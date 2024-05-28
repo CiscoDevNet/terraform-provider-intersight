@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryNxosVtp type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryNxosVtp{}
 
 // NiatelemetryNxosVtp Stores vtp data per switch.
 type NiatelemetryNxosVtp struct {
@@ -114,7 +118,7 @@ func (o *NiatelemetryNxosVtp) SetObjectType(v string) {
 
 // GetOperMode returns the OperMode field value if set, zero value otherwise.
 func (o *NiatelemetryNxosVtp) GetOperMode() string {
-	if o == nil || o.OperMode == nil {
+	if o == nil || IsNil(o.OperMode) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *NiatelemetryNxosVtp) GetOperMode() string {
 // GetOperModeOk returns a tuple with the OperMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosVtp) GetOperModeOk() (*string, bool) {
-	if o == nil || o.OperMode == nil {
+	if o == nil || IsNil(o.OperMode) {
 		return nil, false
 	}
 	return o.OperMode, true
@@ -132,7 +136,7 @@ func (o *NiatelemetryNxosVtp) GetOperModeOk() (*string, bool) {
 
 // HasOperMode returns a boolean if a field has been set.
 func (o *NiatelemetryNxosVtp) HasOperMode() bool {
-	if o != nil && o.OperMode != nil {
+	if o != nil && !IsNil(o.OperMode) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *NiatelemetryNxosVtp) SetOperMode(v string) {
 
 // GetPruningMode returns the PruningMode field value if set, zero value otherwise.
 func (o *NiatelemetryNxosVtp) GetPruningMode() string {
-	if o == nil || o.PruningMode == nil {
+	if o == nil || IsNil(o.PruningMode) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *NiatelemetryNxosVtp) GetPruningMode() string {
 // GetPruningModeOk returns a tuple with the PruningMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosVtp) GetPruningModeOk() (*string, bool) {
-	if o == nil || o.PruningMode == nil {
+	if o == nil || IsNil(o.PruningMode) {
 		return nil, false
 	}
 	return o.PruningMode, true
@@ -164,7 +168,7 @@ func (o *NiatelemetryNxosVtp) GetPruningModeOk() (*string, bool) {
 
 // HasPruningMode returns a boolean if a field has been set.
 func (o *NiatelemetryNxosVtp) HasPruningMode() bool {
-	if o != nil && o.PruningMode != nil {
+	if o != nil && !IsNil(o.PruningMode) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *NiatelemetryNxosVtp) SetPruningMode(v string) {
 
 // GetRunningVersion returns the RunningVersion field value if set, zero value otherwise.
 func (o *NiatelemetryNxosVtp) GetRunningVersion() string {
-	if o == nil || o.RunningVersion == nil {
+	if o == nil || IsNil(o.RunningVersion) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *NiatelemetryNxosVtp) GetRunningVersion() string {
 // GetRunningVersionOk returns a tuple with the RunningVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosVtp) GetRunningVersionOk() (*string, bool) {
-	if o == nil || o.RunningVersion == nil {
+	if o == nil || IsNil(o.RunningVersion) {
 		return nil, false
 	}
 	return o.RunningVersion, true
@@ -196,7 +200,7 @@ func (o *NiatelemetryNxosVtp) GetRunningVersionOk() (*string, bool) {
 
 // HasRunningVersion returns a boolean if a field has been set.
 func (o *NiatelemetryNxosVtp) HasRunningVersion() bool {
-	if o != nil && o.RunningVersion != nil {
+	if o != nil && !IsNil(o.RunningVersion) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *NiatelemetryNxosVtp) SetRunningVersion(v string) {
 
 // GetTrapEnabled returns the TrapEnabled field value if set, zero value otherwise.
 func (o *NiatelemetryNxosVtp) GetTrapEnabled() string {
-	if o == nil || o.TrapEnabled == nil {
+	if o == nil || IsNil(o.TrapEnabled) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *NiatelemetryNxosVtp) GetTrapEnabled() string {
 // GetTrapEnabledOk returns a tuple with the TrapEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosVtp) GetTrapEnabledOk() (*string, bool) {
-	if o == nil || o.TrapEnabled == nil {
+	if o == nil || IsNil(o.TrapEnabled) {
 		return nil, false
 	}
 	return o.TrapEnabled, true
@@ -228,7 +232,7 @@ func (o *NiatelemetryNxosVtp) GetTrapEnabledOk() (*string, bool) {
 
 // HasTrapEnabled returns a boolean if a field has been set.
 func (o *NiatelemetryNxosVtp) HasTrapEnabled() bool {
-	if o != nil && o.TrapEnabled != nil {
+	if o != nil && !IsNil(o.TrapEnabled) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *NiatelemetryNxosVtp) SetTrapEnabled(v string) {
 
 // GetV2Mode returns the V2Mode field value if set, zero value otherwise.
 func (o *NiatelemetryNxosVtp) GetV2Mode() string {
-	if o == nil || o.V2Mode == nil {
+	if o == nil || IsNil(o.V2Mode) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *NiatelemetryNxosVtp) GetV2Mode() string {
 // GetV2ModeOk returns a tuple with the V2Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosVtp) GetV2ModeOk() (*string, bool) {
-	if o == nil || o.V2Mode == nil {
+	if o == nil || IsNil(o.V2Mode) {
 		return nil, false
 	}
 	return o.V2Mode, true
@@ -260,7 +264,7 @@ func (o *NiatelemetryNxosVtp) GetV2ModeOk() (*string, bool) {
 
 // HasV2Mode returns a boolean if a field has been set.
 func (o *NiatelemetryNxosVtp) HasV2Mode() bool {
-	if o != nil && o.V2Mode != nil {
+	if o != nil && !IsNil(o.V2Mode) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *NiatelemetryNxosVtp) SetV2Mode(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *NiatelemetryNxosVtp) GetVersion() int64 {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret int64
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *NiatelemetryNxosVtp) GetVersion() int64 {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNxosVtp) GetVersionOk() (*int64, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -292,7 +296,7 @@ func (o *NiatelemetryNxosVtp) GetVersionOk() (*int64, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *NiatelemetryNxosVtp) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -305,37 +309,41 @@ func (o *NiatelemetryNxosVtp) SetVersion(v int64) {
 }
 
 func (o NiatelemetryNxosVtp) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryNxosVtp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.OperMode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.OperMode) {
 		toSerialize["OperMode"] = o.OperMode
 	}
-	if o.PruningMode != nil {
+	if !IsNil(o.PruningMode) {
 		toSerialize["PruningMode"] = o.PruningMode
 	}
-	if o.RunningVersion != nil {
+	if !IsNil(o.RunningVersion) {
 		toSerialize["RunningVersion"] = o.RunningVersion
 	}
-	if o.TrapEnabled != nil {
+	if !IsNil(o.TrapEnabled) {
 		toSerialize["TrapEnabled"] = o.TrapEnabled
 	}
-	if o.V2Mode != nil {
+	if !IsNil(o.V2Mode) {
 		toSerialize["V2Mode"] = o.V2Mode
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 
@@ -343,10 +351,32 @@ func (o NiatelemetryNxosVtp) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryNxosVtp) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryNxosVtp) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryNxosVtpWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -368,7 +398,7 @@ func (o *NiatelemetryNxosVtp) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryNxosVtpWithoutEmbeddedStruct := NiatelemetryNxosVtpWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNxosVtpWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryNxosVtpWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryNxosVtp := _NiatelemetryNxosVtp{}
 		varNiatelemetryNxosVtp.ClassId = varNiatelemetryNxosVtpWithoutEmbeddedStruct.ClassId
@@ -386,7 +416,7 @@ func (o *NiatelemetryNxosVtp) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryNxosVtp := _NiatelemetryNxosVtp{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNxosVtp)
+	err = json.Unmarshal(data, &varNiatelemetryNxosVtp)
 	if err == nil {
 		o.MoBaseComplexType = varNiatelemetryNxosVtp.MoBaseComplexType
 	} else {
@@ -395,7 +425,7 @@ func (o *NiatelemetryNxosVtp) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "OperMode")

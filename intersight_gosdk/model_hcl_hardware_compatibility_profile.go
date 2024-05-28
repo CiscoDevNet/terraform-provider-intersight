@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HclHardwareCompatibilityProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HclHardwareCompatibilityProfile{}
 
 // HclHardwareCompatibilityProfile Profile giving server hardware details, OS details and UCS Version details.
 type HclHardwareCompatibilityProfile struct {
@@ -129,7 +133,7 @@ func (o *HclHardwareCompatibilityProfile) SetObjectType(v string) {
 
 // GetDriverIsoUrl returns the DriverIsoUrl field value if set, zero value otherwise.
 func (o *HclHardwareCompatibilityProfile) GetDriverIsoUrl() string {
-	if o == nil || o.DriverIsoUrl == nil {
+	if o == nil || IsNil(o.DriverIsoUrl) {
 		var ret string
 		return ret
 	}
@@ -139,7 +143,7 @@ func (o *HclHardwareCompatibilityProfile) GetDriverIsoUrl() string {
 // GetDriverIsoUrlOk returns a tuple with the DriverIsoUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHardwareCompatibilityProfile) GetDriverIsoUrlOk() (*string, bool) {
-	if o == nil || o.DriverIsoUrl == nil {
+	if o == nil || IsNil(o.DriverIsoUrl) {
 		return nil, false
 	}
 	return o.DriverIsoUrl, true
@@ -147,7 +151,7 @@ func (o *HclHardwareCompatibilityProfile) GetDriverIsoUrlOk() (*string, bool) {
 
 // HasDriverIsoUrl returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasDriverIsoUrl() bool {
-	if o != nil && o.DriverIsoUrl != nil {
+	if o != nil && !IsNil(o.DriverIsoUrl) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *HclHardwareCompatibilityProfile) SetDriverIsoUrl(v string) {
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
 func (o *HclHardwareCompatibilityProfile) GetErrorCode() string {
-	if o == nil || o.ErrorCode == nil {
+	if o == nil || IsNil(o.ErrorCode) {
 		var ret string
 		return ret
 	}
@@ -171,7 +175,7 @@ func (o *HclHardwareCompatibilityProfile) GetErrorCode() string {
 // GetErrorCodeOk returns a tuple with the ErrorCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHardwareCompatibilityProfile) GetErrorCodeOk() (*string, bool) {
-	if o == nil || o.ErrorCode == nil {
+	if o == nil || IsNil(o.ErrorCode) {
 		return nil, false
 	}
 	return o.ErrorCode, true
@@ -179,7 +183,7 @@ func (o *HclHardwareCompatibilityProfile) GetErrorCodeOk() (*string, bool) {
 
 // HasErrorCode returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasErrorCode() bool {
-	if o != nil && o.ErrorCode != nil {
+	if o != nil && !IsNil(o.ErrorCode) {
 		return true
 	}
 
@@ -193,7 +197,7 @@ func (o *HclHardwareCompatibilityProfile) SetErrorCode(v string) {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *HclHardwareCompatibilityProfile) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -203,7 +207,7 @@ func (o *HclHardwareCompatibilityProfile) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHardwareCompatibilityProfile) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -211,7 +215,7 @@ func (o *HclHardwareCompatibilityProfile) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -225,7 +229,7 @@ func (o *HclHardwareCompatibilityProfile) SetId(v string) {
 
 // GetOsVendor returns the OsVendor field value if set, zero value otherwise.
 func (o *HclHardwareCompatibilityProfile) GetOsVendor() string {
-	if o == nil || o.OsVendor == nil {
+	if o == nil || IsNil(o.OsVendor) {
 		var ret string
 		return ret
 	}
@@ -235,7 +239,7 @@ func (o *HclHardwareCompatibilityProfile) GetOsVendor() string {
 // GetOsVendorOk returns a tuple with the OsVendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHardwareCompatibilityProfile) GetOsVendorOk() (*string, bool) {
-	if o == nil || o.OsVendor == nil {
+	if o == nil || IsNil(o.OsVendor) {
 		return nil, false
 	}
 	return o.OsVendor, true
@@ -243,7 +247,7 @@ func (o *HclHardwareCompatibilityProfile) GetOsVendorOk() (*string, bool) {
 
 // HasOsVendor returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasOsVendor() bool {
-	if o != nil && o.OsVendor != nil {
+	if o != nil && !IsNil(o.OsVendor) {
 		return true
 	}
 
@@ -257,7 +261,7 @@ func (o *HclHardwareCompatibilityProfile) SetOsVendor(v string) {
 
 // GetOsVersion returns the OsVersion field value if set, zero value otherwise.
 func (o *HclHardwareCompatibilityProfile) GetOsVersion() string {
-	if o == nil || o.OsVersion == nil {
+	if o == nil || IsNil(o.OsVersion) {
 		var ret string
 		return ret
 	}
@@ -267,7 +271,7 @@ func (o *HclHardwareCompatibilityProfile) GetOsVersion() string {
 // GetOsVersionOk returns a tuple with the OsVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHardwareCompatibilityProfile) GetOsVersionOk() (*string, bool) {
-	if o == nil || o.OsVersion == nil {
+	if o == nil || IsNil(o.OsVersion) {
 		return nil, false
 	}
 	return o.OsVersion, true
@@ -275,7 +279,7 @@ func (o *HclHardwareCompatibilityProfile) GetOsVersionOk() (*string, bool) {
 
 // HasOsVersion returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasOsVersion() bool {
-	if o != nil && o.OsVersion != nil {
+	if o != nil && !IsNil(o.OsVersion) {
 		return true
 	}
 
@@ -289,7 +293,7 @@ func (o *HclHardwareCompatibilityProfile) SetOsVersion(v string) {
 
 // GetPersonality returns the Personality field value if set, zero value otherwise.
 func (o *HclHardwareCompatibilityProfile) GetPersonality() string {
-	if o == nil || o.Personality == nil {
+	if o == nil || IsNil(o.Personality) {
 		var ret string
 		return ret
 	}
@@ -299,7 +303,7 @@ func (o *HclHardwareCompatibilityProfile) GetPersonality() string {
 // GetPersonalityOk returns a tuple with the Personality field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHardwareCompatibilityProfile) GetPersonalityOk() (*string, bool) {
-	if o == nil || o.Personality == nil {
+	if o == nil || IsNil(o.Personality) {
 		return nil, false
 	}
 	return o.Personality, true
@@ -307,7 +311,7 @@ func (o *HclHardwareCompatibilityProfile) GetPersonalityOk() (*string, bool) {
 
 // HasPersonality returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasPersonality() bool {
-	if o != nil && o.Personality != nil {
+	if o != nil && !IsNil(o.Personality) {
 		return true
 	}
 
@@ -321,7 +325,7 @@ func (o *HclHardwareCompatibilityProfile) SetPersonality(v string) {
 
 // GetProcessorModel returns the ProcessorModel field value if set, zero value otherwise.
 func (o *HclHardwareCompatibilityProfile) GetProcessorModel() string {
-	if o == nil || o.ProcessorModel == nil {
+	if o == nil || IsNil(o.ProcessorModel) {
 		var ret string
 		return ret
 	}
@@ -331,7 +335,7 @@ func (o *HclHardwareCompatibilityProfile) GetProcessorModel() string {
 // GetProcessorModelOk returns a tuple with the ProcessorModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHardwareCompatibilityProfile) GetProcessorModelOk() (*string, bool) {
-	if o == nil || o.ProcessorModel == nil {
+	if o == nil || IsNil(o.ProcessorModel) {
 		return nil, false
 	}
 	return o.ProcessorModel, true
@@ -339,7 +343,7 @@ func (o *HclHardwareCompatibilityProfile) GetProcessorModelOk() (*string, bool) 
 
 // HasProcessorModel returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasProcessorModel() bool {
-	if o != nil && o.ProcessorModel != nil {
+	if o != nil && !IsNil(o.ProcessorModel) {
 		return true
 	}
 
@@ -364,7 +368,7 @@ func (o *HclHardwareCompatibilityProfile) GetProducts() []HclProduct {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HclHardwareCompatibilityProfile) GetProductsOk() ([]HclProduct, bool) {
-	if o == nil || o.Products == nil {
+	if o == nil || IsNil(o.Products) {
 		return nil, false
 	}
 	return o.Products, true
@@ -372,7 +376,7 @@ func (o *HclHardwareCompatibilityProfile) GetProductsOk() ([]HclProduct, bool) {
 
 // HasProducts returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasProducts() bool {
-	if o != nil && o.Products != nil {
+	if o != nil && IsNil(o.Products) {
 		return true
 	}
 
@@ -386,7 +390,7 @@ func (o *HclHardwareCompatibilityProfile) SetProducts(v []HclProduct) {
 
 // GetServerModel returns the ServerModel field value if set, zero value otherwise.
 func (o *HclHardwareCompatibilityProfile) GetServerModel() string {
-	if o == nil || o.ServerModel == nil {
+	if o == nil || IsNil(o.ServerModel) {
 		var ret string
 		return ret
 	}
@@ -396,7 +400,7 @@ func (o *HclHardwareCompatibilityProfile) GetServerModel() string {
 // GetServerModelOk returns a tuple with the ServerModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHardwareCompatibilityProfile) GetServerModelOk() (*string, bool) {
-	if o == nil || o.ServerModel == nil {
+	if o == nil || IsNil(o.ServerModel) {
 		return nil, false
 	}
 	return o.ServerModel, true
@@ -404,7 +408,7 @@ func (o *HclHardwareCompatibilityProfile) GetServerModelOk() (*string, bool) {
 
 // HasServerModel returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasServerModel() bool {
-	if o != nil && o.ServerModel != nil {
+	if o != nil && !IsNil(o.ServerModel) {
 		return true
 	}
 
@@ -418,7 +422,7 @@ func (o *HclHardwareCompatibilityProfile) SetServerModel(v string) {
 
 // GetServerRevision returns the ServerRevision field value if set, zero value otherwise.
 func (o *HclHardwareCompatibilityProfile) GetServerRevision() string {
-	if o == nil || o.ServerRevision == nil {
+	if o == nil || IsNil(o.ServerRevision) {
 		var ret string
 		return ret
 	}
@@ -428,7 +432,7 @@ func (o *HclHardwareCompatibilityProfile) GetServerRevision() string {
 // GetServerRevisionOk returns a tuple with the ServerRevision field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHardwareCompatibilityProfile) GetServerRevisionOk() (*string, bool) {
-	if o == nil || o.ServerRevision == nil {
+	if o == nil || IsNil(o.ServerRevision) {
 		return nil, false
 	}
 	return o.ServerRevision, true
@@ -436,7 +440,7 @@ func (o *HclHardwareCompatibilityProfile) GetServerRevisionOk() (*string, bool) 
 
 // HasServerRevision returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasServerRevision() bool {
-	if o != nil && o.ServerRevision != nil {
+	if o != nil && !IsNil(o.ServerRevision) {
 		return true
 	}
 
@@ -450,7 +454,7 @@ func (o *HclHardwareCompatibilityProfile) SetServerRevision(v string) {
 
 // GetUcsVersion returns the UcsVersion field value if set, zero value otherwise.
 func (o *HclHardwareCompatibilityProfile) GetUcsVersion() string {
-	if o == nil || o.UcsVersion == nil {
+	if o == nil || IsNil(o.UcsVersion) {
 		var ret string
 		return ret
 	}
@@ -460,7 +464,7 @@ func (o *HclHardwareCompatibilityProfile) GetUcsVersion() string {
 // GetUcsVersionOk returns a tuple with the UcsVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHardwareCompatibilityProfile) GetUcsVersionOk() (*string, bool) {
-	if o == nil || o.UcsVersion == nil {
+	if o == nil || IsNil(o.UcsVersion) {
 		return nil, false
 	}
 	return o.UcsVersion, true
@@ -468,7 +472,7 @@ func (o *HclHardwareCompatibilityProfile) GetUcsVersionOk() (*string, bool) {
 
 // HasUcsVersion returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasUcsVersion() bool {
-	if o != nil && o.UcsVersion != nil {
+	if o != nil && !IsNil(o.UcsVersion) {
 		return true
 	}
 
@@ -482,7 +486,7 @@ func (o *HclHardwareCompatibilityProfile) SetUcsVersion(v string) {
 
 // GetVersionType returns the VersionType field value if set, zero value otherwise.
 func (o *HclHardwareCompatibilityProfile) GetVersionType() string {
-	if o == nil || o.VersionType == nil {
+	if o == nil || IsNil(o.VersionType) {
 		var ret string
 		return ret
 	}
@@ -492,7 +496,7 @@ func (o *HclHardwareCompatibilityProfile) GetVersionType() string {
 // GetVersionTypeOk returns a tuple with the VersionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHardwareCompatibilityProfile) GetVersionTypeOk() (*string, bool) {
-	if o == nil || o.VersionType == nil {
+	if o == nil || IsNil(o.VersionType) {
 		return nil, false
 	}
 	return o.VersionType, true
@@ -500,7 +504,7 @@ func (o *HclHardwareCompatibilityProfile) GetVersionTypeOk() (*string, bool) {
 
 // HasVersionType returns a boolean if a field has been set.
 func (o *HclHardwareCompatibilityProfile) HasVersionType() bool {
-	if o != nil && o.VersionType != nil {
+	if o != nil && !IsNil(o.VersionType) {
 		return true
 	}
 
@@ -513,55 +517,59 @@ func (o *HclHardwareCompatibilityProfile) SetVersionType(v string) {
 }
 
 func (o HclHardwareCompatibilityProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HclHardwareCompatibilityProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DriverIsoUrl != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DriverIsoUrl) {
 		toSerialize["DriverIsoUrl"] = o.DriverIsoUrl
 	}
-	if o.ErrorCode != nil {
+	if !IsNil(o.ErrorCode) {
 		toSerialize["ErrorCode"] = o.ErrorCode
 	}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["Id"] = o.Id
 	}
-	if o.OsVendor != nil {
+	if !IsNil(o.OsVendor) {
 		toSerialize["OsVendor"] = o.OsVendor
 	}
-	if o.OsVersion != nil {
+	if !IsNil(o.OsVersion) {
 		toSerialize["OsVersion"] = o.OsVersion
 	}
-	if o.Personality != nil {
+	if !IsNil(o.Personality) {
 		toSerialize["Personality"] = o.Personality
 	}
-	if o.ProcessorModel != nil {
+	if !IsNil(o.ProcessorModel) {
 		toSerialize["ProcessorModel"] = o.ProcessorModel
 	}
 	if o.Products != nil {
 		toSerialize["Products"] = o.Products
 	}
-	if o.ServerModel != nil {
+	if !IsNil(o.ServerModel) {
 		toSerialize["ServerModel"] = o.ServerModel
 	}
-	if o.ServerRevision != nil {
+	if !IsNil(o.ServerRevision) {
 		toSerialize["ServerRevision"] = o.ServerRevision
 	}
-	if o.UcsVersion != nil {
+	if !IsNil(o.UcsVersion) {
 		toSerialize["UcsVersion"] = o.UcsVersion
 	}
-	if o.VersionType != nil {
+	if !IsNil(o.VersionType) {
 		toSerialize["VersionType"] = o.VersionType
 	}
 
@@ -569,10 +577,32 @@ func (o HclHardwareCompatibilityProfile) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HclHardwareCompatibilityProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HclHardwareCompatibilityProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HclHardwareCompatibilityProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -605,7 +635,7 @@ func (o *HclHardwareCompatibilityProfile) UnmarshalJSON(bytes []byte) (err error
 
 	varHclHardwareCompatibilityProfileWithoutEmbeddedStruct := HclHardwareCompatibilityProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHclHardwareCompatibilityProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHclHardwareCompatibilityProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varHclHardwareCompatibilityProfile := _HclHardwareCompatibilityProfile{}
 		varHclHardwareCompatibilityProfile.ClassId = varHclHardwareCompatibilityProfileWithoutEmbeddedStruct.ClassId
@@ -629,7 +659,7 @@ func (o *HclHardwareCompatibilityProfile) UnmarshalJSON(bytes []byte) (err error
 
 	varHclHardwareCompatibilityProfile := _HclHardwareCompatibilityProfile{}
 
-	err = json.Unmarshal(bytes, &varHclHardwareCompatibilityProfile)
+	err = json.Unmarshal(data, &varHclHardwareCompatibilityProfile)
 	if err == nil {
 		o.MoBaseComplexType = varHclHardwareCompatibilityProfile.MoBaseComplexType
 	} else {
@@ -638,7 +668,7 @@ func (o *HclHardwareCompatibilityProfile) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DriverIsoUrl")

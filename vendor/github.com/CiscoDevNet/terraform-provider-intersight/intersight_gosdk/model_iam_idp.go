@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamIdp type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamIdp{}
 
 // IamIdp The SAML identity provider such as Cisco, that has been used to log in to Intersight.
 type IamIdp struct {
@@ -39,10 +43,10 @@ type IamIdp struct {
 	// When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message.
 	SkipWarning *bool `json:"SkipWarning,omitempty"`
 	// Authentication protocol used by the IdP. * `saml` - Use SAML as the authentication protocol for sign-on. * `oidc` - Open ID connect to be used as an authentication protocol for sign-on. * `local` - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP.
-	Type       *string                    `json:"Type,omitempty"`
-	Account    *IamAccountRelationship    `json:"Account,omitempty"`
-	LdapPolicy *IamLdapPolicyRelationship `json:"LdapPolicy,omitempty"`
-	System     *IamSystemRelationship     `json:"System,omitempty"`
+	Type       *string                           `json:"Type,omitempty"`
+	Account    NullableIamAccountRelationship    `json:"Account,omitempty"`
+	LdapPolicy NullableIamLdapPolicyRelationship `json:"LdapPolicy,omitempty"`
+	System     NullableIamSystemRelationship     `json:"System,omitempty"`
 	// An array of relationships to iamUserPreference resources.
 	UserPreferences []IamUserPreferenceRelationship `json:"UserPreferences,omitempty"`
 	// An array of relationships to iamUserSetting resources.
@@ -134,7 +138,7 @@ func (o *IamIdp) SetObjectType(v string) {
 // GetDomainName returns the DomainName field value if set, zero value otherwise.
 // Deprecated
 func (o *IamIdp) GetDomainName() string {
-	if o == nil || o.DomainName == nil {
+	if o == nil || IsNil(o.DomainName) {
 		var ret string
 		return ret
 	}
@@ -145,7 +149,7 @@ func (o *IamIdp) GetDomainName() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *IamIdp) GetDomainNameOk() (*string, bool) {
-	if o == nil || o.DomainName == nil {
+	if o == nil || IsNil(o.DomainName) {
 		return nil, false
 	}
 	return o.DomainName, true
@@ -153,7 +157,7 @@ func (o *IamIdp) GetDomainNameOk() (*string, bool) {
 
 // HasDomainName returns a boolean if a field has been set.
 func (o *IamIdp) HasDomainName() bool {
-	if o != nil && o.DomainName != nil {
+	if o != nil && !IsNil(o.DomainName) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *IamIdp) GetDomainNames() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdp) GetDomainNamesOk() ([]string, bool) {
-	if o == nil || o.DomainNames == nil {
+	if o == nil || IsNil(o.DomainNames) {
 		return nil, false
 	}
 	return o.DomainNames, true
@@ -187,7 +191,7 @@ func (o *IamIdp) GetDomainNamesOk() ([]string, bool) {
 
 // HasDomainNames returns a boolean if a field has been set.
 func (o *IamIdp) HasDomainNames() bool {
-	if o != nil && o.DomainNames != nil {
+	if o != nil && IsNil(o.DomainNames) {
 		return true
 	}
 
@@ -201,7 +205,7 @@ func (o *IamIdp) SetDomainNames(v []string) {
 
 // GetEnableSingleLogout returns the EnableSingleLogout field value if set, zero value otherwise.
 func (o *IamIdp) GetEnableSingleLogout() bool {
-	if o == nil || o.EnableSingleLogout == nil {
+	if o == nil || IsNil(o.EnableSingleLogout) {
 		var ret bool
 		return ret
 	}
@@ -211,7 +215,7 @@ func (o *IamIdp) GetEnableSingleLogout() bool {
 // GetEnableSingleLogoutOk returns a tuple with the EnableSingleLogout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIdp) GetEnableSingleLogoutOk() (*bool, bool) {
-	if o == nil || o.EnableSingleLogout == nil {
+	if o == nil || IsNil(o.EnableSingleLogout) {
 		return nil, false
 	}
 	return o.EnableSingleLogout, true
@@ -219,7 +223,7 @@ func (o *IamIdp) GetEnableSingleLogoutOk() (*bool, bool) {
 
 // HasEnableSingleLogout returns a boolean if a field has been set.
 func (o *IamIdp) HasEnableSingleLogout() bool {
-	if o != nil && o.EnableSingleLogout != nil {
+	if o != nil && !IsNil(o.EnableSingleLogout) {
 		return true
 	}
 
@@ -233,7 +237,7 @@ func (o *IamIdp) SetEnableSingleLogout(v bool) {
 
 // GetIdpEntityId returns the IdpEntityId field value if set, zero value otherwise.
 func (o *IamIdp) GetIdpEntityId() string {
-	if o == nil || o.IdpEntityId == nil {
+	if o == nil || IsNil(o.IdpEntityId) {
 		var ret string
 		return ret
 	}
@@ -243,7 +247,7 @@ func (o *IamIdp) GetIdpEntityId() string {
 // GetIdpEntityIdOk returns a tuple with the IdpEntityId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIdp) GetIdpEntityIdOk() (*string, bool) {
-	if o == nil || o.IdpEntityId == nil {
+	if o == nil || IsNil(o.IdpEntityId) {
 		return nil, false
 	}
 	return o.IdpEntityId, true
@@ -251,7 +255,7 @@ func (o *IamIdp) GetIdpEntityIdOk() (*string, bool) {
 
 // HasIdpEntityId returns a boolean if a field has been set.
 func (o *IamIdp) HasIdpEntityId() bool {
-	if o != nil && o.IdpEntityId != nil {
+	if o != nil && !IsNil(o.IdpEntityId) {
 		return true
 	}
 
@@ -265,7 +269,7 @@ func (o *IamIdp) SetIdpEntityId(v string) {
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *IamIdp) GetMetadata() string {
-	if o == nil || o.Metadata == nil {
+	if o == nil || IsNil(o.Metadata) {
 		var ret string
 		return ret
 	}
@@ -275,7 +279,7 @@ func (o *IamIdp) GetMetadata() string {
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIdp) GetMetadataOk() (*string, bool) {
-	if o == nil || o.Metadata == nil {
+	if o == nil || IsNil(o.Metadata) {
 		return nil, false
 	}
 	return o.Metadata, true
@@ -283,7 +287,7 @@ func (o *IamIdp) GetMetadataOk() (*string, bool) {
 
 // HasMetadata returns a boolean if a field has been set.
 func (o *IamIdp) HasMetadata() bool {
-	if o != nil && o.Metadata != nil {
+	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
 
@@ -297,7 +301,7 @@ func (o *IamIdp) SetMetadata(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *IamIdp) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -307,7 +311,7 @@ func (o *IamIdp) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIdp) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -315,7 +319,7 @@ func (o *IamIdp) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *IamIdp) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -329,7 +333,7 @@ func (o *IamIdp) SetName(v string) {
 
 // GetSkipWarning returns the SkipWarning field value if set, zero value otherwise.
 func (o *IamIdp) GetSkipWarning() bool {
-	if o == nil || o.SkipWarning == nil {
+	if o == nil || IsNil(o.SkipWarning) {
 		var ret bool
 		return ret
 	}
@@ -339,7 +343,7 @@ func (o *IamIdp) GetSkipWarning() bool {
 // GetSkipWarningOk returns a tuple with the SkipWarning field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIdp) GetSkipWarningOk() (*bool, bool) {
-	if o == nil || o.SkipWarning == nil {
+	if o == nil || IsNil(o.SkipWarning) {
 		return nil, false
 	}
 	return o.SkipWarning, true
@@ -347,7 +351,7 @@ func (o *IamIdp) GetSkipWarningOk() (*bool, bool) {
 
 // HasSkipWarning returns a boolean if a field has been set.
 func (o *IamIdp) HasSkipWarning() bool {
-	if o != nil && o.SkipWarning != nil {
+	if o != nil && !IsNil(o.SkipWarning) {
 		return true
 	}
 
@@ -361,7 +365,7 @@ func (o *IamIdp) SetSkipWarning(v bool) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *IamIdp) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -371,7 +375,7 @@ func (o *IamIdp) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamIdp) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -379,7 +383,7 @@ func (o *IamIdp) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *IamIdp) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -391,100 +395,133 @@ func (o *IamIdp) SetType(v string) {
 	o.Type = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamIdp) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdp) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *IamIdp) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *IamIdp) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetLdapPolicy returns the LdapPolicy field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *IamIdp) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *IamIdp) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetLdapPolicy returns the LdapPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamIdp) GetLdapPolicy() IamLdapPolicyRelationship {
-	if o == nil || o.LdapPolicy == nil {
+	if o == nil || IsNil(o.LdapPolicy.Get()) {
 		var ret IamLdapPolicyRelationship
 		return ret
 	}
-	return *o.LdapPolicy
+	return *o.LdapPolicy.Get()
 }
 
 // GetLdapPolicyOk returns a tuple with the LdapPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdp) GetLdapPolicyOk() (*IamLdapPolicyRelationship, bool) {
-	if o == nil || o.LdapPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LdapPolicy, true
+	return o.LdapPolicy.Get(), o.LdapPolicy.IsSet()
 }
 
 // HasLdapPolicy returns a boolean if a field has been set.
 func (o *IamIdp) HasLdapPolicy() bool {
-	if o != nil && o.LdapPolicy != nil {
+	if o != nil && o.LdapPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLdapPolicy gets a reference to the given IamLdapPolicyRelationship and assigns it to the LdapPolicy field.
+// SetLdapPolicy gets a reference to the given NullableIamLdapPolicyRelationship and assigns it to the LdapPolicy field.
 func (o *IamIdp) SetLdapPolicy(v IamLdapPolicyRelationship) {
-	o.LdapPolicy = &v
+	o.LdapPolicy.Set(&v)
 }
 
-// GetSystem returns the System field value if set, zero value otherwise.
+// SetLdapPolicyNil sets the value for LdapPolicy to be an explicit nil
+func (o *IamIdp) SetLdapPolicyNil() {
+	o.LdapPolicy.Set(nil)
+}
+
+// UnsetLdapPolicy ensures that no value is present for LdapPolicy, not even an explicit nil
+func (o *IamIdp) UnsetLdapPolicy() {
+	o.LdapPolicy.Unset()
+}
+
+// GetSystem returns the System field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamIdp) GetSystem() IamSystemRelationship {
-	if o == nil || o.System == nil {
+	if o == nil || IsNil(o.System.Get()) {
 		var ret IamSystemRelationship
 		return ret
 	}
-	return *o.System
+	return *o.System.Get()
 }
 
 // GetSystemOk returns a tuple with the System field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdp) GetSystemOk() (*IamSystemRelationship, bool) {
-	if o == nil || o.System == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.System, true
+	return o.System.Get(), o.System.IsSet()
 }
 
 // HasSystem returns a boolean if a field has been set.
 func (o *IamIdp) HasSystem() bool {
-	if o != nil && o.System != nil {
+	if o != nil && o.System.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSystem gets a reference to the given IamSystemRelationship and assigns it to the System field.
+// SetSystem gets a reference to the given NullableIamSystemRelationship and assigns it to the System field.
 func (o *IamIdp) SetSystem(v IamSystemRelationship) {
-	o.System = &v
+	o.System.Set(&v)
+}
+
+// SetSystemNil sets the value for System to be an explicit nil
+func (o *IamIdp) SetSystemNil() {
+	o.System.Set(nil)
+}
+
+// UnsetSystem ensures that no value is present for System, not even an explicit nil
+func (o *IamIdp) UnsetSystem() {
+	o.System.Unset()
 }
 
 // GetUserPreferences returns the UserPreferences field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -500,7 +537,7 @@ func (o *IamIdp) GetUserPreferences() []IamUserPreferenceRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdp) GetUserPreferencesOk() ([]IamUserPreferenceRelationship, bool) {
-	if o == nil || o.UserPreferences == nil {
+	if o == nil || IsNil(o.UserPreferences) {
 		return nil, false
 	}
 	return o.UserPreferences, true
@@ -508,7 +545,7 @@ func (o *IamIdp) GetUserPreferencesOk() ([]IamUserPreferenceRelationship, bool) 
 
 // HasUserPreferences returns a boolean if a field has been set.
 func (o *IamIdp) HasUserPreferences() bool {
-	if o != nil && o.UserPreferences != nil {
+	if o != nil && IsNil(o.UserPreferences) {
 		return true
 	}
 
@@ -533,7 +570,7 @@ func (o *IamIdp) GetUserSettings() []IamUserSettingRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdp) GetUserSettingsOk() ([]IamUserSettingRelationship, bool) {
-	if o == nil || o.UserSettings == nil {
+	if o == nil || IsNil(o.UserSettings) {
 		return nil, false
 	}
 	return o.UserSettings, true
@@ -541,7 +578,7 @@ func (o *IamIdp) GetUserSettingsOk() ([]IamUserSettingRelationship, bool) {
 
 // HasUserSettings returns a boolean if a field has been set.
 func (o *IamIdp) HasUserSettings() bool {
-	if o != nil && o.UserSettings != nil {
+	if o != nil && IsNil(o.UserSettings) {
 		return true
 	}
 
@@ -566,7 +603,7 @@ func (o *IamIdp) GetUsergroups() []IamUserGroupRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdp) GetUsergroupsOk() ([]IamUserGroupRelationship, bool) {
-	if o == nil || o.Usergroups == nil {
+	if o == nil || IsNil(o.Usergroups) {
 		return nil, false
 	}
 	return o.Usergroups, true
@@ -574,7 +611,7 @@ func (o *IamIdp) GetUsergroupsOk() ([]IamUserGroupRelationship, bool) {
 
 // HasUsergroups returns a boolean if a field has been set.
 func (o *IamIdp) HasUsergroups() bool {
-	if o != nil && o.Usergroups != nil {
+	if o != nil && IsNil(o.Usergroups) {
 		return true
 	}
 
@@ -599,7 +636,7 @@ func (o *IamIdp) GetUsers() []IamUserRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamIdp) GetUsersOk() ([]IamUserRelationship, bool) {
-	if o == nil || o.Users == nil {
+	if o == nil || IsNil(o.Users) {
 		return nil, false
 	}
 	return o.Users, true
@@ -607,7 +644,7 @@ func (o *IamIdp) GetUsersOk() ([]IamUserRelationship, bool) {
 
 // HasUsers returns a boolean if a field has been set.
 func (o *IamIdp) HasUsers() bool {
-	if o != nil && o.Users != nil {
+	if o != nil && IsNil(o.Users) {
 		return true
 	}
 
@@ -620,53 +657,57 @@ func (o *IamIdp) SetUsers(v []IamUserRelationship) {
 }
 
 func (o IamIdp) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamIdp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DomainName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DomainName) {
 		toSerialize["DomainName"] = o.DomainName
 	}
 	if o.DomainNames != nil {
 		toSerialize["DomainNames"] = o.DomainNames
 	}
-	if o.EnableSingleLogout != nil {
+	if !IsNil(o.EnableSingleLogout) {
 		toSerialize["EnableSingleLogout"] = o.EnableSingleLogout
 	}
-	if o.IdpEntityId != nil {
+	if !IsNil(o.IdpEntityId) {
 		toSerialize["IdpEntityId"] = o.IdpEntityId
 	}
-	if o.Metadata != nil {
+	if !IsNil(o.Metadata) {
 		toSerialize["Metadata"] = o.Metadata
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.SkipWarning != nil {
+	if !IsNil(o.SkipWarning) {
 		toSerialize["SkipWarning"] = o.SkipWarning
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.LdapPolicy != nil {
-		toSerialize["LdapPolicy"] = o.LdapPolicy
+	if o.LdapPolicy.IsSet() {
+		toSerialize["LdapPolicy"] = o.LdapPolicy.Get()
 	}
-	if o.System != nil {
-		toSerialize["System"] = o.System
+	if o.System.IsSet() {
+		toSerialize["System"] = o.System.Get()
 	}
 	if o.UserPreferences != nil {
 		toSerialize["UserPreferences"] = o.UserPreferences
@@ -685,10 +726,32 @@ func (o IamIdp) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamIdp) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamIdp) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamIdpWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -709,10 +772,10 @@ func (o *IamIdp) UnmarshalJSON(bytes []byte) (err error) {
 		// When users attempt the Account URL login with an unverified Domain Name, they get a warning stating that they are logging in using an unverified Domain Name. Enable the slider if you do not wish to see the warning message.
 		SkipWarning *bool `json:"SkipWarning,omitempty"`
 		// Authentication protocol used by the IdP. * `saml` - Use SAML as the authentication protocol for sign-on. * `oidc` - Open ID connect to be used as an authentication protocol for sign-on. * `local` - The local authentication method to be used for sign-on. Local type is set to default for the Intersight Appliance IdP.
-		Type       *string                    `json:"Type,omitempty"`
-		Account    *IamAccountRelationship    `json:"Account,omitempty"`
-		LdapPolicy *IamLdapPolicyRelationship `json:"LdapPolicy,omitempty"`
-		System     *IamSystemRelationship     `json:"System,omitempty"`
+		Type       *string                           `json:"Type,omitempty"`
+		Account    NullableIamAccountRelationship    `json:"Account,omitempty"`
+		LdapPolicy NullableIamLdapPolicyRelationship `json:"LdapPolicy,omitempty"`
+		System     NullableIamSystemRelationship     `json:"System,omitempty"`
 		// An array of relationships to iamUserPreference resources.
 		UserPreferences []IamUserPreferenceRelationship `json:"UserPreferences,omitempty"`
 		// An array of relationships to iamUserSetting resources.
@@ -725,7 +788,7 @@ func (o *IamIdp) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamIdpWithoutEmbeddedStruct := IamIdpWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamIdpWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamIdpWithoutEmbeddedStruct)
 	if err == nil {
 		varIamIdp := _IamIdp{}
 		varIamIdp.ClassId = varIamIdpWithoutEmbeddedStruct.ClassId
@@ -752,7 +815,7 @@ func (o *IamIdp) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamIdp := _IamIdp{}
 
-	err = json.Unmarshal(bytes, &varIamIdp)
+	err = json.Unmarshal(data, &varIamIdp)
 	if err == nil {
 		o.MoBaseMo = varIamIdp.MoBaseMo
 	} else {
@@ -761,7 +824,7 @@ func (o *IamIdp) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DomainName")

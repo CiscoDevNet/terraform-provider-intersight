@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.PrivateKeySpec"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.PrivateKeySpec"]
 **Algorithm** | Pointer to [**NullablePkixKeyGenerationSpec**](PkixKeyGenerationSpec.md) |  | [optional] 
-**CertificateRequest** | Pointer to [**IamCertificateRequestRelationship**](IamCertificateRequestRelationship.md) |  | [optional] 
+**CertificateRequest** | Pointer to [**NullableIamCertificateRequestRelationship**](IamCertificateRequestRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -128,6 +128,16 @@ SetCertificateRequest sets CertificateRequest field to given value.
 
 HasCertificateRequest returns a boolean if a field has been set.
 
+### SetCertificateRequestNil
+
+`func (o *IamPrivateKeySpec) SetCertificateRequestNil(b bool)`
+
+ SetCertificateRequestNil sets the value for CertificateRequest to be an explicit nil
+
+### UnsetCertificateRequest
+`func (o *IamPrivateKeySpec) UnsetCertificateRequest()`
+
+UnsetCertificateRequest ensures that no value is present for CertificateRequest, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

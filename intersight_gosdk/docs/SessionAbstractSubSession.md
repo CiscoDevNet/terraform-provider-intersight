@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **TargetName** | Pointer to **string** | Name of target on which session is initiated. | [optional] [readonly] 
-**Session** | Pointer to [**SessionAbstractSessionRelationship**](SessionAbstractSessionRelationship.md) |  | [optional] 
-**Target** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**User** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
+**Session** | Pointer to [**NullableSessionAbstractSessionRelationship**](SessionAbstractSessionRelationship.md) |  | [optional] 
+**Target** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**User** | Pointer to [**NullableIamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -120,6 +120,16 @@ SetSession sets Session field to given value.
 
 HasSession returns a boolean if a field has been set.
 
+### SetSessionNil
+
+`func (o *SessionAbstractSubSession) SetSessionNil(b bool)`
+
+ SetSessionNil sets the value for Session to be an explicit nil
+
+### UnsetSession
+`func (o *SessionAbstractSubSession) UnsetSession()`
+
+UnsetSession ensures that no value is present for Session, not even an explicit nil
 ### GetTarget
 
 `func (o *SessionAbstractSubSession) GetTarget() MoBaseMoRelationship`
@@ -145,6 +155,16 @@ SetTarget sets Target field to given value.
 
 HasTarget returns a boolean if a field has been set.
 
+### SetTargetNil
+
+`func (o *SessionAbstractSubSession) SetTargetNil(b bool)`
+
+ SetTargetNil sets the value for Target to be an explicit nil
+
+### UnsetTarget
+`func (o *SessionAbstractSubSession) UnsetTarget()`
+
+UnsetTarget ensures that no value is present for Target, not even an explicit nil
 ### GetUser
 
 `func (o *SessionAbstractSubSession) GetUser() IamUserRelationship`
@@ -170,6 +190,16 @@ SetUser sets User field to given value.
 
 HasUser returns a boolean if a field has been set.
 
+### SetUserNil
+
+`func (o *SessionAbstractSubSession) SetUserNil(b bool)`
+
+ SetUserNil sets the value for User to be an explicit nil
+
+### UnsetUser
+`func (o *SessionAbstractSubSession) UnsetUser()`
+
+UnsetUser ensures that no value is present for User, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

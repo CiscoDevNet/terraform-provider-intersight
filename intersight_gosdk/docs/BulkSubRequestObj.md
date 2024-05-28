@@ -19,8 +19,8 @@ Name | Type | Description | Notes
 **TargetMoid** | Pointer to **string** | Used with PATCH &amp; DELETE actions. The moid of an existing object instance. | [optional] 
 **Uri** | Pointer to **string** | The URI on which this bulk action is to be performed. | [optional] 
 **Verb** | Pointer to **string** | The type of operation to be performed. One of - Post (Create), Patch (Update) or Delete (Remove). * &#x60;POST&#x60; - Used to create a REST resource. * &#x60;PATCH&#x60; - Used to update a REST resource. * &#x60;DELETE&#x60; - Used to delete a REST resource. | [optional] [default to "POST"]
-**AsyncRequest** | Pointer to [**BulkResultRelationship**](BulkResultRelationship.md) |  | [optional] 
-**Request** | Pointer to [**BulkRequestRelationship**](BulkRequestRelationship.md) |  | [optional] 
+**AsyncRequest** | Pointer to [**NullableBulkResultRelationship**](BulkResultRelationship.md) |  | [optional] 
+**Request** | Pointer to [**NullableBulkRequestRelationship**](BulkRequestRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -441,6 +441,16 @@ SetAsyncRequest sets AsyncRequest field to given value.
 
 HasAsyncRequest returns a boolean if a field has been set.
 
+### SetAsyncRequestNil
+
+`func (o *BulkSubRequestObj) SetAsyncRequestNil(b bool)`
+
+ SetAsyncRequestNil sets the value for AsyncRequest to be an explicit nil
+
+### UnsetAsyncRequest
+`func (o *BulkSubRequestObj) UnsetAsyncRequest()`
+
+UnsetAsyncRequest ensures that no value is present for AsyncRequest, not even an explicit nil
 ### GetRequest
 
 `func (o *BulkSubRequestObj) GetRequest() BulkRequestRelationship`
@@ -466,6 +476,16 @@ SetRequest sets Request field to given value.
 
 HasRequest returns a boolean if a field has been set.
 
+### SetRequestNil
+
+`func (o *BulkSubRequestObj) SetRequestNil(b bool)`
+
+ SetRequestNil sets the value for Request to be an explicit nil
+
+### UnsetRequest
+`func (o *BulkSubRequestObj) UnsetRequest()`
+
+UnsetRequest ensures that no value is present for Request, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

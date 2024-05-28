@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilityIomUpgradeSupportMeta type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilityIomUpgradeSupportMeta{}
 
 // CapabilityIomUpgradeSupportMeta Internal meta-data to enable IOM upgrade related decision making.
 type CapabilityIomUpgradeSupportMeta struct {
@@ -109,7 +113,7 @@ func (o *CapabilityIomUpgradeSupportMeta) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CapabilityIomUpgradeSupportMeta) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *CapabilityIomUpgradeSupportMeta) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityIomUpgradeSupportMeta) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -127,7 +131,7 @@ func (o *CapabilityIomUpgradeSupportMeta) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CapabilityIomUpgradeSupportMeta) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *CapabilityIomUpgradeSupportMeta) SetDescription(v string) {
 
 // GetDirectUpgrade returns the DirectUpgrade field value if set, zero value otherwise.
 func (o *CapabilityIomUpgradeSupportMeta) GetDirectUpgrade() bool {
-	if o == nil || o.DirectUpgrade == nil {
+	if o == nil || IsNil(o.DirectUpgrade) {
 		var ret bool
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *CapabilityIomUpgradeSupportMeta) GetDirectUpgrade() bool {
 // GetDirectUpgradeOk returns a tuple with the DirectUpgrade field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityIomUpgradeSupportMeta) GetDirectUpgradeOk() (*bool, bool) {
-	if o == nil || o.DirectUpgrade == nil {
+	if o == nil || IsNil(o.DirectUpgrade) {
 		return nil, false
 	}
 	return o.DirectUpgrade, true
@@ -159,7 +163,7 @@ func (o *CapabilityIomUpgradeSupportMeta) GetDirectUpgradeOk() (*bool, bool) {
 
 // HasDirectUpgrade returns a boolean if a field has been set.
 func (o *CapabilityIomUpgradeSupportMeta) HasDirectUpgrade() bool {
-	if o != nil && o.DirectUpgrade != nil {
+	if o != nil && !IsNil(o.DirectUpgrade) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *CapabilityIomUpgradeSupportMeta) SetDirectUpgrade(v bool) {
 
 // GetSeriesId returns the SeriesId field value if set, zero value otherwise.
 func (o *CapabilityIomUpgradeSupportMeta) GetSeriesId() string {
-	if o == nil || o.SeriesId == nil {
+	if o == nil || IsNil(o.SeriesId) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *CapabilityIomUpgradeSupportMeta) GetSeriesId() string {
 // GetSeriesIdOk returns a tuple with the SeriesId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityIomUpgradeSupportMeta) GetSeriesIdOk() (*string, bool) {
-	if o == nil || o.SeriesId == nil {
+	if o == nil || IsNil(o.SeriesId) {
 		return nil, false
 	}
 	return o.SeriesId, true
@@ -191,7 +195,7 @@ func (o *CapabilityIomUpgradeSupportMeta) GetSeriesIdOk() (*string, bool) {
 
 // HasSeriesId returns a boolean if a field has been set.
 func (o *CapabilityIomUpgradeSupportMeta) HasSeriesId() bool {
-	if o != nil && o.SeriesId != nil {
+	if o != nil && !IsNil(o.SeriesId) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *CapabilityIomUpgradeSupportMeta) GetSupportedModels() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilityIomUpgradeSupportMeta) GetSupportedModelsOk() ([]string, bool) {
-	if o == nil || o.SupportedModels == nil {
+	if o == nil || IsNil(o.SupportedModels) {
 		return nil, false
 	}
 	return o.SupportedModels, true
@@ -224,7 +228,7 @@ func (o *CapabilityIomUpgradeSupportMeta) GetSupportedModelsOk() ([]string, bool
 
 // HasSupportedModels returns a boolean if a field has been set.
 func (o *CapabilityIomUpgradeSupportMeta) HasSupportedModels() bool {
-	if o != nil && o.SupportedModels != nil {
+	if o != nil && IsNil(o.SupportedModels) {
 		return true
 	}
 
@@ -237,28 +241,32 @@ func (o *CapabilityIomUpgradeSupportMeta) SetSupportedModels(v []string) {
 }
 
 func (o CapabilityIomUpgradeSupportMeta) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilityIomUpgradeSupportMeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityCapability, errCapabilityCapability := json.Marshal(o.CapabilityCapability)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
 	errCapabilityCapability = json.Unmarshal([]byte(serializedCapabilityCapability), &toSerialize)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.DirectUpgrade != nil {
+	if !IsNil(o.DirectUpgrade) {
 		toSerialize["DirectUpgrade"] = o.DirectUpgrade
 	}
-	if o.SeriesId != nil {
+	if !IsNil(o.SeriesId) {
 		toSerialize["SeriesId"] = o.SeriesId
 	}
 	if o.SupportedModels != nil {
@@ -269,10 +277,32 @@ func (o CapabilityIomUpgradeSupportMeta) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilityIomUpgradeSupportMeta) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilityIomUpgradeSupportMeta) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilityIomUpgradeSupportMetaWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -289,7 +319,7 @@ func (o *CapabilityIomUpgradeSupportMeta) UnmarshalJSON(bytes []byte) (err error
 
 	varCapabilityIomUpgradeSupportMetaWithoutEmbeddedStruct := CapabilityIomUpgradeSupportMetaWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilityIomUpgradeSupportMetaWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilityIomUpgradeSupportMetaWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilityIomUpgradeSupportMeta := _CapabilityIomUpgradeSupportMeta{}
 		varCapabilityIomUpgradeSupportMeta.ClassId = varCapabilityIomUpgradeSupportMetaWithoutEmbeddedStruct.ClassId
@@ -305,7 +335,7 @@ func (o *CapabilityIomUpgradeSupportMeta) UnmarshalJSON(bytes []byte) (err error
 
 	varCapabilityIomUpgradeSupportMeta := _CapabilityIomUpgradeSupportMeta{}
 
-	err = json.Unmarshal(bytes, &varCapabilityIomUpgradeSupportMeta)
+	err = json.Unmarshal(data, &varCapabilityIomUpgradeSupportMeta)
 	if err == nil {
 		o.CapabilityCapability = varCapabilityIomUpgradeSupportMeta.CapabilityCapability
 	} else {
@@ -314,7 +344,7 @@ func (o *CapabilityIomUpgradeSupportMeta) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

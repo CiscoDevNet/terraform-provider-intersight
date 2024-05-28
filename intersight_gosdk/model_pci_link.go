@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PciLink type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PciLink{}
 
 // PciLink The PCI Switch Link connected to PCIe Switch.
 type PciLink struct {
@@ -35,10 +39,10 @@ type PciLink struct {
 	// The slot name of the PCI device.
 	PciSlot *string `json:"PciSlot,omitempty"`
 	// The health information of the PCI device.
-	SlotStatus           *string                              `json:"SlotStatus,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	PciSwitch            *PciSwitchRelationship               `json:"PciSwitch,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SlotStatus           *string                                     `json:"SlotStatus,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	PciSwitch            NullablePciSwitchRelationship               `json:"PciSwitch,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *PciLink) SetObjectType(v string) {
 
 // GetAdapter returns the Adapter field value if set, zero value otherwise.
 func (o *PciLink) GetAdapter() string {
-	if o == nil || o.Adapter == nil {
+	if o == nil || IsNil(o.Adapter) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *PciLink) GetAdapter() string {
 // GetAdapterOk returns a tuple with the Adapter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PciLink) GetAdapterOk() (*string, bool) {
-	if o == nil || o.Adapter == nil {
+	if o == nil || IsNil(o.Adapter) {
 		return nil, false
 	}
 	return o.Adapter, true
@@ -135,7 +139,7 @@ func (o *PciLink) GetAdapterOk() (*string, bool) {
 
 // HasAdapter returns a boolean if a field has been set.
 func (o *PciLink) HasAdapter() bool {
-	if o != nil && o.Adapter != nil {
+	if o != nil && !IsNil(o.Adapter) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *PciLink) SetAdapter(v string) {
 
 // GetLinkSpeed returns the LinkSpeed field value if set, zero value otherwise.
 func (o *PciLink) GetLinkSpeed() string {
-	if o == nil || o.LinkSpeed == nil {
+	if o == nil || IsNil(o.LinkSpeed) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *PciLink) GetLinkSpeed() string {
 // GetLinkSpeedOk returns a tuple with the LinkSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PciLink) GetLinkSpeedOk() (*string, bool) {
-	if o == nil || o.LinkSpeed == nil {
+	if o == nil || IsNil(o.LinkSpeed) {
 		return nil, false
 	}
 	return o.LinkSpeed, true
@@ -167,7 +171,7 @@ func (o *PciLink) GetLinkSpeedOk() (*string, bool) {
 
 // HasLinkSpeed returns a boolean if a field has been set.
 func (o *PciLink) HasLinkSpeed() bool {
-	if o != nil && o.LinkSpeed != nil {
+	if o != nil && !IsNil(o.LinkSpeed) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *PciLink) SetLinkSpeed(v string) {
 
 // GetLinkStatus returns the LinkStatus field value if set, zero value otherwise.
 func (o *PciLink) GetLinkStatus() string {
-	if o == nil || o.LinkStatus == nil {
+	if o == nil || IsNil(o.LinkStatus) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *PciLink) GetLinkStatus() string {
 // GetLinkStatusOk returns a tuple with the LinkStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PciLink) GetLinkStatusOk() (*string, bool) {
-	if o == nil || o.LinkStatus == nil {
+	if o == nil || IsNil(o.LinkStatus) {
 		return nil, false
 	}
 	return o.LinkStatus, true
@@ -199,7 +203,7 @@ func (o *PciLink) GetLinkStatusOk() (*string, bool) {
 
 // HasLinkStatus returns a boolean if a field has been set.
 func (o *PciLink) HasLinkStatus() bool {
-	if o != nil && o.LinkStatus != nil {
+	if o != nil && !IsNil(o.LinkStatus) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *PciLink) SetLinkStatus(v string) {
 
 // GetLinkWidth returns the LinkWidth field value if set, zero value otherwise.
 func (o *PciLink) GetLinkWidth() string {
-	if o == nil || o.LinkWidth == nil {
+	if o == nil || IsNil(o.LinkWidth) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *PciLink) GetLinkWidth() string {
 // GetLinkWidthOk returns a tuple with the LinkWidth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PciLink) GetLinkWidthOk() (*string, bool) {
-	if o == nil || o.LinkWidth == nil {
+	if o == nil || IsNil(o.LinkWidth) {
 		return nil, false
 	}
 	return o.LinkWidth, true
@@ -231,7 +235,7 @@ func (o *PciLink) GetLinkWidthOk() (*string, bool) {
 
 // HasLinkWidth returns a boolean if a field has been set.
 func (o *PciLink) HasLinkWidth() bool {
-	if o != nil && o.LinkWidth != nil {
+	if o != nil && !IsNil(o.LinkWidth) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *PciLink) SetLinkWidth(v string) {
 
 // GetPciSlot returns the PciSlot field value if set, zero value otherwise.
 func (o *PciLink) GetPciSlot() string {
-	if o == nil || o.PciSlot == nil {
+	if o == nil || IsNil(o.PciSlot) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *PciLink) GetPciSlot() string {
 // GetPciSlotOk returns a tuple with the PciSlot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PciLink) GetPciSlotOk() (*string, bool) {
-	if o == nil || o.PciSlot == nil {
+	if o == nil || IsNil(o.PciSlot) {
 		return nil, false
 	}
 	return o.PciSlot, true
@@ -263,7 +267,7 @@ func (o *PciLink) GetPciSlotOk() (*string, bool) {
 
 // HasPciSlot returns a boolean if a field has been set.
 func (o *PciLink) HasPciSlot() bool {
-	if o != nil && o.PciSlot != nil {
+	if o != nil && !IsNil(o.PciSlot) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *PciLink) SetPciSlot(v string) {
 
 // GetSlotStatus returns the SlotStatus field value if set, zero value otherwise.
 func (o *PciLink) GetSlotStatus() string {
-	if o == nil || o.SlotStatus == nil {
+	if o == nil || IsNil(o.SlotStatus) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *PciLink) GetSlotStatus() string {
 // GetSlotStatusOk returns a tuple with the SlotStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PciLink) GetSlotStatusOk() (*string, bool) {
-	if o == nil || o.SlotStatus == nil {
+	if o == nil || IsNil(o.SlotStatus) {
 		return nil, false
 	}
 	return o.SlotStatus, true
@@ -295,7 +299,7 @@ func (o *PciLink) GetSlotStatusOk() (*string, bool) {
 
 // HasSlotStatus returns a boolean if a field has been set.
 func (o *PciLink) HasSlotStatus() bool {
-	if o != nil && o.SlotStatus != nil {
+	if o != nil && !IsNil(o.SlotStatus) {
 		return true
 	}
 
@@ -307,154 +311,213 @@ func (o *PciLink) SetSlotStatus(v string) {
 	o.SlotStatus = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PciLink) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PciLink) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *PciLink) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *PciLink) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetPciSwitch returns the PciSwitch field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *PciLink) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *PciLink) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetPciSwitch returns the PciSwitch field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PciLink) GetPciSwitch() PciSwitchRelationship {
-	if o == nil || o.PciSwitch == nil {
+	if o == nil || IsNil(o.PciSwitch.Get()) {
 		var ret PciSwitchRelationship
 		return ret
 	}
-	return *o.PciSwitch
+	return *o.PciSwitch.Get()
 }
 
 // GetPciSwitchOk returns a tuple with the PciSwitch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PciLink) GetPciSwitchOk() (*PciSwitchRelationship, bool) {
-	if o == nil || o.PciSwitch == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PciSwitch, true
+	return o.PciSwitch.Get(), o.PciSwitch.IsSet()
 }
 
 // HasPciSwitch returns a boolean if a field has been set.
 func (o *PciLink) HasPciSwitch() bool {
-	if o != nil && o.PciSwitch != nil {
+	if o != nil && o.PciSwitch.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPciSwitch gets a reference to the given PciSwitchRelationship and assigns it to the PciSwitch field.
+// SetPciSwitch gets a reference to the given NullablePciSwitchRelationship and assigns it to the PciSwitch field.
 func (o *PciLink) SetPciSwitch(v PciSwitchRelationship) {
-	o.PciSwitch = &v
+	o.PciSwitch.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetPciSwitchNil sets the value for PciSwitch to be an explicit nil
+func (o *PciLink) SetPciSwitchNil() {
+	o.PciSwitch.Set(nil)
+}
+
+// UnsetPciSwitch ensures that no value is present for PciSwitch, not even an explicit nil
+func (o *PciLink) UnsetPciSwitch() {
+	o.PciSwitch.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PciLink) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PciLink) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *PciLink) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *PciLink) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *PciLink) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *PciLink) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o PciLink) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PciLink) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Adapter != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Adapter) {
 		toSerialize["Adapter"] = o.Adapter
 	}
-	if o.LinkSpeed != nil {
+	if !IsNil(o.LinkSpeed) {
 		toSerialize["LinkSpeed"] = o.LinkSpeed
 	}
-	if o.LinkStatus != nil {
+	if !IsNil(o.LinkStatus) {
 		toSerialize["LinkStatus"] = o.LinkStatus
 	}
-	if o.LinkWidth != nil {
+	if !IsNil(o.LinkWidth) {
 		toSerialize["LinkWidth"] = o.LinkWidth
 	}
-	if o.PciSlot != nil {
+	if !IsNil(o.PciSlot) {
 		toSerialize["PciSlot"] = o.PciSlot
 	}
-	if o.SlotStatus != nil {
+	if !IsNil(o.SlotStatus) {
 		toSerialize["SlotStatus"] = o.SlotStatus
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.PciSwitch != nil {
-		toSerialize["PciSwitch"] = o.PciSwitch
+	if o.PciSwitch.IsSet() {
+		toSerialize["PciSwitch"] = o.PciSwitch.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PciLink) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PciLink) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PciLinkWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -471,15 +534,15 @@ func (o *PciLink) UnmarshalJSON(bytes []byte) (err error) {
 		// The slot name of the PCI device.
 		PciSlot *string `json:"PciSlot,omitempty"`
 		// The health information of the PCI device.
-		SlotStatus          *string                              `json:"SlotStatus,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		PciSwitch           *PciSwitchRelationship               `json:"PciSwitch,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SlotStatus          *string                                     `json:"SlotStatus,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		PciSwitch           NullablePciSwitchRelationship               `json:"PciSwitch,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varPciLinkWithoutEmbeddedStruct := PciLinkWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPciLinkWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPciLinkWithoutEmbeddedStruct)
 	if err == nil {
 		varPciLink := _PciLink{}
 		varPciLink.ClassId = varPciLinkWithoutEmbeddedStruct.ClassId
@@ -500,7 +563,7 @@ func (o *PciLink) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPciLink := _PciLink{}
 
-	err = json.Unmarshal(bytes, &varPciLink)
+	err = json.Unmarshal(data, &varPciLink)
 	if err == nil {
 		o.EquipmentBase = varPciLink.EquipmentBase
 	} else {
@@ -509,7 +572,7 @@ func (o *PciLink) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Adapter")

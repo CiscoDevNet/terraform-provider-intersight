@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppVolumeSnapshot"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppVolumeSnapshot"]
 **Uuid** | Pointer to **string** | Universally unique identifier of the volume snapshot. | [optional] [readonly] 
-**Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
-**StorageContainer** | Pointer to [**StorageNetAppVolumeRelationship**](StorageNetAppVolumeRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
+**StorageContainer** | Pointer to [**NullableStorageNetAppVolumeRelationship**](StorageNetAppVolumeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -119,6 +119,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StorageNetAppVolumeSnapshot) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StorageNetAppVolumeSnapshot) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetStorageContainer
 
 `func (o *StorageNetAppVolumeSnapshot) GetStorageContainer() StorageNetAppVolumeRelationship`
@@ -144,6 +154,16 @@ SetStorageContainer sets StorageContainer field to given value.
 
 HasStorageContainer returns a boolean if a field has been set.
 
+### SetStorageContainerNil
+
+`func (o *StorageNetAppVolumeSnapshot) SetStorageContainerNil(b bool)`
+
+ SetStorageContainerNil sets the value for StorageContainer to be an explicit nil
+
+### UnsetStorageContainer
+`func (o *StorageNetAppVolumeSnapshot) UnsetStorageContainer()`
+
+UnsetStorageContainer ensures that no value is present for StorageContainer, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

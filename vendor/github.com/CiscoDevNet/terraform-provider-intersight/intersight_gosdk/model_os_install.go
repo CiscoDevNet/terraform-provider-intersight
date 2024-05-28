@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OsInstall type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OsInstall{}
 
 // OsInstall This MO models the target server, answers and other properties needed for OS installation. The OS installation can be started in the target server by doing a POST on this MO. The requests to this MO starts a OS installation workflow that can be tracked using workflow engine MO workflow.WorkflowInfo.
 type OsInstall struct {
@@ -25,13 +29,13 @@ type OsInstall struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The name of the OS install configuration.
-	Name                 *string                                                      `json:"Name,omitempty"`
-	ConfigurationFile    *OsConfigurationFileRelationship                             `json:"ConfigurationFile,omitempty"`
-	Image                *SoftwarerepositoryOperatingSystemFileRelationship           `json:"Image,omitempty"`
-	Organization         *OrganizationOrganizationRelationship                        `json:"Organization,omitempty"`
-	OsduImage            *FirmwareServerConfigurationUtilityDistributableRelationship `json:"OsduImage,omitempty"`
-	Server               *ComputePhysicalRelationship                                 `json:"Server,omitempty"`
-	WorkflowInfo         *WorkflowWorkflowInfoRelationship                            `json:"WorkflowInfo,omitempty"`
+	Name                 *string                                                             `json:"Name,omitempty"`
+	ConfigurationFile    NullableOsConfigurationFileRelationship                             `json:"ConfigurationFile,omitempty"`
+	Image                NullableSoftwarerepositoryOperatingSystemFileRelationship           `json:"Image,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship                        `json:"Organization,omitempty"`
+	OsduImage            NullableFirmwareServerConfigurationUtilityDistributableRelationship `json:"OsduImage,omitempty"`
+	Server               NullableComputePhysicalRelationship                                 `json:"Server,omitempty"`
+	WorkflowInfo         NullableWorkflowWorkflowInfoRelationship                            `json:"WorkflowInfo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,7 +116,7 @@ func (o *OsInstall) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *OsInstall) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *OsInstall) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsInstall) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -130,7 +134,7 @@ func (o *OsInstall) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *OsInstall) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -142,262 +146,354 @@ func (o *OsInstall) SetName(v string) {
 	o.Name = &v
 }
 
-// GetConfigurationFile returns the ConfigurationFile field value if set, zero value otherwise.
+// GetConfigurationFile returns the ConfigurationFile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsInstall) GetConfigurationFile() OsConfigurationFileRelationship {
-	if o == nil || o.ConfigurationFile == nil {
+	if o == nil || IsNil(o.ConfigurationFile.Get()) {
 		var ret OsConfigurationFileRelationship
 		return ret
 	}
-	return *o.ConfigurationFile
+	return *o.ConfigurationFile.Get()
 }
 
 // GetConfigurationFileOk returns a tuple with the ConfigurationFile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsInstall) GetConfigurationFileOk() (*OsConfigurationFileRelationship, bool) {
-	if o == nil || o.ConfigurationFile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ConfigurationFile, true
+	return o.ConfigurationFile.Get(), o.ConfigurationFile.IsSet()
 }
 
 // HasConfigurationFile returns a boolean if a field has been set.
 func (o *OsInstall) HasConfigurationFile() bool {
-	if o != nil && o.ConfigurationFile != nil {
+	if o != nil && o.ConfigurationFile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetConfigurationFile gets a reference to the given OsConfigurationFileRelationship and assigns it to the ConfigurationFile field.
+// SetConfigurationFile gets a reference to the given NullableOsConfigurationFileRelationship and assigns it to the ConfigurationFile field.
 func (o *OsInstall) SetConfigurationFile(v OsConfigurationFileRelationship) {
-	o.ConfigurationFile = &v
+	o.ConfigurationFile.Set(&v)
 }
 
-// GetImage returns the Image field value if set, zero value otherwise.
+// SetConfigurationFileNil sets the value for ConfigurationFile to be an explicit nil
+func (o *OsInstall) SetConfigurationFileNil() {
+	o.ConfigurationFile.Set(nil)
+}
+
+// UnsetConfigurationFile ensures that no value is present for ConfigurationFile, not even an explicit nil
+func (o *OsInstall) UnsetConfigurationFile() {
+	o.ConfigurationFile.Unset()
+}
+
+// GetImage returns the Image field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsInstall) GetImage() SoftwarerepositoryOperatingSystemFileRelationship {
-	if o == nil || o.Image == nil {
+	if o == nil || IsNil(o.Image.Get()) {
 		var ret SoftwarerepositoryOperatingSystemFileRelationship
 		return ret
 	}
-	return *o.Image
+	return *o.Image.Get()
 }
 
 // GetImageOk returns a tuple with the Image field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsInstall) GetImageOk() (*SoftwarerepositoryOperatingSystemFileRelationship, bool) {
-	if o == nil || o.Image == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Image, true
+	return o.Image.Get(), o.Image.IsSet()
 }
 
 // HasImage returns a boolean if a field has been set.
 func (o *OsInstall) HasImage() bool {
-	if o != nil && o.Image != nil {
+	if o != nil && o.Image.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetImage gets a reference to the given SoftwarerepositoryOperatingSystemFileRelationship and assigns it to the Image field.
+// SetImage gets a reference to the given NullableSoftwarerepositoryOperatingSystemFileRelationship and assigns it to the Image field.
 func (o *OsInstall) SetImage(v SoftwarerepositoryOperatingSystemFileRelationship) {
-	o.Image = &v
+	o.Image.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetImageNil sets the value for Image to be an explicit nil
+func (o *OsInstall) SetImageNil() {
+	o.Image.Set(nil)
+}
+
+// UnsetImage ensures that no value is present for Image, not even an explicit nil
+func (o *OsInstall) UnsetImage() {
+	o.Image.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsInstall) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsInstall) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *OsInstall) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *OsInstall) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetOsduImage returns the OsduImage field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *OsInstall) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *OsInstall) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetOsduImage returns the OsduImage field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsInstall) GetOsduImage() FirmwareServerConfigurationUtilityDistributableRelationship {
-	if o == nil || o.OsduImage == nil {
+	if o == nil || IsNil(o.OsduImage.Get()) {
 		var ret FirmwareServerConfigurationUtilityDistributableRelationship
 		return ret
 	}
-	return *o.OsduImage
+	return *o.OsduImage.Get()
 }
 
 // GetOsduImageOk returns a tuple with the OsduImage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsInstall) GetOsduImageOk() (*FirmwareServerConfigurationUtilityDistributableRelationship, bool) {
-	if o == nil || o.OsduImage == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.OsduImage, true
+	return o.OsduImage.Get(), o.OsduImage.IsSet()
 }
 
 // HasOsduImage returns a boolean if a field has been set.
 func (o *OsInstall) HasOsduImage() bool {
-	if o != nil && o.OsduImage != nil {
+	if o != nil && o.OsduImage.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOsduImage gets a reference to the given FirmwareServerConfigurationUtilityDistributableRelationship and assigns it to the OsduImage field.
+// SetOsduImage gets a reference to the given NullableFirmwareServerConfigurationUtilityDistributableRelationship and assigns it to the OsduImage field.
 func (o *OsInstall) SetOsduImage(v FirmwareServerConfigurationUtilityDistributableRelationship) {
-	o.OsduImage = &v
+	o.OsduImage.Set(&v)
 }
 
-// GetServer returns the Server field value if set, zero value otherwise.
+// SetOsduImageNil sets the value for OsduImage to be an explicit nil
+func (o *OsInstall) SetOsduImageNil() {
+	o.OsduImage.Set(nil)
+}
+
+// UnsetOsduImage ensures that no value is present for OsduImage, not even an explicit nil
+func (o *OsInstall) UnsetOsduImage() {
+	o.OsduImage.Unset()
+}
+
+// GetServer returns the Server field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsInstall) GetServer() ComputePhysicalRelationship {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.Server
+	return *o.Server.Get()
 }
 
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsInstall) GetServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Server, true
+	return o.Server.Get(), o.Server.IsSet()
 }
 
 // HasServer returns a boolean if a field has been set.
 func (o *OsInstall) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && o.Server.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServer gets a reference to the given ComputePhysicalRelationship and assigns it to the Server field.
+// SetServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the Server field.
 func (o *OsInstall) SetServer(v ComputePhysicalRelationship) {
-	o.Server = &v
+	o.Server.Set(&v)
 }
 
-// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise.
+// SetServerNil sets the value for Server to be an explicit nil
+func (o *OsInstall) SetServerNil() {
+	o.Server.Set(nil)
+}
+
+// UnsetServer ensures that no value is present for Server, not even an explicit nil
+func (o *OsInstall) UnsetServer() {
+	o.Server.Unset()
+}
+
+// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsInstall) GetWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil || IsNil(o.WorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.WorkflowInfo
+	return *o.WorkflowInfo.Get()
 }
 
 // GetWorkflowInfoOk returns a tuple with the WorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsInstall) GetWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WorkflowInfo, true
+	return o.WorkflowInfo.Get(), o.WorkflowInfo.IsSet()
 }
 
 // HasWorkflowInfo returns a boolean if a field has been set.
 func (o *OsInstall) HasWorkflowInfo() bool {
-	if o != nil && o.WorkflowInfo != nil {
+	if o != nil && o.WorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
+// SetWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
 func (o *OsInstall) SetWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.WorkflowInfo = &v
+	o.WorkflowInfo.Set(&v)
+}
+
+// SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+func (o *OsInstall) SetWorkflowInfoNil() {
+	o.WorkflowInfo.Set(nil)
+}
+
+// UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
+func (o *OsInstall) UnsetWorkflowInfo() {
+	o.WorkflowInfo.Unset()
 }
 
 func (o OsInstall) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OsInstall) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedOsBaseInstallConfig, errOsBaseInstallConfig := json.Marshal(o.OsBaseInstallConfig)
 	if errOsBaseInstallConfig != nil {
-		return []byte{}, errOsBaseInstallConfig
+		return map[string]interface{}{}, errOsBaseInstallConfig
 	}
 	errOsBaseInstallConfig = json.Unmarshal([]byte(serializedOsBaseInstallConfig), &toSerialize)
 	if errOsBaseInstallConfig != nil {
-		return []byte{}, errOsBaseInstallConfig
+		return map[string]interface{}{}, errOsBaseInstallConfig
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.ConfigurationFile != nil {
-		toSerialize["ConfigurationFile"] = o.ConfigurationFile
+	if o.ConfigurationFile.IsSet() {
+		toSerialize["ConfigurationFile"] = o.ConfigurationFile.Get()
 	}
-	if o.Image != nil {
-		toSerialize["Image"] = o.Image
+	if o.Image.IsSet() {
+		toSerialize["Image"] = o.Image.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.OsduImage != nil {
-		toSerialize["OsduImage"] = o.OsduImage
+	if o.OsduImage.IsSet() {
+		toSerialize["OsduImage"] = o.OsduImage.Get()
 	}
-	if o.Server != nil {
-		toSerialize["Server"] = o.Server
+	if o.Server.IsSet() {
+		toSerialize["Server"] = o.Server.Get()
 	}
-	if o.WorkflowInfo != nil {
-		toSerialize["WorkflowInfo"] = o.WorkflowInfo
+	if o.WorkflowInfo.IsSet() {
+		toSerialize["WorkflowInfo"] = o.WorkflowInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OsInstall) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OsInstall) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OsInstallWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The name of the OS install configuration.
-		Name              *string                                                      `json:"Name,omitempty"`
-		ConfigurationFile *OsConfigurationFileRelationship                             `json:"ConfigurationFile,omitempty"`
-		Image             *SoftwarerepositoryOperatingSystemFileRelationship           `json:"Image,omitempty"`
-		Organization      *OrganizationOrganizationRelationship                        `json:"Organization,omitempty"`
-		OsduImage         *FirmwareServerConfigurationUtilityDistributableRelationship `json:"OsduImage,omitempty"`
-		Server            *ComputePhysicalRelationship                                 `json:"Server,omitempty"`
-		WorkflowInfo      *WorkflowWorkflowInfoRelationship                            `json:"WorkflowInfo,omitempty"`
+		Name              *string                                                             `json:"Name,omitempty"`
+		ConfigurationFile NullableOsConfigurationFileRelationship                             `json:"ConfigurationFile,omitempty"`
+		Image             NullableSoftwarerepositoryOperatingSystemFileRelationship           `json:"Image,omitempty"`
+		Organization      NullableOrganizationOrganizationRelationship                        `json:"Organization,omitempty"`
+		OsduImage         NullableFirmwareServerConfigurationUtilityDistributableRelationship `json:"OsduImage,omitempty"`
+		Server            NullableComputePhysicalRelationship                                 `json:"Server,omitempty"`
+		WorkflowInfo      NullableWorkflowWorkflowInfoRelationship                            `json:"WorkflowInfo,omitempty"`
 	}
 
 	varOsInstallWithoutEmbeddedStruct := OsInstallWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOsInstallWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOsInstallWithoutEmbeddedStruct)
 	if err == nil {
 		varOsInstall := _OsInstall{}
 		varOsInstall.ClassId = varOsInstallWithoutEmbeddedStruct.ClassId
@@ -416,7 +512,7 @@ func (o *OsInstall) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsInstall := _OsInstall{}
 
-	err = json.Unmarshal(bytes, &varOsInstall)
+	err = json.Unmarshal(data, &varOsInstall)
 	if err == nil {
 		o.OsBaseInstallConfig = varOsInstall.OsBaseInstallConfig
 	} else {
@@ -425,7 +521,7 @@ func (o *OsInstall) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

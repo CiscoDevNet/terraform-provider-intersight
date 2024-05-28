@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NetworkLicenseFile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NetworkLicenseFile{}
 
 // NetworkLicenseFile Displays license information.
 type NetworkLicenseFile struct {
@@ -33,9 +37,9 @@ type NetworkLicenseFile struct {
 	// The identifier to identify license host Id.
 	HostId *string `json:"HostId,omitempty"`
 	// The vendor of the license.
-	Vendor               *string                              `json:"Vendor,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Vendor               *string                                     `json:"Vendor,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *NetworkLicenseFile) SetObjectType(v string) {
 
 // GetExpiryDate returns the ExpiryDate field value if set, zero value otherwise.
 func (o *NetworkLicenseFile) GetExpiryDate() string {
-	if o == nil || o.ExpiryDate == nil {
+	if o == nil || IsNil(o.ExpiryDate) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *NetworkLicenseFile) GetExpiryDate() string {
 // GetExpiryDateOk returns a tuple with the ExpiryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkLicenseFile) GetExpiryDateOk() (*string, bool) {
-	if o == nil || o.ExpiryDate == nil {
+	if o == nil || IsNil(o.ExpiryDate) {
 		return nil, false
 	}
 	return o.ExpiryDate, true
@@ -132,7 +136,7 @@ func (o *NetworkLicenseFile) GetExpiryDateOk() (*string, bool) {
 
 // HasExpiryDate returns a boolean if a field has been set.
 func (o *NetworkLicenseFile) HasExpiryDate() bool {
-	if o != nil && o.ExpiryDate != nil {
+	if o != nil && !IsNil(o.ExpiryDate) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *NetworkLicenseFile) SetExpiryDate(v string) {
 
 // GetFeatureName returns the FeatureName field value if set, zero value otherwise.
 func (o *NetworkLicenseFile) GetFeatureName() string {
-	if o == nil || o.FeatureName == nil {
+	if o == nil || IsNil(o.FeatureName) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *NetworkLicenseFile) GetFeatureName() string {
 // GetFeatureNameOk returns a tuple with the FeatureName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkLicenseFile) GetFeatureNameOk() (*string, bool) {
-	if o == nil || o.FeatureName == nil {
+	if o == nil || IsNil(o.FeatureName) {
 		return nil, false
 	}
 	return o.FeatureName, true
@@ -164,7 +168,7 @@ func (o *NetworkLicenseFile) GetFeatureNameOk() (*string, bool) {
 
 // HasFeatureName returns a boolean if a field has been set.
 func (o *NetworkLicenseFile) HasFeatureName() bool {
-	if o != nil && o.FeatureName != nil {
+	if o != nil && !IsNil(o.FeatureName) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *NetworkLicenseFile) SetFeatureName(v string) {
 
 // GetFileId returns the FileId field value if set, zero value otherwise.
 func (o *NetworkLicenseFile) GetFileId() string {
-	if o == nil || o.FileId == nil {
+	if o == nil || IsNil(o.FileId) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *NetworkLicenseFile) GetFileId() string {
 // GetFileIdOk returns a tuple with the FileId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkLicenseFile) GetFileIdOk() (*string, bool) {
-	if o == nil || o.FileId == nil {
+	if o == nil || IsNil(o.FileId) {
 		return nil, false
 	}
 	return o.FileId, true
@@ -196,7 +200,7 @@ func (o *NetworkLicenseFile) GetFileIdOk() (*string, bool) {
 
 // HasFileId returns a boolean if a field has been set.
 func (o *NetworkLicenseFile) HasFileId() bool {
-	if o != nil && o.FileId != nil {
+	if o != nil && !IsNil(o.FileId) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *NetworkLicenseFile) SetFileId(v string) {
 
 // GetHostId returns the HostId field value if set, zero value otherwise.
 func (o *NetworkLicenseFile) GetHostId() string {
-	if o == nil || o.HostId == nil {
+	if o == nil || IsNil(o.HostId) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *NetworkLicenseFile) GetHostId() string {
 // GetHostIdOk returns a tuple with the HostId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkLicenseFile) GetHostIdOk() (*string, bool) {
-	if o == nil || o.HostId == nil {
+	if o == nil || IsNil(o.HostId) {
 		return nil, false
 	}
 	return o.HostId, true
@@ -228,7 +232,7 @@ func (o *NetworkLicenseFile) GetHostIdOk() (*string, bool) {
 
 // HasHostId returns a boolean if a field has been set.
 func (o *NetworkLicenseFile) HasHostId() bool {
-	if o != nil && o.HostId != nil {
+	if o != nil && !IsNil(o.HostId) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *NetworkLicenseFile) SetHostId(v string) {
 
 // GetVendor returns the Vendor field value if set, zero value otherwise.
 func (o *NetworkLicenseFile) GetVendor() string {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *NetworkLicenseFile) GetVendor() string {
 // GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkLicenseFile) GetVendorOk() (*string, bool) {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		return nil, false
 	}
 	return o.Vendor, true
@@ -260,7 +264,7 @@ func (o *NetworkLicenseFile) GetVendorOk() (*string, bool) {
 
 // HasVendor returns a boolean if a field has been set.
 func (o *NetworkLicenseFile) HasVendor() bool {
-	if o != nil && o.Vendor != nil {
+	if o != nil && !IsNil(o.Vendor) {
 		return true
 	}
 
@@ -272,116 +276,164 @@ func (o *NetworkLicenseFile) SetVendor(v string) {
 	o.Vendor = &v
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkLicenseFile) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkLicenseFile) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *NetworkLicenseFile) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *NetworkLicenseFile) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *NetworkLicenseFile) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *NetworkLicenseFile) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkLicenseFile) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkLicenseFile) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NetworkLicenseFile) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NetworkLicenseFile) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NetworkLicenseFile) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NetworkLicenseFile) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NetworkLicenseFile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NetworkLicenseFile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ExpiryDate != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ExpiryDate) {
 		toSerialize["ExpiryDate"] = o.ExpiryDate
 	}
-	if o.FeatureName != nil {
+	if !IsNil(o.FeatureName) {
 		toSerialize["FeatureName"] = o.FeatureName
 	}
-	if o.FileId != nil {
+	if !IsNil(o.FileId) {
 		toSerialize["FileId"] = o.FileId
 	}
-	if o.HostId != nil {
+	if !IsNil(o.HostId) {
 		toSerialize["HostId"] = o.HostId
 	}
-	if o.Vendor != nil {
+	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NetworkLicenseFile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NetworkLicenseFile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NetworkLicenseFileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -396,14 +448,14 @@ func (o *NetworkLicenseFile) UnmarshalJSON(bytes []byte) (err error) {
 		// The identifier to identify license host Id.
 		HostId *string `json:"HostId,omitempty"`
 		// The vendor of the license.
-		Vendor           *string                              `json:"Vendor,omitempty"`
-		NetworkElement   *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Vendor           *string                                     `json:"Vendor,omitempty"`
+		NetworkElement   NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNetworkLicenseFileWithoutEmbeddedStruct := NetworkLicenseFileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNetworkLicenseFileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNetworkLicenseFileWithoutEmbeddedStruct)
 	if err == nil {
 		varNetworkLicenseFile := _NetworkLicenseFile{}
 		varNetworkLicenseFile.ClassId = varNetworkLicenseFileWithoutEmbeddedStruct.ClassId
@@ -422,7 +474,7 @@ func (o *NetworkLicenseFile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNetworkLicenseFile := _NetworkLicenseFile{}
 
-	err = json.Unmarshal(bytes, &varNetworkLicenseFile)
+	err = json.Unmarshal(data, &varNetworkLicenseFile)
 	if err == nil {
 		o.InventoryBase = varNetworkLicenseFile.InventoryBase
 	} else {
@@ -431,7 +483,7 @@ func (o *NetworkLicenseFile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExpiryDate")

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppNonDataIpInterfaceEvent"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppNonDataIpInterfaceEvent"]
-**IpInterface** | Pointer to [**StorageNetAppNonDataIpInterfaceRelationship**](StorageNetAppNonDataIpInterfaceRelationship.md) |  | [optional] 
+**IpInterface** | Pointer to [**NullableStorageNetAppNonDataIpInterfaceRelationship**](StorageNetAppNonDataIpInterfaceRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetIpInterface sets IpInterface field to given value.
 
 HasIpInterface returns a boolean if a field has been set.
 
+### SetIpInterfaceNil
+
+`func (o *StorageNetAppNonDataIpInterfaceEvent) SetIpInterfaceNil(b bool)`
+
+ SetIpInterfaceNil sets the value for IpInterface to be an explicit nil
+
+### UnsetIpInterface
+`func (o *StorageNetAppNonDataIpInterfaceEvent) UnsetIpInterface()`
+
+UnsetIpInterface ensures that no value is present for IpInterface, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

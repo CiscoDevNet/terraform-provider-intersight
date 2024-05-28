@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **ControllerMoid** | Pointer to **string** | The storage controller Moid for which Nvme RAID creation is supported. | [optional] [readonly] 
 **DiskStates** | Pointer to [**[]StorageNvmePhysicalDiskState**](StorageNvmePhysicalDiskState.md) |  | [optional] 
 **DriveGroups** | Pointer to [**[]StorageNvmeRaidDriveGroup**](StorageNvmeRaidDriveGroup.md) |  | [optional] 
-**ServerProfile** | Pointer to [**ServerProfileRelationship**](ServerProfileRelationship.md) |  | [optional] 
-**StoragePolicy** | Pointer to [**StorageStoragePolicyRelationship**](StorageStoragePolicyRelationship.md) |  | [optional] 
+**ServerProfile** | Pointer to [**NullableServerProfileRelationship**](ServerProfileRelationship.md) |  | [optional] 
+**StoragePolicy** | Pointer to [**NullableStorageStoragePolicyRelationship**](StorageStoragePolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -217,6 +217,16 @@ SetServerProfile sets ServerProfile field to given value.
 
 HasServerProfile returns a boolean if a field has been set.
 
+### SetServerProfileNil
+
+`func (o *StorageNvmeRaidConfiguration) SetServerProfileNil(b bool)`
+
+ SetServerProfileNil sets the value for ServerProfile to be an explicit nil
+
+### UnsetServerProfile
+`func (o *StorageNvmeRaidConfiguration) UnsetServerProfile()`
+
+UnsetServerProfile ensures that no value is present for ServerProfile, not even an explicit nil
 ### GetStoragePolicy
 
 `func (o *StorageNvmeRaidConfiguration) GetStoragePolicy() StorageStoragePolicyRelationship`
@@ -242,6 +252,16 @@ SetStoragePolicy sets StoragePolicy field to given value.
 
 HasStoragePolicy returns a boolean if a field has been set.
 
+### SetStoragePolicyNil
+
+`func (o *StorageNvmeRaidConfiguration) SetStoragePolicyNil(b bool)`
+
+ SetStoragePolicyNil sets the value for StoragePolicy to be an explicit nil
+
+### UnsetStoragePolicy
+`func (o *StorageNvmeRaidConfiguration) UnsetStoragePolicy()`
+
+UnsetStoragePolicy ensures that no value is present for StoragePolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

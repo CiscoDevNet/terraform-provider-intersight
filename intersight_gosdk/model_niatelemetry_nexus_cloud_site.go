@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryNexusCloudSite type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryNexusCloudSite{}
 
 // NiatelemetryNexusCloudSite Stores information of Nexus Cloud site devices.
 type NiatelemetryNexusCloudSite struct {
@@ -39,8 +43,8 @@ type NiatelemetryNexusCloudSite struct {
 	// Software management setting status, based on license type.
 	SoftwareManagement *bool `json:"SoftwareManagement,omitempty"`
 	// Returns the uuid of the Nexus Cloud site.
-	Uuid                 *string                                    `json:"Uuid,omitempty"`
-	NexusCloudAccount    *NiatelemetryNexusCloudAccountRelationship `json:"NexusCloudAccount,omitempty"`
+	Uuid                 *string                                           `json:"Uuid,omitempty"`
+	NexusCloudAccount    NullableNiatelemetryNexusCloudAccountRelationship `json:"NexusCloudAccount,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *NiatelemetryNexusCloudSite) SetObjectType(v string) {
 
 // GetAdvisories returns the Advisories field value if set, zero value otherwise.
 func (o *NiatelemetryNexusCloudSite) GetAdvisories() bool {
-	if o == nil || o.Advisories == nil {
+	if o == nil || IsNil(o.Advisories) {
 		var ret bool
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *NiatelemetryNexusCloudSite) GetAdvisories() bool {
 // GetAdvisoriesOk returns a tuple with the Advisories field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusCloudSite) GetAdvisoriesOk() (*bool, bool) {
-	if o == nil || o.Advisories == nil {
+	if o == nil || IsNil(o.Advisories) {
 		return nil, false
 	}
 	return o.Advisories, true
@@ -137,7 +141,7 @@ func (o *NiatelemetryNexusCloudSite) GetAdvisoriesOk() (*bool, bool) {
 
 // HasAdvisories returns a boolean if a field has been set.
 func (o *NiatelemetryNexusCloudSite) HasAdvisories() bool {
-	if o != nil && o.Advisories != nil {
+	if o != nil && !IsNil(o.Advisories) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *NiatelemetryNexusCloudSite) SetAdvisories(v bool) {
 
 // GetAnomalies returns the Anomalies field value if set, zero value otherwise.
 func (o *NiatelemetryNexusCloudSite) GetAnomalies() bool {
-	if o == nil || o.Anomalies == nil {
+	if o == nil || IsNil(o.Anomalies) {
 		var ret bool
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *NiatelemetryNexusCloudSite) GetAnomalies() bool {
 // GetAnomaliesOk returns a tuple with the Anomalies field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusCloudSite) GetAnomaliesOk() (*bool, bool) {
-	if o == nil || o.Anomalies == nil {
+	if o == nil || IsNil(o.Anomalies) {
 		return nil, false
 	}
 	return o.Anomalies, true
@@ -169,7 +173,7 @@ func (o *NiatelemetryNexusCloudSite) GetAnomaliesOk() (*bool, bool) {
 
 // HasAnomalies returns a boolean if a field has been set.
 func (o *NiatelemetryNexusCloudSite) HasAnomalies() bool {
-	if o != nil && o.Anomalies != nil {
+	if o != nil && !IsNil(o.Anomalies) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *NiatelemetryNexusCloudSite) SetAnomalies(v bool) {
 
 // GetCapacityUtilization returns the CapacityUtilization field value if set, zero value otherwise.
 func (o *NiatelemetryNexusCloudSite) GetCapacityUtilization() bool {
-	if o == nil || o.CapacityUtilization == nil {
+	if o == nil || IsNil(o.CapacityUtilization) {
 		var ret bool
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *NiatelemetryNexusCloudSite) GetCapacityUtilization() bool {
 // GetCapacityUtilizationOk returns a tuple with the CapacityUtilization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusCloudSite) GetCapacityUtilizationOk() (*bool, bool) {
-	if o == nil || o.CapacityUtilization == nil {
+	if o == nil || IsNil(o.CapacityUtilization) {
 		return nil, false
 	}
 	return o.CapacityUtilization, true
@@ -201,7 +205,7 @@ func (o *NiatelemetryNexusCloudSite) GetCapacityUtilizationOk() (*bool, bool) {
 
 // HasCapacityUtilization returns a boolean if a field has been set.
 func (o *NiatelemetryNexusCloudSite) HasCapacityUtilization() bool {
-	if o != nil && o.CapacityUtilization != nil {
+	if o != nil && !IsNil(o.CapacityUtilization) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *NiatelemetryNexusCloudSite) SetCapacityUtilization(v bool) {
 
 // GetLicenseType returns the LicenseType field value if set, zero value otherwise.
 func (o *NiatelemetryNexusCloudSite) GetLicenseType() string {
-	if o == nil || o.LicenseType == nil {
+	if o == nil || IsNil(o.LicenseType) {
 		var ret string
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *NiatelemetryNexusCloudSite) GetLicenseType() string {
 // GetLicenseTypeOk returns a tuple with the LicenseType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusCloudSite) GetLicenseTypeOk() (*string, bool) {
-	if o == nil || o.LicenseType == nil {
+	if o == nil || IsNil(o.LicenseType) {
 		return nil, false
 	}
 	return o.LicenseType, true
@@ -233,7 +237,7 @@ func (o *NiatelemetryNexusCloudSite) GetLicenseTypeOk() (*string, bool) {
 
 // HasLicenseType returns a boolean if a field has been set.
 func (o *NiatelemetryNexusCloudSite) HasLicenseType() bool {
-	if o != nil && o.LicenseType != nil {
+	if o != nil && !IsNil(o.LicenseType) {
 		return true
 	}
 
@@ -247,7 +251,7 @@ func (o *NiatelemetryNexusCloudSite) SetLicenseType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *NiatelemetryNexusCloudSite) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -257,7 +261,7 @@ func (o *NiatelemetryNexusCloudSite) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusCloudSite) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -265,7 +269,7 @@ func (o *NiatelemetryNexusCloudSite) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *NiatelemetryNexusCloudSite) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *NiatelemetryNexusCloudSite) SetName(v string) {
 
 // GetSiteType returns the SiteType field value if set, zero value otherwise.
 func (o *NiatelemetryNexusCloudSite) GetSiteType() string {
-	if o == nil || o.SiteType == nil {
+	if o == nil || IsNil(o.SiteType) {
 		var ret string
 		return ret
 	}
@@ -289,7 +293,7 @@ func (o *NiatelemetryNexusCloudSite) GetSiteType() string {
 // GetSiteTypeOk returns a tuple with the SiteType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusCloudSite) GetSiteTypeOk() (*string, bool) {
-	if o == nil || o.SiteType == nil {
+	if o == nil || IsNil(o.SiteType) {
 		return nil, false
 	}
 	return o.SiteType, true
@@ -297,7 +301,7 @@ func (o *NiatelemetryNexusCloudSite) GetSiteTypeOk() (*string, bool) {
 
 // HasSiteType returns a boolean if a field has been set.
 func (o *NiatelemetryNexusCloudSite) HasSiteType() bool {
-	if o != nil && o.SiteType != nil {
+	if o != nil && !IsNil(o.SiteType) {
 		return true
 	}
 
@@ -311,7 +315,7 @@ func (o *NiatelemetryNexusCloudSite) SetSiteType(v string) {
 
 // GetSoftwareManagement returns the SoftwareManagement field value if set, zero value otherwise.
 func (o *NiatelemetryNexusCloudSite) GetSoftwareManagement() bool {
-	if o == nil || o.SoftwareManagement == nil {
+	if o == nil || IsNil(o.SoftwareManagement) {
 		var ret bool
 		return ret
 	}
@@ -321,7 +325,7 @@ func (o *NiatelemetryNexusCloudSite) GetSoftwareManagement() bool {
 // GetSoftwareManagementOk returns a tuple with the SoftwareManagement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusCloudSite) GetSoftwareManagementOk() (*bool, bool) {
-	if o == nil || o.SoftwareManagement == nil {
+	if o == nil || IsNil(o.SoftwareManagement) {
 		return nil, false
 	}
 	return o.SoftwareManagement, true
@@ -329,7 +333,7 @@ func (o *NiatelemetryNexusCloudSite) GetSoftwareManagementOk() (*bool, bool) {
 
 // HasSoftwareManagement returns a boolean if a field has been set.
 func (o *NiatelemetryNexusCloudSite) HasSoftwareManagement() bool {
-	if o != nil && o.SoftwareManagement != nil {
+	if o != nil && !IsNil(o.SoftwareManagement) {
 		return true
 	}
 
@@ -343,7 +347,7 @@ func (o *NiatelemetryNexusCloudSite) SetSoftwareManagement(v bool) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *NiatelemetryNexusCloudSite) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -353,7 +357,7 @@ func (o *NiatelemetryNexusCloudSite) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusCloudSite) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -361,7 +365,7 @@ func (o *NiatelemetryNexusCloudSite) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *NiatelemetryNexusCloudSite) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -373,90 +377,127 @@ func (o *NiatelemetryNexusCloudSite) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetNexusCloudAccount returns the NexusCloudAccount field value if set, zero value otherwise.
+// GetNexusCloudAccount returns the NexusCloudAccount field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryNexusCloudSite) GetNexusCloudAccount() NiatelemetryNexusCloudAccountRelationship {
-	if o == nil || o.NexusCloudAccount == nil {
+	if o == nil || IsNil(o.NexusCloudAccount.Get()) {
 		var ret NiatelemetryNexusCloudAccountRelationship
 		return ret
 	}
-	return *o.NexusCloudAccount
+	return *o.NexusCloudAccount.Get()
 }
 
 // GetNexusCloudAccountOk returns a tuple with the NexusCloudAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNexusCloudSite) GetNexusCloudAccountOk() (*NiatelemetryNexusCloudAccountRelationship, bool) {
-	if o == nil || o.NexusCloudAccount == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NexusCloudAccount, true
+	return o.NexusCloudAccount.Get(), o.NexusCloudAccount.IsSet()
 }
 
 // HasNexusCloudAccount returns a boolean if a field has been set.
 func (o *NiatelemetryNexusCloudSite) HasNexusCloudAccount() bool {
-	if o != nil && o.NexusCloudAccount != nil {
+	if o != nil && o.NexusCloudAccount.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNexusCloudAccount gets a reference to the given NiatelemetryNexusCloudAccountRelationship and assigns it to the NexusCloudAccount field.
+// SetNexusCloudAccount gets a reference to the given NullableNiatelemetryNexusCloudAccountRelationship and assigns it to the NexusCloudAccount field.
 func (o *NiatelemetryNexusCloudSite) SetNexusCloudAccount(v NiatelemetryNexusCloudAccountRelationship) {
-	o.NexusCloudAccount = &v
+	o.NexusCloudAccount.Set(&v)
+}
+
+// SetNexusCloudAccountNil sets the value for NexusCloudAccount to be an explicit nil
+func (o *NiatelemetryNexusCloudSite) SetNexusCloudAccountNil() {
+	o.NexusCloudAccount.Set(nil)
+}
+
+// UnsetNexusCloudAccount ensures that no value is present for NexusCloudAccount, not even an explicit nil
+func (o *NiatelemetryNexusCloudSite) UnsetNexusCloudAccount() {
+	o.NexusCloudAccount.Unset()
 }
 
 func (o NiatelemetryNexusCloudSite) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryNexusCloudSite) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Advisories != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Advisories) {
 		toSerialize["Advisories"] = o.Advisories
 	}
-	if o.Anomalies != nil {
+	if !IsNil(o.Anomalies) {
 		toSerialize["Anomalies"] = o.Anomalies
 	}
-	if o.CapacityUtilization != nil {
+	if !IsNil(o.CapacityUtilization) {
 		toSerialize["CapacityUtilization"] = o.CapacityUtilization
 	}
-	if o.LicenseType != nil {
+	if !IsNil(o.LicenseType) {
 		toSerialize["LicenseType"] = o.LicenseType
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.SiteType != nil {
+	if !IsNil(o.SiteType) {
 		toSerialize["SiteType"] = o.SiteType
 	}
-	if o.SoftwareManagement != nil {
+	if !IsNil(o.SoftwareManagement) {
 		toSerialize["SoftwareManagement"] = o.SoftwareManagement
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.NexusCloudAccount != nil {
-		toSerialize["NexusCloudAccount"] = o.NexusCloudAccount
+	if o.NexusCloudAccount.IsSet() {
+		toSerialize["NexusCloudAccount"] = o.NexusCloudAccount.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryNexusCloudSite) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryNexusCloudSite) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryNexusCloudSiteWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -477,13 +518,13 @@ func (o *NiatelemetryNexusCloudSite) UnmarshalJSON(bytes []byte) (err error) {
 		// Software management setting status, based on license type.
 		SoftwareManagement *bool `json:"SoftwareManagement,omitempty"`
 		// Returns the uuid of the Nexus Cloud site.
-		Uuid              *string                                    `json:"Uuid,omitempty"`
-		NexusCloudAccount *NiatelemetryNexusCloudAccountRelationship `json:"NexusCloudAccount,omitempty"`
+		Uuid              *string                                           `json:"Uuid,omitempty"`
+		NexusCloudAccount NullableNiatelemetryNexusCloudAccountRelationship `json:"NexusCloudAccount,omitempty"`
 	}
 
 	varNiatelemetryNexusCloudSiteWithoutEmbeddedStruct := NiatelemetryNexusCloudSiteWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNexusCloudSiteWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryNexusCloudSiteWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryNexusCloudSite := _NiatelemetryNexusCloudSite{}
 		varNiatelemetryNexusCloudSite.ClassId = varNiatelemetryNexusCloudSiteWithoutEmbeddedStruct.ClassId
@@ -504,7 +545,7 @@ func (o *NiatelemetryNexusCloudSite) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryNexusCloudSite := _NiatelemetryNexusCloudSite{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNexusCloudSite)
+	err = json.Unmarshal(data, &varNiatelemetryNexusCloudSite)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryNexusCloudSite.MoBaseMo
 	} else {
@@ -513,7 +554,7 @@ func (o *NiatelemetryNexusCloudSite) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Advisories")

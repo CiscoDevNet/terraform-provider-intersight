@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cloud.AwsVolume"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cloud.AwsVolume"]
-**AwsBillingUnit** | Pointer to [**CloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
+**AwsBillingUnit** | Pointer to [**NullableCloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetAwsBillingUnit sets AwsBillingUnit field to given value.
 
 HasAwsBillingUnit returns a boolean if a field has been set.
 
+### SetAwsBillingUnitNil
+
+`func (o *CloudAwsVolume) SetAwsBillingUnitNil(b bool)`
+
+ SetAwsBillingUnitNil sets the value for AwsBillingUnit to be an explicit nil
+
+### UnsetAwsBillingUnit
+`func (o *CloudAwsVolume) UnsetAwsBillingUnit()`
+
+UnsetAwsBillingUnit ensures that no value is present for AwsBillingUnit, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

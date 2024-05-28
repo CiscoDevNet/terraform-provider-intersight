@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesAddonDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesAddonDefinition{}
 
 // KubernetesAddonDefinition An addon that can be added to any Kubernetes cluster.
 type KubernetesAddonDefinition struct {
@@ -45,9 +49,9 @@ type KubernetesAddonDefinition struct {
 	Overrides *string  `json:"Overrides,omitempty"`
 	Platforms []string `json:"Platforms,omitempty"`
 	// Version of the addon component.
-	Version              *string                               `json:"Version,omitempty"`
-	Catalog              *KubernetesCatalogRelationship        `json:"Catalog,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	Version              *string                                      `json:"Version,omitempty"`
+	Catalog              NullableKubernetesCatalogRelationship        `json:"Catalog,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -134,7 +138,7 @@ func (o *KubernetesAddonDefinition) SetObjectType(v string) {
 
 // GetChartUrl returns the ChartUrl field value if set, zero value otherwise.
 func (o *KubernetesAddonDefinition) GetChartUrl() string {
-	if o == nil || o.ChartUrl == nil {
+	if o == nil || IsNil(o.ChartUrl) {
 		var ret string
 		return ret
 	}
@@ -144,7 +148,7 @@ func (o *KubernetesAddonDefinition) GetChartUrl() string {
 // GetChartUrlOk returns a tuple with the ChartUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonDefinition) GetChartUrlOk() (*string, bool) {
-	if o == nil || o.ChartUrl == nil {
+	if o == nil || IsNil(o.ChartUrl) {
 		return nil, false
 	}
 	return o.ChartUrl, true
@@ -152,7 +156,7 @@ func (o *KubernetesAddonDefinition) GetChartUrlOk() (*string, bool) {
 
 // HasChartUrl returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasChartUrl() bool {
-	if o != nil && o.ChartUrl != nil {
+	if o != nil && !IsNil(o.ChartUrl) {
 		return true
 	}
 
@@ -166,7 +170,7 @@ func (o *KubernetesAddonDefinition) SetChartUrl(v string) {
 
 // GetDefaultInstallStrategy returns the DefaultInstallStrategy field value if set, zero value otherwise.
 func (o *KubernetesAddonDefinition) GetDefaultInstallStrategy() string {
-	if o == nil || o.DefaultInstallStrategy == nil {
+	if o == nil || IsNil(o.DefaultInstallStrategy) {
 		var ret string
 		return ret
 	}
@@ -176,7 +180,7 @@ func (o *KubernetesAddonDefinition) GetDefaultInstallStrategy() string {
 // GetDefaultInstallStrategyOk returns a tuple with the DefaultInstallStrategy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonDefinition) GetDefaultInstallStrategyOk() (*string, bool) {
-	if o == nil || o.DefaultInstallStrategy == nil {
+	if o == nil || IsNil(o.DefaultInstallStrategy) {
 		return nil, false
 	}
 	return o.DefaultInstallStrategy, true
@@ -184,7 +188,7 @@ func (o *KubernetesAddonDefinition) GetDefaultInstallStrategyOk() (*string, bool
 
 // HasDefaultInstallStrategy returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasDefaultInstallStrategy() bool {
-	if o != nil && o.DefaultInstallStrategy != nil {
+	if o != nil && !IsNil(o.DefaultInstallStrategy) {
 		return true
 	}
 
@@ -198,7 +202,7 @@ func (o *KubernetesAddonDefinition) SetDefaultInstallStrategy(v string) {
 
 // GetDefaultNamespace returns the DefaultNamespace field value if set, zero value otherwise.
 func (o *KubernetesAddonDefinition) GetDefaultNamespace() string {
-	if o == nil || o.DefaultNamespace == nil {
+	if o == nil || IsNil(o.DefaultNamespace) {
 		var ret string
 		return ret
 	}
@@ -208,7 +212,7 @@ func (o *KubernetesAddonDefinition) GetDefaultNamespace() string {
 // GetDefaultNamespaceOk returns a tuple with the DefaultNamespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonDefinition) GetDefaultNamespaceOk() (*string, bool) {
-	if o == nil || o.DefaultNamespace == nil {
+	if o == nil || IsNil(o.DefaultNamespace) {
 		return nil, false
 	}
 	return o.DefaultNamespace, true
@@ -216,7 +220,7 @@ func (o *KubernetesAddonDefinition) GetDefaultNamespaceOk() (*string, bool) {
 
 // HasDefaultNamespace returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasDefaultNamespace() bool {
-	if o != nil && o.DefaultNamespace != nil {
+	if o != nil && !IsNil(o.DefaultNamespace) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *KubernetesAddonDefinition) SetDefaultNamespace(v string) {
 
 // GetDefaultUpgradeStrategy returns the DefaultUpgradeStrategy field value if set, zero value otherwise.
 func (o *KubernetesAddonDefinition) GetDefaultUpgradeStrategy() string {
-	if o == nil || o.DefaultUpgradeStrategy == nil {
+	if o == nil || IsNil(o.DefaultUpgradeStrategy) {
 		var ret string
 		return ret
 	}
@@ -240,7 +244,7 @@ func (o *KubernetesAddonDefinition) GetDefaultUpgradeStrategy() string {
 // GetDefaultUpgradeStrategyOk returns a tuple with the DefaultUpgradeStrategy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonDefinition) GetDefaultUpgradeStrategyOk() (*string, bool) {
-	if o == nil || o.DefaultUpgradeStrategy == nil {
+	if o == nil || IsNil(o.DefaultUpgradeStrategy) {
 		return nil, false
 	}
 	return o.DefaultUpgradeStrategy, true
@@ -248,7 +252,7 @@ func (o *KubernetesAddonDefinition) GetDefaultUpgradeStrategyOk() (*string, bool
 
 // HasDefaultUpgradeStrategy returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasDefaultUpgradeStrategy() bool {
-	if o != nil && o.DefaultUpgradeStrategy != nil {
+	if o != nil && !IsNil(o.DefaultUpgradeStrategy) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *KubernetesAddonDefinition) SetDefaultUpgradeStrategy(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *KubernetesAddonDefinition) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -272,7 +276,7 @@ func (o *KubernetesAddonDefinition) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonDefinition) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -280,7 +284,7 @@ func (o *KubernetesAddonDefinition) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -294,7 +298,7 @@ func (o *KubernetesAddonDefinition) SetDescription(v string) {
 
 // GetDigest returns the Digest field value if set, zero value otherwise.
 func (o *KubernetesAddonDefinition) GetDigest() string {
-	if o == nil || o.Digest == nil {
+	if o == nil || IsNil(o.Digest) {
 		var ret string
 		return ret
 	}
@@ -304,7 +308,7 @@ func (o *KubernetesAddonDefinition) GetDigest() string {
 // GetDigestOk returns a tuple with the Digest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonDefinition) GetDigestOk() (*string, bool) {
-	if o == nil || o.Digest == nil {
+	if o == nil || IsNil(o.Digest) {
 		return nil, false
 	}
 	return o.Digest, true
@@ -312,7 +316,7 @@ func (o *KubernetesAddonDefinition) GetDigestOk() (*string, bool) {
 
 // HasDigest returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasDigest() bool {
-	if o != nil && o.Digest != nil {
+	if o != nil && !IsNil(o.Digest) {
 		return true
 	}
 
@@ -326,7 +330,7 @@ func (o *KubernetesAddonDefinition) SetDigest(v string) {
 
 // GetIconUrl returns the IconUrl field value if set, zero value otherwise.
 func (o *KubernetesAddonDefinition) GetIconUrl() string {
-	if o == nil || o.IconUrl == nil {
+	if o == nil || IsNil(o.IconUrl) {
 		var ret string
 		return ret
 	}
@@ -336,7 +340,7 @@ func (o *KubernetesAddonDefinition) GetIconUrl() string {
 // GetIconUrlOk returns a tuple with the IconUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonDefinition) GetIconUrlOk() (*string, bool) {
-	if o == nil || o.IconUrl == nil {
+	if o == nil || IsNil(o.IconUrl) {
 		return nil, false
 	}
 	return o.IconUrl, true
@@ -344,7 +348,7 @@ func (o *KubernetesAddonDefinition) GetIconUrlOk() (*string, bool) {
 
 // HasIconUrl returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasIconUrl() bool {
-	if o != nil && o.IconUrl != nil {
+	if o != nil && !IsNil(o.IconUrl) {
 		return true
 	}
 
@@ -369,7 +373,7 @@ func (o *KubernetesAddonDefinition) GetLabels() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAddonDefinition) GetLabelsOk() ([]string, bool) {
-	if o == nil || o.Labels == nil {
+	if o == nil || IsNil(o.Labels) {
 		return nil, false
 	}
 	return o.Labels, true
@@ -377,7 +381,7 @@ func (o *KubernetesAddonDefinition) GetLabelsOk() ([]string, bool) {
 
 // HasLabels returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasLabels() bool {
-	if o != nil && o.Labels != nil {
+	if o != nil && IsNil(o.Labels) {
 		return true
 	}
 
@@ -391,7 +395,7 @@ func (o *KubernetesAddonDefinition) SetLabels(v []string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *KubernetesAddonDefinition) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -401,7 +405,7 @@ func (o *KubernetesAddonDefinition) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonDefinition) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -409,7 +413,7 @@ func (o *KubernetesAddonDefinition) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -423,7 +427,7 @@ func (o *KubernetesAddonDefinition) SetName(v string) {
 
 // GetOverrides returns the Overrides field value if set, zero value otherwise.
 func (o *KubernetesAddonDefinition) GetOverrides() string {
-	if o == nil || o.Overrides == nil {
+	if o == nil || IsNil(o.Overrides) {
 		var ret string
 		return ret
 	}
@@ -433,7 +437,7 @@ func (o *KubernetesAddonDefinition) GetOverrides() string {
 // GetOverridesOk returns a tuple with the Overrides field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonDefinition) GetOverridesOk() (*string, bool) {
-	if o == nil || o.Overrides == nil {
+	if o == nil || IsNil(o.Overrides) {
 		return nil, false
 	}
 	return o.Overrides, true
@@ -441,7 +445,7 @@ func (o *KubernetesAddonDefinition) GetOverridesOk() (*string, bool) {
 
 // HasOverrides returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasOverrides() bool {
-	if o != nil && o.Overrides != nil {
+	if o != nil && !IsNil(o.Overrides) {
 		return true
 	}
 
@@ -466,7 +470,7 @@ func (o *KubernetesAddonDefinition) GetPlatforms() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAddonDefinition) GetPlatformsOk() ([]string, bool) {
-	if o == nil || o.Platforms == nil {
+	if o == nil || IsNil(o.Platforms) {
 		return nil, false
 	}
 	return o.Platforms, true
@@ -474,7 +478,7 @@ func (o *KubernetesAddonDefinition) GetPlatformsOk() ([]string, bool) {
 
 // HasPlatforms returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasPlatforms() bool {
-	if o != nil && o.Platforms != nil {
+	if o != nil && IsNil(o.Platforms) {
 		return true
 	}
 
@@ -488,7 +492,7 @@ func (o *KubernetesAddonDefinition) SetPlatforms(v []string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *KubernetesAddonDefinition) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -498,7 +502,7 @@ func (o *KubernetesAddonDefinition) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonDefinition) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -506,7 +510,7 @@ func (o *KubernetesAddonDefinition) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -518,137 +522,185 @@ func (o *KubernetesAddonDefinition) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesAddonDefinition) GetCatalog() KubernetesCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret KubernetesCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAddonDefinition) GetCatalogOk() (*KubernetesCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given KubernetesCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableKubernetesCatalogRelationship and assigns it to the Catalog field.
 func (o *KubernetesAddonDefinition) SetCatalog(v KubernetesCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *KubernetesAddonDefinition) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *KubernetesAddonDefinition) UnsetCatalog() {
+	o.Catalog.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesAddonDefinition) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAddonDefinition) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *KubernetesAddonDefinition) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *KubernetesAddonDefinition) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *KubernetesAddonDefinition) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *KubernetesAddonDefinition) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o KubernetesAddonDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesAddonDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ChartUrl != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ChartUrl) {
 		toSerialize["ChartUrl"] = o.ChartUrl
 	}
-	if o.DefaultInstallStrategy != nil {
+	if !IsNil(o.DefaultInstallStrategy) {
 		toSerialize["DefaultInstallStrategy"] = o.DefaultInstallStrategy
 	}
-	if o.DefaultNamespace != nil {
+	if !IsNil(o.DefaultNamespace) {
 		toSerialize["DefaultNamespace"] = o.DefaultNamespace
 	}
-	if o.DefaultUpgradeStrategy != nil {
+	if !IsNil(o.DefaultUpgradeStrategy) {
 		toSerialize["DefaultUpgradeStrategy"] = o.DefaultUpgradeStrategy
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Digest != nil {
+	if !IsNil(o.Digest) {
 		toSerialize["Digest"] = o.Digest
 	}
-	if o.IconUrl != nil {
+	if !IsNil(o.IconUrl) {
 		toSerialize["IconUrl"] = o.IconUrl
 	}
 	if o.Labels != nil {
 		toSerialize["Labels"] = o.Labels
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Overrides != nil {
+	if !IsNil(o.Overrides) {
 		toSerialize["Overrides"] = o.Overrides
 	}
 	if o.Platforms != nil {
 		toSerialize["Platforms"] = o.Platforms
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesAddonDefinition) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesAddonDefinition) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesAddonDefinitionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -675,14 +727,14 @@ func (o *KubernetesAddonDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		Overrides *string  `json:"Overrides,omitempty"`
 		Platforms []string `json:"Platforms,omitempty"`
 		// Version of the addon component.
-		Version      *string                               `json:"Version,omitempty"`
-		Catalog      *KubernetesCatalogRelationship        `json:"Catalog,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		Version      *string                                      `json:"Version,omitempty"`
+		Catalog      NullableKubernetesCatalogRelationship        `json:"Catalog,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varKubernetesAddonDefinitionWithoutEmbeddedStruct := KubernetesAddonDefinitionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesAddonDefinitionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesAddonDefinitionWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesAddonDefinition := _KubernetesAddonDefinition{}
 		varKubernetesAddonDefinition.ClassId = varKubernetesAddonDefinitionWithoutEmbeddedStruct.ClassId
@@ -708,7 +760,7 @@ func (o *KubernetesAddonDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesAddonDefinition := _KubernetesAddonDefinition{}
 
-	err = json.Unmarshal(bytes, &varKubernetesAddonDefinition)
+	err = json.Unmarshal(data, &varKubernetesAddonDefinition)
 	if err == nil {
 		o.MoBaseMo = varKubernetesAddonDefinition.MoBaseMo
 	} else {
@@ -717,7 +769,7 @@ func (o *KubernetesAddonDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ChartUrl")

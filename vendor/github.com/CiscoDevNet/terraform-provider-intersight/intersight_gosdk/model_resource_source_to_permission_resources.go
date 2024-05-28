@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ResourceSourceToPermissionResources type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceSourceToPermissionResources{}
 
 // ResourceSourceToPermissionResources SourceToPermissionResources holds the source and the permissionResources belonging to them.
 type ResourceSourceToPermissionResources struct {
@@ -23,9 +27,11 @@ type ResourceSourceToPermissionResources struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string    `json:"ObjectType"`
-	PermissionResources  []MoMoRef `json:"PermissionResources,omitempty"`
-	SourceObject         *MoMoRef  `json:"SourceObject,omitempty"`
+	ObjectType          string    `json:"ObjectType"`
+	PermissionResources []MoMoRef `json:"PermissionResources,omitempty"`
+	// PropagateToTarget is a boolean value which indicates whether to propagate the PermissionResources of the  source object to the PermissionResources of the target object. If set to true, then PermissionResources of the target object along with its children hierarchy gets updated with PermissionResources of the source  object. If set to false while propagating the PermissionResources from source object, PermissionResources  against the Source in SourceToPermissionResourceHolder property of Target object will be set to  PermissionResources of the source object. In this case, while evaluating access to an MO, we need to consider  CustomPermissionResources for org user to get right access to the MO.
+	PropagateToTarget    *bool    `json:"PropagateToTarget,omitempty"`
+	SourceObject         *MoMoRef `json:"SourceObject,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +121,7 @@ func (o *ResourceSourceToPermissionResources) GetPermissionResources() []MoMoRef
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceSourceToPermissionResources) GetPermissionResourcesOk() ([]MoMoRef, bool) {
-	if o == nil || o.PermissionResources == nil {
+	if o == nil || IsNil(o.PermissionResources) {
 		return nil, false
 	}
 	return o.PermissionResources, true
@@ -123,7 +129,7 @@ func (o *ResourceSourceToPermissionResources) GetPermissionResourcesOk() ([]MoMo
 
 // HasPermissionResources returns a boolean if a field has been set.
 func (o *ResourceSourceToPermissionResources) HasPermissionResources() bool {
-	if o != nil && o.PermissionResources != nil {
+	if o != nil && IsNil(o.PermissionResources) {
 		return true
 	}
 
@@ -135,9 +141,41 @@ func (o *ResourceSourceToPermissionResources) SetPermissionResources(v []MoMoRef
 	o.PermissionResources = v
 }
 
+// GetPropagateToTarget returns the PropagateToTarget field value if set, zero value otherwise.
+func (o *ResourceSourceToPermissionResources) GetPropagateToTarget() bool {
+	if o == nil || IsNil(o.PropagateToTarget) {
+		var ret bool
+		return ret
+	}
+	return *o.PropagateToTarget
+}
+
+// GetPropagateToTargetOk returns a tuple with the PropagateToTarget field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceSourceToPermissionResources) GetPropagateToTargetOk() (*bool, bool) {
+	if o == nil || IsNil(o.PropagateToTarget) {
+		return nil, false
+	}
+	return o.PropagateToTarget, true
+}
+
+// HasPropagateToTarget returns a boolean if a field has been set.
+func (o *ResourceSourceToPermissionResources) HasPropagateToTarget() bool {
+	if o != nil && !IsNil(o.PropagateToTarget) {
+		return true
+	}
+
+	return false
+}
+
+// SetPropagateToTarget gets a reference to the given bool and assigns it to the PropagateToTarget field.
+func (o *ResourceSourceToPermissionResources) SetPropagateToTarget(v bool) {
+	o.PropagateToTarget = &v
+}
+
 // GetSourceObject returns the SourceObject field value if set, zero value otherwise.
 func (o *ResourceSourceToPermissionResources) GetSourceObject() MoMoRef {
-	if o == nil || o.SourceObject == nil {
+	if o == nil || IsNil(o.SourceObject) {
 		var ret MoMoRef
 		return ret
 	}
@@ -147,7 +185,7 @@ func (o *ResourceSourceToPermissionResources) GetSourceObject() MoMoRef {
 // GetSourceObjectOk returns a tuple with the SourceObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceSourceToPermissionResources) GetSourceObjectOk() (*MoMoRef, bool) {
-	if o == nil || o.SourceObject == nil {
+	if o == nil || IsNil(o.SourceObject) {
 		return nil, false
 	}
 	return o.SourceObject, true
@@ -155,7 +193,7 @@ func (o *ResourceSourceToPermissionResources) GetSourceObjectOk() (*MoMoRef, boo
 
 // HasSourceObject returns a boolean if a field has been set.
 func (o *ResourceSourceToPermissionResources) HasSourceObject() bool {
-	if o != nil && o.SourceObject != nil {
+	if o != nil && !IsNil(o.SourceObject) {
 		return true
 	}
 
@@ -168,25 +206,32 @@ func (o *ResourceSourceToPermissionResources) SetSourceObject(v MoMoRef) {
 }
 
 func (o ResourceSourceToPermissionResources) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ResourceSourceToPermissionResources) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.PermissionResources != nil {
 		toSerialize["PermissionResources"] = o.PermissionResources
 	}
-	if o.SourceObject != nil {
+	if !IsNil(o.PropagateToTarget) {
+		toSerialize["PropagateToTarget"] = o.PropagateToTarget
+	}
+	if !IsNil(o.SourceObject) {
 		toSerialize["SourceObject"] = o.SourceObject
 	}
 
@@ -194,27 +239,52 @@ func (o ResourceSourceToPermissionResources) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ResourceSourceToPermissionResources) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ResourceSourceToPermissionResources) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ResourceSourceToPermissionResourcesWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType          string    `json:"ObjectType"`
 		PermissionResources []MoMoRef `json:"PermissionResources,omitempty"`
-		SourceObject        *MoMoRef  `json:"SourceObject,omitempty"`
+		// PropagateToTarget is a boolean value which indicates whether to propagate the PermissionResources of the  source object to the PermissionResources of the target object. If set to true, then PermissionResources of the target object along with its children hierarchy gets updated with PermissionResources of the source  object. If set to false while propagating the PermissionResources from source object, PermissionResources  against the Source in SourceToPermissionResourceHolder property of Target object will be set to  PermissionResources of the source object. In this case, while evaluating access to an MO, we need to consider  CustomPermissionResources for org user to get right access to the MO.
+		PropagateToTarget *bool    `json:"PropagateToTarget,omitempty"`
+		SourceObject      *MoMoRef `json:"SourceObject,omitempty"`
 	}
 
 	varResourceSourceToPermissionResourcesWithoutEmbeddedStruct := ResourceSourceToPermissionResourcesWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varResourceSourceToPermissionResourcesWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varResourceSourceToPermissionResourcesWithoutEmbeddedStruct)
 	if err == nil {
 		varResourceSourceToPermissionResources := _ResourceSourceToPermissionResources{}
 		varResourceSourceToPermissionResources.ClassId = varResourceSourceToPermissionResourcesWithoutEmbeddedStruct.ClassId
 		varResourceSourceToPermissionResources.ObjectType = varResourceSourceToPermissionResourcesWithoutEmbeddedStruct.ObjectType
 		varResourceSourceToPermissionResources.PermissionResources = varResourceSourceToPermissionResourcesWithoutEmbeddedStruct.PermissionResources
+		varResourceSourceToPermissionResources.PropagateToTarget = varResourceSourceToPermissionResourcesWithoutEmbeddedStruct.PropagateToTarget
 		varResourceSourceToPermissionResources.SourceObject = varResourceSourceToPermissionResourcesWithoutEmbeddedStruct.SourceObject
 		*o = ResourceSourceToPermissionResources(varResourceSourceToPermissionResources)
 	} else {
@@ -223,7 +293,7 @@ func (o *ResourceSourceToPermissionResources) UnmarshalJSON(bytes []byte) (err e
 
 	varResourceSourceToPermissionResources := _ResourceSourceToPermissionResources{}
 
-	err = json.Unmarshal(bytes, &varResourceSourceToPermissionResources)
+	err = json.Unmarshal(data, &varResourceSourceToPermissionResources)
 	if err == nil {
 		o.MoBaseComplexType = varResourceSourceToPermissionResources.MoBaseComplexType
 	} else {
@@ -232,10 +302,11 @@ func (o *ResourceSourceToPermissionResources) UnmarshalJSON(bytes []byte) (err e
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "PermissionResources")
+		delete(additionalProperties, "PropagateToTarget")
 		delete(additionalProperties, "SourceObject")
 
 		// remove fields from embedded structs

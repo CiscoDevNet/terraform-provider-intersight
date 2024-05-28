@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceDeviceClaim type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceDeviceClaim{}
 
 // ApplianceDeviceClaim DeviceClaim managed object represents a user initiated claim request for claiming an endpoint device. There can be many DeviceClaim managed object for a given endpoint device when users claim and unclaim devices repeatedly. Claiming an endpoint device is a multi-step operation. The Intersight Appliance starts a workflow with multiple tasks to process the device claim request. The status of the device claim operation can be obtained from the claim workflow.
 type ApplianceDeviceClaim struct {
@@ -45,9 +49,9 @@ type ApplianceDeviceClaim struct {
 	// Status of the device claim process. * `started` - Device claim operation has started. * `failed` - Device claim operation has failed. * `completed` - Device claim operation has completed.
 	Status *string `json:"Status,omitempty"`
 	// Username to log in to the endpoint device.
-	Username             *string                          `json:"Username,omitempty"`
-	Account              *IamAccountRelationship          `json:"Account,omitempty"`
-	Reservation          *ResourceReservationRelationship `json:"Reservation,omitempty"`
+	Username             *string                                 `json:"Username,omitempty"`
+	Account              NullableIamAccountRelationship          `json:"Account,omitempty"`
+	Reservation          NullableResourceReservationRelationship `json:"Reservation,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -134,7 +138,7 @@ func (o *ApplianceDeviceClaim) SetObjectType(v string) {
 
 // GetDeviceId returns the DeviceId field value if set, zero value otherwise.
 func (o *ApplianceDeviceClaim) GetDeviceId() string {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		var ret string
 		return ret
 	}
@@ -144,7 +148,7 @@ func (o *ApplianceDeviceClaim) GetDeviceId() string {
 // GetDeviceIdOk returns a tuple with the DeviceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClaim) GetDeviceIdOk() (*string, bool) {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		return nil, false
 	}
 	return o.DeviceId, true
@@ -152,7 +156,7 @@ func (o *ApplianceDeviceClaim) GetDeviceIdOk() (*string, bool) {
 
 // HasDeviceId returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasDeviceId() bool {
-	if o != nil && o.DeviceId != nil {
+	if o != nil && !IsNil(o.DeviceId) {
 		return true
 	}
 
@@ -166,7 +170,7 @@ func (o *ApplianceDeviceClaim) SetDeviceId(v string) {
 
 // GetHostname returns the Hostname field value if set, zero value otherwise.
 func (o *ApplianceDeviceClaim) GetHostname() string {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		var ret string
 		return ret
 	}
@@ -176,7 +180,7 @@ func (o *ApplianceDeviceClaim) GetHostname() string {
 // GetHostnameOk returns a tuple with the Hostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClaim) GetHostnameOk() (*string, bool) {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		return nil, false
 	}
 	return o.Hostname, true
@@ -184,7 +188,7 @@ func (o *ApplianceDeviceClaim) GetHostnameOk() (*string, bool) {
 
 // HasHostname returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasHostname() bool {
-	if o != nil && o.Hostname != nil {
+	if o != nil && !IsNil(o.Hostname) {
 		return true
 	}
 
@@ -198,7 +202,7 @@ func (o *ApplianceDeviceClaim) SetHostname(v string) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *ApplianceDeviceClaim) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -208,7 +212,7 @@ func (o *ApplianceDeviceClaim) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClaim) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -216,7 +220,7 @@ func (o *ApplianceDeviceClaim) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *ApplianceDeviceClaim) SetIsPasswordSet(v bool) {
 
 // GetIsRenew returns the IsRenew field value if set, zero value otherwise.
 func (o *ApplianceDeviceClaim) GetIsRenew() bool {
-	if o == nil || o.IsRenew == nil {
+	if o == nil || IsNil(o.IsRenew) {
 		var ret bool
 		return ret
 	}
@@ -240,7 +244,7 @@ func (o *ApplianceDeviceClaim) GetIsRenew() bool {
 // GetIsRenewOk returns a tuple with the IsRenew field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClaim) GetIsRenewOk() (*bool, bool) {
-	if o == nil || o.IsRenew == nil {
+	if o == nil || IsNil(o.IsRenew) {
 		return nil, false
 	}
 	return o.IsRenew, true
@@ -248,7 +252,7 @@ func (o *ApplianceDeviceClaim) GetIsRenewOk() (*bool, bool) {
 
 // HasIsRenew returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasIsRenew() bool {
-	if o != nil && o.IsRenew != nil {
+	if o != nil && !IsNil(o.IsRenew) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *ApplianceDeviceClaim) SetIsRenew(v bool) {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *ApplianceDeviceClaim) GetMessage() string {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -272,7 +276,7 @@ func (o *ApplianceDeviceClaim) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClaim) GetMessageOk() (*string, bool) {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -280,7 +284,7 @@ func (o *ApplianceDeviceClaim) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasMessage() bool {
-	if o != nil && o.Message != nil {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -294,7 +298,7 @@ func (o *ApplianceDeviceClaim) SetMessage(v string) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *ApplianceDeviceClaim) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -304,7 +308,7 @@ func (o *ApplianceDeviceClaim) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClaim) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -312,7 +316,7 @@ func (o *ApplianceDeviceClaim) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -326,7 +330,7 @@ func (o *ApplianceDeviceClaim) SetPassword(v string) {
 
 // GetPlatformType returns the PlatformType field value if set, zero value otherwise.
 func (o *ApplianceDeviceClaim) GetPlatformType() string {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		var ret string
 		return ret
 	}
@@ -336,7 +340,7 @@ func (o *ApplianceDeviceClaim) GetPlatformType() string {
 // GetPlatformTypeOk returns a tuple with the PlatformType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClaim) GetPlatformTypeOk() (*string, bool) {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		return nil, false
 	}
 	return o.PlatformType, true
@@ -344,7 +348,7 @@ func (o *ApplianceDeviceClaim) GetPlatformTypeOk() (*string, bool) {
 
 // HasPlatformType returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasPlatformType() bool {
-	if o != nil && o.PlatformType != nil {
+	if o != nil && !IsNil(o.PlatformType) {
 		return true
 	}
 
@@ -358,7 +362,7 @@ func (o *ApplianceDeviceClaim) SetPlatformType(v string) {
 
 // GetRequestId returns the RequestId field value if set, zero value otherwise.
 func (o *ApplianceDeviceClaim) GetRequestId() string {
-	if o == nil || o.RequestId == nil {
+	if o == nil || IsNil(o.RequestId) {
 		var ret string
 		return ret
 	}
@@ -368,7 +372,7 @@ func (o *ApplianceDeviceClaim) GetRequestId() string {
 // GetRequestIdOk returns a tuple with the RequestId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClaim) GetRequestIdOk() (*string, bool) {
-	if o == nil || o.RequestId == nil {
+	if o == nil || IsNil(o.RequestId) {
 		return nil, false
 	}
 	return o.RequestId, true
@@ -376,7 +380,7 @@ func (o *ApplianceDeviceClaim) GetRequestIdOk() (*string, bool) {
 
 // HasRequestId returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasRequestId() bool {
-	if o != nil && o.RequestId != nil {
+	if o != nil && !IsNil(o.RequestId) {
 		return true
 	}
 
@@ -390,7 +394,7 @@ func (o *ApplianceDeviceClaim) SetRequestId(v string) {
 
 // GetSecurityToken returns the SecurityToken field value if set, zero value otherwise.
 func (o *ApplianceDeviceClaim) GetSecurityToken() string {
-	if o == nil || o.SecurityToken == nil {
+	if o == nil || IsNil(o.SecurityToken) {
 		var ret string
 		return ret
 	}
@@ -400,7 +404,7 @@ func (o *ApplianceDeviceClaim) GetSecurityToken() string {
 // GetSecurityTokenOk returns a tuple with the SecurityToken field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClaim) GetSecurityTokenOk() (*string, bool) {
-	if o == nil || o.SecurityToken == nil {
+	if o == nil || IsNil(o.SecurityToken) {
 		return nil, false
 	}
 	return o.SecurityToken, true
@@ -408,7 +412,7 @@ func (o *ApplianceDeviceClaim) GetSecurityTokenOk() (*string, bool) {
 
 // HasSecurityToken returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasSecurityToken() bool {
-	if o != nil && o.SecurityToken != nil {
+	if o != nil && !IsNil(o.SecurityToken) {
 		return true
 	}
 
@@ -422,7 +426,7 @@ func (o *ApplianceDeviceClaim) SetSecurityToken(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ApplianceDeviceClaim) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -432,7 +436,7 @@ func (o *ApplianceDeviceClaim) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClaim) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -440,7 +444,7 @@ func (o *ApplianceDeviceClaim) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -454,7 +458,7 @@ func (o *ApplianceDeviceClaim) SetStatus(v string) {
 
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *ApplianceDeviceClaim) GetUsername() string {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		var ret string
 		return ret
 	}
@@ -464,7 +468,7 @@ func (o *ApplianceDeviceClaim) GetUsername() string {
 // GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceClaim) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		return nil, false
 	}
 	return o.Username, true
@@ -472,7 +476,7 @@ func (o *ApplianceDeviceClaim) GetUsernameOk() (*string, bool) {
 
 // HasUsername returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasUsername() bool {
-	if o != nil && o.Username != nil {
+	if o != nil && !IsNil(o.Username) {
 		return true
 	}
 
@@ -484,134 +488,182 @@ func (o *ApplianceDeviceClaim) SetUsername(v string) {
 	o.Username = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceDeviceClaim) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceDeviceClaim) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ApplianceDeviceClaim) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetReservation returns the Reservation field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ApplianceDeviceClaim) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ApplianceDeviceClaim) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetReservation returns the Reservation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceDeviceClaim) GetReservation() ResourceReservationRelationship {
-	if o == nil || o.Reservation == nil {
+	if o == nil || IsNil(o.Reservation.Get()) {
 		var ret ResourceReservationRelationship
 		return ret
 	}
-	return *o.Reservation
+	return *o.Reservation.Get()
 }
 
 // GetReservationOk returns a tuple with the Reservation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceDeviceClaim) GetReservationOk() (*ResourceReservationRelationship, bool) {
-	if o == nil || o.Reservation == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Reservation, true
+	return o.Reservation.Get(), o.Reservation.IsSet()
 }
 
 // HasReservation returns a boolean if a field has been set.
 func (o *ApplianceDeviceClaim) HasReservation() bool {
-	if o != nil && o.Reservation != nil {
+	if o != nil && o.Reservation.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReservation gets a reference to the given ResourceReservationRelationship and assigns it to the Reservation field.
+// SetReservation gets a reference to the given NullableResourceReservationRelationship and assigns it to the Reservation field.
 func (o *ApplianceDeviceClaim) SetReservation(v ResourceReservationRelationship) {
-	o.Reservation = &v
+	o.Reservation.Set(&v)
+}
+
+// SetReservationNil sets the value for Reservation to be an explicit nil
+func (o *ApplianceDeviceClaim) SetReservationNil() {
+	o.Reservation.Set(nil)
+}
+
+// UnsetReservation ensures that no value is present for Reservation, not even an explicit nil
+func (o *ApplianceDeviceClaim) UnsetReservation() {
+	o.Reservation.Unset()
 }
 
 func (o ApplianceDeviceClaim) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceDeviceClaim) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeviceId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeviceId) {
 		toSerialize["DeviceId"] = o.DeviceId
 	}
-	if o.Hostname != nil {
+	if !IsNil(o.Hostname) {
 		toSerialize["Hostname"] = o.Hostname
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.IsRenew != nil {
+	if !IsNil(o.IsRenew) {
 		toSerialize["IsRenew"] = o.IsRenew
 	}
-	if o.Message != nil {
+	if !IsNil(o.Message) {
 		toSerialize["Message"] = o.Message
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.PlatformType != nil {
+	if !IsNil(o.PlatformType) {
 		toSerialize["PlatformType"] = o.PlatformType
 	}
-	if o.RequestId != nil {
+	if !IsNil(o.RequestId) {
 		toSerialize["RequestId"] = o.RequestId
 	}
-	if o.SecurityToken != nil {
+	if !IsNil(o.SecurityToken) {
 		toSerialize["SecurityToken"] = o.SecurityToken
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.Username != nil {
+	if !IsNil(o.Username) {
 		toSerialize["Username"] = o.Username
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.Reservation != nil {
-		toSerialize["Reservation"] = o.Reservation
+	if o.Reservation.IsSet() {
+		toSerialize["Reservation"] = o.Reservation.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceDeviceClaim) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceDeviceClaim) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceDeviceClaimWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -638,14 +690,14 @@ func (o *ApplianceDeviceClaim) UnmarshalJSON(bytes []byte) (err error) {
 		// Status of the device claim process. * `started` - Device claim operation has started. * `failed` - Device claim operation has failed. * `completed` - Device claim operation has completed.
 		Status *string `json:"Status,omitempty"`
 		// Username to log in to the endpoint device.
-		Username    *string                          `json:"Username,omitempty"`
-		Account     *IamAccountRelationship          `json:"Account,omitempty"`
-		Reservation *ResourceReservationRelationship `json:"Reservation,omitempty"`
+		Username    *string                                 `json:"Username,omitempty"`
+		Account     NullableIamAccountRelationship          `json:"Account,omitempty"`
+		Reservation NullableResourceReservationRelationship `json:"Reservation,omitempty"`
 	}
 
 	varApplianceDeviceClaimWithoutEmbeddedStruct := ApplianceDeviceClaimWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceDeviceClaimWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceDeviceClaimWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceDeviceClaim := _ApplianceDeviceClaim{}
 		varApplianceDeviceClaim.ClassId = varApplianceDeviceClaimWithoutEmbeddedStruct.ClassId
@@ -670,7 +722,7 @@ func (o *ApplianceDeviceClaim) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceDeviceClaim := _ApplianceDeviceClaim{}
 
-	err = json.Unmarshal(bytes, &varApplianceDeviceClaim)
+	err = json.Unmarshal(data, &varApplianceDeviceClaim)
 	if err == nil {
 		o.MoBaseMo = varApplianceDeviceClaim.MoBaseMo
 	} else {
@@ -679,7 +731,7 @@ func (o *ApplianceDeviceClaim) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeviceId")

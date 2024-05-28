@@ -8,11 +8,11 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fcpool.Reservation"]
 **IdPurpose** | Pointer to **string** | Purpose of this WWN ID. Purpose can be WWPN or WWNN. | [optional] 
 **Identity** | Pointer to **string** | WWN ID that needs to be reserved. | [optional] 
-**Block** | Pointer to [**FcpoolFcBlockRelationship**](FcpoolFcBlockRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Pool** | Pointer to [**FcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**FcpoolPoolMemberRelationship**](FcpoolPoolMemberRelationship.md) |  | [optional] 
-**Universe** | Pointer to [**FcpoolUniverseRelationship**](FcpoolUniverseRelationship.md) |  | [optional] 
+**Block** | Pointer to [**NullableFcpoolFcBlockRelationship**](FcpoolFcBlockRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableFcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**NullableFcpoolPoolMemberRelationship**](FcpoolPoolMemberRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**NullableFcpoolUniverseRelationship**](FcpoolUniverseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -148,6 +148,16 @@ SetBlock sets Block field to given value.
 
 HasBlock returns a boolean if a field has been set.
 
+### SetBlockNil
+
+`func (o *FcpoolReservation) SetBlockNil(b bool)`
+
+ SetBlockNil sets the value for Block to be an explicit nil
+
+### UnsetBlock
+`func (o *FcpoolReservation) UnsetBlock()`
+
+UnsetBlock ensures that no value is present for Block, not even an explicit nil
 ### GetOrganization
 
 `func (o *FcpoolReservation) GetOrganization() OrganizationOrganizationRelationship`
@@ -173,6 +183,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *FcpoolReservation) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *FcpoolReservation) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetPool
 
 `func (o *FcpoolReservation) GetPool() FcpoolPoolRelationship`
@@ -198,6 +218,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *FcpoolReservation) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *FcpoolReservation) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetPoolMember
 
 `func (o *FcpoolReservation) GetPoolMember() FcpoolPoolMemberRelationship`
@@ -223,6 +253,16 @@ SetPoolMember sets PoolMember field to given value.
 
 HasPoolMember returns a boolean if a field has been set.
 
+### SetPoolMemberNil
+
+`func (o *FcpoolReservation) SetPoolMemberNil(b bool)`
+
+ SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+
+### UnsetPoolMember
+`func (o *FcpoolReservation) UnsetPoolMember()`
+
+UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
 ### GetUniverse
 
 `func (o *FcpoolReservation) GetUniverse() FcpoolUniverseRelationship`
@@ -248,6 +288,16 @@ SetUniverse sets Universe field to given value.
 
 HasUniverse returns a boolean if a field has been set.
 
+### SetUniverseNil
+
+`func (o *FcpoolReservation) SetUniverseNil(b bool)`
+
+ SetUniverseNil sets the value for Universe to be an explicit nil
+
+### UnsetUniverse
+`func (o *FcpoolReservation) UnsetUniverse()`
+
+UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

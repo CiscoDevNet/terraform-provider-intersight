@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicIscsiBootPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicIscsiBootPolicy{}
 
 // VnicIscsiBootPolicy Configuration parameters to enable a server to boot its operating system from an iSCSI target machine located remotely over a network.
 type VnicIscsiBootPolicy struct {
@@ -34,12 +38,12 @@ type VnicIscsiBootPolicy struct {
 	InitiatorStaticIpV4Config  NullableIppoolIpV4Config     `json:"InitiatorStaticIpV4Config,omitempty"`
 	MutualChap                 NullableVnicIscsiAuthProfile `json:"MutualChap,omitempty"`
 	// Source Type of Targets - Auto/Static. * `Static` - Type indicates that static target interface is assigned to iSCSI boot. * `Auto` - Type indicates that the system selects the target interface automatically during iSCSI boot.
-	TargetSourceType      *string                                  `json:"TargetSourceType,omitempty"`
-	InitiatorIpPool       *IppoolPoolRelationship                  `json:"InitiatorIpPool,omitempty"`
-	IscsiAdapterPolicy    *VnicIscsiAdapterPolicyRelationship      `json:"IscsiAdapterPolicy,omitempty"`
-	Organization          *OrganizationOrganizationRelationship    `json:"Organization,omitempty"`
-	PrimaryTargetPolicy   *VnicIscsiStaticTargetPolicyRelationship `json:"PrimaryTargetPolicy,omitempty"`
-	SecondaryTargetPolicy *VnicIscsiStaticTargetPolicyRelationship `json:"SecondaryTargetPolicy,omitempty"`
+	TargetSourceType      *string                                         `json:"TargetSourceType,omitempty"`
+	InitiatorIpPool       NullableIppoolPoolRelationship                  `json:"InitiatorIpPool,omitempty"`
+	IscsiAdapterPolicy    NullableVnicIscsiAdapterPolicyRelationship      `json:"IscsiAdapterPolicy,omitempty"`
+	Organization          NullableOrganizationOrganizationRelationship    `json:"Organization,omitempty"`
+	PrimaryTargetPolicy   NullableVnicIscsiStaticTargetPolicyRelationship `json:"PrimaryTargetPolicy,omitempty"`
+	SecondaryTargetPolicy NullableVnicIscsiStaticTargetPolicyRelationship `json:"SecondaryTargetPolicy,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -126,7 +130,7 @@ func (o *VnicIscsiBootPolicy) SetObjectType(v string) {
 
 // GetAutoTargetvendorName returns the AutoTargetvendorName field value if set, zero value otherwise.
 func (o *VnicIscsiBootPolicy) GetAutoTargetvendorName() string {
-	if o == nil || o.AutoTargetvendorName == nil {
+	if o == nil || IsNil(o.AutoTargetvendorName) {
 		var ret string
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *VnicIscsiBootPolicy) GetAutoTargetvendorName() string {
 // GetAutoTargetvendorNameOk returns a tuple with the AutoTargetvendorName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicIscsiBootPolicy) GetAutoTargetvendorNameOk() (*string, bool) {
-	if o == nil || o.AutoTargetvendorName == nil {
+	if o == nil || IsNil(o.AutoTargetvendorName) {
 		return nil, false
 	}
 	return o.AutoTargetvendorName, true
@@ -144,7 +148,7 @@ func (o *VnicIscsiBootPolicy) GetAutoTargetvendorNameOk() (*string, bool) {
 
 // HasAutoTargetvendorName returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicy) HasAutoTargetvendorName() bool {
-	if o != nil && o.AutoTargetvendorName != nil {
+	if o != nil && !IsNil(o.AutoTargetvendorName) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *VnicIscsiBootPolicy) SetAutoTargetvendorName(v string) {
 
 // GetChap returns the Chap field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicy) GetChap() VnicIscsiAuthProfile {
-	if o == nil || o.Chap.Get() == nil {
+	if o == nil || IsNil(o.Chap.Get()) {
 		var ret VnicIscsiAuthProfile
 		return ret
 	}
@@ -201,7 +205,7 @@ func (o *VnicIscsiBootPolicy) UnsetChap() {
 
 // GetInitiatorIpSource returns the InitiatorIpSource field value if set, zero value otherwise.
 func (o *VnicIscsiBootPolicy) GetInitiatorIpSource() string {
-	if o == nil || o.InitiatorIpSource == nil {
+	if o == nil || IsNil(o.InitiatorIpSource) {
 		var ret string
 		return ret
 	}
@@ -211,7 +215,7 @@ func (o *VnicIscsiBootPolicy) GetInitiatorIpSource() string {
 // GetInitiatorIpSourceOk returns a tuple with the InitiatorIpSource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicIscsiBootPolicy) GetInitiatorIpSourceOk() (*string, bool) {
-	if o == nil || o.InitiatorIpSource == nil {
+	if o == nil || IsNil(o.InitiatorIpSource) {
 		return nil, false
 	}
 	return o.InitiatorIpSource, true
@@ -219,7 +223,7 @@ func (o *VnicIscsiBootPolicy) GetInitiatorIpSourceOk() (*string, bool) {
 
 // HasInitiatorIpSource returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicy) HasInitiatorIpSource() bool {
-	if o != nil && o.InitiatorIpSource != nil {
+	if o != nil && !IsNil(o.InitiatorIpSource) {
 		return true
 	}
 
@@ -233,7 +237,7 @@ func (o *VnicIscsiBootPolicy) SetInitiatorIpSource(v string) {
 
 // GetInitiatorStaticIpV4Address returns the InitiatorStaticIpV4Address field value if set, zero value otherwise.
 func (o *VnicIscsiBootPolicy) GetInitiatorStaticIpV4Address() string {
-	if o == nil || o.InitiatorStaticIpV4Address == nil {
+	if o == nil || IsNil(o.InitiatorStaticIpV4Address) {
 		var ret string
 		return ret
 	}
@@ -243,7 +247,7 @@ func (o *VnicIscsiBootPolicy) GetInitiatorStaticIpV4Address() string {
 // GetInitiatorStaticIpV4AddressOk returns a tuple with the InitiatorStaticIpV4Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicIscsiBootPolicy) GetInitiatorStaticIpV4AddressOk() (*string, bool) {
-	if o == nil || o.InitiatorStaticIpV4Address == nil {
+	if o == nil || IsNil(o.InitiatorStaticIpV4Address) {
 		return nil, false
 	}
 	return o.InitiatorStaticIpV4Address, true
@@ -251,7 +255,7 @@ func (o *VnicIscsiBootPolicy) GetInitiatorStaticIpV4AddressOk() (*string, bool) 
 
 // HasInitiatorStaticIpV4Address returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicy) HasInitiatorStaticIpV4Address() bool {
-	if o != nil && o.InitiatorStaticIpV4Address != nil {
+	if o != nil && !IsNil(o.InitiatorStaticIpV4Address) {
 		return true
 	}
 
@@ -265,7 +269,7 @@ func (o *VnicIscsiBootPolicy) SetInitiatorStaticIpV4Address(v string) {
 
 // GetInitiatorStaticIpV4Config returns the InitiatorStaticIpV4Config field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicy) GetInitiatorStaticIpV4Config() IppoolIpV4Config {
-	if o == nil || o.InitiatorStaticIpV4Config.Get() == nil {
+	if o == nil || IsNil(o.InitiatorStaticIpV4Config.Get()) {
 		var ret IppoolIpV4Config
 		return ret
 	}
@@ -308,7 +312,7 @@ func (o *VnicIscsiBootPolicy) UnsetInitiatorStaticIpV4Config() {
 
 // GetMutualChap returns the MutualChap field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicy) GetMutualChap() VnicIscsiAuthProfile {
-	if o == nil || o.MutualChap.Get() == nil {
+	if o == nil || IsNil(o.MutualChap.Get()) {
 		var ret VnicIscsiAuthProfile
 		return ret
 	}
@@ -351,7 +355,7 @@ func (o *VnicIscsiBootPolicy) UnsetMutualChap() {
 
 // GetTargetSourceType returns the TargetSourceType field value if set, zero value otherwise.
 func (o *VnicIscsiBootPolicy) GetTargetSourceType() string {
-	if o == nil || o.TargetSourceType == nil {
+	if o == nil || IsNil(o.TargetSourceType) {
 		var ret string
 		return ret
 	}
@@ -361,7 +365,7 @@ func (o *VnicIscsiBootPolicy) GetTargetSourceType() string {
 // GetTargetSourceTypeOk returns a tuple with the TargetSourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicIscsiBootPolicy) GetTargetSourceTypeOk() (*string, bool) {
-	if o == nil || o.TargetSourceType == nil {
+	if o == nil || IsNil(o.TargetSourceType) {
 		return nil, false
 	}
 	return o.TargetSourceType, true
@@ -369,7 +373,7 @@ func (o *VnicIscsiBootPolicy) GetTargetSourceTypeOk() (*string, bool) {
 
 // HasTargetSourceType returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicy) HasTargetSourceType() bool {
-	if o != nil && o.TargetSourceType != nil {
+	if o != nil && !IsNil(o.TargetSourceType) {
 		return true
 	}
 
@@ -381,192 +385,251 @@ func (o *VnicIscsiBootPolicy) SetTargetSourceType(v string) {
 	o.TargetSourceType = &v
 }
 
-// GetInitiatorIpPool returns the InitiatorIpPool field value if set, zero value otherwise.
+// GetInitiatorIpPool returns the InitiatorIpPool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicy) GetInitiatorIpPool() IppoolPoolRelationship {
-	if o == nil || o.InitiatorIpPool == nil {
+	if o == nil || IsNil(o.InitiatorIpPool.Get()) {
 		var ret IppoolPoolRelationship
 		return ret
 	}
-	return *o.InitiatorIpPool
+	return *o.InitiatorIpPool.Get()
 }
 
 // GetInitiatorIpPoolOk returns a tuple with the InitiatorIpPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicIscsiBootPolicy) GetInitiatorIpPoolOk() (*IppoolPoolRelationship, bool) {
-	if o == nil || o.InitiatorIpPool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InitiatorIpPool, true
+	return o.InitiatorIpPool.Get(), o.InitiatorIpPool.IsSet()
 }
 
 // HasInitiatorIpPool returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicy) HasInitiatorIpPool() bool {
-	if o != nil && o.InitiatorIpPool != nil {
+	if o != nil && o.InitiatorIpPool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInitiatorIpPool gets a reference to the given IppoolPoolRelationship and assigns it to the InitiatorIpPool field.
+// SetInitiatorIpPool gets a reference to the given NullableIppoolPoolRelationship and assigns it to the InitiatorIpPool field.
 func (o *VnicIscsiBootPolicy) SetInitiatorIpPool(v IppoolPoolRelationship) {
-	o.InitiatorIpPool = &v
+	o.InitiatorIpPool.Set(&v)
 }
 
-// GetIscsiAdapterPolicy returns the IscsiAdapterPolicy field value if set, zero value otherwise.
+// SetInitiatorIpPoolNil sets the value for InitiatorIpPool to be an explicit nil
+func (o *VnicIscsiBootPolicy) SetInitiatorIpPoolNil() {
+	o.InitiatorIpPool.Set(nil)
+}
+
+// UnsetInitiatorIpPool ensures that no value is present for InitiatorIpPool, not even an explicit nil
+func (o *VnicIscsiBootPolicy) UnsetInitiatorIpPool() {
+	o.InitiatorIpPool.Unset()
+}
+
+// GetIscsiAdapterPolicy returns the IscsiAdapterPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicy) GetIscsiAdapterPolicy() VnicIscsiAdapterPolicyRelationship {
-	if o == nil || o.IscsiAdapterPolicy == nil {
+	if o == nil || IsNil(o.IscsiAdapterPolicy.Get()) {
 		var ret VnicIscsiAdapterPolicyRelationship
 		return ret
 	}
-	return *o.IscsiAdapterPolicy
+	return *o.IscsiAdapterPolicy.Get()
 }
 
 // GetIscsiAdapterPolicyOk returns a tuple with the IscsiAdapterPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicIscsiBootPolicy) GetIscsiAdapterPolicyOk() (*VnicIscsiAdapterPolicyRelationship, bool) {
-	if o == nil || o.IscsiAdapterPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.IscsiAdapterPolicy, true
+	return o.IscsiAdapterPolicy.Get(), o.IscsiAdapterPolicy.IsSet()
 }
 
 // HasIscsiAdapterPolicy returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicy) HasIscsiAdapterPolicy() bool {
-	if o != nil && o.IscsiAdapterPolicy != nil {
+	if o != nil && o.IscsiAdapterPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIscsiAdapterPolicy gets a reference to the given VnicIscsiAdapterPolicyRelationship and assigns it to the IscsiAdapterPolicy field.
+// SetIscsiAdapterPolicy gets a reference to the given NullableVnicIscsiAdapterPolicyRelationship and assigns it to the IscsiAdapterPolicy field.
 func (o *VnicIscsiBootPolicy) SetIscsiAdapterPolicy(v VnicIscsiAdapterPolicyRelationship) {
-	o.IscsiAdapterPolicy = &v
+	o.IscsiAdapterPolicy.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetIscsiAdapterPolicyNil sets the value for IscsiAdapterPolicy to be an explicit nil
+func (o *VnicIscsiBootPolicy) SetIscsiAdapterPolicyNil() {
+	o.IscsiAdapterPolicy.Set(nil)
+}
+
+// UnsetIscsiAdapterPolicy ensures that no value is present for IscsiAdapterPolicy, not even an explicit nil
+func (o *VnicIscsiBootPolicy) UnsetIscsiAdapterPolicy() {
+	o.IscsiAdapterPolicy.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicIscsiBootPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *VnicIscsiBootPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetPrimaryTargetPolicy returns the PrimaryTargetPolicy field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *VnicIscsiBootPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *VnicIscsiBootPolicy) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetPrimaryTargetPolicy returns the PrimaryTargetPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicy) GetPrimaryTargetPolicy() VnicIscsiStaticTargetPolicyRelationship {
-	if o == nil || o.PrimaryTargetPolicy == nil {
+	if o == nil || IsNil(o.PrimaryTargetPolicy.Get()) {
 		var ret VnicIscsiStaticTargetPolicyRelationship
 		return ret
 	}
-	return *o.PrimaryTargetPolicy
+	return *o.PrimaryTargetPolicy.Get()
 }
 
 // GetPrimaryTargetPolicyOk returns a tuple with the PrimaryTargetPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicIscsiBootPolicy) GetPrimaryTargetPolicyOk() (*VnicIscsiStaticTargetPolicyRelationship, bool) {
-	if o == nil || o.PrimaryTargetPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrimaryTargetPolicy, true
+	return o.PrimaryTargetPolicy.Get(), o.PrimaryTargetPolicy.IsSet()
 }
 
 // HasPrimaryTargetPolicy returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicy) HasPrimaryTargetPolicy() bool {
-	if o != nil && o.PrimaryTargetPolicy != nil {
+	if o != nil && o.PrimaryTargetPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrimaryTargetPolicy gets a reference to the given VnicIscsiStaticTargetPolicyRelationship and assigns it to the PrimaryTargetPolicy field.
+// SetPrimaryTargetPolicy gets a reference to the given NullableVnicIscsiStaticTargetPolicyRelationship and assigns it to the PrimaryTargetPolicy field.
 func (o *VnicIscsiBootPolicy) SetPrimaryTargetPolicy(v VnicIscsiStaticTargetPolicyRelationship) {
-	o.PrimaryTargetPolicy = &v
+	o.PrimaryTargetPolicy.Set(&v)
 }
 
-// GetSecondaryTargetPolicy returns the SecondaryTargetPolicy field value if set, zero value otherwise.
+// SetPrimaryTargetPolicyNil sets the value for PrimaryTargetPolicy to be an explicit nil
+func (o *VnicIscsiBootPolicy) SetPrimaryTargetPolicyNil() {
+	o.PrimaryTargetPolicy.Set(nil)
+}
+
+// UnsetPrimaryTargetPolicy ensures that no value is present for PrimaryTargetPolicy, not even an explicit nil
+func (o *VnicIscsiBootPolicy) UnsetPrimaryTargetPolicy() {
+	o.PrimaryTargetPolicy.Unset()
+}
+
+// GetSecondaryTargetPolicy returns the SecondaryTargetPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicIscsiBootPolicy) GetSecondaryTargetPolicy() VnicIscsiStaticTargetPolicyRelationship {
-	if o == nil || o.SecondaryTargetPolicy == nil {
+	if o == nil || IsNil(o.SecondaryTargetPolicy.Get()) {
 		var ret VnicIscsiStaticTargetPolicyRelationship
 		return ret
 	}
-	return *o.SecondaryTargetPolicy
+	return *o.SecondaryTargetPolicy.Get()
 }
 
 // GetSecondaryTargetPolicyOk returns a tuple with the SecondaryTargetPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicIscsiBootPolicy) GetSecondaryTargetPolicyOk() (*VnicIscsiStaticTargetPolicyRelationship, bool) {
-	if o == nil || o.SecondaryTargetPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SecondaryTargetPolicy, true
+	return o.SecondaryTargetPolicy.Get(), o.SecondaryTargetPolicy.IsSet()
 }
 
 // HasSecondaryTargetPolicy returns a boolean if a field has been set.
 func (o *VnicIscsiBootPolicy) HasSecondaryTargetPolicy() bool {
-	if o != nil && o.SecondaryTargetPolicy != nil {
+	if o != nil && o.SecondaryTargetPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecondaryTargetPolicy gets a reference to the given VnicIscsiStaticTargetPolicyRelationship and assigns it to the SecondaryTargetPolicy field.
+// SetSecondaryTargetPolicy gets a reference to the given NullableVnicIscsiStaticTargetPolicyRelationship and assigns it to the SecondaryTargetPolicy field.
 func (o *VnicIscsiBootPolicy) SetSecondaryTargetPolicy(v VnicIscsiStaticTargetPolicyRelationship) {
-	o.SecondaryTargetPolicy = &v
+	o.SecondaryTargetPolicy.Set(&v)
+}
+
+// SetSecondaryTargetPolicyNil sets the value for SecondaryTargetPolicy to be an explicit nil
+func (o *VnicIscsiBootPolicy) SetSecondaryTargetPolicyNil() {
+	o.SecondaryTargetPolicy.Set(nil)
+}
+
+// UnsetSecondaryTargetPolicy ensures that no value is present for SecondaryTargetPolicy, not even an explicit nil
+func (o *VnicIscsiBootPolicy) UnsetSecondaryTargetPolicy() {
+	o.SecondaryTargetPolicy.Unset()
 }
 
 func (o VnicIscsiBootPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicIscsiBootPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AutoTargetvendorName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AutoTargetvendorName) {
 		toSerialize["AutoTargetvendorName"] = o.AutoTargetvendorName
 	}
 	if o.Chap.IsSet() {
 		toSerialize["Chap"] = o.Chap.Get()
 	}
-	if o.InitiatorIpSource != nil {
+	if !IsNil(o.InitiatorIpSource) {
 		toSerialize["InitiatorIpSource"] = o.InitiatorIpSource
 	}
-	if o.InitiatorStaticIpV4Address != nil {
+	if !IsNil(o.InitiatorStaticIpV4Address) {
 		toSerialize["InitiatorStaticIpV4Address"] = o.InitiatorStaticIpV4Address
 	}
 	if o.InitiatorStaticIpV4Config.IsSet() {
@@ -575,33 +638,55 @@ func (o VnicIscsiBootPolicy) MarshalJSON() ([]byte, error) {
 	if o.MutualChap.IsSet() {
 		toSerialize["MutualChap"] = o.MutualChap.Get()
 	}
-	if o.TargetSourceType != nil {
+	if !IsNil(o.TargetSourceType) {
 		toSerialize["TargetSourceType"] = o.TargetSourceType
 	}
-	if o.InitiatorIpPool != nil {
-		toSerialize["InitiatorIpPool"] = o.InitiatorIpPool
+	if o.InitiatorIpPool.IsSet() {
+		toSerialize["InitiatorIpPool"] = o.InitiatorIpPool.Get()
 	}
-	if o.IscsiAdapterPolicy != nil {
-		toSerialize["IscsiAdapterPolicy"] = o.IscsiAdapterPolicy
+	if o.IscsiAdapterPolicy.IsSet() {
+		toSerialize["IscsiAdapterPolicy"] = o.IscsiAdapterPolicy.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.PrimaryTargetPolicy != nil {
-		toSerialize["PrimaryTargetPolicy"] = o.PrimaryTargetPolicy
+	if o.PrimaryTargetPolicy.IsSet() {
+		toSerialize["PrimaryTargetPolicy"] = o.PrimaryTargetPolicy.Get()
 	}
-	if o.SecondaryTargetPolicy != nil {
-		toSerialize["SecondaryTargetPolicy"] = o.SecondaryTargetPolicy
+	if o.SecondaryTargetPolicy.IsSet() {
+		toSerialize["SecondaryTargetPolicy"] = o.SecondaryTargetPolicy.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicIscsiBootPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicIscsiBootPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicIscsiBootPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -617,17 +702,17 @@ func (o *VnicIscsiBootPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		InitiatorStaticIpV4Config  NullableIppoolIpV4Config     `json:"InitiatorStaticIpV4Config,omitempty"`
 		MutualChap                 NullableVnicIscsiAuthProfile `json:"MutualChap,omitempty"`
 		// Source Type of Targets - Auto/Static. * `Static` - Type indicates that static target interface is assigned to iSCSI boot. * `Auto` - Type indicates that the system selects the target interface automatically during iSCSI boot.
-		TargetSourceType      *string                                  `json:"TargetSourceType,omitempty"`
-		InitiatorIpPool       *IppoolPoolRelationship                  `json:"InitiatorIpPool,omitempty"`
-		IscsiAdapterPolicy    *VnicIscsiAdapterPolicyRelationship      `json:"IscsiAdapterPolicy,omitempty"`
-		Organization          *OrganizationOrganizationRelationship    `json:"Organization,omitempty"`
-		PrimaryTargetPolicy   *VnicIscsiStaticTargetPolicyRelationship `json:"PrimaryTargetPolicy,omitempty"`
-		SecondaryTargetPolicy *VnicIscsiStaticTargetPolicyRelationship `json:"SecondaryTargetPolicy,omitempty"`
+		TargetSourceType      *string                                         `json:"TargetSourceType,omitempty"`
+		InitiatorIpPool       NullableIppoolPoolRelationship                  `json:"InitiatorIpPool,omitempty"`
+		IscsiAdapterPolicy    NullableVnicIscsiAdapterPolicyRelationship      `json:"IscsiAdapterPolicy,omitempty"`
+		Organization          NullableOrganizationOrganizationRelationship    `json:"Organization,omitempty"`
+		PrimaryTargetPolicy   NullableVnicIscsiStaticTargetPolicyRelationship `json:"PrimaryTargetPolicy,omitempty"`
+		SecondaryTargetPolicy NullableVnicIscsiStaticTargetPolicyRelationship `json:"SecondaryTargetPolicy,omitempty"`
 	}
 
 	varVnicIscsiBootPolicyWithoutEmbeddedStruct := VnicIscsiBootPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicIscsiBootPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicIscsiBootPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicIscsiBootPolicy := _VnicIscsiBootPolicy{}
 		varVnicIscsiBootPolicy.ClassId = varVnicIscsiBootPolicyWithoutEmbeddedStruct.ClassId
@@ -651,7 +736,7 @@ func (o *VnicIscsiBootPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicIscsiBootPolicy := _VnicIscsiBootPolicy{}
 
-	err = json.Unmarshal(bytes, &varVnicIscsiBootPolicy)
+	err = json.Unmarshal(data, &varVnicIscsiBootPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varVnicIscsiBootPolicy.PolicyAbstractPolicy
 	} else {
@@ -660,7 +745,7 @@ func (o *VnicIscsiBootPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AutoTargetvendorName")

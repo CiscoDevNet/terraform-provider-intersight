@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareRunningFirmware type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareRunningFirmware{}
 
 // FirmwareRunningFirmware Running Firmware on an endpoint.
 type FirmwareRunningFirmware struct {
@@ -31,18 +35,18 @@ type FirmwareRunningFirmware struct {
 	// The type of the firmware.
 	Type *string `json:"Type,omitempty"`
 	// The version of the firmware.
-	Version              *string                           `json:"Version,omitempty"`
-	BiosUnit             *BiosUnitRelationship             `json:"BiosUnit,omitempty"`
-	GraphicsCard         *GraphicsCardRelationship         `json:"GraphicsCard,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
-	ManagementController *ManagementControllerRelationship `json:"ManagementController,omitempty"`
+	Version              *string                                  `json:"Version,omitempty"`
+	BiosUnit             NullableBiosUnitRelationship             `json:"BiosUnit,omitempty"`
+	GraphicsCard         NullableGraphicsCardRelationship         `json:"GraphicsCard,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
+	ManagementController NullableManagementControllerRelationship `json:"ManagementController,omitempty"`
 	// An array of relationships to networkElement resources.
-	NetworkElements            []NetworkElementRelationship            `json:"NetworkElements,omitempty"`
-	PciSwitch                  *PciSwitchRelationship                  `json:"PciSwitch,omitempty"`
-	RegisteredDevice           *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
-	StorageController          *StorageControllerRelationship          `json:"StorageController,omitempty"`
-	StorageFlexFlashController *StorageFlexFlashControllerRelationship `json:"StorageFlexFlashController,omitempty"`
-	StoragePhysicalDisk        *StoragePhysicalDiskRelationship        `json:"StoragePhysicalDisk,omitempty"`
+	NetworkElements            []NetworkElementRelationship                   `json:"NetworkElements,omitempty"`
+	PciSwitch                  NullablePciSwitchRelationship                  `json:"PciSwitch,omitempty"`
+	RegisteredDevice           NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+	StorageController          NullableStorageControllerRelationship          `json:"StorageController,omitempty"`
+	StorageFlexFlashController NullableStorageFlexFlashControllerRelationship `json:"StorageFlexFlashController,omitempty"`
+	StoragePhysicalDisk        NullableStoragePhysicalDiskRelationship        `json:"StoragePhysicalDisk,omitempty"`
 	AdditionalProperties       map[string]interface{}
 }
 
@@ -121,7 +125,7 @@ func (o *FirmwareRunningFirmware) SetObjectType(v string) {
 
 // GetComponent returns the Component field value if set, zero value otherwise.
 func (o *FirmwareRunningFirmware) GetComponent() string {
-	if o == nil || o.Component == nil {
+	if o == nil || IsNil(o.Component) {
 		var ret string
 		return ret
 	}
@@ -131,7 +135,7 @@ func (o *FirmwareRunningFirmware) GetComponent() string {
 // GetComponentOk returns a tuple with the Component field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareRunningFirmware) GetComponentOk() (*string, bool) {
-	if o == nil || o.Component == nil {
+	if o == nil || IsNil(o.Component) {
 		return nil, false
 	}
 	return o.Component, true
@@ -139,7 +143,7 @@ func (o *FirmwareRunningFirmware) GetComponentOk() (*string, bool) {
 
 // HasComponent returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasComponent() bool {
-	if o != nil && o.Component != nil {
+	if o != nil && !IsNil(o.Component) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *FirmwareRunningFirmware) SetComponent(v string) {
 
 // GetPackageVersion returns the PackageVersion field value if set, zero value otherwise.
 func (o *FirmwareRunningFirmware) GetPackageVersion() string {
-	if o == nil || o.PackageVersion == nil {
+	if o == nil || IsNil(o.PackageVersion) {
 		var ret string
 		return ret
 	}
@@ -163,7 +167,7 @@ func (o *FirmwareRunningFirmware) GetPackageVersion() string {
 // GetPackageVersionOk returns a tuple with the PackageVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareRunningFirmware) GetPackageVersionOk() (*string, bool) {
-	if o == nil || o.PackageVersion == nil {
+	if o == nil || IsNil(o.PackageVersion) {
 		return nil, false
 	}
 	return o.PackageVersion, true
@@ -171,7 +175,7 @@ func (o *FirmwareRunningFirmware) GetPackageVersionOk() (*string, bool) {
 
 // HasPackageVersion returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasPackageVersion() bool {
-	if o != nil && o.PackageVersion != nil {
+	if o != nil && !IsNil(o.PackageVersion) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *FirmwareRunningFirmware) SetPackageVersion(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *FirmwareRunningFirmware) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -195,7 +199,7 @@ func (o *FirmwareRunningFirmware) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareRunningFirmware) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -203,7 +207,7 @@ func (o *FirmwareRunningFirmware) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -217,7 +221,7 @@ func (o *FirmwareRunningFirmware) SetType(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *FirmwareRunningFirmware) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -227,7 +231,7 @@ func (o *FirmwareRunningFirmware) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareRunningFirmware) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -235,7 +239,7 @@ func (o *FirmwareRunningFirmware) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -247,132 +251,176 @@ func (o *FirmwareRunningFirmware) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetBiosUnit returns the BiosUnit field value if set, zero value otherwise.
+// GetBiosUnit returns the BiosUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareRunningFirmware) GetBiosUnit() BiosUnitRelationship {
-	if o == nil || o.BiosUnit == nil {
+	if o == nil || IsNil(o.BiosUnit.Get()) {
 		var ret BiosUnitRelationship
 		return ret
 	}
-	return *o.BiosUnit
+	return *o.BiosUnit.Get()
 }
 
 // GetBiosUnitOk returns a tuple with the BiosUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareRunningFirmware) GetBiosUnitOk() (*BiosUnitRelationship, bool) {
-	if o == nil || o.BiosUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BiosUnit, true
+	return o.BiosUnit.Get(), o.BiosUnit.IsSet()
 }
 
 // HasBiosUnit returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasBiosUnit() bool {
-	if o != nil && o.BiosUnit != nil {
+	if o != nil && o.BiosUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBiosUnit gets a reference to the given BiosUnitRelationship and assigns it to the BiosUnit field.
+// SetBiosUnit gets a reference to the given NullableBiosUnitRelationship and assigns it to the BiosUnit field.
 func (o *FirmwareRunningFirmware) SetBiosUnit(v BiosUnitRelationship) {
-	o.BiosUnit = &v
+	o.BiosUnit.Set(&v)
 }
 
-// GetGraphicsCard returns the GraphicsCard field value if set, zero value otherwise.
+// SetBiosUnitNil sets the value for BiosUnit to be an explicit nil
+func (o *FirmwareRunningFirmware) SetBiosUnitNil() {
+	o.BiosUnit.Set(nil)
+}
+
+// UnsetBiosUnit ensures that no value is present for BiosUnit, not even an explicit nil
+func (o *FirmwareRunningFirmware) UnsetBiosUnit() {
+	o.BiosUnit.Unset()
+}
+
+// GetGraphicsCard returns the GraphicsCard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareRunningFirmware) GetGraphicsCard() GraphicsCardRelationship {
-	if o == nil || o.GraphicsCard == nil {
+	if o == nil || IsNil(o.GraphicsCard.Get()) {
 		var ret GraphicsCardRelationship
 		return ret
 	}
-	return *o.GraphicsCard
+	return *o.GraphicsCard.Get()
 }
 
 // GetGraphicsCardOk returns a tuple with the GraphicsCard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareRunningFirmware) GetGraphicsCardOk() (*GraphicsCardRelationship, bool) {
-	if o == nil || o.GraphicsCard == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.GraphicsCard, true
+	return o.GraphicsCard.Get(), o.GraphicsCard.IsSet()
 }
 
 // HasGraphicsCard returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasGraphicsCard() bool {
-	if o != nil && o.GraphicsCard != nil {
+	if o != nil && o.GraphicsCard.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGraphicsCard gets a reference to the given GraphicsCardRelationship and assigns it to the GraphicsCard field.
+// SetGraphicsCard gets a reference to the given NullableGraphicsCardRelationship and assigns it to the GraphicsCard field.
 func (o *FirmwareRunningFirmware) SetGraphicsCard(v GraphicsCardRelationship) {
-	o.GraphicsCard = &v
+	o.GraphicsCard.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetGraphicsCardNil sets the value for GraphicsCard to be an explicit nil
+func (o *FirmwareRunningFirmware) SetGraphicsCardNil() {
+	o.GraphicsCard.Set(nil)
+}
+
+// UnsetGraphicsCard ensures that no value is present for GraphicsCard, not even an explicit nil
+func (o *FirmwareRunningFirmware) UnsetGraphicsCard() {
+	o.GraphicsCard.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareRunningFirmware) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareRunningFirmware) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *FirmwareRunningFirmware) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetManagementController returns the ManagementController field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *FirmwareRunningFirmware) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *FirmwareRunningFirmware) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetManagementController returns the ManagementController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareRunningFirmware) GetManagementController() ManagementControllerRelationship {
-	if o == nil || o.ManagementController == nil {
+	if o == nil || IsNil(o.ManagementController.Get()) {
 		var ret ManagementControllerRelationship
 		return ret
 	}
-	return *o.ManagementController
+	return *o.ManagementController.Get()
 }
 
 // GetManagementControllerOk returns a tuple with the ManagementController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareRunningFirmware) GetManagementControllerOk() (*ManagementControllerRelationship, bool) {
-	if o == nil || o.ManagementController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ManagementController, true
+	return o.ManagementController.Get(), o.ManagementController.IsSet()
 }
 
 // HasManagementController returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasManagementController() bool {
-	if o != nil && o.ManagementController != nil {
+	if o != nil && o.ManagementController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetManagementController gets a reference to the given ManagementControllerRelationship and assigns it to the ManagementController field.
+// SetManagementController gets a reference to the given NullableManagementControllerRelationship and assigns it to the ManagementController field.
 func (o *FirmwareRunningFirmware) SetManagementController(v ManagementControllerRelationship) {
-	o.ManagementController = &v
+	o.ManagementController.Set(&v)
+}
+
+// SetManagementControllerNil sets the value for ManagementController to be an explicit nil
+func (o *FirmwareRunningFirmware) SetManagementControllerNil() {
+	o.ManagementController.Set(nil)
+}
+
+// UnsetManagementController ensures that no value is present for ManagementController, not even an explicit nil
+func (o *FirmwareRunningFirmware) UnsetManagementController() {
+	o.ManagementController.Unset()
 }
 
 // GetNetworkElements returns the NetworkElements field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -388,7 +436,7 @@ func (o *FirmwareRunningFirmware) GetNetworkElements() []NetworkElementRelations
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareRunningFirmware) GetNetworkElementsOk() ([]NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElements == nil {
+	if o == nil || IsNil(o.NetworkElements) {
 		return nil, false
 	}
 	return o.NetworkElements, true
@@ -396,7 +444,7 @@ func (o *FirmwareRunningFirmware) GetNetworkElementsOk() ([]NetworkElementRelati
 
 // HasNetworkElements returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasNetworkElements() bool {
-	if o != nil && o.NetworkElements != nil {
+	if o != nil && IsNil(o.NetworkElements) {
 		return true
 	}
 
@@ -408,233 +456,314 @@ func (o *FirmwareRunningFirmware) SetNetworkElements(v []NetworkElementRelations
 	o.NetworkElements = v
 }
 
-// GetPciSwitch returns the PciSwitch field value if set, zero value otherwise.
+// GetPciSwitch returns the PciSwitch field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareRunningFirmware) GetPciSwitch() PciSwitchRelationship {
-	if o == nil || o.PciSwitch == nil {
+	if o == nil || IsNil(o.PciSwitch.Get()) {
 		var ret PciSwitchRelationship
 		return ret
 	}
-	return *o.PciSwitch
+	return *o.PciSwitch.Get()
 }
 
 // GetPciSwitchOk returns a tuple with the PciSwitch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareRunningFirmware) GetPciSwitchOk() (*PciSwitchRelationship, bool) {
-	if o == nil || o.PciSwitch == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PciSwitch, true
+	return o.PciSwitch.Get(), o.PciSwitch.IsSet()
 }
 
 // HasPciSwitch returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasPciSwitch() bool {
-	if o != nil && o.PciSwitch != nil {
+	if o != nil && o.PciSwitch.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPciSwitch gets a reference to the given PciSwitchRelationship and assigns it to the PciSwitch field.
+// SetPciSwitch gets a reference to the given NullablePciSwitchRelationship and assigns it to the PciSwitch field.
 func (o *FirmwareRunningFirmware) SetPciSwitch(v PciSwitchRelationship) {
-	o.PciSwitch = &v
+	o.PciSwitch.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetPciSwitchNil sets the value for PciSwitch to be an explicit nil
+func (o *FirmwareRunningFirmware) SetPciSwitchNil() {
+	o.PciSwitch.Set(nil)
+}
+
+// UnsetPciSwitch ensures that no value is present for PciSwitch, not even an explicit nil
+func (o *FirmwareRunningFirmware) UnsetPciSwitch() {
+	o.PciSwitch.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareRunningFirmware) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareRunningFirmware) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *FirmwareRunningFirmware) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetStorageController returns the StorageController field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *FirmwareRunningFirmware) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *FirmwareRunningFirmware) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetStorageController returns the StorageController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareRunningFirmware) GetStorageController() StorageControllerRelationship {
-	if o == nil || o.StorageController == nil {
+	if o == nil || IsNil(o.StorageController.Get()) {
 		var ret StorageControllerRelationship
 		return ret
 	}
-	return *o.StorageController
+	return *o.StorageController.Get()
 }
 
 // GetStorageControllerOk returns a tuple with the StorageController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareRunningFirmware) GetStorageControllerOk() (*StorageControllerRelationship, bool) {
-	if o == nil || o.StorageController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageController, true
+	return o.StorageController.Get(), o.StorageController.IsSet()
 }
 
 // HasStorageController returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasStorageController() bool {
-	if o != nil && o.StorageController != nil {
+	if o != nil && o.StorageController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageController gets a reference to the given StorageControllerRelationship and assigns it to the StorageController field.
+// SetStorageController gets a reference to the given NullableStorageControllerRelationship and assigns it to the StorageController field.
 func (o *FirmwareRunningFirmware) SetStorageController(v StorageControllerRelationship) {
-	o.StorageController = &v
+	o.StorageController.Set(&v)
 }
 
-// GetStorageFlexFlashController returns the StorageFlexFlashController field value if set, zero value otherwise.
+// SetStorageControllerNil sets the value for StorageController to be an explicit nil
+func (o *FirmwareRunningFirmware) SetStorageControllerNil() {
+	o.StorageController.Set(nil)
+}
+
+// UnsetStorageController ensures that no value is present for StorageController, not even an explicit nil
+func (o *FirmwareRunningFirmware) UnsetStorageController() {
+	o.StorageController.Unset()
+}
+
+// GetStorageFlexFlashController returns the StorageFlexFlashController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareRunningFirmware) GetStorageFlexFlashController() StorageFlexFlashControllerRelationship {
-	if o == nil || o.StorageFlexFlashController == nil {
+	if o == nil || IsNil(o.StorageFlexFlashController.Get()) {
 		var ret StorageFlexFlashControllerRelationship
 		return ret
 	}
-	return *o.StorageFlexFlashController
+	return *o.StorageFlexFlashController.Get()
 }
 
 // GetStorageFlexFlashControllerOk returns a tuple with the StorageFlexFlashController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareRunningFirmware) GetStorageFlexFlashControllerOk() (*StorageFlexFlashControllerRelationship, bool) {
-	if o == nil || o.StorageFlexFlashController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageFlexFlashController, true
+	return o.StorageFlexFlashController.Get(), o.StorageFlexFlashController.IsSet()
 }
 
 // HasStorageFlexFlashController returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasStorageFlexFlashController() bool {
-	if o != nil && o.StorageFlexFlashController != nil {
+	if o != nil && o.StorageFlexFlashController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageFlexFlashController gets a reference to the given StorageFlexFlashControllerRelationship and assigns it to the StorageFlexFlashController field.
+// SetStorageFlexFlashController gets a reference to the given NullableStorageFlexFlashControllerRelationship and assigns it to the StorageFlexFlashController field.
 func (o *FirmwareRunningFirmware) SetStorageFlexFlashController(v StorageFlexFlashControllerRelationship) {
-	o.StorageFlexFlashController = &v
+	o.StorageFlexFlashController.Set(&v)
 }
 
-// GetStoragePhysicalDisk returns the StoragePhysicalDisk field value if set, zero value otherwise.
+// SetStorageFlexFlashControllerNil sets the value for StorageFlexFlashController to be an explicit nil
+func (o *FirmwareRunningFirmware) SetStorageFlexFlashControllerNil() {
+	o.StorageFlexFlashController.Set(nil)
+}
+
+// UnsetStorageFlexFlashController ensures that no value is present for StorageFlexFlashController, not even an explicit nil
+func (o *FirmwareRunningFirmware) UnsetStorageFlexFlashController() {
+	o.StorageFlexFlashController.Unset()
+}
+
+// GetStoragePhysicalDisk returns the StoragePhysicalDisk field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareRunningFirmware) GetStoragePhysicalDisk() StoragePhysicalDiskRelationship {
-	if o == nil || o.StoragePhysicalDisk == nil {
+	if o == nil || IsNil(o.StoragePhysicalDisk.Get()) {
 		var ret StoragePhysicalDiskRelationship
 		return ret
 	}
-	return *o.StoragePhysicalDisk
+	return *o.StoragePhysicalDisk.Get()
 }
 
 // GetStoragePhysicalDiskOk returns a tuple with the StoragePhysicalDisk field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareRunningFirmware) GetStoragePhysicalDiskOk() (*StoragePhysicalDiskRelationship, bool) {
-	if o == nil || o.StoragePhysicalDisk == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StoragePhysicalDisk, true
+	return o.StoragePhysicalDisk.Get(), o.StoragePhysicalDisk.IsSet()
 }
 
 // HasStoragePhysicalDisk returns a boolean if a field has been set.
 func (o *FirmwareRunningFirmware) HasStoragePhysicalDisk() bool {
-	if o != nil && o.StoragePhysicalDisk != nil {
+	if o != nil && o.StoragePhysicalDisk.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStoragePhysicalDisk gets a reference to the given StoragePhysicalDiskRelationship and assigns it to the StoragePhysicalDisk field.
+// SetStoragePhysicalDisk gets a reference to the given NullableStoragePhysicalDiskRelationship and assigns it to the StoragePhysicalDisk field.
 func (o *FirmwareRunningFirmware) SetStoragePhysicalDisk(v StoragePhysicalDiskRelationship) {
-	o.StoragePhysicalDisk = &v
+	o.StoragePhysicalDisk.Set(&v)
+}
+
+// SetStoragePhysicalDiskNil sets the value for StoragePhysicalDisk to be an explicit nil
+func (o *FirmwareRunningFirmware) SetStoragePhysicalDiskNil() {
+	o.StoragePhysicalDisk.Set(nil)
+}
+
+// UnsetStoragePhysicalDisk ensures that no value is present for StoragePhysicalDisk, not even an explicit nil
+func (o *FirmwareRunningFirmware) UnsetStoragePhysicalDisk() {
+	o.StoragePhysicalDisk.Unset()
 }
 
 func (o FirmwareRunningFirmware) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareRunningFirmware) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Component != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Component) {
 		toSerialize["Component"] = o.Component
 	}
-	if o.PackageVersion != nil {
+	if !IsNil(o.PackageVersion) {
 		toSerialize["PackageVersion"] = o.PackageVersion
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.BiosUnit != nil {
-		toSerialize["BiosUnit"] = o.BiosUnit
+	if o.BiosUnit.IsSet() {
+		toSerialize["BiosUnit"] = o.BiosUnit.Get()
 	}
-	if o.GraphicsCard != nil {
-		toSerialize["GraphicsCard"] = o.GraphicsCard
+	if o.GraphicsCard.IsSet() {
+		toSerialize["GraphicsCard"] = o.GraphicsCard.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.ManagementController != nil {
-		toSerialize["ManagementController"] = o.ManagementController
+	if o.ManagementController.IsSet() {
+		toSerialize["ManagementController"] = o.ManagementController.Get()
 	}
 	if o.NetworkElements != nil {
 		toSerialize["NetworkElements"] = o.NetworkElements
 	}
-	if o.PciSwitch != nil {
-		toSerialize["PciSwitch"] = o.PciSwitch
+	if o.PciSwitch.IsSet() {
+		toSerialize["PciSwitch"] = o.PciSwitch.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.StorageController != nil {
-		toSerialize["StorageController"] = o.StorageController
+	if o.StorageController.IsSet() {
+		toSerialize["StorageController"] = o.StorageController.Get()
 	}
-	if o.StorageFlexFlashController != nil {
-		toSerialize["StorageFlexFlashController"] = o.StorageFlexFlashController
+	if o.StorageFlexFlashController.IsSet() {
+		toSerialize["StorageFlexFlashController"] = o.StorageFlexFlashController.Get()
 	}
-	if o.StoragePhysicalDisk != nil {
-		toSerialize["StoragePhysicalDisk"] = o.StoragePhysicalDisk
+	if o.StoragePhysicalDisk.IsSet() {
+		toSerialize["StoragePhysicalDisk"] = o.StoragePhysicalDisk.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareRunningFirmware) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareRunningFirmware) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareRunningFirmwareWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -647,23 +776,23 @@ func (o *FirmwareRunningFirmware) UnmarshalJSON(bytes []byte) (err error) {
 		// The type of the firmware.
 		Type *string `json:"Type,omitempty"`
 		// The version of the firmware.
-		Version              *string                           `json:"Version,omitempty"`
-		BiosUnit             *BiosUnitRelationship             `json:"BiosUnit,omitempty"`
-		GraphicsCard         *GraphicsCardRelationship         `json:"GraphicsCard,omitempty"`
-		InventoryDeviceInfo  *InventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
-		ManagementController *ManagementControllerRelationship `json:"ManagementController,omitempty"`
+		Version              *string                                  `json:"Version,omitempty"`
+		BiosUnit             NullableBiosUnitRelationship             `json:"BiosUnit,omitempty"`
+		GraphicsCard         NullableGraphicsCardRelationship         `json:"GraphicsCard,omitempty"`
+		InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship  `json:"InventoryDeviceInfo,omitempty"`
+		ManagementController NullableManagementControllerRelationship `json:"ManagementController,omitempty"`
 		// An array of relationships to networkElement resources.
-		NetworkElements            []NetworkElementRelationship            `json:"NetworkElements,omitempty"`
-		PciSwitch                  *PciSwitchRelationship                  `json:"PciSwitch,omitempty"`
-		RegisteredDevice           *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
-		StorageController          *StorageControllerRelationship          `json:"StorageController,omitempty"`
-		StorageFlexFlashController *StorageFlexFlashControllerRelationship `json:"StorageFlexFlashController,omitempty"`
-		StoragePhysicalDisk        *StoragePhysicalDiskRelationship        `json:"StoragePhysicalDisk,omitempty"`
+		NetworkElements            []NetworkElementRelationship                   `json:"NetworkElements,omitempty"`
+		PciSwitch                  NullablePciSwitchRelationship                  `json:"PciSwitch,omitempty"`
+		RegisteredDevice           NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+		StorageController          NullableStorageControllerRelationship          `json:"StorageController,omitempty"`
+		StorageFlexFlashController NullableStorageFlexFlashControllerRelationship `json:"StorageFlexFlashController,omitempty"`
+		StoragePhysicalDisk        NullableStoragePhysicalDiskRelationship        `json:"StoragePhysicalDisk,omitempty"`
 	}
 
 	varFirmwareRunningFirmwareWithoutEmbeddedStruct := FirmwareRunningFirmwareWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareRunningFirmwareWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareRunningFirmwareWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareRunningFirmware := _FirmwareRunningFirmware{}
 		varFirmwareRunningFirmware.ClassId = varFirmwareRunningFirmwareWithoutEmbeddedStruct.ClassId
@@ -689,7 +818,7 @@ func (o *FirmwareRunningFirmware) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareRunningFirmware := _FirmwareRunningFirmware{}
 
-	err = json.Unmarshal(bytes, &varFirmwareRunningFirmware)
+	err = json.Unmarshal(data, &varFirmwareRunningFirmware)
 	if err == nil {
 		o.InventoryBase = varFirmwareRunningFirmware.InventoryBase
 	} else {
@@ -698,7 +827,7 @@ func (o *FirmwareRunningFirmware) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Component")

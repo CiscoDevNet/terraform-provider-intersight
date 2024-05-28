@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | Status which shows if the resource is healthy or not. * &#x60;&#x60; - An Unknown status indicates that the resource status is not known. * &#x60;Healthy&#x60; - A healthy status indicates that the resource is healthy and running as per spec. * &#x60;Unhealthy&#x60; - An unhealthy status indicates that the resource is down. | [optional] [default to ""]
 **TimeStamp** | Pointer to **time.Time** | The time at which the event was generated. Date is accurate to Intersights clock. This time will be used to identify order of events. | [optional] 
 **UnavailableReplicas** | Pointer to **int64** | Number of replicas Unavailable. | [optional] 
-**Assist** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Assist** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -336,6 +336,16 @@ SetAssist sets Assist field to given value.
 
 HasAssist returns a boolean if a field has been set.
 
+### SetAssistNil
+
+`func (o *OprsDeployment) SetAssistNil(b bool)`
+
+ SetAssistNil sets the value for Assist to be an explicit nil
+
+### UnsetAssist
+`func (o *OprsDeployment) UnsetAssist()`
+
+UnsetAssist ensures that no value is present for Assist, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.SshBatchExecutor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.SshBatchExecutor"]
-**TaskDefinition** | Pointer to [**WorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
+**TaskDefinition** | Pointer to [**NullableWorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetTaskDefinition sets TaskDefinition field to given value.
 
 HasTaskDefinition returns a boolean if a field has been set.
 
+### SetTaskDefinitionNil
+
+`func (o *WorkflowSshBatchExecutor) SetTaskDefinitionNil(b bool)`
+
+ SetTaskDefinitionNil sets the value for TaskDefinition to be an explicit nil
+
+### UnsetTaskDefinition
+`func (o *WorkflowSshBatchExecutor) UnsetTaskDefinition()`
+
+UnsetTaskDefinition ensures that no value is present for TaskDefinition, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

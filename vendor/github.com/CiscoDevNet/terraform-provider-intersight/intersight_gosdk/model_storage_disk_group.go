@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageDiskGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageDiskGroup{}
 
 // StorageDiskGroup Group of one or more Spans to configure virtual drive.
 type StorageDiskGroup struct {
@@ -29,11 +33,11 @@ type StorageDiskGroup struct {
 	// Raid level of the virtual drives in this diskgroup.
 	RaidType *string `json:"RaidType,omitempty"`
 	// An array of relationships to storagePhysicalDisk resources.
-	DedicatedHotSpares []StoragePhysicalDiskRelationship    `json:"DedicatedHotSpares,omitempty"`
-	RegisteredDevice   *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	DedicatedHotSpares []StoragePhysicalDiskRelationship           `json:"DedicatedHotSpares,omitempty"`
+	RegisteredDevice   NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to storageSpan resources.
-	Spans             []StorageSpanRelationship      `json:"Spans,omitempty"`
-	StorageController *StorageControllerRelationship `json:"StorageController,omitempty"`
+	Spans             []StorageSpanRelationship             `json:"Spans,omitempty"`
+	StorageController NullableStorageControllerRelationship `json:"StorageController,omitempty"`
 	// An array of relationships to storageVirtualDrive resources.
 	VirtualDrives        []StorageVirtualDriveRelationship `json:"VirtualDrives,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -114,7 +118,7 @@ func (o *StorageDiskGroup) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageDiskGroup) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *StorageDiskGroup) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageDiskGroup) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -132,7 +136,7 @@ func (o *StorageDiskGroup) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageDiskGroup) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *StorageDiskGroup) SetName(v string) {
 
 // GetRaidType returns the RaidType field value if set, zero value otherwise.
 func (o *StorageDiskGroup) GetRaidType() string {
-	if o == nil || o.RaidType == nil {
+	if o == nil || IsNil(o.RaidType) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *StorageDiskGroup) GetRaidType() string {
 // GetRaidTypeOk returns a tuple with the RaidType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageDiskGroup) GetRaidTypeOk() (*string, bool) {
-	if o == nil || o.RaidType == nil {
+	if o == nil || IsNil(o.RaidType) {
 		return nil, false
 	}
 	return o.RaidType, true
@@ -164,7 +168,7 @@ func (o *StorageDiskGroup) GetRaidTypeOk() (*string, bool) {
 
 // HasRaidType returns a boolean if a field has been set.
 func (o *StorageDiskGroup) HasRaidType() bool {
-	if o != nil && o.RaidType != nil {
+	if o != nil && !IsNil(o.RaidType) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *StorageDiskGroup) GetDedicatedHotSpares() []StoragePhysicalDiskRelation
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageDiskGroup) GetDedicatedHotSparesOk() ([]StoragePhysicalDiskRelationship, bool) {
-	if o == nil || o.DedicatedHotSpares == nil {
+	if o == nil || IsNil(o.DedicatedHotSpares) {
 		return nil, false
 	}
 	return o.DedicatedHotSpares, true
@@ -197,7 +201,7 @@ func (o *StorageDiskGroup) GetDedicatedHotSparesOk() ([]StoragePhysicalDiskRelat
 
 // HasDedicatedHotSpares returns a boolean if a field has been set.
 func (o *StorageDiskGroup) HasDedicatedHotSpares() bool {
-	if o != nil && o.DedicatedHotSpares != nil {
+	if o != nil && IsNil(o.DedicatedHotSpares) {
 		return true
 	}
 
@@ -209,36 +213,47 @@ func (o *StorageDiskGroup) SetDedicatedHotSpares(v []StoragePhysicalDiskRelation
 	o.DedicatedHotSpares = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageDiskGroup) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageDiskGroup) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageDiskGroup) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageDiskGroup) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageDiskGroup) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageDiskGroup) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 // GetSpans returns the Spans field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -254,7 +269,7 @@ func (o *StorageDiskGroup) GetSpans() []StorageSpanRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageDiskGroup) GetSpansOk() ([]StorageSpanRelationship, bool) {
-	if o == nil || o.Spans == nil {
+	if o == nil || IsNil(o.Spans) {
 		return nil, false
 	}
 	return o.Spans, true
@@ -262,7 +277,7 @@ func (o *StorageDiskGroup) GetSpansOk() ([]StorageSpanRelationship, bool) {
 
 // HasSpans returns a boolean if a field has been set.
 func (o *StorageDiskGroup) HasSpans() bool {
-	if o != nil && o.Spans != nil {
+	if o != nil && IsNil(o.Spans) {
 		return true
 	}
 
@@ -274,36 +289,47 @@ func (o *StorageDiskGroup) SetSpans(v []StorageSpanRelationship) {
 	o.Spans = v
 }
 
-// GetStorageController returns the StorageController field value if set, zero value otherwise.
+// GetStorageController returns the StorageController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageDiskGroup) GetStorageController() StorageControllerRelationship {
-	if o == nil || o.StorageController == nil {
+	if o == nil || IsNil(o.StorageController.Get()) {
 		var ret StorageControllerRelationship
 		return ret
 	}
-	return *o.StorageController
+	return *o.StorageController.Get()
 }
 
 // GetStorageControllerOk returns a tuple with the StorageController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageDiskGroup) GetStorageControllerOk() (*StorageControllerRelationship, bool) {
-	if o == nil || o.StorageController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageController, true
+	return o.StorageController.Get(), o.StorageController.IsSet()
 }
 
 // HasStorageController returns a boolean if a field has been set.
 func (o *StorageDiskGroup) HasStorageController() bool {
-	if o != nil && o.StorageController != nil {
+	if o != nil && o.StorageController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageController gets a reference to the given StorageControllerRelationship and assigns it to the StorageController field.
+// SetStorageController gets a reference to the given NullableStorageControllerRelationship and assigns it to the StorageController field.
 func (o *StorageDiskGroup) SetStorageController(v StorageControllerRelationship) {
-	o.StorageController = &v
+	o.StorageController.Set(&v)
+}
+
+// SetStorageControllerNil sets the value for StorageController to be an explicit nil
+func (o *StorageDiskGroup) SetStorageControllerNil() {
+	o.StorageController.Set(nil)
+}
+
+// UnsetStorageController ensures that no value is present for StorageController, not even an explicit nil
+func (o *StorageDiskGroup) UnsetStorageController() {
+	o.StorageController.Unset()
 }
 
 // GetVirtualDrives returns the VirtualDrives field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -319,7 +345,7 @@ func (o *StorageDiskGroup) GetVirtualDrives() []StorageVirtualDriveRelationship 
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageDiskGroup) GetVirtualDrivesOk() ([]StorageVirtualDriveRelationship, bool) {
-	if o == nil || o.VirtualDrives == nil {
+	if o == nil || IsNil(o.VirtualDrives) {
 		return nil, false
 	}
 	return o.VirtualDrives, true
@@ -327,7 +353,7 @@ func (o *StorageDiskGroup) GetVirtualDrivesOk() ([]StorageVirtualDriveRelationsh
 
 // HasVirtualDrives returns a boolean if a field has been set.
 func (o *StorageDiskGroup) HasVirtualDrives() bool {
-	if o != nil && o.VirtualDrives != nil {
+	if o != nil && IsNil(o.VirtualDrives) {
 		return true
 	}
 
@@ -340,38 +366,42 @@ func (o *StorageDiskGroup) SetVirtualDrives(v []StorageVirtualDriveRelationship)
 }
 
 func (o StorageDiskGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageDiskGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.RaidType != nil {
+	if !IsNil(o.RaidType) {
 		toSerialize["RaidType"] = o.RaidType
 	}
 	if o.DedicatedHotSpares != nil {
 		toSerialize["DedicatedHotSpares"] = o.DedicatedHotSpares
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.Spans != nil {
 		toSerialize["Spans"] = o.Spans
 	}
-	if o.StorageController != nil {
-		toSerialize["StorageController"] = o.StorageController
+	if o.StorageController.IsSet() {
+		toSerialize["StorageController"] = o.StorageController.Get()
 	}
 	if o.VirtualDrives != nil {
 		toSerialize["VirtualDrives"] = o.VirtualDrives
@@ -381,10 +411,32 @@ func (o StorageDiskGroup) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageDiskGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageDiskGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageDiskGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -395,18 +447,18 @@ func (o *StorageDiskGroup) UnmarshalJSON(bytes []byte) (err error) {
 		// Raid level of the virtual drives in this diskgroup.
 		RaidType *string `json:"RaidType,omitempty"`
 		// An array of relationships to storagePhysicalDisk resources.
-		DedicatedHotSpares []StoragePhysicalDiskRelationship    `json:"DedicatedHotSpares,omitempty"`
-		RegisteredDevice   *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		DedicatedHotSpares []StoragePhysicalDiskRelationship           `json:"DedicatedHotSpares,omitempty"`
+		RegisteredDevice   NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to storageSpan resources.
-		Spans             []StorageSpanRelationship      `json:"Spans,omitempty"`
-		StorageController *StorageControllerRelationship `json:"StorageController,omitempty"`
+		Spans             []StorageSpanRelationship             `json:"Spans,omitempty"`
+		StorageController NullableStorageControllerRelationship `json:"StorageController,omitempty"`
 		// An array of relationships to storageVirtualDrive resources.
 		VirtualDrives []StorageVirtualDriveRelationship `json:"VirtualDrives,omitempty"`
 	}
 
 	varStorageDiskGroupWithoutEmbeddedStruct := StorageDiskGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageDiskGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageDiskGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageDiskGroup := _StorageDiskGroup{}
 		varStorageDiskGroup.ClassId = varStorageDiskGroupWithoutEmbeddedStruct.ClassId
@@ -425,7 +477,7 @@ func (o *StorageDiskGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageDiskGroup := _StorageDiskGroup{}
 
-	err = json.Unmarshal(bytes, &varStorageDiskGroup)
+	err = json.Unmarshal(data, &varStorageDiskGroup)
 	if err == nil {
 		o.InventoryBase = varStorageDiskGroup.InventoryBase
 	} else {
@@ -434,7 +486,7 @@ func (o *StorageDiskGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

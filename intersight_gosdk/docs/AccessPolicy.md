@@ -9,11 +9,11 @@ Name | Type | Description | Notes
 **AddressType** | Pointer to [**NullableAccessAddressType**](AccessAddressType.md) |  | [optional] 
 **ConfigurationType** | Pointer to [**NullableAccessConfigurationType**](AccessConfigurationType.md) |  | [optional] 
 **InbandVlan** | Pointer to **int64** | VLAN to be used for server access over Inband network. | [optional] 
-**InbandIpPool** | Pointer to [**IppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
-**InbandVrf** | Pointer to [**VrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**OutOfBandIpPool** | Pointer to [**IppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
-**OutOfBandVrf** | Pointer to [**VrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
+**InbandIpPool** | Pointer to [**NullableIppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
+**InbandVrf** | Pointer to [**NullableVrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**OutOfBandIpPool** | Pointer to [**NullableIppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
+**OutOfBandVrf** | Pointer to [**NullableVrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
 ## Methods
@@ -195,6 +195,16 @@ SetInbandIpPool sets InbandIpPool field to given value.
 
 HasInbandIpPool returns a boolean if a field has been set.
 
+### SetInbandIpPoolNil
+
+`func (o *AccessPolicy) SetInbandIpPoolNil(b bool)`
+
+ SetInbandIpPoolNil sets the value for InbandIpPool to be an explicit nil
+
+### UnsetInbandIpPool
+`func (o *AccessPolicy) UnsetInbandIpPool()`
+
+UnsetInbandIpPool ensures that no value is present for InbandIpPool, not even an explicit nil
 ### GetInbandVrf
 
 `func (o *AccessPolicy) GetInbandVrf() VrfVrfRelationship`
@@ -220,6 +230,16 @@ SetInbandVrf sets InbandVrf field to given value.
 
 HasInbandVrf returns a boolean if a field has been set.
 
+### SetInbandVrfNil
+
+`func (o *AccessPolicy) SetInbandVrfNil(b bool)`
+
+ SetInbandVrfNil sets the value for InbandVrf to be an explicit nil
+
+### UnsetInbandVrf
+`func (o *AccessPolicy) UnsetInbandVrf()`
+
+UnsetInbandVrf ensures that no value is present for InbandVrf, not even an explicit nil
 ### GetOrganization
 
 `func (o *AccessPolicy) GetOrganization() OrganizationOrganizationRelationship`
@@ -245,6 +265,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *AccessPolicy) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *AccessPolicy) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetOutOfBandIpPool
 
 `func (o *AccessPolicy) GetOutOfBandIpPool() IppoolPoolRelationship`
@@ -270,6 +300,16 @@ SetOutOfBandIpPool sets OutOfBandIpPool field to given value.
 
 HasOutOfBandIpPool returns a boolean if a field has been set.
 
+### SetOutOfBandIpPoolNil
+
+`func (o *AccessPolicy) SetOutOfBandIpPoolNil(b bool)`
+
+ SetOutOfBandIpPoolNil sets the value for OutOfBandIpPool to be an explicit nil
+
+### UnsetOutOfBandIpPool
+`func (o *AccessPolicy) UnsetOutOfBandIpPool()`
+
+UnsetOutOfBandIpPool ensures that no value is present for OutOfBandIpPool, not even an explicit nil
 ### GetOutOfBandVrf
 
 `func (o *AccessPolicy) GetOutOfBandVrf() VrfVrfRelationship`
@@ -295,6 +335,16 @@ SetOutOfBandVrf sets OutOfBandVrf field to given value.
 
 HasOutOfBandVrf returns a boolean if a field has been set.
 
+### SetOutOfBandVrfNil
+
+`func (o *AccessPolicy) SetOutOfBandVrfNil(b bool)`
+
+ SetOutOfBandVrfNil sets the value for OutOfBandVrf to be an explicit nil
+
+### UnsetOutOfBandVrf
+`func (o *AccessPolicy) UnsetOutOfBandVrf()`
+
+UnsetOutOfBandVrf ensures that no value is present for OutOfBandVrf, not even an explicit nil
 ### GetProfiles
 
 `func (o *AccessPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship`

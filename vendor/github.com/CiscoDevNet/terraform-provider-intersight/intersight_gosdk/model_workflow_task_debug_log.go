@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowTaskDebugLog type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowTaskDebugLog{}
 
 // WorkflowTaskDebugLog Debug information captured during task execution, when the enable debug flag is set at the workflow definition level.
 type WorkflowTaskDebugLog struct {
@@ -29,9 +33,9 @@ type WorkflowTaskDebugLog struct {
 	// Holds information helpful in isolating task failures.
 	TaskDebugLogEntries interface{} `json:"TaskDebugLogEntries,omitempty"`
 	// The unique identifier for task instance.
-	TaskInstId           *string                           `json:"TaskInstId,omitempty"`
-	TaskInfo             *WorkflowTaskInfoRelationship     `json:"TaskInfo,omitempty"`
-	WorkflowInfo         *WorkflowWorkflowInfoRelationship `json:"WorkflowInfo,omitempty"`
+	TaskInstId           *string                                  `json:"TaskInstId,omitempty"`
+	TaskInfo             NullableWorkflowTaskInfoRelationship     `json:"TaskInfo,omitempty"`
+	WorkflowInfo         NullableWorkflowWorkflowInfoRelationship `json:"WorkflowInfo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,7 +114,7 @@ func (o *WorkflowTaskDebugLog) SetObjectType(v string) {
 
 // GetRetryCount returns the RetryCount field value if set, zero value otherwise.
 func (o *WorkflowTaskDebugLog) GetRetryCount() int64 {
-	if o == nil || o.RetryCount == nil {
+	if o == nil || IsNil(o.RetryCount) {
 		var ret int64
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *WorkflowTaskDebugLog) GetRetryCount() int64 {
 // GetRetryCountOk returns a tuple with the RetryCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskDebugLog) GetRetryCountOk() (*int64, bool) {
-	if o == nil || o.RetryCount == nil {
+	if o == nil || IsNil(o.RetryCount) {
 		return nil, false
 	}
 	return o.RetryCount, true
@@ -128,7 +132,7 @@ func (o *WorkflowTaskDebugLog) GetRetryCountOk() (*int64, bool) {
 
 // HasRetryCount returns a boolean if a field has been set.
 func (o *WorkflowTaskDebugLog) HasRetryCount() bool {
-	if o != nil && o.RetryCount != nil {
+	if o != nil && !IsNil(o.RetryCount) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *WorkflowTaskDebugLog) GetTaskDebugLogEntries() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskDebugLog) GetTaskDebugLogEntriesOk() (*interface{}, bool) {
-	if o == nil || o.TaskDebugLogEntries == nil {
+	if o == nil || IsNil(o.TaskDebugLogEntries) {
 		return nil, false
 	}
 	return &o.TaskDebugLogEntries, true
@@ -161,7 +165,7 @@ func (o *WorkflowTaskDebugLog) GetTaskDebugLogEntriesOk() (*interface{}, bool) {
 
 // HasTaskDebugLogEntries returns a boolean if a field has been set.
 func (o *WorkflowTaskDebugLog) HasTaskDebugLogEntries() bool {
-	if o != nil && o.TaskDebugLogEntries != nil {
+	if o != nil && IsNil(o.TaskDebugLogEntries) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *WorkflowTaskDebugLog) SetTaskDebugLogEntries(v interface{}) {
 
 // GetTaskInstId returns the TaskInstId field value if set, zero value otherwise.
 func (o *WorkflowTaskDebugLog) GetTaskInstId() string {
-	if o == nil || o.TaskInstId == nil {
+	if o == nil || IsNil(o.TaskInstId) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *WorkflowTaskDebugLog) GetTaskInstId() string {
 // GetTaskInstIdOk returns a tuple with the TaskInstId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskDebugLog) GetTaskInstIdOk() (*string, bool) {
-	if o == nil || o.TaskInstId == nil {
+	if o == nil || IsNil(o.TaskInstId) {
 		return nil, false
 	}
 	return o.TaskInstId, true
@@ -193,7 +197,7 @@ func (o *WorkflowTaskDebugLog) GetTaskInstIdOk() (*string, bool) {
 
 // HasTaskInstId returns a boolean if a field has been set.
 func (o *WorkflowTaskDebugLog) HasTaskInstId() bool {
-	if o != nil && o.TaskInstId != nil {
+	if o != nil && !IsNil(o.TaskInstId) {
 		return true
 	}
 
@@ -205,110 +209,158 @@ func (o *WorkflowTaskDebugLog) SetTaskInstId(v string) {
 	o.TaskInstId = &v
 }
 
-// GetTaskInfo returns the TaskInfo field value if set, zero value otherwise.
+// GetTaskInfo returns the TaskInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskDebugLog) GetTaskInfo() WorkflowTaskInfoRelationship {
-	if o == nil || o.TaskInfo == nil {
+	if o == nil || IsNil(o.TaskInfo.Get()) {
 		var ret WorkflowTaskInfoRelationship
 		return ret
 	}
-	return *o.TaskInfo
+	return *o.TaskInfo.Get()
 }
 
 // GetTaskInfoOk returns a tuple with the TaskInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskDebugLog) GetTaskInfoOk() (*WorkflowTaskInfoRelationship, bool) {
-	if o == nil || o.TaskInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TaskInfo, true
+	return o.TaskInfo.Get(), o.TaskInfo.IsSet()
 }
 
 // HasTaskInfo returns a boolean if a field has been set.
 func (o *WorkflowTaskDebugLog) HasTaskInfo() bool {
-	if o != nil && o.TaskInfo != nil {
+	if o != nil && o.TaskInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTaskInfo gets a reference to the given WorkflowTaskInfoRelationship and assigns it to the TaskInfo field.
+// SetTaskInfo gets a reference to the given NullableWorkflowTaskInfoRelationship and assigns it to the TaskInfo field.
 func (o *WorkflowTaskDebugLog) SetTaskInfo(v WorkflowTaskInfoRelationship) {
-	o.TaskInfo = &v
+	o.TaskInfo.Set(&v)
 }
 
-// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise.
+// SetTaskInfoNil sets the value for TaskInfo to be an explicit nil
+func (o *WorkflowTaskDebugLog) SetTaskInfoNil() {
+	o.TaskInfo.Set(nil)
+}
+
+// UnsetTaskInfo ensures that no value is present for TaskInfo, not even an explicit nil
+func (o *WorkflowTaskDebugLog) UnsetTaskInfo() {
+	o.TaskInfo.Unset()
+}
+
+// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskDebugLog) GetWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil || IsNil(o.WorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.WorkflowInfo
+	return *o.WorkflowInfo.Get()
 }
 
 // GetWorkflowInfoOk returns a tuple with the WorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskDebugLog) GetWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WorkflowInfo, true
+	return o.WorkflowInfo.Get(), o.WorkflowInfo.IsSet()
 }
 
 // HasWorkflowInfo returns a boolean if a field has been set.
 func (o *WorkflowTaskDebugLog) HasWorkflowInfo() bool {
-	if o != nil && o.WorkflowInfo != nil {
+	if o != nil && o.WorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
+// SetWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
 func (o *WorkflowTaskDebugLog) SetWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.WorkflowInfo = &v
+	o.WorkflowInfo.Set(&v)
+}
+
+// SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+func (o *WorkflowTaskDebugLog) SetWorkflowInfoNil() {
+	o.WorkflowInfo.Set(nil)
+}
+
+// UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
+func (o *WorkflowTaskDebugLog) UnsetWorkflowInfo() {
+	o.WorkflowInfo.Unset()
 }
 
 func (o WorkflowTaskDebugLog) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowTaskDebugLog) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.RetryCount != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.RetryCount) {
 		toSerialize["RetryCount"] = o.RetryCount
 	}
 	if o.TaskDebugLogEntries != nil {
 		toSerialize["TaskDebugLogEntries"] = o.TaskDebugLogEntries
 	}
-	if o.TaskInstId != nil {
+	if !IsNil(o.TaskInstId) {
 		toSerialize["TaskInstId"] = o.TaskInstId
 	}
-	if o.TaskInfo != nil {
-		toSerialize["TaskInfo"] = o.TaskInfo
+	if o.TaskInfo.IsSet() {
+		toSerialize["TaskInfo"] = o.TaskInfo.Get()
 	}
-	if o.WorkflowInfo != nil {
-		toSerialize["WorkflowInfo"] = o.WorkflowInfo
+	if o.WorkflowInfo.IsSet() {
+		toSerialize["WorkflowInfo"] = o.WorkflowInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowTaskDebugLog) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowTaskDebugLog) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowTaskDebugLogWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -319,14 +371,14 @@ func (o *WorkflowTaskDebugLog) UnmarshalJSON(bytes []byte) (err error) {
 		// Holds information helpful in isolating task failures.
 		TaskDebugLogEntries interface{} `json:"TaskDebugLogEntries,omitempty"`
 		// The unique identifier for task instance.
-		TaskInstId   *string                           `json:"TaskInstId,omitempty"`
-		TaskInfo     *WorkflowTaskInfoRelationship     `json:"TaskInfo,omitempty"`
-		WorkflowInfo *WorkflowWorkflowInfoRelationship `json:"WorkflowInfo,omitempty"`
+		TaskInstId   *string                                  `json:"TaskInstId,omitempty"`
+		TaskInfo     NullableWorkflowTaskInfoRelationship     `json:"TaskInfo,omitempty"`
+		WorkflowInfo NullableWorkflowWorkflowInfoRelationship `json:"WorkflowInfo,omitempty"`
 	}
 
 	varWorkflowTaskDebugLogWithoutEmbeddedStruct := WorkflowTaskDebugLogWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowTaskDebugLogWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowTaskDebugLogWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowTaskDebugLog := _WorkflowTaskDebugLog{}
 		varWorkflowTaskDebugLog.ClassId = varWorkflowTaskDebugLogWithoutEmbeddedStruct.ClassId
@@ -343,7 +395,7 @@ func (o *WorkflowTaskDebugLog) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowTaskDebugLog := _WorkflowTaskDebugLog{}
 
-	err = json.Unmarshal(bytes, &varWorkflowTaskDebugLog)
+	err = json.Unmarshal(data, &varWorkflowTaskDebugLog)
 	if err == nil {
 		o.MoBaseMo = varWorkflowTaskDebugLog.MoBaseMo
 	} else {
@@ -352,7 +404,7 @@ func (o *WorkflowTaskDebugLog) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "RetryCount")

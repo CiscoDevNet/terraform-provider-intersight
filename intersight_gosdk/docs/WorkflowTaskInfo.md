@@ -24,10 +24,10 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | The status of the task and this will specify if the task is running or has reached a final state. | [optional] 
 **TaskInstIdList** | Pointer to [**[]WorkflowTaskRetryInfo**](WorkflowTaskRetryInfo.md) |  | [optional] 
 **TaskLoopInfo** | Pointer to [**NullableWorkflowTaskLoopInfo**](WorkflowTaskLoopInfo.md) |  | [optional] 
-**SubWorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**SubWorkflowInfo** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 **SubWorkflowRetryHistory** | Pointer to [**[]WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) | An array of relationships to workflowWorkflowInfo resources. | [optional] [readonly] 
-**TaskDefinition** | Pointer to [**WorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
-**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**TaskDefinition** | Pointer to [**NullableWorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
+**WorkflowInfo** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -613,6 +613,16 @@ SetSubWorkflowInfo sets SubWorkflowInfo field to given value.
 
 HasSubWorkflowInfo returns a boolean if a field has been set.
 
+### SetSubWorkflowInfoNil
+
+`func (o *WorkflowTaskInfo) SetSubWorkflowInfoNil(b bool)`
+
+ SetSubWorkflowInfoNil sets the value for SubWorkflowInfo to be an explicit nil
+
+### UnsetSubWorkflowInfo
+`func (o *WorkflowTaskInfo) UnsetSubWorkflowInfo()`
+
+UnsetSubWorkflowInfo ensures that no value is present for SubWorkflowInfo, not even an explicit nil
 ### GetSubWorkflowRetryHistory
 
 `func (o *WorkflowTaskInfo) GetSubWorkflowRetryHistory() []WorkflowWorkflowInfoRelationship`
@@ -673,6 +683,16 @@ SetTaskDefinition sets TaskDefinition field to given value.
 
 HasTaskDefinition returns a boolean if a field has been set.
 
+### SetTaskDefinitionNil
+
+`func (o *WorkflowTaskInfo) SetTaskDefinitionNil(b bool)`
+
+ SetTaskDefinitionNil sets the value for TaskDefinition to be an explicit nil
+
+### UnsetTaskDefinition
+`func (o *WorkflowTaskInfo) UnsetTaskDefinition()`
+
+UnsetTaskDefinition ensures that no value is present for TaskDefinition, not even an explicit nil
 ### GetWorkflowInfo
 
 `func (o *WorkflowTaskInfo) GetWorkflowInfo() WorkflowWorkflowInfoRelationship`
@@ -698,6 +718,16 @@ SetWorkflowInfo sets WorkflowInfo field to given value.
 
 HasWorkflowInfo returns a boolean if a field has been set.
 
+### SetWorkflowInfoNil
+
+`func (o *WorkflowTaskInfo) SetWorkflowInfoNil(b bool)`
+
+ SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+
+### UnsetWorkflowInfo
+`func (o *WorkflowTaskInfo) UnsetWorkflowInfo()`
+
+UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

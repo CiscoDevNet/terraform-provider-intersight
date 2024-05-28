@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowPrimitiveDataProperty type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowPrimitiveDataProperty{}
 
 // WorkflowPrimitiveDataProperty Capture all the properties for primitive data type.
 type WorkflowPrimitiveDataProperty struct {
@@ -112,7 +116,7 @@ func (o *WorkflowPrimitiveDataProperty) SetObjectType(v string) {
 
 // GetConstraints returns the Constraints field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowPrimitiveDataProperty) GetConstraints() WorkflowConstraints {
-	if o == nil || o.Constraints.Get() == nil {
+	if o == nil || IsNil(o.Constraints.Get()) {
 		var ret WorkflowConstraints
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *WorkflowPrimitiveDataProperty) GetInventorySelector() []WorkflowMoRefer
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowPrimitiveDataProperty) GetInventorySelectorOk() ([]WorkflowMoReferenceProperty, bool) {
-	if o == nil || o.InventorySelector == nil {
+	if o == nil || IsNil(o.InventorySelector) {
 		return nil, false
 	}
 	return o.InventorySelector, true
@@ -174,7 +178,7 @@ func (o *WorkflowPrimitiveDataProperty) GetInventorySelectorOk() ([]WorkflowMoRe
 
 // HasInventorySelector returns a boolean if a field has been set.
 func (o *WorkflowPrimitiveDataProperty) HasInventorySelector() bool {
-	if o != nil && o.InventorySelector != nil {
+	if o != nil && IsNil(o.InventorySelector) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *WorkflowPrimitiveDataProperty) SetInventorySelector(v []WorkflowMoRefer
 
 // GetSecure returns the Secure field value if set, zero value otherwise.
 func (o *WorkflowPrimitiveDataProperty) GetSecure() bool {
-	if o == nil || o.Secure == nil {
+	if o == nil || IsNil(o.Secure) {
 		var ret bool
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *WorkflowPrimitiveDataProperty) GetSecure() bool {
 // GetSecureOk returns a tuple with the Secure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowPrimitiveDataProperty) GetSecureOk() (*bool, bool) {
-	if o == nil || o.Secure == nil {
+	if o == nil || IsNil(o.Secure) {
 		return nil, false
 	}
 	return o.Secure, true
@@ -206,7 +210,7 @@ func (o *WorkflowPrimitiveDataProperty) GetSecureOk() (*bool, bool) {
 
 // HasSecure returns a boolean if a field has been set.
 func (o *WorkflowPrimitiveDataProperty) HasSecure() bool {
-	if o != nil && o.Secure != nil {
+	if o != nil && !IsNil(o.Secure) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *WorkflowPrimitiveDataProperty) SetSecure(v bool) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *WorkflowPrimitiveDataProperty) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *WorkflowPrimitiveDataProperty) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowPrimitiveDataProperty) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -238,7 +242,7 @@ func (o *WorkflowPrimitiveDataProperty) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *WorkflowPrimitiveDataProperty) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -251,31 +255,35 @@ func (o *WorkflowPrimitiveDataProperty) SetType(v string) {
 }
 
 func (o WorkflowPrimitiveDataProperty) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowPrimitiveDataProperty) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Constraints.IsSet() {
 		toSerialize["Constraints"] = o.Constraints.Get()
 	}
 	if o.InventorySelector != nil {
 		toSerialize["InventorySelector"] = o.InventorySelector
 	}
-	if o.Secure != nil {
+	if !IsNil(o.Secure) {
 		toSerialize["Secure"] = o.Secure
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 
@@ -283,10 +291,32 @@ func (o WorkflowPrimitiveDataProperty) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowPrimitiveDataProperty) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowPrimitiveDataProperty) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowPrimitiveDataPropertyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -302,7 +332,7 @@ func (o *WorkflowPrimitiveDataProperty) UnmarshalJSON(bytes []byte) (err error) 
 
 	varWorkflowPrimitiveDataPropertyWithoutEmbeddedStruct := WorkflowPrimitiveDataPropertyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowPrimitiveDataPropertyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowPrimitiveDataPropertyWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowPrimitiveDataProperty := _WorkflowPrimitiveDataProperty{}
 		varWorkflowPrimitiveDataProperty.ClassId = varWorkflowPrimitiveDataPropertyWithoutEmbeddedStruct.ClassId
@@ -318,7 +348,7 @@ func (o *WorkflowPrimitiveDataProperty) UnmarshalJSON(bytes []byte) (err error) 
 
 	varWorkflowPrimitiveDataProperty := _WorkflowPrimitiveDataProperty{}
 
-	err = json.Unmarshal(bytes, &varWorkflowPrimitiveDataProperty)
+	err = json.Unmarshal(data, &varWorkflowPrimitiveDataProperty)
 	if err == nil {
 		o.MoBaseComplexType = varWorkflowPrimitiveDataProperty.MoBaseComplexType
 	} else {
@@ -327,7 +357,7 @@ func (o *WorkflowPrimitiveDataProperty) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Constraints")

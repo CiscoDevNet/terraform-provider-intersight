@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppAggregateEvent"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppAggregateEvent"]
-**Aggregate** | Pointer to [**StorageNetAppAggregateRelationship**](StorageNetAppAggregateRelationship.md) |  | [optional] 
+**Aggregate** | Pointer to [**NullableStorageNetAppAggregateRelationship**](StorageNetAppAggregateRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetAggregate sets Aggregate field to given value.
 
 HasAggregate returns a boolean if a field has been set.
 
+### SetAggregateNil
+
+`func (o *StorageNetAppAggregateEvent) SetAggregateNil(b bool)`
+
+ SetAggregateNil sets the value for Aggregate to be an explicit nil
+
+### UnsetAggregate
+`func (o *StorageNetAppAggregateEvent) UnsetAggregate()`
+
+UnsetAggregate ensures that no value is present for Aggregate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

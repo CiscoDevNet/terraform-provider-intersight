@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationCloudVmConfiguration type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationCloudVmConfiguration{}
 
 // VirtualizationCloudVmConfiguration Specify Aws virtual machine configuration data.
 type VirtualizationCloudVmConfiguration struct {
@@ -116,7 +120,7 @@ func (o *VirtualizationCloudVmConfiguration) SetObjectType(v string) {
 
 // GetAvailabilityZoneId returns the AvailabilityZoneId field value if set, zero value otherwise.
 func (o *VirtualizationCloudVmConfiguration) GetAvailabilityZoneId() string {
-	if o == nil || o.AvailabilityZoneId == nil {
+	if o == nil || IsNil(o.AvailabilityZoneId) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *VirtualizationCloudVmConfiguration) GetAvailabilityZoneId() string {
 // GetAvailabilityZoneIdOk returns a tuple with the AvailabilityZoneId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationCloudVmConfiguration) GetAvailabilityZoneIdOk() (*string, bool) {
-	if o == nil || o.AvailabilityZoneId == nil {
+	if o == nil || IsNil(o.AvailabilityZoneId) {
 		return nil, false
 	}
 	return o.AvailabilityZoneId, true
@@ -134,7 +138,7 @@ func (o *VirtualizationCloudVmConfiguration) GetAvailabilityZoneIdOk() (*string,
 
 // HasAvailabilityZoneId returns a boolean if a field has been set.
 func (o *VirtualizationCloudVmConfiguration) HasAvailabilityZoneId() bool {
-	if o != nil && o.AvailabilityZoneId != nil {
+	if o != nil && !IsNil(o.AvailabilityZoneId) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *VirtualizationCloudVmConfiguration) SetAvailabilityZoneId(v string) {
 
 // GetCompute returns the Compute field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationCloudVmConfiguration) GetCompute() VirtualizationCloudVmComputeConfiguration {
-	if o == nil || o.Compute.Get() == nil {
+	if o == nil || IsNil(o.Compute.Get()) {
 		var ret VirtualizationCloudVmComputeConfiguration
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *VirtualizationCloudVmConfiguration) UnsetCompute() {
 
 // GetImageId returns the ImageId field value if set, zero value otherwise.
 func (o *VirtualizationCloudVmConfiguration) GetImageId() string {
-	if o == nil || o.ImageId == nil {
+	if o == nil || IsNil(o.ImageId) {
 		var ret string
 		return ret
 	}
@@ -201,7 +205,7 @@ func (o *VirtualizationCloudVmConfiguration) GetImageId() string {
 // GetImageIdOk returns a tuple with the ImageId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationCloudVmConfiguration) GetImageIdOk() (*string, bool) {
-	if o == nil || o.ImageId == nil {
+	if o == nil || IsNil(o.ImageId) {
 		return nil, false
 	}
 	return o.ImageId, true
@@ -209,7 +213,7 @@ func (o *VirtualizationCloudVmConfiguration) GetImageIdOk() (*string, bool) {
 
 // HasImageId returns a boolean if a field has been set.
 func (o *VirtualizationCloudVmConfiguration) HasImageId() bool {
-	if o != nil && o.ImageId != nil {
+	if o != nil && !IsNil(o.ImageId) {
 		return true
 	}
 
@@ -223,7 +227,7 @@ func (o *VirtualizationCloudVmConfiguration) SetImageId(v string) {
 
 // GetKeyPairName returns the KeyPairName field value if set, zero value otherwise.
 func (o *VirtualizationCloudVmConfiguration) GetKeyPairName() string {
-	if o == nil || o.KeyPairName == nil {
+	if o == nil || IsNil(o.KeyPairName) {
 		var ret string
 		return ret
 	}
@@ -233,7 +237,7 @@ func (o *VirtualizationCloudVmConfiguration) GetKeyPairName() string {
 // GetKeyPairNameOk returns a tuple with the KeyPairName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationCloudVmConfiguration) GetKeyPairNameOk() (*string, bool) {
-	if o == nil || o.KeyPairName == nil {
+	if o == nil || IsNil(o.KeyPairName) {
 		return nil, false
 	}
 	return o.KeyPairName, true
@@ -241,7 +245,7 @@ func (o *VirtualizationCloudVmConfiguration) GetKeyPairNameOk() (*string, bool) 
 
 // HasKeyPairName returns a boolean if a field has been set.
 func (o *VirtualizationCloudVmConfiguration) HasKeyPairName() bool {
-	if o != nil && o.KeyPairName != nil {
+	if o != nil && !IsNil(o.KeyPairName) {
 		return true
 	}
 
@@ -255,7 +259,7 @@ func (o *VirtualizationCloudVmConfiguration) SetKeyPairName(v string) {
 
 // GetNetwork returns the Network field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationCloudVmConfiguration) GetNetwork() VirtualizationCloudVmNetworkConfiguration {
-	if o == nil || o.Network.Get() == nil {
+	if o == nil || IsNil(o.Network.Get()) {
 		var ret VirtualizationCloudVmNetworkConfiguration
 		return ret
 	}
@@ -298,7 +302,7 @@ func (o *VirtualizationCloudVmConfiguration) UnsetNetwork() {
 
 // GetRegionId returns the RegionId field value if set, zero value otherwise.
 func (o *VirtualizationCloudVmConfiguration) GetRegionId() string {
-	if o == nil || o.RegionId == nil {
+	if o == nil || IsNil(o.RegionId) {
 		var ret string
 		return ret
 	}
@@ -308,7 +312,7 @@ func (o *VirtualizationCloudVmConfiguration) GetRegionId() string {
 // GetRegionIdOk returns a tuple with the RegionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationCloudVmConfiguration) GetRegionIdOk() (*string, bool) {
-	if o == nil || o.RegionId == nil {
+	if o == nil || IsNil(o.RegionId) {
 		return nil, false
 	}
 	return o.RegionId, true
@@ -316,7 +320,7 @@ func (o *VirtualizationCloudVmConfiguration) GetRegionIdOk() (*string, bool) {
 
 // HasRegionId returns a boolean if a field has been set.
 func (o *VirtualizationCloudVmConfiguration) HasRegionId() bool {
-	if o != nil && o.RegionId != nil {
+	if o != nil && !IsNil(o.RegionId) {
 		return true
 	}
 
@@ -341,7 +345,7 @@ func (o *VirtualizationCloudVmConfiguration) GetSecurityGroups() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationCloudVmConfiguration) GetSecurityGroupsOk() ([]string, bool) {
-	if o == nil || o.SecurityGroups == nil {
+	if o == nil || IsNil(o.SecurityGroups) {
 		return nil, false
 	}
 	return o.SecurityGroups, true
@@ -349,7 +353,7 @@ func (o *VirtualizationCloudVmConfiguration) GetSecurityGroupsOk() ([]string, bo
 
 // HasSecurityGroups returns a boolean if a field has been set.
 func (o *VirtualizationCloudVmConfiguration) HasSecurityGroups() bool {
-	if o != nil && o.SecurityGroups != nil {
+	if o != nil && IsNil(o.SecurityGroups) {
 		return true
 	}
 
@@ -363,7 +367,7 @@ func (o *VirtualizationCloudVmConfiguration) SetSecurityGroups(v []string) {
 
 // GetStorage returns the Storage field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationCloudVmConfiguration) GetStorage() VirtualizationCloudVmStorageConfiguration {
-	if o == nil || o.Storage.Get() == nil {
+	if o == nil || IsNil(o.Storage.Get()) {
 		var ret VirtualizationCloudVmStorageConfiguration
 		return ret
 	}
@@ -406,7 +410,7 @@ func (o *VirtualizationCloudVmConfiguration) UnsetStorage() {
 
 // GetVmId returns the VmId field value if set, zero value otherwise.
 func (o *VirtualizationCloudVmConfiguration) GetVmId() string {
-	if o == nil || o.VmId == nil {
+	if o == nil || IsNil(o.VmId) {
 		var ret string
 		return ret
 	}
@@ -416,7 +420,7 @@ func (o *VirtualizationCloudVmConfiguration) GetVmId() string {
 // GetVmIdOk returns a tuple with the VmId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationCloudVmConfiguration) GetVmIdOk() (*string, bool) {
-	if o == nil || o.VmId == nil {
+	if o == nil || IsNil(o.VmId) {
 		return nil, false
 	}
 	return o.VmId, true
@@ -424,7 +428,7 @@ func (o *VirtualizationCloudVmConfiguration) GetVmIdOk() (*string, bool) {
 
 // HasVmId returns a boolean if a field has been set.
 func (o *VirtualizationCloudVmConfiguration) HasVmId() bool {
-	if o != nil && o.VmId != nil {
+	if o != nil && !IsNil(o.VmId) {
 		return true
 	}
 
@@ -437,37 +441,41 @@ func (o *VirtualizationCloudVmConfiguration) SetVmId(v string) {
 }
 
 func (o VirtualizationCloudVmConfiguration) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationCloudVmConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseVmConfiguration, errVirtualizationBaseVmConfiguration := json.Marshal(o.VirtualizationBaseVmConfiguration)
 	if errVirtualizationBaseVmConfiguration != nil {
-		return []byte{}, errVirtualizationBaseVmConfiguration
+		return map[string]interface{}{}, errVirtualizationBaseVmConfiguration
 	}
 	errVirtualizationBaseVmConfiguration = json.Unmarshal([]byte(serializedVirtualizationBaseVmConfiguration), &toSerialize)
 	if errVirtualizationBaseVmConfiguration != nil {
-		return []byte{}, errVirtualizationBaseVmConfiguration
+		return map[string]interface{}{}, errVirtualizationBaseVmConfiguration
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AvailabilityZoneId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AvailabilityZoneId) {
 		toSerialize["AvailabilityZoneId"] = o.AvailabilityZoneId
 	}
 	if o.Compute.IsSet() {
 		toSerialize["Compute"] = o.Compute.Get()
 	}
-	if o.ImageId != nil {
+	if !IsNil(o.ImageId) {
 		toSerialize["ImageId"] = o.ImageId
 	}
-	if o.KeyPairName != nil {
+	if !IsNil(o.KeyPairName) {
 		toSerialize["KeyPairName"] = o.KeyPairName
 	}
 	if o.Network.IsSet() {
 		toSerialize["Network"] = o.Network.Get()
 	}
-	if o.RegionId != nil {
+	if !IsNil(o.RegionId) {
 		toSerialize["RegionId"] = o.RegionId
 	}
 	if o.SecurityGroups != nil {
@@ -476,7 +484,7 @@ func (o VirtualizationCloudVmConfiguration) MarshalJSON() ([]byte, error) {
 	if o.Storage.IsSet() {
 		toSerialize["Storage"] = o.Storage.Get()
 	}
-	if o.VmId != nil {
+	if !IsNil(o.VmId) {
 		toSerialize["VmId"] = o.VmId
 	}
 
@@ -484,10 +492,32 @@ func (o VirtualizationCloudVmConfiguration) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationCloudVmConfiguration) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationCloudVmConfiguration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationCloudVmConfigurationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -511,7 +541,7 @@ func (o *VirtualizationCloudVmConfiguration) UnmarshalJSON(bytes []byte) (err er
 
 	varVirtualizationCloudVmConfigurationWithoutEmbeddedStruct := VirtualizationCloudVmConfigurationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationCloudVmConfigurationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationCloudVmConfigurationWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationCloudVmConfiguration := _VirtualizationCloudVmConfiguration{}
 		varVirtualizationCloudVmConfiguration.ClassId = varVirtualizationCloudVmConfigurationWithoutEmbeddedStruct.ClassId
@@ -532,7 +562,7 @@ func (o *VirtualizationCloudVmConfiguration) UnmarshalJSON(bytes []byte) (err er
 
 	varVirtualizationCloudVmConfiguration := _VirtualizationCloudVmConfiguration{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationCloudVmConfiguration)
+	err = json.Unmarshal(data, &varVirtualizationCloudVmConfiguration)
 	if err == nil {
 		o.VirtualizationBaseVmConfiguration = varVirtualizationCloudVmConfiguration.VirtualizationBaseVmConfiguration
 	} else {
@@ -541,7 +571,7 @@ func (o *VirtualizationCloudVmConfiguration) UnmarshalJSON(bytes []byte) (err er
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AvailabilityZoneId")

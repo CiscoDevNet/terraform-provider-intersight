@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SoftwarerepositoryCategorySupportConstraint type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwarerepositoryCategorySupportConstraint{}
 
 // SoftwarerepositoryCategorySupportConstraint Defines constraints for models which are supported from certain minimum image version.
 type SoftwarerepositoryCategorySupportConstraint struct {
@@ -112,7 +116,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) SetObjectType(v string) {
 
 // GetConstraintId returns the ConstraintId field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategorySupportConstraint) GetConstraintId() string {
-	if o == nil || o.ConstraintId == nil {
+	if o == nil || IsNil(o.ConstraintId) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetConstraintId() string {
 // GetConstraintIdOk returns a tuple with the ConstraintId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategorySupportConstraint) GetConstraintIdOk() (*string, bool) {
-	if o == nil || o.ConstraintId == nil {
+	if o == nil || IsNil(o.ConstraintId) {
 		return nil, false
 	}
 	return o.ConstraintId, true
@@ -130,7 +134,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetConstraintIdOk() (*stri
 
 // HasConstraintId returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategorySupportConstraint) HasConstraintId() bool {
-	if o != nil && o.ConstraintId != nil {
+	if o != nil && !IsNil(o.ConstraintId) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetFilteredModels() []Soft
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryCategorySupportConstraint) GetFilteredModelsOk() ([]SoftwarerepositoryConstraintModels, bool) {
-	if o == nil || o.FilteredModels == nil {
+	if o == nil || IsNil(o.FilteredModels) {
 		return nil, false
 	}
 	return o.FilteredModels, true
@@ -163,7 +167,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetFilteredModelsOk() ([]S
 
 // HasFilteredModels returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategorySupportConstraint) HasFilteredModels() bool {
-	if o != nil && o.FilteredModels != nil {
+	if o != nil && IsNil(o.FilteredModels) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) SetFilteredModels(v []Soft
 
 // GetMdfId returns the MdfId field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategorySupportConstraint) GetMdfId() string {
-	if o == nil || o.MdfId == nil {
+	if o == nil || IsNil(o.MdfId) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetMdfId() string {
 // GetMdfIdOk returns a tuple with the MdfId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategorySupportConstraint) GetMdfIdOk() (*string, bool) {
-	if o == nil || o.MdfId == nil {
+	if o == nil || IsNil(o.MdfId) {
 		return nil, false
 	}
 	return o.MdfId, true
@@ -195,7 +199,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetMdfIdOk() (*string, boo
 
 // HasMdfId returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategorySupportConstraint) HasMdfId() bool {
-	if o != nil && o.MdfId != nil {
+	if o != nil && !IsNil(o.MdfId) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) SetMdfId(v string) {
 
 // GetMinVersion returns the MinVersion field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategorySupportConstraint) GetMinVersion() string {
-	if o == nil || o.MinVersion == nil {
+	if o == nil || IsNil(o.MinVersion) {
 		var ret string
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetMinVersion() string {
 // GetMinVersionOk returns a tuple with the MinVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategorySupportConstraint) GetMinVersionOk() (*string, bool) {
-	if o == nil || o.MinVersion == nil {
+	if o == nil || IsNil(o.MinVersion) {
 		return nil, false
 	}
 	return o.MinVersion, true
@@ -227,7 +231,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetMinVersionOk() (*string
 
 // HasMinVersion returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategorySupportConstraint) HasMinVersion() bool {
-	if o != nil && o.MinVersion != nil {
+	if o != nil && !IsNil(o.MinVersion) {
 		return true
 	}
 
@@ -241,7 +245,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) SetMinVersion(v string) {
 
 // GetParseFromImageName returns the ParseFromImageName field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCategorySupportConstraint) GetParseFromImageName() bool {
-	if o == nil || o.ParseFromImageName == nil {
+	if o == nil || IsNil(o.ParseFromImageName) {
 		var ret bool
 		return ret
 	}
@@ -251,7 +255,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetParseFromImageName() bo
 // GetParseFromImageNameOk returns a tuple with the ParseFromImageName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCategorySupportConstraint) GetParseFromImageNameOk() (*bool, bool) {
-	if o == nil || o.ParseFromImageName == nil {
+	if o == nil || IsNil(o.ParseFromImageName) {
 		return nil, false
 	}
 	return o.ParseFromImageName, true
@@ -259,7 +263,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetParseFromImageNameOk() 
 
 // HasParseFromImageName returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategorySupportConstraint) HasParseFromImageName() bool {
-	if o != nil && o.ParseFromImageName != nil {
+	if o != nil && !IsNil(o.ParseFromImageName) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetSupportedModels() []str
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryCategorySupportConstraint) GetSupportedModelsOk() ([]string, bool) {
-	if o == nil || o.SupportedModels == nil {
+	if o == nil || IsNil(o.SupportedModels) {
 		return nil, false
 	}
 	return o.SupportedModels, true
@@ -292,7 +296,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) GetSupportedModelsOk() ([]
 
 // HasSupportedModels returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCategorySupportConstraint) HasSupportedModels() bool {
-	if o != nil && o.SupportedModels != nil {
+	if o != nil && IsNil(o.SupportedModels) {
 		return true
 	}
 
@@ -305,34 +309,38 @@ func (o *SoftwarerepositoryCategorySupportConstraint) SetSupportedModels(v []str
 }
 
 func (o SoftwarerepositoryCategorySupportConstraint) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwarerepositoryCategorySupportConstraint) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityCapability, errCapabilityCapability := json.Marshal(o.CapabilityCapability)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
 	errCapabilityCapability = json.Unmarshal([]byte(serializedCapabilityCapability), &toSerialize)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConstraintId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConstraintId) {
 		toSerialize["ConstraintId"] = o.ConstraintId
 	}
 	if o.FilteredModels != nil {
 		toSerialize["FilteredModels"] = o.FilteredModels
 	}
-	if o.MdfId != nil {
+	if !IsNil(o.MdfId) {
 		toSerialize["MdfId"] = o.MdfId
 	}
-	if o.MinVersion != nil {
+	if !IsNil(o.MinVersion) {
 		toSerialize["MinVersion"] = o.MinVersion
 	}
-	if o.ParseFromImageName != nil {
+	if !IsNil(o.ParseFromImageName) {
 		toSerialize["ParseFromImageName"] = o.ParseFromImageName
 	}
 	if o.SupportedModels != nil {
@@ -343,10 +351,32 @@ func (o SoftwarerepositoryCategorySupportConstraint) MarshalJSON() ([]byte, erro
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwarerepositoryCategorySupportConstraint) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwarerepositoryCategorySupportConstraint) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwarerepositoryCategorySupportConstraintWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -366,7 +396,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) UnmarshalJSON(bytes []byte
 
 	varSoftwarerepositoryCategorySupportConstraintWithoutEmbeddedStruct := SoftwarerepositoryCategorySupportConstraintWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryCategorySupportConstraintWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwarerepositoryCategorySupportConstraintWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwarerepositoryCategorySupportConstraint := _SoftwarerepositoryCategorySupportConstraint{}
 		varSoftwarerepositoryCategorySupportConstraint.ClassId = varSoftwarerepositoryCategorySupportConstraintWithoutEmbeddedStruct.ClassId
@@ -384,7 +414,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) UnmarshalJSON(bytes []byte
 
 	varSoftwarerepositoryCategorySupportConstraint := _SoftwarerepositoryCategorySupportConstraint{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryCategorySupportConstraint)
+	err = json.Unmarshal(data, &varSoftwarerepositoryCategorySupportConstraint)
 	if err == nil {
 		o.CapabilityCapability = varSoftwarerepositoryCategorySupportConstraint.CapabilityCapability
 	} else {
@@ -393,7 +423,7 @@ func (o *SoftwarerepositoryCategorySupportConstraint) UnmarshalJSON(bytes []byte
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConstraintId")

@@ -26,9 +26,9 @@ Name | Type | Description | Notes
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **VariableDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
 **Version** | Pointer to **int64** | The version of the workflow to support multiple versions. | [optional] [default to 1]
-**Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
-**ClonedFrom** | Pointer to [**WorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
-**WorkflowMetadata** | Pointer to [**WorkflowWorkflowMetadataRelationship**](WorkflowWorkflowMetadataRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableWorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
+**ClonedFrom** | Pointer to [**NullableWorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
+**WorkflowMetadata** | Pointer to [**NullableWorkflowWorkflowMetadataRelationship**](WorkflowWorkflowMetadataRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -714,6 +714,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *WorkflowWorkflowDefinition) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *WorkflowWorkflowDefinition) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 ### GetClonedFrom
 
 `func (o *WorkflowWorkflowDefinition) GetClonedFrom() WorkflowWorkflowDefinitionRelationship`
@@ -739,6 +749,16 @@ SetClonedFrom sets ClonedFrom field to given value.
 
 HasClonedFrom returns a boolean if a field has been set.
 
+### SetClonedFromNil
+
+`func (o *WorkflowWorkflowDefinition) SetClonedFromNil(b bool)`
+
+ SetClonedFromNil sets the value for ClonedFrom to be an explicit nil
+
+### UnsetClonedFrom
+`func (o *WorkflowWorkflowDefinition) UnsetClonedFrom()`
+
+UnsetClonedFrom ensures that no value is present for ClonedFrom, not even an explicit nil
 ### GetWorkflowMetadata
 
 `func (o *WorkflowWorkflowDefinition) GetWorkflowMetadata() WorkflowWorkflowMetadataRelationship`
@@ -764,6 +784,16 @@ SetWorkflowMetadata sets WorkflowMetadata field to given value.
 
 HasWorkflowMetadata returns a boolean if a field has been set.
 
+### SetWorkflowMetadataNil
+
+`func (o *WorkflowWorkflowDefinition) SetWorkflowMetadataNil(b bool)`
+
+ SetWorkflowMetadataNil sets the value for WorkflowMetadata to be an explicit nil
+
+### UnsetWorkflowMetadata
+`func (o *WorkflowWorkflowDefinition) UnsetWorkflowMetadata()`
+
+UnsetWorkflowMetadata ensures that no value is present for WorkflowMetadata, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

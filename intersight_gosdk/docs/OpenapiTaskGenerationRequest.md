@@ -17,9 +17,9 @@ Name | Type | Description | Notes
 **TaskPrefix** | Pointer to **string** | Optional string that can be prefixed to the name of created tasks. | [optional] 
 **TaskTags** | Pointer to [**[]OpenapiKeyValuePair**](OpenapiKeyValuePair.md) |  | [optional] 
 **Url** | Pointer to **string** | Specifies the URL of the endpoint that the created task communicates with. It is defaulted to intersight.com for internal endpoints. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Source** | Pointer to [**OpenapiProcessFileRelationship**](OpenapiProcessFileRelationship.md) |  | [optional] 
-**Workflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Source** | Pointer to [**NullableOpenapiProcessFileRelationship**](OpenapiProcessFileRelationship.md) |  | [optional] 
+**Workflow** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -430,6 +430,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *OpenapiTaskGenerationRequest) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *OpenapiTaskGenerationRequest) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetSource
 
 `func (o *OpenapiTaskGenerationRequest) GetSource() OpenapiProcessFileRelationship`
@@ -455,6 +465,16 @@ SetSource sets Source field to given value.
 
 HasSource returns a boolean if a field has been set.
 
+### SetSourceNil
+
+`func (o *OpenapiTaskGenerationRequest) SetSourceNil(b bool)`
+
+ SetSourceNil sets the value for Source to be an explicit nil
+
+### UnsetSource
+`func (o *OpenapiTaskGenerationRequest) UnsetSource()`
+
+UnsetSource ensures that no value is present for Source, not even an explicit nil
 ### GetWorkflow
 
 `func (o *OpenapiTaskGenerationRequest) GetWorkflow() WorkflowWorkflowInfoRelationship`
@@ -480,6 +500,16 @@ SetWorkflow sets Workflow field to given value.
 
 HasWorkflow returns a boolean if a field has been set.
 
+### SetWorkflowNil
+
+`func (o *OpenapiTaskGenerationRequest) SetWorkflowNil(b bool)`
+
+ SetWorkflowNil sets the value for Workflow to be an explicit nil
+
+### UnsetWorkflow
+`func (o *OpenapiTaskGenerationRequest) UnsetWorkflow()`
+
+UnsetWorkflow ensures that no value is present for Workflow, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

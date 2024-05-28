@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the SchedulerTaskSchedule type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SchedulerTaskSchedule{}
 
 // SchedulerTaskSchedule Metadata used to schedule one-time or repeated tasks.
 type SchedulerTaskSchedule struct {
@@ -38,10 +42,10 @@ type SchedulerTaskSchedule struct {
 	// Suspend a task until an end date. this applies only to the action suspendTill.
 	SuspendEndTime *time.Time                    `json:"SuspendEndTime,omitempty"`
 	TaskRequest    *SchedulerRestStimTaskRequest `json:"TaskRequest,omitempty"`
-	// An Enum describing the type of scheduler to use. * `None` - No value was set for the schedule type (Enum value None). * `OneTime` - Define a one-time task execution time that will not automatically repeat. * `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, yearly, or every <interval> pattern.
-	Type                 *string                                 `json:"Type,omitempty"`
-	AssociatedObject     *MoBaseMoRelationship                   `json:"AssociatedObject,omitempty"`
-	WorkflowDefinition   *WorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
+	// An Enum describing the type of scheduler to use. * `None` - No value was set for the schedule type (Enum value None). * `OneTime` - Define a one-time task execution time that will not automatically repeat. * `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, yearly, or every <interval> pattern. This option is not currently supported.
+	Type                 *string                                        `json:"Type,omitempty"`
+	AssociatedObject     NullableMoBaseMoRelationship                   `json:"AssociatedObject,omitempty"`
+	WorkflowDefinition   NullableWorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -128,7 +132,7 @@ func (o *SchedulerTaskSchedule) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *SchedulerTaskSchedule) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -138,7 +142,7 @@ func (o *SchedulerTaskSchedule) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskSchedule) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -146,7 +150,7 @@ func (o *SchedulerTaskSchedule) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *SchedulerTaskSchedule) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *SchedulerTaskSchedule) SetAction(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *SchedulerTaskSchedule) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *SchedulerTaskSchedule) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskSchedule) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -178,7 +182,7 @@ func (o *SchedulerTaskSchedule) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *SchedulerTaskSchedule) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *SchedulerTaskSchedule) SetDescription(v string) {
 
 // GetLastAction returns the LastAction field value if set, zero value otherwise.
 func (o *SchedulerTaskSchedule) GetLastAction() string {
-	if o == nil || o.LastAction == nil {
+	if o == nil || IsNil(o.LastAction) {
 		var ret string
 		return ret
 	}
@@ -202,7 +206,7 @@ func (o *SchedulerTaskSchedule) GetLastAction() string {
 // GetLastActionOk returns a tuple with the LastAction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskSchedule) GetLastActionOk() (*string, bool) {
-	if o == nil || o.LastAction == nil {
+	if o == nil || IsNil(o.LastAction) {
 		return nil, false
 	}
 	return o.LastAction, true
@@ -210,7 +214,7 @@ func (o *SchedulerTaskSchedule) GetLastActionOk() (*string, bool) {
 
 // HasLastAction returns a boolean if a field has been set.
 func (o *SchedulerTaskSchedule) HasLastAction() bool {
-	if o != nil && o.LastAction != nil {
+	if o != nil && !IsNil(o.LastAction) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *SchedulerTaskSchedule) SetLastAction(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *SchedulerTaskSchedule) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -234,7 +238,7 @@ func (o *SchedulerTaskSchedule) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskSchedule) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -242,7 +246,7 @@ func (o *SchedulerTaskSchedule) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *SchedulerTaskSchedule) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *SchedulerTaskSchedule) SetName(v string) {
 
 // GetScheduleParams returns the ScheduleParams field value if set, zero value otherwise.
 func (o *SchedulerTaskSchedule) GetScheduleParams() SchedulerBaseScheduleParams {
-	if o == nil || o.ScheduleParams == nil {
+	if o == nil || IsNil(o.ScheduleParams) {
 		var ret SchedulerBaseScheduleParams
 		return ret
 	}
@@ -266,7 +270,7 @@ func (o *SchedulerTaskSchedule) GetScheduleParams() SchedulerBaseScheduleParams 
 // GetScheduleParamsOk returns a tuple with the ScheduleParams field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskSchedule) GetScheduleParamsOk() (*SchedulerBaseScheduleParams, bool) {
-	if o == nil || o.ScheduleParams == nil {
+	if o == nil || IsNil(o.ScheduleParams) {
 		return nil, false
 	}
 	return o.ScheduleParams, true
@@ -274,7 +278,7 @@ func (o *SchedulerTaskSchedule) GetScheduleParamsOk() (*SchedulerBaseSchedulePar
 
 // HasScheduleParams returns a boolean if a field has been set.
 func (o *SchedulerTaskSchedule) HasScheduleParams() bool {
-	if o != nil && o.ScheduleParams != nil {
+	if o != nil && !IsNil(o.ScheduleParams) {
 		return true
 	}
 
@@ -288,7 +292,7 @@ func (o *SchedulerTaskSchedule) SetScheduleParams(v SchedulerBaseScheduleParams)
 
 // GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SchedulerTaskSchedule) GetStatus() SchedulerTaskScheduleStatus {
-	if o == nil || o.Status.Get() == nil {
+	if o == nil || IsNil(o.Status.Get()) {
 		var ret SchedulerTaskScheduleStatus
 		return ret
 	}
@@ -331,7 +335,7 @@ func (o *SchedulerTaskSchedule) UnsetStatus() {
 
 // GetSuspendEndTime returns the SuspendEndTime field value if set, zero value otherwise.
 func (o *SchedulerTaskSchedule) GetSuspendEndTime() time.Time {
-	if o == nil || o.SuspendEndTime == nil {
+	if o == nil || IsNil(o.SuspendEndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -341,7 +345,7 @@ func (o *SchedulerTaskSchedule) GetSuspendEndTime() time.Time {
 // GetSuspendEndTimeOk returns a tuple with the SuspendEndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskSchedule) GetSuspendEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.SuspendEndTime == nil {
+	if o == nil || IsNil(o.SuspendEndTime) {
 		return nil, false
 	}
 	return o.SuspendEndTime, true
@@ -349,7 +353,7 @@ func (o *SchedulerTaskSchedule) GetSuspendEndTimeOk() (*time.Time, bool) {
 
 // HasSuspendEndTime returns a boolean if a field has been set.
 func (o *SchedulerTaskSchedule) HasSuspendEndTime() bool {
-	if o != nil && o.SuspendEndTime != nil {
+	if o != nil && !IsNil(o.SuspendEndTime) {
 		return true
 	}
 
@@ -363,7 +367,7 @@ func (o *SchedulerTaskSchedule) SetSuspendEndTime(v time.Time) {
 
 // GetTaskRequest returns the TaskRequest field value if set, zero value otherwise.
 func (o *SchedulerTaskSchedule) GetTaskRequest() SchedulerRestStimTaskRequest {
-	if o == nil || o.TaskRequest == nil {
+	if o == nil || IsNil(o.TaskRequest) {
 		var ret SchedulerRestStimTaskRequest
 		return ret
 	}
@@ -373,7 +377,7 @@ func (o *SchedulerTaskSchedule) GetTaskRequest() SchedulerRestStimTaskRequest {
 // GetTaskRequestOk returns a tuple with the TaskRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskSchedule) GetTaskRequestOk() (*SchedulerRestStimTaskRequest, bool) {
-	if o == nil || o.TaskRequest == nil {
+	if o == nil || IsNil(o.TaskRequest) {
 		return nil, false
 	}
 	return o.TaskRequest, true
@@ -381,7 +385,7 @@ func (o *SchedulerTaskSchedule) GetTaskRequestOk() (*SchedulerRestStimTaskReques
 
 // HasTaskRequest returns a boolean if a field has been set.
 func (o *SchedulerTaskSchedule) HasTaskRequest() bool {
-	if o != nil && o.TaskRequest != nil {
+	if o != nil && !IsNil(o.TaskRequest) {
 		return true
 	}
 
@@ -395,7 +399,7 @@ func (o *SchedulerTaskSchedule) SetTaskRequest(v SchedulerRestStimTaskRequest) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *SchedulerTaskSchedule) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -405,7 +409,7 @@ func (o *SchedulerTaskSchedule) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SchedulerTaskSchedule) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -413,7 +417,7 @@ func (o *SchedulerTaskSchedule) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *SchedulerTaskSchedule) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -425,128 +429,176 @@ func (o *SchedulerTaskSchedule) SetType(v string) {
 	o.Type = &v
 }
 
-// GetAssociatedObject returns the AssociatedObject field value if set, zero value otherwise.
+// GetAssociatedObject returns the AssociatedObject field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SchedulerTaskSchedule) GetAssociatedObject() MoBaseMoRelationship {
-	if o == nil || o.AssociatedObject == nil {
+	if o == nil || IsNil(o.AssociatedObject.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.AssociatedObject
+	return *o.AssociatedObject.Get()
 }
 
 // GetAssociatedObjectOk returns a tuple with the AssociatedObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SchedulerTaskSchedule) GetAssociatedObjectOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.AssociatedObject == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssociatedObject, true
+	return o.AssociatedObject.Get(), o.AssociatedObject.IsSet()
 }
 
 // HasAssociatedObject returns a boolean if a field has been set.
 func (o *SchedulerTaskSchedule) HasAssociatedObject() bool {
-	if o != nil && o.AssociatedObject != nil {
+	if o != nil && o.AssociatedObject.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssociatedObject gets a reference to the given MoBaseMoRelationship and assigns it to the AssociatedObject field.
+// SetAssociatedObject gets a reference to the given NullableMoBaseMoRelationship and assigns it to the AssociatedObject field.
 func (o *SchedulerTaskSchedule) SetAssociatedObject(v MoBaseMoRelationship) {
-	o.AssociatedObject = &v
+	o.AssociatedObject.Set(&v)
 }
 
-// GetWorkflowDefinition returns the WorkflowDefinition field value if set, zero value otherwise.
+// SetAssociatedObjectNil sets the value for AssociatedObject to be an explicit nil
+func (o *SchedulerTaskSchedule) SetAssociatedObjectNil() {
+	o.AssociatedObject.Set(nil)
+}
+
+// UnsetAssociatedObject ensures that no value is present for AssociatedObject, not even an explicit nil
+func (o *SchedulerTaskSchedule) UnsetAssociatedObject() {
+	o.AssociatedObject.Unset()
+}
+
+// GetWorkflowDefinition returns the WorkflowDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SchedulerTaskSchedule) GetWorkflowDefinition() WorkflowWorkflowDefinitionRelationship {
-	if o == nil || o.WorkflowDefinition == nil {
+	if o == nil || IsNil(o.WorkflowDefinition.Get()) {
 		var ret WorkflowWorkflowDefinitionRelationship
 		return ret
 	}
-	return *o.WorkflowDefinition
+	return *o.WorkflowDefinition.Get()
 }
 
 // GetWorkflowDefinitionOk returns a tuple with the WorkflowDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SchedulerTaskSchedule) GetWorkflowDefinitionOk() (*WorkflowWorkflowDefinitionRelationship, bool) {
-	if o == nil || o.WorkflowDefinition == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WorkflowDefinition, true
+	return o.WorkflowDefinition.Get(), o.WorkflowDefinition.IsSet()
 }
 
 // HasWorkflowDefinition returns a boolean if a field has been set.
 func (o *SchedulerTaskSchedule) HasWorkflowDefinition() bool {
-	if o != nil && o.WorkflowDefinition != nil {
+	if o != nil && o.WorkflowDefinition.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflowDefinition gets a reference to the given WorkflowWorkflowDefinitionRelationship and assigns it to the WorkflowDefinition field.
+// SetWorkflowDefinition gets a reference to the given NullableWorkflowWorkflowDefinitionRelationship and assigns it to the WorkflowDefinition field.
 func (o *SchedulerTaskSchedule) SetWorkflowDefinition(v WorkflowWorkflowDefinitionRelationship) {
-	o.WorkflowDefinition = &v
+	o.WorkflowDefinition.Set(&v)
+}
+
+// SetWorkflowDefinitionNil sets the value for WorkflowDefinition to be an explicit nil
+func (o *SchedulerTaskSchedule) SetWorkflowDefinitionNil() {
+	o.WorkflowDefinition.Set(nil)
+}
+
+// UnsetWorkflowDefinition ensures that no value is present for WorkflowDefinition, not even an explicit nil
+func (o *SchedulerTaskSchedule) UnsetWorkflowDefinition() {
+	o.WorkflowDefinition.Unset()
 }
 
 func (o SchedulerTaskSchedule) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SchedulerTaskSchedule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.LastAction != nil {
+	if !IsNil(o.LastAction) {
 		toSerialize["LastAction"] = o.LastAction
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.ScheduleParams != nil {
+	if !IsNil(o.ScheduleParams) {
 		toSerialize["ScheduleParams"] = o.ScheduleParams
 	}
 	if o.Status.IsSet() {
 		toSerialize["Status"] = o.Status.Get()
 	}
-	if o.SuspendEndTime != nil {
+	if !IsNil(o.SuspendEndTime) {
 		toSerialize["SuspendEndTime"] = o.SuspendEndTime
 	}
-	if o.TaskRequest != nil {
+	if !IsNil(o.TaskRequest) {
 		toSerialize["TaskRequest"] = o.TaskRequest
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.AssociatedObject != nil {
-		toSerialize["AssociatedObject"] = o.AssociatedObject
+	if o.AssociatedObject.IsSet() {
+		toSerialize["AssociatedObject"] = o.AssociatedObject.Get()
 	}
-	if o.WorkflowDefinition != nil {
-		toSerialize["WorkflowDefinition"] = o.WorkflowDefinition
+	if o.WorkflowDefinition.IsSet() {
+		toSerialize["WorkflowDefinition"] = o.WorkflowDefinition.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SchedulerTaskSchedule) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SchedulerTaskSchedule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SchedulerTaskScheduleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -565,15 +617,15 @@ func (o *SchedulerTaskSchedule) UnmarshalJSON(bytes []byte) (err error) {
 		// Suspend a task until an end date. this applies only to the action suspendTill.
 		SuspendEndTime *time.Time                    `json:"SuspendEndTime,omitempty"`
 		TaskRequest    *SchedulerRestStimTaskRequest `json:"TaskRequest,omitempty"`
-		// An Enum describing the type of scheduler to use. * `None` - No value was set for the schedule type (Enum value None). * `OneTime` - Define a one-time task execution time that will not automatically repeat. * `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, yearly, or every <interval> pattern.
-		Type               *string                                 `json:"Type,omitempty"`
-		AssociatedObject   *MoBaseMoRelationship                   `json:"AssociatedObject,omitempty"`
-		WorkflowDefinition *WorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
+		// An Enum describing the type of scheduler to use. * `None` - No value was set for the schedule type (Enum value None). * `OneTime` - Define a one-time task execution time that will not automatically repeat. * `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, yearly, or every <interval> pattern. This option is not currently supported.
+		Type               *string                                        `json:"Type,omitempty"`
+		AssociatedObject   NullableMoBaseMoRelationship                   `json:"AssociatedObject,omitempty"`
+		WorkflowDefinition NullableWorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
 	}
 
 	varSchedulerTaskScheduleWithoutEmbeddedStruct := SchedulerTaskScheduleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSchedulerTaskScheduleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSchedulerTaskScheduleWithoutEmbeddedStruct)
 	if err == nil {
 		varSchedulerTaskSchedule := _SchedulerTaskSchedule{}
 		varSchedulerTaskSchedule.ClassId = varSchedulerTaskScheduleWithoutEmbeddedStruct.ClassId
@@ -596,7 +648,7 @@ func (o *SchedulerTaskSchedule) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSchedulerTaskSchedule := _SchedulerTaskSchedule{}
 
-	err = json.Unmarshal(bytes, &varSchedulerTaskSchedule)
+	err = json.Unmarshal(data, &varSchedulerTaskSchedule)
 	if err == nil {
 		o.MoBaseMo = varSchedulerTaskSchedule.MoBaseMo
 	} else {
@@ -605,7 +657,7 @@ func (o *SchedulerTaskSchedule) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

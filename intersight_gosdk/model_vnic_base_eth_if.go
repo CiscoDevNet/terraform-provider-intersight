@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicBaseEthIf type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicBaseEthIf{}
 
 // VnicBaseEthIf A Vnic specifying configuration settings.
 type VnicBaseEthIf struct {
@@ -28,18 +32,18 @@ type VnicBaseEthIf struct {
 	// Enabling failover ensures that traffic from the vNIC automatically fails over to the secondary Fabric Interconnect, in case the specified Fabric Interconnect path goes down. Failover applies only to Cisco VICs that are connected to a Fabric Interconnect cluster.
 	FailoverEnabled *bool `json:"FailoverEnabled,omitempty"`
 	// Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic.
-	PinGroupName                  *string                                    `json:"PinGroupName,omitempty"`
-	SriovSettings                 NullableVnicSriovSettings                  `json:"SriovSettings,omitempty"`
-	UsnicSettings                 NullableVnicUsnicSettings                  `json:"UsnicSettings,omitempty"`
-	VmqSettings                   NullableVnicVmqSettings                    `json:"VmqSettings,omitempty"`
-	EthAdapterPolicy              *VnicEthAdapterPolicyRelationship          `json:"EthAdapterPolicy,omitempty"`
-	EthNetworkPolicy              *VnicEthNetworkPolicyRelationship          `json:"EthNetworkPolicy,omitempty"`
-	EthQosPolicy                  *VnicEthQosPolicyRelationship              `json:"EthQosPolicy,omitempty"`
-	FabricEthNetworkControlPolicy *FabricEthNetworkControlPolicyRelationship `json:"FabricEthNetworkControlPolicy,omitempty"`
+	PinGroupName                  *string                                           `json:"PinGroupName,omitempty"`
+	SriovSettings                 NullableVnicSriovSettings                         `json:"SriovSettings,omitempty"`
+	UsnicSettings                 NullableVnicUsnicSettings                         `json:"UsnicSettings,omitempty"`
+	VmqSettings                   NullableVnicVmqSettings                           `json:"VmqSettings,omitempty"`
+	EthAdapterPolicy              NullableVnicEthAdapterPolicyRelationship          `json:"EthAdapterPolicy,omitempty"`
+	EthNetworkPolicy              NullableVnicEthNetworkPolicyRelationship          `json:"EthNetworkPolicy,omitempty"`
+	EthQosPolicy                  NullableVnicEthQosPolicyRelationship              `json:"EthQosPolicy,omitempty"`
+	FabricEthNetworkControlPolicy NullableFabricEthNetworkControlPolicyRelationship `json:"FabricEthNetworkControlPolicy,omitempty"`
 	// An array of relationships to fabricEthNetworkGroupPolicy resources.
 	FabricEthNetworkGroupPolicy []FabricEthNetworkGroupPolicyRelationship `json:"FabricEthNetworkGroupPolicy,omitempty"`
-	IscsiBootPolicy             *VnicIscsiBootPolicyRelationship          `json:"IscsiBootPolicy,omitempty"`
-	MacPool                     *MacpoolPoolRelationship                  `json:"MacPool,omitempty"`
+	IscsiBootPolicy             NullableVnicIscsiBootPolicyRelationship   `json:"IscsiBootPolicy,omitempty"`
+	MacPool                     NullableMacpoolPoolRelationship           `json:"MacPool,omitempty"`
 	AdditionalProperties        map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *VnicBaseEthIf) SetObjectType(v string) {
 
 // GetCdn returns the Cdn field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseEthIf) GetCdn() VnicCdn {
-	if o == nil || o.Cdn.Get() == nil {
+	if o == nil || IsNil(o.Cdn.Get()) {
 		var ret VnicCdn
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *VnicBaseEthIf) UnsetCdn() {
 
 // GetFailoverEnabled returns the FailoverEnabled field value if set, zero value otherwise.
 func (o *VnicBaseEthIf) GetFailoverEnabled() bool {
-	if o == nil || o.FailoverEnabled == nil {
+	if o == nil || IsNil(o.FailoverEnabled) {
 		var ret bool
 		return ret
 	}
@@ -171,7 +175,7 @@ func (o *VnicBaseEthIf) GetFailoverEnabled() bool {
 // GetFailoverEnabledOk returns a tuple with the FailoverEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicBaseEthIf) GetFailoverEnabledOk() (*bool, bool) {
-	if o == nil || o.FailoverEnabled == nil {
+	if o == nil || IsNil(o.FailoverEnabled) {
 		return nil, false
 	}
 	return o.FailoverEnabled, true
@@ -179,7 +183,7 @@ func (o *VnicBaseEthIf) GetFailoverEnabledOk() (*bool, bool) {
 
 // HasFailoverEnabled returns a boolean if a field has been set.
 func (o *VnicBaseEthIf) HasFailoverEnabled() bool {
-	if o != nil && o.FailoverEnabled != nil {
+	if o != nil && !IsNil(o.FailoverEnabled) {
 		return true
 	}
 
@@ -193,7 +197,7 @@ func (o *VnicBaseEthIf) SetFailoverEnabled(v bool) {
 
 // GetPinGroupName returns the PinGroupName field value if set, zero value otherwise.
 func (o *VnicBaseEthIf) GetPinGroupName() string {
-	if o == nil || o.PinGroupName == nil {
+	if o == nil || IsNil(o.PinGroupName) {
 		var ret string
 		return ret
 	}
@@ -203,7 +207,7 @@ func (o *VnicBaseEthIf) GetPinGroupName() string {
 // GetPinGroupNameOk returns a tuple with the PinGroupName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicBaseEthIf) GetPinGroupNameOk() (*string, bool) {
-	if o == nil || o.PinGroupName == nil {
+	if o == nil || IsNil(o.PinGroupName) {
 		return nil, false
 	}
 	return o.PinGroupName, true
@@ -211,7 +215,7 @@ func (o *VnicBaseEthIf) GetPinGroupNameOk() (*string, bool) {
 
 // HasPinGroupName returns a boolean if a field has been set.
 func (o *VnicBaseEthIf) HasPinGroupName() bool {
-	if o != nil && o.PinGroupName != nil {
+	if o != nil && !IsNil(o.PinGroupName) {
 		return true
 	}
 
@@ -225,7 +229,7 @@ func (o *VnicBaseEthIf) SetPinGroupName(v string) {
 
 // GetSriovSettings returns the SriovSettings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseEthIf) GetSriovSettings() VnicSriovSettings {
-	if o == nil || o.SriovSettings.Get() == nil {
+	if o == nil || IsNil(o.SriovSettings.Get()) {
 		var ret VnicSriovSettings
 		return ret
 	}
@@ -268,7 +272,7 @@ func (o *VnicBaseEthIf) UnsetSriovSettings() {
 
 // GetUsnicSettings returns the UsnicSettings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseEthIf) GetUsnicSettings() VnicUsnicSettings {
-	if o == nil || o.UsnicSettings.Get() == nil {
+	if o == nil || IsNil(o.UsnicSettings.Get()) {
 		var ret VnicUsnicSettings
 		return ret
 	}
@@ -311,7 +315,7 @@ func (o *VnicBaseEthIf) UnsetUsnicSettings() {
 
 // GetVmqSettings returns the VmqSettings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseEthIf) GetVmqSettings() VnicVmqSettings {
-	if o == nil || o.VmqSettings.Get() == nil {
+	if o == nil || IsNil(o.VmqSettings.Get()) {
 		var ret VnicVmqSettings
 		return ret
 	}
@@ -352,132 +356,176 @@ func (o *VnicBaseEthIf) UnsetVmqSettings() {
 	o.VmqSettings.Unset()
 }
 
-// GetEthAdapterPolicy returns the EthAdapterPolicy field value if set, zero value otherwise.
+// GetEthAdapterPolicy returns the EthAdapterPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseEthIf) GetEthAdapterPolicy() VnicEthAdapterPolicyRelationship {
-	if o == nil || o.EthAdapterPolicy == nil {
+	if o == nil || IsNil(o.EthAdapterPolicy.Get()) {
 		var ret VnicEthAdapterPolicyRelationship
 		return ret
 	}
-	return *o.EthAdapterPolicy
+	return *o.EthAdapterPolicy.Get()
 }
 
 // GetEthAdapterPolicyOk returns a tuple with the EthAdapterPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseEthIf) GetEthAdapterPolicyOk() (*VnicEthAdapterPolicyRelationship, bool) {
-	if o == nil || o.EthAdapterPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EthAdapterPolicy, true
+	return o.EthAdapterPolicy.Get(), o.EthAdapterPolicy.IsSet()
 }
 
 // HasEthAdapterPolicy returns a boolean if a field has been set.
 func (o *VnicBaseEthIf) HasEthAdapterPolicy() bool {
-	if o != nil && o.EthAdapterPolicy != nil {
+	if o != nil && o.EthAdapterPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEthAdapterPolicy gets a reference to the given VnicEthAdapterPolicyRelationship and assigns it to the EthAdapterPolicy field.
+// SetEthAdapterPolicy gets a reference to the given NullableVnicEthAdapterPolicyRelationship and assigns it to the EthAdapterPolicy field.
 func (o *VnicBaseEthIf) SetEthAdapterPolicy(v VnicEthAdapterPolicyRelationship) {
-	o.EthAdapterPolicy = &v
+	o.EthAdapterPolicy.Set(&v)
 }
 
-// GetEthNetworkPolicy returns the EthNetworkPolicy field value if set, zero value otherwise.
+// SetEthAdapterPolicyNil sets the value for EthAdapterPolicy to be an explicit nil
+func (o *VnicBaseEthIf) SetEthAdapterPolicyNil() {
+	o.EthAdapterPolicy.Set(nil)
+}
+
+// UnsetEthAdapterPolicy ensures that no value is present for EthAdapterPolicy, not even an explicit nil
+func (o *VnicBaseEthIf) UnsetEthAdapterPolicy() {
+	o.EthAdapterPolicy.Unset()
+}
+
+// GetEthNetworkPolicy returns the EthNetworkPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseEthIf) GetEthNetworkPolicy() VnicEthNetworkPolicyRelationship {
-	if o == nil || o.EthNetworkPolicy == nil {
+	if o == nil || IsNil(o.EthNetworkPolicy.Get()) {
 		var ret VnicEthNetworkPolicyRelationship
 		return ret
 	}
-	return *o.EthNetworkPolicy
+	return *o.EthNetworkPolicy.Get()
 }
 
 // GetEthNetworkPolicyOk returns a tuple with the EthNetworkPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseEthIf) GetEthNetworkPolicyOk() (*VnicEthNetworkPolicyRelationship, bool) {
-	if o == nil || o.EthNetworkPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EthNetworkPolicy, true
+	return o.EthNetworkPolicy.Get(), o.EthNetworkPolicy.IsSet()
 }
 
 // HasEthNetworkPolicy returns a boolean if a field has been set.
 func (o *VnicBaseEthIf) HasEthNetworkPolicy() bool {
-	if o != nil && o.EthNetworkPolicy != nil {
+	if o != nil && o.EthNetworkPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEthNetworkPolicy gets a reference to the given VnicEthNetworkPolicyRelationship and assigns it to the EthNetworkPolicy field.
+// SetEthNetworkPolicy gets a reference to the given NullableVnicEthNetworkPolicyRelationship and assigns it to the EthNetworkPolicy field.
 func (o *VnicBaseEthIf) SetEthNetworkPolicy(v VnicEthNetworkPolicyRelationship) {
-	o.EthNetworkPolicy = &v
+	o.EthNetworkPolicy.Set(&v)
 }
 
-// GetEthQosPolicy returns the EthQosPolicy field value if set, zero value otherwise.
+// SetEthNetworkPolicyNil sets the value for EthNetworkPolicy to be an explicit nil
+func (o *VnicBaseEthIf) SetEthNetworkPolicyNil() {
+	o.EthNetworkPolicy.Set(nil)
+}
+
+// UnsetEthNetworkPolicy ensures that no value is present for EthNetworkPolicy, not even an explicit nil
+func (o *VnicBaseEthIf) UnsetEthNetworkPolicy() {
+	o.EthNetworkPolicy.Unset()
+}
+
+// GetEthQosPolicy returns the EthQosPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseEthIf) GetEthQosPolicy() VnicEthQosPolicyRelationship {
-	if o == nil || o.EthQosPolicy == nil {
+	if o == nil || IsNil(o.EthQosPolicy.Get()) {
 		var ret VnicEthQosPolicyRelationship
 		return ret
 	}
-	return *o.EthQosPolicy
+	return *o.EthQosPolicy.Get()
 }
 
 // GetEthQosPolicyOk returns a tuple with the EthQosPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseEthIf) GetEthQosPolicyOk() (*VnicEthQosPolicyRelationship, bool) {
-	if o == nil || o.EthQosPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EthQosPolicy, true
+	return o.EthQosPolicy.Get(), o.EthQosPolicy.IsSet()
 }
 
 // HasEthQosPolicy returns a boolean if a field has been set.
 func (o *VnicBaseEthIf) HasEthQosPolicy() bool {
-	if o != nil && o.EthQosPolicy != nil {
+	if o != nil && o.EthQosPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEthQosPolicy gets a reference to the given VnicEthQosPolicyRelationship and assigns it to the EthQosPolicy field.
+// SetEthQosPolicy gets a reference to the given NullableVnicEthQosPolicyRelationship and assigns it to the EthQosPolicy field.
 func (o *VnicBaseEthIf) SetEthQosPolicy(v VnicEthQosPolicyRelationship) {
-	o.EthQosPolicy = &v
+	o.EthQosPolicy.Set(&v)
 }
 
-// GetFabricEthNetworkControlPolicy returns the FabricEthNetworkControlPolicy field value if set, zero value otherwise.
+// SetEthQosPolicyNil sets the value for EthQosPolicy to be an explicit nil
+func (o *VnicBaseEthIf) SetEthQosPolicyNil() {
+	o.EthQosPolicy.Set(nil)
+}
+
+// UnsetEthQosPolicy ensures that no value is present for EthQosPolicy, not even an explicit nil
+func (o *VnicBaseEthIf) UnsetEthQosPolicy() {
+	o.EthQosPolicy.Unset()
+}
+
+// GetFabricEthNetworkControlPolicy returns the FabricEthNetworkControlPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseEthIf) GetFabricEthNetworkControlPolicy() FabricEthNetworkControlPolicyRelationship {
-	if o == nil || o.FabricEthNetworkControlPolicy == nil {
+	if o == nil || IsNil(o.FabricEthNetworkControlPolicy.Get()) {
 		var ret FabricEthNetworkControlPolicyRelationship
 		return ret
 	}
-	return *o.FabricEthNetworkControlPolicy
+	return *o.FabricEthNetworkControlPolicy.Get()
 }
 
 // GetFabricEthNetworkControlPolicyOk returns a tuple with the FabricEthNetworkControlPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseEthIf) GetFabricEthNetworkControlPolicyOk() (*FabricEthNetworkControlPolicyRelationship, bool) {
-	if o == nil || o.FabricEthNetworkControlPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FabricEthNetworkControlPolicy, true
+	return o.FabricEthNetworkControlPolicy.Get(), o.FabricEthNetworkControlPolicy.IsSet()
 }
 
 // HasFabricEthNetworkControlPolicy returns a boolean if a field has been set.
 func (o *VnicBaseEthIf) HasFabricEthNetworkControlPolicy() bool {
-	if o != nil && o.FabricEthNetworkControlPolicy != nil {
+	if o != nil && o.FabricEthNetworkControlPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFabricEthNetworkControlPolicy gets a reference to the given FabricEthNetworkControlPolicyRelationship and assigns it to the FabricEthNetworkControlPolicy field.
+// SetFabricEthNetworkControlPolicy gets a reference to the given NullableFabricEthNetworkControlPolicyRelationship and assigns it to the FabricEthNetworkControlPolicy field.
 func (o *VnicBaseEthIf) SetFabricEthNetworkControlPolicy(v FabricEthNetworkControlPolicyRelationship) {
-	o.FabricEthNetworkControlPolicy = &v
+	o.FabricEthNetworkControlPolicy.Set(&v)
+}
+
+// SetFabricEthNetworkControlPolicyNil sets the value for FabricEthNetworkControlPolicy to be an explicit nil
+func (o *VnicBaseEthIf) SetFabricEthNetworkControlPolicyNil() {
+	o.FabricEthNetworkControlPolicy.Set(nil)
+}
+
+// UnsetFabricEthNetworkControlPolicy ensures that no value is present for FabricEthNetworkControlPolicy, not even an explicit nil
+func (o *VnicBaseEthIf) UnsetFabricEthNetworkControlPolicy() {
+	o.FabricEthNetworkControlPolicy.Unset()
 }
 
 // GetFabricEthNetworkGroupPolicy returns the FabricEthNetworkGroupPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -493,7 +541,7 @@ func (o *VnicBaseEthIf) GetFabricEthNetworkGroupPolicy() []FabricEthNetworkGroup
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseEthIf) GetFabricEthNetworkGroupPolicyOk() ([]FabricEthNetworkGroupPolicyRelationship, bool) {
-	if o == nil || o.FabricEthNetworkGroupPolicy == nil {
+	if o == nil || IsNil(o.FabricEthNetworkGroupPolicy) {
 		return nil, false
 	}
 	return o.FabricEthNetworkGroupPolicy, true
@@ -501,7 +549,7 @@ func (o *VnicBaseEthIf) GetFabricEthNetworkGroupPolicyOk() ([]FabricEthNetworkGr
 
 // HasFabricEthNetworkGroupPolicy returns a boolean if a field has been set.
 func (o *VnicBaseEthIf) HasFabricEthNetworkGroupPolicy() bool {
-	if o != nil && o.FabricEthNetworkGroupPolicy != nil {
+	if o != nil && IsNil(o.FabricEthNetworkGroupPolicy) {
 		return true
 	}
 
@@ -513,93 +561,119 @@ func (o *VnicBaseEthIf) SetFabricEthNetworkGroupPolicy(v []FabricEthNetworkGroup
 	o.FabricEthNetworkGroupPolicy = v
 }
 
-// GetIscsiBootPolicy returns the IscsiBootPolicy field value if set, zero value otherwise.
+// GetIscsiBootPolicy returns the IscsiBootPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseEthIf) GetIscsiBootPolicy() VnicIscsiBootPolicyRelationship {
-	if o == nil || o.IscsiBootPolicy == nil {
+	if o == nil || IsNil(o.IscsiBootPolicy.Get()) {
 		var ret VnicIscsiBootPolicyRelationship
 		return ret
 	}
-	return *o.IscsiBootPolicy
+	return *o.IscsiBootPolicy.Get()
 }
 
 // GetIscsiBootPolicyOk returns a tuple with the IscsiBootPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseEthIf) GetIscsiBootPolicyOk() (*VnicIscsiBootPolicyRelationship, bool) {
-	if o == nil || o.IscsiBootPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.IscsiBootPolicy, true
+	return o.IscsiBootPolicy.Get(), o.IscsiBootPolicy.IsSet()
 }
 
 // HasIscsiBootPolicy returns a boolean if a field has been set.
 func (o *VnicBaseEthIf) HasIscsiBootPolicy() bool {
-	if o != nil && o.IscsiBootPolicy != nil {
+	if o != nil && o.IscsiBootPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIscsiBootPolicy gets a reference to the given VnicIscsiBootPolicyRelationship and assigns it to the IscsiBootPolicy field.
+// SetIscsiBootPolicy gets a reference to the given NullableVnicIscsiBootPolicyRelationship and assigns it to the IscsiBootPolicy field.
 func (o *VnicBaseEthIf) SetIscsiBootPolicy(v VnicIscsiBootPolicyRelationship) {
-	o.IscsiBootPolicy = &v
+	o.IscsiBootPolicy.Set(&v)
 }
 
-// GetMacPool returns the MacPool field value if set, zero value otherwise.
+// SetIscsiBootPolicyNil sets the value for IscsiBootPolicy to be an explicit nil
+func (o *VnicBaseEthIf) SetIscsiBootPolicyNil() {
+	o.IscsiBootPolicy.Set(nil)
+}
+
+// UnsetIscsiBootPolicy ensures that no value is present for IscsiBootPolicy, not even an explicit nil
+func (o *VnicBaseEthIf) UnsetIscsiBootPolicy() {
+	o.IscsiBootPolicy.Unset()
+}
+
+// GetMacPool returns the MacPool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseEthIf) GetMacPool() MacpoolPoolRelationship {
-	if o == nil || o.MacPool == nil {
+	if o == nil || IsNil(o.MacPool.Get()) {
 		var ret MacpoolPoolRelationship
 		return ret
 	}
-	return *o.MacPool
+	return *o.MacPool.Get()
 }
 
 // GetMacPoolOk returns a tuple with the MacPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseEthIf) GetMacPoolOk() (*MacpoolPoolRelationship, bool) {
-	if o == nil || o.MacPool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.MacPool, true
+	return o.MacPool.Get(), o.MacPool.IsSet()
 }
 
 // HasMacPool returns a boolean if a field has been set.
 func (o *VnicBaseEthIf) HasMacPool() bool {
-	if o != nil && o.MacPool != nil {
+	if o != nil && o.MacPool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMacPool gets a reference to the given MacpoolPoolRelationship and assigns it to the MacPool field.
+// SetMacPool gets a reference to the given NullableMacpoolPoolRelationship and assigns it to the MacPool field.
 func (o *VnicBaseEthIf) SetMacPool(v MacpoolPoolRelationship) {
-	o.MacPool = &v
+	o.MacPool.Set(&v)
+}
+
+// SetMacPoolNil sets the value for MacPool to be an explicit nil
+func (o *VnicBaseEthIf) SetMacPoolNil() {
+	o.MacPool.Set(nil)
+}
+
+// UnsetMacPool ensures that no value is present for MacPool, not even an explicit nil
+func (o *VnicBaseEthIf) UnsetMacPool() {
+	o.MacPool.Unset()
 }
 
 func (o VnicBaseEthIf) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicBaseEthIf) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicyItem, errPolicyAbstractPolicyItem := json.Marshal(o.PolicyAbstractPolicyItem)
 	if errPolicyAbstractPolicyItem != nil {
-		return []byte{}, errPolicyAbstractPolicyItem
+		return map[string]interface{}{}, errPolicyAbstractPolicyItem
 	}
 	errPolicyAbstractPolicyItem = json.Unmarshal([]byte(serializedPolicyAbstractPolicyItem), &toSerialize)
 	if errPolicyAbstractPolicyItem != nil {
-		return []byte{}, errPolicyAbstractPolicyItem
+		return map[string]interface{}{}, errPolicyAbstractPolicyItem
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Cdn.IsSet() {
 		toSerialize["Cdn"] = o.Cdn.Get()
 	}
-	if o.FailoverEnabled != nil {
+	if !IsNil(o.FailoverEnabled) {
 		toSerialize["FailoverEnabled"] = o.FailoverEnabled
 	}
-	if o.PinGroupName != nil {
+	if !IsNil(o.PinGroupName) {
 		toSerialize["PinGroupName"] = o.PinGroupName
 	}
 	if o.SriovSettings.IsSet() {
@@ -611,36 +685,58 @@ func (o VnicBaseEthIf) MarshalJSON() ([]byte, error) {
 	if o.VmqSettings.IsSet() {
 		toSerialize["VmqSettings"] = o.VmqSettings.Get()
 	}
-	if o.EthAdapterPolicy != nil {
-		toSerialize["EthAdapterPolicy"] = o.EthAdapterPolicy
+	if o.EthAdapterPolicy.IsSet() {
+		toSerialize["EthAdapterPolicy"] = o.EthAdapterPolicy.Get()
 	}
-	if o.EthNetworkPolicy != nil {
-		toSerialize["EthNetworkPolicy"] = o.EthNetworkPolicy
+	if o.EthNetworkPolicy.IsSet() {
+		toSerialize["EthNetworkPolicy"] = o.EthNetworkPolicy.Get()
 	}
-	if o.EthQosPolicy != nil {
-		toSerialize["EthQosPolicy"] = o.EthQosPolicy
+	if o.EthQosPolicy.IsSet() {
+		toSerialize["EthQosPolicy"] = o.EthQosPolicy.Get()
 	}
-	if o.FabricEthNetworkControlPolicy != nil {
-		toSerialize["FabricEthNetworkControlPolicy"] = o.FabricEthNetworkControlPolicy
+	if o.FabricEthNetworkControlPolicy.IsSet() {
+		toSerialize["FabricEthNetworkControlPolicy"] = o.FabricEthNetworkControlPolicy.Get()
 	}
 	if o.FabricEthNetworkGroupPolicy != nil {
 		toSerialize["FabricEthNetworkGroupPolicy"] = o.FabricEthNetworkGroupPolicy
 	}
-	if o.IscsiBootPolicy != nil {
-		toSerialize["IscsiBootPolicy"] = o.IscsiBootPolicy
+	if o.IscsiBootPolicy.IsSet() {
+		toSerialize["IscsiBootPolicy"] = o.IscsiBootPolicy.Get()
 	}
-	if o.MacPool != nil {
-		toSerialize["MacPool"] = o.MacPool
+	if o.MacPool.IsSet() {
+		toSerialize["MacPool"] = o.MacPool.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicBaseEthIf) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicBaseEthIf) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicBaseEthIfWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -650,23 +746,23 @@ func (o *VnicBaseEthIf) UnmarshalJSON(bytes []byte) (err error) {
 		// Enabling failover ensures that traffic from the vNIC automatically fails over to the secondary Fabric Interconnect, in case the specified Fabric Interconnect path goes down. Failover applies only to Cisco VICs that are connected to a Fabric Interconnect cluster.
 		FailoverEnabled *bool `json:"FailoverEnabled,omitempty"`
 		// Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic.
-		PinGroupName                  *string                                    `json:"PinGroupName,omitempty"`
-		SriovSettings                 NullableVnicSriovSettings                  `json:"SriovSettings,omitempty"`
-		UsnicSettings                 NullableVnicUsnicSettings                  `json:"UsnicSettings,omitempty"`
-		VmqSettings                   NullableVnicVmqSettings                    `json:"VmqSettings,omitempty"`
-		EthAdapterPolicy              *VnicEthAdapterPolicyRelationship          `json:"EthAdapterPolicy,omitempty"`
-		EthNetworkPolicy              *VnicEthNetworkPolicyRelationship          `json:"EthNetworkPolicy,omitempty"`
-		EthQosPolicy                  *VnicEthQosPolicyRelationship              `json:"EthQosPolicy,omitempty"`
-		FabricEthNetworkControlPolicy *FabricEthNetworkControlPolicyRelationship `json:"FabricEthNetworkControlPolicy,omitempty"`
+		PinGroupName                  *string                                           `json:"PinGroupName,omitempty"`
+		SriovSettings                 NullableVnicSriovSettings                         `json:"SriovSettings,omitempty"`
+		UsnicSettings                 NullableVnicUsnicSettings                         `json:"UsnicSettings,omitempty"`
+		VmqSettings                   NullableVnicVmqSettings                           `json:"VmqSettings,omitempty"`
+		EthAdapterPolicy              NullableVnicEthAdapterPolicyRelationship          `json:"EthAdapterPolicy,omitempty"`
+		EthNetworkPolicy              NullableVnicEthNetworkPolicyRelationship          `json:"EthNetworkPolicy,omitempty"`
+		EthQosPolicy                  NullableVnicEthQosPolicyRelationship              `json:"EthQosPolicy,omitempty"`
+		FabricEthNetworkControlPolicy NullableFabricEthNetworkControlPolicyRelationship `json:"FabricEthNetworkControlPolicy,omitempty"`
 		// An array of relationships to fabricEthNetworkGroupPolicy resources.
 		FabricEthNetworkGroupPolicy []FabricEthNetworkGroupPolicyRelationship `json:"FabricEthNetworkGroupPolicy,omitempty"`
-		IscsiBootPolicy             *VnicIscsiBootPolicyRelationship          `json:"IscsiBootPolicy,omitempty"`
-		MacPool                     *MacpoolPoolRelationship                  `json:"MacPool,omitempty"`
+		IscsiBootPolicy             NullableVnicIscsiBootPolicyRelationship   `json:"IscsiBootPolicy,omitempty"`
+		MacPool                     NullableMacpoolPoolRelationship           `json:"MacPool,omitempty"`
 	}
 
 	varVnicBaseEthIfWithoutEmbeddedStruct := VnicBaseEthIfWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicBaseEthIfWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicBaseEthIfWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicBaseEthIf := _VnicBaseEthIf{}
 		varVnicBaseEthIf.ClassId = varVnicBaseEthIfWithoutEmbeddedStruct.ClassId
@@ -691,7 +787,7 @@ func (o *VnicBaseEthIf) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicBaseEthIf := _VnicBaseEthIf{}
 
-	err = json.Unmarshal(bytes, &varVnicBaseEthIf)
+	err = json.Unmarshal(data, &varVnicBaseEthIf)
 	if err == nil {
 		o.PolicyAbstractPolicyItem = varVnicBaseEthIf.PolicyAbstractPolicyItem
 	} else {
@@ -700,7 +796,7 @@ func (o *VnicBaseEthIf) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Cdn")

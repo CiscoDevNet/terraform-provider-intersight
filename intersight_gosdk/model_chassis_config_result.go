@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ChassisConfigResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ChassisConfigResult{}
 
 // ChassisConfigResult The profile configuration (deploy, validation) results with the overall state and detailed result messages.
 type ChassisConfigResult struct {
@@ -23,9 +27,9 @@ type ChassisConfigResult struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string                          `json:"ObjectType"`
-	IomProfile *ChassisIomProfileRelationship  `json:"IomProfile,omitempty"`
-	Profile    *ChassisBaseProfileRelationship `json:"Profile,omitempty"`
+	ObjectType string                                 `json:"ObjectType"`
+	IomProfile NullableChassisIomProfileRelationship  `json:"IomProfile,omitempty"`
+	Profile    NullableChassisBaseProfileRelationship `json:"Profile,omitempty"`
 	// An array of relationships to chassisConfigResultEntry resources.
 	ResultEntries        []ChassisConfigResultEntryRelationship `json:"ResultEntries,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -104,68 +108,90 @@ func (o *ChassisConfigResult) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetIomProfile returns the IomProfile field value if set, zero value otherwise.
+// GetIomProfile returns the IomProfile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ChassisConfigResult) GetIomProfile() ChassisIomProfileRelationship {
-	if o == nil || o.IomProfile == nil {
+	if o == nil || IsNil(o.IomProfile.Get()) {
 		var ret ChassisIomProfileRelationship
 		return ret
 	}
-	return *o.IomProfile
+	return *o.IomProfile.Get()
 }
 
 // GetIomProfileOk returns a tuple with the IomProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ChassisConfigResult) GetIomProfileOk() (*ChassisIomProfileRelationship, bool) {
-	if o == nil || o.IomProfile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.IomProfile, true
+	return o.IomProfile.Get(), o.IomProfile.IsSet()
 }
 
 // HasIomProfile returns a boolean if a field has been set.
 func (o *ChassisConfigResult) HasIomProfile() bool {
-	if o != nil && o.IomProfile != nil {
+	if o != nil && o.IomProfile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIomProfile gets a reference to the given ChassisIomProfileRelationship and assigns it to the IomProfile field.
+// SetIomProfile gets a reference to the given NullableChassisIomProfileRelationship and assigns it to the IomProfile field.
 func (o *ChassisConfigResult) SetIomProfile(v ChassisIomProfileRelationship) {
-	o.IomProfile = &v
+	o.IomProfile.Set(&v)
 }
 
-// GetProfile returns the Profile field value if set, zero value otherwise.
+// SetIomProfileNil sets the value for IomProfile to be an explicit nil
+func (o *ChassisConfigResult) SetIomProfileNil() {
+	o.IomProfile.Set(nil)
+}
+
+// UnsetIomProfile ensures that no value is present for IomProfile, not even an explicit nil
+func (o *ChassisConfigResult) UnsetIomProfile() {
+	o.IomProfile.Unset()
+}
+
+// GetProfile returns the Profile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ChassisConfigResult) GetProfile() ChassisBaseProfileRelationship {
-	if o == nil || o.Profile == nil {
+	if o == nil || IsNil(o.Profile.Get()) {
 		var ret ChassisBaseProfileRelationship
 		return ret
 	}
-	return *o.Profile
+	return *o.Profile.Get()
 }
 
 // GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ChassisConfigResult) GetProfileOk() (*ChassisBaseProfileRelationship, bool) {
-	if o == nil || o.Profile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Profile, true
+	return o.Profile.Get(), o.Profile.IsSet()
 }
 
 // HasProfile returns a boolean if a field has been set.
 func (o *ChassisConfigResult) HasProfile() bool {
-	if o != nil && o.Profile != nil {
+	if o != nil && o.Profile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProfile gets a reference to the given ChassisBaseProfileRelationship and assigns it to the Profile field.
+// SetProfile gets a reference to the given NullableChassisBaseProfileRelationship and assigns it to the Profile field.
 func (o *ChassisConfigResult) SetProfile(v ChassisBaseProfileRelationship) {
-	o.Profile = &v
+	o.Profile.Set(&v)
+}
+
+// SetProfileNil sets the value for Profile to be an explicit nil
+func (o *ChassisConfigResult) SetProfileNil() {
+	o.Profile.Set(nil)
+}
+
+// UnsetProfile ensures that no value is present for Profile, not even an explicit nil
+func (o *ChassisConfigResult) UnsetProfile() {
+	o.Profile.Unset()
 }
 
 // GetResultEntries returns the ResultEntries field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -181,7 +207,7 @@ func (o *ChassisConfigResult) GetResultEntries() []ChassisConfigResultEntryRelat
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ChassisConfigResult) GetResultEntriesOk() ([]ChassisConfigResultEntryRelationship, bool) {
-	if o == nil || o.ResultEntries == nil {
+	if o == nil || IsNil(o.ResultEntries) {
 		return nil, false
 	}
 	return o.ResultEntries, true
@@ -189,7 +215,7 @@ func (o *ChassisConfigResult) GetResultEntriesOk() ([]ChassisConfigResultEntryRe
 
 // HasResultEntries returns a boolean if a field has been set.
 func (o *ChassisConfigResult) HasResultEntries() bool {
-	if o != nil && o.ResultEntries != nil {
+	if o != nil && IsNil(o.ResultEntries) {
 		return true
 	}
 
@@ -202,26 +228,30 @@ func (o *ChassisConfigResult) SetResultEntries(v []ChassisConfigResultEntryRelat
 }
 
 func (o ChassisConfigResult) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ChassisConfigResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractConfigResult, errPolicyAbstractConfigResult := json.Marshal(o.PolicyAbstractConfigResult)
 	if errPolicyAbstractConfigResult != nil {
-		return []byte{}, errPolicyAbstractConfigResult
+		return map[string]interface{}{}, errPolicyAbstractConfigResult
 	}
 	errPolicyAbstractConfigResult = json.Unmarshal([]byte(serializedPolicyAbstractConfigResult), &toSerialize)
 	if errPolicyAbstractConfigResult != nil {
-		return []byte{}, errPolicyAbstractConfigResult
+		return map[string]interface{}{}, errPolicyAbstractConfigResult
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.IomProfile.IsSet() {
+		toSerialize["IomProfile"] = o.IomProfile.Get()
 	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IomProfile != nil {
-		toSerialize["IomProfile"] = o.IomProfile
-	}
-	if o.Profile != nil {
-		toSerialize["Profile"] = o.Profile
+	if o.Profile.IsSet() {
+		toSerialize["Profile"] = o.Profile.Get()
 	}
 	if o.ResultEntries != nil {
 		toSerialize["ResultEntries"] = o.ResultEntries
@@ -231,24 +261,46 @@ func (o ChassisConfigResult) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ChassisConfigResult) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ChassisConfigResult) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ChassisConfigResultWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string                          `json:"ObjectType"`
-		IomProfile *ChassisIomProfileRelationship  `json:"IomProfile,omitempty"`
-		Profile    *ChassisBaseProfileRelationship `json:"Profile,omitempty"`
+		ObjectType string                                 `json:"ObjectType"`
+		IomProfile NullableChassisIomProfileRelationship  `json:"IomProfile,omitempty"`
+		Profile    NullableChassisBaseProfileRelationship `json:"Profile,omitempty"`
 		// An array of relationships to chassisConfigResultEntry resources.
 		ResultEntries []ChassisConfigResultEntryRelationship `json:"ResultEntries,omitempty"`
 	}
 
 	varChassisConfigResultWithoutEmbeddedStruct := ChassisConfigResultWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varChassisConfigResultWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varChassisConfigResultWithoutEmbeddedStruct)
 	if err == nil {
 		varChassisConfigResult := _ChassisConfigResult{}
 		varChassisConfigResult.ClassId = varChassisConfigResultWithoutEmbeddedStruct.ClassId
@@ -263,7 +315,7 @@ func (o *ChassisConfigResult) UnmarshalJSON(bytes []byte) (err error) {
 
 	varChassisConfigResult := _ChassisConfigResult{}
 
-	err = json.Unmarshal(bytes, &varChassisConfigResult)
+	err = json.Unmarshal(data, &varChassisConfigResult)
 	if err == nil {
 		o.PolicyAbstractConfigResult = varChassisConfigResult.PolicyAbstractConfigResult
 	} else {
@@ -272,7 +324,7 @@ func (o *ChassisConfigResult) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IomProfile")

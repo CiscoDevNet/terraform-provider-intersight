@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowApi type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowApi{}
 
 // WorkflowApi Intersight Orchestrator supports generic API workflow tasks that can execute an API given the request body and response parser specification. API type models a single API request within a batch of requests that get executed within a single workflow task.
 type WorkflowApi struct {
@@ -122,7 +126,7 @@ func (o *WorkflowApi) SetObjectType(v string) {
 
 // GetAssetTargetMoid returns the AssetTargetMoid field value if set, zero value otherwise.
 func (o *WorkflowApi) GetAssetTargetMoid() string {
-	if o == nil || o.AssetTargetMoid == nil {
+	if o == nil || IsNil(o.AssetTargetMoid) {
 		var ret string
 		return ret
 	}
@@ -132,7 +136,7 @@ func (o *WorkflowApi) GetAssetTargetMoid() string {
 // GetAssetTargetMoidOk returns a tuple with the AssetTargetMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowApi) GetAssetTargetMoidOk() (*string, bool) {
-	if o == nil || o.AssetTargetMoid == nil {
+	if o == nil || IsNil(o.AssetTargetMoid) {
 		return nil, false
 	}
 	return o.AssetTargetMoid, true
@@ -140,7 +144,7 @@ func (o *WorkflowApi) GetAssetTargetMoidOk() (*string, bool) {
 
 // HasAssetTargetMoid returns a boolean if a field has been set.
 func (o *WorkflowApi) HasAssetTargetMoid() bool {
-	if o != nil && o.AssetTargetMoid != nil {
+	if o != nil && !IsNil(o.AssetTargetMoid) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *WorkflowApi) SetAssetTargetMoid(v string) {
 
 // GetBody returns the Body field value if set, zero value otherwise.
 func (o *WorkflowApi) GetBody() string {
-	if o == nil || o.Body == nil {
+	if o == nil || IsNil(o.Body) {
 		var ret string
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *WorkflowApi) GetBody() string {
 // GetBodyOk returns a tuple with the Body field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowApi) GetBodyOk() (*string, bool) {
-	if o == nil || o.Body == nil {
+	if o == nil || IsNil(o.Body) {
 		return nil, false
 	}
 	return o.Body, true
@@ -172,7 +176,7 @@ func (o *WorkflowApi) GetBodyOk() (*string, bool) {
 
 // HasBody returns a boolean if a field has been set.
 func (o *WorkflowApi) HasBody() bool {
-	if o != nil && o.Body != nil {
+	if o != nil && !IsNil(o.Body) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *WorkflowApi) SetBody(v string) {
 
 // GetContentType returns the ContentType field value if set, zero value otherwise.
 func (o *WorkflowApi) GetContentType() string {
-	if o == nil || o.ContentType == nil {
+	if o == nil || IsNil(o.ContentType) {
 		var ret string
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *WorkflowApi) GetContentType() string {
 // GetContentTypeOk returns a tuple with the ContentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowApi) GetContentTypeOk() (*string, bool) {
-	if o == nil || o.ContentType == nil {
+	if o == nil || IsNil(o.ContentType) {
 		return nil, false
 	}
 	return o.ContentType, true
@@ -204,7 +208,7 @@ func (o *WorkflowApi) GetContentTypeOk() (*string, bool) {
 
 // HasContentType returns a boolean if a field has been set.
 func (o *WorkflowApi) HasContentType() bool {
-	if o != nil && o.ContentType != nil {
+	if o != nil && !IsNil(o.ContentType) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *WorkflowApi) SetContentType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *WorkflowApi) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -228,7 +232,7 @@ func (o *WorkflowApi) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowApi) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -236,7 +240,7 @@ func (o *WorkflowApi) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *WorkflowApi) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -250,7 +254,7 @@ func (o *WorkflowApi) SetDescription(v string) {
 
 // GetErrorContentType returns the ErrorContentType field value if set, zero value otherwise.
 func (o *WorkflowApi) GetErrorContentType() string {
-	if o == nil || o.ErrorContentType == nil {
+	if o == nil || IsNil(o.ErrorContentType) {
 		var ret string
 		return ret
 	}
@@ -260,7 +264,7 @@ func (o *WorkflowApi) GetErrorContentType() string {
 // GetErrorContentTypeOk returns a tuple with the ErrorContentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowApi) GetErrorContentTypeOk() (*string, bool) {
-	if o == nil || o.ErrorContentType == nil {
+	if o == nil || IsNil(o.ErrorContentType) {
 		return nil, false
 	}
 	return o.ErrorContentType, true
@@ -268,7 +272,7 @@ func (o *WorkflowApi) GetErrorContentTypeOk() (*string, bool) {
 
 // HasErrorContentType returns a boolean if a field has been set.
 func (o *WorkflowApi) HasErrorContentType() bool {
-	if o != nil && o.ErrorContentType != nil {
+	if o != nil && !IsNil(o.ErrorContentType) {
 		return true
 	}
 
@@ -282,7 +286,7 @@ func (o *WorkflowApi) SetErrorContentType(v string) {
 
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *WorkflowApi) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
@@ -292,7 +296,7 @@ func (o *WorkflowApi) GetLabel() string {
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowApi) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
 	return o.Label, true
@@ -300,7 +304,7 @@ func (o *WorkflowApi) GetLabelOk() (*string, bool) {
 
 // HasLabel returns a boolean if a field has been set.
 func (o *WorkflowApi) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && !IsNil(o.Label) {
 		return true
 	}
 
@@ -314,7 +318,7 @@ func (o *WorkflowApi) SetLabel(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkflowApi) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -324,7 +328,7 @@ func (o *WorkflowApi) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowApi) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -332,7 +336,7 @@ func (o *WorkflowApi) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *WorkflowApi) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -357,7 +361,7 @@ func (o *WorkflowApi) GetOutcomes() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowApi) GetOutcomesOk() (*interface{}, bool) {
-	if o == nil || o.Outcomes == nil {
+	if o == nil || IsNil(o.Outcomes) {
 		return nil, false
 	}
 	return &o.Outcomes, true
@@ -365,7 +369,7 @@ func (o *WorkflowApi) GetOutcomesOk() (*interface{}, bool) {
 
 // HasOutcomes returns a boolean if a field has been set.
 func (o *WorkflowApi) HasOutcomes() bool {
-	if o != nil && o.Outcomes != nil {
+	if o != nil && IsNil(o.Outcomes) {
 		return true
 	}
 
@@ -390,7 +394,7 @@ func (o *WorkflowApi) GetResponseSpec() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowApi) GetResponseSpecOk() (*interface{}, bool) {
-	if o == nil || o.ResponseSpec == nil {
+	if o == nil || IsNil(o.ResponseSpec) {
 		return nil, false
 	}
 	return &o.ResponseSpec, true
@@ -398,7 +402,7 @@ func (o *WorkflowApi) GetResponseSpecOk() (*interface{}, bool) {
 
 // HasResponseSpec returns a boolean if a field has been set.
 func (o *WorkflowApi) HasResponseSpec() bool {
-	if o != nil && o.ResponseSpec != nil {
+	if o != nil && IsNil(o.ResponseSpec) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *WorkflowApi) SetResponseSpec(v interface{}) {
 
 // GetSkipOnCondition returns the SkipOnCondition field value if set, zero value otherwise.
 func (o *WorkflowApi) GetSkipOnCondition() string {
-	if o == nil || o.SkipOnCondition == nil {
+	if o == nil || IsNil(o.SkipOnCondition) {
 		var ret string
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *WorkflowApi) GetSkipOnCondition() string {
 // GetSkipOnConditionOk returns a tuple with the SkipOnCondition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowApi) GetSkipOnConditionOk() (*string, bool) {
-	if o == nil || o.SkipOnCondition == nil {
+	if o == nil || IsNil(o.SkipOnCondition) {
 		return nil, false
 	}
 	return o.SkipOnCondition, true
@@ -430,7 +434,7 @@ func (o *WorkflowApi) GetSkipOnConditionOk() (*string, bool) {
 
 // HasSkipOnCondition returns a boolean if a field has been set.
 func (o *WorkflowApi) HasSkipOnCondition() bool {
-	if o != nil && o.SkipOnCondition != nil {
+	if o != nil && !IsNil(o.SkipOnCondition) {
 		return true
 	}
 
@@ -444,7 +448,7 @@ func (o *WorkflowApi) SetSkipOnCondition(v string) {
 
 // GetStartDelay returns the StartDelay field value if set, zero value otherwise.
 func (o *WorkflowApi) GetStartDelay() int64 {
-	if o == nil || o.StartDelay == nil {
+	if o == nil || IsNil(o.StartDelay) {
 		var ret int64
 		return ret
 	}
@@ -454,7 +458,7 @@ func (o *WorkflowApi) GetStartDelay() int64 {
 // GetStartDelayOk returns a tuple with the StartDelay field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowApi) GetStartDelayOk() (*int64, bool) {
-	if o == nil || o.StartDelay == nil {
+	if o == nil || IsNil(o.StartDelay) {
 		return nil, false
 	}
 	return o.StartDelay, true
@@ -462,7 +466,7 @@ func (o *WorkflowApi) GetStartDelayOk() (*int64, bool) {
 
 // HasStartDelay returns a boolean if a field has been set.
 func (o *WorkflowApi) HasStartDelay() bool {
-	if o != nil && o.StartDelay != nil {
+	if o != nil && !IsNil(o.StartDelay) {
 		return true
 	}
 
@@ -476,7 +480,7 @@ func (o *WorkflowApi) SetStartDelay(v int64) {
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
 func (o *WorkflowApi) GetTimeout() int64 {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		var ret int64
 		return ret
 	}
@@ -486,7 +490,7 @@ func (o *WorkflowApi) GetTimeout() int64 {
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowApi) GetTimeoutOk() (*int64, bool) {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
 	return o.Timeout, true
@@ -494,7 +498,7 @@ func (o *WorkflowApi) GetTimeoutOk() (*int64, bool) {
 
 // HasTimeout returns a boolean if a field has been set.
 func (o *WorkflowApi) HasTimeout() bool {
-	if o != nil && o.Timeout != nil {
+	if o != nil && !IsNil(o.Timeout) {
 		return true
 	}
 
@@ -507,40 +511,44 @@ func (o *WorkflowApi) SetTimeout(v int64) {
 }
 
 func (o WorkflowApi) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowApi) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AssetTargetMoid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AssetTargetMoid) {
 		toSerialize["AssetTargetMoid"] = o.AssetTargetMoid
 	}
-	if o.Body != nil {
+	if !IsNil(o.Body) {
 		toSerialize["Body"] = o.Body
 	}
-	if o.ContentType != nil {
+	if !IsNil(o.ContentType) {
 		toSerialize["ContentType"] = o.ContentType
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.ErrorContentType != nil {
+	if !IsNil(o.ErrorContentType) {
 		toSerialize["ErrorContentType"] = o.ErrorContentType
 	}
-	if o.Label != nil {
+	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.Outcomes != nil {
@@ -549,13 +557,13 @@ func (o WorkflowApi) MarshalJSON() ([]byte, error) {
 	if o.ResponseSpec != nil {
 		toSerialize["ResponseSpec"] = o.ResponseSpec
 	}
-	if o.SkipOnCondition != nil {
+	if !IsNil(o.SkipOnCondition) {
 		toSerialize["SkipOnCondition"] = o.SkipOnCondition
 	}
-	if o.StartDelay != nil {
+	if !IsNil(o.StartDelay) {
 		toSerialize["StartDelay"] = o.StartDelay
 	}
-	if o.Timeout != nil {
+	if !IsNil(o.Timeout) {
 		toSerialize["Timeout"] = o.Timeout
 	}
 
@@ -563,10 +571,32 @@ func (o WorkflowApi) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowApi) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowApi) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowApiWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -600,7 +630,7 @@ func (o *WorkflowApi) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowApiWithoutEmbeddedStruct := WorkflowApiWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowApiWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowApiWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowApi := _WorkflowApi{}
 		varWorkflowApi.ClassId = varWorkflowApiWithoutEmbeddedStruct.ClassId
@@ -624,7 +654,7 @@ func (o *WorkflowApi) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowApi := _WorkflowApi{}
 
-	err = json.Unmarshal(bytes, &varWorkflowApi)
+	err = json.Unmarshal(data, &varWorkflowApi)
 	if err == nil {
 		o.MoBaseComplexType = varWorkflowApi.MoBaseComplexType
 	} else {
@@ -633,7 +663,7 @@ func (o *WorkflowApi) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AssetTargetMoid")

@@ -10,30 +10,30 @@ Name | Type | Description | Notes
 **ServerId** | Pointer to **int64** | RackUnit ID that uniquely identifies the server. | [optional] [readonly] 
 **TopologyScanStatus** | Pointer to **string** | To maintain the Topology workflow run status. | [optional] 
 **Adapters** | Pointer to [**[]AdapterUnitRelationship**](AdapterUnitRelationship.md) | An array of relationships to adapterUnit resources. | [optional] [readonly] 
-**BiosBootmode** | Pointer to [**BiosBootModeRelationship**](BiosBootModeRelationship.md) |  | [optional] 
-**BiosTokenSettings** | Pointer to [**BiosTokenSettingsRelationship**](BiosTokenSettingsRelationship.md) |  | [optional] 
-**BiosVfSelectMemoryRasConfiguration** | Pointer to [**BiosVfSelectMemoryRasConfigurationRelationship**](BiosVfSelectMemoryRasConfigurationRelationship.md) |  | [optional] 
+**BiosBootmode** | Pointer to [**NullableBiosBootModeRelationship**](BiosBootModeRelationship.md) |  | [optional] 
+**BiosTokenSettings** | Pointer to [**NullableBiosTokenSettingsRelationship**](BiosTokenSettingsRelationship.md) |  | [optional] 
+**BiosVfSelectMemoryRasConfiguration** | Pointer to [**NullableBiosVfSelectMemoryRasConfigurationRelationship**](BiosVfSelectMemoryRasConfigurationRelationship.md) |  | [optional] 
 **Biosunits** | Pointer to [**[]BiosUnitRelationship**](BiosUnitRelationship.md) | An array of relationships to biosUnit resources. | [optional] [readonly] 
-**Bmc** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
-**Board** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
-**BootDeviceBootmode** | Pointer to [**BootDeviceBootModeRelationship**](BootDeviceBootModeRelationship.md) |  | [optional] 
+**Bmc** | Pointer to [**NullableManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
+**Board** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
+**BootDeviceBootmode** | Pointer to [**NullableBootDeviceBootModeRelationship**](BootDeviceBootModeRelationship.md) |  | [optional] 
 **ComputePersonality** | Pointer to [**[]ComputePersonalityRelationship**](ComputePersonalityRelationship.md) | An array of relationships to computePersonality resources. | [optional] [readonly] 
 **Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
 **GenericInventoryHolders** | Pointer to [**[]InventoryGenericInventoryHolderRelationship**](InventoryGenericInventoryHolderRelationship.md) | An array of relationships to inventoryGenericInventoryHolder resources. | [optional] [readonly] 
 **GraphicsCards** | Pointer to [**[]GraphicsCardRelationship**](GraphicsCardRelationship.md) | An array of relationships to graphicsCard resources. | [optional] 
 **HybridDriveSlots** | Pointer to [**[]EquipmentHybridDriveSlotRelationship**](EquipmentHybridDriveSlotRelationship.md) | An array of relationships to equipmentHybridDriveSlot resources. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**LocatorLed** | Pointer to [**NullableEquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **MemoryArrays** | Pointer to [**[]MemoryArrayRelationship**](MemoryArrayRelationship.md) | An array of relationships to memoryArray resources. | [optional] 
 **PciDevices** | Pointer to [**[]PciDeviceRelationship**](PciDeviceRelationship.md) | An array of relationships to pciDevice resources. | [optional] [readonly] 
 **Processors** | Pointer to [**[]ProcessorUnitRelationship**](ProcessorUnitRelationship.md) | An array of relationships to processorUnit resources. | [optional] 
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
-**RackEnclosureSlot** | Pointer to [**EquipmentRackEnclosureSlotRelationship**](EquipmentRackEnclosureSlotRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RackEnclosureSlot** | Pointer to [**NullableEquipmentRackEnclosureSlotRelationship**](EquipmentRackEnclosureSlotRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **SasExpanders** | Pointer to [**[]StorageSasExpanderRelationship**](StorageSasExpanderRelationship.md) | An array of relationships to storageSasExpander resources. | [optional] 
 **StorageControllers** | Pointer to [**[]StorageControllerRelationship**](StorageControllerRelationship.md) | An array of relationships to storageController resources. | [optional] 
 **StorageEnclosures** | Pointer to [**[]StorageEnclosureRelationship**](StorageEnclosureRelationship.md) | An array of relationships to storageEnclosure resources. | [optional] [readonly] 
-**TopSystem** | Pointer to [**TopSystemRelationship**](TopSystemRelationship.md) |  | [optional] 
+**TopSystem** | Pointer to [**NullableTopSystemRelationship**](TopSystemRelationship.md) |  | [optional] 
 **UnitPersonality** | Pointer to [**[]RackUnitPersonalityRelationship**](RackUnitPersonalityRelationship.md) | An array of relationships to rackUnitPersonality resources. | [optional] [readonly] 
 
 ## Methods
@@ -230,6 +230,16 @@ SetBiosBootmode sets BiosBootmode field to given value.
 
 HasBiosBootmode returns a boolean if a field has been set.
 
+### SetBiosBootmodeNil
+
+`func (o *ComputeRackUnit) SetBiosBootmodeNil(b bool)`
+
+ SetBiosBootmodeNil sets the value for BiosBootmode to be an explicit nil
+
+### UnsetBiosBootmode
+`func (o *ComputeRackUnit) UnsetBiosBootmode()`
+
+UnsetBiosBootmode ensures that no value is present for BiosBootmode, not even an explicit nil
 ### GetBiosTokenSettings
 
 `func (o *ComputeRackUnit) GetBiosTokenSettings() BiosTokenSettingsRelationship`
@@ -255,6 +265,16 @@ SetBiosTokenSettings sets BiosTokenSettings field to given value.
 
 HasBiosTokenSettings returns a boolean if a field has been set.
 
+### SetBiosTokenSettingsNil
+
+`func (o *ComputeRackUnit) SetBiosTokenSettingsNil(b bool)`
+
+ SetBiosTokenSettingsNil sets the value for BiosTokenSettings to be an explicit nil
+
+### UnsetBiosTokenSettings
+`func (o *ComputeRackUnit) UnsetBiosTokenSettings()`
+
+UnsetBiosTokenSettings ensures that no value is present for BiosTokenSettings, not even an explicit nil
 ### GetBiosVfSelectMemoryRasConfiguration
 
 `func (o *ComputeRackUnit) GetBiosVfSelectMemoryRasConfiguration() BiosVfSelectMemoryRasConfigurationRelationship`
@@ -280,6 +300,16 @@ SetBiosVfSelectMemoryRasConfiguration sets BiosVfSelectMemoryRasConfiguration fi
 
 HasBiosVfSelectMemoryRasConfiguration returns a boolean if a field has been set.
 
+### SetBiosVfSelectMemoryRasConfigurationNil
+
+`func (o *ComputeRackUnit) SetBiosVfSelectMemoryRasConfigurationNil(b bool)`
+
+ SetBiosVfSelectMemoryRasConfigurationNil sets the value for BiosVfSelectMemoryRasConfiguration to be an explicit nil
+
+### UnsetBiosVfSelectMemoryRasConfiguration
+`func (o *ComputeRackUnit) UnsetBiosVfSelectMemoryRasConfiguration()`
+
+UnsetBiosVfSelectMemoryRasConfiguration ensures that no value is present for BiosVfSelectMemoryRasConfiguration, not even an explicit nil
 ### GetBiosunits
 
 `func (o *ComputeRackUnit) GetBiosunits() []BiosUnitRelationship`
@@ -340,6 +370,16 @@ SetBmc sets Bmc field to given value.
 
 HasBmc returns a boolean if a field has been set.
 
+### SetBmcNil
+
+`func (o *ComputeRackUnit) SetBmcNil(b bool)`
+
+ SetBmcNil sets the value for Bmc to be an explicit nil
+
+### UnsetBmc
+`func (o *ComputeRackUnit) UnsetBmc()`
+
+UnsetBmc ensures that no value is present for Bmc, not even an explicit nil
 ### GetBoard
 
 `func (o *ComputeRackUnit) GetBoard() ComputeBoardRelationship`
@@ -365,6 +405,16 @@ SetBoard sets Board field to given value.
 
 HasBoard returns a boolean if a field has been set.
 
+### SetBoardNil
+
+`func (o *ComputeRackUnit) SetBoardNil(b bool)`
+
+ SetBoardNil sets the value for Board to be an explicit nil
+
+### UnsetBoard
+`func (o *ComputeRackUnit) UnsetBoard()`
+
+UnsetBoard ensures that no value is present for Board, not even an explicit nil
 ### GetBootDeviceBootmode
 
 `func (o *ComputeRackUnit) GetBootDeviceBootmode() BootDeviceBootModeRelationship`
@@ -390,6 +440,16 @@ SetBootDeviceBootmode sets BootDeviceBootmode field to given value.
 
 HasBootDeviceBootmode returns a boolean if a field has been set.
 
+### SetBootDeviceBootmodeNil
+
+`func (o *ComputeRackUnit) SetBootDeviceBootmodeNil(b bool)`
+
+ SetBootDeviceBootmodeNil sets the value for BootDeviceBootmode to be an explicit nil
+
+### UnsetBootDeviceBootmode
+`func (o *ComputeRackUnit) UnsetBootDeviceBootmode()`
+
+UnsetBootDeviceBootmode ensures that no value is present for BootDeviceBootmode, not even an explicit nil
 ### GetComputePersonality
 
 `func (o *ComputeRackUnit) GetComputePersonality() []ComputePersonalityRelationship`
@@ -590,6 +650,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *ComputeRackUnit) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *ComputeRackUnit) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetLocatorLed
 
 `func (o *ComputeRackUnit) GetLocatorLed() EquipmentLocatorLedRelationship`
@@ -615,6 +685,16 @@ SetLocatorLed sets LocatorLed field to given value.
 
 HasLocatorLed returns a boolean if a field has been set.
 
+### SetLocatorLedNil
+
+`func (o *ComputeRackUnit) SetLocatorLedNil(b bool)`
+
+ SetLocatorLedNil sets the value for LocatorLed to be an explicit nil
+
+### UnsetLocatorLed
+`func (o *ComputeRackUnit) UnsetLocatorLed()`
+
+UnsetLocatorLed ensures that no value is present for LocatorLed, not even an explicit nil
 ### GetMemoryArrays
 
 `func (o *ComputeRackUnit) GetMemoryArrays() []MemoryArrayRelationship`
@@ -780,6 +860,16 @@ SetRackEnclosureSlot sets RackEnclosureSlot field to given value.
 
 HasRackEnclosureSlot returns a boolean if a field has been set.
 
+### SetRackEnclosureSlotNil
+
+`func (o *ComputeRackUnit) SetRackEnclosureSlotNil(b bool)`
+
+ SetRackEnclosureSlotNil sets the value for RackEnclosureSlot to be an explicit nil
+
+### UnsetRackEnclosureSlot
+`func (o *ComputeRackUnit) UnsetRackEnclosureSlot()`
+
+UnsetRackEnclosureSlot ensures that no value is present for RackEnclosureSlot, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *ComputeRackUnit) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -805,6 +895,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *ComputeRackUnit) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *ComputeRackUnit) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetSasExpanders
 
 `func (o *ComputeRackUnit) GetSasExpanders() []StorageSasExpanderRelationship`
@@ -935,6 +1035,16 @@ SetTopSystem sets TopSystem field to given value.
 
 HasTopSystem returns a boolean if a field has been set.
 
+### SetTopSystemNil
+
+`func (o *ComputeRackUnit) SetTopSystemNil(b bool)`
+
+ SetTopSystemNil sets the value for TopSystem to be an explicit nil
+
+### UnsetTopSystem
+`func (o *ComputeRackUnit) UnsetTopSystem()`
+
+UnsetTopSystem ensures that no value is present for TopSystem, not even an explicit nil
 ### GetUnitPersonality
 
 `func (o *ComputeRackUnit) GetUnitPersonality() []RackUnitPersonalityRelationship`

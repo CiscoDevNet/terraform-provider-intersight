@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MemoryUnit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MemoryUnit{}
 
 // MemoryUnit This represents a memory DIMM on a server.
 type MemoryUnit struct {
@@ -33,10 +37,10 @@ type MemoryUnit struct {
 	// This field displays the part number of the DIMM.
 	PartNumber *string `json:"PartNumber,omitempty"`
 	// This field displays the product ID of the DIMM.
-	Pid                  *string                              `json:"Pid,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	MemoryArray          *MemoryArrayRelationship             `json:"MemoryArray,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Pid                  *string                                     `json:"Pid,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	MemoryArray          NullableMemoryArrayRelationship             `json:"MemoryArray,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *MemoryUnit) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *MemoryUnit) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *MemoryUnit) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryUnit) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -133,7 +137,7 @@ func (o *MemoryUnit) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *MemoryUnit) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *MemoryUnit) SetDescription(v string) {
 
 // GetIsPlatformSupported returns the IsPlatformSupported field value if set, zero value otherwise.
 func (o *MemoryUnit) GetIsPlatformSupported() bool {
-	if o == nil || o.IsPlatformSupported == nil {
+	if o == nil || IsNil(o.IsPlatformSupported) {
 		var ret bool
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *MemoryUnit) GetIsPlatformSupported() bool {
 // GetIsPlatformSupportedOk returns a tuple with the IsPlatformSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryUnit) GetIsPlatformSupportedOk() (*bool, bool) {
-	if o == nil || o.IsPlatformSupported == nil {
+	if o == nil || IsNil(o.IsPlatformSupported) {
 		return nil, false
 	}
 	return o.IsPlatformSupported, true
@@ -165,7 +169,7 @@ func (o *MemoryUnit) GetIsPlatformSupportedOk() (*bool, bool) {
 
 // HasIsPlatformSupported returns a boolean if a field has been set.
 func (o *MemoryUnit) HasIsPlatformSupported() bool {
-	if o != nil && o.IsPlatformSupported != nil {
+	if o != nil && !IsNil(o.IsPlatformSupported) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *MemoryUnit) SetIsPlatformSupported(v bool) {
 
 // GetMemoryId returns the MemoryId field value if set, zero value otherwise.
 func (o *MemoryUnit) GetMemoryId() int64 {
-	if o == nil || o.MemoryId == nil {
+	if o == nil || IsNil(o.MemoryId) {
 		var ret int64
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *MemoryUnit) GetMemoryId() int64 {
 // GetMemoryIdOk returns a tuple with the MemoryId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryUnit) GetMemoryIdOk() (*int64, bool) {
-	if o == nil || o.MemoryId == nil {
+	if o == nil || IsNil(o.MemoryId) {
 		return nil, false
 	}
 	return o.MemoryId, true
@@ -197,7 +201,7 @@ func (o *MemoryUnit) GetMemoryIdOk() (*int64, bool) {
 
 // HasMemoryId returns a boolean if a field has been set.
 func (o *MemoryUnit) HasMemoryId() bool {
-	if o != nil && o.MemoryId != nil {
+	if o != nil && !IsNil(o.MemoryId) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *MemoryUnit) SetMemoryId(v int64) {
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
 func (o *MemoryUnit) GetPartNumber() string {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *MemoryUnit) GetPartNumber() string {
 // GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryUnit) GetPartNumberOk() (*string, bool) {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		return nil, false
 	}
 	return o.PartNumber, true
@@ -229,7 +233,7 @@ func (o *MemoryUnit) GetPartNumberOk() (*string, bool) {
 
 // HasPartNumber returns a boolean if a field has been set.
 func (o *MemoryUnit) HasPartNumber() bool {
-	if o != nil && o.PartNumber != nil {
+	if o != nil && !IsNil(o.PartNumber) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *MemoryUnit) SetPartNumber(v string) {
 
 // GetPid returns the Pid field value if set, zero value otherwise.
 func (o *MemoryUnit) GetPid() string {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		var ret string
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *MemoryUnit) GetPid() string {
 // GetPidOk returns a tuple with the Pid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryUnit) GetPidOk() (*string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -261,7 +265,7 @@ func (o *MemoryUnit) GetPidOk() (*string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *MemoryUnit) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && !IsNil(o.Pid) {
 		return true
 	}
 
@@ -273,151 +277,210 @@ func (o *MemoryUnit) SetPid(v string) {
 	o.Pid = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryUnit) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryUnit) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *MemoryUnit) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *MemoryUnit) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetMemoryArray returns the MemoryArray field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *MemoryUnit) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *MemoryUnit) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetMemoryArray returns the MemoryArray field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryUnit) GetMemoryArray() MemoryArrayRelationship {
-	if o == nil || o.MemoryArray == nil {
+	if o == nil || IsNil(o.MemoryArray.Get()) {
 		var ret MemoryArrayRelationship
 		return ret
 	}
-	return *o.MemoryArray
+	return *o.MemoryArray.Get()
 }
 
 // GetMemoryArrayOk returns a tuple with the MemoryArray field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryUnit) GetMemoryArrayOk() (*MemoryArrayRelationship, bool) {
-	if o == nil || o.MemoryArray == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.MemoryArray, true
+	return o.MemoryArray.Get(), o.MemoryArray.IsSet()
 }
 
 // HasMemoryArray returns a boolean if a field has been set.
 func (o *MemoryUnit) HasMemoryArray() bool {
-	if o != nil && o.MemoryArray != nil {
+	if o != nil && o.MemoryArray.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMemoryArray gets a reference to the given MemoryArrayRelationship and assigns it to the MemoryArray field.
+// SetMemoryArray gets a reference to the given NullableMemoryArrayRelationship and assigns it to the MemoryArray field.
 func (o *MemoryUnit) SetMemoryArray(v MemoryArrayRelationship) {
-	o.MemoryArray = &v
+	o.MemoryArray.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetMemoryArrayNil sets the value for MemoryArray to be an explicit nil
+func (o *MemoryUnit) SetMemoryArrayNil() {
+	o.MemoryArray.Set(nil)
+}
+
+// UnsetMemoryArray ensures that no value is present for MemoryArray, not even an explicit nil
+func (o *MemoryUnit) UnsetMemoryArray() {
+	o.MemoryArray.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryUnit) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryUnit) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *MemoryUnit) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *MemoryUnit) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *MemoryUnit) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *MemoryUnit) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o MemoryUnit) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MemoryUnit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMemoryAbstractUnit, errMemoryAbstractUnit := json.Marshal(o.MemoryAbstractUnit)
 	if errMemoryAbstractUnit != nil {
-		return []byte{}, errMemoryAbstractUnit
+		return map[string]interface{}{}, errMemoryAbstractUnit
 	}
 	errMemoryAbstractUnit = json.Unmarshal([]byte(serializedMemoryAbstractUnit), &toSerialize)
 	if errMemoryAbstractUnit != nil {
-		return []byte{}, errMemoryAbstractUnit
+		return map[string]interface{}{}, errMemoryAbstractUnit
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.IsPlatformSupported != nil {
+	if !IsNil(o.IsPlatformSupported) {
 		toSerialize["IsPlatformSupported"] = o.IsPlatformSupported
 	}
-	if o.MemoryId != nil {
+	if !IsNil(o.MemoryId) {
 		toSerialize["MemoryId"] = o.MemoryId
 	}
-	if o.PartNumber != nil {
+	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if o.Pid != nil {
+	if !IsNil(o.Pid) {
 		toSerialize["Pid"] = o.Pid
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.MemoryArray != nil {
-		toSerialize["MemoryArray"] = o.MemoryArray
+	if o.MemoryArray.IsSet() {
+		toSerialize["MemoryArray"] = o.MemoryArray.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MemoryUnit) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MemoryUnit) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MemoryUnitWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -432,15 +495,15 @@ func (o *MemoryUnit) UnmarshalJSON(bytes []byte) (err error) {
 		// This field displays the part number of the DIMM.
 		PartNumber *string `json:"PartNumber,omitempty"`
 		// This field displays the product ID of the DIMM.
-		Pid                 *string                              `json:"Pid,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		MemoryArray         *MemoryArrayRelationship             `json:"MemoryArray,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Pid                 *string                                     `json:"Pid,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		MemoryArray         NullableMemoryArrayRelationship             `json:"MemoryArray,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varMemoryUnitWithoutEmbeddedStruct := MemoryUnitWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMemoryUnitWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMemoryUnitWithoutEmbeddedStruct)
 	if err == nil {
 		varMemoryUnit := _MemoryUnit{}
 		varMemoryUnit.ClassId = varMemoryUnitWithoutEmbeddedStruct.ClassId
@@ -460,7 +523,7 @@ func (o *MemoryUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMemoryUnit := _MemoryUnit{}
 
-	err = json.Unmarshal(bytes, &varMemoryUnit)
+	err = json.Unmarshal(data, &varMemoryUnit)
 	if err == nil {
 		o.MemoryAbstractUnit = varMemoryUnit.MemoryAbstractUnit
 	} else {
@@ -469,7 +532,7 @@ func (o *MemoryUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

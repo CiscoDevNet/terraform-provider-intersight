@@ -24,9 +24,9 @@ Name | Type | Description | Notes
 **WriteEnabled** | Pointer to **string** | Write access state of the FlexUtil Physical Drive. | [optional] 
 **WriteErrorCount** | Pointer to **string** | Write error count of the FlexUtil Physical Drive. | [optional] 
 **WriteErrorThreshold** | Pointer to **string** | Write error threshold for FlexUtil Physical Drive. | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StorageFlexUtilController** | Pointer to [**StorageFlexUtilControllerRelationship**](StorageFlexUtilControllerRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageFlexUtilController** | Pointer to [**NullableStorageFlexUtilControllerRelationship**](StorageFlexUtilControllerRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -562,6 +562,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StorageFlexUtilPhysicalDrive) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StorageFlexUtilPhysicalDrive) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageFlexUtilPhysicalDrive) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -587,6 +597,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageFlexUtilPhysicalDrive) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageFlexUtilPhysicalDrive) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageFlexUtilController
 
 `func (o *StorageFlexUtilPhysicalDrive) GetStorageFlexUtilController() StorageFlexUtilControllerRelationship`
@@ -612,6 +632,16 @@ SetStorageFlexUtilController sets StorageFlexUtilController field to given value
 
 HasStorageFlexUtilController returns a boolean if a field has been set.
 
+### SetStorageFlexUtilControllerNil
+
+`func (o *StorageFlexUtilPhysicalDrive) SetStorageFlexUtilControllerNil(b bool)`
+
+ SetStorageFlexUtilControllerNil sets the value for StorageFlexUtilController to be an explicit nil
+
+### UnsetStorageFlexUtilController
+`func (o *StorageFlexUtilPhysicalDrive) UnsetStorageFlexUtilController()`
+
+UnsetStorageFlexUtilController ensures that no value is present for StorageFlexUtilController, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the IwotenantMaintenanceNotification type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IwotenantMaintenanceNotification{}
 
 // IwotenantMaintenanceNotification Maintenance related notification to be displayed as UI banner when customer logs in the Intersight UI.
 type IwotenantMaintenanceNotification struct {
@@ -115,7 +119,7 @@ func (o *IwotenantMaintenanceNotification) SetObjectType(v string) {
 
 // GetI18nKey returns the I18nKey field value if set, zero value otherwise.
 func (o *IwotenantMaintenanceNotification) GetI18nKey() string {
-	if o == nil || o.I18nKey == nil {
+	if o == nil || IsNil(o.I18nKey) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *IwotenantMaintenanceNotification) GetI18nKey() string {
 // GetI18nKeyOk returns a tuple with the I18nKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantMaintenanceNotification) GetI18nKeyOk() (*string, bool) {
-	if o == nil || o.I18nKey == nil {
+	if o == nil || IsNil(o.I18nKey) {
 		return nil, false
 	}
 	return o.I18nKey, true
@@ -133,7 +137,7 @@ func (o *IwotenantMaintenanceNotification) GetI18nKeyOk() (*string, bool) {
 
 // HasI18nKey returns a boolean if a field has been set.
 func (o *IwotenantMaintenanceNotification) HasI18nKey() bool {
-	if o != nil && o.I18nKey != nil {
+	if o != nil && !IsNil(o.I18nKey) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *IwotenantMaintenanceNotification) SetI18nKey(v string) {
 
 // GetIwoId returns the IwoId field value if set, zero value otherwise.
 func (o *IwotenantMaintenanceNotification) GetIwoId() string {
-	if o == nil || o.IwoId == nil {
+	if o == nil || IsNil(o.IwoId) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *IwotenantMaintenanceNotification) GetIwoId() string {
 // GetIwoIdOk returns a tuple with the IwoId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantMaintenanceNotification) GetIwoIdOk() (*string, bool) {
-	if o == nil || o.IwoId == nil {
+	if o == nil || IsNil(o.IwoId) {
 		return nil, false
 	}
 	return o.IwoId, true
@@ -165,7 +169,7 @@ func (o *IwotenantMaintenanceNotification) GetIwoIdOk() (*string, bool) {
 
 // HasIwoId returns a boolean if a field has been set.
 func (o *IwotenantMaintenanceNotification) HasIwoId() bool {
-	if o != nil && o.IwoId != nil {
+	if o != nil && !IsNil(o.IwoId) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *IwotenantMaintenanceNotification) SetIwoId(v string) {
 
 // GetMaintenanceStartTime returns the MaintenanceStartTime field value if set, zero value otherwise.
 func (o *IwotenantMaintenanceNotification) GetMaintenanceStartTime() time.Time {
-	if o == nil || o.MaintenanceStartTime == nil {
+	if o == nil || IsNil(o.MaintenanceStartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *IwotenantMaintenanceNotification) GetMaintenanceStartTime() time.Time {
 // GetMaintenanceStartTimeOk returns a tuple with the MaintenanceStartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantMaintenanceNotification) GetMaintenanceStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.MaintenanceStartTime == nil {
+	if o == nil || IsNil(o.MaintenanceStartTime) {
 		return nil, false
 	}
 	return o.MaintenanceStartTime, true
@@ -197,7 +201,7 @@ func (o *IwotenantMaintenanceNotification) GetMaintenanceStartTimeOk() (*time.Ti
 
 // HasMaintenanceStartTime returns a boolean if a field has been set.
 func (o *IwotenantMaintenanceNotification) HasMaintenanceStartTime() bool {
-	if o != nil && o.MaintenanceStartTime != nil {
+	if o != nil && !IsNil(o.MaintenanceStartTime) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *IwotenantMaintenanceNotification) SetMaintenanceStartTime(v time.Time) 
 
 // GetNtfnMessage returns the NtfnMessage field value if set, zero value otherwise.
 func (o *IwotenantMaintenanceNotification) GetNtfnMessage() string {
-	if o == nil || o.NtfnMessage == nil {
+	if o == nil || IsNil(o.NtfnMessage) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *IwotenantMaintenanceNotification) GetNtfnMessage() string {
 // GetNtfnMessageOk returns a tuple with the NtfnMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantMaintenanceNotification) GetNtfnMessageOk() (*string, bool) {
-	if o == nil || o.NtfnMessage == nil {
+	if o == nil || IsNil(o.NtfnMessage) {
 		return nil, false
 	}
 	return o.NtfnMessage, true
@@ -229,7 +233,7 @@ func (o *IwotenantMaintenanceNotification) GetNtfnMessageOk() (*string, bool) {
 
 // HasNtfnMessage returns a boolean if a field has been set.
 func (o *IwotenantMaintenanceNotification) HasNtfnMessage() bool {
-	if o != nil && o.NtfnMessage != nil {
+	if o != nil && !IsNil(o.NtfnMessage) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *IwotenantMaintenanceNotification) SetNtfnMessage(v string) {
 
 // GetShowFromTime returns the ShowFromTime field value if set, zero value otherwise.
 func (o *IwotenantMaintenanceNotification) GetShowFromTime() time.Time {
-	if o == nil || o.ShowFromTime == nil {
+	if o == nil || IsNil(o.ShowFromTime) {
 		var ret time.Time
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *IwotenantMaintenanceNotification) GetShowFromTime() time.Time {
 // GetShowFromTimeOk returns a tuple with the ShowFromTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantMaintenanceNotification) GetShowFromTimeOk() (*time.Time, bool) {
-	if o == nil || o.ShowFromTime == nil {
+	if o == nil || IsNil(o.ShowFromTime) {
 		return nil, false
 	}
 	return o.ShowFromTime, true
@@ -261,7 +265,7 @@ func (o *IwotenantMaintenanceNotification) GetShowFromTimeOk() (*time.Time, bool
 
 // HasShowFromTime returns a boolean if a field has been set.
 func (o *IwotenantMaintenanceNotification) HasShowFromTime() bool {
-	if o != nil && o.ShowFromTime != nil {
+	if o != nil && !IsNil(o.ShowFromTime) {
 		return true
 	}
 
@@ -275,7 +279,7 @@ func (o *IwotenantMaintenanceNotification) SetShowFromTime(v time.Time) {
 
 // GetShowUntilTime returns the ShowUntilTime field value if set, zero value otherwise.
 func (o *IwotenantMaintenanceNotification) GetShowUntilTime() time.Time {
-	if o == nil || o.ShowUntilTime == nil {
+	if o == nil || IsNil(o.ShowUntilTime) {
 		var ret time.Time
 		return ret
 	}
@@ -285,7 +289,7 @@ func (o *IwotenantMaintenanceNotification) GetShowUntilTime() time.Time {
 // GetShowUntilTimeOk returns a tuple with the ShowUntilTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IwotenantMaintenanceNotification) GetShowUntilTimeOk() (*time.Time, bool) {
-	if o == nil || o.ShowUntilTime == nil {
+	if o == nil || IsNil(o.ShowUntilTime) {
 		return nil, false
 	}
 	return o.ShowUntilTime, true
@@ -293,7 +297,7 @@ func (o *IwotenantMaintenanceNotification) GetShowUntilTimeOk() (*time.Time, boo
 
 // HasShowUntilTime returns a boolean if a field has been set.
 func (o *IwotenantMaintenanceNotification) HasShowUntilTime() bool {
-	if o != nil && o.ShowUntilTime != nil {
+	if o != nil && !IsNil(o.ShowUntilTime) {
 		return true
 	}
 
@@ -306,37 +310,41 @@ func (o *IwotenantMaintenanceNotification) SetShowUntilTime(v time.Time) {
 }
 
 func (o IwotenantMaintenanceNotification) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IwotenantMaintenanceNotification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.I18nKey != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.I18nKey) {
 		toSerialize["I18nKey"] = o.I18nKey
 	}
-	if o.IwoId != nil {
+	if !IsNil(o.IwoId) {
 		toSerialize["IwoId"] = o.IwoId
 	}
-	if o.MaintenanceStartTime != nil {
+	if !IsNil(o.MaintenanceStartTime) {
 		toSerialize["MaintenanceStartTime"] = o.MaintenanceStartTime
 	}
-	if o.NtfnMessage != nil {
+	if !IsNil(o.NtfnMessage) {
 		toSerialize["NtfnMessage"] = o.NtfnMessage
 	}
-	if o.ShowFromTime != nil {
+	if !IsNil(o.ShowFromTime) {
 		toSerialize["ShowFromTime"] = o.ShowFromTime
 	}
-	if o.ShowUntilTime != nil {
+	if !IsNil(o.ShowUntilTime) {
 		toSerialize["ShowUntilTime"] = o.ShowUntilTime
 	}
 
@@ -344,10 +352,32 @@ func (o IwotenantMaintenanceNotification) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IwotenantMaintenanceNotification) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IwotenantMaintenanceNotification) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IwotenantMaintenanceNotificationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -369,7 +399,7 @@ func (o *IwotenantMaintenanceNotification) UnmarshalJSON(bytes []byte) (err erro
 
 	varIwotenantMaintenanceNotificationWithoutEmbeddedStruct := IwotenantMaintenanceNotificationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIwotenantMaintenanceNotificationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIwotenantMaintenanceNotificationWithoutEmbeddedStruct)
 	if err == nil {
 		varIwotenantMaintenanceNotification := _IwotenantMaintenanceNotification{}
 		varIwotenantMaintenanceNotification.ClassId = varIwotenantMaintenanceNotificationWithoutEmbeddedStruct.ClassId
@@ -387,7 +417,7 @@ func (o *IwotenantMaintenanceNotification) UnmarshalJSON(bytes []byte) (err erro
 
 	varIwotenantMaintenanceNotification := _IwotenantMaintenanceNotification{}
 
-	err = json.Unmarshal(bytes, &varIwotenantMaintenanceNotification)
+	err = json.Unmarshal(data, &varIwotenantMaintenanceNotification)
 	if err == nil {
 		o.MoBaseMo = varIwotenantMaintenanceNotification.MoBaseMo
 	} else {
@@ -396,7 +426,7 @@ func (o *IwotenantMaintenanceNotification) UnmarshalJSON(bytes []byte) (err erro
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "I18nKey")

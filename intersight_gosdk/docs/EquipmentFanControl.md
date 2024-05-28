@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.FanControl"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.FanControl"]
 **Mode** | Pointer to **string** | This field identifies the Fan Control Mode on the endpoint. * &#x60;Balanced&#x60; - Value of Fan Speed is Balanced. * &#x60;LowPower&#x60; - Value of Fan Speed is LowPower. * &#x60;HighPower&#x60; - Value of Fan Speed is HighPower. * &#x60;MaximumPower&#x60; - Value of Fan Speed is MaximumPower. * &#x60;Acoustic&#x60; - Value of Fan Speed is Acoustic. | [optional] [readonly] [default to "Balanced"]
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -120,6 +120,16 @@ SetEquipmentChassis sets EquipmentChassis field to given value.
 
 HasEquipmentChassis returns a boolean if a field has been set.
 
+### SetEquipmentChassisNil
+
+`func (o *EquipmentFanControl) SetEquipmentChassisNil(b bool)`
+
+ SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+
+### UnsetEquipmentChassis
+`func (o *EquipmentFanControl) UnsetEquipmentChassis()`
+
+UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentFanControl) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -145,6 +155,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *EquipmentFanControl) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *EquipmentFanControl) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EquipmentFanControl) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -170,6 +190,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EquipmentFanControl) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EquipmentFanControl) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

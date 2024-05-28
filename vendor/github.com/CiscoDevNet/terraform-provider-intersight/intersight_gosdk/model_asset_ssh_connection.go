@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetSshConnection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetSshConnection{}
 
 // AssetSshConnection SshConnection provides the necessary details for Intersight to connect and authenticate with a managed target over an SSH connection.
 type AssetSshConnection struct {
@@ -106,7 +110,7 @@ func (o *AssetSshConnection) SetObjectType(v string) {
 
 // GetManagementAddress returns the ManagementAddress field value if set, zero value otherwise.
 func (o *AssetSshConnection) GetManagementAddress() string {
-	if o == nil || o.ManagementAddress == nil {
+	if o == nil || IsNil(o.ManagementAddress) {
 		var ret string
 		return ret
 	}
@@ -116,7 +120,7 @@ func (o *AssetSshConnection) GetManagementAddress() string {
 // GetManagementAddressOk returns a tuple with the ManagementAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetSshConnection) GetManagementAddressOk() (*string, bool) {
-	if o == nil || o.ManagementAddress == nil {
+	if o == nil || IsNil(o.ManagementAddress) {
 		return nil, false
 	}
 	return o.ManagementAddress, true
@@ -124,7 +128,7 @@ func (o *AssetSshConnection) GetManagementAddressOk() (*string, bool) {
 
 // HasManagementAddress returns a boolean if a field has been set.
 func (o *AssetSshConnection) HasManagementAddress() bool {
-	if o != nil && o.ManagementAddress != nil {
+	if o != nil && !IsNil(o.ManagementAddress) {
 		return true
 	}
 
@@ -138,7 +142,7 @@ func (o *AssetSshConnection) SetManagementAddress(v string) {
 
 // GetPort returns the Port field value if set, zero value otherwise.
 func (o *AssetSshConnection) GetPort() int64 {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret int64
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *AssetSshConnection) GetPort() int64 {
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetSshConnection) GetPortOk() (*int64, bool) {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
 	return o.Port, true
@@ -156,7 +160,7 @@ func (o *AssetSshConnection) GetPortOk() (*int64, bool) {
 
 // HasPort returns a boolean if a field has been set.
 func (o *AssetSshConnection) HasPort() bool {
-	if o != nil && o.Port != nil {
+	if o != nil && !IsNil(o.Port) {
 		return true
 	}
 
@@ -169,25 +173,29 @@ func (o *AssetSshConnection) SetPort(v int64) {
 }
 
 func (o AssetSshConnection) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetSshConnection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedAssetConnection, errAssetConnection := json.Marshal(o.AssetConnection)
 	if errAssetConnection != nil {
-		return []byte{}, errAssetConnection
+		return map[string]interface{}{}, errAssetConnection
 	}
 	errAssetConnection = json.Unmarshal([]byte(serializedAssetConnection), &toSerialize)
 	if errAssetConnection != nil {
-		return []byte{}, errAssetConnection
+		return map[string]interface{}{}, errAssetConnection
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ManagementAddress != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ManagementAddress) {
 		toSerialize["ManagementAddress"] = o.ManagementAddress
 	}
-	if o.Port != nil {
+	if !IsNil(o.Port) {
 		toSerialize["Port"] = o.Port
 	}
 
@@ -195,10 +203,32 @@ func (o AssetSshConnection) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetSshConnection) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetSshConnection) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetSshConnectionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -212,7 +242,7 @@ func (o *AssetSshConnection) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetSshConnectionWithoutEmbeddedStruct := AssetSshConnectionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetSshConnectionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetSshConnectionWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetSshConnection := _AssetSshConnection{}
 		varAssetSshConnection.ClassId = varAssetSshConnectionWithoutEmbeddedStruct.ClassId
@@ -226,7 +256,7 @@ func (o *AssetSshConnection) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetSshConnection := _AssetSshConnection{}
 
-	err = json.Unmarshal(bytes, &varAssetSshConnection)
+	err = json.Unmarshal(data, &varAssetSshConnection)
 	if err == nil {
 		o.AssetConnection = varAssetSshConnection.AssetConnection
 	} else {
@@ -235,7 +265,7 @@ func (o *AssetSshConnection) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ManagementAddress")

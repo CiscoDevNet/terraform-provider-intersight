@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **DiskId** | Pointer to **int64** | The storage Enclosure slotId. | [optional] [readonly] 
 **DiskState** | Pointer to **string** | The current drive state of disk. | [optional] [readonly] 
 **Health** | Pointer to **string** | The current drive state of disk. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**PhysicalDisk** | Pointer to [**StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StorageController** | Pointer to [**StorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PhysicalDisk** | Pointer to [**NullableStoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageController** | Pointer to [**NullableStorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -225,6 +225,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StoragePhysicalDiskExtension) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StoragePhysicalDiskExtension) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetPhysicalDisk
 
 `func (o *StoragePhysicalDiskExtension) GetPhysicalDisk() StoragePhysicalDiskRelationship`
@@ -250,6 +260,16 @@ SetPhysicalDisk sets PhysicalDisk field to given value.
 
 HasPhysicalDisk returns a boolean if a field has been set.
 
+### SetPhysicalDiskNil
+
+`func (o *StoragePhysicalDiskExtension) SetPhysicalDiskNil(b bool)`
+
+ SetPhysicalDiskNil sets the value for PhysicalDisk to be an explicit nil
+
+### UnsetPhysicalDisk
+`func (o *StoragePhysicalDiskExtension) UnsetPhysicalDisk()`
+
+UnsetPhysicalDisk ensures that no value is present for PhysicalDisk, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StoragePhysicalDiskExtension) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -275,6 +295,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StoragePhysicalDiskExtension) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StoragePhysicalDiskExtension) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageController
 
 `func (o *StoragePhysicalDiskExtension) GetStorageController() StorageControllerRelationship`
@@ -300,6 +330,16 @@ SetStorageController sets StorageController field to given value.
 
 HasStorageController returns a boolean if a field has been set.
 
+### SetStorageControllerNil
+
+`func (o *StoragePhysicalDiskExtension) SetStorageControllerNil(b bool)`
+
+ SetStorageControllerNil sets the value for StorageController to be an explicit nil
+
+### UnsetStorageController
+`func (o *StoragePhysicalDiskExtension) UnsetStorageController()`
+
+UnsetStorageController ensures that no value is present for StorageController, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

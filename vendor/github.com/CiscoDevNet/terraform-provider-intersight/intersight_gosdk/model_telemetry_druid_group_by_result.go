@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the TelemetryDruidGroupByResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidGroupByResult{}
 
 // TelemetryDruidGroupByResult A time series result based on a provided groupBy query. Result can contain multiple dimensions and values.
 type TelemetryDruidGroupByResult struct {
@@ -48,7 +51,7 @@ func NewTelemetryDruidGroupByResultWithDefaults() *TelemetryDruidGroupByResult {
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *TelemetryDruidGroupByResult) GetTimestamp() time.Time {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		var ret time.Time
 		return ret
 	}
@@ -58,7 +61,7 @@ func (o *TelemetryDruidGroupByResult) GetTimestamp() time.Time {
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidGroupByResult) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
 	return o.Timestamp, true
@@ -66,7 +69,7 @@ func (o *TelemetryDruidGroupByResult) GetTimestampOk() (*time.Time, bool) {
 
 // HasTimestamp returns a boolean if a field has been set.
 func (o *TelemetryDruidGroupByResult) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
+	if o != nil && !IsNil(o.Timestamp) {
 		return true
 	}
 
@@ -80,7 +83,7 @@ func (o *TelemetryDruidGroupByResult) SetTimestamp(v time.Time) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *TelemetryDruidGroupByResult) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -90,7 +93,7 @@ func (o *TelemetryDruidGroupByResult) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidGroupByResult) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -98,7 +101,7 @@ func (o *TelemetryDruidGroupByResult) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *TelemetryDruidGroupByResult) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -112,7 +115,7 @@ func (o *TelemetryDruidGroupByResult) SetVersion(v string) {
 
 // GetEvent returns the Event field value if set, zero value otherwise.
 func (o *TelemetryDruidGroupByResult) GetEvent() map[string]interface{} {
-	if o == nil || o.Event == nil {
+	if o == nil || IsNil(o.Event) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -122,15 +125,15 @@ func (o *TelemetryDruidGroupByResult) GetEvent() map[string]interface{} {
 // GetEventOk returns a tuple with the Event field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidGroupByResult) GetEventOk() (map[string]interface{}, bool) {
-	if o == nil || o.Event == nil {
-		return nil, false
+	if o == nil || IsNil(o.Event) {
+		return map[string]interface{}{}, false
 	}
 	return o.Event, true
 }
 
 // HasEvent returns a boolean if a field has been set.
 func (o *TelemetryDruidGroupByResult) HasEvent() bool {
-	if o != nil && o.Event != nil {
+	if o != nil && !IsNil(o.Event) {
 		return true
 	}
 
@@ -143,14 +146,22 @@ func (o *TelemetryDruidGroupByResult) SetEvent(v map[string]interface{}) {
 }
 
 func (o TelemetryDruidGroupByResult) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidGroupByResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Timestamp != nil {
+	if !IsNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
-	if o.Event != nil {
+	if !IsNil(o.Event) {
 		toSerialize["event"] = o.Event
 	}
 
@@ -158,19 +169,23 @@ func (o TelemetryDruidGroupByResult) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidGroupByResult) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidGroupByResult) UnmarshalJSON(data []byte) (err error) {
 	varTelemetryDruidGroupByResult := _TelemetryDruidGroupByResult{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidGroupByResult); err == nil {
-		*o = TelemetryDruidGroupByResult(varTelemetryDruidGroupByResult)
+	err = json.Unmarshal(data, &varTelemetryDruidGroupByResult)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidGroupByResult(varTelemetryDruidGroupByResult)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "timestamp")
 		delete(additionalProperties, "version")
 		delete(additionalProperties, "event")

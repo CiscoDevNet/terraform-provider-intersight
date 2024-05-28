@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.VirtualDriveIdentity"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.VirtualDriveIdentity"]
 **Name** | Pointer to **string** | The VirtualDrive Name which belongs to the Storage VirtualDrive. | [optional] [readonly] 
-**ServerProfile** | Pointer to [**ServerProfileRelationship**](ServerProfileRelationship.md) |  | [optional] 
-**StoragePolicy** | Pointer to [**StorageStoragePolicyRelationship**](StorageStoragePolicyRelationship.md) |  | [optional] 
-**VirtualDrive** | Pointer to [**StorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) |  | [optional] 
+**ServerProfile** | Pointer to [**NullableServerProfileRelationship**](ServerProfileRelationship.md) |  | [optional] 
+**StoragePolicy** | Pointer to [**NullableStorageStoragePolicyRelationship**](StorageStoragePolicyRelationship.md) |  | [optional] 
+**VirtualDrive** | Pointer to [**NullableStorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -120,6 +120,16 @@ SetServerProfile sets ServerProfile field to given value.
 
 HasServerProfile returns a boolean if a field has been set.
 
+### SetServerProfileNil
+
+`func (o *StorageVirtualDriveIdentity) SetServerProfileNil(b bool)`
+
+ SetServerProfileNil sets the value for ServerProfile to be an explicit nil
+
+### UnsetServerProfile
+`func (o *StorageVirtualDriveIdentity) UnsetServerProfile()`
+
+UnsetServerProfile ensures that no value is present for ServerProfile, not even an explicit nil
 ### GetStoragePolicy
 
 `func (o *StorageVirtualDriveIdentity) GetStoragePolicy() StorageStoragePolicyRelationship`
@@ -145,6 +155,16 @@ SetStoragePolicy sets StoragePolicy field to given value.
 
 HasStoragePolicy returns a boolean if a field has been set.
 
+### SetStoragePolicyNil
+
+`func (o *StorageVirtualDriveIdentity) SetStoragePolicyNil(b bool)`
+
+ SetStoragePolicyNil sets the value for StoragePolicy to be an explicit nil
+
+### UnsetStoragePolicy
+`func (o *StorageVirtualDriveIdentity) UnsetStoragePolicy()`
+
+UnsetStoragePolicy ensures that no value is present for StoragePolicy, not even an explicit nil
 ### GetVirtualDrive
 
 `func (o *StorageVirtualDriveIdentity) GetVirtualDrive() StorageVirtualDriveRelationship`
@@ -170,6 +190,16 @@ SetVirtualDrive sets VirtualDrive field to given value.
 
 HasVirtualDrive returns a boolean if a field has been set.
 
+### SetVirtualDriveNil
+
+`func (o *StorageVirtualDriveIdentity) SetVirtualDriveNil(b bool)`
+
+ SetVirtualDriveNil sets the value for VirtualDrive to be an explicit nil
+
+### UnsetVirtualDrive
+`func (o *StorageVirtualDriveIdentity) UnsetVirtualDrive()`
+
+UnsetVirtualDrive ensures that no value is present for VirtualDrive, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

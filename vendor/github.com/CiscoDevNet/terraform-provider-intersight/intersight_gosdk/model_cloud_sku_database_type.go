@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudSkuDatabaseType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudSkuDatabaseType{}
 
 // CloudSkuDatabaseType Stores details of instance type which handle databases.
 type CloudSkuDatabaseType struct {
@@ -118,7 +122,7 @@ func (o *CloudSkuDatabaseType) SetObjectType(v string) {
 
 // GetDatabaseEdition returns the DatabaseEdition field value if set, zero value otherwise.
 func (o *CloudSkuDatabaseType) GetDatabaseEdition() string {
-	if o == nil || o.DatabaseEdition == nil {
+	if o == nil || IsNil(o.DatabaseEdition) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *CloudSkuDatabaseType) GetDatabaseEdition() string {
 // GetDatabaseEditionOk returns a tuple with the DatabaseEdition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuDatabaseType) GetDatabaseEditionOk() (*string, bool) {
-	if o == nil || o.DatabaseEdition == nil {
+	if o == nil || IsNil(o.DatabaseEdition) {
 		return nil, false
 	}
 	return o.DatabaseEdition, true
@@ -136,7 +140,7 @@ func (o *CloudSkuDatabaseType) GetDatabaseEditionOk() (*string, bool) {
 
 // HasDatabaseEdition returns a boolean if a field has been set.
 func (o *CloudSkuDatabaseType) HasDatabaseEdition() bool {
-	if o != nil && o.DatabaseEdition != nil {
+	if o != nil && !IsNil(o.DatabaseEdition) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *CloudSkuDatabaseType) SetDatabaseEdition(v string) {
 
 // GetDatabaseEngine returns the DatabaseEngine field value if set, zero value otherwise.
 func (o *CloudSkuDatabaseType) GetDatabaseEngine() string {
-	if o == nil || o.DatabaseEngine == nil {
+	if o == nil || IsNil(o.DatabaseEngine) {
 		var ret string
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *CloudSkuDatabaseType) GetDatabaseEngine() string {
 // GetDatabaseEngineOk returns a tuple with the DatabaseEngine field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuDatabaseType) GetDatabaseEngineOk() (*string, bool) {
-	if o == nil || o.DatabaseEngine == nil {
+	if o == nil || IsNil(o.DatabaseEngine) {
 		return nil, false
 	}
 	return o.DatabaseEngine, true
@@ -168,7 +172,7 @@ func (o *CloudSkuDatabaseType) GetDatabaseEngineOk() (*string, bool) {
 
 // HasDatabaseEngine returns a boolean if a field has been set.
 func (o *CloudSkuDatabaseType) HasDatabaseEngine() bool {
-	if o != nil && o.DatabaseEngine != nil {
+	if o != nil && !IsNil(o.DatabaseEngine) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *CloudSkuDatabaseType) SetDatabaseEngine(v string) {
 
 // GetLicenseModel returns the LicenseModel field value if set, zero value otherwise.
 func (o *CloudSkuDatabaseType) GetLicenseModel() string {
-	if o == nil || o.LicenseModel == nil {
+	if o == nil || IsNil(o.LicenseModel) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *CloudSkuDatabaseType) GetLicenseModel() string {
 // GetLicenseModelOk returns a tuple with the LicenseModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuDatabaseType) GetLicenseModelOk() (*string, bool) {
-	if o == nil || o.LicenseModel == nil {
+	if o == nil || IsNil(o.LicenseModel) {
 		return nil, false
 	}
 	return o.LicenseModel, true
@@ -200,7 +204,7 @@ func (o *CloudSkuDatabaseType) GetLicenseModelOk() (*string, bool) {
 
 // HasLicenseModel returns a boolean if a field has been set.
 func (o *CloudSkuDatabaseType) HasLicenseModel() bool {
-	if o != nil && o.LicenseModel != nil {
+	if o != nil && !IsNil(o.LicenseModel) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *CloudSkuDatabaseType) SetLicenseModel(v string) {
 
 // GetNetworkPerformance returns the NetworkPerformance field value if set, zero value otherwise.
 func (o *CloudSkuDatabaseType) GetNetworkPerformance() string {
-	if o == nil || o.NetworkPerformance == nil {
+	if o == nil || IsNil(o.NetworkPerformance) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *CloudSkuDatabaseType) GetNetworkPerformance() string {
 // GetNetworkPerformanceOk returns a tuple with the NetworkPerformance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuDatabaseType) GetNetworkPerformanceOk() (*string, bool) {
-	if o == nil || o.NetworkPerformance == nil {
+	if o == nil || IsNil(o.NetworkPerformance) {
 		return nil, false
 	}
 	return o.NetworkPerformance, true
@@ -232,7 +236,7 @@ func (o *CloudSkuDatabaseType) GetNetworkPerformanceOk() (*string, bool) {
 
 // HasNetworkPerformance returns a boolean if a field has been set.
 func (o *CloudSkuDatabaseType) HasNetworkPerformance() bool {
-	if o != nil && o.NetworkPerformance != nil {
+	if o != nil && !IsNil(o.NetworkPerformance) {
 		return true
 	}
 
@@ -245,31 +249,35 @@ func (o *CloudSkuDatabaseType) SetNetworkPerformance(v string) {
 }
 
 func (o CloudSkuDatabaseType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudSkuDatabaseType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCloudBaseSku, errCloudBaseSku := json.Marshal(o.CloudBaseSku)
 	if errCloudBaseSku != nil {
-		return []byte{}, errCloudBaseSku
+		return map[string]interface{}{}, errCloudBaseSku
 	}
 	errCloudBaseSku = json.Unmarshal([]byte(serializedCloudBaseSku), &toSerialize)
 	if errCloudBaseSku != nil {
-		return []byte{}, errCloudBaseSku
+		return map[string]interface{}{}, errCloudBaseSku
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DatabaseEdition != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DatabaseEdition) {
 		toSerialize["DatabaseEdition"] = o.DatabaseEdition
 	}
-	if o.DatabaseEngine != nil {
+	if !IsNil(o.DatabaseEngine) {
 		toSerialize["DatabaseEngine"] = o.DatabaseEngine
 	}
-	if o.LicenseModel != nil {
+	if !IsNil(o.LicenseModel) {
 		toSerialize["LicenseModel"] = o.LicenseModel
 	}
-	if o.NetworkPerformance != nil {
+	if !IsNil(o.NetworkPerformance) {
 		toSerialize["NetworkPerformance"] = o.NetworkPerformance
 	}
 
@@ -277,10 +285,32 @@ func (o CloudSkuDatabaseType) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudSkuDatabaseType) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudSkuDatabaseType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudSkuDatabaseTypeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -298,7 +328,7 @@ func (o *CloudSkuDatabaseType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudSkuDatabaseTypeWithoutEmbeddedStruct := CloudSkuDatabaseTypeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudSkuDatabaseTypeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudSkuDatabaseTypeWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudSkuDatabaseType := _CloudSkuDatabaseType{}
 		varCloudSkuDatabaseType.ClassId = varCloudSkuDatabaseTypeWithoutEmbeddedStruct.ClassId
@@ -314,7 +344,7 @@ func (o *CloudSkuDatabaseType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudSkuDatabaseType := _CloudSkuDatabaseType{}
 
-	err = json.Unmarshal(bytes, &varCloudSkuDatabaseType)
+	err = json.Unmarshal(data, &varCloudSkuDatabaseType)
 	if err == nil {
 		o.CloudBaseSku = varCloudSkuDatabaseType.CloudBaseSku
 	} else {
@@ -323,7 +353,7 @@ func (o *CloudSkuDatabaseType) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DatabaseEdition")

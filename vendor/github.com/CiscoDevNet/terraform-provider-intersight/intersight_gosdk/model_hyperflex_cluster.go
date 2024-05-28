@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexCluster type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexCluster{}
 
 // HyperflexCluster A HyperFlex cluster. Contains inventory information concerning the health, software versions, storage, and nodes of the cluster.
 type HyperflexCluster struct {
@@ -53,16 +57,16 @@ type HyperflexCluster struct {
 	// The type of availability zone used by the cluster. Physical zones are always used in HyperFlex Stretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ) enabled. * `UNKNOWN` - The type of zone configured on the HyperFlex cluster is not known. * `NOT_CONFIGURED` - The zone type is not configured. * `LOGICAL` - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster. * `PHYSICAL` - The zone is a physical zone configured on a stretched HyperFlex cluster.
 	ZoneType *string `json:"ZoneType,omitempty"`
 	// An array of relationships to hyperflexAlarm resources.
-	Alarm      []HyperflexAlarmRelationship     `json:"Alarm,omitempty"`
-	Encryption *HyperflexEncryptionRelationship `json:"Encryption,omitempty"`
-	Health     *HyperflexHealthRelationship     `json:"Health,omitempty"`
-	License    *HyperflexLicenseRelationship    `json:"License,omitempty"`
+	Alarm      []HyperflexAlarmRelationship            `json:"Alarm,omitempty"`
+	Encryption NullableHyperflexEncryptionRelationship `json:"Encryption,omitempty"`
+	Health     NullableHyperflexHealthRelationship     `json:"Health,omitempty"`
+	License    NullableHyperflexLicenseRelationship    `json:"License,omitempty"`
 	// An array of relationships to hyperflexNode resources.
-	Nodes            []HyperflexNodeRelationship          `json:"Nodes,omitempty"`
-	RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Nodes            []HyperflexNodeRelationship                 `json:"Nodes,omitempty"`
+	RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to ippoolPool resources.
-	StorageClientIpPools []IppoolPoolRelationship `json:"StorageClientIpPools,omitempty"`
-	StorageClientVrf     *VrfVrfRelationship      `json:"StorageClientVrf,omitempty"`
+	StorageClientIpPools []IppoolPoolRelationship   `json:"StorageClientIpPools,omitempty"`
+	StorageClientVrf     NullableVrfVrfRelationship `json:"StorageClientVrf,omitempty"`
 	// An array of relationships to storageHyperFlexStorageContainer resources.
 	StorageContainers []StorageHyperFlexStorageContainerRelationship `json:"StorageContainers,omitempty"`
 	// An array of relationships to storageHyperFlexVolume resources.
@@ -149,7 +153,7 @@ func (o *HyperflexCluster) SetObjectType(v string) {
 
 // GetCapability returns the Capability field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexCluster) GetCapability() HyperflexCapability {
-	if o == nil || o.Capability.Get() == nil {
+	if o == nil || IsNil(o.Capability.Get()) {
 		var ret HyperflexCapability
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *HyperflexCluster) UnsetCapability() {
 // GetClusterType returns the ClusterType field value if set, zero value otherwise.
 // Deprecated
 func (o *HyperflexCluster) GetClusterType() int64 {
-	if o == nil || o.ClusterType == nil {
+	if o == nil || IsNil(o.ClusterType) {
 		var ret int64
 		return ret
 	}
@@ -204,7 +208,7 @@ func (o *HyperflexCluster) GetClusterType() int64 {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *HyperflexCluster) GetClusterTypeOk() (*int64, bool) {
-	if o == nil || o.ClusterType == nil {
+	if o == nil || IsNil(o.ClusterType) {
 		return nil, false
 	}
 	return o.ClusterType, true
@@ -212,7 +216,7 @@ func (o *HyperflexCluster) GetClusterTypeOk() (*int64, bool) {
 
 // HasClusterType returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasClusterType() bool {
-	if o != nil && o.ClusterType != nil {
+	if o != nil && !IsNil(o.ClusterType) {
 		return true
 	}
 
@@ -227,7 +231,7 @@ func (o *HyperflexCluster) SetClusterType(v int64) {
 
 // GetClusterUuid returns the ClusterUuid field value if set, zero value otherwise.
 func (o *HyperflexCluster) GetClusterUuid() string {
-	if o == nil || o.ClusterUuid == nil {
+	if o == nil || IsNil(o.ClusterUuid) {
 		var ret string
 		return ret
 	}
@@ -237,7 +241,7 @@ func (o *HyperflexCluster) GetClusterUuid() string {
 // GetClusterUuidOk returns a tuple with the ClusterUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexCluster) GetClusterUuidOk() (*string, bool) {
-	if o == nil || o.ClusterUuid == nil {
+	if o == nil || IsNil(o.ClusterUuid) {
 		return nil, false
 	}
 	return o.ClusterUuid, true
@@ -245,7 +249,7 @@ func (o *HyperflexCluster) GetClusterUuidOk() (*string, bool) {
 
 // HasClusterUuid returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasClusterUuid() bool {
-	if o != nil && o.ClusterUuid != nil {
+	if o != nil && !IsNil(o.ClusterUuid) {
 		return true
 	}
 
@@ -259,7 +263,7 @@ func (o *HyperflexCluster) SetClusterUuid(v string) {
 
 // GetDeviceId returns the DeviceId field value if set, zero value otherwise.
 func (o *HyperflexCluster) GetDeviceId() string {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		var ret string
 		return ret
 	}
@@ -269,7 +273,7 @@ func (o *HyperflexCluster) GetDeviceId() string {
 // GetDeviceIdOk returns a tuple with the DeviceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexCluster) GetDeviceIdOk() (*string, bool) {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		return nil, false
 	}
 	return o.DeviceId, true
@@ -277,7 +281,7 @@ func (o *HyperflexCluster) GetDeviceIdOk() (*string, bool) {
 
 // HasDeviceId returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasDeviceId() bool {
-	if o != nil && o.DeviceId != nil {
+	if o != nil && !IsNil(o.DeviceId) {
 		return true
 	}
 
@@ -302,7 +306,7 @@ func (o *HyperflexCluster) GetDnsServers() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetDnsServersOk() ([]string, bool) {
-	if o == nil || o.DnsServers == nil {
+	if o == nil || IsNil(o.DnsServers) {
 		return nil, false
 	}
 	return o.DnsServers, true
@@ -310,7 +314,7 @@ func (o *HyperflexCluster) GetDnsServersOk() ([]string, bool) {
 
 // HasDnsServers returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasDnsServers() bool {
-	if o != nil && o.DnsServers != nil {
+	if o != nil && IsNil(o.DnsServers) {
 		return true
 	}
 
@@ -324,7 +328,7 @@ func (o *HyperflexCluster) SetDnsServers(v []string) {
 
 // GetEncryptionStatus returns the EncryptionStatus field value if set, zero value otherwise.
 func (o *HyperflexCluster) GetEncryptionStatus() string {
-	if o == nil || o.EncryptionStatus == nil {
+	if o == nil || IsNil(o.EncryptionStatus) {
 		var ret string
 		return ret
 	}
@@ -334,7 +338,7 @@ func (o *HyperflexCluster) GetEncryptionStatus() string {
 // GetEncryptionStatusOk returns a tuple with the EncryptionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexCluster) GetEncryptionStatusOk() (*string, bool) {
-	if o == nil || o.EncryptionStatus == nil {
+	if o == nil || IsNil(o.EncryptionStatus) {
 		return nil, false
 	}
 	return o.EncryptionStatus, true
@@ -342,7 +346,7 @@ func (o *HyperflexCluster) GetEncryptionStatusOk() (*string, bool) {
 
 // HasEncryptionStatus returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasEncryptionStatus() bool {
-	if o != nil && o.EncryptionStatus != nil {
+	if o != nil && !IsNil(o.EncryptionStatus) {
 		return true
 	}
 
@@ -357,7 +361,7 @@ func (o *HyperflexCluster) SetEncryptionStatus(v string) {
 // GetFltAggr returns the FltAggr field value if set, zero value otherwise.
 // Deprecated
 func (o *HyperflexCluster) GetFltAggr() int64 {
-	if o == nil || o.FltAggr == nil {
+	if o == nil || IsNil(o.FltAggr) {
 		var ret int64
 		return ret
 	}
@@ -368,7 +372,7 @@ func (o *HyperflexCluster) GetFltAggr() int64 {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *HyperflexCluster) GetFltAggrOk() (*int64, bool) {
-	if o == nil || o.FltAggr == nil {
+	if o == nil || IsNil(o.FltAggr) {
 		return nil, false
 	}
 	return o.FltAggr, true
@@ -376,7 +380,7 @@ func (o *HyperflexCluster) GetFltAggrOk() (*int64, bool) {
 
 // HasFltAggr returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasFltAggr() bool {
-	if o != nil && o.FltAggr != nil {
+	if o != nil && !IsNil(o.FltAggr) {
 		return true
 	}
 
@@ -391,7 +395,7 @@ func (o *HyperflexCluster) SetFltAggr(v int64) {
 
 // GetHxdpBuildVersion returns the HxdpBuildVersion field value if set, zero value otherwise.
 func (o *HyperflexCluster) GetHxdpBuildVersion() string {
-	if o == nil || o.HxdpBuildVersion == nil {
+	if o == nil || IsNil(o.HxdpBuildVersion) {
 		var ret string
 		return ret
 	}
@@ -401,7 +405,7 @@ func (o *HyperflexCluster) GetHxdpBuildVersion() string {
 // GetHxdpBuildVersionOk returns a tuple with the HxdpBuildVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexCluster) GetHxdpBuildVersionOk() (*string, bool) {
-	if o == nil || o.HxdpBuildVersion == nil {
+	if o == nil || IsNil(o.HxdpBuildVersion) {
 		return nil, false
 	}
 	return o.HxdpBuildVersion, true
@@ -409,7 +413,7 @@ func (o *HyperflexCluster) GetHxdpBuildVersionOk() (*string, bool) {
 
 // HasHxdpBuildVersion returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasHxdpBuildVersion() bool {
-	if o != nil && o.HxdpBuildVersion != nil {
+	if o != nil && !IsNil(o.HxdpBuildVersion) {
 		return true
 	}
 
@@ -423,7 +427,7 @@ func (o *HyperflexCluster) SetHxdpBuildVersion(v string) {
 
 // GetNetworkConfiguration returns the NetworkConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexCluster) GetNetworkConfiguration() HyperflexNetworkConfiguration {
-	if o == nil || o.NetworkConfiguration.Get() == nil {
+	if o == nil || IsNil(o.NetworkConfiguration.Get()) {
 		var ret HyperflexNetworkConfiguration
 		return ret
 	}
@@ -477,7 +481,7 @@ func (o *HyperflexCluster) GetNtpServers() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetNtpServersOk() ([]string, bool) {
-	if o == nil || o.NtpServers == nil {
+	if o == nil || IsNil(o.NtpServers) {
 		return nil, false
 	}
 	return o.NtpServers, true
@@ -485,7 +489,7 @@ func (o *HyperflexCluster) GetNtpServersOk() ([]string, bool) {
 
 // HasNtpServers returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasNtpServers() bool {
-	if o != nil && o.NtpServers != nil {
+	if o != nil && IsNil(o.NtpServers) {
 		return true
 	}
 
@@ -499,7 +503,7 @@ func (o *HyperflexCluster) SetNtpServers(v []string) {
 
 // GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexCluster) GetSummary() HyperflexSummary {
-	if o == nil || o.Summary.Get() == nil {
+	if o == nil || IsNil(o.Summary.Get()) {
 		var ret HyperflexSummary
 		return ret
 	}
@@ -542,7 +546,7 @@ func (o *HyperflexCluster) UnsetSummary() {
 
 // GetUpgradeStatus returns the UpgradeStatus field value if set, zero value otherwise.
 func (o *HyperflexCluster) GetUpgradeStatus() string {
-	if o == nil || o.UpgradeStatus == nil {
+	if o == nil || IsNil(o.UpgradeStatus) {
 		var ret string
 		return ret
 	}
@@ -552,7 +556,7 @@ func (o *HyperflexCluster) GetUpgradeStatus() string {
 // GetUpgradeStatusOk returns a tuple with the UpgradeStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexCluster) GetUpgradeStatusOk() (*string, bool) {
-	if o == nil || o.UpgradeStatus == nil {
+	if o == nil || IsNil(o.UpgradeStatus) {
 		return nil, false
 	}
 	return o.UpgradeStatus, true
@@ -560,7 +564,7 @@ func (o *HyperflexCluster) GetUpgradeStatusOk() (*string, bool) {
 
 // HasUpgradeStatus returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasUpgradeStatus() bool {
-	if o != nil && o.UpgradeStatus != nil {
+	if o != nil && !IsNil(o.UpgradeStatus) {
 		return true
 	}
 
@@ -574,7 +578,7 @@ func (o *HyperflexCluster) SetUpgradeStatus(v string) {
 
 // GetUplinkSpeed returns the UplinkSpeed field value if set, zero value otherwise.
 func (o *HyperflexCluster) GetUplinkSpeed() string {
-	if o == nil || o.UplinkSpeed == nil {
+	if o == nil || IsNil(o.UplinkSpeed) {
 		var ret string
 		return ret
 	}
@@ -584,7 +588,7 @@ func (o *HyperflexCluster) GetUplinkSpeed() string {
 // GetUplinkSpeedOk returns a tuple with the UplinkSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexCluster) GetUplinkSpeedOk() (*string, bool) {
-	if o == nil || o.UplinkSpeed == nil {
+	if o == nil || IsNil(o.UplinkSpeed) {
 		return nil, false
 	}
 	return o.UplinkSpeed, true
@@ -592,7 +596,7 @@ func (o *HyperflexCluster) GetUplinkSpeedOk() (*string, bool) {
 
 // HasUplinkSpeed returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasUplinkSpeed() bool {
-	if o != nil && o.UplinkSpeed != nil {
+	if o != nil && !IsNil(o.UplinkSpeed) {
 		return true
 	}
 
@@ -606,7 +610,7 @@ func (o *HyperflexCluster) SetUplinkSpeed(v string) {
 
 // GetVcenterConfiguration returns the VcenterConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexCluster) GetVcenterConfiguration() HyperflexVcenterConfiguration {
-	if o == nil || o.VcenterConfiguration.Get() == nil {
+	if o == nil || IsNil(o.VcenterConfiguration.Get()) {
 		var ret HyperflexVcenterConfiguration
 		return ret
 	}
@@ -649,7 +653,7 @@ func (o *HyperflexCluster) UnsetVcenterConfiguration() {
 
 // GetVmCount returns the VmCount field value if set, zero value otherwise.
 func (o *HyperflexCluster) GetVmCount() int64 {
-	if o == nil || o.VmCount == nil {
+	if o == nil || IsNil(o.VmCount) {
 		var ret int64
 		return ret
 	}
@@ -659,7 +663,7 @@ func (o *HyperflexCluster) GetVmCount() int64 {
 // GetVmCountOk returns a tuple with the VmCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexCluster) GetVmCountOk() (*int64, bool) {
-	if o == nil || o.VmCount == nil {
+	if o == nil || IsNil(o.VmCount) {
 		return nil, false
 	}
 	return o.VmCount, true
@@ -667,7 +671,7 @@ func (o *HyperflexCluster) GetVmCountOk() (*int64, bool) {
 
 // HasVmCount returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasVmCount() bool {
-	if o != nil && o.VmCount != nil {
+	if o != nil && !IsNil(o.VmCount) {
 		return true
 	}
 
@@ -681,7 +685,7 @@ func (o *HyperflexCluster) SetVmCount(v int64) {
 
 // GetZoneType returns the ZoneType field value if set, zero value otherwise.
 func (o *HyperflexCluster) GetZoneType() string {
-	if o == nil || o.ZoneType == nil {
+	if o == nil || IsNil(o.ZoneType) {
 		var ret string
 		return ret
 	}
@@ -691,7 +695,7 @@ func (o *HyperflexCluster) GetZoneType() string {
 // GetZoneTypeOk returns a tuple with the ZoneType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexCluster) GetZoneTypeOk() (*string, bool) {
-	if o == nil || o.ZoneType == nil {
+	if o == nil || IsNil(o.ZoneType) {
 		return nil, false
 	}
 	return o.ZoneType, true
@@ -699,7 +703,7 @@ func (o *HyperflexCluster) GetZoneTypeOk() (*string, bool) {
 
 // HasZoneType returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasZoneType() bool {
-	if o != nil && o.ZoneType != nil {
+	if o != nil && !IsNil(o.ZoneType) {
 		return true
 	}
 
@@ -724,7 +728,7 @@ func (o *HyperflexCluster) GetAlarm() []HyperflexAlarmRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetAlarmOk() ([]HyperflexAlarmRelationship, bool) {
-	if o == nil || o.Alarm == nil {
+	if o == nil || IsNil(o.Alarm) {
 		return nil, false
 	}
 	return o.Alarm, true
@@ -732,7 +736,7 @@ func (o *HyperflexCluster) GetAlarmOk() ([]HyperflexAlarmRelationship, bool) {
 
 // HasAlarm returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasAlarm() bool {
-	if o != nil && o.Alarm != nil {
+	if o != nil && IsNil(o.Alarm) {
 		return true
 	}
 
@@ -744,100 +748,133 @@ func (o *HyperflexCluster) SetAlarm(v []HyperflexAlarmRelationship) {
 	o.Alarm = v
 }
 
-// GetEncryption returns the Encryption field value if set, zero value otherwise.
+// GetEncryption returns the Encryption field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexCluster) GetEncryption() HyperflexEncryptionRelationship {
-	if o == nil || o.Encryption == nil {
+	if o == nil || IsNil(o.Encryption.Get()) {
 		var ret HyperflexEncryptionRelationship
 		return ret
 	}
-	return *o.Encryption
+	return *o.Encryption.Get()
 }
 
 // GetEncryptionOk returns a tuple with the Encryption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetEncryptionOk() (*HyperflexEncryptionRelationship, bool) {
-	if o == nil || o.Encryption == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Encryption, true
+	return o.Encryption.Get(), o.Encryption.IsSet()
 }
 
 // HasEncryption returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasEncryption() bool {
-	if o != nil && o.Encryption != nil {
+	if o != nil && o.Encryption.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEncryption gets a reference to the given HyperflexEncryptionRelationship and assigns it to the Encryption field.
+// SetEncryption gets a reference to the given NullableHyperflexEncryptionRelationship and assigns it to the Encryption field.
 func (o *HyperflexCluster) SetEncryption(v HyperflexEncryptionRelationship) {
-	o.Encryption = &v
+	o.Encryption.Set(&v)
 }
 
-// GetHealth returns the Health field value if set, zero value otherwise.
+// SetEncryptionNil sets the value for Encryption to be an explicit nil
+func (o *HyperflexCluster) SetEncryptionNil() {
+	o.Encryption.Set(nil)
+}
+
+// UnsetEncryption ensures that no value is present for Encryption, not even an explicit nil
+func (o *HyperflexCluster) UnsetEncryption() {
+	o.Encryption.Unset()
+}
+
+// GetHealth returns the Health field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexCluster) GetHealth() HyperflexHealthRelationship {
-	if o == nil || o.Health == nil {
+	if o == nil || IsNil(o.Health.Get()) {
 		var ret HyperflexHealthRelationship
 		return ret
 	}
-	return *o.Health
+	return *o.Health.Get()
 }
 
 // GetHealthOk returns a tuple with the Health field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetHealthOk() (*HyperflexHealthRelationship, bool) {
-	if o == nil || o.Health == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Health, true
+	return o.Health.Get(), o.Health.IsSet()
 }
 
 // HasHealth returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasHealth() bool {
-	if o != nil && o.Health != nil {
+	if o != nil && o.Health.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHealth gets a reference to the given HyperflexHealthRelationship and assigns it to the Health field.
+// SetHealth gets a reference to the given NullableHyperflexHealthRelationship and assigns it to the Health field.
 func (o *HyperflexCluster) SetHealth(v HyperflexHealthRelationship) {
-	o.Health = &v
+	o.Health.Set(&v)
 }
 
-// GetLicense returns the License field value if set, zero value otherwise.
+// SetHealthNil sets the value for Health to be an explicit nil
+func (o *HyperflexCluster) SetHealthNil() {
+	o.Health.Set(nil)
+}
+
+// UnsetHealth ensures that no value is present for Health, not even an explicit nil
+func (o *HyperflexCluster) UnsetHealth() {
+	o.Health.Unset()
+}
+
+// GetLicense returns the License field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexCluster) GetLicense() HyperflexLicenseRelationship {
-	if o == nil || o.License == nil {
+	if o == nil || IsNil(o.License.Get()) {
 		var ret HyperflexLicenseRelationship
 		return ret
 	}
-	return *o.License
+	return *o.License.Get()
 }
 
 // GetLicenseOk returns a tuple with the License field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetLicenseOk() (*HyperflexLicenseRelationship, bool) {
-	if o == nil || o.License == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.License, true
+	return o.License.Get(), o.License.IsSet()
 }
 
 // HasLicense returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasLicense() bool {
-	if o != nil && o.License != nil {
+	if o != nil && o.License.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLicense gets a reference to the given HyperflexLicenseRelationship and assigns it to the License field.
+// SetLicense gets a reference to the given NullableHyperflexLicenseRelationship and assigns it to the License field.
 func (o *HyperflexCluster) SetLicense(v HyperflexLicenseRelationship) {
-	o.License = &v
+	o.License.Set(&v)
+}
+
+// SetLicenseNil sets the value for License to be an explicit nil
+func (o *HyperflexCluster) SetLicenseNil() {
+	o.License.Set(nil)
+}
+
+// UnsetLicense ensures that no value is present for License, not even an explicit nil
+func (o *HyperflexCluster) UnsetLicense() {
+	o.License.Unset()
 }
 
 // GetNodes returns the Nodes field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -853,7 +890,7 @@ func (o *HyperflexCluster) GetNodes() []HyperflexNodeRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetNodesOk() ([]HyperflexNodeRelationship, bool) {
-	if o == nil || o.Nodes == nil {
+	if o == nil || IsNil(o.Nodes) {
 		return nil, false
 	}
 	return o.Nodes, true
@@ -861,7 +898,7 @@ func (o *HyperflexCluster) GetNodesOk() ([]HyperflexNodeRelationship, bool) {
 
 // HasNodes returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasNodes() bool {
-	if o != nil && o.Nodes != nil {
+	if o != nil && IsNil(o.Nodes) {
 		return true
 	}
 
@@ -873,36 +910,47 @@ func (o *HyperflexCluster) SetNodes(v []HyperflexNodeRelationship) {
 	o.Nodes = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexCluster) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *HyperflexCluster) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *HyperflexCluster) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *HyperflexCluster) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 // GetStorageClientIpPools returns the StorageClientIpPools field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -918,7 +966,7 @@ func (o *HyperflexCluster) GetStorageClientIpPools() []IppoolPoolRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetStorageClientIpPoolsOk() ([]IppoolPoolRelationship, bool) {
-	if o == nil || o.StorageClientIpPools == nil {
+	if o == nil || IsNil(o.StorageClientIpPools) {
 		return nil, false
 	}
 	return o.StorageClientIpPools, true
@@ -926,7 +974,7 @@ func (o *HyperflexCluster) GetStorageClientIpPoolsOk() ([]IppoolPoolRelationship
 
 // HasStorageClientIpPools returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasStorageClientIpPools() bool {
-	if o != nil && o.StorageClientIpPools != nil {
+	if o != nil && IsNil(o.StorageClientIpPools) {
 		return true
 	}
 
@@ -938,36 +986,47 @@ func (o *HyperflexCluster) SetStorageClientIpPools(v []IppoolPoolRelationship) {
 	o.StorageClientIpPools = v
 }
 
-// GetStorageClientVrf returns the StorageClientVrf field value if set, zero value otherwise.
+// GetStorageClientVrf returns the StorageClientVrf field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexCluster) GetStorageClientVrf() VrfVrfRelationship {
-	if o == nil || o.StorageClientVrf == nil {
+	if o == nil || IsNil(o.StorageClientVrf.Get()) {
 		var ret VrfVrfRelationship
 		return ret
 	}
-	return *o.StorageClientVrf
+	return *o.StorageClientVrf.Get()
 }
 
 // GetStorageClientVrfOk returns a tuple with the StorageClientVrf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetStorageClientVrfOk() (*VrfVrfRelationship, bool) {
-	if o == nil || o.StorageClientVrf == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageClientVrf, true
+	return o.StorageClientVrf.Get(), o.StorageClientVrf.IsSet()
 }
 
 // HasStorageClientVrf returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasStorageClientVrf() bool {
-	if o != nil && o.StorageClientVrf != nil {
+	if o != nil && o.StorageClientVrf.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageClientVrf gets a reference to the given VrfVrfRelationship and assigns it to the StorageClientVrf field.
+// SetStorageClientVrf gets a reference to the given NullableVrfVrfRelationship and assigns it to the StorageClientVrf field.
 func (o *HyperflexCluster) SetStorageClientVrf(v VrfVrfRelationship) {
-	o.StorageClientVrf = &v
+	o.StorageClientVrf.Set(&v)
+}
+
+// SetStorageClientVrfNil sets the value for StorageClientVrf to be an explicit nil
+func (o *HyperflexCluster) SetStorageClientVrfNil() {
+	o.StorageClientVrf.Set(nil)
+}
+
+// UnsetStorageClientVrf ensures that no value is present for StorageClientVrf, not even an explicit nil
+func (o *HyperflexCluster) UnsetStorageClientVrf() {
+	o.StorageClientVrf.Unset()
 }
 
 // GetStorageContainers returns the StorageContainers field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -983,7 +1042,7 @@ func (o *HyperflexCluster) GetStorageContainers() []StorageHyperFlexStorageConta
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetStorageContainersOk() ([]StorageHyperFlexStorageContainerRelationship, bool) {
-	if o == nil || o.StorageContainers == nil {
+	if o == nil || IsNil(o.StorageContainers) {
 		return nil, false
 	}
 	return o.StorageContainers, true
@@ -991,7 +1050,7 @@ func (o *HyperflexCluster) GetStorageContainersOk() ([]StorageHyperFlexStorageCo
 
 // HasStorageContainers returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasStorageContainers() bool {
-	if o != nil && o.StorageContainers != nil {
+	if o != nil && IsNil(o.StorageContainers) {
 		return true
 	}
 
@@ -1016,7 +1075,7 @@ func (o *HyperflexCluster) GetVolumes() []StorageHyperFlexVolumeRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexCluster) GetVolumesOk() ([]StorageHyperFlexVolumeRelationship, bool) {
-	if o == nil || o.Volumes == nil {
+	if o == nil || IsNil(o.Volumes) {
 		return nil, false
 	}
 	return o.Volumes, true
@@ -1024,7 +1083,7 @@ func (o *HyperflexCluster) GetVolumesOk() ([]StorageHyperFlexVolumeRelationship,
 
 // HasVolumes returns a boolean if a field has been set.
 func (o *HyperflexCluster) HasVolumes() bool {
-	if o != nil && o.Volumes != nil {
+	if o != nil && IsNil(o.Volumes) {
 		return true
 	}
 
@@ -1037,43 +1096,47 @@ func (o *HyperflexCluster) SetVolumes(v []StorageHyperFlexVolumeRelationship) {
 }
 
 func (o HyperflexCluster) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedHyperflexBaseCluster, errHyperflexBaseCluster := json.Marshal(o.HyperflexBaseCluster)
 	if errHyperflexBaseCluster != nil {
-		return []byte{}, errHyperflexBaseCluster
+		return map[string]interface{}{}, errHyperflexBaseCluster
 	}
 	errHyperflexBaseCluster = json.Unmarshal([]byte(serializedHyperflexBaseCluster), &toSerialize)
 	if errHyperflexBaseCluster != nil {
-		return []byte{}, errHyperflexBaseCluster
+		return map[string]interface{}{}, errHyperflexBaseCluster
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Capability.IsSet() {
 		toSerialize["Capability"] = o.Capability.Get()
 	}
-	if o.ClusterType != nil {
+	if !IsNil(o.ClusterType) {
 		toSerialize["ClusterType"] = o.ClusterType
 	}
-	if o.ClusterUuid != nil {
+	if !IsNil(o.ClusterUuid) {
 		toSerialize["ClusterUuid"] = o.ClusterUuid
 	}
-	if o.DeviceId != nil {
+	if !IsNil(o.DeviceId) {
 		toSerialize["DeviceId"] = o.DeviceId
 	}
 	if o.DnsServers != nil {
 		toSerialize["DnsServers"] = o.DnsServers
 	}
-	if o.EncryptionStatus != nil {
+	if !IsNil(o.EncryptionStatus) {
 		toSerialize["EncryptionStatus"] = o.EncryptionStatus
 	}
-	if o.FltAggr != nil {
+	if !IsNil(o.FltAggr) {
 		toSerialize["FltAggr"] = o.FltAggr
 	}
-	if o.HxdpBuildVersion != nil {
+	if !IsNil(o.HxdpBuildVersion) {
 		toSerialize["HxdpBuildVersion"] = o.HxdpBuildVersion
 	}
 	if o.NetworkConfiguration.IsSet() {
@@ -1085,44 +1148,44 @@ func (o HyperflexCluster) MarshalJSON() ([]byte, error) {
 	if o.Summary.IsSet() {
 		toSerialize["Summary"] = o.Summary.Get()
 	}
-	if o.UpgradeStatus != nil {
+	if !IsNil(o.UpgradeStatus) {
 		toSerialize["UpgradeStatus"] = o.UpgradeStatus
 	}
-	if o.UplinkSpeed != nil {
+	if !IsNil(o.UplinkSpeed) {
 		toSerialize["UplinkSpeed"] = o.UplinkSpeed
 	}
 	if o.VcenterConfiguration.IsSet() {
 		toSerialize["VcenterConfiguration"] = o.VcenterConfiguration.Get()
 	}
-	if o.VmCount != nil {
+	if !IsNil(o.VmCount) {
 		toSerialize["VmCount"] = o.VmCount
 	}
-	if o.ZoneType != nil {
+	if !IsNil(o.ZoneType) {
 		toSerialize["ZoneType"] = o.ZoneType
 	}
 	if o.Alarm != nil {
 		toSerialize["Alarm"] = o.Alarm
 	}
-	if o.Encryption != nil {
-		toSerialize["Encryption"] = o.Encryption
+	if o.Encryption.IsSet() {
+		toSerialize["Encryption"] = o.Encryption.Get()
 	}
-	if o.Health != nil {
-		toSerialize["Health"] = o.Health
+	if o.Health.IsSet() {
+		toSerialize["Health"] = o.Health.Get()
 	}
-	if o.License != nil {
-		toSerialize["License"] = o.License
+	if o.License.IsSet() {
+		toSerialize["License"] = o.License.Get()
 	}
 	if o.Nodes != nil {
 		toSerialize["Nodes"] = o.Nodes
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.StorageClientIpPools != nil {
 		toSerialize["StorageClientIpPools"] = o.StorageClientIpPools
 	}
-	if o.StorageClientVrf != nil {
-		toSerialize["StorageClientVrf"] = o.StorageClientVrf
+	if o.StorageClientVrf.IsSet() {
+		toSerialize["StorageClientVrf"] = o.StorageClientVrf.Get()
 	}
 	if o.StorageContainers != nil {
 		toSerialize["StorageContainers"] = o.StorageContainers
@@ -1135,10 +1198,32 @@ func (o HyperflexCluster) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexCluster) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexCluster) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexClusterWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1173,16 +1258,16 @@ func (o *HyperflexCluster) UnmarshalJSON(bytes []byte) (err error) {
 		// The type of availability zone used by the cluster. Physical zones are always used in HyperFlex Stretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ) enabled. * `UNKNOWN` - The type of zone configured on the HyperFlex cluster is not known. * `NOT_CONFIGURED` - The zone type is not configured. * `LOGICAL` - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster. * `PHYSICAL` - The zone is a physical zone configured on a stretched HyperFlex cluster.
 		ZoneType *string `json:"ZoneType,omitempty"`
 		// An array of relationships to hyperflexAlarm resources.
-		Alarm      []HyperflexAlarmRelationship     `json:"Alarm,omitempty"`
-		Encryption *HyperflexEncryptionRelationship `json:"Encryption,omitempty"`
-		Health     *HyperflexHealthRelationship     `json:"Health,omitempty"`
-		License    *HyperflexLicenseRelationship    `json:"License,omitempty"`
+		Alarm      []HyperflexAlarmRelationship            `json:"Alarm,omitempty"`
+		Encryption NullableHyperflexEncryptionRelationship `json:"Encryption,omitempty"`
+		Health     NullableHyperflexHealthRelationship     `json:"Health,omitempty"`
+		License    NullableHyperflexLicenseRelationship    `json:"License,omitempty"`
 		// An array of relationships to hyperflexNode resources.
-		Nodes            []HyperflexNodeRelationship          `json:"Nodes,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Nodes            []HyperflexNodeRelationship                 `json:"Nodes,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to ippoolPool resources.
-		StorageClientIpPools []IppoolPoolRelationship `json:"StorageClientIpPools,omitempty"`
-		StorageClientVrf     *VrfVrfRelationship      `json:"StorageClientVrf,omitempty"`
+		StorageClientIpPools []IppoolPoolRelationship   `json:"StorageClientIpPools,omitempty"`
+		StorageClientVrf     NullableVrfVrfRelationship `json:"StorageClientVrf,omitempty"`
 		// An array of relationships to storageHyperFlexStorageContainer resources.
 		StorageContainers []StorageHyperFlexStorageContainerRelationship `json:"StorageContainers,omitempty"`
 		// An array of relationships to storageHyperFlexVolume resources.
@@ -1191,7 +1276,7 @@ func (o *HyperflexCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexClusterWithoutEmbeddedStruct := HyperflexClusterWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexClusterWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexClusterWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexCluster := _HyperflexCluster{}
 		varHyperflexCluster.ClassId = varHyperflexClusterWithoutEmbeddedStruct.ClassId
@@ -1229,7 +1314,7 @@ func (o *HyperflexCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexCluster := _HyperflexCluster{}
 
-	err = json.Unmarshal(bytes, &varHyperflexCluster)
+	err = json.Unmarshal(data, &varHyperflexCluster)
 	if err == nil {
 		o.HyperflexBaseCluster = varHyperflexCluster.HyperflexBaseCluster
 	} else {
@@ -1238,7 +1323,7 @@ func (o *HyperflexCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Capability")

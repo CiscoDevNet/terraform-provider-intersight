@@ -20,8 +20,8 @@ Name | Type | Description | Notes
 **SubVendorId** | Pointer to **int64** | The sub vendor ID of this PCI device. | [optional] [readonly] 
 **VendorId** | Pointer to **int64** | The vendor ID of this PCI device. | [optional] [readonly] 
 **VendorName** | Pointer to **string** | The vendor name of this PCI device. | [optional] [readonly] 
-**Cluster** | Pointer to [**VirtualizationBaseClusterRelationship**](VirtualizationBaseClusterRelationship.md) |  | [optional] 
-**Host** | Pointer to [**VirtualizationBaseHostRelationship**](VirtualizationBaseHostRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableVirtualizationBaseClusterRelationship**](VirtualizationBaseClusterRelationship.md) |  | [optional] 
+**Host** | Pointer to [**NullableVirtualizationBaseHostRelationship**](VirtualizationBaseHostRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -457,6 +457,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *VirtualizationBaseHostPciDevice) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *VirtualizationBaseHostPciDevice) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 ### GetHost
 
 `func (o *VirtualizationBaseHostPciDevice) GetHost() VirtualizationBaseHostRelationship`
@@ -482,6 +492,16 @@ SetHost sets Host field to given value.
 
 HasHost returns a boolean if a field has been set.
 
+### SetHostNil
+
+`func (o *VirtualizationBaseHostPciDevice) SetHostNil(b bool)`
+
+ SetHostNil sets the value for Host to be an explicit nil
+
+### UnsetHost
+`func (o *VirtualizationBaseHostPciDevice) UnsetHost()`
+
+UnsetHost ensures that no value is present for Host, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

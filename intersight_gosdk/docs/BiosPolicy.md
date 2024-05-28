@@ -453,7 +453,7 @@ Name | Type | Description | Notes
 **X2apicOptOut** | Pointer to **string** | BIOS Token for setting X2APIC Opt-Out Flag configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;enabled&#x60; - Enables the BIOS setting. * &#x60;disabled&#x60; - Disables the BIOS setting. | [optional] [default to "platform-default"]
 **XptPrefetch** | Pointer to **string** | BIOS Token for setting XPT Prefetch configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring XptPrefetch token. * &#x60;disabled&#x60; - Value - disabled for configuring XptPrefetch token. * &#x60;enabled&#x60; - Value - enabled for configuring XptPrefetch token. | [optional] [default to "platform-default"]
 **XptRemotePrefetch** | Pointer to **string** | BIOS Token for setting XPT Remote Prefetch configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring XptRemotePrefetch token. * &#x60;disabled&#x60; - Value - disabled for configuring XptRemotePrefetch token. * &#x60;enabled&#x60; - Value - enabled for configuring XptRemotePrefetch token. | [optional] [default to "platform-default"]
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
 ## Methods
@@ -11715,6 +11715,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *BiosPolicy) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *BiosPolicy) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetProfiles
 
 `func (o *BiosPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship`

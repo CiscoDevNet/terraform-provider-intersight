@@ -14,10 +14,10 @@ Name | Type | Description | Notes
 **Minsize** | Pointer to **int64** | Minimum number of available nodes this node group can scale down to during repair, replacement or upgrade operations. | [optional] 
 **NodeType** | Pointer to **string** | The node type ControlPlane, Worker or ControlPlaneWorker. * &#x60;Worker&#x60; - Node will be marked as a worker node. * &#x60;ControlPlane&#x60; - Node will be marked as a control plane node. * &#x60;ControlPlaneWorker&#x60; - Node will be both a controle plane and a worker. | [optional] [default to "Worker"]
 **Taints** | Pointer to [**[]KubernetesNodeGroupTaint**](KubernetesNodeGroupTaint.md) |  | [optional] 
-**ClusterProfile** | Pointer to [**KubernetesClusterProfileRelationship**](KubernetesClusterProfileRelationship.md) |  | [optional] 
-**InfraProvider** | Pointer to [**KubernetesBaseInfrastructureProviderRelationship**](KubernetesBaseInfrastructureProviderRelationship.md) |  | [optional] 
+**ClusterProfile** | Pointer to [**NullableKubernetesClusterProfileRelationship**](KubernetesClusterProfileRelationship.md) |  | [optional] 
+**InfraProvider** | Pointer to [**NullableKubernetesBaseInfrastructureProviderRelationship**](KubernetesBaseInfrastructureProviderRelationship.md) |  | [optional] 
 **IpPools** | Pointer to [**[]IppoolPoolRelationship**](IppoolPoolRelationship.md) | An array of relationships to ippoolPool resources. | [optional] 
-**KubernetesVersion** | Pointer to [**KubernetesVersionPolicyRelationship**](KubernetesVersionPolicyRelationship.md) |  | [optional] 
+**KubernetesVersion** | Pointer to [**NullableKubernetesVersionPolicyRelationship**](KubernetesVersionPolicyRelationship.md) |  | [optional] 
 **Nodes** | Pointer to [**[]KubernetesNodeProfileRelationship**](KubernetesNodeProfileRelationship.md) | An array of relationships to kubernetesNodeProfile resources. | [optional] 
 
 ## Methods
@@ -334,6 +334,16 @@ SetClusterProfile sets ClusterProfile field to given value.
 
 HasClusterProfile returns a boolean if a field has been set.
 
+### SetClusterProfileNil
+
+`func (o *KubernetesNodeGroupProfile) SetClusterProfileNil(b bool)`
+
+ SetClusterProfileNil sets the value for ClusterProfile to be an explicit nil
+
+### UnsetClusterProfile
+`func (o *KubernetesNodeGroupProfile) UnsetClusterProfile()`
+
+UnsetClusterProfile ensures that no value is present for ClusterProfile, not even an explicit nil
 ### GetInfraProvider
 
 `func (o *KubernetesNodeGroupProfile) GetInfraProvider() KubernetesBaseInfrastructureProviderRelationship`
@@ -359,6 +369,16 @@ SetInfraProvider sets InfraProvider field to given value.
 
 HasInfraProvider returns a boolean if a field has been set.
 
+### SetInfraProviderNil
+
+`func (o *KubernetesNodeGroupProfile) SetInfraProviderNil(b bool)`
+
+ SetInfraProviderNil sets the value for InfraProvider to be an explicit nil
+
+### UnsetInfraProvider
+`func (o *KubernetesNodeGroupProfile) UnsetInfraProvider()`
+
+UnsetInfraProvider ensures that no value is present for InfraProvider, not even an explicit nil
 ### GetIpPools
 
 `func (o *KubernetesNodeGroupProfile) GetIpPools() []IppoolPoolRelationship`
@@ -419,6 +439,16 @@ SetKubernetesVersion sets KubernetesVersion field to given value.
 
 HasKubernetesVersion returns a boolean if a field has been set.
 
+### SetKubernetesVersionNil
+
+`func (o *KubernetesNodeGroupProfile) SetKubernetesVersionNil(b bool)`
+
+ SetKubernetesVersionNil sets the value for KubernetesVersion to be an explicit nil
+
+### UnsetKubernetesVersion
+`func (o *KubernetesNodeGroupProfile) UnsetKubernetesVersion()`
+
+UnsetKubernetesVersion ensures that no value is present for KubernetesVersion, not even an explicit nil
 ### GetNodes
 
 `func (o *KubernetesNodeGroupProfile) GetNodes() []KubernetesNodeProfileRelationship`

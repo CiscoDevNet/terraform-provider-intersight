@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVirtualMachine type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVirtualMachine{}
 
 // VirtualizationVirtualMachine Depicts operations to control the life cycle of a virtual machine on a hypervisor.
 type VirtualizationVirtualMachine struct {
@@ -55,13 +59,13 @@ type VirtualizationVirtualMachine struct {
 	// Expected power state of virtual machine (PowerOn, PowerOff, Restart). * `PowerOff` - The virtual machine will be powered off if it is already not in powered off state. If it is already powered off, no side-effects are expected. * `PowerOn` - The virtual machine will be powered on if it is already not in powered on state. If it is already powered on, no side-effects are expected. * `Suspend` - The virtual machine will be put into  a suspended state. * `ShutDownGuestOS` - The guest operating system is shut down gracefully. * `RestartGuestOS` - It can either act as a reset switch and abruptly reset the guest operating system, or it can send a restart signal to the guest operating system so that it shuts down gracefully and restarts. * `Reset` - Resets the virtual machine abruptly, with no consideration for work in progress. * `Restart` - The virtual machine will be restarted only if it is in powered on state. If it is powered off, it will not be started up. * `Unknown` - Power state of the entity is unknown.
 	PowerState *string `json:"PowerState,omitempty"`
 	// Identifies the provision type to create a new virtual machine. * `OVA` - Deploy virtual machine using OVA/F file. * `Template` - Provision virtual machine using a template file. * `Discovered` - A virtual machine was 'discovered' and not created from Intersight. No provisioning information is available.
-	ProvisionType        *string                                       `json:"ProvisionType,omitempty"`
-	VmConfig             NullableVirtualizationBaseVmConfiguration     `json:"VmConfig,omitempty"`
-	Cluster              *VirtualizationBaseClusterRelationship        `json:"Cluster,omitempty"`
-	Host                 *VirtualizationBaseHostRelationship           `json:"Host,omitempty"`
-	Inventory            *VirtualizationBaseVirtualMachineRelationship `json:"Inventory,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship          `json:"RegisteredDevice,omitempty"`
-	WorkflowInfo         *WorkflowWorkflowInfoRelationship             `json:"WorkflowInfo,omitempty"`
+	ProvisionType        *string                                              `json:"ProvisionType,omitempty"`
+	VmConfig             NullableVirtualizationBaseVmConfiguration            `json:"VmConfig,omitempty"`
+	Cluster              NullableVirtualizationBaseClusterRelationship        `json:"Cluster,omitempty"`
+	Host                 NullableVirtualizationBaseHostRelationship           `json:"Host,omitempty"`
+	Inventory            NullableVirtualizationBaseVirtualMachineRelationship `json:"Inventory,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship          `json:"RegisteredDevice,omitempty"`
+	WorkflowInfo         NullableWorkflowWorkflowInfoRelationship             `json:"WorkflowInfo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -156,7 +160,7 @@ func (o *VirtualizationVirtualMachine) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *VirtualizationVirtualMachine) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -174,7 +178,7 @@ func (o *VirtualizationVirtualMachine) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *VirtualizationVirtualMachine) SetAction(v string) {
 
 // GetActionInfo returns the ActionInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVirtualMachine) GetActionInfo() VirtualizationActionInfo {
-	if o == nil || o.ActionInfo.Get() == nil {
+	if o == nil || IsNil(o.ActionInfo.Get()) {
 		var ret VirtualizationActionInfo
 		return ret
 	}
@@ -242,7 +246,7 @@ func (o *VirtualizationVirtualMachine) GetAffinitySelectors() []InfraMetaData {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVirtualMachine) GetAffinitySelectorsOk() ([]InfraMetaData, bool) {
-	if o == nil || o.AffinitySelectors == nil {
+	if o == nil || IsNil(o.AffinitySelectors) {
 		return nil, false
 	}
 	return o.AffinitySelectors, true
@@ -250,7 +254,7 @@ func (o *VirtualizationVirtualMachine) GetAffinitySelectorsOk() ([]InfraMetaData
 
 // HasAffinitySelectors returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasAffinitySelectors() bool {
-	if o != nil && o.AffinitySelectors != nil {
+	if o != nil && IsNil(o.AffinitySelectors) {
 		return true
 	}
 
@@ -275,7 +279,7 @@ func (o *VirtualizationVirtualMachine) GetAntiAffinitySelectors() []InfraMetaDat
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVirtualMachine) GetAntiAffinitySelectorsOk() ([]InfraMetaData, bool) {
-	if o == nil || o.AntiAffinitySelectors == nil {
+	if o == nil || IsNil(o.AntiAffinitySelectors) {
 		return nil, false
 	}
 	return o.AntiAffinitySelectors, true
@@ -283,7 +287,7 @@ func (o *VirtualizationVirtualMachine) GetAntiAffinitySelectorsOk() ([]InfraMeta
 
 // HasAntiAffinitySelectors returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasAntiAffinitySelectors() bool {
-	if o != nil && o.AntiAffinitySelectors != nil {
+	if o != nil && IsNil(o.AntiAffinitySelectors) {
 		return true
 	}
 
@@ -297,7 +301,7 @@ func (o *VirtualizationVirtualMachine) SetAntiAffinitySelectors(v []InfraMetaDat
 
 // GetCloudInitConfig returns the CloudInitConfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVirtualMachine) GetCloudInitConfig() VirtualizationCloudInitConfig {
-	if o == nil || o.CloudInitConfig.Get() == nil {
+	if o == nil || IsNil(o.CloudInitConfig.Get()) {
 		var ret VirtualizationCloudInitConfig
 		return ret
 	}
@@ -340,7 +344,7 @@ func (o *VirtualizationVirtualMachine) UnsetCloudInitConfig() {
 
 // GetClusterEsxi returns the ClusterEsxi field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetClusterEsxi() string {
-	if o == nil || o.ClusterEsxi == nil {
+	if o == nil || IsNil(o.ClusterEsxi) {
 		var ret string
 		return ret
 	}
@@ -350,7 +354,7 @@ func (o *VirtualizationVirtualMachine) GetClusterEsxi() string {
 // GetClusterEsxiOk returns a tuple with the ClusterEsxi field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetClusterEsxiOk() (*string, bool) {
-	if o == nil || o.ClusterEsxi == nil {
+	if o == nil || IsNil(o.ClusterEsxi) {
 		return nil, false
 	}
 	return o.ClusterEsxi, true
@@ -358,7 +362,7 @@ func (o *VirtualizationVirtualMachine) GetClusterEsxiOk() (*string, bool) {
 
 // HasClusterEsxi returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasClusterEsxi() bool {
-	if o != nil && o.ClusterEsxi != nil {
+	if o != nil && !IsNil(o.ClusterEsxi) {
 		return true
 	}
 
@@ -372,7 +376,7 @@ func (o *VirtualizationVirtualMachine) SetClusterEsxi(v string) {
 
 // GetCpu returns the Cpu field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetCpu() int64 {
-	if o == nil || o.Cpu == nil {
+	if o == nil || IsNil(o.Cpu) {
 		var ret int64
 		return ret
 	}
@@ -382,7 +386,7 @@ func (o *VirtualizationVirtualMachine) GetCpu() int64 {
 // GetCpuOk returns a tuple with the Cpu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetCpuOk() (*int64, bool) {
-	if o == nil || o.Cpu == nil {
+	if o == nil || IsNil(o.Cpu) {
 		return nil, false
 	}
 	return o.Cpu, true
@@ -390,7 +394,7 @@ func (o *VirtualizationVirtualMachine) GetCpuOk() (*int64, bool) {
 
 // HasCpu returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasCpu() bool {
-	if o != nil && o.Cpu != nil {
+	if o != nil && !IsNil(o.Cpu) {
 		return true
 	}
 
@@ -404,7 +408,7 @@ func (o *VirtualizationVirtualMachine) SetCpu(v int64) {
 
 // GetDiscovered returns the Discovered field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetDiscovered() bool {
-	if o == nil || o.Discovered == nil {
+	if o == nil || IsNil(o.Discovered) {
 		var ret bool
 		return ret
 	}
@@ -414,7 +418,7 @@ func (o *VirtualizationVirtualMachine) GetDiscovered() bool {
 // GetDiscoveredOk returns a tuple with the Discovered field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetDiscoveredOk() (*bool, bool) {
-	if o == nil || o.Discovered == nil {
+	if o == nil || IsNil(o.Discovered) {
 		return nil, false
 	}
 	return o.Discovered, true
@@ -422,7 +426,7 @@ func (o *VirtualizationVirtualMachine) GetDiscoveredOk() (*bool, bool) {
 
 // HasDiscovered returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasDiscovered() bool {
-	if o != nil && o.Discovered != nil {
+	if o != nil && !IsNil(o.Discovered) {
 		return true
 	}
 
@@ -447,7 +451,7 @@ func (o *VirtualizationVirtualMachine) GetDisk() []VirtualizationVirtualMachineD
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVirtualMachine) GetDiskOk() ([]VirtualizationVirtualMachineDisk, bool) {
-	if o == nil || o.Disk == nil {
+	if o == nil || IsNil(o.Disk) {
 		return nil, false
 	}
 	return o.Disk, true
@@ -455,7 +459,7 @@ func (o *VirtualizationVirtualMachine) GetDiskOk() ([]VirtualizationVirtualMachi
 
 // HasDisk returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasDisk() bool {
-	if o != nil && o.Disk != nil {
+	if o != nil && IsNil(o.Disk) {
 		return true
 	}
 
@@ -469,7 +473,7 @@ func (o *VirtualizationVirtualMachine) SetDisk(v []VirtualizationVirtualMachineD
 
 // GetForceDelete returns the ForceDelete field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetForceDelete() bool {
-	if o == nil || o.ForceDelete == nil {
+	if o == nil || IsNil(o.ForceDelete) {
 		var ret bool
 		return ret
 	}
@@ -479,7 +483,7 @@ func (o *VirtualizationVirtualMachine) GetForceDelete() bool {
 // GetForceDeleteOk returns a tuple with the ForceDelete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetForceDeleteOk() (*bool, bool) {
-	if o == nil || o.ForceDelete == nil {
+	if o == nil || IsNil(o.ForceDelete) {
 		return nil, false
 	}
 	return o.ForceDelete, true
@@ -487,7 +491,7 @@ func (o *VirtualizationVirtualMachine) GetForceDeleteOk() (*bool, bool) {
 
 // HasForceDelete returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasForceDelete() bool {
-	if o != nil && o.ForceDelete != nil {
+	if o != nil && !IsNil(o.ForceDelete) {
 		return true
 	}
 
@@ -512,7 +516,7 @@ func (o *VirtualizationVirtualMachine) GetGpuConfigs() []InfraBaseGpuConfigurati
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVirtualMachine) GetGpuConfigsOk() ([]InfraBaseGpuConfiguration, bool) {
-	if o == nil || o.GpuConfigs == nil {
+	if o == nil || IsNil(o.GpuConfigs) {
 		return nil, false
 	}
 	return o.GpuConfigs, true
@@ -520,7 +524,7 @@ func (o *VirtualizationVirtualMachine) GetGpuConfigsOk() ([]InfraBaseGpuConfigur
 
 // HasGpuConfigs returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasGpuConfigs() bool {
-	if o != nil && o.GpuConfigs != nil {
+	if o != nil && IsNil(o.GpuConfigs) {
 		return true
 	}
 
@@ -534,7 +538,7 @@ func (o *VirtualizationVirtualMachine) SetGpuConfigs(v []InfraBaseGpuConfigurati
 
 // GetGuestOs returns the GuestOs field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetGuestOs() string {
-	if o == nil || o.GuestOs == nil {
+	if o == nil || IsNil(o.GuestOs) {
 		var ret string
 		return ret
 	}
@@ -544,7 +548,7 @@ func (o *VirtualizationVirtualMachine) GetGuestOs() string {
 // GetGuestOsOk returns a tuple with the GuestOs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetGuestOsOk() (*string, bool) {
-	if o == nil || o.GuestOs == nil {
+	if o == nil || IsNil(o.GuestOs) {
 		return nil, false
 	}
 	return o.GuestOs, true
@@ -552,7 +556,7 @@ func (o *VirtualizationVirtualMachine) GetGuestOsOk() (*string, bool) {
 
 // HasGuestOs returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasGuestOs() bool {
-	if o != nil && o.GuestOs != nil {
+	if o != nil && !IsNil(o.GuestOs) {
 		return true
 	}
 
@@ -566,7 +570,7 @@ func (o *VirtualizationVirtualMachine) SetGuestOs(v string) {
 
 // GetHostEsxi returns the HostEsxi field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetHostEsxi() string {
-	if o == nil || o.HostEsxi == nil {
+	if o == nil || IsNil(o.HostEsxi) {
 		var ret string
 		return ret
 	}
@@ -576,7 +580,7 @@ func (o *VirtualizationVirtualMachine) GetHostEsxi() string {
 // GetHostEsxiOk returns a tuple with the HostEsxi field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetHostEsxiOk() (*string, bool) {
-	if o == nil || o.HostEsxi == nil {
+	if o == nil || IsNil(o.HostEsxi) {
 		return nil, false
 	}
 	return o.HostEsxi, true
@@ -584,7 +588,7 @@ func (o *VirtualizationVirtualMachine) GetHostEsxiOk() (*string, bool) {
 
 // HasHostEsxi returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasHostEsxi() bool {
-	if o != nil && o.HostEsxi != nil {
+	if o != nil && !IsNil(o.HostEsxi) {
 		return true
 	}
 
@@ -598,7 +602,7 @@ func (o *VirtualizationVirtualMachine) SetHostEsxi(v string) {
 
 // GetHypervisorType returns the HypervisorType field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetHypervisorType() string {
-	if o == nil || o.HypervisorType == nil {
+	if o == nil || IsNil(o.HypervisorType) {
 		var ret string
 		return ret
 	}
@@ -608,7 +612,7 @@ func (o *VirtualizationVirtualMachine) GetHypervisorType() string {
 // GetHypervisorTypeOk returns a tuple with the HypervisorType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetHypervisorTypeOk() (*string, bool) {
-	if o == nil || o.HypervisorType == nil {
+	if o == nil || IsNil(o.HypervisorType) {
 		return nil, false
 	}
 	return o.HypervisorType, true
@@ -616,7 +620,7 @@ func (o *VirtualizationVirtualMachine) GetHypervisorTypeOk() (*string, bool) {
 
 // HasHypervisorType returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasHypervisorType() bool {
-	if o != nil && o.HypervisorType != nil {
+	if o != nil && !IsNil(o.HypervisorType) {
 		return true
 	}
 
@@ -641,7 +645,7 @@ func (o *VirtualizationVirtualMachine) GetInterfaces() []VirtualizationNetworkIn
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVirtualMachine) GetInterfacesOk() ([]VirtualizationNetworkInterface, bool) {
-	if o == nil || o.Interfaces == nil {
+	if o == nil || IsNil(o.Interfaces) {
 		return nil, false
 	}
 	return o.Interfaces, true
@@ -649,7 +653,7 @@ func (o *VirtualizationVirtualMachine) GetInterfacesOk() ([]VirtualizationNetwor
 
 // HasInterfaces returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasInterfaces() bool {
-	if o != nil && o.Interfaces != nil {
+	if o != nil && IsNil(o.Interfaces) {
 		return true
 	}
 
@@ -674,7 +678,7 @@ func (o *VirtualizationVirtualMachine) GetLabels() []InfraMetaData {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVirtualMachine) GetLabelsOk() ([]InfraMetaData, bool) {
-	if o == nil || o.Labels == nil {
+	if o == nil || IsNil(o.Labels) {
 		return nil, false
 	}
 	return o.Labels, true
@@ -682,7 +686,7 @@ func (o *VirtualizationVirtualMachine) GetLabelsOk() ([]InfraMetaData, bool) {
 
 // HasLabels returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasLabels() bool {
-	if o != nil && o.Labels != nil {
+	if o != nil && IsNil(o.Labels) {
 		return true
 	}
 
@@ -696,7 +700,7 @@ func (o *VirtualizationVirtualMachine) SetLabels(v []InfraMetaData) {
 
 // GetMemory returns the Memory field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetMemory() int64 {
-	if o == nil || o.Memory == nil {
+	if o == nil || IsNil(o.Memory) {
 		var ret int64
 		return ret
 	}
@@ -706,7 +710,7 @@ func (o *VirtualizationVirtualMachine) GetMemory() int64 {
 // GetMemoryOk returns a tuple with the Memory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetMemoryOk() (*int64, bool) {
-	if o == nil || o.Memory == nil {
+	if o == nil || IsNil(o.Memory) {
 		return nil, false
 	}
 	return o.Memory, true
@@ -714,7 +718,7 @@ func (o *VirtualizationVirtualMachine) GetMemoryOk() (*int64, bool) {
 
 // HasMemory returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasMemory() bool {
-	if o != nil && o.Memory != nil {
+	if o != nil && !IsNil(o.Memory) {
 		return true
 	}
 
@@ -728,7 +732,7 @@ func (o *VirtualizationVirtualMachine) SetMemory(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -738,7 +742,7 @@ func (o *VirtualizationVirtualMachine) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -746,7 +750,7 @@ func (o *VirtualizationVirtualMachine) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -760,7 +764,7 @@ func (o *VirtualizationVirtualMachine) SetName(v string) {
 
 // GetPowerState returns the PowerState field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetPowerState() string {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		var ret string
 		return ret
 	}
@@ -770,7 +774,7 @@ func (o *VirtualizationVirtualMachine) GetPowerState() string {
 // GetPowerStateOk returns a tuple with the PowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetPowerStateOk() (*string, bool) {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		return nil, false
 	}
 	return o.PowerState, true
@@ -778,7 +782,7 @@ func (o *VirtualizationVirtualMachine) GetPowerStateOk() (*string, bool) {
 
 // HasPowerState returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasPowerState() bool {
-	if o != nil && o.PowerState != nil {
+	if o != nil && !IsNil(o.PowerState) {
 		return true
 	}
 
@@ -792,7 +796,7 @@ func (o *VirtualizationVirtualMachine) SetPowerState(v string) {
 
 // GetProvisionType returns the ProvisionType field value if set, zero value otherwise.
 func (o *VirtualizationVirtualMachine) GetProvisionType() string {
-	if o == nil || o.ProvisionType == nil {
+	if o == nil || IsNil(o.ProvisionType) {
 		var ret string
 		return ret
 	}
@@ -802,7 +806,7 @@ func (o *VirtualizationVirtualMachine) GetProvisionType() string {
 // GetProvisionTypeOk returns a tuple with the ProvisionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVirtualMachine) GetProvisionTypeOk() (*string, bool) {
-	if o == nil || o.ProvisionType == nil {
+	if o == nil || IsNil(o.ProvisionType) {
 		return nil, false
 	}
 	return o.ProvisionType, true
@@ -810,7 +814,7 @@ func (o *VirtualizationVirtualMachine) GetProvisionTypeOk() (*string, bool) {
 
 // HasProvisionType returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasProvisionType() bool {
-	if o != nil && o.ProvisionType != nil {
+	if o != nil && !IsNil(o.ProvisionType) {
 		return true
 	}
 
@@ -824,7 +828,7 @@ func (o *VirtualizationVirtualMachine) SetProvisionType(v string) {
 
 // GetVmConfig returns the VmConfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVirtualMachine) GetVmConfig() VirtualizationBaseVmConfiguration {
-	if o == nil || o.VmConfig.Get() == nil {
+	if o == nil || IsNil(o.VmConfig.Get()) {
 		var ret VirtualizationBaseVmConfiguration
 		return ret
 	}
@@ -865,183 +869,242 @@ func (o *VirtualizationVirtualMachine) UnsetVmConfig() {
 	o.VmConfig.Unset()
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVirtualMachine) GetCluster() VirtualizationBaseClusterRelationship {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster.Get()) {
 		var ret VirtualizationBaseClusterRelationship
 		return ret
 	}
-	return *o.Cluster
+	return *o.Cluster.Get()
 }
 
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVirtualMachine) GetClusterOk() (*VirtualizationBaseClusterRelationship, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.Cluster.Get(), o.Cluster.IsSet()
 }
 
 // HasCluster returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && o.Cluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given VirtualizationBaseClusterRelationship and assigns it to the Cluster field.
+// SetCluster gets a reference to the given NullableVirtualizationBaseClusterRelationship and assigns it to the Cluster field.
 func (o *VirtualizationVirtualMachine) SetCluster(v VirtualizationBaseClusterRelationship) {
-	o.Cluster = &v
+	o.Cluster.Set(&v)
 }
 
-// GetHost returns the Host field value if set, zero value otherwise.
+// SetClusterNil sets the value for Cluster to be an explicit nil
+func (o *VirtualizationVirtualMachine) SetClusterNil() {
+	o.Cluster.Set(nil)
+}
+
+// UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
+func (o *VirtualizationVirtualMachine) UnsetCluster() {
+	o.Cluster.Unset()
+}
+
+// GetHost returns the Host field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVirtualMachine) GetHost() VirtualizationBaseHostRelationship {
-	if o == nil || o.Host == nil {
+	if o == nil || IsNil(o.Host.Get()) {
 		var ret VirtualizationBaseHostRelationship
 		return ret
 	}
-	return *o.Host
+	return *o.Host.Get()
 }
 
 // GetHostOk returns a tuple with the Host field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVirtualMachine) GetHostOk() (*VirtualizationBaseHostRelationship, bool) {
-	if o == nil || o.Host == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Host, true
+	return o.Host.Get(), o.Host.IsSet()
 }
 
 // HasHost returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasHost() bool {
-	if o != nil && o.Host != nil {
+	if o != nil && o.Host.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHost gets a reference to the given VirtualizationBaseHostRelationship and assigns it to the Host field.
+// SetHost gets a reference to the given NullableVirtualizationBaseHostRelationship and assigns it to the Host field.
 func (o *VirtualizationVirtualMachine) SetHost(v VirtualizationBaseHostRelationship) {
-	o.Host = &v
+	o.Host.Set(&v)
 }
 
-// GetInventory returns the Inventory field value if set, zero value otherwise.
+// SetHostNil sets the value for Host to be an explicit nil
+func (o *VirtualizationVirtualMachine) SetHostNil() {
+	o.Host.Set(nil)
+}
+
+// UnsetHost ensures that no value is present for Host, not even an explicit nil
+func (o *VirtualizationVirtualMachine) UnsetHost() {
+	o.Host.Unset()
+}
+
+// GetInventory returns the Inventory field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVirtualMachine) GetInventory() VirtualizationBaseVirtualMachineRelationship {
-	if o == nil || o.Inventory == nil {
+	if o == nil || IsNil(o.Inventory.Get()) {
 		var ret VirtualizationBaseVirtualMachineRelationship
 		return ret
 	}
-	return *o.Inventory
+	return *o.Inventory.Get()
 }
 
 // GetInventoryOk returns a tuple with the Inventory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVirtualMachine) GetInventoryOk() (*VirtualizationBaseVirtualMachineRelationship, bool) {
-	if o == nil || o.Inventory == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Inventory, true
+	return o.Inventory.Get(), o.Inventory.IsSet()
 }
 
 // HasInventory returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasInventory() bool {
-	if o != nil && o.Inventory != nil {
+	if o != nil && o.Inventory.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventory gets a reference to the given VirtualizationBaseVirtualMachineRelationship and assigns it to the Inventory field.
+// SetInventory gets a reference to the given NullableVirtualizationBaseVirtualMachineRelationship and assigns it to the Inventory field.
 func (o *VirtualizationVirtualMachine) SetInventory(v VirtualizationBaseVirtualMachineRelationship) {
-	o.Inventory = &v
+	o.Inventory.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryNil sets the value for Inventory to be an explicit nil
+func (o *VirtualizationVirtualMachine) SetInventoryNil() {
+	o.Inventory.Set(nil)
+}
+
+// UnsetInventory ensures that no value is present for Inventory, not even an explicit nil
+func (o *VirtualizationVirtualMachine) UnsetInventory() {
+	o.Inventory.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVirtualMachine) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVirtualMachine) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *VirtualizationVirtualMachine) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *VirtualizationVirtualMachine) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *VirtualizationVirtualMachine) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVirtualMachine) GetWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil || IsNil(o.WorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.WorkflowInfo
+	return *o.WorkflowInfo.Get()
 }
 
 // GetWorkflowInfoOk returns a tuple with the WorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVirtualMachine) GetWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WorkflowInfo, true
+	return o.WorkflowInfo.Get(), o.WorkflowInfo.IsSet()
 }
 
 // HasWorkflowInfo returns a boolean if a field has been set.
 func (o *VirtualizationVirtualMachine) HasWorkflowInfo() bool {
-	if o != nil && o.WorkflowInfo != nil {
+	if o != nil && o.WorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
+// SetWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
 func (o *VirtualizationVirtualMachine) SetWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.WorkflowInfo = &v
+	o.WorkflowInfo.Set(&v)
+}
+
+// SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+func (o *VirtualizationVirtualMachine) SetWorkflowInfoNil() {
+	o.WorkflowInfo.Set(nil)
+}
+
+// UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
+func (o *VirtualizationVirtualMachine) UnsetWorkflowInfo() {
+	o.WorkflowInfo.Unset()
 }
 
 func (o VirtualizationVirtualMachine) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVirtualMachine) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
 	if o.ActionInfo.IsSet() {
@@ -1056,31 +1119,31 @@ func (o VirtualizationVirtualMachine) MarshalJSON() ([]byte, error) {
 	if o.CloudInitConfig.IsSet() {
 		toSerialize["CloudInitConfig"] = o.CloudInitConfig.Get()
 	}
-	if o.ClusterEsxi != nil {
+	if !IsNil(o.ClusterEsxi) {
 		toSerialize["ClusterEsxi"] = o.ClusterEsxi
 	}
-	if o.Cpu != nil {
+	if !IsNil(o.Cpu) {
 		toSerialize["Cpu"] = o.Cpu
 	}
-	if o.Discovered != nil {
+	if !IsNil(o.Discovered) {
 		toSerialize["Discovered"] = o.Discovered
 	}
 	if o.Disk != nil {
 		toSerialize["Disk"] = o.Disk
 	}
-	if o.ForceDelete != nil {
+	if !IsNil(o.ForceDelete) {
 		toSerialize["ForceDelete"] = o.ForceDelete
 	}
 	if o.GpuConfigs != nil {
 		toSerialize["GpuConfigs"] = o.GpuConfigs
 	}
-	if o.GuestOs != nil {
+	if !IsNil(o.GuestOs) {
 		toSerialize["GuestOs"] = o.GuestOs
 	}
-	if o.HostEsxi != nil {
+	if !IsNil(o.HostEsxi) {
 		toSerialize["HostEsxi"] = o.HostEsxi
 	}
-	if o.HypervisorType != nil {
+	if !IsNil(o.HypervisorType) {
 		toSerialize["HypervisorType"] = o.HypervisorType
 	}
 	if o.Interfaces != nil {
@@ -1089,45 +1152,67 @@ func (o VirtualizationVirtualMachine) MarshalJSON() ([]byte, error) {
 	if o.Labels != nil {
 		toSerialize["Labels"] = o.Labels
 	}
-	if o.Memory != nil {
+	if !IsNil(o.Memory) {
 		toSerialize["Memory"] = o.Memory
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PowerState != nil {
+	if !IsNil(o.PowerState) {
 		toSerialize["PowerState"] = o.PowerState
 	}
-	if o.ProvisionType != nil {
+	if !IsNil(o.ProvisionType) {
 		toSerialize["ProvisionType"] = o.ProvisionType
 	}
 	if o.VmConfig.IsSet() {
 		toSerialize["VmConfig"] = o.VmConfig.Get()
 	}
-	if o.Cluster != nil {
-		toSerialize["Cluster"] = o.Cluster
+	if o.Cluster.IsSet() {
+		toSerialize["Cluster"] = o.Cluster.Get()
 	}
-	if o.Host != nil {
-		toSerialize["Host"] = o.Host
+	if o.Host.IsSet() {
+		toSerialize["Host"] = o.Host.Get()
 	}
-	if o.Inventory != nil {
-		toSerialize["Inventory"] = o.Inventory
+	if o.Inventory.IsSet() {
+		toSerialize["Inventory"] = o.Inventory.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.WorkflowInfo != nil {
-		toSerialize["WorkflowInfo"] = o.WorkflowInfo
+	if o.WorkflowInfo.IsSet() {
+		toSerialize["WorkflowInfo"] = o.WorkflowInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVirtualMachine) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVirtualMachineWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1164,18 +1249,18 @@ func (o *VirtualizationVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 		// Expected power state of virtual machine (PowerOn, PowerOff, Restart). * `PowerOff` - The virtual machine will be powered off if it is already not in powered off state. If it is already powered off, no side-effects are expected. * `PowerOn` - The virtual machine will be powered on if it is already not in powered on state. If it is already powered on, no side-effects are expected. * `Suspend` - The virtual machine will be put into  a suspended state. * `ShutDownGuestOS` - The guest operating system is shut down gracefully. * `RestartGuestOS` - It can either act as a reset switch and abruptly reset the guest operating system, or it can send a restart signal to the guest operating system so that it shuts down gracefully and restarts. * `Reset` - Resets the virtual machine abruptly, with no consideration for work in progress. * `Restart` - The virtual machine will be restarted only if it is in powered on state. If it is powered off, it will not be started up. * `Unknown` - Power state of the entity is unknown.
 		PowerState *string `json:"PowerState,omitempty"`
 		// Identifies the provision type to create a new virtual machine. * `OVA` - Deploy virtual machine using OVA/F file. * `Template` - Provision virtual machine using a template file. * `Discovered` - A virtual machine was 'discovered' and not created from Intersight. No provisioning information is available.
-		ProvisionType    *string                                       `json:"ProvisionType,omitempty"`
-		VmConfig         NullableVirtualizationBaseVmConfiguration     `json:"VmConfig,omitempty"`
-		Cluster          *VirtualizationBaseClusterRelationship        `json:"Cluster,omitempty"`
-		Host             *VirtualizationBaseHostRelationship           `json:"Host,omitempty"`
-		Inventory        *VirtualizationBaseVirtualMachineRelationship `json:"Inventory,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship          `json:"RegisteredDevice,omitempty"`
-		WorkflowInfo     *WorkflowWorkflowInfoRelationship             `json:"WorkflowInfo,omitempty"`
+		ProvisionType    *string                                              `json:"ProvisionType,omitempty"`
+		VmConfig         NullableVirtualizationBaseVmConfiguration            `json:"VmConfig,omitempty"`
+		Cluster          NullableVirtualizationBaseClusterRelationship        `json:"Cluster,omitempty"`
+		Host             NullableVirtualizationBaseHostRelationship           `json:"Host,omitempty"`
+		Inventory        NullableVirtualizationBaseVirtualMachineRelationship `json:"Inventory,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship          `json:"RegisteredDevice,omitempty"`
+		WorkflowInfo     NullableWorkflowWorkflowInfoRelationship             `json:"WorkflowInfo,omitempty"`
 	}
 
 	varVirtualizationVirtualMachineWithoutEmbeddedStruct := VirtualizationVirtualMachineWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVirtualMachineWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVirtualMachineWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVirtualMachine := _VirtualizationVirtualMachine{}
 		varVirtualizationVirtualMachine.ClassId = varVirtualizationVirtualMachineWithoutEmbeddedStruct.ClassId
@@ -1213,7 +1298,7 @@ func (o *VirtualizationVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationVirtualMachine := _VirtualizationVirtualMachine{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVirtualMachine)
+	err = json.Unmarshal(data, &varVirtualizationVirtualMachine)
 	if err == nil {
 		o.MoBaseMo = varVirtualizationVirtualMachine.MoBaseMo
 	} else {
@@ -1222,7 +1307,7 @@ func (o *VirtualizationVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

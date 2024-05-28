@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FcpoolLease type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FcpoolLease{}
 
 // FcpoolLease Lease represents a single WWN ID that is part of the universe, allocated either from a pool or through static assignment.
 type FcpoolLease struct {
@@ -28,11 +32,11 @@ type FcpoolLease struct {
 	PoolPurpose *string                     `json:"PoolPurpose,omitempty"`
 	Reservation *FcpoolReservationReference `json:"Reservation,omitempty"`
 	// WWN ID allocated for pool based allocation.
-	WwnId                *string                       `json:"WwnId,omitempty"`
-	AssignedToEntity     *MoBaseMoRelationship         `json:"AssignedToEntity,omitempty"`
-	Pool                 *FcpoolPoolRelationship       `json:"Pool,omitempty"`
-	PoolMember           *FcpoolPoolMemberRelationship `json:"PoolMember,omitempty"`
-	Universe             *FcpoolUniverseRelationship   `json:"Universe,omitempty"`
+	WwnId                *string                              `json:"WwnId,omitempty"`
+	AssignedToEntity     NullableMoBaseMoRelationship         `json:"AssignedToEntity,omitempty"`
+	Pool                 NullableFcpoolPoolRelationship       `json:"Pool,omitempty"`
+	PoolMember           NullableFcpoolPoolMemberRelationship `json:"PoolMember,omitempty"`
+	Universe             NullableFcpoolUniverseRelationship   `json:"Universe,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *FcpoolLease) SetObjectType(v string) {
 
 // GetPoolPurpose returns the PoolPurpose field value if set, zero value otherwise.
 func (o *FcpoolLease) GetPoolPurpose() string {
-	if o == nil || o.PoolPurpose == nil {
+	if o == nil || IsNil(o.PoolPurpose) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *FcpoolLease) GetPoolPurpose() string {
 // GetPoolPurposeOk returns a tuple with the PoolPurpose field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FcpoolLease) GetPoolPurposeOk() (*string, bool) {
-	if o == nil || o.PoolPurpose == nil {
+	if o == nil || IsNil(o.PoolPurpose) {
 		return nil, false
 	}
 	return o.PoolPurpose, true
@@ -133,7 +137,7 @@ func (o *FcpoolLease) GetPoolPurposeOk() (*string, bool) {
 
 // HasPoolPurpose returns a boolean if a field has been set.
 func (o *FcpoolLease) HasPoolPurpose() bool {
-	if o != nil && o.PoolPurpose != nil {
+	if o != nil && !IsNil(o.PoolPurpose) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *FcpoolLease) SetPoolPurpose(v string) {
 
 // GetReservation returns the Reservation field value if set, zero value otherwise.
 func (o *FcpoolLease) GetReservation() FcpoolReservationReference {
-	if o == nil || o.Reservation == nil {
+	if o == nil || IsNil(o.Reservation) {
 		var ret FcpoolReservationReference
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *FcpoolLease) GetReservation() FcpoolReservationReference {
 // GetReservationOk returns a tuple with the Reservation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FcpoolLease) GetReservationOk() (*FcpoolReservationReference, bool) {
-	if o == nil || o.Reservation == nil {
+	if o == nil || IsNil(o.Reservation) {
 		return nil, false
 	}
 	return o.Reservation, true
@@ -165,7 +169,7 @@ func (o *FcpoolLease) GetReservationOk() (*FcpoolReservationReference, bool) {
 
 // HasReservation returns a boolean if a field has been set.
 func (o *FcpoolLease) HasReservation() bool {
-	if o != nil && o.Reservation != nil {
+	if o != nil && !IsNil(o.Reservation) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *FcpoolLease) SetReservation(v FcpoolReservationReference) {
 
 // GetWwnId returns the WwnId field value if set, zero value otherwise.
 func (o *FcpoolLease) GetWwnId() string {
-	if o == nil || o.WwnId == nil {
+	if o == nil || IsNil(o.WwnId) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *FcpoolLease) GetWwnId() string {
 // GetWwnIdOk returns a tuple with the WwnId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FcpoolLease) GetWwnIdOk() (*string, bool) {
-	if o == nil || o.WwnId == nil {
+	if o == nil || IsNil(o.WwnId) {
 		return nil, false
 	}
 	return o.WwnId, true
@@ -197,7 +201,7 @@ func (o *FcpoolLease) GetWwnIdOk() (*string, bool) {
 
 // HasWwnId returns a boolean if a field has been set.
 func (o *FcpoolLease) HasWwnId() bool {
-	if o != nil && o.WwnId != nil {
+	if o != nil && !IsNil(o.WwnId) {
 		return true
 	}
 
@@ -209,180 +213,250 @@ func (o *FcpoolLease) SetWwnId(v string) {
 	o.WwnId = &v
 }
 
-// GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise.
+// GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FcpoolLease) GetAssignedToEntity() MoBaseMoRelationship {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil || IsNil(o.AssignedToEntity.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.AssignedToEntity
+	return *o.AssignedToEntity.Get()
 }
 
 // GetAssignedToEntityOk returns a tuple with the AssignedToEntity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FcpoolLease) GetAssignedToEntityOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssignedToEntity, true
+	return o.AssignedToEntity.Get(), o.AssignedToEntity.IsSet()
 }
 
 // HasAssignedToEntity returns a boolean if a field has been set.
 func (o *FcpoolLease) HasAssignedToEntity() bool {
-	if o != nil && o.AssignedToEntity != nil {
+	if o != nil && o.AssignedToEntity.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssignedToEntity gets a reference to the given MoBaseMoRelationship and assigns it to the AssignedToEntity field.
+// SetAssignedToEntity gets a reference to the given NullableMoBaseMoRelationship and assigns it to the AssignedToEntity field.
 func (o *FcpoolLease) SetAssignedToEntity(v MoBaseMoRelationship) {
-	o.AssignedToEntity = &v
+	o.AssignedToEntity.Set(&v)
 }
 
-// GetPool returns the Pool field value if set, zero value otherwise.
+// SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+func (o *FcpoolLease) SetAssignedToEntityNil() {
+	o.AssignedToEntity.Set(nil)
+}
+
+// UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
+func (o *FcpoolLease) UnsetAssignedToEntity() {
+	o.AssignedToEntity.Unset()
+}
+
+// GetPool returns the Pool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FcpoolLease) GetPool() FcpoolPoolRelationship {
-	if o == nil || o.Pool == nil {
+	if o == nil || IsNil(o.Pool.Get()) {
 		var ret FcpoolPoolRelationship
 		return ret
 	}
-	return *o.Pool
+	return *o.Pool.Get()
 }
 
 // GetPoolOk returns a tuple with the Pool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FcpoolLease) GetPoolOk() (*FcpoolPoolRelationship, bool) {
-	if o == nil || o.Pool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pool, true
+	return o.Pool.Get(), o.Pool.IsSet()
 }
 
 // HasPool returns a boolean if a field has been set.
 func (o *FcpoolLease) HasPool() bool {
-	if o != nil && o.Pool != nil {
+	if o != nil && o.Pool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPool gets a reference to the given FcpoolPoolRelationship and assigns it to the Pool field.
+// SetPool gets a reference to the given NullableFcpoolPoolRelationship and assigns it to the Pool field.
 func (o *FcpoolLease) SetPool(v FcpoolPoolRelationship) {
-	o.Pool = &v
+	o.Pool.Set(&v)
 }
 
-// GetPoolMember returns the PoolMember field value if set, zero value otherwise.
+// SetPoolNil sets the value for Pool to be an explicit nil
+func (o *FcpoolLease) SetPoolNil() {
+	o.Pool.Set(nil)
+}
+
+// UnsetPool ensures that no value is present for Pool, not even an explicit nil
+func (o *FcpoolLease) UnsetPool() {
+	o.Pool.Unset()
+}
+
+// GetPoolMember returns the PoolMember field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FcpoolLease) GetPoolMember() FcpoolPoolMemberRelationship {
-	if o == nil || o.PoolMember == nil {
+	if o == nil || IsNil(o.PoolMember.Get()) {
 		var ret FcpoolPoolMemberRelationship
 		return ret
 	}
-	return *o.PoolMember
+	return *o.PoolMember.Get()
 }
 
 // GetPoolMemberOk returns a tuple with the PoolMember field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FcpoolLease) GetPoolMemberOk() (*FcpoolPoolMemberRelationship, bool) {
-	if o == nil || o.PoolMember == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PoolMember, true
+	return o.PoolMember.Get(), o.PoolMember.IsSet()
 }
 
 // HasPoolMember returns a boolean if a field has been set.
 func (o *FcpoolLease) HasPoolMember() bool {
-	if o != nil && o.PoolMember != nil {
+	if o != nil && o.PoolMember.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPoolMember gets a reference to the given FcpoolPoolMemberRelationship and assigns it to the PoolMember field.
+// SetPoolMember gets a reference to the given NullableFcpoolPoolMemberRelationship and assigns it to the PoolMember field.
 func (o *FcpoolLease) SetPoolMember(v FcpoolPoolMemberRelationship) {
-	o.PoolMember = &v
+	o.PoolMember.Set(&v)
 }
 
-// GetUniverse returns the Universe field value if set, zero value otherwise.
+// SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+func (o *FcpoolLease) SetPoolMemberNil() {
+	o.PoolMember.Set(nil)
+}
+
+// UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
+func (o *FcpoolLease) UnsetPoolMember() {
+	o.PoolMember.Unset()
+}
+
+// GetUniverse returns the Universe field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FcpoolLease) GetUniverse() FcpoolUniverseRelationship {
-	if o == nil || o.Universe == nil {
+	if o == nil || IsNil(o.Universe.Get()) {
 		var ret FcpoolUniverseRelationship
 		return ret
 	}
-	return *o.Universe
+	return *o.Universe.Get()
 }
 
 // GetUniverseOk returns a tuple with the Universe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FcpoolLease) GetUniverseOk() (*FcpoolUniverseRelationship, bool) {
-	if o == nil || o.Universe == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Universe, true
+	return o.Universe.Get(), o.Universe.IsSet()
 }
 
 // HasUniverse returns a boolean if a field has been set.
 func (o *FcpoolLease) HasUniverse() bool {
-	if o != nil && o.Universe != nil {
+	if o != nil && o.Universe.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUniverse gets a reference to the given FcpoolUniverseRelationship and assigns it to the Universe field.
+// SetUniverse gets a reference to the given NullableFcpoolUniverseRelationship and assigns it to the Universe field.
 func (o *FcpoolLease) SetUniverse(v FcpoolUniverseRelationship) {
-	o.Universe = &v
+	o.Universe.Set(&v)
+}
+
+// SetUniverseNil sets the value for Universe to be an explicit nil
+func (o *FcpoolLease) SetUniverseNil() {
+	o.Universe.Set(nil)
+}
+
+// UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
+func (o *FcpoolLease) UnsetUniverse() {
+	o.Universe.Unset()
 }
 
 func (o FcpoolLease) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FcpoolLease) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolAbstractLease, errPoolAbstractLease := json.Marshal(o.PoolAbstractLease)
 	if errPoolAbstractLease != nil {
-		return []byte{}, errPoolAbstractLease
+		return map[string]interface{}{}, errPoolAbstractLease
 	}
 	errPoolAbstractLease = json.Unmarshal([]byte(serializedPoolAbstractLease), &toSerialize)
 	if errPoolAbstractLease != nil {
-		return []byte{}, errPoolAbstractLease
+		return map[string]interface{}{}, errPoolAbstractLease
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.PoolPurpose != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.PoolPurpose) {
 		toSerialize["PoolPurpose"] = o.PoolPurpose
 	}
-	if o.Reservation != nil {
+	if !IsNil(o.Reservation) {
 		toSerialize["Reservation"] = o.Reservation
 	}
-	if o.WwnId != nil {
+	if !IsNil(o.WwnId) {
 		toSerialize["WwnId"] = o.WwnId
 	}
-	if o.AssignedToEntity != nil {
-		toSerialize["AssignedToEntity"] = o.AssignedToEntity
+	if o.AssignedToEntity.IsSet() {
+		toSerialize["AssignedToEntity"] = o.AssignedToEntity.Get()
 	}
-	if o.Pool != nil {
-		toSerialize["Pool"] = o.Pool
+	if o.Pool.IsSet() {
+		toSerialize["Pool"] = o.Pool.Get()
 	}
-	if o.PoolMember != nil {
-		toSerialize["PoolMember"] = o.PoolMember
+	if o.PoolMember.IsSet() {
+		toSerialize["PoolMember"] = o.PoolMember.Get()
 	}
-	if o.Universe != nil {
-		toSerialize["Universe"] = o.Universe
+	if o.Universe.IsSet() {
+		toSerialize["Universe"] = o.Universe.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FcpoolLease) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FcpoolLease) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FcpoolLeaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -392,16 +466,16 @@ func (o *FcpoolLease) UnmarshalJSON(bytes []byte) (err error) {
 		PoolPurpose *string                     `json:"PoolPurpose,omitempty"`
 		Reservation *FcpoolReservationReference `json:"Reservation,omitempty"`
 		// WWN ID allocated for pool based allocation.
-		WwnId            *string                       `json:"WwnId,omitempty"`
-		AssignedToEntity *MoBaseMoRelationship         `json:"AssignedToEntity,omitempty"`
-		Pool             *FcpoolPoolRelationship       `json:"Pool,omitempty"`
-		PoolMember       *FcpoolPoolMemberRelationship `json:"PoolMember,omitempty"`
-		Universe         *FcpoolUniverseRelationship   `json:"Universe,omitempty"`
+		WwnId            *string                              `json:"WwnId,omitempty"`
+		AssignedToEntity NullableMoBaseMoRelationship         `json:"AssignedToEntity,omitempty"`
+		Pool             NullableFcpoolPoolRelationship       `json:"Pool,omitempty"`
+		PoolMember       NullableFcpoolPoolMemberRelationship `json:"PoolMember,omitempty"`
+		Universe         NullableFcpoolUniverseRelationship   `json:"Universe,omitempty"`
 	}
 
 	varFcpoolLeaseWithoutEmbeddedStruct := FcpoolLeaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFcpoolLeaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFcpoolLeaseWithoutEmbeddedStruct)
 	if err == nil {
 		varFcpoolLease := _FcpoolLease{}
 		varFcpoolLease.ClassId = varFcpoolLeaseWithoutEmbeddedStruct.ClassId
@@ -420,7 +494,7 @@ func (o *FcpoolLease) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFcpoolLease := _FcpoolLease{}
 
-	err = json.Unmarshal(bytes, &varFcpoolLease)
+	err = json.Unmarshal(data, &varFcpoolLease)
 	if err == nil {
 		o.PoolAbstractLease = varFcpoolLease.PoolAbstractLease
 	} else {
@@ -429,7 +503,7 @@ func (o *FcpoolLease) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "PoolPurpose")

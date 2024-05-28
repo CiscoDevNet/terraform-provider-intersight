@@ -30,8 +30,8 @@ Name | Type | Description | Notes
 **TotalPhases** | Pointer to **int64** | TotalPhase represents the total number of the upgradePhases for one upgrade. | [optional] [readonly] 
 **UiPackages** | Pointer to **[]string** |  | [optional] 
 **Version** | Pointer to **string** | Software upgrade manifest&#39;s version. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**ImageBundle** | Pointer to [**ApplianceImageBundleRelationship**](ApplianceImageBundleRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**ImageBundle** | Pointer to [**NullableApplianceImageBundleRelationship**](ApplianceImageBundleRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -787,6 +787,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *ApplianceUpgrade) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *ApplianceUpgrade) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetImageBundle
 
 `func (o *ApplianceUpgrade) GetImageBundle() ApplianceImageBundleRelationship`
@@ -812,6 +822,16 @@ SetImageBundle sets ImageBundle field to given value.
 
 HasImageBundle returns a boolean if a field has been set.
 
+### SetImageBundleNil
+
+`func (o *ApplianceUpgrade) SetImageBundleNil(b bool)`
+
+ SetImageBundleNil sets the value for ImageBundle to be an explicit nil
+
+### UnsetImageBundle
+`func (o *ApplianceUpgrade) UnsetImageBundle()`
+
+UnsetImageBundle ensures that no value is present for ImageBundle, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

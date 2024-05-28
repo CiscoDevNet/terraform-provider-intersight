@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NetworkDns type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NetworkDns{}
 
 // NetworkDns Concrete class for list of DNS servers configured on the nexus end point.
 type NetworkDns struct {
@@ -29,9 +33,9 @@ type NetworkDns struct {
 	DefaultDomain *string  `json:"DefaultDomain,omitempty"`
 	NameServers   []string `json:"NameServers,omitempty"`
 	// Name of the VRF configured for the DNS.
-	VrfName              *string                              `json:"VrfName,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	VrfName              *string                                     `json:"VrfName,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +125,7 @@ func (o *NetworkDns) GetAdditionalDomains() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkDns) GetAdditionalDomainsOk() ([]string, bool) {
-	if o == nil || o.AdditionalDomains == nil {
+	if o == nil || IsNil(o.AdditionalDomains) {
 		return nil, false
 	}
 	return o.AdditionalDomains, true
@@ -129,7 +133,7 @@ func (o *NetworkDns) GetAdditionalDomainsOk() ([]string, bool) {
 
 // HasAdditionalDomains returns a boolean if a field has been set.
 func (o *NetworkDns) HasAdditionalDomains() bool {
-	if o != nil && o.AdditionalDomains != nil {
+	if o != nil && IsNil(o.AdditionalDomains) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *NetworkDns) SetAdditionalDomains(v []string) {
 
 // GetDefaultDomain returns the DefaultDomain field value if set, zero value otherwise.
 func (o *NetworkDns) GetDefaultDomain() string {
-	if o == nil || o.DefaultDomain == nil {
+	if o == nil || IsNil(o.DefaultDomain) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *NetworkDns) GetDefaultDomain() string {
 // GetDefaultDomainOk returns a tuple with the DefaultDomain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkDns) GetDefaultDomainOk() (*string, bool) {
-	if o == nil || o.DefaultDomain == nil {
+	if o == nil || IsNil(o.DefaultDomain) {
 		return nil, false
 	}
 	return o.DefaultDomain, true
@@ -161,7 +165,7 @@ func (o *NetworkDns) GetDefaultDomainOk() (*string, bool) {
 
 // HasDefaultDomain returns a boolean if a field has been set.
 func (o *NetworkDns) HasDefaultDomain() bool {
-	if o != nil && o.DefaultDomain != nil {
+	if o != nil && !IsNil(o.DefaultDomain) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *NetworkDns) GetNameServers() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkDns) GetNameServersOk() ([]string, bool) {
-	if o == nil || o.NameServers == nil {
+	if o == nil || IsNil(o.NameServers) {
 		return nil, false
 	}
 	return o.NameServers, true
@@ -194,7 +198,7 @@ func (o *NetworkDns) GetNameServersOk() ([]string, bool) {
 
 // HasNameServers returns a boolean if a field has been set.
 func (o *NetworkDns) HasNameServers() bool {
-	if o != nil && o.NameServers != nil {
+	if o != nil && IsNil(o.NameServers) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *NetworkDns) SetNameServers(v []string) {
 
 // GetVrfName returns the VrfName field value if set, zero value otherwise.
 func (o *NetworkDns) GetVrfName() string {
-	if o == nil || o.VrfName == nil {
+	if o == nil || IsNil(o.VrfName) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *NetworkDns) GetVrfName() string {
 // GetVrfNameOk returns a tuple with the VrfName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkDns) GetVrfNameOk() (*string, bool) {
-	if o == nil || o.VrfName == nil {
+	if o == nil || IsNil(o.VrfName) {
 		return nil, false
 	}
 	return o.VrfName, true
@@ -226,7 +230,7 @@ func (o *NetworkDns) GetVrfNameOk() (*string, bool) {
 
 // HasVrfName returns a boolean if a field has been set.
 func (o *NetworkDns) HasVrfName() bool {
-	if o != nil && o.VrfName != nil {
+	if o != nil && !IsNil(o.VrfName) {
 		return true
 	}
 
@@ -238,113 +242,161 @@ func (o *NetworkDns) SetVrfName(v string) {
 	o.VrfName = &v
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkDns) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkDns) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *NetworkDns) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *NetworkDns) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *NetworkDns) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *NetworkDns) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkDns) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkDns) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NetworkDns) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NetworkDns) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NetworkDns) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NetworkDns) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NetworkDns) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NetworkDns) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AdditionalDomains != nil {
 		toSerialize["AdditionalDomains"] = o.AdditionalDomains
 	}
-	if o.DefaultDomain != nil {
+	if !IsNil(o.DefaultDomain) {
 		toSerialize["DefaultDomain"] = o.DefaultDomain
 	}
 	if o.NameServers != nil {
 		toSerialize["NameServers"] = o.NameServers
 	}
-	if o.VrfName != nil {
+	if !IsNil(o.VrfName) {
 		toSerialize["VrfName"] = o.VrfName
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NetworkDns) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NetworkDns) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NetworkDnsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -355,14 +407,14 @@ func (o *NetworkDns) UnmarshalJSON(bytes []byte) (err error) {
 		DefaultDomain *string  `json:"DefaultDomain,omitempty"`
 		NameServers   []string `json:"NameServers,omitempty"`
 		// Name of the VRF configured for the DNS.
-		VrfName          *string                              `json:"VrfName,omitempty"`
-		NetworkElement   *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		VrfName          *string                                     `json:"VrfName,omitempty"`
+		NetworkElement   NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNetworkDnsWithoutEmbeddedStruct := NetworkDnsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNetworkDnsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNetworkDnsWithoutEmbeddedStruct)
 	if err == nil {
 		varNetworkDns := _NetworkDns{}
 		varNetworkDns.ClassId = varNetworkDnsWithoutEmbeddedStruct.ClassId
@@ -380,7 +432,7 @@ func (o *NetworkDns) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNetworkDns := _NetworkDns{}
 
-	err = json.Unmarshal(bytes, &varNetworkDns)
+	err = json.Unmarshal(data, &varNetworkDns)
 	if err == nil {
 		o.InventoryBase = varNetworkDns.InventoryBase
 	} else {
@@ -389,7 +441,7 @@ func (o *NetworkDns) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdditionalDomains")

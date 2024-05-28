@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **TargetPlatform** | Pointer to **string** | The platform for which the chassis profile is applicable. It can either be a chassis that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * &#x60;FIAttached&#x60; - Chassis which are connected to a Fabric Interconnect that is managed by Intersight. | [optional] [default to "FIAttached"]
-**ConfigResult** | Pointer to [**ChassisConfigResultRelationship**](ChassisConfigResultRelationship.md) |  | [optional] 
+**ConfigResult** | Pointer to [**NullableChassisConfigResultRelationship**](ChassisConfigResultRelationship.md) |  | [optional] 
 **IomProfiles** | Pointer to [**[]ChassisIomProfileRelationship**](ChassisIomProfileRelationship.md) | An array of relationships to chassisIomProfile resources. | [optional] [readonly] 
 
 ## Methods
@@ -119,6 +119,16 @@ SetConfigResult sets ConfigResult field to given value.
 
 HasConfigResult returns a boolean if a field has been set.
 
+### SetConfigResultNil
+
+`func (o *ChassisBaseProfile) SetConfigResultNil(b bool)`
+
+ SetConfigResultNil sets the value for ConfigResult to be an explicit nil
+
+### UnsetConfigResult
+`func (o *ChassisBaseProfile) UnsetConfigResult()`
+
+UnsetConfigResult ensures that no value is present for ConfigResult, not even an explicit nil
 ### GetIomProfiles
 
 `func (o *ChassisBaseProfile) GetIomProfiles() []ChassisIomProfileRelationship`

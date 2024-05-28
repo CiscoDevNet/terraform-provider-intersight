@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,7 +13,11 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 )
+
+// checks if the TelemetryDruidFilteredAggregator type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidFilteredAggregator{}
 
 // TelemetryDruidFilteredAggregator A filtered aggregator wraps any given aggregator, but only aggregates the values for which the given dimension filter matches. This makes it possible to compute the results of a filtered and an unfiltered aggregation simultaneously, without having to issue multiple queries, and use both results as part of post-aggregations. If only the filtered results are required, consider putting the filter on the query itself, which will be much faster since it does not require scanning all the data.
 type TelemetryDruidFilteredAggregator struct {
@@ -119,34 +123,63 @@ func (o *TelemetryDruidFilteredAggregator) SetAggregator(v TelemetryDruidAggrega
 }
 
 func (o TelemetryDruidFilteredAggregator) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidFilteredAggregator) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if true {
-		toSerialize["filter"] = o.Filter
-	}
-	if true {
-		toSerialize["aggregator"] = o.Aggregator
-	}
+	toSerialize["type"] = o.Type
+	toSerialize["filter"] = o.Filter
+	toSerialize["aggregator"] = o.Aggregator
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidFilteredAggregator) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidFilteredAggregator) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"type",
+		"filter",
+		"aggregator",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTelemetryDruidFilteredAggregator := _TelemetryDruidFilteredAggregator{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidFilteredAggregator); err == nil {
-		*o = TelemetryDruidFilteredAggregator(varTelemetryDruidFilteredAggregator)
+	err = json.Unmarshal(data, &varTelemetryDruidFilteredAggregator)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidFilteredAggregator(varTelemetryDruidFilteredAggregator)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "filter")
 		delete(additionalProperties, "aggregator")

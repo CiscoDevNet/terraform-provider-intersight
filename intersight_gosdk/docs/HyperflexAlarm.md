@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **TriggeredTimeAsUtc** | Pointer to **string** | The time when alarm was triggered in ISO 6801 UTC format. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The unique identifier for this alarm instance. | [optional] [readonly] 
 **AncestorMos** | Pointer to [**[]InfraBaseClusterRelationship**](InfraBaseClusterRelationship.md) | An array of relationships to infraBaseCluster resources. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -518,6 +518,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *HyperflexAlarm) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *HyperflexAlarm) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

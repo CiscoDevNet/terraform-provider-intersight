@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Label** | Pointer to **string** | A user friendly short name to identify the workflow metadata. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). | [optional] 
 **Name** | Pointer to **string** | The name for this workflow metadata. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). | [optional] 
 **AssociatedRoles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
-**Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableWorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -206,6 +206,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *WorkflowWorkflowMetadata) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *WorkflowWorkflowMetadata) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

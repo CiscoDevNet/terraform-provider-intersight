@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesStatefulSetStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesStatefulSetStatus{}
 
 // KubernetesStatefulSetStatus The current status of a StatefulSet.
 type KubernetesStatefulSetStatus struct {
@@ -142,7 +146,7 @@ func (o *KubernetesStatefulSetStatus) SetObjectType(v string) {
 
 // GetAvailableReplicas returns the AvailableReplicas field value if set, zero value otherwise.
 func (o *KubernetesStatefulSetStatus) GetAvailableReplicas() int64 {
-	if o == nil || o.AvailableReplicas == nil {
+	if o == nil || IsNil(o.AvailableReplicas) {
 		var ret int64
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *KubernetesStatefulSetStatus) GetAvailableReplicas() int64 {
 // GetAvailableReplicasOk returns a tuple with the AvailableReplicas field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesStatefulSetStatus) GetAvailableReplicasOk() (*int64, bool) {
-	if o == nil || o.AvailableReplicas == nil {
+	if o == nil || IsNil(o.AvailableReplicas) {
 		return nil, false
 	}
 	return o.AvailableReplicas, true
@@ -160,7 +164,7 @@ func (o *KubernetesStatefulSetStatus) GetAvailableReplicasOk() (*int64, bool) {
 
 // HasAvailableReplicas returns a boolean if a field has been set.
 func (o *KubernetesStatefulSetStatus) HasAvailableReplicas() bool {
-	if o != nil && o.AvailableReplicas != nil {
+	if o != nil && !IsNil(o.AvailableReplicas) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *KubernetesStatefulSetStatus) SetAvailableReplicas(v int64) {
 
 // GetCollisionCount returns the CollisionCount field value if set, zero value otherwise.
 func (o *KubernetesStatefulSetStatus) GetCollisionCount() int64 {
-	if o == nil || o.CollisionCount == nil {
+	if o == nil || IsNil(o.CollisionCount) {
 		var ret int64
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *KubernetesStatefulSetStatus) GetCollisionCount() int64 {
 // GetCollisionCountOk returns a tuple with the CollisionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesStatefulSetStatus) GetCollisionCountOk() (*int64, bool) {
-	if o == nil || o.CollisionCount == nil {
+	if o == nil || IsNil(o.CollisionCount) {
 		return nil, false
 	}
 	return o.CollisionCount, true
@@ -192,7 +196,7 @@ func (o *KubernetesStatefulSetStatus) GetCollisionCountOk() (*int64, bool) {
 
 // HasCollisionCount returns a boolean if a field has been set.
 func (o *KubernetesStatefulSetStatus) HasCollisionCount() bool {
-	if o != nil && o.CollisionCount != nil {
+	if o != nil && !IsNil(o.CollisionCount) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *KubernetesStatefulSetStatus) SetCollisionCount(v int64) {
 
 // GetCurrentRevision returns the CurrentRevision field value if set, zero value otherwise.
 func (o *KubernetesStatefulSetStatus) GetCurrentRevision() string {
-	if o == nil || o.CurrentRevision == nil {
+	if o == nil || IsNil(o.CurrentRevision) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *KubernetesStatefulSetStatus) GetCurrentRevision() string {
 // GetCurrentRevisionOk returns a tuple with the CurrentRevision field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesStatefulSetStatus) GetCurrentRevisionOk() (*string, bool) {
-	if o == nil || o.CurrentRevision == nil {
+	if o == nil || IsNil(o.CurrentRevision) {
 		return nil, false
 	}
 	return o.CurrentRevision, true
@@ -224,7 +228,7 @@ func (o *KubernetesStatefulSetStatus) GetCurrentRevisionOk() (*string, bool) {
 
 // HasCurrentRevision returns a boolean if a field has been set.
 func (o *KubernetesStatefulSetStatus) HasCurrentRevision() bool {
-	if o != nil && o.CurrentRevision != nil {
+	if o != nil && !IsNil(o.CurrentRevision) {
 		return true
 	}
 
@@ -238,7 +242,7 @@ func (o *KubernetesStatefulSetStatus) SetCurrentRevision(v string) {
 
 // GetObservedGeneration returns the ObservedGeneration field value if set, zero value otherwise.
 func (o *KubernetesStatefulSetStatus) GetObservedGeneration() int64 {
-	if o == nil || o.ObservedGeneration == nil {
+	if o == nil || IsNil(o.ObservedGeneration) {
 		var ret int64
 		return ret
 	}
@@ -248,7 +252,7 @@ func (o *KubernetesStatefulSetStatus) GetObservedGeneration() int64 {
 // GetObservedGenerationOk returns a tuple with the ObservedGeneration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesStatefulSetStatus) GetObservedGenerationOk() (*int64, bool) {
-	if o == nil || o.ObservedGeneration == nil {
+	if o == nil || IsNil(o.ObservedGeneration) {
 		return nil, false
 	}
 	return o.ObservedGeneration, true
@@ -256,7 +260,7 @@ func (o *KubernetesStatefulSetStatus) GetObservedGenerationOk() (*int64, bool) {
 
 // HasObservedGeneration returns a boolean if a field has been set.
 func (o *KubernetesStatefulSetStatus) HasObservedGeneration() bool {
-	if o != nil && o.ObservedGeneration != nil {
+	if o != nil && !IsNil(o.ObservedGeneration) {
 		return true
 	}
 
@@ -270,7 +274,7 @@ func (o *KubernetesStatefulSetStatus) SetObservedGeneration(v int64) {
 
 // GetReadyReplicas returns the ReadyReplicas field value if set, zero value otherwise.
 func (o *KubernetesStatefulSetStatus) GetReadyReplicas() int64 {
-	if o == nil || o.ReadyReplicas == nil {
+	if o == nil || IsNil(o.ReadyReplicas) {
 		var ret int64
 		return ret
 	}
@@ -280,7 +284,7 @@ func (o *KubernetesStatefulSetStatus) GetReadyReplicas() int64 {
 // GetReadyReplicasOk returns a tuple with the ReadyReplicas field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesStatefulSetStatus) GetReadyReplicasOk() (*int64, bool) {
-	if o == nil || o.ReadyReplicas == nil {
+	if o == nil || IsNil(o.ReadyReplicas) {
 		return nil, false
 	}
 	return o.ReadyReplicas, true
@@ -288,7 +292,7 @@ func (o *KubernetesStatefulSetStatus) GetReadyReplicasOk() (*int64, bool) {
 
 // HasReadyReplicas returns a boolean if a field has been set.
 func (o *KubernetesStatefulSetStatus) HasReadyReplicas() bool {
-	if o != nil && o.ReadyReplicas != nil {
+	if o != nil && !IsNil(o.ReadyReplicas) {
 		return true
 	}
 
@@ -302,7 +306,7 @@ func (o *KubernetesStatefulSetStatus) SetReadyReplicas(v int64) {
 
 // GetReplicas returns the Replicas field value if set, zero value otherwise.
 func (o *KubernetesStatefulSetStatus) GetReplicas() int64 {
-	if o == nil || o.Replicas == nil {
+	if o == nil || IsNil(o.Replicas) {
 		var ret int64
 		return ret
 	}
@@ -312,7 +316,7 @@ func (o *KubernetesStatefulSetStatus) GetReplicas() int64 {
 // GetReplicasOk returns a tuple with the Replicas field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesStatefulSetStatus) GetReplicasOk() (*int64, bool) {
-	if o == nil || o.Replicas == nil {
+	if o == nil || IsNil(o.Replicas) {
 		return nil, false
 	}
 	return o.Replicas, true
@@ -320,7 +324,7 @@ func (o *KubernetesStatefulSetStatus) GetReplicasOk() (*int64, bool) {
 
 // HasReplicas returns a boolean if a field has been set.
 func (o *KubernetesStatefulSetStatus) HasReplicas() bool {
-	if o != nil && o.Replicas != nil {
+	if o != nil && !IsNil(o.Replicas) {
 		return true
 	}
 
@@ -334,7 +338,7 @@ func (o *KubernetesStatefulSetStatus) SetReplicas(v int64) {
 
 // GetUpdateRevision returns the UpdateRevision field value if set, zero value otherwise.
 func (o *KubernetesStatefulSetStatus) GetUpdateRevision() string {
-	if o == nil || o.UpdateRevision == nil {
+	if o == nil || IsNil(o.UpdateRevision) {
 		var ret string
 		return ret
 	}
@@ -344,7 +348,7 @@ func (o *KubernetesStatefulSetStatus) GetUpdateRevision() string {
 // GetUpdateRevisionOk returns a tuple with the UpdateRevision field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesStatefulSetStatus) GetUpdateRevisionOk() (*string, bool) {
-	if o == nil || o.UpdateRevision == nil {
+	if o == nil || IsNil(o.UpdateRevision) {
 		return nil, false
 	}
 	return o.UpdateRevision, true
@@ -352,7 +356,7 @@ func (o *KubernetesStatefulSetStatus) GetUpdateRevisionOk() (*string, bool) {
 
 // HasUpdateRevision returns a boolean if a field has been set.
 func (o *KubernetesStatefulSetStatus) HasUpdateRevision() bool {
-	if o != nil && o.UpdateRevision != nil {
+	if o != nil && !IsNil(o.UpdateRevision) {
 		return true
 	}
 
@@ -366,7 +370,7 @@ func (o *KubernetesStatefulSetStatus) SetUpdateRevision(v string) {
 
 // GetUpdatedReplicas returns the UpdatedReplicas field value if set, zero value otherwise.
 func (o *KubernetesStatefulSetStatus) GetUpdatedReplicas() int64 {
-	if o == nil || o.UpdatedReplicas == nil {
+	if o == nil || IsNil(o.UpdatedReplicas) {
 		var ret int64
 		return ret
 	}
@@ -376,7 +380,7 @@ func (o *KubernetesStatefulSetStatus) GetUpdatedReplicas() int64 {
 // GetUpdatedReplicasOk returns a tuple with the UpdatedReplicas field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesStatefulSetStatus) GetUpdatedReplicasOk() (*int64, bool) {
-	if o == nil || o.UpdatedReplicas == nil {
+	if o == nil || IsNil(o.UpdatedReplicas) {
 		return nil, false
 	}
 	return o.UpdatedReplicas, true
@@ -384,7 +388,7 @@ func (o *KubernetesStatefulSetStatus) GetUpdatedReplicasOk() (*int64, bool) {
 
 // HasUpdatedReplicas returns a boolean if a field has been set.
 func (o *KubernetesStatefulSetStatus) HasUpdatedReplicas() bool {
-	if o != nil && o.UpdatedReplicas != nil {
+	if o != nil && !IsNil(o.UpdatedReplicas) {
 		return true
 	}
 
@@ -397,43 +401,47 @@ func (o *KubernetesStatefulSetStatus) SetUpdatedReplicas(v int64) {
 }
 
 func (o KubernetesStatefulSetStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesStatefulSetStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AvailableReplicas != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AvailableReplicas) {
 		toSerialize["AvailableReplicas"] = o.AvailableReplicas
 	}
-	if o.CollisionCount != nil {
+	if !IsNil(o.CollisionCount) {
 		toSerialize["CollisionCount"] = o.CollisionCount
 	}
-	if o.CurrentRevision != nil {
+	if !IsNil(o.CurrentRevision) {
 		toSerialize["CurrentRevision"] = o.CurrentRevision
 	}
-	if o.ObservedGeneration != nil {
+	if !IsNil(o.ObservedGeneration) {
 		toSerialize["ObservedGeneration"] = o.ObservedGeneration
 	}
-	if o.ReadyReplicas != nil {
+	if !IsNil(o.ReadyReplicas) {
 		toSerialize["ReadyReplicas"] = o.ReadyReplicas
 	}
-	if o.Replicas != nil {
+	if !IsNil(o.Replicas) {
 		toSerialize["Replicas"] = o.Replicas
 	}
-	if o.UpdateRevision != nil {
+	if !IsNil(o.UpdateRevision) {
 		toSerialize["UpdateRevision"] = o.UpdateRevision
 	}
-	if o.UpdatedReplicas != nil {
+	if !IsNil(o.UpdatedReplicas) {
 		toSerialize["UpdatedReplicas"] = o.UpdatedReplicas
 	}
 
@@ -441,10 +449,32 @@ func (o KubernetesStatefulSetStatus) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesStatefulSetStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesStatefulSetStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesStatefulSetStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -470,7 +500,7 @@ func (o *KubernetesStatefulSetStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesStatefulSetStatusWithoutEmbeddedStruct := KubernetesStatefulSetStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesStatefulSetStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesStatefulSetStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesStatefulSetStatus := _KubernetesStatefulSetStatus{}
 		varKubernetesStatefulSetStatus.ClassId = varKubernetesStatefulSetStatusWithoutEmbeddedStruct.ClassId
@@ -490,7 +520,7 @@ func (o *KubernetesStatefulSetStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesStatefulSetStatus := _KubernetesStatefulSetStatus{}
 
-	err = json.Unmarshal(bytes, &varKubernetesStatefulSetStatus)
+	err = json.Unmarshal(data, &varKubernetesStatefulSetStatus)
 	if err == nil {
 		o.MoBaseComplexType = varKubernetesStatefulSetStatus.MoBaseComplexType
 	} else {
@@ -499,7 +529,7 @@ func (o *KubernetesStatefulSetStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AvailableReplicas")

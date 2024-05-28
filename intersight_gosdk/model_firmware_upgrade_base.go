@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareUpgradeBase type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareUpgradeBase{}
 
 // FirmwareUpgradeBase Firmware upgrade operation that downloads the image from Cisco/appliance/user provided HTTP repository or use the image from a network share and upgrade. The direct download is used for upgrade to use the image from Cisco repository or appliance repository. The network share is used for upgrade to use the image from a network share in user data center.
 type FirmwareUpgradeBase struct {
@@ -32,11 +36,11 @@ type FirmwareUpgradeBase struct {
 	// Status of the upgrade operation. * `NONE` - Upgrade status is not populated. * `IN_PROGRESS` - The upgrade is in progress. * `SUCCESSFUL` - The upgrade successfully completed. * `FAILED` - The upgrade shows failed status. * `TERMINATED` - The upgrade has been terminated.
 	Status *string `json:"Status,omitempty"`
 	// Desired upgrade mode to choose either direct download based upgrade or network share upgrade. * `direct_upgrade` - Upgrade mode is direct download. * `network_upgrade` - Upgrade mode is network upgrade.
-	UpgradeType          *string                                  `json:"UpgradeType,omitempty"`
-	Distributable        *FirmwareDistributableRelationship       `json:"Distributable,omitempty"`
-	Release              *SoftwarerepositoryReleaseRelationship   `json:"Release,omitempty"`
-	UpgradeImpact        *FirmwareUpgradeImpactStatusRelationship `json:"UpgradeImpact,omitempty"`
-	UpgradeStatus        *FirmwareUpgradeStatusRelationship       `json:"UpgradeStatus,omitempty"`
+	UpgradeType          *string                                         `json:"UpgradeType,omitempty"`
+	Distributable        NullableFirmwareDistributableRelationship       `json:"Distributable,omitempty"`
+	Release              NullableSoftwarerepositoryReleaseRelationship   `json:"Release,omitempty"`
+	UpgradeImpact        NullableFirmwareUpgradeImpactStatusRelationship `json:"UpgradeImpact,omitempty"`
+	UpgradeStatus        NullableFirmwareUpgradeStatusRelationship       `json:"UpgradeStatus,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *FirmwareUpgradeBase) SetObjectType(v string) {
 
 // GetDirectDownload returns the DirectDownload field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeBase) GetDirectDownload() FirmwareDirectDownload {
-	if o == nil || o.DirectDownload.Get() == nil {
+	if o == nil || IsNil(o.DirectDownload.Get()) {
 		var ret FirmwareDirectDownload
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *FirmwareUpgradeBase) UnsetDirectDownload() {
 
 // GetFileServer returns the FileServer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeBase) GetFileServer() SoftwarerepositoryFileServer {
-	if o == nil || o.FileServer.Get() == nil {
+	if o == nil || IsNil(o.FileServer.Get()) {
 		var ret SoftwarerepositoryFileServer
 		return ret
 	}
@@ -205,7 +209,7 @@ func (o *FirmwareUpgradeBase) UnsetFileServer() {
 
 // GetNetworkShare returns the NetworkShare field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeBase) GetNetworkShare() FirmwareNetworkShare {
-	if o == nil || o.NetworkShare.Get() == nil {
+	if o == nil || IsNil(o.NetworkShare.Get()) {
 		var ret FirmwareNetworkShare
 		return ret
 	}
@@ -248,7 +252,7 @@ func (o *FirmwareUpgradeBase) UnsetNetworkShare() {
 
 // GetSkipEstimateImpact returns the SkipEstimateImpact field value if set, zero value otherwise.
 func (o *FirmwareUpgradeBase) GetSkipEstimateImpact() bool {
-	if o == nil || o.SkipEstimateImpact == nil {
+	if o == nil || IsNil(o.SkipEstimateImpact) {
 		var ret bool
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *FirmwareUpgradeBase) GetSkipEstimateImpact() bool {
 // GetSkipEstimateImpactOk returns a tuple with the SkipEstimateImpact field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeBase) GetSkipEstimateImpactOk() (*bool, bool) {
-	if o == nil || o.SkipEstimateImpact == nil {
+	if o == nil || IsNil(o.SkipEstimateImpact) {
 		return nil, false
 	}
 	return o.SkipEstimateImpact, true
@@ -266,7 +270,7 @@ func (o *FirmwareUpgradeBase) GetSkipEstimateImpactOk() (*bool, bool) {
 
 // HasSkipEstimateImpact returns a boolean if a field has been set.
 func (o *FirmwareUpgradeBase) HasSkipEstimateImpact() bool {
-	if o != nil && o.SkipEstimateImpact != nil {
+	if o != nil && !IsNil(o.SkipEstimateImpact) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *FirmwareUpgradeBase) SetSkipEstimateImpact(v bool) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *FirmwareUpgradeBase) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *FirmwareUpgradeBase) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeBase) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -298,7 +302,7 @@ func (o *FirmwareUpgradeBase) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *FirmwareUpgradeBase) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *FirmwareUpgradeBase) SetStatus(v string) {
 
 // GetUpgradeType returns the UpgradeType field value if set, zero value otherwise.
 func (o *FirmwareUpgradeBase) GetUpgradeType() string {
-	if o == nil || o.UpgradeType == nil {
+	if o == nil || IsNil(o.UpgradeType) {
 		var ret string
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *FirmwareUpgradeBase) GetUpgradeType() string {
 // GetUpgradeTypeOk returns a tuple with the UpgradeType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeBase) GetUpgradeTypeOk() (*string, bool) {
-	if o == nil || o.UpgradeType == nil {
+	if o == nil || IsNil(o.UpgradeType) {
 		return nil, false
 	}
 	return o.UpgradeType, true
@@ -330,7 +334,7 @@ func (o *FirmwareUpgradeBase) GetUpgradeTypeOk() (*string, bool) {
 
 // HasUpgradeType returns a boolean if a field has been set.
 func (o *FirmwareUpgradeBase) HasUpgradeType() bool {
-	if o != nil && o.UpgradeType != nil {
+	if o != nil && !IsNil(o.UpgradeType) {
 		return true
 	}
 
@@ -342,150 +346,198 @@ func (o *FirmwareUpgradeBase) SetUpgradeType(v string) {
 	o.UpgradeType = &v
 }
 
-// GetDistributable returns the Distributable field value if set, zero value otherwise.
+// GetDistributable returns the Distributable field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeBase) GetDistributable() FirmwareDistributableRelationship {
-	if o == nil || o.Distributable == nil {
+	if o == nil || IsNil(o.Distributable.Get()) {
 		var ret FirmwareDistributableRelationship
 		return ret
 	}
-	return *o.Distributable
+	return *o.Distributable.Get()
 }
 
 // GetDistributableOk returns a tuple with the Distributable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeBase) GetDistributableOk() (*FirmwareDistributableRelationship, bool) {
-	if o == nil || o.Distributable == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Distributable, true
+	return o.Distributable.Get(), o.Distributable.IsSet()
 }
 
 // HasDistributable returns a boolean if a field has been set.
 func (o *FirmwareUpgradeBase) HasDistributable() bool {
-	if o != nil && o.Distributable != nil {
+	if o != nil && o.Distributable.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDistributable gets a reference to the given FirmwareDistributableRelationship and assigns it to the Distributable field.
+// SetDistributable gets a reference to the given NullableFirmwareDistributableRelationship and assigns it to the Distributable field.
 func (o *FirmwareUpgradeBase) SetDistributable(v FirmwareDistributableRelationship) {
-	o.Distributable = &v
+	o.Distributable.Set(&v)
 }
 
-// GetRelease returns the Release field value if set, zero value otherwise.
+// SetDistributableNil sets the value for Distributable to be an explicit nil
+func (o *FirmwareUpgradeBase) SetDistributableNil() {
+	o.Distributable.Set(nil)
+}
+
+// UnsetDistributable ensures that no value is present for Distributable, not even an explicit nil
+func (o *FirmwareUpgradeBase) UnsetDistributable() {
+	o.Distributable.Unset()
+}
+
+// GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeBase) GetRelease() SoftwarerepositoryReleaseRelationship {
-	if o == nil || o.Release == nil {
+	if o == nil || IsNil(o.Release.Get()) {
 		var ret SoftwarerepositoryReleaseRelationship
 		return ret
 	}
-	return *o.Release
+	return *o.Release.Get()
 }
 
 // GetReleaseOk returns a tuple with the Release field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeBase) GetReleaseOk() (*SoftwarerepositoryReleaseRelationship, bool) {
-	if o == nil || o.Release == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Release, true
+	return o.Release.Get(), o.Release.IsSet()
 }
 
 // HasRelease returns a boolean if a field has been set.
 func (o *FirmwareUpgradeBase) HasRelease() bool {
-	if o != nil && o.Release != nil {
+	if o != nil && o.Release.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRelease gets a reference to the given SoftwarerepositoryReleaseRelationship and assigns it to the Release field.
+// SetRelease gets a reference to the given NullableSoftwarerepositoryReleaseRelationship and assigns it to the Release field.
 func (o *FirmwareUpgradeBase) SetRelease(v SoftwarerepositoryReleaseRelationship) {
-	o.Release = &v
+	o.Release.Set(&v)
 }
 
-// GetUpgradeImpact returns the UpgradeImpact field value if set, zero value otherwise.
+// SetReleaseNil sets the value for Release to be an explicit nil
+func (o *FirmwareUpgradeBase) SetReleaseNil() {
+	o.Release.Set(nil)
+}
+
+// UnsetRelease ensures that no value is present for Release, not even an explicit nil
+func (o *FirmwareUpgradeBase) UnsetRelease() {
+	o.Release.Unset()
+}
+
+// GetUpgradeImpact returns the UpgradeImpact field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeBase) GetUpgradeImpact() FirmwareUpgradeImpactStatusRelationship {
-	if o == nil || o.UpgradeImpact == nil {
+	if o == nil || IsNil(o.UpgradeImpact.Get()) {
 		var ret FirmwareUpgradeImpactStatusRelationship
 		return ret
 	}
-	return *o.UpgradeImpact
+	return *o.UpgradeImpact.Get()
 }
 
 // GetUpgradeImpactOk returns a tuple with the UpgradeImpact field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeBase) GetUpgradeImpactOk() (*FirmwareUpgradeImpactStatusRelationship, bool) {
-	if o == nil || o.UpgradeImpact == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.UpgradeImpact, true
+	return o.UpgradeImpact.Get(), o.UpgradeImpact.IsSet()
 }
 
 // HasUpgradeImpact returns a boolean if a field has been set.
 func (o *FirmwareUpgradeBase) HasUpgradeImpact() bool {
-	if o != nil && o.UpgradeImpact != nil {
+	if o != nil && o.UpgradeImpact.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUpgradeImpact gets a reference to the given FirmwareUpgradeImpactStatusRelationship and assigns it to the UpgradeImpact field.
+// SetUpgradeImpact gets a reference to the given NullableFirmwareUpgradeImpactStatusRelationship and assigns it to the UpgradeImpact field.
 func (o *FirmwareUpgradeBase) SetUpgradeImpact(v FirmwareUpgradeImpactStatusRelationship) {
-	o.UpgradeImpact = &v
+	o.UpgradeImpact.Set(&v)
 }
 
-// GetUpgradeStatus returns the UpgradeStatus field value if set, zero value otherwise.
+// SetUpgradeImpactNil sets the value for UpgradeImpact to be an explicit nil
+func (o *FirmwareUpgradeBase) SetUpgradeImpactNil() {
+	o.UpgradeImpact.Set(nil)
+}
+
+// UnsetUpgradeImpact ensures that no value is present for UpgradeImpact, not even an explicit nil
+func (o *FirmwareUpgradeBase) UnsetUpgradeImpact() {
+	o.UpgradeImpact.Unset()
+}
+
+// GetUpgradeStatus returns the UpgradeStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeBase) GetUpgradeStatus() FirmwareUpgradeStatusRelationship {
-	if o == nil || o.UpgradeStatus == nil {
+	if o == nil || IsNil(o.UpgradeStatus.Get()) {
 		var ret FirmwareUpgradeStatusRelationship
 		return ret
 	}
-	return *o.UpgradeStatus
+	return *o.UpgradeStatus.Get()
 }
 
 // GetUpgradeStatusOk returns a tuple with the UpgradeStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeBase) GetUpgradeStatusOk() (*FirmwareUpgradeStatusRelationship, bool) {
-	if o == nil || o.UpgradeStatus == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.UpgradeStatus, true
+	return o.UpgradeStatus.Get(), o.UpgradeStatus.IsSet()
 }
 
 // HasUpgradeStatus returns a boolean if a field has been set.
 func (o *FirmwareUpgradeBase) HasUpgradeStatus() bool {
-	if o != nil && o.UpgradeStatus != nil {
+	if o != nil && o.UpgradeStatus.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUpgradeStatus gets a reference to the given FirmwareUpgradeStatusRelationship and assigns it to the UpgradeStatus field.
+// SetUpgradeStatus gets a reference to the given NullableFirmwareUpgradeStatusRelationship and assigns it to the UpgradeStatus field.
 func (o *FirmwareUpgradeBase) SetUpgradeStatus(v FirmwareUpgradeStatusRelationship) {
-	o.UpgradeStatus = &v
+	o.UpgradeStatus.Set(&v)
+}
+
+// SetUpgradeStatusNil sets the value for UpgradeStatus to be an explicit nil
+func (o *FirmwareUpgradeBase) SetUpgradeStatusNil() {
+	o.UpgradeStatus.Set(nil)
+}
+
+// UnsetUpgradeStatus ensures that no value is present for UpgradeStatus, not even an explicit nil
+func (o *FirmwareUpgradeBase) UnsetUpgradeStatus() {
+	o.UpgradeStatus.Unset()
 }
 
 func (o FirmwareUpgradeBase) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareUpgradeBase) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.DirectDownload.IsSet() {
 		toSerialize["DirectDownload"] = o.DirectDownload.Get()
 	}
@@ -495,36 +547,58 @@ func (o FirmwareUpgradeBase) MarshalJSON() ([]byte, error) {
 	if o.NetworkShare.IsSet() {
 		toSerialize["NetworkShare"] = o.NetworkShare.Get()
 	}
-	if o.SkipEstimateImpact != nil {
+	if !IsNil(o.SkipEstimateImpact) {
 		toSerialize["SkipEstimateImpact"] = o.SkipEstimateImpact
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.UpgradeType != nil {
+	if !IsNil(o.UpgradeType) {
 		toSerialize["UpgradeType"] = o.UpgradeType
 	}
-	if o.Distributable != nil {
-		toSerialize["Distributable"] = o.Distributable
+	if o.Distributable.IsSet() {
+		toSerialize["Distributable"] = o.Distributable.Get()
 	}
-	if o.Release != nil {
-		toSerialize["Release"] = o.Release
+	if o.Release.IsSet() {
+		toSerialize["Release"] = o.Release.Get()
 	}
-	if o.UpgradeImpact != nil {
-		toSerialize["UpgradeImpact"] = o.UpgradeImpact
+	if o.UpgradeImpact.IsSet() {
+		toSerialize["UpgradeImpact"] = o.UpgradeImpact.Get()
 	}
-	if o.UpgradeStatus != nil {
-		toSerialize["UpgradeStatus"] = o.UpgradeStatus
+	if o.UpgradeStatus.IsSet() {
+		toSerialize["UpgradeStatus"] = o.UpgradeStatus.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareUpgradeBase) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareUpgradeBase) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareUpgradeBaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -538,16 +612,16 @@ func (o *FirmwareUpgradeBase) UnmarshalJSON(bytes []byte) (err error) {
 		// Status of the upgrade operation. * `NONE` - Upgrade status is not populated. * `IN_PROGRESS` - The upgrade is in progress. * `SUCCESSFUL` - The upgrade successfully completed. * `FAILED` - The upgrade shows failed status. * `TERMINATED` - The upgrade has been terminated.
 		Status *string `json:"Status,omitempty"`
 		// Desired upgrade mode to choose either direct download based upgrade or network share upgrade. * `direct_upgrade` - Upgrade mode is direct download. * `network_upgrade` - Upgrade mode is network upgrade.
-		UpgradeType   *string                                  `json:"UpgradeType,omitempty"`
-		Distributable *FirmwareDistributableRelationship       `json:"Distributable,omitempty"`
-		Release       *SoftwarerepositoryReleaseRelationship   `json:"Release,omitempty"`
-		UpgradeImpact *FirmwareUpgradeImpactStatusRelationship `json:"UpgradeImpact,omitempty"`
-		UpgradeStatus *FirmwareUpgradeStatusRelationship       `json:"UpgradeStatus,omitempty"`
+		UpgradeType   *string                                         `json:"UpgradeType,omitempty"`
+		Distributable NullableFirmwareDistributableRelationship       `json:"Distributable,omitempty"`
+		Release       NullableSoftwarerepositoryReleaseRelationship   `json:"Release,omitempty"`
+		UpgradeImpact NullableFirmwareUpgradeImpactStatusRelationship `json:"UpgradeImpact,omitempty"`
+		UpgradeStatus NullableFirmwareUpgradeStatusRelationship       `json:"UpgradeStatus,omitempty"`
 	}
 
 	varFirmwareUpgradeBaseWithoutEmbeddedStruct := FirmwareUpgradeBaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUpgradeBaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareUpgradeBaseWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareUpgradeBase := _FirmwareUpgradeBase{}
 		varFirmwareUpgradeBase.ClassId = varFirmwareUpgradeBaseWithoutEmbeddedStruct.ClassId
@@ -569,7 +643,7 @@ func (o *FirmwareUpgradeBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareUpgradeBase := _FirmwareUpgradeBase{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUpgradeBase)
+	err = json.Unmarshal(data, &varFirmwareUpgradeBase)
 	if err == nil {
 		o.MoBaseMo = varFirmwareUpgradeBase.MoBaseMo
 	} else {
@@ -578,7 +652,7 @@ func (o *FirmwareUpgradeBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DirectDownload")

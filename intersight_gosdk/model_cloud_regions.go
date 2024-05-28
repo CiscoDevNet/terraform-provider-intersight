@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudRegions type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudRegions{}
 
 // CloudRegions The geographic location where a clouds resources are located. It has details such as cloud name, region name, region identifier, list of zones, region endpoint etc.
 type CloudRegions struct {
@@ -40,9 +44,9 @@ type CloudRegions struct {
 	// HTTP endpoint of the region. For example https://ec2.us-east-2.amazonaws.com.
 	RegionEndPoint *string `json:"RegionEndPoint,omitempty"`
 	// The region Id which is assigned by the cloud provider. For e.g. us-east-1.
-	RegionId             *string                  `json:"RegionId,omitempty"`
-	Zones                []string                 `json:"Zones,omitempty"`
-	Target               *AssetTargetRelationship `json:"Target,omitempty"`
+	RegionId             *string                         `json:"RegionId,omitempty"`
+	Zones                []string                        `json:"Zones,omitempty"`
+	Target               NullableAssetTargetRelationship `json:"Target,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -140,7 +144,7 @@ func (o *CloudRegions) GetAlternateNames() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudRegions) GetAlternateNamesOk() ([]string, bool) {
-	if o == nil || o.AlternateNames == nil {
+	if o == nil || IsNil(o.AlternateNames) {
 		return nil, false
 	}
 	return o.AlternateNames, true
@@ -148,7 +152,7 @@ func (o *CloudRegions) GetAlternateNamesOk() ([]string, bool) {
 
 // HasAlternateNames returns a boolean if a field has been set.
 func (o *CloudRegions) HasAlternateNames() bool {
-	if o != nil && o.AlternateNames != nil {
+	if o != nil && IsNil(o.AlternateNames) {
 		return true
 	}
 
@@ -162,7 +166,7 @@ func (o *CloudRegions) SetAlternateNames(v []string) {
 
 // GetDefaultZone returns the DefaultZone field value if set, zero value otherwise.
 func (o *CloudRegions) GetDefaultZone() string {
-	if o == nil || o.DefaultZone == nil {
+	if o == nil || IsNil(o.DefaultZone) {
 		var ret string
 		return ret
 	}
@@ -172,7 +176,7 @@ func (o *CloudRegions) GetDefaultZone() string {
 // GetDefaultZoneOk returns a tuple with the DefaultZone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudRegions) GetDefaultZoneOk() (*string, bool) {
-	if o == nil || o.DefaultZone == nil {
+	if o == nil || IsNil(o.DefaultZone) {
 		return nil, false
 	}
 	return o.DefaultZone, true
@@ -180,7 +184,7 @@ func (o *CloudRegions) GetDefaultZoneOk() (*string, bool) {
 
 // HasDefaultZone returns a boolean if a field has been set.
 func (o *CloudRegions) HasDefaultZone() bool {
-	if o != nil && o.DefaultZone != nil {
+	if o != nil && !IsNil(o.DefaultZone) {
 		return true
 	}
 
@@ -194,7 +198,7 @@ func (o *CloudRegions) SetDefaultZone(v string) {
 
 // GetGroup returns the Group field value if set, zero value otherwise.
 func (o *CloudRegions) GetGroup() string {
-	if o == nil || o.Group == nil {
+	if o == nil || IsNil(o.Group) {
 		var ret string
 		return ret
 	}
@@ -204,7 +208,7 @@ func (o *CloudRegions) GetGroup() string {
 // GetGroupOk returns a tuple with the Group field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudRegions) GetGroupOk() (*string, bool) {
-	if o == nil || o.Group == nil {
+	if o == nil || IsNil(o.Group) {
 		return nil, false
 	}
 	return o.Group, true
@@ -212,7 +216,7 @@ func (o *CloudRegions) GetGroupOk() (*string, bool) {
 
 // HasGroup returns a boolean if a field has been set.
 func (o *CloudRegions) HasGroup() bool {
-	if o != nil && o.Group != nil {
+	if o != nil && !IsNil(o.Group) {
 		return true
 	}
 
@@ -226,7 +230,7 @@ func (o *CloudRegions) SetGroup(v string) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *CloudRegions) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || IsNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -236,7 +240,7 @@ func (o *CloudRegions) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudRegions) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
+	if o == nil || IsNil(o.IsActive) {
 		return nil, false
 	}
 	return o.IsActive, true
@@ -244,7 +248,7 @@ func (o *CloudRegions) GetIsActiveOk() (*bool, bool) {
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *CloudRegions) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !IsNil(o.IsActive) {
 		return true
 	}
 
@@ -258,7 +262,7 @@ func (o *CloudRegions) SetIsActive(v bool) {
 
 // GetIsBillingOnly returns the IsBillingOnly field value if set, zero value otherwise.
 func (o *CloudRegions) GetIsBillingOnly() bool {
-	if o == nil || o.IsBillingOnly == nil {
+	if o == nil || IsNil(o.IsBillingOnly) {
 		var ret bool
 		return ret
 	}
@@ -268,7 +272,7 @@ func (o *CloudRegions) GetIsBillingOnly() bool {
 // GetIsBillingOnlyOk returns a tuple with the IsBillingOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudRegions) GetIsBillingOnlyOk() (*bool, bool) {
-	if o == nil || o.IsBillingOnly == nil {
+	if o == nil || IsNil(o.IsBillingOnly) {
 		return nil, false
 	}
 	return o.IsBillingOnly, true
@@ -276,7 +280,7 @@ func (o *CloudRegions) GetIsBillingOnlyOk() (*bool, bool) {
 
 // HasIsBillingOnly returns a boolean if a field has been set.
 func (o *CloudRegions) HasIsBillingOnly() bool {
-	if o != nil && o.IsBillingOnly != nil {
+	if o != nil && !IsNil(o.IsBillingOnly) {
 		return true
 	}
 
@@ -290,7 +294,7 @@ func (o *CloudRegions) SetIsBillingOnly(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CloudRegions) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -300,7 +304,7 @@ func (o *CloudRegions) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudRegions) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -308,7 +312,7 @@ func (o *CloudRegions) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CloudRegions) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -322,7 +326,7 @@ func (o *CloudRegions) SetName(v string) {
 
 // GetPlatformType returns the PlatformType field value if set, zero value otherwise.
 func (o *CloudRegions) GetPlatformType() string {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		var ret string
 		return ret
 	}
@@ -332,7 +336,7 @@ func (o *CloudRegions) GetPlatformType() string {
 // GetPlatformTypeOk returns a tuple with the PlatformType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudRegions) GetPlatformTypeOk() (*string, bool) {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		return nil, false
 	}
 	return o.PlatformType, true
@@ -340,7 +344,7 @@ func (o *CloudRegions) GetPlatformTypeOk() (*string, bool) {
 
 // HasPlatformType returns a boolean if a field has been set.
 func (o *CloudRegions) HasPlatformType() bool {
-	if o != nil && o.PlatformType != nil {
+	if o != nil && !IsNil(o.PlatformType) {
 		return true
 	}
 
@@ -354,7 +358,7 @@ func (o *CloudRegions) SetPlatformType(v string) {
 
 // GetRegionEndPoint returns the RegionEndPoint field value if set, zero value otherwise.
 func (o *CloudRegions) GetRegionEndPoint() string {
-	if o == nil || o.RegionEndPoint == nil {
+	if o == nil || IsNil(o.RegionEndPoint) {
 		var ret string
 		return ret
 	}
@@ -364,7 +368,7 @@ func (o *CloudRegions) GetRegionEndPoint() string {
 // GetRegionEndPointOk returns a tuple with the RegionEndPoint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudRegions) GetRegionEndPointOk() (*string, bool) {
-	if o == nil || o.RegionEndPoint == nil {
+	if o == nil || IsNil(o.RegionEndPoint) {
 		return nil, false
 	}
 	return o.RegionEndPoint, true
@@ -372,7 +376,7 @@ func (o *CloudRegions) GetRegionEndPointOk() (*string, bool) {
 
 // HasRegionEndPoint returns a boolean if a field has been set.
 func (o *CloudRegions) HasRegionEndPoint() bool {
-	if o != nil && o.RegionEndPoint != nil {
+	if o != nil && !IsNil(o.RegionEndPoint) {
 		return true
 	}
 
@@ -386,7 +390,7 @@ func (o *CloudRegions) SetRegionEndPoint(v string) {
 
 // GetRegionId returns the RegionId field value if set, zero value otherwise.
 func (o *CloudRegions) GetRegionId() string {
-	if o == nil || o.RegionId == nil {
+	if o == nil || IsNil(o.RegionId) {
 		var ret string
 		return ret
 	}
@@ -396,7 +400,7 @@ func (o *CloudRegions) GetRegionId() string {
 // GetRegionIdOk returns a tuple with the RegionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudRegions) GetRegionIdOk() (*string, bool) {
-	if o == nil || o.RegionId == nil {
+	if o == nil || IsNil(o.RegionId) {
 		return nil, false
 	}
 	return o.RegionId, true
@@ -404,7 +408,7 @@ func (o *CloudRegions) GetRegionIdOk() (*string, bool) {
 
 // HasRegionId returns a boolean if a field has been set.
 func (o *CloudRegions) HasRegionId() bool {
-	if o != nil && o.RegionId != nil {
+	if o != nil && !IsNil(o.RegionId) {
 		return true
 	}
 
@@ -429,7 +433,7 @@ func (o *CloudRegions) GetZones() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudRegions) GetZonesOk() ([]string, bool) {
-	if o == nil || o.Zones == nil {
+	if o == nil || IsNil(o.Zones) {
 		return nil, false
 	}
 	return o.Zones, true
@@ -437,7 +441,7 @@ func (o *CloudRegions) GetZonesOk() ([]string, bool) {
 
 // HasZones returns a boolean if a field has been set.
 func (o *CloudRegions) HasZones() bool {
-	if o != nil && o.Zones != nil {
+	if o != nil && IsNil(o.Zones) {
 		return true
 	}
 
@@ -449,96 +453,133 @@ func (o *CloudRegions) SetZones(v []string) {
 	o.Zones = v
 }
 
-// GetTarget returns the Target field value if set, zero value otherwise.
+// GetTarget returns the Target field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudRegions) GetTarget() AssetTargetRelationship {
-	if o == nil || o.Target == nil {
+	if o == nil || IsNil(o.Target.Get()) {
 		var ret AssetTargetRelationship
 		return ret
 	}
-	return *o.Target
+	return *o.Target.Get()
 }
 
 // GetTargetOk returns a tuple with the Target field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudRegions) GetTargetOk() (*AssetTargetRelationship, bool) {
-	if o == nil || o.Target == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Target, true
+	return o.Target.Get(), o.Target.IsSet()
 }
 
 // HasTarget returns a boolean if a field has been set.
 func (o *CloudRegions) HasTarget() bool {
-	if o != nil && o.Target != nil {
+	if o != nil && o.Target.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTarget gets a reference to the given AssetTargetRelationship and assigns it to the Target field.
+// SetTarget gets a reference to the given NullableAssetTargetRelationship and assigns it to the Target field.
 func (o *CloudRegions) SetTarget(v AssetTargetRelationship) {
-	o.Target = &v
+	o.Target.Set(&v)
+}
+
+// SetTargetNil sets the value for Target to be an explicit nil
+func (o *CloudRegions) SetTargetNil() {
+	o.Target.Set(nil)
+}
+
+// UnsetTarget ensures that no value is present for Target, not even an explicit nil
+func (o *CloudRegions) UnsetTarget() {
+	o.Target.Unset()
 }
 
 func (o CloudRegions) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudRegions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AlternateNames != nil {
 		toSerialize["AlternateNames"] = o.AlternateNames
 	}
-	if o.DefaultZone != nil {
+	if !IsNil(o.DefaultZone) {
 		toSerialize["DefaultZone"] = o.DefaultZone
 	}
-	if o.Group != nil {
+	if !IsNil(o.Group) {
 		toSerialize["Group"] = o.Group
 	}
-	if o.IsActive != nil {
+	if !IsNil(o.IsActive) {
 		toSerialize["IsActive"] = o.IsActive
 	}
-	if o.IsBillingOnly != nil {
+	if !IsNil(o.IsBillingOnly) {
 		toSerialize["IsBillingOnly"] = o.IsBillingOnly
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PlatformType != nil {
+	if !IsNil(o.PlatformType) {
 		toSerialize["PlatformType"] = o.PlatformType
 	}
-	if o.RegionEndPoint != nil {
+	if !IsNil(o.RegionEndPoint) {
 		toSerialize["RegionEndPoint"] = o.RegionEndPoint
 	}
-	if o.RegionId != nil {
+	if !IsNil(o.RegionId) {
 		toSerialize["RegionId"] = o.RegionId
 	}
 	if o.Zones != nil {
 		toSerialize["Zones"] = o.Zones
 	}
-	if o.Target != nil {
-		toSerialize["Target"] = o.Target
+	if o.Target.IsSet() {
+		toSerialize["Target"] = o.Target.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudRegions) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudRegions) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudRegionsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -560,14 +601,14 @@ func (o *CloudRegions) UnmarshalJSON(bytes []byte) (err error) {
 		// HTTP endpoint of the region. For example https://ec2.us-east-2.amazonaws.com.
 		RegionEndPoint *string `json:"RegionEndPoint,omitempty"`
 		// The region Id which is assigned by the cloud provider. For e.g. us-east-1.
-		RegionId *string                  `json:"RegionId,omitempty"`
-		Zones    []string                 `json:"Zones,omitempty"`
-		Target   *AssetTargetRelationship `json:"Target,omitempty"`
+		RegionId *string                         `json:"RegionId,omitempty"`
+		Zones    []string                        `json:"Zones,omitempty"`
+		Target   NullableAssetTargetRelationship `json:"Target,omitempty"`
 	}
 
 	varCloudRegionsWithoutEmbeddedStruct := CloudRegionsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudRegionsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudRegionsWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudRegions := _CloudRegions{}
 		varCloudRegions.ClassId = varCloudRegionsWithoutEmbeddedStruct.ClassId
@@ -590,7 +631,7 @@ func (o *CloudRegions) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudRegions := _CloudRegions{}
 
-	err = json.Unmarshal(bytes, &varCloudRegions)
+	err = json.Unmarshal(data, &varCloudRegions)
 	if err == nil {
 		o.MoBaseMo = varCloudRegions.MoBaseMo
 	} else {
@@ -599,7 +640,7 @@ func (o *CloudRegions) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AlternateNames")

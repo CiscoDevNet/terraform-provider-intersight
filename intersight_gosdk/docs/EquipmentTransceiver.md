@@ -20,10 +20,10 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | Status of the pluggable SFP. | [optional] 
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
 **Type** | Pointer to **string** | The type of the transceiver. | [optional] [readonly] 
-**EtherHostPort** | Pointer to [**EtherHostPortRelationship**](EtherHostPortRelationship.md) |  | [optional] 
-**EtherPhysicalPort** | Pointer to [**EtherPhysicalPortRelationship**](EtherPhysicalPortRelationship.md) |  | [optional] 
-**FcPhysicalPort** | Pointer to [**FcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**EtherHostPort** | Pointer to [**NullableEtherHostPortRelationship**](EtherHostPortRelationship.md) |  | [optional] 
+**EtherPhysicalPort** | Pointer to [**NullableEtherPhysicalPortRelationship**](EtherPhysicalPortRelationship.md) |  | [optional] 
+**FcPhysicalPort** | Pointer to [**NullableFcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -459,6 +459,16 @@ SetEtherHostPort sets EtherHostPort field to given value.
 
 HasEtherHostPort returns a boolean if a field has been set.
 
+### SetEtherHostPortNil
+
+`func (o *EquipmentTransceiver) SetEtherHostPortNil(b bool)`
+
+ SetEtherHostPortNil sets the value for EtherHostPort to be an explicit nil
+
+### UnsetEtherHostPort
+`func (o *EquipmentTransceiver) UnsetEtherHostPort()`
+
+UnsetEtherHostPort ensures that no value is present for EtherHostPort, not even an explicit nil
 ### GetEtherPhysicalPort
 
 `func (o *EquipmentTransceiver) GetEtherPhysicalPort() EtherPhysicalPortRelationship`
@@ -484,6 +494,16 @@ SetEtherPhysicalPort sets EtherPhysicalPort field to given value.
 
 HasEtherPhysicalPort returns a boolean if a field has been set.
 
+### SetEtherPhysicalPortNil
+
+`func (o *EquipmentTransceiver) SetEtherPhysicalPortNil(b bool)`
+
+ SetEtherPhysicalPortNil sets the value for EtherPhysicalPort to be an explicit nil
+
+### UnsetEtherPhysicalPort
+`func (o *EquipmentTransceiver) UnsetEtherPhysicalPort()`
+
+UnsetEtherPhysicalPort ensures that no value is present for EtherPhysicalPort, not even an explicit nil
 ### GetFcPhysicalPort
 
 `func (o *EquipmentTransceiver) GetFcPhysicalPort() FcPhysicalPortRelationship`
@@ -509,6 +529,16 @@ SetFcPhysicalPort sets FcPhysicalPort field to given value.
 
 HasFcPhysicalPort returns a boolean if a field has been set.
 
+### SetFcPhysicalPortNil
+
+`func (o *EquipmentTransceiver) SetFcPhysicalPortNil(b bool)`
+
+ SetFcPhysicalPortNil sets the value for FcPhysicalPort to be an explicit nil
+
+### UnsetFcPhysicalPort
+`func (o *EquipmentTransceiver) UnsetFcPhysicalPort()`
+
+UnsetFcPhysicalPort ensures that no value is present for FcPhysicalPort, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EquipmentTransceiver) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -534,6 +564,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EquipmentTransceiver) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EquipmentTransceiver) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

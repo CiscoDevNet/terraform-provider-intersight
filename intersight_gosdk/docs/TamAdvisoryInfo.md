@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "tam.AdvisoryInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "tam.AdvisoryInfo"]
 **State** | Pointer to **string** | Current state of the advisory for the owner. Indicates if the user is interested in getting updates for the advisory. * &#x60;active&#x60; - Advisory is currently active and the user wants to receive updates for this advisory. * &#x60;acknowledged&#x60; - Advisory is seen and acknowledged by the user and she no longer wants to recieve updates. | [optional] [default to "active"]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**Advisory** | Pointer to [**TamBaseAdvisoryRelationship**](TamBaseAdvisoryRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Advisory** | Pointer to [**NullableTamBaseAdvisoryRelationship**](TamBaseAdvisoryRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -119,6 +119,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *TamAdvisoryInfo) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *TamAdvisoryInfo) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetAdvisory
 
 `func (o *TamAdvisoryInfo) GetAdvisory() TamBaseAdvisoryRelationship`
@@ -144,6 +154,16 @@ SetAdvisory sets Advisory field to given value.
 
 HasAdvisory returns a boolean if a field has been set.
 
+### SetAdvisoryNil
+
+`func (o *TamAdvisoryInfo) SetAdvisoryNil(b bool)`
+
+ SetAdvisoryNil sets the value for Advisory to be an explicit nil
+
+### UnsetAdvisory
+`func (o *TamAdvisoryInfo) UnsetAdvisory()`
+
+UnsetAdvisory ensures that no value is present for Advisory, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

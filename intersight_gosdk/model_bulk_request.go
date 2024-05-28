@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the BulkRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BulkRequest{}
 
 // BulkRequest The bulk.Request API allows users to perform API actions (Create, Update or Delete) in bulk, on a given URI. It is possible to operate on multiple subpaths relative to the provided URI (For example, it would be possible to perform a PATCH action on multiple objects of a given REST resource type).
 type BulkRequest struct {
@@ -53,9 +57,9 @@ type BulkRequest struct {
 	// An array of relationships to bulkSubRequestObj resources.
 	AsyncResults []BulkSubRequestObjRelationship `json:"AsyncResults,omitempty"`
 	// An array of relationships to bulkSubRequestObj resources.
-	AsyncResultsFailed   []BulkSubRequestObjRelationship       `json:"AsyncResultsFailed,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	WorkflowInfo         *WorkflowWorkflowInfoRelationship     `json:"WorkflowInfo,omitempty"`
+	AsyncResultsFailed   []BulkSubRequestObjRelationship              `json:"AsyncResultsFailed,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	WorkflowInfo         NullableWorkflowWorkflowInfoRelationship     `json:"WorkflowInfo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -142,7 +146,7 @@ func (o *BulkRequest) SetObjectType(v string) {
 
 // GetActionOnError returns the ActionOnError field value if set, zero value otherwise.
 func (o *BulkRequest) GetActionOnError() string {
-	if o == nil || o.ActionOnError == nil {
+	if o == nil || IsNil(o.ActionOnError) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *BulkRequest) GetActionOnError() string {
 // GetActionOnErrorOk returns a tuple with the ActionOnError field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkRequest) GetActionOnErrorOk() (*string, bool) {
-	if o == nil || o.ActionOnError == nil {
+	if o == nil || IsNil(o.ActionOnError) {
 		return nil, false
 	}
 	return o.ActionOnError, true
@@ -160,7 +164,7 @@ func (o *BulkRequest) GetActionOnErrorOk() (*string, bool) {
 
 // HasActionOnError returns a boolean if a field has been set.
 func (o *BulkRequest) HasActionOnError() bool {
-	if o != nil && o.ActionOnError != nil {
+	if o != nil && !IsNil(o.ActionOnError) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *BulkRequest) GetActions() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkRequest) GetActionsOk() ([]string, bool) {
-	if o == nil || o.Actions == nil {
+	if o == nil || IsNil(o.Actions) {
 		return nil, false
 	}
 	return o.Actions, true
@@ -193,7 +197,7 @@ func (o *BulkRequest) GetActionsOk() ([]string, bool) {
 
 // HasActions returns a boolean if a field has been set.
 func (o *BulkRequest) HasActions() bool {
-	if o != nil && o.Actions != nil {
+	if o != nil && IsNil(o.Actions) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *BulkRequest) SetActions(v []string) {
 
 // GetCompletionTime returns the CompletionTime field value if set, zero value otherwise.
 func (o *BulkRequest) GetCompletionTime() string {
-	if o == nil || o.CompletionTime == nil {
+	if o == nil || IsNil(o.CompletionTime) {
 		var ret string
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *BulkRequest) GetCompletionTime() string {
 // GetCompletionTimeOk returns a tuple with the CompletionTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkRequest) GetCompletionTimeOk() (*string, bool) {
-	if o == nil || o.CompletionTime == nil {
+	if o == nil || IsNil(o.CompletionTime) {
 		return nil, false
 	}
 	return o.CompletionTime, true
@@ -225,7 +229,7 @@ func (o *BulkRequest) GetCompletionTimeOk() (*string, bool) {
 
 // HasCompletionTime returns a boolean if a field has been set.
 func (o *BulkRequest) HasCompletionTime() bool {
-	if o != nil && o.CompletionTime != nil {
+	if o != nil && !IsNil(o.CompletionTime) {
 		return true
 	}
 
@@ -250,7 +254,7 @@ func (o *BulkRequest) GetHeaders() []BulkHttpHeader {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkRequest) GetHeadersOk() ([]BulkHttpHeader, bool) {
-	if o == nil || o.Headers == nil {
+	if o == nil || IsNil(o.Headers) {
 		return nil, false
 	}
 	return o.Headers, true
@@ -258,7 +262,7 @@ func (o *BulkRequest) GetHeadersOk() ([]BulkHttpHeader, bool) {
 
 // HasHeaders returns a boolean if a field has been set.
 func (o *BulkRequest) HasHeaders() bool {
-	if o != nil && o.Headers != nil {
+	if o != nil && IsNil(o.Headers) {
 		return true
 	}
 
@@ -272,7 +276,7 @@ func (o *BulkRequest) SetHeaders(v []BulkHttpHeader) {
 
 // GetNumSubRequests returns the NumSubRequests field value if set, zero value otherwise.
 func (o *BulkRequest) GetNumSubRequests() int64 {
-	if o == nil || o.NumSubRequests == nil {
+	if o == nil || IsNil(o.NumSubRequests) {
 		var ret int64
 		return ret
 	}
@@ -282,7 +286,7 @@ func (o *BulkRequest) GetNumSubRequests() int64 {
 // GetNumSubRequestsOk returns a tuple with the NumSubRequests field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkRequest) GetNumSubRequestsOk() (*int64, bool) {
-	if o == nil || o.NumSubRequests == nil {
+	if o == nil || IsNil(o.NumSubRequests) {
 		return nil, false
 	}
 	return o.NumSubRequests, true
@@ -290,7 +294,7 @@ func (o *BulkRequest) GetNumSubRequestsOk() (*int64, bool) {
 
 // HasNumSubRequests returns a boolean if a field has been set.
 func (o *BulkRequest) HasNumSubRequests() bool {
-	if o != nil && o.NumSubRequests != nil {
+	if o != nil && !IsNil(o.NumSubRequests) {
 		return true
 	}
 
@@ -304,7 +308,7 @@ func (o *BulkRequest) SetNumSubRequests(v int64) {
 
 // GetOrgMoid returns the OrgMoid field value if set, zero value otherwise.
 func (o *BulkRequest) GetOrgMoid() string {
-	if o == nil || o.OrgMoid == nil {
+	if o == nil || IsNil(o.OrgMoid) {
 		var ret string
 		return ret
 	}
@@ -314,7 +318,7 @@ func (o *BulkRequest) GetOrgMoid() string {
 // GetOrgMoidOk returns a tuple with the OrgMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkRequest) GetOrgMoidOk() (*string, bool) {
-	if o == nil || o.OrgMoid == nil {
+	if o == nil || IsNil(o.OrgMoid) {
 		return nil, false
 	}
 	return o.OrgMoid, true
@@ -322,7 +326,7 @@ func (o *BulkRequest) GetOrgMoidOk() (*string, bool) {
 
 // HasOrgMoid returns a boolean if a field has been set.
 func (o *BulkRequest) HasOrgMoid() bool {
-	if o != nil && o.OrgMoid != nil {
+	if o != nil && !IsNil(o.OrgMoid) {
 		return true
 	}
 
@@ -336,7 +340,7 @@ func (o *BulkRequest) SetOrgMoid(v string) {
 
 // GetRequestReceivedTime returns the RequestReceivedTime field value if set, zero value otherwise.
 func (o *BulkRequest) GetRequestReceivedTime() string {
-	if o == nil || o.RequestReceivedTime == nil {
+	if o == nil || IsNil(o.RequestReceivedTime) {
 		var ret string
 		return ret
 	}
@@ -346,7 +350,7 @@ func (o *BulkRequest) GetRequestReceivedTime() string {
 // GetRequestReceivedTimeOk returns a tuple with the RequestReceivedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkRequest) GetRequestReceivedTimeOk() (*string, bool) {
-	if o == nil || o.RequestReceivedTime == nil {
+	if o == nil || IsNil(o.RequestReceivedTime) {
 		return nil, false
 	}
 	return o.RequestReceivedTime, true
@@ -354,7 +358,7 @@ func (o *BulkRequest) GetRequestReceivedTimeOk() (*string, bool) {
 
 // HasRequestReceivedTime returns a boolean if a field has been set.
 func (o *BulkRequest) HasRequestReceivedTime() bool {
-	if o != nil && o.RequestReceivedTime != nil {
+	if o != nil && !IsNil(o.RequestReceivedTime) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *BulkRequest) GetRequests() []BulkSubRequest {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkRequest) GetRequestsOk() ([]BulkSubRequest, bool) {
-	if o == nil || o.Requests == nil {
+	if o == nil || IsNil(o.Requests) {
 		return nil, false
 	}
 	return o.Requests, true
@@ -387,7 +391,7 @@ func (o *BulkRequest) GetRequestsOk() ([]BulkSubRequest, bool) {
 
 // HasRequests returns a boolean if a field has been set.
 func (o *BulkRequest) HasRequests() bool {
-	if o != nil && o.Requests != nil {
+	if o != nil && IsNil(o.Requests) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *BulkRequest) GetResults() []BulkApiResult {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkRequest) GetResultsOk() ([]BulkApiResult, bool) {
-	if o == nil || o.Results == nil {
+	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
 	return o.Results, true
@@ -420,7 +424,7 @@ func (o *BulkRequest) GetResultsOk() ([]BulkApiResult, bool) {
 
 // HasResults returns a boolean if a field has been set.
 func (o *BulkRequest) HasResults() bool {
-	if o != nil && o.Results != nil {
+	if o != nil && IsNil(o.Results) {
 		return true
 	}
 
@@ -434,7 +438,7 @@ func (o *BulkRequest) SetResults(v []BulkApiResult) {
 
 // GetSkipDuplicates returns the SkipDuplicates field value if set, zero value otherwise.
 func (o *BulkRequest) GetSkipDuplicates() bool {
-	if o == nil || o.SkipDuplicates == nil {
+	if o == nil || IsNil(o.SkipDuplicates) {
 		var ret bool
 		return ret
 	}
@@ -444,7 +448,7 @@ func (o *BulkRequest) GetSkipDuplicates() bool {
 // GetSkipDuplicatesOk returns a tuple with the SkipDuplicates field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkRequest) GetSkipDuplicatesOk() (*bool, bool) {
-	if o == nil || o.SkipDuplicates == nil {
+	if o == nil || IsNil(o.SkipDuplicates) {
 		return nil, false
 	}
 	return o.SkipDuplicates, true
@@ -452,7 +456,7 @@ func (o *BulkRequest) GetSkipDuplicatesOk() (*bool, bool) {
 
 // HasSkipDuplicates returns a boolean if a field has been set.
 func (o *BulkRequest) HasSkipDuplicates() bool {
-	if o != nil && o.SkipDuplicates != nil {
+	if o != nil && !IsNil(o.SkipDuplicates) {
 		return true
 	}
 
@@ -466,7 +470,7 @@ func (o *BulkRequest) SetSkipDuplicates(v bool) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *BulkRequest) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -476,7 +480,7 @@ func (o *BulkRequest) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkRequest) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -484,7 +488,7 @@ func (o *BulkRequest) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *BulkRequest) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -498,7 +502,7 @@ func (o *BulkRequest) SetStatus(v string) {
 
 // GetStatusMessage returns the StatusMessage field value if set, zero value otherwise.
 func (o *BulkRequest) GetStatusMessage() string {
-	if o == nil || o.StatusMessage == nil {
+	if o == nil || IsNil(o.StatusMessage) {
 		var ret string
 		return ret
 	}
@@ -508,7 +512,7 @@ func (o *BulkRequest) GetStatusMessage() string {
 // GetStatusMessageOk returns a tuple with the StatusMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkRequest) GetStatusMessageOk() (*string, bool) {
-	if o == nil || o.StatusMessage == nil {
+	if o == nil || IsNil(o.StatusMessage) {
 		return nil, false
 	}
 	return o.StatusMessage, true
@@ -516,7 +520,7 @@ func (o *BulkRequest) GetStatusMessageOk() (*string, bool) {
 
 // HasStatusMessage returns a boolean if a field has been set.
 func (o *BulkRequest) HasStatusMessage() bool {
-	if o != nil && o.StatusMessage != nil {
+	if o != nil && !IsNil(o.StatusMessage) {
 		return true
 	}
 
@@ -531,7 +535,7 @@ func (o *BulkRequest) SetStatusMessage(v string) {
 // GetUri returns the Uri field value if set, zero value otherwise.
 // Deprecated
 func (o *BulkRequest) GetUri() string {
-	if o == nil || o.Uri == nil {
+	if o == nil || IsNil(o.Uri) {
 		var ret string
 		return ret
 	}
@@ -542,7 +546,7 @@ func (o *BulkRequest) GetUri() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *BulkRequest) GetUriOk() (*string, bool) {
-	if o == nil || o.Uri == nil {
+	if o == nil || IsNil(o.Uri) {
 		return nil, false
 	}
 	return o.Uri, true
@@ -550,7 +554,7 @@ func (o *BulkRequest) GetUriOk() (*string, bool) {
 
 // HasUri returns a boolean if a field has been set.
 func (o *BulkRequest) HasUri() bool {
-	if o != nil && o.Uri != nil {
+	if o != nil && !IsNil(o.Uri) {
 		return true
 	}
 
@@ -566,7 +570,7 @@ func (o *BulkRequest) SetUri(v string) {
 // GetVerb returns the Verb field value if set, zero value otherwise.
 // Deprecated
 func (o *BulkRequest) GetVerb() string {
-	if o == nil || o.Verb == nil {
+	if o == nil || IsNil(o.Verb) {
 		var ret string
 		return ret
 	}
@@ -577,7 +581,7 @@ func (o *BulkRequest) GetVerb() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *BulkRequest) GetVerbOk() (*string, bool) {
-	if o == nil || o.Verb == nil {
+	if o == nil || IsNil(o.Verb) {
 		return nil, false
 	}
 	return o.Verb, true
@@ -585,7 +589,7 @@ func (o *BulkRequest) GetVerbOk() (*string, bool) {
 
 // HasVerb returns a boolean if a field has been set.
 func (o *BulkRequest) HasVerb() bool {
-	if o != nil && o.Verb != nil {
+	if o != nil && !IsNil(o.Verb) {
 		return true
 	}
 
@@ -611,7 +615,7 @@ func (o *BulkRequest) GetAsyncResults() []BulkSubRequestObjRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkRequest) GetAsyncResultsOk() ([]BulkSubRequestObjRelationship, bool) {
-	if o == nil || o.AsyncResults == nil {
+	if o == nil || IsNil(o.AsyncResults) {
 		return nil, false
 	}
 	return o.AsyncResults, true
@@ -619,7 +623,7 @@ func (o *BulkRequest) GetAsyncResultsOk() ([]BulkSubRequestObjRelationship, bool
 
 // HasAsyncResults returns a boolean if a field has been set.
 func (o *BulkRequest) HasAsyncResults() bool {
-	if o != nil && o.AsyncResults != nil {
+	if o != nil && IsNil(o.AsyncResults) {
 		return true
 	}
 
@@ -644,7 +648,7 @@ func (o *BulkRequest) GetAsyncResultsFailed() []BulkSubRequestObjRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkRequest) GetAsyncResultsFailedOk() ([]BulkSubRequestObjRelationship, bool) {
-	if o == nil || o.AsyncResultsFailed == nil {
+	if o == nil || IsNil(o.AsyncResultsFailed) {
 		return nil, false
 	}
 	return o.AsyncResultsFailed, true
@@ -652,7 +656,7 @@ func (o *BulkRequest) GetAsyncResultsFailedOk() ([]BulkSubRequestObjRelationship
 
 // HasAsyncResultsFailed returns a boolean if a field has been set.
 func (o *BulkRequest) HasAsyncResultsFailed() bool {
-	if o != nil && o.AsyncResultsFailed != nil {
+	if o != nil && IsNil(o.AsyncResultsFailed) {
 		return true
 	}
 
@@ -664,105 +668,131 @@ func (o *BulkRequest) SetAsyncResultsFailed(v []BulkSubRequestObjRelationship) {
 	o.AsyncResultsFailed = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkRequest) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkRequest) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *BulkRequest) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *BulkRequest) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *BulkRequest) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *BulkRequest) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkRequest) GetWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil || IsNil(o.WorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.WorkflowInfo
+	return *o.WorkflowInfo.Get()
 }
 
 // GetWorkflowInfoOk returns a tuple with the WorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkRequest) GetWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WorkflowInfo, true
+	return o.WorkflowInfo.Get(), o.WorkflowInfo.IsSet()
 }
 
 // HasWorkflowInfo returns a boolean if a field has been set.
 func (o *BulkRequest) HasWorkflowInfo() bool {
-	if o != nil && o.WorkflowInfo != nil {
+	if o != nil && o.WorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
+// SetWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
 func (o *BulkRequest) SetWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.WorkflowInfo = &v
+	o.WorkflowInfo.Set(&v)
+}
+
+// SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+func (o *BulkRequest) SetWorkflowInfoNil() {
+	o.WorkflowInfo.Set(nil)
+}
+
+// UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
+func (o *BulkRequest) UnsetWorkflowInfo() {
+	o.WorkflowInfo.Unset()
 }
 
 func (o BulkRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BulkRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ActionOnError != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ActionOnError) {
 		toSerialize["ActionOnError"] = o.ActionOnError
 	}
 	if o.Actions != nil {
 		toSerialize["Actions"] = o.Actions
 	}
-	if o.CompletionTime != nil {
+	if !IsNil(o.CompletionTime) {
 		toSerialize["CompletionTime"] = o.CompletionTime
 	}
 	if o.Headers != nil {
 		toSerialize["Headers"] = o.Headers
 	}
-	if o.NumSubRequests != nil {
+	if !IsNil(o.NumSubRequests) {
 		toSerialize["NumSubRequests"] = o.NumSubRequests
 	}
-	if o.OrgMoid != nil {
+	if !IsNil(o.OrgMoid) {
 		toSerialize["OrgMoid"] = o.OrgMoid
 	}
-	if o.RequestReceivedTime != nil {
+	if !IsNil(o.RequestReceivedTime) {
 		toSerialize["RequestReceivedTime"] = o.RequestReceivedTime
 	}
 	if o.Requests != nil {
@@ -771,19 +801,19 @@ func (o BulkRequest) MarshalJSON() ([]byte, error) {
 	if o.Results != nil {
 		toSerialize["Results"] = o.Results
 	}
-	if o.SkipDuplicates != nil {
+	if !IsNil(o.SkipDuplicates) {
 		toSerialize["SkipDuplicates"] = o.SkipDuplicates
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.StatusMessage != nil {
+	if !IsNil(o.StatusMessage) {
 		toSerialize["StatusMessage"] = o.StatusMessage
 	}
-	if o.Uri != nil {
+	if !IsNil(o.Uri) {
 		toSerialize["Uri"] = o.Uri
 	}
-	if o.Verb != nil {
+	if !IsNil(o.Verb) {
 		toSerialize["Verb"] = o.Verb
 	}
 	if o.AsyncResults != nil {
@@ -792,21 +822,43 @@ func (o BulkRequest) MarshalJSON() ([]byte, error) {
 	if o.AsyncResultsFailed != nil {
 		toSerialize["AsyncResultsFailed"] = o.AsyncResultsFailed
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.WorkflowInfo != nil {
-		toSerialize["WorkflowInfo"] = o.WorkflowInfo
+	if o.WorkflowInfo.IsSet() {
+		toSerialize["WorkflowInfo"] = o.WorkflowInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *BulkRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *BulkRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type BulkRequestWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -841,14 +893,14 @@ func (o *BulkRequest) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to bulkSubRequestObj resources.
 		AsyncResults []BulkSubRequestObjRelationship `json:"AsyncResults,omitempty"`
 		// An array of relationships to bulkSubRequestObj resources.
-		AsyncResultsFailed []BulkSubRequestObjRelationship       `json:"AsyncResultsFailed,omitempty"`
-		Organization       *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-		WorkflowInfo       *WorkflowWorkflowInfoRelationship     `json:"WorkflowInfo,omitempty"`
+		AsyncResultsFailed []BulkSubRequestObjRelationship              `json:"AsyncResultsFailed,omitempty"`
+		Organization       NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		WorkflowInfo       NullableWorkflowWorkflowInfoRelationship     `json:"WorkflowInfo,omitempty"`
 	}
 
 	varBulkRequestWithoutEmbeddedStruct := BulkRequestWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varBulkRequestWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varBulkRequestWithoutEmbeddedStruct)
 	if err == nil {
 		varBulkRequest := _BulkRequest{}
 		varBulkRequest.ClassId = varBulkRequestWithoutEmbeddedStruct.ClassId
@@ -878,7 +930,7 @@ func (o *BulkRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBulkRequest := _BulkRequest{}
 
-	err = json.Unmarshal(bytes, &varBulkRequest)
+	err = json.Unmarshal(data, &varBulkRequest)
 	if err == nil {
 		o.MoBaseMo = varBulkRequest.MoBaseMo
 	} else {
@@ -887,7 +939,7 @@ func (o *BulkRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ActionOnError")

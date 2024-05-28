@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **PortIdEnd** | Pointer to **int64** | Ending range of the Port Identifier. | [optional] 
 **PortIdStart** | Pointer to **int64** | Starting range of the Port Identifier. | [optional] 
 **SlotId** | Pointer to **int64** | Slot Identifier of the switch. | [optional] 
-**PortPolicy** | Pointer to [**FabricPortPolicyRelationship**](FabricPortPolicyRelationship.md) |  | [optional] 
+**PortPolicy** | Pointer to [**NullableFabricPortPolicyRelationship**](FabricPortPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -196,6 +196,16 @@ SetPortPolicy sets PortPolicy field to given value.
 
 HasPortPolicy returns a boolean if a field has been set.
 
+### SetPortPolicyNil
+
+`func (o *FabricPortMode) SetPortPolicyNil(b bool)`
+
+ SetPortPolicyNil sets the value for PortPolicy to be an explicit nil
+
+### UnsetPortPolicy
+`func (o *FabricPortMode) UnsetPortPolicy()`
+
+UnsetPortPolicy ensures that no value is present for PortPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

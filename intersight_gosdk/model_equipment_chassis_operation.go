@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentChassisOperation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentChassisOperation{}
 
 // EquipmentChassisOperation Models the configurable properties of Chassis.
 type EquipmentChassisOperation struct {
@@ -30,9 +34,9 @@ type EquipmentChassisOperation struct {
 	AdminPowerCycleSlotId  *int64                            `json:"AdminPowerCycleSlotId,omitempty"`
 	ChassisOperationStatus []EquipmentChassisOperationStatus `json:"ChassisOperationStatus,omitempty"`
 	// The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
-	ConfigState          *string                              `json:"ConfigState,omitempty"`
-	Chassis              *EquipmentChassisRelationship        `json:"Chassis,omitempty"`
-	DeviceRegistration   *AssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
+	ConfigState          *string                                     `json:"ConfigState,omitempty"`
+	Chassis              NullableEquipmentChassisRelationship        `json:"Chassis,omitempty"`
+	DeviceRegistration   NullableAssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *EquipmentChassisOperation) SetObjectType(v string) {
 
 // GetAdminLocatorLedAction returns the AdminLocatorLedAction field value if set, zero value otherwise.
 func (o *EquipmentChassisOperation) GetAdminLocatorLedAction() string {
-	if o == nil || o.AdminLocatorLedAction == nil {
+	if o == nil || IsNil(o.AdminLocatorLedAction) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *EquipmentChassisOperation) GetAdminLocatorLedAction() string {
 // GetAdminLocatorLedActionOk returns a tuple with the AdminLocatorLedAction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentChassisOperation) GetAdminLocatorLedActionOk() (*string, bool) {
-	if o == nil || o.AdminLocatorLedAction == nil {
+	if o == nil || IsNil(o.AdminLocatorLedAction) {
 		return nil, false
 	}
 	return o.AdminLocatorLedAction, true
@@ -133,7 +137,7 @@ func (o *EquipmentChassisOperation) GetAdminLocatorLedActionOk() (*string, bool)
 
 // HasAdminLocatorLedAction returns a boolean if a field has been set.
 func (o *EquipmentChassisOperation) HasAdminLocatorLedAction() bool {
-	if o != nil && o.AdminLocatorLedAction != nil {
+	if o != nil && !IsNil(o.AdminLocatorLedAction) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *EquipmentChassisOperation) SetAdminLocatorLedAction(v string) {
 
 // GetAdminPowerCycleSlotId returns the AdminPowerCycleSlotId field value if set, zero value otherwise.
 func (o *EquipmentChassisOperation) GetAdminPowerCycleSlotId() int64 {
-	if o == nil || o.AdminPowerCycleSlotId == nil {
+	if o == nil || IsNil(o.AdminPowerCycleSlotId) {
 		var ret int64
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *EquipmentChassisOperation) GetAdminPowerCycleSlotId() int64 {
 // GetAdminPowerCycleSlotIdOk returns a tuple with the AdminPowerCycleSlotId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentChassisOperation) GetAdminPowerCycleSlotIdOk() (*int64, bool) {
-	if o == nil || o.AdminPowerCycleSlotId == nil {
+	if o == nil || IsNil(o.AdminPowerCycleSlotId) {
 		return nil, false
 	}
 	return o.AdminPowerCycleSlotId, true
@@ -165,7 +169,7 @@ func (o *EquipmentChassisOperation) GetAdminPowerCycleSlotIdOk() (*int64, bool) 
 
 // HasAdminPowerCycleSlotId returns a boolean if a field has been set.
 func (o *EquipmentChassisOperation) HasAdminPowerCycleSlotId() bool {
-	if o != nil && o.AdminPowerCycleSlotId != nil {
+	if o != nil && !IsNil(o.AdminPowerCycleSlotId) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *EquipmentChassisOperation) GetChassisOperationStatus() []EquipmentChass
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentChassisOperation) GetChassisOperationStatusOk() ([]EquipmentChassisOperationStatus, bool) {
-	if o == nil || o.ChassisOperationStatus == nil {
+	if o == nil || IsNil(o.ChassisOperationStatus) {
 		return nil, false
 	}
 	return o.ChassisOperationStatus, true
@@ -198,7 +202,7 @@ func (o *EquipmentChassisOperation) GetChassisOperationStatusOk() ([]EquipmentCh
 
 // HasChassisOperationStatus returns a boolean if a field has been set.
 func (o *EquipmentChassisOperation) HasChassisOperationStatus() bool {
-	if o != nil && o.ChassisOperationStatus != nil {
+	if o != nil && IsNil(o.ChassisOperationStatus) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *EquipmentChassisOperation) SetChassisOperationStatus(v []EquipmentChass
 
 // GetConfigState returns the ConfigState field value if set, zero value otherwise.
 func (o *EquipmentChassisOperation) GetConfigState() string {
-	if o == nil || o.ConfigState == nil {
+	if o == nil || IsNil(o.ConfigState) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *EquipmentChassisOperation) GetConfigState() string {
 // GetConfigStateOk returns a tuple with the ConfigState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentChassisOperation) GetConfigStateOk() (*string, bool) {
-	if o == nil || o.ConfigState == nil {
+	if o == nil || IsNil(o.ConfigState) {
 		return nil, false
 	}
 	return o.ConfigState, true
@@ -230,7 +234,7 @@ func (o *EquipmentChassisOperation) GetConfigStateOk() (*string, bool) {
 
 // HasConfigState returns a boolean if a field has been set.
 func (o *EquipmentChassisOperation) HasConfigState() bool {
-	if o != nil && o.ConfigState != nil {
+	if o != nil && !IsNil(o.ConfigState) {
 		return true
 	}
 
@@ -242,113 +246,161 @@ func (o *EquipmentChassisOperation) SetConfigState(v string) {
 	o.ConfigState = &v
 }
 
-// GetChassis returns the Chassis field value if set, zero value otherwise.
+// GetChassis returns the Chassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentChassisOperation) GetChassis() EquipmentChassisRelationship {
-	if o == nil || o.Chassis == nil {
+	if o == nil || IsNil(o.Chassis.Get()) {
 		var ret EquipmentChassisRelationship
 		return ret
 	}
-	return *o.Chassis
+	return *o.Chassis.Get()
 }
 
 // GetChassisOk returns a tuple with the Chassis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentChassisOperation) GetChassisOk() (*EquipmentChassisRelationship, bool) {
-	if o == nil || o.Chassis == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Chassis, true
+	return o.Chassis.Get(), o.Chassis.IsSet()
 }
 
 // HasChassis returns a boolean if a field has been set.
 func (o *EquipmentChassisOperation) HasChassis() bool {
-	if o != nil && o.Chassis != nil {
+	if o != nil && o.Chassis.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetChassis gets a reference to the given EquipmentChassisRelationship and assigns it to the Chassis field.
+// SetChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the Chassis field.
 func (o *EquipmentChassisOperation) SetChassis(v EquipmentChassisRelationship) {
-	o.Chassis = &v
+	o.Chassis.Set(&v)
 }
 
-// GetDeviceRegistration returns the DeviceRegistration field value if set, zero value otherwise.
+// SetChassisNil sets the value for Chassis to be an explicit nil
+func (o *EquipmentChassisOperation) SetChassisNil() {
+	o.Chassis.Set(nil)
+}
+
+// UnsetChassis ensures that no value is present for Chassis, not even an explicit nil
+func (o *EquipmentChassisOperation) UnsetChassis() {
+	o.Chassis.Unset()
+}
+
+// GetDeviceRegistration returns the DeviceRegistration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentChassisOperation) GetDeviceRegistration() AssetDeviceRegistrationRelationship {
-	if o == nil || o.DeviceRegistration == nil {
+	if o == nil || IsNil(o.DeviceRegistration.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.DeviceRegistration
+	return *o.DeviceRegistration.Get()
 }
 
 // GetDeviceRegistrationOk returns a tuple with the DeviceRegistration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentChassisOperation) GetDeviceRegistrationOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.DeviceRegistration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeviceRegistration, true
+	return o.DeviceRegistration.Get(), o.DeviceRegistration.IsSet()
 }
 
 // HasDeviceRegistration returns a boolean if a field has been set.
 func (o *EquipmentChassisOperation) HasDeviceRegistration() bool {
-	if o != nil && o.DeviceRegistration != nil {
+	if o != nil && o.DeviceRegistration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeviceRegistration gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the DeviceRegistration field.
+// SetDeviceRegistration gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the DeviceRegistration field.
 func (o *EquipmentChassisOperation) SetDeviceRegistration(v AssetDeviceRegistrationRelationship) {
-	o.DeviceRegistration = &v
+	o.DeviceRegistration.Set(&v)
+}
+
+// SetDeviceRegistrationNil sets the value for DeviceRegistration to be an explicit nil
+func (o *EquipmentChassisOperation) SetDeviceRegistrationNil() {
+	o.DeviceRegistration.Set(nil)
+}
+
+// UnsetDeviceRegistration ensures that no value is present for DeviceRegistration, not even an explicit nil
+func (o *EquipmentChassisOperation) UnsetDeviceRegistration() {
+	o.DeviceRegistration.Unset()
 }
 
 func (o EquipmentChassisOperation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentChassisOperation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminLocatorLedAction != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminLocatorLedAction) {
 		toSerialize["AdminLocatorLedAction"] = o.AdminLocatorLedAction
 	}
-	if o.AdminPowerCycleSlotId != nil {
+	if !IsNil(o.AdminPowerCycleSlotId) {
 		toSerialize["AdminPowerCycleSlotId"] = o.AdminPowerCycleSlotId
 	}
 	if o.ChassisOperationStatus != nil {
 		toSerialize["ChassisOperationStatus"] = o.ChassisOperationStatus
 	}
-	if o.ConfigState != nil {
+	if !IsNil(o.ConfigState) {
 		toSerialize["ConfigState"] = o.ConfigState
 	}
-	if o.Chassis != nil {
-		toSerialize["Chassis"] = o.Chassis
+	if o.Chassis.IsSet() {
+		toSerialize["Chassis"] = o.Chassis.Get()
 	}
-	if o.DeviceRegistration != nil {
-		toSerialize["DeviceRegistration"] = o.DeviceRegistration
+	if o.DeviceRegistration.IsSet() {
+		toSerialize["DeviceRegistration"] = o.DeviceRegistration.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentChassisOperation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentChassisOperation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentChassisOperationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -360,14 +412,14 @@ func (o *EquipmentChassisOperation) UnmarshalJSON(bytes []byte) (err error) {
 		AdminPowerCycleSlotId  *int64                            `json:"AdminPowerCycleSlotId,omitempty"`
 		ChassisOperationStatus []EquipmentChassisOperationStatus `json:"ChassisOperationStatus,omitempty"`
 		// The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target chassis. Applying - This state denotes that the settings are being applied in the target chassis. Failed - This state denotes that the settings could not be applied in the target chassis. * `None` - Nil value when no action has been triggered by the user. * `Applied` - User configured settings are in applied state. * `Applying` - User settings are being applied on the target server. * `Failed` - User configured settings could not be applied.
-		ConfigState        *string                              `json:"ConfigState,omitempty"`
-		Chassis            *EquipmentChassisRelationship        `json:"Chassis,omitempty"`
-		DeviceRegistration *AssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
+		ConfigState        *string                                     `json:"ConfigState,omitempty"`
+		Chassis            NullableEquipmentChassisRelationship        `json:"Chassis,omitempty"`
+		DeviceRegistration NullableAssetDeviceRegistrationRelationship `json:"DeviceRegistration,omitempty"`
 	}
 
 	varEquipmentChassisOperationWithoutEmbeddedStruct := EquipmentChassisOperationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentChassisOperationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentChassisOperationWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentChassisOperation := _EquipmentChassisOperation{}
 		varEquipmentChassisOperation.ClassId = varEquipmentChassisOperationWithoutEmbeddedStruct.ClassId
@@ -385,7 +437,7 @@ func (o *EquipmentChassisOperation) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentChassisOperation := _EquipmentChassisOperation{}
 
-	err = json.Unmarshal(bytes, &varEquipmentChassisOperation)
+	err = json.Unmarshal(data, &varEquipmentChassisOperation)
 	if err == nil {
 		o.MoBaseMo = varEquipmentChassisOperation.MoBaseMo
 	} else {
@@ -394,7 +446,7 @@ func (o *EquipmentChassisOperation) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminLocatorLedAction")

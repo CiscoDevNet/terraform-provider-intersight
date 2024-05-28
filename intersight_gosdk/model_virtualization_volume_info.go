@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVolumeInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVolumeInfo{}
 
 // VirtualizationVolumeInfo Information about the volume.
 type VirtualizationVolumeInfo struct {
@@ -122,7 +126,7 @@ func (o *VirtualizationVolumeInfo) SetObjectType(v string) {
 
 // GetBootable returns the Bootable field value if set, zero value otherwise.
 func (o *VirtualizationVolumeInfo) GetBootable() bool {
-	if o == nil || o.Bootable == nil {
+	if o == nil || IsNil(o.Bootable) {
 		var ret bool
 		return ret
 	}
@@ -132,7 +136,7 @@ func (o *VirtualizationVolumeInfo) GetBootable() bool {
 // GetBootableOk returns a tuple with the Bootable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVolumeInfo) GetBootableOk() (*bool, bool) {
-	if o == nil || o.Bootable == nil {
+	if o == nil || IsNil(o.Bootable) {
 		return nil, false
 	}
 	return o.Bootable, true
@@ -140,7 +144,7 @@ func (o *VirtualizationVolumeInfo) GetBootableOk() (*bool, bool) {
 
 // HasBootable returns a boolean if a field has been set.
 func (o *VirtualizationVolumeInfo) HasBootable() bool {
-	if o != nil && o.Bootable != nil {
+	if o != nil && !IsNil(o.Bootable) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *VirtualizationVolumeInfo) SetBootable(v bool) {
 
 // GetDeleteOnTermination returns the DeleteOnTermination field value if set, zero value otherwise.
 func (o *VirtualizationVolumeInfo) GetDeleteOnTermination() bool {
-	if o == nil || o.DeleteOnTermination == nil {
+	if o == nil || IsNil(o.DeleteOnTermination) {
 		var ret bool
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *VirtualizationVolumeInfo) GetDeleteOnTermination() bool {
 // GetDeleteOnTerminationOk returns a tuple with the DeleteOnTermination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVolumeInfo) GetDeleteOnTerminationOk() (*bool, bool) {
-	if o == nil || o.DeleteOnTermination == nil {
+	if o == nil || IsNil(o.DeleteOnTermination) {
 		return nil, false
 	}
 	return o.DeleteOnTermination, true
@@ -172,7 +176,7 @@ func (o *VirtualizationVolumeInfo) GetDeleteOnTerminationOk() (*bool, bool) {
 
 // HasDeleteOnTermination returns a boolean if a field has been set.
 func (o *VirtualizationVolumeInfo) HasDeleteOnTermination() bool {
-	if o != nil && o.DeleteOnTermination != nil {
+	if o != nil && !IsNil(o.DeleteOnTermination) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *VirtualizationVolumeInfo) SetDeleteOnTermination(v bool) {
 
 // GetEncryption returns the Encryption field value if set, zero value otherwise.
 func (o *VirtualizationVolumeInfo) GetEncryption() bool {
-	if o == nil || o.Encryption == nil {
+	if o == nil || IsNil(o.Encryption) {
 		var ret bool
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *VirtualizationVolumeInfo) GetEncryption() bool {
 // GetEncryptionOk returns a tuple with the Encryption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVolumeInfo) GetEncryptionOk() (*bool, bool) {
-	if o == nil || o.Encryption == nil {
+	if o == nil || IsNil(o.Encryption) {
 		return nil, false
 	}
 	return o.Encryption, true
@@ -204,7 +208,7 @@ func (o *VirtualizationVolumeInfo) GetEncryptionOk() (*bool, bool) {
 
 // HasEncryption returns a boolean if a field has been set.
 func (o *VirtualizationVolumeInfo) HasEncryption() bool {
-	if o != nil && o.Encryption != nil {
+	if o != nil && !IsNil(o.Encryption) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *VirtualizationVolumeInfo) SetEncryption(v bool) {
 
 // GetIops returns the Iops field value if set, zero value otherwise.
 func (o *VirtualizationVolumeInfo) GetIops() int64 {
-	if o == nil || o.Iops == nil {
+	if o == nil || IsNil(o.Iops) {
 		var ret int64
 		return ret
 	}
@@ -228,7 +232,7 @@ func (o *VirtualizationVolumeInfo) GetIops() int64 {
 // GetIopsOk returns a tuple with the Iops field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVolumeInfo) GetIopsOk() (*int64, bool) {
-	if o == nil || o.Iops == nil {
+	if o == nil || IsNil(o.Iops) {
 		return nil, false
 	}
 	return o.Iops, true
@@ -236,7 +240,7 @@ func (o *VirtualizationVolumeInfo) GetIopsOk() (*int64, bool) {
 
 // HasIops returns a boolean if a field has been set.
 func (o *VirtualizationVolumeInfo) HasIops() bool {
-	if o != nil && o.Iops != nil {
+	if o != nil && !IsNil(o.Iops) {
 		return true
 	}
 
@@ -250,7 +254,7 @@ func (o *VirtualizationVolumeInfo) SetIops(v int64) {
 
 // GetOrder returns the Order field value if set, zero value otherwise.
 func (o *VirtualizationVolumeInfo) GetOrder() int64 {
-	if o == nil || o.Order == nil {
+	if o == nil || IsNil(o.Order) {
 		var ret int64
 		return ret
 	}
@@ -260,7 +264,7 @@ func (o *VirtualizationVolumeInfo) GetOrder() int64 {
 // GetOrderOk returns a tuple with the Order field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVolumeInfo) GetOrderOk() (*int64, bool) {
-	if o == nil || o.Order == nil {
+	if o == nil || IsNil(o.Order) {
 		return nil, false
 	}
 	return o.Order, true
@@ -268,7 +272,7 @@ func (o *VirtualizationVolumeInfo) GetOrderOk() (*int64, bool) {
 
 // HasOrder returns a boolean if a field has been set.
 func (o *VirtualizationVolumeInfo) HasOrder() bool {
-	if o != nil && o.Order != nil {
+	if o != nil && !IsNil(o.Order) {
 		return true
 	}
 
@@ -282,7 +286,7 @@ func (o *VirtualizationVolumeInfo) SetOrder(v int64) {
 
 // GetThroughput returns the Throughput field value if set, zero value otherwise.
 func (o *VirtualizationVolumeInfo) GetThroughput() int64 {
-	if o == nil || o.Throughput == nil {
+	if o == nil || IsNil(o.Throughput) {
 		var ret int64
 		return ret
 	}
@@ -292,7 +296,7 @@ func (o *VirtualizationVolumeInfo) GetThroughput() int64 {
 // GetThroughputOk returns a tuple with the Throughput field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVolumeInfo) GetThroughputOk() (*int64, bool) {
-	if o == nil || o.Throughput == nil {
+	if o == nil || IsNil(o.Throughput) {
 		return nil, false
 	}
 	return o.Throughput, true
@@ -300,7 +304,7 @@ func (o *VirtualizationVolumeInfo) GetThroughputOk() (*int64, bool) {
 
 // HasThroughput returns a boolean if a field has been set.
 func (o *VirtualizationVolumeInfo) HasThroughput() bool {
-	if o != nil && o.Throughput != nil {
+	if o != nil && !IsNil(o.Throughput) {
 		return true
 	}
 
@@ -314,7 +318,7 @@ func (o *VirtualizationVolumeInfo) SetThroughput(v int64) {
 
 // GetVolumeId returns the VolumeId field value if set, zero value otherwise.
 func (o *VirtualizationVolumeInfo) GetVolumeId() string {
-	if o == nil || o.VolumeId == nil {
+	if o == nil || IsNil(o.VolumeId) {
 		var ret string
 		return ret
 	}
@@ -324,7 +328,7 @@ func (o *VirtualizationVolumeInfo) GetVolumeId() string {
 // GetVolumeIdOk returns a tuple with the VolumeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVolumeInfo) GetVolumeIdOk() (*string, bool) {
-	if o == nil || o.VolumeId == nil {
+	if o == nil || IsNil(o.VolumeId) {
 		return nil, false
 	}
 	return o.VolumeId, true
@@ -332,7 +336,7 @@ func (o *VirtualizationVolumeInfo) GetVolumeIdOk() (*string, bool) {
 
 // HasVolumeId returns a boolean if a field has been set.
 func (o *VirtualizationVolumeInfo) HasVolumeId() bool {
-	if o != nil && o.VolumeId != nil {
+	if o != nil && !IsNil(o.VolumeId) {
 		return true
 	}
 
@@ -346,7 +350,7 @@ func (o *VirtualizationVolumeInfo) SetVolumeId(v string) {
 
 // GetVolumeName returns the VolumeName field value if set, zero value otherwise.
 func (o *VirtualizationVolumeInfo) GetVolumeName() string {
-	if o == nil || o.VolumeName == nil {
+	if o == nil || IsNil(o.VolumeName) {
 		var ret string
 		return ret
 	}
@@ -356,7 +360,7 @@ func (o *VirtualizationVolumeInfo) GetVolumeName() string {
 // GetVolumeNameOk returns a tuple with the VolumeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVolumeInfo) GetVolumeNameOk() (*string, bool) {
-	if o == nil || o.VolumeName == nil {
+	if o == nil || IsNil(o.VolumeName) {
 		return nil, false
 	}
 	return o.VolumeName, true
@@ -364,7 +368,7 @@ func (o *VirtualizationVolumeInfo) GetVolumeNameOk() (*string, bool) {
 
 // HasVolumeName returns a boolean if a field has been set.
 func (o *VirtualizationVolumeInfo) HasVolumeName() bool {
-	if o != nil && o.VolumeName != nil {
+	if o != nil && !IsNil(o.VolumeName) {
 		return true
 	}
 
@@ -378,7 +382,7 @@ func (o *VirtualizationVolumeInfo) SetVolumeName(v string) {
 
 // GetVolumeSize returns the VolumeSize field value if set, zero value otherwise.
 func (o *VirtualizationVolumeInfo) GetVolumeSize() int64 {
-	if o == nil || o.VolumeSize == nil {
+	if o == nil || IsNil(o.VolumeSize) {
 		var ret int64
 		return ret
 	}
@@ -388,7 +392,7 @@ func (o *VirtualizationVolumeInfo) GetVolumeSize() int64 {
 // GetVolumeSizeOk returns a tuple with the VolumeSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVolumeInfo) GetVolumeSizeOk() (*int64, bool) {
-	if o == nil || o.VolumeSize == nil {
+	if o == nil || IsNil(o.VolumeSize) {
 		return nil, false
 	}
 	return o.VolumeSize, true
@@ -396,7 +400,7 @@ func (o *VirtualizationVolumeInfo) GetVolumeSizeOk() (*int64, bool) {
 
 // HasVolumeSize returns a boolean if a field has been set.
 func (o *VirtualizationVolumeInfo) HasVolumeSize() bool {
-	if o != nil && o.VolumeSize != nil {
+	if o != nil && !IsNil(o.VolumeSize) {
 		return true
 	}
 
@@ -410,7 +414,7 @@ func (o *VirtualizationVolumeInfo) SetVolumeSize(v int64) {
 
 // GetVolumeType returns the VolumeType field value if set, zero value otherwise.
 func (o *VirtualizationVolumeInfo) GetVolumeType() string {
-	if o == nil || o.VolumeType == nil {
+	if o == nil || IsNil(o.VolumeType) {
 		var ret string
 		return ret
 	}
@@ -420,7 +424,7 @@ func (o *VirtualizationVolumeInfo) GetVolumeType() string {
 // GetVolumeTypeOk returns a tuple with the VolumeType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVolumeInfo) GetVolumeTypeOk() (*string, bool) {
-	if o == nil || o.VolumeType == nil {
+	if o == nil || IsNil(o.VolumeType) {
 		return nil, false
 	}
 	return o.VolumeType, true
@@ -428,7 +432,7 @@ func (o *VirtualizationVolumeInfo) GetVolumeTypeOk() (*string, bool) {
 
 // HasVolumeType returns a boolean if a field has been set.
 func (o *VirtualizationVolumeInfo) HasVolumeType() bool {
-	if o != nil && o.VolumeType != nil {
+	if o != nil && !IsNil(o.VolumeType) {
 		return true
 	}
 
@@ -441,49 +445,53 @@ func (o *VirtualizationVolumeInfo) SetVolumeType(v string) {
 }
 
 func (o VirtualizationVolumeInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVolumeInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Bootable != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Bootable) {
 		toSerialize["Bootable"] = o.Bootable
 	}
-	if o.DeleteOnTermination != nil {
+	if !IsNil(o.DeleteOnTermination) {
 		toSerialize["DeleteOnTermination"] = o.DeleteOnTermination
 	}
-	if o.Encryption != nil {
+	if !IsNil(o.Encryption) {
 		toSerialize["Encryption"] = o.Encryption
 	}
-	if o.Iops != nil {
+	if !IsNil(o.Iops) {
 		toSerialize["Iops"] = o.Iops
 	}
-	if o.Order != nil {
+	if !IsNil(o.Order) {
 		toSerialize["Order"] = o.Order
 	}
-	if o.Throughput != nil {
+	if !IsNil(o.Throughput) {
 		toSerialize["Throughput"] = o.Throughput
 	}
-	if o.VolumeId != nil {
+	if !IsNil(o.VolumeId) {
 		toSerialize["VolumeId"] = o.VolumeId
 	}
-	if o.VolumeName != nil {
+	if !IsNil(o.VolumeName) {
 		toSerialize["VolumeName"] = o.VolumeName
 	}
-	if o.VolumeSize != nil {
+	if !IsNil(o.VolumeSize) {
 		toSerialize["VolumeSize"] = o.VolumeSize
 	}
-	if o.VolumeType != nil {
+	if !IsNil(o.VolumeType) {
 		toSerialize["VolumeType"] = o.VolumeType
 	}
 
@@ -491,10 +499,32 @@ func (o VirtualizationVolumeInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVolumeInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVolumeInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVolumeInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -524,7 +554,7 @@ func (o *VirtualizationVolumeInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationVolumeInfoWithoutEmbeddedStruct := VirtualizationVolumeInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVolumeInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVolumeInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVolumeInfo := _VirtualizationVolumeInfo{}
 		varVirtualizationVolumeInfo.ClassId = varVirtualizationVolumeInfoWithoutEmbeddedStruct.ClassId
@@ -546,7 +576,7 @@ func (o *VirtualizationVolumeInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationVolumeInfo := _VirtualizationVolumeInfo{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVolumeInfo)
+	err = json.Unmarshal(data, &varVirtualizationVolumeInfo)
 	if err == nil {
 		o.MoBaseComplexType = varVirtualizationVolumeInfo.MoBaseComplexType
 	} else {
@@ -555,7 +585,7 @@ func (o *VirtualizationVolumeInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Bootable")

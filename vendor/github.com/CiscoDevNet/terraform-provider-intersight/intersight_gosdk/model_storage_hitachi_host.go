@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageHitachiHost type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageHitachiHost{}
 
 // StorageHitachiHost A host group entity in Hitachi storage array. It is an abstraction used by Hitachi storage to organize the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names) of client computers and to control communications between clients and volumes.
 type StorageHitachiHost struct {
@@ -42,9 +46,9 @@ type StorageHitachiHost struct {
 	// Host Group type, it can be FC or iSCSI. * `FC` - Port supports fibre channel protocol. * `iSCSI` - Port supports iSCSI protocol. * `FCoE` - Port supports fibre channel over ethernet protocol.
 	Type *string `json:"Type,omitempty"`
 	// World wide port name, 64 bit address represented in hexa decimal notation.
-	Wwn                  *string                              `json:"Wwn,omitempty"`
-	Array                *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Wwn                  *string                                     `json:"Wwn,omitempty"`
+	Array                NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -123,7 +127,7 @@ func (o *StorageHitachiHost) SetObjectType(v string) {
 
 // GetAuthenticationMode returns the AuthenticationMode field value if set, zero value otherwise.
 func (o *StorageHitachiHost) GetAuthenticationMode() string {
-	if o == nil || o.AuthenticationMode == nil {
+	if o == nil || IsNil(o.AuthenticationMode) {
 		var ret string
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *StorageHitachiHost) GetAuthenticationMode() string {
 // GetAuthenticationModeOk returns a tuple with the AuthenticationMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiHost) GetAuthenticationModeOk() (*string, bool) {
-	if o == nil || o.AuthenticationMode == nil {
+	if o == nil || IsNil(o.AuthenticationMode) {
 		return nil, false
 	}
 	return o.AuthenticationMode, true
@@ -141,7 +145,7 @@ func (o *StorageHitachiHost) GetAuthenticationModeOk() (*string, bool) {
 
 // HasAuthenticationMode returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasAuthenticationMode() bool {
-	if o != nil && o.AuthenticationMode != nil {
+	if o != nil && !IsNil(o.AuthenticationMode) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *StorageHitachiHost) SetAuthenticationMode(v string) {
 
 // GetHostGroupId returns the HostGroupId field value if set, zero value otherwise.
 func (o *StorageHitachiHost) GetHostGroupId() string {
-	if o == nil || o.HostGroupId == nil {
+	if o == nil || IsNil(o.HostGroupId) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *StorageHitachiHost) GetHostGroupId() string {
 // GetHostGroupIdOk returns a tuple with the HostGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiHost) GetHostGroupIdOk() (*string, bool) {
-	if o == nil || o.HostGroupId == nil {
+	if o == nil || IsNil(o.HostGroupId) {
 		return nil, false
 	}
 	return o.HostGroupId, true
@@ -173,7 +177,7 @@ func (o *StorageHitachiHost) GetHostGroupIdOk() (*string, bool) {
 
 // HasHostGroupId returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasHostGroupId() bool {
-	if o != nil && o.HostGroupId != nil {
+	if o != nil && !IsNil(o.HostGroupId) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *StorageHitachiHost) SetHostGroupId(v string) {
 
 // GetHostGroupNumber returns the HostGroupNumber field value if set, zero value otherwise.
 func (o *StorageHitachiHost) GetHostGroupNumber() int64 {
-	if o == nil || o.HostGroupNumber == nil {
+	if o == nil || IsNil(o.HostGroupNumber) {
 		var ret int64
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *StorageHitachiHost) GetHostGroupNumber() int64 {
 // GetHostGroupNumberOk returns a tuple with the HostGroupNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiHost) GetHostGroupNumberOk() (*int64, bool) {
-	if o == nil || o.HostGroupNumber == nil {
+	if o == nil || IsNil(o.HostGroupNumber) {
 		return nil, false
 	}
 	return o.HostGroupNumber, true
@@ -205,7 +209,7 @@ func (o *StorageHitachiHost) GetHostGroupNumberOk() (*int64, bool) {
 
 // HasHostGroupNumber returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasHostGroupNumber() bool {
-	if o != nil && o.HostGroupNumber != nil {
+	if o != nil && !IsNil(o.HostGroupNumber) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *StorageHitachiHost) GetHostModeOptions() []int64 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiHost) GetHostModeOptionsOk() ([]int64, bool) {
-	if o == nil || o.HostModeOptions == nil {
+	if o == nil || IsNil(o.HostModeOptions) {
 		return nil, false
 	}
 	return o.HostModeOptions, true
@@ -238,7 +242,7 @@ func (o *StorageHitachiHost) GetHostModeOptionsOk() ([]int64, bool) {
 
 // HasHostModeOptions returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasHostModeOptions() bool {
-	if o != nil && o.HostModeOptions != nil {
+	if o != nil && IsNil(o.HostModeOptions) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *StorageHitachiHost) SetHostModeOptions(v []int64) {
 
 // GetIsChapMutual returns the IsChapMutual field value if set, zero value otherwise.
 func (o *StorageHitachiHost) GetIsChapMutual() bool {
-	if o == nil || o.IsChapMutual == nil {
+	if o == nil || IsNil(o.IsChapMutual) {
 		var ret bool
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *StorageHitachiHost) GetIsChapMutual() bool {
 // GetIsChapMutualOk returns a tuple with the IsChapMutual field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiHost) GetIsChapMutualOk() (*bool, bool) {
-	if o == nil || o.IsChapMutual == nil {
+	if o == nil || IsNil(o.IsChapMutual) {
 		return nil, false
 	}
 	return o.IsChapMutual, true
@@ -270,7 +274,7 @@ func (o *StorageHitachiHost) GetIsChapMutualOk() (*bool, bool) {
 
 // HasIsChapMutual returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasIsChapMutual() bool {
-	if o != nil && o.IsChapMutual != nil {
+	if o != nil && !IsNil(o.IsChapMutual) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *StorageHitachiHost) SetIsChapMutual(v bool) {
 
 // GetIscsiName returns the IscsiName field value if set, zero value otherwise.
 func (o *StorageHitachiHost) GetIscsiName() string {
-	if o == nil || o.IscsiName == nil {
+	if o == nil || IsNil(o.IscsiName) {
 		var ret string
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *StorageHitachiHost) GetIscsiName() string {
 // GetIscsiNameOk returns a tuple with the IscsiName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiHost) GetIscsiNameOk() (*string, bool) {
-	if o == nil || o.IscsiName == nil {
+	if o == nil || IsNil(o.IscsiName) {
 		return nil, false
 	}
 	return o.IscsiName, true
@@ -302,7 +306,7 @@ func (o *StorageHitachiHost) GetIscsiNameOk() (*string, bool) {
 
 // HasIscsiName returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasIscsiName() bool {
-	if o != nil && o.IscsiName != nil {
+	if o != nil && !IsNil(o.IscsiName) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *StorageHitachiHost) SetIscsiName(v string) {
 
 // GetPortId returns the PortId field value if set, zero value otherwise.
 func (o *StorageHitachiHost) GetPortId() string {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		var ret string
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *StorageHitachiHost) GetPortId() string {
 // GetPortIdOk returns a tuple with the PortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiHost) GetPortIdOk() (*string, bool) {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		return nil, false
 	}
 	return o.PortId, true
@@ -334,7 +338,7 @@ func (o *StorageHitachiHost) GetPortIdOk() (*string, bool) {
 
 // HasPortId returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasPortId() bool {
-	if o != nil && o.PortId != nil {
+	if o != nil && !IsNil(o.PortId) {
 		return true
 	}
 
@@ -348,7 +352,7 @@ func (o *StorageHitachiHost) SetPortId(v string) {
 
 // GetPortLunSecurity returns the PortLunSecurity field value if set, zero value otherwise.
 func (o *StorageHitachiHost) GetPortLunSecurity() bool {
-	if o == nil || o.PortLunSecurity == nil {
+	if o == nil || IsNil(o.PortLunSecurity) {
 		var ret bool
 		return ret
 	}
@@ -358,7 +362,7 @@ func (o *StorageHitachiHost) GetPortLunSecurity() bool {
 // GetPortLunSecurityOk returns a tuple with the PortLunSecurity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiHost) GetPortLunSecurityOk() (*bool, bool) {
-	if o == nil || o.PortLunSecurity == nil {
+	if o == nil || IsNil(o.PortLunSecurity) {
 		return nil, false
 	}
 	return o.PortLunSecurity, true
@@ -366,7 +370,7 @@ func (o *StorageHitachiHost) GetPortLunSecurityOk() (*bool, bool) {
 
 // HasPortLunSecurity returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasPortLunSecurity() bool {
-	if o != nil && o.PortLunSecurity != nil {
+	if o != nil && !IsNil(o.PortLunSecurity) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *StorageHitachiHost) SetPortLunSecurity(v bool) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StorageHitachiHost) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *StorageHitachiHost) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiHost) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -398,7 +402,7 @@ func (o *StorageHitachiHost) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *StorageHitachiHost) SetType(v string) {
 
 // GetWwn returns the Wwn field value if set, zero value otherwise.
 func (o *StorageHitachiHost) GetWwn() string {
-	if o == nil || o.Wwn == nil {
+	if o == nil || IsNil(o.Wwn) {
 		var ret string
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *StorageHitachiHost) GetWwn() string {
 // GetWwnOk returns a tuple with the Wwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiHost) GetWwnOk() (*string, bool) {
-	if o == nil || o.Wwn == nil {
+	if o == nil || IsNil(o.Wwn) {
 		return nil, false
 	}
 	return o.Wwn, true
@@ -430,7 +434,7 @@ func (o *StorageHitachiHost) GetWwnOk() (*string, bool) {
 
 // HasWwn returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasWwn() bool {
-	if o != nil && o.Wwn != nil {
+	if o != nil && !IsNil(o.Wwn) {
 		return true
 	}
 
@@ -442,131 +446,179 @@ func (o *StorageHitachiHost) SetWwn(v string) {
 	o.Wwn = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiHost) GetArray() StorageHitachiArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageHitachiArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiHost) GetArrayOk() (*StorageHitachiArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageHitachiArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageHitachiArrayRelationship and assigns it to the Array field.
 func (o *StorageHitachiHost) SetArray(v StorageHitachiArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageHitachiHost) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageHitachiHost) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiHost) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiHost) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageHitachiHost) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageHitachiHost) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageHitachiHost) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageHitachiHost) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageHitachiHost) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageHitachiHost) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseHost, errStorageBaseHost := json.Marshal(o.StorageBaseHost)
 	if errStorageBaseHost != nil {
-		return []byte{}, errStorageBaseHost
+		return map[string]interface{}{}, errStorageBaseHost
 	}
 	errStorageBaseHost = json.Unmarshal([]byte(serializedStorageBaseHost), &toSerialize)
 	if errStorageBaseHost != nil {
-		return []byte{}, errStorageBaseHost
+		return map[string]interface{}{}, errStorageBaseHost
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AuthenticationMode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AuthenticationMode) {
 		toSerialize["AuthenticationMode"] = o.AuthenticationMode
 	}
-	if o.HostGroupId != nil {
+	if !IsNil(o.HostGroupId) {
 		toSerialize["HostGroupId"] = o.HostGroupId
 	}
-	if o.HostGroupNumber != nil {
+	if !IsNil(o.HostGroupNumber) {
 		toSerialize["HostGroupNumber"] = o.HostGroupNumber
 	}
 	if o.HostModeOptions != nil {
 		toSerialize["HostModeOptions"] = o.HostModeOptions
 	}
-	if o.IsChapMutual != nil {
+	if !IsNil(o.IsChapMutual) {
 		toSerialize["IsChapMutual"] = o.IsChapMutual
 	}
-	if o.IscsiName != nil {
+	if !IsNil(o.IscsiName) {
 		toSerialize["IscsiName"] = o.IscsiName
 	}
-	if o.PortId != nil {
+	if !IsNil(o.PortId) {
 		toSerialize["PortId"] = o.PortId
 	}
-	if o.PortLunSecurity != nil {
+	if !IsNil(o.PortLunSecurity) {
 		toSerialize["PortLunSecurity"] = o.PortLunSecurity
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Wwn != nil {
+	if !IsNil(o.Wwn) {
 		toSerialize["Wwn"] = o.Wwn
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageHitachiHost) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageHitachiHost) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageHitachiHostWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -590,14 +642,14 @@ func (o *StorageHitachiHost) UnmarshalJSON(bytes []byte) (err error) {
 		// Host Group type, it can be FC or iSCSI. * `FC` - Port supports fibre channel protocol. * `iSCSI` - Port supports iSCSI protocol. * `FCoE` - Port supports fibre channel over ethernet protocol.
 		Type *string `json:"Type,omitempty"`
 		// World wide port name, 64 bit address represented in hexa decimal notation.
-		Wwn              *string                              `json:"Wwn,omitempty"`
-		Array            *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Wwn              *string                                     `json:"Wwn,omitempty"`
+		Array            NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageHitachiHostWithoutEmbeddedStruct := StorageHitachiHostWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiHostWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageHitachiHostWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageHitachiHost := _StorageHitachiHost{}
 		varStorageHitachiHost.ClassId = varStorageHitachiHostWithoutEmbeddedStruct.ClassId
@@ -621,7 +673,7 @@ func (o *StorageHitachiHost) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageHitachiHost := _StorageHitachiHost{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiHost)
+	err = json.Unmarshal(data, &varStorageHitachiHost)
 	if err == nil {
 		o.StorageBaseHost = varStorageHitachiHost.StorageBaseHost
 	} else {
@@ -630,7 +682,7 @@ func (o *StorageHitachiHost) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AuthenticationMode")

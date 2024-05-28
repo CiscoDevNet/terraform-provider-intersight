@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **DeviceId** | Pointer to **int64** | Device Id of a product, which is unique within a vendor. | [optional] 
 **Name** | Pointer to **string** | Display Name of a product. | [optional] 
 **VendorId** | Pointer to **int64** | Vendor Id of a product. Each vendor has a globally unique Id, for example 0x10DE for Nvidia. | [optional] 
-**Catalog** | Pointer to [**KubernetesCatalogRelationship**](KubernetesCatalogRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableKubernetesCatalogRelationship**](KubernetesCatalogRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -196,6 +196,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *KubernetesBaseProduct) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *KubernetesBaseProduct) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

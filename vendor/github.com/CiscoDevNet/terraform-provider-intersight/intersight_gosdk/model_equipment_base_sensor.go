@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentBaseSensor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentBaseSensor{}
 
 // EquipmentBaseSensor Information for a particular sensor on a storage array controller.
 type EquipmentBaseSensor struct {
@@ -114,7 +118,7 @@ func (o *EquipmentBaseSensor) SetObjectType(v string) {
 
 // GetControllerName returns the ControllerName field value if set, zero value otherwise.
 func (o *EquipmentBaseSensor) GetControllerName() string {
-	if o == nil || o.ControllerName == nil {
+	if o == nil || IsNil(o.ControllerName) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *EquipmentBaseSensor) GetControllerName() string {
 // GetControllerNameOk returns a tuple with the ControllerName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBaseSensor) GetControllerNameOk() (*string, bool) {
-	if o == nil || o.ControllerName == nil {
+	if o == nil || IsNil(o.ControllerName) {
 		return nil, false
 	}
 	return o.ControllerName, true
@@ -132,7 +136,7 @@ func (o *EquipmentBaseSensor) GetControllerNameOk() (*string, bool) {
 
 // HasControllerName returns a boolean if a field has been set.
 func (o *EquipmentBaseSensor) HasControllerName() bool {
-	if o != nil && o.ControllerName != nil {
+	if o != nil && !IsNil(o.ControllerName) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *EquipmentBaseSensor) SetControllerName(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *EquipmentBaseSensor) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *EquipmentBaseSensor) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBaseSensor) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -164,7 +168,7 @@ func (o *EquipmentBaseSensor) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *EquipmentBaseSensor) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *EquipmentBaseSensor) SetName(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *EquipmentBaseSensor) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *EquipmentBaseSensor) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBaseSensor) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -196,7 +200,7 @@ func (o *EquipmentBaseSensor) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *EquipmentBaseSensor) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *EquipmentBaseSensor) SetState(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *EquipmentBaseSensor) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *EquipmentBaseSensor) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBaseSensor) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -228,7 +232,7 @@ func (o *EquipmentBaseSensor) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *EquipmentBaseSensor) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *EquipmentBaseSensor) SetType(v string) {
 
 // GetUnits returns the Units field value if set, zero value otherwise.
 func (o *EquipmentBaseSensor) GetUnits() string {
-	if o == nil || o.Units == nil {
+	if o == nil || IsNil(o.Units) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *EquipmentBaseSensor) GetUnits() string {
 // GetUnitsOk returns a tuple with the Units field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBaseSensor) GetUnitsOk() (*string, bool) {
-	if o == nil || o.Units == nil {
+	if o == nil || IsNil(o.Units) {
 		return nil, false
 	}
 	return o.Units, true
@@ -260,7 +264,7 @@ func (o *EquipmentBaseSensor) GetUnitsOk() (*string, bool) {
 
 // HasUnits returns a boolean if a field has been set.
 func (o *EquipmentBaseSensor) HasUnits() bool {
-	if o != nil && o.Units != nil {
+	if o != nil && !IsNil(o.Units) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *EquipmentBaseSensor) SetUnits(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *EquipmentBaseSensor) GetValue() string {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		var ret string
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *EquipmentBaseSensor) GetValue() string {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentBaseSensor) GetValueOk() (*string, bool) {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
 	return o.Value, true
@@ -292,7 +296,7 @@ func (o *EquipmentBaseSensor) GetValueOk() (*string, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *EquipmentBaseSensor) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -305,37 +309,41 @@ func (o *EquipmentBaseSensor) SetValue(v string) {
 }
 
 func (o EquipmentBaseSensor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentBaseSensor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ControllerName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ControllerName) {
 		toSerialize["ControllerName"] = o.ControllerName
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Units != nil {
+	if !IsNil(o.Units) {
 		toSerialize["Units"] = o.Units
 	}
-	if o.Value != nil {
+	if !IsNil(o.Value) {
 		toSerialize["Value"] = o.Value
 	}
 
@@ -343,10 +351,32 @@ func (o EquipmentBaseSensor) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentBaseSensor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentBaseSensor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentBaseSensorWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -368,7 +398,7 @@ func (o *EquipmentBaseSensor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentBaseSensorWithoutEmbeddedStruct := EquipmentBaseSensorWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentBaseSensorWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentBaseSensorWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentBaseSensor := _EquipmentBaseSensor{}
 		varEquipmentBaseSensor.ClassId = varEquipmentBaseSensorWithoutEmbeddedStruct.ClassId
@@ -386,7 +416,7 @@ func (o *EquipmentBaseSensor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentBaseSensor := _EquipmentBaseSensor{}
 
-	err = json.Unmarshal(bytes, &varEquipmentBaseSensor)
+	err = json.Unmarshal(data, &varEquipmentBaseSensor)
 	if err == nil {
 		o.MoBaseMo = varEquipmentBaseSensor.MoBaseMo
 	} else {
@@ -395,7 +425,7 @@ func (o *EquipmentBaseSensor) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ControllerName")

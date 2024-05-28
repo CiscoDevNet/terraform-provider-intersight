@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetGoogleCloudPlatformServiceAccountKeyCredential type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetGoogleCloudPlatformServiceAccountKeyCredential{}
 
 // AssetGoogleCloudPlatformServiceAccountKeyCredential Google APIs use the OAuth 2.0 protocol for authentication and authorization. Google Cloud Platform (GCP) service account's key JSON file to get an access token to call Google APIs. Documentation : [link](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
 type AssetGoogleCloudPlatformServiceAccountKeyCredential struct {
@@ -112,7 +116,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) SetObjectType(v st
 
 // GetIsServiceAccountKeySet returns the IsServiceAccountKeySet field value if set, zero value otherwise.
 func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetIsServiceAccountKeySet() bool {
-	if o == nil || o.IsServiceAccountKeySet == nil {
+	if o == nil || IsNil(o.IsServiceAccountKeySet) {
 		var ret bool
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetIsServiceAccoun
 // GetIsServiceAccountKeySetOk returns a tuple with the IsServiceAccountKeySet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetIsServiceAccountKeySetOk() (*bool, bool) {
-	if o == nil || o.IsServiceAccountKeySet == nil {
+	if o == nil || IsNil(o.IsServiceAccountKeySet) {
 		return nil, false
 	}
 	return o.IsServiceAccountKeySet, true
@@ -130,7 +134,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetIsServiceAccoun
 
 // HasIsServiceAccountKeySet returns a boolean if a field has been set.
 func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) HasIsServiceAccountKeySet() bool {
-	if o != nil && o.IsServiceAccountKeySet != nil {
+	if o != nil && !IsNil(o.IsServiceAccountKeySet) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) SetIsServiceAccoun
 
 // GetKeyType returns the KeyType field value if set, zero value otherwise.
 func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetKeyType() string {
-	if o == nil || o.KeyType == nil {
+	if o == nil || IsNil(o.KeyType) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetKeyType() strin
 // GetKeyTypeOk returns a tuple with the KeyType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetKeyTypeOk() (*string, bool) {
-	if o == nil || o.KeyType == nil {
+	if o == nil || IsNil(o.KeyType) {
 		return nil, false
 	}
 	return o.KeyType, true
@@ -162,7 +166,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetKeyTypeOk() (*s
 
 // HasKeyType returns a boolean if a field has been set.
 func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) HasKeyType() bool {
-	if o != nil && o.KeyType != nil {
+	if o != nil && !IsNil(o.KeyType) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) SetKeyType(v strin
 
 // GetServiceAccountKey returns the ServiceAccountKey field value if set, zero value otherwise.
 func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetServiceAccountKey() string {
-	if o == nil || o.ServiceAccountKey == nil {
+	if o == nil || IsNil(o.ServiceAccountKey) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetServiceAccountK
 // GetServiceAccountKeyOk returns a tuple with the ServiceAccountKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetServiceAccountKeyOk() (*string, bool) {
-	if o == nil || o.ServiceAccountKey == nil {
+	if o == nil || IsNil(o.ServiceAccountKey) {
 		return nil, false
 	}
 	return o.ServiceAccountKey, true
@@ -194,7 +198,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) GetServiceAccountK
 
 // HasServiceAccountKey returns a boolean if a field has been set.
 func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) HasServiceAccountKey() bool {
-	if o != nil && o.ServiceAccountKey != nil {
+	if o != nil && !IsNil(o.ServiceAccountKey) {
 		return true
 	}
 
@@ -207,28 +211,32 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) SetServiceAccountK
 }
 
 func (o AssetGoogleCloudPlatformServiceAccountKeyCredential) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetGoogleCloudPlatformServiceAccountKeyCredential) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedAssetCredential, errAssetCredential := json.Marshal(o.AssetCredential)
 	if errAssetCredential != nil {
-		return []byte{}, errAssetCredential
+		return map[string]interface{}{}, errAssetCredential
 	}
 	errAssetCredential = json.Unmarshal([]byte(serializedAssetCredential), &toSerialize)
 	if errAssetCredential != nil {
-		return []byte{}, errAssetCredential
+		return map[string]interface{}{}, errAssetCredential
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsServiceAccountKeySet != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsServiceAccountKeySet) {
 		toSerialize["IsServiceAccountKeySet"] = o.IsServiceAccountKeySet
 	}
-	if o.KeyType != nil {
+	if !IsNil(o.KeyType) {
 		toSerialize["KeyType"] = o.KeyType
 	}
-	if o.ServiceAccountKey != nil {
+	if !IsNil(o.ServiceAccountKey) {
 		toSerialize["ServiceAccountKey"] = o.ServiceAccountKey
 	}
 
@@ -236,10 +244,32 @@ func (o AssetGoogleCloudPlatformServiceAccountKeyCredential) MarshalJSON() ([]by
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetGoogleCloudPlatformServiceAccountKeyCredentialWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -255,7 +285,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) UnmarshalJSON(byte
 
 	varAssetGoogleCloudPlatformServiceAccountKeyCredentialWithoutEmbeddedStruct := AssetGoogleCloudPlatformServiceAccountKeyCredentialWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetGoogleCloudPlatformServiceAccountKeyCredentialWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetGoogleCloudPlatformServiceAccountKeyCredentialWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetGoogleCloudPlatformServiceAccountKeyCredential := _AssetGoogleCloudPlatformServiceAccountKeyCredential{}
 		varAssetGoogleCloudPlatformServiceAccountKeyCredential.ClassId = varAssetGoogleCloudPlatformServiceAccountKeyCredentialWithoutEmbeddedStruct.ClassId
@@ -270,7 +300,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) UnmarshalJSON(byte
 
 	varAssetGoogleCloudPlatformServiceAccountKeyCredential := _AssetGoogleCloudPlatformServiceAccountKeyCredential{}
 
-	err = json.Unmarshal(bytes, &varAssetGoogleCloudPlatformServiceAccountKeyCredential)
+	err = json.Unmarshal(data, &varAssetGoogleCloudPlatformServiceAccountKeyCredential)
 	if err == nil {
 		o.AssetCredential = varAssetGoogleCloudPlatformServiceAccountKeyCredential.AssetCredential
 	} else {
@@ -279,7 +309,7 @@ func (o *AssetGoogleCloudPlatformServiceAccountKeyCredential) UnmarshalJSON(byte
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsServiceAccountKeySet")

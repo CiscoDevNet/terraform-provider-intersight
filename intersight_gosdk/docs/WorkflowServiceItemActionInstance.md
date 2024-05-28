@@ -18,16 +18,16 @@ Name | Type | Description | Notes
 **StartTime** | Pointer to **time.Time** | The time when the action was started for execution last time. | [optional] [readonly] 
 **Status** | Pointer to **string** | State of the service item action instance. * &#x60;NotStarted&#x60; - An action on the service item is not yet started and it is in a draft mode. A service item action instance can be deleted in this state. * &#x60;Validating&#x60; - A validate action has been triggered on the action and until it completes the start action cannot be issued. * &#x60;InProgress&#x60; - An action is in progress and until that action has reached a final state, another action cannot be started. * &#x60;Failed&#x60; - The action on the service item instance failed and can be retried. * &#x60;Completed&#x60; - The action on the service item instance completed successfully. * &#x60;Stopping&#x60; - The stop action is running on the action instance. * &#x60;Stopped&#x60; - The action on the service item instance has stopped. | [optional] [readonly] [default to "NotStarted"]
 **UserIdOrEmail** | Pointer to **string** | The user identifier who invoked the request to create the service item instance. | [optional] [readonly] 
-**ActionWorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**ActionWorkflowInfo** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 **CatalogServiceRequest** | Pointer to [**[]WorkflowCatalogServiceRequestRelationship**](WorkflowCatalogServiceRequestRelationship.md) | An array of relationships to workflowCatalogServiceRequest resources. | [optional] [readonly] 
-**Idp** | Pointer to [**IamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
-**IdpReference** | Pointer to [**IamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
-**ServiceItemActionDefinition** | Pointer to [**WorkflowServiceItemActionDefinitionRelationship**](WorkflowServiceItemActionDefinitionRelationship.md) |  | [optional] 
-**ServiceItemDefinition** | Pointer to [**WorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
-**ServiceItemInstance** | Pointer to [**WorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
-**StopWorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
-**User** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
-**ValidationWorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**Idp** | Pointer to [**NullableIamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
+**IdpReference** | Pointer to [**NullableIamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
+**ServiceItemActionDefinition** | Pointer to [**NullableWorkflowServiceItemActionDefinitionRelationship**](WorkflowServiceItemActionDefinitionRelationship.md) |  | [optional] 
+**ServiceItemDefinition** | Pointer to [**NullableWorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
+**ServiceItemInstance** | Pointer to [**NullableWorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
+**StopWorkflowInfo** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**User** | Pointer to [**NullableIamUserRelationship**](IamUserRelationship.md) |  | [optional] 
+**ValidationWorkflowInfo** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -453,6 +453,16 @@ SetActionWorkflowInfo sets ActionWorkflowInfo field to given value.
 
 HasActionWorkflowInfo returns a boolean if a field has been set.
 
+### SetActionWorkflowInfoNil
+
+`func (o *WorkflowServiceItemActionInstance) SetActionWorkflowInfoNil(b bool)`
+
+ SetActionWorkflowInfoNil sets the value for ActionWorkflowInfo to be an explicit nil
+
+### UnsetActionWorkflowInfo
+`func (o *WorkflowServiceItemActionInstance) UnsetActionWorkflowInfo()`
+
+UnsetActionWorkflowInfo ensures that no value is present for ActionWorkflowInfo, not even an explicit nil
 ### GetCatalogServiceRequest
 
 `func (o *WorkflowServiceItemActionInstance) GetCatalogServiceRequest() []WorkflowCatalogServiceRequestRelationship`
@@ -513,6 +523,16 @@ SetIdp sets Idp field to given value.
 
 HasIdp returns a boolean if a field has been set.
 
+### SetIdpNil
+
+`func (o *WorkflowServiceItemActionInstance) SetIdpNil(b bool)`
+
+ SetIdpNil sets the value for Idp to be an explicit nil
+
+### UnsetIdp
+`func (o *WorkflowServiceItemActionInstance) UnsetIdp()`
+
+UnsetIdp ensures that no value is present for Idp, not even an explicit nil
 ### GetIdpReference
 
 `func (o *WorkflowServiceItemActionInstance) GetIdpReference() IamIdpReferenceRelationship`
@@ -538,6 +558,16 @@ SetIdpReference sets IdpReference field to given value.
 
 HasIdpReference returns a boolean if a field has been set.
 
+### SetIdpReferenceNil
+
+`func (o *WorkflowServiceItemActionInstance) SetIdpReferenceNil(b bool)`
+
+ SetIdpReferenceNil sets the value for IdpReference to be an explicit nil
+
+### UnsetIdpReference
+`func (o *WorkflowServiceItemActionInstance) UnsetIdpReference()`
+
+UnsetIdpReference ensures that no value is present for IdpReference, not even an explicit nil
 ### GetServiceItemActionDefinition
 
 `func (o *WorkflowServiceItemActionInstance) GetServiceItemActionDefinition() WorkflowServiceItemActionDefinitionRelationship`
@@ -563,6 +593,16 @@ SetServiceItemActionDefinition sets ServiceItemActionDefinition field to given v
 
 HasServiceItemActionDefinition returns a boolean if a field has been set.
 
+### SetServiceItemActionDefinitionNil
+
+`func (o *WorkflowServiceItemActionInstance) SetServiceItemActionDefinitionNil(b bool)`
+
+ SetServiceItemActionDefinitionNil sets the value for ServiceItemActionDefinition to be an explicit nil
+
+### UnsetServiceItemActionDefinition
+`func (o *WorkflowServiceItemActionInstance) UnsetServiceItemActionDefinition()`
+
+UnsetServiceItemActionDefinition ensures that no value is present for ServiceItemActionDefinition, not even an explicit nil
 ### GetServiceItemDefinition
 
 `func (o *WorkflowServiceItemActionInstance) GetServiceItemDefinition() WorkflowServiceItemDefinitionRelationship`
@@ -588,6 +628,16 @@ SetServiceItemDefinition sets ServiceItemDefinition field to given value.
 
 HasServiceItemDefinition returns a boolean if a field has been set.
 
+### SetServiceItemDefinitionNil
+
+`func (o *WorkflowServiceItemActionInstance) SetServiceItemDefinitionNil(b bool)`
+
+ SetServiceItemDefinitionNil sets the value for ServiceItemDefinition to be an explicit nil
+
+### UnsetServiceItemDefinition
+`func (o *WorkflowServiceItemActionInstance) UnsetServiceItemDefinition()`
+
+UnsetServiceItemDefinition ensures that no value is present for ServiceItemDefinition, not even an explicit nil
 ### GetServiceItemInstance
 
 `func (o *WorkflowServiceItemActionInstance) GetServiceItemInstance() WorkflowServiceItemInstanceRelationship`
@@ -613,6 +663,16 @@ SetServiceItemInstance sets ServiceItemInstance field to given value.
 
 HasServiceItemInstance returns a boolean if a field has been set.
 
+### SetServiceItemInstanceNil
+
+`func (o *WorkflowServiceItemActionInstance) SetServiceItemInstanceNil(b bool)`
+
+ SetServiceItemInstanceNil sets the value for ServiceItemInstance to be an explicit nil
+
+### UnsetServiceItemInstance
+`func (o *WorkflowServiceItemActionInstance) UnsetServiceItemInstance()`
+
+UnsetServiceItemInstance ensures that no value is present for ServiceItemInstance, not even an explicit nil
 ### GetStopWorkflowInfo
 
 `func (o *WorkflowServiceItemActionInstance) GetStopWorkflowInfo() WorkflowWorkflowInfoRelationship`
@@ -638,6 +698,16 @@ SetStopWorkflowInfo sets StopWorkflowInfo field to given value.
 
 HasStopWorkflowInfo returns a boolean if a field has been set.
 
+### SetStopWorkflowInfoNil
+
+`func (o *WorkflowServiceItemActionInstance) SetStopWorkflowInfoNil(b bool)`
+
+ SetStopWorkflowInfoNil sets the value for StopWorkflowInfo to be an explicit nil
+
+### UnsetStopWorkflowInfo
+`func (o *WorkflowServiceItemActionInstance) UnsetStopWorkflowInfo()`
+
+UnsetStopWorkflowInfo ensures that no value is present for StopWorkflowInfo, not even an explicit nil
 ### GetUser
 
 `func (o *WorkflowServiceItemActionInstance) GetUser() IamUserRelationship`
@@ -663,6 +733,16 @@ SetUser sets User field to given value.
 
 HasUser returns a boolean if a field has been set.
 
+### SetUserNil
+
+`func (o *WorkflowServiceItemActionInstance) SetUserNil(b bool)`
+
+ SetUserNil sets the value for User to be an explicit nil
+
+### UnsetUser
+`func (o *WorkflowServiceItemActionInstance) UnsetUser()`
+
+UnsetUser ensures that no value is present for User, not even an explicit nil
 ### GetValidationWorkflowInfo
 
 `func (o *WorkflowServiceItemActionInstance) GetValidationWorkflowInfo() WorkflowWorkflowInfoRelationship`
@@ -688,6 +768,16 @@ SetValidationWorkflowInfo sets ValidationWorkflowInfo field to given value.
 
 HasValidationWorkflowInfo returns a boolean if a field has been set.
 
+### SetValidationWorkflowInfoNil
+
+`func (o *WorkflowServiceItemActionInstance) SetValidationWorkflowInfoNil(b bool)`
+
+ SetValidationWorkflowInfoNil sets the value for ValidationWorkflowInfo to be an explicit nil
+
+### UnsetValidationWorkflowInfo
+`func (o *WorkflowServiceItemActionInstance) UnsetValidationWorkflowInfo()`
+
+UnsetValidationWorkflowInfo ensures that no value is present for ValidationWorkflowInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

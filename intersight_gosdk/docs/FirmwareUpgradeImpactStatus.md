@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.UpgradeImpactStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.UpgradeImpactStatus"]
-**Upgrade** | Pointer to [**FirmwareUpgradeBaseRelationship**](FirmwareUpgradeBaseRelationship.md) |  | [optional] 
+**Upgrade** | Pointer to [**NullableFirmwareUpgradeBaseRelationship**](FirmwareUpgradeBaseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetUpgrade sets Upgrade field to given value.
 
 HasUpgrade returns a boolean if a field has been set.
 
+### SetUpgradeNil
+
+`func (o *FirmwareUpgradeImpactStatus) SetUpgradeNil(b bool)`
+
+ SetUpgradeNil sets the value for Upgrade to be an explicit nil
+
+### UnsetUpgrade
+`func (o *FirmwareUpgradeImpactStatus) UnsetUpgrade()`
+
+UnsetUpgrade ensures that no value is present for Upgrade, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ClusterUuid** | Pointer to **string** | Unique identity of the device. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the license package. | [optional] [readonly] 
 **State** | Pointer to **string** | Summary state of license package based on all installed licenses. * &#x60;Unknown&#x60; - The summary state of the license package is unknown. * &#x60;Compliant&#x60; - The summary state of the license package is compliant. * &#x60;Noncompliant&#x60; - The summary state of the license package is noncompliant. * &#x60;Unlicensed&#x60; - The summary state of the license package is unlicensed. | [optional] [readonly] [default to "Unknown"]
-**Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -170,6 +170,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StorageNetAppLicense) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StorageNetAppLicense) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

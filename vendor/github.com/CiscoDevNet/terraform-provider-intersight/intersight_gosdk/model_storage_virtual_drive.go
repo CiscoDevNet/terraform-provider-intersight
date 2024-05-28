@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageVirtualDrive type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageVirtualDrive{}
 
 // StorageVirtualDrive A Virtual Disk Drive or Logical Unit Number.
 type StorageVirtualDrive struct {
@@ -73,17 +77,17 @@ type StorageVirtualDrive struct {
 	// The UUID value of the vendor.
 	VendorUuid *string `json:"VendorUuid,omitempty"`
 	// The identifier for this Virtual drive.
-	VirtualDriveId      *string                          `json:"VirtualDriveId,omitempty"`
-	DiskGroup           *StorageDiskGroupRelationship    `json:"DiskGroup,omitempty"`
-	InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+	VirtualDriveId      *string                                 `json:"VirtualDriveId,omitempty"`
+	DiskGroup           NullableStorageDiskGroupRelationship    `json:"DiskGroup,omitempty"`
+	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 	// An array of relationships to storagePhysicalDiskUsage resources.
-	PhysicalDiskUsages           []StoragePhysicalDiskUsageRelationship    `json:"PhysicalDiskUsages,omitempty"`
-	RegisteredDevice             *AssetDeviceRegistrationRelationship      `json:"RegisteredDevice,omitempty"`
-	StorageController            *StorageControllerRelationship            `json:"StorageController,omitempty"`
-	StorageVirtualDriveContainer *StorageVirtualDriveContainerRelationship `json:"StorageVirtualDriveContainer,omitempty"`
+	PhysicalDiskUsages           []StoragePhysicalDiskUsageRelationship           `json:"PhysicalDiskUsages,omitempty"`
+	RegisteredDevice             NullableAssetDeviceRegistrationRelationship      `json:"RegisteredDevice,omitempty"`
+	StorageController            NullableStorageControllerRelationship            `json:"StorageController,omitempty"`
+	StorageVirtualDriveContainer NullableStorageVirtualDriveContainerRelationship `json:"StorageVirtualDriveContainer,omitempty"`
 	// An array of relationships to storageVdMemberEp resources.
-	VdMemberEps           []StorageVdMemberEpRelationship           `json:"VdMemberEps,omitempty"`
-	VirtualDriveExtension *StorageVirtualDriveExtensionRelationship `json:"VirtualDriveExtension,omitempty"`
+	VdMemberEps           []StorageVdMemberEpRelationship                  `json:"VdMemberEps,omitempty"`
+	VirtualDriveExtension NullableStorageVirtualDriveExtensionRelationship `json:"VirtualDriveExtension,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -162,7 +166,7 @@ func (o *StorageVirtualDrive) SetObjectType(v string) {
 
 // GetAccessPolicy returns the AccessPolicy field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetAccessPolicy() string {
-	if o == nil || o.AccessPolicy == nil {
+	if o == nil || IsNil(o.AccessPolicy) {
 		var ret string
 		return ret
 	}
@@ -172,7 +176,7 @@ func (o *StorageVirtualDrive) GetAccessPolicy() string {
 // GetAccessPolicyOk returns a tuple with the AccessPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetAccessPolicyOk() (*string, bool) {
-	if o == nil || o.AccessPolicy == nil {
+	if o == nil || IsNil(o.AccessPolicy) {
 		return nil, false
 	}
 	return o.AccessPolicy, true
@@ -180,7 +184,7 @@ func (o *StorageVirtualDrive) GetAccessPolicyOk() (*string, bool) {
 
 // HasAccessPolicy returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasAccessPolicy() bool {
-	if o != nil && o.AccessPolicy != nil {
+	if o != nil && !IsNil(o.AccessPolicy) {
 		return true
 	}
 
@@ -194,7 +198,7 @@ func (o *StorageVirtualDrive) SetAccessPolicy(v string) {
 
 // GetActualWriteCachePolicy returns the ActualWriteCachePolicy field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetActualWriteCachePolicy() string {
-	if o == nil || o.ActualWriteCachePolicy == nil {
+	if o == nil || IsNil(o.ActualWriteCachePolicy) {
 		var ret string
 		return ret
 	}
@@ -204,7 +208,7 @@ func (o *StorageVirtualDrive) GetActualWriteCachePolicy() string {
 // GetActualWriteCachePolicyOk returns a tuple with the ActualWriteCachePolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetActualWriteCachePolicyOk() (*string, bool) {
-	if o == nil || o.ActualWriteCachePolicy == nil {
+	if o == nil || IsNil(o.ActualWriteCachePolicy) {
 		return nil, false
 	}
 	return o.ActualWriteCachePolicy, true
@@ -212,7 +216,7 @@ func (o *StorageVirtualDrive) GetActualWriteCachePolicyOk() (*string, bool) {
 
 // HasActualWriteCachePolicy returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasActualWriteCachePolicy() bool {
-	if o != nil && o.ActualWriteCachePolicy != nil {
+	if o != nil && !IsNil(o.ActualWriteCachePolicy) {
 		return true
 	}
 
@@ -226,7 +230,7 @@ func (o *StorageVirtualDrive) SetActualWriteCachePolicy(v string) {
 
 // GetAvailableSize returns the AvailableSize field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetAvailableSize() string {
-	if o == nil || o.AvailableSize == nil {
+	if o == nil || IsNil(o.AvailableSize) {
 		var ret string
 		return ret
 	}
@@ -236,7 +240,7 @@ func (o *StorageVirtualDrive) GetAvailableSize() string {
 // GetAvailableSizeOk returns a tuple with the AvailableSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetAvailableSizeOk() (*string, bool) {
-	if o == nil || o.AvailableSize == nil {
+	if o == nil || IsNil(o.AvailableSize) {
 		return nil, false
 	}
 	return o.AvailableSize, true
@@ -244,7 +248,7 @@ func (o *StorageVirtualDrive) GetAvailableSizeOk() (*string, bool) {
 
 // HasAvailableSize returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasAvailableSize() bool {
-	if o != nil && o.AvailableSize != nil {
+	if o != nil && !IsNil(o.AvailableSize) {
 		return true
 	}
 
@@ -258,7 +262,7 @@ func (o *StorageVirtualDrive) SetAvailableSize(v string) {
 
 // GetBlockSize returns the BlockSize field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetBlockSize() string {
-	if o == nil || o.BlockSize == nil {
+	if o == nil || IsNil(o.BlockSize) {
 		var ret string
 		return ret
 	}
@@ -268,7 +272,7 @@ func (o *StorageVirtualDrive) GetBlockSize() string {
 // GetBlockSizeOk returns a tuple with the BlockSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetBlockSizeOk() (*string, bool) {
-	if o == nil || o.BlockSize == nil {
+	if o == nil || IsNil(o.BlockSize) {
 		return nil, false
 	}
 	return o.BlockSize, true
@@ -276,7 +280,7 @@ func (o *StorageVirtualDrive) GetBlockSizeOk() (*string, bool) {
 
 // HasBlockSize returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasBlockSize() bool {
-	if o != nil && o.BlockSize != nil {
+	if o != nil && !IsNil(o.BlockSize) {
 		return true
 	}
 
@@ -290,7 +294,7 @@ func (o *StorageVirtualDrive) SetBlockSize(v string) {
 
 // GetBootable returns the Bootable field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetBootable() string {
-	if o == nil || o.Bootable == nil {
+	if o == nil || IsNil(o.Bootable) {
 		var ret string
 		return ret
 	}
@@ -300,7 +304,7 @@ func (o *StorageVirtualDrive) GetBootable() string {
 // GetBootableOk returns a tuple with the Bootable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetBootableOk() (*string, bool) {
-	if o == nil || o.Bootable == nil {
+	if o == nil || IsNil(o.Bootable) {
 		return nil, false
 	}
 	return o.Bootable, true
@@ -308,7 +312,7 @@ func (o *StorageVirtualDrive) GetBootableOk() (*string, bool) {
 
 // HasBootable returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasBootable() bool {
-	if o != nil && o.Bootable != nil {
+	if o != nil && !IsNil(o.Bootable) {
 		return true
 	}
 
@@ -322,7 +326,7 @@ func (o *StorageVirtualDrive) SetBootable(v string) {
 
 // GetConfigState returns the ConfigState field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetConfigState() string {
-	if o == nil || o.ConfigState == nil {
+	if o == nil || IsNil(o.ConfigState) {
 		var ret string
 		return ret
 	}
@@ -332,7 +336,7 @@ func (o *StorageVirtualDrive) GetConfigState() string {
 // GetConfigStateOk returns a tuple with the ConfigState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetConfigStateOk() (*string, bool) {
-	if o == nil || o.ConfigState == nil {
+	if o == nil || IsNil(o.ConfigState) {
 		return nil, false
 	}
 	return o.ConfigState, true
@@ -340,7 +344,7 @@ func (o *StorageVirtualDrive) GetConfigStateOk() (*string, bool) {
 
 // HasConfigState returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasConfigState() bool {
-	if o != nil && o.ConfigState != nil {
+	if o != nil && !IsNil(o.ConfigState) {
 		return true
 	}
 
@@ -354,7 +358,7 @@ func (o *StorageVirtualDrive) SetConfigState(v string) {
 
 // GetConfiguredWriteCachePolicy returns the ConfiguredWriteCachePolicy field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetConfiguredWriteCachePolicy() string {
-	if o == nil || o.ConfiguredWriteCachePolicy == nil {
+	if o == nil || IsNil(o.ConfiguredWriteCachePolicy) {
 		var ret string
 		return ret
 	}
@@ -364,7 +368,7 @@ func (o *StorageVirtualDrive) GetConfiguredWriteCachePolicy() string {
 // GetConfiguredWriteCachePolicyOk returns a tuple with the ConfiguredWriteCachePolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetConfiguredWriteCachePolicyOk() (*string, bool) {
-	if o == nil || o.ConfiguredWriteCachePolicy == nil {
+	if o == nil || IsNil(o.ConfiguredWriteCachePolicy) {
 		return nil, false
 	}
 	return o.ConfiguredWriteCachePolicy, true
@@ -372,7 +376,7 @@ func (o *StorageVirtualDrive) GetConfiguredWriteCachePolicyOk() (*string, bool) 
 
 // HasConfiguredWriteCachePolicy returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasConfiguredWriteCachePolicy() bool {
-	if o != nil && o.ConfiguredWriteCachePolicy != nil {
+	if o != nil && !IsNil(o.ConfiguredWriteCachePolicy) {
 		return true
 	}
 
@@ -386,7 +390,7 @@ func (o *StorageVirtualDrive) SetConfiguredWriteCachePolicy(v string) {
 
 // GetConnectionProtocol returns the ConnectionProtocol field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetConnectionProtocol() string {
-	if o == nil || o.ConnectionProtocol == nil {
+	if o == nil || IsNil(o.ConnectionProtocol) {
 		var ret string
 		return ret
 	}
@@ -396,7 +400,7 @@ func (o *StorageVirtualDrive) GetConnectionProtocol() string {
 // GetConnectionProtocolOk returns a tuple with the ConnectionProtocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetConnectionProtocolOk() (*string, bool) {
-	if o == nil || o.ConnectionProtocol == nil {
+	if o == nil || IsNil(o.ConnectionProtocol) {
 		return nil, false
 	}
 	return o.ConnectionProtocol, true
@@ -404,7 +408,7 @@ func (o *StorageVirtualDrive) GetConnectionProtocolOk() (*string, bool) {
 
 // HasConnectionProtocol returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasConnectionProtocol() bool {
-	if o != nil && o.ConnectionProtocol != nil {
+	if o != nil && !IsNil(o.ConnectionProtocol) {
 		return true
 	}
 
@@ -418,7 +422,7 @@ func (o *StorageVirtualDrive) SetConnectionProtocol(v string) {
 
 // GetDriveCache returns the DriveCache field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetDriveCache() string {
-	if o == nil || o.DriveCache == nil {
+	if o == nil || IsNil(o.DriveCache) {
 		var ret string
 		return ret
 	}
@@ -428,7 +432,7 @@ func (o *StorageVirtualDrive) GetDriveCache() string {
 // GetDriveCacheOk returns a tuple with the DriveCache field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetDriveCacheOk() (*string, bool) {
-	if o == nil || o.DriveCache == nil {
+	if o == nil || IsNil(o.DriveCache) {
 		return nil, false
 	}
 	return o.DriveCache, true
@@ -436,7 +440,7 @@ func (o *StorageVirtualDrive) GetDriveCacheOk() (*string, bool) {
 
 // HasDriveCache returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasDriveCache() bool {
-	if o != nil && o.DriveCache != nil {
+	if o != nil && !IsNil(o.DriveCache) {
 		return true
 	}
 
@@ -450,7 +454,7 @@ func (o *StorageVirtualDrive) SetDriveCache(v string) {
 
 // GetDriveSecurity returns the DriveSecurity field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetDriveSecurity() string {
-	if o == nil || o.DriveSecurity == nil {
+	if o == nil || IsNil(o.DriveSecurity) {
 		var ret string
 		return ret
 	}
@@ -460,7 +464,7 @@ func (o *StorageVirtualDrive) GetDriveSecurity() string {
 // GetDriveSecurityOk returns a tuple with the DriveSecurity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetDriveSecurityOk() (*string, bool) {
-	if o == nil || o.DriveSecurity == nil {
+	if o == nil || IsNil(o.DriveSecurity) {
 		return nil, false
 	}
 	return o.DriveSecurity, true
@@ -468,7 +472,7 @@ func (o *StorageVirtualDrive) GetDriveSecurityOk() (*string, bool) {
 
 // HasDriveSecurity returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasDriveSecurity() bool {
-	if o != nil && o.DriveSecurity != nil {
+	if o != nil && !IsNil(o.DriveSecurity) {
 		return true
 	}
 
@@ -482,7 +486,7 @@ func (o *StorageVirtualDrive) SetDriveSecurity(v string) {
 
 // GetDriveState returns the DriveState field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetDriveState() string {
-	if o == nil || o.DriveState == nil {
+	if o == nil || IsNil(o.DriveState) {
 		var ret string
 		return ret
 	}
@@ -492,7 +496,7 @@ func (o *StorageVirtualDrive) GetDriveState() string {
 // GetDriveStateOk returns a tuple with the DriveState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetDriveStateOk() (*string, bool) {
-	if o == nil || o.DriveState == nil {
+	if o == nil || IsNil(o.DriveState) {
 		return nil, false
 	}
 	return o.DriveState, true
@@ -500,7 +504,7 @@ func (o *StorageVirtualDrive) GetDriveStateOk() (*string, bool) {
 
 // HasDriveState returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasDriveState() bool {
-	if o != nil && o.DriveState != nil {
+	if o != nil && !IsNil(o.DriveState) {
 		return true
 	}
 
@@ -514,7 +518,7 @@ func (o *StorageVirtualDrive) SetDriveState(v string) {
 
 // GetIoPolicy returns the IoPolicy field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetIoPolicy() string {
-	if o == nil || o.IoPolicy == nil {
+	if o == nil || IsNil(o.IoPolicy) {
 		var ret string
 		return ret
 	}
@@ -524,7 +528,7 @@ func (o *StorageVirtualDrive) GetIoPolicy() string {
 // GetIoPolicyOk returns a tuple with the IoPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetIoPolicyOk() (*string, bool) {
-	if o == nil || o.IoPolicy == nil {
+	if o == nil || IsNil(o.IoPolicy) {
 		return nil, false
 	}
 	return o.IoPolicy, true
@@ -532,7 +536,7 @@ func (o *StorageVirtualDrive) GetIoPolicyOk() (*string, bool) {
 
 // HasIoPolicy returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasIoPolicy() bool {
-	if o != nil && o.IoPolicy != nil {
+	if o != nil && !IsNil(o.IoPolicy) {
 		return true
 	}
 
@@ -546,7 +550,7 @@ func (o *StorageVirtualDrive) SetIoPolicy(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -556,7 +560,7 @@ func (o *StorageVirtualDrive) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -564,7 +568,7 @@ func (o *StorageVirtualDrive) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -578,7 +582,7 @@ func (o *StorageVirtualDrive) SetName(v string) {
 
 // GetNumBlocks returns the NumBlocks field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetNumBlocks() string {
-	if o == nil || o.NumBlocks == nil {
+	if o == nil || IsNil(o.NumBlocks) {
 		var ret string
 		return ret
 	}
@@ -588,7 +592,7 @@ func (o *StorageVirtualDrive) GetNumBlocks() string {
 // GetNumBlocksOk returns a tuple with the NumBlocks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetNumBlocksOk() (*string, bool) {
-	if o == nil || o.NumBlocks == nil {
+	if o == nil || IsNil(o.NumBlocks) {
 		return nil, false
 	}
 	return o.NumBlocks, true
@@ -596,7 +600,7 @@ func (o *StorageVirtualDrive) GetNumBlocksOk() (*string, bool) {
 
 // HasNumBlocks returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasNumBlocks() bool {
-	if o != nil && o.NumBlocks != nil {
+	if o != nil && !IsNil(o.NumBlocks) {
 		return true
 	}
 
@@ -610,7 +614,7 @@ func (o *StorageVirtualDrive) SetNumBlocks(v string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -620,7 +624,7 @@ func (o *StorageVirtualDrive) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -628,7 +632,7 @@ func (o *StorageVirtualDrive) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -642,7 +646,7 @@ func (o *StorageVirtualDrive) SetOperState(v string) {
 
 // GetOperability returns the Operability field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetOperability() string {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		var ret string
 		return ret
 	}
@@ -652,7 +656,7 @@ func (o *StorageVirtualDrive) GetOperability() string {
 // GetOperabilityOk returns a tuple with the Operability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetOperabilityOk() (*string, bool) {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		return nil, false
 	}
 	return o.Operability, true
@@ -660,7 +664,7 @@ func (o *StorageVirtualDrive) GetOperabilityOk() (*string, bool) {
 
 // HasOperability returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasOperability() bool {
-	if o != nil && o.Operability != nil {
+	if o != nil && !IsNil(o.Operability) {
 		return true
 	}
 
@@ -674,7 +678,7 @@ func (o *StorageVirtualDrive) SetOperability(v string) {
 
 // GetPhysicalBlockSize returns the PhysicalBlockSize field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetPhysicalBlockSize() string {
-	if o == nil || o.PhysicalBlockSize == nil {
+	if o == nil || IsNil(o.PhysicalBlockSize) {
 		var ret string
 		return ret
 	}
@@ -684,7 +688,7 @@ func (o *StorageVirtualDrive) GetPhysicalBlockSize() string {
 // GetPhysicalBlockSizeOk returns a tuple with the PhysicalBlockSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetPhysicalBlockSizeOk() (*string, bool) {
-	if o == nil || o.PhysicalBlockSize == nil {
+	if o == nil || IsNil(o.PhysicalBlockSize) {
 		return nil, false
 	}
 	return o.PhysicalBlockSize, true
@@ -692,7 +696,7 @@ func (o *StorageVirtualDrive) GetPhysicalBlockSizeOk() (*string, bool) {
 
 // HasPhysicalBlockSize returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasPhysicalBlockSize() bool {
-	if o != nil && o.PhysicalBlockSize != nil {
+	if o != nil && !IsNil(o.PhysicalBlockSize) {
 		return true
 	}
 
@@ -706,7 +710,7 @@ func (o *StorageVirtualDrive) SetPhysicalBlockSize(v string) {
 
 // GetReadPolicy returns the ReadPolicy field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetReadPolicy() string {
-	if o == nil || o.ReadPolicy == nil {
+	if o == nil || IsNil(o.ReadPolicy) {
 		var ret string
 		return ret
 	}
@@ -716,7 +720,7 @@ func (o *StorageVirtualDrive) GetReadPolicy() string {
 // GetReadPolicyOk returns a tuple with the ReadPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetReadPolicyOk() (*string, bool) {
-	if o == nil || o.ReadPolicy == nil {
+	if o == nil || IsNil(o.ReadPolicy) {
 		return nil, false
 	}
 	return o.ReadPolicy, true
@@ -724,7 +728,7 @@ func (o *StorageVirtualDrive) GetReadPolicyOk() (*string, bool) {
 
 // HasReadPolicy returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasReadPolicy() bool {
-	if o != nil && o.ReadPolicy != nil {
+	if o != nil && !IsNil(o.ReadPolicy) {
 		return true
 	}
 
@@ -738,7 +742,7 @@ func (o *StorageVirtualDrive) SetReadPolicy(v string) {
 
 // GetSecurityFlags returns the SecurityFlags field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetSecurityFlags() string {
-	if o == nil || o.SecurityFlags == nil {
+	if o == nil || IsNil(o.SecurityFlags) {
 		var ret string
 		return ret
 	}
@@ -748,7 +752,7 @@ func (o *StorageVirtualDrive) GetSecurityFlags() string {
 // GetSecurityFlagsOk returns a tuple with the SecurityFlags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetSecurityFlagsOk() (*string, bool) {
-	if o == nil || o.SecurityFlags == nil {
+	if o == nil || IsNil(o.SecurityFlags) {
 		return nil, false
 	}
 	return o.SecurityFlags, true
@@ -756,7 +760,7 @@ func (o *StorageVirtualDrive) GetSecurityFlagsOk() (*string, bool) {
 
 // HasSecurityFlags returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasSecurityFlags() bool {
-	if o != nil && o.SecurityFlags != nil {
+	if o != nil && !IsNil(o.SecurityFlags) {
 		return true
 	}
 
@@ -770,7 +774,7 @@ func (o *StorageVirtualDrive) SetSecurityFlags(v string) {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetSize() string {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		var ret string
 		return ret
 	}
@@ -780,7 +784,7 @@ func (o *StorageVirtualDrive) GetSize() string {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetSizeOk() (*string, bool) {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -788,7 +792,7 @@ func (o *StorageVirtualDrive) GetSizeOk() (*string, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasSize() bool {
-	if o != nil && o.Size != nil {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -802,7 +806,7 @@ func (o *StorageVirtualDrive) SetSize(v string) {
 
 // GetStripSize returns the StripSize field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetStripSize() string {
-	if o == nil || o.StripSize == nil {
+	if o == nil || IsNil(o.StripSize) {
 		var ret string
 		return ret
 	}
@@ -812,7 +816,7 @@ func (o *StorageVirtualDrive) GetStripSize() string {
 // GetStripSizeOk returns a tuple with the StripSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetStripSizeOk() (*string, bool) {
-	if o == nil || o.StripSize == nil {
+	if o == nil || IsNil(o.StripSize) {
 		return nil, false
 	}
 	return o.StripSize, true
@@ -820,7 +824,7 @@ func (o *StorageVirtualDrive) GetStripSizeOk() (*string, bool) {
 
 // HasStripSize returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasStripSize() bool {
-	if o != nil && o.StripSize != nil {
+	if o != nil && !IsNil(o.StripSize) {
 		return true
 	}
 
@@ -834,7 +838,7 @@ func (o *StorageVirtualDrive) SetStripSize(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -844,7 +848,7 @@ func (o *StorageVirtualDrive) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -852,7 +856,7 @@ func (o *StorageVirtualDrive) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -866,7 +870,7 @@ func (o *StorageVirtualDrive) SetType(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -876,7 +880,7 @@ func (o *StorageVirtualDrive) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -884,7 +888,7 @@ func (o *StorageVirtualDrive) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -898,7 +902,7 @@ func (o *StorageVirtualDrive) SetUuid(v string) {
 
 // GetVendorUuid returns the VendorUuid field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetVendorUuid() string {
-	if o == nil || o.VendorUuid == nil {
+	if o == nil || IsNil(o.VendorUuid) {
 		var ret string
 		return ret
 	}
@@ -908,7 +912,7 @@ func (o *StorageVirtualDrive) GetVendorUuid() string {
 // GetVendorUuidOk returns a tuple with the VendorUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetVendorUuidOk() (*string, bool) {
-	if o == nil || o.VendorUuid == nil {
+	if o == nil || IsNil(o.VendorUuid) {
 		return nil, false
 	}
 	return o.VendorUuid, true
@@ -916,7 +920,7 @@ func (o *StorageVirtualDrive) GetVendorUuidOk() (*string, bool) {
 
 // HasVendorUuid returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasVendorUuid() bool {
-	if o != nil && o.VendorUuid != nil {
+	if o != nil && !IsNil(o.VendorUuid) {
 		return true
 	}
 
@@ -930,7 +934,7 @@ func (o *StorageVirtualDrive) SetVendorUuid(v string) {
 
 // GetVirtualDriveId returns the VirtualDriveId field value if set, zero value otherwise.
 func (o *StorageVirtualDrive) GetVirtualDriveId() string {
-	if o == nil || o.VirtualDriveId == nil {
+	if o == nil || IsNil(o.VirtualDriveId) {
 		var ret string
 		return ret
 	}
@@ -940,7 +944,7 @@ func (o *StorageVirtualDrive) GetVirtualDriveId() string {
 // GetVirtualDriveIdOk returns a tuple with the VirtualDriveId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVirtualDrive) GetVirtualDriveIdOk() (*string, bool) {
-	if o == nil || o.VirtualDriveId == nil {
+	if o == nil || IsNil(o.VirtualDriveId) {
 		return nil, false
 	}
 	return o.VirtualDriveId, true
@@ -948,7 +952,7 @@ func (o *StorageVirtualDrive) GetVirtualDriveIdOk() (*string, bool) {
 
 // HasVirtualDriveId returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasVirtualDriveId() bool {
-	if o != nil && o.VirtualDriveId != nil {
+	if o != nil && !IsNil(o.VirtualDriveId) {
 		return true
 	}
 
@@ -960,68 +964,90 @@ func (o *StorageVirtualDrive) SetVirtualDriveId(v string) {
 	o.VirtualDriveId = &v
 }
 
-// GetDiskGroup returns the DiskGroup field value if set, zero value otherwise.
+// GetDiskGroup returns the DiskGroup field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVirtualDrive) GetDiskGroup() StorageDiskGroupRelationship {
-	if o == nil || o.DiskGroup == nil {
+	if o == nil || IsNil(o.DiskGroup.Get()) {
 		var ret StorageDiskGroupRelationship
 		return ret
 	}
-	return *o.DiskGroup
+	return *o.DiskGroup.Get()
 }
 
 // GetDiskGroupOk returns a tuple with the DiskGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVirtualDrive) GetDiskGroupOk() (*StorageDiskGroupRelationship, bool) {
-	if o == nil || o.DiskGroup == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DiskGroup, true
+	return o.DiskGroup.Get(), o.DiskGroup.IsSet()
 }
 
 // HasDiskGroup returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasDiskGroup() bool {
-	if o != nil && o.DiskGroup != nil {
+	if o != nil && o.DiskGroup.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDiskGroup gets a reference to the given StorageDiskGroupRelationship and assigns it to the DiskGroup field.
+// SetDiskGroup gets a reference to the given NullableStorageDiskGroupRelationship and assigns it to the DiskGroup field.
 func (o *StorageVirtualDrive) SetDiskGroup(v StorageDiskGroupRelationship) {
-	o.DiskGroup = &v
+	o.DiskGroup.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetDiskGroupNil sets the value for DiskGroup to be an explicit nil
+func (o *StorageVirtualDrive) SetDiskGroupNil() {
+	o.DiskGroup.Set(nil)
+}
+
+// UnsetDiskGroup ensures that no value is present for DiskGroup, not even an explicit nil
+func (o *StorageVirtualDrive) UnsetDiskGroup() {
+	o.DiskGroup.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVirtualDrive) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVirtualDrive) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *StorageVirtualDrive) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
+}
+
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *StorageVirtualDrive) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *StorageVirtualDrive) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
 }
 
 // GetPhysicalDiskUsages returns the PhysicalDiskUsages field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1037,7 +1063,7 @@ func (o *StorageVirtualDrive) GetPhysicalDiskUsages() []StoragePhysicalDiskUsage
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVirtualDrive) GetPhysicalDiskUsagesOk() ([]StoragePhysicalDiskUsageRelationship, bool) {
-	if o == nil || o.PhysicalDiskUsages == nil {
+	if o == nil || IsNil(o.PhysicalDiskUsages) {
 		return nil, false
 	}
 	return o.PhysicalDiskUsages, true
@@ -1045,7 +1071,7 @@ func (o *StorageVirtualDrive) GetPhysicalDiskUsagesOk() ([]StoragePhysicalDiskUs
 
 // HasPhysicalDiskUsages returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasPhysicalDiskUsages() bool {
-	if o != nil && o.PhysicalDiskUsages != nil {
+	if o != nil && IsNil(o.PhysicalDiskUsages) {
 		return true
 	}
 
@@ -1057,100 +1083,133 @@ func (o *StorageVirtualDrive) SetPhysicalDiskUsages(v []StoragePhysicalDiskUsage
 	o.PhysicalDiskUsages = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVirtualDrive) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVirtualDrive) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageVirtualDrive) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetStorageController returns the StorageController field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageVirtualDrive) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageVirtualDrive) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetStorageController returns the StorageController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVirtualDrive) GetStorageController() StorageControllerRelationship {
-	if o == nil || o.StorageController == nil {
+	if o == nil || IsNil(o.StorageController.Get()) {
 		var ret StorageControllerRelationship
 		return ret
 	}
-	return *o.StorageController
+	return *o.StorageController.Get()
 }
 
 // GetStorageControllerOk returns a tuple with the StorageController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVirtualDrive) GetStorageControllerOk() (*StorageControllerRelationship, bool) {
-	if o == nil || o.StorageController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageController, true
+	return o.StorageController.Get(), o.StorageController.IsSet()
 }
 
 // HasStorageController returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasStorageController() bool {
-	if o != nil && o.StorageController != nil {
+	if o != nil && o.StorageController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageController gets a reference to the given StorageControllerRelationship and assigns it to the StorageController field.
+// SetStorageController gets a reference to the given NullableStorageControllerRelationship and assigns it to the StorageController field.
 func (o *StorageVirtualDrive) SetStorageController(v StorageControllerRelationship) {
-	o.StorageController = &v
+	o.StorageController.Set(&v)
 }
 
-// GetStorageVirtualDriveContainer returns the StorageVirtualDriveContainer field value if set, zero value otherwise.
+// SetStorageControllerNil sets the value for StorageController to be an explicit nil
+func (o *StorageVirtualDrive) SetStorageControllerNil() {
+	o.StorageController.Set(nil)
+}
+
+// UnsetStorageController ensures that no value is present for StorageController, not even an explicit nil
+func (o *StorageVirtualDrive) UnsetStorageController() {
+	o.StorageController.Unset()
+}
+
+// GetStorageVirtualDriveContainer returns the StorageVirtualDriveContainer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVirtualDrive) GetStorageVirtualDriveContainer() StorageVirtualDriveContainerRelationship {
-	if o == nil || o.StorageVirtualDriveContainer == nil {
+	if o == nil || IsNil(o.StorageVirtualDriveContainer.Get()) {
 		var ret StorageVirtualDriveContainerRelationship
 		return ret
 	}
-	return *o.StorageVirtualDriveContainer
+	return *o.StorageVirtualDriveContainer.Get()
 }
 
 // GetStorageVirtualDriveContainerOk returns a tuple with the StorageVirtualDriveContainer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVirtualDrive) GetStorageVirtualDriveContainerOk() (*StorageVirtualDriveContainerRelationship, bool) {
-	if o == nil || o.StorageVirtualDriveContainer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageVirtualDriveContainer, true
+	return o.StorageVirtualDriveContainer.Get(), o.StorageVirtualDriveContainer.IsSet()
 }
 
 // HasStorageVirtualDriveContainer returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasStorageVirtualDriveContainer() bool {
-	if o != nil && o.StorageVirtualDriveContainer != nil {
+	if o != nil && o.StorageVirtualDriveContainer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageVirtualDriveContainer gets a reference to the given StorageVirtualDriveContainerRelationship and assigns it to the StorageVirtualDriveContainer field.
+// SetStorageVirtualDriveContainer gets a reference to the given NullableStorageVirtualDriveContainerRelationship and assigns it to the StorageVirtualDriveContainer field.
 func (o *StorageVirtualDrive) SetStorageVirtualDriveContainer(v StorageVirtualDriveContainerRelationship) {
-	o.StorageVirtualDriveContainer = &v
+	o.StorageVirtualDriveContainer.Set(&v)
+}
+
+// SetStorageVirtualDriveContainerNil sets the value for StorageVirtualDriveContainer to be an explicit nil
+func (o *StorageVirtualDrive) SetStorageVirtualDriveContainerNil() {
+	o.StorageVirtualDriveContainer.Set(nil)
+}
+
+// UnsetStorageVirtualDriveContainer ensures that no value is present for StorageVirtualDriveContainer, not even an explicit nil
+func (o *StorageVirtualDrive) UnsetStorageVirtualDriveContainer() {
+	o.StorageVirtualDriveContainer.Unset()
 }
 
 // GetVdMemberEps returns the VdMemberEps field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1166,7 +1225,7 @@ func (o *StorageVirtualDrive) GetVdMemberEps() []StorageVdMemberEpRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVirtualDrive) GetVdMemberEpsOk() ([]StorageVdMemberEpRelationship, bool) {
-	if o == nil || o.VdMemberEps == nil {
+	if o == nil || IsNil(o.VdMemberEps) {
 		return nil, false
 	}
 	return o.VdMemberEps, true
@@ -1174,7 +1233,7 @@ func (o *StorageVirtualDrive) GetVdMemberEpsOk() ([]StorageVdMemberEpRelationshi
 
 // HasVdMemberEps returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasVdMemberEps() bool {
-	if o != nil && o.VdMemberEps != nil {
+	if o != nil && IsNil(o.VdMemberEps) {
 		return true
 	}
 
@@ -1186,162 +1245,199 @@ func (o *StorageVirtualDrive) SetVdMemberEps(v []StorageVdMemberEpRelationship) 
 	o.VdMemberEps = v
 }
 
-// GetVirtualDriveExtension returns the VirtualDriveExtension field value if set, zero value otherwise.
+// GetVirtualDriveExtension returns the VirtualDriveExtension field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVirtualDrive) GetVirtualDriveExtension() StorageVirtualDriveExtensionRelationship {
-	if o == nil || o.VirtualDriveExtension == nil {
+	if o == nil || IsNil(o.VirtualDriveExtension.Get()) {
 		var ret StorageVirtualDriveExtensionRelationship
 		return ret
 	}
-	return *o.VirtualDriveExtension
+	return *o.VirtualDriveExtension.Get()
 }
 
 // GetVirtualDriveExtensionOk returns a tuple with the VirtualDriveExtension field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVirtualDrive) GetVirtualDriveExtensionOk() (*StorageVirtualDriveExtensionRelationship, bool) {
-	if o == nil || o.VirtualDriveExtension == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VirtualDriveExtension, true
+	return o.VirtualDriveExtension.Get(), o.VirtualDriveExtension.IsSet()
 }
 
 // HasVirtualDriveExtension returns a boolean if a field has been set.
 func (o *StorageVirtualDrive) HasVirtualDriveExtension() bool {
-	if o != nil && o.VirtualDriveExtension != nil {
+	if o != nil && o.VirtualDriveExtension.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVirtualDriveExtension gets a reference to the given StorageVirtualDriveExtensionRelationship and assigns it to the VirtualDriveExtension field.
+// SetVirtualDriveExtension gets a reference to the given NullableStorageVirtualDriveExtensionRelationship and assigns it to the VirtualDriveExtension field.
 func (o *StorageVirtualDrive) SetVirtualDriveExtension(v StorageVirtualDriveExtensionRelationship) {
-	o.VirtualDriveExtension = &v
+	o.VirtualDriveExtension.Set(&v)
+}
+
+// SetVirtualDriveExtensionNil sets the value for VirtualDriveExtension to be an explicit nil
+func (o *StorageVirtualDrive) SetVirtualDriveExtensionNil() {
+	o.VirtualDriveExtension.Set(nil)
+}
+
+// UnsetVirtualDriveExtension ensures that no value is present for VirtualDriveExtension, not even an explicit nil
+func (o *StorageVirtualDrive) UnsetVirtualDriveExtension() {
+	o.VirtualDriveExtension.Unset()
 }
 
 func (o StorageVirtualDrive) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageVirtualDrive) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccessPolicy != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessPolicy) {
 		toSerialize["AccessPolicy"] = o.AccessPolicy
 	}
-	if o.ActualWriteCachePolicy != nil {
+	if !IsNil(o.ActualWriteCachePolicy) {
 		toSerialize["ActualWriteCachePolicy"] = o.ActualWriteCachePolicy
 	}
-	if o.AvailableSize != nil {
+	if !IsNil(o.AvailableSize) {
 		toSerialize["AvailableSize"] = o.AvailableSize
 	}
-	if o.BlockSize != nil {
+	if !IsNil(o.BlockSize) {
 		toSerialize["BlockSize"] = o.BlockSize
 	}
-	if o.Bootable != nil {
+	if !IsNil(o.Bootable) {
 		toSerialize["Bootable"] = o.Bootable
 	}
-	if o.ConfigState != nil {
+	if !IsNil(o.ConfigState) {
 		toSerialize["ConfigState"] = o.ConfigState
 	}
-	if o.ConfiguredWriteCachePolicy != nil {
+	if !IsNil(o.ConfiguredWriteCachePolicy) {
 		toSerialize["ConfiguredWriteCachePolicy"] = o.ConfiguredWriteCachePolicy
 	}
-	if o.ConnectionProtocol != nil {
+	if !IsNil(o.ConnectionProtocol) {
 		toSerialize["ConnectionProtocol"] = o.ConnectionProtocol
 	}
-	if o.DriveCache != nil {
+	if !IsNil(o.DriveCache) {
 		toSerialize["DriveCache"] = o.DriveCache
 	}
-	if o.DriveSecurity != nil {
+	if !IsNil(o.DriveSecurity) {
 		toSerialize["DriveSecurity"] = o.DriveSecurity
 	}
-	if o.DriveState != nil {
+	if !IsNil(o.DriveState) {
 		toSerialize["DriveState"] = o.DriveState
 	}
-	if o.IoPolicy != nil {
+	if !IsNil(o.IoPolicy) {
 		toSerialize["IoPolicy"] = o.IoPolicy
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.NumBlocks != nil {
+	if !IsNil(o.NumBlocks) {
 		toSerialize["NumBlocks"] = o.NumBlocks
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.Operability != nil {
+	if !IsNil(o.Operability) {
 		toSerialize["Operability"] = o.Operability
 	}
-	if o.PhysicalBlockSize != nil {
+	if !IsNil(o.PhysicalBlockSize) {
 		toSerialize["PhysicalBlockSize"] = o.PhysicalBlockSize
 	}
-	if o.ReadPolicy != nil {
+	if !IsNil(o.ReadPolicy) {
 		toSerialize["ReadPolicy"] = o.ReadPolicy
 	}
-	if o.SecurityFlags != nil {
+	if !IsNil(o.SecurityFlags) {
 		toSerialize["SecurityFlags"] = o.SecurityFlags
 	}
-	if o.Size != nil {
+	if !IsNil(o.Size) {
 		toSerialize["Size"] = o.Size
 	}
-	if o.StripSize != nil {
+	if !IsNil(o.StripSize) {
 		toSerialize["StripSize"] = o.StripSize
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.VendorUuid != nil {
+	if !IsNil(o.VendorUuid) {
 		toSerialize["VendorUuid"] = o.VendorUuid
 	}
-	if o.VirtualDriveId != nil {
+	if !IsNil(o.VirtualDriveId) {
 		toSerialize["VirtualDriveId"] = o.VirtualDriveId
 	}
-	if o.DiskGroup != nil {
-		toSerialize["DiskGroup"] = o.DiskGroup
+	if o.DiskGroup.IsSet() {
+		toSerialize["DiskGroup"] = o.DiskGroup.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
 	if o.PhysicalDiskUsages != nil {
 		toSerialize["PhysicalDiskUsages"] = o.PhysicalDiskUsages
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.StorageController != nil {
-		toSerialize["StorageController"] = o.StorageController
+	if o.StorageController.IsSet() {
+		toSerialize["StorageController"] = o.StorageController.Get()
 	}
-	if o.StorageVirtualDriveContainer != nil {
-		toSerialize["StorageVirtualDriveContainer"] = o.StorageVirtualDriveContainer
+	if o.StorageVirtualDriveContainer.IsSet() {
+		toSerialize["StorageVirtualDriveContainer"] = o.StorageVirtualDriveContainer.Get()
 	}
 	if o.VdMemberEps != nil {
 		toSerialize["VdMemberEps"] = o.VdMemberEps
 	}
-	if o.VirtualDriveExtension != nil {
-		toSerialize["VirtualDriveExtension"] = o.VirtualDriveExtension
+	if o.VirtualDriveExtension.IsSet() {
+		toSerialize["VirtualDriveExtension"] = o.VirtualDriveExtension.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageVirtualDrive) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageVirtualDrive) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageVirtualDriveWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1396,22 +1492,22 @@ func (o *StorageVirtualDrive) UnmarshalJSON(bytes []byte) (err error) {
 		// The UUID value of the vendor.
 		VendorUuid *string `json:"VendorUuid,omitempty"`
 		// The identifier for this Virtual drive.
-		VirtualDriveId      *string                          `json:"VirtualDriveId,omitempty"`
-		DiskGroup           *StorageDiskGroupRelationship    `json:"DiskGroup,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+		VirtualDriveId      *string                                 `json:"VirtualDriveId,omitempty"`
+		DiskGroup           NullableStorageDiskGroupRelationship    `json:"DiskGroup,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 		// An array of relationships to storagePhysicalDiskUsage resources.
-		PhysicalDiskUsages           []StoragePhysicalDiskUsageRelationship    `json:"PhysicalDiskUsages,omitempty"`
-		RegisteredDevice             *AssetDeviceRegistrationRelationship      `json:"RegisteredDevice,omitempty"`
-		StorageController            *StorageControllerRelationship            `json:"StorageController,omitempty"`
-		StorageVirtualDriveContainer *StorageVirtualDriveContainerRelationship `json:"StorageVirtualDriveContainer,omitempty"`
+		PhysicalDiskUsages           []StoragePhysicalDiskUsageRelationship           `json:"PhysicalDiskUsages,omitempty"`
+		RegisteredDevice             NullableAssetDeviceRegistrationRelationship      `json:"RegisteredDevice,omitempty"`
+		StorageController            NullableStorageControllerRelationship            `json:"StorageController,omitempty"`
+		StorageVirtualDriveContainer NullableStorageVirtualDriveContainerRelationship `json:"StorageVirtualDriveContainer,omitempty"`
 		// An array of relationships to storageVdMemberEp resources.
-		VdMemberEps           []StorageVdMemberEpRelationship           `json:"VdMemberEps,omitempty"`
-		VirtualDriveExtension *StorageVirtualDriveExtensionRelationship `json:"VirtualDriveExtension,omitempty"`
+		VdMemberEps           []StorageVdMemberEpRelationship                  `json:"VdMemberEps,omitempty"`
+		VirtualDriveExtension NullableStorageVirtualDriveExtensionRelationship `json:"VirtualDriveExtension,omitempty"`
 	}
 
 	varStorageVirtualDriveWithoutEmbeddedStruct := StorageVirtualDriveWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageVirtualDriveWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageVirtualDriveWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageVirtualDrive := _StorageVirtualDrive{}
 		varStorageVirtualDrive.ClassId = varStorageVirtualDriveWithoutEmbeddedStruct.ClassId
@@ -1456,7 +1552,7 @@ func (o *StorageVirtualDrive) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageVirtualDrive := _StorageVirtualDrive{}
 
-	err = json.Unmarshal(bytes, &varStorageVirtualDrive)
+	err = json.Unmarshal(data, &varStorageVirtualDrive)
 	if err == nil {
 		o.EquipmentBase = varStorageVirtualDrive.EquipmentBase
 	} else {
@@ -1465,7 +1561,7 @@ func (o *StorageVirtualDrive) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessPolicy")

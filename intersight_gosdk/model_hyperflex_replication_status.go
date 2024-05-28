@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexReplicationStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexReplicationStatus{}
 
 // HyperflexReplicationStatus Replication status information for this particular snapshot.
 type HyperflexReplicationStatus struct {
@@ -115,7 +119,7 @@ func (o *HyperflexReplicationStatus) SetObjectType(v string) {
 
 // GetBytesReplicated returns the BytesReplicated field value if set, zero value otherwise.
 func (o *HyperflexReplicationStatus) GetBytesReplicated() int64 {
-	if o == nil || o.BytesReplicated == nil {
+	if o == nil || IsNil(o.BytesReplicated) {
 		var ret int64
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *HyperflexReplicationStatus) GetBytesReplicated() int64 {
 // GetBytesReplicatedOk returns a tuple with the BytesReplicated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexReplicationStatus) GetBytesReplicatedOk() (*int64, bool) {
-	if o == nil || o.BytesReplicated == nil {
+	if o == nil || IsNil(o.BytesReplicated) {
 		return nil, false
 	}
 	return o.BytesReplicated, true
@@ -133,7 +137,7 @@ func (o *HyperflexReplicationStatus) GetBytesReplicatedOk() (*int64, bool) {
 
 // HasBytesReplicated returns a boolean if a field has been set.
 func (o *HyperflexReplicationStatus) HasBytesReplicated() bool {
-	if o != nil && o.BytesReplicated != nil {
+	if o != nil && !IsNil(o.BytesReplicated) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *HyperflexReplicationStatus) SetBytesReplicated(v int64) {
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *HyperflexReplicationStatus) GetEndTime() int64 {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret int64
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *HyperflexReplicationStatus) GetEndTime() int64 {
 // GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexReplicationStatus) GetEndTimeOk() (*int64, bool) {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
 	return o.EndTime, true
@@ -165,7 +169,7 @@ func (o *HyperflexReplicationStatus) GetEndTimeOk() (*int64, bool) {
 
 // HasEndTime returns a boolean if a field has been set.
 func (o *HyperflexReplicationStatus) HasEndTime() bool {
-	if o != nil && o.EndTime != nil {
+	if o != nil && !IsNil(o.EndTime) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *HyperflexReplicationStatus) SetEndTime(v int64) {
 
 // GetError returns the Error field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexReplicationStatus) GetError() HyperflexErrorStack {
-	if o == nil || o.Error.Get() == nil {
+	if o == nil || IsNil(o.Error.Get()) {
 		var ret HyperflexErrorStack
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *HyperflexReplicationStatus) UnsetError() {
 
 // GetPackEntityReference returns the PackEntityReference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexReplicationStatus) GetPackEntityReference() HyperflexEntityReference {
-	if o == nil || o.PackEntityReference.Get() == nil {
+	if o == nil || IsNil(o.PackEntityReference.Get()) {
 		var ret HyperflexEntityReference
 		return ret
 	}
@@ -265,7 +269,7 @@ func (o *HyperflexReplicationStatus) UnsetPackEntityReference() {
 
 // GetPctComplete returns the PctComplete field value if set, zero value otherwise.
 func (o *HyperflexReplicationStatus) GetPctComplete() int64 {
-	if o == nil || o.PctComplete == nil {
+	if o == nil || IsNil(o.PctComplete) {
 		var ret int64
 		return ret
 	}
@@ -275,7 +279,7 @@ func (o *HyperflexReplicationStatus) GetPctComplete() int64 {
 // GetPctCompleteOk returns a tuple with the PctComplete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexReplicationStatus) GetPctCompleteOk() (*int64, bool) {
-	if o == nil || o.PctComplete == nil {
+	if o == nil || IsNil(o.PctComplete) {
 		return nil, false
 	}
 	return o.PctComplete, true
@@ -283,7 +287,7 @@ func (o *HyperflexReplicationStatus) GetPctCompleteOk() (*int64, bool) {
 
 // HasPctComplete returns a boolean if a field has been set.
 func (o *HyperflexReplicationStatus) HasPctComplete() bool {
-	if o != nil && o.PctComplete != nil {
+	if o != nil && !IsNil(o.PctComplete) {
 		return true
 	}
 
@@ -297,7 +301,7 @@ func (o *HyperflexReplicationStatus) SetPctComplete(v int64) {
 
 // GetRpoStatus returns the RpoStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexReplicationStatus) GetRpoStatus() HyperflexRpoStatus {
-	if o == nil || o.RpoStatus.Get() == nil {
+	if o == nil || IsNil(o.RpoStatus.Get()) {
 		var ret HyperflexRpoStatus
 		return ret
 	}
@@ -340,7 +344,7 @@ func (o *HyperflexReplicationStatus) UnsetRpoStatus() {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *HyperflexReplicationStatus) GetStartTime() int64 {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret int64
 		return ret
 	}
@@ -350,7 +354,7 @@ func (o *HyperflexReplicationStatus) GetStartTime() int64 {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexReplicationStatus) GetStartTimeOk() (*int64, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -358,7 +362,7 @@ func (o *HyperflexReplicationStatus) GetStartTimeOk() (*int64, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *HyperflexReplicationStatus) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -372,7 +376,7 @@ func (o *HyperflexReplicationStatus) SetStartTime(v int64) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *HyperflexReplicationStatus) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -382,7 +386,7 @@ func (o *HyperflexReplicationStatus) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexReplicationStatus) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -390,7 +394,7 @@ func (o *HyperflexReplicationStatus) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *HyperflexReplicationStatus) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -403,25 +407,29 @@ func (o *HyperflexReplicationStatus) SetStatus(v string) {
 }
 
 func (o HyperflexReplicationStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexReplicationStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BytesReplicated != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BytesReplicated) {
 		toSerialize["BytesReplicated"] = o.BytesReplicated
 	}
-	if o.EndTime != nil {
+	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
 	}
 	if o.Error.IsSet() {
@@ -430,16 +438,16 @@ func (o HyperflexReplicationStatus) MarshalJSON() ([]byte, error) {
 	if o.PackEntityReference.IsSet() {
 		toSerialize["PackEntityReference"] = o.PackEntityReference.Get()
 	}
-	if o.PctComplete != nil {
+	if !IsNil(o.PctComplete) {
 		toSerialize["PctComplete"] = o.PctComplete
 	}
 	if o.RpoStatus.IsSet() {
 		toSerialize["RpoStatus"] = o.RpoStatus.Get()
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 
@@ -447,10 +455,32 @@ func (o HyperflexReplicationStatus) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexReplicationStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexReplicationStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexReplicationStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -473,7 +503,7 @@ func (o *HyperflexReplicationStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexReplicationStatusWithoutEmbeddedStruct := HyperflexReplicationStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexReplicationStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexReplicationStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexReplicationStatus := _HyperflexReplicationStatus{}
 		varHyperflexReplicationStatus.ClassId = varHyperflexReplicationStatusWithoutEmbeddedStruct.ClassId
@@ -493,7 +523,7 @@ func (o *HyperflexReplicationStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexReplicationStatus := _HyperflexReplicationStatus{}
 
-	err = json.Unmarshal(bytes, &varHyperflexReplicationStatus)
+	err = json.Unmarshal(data, &varHyperflexReplicationStatus)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexReplicationStatus.MoBaseComplexType
 	} else {
@@ -502,7 +532,7 @@ func (o *HyperflexReplicationStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BytesReplicated")

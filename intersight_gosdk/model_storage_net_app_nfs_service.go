@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppNfsService type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppNfsService{}
 
 // StorageNetAppNfsService An NFS service retrieves the NFS configuration of a storage virtual machine.
 type StorageNetAppNfsService struct {
@@ -31,8 +35,8 @@ type StorageNetAppNfsService struct {
 	// Specifies whether NFSv4.0 protocol is enabled.
 	NfsV4Enabled *bool `json:"NfsV4Enabled,omitempty"`
 	// Unique identifier for the NetApp Storage Virtual Machine.
-	SvmUuid              *string                             `json:"SvmUuid,omitempty"`
-	Tenant               *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+	SvmUuid              *string                                    `json:"SvmUuid,omitempty"`
+	Tenant               NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *StorageNetAppNfsService) SetObjectType(v string) {
 
 // GetNfsV3Enabled returns the NfsV3Enabled field value if set, zero value otherwise.
 func (o *StorageNetAppNfsService) GetNfsV3Enabled() bool {
-	if o == nil || o.NfsV3Enabled == nil {
+	if o == nil || IsNil(o.NfsV3Enabled) {
 		var ret bool
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *StorageNetAppNfsService) GetNfsV3Enabled() bool {
 // GetNfsV3EnabledOk returns a tuple with the NfsV3Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsService) GetNfsV3EnabledOk() (*bool, bool) {
-	if o == nil || o.NfsV3Enabled == nil {
+	if o == nil || IsNil(o.NfsV3Enabled) {
 		return nil, false
 	}
 	return o.NfsV3Enabled, true
@@ -129,7 +133,7 @@ func (o *StorageNetAppNfsService) GetNfsV3EnabledOk() (*bool, bool) {
 
 // HasNfsV3Enabled returns a boolean if a field has been set.
 func (o *StorageNetAppNfsService) HasNfsV3Enabled() bool {
-	if o != nil && o.NfsV3Enabled != nil {
+	if o != nil && !IsNil(o.NfsV3Enabled) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *StorageNetAppNfsService) SetNfsV3Enabled(v bool) {
 
 // GetNfsV41Enabled returns the NfsV41Enabled field value if set, zero value otherwise.
 func (o *StorageNetAppNfsService) GetNfsV41Enabled() bool {
-	if o == nil || o.NfsV41Enabled == nil {
+	if o == nil || IsNil(o.NfsV41Enabled) {
 		var ret bool
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *StorageNetAppNfsService) GetNfsV41Enabled() bool {
 // GetNfsV41EnabledOk returns a tuple with the NfsV41Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsService) GetNfsV41EnabledOk() (*bool, bool) {
-	if o == nil || o.NfsV41Enabled == nil {
+	if o == nil || IsNil(o.NfsV41Enabled) {
 		return nil, false
 	}
 	return o.NfsV41Enabled, true
@@ -161,7 +165,7 @@ func (o *StorageNetAppNfsService) GetNfsV41EnabledOk() (*bool, bool) {
 
 // HasNfsV41Enabled returns a boolean if a field has been set.
 func (o *StorageNetAppNfsService) HasNfsV41Enabled() bool {
-	if o != nil && o.NfsV41Enabled != nil {
+	if o != nil && !IsNil(o.NfsV41Enabled) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *StorageNetAppNfsService) SetNfsV41Enabled(v bool) {
 
 // GetNfsV4Enabled returns the NfsV4Enabled field value if set, zero value otherwise.
 func (o *StorageNetAppNfsService) GetNfsV4Enabled() bool {
-	if o == nil || o.NfsV4Enabled == nil {
+	if o == nil || IsNil(o.NfsV4Enabled) {
 		var ret bool
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *StorageNetAppNfsService) GetNfsV4Enabled() bool {
 // GetNfsV4EnabledOk returns a tuple with the NfsV4Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsService) GetNfsV4EnabledOk() (*bool, bool) {
-	if o == nil || o.NfsV4Enabled == nil {
+	if o == nil || IsNil(o.NfsV4Enabled) {
 		return nil, false
 	}
 	return o.NfsV4Enabled, true
@@ -193,7 +197,7 @@ func (o *StorageNetAppNfsService) GetNfsV4EnabledOk() (*bool, bool) {
 
 // HasNfsV4Enabled returns a boolean if a field has been set.
 func (o *StorageNetAppNfsService) HasNfsV4Enabled() bool {
-	if o != nil && o.NfsV4Enabled != nil {
+	if o != nil && !IsNil(o.NfsV4Enabled) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *StorageNetAppNfsService) SetNfsV4Enabled(v bool) {
 
 // GetSvmUuid returns the SvmUuid field value if set, zero value otherwise.
 func (o *StorageNetAppNfsService) GetSvmUuid() string {
-	if o == nil || o.SvmUuid == nil {
+	if o == nil || IsNil(o.SvmUuid) {
 		var ret string
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *StorageNetAppNfsService) GetSvmUuid() string {
 // GetSvmUuidOk returns a tuple with the SvmUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsService) GetSvmUuidOk() (*string, bool) {
-	if o == nil || o.SvmUuid == nil {
+	if o == nil || IsNil(o.SvmUuid) {
 		return nil, false
 	}
 	return o.SvmUuid, true
@@ -225,7 +229,7 @@ func (o *StorageNetAppNfsService) GetSvmUuidOk() (*string, bool) {
 
 // HasSvmUuid returns a boolean if a field has been set.
 func (o *StorageNetAppNfsService) HasSvmUuid() bool {
-	if o != nil && o.SvmUuid != nil {
+	if o != nil && !IsNil(o.SvmUuid) {
 		return true
 	}
 
@@ -237,78 +241,115 @@ func (o *StorageNetAppNfsService) SetSvmUuid(v string) {
 	o.SvmUuid = &v
 }
 
-// GetTenant returns the Tenant field value if set, zero value otherwise.
+// GetTenant returns the Tenant field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppNfsService) GetTenant() StorageNetAppStorageVmRelationship {
-	if o == nil || o.Tenant == nil {
+	if o == nil || IsNil(o.Tenant.Get()) {
 		var ret StorageNetAppStorageVmRelationship
 		return ret
 	}
-	return *o.Tenant
+	return *o.Tenant.Get()
 }
 
 // GetTenantOk returns a tuple with the Tenant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppNfsService) GetTenantOk() (*StorageNetAppStorageVmRelationship, bool) {
-	if o == nil || o.Tenant == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tenant, true
+	return o.Tenant.Get(), o.Tenant.IsSet()
 }
 
 // HasTenant returns a boolean if a field has been set.
 func (o *StorageNetAppNfsService) HasTenant() bool {
-	if o != nil && o.Tenant != nil {
+	if o != nil && o.Tenant.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTenant gets a reference to the given StorageNetAppStorageVmRelationship and assigns it to the Tenant field.
+// SetTenant gets a reference to the given NullableStorageNetAppStorageVmRelationship and assigns it to the Tenant field.
 func (o *StorageNetAppNfsService) SetTenant(v StorageNetAppStorageVmRelationship) {
-	o.Tenant = &v
+	o.Tenant.Set(&v)
+}
+
+// SetTenantNil sets the value for Tenant to be an explicit nil
+func (o *StorageNetAppNfsService) SetTenantNil() {
+	o.Tenant.Set(nil)
+}
+
+// UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
+func (o *StorageNetAppNfsService) UnsetTenant() {
+	o.Tenant.Unset()
 }
 
 func (o StorageNetAppNfsService) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppNfsService) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.NfsV3Enabled != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.NfsV3Enabled) {
 		toSerialize["NfsV3Enabled"] = o.NfsV3Enabled
 	}
-	if o.NfsV41Enabled != nil {
+	if !IsNil(o.NfsV41Enabled) {
 		toSerialize["NfsV41Enabled"] = o.NfsV41Enabled
 	}
-	if o.NfsV4Enabled != nil {
+	if !IsNil(o.NfsV4Enabled) {
 		toSerialize["NfsV4Enabled"] = o.NfsV4Enabled
 	}
-	if o.SvmUuid != nil {
+	if !IsNil(o.SvmUuid) {
 		toSerialize["SvmUuid"] = o.SvmUuid
 	}
-	if o.Tenant != nil {
-		toSerialize["Tenant"] = o.Tenant
+	if o.Tenant.IsSet() {
+		toSerialize["Tenant"] = o.Tenant.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppNfsService) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppNfsService) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppNfsServiceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -321,13 +362,13 @@ func (o *StorageNetAppNfsService) UnmarshalJSON(bytes []byte) (err error) {
 		// Specifies whether NFSv4.0 protocol is enabled.
 		NfsV4Enabled *bool `json:"NfsV4Enabled,omitempty"`
 		// Unique identifier for the NetApp Storage Virtual Machine.
-		SvmUuid *string                             `json:"SvmUuid,omitempty"`
-		Tenant  *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+		SvmUuid *string                                    `json:"SvmUuid,omitempty"`
+		Tenant  NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	}
 
 	varStorageNetAppNfsServiceWithoutEmbeddedStruct := StorageNetAppNfsServiceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppNfsServiceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppNfsServiceWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppNfsService := _StorageNetAppNfsService{}
 		varStorageNetAppNfsService.ClassId = varStorageNetAppNfsServiceWithoutEmbeddedStruct.ClassId
@@ -344,7 +385,7 @@ func (o *StorageNetAppNfsService) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppNfsService := _StorageNetAppNfsService{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppNfsService)
+	err = json.Unmarshal(data, &varStorageNetAppNfsService)
 	if err == nil {
 		o.MoBaseMo = varStorageNetAppNfsService.MoBaseMo
 	} else {
@@ -353,7 +394,7 @@ func (o *StorageNetAppNfsService) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "NfsV3Enabled")

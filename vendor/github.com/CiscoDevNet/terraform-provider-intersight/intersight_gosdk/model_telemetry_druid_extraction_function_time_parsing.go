@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,7 +13,11 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 )
+
+// checks if the TelemetryDruidExtractionFunctionTimeParsing type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidExtractionFunctionTimeParsing{}
 
 // TelemetryDruidExtractionFunctionTimeParsing Parses dimension values as timestamps using the given input format, and returns them formatted using the given output format. Note, if you are working with the __time dimension, you should consider using the time extraction function instead instead, which works on time value directly as opposed to string values. If \"joda\" is true, time formats are described in the Joda DateTimeFormat documentation. If \"joda\" is false (or unspecified) then formats are described in the SimpleDateFormat documentation. In general, we recommend setting \"joda\" to true since Joda format strings are more common in Druid APIs and since Joda handles certain edge cases (like weeks and weekyears near the start and end of calendar years) in a more ISO8601 compliant way. If a value cannot be parsed using the provided timeFormat, it will be returned as-is.
 type TelemetryDruidExtractionFunctionTimeParsing struct {
@@ -70,7 +74,7 @@ func (o *TelemetryDruidExtractionFunctionTimeParsing) SetType(v string) {
 
 // GetTimeFormat returns the TimeFormat field value if set, zero value otherwise.
 func (o *TelemetryDruidExtractionFunctionTimeParsing) GetTimeFormat() string {
-	if o == nil || o.TimeFormat == nil {
+	if o == nil || IsNil(o.TimeFormat) {
 		var ret string
 		return ret
 	}
@@ -80,7 +84,7 @@ func (o *TelemetryDruidExtractionFunctionTimeParsing) GetTimeFormat() string {
 // GetTimeFormatOk returns a tuple with the TimeFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidExtractionFunctionTimeParsing) GetTimeFormatOk() (*string, bool) {
-	if o == nil || o.TimeFormat == nil {
+	if o == nil || IsNil(o.TimeFormat) {
 		return nil, false
 	}
 	return o.TimeFormat, true
@@ -88,7 +92,7 @@ func (o *TelemetryDruidExtractionFunctionTimeParsing) GetTimeFormatOk() (*string
 
 // HasTimeFormat returns a boolean if a field has been set.
 func (o *TelemetryDruidExtractionFunctionTimeParsing) HasTimeFormat() bool {
-	if o != nil && o.TimeFormat != nil {
+	if o != nil && !IsNil(o.TimeFormat) {
 		return true
 	}
 
@@ -102,7 +106,7 @@ func (o *TelemetryDruidExtractionFunctionTimeParsing) SetTimeFormat(v string) {
 
 // GetResultFormat returns the ResultFormat field value if set, zero value otherwise.
 func (o *TelemetryDruidExtractionFunctionTimeParsing) GetResultFormat() string {
-	if o == nil || o.ResultFormat == nil {
+	if o == nil || IsNil(o.ResultFormat) {
 		var ret string
 		return ret
 	}
@@ -112,7 +116,7 @@ func (o *TelemetryDruidExtractionFunctionTimeParsing) GetResultFormat() string {
 // GetResultFormatOk returns a tuple with the ResultFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidExtractionFunctionTimeParsing) GetResultFormatOk() (*string, bool) {
-	if o == nil || o.ResultFormat == nil {
+	if o == nil || IsNil(o.ResultFormat) {
 		return nil, false
 	}
 	return o.ResultFormat, true
@@ -120,7 +124,7 @@ func (o *TelemetryDruidExtractionFunctionTimeParsing) GetResultFormatOk() (*stri
 
 // HasResultFormat returns a boolean if a field has been set.
 func (o *TelemetryDruidExtractionFunctionTimeParsing) HasResultFormat() bool {
-	if o != nil && o.ResultFormat != nil {
+	if o != nil && !IsNil(o.ResultFormat) {
 		return true
 	}
 
@@ -134,7 +138,7 @@ func (o *TelemetryDruidExtractionFunctionTimeParsing) SetResultFormat(v string) 
 
 // GetJoda returns the Joda field value if set, zero value otherwise.
 func (o *TelemetryDruidExtractionFunctionTimeParsing) GetJoda() bool {
-	if o == nil || o.Joda == nil {
+	if o == nil || IsNil(o.Joda) {
 		var ret bool
 		return ret
 	}
@@ -144,7 +148,7 @@ func (o *TelemetryDruidExtractionFunctionTimeParsing) GetJoda() bool {
 // GetJodaOk returns a tuple with the Joda field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidExtractionFunctionTimeParsing) GetJodaOk() (*bool, bool) {
-	if o == nil || o.Joda == nil {
+	if o == nil || IsNil(o.Joda) {
 		return nil, false
 	}
 	return o.Joda, true
@@ -152,7 +156,7 @@ func (o *TelemetryDruidExtractionFunctionTimeParsing) GetJodaOk() (*bool, bool) 
 
 // HasJoda returns a boolean if a field has been set.
 func (o *TelemetryDruidExtractionFunctionTimeParsing) HasJoda() bool {
-	if o != nil && o.Joda != nil {
+	if o != nil && !IsNil(o.Joda) {
 		return true
 	}
 
@@ -165,17 +169,23 @@ func (o *TelemetryDruidExtractionFunctionTimeParsing) SetJoda(v bool) {
 }
 
 func (o TelemetryDruidExtractionFunctionTimeParsing) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["type"] = o.Type
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
-	if o.TimeFormat != nil {
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidExtractionFunctionTimeParsing) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["type"] = o.Type
+	if !IsNil(o.TimeFormat) {
 		toSerialize["timeFormat"] = o.TimeFormat
 	}
-	if o.ResultFormat != nil {
+	if !IsNil(o.ResultFormat) {
 		toSerialize["resultFormat"] = o.ResultFormat
 	}
-	if o.Joda != nil {
+	if !IsNil(o.Joda) {
 		toSerialize["joda"] = o.Joda
 	}
 
@@ -183,19 +193,44 @@ func (o TelemetryDruidExtractionFunctionTimeParsing) MarshalJSON() ([]byte, erro
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidExtractionFunctionTimeParsing) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidExtractionFunctionTimeParsing) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"type",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTelemetryDruidExtractionFunctionTimeParsing := _TelemetryDruidExtractionFunctionTimeParsing{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidExtractionFunctionTimeParsing); err == nil {
-		*o = TelemetryDruidExtractionFunctionTimeParsing(varTelemetryDruidExtractionFunctionTimeParsing)
+	err = json.Unmarshal(data, &varTelemetryDruidExtractionFunctionTimeParsing)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidExtractionFunctionTimeParsing(varTelemetryDruidExtractionFunctionTimeParsing)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "timeFormat")
 		delete(additionalProperties, "resultFormat")

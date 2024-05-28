@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SoftwareReleaseMeta type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwareReleaseMeta{}
 
 // SoftwareReleaseMeta Release information for various software images. Gives information on the latest released version of a product.
 type SoftwareReleaseMeta struct {
@@ -31,9 +35,9 @@ type SoftwareReleaseMeta struct {
 	// Latest version of the image avaiable for a specific software.
 	LatestVersion *string `json:"LatestVersion,omitempty"`
 	// The software type id of the image (For e.g. firmware.Distributable, software.ApplianceDistributable, software.HyperflexBundleDistributable, software.UcsdBundleDistributable).
-	SoftwareTypeId       *string                                `json:"SoftwareTypeId,omitempty"`
-	Catalog              *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
-	Image                *FirmwareBaseDistributableRelationship `json:"Image,omitempty"`
+	SoftwareTypeId       *string                                       `json:"SoftwareTypeId,omitempty"`
+	Catalog              NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+	Image                NullableFirmwareBaseDistributableRelationship `json:"Image,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,7 +116,7 @@ func (o *SoftwareReleaseMeta) SetObjectType(v string) {
 
 // GetImageType returns the ImageType field value if set, zero value otherwise.
 func (o *SoftwareReleaseMeta) GetImageType() string {
-	if o == nil || o.ImageType == nil {
+	if o == nil || IsNil(o.ImageType) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *SoftwareReleaseMeta) GetImageType() string {
 // GetImageTypeOk returns a tuple with the ImageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareReleaseMeta) GetImageTypeOk() (*string, bool) {
-	if o == nil || o.ImageType == nil {
+	if o == nil || IsNil(o.ImageType) {
 		return nil, false
 	}
 	return o.ImageType, true
@@ -130,7 +134,7 @@ func (o *SoftwareReleaseMeta) GetImageTypeOk() (*string, bool) {
 
 // HasImageType returns a boolean if a field has been set.
 func (o *SoftwareReleaseMeta) HasImageType() bool {
-	if o != nil && o.ImageType != nil {
+	if o != nil && !IsNil(o.ImageType) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *SoftwareReleaseMeta) SetImageType(v string) {
 
 // GetLatestFileName returns the LatestFileName field value if set, zero value otherwise.
 func (o *SoftwareReleaseMeta) GetLatestFileName() string {
-	if o == nil || o.LatestFileName == nil {
+	if o == nil || IsNil(o.LatestFileName) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *SoftwareReleaseMeta) GetLatestFileName() string {
 // GetLatestFileNameOk returns a tuple with the LatestFileName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareReleaseMeta) GetLatestFileNameOk() (*string, bool) {
-	if o == nil || o.LatestFileName == nil {
+	if o == nil || IsNil(o.LatestFileName) {
 		return nil, false
 	}
 	return o.LatestFileName, true
@@ -162,7 +166,7 @@ func (o *SoftwareReleaseMeta) GetLatestFileNameOk() (*string, bool) {
 
 // HasLatestFileName returns a boolean if a field has been set.
 func (o *SoftwareReleaseMeta) HasLatestFileName() bool {
-	if o != nil && o.LatestFileName != nil {
+	if o != nil && !IsNil(o.LatestFileName) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *SoftwareReleaseMeta) SetLatestFileName(v string) {
 
 // GetLatestVersion returns the LatestVersion field value if set, zero value otherwise.
 func (o *SoftwareReleaseMeta) GetLatestVersion() string {
-	if o == nil || o.LatestVersion == nil {
+	if o == nil || IsNil(o.LatestVersion) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *SoftwareReleaseMeta) GetLatestVersion() string {
 // GetLatestVersionOk returns a tuple with the LatestVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareReleaseMeta) GetLatestVersionOk() (*string, bool) {
-	if o == nil || o.LatestVersion == nil {
+	if o == nil || IsNil(o.LatestVersion) {
 		return nil, false
 	}
 	return o.LatestVersion, true
@@ -194,7 +198,7 @@ func (o *SoftwareReleaseMeta) GetLatestVersionOk() (*string, bool) {
 
 // HasLatestVersion returns a boolean if a field has been set.
 func (o *SoftwareReleaseMeta) HasLatestVersion() bool {
-	if o != nil && o.LatestVersion != nil {
+	if o != nil && !IsNil(o.LatestVersion) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *SoftwareReleaseMeta) SetLatestVersion(v string) {
 
 // GetSoftwareTypeId returns the SoftwareTypeId field value if set, zero value otherwise.
 func (o *SoftwareReleaseMeta) GetSoftwareTypeId() string {
-	if o == nil || o.SoftwareTypeId == nil {
+	if o == nil || IsNil(o.SoftwareTypeId) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *SoftwareReleaseMeta) GetSoftwareTypeId() string {
 // GetSoftwareTypeIdOk returns a tuple with the SoftwareTypeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareReleaseMeta) GetSoftwareTypeIdOk() (*string, bool) {
-	if o == nil || o.SoftwareTypeId == nil {
+	if o == nil || IsNil(o.SoftwareTypeId) {
 		return nil, false
 	}
 	return o.SoftwareTypeId, true
@@ -226,7 +230,7 @@ func (o *SoftwareReleaseMeta) GetSoftwareTypeIdOk() (*string, bool) {
 
 // HasSoftwareTypeId returns a boolean if a field has been set.
 func (o *SoftwareReleaseMeta) HasSoftwareTypeId() bool {
-	if o != nil && o.SoftwareTypeId != nil {
+	if o != nil && !IsNil(o.SoftwareTypeId) {
 		return true
 	}
 
@@ -238,113 +242,161 @@ func (o *SoftwareReleaseMeta) SetSoftwareTypeId(v string) {
 	o.SoftwareTypeId = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoftwareReleaseMeta) GetCatalog() SoftwarerepositoryCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret SoftwarerepositoryCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwareReleaseMeta) GetCatalogOk() (*SoftwarerepositoryCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *SoftwareReleaseMeta) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given SoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableSoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
 func (o *SoftwareReleaseMeta) SetCatalog(v SoftwarerepositoryCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
 }
 
-// GetImage returns the Image field value if set, zero value otherwise.
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *SoftwareReleaseMeta) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *SoftwareReleaseMeta) UnsetCatalog() {
+	o.Catalog.Unset()
+}
+
+// GetImage returns the Image field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoftwareReleaseMeta) GetImage() FirmwareBaseDistributableRelationship {
-	if o == nil || o.Image == nil {
+	if o == nil || IsNil(o.Image.Get()) {
 		var ret FirmwareBaseDistributableRelationship
 		return ret
 	}
-	return *o.Image
+	return *o.Image.Get()
 }
 
 // GetImageOk returns a tuple with the Image field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwareReleaseMeta) GetImageOk() (*FirmwareBaseDistributableRelationship, bool) {
-	if o == nil || o.Image == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Image, true
+	return o.Image.Get(), o.Image.IsSet()
 }
 
 // HasImage returns a boolean if a field has been set.
 func (o *SoftwareReleaseMeta) HasImage() bool {
-	if o != nil && o.Image != nil {
+	if o != nil && o.Image.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetImage gets a reference to the given FirmwareBaseDistributableRelationship and assigns it to the Image field.
+// SetImage gets a reference to the given NullableFirmwareBaseDistributableRelationship and assigns it to the Image field.
 func (o *SoftwareReleaseMeta) SetImage(v FirmwareBaseDistributableRelationship) {
-	o.Image = &v
+	o.Image.Set(&v)
+}
+
+// SetImageNil sets the value for Image to be an explicit nil
+func (o *SoftwareReleaseMeta) SetImageNil() {
+	o.Image.Set(nil)
+}
+
+// UnsetImage ensures that no value is present for Image, not even an explicit nil
+func (o *SoftwareReleaseMeta) UnsetImage() {
+	o.Image.Unset()
 }
 
 func (o SoftwareReleaseMeta) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwareReleaseMeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ImageType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ImageType) {
 		toSerialize["ImageType"] = o.ImageType
 	}
-	if o.LatestFileName != nil {
+	if !IsNil(o.LatestFileName) {
 		toSerialize["LatestFileName"] = o.LatestFileName
 	}
-	if o.LatestVersion != nil {
+	if !IsNil(o.LatestVersion) {
 		toSerialize["LatestVersion"] = o.LatestVersion
 	}
-	if o.SoftwareTypeId != nil {
+	if !IsNil(o.SoftwareTypeId) {
 		toSerialize["SoftwareTypeId"] = o.SoftwareTypeId
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
-	if o.Image != nil {
-		toSerialize["Image"] = o.Image
+	if o.Image.IsSet() {
+		toSerialize["Image"] = o.Image.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwareReleaseMeta) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwareReleaseMeta) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwareReleaseMetaWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -357,14 +409,14 @@ func (o *SoftwareReleaseMeta) UnmarshalJSON(bytes []byte) (err error) {
 		// Latest version of the image avaiable for a specific software.
 		LatestVersion *string `json:"LatestVersion,omitempty"`
 		// The software type id of the image (For e.g. firmware.Distributable, software.ApplianceDistributable, software.HyperflexBundleDistributable, software.UcsdBundleDistributable).
-		SoftwareTypeId *string                                `json:"SoftwareTypeId,omitempty"`
-		Catalog        *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
-		Image          *FirmwareBaseDistributableRelationship `json:"Image,omitempty"`
+		SoftwareTypeId *string                                       `json:"SoftwareTypeId,omitempty"`
+		Catalog        NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+		Image          NullableFirmwareBaseDistributableRelationship `json:"Image,omitempty"`
 	}
 
 	varSoftwareReleaseMetaWithoutEmbeddedStruct := SoftwareReleaseMetaWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwareReleaseMetaWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwareReleaseMetaWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwareReleaseMeta := _SoftwareReleaseMeta{}
 		varSoftwareReleaseMeta.ClassId = varSoftwareReleaseMetaWithoutEmbeddedStruct.ClassId
@@ -382,7 +434,7 @@ func (o *SoftwareReleaseMeta) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSoftwareReleaseMeta := _SoftwareReleaseMeta{}
 
-	err = json.Unmarshal(bytes, &varSoftwareReleaseMeta)
+	err = json.Unmarshal(data, &varSoftwareReleaseMeta)
 	if err == nil {
 		o.MoBaseMo = varSoftwareReleaseMeta.MoBaseMo
 	} else {
@@ -391,7 +443,7 @@ func (o *SoftwareReleaseMeta) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ImageType")

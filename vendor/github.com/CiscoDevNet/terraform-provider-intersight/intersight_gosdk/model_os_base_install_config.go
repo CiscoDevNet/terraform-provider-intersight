@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OsBaseInstallConfig type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OsBaseInstallConfig{}
 
 // OsBaseInstallConfig BaseInstallConfig models the configuration required to install OS.
 type OsBaseInstallConfig struct {
@@ -131,7 +135,7 @@ func (o *OsBaseInstallConfig) GetAdditionalParameters() []OsPlaceHolder {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsBaseInstallConfig) GetAdditionalParametersOk() ([]OsPlaceHolder, bool) {
-	if o == nil || o.AdditionalParameters == nil {
+	if o == nil || IsNil(o.AdditionalParameters) {
 		return nil, false
 	}
 	return o.AdditionalParameters, true
@@ -139,7 +143,7 @@ func (o *OsBaseInstallConfig) GetAdditionalParametersOk() ([]OsPlaceHolder, bool
 
 // HasAdditionalParameters returns a boolean if a field has been set.
 func (o *OsBaseInstallConfig) HasAdditionalParameters() bool {
-	if o != nil && o.AdditionalParameters != nil {
+	if o != nil && IsNil(o.AdditionalParameters) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *OsBaseInstallConfig) SetAdditionalParameters(v []OsPlaceHolder) {
 
 // GetAnswers returns the Answers field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsBaseInstallConfig) GetAnswers() OsAnswers {
-	if o == nil || o.Answers.Get() == nil {
+	if o == nil || IsNil(o.Answers.Get()) {
 		var ret OsAnswers
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *OsBaseInstallConfig) UnsetAnswers() {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *OsBaseInstallConfig) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -206,7 +210,7 @@ func (o *OsBaseInstallConfig) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsBaseInstallConfig) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -214,7 +218,7 @@ func (o *OsBaseInstallConfig) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *OsBaseInstallConfig) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -228,7 +232,7 @@ func (o *OsBaseInstallConfig) SetDescription(v string) {
 
 // GetErrorMsg returns the ErrorMsg field value if set, zero value otherwise.
 func (o *OsBaseInstallConfig) GetErrorMsg() string {
-	if o == nil || o.ErrorMsg == nil {
+	if o == nil || IsNil(o.ErrorMsg) {
 		var ret string
 		return ret
 	}
@@ -238,7 +242,7 @@ func (o *OsBaseInstallConfig) GetErrorMsg() string {
 // GetErrorMsgOk returns a tuple with the ErrorMsg field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsBaseInstallConfig) GetErrorMsgOk() (*string, bool) {
-	if o == nil || o.ErrorMsg == nil {
+	if o == nil || IsNil(o.ErrorMsg) {
 		return nil, false
 	}
 	return o.ErrorMsg, true
@@ -246,7 +250,7 @@ func (o *OsBaseInstallConfig) GetErrorMsgOk() (*string, bool) {
 
 // HasErrorMsg returns a boolean if a field has been set.
 func (o *OsBaseInstallConfig) HasErrorMsg() bool {
-	if o != nil && o.ErrorMsg != nil {
+	if o != nil && !IsNil(o.ErrorMsg) {
 		return true
 	}
 
@@ -260,7 +264,7 @@ func (o *OsBaseInstallConfig) SetErrorMsg(v string) {
 
 // GetInstallMethod returns the InstallMethod field value if set, zero value otherwise.
 func (o *OsBaseInstallConfig) GetInstallMethod() string {
-	if o == nil || o.InstallMethod == nil {
+	if o == nil || IsNil(o.InstallMethod) {
 		var ret string
 		return ret
 	}
@@ -270,7 +274,7 @@ func (o *OsBaseInstallConfig) GetInstallMethod() string {
 // GetInstallMethodOk returns a tuple with the InstallMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsBaseInstallConfig) GetInstallMethodOk() (*string, bool) {
-	if o == nil || o.InstallMethod == nil {
+	if o == nil || IsNil(o.InstallMethod) {
 		return nil, false
 	}
 	return o.InstallMethod, true
@@ -278,7 +282,7 @@ func (o *OsBaseInstallConfig) GetInstallMethodOk() (*string, bool) {
 
 // HasInstallMethod returns a boolean if a field has been set.
 func (o *OsBaseInstallConfig) HasInstallMethod() bool {
-	if o != nil && o.InstallMethod != nil {
+	if o != nil && !IsNil(o.InstallMethod) {
 		return true
 	}
 
@@ -292,7 +296,7 @@ func (o *OsBaseInstallConfig) SetInstallMethod(v string) {
 
 // GetInstallTarget returns the InstallTarget field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsBaseInstallConfig) GetInstallTarget() OsInstallTarget {
-	if o == nil || o.InstallTarget.Get() == nil {
+	if o == nil || IsNil(o.InstallTarget.Get()) {
 		var ret OsInstallTarget
 		return ret
 	}
@@ -335,7 +339,7 @@ func (o *OsBaseInstallConfig) UnsetInstallTarget() {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *OsBaseInstallConfig) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -345,7 +349,7 @@ func (o *OsBaseInstallConfig) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsBaseInstallConfig) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -353,7 +357,7 @@ func (o *OsBaseInstallConfig) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *OsBaseInstallConfig) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -367,7 +371,7 @@ func (o *OsBaseInstallConfig) SetOperState(v string) {
 
 // GetOperatingSystemParameters returns the OperatingSystemParameters field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsBaseInstallConfig) GetOperatingSystemParameters() OsOperatingSystemParameters {
-	if o == nil || o.OperatingSystemParameters.Get() == nil {
+	if o == nil || IsNil(o.OperatingSystemParameters.Get()) {
 		var ret OsOperatingSystemParameters
 		return ret
 	}
@@ -410,7 +414,7 @@ func (o *OsBaseInstallConfig) UnsetOperatingSystemParameters() {
 
 // GetOverrideSecureBoot returns the OverrideSecureBoot field value if set, zero value otherwise.
 func (o *OsBaseInstallConfig) GetOverrideSecureBoot() bool {
-	if o == nil || o.OverrideSecureBoot == nil {
+	if o == nil || IsNil(o.OverrideSecureBoot) {
 		var ret bool
 		return ret
 	}
@@ -420,7 +424,7 @@ func (o *OsBaseInstallConfig) GetOverrideSecureBoot() bool {
 // GetOverrideSecureBootOk returns a tuple with the OverrideSecureBoot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsBaseInstallConfig) GetOverrideSecureBootOk() (*bool, bool) {
-	if o == nil || o.OverrideSecureBoot == nil {
+	if o == nil || IsNil(o.OverrideSecureBoot) {
 		return nil, false
 	}
 	return o.OverrideSecureBoot, true
@@ -428,7 +432,7 @@ func (o *OsBaseInstallConfig) GetOverrideSecureBootOk() (*bool, bool) {
 
 // HasOverrideSecureBoot returns a boolean if a field has been set.
 func (o *OsBaseInstallConfig) HasOverrideSecureBoot() bool {
-	if o != nil && o.OverrideSecureBoot != nil {
+	if o != nil && !IsNil(o.OverrideSecureBoot) {
 		return true
 	}
 
@@ -441,46 +445,50 @@ func (o *OsBaseInstallConfig) SetOverrideSecureBoot(v bool) {
 }
 
 func (o OsBaseInstallConfig) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OsBaseInstallConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AdditionalParameters != nil {
 		toSerialize["AdditionalParameters"] = o.AdditionalParameters
 	}
 	if o.Answers.IsSet() {
 		toSerialize["Answers"] = o.Answers.Get()
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.ErrorMsg != nil {
+	if !IsNil(o.ErrorMsg) {
 		toSerialize["ErrorMsg"] = o.ErrorMsg
 	}
-	if o.InstallMethod != nil {
+	if !IsNil(o.InstallMethod) {
 		toSerialize["InstallMethod"] = o.InstallMethod
 	}
 	if o.InstallTarget.IsSet() {
 		toSerialize["InstallTarget"] = o.InstallTarget.Get()
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
 	if o.OperatingSystemParameters.IsSet() {
 		toSerialize["OperatingSystemParameters"] = o.OperatingSystemParameters.Get()
 	}
-	if o.OverrideSecureBoot != nil {
+	if !IsNil(o.OverrideSecureBoot) {
 		toSerialize["OverrideSecureBoot"] = o.OverrideSecureBoot
 	}
 
@@ -488,10 +496,32 @@ func (o OsBaseInstallConfig) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OsBaseInstallConfig) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OsBaseInstallConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OsBaseInstallConfigWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -515,7 +545,7 @@ func (o *OsBaseInstallConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsBaseInstallConfigWithoutEmbeddedStruct := OsBaseInstallConfigWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOsBaseInstallConfigWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOsBaseInstallConfigWithoutEmbeddedStruct)
 	if err == nil {
 		varOsBaseInstallConfig := _OsBaseInstallConfig{}
 		varOsBaseInstallConfig.ClassId = varOsBaseInstallConfigWithoutEmbeddedStruct.ClassId
@@ -536,7 +566,7 @@ func (o *OsBaseInstallConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsBaseInstallConfig := _OsBaseInstallConfig{}
 
-	err = json.Unmarshal(bytes, &varOsBaseInstallConfig)
+	err = json.Unmarshal(data, &varOsBaseInstallConfig)
 	if err == nil {
 		o.MoBaseMo = varOsBaseInstallConfig.MoBaseMo
 	} else {
@@ -545,7 +575,7 @@ func (o *OsBaseInstallConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdditionalParameters")

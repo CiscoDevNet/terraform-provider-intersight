@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexClusterReplicationNetworkPolicyDeployment type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexClusterReplicationNetworkPolicyDeployment{}
 
 // HyperflexClusterReplicationNetworkPolicyDeployment Record of HyperFlex Cluster replication network policy deployment.
 type HyperflexClusterReplicationNetworkPolicyDeployment struct {
@@ -43,9 +47,9 @@ type HyperflexClusterReplicationNetworkPolicyDeployment struct {
 	ReplicationMtu  *int64                     `json:"ReplicationMtu,omitempty"`
 	ReplicationVlan NullableHyperflexNamedVlan `json:"ReplicationVlan,omitempty"`
 	// Unique request ID allowing retry of the same logical request following a transient communication failure.
-	RequestId            *string                               `json:"RequestId,omitempty"`
-	Cluster              *HyperflexClusterRelationship         `json:"Cluster,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	RequestId            *string                                      `json:"RequestId,omitempty"`
+	Cluster              NullableHyperflexClusterRelationship         `json:"Cluster,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,7 +128,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetObjectType(v str
 
 // GetClusterUuid returns the ClusterUuid field value if set, zero value otherwise.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetClusterUuid() string {
-	if o == nil || o.ClusterUuid == nil {
+	if o == nil || IsNil(o.ClusterUuid) {
 		var ret string
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetClusterUuid() st
 // GetClusterUuidOk returns a tuple with the ClusterUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetClusterUuidOk() (*string, bool) {
-	if o == nil || o.ClusterUuid == nil {
+	if o == nil || IsNil(o.ClusterUuid) {
 		return nil, false
 	}
 	return o.ClusterUuid, true
@@ -142,7 +146,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetClusterUuidOk() 
 
 // HasClusterUuid returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasClusterUuid() bool {
-	if o != nil && o.ClusterUuid != nil {
+	if o != nil && !IsNil(o.ClusterUuid) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetClusterUuid(v st
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetDescription() st
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -174,7 +178,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetDescriptionOk() 
 
 // HasDescription returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetDescription(v st
 
 // GetDiscovered returns the Discovered field value if set, zero value otherwise.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetDiscovered() bool {
-	if o == nil || o.Discovered == nil {
+	if o == nil || IsNil(o.Discovered) {
 		var ret bool
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetDiscovered() boo
 // GetDiscoveredOk returns a tuple with the Discovered field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetDiscoveredOk() (*bool, bool) {
-	if o == nil || o.Discovered == nil {
+	if o == nil || IsNil(o.Discovered) {
 		return nil, false
 	}
 	return o.Discovered, true
@@ -206,7 +210,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetDiscoveredOk() (
 
 // HasDiscovered returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasDiscovered() bool {
-	if o != nil && o.Discovered != nil {
+	if o != nil && !IsNil(o.Discovered) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetDiscovered(v boo
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -238,7 +242,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetNameOk() (*strin
 
 // HasName returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetName(v string) {
 
 // GetPolicyMoid returns the PolicyMoid field value if set, zero value otherwise.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetPolicyMoid() string {
-	if o == nil || o.PolicyMoid == nil {
+	if o == nil || IsNil(o.PolicyMoid) {
 		var ret string
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetPolicyMoid() str
 // GetPolicyMoidOk returns a tuple with the PolicyMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetPolicyMoidOk() (*string, bool) {
-	if o == nil || o.PolicyMoid == nil {
+	if o == nil || IsNil(o.PolicyMoid) {
 		return nil, false
 	}
 	return o.PolicyMoid, true
@@ -270,7 +274,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetPolicyMoidOk() (
 
 // HasPolicyMoid returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasPolicyMoid() bool {
-	if o != nil && o.PolicyMoid != nil {
+	if o != nil && !IsNil(o.PolicyMoid) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetPolicyMoid(v str
 
 // GetProfileMoid returns the ProfileMoid field value if set, zero value otherwise.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetProfileMoid() string {
-	if o == nil || o.ProfileMoid == nil {
+	if o == nil || IsNil(o.ProfileMoid) {
 		var ret string
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetProfileMoid() st
 // GetProfileMoidOk returns a tuple with the ProfileMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetProfileMoidOk() (*string, bool) {
-	if o == nil || o.ProfileMoid == nil {
+	if o == nil || IsNil(o.ProfileMoid) {
 		return nil, false
 	}
 	return o.ProfileMoid, true
@@ -302,7 +306,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetProfileMoidOk() 
 
 // HasProfileMoid returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasProfileMoid() bool {
-	if o != nil && o.ProfileMoid != nil {
+	if o != nil && !IsNil(o.ProfileMoid) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetProfileMoid(v st
 
 // GetReplicationBandwidthMbps returns the ReplicationBandwidthMbps field value if set, zero value otherwise.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationBandwidthMbps() int64 {
-	if o == nil || o.ReplicationBandwidthMbps == nil {
+	if o == nil || IsNil(o.ReplicationBandwidthMbps) {
 		var ret int64
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationBandw
 // GetReplicationBandwidthMbpsOk returns a tuple with the ReplicationBandwidthMbps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationBandwidthMbpsOk() (*int64, bool) {
-	if o == nil || o.ReplicationBandwidthMbps == nil {
+	if o == nil || IsNil(o.ReplicationBandwidthMbps) {
 		return nil, false
 	}
 	return o.ReplicationBandwidthMbps, true
@@ -334,7 +338,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationBandw
 
 // HasReplicationBandwidthMbps returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasReplicationBandwidthMbps() bool {
-	if o != nil && o.ReplicationBandwidthMbps != nil {
+	if o != nil && !IsNil(o.ReplicationBandwidthMbps) {
 		return true
 	}
 
@@ -359,7 +363,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationIpran
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationIprangesOk() ([]HyperflexIpAddrRange, bool) {
-	if o == nil || o.ReplicationIpranges == nil {
+	if o == nil || IsNil(o.ReplicationIpranges) {
 		return nil, false
 	}
 	return o.ReplicationIpranges, true
@@ -367,7 +371,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationIpran
 
 // HasReplicationIpranges returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasReplicationIpranges() bool {
-	if o != nil && o.ReplicationIpranges != nil {
+	if o != nil && IsNil(o.ReplicationIpranges) {
 		return true
 	}
 
@@ -381,7 +385,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetReplicationIpran
 
 // GetReplicationMtu returns the ReplicationMtu field value if set, zero value otherwise.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationMtu() int64 {
-	if o == nil || o.ReplicationMtu == nil {
+	if o == nil || IsNil(o.ReplicationMtu) {
 		var ret int64
 		return ret
 	}
@@ -391,7 +395,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationMtu()
 // GetReplicationMtuOk returns a tuple with the ReplicationMtu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationMtuOk() (*int64, bool) {
-	if o == nil || o.ReplicationMtu == nil {
+	if o == nil || IsNil(o.ReplicationMtu) {
 		return nil, false
 	}
 	return o.ReplicationMtu, true
@@ -399,7 +403,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationMtuOk
 
 // HasReplicationMtu returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasReplicationMtu() bool {
-	if o != nil && o.ReplicationMtu != nil {
+	if o != nil && !IsNil(o.ReplicationMtu) {
 		return true
 	}
 
@@ -413,7 +417,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetReplicationMtu(v
 
 // GetReplicationVlan returns the ReplicationVlan field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetReplicationVlan() HyperflexNamedVlan {
-	if o == nil || o.ReplicationVlan.Get() == nil {
+	if o == nil || IsNil(o.ReplicationVlan.Get()) {
 		var ret HyperflexNamedVlan
 		return ret
 	}
@@ -456,7 +460,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) UnsetReplicationVla
 
 // GetRequestId returns the RequestId field value if set, zero value otherwise.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetRequestId() string {
-	if o == nil || o.RequestId == nil {
+	if o == nil || IsNil(o.RequestId) {
 		var ret string
 		return ret
 	}
@@ -466,7 +470,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetRequestId() stri
 // GetRequestIdOk returns a tuple with the RequestId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetRequestIdOk() (*string, bool) {
-	if o == nil || o.RequestId == nil {
+	if o == nil || IsNil(o.RequestId) {
 		return nil, false
 	}
 	return o.RequestId, true
@@ -474,7 +478,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetRequestIdOk() (*
 
 // HasRequestId returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasRequestId() bool {
-	if o != nil && o.RequestId != nil {
+	if o != nil && !IsNil(o.RequestId) {
 		return true
 	}
 
@@ -486,134 +490,182 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetRequestId(v stri
 	o.RequestId = &v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetCluster() HyperflexClusterRelationship {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.Cluster
+	return *o.Cluster.Get()
 }
 
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.Cluster.Get(), o.Cluster.IsSet()
 }
 
 // HasCluster returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && o.Cluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the Cluster field.
+// SetCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the Cluster field.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetCluster(v HyperflexClusterRelationship) {
-	o.Cluster = &v
+	o.Cluster.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetClusterNil sets the value for Cluster to be an explicit nil
+func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetClusterNil() {
+	o.Cluster.Set(nil)
+}
+
+// UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
+func (o *HyperflexClusterReplicationNetworkPolicyDeployment) UnsetCluster() {
+	o.Cluster.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *HyperflexClusterReplicationNetworkPolicyDeployment) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *HyperflexClusterReplicationNetworkPolicyDeployment) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o HyperflexClusterReplicationNetworkPolicyDeployment) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexClusterReplicationNetworkPolicyDeployment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClusterUuid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClusterUuid) {
 		toSerialize["ClusterUuid"] = o.ClusterUuid
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Discovered != nil {
+	if !IsNil(o.Discovered) {
 		toSerialize["Discovered"] = o.Discovered
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PolicyMoid != nil {
+	if !IsNil(o.PolicyMoid) {
 		toSerialize["PolicyMoid"] = o.PolicyMoid
 	}
-	if o.ProfileMoid != nil {
+	if !IsNil(o.ProfileMoid) {
 		toSerialize["ProfileMoid"] = o.ProfileMoid
 	}
-	if o.ReplicationBandwidthMbps != nil {
+	if !IsNil(o.ReplicationBandwidthMbps) {
 		toSerialize["ReplicationBandwidthMbps"] = o.ReplicationBandwidthMbps
 	}
 	if o.ReplicationIpranges != nil {
 		toSerialize["ReplicationIpranges"] = o.ReplicationIpranges
 	}
-	if o.ReplicationMtu != nil {
+	if !IsNil(o.ReplicationMtu) {
 		toSerialize["ReplicationMtu"] = o.ReplicationMtu
 	}
 	if o.ReplicationVlan.IsSet() {
 		toSerialize["ReplicationVlan"] = o.ReplicationVlan.Get()
 	}
-	if o.RequestId != nil {
+	if !IsNil(o.RequestId) {
 		toSerialize["RequestId"] = o.RequestId
 	}
-	if o.Cluster != nil {
-		toSerialize["Cluster"] = o.Cluster
+	if o.Cluster.IsSet() {
+		toSerialize["Cluster"] = o.Cluster.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexClusterReplicationNetworkPolicyDeployment) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexClusterReplicationNetworkPolicyDeployment) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexClusterReplicationNetworkPolicyDeploymentWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -638,14 +690,14 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) UnmarshalJSON(bytes
 		ReplicationMtu  *int64                     `json:"ReplicationMtu,omitempty"`
 		ReplicationVlan NullableHyperflexNamedVlan `json:"ReplicationVlan,omitempty"`
 		// Unique request ID allowing retry of the same logical request following a transient communication failure.
-		RequestId    *string                               `json:"RequestId,omitempty"`
-		Cluster      *HyperflexClusterRelationship         `json:"Cluster,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		RequestId    *string                                      `json:"RequestId,omitempty"`
+		Cluster      NullableHyperflexClusterRelationship         `json:"Cluster,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varHyperflexClusterReplicationNetworkPolicyDeploymentWithoutEmbeddedStruct := HyperflexClusterReplicationNetworkPolicyDeploymentWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexClusterReplicationNetworkPolicyDeploymentWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexClusterReplicationNetworkPolicyDeploymentWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexClusterReplicationNetworkPolicyDeployment := _HyperflexClusterReplicationNetworkPolicyDeployment{}
 		varHyperflexClusterReplicationNetworkPolicyDeployment.ClassId = varHyperflexClusterReplicationNetworkPolicyDeploymentWithoutEmbeddedStruct.ClassId
@@ -670,7 +722,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) UnmarshalJSON(bytes
 
 	varHyperflexClusterReplicationNetworkPolicyDeployment := _HyperflexClusterReplicationNetworkPolicyDeployment{}
 
-	err = json.Unmarshal(bytes, &varHyperflexClusterReplicationNetworkPolicyDeployment)
+	err = json.Unmarshal(data, &varHyperflexClusterReplicationNetworkPolicyDeployment)
 	if err == nil {
 		o.MoBaseMo = varHyperflexClusterReplicationNetworkPolicyDeployment.MoBaseMo
 	} else {
@@ -679,7 +731,7 @@ func (o *HyperflexClusterReplicationNetworkPolicyDeployment) UnmarshalJSON(bytes
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterUuid")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowServiceItemAttribute type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowServiceItemAttribute{}
 
 // WorkflowServiceItemAttribute Service item attribute which represents all the artifacts created or related to this service item instance.
 type WorkflowServiceItemAttribute struct {
@@ -31,9 +35,9 @@ type WorkflowServiceItemAttribute struct {
 	// Attribute name which is used in the attribute definition of the service item.
 	Name *string `json:"Name,omitempty"`
 	// Type of the service item attribute. * `None` - Default value if the service item attribute does not belong to any of the existing types. * `Configuration` - The service item attribute is a configuration from the designer or the end user. * `Inventory` - The service item attribute captures the inventory of the resource created by the service item deployment. * `Health` - The service item attribute describes the health of the resource created by the service item deployment. * `Output` - The service item attribute captures the artifact generated after performing an action on the service item.
-	Type                  *string                                    `json:"Type,omitempty"`
-	ServiceItemDefinition *WorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
-	ServiceItemInstance   *WorkflowServiceItemInstanceRelationship   `json:"ServiceItemInstance,omitempty"`
+	Type                  *string                                           `json:"Type,omitempty"`
+	ServiceItemDefinition NullableWorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
+	ServiceItemInstance   NullableWorkflowServiceItemInstanceRelationship   `json:"ServiceItemInstance,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -123,7 +127,7 @@ func (o *WorkflowServiceItemAttribute) GetAttribute() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemAttribute) GetAttributeOk() (*interface{}, bool) {
-	if o == nil || o.Attribute == nil {
+	if o == nil || IsNil(o.Attribute) {
 		return nil, false
 	}
 	return &o.Attribute, true
@@ -131,7 +135,7 @@ func (o *WorkflowServiceItemAttribute) GetAttributeOk() (*interface{}, bool) {
 
 // HasAttribute returns a boolean if a field has been set.
 func (o *WorkflowServiceItemAttribute) HasAttribute() bool {
-	if o != nil && o.Attribute != nil {
+	if o != nil && IsNil(o.Attribute) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *WorkflowServiceItemAttribute) SetAttribute(v interface{}) {
 
 // GetDatatype returns the Datatype field value if set, zero value otherwise.
 func (o *WorkflowServiceItemAttribute) GetDatatype() string {
-	if o == nil || o.Datatype == nil {
+	if o == nil || IsNil(o.Datatype) {
 		var ret string
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *WorkflowServiceItemAttribute) GetDatatype() string {
 // GetDatatypeOk returns a tuple with the Datatype field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemAttribute) GetDatatypeOk() (*string, bool) {
-	if o == nil || o.Datatype == nil {
+	if o == nil || IsNil(o.Datatype) {
 		return nil, false
 	}
 	return o.Datatype, true
@@ -163,7 +167,7 @@ func (o *WorkflowServiceItemAttribute) GetDatatypeOk() (*string, bool) {
 
 // HasDatatype returns a boolean if a field has been set.
 func (o *WorkflowServiceItemAttribute) HasDatatype() bool {
-	if o != nil && o.Datatype != nil {
+	if o != nil && !IsNil(o.Datatype) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *WorkflowServiceItemAttribute) SetDatatype(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkflowServiceItemAttribute) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *WorkflowServiceItemAttribute) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemAttribute) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -195,7 +199,7 @@ func (o *WorkflowServiceItemAttribute) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *WorkflowServiceItemAttribute) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *WorkflowServiceItemAttribute) SetName(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *WorkflowServiceItemAttribute) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *WorkflowServiceItemAttribute) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemAttribute) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -227,7 +231,7 @@ func (o *WorkflowServiceItemAttribute) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *WorkflowServiceItemAttribute) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -239,113 +243,161 @@ func (o *WorkflowServiceItemAttribute) SetType(v string) {
 	o.Type = &v
 }
 
-// GetServiceItemDefinition returns the ServiceItemDefinition field value if set, zero value otherwise.
+// GetServiceItemDefinition returns the ServiceItemDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemAttribute) GetServiceItemDefinition() WorkflowServiceItemDefinitionRelationship {
-	if o == nil || o.ServiceItemDefinition == nil {
+	if o == nil || IsNil(o.ServiceItemDefinition.Get()) {
 		var ret WorkflowServiceItemDefinitionRelationship
 		return ret
 	}
-	return *o.ServiceItemDefinition
+	return *o.ServiceItemDefinition.Get()
 }
 
 // GetServiceItemDefinitionOk returns a tuple with the ServiceItemDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemAttribute) GetServiceItemDefinitionOk() (*WorkflowServiceItemDefinitionRelationship, bool) {
-	if o == nil || o.ServiceItemDefinition == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServiceItemDefinition, true
+	return o.ServiceItemDefinition.Get(), o.ServiceItemDefinition.IsSet()
 }
 
 // HasServiceItemDefinition returns a boolean if a field has been set.
 func (o *WorkflowServiceItemAttribute) HasServiceItemDefinition() bool {
-	if o != nil && o.ServiceItemDefinition != nil {
+	if o != nil && o.ServiceItemDefinition.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServiceItemDefinition gets a reference to the given WorkflowServiceItemDefinitionRelationship and assigns it to the ServiceItemDefinition field.
+// SetServiceItemDefinition gets a reference to the given NullableWorkflowServiceItemDefinitionRelationship and assigns it to the ServiceItemDefinition field.
 func (o *WorkflowServiceItemAttribute) SetServiceItemDefinition(v WorkflowServiceItemDefinitionRelationship) {
-	o.ServiceItemDefinition = &v
+	o.ServiceItemDefinition.Set(&v)
 }
 
-// GetServiceItemInstance returns the ServiceItemInstance field value if set, zero value otherwise.
+// SetServiceItemDefinitionNil sets the value for ServiceItemDefinition to be an explicit nil
+func (o *WorkflowServiceItemAttribute) SetServiceItemDefinitionNil() {
+	o.ServiceItemDefinition.Set(nil)
+}
+
+// UnsetServiceItemDefinition ensures that no value is present for ServiceItemDefinition, not even an explicit nil
+func (o *WorkflowServiceItemAttribute) UnsetServiceItemDefinition() {
+	o.ServiceItemDefinition.Unset()
+}
+
+// GetServiceItemInstance returns the ServiceItemInstance field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemAttribute) GetServiceItemInstance() WorkflowServiceItemInstanceRelationship {
-	if o == nil || o.ServiceItemInstance == nil {
+	if o == nil || IsNil(o.ServiceItemInstance.Get()) {
 		var ret WorkflowServiceItemInstanceRelationship
 		return ret
 	}
-	return *o.ServiceItemInstance
+	return *o.ServiceItemInstance.Get()
 }
 
 // GetServiceItemInstanceOk returns a tuple with the ServiceItemInstance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemAttribute) GetServiceItemInstanceOk() (*WorkflowServiceItemInstanceRelationship, bool) {
-	if o == nil || o.ServiceItemInstance == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServiceItemInstance, true
+	return o.ServiceItemInstance.Get(), o.ServiceItemInstance.IsSet()
 }
 
 // HasServiceItemInstance returns a boolean if a field has been set.
 func (o *WorkflowServiceItemAttribute) HasServiceItemInstance() bool {
-	if o != nil && o.ServiceItemInstance != nil {
+	if o != nil && o.ServiceItemInstance.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServiceItemInstance gets a reference to the given WorkflowServiceItemInstanceRelationship and assigns it to the ServiceItemInstance field.
+// SetServiceItemInstance gets a reference to the given NullableWorkflowServiceItemInstanceRelationship and assigns it to the ServiceItemInstance field.
 func (o *WorkflowServiceItemAttribute) SetServiceItemInstance(v WorkflowServiceItemInstanceRelationship) {
-	o.ServiceItemInstance = &v
+	o.ServiceItemInstance.Set(&v)
+}
+
+// SetServiceItemInstanceNil sets the value for ServiceItemInstance to be an explicit nil
+func (o *WorkflowServiceItemAttribute) SetServiceItemInstanceNil() {
+	o.ServiceItemInstance.Set(nil)
+}
+
+// UnsetServiceItemInstance ensures that no value is present for ServiceItemInstance, not even an explicit nil
+func (o *WorkflowServiceItemAttribute) UnsetServiceItemInstance() {
+	o.ServiceItemInstance.Unset()
 }
 
 func (o WorkflowServiceItemAttribute) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowServiceItemAttribute) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Attribute != nil {
 		toSerialize["Attribute"] = o.Attribute
 	}
-	if o.Datatype != nil {
+	if !IsNil(o.Datatype) {
 		toSerialize["Datatype"] = o.Datatype
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.ServiceItemDefinition != nil {
-		toSerialize["ServiceItemDefinition"] = o.ServiceItemDefinition
+	if o.ServiceItemDefinition.IsSet() {
+		toSerialize["ServiceItemDefinition"] = o.ServiceItemDefinition.Get()
 	}
-	if o.ServiceItemInstance != nil {
-		toSerialize["ServiceItemInstance"] = o.ServiceItemInstance
+	if o.ServiceItemInstance.IsSet() {
+		toSerialize["ServiceItemInstance"] = o.ServiceItemInstance.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowServiceItemAttribute) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowServiceItemAttribute) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowServiceItemAttributeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -358,14 +410,14 @@ func (o *WorkflowServiceItemAttribute) UnmarshalJSON(bytes []byte) (err error) {
 		// Attribute name which is used in the attribute definition of the service item.
 		Name *string `json:"Name,omitempty"`
 		// Type of the service item attribute. * `None` - Default value if the service item attribute does not belong to any of the existing types. * `Configuration` - The service item attribute is a configuration from the designer or the end user. * `Inventory` - The service item attribute captures the inventory of the resource created by the service item deployment. * `Health` - The service item attribute describes the health of the resource created by the service item deployment. * `Output` - The service item attribute captures the artifact generated after performing an action on the service item.
-		Type                  *string                                    `json:"Type,omitempty"`
-		ServiceItemDefinition *WorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
-		ServiceItemInstance   *WorkflowServiceItemInstanceRelationship   `json:"ServiceItemInstance,omitempty"`
+		Type                  *string                                           `json:"Type,omitempty"`
+		ServiceItemDefinition NullableWorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
+		ServiceItemInstance   NullableWorkflowServiceItemInstanceRelationship   `json:"ServiceItemInstance,omitempty"`
 	}
 
 	varWorkflowServiceItemAttributeWithoutEmbeddedStruct := WorkflowServiceItemAttributeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowServiceItemAttributeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowServiceItemAttributeWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowServiceItemAttribute := _WorkflowServiceItemAttribute{}
 		varWorkflowServiceItemAttribute.ClassId = varWorkflowServiceItemAttributeWithoutEmbeddedStruct.ClassId
@@ -383,7 +435,7 @@ func (o *WorkflowServiceItemAttribute) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowServiceItemAttribute := _WorkflowServiceItemAttribute{}
 
-	err = json.Unmarshal(bytes, &varWorkflowServiceItemAttribute)
+	err = json.Unmarshal(data, &varWorkflowServiceItemAttribute)
 	if err == nil {
 		o.MoBaseMo = varWorkflowServiceItemAttribute.MoBaseMo
 	} else {
@@ -392,7 +444,7 @@ func (o *WorkflowServiceItemAttribute) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Attribute")

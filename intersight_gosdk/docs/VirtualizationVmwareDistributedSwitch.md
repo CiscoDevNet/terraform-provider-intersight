@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **SwitchCapacity** | Pointer to [**NullableVirtualizationStorageCapacity**](VirtualizationStorageCapacity.md) |  | [optional] 
 **Uuid** | Pointer to **string** | Universally Unique Id of this distributed virtual switch. | [optional] 
 **Version** | Pointer to **string** | The running config&#39;s version details are represented. | [optional] 
-**Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
+**Datacenter** | Pointer to [**NullableVirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
 **Hosts** | Pointer to [**[]VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) | An array of relationships to virtualizationVmwareHost resources. | [optional] [readonly] 
 
 ## Methods
@@ -497,6 +497,16 @@ SetDatacenter sets Datacenter field to given value.
 
 HasDatacenter returns a boolean if a field has been set.
 
+### SetDatacenterNil
+
+`func (o *VirtualizationVmwareDistributedSwitch) SetDatacenterNil(b bool)`
+
+ SetDatacenterNil sets the value for Datacenter to be an explicit nil
+
+### UnsetDatacenter
+`func (o *VirtualizationVmwareDistributedSwitch) UnsetDatacenter()`
+
+UnsetDatacenter ensures that no value is present for Datacenter, not even an explicit nil
 ### GetHosts
 
 `func (o *VirtualizationVmwareDistributedSwitch) GetHosts() []VirtualizationVmwareHostRelationship`

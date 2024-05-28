@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageKmipServer type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageKmipServer{}
 
 // StorageKmipServer Models the KMIP Server configuration used to fetch the encryption key.
 type StorageKmipServer struct {
@@ -118,7 +122,7 @@ func (o *StorageKmipServer) SetObjectType(v string) {
 
 // GetEnableDriveSecurity returns the EnableDriveSecurity field value if set, zero value otherwise.
 func (o *StorageKmipServer) GetEnableDriveSecurity() bool {
-	if o == nil || o.EnableDriveSecurity == nil {
+	if o == nil || IsNil(o.EnableDriveSecurity) {
 		var ret bool
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *StorageKmipServer) GetEnableDriveSecurity() bool {
 // GetEnableDriveSecurityOk returns a tuple with the EnableDriveSecurity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageKmipServer) GetEnableDriveSecurityOk() (*bool, bool) {
-	if o == nil || o.EnableDriveSecurity == nil {
+	if o == nil || IsNil(o.EnableDriveSecurity) {
 		return nil, false
 	}
 	return o.EnableDriveSecurity, true
@@ -136,7 +140,7 @@ func (o *StorageKmipServer) GetEnableDriveSecurityOk() (*bool, bool) {
 
 // HasEnableDriveSecurity returns a boolean if a field has been set.
 func (o *StorageKmipServer) HasEnableDriveSecurity() bool {
-	if o != nil && o.EnableDriveSecurity != nil {
+	if o != nil && !IsNil(o.EnableDriveSecurity) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *StorageKmipServer) SetEnableDriveSecurity(v bool) {
 
 // GetIpAddress returns the IpAddress field value if set, zero value otherwise.
 func (o *StorageKmipServer) GetIpAddress() string {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		var ret string
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *StorageKmipServer) GetIpAddress() string {
 // GetIpAddressOk returns a tuple with the IpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageKmipServer) GetIpAddressOk() (*string, bool) {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		return nil, false
 	}
 	return o.IpAddress, true
@@ -168,7 +172,7 @@ func (o *StorageKmipServer) GetIpAddressOk() (*string, bool) {
 
 // HasIpAddress returns a boolean if a field has been set.
 func (o *StorageKmipServer) HasIpAddress() bool {
-	if o != nil && o.IpAddress != nil {
+	if o != nil && !IsNil(o.IpAddress) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *StorageKmipServer) SetIpAddress(v string) {
 
 // GetPort returns the Port field value if set, zero value otherwise.
 func (o *StorageKmipServer) GetPort() int64 {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret int64
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *StorageKmipServer) GetPort() int64 {
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageKmipServer) GetPortOk() (*int64, bool) {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
 	return o.Port, true
@@ -200,7 +204,7 @@ func (o *StorageKmipServer) GetPortOk() (*int64, bool) {
 
 // HasPort returns a boolean if a field has been set.
 func (o *StorageKmipServer) HasPort() bool {
-	if o != nil && o.Port != nil {
+	if o != nil && !IsNil(o.Port) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *StorageKmipServer) SetPort(v int64) {
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
 func (o *StorageKmipServer) GetTimeout() int64 {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		var ret int64
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *StorageKmipServer) GetTimeout() int64 {
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageKmipServer) GetTimeoutOk() (*int64, bool) {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
 	return o.Timeout, true
@@ -232,7 +236,7 @@ func (o *StorageKmipServer) GetTimeoutOk() (*int64, bool) {
 
 // HasTimeout returns a boolean if a field has been set.
 func (o *StorageKmipServer) HasTimeout() bool {
-	if o != nil && o.Timeout != nil {
+	if o != nil && !IsNil(o.Timeout) {
 		return true
 	}
 
@@ -245,31 +249,35 @@ func (o *StorageKmipServer) SetTimeout(v int64) {
 }
 
 func (o StorageKmipServer) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageKmipServer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EnableDriveSecurity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EnableDriveSecurity) {
 		toSerialize["EnableDriveSecurity"] = o.EnableDriveSecurity
 	}
-	if o.IpAddress != nil {
+	if !IsNil(o.IpAddress) {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
-	if o.Port != nil {
+	if !IsNil(o.Port) {
 		toSerialize["Port"] = o.Port
 	}
-	if o.Timeout != nil {
+	if !IsNil(o.Timeout) {
 		toSerialize["Timeout"] = o.Timeout
 	}
 
@@ -277,10 +285,32 @@ func (o StorageKmipServer) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageKmipServer) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageKmipServer) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageKmipServerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -298,7 +328,7 @@ func (o *StorageKmipServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageKmipServerWithoutEmbeddedStruct := StorageKmipServerWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageKmipServerWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageKmipServerWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageKmipServer := _StorageKmipServer{}
 		varStorageKmipServer.ClassId = varStorageKmipServerWithoutEmbeddedStruct.ClassId
@@ -314,7 +344,7 @@ func (o *StorageKmipServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageKmipServer := _StorageKmipServer{}
 
-	err = json.Unmarshal(bytes, &varStorageKmipServer)
+	err = json.Unmarshal(data, &varStorageKmipServer)
 	if err == nil {
 		o.MoBaseComplexType = varStorageKmipServer.MoBaseComplexType
 	} else {
@@ -323,7 +353,7 @@ func (o *StorageKmipServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EnableDriveSecurity")

@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vmrc.Console"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vmrc.Console"]
-**Vcenter** | Pointer to [**VirtualizationVmwareVcenterRelationship**](VirtualizationVmwareVcenterRelationship.md) |  | [optional] 
-**VirtualMachine** | Pointer to [**VirtualizationVmwareVirtualMachineRelationship**](VirtualizationVmwareVirtualMachineRelationship.md) |  | [optional] 
+**Vcenter** | Pointer to [**NullableVirtualizationVmwareVcenterRelationship**](VirtualizationVmwareVcenterRelationship.md) |  | [optional] 
+**VirtualMachine** | Pointer to [**NullableVirtualizationVmwareVirtualMachineRelationship**](VirtualizationVmwareVirtualMachineRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -93,6 +93,16 @@ SetVcenter sets Vcenter field to given value.
 
 HasVcenter returns a boolean if a field has been set.
 
+### SetVcenterNil
+
+`func (o *VmrcConsole) SetVcenterNil(b bool)`
+
+ SetVcenterNil sets the value for Vcenter to be an explicit nil
+
+### UnsetVcenter
+`func (o *VmrcConsole) UnsetVcenter()`
+
+UnsetVcenter ensures that no value is present for Vcenter, not even an explicit nil
 ### GetVirtualMachine
 
 `func (o *VmrcConsole) GetVirtualMachine() VirtualizationVmwareVirtualMachineRelationship`
@@ -118,6 +128,16 @@ SetVirtualMachine sets VirtualMachine field to given value.
 
 HasVirtualMachine returns a boolean if a field has been set.
 
+### SetVirtualMachineNil
+
+`func (o *VmrcConsole) SetVirtualMachineNil(b bool)`
+
+ SetVirtualMachineNil sets the value for VirtualMachine to be an explicit nil
+
+### UnsetVirtualMachine
+`func (o *VmrcConsole) UnsetVirtualMachine()`
+
+UnsetVirtualMachine ensures that no value is present for VirtualMachine, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

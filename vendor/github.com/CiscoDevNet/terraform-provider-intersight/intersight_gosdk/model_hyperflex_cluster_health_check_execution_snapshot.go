@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the HyperflexClusterHealthCheckExecutionSnapshot type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexClusterHealthCheckExecutionSnapshot{}
 
 // HyperflexClusterHealthCheckExecutionSnapshot Health check execution snapshot of the HyperFlex cluster.
 type HyperflexClusterHealthCheckExecutionSnapshot struct {
@@ -28,10 +32,10 @@ type HyperflexClusterHealthCheckExecutionSnapshot struct {
 	// The execution context of the HyperFlex health checks. * `UNKNOWN` - The current context of HyperFlex health check execution is unknown. * `WORKFLOW` - The HyperFlex health check execution is initiated through an orchestration workflow. * `SCHEDULED` - The HyperFlex health check execution is through a scheduled run.
 	ExecutionContext *string `json:"ExecutionContext,omitempty"`
 	// Timestamp of the last health check execution on the HyperFlex cluster.
-	Timestamp            *time.Time                           `json:"Timestamp,omitempty"`
-	HxCluster            *HyperflexClusterRelationship        `json:"HxCluster,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	Workflow             *WorkflowWorkflowInfoRelationship    `json:"Workflow,omitempty"`
+	Timestamp            *time.Time                                  `json:"Timestamp,omitempty"`
+	HxCluster            NullableHyperflexClusterRelationship        `json:"HxCluster,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Workflow             NullableWorkflowWorkflowInfoRelationship    `json:"Workflow,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetObjectType(v string) {
 
 // GetExecutionContext returns the ExecutionContext field value if set, zero value otherwise.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetExecutionContext() string {
-	if o == nil || o.ExecutionContext == nil {
+	if o == nil || IsNil(o.ExecutionContext) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetExecutionContext() str
 // GetExecutionContextOk returns a tuple with the ExecutionContext field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetExecutionContextOk() (*string, bool) {
-	if o == nil || o.ExecutionContext == nil {
+	if o == nil || IsNil(o.ExecutionContext) {
 		return nil, false
 	}
 	return o.ExecutionContext, true
@@ -132,7 +136,7 @@ func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetExecutionContextOk() (
 
 // HasExecutionContext returns a boolean if a field has been set.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) HasExecutionContext() bool {
-	if o != nil && o.ExecutionContext != nil {
+	if o != nil && !IsNil(o.ExecutionContext) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetExecutionContext(v str
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetTimestamp() time.Time {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		var ret time.Time
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetTimestamp() time.Time 
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
 	return o.Timestamp, true
@@ -164,7 +168,7 @@ func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetTimestampOk() (*time.T
 
 // HasTimestamp returns a boolean if a field has been set.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
+	if o != nil && !IsNil(o.Timestamp) {
 		return true
 	}
 
@@ -176,142 +180,201 @@ func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetTimestamp(v time.Time)
 	o.Timestamp = &v
 }
 
-// GetHxCluster returns the HxCluster field value if set, zero value otherwise.
+// GetHxCluster returns the HxCluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetHxCluster() HyperflexClusterRelationship {
-	if o == nil || o.HxCluster == nil {
+	if o == nil || IsNil(o.HxCluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.HxCluster
+	return *o.HxCluster.Get()
 }
 
 // GetHxClusterOk returns a tuple with the HxCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetHxClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.HxCluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.HxCluster, true
+	return o.HxCluster.Get(), o.HxCluster.IsSet()
 }
 
 // HasHxCluster returns a boolean if a field has been set.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) HasHxCluster() bool {
-	if o != nil && o.HxCluster != nil {
+	if o != nil && o.HxCluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHxCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the HxCluster field.
+// SetHxCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the HxCluster field.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetHxCluster(v HyperflexClusterRelationship) {
-	o.HxCluster = &v
+	o.HxCluster.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetHxClusterNil sets the value for HxCluster to be an explicit nil
+func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetHxClusterNil() {
+	o.HxCluster.Set(nil)
+}
+
+// UnsetHxCluster ensures that no value is present for HxCluster, not even an explicit nil
+func (o *HyperflexClusterHealthCheckExecutionSnapshot) UnsetHxCluster() {
+	o.HxCluster.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetWorkflow returns the Workflow field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *HyperflexClusterHealthCheckExecutionSnapshot) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetWorkflow returns the Workflow field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetWorkflow() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.Workflow == nil {
+	if o == nil || IsNil(o.Workflow.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.Workflow
+	return *o.Workflow.Get()
 }
 
 // GetWorkflowOk returns a tuple with the Workflow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) GetWorkflowOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.Workflow == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Workflow, true
+	return o.Workflow.Get(), o.Workflow.IsSet()
 }
 
 // HasWorkflow returns a boolean if a field has been set.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) HasWorkflow() bool {
-	if o != nil && o.Workflow != nil {
+	if o != nil && o.Workflow.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflow gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the Workflow field.
+// SetWorkflow gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the Workflow field.
 func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetWorkflow(v WorkflowWorkflowInfoRelationship) {
-	o.Workflow = &v
+	o.Workflow.Set(&v)
+}
+
+// SetWorkflowNil sets the value for Workflow to be an explicit nil
+func (o *HyperflexClusterHealthCheckExecutionSnapshot) SetWorkflowNil() {
+	o.Workflow.Set(nil)
+}
+
+// UnsetWorkflow ensures that no value is present for Workflow, not even an explicit nil
+func (o *HyperflexClusterHealthCheckExecutionSnapshot) UnsetWorkflow() {
+	o.Workflow.Unset()
 }
 
 func (o HyperflexClusterHealthCheckExecutionSnapshot) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexClusterHealthCheckExecutionSnapshot) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ExecutionContext != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ExecutionContext) {
 		toSerialize["ExecutionContext"] = o.ExecutionContext
 	}
-	if o.Timestamp != nil {
+	if !IsNil(o.Timestamp) {
 		toSerialize["Timestamp"] = o.Timestamp
 	}
-	if o.HxCluster != nil {
-		toSerialize["HxCluster"] = o.HxCluster
+	if o.HxCluster.IsSet() {
+		toSerialize["HxCluster"] = o.HxCluster.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.Workflow != nil {
-		toSerialize["Workflow"] = o.Workflow
+	if o.Workflow.IsSet() {
+		toSerialize["Workflow"] = o.Workflow.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexClusterHealthCheckExecutionSnapshot) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexClusterHealthCheckExecutionSnapshot) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexClusterHealthCheckExecutionSnapshotWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -320,15 +383,15 @@ func (o *HyperflexClusterHealthCheckExecutionSnapshot) UnmarshalJSON(bytes []byt
 		// The execution context of the HyperFlex health checks. * `UNKNOWN` - The current context of HyperFlex health check execution is unknown. * `WORKFLOW` - The HyperFlex health check execution is initiated through an orchestration workflow. * `SCHEDULED` - The HyperFlex health check execution is through a scheduled run.
 		ExecutionContext *string `json:"ExecutionContext,omitempty"`
 		// Timestamp of the last health check execution on the HyperFlex cluster.
-		Timestamp        *time.Time                           `json:"Timestamp,omitempty"`
-		HxCluster        *HyperflexClusterRelationship        `json:"HxCluster,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		Workflow         *WorkflowWorkflowInfoRelationship    `json:"Workflow,omitempty"`
+		Timestamp        *time.Time                                  `json:"Timestamp,omitempty"`
+		HxCluster        NullableHyperflexClusterRelationship        `json:"HxCluster,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Workflow         NullableWorkflowWorkflowInfoRelationship    `json:"Workflow,omitempty"`
 	}
 
 	varHyperflexClusterHealthCheckExecutionSnapshotWithoutEmbeddedStruct := HyperflexClusterHealthCheckExecutionSnapshotWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexClusterHealthCheckExecutionSnapshotWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexClusterHealthCheckExecutionSnapshotWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexClusterHealthCheckExecutionSnapshot := _HyperflexClusterHealthCheckExecutionSnapshot{}
 		varHyperflexClusterHealthCheckExecutionSnapshot.ClassId = varHyperflexClusterHealthCheckExecutionSnapshotWithoutEmbeddedStruct.ClassId
@@ -345,7 +408,7 @@ func (o *HyperflexClusterHealthCheckExecutionSnapshot) UnmarshalJSON(bytes []byt
 
 	varHyperflexClusterHealthCheckExecutionSnapshot := _HyperflexClusterHealthCheckExecutionSnapshot{}
 
-	err = json.Unmarshal(bytes, &varHyperflexClusterHealthCheckExecutionSnapshot)
+	err = json.Unmarshal(data, &varHyperflexClusterHealthCheckExecutionSnapshot)
 	if err == nil {
 		o.MoBaseMo = varHyperflexClusterHealthCheckExecutionSnapshot.MoBaseMo
 	} else {
@@ -354,7 +417,7 @@ func (o *HyperflexClusterHealthCheckExecutionSnapshot) UnmarshalJSON(bytes []byt
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExecutionContext")

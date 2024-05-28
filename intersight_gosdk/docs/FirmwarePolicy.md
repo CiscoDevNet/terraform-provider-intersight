@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ExcludeComponentList** | Pointer to **[]string** |  | [optional] 
 **ModelBundleCombo** | Pointer to [**[]FirmwareModelBundleVersion**](FirmwareModelBundleVersion.md) |  | [optional] 
 **TargetPlatform** | Pointer to **string** | The target platform on which the policy to be applied. Either standalone or connected. * &#x60;Standalone&#x60; - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * &#x60;FIAttached&#x60; - Servers which are connected to a Fabric Interconnect that is managed by Intersight. | [optional] [default to "Standalone"]
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
 ## Methods
@@ -191,6 +191,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *FirmwarePolicy) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *FirmwarePolicy) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetProfiles
 
 `func (o *FirmwarePolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship`

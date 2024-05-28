@@ -25,14 +25,14 @@ Name | Type | Description | Notes
 **SubDeviceId** | Pointer to **int64** | The sub device id of the graphics processor unit. | [optional] [readonly] 
 **SubVendorId** | Pointer to **int64** | The sub vendor id of the graphics processor unit. | [optional] [readonly] 
 **VendorId** | Pointer to **int64** | The vendor id of the graphics processor unit. | [optional] [readonly] 
-**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
-**ComputeBoard** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
-**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**ComputeBlade** | Pointer to [**NullableComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
+**ComputeBoard** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
+**ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **GraphicsControllers** | Pointer to [**[]GraphicsControllerRelationship**](GraphicsControllerRelationship.md) | An array of relationships to graphicsController resources. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**PciDevice** | Pointer to [**PciDeviceRelationship**](PciDeviceRelationship.md) |  | [optional] 
-**PciNode** | Pointer to [**PciNodeRelationship**](PciNodeRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PciDevice** | Pointer to [**NullablePciDeviceRelationship**](PciDeviceRelationship.md) |  | [optional] 
+**PciNode** | Pointer to [**NullablePciNodeRelationship**](PciNodeRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 
 ## Methods
@@ -604,6 +604,16 @@ SetComputeBlade sets ComputeBlade field to given value.
 
 HasComputeBlade returns a boolean if a field has been set.
 
+### SetComputeBladeNil
+
+`func (o *GraphicsCard) SetComputeBladeNil(b bool)`
+
+ SetComputeBladeNil sets the value for ComputeBlade to be an explicit nil
+
+### UnsetComputeBlade
+`func (o *GraphicsCard) UnsetComputeBlade()`
+
+UnsetComputeBlade ensures that no value is present for ComputeBlade, not even an explicit nil
 ### GetComputeBoard
 
 `func (o *GraphicsCard) GetComputeBoard() ComputeBoardRelationship`
@@ -629,6 +639,16 @@ SetComputeBoard sets ComputeBoard field to given value.
 
 HasComputeBoard returns a boolean if a field has been set.
 
+### SetComputeBoardNil
+
+`func (o *GraphicsCard) SetComputeBoardNil(b bool)`
+
+ SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+
+### UnsetComputeBoard
+`func (o *GraphicsCard) UnsetComputeBoard()`
+
+UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
 ### GetComputeRackUnit
 
 `func (o *GraphicsCard) GetComputeRackUnit() ComputeRackUnitRelationship`
@@ -654,6 +674,16 @@ SetComputeRackUnit sets ComputeRackUnit field to given value.
 
 HasComputeRackUnit returns a boolean if a field has been set.
 
+### SetComputeRackUnitNil
+
+`func (o *GraphicsCard) SetComputeRackUnitNil(b bool)`
+
+ SetComputeRackUnitNil sets the value for ComputeRackUnit to be an explicit nil
+
+### UnsetComputeRackUnit
+`func (o *GraphicsCard) UnsetComputeRackUnit()`
+
+UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
 ### GetGraphicsControllers
 
 `func (o *GraphicsCard) GetGraphicsControllers() []GraphicsControllerRelationship`
@@ -714,6 +744,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *GraphicsCard) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *GraphicsCard) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetPciDevice
 
 `func (o *GraphicsCard) GetPciDevice() PciDeviceRelationship`
@@ -739,6 +779,16 @@ SetPciDevice sets PciDevice field to given value.
 
 HasPciDevice returns a boolean if a field has been set.
 
+### SetPciDeviceNil
+
+`func (o *GraphicsCard) SetPciDeviceNil(b bool)`
+
+ SetPciDeviceNil sets the value for PciDevice to be an explicit nil
+
+### UnsetPciDevice
+`func (o *GraphicsCard) UnsetPciDevice()`
+
+UnsetPciDevice ensures that no value is present for PciDevice, not even an explicit nil
 ### GetPciNode
 
 `func (o *GraphicsCard) GetPciNode() PciNodeRelationship`
@@ -764,6 +814,16 @@ SetPciNode sets PciNode field to given value.
 
 HasPciNode returns a boolean if a field has been set.
 
+### SetPciNodeNil
+
+`func (o *GraphicsCard) SetPciNodeNil(b bool)`
+
+ SetPciNodeNil sets the value for PciNode to be an explicit nil
+
+### UnsetPciNode
+`func (o *GraphicsCard) UnsetPciNode()`
+
+UnsetPciNode ensures that no value is present for PciNode, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *GraphicsCard) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -789,6 +849,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *GraphicsCard) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *GraphicsCard) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetRunningFirmware
 
 `func (o *GraphicsCard) GetRunningFirmware() []FirmwareRunningFirmwareRelationship`

@@ -10,11 +10,11 @@ Name | Type | Description | Notes
 **IqnNumber** | Pointer to **int64** | Number of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
 **IqnPrefix** | Pointer to **string** | Prefix of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
 **IqnSuffix** | Pointer to **string** | Suffix of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
-**Block** | Pointer to [**IqnpoolBlockRelationship**](IqnpoolBlockRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Pool** | Pointer to [**IqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**IqnpoolPoolMemberRelationship**](IqnpoolPoolMemberRelationship.md) |  | [optional] 
-**Universe** | Pointer to [**IqnpoolUniverseRelationship**](IqnpoolUniverseRelationship.md) |  | [optional] 
+**Block** | Pointer to [**NullableIqnpoolBlockRelationship**](IqnpoolBlockRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableIqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**NullableIqnpoolPoolMemberRelationship**](IqnpoolPoolMemberRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**NullableIqnpoolUniverseRelationship**](IqnpoolUniverseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -200,6 +200,16 @@ SetBlock sets Block field to given value.
 
 HasBlock returns a boolean if a field has been set.
 
+### SetBlockNil
+
+`func (o *IqnpoolReservation) SetBlockNil(b bool)`
+
+ SetBlockNil sets the value for Block to be an explicit nil
+
+### UnsetBlock
+`func (o *IqnpoolReservation) UnsetBlock()`
+
+UnsetBlock ensures that no value is present for Block, not even an explicit nil
 ### GetOrganization
 
 `func (o *IqnpoolReservation) GetOrganization() OrganizationOrganizationRelationship`
@@ -225,6 +235,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *IqnpoolReservation) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *IqnpoolReservation) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetPool
 
 `func (o *IqnpoolReservation) GetPool() IqnpoolPoolRelationship`
@@ -250,6 +270,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *IqnpoolReservation) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *IqnpoolReservation) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetPoolMember
 
 `func (o *IqnpoolReservation) GetPoolMember() IqnpoolPoolMemberRelationship`
@@ -275,6 +305,16 @@ SetPoolMember sets PoolMember field to given value.
 
 HasPoolMember returns a boolean if a field has been set.
 
+### SetPoolMemberNil
+
+`func (o *IqnpoolReservation) SetPoolMemberNil(b bool)`
+
+ SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+
+### UnsetPoolMember
+`func (o *IqnpoolReservation) UnsetPoolMember()`
+
+UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
 ### GetUniverse
 
 `func (o *IqnpoolReservation) GetUniverse() IqnpoolUniverseRelationship`
@@ -300,6 +340,16 @@ SetUniverse sets Universe field to given value.
 
 HasUniverse returns a boolean if a field has been set.
 
+### SetUniverseNil
+
+`func (o *IqnpoolReservation) SetUniverseNil(b bool)`
+
+ SetUniverseNil sets the value for Universe to be an explicit nil
+
+### UnsetUniverse
+`func (o *IqnpoolReservation) UnsetUniverse()`
+
+UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

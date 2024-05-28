@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ConnectorTargetSpecification type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConnectorTargetSpecification{}
 
 // ConnectorTargetSpecification Target deployment specification details to deploy target as a kube service. This allows Intersight to define supported docker image tag and customize resources for each target deployment.
 type ConnectorTargetSpecification struct {
@@ -112,7 +116,7 @@ func (o *ConnectorTargetSpecification) SetObjectType(v string) {
 
 // GetCpuLimit returns the CpuLimit field value if set, zero value otherwise.
 func (o *ConnectorTargetSpecification) GetCpuLimit() string {
-	if o == nil || o.CpuLimit == nil {
+	if o == nil || IsNil(o.CpuLimit) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *ConnectorTargetSpecification) GetCpuLimit() string {
 // GetCpuLimitOk returns a tuple with the CpuLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorTargetSpecification) GetCpuLimitOk() (*string, bool) {
-	if o == nil || o.CpuLimit == nil {
+	if o == nil || IsNil(o.CpuLimit) {
 		return nil, false
 	}
 	return o.CpuLimit, true
@@ -130,7 +134,7 @@ func (o *ConnectorTargetSpecification) GetCpuLimitOk() (*string, bool) {
 
 // HasCpuLimit returns a boolean if a field has been set.
 func (o *ConnectorTargetSpecification) HasCpuLimit() bool {
-	if o != nil && o.CpuLimit != nil {
+	if o != nil && !IsNil(o.CpuLimit) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *ConnectorTargetSpecification) SetCpuLimit(v string) {
 
 // GetCpuRequest returns the CpuRequest field value if set, zero value otherwise.
 func (o *ConnectorTargetSpecification) GetCpuRequest() string {
-	if o == nil || o.CpuRequest == nil {
+	if o == nil || IsNil(o.CpuRequest) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *ConnectorTargetSpecification) GetCpuRequest() string {
 // GetCpuRequestOk returns a tuple with the CpuRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorTargetSpecification) GetCpuRequestOk() (*string, bool) {
-	if o == nil || o.CpuRequest == nil {
+	if o == nil || IsNil(o.CpuRequest) {
 		return nil, false
 	}
 	return o.CpuRequest, true
@@ -162,7 +166,7 @@ func (o *ConnectorTargetSpecification) GetCpuRequestOk() (*string, bool) {
 
 // HasCpuRequest returns a boolean if a field has been set.
 func (o *ConnectorTargetSpecification) HasCpuRequest() bool {
-	if o != nil && o.CpuRequest != nil {
+	if o != nil && !IsNil(o.CpuRequest) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *ConnectorTargetSpecification) SetCpuRequest(v string) {
 
 // GetImageTag returns the ImageTag field value if set, zero value otherwise.
 func (o *ConnectorTargetSpecification) GetImageTag() string {
-	if o == nil || o.ImageTag == nil {
+	if o == nil || IsNil(o.ImageTag) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *ConnectorTargetSpecification) GetImageTag() string {
 // GetImageTagOk returns a tuple with the ImageTag field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorTargetSpecification) GetImageTagOk() (*string, bool) {
-	if o == nil || o.ImageTag == nil {
+	if o == nil || IsNil(o.ImageTag) {
 		return nil, false
 	}
 	return o.ImageTag, true
@@ -194,7 +198,7 @@ func (o *ConnectorTargetSpecification) GetImageTagOk() (*string, bool) {
 
 // HasImageTag returns a boolean if a field has been set.
 func (o *ConnectorTargetSpecification) HasImageTag() bool {
-	if o != nil && o.ImageTag != nil {
+	if o != nil && !IsNil(o.ImageTag) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *ConnectorTargetSpecification) SetImageTag(v string) {
 
 // GetMemoryLimit returns the MemoryLimit field value if set, zero value otherwise.
 func (o *ConnectorTargetSpecification) GetMemoryLimit() string {
-	if o == nil || o.MemoryLimit == nil {
+	if o == nil || IsNil(o.MemoryLimit) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *ConnectorTargetSpecification) GetMemoryLimit() string {
 // GetMemoryLimitOk returns a tuple with the MemoryLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorTargetSpecification) GetMemoryLimitOk() (*string, bool) {
-	if o == nil || o.MemoryLimit == nil {
+	if o == nil || IsNil(o.MemoryLimit) {
 		return nil, false
 	}
 	return o.MemoryLimit, true
@@ -226,7 +230,7 @@ func (o *ConnectorTargetSpecification) GetMemoryLimitOk() (*string, bool) {
 
 // HasMemoryLimit returns a boolean if a field has been set.
 func (o *ConnectorTargetSpecification) HasMemoryLimit() bool {
-	if o != nil && o.MemoryLimit != nil {
+	if o != nil && !IsNil(o.MemoryLimit) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *ConnectorTargetSpecification) SetMemoryLimit(v string) {
 
 // GetMemoryRequest returns the MemoryRequest field value if set, zero value otherwise.
 func (o *ConnectorTargetSpecification) GetMemoryRequest() string {
-	if o == nil || o.MemoryRequest == nil {
+	if o == nil || IsNil(o.MemoryRequest) {
 		var ret string
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *ConnectorTargetSpecification) GetMemoryRequest() string {
 // GetMemoryRequestOk returns a tuple with the MemoryRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorTargetSpecification) GetMemoryRequestOk() (*string, bool) {
-	if o == nil || o.MemoryRequest == nil {
+	if o == nil || IsNil(o.MemoryRequest) {
 		return nil, false
 	}
 	return o.MemoryRequest, true
@@ -258,7 +262,7 @@ func (o *ConnectorTargetSpecification) GetMemoryRequestOk() (*string, bool) {
 
 // HasMemoryRequest returns a boolean if a field has been set.
 func (o *ConnectorTargetSpecification) HasMemoryRequest() bool {
-	if o != nil && o.MemoryRequest != nil {
+	if o != nil && !IsNil(o.MemoryRequest) {
 		return true
 	}
 
@@ -271,34 +275,38 @@ func (o *ConnectorTargetSpecification) SetMemoryRequest(v string) {
 }
 
 func (o ConnectorTargetSpecification) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConnectorTargetSpecification) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CpuLimit != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CpuLimit) {
 		toSerialize["CpuLimit"] = o.CpuLimit
 	}
-	if o.CpuRequest != nil {
+	if !IsNil(o.CpuRequest) {
 		toSerialize["CpuRequest"] = o.CpuRequest
 	}
-	if o.ImageTag != nil {
+	if !IsNil(o.ImageTag) {
 		toSerialize["ImageTag"] = o.ImageTag
 	}
-	if o.MemoryLimit != nil {
+	if !IsNil(o.MemoryLimit) {
 		toSerialize["MemoryLimit"] = o.MemoryLimit
 	}
-	if o.MemoryRequest != nil {
+	if !IsNil(o.MemoryRequest) {
 		toSerialize["MemoryRequest"] = o.MemoryRequest
 	}
 
@@ -306,10 +314,32 @@ func (o ConnectorTargetSpecification) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ConnectorTargetSpecification) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ConnectorTargetSpecification) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ConnectorTargetSpecificationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -329,7 +359,7 @@ func (o *ConnectorTargetSpecification) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorTargetSpecificationWithoutEmbeddedStruct := ConnectorTargetSpecificationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varConnectorTargetSpecificationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varConnectorTargetSpecificationWithoutEmbeddedStruct)
 	if err == nil {
 		varConnectorTargetSpecification := _ConnectorTargetSpecification{}
 		varConnectorTargetSpecification.ClassId = varConnectorTargetSpecificationWithoutEmbeddedStruct.ClassId
@@ -346,7 +376,7 @@ func (o *ConnectorTargetSpecification) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorTargetSpecification := _ConnectorTargetSpecification{}
 
-	err = json.Unmarshal(bytes, &varConnectorTargetSpecification)
+	err = json.Unmarshal(data, &varConnectorTargetSpecification)
 	if err == nil {
 		o.MoBaseComplexType = varConnectorTargetSpecification.MoBaseComplexType
 	} else {
@@ -355,7 +385,7 @@ func (o *ConnectorTargetSpecification) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CpuLimit")

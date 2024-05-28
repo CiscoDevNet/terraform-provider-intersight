@@ -6,7 +6,9 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"strconv"
 	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -669,6 +671,11 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 					},
 				},
 			},
+			"vic_id": {
+				Description: "Vic Id assigned for the adapter.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 		},
 	}
 }
@@ -1016,6 +1023,11 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 		o.SetVersion(x)
 	}
 
+	if v, ok := d.GetOk("vic_id"); ok {
+		x := (v.(string))
+		o.SetVicId(x)
+	}
+
 	r := conn.ApiClient.CapabilityApi.CreateCapabilityAdapterUnitDescriptor(conn.ctx).CapabilityAdapterUnitDescriptor(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1026,14 +1038,25 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 		}
 		return diag.Errorf("error occurred while creating CapabilityAdapterUnitDescriptor: %s", responseErr.Error())
 	}
-	log.Printf("Moid: %s", resultMo.GetMoid())
-	d.SetId(resultMo.GetMoid())
+	if len(resultMo.GetMoid()) != 0 {
+		log.Printf("Moid: %s", resultMo.GetMoid())
+		d.SetId(resultMo.GetMoid())
+	} else {
+		d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
+		log.Printf("Mo: %v", resultMo)
+	}
+	if len(resultMo.GetMoid()) == 0 {
+		return de
+	}
 	return append(de, resourceCapabilityAdapterUnitDescriptorRead(c, d, meta)...)
 }
 
 func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	var de diag.Diagnostics
+	if len(d.Id()) == 0 {
+		return de
+	}
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityAdapterUnitDescriptorByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
@@ -1193,6 +1216,10 @@ func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.Re
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property VersionContext in CapabilityAdapterUnitDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("vic_id", (s.GetVicId())); err != nil {
+		return diag.Errorf("error occurred while setting property VicId in CapabilityAdapterUnitDescriptor object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
@@ -1559,6 +1586,12 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 		v := d.Get("nr_version")
 		x := (v.(string))
 		o.SetVersion(x)
+	}
+
+	if d.HasChange("vic_id") {
+		v := d.Get("vic_id")
+		x := (v.(string))
+		o.SetVicId(x)
 	}
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilityAdapterUnitDescriptor(conn.ctx, d.Id()).CapabilityAdapterUnitDescriptor(*o)

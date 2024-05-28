@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ForecastDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ForecastDefinition{}
 
 // ForecastDefinition Definition for forecast metric settings.
 type ForecastDefinition struct {
@@ -35,8 +39,8 @@ type ForecastDefinition struct {
 	// Number of days of data queried from the data source (example Druid ) which is used as input data for computing forecast model.
 	NumOfDaysOfHistoricalData *int64 `json:"NumOfDaysOfHistoricalData,omitempty"`
 	// The platform type for which we want to compute forecast. For example HyperFlex, NetworkElement.
-	PlatformType         *string                      `json:"PlatformType,omitempty"`
-	Catalog              *ForecastCatalogRelationship `json:"Catalog,omitempty"`
+	PlatformType         *string                             `json:"PlatformType,omitempty"`
+	Catalog              NullableForecastCatalogRelationship `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *ForecastDefinition) SetObjectType(v string) {
 
 // GetAlertThresholdInPercentage returns the AlertThresholdInPercentage field value if set, zero value otherwise.
 func (o *ForecastDefinition) GetAlertThresholdInPercentage() int64 {
-	if o == nil || o.AlertThresholdInPercentage == nil {
+	if o == nil || IsNil(o.AlertThresholdInPercentage) {
 		var ret int64
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *ForecastDefinition) GetAlertThresholdInPercentage() int64 {
 // GetAlertThresholdInPercentageOk returns a tuple with the AlertThresholdInPercentage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastDefinition) GetAlertThresholdInPercentageOk() (*int64, bool) {
-	if o == nil || o.AlertThresholdInPercentage == nil {
+	if o == nil || IsNil(o.AlertThresholdInPercentage) {
 		return nil, false
 	}
 	return o.AlertThresholdInPercentage, true
@@ -133,7 +137,7 @@ func (o *ForecastDefinition) GetAlertThresholdInPercentageOk() (*int64, bool) {
 
 // HasAlertThresholdInPercentage returns a boolean if a field has been set.
 func (o *ForecastDefinition) HasAlertThresholdInPercentage() bool {
-	if o != nil && o.AlertThresholdInPercentage != nil {
+	if o != nil && !IsNil(o.AlertThresholdInPercentage) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *ForecastDefinition) SetAlertThresholdInPercentage(v int64) {
 
 // GetDataSource returns the DataSource field value if set, zero value otherwise.
 func (o *ForecastDefinition) GetDataSource() string {
-	if o == nil || o.DataSource == nil {
+	if o == nil || IsNil(o.DataSource) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *ForecastDefinition) GetDataSource() string {
 // GetDataSourceOk returns a tuple with the DataSource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastDefinition) GetDataSourceOk() (*string, bool) {
-	if o == nil || o.DataSource == nil {
+	if o == nil || IsNil(o.DataSource) {
 		return nil, false
 	}
 	return o.DataSource, true
@@ -165,7 +169,7 @@ func (o *ForecastDefinition) GetDataSourceOk() (*string, bool) {
 
 // HasDataSource returns a boolean if a field has been set.
 func (o *ForecastDefinition) HasDataSource() bool {
-	if o != nil && o.DataSource != nil {
+	if o != nil && !IsNil(o.DataSource) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *ForecastDefinition) SetDataSource(v string) {
 
 // GetMetricName returns the MetricName field value if set, zero value otherwise.
 func (o *ForecastDefinition) GetMetricName() string {
-	if o == nil || o.MetricName == nil {
+	if o == nil || IsNil(o.MetricName) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *ForecastDefinition) GetMetricName() string {
 // GetMetricNameOk returns a tuple with the MetricName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastDefinition) GetMetricNameOk() (*string, bool) {
-	if o == nil || o.MetricName == nil {
+	if o == nil || IsNil(o.MetricName) {
 		return nil, false
 	}
 	return o.MetricName, true
@@ -197,7 +201,7 @@ func (o *ForecastDefinition) GetMetricNameOk() (*string, bool) {
 
 // HasMetricName returns a boolean if a field has been set.
 func (o *ForecastDefinition) HasMetricName() bool {
-	if o != nil && o.MetricName != nil {
+	if o != nil && !IsNil(o.MetricName) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *ForecastDefinition) SetMetricName(v string) {
 
 // GetMinNumOfDaysOfData returns the MinNumOfDaysOfData field value if set, zero value otherwise.
 func (o *ForecastDefinition) GetMinNumOfDaysOfData() int64 {
-	if o == nil || o.MinNumOfDaysOfData == nil {
+	if o == nil || IsNil(o.MinNumOfDaysOfData) {
 		var ret int64
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *ForecastDefinition) GetMinNumOfDaysOfData() int64 {
 // GetMinNumOfDaysOfDataOk returns a tuple with the MinNumOfDaysOfData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastDefinition) GetMinNumOfDaysOfDataOk() (*int64, bool) {
-	if o == nil || o.MinNumOfDaysOfData == nil {
+	if o == nil || IsNil(o.MinNumOfDaysOfData) {
 		return nil, false
 	}
 	return o.MinNumOfDaysOfData, true
@@ -229,7 +233,7 @@ func (o *ForecastDefinition) GetMinNumOfDaysOfDataOk() (*int64, bool) {
 
 // HasMinNumOfDaysOfData returns a boolean if a field has been set.
 func (o *ForecastDefinition) HasMinNumOfDaysOfData() bool {
-	if o != nil && o.MinNumOfDaysOfData != nil {
+	if o != nil && !IsNil(o.MinNumOfDaysOfData) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *ForecastDefinition) SetMinNumOfDaysOfData(v int64) {
 
 // GetNumOfDaysOfHistoricalData returns the NumOfDaysOfHistoricalData field value if set, zero value otherwise.
 func (o *ForecastDefinition) GetNumOfDaysOfHistoricalData() int64 {
-	if o == nil || o.NumOfDaysOfHistoricalData == nil {
+	if o == nil || IsNil(o.NumOfDaysOfHistoricalData) {
 		var ret int64
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *ForecastDefinition) GetNumOfDaysOfHistoricalData() int64 {
 // GetNumOfDaysOfHistoricalDataOk returns a tuple with the NumOfDaysOfHistoricalData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastDefinition) GetNumOfDaysOfHistoricalDataOk() (*int64, bool) {
-	if o == nil || o.NumOfDaysOfHistoricalData == nil {
+	if o == nil || IsNil(o.NumOfDaysOfHistoricalData) {
 		return nil, false
 	}
 	return o.NumOfDaysOfHistoricalData, true
@@ -261,7 +265,7 @@ func (o *ForecastDefinition) GetNumOfDaysOfHistoricalDataOk() (*int64, bool) {
 
 // HasNumOfDaysOfHistoricalData returns a boolean if a field has been set.
 func (o *ForecastDefinition) HasNumOfDaysOfHistoricalData() bool {
-	if o != nil && o.NumOfDaysOfHistoricalData != nil {
+	if o != nil && !IsNil(o.NumOfDaysOfHistoricalData) {
 		return true
 	}
 
@@ -275,7 +279,7 @@ func (o *ForecastDefinition) SetNumOfDaysOfHistoricalData(v int64) {
 
 // GetPlatformType returns the PlatformType field value if set, zero value otherwise.
 func (o *ForecastDefinition) GetPlatformType() string {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		var ret string
 		return ret
 	}
@@ -285,7 +289,7 @@ func (o *ForecastDefinition) GetPlatformType() string {
 // GetPlatformTypeOk returns a tuple with the PlatformType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastDefinition) GetPlatformTypeOk() (*string, bool) {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		return nil, false
 	}
 	return o.PlatformType, true
@@ -293,7 +297,7 @@ func (o *ForecastDefinition) GetPlatformTypeOk() (*string, bool) {
 
 // HasPlatformType returns a boolean if a field has been set.
 func (o *ForecastDefinition) HasPlatformType() bool {
-	if o != nil && o.PlatformType != nil {
+	if o != nil && !IsNil(o.PlatformType) {
 		return true
 	}
 
@@ -305,84 +309,121 @@ func (o *ForecastDefinition) SetPlatformType(v string) {
 	o.PlatformType = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ForecastDefinition) GetCatalog() ForecastCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret ForecastCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ForecastDefinition) GetCatalogOk() (*ForecastCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *ForecastDefinition) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given ForecastCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableForecastCatalogRelationship and assigns it to the Catalog field.
 func (o *ForecastDefinition) SetCatalog(v ForecastCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
+}
+
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *ForecastDefinition) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *ForecastDefinition) UnsetCatalog() {
+	o.Catalog.Unset()
 }
 
 func (o ForecastDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ForecastDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AlertThresholdInPercentage != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AlertThresholdInPercentage) {
 		toSerialize["AlertThresholdInPercentage"] = o.AlertThresholdInPercentage
 	}
-	if o.DataSource != nil {
+	if !IsNil(o.DataSource) {
 		toSerialize["DataSource"] = o.DataSource
 	}
-	if o.MetricName != nil {
+	if !IsNil(o.MetricName) {
 		toSerialize["MetricName"] = o.MetricName
 	}
-	if o.MinNumOfDaysOfData != nil {
+	if !IsNil(o.MinNumOfDaysOfData) {
 		toSerialize["MinNumOfDaysOfData"] = o.MinNumOfDaysOfData
 	}
-	if o.NumOfDaysOfHistoricalData != nil {
+	if !IsNil(o.NumOfDaysOfHistoricalData) {
 		toSerialize["NumOfDaysOfHistoricalData"] = o.NumOfDaysOfHistoricalData
 	}
-	if o.PlatformType != nil {
+	if !IsNil(o.PlatformType) {
 		toSerialize["PlatformType"] = o.PlatformType
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ForecastDefinition) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ForecastDefinition) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ForecastDefinitionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -399,13 +440,13 @@ func (o *ForecastDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		// Number of days of data queried from the data source (example Druid ) which is used as input data for computing forecast model.
 		NumOfDaysOfHistoricalData *int64 `json:"NumOfDaysOfHistoricalData,omitempty"`
 		// The platform type for which we want to compute forecast. For example HyperFlex, NetworkElement.
-		PlatformType *string                      `json:"PlatformType,omitempty"`
-		Catalog      *ForecastCatalogRelationship `json:"Catalog,omitempty"`
+		PlatformType *string                             `json:"PlatformType,omitempty"`
+		Catalog      NullableForecastCatalogRelationship `json:"Catalog,omitempty"`
 	}
 
 	varForecastDefinitionWithoutEmbeddedStruct := ForecastDefinitionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varForecastDefinitionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varForecastDefinitionWithoutEmbeddedStruct)
 	if err == nil {
 		varForecastDefinition := _ForecastDefinition{}
 		varForecastDefinition.ClassId = varForecastDefinitionWithoutEmbeddedStruct.ClassId
@@ -424,7 +465,7 @@ func (o *ForecastDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	varForecastDefinition := _ForecastDefinition{}
 
-	err = json.Unmarshal(bytes, &varForecastDefinition)
+	err = json.Unmarshal(data, &varForecastDefinition)
 	if err == nil {
 		o.MoBaseMo = varForecastDefinition.MoBaseMo
 	} else {
@@ -433,7 +474,7 @@ func (o *ForecastDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AlertThresholdInPercentage")

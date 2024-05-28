@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -131,7 +131,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 	var jsonDict map[string]interface{}
 	err = newStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
-		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
+		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
 	}
 
 	// check if the discriminator value is 'bucket'
@@ -142,7 +142,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionBucket, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionBucket = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionBucket: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionBucket: %s", err.Error())
 		}
 	}
 
@@ -154,7 +154,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionCascade, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionCascade = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionCascade: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionCascade: %s", err.Error())
 		}
 	}
 
@@ -166,7 +166,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionInlineLookup, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionInlineLookup = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionInlineLookup: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionInlineLookup: %s", err.Error())
 		}
 	}
 
@@ -178,7 +178,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionLowerCase, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionLowerCase = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionLowerCase: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionLowerCase: %s", err.Error())
 		}
 	}
 
@@ -190,7 +190,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionPartial, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionPartial = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionPartial: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionPartial: %s", err.Error())
 		}
 	}
 
@@ -202,7 +202,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionRegex, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionRegex = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionRegex: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionRegex: %s", err.Error())
 		}
 	}
 
@@ -214,7 +214,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionSearchQuery, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionSearchQuery = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionSearchQuery: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionSearchQuery: %s", err.Error())
 		}
 	}
 
@@ -226,7 +226,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionStringFormat, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionStringFormat = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionStringFormat: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionStringFormat: %s", err.Error())
 		}
 	}
 
@@ -238,7 +238,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionStrlen, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionStrlen = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionStrlen: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionStrlen: %s", err.Error())
 		}
 	}
 
@@ -250,163 +250,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionSubstring, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionSubstring = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionSubstring: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionBucket'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionBucket" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionBucket
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionBucket)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionBucket, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionBucket = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionBucket: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionCascade'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionCascade" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionCascade
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionCascade)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionCascade, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionCascade = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionCascade: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionInlineLookup'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionInlineLookup" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionInlineLookup
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionInlineLookup)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionInlineLookup, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionInlineLookup = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionInlineLookup: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionLowerCase'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionLowerCase" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionLowerCase
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionLowerCase)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionLowerCase, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionLowerCase = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionLowerCase: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionPartial'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionPartial" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionPartial
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionPartial)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionPartial, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionPartial = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionPartial: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionRegex'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionRegex" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionRegex
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionRegex)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionRegex, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionRegex = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionRegex: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionSearchQuery'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionSearchQuery" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionSearchQuery
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionSearchQuery)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionSearchQuery, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionSearchQuery = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionSearchQuery: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionStringFormat'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionStringFormat" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionStringFormat
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionStringFormat)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionStringFormat, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionStringFormat = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionStringFormat: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionStrlen'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionStrlen" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionStrlen
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionStrlen)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionStrlen, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionStrlen = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionStrlen: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionSubstring'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionSubstring" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionSubstring
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionSubstring)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionSubstring, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionSubstring = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionSubstring: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionTimeFormat'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionTimeFormat" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionTimeFormat
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionTimeFormat)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionTimeFormat, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionTimeFormat = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionTimeFormat: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionTimeParsing'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionTimeParsing" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionTimeParsing
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionTimeParsing)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionTimeParsing, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionTimeParsing = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionTimeParsing: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExtractionFunctionUpperCase'
-	if jsonDict["type"] == "telemetry.DruidExtractionFunctionUpperCase" {
-		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionUpperCase
-		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionUpperCase)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExtractionFunctionUpperCase, return on the first match
-		} else {
-			dst.TelemetryDruidExtractionFunctionUpperCase = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionUpperCase: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionSubstring: %s", err.Error())
 		}
 	}
 
@@ -418,7 +262,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionTimeParsing, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionTimeParsing = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionTimeParsing: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionTimeParsing: %s", err.Error())
 		}
 	}
 
@@ -430,7 +274,7 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionTimeFormat, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionTimeFormat = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionTimeFormat: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionTimeFormat: %s", err.Error())
 		}
 	}
 
@@ -442,7 +286,163 @@ func (dst *TelemetryDruidExtractionFunction) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExtractionFunctionUpperCase, return on the first match
 		} else {
 			dst.TelemetryDruidExtractionFunctionUpperCase = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionUpperCase: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionUpperCase: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionBucket'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionBucket" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionBucket
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionBucket)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionBucket, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionBucket = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionBucket: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionCascade'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionCascade" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionCascade
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionCascade)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionCascade, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionCascade = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionCascade: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionInlineLookup'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionInlineLookup" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionInlineLookup
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionInlineLookup)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionInlineLookup, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionInlineLookup = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionInlineLookup: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionLowerCase'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionLowerCase" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionLowerCase
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionLowerCase)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionLowerCase, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionLowerCase = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionLowerCase: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionPartial'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionPartial" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionPartial
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionPartial)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionPartial, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionPartial = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionPartial: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionRegex'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionRegex" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionRegex
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionRegex)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionRegex, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionRegex = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionRegex: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionSearchQuery'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionSearchQuery" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionSearchQuery
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionSearchQuery)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionSearchQuery, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionSearchQuery = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionSearchQuery: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionStringFormat'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionStringFormat" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionStringFormat
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionStringFormat)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionStringFormat, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionStringFormat = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionStringFormat: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionStrlen'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionStrlen" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionStrlen
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionStrlen)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionStrlen, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionStrlen = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionStrlen: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionSubstring'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionSubstring" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionSubstring
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionSubstring)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionSubstring, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionSubstring = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionSubstring: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionTimeFormat'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionTimeFormat" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionTimeFormat
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionTimeFormat)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionTimeFormat, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionTimeFormat = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionTimeFormat: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionTimeParsing'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionTimeParsing" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionTimeParsing
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionTimeParsing)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionTimeParsing, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionTimeParsing = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionTimeParsing: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExtractionFunctionUpperCase'
+	if jsonDict["type"] == "telemetry.DruidExtractionFunctionUpperCase" {
+		// try to unmarshal JSON data into TelemetryDruidExtractionFunctionUpperCase
+		err = json.Unmarshal(data, &dst.TelemetryDruidExtractionFunctionUpperCase)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExtractionFunctionUpperCase, return on the first match
+		} else {
+			dst.TelemetryDruidExtractionFunctionUpperCase = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidExtractionFunction as TelemetryDruidExtractionFunctionUpperCase: %s", err.Error())
 		}
 	}
 

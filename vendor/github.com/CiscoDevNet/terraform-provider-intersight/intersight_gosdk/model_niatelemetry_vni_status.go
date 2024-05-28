@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryVniStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryVniStatus{}
 
 // NiatelemetryVniStatus Stores information related to vni details.
 type NiatelemetryVniStatus struct {
@@ -108,7 +112,7 @@ func (o *NiatelemetryVniStatus) SetObjectType(v string) {
 
 // GetVni returns the Vni field value if set, zero value otherwise.
 func (o *NiatelemetryVniStatus) GetVni() string {
-	if o == nil || o.Vni == nil {
+	if o == nil || IsNil(o.Vni) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *NiatelemetryVniStatus) GetVni() string {
 // GetVniOk returns a tuple with the Vni field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryVniStatus) GetVniOk() (*string, bool) {
-	if o == nil || o.Vni == nil {
+	if o == nil || IsNil(o.Vni) {
 		return nil, false
 	}
 	return o.Vni, true
@@ -126,7 +130,7 @@ func (o *NiatelemetryVniStatus) GetVniOk() (*string, bool) {
 
 // HasVni returns a boolean if a field has been set.
 func (o *NiatelemetryVniStatus) HasVni() bool {
-	if o != nil && o.Vni != nil {
+	if o != nil && !IsNil(o.Vni) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *NiatelemetryVniStatus) SetVni(v string) {
 
 // GetVniState returns the VniState field value if set, zero value otherwise.
 func (o *NiatelemetryVniStatus) GetVniState() string {
-	if o == nil || o.VniState == nil {
+	if o == nil || IsNil(o.VniState) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *NiatelemetryVniStatus) GetVniState() string {
 // GetVniStateOk returns a tuple with the VniState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryVniStatus) GetVniStateOk() (*string, bool) {
-	if o == nil || o.VniState == nil {
+	if o == nil || IsNil(o.VniState) {
 		return nil, false
 	}
 	return o.VniState, true
@@ -158,7 +162,7 @@ func (o *NiatelemetryVniStatus) GetVniStateOk() (*string, bool) {
 
 // HasVniState returns a boolean if a field has been set.
 func (o *NiatelemetryVniStatus) HasVniState() bool {
-	if o != nil && o.VniState != nil {
+	if o != nil && !IsNil(o.VniState) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *NiatelemetryVniStatus) SetVniState(v string) {
 
 // GetVniType returns the VniType field value if set, zero value otherwise.
 func (o *NiatelemetryVniStatus) GetVniType() string {
-	if o == nil || o.VniType == nil {
+	if o == nil || IsNil(o.VniType) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *NiatelemetryVniStatus) GetVniType() string {
 // GetVniTypeOk returns a tuple with the VniType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryVniStatus) GetVniTypeOk() (*string, bool) {
-	if o == nil || o.VniType == nil {
+	if o == nil || IsNil(o.VniType) {
 		return nil, false
 	}
 	return o.VniType, true
@@ -190,7 +194,7 @@ func (o *NiatelemetryVniStatus) GetVniTypeOk() (*string, bool) {
 
 // HasVniType returns a boolean if a field has been set.
 func (o *NiatelemetryVniStatus) HasVniType() bool {
-	if o != nil && o.VniType != nil {
+	if o != nil && !IsNil(o.VniType) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *NiatelemetryVniStatus) SetVniType(v string) {
 }
 
 func (o NiatelemetryVniStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryVniStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Vni != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Vni) {
 		toSerialize["Vni"] = o.Vni
 	}
-	if o.VniState != nil {
+	if !IsNil(o.VniState) {
 		toSerialize["VniState"] = o.VniState
 	}
-	if o.VniType != nil {
+	if !IsNil(o.VniType) {
 		toSerialize["VniType"] = o.VniType
 	}
 
@@ -232,10 +240,32 @@ func (o NiatelemetryVniStatus) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryVniStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryVniStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryVniStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *NiatelemetryVniStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryVniStatusWithoutEmbeddedStruct := NiatelemetryVniStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryVniStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryVniStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryVniStatus := _NiatelemetryVniStatus{}
 		varNiatelemetryVniStatus.ClassId = varNiatelemetryVniStatusWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *NiatelemetryVniStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryVniStatus := _NiatelemetryVniStatus{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryVniStatus)
+	err = json.Unmarshal(data, &varNiatelemetryVniStatus)
 	if err == nil {
 		o.MoBaseComplexType = varNiatelemetryVniStatus.MoBaseComplexType
 	} else {
@@ -275,7 +305,7 @@ func (o *NiatelemetryVniStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Vni")

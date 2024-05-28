@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PkixSubjectAlternateName type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PkixSubjectAlternateName{}
 
 // PkixSubjectAlternateName The additional hostnames to be protected by a given X.509 certificate.
 type PkixSubjectAlternateName struct {
@@ -117,7 +121,7 @@ func (o *PkixSubjectAlternateName) GetDnsName() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PkixSubjectAlternateName) GetDnsNameOk() ([]string, bool) {
-	if o == nil || o.DnsName == nil {
+	if o == nil || IsNil(o.DnsName) {
 		return nil, false
 	}
 	return o.DnsName, true
@@ -125,7 +129,7 @@ func (o *PkixSubjectAlternateName) GetDnsNameOk() ([]string, bool) {
 
 // HasDnsName returns a boolean if a field has been set.
 func (o *PkixSubjectAlternateName) HasDnsName() bool {
-	if o != nil && o.DnsName != nil {
+	if o != nil && IsNil(o.DnsName) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *PkixSubjectAlternateName) GetEmailAddress() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PkixSubjectAlternateName) GetEmailAddressOk() ([]string, bool) {
-	if o == nil || o.EmailAddress == nil {
+	if o == nil || IsNil(o.EmailAddress) {
 		return nil, false
 	}
 	return o.EmailAddress, true
@@ -158,7 +162,7 @@ func (o *PkixSubjectAlternateName) GetEmailAddressOk() ([]string, bool) {
 
 // HasEmailAddress returns a boolean if a field has been set.
 func (o *PkixSubjectAlternateName) HasEmailAddress() bool {
-	if o != nil && o.EmailAddress != nil {
+	if o != nil && IsNil(o.EmailAddress) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *PkixSubjectAlternateName) GetIpAddress() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PkixSubjectAlternateName) GetIpAddressOk() ([]string, bool) {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		return nil, false
 	}
 	return o.IpAddress, true
@@ -191,7 +195,7 @@ func (o *PkixSubjectAlternateName) GetIpAddressOk() ([]string, bool) {
 
 // HasIpAddress returns a boolean if a field has been set.
 func (o *PkixSubjectAlternateName) HasIpAddress() bool {
-	if o != nil && o.IpAddress != nil {
+	if o != nil && IsNil(o.IpAddress) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *PkixSubjectAlternateName) GetUri() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PkixSubjectAlternateName) GetUriOk() ([]string, bool) {
-	if o == nil || o.Uri == nil {
+	if o == nil || IsNil(o.Uri) {
 		return nil, false
 	}
 	return o.Uri, true
@@ -224,7 +228,7 @@ func (o *PkixSubjectAlternateName) GetUriOk() ([]string, bool) {
 
 // HasUri returns a boolean if a field has been set.
 func (o *PkixSubjectAlternateName) HasUri() bool {
-	if o != nil && o.Uri != nil {
+	if o != nil && IsNil(o.Uri) {
 		return true
 	}
 
@@ -237,21 +241,25 @@ func (o *PkixSubjectAlternateName) SetUri(v []string) {
 }
 
 func (o PkixSubjectAlternateName) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PkixSubjectAlternateName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.DnsName != nil {
 		toSerialize["DnsName"] = o.DnsName
 	}
@@ -269,10 +277,32 @@ func (o PkixSubjectAlternateName) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PkixSubjectAlternateName) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PkixSubjectAlternateName) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PkixSubjectAlternateNameWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -286,7 +316,7 @@ func (o *PkixSubjectAlternateName) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPkixSubjectAlternateNameWithoutEmbeddedStruct := PkixSubjectAlternateNameWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPkixSubjectAlternateNameWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPkixSubjectAlternateNameWithoutEmbeddedStruct)
 	if err == nil {
 		varPkixSubjectAlternateName := _PkixSubjectAlternateName{}
 		varPkixSubjectAlternateName.ClassId = varPkixSubjectAlternateNameWithoutEmbeddedStruct.ClassId
@@ -302,7 +332,7 @@ func (o *PkixSubjectAlternateName) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPkixSubjectAlternateName := _PkixSubjectAlternateName{}
 
-	err = json.Unmarshal(bytes, &varPkixSubjectAlternateName)
+	err = json.Unmarshal(data, &varPkixSubjectAlternateName)
 	if err == nil {
 		o.MoBaseComplexType = varPkixSubjectAlternateName.MoBaseComplexType
 	} else {
@@ -311,7 +341,7 @@ func (o *PkixSubjectAlternateName) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DnsName")

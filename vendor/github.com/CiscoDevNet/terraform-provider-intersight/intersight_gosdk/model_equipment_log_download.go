@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentLogDownload type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentLogDownload{}
 
 // EquipmentLogDownload Download the log collected from end point.
 type EquipmentLogDownload struct {
@@ -23,8 +27,8 @@ type EquipmentLogDownload struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                       `json:"ObjectType"`
-	Server               *ComputePhysicalRelationship `json:"Server,omitempty"`
+	ObjectType           string                              `json:"ObjectType"`
+	Server               NullableComputePhysicalRelationship `json:"Server,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,77 +105,114 @@ func (o *EquipmentLogDownload) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetServer returns the Server field value if set, zero value otherwise.
+// GetServer returns the Server field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentLogDownload) GetServer() ComputePhysicalRelationship {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.Server
+	return *o.Server.Get()
 }
 
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentLogDownload) GetServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Server, true
+	return o.Server.Get(), o.Server.IsSet()
 }
 
 // HasServer returns a boolean if a field has been set.
 func (o *EquipmentLogDownload) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && o.Server.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServer gets a reference to the given ComputePhysicalRelationship and assigns it to the Server field.
+// SetServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the Server field.
 func (o *EquipmentLogDownload) SetServer(v ComputePhysicalRelationship) {
-	o.Server = &v
+	o.Server.Set(&v)
+}
+
+// SetServerNil sets the value for Server to be an explicit nil
+func (o *EquipmentLogDownload) SetServerNil() {
+	o.Server.Set(nil)
+}
+
+// UnsetServer ensures that no value is present for Server, not even an explicit nil
+func (o *EquipmentLogDownload) UnsetServer() {
+	o.Server.Unset()
 }
 
 func (o EquipmentLogDownload) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentLogDownload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Server != nil {
-		toSerialize["Server"] = o.Server
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.Server.IsSet() {
+		toSerialize["Server"] = o.Server.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentLogDownload) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentLogDownload) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentLogDownloadWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string                       `json:"ObjectType"`
-		Server     *ComputePhysicalRelationship `json:"Server,omitempty"`
+		ObjectType string                              `json:"ObjectType"`
+		Server     NullableComputePhysicalRelationship `json:"Server,omitempty"`
 	}
 
 	varEquipmentLogDownloadWithoutEmbeddedStruct := EquipmentLogDownloadWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentLogDownloadWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentLogDownloadWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentLogDownload := _EquipmentLogDownload{}
 		varEquipmentLogDownload.ClassId = varEquipmentLogDownloadWithoutEmbeddedStruct.ClassId
@@ -184,7 +225,7 @@ func (o *EquipmentLogDownload) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentLogDownload := _EquipmentLogDownload{}
 
-	err = json.Unmarshal(bytes, &varEquipmentLogDownload)
+	err = json.Unmarshal(data, &varEquipmentLogDownload)
 	if err == nil {
 		o.MoBaseMo = varEquipmentLogDownload.MoBaseMo
 	} else {
@@ -193,7 +234,7 @@ func (o *EquipmentLogDownload) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Server")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudVolumeIopsInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudVolumeIopsInfo{}
 
 // CloudVolumeIopsInfo Volume input/output operations per second.
 type CloudVolumeIopsInfo struct {
@@ -110,7 +114,7 @@ func (o *CloudVolumeIopsInfo) SetObjectType(v string) {
 
 // GetIopsReadLimit returns the IopsReadLimit field value if set, zero value otherwise.
 func (o *CloudVolumeIopsInfo) GetIopsReadLimit() int64 {
-	if o == nil || o.IopsReadLimit == nil {
+	if o == nil || IsNil(o.IopsReadLimit) {
 		var ret int64
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *CloudVolumeIopsInfo) GetIopsReadLimit() int64 {
 // GetIopsReadLimitOk returns a tuple with the IopsReadLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudVolumeIopsInfo) GetIopsReadLimitOk() (*int64, bool) {
-	if o == nil || o.IopsReadLimit == nil {
+	if o == nil || IsNil(o.IopsReadLimit) {
 		return nil, false
 	}
 	return o.IopsReadLimit, true
@@ -128,7 +132,7 @@ func (o *CloudVolumeIopsInfo) GetIopsReadLimitOk() (*int64, bool) {
 
 // HasIopsReadLimit returns a boolean if a field has been set.
 func (o *CloudVolumeIopsInfo) HasIopsReadLimit() bool {
-	if o != nil && o.IopsReadLimit != nil {
+	if o != nil && !IsNil(o.IopsReadLimit) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *CloudVolumeIopsInfo) SetIopsReadLimit(v int64) {
 
 // GetIopsWriteLimit returns the IopsWriteLimit field value if set, zero value otherwise.
 func (o *CloudVolumeIopsInfo) GetIopsWriteLimit() int64 {
-	if o == nil || o.IopsWriteLimit == nil {
+	if o == nil || IsNil(o.IopsWriteLimit) {
 		var ret int64
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *CloudVolumeIopsInfo) GetIopsWriteLimit() int64 {
 // GetIopsWriteLimitOk returns a tuple with the IopsWriteLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudVolumeIopsInfo) GetIopsWriteLimitOk() (*int64, bool) {
-	if o == nil || o.IopsWriteLimit == nil {
+	if o == nil || IsNil(o.IopsWriteLimit) {
 		return nil, false
 	}
 	return o.IopsWriteLimit, true
@@ -160,7 +164,7 @@ func (o *CloudVolumeIopsInfo) GetIopsWriteLimitOk() (*int64, bool) {
 
 // HasIopsWriteLimit returns a boolean if a field has been set.
 func (o *CloudVolumeIopsInfo) HasIopsWriteLimit() bool {
-	if o != nil && o.IopsWriteLimit != nil {
+	if o != nil && !IsNil(o.IopsWriteLimit) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *CloudVolumeIopsInfo) SetIopsWriteLimit(v int64) {
 
 // GetThroughputReadLimit returns the ThroughputReadLimit field value if set, zero value otherwise.
 func (o *CloudVolumeIopsInfo) GetThroughputReadLimit() int64 {
-	if o == nil || o.ThroughputReadLimit == nil {
+	if o == nil || IsNil(o.ThroughputReadLimit) {
 		var ret int64
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *CloudVolumeIopsInfo) GetThroughputReadLimit() int64 {
 // GetThroughputReadLimitOk returns a tuple with the ThroughputReadLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudVolumeIopsInfo) GetThroughputReadLimitOk() (*int64, bool) {
-	if o == nil || o.ThroughputReadLimit == nil {
+	if o == nil || IsNil(o.ThroughputReadLimit) {
 		return nil, false
 	}
 	return o.ThroughputReadLimit, true
@@ -192,7 +196,7 @@ func (o *CloudVolumeIopsInfo) GetThroughputReadLimitOk() (*int64, bool) {
 
 // HasThroughputReadLimit returns a boolean if a field has been set.
 func (o *CloudVolumeIopsInfo) HasThroughputReadLimit() bool {
-	if o != nil && o.ThroughputReadLimit != nil {
+	if o != nil && !IsNil(o.ThroughputReadLimit) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *CloudVolumeIopsInfo) SetThroughputReadLimit(v int64) {
 
 // GetThroughputWriteLimit returns the ThroughputWriteLimit field value if set, zero value otherwise.
 func (o *CloudVolumeIopsInfo) GetThroughputWriteLimit() int64 {
-	if o == nil || o.ThroughputWriteLimit == nil {
+	if o == nil || IsNil(o.ThroughputWriteLimit) {
 		var ret int64
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *CloudVolumeIopsInfo) GetThroughputWriteLimit() int64 {
 // GetThroughputWriteLimitOk returns a tuple with the ThroughputWriteLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudVolumeIopsInfo) GetThroughputWriteLimitOk() (*int64, bool) {
-	if o == nil || o.ThroughputWriteLimit == nil {
+	if o == nil || IsNil(o.ThroughputWriteLimit) {
 		return nil, false
 	}
 	return o.ThroughputWriteLimit, true
@@ -224,7 +228,7 @@ func (o *CloudVolumeIopsInfo) GetThroughputWriteLimitOk() (*int64, bool) {
 
 // HasThroughputWriteLimit returns a boolean if a field has been set.
 func (o *CloudVolumeIopsInfo) HasThroughputWriteLimit() bool {
-	if o != nil && o.ThroughputWriteLimit != nil {
+	if o != nil && !IsNil(o.ThroughputWriteLimit) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *CloudVolumeIopsInfo) SetThroughputWriteLimit(v int64) {
 }
 
 func (o CloudVolumeIopsInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudVolumeIopsInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IopsReadLimit != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IopsReadLimit) {
 		toSerialize["IopsReadLimit"] = o.IopsReadLimit
 	}
-	if o.IopsWriteLimit != nil {
+	if !IsNil(o.IopsWriteLimit) {
 		toSerialize["IopsWriteLimit"] = o.IopsWriteLimit
 	}
-	if o.ThroughputReadLimit != nil {
+	if !IsNil(o.ThroughputReadLimit) {
 		toSerialize["ThroughputReadLimit"] = o.ThroughputReadLimit
 	}
-	if o.ThroughputWriteLimit != nil {
+	if !IsNil(o.ThroughputWriteLimit) {
 		toSerialize["ThroughputWriteLimit"] = o.ThroughputWriteLimit
 	}
 
@@ -269,10 +277,32 @@ func (o CloudVolumeIopsInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudVolumeIopsInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudVolumeIopsInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudVolumeIopsInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *CloudVolumeIopsInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudVolumeIopsInfoWithoutEmbeddedStruct := CloudVolumeIopsInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudVolumeIopsInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudVolumeIopsInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudVolumeIopsInfo := _CloudVolumeIopsInfo{}
 		varCloudVolumeIopsInfo.ClassId = varCloudVolumeIopsInfoWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *CloudVolumeIopsInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudVolumeIopsInfo := _CloudVolumeIopsInfo{}
 
-	err = json.Unmarshal(bytes, &varCloudVolumeIopsInfo)
+	err = json.Unmarshal(data, &varCloudVolumeIopsInfo)
 	if err == nil {
 		o.MoBaseComplexType = varCloudVolumeIopsInfo.MoBaseComplexType
 	} else {
@@ -315,7 +345,7 @@ func (o *CloudVolumeIopsInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IopsReadLimit")

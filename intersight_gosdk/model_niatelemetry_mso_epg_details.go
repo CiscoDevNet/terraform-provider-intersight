@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryMsoEpgDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryMsoEpgDetails{}
 
 // NiatelemetryMsoEpgDetails Details of Epgs configured from the Multi-Site Orchestrator.
 type NiatelemetryMsoEpgDetails struct {
@@ -37,8 +41,8 @@ type NiatelemetryMsoEpgDetails struct {
 	// Schema name in Multi-Site Orchestrator.
 	SchemaName *string `json:"SchemaName,omitempty"`
 	// Template name in Multi-Site Orchestrator.
-	TemplateName         *string                              `json:"TemplateName,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	TemplateName         *string                                     `json:"TemplateName,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *NiatelemetryMsoEpgDetails) SetObjectType(v string) {
 
 // GetDeployedSites returns the DeployedSites field value if set, zero value otherwise.
 func (o *NiatelemetryMsoEpgDetails) GetDeployedSites() string {
-	if o == nil || o.DeployedSites == nil {
+	if o == nil || IsNil(o.DeployedSites) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *NiatelemetryMsoEpgDetails) GetDeployedSites() string {
 // GetDeployedSitesOk returns a tuple with the DeployedSites field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoEpgDetails) GetDeployedSitesOk() (*string, bool) {
-	if o == nil || o.DeployedSites == nil {
+	if o == nil || IsNil(o.DeployedSites) {
 		return nil, false
 	}
 	return o.DeployedSites, true
@@ -135,7 +139,7 @@ func (o *NiatelemetryMsoEpgDetails) GetDeployedSitesOk() (*string, bool) {
 
 // HasDeployedSites returns a boolean if a field has been set.
 func (o *NiatelemetryMsoEpgDetails) HasDeployedSites() bool {
-	if o != nil && o.DeployedSites != nil {
+	if o != nil && !IsNil(o.DeployedSites) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *NiatelemetryMsoEpgDetails) SetDeployedSites(v string) {
 
 // GetEpgName returns the EpgName field value if set, zero value otherwise.
 func (o *NiatelemetryMsoEpgDetails) GetEpgName() string {
-	if o == nil || o.EpgName == nil {
+	if o == nil || IsNil(o.EpgName) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *NiatelemetryMsoEpgDetails) GetEpgName() string {
 // GetEpgNameOk returns a tuple with the EpgName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoEpgDetails) GetEpgNameOk() (*string, bool) {
-	if o == nil || o.EpgName == nil {
+	if o == nil || IsNil(o.EpgName) {
 		return nil, false
 	}
 	return o.EpgName, true
@@ -167,7 +171,7 @@ func (o *NiatelemetryMsoEpgDetails) GetEpgNameOk() (*string, bool) {
 
 // HasEpgName returns a boolean if a field has been set.
 func (o *NiatelemetryMsoEpgDetails) HasEpgName() bool {
-	if o != nil && o.EpgName != nil {
+	if o != nil && !IsNil(o.EpgName) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *NiatelemetryMsoEpgDetails) SetEpgName(v string) {
 
 // GetIsLocal returns the IsLocal field value if set, zero value otherwise.
 func (o *NiatelemetryMsoEpgDetails) GetIsLocal() string {
-	if o == nil || o.IsLocal == nil {
+	if o == nil || IsNil(o.IsLocal) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *NiatelemetryMsoEpgDetails) GetIsLocal() string {
 // GetIsLocalOk returns a tuple with the IsLocal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoEpgDetails) GetIsLocalOk() (*string, bool) {
-	if o == nil || o.IsLocal == nil {
+	if o == nil || IsNil(o.IsLocal) {
 		return nil, false
 	}
 	return o.IsLocal, true
@@ -199,7 +203,7 @@ func (o *NiatelemetryMsoEpgDetails) GetIsLocalOk() (*string, bool) {
 
 // HasIsLocal returns a boolean if a field has been set.
 func (o *NiatelemetryMsoEpgDetails) HasIsLocal() bool {
-	if o != nil && o.IsLocal != nil {
+	if o != nil && !IsNil(o.IsLocal) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *NiatelemetryMsoEpgDetails) SetIsLocal(v string) {
 
 // GetReference returns the Reference field value if set, zero value otherwise.
 func (o *NiatelemetryMsoEpgDetails) GetReference() string {
-	if o == nil || o.Reference == nil {
+	if o == nil || IsNil(o.Reference) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *NiatelemetryMsoEpgDetails) GetReference() string {
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoEpgDetails) GetReferenceOk() (*string, bool) {
-	if o == nil || o.Reference == nil {
+	if o == nil || IsNil(o.Reference) {
 		return nil, false
 	}
 	return o.Reference, true
@@ -231,7 +235,7 @@ func (o *NiatelemetryMsoEpgDetails) GetReferenceOk() (*string, bool) {
 
 // HasReference returns a boolean if a field has been set.
 func (o *NiatelemetryMsoEpgDetails) HasReference() bool {
-	if o != nil && o.Reference != nil {
+	if o != nil && !IsNil(o.Reference) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *NiatelemetryMsoEpgDetails) SetReference(v string) {
 
 // GetSchemaId returns the SchemaId field value if set, zero value otherwise.
 func (o *NiatelemetryMsoEpgDetails) GetSchemaId() string {
-	if o == nil || o.SchemaId == nil {
+	if o == nil || IsNil(o.SchemaId) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *NiatelemetryMsoEpgDetails) GetSchemaId() string {
 // GetSchemaIdOk returns a tuple with the SchemaId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoEpgDetails) GetSchemaIdOk() (*string, bool) {
-	if o == nil || o.SchemaId == nil {
+	if o == nil || IsNil(o.SchemaId) {
 		return nil, false
 	}
 	return o.SchemaId, true
@@ -263,7 +267,7 @@ func (o *NiatelemetryMsoEpgDetails) GetSchemaIdOk() (*string, bool) {
 
 // HasSchemaId returns a boolean if a field has been set.
 func (o *NiatelemetryMsoEpgDetails) HasSchemaId() bool {
-	if o != nil && o.SchemaId != nil {
+	if o != nil && !IsNil(o.SchemaId) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *NiatelemetryMsoEpgDetails) SetSchemaId(v string) {
 
 // GetSchemaName returns the SchemaName field value if set, zero value otherwise.
 func (o *NiatelemetryMsoEpgDetails) GetSchemaName() string {
-	if o == nil || o.SchemaName == nil {
+	if o == nil || IsNil(o.SchemaName) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *NiatelemetryMsoEpgDetails) GetSchemaName() string {
 // GetSchemaNameOk returns a tuple with the SchemaName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoEpgDetails) GetSchemaNameOk() (*string, bool) {
-	if o == nil || o.SchemaName == nil {
+	if o == nil || IsNil(o.SchemaName) {
 		return nil, false
 	}
 	return o.SchemaName, true
@@ -295,7 +299,7 @@ func (o *NiatelemetryMsoEpgDetails) GetSchemaNameOk() (*string, bool) {
 
 // HasSchemaName returns a boolean if a field has been set.
 func (o *NiatelemetryMsoEpgDetails) HasSchemaName() bool {
-	if o != nil && o.SchemaName != nil {
+	if o != nil && !IsNil(o.SchemaName) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *NiatelemetryMsoEpgDetails) SetSchemaName(v string) {
 
 // GetTemplateName returns the TemplateName field value if set, zero value otherwise.
 func (o *NiatelemetryMsoEpgDetails) GetTemplateName() string {
-	if o == nil || o.TemplateName == nil {
+	if o == nil || IsNil(o.TemplateName) {
 		var ret string
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *NiatelemetryMsoEpgDetails) GetTemplateName() string {
 // GetTemplateNameOk returns a tuple with the TemplateName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryMsoEpgDetails) GetTemplateNameOk() (*string, bool) {
-	if o == nil || o.TemplateName == nil {
+	if o == nil || IsNil(o.TemplateName) {
 		return nil, false
 	}
 	return o.TemplateName, true
@@ -327,7 +331,7 @@ func (o *NiatelemetryMsoEpgDetails) GetTemplateNameOk() (*string, bool) {
 
 // HasTemplateName returns a boolean if a field has been set.
 func (o *NiatelemetryMsoEpgDetails) HasTemplateName() bool {
-	if o != nil && o.TemplateName != nil {
+	if o != nil && !IsNil(o.TemplateName) {
 		return true
 	}
 
@@ -339,87 +343,124 @@ func (o *NiatelemetryMsoEpgDetails) SetTemplateName(v string) {
 	o.TemplateName = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryMsoEpgDetails) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryMsoEpgDetails) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryMsoEpgDetails) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryMsoEpgDetails) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryMsoEpgDetails) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryMsoEpgDetails) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryMsoEpgDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryMsoEpgDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeployedSites != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeployedSites) {
 		toSerialize["DeployedSites"] = o.DeployedSites
 	}
-	if o.EpgName != nil {
+	if !IsNil(o.EpgName) {
 		toSerialize["EpgName"] = o.EpgName
 	}
-	if o.IsLocal != nil {
+	if !IsNil(o.IsLocal) {
 		toSerialize["IsLocal"] = o.IsLocal
 	}
-	if o.Reference != nil {
+	if !IsNil(o.Reference) {
 		toSerialize["Reference"] = o.Reference
 	}
-	if o.SchemaId != nil {
+	if !IsNil(o.SchemaId) {
 		toSerialize["SchemaId"] = o.SchemaId
 	}
-	if o.SchemaName != nil {
+	if !IsNil(o.SchemaName) {
 		toSerialize["SchemaName"] = o.SchemaName
 	}
-	if o.TemplateName != nil {
+	if !IsNil(o.TemplateName) {
 		toSerialize["TemplateName"] = o.TemplateName
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryMsoEpgDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryMsoEpgDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryMsoEpgDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -438,13 +479,13 @@ func (o *NiatelemetryMsoEpgDetails) UnmarshalJSON(bytes []byte) (err error) {
 		// Schema name in Multi-Site Orchestrator.
 		SchemaName *string `json:"SchemaName,omitempty"`
 		// Template name in Multi-Site Orchestrator.
-		TemplateName     *string                              `json:"TemplateName,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		TemplateName     *string                                     `json:"TemplateName,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryMsoEpgDetailsWithoutEmbeddedStruct := NiatelemetryMsoEpgDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryMsoEpgDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryMsoEpgDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryMsoEpgDetails := _NiatelemetryMsoEpgDetails{}
 		varNiatelemetryMsoEpgDetails.ClassId = varNiatelemetryMsoEpgDetailsWithoutEmbeddedStruct.ClassId
@@ -464,7 +505,7 @@ func (o *NiatelemetryMsoEpgDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryMsoEpgDetails := _NiatelemetryMsoEpgDetails{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryMsoEpgDetails)
+	err = json.Unmarshal(data, &varNiatelemetryMsoEpgDetails)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryMsoEpgDetails.MoBaseMo
 	} else {
@@ -473,7 +514,7 @@ func (o *NiatelemetryMsoEpgDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeployedSites")

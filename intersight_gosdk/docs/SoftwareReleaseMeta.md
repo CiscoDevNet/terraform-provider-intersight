@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **LatestFileName** | Pointer to **string** | The name of the latest image file uploaded for this software type. It is populated as part of the image import operation. | [optional] 
 **LatestVersion** | Pointer to **string** | Latest version of the image avaiable for a specific software. | [optional] [readonly] 
 **SoftwareTypeId** | Pointer to **string** | The software type id of the image (For e.g. firmware.Distributable, software.ApplianceDistributable, software.HyperflexBundleDistributable, software.UcsdBundleDistributable). | [optional] 
-**Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
-**Image** | Pointer to [**FirmwareBaseDistributableRelationship**](FirmwareBaseDistributableRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableSoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
+**Image** | Pointer to [**NullableFirmwareBaseDistributableRelationship**](FirmwareBaseDistributableRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -197,6 +197,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *SoftwareReleaseMeta) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *SoftwareReleaseMeta) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 ### GetImage
 
 `func (o *SoftwareReleaseMeta) GetImage() FirmwareBaseDistributableRelationship`
@@ -222,6 +232,16 @@ SetImage sets Image field to given value.
 
 HasImage returns a boolean if a field has been set.
 
+### SetImageNil
+
+`func (o *SoftwareReleaseMeta) SetImageNil(b bool)`
+
+ SetImageNil sets the value for Image to be an explicit nil
+
+### UnsetImage
+`func (o *SoftwareReleaseMeta) UnsetImage()`
+
+UnsetImage ensures that no value is present for Image, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **UnitOfMeasure** | Pointer to [**[]AssetMeteringType**](AssetMeteringType.md) |  | [optional] 
 **Workloads** | Pointer to **[]string** |  | [optional] 
 **Devices** | Pointer to [**[]AssetDeploymentDeviceRelationship**](AssetDeploymentDeviceRelationship.md) | An array of relationships to assetDeploymentDevice resources. | [optional] [readonly] 
-**Subscription** | Pointer to [**AssetSubscriptionRelationship**](AssetSubscriptionRelationship.md) |  | [optional] 
+**Subscription** | Pointer to [**NullableAssetSubscriptionRelationship**](AssetSubscriptionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -428,6 +428,16 @@ SetSubscription sets Subscription field to given value.
 
 HasSubscription returns a boolean if a field has been set.
 
+### SetSubscriptionNil
+
+`func (o *AssetDeployment) SetSubscriptionNil(b bool)`
+
+ SetSubscriptionNil sets the value for Subscription to be an explicit nil
+
+### UnsetSubscription
+`func (o *AssetDeployment) UnsetSubscription()`
+
+UnsetSubscription ensures that no value is present for Subscription, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

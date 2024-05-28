@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesAciCniApic type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesAciCniApic{}
 
 // KubernetesAciCniApic Internally generated object of claimed APIC device known to Razor.
 type KubernetesAciCniApic struct {
@@ -29,9 +33,9 @@ type KubernetesAciCniApic struct {
 	// The number of ACI CNI profiles configured for this APIC.
 	NumAciCniProfiles *int64 `json:"NumAciCniProfiles,omitempty"`
 	// An array of relationships to kubernetesAciCniProfile resources.
-	AciCniProfiles       []KubernetesAciCniProfileRelationship `json:"AciCniProfiles,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship  `json:"RegisteredDevice,omitempty"`
+	AciCniProfiles       []KubernetesAciCniProfileRelationship        `json:"AciCniProfiles,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship  `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,7 +114,7 @@ func (o *KubernetesAciCniApic) SetObjectType(v string) {
 
 // GetAssetApicMoid returns the AssetApicMoid field value if set, zero value otherwise.
 func (o *KubernetesAciCniApic) GetAssetApicMoid() string {
-	if o == nil || o.AssetApicMoid == nil {
+	if o == nil || IsNil(o.AssetApicMoid) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *KubernetesAciCniApic) GetAssetApicMoid() string {
 // GetAssetApicMoidOk returns a tuple with the AssetApicMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniApic) GetAssetApicMoidOk() (*string, bool) {
-	if o == nil || o.AssetApicMoid == nil {
+	if o == nil || IsNil(o.AssetApicMoid) {
 		return nil, false
 	}
 	return o.AssetApicMoid, true
@@ -128,7 +132,7 @@ func (o *KubernetesAciCniApic) GetAssetApicMoidOk() (*string, bool) {
 
 // HasAssetApicMoid returns a boolean if a field has been set.
 func (o *KubernetesAciCniApic) HasAssetApicMoid() bool {
-	if o != nil && o.AssetApicMoid != nil {
+	if o != nil && !IsNil(o.AssetApicMoid) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *KubernetesAciCniApic) SetAssetApicMoid(v string) {
 
 // GetNumAciCniProfiles returns the NumAciCniProfiles field value if set, zero value otherwise.
 func (o *KubernetesAciCniApic) GetNumAciCniProfiles() int64 {
-	if o == nil || o.NumAciCniProfiles == nil {
+	if o == nil || IsNil(o.NumAciCniProfiles) {
 		var ret int64
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *KubernetesAciCniApic) GetNumAciCniProfiles() int64 {
 // GetNumAciCniProfilesOk returns a tuple with the NumAciCniProfiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniApic) GetNumAciCniProfilesOk() (*int64, bool) {
-	if o == nil || o.NumAciCniProfiles == nil {
+	if o == nil || IsNil(o.NumAciCniProfiles) {
 		return nil, false
 	}
 	return o.NumAciCniProfiles, true
@@ -160,7 +164,7 @@ func (o *KubernetesAciCniApic) GetNumAciCniProfilesOk() (*int64, bool) {
 
 // HasNumAciCniProfiles returns a boolean if a field has been set.
 func (o *KubernetesAciCniApic) HasNumAciCniProfiles() bool {
-	if o != nil && o.NumAciCniProfiles != nil {
+	if o != nil && !IsNil(o.NumAciCniProfiles) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *KubernetesAciCniApic) GetAciCniProfiles() []KubernetesAciCniProfileRela
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAciCniApic) GetAciCniProfilesOk() ([]KubernetesAciCniProfileRelationship, bool) {
-	if o == nil || o.AciCniProfiles == nil {
+	if o == nil || IsNil(o.AciCniProfiles) {
 		return nil, false
 	}
 	return o.AciCniProfiles, true
@@ -193,7 +197,7 @@ func (o *KubernetesAciCniApic) GetAciCniProfilesOk() ([]KubernetesAciCniProfileR
 
 // HasAciCniProfiles returns a boolean if a field has been set.
 func (o *KubernetesAciCniApic) HasAciCniProfiles() bool {
-	if o != nil && o.AciCniProfiles != nil {
+	if o != nil && IsNil(o.AciCniProfiles) {
 		return true
 	}
 
@@ -205,110 +209,158 @@ func (o *KubernetesAciCniApic) SetAciCniProfiles(v []KubernetesAciCniProfileRela
 	o.AciCniProfiles = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesAciCniApic) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAciCniApic) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *KubernetesAciCniApic) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *KubernetesAciCniApic) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *KubernetesAciCniApic) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *KubernetesAciCniApic) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesAciCniApic) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAciCniApic) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *KubernetesAciCniApic) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *KubernetesAciCniApic) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *KubernetesAciCniApic) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *KubernetesAciCniApic) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o KubernetesAciCniApic) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesAciCniApic) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AssetApicMoid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AssetApicMoid) {
 		toSerialize["AssetApicMoid"] = o.AssetApicMoid
 	}
-	if o.NumAciCniProfiles != nil {
+	if !IsNil(o.NumAciCniProfiles) {
 		toSerialize["NumAciCniProfiles"] = o.NumAciCniProfiles
 	}
 	if o.AciCniProfiles != nil {
 		toSerialize["AciCniProfiles"] = o.AciCniProfiles
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesAciCniApic) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesAciCniApic) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesAciCniApicWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -319,14 +371,14 @@ func (o *KubernetesAciCniApic) UnmarshalJSON(bytes []byte) (err error) {
 		// The number of ACI CNI profiles configured for this APIC.
 		NumAciCniProfiles *int64 `json:"NumAciCniProfiles,omitempty"`
 		// An array of relationships to kubernetesAciCniProfile resources.
-		AciCniProfiles   []KubernetesAciCniProfileRelationship `json:"AciCniProfiles,omitempty"`
-		Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship  `json:"RegisteredDevice,omitempty"`
+		AciCniProfiles   []KubernetesAciCniProfileRelationship        `json:"AciCniProfiles,omitempty"`
+		Organization     NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship  `json:"RegisteredDevice,omitempty"`
 	}
 
 	varKubernetesAciCniApicWithoutEmbeddedStruct := KubernetesAciCniApicWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesAciCniApicWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesAciCniApicWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesAciCniApic := _KubernetesAciCniApic{}
 		varKubernetesAciCniApic.ClassId = varKubernetesAciCniApicWithoutEmbeddedStruct.ClassId
@@ -343,7 +395,7 @@ func (o *KubernetesAciCniApic) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesAciCniApic := _KubernetesAciCniApic{}
 
-	err = json.Unmarshal(bytes, &varKubernetesAciCniApic)
+	err = json.Unmarshal(data, &varKubernetesAciCniApic)
 	if err == nil {
 		o.MoBaseMo = varKubernetesAciCniApic.MoBaseMo
 	} else {
@@ -352,7 +404,7 @@ func (o *KubernetesAciCniApic) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AssetApicMoid")

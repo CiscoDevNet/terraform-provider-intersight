@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AdapterHostFcInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AdapterHostFcInterface{}
 
 // AdapterHostFcInterface Host facing fibre channel interface on a server adapter.
 type AdapterHostFcInterface struct {
@@ -52,12 +56,12 @@ type AdapterHostFcInterface struct {
 	// The uniquely distinguishable user configured World Wide Node Name of the Host.
 	Wwnn *string `json:"Wwnn,omitempty"`
 	// The uniquely distinguishable user configured World Wide Port Name of the Host Fibre Channel Interface.
-	Wwpn                 *string                              `json:"Wwpn,omitempty"`
-	AdapterUnit          *AdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	PinnedInterface      *InventoryInterfaceRelationship      `json:"PinnedInterface,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	Vfc                  *NetworkVfcRelationship              `json:"Vfc,omitempty"`
+	Wwpn                 *string                                     `json:"Wwpn,omitempty"`
+	AdapterUnit          NullableAdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	PinnedInterface      NullableInventoryInterfaceRelationship      `json:"PinnedInterface,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Vfc                  NullableNetworkVfcRelationship              `json:"Vfc,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -140,7 +144,7 @@ func (o *AdapterHostFcInterface) SetObjectType(v string) {
 
 // GetAdminState returns the AdminState field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetAdminState() string {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *AdapterHostFcInterface) GetAdminState() string {
 // GetAdminStateOk returns a tuple with the AdminState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetAdminStateOk() (*string, bool) {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		return nil, false
 	}
 	return o.AdminState, true
@@ -158,7 +162,7 @@ func (o *AdapterHostFcInterface) GetAdminStateOk() (*string, bool) {
 
 // HasAdminState returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasAdminState() bool {
-	if o != nil && o.AdminState != nil {
+	if o != nil && !IsNil(o.AdminState) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *AdapterHostFcInterface) SetAdminState(v string) {
 
 // GetEpDn returns the EpDn field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetEpDn() string {
-	if o == nil || o.EpDn == nil {
+	if o == nil || IsNil(o.EpDn) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *AdapterHostFcInterface) GetEpDn() string {
 // GetEpDnOk returns a tuple with the EpDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetEpDnOk() (*string, bool) {
-	if o == nil || o.EpDn == nil {
+	if o == nil || IsNil(o.EpDn) {
 		return nil, false
 	}
 	return o.EpDn, true
@@ -190,7 +194,7 @@ func (o *AdapterHostFcInterface) GetEpDnOk() (*string, bool) {
 
 // HasEpDn returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasEpDn() bool {
-	if o != nil && o.EpDn != nil {
+	if o != nil && !IsNil(o.EpDn) {
 		return true
 	}
 
@@ -204,7 +208,7 @@ func (o *AdapterHostFcInterface) SetEpDn(v string) {
 
 // GetHostFcInterfaceId returns the HostFcInterfaceId field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetHostFcInterfaceId() int64 {
-	if o == nil || o.HostFcInterfaceId == nil {
+	if o == nil || IsNil(o.HostFcInterfaceId) {
 		var ret int64
 		return ret
 	}
@@ -214,7 +218,7 @@ func (o *AdapterHostFcInterface) GetHostFcInterfaceId() int64 {
 // GetHostFcInterfaceIdOk returns a tuple with the HostFcInterfaceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetHostFcInterfaceIdOk() (*int64, bool) {
-	if o == nil || o.HostFcInterfaceId == nil {
+	if o == nil || IsNil(o.HostFcInterfaceId) {
 		return nil, false
 	}
 	return o.HostFcInterfaceId, true
@@ -222,7 +226,7 @@ func (o *AdapterHostFcInterface) GetHostFcInterfaceIdOk() (*int64, bool) {
 
 // HasHostFcInterfaceId returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasHostFcInterfaceId() bool {
-	if o != nil && o.HostFcInterfaceId != nil {
+	if o != nil && !IsNil(o.HostFcInterfaceId) {
 		return true
 	}
 
@@ -236,7 +240,7 @@ func (o *AdapterHostFcInterface) SetHostFcInterfaceId(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -246,7 +250,7 @@ func (o *AdapterHostFcInterface) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -254,7 +258,7 @@ func (o *AdapterHostFcInterface) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *AdapterHostFcInterface) GetOperReason() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterHostFcInterface) GetOperReasonOk() ([]string, bool) {
-	if o == nil || o.OperReason == nil {
+	if o == nil || IsNil(o.OperReason) {
 		return nil, false
 	}
 	return o.OperReason, true
@@ -287,7 +291,7 @@ func (o *AdapterHostFcInterface) GetOperReasonOk() ([]string, bool) {
 
 // HasOperReason returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasOperReason() bool {
-	if o != nil && o.OperReason != nil {
+	if o != nil && IsNil(o.OperReason) {
 		return true
 	}
 
@@ -301,7 +305,7 @@ func (o *AdapterHostFcInterface) SetOperReason(v []string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -311,7 +315,7 @@ func (o *AdapterHostFcInterface) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -319,7 +323,7 @@ func (o *AdapterHostFcInterface) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -333,7 +337,7 @@ func (o *AdapterHostFcInterface) SetOperState(v string) {
 
 // GetOperability returns the Operability field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetOperability() string {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		var ret string
 		return ret
 	}
@@ -343,7 +347,7 @@ func (o *AdapterHostFcInterface) GetOperability() string {
 // GetOperabilityOk returns a tuple with the Operability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetOperabilityOk() (*string, bool) {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		return nil, false
 	}
 	return o.Operability, true
@@ -351,7 +355,7 @@ func (o *AdapterHostFcInterface) GetOperabilityOk() (*string, bool) {
 
 // HasOperability returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasOperability() bool {
-	if o != nil && o.Operability != nil {
+	if o != nil && !IsNil(o.Operability) {
 		return true
 	}
 
@@ -365,7 +369,7 @@ func (o *AdapterHostFcInterface) SetOperability(v string) {
 
 // GetOriginalWwnn returns the OriginalWwnn field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetOriginalWwnn() string {
-	if o == nil || o.OriginalWwnn == nil {
+	if o == nil || IsNil(o.OriginalWwnn) {
 		var ret string
 		return ret
 	}
@@ -375,7 +379,7 @@ func (o *AdapterHostFcInterface) GetOriginalWwnn() string {
 // GetOriginalWwnnOk returns a tuple with the OriginalWwnn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetOriginalWwnnOk() (*string, bool) {
-	if o == nil || o.OriginalWwnn == nil {
+	if o == nil || IsNil(o.OriginalWwnn) {
 		return nil, false
 	}
 	return o.OriginalWwnn, true
@@ -383,7 +387,7 @@ func (o *AdapterHostFcInterface) GetOriginalWwnnOk() (*string, bool) {
 
 // HasOriginalWwnn returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasOriginalWwnn() bool {
-	if o != nil && o.OriginalWwnn != nil {
+	if o != nil && !IsNil(o.OriginalWwnn) {
 		return true
 	}
 
@@ -397,7 +401,7 @@ func (o *AdapterHostFcInterface) SetOriginalWwnn(v string) {
 
 // GetOriginalWwpn returns the OriginalWwpn field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetOriginalWwpn() string {
-	if o == nil || o.OriginalWwpn == nil {
+	if o == nil || IsNil(o.OriginalWwpn) {
 		var ret string
 		return ret
 	}
@@ -407,7 +411,7 @@ func (o *AdapterHostFcInterface) GetOriginalWwpn() string {
 // GetOriginalWwpnOk returns a tuple with the OriginalWwpn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetOriginalWwpnOk() (*string, bool) {
-	if o == nil || o.OriginalWwpn == nil {
+	if o == nil || IsNil(o.OriginalWwpn) {
 		return nil, false
 	}
 	return o.OriginalWwpn, true
@@ -415,7 +419,7 @@ func (o *AdapterHostFcInterface) GetOriginalWwpnOk() (*string, bool) {
 
 // HasOriginalWwpn returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasOriginalWwpn() bool {
-	if o != nil && o.OriginalWwpn != nil {
+	if o != nil && !IsNil(o.OriginalWwpn) {
 		return true
 	}
 
@@ -429,7 +433,7 @@ func (o *AdapterHostFcInterface) SetOriginalWwpn(v string) {
 
 // GetPeerDn returns the PeerDn field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetPeerDn() string {
-	if o == nil || o.PeerDn == nil {
+	if o == nil || IsNil(o.PeerDn) {
 		var ret string
 		return ret
 	}
@@ -439,7 +443,7 @@ func (o *AdapterHostFcInterface) GetPeerDn() string {
 // GetPeerDnOk returns a tuple with the PeerDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetPeerDnOk() (*string, bool) {
-	if o == nil || o.PeerDn == nil {
+	if o == nil || IsNil(o.PeerDn) {
 		return nil, false
 	}
 	return o.PeerDn, true
@@ -447,7 +451,7 @@ func (o *AdapterHostFcInterface) GetPeerDnOk() (*string, bool) {
 
 // HasPeerDn returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasPeerDn() bool {
-	if o != nil && o.PeerDn != nil {
+	if o != nil && !IsNil(o.PeerDn) {
 		return true
 	}
 
@@ -461,7 +465,7 @@ func (o *AdapterHostFcInterface) SetPeerDn(v string) {
 
 // GetPinGroupName returns the PinGroupName field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetPinGroupName() string {
-	if o == nil || o.PinGroupName == nil {
+	if o == nil || IsNil(o.PinGroupName) {
 		var ret string
 		return ret
 	}
@@ -471,7 +475,7 @@ func (o *AdapterHostFcInterface) GetPinGroupName() string {
 // GetPinGroupNameOk returns a tuple with the PinGroupName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetPinGroupNameOk() (*string, bool) {
-	if o == nil || o.PinGroupName == nil {
+	if o == nil || IsNil(o.PinGroupName) {
 		return nil, false
 	}
 	return o.PinGroupName, true
@@ -479,7 +483,7 @@ func (o *AdapterHostFcInterface) GetPinGroupNameOk() (*string, bool) {
 
 // HasPinGroupName returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasPinGroupName() bool {
-	if o != nil && o.PinGroupName != nil {
+	if o != nil && !IsNil(o.PinGroupName) {
 		return true
 	}
 
@@ -493,7 +497,7 @@ func (o *AdapterHostFcInterface) SetPinGroupName(v string) {
 
 // GetVfcAction returns the VfcAction field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetVfcAction() string {
-	if o == nil || o.VfcAction == nil {
+	if o == nil || IsNil(o.VfcAction) {
 		var ret string
 		return ret
 	}
@@ -503,7 +507,7 @@ func (o *AdapterHostFcInterface) GetVfcAction() string {
 // GetVfcActionOk returns a tuple with the VfcAction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetVfcActionOk() (*string, bool) {
-	if o == nil || o.VfcAction == nil {
+	if o == nil || IsNil(o.VfcAction) {
 		return nil, false
 	}
 	return o.VfcAction, true
@@ -511,7 +515,7 @@ func (o *AdapterHostFcInterface) GetVfcActionOk() (*string, bool) {
 
 // HasVfcAction returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasVfcAction() bool {
-	if o != nil && o.VfcAction != nil {
+	if o != nil && !IsNil(o.VfcAction) {
 		return true
 	}
 
@@ -525,7 +529,7 @@ func (o *AdapterHostFcInterface) SetVfcAction(v string) {
 
 // GetVifId returns the VifId field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetVifId() int64 {
-	if o == nil || o.VifId == nil {
+	if o == nil || IsNil(o.VifId) {
 		var ret int64
 		return ret
 	}
@@ -535,7 +539,7 @@ func (o *AdapterHostFcInterface) GetVifId() int64 {
 // GetVifIdOk returns a tuple with the VifId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetVifIdOk() (*int64, bool) {
-	if o == nil || o.VifId == nil {
+	if o == nil || IsNil(o.VifId) {
 		return nil, false
 	}
 	return o.VifId, true
@@ -543,7 +547,7 @@ func (o *AdapterHostFcInterface) GetVifIdOk() (*int64, bool) {
 
 // HasVifId returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasVifId() bool {
-	if o != nil && o.VifId != nil {
+	if o != nil && !IsNil(o.VifId) {
 		return true
 	}
 
@@ -557,7 +561,7 @@ func (o *AdapterHostFcInterface) SetVifId(v int64) {
 
 // GetWwnn returns the Wwnn field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetWwnn() string {
-	if o == nil || o.Wwnn == nil {
+	if o == nil || IsNil(o.Wwnn) {
 		var ret string
 		return ret
 	}
@@ -567,7 +571,7 @@ func (o *AdapterHostFcInterface) GetWwnn() string {
 // GetWwnnOk returns a tuple with the Wwnn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetWwnnOk() (*string, bool) {
-	if o == nil || o.Wwnn == nil {
+	if o == nil || IsNil(o.Wwnn) {
 		return nil, false
 	}
 	return o.Wwnn, true
@@ -575,7 +579,7 @@ func (o *AdapterHostFcInterface) GetWwnnOk() (*string, bool) {
 
 // HasWwnn returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasWwnn() bool {
-	if o != nil && o.Wwnn != nil {
+	if o != nil && !IsNil(o.Wwnn) {
 		return true
 	}
 
@@ -589,7 +593,7 @@ func (o *AdapterHostFcInterface) SetWwnn(v string) {
 
 // GetWwpn returns the Wwpn field value if set, zero value otherwise.
 func (o *AdapterHostFcInterface) GetWwpn() string {
-	if o == nil || o.Wwpn == nil {
+	if o == nil || IsNil(o.Wwpn) {
 		var ret string
 		return ret
 	}
@@ -599,7 +603,7 @@ func (o *AdapterHostFcInterface) GetWwpn() string {
 // GetWwpnOk returns a tuple with the Wwpn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterHostFcInterface) GetWwpnOk() (*string, bool) {
-	if o == nil || o.Wwpn == nil {
+	if o == nil || IsNil(o.Wwpn) {
 		return nil, false
 	}
 	return o.Wwpn, true
@@ -607,7 +611,7 @@ func (o *AdapterHostFcInterface) GetWwpnOk() (*string, bool) {
 
 // HasWwpn returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasWwpn() bool {
-	if o != nil && o.Wwpn != nil {
+	if o != nil && !IsNil(o.Wwpn) {
 		return true
 	}
 
@@ -619,251 +623,332 @@ func (o *AdapterHostFcInterface) SetWwpn(v string) {
 	o.Wwpn = &v
 }
 
-// GetAdapterUnit returns the AdapterUnit field value if set, zero value otherwise.
+// GetAdapterUnit returns the AdapterUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterHostFcInterface) GetAdapterUnit() AdapterUnitRelationship {
-	if o == nil || o.AdapterUnit == nil {
+	if o == nil || IsNil(o.AdapterUnit.Get()) {
 		var ret AdapterUnitRelationship
 		return ret
 	}
-	return *o.AdapterUnit
+	return *o.AdapterUnit.Get()
 }
 
 // GetAdapterUnitOk returns a tuple with the AdapterUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterHostFcInterface) GetAdapterUnitOk() (*AdapterUnitRelationship, bool) {
-	if o == nil || o.AdapterUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdapterUnit, true
+	return o.AdapterUnit.Get(), o.AdapterUnit.IsSet()
 }
 
 // HasAdapterUnit returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasAdapterUnit() bool {
-	if o != nil && o.AdapterUnit != nil {
+	if o != nil && o.AdapterUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAdapterUnit gets a reference to the given AdapterUnitRelationship and assigns it to the AdapterUnit field.
+// SetAdapterUnit gets a reference to the given NullableAdapterUnitRelationship and assigns it to the AdapterUnit field.
 func (o *AdapterHostFcInterface) SetAdapterUnit(v AdapterUnitRelationship) {
-	o.AdapterUnit = &v
+	o.AdapterUnit.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetAdapterUnitNil sets the value for AdapterUnit to be an explicit nil
+func (o *AdapterHostFcInterface) SetAdapterUnitNil() {
+	o.AdapterUnit.Set(nil)
+}
+
+// UnsetAdapterUnit ensures that no value is present for AdapterUnit, not even an explicit nil
+func (o *AdapterHostFcInterface) UnsetAdapterUnit() {
+	o.AdapterUnit.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterHostFcInterface) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterHostFcInterface) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *AdapterHostFcInterface) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetPinnedInterface returns the PinnedInterface field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *AdapterHostFcInterface) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *AdapterHostFcInterface) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetPinnedInterface returns the PinnedInterface field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterHostFcInterface) GetPinnedInterface() InventoryInterfaceRelationship {
-	if o == nil || o.PinnedInterface == nil {
+	if o == nil || IsNil(o.PinnedInterface.Get()) {
 		var ret InventoryInterfaceRelationship
 		return ret
 	}
-	return *o.PinnedInterface
+	return *o.PinnedInterface.Get()
 }
 
 // GetPinnedInterfaceOk returns a tuple with the PinnedInterface field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterHostFcInterface) GetPinnedInterfaceOk() (*InventoryInterfaceRelationship, bool) {
-	if o == nil || o.PinnedInterface == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PinnedInterface, true
+	return o.PinnedInterface.Get(), o.PinnedInterface.IsSet()
 }
 
 // HasPinnedInterface returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasPinnedInterface() bool {
-	if o != nil && o.PinnedInterface != nil {
+	if o != nil && o.PinnedInterface.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPinnedInterface gets a reference to the given InventoryInterfaceRelationship and assigns it to the PinnedInterface field.
+// SetPinnedInterface gets a reference to the given NullableInventoryInterfaceRelationship and assigns it to the PinnedInterface field.
 func (o *AdapterHostFcInterface) SetPinnedInterface(v InventoryInterfaceRelationship) {
-	o.PinnedInterface = &v
+	o.PinnedInterface.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetPinnedInterfaceNil sets the value for PinnedInterface to be an explicit nil
+func (o *AdapterHostFcInterface) SetPinnedInterfaceNil() {
+	o.PinnedInterface.Set(nil)
+}
+
+// UnsetPinnedInterface ensures that no value is present for PinnedInterface, not even an explicit nil
+func (o *AdapterHostFcInterface) UnsetPinnedInterface() {
+	o.PinnedInterface.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterHostFcInterface) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterHostFcInterface) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *AdapterHostFcInterface) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetVfc returns the Vfc field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *AdapterHostFcInterface) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *AdapterHostFcInterface) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetVfc returns the Vfc field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterHostFcInterface) GetVfc() NetworkVfcRelationship {
-	if o == nil || o.Vfc == nil {
+	if o == nil || IsNil(o.Vfc.Get()) {
 		var ret NetworkVfcRelationship
 		return ret
 	}
-	return *o.Vfc
+	return *o.Vfc.Get()
 }
 
 // GetVfcOk returns a tuple with the Vfc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterHostFcInterface) GetVfcOk() (*NetworkVfcRelationship, bool) {
-	if o == nil || o.Vfc == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Vfc, true
+	return o.Vfc.Get(), o.Vfc.IsSet()
 }
 
 // HasVfc returns a boolean if a field has been set.
 func (o *AdapterHostFcInterface) HasVfc() bool {
-	if o != nil && o.Vfc != nil {
+	if o != nil && o.Vfc.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVfc gets a reference to the given NetworkVfcRelationship and assigns it to the Vfc field.
+// SetVfc gets a reference to the given NullableNetworkVfcRelationship and assigns it to the Vfc field.
 func (o *AdapterHostFcInterface) SetVfc(v NetworkVfcRelationship) {
-	o.Vfc = &v
+	o.Vfc.Set(&v)
+}
+
+// SetVfcNil sets the value for Vfc to be an explicit nil
+func (o *AdapterHostFcInterface) SetVfcNil() {
+	o.Vfc.Set(nil)
+}
+
+// UnsetVfc ensures that no value is present for Vfc, not even an explicit nil
+func (o *AdapterHostFcInterface) UnsetVfc() {
+	o.Vfc.Unset()
 }
 
 func (o AdapterHostFcInterface) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AdapterHostFcInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminState) {
 		toSerialize["AdminState"] = o.AdminState
 	}
-	if o.EpDn != nil {
+	if !IsNil(o.EpDn) {
 		toSerialize["EpDn"] = o.EpDn
 	}
-	if o.HostFcInterfaceId != nil {
+	if !IsNil(o.HostFcInterfaceId) {
 		toSerialize["HostFcInterfaceId"] = o.HostFcInterfaceId
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.OperReason != nil {
 		toSerialize["OperReason"] = o.OperReason
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.Operability != nil {
+	if !IsNil(o.Operability) {
 		toSerialize["Operability"] = o.Operability
 	}
-	if o.OriginalWwnn != nil {
+	if !IsNil(o.OriginalWwnn) {
 		toSerialize["OriginalWwnn"] = o.OriginalWwnn
 	}
-	if o.OriginalWwpn != nil {
+	if !IsNil(o.OriginalWwpn) {
 		toSerialize["OriginalWwpn"] = o.OriginalWwpn
 	}
-	if o.PeerDn != nil {
+	if !IsNil(o.PeerDn) {
 		toSerialize["PeerDn"] = o.PeerDn
 	}
-	if o.PinGroupName != nil {
+	if !IsNil(o.PinGroupName) {
 		toSerialize["PinGroupName"] = o.PinGroupName
 	}
-	if o.VfcAction != nil {
+	if !IsNil(o.VfcAction) {
 		toSerialize["VfcAction"] = o.VfcAction
 	}
-	if o.VifId != nil {
+	if !IsNil(o.VifId) {
 		toSerialize["VifId"] = o.VifId
 	}
-	if o.Wwnn != nil {
+	if !IsNil(o.Wwnn) {
 		toSerialize["Wwnn"] = o.Wwnn
 	}
-	if o.Wwpn != nil {
+	if !IsNil(o.Wwpn) {
 		toSerialize["Wwpn"] = o.Wwpn
 	}
-	if o.AdapterUnit != nil {
-		toSerialize["AdapterUnit"] = o.AdapterUnit
+	if o.AdapterUnit.IsSet() {
+		toSerialize["AdapterUnit"] = o.AdapterUnit.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.PinnedInterface != nil {
-		toSerialize["PinnedInterface"] = o.PinnedInterface
+	if o.PinnedInterface.IsSet() {
+		toSerialize["PinnedInterface"] = o.PinnedInterface.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.Vfc != nil {
-		toSerialize["Vfc"] = o.Vfc
+	if o.Vfc.IsSet() {
+		toSerialize["Vfc"] = o.Vfc.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AdapterHostFcInterface) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AdapterHostFcInterface) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AdapterHostFcInterfaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -897,17 +982,17 @@ func (o *AdapterHostFcInterface) UnmarshalJSON(bytes []byte) (err error) {
 		// The uniquely distinguishable user configured World Wide Node Name of the Host.
 		Wwnn *string `json:"Wwnn,omitempty"`
 		// The uniquely distinguishable user configured World Wide Port Name of the Host Fibre Channel Interface.
-		Wwpn                *string                              `json:"Wwpn,omitempty"`
-		AdapterUnit         *AdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		PinnedInterface     *InventoryInterfaceRelationship      `json:"PinnedInterface,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		Vfc                 *NetworkVfcRelationship              `json:"Vfc,omitempty"`
+		Wwpn                *string                                     `json:"Wwpn,omitempty"`
+		AdapterUnit         NullableAdapterUnitRelationship             `json:"AdapterUnit,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		PinnedInterface     NullableInventoryInterfaceRelationship      `json:"PinnedInterface,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Vfc                 NullableNetworkVfcRelationship              `json:"Vfc,omitempty"`
 	}
 
 	varAdapterHostFcInterfaceWithoutEmbeddedStruct := AdapterHostFcInterfaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAdapterHostFcInterfaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAdapterHostFcInterfaceWithoutEmbeddedStruct)
 	if err == nil {
 		varAdapterHostFcInterface := _AdapterHostFcInterface{}
 		varAdapterHostFcInterface.ClassId = varAdapterHostFcInterfaceWithoutEmbeddedStruct.ClassId
@@ -939,7 +1024,7 @@ func (o *AdapterHostFcInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAdapterHostFcInterface := _AdapterHostFcInterface{}
 
-	err = json.Unmarshal(bytes, &varAdapterHostFcInterface)
+	err = json.Unmarshal(data, &varAdapterHostFcInterface)
 	if err == nil {
 		o.EquipmentBase = varAdapterHostFcInterface.EquipmentBase
 	} else {
@@ -948,7 +1033,7 @@ func (o *AdapterHostFcInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminState")

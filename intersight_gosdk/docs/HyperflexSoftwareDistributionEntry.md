@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.SoftwareDistributionEntry"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.SoftwareDistributionEntry"]
 **DistributionType** | Pointer to **string** | The HyperFlex Software Distribution type. | [optional] 
-**AppCatalog** | Pointer to [**HyperflexAppCatalogRelationship**](HyperflexAppCatalogRelationship.md) |  | [optional] 
+**AppCatalog** | Pointer to [**NullableHyperflexAppCatalogRelationship**](HyperflexAppCatalogRelationship.md) |  | [optional] 
 **DistributionVersions** | Pointer to [**[]HyperflexSoftwareDistributionVersionRelationship**](HyperflexSoftwareDistributionVersionRelationship.md) | An array of relationships to hyperflexSoftwareDistributionVersion resources. | [optional] 
 
 ## Methods
@@ -119,6 +119,16 @@ SetAppCatalog sets AppCatalog field to given value.
 
 HasAppCatalog returns a boolean if a field has been set.
 
+### SetAppCatalogNil
+
+`func (o *HyperflexSoftwareDistributionEntry) SetAppCatalogNil(b bool)`
+
+ SetAppCatalogNil sets the value for AppCatalog to be an explicit nil
+
+### UnsetAppCatalog
+`func (o *HyperflexSoftwareDistributionEntry) UnsetAppCatalog()`
+
+UnsetAppCatalog ensures that no value is present for AppCatalog, not even an explicit nil
 ### GetDistributionVersions
 
 `func (o *HyperflexSoftwareDistributionEntry) GetDistributionVersions() []HyperflexSoftwareDistributionVersionRelationship`

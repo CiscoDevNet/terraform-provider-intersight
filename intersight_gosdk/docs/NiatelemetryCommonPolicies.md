@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **SnmpSrc** | Pointer to **string** | List of Dn of SNMP Src for the above common pol. | [optional] 
 **SyslogSrc** | Pointer to **string** | List of Dn of Syslog Src for the above common pol. | [optional] 
 **SyslogSysMsg** | Pointer to **string** | List of Dn of Syslog Sys Msg the above common pol. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -274,6 +274,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *NiatelemetryCommonPolicies) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *NiatelemetryCommonPolicies) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

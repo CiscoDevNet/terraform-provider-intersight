@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowServiceItemHealthCheckDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowServiceItemHealthCheckDefinition{}
 
 // WorkflowServiceItemHealthCheckDefinition Service item health check definition metadata.
 type WorkflowServiceItemHealthCheckDefinition struct {
@@ -36,8 +40,8 @@ type WorkflowServiceItemHealthCheckDefinition struct {
 	// Label for the health check definition that is displayed on UI.
 	Label *string `json:"Label,omitempty"`
 	// Name of the health check definition.
-	Name                  *string                                    `json:"Name,omitempty"`
-	ServiceItemDefinition *WorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
+	Name                  *string                                           `json:"Name,omitempty"`
+	ServiceItemDefinition NullableWorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -120,7 +124,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) SetObjectType(v string) {
 
 // GetCategory returns the Category field value if set, zero value otherwise.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetCategory() string {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		var ret string
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetCategory() string {
 // GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetCategoryOk() (*string, bool) {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		return nil, false
 	}
 	return o.Category, true
@@ -138,7 +142,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetCategoryOk() (*string, boo
 
 // HasCategory returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) HasCategory() bool {
-	if o != nil && o.Category != nil {
+	if o != nil && !IsNil(o.Category) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) SetCategory(v string) {
 
 // GetCommonCauseAndResolution returns the CommonCauseAndResolution field value if set, zero value otherwise.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetCommonCauseAndResolution() string {
-	if o == nil || o.CommonCauseAndResolution == nil {
+	if o == nil || IsNil(o.CommonCauseAndResolution) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetCommonCauseAndResolution()
 // GetCommonCauseAndResolutionOk returns a tuple with the CommonCauseAndResolution field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetCommonCauseAndResolutionOk() (*string, bool) {
-	if o == nil || o.CommonCauseAndResolution == nil {
+	if o == nil || IsNil(o.CommonCauseAndResolution) {
 		return nil, false
 	}
 	return o.CommonCauseAndResolution, true
@@ -170,7 +174,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetCommonCauseAndResolutionOk
 
 // HasCommonCauseAndResolution returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) HasCommonCauseAndResolution() bool {
-	if o != nil && o.CommonCauseAndResolution != nil {
+	if o != nil && !IsNil(o.CommonCauseAndResolution) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) SetCommonCauseAndResolution(v
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -202,7 +206,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetDescriptionOk() (*string, 
 
 // HasDescription returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) SetDescription(v string) {
 
 // GetExecutionMode returns the ExecutionMode field value if set, zero value otherwise.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetExecutionMode() string {
-	if o == nil || o.ExecutionMode == nil {
+	if o == nil || IsNil(o.ExecutionMode) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetExecutionMode() string {
 // GetExecutionModeOk returns a tuple with the ExecutionMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetExecutionModeOk() (*string, bool) {
-	if o == nil || o.ExecutionMode == nil {
+	if o == nil || IsNil(o.ExecutionMode) {
 		return nil, false
 	}
 	return o.ExecutionMode, true
@@ -234,7 +238,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetExecutionModeOk() (*string
 
 // HasExecutionMode returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) HasExecutionMode() bool {
-	if o != nil && o.ExecutionMode != nil {
+	if o != nil && !IsNil(o.ExecutionMode) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) SetExecutionMode(v string) {
 
 // GetHealthCheckWorkflow returns the HealthCheckWorkflow field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemHealthCheckDefinition) GetHealthCheckWorkflow() WorkflowServiceItemActionWorkflowDefinition {
-	if o == nil || o.HealthCheckWorkflow.Get() == nil {
+	if o == nil || IsNil(o.HealthCheckWorkflow.Get()) {
 		var ret WorkflowServiceItemActionWorkflowDefinition
 		return ret
 	}
@@ -291,7 +295,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) UnsetHealthCheckWorkflow() {
 
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
@@ -301,7 +305,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetLabel() string {
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
 	return o.Label, true
@@ -309,7 +313,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetLabelOk() (*string, bool) 
 
 // HasLabel returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && !IsNil(o.Label) {
 		return true
 	}
 
@@ -323,7 +327,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) SetLabel(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -333,7 +337,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -341,7 +345,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -353,87 +357,124 @@ func (o *WorkflowServiceItemHealthCheckDefinition) SetName(v string) {
 	o.Name = &v
 }
 
-// GetServiceItemDefinition returns the ServiceItemDefinition field value if set, zero value otherwise.
+// GetServiceItemDefinition returns the ServiceItemDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemHealthCheckDefinition) GetServiceItemDefinition() WorkflowServiceItemDefinitionRelationship {
-	if o == nil || o.ServiceItemDefinition == nil {
+	if o == nil || IsNil(o.ServiceItemDefinition.Get()) {
 		var ret WorkflowServiceItemDefinitionRelationship
 		return ret
 	}
-	return *o.ServiceItemDefinition
+	return *o.ServiceItemDefinition.Get()
 }
 
 // GetServiceItemDefinitionOk returns a tuple with the ServiceItemDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemHealthCheckDefinition) GetServiceItemDefinitionOk() (*WorkflowServiceItemDefinitionRelationship, bool) {
-	if o == nil || o.ServiceItemDefinition == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServiceItemDefinition, true
+	return o.ServiceItemDefinition.Get(), o.ServiceItemDefinition.IsSet()
 }
 
 // HasServiceItemDefinition returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckDefinition) HasServiceItemDefinition() bool {
-	if o != nil && o.ServiceItemDefinition != nil {
+	if o != nil && o.ServiceItemDefinition.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServiceItemDefinition gets a reference to the given WorkflowServiceItemDefinitionRelationship and assigns it to the ServiceItemDefinition field.
+// SetServiceItemDefinition gets a reference to the given NullableWorkflowServiceItemDefinitionRelationship and assigns it to the ServiceItemDefinition field.
 func (o *WorkflowServiceItemHealthCheckDefinition) SetServiceItemDefinition(v WorkflowServiceItemDefinitionRelationship) {
-	o.ServiceItemDefinition = &v
+	o.ServiceItemDefinition.Set(&v)
+}
+
+// SetServiceItemDefinitionNil sets the value for ServiceItemDefinition to be an explicit nil
+func (o *WorkflowServiceItemHealthCheckDefinition) SetServiceItemDefinitionNil() {
+	o.ServiceItemDefinition.Set(nil)
+}
+
+// UnsetServiceItemDefinition ensures that no value is present for ServiceItemDefinition, not even an explicit nil
+func (o *WorkflowServiceItemHealthCheckDefinition) UnsetServiceItemDefinition() {
+	o.ServiceItemDefinition.Unset()
 }
 
 func (o WorkflowServiceItemHealthCheckDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowServiceItemHealthCheckDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Category != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Category) {
 		toSerialize["Category"] = o.Category
 	}
-	if o.CommonCauseAndResolution != nil {
+	if !IsNil(o.CommonCauseAndResolution) {
 		toSerialize["CommonCauseAndResolution"] = o.CommonCauseAndResolution
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.ExecutionMode != nil {
+	if !IsNil(o.ExecutionMode) {
 		toSerialize["ExecutionMode"] = o.ExecutionMode
 	}
 	if o.HealthCheckWorkflow.IsSet() {
 		toSerialize["HealthCheckWorkflow"] = o.HealthCheckWorkflow.Get()
 	}
-	if o.Label != nil {
+	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.ServiceItemDefinition != nil {
-		toSerialize["ServiceItemDefinition"] = o.ServiceItemDefinition
+	if o.ServiceItemDefinition.IsSet() {
+		toSerialize["ServiceItemDefinition"] = o.ServiceItemDefinition.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowServiceItemHealthCheckDefinition) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowServiceItemHealthCheckDefinition) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowServiceItemHealthCheckDefinitionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -451,13 +492,13 @@ func (o *WorkflowServiceItemHealthCheckDefinition) UnmarshalJSON(bytes []byte) (
 		// Label for the health check definition that is displayed on UI.
 		Label *string `json:"Label,omitempty"`
 		// Name of the health check definition.
-		Name                  *string                                    `json:"Name,omitempty"`
-		ServiceItemDefinition *WorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
+		Name                  *string                                           `json:"Name,omitempty"`
+		ServiceItemDefinition NullableWorkflowServiceItemDefinitionRelationship `json:"ServiceItemDefinition,omitempty"`
 	}
 
 	varWorkflowServiceItemHealthCheckDefinitionWithoutEmbeddedStruct := WorkflowServiceItemHealthCheckDefinitionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowServiceItemHealthCheckDefinitionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowServiceItemHealthCheckDefinitionWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowServiceItemHealthCheckDefinition := _WorkflowServiceItemHealthCheckDefinition{}
 		varWorkflowServiceItemHealthCheckDefinition.ClassId = varWorkflowServiceItemHealthCheckDefinitionWithoutEmbeddedStruct.ClassId
@@ -477,7 +518,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) UnmarshalJSON(bytes []byte) (
 
 	varWorkflowServiceItemHealthCheckDefinition := _WorkflowServiceItemHealthCheckDefinition{}
 
-	err = json.Unmarshal(bytes, &varWorkflowServiceItemHealthCheckDefinition)
+	err = json.Unmarshal(data, &varWorkflowServiceItemHealthCheckDefinition)
 	if err == nil {
 		o.MoBaseMo = varWorkflowServiceItemHealthCheckDefinition.MoBaseMo
 	} else {
@@ -486,7 +527,7 @@ func (o *WorkflowServiceItemHealthCheckDefinition) UnmarshalJSON(bytes []byte) (
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Category")

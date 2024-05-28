@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the BulkMoMerger type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BulkMoMerger{}
 
 // BulkMoMerger The MO Merger interface facilitates merging of all or selected properties of any MO instance to one or more MO instances. The \"Sources\" array should contain the list of source MO instances as MoRef objects. The \"Targets\" array should contain the list of target MO instances as MoRef objects. The \"TargetConfig\" property is applicable only for a merge operation. If a configuration action needs to be applied on all target MOs, it can be specified using this property. Currently this API is used to synchronize template update to all its derived instances for the Server Profile Templates, vNIC Templates and vHBA Templates.
 type BulkMoMerger struct {
@@ -31,9 +35,9 @@ type BulkMoMerger struct {
 	TargetConfig *MoBaseMo        `json:"TargetConfig,omitempty"`
 	Targets      []MoBaseMo       `json:"Targets,omitempty"`
 	// A user-friendly short name to identify the workflow. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), comma or an underscore (_).
-	WorkflowNameSuffix   *string                               `json:"WorkflowNameSuffix,omitempty"`
-	AsyncResult          *BulkResultRelationship               `json:"AsyncResult,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	WorkflowNameSuffix   *string                                      `json:"WorkflowNameSuffix,omitempty"`
+	AsyncResult          NullableBulkResultRelationship               `json:"AsyncResult,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -116,7 +120,7 @@ func (o *BulkMoMerger) SetObjectType(v string) {
 
 // GetMergeAction returns the MergeAction field value if set, zero value otherwise.
 func (o *BulkMoMerger) GetMergeAction() string {
-	if o == nil || o.MergeAction == nil {
+	if o == nil || IsNil(o.MergeAction) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *BulkMoMerger) GetMergeAction() string {
 // GetMergeActionOk returns a tuple with the MergeAction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkMoMerger) GetMergeActionOk() (*string, bool) {
-	if o == nil || o.MergeAction == nil {
+	if o == nil || IsNil(o.MergeAction) {
 		return nil, false
 	}
 	return o.MergeAction, true
@@ -134,7 +138,7 @@ func (o *BulkMoMerger) GetMergeActionOk() (*string, bool) {
 
 // HasMergeAction returns a boolean if a field has been set.
 func (o *BulkMoMerger) HasMergeAction() bool {
-	if o != nil && o.MergeAction != nil {
+	if o != nil && !IsNil(o.MergeAction) {
 		return true
 	}
 
@@ -159,7 +163,7 @@ func (o *BulkMoMerger) GetResponses() []BulkRestResult {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkMoMerger) GetResponsesOk() ([]BulkRestResult, bool) {
-	if o == nil || o.Responses == nil {
+	if o == nil || IsNil(o.Responses) {
 		return nil, false
 	}
 	return o.Responses, true
@@ -167,7 +171,7 @@ func (o *BulkMoMerger) GetResponsesOk() ([]BulkRestResult, bool) {
 
 // HasResponses returns a boolean if a field has been set.
 func (o *BulkMoMerger) HasResponses() bool {
-	if o != nil && o.Responses != nil {
+	if o != nil && IsNil(o.Responses) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *BulkMoMerger) GetSources() []MoBaseMo {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkMoMerger) GetSourcesOk() ([]MoBaseMo, bool) {
-	if o == nil || o.Sources == nil {
+	if o == nil || IsNil(o.Sources) {
 		return nil, false
 	}
 	return o.Sources, true
@@ -200,7 +204,7 @@ func (o *BulkMoMerger) GetSourcesOk() ([]MoBaseMo, bool) {
 
 // HasSources returns a boolean if a field has been set.
 func (o *BulkMoMerger) HasSources() bool {
-	if o != nil && o.Sources != nil {
+	if o != nil && IsNil(o.Sources) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *BulkMoMerger) SetSources(v []MoBaseMo) {
 
 // GetTargetConfig returns the TargetConfig field value if set, zero value otherwise.
 func (o *BulkMoMerger) GetTargetConfig() MoBaseMo {
-	if o == nil || o.TargetConfig == nil {
+	if o == nil || IsNil(o.TargetConfig) {
 		var ret MoBaseMo
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *BulkMoMerger) GetTargetConfig() MoBaseMo {
 // GetTargetConfigOk returns a tuple with the TargetConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkMoMerger) GetTargetConfigOk() (*MoBaseMo, bool) {
-	if o == nil || o.TargetConfig == nil {
+	if o == nil || IsNil(o.TargetConfig) {
 		return nil, false
 	}
 	return o.TargetConfig, true
@@ -232,7 +236,7 @@ func (o *BulkMoMerger) GetTargetConfigOk() (*MoBaseMo, bool) {
 
 // HasTargetConfig returns a boolean if a field has been set.
 func (o *BulkMoMerger) HasTargetConfig() bool {
-	if o != nil && o.TargetConfig != nil {
+	if o != nil && !IsNil(o.TargetConfig) {
 		return true
 	}
 
@@ -257,7 +261,7 @@ func (o *BulkMoMerger) GetTargets() []MoBaseMo {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkMoMerger) GetTargetsOk() ([]MoBaseMo, bool) {
-	if o == nil || o.Targets == nil {
+	if o == nil || IsNil(o.Targets) {
 		return nil, false
 	}
 	return o.Targets, true
@@ -265,7 +269,7 @@ func (o *BulkMoMerger) GetTargetsOk() ([]MoBaseMo, bool) {
 
 // HasTargets returns a boolean if a field has been set.
 func (o *BulkMoMerger) HasTargets() bool {
-	if o != nil && o.Targets != nil {
+	if o != nil && IsNil(o.Targets) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *BulkMoMerger) SetTargets(v []MoBaseMo) {
 
 // GetWorkflowNameSuffix returns the WorkflowNameSuffix field value if set, zero value otherwise.
 func (o *BulkMoMerger) GetWorkflowNameSuffix() string {
-	if o == nil || o.WorkflowNameSuffix == nil {
+	if o == nil || IsNil(o.WorkflowNameSuffix) {
 		var ret string
 		return ret
 	}
@@ -289,7 +293,7 @@ func (o *BulkMoMerger) GetWorkflowNameSuffix() string {
 // GetWorkflowNameSuffixOk returns a tuple with the WorkflowNameSuffix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkMoMerger) GetWorkflowNameSuffixOk() (*string, bool) {
-	if o == nil || o.WorkflowNameSuffix == nil {
+	if o == nil || IsNil(o.WorkflowNameSuffix) {
 		return nil, false
 	}
 	return o.WorkflowNameSuffix, true
@@ -297,7 +301,7 @@ func (o *BulkMoMerger) GetWorkflowNameSuffixOk() (*string, bool) {
 
 // HasWorkflowNameSuffix returns a boolean if a field has been set.
 func (o *BulkMoMerger) HasWorkflowNameSuffix() bool {
-	if o != nil && o.WorkflowNameSuffix != nil {
+	if o != nil && !IsNil(o.WorkflowNameSuffix) {
 		return true
 	}
 
@@ -309,87 +313,113 @@ func (o *BulkMoMerger) SetWorkflowNameSuffix(v string) {
 	o.WorkflowNameSuffix = &v
 }
 
-// GetAsyncResult returns the AsyncResult field value if set, zero value otherwise.
+// GetAsyncResult returns the AsyncResult field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkMoMerger) GetAsyncResult() BulkResultRelationship {
-	if o == nil || o.AsyncResult == nil {
+	if o == nil || IsNil(o.AsyncResult.Get()) {
 		var ret BulkResultRelationship
 		return ret
 	}
-	return *o.AsyncResult
+	return *o.AsyncResult.Get()
 }
 
 // GetAsyncResultOk returns a tuple with the AsyncResult field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkMoMerger) GetAsyncResultOk() (*BulkResultRelationship, bool) {
-	if o == nil || o.AsyncResult == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AsyncResult, true
+	return o.AsyncResult.Get(), o.AsyncResult.IsSet()
 }
 
 // HasAsyncResult returns a boolean if a field has been set.
 func (o *BulkMoMerger) HasAsyncResult() bool {
-	if o != nil && o.AsyncResult != nil {
+	if o != nil && o.AsyncResult.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAsyncResult gets a reference to the given BulkResultRelationship and assigns it to the AsyncResult field.
+// SetAsyncResult gets a reference to the given NullableBulkResultRelationship and assigns it to the AsyncResult field.
 func (o *BulkMoMerger) SetAsyncResult(v BulkResultRelationship) {
-	o.AsyncResult = &v
+	o.AsyncResult.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetAsyncResultNil sets the value for AsyncResult to be an explicit nil
+func (o *BulkMoMerger) SetAsyncResultNil() {
+	o.AsyncResult.Set(nil)
+}
+
+// UnsetAsyncResult ensures that no value is present for AsyncResult, not even an explicit nil
+func (o *BulkMoMerger) UnsetAsyncResult() {
+	o.AsyncResult.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BulkMoMerger) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BulkMoMerger) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *BulkMoMerger) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *BulkMoMerger) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *BulkMoMerger) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *BulkMoMerger) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o BulkMoMerger) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BulkMoMerger) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.MergeAction != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MergeAction) {
 		toSerialize["MergeAction"] = o.MergeAction
 	}
 	if o.Responses != nil {
@@ -398,30 +428,52 @@ func (o BulkMoMerger) MarshalJSON() ([]byte, error) {
 	if o.Sources != nil {
 		toSerialize["Sources"] = o.Sources
 	}
-	if o.TargetConfig != nil {
+	if !IsNil(o.TargetConfig) {
 		toSerialize["TargetConfig"] = o.TargetConfig
 	}
 	if o.Targets != nil {
 		toSerialize["Targets"] = o.Targets
 	}
-	if o.WorkflowNameSuffix != nil {
+	if !IsNil(o.WorkflowNameSuffix) {
 		toSerialize["WorkflowNameSuffix"] = o.WorkflowNameSuffix
 	}
-	if o.AsyncResult != nil {
-		toSerialize["AsyncResult"] = o.AsyncResult
+	if o.AsyncResult.IsSet() {
+		toSerialize["AsyncResult"] = o.AsyncResult.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *BulkMoMerger) UnmarshalJSON(bytes []byte) (err error) {
+func (o *BulkMoMerger) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type BulkMoMergerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -434,14 +486,14 @@ func (o *BulkMoMerger) UnmarshalJSON(bytes []byte) (err error) {
 		TargetConfig *MoBaseMo        `json:"TargetConfig,omitempty"`
 		Targets      []MoBaseMo       `json:"Targets,omitempty"`
 		// A user-friendly short name to identify the workflow. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), comma or an underscore (_).
-		WorkflowNameSuffix *string                               `json:"WorkflowNameSuffix,omitempty"`
-		AsyncResult        *BulkResultRelationship               `json:"AsyncResult,omitempty"`
-		Organization       *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		WorkflowNameSuffix *string                                      `json:"WorkflowNameSuffix,omitempty"`
+		AsyncResult        NullableBulkResultRelationship               `json:"AsyncResult,omitempty"`
+		Organization       NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varBulkMoMergerWithoutEmbeddedStruct := BulkMoMergerWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varBulkMoMergerWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varBulkMoMergerWithoutEmbeddedStruct)
 	if err == nil {
 		varBulkMoMerger := _BulkMoMerger{}
 		varBulkMoMerger.ClassId = varBulkMoMergerWithoutEmbeddedStruct.ClassId
@@ -461,7 +513,7 @@ func (o *BulkMoMerger) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBulkMoMerger := _BulkMoMerger{}
 
-	err = json.Unmarshal(bytes, &varBulkMoMerger)
+	err = json.Unmarshal(data, &varBulkMoMerger)
 	if err == nil {
 		o.MoBaseMo = varBulkMoMerger.MoBaseMo
 	} else {
@@ -470,7 +522,7 @@ func (o *BulkMoMerger) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MergeAction")

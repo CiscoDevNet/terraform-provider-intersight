@@ -7,7 +7,9 @@ import (
 	"log"
 	"reflect"
 	"regexp"
+	"strconv"
 	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -718,9 +720,10 @@ func resourceVnicEthIf() *schema.Resource {
 				Default:     "vnic.EthIf",
 			},
 			"order": {
-				Description: "The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.",
-				Type:        schema.TypeInt,
-				Optional:    true,
+				Description:  "The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.",
+				Type:         schema.TypeInt,
+				ValidateFunc: validation.IntAtLeast(0),
+				Optional:     true,
 			},
 			"overridden_list": {
 				Type:       schema.TypeList,
@@ -2587,8 +2590,16 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 		return diag.Errorf("error occurred while creating VnicEthIf: %s", responseErr.Error())
 	}
-	log.Printf("Moid: %s", resultMo.GetMoid())
-	d.SetId(resultMo.GetMoid())
+	if len(resultMo.GetMoid()) != 0 {
+		log.Printf("Moid: %s", resultMo.GetMoid())
+		d.SetId(resultMo.GetMoid())
+	} else {
+		d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
+		log.Printf("Mo: %v", resultMo)
+	}
+	if len(resultMo.GetMoid()) == 0 {
+		return de
+	}
 	return append(de, resourceVnicEthIfRead(c, d, meta)...)
 }
 func detachVnicEthIfProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -2616,6 +2627,9 @@ func detachVnicEthIfProfiles(d *schema.ResourceData, meta interface{}) diag.Diag
 func resourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	var de diag.Diagnostics
+	if len(d.Id()) == 0 {
+		return de
+	}
 	conn := meta.(*Config)
 	r := conn.ApiClient.VnicApi.GetVnicEthIfByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()

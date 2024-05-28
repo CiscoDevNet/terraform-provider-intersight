@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ResourceGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceGroup{}
 
 // ResourceGroup A group of REST resources, such as a group of compute.Blade MOs. A ResourceGroup can contain static members which are specified as a set of object references, or it can contain dynamic members, which are specified through OData query filters. A Resource can be part of multiple resource groups.
 type ResourceGroup struct {
@@ -35,8 +39,8 @@ type ResourceGroup struct {
 	Reevaluate *bool              `json:"Reevaluate,omitempty"`
 	Selectors  []ResourceSelector `json:"Selectors,omitempty"`
 	// The type of this resource group. (Rbac, Licensing, solution). * `rbac` - These resource groups are used for multi-tenancy by assigning to organizations. * `licensing` - These resource groups are used to classify resources like servers to various groups which are associated to different license tiers. * `solution` - These resource groups are created for Flexpods.
-	Type    *string                 `json:"Type,omitempty"`
-	Account *IamAccountRelationship `json:"Account,omitempty"`
+	Type    *string                        `json:"Type,omitempty"`
+	Account NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to organizationOrganization resources.
 	Organizations        []OrganizationOrganizationRelationship `json:"Organizations,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -121,7 +125,7 @@ func (o *ResourceGroup) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ResourceGroup) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -131,7 +135,7 @@ func (o *ResourceGroup) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceGroup) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -139,7 +143,7 @@ func (o *ResourceGroup) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ResourceGroup) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *ResourceGroup) SetDescription(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ResourceGroup) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -163,7 +167,7 @@ func (o *ResourceGroup) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceGroup) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -171,7 +175,7 @@ func (o *ResourceGroup) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ResourceGroup) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -196,7 +200,7 @@ func (o *ResourceGroup) GetPerTypeCombinedSelector() []ResourcePerTypeCombinedSe
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceGroup) GetPerTypeCombinedSelectorOk() ([]ResourcePerTypeCombinedSelector, bool) {
-	if o == nil || o.PerTypeCombinedSelector == nil {
+	if o == nil || IsNil(o.PerTypeCombinedSelector) {
 		return nil, false
 	}
 	return o.PerTypeCombinedSelector, true
@@ -204,7 +208,7 @@ func (o *ResourceGroup) GetPerTypeCombinedSelectorOk() ([]ResourcePerTypeCombine
 
 // HasPerTypeCombinedSelector returns a boolean if a field has been set.
 func (o *ResourceGroup) HasPerTypeCombinedSelector() bool {
-	if o != nil && o.PerTypeCombinedSelector != nil {
+	if o != nil && IsNil(o.PerTypeCombinedSelector) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *ResourceGroup) SetPerTypeCombinedSelector(v []ResourcePerTypeCombinedSe
 
 // GetQualifier returns the Qualifier field value if set, zero value otherwise.
 func (o *ResourceGroup) GetQualifier() string {
-	if o == nil || o.Qualifier == nil {
+	if o == nil || IsNil(o.Qualifier) {
 		var ret string
 		return ret
 	}
@@ -228,7 +232,7 @@ func (o *ResourceGroup) GetQualifier() string {
 // GetQualifierOk returns a tuple with the Qualifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceGroup) GetQualifierOk() (*string, bool) {
-	if o == nil || o.Qualifier == nil {
+	if o == nil || IsNil(o.Qualifier) {
 		return nil, false
 	}
 	return o.Qualifier, true
@@ -236,7 +240,7 @@ func (o *ResourceGroup) GetQualifierOk() (*string, bool) {
 
 // HasQualifier returns a boolean if a field has been set.
 func (o *ResourceGroup) HasQualifier() bool {
-	if o != nil && o.Qualifier != nil {
+	if o != nil && !IsNil(o.Qualifier) {
 		return true
 	}
 
@@ -250,7 +254,7 @@ func (o *ResourceGroup) SetQualifier(v string) {
 
 // GetReevaluate returns the Reevaluate field value if set, zero value otherwise.
 func (o *ResourceGroup) GetReevaluate() bool {
-	if o == nil || o.Reevaluate == nil {
+	if o == nil || IsNil(o.Reevaluate) {
 		var ret bool
 		return ret
 	}
@@ -260,7 +264,7 @@ func (o *ResourceGroup) GetReevaluate() bool {
 // GetReevaluateOk returns a tuple with the Reevaluate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceGroup) GetReevaluateOk() (*bool, bool) {
-	if o == nil || o.Reevaluate == nil {
+	if o == nil || IsNil(o.Reevaluate) {
 		return nil, false
 	}
 	return o.Reevaluate, true
@@ -268,7 +272,7 @@ func (o *ResourceGroup) GetReevaluateOk() (*bool, bool) {
 
 // HasReevaluate returns a boolean if a field has been set.
 func (o *ResourceGroup) HasReevaluate() bool {
-	if o != nil && o.Reevaluate != nil {
+	if o != nil && !IsNil(o.Reevaluate) {
 		return true
 	}
 
@@ -293,7 +297,7 @@ func (o *ResourceGroup) GetSelectors() []ResourceSelector {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceGroup) GetSelectorsOk() ([]ResourceSelector, bool) {
-	if o == nil || o.Selectors == nil {
+	if o == nil || IsNil(o.Selectors) {
 		return nil, false
 	}
 	return o.Selectors, true
@@ -301,7 +305,7 @@ func (o *ResourceGroup) GetSelectorsOk() ([]ResourceSelector, bool) {
 
 // HasSelectors returns a boolean if a field has been set.
 func (o *ResourceGroup) HasSelectors() bool {
-	if o != nil && o.Selectors != nil {
+	if o != nil && IsNil(o.Selectors) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *ResourceGroup) SetSelectors(v []ResourceSelector) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *ResourceGroup) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *ResourceGroup) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceGroup) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -333,7 +337,7 @@ func (o *ResourceGroup) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *ResourceGroup) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -345,36 +349,47 @@ func (o *ResourceGroup) SetType(v string) {
 	o.Type = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceGroup) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceGroup) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ResourceGroup) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ResourceGroup) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ResourceGroup) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ResourceGroup) UnsetAccount() {
+	o.Account.Unset()
 }
 
 // GetOrganizations returns the Organizations field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -390,7 +405,7 @@ func (o *ResourceGroup) GetOrganizations() []OrganizationOrganizationRelationshi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceGroup) GetOrganizationsOk() ([]OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organizations == nil {
+	if o == nil || IsNil(o.Organizations) {
 		return nil, false
 	}
 	return o.Organizations, true
@@ -398,7 +413,7 @@ func (o *ResourceGroup) GetOrganizationsOk() ([]OrganizationOrganizationRelation
 
 // HasOrganizations returns a boolean if a field has been set.
 func (o *ResourceGroup) HasOrganizations() bool {
-	if o != nil && o.Organizations != nil {
+	if o != nil && IsNil(o.Organizations) {
 		return true
 	}
 
@@ -411,44 +426,48 @@ func (o *ResourceGroup) SetOrganizations(v []OrganizationOrganizationRelationshi
 }
 
 func (o ResourceGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ResourceGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.PerTypeCombinedSelector != nil {
 		toSerialize["PerTypeCombinedSelector"] = o.PerTypeCombinedSelector
 	}
-	if o.Qualifier != nil {
+	if !IsNil(o.Qualifier) {
 		toSerialize["Qualifier"] = o.Qualifier
 	}
-	if o.Reevaluate != nil {
+	if !IsNil(o.Reevaluate) {
 		toSerialize["Reevaluate"] = o.Reevaluate
 	}
 	if o.Selectors != nil {
 		toSerialize["Selectors"] = o.Selectors
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 	if o.Organizations != nil {
 		toSerialize["Organizations"] = o.Organizations
@@ -458,10 +477,32 @@ func (o ResourceGroup) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ResourceGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ResourceGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ResourceGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -478,15 +519,15 @@ func (o *ResourceGroup) UnmarshalJSON(bytes []byte) (err error) {
 		Reevaluate *bool              `json:"Reevaluate,omitempty"`
 		Selectors  []ResourceSelector `json:"Selectors,omitempty"`
 		// The type of this resource group. (Rbac, Licensing, solution). * `rbac` - These resource groups are used for multi-tenancy by assigning to organizations. * `licensing` - These resource groups are used to classify resources like servers to various groups which are associated to different license tiers. * `solution` - These resource groups are created for Flexpods.
-		Type    *string                 `json:"Type,omitempty"`
-		Account *IamAccountRelationship `json:"Account,omitempty"`
+		Type    *string                        `json:"Type,omitempty"`
+		Account NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to organizationOrganization resources.
 		Organizations []OrganizationOrganizationRelationship `json:"Organizations,omitempty"`
 	}
 
 	varResourceGroupWithoutEmbeddedStruct := ResourceGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varResourceGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varResourceGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varResourceGroup := _ResourceGroup{}
 		varResourceGroup.ClassId = varResourceGroupWithoutEmbeddedStruct.ClassId
@@ -507,7 +548,7 @@ func (o *ResourceGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varResourceGroup := _ResourceGroup{}
 
-	err = json.Unmarshal(bytes, &varResourceGroup)
+	err = json.Unmarshal(data, &varResourceGroup)
 	if err == nil {
 		o.MoBaseMo = varResourceGroup.MoBaseMo
 	} else {
@@ -516,7 +557,7 @@ func (o *ResourceGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

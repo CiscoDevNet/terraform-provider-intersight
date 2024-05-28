@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Description of the privilege set. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the privilege set. | [optional] 
 **PrivilegeNames** | Pointer to **[]string** |  | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **AssociatedPrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
 **Privileges** | Pointer to [**[]IamPrivilegeRelationship**](IamPrivilegeRelationship.md) | An array of relationships to iamPrivilege resources. | [optional] [readonly] 
-**System** | Pointer to [**IamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
+**System** | Pointer to [**NullableIamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -183,6 +183,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *IamPrivilegeSet) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *IamPrivilegeSet) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetAssociatedPrivilegeSets
 
 `func (o *IamPrivilegeSet) GetAssociatedPrivilegeSets() []IamPrivilegeSetRelationship`
@@ -278,6 +288,16 @@ SetSystem sets System field to given value.
 
 HasSystem returns a boolean if a field has been set.
 
+### SetSystemNil
+
+`func (o *IamPrivilegeSet) SetSystemNil(b bool)`
+
+ SetSystemNil sets the value for System to be an explicit nil
+
+### UnsetSystem
+`func (o *IamPrivilegeSet) UnsetSystem()`
+
+UnsetSystem ensures that no value is present for System, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

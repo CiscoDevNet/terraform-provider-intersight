@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricEthNetworkControlPolicyInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricEthNetworkControlPolicyInventory{}
 
 // FabricEthNetworkControlPolicyInventory The features that are applied on a vethernet that is connected to the vNIC.
 type FabricEthNetworkControlPolicyInventory struct {
@@ -36,7 +40,7 @@ type FabricEthNetworkControlPolicyInventory struct {
 	// An array of relationships to vnicEthNetworkPolicyInventory resources.
 	// Deprecated
 	NetworkPolicy        []VnicEthNetworkPolicyInventoryRelationship `json:"NetworkPolicy,omitempty"`
-	TargetMo             *MoBaseMoRelationship                       `json:"TargetMo,omitempty"`
+	TargetMo             NullableMoBaseMoRelationship                `json:"TargetMo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *FabricEthNetworkControlPolicyInventory) SetObjectType(v string) {
 
 // GetCdpEnabled returns the CdpEnabled field value if set, zero value otherwise.
 func (o *FabricEthNetworkControlPolicyInventory) GetCdpEnabled() bool {
-	if o == nil || o.CdpEnabled == nil {
+	if o == nil || IsNil(o.CdpEnabled) {
 		var ret bool
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *FabricEthNetworkControlPolicyInventory) GetCdpEnabled() bool {
 // GetCdpEnabledOk returns a tuple with the CdpEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricEthNetworkControlPolicyInventory) GetCdpEnabledOk() (*bool, bool) {
-	if o == nil || o.CdpEnabled == nil {
+	if o == nil || IsNil(o.CdpEnabled) {
 		return nil, false
 	}
 	return o.CdpEnabled, true
@@ -133,7 +137,7 @@ func (o *FabricEthNetworkControlPolicyInventory) GetCdpEnabledOk() (*bool, bool)
 
 // HasCdpEnabled returns a boolean if a field has been set.
 func (o *FabricEthNetworkControlPolicyInventory) HasCdpEnabled() bool {
-	if o != nil && o.CdpEnabled != nil {
+	if o != nil && !IsNil(o.CdpEnabled) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *FabricEthNetworkControlPolicyInventory) SetCdpEnabled(v bool) {
 
 // GetForgeMac returns the ForgeMac field value if set, zero value otherwise.
 func (o *FabricEthNetworkControlPolicyInventory) GetForgeMac() string {
-	if o == nil || o.ForgeMac == nil {
+	if o == nil || IsNil(o.ForgeMac) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *FabricEthNetworkControlPolicyInventory) GetForgeMac() string {
 // GetForgeMacOk returns a tuple with the ForgeMac field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricEthNetworkControlPolicyInventory) GetForgeMacOk() (*string, bool) {
-	if o == nil || o.ForgeMac == nil {
+	if o == nil || IsNil(o.ForgeMac) {
 		return nil, false
 	}
 	return o.ForgeMac, true
@@ -165,7 +169,7 @@ func (o *FabricEthNetworkControlPolicyInventory) GetForgeMacOk() (*string, bool)
 
 // HasForgeMac returns a boolean if a field has been set.
 func (o *FabricEthNetworkControlPolicyInventory) HasForgeMac() bool {
-	if o != nil && o.ForgeMac != nil {
+	if o != nil && !IsNil(o.ForgeMac) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *FabricEthNetworkControlPolicyInventory) SetForgeMac(v string) {
 
 // GetLldpSettings returns the LldpSettings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricEthNetworkControlPolicyInventory) GetLldpSettings() FabricLldpSettings {
-	if o == nil || o.LldpSettings.Get() == nil {
+	if o == nil || IsNil(o.LldpSettings.Get()) {
 		var ret FabricLldpSettings
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *FabricEthNetworkControlPolicyInventory) UnsetLldpSettings() {
 
 // GetMacRegistrationMode returns the MacRegistrationMode field value if set, zero value otherwise.
 func (o *FabricEthNetworkControlPolicyInventory) GetMacRegistrationMode() string {
-	if o == nil || o.MacRegistrationMode == nil {
+	if o == nil || IsNil(o.MacRegistrationMode) {
 		var ret string
 		return ret
 	}
@@ -232,7 +236,7 @@ func (o *FabricEthNetworkControlPolicyInventory) GetMacRegistrationMode() string
 // GetMacRegistrationModeOk returns a tuple with the MacRegistrationMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricEthNetworkControlPolicyInventory) GetMacRegistrationModeOk() (*string, bool) {
-	if o == nil || o.MacRegistrationMode == nil {
+	if o == nil || IsNil(o.MacRegistrationMode) {
 		return nil, false
 	}
 	return o.MacRegistrationMode, true
@@ -240,7 +244,7 @@ func (o *FabricEthNetworkControlPolicyInventory) GetMacRegistrationModeOk() (*st
 
 // HasMacRegistrationMode returns a boolean if a field has been set.
 func (o *FabricEthNetworkControlPolicyInventory) HasMacRegistrationMode() bool {
-	if o != nil && o.MacRegistrationMode != nil {
+	if o != nil && !IsNil(o.MacRegistrationMode) {
 		return true
 	}
 
@@ -254,7 +258,7 @@ func (o *FabricEthNetworkControlPolicyInventory) SetMacRegistrationMode(v string
 
 // GetUplinkFailAction returns the UplinkFailAction field value if set, zero value otherwise.
 func (o *FabricEthNetworkControlPolicyInventory) GetUplinkFailAction() string {
-	if o == nil || o.UplinkFailAction == nil {
+	if o == nil || IsNil(o.UplinkFailAction) {
 		var ret string
 		return ret
 	}
@@ -264,7 +268,7 @@ func (o *FabricEthNetworkControlPolicyInventory) GetUplinkFailAction() string {
 // GetUplinkFailActionOk returns a tuple with the UplinkFailAction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricEthNetworkControlPolicyInventory) GetUplinkFailActionOk() (*string, bool) {
-	if o == nil || o.UplinkFailAction == nil {
+	if o == nil || IsNil(o.UplinkFailAction) {
 		return nil, false
 	}
 	return o.UplinkFailAction, true
@@ -272,7 +276,7 @@ func (o *FabricEthNetworkControlPolicyInventory) GetUplinkFailActionOk() (*strin
 
 // HasUplinkFailAction returns a boolean if a field has been set.
 func (o *FabricEthNetworkControlPolicyInventory) HasUplinkFailAction() bool {
-	if o != nil && o.UplinkFailAction != nil {
+	if o != nil && !IsNil(o.UplinkFailAction) {
 		return true
 	}
 
@@ -299,7 +303,7 @@ func (o *FabricEthNetworkControlPolicyInventory) GetNetworkPolicy() []VnicEthNet
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 // Deprecated
 func (o *FabricEthNetworkControlPolicyInventory) GetNetworkPolicyOk() ([]VnicEthNetworkPolicyInventoryRelationship, bool) {
-	if o == nil || o.NetworkPolicy == nil {
+	if o == nil || IsNil(o.NetworkPolicy) {
 		return nil, false
 	}
 	return o.NetworkPolicy, true
@@ -307,7 +311,7 @@ func (o *FabricEthNetworkControlPolicyInventory) GetNetworkPolicyOk() ([]VnicEth
 
 // HasNetworkPolicy returns a boolean if a field has been set.
 func (o *FabricEthNetworkControlPolicyInventory) HasNetworkPolicy() bool {
-	if o != nil && o.NetworkPolicy != nil {
+	if o != nil && IsNil(o.NetworkPolicy) {
 		return true
 	}
 
@@ -320,84 +324,121 @@ func (o *FabricEthNetworkControlPolicyInventory) SetNetworkPolicy(v []VnicEthNet
 	o.NetworkPolicy = v
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricEthNetworkControlPolicyInventory) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricEthNetworkControlPolicyInventory) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *FabricEthNetworkControlPolicyInventory) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *FabricEthNetworkControlPolicyInventory) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *FabricEthNetworkControlPolicyInventory) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *FabricEthNetworkControlPolicyInventory) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o FabricEthNetworkControlPolicyInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricEthNetworkControlPolicyInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicyInventory, errPolicyAbstractPolicyInventory := json.Marshal(o.PolicyAbstractPolicyInventory)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
 	errPolicyAbstractPolicyInventory = json.Unmarshal([]byte(serializedPolicyAbstractPolicyInventory), &toSerialize)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CdpEnabled != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CdpEnabled) {
 		toSerialize["CdpEnabled"] = o.CdpEnabled
 	}
-	if o.ForgeMac != nil {
+	if !IsNil(o.ForgeMac) {
 		toSerialize["ForgeMac"] = o.ForgeMac
 	}
 	if o.LldpSettings.IsSet() {
 		toSerialize["LldpSettings"] = o.LldpSettings.Get()
 	}
-	if o.MacRegistrationMode != nil {
+	if !IsNil(o.MacRegistrationMode) {
 		toSerialize["MacRegistrationMode"] = o.MacRegistrationMode
 	}
-	if o.UplinkFailAction != nil {
+	if !IsNil(o.UplinkFailAction) {
 		toSerialize["UplinkFailAction"] = o.UplinkFailAction
 	}
 	if o.NetworkPolicy != nil {
 		toSerialize["NetworkPolicy"] = o.NetworkPolicy
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricEthNetworkControlPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricEthNetworkControlPolicyInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricEthNetworkControlPolicyInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -415,12 +456,12 @@ func (o *FabricEthNetworkControlPolicyInventory) UnmarshalJSON(bytes []byte) (er
 		// An array of relationships to vnicEthNetworkPolicyInventory resources.
 		// Deprecated
 		NetworkPolicy []VnicEthNetworkPolicyInventoryRelationship `json:"NetworkPolicy,omitempty"`
-		TargetMo      *MoBaseMoRelationship                       `json:"TargetMo,omitempty"`
+		TargetMo      NullableMoBaseMoRelationship                `json:"TargetMo,omitempty"`
 	}
 
 	varFabricEthNetworkControlPolicyInventoryWithoutEmbeddedStruct := FabricEthNetworkControlPolicyInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricEthNetworkControlPolicyInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricEthNetworkControlPolicyInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricEthNetworkControlPolicyInventory := _FabricEthNetworkControlPolicyInventory{}
 		varFabricEthNetworkControlPolicyInventory.ClassId = varFabricEthNetworkControlPolicyInventoryWithoutEmbeddedStruct.ClassId
@@ -439,7 +480,7 @@ func (o *FabricEthNetworkControlPolicyInventory) UnmarshalJSON(bytes []byte) (er
 
 	varFabricEthNetworkControlPolicyInventory := _FabricEthNetworkControlPolicyInventory{}
 
-	err = json.Unmarshal(bytes, &varFabricEthNetworkControlPolicyInventory)
+	err = json.Unmarshal(data, &varFabricEthNetworkControlPolicyInventory)
 	if err == nil {
 		o.PolicyAbstractPolicyInventory = varFabricEthNetworkControlPolicyInventory.PolicyAbstractPolicyInventory
 	} else {
@@ -448,7 +489,7 @@ func (o *FabricEthNetworkControlPolicyInventory) UnmarshalJSON(bytes []byte) (er
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CdpEnabled")

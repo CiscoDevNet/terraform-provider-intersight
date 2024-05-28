@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ApplicationName** | Pointer to **string** | Application name reported by Cisco Install Base. | [optional] [readonly] 
 **SubscriptionRefId** | Pointer to **string** | Identifies the consumption-based subscription. | [optional] [readonly] 
 **Deployments** | Pointer to [**[]AssetDeploymentRelationship**](AssetDeploymentRelationship.md) | An array of relationships to assetDeployment resources. | [optional] [readonly] 
-**SubscriptionAccount** | Pointer to [**AssetSubscriptionAccountRelationship**](AssetSubscriptionAccountRelationship.md) |  | [optional] 
+**SubscriptionAccount** | Pointer to [**NullableAssetSubscriptionAccountRelationship**](AssetSubscriptionAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -180,6 +180,16 @@ SetSubscriptionAccount sets SubscriptionAccount field to given value.
 
 HasSubscriptionAccount returns a boolean if a field has been set.
 
+### SetSubscriptionAccountNil
+
+`func (o *AssetSubscription) SetSubscriptionAccountNil(b bool)`
+
+ SetSubscriptionAccountNil sets the value for SubscriptionAccount to be an explicit nil
+
+### UnsetSubscriptionAccount
+`func (o *AssetSubscription) UnsetSubscriptionAccount()`
+
+UnsetSubscriptionAccount ensures that no value is present for SubscriptionAccount, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

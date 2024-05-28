@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamCertificateRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamCertificateRequest{}
 
 // IamCertificateRequest The information required to generate a certificate signing request (CSR), which is a block of encoded text that is given to a Certificate Authority when applying for an SSL Certificate.
 type IamCertificateRequest struct {
@@ -31,12 +35,12 @@ type IamCertificateRequest struct {
 	// Generated certificate signing request (CSR) in PEM format.
 	Request *string `json:"Request,omitempty"`
 	// Whether the user wants the generated CSR to be self-signed by the appliance.
-	SelfSigned           *bool                            `json:"SelfSigned,omitempty"`
-	Subject              NullablePkixDistinguishedName    `json:"Subject,omitempty"`
-	SubjectAlternateName NullablePkixSubjectAlternateName `json:"SubjectAlternateName,omitempty"`
-	Account              *IamAccountRelationship          `json:"Account,omitempty"`
-	Certificate          *IamCertificateRelationship      `json:"Certificate,omitempty"`
-	PrivateKeySpec       *IamPrivateKeySpecRelationship   `json:"PrivateKeySpec,omitempty"`
+	SelfSigned           *bool                                 `json:"SelfSigned,omitempty"`
+	Subject              NullablePkixDistinguishedName         `json:"Subject,omitempty"`
+	SubjectAlternateName NullablePkixSubjectAlternateName      `json:"SubjectAlternateName,omitempty"`
+	Account              NullableIamAccountRelationship        `json:"Account,omitempty"`
+	Certificate          NullableIamCertificateRelationship    `json:"Certificate,omitempty"`
+	PrivateKeySpec       NullableIamPrivateKeySpecRelationship `json:"PrivateKeySpec,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *IamCertificateRequest) SetObjectType(v string) {
 
 // GetEmailAddress returns the EmailAddress field value if set, zero value otherwise.
 func (o *IamCertificateRequest) GetEmailAddress() string {
-	if o == nil || o.EmailAddress == nil {
+	if o == nil || IsNil(o.EmailAddress) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *IamCertificateRequest) GetEmailAddress() string {
 // GetEmailAddressOk returns a tuple with the EmailAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamCertificateRequest) GetEmailAddressOk() (*string, bool) {
-	if o == nil || o.EmailAddress == nil {
+	if o == nil || IsNil(o.EmailAddress) {
 		return nil, false
 	}
 	return o.EmailAddress, true
@@ -133,7 +137,7 @@ func (o *IamCertificateRequest) GetEmailAddressOk() (*string, bool) {
 
 // HasEmailAddress returns a boolean if a field has been set.
 func (o *IamCertificateRequest) HasEmailAddress() bool {
-	if o != nil && o.EmailAddress != nil {
+	if o != nil && !IsNil(o.EmailAddress) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *IamCertificateRequest) SetEmailAddress(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *IamCertificateRequest) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *IamCertificateRequest) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamCertificateRequest) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -165,7 +169,7 @@ func (o *IamCertificateRequest) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *IamCertificateRequest) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *IamCertificateRequest) SetName(v string) {
 
 // GetRequest returns the Request field value if set, zero value otherwise.
 func (o *IamCertificateRequest) GetRequest() string {
-	if o == nil || o.Request == nil {
+	if o == nil || IsNil(o.Request) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *IamCertificateRequest) GetRequest() string {
 // GetRequestOk returns a tuple with the Request field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamCertificateRequest) GetRequestOk() (*string, bool) {
-	if o == nil || o.Request == nil {
+	if o == nil || IsNil(o.Request) {
 		return nil, false
 	}
 	return o.Request, true
@@ -197,7 +201,7 @@ func (o *IamCertificateRequest) GetRequestOk() (*string, bool) {
 
 // HasRequest returns a boolean if a field has been set.
 func (o *IamCertificateRequest) HasRequest() bool {
-	if o != nil && o.Request != nil {
+	if o != nil && !IsNil(o.Request) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *IamCertificateRequest) SetRequest(v string) {
 
 // GetSelfSigned returns the SelfSigned field value if set, zero value otherwise.
 func (o *IamCertificateRequest) GetSelfSigned() bool {
-	if o == nil || o.SelfSigned == nil {
+	if o == nil || IsNil(o.SelfSigned) {
 		var ret bool
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *IamCertificateRequest) GetSelfSigned() bool {
 // GetSelfSignedOk returns a tuple with the SelfSigned field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamCertificateRequest) GetSelfSignedOk() (*bool, bool) {
-	if o == nil || o.SelfSigned == nil {
+	if o == nil || IsNil(o.SelfSigned) {
 		return nil, false
 	}
 	return o.SelfSigned, true
@@ -229,7 +233,7 @@ func (o *IamCertificateRequest) GetSelfSignedOk() (*bool, bool) {
 
 // HasSelfSigned returns a boolean if a field has been set.
 func (o *IamCertificateRequest) HasSelfSigned() bool {
-	if o != nil && o.SelfSigned != nil {
+	if o != nil && !IsNil(o.SelfSigned) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *IamCertificateRequest) SetSelfSigned(v bool) {
 
 // GetSubject returns the Subject field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamCertificateRequest) GetSubject() PkixDistinguishedName {
-	if o == nil || o.Subject.Get() == nil {
+	if o == nil || IsNil(o.Subject.Get()) {
 		var ret PkixDistinguishedName
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *IamCertificateRequest) UnsetSubject() {
 
 // GetSubjectAlternateName returns the SubjectAlternateName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamCertificateRequest) GetSubjectAlternateName() PkixSubjectAlternateName {
-	if o == nil || o.SubjectAlternateName.Get() == nil {
+	if o == nil || IsNil(o.SubjectAlternateName.Get()) {
 		var ret PkixSubjectAlternateName
 		return ret
 	}
@@ -327,128 +331,165 @@ func (o *IamCertificateRequest) UnsetSubjectAlternateName() {
 	o.SubjectAlternateName.Unset()
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamCertificateRequest) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamCertificateRequest) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *IamCertificateRequest) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *IamCertificateRequest) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetCertificate returns the Certificate field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *IamCertificateRequest) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *IamCertificateRequest) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetCertificate returns the Certificate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamCertificateRequest) GetCertificate() IamCertificateRelationship {
-	if o == nil || o.Certificate == nil {
+	if o == nil || IsNil(o.Certificate.Get()) {
 		var ret IamCertificateRelationship
 		return ret
 	}
-	return *o.Certificate
+	return *o.Certificate.Get()
 }
 
 // GetCertificateOk returns a tuple with the Certificate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamCertificateRequest) GetCertificateOk() (*IamCertificateRelationship, bool) {
-	if o == nil || o.Certificate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Certificate, true
+	return o.Certificate.Get(), o.Certificate.IsSet()
 }
 
 // HasCertificate returns a boolean if a field has been set.
 func (o *IamCertificateRequest) HasCertificate() bool {
-	if o != nil && o.Certificate != nil {
+	if o != nil && o.Certificate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCertificate gets a reference to the given IamCertificateRelationship and assigns it to the Certificate field.
+// SetCertificate gets a reference to the given NullableIamCertificateRelationship and assigns it to the Certificate field.
 func (o *IamCertificateRequest) SetCertificate(v IamCertificateRelationship) {
-	o.Certificate = &v
+	o.Certificate.Set(&v)
 }
 
-// GetPrivateKeySpec returns the PrivateKeySpec field value if set, zero value otherwise.
+// SetCertificateNil sets the value for Certificate to be an explicit nil
+func (o *IamCertificateRequest) SetCertificateNil() {
+	o.Certificate.Set(nil)
+}
+
+// UnsetCertificate ensures that no value is present for Certificate, not even an explicit nil
+func (o *IamCertificateRequest) UnsetCertificate() {
+	o.Certificate.Unset()
+}
+
+// GetPrivateKeySpec returns the PrivateKeySpec field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamCertificateRequest) GetPrivateKeySpec() IamPrivateKeySpecRelationship {
-	if o == nil || o.PrivateKeySpec == nil {
+	if o == nil || IsNil(o.PrivateKeySpec.Get()) {
 		var ret IamPrivateKeySpecRelationship
 		return ret
 	}
-	return *o.PrivateKeySpec
+	return *o.PrivateKeySpec.Get()
 }
 
 // GetPrivateKeySpecOk returns a tuple with the PrivateKeySpec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamCertificateRequest) GetPrivateKeySpecOk() (*IamPrivateKeySpecRelationship, bool) {
-	if o == nil || o.PrivateKeySpec == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrivateKeySpec, true
+	return o.PrivateKeySpec.Get(), o.PrivateKeySpec.IsSet()
 }
 
 // HasPrivateKeySpec returns a boolean if a field has been set.
 func (o *IamCertificateRequest) HasPrivateKeySpec() bool {
-	if o != nil && o.PrivateKeySpec != nil {
+	if o != nil && o.PrivateKeySpec.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrivateKeySpec gets a reference to the given IamPrivateKeySpecRelationship and assigns it to the PrivateKeySpec field.
+// SetPrivateKeySpec gets a reference to the given NullableIamPrivateKeySpecRelationship and assigns it to the PrivateKeySpec field.
 func (o *IamCertificateRequest) SetPrivateKeySpec(v IamPrivateKeySpecRelationship) {
-	o.PrivateKeySpec = &v
+	o.PrivateKeySpec.Set(&v)
+}
+
+// SetPrivateKeySpecNil sets the value for PrivateKeySpec to be an explicit nil
+func (o *IamCertificateRequest) SetPrivateKeySpecNil() {
+	o.PrivateKeySpec.Set(nil)
+}
+
+// UnsetPrivateKeySpec ensures that no value is present for PrivateKeySpec, not even an explicit nil
+func (o *IamCertificateRequest) UnsetPrivateKeySpec() {
+	o.PrivateKeySpec.Unset()
 }
 
 func (o IamCertificateRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamCertificateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EmailAddress != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EmailAddress) {
 		toSerialize["EmailAddress"] = o.EmailAddress
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Request != nil {
+	if !IsNil(o.Request) {
 		toSerialize["Request"] = o.Request
 	}
-	if o.SelfSigned != nil {
+	if !IsNil(o.SelfSigned) {
 		toSerialize["SelfSigned"] = o.SelfSigned
 	}
 	if o.Subject.IsSet() {
@@ -457,24 +498,46 @@ func (o IamCertificateRequest) MarshalJSON() ([]byte, error) {
 	if o.SubjectAlternateName.IsSet() {
 		toSerialize["SubjectAlternateName"] = o.SubjectAlternateName.Get()
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.Certificate != nil {
-		toSerialize["Certificate"] = o.Certificate
+	if o.Certificate.IsSet() {
+		toSerialize["Certificate"] = o.Certificate.Get()
 	}
-	if o.PrivateKeySpec != nil {
-		toSerialize["PrivateKeySpec"] = o.PrivateKeySpec
+	if o.PrivateKeySpec.IsSet() {
+		toSerialize["PrivateKeySpec"] = o.PrivateKeySpec.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamCertificateRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamCertificateRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamCertificateRequestWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -487,17 +550,17 @@ func (o *IamCertificateRequest) UnmarshalJSON(bytes []byte) (err error) {
 		// Generated certificate signing request (CSR) in PEM format.
 		Request *string `json:"Request,omitempty"`
 		// Whether the user wants the generated CSR to be self-signed by the appliance.
-		SelfSigned           *bool                            `json:"SelfSigned,omitempty"`
-		Subject              NullablePkixDistinguishedName    `json:"Subject,omitempty"`
-		SubjectAlternateName NullablePkixSubjectAlternateName `json:"SubjectAlternateName,omitempty"`
-		Account              *IamAccountRelationship          `json:"Account,omitempty"`
-		Certificate          *IamCertificateRelationship      `json:"Certificate,omitempty"`
-		PrivateKeySpec       *IamPrivateKeySpecRelationship   `json:"PrivateKeySpec,omitempty"`
+		SelfSigned           *bool                                 `json:"SelfSigned,omitempty"`
+		Subject              NullablePkixDistinguishedName         `json:"Subject,omitempty"`
+		SubjectAlternateName NullablePkixSubjectAlternateName      `json:"SubjectAlternateName,omitempty"`
+		Account              NullableIamAccountRelationship        `json:"Account,omitempty"`
+		Certificate          NullableIamCertificateRelationship    `json:"Certificate,omitempty"`
+		PrivateKeySpec       NullableIamPrivateKeySpecRelationship `json:"PrivateKeySpec,omitempty"`
 	}
 
 	varIamCertificateRequestWithoutEmbeddedStruct := IamCertificateRequestWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamCertificateRequestWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamCertificateRequestWithoutEmbeddedStruct)
 	if err == nil {
 		varIamCertificateRequest := _IamCertificateRequest{}
 		varIamCertificateRequest.ClassId = varIamCertificateRequestWithoutEmbeddedStruct.ClassId
@@ -518,7 +581,7 @@ func (o *IamCertificateRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamCertificateRequest := _IamCertificateRequest{}
 
-	err = json.Unmarshal(bytes, &varIamCertificateRequest)
+	err = json.Unmarshal(data, &varIamCertificateRequest)
 	if err == nil {
 		o.MoBaseMo = varIamCertificateRequest.MoBaseMo
 	} else {
@@ -527,7 +590,7 @@ func (o *IamCertificateRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EmailAddress")

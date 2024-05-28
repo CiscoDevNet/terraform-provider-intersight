@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -163,7 +163,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 	var jsonDict map[string]interface{}
 	err = newStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
-		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
+		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
 	}
 
 	// check if the discriminator value is 'and'
@@ -174,7 +174,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidAndFilter, return on the first match
 		} else {
 			dst.TelemetryDruidAndFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidAndFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidAndFilter: %s", err.Error())
 		}
 	}
 
@@ -186,7 +186,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidBoundFilter, return on the first match
 		} else {
 			dst.TelemetryDruidBoundFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidBoundFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidBoundFilter: %s", err.Error())
 		}
 	}
 
@@ -198,7 +198,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidColumnComparisonFilter, return on the first match
 		} else {
 			dst.TelemetryDruidColumnComparisonFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidColumnComparisonFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidColumnComparisonFilter: %s", err.Error())
 		}
 	}
 
@@ -210,7 +210,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidEqualityFilter, return on the first match
 		} else {
 			dst.TelemetryDruidEqualityFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidEqualityFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidEqualityFilter: %s", err.Error())
 		}
 	}
 
@@ -222,7 +222,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidExpressionFilter, return on the first match
 		} else {
 			dst.TelemetryDruidExpressionFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidExpressionFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidExpressionFilter: %s", err.Error())
 		}
 	}
 
@@ -234,7 +234,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidFalseFilter, return on the first match
 		} else {
 			dst.TelemetryDruidFalseFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidFalseFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidFalseFilter: %s", err.Error())
 		}
 	}
 
@@ -246,7 +246,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidInFilter, return on the first match
 		} else {
 			dst.TelemetryDruidInFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidInFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidInFilter: %s", err.Error())
 		}
 	}
 
@@ -258,7 +258,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidIntervalFilter, return on the first match
 		} else {
 			dst.TelemetryDruidIntervalFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidIntervalFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidIntervalFilter: %s", err.Error())
 		}
 	}
 
@@ -270,7 +270,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidLikeFilter, return on the first match
 		} else {
 			dst.TelemetryDruidLikeFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidLikeFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidLikeFilter: %s", err.Error())
 		}
 	}
 
@@ -282,7 +282,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidNotFilter, return on the first match
 		} else {
 			dst.TelemetryDruidNotFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidNotFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidNotFilter: %s", err.Error())
 		}
 	}
 
@@ -294,7 +294,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidNullFilter, return on the first match
 		} else {
 			dst.TelemetryDruidNullFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidNullFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidNullFilter: %s", err.Error())
 		}
 	}
 
@@ -306,7 +306,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidOrFilter, return on the first match
 		} else {
 			dst.TelemetryDruidOrFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidOrFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidOrFilter: %s", err.Error())
 		}
 	}
 
@@ -318,7 +318,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidRangeFilter, return on the first match
 		} else {
 			dst.TelemetryDruidRangeFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidRangeFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidRangeFilter: %s", err.Error())
 		}
 	}
 
@@ -330,7 +330,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidRegexFilter, return on the first match
 		} else {
 			dst.TelemetryDruidRegexFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidRegexFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidRegexFilter: %s", err.Error())
 		}
 	}
 
@@ -342,7 +342,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidSearchFilter, return on the first match
 		} else {
 			dst.TelemetryDruidSearchFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidSearchFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidSearchFilter: %s", err.Error())
 		}
 	}
 
@@ -354,211 +354,7 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidSelectorFilter, return on the first match
 		} else {
 			dst.TelemetryDruidSelectorFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidSelectorFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidAndFilter'
-	if jsonDict["type"] == "telemetry.DruidAndFilter" {
-		// try to unmarshal JSON data into TelemetryDruidAndFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidAndFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidAndFilter, return on the first match
-		} else {
-			dst.TelemetryDruidAndFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidAndFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidBoundFilter'
-	if jsonDict["type"] == "telemetry.DruidBoundFilter" {
-		// try to unmarshal JSON data into TelemetryDruidBoundFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidBoundFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidBoundFilter, return on the first match
-		} else {
-			dst.TelemetryDruidBoundFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidBoundFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidColumnComparisonFilter'
-	if jsonDict["type"] == "telemetry.DruidColumnComparisonFilter" {
-		// try to unmarshal JSON data into TelemetryDruidColumnComparisonFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidColumnComparisonFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidColumnComparisonFilter, return on the first match
-		} else {
-			dst.TelemetryDruidColumnComparisonFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidColumnComparisonFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidEqualityFilter'
-	if jsonDict["type"] == "telemetry.DruidEqualityFilter" {
-		// try to unmarshal JSON data into TelemetryDruidEqualityFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidEqualityFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidEqualityFilter, return on the first match
-		} else {
-			dst.TelemetryDruidEqualityFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidEqualityFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidExpressionFilter'
-	if jsonDict["type"] == "telemetry.DruidExpressionFilter" {
-		// try to unmarshal JSON data into TelemetryDruidExpressionFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidExpressionFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidExpressionFilter, return on the first match
-		} else {
-			dst.TelemetryDruidExpressionFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidExpressionFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidFalseFilter'
-	if jsonDict["type"] == "telemetry.DruidFalseFilter" {
-		// try to unmarshal JSON data into TelemetryDruidFalseFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidFalseFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidFalseFilter, return on the first match
-		} else {
-			dst.TelemetryDruidFalseFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidFalseFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidInFilter'
-	if jsonDict["type"] == "telemetry.DruidInFilter" {
-		// try to unmarshal JSON data into TelemetryDruidInFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidInFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidInFilter, return on the first match
-		} else {
-			dst.TelemetryDruidInFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidInFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidIntervalFilter'
-	if jsonDict["type"] == "telemetry.DruidIntervalFilter" {
-		// try to unmarshal JSON data into TelemetryDruidIntervalFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidIntervalFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidIntervalFilter, return on the first match
-		} else {
-			dst.TelemetryDruidIntervalFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidIntervalFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidLikeFilter'
-	if jsonDict["type"] == "telemetry.DruidLikeFilter" {
-		// try to unmarshal JSON data into TelemetryDruidLikeFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidLikeFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidLikeFilter, return on the first match
-		} else {
-			dst.TelemetryDruidLikeFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidLikeFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidNotFilter'
-	if jsonDict["type"] == "telemetry.DruidNotFilter" {
-		// try to unmarshal JSON data into TelemetryDruidNotFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidNotFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidNotFilter, return on the first match
-		} else {
-			dst.TelemetryDruidNotFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidNotFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidNullFilter'
-	if jsonDict["type"] == "telemetry.DruidNullFilter" {
-		// try to unmarshal JSON data into TelemetryDruidNullFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidNullFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidNullFilter, return on the first match
-		} else {
-			dst.TelemetryDruidNullFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidNullFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidOrFilter'
-	if jsonDict["type"] == "telemetry.DruidOrFilter" {
-		// try to unmarshal JSON data into TelemetryDruidOrFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidOrFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidOrFilter, return on the first match
-		} else {
-			dst.TelemetryDruidOrFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidOrFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidRangeFilter'
-	if jsonDict["type"] == "telemetry.DruidRangeFilter" {
-		// try to unmarshal JSON data into TelemetryDruidRangeFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidRangeFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidRangeFilter, return on the first match
-		} else {
-			dst.TelemetryDruidRangeFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidRangeFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidRegexFilter'
-	if jsonDict["type"] == "telemetry.DruidRegexFilter" {
-		// try to unmarshal JSON data into TelemetryDruidRegexFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidRegexFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidRegexFilter, return on the first match
-		} else {
-			dst.TelemetryDruidRegexFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidRegexFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidSearchFilter'
-	if jsonDict["type"] == "telemetry.DruidSearchFilter" {
-		// try to unmarshal JSON data into TelemetryDruidSearchFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidSearchFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidSearchFilter, return on the first match
-		} else {
-			dst.TelemetryDruidSearchFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidSearchFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidSelectorFilter'
-	if jsonDict["type"] == "telemetry.DruidSelectorFilter" {
-		// try to unmarshal JSON data into TelemetryDruidSelectorFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidSelectorFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidSelectorFilter, return on the first match
-		} else {
-			dst.TelemetryDruidSelectorFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidSelectorFilter: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'telemetry.DruidTrueFilter'
-	if jsonDict["type"] == "telemetry.DruidTrueFilter" {
-		// try to unmarshal JSON data into TelemetryDruidTrueFilter
-		err = json.Unmarshal(data, &dst.TelemetryDruidTrueFilter)
-		if err == nil {
-			return nil // data stored in dst.TelemetryDruidTrueFilter, return on the first match
-		} else {
-			dst.TelemetryDruidTrueFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidTrueFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidSelectorFilter: %s", err.Error())
 		}
 	}
 
@@ -570,7 +366,211 @@ func (dst *TelemetryDruidFilter) UnmarshalJSON(data []byte) error {
 			return nil // data stored in dst.TelemetryDruidTrueFilter, return on the first match
 		} else {
 			dst.TelemetryDruidTrueFilter = nil
-			return fmt.Errorf("Failed to unmarshal TelemetryDruidFilter as TelemetryDruidTrueFilter: %s", err.Error())
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidTrueFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidAndFilter'
+	if jsonDict["type"] == "telemetry.DruidAndFilter" {
+		// try to unmarshal JSON data into TelemetryDruidAndFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidAndFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidAndFilter, return on the first match
+		} else {
+			dst.TelemetryDruidAndFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidAndFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidBoundFilter'
+	if jsonDict["type"] == "telemetry.DruidBoundFilter" {
+		// try to unmarshal JSON data into TelemetryDruidBoundFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidBoundFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidBoundFilter, return on the first match
+		} else {
+			dst.TelemetryDruidBoundFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidBoundFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidColumnComparisonFilter'
+	if jsonDict["type"] == "telemetry.DruidColumnComparisonFilter" {
+		// try to unmarshal JSON data into TelemetryDruidColumnComparisonFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidColumnComparisonFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidColumnComparisonFilter, return on the first match
+		} else {
+			dst.TelemetryDruidColumnComparisonFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidColumnComparisonFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidEqualityFilter'
+	if jsonDict["type"] == "telemetry.DruidEqualityFilter" {
+		// try to unmarshal JSON data into TelemetryDruidEqualityFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidEqualityFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidEqualityFilter, return on the first match
+		} else {
+			dst.TelemetryDruidEqualityFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidEqualityFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidExpressionFilter'
+	if jsonDict["type"] == "telemetry.DruidExpressionFilter" {
+		// try to unmarshal JSON data into TelemetryDruidExpressionFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidExpressionFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidExpressionFilter, return on the first match
+		} else {
+			dst.TelemetryDruidExpressionFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidExpressionFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidFalseFilter'
+	if jsonDict["type"] == "telemetry.DruidFalseFilter" {
+		// try to unmarshal JSON data into TelemetryDruidFalseFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidFalseFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidFalseFilter, return on the first match
+		} else {
+			dst.TelemetryDruidFalseFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidFalseFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidInFilter'
+	if jsonDict["type"] == "telemetry.DruidInFilter" {
+		// try to unmarshal JSON data into TelemetryDruidInFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidInFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidInFilter, return on the first match
+		} else {
+			dst.TelemetryDruidInFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidInFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidIntervalFilter'
+	if jsonDict["type"] == "telemetry.DruidIntervalFilter" {
+		// try to unmarshal JSON data into TelemetryDruidIntervalFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidIntervalFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidIntervalFilter, return on the first match
+		} else {
+			dst.TelemetryDruidIntervalFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidIntervalFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidLikeFilter'
+	if jsonDict["type"] == "telemetry.DruidLikeFilter" {
+		// try to unmarshal JSON data into TelemetryDruidLikeFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidLikeFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidLikeFilter, return on the first match
+		} else {
+			dst.TelemetryDruidLikeFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidLikeFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidNotFilter'
+	if jsonDict["type"] == "telemetry.DruidNotFilter" {
+		// try to unmarshal JSON data into TelemetryDruidNotFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidNotFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidNotFilter, return on the first match
+		} else {
+			dst.TelemetryDruidNotFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidNotFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidNullFilter'
+	if jsonDict["type"] == "telemetry.DruidNullFilter" {
+		// try to unmarshal JSON data into TelemetryDruidNullFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidNullFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidNullFilter, return on the first match
+		} else {
+			dst.TelemetryDruidNullFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidNullFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidOrFilter'
+	if jsonDict["type"] == "telemetry.DruidOrFilter" {
+		// try to unmarshal JSON data into TelemetryDruidOrFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidOrFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidOrFilter, return on the first match
+		} else {
+			dst.TelemetryDruidOrFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidOrFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidRangeFilter'
+	if jsonDict["type"] == "telemetry.DruidRangeFilter" {
+		// try to unmarshal JSON data into TelemetryDruidRangeFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidRangeFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidRangeFilter, return on the first match
+		} else {
+			dst.TelemetryDruidRangeFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidRangeFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidRegexFilter'
+	if jsonDict["type"] == "telemetry.DruidRegexFilter" {
+		// try to unmarshal JSON data into TelemetryDruidRegexFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidRegexFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidRegexFilter, return on the first match
+		} else {
+			dst.TelemetryDruidRegexFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidRegexFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidSearchFilter'
+	if jsonDict["type"] == "telemetry.DruidSearchFilter" {
+		// try to unmarshal JSON data into TelemetryDruidSearchFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidSearchFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidSearchFilter, return on the first match
+		} else {
+			dst.TelemetryDruidSearchFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidSearchFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidSelectorFilter'
+	if jsonDict["type"] == "telemetry.DruidSelectorFilter" {
+		// try to unmarshal JSON data into TelemetryDruidSelectorFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidSelectorFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidSelectorFilter, return on the first match
+		} else {
+			dst.TelemetryDruidSelectorFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidSelectorFilter: %s", err.Error())
+		}
+	}
+
+	// check if the discriminator value is 'telemetry.DruidTrueFilter'
+	if jsonDict["type"] == "telemetry.DruidTrueFilter" {
+		// try to unmarshal JSON data into TelemetryDruidTrueFilter
+		err = json.Unmarshal(data, &dst.TelemetryDruidTrueFilter)
+		if err == nil {
+			return nil // data stored in dst.TelemetryDruidTrueFilter, return on the first match
+		} else {
+			dst.TelemetryDruidTrueFilter = nil
+			return fmt.Errorf("failed to unmarshal TelemetryDruidFilter as TelemetryDruidTrueFilter: %s", err.Error())
 		}
 	}
 

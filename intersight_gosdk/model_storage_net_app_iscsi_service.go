@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppIscsiService type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppIscsiService{}
 
 // StorageNetAppIscsiService An iSCSI service defines the properties of the iSCSI target for an SVM. There can be at most one iSCSI service for an SVM. An SVM's iSCSI service must be created before iSCSI initiators can log in to the SVM.
 type StorageNetAppIscsiService struct {
@@ -29,8 +33,8 @@ type StorageNetAppIscsiService struct {
 	// The iSCSI target alias of the iSCSI service.
 	TargetAlias *string `json:"TargetAlias,omitempty"`
 	// The iSCSI target name of the iSCSI service.
-	TargetName           *string                             `json:"TargetName,omitempty"`
-	Tenant               *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+	TargetName           *string                                    `json:"TargetName,omitempty"`
+	Tenant               NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,7 +113,7 @@ func (o *StorageNetAppIscsiService) SetObjectType(v string) {
 
 // GetSvmUuid returns the SvmUuid field value if set, zero value otherwise.
 func (o *StorageNetAppIscsiService) GetSvmUuid() string {
-	if o == nil || o.SvmUuid == nil {
+	if o == nil || IsNil(o.SvmUuid) {
 		var ret string
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *StorageNetAppIscsiService) GetSvmUuid() string {
 // GetSvmUuidOk returns a tuple with the SvmUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppIscsiService) GetSvmUuidOk() (*string, bool) {
-	if o == nil || o.SvmUuid == nil {
+	if o == nil || IsNil(o.SvmUuid) {
 		return nil, false
 	}
 	return o.SvmUuid, true
@@ -127,7 +131,7 @@ func (o *StorageNetAppIscsiService) GetSvmUuidOk() (*string, bool) {
 
 // HasSvmUuid returns a boolean if a field has been set.
 func (o *StorageNetAppIscsiService) HasSvmUuid() bool {
-	if o != nil && o.SvmUuid != nil {
+	if o != nil && !IsNil(o.SvmUuid) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *StorageNetAppIscsiService) SetSvmUuid(v string) {
 
 // GetTargetAlias returns the TargetAlias field value if set, zero value otherwise.
 func (o *StorageNetAppIscsiService) GetTargetAlias() string {
-	if o == nil || o.TargetAlias == nil {
+	if o == nil || IsNil(o.TargetAlias) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *StorageNetAppIscsiService) GetTargetAlias() string {
 // GetTargetAliasOk returns a tuple with the TargetAlias field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppIscsiService) GetTargetAliasOk() (*string, bool) {
-	if o == nil || o.TargetAlias == nil {
+	if o == nil || IsNil(o.TargetAlias) {
 		return nil, false
 	}
 	return o.TargetAlias, true
@@ -159,7 +163,7 @@ func (o *StorageNetAppIscsiService) GetTargetAliasOk() (*string, bool) {
 
 // HasTargetAlias returns a boolean if a field has been set.
 func (o *StorageNetAppIscsiService) HasTargetAlias() bool {
-	if o != nil && o.TargetAlias != nil {
+	if o != nil && !IsNil(o.TargetAlias) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *StorageNetAppIscsiService) SetTargetAlias(v string) {
 
 // GetTargetName returns the TargetName field value if set, zero value otherwise.
 func (o *StorageNetAppIscsiService) GetTargetName() string {
-	if o == nil || o.TargetName == nil {
+	if o == nil || IsNil(o.TargetName) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *StorageNetAppIscsiService) GetTargetName() string {
 // GetTargetNameOk returns a tuple with the TargetName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppIscsiService) GetTargetNameOk() (*string, bool) {
-	if o == nil || o.TargetName == nil {
+	if o == nil || IsNil(o.TargetName) {
 		return nil, false
 	}
 	return o.TargetName, true
@@ -191,7 +195,7 @@ func (o *StorageNetAppIscsiService) GetTargetNameOk() (*string, bool) {
 
 // HasTargetName returns a boolean if a field has been set.
 func (o *StorageNetAppIscsiService) HasTargetName() bool {
-	if o != nil && o.TargetName != nil {
+	if o != nil && !IsNil(o.TargetName) {
 		return true
 	}
 
@@ -203,75 +207,112 @@ func (o *StorageNetAppIscsiService) SetTargetName(v string) {
 	o.TargetName = &v
 }
 
-// GetTenant returns the Tenant field value if set, zero value otherwise.
+// GetTenant returns the Tenant field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppIscsiService) GetTenant() StorageNetAppStorageVmRelationship {
-	if o == nil || o.Tenant == nil {
+	if o == nil || IsNil(o.Tenant.Get()) {
 		var ret StorageNetAppStorageVmRelationship
 		return ret
 	}
-	return *o.Tenant
+	return *o.Tenant.Get()
 }
 
 // GetTenantOk returns a tuple with the Tenant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppIscsiService) GetTenantOk() (*StorageNetAppStorageVmRelationship, bool) {
-	if o == nil || o.Tenant == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tenant, true
+	return o.Tenant.Get(), o.Tenant.IsSet()
 }
 
 // HasTenant returns a boolean if a field has been set.
 func (o *StorageNetAppIscsiService) HasTenant() bool {
-	if o != nil && o.Tenant != nil {
+	if o != nil && o.Tenant.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTenant gets a reference to the given StorageNetAppStorageVmRelationship and assigns it to the Tenant field.
+// SetTenant gets a reference to the given NullableStorageNetAppStorageVmRelationship and assigns it to the Tenant field.
 func (o *StorageNetAppIscsiService) SetTenant(v StorageNetAppStorageVmRelationship) {
-	o.Tenant = &v
+	o.Tenant.Set(&v)
+}
+
+// SetTenantNil sets the value for Tenant to be an explicit nil
+func (o *StorageNetAppIscsiService) SetTenantNil() {
+	o.Tenant.Set(nil)
+}
+
+// UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
+func (o *StorageNetAppIscsiService) UnsetTenant() {
+	o.Tenant.Unset()
 }
 
 func (o StorageNetAppIscsiService) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppIscsiService) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.SvmUuid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.SvmUuid) {
 		toSerialize["SvmUuid"] = o.SvmUuid
 	}
-	if o.TargetAlias != nil {
+	if !IsNil(o.TargetAlias) {
 		toSerialize["TargetAlias"] = o.TargetAlias
 	}
-	if o.TargetName != nil {
+	if !IsNil(o.TargetName) {
 		toSerialize["TargetName"] = o.TargetName
 	}
-	if o.Tenant != nil {
-		toSerialize["Tenant"] = o.Tenant
+	if o.Tenant.IsSet() {
+		toSerialize["Tenant"] = o.Tenant.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppIscsiService) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppIscsiService) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppIscsiServiceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -282,13 +323,13 @@ func (o *StorageNetAppIscsiService) UnmarshalJSON(bytes []byte) (err error) {
 		// The iSCSI target alias of the iSCSI service.
 		TargetAlias *string `json:"TargetAlias,omitempty"`
 		// The iSCSI target name of the iSCSI service.
-		TargetName *string                             `json:"TargetName,omitempty"`
-		Tenant     *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+		TargetName *string                                    `json:"TargetName,omitempty"`
+		Tenant     NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	}
 
 	varStorageNetAppIscsiServiceWithoutEmbeddedStruct := StorageNetAppIscsiServiceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppIscsiServiceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppIscsiServiceWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppIscsiService := _StorageNetAppIscsiService{}
 		varStorageNetAppIscsiService.ClassId = varStorageNetAppIscsiServiceWithoutEmbeddedStruct.ClassId
@@ -304,7 +345,7 @@ func (o *StorageNetAppIscsiService) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppIscsiService := _StorageNetAppIscsiService{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppIscsiService)
+	err = json.Unmarshal(data, &varStorageNetAppIscsiService)
 	if err == nil {
 		o.MoBaseMo = varStorageNetAppIscsiService.MoBaseMo
 	} else {
@@ -313,7 +354,7 @@ func (o *StorageNetAppIscsiService) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "SvmUuid")

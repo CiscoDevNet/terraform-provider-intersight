@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recommendation.SoftwareItem"]
 **Message** | Pointer to **string** | The user visible message which informs user of the type of software recommendation. | [optional] [readonly] 
 **RecommendationType** | Pointer to **string** | The software-recommendation type, for example, HXDP version, HyperV or ESXi version, etc. * &#x60;None&#x60; - The Enum value None represents the default software recommendation value. * &#x60;HXDPVersion&#x60; - The Enum value HXDPVersion represents that the software recommendation is to upgrade the HyperFlex Data Platform build version. * &#x60;NodeRatioLicense&#x60; - The Enum value NodeRatioLicense represents that the software recommendation is to upgrade the HyperFlex Data Platform license for using 1:2 converged to compute node ratio limits. * &#x60;NodeRatioEvalLicense&#x60; - The Enum value NodeRatioEvalLicense represents that the software recommendation is to upgrade the Hyperflex Data Platform license to Data Center Premier, after the evaluation period ends. * &#x60;DCNoFILicense&#x60; - The Enum value DCNoFILicense represents that the software recommendation is to upgrade the HyperFlex Data Platform license for using DC-No-FI limits. * &#x60;DcNoFIEvalLicense&#x60; - The Enum value DcNoFIEvalLicense represents that the software recommendation is to upgrade the Hyperflex Data Platform license to Hyperflex Data Center Advantage or Data Center Premier license, after evaluation period ends. * &#x60;LAZExistingStatus&#x60; - The Enum value LAZExistingStatus represents that the software recommendation is to indicate HyperFlex cluster might have LAZ enabled. * &#x60;LAZNewStatus&#x60; - The Enum value LAZNewStatus represents that the software recommendation is to enable LAZ with expansion on the HyperFlex Cluster. * &#x60;EVCStatus&#x60; - The Enum value EVCStatus represents that the software recommendation is to enable Enhanced VMotion on the HypeFlex Cluster. | [optional] [readonly] [default to "None"]
-**ClusterExpansion** | Pointer to [**RecommendationClusterExpansionRelationship**](RecommendationClusterExpansionRelationship.md) |  | [optional] 
+**ClusterExpansion** | Pointer to [**NullableRecommendationClusterExpansionRelationship**](RecommendationClusterExpansionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -144,6 +144,16 @@ SetClusterExpansion sets ClusterExpansion field to given value.
 
 HasClusterExpansion returns a boolean if a field has been set.
 
+### SetClusterExpansionNil
+
+`func (o *RecommendationSoftwareItem) SetClusterExpansionNil(b bool)`
+
+ SetClusterExpansionNil sets the value for ClusterExpansion to be an explicit nil
+
+### UnsetClusterExpansion
+`func (o *RecommendationSoftwareItem) UnsetClusterExpansion()`
+
+UnsetClusterExpansion ensures that no value is present for ClusterExpansion, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

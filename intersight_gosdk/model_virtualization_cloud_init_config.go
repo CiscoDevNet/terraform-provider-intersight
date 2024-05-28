@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationCloudInitConfig type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationCloudInitConfig{}
 
 // VirtualizationCloudInitConfig It is a configuration for early initialization of virtual machine instances. It enables automatic configuration of a virtual machine instances as it boots.
 type VirtualizationCloudInitConfig struct {
@@ -116,7 +120,7 @@ func (o *VirtualizationCloudInitConfig) SetObjectType(v string) {
 
 // GetConfigType returns the ConfigType field value if set, zero value otherwise.
 func (o *VirtualizationCloudInitConfig) GetConfigType() string {
-	if o == nil || o.ConfigType == nil {
+	if o == nil || IsNil(o.ConfigType) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *VirtualizationCloudInitConfig) GetConfigType() string {
 // GetConfigTypeOk returns a tuple with the ConfigType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationCloudInitConfig) GetConfigTypeOk() (*string, bool) {
-	if o == nil || o.ConfigType == nil {
+	if o == nil || IsNil(o.ConfigType) {
 		return nil, false
 	}
 	return o.ConfigType, true
@@ -134,7 +138,7 @@ func (o *VirtualizationCloudInitConfig) GetConfigTypeOk() (*string, bool) {
 
 // HasConfigType returns a boolean if a field has been set.
 func (o *VirtualizationCloudInitConfig) HasConfigType() bool {
-	if o != nil && o.ConfigType != nil {
+	if o != nil && !IsNil(o.ConfigType) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *VirtualizationCloudInitConfig) SetConfigType(v string) {
 
 // GetNetworkData returns the NetworkData field value if set, zero value otherwise.
 func (o *VirtualizationCloudInitConfig) GetNetworkData() string {
-	if o == nil || o.NetworkData == nil {
+	if o == nil || IsNil(o.NetworkData) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *VirtualizationCloudInitConfig) GetNetworkData() string {
 // GetNetworkDataOk returns a tuple with the NetworkData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationCloudInitConfig) GetNetworkDataOk() (*string, bool) {
-	if o == nil || o.NetworkData == nil {
+	if o == nil || IsNil(o.NetworkData) {
 		return nil, false
 	}
 	return o.NetworkData, true
@@ -166,7 +170,7 @@ func (o *VirtualizationCloudInitConfig) GetNetworkDataOk() (*string, bool) {
 
 // HasNetworkData returns a boolean if a field has been set.
 func (o *VirtualizationCloudInitConfig) HasNetworkData() bool {
-	if o != nil && o.NetworkData != nil {
+	if o != nil && !IsNil(o.NetworkData) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *VirtualizationCloudInitConfig) SetNetworkData(v string) {
 
 // GetNetworkDataBase64Encoded returns the NetworkDataBase64Encoded field value if set, zero value otherwise.
 func (o *VirtualizationCloudInitConfig) GetNetworkDataBase64Encoded() bool {
-	if o == nil || o.NetworkDataBase64Encoded == nil {
+	if o == nil || IsNil(o.NetworkDataBase64Encoded) {
 		var ret bool
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *VirtualizationCloudInitConfig) GetNetworkDataBase64Encoded() bool {
 // GetNetworkDataBase64EncodedOk returns a tuple with the NetworkDataBase64Encoded field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationCloudInitConfig) GetNetworkDataBase64EncodedOk() (*bool, bool) {
-	if o == nil || o.NetworkDataBase64Encoded == nil {
+	if o == nil || IsNil(o.NetworkDataBase64Encoded) {
 		return nil, false
 	}
 	return o.NetworkDataBase64Encoded, true
@@ -198,7 +202,7 @@ func (o *VirtualizationCloudInitConfig) GetNetworkDataBase64EncodedOk() (*bool, 
 
 // HasNetworkDataBase64Encoded returns a boolean if a field has been set.
 func (o *VirtualizationCloudInitConfig) HasNetworkDataBase64Encoded() bool {
-	if o != nil && o.NetworkDataBase64Encoded != nil {
+	if o != nil && !IsNil(o.NetworkDataBase64Encoded) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *VirtualizationCloudInitConfig) SetNetworkDataBase64Encoded(v bool) {
 
 // GetUserData returns the UserData field value if set, zero value otherwise.
 func (o *VirtualizationCloudInitConfig) GetUserData() string {
-	if o == nil || o.UserData == nil {
+	if o == nil || IsNil(o.UserData) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *VirtualizationCloudInitConfig) GetUserData() string {
 // GetUserDataOk returns a tuple with the UserData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationCloudInitConfig) GetUserDataOk() (*string, bool) {
-	if o == nil || o.UserData == nil {
+	if o == nil || IsNil(o.UserData) {
 		return nil, false
 	}
 	return o.UserData, true
@@ -230,7 +234,7 @@ func (o *VirtualizationCloudInitConfig) GetUserDataOk() (*string, bool) {
 
 // HasUserData returns a boolean if a field has been set.
 func (o *VirtualizationCloudInitConfig) HasUserData() bool {
-	if o != nil && o.UserData != nil {
+	if o != nil && !IsNil(o.UserData) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *VirtualizationCloudInitConfig) SetUserData(v string) {
 
 // GetUserDataBase64Encoded returns the UserDataBase64Encoded field value if set, zero value otherwise.
 func (o *VirtualizationCloudInitConfig) GetUserDataBase64Encoded() bool {
-	if o == nil || o.UserDataBase64Encoded == nil {
+	if o == nil || IsNil(o.UserDataBase64Encoded) {
 		var ret bool
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *VirtualizationCloudInitConfig) GetUserDataBase64Encoded() bool {
 // GetUserDataBase64EncodedOk returns a tuple with the UserDataBase64Encoded field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationCloudInitConfig) GetUserDataBase64EncodedOk() (*bool, bool) {
-	if o == nil || o.UserDataBase64Encoded == nil {
+	if o == nil || IsNil(o.UserDataBase64Encoded) {
 		return nil, false
 	}
 	return o.UserDataBase64Encoded, true
@@ -262,7 +266,7 @@ func (o *VirtualizationCloudInitConfig) GetUserDataBase64EncodedOk() (*bool, boo
 
 // HasUserDataBase64Encoded returns a boolean if a field has been set.
 func (o *VirtualizationCloudInitConfig) HasUserDataBase64Encoded() bool {
-	if o != nil && o.UserDataBase64Encoded != nil {
+	if o != nil && !IsNil(o.UserDataBase64Encoded) {
 		return true
 	}
 
@@ -275,34 +279,38 @@ func (o *VirtualizationCloudInitConfig) SetUserDataBase64Encoded(v bool) {
 }
 
 func (o VirtualizationCloudInitConfig) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationCloudInitConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConfigType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConfigType) {
 		toSerialize["ConfigType"] = o.ConfigType
 	}
-	if o.NetworkData != nil {
+	if !IsNil(o.NetworkData) {
 		toSerialize["NetworkData"] = o.NetworkData
 	}
-	if o.NetworkDataBase64Encoded != nil {
+	if !IsNil(o.NetworkDataBase64Encoded) {
 		toSerialize["NetworkDataBase64Encoded"] = o.NetworkDataBase64Encoded
 	}
-	if o.UserData != nil {
+	if !IsNil(o.UserData) {
 		toSerialize["UserData"] = o.UserData
 	}
-	if o.UserDataBase64Encoded != nil {
+	if !IsNil(o.UserDataBase64Encoded) {
 		toSerialize["UserDataBase64Encoded"] = o.UserDataBase64Encoded
 	}
 
@@ -310,10 +318,32 @@ func (o VirtualizationCloudInitConfig) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationCloudInitConfig) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationCloudInitConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationCloudInitConfigWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -333,7 +363,7 @@ func (o *VirtualizationCloudInitConfig) UnmarshalJSON(bytes []byte) (err error) 
 
 	varVirtualizationCloudInitConfigWithoutEmbeddedStruct := VirtualizationCloudInitConfigWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationCloudInitConfigWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationCloudInitConfigWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationCloudInitConfig := _VirtualizationCloudInitConfig{}
 		varVirtualizationCloudInitConfig.ClassId = varVirtualizationCloudInitConfigWithoutEmbeddedStruct.ClassId
@@ -350,7 +380,7 @@ func (o *VirtualizationCloudInitConfig) UnmarshalJSON(bytes []byte) (err error) 
 
 	varVirtualizationCloudInitConfig := _VirtualizationCloudInitConfig{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationCloudInitConfig)
+	err = json.Unmarshal(data, &varVirtualizationCloudInitConfig)
 	if err == nil {
 		o.MoBaseComplexType = varVirtualizationCloudInitConfig.MoBaseComplexType
 	} else {
@@ -359,7 +389,7 @@ func (o *VirtualizationCloudInitConfig) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigType")

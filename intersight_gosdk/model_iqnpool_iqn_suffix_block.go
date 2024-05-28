@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IqnpoolIqnSuffixBlock type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IqnpoolIqnSuffixBlock{}
 
 // IqnpoolIqnSuffixBlock The suffix block of iSCSI Qualified Names (IQNs).
 type IqnpoolIqnSuffixBlock struct {
@@ -108,7 +112,7 @@ func (o *IqnpoolIqnSuffixBlock) SetObjectType(v string) {
 
 // GetFrom returns the From field value if set, zero value otherwise.
 func (o *IqnpoolIqnSuffixBlock) GetFrom() int64 {
-	if o == nil || o.From == nil {
+	if o == nil || IsNil(o.From) {
 		var ret int64
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *IqnpoolIqnSuffixBlock) GetFrom() int64 {
 // GetFromOk returns a tuple with the From field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IqnpoolIqnSuffixBlock) GetFromOk() (*int64, bool) {
-	if o == nil || o.From == nil {
+	if o == nil || IsNil(o.From) {
 		return nil, false
 	}
 	return o.From, true
@@ -126,7 +130,7 @@ func (o *IqnpoolIqnSuffixBlock) GetFromOk() (*int64, bool) {
 
 // HasFrom returns a boolean if a field has been set.
 func (o *IqnpoolIqnSuffixBlock) HasFrom() bool {
-	if o != nil && o.From != nil {
+	if o != nil && !IsNil(o.From) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *IqnpoolIqnSuffixBlock) SetFrom(v int64) {
 
 // GetSuffix returns the Suffix field value if set, zero value otherwise.
 func (o *IqnpoolIqnSuffixBlock) GetSuffix() string {
-	if o == nil || o.Suffix == nil {
+	if o == nil || IsNil(o.Suffix) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *IqnpoolIqnSuffixBlock) GetSuffix() string {
 // GetSuffixOk returns a tuple with the Suffix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IqnpoolIqnSuffixBlock) GetSuffixOk() (*string, bool) {
-	if o == nil || o.Suffix == nil {
+	if o == nil || IsNil(o.Suffix) {
 		return nil, false
 	}
 	return o.Suffix, true
@@ -158,7 +162,7 @@ func (o *IqnpoolIqnSuffixBlock) GetSuffixOk() (*string, bool) {
 
 // HasSuffix returns a boolean if a field has been set.
 func (o *IqnpoolIqnSuffixBlock) HasSuffix() bool {
-	if o != nil && o.Suffix != nil {
+	if o != nil && !IsNil(o.Suffix) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *IqnpoolIqnSuffixBlock) SetSuffix(v string) {
 
 // GetTo returns the To field value if set, zero value otherwise.
 func (o *IqnpoolIqnSuffixBlock) GetTo() int64 {
-	if o == nil || o.To == nil {
+	if o == nil || IsNil(o.To) {
 		var ret int64
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *IqnpoolIqnSuffixBlock) GetTo() int64 {
 // GetToOk returns a tuple with the To field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IqnpoolIqnSuffixBlock) GetToOk() (*int64, bool) {
-	if o == nil || o.To == nil {
+	if o == nil || IsNil(o.To) {
 		return nil, false
 	}
 	return o.To, true
@@ -190,7 +194,7 @@ func (o *IqnpoolIqnSuffixBlock) GetToOk() (*int64, bool) {
 
 // HasTo returns a boolean if a field has been set.
 func (o *IqnpoolIqnSuffixBlock) HasTo() bool {
-	if o != nil && o.To != nil {
+	if o != nil && !IsNil(o.To) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *IqnpoolIqnSuffixBlock) SetTo(v int64) {
 }
 
 func (o IqnpoolIqnSuffixBlock) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IqnpoolIqnSuffixBlock) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolAbstractBlockType, errPoolAbstractBlockType := json.Marshal(o.PoolAbstractBlockType)
 	if errPoolAbstractBlockType != nil {
-		return []byte{}, errPoolAbstractBlockType
+		return map[string]interface{}{}, errPoolAbstractBlockType
 	}
 	errPoolAbstractBlockType = json.Unmarshal([]byte(serializedPoolAbstractBlockType), &toSerialize)
 	if errPoolAbstractBlockType != nil {
-		return []byte{}, errPoolAbstractBlockType
+		return map[string]interface{}{}, errPoolAbstractBlockType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.From != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.From) {
 		toSerialize["From"] = o.From
 	}
-	if o.Suffix != nil {
+	if !IsNil(o.Suffix) {
 		toSerialize["Suffix"] = o.Suffix
 	}
-	if o.To != nil {
+	if !IsNil(o.To) {
 		toSerialize["To"] = o.To
 	}
 
@@ -232,10 +240,32 @@ func (o IqnpoolIqnSuffixBlock) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IqnpoolIqnSuffixBlock) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IqnpoolIqnSuffixBlock) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IqnpoolIqnSuffixBlockWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *IqnpoolIqnSuffixBlock) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIqnpoolIqnSuffixBlockWithoutEmbeddedStruct := IqnpoolIqnSuffixBlockWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIqnpoolIqnSuffixBlockWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIqnpoolIqnSuffixBlockWithoutEmbeddedStruct)
 	if err == nil {
 		varIqnpoolIqnSuffixBlock := _IqnpoolIqnSuffixBlock{}
 		varIqnpoolIqnSuffixBlock.ClassId = varIqnpoolIqnSuffixBlockWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *IqnpoolIqnSuffixBlock) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIqnpoolIqnSuffixBlock := _IqnpoolIqnSuffixBlock{}
 
-	err = json.Unmarshal(bytes, &varIqnpoolIqnSuffixBlock)
+	err = json.Unmarshal(data, &varIqnpoolIqnSuffixBlock)
 	if err == nil {
 		o.PoolAbstractBlockType = varIqnpoolIqnSuffixBlock.PoolAbstractBlockType
 	} else {
@@ -275,7 +305,7 @@ func (o *IqnpoolIqnSuffixBlock) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "From")

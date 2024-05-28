@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recovery.OnDemandBackup"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recovery.OnDemandBackup"]
-**ConfigResult** | Pointer to [**RecoveryConfigResultRelationship**](RecoveryConfigResultRelationship.md) |  | [optional] 
-**DeviceId** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ConfigResult** | Pointer to [**NullableRecoveryConfigResultRelationship**](RecoveryConfigResultRelationship.md) |  | [optional] 
+**DeviceId** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -94,6 +94,16 @@ SetConfigResult sets ConfigResult field to given value.
 
 HasConfigResult returns a boolean if a field has been set.
 
+### SetConfigResultNil
+
+`func (o *RecoveryOnDemandBackup) SetConfigResultNil(b bool)`
+
+ SetConfigResultNil sets the value for ConfigResult to be an explicit nil
+
+### UnsetConfigResult
+`func (o *RecoveryOnDemandBackup) UnsetConfigResult()`
+
+UnsetConfigResult ensures that no value is present for ConfigResult, not even an explicit nil
 ### GetDeviceId
 
 `func (o *RecoveryOnDemandBackup) GetDeviceId() AssetDeviceRegistrationRelationship`
@@ -119,6 +129,16 @@ SetDeviceId sets DeviceId field to given value.
 
 HasDeviceId returns a boolean if a field has been set.
 
+### SetDeviceIdNil
+
+`func (o *RecoveryOnDemandBackup) SetDeviceIdNil(b bool)`
+
+ SetDeviceIdNil sets the value for DeviceId to be an explicit nil
+
+### UnsetDeviceId
+`func (o *RecoveryOnDemandBackup) UnsetDeviceId()`
+
+UnsetDeviceId ensures that no value is present for DeviceId, not even an explicit nil
 ### GetOrganization
 
 `func (o *RecoveryOnDemandBackup) GetOrganization() OrganizationOrganizationRelationship`
@@ -144,6 +164,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *RecoveryOnDemandBackup) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *RecoveryOnDemandBackup) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppCifsService type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppCifsService{}
 
 // StorageNetAppCifsService NetApp CIFS service represents a CIFS server on a storage virtual machine.
 type StorageNetAppCifsService struct {
@@ -37,8 +41,8 @@ type StorageNetAppCifsService struct {
 	// The storage virtual machine name for the CIFS service.
 	SvmName *string `json:"SvmName,omitempty"`
 	// Unique identifier for the NetApp Storage Virtual Machine.
-	SvmUuid              *string                             `json:"SvmUuid,omitempty"`
-	Tenant               *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+	SvmUuid              *string                                    `json:"SvmUuid,omitempty"`
+	Tenant               NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *StorageNetAppCifsService) SetObjectType(v string) {
 
 // GetActiveDirectoryFqdn returns the ActiveDirectoryFqdn field value if set, zero value otherwise.
 func (o *StorageNetAppCifsService) GetActiveDirectoryFqdn() string {
-	if o == nil || o.ActiveDirectoryFqdn == nil {
+	if o == nil || IsNil(o.ActiveDirectoryFqdn) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *StorageNetAppCifsService) GetActiveDirectoryFqdn() string {
 // GetActiveDirectoryFqdnOk returns a tuple with the ActiveDirectoryFqdn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCifsService) GetActiveDirectoryFqdnOk() (*string, bool) {
-	if o == nil || o.ActiveDirectoryFqdn == nil {
+	if o == nil || IsNil(o.ActiveDirectoryFqdn) {
 		return nil, false
 	}
 	return o.ActiveDirectoryFqdn, true
@@ -135,7 +139,7 @@ func (o *StorageNetAppCifsService) GetActiveDirectoryFqdnOk() (*string, bool) {
 
 // HasActiveDirectoryFqdn returns a boolean if a field has been set.
 func (o *StorageNetAppCifsService) HasActiveDirectoryFqdn() bool {
-	if o != nil && o.ActiveDirectoryFqdn != nil {
+	if o != nil && !IsNil(o.ActiveDirectoryFqdn) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *StorageNetAppCifsService) SetActiveDirectoryFqdn(v string) {
 
 // GetAdOrganizationalUnit returns the AdOrganizationalUnit field value if set, zero value otherwise.
 func (o *StorageNetAppCifsService) GetAdOrganizationalUnit() string {
-	if o == nil || o.AdOrganizationalUnit == nil {
+	if o == nil || IsNil(o.AdOrganizationalUnit) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *StorageNetAppCifsService) GetAdOrganizationalUnit() string {
 // GetAdOrganizationalUnitOk returns a tuple with the AdOrganizationalUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCifsService) GetAdOrganizationalUnitOk() (*string, bool) {
-	if o == nil || o.AdOrganizationalUnit == nil {
+	if o == nil || IsNil(o.AdOrganizationalUnit) {
 		return nil, false
 	}
 	return o.AdOrganizationalUnit, true
@@ -167,7 +171,7 @@ func (o *StorageNetAppCifsService) GetAdOrganizationalUnitOk() (*string, bool) {
 
 // HasAdOrganizationalUnit returns a boolean if a field has been set.
 func (o *StorageNetAppCifsService) HasAdOrganizationalUnit() bool {
-	if o != nil && o.AdOrganizationalUnit != nil {
+	if o != nil && !IsNil(o.AdOrganizationalUnit) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *StorageNetAppCifsService) SetAdOrganizationalUnit(v string) {
 
 // GetComment returns the Comment field value if set, zero value otherwise.
 func (o *StorageNetAppCifsService) GetComment() string {
-	if o == nil || o.Comment == nil {
+	if o == nil || IsNil(o.Comment) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *StorageNetAppCifsService) GetComment() string {
 // GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCifsService) GetCommentOk() (*string, bool) {
-	if o == nil || o.Comment == nil {
+	if o == nil || IsNil(o.Comment) {
 		return nil, false
 	}
 	return o.Comment, true
@@ -199,7 +203,7 @@ func (o *StorageNetAppCifsService) GetCommentOk() (*string, bool) {
 
 // HasComment returns a boolean if a field has been set.
 func (o *StorageNetAppCifsService) HasComment() bool {
-	if o != nil && o.Comment != nil {
+	if o != nil && !IsNil(o.Comment) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *StorageNetAppCifsService) SetComment(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *StorageNetAppCifsService) GetEnabled() string {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *StorageNetAppCifsService) GetEnabled() string {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCifsService) GetEnabledOk() (*string, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -231,7 +235,7 @@ func (o *StorageNetAppCifsService) GetEnabledOk() (*string, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *StorageNetAppCifsService) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *StorageNetAppCifsService) SetEnabled(v string) {
 
 // GetServerName returns the ServerName field value if set, zero value otherwise.
 func (o *StorageNetAppCifsService) GetServerName() string {
-	if o == nil || o.ServerName == nil {
+	if o == nil || IsNil(o.ServerName) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *StorageNetAppCifsService) GetServerName() string {
 // GetServerNameOk returns a tuple with the ServerName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCifsService) GetServerNameOk() (*string, bool) {
-	if o == nil || o.ServerName == nil {
+	if o == nil || IsNil(o.ServerName) {
 		return nil, false
 	}
 	return o.ServerName, true
@@ -263,7 +267,7 @@ func (o *StorageNetAppCifsService) GetServerNameOk() (*string, bool) {
 
 // HasServerName returns a boolean if a field has been set.
 func (o *StorageNetAppCifsService) HasServerName() bool {
-	if o != nil && o.ServerName != nil {
+	if o != nil && !IsNil(o.ServerName) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *StorageNetAppCifsService) SetServerName(v string) {
 
 // GetSvmName returns the SvmName field value if set, zero value otherwise.
 func (o *StorageNetAppCifsService) GetSvmName() string {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *StorageNetAppCifsService) GetSvmName() string {
 // GetSvmNameOk returns a tuple with the SvmName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCifsService) GetSvmNameOk() (*string, bool) {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		return nil, false
 	}
 	return o.SvmName, true
@@ -295,7 +299,7 @@ func (o *StorageNetAppCifsService) GetSvmNameOk() (*string, bool) {
 
 // HasSvmName returns a boolean if a field has been set.
 func (o *StorageNetAppCifsService) HasSvmName() bool {
-	if o != nil && o.SvmName != nil {
+	if o != nil && !IsNil(o.SvmName) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *StorageNetAppCifsService) SetSvmName(v string) {
 
 // GetSvmUuid returns the SvmUuid field value if set, zero value otherwise.
 func (o *StorageNetAppCifsService) GetSvmUuid() string {
-	if o == nil || o.SvmUuid == nil {
+	if o == nil || IsNil(o.SvmUuid) {
 		var ret string
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *StorageNetAppCifsService) GetSvmUuid() string {
 // GetSvmUuidOk returns a tuple with the SvmUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCifsService) GetSvmUuidOk() (*string, bool) {
-	if o == nil || o.SvmUuid == nil {
+	if o == nil || IsNil(o.SvmUuid) {
 		return nil, false
 	}
 	return o.SvmUuid, true
@@ -327,7 +331,7 @@ func (o *StorageNetAppCifsService) GetSvmUuidOk() (*string, bool) {
 
 // HasSvmUuid returns a boolean if a field has been set.
 func (o *StorageNetAppCifsService) HasSvmUuid() bool {
-	if o != nil && o.SvmUuid != nil {
+	if o != nil && !IsNil(o.SvmUuid) {
 		return true
 	}
 
@@ -339,87 +343,124 @@ func (o *StorageNetAppCifsService) SetSvmUuid(v string) {
 	o.SvmUuid = &v
 }
 
-// GetTenant returns the Tenant field value if set, zero value otherwise.
+// GetTenant returns the Tenant field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppCifsService) GetTenant() StorageNetAppStorageVmRelationship {
-	if o == nil || o.Tenant == nil {
+	if o == nil || IsNil(o.Tenant.Get()) {
 		var ret StorageNetAppStorageVmRelationship
 		return ret
 	}
-	return *o.Tenant
+	return *o.Tenant.Get()
 }
 
 // GetTenantOk returns a tuple with the Tenant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppCifsService) GetTenantOk() (*StorageNetAppStorageVmRelationship, bool) {
-	if o == nil || o.Tenant == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tenant, true
+	return o.Tenant.Get(), o.Tenant.IsSet()
 }
 
 // HasTenant returns a boolean if a field has been set.
 func (o *StorageNetAppCifsService) HasTenant() bool {
-	if o != nil && o.Tenant != nil {
+	if o != nil && o.Tenant.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTenant gets a reference to the given StorageNetAppStorageVmRelationship and assigns it to the Tenant field.
+// SetTenant gets a reference to the given NullableStorageNetAppStorageVmRelationship and assigns it to the Tenant field.
 func (o *StorageNetAppCifsService) SetTenant(v StorageNetAppStorageVmRelationship) {
-	o.Tenant = &v
+	o.Tenant.Set(&v)
+}
+
+// SetTenantNil sets the value for Tenant to be an explicit nil
+func (o *StorageNetAppCifsService) SetTenantNil() {
+	o.Tenant.Set(nil)
+}
+
+// UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
+func (o *StorageNetAppCifsService) UnsetTenant() {
+	o.Tenant.Unset()
 }
 
 func (o StorageNetAppCifsService) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppCifsService) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ActiveDirectoryFqdn != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ActiveDirectoryFqdn) {
 		toSerialize["ActiveDirectoryFqdn"] = o.ActiveDirectoryFqdn
 	}
-	if o.AdOrganizationalUnit != nil {
+	if !IsNil(o.AdOrganizationalUnit) {
 		toSerialize["AdOrganizationalUnit"] = o.AdOrganizationalUnit
 	}
-	if o.Comment != nil {
+	if !IsNil(o.Comment) {
 		toSerialize["Comment"] = o.Comment
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.ServerName != nil {
+	if !IsNil(o.ServerName) {
 		toSerialize["ServerName"] = o.ServerName
 	}
-	if o.SvmName != nil {
+	if !IsNil(o.SvmName) {
 		toSerialize["SvmName"] = o.SvmName
 	}
-	if o.SvmUuid != nil {
+	if !IsNil(o.SvmUuid) {
 		toSerialize["SvmUuid"] = o.SvmUuid
 	}
-	if o.Tenant != nil {
-		toSerialize["Tenant"] = o.Tenant
+	if o.Tenant.IsSet() {
+		toSerialize["Tenant"] = o.Tenant.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppCifsService) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppCifsService) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppCifsServiceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -438,13 +479,13 @@ func (o *StorageNetAppCifsService) UnmarshalJSON(bytes []byte) (err error) {
 		// The storage virtual machine name for the CIFS service.
 		SvmName *string `json:"SvmName,omitempty"`
 		// Unique identifier for the NetApp Storage Virtual Machine.
-		SvmUuid *string                             `json:"SvmUuid,omitempty"`
-		Tenant  *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+		SvmUuid *string                                    `json:"SvmUuid,omitempty"`
+		Tenant  NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	}
 
 	varStorageNetAppCifsServiceWithoutEmbeddedStruct := StorageNetAppCifsServiceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppCifsServiceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppCifsServiceWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppCifsService := _StorageNetAppCifsService{}
 		varStorageNetAppCifsService.ClassId = varStorageNetAppCifsServiceWithoutEmbeddedStruct.ClassId
@@ -464,7 +505,7 @@ func (o *StorageNetAppCifsService) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppCifsService := _StorageNetAppCifsService{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppCifsService)
+	err = json.Unmarshal(data, &varStorageNetAppCifsService)
 	if err == nil {
 		o.MoBaseMo = varStorageNetAppCifsService.MoBaseMo
 	} else {
@@ -473,7 +514,7 @@ func (o *StorageNetAppCifsService) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ActiveDirectoryFqdn")

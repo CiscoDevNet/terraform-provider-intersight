@@ -105,19 +105,93 @@ func getResourceReservationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"custom_permission_resources": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"description": {
+			Description: "Details of the use case for which the reservation was created, such as decommissioning.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"expiration": {
-			Description: "Expiration of the resource Reservation.",
+			Description: "The resource reservation includes an expiration date and a timestamp indicating when this management object will be cleared. The expiration date is set during the decommissioning process and is maintained for a period of 3 months.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"groups": {
 			Description: "An array of relationships to resourceGroup resources.",
 			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"identity": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
 			Optional:    true,
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
@@ -243,13 +317,18 @@ func getResourceReservationSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"reservation_selector": {
+			Description: "The unique identification of the resource is based on the resource OData string, which is mentioned as part of the ReservationSelector. For example, 'Serial eq 'EM6259AE6B'.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"resource_moids": {
 			Type:     schema.TypeList,
 			Optional: true,
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
 		"resource_type": {
-			Description: "Type of resources which will get filled into the resource groups.",
+			Description: "The type of resource that is placed into resource groups or pools. Resource Type can be either 'compute.Blade' or 'compute.RackUnit' for pools.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -259,7 +338,7 @@ func getResourceReservationSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "Status of the Reservation.\n* `Created` - By default, a reservation is in Created status.\n* `Processing` - A reservation is changed to Processing status for appliance mode resource claim requests.\n* `Failed` - A reservation is changed to Failed status if the validations on resources, resource groups fails.\n* `Finished` - A reservation is changed to Finished status if the validations on resources, resource groups are successful. The resource moids in reservation will be added to resource groups using OData filters.",
+			Description: "The reservation status can be in the 'Created', 'Processing', 'Failed', or 'Finished' state.\n* `Created` - By default, a reservation is in Created status.\n* `Processing` - A reservation is changed to Processing status for appliance mode resource claim requests.\n* `Failed` - A reservation is changed to Failed status if the validations on resources, resource groups fails.\n* `Finished` - A reservation is changed to Finished status if the validations on resources, resource groups are successful. The resource moids in reservation will be added to resource groups using OData filters.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -533,6 +612,51 @@ func dataSourceResourceReservationRead(c context.Context, d *schema.ResourceData
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("custom_permission_resources"); ok {
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		o.SetCustomPermissionResources(x)
+	}
+
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
@@ -581,6 +705,49 @@ func dataSourceResourceReservationRead(c context.Context, d *schema.ResourceData
 			x = append(x, models.MoMoRefAsResourceGroupRelationship(o))
 		}
 		o.SetGroups(x)
+	}
+
+	if v, ok := d.GetOk("identity"); ok {
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIdentity(x)
+		}
 	}
 
 	if v, ok := d.GetOkExists("mark_fail"); ok {
@@ -695,6 +862,11 @@ func dataSourceResourceReservationRead(c context.Context, d *schema.ResourceData
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if v, ok := d.GetOk("reservation_selector"); ok {
+		x := (v.(string))
+		o.SetReservationSelector(x)
 	}
 
 	if v, ok := d.GetOk("resource_moids"); ok {
@@ -879,11 +1051,16 @@ func dataSourceResourceReservationRead(c context.Context, d *schema.ResourceData
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+
+				temp["custom_permission_resources"] = flattenListMoBaseMoRelationship(s.GetCustomPermissionResources(), d)
+				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["expiration"] = (s.GetExpiration()).String()
 
 				temp["groups"] = flattenListResourceGroupRelationship(s.GetGroups(), d)
+
+				temp["identity"] = flattenMapMoBaseMoRelationship(s.GetIdentity(), d)
 				temp["mark_fail"] = (s.GetMarkFail())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -894,6 +1071,7 @@ func dataSourceResourceReservationRead(c context.Context, d *schema.ResourceData
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["reservation_selector"] = (s.GetReservationSelector())
 				temp["resource_moids"] = (s.GetResourceMoids())
 				temp["resource_type"] = (s.GetResourceType())
 				temp["shared_scope"] = (s.GetSharedScope())

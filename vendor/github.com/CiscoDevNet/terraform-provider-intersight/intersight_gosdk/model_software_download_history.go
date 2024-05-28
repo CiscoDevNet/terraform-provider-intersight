@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the SoftwareDownloadHistory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwareDownloadHistory{}
 
 // SoftwareDownloadHistory An object to keep track of software downloads from the Private Appliance portal in SaaS.
 type SoftwareDownloadHistory struct {
@@ -34,9 +38,9 @@ type SoftwareDownloadHistory struct {
 	// The email id of the user who initiated the software download.
 	UserIdOrEmail *string `json:"UserIdOrEmail,omitempty"`
 	// The version of software which was downloaded.
-	Version              *string                                `json:"Version,omitempty"`
-	Account              *IamAccountRelationship                `json:"Account,omitempty"`
-	Image                *FirmwareBaseDistributableRelationship `json:"Image,omitempty"`
+	Version              *string                                       `json:"Version,omitempty"`
+	Account              NullableIamAccountRelationship                `json:"Account,omitempty"`
+	Image                NullableFirmwareBaseDistributableRelationship `json:"Image,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *SoftwareDownloadHistory) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *SoftwareDownloadHistory) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *SoftwareDownloadHistory) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareDownloadHistory) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -133,7 +137,7 @@ func (o *SoftwareDownloadHistory) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *SoftwareDownloadHistory) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *SoftwareDownloadHistory) SetName(v string) {
 
 // GetProduct returns the Product field value if set, zero value otherwise.
 func (o *SoftwareDownloadHistory) GetProduct() string {
-	if o == nil || o.Product == nil {
+	if o == nil || IsNil(o.Product) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *SoftwareDownloadHistory) GetProduct() string {
 // GetProductOk returns a tuple with the Product field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareDownloadHistory) GetProductOk() (*string, bool) {
-	if o == nil || o.Product == nil {
+	if o == nil || IsNil(o.Product) {
 		return nil, false
 	}
 	return o.Product, true
@@ -165,7 +169,7 @@ func (o *SoftwareDownloadHistory) GetProductOk() (*string, bool) {
 
 // HasProduct returns a boolean if a field has been set.
 func (o *SoftwareDownloadHistory) HasProduct() bool {
-	if o != nil && o.Product != nil {
+	if o != nil && !IsNil(o.Product) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *SoftwareDownloadHistory) SetProduct(v string) {
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *SoftwareDownloadHistory) GetTimestamp() time.Time {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		var ret time.Time
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *SoftwareDownloadHistory) GetTimestamp() time.Time {
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareDownloadHistory) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
 	return o.Timestamp, true
@@ -197,7 +201,7 @@ func (o *SoftwareDownloadHistory) GetTimestampOk() (*time.Time, bool) {
 
 // HasTimestamp returns a boolean if a field has been set.
 func (o *SoftwareDownloadHistory) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
+	if o != nil && !IsNil(o.Timestamp) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *SoftwareDownloadHistory) SetTimestamp(v time.Time) {
 
 // GetUserIdOrEmail returns the UserIdOrEmail field value if set, zero value otherwise.
 func (o *SoftwareDownloadHistory) GetUserIdOrEmail() string {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *SoftwareDownloadHistory) GetUserIdOrEmail() string {
 // GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareDownloadHistory) GetUserIdOrEmailOk() (*string, bool) {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		return nil, false
 	}
 	return o.UserIdOrEmail, true
@@ -229,7 +233,7 @@ func (o *SoftwareDownloadHistory) GetUserIdOrEmailOk() (*string, bool) {
 
 // HasUserIdOrEmail returns a boolean if a field has been set.
 func (o *SoftwareDownloadHistory) HasUserIdOrEmail() bool {
-	if o != nil && o.UserIdOrEmail != nil {
+	if o != nil && !IsNil(o.UserIdOrEmail) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *SoftwareDownloadHistory) SetUserIdOrEmail(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *SoftwareDownloadHistory) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *SoftwareDownloadHistory) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwareDownloadHistory) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -261,7 +265,7 @@ func (o *SoftwareDownloadHistory) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *SoftwareDownloadHistory) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -273,116 +277,164 @@ func (o *SoftwareDownloadHistory) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoftwareDownloadHistory) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwareDownloadHistory) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *SoftwareDownloadHistory) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *SoftwareDownloadHistory) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetImage returns the Image field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *SoftwareDownloadHistory) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *SoftwareDownloadHistory) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetImage returns the Image field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoftwareDownloadHistory) GetImage() FirmwareBaseDistributableRelationship {
-	if o == nil || o.Image == nil {
+	if o == nil || IsNil(o.Image.Get()) {
 		var ret FirmwareBaseDistributableRelationship
 		return ret
 	}
-	return *o.Image
+	return *o.Image.Get()
 }
 
 // GetImageOk returns a tuple with the Image field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwareDownloadHistory) GetImageOk() (*FirmwareBaseDistributableRelationship, bool) {
-	if o == nil || o.Image == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Image, true
+	return o.Image.Get(), o.Image.IsSet()
 }
 
 // HasImage returns a boolean if a field has been set.
 func (o *SoftwareDownloadHistory) HasImage() bool {
-	if o != nil && o.Image != nil {
+	if o != nil && o.Image.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetImage gets a reference to the given FirmwareBaseDistributableRelationship and assigns it to the Image field.
+// SetImage gets a reference to the given NullableFirmwareBaseDistributableRelationship and assigns it to the Image field.
 func (o *SoftwareDownloadHistory) SetImage(v FirmwareBaseDistributableRelationship) {
-	o.Image = &v
+	o.Image.Set(&v)
+}
+
+// SetImageNil sets the value for Image to be an explicit nil
+func (o *SoftwareDownloadHistory) SetImageNil() {
+	o.Image.Set(nil)
+}
+
+// UnsetImage ensures that no value is present for Image, not even an explicit nil
+func (o *SoftwareDownloadHistory) UnsetImage() {
+	o.Image.Unset()
 }
 
 func (o SoftwareDownloadHistory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwareDownloadHistory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Product != nil {
+	if !IsNil(o.Product) {
 		toSerialize["Product"] = o.Product
 	}
-	if o.Timestamp != nil {
+	if !IsNil(o.Timestamp) {
 		toSerialize["Timestamp"] = o.Timestamp
 	}
-	if o.UserIdOrEmail != nil {
+	if !IsNil(o.UserIdOrEmail) {
 		toSerialize["UserIdOrEmail"] = o.UserIdOrEmail
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.Image != nil {
-		toSerialize["Image"] = o.Image
+	if o.Image.IsSet() {
+		toSerialize["Image"] = o.Image.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwareDownloadHistory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwareDownloadHistory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwareDownloadHistoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -397,14 +449,14 @@ func (o *SoftwareDownloadHistory) UnmarshalJSON(bytes []byte) (err error) {
 		// The email id of the user who initiated the software download.
 		UserIdOrEmail *string `json:"UserIdOrEmail,omitempty"`
 		// The version of software which was downloaded.
-		Version *string                                `json:"Version,omitempty"`
-		Account *IamAccountRelationship                `json:"Account,omitempty"`
-		Image   *FirmwareBaseDistributableRelationship `json:"Image,omitempty"`
+		Version *string                                       `json:"Version,omitempty"`
+		Account NullableIamAccountRelationship                `json:"Account,omitempty"`
+		Image   NullableFirmwareBaseDistributableRelationship `json:"Image,omitempty"`
 	}
 
 	varSoftwareDownloadHistoryWithoutEmbeddedStruct := SoftwareDownloadHistoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwareDownloadHistoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwareDownloadHistoryWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwareDownloadHistory := _SoftwareDownloadHistory{}
 		varSoftwareDownloadHistory.ClassId = varSoftwareDownloadHistoryWithoutEmbeddedStruct.ClassId
@@ -423,7 +475,7 @@ func (o *SoftwareDownloadHistory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSoftwareDownloadHistory := _SoftwareDownloadHistory{}
 
-	err = json.Unmarshal(bytes, &varSoftwareDownloadHistory)
+	err = json.Unmarshal(data, &varSoftwareDownloadHistory)
 	if err == nil {
 		o.MoBaseMo = varSoftwareDownloadHistory.MoBaseMo
 	} else {
@@ -432,7 +484,7 @@ func (o *SoftwareDownloadHistory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

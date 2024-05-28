@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmEsxiDisk type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmEsxiDisk{}
 
 // VirtualizationVmEsxiDisk Virtual machine disk configuration data.
 type VirtualizationVmEsxiDisk struct {
@@ -114,7 +118,7 @@ func (o *VirtualizationVmEsxiDisk) SetObjectType(v string) {
 
 // GetCapacity returns the Capacity field value if set, zero value otherwise.
 func (o *VirtualizationVmEsxiDisk) GetCapacity() string {
-	if o == nil || o.Capacity == nil {
+	if o == nil || IsNil(o.Capacity) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *VirtualizationVmEsxiDisk) GetCapacity() string {
 // GetCapacityOk returns a tuple with the Capacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmEsxiDisk) GetCapacityOk() (*string, bool) {
-	if o == nil || o.Capacity == nil {
+	if o == nil || IsNil(o.Capacity) {
 		return nil, false
 	}
 	return o.Capacity, true
@@ -132,7 +136,7 @@ func (o *VirtualizationVmEsxiDisk) GetCapacityOk() (*string, bool) {
 
 // HasCapacity returns a boolean if a field has been set.
 func (o *VirtualizationVmEsxiDisk) HasCapacity() bool {
-	if o != nil && o.Capacity != nil {
+	if o != nil && !IsNil(o.Capacity) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *VirtualizationVmEsxiDisk) SetCapacity(v string) {
 
 // GetDatastore returns the Datastore field value if set, zero value otherwise.
 func (o *VirtualizationVmEsxiDisk) GetDatastore() string {
-	if o == nil || o.Datastore == nil {
+	if o == nil || IsNil(o.Datastore) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *VirtualizationVmEsxiDisk) GetDatastore() string {
 // GetDatastoreOk returns a tuple with the Datastore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmEsxiDisk) GetDatastoreOk() (*string, bool) {
-	if o == nil || o.Datastore == nil {
+	if o == nil || IsNil(o.Datastore) {
 		return nil, false
 	}
 	return o.Datastore, true
@@ -164,7 +168,7 @@ func (o *VirtualizationVmEsxiDisk) GetDatastoreOk() (*string, bool) {
 
 // HasDatastore returns a boolean if a field has been set.
 func (o *VirtualizationVmEsxiDisk) HasDatastore() bool {
-	if o != nil && o.Datastore != nil {
+	if o != nil && !IsNil(o.Datastore) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *VirtualizationVmEsxiDisk) SetDatastore(v string) {
 
 // GetDiskmode returns the Diskmode field value if set, zero value otherwise.
 func (o *VirtualizationVmEsxiDisk) GetDiskmode() string {
-	if o == nil || o.Diskmode == nil {
+	if o == nil || IsNil(o.Diskmode) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *VirtualizationVmEsxiDisk) GetDiskmode() string {
 // GetDiskmodeOk returns a tuple with the Diskmode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmEsxiDisk) GetDiskmodeOk() (*string, bool) {
-	if o == nil || o.Diskmode == nil {
+	if o == nil || IsNil(o.Diskmode) {
 		return nil, false
 	}
 	return o.Diskmode, true
@@ -196,7 +200,7 @@ func (o *VirtualizationVmEsxiDisk) GetDiskmodeOk() (*string, bool) {
 
 // HasDiskmode returns a boolean if a field has been set.
 func (o *VirtualizationVmEsxiDisk) HasDiskmode() bool {
-	if o != nil && o.Diskmode != nil {
+	if o != nil && !IsNil(o.Diskmode) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *VirtualizationVmEsxiDisk) SetDiskmode(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VirtualizationVmEsxiDisk) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *VirtualizationVmEsxiDisk) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmEsxiDisk) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -228,7 +232,7 @@ func (o *VirtualizationVmEsxiDisk) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *VirtualizationVmEsxiDisk) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *VirtualizationVmEsxiDisk) SetName(v string) {
 
 // GetStorageAllocation returns the StorageAllocation field value if set, zero value otherwise.
 func (o *VirtualizationVmEsxiDisk) GetStorageAllocation() string {
-	if o == nil || o.StorageAllocation == nil {
+	if o == nil || IsNil(o.StorageAllocation) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *VirtualizationVmEsxiDisk) GetStorageAllocation() string {
 // GetStorageAllocationOk returns a tuple with the StorageAllocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmEsxiDisk) GetStorageAllocationOk() (*string, bool) {
-	if o == nil || o.StorageAllocation == nil {
+	if o == nil || IsNil(o.StorageAllocation) {
 		return nil, false
 	}
 	return o.StorageAllocation, true
@@ -260,7 +264,7 @@ func (o *VirtualizationVmEsxiDisk) GetStorageAllocationOk() (*string, bool) {
 
 // HasStorageAllocation returns a boolean if a field has been set.
 func (o *VirtualizationVmEsxiDisk) HasStorageAllocation() bool {
-	if o != nil && o.StorageAllocation != nil {
+	if o != nil && !IsNil(o.StorageAllocation) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *VirtualizationVmEsxiDisk) SetStorageAllocation(v string) {
 
 // GetStorageController returns the StorageController field value if set, zero value otherwise.
 func (o *VirtualizationVmEsxiDisk) GetStorageController() string {
-	if o == nil || o.StorageController == nil {
+	if o == nil || IsNil(o.StorageController) {
 		var ret string
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *VirtualizationVmEsxiDisk) GetStorageController() string {
 // GetStorageControllerOk returns a tuple with the StorageController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmEsxiDisk) GetStorageControllerOk() (*string, bool) {
-	if o == nil || o.StorageController == nil {
+	if o == nil || IsNil(o.StorageController) {
 		return nil, false
 	}
 	return o.StorageController, true
@@ -292,7 +296,7 @@ func (o *VirtualizationVmEsxiDisk) GetStorageControllerOk() (*string, bool) {
 
 // HasStorageController returns a boolean if a field has been set.
 func (o *VirtualizationVmEsxiDisk) HasStorageController() bool {
-	if o != nil && o.StorageController != nil {
+	if o != nil && !IsNil(o.StorageController) {
 		return true
 	}
 
@@ -305,37 +309,41 @@ func (o *VirtualizationVmEsxiDisk) SetStorageController(v string) {
 }
 
 func (o VirtualizationVmEsxiDisk) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmEsxiDisk) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Capacity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Capacity) {
 		toSerialize["Capacity"] = o.Capacity
 	}
-	if o.Datastore != nil {
+	if !IsNil(o.Datastore) {
 		toSerialize["Datastore"] = o.Datastore
 	}
-	if o.Diskmode != nil {
+	if !IsNil(o.Diskmode) {
 		toSerialize["Diskmode"] = o.Diskmode
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.StorageAllocation != nil {
+	if !IsNil(o.StorageAllocation) {
 		toSerialize["StorageAllocation"] = o.StorageAllocation
 	}
-	if o.StorageController != nil {
+	if !IsNil(o.StorageController) {
 		toSerialize["StorageController"] = o.StorageController
 	}
 
@@ -343,10 +351,32 @@ func (o VirtualizationVmEsxiDisk) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmEsxiDisk) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmEsxiDisk) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmEsxiDiskWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -368,7 +398,7 @@ func (o *VirtualizationVmEsxiDisk) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationVmEsxiDiskWithoutEmbeddedStruct := VirtualizationVmEsxiDiskWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmEsxiDiskWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmEsxiDiskWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmEsxiDisk := _VirtualizationVmEsxiDisk{}
 		varVirtualizationVmEsxiDisk.ClassId = varVirtualizationVmEsxiDiskWithoutEmbeddedStruct.ClassId
@@ -386,7 +416,7 @@ func (o *VirtualizationVmEsxiDisk) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationVmEsxiDisk := _VirtualizationVmEsxiDisk{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmEsxiDisk)
+	err = json.Unmarshal(data, &varVirtualizationVmEsxiDisk)
 	if err == nil {
 		o.MoBaseComplexType = varVirtualizationVmEsxiDisk.MoBaseComplexType
 	} else {
@@ -395,7 +425,7 @@ func (o *VirtualizationVmEsxiDisk) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Capacity")

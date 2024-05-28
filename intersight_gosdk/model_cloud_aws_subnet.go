@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudAwsSubnet type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudAwsSubnet{}
 
 // CloudAwsSubnet Subnet object in AWS inventory. It is a range of IP addresses in a VPC that can be used to isolate different EC2 resources from each other or from the Internet.
 type CloudAwsSubnet struct {
@@ -37,9 +41,9 @@ type CloudAwsSubnet struct {
 	// If true, indicates that this is default subnet.
 	IsDefault *bool `json:"IsDefault,omitempty"`
 	// The state of the subnet (pending | available).
-	State                *string                  `json:"State,omitempty"`
-	SubnetTags           []CloudCloudTag          `json:"SubnetTags,omitempty"`
-	AwsVpc               *CloudAwsVpcRelationship `json:"AwsVpc,omitempty"`
+	State                *string                         `json:"State,omitempty"`
+	SubnetTags           []CloudCloudTag                 `json:"SubnetTags,omitempty"`
+	AwsVpc               NullableCloudAwsVpcRelationship `json:"AwsVpc,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *CloudAwsSubnet) SetObjectType(v string) {
 
 // GetAutoAssignPrivateIpV6 returns the AutoAssignPrivateIpV6 field value if set, zero value otherwise.
 func (o *CloudAwsSubnet) GetAutoAssignPrivateIpV6() bool {
-	if o == nil || o.AutoAssignPrivateIpV6 == nil {
+	if o == nil || IsNil(o.AutoAssignPrivateIpV6) {
 		var ret bool
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *CloudAwsSubnet) GetAutoAssignPrivateIpV6() bool {
 // GetAutoAssignPrivateIpV6Ok returns a tuple with the AutoAssignPrivateIpV6 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsSubnet) GetAutoAssignPrivateIpV6Ok() (*bool, bool) {
-	if o == nil || o.AutoAssignPrivateIpV6 == nil {
+	if o == nil || IsNil(o.AutoAssignPrivateIpV6) {
 		return nil, false
 	}
 	return o.AutoAssignPrivateIpV6, true
@@ -136,7 +140,7 @@ func (o *CloudAwsSubnet) GetAutoAssignPrivateIpV6Ok() (*bool, bool) {
 
 // HasAutoAssignPrivateIpV6 returns a boolean if a field has been set.
 func (o *CloudAwsSubnet) HasAutoAssignPrivateIpV6() bool {
-	if o != nil && o.AutoAssignPrivateIpV6 != nil {
+	if o != nil && !IsNil(o.AutoAssignPrivateIpV6) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *CloudAwsSubnet) SetAutoAssignPrivateIpV6(v bool) {
 
 // GetAutoAssignPublicIpV4 returns the AutoAssignPublicIpV4 field value if set, zero value otherwise.
 func (o *CloudAwsSubnet) GetAutoAssignPublicIpV4() bool {
-	if o == nil || o.AutoAssignPublicIpV4 == nil {
+	if o == nil || IsNil(o.AutoAssignPublicIpV4) {
 		var ret bool
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *CloudAwsSubnet) GetAutoAssignPublicIpV4() bool {
 // GetAutoAssignPublicIpV4Ok returns a tuple with the AutoAssignPublicIpV4 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsSubnet) GetAutoAssignPublicIpV4Ok() (*bool, bool) {
-	if o == nil || o.AutoAssignPublicIpV4 == nil {
+	if o == nil || IsNil(o.AutoAssignPublicIpV4) {
 		return nil, false
 	}
 	return o.AutoAssignPublicIpV4, true
@@ -168,7 +172,7 @@ func (o *CloudAwsSubnet) GetAutoAssignPublicIpV4Ok() (*bool, bool) {
 
 // HasAutoAssignPublicIpV4 returns a boolean if a field has been set.
 func (o *CloudAwsSubnet) HasAutoAssignPublicIpV4() bool {
-	if o != nil && o.AutoAssignPublicIpV4 != nil {
+	if o != nil && !IsNil(o.AutoAssignPublicIpV4) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *CloudAwsSubnet) SetAutoAssignPublicIpV4(v bool) {
 
 // GetAvailabilityZoneName returns the AvailabilityZoneName field value if set, zero value otherwise.
 func (o *CloudAwsSubnet) GetAvailabilityZoneName() string {
-	if o == nil || o.AvailabilityZoneName == nil {
+	if o == nil || IsNil(o.AvailabilityZoneName) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *CloudAwsSubnet) GetAvailabilityZoneName() string {
 // GetAvailabilityZoneNameOk returns a tuple with the AvailabilityZoneName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsSubnet) GetAvailabilityZoneNameOk() (*string, bool) {
-	if o == nil || o.AvailabilityZoneName == nil {
+	if o == nil || IsNil(o.AvailabilityZoneName) {
 		return nil, false
 	}
 	return o.AvailabilityZoneName, true
@@ -200,7 +204,7 @@ func (o *CloudAwsSubnet) GetAvailabilityZoneNameOk() (*string, bool) {
 
 // HasAvailabilityZoneName returns a boolean if a field has been set.
 func (o *CloudAwsSubnet) HasAvailabilityZoneName() bool {
-	if o != nil && o.AvailabilityZoneName != nil {
+	if o != nil && !IsNil(o.AvailabilityZoneName) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *CloudAwsSubnet) SetAvailabilityZoneName(v string) {
 
 // GetIpv4Cidr returns the Ipv4Cidr field value if set, zero value otherwise.
 func (o *CloudAwsSubnet) GetIpv4Cidr() string {
-	if o == nil || o.Ipv4Cidr == nil {
+	if o == nil || IsNil(o.Ipv4Cidr) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *CloudAwsSubnet) GetIpv4Cidr() string {
 // GetIpv4CidrOk returns a tuple with the Ipv4Cidr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsSubnet) GetIpv4CidrOk() (*string, bool) {
-	if o == nil || o.Ipv4Cidr == nil {
+	if o == nil || IsNil(o.Ipv4Cidr) {
 		return nil, false
 	}
 	return o.Ipv4Cidr, true
@@ -232,7 +236,7 @@ func (o *CloudAwsSubnet) GetIpv4CidrOk() (*string, bool) {
 
 // HasIpv4Cidr returns a boolean if a field has been set.
 func (o *CloudAwsSubnet) HasIpv4Cidr() bool {
-	if o != nil && o.Ipv4Cidr != nil {
+	if o != nil && !IsNil(o.Ipv4Cidr) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *CloudAwsSubnet) SetIpv4Cidr(v string) {
 
 // GetIpv6Cidr returns the Ipv6Cidr field value if set, zero value otherwise.
 func (o *CloudAwsSubnet) GetIpv6Cidr() string {
-	if o == nil || o.Ipv6Cidr == nil {
+	if o == nil || IsNil(o.Ipv6Cidr) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *CloudAwsSubnet) GetIpv6Cidr() string {
 // GetIpv6CidrOk returns a tuple with the Ipv6Cidr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsSubnet) GetIpv6CidrOk() (*string, bool) {
-	if o == nil || o.Ipv6Cidr == nil {
+	if o == nil || IsNil(o.Ipv6Cidr) {
 		return nil, false
 	}
 	return o.Ipv6Cidr, true
@@ -264,7 +268,7 @@ func (o *CloudAwsSubnet) GetIpv6CidrOk() (*string, bool) {
 
 // HasIpv6Cidr returns a boolean if a field has been set.
 func (o *CloudAwsSubnet) HasIpv6Cidr() bool {
-	if o != nil && o.Ipv6Cidr != nil {
+	if o != nil && !IsNil(o.Ipv6Cidr) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *CloudAwsSubnet) SetIpv6Cidr(v string) {
 
 // GetIsDefault returns the IsDefault field value if set, zero value otherwise.
 func (o *CloudAwsSubnet) GetIsDefault() bool {
-	if o == nil || o.IsDefault == nil {
+	if o == nil || IsNil(o.IsDefault) {
 		var ret bool
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *CloudAwsSubnet) GetIsDefault() bool {
 // GetIsDefaultOk returns a tuple with the IsDefault field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsSubnet) GetIsDefaultOk() (*bool, bool) {
-	if o == nil || o.IsDefault == nil {
+	if o == nil || IsNil(o.IsDefault) {
 		return nil, false
 	}
 	return o.IsDefault, true
@@ -296,7 +300,7 @@ func (o *CloudAwsSubnet) GetIsDefaultOk() (*bool, bool) {
 
 // HasIsDefault returns a boolean if a field has been set.
 func (o *CloudAwsSubnet) HasIsDefault() bool {
-	if o != nil && o.IsDefault != nil {
+	if o != nil && !IsNil(o.IsDefault) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *CloudAwsSubnet) SetIsDefault(v bool) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *CloudAwsSubnet) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *CloudAwsSubnet) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsSubnet) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -328,7 +332,7 @@ func (o *CloudAwsSubnet) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *CloudAwsSubnet) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -353,7 +357,7 @@ func (o *CloudAwsSubnet) GetSubnetTags() []CloudCloudTag {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsSubnet) GetSubnetTagsOk() ([]CloudCloudTag, bool) {
-	if o == nil || o.SubnetTags == nil {
+	if o == nil || IsNil(o.SubnetTags) {
 		return nil, false
 	}
 	return o.SubnetTags, true
@@ -361,7 +365,7 @@ func (o *CloudAwsSubnet) GetSubnetTagsOk() ([]CloudCloudTag, bool) {
 
 // HasSubnetTags returns a boolean if a field has been set.
 func (o *CloudAwsSubnet) HasSubnetTags() bool {
-	if o != nil && o.SubnetTags != nil {
+	if o != nil && IsNil(o.SubnetTags) {
 		return true
 	}
 
@@ -373,90 +377,127 @@ func (o *CloudAwsSubnet) SetSubnetTags(v []CloudCloudTag) {
 	o.SubnetTags = v
 }
 
-// GetAwsVpc returns the AwsVpc field value if set, zero value otherwise.
+// GetAwsVpc returns the AwsVpc field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudAwsSubnet) GetAwsVpc() CloudAwsVpcRelationship {
-	if o == nil || o.AwsVpc == nil {
+	if o == nil || IsNil(o.AwsVpc.Get()) {
 		var ret CloudAwsVpcRelationship
 		return ret
 	}
-	return *o.AwsVpc
+	return *o.AwsVpc.Get()
 }
 
 // GetAwsVpcOk returns a tuple with the AwsVpc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsSubnet) GetAwsVpcOk() (*CloudAwsVpcRelationship, bool) {
-	if o == nil || o.AwsVpc == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AwsVpc, true
+	return o.AwsVpc.Get(), o.AwsVpc.IsSet()
 }
 
 // HasAwsVpc returns a boolean if a field has been set.
 func (o *CloudAwsSubnet) HasAwsVpc() bool {
-	if o != nil && o.AwsVpc != nil {
+	if o != nil && o.AwsVpc.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAwsVpc gets a reference to the given CloudAwsVpcRelationship and assigns it to the AwsVpc field.
+// SetAwsVpc gets a reference to the given NullableCloudAwsVpcRelationship and assigns it to the AwsVpc field.
 func (o *CloudAwsSubnet) SetAwsVpc(v CloudAwsVpcRelationship) {
-	o.AwsVpc = &v
+	o.AwsVpc.Set(&v)
+}
+
+// SetAwsVpcNil sets the value for AwsVpc to be an explicit nil
+func (o *CloudAwsSubnet) SetAwsVpcNil() {
+	o.AwsVpc.Set(nil)
+}
+
+// UnsetAwsVpc ensures that no value is present for AwsVpc, not even an explicit nil
+func (o *CloudAwsSubnet) UnsetAwsVpc() {
+	o.AwsVpc.Unset()
 }
 
 func (o CloudAwsSubnet) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudAwsSubnet) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCloudBaseNetwork, errCloudBaseNetwork := json.Marshal(o.CloudBaseNetwork)
 	if errCloudBaseNetwork != nil {
-		return []byte{}, errCloudBaseNetwork
+		return map[string]interface{}{}, errCloudBaseNetwork
 	}
 	errCloudBaseNetwork = json.Unmarshal([]byte(serializedCloudBaseNetwork), &toSerialize)
 	if errCloudBaseNetwork != nil {
-		return []byte{}, errCloudBaseNetwork
+		return map[string]interface{}{}, errCloudBaseNetwork
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AutoAssignPrivateIpV6 != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AutoAssignPrivateIpV6) {
 		toSerialize["AutoAssignPrivateIpV6"] = o.AutoAssignPrivateIpV6
 	}
-	if o.AutoAssignPublicIpV4 != nil {
+	if !IsNil(o.AutoAssignPublicIpV4) {
 		toSerialize["AutoAssignPublicIpV4"] = o.AutoAssignPublicIpV4
 	}
-	if o.AvailabilityZoneName != nil {
+	if !IsNil(o.AvailabilityZoneName) {
 		toSerialize["AvailabilityZoneName"] = o.AvailabilityZoneName
 	}
-	if o.Ipv4Cidr != nil {
+	if !IsNil(o.Ipv4Cidr) {
 		toSerialize["Ipv4Cidr"] = o.Ipv4Cidr
 	}
-	if o.Ipv6Cidr != nil {
+	if !IsNil(o.Ipv6Cidr) {
 		toSerialize["Ipv6Cidr"] = o.Ipv6Cidr
 	}
-	if o.IsDefault != nil {
+	if !IsNil(o.IsDefault) {
 		toSerialize["IsDefault"] = o.IsDefault
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
 	if o.SubnetTags != nil {
 		toSerialize["SubnetTags"] = o.SubnetTags
 	}
-	if o.AwsVpc != nil {
-		toSerialize["AwsVpc"] = o.AwsVpc
+	if o.AwsVpc.IsSet() {
+		toSerialize["AwsVpc"] = o.AwsVpc.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudAwsSubnet) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudAwsSubnet) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudAwsSubnetWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -475,14 +516,14 @@ func (o *CloudAwsSubnet) UnmarshalJSON(bytes []byte) (err error) {
 		// If true, indicates that this is default subnet.
 		IsDefault *bool `json:"IsDefault,omitempty"`
 		// The state of the subnet (pending | available).
-		State      *string                  `json:"State,omitempty"`
-		SubnetTags []CloudCloudTag          `json:"SubnetTags,omitempty"`
-		AwsVpc     *CloudAwsVpcRelationship `json:"AwsVpc,omitempty"`
+		State      *string                         `json:"State,omitempty"`
+		SubnetTags []CloudCloudTag                 `json:"SubnetTags,omitempty"`
+		AwsVpc     NullableCloudAwsVpcRelationship `json:"AwsVpc,omitempty"`
 	}
 
 	varCloudAwsSubnetWithoutEmbeddedStruct := CloudAwsSubnetWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsSubnetWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudAwsSubnetWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudAwsSubnet := _CloudAwsSubnet{}
 		varCloudAwsSubnet.ClassId = varCloudAwsSubnetWithoutEmbeddedStruct.ClassId
@@ -503,7 +544,7 @@ func (o *CloudAwsSubnet) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudAwsSubnet := _CloudAwsSubnet{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsSubnet)
+	err = json.Unmarshal(data, &varCloudAwsSubnet)
 	if err == nil {
 		o.CloudBaseNetwork = varCloudAwsSubnet.CloudBaseNetwork
 	} else {
@@ -512,7 +553,7 @@ func (o *CloudAwsSubnet) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AutoAssignPrivateIpV6")

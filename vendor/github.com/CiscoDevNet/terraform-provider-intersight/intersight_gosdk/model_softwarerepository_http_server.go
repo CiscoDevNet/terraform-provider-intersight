@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SoftwarerepositoryHttpServer type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwarerepositoryHttpServer{}
 
 // SoftwarerepositoryHttpServer An external HTTP file server. This can represent the cisco.com website or a HTTP server in the user's datacenter.
 type SoftwarerepositoryHttpServer struct {
@@ -110,7 +114,7 @@ func (o *SoftwarerepositoryHttpServer) SetObjectType(v string) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *SoftwarerepositoryHttpServer) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *SoftwarerepositoryHttpServer) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryHttpServer) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -128,7 +132,7 @@ func (o *SoftwarerepositoryHttpServer) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *SoftwarerepositoryHttpServer) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *SoftwarerepositoryHttpServer) SetIsPasswordSet(v bool) {
 
 // GetLocationLink returns the LocationLink field value if set, zero value otherwise.
 func (o *SoftwarerepositoryHttpServer) GetLocationLink() string {
-	if o == nil || o.LocationLink == nil {
+	if o == nil || IsNil(o.LocationLink) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *SoftwarerepositoryHttpServer) GetLocationLink() string {
 // GetLocationLinkOk returns a tuple with the LocationLink field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryHttpServer) GetLocationLinkOk() (*string, bool) {
-	if o == nil || o.LocationLink == nil {
+	if o == nil || IsNil(o.LocationLink) {
 		return nil, false
 	}
 	return o.LocationLink, true
@@ -160,7 +164,7 @@ func (o *SoftwarerepositoryHttpServer) GetLocationLinkOk() (*string, bool) {
 
 // HasLocationLink returns a boolean if a field has been set.
 func (o *SoftwarerepositoryHttpServer) HasLocationLink() bool {
-	if o != nil && o.LocationLink != nil {
+	if o != nil && !IsNil(o.LocationLink) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *SoftwarerepositoryHttpServer) SetLocationLink(v string) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *SoftwarerepositoryHttpServer) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *SoftwarerepositoryHttpServer) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryHttpServer) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -192,7 +196,7 @@ func (o *SoftwarerepositoryHttpServer) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *SoftwarerepositoryHttpServer) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *SoftwarerepositoryHttpServer) SetPassword(v string) {
 
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *SoftwarerepositoryHttpServer) GetUsername() string {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *SoftwarerepositoryHttpServer) GetUsername() string {
 // GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryHttpServer) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		return nil, false
 	}
 	return o.Username, true
@@ -224,7 +228,7 @@ func (o *SoftwarerepositoryHttpServer) GetUsernameOk() (*string, bool) {
 
 // HasUsername returns a boolean if a field has been set.
 func (o *SoftwarerepositoryHttpServer) HasUsername() bool {
-	if o != nil && o.Username != nil {
+	if o != nil && !IsNil(o.Username) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *SoftwarerepositoryHttpServer) SetUsername(v string) {
 }
 
 func (o SoftwarerepositoryHttpServer) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwarerepositoryHttpServer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedSoftwarerepositoryFileServer, errSoftwarerepositoryFileServer := json.Marshal(o.SoftwarerepositoryFileServer)
 	if errSoftwarerepositoryFileServer != nil {
-		return []byte{}, errSoftwarerepositoryFileServer
+		return map[string]interface{}{}, errSoftwarerepositoryFileServer
 	}
 	errSoftwarerepositoryFileServer = json.Unmarshal([]byte(serializedSoftwarerepositoryFileServer), &toSerialize)
 	if errSoftwarerepositoryFileServer != nil {
-		return []byte{}, errSoftwarerepositoryFileServer
+		return map[string]interface{}{}, errSoftwarerepositoryFileServer
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsPasswordSet != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.LocationLink != nil {
+	if !IsNil(o.LocationLink) {
 		toSerialize["LocationLink"] = o.LocationLink
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.Username != nil {
+	if !IsNil(o.Username) {
 		toSerialize["Username"] = o.Username
 	}
 
@@ -269,10 +277,32 @@ func (o SoftwarerepositoryHttpServer) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwarerepositoryHttpServer) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwarerepositoryHttpServer) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwarerepositoryHttpServerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *SoftwarerepositoryHttpServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSoftwarerepositoryHttpServerWithoutEmbeddedStruct := SoftwarerepositoryHttpServerWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryHttpServerWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwarerepositoryHttpServerWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwarerepositoryHttpServer := _SoftwarerepositoryHttpServer{}
 		varSoftwarerepositoryHttpServer.ClassId = varSoftwarerepositoryHttpServerWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *SoftwarerepositoryHttpServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSoftwarerepositoryHttpServer := _SoftwarerepositoryHttpServer{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryHttpServer)
+	err = json.Unmarshal(data, &varSoftwarerepositoryHttpServer)
 	if err == nil {
 		o.SoftwarerepositoryFileServer = varSoftwarerepositoryHttpServer.SoftwarerepositoryFileServer
 	} else {
@@ -315,7 +345,7 @@ func (o *SoftwarerepositoryHttpServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsPasswordSet")

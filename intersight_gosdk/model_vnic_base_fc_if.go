@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicBaseFcIf type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicBaseFcIf{}
 
 // VnicBaseFcIf A Vhba specifying configuration settings.
 type VnicBaseFcIf struct {
@@ -29,13 +33,13 @@ type VnicBaseFcIf struct {
 	// Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.
 	PinGroupName *string `json:"PinGroupName,omitempty"`
 	// VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters. * `fc-initiator` - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems. * `fc-nvme-initiator` - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. * `fc-nvme-target` - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver. * `fc-target` - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver.
-	Type            *string                          `json:"Type,omitempty"`
-	FcAdapterPolicy *VnicFcAdapterPolicyRelationship `json:"FcAdapterPolicy,omitempty"`
-	FcNetworkPolicy *VnicFcNetworkPolicyRelationship `json:"FcNetworkPolicy,omitempty"`
-	FcQosPolicy     *VnicFcQosPolicyRelationship     `json:"FcQosPolicy,omitempty"`
+	Type            *string                                 `json:"Type,omitempty"`
+	FcAdapterPolicy NullableVnicFcAdapterPolicyRelationship `json:"FcAdapterPolicy,omitempty"`
+	FcNetworkPolicy NullableVnicFcNetworkPolicyRelationship `json:"FcNetworkPolicy,omitempty"`
+	FcQosPolicy     NullableVnicFcQosPolicyRelationship     `json:"FcQosPolicy,omitempty"`
 	// An array of relationships to fabricFcZonePolicy resources.
 	FcZonePolicies       []FabricFcZonePolicyRelationship `json:"FcZonePolicies,omitempty"`
-	WwpnPool             *FcpoolPoolRelationship          `json:"WwpnPool,omitempty"`
+	WwpnPool             NullableFcpoolPoolRelationship   `json:"WwpnPool,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *VnicBaseFcIf) SetObjectType(v string) {
 
 // GetPersistentBindings returns the PersistentBindings field value if set, zero value otherwise.
 func (o *VnicBaseFcIf) GetPersistentBindings() bool {
-	if o == nil || o.PersistentBindings == nil {
+	if o == nil || IsNil(o.PersistentBindings) {
 		var ret bool
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *VnicBaseFcIf) GetPersistentBindings() bool {
 // GetPersistentBindingsOk returns a tuple with the PersistentBindings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicBaseFcIf) GetPersistentBindingsOk() (*bool, bool) {
-	if o == nil || o.PersistentBindings == nil {
+	if o == nil || IsNil(o.PersistentBindings) {
 		return nil, false
 	}
 	return o.PersistentBindings, true
@@ -132,7 +136,7 @@ func (o *VnicBaseFcIf) GetPersistentBindingsOk() (*bool, bool) {
 
 // HasPersistentBindings returns a boolean if a field has been set.
 func (o *VnicBaseFcIf) HasPersistentBindings() bool {
-	if o != nil && o.PersistentBindings != nil {
+	if o != nil && !IsNil(o.PersistentBindings) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *VnicBaseFcIf) SetPersistentBindings(v bool) {
 
 // GetPinGroupName returns the PinGroupName field value if set, zero value otherwise.
 func (o *VnicBaseFcIf) GetPinGroupName() string {
-	if o == nil || o.PinGroupName == nil {
+	if o == nil || IsNil(o.PinGroupName) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *VnicBaseFcIf) GetPinGroupName() string {
 // GetPinGroupNameOk returns a tuple with the PinGroupName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicBaseFcIf) GetPinGroupNameOk() (*string, bool) {
-	if o == nil || o.PinGroupName == nil {
+	if o == nil || IsNil(o.PinGroupName) {
 		return nil, false
 	}
 	return o.PinGroupName, true
@@ -164,7 +168,7 @@ func (o *VnicBaseFcIf) GetPinGroupNameOk() (*string, bool) {
 
 // HasPinGroupName returns a boolean if a field has been set.
 func (o *VnicBaseFcIf) HasPinGroupName() bool {
-	if o != nil && o.PinGroupName != nil {
+	if o != nil && !IsNil(o.PinGroupName) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *VnicBaseFcIf) SetPinGroupName(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *VnicBaseFcIf) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *VnicBaseFcIf) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicBaseFcIf) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -196,7 +200,7 @@ func (o *VnicBaseFcIf) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *VnicBaseFcIf) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -208,100 +212,133 @@ func (o *VnicBaseFcIf) SetType(v string) {
 	o.Type = &v
 }
 
-// GetFcAdapterPolicy returns the FcAdapterPolicy field value if set, zero value otherwise.
+// GetFcAdapterPolicy returns the FcAdapterPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseFcIf) GetFcAdapterPolicy() VnicFcAdapterPolicyRelationship {
-	if o == nil || o.FcAdapterPolicy == nil {
+	if o == nil || IsNil(o.FcAdapterPolicy.Get()) {
 		var ret VnicFcAdapterPolicyRelationship
 		return ret
 	}
-	return *o.FcAdapterPolicy
+	return *o.FcAdapterPolicy.Get()
 }
 
 // GetFcAdapterPolicyOk returns a tuple with the FcAdapterPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseFcIf) GetFcAdapterPolicyOk() (*VnicFcAdapterPolicyRelationship, bool) {
-	if o == nil || o.FcAdapterPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FcAdapterPolicy, true
+	return o.FcAdapterPolicy.Get(), o.FcAdapterPolicy.IsSet()
 }
 
 // HasFcAdapterPolicy returns a boolean if a field has been set.
 func (o *VnicBaseFcIf) HasFcAdapterPolicy() bool {
-	if o != nil && o.FcAdapterPolicy != nil {
+	if o != nil && o.FcAdapterPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFcAdapterPolicy gets a reference to the given VnicFcAdapterPolicyRelationship and assigns it to the FcAdapterPolicy field.
+// SetFcAdapterPolicy gets a reference to the given NullableVnicFcAdapterPolicyRelationship and assigns it to the FcAdapterPolicy field.
 func (o *VnicBaseFcIf) SetFcAdapterPolicy(v VnicFcAdapterPolicyRelationship) {
-	o.FcAdapterPolicy = &v
+	o.FcAdapterPolicy.Set(&v)
 }
 
-// GetFcNetworkPolicy returns the FcNetworkPolicy field value if set, zero value otherwise.
+// SetFcAdapterPolicyNil sets the value for FcAdapterPolicy to be an explicit nil
+func (o *VnicBaseFcIf) SetFcAdapterPolicyNil() {
+	o.FcAdapterPolicy.Set(nil)
+}
+
+// UnsetFcAdapterPolicy ensures that no value is present for FcAdapterPolicy, not even an explicit nil
+func (o *VnicBaseFcIf) UnsetFcAdapterPolicy() {
+	o.FcAdapterPolicy.Unset()
+}
+
+// GetFcNetworkPolicy returns the FcNetworkPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseFcIf) GetFcNetworkPolicy() VnicFcNetworkPolicyRelationship {
-	if o == nil || o.FcNetworkPolicy == nil {
+	if o == nil || IsNil(o.FcNetworkPolicy.Get()) {
 		var ret VnicFcNetworkPolicyRelationship
 		return ret
 	}
-	return *o.FcNetworkPolicy
+	return *o.FcNetworkPolicy.Get()
 }
 
 // GetFcNetworkPolicyOk returns a tuple with the FcNetworkPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseFcIf) GetFcNetworkPolicyOk() (*VnicFcNetworkPolicyRelationship, bool) {
-	if o == nil || o.FcNetworkPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FcNetworkPolicy, true
+	return o.FcNetworkPolicy.Get(), o.FcNetworkPolicy.IsSet()
 }
 
 // HasFcNetworkPolicy returns a boolean if a field has been set.
 func (o *VnicBaseFcIf) HasFcNetworkPolicy() bool {
-	if o != nil && o.FcNetworkPolicy != nil {
+	if o != nil && o.FcNetworkPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFcNetworkPolicy gets a reference to the given VnicFcNetworkPolicyRelationship and assigns it to the FcNetworkPolicy field.
+// SetFcNetworkPolicy gets a reference to the given NullableVnicFcNetworkPolicyRelationship and assigns it to the FcNetworkPolicy field.
 func (o *VnicBaseFcIf) SetFcNetworkPolicy(v VnicFcNetworkPolicyRelationship) {
-	o.FcNetworkPolicy = &v
+	o.FcNetworkPolicy.Set(&v)
 }
 
-// GetFcQosPolicy returns the FcQosPolicy field value if set, zero value otherwise.
+// SetFcNetworkPolicyNil sets the value for FcNetworkPolicy to be an explicit nil
+func (o *VnicBaseFcIf) SetFcNetworkPolicyNil() {
+	o.FcNetworkPolicy.Set(nil)
+}
+
+// UnsetFcNetworkPolicy ensures that no value is present for FcNetworkPolicy, not even an explicit nil
+func (o *VnicBaseFcIf) UnsetFcNetworkPolicy() {
+	o.FcNetworkPolicy.Unset()
+}
+
+// GetFcQosPolicy returns the FcQosPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseFcIf) GetFcQosPolicy() VnicFcQosPolicyRelationship {
-	if o == nil || o.FcQosPolicy == nil {
+	if o == nil || IsNil(o.FcQosPolicy.Get()) {
 		var ret VnicFcQosPolicyRelationship
 		return ret
 	}
-	return *o.FcQosPolicy
+	return *o.FcQosPolicy.Get()
 }
 
 // GetFcQosPolicyOk returns a tuple with the FcQosPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseFcIf) GetFcQosPolicyOk() (*VnicFcQosPolicyRelationship, bool) {
-	if o == nil || o.FcQosPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FcQosPolicy, true
+	return o.FcQosPolicy.Get(), o.FcQosPolicy.IsSet()
 }
 
 // HasFcQosPolicy returns a boolean if a field has been set.
 func (o *VnicBaseFcIf) HasFcQosPolicy() bool {
-	if o != nil && o.FcQosPolicy != nil {
+	if o != nil && o.FcQosPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFcQosPolicy gets a reference to the given VnicFcQosPolicyRelationship and assigns it to the FcQosPolicy field.
+// SetFcQosPolicy gets a reference to the given NullableVnicFcQosPolicyRelationship and assigns it to the FcQosPolicy field.
 func (o *VnicBaseFcIf) SetFcQosPolicy(v VnicFcQosPolicyRelationship) {
-	o.FcQosPolicy = &v
+	o.FcQosPolicy.Set(&v)
+}
+
+// SetFcQosPolicyNil sets the value for FcQosPolicy to be an explicit nil
+func (o *VnicBaseFcIf) SetFcQosPolicyNil() {
+	o.FcQosPolicy.Set(nil)
+}
+
+// UnsetFcQosPolicy ensures that no value is present for FcQosPolicy, not even an explicit nil
+func (o *VnicBaseFcIf) UnsetFcQosPolicy() {
+	o.FcQosPolicy.Unset()
 }
 
 // GetFcZonePolicies returns the FcZonePolicies field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -317,7 +354,7 @@ func (o *VnicBaseFcIf) GetFcZonePolicies() []FabricFcZonePolicyRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseFcIf) GetFcZonePoliciesOk() ([]FabricFcZonePolicyRelationship, bool) {
-	if o == nil || o.FcZonePolicies == nil {
+	if o == nil || IsNil(o.FcZonePolicies) {
 		return nil, false
 	}
 	return o.FcZonePolicies, true
@@ -325,7 +362,7 @@ func (o *VnicBaseFcIf) GetFcZonePoliciesOk() ([]FabricFcZonePolicyRelationship, 
 
 // HasFcZonePolicies returns a boolean if a field has been set.
 func (o *VnicBaseFcIf) HasFcZonePolicies() bool {
-	if o != nil && o.FcZonePolicies != nil {
+	if o != nil && IsNil(o.FcZonePolicies) {
 		return true
 	}
 
@@ -337,87 +374,124 @@ func (o *VnicBaseFcIf) SetFcZonePolicies(v []FabricFcZonePolicyRelationship) {
 	o.FcZonePolicies = v
 }
 
-// GetWwpnPool returns the WwpnPool field value if set, zero value otherwise.
+// GetWwpnPool returns the WwpnPool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicBaseFcIf) GetWwpnPool() FcpoolPoolRelationship {
-	if o == nil || o.WwpnPool == nil {
+	if o == nil || IsNil(o.WwpnPool.Get()) {
 		var ret FcpoolPoolRelationship
 		return ret
 	}
-	return *o.WwpnPool
+	return *o.WwpnPool.Get()
 }
 
 // GetWwpnPoolOk returns a tuple with the WwpnPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicBaseFcIf) GetWwpnPoolOk() (*FcpoolPoolRelationship, bool) {
-	if o == nil || o.WwpnPool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WwpnPool, true
+	return o.WwpnPool.Get(), o.WwpnPool.IsSet()
 }
 
 // HasWwpnPool returns a boolean if a field has been set.
 func (o *VnicBaseFcIf) HasWwpnPool() bool {
-	if o != nil && o.WwpnPool != nil {
+	if o != nil && o.WwpnPool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWwpnPool gets a reference to the given FcpoolPoolRelationship and assigns it to the WwpnPool field.
+// SetWwpnPool gets a reference to the given NullableFcpoolPoolRelationship and assigns it to the WwpnPool field.
 func (o *VnicBaseFcIf) SetWwpnPool(v FcpoolPoolRelationship) {
-	o.WwpnPool = &v
+	o.WwpnPool.Set(&v)
+}
+
+// SetWwpnPoolNil sets the value for WwpnPool to be an explicit nil
+func (o *VnicBaseFcIf) SetWwpnPoolNil() {
+	o.WwpnPool.Set(nil)
+}
+
+// UnsetWwpnPool ensures that no value is present for WwpnPool, not even an explicit nil
+func (o *VnicBaseFcIf) UnsetWwpnPool() {
+	o.WwpnPool.Unset()
 }
 
 func (o VnicBaseFcIf) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicBaseFcIf) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicyItem, errPolicyAbstractPolicyItem := json.Marshal(o.PolicyAbstractPolicyItem)
 	if errPolicyAbstractPolicyItem != nil {
-		return []byte{}, errPolicyAbstractPolicyItem
+		return map[string]interface{}{}, errPolicyAbstractPolicyItem
 	}
 	errPolicyAbstractPolicyItem = json.Unmarshal([]byte(serializedPolicyAbstractPolicyItem), &toSerialize)
 	if errPolicyAbstractPolicyItem != nil {
-		return []byte{}, errPolicyAbstractPolicyItem
+		return map[string]interface{}{}, errPolicyAbstractPolicyItem
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.PersistentBindings != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.PersistentBindings) {
 		toSerialize["PersistentBindings"] = o.PersistentBindings
 	}
-	if o.PinGroupName != nil {
+	if !IsNil(o.PinGroupName) {
 		toSerialize["PinGroupName"] = o.PinGroupName
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.FcAdapterPolicy != nil {
-		toSerialize["FcAdapterPolicy"] = o.FcAdapterPolicy
+	if o.FcAdapterPolicy.IsSet() {
+		toSerialize["FcAdapterPolicy"] = o.FcAdapterPolicy.Get()
 	}
-	if o.FcNetworkPolicy != nil {
-		toSerialize["FcNetworkPolicy"] = o.FcNetworkPolicy
+	if o.FcNetworkPolicy.IsSet() {
+		toSerialize["FcNetworkPolicy"] = o.FcNetworkPolicy.Get()
 	}
-	if o.FcQosPolicy != nil {
-		toSerialize["FcQosPolicy"] = o.FcQosPolicy
+	if o.FcQosPolicy.IsSet() {
+		toSerialize["FcQosPolicy"] = o.FcQosPolicy.Get()
 	}
 	if o.FcZonePolicies != nil {
 		toSerialize["FcZonePolicies"] = o.FcZonePolicies
 	}
-	if o.WwpnPool != nil {
-		toSerialize["WwpnPool"] = o.WwpnPool
+	if o.WwpnPool.IsSet() {
+		toSerialize["WwpnPool"] = o.WwpnPool.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicBaseFcIf) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicBaseFcIf) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicBaseFcIfWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -428,18 +502,18 @@ func (o *VnicBaseFcIf) UnmarshalJSON(bytes []byte) (err error) {
 		// Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.
 		PinGroupName *string `json:"PinGroupName,omitempty"`
 		// VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters. * `fc-initiator` - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems. * `fc-nvme-initiator` - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. * `fc-nvme-target` - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver. * `fc-target` - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver.
-		Type            *string                          `json:"Type,omitempty"`
-		FcAdapterPolicy *VnicFcAdapterPolicyRelationship `json:"FcAdapterPolicy,omitempty"`
-		FcNetworkPolicy *VnicFcNetworkPolicyRelationship `json:"FcNetworkPolicy,omitempty"`
-		FcQosPolicy     *VnicFcQosPolicyRelationship     `json:"FcQosPolicy,omitempty"`
+		Type            *string                                 `json:"Type,omitempty"`
+		FcAdapterPolicy NullableVnicFcAdapterPolicyRelationship `json:"FcAdapterPolicy,omitempty"`
+		FcNetworkPolicy NullableVnicFcNetworkPolicyRelationship `json:"FcNetworkPolicy,omitempty"`
+		FcQosPolicy     NullableVnicFcQosPolicyRelationship     `json:"FcQosPolicy,omitempty"`
 		// An array of relationships to fabricFcZonePolicy resources.
 		FcZonePolicies []FabricFcZonePolicyRelationship `json:"FcZonePolicies,omitempty"`
-		WwpnPool       *FcpoolPoolRelationship          `json:"WwpnPool,omitempty"`
+		WwpnPool       NullableFcpoolPoolRelationship   `json:"WwpnPool,omitempty"`
 	}
 
 	varVnicBaseFcIfWithoutEmbeddedStruct := VnicBaseFcIfWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicBaseFcIfWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicBaseFcIfWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicBaseFcIf := _VnicBaseFcIf{}
 		varVnicBaseFcIf.ClassId = varVnicBaseFcIfWithoutEmbeddedStruct.ClassId
@@ -459,7 +533,7 @@ func (o *VnicBaseFcIf) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicBaseFcIf := _VnicBaseFcIf{}
 
-	err = json.Unmarshal(bytes, &varVnicBaseFcIf)
+	err = json.Unmarshal(data, &varVnicBaseFcIf)
 	if err == nil {
 		o.PolicyAbstractPolicyItem = varVnicBaseFcIf.PolicyAbstractPolicyItem
 	} else {
@@ -468,7 +542,7 @@ func (o *VnicBaseFcIf) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "PersistentBindings")

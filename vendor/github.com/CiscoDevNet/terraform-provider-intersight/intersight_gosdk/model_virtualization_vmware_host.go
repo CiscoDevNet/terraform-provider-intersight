@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the VirtualizationVmwareHost type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareHost{}
 
 // VirtualizationVmwareHost The VMware Host entity with its attributes. Every Host belongs to a Datacenter and may run VMs.
 type VirtualizationVmwareHost struct {
@@ -47,17 +51,17 @@ type VirtualizationVmwareHost struct {
 	// Time zone this host is in.
 	TimeZone *string `json:"TimeZone,omitempty"`
 	// The identity of this host within vCenter (optional).
-	VcenterHostId *string                                     `json:"VcenterHostId,omitempty"`
-	Cluster       *VirtualizationVmwareClusterRelationship    `json:"Cluster,omitempty"`
-	Datacenter    *VirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
+	VcenterHostId *string                                            `json:"VcenterHostId,omitempty"`
+	Cluster       NullableVirtualizationVmwareClusterRelationship    `json:"Cluster,omitempty"`
+	Datacenter    NullableVirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
 	// An array of relationships to virtualizationVmwareDatastore resources.
 	Datastores []VirtualizationVmwareDatastoreRelationship `json:"Datastores,omitempty"`
 	// An array of relationships to virtualizationVmwareDistributedNetwork resources.
 	DistributedNetworks []VirtualizationVmwareDistributedNetworkRelationship `json:"DistributedNetworks,omitempty"`
 	// An array of relationships to virtualizationVmwareDistributedSwitch resources.
 	DistributedSwitches  []VirtualizationVmwareDistributedSwitchRelationship `json:"DistributedSwitches,omitempty"`
-	HyperFlexNode        *HyperflexNodeRelationship                          `json:"HyperFlexNode,omitempty"`
-	Server               *ComputePhysicalSummaryRelationship                 `json:"Server,omitempty"`
+	HyperFlexNode        NullableHyperflexNodeRelationship                   `json:"HyperFlexNode,omitempty"`
+	Server               NullableComputePhysicalSummaryRelationship          `json:"Server,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -144,7 +148,7 @@ func (o *VirtualizationVmwareHost) SetObjectType(v string) {
 
 // GetBootTime returns the BootTime field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetBootTime() time.Time {
-	if o == nil || o.BootTime == nil {
+	if o == nil || IsNil(o.BootTime) {
 		var ret time.Time
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *VirtualizationVmwareHost) GetBootTime() time.Time {
 // GetBootTimeOk returns a tuple with the BootTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareHost) GetBootTimeOk() (*time.Time, bool) {
-	if o == nil || o.BootTime == nil {
+	if o == nil || IsNil(o.BootTime) {
 		return nil, false
 	}
 	return o.BootTime, true
@@ -162,7 +166,7 @@ func (o *VirtualizationVmwareHost) GetBootTimeOk() (*time.Time, bool) {
 
 // HasBootTime returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasBootTime() bool {
-	if o != nil && o.BootTime != nil {
+	if o != nil && !IsNil(o.BootTime) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *VirtualizationVmwareHost) SetBootTime(v time.Time) {
 
 // GetConnectionState returns the ConnectionState field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetConnectionState() string {
-	if o == nil || o.ConnectionState == nil {
+	if o == nil || IsNil(o.ConnectionState) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *VirtualizationVmwareHost) GetConnectionState() string {
 // GetConnectionStateOk returns a tuple with the ConnectionState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareHost) GetConnectionStateOk() (*string, bool) {
-	if o == nil || o.ConnectionState == nil {
+	if o == nil || IsNil(o.ConnectionState) {
 		return nil, false
 	}
 	return o.ConnectionState, true
@@ -194,7 +198,7 @@ func (o *VirtualizationVmwareHost) GetConnectionStateOk() (*string, bool) {
 
 // HasConnectionState returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasConnectionState() bool {
-	if o != nil && o.ConnectionState != nil {
+	if o != nil && !IsNil(o.ConnectionState) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *VirtualizationVmwareHost) SetConnectionState(v string) {
 
 // GetDcInvPath returns the DcInvPath field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetDcInvPath() string {
-	if o == nil || o.DcInvPath == nil {
+	if o == nil || IsNil(o.DcInvPath) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *VirtualizationVmwareHost) GetDcInvPath() string {
 // GetDcInvPathOk returns a tuple with the DcInvPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareHost) GetDcInvPathOk() (*string, bool) {
-	if o == nil || o.DcInvPath == nil {
+	if o == nil || IsNil(o.DcInvPath) {
 		return nil, false
 	}
 	return o.DcInvPath, true
@@ -226,7 +230,7 @@ func (o *VirtualizationVmwareHost) GetDcInvPathOk() (*string, bool) {
 
 // HasDcInvPath returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasDcInvPath() bool {
-	if o != nil && o.DcInvPath != nil {
+	if o != nil && !IsNil(o.DcInvPath) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *VirtualizationVmwareHost) GetDnsServers() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareHost) GetDnsServersOk() ([]string, bool) {
-	if o == nil || o.DnsServers == nil {
+	if o == nil || IsNil(o.DnsServers) {
 		return nil, false
 	}
 	return o.DnsServers, true
@@ -259,7 +263,7 @@ func (o *VirtualizationVmwareHost) GetDnsServersOk() ([]string, bool) {
 
 // HasDnsServers returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasDnsServers() bool {
-	if o != nil && o.DnsServers != nil {
+	if o != nil && IsNil(o.DnsServers) {
 		return true
 	}
 
@@ -273,7 +277,7 @@ func (o *VirtualizationVmwareHost) SetDnsServers(v []string) {
 
 // GetHwPowerState returns the HwPowerState field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetHwPowerState() string {
-	if o == nil || o.HwPowerState == nil {
+	if o == nil || IsNil(o.HwPowerState) {
 		var ret string
 		return ret
 	}
@@ -283,7 +287,7 @@ func (o *VirtualizationVmwareHost) GetHwPowerState() string {
 // GetHwPowerStateOk returns a tuple with the HwPowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareHost) GetHwPowerStateOk() (*string, bool) {
-	if o == nil || o.HwPowerState == nil {
+	if o == nil || IsNil(o.HwPowerState) {
 		return nil, false
 	}
 	return o.HwPowerState, true
@@ -291,7 +295,7 @@ func (o *VirtualizationVmwareHost) GetHwPowerStateOk() (*string, bool) {
 
 // HasHwPowerState returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasHwPowerState() bool {
-	if o != nil && o.HwPowerState != nil {
+	if o != nil && !IsNil(o.HwPowerState) {
 		return true
 	}
 
@@ -305,7 +309,7 @@ func (o *VirtualizationVmwareHost) SetHwPowerState(v string) {
 
 // GetIsSshEnabled returns the IsSshEnabled field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetIsSshEnabled() bool {
-	if o == nil || o.IsSshEnabled == nil {
+	if o == nil || IsNil(o.IsSshEnabled) {
 		var ret bool
 		return ret
 	}
@@ -315,7 +319,7 @@ func (o *VirtualizationVmwareHost) GetIsSshEnabled() bool {
 // GetIsSshEnabledOk returns a tuple with the IsSshEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareHost) GetIsSshEnabledOk() (*bool, bool) {
-	if o == nil || o.IsSshEnabled == nil {
+	if o == nil || IsNil(o.IsSshEnabled) {
 		return nil, false
 	}
 	return o.IsSshEnabled, true
@@ -323,7 +327,7 @@ func (o *VirtualizationVmwareHost) GetIsSshEnabledOk() (*bool, bool) {
 
 // HasIsSshEnabled returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasIsSshEnabled() bool {
-	if o != nil && o.IsSshEnabled != nil {
+	if o != nil && !IsNil(o.IsSshEnabled) {
 		return true
 	}
 
@@ -337,7 +341,7 @@ func (o *VirtualizationVmwareHost) SetIsSshEnabled(v bool) {
 
 // GetNetworkAdapterCount returns the NetworkAdapterCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetNetworkAdapterCount() int64 {
-	if o == nil || o.NetworkAdapterCount == nil {
+	if o == nil || IsNil(o.NetworkAdapterCount) {
 		var ret int64
 		return ret
 	}
@@ -347,7 +351,7 @@ func (o *VirtualizationVmwareHost) GetNetworkAdapterCount() int64 {
 // GetNetworkAdapterCountOk returns a tuple with the NetworkAdapterCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareHost) GetNetworkAdapterCountOk() (*int64, bool) {
-	if o == nil || o.NetworkAdapterCount == nil {
+	if o == nil || IsNil(o.NetworkAdapterCount) {
 		return nil, false
 	}
 	return o.NetworkAdapterCount, true
@@ -355,7 +359,7 @@ func (o *VirtualizationVmwareHost) GetNetworkAdapterCountOk() (*int64, bool) {
 
 // HasNetworkAdapterCount returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasNetworkAdapterCount() bool {
-	if o != nil && o.NetworkAdapterCount != nil {
+	if o != nil && !IsNil(o.NetworkAdapterCount) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *VirtualizationVmwareHost) GetNtpServers() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareHost) GetNtpServersOk() ([]string, bool) {
-	if o == nil || o.NtpServers == nil {
+	if o == nil || IsNil(o.NtpServers) {
 		return nil, false
 	}
 	return o.NtpServers, true
@@ -388,7 +392,7 @@ func (o *VirtualizationVmwareHost) GetNtpServersOk() ([]string, bool) {
 
 // HasNtpServers returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasNtpServers() bool {
-	if o != nil && o.NtpServers != nil {
+	if o != nil && IsNil(o.NtpServers) {
 		return true
 	}
 
@@ -402,7 +406,7 @@ func (o *VirtualizationVmwareHost) SetNtpServers(v []string) {
 
 // GetQuarantineMode returns the QuarantineMode field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetQuarantineMode() bool {
-	if o == nil || o.QuarantineMode == nil {
+	if o == nil || IsNil(o.QuarantineMode) {
 		var ret bool
 		return ret
 	}
@@ -412,7 +416,7 @@ func (o *VirtualizationVmwareHost) GetQuarantineMode() bool {
 // GetQuarantineModeOk returns a tuple with the QuarantineMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareHost) GetQuarantineModeOk() (*bool, bool) {
-	if o == nil || o.QuarantineMode == nil {
+	if o == nil || IsNil(o.QuarantineMode) {
 		return nil, false
 	}
 	return o.QuarantineMode, true
@@ -420,7 +424,7 @@ func (o *VirtualizationVmwareHost) GetQuarantineModeOk() (*bool, bool) {
 
 // HasQuarantineMode returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasQuarantineMode() bool {
-	if o != nil && o.QuarantineMode != nil {
+	if o != nil && !IsNil(o.QuarantineMode) {
 		return true
 	}
 
@@ -434,7 +438,7 @@ func (o *VirtualizationVmwareHost) SetQuarantineMode(v bool) {
 
 // GetResourceConsumed returns the ResourceConsumed field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareHost) GetResourceConsumed() VirtualizationVmwareResourceConsumption {
-	if o == nil || o.ResourceConsumed.Get() == nil {
+	if o == nil || IsNil(o.ResourceConsumed.Get()) {
 		var ret VirtualizationVmwareResourceConsumption
 		return ret
 	}
@@ -477,7 +481,7 @@ func (o *VirtualizationVmwareHost) UnsetResourceConsumed() {
 
 // GetStorageAdapterCount returns the StorageAdapterCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetStorageAdapterCount() int64 {
-	if o == nil || o.StorageAdapterCount == nil {
+	if o == nil || IsNil(o.StorageAdapterCount) {
 		var ret int64
 		return ret
 	}
@@ -487,7 +491,7 @@ func (o *VirtualizationVmwareHost) GetStorageAdapterCount() int64 {
 // GetStorageAdapterCountOk returns a tuple with the StorageAdapterCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareHost) GetStorageAdapterCountOk() (*int64, bool) {
-	if o == nil || o.StorageAdapterCount == nil {
+	if o == nil || IsNil(o.StorageAdapterCount) {
 		return nil, false
 	}
 	return o.StorageAdapterCount, true
@@ -495,7 +499,7 @@ func (o *VirtualizationVmwareHost) GetStorageAdapterCountOk() (*int64, bool) {
 
 // HasStorageAdapterCount returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasStorageAdapterCount() bool {
-	if o != nil && o.StorageAdapterCount != nil {
+	if o != nil && !IsNil(o.StorageAdapterCount) {
 		return true
 	}
 
@@ -509,7 +513,7 @@ func (o *VirtualizationVmwareHost) SetStorageAdapterCount(v int64) {
 
 // GetTimeZone returns the TimeZone field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetTimeZone() string {
-	if o == nil || o.TimeZone == nil {
+	if o == nil || IsNil(o.TimeZone) {
 		var ret string
 		return ret
 	}
@@ -519,7 +523,7 @@ func (o *VirtualizationVmwareHost) GetTimeZone() string {
 // GetTimeZoneOk returns a tuple with the TimeZone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareHost) GetTimeZoneOk() (*string, bool) {
-	if o == nil || o.TimeZone == nil {
+	if o == nil || IsNil(o.TimeZone) {
 		return nil, false
 	}
 	return o.TimeZone, true
@@ -527,7 +531,7 @@ func (o *VirtualizationVmwareHost) GetTimeZoneOk() (*string, bool) {
 
 // HasTimeZone returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasTimeZone() bool {
-	if o != nil && o.TimeZone != nil {
+	if o != nil && !IsNil(o.TimeZone) {
 		return true
 	}
 
@@ -541,7 +545,7 @@ func (o *VirtualizationVmwareHost) SetTimeZone(v string) {
 
 // GetVcenterHostId returns the VcenterHostId field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetVcenterHostId() string {
-	if o == nil || o.VcenterHostId == nil {
+	if o == nil || IsNil(o.VcenterHostId) {
 		var ret string
 		return ret
 	}
@@ -551,7 +555,7 @@ func (o *VirtualizationVmwareHost) GetVcenterHostId() string {
 // GetVcenterHostIdOk returns a tuple with the VcenterHostId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareHost) GetVcenterHostIdOk() (*string, bool) {
-	if o == nil || o.VcenterHostId == nil {
+	if o == nil || IsNil(o.VcenterHostId) {
 		return nil, false
 	}
 	return o.VcenterHostId, true
@@ -559,7 +563,7 @@ func (o *VirtualizationVmwareHost) GetVcenterHostIdOk() (*string, bool) {
 
 // HasVcenterHostId returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasVcenterHostId() bool {
-	if o != nil && o.VcenterHostId != nil {
+	if o != nil && !IsNil(o.VcenterHostId) {
 		return true
 	}
 
@@ -571,68 +575,90 @@ func (o *VirtualizationVmwareHost) SetVcenterHostId(v string) {
 	o.VcenterHostId = &v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareHost) GetCluster() VirtualizationVmwareClusterRelationship {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster.Get()) {
 		var ret VirtualizationVmwareClusterRelationship
 		return ret
 	}
-	return *o.Cluster
+	return *o.Cluster.Get()
 }
 
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareHost) GetClusterOk() (*VirtualizationVmwareClusterRelationship, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.Cluster.Get(), o.Cluster.IsSet()
 }
 
 // HasCluster returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && o.Cluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given VirtualizationVmwareClusterRelationship and assigns it to the Cluster field.
+// SetCluster gets a reference to the given NullableVirtualizationVmwareClusterRelationship and assigns it to the Cluster field.
 func (o *VirtualizationVmwareHost) SetCluster(v VirtualizationVmwareClusterRelationship) {
-	o.Cluster = &v
+	o.Cluster.Set(&v)
 }
 
-// GetDatacenter returns the Datacenter field value if set, zero value otherwise.
+// SetClusterNil sets the value for Cluster to be an explicit nil
+func (o *VirtualizationVmwareHost) SetClusterNil() {
+	o.Cluster.Set(nil)
+}
+
+// UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
+func (o *VirtualizationVmwareHost) UnsetCluster() {
+	o.Cluster.Unset()
+}
+
+// GetDatacenter returns the Datacenter field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareHost) GetDatacenter() VirtualizationVmwareDatacenterRelationship {
-	if o == nil || o.Datacenter == nil {
+	if o == nil || IsNil(o.Datacenter.Get()) {
 		var ret VirtualizationVmwareDatacenterRelationship
 		return ret
 	}
-	return *o.Datacenter
+	return *o.Datacenter.Get()
 }
 
 // GetDatacenterOk returns a tuple with the Datacenter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareHost) GetDatacenterOk() (*VirtualizationVmwareDatacenterRelationship, bool) {
-	if o == nil || o.Datacenter == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Datacenter, true
+	return o.Datacenter.Get(), o.Datacenter.IsSet()
 }
 
 // HasDatacenter returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasDatacenter() bool {
-	if o != nil && o.Datacenter != nil {
+	if o != nil && o.Datacenter.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDatacenter gets a reference to the given VirtualizationVmwareDatacenterRelationship and assigns it to the Datacenter field.
+// SetDatacenter gets a reference to the given NullableVirtualizationVmwareDatacenterRelationship and assigns it to the Datacenter field.
 func (o *VirtualizationVmwareHost) SetDatacenter(v VirtualizationVmwareDatacenterRelationship) {
-	o.Datacenter = &v
+	o.Datacenter.Set(&v)
+}
+
+// SetDatacenterNil sets the value for Datacenter to be an explicit nil
+func (o *VirtualizationVmwareHost) SetDatacenterNil() {
+	o.Datacenter.Set(nil)
+}
+
+// UnsetDatacenter ensures that no value is present for Datacenter, not even an explicit nil
+func (o *VirtualizationVmwareHost) UnsetDatacenter() {
+	o.Datacenter.Unset()
 }
 
 // GetDatastores returns the Datastores field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -648,7 +674,7 @@ func (o *VirtualizationVmwareHost) GetDatastores() []VirtualizationVmwareDatasto
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareHost) GetDatastoresOk() ([]VirtualizationVmwareDatastoreRelationship, bool) {
-	if o == nil || o.Datastores == nil {
+	if o == nil || IsNil(o.Datastores) {
 		return nil, false
 	}
 	return o.Datastores, true
@@ -656,7 +682,7 @@ func (o *VirtualizationVmwareHost) GetDatastoresOk() ([]VirtualizationVmwareData
 
 // HasDatastores returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasDatastores() bool {
-	if o != nil && o.Datastores != nil {
+	if o != nil && IsNil(o.Datastores) {
 		return true
 	}
 
@@ -681,7 +707,7 @@ func (o *VirtualizationVmwareHost) GetDistributedNetworks() []VirtualizationVmwa
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareHost) GetDistributedNetworksOk() ([]VirtualizationVmwareDistributedNetworkRelationship, bool) {
-	if o == nil || o.DistributedNetworks == nil {
+	if o == nil || IsNil(o.DistributedNetworks) {
 		return nil, false
 	}
 	return o.DistributedNetworks, true
@@ -689,7 +715,7 @@ func (o *VirtualizationVmwareHost) GetDistributedNetworksOk() ([]VirtualizationV
 
 // HasDistributedNetworks returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasDistributedNetworks() bool {
-	if o != nil && o.DistributedNetworks != nil {
+	if o != nil && IsNil(o.DistributedNetworks) {
 		return true
 	}
 
@@ -714,7 +740,7 @@ func (o *VirtualizationVmwareHost) GetDistributedSwitches() []VirtualizationVmwa
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareHost) GetDistributedSwitchesOk() ([]VirtualizationVmwareDistributedSwitchRelationship, bool) {
-	if o == nil || o.DistributedSwitches == nil {
+	if o == nil || IsNil(o.DistributedSwitches) {
 		return nil, false
 	}
 	return o.DistributedSwitches, true
@@ -722,7 +748,7 @@ func (o *VirtualizationVmwareHost) GetDistributedSwitchesOk() ([]VirtualizationV
 
 // HasDistributedSwitches returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasDistributedSwitches() bool {
-	if o != nil && o.DistributedSwitches != nil {
+	if o != nil && IsNil(o.DistributedSwitches) {
 		return true
 	}
 
@@ -734,130 +760,156 @@ func (o *VirtualizationVmwareHost) SetDistributedSwitches(v []VirtualizationVmwa
 	o.DistributedSwitches = v
 }
 
-// GetHyperFlexNode returns the HyperFlexNode field value if set, zero value otherwise.
+// GetHyperFlexNode returns the HyperFlexNode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareHost) GetHyperFlexNode() HyperflexNodeRelationship {
-	if o == nil || o.HyperFlexNode == nil {
+	if o == nil || IsNil(o.HyperFlexNode.Get()) {
 		var ret HyperflexNodeRelationship
 		return ret
 	}
-	return *o.HyperFlexNode
+	return *o.HyperFlexNode.Get()
 }
 
 // GetHyperFlexNodeOk returns a tuple with the HyperFlexNode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareHost) GetHyperFlexNodeOk() (*HyperflexNodeRelationship, bool) {
-	if o == nil || o.HyperFlexNode == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.HyperFlexNode, true
+	return o.HyperFlexNode.Get(), o.HyperFlexNode.IsSet()
 }
 
 // HasHyperFlexNode returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasHyperFlexNode() bool {
-	if o != nil && o.HyperFlexNode != nil {
+	if o != nil && o.HyperFlexNode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHyperFlexNode gets a reference to the given HyperflexNodeRelationship and assigns it to the HyperFlexNode field.
+// SetHyperFlexNode gets a reference to the given NullableHyperflexNodeRelationship and assigns it to the HyperFlexNode field.
 func (o *VirtualizationVmwareHost) SetHyperFlexNode(v HyperflexNodeRelationship) {
-	o.HyperFlexNode = &v
+	o.HyperFlexNode.Set(&v)
 }
 
-// GetServer returns the Server field value if set, zero value otherwise.
+// SetHyperFlexNodeNil sets the value for HyperFlexNode to be an explicit nil
+func (o *VirtualizationVmwareHost) SetHyperFlexNodeNil() {
+	o.HyperFlexNode.Set(nil)
+}
+
+// UnsetHyperFlexNode ensures that no value is present for HyperFlexNode, not even an explicit nil
+func (o *VirtualizationVmwareHost) UnsetHyperFlexNode() {
+	o.HyperFlexNode.Unset()
+}
+
+// GetServer returns the Server field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareHost) GetServer() ComputePhysicalSummaryRelationship {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server.Get()) {
 		var ret ComputePhysicalSummaryRelationship
 		return ret
 	}
-	return *o.Server
+	return *o.Server.Get()
 }
 
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareHost) GetServerOk() (*ComputePhysicalSummaryRelationship, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Server, true
+	return o.Server.Get(), o.Server.IsSet()
 }
 
 // HasServer returns a boolean if a field has been set.
 func (o *VirtualizationVmwareHost) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && o.Server.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServer gets a reference to the given ComputePhysicalSummaryRelationship and assigns it to the Server field.
+// SetServer gets a reference to the given NullableComputePhysicalSummaryRelationship and assigns it to the Server field.
 func (o *VirtualizationVmwareHost) SetServer(v ComputePhysicalSummaryRelationship) {
-	o.Server = &v
+	o.Server.Set(&v)
+}
+
+// SetServerNil sets the value for Server to be an explicit nil
+func (o *VirtualizationVmwareHost) SetServerNil() {
+	o.Server.Set(nil)
+}
+
+// UnsetServer ensures that no value is present for Server, not even an explicit nil
+func (o *VirtualizationVmwareHost) UnsetServer() {
+	o.Server.Unset()
 }
 
 func (o VirtualizationVmwareHost) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareHost) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseHost, errVirtualizationBaseHost := json.Marshal(o.VirtualizationBaseHost)
 	if errVirtualizationBaseHost != nil {
-		return []byte{}, errVirtualizationBaseHost
+		return map[string]interface{}{}, errVirtualizationBaseHost
 	}
 	errVirtualizationBaseHost = json.Unmarshal([]byte(serializedVirtualizationBaseHost), &toSerialize)
 	if errVirtualizationBaseHost != nil {
-		return []byte{}, errVirtualizationBaseHost
+		return map[string]interface{}{}, errVirtualizationBaseHost
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BootTime != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BootTime) {
 		toSerialize["BootTime"] = o.BootTime
 	}
-	if o.ConnectionState != nil {
+	if !IsNil(o.ConnectionState) {
 		toSerialize["ConnectionState"] = o.ConnectionState
 	}
-	if o.DcInvPath != nil {
+	if !IsNil(o.DcInvPath) {
 		toSerialize["DcInvPath"] = o.DcInvPath
 	}
 	if o.DnsServers != nil {
 		toSerialize["DnsServers"] = o.DnsServers
 	}
-	if o.HwPowerState != nil {
+	if !IsNil(o.HwPowerState) {
 		toSerialize["HwPowerState"] = o.HwPowerState
 	}
-	if o.IsSshEnabled != nil {
+	if !IsNil(o.IsSshEnabled) {
 		toSerialize["IsSshEnabled"] = o.IsSshEnabled
 	}
-	if o.NetworkAdapterCount != nil {
+	if !IsNil(o.NetworkAdapterCount) {
 		toSerialize["NetworkAdapterCount"] = o.NetworkAdapterCount
 	}
 	if o.NtpServers != nil {
 		toSerialize["NtpServers"] = o.NtpServers
 	}
-	if o.QuarantineMode != nil {
+	if !IsNil(o.QuarantineMode) {
 		toSerialize["QuarantineMode"] = o.QuarantineMode
 	}
 	if o.ResourceConsumed.IsSet() {
 		toSerialize["ResourceConsumed"] = o.ResourceConsumed.Get()
 	}
-	if o.StorageAdapterCount != nil {
+	if !IsNil(o.StorageAdapterCount) {
 		toSerialize["StorageAdapterCount"] = o.StorageAdapterCount
 	}
-	if o.TimeZone != nil {
+	if !IsNil(o.TimeZone) {
 		toSerialize["TimeZone"] = o.TimeZone
 	}
-	if o.VcenterHostId != nil {
+	if !IsNil(o.VcenterHostId) {
 		toSerialize["VcenterHostId"] = o.VcenterHostId
 	}
-	if o.Cluster != nil {
-		toSerialize["Cluster"] = o.Cluster
+	if o.Cluster.IsSet() {
+		toSerialize["Cluster"] = o.Cluster.Get()
 	}
-	if o.Datacenter != nil {
-		toSerialize["Datacenter"] = o.Datacenter
+	if o.Datacenter.IsSet() {
+		toSerialize["Datacenter"] = o.Datacenter.Get()
 	}
 	if o.Datastores != nil {
 		toSerialize["Datastores"] = o.Datastores
@@ -868,21 +920,43 @@ func (o VirtualizationVmwareHost) MarshalJSON() ([]byte, error) {
 	if o.DistributedSwitches != nil {
 		toSerialize["DistributedSwitches"] = o.DistributedSwitches
 	}
-	if o.HyperFlexNode != nil {
-		toSerialize["HyperFlexNode"] = o.HyperFlexNode
+	if o.HyperFlexNode.IsSet() {
+		toSerialize["HyperFlexNode"] = o.HyperFlexNode.Get()
 	}
-	if o.Server != nil {
-		toSerialize["Server"] = o.Server
+	if o.Server.IsSet() {
+		toSerialize["Server"] = o.Server.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareHost) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareHost) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareHostWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -910,22 +984,22 @@ func (o *VirtualizationVmwareHost) UnmarshalJSON(bytes []byte) (err error) {
 		// Time zone this host is in.
 		TimeZone *string `json:"TimeZone,omitempty"`
 		// The identity of this host within vCenter (optional).
-		VcenterHostId *string                                     `json:"VcenterHostId,omitempty"`
-		Cluster       *VirtualizationVmwareClusterRelationship    `json:"Cluster,omitempty"`
-		Datacenter    *VirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
+		VcenterHostId *string                                            `json:"VcenterHostId,omitempty"`
+		Cluster       NullableVirtualizationVmwareClusterRelationship    `json:"Cluster,omitempty"`
+		Datacenter    NullableVirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
 		// An array of relationships to virtualizationVmwareDatastore resources.
 		Datastores []VirtualizationVmwareDatastoreRelationship `json:"Datastores,omitempty"`
 		// An array of relationships to virtualizationVmwareDistributedNetwork resources.
 		DistributedNetworks []VirtualizationVmwareDistributedNetworkRelationship `json:"DistributedNetworks,omitempty"`
 		// An array of relationships to virtualizationVmwareDistributedSwitch resources.
 		DistributedSwitches []VirtualizationVmwareDistributedSwitchRelationship `json:"DistributedSwitches,omitempty"`
-		HyperFlexNode       *HyperflexNodeRelationship                          `json:"HyperFlexNode,omitempty"`
-		Server              *ComputePhysicalSummaryRelationship                 `json:"Server,omitempty"`
+		HyperFlexNode       NullableHyperflexNodeRelationship                   `json:"HyperFlexNode,omitempty"`
+		Server              NullableComputePhysicalSummaryRelationship          `json:"Server,omitempty"`
 	}
 
 	varVirtualizationVmwareHostWithoutEmbeddedStruct := VirtualizationVmwareHostWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareHostWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareHostWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareHost := _VirtualizationVmwareHost{}
 		varVirtualizationVmwareHost.ClassId = varVirtualizationVmwareHostWithoutEmbeddedStruct.ClassId
@@ -957,7 +1031,7 @@ func (o *VirtualizationVmwareHost) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationVmwareHost := _VirtualizationVmwareHost{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareHost)
+	err = json.Unmarshal(data, &varVirtualizationVmwareHost)
 	if err == nil {
 		o.VirtualizationBaseHost = varVirtualizationVmwareHost.VirtualizationBaseHost
 	} else {
@@ -966,7 +1040,7 @@ func (o *VirtualizationVmwareHost) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BootTime")

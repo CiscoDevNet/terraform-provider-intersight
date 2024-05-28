@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PolicyAbstractProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PolicyAbstractProfile{}
 
 // PolicyAbstractProfile Abstract base type for all profiles.
 type PolicyAbstractProfile struct {
@@ -29,8 +33,8 @@ type PolicyAbstractProfile struct {
 	// Name of the profile instance or profile template.
 	Name *string `json:"Name,omitempty"`
 	// Defines the type of the profile. Accepted values are instance or template. * `instance` - The profile defines the configuration for a specific instance of a target.
-	Type                 *string                            `json:"Type,omitempty"`
-	SrcTemplate          *PolicyAbstractProfileRelationship `json:"SrcTemplate,omitempty"`
+	Type                 *string                                   `json:"Type,omitempty"`
+	SrcTemplate          NullablePolicyAbstractProfileRelationship `json:"SrcTemplate,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,7 +113,7 @@ func (o *PolicyAbstractProfile) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *PolicyAbstractProfile) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *PolicyAbstractProfile) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyAbstractProfile) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -127,7 +131,7 @@ func (o *PolicyAbstractProfile) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *PolicyAbstractProfile) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *PolicyAbstractProfile) SetDescription(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *PolicyAbstractProfile) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *PolicyAbstractProfile) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyAbstractProfile) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -159,7 +163,7 @@ func (o *PolicyAbstractProfile) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *PolicyAbstractProfile) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *PolicyAbstractProfile) SetName(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *PolicyAbstractProfile) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *PolicyAbstractProfile) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyAbstractProfile) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -191,7 +195,7 @@ func (o *PolicyAbstractProfile) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *PolicyAbstractProfile) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -203,75 +207,112 @@ func (o *PolicyAbstractProfile) SetType(v string) {
 	o.Type = &v
 }
 
-// GetSrcTemplate returns the SrcTemplate field value if set, zero value otherwise.
+// GetSrcTemplate returns the SrcTemplate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PolicyAbstractProfile) GetSrcTemplate() PolicyAbstractProfileRelationship {
-	if o == nil || o.SrcTemplate == nil {
+	if o == nil || IsNil(o.SrcTemplate.Get()) {
 		var ret PolicyAbstractProfileRelationship
 		return ret
 	}
-	return *o.SrcTemplate
+	return *o.SrcTemplate.Get()
 }
 
 // GetSrcTemplateOk returns a tuple with the SrcTemplate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PolicyAbstractProfile) GetSrcTemplateOk() (*PolicyAbstractProfileRelationship, bool) {
-	if o == nil || o.SrcTemplate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SrcTemplate, true
+	return o.SrcTemplate.Get(), o.SrcTemplate.IsSet()
 }
 
 // HasSrcTemplate returns a boolean if a field has been set.
 func (o *PolicyAbstractProfile) HasSrcTemplate() bool {
-	if o != nil && o.SrcTemplate != nil {
+	if o != nil && o.SrcTemplate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSrcTemplate gets a reference to the given PolicyAbstractProfileRelationship and assigns it to the SrcTemplate field.
+// SetSrcTemplate gets a reference to the given NullablePolicyAbstractProfileRelationship and assigns it to the SrcTemplate field.
 func (o *PolicyAbstractProfile) SetSrcTemplate(v PolicyAbstractProfileRelationship) {
-	o.SrcTemplate = &v
+	o.SrcTemplate.Set(&v)
+}
+
+// SetSrcTemplateNil sets the value for SrcTemplate to be an explicit nil
+func (o *PolicyAbstractProfile) SetSrcTemplateNil() {
+	o.SrcTemplate.Set(nil)
+}
+
+// UnsetSrcTemplate ensures that no value is present for SrcTemplate, not even an explicit nil
+func (o *PolicyAbstractProfile) UnsetSrcTemplate() {
+	o.SrcTemplate.Unset()
 }
 
 func (o PolicyAbstractProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PolicyAbstractProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractConfigurationObject, errPolicyAbstractConfigurationObject := json.Marshal(o.PolicyAbstractConfigurationObject)
 	if errPolicyAbstractConfigurationObject != nil {
-		return []byte{}, errPolicyAbstractConfigurationObject
+		return map[string]interface{}{}, errPolicyAbstractConfigurationObject
 	}
 	errPolicyAbstractConfigurationObject = json.Unmarshal([]byte(serializedPolicyAbstractConfigurationObject), &toSerialize)
 	if errPolicyAbstractConfigurationObject != nil {
-		return []byte{}, errPolicyAbstractConfigurationObject
+		return map[string]interface{}{}, errPolicyAbstractConfigurationObject
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.SrcTemplate != nil {
-		toSerialize["SrcTemplate"] = o.SrcTemplate
+	if o.SrcTemplate.IsSet() {
+		toSerialize["SrcTemplate"] = o.SrcTemplate.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PolicyAbstractProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PolicyAbstractProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PolicyAbstractProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -282,13 +323,13 @@ func (o *PolicyAbstractProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// Name of the profile instance or profile template.
 		Name *string `json:"Name,omitempty"`
 		// Defines the type of the profile. Accepted values are instance or template. * `instance` - The profile defines the configuration for a specific instance of a target.
-		Type        *string                            `json:"Type,omitempty"`
-		SrcTemplate *PolicyAbstractProfileRelationship `json:"SrcTemplate,omitempty"`
+		Type        *string                                   `json:"Type,omitempty"`
+		SrcTemplate NullablePolicyAbstractProfileRelationship `json:"SrcTemplate,omitempty"`
 	}
 
 	varPolicyAbstractProfileWithoutEmbeddedStruct := PolicyAbstractProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPolicyAbstractProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPolicyAbstractProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varPolicyAbstractProfile := _PolicyAbstractProfile{}
 		varPolicyAbstractProfile.ClassId = varPolicyAbstractProfileWithoutEmbeddedStruct.ClassId
@@ -304,7 +345,7 @@ func (o *PolicyAbstractProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPolicyAbstractProfile := _PolicyAbstractProfile{}
 
-	err = json.Unmarshal(bytes, &varPolicyAbstractProfile)
+	err = json.Unmarshal(data, &varPolicyAbstractProfile)
 	if err == nil {
 		o.PolicyAbstractConfigurationObject = varPolicyAbstractProfile.PolicyAbstractConfigurationObject
 	} else {
@@ -313,7 +354,7 @@ func (o *PolicyAbstractProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SoftwarerepositoryOperatingSystemFile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwarerepositoryOperatingSystemFile{}
 
 // SoftwarerepositoryOperatingSystemFile An operating system image that resides either in an external repository or has been imported to the local repository. If the file is available in the local repository, it is marked as cached. If not, it represents a pointer to a file in an external repository.
 type SoftwarerepositoryOperatingSystemFile struct {
@@ -25,8 +29,8 @@ type SoftwarerepositoryOperatingSystemFile struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The vendor or publisher of this file.
-	Vendor               *string                                `json:"Vendor,omitempty"`
-	Catalog              *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+	Vendor               *string                                       `json:"Vendor,omitempty"`
+	Catalog              NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,7 +111,7 @@ func (o *SoftwarerepositoryOperatingSystemFile) SetObjectType(v string) {
 
 // GetVendor returns the Vendor field value if set, zero value otherwise.
 func (o *SoftwarerepositoryOperatingSystemFile) GetVendor() string {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *SoftwarerepositoryOperatingSystemFile) GetVendor() string {
 // GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryOperatingSystemFile) GetVendorOk() (*string, bool) {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		return nil, false
 	}
 	return o.Vendor, true
@@ -125,7 +129,7 @@ func (o *SoftwarerepositoryOperatingSystemFile) GetVendorOk() (*string, bool) {
 
 // HasVendor returns a boolean if a field has been set.
 func (o *SoftwarerepositoryOperatingSystemFile) HasVendor() bool {
-	if o != nil && o.Vendor != nil {
+	if o != nil && !IsNil(o.Vendor) {
 		return true
 	}
 
@@ -137,82 +141,119 @@ func (o *SoftwarerepositoryOperatingSystemFile) SetVendor(v string) {
 	o.Vendor = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoftwarerepositoryOperatingSystemFile) GetCatalog() SoftwarerepositoryCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret SoftwarerepositoryCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryOperatingSystemFile) GetCatalogOk() (*SoftwarerepositoryCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *SoftwarerepositoryOperatingSystemFile) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given SoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableSoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
 func (o *SoftwarerepositoryOperatingSystemFile) SetCatalog(v SoftwarerepositoryCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
+}
+
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *SoftwarerepositoryOperatingSystemFile) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *SoftwarerepositoryOperatingSystemFile) UnsetCatalog() {
+	o.Catalog.Unset()
 }
 
 func (o SoftwarerepositoryOperatingSystemFile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwarerepositoryOperatingSystemFile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedSoftwarerepositoryFile, errSoftwarerepositoryFile := json.Marshal(o.SoftwarerepositoryFile)
 	if errSoftwarerepositoryFile != nil {
-		return []byte{}, errSoftwarerepositoryFile
+		return map[string]interface{}{}, errSoftwarerepositoryFile
 	}
 	errSoftwarerepositoryFile = json.Unmarshal([]byte(serializedSoftwarerepositoryFile), &toSerialize)
 	if errSoftwarerepositoryFile != nil {
-		return []byte{}, errSoftwarerepositoryFile
+		return map[string]interface{}{}, errSoftwarerepositoryFile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Vendor != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwarerepositoryOperatingSystemFile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwarerepositoryOperatingSystemFile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The vendor or publisher of this file.
-		Vendor  *string                                `json:"Vendor,omitempty"`
-		Catalog *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+		Vendor  *string                                       `json:"Vendor,omitempty"`
+		Catalog NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	}
 
 	varSoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct := SoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwarerepositoryOperatingSystemFile := _SoftwarerepositoryOperatingSystemFile{}
 		varSoftwarerepositoryOperatingSystemFile.ClassId = varSoftwarerepositoryOperatingSystemFileWithoutEmbeddedStruct.ClassId
@@ -226,7 +267,7 @@ func (o *SoftwarerepositoryOperatingSystemFile) UnmarshalJSON(bytes []byte) (err
 
 	varSoftwarerepositoryOperatingSystemFile := _SoftwarerepositoryOperatingSystemFile{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryOperatingSystemFile)
+	err = json.Unmarshal(data, &varSoftwarerepositoryOperatingSystemFile)
 	if err == nil {
 		o.SoftwarerepositoryFile = varSoftwarerepositoryOperatingSystemFile.SoftwarerepositoryFile
 	} else {
@@ -235,7 +276,7 @@ func (o *SoftwarerepositoryOperatingSystemFile) UnmarshalJSON(bytes []byte) (err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Vendor")

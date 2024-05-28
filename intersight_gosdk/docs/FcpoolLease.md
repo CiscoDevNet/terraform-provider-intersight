@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **PoolPurpose** | Pointer to **string** | Purpose of this WWN pool. | [optional] 
 **Reservation** | Pointer to [**FcpoolReservationReference**](FcpoolReservationReference.md) |  | [optional] 
 **WwnId** | Pointer to **string** | WWN ID allocated for pool based allocation. | [optional] 
-**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**Pool** | Pointer to [**FcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**FcpoolPoolMemberRelationship**](FcpoolPoolMemberRelationship.md) |  | [optional] 
-**Universe** | Pointer to [**FcpoolUniverseRelationship**](FcpoolUniverseRelationship.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableFcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**NullableFcpoolPoolMemberRelationship**](FcpoolPoolMemberRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**NullableFcpoolUniverseRelationship**](FcpoolUniverseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -173,6 +173,16 @@ SetAssignedToEntity sets AssignedToEntity field to given value.
 
 HasAssignedToEntity returns a boolean if a field has been set.
 
+### SetAssignedToEntityNil
+
+`func (o *FcpoolLease) SetAssignedToEntityNil(b bool)`
+
+ SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+
+### UnsetAssignedToEntity
+`func (o *FcpoolLease) UnsetAssignedToEntity()`
+
+UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
 ### GetPool
 
 `func (o *FcpoolLease) GetPool() FcpoolPoolRelationship`
@@ -198,6 +208,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *FcpoolLease) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *FcpoolLease) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetPoolMember
 
 `func (o *FcpoolLease) GetPoolMember() FcpoolPoolMemberRelationship`
@@ -223,6 +243,16 @@ SetPoolMember sets PoolMember field to given value.
 
 HasPoolMember returns a boolean if a field has been set.
 
+### SetPoolMemberNil
+
+`func (o *FcpoolLease) SetPoolMemberNil(b bool)`
+
+ SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+
+### UnsetPoolMember
+`func (o *FcpoolLease) UnsetPoolMember()`
+
+UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
 ### GetUniverse
 
 `func (o *FcpoolLease) GetUniverse() FcpoolUniverseRelationship`
@@ -248,6 +278,16 @@ SetUniverse sets Universe field to given value.
 
 HasUniverse returns a boolean if a field has been set.
 
+### SetUniverseNil
+
+`func (o *FcpoolLease) SetUniverseNil(b bool)`
+
+ SetUniverseNil sets the value for Universe to be an explicit nil
+
+### UnsetUniverse
+`func (o *FcpoolLease) UnsetUniverse()`
+
+UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -20,9 +20,9 @@ Name | Type | Description | Notes
 **Stdout** | Pointer to **interface{}** | Stdout of the terraform execution will be captured here. | [optional] 
 **TaskId** | Pointer to **string** | TaskId of a pontem workflow is same as the MO. | [optional] 
 **Variables** | Pointer to **interface{}** | Variables needed by the terraform configuration as a JSON object. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**WorkflowInfo** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -518,6 +518,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *TerraformExecutor) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *TerraformExecutor) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *TerraformExecutor) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -543,6 +553,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *TerraformExecutor) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *TerraformExecutor) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetWorkflowInfo
 
 `func (o *TerraformExecutor) GetWorkflowInfo() WorkflowWorkflowInfoRelationship`
@@ -568,6 +588,16 @@ SetWorkflowInfo sets WorkflowInfo field to given value.
 
 HasWorkflowInfo returns a boolean if a field has been set.
 
+### SetWorkflowInfoNil
+
+`func (o *TerraformExecutor) SetWorkflowInfoNil(b bool)`
+
+ SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+
+### UnsetWorkflowInfo
+`func (o *TerraformExecutor) UnsetWorkflowInfo()`
+
+UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

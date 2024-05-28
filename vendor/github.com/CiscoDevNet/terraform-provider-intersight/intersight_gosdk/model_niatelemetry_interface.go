@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryInterface{}
 
 // NiatelemetryInterface Stores data about interfaces per switch.
 type NiatelemetryInterface struct {
@@ -106,7 +110,7 @@ func (o *NiatelemetryInterface) SetObjectType(v string) {
 
 // GetInterfaceDownCount returns the InterfaceDownCount field value if set, zero value otherwise.
 func (o *NiatelemetryInterface) GetInterfaceDownCount() int64 {
-	if o == nil || o.InterfaceDownCount == nil {
+	if o == nil || IsNil(o.InterfaceDownCount) {
 		var ret int64
 		return ret
 	}
@@ -116,7 +120,7 @@ func (o *NiatelemetryInterface) GetInterfaceDownCount() int64 {
 // GetInterfaceDownCountOk returns a tuple with the InterfaceDownCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryInterface) GetInterfaceDownCountOk() (*int64, bool) {
-	if o == nil || o.InterfaceDownCount == nil {
+	if o == nil || IsNil(o.InterfaceDownCount) {
 		return nil, false
 	}
 	return o.InterfaceDownCount, true
@@ -124,7 +128,7 @@ func (o *NiatelemetryInterface) GetInterfaceDownCountOk() (*int64, bool) {
 
 // HasInterfaceDownCount returns a boolean if a field has been set.
 func (o *NiatelemetryInterface) HasInterfaceDownCount() bool {
-	if o != nil && o.InterfaceDownCount != nil {
+	if o != nil && !IsNil(o.InterfaceDownCount) {
 		return true
 	}
 
@@ -138,7 +142,7 @@ func (o *NiatelemetryInterface) SetInterfaceDownCount(v int64) {
 
 // GetInterfaceUpCount returns the InterfaceUpCount field value if set, zero value otherwise.
 func (o *NiatelemetryInterface) GetInterfaceUpCount() int64 {
-	if o == nil || o.InterfaceUpCount == nil {
+	if o == nil || IsNil(o.InterfaceUpCount) {
 		var ret int64
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *NiatelemetryInterface) GetInterfaceUpCount() int64 {
 // GetInterfaceUpCountOk returns a tuple with the InterfaceUpCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryInterface) GetInterfaceUpCountOk() (*int64, bool) {
-	if o == nil || o.InterfaceUpCount == nil {
+	if o == nil || IsNil(o.InterfaceUpCount) {
 		return nil, false
 	}
 	return o.InterfaceUpCount, true
@@ -156,7 +160,7 @@ func (o *NiatelemetryInterface) GetInterfaceUpCountOk() (*int64, bool) {
 
 // HasInterfaceUpCount returns a boolean if a field has been set.
 func (o *NiatelemetryInterface) HasInterfaceUpCount() bool {
-	if o != nil && o.InterfaceUpCount != nil {
+	if o != nil && !IsNil(o.InterfaceUpCount) {
 		return true
 	}
 
@@ -169,25 +173,29 @@ func (o *NiatelemetryInterface) SetInterfaceUpCount(v int64) {
 }
 
 func (o NiatelemetryInterface) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.InterfaceDownCount != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.InterfaceDownCount) {
 		toSerialize["InterfaceDownCount"] = o.InterfaceDownCount
 	}
-	if o.InterfaceUpCount != nil {
+	if !IsNil(o.InterfaceUpCount) {
 		toSerialize["InterfaceUpCount"] = o.InterfaceUpCount
 	}
 
@@ -195,10 +203,32 @@ func (o NiatelemetryInterface) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryInterface) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryInterface) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryInterfaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -212,7 +242,7 @@ func (o *NiatelemetryInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryInterfaceWithoutEmbeddedStruct := NiatelemetryInterfaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryInterfaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryInterfaceWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryInterface := _NiatelemetryInterface{}
 		varNiatelemetryInterface.ClassId = varNiatelemetryInterfaceWithoutEmbeddedStruct.ClassId
@@ -226,7 +256,7 @@ func (o *NiatelemetryInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryInterface := _NiatelemetryInterface{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryInterface)
+	err = json.Unmarshal(data, &varNiatelemetryInterface)
 	if err == nil {
 		o.MoBaseComplexType = varNiatelemetryInterface.MoBaseComplexType
 	} else {
@@ -235,7 +265,7 @@ func (o *NiatelemetryInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "InterfaceDownCount")

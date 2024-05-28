@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesAddonRepository type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesAddonRepository{}
 
 // KubernetesAddonRepository Docker registry or helm repository which hosts helm charts and docker images.
 type KubernetesAddonRepository struct {
@@ -36,9 +40,9 @@ type KubernetesAddonRepository struct {
 	// URL for the repository where the addon is hosted.
 	RepositoryUrl *string `json:"RepositoryUrl,omitempty"`
 	// Username to authenticate to the addon registry.
-	Username             *string                              `json:"Username,omitempty"`
-	Catalog              *WorkflowCatalogRelationship         `json:"Catalog,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Username             *string                                     `json:"Username,omitempty"`
+	Catalog              NullableWorkflowCatalogRelationship         `json:"Catalog,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +125,7 @@ func (o *KubernetesAddonRepository) SetObjectType(v string) {
 
 // GetCaCert returns the CaCert field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesAddonRepository) GetCaCert() X509Certificate {
-	if o == nil || o.CaCert.Get() == nil {
+	if o == nil || IsNil(o.CaCert.Get()) {
 		var ret X509Certificate
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *KubernetesAddonRepository) UnsetCaCert() {
 
 // GetInsecureSkipVerification returns the InsecureSkipVerification field value if set, zero value otherwise.
 func (o *KubernetesAddonRepository) GetInsecureSkipVerification() bool {
-	if o == nil || o.InsecureSkipVerification == nil {
+	if o == nil || IsNil(o.InsecureSkipVerification) {
 		var ret bool
 		return ret
 	}
@@ -174,7 +178,7 @@ func (o *KubernetesAddonRepository) GetInsecureSkipVerification() bool {
 // GetInsecureSkipVerificationOk returns a tuple with the InsecureSkipVerification field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonRepository) GetInsecureSkipVerificationOk() (*bool, bool) {
-	if o == nil || o.InsecureSkipVerification == nil {
+	if o == nil || IsNil(o.InsecureSkipVerification) {
 		return nil, false
 	}
 	return o.InsecureSkipVerification, true
@@ -182,7 +186,7 @@ func (o *KubernetesAddonRepository) GetInsecureSkipVerificationOk() (*bool, bool
 
 // HasInsecureSkipVerification returns a boolean if a field has been set.
 func (o *KubernetesAddonRepository) HasInsecureSkipVerification() bool {
-	if o != nil && o.InsecureSkipVerification != nil {
+	if o != nil && !IsNil(o.InsecureSkipVerification) {
 		return true
 	}
 
@@ -196,7 +200,7 @@ func (o *KubernetesAddonRepository) SetInsecureSkipVerification(v bool) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *KubernetesAddonRepository) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -206,7 +210,7 @@ func (o *KubernetesAddonRepository) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonRepository) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -214,7 +218,7 @@ func (o *KubernetesAddonRepository) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *KubernetesAddonRepository) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -228,7 +232,7 @@ func (o *KubernetesAddonRepository) SetIsPasswordSet(v bool) {
 
 // GetIsTokenSet returns the IsTokenSet field value if set, zero value otherwise.
 func (o *KubernetesAddonRepository) GetIsTokenSet() bool {
-	if o == nil || o.IsTokenSet == nil {
+	if o == nil || IsNil(o.IsTokenSet) {
 		var ret bool
 		return ret
 	}
@@ -238,7 +242,7 @@ func (o *KubernetesAddonRepository) GetIsTokenSet() bool {
 // GetIsTokenSetOk returns a tuple with the IsTokenSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonRepository) GetIsTokenSetOk() (*bool, bool) {
-	if o == nil || o.IsTokenSet == nil {
+	if o == nil || IsNil(o.IsTokenSet) {
 		return nil, false
 	}
 	return o.IsTokenSet, true
@@ -246,7 +250,7 @@ func (o *KubernetesAddonRepository) GetIsTokenSetOk() (*bool, bool) {
 
 // HasIsTokenSet returns a boolean if a field has been set.
 func (o *KubernetesAddonRepository) HasIsTokenSet() bool {
-	if o != nil && o.IsTokenSet != nil {
+	if o != nil && !IsNil(o.IsTokenSet) {
 		return true
 	}
 
@@ -260,7 +264,7 @@ func (o *KubernetesAddonRepository) SetIsTokenSet(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *KubernetesAddonRepository) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -270,7 +274,7 @@ func (o *KubernetesAddonRepository) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonRepository) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -278,7 +282,7 @@ func (o *KubernetesAddonRepository) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *KubernetesAddonRepository) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -292,7 +296,7 @@ func (o *KubernetesAddonRepository) SetName(v string) {
 
 // GetRepositoryUrl returns the RepositoryUrl field value if set, zero value otherwise.
 func (o *KubernetesAddonRepository) GetRepositoryUrl() string {
-	if o == nil || o.RepositoryUrl == nil {
+	if o == nil || IsNil(o.RepositoryUrl) {
 		var ret string
 		return ret
 	}
@@ -302,7 +306,7 @@ func (o *KubernetesAddonRepository) GetRepositoryUrl() string {
 // GetRepositoryUrlOk returns a tuple with the RepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonRepository) GetRepositoryUrlOk() (*string, bool) {
-	if o == nil || o.RepositoryUrl == nil {
+	if o == nil || IsNil(o.RepositoryUrl) {
 		return nil, false
 	}
 	return o.RepositoryUrl, true
@@ -310,7 +314,7 @@ func (o *KubernetesAddonRepository) GetRepositoryUrlOk() (*string, bool) {
 
 // HasRepositoryUrl returns a boolean if a field has been set.
 func (o *KubernetesAddonRepository) HasRepositoryUrl() bool {
-	if o != nil && o.RepositoryUrl != nil {
+	if o != nil && !IsNil(o.RepositoryUrl) {
 		return true
 	}
 
@@ -324,7 +328,7 @@ func (o *KubernetesAddonRepository) SetRepositoryUrl(v string) {
 
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *KubernetesAddonRepository) GetUsername() string {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		var ret string
 		return ret
 	}
@@ -334,7 +338,7 @@ func (o *KubernetesAddonRepository) GetUsername() string {
 // GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAddonRepository) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		return nil, false
 	}
 	return o.Username, true
@@ -342,7 +346,7 @@ func (o *KubernetesAddonRepository) GetUsernameOk() (*string, bool) {
 
 // HasUsername returns a boolean if a field has been set.
 func (o *KubernetesAddonRepository) HasUsername() bool {
-	if o != nil && o.Username != nil {
+	if o != nil && !IsNil(o.Username) {
 		return true
 	}
 
@@ -354,122 +358,170 @@ func (o *KubernetesAddonRepository) SetUsername(v string) {
 	o.Username = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesAddonRepository) GetCatalog() WorkflowCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret WorkflowCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAddonRepository) GetCatalogOk() (*WorkflowCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *KubernetesAddonRepository) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given WorkflowCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableWorkflowCatalogRelationship and assigns it to the Catalog field.
 func (o *KubernetesAddonRepository) SetCatalog(v WorkflowCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *KubernetesAddonRepository) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *KubernetesAddonRepository) UnsetCatalog() {
+	o.Catalog.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesAddonRepository) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAddonRepository) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *KubernetesAddonRepository) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *KubernetesAddonRepository) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *KubernetesAddonRepository) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *KubernetesAddonRepository) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o KubernetesAddonRepository) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesAddonRepository) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.CaCert.IsSet() {
 		toSerialize["CaCert"] = o.CaCert.Get()
 	}
-	if o.InsecureSkipVerification != nil {
+	if !IsNil(o.InsecureSkipVerification) {
 		toSerialize["InsecureSkipVerification"] = o.InsecureSkipVerification
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.IsTokenSet != nil {
+	if !IsNil(o.IsTokenSet) {
 		toSerialize["IsTokenSet"] = o.IsTokenSet
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.RepositoryUrl != nil {
+	if !IsNil(o.RepositoryUrl) {
 		toSerialize["RepositoryUrl"] = o.RepositoryUrl
 	}
-	if o.Username != nil {
+	if !IsNil(o.Username) {
 		toSerialize["Username"] = o.Username
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesAddonRepository) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesAddonRepository) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesAddonRepositoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -487,14 +539,14 @@ func (o *KubernetesAddonRepository) UnmarshalJSON(bytes []byte) (err error) {
 		// URL for the repository where the addon is hosted.
 		RepositoryUrl *string `json:"RepositoryUrl,omitempty"`
 		// Username to authenticate to the addon registry.
-		Username         *string                              `json:"Username,omitempty"`
-		Catalog          *WorkflowCatalogRelationship         `json:"Catalog,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Username         *string                                     `json:"Username,omitempty"`
+		Catalog          NullableWorkflowCatalogRelationship         `json:"Catalog,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varKubernetesAddonRepositoryWithoutEmbeddedStruct := KubernetesAddonRepositoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesAddonRepositoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesAddonRepositoryWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesAddonRepository := _KubernetesAddonRepository{}
 		varKubernetesAddonRepository.ClassId = varKubernetesAddonRepositoryWithoutEmbeddedStruct.ClassId
@@ -515,7 +567,7 @@ func (o *KubernetesAddonRepository) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesAddonRepository := _KubernetesAddonRepository{}
 
-	err = json.Unmarshal(bytes, &varKubernetesAddonRepository)
+	err = json.Unmarshal(data, &varKubernetesAddonRepository)
 	if err == nil {
 		o.MoBaseMo = varKubernetesAddonRepository.MoBaseMo
 	} else {
@@ -524,7 +576,7 @@ func (o *KubernetesAddonRepository) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CaCert")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationBaseVirtualMachinePciDevice type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationBaseVirtualMachinePciDevice{}
 
 // VirtualizationBaseVirtualMachinePciDevice Common attributes of a PCI device on a VM.
 type VirtualizationBaseVirtualMachinePciDevice struct {
@@ -29,9 +33,9 @@ type VirtualizationBaseVirtualMachinePciDevice struct {
 	// Name of this virtual machine PCI device.
 	Name *string `json:"Name,omitempty"`
 	// Indicates if this virtual machine PCI device is enabled via passthrough from the host.
-	Passthrough          *bool                                         `json:"Passthrough,omitempty"`
-	BackingPciDevice     *VirtualizationBaseHostPciDeviceRelationship  `json:"BackingPciDevice,omitempty"`
-	VirtualMachine       *VirtualizationBaseVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
+	Passthrough          *bool                                                `json:"Passthrough,omitempty"`
+	BackingPciDevice     NullableVirtualizationBaseHostPciDeviceRelationship  `json:"BackingPciDevice,omitempty"`
+	VirtualMachine       NullableVirtualizationBaseVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,7 +114,7 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) SetObjectType(v string) {
 
 // GetBackingPciId returns the BackingPciId field value if set, zero value otherwise.
 func (o *VirtualizationBaseVirtualMachinePciDevice) GetBackingPciId() string {
-	if o == nil || o.BackingPciId == nil {
+	if o == nil || IsNil(o.BackingPciId) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) GetBackingPciId() string {
 // GetBackingPciIdOk returns a tuple with the BackingPciId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseVirtualMachinePciDevice) GetBackingPciIdOk() (*string, bool) {
-	if o == nil || o.BackingPciId == nil {
+	if o == nil || IsNil(o.BackingPciId) {
 		return nil, false
 	}
 	return o.BackingPciId, true
@@ -128,7 +132,7 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) GetBackingPciIdOk() (*string
 
 // HasBackingPciId returns a boolean if a field has been set.
 func (o *VirtualizationBaseVirtualMachinePciDevice) HasBackingPciId() bool {
-	if o != nil && o.BackingPciId != nil {
+	if o != nil && !IsNil(o.BackingPciId) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) SetBackingPciId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VirtualizationBaseVirtualMachinePciDevice) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseVirtualMachinePciDevice) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -160,7 +164,7 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) GetNameOk() (*string, bool) 
 
 // HasName returns a boolean if a field has been set.
 func (o *VirtualizationBaseVirtualMachinePciDevice) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) SetName(v string) {
 
 // GetPassthrough returns the Passthrough field value if set, zero value otherwise.
 func (o *VirtualizationBaseVirtualMachinePciDevice) GetPassthrough() bool {
-	if o == nil || o.Passthrough == nil {
+	if o == nil || IsNil(o.Passthrough) {
 		var ret bool
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) GetPassthrough() bool {
 // GetPassthroughOk returns a tuple with the Passthrough field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseVirtualMachinePciDevice) GetPassthroughOk() (*bool, bool) {
-	if o == nil || o.Passthrough == nil {
+	if o == nil || IsNil(o.Passthrough) {
 		return nil, false
 	}
 	return o.Passthrough, true
@@ -192,7 +196,7 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) GetPassthroughOk() (*bool, b
 
 // HasPassthrough returns a boolean if a field has been set.
 func (o *VirtualizationBaseVirtualMachinePciDevice) HasPassthrough() bool {
-	if o != nil && o.Passthrough != nil {
+	if o != nil && !IsNil(o.Passthrough) {
 		return true
 	}
 
@@ -204,110 +208,158 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) SetPassthrough(v bool) {
 	o.Passthrough = &v
 }
 
-// GetBackingPciDevice returns the BackingPciDevice field value if set, zero value otherwise.
+// GetBackingPciDevice returns the BackingPciDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationBaseVirtualMachinePciDevice) GetBackingPciDevice() VirtualizationBaseHostPciDeviceRelationship {
-	if o == nil || o.BackingPciDevice == nil {
+	if o == nil || IsNil(o.BackingPciDevice.Get()) {
 		var ret VirtualizationBaseHostPciDeviceRelationship
 		return ret
 	}
-	return *o.BackingPciDevice
+	return *o.BackingPciDevice.Get()
 }
 
 // GetBackingPciDeviceOk returns a tuple with the BackingPciDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationBaseVirtualMachinePciDevice) GetBackingPciDeviceOk() (*VirtualizationBaseHostPciDeviceRelationship, bool) {
-	if o == nil || o.BackingPciDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BackingPciDevice, true
+	return o.BackingPciDevice.Get(), o.BackingPciDevice.IsSet()
 }
 
 // HasBackingPciDevice returns a boolean if a field has been set.
 func (o *VirtualizationBaseVirtualMachinePciDevice) HasBackingPciDevice() bool {
-	if o != nil && o.BackingPciDevice != nil {
+	if o != nil && o.BackingPciDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBackingPciDevice gets a reference to the given VirtualizationBaseHostPciDeviceRelationship and assigns it to the BackingPciDevice field.
+// SetBackingPciDevice gets a reference to the given NullableVirtualizationBaseHostPciDeviceRelationship and assigns it to the BackingPciDevice field.
 func (o *VirtualizationBaseVirtualMachinePciDevice) SetBackingPciDevice(v VirtualizationBaseHostPciDeviceRelationship) {
-	o.BackingPciDevice = &v
+	o.BackingPciDevice.Set(&v)
 }
 
-// GetVirtualMachine returns the VirtualMachine field value if set, zero value otherwise.
+// SetBackingPciDeviceNil sets the value for BackingPciDevice to be an explicit nil
+func (o *VirtualizationBaseVirtualMachinePciDevice) SetBackingPciDeviceNil() {
+	o.BackingPciDevice.Set(nil)
+}
+
+// UnsetBackingPciDevice ensures that no value is present for BackingPciDevice, not even an explicit nil
+func (o *VirtualizationBaseVirtualMachinePciDevice) UnsetBackingPciDevice() {
+	o.BackingPciDevice.Unset()
+}
+
+// GetVirtualMachine returns the VirtualMachine field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationBaseVirtualMachinePciDevice) GetVirtualMachine() VirtualizationBaseVirtualMachineRelationship {
-	if o == nil || o.VirtualMachine == nil {
+	if o == nil || IsNil(o.VirtualMachine.Get()) {
 		var ret VirtualizationBaseVirtualMachineRelationship
 		return ret
 	}
-	return *o.VirtualMachine
+	return *o.VirtualMachine.Get()
 }
 
 // GetVirtualMachineOk returns a tuple with the VirtualMachine field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationBaseVirtualMachinePciDevice) GetVirtualMachineOk() (*VirtualizationBaseVirtualMachineRelationship, bool) {
-	if o == nil || o.VirtualMachine == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VirtualMachine, true
+	return o.VirtualMachine.Get(), o.VirtualMachine.IsSet()
 }
 
 // HasVirtualMachine returns a boolean if a field has been set.
 func (o *VirtualizationBaseVirtualMachinePciDevice) HasVirtualMachine() bool {
-	if o != nil && o.VirtualMachine != nil {
+	if o != nil && o.VirtualMachine.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVirtualMachine gets a reference to the given VirtualizationBaseVirtualMachineRelationship and assigns it to the VirtualMachine field.
+// SetVirtualMachine gets a reference to the given NullableVirtualizationBaseVirtualMachineRelationship and assigns it to the VirtualMachine field.
 func (o *VirtualizationBaseVirtualMachinePciDevice) SetVirtualMachine(v VirtualizationBaseVirtualMachineRelationship) {
-	o.VirtualMachine = &v
+	o.VirtualMachine.Set(&v)
+}
+
+// SetVirtualMachineNil sets the value for VirtualMachine to be an explicit nil
+func (o *VirtualizationBaseVirtualMachinePciDevice) SetVirtualMachineNil() {
+	o.VirtualMachine.Set(nil)
+}
+
+// UnsetVirtualMachine ensures that no value is present for VirtualMachine, not even an explicit nil
+func (o *VirtualizationBaseVirtualMachinePciDevice) UnsetVirtualMachine() {
+	o.VirtualMachine.Unset()
 }
 
 func (o VirtualizationBaseVirtualMachinePciDevice) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationBaseVirtualMachinePciDevice) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseSourceDevice, errVirtualizationBaseSourceDevice := json.Marshal(o.VirtualizationBaseSourceDevice)
 	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
+		return map[string]interface{}{}, errVirtualizationBaseSourceDevice
 	}
 	errVirtualizationBaseSourceDevice = json.Unmarshal([]byte(serializedVirtualizationBaseSourceDevice), &toSerialize)
 	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
+		return map[string]interface{}{}, errVirtualizationBaseSourceDevice
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BackingPciId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BackingPciId) {
 		toSerialize["BackingPciId"] = o.BackingPciId
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Passthrough != nil {
+	if !IsNil(o.Passthrough) {
 		toSerialize["Passthrough"] = o.Passthrough
 	}
-	if o.BackingPciDevice != nil {
-		toSerialize["BackingPciDevice"] = o.BackingPciDevice
+	if o.BackingPciDevice.IsSet() {
+		toSerialize["BackingPciDevice"] = o.BackingPciDevice.Get()
 	}
-	if o.VirtualMachine != nil {
-		toSerialize["VirtualMachine"] = o.VirtualMachine
+	if o.VirtualMachine.IsSet() {
+		toSerialize["VirtualMachine"] = o.VirtualMachine.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationBaseVirtualMachinePciDevice) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationBaseVirtualMachinePciDevice) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationBaseVirtualMachinePciDeviceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -318,14 +370,14 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) UnmarshalJSON(bytes []byte) 
 		// Name of this virtual machine PCI device.
 		Name *string `json:"Name,omitempty"`
 		// Indicates if this virtual machine PCI device is enabled via passthrough from the host.
-		Passthrough      *bool                                         `json:"Passthrough,omitempty"`
-		BackingPciDevice *VirtualizationBaseHostPciDeviceRelationship  `json:"BackingPciDevice,omitempty"`
-		VirtualMachine   *VirtualizationBaseVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
+		Passthrough      *bool                                                `json:"Passthrough,omitempty"`
+		BackingPciDevice NullableVirtualizationBaseHostPciDeviceRelationship  `json:"BackingPciDevice,omitempty"`
+		VirtualMachine   NullableVirtualizationBaseVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
 	}
 
 	varVirtualizationBaseVirtualMachinePciDeviceWithoutEmbeddedStruct := VirtualizationBaseVirtualMachinePciDeviceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationBaseVirtualMachinePciDeviceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationBaseVirtualMachinePciDeviceWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationBaseVirtualMachinePciDevice := _VirtualizationBaseVirtualMachinePciDevice{}
 		varVirtualizationBaseVirtualMachinePciDevice.ClassId = varVirtualizationBaseVirtualMachinePciDeviceWithoutEmbeddedStruct.ClassId
@@ -342,7 +394,7 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) UnmarshalJSON(bytes []byte) 
 
 	varVirtualizationBaseVirtualMachinePciDevice := _VirtualizationBaseVirtualMachinePciDevice{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationBaseVirtualMachinePciDevice)
+	err = json.Unmarshal(data, &varVirtualizationBaseVirtualMachinePciDevice)
 	if err == nil {
 		o.VirtualizationBaseSourceDevice = varVirtualizationBaseVirtualMachinePciDevice.VirtualizationBaseSourceDevice
 	} else {
@@ -351,7 +403,7 @@ func (o *VirtualizationBaseVirtualMachinePciDevice) UnmarshalJSON(bytes []byte) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BackingPciId")

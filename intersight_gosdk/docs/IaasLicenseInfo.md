@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **LicenseKeysInfo** | Pointer to [**[]IaasLicenseKeysInfo**](IaasLicenseKeysInfo.md) |  | [optional] 
 **LicenseType** | Pointer to **string** | License type of UCSD whether it is EVAL/Permanent/Subscription.. | [optional] [readonly] 
 **LicenseUtilizationInfo** | Pointer to [**[]IaasLicenseUtilizationInfo**](IaasLicenseUtilizationInfo.md) |  | [optional] 
-**Guid** | Pointer to [**IaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
+**Guid** | Pointer to [**NullableIaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -216,6 +216,16 @@ SetGuid sets Guid field to given value.
 
 HasGuid returns a boolean if a field has been set.
 
+### SetGuidNil
+
+`func (o *IaasLicenseInfo) SetGuidNil(b bool)`
+
+ SetGuidNil sets the value for Guid to be an explicit nil
+
+### UnsetGuid
+`func (o *IaasLicenseInfo) UnsetGuid()`
+
+UnsetGuid ensures that no value is present for Guid, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

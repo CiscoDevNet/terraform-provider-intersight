@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **MaximumLimit** | Pointer to **int64** | The maximum number of sessions allowed in an account or permission. The default value is 128. | [optional] [default to 128]
 **PerUserLimit** | Pointer to **int64** | The maximum number of sessions allowed per user. Default value is 32. | [optional] [default to 32]
 **SessionTimeOut** | Pointer to **int64** | The session expiry duration in seconds. The minimum value is 350 seconds and the maximum value is 31536000 seconds (1 year). The system default value is 57600 seconds. | [optional] [default to 57600]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**Permission** | Pointer to [**IamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Permission** | Pointer to [**NullableIamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -197,6 +197,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *IamSessionLimits) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *IamSessionLimits) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetPermission
 
 `func (o *IamSessionLimits) GetPermission() IamPermissionRelationship`
@@ -222,6 +232,16 @@ SetPermission sets Permission field to given value.
 
 HasPermission returns a boolean if a field has been set.
 
+### SetPermissionNil
+
+`func (o *IamSessionLimits) SetPermissionNil(b bool)`
+
+ SetPermissionNil sets the value for Permission to be an explicit nil
+
+### UnsetPermission
+`func (o *IamSessionLimits) UnsetPermission()`
+
+UnsetPermission ensures that no value is present for Permission, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **Etls** | Pointer to [**[]PartnerintegrationEtlRelationship**](PartnerintegrationEtlRelationship.md) | An array of relationships to partnerintegrationEtl resources. | [optional] 
 **Logs** | Pointer to [**[]PartnerintegrationLogsRelationship**](PartnerintegrationLogsRelationship.md) | An array of relationships to partnerintegrationLogs resources. | [optional] [readonly] 
 **Models** | Pointer to [**[]PartnerintegrationModelRelationship**](PartnerintegrationModelRelationship.md) | An array of relationships to partnerintegrationModel resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -470,6 +470,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *PartnerintegrationInventory) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *PartnerintegrationInventory) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

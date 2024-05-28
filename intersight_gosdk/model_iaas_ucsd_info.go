@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the IaasUcsdInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IaasUcsdInfo{}
 
 // IaasUcsdInfo UCS Director accounts managed by Intersight.
 type IaasUcsdInfo struct {
@@ -50,14 +54,14 @@ type IaasUcsdInfo struct {
 	// An array of relationships to iaasCustomTaskInfo resources.
 	CustomTaskInfo []IaasCustomTaskInfoRelationship `json:"CustomTaskInfo,omitempty"`
 	// An array of relationships to iaasDeviceStatus resources.
-	DeviceStatus []IaasDeviceStatusRelationship `json:"DeviceStatus,omitempty"`
-	LicenseInfo  *IaasLicenseInfoRelationship   `json:"LicenseInfo,omitempty"`
+	DeviceStatus []IaasDeviceStatusRelationship      `json:"DeviceStatus,omitempty"`
+	LicenseInfo  NullableIaasLicenseInfoRelationship `json:"LicenseInfo,omitempty"`
 	// An array of relationships to iaasMostRunTasks resources.
-	MostRunTasks     []IaasMostRunTasksRelationship       `json:"MostRunTasks,omitempty"`
-	RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	MostRunTasks     []IaasMostRunTasksRelationship              `json:"MostRunTasks,omitempty"`
+	RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to iaasSystemTaskInfo resources.
-	SystemTaskInfo       []IaasSystemTaskInfoRelationship  `json:"SystemTaskInfo,omitempty"`
-	UcsdManagedInfra     *IaasUcsdManagedInfraRelationship `json:"UcsdManagedInfra,omitempty"`
+	SystemTaskInfo       []IaasSystemTaskInfoRelationship         `json:"SystemTaskInfo,omitempty"`
+	UcsdManagedInfra     NullableIaasUcsdManagedInfraRelationship `json:"UcsdManagedInfra,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -136,7 +140,7 @@ func (o *IaasUcsdInfo) SetObjectType(v string) {
 
 // GetDeviceId returns the DeviceId field value if set, zero value otherwise.
 func (o *IaasUcsdInfo) GetDeviceId() string {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		var ret string
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *IaasUcsdInfo) GetDeviceId() string {
 // GetDeviceIdOk returns a tuple with the DeviceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdInfo) GetDeviceIdOk() (*string, bool) {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		return nil, false
 	}
 	return o.DeviceId, true
@@ -154,7 +158,7 @@ func (o *IaasUcsdInfo) GetDeviceIdOk() (*string, bool) {
 
 // HasDeviceId returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasDeviceId() bool {
-	if o != nil && o.DeviceId != nil {
+	if o != nil && !IsNil(o.DeviceId) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *IaasUcsdInfo) SetDeviceId(v string) {
 
 // GetGuid returns the Guid field value if set, zero value otherwise.
 func (o *IaasUcsdInfo) GetGuid() string {
-	if o == nil || o.Guid == nil {
+	if o == nil || IsNil(o.Guid) {
 		var ret string
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *IaasUcsdInfo) GetGuid() string {
 // GetGuidOk returns a tuple with the Guid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdInfo) GetGuidOk() (*string, bool) {
-	if o == nil || o.Guid == nil {
+	if o == nil || IsNil(o.Guid) {
 		return nil, false
 	}
 	return o.Guid, true
@@ -186,7 +190,7 @@ func (o *IaasUcsdInfo) GetGuidOk() (*string, bool) {
 
 // HasGuid returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasGuid() bool {
-	if o != nil && o.Guid != nil {
+	if o != nil && !IsNil(o.Guid) {
 		return true
 	}
 
@@ -200,7 +204,7 @@ func (o *IaasUcsdInfo) SetGuid(v string) {
 
 // GetHostName returns the HostName field value if set, zero value otherwise.
 func (o *IaasUcsdInfo) GetHostName() string {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		var ret string
 		return ret
 	}
@@ -210,7 +214,7 @@ func (o *IaasUcsdInfo) GetHostName() string {
 // GetHostNameOk returns a tuple with the HostName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdInfo) GetHostNameOk() (*string, bool) {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		return nil, false
 	}
 	return o.HostName, true
@@ -218,7 +222,7 @@ func (o *IaasUcsdInfo) GetHostNameOk() (*string, bool) {
 
 // HasHostName returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasHostName() bool {
-	if o != nil && o.HostName != nil {
+	if o != nil && !IsNil(o.HostName) {
 		return true
 	}
 
@@ -232,7 +236,7 @@ func (o *IaasUcsdInfo) SetHostName(v string) {
 
 // GetIp returns the Ip field value if set, zero value otherwise.
 func (o *IaasUcsdInfo) GetIp() string {
-	if o == nil || o.Ip == nil {
+	if o == nil || IsNil(o.Ip) {
 		var ret string
 		return ret
 	}
@@ -242,7 +246,7 @@ func (o *IaasUcsdInfo) GetIp() string {
 // GetIpOk returns a tuple with the Ip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdInfo) GetIpOk() (*string, bool) {
-	if o == nil || o.Ip == nil {
+	if o == nil || IsNil(o.Ip) {
 		return nil, false
 	}
 	return o.Ip, true
@@ -250,7 +254,7 @@ func (o *IaasUcsdInfo) GetIpOk() (*string, bool) {
 
 // HasIp returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasIp() bool {
-	if o != nil && o.Ip != nil {
+	if o != nil && !IsNil(o.Ip) {
 		return true
 	}
 
@@ -264,7 +268,7 @@ func (o *IaasUcsdInfo) SetIp(v string) {
 
 // GetLastBackup returns the LastBackup field value if set, zero value otherwise.
 func (o *IaasUcsdInfo) GetLastBackup() time.Time {
-	if o == nil || o.LastBackup == nil {
+	if o == nil || IsNil(o.LastBackup) {
 		var ret time.Time
 		return ret
 	}
@@ -274,7 +278,7 @@ func (o *IaasUcsdInfo) GetLastBackup() time.Time {
 // GetLastBackupOk returns a tuple with the LastBackup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdInfo) GetLastBackupOk() (*time.Time, bool) {
-	if o == nil || o.LastBackup == nil {
+	if o == nil || IsNil(o.LastBackup) {
 		return nil, false
 	}
 	return o.LastBackup, true
@@ -282,7 +286,7 @@ func (o *IaasUcsdInfo) GetLastBackupOk() (*time.Time, bool) {
 
 // HasLastBackup returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasLastBackup() bool {
-	if o != nil && o.LastBackup != nil {
+	if o != nil && !IsNil(o.LastBackup) {
 		return true
 	}
 
@@ -296,7 +300,7 @@ func (o *IaasUcsdInfo) SetLastBackup(v time.Time) {
 
 // GetNodeType returns the NodeType field value if set, zero value otherwise.
 func (o *IaasUcsdInfo) GetNodeType() string {
-	if o == nil || o.NodeType == nil {
+	if o == nil || IsNil(o.NodeType) {
 		var ret string
 		return ret
 	}
@@ -306,7 +310,7 @@ func (o *IaasUcsdInfo) GetNodeType() string {
 // GetNodeTypeOk returns a tuple with the NodeType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdInfo) GetNodeTypeOk() (*string, bool) {
-	if o == nil || o.NodeType == nil {
+	if o == nil || IsNil(o.NodeType) {
 		return nil, false
 	}
 	return o.NodeType, true
@@ -314,7 +318,7 @@ func (o *IaasUcsdInfo) GetNodeTypeOk() (*string, bool) {
 
 // HasNodeType returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasNodeType() bool {
-	if o != nil && o.NodeType != nil {
+	if o != nil && !IsNil(o.NodeType) {
 		return true
 	}
 
@@ -328,7 +332,7 @@ func (o *IaasUcsdInfo) SetNodeType(v string) {
 
 // GetProductName returns the ProductName field value if set, zero value otherwise.
 func (o *IaasUcsdInfo) GetProductName() string {
-	if o == nil || o.ProductName == nil {
+	if o == nil || IsNil(o.ProductName) {
 		var ret string
 		return ret
 	}
@@ -338,7 +342,7 @@ func (o *IaasUcsdInfo) GetProductName() string {
 // GetProductNameOk returns a tuple with the ProductName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdInfo) GetProductNameOk() (*string, bool) {
-	if o == nil || o.ProductName == nil {
+	if o == nil || IsNil(o.ProductName) {
 		return nil, false
 	}
 	return o.ProductName, true
@@ -346,7 +350,7 @@ func (o *IaasUcsdInfo) GetProductNameOk() (*string, bool) {
 
 // HasProductName returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasProductName() bool {
-	if o != nil && o.ProductName != nil {
+	if o != nil && !IsNil(o.ProductName) {
 		return true
 	}
 
@@ -360,7 +364,7 @@ func (o *IaasUcsdInfo) SetProductName(v string) {
 
 // GetProductVendor returns the ProductVendor field value if set, zero value otherwise.
 func (o *IaasUcsdInfo) GetProductVendor() string {
-	if o == nil || o.ProductVendor == nil {
+	if o == nil || IsNil(o.ProductVendor) {
 		var ret string
 		return ret
 	}
@@ -370,7 +374,7 @@ func (o *IaasUcsdInfo) GetProductVendor() string {
 // GetProductVendorOk returns a tuple with the ProductVendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdInfo) GetProductVendorOk() (*string, bool) {
-	if o == nil || o.ProductVendor == nil {
+	if o == nil || IsNil(o.ProductVendor) {
 		return nil, false
 	}
 	return o.ProductVendor, true
@@ -378,7 +382,7 @@ func (o *IaasUcsdInfo) GetProductVendorOk() (*string, bool) {
 
 // HasProductVendor returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasProductVendor() bool {
-	if o != nil && o.ProductVendor != nil {
+	if o != nil && !IsNil(o.ProductVendor) {
 		return true
 	}
 
@@ -392,7 +396,7 @@ func (o *IaasUcsdInfo) SetProductVendor(v string) {
 
 // GetProductVersion returns the ProductVersion field value if set, zero value otherwise.
 func (o *IaasUcsdInfo) GetProductVersion() string {
-	if o == nil || o.ProductVersion == nil {
+	if o == nil || IsNil(o.ProductVersion) {
 		var ret string
 		return ret
 	}
@@ -402,7 +406,7 @@ func (o *IaasUcsdInfo) GetProductVersion() string {
 // GetProductVersionOk returns a tuple with the ProductVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdInfo) GetProductVersionOk() (*string, bool) {
-	if o == nil || o.ProductVersion == nil {
+	if o == nil || IsNil(o.ProductVersion) {
 		return nil, false
 	}
 	return o.ProductVersion, true
@@ -410,7 +414,7 @@ func (o *IaasUcsdInfo) GetProductVersionOk() (*string, bool) {
 
 // HasProductVersion returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasProductVersion() bool {
-	if o != nil && o.ProductVersion != nil {
+	if o != nil && !IsNil(o.ProductVersion) {
 		return true
 	}
 
@@ -424,7 +428,7 @@ func (o *IaasUcsdInfo) SetProductVersion(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *IaasUcsdInfo) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -434,7 +438,7 @@ func (o *IaasUcsdInfo) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdInfo) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -442,7 +446,7 @@ func (o *IaasUcsdInfo) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -467,7 +471,7 @@ func (o *IaasUcsdInfo) GetConnectorPack() []IaasConnectorPackRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasUcsdInfo) GetConnectorPackOk() ([]IaasConnectorPackRelationship, bool) {
-	if o == nil || o.ConnectorPack == nil {
+	if o == nil || IsNil(o.ConnectorPack) {
 		return nil, false
 	}
 	return o.ConnectorPack, true
@@ -475,7 +479,7 @@ func (o *IaasUcsdInfo) GetConnectorPackOk() ([]IaasConnectorPackRelationship, bo
 
 // HasConnectorPack returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasConnectorPack() bool {
-	if o != nil && o.ConnectorPack != nil {
+	if o != nil && IsNil(o.ConnectorPack) {
 		return true
 	}
 
@@ -500,7 +504,7 @@ func (o *IaasUcsdInfo) GetCustomTaskInfo() []IaasCustomTaskInfoRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasUcsdInfo) GetCustomTaskInfoOk() ([]IaasCustomTaskInfoRelationship, bool) {
-	if o == nil || o.CustomTaskInfo == nil {
+	if o == nil || IsNil(o.CustomTaskInfo) {
 		return nil, false
 	}
 	return o.CustomTaskInfo, true
@@ -508,7 +512,7 @@ func (o *IaasUcsdInfo) GetCustomTaskInfoOk() ([]IaasCustomTaskInfoRelationship, 
 
 // HasCustomTaskInfo returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasCustomTaskInfo() bool {
-	if o != nil && o.CustomTaskInfo != nil {
+	if o != nil && IsNil(o.CustomTaskInfo) {
 		return true
 	}
 
@@ -533,7 +537,7 @@ func (o *IaasUcsdInfo) GetDeviceStatus() []IaasDeviceStatusRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasUcsdInfo) GetDeviceStatusOk() ([]IaasDeviceStatusRelationship, bool) {
-	if o == nil || o.DeviceStatus == nil {
+	if o == nil || IsNil(o.DeviceStatus) {
 		return nil, false
 	}
 	return o.DeviceStatus, true
@@ -541,7 +545,7 @@ func (o *IaasUcsdInfo) GetDeviceStatusOk() ([]IaasDeviceStatusRelationship, bool
 
 // HasDeviceStatus returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasDeviceStatus() bool {
-	if o != nil && o.DeviceStatus != nil {
+	if o != nil && IsNil(o.DeviceStatus) {
 		return true
 	}
 
@@ -553,36 +557,47 @@ func (o *IaasUcsdInfo) SetDeviceStatus(v []IaasDeviceStatusRelationship) {
 	o.DeviceStatus = v
 }
 
-// GetLicenseInfo returns the LicenseInfo field value if set, zero value otherwise.
+// GetLicenseInfo returns the LicenseInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IaasUcsdInfo) GetLicenseInfo() IaasLicenseInfoRelationship {
-	if o == nil || o.LicenseInfo == nil {
+	if o == nil || IsNil(o.LicenseInfo.Get()) {
 		var ret IaasLicenseInfoRelationship
 		return ret
 	}
-	return *o.LicenseInfo
+	return *o.LicenseInfo.Get()
 }
 
 // GetLicenseInfoOk returns a tuple with the LicenseInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasUcsdInfo) GetLicenseInfoOk() (*IaasLicenseInfoRelationship, bool) {
-	if o == nil || o.LicenseInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LicenseInfo, true
+	return o.LicenseInfo.Get(), o.LicenseInfo.IsSet()
 }
 
 // HasLicenseInfo returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasLicenseInfo() bool {
-	if o != nil && o.LicenseInfo != nil {
+	if o != nil && o.LicenseInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLicenseInfo gets a reference to the given IaasLicenseInfoRelationship and assigns it to the LicenseInfo field.
+// SetLicenseInfo gets a reference to the given NullableIaasLicenseInfoRelationship and assigns it to the LicenseInfo field.
 func (o *IaasUcsdInfo) SetLicenseInfo(v IaasLicenseInfoRelationship) {
-	o.LicenseInfo = &v
+	o.LicenseInfo.Set(&v)
+}
+
+// SetLicenseInfoNil sets the value for LicenseInfo to be an explicit nil
+func (o *IaasUcsdInfo) SetLicenseInfoNil() {
+	o.LicenseInfo.Set(nil)
+}
+
+// UnsetLicenseInfo ensures that no value is present for LicenseInfo, not even an explicit nil
+func (o *IaasUcsdInfo) UnsetLicenseInfo() {
+	o.LicenseInfo.Unset()
 }
 
 // GetMostRunTasks returns the MostRunTasks field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -598,7 +613,7 @@ func (o *IaasUcsdInfo) GetMostRunTasks() []IaasMostRunTasksRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasUcsdInfo) GetMostRunTasksOk() ([]IaasMostRunTasksRelationship, bool) {
-	if o == nil || o.MostRunTasks == nil {
+	if o == nil || IsNil(o.MostRunTasks) {
 		return nil, false
 	}
 	return o.MostRunTasks, true
@@ -606,7 +621,7 @@ func (o *IaasUcsdInfo) GetMostRunTasksOk() ([]IaasMostRunTasksRelationship, bool
 
 // HasMostRunTasks returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasMostRunTasks() bool {
-	if o != nil && o.MostRunTasks != nil {
+	if o != nil && IsNil(o.MostRunTasks) {
 		return true
 	}
 
@@ -618,36 +633,47 @@ func (o *IaasUcsdInfo) SetMostRunTasks(v []IaasMostRunTasksRelationship) {
 	o.MostRunTasks = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IaasUcsdInfo) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasUcsdInfo) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *IaasUcsdInfo) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *IaasUcsdInfo) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *IaasUcsdInfo) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 // GetSystemTaskInfo returns the SystemTaskInfo field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -663,7 +689,7 @@ func (o *IaasUcsdInfo) GetSystemTaskInfo() []IaasSystemTaskInfoRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasUcsdInfo) GetSystemTaskInfoOk() ([]IaasSystemTaskInfoRelationship, bool) {
-	if o == nil || o.SystemTaskInfo == nil {
+	if o == nil || IsNil(o.SystemTaskInfo) {
 		return nil, false
 	}
 	return o.SystemTaskInfo, true
@@ -671,7 +697,7 @@ func (o *IaasUcsdInfo) GetSystemTaskInfoOk() ([]IaasSystemTaskInfoRelationship, 
 
 // HasSystemTaskInfo returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasSystemTaskInfo() bool {
-	if o != nil && o.SystemTaskInfo != nil {
+	if o != nil && IsNil(o.SystemTaskInfo) {
 		return true
 	}
 
@@ -683,82 +709,97 @@ func (o *IaasUcsdInfo) SetSystemTaskInfo(v []IaasSystemTaskInfoRelationship) {
 	o.SystemTaskInfo = v
 }
 
-// GetUcsdManagedInfra returns the UcsdManagedInfra field value if set, zero value otherwise.
+// GetUcsdManagedInfra returns the UcsdManagedInfra field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IaasUcsdInfo) GetUcsdManagedInfra() IaasUcsdManagedInfraRelationship {
-	if o == nil || o.UcsdManagedInfra == nil {
+	if o == nil || IsNil(o.UcsdManagedInfra.Get()) {
 		var ret IaasUcsdManagedInfraRelationship
 		return ret
 	}
-	return *o.UcsdManagedInfra
+	return *o.UcsdManagedInfra.Get()
 }
 
 // GetUcsdManagedInfraOk returns a tuple with the UcsdManagedInfra field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasUcsdInfo) GetUcsdManagedInfraOk() (*IaasUcsdManagedInfraRelationship, bool) {
-	if o == nil || o.UcsdManagedInfra == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.UcsdManagedInfra, true
+	return o.UcsdManagedInfra.Get(), o.UcsdManagedInfra.IsSet()
 }
 
 // HasUcsdManagedInfra returns a boolean if a field has been set.
 func (o *IaasUcsdInfo) HasUcsdManagedInfra() bool {
-	if o != nil && o.UcsdManagedInfra != nil {
+	if o != nil && o.UcsdManagedInfra.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUcsdManagedInfra gets a reference to the given IaasUcsdManagedInfraRelationship and assigns it to the UcsdManagedInfra field.
+// SetUcsdManagedInfra gets a reference to the given NullableIaasUcsdManagedInfraRelationship and assigns it to the UcsdManagedInfra field.
 func (o *IaasUcsdInfo) SetUcsdManagedInfra(v IaasUcsdManagedInfraRelationship) {
-	o.UcsdManagedInfra = &v
+	o.UcsdManagedInfra.Set(&v)
+}
+
+// SetUcsdManagedInfraNil sets the value for UcsdManagedInfra to be an explicit nil
+func (o *IaasUcsdInfo) SetUcsdManagedInfraNil() {
+	o.UcsdManagedInfra.Set(nil)
+}
+
+// UnsetUcsdManagedInfra ensures that no value is present for UcsdManagedInfra, not even an explicit nil
+func (o *IaasUcsdInfo) UnsetUcsdManagedInfra() {
+	o.UcsdManagedInfra.Unset()
 }
 
 func (o IaasUcsdInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IaasUcsdInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeviceId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeviceId) {
 		toSerialize["DeviceId"] = o.DeviceId
 	}
-	if o.Guid != nil {
+	if !IsNil(o.Guid) {
 		toSerialize["Guid"] = o.Guid
 	}
-	if o.HostName != nil {
+	if !IsNil(o.HostName) {
 		toSerialize["HostName"] = o.HostName
 	}
-	if o.Ip != nil {
+	if !IsNil(o.Ip) {
 		toSerialize["Ip"] = o.Ip
 	}
-	if o.LastBackup != nil {
+	if !IsNil(o.LastBackup) {
 		toSerialize["LastBackup"] = o.LastBackup
 	}
-	if o.NodeType != nil {
+	if !IsNil(o.NodeType) {
 		toSerialize["NodeType"] = o.NodeType
 	}
-	if o.ProductName != nil {
+	if !IsNil(o.ProductName) {
 		toSerialize["ProductName"] = o.ProductName
 	}
-	if o.ProductVendor != nil {
+	if !IsNil(o.ProductVendor) {
 		toSerialize["ProductVendor"] = o.ProductVendor
 	}
-	if o.ProductVersion != nil {
+	if !IsNil(o.ProductVersion) {
 		toSerialize["ProductVersion"] = o.ProductVersion
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 	if o.ConnectorPack != nil {
@@ -770,30 +811,52 @@ func (o IaasUcsdInfo) MarshalJSON() ([]byte, error) {
 	if o.DeviceStatus != nil {
 		toSerialize["DeviceStatus"] = o.DeviceStatus
 	}
-	if o.LicenseInfo != nil {
-		toSerialize["LicenseInfo"] = o.LicenseInfo
+	if o.LicenseInfo.IsSet() {
+		toSerialize["LicenseInfo"] = o.LicenseInfo.Get()
 	}
 	if o.MostRunTasks != nil {
 		toSerialize["MostRunTasks"] = o.MostRunTasks
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.SystemTaskInfo != nil {
 		toSerialize["SystemTaskInfo"] = o.SystemTaskInfo
 	}
-	if o.UcsdManagedInfra != nil {
-		toSerialize["UcsdManagedInfra"] = o.UcsdManagedInfra
+	if o.UcsdManagedInfra.IsSet() {
+		toSerialize["UcsdManagedInfra"] = o.UcsdManagedInfra.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IaasUcsdInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IaasUcsdInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IaasUcsdInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -824,19 +887,19 @@ func (o *IaasUcsdInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to iaasCustomTaskInfo resources.
 		CustomTaskInfo []IaasCustomTaskInfoRelationship `json:"CustomTaskInfo,omitempty"`
 		// An array of relationships to iaasDeviceStatus resources.
-		DeviceStatus []IaasDeviceStatusRelationship `json:"DeviceStatus,omitempty"`
-		LicenseInfo  *IaasLicenseInfoRelationship   `json:"LicenseInfo,omitempty"`
+		DeviceStatus []IaasDeviceStatusRelationship      `json:"DeviceStatus,omitempty"`
+		LicenseInfo  NullableIaasLicenseInfoRelationship `json:"LicenseInfo,omitempty"`
 		// An array of relationships to iaasMostRunTasks resources.
-		MostRunTasks     []IaasMostRunTasksRelationship       `json:"MostRunTasks,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		MostRunTasks     []IaasMostRunTasksRelationship              `json:"MostRunTasks,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to iaasSystemTaskInfo resources.
-		SystemTaskInfo   []IaasSystemTaskInfoRelationship  `json:"SystemTaskInfo,omitempty"`
-		UcsdManagedInfra *IaasUcsdManagedInfraRelationship `json:"UcsdManagedInfra,omitempty"`
+		SystemTaskInfo   []IaasSystemTaskInfoRelationship         `json:"SystemTaskInfo,omitempty"`
+		UcsdManagedInfra NullableIaasUcsdManagedInfraRelationship `json:"UcsdManagedInfra,omitempty"`
 	}
 
 	varIaasUcsdInfoWithoutEmbeddedStruct := IaasUcsdInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIaasUcsdInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIaasUcsdInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varIaasUcsdInfo := _IaasUcsdInfo{}
 		varIaasUcsdInfo.ClassId = varIaasUcsdInfoWithoutEmbeddedStruct.ClassId
@@ -866,7 +929,7 @@ func (o *IaasUcsdInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIaasUcsdInfo := _IaasUcsdInfo{}
 
-	err = json.Unmarshal(bytes, &varIaasUcsdInfo)
+	err = json.Unmarshal(data, &varIaasUcsdInfo)
 	if err == nil {
 		o.MoBaseMo = varIaasUcsdInfo.MoBaseMo
 	} else {
@@ -875,7 +938,7 @@ func (o *IaasUcsdInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeviceId")

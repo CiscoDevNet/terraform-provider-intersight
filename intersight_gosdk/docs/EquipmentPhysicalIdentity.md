@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **LastDiscoveryTriggered** | Pointer to **string** | Denotes the type of discovery that was most recently triggered on this server. * &#x60;Unknown&#x60; - The last discovery type is unknown. * &#x60;Deep&#x60; - The last discovery triggered is deep. * &#x60;Shallow&#x60; - The last discovery triggered is shallow. | [optional] [readonly] [default to "Unknown"]
-**PhysicalDeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**PhysicalDeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -118,6 +118,16 @@ SetPhysicalDeviceRegistration sets PhysicalDeviceRegistration field to given val
 
 HasPhysicalDeviceRegistration returns a boolean if a field has been set.
 
+### SetPhysicalDeviceRegistrationNil
+
+`func (o *EquipmentPhysicalIdentity) SetPhysicalDeviceRegistrationNil(b bool)`
+
+ SetPhysicalDeviceRegistrationNil sets the value for PhysicalDeviceRegistration to be an explicit nil
+
+### UnsetPhysicalDeviceRegistration
+`func (o *EquipmentPhysicalIdentity) UnsetPhysicalDeviceRegistration()`
+
+UnsetPhysicalDeviceRegistration ensures that no value is present for PhysicalDeviceRegistration, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

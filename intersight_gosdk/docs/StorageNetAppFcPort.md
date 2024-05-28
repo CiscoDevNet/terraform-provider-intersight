@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **SpeedMaximum** | Pointer to **string** | The maximum speed supported by the FC port in gigabits per second. | [optional] [readonly] 
 **State** | Pointer to **string** | State of the port available in storage array. * &#x60;Unknown&#x60; - Default unknown port state. * &#x60;StartUp&#x60; - The port in the storage array is booting up. * &#x60;LinkNotConnected&#x60; - The port has finished initialization, but a link with the fabric is not established. * &#x60;Online&#x60; - The port is initialized and a link with the fabric has been established. * &#x60;LinkDisconnected&#x60; - The link on this port is currently not established. * &#x60;OfflineUser&#x60; - The port is administratively disabled. * &#x60;OfflineSystem&#x60; - The port is set to offline by the system. This happens when the port encounters too many errors. * &#x60;NodeOffline&#x60; - The state information for the port cannot be retrieved. The node is offline or inaccessible. | [optional] [readonly] [default to "Unknown"]
 **Uuid** | Pointer to **string** | Universally unique identifier of the FC port. | [optional] [readonly] 
-**ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
+**ArrayController** | Pointer to [**NullableStorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
 **Events** | Pointer to [**[]StorageNetAppFcPortEventRelationship**](StorageNetAppFcPortEventRelationship.md) | An array of relationships to storageNetAppFcPortEvent resources. | [optional] [readonly] 
 
 ## Methods
@@ -249,6 +249,16 @@ SetArrayController sets ArrayController field to given value.
 
 HasArrayController returns a boolean if a field has been set.
 
+### SetArrayControllerNil
+
+`func (o *StorageNetAppFcPort) SetArrayControllerNil(b bool)`
+
+ SetArrayControllerNil sets the value for ArrayController to be an explicit nil
+
+### UnsetArrayController
+`func (o *StorageNetAppFcPort) UnsetArrayController()`
+
+UnsetArrayController ensures that no value is present for ArrayController, not even an explicit nil
 ### GetEvents
 
 `func (o *StorageNetAppFcPort) GetEvents() []StorageNetAppFcPortEventRelationship`

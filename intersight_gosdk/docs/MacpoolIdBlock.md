@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "macpool.IdBlock"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "macpool.IdBlock"]
 **MacBlock** | Pointer to [**MacpoolBlock**](MacpoolBlock.md) |  | [optional] 
-**Pool** | Pointer to [**MacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableMacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
 **Reservations** | Pointer to [**[]MacpoolReservationRelationship**](MacpoolReservationRelationship.md) | An array of relationships to macpoolReservation resources. | [optional] [readonly] 
 
 ## Methods
@@ -119,6 +119,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *MacpoolIdBlock) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *MacpoolIdBlock) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetReservations
 
 `func (o *MacpoolIdBlock) GetReservations() []MacpoolReservationRelationship`

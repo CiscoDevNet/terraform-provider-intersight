@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexSoftwareDistributionVersion type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexSoftwareDistributionVersion{}
 
 // HyperflexSoftwareDistributionVersion A HyperFlex Software Distribution version.
 type HyperflexSoftwareDistributionVersion struct {
@@ -27,8 +31,8 @@ type HyperflexSoftwareDistributionVersion struct {
 	// The HyperFlex Software Distribution version.
 	Version *string `json:"Version,omitempty"`
 	// An array of relationships to hyperflexSoftwareDistributionComponent resources.
-	DistributionComponents    []HyperflexSoftwareDistributionComponentRelationship `json:"DistributionComponents,omitempty"`
-	SoftwareDistributionEntry *HyperflexSoftwareDistributionEntryRelationship      `json:"SoftwareDistributionEntry,omitempty"`
+	DistributionComponents    []HyperflexSoftwareDistributionComponentRelationship   `json:"DistributionComponents,omitempty"`
+	SoftwareDistributionEntry NullableHyperflexSoftwareDistributionEntryRelationship `json:"SoftwareDistributionEntry,omitempty"`
 	AdditionalProperties      map[string]interface{}
 }
 
@@ -107,7 +111,7 @@ func (o *HyperflexSoftwareDistributionVersion) SetObjectType(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HyperflexSoftwareDistributionVersion) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *HyperflexSoftwareDistributionVersion) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSoftwareDistributionVersion) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -125,7 +129,7 @@ func (o *HyperflexSoftwareDistributionVersion) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *HyperflexSoftwareDistributionVersion) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *HyperflexSoftwareDistributionVersion) GetDistributionComponents() []Hyp
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSoftwareDistributionVersion) GetDistributionComponentsOk() ([]HyperflexSoftwareDistributionComponentRelationship, bool) {
-	if o == nil || o.DistributionComponents == nil {
+	if o == nil || IsNil(o.DistributionComponents) {
 		return nil, false
 	}
 	return o.DistributionComponents, true
@@ -158,7 +162,7 @@ func (o *HyperflexSoftwareDistributionVersion) GetDistributionComponentsOk() ([]
 
 // HasDistributionComponents returns a boolean if a field has been set.
 func (o *HyperflexSoftwareDistributionVersion) HasDistributionComponents() bool {
-	if o != nil && o.DistributionComponents != nil {
+	if o != nil && IsNil(o.DistributionComponents) {
 		return true
 	}
 
@@ -170,72 +174,109 @@ func (o *HyperflexSoftwareDistributionVersion) SetDistributionComponents(v []Hyp
 	o.DistributionComponents = v
 }
 
-// GetSoftwareDistributionEntry returns the SoftwareDistributionEntry field value if set, zero value otherwise.
+// GetSoftwareDistributionEntry returns the SoftwareDistributionEntry field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSoftwareDistributionVersion) GetSoftwareDistributionEntry() HyperflexSoftwareDistributionEntryRelationship {
-	if o == nil || o.SoftwareDistributionEntry == nil {
+	if o == nil || IsNil(o.SoftwareDistributionEntry.Get()) {
 		var ret HyperflexSoftwareDistributionEntryRelationship
 		return ret
 	}
-	return *o.SoftwareDistributionEntry
+	return *o.SoftwareDistributionEntry.Get()
 }
 
 // GetSoftwareDistributionEntryOk returns a tuple with the SoftwareDistributionEntry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSoftwareDistributionVersion) GetSoftwareDistributionEntryOk() (*HyperflexSoftwareDistributionEntryRelationship, bool) {
-	if o == nil || o.SoftwareDistributionEntry == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SoftwareDistributionEntry, true
+	return o.SoftwareDistributionEntry.Get(), o.SoftwareDistributionEntry.IsSet()
 }
 
 // HasSoftwareDistributionEntry returns a boolean if a field has been set.
 func (o *HyperflexSoftwareDistributionVersion) HasSoftwareDistributionEntry() bool {
-	if o != nil && o.SoftwareDistributionEntry != nil {
+	if o != nil && o.SoftwareDistributionEntry.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSoftwareDistributionEntry gets a reference to the given HyperflexSoftwareDistributionEntryRelationship and assigns it to the SoftwareDistributionEntry field.
+// SetSoftwareDistributionEntry gets a reference to the given NullableHyperflexSoftwareDistributionEntryRelationship and assigns it to the SoftwareDistributionEntry field.
 func (o *HyperflexSoftwareDistributionVersion) SetSoftwareDistributionEntry(v HyperflexSoftwareDistributionEntryRelationship) {
-	o.SoftwareDistributionEntry = &v
+	o.SoftwareDistributionEntry.Set(&v)
+}
+
+// SetSoftwareDistributionEntryNil sets the value for SoftwareDistributionEntry to be an explicit nil
+func (o *HyperflexSoftwareDistributionVersion) SetSoftwareDistributionEntryNil() {
+	o.SoftwareDistributionEntry.Set(nil)
+}
+
+// UnsetSoftwareDistributionEntry ensures that no value is present for SoftwareDistributionEntry, not even an explicit nil
+func (o *HyperflexSoftwareDistributionVersion) UnsetSoftwareDistributionEntry() {
+	o.SoftwareDistributionEntry.Unset()
 }
 
 func (o HyperflexSoftwareDistributionVersion) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexSoftwareDistributionVersion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Version != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 	if o.DistributionComponents != nil {
 		toSerialize["DistributionComponents"] = o.DistributionComponents
 	}
-	if o.SoftwareDistributionEntry != nil {
-		toSerialize["SoftwareDistributionEntry"] = o.SoftwareDistributionEntry
+	if o.SoftwareDistributionEntry.IsSet() {
+		toSerialize["SoftwareDistributionEntry"] = o.SoftwareDistributionEntry.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexSoftwareDistributionVersion) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexSoftwareDistributionVersion) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexSoftwareDistributionVersionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -244,13 +285,13 @@ func (o *HyperflexSoftwareDistributionVersion) UnmarshalJSON(bytes []byte) (err 
 		// The HyperFlex Software Distribution version.
 		Version *string `json:"Version,omitempty"`
 		// An array of relationships to hyperflexSoftwareDistributionComponent resources.
-		DistributionComponents    []HyperflexSoftwareDistributionComponentRelationship `json:"DistributionComponents,omitempty"`
-		SoftwareDistributionEntry *HyperflexSoftwareDistributionEntryRelationship      `json:"SoftwareDistributionEntry,omitempty"`
+		DistributionComponents    []HyperflexSoftwareDistributionComponentRelationship   `json:"DistributionComponents,omitempty"`
+		SoftwareDistributionEntry NullableHyperflexSoftwareDistributionEntryRelationship `json:"SoftwareDistributionEntry,omitempty"`
 	}
 
 	varHyperflexSoftwareDistributionVersionWithoutEmbeddedStruct := HyperflexSoftwareDistributionVersionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSoftwareDistributionVersionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexSoftwareDistributionVersionWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexSoftwareDistributionVersion := _HyperflexSoftwareDistributionVersion{}
 		varHyperflexSoftwareDistributionVersion.ClassId = varHyperflexSoftwareDistributionVersionWithoutEmbeddedStruct.ClassId
@@ -265,7 +306,7 @@ func (o *HyperflexSoftwareDistributionVersion) UnmarshalJSON(bytes []byte) (err 
 
 	varHyperflexSoftwareDistributionVersion := _HyperflexSoftwareDistributionVersion{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSoftwareDistributionVersion)
+	err = json.Unmarshal(data, &varHyperflexSoftwareDistributionVersion)
 	if err == nil {
 		o.MoBaseMo = varHyperflexSoftwareDistributionVersion.MoBaseMo
 	} else {
@@ -274,7 +315,7 @@ func (o *HyperflexSoftwareDistributionVersion) UnmarshalJSON(bytes []byte) (err 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Version")

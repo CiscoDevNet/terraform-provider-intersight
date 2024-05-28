@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentExpanderModule type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentExpanderModule{}
 
 // EquipmentExpanderModule Expander module inside the chassis.
 type EquipmentExpanderModule struct {
@@ -30,11 +34,11 @@ type EquipmentExpanderModule struct {
 	// Operational state of expander module.
 	OperState *string `json:"OperState,omitempty"`
 	// Part number identifier for the expander module.
-	PartNumber       *string                       `json:"PartNumber,omitempty"`
-	EquipmentChassis *EquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
+	PartNumber       *string                              `json:"PartNumber,omitempty"`
+	EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
 	// An array of relationships to equipmentFanModule resources.
-	FanModules           []EquipmentFanModuleRelationship     `json:"FanModules,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	FanModules           []EquipmentFanModuleRelationship            `json:"FanModules,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -113,7 +117,7 @@ func (o *EquipmentExpanderModule) SetObjectType(v string) {
 
 // GetModuleId returns the ModuleId field value if set, zero value otherwise.
 func (o *EquipmentExpanderModule) GetModuleId() int64 {
-	if o == nil || o.ModuleId == nil {
+	if o == nil || IsNil(o.ModuleId) {
 		var ret int64
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *EquipmentExpanderModule) GetModuleId() int64 {
 // GetModuleIdOk returns a tuple with the ModuleId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentExpanderModule) GetModuleIdOk() (*int64, bool) {
-	if o == nil || o.ModuleId == nil {
+	if o == nil || IsNil(o.ModuleId) {
 		return nil, false
 	}
 	return o.ModuleId, true
@@ -131,7 +135,7 @@ func (o *EquipmentExpanderModule) GetModuleIdOk() (*int64, bool) {
 
 // HasModuleId returns a boolean if a field has been set.
 func (o *EquipmentExpanderModule) HasModuleId() bool {
-	if o != nil && o.ModuleId != nil {
+	if o != nil && !IsNil(o.ModuleId) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *EquipmentExpanderModule) GetOperReason() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentExpanderModule) GetOperReasonOk() ([]string, bool) {
-	if o == nil || o.OperReason == nil {
+	if o == nil || IsNil(o.OperReason) {
 		return nil, false
 	}
 	return o.OperReason, true
@@ -164,7 +168,7 @@ func (o *EquipmentExpanderModule) GetOperReasonOk() ([]string, bool) {
 
 // HasOperReason returns a boolean if a field has been set.
 func (o *EquipmentExpanderModule) HasOperReason() bool {
-	if o != nil && o.OperReason != nil {
+	if o != nil && IsNil(o.OperReason) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *EquipmentExpanderModule) SetOperReason(v []string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *EquipmentExpanderModule) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *EquipmentExpanderModule) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentExpanderModule) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -196,7 +200,7 @@ func (o *EquipmentExpanderModule) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *EquipmentExpanderModule) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *EquipmentExpanderModule) SetOperState(v string) {
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
 func (o *EquipmentExpanderModule) GetPartNumber() string {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *EquipmentExpanderModule) GetPartNumber() string {
 // GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentExpanderModule) GetPartNumberOk() (*string, bool) {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		return nil, false
 	}
 	return o.PartNumber, true
@@ -228,7 +232,7 @@ func (o *EquipmentExpanderModule) GetPartNumberOk() (*string, bool) {
 
 // HasPartNumber returns a boolean if a field has been set.
 func (o *EquipmentExpanderModule) HasPartNumber() bool {
-	if o != nil && o.PartNumber != nil {
+	if o != nil && !IsNil(o.PartNumber) {
 		return true
 	}
 
@@ -240,36 +244,47 @@ func (o *EquipmentExpanderModule) SetPartNumber(v string) {
 	o.PartNumber = &v
 }
 
-// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise.
+// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentExpanderModule) GetEquipmentChassis() EquipmentChassisRelationship {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil || IsNil(o.EquipmentChassis.Get()) {
 		var ret EquipmentChassisRelationship
 		return ret
 	}
-	return *o.EquipmentChassis
+	return *o.EquipmentChassis.Get()
 }
 
 // GetEquipmentChassisOk returns a tuple with the EquipmentChassis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentExpanderModule) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool) {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentChassis, true
+	return o.EquipmentChassis.Get(), o.EquipmentChassis.IsSet()
 }
 
 // HasEquipmentChassis returns a boolean if a field has been set.
 func (o *EquipmentExpanderModule) HasEquipmentChassis() bool {
-	if o != nil && o.EquipmentChassis != nil {
+	if o != nil && o.EquipmentChassis.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentChassis gets a reference to the given EquipmentChassisRelationship and assigns it to the EquipmentChassis field.
+// SetEquipmentChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the EquipmentChassis field.
 func (o *EquipmentExpanderModule) SetEquipmentChassis(v EquipmentChassisRelationship) {
-	o.EquipmentChassis = &v
+	o.EquipmentChassis.Set(&v)
+}
+
+// SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+func (o *EquipmentExpanderModule) SetEquipmentChassisNil() {
+	o.EquipmentChassis.Set(nil)
+}
+
+// UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
+func (o *EquipmentExpanderModule) UnsetEquipmentChassis() {
+	o.EquipmentChassis.Unset()
 }
 
 // GetFanModules returns the FanModules field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -285,7 +300,7 @@ func (o *EquipmentExpanderModule) GetFanModules() []EquipmentFanModuleRelationsh
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentExpanderModule) GetFanModulesOk() ([]EquipmentFanModuleRelationship, bool) {
-	if o == nil || o.FanModules == nil {
+	if o == nil || IsNil(o.FanModules) {
 		return nil, false
 	}
 	return o.FanModules, true
@@ -293,7 +308,7 @@ func (o *EquipmentExpanderModule) GetFanModulesOk() ([]EquipmentFanModuleRelatio
 
 // HasFanModules returns a boolean if a field has been set.
 func (o *EquipmentExpanderModule) HasFanModules() bool {
-	if o != nil && o.FanModules != nil {
+	if o != nil && IsNil(o.FanModules) {
 		return true
 	}
 
@@ -305,84 +320,121 @@ func (o *EquipmentExpanderModule) SetFanModules(v []EquipmentFanModuleRelationsh
 	o.FanModules = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentExpanderModule) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentExpanderModule) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *EquipmentExpanderModule) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *EquipmentExpanderModule) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *EquipmentExpanderModule) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *EquipmentExpanderModule) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o EquipmentExpanderModule) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentExpanderModule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ModuleId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ModuleId) {
 		toSerialize["ModuleId"] = o.ModuleId
 	}
 	if o.OperReason != nil {
 		toSerialize["OperReason"] = o.OperReason
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.PartNumber != nil {
+	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if o.EquipmentChassis != nil {
-		toSerialize["EquipmentChassis"] = o.EquipmentChassis
+	if o.EquipmentChassis.IsSet() {
+		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
 	}
 	if o.FanModules != nil {
 		toSerialize["FanModules"] = o.FanModules
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentExpanderModule) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentExpanderModule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentExpanderModuleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -394,16 +446,16 @@ func (o *EquipmentExpanderModule) UnmarshalJSON(bytes []byte) (err error) {
 		// Operational state of expander module.
 		OperState *string `json:"OperState,omitempty"`
 		// Part number identifier for the expander module.
-		PartNumber       *string                       `json:"PartNumber,omitempty"`
-		EquipmentChassis *EquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
+		PartNumber       *string                              `json:"PartNumber,omitempty"`
+		EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
 		// An array of relationships to equipmentFanModule resources.
-		FanModules       []EquipmentFanModuleRelationship     `json:"FanModules,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		FanModules       []EquipmentFanModuleRelationship            `json:"FanModules,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varEquipmentExpanderModuleWithoutEmbeddedStruct := EquipmentExpanderModuleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentExpanderModuleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentExpanderModuleWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentExpanderModule := _EquipmentExpanderModule{}
 		varEquipmentExpanderModule.ClassId = varEquipmentExpanderModuleWithoutEmbeddedStruct.ClassId
@@ -422,7 +474,7 @@ func (o *EquipmentExpanderModule) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentExpanderModule := _EquipmentExpanderModule{}
 
-	err = json.Unmarshal(bytes, &varEquipmentExpanderModule)
+	err = json.Unmarshal(data, &varEquipmentExpanderModule)
 	if err == nil {
 		o.EquipmentBase = varEquipmentExpanderModule.EquipmentBase
 	} else {
@@ -431,7 +483,7 @@ func (o *EquipmentExpanderModule) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ModuleId")

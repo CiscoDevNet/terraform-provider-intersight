@@ -22,8 +22,8 @@ Name | Type | Description | Notes
 **UsedCapacity** | Pointer to **int64** | Used Capacity of the drive in Bytes. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The unique identifier of the Hyperflex drive. | [optional] [readonly] 
 **Version** | Pointer to **string** | The firmware version of the Hyperflex drive. | [optional] [readonly] 
-**LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
-**Node** | Pointer to [**HyperflexNodeRelationship**](HyperflexNodeRelationship.md) |  | [optional] 
+**LocatorLed** | Pointer to [**NullableEquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
+**Node** | Pointer to [**NullableHyperflexNodeRelationship**](HyperflexNodeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -509,6 +509,16 @@ SetLocatorLed sets LocatorLed field to given value.
 
 HasLocatorLed returns a boolean if a field has been set.
 
+### SetLocatorLedNil
+
+`func (o *HyperflexDrive) SetLocatorLedNil(b bool)`
+
+ SetLocatorLedNil sets the value for LocatorLed to be an explicit nil
+
+### UnsetLocatorLed
+`func (o *HyperflexDrive) UnsetLocatorLed()`
+
+UnsetLocatorLed ensures that no value is present for LocatorLed, not even an explicit nil
 ### GetNode
 
 `func (o *HyperflexDrive) GetNode() HyperflexNodeRelationship`
@@ -534,6 +544,16 @@ SetNode sets Node field to given value.
 
 HasNode returns a boolean if a field has been set.
 
+### SetNodeNil
+
+`func (o *HyperflexDrive) SetNodeNil(b bool)`
+
+ SetNodeNil sets the value for Node to be an explicit nil
+
+### UnsetNode
+`func (o *HyperflexDrive) UnsetNode()`
+
+UnsetNode ensures that no value is present for Node, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

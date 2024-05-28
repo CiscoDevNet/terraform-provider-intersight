@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ManagementController type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ManagementController{}
 
 // ManagementController A specialized service processor that monitors the physical state of a server, using sensors and communicating with the system administrator through an independent connection.
 type ManagementController struct {
@@ -30,22 +34,22 @@ type ManagementController struct {
 	Model              *string                                  `json:"Model,omitempty"`
 	RootCaCertificates []CertificatemanagementRootCaCertificate `json:"RootCaCertificates,omitempty"`
 	// Desired state of the UEM stream. * `Disabled` - The UEM event channel is disabled. * `Enabled` - The UEM event channel is enabled.
-	UemStreamAdminState         *string                                  `json:"UemStreamAdminState,omitempty"`
-	AdapterUnit                 *AdapterUnitRelationship                 `json:"AdapterUnit,omitempty"`
-	ComputeBlade                *ComputeBladeRelationship                `json:"ComputeBlade,omitempty"`
-	ComputeRackUnit             *ComputeRackUnitRelationship             `json:"ComputeRackUnit,omitempty"`
-	EquipmentIoCardBase         *EquipmentIoCardBaseRelationship         `json:"EquipmentIoCardBase,omitempty"`
-	EquipmentSharedIoModule     *EquipmentSharedIoModuleRelationship     `json:"EquipmentSharedIoModule,omitempty"`
-	EquipmentSystemIoController *EquipmentSystemIoControllerRelationship `json:"EquipmentSystemIoController,omitempty"`
-	InventoryDeviceInfo         *InventoryDeviceInfoRelationship         `json:"InventoryDeviceInfo,omitempty"`
+	UemStreamAdminState         *string                                         `json:"UemStreamAdminState,omitempty"`
+	AdapterUnit                 NullableAdapterUnitRelationship                 `json:"AdapterUnit,omitempty"`
+	ComputeBlade                NullableComputeBladeRelationship                `json:"ComputeBlade,omitempty"`
+	ComputeRackUnit             NullableComputeRackUnitRelationship             `json:"ComputeRackUnit,omitempty"`
+	EquipmentIoCardBase         NullableEquipmentIoCardBaseRelationship         `json:"EquipmentIoCardBase,omitempty"`
+	EquipmentSharedIoModule     NullableEquipmentSharedIoModuleRelationship     `json:"EquipmentSharedIoModule,omitempty"`
+	EquipmentSystemIoController NullableEquipmentSystemIoControllerRelationship `json:"EquipmentSystemIoController,omitempty"`
+	InventoryDeviceInfo         NullableInventoryDeviceInfoRelationship         `json:"InventoryDeviceInfo,omitempty"`
 	// An array of relationships to managementInterface resources.
-	ManagementInterfaces []ManagementInterfaceRelationship    `json:"ManagementInterfaces,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	ManagementInterfaces []ManagementInterfaceRelationship           `json:"ManagementInterfaces,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to firmwareRunningFirmware resources.
-	RunningFirmware      []FirmwareRunningFirmwareRelationship `json:"RunningFirmware,omitempty"`
-	StorageSasExpander   *StorageSasExpanderRelationship       `json:"StorageSasExpander,omitempty"`
-	TopSystem            *TopSystemRelationship                `json:"TopSystem,omitempty"`
+	RunningFirmware      []FirmwareRunningFirmwareRelationship  `json:"RunningFirmware,omitempty"`
+	StorageSasExpander   NullableStorageSasExpanderRelationship `json:"StorageSasExpander,omitempty"`
+	TopSystem            NullableTopSystemRelationship          `json:"TopSystem,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -128,7 +132,7 @@ func (o *ManagementController) SetObjectType(v string) {
 
 // GetCertificate returns the Certificate field value if set, zero value otherwise.
 func (o *ManagementController) GetCertificate() CertificatemanagementImc {
-	if o == nil || o.Certificate == nil {
+	if o == nil || IsNil(o.Certificate) {
 		var ret CertificatemanagementImc
 		return ret
 	}
@@ -138,7 +142,7 @@ func (o *ManagementController) GetCertificate() CertificatemanagementImc {
 // GetCertificateOk returns a tuple with the Certificate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementController) GetCertificateOk() (*CertificatemanagementImc, bool) {
-	if o == nil || o.Certificate == nil {
+	if o == nil || IsNil(o.Certificate) {
 		return nil, false
 	}
 	return o.Certificate, true
@@ -146,7 +150,7 @@ func (o *ManagementController) GetCertificateOk() (*CertificatemanagementImc, bo
 
 // HasCertificate returns a boolean if a field has been set.
 func (o *ManagementController) HasCertificate() bool {
-	if o != nil && o.Certificate != nil {
+	if o != nil && !IsNil(o.Certificate) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *ManagementController) SetCertificate(v CertificatemanagementImc) {
 
 // GetKmipClientCertificate returns the KmipClientCertificate field value if set, zero value otherwise.
 func (o *ManagementController) GetKmipClientCertificate() CertificatemanagementImc {
-	if o == nil || o.KmipClientCertificate == nil {
+	if o == nil || IsNil(o.KmipClientCertificate) {
 		var ret CertificatemanagementImc
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *ManagementController) GetKmipClientCertificate() CertificatemanagementI
 // GetKmipClientCertificateOk returns a tuple with the KmipClientCertificate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementController) GetKmipClientCertificateOk() (*CertificatemanagementImc, bool) {
-	if o == nil || o.KmipClientCertificate == nil {
+	if o == nil || IsNil(o.KmipClientCertificate) {
 		return nil, false
 	}
 	return o.KmipClientCertificate, true
@@ -178,7 +182,7 @@ func (o *ManagementController) GetKmipClientCertificateOk() (*Certificatemanagem
 
 // HasKmipClientCertificate returns a boolean if a field has been set.
 func (o *ManagementController) HasKmipClientCertificate() bool {
-	if o != nil && o.KmipClientCertificate != nil {
+	if o != nil && !IsNil(o.KmipClientCertificate) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *ManagementController) SetKmipClientCertificate(v CertificatemanagementI
 
 // GetModel returns the Model field value if set, zero value otherwise.
 func (o *ManagementController) GetModel() string {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		var ret string
 		return ret
 	}
@@ -202,7 +206,7 @@ func (o *ManagementController) GetModel() string {
 // GetModelOk returns a tuple with the Model field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementController) GetModelOk() (*string, bool) {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		return nil, false
 	}
 	return o.Model, true
@@ -210,7 +214,7 @@ func (o *ManagementController) GetModelOk() (*string, bool) {
 
 // HasModel returns a boolean if a field has been set.
 func (o *ManagementController) HasModel() bool {
-	if o != nil && o.Model != nil {
+	if o != nil && !IsNil(o.Model) {
 		return true
 	}
 
@@ -235,7 +239,7 @@ func (o *ManagementController) GetRootCaCertificates() []CertificatemanagementRo
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetRootCaCertificatesOk() ([]CertificatemanagementRootCaCertificate, bool) {
-	if o == nil || o.RootCaCertificates == nil {
+	if o == nil || IsNil(o.RootCaCertificates) {
 		return nil, false
 	}
 	return o.RootCaCertificates, true
@@ -243,7 +247,7 @@ func (o *ManagementController) GetRootCaCertificatesOk() ([]Certificatemanagemen
 
 // HasRootCaCertificates returns a boolean if a field has been set.
 func (o *ManagementController) HasRootCaCertificates() bool {
-	if o != nil && o.RootCaCertificates != nil {
+	if o != nil && IsNil(o.RootCaCertificates) {
 		return true
 	}
 
@@ -257,7 +261,7 @@ func (o *ManagementController) SetRootCaCertificates(v []CertificatemanagementRo
 
 // GetUemStreamAdminState returns the UemStreamAdminState field value if set, zero value otherwise.
 func (o *ManagementController) GetUemStreamAdminState() string {
-	if o == nil || o.UemStreamAdminState == nil {
+	if o == nil || IsNil(o.UemStreamAdminState) {
 		var ret string
 		return ret
 	}
@@ -267,7 +271,7 @@ func (o *ManagementController) GetUemStreamAdminState() string {
 // GetUemStreamAdminStateOk returns a tuple with the UemStreamAdminState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementController) GetUemStreamAdminStateOk() (*string, bool) {
-	if o == nil || o.UemStreamAdminState == nil {
+	if o == nil || IsNil(o.UemStreamAdminState) {
 		return nil, false
 	}
 	return o.UemStreamAdminState, true
@@ -275,7 +279,7 @@ func (o *ManagementController) GetUemStreamAdminStateOk() (*string, bool) {
 
 // HasUemStreamAdminState returns a boolean if a field has been set.
 func (o *ManagementController) HasUemStreamAdminState() bool {
-	if o != nil && o.UemStreamAdminState != nil {
+	if o != nil && !IsNil(o.UemStreamAdminState) {
 		return true
 	}
 
@@ -287,228 +291,305 @@ func (o *ManagementController) SetUemStreamAdminState(v string) {
 	o.UemStreamAdminState = &v
 }
 
-// GetAdapterUnit returns the AdapterUnit field value if set, zero value otherwise.
+// GetAdapterUnit returns the AdapterUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementController) GetAdapterUnit() AdapterUnitRelationship {
-	if o == nil || o.AdapterUnit == nil {
+	if o == nil || IsNil(o.AdapterUnit.Get()) {
 		var ret AdapterUnitRelationship
 		return ret
 	}
-	return *o.AdapterUnit
+	return *o.AdapterUnit.Get()
 }
 
 // GetAdapterUnitOk returns a tuple with the AdapterUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetAdapterUnitOk() (*AdapterUnitRelationship, bool) {
-	if o == nil || o.AdapterUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdapterUnit, true
+	return o.AdapterUnit.Get(), o.AdapterUnit.IsSet()
 }
 
 // HasAdapterUnit returns a boolean if a field has been set.
 func (o *ManagementController) HasAdapterUnit() bool {
-	if o != nil && o.AdapterUnit != nil {
+	if o != nil && o.AdapterUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAdapterUnit gets a reference to the given AdapterUnitRelationship and assigns it to the AdapterUnit field.
+// SetAdapterUnit gets a reference to the given NullableAdapterUnitRelationship and assigns it to the AdapterUnit field.
 func (o *ManagementController) SetAdapterUnit(v AdapterUnitRelationship) {
-	o.AdapterUnit = &v
+	o.AdapterUnit.Set(&v)
 }
 
-// GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise.
+// SetAdapterUnitNil sets the value for AdapterUnit to be an explicit nil
+func (o *ManagementController) SetAdapterUnitNil() {
+	o.AdapterUnit.Set(nil)
+}
+
+// UnsetAdapterUnit ensures that no value is present for AdapterUnit, not even an explicit nil
+func (o *ManagementController) UnsetAdapterUnit() {
+	o.AdapterUnit.Unset()
+}
+
+// GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementController) GetComputeBlade() ComputeBladeRelationship {
-	if o == nil || o.ComputeBlade == nil {
+	if o == nil || IsNil(o.ComputeBlade.Get()) {
 		var ret ComputeBladeRelationship
 		return ret
 	}
-	return *o.ComputeBlade
+	return *o.ComputeBlade.Get()
 }
 
 // GetComputeBladeOk returns a tuple with the ComputeBlade field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetComputeBladeOk() (*ComputeBladeRelationship, bool) {
-	if o == nil || o.ComputeBlade == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBlade, true
+	return o.ComputeBlade.Get(), o.ComputeBlade.IsSet()
 }
 
 // HasComputeBlade returns a boolean if a field has been set.
 func (o *ManagementController) HasComputeBlade() bool {
-	if o != nil && o.ComputeBlade != nil {
+	if o != nil && o.ComputeBlade.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBlade gets a reference to the given ComputeBladeRelationship and assigns it to the ComputeBlade field.
+// SetComputeBlade gets a reference to the given NullableComputeBladeRelationship and assigns it to the ComputeBlade field.
 func (o *ManagementController) SetComputeBlade(v ComputeBladeRelationship) {
-	o.ComputeBlade = &v
+	o.ComputeBlade.Set(&v)
 }
 
-// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise.
+// SetComputeBladeNil sets the value for ComputeBlade to be an explicit nil
+func (o *ManagementController) SetComputeBladeNil() {
+	o.ComputeBlade.Set(nil)
+}
+
+// UnsetComputeBlade ensures that no value is present for ComputeBlade, not even an explicit nil
+func (o *ManagementController) UnsetComputeBlade() {
+	o.ComputeBlade.Unset()
+}
+
+// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementController) GetComputeRackUnit() ComputeRackUnitRelationship {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil || IsNil(o.ComputeRackUnit.Get()) {
 		var ret ComputeRackUnitRelationship
 		return ret
 	}
-	return *o.ComputeRackUnit
+	return *o.ComputeRackUnit.Get()
 }
 
 // GetComputeRackUnitOk returns a tuple with the ComputeRackUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetComputeRackUnitOk() (*ComputeRackUnitRelationship, bool) {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeRackUnit, true
+	return o.ComputeRackUnit.Get(), o.ComputeRackUnit.IsSet()
 }
 
 // HasComputeRackUnit returns a boolean if a field has been set.
 func (o *ManagementController) HasComputeRackUnit() bool {
-	if o != nil && o.ComputeRackUnit != nil {
+	if o != nil && o.ComputeRackUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeRackUnit gets a reference to the given ComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
+// SetComputeRackUnit gets a reference to the given NullableComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
 func (o *ManagementController) SetComputeRackUnit(v ComputeRackUnitRelationship) {
-	o.ComputeRackUnit = &v
+	o.ComputeRackUnit.Set(&v)
 }
 
-// GetEquipmentIoCardBase returns the EquipmentIoCardBase field value if set, zero value otherwise.
+// SetComputeRackUnitNil sets the value for ComputeRackUnit to be an explicit nil
+func (o *ManagementController) SetComputeRackUnitNil() {
+	o.ComputeRackUnit.Set(nil)
+}
+
+// UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
+func (o *ManagementController) UnsetComputeRackUnit() {
+	o.ComputeRackUnit.Unset()
+}
+
+// GetEquipmentIoCardBase returns the EquipmentIoCardBase field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementController) GetEquipmentIoCardBase() EquipmentIoCardBaseRelationship {
-	if o == nil || o.EquipmentIoCardBase == nil {
+	if o == nil || IsNil(o.EquipmentIoCardBase.Get()) {
 		var ret EquipmentIoCardBaseRelationship
 		return ret
 	}
-	return *o.EquipmentIoCardBase
+	return *o.EquipmentIoCardBase.Get()
 }
 
 // GetEquipmentIoCardBaseOk returns a tuple with the EquipmentIoCardBase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetEquipmentIoCardBaseOk() (*EquipmentIoCardBaseRelationship, bool) {
-	if o == nil || o.EquipmentIoCardBase == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentIoCardBase, true
+	return o.EquipmentIoCardBase.Get(), o.EquipmentIoCardBase.IsSet()
 }
 
 // HasEquipmentIoCardBase returns a boolean if a field has been set.
 func (o *ManagementController) HasEquipmentIoCardBase() bool {
-	if o != nil && o.EquipmentIoCardBase != nil {
+	if o != nil && o.EquipmentIoCardBase.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentIoCardBase gets a reference to the given EquipmentIoCardBaseRelationship and assigns it to the EquipmentIoCardBase field.
+// SetEquipmentIoCardBase gets a reference to the given NullableEquipmentIoCardBaseRelationship and assigns it to the EquipmentIoCardBase field.
 func (o *ManagementController) SetEquipmentIoCardBase(v EquipmentIoCardBaseRelationship) {
-	o.EquipmentIoCardBase = &v
+	o.EquipmentIoCardBase.Set(&v)
 }
 
-// GetEquipmentSharedIoModule returns the EquipmentSharedIoModule field value if set, zero value otherwise.
+// SetEquipmentIoCardBaseNil sets the value for EquipmentIoCardBase to be an explicit nil
+func (o *ManagementController) SetEquipmentIoCardBaseNil() {
+	o.EquipmentIoCardBase.Set(nil)
+}
+
+// UnsetEquipmentIoCardBase ensures that no value is present for EquipmentIoCardBase, not even an explicit nil
+func (o *ManagementController) UnsetEquipmentIoCardBase() {
+	o.EquipmentIoCardBase.Unset()
+}
+
+// GetEquipmentSharedIoModule returns the EquipmentSharedIoModule field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementController) GetEquipmentSharedIoModule() EquipmentSharedIoModuleRelationship {
-	if o == nil || o.EquipmentSharedIoModule == nil {
+	if o == nil || IsNil(o.EquipmentSharedIoModule.Get()) {
 		var ret EquipmentSharedIoModuleRelationship
 		return ret
 	}
-	return *o.EquipmentSharedIoModule
+	return *o.EquipmentSharedIoModule.Get()
 }
 
 // GetEquipmentSharedIoModuleOk returns a tuple with the EquipmentSharedIoModule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetEquipmentSharedIoModuleOk() (*EquipmentSharedIoModuleRelationship, bool) {
-	if o == nil || o.EquipmentSharedIoModule == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentSharedIoModule, true
+	return o.EquipmentSharedIoModule.Get(), o.EquipmentSharedIoModule.IsSet()
 }
 
 // HasEquipmentSharedIoModule returns a boolean if a field has been set.
 func (o *ManagementController) HasEquipmentSharedIoModule() bool {
-	if o != nil && o.EquipmentSharedIoModule != nil {
+	if o != nil && o.EquipmentSharedIoModule.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentSharedIoModule gets a reference to the given EquipmentSharedIoModuleRelationship and assigns it to the EquipmentSharedIoModule field.
+// SetEquipmentSharedIoModule gets a reference to the given NullableEquipmentSharedIoModuleRelationship and assigns it to the EquipmentSharedIoModule field.
 func (o *ManagementController) SetEquipmentSharedIoModule(v EquipmentSharedIoModuleRelationship) {
-	o.EquipmentSharedIoModule = &v
+	o.EquipmentSharedIoModule.Set(&v)
 }
 
-// GetEquipmentSystemIoController returns the EquipmentSystemIoController field value if set, zero value otherwise.
+// SetEquipmentSharedIoModuleNil sets the value for EquipmentSharedIoModule to be an explicit nil
+func (o *ManagementController) SetEquipmentSharedIoModuleNil() {
+	o.EquipmentSharedIoModule.Set(nil)
+}
+
+// UnsetEquipmentSharedIoModule ensures that no value is present for EquipmentSharedIoModule, not even an explicit nil
+func (o *ManagementController) UnsetEquipmentSharedIoModule() {
+	o.EquipmentSharedIoModule.Unset()
+}
+
+// GetEquipmentSystemIoController returns the EquipmentSystemIoController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementController) GetEquipmentSystemIoController() EquipmentSystemIoControllerRelationship {
-	if o == nil || o.EquipmentSystemIoController == nil {
+	if o == nil || IsNil(o.EquipmentSystemIoController.Get()) {
 		var ret EquipmentSystemIoControllerRelationship
 		return ret
 	}
-	return *o.EquipmentSystemIoController
+	return *o.EquipmentSystemIoController.Get()
 }
 
 // GetEquipmentSystemIoControllerOk returns a tuple with the EquipmentSystemIoController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetEquipmentSystemIoControllerOk() (*EquipmentSystemIoControllerRelationship, bool) {
-	if o == nil || o.EquipmentSystemIoController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentSystemIoController, true
+	return o.EquipmentSystemIoController.Get(), o.EquipmentSystemIoController.IsSet()
 }
 
 // HasEquipmentSystemIoController returns a boolean if a field has been set.
 func (o *ManagementController) HasEquipmentSystemIoController() bool {
-	if o != nil && o.EquipmentSystemIoController != nil {
+	if o != nil && o.EquipmentSystemIoController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentSystemIoController gets a reference to the given EquipmentSystemIoControllerRelationship and assigns it to the EquipmentSystemIoController field.
+// SetEquipmentSystemIoController gets a reference to the given NullableEquipmentSystemIoControllerRelationship and assigns it to the EquipmentSystemIoController field.
 func (o *ManagementController) SetEquipmentSystemIoController(v EquipmentSystemIoControllerRelationship) {
-	o.EquipmentSystemIoController = &v
+	o.EquipmentSystemIoController.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetEquipmentSystemIoControllerNil sets the value for EquipmentSystemIoController to be an explicit nil
+func (o *ManagementController) SetEquipmentSystemIoControllerNil() {
+	o.EquipmentSystemIoController.Set(nil)
+}
+
+// UnsetEquipmentSystemIoController ensures that no value is present for EquipmentSystemIoController, not even an explicit nil
+func (o *ManagementController) UnsetEquipmentSystemIoController() {
+	o.EquipmentSystemIoController.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementController) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *ManagementController) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *ManagementController) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
+}
+
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *ManagementController) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *ManagementController) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
 }
 
 // GetManagementInterfaces returns the ManagementInterfaces field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -524,7 +605,7 @@ func (o *ManagementController) GetManagementInterfaces() []ManagementInterfaceRe
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetManagementInterfacesOk() ([]ManagementInterfaceRelationship, bool) {
-	if o == nil || o.ManagementInterfaces == nil {
+	if o == nil || IsNil(o.ManagementInterfaces) {
 		return nil, false
 	}
 	return o.ManagementInterfaces, true
@@ -532,7 +613,7 @@ func (o *ManagementController) GetManagementInterfacesOk() ([]ManagementInterfac
 
 // HasManagementInterfaces returns a boolean if a field has been set.
 func (o *ManagementController) HasManagementInterfaces() bool {
-	if o != nil && o.ManagementInterfaces != nil {
+	if o != nil && IsNil(o.ManagementInterfaces) {
 		return true
 	}
 
@@ -544,68 +625,90 @@ func (o *ManagementController) SetManagementInterfaces(v []ManagementInterfaceRe
 	o.ManagementInterfaces = v
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementController) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *ManagementController) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *ManagementController) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *ManagementController) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *ManagementController) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementController) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ManagementController) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ManagementController) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ManagementController) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ManagementController) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 // GetRunningFirmware returns the RunningFirmware field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -621,7 +724,7 @@ func (o *ManagementController) GetRunningFirmware() []FirmwareRunningFirmwareRel
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetRunningFirmwareOk() ([]FirmwareRunningFirmwareRelationship, bool) {
-	if o == nil || o.RunningFirmware == nil {
+	if o == nil || IsNil(o.RunningFirmware) {
 		return nil, false
 	}
 	return o.RunningFirmware, true
@@ -629,7 +732,7 @@ func (o *ManagementController) GetRunningFirmwareOk() ([]FirmwareRunningFirmware
 
 // HasRunningFirmware returns a boolean if a field has been set.
 func (o *ManagementController) HasRunningFirmware() bool {
-	if o != nil && o.RunningFirmware != nil {
+	if o != nil && IsNil(o.RunningFirmware) {
 		return true
 	}
 
@@ -641,149 +744,197 @@ func (o *ManagementController) SetRunningFirmware(v []FirmwareRunningFirmwareRel
 	o.RunningFirmware = v
 }
 
-// GetStorageSasExpander returns the StorageSasExpander field value if set, zero value otherwise.
+// GetStorageSasExpander returns the StorageSasExpander field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementController) GetStorageSasExpander() StorageSasExpanderRelationship {
-	if o == nil || o.StorageSasExpander == nil {
+	if o == nil || IsNil(o.StorageSasExpander.Get()) {
 		var ret StorageSasExpanderRelationship
 		return ret
 	}
-	return *o.StorageSasExpander
+	return *o.StorageSasExpander.Get()
 }
 
 // GetStorageSasExpanderOk returns a tuple with the StorageSasExpander field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetStorageSasExpanderOk() (*StorageSasExpanderRelationship, bool) {
-	if o == nil || o.StorageSasExpander == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageSasExpander, true
+	return o.StorageSasExpander.Get(), o.StorageSasExpander.IsSet()
 }
 
 // HasStorageSasExpander returns a boolean if a field has been set.
 func (o *ManagementController) HasStorageSasExpander() bool {
-	if o != nil && o.StorageSasExpander != nil {
+	if o != nil && o.StorageSasExpander.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageSasExpander gets a reference to the given StorageSasExpanderRelationship and assigns it to the StorageSasExpander field.
+// SetStorageSasExpander gets a reference to the given NullableStorageSasExpanderRelationship and assigns it to the StorageSasExpander field.
 func (o *ManagementController) SetStorageSasExpander(v StorageSasExpanderRelationship) {
-	o.StorageSasExpander = &v
+	o.StorageSasExpander.Set(&v)
 }
 
-// GetTopSystem returns the TopSystem field value if set, zero value otherwise.
+// SetStorageSasExpanderNil sets the value for StorageSasExpander to be an explicit nil
+func (o *ManagementController) SetStorageSasExpanderNil() {
+	o.StorageSasExpander.Set(nil)
+}
+
+// UnsetStorageSasExpander ensures that no value is present for StorageSasExpander, not even an explicit nil
+func (o *ManagementController) UnsetStorageSasExpander() {
+	o.StorageSasExpander.Unset()
+}
+
+// GetTopSystem returns the TopSystem field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementController) GetTopSystem() TopSystemRelationship {
-	if o == nil || o.TopSystem == nil {
+	if o == nil || IsNil(o.TopSystem.Get()) {
 		var ret TopSystemRelationship
 		return ret
 	}
-	return *o.TopSystem
+	return *o.TopSystem.Get()
 }
 
 // GetTopSystemOk returns a tuple with the TopSystem field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementController) GetTopSystemOk() (*TopSystemRelationship, bool) {
-	if o == nil || o.TopSystem == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TopSystem, true
+	return o.TopSystem.Get(), o.TopSystem.IsSet()
 }
 
 // HasTopSystem returns a boolean if a field has been set.
 func (o *ManagementController) HasTopSystem() bool {
-	if o != nil && o.TopSystem != nil {
+	if o != nil && o.TopSystem.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTopSystem gets a reference to the given TopSystemRelationship and assigns it to the TopSystem field.
+// SetTopSystem gets a reference to the given NullableTopSystemRelationship and assigns it to the TopSystem field.
 func (o *ManagementController) SetTopSystem(v TopSystemRelationship) {
-	o.TopSystem = &v
+	o.TopSystem.Set(&v)
+}
+
+// SetTopSystemNil sets the value for TopSystem to be an explicit nil
+func (o *ManagementController) SetTopSystemNil() {
+	o.TopSystem.Set(nil)
+}
+
+// UnsetTopSystem ensures that no value is present for TopSystem, not even an explicit nil
+func (o *ManagementController) UnsetTopSystem() {
+	o.TopSystem.Unset()
 }
 
 func (o ManagementController) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ManagementController) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Certificate != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Certificate) {
 		toSerialize["Certificate"] = o.Certificate
 	}
-	if o.KmipClientCertificate != nil {
+	if !IsNil(o.KmipClientCertificate) {
 		toSerialize["KmipClientCertificate"] = o.KmipClientCertificate
 	}
-	if o.Model != nil {
+	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
 	}
 	if o.RootCaCertificates != nil {
 		toSerialize["RootCaCertificates"] = o.RootCaCertificates
 	}
-	if o.UemStreamAdminState != nil {
+	if !IsNil(o.UemStreamAdminState) {
 		toSerialize["UemStreamAdminState"] = o.UemStreamAdminState
 	}
-	if o.AdapterUnit != nil {
-		toSerialize["AdapterUnit"] = o.AdapterUnit
+	if o.AdapterUnit.IsSet() {
+		toSerialize["AdapterUnit"] = o.AdapterUnit.Get()
 	}
-	if o.ComputeBlade != nil {
-		toSerialize["ComputeBlade"] = o.ComputeBlade
+	if o.ComputeBlade.IsSet() {
+		toSerialize["ComputeBlade"] = o.ComputeBlade.Get()
 	}
-	if o.ComputeRackUnit != nil {
-		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit
+	if o.ComputeRackUnit.IsSet() {
+		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit.Get()
 	}
-	if o.EquipmentIoCardBase != nil {
-		toSerialize["EquipmentIoCardBase"] = o.EquipmentIoCardBase
+	if o.EquipmentIoCardBase.IsSet() {
+		toSerialize["EquipmentIoCardBase"] = o.EquipmentIoCardBase.Get()
 	}
-	if o.EquipmentSharedIoModule != nil {
-		toSerialize["EquipmentSharedIoModule"] = o.EquipmentSharedIoModule
+	if o.EquipmentSharedIoModule.IsSet() {
+		toSerialize["EquipmentSharedIoModule"] = o.EquipmentSharedIoModule.Get()
 	}
-	if o.EquipmentSystemIoController != nil {
-		toSerialize["EquipmentSystemIoController"] = o.EquipmentSystemIoController
+	if o.EquipmentSystemIoController.IsSet() {
+		toSerialize["EquipmentSystemIoController"] = o.EquipmentSystemIoController.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
 	if o.ManagementInterfaces != nil {
 		toSerialize["ManagementInterfaces"] = o.ManagementInterfaces
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.RunningFirmware != nil {
 		toSerialize["RunningFirmware"] = o.RunningFirmware
 	}
-	if o.StorageSasExpander != nil {
-		toSerialize["StorageSasExpander"] = o.StorageSasExpander
+	if o.StorageSasExpander.IsSet() {
+		toSerialize["StorageSasExpander"] = o.StorageSasExpander.Get()
 	}
-	if o.TopSystem != nil {
-		toSerialize["TopSystem"] = o.TopSystem
+	if o.TopSystem.IsSet() {
+		toSerialize["TopSystem"] = o.TopSystem.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ManagementController) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ManagementController) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ManagementControllerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -795,27 +946,27 @@ func (o *ManagementController) UnmarshalJSON(bytes []byte) (err error) {
 		Model              *string                                  `json:"Model,omitempty"`
 		RootCaCertificates []CertificatemanagementRootCaCertificate `json:"RootCaCertificates,omitempty"`
 		// Desired state of the UEM stream. * `Disabled` - The UEM event channel is disabled. * `Enabled` - The UEM event channel is enabled.
-		UemStreamAdminState         *string                                  `json:"UemStreamAdminState,omitempty"`
-		AdapterUnit                 *AdapterUnitRelationship                 `json:"AdapterUnit,omitempty"`
-		ComputeBlade                *ComputeBladeRelationship                `json:"ComputeBlade,omitempty"`
-		ComputeRackUnit             *ComputeRackUnitRelationship             `json:"ComputeRackUnit,omitempty"`
-		EquipmentIoCardBase         *EquipmentIoCardBaseRelationship         `json:"EquipmentIoCardBase,omitempty"`
-		EquipmentSharedIoModule     *EquipmentSharedIoModuleRelationship     `json:"EquipmentSharedIoModule,omitempty"`
-		EquipmentSystemIoController *EquipmentSystemIoControllerRelationship `json:"EquipmentSystemIoController,omitempty"`
-		InventoryDeviceInfo         *InventoryDeviceInfoRelationship         `json:"InventoryDeviceInfo,omitempty"`
+		UemStreamAdminState         *string                                         `json:"UemStreamAdminState,omitempty"`
+		AdapterUnit                 NullableAdapterUnitRelationship                 `json:"AdapterUnit,omitempty"`
+		ComputeBlade                NullableComputeBladeRelationship                `json:"ComputeBlade,omitempty"`
+		ComputeRackUnit             NullableComputeRackUnitRelationship             `json:"ComputeRackUnit,omitempty"`
+		EquipmentIoCardBase         NullableEquipmentIoCardBaseRelationship         `json:"EquipmentIoCardBase,omitempty"`
+		EquipmentSharedIoModule     NullableEquipmentSharedIoModuleRelationship     `json:"EquipmentSharedIoModule,omitempty"`
+		EquipmentSystemIoController NullableEquipmentSystemIoControllerRelationship `json:"EquipmentSystemIoController,omitempty"`
+		InventoryDeviceInfo         NullableInventoryDeviceInfoRelationship         `json:"InventoryDeviceInfo,omitempty"`
 		// An array of relationships to managementInterface resources.
-		ManagementInterfaces []ManagementInterfaceRelationship    `json:"ManagementInterfaces,omitempty"`
-		NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		ManagementInterfaces []ManagementInterfaceRelationship           `json:"ManagementInterfaces,omitempty"`
+		NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to firmwareRunningFirmware resources.
-		RunningFirmware    []FirmwareRunningFirmwareRelationship `json:"RunningFirmware,omitempty"`
-		StorageSasExpander *StorageSasExpanderRelationship       `json:"StorageSasExpander,omitempty"`
-		TopSystem          *TopSystemRelationship                `json:"TopSystem,omitempty"`
+		RunningFirmware    []FirmwareRunningFirmwareRelationship  `json:"RunningFirmware,omitempty"`
+		StorageSasExpander NullableStorageSasExpanderRelationship `json:"StorageSasExpander,omitempty"`
+		TopSystem          NullableTopSystemRelationship          `json:"TopSystem,omitempty"`
 	}
 
 	varManagementControllerWithoutEmbeddedStruct := ManagementControllerWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varManagementControllerWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varManagementControllerWithoutEmbeddedStruct)
 	if err == nil {
 		varManagementController := _ManagementController{}
 		varManagementController.ClassId = varManagementControllerWithoutEmbeddedStruct.ClassId
@@ -845,7 +996,7 @@ func (o *ManagementController) UnmarshalJSON(bytes []byte) (err error) {
 
 	varManagementController := _ManagementController{}
 
-	err = json.Unmarshal(bytes, &varManagementController)
+	err = json.Unmarshal(data, &varManagementController)
 	if err == nil {
 		o.InventoryBase = varManagementController.InventoryBase
 	} else {
@@ -854,7 +1005,7 @@ func (o *ManagementController) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Certificate")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilityEquipmentSlotArray type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilityEquipmentSlotArray{}
 
 // CapabilityEquipmentSlotArray Type to represent additional switch specific capabilities.
 type CapabilityEquipmentSlotArray struct {
@@ -136,7 +140,7 @@ func (o *CapabilityEquipmentSlotArray) SetObjectType(v string) {
 
 // GetFirstIndex returns the FirstIndex field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetFirstIndex() float32 {
-	if o == nil || o.FirstIndex == nil {
+	if o == nil || IsNil(o.FirstIndex) {
 		var ret float32
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *CapabilityEquipmentSlotArray) GetFirstIndex() float32 {
 // GetFirstIndexOk returns a tuple with the FirstIndex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetFirstIndexOk() (*float32, bool) {
-	if o == nil || o.FirstIndex == nil {
+	if o == nil || IsNil(o.FirstIndex) {
 		return nil, false
 	}
 	return o.FirstIndex, true
@@ -154,7 +158,7 @@ func (o *CapabilityEquipmentSlotArray) GetFirstIndexOk() (*float32, bool) {
 
 // HasFirstIndex returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasFirstIndex() bool {
-	if o != nil && o.FirstIndex != nil {
+	if o != nil && !IsNil(o.FirstIndex) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *CapabilityEquipmentSlotArray) SetFirstIndex(v float32) {
 
 // GetHeight returns the Height field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetHeight() float32 {
-	if o == nil || o.Height == nil {
+	if o == nil || IsNil(o.Height) {
 		var ret float32
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *CapabilityEquipmentSlotArray) GetHeight() float32 {
 // GetHeightOk returns a tuple with the Height field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetHeightOk() (*float32, bool) {
-	if o == nil || o.Height == nil {
+	if o == nil || IsNil(o.Height) {
 		return nil, false
 	}
 	return o.Height, true
@@ -186,7 +190,7 @@ func (o *CapabilityEquipmentSlotArray) GetHeightOk() (*float32, bool) {
 
 // HasHeight returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasHeight() bool {
-	if o != nil && o.Height != nil {
+	if o != nil && !IsNil(o.Height) {
 		return true
 	}
 
@@ -200,7 +204,7 @@ func (o *CapabilityEquipmentSlotArray) SetHeight(v float32) {
 
 // GetHorizontalStartOffset returns the HorizontalStartOffset field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetHorizontalStartOffset() float32 {
-	if o == nil || o.HorizontalStartOffset == nil {
+	if o == nil || IsNil(o.HorizontalStartOffset) {
 		var ret float32
 		return ret
 	}
@@ -210,7 +214,7 @@ func (o *CapabilityEquipmentSlotArray) GetHorizontalStartOffset() float32 {
 // GetHorizontalStartOffsetOk returns a tuple with the HorizontalStartOffset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetHorizontalStartOffsetOk() (*float32, bool) {
-	if o == nil || o.HorizontalStartOffset == nil {
+	if o == nil || IsNil(o.HorizontalStartOffset) {
 		return nil, false
 	}
 	return o.HorizontalStartOffset, true
@@ -218,7 +222,7 @@ func (o *CapabilityEquipmentSlotArray) GetHorizontalStartOffsetOk() (*float32, b
 
 // HasHorizontalStartOffset returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasHorizontalStartOffset() bool {
-	if o != nil && o.HorizontalStartOffset != nil {
+	if o != nil && !IsNil(o.HorizontalStartOffset) {
 		return true
 	}
 
@@ -232,7 +236,7 @@ func (o *CapabilityEquipmentSlotArray) SetHorizontalStartOffset(v float32) {
 
 // GetInlineGroupSeparation returns the InlineGroupSeparation field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetInlineGroupSeparation() float32 {
-	if o == nil || o.InlineGroupSeparation == nil {
+	if o == nil || IsNil(o.InlineGroupSeparation) {
 		var ret float32
 		return ret
 	}
@@ -242,7 +246,7 @@ func (o *CapabilityEquipmentSlotArray) GetInlineGroupSeparation() float32 {
 // GetInlineGroupSeparationOk returns a tuple with the InlineGroupSeparation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetInlineGroupSeparationOk() (*float32, bool) {
-	if o == nil || o.InlineGroupSeparation == nil {
+	if o == nil || IsNil(o.InlineGroupSeparation) {
 		return nil, false
 	}
 	return o.InlineGroupSeparation, true
@@ -250,7 +254,7 @@ func (o *CapabilityEquipmentSlotArray) GetInlineGroupSeparationOk() (*float32, b
 
 // HasInlineGroupSeparation returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasInlineGroupSeparation() bool {
-	if o != nil && o.InlineGroupSeparation != nil {
+	if o != nil && !IsNil(o.InlineGroupSeparation) {
 		return true
 	}
 
@@ -264,7 +268,7 @@ func (o *CapabilityEquipmentSlotArray) SetInlineGroupSeparation(v float32) {
 
 // GetInlineGroupSize returns the InlineGroupSize field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetInlineGroupSize() float32 {
-	if o == nil || o.InlineGroupSize == nil {
+	if o == nil || IsNil(o.InlineGroupSize) {
 		var ret float32
 		return ret
 	}
@@ -274,7 +278,7 @@ func (o *CapabilityEquipmentSlotArray) GetInlineGroupSize() float32 {
 // GetInlineGroupSizeOk returns a tuple with the InlineGroupSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetInlineGroupSizeOk() (*float32, bool) {
-	if o == nil || o.InlineGroupSize == nil {
+	if o == nil || IsNil(o.InlineGroupSize) {
 		return nil, false
 	}
 	return o.InlineGroupSize, true
@@ -282,7 +286,7 @@ func (o *CapabilityEquipmentSlotArray) GetInlineGroupSizeOk() (*float32, bool) {
 
 // HasInlineGroupSize returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasInlineGroupSize() bool {
-	if o != nil && o.InlineGroupSize != nil {
+	if o != nil && !IsNil(o.InlineGroupSize) {
 		return true
 	}
 
@@ -296,7 +300,7 @@ func (o *CapabilityEquipmentSlotArray) SetInlineGroupSize(v float32) {
 
 // GetInlineOffset returns the InlineOffset field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetInlineOffset() float32 {
-	if o == nil || o.InlineOffset == nil {
+	if o == nil || IsNil(o.InlineOffset) {
 		var ret float32
 		return ret
 	}
@@ -306,7 +310,7 @@ func (o *CapabilityEquipmentSlotArray) GetInlineOffset() float32 {
 // GetInlineOffsetOk returns a tuple with the InlineOffset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetInlineOffsetOk() (*float32, bool) {
-	if o == nil || o.InlineOffset == nil {
+	if o == nil || IsNil(o.InlineOffset) {
 		return nil, false
 	}
 	return o.InlineOffset, true
@@ -314,7 +318,7 @@ func (o *CapabilityEquipmentSlotArray) GetInlineOffsetOk() (*float32, bool) {
 
 // HasInlineOffset returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasInlineOffset() bool {
-	if o != nil && o.InlineOffset != nil {
+	if o != nil && !IsNil(o.InlineOffset) {
 		return true
 	}
 
@@ -328,7 +332,7 @@ func (o *CapabilityEquipmentSlotArray) SetInlineOffset(v float32) {
 
 // GetLocation returns the Location field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetLocation() string {
-	if o == nil || o.Location == nil {
+	if o == nil || IsNil(o.Location) {
 		var ret string
 		return ret
 	}
@@ -338,7 +342,7 @@ func (o *CapabilityEquipmentSlotArray) GetLocation() string {
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetLocationOk() (*string, bool) {
-	if o == nil || o.Location == nil {
+	if o == nil || IsNil(o.Location) {
 		return nil, false
 	}
 	return o.Location, true
@@ -346,7 +350,7 @@ func (o *CapabilityEquipmentSlotArray) GetLocationOk() (*string, bool) {
 
 // HasLocation returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasLocation() bool {
-	if o != nil && o.Location != nil {
+	if o != nil && !IsNil(o.Location) {
 		return true
 	}
 
@@ -360,7 +364,7 @@ func (o *CapabilityEquipmentSlotArray) SetLocation(v string) {
 
 // GetNumberOfSlots returns the NumberOfSlots field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetNumberOfSlots() int64 {
-	if o == nil || o.NumberOfSlots == nil {
+	if o == nil || IsNil(o.NumberOfSlots) {
 		var ret int64
 		return ret
 	}
@@ -370,7 +374,7 @@ func (o *CapabilityEquipmentSlotArray) GetNumberOfSlots() int64 {
 // GetNumberOfSlotsOk returns a tuple with the NumberOfSlots field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetNumberOfSlotsOk() (*int64, bool) {
-	if o == nil || o.NumberOfSlots == nil {
+	if o == nil || IsNil(o.NumberOfSlots) {
 		return nil, false
 	}
 	return o.NumberOfSlots, true
@@ -378,7 +382,7 @@ func (o *CapabilityEquipmentSlotArray) GetNumberOfSlotsOk() (*int64, bool) {
 
 // HasNumberOfSlots returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasNumberOfSlots() bool {
-	if o != nil && o.NumberOfSlots != nil {
+	if o != nil && !IsNil(o.NumberOfSlots) {
 		return true
 	}
 
@@ -392,7 +396,7 @@ func (o *CapabilityEquipmentSlotArray) SetNumberOfSlots(v int64) {
 
 // GetOrientation returns the Orientation field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetOrientation() string {
-	if o == nil || o.Orientation == nil {
+	if o == nil || IsNil(o.Orientation) {
 		var ret string
 		return ret
 	}
@@ -402,7 +406,7 @@ func (o *CapabilityEquipmentSlotArray) GetOrientation() string {
 // GetOrientationOk returns a tuple with the Orientation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetOrientationOk() (*string, bool) {
-	if o == nil || o.Orientation == nil {
+	if o == nil || IsNil(o.Orientation) {
 		return nil, false
 	}
 	return o.Orientation, true
@@ -410,7 +414,7 @@ func (o *CapabilityEquipmentSlotArray) GetOrientationOk() (*string, bool) {
 
 // HasOrientation returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasOrientation() bool {
-	if o != nil && o.Orientation != nil {
+	if o != nil && !IsNil(o.Orientation) {
 		return true
 	}
 
@@ -424,7 +428,7 @@ func (o *CapabilityEquipmentSlotArray) SetOrientation(v string) {
 
 // GetSelector returns the Selector field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetSelector() string {
-	if o == nil || o.Selector == nil {
+	if o == nil || IsNil(o.Selector) {
 		var ret string
 		return ret
 	}
@@ -434,7 +438,7 @@ func (o *CapabilityEquipmentSlotArray) GetSelector() string {
 // GetSelectorOk returns a tuple with the Selector field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetSelectorOk() (*string, bool) {
-	if o == nil || o.Selector == nil {
+	if o == nil || IsNil(o.Selector) {
 		return nil, false
 	}
 	return o.Selector, true
@@ -442,7 +446,7 @@ func (o *CapabilityEquipmentSlotArray) GetSelectorOk() (*string, bool) {
 
 // HasSelector returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasSelector() bool {
-	if o != nil && o.Selector != nil {
+	if o != nil && !IsNil(o.Selector) {
 		return true
 	}
 
@@ -456,7 +460,7 @@ func (o *CapabilityEquipmentSlotArray) SetSelector(v string) {
 
 // GetSlotsPerLine returns the SlotsPerLine field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetSlotsPerLine() int64 {
-	if o == nil || o.SlotsPerLine == nil {
+	if o == nil || IsNil(o.SlotsPerLine) {
 		var ret int64
 		return ret
 	}
@@ -466,7 +470,7 @@ func (o *CapabilityEquipmentSlotArray) GetSlotsPerLine() int64 {
 // GetSlotsPerLineOk returns a tuple with the SlotsPerLine field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetSlotsPerLineOk() (*int64, bool) {
-	if o == nil || o.SlotsPerLine == nil {
+	if o == nil || IsNil(o.SlotsPerLine) {
 		return nil, false
 	}
 	return o.SlotsPerLine, true
@@ -474,7 +478,7 @@ func (o *CapabilityEquipmentSlotArray) GetSlotsPerLineOk() (*int64, bool) {
 
 // HasSlotsPerLine returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasSlotsPerLine() bool {
-	if o != nil && o.SlotsPerLine != nil {
+	if o != nil && !IsNil(o.SlotsPerLine) {
 		return true
 	}
 
@@ -488,7 +492,7 @@ func (o *CapabilityEquipmentSlotArray) SetSlotsPerLine(v int64) {
 
 // GetTransverseGroupSeparation returns the TransverseGroupSeparation field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetTransverseGroupSeparation() float32 {
-	if o == nil || o.TransverseGroupSeparation == nil {
+	if o == nil || IsNil(o.TransverseGroupSeparation) {
 		var ret float32
 		return ret
 	}
@@ -498,7 +502,7 @@ func (o *CapabilityEquipmentSlotArray) GetTransverseGroupSeparation() float32 {
 // GetTransverseGroupSeparationOk returns a tuple with the TransverseGroupSeparation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetTransverseGroupSeparationOk() (*float32, bool) {
-	if o == nil || o.TransverseGroupSeparation == nil {
+	if o == nil || IsNil(o.TransverseGroupSeparation) {
 		return nil, false
 	}
 	return o.TransverseGroupSeparation, true
@@ -506,7 +510,7 @@ func (o *CapabilityEquipmentSlotArray) GetTransverseGroupSeparationOk() (*float3
 
 // HasTransverseGroupSeparation returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasTransverseGroupSeparation() bool {
-	if o != nil && o.TransverseGroupSeparation != nil {
+	if o != nil && !IsNil(o.TransverseGroupSeparation) {
 		return true
 	}
 
@@ -520,7 +524,7 @@ func (o *CapabilityEquipmentSlotArray) SetTransverseGroupSeparation(v float32) {
 
 // GetTransverseGroupSize returns the TransverseGroupSize field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetTransverseGroupSize() float32 {
-	if o == nil || o.TransverseGroupSize == nil {
+	if o == nil || IsNil(o.TransverseGroupSize) {
 		var ret float32
 		return ret
 	}
@@ -530,7 +534,7 @@ func (o *CapabilityEquipmentSlotArray) GetTransverseGroupSize() float32 {
 // GetTransverseGroupSizeOk returns a tuple with the TransverseGroupSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetTransverseGroupSizeOk() (*float32, bool) {
-	if o == nil || o.TransverseGroupSize == nil {
+	if o == nil || IsNil(o.TransverseGroupSize) {
 		return nil, false
 	}
 	return o.TransverseGroupSize, true
@@ -538,7 +542,7 @@ func (o *CapabilityEquipmentSlotArray) GetTransverseGroupSizeOk() (*float32, boo
 
 // HasTransverseGroupSize returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasTransverseGroupSize() bool {
-	if o != nil && o.TransverseGroupSize != nil {
+	if o != nil && !IsNil(o.TransverseGroupSize) {
 		return true
 	}
 
@@ -552,7 +556,7 @@ func (o *CapabilityEquipmentSlotArray) SetTransverseGroupSize(v float32) {
 
 // GetTransverseOffset returns the TransverseOffset field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetTransverseOffset() float32 {
-	if o == nil || o.TransverseOffset == nil {
+	if o == nil || IsNil(o.TransverseOffset) {
 		var ret float32
 		return ret
 	}
@@ -562,7 +566,7 @@ func (o *CapabilityEquipmentSlotArray) GetTransverseOffset() float32 {
 // GetTransverseOffsetOk returns a tuple with the TransverseOffset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetTransverseOffsetOk() (*float32, bool) {
-	if o == nil || o.TransverseOffset == nil {
+	if o == nil || IsNil(o.TransverseOffset) {
 		return nil, false
 	}
 	return o.TransverseOffset, true
@@ -570,7 +574,7 @@ func (o *CapabilityEquipmentSlotArray) GetTransverseOffsetOk() (*float32, bool) 
 
 // HasTransverseOffset returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasTransverseOffset() bool {
-	if o != nil && o.TransverseOffset != nil {
+	if o != nil && !IsNil(o.TransverseOffset) {
 		return true
 	}
 
@@ -584,7 +588,7 @@ func (o *CapabilityEquipmentSlotArray) SetTransverseOffset(v float32) {
 
 // GetVerticalStartOffset returns the VerticalStartOffset field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetVerticalStartOffset() float32 {
-	if o == nil || o.VerticalStartOffset == nil {
+	if o == nil || IsNil(o.VerticalStartOffset) {
 		var ret float32
 		return ret
 	}
@@ -594,7 +598,7 @@ func (o *CapabilityEquipmentSlotArray) GetVerticalStartOffset() float32 {
 // GetVerticalStartOffsetOk returns a tuple with the VerticalStartOffset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetVerticalStartOffsetOk() (*float32, bool) {
-	if o == nil || o.VerticalStartOffset == nil {
+	if o == nil || IsNil(o.VerticalStartOffset) {
 		return nil, false
 	}
 	return o.VerticalStartOffset, true
@@ -602,7 +606,7 @@ func (o *CapabilityEquipmentSlotArray) GetVerticalStartOffsetOk() (*float32, boo
 
 // HasVerticalStartOffset returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasVerticalStartOffset() bool {
-	if o != nil && o.VerticalStartOffset != nil {
+	if o != nil && !IsNil(o.VerticalStartOffset) {
 		return true
 	}
 
@@ -616,7 +620,7 @@ func (o *CapabilityEquipmentSlotArray) SetVerticalStartOffset(v float32) {
 
 // GetWidth returns the Width field value if set, zero value otherwise.
 func (o *CapabilityEquipmentSlotArray) GetWidth() float32 {
-	if o == nil || o.Width == nil {
+	if o == nil || IsNil(o.Width) {
 		var ret float32
 		return ret
 	}
@@ -626,7 +630,7 @@ func (o *CapabilityEquipmentSlotArray) GetWidth() float32 {
 // GetWidthOk returns a tuple with the Width field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityEquipmentSlotArray) GetWidthOk() (*float32, bool) {
-	if o == nil || o.Width == nil {
+	if o == nil || IsNil(o.Width) {
 		return nil, false
 	}
 	return o.Width, true
@@ -634,7 +638,7 @@ func (o *CapabilityEquipmentSlotArray) GetWidthOk() (*float32, bool) {
 
 // HasWidth returns a boolean if a field has been set.
 func (o *CapabilityEquipmentSlotArray) HasWidth() bool {
-	if o != nil && o.Width != nil {
+	if o != nil && !IsNil(o.Width) {
 		return true
 	}
 
@@ -647,67 +651,71 @@ func (o *CapabilityEquipmentSlotArray) SetWidth(v float32) {
 }
 
 func (o CapabilityEquipmentSlotArray) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilityEquipmentSlotArray) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilitySwitchCapabilityDef, errCapabilitySwitchCapabilityDef := json.Marshal(o.CapabilitySwitchCapabilityDef)
 	if errCapabilitySwitchCapabilityDef != nil {
-		return []byte{}, errCapabilitySwitchCapabilityDef
+		return map[string]interface{}{}, errCapabilitySwitchCapabilityDef
 	}
 	errCapabilitySwitchCapabilityDef = json.Unmarshal([]byte(serializedCapabilitySwitchCapabilityDef), &toSerialize)
 	if errCapabilitySwitchCapabilityDef != nil {
-		return []byte{}, errCapabilitySwitchCapabilityDef
+		return map[string]interface{}{}, errCapabilitySwitchCapabilityDef
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FirstIndex != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FirstIndex) {
 		toSerialize["FirstIndex"] = o.FirstIndex
 	}
-	if o.Height != nil {
+	if !IsNil(o.Height) {
 		toSerialize["Height"] = o.Height
 	}
-	if o.HorizontalStartOffset != nil {
+	if !IsNil(o.HorizontalStartOffset) {
 		toSerialize["HorizontalStartOffset"] = o.HorizontalStartOffset
 	}
-	if o.InlineGroupSeparation != nil {
+	if !IsNil(o.InlineGroupSeparation) {
 		toSerialize["InlineGroupSeparation"] = o.InlineGroupSeparation
 	}
-	if o.InlineGroupSize != nil {
+	if !IsNil(o.InlineGroupSize) {
 		toSerialize["InlineGroupSize"] = o.InlineGroupSize
 	}
-	if o.InlineOffset != nil {
+	if !IsNil(o.InlineOffset) {
 		toSerialize["InlineOffset"] = o.InlineOffset
 	}
-	if o.Location != nil {
+	if !IsNil(o.Location) {
 		toSerialize["Location"] = o.Location
 	}
-	if o.NumberOfSlots != nil {
+	if !IsNil(o.NumberOfSlots) {
 		toSerialize["NumberOfSlots"] = o.NumberOfSlots
 	}
-	if o.Orientation != nil {
+	if !IsNil(o.Orientation) {
 		toSerialize["Orientation"] = o.Orientation
 	}
-	if o.Selector != nil {
+	if !IsNil(o.Selector) {
 		toSerialize["Selector"] = o.Selector
 	}
-	if o.SlotsPerLine != nil {
+	if !IsNil(o.SlotsPerLine) {
 		toSerialize["SlotsPerLine"] = o.SlotsPerLine
 	}
-	if o.TransverseGroupSeparation != nil {
+	if !IsNil(o.TransverseGroupSeparation) {
 		toSerialize["TransverseGroupSeparation"] = o.TransverseGroupSeparation
 	}
-	if o.TransverseGroupSize != nil {
+	if !IsNil(o.TransverseGroupSize) {
 		toSerialize["TransverseGroupSize"] = o.TransverseGroupSize
 	}
-	if o.TransverseOffset != nil {
+	if !IsNil(o.TransverseOffset) {
 		toSerialize["TransverseOffset"] = o.TransverseOffset
 	}
-	if o.VerticalStartOffset != nil {
+	if !IsNil(o.VerticalStartOffset) {
 		toSerialize["VerticalStartOffset"] = o.VerticalStartOffset
 	}
-	if o.Width != nil {
+	if !IsNil(o.Width) {
 		toSerialize["Width"] = o.Width
 	}
 
@@ -715,10 +723,32 @@ func (o CapabilityEquipmentSlotArray) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilityEquipmentSlotArray) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilityEquipmentSlotArray) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilityEquipmentSlotArrayWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -760,7 +790,7 @@ func (o *CapabilityEquipmentSlotArray) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCapabilityEquipmentSlotArrayWithoutEmbeddedStruct := CapabilityEquipmentSlotArrayWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilityEquipmentSlotArrayWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilityEquipmentSlotArrayWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilityEquipmentSlotArray := _CapabilityEquipmentSlotArray{}
 		varCapabilityEquipmentSlotArray.ClassId = varCapabilityEquipmentSlotArrayWithoutEmbeddedStruct.ClassId
@@ -788,7 +818,7 @@ func (o *CapabilityEquipmentSlotArray) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCapabilityEquipmentSlotArray := _CapabilityEquipmentSlotArray{}
 
-	err = json.Unmarshal(bytes, &varCapabilityEquipmentSlotArray)
+	err = json.Unmarshal(data, &varCapabilityEquipmentSlotArray)
 	if err == nil {
 		o.CapabilitySwitchCapabilityDef = varCapabilityEquipmentSlotArray.CapabilitySwitchCapabilityDef
 	} else {
@@ -797,7 +827,7 @@ func (o *CapabilityEquipmentSlotArray) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FirstIndex")

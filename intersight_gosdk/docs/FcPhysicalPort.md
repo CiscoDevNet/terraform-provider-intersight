@@ -19,13 +19,13 @@ Name | Type | Description | Notes
 **TransceiverType** | Pointer to **string** | Transceiver type of a Fibre Channel port. | [optional] [readonly] 
 **Vsan** | Pointer to **int64** | Virtual San that is associated to the port. | [optional] [readonly] 
 **Wwn** | Pointer to **string** | World Wide Name of a Fibre Channel port. | [optional] [readonly] 
-**EquipmentSwitchCard** | Pointer to [**EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
-**FcNeighbor** | Pointer to [**FcNeighborRelationship**](FcNeighborRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**NetworkSupervisorCard** | Pointer to [**NetworkSupervisorCardRelationship**](NetworkSupervisorCardRelationship.md) |  | [optional] 
-**PortGroup** | Pointer to [**PortGroupRelationship**](PortGroupRelationship.md) |  | [optional] 
-**PortSubGroup** | Pointer to [**PortSubGroupRelationship**](PortSubGroupRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**EquipmentSwitchCard** | Pointer to [**NullableEquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
+**FcNeighbor** | Pointer to [**NullableFcNeighborRelationship**](FcNeighborRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**NetworkSupervisorCard** | Pointer to [**NullableNetworkSupervisorCardRelationship**](NetworkSupervisorCardRelationship.md) |  | [optional] 
+**PortGroup** | Pointer to [**NullablePortGroupRelationship**](PortGroupRelationship.md) |  | [optional] 
+**PortSubGroup** | Pointer to [**NullablePortSubGroupRelationship**](PortSubGroupRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -436,6 +436,16 @@ SetEquipmentSwitchCard sets EquipmentSwitchCard field to given value.
 
 HasEquipmentSwitchCard returns a boolean if a field has been set.
 
+### SetEquipmentSwitchCardNil
+
+`func (o *FcPhysicalPort) SetEquipmentSwitchCardNil(b bool)`
+
+ SetEquipmentSwitchCardNil sets the value for EquipmentSwitchCard to be an explicit nil
+
+### UnsetEquipmentSwitchCard
+`func (o *FcPhysicalPort) UnsetEquipmentSwitchCard()`
+
+UnsetEquipmentSwitchCard ensures that no value is present for EquipmentSwitchCard, not even an explicit nil
 ### GetFcNeighbor
 
 `func (o *FcPhysicalPort) GetFcNeighbor() FcNeighborRelationship`
@@ -461,6 +471,16 @@ SetFcNeighbor sets FcNeighbor field to given value.
 
 HasFcNeighbor returns a boolean if a field has been set.
 
+### SetFcNeighborNil
+
+`func (o *FcPhysicalPort) SetFcNeighborNil(b bool)`
+
+ SetFcNeighborNil sets the value for FcNeighbor to be an explicit nil
+
+### UnsetFcNeighbor
+`func (o *FcPhysicalPort) UnsetFcNeighbor()`
+
+UnsetFcNeighbor ensures that no value is present for FcNeighbor, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *FcPhysicalPort) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -486,6 +506,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *FcPhysicalPort) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *FcPhysicalPort) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetNetworkSupervisorCard
 
 `func (o *FcPhysicalPort) GetNetworkSupervisorCard() NetworkSupervisorCardRelationship`
@@ -511,6 +541,16 @@ SetNetworkSupervisorCard sets NetworkSupervisorCard field to given value.
 
 HasNetworkSupervisorCard returns a boolean if a field has been set.
 
+### SetNetworkSupervisorCardNil
+
+`func (o *FcPhysicalPort) SetNetworkSupervisorCardNil(b bool)`
+
+ SetNetworkSupervisorCardNil sets the value for NetworkSupervisorCard to be an explicit nil
+
+### UnsetNetworkSupervisorCard
+`func (o *FcPhysicalPort) UnsetNetworkSupervisorCard()`
+
+UnsetNetworkSupervisorCard ensures that no value is present for NetworkSupervisorCard, not even an explicit nil
 ### GetPortGroup
 
 `func (o *FcPhysicalPort) GetPortGroup() PortGroupRelationship`
@@ -536,6 +576,16 @@ SetPortGroup sets PortGroup field to given value.
 
 HasPortGroup returns a boolean if a field has been set.
 
+### SetPortGroupNil
+
+`func (o *FcPhysicalPort) SetPortGroupNil(b bool)`
+
+ SetPortGroupNil sets the value for PortGroup to be an explicit nil
+
+### UnsetPortGroup
+`func (o *FcPhysicalPort) UnsetPortGroup()`
+
+UnsetPortGroup ensures that no value is present for PortGroup, not even an explicit nil
 ### GetPortSubGroup
 
 `func (o *FcPhysicalPort) GetPortSubGroup() PortSubGroupRelationship`
@@ -561,6 +611,16 @@ SetPortSubGroup sets PortSubGroup field to given value.
 
 HasPortSubGroup returns a boolean if a field has been set.
 
+### SetPortSubGroupNil
+
+`func (o *FcPhysicalPort) SetPortSubGroupNil(b bool)`
+
+ SetPortSubGroupNil sets the value for PortSubGroup to be an explicit nil
+
+### UnsetPortSubGroup
+`func (o *FcPhysicalPort) UnsetPortSubGroup()`
+
+UnsetPortSubGroup ensures that no value is present for PortSubGroup, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *FcPhysicalPort) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -586,6 +646,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *FcPhysicalPort) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *FcPhysicalPort) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **Port** | Pointer to **int64** | The port that should be used for the remote request. | [optional] 
 **Protocol** | Pointer to **string** | Specifies if this is an scp or sftp request. * &#x60;scp&#x60; - Secure Copy Protocol (SCP) to access the file server. * &#x60;sftp&#x60; - SSH File Transfer Protocol (SFTP) to access file server. * &#x60;cifs&#x60; - Common Internet File System (CIFS) Protocol to access file server. | [optional] [default to "scp"]
 **Username** | Pointer to **string** | The username for the remote request. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -300,6 +300,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *ApplianceRemoteFileImport) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *ApplianceRemoteFileImport) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

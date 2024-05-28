@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ComputeRackUnit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComputeRackUnit{}
 
 // ComputeRackUnit Describes a standalone or FI-attached Rack-mounted server.
 type ComputeRackUnit struct {
@@ -31,16 +35,16 @@ type ComputeRackUnit struct {
 	// To maintain the Topology workflow run status.
 	TopologyScanStatus *string `json:"TopologyScanStatus,omitempty"`
 	// An array of relationships to adapterUnit resources.
-	Adapters                           []AdapterUnitRelationship                       `json:"Adapters,omitempty"`
-	BiosBootmode                       *BiosBootModeRelationship                       `json:"BiosBootmode,omitempty"`
-	BiosTokenSettings                  *BiosTokenSettingsRelationship                  `json:"BiosTokenSettings,omitempty"`
-	BiosVfSelectMemoryRasConfiguration *BiosVfSelectMemoryRasConfigurationRelationship `json:"BiosVfSelectMemoryRasConfiguration,omitempty"`
+	Adapters                           []AdapterUnitRelationship                              `json:"Adapters,omitempty"`
+	BiosBootmode                       NullableBiosBootModeRelationship                       `json:"BiosBootmode,omitempty"`
+	BiosTokenSettings                  NullableBiosTokenSettingsRelationship                  `json:"BiosTokenSettings,omitempty"`
+	BiosVfSelectMemoryRasConfiguration NullableBiosVfSelectMemoryRasConfigurationRelationship `json:"BiosVfSelectMemoryRasConfiguration,omitempty"`
 	// An array of relationships to biosUnit resources.
 	// Deprecated
-	Biosunits          []BiosUnitRelationship            `json:"Biosunits,omitempty"`
-	Bmc                *ManagementControllerRelationship `json:"Bmc,omitempty"`
-	Board              *ComputeBoardRelationship         `json:"Board,omitempty"`
-	BootDeviceBootmode *BootDeviceBootModeRelationship   `json:"BootDeviceBootmode,omitempty"`
+	Biosunits          []BiosUnitRelationship                   `json:"Biosunits,omitempty"`
+	Bmc                NullableManagementControllerRelationship `json:"Bmc,omitempty"`
+	Board              NullableComputeBoardRelationship         `json:"Board,omitempty"`
+	BootDeviceBootmode NullableBootDeviceBootModeRelationship   `json:"BootDeviceBootmode,omitempty"`
 	// An array of relationships to computePersonality resources.
 	ComputePersonality []ComputePersonalityRelationship `json:"ComputePersonality,omitempty"`
 	// An array of relationships to equipmentFanModule resources.
@@ -50,9 +54,9 @@ type ComputeRackUnit struct {
 	// An array of relationships to graphicsCard resources.
 	GraphicsCards []GraphicsCardRelationship `json:"GraphicsCards,omitempty"`
 	// An array of relationships to equipmentHybridDriveSlot resources.
-	HybridDriveSlots    []EquipmentHybridDriveSlotRelationship `json:"HybridDriveSlots,omitempty"`
-	InventoryDeviceInfo *InventoryDeviceInfoRelationship       `json:"InventoryDeviceInfo,omitempty"`
-	LocatorLed          *EquipmentLocatorLedRelationship       `json:"LocatorLed,omitempty"`
+	HybridDriveSlots    []EquipmentHybridDriveSlotRelationship  `json:"HybridDriveSlots,omitempty"`
+	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+	LocatorLed          NullableEquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
 	// An array of relationships to memoryArray resources.
 	MemoryArrays []MemoryArrayRelationship `json:"MemoryArrays,omitempty"`
 	// An array of relationships to pciDevice resources.
@@ -60,16 +64,16 @@ type ComputeRackUnit struct {
 	// An array of relationships to processorUnit resources.
 	Processors []ProcessorUnitRelationship `json:"Processors,omitempty"`
 	// An array of relationships to equipmentPsu resources.
-	Psus              []EquipmentPsuRelationship              `json:"Psus,omitempty"`
-	RackEnclosureSlot *EquipmentRackEnclosureSlotRelationship `json:"RackEnclosureSlot,omitempty"`
-	RegisteredDevice  *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+	Psus              []EquipmentPsuRelationship                     `json:"Psus,omitempty"`
+	RackEnclosureSlot NullableEquipmentRackEnclosureSlotRelationship `json:"RackEnclosureSlot,omitempty"`
+	RegisteredDevice  NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to storageSasExpander resources.
 	SasExpanders []StorageSasExpanderRelationship `json:"SasExpanders,omitempty"`
 	// An array of relationships to storageController resources.
 	StorageControllers []StorageControllerRelationship `json:"StorageControllers,omitempty"`
 	// An array of relationships to storageEnclosure resources.
 	StorageEnclosures []StorageEnclosureRelationship `json:"StorageEnclosures,omitempty"`
-	TopSystem         *TopSystemRelationship         `json:"TopSystem,omitempty"`
+	TopSystem         NullableTopSystemRelationship  `json:"TopSystem,omitempty"`
 	// An array of relationships to rackUnitPersonality resources.
 	UnitPersonality      []RackUnitPersonalityRelationship `json:"UnitPersonality,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -154,7 +158,7 @@ func (o *ComputeRackUnit) SetObjectType(v string) {
 
 // GetConnectionStatus returns the ConnectionStatus field value if set, zero value otherwise.
 func (o *ComputeRackUnit) GetConnectionStatus() string {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		var ret string
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *ComputeRackUnit) GetConnectionStatus() string {
 // GetConnectionStatusOk returns a tuple with the ConnectionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeRackUnit) GetConnectionStatusOk() (*string, bool) {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		return nil, false
 	}
 	return o.ConnectionStatus, true
@@ -172,7 +176,7 @@ func (o *ComputeRackUnit) GetConnectionStatusOk() (*string, bool) {
 
 // HasConnectionStatus returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasConnectionStatus() bool {
-	if o != nil && o.ConnectionStatus != nil {
+	if o != nil && !IsNil(o.ConnectionStatus) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *ComputeRackUnit) SetConnectionStatus(v string) {
 
 // GetServerId returns the ServerId field value if set, zero value otherwise.
 func (o *ComputeRackUnit) GetServerId() int64 {
-	if o == nil || o.ServerId == nil {
+	if o == nil || IsNil(o.ServerId) {
 		var ret int64
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *ComputeRackUnit) GetServerId() int64 {
 // GetServerIdOk returns a tuple with the ServerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeRackUnit) GetServerIdOk() (*int64, bool) {
-	if o == nil || o.ServerId == nil {
+	if o == nil || IsNil(o.ServerId) {
 		return nil, false
 	}
 	return o.ServerId, true
@@ -204,7 +208,7 @@ func (o *ComputeRackUnit) GetServerIdOk() (*int64, bool) {
 
 // HasServerId returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasServerId() bool {
-	if o != nil && o.ServerId != nil {
+	if o != nil && !IsNil(o.ServerId) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *ComputeRackUnit) SetServerId(v int64) {
 
 // GetTopologyScanStatus returns the TopologyScanStatus field value if set, zero value otherwise.
 func (o *ComputeRackUnit) GetTopologyScanStatus() string {
-	if o == nil || o.TopologyScanStatus == nil {
+	if o == nil || IsNil(o.TopologyScanStatus) {
 		var ret string
 		return ret
 	}
@@ -228,7 +232,7 @@ func (o *ComputeRackUnit) GetTopologyScanStatus() string {
 // GetTopologyScanStatusOk returns a tuple with the TopologyScanStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeRackUnit) GetTopologyScanStatusOk() (*string, bool) {
-	if o == nil || o.TopologyScanStatus == nil {
+	if o == nil || IsNil(o.TopologyScanStatus) {
 		return nil, false
 	}
 	return o.TopologyScanStatus, true
@@ -236,7 +240,7 @@ func (o *ComputeRackUnit) GetTopologyScanStatusOk() (*string, bool) {
 
 // HasTopologyScanStatus returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasTopologyScanStatus() bool {
-	if o != nil && o.TopologyScanStatus != nil {
+	if o != nil && !IsNil(o.TopologyScanStatus) {
 		return true
 	}
 
@@ -261,7 +265,7 @@ func (o *ComputeRackUnit) GetAdapters() []AdapterUnitRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetAdaptersOk() ([]AdapterUnitRelationship, bool) {
-	if o == nil || o.Adapters == nil {
+	if o == nil || IsNil(o.Adapters) {
 		return nil, false
 	}
 	return o.Adapters, true
@@ -269,7 +273,7 @@ func (o *ComputeRackUnit) GetAdaptersOk() ([]AdapterUnitRelationship, bool) {
 
 // HasAdapters returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasAdapters() bool {
-	if o != nil && o.Adapters != nil {
+	if o != nil && IsNil(o.Adapters) {
 		return true
 	}
 
@@ -281,100 +285,133 @@ func (o *ComputeRackUnit) SetAdapters(v []AdapterUnitRelationship) {
 	o.Adapters = v
 }
 
-// GetBiosBootmode returns the BiosBootmode field value if set, zero value otherwise.
+// GetBiosBootmode returns the BiosBootmode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetBiosBootmode() BiosBootModeRelationship {
-	if o == nil || o.BiosBootmode == nil {
+	if o == nil || IsNil(o.BiosBootmode.Get()) {
 		var ret BiosBootModeRelationship
 		return ret
 	}
-	return *o.BiosBootmode
+	return *o.BiosBootmode.Get()
 }
 
 // GetBiosBootmodeOk returns a tuple with the BiosBootmode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetBiosBootmodeOk() (*BiosBootModeRelationship, bool) {
-	if o == nil || o.BiosBootmode == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BiosBootmode, true
+	return o.BiosBootmode.Get(), o.BiosBootmode.IsSet()
 }
 
 // HasBiosBootmode returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasBiosBootmode() bool {
-	if o != nil && o.BiosBootmode != nil {
+	if o != nil && o.BiosBootmode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBiosBootmode gets a reference to the given BiosBootModeRelationship and assigns it to the BiosBootmode field.
+// SetBiosBootmode gets a reference to the given NullableBiosBootModeRelationship and assigns it to the BiosBootmode field.
 func (o *ComputeRackUnit) SetBiosBootmode(v BiosBootModeRelationship) {
-	o.BiosBootmode = &v
+	o.BiosBootmode.Set(&v)
 }
 
-// GetBiosTokenSettings returns the BiosTokenSettings field value if set, zero value otherwise.
+// SetBiosBootmodeNil sets the value for BiosBootmode to be an explicit nil
+func (o *ComputeRackUnit) SetBiosBootmodeNil() {
+	o.BiosBootmode.Set(nil)
+}
+
+// UnsetBiosBootmode ensures that no value is present for BiosBootmode, not even an explicit nil
+func (o *ComputeRackUnit) UnsetBiosBootmode() {
+	o.BiosBootmode.Unset()
+}
+
+// GetBiosTokenSettings returns the BiosTokenSettings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetBiosTokenSettings() BiosTokenSettingsRelationship {
-	if o == nil || o.BiosTokenSettings == nil {
+	if o == nil || IsNil(o.BiosTokenSettings.Get()) {
 		var ret BiosTokenSettingsRelationship
 		return ret
 	}
-	return *o.BiosTokenSettings
+	return *o.BiosTokenSettings.Get()
 }
 
 // GetBiosTokenSettingsOk returns a tuple with the BiosTokenSettings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetBiosTokenSettingsOk() (*BiosTokenSettingsRelationship, bool) {
-	if o == nil || o.BiosTokenSettings == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BiosTokenSettings, true
+	return o.BiosTokenSettings.Get(), o.BiosTokenSettings.IsSet()
 }
 
 // HasBiosTokenSettings returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasBiosTokenSettings() bool {
-	if o != nil && o.BiosTokenSettings != nil {
+	if o != nil && o.BiosTokenSettings.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBiosTokenSettings gets a reference to the given BiosTokenSettingsRelationship and assigns it to the BiosTokenSettings field.
+// SetBiosTokenSettings gets a reference to the given NullableBiosTokenSettingsRelationship and assigns it to the BiosTokenSettings field.
 func (o *ComputeRackUnit) SetBiosTokenSettings(v BiosTokenSettingsRelationship) {
-	o.BiosTokenSettings = &v
+	o.BiosTokenSettings.Set(&v)
 }
 
-// GetBiosVfSelectMemoryRasConfiguration returns the BiosVfSelectMemoryRasConfiguration field value if set, zero value otherwise.
+// SetBiosTokenSettingsNil sets the value for BiosTokenSettings to be an explicit nil
+func (o *ComputeRackUnit) SetBiosTokenSettingsNil() {
+	o.BiosTokenSettings.Set(nil)
+}
+
+// UnsetBiosTokenSettings ensures that no value is present for BiosTokenSettings, not even an explicit nil
+func (o *ComputeRackUnit) UnsetBiosTokenSettings() {
+	o.BiosTokenSettings.Unset()
+}
+
+// GetBiosVfSelectMemoryRasConfiguration returns the BiosVfSelectMemoryRasConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetBiosVfSelectMemoryRasConfiguration() BiosVfSelectMemoryRasConfigurationRelationship {
-	if o == nil || o.BiosVfSelectMemoryRasConfiguration == nil {
+	if o == nil || IsNil(o.BiosVfSelectMemoryRasConfiguration.Get()) {
 		var ret BiosVfSelectMemoryRasConfigurationRelationship
 		return ret
 	}
-	return *o.BiosVfSelectMemoryRasConfiguration
+	return *o.BiosVfSelectMemoryRasConfiguration.Get()
 }
 
 // GetBiosVfSelectMemoryRasConfigurationOk returns a tuple with the BiosVfSelectMemoryRasConfiguration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetBiosVfSelectMemoryRasConfigurationOk() (*BiosVfSelectMemoryRasConfigurationRelationship, bool) {
-	if o == nil || o.BiosVfSelectMemoryRasConfiguration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BiosVfSelectMemoryRasConfiguration, true
+	return o.BiosVfSelectMemoryRasConfiguration.Get(), o.BiosVfSelectMemoryRasConfiguration.IsSet()
 }
 
 // HasBiosVfSelectMemoryRasConfiguration returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasBiosVfSelectMemoryRasConfiguration() bool {
-	if o != nil && o.BiosVfSelectMemoryRasConfiguration != nil {
+	if o != nil && o.BiosVfSelectMemoryRasConfiguration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBiosVfSelectMemoryRasConfiguration gets a reference to the given BiosVfSelectMemoryRasConfigurationRelationship and assigns it to the BiosVfSelectMemoryRasConfiguration field.
+// SetBiosVfSelectMemoryRasConfiguration gets a reference to the given NullableBiosVfSelectMemoryRasConfigurationRelationship and assigns it to the BiosVfSelectMemoryRasConfiguration field.
 func (o *ComputeRackUnit) SetBiosVfSelectMemoryRasConfiguration(v BiosVfSelectMemoryRasConfigurationRelationship) {
-	o.BiosVfSelectMemoryRasConfiguration = &v
+	o.BiosVfSelectMemoryRasConfiguration.Set(&v)
+}
+
+// SetBiosVfSelectMemoryRasConfigurationNil sets the value for BiosVfSelectMemoryRasConfiguration to be an explicit nil
+func (o *ComputeRackUnit) SetBiosVfSelectMemoryRasConfigurationNil() {
+	o.BiosVfSelectMemoryRasConfiguration.Set(nil)
+}
+
+// UnsetBiosVfSelectMemoryRasConfiguration ensures that no value is present for BiosVfSelectMemoryRasConfiguration, not even an explicit nil
+func (o *ComputeRackUnit) UnsetBiosVfSelectMemoryRasConfiguration() {
+	o.BiosVfSelectMemoryRasConfiguration.Unset()
 }
 
 // GetBiosunits returns the Biosunits field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -392,7 +429,7 @@ func (o *ComputeRackUnit) GetBiosunits() []BiosUnitRelationship {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 // Deprecated
 func (o *ComputeRackUnit) GetBiosunitsOk() ([]BiosUnitRelationship, bool) {
-	if o == nil || o.Biosunits == nil {
+	if o == nil || IsNil(o.Biosunits) {
 		return nil, false
 	}
 	return o.Biosunits, true
@@ -400,7 +437,7 @@ func (o *ComputeRackUnit) GetBiosunitsOk() ([]BiosUnitRelationship, bool) {
 
 // HasBiosunits returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasBiosunits() bool {
-	if o != nil && o.Biosunits != nil {
+	if o != nil && IsNil(o.Biosunits) {
 		return true
 	}
 
@@ -413,100 +450,133 @@ func (o *ComputeRackUnit) SetBiosunits(v []BiosUnitRelationship) {
 	o.Biosunits = v
 }
 
-// GetBmc returns the Bmc field value if set, zero value otherwise.
+// GetBmc returns the Bmc field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetBmc() ManagementControllerRelationship {
-	if o == nil || o.Bmc == nil {
+	if o == nil || IsNil(o.Bmc.Get()) {
 		var ret ManagementControllerRelationship
 		return ret
 	}
-	return *o.Bmc
+	return *o.Bmc.Get()
 }
 
 // GetBmcOk returns a tuple with the Bmc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetBmcOk() (*ManagementControllerRelationship, bool) {
-	if o == nil || o.Bmc == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Bmc, true
+	return o.Bmc.Get(), o.Bmc.IsSet()
 }
 
 // HasBmc returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasBmc() bool {
-	if o != nil && o.Bmc != nil {
+	if o != nil && o.Bmc.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBmc gets a reference to the given ManagementControllerRelationship and assigns it to the Bmc field.
+// SetBmc gets a reference to the given NullableManagementControllerRelationship and assigns it to the Bmc field.
 func (o *ComputeRackUnit) SetBmc(v ManagementControllerRelationship) {
-	o.Bmc = &v
+	o.Bmc.Set(&v)
 }
 
-// GetBoard returns the Board field value if set, zero value otherwise.
+// SetBmcNil sets the value for Bmc to be an explicit nil
+func (o *ComputeRackUnit) SetBmcNil() {
+	o.Bmc.Set(nil)
+}
+
+// UnsetBmc ensures that no value is present for Bmc, not even an explicit nil
+func (o *ComputeRackUnit) UnsetBmc() {
+	o.Bmc.Unset()
+}
+
+// GetBoard returns the Board field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetBoard() ComputeBoardRelationship {
-	if o == nil || o.Board == nil {
+	if o == nil || IsNil(o.Board.Get()) {
 		var ret ComputeBoardRelationship
 		return ret
 	}
-	return *o.Board
+	return *o.Board.Get()
 }
 
 // GetBoardOk returns a tuple with the Board field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetBoardOk() (*ComputeBoardRelationship, bool) {
-	if o == nil || o.Board == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Board, true
+	return o.Board.Get(), o.Board.IsSet()
 }
 
 // HasBoard returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasBoard() bool {
-	if o != nil && o.Board != nil {
+	if o != nil && o.Board.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBoard gets a reference to the given ComputeBoardRelationship and assigns it to the Board field.
+// SetBoard gets a reference to the given NullableComputeBoardRelationship and assigns it to the Board field.
 func (o *ComputeRackUnit) SetBoard(v ComputeBoardRelationship) {
-	o.Board = &v
+	o.Board.Set(&v)
 }
 
-// GetBootDeviceBootmode returns the BootDeviceBootmode field value if set, zero value otherwise.
+// SetBoardNil sets the value for Board to be an explicit nil
+func (o *ComputeRackUnit) SetBoardNil() {
+	o.Board.Set(nil)
+}
+
+// UnsetBoard ensures that no value is present for Board, not even an explicit nil
+func (o *ComputeRackUnit) UnsetBoard() {
+	o.Board.Unset()
+}
+
+// GetBootDeviceBootmode returns the BootDeviceBootmode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetBootDeviceBootmode() BootDeviceBootModeRelationship {
-	if o == nil || o.BootDeviceBootmode == nil {
+	if o == nil || IsNil(o.BootDeviceBootmode.Get()) {
 		var ret BootDeviceBootModeRelationship
 		return ret
 	}
-	return *o.BootDeviceBootmode
+	return *o.BootDeviceBootmode.Get()
 }
 
 // GetBootDeviceBootmodeOk returns a tuple with the BootDeviceBootmode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetBootDeviceBootmodeOk() (*BootDeviceBootModeRelationship, bool) {
-	if o == nil || o.BootDeviceBootmode == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BootDeviceBootmode, true
+	return o.BootDeviceBootmode.Get(), o.BootDeviceBootmode.IsSet()
 }
 
 // HasBootDeviceBootmode returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasBootDeviceBootmode() bool {
-	if o != nil && o.BootDeviceBootmode != nil {
+	if o != nil && o.BootDeviceBootmode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBootDeviceBootmode gets a reference to the given BootDeviceBootModeRelationship and assigns it to the BootDeviceBootmode field.
+// SetBootDeviceBootmode gets a reference to the given NullableBootDeviceBootModeRelationship and assigns it to the BootDeviceBootmode field.
 func (o *ComputeRackUnit) SetBootDeviceBootmode(v BootDeviceBootModeRelationship) {
-	o.BootDeviceBootmode = &v
+	o.BootDeviceBootmode.Set(&v)
+}
+
+// SetBootDeviceBootmodeNil sets the value for BootDeviceBootmode to be an explicit nil
+func (o *ComputeRackUnit) SetBootDeviceBootmodeNil() {
+	o.BootDeviceBootmode.Set(nil)
+}
+
+// UnsetBootDeviceBootmode ensures that no value is present for BootDeviceBootmode, not even an explicit nil
+func (o *ComputeRackUnit) UnsetBootDeviceBootmode() {
+	o.BootDeviceBootmode.Unset()
 }
 
 // GetComputePersonality returns the ComputePersonality field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -522,7 +592,7 @@ func (o *ComputeRackUnit) GetComputePersonality() []ComputePersonalityRelationsh
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetComputePersonalityOk() ([]ComputePersonalityRelationship, bool) {
-	if o == nil || o.ComputePersonality == nil {
+	if o == nil || IsNil(o.ComputePersonality) {
 		return nil, false
 	}
 	return o.ComputePersonality, true
@@ -530,7 +600,7 @@ func (o *ComputeRackUnit) GetComputePersonalityOk() ([]ComputePersonalityRelatio
 
 // HasComputePersonality returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasComputePersonality() bool {
-	if o != nil && o.ComputePersonality != nil {
+	if o != nil && IsNil(o.ComputePersonality) {
 		return true
 	}
 
@@ -555,7 +625,7 @@ func (o *ComputeRackUnit) GetFanmodules() []EquipmentFanModuleRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetFanmodulesOk() ([]EquipmentFanModuleRelationship, bool) {
-	if o == nil || o.Fanmodules == nil {
+	if o == nil || IsNil(o.Fanmodules) {
 		return nil, false
 	}
 	return o.Fanmodules, true
@@ -563,7 +633,7 @@ func (o *ComputeRackUnit) GetFanmodulesOk() ([]EquipmentFanModuleRelationship, b
 
 // HasFanmodules returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasFanmodules() bool {
-	if o != nil && o.Fanmodules != nil {
+	if o != nil && IsNil(o.Fanmodules) {
 		return true
 	}
 
@@ -588,7 +658,7 @@ func (o *ComputeRackUnit) GetGenericInventoryHolders() []InventoryGenericInvento
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetGenericInventoryHoldersOk() ([]InventoryGenericInventoryHolderRelationship, bool) {
-	if o == nil || o.GenericInventoryHolders == nil {
+	if o == nil || IsNil(o.GenericInventoryHolders) {
 		return nil, false
 	}
 	return o.GenericInventoryHolders, true
@@ -596,7 +666,7 @@ func (o *ComputeRackUnit) GetGenericInventoryHoldersOk() ([]InventoryGenericInve
 
 // HasGenericInventoryHolders returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasGenericInventoryHolders() bool {
-	if o != nil && o.GenericInventoryHolders != nil {
+	if o != nil && IsNil(o.GenericInventoryHolders) {
 		return true
 	}
 
@@ -621,7 +691,7 @@ func (o *ComputeRackUnit) GetGraphicsCards() []GraphicsCardRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetGraphicsCardsOk() ([]GraphicsCardRelationship, bool) {
-	if o == nil || o.GraphicsCards == nil {
+	if o == nil || IsNil(o.GraphicsCards) {
 		return nil, false
 	}
 	return o.GraphicsCards, true
@@ -629,7 +699,7 @@ func (o *ComputeRackUnit) GetGraphicsCardsOk() ([]GraphicsCardRelationship, bool
 
 // HasGraphicsCards returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasGraphicsCards() bool {
-	if o != nil && o.GraphicsCards != nil {
+	if o != nil && IsNil(o.GraphicsCards) {
 		return true
 	}
 
@@ -654,7 +724,7 @@ func (o *ComputeRackUnit) GetHybridDriveSlots() []EquipmentHybridDriveSlotRelati
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetHybridDriveSlotsOk() ([]EquipmentHybridDriveSlotRelationship, bool) {
-	if o == nil || o.HybridDriveSlots == nil {
+	if o == nil || IsNil(o.HybridDriveSlots) {
 		return nil, false
 	}
 	return o.HybridDriveSlots, true
@@ -662,7 +732,7 @@ func (o *ComputeRackUnit) GetHybridDriveSlotsOk() ([]EquipmentHybridDriveSlotRel
 
 // HasHybridDriveSlots returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasHybridDriveSlots() bool {
-	if o != nil && o.HybridDriveSlots != nil {
+	if o != nil && IsNil(o.HybridDriveSlots) {
 		return true
 	}
 
@@ -674,68 +744,90 @@ func (o *ComputeRackUnit) SetHybridDriveSlots(v []EquipmentHybridDriveSlotRelati
 	o.HybridDriveSlots = v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *ComputeRackUnit) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetLocatorLed returns the LocatorLed field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *ComputeRackUnit) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *ComputeRackUnit) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetLocatorLed returns the LocatorLed field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetLocatorLed() EquipmentLocatorLedRelationship {
-	if o == nil || o.LocatorLed == nil {
+	if o == nil || IsNil(o.LocatorLed.Get()) {
 		var ret EquipmentLocatorLedRelationship
 		return ret
 	}
-	return *o.LocatorLed
+	return *o.LocatorLed.Get()
 }
 
 // GetLocatorLedOk returns a tuple with the LocatorLed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetLocatorLedOk() (*EquipmentLocatorLedRelationship, bool) {
-	if o == nil || o.LocatorLed == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocatorLed, true
+	return o.LocatorLed.Get(), o.LocatorLed.IsSet()
 }
 
 // HasLocatorLed returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasLocatorLed() bool {
-	if o != nil && o.LocatorLed != nil {
+	if o != nil && o.LocatorLed.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocatorLed gets a reference to the given EquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
+// SetLocatorLed gets a reference to the given NullableEquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
 func (o *ComputeRackUnit) SetLocatorLed(v EquipmentLocatorLedRelationship) {
-	o.LocatorLed = &v
+	o.LocatorLed.Set(&v)
+}
+
+// SetLocatorLedNil sets the value for LocatorLed to be an explicit nil
+func (o *ComputeRackUnit) SetLocatorLedNil() {
+	o.LocatorLed.Set(nil)
+}
+
+// UnsetLocatorLed ensures that no value is present for LocatorLed, not even an explicit nil
+func (o *ComputeRackUnit) UnsetLocatorLed() {
+	o.LocatorLed.Unset()
 }
 
 // GetMemoryArrays returns the MemoryArrays field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -751,7 +843,7 @@ func (o *ComputeRackUnit) GetMemoryArrays() []MemoryArrayRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetMemoryArraysOk() ([]MemoryArrayRelationship, bool) {
-	if o == nil || o.MemoryArrays == nil {
+	if o == nil || IsNil(o.MemoryArrays) {
 		return nil, false
 	}
 	return o.MemoryArrays, true
@@ -759,7 +851,7 @@ func (o *ComputeRackUnit) GetMemoryArraysOk() ([]MemoryArrayRelationship, bool) 
 
 // HasMemoryArrays returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasMemoryArrays() bool {
-	if o != nil && o.MemoryArrays != nil {
+	if o != nil && IsNil(o.MemoryArrays) {
 		return true
 	}
 
@@ -784,7 +876,7 @@ func (o *ComputeRackUnit) GetPciDevices() []PciDeviceRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetPciDevicesOk() ([]PciDeviceRelationship, bool) {
-	if o == nil || o.PciDevices == nil {
+	if o == nil || IsNil(o.PciDevices) {
 		return nil, false
 	}
 	return o.PciDevices, true
@@ -792,7 +884,7 @@ func (o *ComputeRackUnit) GetPciDevicesOk() ([]PciDeviceRelationship, bool) {
 
 // HasPciDevices returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasPciDevices() bool {
-	if o != nil && o.PciDevices != nil {
+	if o != nil && IsNil(o.PciDevices) {
 		return true
 	}
 
@@ -817,7 +909,7 @@ func (o *ComputeRackUnit) GetProcessors() []ProcessorUnitRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetProcessorsOk() ([]ProcessorUnitRelationship, bool) {
-	if o == nil || o.Processors == nil {
+	if o == nil || IsNil(o.Processors) {
 		return nil, false
 	}
 	return o.Processors, true
@@ -825,7 +917,7 @@ func (o *ComputeRackUnit) GetProcessorsOk() ([]ProcessorUnitRelationship, bool) 
 
 // HasProcessors returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasProcessors() bool {
-	if o != nil && o.Processors != nil {
+	if o != nil && IsNil(o.Processors) {
 		return true
 	}
 
@@ -850,7 +942,7 @@ func (o *ComputeRackUnit) GetPsus() []EquipmentPsuRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetPsusOk() ([]EquipmentPsuRelationship, bool) {
-	if o == nil || o.Psus == nil {
+	if o == nil || IsNil(o.Psus) {
 		return nil, false
 	}
 	return o.Psus, true
@@ -858,7 +950,7 @@ func (o *ComputeRackUnit) GetPsusOk() ([]EquipmentPsuRelationship, bool) {
 
 // HasPsus returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasPsus() bool {
-	if o != nil && o.Psus != nil {
+	if o != nil && IsNil(o.Psus) {
 		return true
 	}
 
@@ -870,68 +962,90 @@ func (o *ComputeRackUnit) SetPsus(v []EquipmentPsuRelationship) {
 	o.Psus = v
 }
 
-// GetRackEnclosureSlot returns the RackEnclosureSlot field value if set, zero value otherwise.
+// GetRackEnclosureSlot returns the RackEnclosureSlot field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetRackEnclosureSlot() EquipmentRackEnclosureSlotRelationship {
-	if o == nil || o.RackEnclosureSlot == nil {
+	if o == nil || IsNil(o.RackEnclosureSlot.Get()) {
 		var ret EquipmentRackEnclosureSlotRelationship
 		return ret
 	}
-	return *o.RackEnclosureSlot
+	return *o.RackEnclosureSlot.Get()
 }
 
 // GetRackEnclosureSlotOk returns a tuple with the RackEnclosureSlot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetRackEnclosureSlotOk() (*EquipmentRackEnclosureSlotRelationship, bool) {
-	if o == nil || o.RackEnclosureSlot == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RackEnclosureSlot, true
+	return o.RackEnclosureSlot.Get(), o.RackEnclosureSlot.IsSet()
 }
 
 // HasRackEnclosureSlot returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasRackEnclosureSlot() bool {
-	if o != nil && o.RackEnclosureSlot != nil {
+	if o != nil && o.RackEnclosureSlot.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRackEnclosureSlot gets a reference to the given EquipmentRackEnclosureSlotRelationship and assigns it to the RackEnclosureSlot field.
+// SetRackEnclosureSlot gets a reference to the given NullableEquipmentRackEnclosureSlotRelationship and assigns it to the RackEnclosureSlot field.
 func (o *ComputeRackUnit) SetRackEnclosureSlot(v EquipmentRackEnclosureSlotRelationship) {
-	o.RackEnclosureSlot = &v
+	o.RackEnclosureSlot.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetRackEnclosureSlotNil sets the value for RackEnclosureSlot to be an explicit nil
+func (o *ComputeRackUnit) SetRackEnclosureSlotNil() {
+	o.RackEnclosureSlot.Set(nil)
+}
+
+// UnsetRackEnclosureSlot ensures that no value is present for RackEnclosureSlot, not even an explicit nil
+func (o *ComputeRackUnit) UnsetRackEnclosureSlot() {
+	o.RackEnclosureSlot.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ComputeRackUnit) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ComputeRackUnit) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ComputeRackUnit) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 // GetSasExpanders returns the SasExpanders field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -947,7 +1061,7 @@ func (o *ComputeRackUnit) GetSasExpanders() []StorageSasExpanderRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetSasExpandersOk() ([]StorageSasExpanderRelationship, bool) {
-	if o == nil || o.SasExpanders == nil {
+	if o == nil || IsNil(o.SasExpanders) {
 		return nil, false
 	}
 	return o.SasExpanders, true
@@ -955,7 +1069,7 @@ func (o *ComputeRackUnit) GetSasExpandersOk() ([]StorageSasExpanderRelationship,
 
 // HasSasExpanders returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasSasExpanders() bool {
-	if o != nil && o.SasExpanders != nil {
+	if o != nil && IsNil(o.SasExpanders) {
 		return true
 	}
 
@@ -980,7 +1094,7 @@ func (o *ComputeRackUnit) GetStorageControllers() []StorageControllerRelationshi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetStorageControllersOk() ([]StorageControllerRelationship, bool) {
-	if o == nil || o.StorageControllers == nil {
+	if o == nil || IsNil(o.StorageControllers) {
 		return nil, false
 	}
 	return o.StorageControllers, true
@@ -988,7 +1102,7 @@ func (o *ComputeRackUnit) GetStorageControllersOk() ([]StorageControllerRelation
 
 // HasStorageControllers returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasStorageControllers() bool {
-	if o != nil && o.StorageControllers != nil {
+	if o != nil && IsNil(o.StorageControllers) {
 		return true
 	}
 
@@ -1013,7 +1127,7 @@ func (o *ComputeRackUnit) GetStorageEnclosures() []StorageEnclosureRelationship 
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetStorageEnclosuresOk() ([]StorageEnclosureRelationship, bool) {
-	if o == nil || o.StorageEnclosures == nil {
+	if o == nil || IsNil(o.StorageEnclosures) {
 		return nil, false
 	}
 	return o.StorageEnclosures, true
@@ -1021,7 +1135,7 @@ func (o *ComputeRackUnit) GetStorageEnclosuresOk() ([]StorageEnclosureRelationsh
 
 // HasStorageEnclosures returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasStorageEnclosures() bool {
-	if o != nil && o.StorageEnclosures != nil {
+	if o != nil && IsNil(o.StorageEnclosures) {
 		return true
 	}
 
@@ -1033,36 +1147,47 @@ func (o *ComputeRackUnit) SetStorageEnclosures(v []StorageEnclosureRelationship)
 	o.StorageEnclosures = v
 }
 
-// GetTopSystem returns the TopSystem field value if set, zero value otherwise.
+// GetTopSystem returns the TopSystem field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeRackUnit) GetTopSystem() TopSystemRelationship {
-	if o == nil || o.TopSystem == nil {
+	if o == nil || IsNil(o.TopSystem.Get()) {
 		var ret TopSystemRelationship
 		return ret
 	}
-	return *o.TopSystem
+	return *o.TopSystem.Get()
 }
 
 // GetTopSystemOk returns a tuple with the TopSystem field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetTopSystemOk() (*TopSystemRelationship, bool) {
-	if o == nil || o.TopSystem == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TopSystem, true
+	return o.TopSystem.Get(), o.TopSystem.IsSet()
 }
 
 // HasTopSystem returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasTopSystem() bool {
-	if o != nil && o.TopSystem != nil {
+	if o != nil && o.TopSystem.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTopSystem gets a reference to the given TopSystemRelationship and assigns it to the TopSystem field.
+// SetTopSystem gets a reference to the given NullableTopSystemRelationship and assigns it to the TopSystem field.
 func (o *ComputeRackUnit) SetTopSystem(v TopSystemRelationship) {
-	o.TopSystem = &v
+	o.TopSystem.Set(&v)
+}
+
+// SetTopSystemNil sets the value for TopSystem to be an explicit nil
+func (o *ComputeRackUnit) SetTopSystemNil() {
+	o.TopSystem.Set(nil)
+}
+
+// UnsetTopSystem ensures that no value is present for TopSystem, not even an explicit nil
+func (o *ComputeRackUnit) UnsetTopSystem() {
+	o.TopSystem.Unset()
 }
 
 // GetUnitPersonality returns the UnitPersonality field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1078,7 +1203,7 @@ func (o *ComputeRackUnit) GetUnitPersonality() []RackUnitPersonalityRelationship
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeRackUnit) GetUnitPersonalityOk() ([]RackUnitPersonalityRelationship, bool) {
-	if o == nil || o.UnitPersonality == nil {
+	if o == nil || IsNil(o.UnitPersonality) {
 		return nil, false
 	}
 	return o.UnitPersonality, true
@@ -1086,7 +1211,7 @@ func (o *ComputeRackUnit) GetUnitPersonalityOk() ([]RackUnitPersonalityRelations
 
 // HasUnitPersonality returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasUnitPersonality() bool {
-	if o != nil && o.UnitPersonality != nil {
+	if o != nil && IsNil(o.UnitPersonality) {
 		return true
 	}
 
@@ -1099,53 +1224,57 @@ func (o *ComputeRackUnit) SetUnitPersonality(v []RackUnitPersonalityRelationship
 }
 
 func (o ComputeRackUnit) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComputeRackUnit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedComputePhysical, errComputePhysical := json.Marshal(o.ComputePhysical)
 	if errComputePhysical != nil {
-		return []byte{}, errComputePhysical
+		return map[string]interface{}{}, errComputePhysical
 	}
 	errComputePhysical = json.Unmarshal([]byte(serializedComputePhysical), &toSerialize)
 	if errComputePhysical != nil {
-		return []byte{}, errComputePhysical
+		return map[string]interface{}{}, errComputePhysical
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConnectionStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
-	if o.ServerId != nil {
+	if !IsNil(o.ServerId) {
 		toSerialize["ServerId"] = o.ServerId
 	}
-	if o.TopologyScanStatus != nil {
+	if !IsNil(o.TopologyScanStatus) {
 		toSerialize["TopologyScanStatus"] = o.TopologyScanStatus
 	}
 	if o.Adapters != nil {
 		toSerialize["Adapters"] = o.Adapters
 	}
-	if o.BiosBootmode != nil {
-		toSerialize["BiosBootmode"] = o.BiosBootmode
+	if o.BiosBootmode.IsSet() {
+		toSerialize["BiosBootmode"] = o.BiosBootmode.Get()
 	}
-	if o.BiosTokenSettings != nil {
-		toSerialize["BiosTokenSettings"] = o.BiosTokenSettings
+	if o.BiosTokenSettings.IsSet() {
+		toSerialize["BiosTokenSettings"] = o.BiosTokenSettings.Get()
 	}
-	if o.BiosVfSelectMemoryRasConfiguration != nil {
-		toSerialize["BiosVfSelectMemoryRasConfiguration"] = o.BiosVfSelectMemoryRasConfiguration
+	if o.BiosVfSelectMemoryRasConfiguration.IsSet() {
+		toSerialize["BiosVfSelectMemoryRasConfiguration"] = o.BiosVfSelectMemoryRasConfiguration.Get()
 	}
 	if o.Biosunits != nil {
 		toSerialize["Biosunits"] = o.Biosunits
 	}
-	if o.Bmc != nil {
-		toSerialize["Bmc"] = o.Bmc
+	if o.Bmc.IsSet() {
+		toSerialize["Bmc"] = o.Bmc.Get()
 	}
-	if o.Board != nil {
-		toSerialize["Board"] = o.Board
+	if o.Board.IsSet() {
+		toSerialize["Board"] = o.Board.Get()
 	}
-	if o.BootDeviceBootmode != nil {
-		toSerialize["BootDeviceBootmode"] = o.BootDeviceBootmode
+	if o.BootDeviceBootmode.IsSet() {
+		toSerialize["BootDeviceBootmode"] = o.BootDeviceBootmode.Get()
 	}
 	if o.ComputePersonality != nil {
 		toSerialize["ComputePersonality"] = o.ComputePersonality
@@ -1162,11 +1291,11 @@ func (o ComputeRackUnit) MarshalJSON() ([]byte, error) {
 	if o.HybridDriveSlots != nil {
 		toSerialize["HybridDriveSlots"] = o.HybridDriveSlots
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.LocatorLed != nil {
-		toSerialize["LocatorLed"] = o.LocatorLed
+	if o.LocatorLed.IsSet() {
+		toSerialize["LocatorLed"] = o.LocatorLed.Get()
 	}
 	if o.MemoryArrays != nil {
 		toSerialize["MemoryArrays"] = o.MemoryArrays
@@ -1180,11 +1309,11 @@ func (o ComputeRackUnit) MarshalJSON() ([]byte, error) {
 	if o.Psus != nil {
 		toSerialize["Psus"] = o.Psus
 	}
-	if o.RackEnclosureSlot != nil {
-		toSerialize["RackEnclosureSlot"] = o.RackEnclosureSlot
+	if o.RackEnclosureSlot.IsSet() {
+		toSerialize["RackEnclosureSlot"] = o.RackEnclosureSlot.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.SasExpanders != nil {
 		toSerialize["SasExpanders"] = o.SasExpanders
@@ -1195,8 +1324,8 @@ func (o ComputeRackUnit) MarshalJSON() ([]byte, error) {
 	if o.StorageEnclosures != nil {
 		toSerialize["StorageEnclosures"] = o.StorageEnclosures
 	}
-	if o.TopSystem != nil {
-		toSerialize["TopSystem"] = o.TopSystem
+	if o.TopSystem.IsSet() {
+		toSerialize["TopSystem"] = o.TopSystem.Get()
 	}
 	if o.UnitPersonality != nil {
 		toSerialize["UnitPersonality"] = o.UnitPersonality
@@ -1206,10 +1335,32 @@ func (o ComputeRackUnit) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ComputeRackUnit) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ComputeRackUnitWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1222,16 +1373,16 @@ func (o *ComputeRackUnit) UnmarshalJSON(bytes []byte) (err error) {
 		// To maintain the Topology workflow run status.
 		TopologyScanStatus *string `json:"TopologyScanStatus,omitempty"`
 		// An array of relationships to adapterUnit resources.
-		Adapters                           []AdapterUnitRelationship                       `json:"Adapters,omitempty"`
-		BiosBootmode                       *BiosBootModeRelationship                       `json:"BiosBootmode,omitempty"`
-		BiosTokenSettings                  *BiosTokenSettingsRelationship                  `json:"BiosTokenSettings,omitempty"`
-		BiosVfSelectMemoryRasConfiguration *BiosVfSelectMemoryRasConfigurationRelationship `json:"BiosVfSelectMemoryRasConfiguration,omitempty"`
+		Adapters                           []AdapterUnitRelationship                              `json:"Adapters,omitempty"`
+		BiosBootmode                       NullableBiosBootModeRelationship                       `json:"BiosBootmode,omitempty"`
+		BiosTokenSettings                  NullableBiosTokenSettingsRelationship                  `json:"BiosTokenSettings,omitempty"`
+		BiosVfSelectMemoryRasConfiguration NullableBiosVfSelectMemoryRasConfigurationRelationship `json:"BiosVfSelectMemoryRasConfiguration,omitempty"`
 		// An array of relationships to biosUnit resources.
 		// Deprecated
-		Biosunits          []BiosUnitRelationship            `json:"Biosunits,omitempty"`
-		Bmc                *ManagementControllerRelationship `json:"Bmc,omitempty"`
-		Board              *ComputeBoardRelationship         `json:"Board,omitempty"`
-		BootDeviceBootmode *BootDeviceBootModeRelationship   `json:"BootDeviceBootmode,omitempty"`
+		Biosunits          []BiosUnitRelationship                   `json:"Biosunits,omitempty"`
+		Bmc                NullableManagementControllerRelationship `json:"Bmc,omitempty"`
+		Board              NullableComputeBoardRelationship         `json:"Board,omitempty"`
+		BootDeviceBootmode NullableBootDeviceBootModeRelationship   `json:"BootDeviceBootmode,omitempty"`
 		// An array of relationships to computePersonality resources.
 		ComputePersonality []ComputePersonalityRelationship `json:"ComputePersonality,omitempty"`
 		// An array of relationships to equipmentFanModule resources.
@@ -1241,9 +1392,9 @@ func (o *ComputeRackUnit) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to graphicsCard resources.
 		GraphicsCards []GraphicsCardRelationship `json:"GraphicsCards,omitempty"`
 		// An array of relationships to equipmentHybridDriveSlot resources.
-		HybridDriveSlots    []EquipmentHybridDriveSlotRelationship `json:"HybridDriveSlots,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship       `json:"InventoryDeviceInfo,omitempty"`
-		LocatorLed          *EquipmentLocatorLedRelationship       `json:"LocatorLed,omitempty"`
+		HybridDriveSlots    []EquipmentHybridDriveSlotRelationship  `json:"HybridDriveSlots,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+		LocatorLed          NullableEquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
 		// An array of relationships to memoryArray resources.
 		MemoryArrays []MemoryArrayRelationship `json:"MemoryArrays,omitempty"`
 		// An array of relationships to pciDevice resources.
@@ -1251,23 +1402,23 @@ func (o *ComputeRackUnit) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to processorUnit resources.
 		Processors []ProcessorUnitRelationship `json:"Processors,omitempty"`
 		// An array of relationships to equipmentPsu resources.
-		Psus              []EquipmentPsuRelationship              `json:"Psus,omitempty"`
-		RackEnclosureSlot *EquipmentRackEnclosureSlotRelationship `json:"RackEnclosureSlot,omitempty"`
-		RegisteredDevice  *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+		Psus              []EquipmentPsuRelationship                     `json:"Psus,omitempty"`
+		RackEnclosureSlot NullableEquipmentRackEnclosureSlotRelationship `json:"RackEnclosureSlot,omitempty"`
+		RegisteredDevice  NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to storageSasExpander resources.
 		SasExpanders []StorageSasExpanderRelationship `json:"SasExpanders,omitempty"`
 		// An array of relationships to storageController resources.
 		StorageControllers []StorageControllerRelationship `json:"StorageControllers,omitempty"`
 		// An array of relationships to storageEnclosure resources.
 		StorageEnclosures []StorageEnclosureRelationship `json:"StorageEnclosures,omitempty"`
-		TopSystem         *TopSystemRelationship         `json:"TopSystem,omitempty"`
+		TopSystem         NullableTopSystemRelationship  `json:"TopSystem,omitempty"`
 		// An array of relationships to rackUnitPersonality resources.
 		UnitPersonality []RackUnitPersonalityRelationship `json:"UnitPersonality,omitempty"`
 	}
 
 	varComputeRackUnitWithoutEmbeddedStruct := ComputeRackUnitWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varComputeRackUnitWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varComputeRackUnitWithoutEmbeddedStruct)
 	if err == nil {
 		varComputeRackUnit := _ComputeRackUnit{}
 		varComputeRackUnit.ClassId = varComputeRackUnitWithoutEmbeddedStruct.ClassId
@@ -1308,7 +1459,7 @@ func (o *ComputeRackUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	varComputeRackUnit := _ComputeRackUnit{}
 
-	err = json.Unmarshal(bytes, &varComputeRackUnit)
+	err = json.Unmarshal(data, &varComputeRackUnit)
 	if err == nil {
 		o.ComputePhysical = varComputeRackUnit.ComputePhysical
 	} else {
@@ -1317,7 +1468,7 @@ func (o *ComputeRackUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConnectionStatus")

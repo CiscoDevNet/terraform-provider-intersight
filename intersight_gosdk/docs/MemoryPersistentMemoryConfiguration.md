@@ -13,11 +13,11 @@ Name | Type | Description | Notes
 **ReservedCapacity** | Pointer to **string** | Reserved capacity in GiB of a Persistent Memory configuration on a server. | [optional] [readonly] 
 **SecurityState** | Pointer to **string** | Collective security state of all Persistent Memory modules on a server. | [optional] [readonly] 
 **TotalCapacity** | Pointer to **string** | Total capacity in GiB of a Persistent Memory configuration on a server. | [optional] [readonly] 
-**ComputeBoard** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**PersistentMemoryConfigResult** | Pointer to [**MemoryPersistentMemoryConfigResultRelationship**](MemoryPersistentMemoryConfigResultRelationship.md) |  | [optional] 
+**ComputeBoard** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PersistentMemoryConfigResult** | Pointer to [**NullableMemoryPersistentMemoryConfigResultRelationship**](MemoryPersistentMemoryConfigResultRelationship.md) |  | [optional] 
 **PersistentMemoryRegions** | Pointer to [**[]MemoryPersistentMemoryRegionRelationship**](MemoryPersistentMemoryRegionRelationship.md) | An array of relationships to memoryPersistentMemoryRegion resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -278,6 +278,16 @@ SetComputeBoard sets ComputeBoard field to given value.
 
 HasComputeBoard returns a boolean if a field has been set.
 
+### SetComputeBoardNil
+
+`func (o *MemoryPersistentMemoryConfiguration) SetComputeBoardNil(b bool)`
+
+ SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+
+### UnsetComputeBoard
+`func (o *MemoryPersistentMemoryConfiguration) UnsetComputeBoard()`
+
+UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *MemoryPersistentMemoryConfiguration) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -303,6 +313,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *MemoryPersistentMemoryConfiguration) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *MemoryPersistentMemoryConfiguration) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetPersistentMemoryConfigResult
 
 `func (o *MemoryPersistentMemoryConfiguration) GetPersistentMemoryConfigResult() MemoryPersistentMemoryConfigResultRelationship`
@@ -328,6 +348,16 @@ SetPersistentMemoryConfigResult sets PersistentMemoryConfigResult field to given
 
 HasPersistentMemoryConfigResult returns a boolean if a field has been set.
 
+### SetPersistentMemoryConfigResultNil
+
+`func (o *MemoryPersistentMemoryConfiguration) SetPersistentMemoryConfigResultNil(b bool)`
+
+ SetPersistentMemoryConfigResultNil sets the value for PersistentMemoryConfigResult to be an explicit nil
+
+### UnsetPersistentMemoryConfigResult
+`func (o *MemoryPersistentMemoryConfiguration) UnsetPersistentMemoryConfigResult()`
+
+UnsetPersistentMemoryConfigResult ensures that no value is present for PersistentMemoryConfigResult, not even an explicit nil
 ### GetPersistentMemoryRegions
 
 `func (o *MemoryPersistentMemoryConfiguration) GetPersistentMemoryRegions() []MemoryPersistentMemoryRegionRelationship`
@@ -388,6 +418,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *MemoryPersistentMemoryConfiguration) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *MemoryPersistentMemoryConfiguration) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

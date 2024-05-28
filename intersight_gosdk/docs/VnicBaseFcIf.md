@@ -9,11 +9,11 @@ Name | Type | Description | Notes
 **PersistentBindings** | Pointer to **bool** | Enables retention of LUN ID associations in memory until they are manually cleared. | [optional] 
 **PinGroupName** | Pointer to **string** | Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic. | [optional] 
 **Type** | Pointer to **string** | VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters. * &#x60;fc-initiator&#x60; - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems. * &#x60;fc-nvme-initiator&#x60; - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. * &#x60;fc-nvme-target&#x60; - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver. * &#x60;fc-target&#x60; - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver. | [optional] [default to "fc-initiator"]
-**FcAdapterPolicy** | Pointer to [**VnicFcAdapterPolicyRelationship**](VnicFcAdapterPolicyRelationship.md) |  | [optional] 
-**FcNetworkPolicy** | Pointer to [**VnicFcNetworkPolicyRelationship**](VnicFcNetworkPolicyRelationship.md) |  | [optional] 
-**FcQosPolicy** | Pointer to [**VnicFcQosPolicyRelationship**](VnicFcQosPolicyRelationship.md) |  | [optional] 
+**FcAdapterPolicy** | Pointer to [**NullableVnicFcAdapterPolicyRelationship**](VnicFcAdapterPolicyRelationship.md) |  | [optional] 
+**FcNetworkPolicy** | Pointer to [**NullableVnicFcNetworkPolicyRelationship**](VnicFcNetworkPolicyRelationship.md) |  | [optional] 
+**FcQosPolicy** | Pointer to [**NullableVnicFcQosPolicyRelationship**](VnicFcQosPolicyRelationship.md) |  | [optional] 
 **FcZonePolicies** | Pointer to [**[]FabricFcZonePolicyRelationship**](FabricFcZonePolicyRelationship.md) | An array of relationships to fabricFcZonePolicy resources. | [optional] 
-**WwpnPool** | Pointer to [**FcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
+**WwpnPool** | Pointer to [**NullableFcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -174,6 +174,16 @@ SetFcAdapterPolicy sets FcAdapterPolicy field to given value.
 
 HasFcAdapterPolicy returns a boolean if a field has been set.
 
+### SetFcAdapterPolicyNil
+
+`func (o *VnicBaseFcIf) SetFcAdapterPolicyNil(b bool)`
+
+ SetFcAdapterPolicyNil sets the value for FcAdapterPolicy to be an explicit nil
+
+### UnsetFcAdapterPolicy
+`func (o *VnicBaseFcIf) UnsetFcAdapterPolicy()`
+
+UnsetFcAdapterPolicy ensures that no value is present for FcAdapterPolicy, not even an explicit nil
 ### GetFcNetworkPolicy
 
 `func (o *VnicBaseFcIf) GetFcNetworkPolicy() VnicFcNetworkPolicyRelationship`
@@ -199,6 +209,16 @@ SetFcNetworkPolicy sets FcNetworkPolicy field to given value.
 
 HasFcNetworkPolicy returns a boolean if a field has been set.
 
+### SetFcNetworkPolicyNil
+
+`func (o *VnicBaseFcIf) SetFcNetworkPolicyNil(b bool)`
+
+ SetFcNetworkPolicyNil sets the value for FcNetworkPolicy to be an explicit nil
+
+### UnsetFcNetworkPolicy
+`func (o *VnicBaseFcIf) UnsetFcNetworkPolicy()`
+
+UnsetFcNetworkPolicy ensures that no value is present for FcNetworkPolicy, not even an explicit nil
 ### GetFcQosPolicy
 
 `func (o *VnicBaseFcIf) GetFcQosPolicy() VnicFcQosPolicyRelationship`
@@ -224,6 +244,16 @@ SetFcQosPolicy sets FcQosPolicy field to given value.
 
 HasFcQosPolicy returns a boolean if a field has been set.
 
+### SetFcQosPolicyNil
+
+`func (o *VnicBaseFcIf) SetFcQosPolicyNil(b bool)`
+
+ SetFcQosPolicyNil sets the value for FcQosPolicy to be an explicit nil
+
+### UnsetFcQosPolicy
+`func (o *VnicBaseFcIf) UnsetFcQosPolicy()`
+
+UnsetFcQosPolicy ensures that no value is present for FcQosPolicy, not even an explicit nil
 ### GetFcZonePolicies
 
 `func (o *VnicBaseFcIf) GetFcZonePolicies() []FabricFcZonePolicyRelationship`
@@ -284,6 +314,16 @@ SetWwpnPool sets WwpnPool field to given value.
 
 HasWwpnPool returns a boolean if a field has been set.
 
+### SetWwpnPoolNil
+
+`func (o *VnicBaseFcIf) SetWwpnPoolNil(b bool)`
+
+ SetWwpnPoolNil sets the value for WwpnPool to be an explicit nil
+
+### UnsetWwpnPool
+`func (o *VnicBaseFcIf) UnsetWwpnPool()`
+
+UnsetWwpnPool ensures that no value is present for WwpnPool, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

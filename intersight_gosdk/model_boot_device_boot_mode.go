@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the BootDeviceBootMode type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BootDeviceBootMode{}
 
 // BootDeviceBootMode Boot mode of the devices that BIOS uses to boot them.
 type BootDeviceBootMode struct {
@@ -25,11 +29,11 @@ type BootDeviceBootMode struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The user desired BIOS boot mode as configured in the boot policy.
-	ConfiguredBootMode   *string                              `json:"ConfiguredBootMode,omitempty"`
-	ComputeBlade         *ComputeBladeRelationship            `json:"ComputeBlade,omitempty"`
-	ComputeRackUnit      *ComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	ConfiguredBootMode   *string                                     `json:"ConfiguredBootMode,omitempty"`
+	ComputeBlade         NullableComputeBladeRelationship            `json:"ComputeBlade,omitempty"`
+	ComputeRackUnit      NullableComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,7 +112,7 @@ func (o *BootDeviceBootMode) SetObjectType(v string) {
 
 // GetConfiguredBootMode returns the ConfiguredBootMode field value if set, zero value otherwise.
 func (o *BootDeviceBootMode) GetConfiguredBootMode() string {
-	if o == nil || o.ConfiguredBootMode == nil {
+	if o == nil || IsNil(o.ConfiguredBootMode) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *BootDeviceBootMode) GetConfiguredBootMode() string {
 // GetConfiguredBootModeOk returns a tuple with the ConfiguredBootMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootDeviceBootMode) GetConfiguredBootModeOk() (*string, bool) {
-	if o == nil || o.ConfiguredBootMode == nil {
+	if o == nil || IsNil(o.ConfiguredBootMode) {
 		return nil, false
 	}
 	return o.ConfiguredBootMode, true
@@ -126,7 +130,7 @@ func (o *BootDeviceBootMode) GetConfiguredBootModeOk() (*string, bool) {
 
 // HasConfiguredBootMode returns a boolean if a field has been set.
 func (o *BootDeviceBootMode) HasConfiguredBootMode() bool {
-	if o != nil && o.ConfiguredBootMode != nil {
+	if o != nil && !IsNil(o.ConfiguredBootMode) {
 		return true
 	}
 
@@ -138,190 +142,260 @@ func (o *BootDeviceBootMode) SetConfiguredBootMode(v string) {
 	o.ConfiguredBootMode = &v
 }
 
-// GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise.
+// GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BootDeviceBootMode) GetComputeBlade() ComputeBladeRelationship {
-	if o == nil || o.ComputeBlade == nil {
+	if o == nil || IsNil(o.ComputeBlade.Get()) {
 		var ret ComputeBladeRelationship
 		return ret
 	}
-	return *o.ComputeBlade
+	return *o.ComputeBlade.Get()
 }
 
 // GetComputeBladeOk returns a tuple with the ComputeBlade field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BootDeviceBootMode) GetComputeBladeOk() (*ComputeBladeRelationship, bool) {
-	if o == nil || o.ComputeBlade == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBlade, true
+	return o.ComputeBlade.Get(), o.ComputeBlade.IsSet()
 }
 
 // HasComputeBlade returns a boolean if a field has been set.
 func (o *BootDeviceBootMode) HasComputeBlade() bool {
-	if o != nil && o.ComputeBlade != nil {
+	if o != nil && o.ComputeBlade.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBlade gets a reference to the given ComputeBladeRelationship and assigns it to the ComputeBlade field.
+// SetComputeBlade gets a reference to the given NullableComputeBladeRelationship and assigns it to the ComputeBlade field.
 func (o *BootDeviceBootMode) SetComputeBlade(v ComputeBladeRelationship) {
-	o.ComputeBlade = &v
+	o.ComputeBlade.Set(&v)
 }
 
-// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise.
+// SetComputeBladeNil sets the value for ComputeBlade to be an explicit nil
+func (o *BootDeviceBootMode) SetComputeBladeNil() {
+	o.ComputeBlade.Set(nil)
+}
+
+// UnsetComputeBlade ensures that no value is present for ComputeBlade, not even an explicit nil
+func (o *BootDeviceBootMode) UnsetComputeBlade() {
+	o.ComputeBlade.Unset()
+}
+
+// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BootDeviceBootMode) GetComputeRackUnit() ComputeRackUnitRelationship {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil || IsNil(o.ComputeRackUnit.Get()) {
 		var ret ComputeRackUnitRelationship
 		return ret
 	}
-	return *o.ComputeRackUnit
+	return *o.ComputeRackUnit.Get()
 }
 
 // GetComputeRackUnitOk returns a tuple with the ComputeRackUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BootDeviceBootMode) GetComputeRackUnitOk() (*ComputeRackUnitRelationship, bool) {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeRackUnit, true
+	return o.ComputeRackUnit.Get(), o.ComputeRackUnit.IsSet()
 }
 
 // HasComputeRackUnit returns a boolean if a field has been set.
 func (o *BootDeviceBootMode) HasComputeRackUnit() bool {
-	if o != nil && o.ComputeRackUnit != nil {
+	if o != nil && o.ComputeRackUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeRackUnit gets a reference to the given ComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
+// SetComputeRackUnit gets a reference to the given NullableComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
 func (o *BootDeviceBootMode) SetComputeRackUnit(v ComputeRackUnitRelationship) {
-	o.ComputeRackUnit = &v
+	o.ComputeRackUnit.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetComputeRackUnitNil sets the value for ComputeRackUnit to be an explicit nil
+func (o *BootDeviceBootMode) SetComputeRackUnitNil() {
+	o.ComputeRackUnit.Set(nil)
+}
+
+// UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
+func (o *BootDeviceBootMode) UnsetComputeRackUnit() {
+	o.ComputeRackUnit.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BootDeviceBootMode) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BootDeviceBootMode) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *BootDeviceBootMode) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *BootDeviceBootMode) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *BootDeviceBootMode) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *BootDeviceBootMode) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BootDeviceBootMode) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BootDeviceBootMode) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *BootDeviceBootMode) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *BootDeviceBootMode) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *BootDeviceBootMode) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *BootDeviceBootMode) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o BootDeviceBootMode) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BootDeviceBootMode) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConfiguredBootMode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConfiguredBootMode) {
 		toSerialize["ConfiguredBootMode"] = o.ConfiguredBootMode
 	}
-	if o.ComputeBlade != nil {
-		toSerialize["ComputeBlade"] = o.ComputeBlade
+	if o.ComputeBlade.IsSet() {
+		toSerialize["ComputeBlade"] = o.ComputeBlade.Get()
 	}
-	if o.ComputeRackUnit != nil {
-		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit
+	if o.ComputeRackUnit.IsSet() {
+		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *BootDeviceBootMode) UnmarshalJSON(bytes []byte) (err error) {
+func (o *BootDeviceBootMode) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type BootDeviceBootModeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The user desired BIOS boot mode as configured in the boot policy.
-		ConfiguredBootMode  *string                              `json:"ConfiguredBootMode,omitempty"`
-		ComputeBlade        *ComputeBladeRelationship            `json:"ComputeBlade,omitempty"`
-		ComputeRackUnit     *ComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		ConfiguredBootMode  *string                                     `json:"ConfiguredBootMode,omitempty"`
+		ComputeBlade        NullableComputeBladeRelationship            `json:"ComputeBlade,omitempty"`
+		ComputeRackUnit     NullableComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varBootDeviceBootModeWithoutEmbeddedStruct := BootDeviceBootModeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varBootDeviceBootModeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varBootDeviceBootModeWithoutEmbeddedStruct)
 	if err == nil {
 		varBootDeviceBootMode := _BootDeviceBootMode{}
 		varBootDeviceBootMode.ClassId = varBootDeviceBootModeWithoutEmbeddedStruct.ClassId
@@ -338,7 +412,7 @@ func (o *BootDeviceBootMode) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBootDeviceBootMode := _BootDeviceBootMode{}
 
-	err = json.Unmarshal(bytes, &varBootDeviceBootMode)
+	err = json.Unmarshal(data, &varBootDeviceBootMode)
 	if err == nil {
 		o.InventoryBase = varBootDeviceBootMode.InventoryBase
 	} else {
@@ -347,7 +421,7 @@ func (o *BootDeviceBootMode) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfiguredBootMode")

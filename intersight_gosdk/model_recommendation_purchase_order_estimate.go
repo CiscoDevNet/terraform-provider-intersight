@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the RecommendationPurchaseOrderEstimate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RecommendationPurchaseOrderEstimate{}
 
 // RecommendationPurchaseOrderEstimate Entity representing the estimate for the purchase order for user requested expansion.
 type RecommendationPurchaseOrderEstimate struct {
@@ -34,9 +38,9 @@ type RecommendationPurchaseOrderEstimate struct {
 	Status *string `json:"Status,omitempty"`
 	// The total cost of all the recommended hardware in the bill of materials for the corresponding estimate.
 	// Deprecated
-	TotalCost            *float32                                    `json:"TotalCost,omitempty"`
-	ClusterExpansion     *RecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
-	EstimateOwner        *IamUserRelationship                        `json:"EstimateOwner,omitempty"`
+	TotalCost            *float32                                           `json:"TotalCost,omitempty"`
+	ClusterExpansion     NullableRecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
+	EstimateOwner        NullableIamUserRelationship                        `json:"EstimateOwner,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *RecommendationPurchaseOrderEstimate) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *RecommendationPurchaseOrderEstimate) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *RecommendationPurchaseOrderEstimate) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationPurchaseOrderEstimate) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -137,7 +141,7 @@ func (o *RecommendationPurchaseOrderEstimate) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *RecommendationPurchaseOrderEstimate) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *RecommendationPurchaseOrderEstimate) SetAction(v string) {
 
 // GetEstimateId returns the EstimateId field value if set, zero value otherwise.
 func (o *RecommendationPurchaseOrderEstimate) GetEstimateId() string {
-	if o == nil || o.EstimateId == nil {
+	if o == nil || IsNil(o.EstimateId) {
 		var ret string
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *RecommendationPurchaseOrderEstimate) GetEstimateId() string {
 // GetEstimateIdOk returns a tuple with the EstimateId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationPurchaseOrderEstimate) GetEstimateIdOk() (*string, bool) {
-	if o == nil || o.EstimateId == nil {
+	if o == nil || IsNil(o.EstimateId) {
 		return nil, false
 	}
 	return o.EstimateId, true
@@ -169,7 +173,7 @@ func (o *RecommendationPurchaseOrderEstimate) GetEstimateIdOk() (*string, bool) 
 
 // HasEstimateId returns a boolean if a field has been set.
 func (o *RecommendationPurchaseOrderEstimate) HasEstimateId() bool {
-	if o != nil && o.EstimateId != nil {
+	if o != nil && !IsNil(o.EstimateId) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *RecommendationPurchaseOrderEstimate) SetEstimateId(v string) {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *RecommendationPurchaseOrderEstimate) GetMessage() string {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *RecommendationPurchaseOrderEstimate) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationPurchaseOrderEstimate) GetMessageOk() (*string, bool) {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -201,7 +205,7 @@ func (o *RecommendationPurchaseOrderEstimate) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *RecommendationPurchaseOrderEstimate) HasMessage() bool {
-	if o != nil && o.Message != nil {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *RecommendationPurchaseOrderEstimate) SetMessage(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *RecommendationPurchaseOrderEstimate) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *RecommendationPurchaseOrderEstimate) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationPurchaseOrderEstimate) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -233,7 +237,7 @@ func (o *RecommendationPurchaseOrderEstimate) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *RecommendationPurchaseOrderEstimate) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *RecommendationPurchaseOrderEstimate) SetStatus(v string) {
 // GetTotalCost returns the TotalCost field value if set, zero value otherwise.
 // Deprecated
 func (o *RecommendationPurchaseOrderEstimate) GetTotalCost() float32 {
-	if o == nil || o.TotalCost == nil {
+	if o == nil || IsNil(o.TotalCost) {
 		var ret float32
 		return ret
 	}
@@ -259,7 +263,7 @@ func (o *RecommendationPurchaseOrderEstimate) GetTotalCost() float32 {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *RecommendationPurchaseOrderEstimate) GetTotalCostOk() (*float32, bool) {
-	if o == nil || o.TotalCost == nil {
+	if o == nil || IsNil(o.TotalCost) {
 		return nil, false
 	}
 	return o.TotalCost, true
@@ -267,7 +271,7 @@ func (o *RecommendationPurchaseOrderEstimate) GetTotalCostOk() (*float32, bool) 
 
 // HasTotalCost returns a boolean if a field has been set.
 func (o *RecommendationPurchaseOrderEstimate) HasTotalCost() bool {
-	if o != nil && o.TotalCost != nil {
+	if o != nil && !IsNil(o.TotalCost) {
 		return true
 	}
 
@@ -280,116 +284,164 @@ func (o *RecommendationPurchaseOrderEstimate) SetTotalCost(v float32) {
 	o.TotalCost = &v
 }
 
-// GetClusterExpansion returns the ClusterExpansion field value if set, zero value otherwise.
+// GetClusterExpansion returns the ClusterExpansion field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecommendationPurchaseOrderEstimate) GetClusterExpansion() RecommendationClusterExpansionRelationship {
-	if o == nil || o.ClusterExpansion == nil {
+	if o == nil || IsNil(o.ClusterExpansion.Get()) {
 		var ret RecommendationClusterExpansionRelationship
 		return ret
 	}
-	return *o.ClusterExpansion
+	return *o.ClusterExpansion.Get()
 }
 
 // GetClusterExpansionOk returns a tuple with the ClusterExpansion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationPurchaseOrderEstimate) GetClusterExpansionOk() (*RecommendationClusterExpansionRelationship, bool) {
-	if o == nil || o.ClusterExpansion == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClusterExpansion, true
+	return o.ClusterExpansion.Get(), o.ClusterExpansion.IsSet()
 }
 
 // HasClusterExpansion returns a boolean if a field has been set.
 func (o *RecommendationPurchaseOrderEstimate) HasClusterExpansion() bool {
-	if o != nil && o.ClusterExpansion != nil {
+	if o != nil && o.ClusterExpansion.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClusterExpansion gets a reference to the given RecommendationClusterExpansionRelationship and assigns it to the ClusterExpansion field.
+// SetClusterExpansion gets a reference to the given NullableRecommendationClusterExpansionRelationship and assigns it to the ClusterExpansion field.
 func (o *RecommendationPurchaseOrderEstimate) SetClusterExpansion(v RecommendationClusterExpansionRelationship) {
-	o.ClusterExpansion = &v
+	o.ClusterExpansion.Set(&v)
 }
 
-// GetEstimateOwner returns the EstimateOwner field value if set, zero value otherwise.
+// SetClusterExpansionNil sets the value for ClusterExpansion to be an explicit nil
+func (o *RecommendationPurchaseOrderEstimate) SetClusterExpansionNil() {
+	o.ClusterExpansion.Set(nil)
+}
+
+// UnsetClusterExpansion ensures that no value is present for ClusterExpansion, not even an explicit nil
+func (o *RecommendationPurchaseOrderEstimate) UnsetClusterExpansion() {
+	o.ClusterExpansion.Unset()
+}
+
+// GetEstimateOwner returns the EstimateOwner field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecommendationPurchaseOrderEstimate) GetEstimateOwner() IamUserRelationship {
-	if o == nil || o.EstimateOwner == nil {
+	if o == nil || IsNil(o.EstimateOwner.Get()) {
 		var ret IamUserRelationship
 		return ret
 	}
-	return *o.EstimateOwner
+	return *o.EstimateOwner.Get()
 }
 
 // GetEstimateOwnerOk returns a tuple with the EstimateOwner field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationPurchaseOrderEstimate) GetEstimateOwnerOk() (*IamUserRelationship, bool) {
-	if o == nil || o.EstimateOwner == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EstimateOwner, true
+	return o.EstimateOwner.Get(), o.EstimateOwner.IsSet()
 }
 
 // HasEstimateOwner returns a boolean if a field has been set.
 func (o *RecommendationPurchaseOrderEstimate) HasEstimateOwner() bool {
-	if o != nil && o.EstimateOwner != nil {
+	if o != nil && o.EstimateOwner.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEstimateOwner gets a reference to the given IamUserRelationship and assigns it to the EstimateOwner field.
+// SetEstimateOwner gets a reference to the given NullableIamUserRelationship and assigns it to the EstimateOwner field.
 func (o *RecommendationPurchaseOrderEstimate) SetEstimateOwner(v IamUserRelationship) {
-	o.EstimateOwner = &v
+	o.EstimateOwner.Set(&v)
+}
+
+// SetEstimateOwnerNil sets the value for EstimateOwner to be an explicit nil
+func (o *RecommendationPurchaseOrderEstimate) SetEstimateOwnerNil() {
+	o.EstimateOwner.Set(nil)
+}
+
+// UnsetEstimateOwner ensures that no value is present for EstimateOwner, not even an explicit nil
+func (o *RecommendationPurchaseOrderEstimate) UnsetEstimateOwner() {
+	o.EstimateOwner.Unset()
 }
 
 func (o RecommendationPurchaseOrderEstimate) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RecommendationPurchaseOrderEstimate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedRecommendationBase, errRecommendationBase := json.Marshal(o.RecommendationBase)
 	if errRecommendationBase != nil {
-		return []byte{}, errRecommendationBase
+		return map[string]interface{}{}, errRecommendationBase
 	}
 	errRecommendationBase = json.Unmarshal([]byte(serializedRecommendationBase), &toSerialize)
 	if errRecommendationBase != nil {
-		return []byte{}, errRecommendationBase
+		return map[string]interface{}{}, errRecommendationBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
-	if o.EstimateId != nil {
+	if !IsNil(o.EstimateId) {
 		toSerialize["EstimateId"] = o.EstimateId
 	}
-	if o.Message != nil {
+	if !IsNil(o.Message) {
 		toSerialize["Message"] = o.Message
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.TotalCost != nil {
+	if !IsNil(o.TotalCost) {
 		toSerialize["TotalCost"] = o.TotalCost
 	}
-	if o.ClusterExpansion != nil {
-		toSerialize["ClusterExpansion"] = o.ClusterExpansion
+	if o.ClusterExpansion.IsSet() {
+		toSerialize["ClusterExpansion"] = o.ClusterExpansion.Get()
 	}
-	if o.EstimateOwner != nil {
-		toSerialize["EstimateOwner"] = o.EstimateOwner
+	if o.EstimateOwner.IsSet() {
+		toSerialize["EstimateOwner"] = o.EstimateOwner.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *RecommendationPurchaseOrderEstimate) UnmarshalJSON(bytes []byte) (err error) {
+func (o *RecommendationPurchaseOrderEstimate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type RecommendationPurchaseOrderEstimateWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -405,14 +457,14 @@ func (o *RecommendationPurchaseOrderEstimate) UnmarshalJSON(bytes []byte) (err e
 		Status *string `json:"Status,omitempty"`
 		// The total cost of all the recommended hardware in the bill of materials for the corresponding estimate.
 		// Deprecated
-		TotalCost        *float32                                    `json:"TotalCost,omitempty"`
-		ClusterExpansion *RecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
-		EstimateOwner    *IamUserRelationship                        `json:"EstimateOwner,omitempty"`
+		TotalCost        *float32                                           `json:"TotalCost,omitempty"`
+		ClusterExpansion NullableRecommendationClusterExpansionRelationship `json:"ClusterExpansion,omitempty"`
+		EstimateOwner    NullableIamUserRelationship                        `json:"EstimateOwner,omitempty"`
 	}
 
 	varRecommendationPurchaseOrderEstimateWithoutEmbeddedStruct := RecommendationPurchaseOrderEstimateWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varRecommendationPurchaseOrderEstimateWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varRecommendationPurchaseOrderEstimateWithoutEmbeddedStruct)
 	if err == nil {
 		varRecommendationPurchaseOrderEstimate := _RecommendationPurchaseOrderEstimate{}
 		varRecommendationPurchaseOrderEstimate.ClassId = varRecommendationPurchaseOrderEstimateWithoutEmbeddedStruct.ClassId
@@ -431,7 +483,7 @@ func (o *RecommendationPurchaseOrderEstimate) UnmarshalJSON(bytes []byte) (err e
 
 	varRecommendationPurchaseOrderEstimate := _RecommendationPurchaseOrderEstimate{}
 
-	err = json.Unmarshal(bytes, &varRecommendationPurchaseOrderEstimate)
+	err = json.Unmarshal(data, &varRecommendationPurchaseOrderEstimate)
 	if err == nil {
 		o.RecommendationBase = varRecommendationPurchaseOrderEstimate.RecommendationBase
 	} else {
@@ -440,7 +492,7 @@ func (o *RecommendationPurchaseOrderEstimate) UnmarshalJSON(bytes []byte) (err e
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

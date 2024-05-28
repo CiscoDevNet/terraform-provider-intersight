@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppBaseIpInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppBaseIpInterface{}
 
 // StorageNetAppBaseIpInterface NetApp IP interface is a logical interface.
 type StorageNetAppBaseIpInterface struct {
@@ -139,7 +143,7 @@ func (o *StorageNetAppBaseIpInterface) SetObjectType(v string) {
 
 // GetCurrentNode returns the CurrentNode field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetCurrentNode() string {
-	if o == nil || o.CurrentNode == nil {
+	if o == nil || IsNil(o.CurrentNode) {
 		var ret string
 		return ret
 	}
@@ -149,7 +153,7 @@ func (o *StorageNetAppBaseIpInterface) GetCurrentNode() string {
 // GetCurrentNodeOk returns a tuple with the CurrentNode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetCurrentNodeOk() (*string, bool) {
-	if o == nil || o.CurrentNode == nil {
+	if o == nil || IsNil(o.CurrentNode) {
 		return nil, false
 	}
 	return o.CurrentNode, true
@@ -157,7 +161,7 @@ func (o *StorageNetAppBaseIpInterface) GetCurrentNodeOk() (*string, bool) {
 
 // HasCurrentNode returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasCurrentNode() bool {
-	if o != nil && o.CurrentNode != nil {
+	if o != nil && !IsNil(o.CurrentNode) {
 		return true
 	}
 
@@ -171,7 +175,7 @@ func (o *StorageNetAppBaseIpInterface) SetCurrentNode(v string) {
 
 // GetCurrentPort returns the CurrentPort field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetCurrentPort() string {
-	if o == nil || o.CurrentPort == nil {
+	if o == nil || IsNil(o.CurrentPort) {
 		var ret string
 		return ret
 	}
@@ -181,7 +185,7 @@ func (o *StorageNetAppBaseIpInterface) GetCurrentPort() string {
 // GetCurrentPortOk returns a tuple with the CurrentPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetCurrentPortOk() (*string, bool) {
-	if o == nil || o.CurrentPort == nil {
+	if o == nil || IsNil(o.CurrentPort) {
 		return nil, false
 	}
 	return o.CurrentPort, true
@@ -189,7 +193,7 @@ func (o *StorageNetAppBaseIpInterface) GetCurrentPortOk() (*string, bool) {
 
 // HasCurrentPort returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasCurrentPort() bool {
-	if o != nil && o.CurrentPort != nil {
+	if o != nil && !IsNil(o.CurrentPort) {
 		return true
 	}
 
@@ -203,7 +207,7 @@ func (o *StorageNetAppBaseIpInterface) SetCurrentPort(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetEnabled() string {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret string
 		return ret
 	}
@@ -213,7 +217,7 @@ func (o *StorageNetAppBaseIpInterface) GetEnabled() string {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetEnabledOk() (*string, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -221,7 +225,7 @@ func (o *StorageNetAppBaseIpInterface) GetEnabledOk() (*string, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -235,7 +239,7 @@ func (o *StorageNetAppBaseIpInterface) SetEnabled(v string) {
 
 // GetHomeNode returns the HomeNode field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetHomeNode() string {
-	if o == nil || o.HomeNode == nil {
+	if o == nil || IsNil(o.HomeNode) {
 		var ret string
 		return ret
 	}
@@ -245,7 +249,7 @@ func (o *StorageNetAppBaseIpInterface) GetHomeNode() string {
 // GetHomeNodeOk returns a tuple with the HomeNode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetHomeNodeOk() (*string, bool) {
-	if o == nil || o.HomeNode == nil {
+	if o == nil || IsNil(o.HomeNode) {
 		return nil, false
 	}
 	return o.HomeNode, true
@@ -253,7 +257,7 @@ func (o *StorageNetAppBaseIpInterface) GetHomeNodeOk() (*string, bool) {
 
 // HasHomeNode returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasHomeNode() bool {
-	if o != nil && o.HomeNode != nil {
+	if o != nil && !IsNil(o.HomeNode) {
 		return true
 	}
 
@@ -267,7 +271,7 @@ func (o *StorageNetAppBaseIpInterface) SetHomeNode(v string) {
 
 // GetHomePort returns the HomePort field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetHomePort() string {
-	if o == nil || o.HomePort == nil {
+	if o == nil || IsNil(o.HomePort) {
 		var ret string
 		return ret
 	}
@@ -277,7 +281,7 @@ func (o *StorageNetAppBaseIpInterface) GetHomePort() string {
 // GetHomePortOk returns a tuple with the HomePort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetHomePortOk() (*string, bool) {
-	if o == nil || o.HomePort == nil {
+	if o == nil || IsNil(o.HomePort) {
 		return nil, false
 	}
 	return o.HomePort, true
@@ -285,7 +289,7 @@ func (o *StorageNetAppBaseIpInterface) GetHomePortOk() (*string, bool) {
 
 // HasHomePort returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasHomePort() bool {
-	if o != nil && o.HomePort != nil {
+	if o != nil && !IsNil(o.HomePort) {
 		return true
 	}
 
@@ -299,7 +303,7 @@ func (o *StorageNetAppBaseIpInterface) SetHomePort(v string) {
 
 // GetInterfaceIsHome returns the InterfaceIsHome field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetInterfaceIsHome() string {
-	if o == nil || o.InterfaceIsHome == nil {
+	if o == nil || IsNil(o.InterfaceIsHome) {
 		var ret string
 		return ret
 	}
@@ -309,7 +313,7 @@ func (o *StorageNetAppBaseIpInterface) GetInterfaceIsHome() string {
 // GetInterfaceIsHomeOk returns a tuple with the InterfaceIsHome field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetInterfaceIsHomeOk() (*string, bool) {
-	if o == nil || o.InterfaceIsHome == nil {
+	if o == nil || IsNil(o.InterfaceIsHome) {
 		return nil, false
 	}
 	return o.InterfaceIsHome, true
@@ -317,7 +321,7 @@ func (o *StorageNetAppBaseIpInterface) GetInterfaceIsHomeOk() (*string, bool) {
 
 // HasInterfaceIsHome returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasInterfaceIsHome() bool {
-	if o != nil && o.InterfaceIsHome != nil {
+	if o != nil && !IsNil(o.InterfaceIsHome) {
 		return true
 	}
 
@@ -331,7 +335,7 @@ func (o *StorageNetAppBaseIpInterface) SetInterfaceIsHome(v string) {
 
 // GetInterfaceState returns the InterfaceState field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetInterfaceState() string {
-	if o == nil || o.InterfaceState == nil {
+	if o == nil || IsNil(o.InterfaceState) {
 		var ret string
 		return ret
 	}
@@ -341,7 +345,7 @@ func (o *StorageNetAppBaseIpInterface) GetInterfaceState() string {
 // GetInterfaceStateOk returns a tuple with the InterfaceState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetInterfaceStateOk() (*string, bool) {
-	if o == nil || o.InterfaceState == nil {
+	if o == nil || IsNil(o.InterfaceState) {
 		return nil, false
 	}
 	return o.InterfaceState, true
@@ -349,7 +353,7 @@ func (o *StorageNetAppBaseIpInterface) GetInterfaceStateOk() (*string, bool) {
 
 // HasInterfaceState returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasInterfaceState() bool {
-	if o != nil && o.InterfaceState != nil {
+	if o != nil && !IsNil(o.InterfaceState) {
 		return true
 	}
 
@@ -363,7 +367,7 @@ func (o *StorageNetAppBaseIpInterface) SetInterfaceState(v string) {
 
 // GetIpAddress returns the IpAddress field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetIpAddress() string {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		var ret string
 		return ret
 	}
@@ -373,7 +377,7 @@ func (o *StorageNetAppBaseIpInterface) GetIpAddress() string {
 // GetIpAddressOk returns a tuple with the IpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetIpAddressOk() (*string, bool) {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		return nil, false
 	}
 	return o.IpAddress, true
@@ -381,7 +385,7 @@ func (o *StorageNetAppBaseIpInterface) GetIpAddressOk() (*string, bool) {
 
 // HasIpAddress returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasIpAddress() bool {
-	if o != nil && o.IpAddress != nil {
+	if o != nil && !IsNil(o.IpAddress) {
 		return true
 	}
 
@@ -395,7 +399,7 @@ func (o *StorageNetAppBaseIpInterface) SetIpAddress(v string) {
 
 // GetIpFamily returns the IpFamily field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetIpFamily() string {
-	if o == nil || o.IpFamily == nil {
+	if o == nil || IsNil(o.IpFamily) {
 		var ret string
 		return ret
 	}
@@ -405,7 +409,7 @@ func (o *StorageNetAppBaseIpInterface) GetIpFamily() string {
 // GetIpFamilyOk returns a tuple with the IpFamily field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetIpFamilyOk() (*string, bool) {
-	if o == nil || o.IpFamily == nil {
+	if o == nil || IsNil(o.IpFamily) {
 		return nil, false
 	}
 	return o.IpFamily, true
@@ -413,7 +417,7 @@ func (o *StorageNetAppBaseIpInterface) GetIpFamilyOk() (*string, bool) {
 
 // HasIpFamily returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasIpFamily() bool {
-	if o != nil && o.IpFamily != nil {
+	if o != nil && !IsNil(o.IpFamily) {
 		return true
 	}
 
@@ -427,7 +431,7 @@ func (o *StorageNetAppBaseIpInterface) SetIpFamily(v string) {
 
 // GetIpspace returns the Ipspace field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetIpspace() string {
-	if o == nil || o.Ipspace == nil {
+	if o == nil || IsNil(o.Ipspace) {
 		var ret string
 		return ret
 	}
@@ -437,7 +441,7 @@ func (o *StorageNetAppBaseIpInterface) GetIpspace() string {
 // GetIpspaceOk returns a tuple with the Ipspace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetIpspaceOk() (*string, bool) {
-	if o == nil || o.Ipspace == nil {
+	if o == nil || IsNil(o.Ipspace) {
 		return nil, false
 	}
 	return o.Ipspace, true
@@ -445,7 +449,7 @@ func (o *StorageNetAppBaseIpInterface) GetIpspaceOk() (*string, bool) {
 
 // HasIpspace returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasIpspace() bool {
-	if o != nil && o.Ipspace != nil {
+	if o != nil && !IsNil(o.Ipspace) {
 		return true
 	}
 
@@ -460,7 +464,7 @@ func (o *StorageNetAppBaseIpInterface) SetIpspace(v string) {
 // GetIsHome returns the IsHome field value if set, zero value otherwise.
 // Deprecated
 func (o *StorageNetAppBaseIpInterface) GetIsHome() bool {
-	if o == nil || o.IsHome == nil {
+	if o == nil || IsNil(o.IsHome) {
 		var ret bool
 		return ret
 	}
@@ -471,7 +475,7 @@ func (o *StorageNetAppBaseIpInterface) GetIsHome() bool {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *StorageNetAppBaseIpInterface) GetIsHomeOk() (*bool, bool) {
-	if o == nil || o.IsHome == nil {
+	if o == nil || IsNil(o.IsHome) {
 		return nil, false
 	}
 	return o.IsHome, true
@@ -479,7 +483,7 @@ func (o *StorageNetAppBaseIpInterface) GetIsHomeOk() (*bool, bool) {
 
 // HasIsHome returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasIsHome() bool {
-	if o != nil && o.IsHome != nil {
+	if o != nil && !IsNil(o.IsHome) {
 		return true
 	}
 
@@ -494,7 +498,7 @@ func (o *StorageNetAppBaseIpInterface) SetIsHome(v bool) {
 
 // GetLocationFailover returns the LocationFailover field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetLocationFailover() string {
-	if o == nil || o.LocationFailover == nil {
+	if o == nil || IsNil(o.LocationFailover) {
 		var ret string
 		return ret
 	}
@@ -504,7 +508,7 @@ func (o *StorageNetAppBaseIpInterface) GetLocationFailover() string {
 // GetLocationFailoverOk returns a tuple with the LocationFailover field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetLocationFailoverOk() (*string, bool) {
-	if o == nil || o.LocationFailover == nil {
+	if o == nil || IsNil(o.LocationFailover) {
 		return nil, false
 	}
 	return o.LocationFailover, true
@@ -512,7 +516,7 @@ func (o *StorageNetAppBaseIpInterface) GetLocationFailoverOk() (*string, bool) {
 
 // HasLocationFailover returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasLocationFailover() bool {
-	if o != nil && o.LocationFailover != nil {
+	if o != nil && !IsNil(o.LocationFailover) {
 		return true
 	}
 
@@ -526,7 +530,7 @@ func (o *StorageNetAppBaseIpInterface) SetLocationFailover(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -536,7 +540,7 @@ func (o *StorageNetAppBaseIpInterface) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -544,7 +548,7 @@ func (o *StorageNetAppBaseIpInterface) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -558,7 +562,7 @@ func (o *StorageNetAppBaseIpInterface) SetName(v string) {
 
 // GetNetmask returns the Netmask field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetNetmask() string {
-	if o == nil || o.Netmask == nil {
+	if o == nil || IsNil(o.Netmask) {
 		var ret string
 		return ret
 	}
@@ -568,7 +572,7 @@ func (o *StorageNetAppBaseIpInterface) GetNetmask() string {
 // GetNetmaskOk returns a tuple with the Netmask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetNetmaskOk() (*string, bool) {
-	if o == nil || o.Netmask == nil {
+	if o == nil || IsNil(o.Netmask) {
 		return nil, false
 	}
 	return o.Netmask, true
@@ -576,7 +580,7 @@ func (o *StorageNetAppBaseIpInterface) GetNetmaskOk() (*string, bool) {
 
 // HasNetmask returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasNetmask() bool {
-	if o != nil && o.Netmask != nil {
+	if o != nil && !IsNil(o.Netmask) {
 		return true
 	}
 
@@ -590,7 +594,7 @@ func (o *StorageNetAppBaseIpInterface) SetNetmask(v string) {
 
 // GetServicePolicyName returns the ServicePolicyName field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetServicePolicyName() string {
-	if o == nil || o.ServicePolicyName == nil {
+	if o == nil || IsNil(o.ServicePolicyName) {
 		var ret string
 		return ret
 	}
@@ -600,7 +604,7 @@ func (o *StorageNetAppBaseIpInterface) GetServicePolicyName() string {
 // GetServicePolicyNameOk returns a tuple with the ServicePolicyName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetServicePolicyNameOk() (*string, bool) {
-	if o == nil || o.ServicePolicyName == nil {
+	if o == nil || IsNil(o.ServicePolicyName) {
 		return nil, false
 	}
 	return o.ServicePolicyName, true
@@ -608,7 +612,7 @@ func (o *StorageNetAppBaseIpInterface) GetServicePolicyNameOk() (*string, bool) 
 
 // HasServicePolicyName returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasServicePolicyName() bool {
-	if o != nil && o.ServicePolicyName != nil {
+	if o != nil && !IsNil(o.ServicePolicyName) {
 		return true
 	}
 
@@ -622,7 +626,7 @@ func (o *StorageNetAppBaseIpInterface) SetServicePolicyName(v string) {
 
 // GetServicePolicyUuid returns the ServicePolicyUuid field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetServicePolicyUuid() string {
-	if o == nil || o.ServicePolicyUuid == nil {
+	if o == nil || IsNil(o.ServicePolicyUuid) {
 		var ret string
 		return ret
 	}
@@ -632,7 +636,7 @@ func (o *StorageNetAppBaseIpInterface) GetServicePolicyUuid() string {
 // GetServicePolicyUuidOk returns a tuple with the ServicePolicyUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetServicePolicyUuidOk() (*string, bool) {
-	if o == nil || o.ServicePolicyUuid == nil {
+	if o == nil || IsNil(o.ServicePolicyUuid) {
 		return nil, false
 	}
 	return o.ServicePolicyUuid, true
@@ -640,7 +644,7 @@ func (o *StorageNetAppBaseIpInterface) GetServicePolicyUuidOk() (*string, bool) 
 
 // HasServicePolicyUuid returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasServicePolicyUuid() bool {
-	if o != nil && o.ServicePolicyUuid != nil {
+	if o != nil && !IsNil(o.ServicePolicyUuid) {
 		return true
 	}
 
@@ -665,7 +669,7 @@ func (o *StorageNetAppBaseIpInterface) GetServices() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppBaseIpInterface) GetServicesOk() ([]string, bool) {
-	if o == nil || o.Services == nil {
+	if o == nil || IsNil(o.Services) {
 		return nil, false
 	}
 	return o.Services, true
@@ -673,7 +677,7 @@ func (o *StorageNetAppBaseIpInterface) GetServicesOk() ([]string, bool) {
 
 // HasServices returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasServices() bool {
-	if o != nil && o.Services != nil {
+	if o != nil && IsNil(o.Services) {
 		return true
 	}
 
@@ -688,7 +692,7 @@ func (o *StorageNetAppBaseIpInterface) SetServices(v []string) {
 // GetState returns the State field value if set, zero value otherwise.
 // Deprecated
 func (o *StorageNetAppBaseIpInterface) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -699,7 +703,7 @@ func (o *StorageNetAppBaseIpInterface) GetState() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *StorageNetAppBaseIpInterface) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -707,7 +711,7 @@ func (o *StorageNetAppBaseIpInterface) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -722,7 +726,7 @@ func (o *StorageNetAppBaseIpInterface) SetState(v string) {
 
 // GetSvmName returns the SvmName field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetSvmName() string {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		var ret string
 		return ret
 	}
@@ -732,7 +736,7 @@ func (o *StorageNetAppBaseIpInterface) GetSvmName() string {
 // GetSvmNameOk returns a tuple with the SvmName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetSvmNameOk() (*string, bool) {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		return nil, false
 	}
 	return o.SvmName, true
@@ -740,7 +744,7 @@ func (o *StorageNetAppBaseIpInterface) GetSvmNameOk() (*string, bool) {
 
 // HasSvmName returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasSvmName() bool {
-	if o != nil && o.SvmName != nil {
+	if o != nil && !IsNil(o.SvmName) {
 		return true
 	}
 
@@ -754,7 +758,7 @@ func (o *StorageNetAppBaseIpInterface) SetSvmName(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *StorageNetAppBaseIpInterface) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -764,7 +768,7 @@ func (o *StorageNetAppBaseIpInterface) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseIpInterface) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -772,7 +776,7 @@ func (o *StorageNetAppBaseIpInterface) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *StorageNetAppBaseIpInterface) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -785,79 +789,83 @@ func (o *StorageNetAppBaseIpInterface) SetUuid(v string) {
 }
 
 func (o StorageNetAppBaseIpInterface) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppBaseIpInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CurrentNode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CurrentNode) {
 		toSerialize["CurrentNode"] = o.CurrentNode
 	}
-	if o.CurrentPort != nil {
+	if !IsNil(o.CurrentPort) {
 		toSerialize["CurrentPort"] = o.CurrentPort
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.HomeNode != nil {
+	if !IsNil(o.HomeNode) {
 		toSerialize["HomeNode"] = o.HomeNode
 	}
-	if o.HomePort != nil {
+	if !IsNil(o.HomePort) {
 		toSerialize["HomePort"] = o.HomePort
 	}
-	if o.InterfaceIsHome != nil {
+	if !IsNil(o.InterfaceIsHome) {
 		toSerialize["InterfaceIsHome"] = o.InterfaceIsHome
 	}
-	if o.InterfaceState != nil {
+	if !IsNil(o.InterfaceState) {
 		toSerialize["InterfaceState"] = o.InterfaceState
 	}
-	if o.IpAddress != nil {
+	if !IsNil(o.IpAddress) {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
-	if o.IpFamily != nil {
+	if !IsNil(o.IpFamily) {
 		toSerialize["IpFamily"] = o.IpFamily
 	}
-	if o.Ipspace != nil {
+	if !IsNil(o.Ipspace) {
 		toSerialize["Ipspace"] = o.Ipspace
 	}
-	if o.IsHome != nil {
+	if !IsNil(o.IsHome) {
 		toSerialize["IsHome"] = o.IsHome
 	}
-	if o.LocationFailover != nil {
+	if !IsNil(o.LocationFailover) {
 		toSerialize["LocationFailover"] = o.LocationFailover
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Netmask != nil {
+	if !IsNil(o.Netmask) {
 		toSerialize["Netmask"] = o.Netmask
 	}
-	if o.ServicePolicyName != nil {
+	if !IsNil(o.ServicePolicyName) {
 		toSerialize["ServicePolicyName"] = o.ServicePolicyName
 	}
-	if o.ServicePolicyUuid != nil {
+	if !IsNil(o.ServicePolicyUuid) {
 		toSerialize["ServicePolicyUuid"] = o.ServicePolicyUuid
 	}
 	if o.Services != nil {
 		toSerialize["Services"] = o.Services
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.SvmName != nil {
+	if !IsNil(o.SvmName) {
 		toSerialize["SvmName"] = o.SvmName
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
 
@@ -865,10 +873,32 @@ func (o StorageNetAppBaseIpInterface) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppBaseIpInterfaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -919,7 +949,7 @@ func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct := StorageNetAppBaseIpInterfaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppBaseIpInterface := _StorageNetAppBaseIpInterface{}
 		varStorageNetAppBaseIpInterface.ClassId = varStorageNetAppBaseIpInterfaceWithoutEmbeddedStruct.ClassId
@@ -951,7 +981,7 @@ func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppBaseIpInterface := _StorageNetAppBaseIpInterface{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppBaseIpInterface)
+	err = json.Unmarshal(data, &varStorageNetAppBaseIpInterface)
 	if err == nil {
 		o.MoBaseMo = varStorageNetAppBaseIpInterface.MoBaseMo
 	} else {
@@ -960,7 +990,7 @@ func (o *StorageNetAppBaseIpInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CurrentNode")

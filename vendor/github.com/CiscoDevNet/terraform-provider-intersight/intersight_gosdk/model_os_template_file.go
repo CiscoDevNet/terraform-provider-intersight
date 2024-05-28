@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OsTemplateFile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OsTemplateFile{}
 
 // OsTemplateFile A TemplateFile is an OS specific answer file that helps with the unattended installation. The file can also be a template file with placeholders instead of actual answers. Intersight supports the golang template syntax specified in https://golang.org/pkg/text/template/. The values for these placeholders shall be given during OS installation in the form of 'additionalProperties' in os.OsInstall object.
 type OsTemplateFile struct {
@@ -107,7 +111,7 @@ func (o *OsTemplateFile) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *OsTemplateFile) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *OsTemplateFile) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsTemplateFile) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -125,7 +129,7 @@ func (o *OsTemplateFile) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *OsTemplateFile) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *OsTemplateFile) GetPlaceholders() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsTemplateFile) GetPlaceholdersOk() ([]string, bool) {
-	if o == nil || o.Placeholders == nil {
+	if o == nil || IsNil(o.Placeholders) {
 		return nil, false
 	}
 	return o.Placeholders, true
@@ -158,7 +162,7 @@ func (o *OsTemplateFile) GetPlaceholdersOk() ([]string, bool) {
 
 // HasPlaceholders returns a boolean if a field has been set.
 func (o *OsTemplateFile) HasPlaceholders() bool {
-	if o != nil && o.Placeholders != nil {
+	if o != nil && IsNil(o.Placeholders) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *OsTemplateFile) SetPlaceholders(v []string) {
 
 // GetTemplateContent returns the TemplateContent field value if set, zero value otherwise.
 func (o *OsTemplateFile) GetTemplateContent() string {
-	if o == nil || o.TemplateContent == nil {
+	if o == nil || IsNil(o.TemplateContent) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *OsTemplateFile) GetTemplateContent() string {
 // GetTemplateContentOk returns a tuple with the TemplateContent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsTemplateFile) GetTemplateContentOk() (*string, bool) {
-	if o == nil || o.TemplateContent == nil {
+	if o == nil || IsNil(o.TemplateContent) {
 		return nil, false
 	}
 	return o.TemplateContent, true
@@ -190,7 +194,7 @@ func (o *OsTemplateFile) GetTemplateContentOk() (*string, bool) {
 
 // HasTemplateContent returns a boolean if a field has been set.
 func (o *OsTemplateFile) HasTemplateContent() bool {
-	if o != nil && o.TemplateContent != nil {
+	if o != nil && !IsNil(o.TemplateContent) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *OsTemplateFile) SetTemplateContent(v string) {
 }
 
 func (o OsTemplateFile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OsTemplateFile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.Placeholders != nil {
 		toSerialize["Placeholders"] = o.Placeholders
 	}
-	if o.TemplateContent != nil {
+	if !IsNil(o.TemplateContent) {
 		toSerialize["TemplateContent"] = o.TemplateContent
 	}
 
@@ -232,10 +240,32 @@ func (o OsTemplateFile) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OsTemplateFile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OsTemplateFile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OsTemplateFileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -250,7 +280,7 @@ func (o *OsTemplateFile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsTemplateFileWithoutEmbeddedStruct := OsTemplateFileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOsTemplateFileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOsTemplateFileWithoutEmbeddedStruct)
 	if err == nil {
 		varOsTemplateFile := _OsTemplateFile{}
 		varOsTemplateFile.ClassId = varOsTemplateFileWithoutEmbeddedStruct.ClassId
@@ -265,7 +295,7 @@ func (o *OsTemplateFile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsTemplateFile := _OsTemplateFile{}
 
-	err = json.Unmarshal(bytes, &varOsTemplateFile)
+	err = json.Unmarshal(data, &varOsTemplateFile)
 	if err == nil {
 		o.MoBaseMo = varOsTemplateFile.MoBaseMo
 	} else {
@@ -274,7 +304,7 @@ func (o *OsTemplateFile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

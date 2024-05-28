@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the WorkflowServiceItemActionInstance type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowServiceItemActionInstance{}
 
 // WorkflowServiceItemActionInstance Service item action instance which represents one action on a service item instance.
 type WorkflowServiceItemActionInstance struct {
@@ -46,18 +50,18 @@ type WorkflowServiceItemActionInstance struct {
 	// State of the service item action instance. * `NotStarted` - An action on the service item is not yet started and it is in a draft mode. A service item action instance can be deleted in this state. * `Validating` - A validate action has been triggered on the action and until it completes the start action cannot be issued. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The action on the service item instance failed and can be retried. * `Completed` - The action on the service item instance completed successfully. * `Stopping` - The stop action is running on the action instance. * `Stopped` - The action on the service item instance has stopped.
 	Status *string `json:"Status,omitempty"`
 	// The user identifier who invoked the request to create the service item instance.
-	UserIdOrEmail      *string                           `json:"UserIdOrEmail,omitempty"`
-	ActionWorkflowInfo *WorkflowWorkflowInfoRelationship `json:"ActionWorkflowInfo,omitempty"`
+	UserIdOrEmail      *string                                  `json:"UserIdOrEmail,omitempty"`
+	ActionWorkflowInfo NullableWorkflowWorkflowInfoRelationship `json:"ActionWorkflowInfo,omitempty"`
 	// An array of relationships to workflowCatalogServiceRequest resources.
-	CatalogServiceRequest       []WorkflowCatalogServiceRequestRelationship      `json:"CatalogServiceRequest,omitempty"`
-	Idp                         *IamIdpRelationship                              `json:"Idp,omitempty"`
-	IdpReference                *IamIdpReferenceRelationship                     `json:"IdpReference,omitempty"`
-	ServiceItemActionDefinition *WorkflowServiceItemActionDefinitionRelationship `json:"ServiceItemActionDefinition,omitempty"`
-	ServiceItemDefinition       *WorkflowServiceItemDefinitionRelationship       `json:"ServiceItemDefinition,omitempty"`
-	ServiceItemInstance         *WorkflowServiceItemInstanceRelationship         `json:"ServiceItemInstance,omitempty"`
-	StopWorkflowInfo            *WorkflowWorkflowInfoRelationship                `json:"StopWorkflowInfo,omitempty"`
-	User                        *IamUserRelationship                             `json:"User,omitempty"`
-	ValidationWorkflowInfo      *WorkflowWorkflowInfoRelationship                `json:"ValidationWorkflowInfo,omitempty"`
+	CatalogServiceRequest       []WorkflowCatalogServiceRequestRelationship             `json:"CatalogServiceRequest,omitempty"`
+	Idp                         NullableIamIdpRelationship                              `json:"Idp,omitempty"`
+	IdpReference                NullableIamIdpReferenceRelationship                     `json:"IdpReference,omitempty"`
+	ServiceItemActionDefinition NullableWorkflowServiceItemActionDefinitionRelationship `json:"ServiceItemActionDefinition,omitempty"`
+	ServiceItemDefinition       NullableWorkflowServiceItemDefinitionRelationship       `json:"ServiceItemDefinition,omitempty"`
+	ServiceItemInstance         NullableWorkflowServiceItemInstanceRelationship         `json:"ServiceItemInstance,omitempty"`
+	StopWorkflowInfo            NullableWorkflowWorkflowInfoRelationship                `json:"StopWorkflowInfo,omitempty"`
+	User                        NullableIamUserRelationship                             `json:"User,omitempty"`
+	ValidationWorkflowInfo      NullableWorkflowWorkflowInfoRelationship                `json:"ValidationWorkflowInfo,omitempty"`
 	AdditionalProperties        map[string]interface{}
 }
 
@@ -140,7 +144,7 @@ func (o *WorkflowServiceItemActionInstance) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *WorkflowServiceItemActionInstance) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *WorkflowServiceItemActionInstance) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemActionInstance) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -158,7 +162,7 @@ func (o *WorkflowServiceItemActionInstance) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *WorkflowServiceItemActionInstance) SetAction(v string) {
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *WorkflowServiceItemActionInstance) GetEndTime() time.Time {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *WorkflowServiceItemActionInstance) GetEndTime() time.Time {
 // GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemActionInstance) GetEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
 	return o.EndTime, true
@@ -190,7 +194,7 @@ func (o *WorkflowServiceItemActionInstance) GetEndTimeOk() (*time.Time, bool) {
 
 // HasEndTime returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasEndTime() bool {
-	if o != nil && o.EndTime != nil {
+	if o != nil && !IsNil(o.EndTime) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *WorkflowServiceItemActionInstance) GetInput() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetInputOk() (*interface{}, bool) {
-	if o == nil || o.Input == nil {
+	if o == nil || IsNil(o.Input) {
 		return nil, false
 	}
 	return &o.Input, true
@@ -223,7 +227,7 @@ func (o *WorkflowServiceItemActionInstance) GetInputOk() (*interface{}, bool) {
 
 // HasInput returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasInput() bool {
-	if o != nil && o.Input != nil {
+	if o != nil && IsNil(o.Input) {
 		return true
 	}
 
@@ -237,7 +241,7 @@ func (o *WorkflowServiceItemActionInstance) SetInput(v interface{}) {
 
 // GetLastAction returns the LastAction field value if set, zero value otherwise.
 func (o *WorkflowServiceItemActionInstance) GetLastAction() string {
-	if o == nil || o.LastAction == nil {
+	if o == nil || IsNil(o.LastAction) {
 		var ret string
 		return ret
 	}
@@ -247,7 +251,7 @@ func (o *WorkflowServiceItemActionInstance) GetLastAction() string {
 // GetLastActionOk returns a tuple with the LastAction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemActionInstance) GetLastActionOk() (*string, bool) {
-	if o == nil || o.LastAction == nil {
+	if o == nil || IsNil(o.LastAction) {
 		return nil, false
 	}
 	return o.LastAction, true
@@ -255,7 +259,7 @@ func (o *WorkflowServiceItemActionInstance) GetLastActionOk() (*string, bool) {
 
 // HasLastAction returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasLastAction() bool {
-	if o != nil && o.LastAction != nil {
+	if o != nil && !IsNil(o.LastAction) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *WorkflowServiceItemActionInstance) GetMessages() []ServiceitemMessage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetMessagesOk() ([]ServiceitemMessage, bool) {
-	if o == nil || o.Messages == nil {
+	if o == nil || IsNil(o.Messages) {
 		return nil, false
 	}
 	return o.Messages, true
@@ -288,7 +292,7 @@ func (o *WorkflowServiceItemActionInstance) GetMessagesOk() ([]ServiceitemMessag
 
 // HasMessages returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasMessages() bool {
-	if o != nil && o.Messages != nil {
+	if o != nil && IsNil(o.Messages) {
 		return true
 	}
 
@@ -302,7 +306,7 @@ func (o *WorkflowServiceItemActionInstance) SetMessages(v []ServiceitemMessage) 
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkflowServiceItemActionInstance) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -312,7 +316,7 @@ func (o *WorkflowServiceItemActionInstance) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemActionInstance) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -320,7 +324,7 @@ func (o *WorkflowServiceItemActionInstance) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -334,7 +338,7 @@ func (o *WorkflowServiceItemActionInstance) SetName(v string) {
 
 // GetResourcelifecycleStatus returns the ResourcelifecycleStatus field value if set, zero value otherwise.
 func (o *WorkflowServiceItemActionInstance) GetResourcelifecycleStatus() string {
-	if o == nil || o.ResourcelifecycleStatus == nil {
+	if o == nil || IsNil(o.ResourcelifecycleStatus) {
 		var ret string
 		return ret
 	}
@@ -344,7 +348,7 @@ func (o *WorkflowServiceItemActionInstance) GetResourcelifecycleStatus() string 
 // GetResourcelifecycleStatusOk returns a tuple with the ResourcelifecycleStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemActionInstance) GetResourcelifecycleStatusOk() (*string, bool) {
-	if o == nil || o.ResourcelifecycleStatus == nil {
+	if o == nil || IsNil(o.ResourcelifecycleStatus) {
 		return nil, false
 	}
 	return o.ResourcelifecycleStatus, true
@@ -352,7 +356,7 @@ func (o *WorkflowServiceItemActionInstance) GetResourcelifecycleStatusOk() (*str
 
 // HasResourcelifecycleStatus returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasResourcelifecycleStatus() bool {
-	if o != nil && o.ResourcelifecycleStatus != nil {
+	if o != nil && !IsNil(o.ResourcelifecycleStatus) {
 		return true
 	}
 
@@ -377,7 +381,7 @@ func (o *WorkflowServiceItemActionInstance) GetSelectionCriteriaInputs() []Servi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetSelectionCriteriaInputsOk() ([]ServiceitemSelectionCriteriaInput, bool) {
-	if o == nil || o.SelectionCriteriaInputs == nil {
+	if o == nil || IsNil(o.SelectionCriteriaInputs) {
 		return nil, false
 	}
 	return o.SelectionCriteriaInputs, true
@@ -385,7 +389,7 @@ func (o *WorkflowServiceItemActionInstance) GetSelectionCriteriaInputsOk() ([]Se
 
 // HasSelectionCriteriaInputs returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasSelectionCriteriaInputs() bool {
-	if o != nil && o.SelectionCriteriaInputs != nil {
+	if o != nil && IsNil(o.SelectionCriteriaInputs) {
 		return true
 	}
 
@@ -410,7 +414,7 @@ func (o *WorkflowServiceItemActionInstance) GetServiceRequestInput() interface{}
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetServiceRequestInputOk() (*interface{}, bool) {
-	if o == nil || o.ServiceRequestInput == nil {
+	if o == nil || IsNil(o.ServiceRequestInput) {
 		return nil, false
 	}
 	return &o.ServiceRequestInput, true
@@ -418,7 +422,7 @@ func (o *WorkflowServiceItemActionInstance) GetServiceRequestInputOk() (*interfa
 
 // HasServiceRequestInput returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasServiceRequestInput() bool {
-	if o != nil && o.ServiceRequestInput != nil {
+	if o != nil && IsNil(o.ServiceRequestInput) {
 		return true
 	}
 
@@ -432,7 +436,7 @@ func (o *WorkflowServiceItemActionInstance) SetServiceRequestInput(v interface{}
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *WorkflowServiceItemActionInstance) GetStartTime() time.Time {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -442,7 +446,7 @@ func (o *WorkflowServiceItemActionInstance) GetStartTime() time.Time {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemActionInstance) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -450,7 +454,7 @@ func (o *WorkflowServiceItemActionInstance) GetStartTimeOk() (*time.Time, bool) 
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -464,7 +468,7 @@ func (o *WorkflowServiceItemActionInstance) SetStartTime(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *WorkflowServiceItemActionInstance) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -474,7 +478,7 @@ func (o *WorkflowServiceItemActionInstance) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemActionInstance) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -482,7 +486,7 @@ func (o *WorkflowServiceItemActionInstance) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -496,7 +500,7 @@ func (o *WorkflowServiceItemActionInstance) SetStatus(v string) {
 
 // GetUserIdOrEmail returns the UserIdOrEmail field value if set, zero value otherwise.
 func (o *WorkflowServiceItemActionInstance) GetUserIdOrEmail() string {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		var ret string
 		return ret
 	}
@@ -506,7 +510,7 @@ func (o *WorkflowServiceItemActionInstance) GetUserIdOrEmail() string {
 // GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemActionInstance) GetUserIdOrEmailOk() (*string, bool) {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		return nil, false
 	}
 	return o.UserIdOrEmail, true
@@ -514,7 +518,7 @@ func (o *WorkflowServiceItemActionInstance) GetUserIdOrEmailOk() (*string, bool)
 
 // HasUserIdOrEmail returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasUserIdOrEmail() bool {
-	if o != nil && o.UserIdOrEmail != nil {
+	if o != nil && !IsNil(o.UserIdOrEmail) {
 		return true
 	}
 
@@ -526,36 +530,47 @@ func (o *WorkflowServiceItemActionInstance) SetUserIdOrEmail(v string) {
 	o.UserIdOrEmail = &v
 }
 
-// GetActionWorkflowInfo returns the ActionWorkflowInfo field value if set, zero value otherwise.
+// GetActionWorkflowInfo returns the ActionWorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemActionInstance) GetActionWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.ActionWorkflowInfo == nil {
+	if o == nil || IsNil(o.ActionWorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.ActionWorkflowInfo
+	return *o.ActionWorkflowInfo.Get()
 }
 
 // GetActionWorkflowInfoOk returns a tuple with the ActionWorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetActionWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.ActionWorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ActionWorkflowInfo, true
+	return o.ActionWorkflowInfo.Get(), o.ActionWorkflowInfo.IsSet()
 }
 
 // HasActionWorkflowInfo returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasActionWorkflowInfo() bool {
-	if o != nil && o.ActionWorkflowInfo != nil {
+	if o != nil && o.ActionWorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetActionWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the ActionWorkflowInfo field.
+// SetActionWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the ActionWorkflowInfo field.
 func (o *WorkflowServiceItemActionInstance) SetActionWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.ActionWorkflowInfo = &v
+	o.ActionWorkflowInfo.Set(&v)
+}
+
+// SetActionWorkflowInfoNil sets the value for ActionWorkflowInfo to be an explicit nil
+func (o *WorkflowServiceItemActionInstance) SetActionWorkflowInfoNil() {
+	o.ActionWorkflowInfo.Set(nil)
+}
+
+// UnsetActionWorkflowInfo ensures that no value is present for ActionWorkflowInfo, not even an explicit nil
+func (o *WorkflowServiceItemActionInstance) UnsetActionWorkflowInfo() {
+	o.ActionWorkflowInfo.Unset()
 }
 
 // GetCatalogServiceRequest returns the CatalogServiceRequest field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -571,7 +586,7 @@ func (o *WorkflowServiceItemActionInstance) GetCatalogServiceRequest() []Workflo
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetCatalogServiceRequestOk() ([]WorkflowCatalogServiceRequestRelationship, bool) {
-	if o == nil || o.CatalogServiceRequest == nil {
+	if o == nil || IsNil(o.CatalogServiceRequest) {
 		return nil, false
 	}
 	return o.CatalogServiceRequest, true
@@ -579,7 +594,7 @@ func (o *WorkflowServiceItemActionInstance) GetCatalogServiceRequestOk() ([]Work
 
 // HasCatalogServiceRequest returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasCatalogServiceRequest() bool {
-	if o != nil && o.CatalogServiceRequest != nil {
+	if o != nil && IsNil(o.CatalogServiceRequest) {
 		return true
 	}
 
@@ -591,297 +606,389 @@ func (o *WorkflowServiceItemActionInstance) SetCatalogServiceRequest(v []Workflo
 	o.CatalogServiceRequest = v
 }
 
-// GetIdp returns the Idp field value if set, zero value otherwise.
+// GetIdp returns the Idp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemActionInstance) GetIdp() IamIdpRelationship {
-	if o == nil || o.Idp == nil {
+	if o == nil || IsNil(o.Idp.Get()) {
 		var ret IamIdpRelationship
 		return ret
 	}
-	return *o.Idp
+	return *o.Idp.Get()
 }
 
 // GetIdpOk returns a tuple with the Idp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetIdpOk() (*IamIdpRelationship, bool) {
-	if o == nil || o.Idp == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Idp, true
+	return o.Idp.Get(), o.Idp.IsSet()
 }
 
 // HasIdp returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasIdp() bool {
-	if o != nil && o.Idp != nil {
+	if o != nil && o.Idp.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdp gets a reference to the given IamIdpRelationship and assigns it to the Idp field.
+// SetIdp gets a reference to the given NullableIamIdpRelationship and assigns it to the Idp field.
 func (o *WorkflowServiceItemActionInstance) SetIdp(v IamIdpRelationship) {
-	o.Idp = &v
+	o.Idp.Set(&v)
 }
 
-// GetIdpReference returns the IdpReference field value if set, zero value otherwise.
+// SetIdpNil sets the value for Idp to be an explicit nil
+func (o *WorkflowServiceItemActionInstance) SetIdpNil() {
+	o.Idp.Set(nil)
+}
+
+// UnsetIdp ensures that no value is present for Idp, not even an explicit nil
+func (o *WorkflowServiceItemActionInstance) UnsetIdp() {
+	o.Idp.Unset()
+}
+
+// GetIdpReference returns the IdpReference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemActionInstance) GetIdpReference() IamIdpReferenceRelationship {
-	if o == nil || o.IdpReference == nil {
+	if o == nil || IsNil(o.IdpReference.Get()) {
 		var ret IamIdpReferenceRelationship
 		return ret
 	}
-	return *o.IdpReference
+	return *o.IdpReference.Get()
 }
 
 // GetIdpReferenceOk returns a tuple with the IdpReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetIdpReferenceOk() (*IamIdpReferenceRelationship, bool) {
-	if o == nil || o.IdpReference == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.IdpReference, true
+	return o.IdpReference.Get(), o.IdpReference.IsSet()
 }
 
 // HasIdpReference returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasIdpReference() bool {
-	if o != nil && o.IdpReference != nil {
+	if o != nil && o.IdpReference.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdpReference gets a reference to the given IamIdpReferenceRelationship and assigns it to the IdpReference field.
+// SetIdpReference gets a reference to the given NullableIamIdpReferenceRelationship and assigns it to the IdpReference field.
 func (o *WorkflowServiceItemActionInstance) SetIdpReference(v IamIdpReferenceRelationship) {
-	o.IdpReference = &v
+	o.IdpReference.Set(&v)
 }
 
-// GetServiceItemActionDefinition returns the ServiceItemActionDefinition field value if set, zero value otherwise.
+// SetIdpReferenceNil sets the value for IdpReference to be an explicit nil
+func (o *WorkflowServiceItemActionInstance) SetIdpReferenceNil() {
+	o.IdpReference.Set(nil)
+}
+
+// UnsetIdpReference ensures that no value is present for IdpReference, not even an explicit nil
+func (o *WorkflowServiceItemActionInstance) UnsetIdpReference() {
+	o.IdpReference.Unset()
+}
+
+// GetServiceItemActionDefinition returns the ServiceItemActionDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemActionInstance) GetServiceItemActionDefinition() WorkflowServiceItemActionDefinitionRelationship {
-	if o == nil || o.ServiceItemActionDefinition == nil {
+	if o == nil || IsNil(o.ServiceItemActionDefinition.Get()) {
 		var ret WorkflowServiceItemActionDefinitionRelationship
 		return ret
 	}
-	return *o.ServiceItemActionDefinition
+	return *o.ServiceItemActionDefinition.Get()
 }
 
 // GetServiceItemActionDefinitionOk returns a tuple with the ServiceItemActionDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetServiceItemActionDefinitionOk() (*WorkflowServiceItemActionDefinitionRelationship, bool) {
-	if o == nil || o.ServiceItemActionDefinition == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServiceItemActionDefinition, true
+	return o.ServiceItemActionDefinition.Get(), o.ServiceItemActionDefinition.IsSet()
 }
 
 // HasServiceItemActionDefinition returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasServiceItemActionDefinition() bool {
-	if o != nil && o.ServiceItemActionDefinition != nil {
+	if o != nil && o.ServiceItemActionDefinition.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServiceItemActionDefinition gets a reference to the given WorkflowServiceItemActionDefinitionRelationship and assigns it to the ServiceItemActionDefinition field.
+// SetServiceItemActionDefinition gets a reference to the given NullableWorkflowServiceItemActionDefinitionRelationship and assigns it to the ServiceItemActionDefinition field.
 func (o *WorkflowServiceItemActionInstance) SetServiceItemActionDefinition(v WorkflowServiceItemActionDefinitionRelationship) {
-	o.ServiceItemActionDefinition = &v
+	o.ServiceItemActionDefinition.Set(&v)
 }
 
-// GetServiceItemDefinition returns the ServiceItemDefinition field value if set, zero value otherwise.
+// SetServiceItemActionDefinitionNil sets the value for ServiceItemActionDefinition to be an explicit nil
+func (o *WorkflowServiceItemActionInstance) SetServiceItemActionDefinitionNil() {
+	o.ServiceItemActionDefinition.Set(nil)
+}
+
+// UnsetServiceItemActionDefinition ensures that no value is present for ServiceItemActionDefinition, not even an explicit nil
+func (o *WorkflowServiceItemActionInstance) UnsetServiceItemActionDefinition() {
+	o.ServiceItemActionDefinition.Unset()
+}
+
+// GetServiceItemDefinition returns the ServiceItemDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemActionInstance) GetServiceItemDefinition() WorkflowServiceItemDefinitionRelationship {
-	if o == nil || o.ServiceItemDefinition == nil {
+	if o == nil || IsNil(o.ServiceItemDefinition.Get()) {
 		var ret WorkflowServiceItemDefinitionRelationship
 		return ret
 	}
-	return *o.ServiceItemDefinition
+	return *o.ServiceItemDefinition.Get()
 }
 
 // GetServiceItemDefinitionOk returns a tuple with the ServiceItemDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetServiceItemDefinitionOk() (*WorkflowServiceItemDefinitionRelationship, bool) {
-	if o == nil || o.ServiceItemDefinition == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServiceItemDefinition, true
+	return o.ServiceItemDefinition.Get(), o.ServiceItemDefinition.IsSet()
 }
 
 // HasServiceItemDefinition returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasServiceItemDefinition() bool {
-	if o != nil && o.ServiceItemDefinition != nil {
+	if o != nil && o.ServiceItemDefinition.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServiceItemDefinition gets a reference to the given WorkflowServiceItemDefinitionRelationship and assigns it to the ServiceItemDefinition field.
+// SetServiceItemDefinition gets a reference to the given NullableWorkflowServiceItemDefinitionRelationship and assigns it to the ServiceItemDefinition field.
 func (o *WorkflowServiceItemActionInstance) SetServiceItemDefinition(v WorkflowServiceItemDefinitionRelationship) {
-	o.ServiceItemDefinition = &v
+	o.ServiceItemDefinition.Set(&v)
 }
 
-// GetServiceItemInstance returns the ServiceItemInstance field value if set, zero value otherwise.
+// SetServiceItemDefinitionNil sets the value for ServiceItemDefinition to be an explicit nil
+func (o *WorkflowServiceItemActionInstance) SetServiceItemDefinitionNil() {
+	o.ServiceItemDefinition.Set(nil)
+}
+
+// UnsetServiceItemDefinition ensures that no value is present for ServiceItemDefinition, not even an explicit nil
+func (o *WorkflowServiceItemActionInstance) UnsetServiceItemDefinition() {
+	o.ServiceItemDefinition.Unset()
+}
+
+// GetServiceItemInstance returns the ServiceItemInstance field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemActionInstance) GetServiceItemInstance() WorkflowServiceItemInstanceRelationship {
-	if o == nil || o.ServiceItemInstance == nil {
+	if o == nil || IsNil(o.ServiceItemInstance.Get()) {
 		var ret WorkflowServiceItemInstanceRelationship
 		return ret
 	}
-	return *o.ServiceItemInstance
+	return *o.ServiceItemInstance.Get()
 }
 
 // GetServiceItemInstanceOk returns a tuple with the ServiceItemInstance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetServiceItemInstanceOk() (*WorkflowServiceItemInstanceRelationship, bool) {
-	if o == nil || o.ServiceItemInstance == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServiceItemInstance, true
+	return o.ServiceItemInstance.Get(), o.ServiceItemInstance.IsSet()
 }
 
 // HasServiceItemInstance returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasServiceItemInstance() bool {
-	if o != nil && o.ServiceItemInstance != nil {
+	if o != nil && o.ServiceItemInstance.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServiceItemInstance gets a reference to the given WorkflowServiceItemInstanceRelationship and assigns it to the ServiceItemInstance field.
+// SetServiceItemInstance gets a reference to the given NullableWorkflowServiceItemInstanceRelationship and assigns it to the ServiceItemInstance field.
 func (o *WorkflowServiceItemActionInstance) SetServiceItemInstance(v WorkflowServiceItemInstanceRelationship) {
-	o.ServiceItemInstance = &v
+	o.ServiceItemInstance.Set(&v)
 }
 
-// GetStopWorkflowInfo returns the StopWorkflowInfo field value if set, zero value otherwise.
+// SetServiceItemInstanceNil sets the value for ServiceItemInstance to be an explicit nil
+func (o *WorkflowServiceItemActionInstance) SetServiceItemInstanceNil() {
+	o.ServiceItemInstance.Set(nil)
+}
+
+// UnsetServiceItemInstance ensures that no value is present for ServiceItemInstance, not even an explicit nil
+func (o *WorkflowServiceItemActionInstance) UnsetServiceItemInstance() {
+	o.ServiceItemInstance.Unset()
+}
+
+// GetStopWorkflowInfo returns the StopWorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemActionInstance) GetStopWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.StopWorkflowInfo == nil {
+	if o == nil || IsNil(o.StopWorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.StopWorkflowInfo
+	return *o.StopWorkflowInfo.Get()
 }
 
 // GetStopWorkflowInfoOk returns a tuple with the StopWorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetStopWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.StopWorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StopWorkflowInfo, true
+	return o.StopWorkflowInfo.Get(), o.StopWorkflowInfo.IsSet()
 }
 
 // HasStopWorkflowInfo returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasStopWorkflowInfo() bool {
-	if o != nil && o.StopWorkflowInfo != nil {
+	if o != nil && o.StopWorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStopWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the StopWorkflowInfo field.
+// SetStopWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the StopWorkflowInfo field.
 func (o *WorkflowServiceItemActionInstance) SetStopWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.StopWorkflowInfo = &v
+	o.StopWorkflowInfo.Set(&v)
 }
 
-// GetUser returns the User field value if set, zero value otherwise.
+// SetStopWorkflowInfoNil sets the value for StopWorkflowInfo to be an explicit nil
+func (o *WorkflowServiceItemActionInstance) SetStopWorkflowInfoNil() {
+	o.StopWorkflowInfo.Set(nil)
+}
+
+// UnsetStopWorkflowInfo ensures that no value is present for StopWorkflowInfo, not even an explicit nil
+func (o *WorkflowServiceItemActionInstance) UnsetStopWorkflowInfo() {
+	o.StopWorkflowInfo.Unset()
+}
+
+// GetUser returns the User field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemActionInstance) GetUser() IamUserRelationship {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User.Get()) {
 		var ret IamUserRelationship
 		return ret
 	}
-	return *o.User
+	return *o.User.Get()
 }
 
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetUserOk() (*IamUserRelationship, bool) {
-	if o == nil || o.User == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.User, true
+	return o.User.Get(), o.User.IsSet()
 }
 
 // HasUser returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && o.User.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUser gets a reference to the given IamUserRelationship and assigns it to the User field.
+// SetUser gets a reference to the given NullableIamUserRelationship and assigns it to the User field.
 func (o *WorkflowServiceItemActionInstance) SetUser(v IamUserRelationship) {
-	o.User = &v
+	o.User.Set(&v)
 }
 
-// GetValidationWorkflowInfo returns the ValidationWorkflowInfo field value if set, zero value otherwise.
+// SetUserNil sets the value for User to be an explicit nil
+func (o *WorkflowServiceItemActionInstance) SetUserNil() {
+	o.User.Set(nil)
+}
+
+// UnsetUser ensures that no value is present for User, not even an explicit nil
+func (o *WorkflowServiceItemActionInstance) UnsetUser() {
+	o.User.Unset()
+}
+
+// GetValidationWorkflowInfo returns the ValidationWorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemActionInstance) GetValidationWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.ValidationWorkflowInfo == nil {
+	if o == nil || IsNil(o.ValidationWorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.ValidationWorkflowInfo
+	return *o.ValidationWorkflowInfo.Get()
 }
 
 // GetValidationWorkflowInfoOk returns a tuple with the ValidationWorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemActionInstance) GetValidationWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.ValidationWorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ValidationWorkflowInfo, true
+	return o.ValidationWorkflowInfo.Get(), o.ValidationWorkflowInfo.IsSet()
 }
 
 // HasValidationWorkflowInfo returns a boolean if a field has been set.
 func (o *WorkflowServiceItemActionInstance) HasValidationWorkflowInfo() bool {
-	if o != nil && o.ValidationWorkflowInfo != nil {
+	if o != nil && o.ValidationWorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetValidationWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the ValidationWorkflowInfo field.
+// SetValidationWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the ValidationWorkflowInfo field.
 func (o *WorkflowServiceItemActionInstance) SetValidationWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.ValidationWorkflowInfo = &v
+	o.ValidationWorkflowInfo.Set(&v)
+}
+
+// SetValidationWorkflowInfoNil sets the value for ValidationWorkflowInfo to be an explicit nil
+func (o *WorkflowServiceItemActionInstance) SetValidationWorkflowInfoNil() {
+	o.ValidationWorkflowInfo.Set(nil)
+}
+
+// UnsetValidationWorkflowInfo ensures that no value is present for ValidationWorkflowInfo, not even an explicit nil
+func (o *WorkflowServiceItemActionInstance) UnsetValidationWorkflowInfo() {
+	o.ValidationWorkflowInfo.Unset()
 }
 
 func (o WorkflowServiceItemActionInstance) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowServiceItemActionInstance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
-	if o.EndTime != nil {
+	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
 	}
 	if o.Input != nil {
 		toSerialize["Input"] = o.Input
 	}
-	if o.LastAction != nil {
+	if !IsNil(o.LastAction) {
 		toSerialize["LastAction"] = o.LastAction
 	}
 	if o.Messages != nil {
 		toSerialize["Messages"] = o.Messages
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.ResourcelifecycleStatus != nil {
+	if !IsNil(o.ResourcelifecycleStatus) {
 		toSerialize["ResourcelifecycleStatus"] = o.ResourcelifecycleStatus
 	}
 	if o.SelectionCriteriaInputs != nil {
@@ -890,54 +997,76 @@ func (o WorkflowServiceItemActionInstance) MarshalJSON() ([]byte, error) {
 	if o.ServiceRequestInput != nil {
 		toSerialize["ServiceRequestInput"] = o.ServiceRequestInput
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.UserIdOrEmail != nil {
+	if !IsNil(o.UserIdOrEmail) {
 		toSerialize["UserIdOrEmail"] = o.UserIdOrEmail
 	}
-	if o.ActionWorkflowInfo != nil {
-		toSerialize["ActionWorkflowInfo"] = o.ActionWorkflowInfo
+	if o.ActionWorkflowInfo.IsSet() {
+		toSerialize["ActionWorkflowInfo"] = o.ActionWorkflowInfo.Get()
 	}
 	if o.CatalogServiceRequest != nil {
 		toSerialize["CatalogServiceRequest"] = o.CatalogServiceRequest
 	}
-	if o.Idp != nil {
-		toSerialize["Idp"] = o.Idp
+	if o.Idp.IsSet() {
+		toSerialize["Idp"] = o.Idp.Get()
 	}
-	if o.IdpReference != nil {
-		toSerialize["IdpReference"] = o.IdpReference
+	if o.IdpReference.IsSet() {
+		toSerialize["IdpReference"] = o.IdpReference.Get()
 	}
-	if o.ServiceItemActionDefinition != nil {
-		toSerialize["ServiceItemActionDefinition"] = o.ServiceItemActionDefinition
+	if o.ServiceItemActionDefinition.IsSet() {
+		toSerialize["ServiceItemActionDefinition"] = o.ServiceItemActionDefinition.Get()
 	}
-	if o.ServiceItemDefinition != nil {
-		toSerialize["ServiceItemDefinition"] = o.ServiceItemDefinition
+	if o.ServiceItemDefinition.IsSet() {
+		toSerialize["ServiceItemDefinition"] = o.ServiceItemDefinition.Get()
 	}
-	if o.ServiceItemInstance != nil {
-		toSerialize["ServiceItemInstance"] = o.ServiceItemInstance
+	if o.ServiceItemInstance.IsSet() {
+		toSerialize["ServiceItemInstance"] = o.ServiceItemInstance.Get()
 	}
-	if o.StopWorkflowInfo != nil {
-		toSerialize["StopWorkflowInfo"] = o.StopWorkflowInfo
+	if o.StopWorkflowInfo.IsSet() {
+		toSerialize["StopWorkflowInfo"] = o.StopWorkflowInfo.Get()
 	}
-	if o.User != nil {
-		toSerialize["User"] = o.User
+	if o.User.IsSet() {
+		toSerialize["User"] = o.User.Get()
 	}
-	if o.ValidationWorkflowInfo != nil {
-		toSerialize["ValidationWorkflowInfo"] = o.ValidationWorkflowInfo
+	if o.ValidationWorkflowInfo.IsSet() {
+		toSerialize["ValidationWorkflowInfo"] = o.ValidationWorkflowInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowServiceItemActionInstance) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowServiceItemActionInstance) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowServiceItemActionInstanceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -964,23 +1093,23 @@ func (o *WorkflowServiceItemActionInstance) UnmarshalJSON(bytes []byte) (err err
 		// State of the service item action instance. * `NotStarted` - An action on the service item is not yet started and it is in a draft mode. A service item action instance can be deleted in this state. * `Validating` - A validate action has been triggered on the action and until it completes the start action cannot be issued. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The action on the service item instance failed and can be retried. * `Completed` - The action on the service item instance completed successfully. * `Stopping` - The stop action is running on the action instance. * `Stopped` - The action on the service item instance has stopped.
 		Status *string `json:"Status,omitempty"`
 		// The user identifier who invoked the request to create the service item instance.
-		UserIdOrEmail      *string                           `json:"UserIdOrEmail,omitempty"`
-		ActionWorkflowInfo *WorkflowWorkflowInfoRelationship `json:"ActionWorkflowInfo,omitempty"`
+		UserIdOrEmail      *string                                  `json:"UserIdOrEmail,omitempty"`
+		ActionWorkflowInfo NullableWorkflowWorkflowInfoRelationship `json:"ActionWorkflowInfo,omitempty"`
 		// An array of relationships to workflowCatalogServiceRequest resources.
-		CatalogServiceRequest       []WorkflowCatalogServiceRequestRelationship      `json:"CatalogServiceRequest,omitempty"`
-		Idp                         *IamIdpRelationship                              `json:"Idp,omitempty"`
-		IdpReference                *IamIdpReferenceRelationship                     `json:"IdpReference,omitempty"`
-		ServiceItemActionDefinition *WorkflowServiceItemActionDefinitionRelationship `json:"ServiceItemActionDefinition,omitempty"`
-		ServiceItemDefinition       *WorkflowServiceItemDefinitionRelationship       `json:"ServiceItemDefinition,omitempty"`
-		ServiceItemInstance         *WorkflowServiceItemInstanceRelationship         `json:"ServiceItemInstance,omitempty"`
-		StopWorkflowInfo            *WorkflowWorkflowInfoRelationship                `json:"StopWorkflowInfo,omitempty"`
-		User                        *IamUserRelationship                             `json:"User,omitempty"`
-		ValidationWorkflowInfo      *WorkflowWorkflowInfoRelationship                `json:"ValidationWorkflowInfo,omitempty"`
+		CatalogServiceRequest       []WorkflowCatalogServiceRequestRelationship             `json:"CatalogServiceRequest,omitempty"`
+		Idp                         NullableIamIdpRelationship                              `json:"Idp,omitempty"`
+		IdpReference                NullableIamIdpReferenceRelationship                     `json:"IdpReference,omitempty"`
+		ServiceItemActionDefinition NullableWorkflowServiceItemActionDefinitionRelationship `json:"ServiceItemActionDefinition,omitempty"`
+		ServiceItemDefinition       NullableWorkflowServiceItemDefinitionRelationship       `json:"ServiceItemDefinition,omitempty"`
+		ServiceItemInstance         NullableWorkflowServiceItemInstanceRelationship         `json:"ServiceItemInstance,omitempty"`
+		StopWorkflowInfo            NullableWorkflowWorkflowInfoRelationship                `json:"StopWorkflowInfo,omitempty"`
+		User                        NullableIamUserRelationship                             `json:"User,omitempty"`
+		ValidationWorkflowInfo      NullableWorkflowWorkflowInfoRelationship                `json:"ValidationWorkflowInfo,omitempty"`
 	}
 
 	varWorkflowServiceItemActionInstanceWithoutEmbeddedStruct := WorkflowServiceItemActionInstanceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowServiceItemActionInstanceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowServiceItemActionInstanceWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowServiceItemActionInstance := _WorkflowServiceItemActionInstance{}
 		varWorkflowServiceItemActionInstance.ClassId = varWorkflowServiceItemActionInstanceWithoutEmbeddedStruct.ClassId
@@ -1014,7 +1143,7 @@ func (o *WorkflowServiceItemActionInstance) UnmarshalJSON(bytes []byte) (err err
 
 	varWorkflowServiceItemActionInstance := _WorkflowServiceItemActionInstance{}
 
-	err = json.Unmarshal(bytes, &varWorkflowServiceItemActionInstance)
+	err = json.Unmarshal(data, &varWorkflowServiceItemActionInstance)
 	if err == nil {
 		o.MoBaseMo = varWorkflowServiceItemActionInstance.MoBaseMo
 	} else {
@@ -1023,7 +1152,7 @@ func (o *WorkflowServiceItemActionInstance) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

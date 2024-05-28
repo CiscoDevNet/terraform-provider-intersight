@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkspaceFolder type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkspaceFolder{}
 
 // WorkspaceFolder Folder contains list of predefined assets like Workflows, Service items, Widgets, etc. it enables customers to make uses of these readily available predefined assets.
 type WorkspaceFolder struct {
@@ -33,9 +37,9 @@ type WorkspaceFolder struct {
 	// The name for this folder. You can have multiple versions of the folder with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_).
 	Name *string `json:"Name,omitempty"`
 	// An array of relationships to moBaseMo resources.
-	Assets       []MoBaseMoRelationship       `json:"Assets,omitempty"`
-	Catalog      *WorkflowCatalogRelationship `json:"Catalog,omitempty"`
-	ParentFolder *WorkspaceFolderRelationship `json:"ParentFolder,omitempty"`
+	Assets       []MoBaseMoRelationship              `json:"Assets,omitempty"`
+	Catalog      NullableWorkflowCatalogRelationship `json:"Catalog,omitempty"`
+	ParentFolder NullableWorkspaceFolderRelationship `json:"ParentFolder,omitempty"`
 	// An array of relationships to workspaceFolder resources.
 	SubFolders           []WorkspaceFolderRelationship `json:"SubFolders,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -120,7 +124,7 @@ func (o *WorkspaceFolder) SetObjectType(v string) {
 
 // GetArchived returns the Archived field value if set, zero value otherwise.
 func (o *WorkspaceFolder) GetArchived() bool {
-	if o == nil || o.Archived == nil {
+	if o == nil || IsNil(o.Archived) {
 		var ret bool
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *WorkspaceFolder) GetArchived() bool {
 // GetArchivedOk returns a tuple with the Archived field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkspaceFolder) GetArchivedOk() (*bool, bool) {
-	if o == nil || o.Archived == nil {
+	if o == nil || IsNil(o.Archived) {
 		return nil, false
 	}
 	return o.Archived, true
@@ -138,7 +142,7 @@ func (o *WorkspaceFolder) GetArchivedOk() (*bool, bool) {
 
 // HasArchived returns a boolean if a field has been set.
 func (o *WorkspaceFolder) HasArchived() bool {
-	if o != nil && o.Archived != nil {
+	if o != nil && !IsNil(o.Archived) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *WorkspaceFolder) SetArchived(v bool) {
 
 // GetCreateUser returns the CreateUser field value if set, zero value otherwise.
 func (o *WorkspaceFolder) GetCreateUser() string {
-	if o == nil || o.CreateUser == nil {
+	if o == nil || IsNil(o.CreateUser) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *WorkspaceFolder) GetCreateUser() string {
 // GetCreateUserOk returns a tuple with the CreateUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkspaceFolder) GetCreateUserOk() (*string, bool) {
-	if o == nil || o.CreateUser == nil {
+	if o == nil || IsNil(o.CreateUser) {
 		return nil, false
 	}
 	return o.CreateUser, true
@@ -170,7 +174,7 @@ func (o *WorkspaceFolder) GetCreateUserOk() (*string, bool) {
 
 // HasCreateUser returns a boolean if a field has been set.
 func (o *WorkspaceFolder) HasCreateUser() bool {
-	if o != nil && o.CreateUser != nil {
+	if o != nil && !IsNil(o.CreateUser) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *WorkspaceFolder) SetCreateUser(v string) {
 
 // GetModUser returns the ModUser field value if set, zero value otherwise.
 func (o *WorkspaceFolder) GetModUser() string {
-	if o == nil || o.ModUser == nil {
+	if o == nil || IsNil(o.ModUser) {
 		var ret string
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *WorkspaceFolder) GetModUser() string {
 // GetModUserOk returns a tuple with the ModUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkspaceFolder) GetModUserOk() (*string, bool) {
-	if o == nil || o.ModUser == nil {
+	if o == nil || IsNil(o.ModUser) {
 		return nil, false
 	}
 	return o.ModUser, true
@@ -202,7 +206,7 @@ func (o *WorkspaceFolder) GetModUserOk() (*string, bool) {
 
 // HasModUser returns a boolean if a field has been set.
 func (o *WorkspaceFolder) HasModUser() bool {
-	if o != nil && o.ModUser != nil {
+	if o != nil && !IsNil(o.ModUser) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *WorkspaceFolder) SetModUser(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkspaceFolder) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *WorkspaceFolder) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkspaceFolder) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -234,7 +238,7 @@ func (o *WorkspaceFolder) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *WorkspaceFolder) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -259,7 +263,7 @@ func (o *WorkspaceFolder) GetAssets() []MoBaseMoRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkspaceFolder) GetAssetsOk() ([]MoBaseMoRelationship, bool) {
-	if o == nil || o.Assets == nil {
+	if o == nil || IsNil(o.Assets) {
 		return nil, false
 	}
 	return o.Assets, true
@@ -267,7 +271,7 @@ func (o *WorkspaceFolder) GetAssetsOk() ([]MoBaseMoRelationship, bool) {
 
 // HasAssets returns a boolean if a field has been set.
 func (o *WorkspaceFolder) HasAssets() bool {
-	if o != nil && o.Assets != nil {
+	if o != nil && IsNil(o.Assets) {
 		return true
 	}
 
@@ -279,68 +283,90 @@ func (o *WorkspaceFolder) SetAssets(v []MoBaseMoRelationship) {
 	o.Assets = v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkspaceFolder) GetCatalog() WorkflowCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret WorkflowCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkspaceFolder) GetCatalogOk() (*WorkflowCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *WorkspaceFolder) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given WorkflowCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableWorkflowCatalogRelationship and assigns it to the Catalog field.
 func (o *WorkspaceFolder) SetCatalog(v WorkflowCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
 }
 
-// GetParentFolder returns the ParentFolder field value if set, zero value otherwise.
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *WorkspaceFolder) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *WorkspaceFolder) UnsetCatalog() {
+	o.Catalog.Unset()
+}
+
+// GetParentFolder returns the ParentFolder field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkspaceFolder) GetParentFolder() WorkspaceFolderRelationship {
-	if o == nil || o.ParentFolder == nil {
+	if o == nil || IsNil(o.ParentFolder.Get()) {
 		var ret WorkspaceFolderRelationship
 		return ret
 	}
-	return *o.ParentFolder
+	return *o.ParentFolder.Get()
 }
 
 // GetParentFolderOk returns a tuple with the ParentFolder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkspaceFolder) GetParentFolderOk() (*WorkspaceFolderRelationship, bool) {
-	if o == nil || o.ParentFolder == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ParentFolder, true
+	return o.ParentFolder.Get(), o.ParentFolder.IsSet()
 }
 
 // HasParentFolder returns a boolean if a field has been set.
 func (o *WorkspaceFolder) HasParentFolder() bool {
-	if o != nil && o.ParentFolder != nil {
+	if o != nil && o.ParentFolder.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetParentFolder gets a reference to the given WorkspaceFolderRelationship and assigns it to the ParentFolder field.
+// SetParentFolder gets a reference to the given NullableWorkspaceFolderRelationship and assigns it to the ParentFolder field.
 func (o *WorkspaceFolder) SetParentFolder(v WorkspaceFolderRelationship) {
-	o.ParentFolder = &v
+	o.ParentFolder.Set(&v)
+}
+
+// SetParentFolderNil sets the value for ParentFolder to be an explicit nil
+func (o *WorkspaceFolder) SetParentFolderNil() {
+	o.ParentFolder.Set(nil)
+}
+
+// UnsetParentFolder ensures that no value is present for ParentFolder, not even an explicit nil
+func (o *WorkspaceFolder) UnsetParentFolder() {
+	o.ParentFolder.Unset()
 }
 
 // GetSubFolders returns the SubFolders field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -356,7 +382,7 @@ func (o *WorkspaceFolder) GetSubFolders() []WorkspaceFolderRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkspaceFolder) GetSubFoldersOk() ([]WorkspaceFolderRelationship, bool) {
-	if o == nil || o.SubFolders == nil {
+	if o == nil || IsNil(o.SubFolders) {
 		return nil, false
 	}
 	return o.SubFolders, true
@@ -364,7 +390,7 @@ func (o *WorkspaceFolder) GetSubFoldersOk() ([]WorkspaceFolderRelationship, bool
 
 // HasSubFolders returns a boolean if a field has been set.
 func (o *WorkspaceFolder) HasSubFolders() bool {
-	if o != nil && o.SubFolders != nil {
+	if o != nil && IsNil(o.SubFolders) {
 		return true
 	}
 
@@ -377,41 +403,45 @@ func (o *WorkspaceFolder) SetSubFolders(v []WorkspaceFolderRelationship) {
 }
 
 func (o WorkspaceFolder) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkspaceFolder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Archived != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Archived) {
 		toSerialize["Archived"] = o.Archived
 	}
-	if o.CreateUser != nil {
+	if !IsNil(o.CreateUser) {
 		toSerialize["CreateUser"] = o.CreateUser
 	}
-	if o.ModUser != nil {
+	if !IsNil(o.ModUser) {
 		toSerialize["ModUser"] = o.ModUser
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.Assets != nil {
 		toSerialize["Assets"] = o.Assets
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
-	if o.ParentFolder != nil {
-		toSerialize["ParentFolder"] = o.ParentFolder
+	if o.ParentFolder.IsSet() {
+		toSerialize["ParentFolder"] = o.ParentFolder.Get()
 	}
 	if o.SubFolders != nil {
 		toSerialize["SubFolders"] = o.SubFolders
@@ -421,10 +451,32 @@ func (o WorkspaceFolder) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkspaceFolder) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkspaceFolder) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkspaceFolderWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -439,16 +491,16 @@ func (o *WorkspaceFolder) UnmarshalJSON(bytes []byte) (err error) {
 		// The name for this folder. You can have multiple versions of the folder with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_).
 		Name *string `json:"Name,omitempty"`
 		// An array of relationships to moBaseMo resources.
-		Assets       []MoBaseMoRelationship       `json:"Assets,omitempty"`
-		Catalog      *WorkflowCatalogRelationship `json:"Catalog,omitempty"`
-		ParentFolder *WorkspaceFolderRelationship `json:"ParentFolder,omitempty"`
+		Assets       []MoBaseMoRelationship              `json:"Assets,omitempty"`
+		Catalog      NullableWorkflowCatalogRelationship `json:"Catalog,omitempty"`
+		ParentFolder NullableWorkspaceFolderRelationship `json:"ParentFolder,omitempty"`
 		// An array of relationships to workspaceFolder resources.
 		SubFolders []WorkspaceFolderRelationship `json:"SubFolders,omitempty"`
 	}
 
 	varWorkspaceFolderWithoutEmbeddedStruct := WorkspaceFolderWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkspaceFolderWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkspaceFolderWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkspaceFolder := _WorkspaceFolder{}
 		varWorkspaceFolder.ClassId = varWorkspaceFolderWithoutEmbeddedStruct.ClassId
@@ -468,7 +520,7 @@ func (o *WorkspaceFolder) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkspaceFolder := _WorkspaceFolder{}
 
-	err = json.Unmarshal(bytes, &varWorkspaceFolder)
+	err = json.Unmarshal(data, &varWorkspaceFolder)
 	if err == nil {
 		o.MoBaseMo = varWorkspaceFolder.MoBaseMo
 	} else {
@@ -477,7 +529,7 @@ func (o *WorkspaceFolder) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Archived")

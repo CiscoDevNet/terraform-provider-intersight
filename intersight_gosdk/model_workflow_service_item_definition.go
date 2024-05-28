@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowServiceItemDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowServiceItemDefinition{}
 
 // WorkflowServiceItemDefinition Service Item definition is a collection of actions and associated workflow definition that can be used to deploy a service item.
 type WorkflowServiceItemDefinition struct {
@@ -52,7 +56,7 @@ type WorkflowServiceItemDefinition struct {
 	Version *int64 `json:"Version,omitempty"`
 	// An array of relationships to workflowServiceItemActionDefinition resources.
 	ActionDefinitions    []WorkflowServiceItemActionDefinitionRelationship `json:"ActionDefinitions,omitempty"`
-	Catalog              *WorkflowCatalogRelationship                      `json:"Catalog,omitempty"`
+	Catalog              NullableWorkflowCatalogRelationship               `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -151,7 +155,7 @@ func (o *WorkflowServiceItemDefinition) SetObjectType(v string) {
 
 // GetAllowMultipleServiceItemInstances returns the AllowMultipleServiceItemInstances field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetAllowMultipleServiceItemInstances() bool {
-	if o == nil || o.AllowMultipleServiceItemInstances == nil {
+	if o == nil || IsNil(o.AllowMultipleServiceItemInstances) {
 		var ret bool
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *WorkflowServiceItemDefinition) GetAllowMultipleServiceItemInstances() b
 // GetAllowMultipleServiceItemInstancesOk returns a tuple with the AllowMultipleServiceItemInstances field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetAllowMultipleServiceItemInstancesOk() (*bool, bool) {
-	if o == nil || o.AllowMultipleServiceItemInstances == nil {
+	if o == nil || IsNil(o.AllowMultipleServiceItemInstances) {
 		return nil, false
 	}
 	return o.AllowMultipleServiceItemInstances, true
@@ -169,7 +173,7 @@ func (o *WorkflowServiceItemDefinition) GetAllowMultipleServiceItemInstancesOk()
 
 // HasAllowMultipleServiceItemInstances returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasAllowMultipleServiceItemInstances() bool {
-	if o != nil && o.AllowMultipleServiceItemInstances != nil {
+	if o != nil && !IsNil(o.AllowMultipleServiceItemInstances) {
 		return true
 	}
 
@@ -194,7 +198,7 @@ func (o *WorkflowServiceItemDefinition) GetAttributeDefinition() []WorkflowBaseD
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemDefinition) GetAttributeDefinitionOk() ([]WorkflowBaseDataType, bool) {
-	if o == nil || o.AttributeDefinition == nil {
+	if o == nil || IsNil(o.AttributeDefinition) {
 		return nil, false
 	}
 	return o.AttributeDefinition, true
@@ -202,7 +206,7 @@ func (o *WorkflowServiceItemDefinition) GetAttributeDefinitionOk() ([]WorkflowBa
 
 // HasAttributeDefinition returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasAttributeDefinition() bool {
-	if o != nil && o.AttributeDefinition != nil {
+	if o != nil && IsNil(o.AttributeDefinition) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *WorkflowServiceItemDefinition) SetAttributeDefinition(v []WorkflowBaseD
 
 // GetCvdId returns the CvdId field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetCvdId() string {
-	if o == nil || o.CvdId == nil {
+	if o == nil || IsNil(o.CvdId) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *WorkflowServiceItemDefinition) GetCvdId() string {
 // GetCvdIdOk returns a tuple with the CvdId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetCvdIdOk() (*string, bool) {
-	if o == nil || o.CvdId == nil {
+	if o == nil || IsNil(o.CvdId) {
 		return nil, false
 	}
 	return o.CvdId, true
@@ -234,7 +238,7 @@ func (o *WorkflowServiceItemDefinition) GetCvdIdOk() (*string, bool) {
 
 // HasCvdId returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasCvdId() bool {
-	if o != nil && o.CvdId != nil {
+	if o != nil && !IsNil(o.CvdId) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *WorkflowServiceItemDefinition) SetCvdId(v string) {
 
 // GetDeleteInstanceOnDecommission returns the DeleteInstanceOnDecommission field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetDeleteInstanceOnDecommission() bool {
-	if o == nil || o.DeleteInstanceOnDecommission == nil {
+	if o == nil || IsNil(o.DeleteInstanceOnDecommission) {
 		var ret bool
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *WorkflowServiceItemDefinition) GetDeleteInstanceOnDecommission() bool {
 // GetDeleteInstanceOnDecommissionOk returns a tuple with the DeleteInstanceOnDecommission field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetDeleteInstanceOnDecommissionOk() (*bool, bool) {
-	if o == nil || o.DeleteInstanceOnDecommission == nil {
+	if o == nil || IsNil(o.DeleteInstanceOnDecommission) {
 		return nil, false
 	}
 	return o.DeleteInstanceOnDecommission, true
@@ -266,7 +270,7 @@ func (o *WorkflowServiceItemDefinition) GetDeleteInstanceOnDecommissionOk() (*bo
 
 // HasDeleteInstanceOnDecommission returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasDeleteInstanceOnDecommission() bool {
-	if o != nil && o.DeleteInstanceOnDecommission != nil {
+	if o != nil && !IsNil(o.DeleteInstanceOnDecommission) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *WorkflowServiceItemDefinition) SetDeleteInstanceOnDecommission(v bool) 
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *WorkflowServiceItemDefinition) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -298,7 +302,7 @@ func (o *WorkflowServiceItemDefinition) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *WorkflowServiceItemDefinition) SetDescription(v string) {
 
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *WorkflowServiceItemDefinition) GetLabel() string {
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
 	return o.Label, true
@@ -330,7 +334,7 @@ func (o *WorkflowServiceItemDefinition) GetLabelOk() (*string, bool) {
 
 // HasLabel returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && !IsNil(o.Label) {
 		return true
 	}
 
@@ -344,7 +348,7 @@ func (o *WorkflowServiceItemDefinition) SetLabel(v string) {
 
 // GetLicenseEntitlement returns the LicenseEntitlement field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetLicenseEntitlement() string {
-	if o == nil || o.LicenseEntitlement == nil {
+	if o == nil || IsNil(o.LicenseEntitlement) {
 		var ret string
 		return ret
 	}
@@ -354,7 +358,7 @@ func (o *WorkflowServiceItemDefinition) GetLicenseEntitlement() string {
 // GetLicenseEntitlementOk returns a tuple with the LicenseEntitlement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetLicenseEntitlementOk() (*string, bool) {
-	if o == nil || o.LicenseEntitlement == nil {
+	if o == nil || IsNil(o.LicenseEntitlement) {
 		return nil, false
 	}
 	return o.LicenseEntitlement, true
@@ -362,7 +366,7 @@ func (o *WorkflowServiceItemDefinition) GetLicenseEntitlementOk() (*string, bool
 
 // HasLicenseEntitlement returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasLicenseEntitlement() bool {
-	if o != nil && o.LicenseEntitlement != nil {
+	if o != nil && !IsNil(o.LicenseEntitlement) {
 		return true
 	}
 
@@ -376,7 +380,7 @@ func (o *WorkflowServiceItemDefinition) SetLicenseEntitlement(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -386,7 +390,7 @@ func (o *WorkflowServiceItemDefinition) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -394,7 +398,7 @@ func (o *WorkflowServiceItemDefinition) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -408,7 +412,7 @@ func (o *WorkflowServiceItemDefinition) SetName(v string) {
 
 // GetPublishStatus returns the PublishStatus field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetPublishStatus() string {
-	if o == nil || o.PublishStatus == nil {
+	if o == nil || IsNil(o.PublishStatus) {
 		var ret string
 		return ret
 	}
@@ -418,7 +422,7 @@ func (o *WorkflowServiceItemDefinition) GetPublishStatus() string {
 // GetPublishStatusOk returns a tuple with the PublishStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetPublishStatusOk() (*string, bool) {
-	if o == nil || o.PublishStatus == nil {
+	if o == nil || IsNil(o.PublishStatus) {
 		return nil, false
 	}
 	return o.PublishStatus, true
@@ -426,7 +430,7 @@ func (o *WorkflowServiceItemDefinition) GetPublishStatusOk() (*string, bool) {
 
 // HasPublishStatus returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasPublishStatus() bool {
-	if o != nil && o.PublishStatus != nil {
+	if o != nil && !IsNil(o.PublishStatus) {
 		return true
 	}
 
@@ -440,7 +444,7 @@ func (o *WorkflowServiceItemDefinition) SetPublishStatus(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -450,7 +454,7 @@ func (o *WorkflowServiceItemDefinition) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -458,7 +462,7 @@ func (o *WorkflowServiceItemDefinition) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -472,7 +476,7 @@ func (o *WorkflowServiceItemDefinition) SetStatus(v string) {
 
 // GetSupportStatus returns the SupportStatus field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetSupportStatus() string {
-	if o == nil || o.SupportStatus == nil {
+	if o == nil || IsNil(o.SupportStatus) {
 		var ret string
 		return ret
 	}
@@ -482,7 +486,7 @@ func (o *WorkflowServiceItemDefinition) GetSupportStatus() string {
 // GetSupportStatusOk returns a tuple with the SupportStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetSupportStatusOk() (*string, bool) {
-	if o == nil || o.SupportStatus == nil {
+	if o == nil || IsNil(o.SupportStatus) {
 		return nil, false
 	}
 	return o.SupportStatus, true
@@ -490,7 +494,7 @@ func (o *WorkflowServiceItemDefinition) GetSupportStatusOk() (*string, bool) {
 
 // HasSupportStatus returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasSupportStatus() bool {
-	if o != nil && o.SupportStatus != nil {
+	if o != nil && !IsNil(o.SupportStatus) {
 		return true
 	}
 
@@ -504,7 +508,7 @@ func (o *WorkflowServiceItemDefinition) SetSupportStatus(v string) {
 
 // GetUserIdOrEmail returns the UserIdOrEmail field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetUserIdOrEmail() string {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		var ret string
 		return ret
 	}
@@ -514,7 +518,7 @@ func (o *WorkflowServiceItemDefinition) GetUserIdOrEmail() string {
 // GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetUserIdOrEmailOk() (*string, bool) {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		return nil, false
 	}
 	return o.UserIdOrEmail, true
@@ -522,7 +526,7 @@ func (o *WorkflowServiceItemDefinition) GetUserIdOrEmailOk() (*string, bool) {
 
 // HasUserIdOrEmail returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasUserIdOrEmail() bool {
-	if o != nil && o.UserIdOrEmail != nil {
+	if o != nil && !IsNil(o.UserIdOrEmail) {
 		return true
 	}
 
@@ -536,7 +540,7 @@ func (o *WorkflowServiceItemDefinition) SetUserIdOrEmail(v string) {
 
 // GetValidationInformation returns the ValidationInformation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemDefinition) GetValidationInformation() WorkflowValidationInformation {
-	if o == nil || o.ValidationInformation.Get() == nil {
+	if o == nil || IsNil(o.ValidationInformation.Get()) {
 		var ret WorkflowValidationInformation
 		return ret
 	}
@@ -579,7 +583,7 @@ func (o *WorkflowServiceItemDefinition) UnsetValidationInformation() {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetVersion() int64 {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret int64
 		return ret
 	}
@@ -589,7 +593,7 @@ func (o *WorkflowServiceItemDefinition) GetVersion() int64 {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemDefinition) GetVersionOk() (*int64, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -597,7 +601,7 @@ func (o *WorkflowServiceItemDefinition) GetVersionOk() (*int64, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -622,7 +626,7 @@ func (o *WorkflowServiceItemDefinition) GetActionDefinitions() []WorkflowService
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemDefinition) GetActionDefinitionsOk() ([]WorkflowServiceItemActionDefinitionRelationship, bool) {
-	if o == nil || o.ActionDefinitions == nil {
+	if o == nil || IsNil(o.ActionDefinitions) {
 		return nil, false
 	}
 	return o.ActionDefinitions, true
@@ -630,7 +634,7 @@ func (o *WorkflowServiceItemDefinition) GetActionDefinitionsOk() ([]WorkflowServ
 
 // HasActionDefinitions returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasActionDefinitions() bool {
-	if o != nil && o.ActionDefinitions != nil {
+	if o != nil && IsNil(o.ActionDefinitions) {
 		return true
 	}
 
@@ -642,111 +646,148 @@ func (o *WorkflowServiceItemDefinition) SetActionDefinitions(v []WorkflowService
 	o.ActionDefinitions = v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemDefinition) GetCatalog() WorkflowCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret WorkflowCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemDefinition) GetCatalogOk() (*WorkflowCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *WorkflowServiceItemDefinition) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given WorkflowCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableWorkflowCatalogRelationship and assigns it to the Catalog field.
 func (o *WorkflowServiceItemDefinition) SetCatalog(v WorkflowCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
+}
+
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *WorkflowServiceItemDefinition) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *WorkflowServiceItemDefinition) UnsetCatalog() {
+	o.Catalog.Unset()
 }
 
 func (o WorkflowServiceItemDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowServiceItemDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AllowMultipleServiceItemInstances != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AllowMultipleServiceItemInstances) {
 		toSerialize["AllowMultipleServiceItemInstances"] = o.AllowMultipleServiceItemInstances
 	}
 	if o.AttributeDefinition != nil {
 		toSerialize["AttributeDefinition"] = o.AttributeDefinition
 	}
-	if o.CvdId != nil {
+	if !IsNil(o.CvdId) {
 		toSerialize["CvdId"] = o.CvdId
 	}
-	if o.DeleteInstanceOnDecommission != nil {
+	if !IsNil(o.DeleteInstanceOnDecommission) {
 		toSerialize["DeleteInstanceOnDecommission"] = o.DeleteInstanceOnDecommission
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Label != nil {
+	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
 	}
-	if o.LicenseEntitlement != nil {
+	if !IsNil(o.LicenseEntitlement) {
 		toSerialize["LicenseEntitlement"] = o.LicenseEntitlement
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PublishStatus != nil {
+	if !IsNil(o.PublishStatus) {
 		toSerialize["PublishStatus"] = o.PublishStatus
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.SupportStatus != nil {
+	if !IsNil(o.SupportStatus) {
 		toSerialize["SupportStatus"] = o.SupportStatus
 	}
-	if o.UserIdOrEmail != nil {
+	if !IsNil(o.UserIdOrEmail) {
 		toSerialize["UserIdOrEmail"] = o.UserIdOrEmail
 	}
 	if o.ValidationInformation.IsSet() {
 		toSerialize["ValidationInformation"] = o.ValidationInformation.Get()
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 	if o.ActionDefinitions != nil {
 		toSerialize["ActionDefinitions"] = o.ActionDefinitions
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowServiceItemDefinition) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowServiceItemDefinition) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowServiceItemDefinitionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -780,12 +821,12 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(bytes []byte) (err error) 
 		Version *int64 `json:"Version,omitempty"`
 		// An array of relationships to workflowServiceItemActionDefinition resources.
 		ActionDefinitions []WorkflowServiceItemActionDefinitionRelationship `json:"ActionDefinitions,omitempty"`
-		Catalog           *WorkflowCatalogRelationship                      `json:"Catalog,omitempty"`
+		Catalog           NullableWorkflowCatalogRelationship               `json:"Catalog,omitempty"`
 	}
 
 	varWorkflowServiceItemDefinitionWithoutEmbeddedStruct := WorkflowServiceItemDefinitionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowServiceItemDefinitionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowServiceItemDefinitionWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowServiceItemDefinition := _WorkflowServiceItemDefinition{}
 		varWorkflowServiceItemDefinition.ClassId = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.ClassId
@@ -813,7 +854,7 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(bytes []byte) (err error) 
 
 	varWorkflowServiceItemDefinition := _WorkflowServiceItemDefinition{}
 
-	err = json.Unmarshal(bytes, &varWorkflowServiceItemDefinition)
+	err = json.Unmarshal(data, &varWorkflowServiceItemDefinition)
 	if err == nil {
 		o.MoBaseMo = varWorkflowServiceItemDefinition.MoBaseMo
 	} else {
@@ -822,7 +863,7 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllowMultipleServiceItemInstances")

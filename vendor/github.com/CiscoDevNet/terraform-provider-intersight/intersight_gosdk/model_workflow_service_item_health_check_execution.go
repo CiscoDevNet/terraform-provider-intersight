@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the WorkflowServiceItemHealthCheckExecution type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowServiceItemHealthCheckExecution{}
 
 // WorkflowServiceItemHealthCheckExecution Health check execution result for a health check definition on a service item.
 type WorkflowServiceItemHealthCheckExecution struct {
@@ -35,10 +39,10 @@ type WorkflowServiceItemHealthCheckExecution struct {
 	// A brief summary of health check execution result.
 	Summary *string `json:"Summary,omitempty"`
 	// Status of the workflow that is executed as a part of health check execution.
-	WorkflowStatus        *string                                               `json:"WorkflowStatus,omitempty"`
-	HealthCheckDefinition *WorkflowServiceItemHealthCheckDefinitionRelationship `json:"HealthCheckDefinition,omitempty"`
-	ServiceItemInstance   *WorkflowServiceItemInstanceRelationship              `json:"ServiceItemInstance,omitempty"`
-	WorkflowInfo          *WorkflowWorkflowInfoRelationship                     `json:"WorkflowInfo,omitempty"`
+	WorkflowStatus        *string                                                      `json:"WorkflowStatus,omitempty"`
+	HealthCheckDefinition NullableWorkflowServiceItemHealthCheckDefinitionRelationship `json:"HealthCheckDefinition,omitempty"`
+	ServiceItemInstance   NullableWorkflowServiceItemInstanceRelationship              `json:"ServiceItemInstance,omitempty"`
+	WorkflowInfo          NullableWorkflowWorkflowInfoRelationship                     `json:"WorkflowInfo,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -128,7 +132,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetErrorElements() []Serviceit
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemHealthCheckExecution) GetErrorElementsOk() ([]ServiceitemHealthCheckErrorElement, bool) {
-	if o == nil || o.ErrorElements == nil {
+	if o == nil || IsNil(o.ErrorElements) {
 		return nil, false
 	}
 	return o.ErrorElements, true
@@ -136,7 +140,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetErrorElementsOk() ([]Servic
 
 // HasErrorElements returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) HasErrorElements() bool {
-	if o != nil && o.ErrorElements != nil {
+	if o != nil && IsNil(o.ErrorElements) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) SetErrorElements(v []Serviceit
 
 // GetErrorSummary returns the ErrorSummary field value if set, zero value otherwise.
 func (o *WorkflowServiceItemHealthCheckExecution) GetErrorSummary() string {
-	if o == nil || o.ErrorSummary == nil {
+	if o == nil || IsNil(o.ErrorSummary) {
 		var ret string
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetErrorSummary() string {
 // GetErrorSummaryOk returns a tuple with the ErrorSummary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) GetErrorSummaryOk() (*string, bool) {
-	if o == nil || o.ErrorSummary == nil {
+	if o == nil || IsNil(o.ErrorSummary) {
 		return nil, false
 	}
 	return o.ErrorSummary, true
@@ -168,7 +172,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetErrorSummaryOk() (*string, 
 
 // HasErrorSummary returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) HasErrorSummary() bool {
-	if o != nil && o.ErrorSummary != nil {
+	if o != nil && !IsNil(o.ErrorSummary) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) SetErrorSummary(v string) {
 
 // GetLastPassedTimestamp returns the LastPassedTimestamp field value if set, zero value otherwise.
 func (o *WorkflowServiceItemHealthCheckExecution) GetLastPassedTimestamp() time.Time {
-	if o == nil || o.LastPassedTimestamp == nil {
+	if o == nil || IsNil(o.LastPassedTimestamp) {
 		var ret time.Time
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetLastPassedTimestamp() time.
 // GetLastPassedTimestampOk returns a tuple with the LastPassedTimestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) GetLastPassedTimestampOk() (*time.Time, bool) {
-	if o == nil || o.LastPassedTimestamp == nil {
+	if o == nil || IsNil(o.LastPassedTimestamp) {
 		return nil, false
 	}
 	return o.LastPassedTimestamp, true
@@ -200,7 +204,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetLastPassedTimestampOk() (*t
 
 // HasLastPassedTimestamp returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) HasLastPassedTimestamp() bool {
-	if o != nil && o.LastPassedTimestamp != nil {
+	if o != nil && !IsNil(o.LastPassedTimestamp) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) SetLastPassedTimestamp(v time.
 
 // GetResult returns the Result field value if set, zero value otherwise.
 func (o *WorkflowServiceItemHealthCheckExecution) GetResult() string {
-	if o == nil || o.Result == nil {
+	if o == nil || IsNil(o.Result) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetResult() string {
 // GetResultOk returns a tuple with the Result field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) GetResultOk() (*string, bool) {
-	if o == nil || o.Result == nil {
+	if o == nil || IsNil(o.Result) {
 		return nil, false
 	}
 	return o.Result, true
@@ -232,7 +236,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetResultOk() (*string, bool) 
 
 // HasResult returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) HasResult() bool {
-	if o != nil && o.Result != nil {
+	if o != nil && !IsNil(o.Result) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) SetResult(v string) {
 
 // GetSummary returns the Summary field value if set, zero value otherwise.
 func (o *WorkflowServiceItemHealthCheckExecution) GetSummary() string {
-	if o == nil || o.Summary == nil {
+	if o == nil || IsNil(o.Summary) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetSummary() string {
 // GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) GetSummaryOk() (*string, bool) {
-	if o == nil || o.Summary == nil {
+	if o == nil || IsNil(o.Summary) {
 		return nil, false
 	}
 	return o.Summary, true
@@ -264,7 +268,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetSummaryOk() (*string, bool)
 
 // HasSummary returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) HasSummary() bool {
-	if o != nil && o.Summary != nil {
+	if o != nil && !IsNil(o.Summary) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) SetSummary(v string) {
 
 // GetWorkflowStatus returns the WorkflowStatus field value if set, zero value otherwise.
 func (o *WorkflowServiceItemHealthCheckExecution) GetWorkflowStatus() string {
-	if o == nil || o.WorkflowStatus == nil {
+	if o == nil || IsNil(o.WorkflowStatus) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetWorkflowStatus() string {
 // GetWorkflowStatusOk returns a tuple with the WorkflowStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) GetWorkflowStatusOk() (*string, bool) {
-	if o == nil || o.WorkflowStatus == nil {
+	if o == nil || IsNil(o.WorkflowStatus) {
 		return nil, false
 	}
 	return o.WorkflowStatus, true
@@ -296,7 +300,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) GetWorkflowStatusOk() (*string
 
 // HasWorkflowStatus returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) HasWorkflowStatus() bool {
-	if o != nil && o.WorkflowStatus != nil {
+	if o != nil && !IsNil(o.WorkflowStatus) {
 		return true
 	}
 
@@ -308,154 +312,213 @@ func (o *WorkflowServiceItemHealthCheckExecution) SetWorkflowStatus(v string) {
 	o.WorkflowStatus = &v
 }
 
-// GetHealthCheckDefinition returns the HealthCheckDefinition field value if set, zero value otherwise.
+// GetHealthCheckDefinition returns the HealthCheckDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemHealthCheckExecution) GetHealthCheckDefinition() WorkflowServiceItemHealthCheckDefinitionRelationship {
-	if o == nil || o.HealthCheckDefinition == nil {
+	if o == nil || IsNil(o.HealthCheckDefinition.Get()) {
 		var ret WorkflowServiceItemHealthCheckDefinitionRelationship
 		return ret
 	}
-	return *o.HealthCheckDefinition
+	return *o.HealthCheckDefinition.Get()
 }
 
 // GetHealthCheckDefinitionOk returns a tuple with the HealthCheckDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemHealthCheckExecution) GetHealthCheckDefinitionOk() (*WorkflowServiceItemHealthCheckDefinitionRelationship, bool) {
-	if o == nil || o.HealthCheckDefinition == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.HealthCheckDefinition, true
+	return o.HealthCheckDefinition.Get(), o.HealthCheckDefinition.IsSet()
 }
 
 // HasHealthCheckDefinition returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) HasHealthCheckDefinition() bool {
-	if o != nil && o.HealthCheckDefinition != nil {
+	if o != nil && o.HealthCheckDefinition.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHealthCheckDefinition gets a reference to the given WorkflowServiceItemHealthCheckDefinitionRelationship and assigns it to the HealthCheckDefinition field.
+// SetHealthCheckDefinition gets a reference to the given NullableWorkflowServiceItemHealthCheckDefinitionRelationship and assigns it to the HealthCheckDefinition field.
 func (o *WorkflowServiceItemHealthCheckExecution) SetHealthCheckDefinition(v WorkflowServiceItemHealthCheckDefinitionRelationship) {
-	o.HealthCheckDefinition = &v
+	o.HealthCheckDefinition.Set(&v)
 }
 
-// GetServiceItemInstance returns the ServiceItemInstance field value if set, zero value otherwise.
+// SetHealthCheckDefinitionNil sets the value for HealthCheckDefinition to be an explicit nil
+func (o *WorkflowServiceItemHealthCheckExecution) SetHealthCheckDefinitionNil() {
+	o.HealthCheckDefinition.Set(nil)
+}
+
+// UnsetHealthCheckDefinition ensures that no value is present for HealthCheckDefinition, not even an explicit nil
+func (o *WorkflowServiceItemHealthCheckExecution) UnsetHealthCheckDefinition() {
+	o.HealthCheckDefinition.Unset()
+}
+
+// GetServiceItemInstance returns the ServiceItemInstance field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemHealthCheckExecution) GetServiceItemInstance() WorkflowServiceItemInstanceRelationship {
-	if o == nil || o.ServiceItemInstance == nil {
+	if o == nil || IsNil(o.ServiceItemInstance.Get()) {
 		var ret WorkflowServiceItemInstanceRelationship
 		return ret
 	}
-	return *o.ServiceItemInstance
+	return *o.ServiceItemInstance.Get()
 }
 
 // GetServiceItemInstanceOk returns a tuple with the ServiceItemInstance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemHealthCheckExecution) GetServiceItemInstanceOk() (*WorkflowServiceItemInstanceRelationship, bool) {
-	if o == nil || o.ServiceItemInstance == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServiceItemInstance, true
+	return o.ServiceItemInstance.Get(), o.ServiceItemInstance.IsSet()
 }
 
 // HasServiceItemInstance returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) HasServiceItemInstance() bool {
-	if o != nil && o.ServiceItemInstance != nil {
+	if o != nil && o.ServiceItemInstance.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServiceItemInstance gets a reference to the given WorkflowServiceItemInstanceRelationship and assigns it to the ServiceItemInstance field.
+// SetServiceItemInstance gets a reference to the given NullableWorkflowServiceItemInstanceRelationship and assigns it to the ServiceItemInstance field.
 func (o *WorkflowServiceItemHealthCheckExecution) SetServiceItemInstance(v WorkflowServiceItemInstanceRelationship) {
-	o.ServiceItemInstance = &v
+	o.ServiceItemInstance.Set(&v)
 }
 
-// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise.
+// SetServiceItemInstanceNil sets the value for ServiceItemInstance to be an explicit nil
+func (o *WorkflowServiceItemHealthCheckExecution) SetServiceItemInstanceNil() {
+	o.ServiceItemInstance.Set(nil)
+}
+
+// UnsetServiceItemInstance ensures that no value is present for ServiceItemInstance, not even an explicit nil
+func (o *WorkflowServiceItemHealthCheckExecution) UnsetServiceItemInstance() {
+	o.ServiceItemInstance.Unset()
+}
+
+// GetWorkflowInfo returns the WorkflowInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowServiceItemHealthCheckExecution) GetWorkflowInfo() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil || IsNil(o.WorkflowInfo.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.WorkflowInfo
+	return *o.WorkflowInfo.Get()
 }
 
 // GetWorkflowInfoOk returns a tuple with the WorkflowInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowServiceItemHealthCheckExecution) GetWorkflowInfoOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.WorkflowInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WorkflowInfo, true
+	return o.WorkflowInfo.Get(), o.WorkflowInfo.IsSet()
 }
 
 // HasWorkflowInfo returns a boolean if a field has been set.
 func (o *WorkflowServiceItemHealthCheckExecution) HasWorkflowInfo() bool {
-	if o != nil && o.WorkflowInfo != nil {
+	if o != nil && o.WorkflowInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflowInfo gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
+// SetWorkflowInfo gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the WorkflowInfo field.
 func (o *WorkflowServiceItemHealthCheckExecution) SetWorkflowInfo(v WorkflowWorkflowInfoRelationship) {
-	o.WorkflowInfo = &v
+	o.WorkflowInfo.Set(&v)
+}
+
+// SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+func (o *WorkflowServiceItemHealthCheckExecution) SetWorkflowInfoNil() {
+	o.WorkflowInfo.Set(nil)
+}
+
+// UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
+func (o *WorkflowServiceItemHealthCheckExecution) UnsetWorkflowInfo() {
+	o.WorkflowInfo.Unset()
 }
 
 func (o WorkflowServiceItemHealthCheckExecution) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowServiceItemHealthCheckExecution) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ErrorElements != nil {
 		toSerialize["ErrorElements"] = o.ErrorElements
 	}
-	if o.ErrorSummary != nil {
+	if !IsNil(o.ErrorSummary) {
 		toSerialize["ErrorSummary"] = o.ErrorSummary
 	}
-	if o.LastPassedTimestamp != nil {
+	if !IsNil(o.LastPassedTimestamp) {
 		toSerialize["LastPassedTimestamp"] = o.LastPassedTimestamp
 	}
-	if o.Result != nil {
+	if !IsNil(o.Result) {
 		toSerialize["Result"] = o.Result
 	}
-	if o.Summary != nil {
+	if !IsNil(o.Summary) {
 		toSerialize["Summary"] = o.Summary
 	}
-	if o.WorkflowStatus != nil {
+	if !IsNil(o.WorkflowStatus) {
 		toSerialize["WorkflowStatus"] = o.WorkflowStatus
 	}
-	if o.HealthCheckDefinition != nil {
-		toSerialize["HealthCheckDefinition"] = o.HealthCheckDefinition
+	if o.HealthCheckDefinition.IsSet() {
+		toSerialize["HealthCheckDefinition"] = o.HealthCheckDefinition.Get()
 	}
-	if o.ServiceItemInstance != nil {
-		toSerialize["ServiceItemInstance"] = o.ServiceItemInstance
+	if o.ServiceItemInstance.IsSet() {
+		toSerialize["ServiceItemInstance"] = o.ServiceItemInstance.Get()
 	}
-	if o.WorkflowInfo != nil {
-		toSerialize["WorkflowInfo"] = o.WorkflowInfo
+	if o.WorkflowInfo.IsSet() {
+		toSerialize["WorkflowInfo"] = o.WorkflowInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowServiceItemHealthCheckExecution) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowServiceItemHealthCheckExecution) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowServiceItemHealthCheckExecutionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -471,15 +534,15 @@ func (o *WorkflowServiceItemHealthCheckExecution) UnmarshalJSON(bytes []byte) (e
 		// A brief summary of health check execution result.
 		Summary *string `json:"Summary,omitempty"`
 		// Status of the workflow that is executed as a part of health check execution.
-		WorkflowStatus        *string                                               `json:"WorkflowStatus,omitempty"`
-		HealthCheckDefinition *WorkflowServiceItemHealthCheckDefinitionRelationship `json:"HealthCheckDefinition,omitempty"`
-		ServiceItemInstance   *WorkflowServiceItemInstanceRelationship              `json:"ServiceItemInstance,omitempty"`
-		WorkflowInfo          *WorkflowWorkflowInfoRelationship                     `json:"WorkflowInfo,omitempty"`
+		WorkflowStatus        *string                                                      `json:"WorkflowStatus,omitempty"`
+		HealthCheckDefinition NullableWorkflowServiceItemHealthCheckDefinitionRelationship `json:"HealthCheckDefinition,omitempty"`
+		ServiceItemInstance   NullableWorkflowServiceItemInstanceRelationship              `json:"ServiceItemInstance,omitempty"`
+		WorkflowInfo          NullableWorkflowWorkflowInfoRelationship                     `json:"WorkflowInfo,omitempty"`
 	}
 
 	varWorkflowServiceItemHealthCheckExecutionWithoutEmbeddedStruct := WorkflowServiceItemHealthCheckExecutionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowServiceItemHealthCheckExecutionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowServiceItemHealthCheckExecutionWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowServiceItemHealthCheckExecution := _WorkflowServiceItemHealthCheckExecution{}
 		varWorkflowServiceItemHealthCheckExecution.ClassId = varWorkflowServiceItemHealthCheckExecutionWithoutEmbeddedStruct.ClassId
@@ -500,7 +563,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) UnmarshalJSON(bytes []byte) (e
 
 	varWorkflowServiceItemHealthCheckExecution := _WorkflowServiceItemHealthCheckExecution{}
 
-	err = json.Unmarshal(bytes, &varWorkflowServiceItemHealthCheckExecution)
+	err = json.Unmarshal(data, &varWorkflowServiceItemHealthCheckExecution)
 	if err == nil {
 		o.MoBaseMo = varWorkflowServiceItemHealthCheckExecution.MoBaseMo
 	} else {
@@ -509,7 +572,7 @@ func (o *WorkflowServiceItemHealthCheckExecution) UnmarshalJSON(bytes []byte) (e
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ErrorElements")

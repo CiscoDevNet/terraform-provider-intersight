@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CondAlarmSummary type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CondAlarmSummary{}
 
 // CondAlarmSummary The summary of alarm counts based on alarm serverity.
 type CondAlarmSummary struct {
@@ -116,7 +120,7 @@ func (o *CondAlarmSummary) SetObjectType(v string) {
 
 // GetCritical returns the Critical field value if set, zero value otherwise.
 func (o *CondAlarmSummary) GetCritical() int64 {
-	if o == nil || o.Critical == nil {
+	if o == nil || IsNil(o.Critical) {
 		var ret int64
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *CondAlarmSummary) GetCritical() int64 {
 // GetCriticalOk returns a tuple with the Critical field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarmSummary) GetCriticalOk() (*int64, bool) {
-	if o == nil || o.Critical == nil {
+	if o == nil || IsNil(o.Critical) {
 		return nil, false
 	}
 	return o.Critical, true
@@ -134,7 +138,7 @@ func (o *CondAlarmSummary) GetCriticalOk() (*int64, bool) {
 
 // HasCritical returns a boolean if a field has been set.
 func (o *CondAlarmSummary) HasCritical() bool {
-	if o != nil && o.Critical != nil {
+	if o != nil && !IsNil(o.Critical) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *CondAlarmSummary) SetCritical(v int64) {
 
 // GetHealth returns the Health field value if set, zero value otherwise.
 func (o *CondAlarmSummary) GetHealth() string {
-	if o == nil || o.Health == nil {
+	if o == nil || IsNil(o.Health) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *CondAlarmSummary) GetHealth() string {
 // GetHealthOk returns a tuple with the Health field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarmSummary) GetHealthOk() (*string, bool) {
-	if o == nil || o.Health == nil {
+	if o == nil || IsNil(o.Health) {
 		return nil, false
 	}
 	return o.Health, true
@@ -166,7 +170,7 @@ func (o *CondAlarmSummary) GetHealthOk() (*string, bool) {
 
 // HasHealth returns a boolean if a field has been set.
 func (o *CondAlarmSummary) HasHealth() bool {
-	if o != nil && o.Health != nil {
+	if o != nil && !IsNil(o.Health) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *CondAlarmSummary) SetHealth(v string) {
 
 // GetInfo returns the Info field value if set, zero value otherwise.
 func (o *CondAlarmSummary) GetInfo() int64 {
-	if o == nil || o.Info == nil {
+	if o == nil || IsNil(o.Info) {
 		var ret int64
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *CondAlarmSummary) GetInfo() int64 {
 // GetInfoOk returns a tuple with the Info field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarmSummary) GetInfoOk() (*int64, bool) {
-	if o == nil || o.Info == nil {
+	if o == nil || IsNil(o.Info) {
 		return nil, false
 	}
 	return o.Info, true
@@ -198,7 +202,7 @@ func (o *CondAlarmSummary) GetInfoOk() (*int64, bool) {
 
 // HasInfo returns a boolean if a field has been set.
 func (o *CondAlarmSummary) HasInfo() bool {
-	if o != nil && o.Info != nil {
+	if o != nil && !IsNil(o.Info) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *CondAlarmSummary) SetInfo(v int64) {
 
 // GetSuppressedCritical returns the SuppressedCritical field value if set, zero value otherwise.
 func (o *CondAlarmSummary) GetSuppressedCritical() int64 {
-	if o == nil || o.SuppressedCritical == nil {
+	if o == nil || IsNil(o.SuppressedCritical) {
 		var ret int64
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *CondAlarmSummary) GetSuppressedCritical() int64 {
 // GetSuppressedCriticalOk returns a tuple with the SuppressedCritical field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarmSummary) GetSuppressedCriticalOk() (*int64, bool) {
-	if o == nil || o.SuppressedCritical == nil {
+	if o == nil || IsNil(o.SuppressedCritical) {
 		return nil, false
 	}
 	return o.SuppressedCritical, true
@@ -230,7 +234,7 @@ func (o *CondAlarmSummary) GetSuppressedCriticalOk() (*int64, bool) {
 
 // HasSuppressedCritical returns a boolean if a field has been set.
 func (o *CondAlarmSummary) HasSuppressedCritical() bool {
-	if o != nil && o.SuppressedCritical != nil {
+	if o != nil && !IsNil(o.SuppressedCritical) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *CondAlarmSummary) SetSuppressedCritical(v int64) {
 
 // GetSuppressedInfo returns the SuppressedInfo field value if set, zero value otherwise.
 func (o *CondAlarmSummary) GetSuppressedInfo() int64 {
-	if o == nil || o.SuppressedInfo == nil {
+	if o == nil || IsNil(o.SuppressedInfo) {
 		var ret int64
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *CondAlarmSummary) GetSuppressedInfo() int64 {
 // GetSuppressedInfoOk returns a tuple with the SuppressedInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarmSummary) GetSuppressedInfoOk() (*int64, bool) {
-	if o == nil || o.SuppressedInfo == nil {
+	if o == nil || IsNil(o.SuppressedInfo) {
 		return nil, false
 	}
 	return o.SuppressedInfo, true
@@ -262,7 +266,7 @@ func (o *CondAlarmSummary) GetSuppressedInfoOk() (*int64, bool) {
 
 // HasSuppressedInfo returns a boolean if a field has been set.
 func (o *CondAlarmSummary) HasSuppressedInfo() bool {
-	if o != nil && o.SuppressedInfo != nil {
+	if o != nil && !IsNil(o.SuppressedInfo) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *CondAlarmSummary) SetSuppressedInfo(v int64) {
 
 // GetSuppressedWarning returns the SuppressedWarning field value if set, zero value otherwise.
 func (o *CondAlarmSummary) GetSuppressedWarning() int64 {
-	if o == nil || o.SuppressedWarning == nil {
+	if o == nil || IsNil(o.SuppressedWarning) {
 		var ret int64
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *CondAlarmSummary) GetSuppressedWarning() int64 {
 // GetSuppressedWarningOk returns a tuple with the SuppressedWarning field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarmSummary) GetSuppressedWarningOk() (*int64, bool) {
-	if o == nil || o.SuppressedWarning == nil {
+	if o == nil || IsNil(o.SuppressedWarning) {
 		return nil, false
 	}
 	return o.SuppressedWarning, true
@@ -294,7 +298,7 @@ func (o *CondAlarmSummary) GetSuppressedWarningOk() (*int64, bool) {
 
 // HasSuppressedWarning returns a boolean if a field has been set.
 func (o *CondAlarmSummary) HasSuppressedWarning() bool {
-	if o != nil && o.SuppressedWarning != nil {
+	if o != nil && !IsNil(o.SuppressedWarning) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *CondAlarmSummary) SetSuppressedWarning(v int64) {
 
 // GetWarning returns the Warning field value if set, zero value otherwise.
 func (o *CondAlarmSummary) GetWarning() int64 {
-	if o == nil || o.Warning == nil {
+	if o == nil || IsNil(o.Warning) {
 		var ret int64
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *CondAlarmSummary) GetWarning() int64 {
 // GetWarningOk returns a tuple with the Warning field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarmSummary) GetWarningOk() (*int64, bool) {
-	if o == nil || o.Warning == nil {
+	if o == nil || IsNil(o.Warning) {
 		return nil, false
 	}
 	return o.Warning, true
@@ -326,7 +330,7 @@ func (o *CondAlarmSummary) GetWarningOk() (*int64, bool) {
 
 // HasWarning returns a boolean if a field has been set.
 func (o *CondAlarmSummary) HasWarning() bool {
-	if o != nil && o.Warning != nil {
+	if o != nil && !IsNil(o.Warning) {
 		return true
 	}
 
@@ -339,40 +343,44 @@ func (o *CondAlarmSummary) SetWarning(v int64) {
 }
 
 func (o CondAlarmSummary) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CondAlarmSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Critical != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Critical) {
 		toSerialize["Critical"] = o.Critical
 	}
-	if o.Health != nil {
+	if !IsNil(o.Health) {
 		toSerialize["Health"] = o.Health
 	}
-	if o.Info != nil {
+	if !IsNil(o.Info) {
 		toSerialize["Info"] = o.Info
 	}
-	if o.SuppressedCritical != nil {
+	if !IsNil(o.SuppressedCritical) {
 		toSerialize["SuppressedCritical"] = o.SuppressedCritical
 	}
-	if o.SuppressedInfo != nil {
+	if !IsNil(o.SuppressedInfo) {
 		toSerialize["SuppressedInfo"] = o.SuppressedInfo
 	}
-	if o.SuppressedWarning != nil {
+	if !IsNil(o.SuppressedWarning) {
 		toSerialize["SuppressedWarning"] = o.SuppressedWarning
 	}
-	if o.Warning != nil {
+	if !IsNil(o.Warning) {
 		toSerialize["Warning"] = o.Warning
 	}
 
@@ -380,10 +388,32 @@ func (o CondAlarmSummary) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CondAlarmSummary) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CondAlarmSummary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CondAlarmSummaryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -407,7 +437,7 @@ func (o *CondAlarmSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCondAlarmSummaryWithoutEmbeddedStruct := CondAlarmSummaryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCondAlarmSummaryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCondAlarmSummaryWithoutEmbeddedStruct)
 	if err == nil {
 		varCondAlarmSummary := _CondAlarmSummary{}
 		varCondAlarmSummary.ClassId = varCondAlarmSummaryWithoutEmbeddedStruct.ClassId
@@ -426,7 +456,7 @@ func (o *CondAlarmSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCondAlarmSummary := _CondAlarmSummary{}
 
-	err = json.Unmarshal(bytes, &varCondAlarmSummary)
+	err = json.Unmarshal(data, &varCondAlarmSummary)
 	if err == nil {
 		o.MoBaseComplexType = varCondAlarmSummary.MoBaseComplexType
 	} else {
@@ -435,7 +465,7 @@ func (o *CondAlarmSummary) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Critical")

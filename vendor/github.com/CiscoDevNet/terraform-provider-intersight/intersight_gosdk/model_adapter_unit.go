@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AdapterUnit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AdapterUnit{}
 
 // AdapterUnit The physical adapter present on a server.
 type AdapterUnit struct {
@@ -48,11 +52,11 @@ type AdapterUnit struct {
 	// Records the current state of communication between the Virtual Interface Card (VIC) and the Cisco Integrated Management Controller (CIMC) on the server. * `Not Applicable` - Set the state of VIC communication to Not Applicable for other Platforms. * `Yes` - VIC is reachable from CIMC. * `No` - VIC is not reachable from CIMC.
 	VicCommunicable *string `json:"VicCommunicable,omitempty"`
 	// Virtual Id of the adapter in the server.
-	Vid                 *string                           `json:"Vid,omitempty"`
-	AdapterUnitExpander *AdapterUnitExpanderRelationship  `json:"AdapterUnitExpander,omitempty"`
-	ComputeBlade        *ComputeBladeRelationship         `json:"ComputeBlade,omitempty"`
-	ComputeRackUnit     *ComputeRackUnitRelationship      `json:"ComputeRackUnit,omitempty"`
-	Controller          *ManagementControllerRelationship `json:"Controller,omitempty"`
+	Vid                 *string                                  `json:"Vid,omitempty"`
+	AdapterUnitExpander NullableAdapterUnitExpanderRelationship  `json:"AdapterUnitExpander,omitempty"`
+	ComputeBlade        NullableComputeBladeRelationship         `json:"ComputeBlade,omitempty"`
+	ComputeRackUnit     NullableComputeRackUnitRelationship      `json:"ComputeRackUnit,omitempty"`
+	Controller          NullableManagementControllerRelationship `json:"Controller,omitempty"`
 	// An array of relationships to adapterExtEthInterface resources.
 	ExtEthIfs []AdapterExtEthInterfaceRelationship `json:"ExtEthIfs,omitempty"`
 	// An array of relationships to adapterHostEthInterface resources.
@@ -60,9 +64,9 @@ type AdapterUnit struct {
 	// An array of relationships to adapterHostFcInterface resources.
 	HostFcIfs []AdapterHostFcInterfaceRelationship `json:"HostFcIfs,omitempty"`
 	// An array of relationships to adapterHostIscsiInterface resources.
-	HostIscsiIfs         []AdapterHostIscsiInterfaceRelationship `json:"HostIscsiIfs,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship        `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+	HostIscsiIfs         []AdapterHostIscsiInterfaceRelationship     `json:"HostIscsiIfs,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +145,7 @@ func (o *AdapterUnit) SetObjectType(v string) {
 
 // GetAdapterId returns the AdapterId field value if set, zero value otherwise.
 func (o *AdapterUnit) GetAdapterId() string {
-	if o == nil || o.AdapterId == nil {
+	if o == nil || IsNil(o.AdapterId) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *AdapterUnit) GetAdapterId() string {
 // GetAdapterIdOk returns a tuple with the AdapterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetAdapterIdOk() (*string, bool) {
-	if o == nil || o.AdapterId == nil {
+	if o == nil || IsNil(o.AdapterId) {
 		return nil, false
 	}
 	return o.AdapterId, true
@@ -159,7 +163,7 @@ func (o *AdapterUnit) GetAdapterIdOk() (*string, bool) {
 
 // HasAdapterId returns a boolean if a field has been set.
 func (o *AdapterUnit) HasAdapterId() bool {
-	if o != nil && o.AdapterId != nil {
+	if o != nil && !IsNil(o.AdapterId) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *AdapterUnit) SetAdapterId(v string) {
 
 // GetBaseMacAddress returns the BaseMacAddress field value if set, zero value otherwise.
 func (o *AdapterUnit) GetBaseMacAddress() string {
-	if o == nil || o.BaseMacAddress == nil {
+	if o == nil || IsNil(o.BaseMacAddress) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *AdapterUnit) GetBaseMacAddress() string {
 // GetBaseMacAddressOk returns a tuple with the BaseMacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetBaseMacAddressOk() (*string, bool) {
-	if o == nil || o.BaseMacAddress == nil {
+	if o == nil || IsNil(o.BaseMacAddress) {
 		return nil, false
 	}
 	return o.BaseMacAddress, true
@@ -191,7 +195,7 @@ func (o *AdapterUnit) GetBaseMacAddressOk() (*string, bool) {
 
 // HasBaseMacAddress returns a boolean if a field has been set.
 func (o *AdapterUnit) HasBaseMacAddress() bool {
-	if o != nil && o.BaseMacAddress != nil {
+	if o != nil && !IsNil(o.BaseMacAddress) {
 		return true
 	}
 
@@ -205,7 +209,7 @@ func (o *AdapterUnit) SetBaseMacAddress(v string) {
 
 // GetConnectionStatus returns the ConnectionStatus field value if set, zero value otherwise.
 func (o *AdapterUnit) GetConnectionStatus() string {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		var ret string
 		return ret
 	}
@@ -215,7 +219,7 @@ func (o *AdapterUnit) GetConnectionStatus() string {
 // GetConnectionStatusOk returns a tuple with the ConnectionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetConnectionStatusOk() (*string, bool) {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		return nil, false
 	}
 	return o.ConnectionStatus, true
@@ -223,7 +227,7 @@ func (o *AdapterUnit) GetConnectionStatusOk() (*string, bool) {
 
 // HasConnectionStatus returns a boolean if a field has been set.
 func (o *AdapterUnit) HasConnectionStatus() bool {
-	if o != nil && o.ConnectionStatus != nil {
+	if o != nil && !IsNil(o.ConnectionStatus) {
 		return true
 	}
 
@@ -237,7 +241,7 @@ func (o *AdapterUnit) SetConnectionStatus(v string) {
 
 // GetIntegrated returns the Integrated field value if set, zero value otherwise.
 func (o *AdapterUnit) GetIntegrated() string {
-	if o == nil || o.Integrated == nil {
+	if o == nil || IsNil(o.Integrated) {
 		var ret string
 		return ret
 	}
@@ -247,7 +251,7 @@ func (o *AdapterUnit) GetIntegrated() string {
 // GetIntegratedOk returns a tuple with the Integrated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetIntegratedOk() (*string, bool) {
-	if o == nil || o.Integrated == nil {
+	if o == nil || IsNil(o.Integrated) {
 		return nil, false
 	}
 	return o.Integrated, true
@@ -255,7 +259,7 @@ func (o *AdapterUnit) GetIntegratedOk() (*string, bool) {
 
 // HasIntegrated returns a boolean if a field has been set.
 func (o *AdapterUnit) HasIntegrated() bool {
-	if o != nil && o.Integrated != nil {
+	if o != nil && !IsNil(o.Integrated) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *AdapterUnit) GetOperReason() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterUnit) GetOperReasonOk() ([]string, bool) {
-	if o == nil || o.OperReason == nil {
+	if o == nil || IsNil(o.OperReason) {
 		return nil, false
 	}
 	return o.OperReason, true
@@ -288,7 +292,7 @@ func (o *AdapterUnit) GetOperReasonOk() ([]string, bool) {
 
 // HasOperReason returns a boolean if a field has been set.
 func (o *AdapterUnit) HasOperReason() bool {
-	if o != nil && o.OperReason != nil {
+	if o != nil && IsNil(o.OperReason) {
 		return true
 	}
 
@@ -302,7 +306,7 @@ func (o *AdapterUnit) SetOperReason(v []string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *AdapterUnit) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -312,7 +316,7 @@ func (o *AdapterUnit) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -320,7 +324,7 @@ func (o *AdapterUnit) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *AdapterUnit) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -334,7 +338,7 @@ func (o *AdapterUnit) SetOperState(v string) {
 
 // GetOperability returns the Operability field value if set, zero value otherwise.
 func (o *AdapterUnit) GetOperability() string {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		var ret string
 		return ret
 	}
@@ -344,7 +348,7 @@ func (o *AdapterUnit) GetOperability() string {
 // GetOperabilityOk returns a tuple with the Operability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetOperabilityOk() (*string, bool) {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		return nil, false
 	}
 	return o.Operability, true
@@ -352,7 +356,7 @@ func (o *AdapterUnit) GetOperabilityOk() (*string, bool) {
 
 // HasOperability returns a boolean if a field has been set.
 func (o *AdapterUnit) HasOperability() bool {
-	if o != nil && o.Operability != nil {
+	if o != nil && !IsNil(o.Operability) {
 		return true
 	}
 
@@ -366,7 +370,7 @@ func (o *AdapterUnit) SetOperability(v string) {
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
 func (o *AdapterUnit) GetPartNumber() string {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		var ret string
 		return ret
 	}
@@ -376,7 +380,7 @@ func (o *AdapterUnit) GetPartNumber() string {
 // GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetPartNumberOk() (*string, bool) {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		return nil, false
 	}
 	return o.PartNumber, true
@@ -384,7 +388,7 @@ func (o *AdapterUnit) GetPartNumberOk() (*string, bool) {
 
 // HasPartNumber returns a boolean if a field has been set.
 func (o *AdapterUnit) HasPartNumber() bool {
-	if o != nil && o.PartNumber != nil {
+	if o != nil && !IsNil(o.PartNumber) {
 		return true
 	}
 
@@ -398,7 +402,7 @@ func (o *AdapterUnit) SetPartNumber(v string) {
 
 // GetPciSlot returns the PciSlot field value if set, zero value otherwise.
 func (o *AdapterUnit) GetPciSlot() string {
-	if o == nil || o.PciSlot == nil {
+	if o == nil || IsNil(o.PciSlot) {
 		var ret string
 		return ret
 	}
@@ -408,7 +412,7 @@ func (o *AdapterUnit) GetPciSlot() string {
 // GetPciSlotOk returns a tuple with the PciSlot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetPciSlotOk() (*string, bool) {
-	if o == nil || o.PciSlot == nil {
+	if o == nil || IsNil(o.PciSlot) {
 		return nil, false
 	}
 	return o.PciSlot, true
@@ -416,7 +420,7 @@ func (o *AdapterUnit) GetPciSlotOk() (*string, bool) {
 
 // HasPciSlot returns a boolean if a field has been set.
 func (o *AdapterUnit) HasPciSlot() bool {
-	if o != nil && o.PciSlot != nil {
+	if o != nil && !IsNil(o.PciSlot) {
 		return true
 	}
 
@@ -430,7 +434,7 @@ func (o *AdapterUnit) SetPciSlot(v string) {
 
 // GetPower returns the Power field value if set, zero value otherwise.
 func (o *AdapterUnit) GetPower() string {
-	if o == nil || o.Power == nil {
+	if o == nil || IsNil(o.Power) {
 		var ret string
 		return ret
 	}
@@ -440,7 +444,7 @@ func (o *AdapterUnit) GetPower() string {
 // GetPowerOk returns a tuple with the Power field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetPowerOk() (*string, bool) {
-	if o == nil || o.Power == nil {
+	if o == nil || IsNil(o.Power) {
 		return nil, false
 	}
 	return o.Power, true
@@ -448,7 +452,7 @@ func (o *AdapterUnit) GetPowerOk() (*string, bool) {
 
 // HasPower returns a boolean if a field has been set.
 func (o *AdapterUnit) HasPower() bool {
-	if o != nil && o.Power != nil {
+	if o != nil && !IsNil(o.Power) {
 		return true
 	}
 
@@ -462,7 +466,7 @@ func (o *AdapterUnit) SetPower(v string) {
 
 // GetThermal returns the Thermal field value if set, zero value otherwise.
 func (o *AdapterUnit) GetThermal() string {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		var ret string
 		return ret
 	}
@@ -472,7 +476,7 @@ func (o *AdapterUnit) GetThermal() string {
 // GetThermalOk returns a tuple with the Thermal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetThermalOk() (*string, bool) {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		return nil, false
 	}
 	return o.Thermal, true
@@ -480,7 +484,7 @@ func (o *AdapterUnit) GetThermalOk() (*string, bool) {
 
 // HasThermal returns a boolean if a field has been set.
 func (o *AdapterUnit) HasThermal() bool {
-	if o != nil && o.Thermal != nil {
+	if o != nil && !IsNil(o.Thermal) {
 		return true
 	}
 
@@ -494,7 +498,7 @@ func (o *AdapterUnit) SetThermal(v string) {
 
 // GetVicCommunicable returns the VicCommunicable field value if set, zero value otherwise.
 func (o *AdapterUnit) GetVicCommunicable() string {
-	if o == nil || o.VicCommunicable == nil {
+	if o == nil || IsNil(o.VicCommunicable) {
 		var ret string
 		return ret
 	}
@@ -504,7 +508,7 @@ func (o *AdapterUnit) GetVicCommunicable() string {
 // GetVicCommunicableOk returns a tuple with the VicCommunicable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetVicCommunicableOk() (*string, bool) {
-	if o == nil || o.VicCommunicable == nil {
+	if o == nil || IsNil(o.VicCommunicable) {
 		return nil, false
 	}
 	return o.VicCommunicable, true
@@ -512,7 +516,7 @@ func (o *AdapterUnit) GetVicCommunicableOk() (*string, bool) {
 
 // HasVicCommunicable returns a boolean if a field has been set.
 func (o *AdapterUnit) HasVicCommunicable() bool {
-	if o != nil && o.VicCommunicable != nil {
+	if o != nil && !IsNil(o.VicCommunicable) {
 		return true
 	}
 
@@ -526,7 +530,7 @@ func (o *AdapterUnit) SetVicCommunicable(v string) {
 
 // GetVid returns the Vid field value if set, zero value otherwise.
 func (o *AdapterUnit) GetVid() string {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		var ret string
 		return ret
 	}
@@ -536,7 +540,7 @@ func (o *AdapterUnit) GetVid() string {
 // GetVidOk returns a tuple with the Vid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdapterUnit) GetVidOk() (*string, bool) {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		return nil, false
 	}
 	return o.Vid, true
@@ -544,7 +548,7 @@ func (o *AdapterUnit) GetVidOk() (*string, bool) {
 
 // HasVid returns a boolean if a field has been set.
 func (o *AdapterUnit) HasVid() bool {
-	if o != nil && o.Vid != nil {
+	if o != nil && !IsNil(o.Vid) {
 		return true
 	}
 
@@ -556,132 +560,176 @@ func (o *AdapterUnit) SetVid(v string) {
 	o.Vid = &v
 }
 
-// GetAdapterUnitExpander returns the AdapterUnitExpander field value if set, zero value otherwise.
+// GetAdapterUnitExpander returns the AdapterUnitExpander field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterUnit) GetAdapterUnitExpander() AdapterUnitExpanderRelationship {
-	if o == nil || o.AdapterUnitExpander == nil {
+	if o == nil || IsNil(o.AdapterUnitExpander.Get()) {
 		var ret AdapterUnitExpanderRelationship
 		return ret
 	}
-	return *o.AdapterUnitExpander
+	return *o.AdapterUnitExpander.Get()
 }
 
 // GetAdapterUnitExpanderOk returns a tuple with the AdapterUnitExpander field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterUnit) GetAdapterUnitExpanderOk() (*AdapterUnitExpanderRelationship, bool) {
-	if o == nil || o.AdapterUnitExpander == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdapterUnitExpander, true
+	return o.AdapterUnitExpander.Get(), o.AdapterUnitExpander.IsSet()
 }
 
 // HasAdapterUnitExpander returns a boolean if a field has been set.
 func (o *AdapterUnit) HasAdapterUnitExpander() bool {
-	if o != nil && o.AdapterUnitExpander != nil {
+	if o != nil && o.AdapterUnitExpander.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAdapterUnitExpander gets a reference to the given AdapterUnitExpanderRelationship and assigns it to the AdapterUnitExpander field.
+// SetAdapterUnitExpander gets a reference to the given NullableAdapterUnitExpanderRelationship and assigns it to the AdapterUnitExpander field.
 func (o *AdapterUnit) SetAdapterUnitExpander(v AdapterUnitExpanderRelationship) {
-	o.AdapterUnitExpander = &v
+	o.AdapterUnitExpander.Set(&v)
 }
 
-// GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise.
+// SetAdapterUnitExpanderNil sets the value for AdapterUnitExpander to be an explicit nil
+func (o *AdapterUnit) SetAdapterUnitExpanderNil() {
+	o.AdapterUnitExpander.Set(nil)
+}
+
+// UnsetAdapterUnitExpander ensures that no value is present for AdapterUnitExpander, not even an explicit nil
+func (o *AdapterUnit) UnsetAdapterUnitExpander() {
+	o.AdapterUnitExpander.Unset()
+}
+
+// GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterUnit) GetComputeBlade() ComputeBladeRelationship {
-	if o == nil || o.ComputeBlade == nil {
+	if o == nil || IsNil(o.ComputeBlade.Get()) {
 		var ret ComputeBladeRelationship
 		return ret
 	}
-	return *o.ComputeBlade
+	return *o.ComputeBlade.Get()
 }
 
 // GetComputeBladeOk returns a tuple with the ComputeBlade field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterUnit) GetComputeBladeOk() (*ComputeBladeRelationship, bool) {
-	if o == nil || o.ComputeBlade == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBlade, true
+	return o.ComputeBlade.Get(), o.ComputeBlade.IsSet()
 }
 
 // HasComputeBlade returns a boolean if a field has been set.
 func (o *AdapterUnit) HasComputeBlade() bool {
-	if o != nil && o.ComputeBlade != nil {
+	if o != nil && o.ComputeBlade.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBlade gets a reference to the given ComputeBladeRelationship and assigns it to the ComputeBlade field.
+// SetComputeBlade gets a reference to the given NullableComputeBladeRelationship and assigns it to the ComputeBlade field.
 func (o *AdapterUnit) SetComputeBlade(v ComputeBladeRelationship) {
-	o.ComputeBlade = &v
+	o.ComputeBlade.Set(&v)
 }
 
-// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise.
+// SetComputeBladeNil sets the value for ComputeBlade to be an explicit nil
+func (o *AdapterUnit) SetComputeBladeNil() {
+	o.ComputeBlade.Set(nil)
+}
+
+// UnsetComputeBlade ensures that no value is present for ComputeBlade, not even an explicit nil
+func (o *AdapterUnit) UnsetComputeBlade() {
+	o.ComputeBlade.Unset()
+}
+
+// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterUnit) GetComputeRackUnit() ComputeRackUnitRelationship {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil || IsNil(o.ComputeRackUnit.Get()) {
 		var ret ComputeRackUnitRelationship
 		return ret
 	}
-	return *o.ComputeRackUnit
+	return *o.ComputeRackUnit.Get()
 }
 
 // GetComputeRackUnitOk returns a tuple with the ComputeRackUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterUnit) GetComputeRackUnitOk() (*ComputeRackUnitRelationship, bool) {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeRackUnit, true
+	return o.ComputeRackUnit.Get(), o.ComputeRackUnit.IsSet()
 }
 
 // HasComputeRackUnit returns a boolean if a field has been set.
 func (o *AdapterUnit) HasComputeRackUnit() bool {
-	if o != nil && o.ComputeRackUnit != nil {
+	if o != nil && o.ComputeRackUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeRackUnit gets a reference to the given ComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
+// SetComputeRackUnit gets a reference to the given NullableComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
 func (o *AdapterUnit) SetComputeRackUnit(v ComputeRackUnitRelationship) {
-	o.ComputeRackUnit = &v
+	o.ComputeRackUnit.Set(&v)
 }
 
-// GetController returns the Controller field value if set, zero value otherwise.
+// SetComputeRackUnitNil sets the value for ComputeRackUnit to be an explicit nil
+func (o *AdapterUnit) SetComputeRackUnitNil() {
+	o.ComputeRackUnit.Set(nil)
+}
+
+// UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
+func (o *AdapterUnit) UnsetComputeRackUnit() {
+	o.ComputeRackUnit.Unset()
+}
+
+// GetController returns the Controller field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterUnit) GetController() ManagementControllerRelationship {
-	if o == nil || o.Controller == nil {
+	if o == nil || IsNil(o.Controller.Get()) {
 		var ret ManagementControllerRelationship
 		return ret
 	}
-	return *o.Controller
+	return *o.Controller.Get()
 }
 
 // GetControllerOk returns a tuple with the Controller field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterUnit) GetControllerOk() (*ManagementControllerRelationship, bool) {
-	if o == nil || o.Controller == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Controller, true
+	return o.Controller.Get(), o.Controller.IsSet()
 }
 
 // HasController returns a boolean if a field has been set.
 func (o *AdapterUnit) HasController() bool {
-	if o != nil && o.Controller != nil {
+	if o != nil && o.Controller.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetController gets a reference to the given ManagementControllerRelationship and assigns it to the Controller field.
+// SetController gets a reference to the given NullableManagementControllerRelationship and assigns it to the Controller field.
 func (o *AdapterUnit) SetController(v ManagementControllerRelationship) {
-	o.Controller = &v
+	o.Controller.Set(&v)
+}
+
+// SetControllerNil sets the value for Controller to be an explicit nil
+func (o *AdapterUnit) SetControllerNil() {
+	o.Controller.Set(nil)
+}
+
+// UnsetController ensures that no value is present for Controller, not even an explicit nil
+func (o *AdapterUnit) UnsetController() {
+	o.Controller.Unset()
 }
 
 // GetExtEthIfs returns the ExtEthIfs field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -697,7 +745,7 @@ func (o *AdapterUnit) GetExtEthIfs() []AdapterExtEthInterfaceRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterUnit) GetExtEthIfsOk() ([]AdapterExtEthInterfaceRelationship, bool) {
-	if o == nil || o.ExtEthIfs == nil {
+	if o == nil || IsNil(o.ExtEthIfs) {
 		return nil, false
 	}
 	return o.ExtEthIfs, true
@@ -705,7 +753,7 @@ func (o *AdapterUnit) GetExtEthIfsOk() ([]AdapterExtEthInterfaceRelationship, bo
 
 // HasExtEthIfs returns a boolean if a field has been set.
 func (o *AdapterUnit) HasExtEthIfs() bool {
-	if o != nil && o.ExtEthIfs != nil {
+	if o != nil && IsNil(o.ExtEthIfs) {
 		return true
 	}
 
@@ -730,7 +778,7 @@ func (o *AdapterUnit) GetHostEthIfs() []AdapterHostEthInterfaceRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterUnit) GetHostEthIfsOk() ([]AdapterHostEthInterfaceRelationship, bool) {
-	if o == nil || o.HostEthIfs == nil {
+	if o == nil || IsNil(o.HostEthIfs) {
 		return nil, false
 	}
 	return o.HostEthIfs, true
@@ -738,7 +786,7 @@ func (o *AdapterUnit) GetHostEthIfsOk() ([]AdapterHostEthInterfaceRelationship, 
 
 // HasHostEthIfs returns a boolean if a field has been set.
 func (o *AdapterUnit) HasHostEthIfs() bool {
-	if o != nil && o.HostEthIfs != nil {
+	if o != nil && IsNil(o.HostEthIfs) {
 		return true
 	}
 
@@ -763,7 +811,7 @@ func (o *AdapterUnit) GetHostFcIfs() []AdapterHostFcInterfaceRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterUnit) GetHostFcIfsOk() ([]AdapterHostFcInterfaceRelationship, bool) {
-	if o == nil || o.HostFcIfs == nil {
+	if o == nil || IsNil(o.HostFcIfs) {
 		return nil, false
 	}
 	return o.HostFcIfs, true
@@ -771,7 +819,7 @@ func (o *AdapterUnit) GetHostFcIfsOk() ([]AdapterHostFcInterfaceRelationship, bo
 
 // HasHostFcIfs returns a boolean if a field has been set.
 func (o *AdapterUnit) HasHostFcIfs() bool {
-	if o != nil && o.HostFcIfs != nil {
+	if o != nil && IsNil(o.HostFcIfs) {
 		return true
 	}
 
@@ -796,7 +844,7 @@ func (o *AdapterUnit) GetHostIscsiIfs() []AdapterHostIscsiInterfaceRelationship 
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterUnit) GetHostIscsiIfsOk() ([]AdapterHostIscsiInterfaceRelationship, bool) {
-	if o == nil || o.HostIscsiIfs == nil {
+	if o == nil || IsNil(o.HostIscsiIfs) {
 		return nil, false
 	}
 	return o.HostIscsiIfs, true
@@ -804,7 +852,7 @@ func (o *AdapterUnit) GetHostIscsiIfsOk() ([]AdapterHostIscsiInterfaceRelationsh
 
 // HasHostIscsiIfs returns a boolean if a field has been set.
 func (o *AdapterUnit) HasHostIscsiIfs() bool {
-	if o != nil && o.HostIscsiIfs != nil {
+	if o != nil && IsNil(o.HostIscsiIfs) {
 		return true
 	}
 
@@ -816,136 +864,162 @@ func (o *AdapterUnit) SetHostIscsiIfs(v []AdapterHostIscsiInterfaceRelationship)
 	o.HostIscsiIfs = v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterUnit) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterUnit) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *AdapterUnit) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *AdapterUnit) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *AdapterUnit) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *AdapterUnit) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AdapterUnit) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdapterUnit) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *AdapterUnit) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *AdapterUnit) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *AdapterUnit) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *AdapterUnit) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o AdapterUnit) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AdapterUnit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdapterId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdapterId) {
 		toSerialize["AdapterId"] = o.AdapterId
 	}
-	if o.BaseMacAddress != nil {
+	if !IsNil(o.BaseMacAddress) {
 		toSerialize["BaseMacAddress"] = o.BaseMacAddress
 	}
-	if o.ConnectionStatus != nil {
+	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
-	if o.Integrated != nil {
+	if !IsNil(o.Integrated) {
 		toSerialize["Integrated"] = o.Integrated
 	}
 	if o.OperReason != nil {
 		toSerialize["OperReason"] = o.OperReason
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.Operability != nil {
+	if !IsNil(o.Operability) {
 		toSerialize["Operability"] = o.Operability
 	}
-	if o.PartNumber != nil {
+	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if o.PciSlot != nil {
+	if !IsNil(o.PciSlot) {
 		toSerialize["PciSlot"] = o.PciSlot
 	}
-	if o.Power != nil {
+	if !IsNil(o.Power) {
 		toSerialize["Power"] = o.Power
 	}
-	if o.Thermal != nil {
+	if !IsNil(o.Thermal) {
 		toSerialize["Thermal"] = o.Thermal
 	}
-	if o.VicCommunicable != nil {
+	if !IsNil(o.VicCommunicable) {
 		toSerialize["VicCommunicable"] = o.VicCommunicable
 	}
-	if o.Vid != nil {
+	if !IsNil(o.Vid) {
 		toSerialize["Vid"] = o.Vid
 	}
-	if o.AdapterUnitExpander != nil {
-		toSerialize["AdapterUnitExpander"] = o.AdapterUnitExpander
+	if o.AdapterUnitExpander.IsSet() {
+		toSerialize["AdapterUnitExpander"] = o.AdapterUnitExpander.Get()
 	}
-	if o.ComputeBlade != nil {
-		toSerialize["ComputeBlade"] = o.ComputeBlade
+	if o.ComputeBlade.IsSet() {
+		toSerialize["ComputeBlade"] = o.ComputeBlade.Get()
 	}
-	if o.ComputeRackUnit != nil {
-		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit
+	if o.ComputeRackUnit.IsSet() {
+		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit.Get()
 	}
-	if o.Controller != nil {
-		toSerialize["Controller"] = o.Controller
+	if o.Controller.IsSet() {
+		toSerialize["Controller"] = o.Controller.Get()
 	}
 	if o.ExtEthIfs != nil {
 		toSerialize["ExtEthIfs"] = o.ExtEthIfs
@@ -959,21 +1033,43 @@ func (o AdapterUnit) MarshalJSON() ([]byte, error) {
 	if o.HostIscsiIfs != nil {
 		toSerialize["HostIscsiIfs"] = o.HostIscsiIfs
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AdapterUnit) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AdapterUnit) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AdapterUnitWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1003,11 +1099,11 @@ func (o *AdapterUnit) UnmarshalJSON(bytes []byte) (err error) {
 		// Records the current state of communication between the Virtual Interface Card (VIC) and the Cisco Integrated Management Controller (CIMC) on the server. * `Not Applicable` - Set the state of VIC communication to Not Applicable for other Platforms. * `Yes` - VIC is reachable from CIMC. * `No` - VIC is not reachable from CIMC.
 		VicCommunicable *string `json:"VicCommunicable,omitempty"`
 		// Virtual Id of the adapter in the server.
-		Vid                 *string                           `json:"Vid,omitempty"`
-		AdapterUnitExpander *AdapterUnitExpanderRelationship  `json:"AdapterUnitExpander,omitempty"`
-		ComputeBlade        *ComputeBladeRelationship         `json:"ComputeBlade,omitempty"`
-		ComputeRackUnit     *ComputeRackUnitRelationship      `json:"ComputeRackUnit,omitempty"`
-		Controller          *ManagementControllerRelationship `json:"Controller,omitempty"`
+		Vid                 *string                                  `json:"Vid,omitempty"`
+		AdapterUnitExpander NullableAdapterUnitExpanderRelationship  `json:"AdapterUnitExpander,omitempty"`
+		ComputeBlade        NullableComputeBladeRelationship         `json:"ComputeBlade,omitempty"`
+		ComputeRackUnit     NullableComputeRackUnitRelationship      `json:"ComputeRackUnit,omitempty"`
+		Controller          NullableManagementControllerRelationship `json:"Controller,omitempty"`
 		// An array of relationships to adapterExtEthInterface resources.
 		ExtEthIfs []AdapterExtEthInterfaceRelationship `json:"ExtEthIfs,omitempty"`
 		// An array of relationships to adapterHostEthInterface resources.
@@ -1015,14 +1111,14 @@ func (o *AdapterUnit) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to adapterHostFcInterface resources.
 		HostFcIfs []AdapterHostFcInterfaceRelationship `json:"HostFcIfs,omitempty"`
 		// An array of relationships to adapterHostIscsiInterface resources.
-		HostIscsiIfs        []AdapterHostIscsiInterfaceRelationship `json:"HostIscsiIfs,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship        `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+		HostIscsiIfs        []AdapterHostIscsiInterfaceRelationship     `json:"HostIscsiIfs,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varAdapterUnitWithoutEmbeddedStruct := AdapterUnitWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAdapterUnitWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAdapterUnitWithoutEmbeddedStruct)
 	if err == nil {
 		varAdapterUnit := _AdapterUnit{}
 		varAdapterUnit.ClassId = varAdapterUnitWithoutEmbeddedStruct.ClassId
@@ -1057,7 +1153,7 @@ func (o *AdapterUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAdapterUnit := _AdapterUnit{}
 
-	err = json.Unmarshal(bytes, &varAdapterUnit)
+	err = json.Unmarshal(data, &varAdapterUnit)
 	if err == nil {
 		o.EquipmentBase = varAdapterUnit.EquipmentBase
 	} else {
@@ -1066,7 +1162,7 @@ func (o *AdapterUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdapterId")

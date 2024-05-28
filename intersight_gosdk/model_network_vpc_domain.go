@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NetworkVpcDomain type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NetworkVpcDomain{}
 
 // NetworkVpcDomain Concrete class for VPC domain configured on a network device. VPC (Virtual Port Channel) domain is used to connect two different switches logically to a single switch.
 type NetworkVpcDomain struct {
@@ -39,9 +43,9 @@ type NetworkVpcDomain struct {
 	// Identity of the virtual port channel domain.
 	VpcDomainId *int64 `json:"VpcDomainId,omitempty"`
 	// Number of VPCs configured on the virtual port channel domain.
-	VpcsConfiguredCount  *int64                               `json:"VpcsConfiguredCount,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	VpcsConfiguredCount  *int64                                      `json:"VpcsConfiguredCount,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -120,7 +124,7 @@ func (o *NetworkVpcDomain) SetObjectType(v string) {
 
 // GetAutoRecoveryStatus returns the AutoRecoveryStatus field value if set, zero value otherwise.
 func (o *NetworkVpcDomain) GetAutoRecoveryStatus() string {
-	if o == nil || o.AutoRecoveryStatus == nil {
+	if o == nil || IsNil(o.AutoRecoveryStatus) {
 		var ret string
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *NetworkVpcDomain) GetAutoRecoveryStatus() string {
 // GetAutoRecoveryStatusOk returns a tuple with the AutoRecoveryStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcDomain) GetAutoRecoveryStatusOk() (*string, bool) {
-	if o == nil || o.AutoRecoveryStatus == nil {
+	if o == nil || IsNil(o.AutoRecoveryStatus) {
 		return nil, false
 	}
 	return o.AutoRecoveryStatus, true
@@ -138,7 +142,7 @@ func (o *NetworkVpcDomain) GetAutoRecoveryStatusOk() (*string, bool) {
 
 // HasAutoRecoveryStatus returns a boolean if a field has been set.
 func (o *NetworkVpcDomain) HasAutoRecoveryStatus() bool {
-	if o != nil && o.AutoRecoveryStatus != nil {
+	if o != nil && !IsNil(o.AutoRecoveryStatus) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *NetworkVpcDomain) SetAutoRecoveryStatus(v string) {
 
 // GetConsistencyStatus returns the ConsistencyStatus field value if set, zero value otherwise.
 func (o *NetworkVpcDomain) GetConsistencyStatus() string {
-	if o == nil || o.ConsistencyStatus == nil {
+	if o == nil || IsNil(o.ConsistencyStatus) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *NetworkVpcDomain) GetConsistencyStatus() string {
 // GetConsistencyStatusOk returns a tuple with the ConsistencyStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcDomain) GetConsistencyStatusOk() (*string, bool) {
-	if o == nil || o.ConsistencyStatus == nil {
+	if o == nil || IsNil(o.ConsistencyStatus) {
 		return nil, false
 	}
 	return o.ConsistencyStatus, true
@@ -170,7 +174,7 @@ func (o *NetworkVpcDomain) GetConsistencyStatusOk() (*string, bool) {
 
 // HasConsistencyStatus returns a boolean if a field has been set.
 func (o *NetworkVpcDomain) HasConsistencyStatus() bool {
-	if o != nil && o.ConsistencyStatus != nil {
+	if o != nil && !IsNil(o.ConsistencyStatus) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *NetworkVpcDomain) SetConsistencyStatus(v string) {
 
 // GetDualActiveExcludedVlans returns the DualActiveExcludedVlans field value if set, zero value otherwise.
 func (o *NetworkVpcDomain) GetDualActiveExcludedVlans() int64 {
-	if o == nil || o.DualActiveExcludedVlans == nil {
+	if o == nil || IsNil(o.DualActiveExcludedVlans) {
 		var ret int64
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *NetworkVpcDomain) GetDualActiveExcludedVlans() int64 {
 // GetDualActiveExcludedVlansOk returns a tuple with the DualActiveExcludedVlans field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcDomain) GetDualActiveExcludedVlansOk() (*int64, bool) {
-	if o == nil || o.DualActiveExcludedVlans == nil {
+	if o == nil || IsNil(o.DualActiveExcludedVlans) {
 		return nil, false
 	}
 	return o.DualActiveExcludedVlans, true
@@ -202,7 +206,7 @@ func (o *NetworkVpcDomain) GetDualActiveExcludedVlansOk() (*int64, bool) {
 
 // HasDualActiveExcludedVlans returns a boolean if a field has been set.
 func (o *NetworkVpcDomain) HasDualActiveExcludedVlans() bool {
-	if o != nil && o.DualActiveExcludedVlans != nil {
+	if o != nil && !IsNil(o.DualActiveExcludedVlans) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *NetworkVpcDomain) SetDualActiveExcludedVlans(v int64) {
 
 // GetKeepAliveStatus returns the KeepAliveStatus field value if set, zero value otherwise.
 func (o *NetworkVpcDomain) GetKeepAliveStatus() string {
-	if o == nil || o.KeepAliveStatus == nil {
+	if o == nil || IsNil(o.KeepAliveStatus) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *NetworkVpcDomain) GetKeepAliveStatus() string {
 // GetKeepAliveStatusOk returns a tuple with the KeepAliveStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcDomain) GetKeepAliveStatusOk() (*string, bool) {
-	if o == nil || o.KeepAliveStatus == nil {
+	if o == nil || IsNil(o.KeepAliveStatus) {
 		return nil, false
 	}
 	return o.KeepAliveStatus, true
@@ -234,7 +238,7 @@ func (o *NetworkVpcDomain) GetKeepAliveStatusOk() (*string, bool) {
 
 // HasKeepAliveStatus returns a boolean if a field has been set.
 func (o *NetworkVpcDomain) HasKeepAliveStatus() bool {
-	if o != nil && o.KeepAliveStatus != nil {
+	if o != nil && !IsNil(o.KeepAliveStatus) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *NetworkVpcDomain) SetKeepAliveStatus(v string) {
 
 // GetPeerStatus returns the PeerStatus field value if set, zero value otherwise.
 func (o *NetworkVpcDomain) GetPeerStatus() string {
-	if o == nil || o.PeerStatus == nil {
+	if o == nil || IsNil(o.PeerStatus) {
 		var ret string
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *NetworkVpcDomain) GetPeerStatus() string {
 // GetPeerStatusOk returns a tuple with the PeerStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcDomain) GetPeerStatusOk() (*string, bool) {
-	if o == nil || o.PeerStatus == nil {
+	if o == nil || IsNil(o.PeerStatus) {
 		return nil, false
 	}
 	return o.PeerStatus, true
@@ -266,7 +270,7 @@ func (o *NetworkVpcDomain) GetPeerStatusOk() (*string, bool) {
 
 // HasPeerStatus returns a boolean if a field has been set.
 func (o *NetworkVpcDomain) HasPeerStatus() bool {
-	if o != nil && o.PeerStatus != nil {
+	if o != nil && !IsNil(o.PeerStatus) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *NetworkVpcDomain) SetPeerStatus(v string) {
 
 // GetRole returns the Role field value if set, zero value otherwise.
 func (o *NetworkVpcDomain) GetRole() string {
-	if o == nil || o.Role == nil {
+	if o == nil || IsNil(o.Role) {
 		var ret string
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *NetworkVpcDomain) GetRole() string {
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcDomain) GetRoleOk() (*string, bool) {
-	if o == nil || o.Role == nil {
+	if o == nil || IsNil(o.Role) {
 		return nil, false
 	}
 	return o.Role, true
@@ -298,7 +302,7 @@ func (o *NetworkVpcDomain) GetRoleOk() (*string, bool) {
 
 // HasRole returns a boolean if a field has been set.
 func (o *NetworkVpcDomain) HasRole() bool {
-	if o != nil && o.Role != nil {
+	if o != nil && !IsNil(o.Role) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *NetworkVpcDomain) SetRole(v string) {
 
 // GetVpcDomainId returns the VpcDomainId field value if set, zero value otherwise.
 func (o *NetworkVpcDomain) GetVpcDomainId() int64 {
-	if o == nil || o.VpcDomainId == nil {
+	if o == nil || IsNil(o.VpcDomainId) {
 		var ret int64
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *NetworkVpcDomain) GetVpcDomainId() int64 {
 // GetVpcDomainIdOk returns a tuple with the VpcDomainId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcDomain) GetVpcDomainIdOk() (*int64, bool) {
-	if o == nil || o.VpcDomainId == nil {
+	if o == nil || IsNil(o.VpcDomainId) {
 		return nil, false
 	}
 	return o.VpcDomainId, true
@@ -330,7 +334,7 @@ func (o *NetworkVpcDomain) GetVpcDomainIdOk() (*int64, bool) {
 
 // HasVpcDomainId returns a boolean if a field has been set.
 func (o *NetworkVpcDomain) HasVpcDomainId() bool {
-	if o != nil && o.VpcDomainId != nil {
+	if o != nil && !IsNil(o.VpcDomainId) {
 		return true
 	}
 
@@ -344,7 +348,7 @@ func (o *NetworkVpcDomain) SetVpcDomainId(v int64) {
 
 // GetVpcsConfiguredCount returns the VpcsConfiguredCount field value if set, zero value otherwise.
 func (o *NetworkVpcDomain) GetVpcsConfiguredCount() int64 {
-	if o == nil || o.VpcsConfiguredCount == nil {
+	if o == nil || IsNil(o.VpcsConfiguredCount) {
 		var ret int64
 		return ret
 	}
@@ -354,7 +358,7 @@ func (o *NetworkVpcDomain) GetVpcsConfiguredCount() int64 {
 // GetVpcsConfiguredCountOk returns a tuple with the VpcsConfiguredCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVpcDomain) GetVpcsConfiguredCountOk() (*int64, bool) {
-	if o == nil || o.VpcsConfiguredCount == nil {
+	if o == nil || IsNil(o.VpcsConfiguredCount) {
 		return nil, false
 	}
 	return o.VpcsConfiguredCount, true
@@ -362,7 +366,7 @@ func (o *NetworkVpcDomain) GetVpcsConfiguredCountOk() (*int64, bool) {
 
 // HasVpcsConfiguredCount returns a boolean if a field has been set.
 func (o *NetworkVpcDomain) HasVpcsConfiguredCount() bool {
-	if o != nil && o.VpcsConfiguredCount != nil {
+	if o != nil && !IsNil(o.VpcsConfiguredCount) {
 		return true
 	}
 
@@ -374,125 +378,173 @@ func (o *NetworkVpcDomain) SetVpcsConfiguredCount(v int64) {
 	o.VpcsConfiguredCount = &v
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkVpcDomain) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkVpcDomain) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *NetworkVpcDomain) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *NetworkVpcDomain) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *NetworkVpcDomain) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *NetworkVpcDomain) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkVpcDomain) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkVpcDomain) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NetworkVpcDomain) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NetworkVpcDomain) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NetworkVpcDomain) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NetworkVpcDomain) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NetworkVpcDomain) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NetworkVpcDomain) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AutoRecoveryStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AutoRecoveryStatus) {
 		toSerialize["AutoRecoveryStatus"] = o.AutoRecoveryStatus
 	}
-	if o.ConsistencyStatus != nil {
+	if !IsNil(o.ConsistencyStatus) {
 		toSerialize["ConsistencyStatus"] = o.ConsistencyStatus
 	}
-	if o.DualActiveExcludedVlans != nil {
+	if !IsNil(o.DualActiveExcludedVlans) {
 		toSerialize["DualActiveExcludedVlans"] = o.DualActiveExcludedVlans
 	}
-	if o.KeepAliveStatus != nil {
+	if !IsNil(o.KeepAliveStatus) {
 		toSerialize["KeepAliveStatus"] = o.KeepAliveStatus
 	}
-	if o.PeerStatus != nil {
+	if !IsNil(o.PeerStatus) {
 		toSerialize["PeerStatus"] = o.PeerStatus
 	}
-	if o.Role != nil {
+	if !IsNil(o.Role) {
 		toSerialize["Role"] = o.Role
 	}
-	if o.VpcDomainId != nil {
+	if !IsNil(o.VpcDomainId) {
 		toSerialize["VpcDomainId"] = o.VpcDomainId
 	}
-	if o.VpcsConfiguredCount != nil {
+	if !IsNil(o.VpcsConfiguredCount) {
 		toSerialize["VpcsConfiguredCount"] = o.VpcsConfiguredCount
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NetworkVpcDomain) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NetworkVpcDomain) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NetworkVpcDomainWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -513,14 +565,14 @@ func (o *NetworkVpcDomain) UnmarshalJSON(bytes []byte) (err error) {
 		// Identity of the virtual port channel domain.
 		VpcDomainId *int64 `json:"VpcDomainId,omitempty"`
 		// Number of VPCs configured on the virtual port channel domain.
-		VpcsConfiguredCount *int64                               `json:"VpcsConfiguredCount,omitempty"`
-		NetworkElement      *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		VpcsConfiguredCount *int64                                      `json:"VpcsConfiguredCount,omitempty"`
+		NetworkElement      NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNetworkVpcDomainWithoutEmbeddedStruct := NetworkVpcDomainWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNetworkVpcDomainWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNetworkVpcDomainWithoutEmbeddedStruct)
 	if err == nil {
 		varNetworkVpcDomain := _NetworkVpcDomain{}
 		varNetworkVpcDomain.ClassId = varNetworkVpcDomainWithoutEmbeddedStruct.ClassId
@@ -542,7 +594,7 @@ func (o *NetworkVpcDomain) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNetworkVpcDomain := _NetworkVpcDomain{}
 
-	err = json.Unmarshal(bytes, &varNetworkVpcDomain)
+	err = json.Unmarshal(data, &varNetworkVpcDomain)
 	if err == nil {
 		o.InventoryBase = varNetworkVpcDomain.InventoryBase
 	} else {
@@ -551,7 +603,7 @@ func (o *NetworkVpcDomain) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AutoRecoveryStatus")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudAwsVpc type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudAwsVpc{}
 
 // CloudAwsVpc VPC (Virtual Private Cloud) object in AWS inventory.It is a service that lets you launch AWS resources in a logically isolated virtual network.
 type CloudAwsVpc struct {
@@ -35,9 +39,9 @@ type CloudAwsVpc struct {
 	// The state of the VPC (pending | available).
 	State *string `json:"State,omitempty"`
 	// The allowed tenancy of instances launched into the VPC.
-	Tenancy              *string                          `json:"Tenancy,omitempty"`
-	VpcTags              []CloudCloudTag                  `json:"VpcTags,omitempty"`
-	AwsBillingUnit       *CloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
+	Tenancy              *string                                 `json:"Tenancy,omitempty"`
+	VpcTags              []CloudCloudTag                         `json:"VpcTags,omitempty"`
+	AwsBillingUnit       NullableCloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -116,7 +120,7 @@ func (o *CloudAwsVpc) SetObjectType(v string) {
 
 // GetDnsHostName returns the DnsHostName field value if set, zero value otherwise.
 func (o *CloudAwsVpc) GetDnsHostName() bool {
-	if o == nil || o.DnsHostName == nil {
+	if o == nil || IsNil(o.DnsHostName) {
 		var ret bool
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *CloudAwsVpc) GetDnsHostName() bool {
 // GetDnsHostNameOk returns a tuple with the DnsHostName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsVpc) GetDnsHostNameOk() (*bool, bool) {
-	if o == nil || o.DnsHostName == nil {
+	if o == nil || IsNil(o.DnsHostName) {
 		return nil, false
 	}
 	return o.DnsHostName, true
@@ -134,7 +138,7 @@ func (o *CloudAwsVpc) GetDnsHostNameOk() (*bool, bool) {
 
 // HasDnsHostName returns a boolean if a field has been set.
 func (o *CloudAwsVpc) HasDnsHostName() bool {
-	if o != nil && o.DnsHostName != nil {
+	if o != nil && !IsNil(o.DnsHostName) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *CloudAwsVpc) SetDnsHostName(v bool) {
 
 // GetDnsResolution returns the DnsResolution field value if set, zero value otherwise.
 func (o *CloudAwsVpc) GetDnsResolution() bool {
-	if o == nil || o.DnsResolution == nil {
+	if o == nil || IsNil(o.DnsResolution) {
 		var ret bool
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *CloudAwsVpc) GetDnsResolution() bool {
 // GetDnsResolutionOk returns a tuple with the DnsResolution field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsVpc) GetDnsResolutionOk() (*bool, bool) {
-	if o == nil || o.DnsResolution == nil {
+	if o == nil || IsNil(o.DnsResolution) {
 		return nil, false
 	}
 	return o.DnsResolution, true
@@ -166,7 +170,7 @@ func (o *CloudAwsVpc) GetDnsResolutionOk() (*bool, bool) {
 
 // HasDnsResolution returns a boolean if a field has been set.
 func (o *CloudAwsVpc) HasDnsResolution() bool {
-	if o != nil && o.DnsResolution != nil {
+	if o != nil && !IsNil(o.DnsResolution) {
 		return true
 	}
 
@@ -191,7 +195,7 @@ func (o *CloudAwsVpc) GetIpv4Cidr() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsVpc) GetIpv4CidrOk() ([]string, bool) {
-	if o == nil || o.Ipv4Cidr == nil {
+	if o == nil || IsNil(o.Ipv4Cidr) {
 		return nil, false
 	}
 	return o.Ipv4Cidr, true
@@ -199,7 +203,7 @@ func (o *CloudAwsVpc) GetIpv4CidrOk() ([]string, bool) {
 
 // HasIpv4Cidr returns a boolean if a field has been set.
 func (o *CloudAwsVpc) HasIpv4Cidr() bool {
-	if o != nil && o.Ipv4Cidr != nil {
+	if o != nil && IsNil(o.Ipv4Cidr) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *CloudAwsVpc) GetIpv6Cidr() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsVpc) GetIpv6CidrOk() ([]string, bool) {
-	if o == nil || o.Ipv6Cidr == nil {
+	if o == nil || IsNil(o.Ipv6Cidr) {
 		return nil, false
 	}
 	return o.Ipv6Cidr, true
@@ -232,7 +236,7 @@ func (o *CloudAwsVpc) GetIpv6CidrOk() ([]string, bool) {
 
 // HasIpv6Cidr returns a boolean if a field has been set.
 func (o *CloudAwsVpc) HasIpv6Cidr() bool {
-	if o != nil && o.Ipv6Cidr != nil {
+	if o != nil && IsNil(o.Ipv6Cidr) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *CloudAwsVpc) SetIpv6Cidr(v []string) {
 
 // GetIsDefault returns the IsDefault field value if set, zero value otherwise.
 func (o *CloudAwsVpc) GetIsDefault() bool {
-	if o == nil || o.IsDefault == nil {
+	if o == nil || IsNil(o.IsDefault) {
 		var ret bool
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *CloudAwsVpc) GetIsDefault() bool {
 // GetIsDefaultOk returns a tuple with the IsDefault field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsVpc) GetIsDefaultOk() (*bool, bool) {
-	if o == nil || o.IsDefault == nil {
+	if o == nil || IsNil(o.IsDefault) {
 		return nil, false
 	}
 	return o.IsDefault, true
@@ -264,7 +268,7 @@ func (o *CloudAwsVpc) GetIsDefaultOk() (*bool, bool) {
 
 // HasIsDefault returns a boolean if a field has been set.
 func (o *CloudAwsVpc) HasIsDefault() bool {
-	if o != nil && o.IsDefault != nil {
+	if o != nil && !IsNil(o.IsDefault) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *CloudAwsVpc) SetIsDefault(v bool) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *CloudAwsVpc) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *CloudAwsVpc) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsVpc) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -296,7 +300,7 @@ func (o *CloudAwsVpc) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *CloudAwsVpc) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *CloudAwsVpc) SetState(v string) {
 
 // GetTenancy returns the Tenancy field value if set, zero value otherwise.
 func (o *CloudAwsVpc) GetTenancy() string {
-	if o == nil || o.Tenancy == nil {
+	if o == nil || IsNil(o.Tenancy) {
 		var ret string
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *CloudAwsVpc) GetTenancy() string {
 // GetTenancyOk returns a tuple with the Tenancy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsVpc) GetTenancyOk() (*string, bool) {
-	if o == nil || o.Tenancy == nil {
+	if o == nil || IsNil(o.Tenancy) {
 		return nil, false
 	}
 	return o.Tenancy, true
@@ -328,7 +332,7 @@ func (o *CloudAwsVpc) GetTenancyOk() (*string, bool) {
 
 // HasTenancy returns a boolean if a field has been set.
 func (o *CloudAwsVpc) HasTenancy() bool {
-	if o != nil && o.Tenancy != nil {
+	if o != nil && !IsNil(o.Tenancy) {
 		return true
 	}
 
@@ -353,7 +357,7 @@ func (o *CloudAwsVpc) GetVpcTags() []CloudCloudTag {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsVpc) GetVpcTagsOk() ([]CloudCloudTag, bool) {
-	if o == nil || o.VpcTags == nil {
+	if o == nil || IsNil(o.VpcTags) {
 		return nil, false
 	}
 	return o.VpcTags, true
@@ -361,7 +365,7 @@ func (o *CloudAwsVpc) GetVpcTagsOk() ([]CloudCloudTag, bool) {
 
 // HasVpcTags returns a boolean if a field has been set.
 func (o *CloudAwsVpc) HasVpcTags() bool {
-	if o != nil && o.VpcTags != nil {
+	if o != nil && IsNil(o.VpcTags) {
 		return true
 	}
 
@@ -373,58 +377,73 @@ func (o *CloudAwsVpc) SetVpcTags(v []CloudCloudTag) {
 	o.VpcTags = v
 }
 
-// GetAwsBillingUnit returns the AwsBillingUnit field value if set, zero value otherwise.
+// GetAwsBillingUnit returns the AwsBillingUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudAwsVpc) GetAwsBillingUnit() CloudAwsBillingUnitRelationship {
-	if o == nil || o.AwsBillingUnit == nil {
+	if o == nil || IsNil(o.AwsBillingUnit.Get()) {
 		var ret CloudAwsBillingUnitRelationship
 		return ret
 	}
-	return *o.AwsBillingUnit
+	return *o.AwsBillingUnit.Get()
 }
 
 // GetAwsBillingUnitOk returns a tuple with the AwsBillingUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsVpc) GetAwsBillingUnitOk() (*CloudAwsBillingUnitRelationship, bool) {
-	if o == nil || o.AwsBillingUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AwsBillingUnit, true
+	return o.AwsBillingUnit.Get(), o.AwsBillingUnit.IsSet()
 }
 
 // HasAwsBillingUnit returns a boolean if a field has been set.
 func (o *CloudAwsVpc) HasAwsBillingUnit() bool {
-	if o != nil && o.AwsBillingUnit != nil {
+	if o != nil && o.AwsBillingUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAwsBillingUnit gets a reference to the given CloudAwsBillingUnitRelationship and assigns it to the AwsBillingUnit field.
+// SetAwsBillingUnit gets a reference to the given NullableCloudAwsBillingUnitRelationship and assigns it to the AwsBillingUnit field.
 func (o *CloudAwsVpc) SetAwsBillingUnit(v CloudAwsBillingUnitRelationship) {
-	o.AwsBillingUnit = &v
+	o.AwsBillingUnit.Set(&v)
+}
+
+// SetAwsBillingUnitNil sets the value for AwsBillingUnit to be an explicit nil
+func (o *CloudAwsVpc) SetAwsBillingUnitNil() {
+	o.AwsBillingUnit.Set(nil)
+}
+
+// UnsetAwsBillingUnit ensures that no value is present for AwsBillingUnit, not even an explicit nil
+func (o *CloudAwsVpc) UnsetAwsBillingUnit() {
+	o.AwsBillingUnit.Unset()
 }
 
 func (o CloudAwsVpc) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudAwsVpc) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCloudBasePlacement, errCloudBasePlacement := json.Marshal(o.CloudBasePlacement)
 	if errCloudBasePlacement != nil {
-		return []byte{}, errCloudBasePlacement
+		return map[string]interface{}{}, errCloudBasePlacement
 	}
 	errCloudBasePlacement = json.Unmarshal([]byte(serializedCloudBasePlacement), &toSerialize)
 	if errCloudBasePlacement != nil {
-		return []byte{}, errCloudBasePlacement
+		return map[string]interface{}{}, errCloudBasePlacement
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DnsHostName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DnsHostName) {
 		toSerialize["DnsHostName"] = o.DnsHostName
 	}
-	if o.DnsResolution != nil {
+	if !IsNil(o.DnsResolution) {
 		toSerialize["DnsResolution"] = o.DnsResolution
 	}
 	if o.Ipv4Cidr != nil {
@@ -433,30 +452,52 @@ func (o CloudAwsVpc) MarshalJSON() ([]byte, error) {
 	if o.Ipv6Cidr != nil {
 		toSerialize["Ipv6Cidr"] = o.Ipv6Cidr
 	}
-	if o.IsDefault != nil {
+	if !IsNil(o.IsDefault) {
 		toSerialize["IsDefault"] = o.IsDefault
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Tenancy != nil {
+	if !IsNil(o.Tenancy) {
 		toSerialize["Tenancy"] = o.Tenancy
 	}
 	if o.VpcTags != nil {
 		toSerialize["VpcTags"] = o.VpcTags
 	}
-	if o.AwsBillingUnit != nil {
-		toSerialize["AwsBillingUnit"] = o.AwsBillingUnit
+	if o.AwsBillingUnit.IsSet() {
+		toSerialize["AwsBillingUnit"] = o.AwsBillingUnit.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudAwsVpc) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudAwsVpc) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudAwsVpcWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -473,14 +514,14 @@ func (o *CloudAwsVpc) UnmarshalJSON(bytes []byte) (err error) {
 		// The state of the VPC (pending | available).
 		State *string `json:"State,omitempty"`
 		// The allowed tenancy of instances launched into the VPC.
-		Tenancy        *string                          `json:"Tenancy,omitempty"`
-		VpcTags        []CloudCloudTag                  `json:"VpcTags,omitempty"`
-		AwsBillingUnit *CloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
+		Tenancy        *string                                 `json:"Tenancy,omitempty"`
+		VpcTags        []CloudCloudTag                         `json:"VpcTags,omitempty"`
+		AwsBillingUnit NullableCloudAwsBillingUnitRelationship `json:"AwsBillingUnit,omitempty"`
 	}
 
 	varCloudAwsVpcWithoutEmbeddedStruct := CloudAwsVpcWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsVpcWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudAwsVpcWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudAwsVpc := _CloudAwsVpc{}
 		varCloudAwsVpc.ClassId = varCloudAwsVpcWithoutEmbeddedStruct.ClassId
@@ -501,7 +542,7 @@ func (o *CloudAwsVpc) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudAwsVpc := _CloudAwsVpc{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsVpc)
+	err = json.Unmarshal(data, &varCloudAwsVpc)
 	if err == nil {
 		o.CloudBasePlacement = varCloudAwsVpc.CloudBasePlacement
 	} else {
@@ -510,7 +551,7 @@ func (o *CloudAwsVpc) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DnsHostName")

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Certificate"]
 **Certificate** | Pointer to [**NullableX509Certificate**](X509Certificate.md) |  | [optional] 
 **Status** | Pointer to **string** | Status of the certificate. * &#x60;PendingValidation&#x60; - The certificate has not been validated. * &#x60;Valid&#x60; - The certificate is valid. * &#x60;Invalid&#x60; - Ther certificate is invalid. | [optional] [readonly] [default to "PendingValidation"]
-**CertificateRequest** | Pointer to [**IamCertificateRequestRelationship**](IamCertificateRequestRelationship.md) |  | [optional] 
+**CertificateRequest** | Pointer to [**NullableIamCertificateRequestRelationship**](IamCertificateRequestRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -154,6 +154,16 @@ SetCertificateRequest sets CertificateRequest field to given value.
 
 HasCertificateRequest returns a boolean if a field has been set.
 
+### SetCertificateRequestNil
+
+`func (o *IamCertificate) SetCertificateRequestNil(b bool)`
+
+ SetCertificateRequestNil sets the value for CertificateRequest to be an explicit nil
+
+### UnsetCertificateRequest
+`func (o *IamCertificate) UnsetCertificateRequest()`
+
+UnsetCertificateRequest ensures that no value is present for CertificateRequest, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **PcId** | Pointer to **int64** | Unique Identifier of the port-channel, local to this switch. | [optional] 
 **Ports** | Pointer to [**[]FabricPortIdentifier**](FabricPortIdentifier.md) |  | [optional] 
-**PortPolicy** | Pointer to [**FabricPortPolicyRelationship**](FabricPortPolicyRelationship.md) |  | [optional] 
+**PortPolicy** | Pointer to [**NullableFabricPortPolicyRelationship**](FabricPortPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -154,6 +154,16 @@ SetPortPolicy sets PortPolicy field to given value.
 
 HasPortPolicy returns a boolean if a field has been set.
 
+### SetPortPolicyNil
+
+`func (o *FabricPortChannelRole) SetPortPolicyNil(b bool)`
+
+ SetPortPolicyNil sets the value for PortPolicy to be an explicit nil
+
+### UnsetPortPolicy
+`func (o *FabricPortChannelRole) UnsetPortPolicy()`
+
+UnsetPortPolicy ensures that no value is present for PortPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

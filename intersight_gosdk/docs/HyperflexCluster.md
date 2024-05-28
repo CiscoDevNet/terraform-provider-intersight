@@ -23,13 +23,13 @@ Name | Type | Description | Notes
 **VmCount** | Pointer to **int64** | The number of virtual machines present on this cluster. | [optional] [readonly] 
 **ZoneType** | Pointer to **string** | The type of availability zone used by the cluster. Physical zones are always used in HyperFlex Stretched Clusters. Logical zones may be used if a cluster has Logical Availability Zones (LAZ) enabled. * &#x60;UNKNOWN&#x60; - The type of zone configured on the HyperFlex cluster is not known. * &#x60;NOT_CONFIGURED&#x60; - The zone type is not configured. * &#x60;LOGICAL&#x60; - The zone is a logical zone created when the logical availability zones (LAZ) feature is enabled on the HyperFlex cluster. * &#x60;PHYSICAL&#x60; - The zone is a physical zone configured on a stretched HyperFlex cluster. | [optional] [readonly] [default to "UNKNOWN"]
 **Alarm** | Pointer to [**[]HyperflexAlarmRelationship**](HyperflexAlarmRelationship.md) | An array of relationships to hyperflexAlarm resources. | [optional] [readonly] 
-**Encryption** | Pointer to [**HyperflexEncryptionRelationship**](HyperflexEncryptionRelationship.md) |  | [optional] 
-**Health** | Pointer to [**HyperflexHealthRelationship**](HyperflexHealthRelationship.md) |  | [optional] 
-**License** | Pointer to [**HyperflexLicenseRelationship**](HyperflexLicenseRelationship.md) |  | [optional] 
+**Encryption** | Pointer to [**NullableHyperflexEncryptionRelationship**](HyperflexEncryptionRelationship.md) |  | [optional] 
+**Health** | Pointer to [**NullableHyperflexHealthRelationship**](HyperflexHealthRelationship.md) |  | [optional] 
+**License** | Pointer to [**NullableHyperflexLicenseRelationship**](HyperflexLicenseRelationship.md) |  | [optional] 
 **Nodes** | Pointer to [**[]HyperflexNodeRelationship**](HyperflexNodeRelationship.md) | An array of relationships to hyperflexNode resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **StorageClientIpPools** | Pointer to [**[]IppoolPoolRelationship**](IppoolPoolRelationship.md) | An array of relationships to ippoolPool resources. | [optional] [readonly] 
-**StorageClientVrf** | Pointer to [**VrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
+**StorageClientVrf** | Pointer to [**NullableVrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
 **StorageContainers** | Pointer to [**[]StorageHyperFlexStorageContainerRelationship**](StorageHyperFlexStorageContainerRelationship.md) | An array of relationships to storageHyperFlexStorageContainer resources. | [optional] [readonly] 
 **Volumes** | Pointer to [**[]StorageHyperFlexVolumeRelationship**](StorageHyperFlexVolumeRelationship.md) | An array of relationships to storageHyperFlexVolume resources. | [optional] [readonly] 
 
@@ -612,6 +612,16 @@ SetEncryption sets Encryption field to given value.
 
 HasEncryption returns a boolean if a field has been set.
 
+### SetEncryptionNil
+
+`func (o *HyperflexCluster) SetEncryptionNil(b bool)`
+
+ SetEncryptionNil sets the value for Encryption to be an explicit nil
+
+### UnsetEncryption
+`func (o *HyperflexCluster) UnsetEncryption()`
+
+UnsetEncryption ensures that no value is present for Encryption, not even an explicit nil
 ### GetHealth
 
 `func (o *HyperflexCluster) GetHealth() HyperflexHealthRelationship`
@@ -637,6 +647,16 @@ SetHealth sets Health field to given value.
 
 HasHealth returns a boolean if a field has been set.
 
+### SetHealthNil
+
+`func (o *HyperflexCluster) SetHealthNil(b bool)`
+
+ SetHealthNil sets the value for Health to be an explicit nil
+
+### UnsetHealth
+`func (o *HyperflexCluster) UnsetHealth()`
+
+UnsetHealth ensures that no value is present for Health, not even an explicit nil
 ### GetLicense
 
 `func (o *HyperflexCluster) GetLicense() HyperflexLicenseRelationship`
@@ -662,6 +682,16 @@ SetLicense sets License field to given value.
 
 HasLicense returns a boolean if a field has been set.
 
+### SetLicenseNil
+
+`func (o *HyperflexCluster) SetLicenseNil(b bool)`
+
+ SetLicenseNil sets the value for License to be an explicit nil
+
+### UnsetLicense
+`func (o *HyperflexCluster) UnsetLicense()`
+
+UnsetLicense ensures that no value is present for License, not even an explicit nil
 ### GetNodes
 
 `func (o *HyperflexCluster) GetNodes() []HyperflexNodeRelationship`
@@ -722,6 +752,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *HyperflexCluster) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *HyperflexCluster) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageClientIpPools
 
 `func (o *HyperflexCluster) GetStorageClientIpPools() []IppoolPoolRelationship`
@@ -782,6 +822,16 @@ SetStorageClientVrf sets StorageClientVrf field to given value.
 
 HasStorageClientVrf returns a boolean if a field has been set.
 
+### SetStorageClientVrfNil
+
+`func (o *HyperflexCluster) SetStorageClientVrfNil(b bool)`
+
+ SetStorageClientVrfNil sets the value for StorageClientVrf to be an explicit nil
+
+### UnsetStorageClientVrf
+`func (o *HyperflexCluster) UnsetStorageClientVrf()`
+
+UnsetStorageClientVrf ensures that no value is present for StorageClientVrf, not even an explicit nil
 ### GetStorageContainers
 
 `func (o *HyperflexCluster) GetStorageContainers() []StorageHyperFlexStorageContainerRelationship`

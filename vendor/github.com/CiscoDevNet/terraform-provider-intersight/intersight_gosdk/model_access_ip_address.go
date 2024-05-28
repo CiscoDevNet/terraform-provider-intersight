@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AccessIpAddress type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AccessIpAddress{}
 
 // AccessIpAddress IP address and Lease information for a specific Server Profile.
 type AccessIpAddress struct {
@@ -29,11 +33,11 @@ type AccessIpAddress struct {
 	// IPv4 Address leased to this Server Profile for In-Band Deployment.
 	Ipv6Address *string `json:"Ipv6Address,omitempty"`
 	// IPv4 Address leased to this Server Profile for Out-Of-Band deployment.
-	OobIpv4Address       *string                                  `json:"OobIpv4Address,omitempty"`
-	Ipv4Lease            *IppoolIpLeaseRelationship               `json:"Ipv4Lease,omitempty"`
-	Ipv6Lease            *IppoolIpLeaseRelationship               `json:"Ipv6Lease,omitempty"`
-	OobIpv4Lease         *IppoolIpLeaseRelationship               `json:"OobIpv4Lease,omitempty"`
-	Profile              *PolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
+	OobIpv4Address       *string                                         `json:"OobIpv4Address,omitempty"`
+	Ipv4Lease            NullableIppoolIpLeaseRelationship               `json:"Ipv4Lease,omitempty"`
+	Ipv6Lease            NullableIppoolIpLeaseRelationship               `json:"Ipv6Lease,omitempty"`
+	OobIpv4Lease         NullableIppoolIpLeaseRelationship               `json:"OobIpv4Lease,omitempty"`
+	Profile              NullablePolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,7 +116,7 @@ func (o *AccessIpAddress) SetObjectType(v string) {
 
 // GetIpv4Address returns the Ipv4Address field value if set, zero value otherwise.
 func (o *AccessIpAddress) GetIpv4Address() string {
-	if o == nil || o.Ipv4Address == nil {
+	if o == nil || IsNil(o.Ipv4Address) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *AccessIpAddress) GetIpv4Address() string {
 // GetIpv4AddressOk returns a tuple with the Ipv4Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AccessIpAddress) GetIpv4AddressOk() (*string, bool) {
-	if o == nil || o.Ipv4Address == nil {
+	if o == nil || IsNil(o.Ipv4Address) {
 		return nil, false
 	}
 	return o.Ipv4Address, true
@@ -130,7 +134,7 @@ func (o *AccessIpAddress) GetIpv4AddressOk() (*string, bool) {
 
 // HasIpv4Address returns a boolean if a field has been set.
 func (o *AccessIpAddress) HasIpv4Address() bool {
-	if o != nil && o.Ipv4Address != nil {
+	if o != nil && !IsNil(o.Ipv4Address) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *AccessIpAddress) SetIpv4Address(v string) {
 
 // GetIpv6Address returns the Ipv6Address field value if set, zero value otherwise.
 func (o *AccessIpAddress) GetIpv6Address() string {
-	if o == nil || o.Ipv6Address == nil {
+	if o == nil || IsNil(o.Ipv6Address) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *AccessIpAddress) GetIpv6Address() string {
 // GetIpv6AddressOk returns a tuple with the Ipv6Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AccessIpAddress) GetIpv6AddressOk() (*string, bool) {
-	if o == nil || o.Ipv6Address == nil {
+	if o == nil || IsNil(o.Ipv6Address) {
 		return nil, false
 	}
 	return o.Ipv6Address, true
@@ -162,7 +166,7 @@ func (o *AccessIpAddress) GetIpv6AddressOk() (*string, bool) {
 
 // HasIpv6Address returns a boolean if a field has been set.
 func (o *AccessIpAddress) HasIpv6Address() bool {
-	if o != nil && o.Ipv6Address != nil {
+	if o != nil && !IsNil(o.Ipv6Address) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *AccessIpAddress) SetIpv6Address(v string) {
 
 // GetOobIpv4Address returns the OobIpv4Address field value if set, zero value otherwise.
 func (o *AccessIpAddress) GetOobIpv4Address() string {
-	if o == nil || o.OobIpv4Address == nil {
+	if o == nil || IsNil(o.OobIpv4Address) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *AccessIpAddress) GetOobIpv4Address() string {
 // GetOobIpv4AddressOk returns a tuple with the OobIpv4Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AccessIpAddress) GetOobIpv4AddressOk() (*string, bool) {
-	if o == nil || o.OobIpv4Address == nil {
+	if o == nil || IsNil(o.OobIpv4Address) {
 		return nil, false
 	}
 	return o.OobIpv4Address, true
@@ -194,7 +198,7 @@ func (o *AccessIpAddress) GetOobIpv4AddressOk() (*string, bool) {
 
 // HasOobIpv4Address returns a boolean if a field has been set.
 func (o *AccessIpAddress) HasOobIpv4Address() bool {
-	if o != nil && o.OobIpv4Address != nil {
+	if o != nil && !IsNil(o.OobIpv4Address) {
 		return true
 	}
 
@@ -206,180 +210,250 @@ func (o *AccessIpAddress) SetOobIpv4Address(v string) {
 	o.OobIpv4Address = &v
 }
 
-// GetIpv4Lease returns the Ipv4Lease field value if set, zero value otherwise.
+// GetIpv4Lease returns the Ipv4Lease field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessIpAddress) GetIpv4Lease() IppoolIpLeaseRelationship {
-	if o == nil || o.Ipv4Lease == nil {
+	if o == nil || IsNil(o.Ipv4Lease.Get()) {
 		var ret IppoolIpLeaseRelationship
 		return ret
 	}
-	return *o.Ipv4Lease
+	return *o.Ipv4Lease.Get()
 }
 
 // GetIpv4LeaseOk returns a tuple with the Ipv4Lease field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccessIpAddress) GetIpv4LeaseOk() (*IppoolIpLeaseRelationship, bool) {
-	if o == nil || o.Ipv4Lease == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ipv4Lease, true
+	return o.Ipv4Lease.Get(), o.Ipv4Lease.IsSet()
 }
 
 // HasIpv4Lease returns a boolean if a field has been set.
 func (o *AccessIpAddress) HasIpv4Lease() bool {
-	if o != nil && o.Ipv4Lease != nil {
+	if o != nil && o.Ipv4Lease.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIpv4Lease gets a reference to the given IppoolIpLeaseRelationship and assigns it to the Ipv4Lease field.
+// SetIpv4Lease gets a reference to the given NullableIppoolIpLeaseRelationship and assigns it to the Ipv4Lease field.
 func (o *AccessIpAddress) SetIpv4Lease(v IppoolIpLeaseRelationship) {
-	o.Ipv4Lease = &v
+	o.Ipv4Lease.Set(&v)
 }
 
-// GetIpv6Lease returns the Ipv6Lease field value if set, zero value otherwise.
+// SetIpv4LeaseNil sets the value for Ipv4Lease to be an explicit nil
+func (o *AccessIpAddress) SetIpv4LeaseNil() {
+	o.Ipv4Lease.Set(nil)
+}
+
+// UnsetIpv4Lease ensures that no value is present for Ipv4Lease, not even an explicit nil
+func (o *AccessIpAddress) UnsetIpv4Lease() {
+	o.Ipv4Lease.Unset()
+}
+
+// GetIpv6Lease returns the Ipv6Lease field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessIpAddress) GetIpv6Lease() IppoolIpLeaseRelationship {
-	if o == nil || o.Ipv6Lease == nil {
+	if o == nil || IsNil(o.Ipv6Lease.Get()) {
 		var ret IppoolIpLeaseRelationship
 		return ret
 	}
-	return *o.Ipv6Lease
+	return *o.Ipv6Lease.Get()
 }
 
 // GetIpv6LeaseOk returns a tuple with the Ipv6Lease field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccessIpAddress) GetIpv6LeaseOk() (*IppoolIpLeaseRelationship, bool) {
-	if o == nil || o.Ipv6Lease == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ipv6Lease, true
+	return o.Ipv6Lease.Get(), o.Ipv6Lease.IsSet()
 }
 
 // HasIpv6Lease returns a boolean if a field has been set.
 func (o *AccessIpAddress) HasIpv6Lease() bool {
-	if o != nil && o.Ipv6Lease != nil {
+	if o != nil && o.Ipv6Lease.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIpv6Lease gets a reference to the given IppoolIpLeaseRelationship and assigns it to the Ipv6Lease field.
+// SetIpv6Lease gets a reference to the given NullableIppoolIpLeaseRelationship and assigns it to the Ipv6Lease field.
 func (o *AccessIpAddress) SetIpv6Lease(v IppoolIpLeaseRelationship) {
-	o.Ipv6Lease = &v
+	o.Ipv6Lease.Set(&v)
 }
 
-// GetOobIpv4Lease returns the OobIpv4Lease field value if set, zero value otherwise.
+// SetIpv6LeaseNil sets the value for Ipv6Lease to be an explicit nil
+func (o *AccessIpAddress) SetIpv6LeaseNil() {
+	o.Ipv6Lease.Set(nil)
+}
+
+// UnsetIpv6Lease ensures that no value is present for Ipv6Lease, not even an explicit nil
+func (o *AccessIpAddress) UnsetIpv6Lease() {
+	o.Ipv6Lease.Unset()
+}
+
+// GetOobIpv4Lease returns the OobIpv4Lease field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessIpAddress) GetOobIpv4Lease() IppoolIpLeaseRelationship {
-	if o == nil || o.OobIpv4Lease == nil {
+	if o == nil || IsNil(o.OobIpv4Lease.Get()) {
 		var ret IppoolIpLeaseRelationship
 		return ret
 	}
-	return *o.OobIpv4Lease
+	return *o.OobIpv4Lease.Get()
 }
 
 // GetOobIpv4LeaseOk returns a tuple with the OobIpv4Lease field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccessIpAddress) GetOobIpv4LeaseOk() (*IppoolIpLeaseRelationship, bool) {
-	if o == nil || o.OobIpv4Lease == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.OobIpv4Lease, true
+	return o.OobIpv4Lease.Get(), o.OobIpv4Lease.IsSet()
 }
 
 // HasOobIpv4Lease returns a boolean if a field has been set.
 func (o *AccessIpAddress) HasOobIpv4Lease() bool {
-	if o != nil && o.OobIpv4Lease != nil {
+	if o != nil && o.OobIpv4Lease.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOobIpv4Lease gets a reference to the given IppoolIpLeaseRelationship and assigns it to the OobIpv4Lease field.
+// SetOobIpv4Lease gets a reference to the given NullableIppoolIpLeaseRelationship and assigns it to the OobIpv4Lease field.
 func (o *AccessIpAddress) SetOobIpv4Lease(v IppoolIpLeaseRelationship) {
-	o.OobIpv4Lease = &v
+	o.OobIpv4Lease.Set(&v)
 }
 
-// GetProfile returns the Profile field value if set, zero value otherwise.
+// SetOobIpv4LeaseNil sets the value for OobIpv4Lease to be an explicit nil
+func (o *AccessIpAddress) SetOobIpv4LeaseNil() {
+	o.OobIpv4Lease.Set(nil)
+}
+
+// UnsetOobIpv4Lease ensures that no value is present for OobIpv4Lease, not even an explicit nil
+func (o *AccessIpAddress) UnsetOobIpv4Lease() {
+	o.OobIpv4Lease.Unset()
+}
+
+// GetProfile returns the Profile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessIpAddress) GetProfile() PolicyAbstractConfigProfileRelationship {
-	if o == nil || o.Profile == nil {
+	if o == nil || IsNil(o.Profile.Get()) {
 		var ret PolicyAbstractConfigProfileRelationship
 		return ret
 	}
-	return *o.Profile
+	return *o.Profile.Get()
 }
 
 // GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccessIpAddress) GetProfileOk() (*PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Profile, true
+	return o.Profile.Get(), o.Profile.IsSet()
 }
 
 // HasProfile returns a boolean if a field has been set.
 func (o *AccessIpAddress) HasProfile() bool {
-	if o != nil && o.Profile != nil {
+	if o != nil && o.Profile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProfile gets a reference to the given PolicyAbstractConfigProfileRelationship and assigns it to the Profile field.
+// SetProfile gets a reference to the given NullablePolicyAbstractConfigProfileRelationship and assigns it to the Profile field.
 func (o *AccessIpAddress) SetProfile(v PolicyAbstractConfigProfileRelationship) {
-	o.Profile = &v
+	o.Profile.Set(&v)
+}
+
+// SetProfileNil sets the value for Profile to be an explicit nil
+func (o *AccessIpAddress) SetProfileNil() {
+	o.Profile.Set(nil)
+}
+
+// UnsetProfile ensures that no value is present for Profile, not even an explicit nil
+func (o *AccessIpAddress) UnsetProfile() {
+	o.Profile.Unset()
 }
 
 func (o AccessIpAddress) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AccessIpAddress) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Ipv4Address != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Ipv4Address) {
 		toSerialize["Ipv4Address"] = o.Ipv4Address
 	}
-	if o.Ipv6Address != nil {
+	if !IsNil(o.Ipv6Address) {
 		toSerialize["Ipv6Address"] = o.Ipv6Address
 	}
-	if o.OobIpv4Address != nil {
+	if !IsNil(o.OobIpv4Address) {
 		toSerialize["OobIpv4Address"] = o.OobIpv4Address
 	}
-	if o.Ipv4Lease != nil {
-		toSerialize["Ipv4Lease"] = o.Ipv4Lease
+	if o.Ipv4Lease.IsSet() {
+		toSerialize["Ipv4Lease"] = o.Ipv4Lease.Get()
 	}
-	if o.Ipv6Lease != nil {
-		toSerialize["Ipv6Lease"] = o.Ipv6Lease
+	if o.Ipv6Lease.IsSet() {
+		toSerialize["Ipv6Lease"] = o.Ipv6Lease.Get()
 	}
-	if o.OobIpv4Lease != nil {
-		toSerialize["OobIpv4Lease"] = o.OobIpv4Lease
+	if o.OobIpv4Lease.IsSet() {
+		toSerialize["OobIpv4Lease"] = o.OobIpv4Lease.Get()
 	}
-	if o.Profile != nil {
-		toSerialize["Profile"] = o.Profile
+	if o.Profile.IsSet() {
+		toSerialize["Profile"] = o.Profile.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AccessIpAddress) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AccessIpAddress) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AccessIpAddressWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -390,16 +464,16 @@ func (o *AccessIpAddress) UnmarshalJSON(bytes []byte) (err error) {
 		// IPv4 Address leased to this Server Profile for In-Band Deployment.
 		Ipv6Address *string `json:"Ipv6Address,omitempty"`
 		// IPv4 Address leased to this Server Profile for Out-Of-Band deployment.
-		OobIpv4Address *string                                  `json:"OobIpv4Address,omitempty"`
-		Ipv4Lease      *IppoolIpLeaseRelationship               `json:"Ipv4Lease,omitempty"`
-		Ipv6Lease      *IppoolIpLeaseRelationship               `json:"Ipv6Lease,omitempty"`
-		OobIpv4Lease   *IppoolIpLeaseRelationship               `json:"OobIpv4Lease,omitempty"`
-		Profile        *PolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
+		OobIpv4Address *string                                         `json:"OobIpv4Address,omitempty"`
+		Ipv4Lease      NullableIppoolIpLeaseRelationship               `json:"Ipv4Lease,omitempty"`
+		Ipv6Lease      NullableIppoolIpLeaseRelationship               `json:"Ipv6Lease,omitempty"`
+		OobIpv4Lease   NullableIppoolIpLeaseRelationship               `json:"OobIpv4Lease,omitempty"`
+		Profile        NullablePolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
 	}
 
 	varAccessIpAddressWithoutEmbeddedStruct := AccessIpAddressWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAccessIpAddressWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAccessIpAddressWithoutEmbeddedStruct)
 	if err == nil {
 		varAccessIpAddress := _AccessIpAddress{}
 		varAccessIpAddress.ClassId = varAccessIpAddressWithoutEmbeddedStruct.ClassId
@@ -418,7 +492,7 @@ func (o *AccessIpAddress) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAccessIpAddress := _AccessIpAddress{}
 
-	err = json.Unmarshal(bytes, &varAccessIpAddress)
+	err = json.Unmarshal(data, &varAccessIpAddress)
 	if err == nil {
 		o.PolicyAbstractPolicy = varAccessIpAddress.PolicyAbstractPolicy
 	} else {
@@ -427,7 +501,7 @@ func (o *AccessIpAddress) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Ipv4Address")

@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 **SocketId** | Pointer to **string** | Socket ID of the Persistent Memory Region. | [optional] [readonly] 
 **SocketMemoryId** | Pointer to **string** | Socket Memory ID of the Persistent Memory Region. | [optional] [readonly] 
 **TotalCapacity** | Pointer to **string** | Total capacity in GiB of the Persistent Memory Region. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**MemoryPersistentMemoryConfiguration** | Pointer to [**MemoryPersistentMemoryConfigurationRelationship**](MemoryPersistentMemoryConfigurationRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**MemoryPersistentMemoryConfiguration** | Pointer to [**NullableMemoryPersistentMemoryConfigurationRelationship**](MemoryPersistentMemoryConfigurationRelationship.md) |  | [optional] 
 **PersistentMemoryNamespaces** | Pointer to [**[]MemoryPersistentMemoryNamespaceRelationship**](MemoryPersistentMemoryNamespaceRelationship.md) | An array of relationships to memoryPersistentMemoryNamespace resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -329,6 +329,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *MemoryPersistentMemoryRegion) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *MemoryPersistentMemoryRegion) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetMemoryPersistentMemoryConfiguration
 
 `func (o *MemoryPersistentMemoryRegion) GetMemoryPersistentMemoryConfiguration() MemoryPersistentMemoryConfigurationRelationship`
@@ -354,6 +364,16 @@ SetMemoryPersistentMemoryConfiguration sets MemoryPersistentMemoryConfiguration 
 
 HasMemoryPersistentMemoryConfiguration returns a boolean if a field has been set.
 
+### SetMemoryPersistentMemoryConfigurationNil
+
+`func (o *MemoryPersistentMemoryRegion) SetMemoryPersistentMemoryConfigurationNil(b bool)`
+
+ SetMemoryPersistentMemoryConfigurationNil sets the value for MemoryPersistentMemoryConfiguration to be an explicit nil
+
+### UnsetMemoryPersistentMemoryConfiguration
+`func (o *MemoryPersistentMemoryRegion) UnsetMemoryPersistentMemoryConfiguration()`
+
+UnsetMemoryPersistentMemoryConfiguration ensures that no value is present for MemoryPersistentMemoryConfiguration, not even an explicit nil
 ### GetPersistentMemoryNamespaces
 
 `func (o *MemoryPersistentMemoryRegion) GetPersistentMemoryNamespaces() []MemoryPersistentMemoryNamespaceRelationship`
@@ -414,6 +434,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *MemoryPersistentMemoryRegion) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *MemoryPersistentMemoryRegion) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

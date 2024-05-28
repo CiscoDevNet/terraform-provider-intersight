@@ -284,7 +284,7 @@ func getResourcepoolMembershipReservationSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"resource_type": {
-			Description: "The type of resource that is placed into resource groups or pools. Resource Type can be either 'compute.Blade' or 'compute.RackUnit for pools.",
+			Description: "The type of resource that is placed into resource groups or pools. Resource Type can be either 'compute.Blade' or 'compute.RackUnit' for pools.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

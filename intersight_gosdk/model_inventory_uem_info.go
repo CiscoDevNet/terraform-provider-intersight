@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the InventoryUemInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InventoryUemInfo{}
 
 // InventoryUemInfo The runtime information about a Uem supported endpoint.
 type InventoryUemInfo struct {
@@ -112,7 +116,7 @@ func (o *InventoryUemInfo) SetObjectType(v string) {
 
 // GetConnectionStatus returns the ConnectionStatus field value if set, zero value otherwise.
 func (o *InventoryUemInfo) GetConnectionStatus() string {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *InventoryUemInfo) GetConnectionStatus() string {
 // GetConnectionStatusOk returns a tuple with the ConnectionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryUemInfo) GetConnectionStatusOk() (*string, bool) {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		return nil, false
 	}
 	return o.ConnectionStatus, true
@@ -130,7 +134,7 @@ func (o *InventoryUemInfo) GetConnectionStatusOk() (*string, bool) {
 
 // HasConnectionStatus returns a boolean if a field has been set.
 func (o *InventoryUemInfo) HasConnectionStatus() bool {
-	if o != nil && o.ConnectionStatus != nil {
+	if o != nil && !IsNil(o.ConnectionStatus) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *InventoryUemInfo) SetConnectionStatus(v string) {
 
 // GetLastSequenceId returns the LastSequenceId field value if set, zero value otherwise.
 func (o *InventoryUemInfo) GetLastSequenceId() int64 {
-	if o == nil || o.LastSequenceId == nil {
+	if o == nil || IsNil(o.LastSequenceId) {
 		var ret int64
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *InventoryUemInfo) GetLastSequenceId() int64 {
 // GetLastSequenceIdOk returns a tuple with the LastSequenceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryUemInfo) GetLastSequenceIdOk() (*int64, bool) {
-	if o == nil || o.LastSequenceId == nil {
+	if o == nil || IsNil(o.LastSequenceId) {
 		return nil, false
 	}
 	return o.LastSequenceId, true
@@ -162,7 +166,7 @@ func (o *InventoryUemInfo) GetLastSequenceIdOk() (*int64, bool) {
 
 // HasLastSequenceId returns a boolean if a field has been set.
 func (o *InventoryUemInfo) HasLastSequenceId() bool {
-	if o != nil && o.LastSequenceId != nil {
+	if o != nil && !IsNil(o.LastSequenceId) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *InventoryUemInfo) SetLastSequenceId(v int64) {
 
 // GetPackageVersion returns the PackageVersion field value if set, zero value otherwise.
 func (o *InventoryUemInfo) GetPackageVersion() string {
-	if o == nil || o.PackageVersion == nil {
+	if o == nil || IsNil(o.PackageVersion) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *InventoryUemInfo) GetPackageVersion() string {
 // GetPackageVersionOk returns a tuple with the PackageVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryUemInfo) GetPackageVersionOk() (*string, bool) {
-	if o == nil || o.PackageVersion == nil {
+	if o == nil || IsNil(o.PackageVersion) {
 		return nil, false
 	}
 	return o.PackageVersion, true
@@ -194,7 +198,7 @@ func (o *InventoryUemInfo) GetPackageVersionOk() (*string, bool) {
 
 // HasPackageVersion returns a boolean if a field has been set.
 func (o *InventoryUemInfo) HasPackageVersion() bool {
-	if o != nil && o.PackageVersion != nil {
+	if o != nil && !IsNil(o.PackageVersion) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *InventoryUemInfo) SetPackageVersion(v string) {
 
 // GetProtocolVersion returns the ProtocolVersion field value if set, zero value otherwise.
 func (o *InventoryUemInfo) GetProtocolVersion() string {
-	if o == nil || o.ProtocolVersion == nil {
+	if o == nil || IsNil(o.ProtocolVersion) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *InventoryUemInfo) GetProtocolVersion() string {
 // GetProtocolVersionOk returns a tuple with the ProtocolVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryUemInfo) GetProtocolVersionOk() (*string, bool) {
-	if o == nil || o.ProtocolVersion == nil {
+	if o == nil || IsNil(o.ProtocolVersion) {
 		return nil, false
 	}
 	return o.ProtocolVersion, true
@@ -226,7 +230,7 @@ func (o *InventoryUemInfo) GetProtocolVersionOk() (*string, bool) {
 
 // HasProtocolVersion returns a boolean if a field has been set.
 func (o *InventoryUemInfo) HasProtocolVersion() bool {
-	if o != nil && o.ProtocolVersion != nil {
+	if o != nil && !IsNil(o.ProtocolVersion) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *InventoryUemInfo) SetProtocolVersion(v string) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *InventoryUemInfo) GetSwitchId() string {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret string
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *InventoryUemInfo) GetSwitchId() string {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryUemInfo) GetSwitchIdOk() (*string, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -258,7 +262,7 @@ func (o *InventoryUemInfo) GetSwitchIdOk() (*string, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *InventoryUemInfo) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -271,34 +275,38 @@ func (o *InventoryUemInfo) SetSwitchId(v string) {
 }
 
 func (o InventoryUemInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o InventoryUemInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConnectionStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
-	if o.LastSequenceId != nil {
+	if !IsNil(o.LastSequenceId) {
 		toSerialize["LastSequenceId"] = o.LastSequenceId
 	}
-	if o.PackageVersion != nil {
+	if !IsNil(o.PackageVersion) {
 		toSerialize["PackageVersion"] = o.PackageVersion
 	}
-	if o.ProtocolVersion != nil {
+	if !IsNil(o.ProtocolVersion) {
 		toSerialize["ProtocolVersion"] = o.ProtocolVersion
 	}
-	if o.SwitchId != nil {
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
 
@@ -306,10 +314,32 @@ func (o InventoryUemInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *InventoryUemInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *InventoryUemInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type InventoryUemInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -329,7 +359,7 @@ func (o *InventoryUemInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varInventoryUemInfoWithoutEmbeddedStruct := InventoryUemInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varInventoryUemInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varInventoryUemInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varInventoryUemInfo := _InventoryUemInfo{}
 		varInventoryUemInfo.ClassId = varInventoryUemInfoWithoutEmbeddedStruct.ClassId
@@ -346,7 +376,7 @@ func (o *InventoryUemInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varInventoryUemInfo := _InventoryUemInfo{}
 
-	err = json.Unmarshal(bytes, &varInventoryUemInfo)
+	err = json.Unmarshal(data, &varInventoryUemInfo)
 	if err == nil {
 		o.MoBaseComplexType = varInventoryUemInfo.MoBaseComplexType
 	} else {
@@ -355,7 +385,7 @@ func (o *InventoryUemInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConnectionStatus")

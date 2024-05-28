@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareUpgradeStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareUpgradeStatus{}
 
 // FirmwareUpgradeStatus The status for the upgrade operation to include the status for the download and upgrade stages.
 type FirmwareUpgradeStatus struct {
@@ -47,9 +51,9 @@ type FirmwareUpgradeStatus struct {
 	// CIMC firmware version of the server prior to the upgrade.
 	SourceFirmwareVersion *string `json:"SourceFirmwareVersion,omitempty"`
 	// CIMC firmware version of the server post the upgrade.
-	TargetFirmwareVersion *string                           `json:"TargetFirmwareVersion,omitempty"`
-	Upgrade               *FirmwareUpgradeBaseRelationship  `json:"Upgrade,omitempty"`
-	Workflow              *WorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
+	TargetFirmwareVersion *string                                  `json:"TargetFirmwareVersion,omitempty"`
+	Upgrade               NullableFirmwareUpgradeBaseRelationship  `json:"Upgrade,omitempty"`
+	Workflow              NullableWorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
 	AdditionalProperties  map[string]interface{}
 }
 
@@ -144,7 +148,7 @@ func (o *FirmwareUpgradeStatus) SetObjectType(v string) {
 
 // GetDownloadMessage returns the DownloadMessage field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetDownloadMessage() string {
-	if o == nil || o.DownloadMessage == nil {
+	if o == nil || IsNil(o.DownloadMessage) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *FirmwareUpgradeStatus) GetDownloadMessage() string {
 // GetDownloadMessageOk returns a tuple with the DownloadMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetDownloadMessageOk() (*string, bool) {
-	if o == nil || o.DownloadMessage == nil {
+	if o == nil || IsNil(o.DownloadMessage) {
 		return nil, false
 	}
 	return o.DownloadMessage, true
@@ -162,7 +166,7 @@ func (o *FirmwareUpgradeStatus) GetDownloadMessageOk() (*string, bool) {
 
 // HasDownloadMessage returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasDownloadMessage() bool {
-	if o != nil && o.DownloadMessage != nil {
+	if o != nil && !IsNil(o.DownloadMessage) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *FirmwareUpgradeStatus) SetDownloadMessage(v string) {
 
 // GetDownloadPercentage returns the DownloadPercentage field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetDownloadPercentage() int64 {
-	if o == nil || o.DownloadPercentage == nil {
+	if o == nil || IsNil(o.DownloadPercentage) {
 		var ret int64
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *FirmwareUpgradeStatus) GetDownloadPercentage() int64 {
 // GetDownloadPercentageOk returns a tuple with the DownloadPercentage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetDownloadPercentageOk() (*int64, bool) {
-	if o == nil || o.DownloadPercentage == nil {
+	if o == nil || IsNil(o.DownloadPercentage) {
 		return nil, false
 	}
 	return o.DownloadPercentage, true
@@ -194,7 +198,7 @@ func (o *FirmwareUpgradeStatus) GetDownloadPercentageOk() (*int64, bool) {
 
 // HasDownloadPercentage returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasDownloadPercentage() bool {
-	if o != nil && o.DownloadPercentage != nil {
+	if o != nil && !IsNil(o.DownloadPercentage) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *FirmwareUpgradeStatus) SetDownloadPercentage(v int64) {
 
 // GetDownloadStage returns the DownloadStage field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetDownloadStage() string {
-	if o == nil || o.DownloadStage == nil {
+	if o == nil || IsNil(o.DownloadStage) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *FirmwareUpgradeStatus) GetDownloadStage() string {
 // GetDownloadStageOk returns a tuple with the DownloadStage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetDownloadStageOk() (*string, bool) {
-	if o == nil || o.DownloadStage == nil {
+	if o == nil || IsNil(o.DownloadStage) {
 		return nil, false
 	}
 	return o.DownloadStage, true
@@ -226,7 +230,7 @@ func (o *FirmwareUpgradeStatus) GetDownloadStageOk() (*string, bool) {
 
 // HasDownloadStage returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasDownloadStage() bool {
-	if o != nil && o.DownloadStage != nil {
+	if o != nil && !IsNil(o.DownloadStage) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *FirmwareUpgradeStatus) SetDownloadStage(v string) {
 
 // GetEpPowerStatus returns the EpPowerStatus field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetEpPowerStatus() string {
-	if o == nil || o.EpPowerStatus == nil {
+	if o == nil || IsNil(o.EpPowerStatus) {
 		var ret string
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *FirmwareUpgradeStatus) GetEpPowerStatus() string {
 // GetEpPowerStatusOk returns a tuple with the EpPowerStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetEpPowerStatusOk() (*string, bool) {
-	if o == nil || o.EpPowerStatus == nil {
+	if o == nil || IsNil(o.EpPowerStatus) {
 		return nil, false
 	}
 	return o.EpPowerStatus, true
@@ -258,7 +262,7 @@ func (o *FirmwareUpgradeStatus) GetEpPowerStatusOk() (*string, bool) {
 
 // HasEpPowerStatus returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasEpPowerStatus() bool {
-	if o != nil && o.EpPowerStatus != nil {
+	if o != nil && !IsNil(o.EpPowerStatus) {
 		return true
 	}
 
@@ -272,7 +276,7 @@ func (o *FirmwareUpgradeStatus) SetEpPowerStatus(v string) {
 
 // GetInitialPowerStatus returns the InitialPowerStatus field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetInitialPowerStatus() string {
-	if o == nil || o.InitialPowerStatus == nil {
+	if o == nil || IsNil(o.InitialPowerStatus) {
 		var ret string
 		return ret
 	}
@@ -282,7 +286,7 @@ func (o *FirmwareUpgradeStatus) GetInitialPowerStatus() string {
 // GetInitialPowerStatusOk returns a tuple with the InitialPowerStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetInitialPowerStatusOk() (*string, bool) {
-	if o == nil || o.InitialPowerStatus == nil {
+	if o == nil || IsNil(o.InitialPowerStatus) {
 		return nil, false
 	}
 	return o.InitialPowerStatus, true
@@ -290,7 +294,7 @@ func (o *FirmwareUpgradeStatus) GetInitialPowerStatusOk() (*string, bool) {
 
 // HasInitialPowerStatus returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasInitialPowerStatus() bool {
-	if o != nil && o.InitialPowerStatus != nil {
+	if o != nil && !IsNil(o.InitialPowerStatus) {
 		return true
 	}
 
@@ -304,7 +308,7 @@ func (o *FirmwareUpgradeStatus) SetInitialPowerStatus(v string) {
 
 // GetOverallError returns the OverallError field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetOverallError() string {
-	if o == nil || o.OverallError == nil {
+	if o == nil || IsNil(o.OverallError) {
 		var ret string
 		return ret
 	}
@@ -314,7 +318,7 @@ func (o *FirmwareUpgradeStatus) GetOverallError() string {
 // GetOverallErrorOk returns a tuple with the OverallError field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetOverallErrorOk() (*string, bool) {
-	if o == nil || o.OverallError == nil {
+	if o == nil || IsNil(o.OverallError) {
 		return nil, false
 	}
 	return o.OverallError, true
@@ -322,7 +326,7 @@ func (o *FirmwareUpgradeStatus) GetOverallErrorOk() (*string, bool) {
 
 // HasOverallError returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasOverallError() bool {
-	if o != nil && o.OverallError != nil {
+	if o != nil && !IsNil(o.OverallError) {
 		return true
 	}
 
@@ -336,7 +340,7 @@ func (o *FirmwareUpgradeStatus) SetOverallError(v string) {
 
 // GetOverallPercentage returns the OverallPercentage field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetOverallPercentage() int64 {
-	if o == nil || o.OverallPercentage == nil {
+	if o == nil || IsNil(o.OverallPercentage) {
 		var ret int64
 		return ret
 	}
@@ -346,7 +350,7 @@ func (o *FirmwareUpgradeStatus) GetOverallPercentage() int64 {
 // GetOverallPercentageOk returns a tuple with the OverallPercentage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetOverallPercentageOk() (*int64, bool) {
-	if o == nil || o.OverallPercentage == nil {
+	if o == nil || IsNil(o.OverallPercentage) {
 		return nil, false
 	}
 	return o.OverallPercentage, true
@@ -354,7 +358,7 @@ func (o *FirmwareUpgradeStatus) GetOverallPercentageOk() (*int64, bool) {
 
 // HasOverallPercentage returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasOverallPercentage() bool {
-	if o != nil && o.OverallPercentage != nil {
+	if o != nil && !IsNil(o.OverallPercentage) {
 		return true
 	}
 
@@ -368,7 +372,7 @@ func (o *FirmwareUpgradeStatus) SetOverallPercentage(v int64) {
 
 // GetOverallstatus returns the Overallstatus field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetOverallstatus() string {
-	if o == nil || o.Overallstatus == nil {
+	if o == nil || IsNil(o.Overallstatus) {
 		var ret string
 		return ret
 	}
@@ -378,7 +382,7 @@ func (o *FirmwareUpgradeStatus) GetOverallstatus() string {
 // GetOverallstatusOk returns a tuple with the Overallstatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetOverallstatusOk() (*string, bool) {
-	if o == nil || o.Overallstatus == nil {
+	if o == nil || IsNil(o.Overallstatus) {
 		return nil, false
 	}
 	return o.Overallstatus, true
@@ -386,7 +390,7 @@ func (o *FirmwareUpgradeStatus) GetOverallstatusOk() (*string, bool) {
 
 // HasOverallstatus returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasOverallstatus() bool {
-	if o != nil && o.Overallstatus != nil {
+	if o != nil && !IsNil(o.Overallstatus) {
 		return true
 	}
 
@@ -400,7 +404,7 @@ func (o *FirmwareUpgradeStatus) SetOverallstatus(v string) {
 
 // GetPendingType returns the PendingType field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetPendingType() string {
-	if o == nil || o.PendingType == nil {
+	if o == nil || IsNil(o.PendingType) {
 		var ret string
 		return ret
 	}
@@ -410,7 +414,7 @@ func (o *FirmwareUpgradeStatus) GetPendingType() string {
 // GetPendingTypeOk returns a tuple with the PendingType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetPendingTypeOk() (*string, bool) {
-	if o == nil || o.PendingType == nil {
+	if o == nil || IsNil(o.PendingType) {
 		return nil, false
 	}
 	return o.PendingType, true
@@ -418,7 +422,7 @@ func (o *FirmwareUpgradeStatus) GetPendingTypeOk() (*string, bool) {
 
 // HasPendingType returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasPendingType() bool {
-	if o != nil && o.PendingType != nil {
+	if o != nil && !IsNil(o.PendingType) {
 		return true
 	}
 
@@ -432,7 +436,7 @@ func (o *FirmwareUpgradeStatus) SetPendingType(v string) {
 
 // GetSdCardDownloadError returns the SdCardDownloadError field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetSdCardDownloadError() string {
-	if o == nil || o.SdCardDownloadError == nil {
+	if o == nil || IsNil(o.SdCardDownloadError) {
 		var ret string
 		return ret
 	}
@@ -442,7 +446,7 @@ func (o *FirmwareUpgradeStatus) GetSdCardDownloadError() string {
 // GetSdCardDownloadErrorOk returns a tuple with the SdCardDownloadError field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetSdCardDownloadErrorOk() (*string, bool) {
-	if o == nil || o.SdCardDownloadError == nil {
+	if o == nil || IsNil(o.SdCardDownloadError) {
 		return nil, false
 	}
 	return o.SdCardDownloadError, true
@@ -450,7 +454,7 @@ func (o *FirmwareUpgradeStatus) GetSdCardDownloadErrorOk() (*string, bool) {
 
 // HasSdCardDownloadError returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasSdCardDownloadError() bool {
-	if o != nil && o.SdCardDownloadError != nil {
+	if o != nil && !IsNil(o.SdCardDownloadError) {
 		return true
 	}
 
@@ -464,7 +468,7 @@ func (o *FirmwareUpgradeStatus) SetSdCardDownloadError(v string) {
 
 // GetSourceFirmwareVersion returns the SourceFirmwareVersion field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetSourceFirmwareVersion() string {
-	if o == nil || o.SourceFirmwareVersion == nil {
+	if o == nil || IsNil(o.SourceFirmwareVersion) {
 		var ret string
 		return ret
 	}
@@ -474,7 +478,7 @@ func (o *FirmwareUpgradeStatus) GetSourceFirmwareVersion() string {
 // GetSourceFirmwareVersionOk returns a tuple with the SourceFirmwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetSourceFirmwareVersionOk() (*string, bool) {
-	if o == nil || o.SourceFirmwareVersion == nil {
+	if o == nil || IsNil(o.SourceFirmwareVersion) {
 		return nil, false
 	}
 	return o.SourceFirmwareVersion, true
@@ -482,7 +486,7 @@ func (o *FirmwareUpgradeStatus) GetSourceFirmwareVersionOk() (*string, bool) {
 
 // HasSourceFirmwareVersion returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasSourceFirmwareVersion() bool {
-	if o != nil && o.SourceFirmwareVersion != nil {
+	if o != nil && !IsNil(o.SourceFirmwareVersion) {
 		return true
 	}
 
@@ -496,7 +500,7 @@ func (o *FirmwareUpgradeStatus) SetSourceFirmwareVersion(v string) {
 
 // GetTargetFirmwareVersion returns the TargetFirmwareVersion field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetTargetFirmwareVersion() string {
-	if o == nil || o.TargetFirmwareVersion == nil {
+	if o == nil || IsNil(o.TargetFirmwareVersion) {
 		var ret string
 		return ret
 	}
@@ -506,7 +510,7 @@ func (o *FirmwareUpgradeStatus) GetTargetFirmwareVersion() string {
 // GetTargetFirmwareVersionOk returns a tuple with the TargetFirmwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeStatus) GetTargetFirmwareVersionOk() (*string, bool) {
-	if o == nil || o.TargetFirmwareVersion == nil {
+	if o == nil || IsNil(o.TargetFirmwareVersion) {
 		return nil, false
 	}
 	return o.TargetFirmwareVersion, true
@@ -514,7 +518,7 @@ func (o *FirmwareUpgradeStatus) GetTargetFirmwareVersionOk() (*string, bool) {
 
 // HasTargetFirmwareVersion returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasTargetFirmwareVersion() bool {
-	if o != nil && o.TargetFirmwareVersion != nil {
+	if o != nil && !IsNil(o.TargetFirmwareVersion) {
 		return true
 	}
 
@@ -526,137 +530,185 @@ func (o *FirmwareUpgradeStatus) SetTargetFirmwareVersion(v string) {
 	o.TargetFirmwareVersion = &v
 }
 
-// GetUpgrade returns the Upgrade field value if set, zero value otherwise.
+// GetUpgrade returns the Upgrade field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeStatus) GetUpgrade() FirmwareUpgradeBaseRelationship {
-	if o == nil || o.Upgrade == nil {
+	if o == nil || IsNil(o.Upgrade.Get()) {
 		var ret FirmwareUpgradeBaseRelationship
 		return ret
 	}
-	return *o.Upgrade
+	return *o.Upgrade.Get()
 }
 
 // GetUpgradeOk returns a tuple with the Upgrade field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeStatus) GetUpgradeOk() (*FirmwareUpgradeBaseRelationship, bool) {
-	if o == nil || o.Upgrade == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Upgrade, true
+	return o.Upgrade.Get(), o.Upgrade.IsSet()
 }
 
 // HasUpgrade returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasUpgrade() bool {
-	if o != nil && o.Upgrade != nil {
+	if o != nil && o.Upgrade.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUpgrade gets a reference to the given FirmwareUpgradeBaseRelationship and assigns it to the Upgrade field.
+// SetUpgrade gets a reference to the given NullableFirmwareUpgradeBaseRelationship and assigns it to the Upgrade field.
 func (o *FirmwareUpgradeStatus) SetUpgrade(v FirmwareUpgradeBaseRelationship) {
-	o.Upgrade = &v
+	o.Upgrade.Set(&v)
 }
 
-// GetWorkflow returns the Workflow field value if set, zero value otherwise.
+// SetUpgradeNil sets the value for Upgrade to be an explicit nil
+func (o *FirmwareUpgradeStatus) SetUpgradeNil() {
+	o.Upgrade.Set(nil)
+}
+
+// UnsetUpgrade ensures that no value is present for Upgrade, not even an explicit nil
+func (o *FirmwareUpgradeStatus) UnsetUpgrade() {
+	o.Upgrade.Unset()
+}
+
+// GetWorkflow returns the Workflow field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeStatus) GetWorkflow() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.Workflow == nil {
+	if o == nil || IsNil(o.Workflow.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.Workflow
+	return *o.Workflow.Get()
 }
 
 // GetWorkflowOk returns a tuple with the Workflow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeStatus) GetWorkflowOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.Workflow == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Workflow, true
+	return o.Workflow.Get(), o.Workflow.IsSet()
 }
 
 // HasWorkflow returns a boolean if a field has been set.
 func (o *FirmwareUpgradeStatus) HasWorkflow() bool {
-	if o != nil && o.Workflow != nil {
+	if o != nil && o.Workflow.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflow gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the Workflow field.
+// SetWorkflow gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the Workflow field.
 func (o *FirmwareUpgradeStatus) SetWorkflow(v WorkflowWorkflowInfoRelationship) {
-	o.Workflow = &v
+	o.Workflow.Set(&v)
+}
+
+// SetWorkflowNil sets the value for Workflow to be an explicit nil
+func (o *FirmwareUpgradeStatus) SetWorkflowNil() {
+	o.Workflow.Set(nil)
+}
+
+// UnsetWorkflow ensures that no value is present for Workflow, not even an explicit nil
+func (o *FirmwareUpgradeStatus) UnsetWorkflow() {
+	o.Workflow.Unset()
 }
 
 func (o FirmwareUpgradeStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareUpgradeStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConnectorDownloadStatus, errConnectorDownloadStatus := json.Marshal(o.ConnectorDownloadStatus)
 	if errConnectorDownloadStatus != nil {
-		return []byte{}, errConnectorDownloadStatus
+		return map[string]interface{}{}, errConnectorDownloadStatus
 	}
 	errConnectorDownloadStatus = json.Unmarshal([]byte(serializedConnectorDownloadStatus), &toSerialize)
 	if errConnectorDownloadStatus != nil {
-		return []byte{}, errConnectorDownloadStatus
+		return map[string]interface{}{}, errConnectorDownloadStatus
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DownloadMessage != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DownloadMessage) {
 		toSerialize["DownloadMessage"] = o.DownloadMessage
 	}
-	if o.DownloadPercentage != nil {
+	if !IsNil(o.DownloadPercentage) {
 		toSerialize["DownloadPercentage"] = o.DownloadPercentage
 	}
-	if o.DownloadStage != nil {
+	if !IsNil(o.DownloadStage) {
 		toSerialize["DownloadStage"] = o.DownloadStage
 	}
-	if o.EpPowerStatus != nil {
+	if !IsNil(o.EpPowerStatus) {
 		toSerialize["EpPowerStatus"] = o.EpPowerStatus
 	}
-	if o.InitialPowerStatus != nil {
+	if !IsNil(o.InitialPowerStatus) {
 		toSerialize["InitialPowerStatus"] = o.InitialPowerStatus
 	}
-	if o.OverallError != nil {
+	if !IsNil(o.OverallError) {
 		toSerialize["OverallError"] = o.OverallError
 	}
-	if o.OverallPercentage != nil {
+	if !IsNil(o.OverallPercentage) {
 		toSerialize["OverallPercentage"] = o.OverallPercentage
 	}
-	if o.Overallstatus != nil {
+	if !IsNil(o.Overallstatus) {
 		toSerialize["Overallstatus"] = o.Overallstatus
 	}
-	if o.PendingType != nil {
+	if !IsNil(o.PendingType) {
 		toSerialize["PendingType"] = o.PendingType
 	}
-	if o.SdCardDownloadError != nil {
+	if !IsNil(o.SdCardDownloadError) {
 		toSerialize["SdCardDownloadError"] = o.SdCardDownloadError
 	}
-	if o.SourceFirmwareVersion != nil {
+	if !IsNil(o.SourceFirmwareVersion) {
 		toSerialize["SourceFirmwareVersion"] = o.SourceFirmwareVersion
 	}
-	if o.TargetFirmwareVersion != nil {
+	if !IsNil(o.TargetFirmwareVersion) {
 		toSerialize["TargetFirmwareVersion"] = o.TargetFirmwareVersion
 	}
-	if o.Upgrade != nil {
-		toSerialize["Upgrade"] = o.Upgrade
+	if o.Upgrade.IsSet() {
+		toSerialize["Upgrade"] = o.Upgrade.Get()
 	}
-	if o.Workflow != nil {
-		toSerialize["Workflow"] = o.Workflow
+	if o.Workflow.IsSet() {
+		toSerialize["Workflow"] = o.Workflow.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareUpgradeStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareUpgradeStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareUpgradeStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -685,14 +737,14 @@ func (o *FirmwareUpgradeStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// CIMC firmware version of the server prior to the upgrade.
 		SourceFirmwareVersion *string `json:"SourceFirmwareVersion,omitempty"`
 		// CIMC firmware version of the server post the upgrade.
-		TargetFirmwareVersion *string                           `json:"TargetFirmwareVersion,omitempty"`
-		Upgrade               *FirmwareUpgradeBaseRelationship  `json:"Upgrade,omitempty"`
-		Workflow              *WorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
+		TargetFirmwareVersion *string                                  `json:"TargetFirmwareVersion,omitempty"`
+		Upgrade               NullableFirmwareUpgradeBaseRelationship  `json:"Upgrade,omitempty"`
+		Workflow              NullableWorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
 	}
 
 	varFirmwareUpgradeStatusWithoutEmbeddedStruct := FirmwareUpgradeStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUpgradeStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareUpgradeStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareUpgradeStatus := _FirmwareUpgradeStatus{}
 		varFirmwareUpgradeStatus.ClassId = varFirmwareUpgradeStatusWithoutEmbeddedStruct.ClassId
@@ -718,7 +770,7 @@ func (o *FirmwareUpgradeStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareUpgradeStatus := _FirmwareUpgradeStatus{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUpgradeStatus)
+	err = json.Unmarshal(data, &varFirmwareUpgradeStatus)
 	if err == nil {
 		o.ConnectorDownloadStatus = varFirmwareUpgradeStatus.ConnectorDownloadStatus
 	} else {
@@ -727,7 +779,7 @@ func (o *FirmwareUpgradeStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DownloadMessage")

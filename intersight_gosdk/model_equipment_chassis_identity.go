@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentChassisIdentity type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentChassisIdentity{}
 
 // EquipmentChassisIdentity ChassisIdentity object contains connectivity information about IOMs of the chassis. ChassisID is uniquely allocated for the combination of vendor, model and serial number of the chassis.
 type EquipmentChassisIdentity struct {
@@ -23,9 +27,9 @@ type EquipmentChassisIdentity struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                        `json:"ObjectType"`
-	IoCardIdentityList   []EquipmentIoCardIdentity     `json:"IoCardIdentityList,omitempty"`
-	Chassis              *EquipmentChassisRelationship `json:"Chassis,omitempty"`
+	ObjectType           string                               `json:"ObjectType"`
+	IoCardIdentityList   []EquipmentIoCardIdentity            `json:"IoCardIdentityList,omitempty"`
+	Chassis              NullableEquipmentChassisRelationship `json:"Chassis,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *EquipmentChassisIdentity) GetIoCardIdentityList() []EquipmentIoCardIden
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentChassisIdentity) GetIoCardIdentityListOk() ([]EquipmentIoCardIdentity, bool) {
-	if o == nil || o.IoCardIdentityList == nil {
+	if o == nil || IsNil(o.IoCardIdentityList) {
 		return nil, false
 	}
 	return o.IoCardIdentityList, true
@@ -125,7 +129,7 @@ func (o *EquipmentChassisIdentity) GetIoCardIdentityListOk() ([]EquipmentIoCardI
 
 // HasIoCardIdentityList returns a boolean if a field has been set.
 func (o *EquipmentChassisIdentity) HasIoCardIdentityList() bool {
-	if o != nil && o.IoCardIdentityList != nil {
+	if o != nil && IsNil(o.IoCardIdentityList) {
 		return true
 	}
 
@@ -137,81 +141,118 @@ func (o *EquipmentChassisIdentity) SetIoCardIdentityList(v []EquipmentIoCardIden
 	o.IoCardIdentityList = v
 }
 
-// GetChassis returns the Chassis field value if set, zero value otherwise.
+// GetChassis returns the Chassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentChassisIdentity) GetChassis() EquipmentChassisRelationship {
-	if o == nil || o.Chassis == nil {
+	if o == nil || IsNil(o.Chassis.Get()) {
 		var ret EquipmentChassisRelationship
 		return ret
 	}
-	return *o.Chassis
+	return *o.Chassis.Get()
 }
 
 // GetChassisOk returns a tuple with the Chassis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentChassisIdentity) GetChassisOk() (*EquipmentChassisRelationship, bool) {
-	if o == nil || o.Chassis == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Chassis, true
+	return o.Chassis.Get(), o.Chassis.IsSet()
 }
 
 // HasChassis returns a boolean if a field has been set.
 func (o *EquipmentChassisIdentity) HasChassis() bool {
-	if o != nil && o.Chassis != nil {
+	if o != nil && o.Chassis.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetChassis gets a reference to the given EquipmentChassisRelationship and assigns it to the Chassis field.
+// SetChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the Chassis field.
 func (o *EquipmentChassisIdentity) SetChassis(v EquipmentChassisRelationship) {
-	o.Chassis = &v
+	o.Chassis.Set(&v)
+}
+
+// SetChassisNil sets the value for Chassis to be an explicit nil
+func (o *EquipmentChassisIdentity) SetChassisNil() {
+	o.Chassis.Set(nil)
+}
+
+// UnsetChassis ensures that no value is present for Chassis, not even an explicit nil
+func (o *EquipmentChassisIdentity) UnsetChassis() {
+	o.Chassis.Unset()
 }
 
 func (o EquipmentChassisIdentity) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentChassisIdentity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentIdentity, errEquipmentIdentity := json.Marshal(o.EquipmentIdentity)
 	if errEquipmentIdentity != nil {
-		return []byte{}, errEquipmentIdentity
+		return map[string]interface{}{}, errEquipmentIdentity
 	}
 	errEquipmentIdentity = json.Unmarshal([]byte(serializedEquipmentIdentity), &toSerialize)
 	if errEquipmentIdentity != nil {
-		return []byte{}, errEquipmentIdentity
+		return map[string]interface{}{}, errEquipmentIdentity
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.IoCardIdentityList != nil {
 		toSerialize["IoCardIdentityList"] = o.IoCardIdentityList
 	}
-	if o.Chassis != nil {
-		toSerialize["Chassis"] = o.Chassis
+	if o.Chassis.IsSet() {
+		toSerialize["Chassis"] = o.Chassis.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentChassisIdentity) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentChassisIdentity) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentChassisIdentityWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType         string                        `json:"ObjectType"`
-		IoCardIdentityList []EquipmentIoCardIdentity     `json:"IoCardIdentityList,omitempty"`
-		Chassis            *EquipmentChassisRelationship `json:"Chassis,omitempty"`
+		ObjectType         string                               `json:"ObjectType"`
+		IoCardIdentityList []EquipmentIoCardIdentity            `json:"IoCardIdentityList,omitempty"`
+		Chassis            NullableEquipmentChassisRelationship `json:"Chassis,omitempty"`
 	}
 
 	varEquipmentChassisIdentityWithoutEmbeddedStruct := EquipmentChassisIdentityWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentChassisIdentityWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentChassisIdentityWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentChassisIdentity := _EquipmentChassisIdentity{}
 		varEquipmentChassisIdentity.ClassId = varEquipmentChassisIdentityWithoutEmbeddedStruct.ClassId
@@ -225,7 +266,7 @@ func (o *EquipmentChassisIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentChassisIdentity := _EquipmentChassisIdentity{}
 
-	err = json.Unmarshal(bytes, &varEquipmentChassisIdentity)
+	err = json.Unmarshal(data, &varEquipmentChassisIdentity)
 	if err == nil {
 		o.EquipmentIdentity = varEquipmentChassisIdentity.EquipmentIdentity
 	} else {
@@ -234,7 +275,7 @@ func (o *EquipmentChassisIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IoCardIdentityList")

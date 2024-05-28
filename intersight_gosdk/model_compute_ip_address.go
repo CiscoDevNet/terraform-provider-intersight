@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ComputeIpAddress type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComputeIpAddress{}
 
 // ComputeIpAddress Complex type representing an IP address in UCSM.
 type ComputeIpAddress struct {
@@ -124,7 +128,7 @@ func (o *ComputeIpAddress) SetObjectType(v string) {
 
 // GetAddress returns the Address field value if set, zero value otherwise.
 func (o *ComputeIpAddress) GetAddress() string {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		var ret string
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *ComputeIpAddress) GetAddress() string {
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeIpAddress) GetAddressOk() (*string, bool) {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		return nil, false
 	}
 	return o.Address, true
@@ -142,7 +146,7 @@ func (o *ComputeIpAddress) GetAddressOk() (*string, bool) {
 
 // HasAddress returns a boolean if a field has been set.
 func (o *ComputeIpAddress) HasAddress() bool {
-	if o != nil && o.Address != nil {
+	if o != nil && !IsNil(o.Address) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *ComputeIpAddress) SetAddress(v string) {
 
 // GetCategory returns the Category field value if set, zero value otherwise.
 func (o *ComputeIpAddress) GetCategory() string {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		var ret string
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *ComputeIpAddress) GetCategory() string {
 // GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeIpAddress) GetCategoryOk() (*string, bool) {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		return nil, false
 	}
 	return o.Category, true
@@ -174,7 +178,7 @@ func (o *ComputeIpAddress) GetCategoryOk() (*string, bool) {
 
 // HasCategory returns a boolean if a field has been set.
 func (o *ComputeIpAddress) HasCategory() bool {
-	if o != nil && o.Category != nil {
+	if o != nil && !IsNil(o.Category) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *ComputeIpAddress) SetCategory(v string) {
 
 // GetDefaultGateway returns the DefaultGateway field value if set, zero value otherwise.
 func (o *ComputeIpAddress) GetDefaultGateway() string {
-	if o == nil || o.DefaultGateway == nil {
+	if o == nil || IsNil(o.DefaultGateway) {
 		var ret string
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *ComputeIpAddress) GetDefaultGateway() string {
 // GetDefaultGatewayOk returns a tuple with the DefaultGateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeIpAddress) GetDefaultGatewayOk() (*string, bool) {
-	if o == nil || o.DefaultGateway == nil {
+	if o == nil || IsNil(o.DefaultGateway) {
 		return nil, false
 	}
 	return o.DefaultGateway, true
@@ -206,7 +210,7 @@ func (o *ComputeIpAddress) GetDefaultGatewayOk() (*string, bool) {
 
 // HasDefaultGateway returns a boolean if a field has been set.
 func (o *ComputeIpAddress) HasDefaultGateway() bool {
-	if o != nil && o.DefaultGateway != nil {
+	if o != nil && !IsNil(o.DefaultGateway) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *ComputeIpAddress) SetDefaultGateway(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *ComputeIpAddress) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *ComputeIpAddress) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeIpAddress) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -238,7 +242,7 @@ func (o *ComputeIpAddress) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *ComputeIpAddress) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *ComputeIpAddress) SetDn(v string) {
 
 // GetHttpPort returns the HttpPort field value if set, zero value otherwise.
 func (o *ComputeIpAddress) GetHttpPort() int64 {
-	if o == nil || o.HttpPort == nil {
+	if o == nil || IsNil(o.HttpPort) {
 		var ret int64
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *ComputeIpAddress) GetHttpPort() int64 {
 // GetHttpPortOk returns a tuple with the HttpPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeIpAddress) GetHttpPortOk() (*int64, bool) {
-	if o == nil || o.HttpPort == nil {
+	if o == nil || IsNil(o.HttpPort) {
 		return nil, false
 	}
 	return o.HttpPort, true
@@ -270,7 +274,7 @@ func (o *ComputeIpAddress) GetHttpPortOk() (*int64, bool) {
 
 // HasHttpPort returns a boolean if a field has been set.
 func (o *ComputeIpAddress) HasHttpPort() bool {
-	if o != nil && o.HttpPort != nil {
+	if o != nil && !IsNil(o.HttpPort) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *ComputeIpAddress) SetHttpPort(v int64) {
 
 // GetHttpsPort returns the HttpsPort field value if set, zero value otherwise.
 func (o *ComputeIpAddress) GetHttpsPort() int64 {
-	if o == nil || o.HttpsPort == nil {
+	if o == nil || IsNil(o.HttpsPort) {
 		var ret int64
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *ComputeIpAddress) GetHttpsPort() int64 {
 // GetHttpsPortOk returns a tuple with the HttpsPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeIpAddress) GetHttpsPortOk() (*int64, bool) {
-	if o == nil || o.HttpsPort == nil {
+	if o == nil || IsNil(o.HttpsPort) {
 		return nil, false
 	}
 	return o.HttpsPort, true
@@ -302,7 +306,7 @@ func (o *ComputeIpAddress) GetHttpsPortOk() (*int64, bool) {
 
 // HasHttpsPort returns a boolean if a field has been set.
 func (o *ComputeIpAddress) HasHttpsPort() bool {
-	if o != nil && o.HttpsPort != nil {
+	if o != nil && !IsNil(o.HttpsPort) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *ComputeIpAddress) SetHttpsPort(v int64) {
 
 // GetKvmPort returns the KvmPort field value if set, zero value otherwise.
 func (o *ComputeIpAddress) GetKvmPort() int64 {
-	if o == nil || o.KvmPort == nil {
+	if o == nil || IsNil(o.KvmPort) {
 		var ret int64
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *ComputeIpAddress) GetKvmPort() int64 {
 // GetKvmPortOk returns a tuple with the KvmPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeIpAddress) GetKvmPortOk() (*int64, bool) {
-	if o == nil || o.KvmPort == nil {
+	if o == nil || IsNil(o.KvmPort) {
 		return nil, false
 	}
 	return o.KvmPort, true
@@ -334,7 +338,7 @@ func (o *ComputeIpAddress) GetKvmPortOk() (*int64, bool) {
 
 // HasKvmPort returns a boolean if a field has been set.
 func (o *ComputeIpAddress) HasKvmPort() bool {
-	if o != nil && o.KvmPort != nil {
+	if o != nil && !IsNil(o.KvmPort) {
 		return true
 	}
 
@@ -348,7 +352,7 @@ func (o *ComputeIpAddress) SetKvmPort(v int64) {
 
 // GetKvmVlan returns the KvmVlan field value if set, zero value otherwise.
 func (o *ComputeIpAddress) GetKvmVlan() int64 {
-	if o == nil || o.KvmVlan == nil {
+	if o == nil || IsNil(o.KvmVlan) {
 		var ret int64
 		return ret
 	}
@@ -358,7 +362,7 @@ func (o *ComputeIpAddress) GetKvmVlan() int64 {
 // GetKvmVlanOk returns a tuple with the KvmVlan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeIpAddress) GetKvmVlanOk() (*int64, bool) {
-	if o == nil || o.KvmVlan == nil {
+	if o == nil || IsNil(o.KvmVlan) {
 		return nil, false
 	}
 	return o.KvmVlan, true
@@ -366,7 +370,7 @@ func (o *ComputeIpAddress) GetKvmVlanOk() (*int64, bool) {
 
 // HasKvmVlan returns a boolean if a field has been set.
 func (o *ComputeIpAddress) HasKvmVlan() bool {
-	if o != nil && o.KvmVlan != nil {
+	if o != nil && !IsNil(o.KvmVlan) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *ComputeIpAddress) SetKvmVlan(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ComputeIpAddress) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *ComputeIpAddress) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeIpAddress) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -398,7 +402,7 @@ func (o *ComputeIpAddress) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ComputeIpAddress) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *ComputeIpAddress) SetName(v string) {
 
 // GetSubnet returns the Subnet field value if set, zero value otherwise.
 func (o *ComputeIpAddress) GetSubnet() string {
-	if o == nil || o.Subnet == nil {
+	if o == nil || IsNil(o.Subnet) {
 		var ret string
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *ComputeIpAddress) GetSubnet() string {
 // GetSubnetOk returns a tuple with the Subnet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeIpAddress) GetSubnetOk() (*string, bool) {
-	if o == nil || o.Subnet == nil {
+	if o == nil || IsNil(o.Subnet) {
 		return nil, false
 	}
 	return o.Subnet, true
@@ -430,7 +434,7 @@ func (o *ComputeIpAddress) GetSubnetOk() (*string, bool) {
 
 // HasSubnet returns a boolean if a field has been set.
 func (o *ComputeIpAddress) HasSubnet() bool {
-	if o != nil && o.Subnet != nil {
+	if o != nil && !IsNil(o.Subnet) {
 		return true
 	}
 
@@ -444,7 +448,7 @@ func (o *ComputeIpAddress) SetSubnet(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *ComputeIpAddress) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -454,7 +458,7 @@ func (o *ComputeIpAddress) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeIpAddress) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -462,7 +466,7 @@ func (o *ComputeIpAddress) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *ComputeIpAddress) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -475,52 +479,56 @@ func (o *ComputeIpAddress) SetType(v string) {
 }
 
 func (o ComputeIpAddress) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComputeIpAddress) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Address != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Address) {
 		toSerialize["Address"] = o.Address
 	}
-	if o.Category != nil {
+	if !IsNil(o.Category) {
 		toSerialize["Category"] = o.Category
 	}
-	if o.DefaultGateway != nil {
+	if !IsNil(o.DefaultGateway) {
 		toSerialize["DefaultGateway"] = o.DefaultGateway
 	}
-	if o.Dn != nil {
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.HttpPort != nil {
+	if !IsNil(o.HttpPort) {
 		toSerialize["HttpPort"] = o.HttpPort
 	}
-	if o.HttpsPort != nil {
+	if !IsNil(o.HttpsPort) {
 		toSerialize["HttpsPort"] = o.HttpsPort
 	}
-	if o.KvmPort != nil {
+	if !IsNil(o.KvmPort) {
 		toSerialize["KvmPort"] = o.KvmPort
 	}
-	if o.KvmVlan != nil {
+	if !IsNil(o.KvmVlan) {
 		toSerialize["KvmVlan"] = o.KvmVlan
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Subnet != nil {
+	if !IsNil(o.Subnet) {
 		toSerialize["Subnet"] = o.Subnet
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 
@@ -528,10 +536,32 @@ func (o ComputeIpAddress) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ComputeIpAddress) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ComputeIpAddress) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ComputeIpAddressWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -563,7 +593,7 @@ func (o *ComputeIpAddress) UnmarshalJSON(bytes []byte) (err error) {
 
 	varComputeIpAddressWithoutEmbeddedStruct := ComputeIpAddressWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varComputeIpAddressWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varComputeIpAddressWithoutEmbeddedStruct)
 	if err == nil {
 		varComputeIpAddress := _ComputeIpAddress{}
 		varComputeIpAddress.ClassId = varComputeIpAddressWithoutEmbeddedStruct.ClassId
@@ -586,7 +616,7 @@ func (o *ComputeIpAddress) UnmarshalJSON(bytes []byte) (err error) {
 
 	varComputeIpAddress := _ComputeIpAddress{}
 
-	err = json.Unmarshal(bytes, &varComputeIpAddress)
+	err = json.Unmarshal(data, &varComputeIpAddress)
 	if err == nil {
 		o.MoBaseComplexType = varComputeIpAddress.MoBaseComplexType
 	} else {
@@ -595,7 +625,7 @@ func (o *ComputeIpAddress) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Address")

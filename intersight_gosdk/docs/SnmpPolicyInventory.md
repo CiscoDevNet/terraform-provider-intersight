@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **TrapCommunity** | Pointer to **string** | SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users. | [optional] [readonly] 
 **V2Enabled** | Pointer to **bool** | State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host. | [optional] [readonly] [default to true]
 **V3Enabled** | Pointer to **bool** | State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host. | [optional] [readonly] [default to true]
-**TargetMo** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**TargetMo** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -424,6 +424,16 @@ SetTargetMo sets TargetMo field to given value.
 
 HasTargetMo returns a boolean if a field has been set.
 
+### SetTargetMoNil
+
+`func (o *SnmpPolicyInventory) SetTargetMoNil(b bool)`
+
+ SetTargetMoNil sets the value for TargetMo to be an explicit nil
+
+### UnsetTargetMo
+`func (o *SnmpPolicyInventory) UnsetTargetMo()`
+
+UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

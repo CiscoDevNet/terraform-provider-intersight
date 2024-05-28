@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexHealthCheckNodeLevelInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexHealthCheckNodeLevelInfo{}
 
 // HyperflexHealthCheckNodeLevelInfo Health check node information, contains node IP address, ESXi IP address and node name.
 type HyperflexHealthCheckNodeLevelInfo struct {
@@ -114,7 +118,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) SetObjectType(v string) {
 
 // GetNodeCause returns the NodeCause field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeCause() string {
-	if o == nil || o.NodeCause == nil {
+	if o == nil || IsNil(o.NodeCause) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeCause() string {
 // GetNodeCauseOk returns a tuple with the NodeCause field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeCauseOk() (*string, bool) {
-	if o == nil || o.NodeCause == nil {
+	if o == nil || IsNil(o.NodeCause) {
 		return nil, false
 	}
 	return o.NodeCause, true
@@ -132,7 +136,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeCauseOk() (*string, bool) {
 
 // HasNodeCause returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) HasNodeCause() bool {
-	if o != nil && o.NodeCause != nil {
+	if o != nil && !IsNil(o.NodeCause) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) SetNodeCause(v string) {
 
 // GetNodeCheckResult returns the NodeCheckResult field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeCheckResult() string {
-	if o == nil || o.NodeCheckResult == nil {
+	if o == nil || IsNil(o.NodeCheckResult) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeCheckResult() string {
 // GetNodeCheckResultOk returns a tuple with the NodeCheckResult field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeCheckResultOk() (*string, bool) {
-	if o == nil || o.NodeCheckResult == nil {
+	if o == nil || IsNil(o.NodeCheckResult) {
 		return nil, false
 	}
 	return o.NodeCheckResult, true
@@ -164,7 +168,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeCheckResultOk() (*string, boo
 
 // HasNodeCheckResult returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) HasNodeCheckResult() bool {
-	if o != nil && o.NodeCheckResult != nil {
+	if o != nil && !IsNil(o.NodeCheckResult) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) SetNodeCheckResult(v string) {
 
 // GetNodeEsxIpAddress returns the NodeEsxIpAddress field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeEsxIpAddress() string {
-	if o == nil || o.NodeEsxIpAddress == nil {
+	if o == nil || IsNil(o.NodeEsxIpAddress) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeEsxIpAddress() string {
 // GetNodeEsxIpAddressOk returns a tuple with the NodeEsxIpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeEsxIpAddressOk() (*string, bool) {
-	if o == nil || o.NodeEsxIpAddress == nil {
+	if o == nil || IsNil(o.NodeEsxIpAddress) {
 		return nil, false
 	}
 	return o.NodeEsxIpAddress, true
@@ -196,7 +200,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeEsxIpAddressOk() (*string, bo
 
 // HasNodeEsxIpAddress returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) HasNodeEsxIpAddress() bool {
-	if o != nil && o.NodeEsxIpAddress != nil {
+	if o != nil && !IsNil(o.NodeEsxIpAddress) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) SetNodeEsxIpAddress(v string) {
 
 // GetNodeIpAddress returns the NodeIpAddress field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeIpAddress() string {
-	if o == nil || o.NodeIpAddress == nil {
+	if o == nil || IsNil(o.NodeIpAddress) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeIpAddress() string {
 // GetNodeIpAddressOk returns a tuple with the NodeIpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeIpAddressOk() (*string, bool) {
-	if o == nil || o.NodeIpAddress == nil {
+	if o == nil || IsNil(o.NodeIpAddress) {
 		return nil, false
 	}
 	return o.NodeIpAddress, true
@@ -228,7 +232,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeIpAddressOk() (*string, bool)
 
 // HasNodeIpAddress returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) HasNodeIpAddress() bool {
-	if o != nil && o.NodeIpAddress != nil {
+	if o != nil && !IsNil(o.NodeIpAddress) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) SetNodeIpAddress(v string) {
 
 // GetNodeName returns the NodeName field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeName() string {
-	if o == nil || o.NodeName == nil {
+	if o == nil || IsNil(o.NodeName) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeName() string {
 // GetNodeNameOk returns a tuple with the NodeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeNameOk() (*string, bool) {
-	if o == nil || o.NodeName == nil {
+	if o == nil || IsNil(o.NodeName) {
 		return nil, false
 	}
 	return o.NodeName, true
@@ -260,7 +264,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeNameOk() (*string, bool) {
 
 // HasNodeName returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) HasNodeName() bool {
-	if o != nil && o.NodeName != nil {
+	if o != nil && !IsNil(o.NodeName) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) SetNodeName(v string) {
 
 // GetNodeResolution returns the NodeResolution field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeResolution() string {
-	if o == nil || o.NodeResolution == nil {
+	if o == nil || IsNil(o.NodeResolution) {
 		var ret string
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeResolution() string {
 // GetNodeResolutionOk returns a tuple with the NodeResolution field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeResolutionOk() (*string, bool) {
-	if o == nil || o.NodeResolution == nil {
+	if o == nil || IsNil(o.NodeResolution) {
 		return nil, false
 	}
 	return o.NodeResolution, true
@@ -292,7 +296,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) GetNodeResolutionOk() (*string, bool
 
 // HasNodeResolution returns a boolean if a field has been set.
 func (o *HyperflexHealthCheckNodeLevelInfo) HasNodeResolution() bool {
-	if o != nil && o.NodeResolution != nil {
+	if o != nil && !IsNil(o.NodeResolution) {
 		return true
 	}
 
@@ -305,37 +309,41 @@ func (o *HyperflexHealthCheckNodeLevelInfo) SetNodeResolution(v string) {
 }
 
 func (o HyperflexHealthCheckNodeLevelInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexHealthCheckNodeLevelInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.NodeCause != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.NodeCause) {
 		toSerialize["NodeCause"] = o.NodeCause
 	}
-	if o.NodeCheckResult != nil {
+	if !IsNil(o.NodeCheckResult) {
 		toSerialize["NodeCheckResult"] = o.NodeCheckResult
 	}
-	if o.NodeEsxIpAddress != nil {
+	if !IsNil(o.NodeEsxIpAddress) {
 		toSerialize["NodeEsxIpAddress"] = o.NodeEsxIpAddress
 	}
-	if o.NodeIpAddress != nil {
+	if !IsNil(o.NodeIpAddress) {
 		toSerialize["NodeIpAddress"] = o.NodeIpAddress
 	}
-	if o.NodeName != nil {
+	if !IsNil(o.NodeName) {
 		toSerialize["NodeName"] = o.NodeName
 	}
-	if o.NodeResolution != nil {
+	if !IsNil(o.NodeResolution) {
 		toSerialize["NodeResolution"] = o.NodeResolution
 	}
 
@@ -343,10 +351,32 @@ func (o HyperflexHealthCheckNodeLevelInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexHealthCheckNodeLevelInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexHealthCheckNodeLevelInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexHealthCheckNodeLevelInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -368,7 +398,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) UnmarshalJSON(bytes []byte) (err err
 
 	varHyperflexHealthCheckNodeLevelInfoWithoutEmbeddedStruct := HyperflexHealthCheckNodeLevelInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHealthCheckNodeLevelInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexHealthCheckNodeLevelInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexHealthCheckNodeLevelInfo := _HyperflexHealthCheckNodeLevelInfo{}
 		varHyperflexHealthCheckNodeLevelInfo.ClassId = varHyperflexHealthCheckNodeLevelInfoWithoutEmbeddedStruct.ClassId
@@ -386,7 +416,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) UnmarshalJSON(bytes []byte) (err err
 
 	varHyperflexHealthCheckNodeLevelInfo := _HyperflexHealthCheckNodeLevelInfo{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHealthCheckNodeLevelInfo)
+	err = json.Unmarshal(data, &varHyperflexHealthCheckNodeLevelInfo)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexHealthCheckNodeLevelInfo.MoBaseComplexType
 	} else {
@@ -395,7 +425,7 @@ func (o *HyperflexHealthCheckNodeLevelInfo) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "NodeCause")

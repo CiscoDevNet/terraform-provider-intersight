@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowPowerShellBatchApiExecutor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowPowerShellBatchApiExecutor{}
 
 // WorkflowPowerShellBatchApiExecutor Intersight allows generic API tasks to be created by taking the API request body and a response parser specification in the form of content.Grammar object. Batch API associates the list of API requests to be executed as part of single task execution. Each API request takes the request body and a response parser specification.
 type WorkflowPowerShellBatchApiExecutor struct {
@@ -23,9 +27,9 @@ type WorkflowPowerShellBatchApiExecutor struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                                    `json:"ObjectType"`
-	ErrorResponseHandler *WorkflowErrorResponseHandlerRelationship `json:"ErrorResponseHandler,omitempty"`
-	TaskDefinition       *WorkflowTaskDefinitionRelationship       `json:"TaskDefinition,omitempty"`
+	ObjectType           string                                           `json:"ObjectType"`
+	ErrorResponseHandler NullableWorkflowErrorResponseHandlerRelationship `json:"ErrorResponseHandler,omitempty"`
+	TaskDefinition       NullableWorkflowTaskDefinitionRelationship       `json:"TaskDefinition,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -102,113 +106,161 @@ func (o *WorkflowPowerShellBatchApiExecutor) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetErrorResponseHandler returns the ErrorResponseHandler field value if set, zero value otherwise.
+// GetErrorResponseHandler returns the ErrorResponseHandler field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowPowerShellBatchApiExecutor) GetErrorResponseHandler() WorkflowErrorResponseHandlerRelationship {
-	if o == nil || o.ErrorResponseHandler == nil {
+	if o == nil || IsNil(o.ErrorResponseHandler.Get()) {
 		var ret WorkflowErrorResponseHandlerRelationship
 		return ret
 	}
-	return *o.ErrorResponseHandler
+	return *o.ErrorResponseHandler.Get()
 }
 
 // GetErrorResponseHandlerOk returns a tuple with the ErrorResponseHandler field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowPowerShellBatchApiExecutor) GetErrorResponseHandlerOk() (*WorkflowErrorResponseHandlerRelationship, bool) {
-	if o == nil || o.ErrorResponseHandler == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ErrorResponseHandler, true
+	return o.ErrorResponseHandler.Get(), o.ErrorResponseHandler.IsSet()
 }
 
 // HasErrorResponseHandler returns a boolean if a field has been set.
 func (o *WorkflowPowerShellBatchApiExecutor) HasErrorResponseHandler() bool {
-	if o != nil && o.ErrorResponseHandler != nil {
+	if o != nil && o.ErrorResponseHandler.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetErrorResponseHandler gets a reference to the given WorkflowErrorResponseHandlerRelationship and assigns it to the ErrorResponseHandler field.
+// SetErrorResponseHandler gets a reference to the given NullableWorkflowErrorResponseHandlerRelationship and assigns it to the ErrorResponseHandler field.
 func (o *WorkflowPowerShellBatchApiExecutor) SetErrorResponseHandler(v WorkflowErrorResponseHandlerRelationship) {
-	o.ErrorResponseHandler = &v
+	o.ErrorResponseHandler.Set(&v)
 }
 
-// GetTaskDefinition returns the TaskDefinition field value if set, zero value otherwise.
+// SetErrorResponseHandlerNil sets the value for ErrorResponseHandler to be an explicit nil
+func (o *WorkflowPowerShellBatchApiExecutor) SetErrorResponseHandlerNil() {
+	o.ErrorResponseHandler.Set(nil)
+}
+
+// UnsetErrorResponseHandler ensures that no value is present for ErrorResponseHandler, not even an explicit nil
+func (o *WorkflowPowerShellBatchApiExecutor) UnsetErrorResponseHandler() {
+	o.ErrorResponseHandler.Unset()
+}
+
+// GetTaskDefinition returns the TaskDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowPowerShellBatchApiExecutor) GetTaskDefinition() WorkflowTaskDefinitionRelationship {
-	if o == nil || o.TaskDefinition == nil {
+	if o == nil || IsNil(o.TaskDefinition.Get()) {
 		var ret WorkflowTaskDefinitionRelationship
 		return ret
 	}
-	return *o.TaskDefinition
+	return *o.TaskDefinition.Get()
 }
 
 // GetTaskDefinitionOk returns a tuple with the TaskDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowPowerShellBatchApiExecutor) GetTaskDefinitionOk() (*WorkflowTaskDefinitionRelationship, bool) {
-	if o == nil || o.TaskDefinition == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TaskDefinition, true
+	return o.TaskDefinition.Get(), o.TaskDefinition.IsSet()
 }
 
 // HasTaskDefinition returns a boolean if a field has been set.
 func (o *WorkflowPowerShellBatchApiExecutor) HasTaskDefinition() bool {
-	if o != nil && o.TaskDefinition != nil {
+	if o != nil && o.TaskDefinition.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTaskDefinition gets a reference to the given WorkflowTaskDefinitionRelationship and assigns it to the TaskDefinition field.
+// SetTaskDefinition gets a reference to the given NullableWorkflowTaskDefinitionRelationship and assigns it to the TaskDefinition field.
 func (o *WorkflowPowerShellBatchApiExecutor) SetTaskDefinition(v WorkflowTaskDefinitionRelationship) {
-	o.TaskDefinition = &v
+	o.TaskDefinition.Set(&v)
+}
+
+// SetTaskDefinitionNil sets the value for TaskDefinition to be an explicit nil
+func (o *WorkflowPowerShellBatchApiExecutor) SetTaskDefinitionNil() {
+	o.TaskDefinition.Set(nil)
+}
+
+// UnsetTaskDefinition ensures that no value is present for TaskDefinition, not even an explicit nil
+func (o *WorkflowPowerShellBatchApiExecutor) UnsetTaskDefinition() {
+	o.TaskDefinition.Unset()
 }
 
 func (o WorkflowPowerShellBatchApiExecutor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowPowerShellBatchApiExecutor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowBatchExecutor, errWorkflowBatchExecutor := json.Marshal(o.WorkflowBatchExecutor)
 	if errWorkflowBatchExecutor != nil {
-		return []byte{}, errWorkflowBatchExecutor
+		return map[string]interface{}{}, errWorkflowBatchExecutor
 	}
 	errWorkflowBatchExecutor = json.Unmarshal([]byte(serializedWorkflowBatchExecutor), &toSerialize)
 	if errWorkflowBatchExecutor != nil {
-		return []byte{}, errWorkflowBatchExecutor
+		return map[string]interface{}{}, errWorkflowBatchExecutor
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.ErrorResponseHandler.IsSet() {
+		toSerialize["ErrorResponseHandler"] = o.ErrorResponseHandler.Get()
 	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ErrorResponseHandler != nil {
-		toSerialize["ErrorResponseHandler"] = o.ErrorResponseHandler
-	}
-	if o.TaskDefinition != nil {
-		toSerialize["TaskDefinition"] = o.TaskDefinition
+	if o.TaskDefinition.IsSet() {
+		toSerialize["TaskDefinition"] = o.TaskDefinition.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowPowerShellBatchApiExecutor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowPowerShellBatchApiExecutor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowPowerShellBatchApiExecutorWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType           string                                    `json:"ObjectType"`
-		ErrorResponseHandler *WorkflowErrorResponseHandlerRelationship `json:"ErrorResponseHandler,omitempty"`
-		TaskDefinition       *WorkflowTaskDefinitionRelationship       `json:"TaskDefinition,omitempty"`
+		ObjectType           string                                           `json:"ObjectType"`
+		ErrorResponseHandler NullableWorkflowErrorResponseHandlerRelationship `json:"ErrorResponseHandler,omitempty"`
+		TaskDefinition       NullableWorkflowTaskDefinitionRelationship       `json:"TaskDefinition,omitempty"`
 	}
 
 	varWorkflowPowerShellBatchApiExecutorWithoutEmbeddedStruct := WorkflowPowerShellBatchApiExecutorWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowPowerShellBatchApiExecutorWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowPowerShellBatchApiExecutorWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowPowerShellBatchApiExecutor := _WorkflowPowerShellBatchApiExecutor{}
 		varWorkflowPowerShellBatchApiExecutor.ClassId = varWorkflowPowerShellBatchApiExecutorWithoutEmbeddedStruct.ClassId
@@ -222,7 +274,7 @@ func (o *WorkflowPowerShellBatchApiExecutor) UnmarshalJSON(bytes []byte) (err er
 
 	varWorkflowPowerShellBatchApiExecutor := _WorkflowPowerShellBatchApiExecutor{}
 
-	err = json.Unmarshal(bytes, &varWorkflowPowerShellBatchApiExecutor)
+	err = json.Unmarshal(data, &varWorkflowPowerShellBatchApiExecutor)
 	if err == nil {
 		o.WorkflowBatchExecutor = varWorkflowPowerShellBatchApiExecutor.WorkflowBatchExecutor
 	} else {
@@ -231,7 +283,7 @@ func (o *WorkflowPowerShellBatchApiExecutor) UnmarshalJSON(bytes []byte) (err er
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ErrorResponseHandler")

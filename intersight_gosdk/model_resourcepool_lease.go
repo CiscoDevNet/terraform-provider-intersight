@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ResourcepoolLease type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourcepoolLease{}
 
 // ResourcepoolLease Lease API invoked by passing resource pool, lease API will reserve or un-reserve the resource from the pool.
 type ResourcepoolLease struct {
@@ -32,12 +36,12 @@ type ResourcepoolLease struct {
 	LeaseParameters             NullableResourcepoolLeaseParameters `json:"LeaseParameters,omitempty"`
 	Resource                    *MoBaseMo                           `json:"Resource,omitempty"`
 	// The type of resource present in the pool, such as 'server' can be a RackUnit or Blade. * `None` - The resource cannot consider for Resource Pool. * `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.
-	ResourceType         *string                                `json:"ResourceType,omitempty"`
-	AssignedToEntity     *MoBaseMoRelationship                  `json:"AssignedToEntity,omitempty"`
-	LeasedResource       *ResourcepoolLeaseResourceRelationship `json:"LeasedResource,omitempty"`
-	Pool                 *ResourcepoolPoolRelationship          `json:"Pool,omitempty"`
-	PoolMember           *ResourcepoolPoolMemberRelationship    `json:"PoolMember,omitempty"`
-	Universe             *ResourcepoolUniverseRelationship      `json:"Universe,omitempty"`
+	ResourceType         *string                                       `json:"ResourceType,omitempty"`
+	AssignedToEntity     NullableMoBaseMoRelationship                  `json:"AssignedToEntity,omitempty"`
+	LeasedResource       NullableResourcepoolLeaseResourceRelationship `json:"LeasedResource,omitempty"`
+	Pool                 NullableResourcepoolPoolRelationship          `json:"Pool,omitempty"`
+	PoolMember           NullableResourcepoolPoolMemberRelationship    `json:"PoolMember,omitempty"`
+	Universe             NullableResourcepoolUniverseRelationship      `json:"Universe,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -139,7 +143,7 @@ func (o *ResourcepoolLease) GetCondition() []ResourceSelector {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolLease) GetConditionOk() ([]ResourceSelector, bool) {
-	if o == nil || o.Condition == nil {
+	if o == nil || IsNil(o.Condition) {
 		return nil, false
 	}
 	return o.Condition, true
@@ -147,7 +151,7 @@ func (o *ResourcepoolLease) GetConditionOk() ([]ResourceSelector, bool) {
 
 // HasCondition returns a boolean if a field has been set.
 func (o *ResourcepoolLease) HasCondition() bool {
-	if o != nil && o.Condition != nil {
+	if o != nil && IsNil(o.Condition) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *ResourcepoolLease) SetCondition(v []ResourceSelector) {
 
 // GetFeature returns the Feature field value if set, zero value otherwise.
 func (o *ResourcepoolLease) GetFeature() string {
-	if o == nil || o.Feature == nil {
+	if o == nil || IsNil(o.Feature) {
 		var ret string
 		return ret
 	}
@@ -171,7 +175,7 @@ func (o *ResourcepoolLease) GetFeature() string {
 // GetFeatureOk returns a tuple with the Feature field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourcepoolLease) GetFeatureOk() (*string, bool) {
-	if o == nil || o.Feature == nil {
+	if o == nil || IsNil(o.Feature) {
 		return nil, false
 	}
 	return o.Feature, true
@@ -179,7 +183,7 @@ func (o *ResourcepoolLease) GetFeatureOk() (*string, bool) {
 
 // HasFeature returns a boolean if a field has been set.
 func (o *ResourcepoolLease) HasFeature() bool {
-	if o != nil && o.Feature != nil {
+	if o != nil && !IsNil(o.Feature) {
 		return true
 	}
 
@@ -193,7 +197,7 @@ func (o *ResourcepoolLease) SetFeature(v string) {
 
 // GetIsExclusiveAtAssignedEntity returns the IsExclusiveAtAssignedEntity field value if set, zero value otherwise.
 func (o *ResourcepoolLease) GetIsExclusiveAtAssignedEntity() bool {
-	if o == nil || o.IsExclusiveAtAssignedEntity == nil {
+	if o == nil || IsNil(o.IsExclusiveAtAssignedEntity) {
 		var ret bool
 		return ret
 	}
@@ -203,7 +207,7 @@ func (o *ResourcepoolLease) GetIsExclusiveAtAssignedEntity() bool {
 // GetIsExclusiveAtAssignedEntityOk returns a tuple with the IsExclusiveAtAssignedEntity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourcepoolLease) GetIsExclusiveAtAssignedEntityOk() (*bool, bool) {
-	if o == nil || o.IsExclusiveAtAssignedEntity == nil {
+	if o == nil || IsNil(o.IsExclusiveAtAssignedEntity) {
 		return nil, false
 	}
 	return o.IsExclusiveAtAssignedEntity, true
@@ -211,7 +215,7 @@ func (o *ResourcepoolLease) GetIsExclusiveAtAssignedEntityOk() (*bool, bool) {
 
 // HasIsExclusiveAtAssignedEntity returns a boolean if a field has been set.
 func (o *ResourcepoolLease) HasIsExclusiveAtAssignedEntity() bool {
-	if o != nil && o.IsExclusiveAtAssignedEntity != nil {
+	if o != nil && !IsNil(o.IsExclusiveAtAssignedEntity) {
 		return true
 	}
 
@@ -225,7 +229,7 @@ func (o *ResourcepoolLease) SetIsExclusiveAtAssignedEntity(v bool) {
 
 // GetLeaseParameters returns the LeaseParameters field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolLease) GetLeaseParameters() ResourcepoolLeaseParameters {
-	if o == nil || o.LeaseParameters.Get() == nil {
+	if o == nil || IsNil(o.LeaseParameters.Get()) {
 		var ret ResourcepoolLeaseParameters
 		return ret
 	}
@@ -268,7 +272,7 @@ func (o *ResourcepoolLease) UnsetLeaseParameters() {
 
 // GetResource returns the Resource field value if set, zero value otherwise.
 func (o *ResourcepoolLease) GetResource() MoBaseMo {
-	if o == nil || o.Resource == nil {
+	if o == nil || IsNil(o.Resource) {
 		var ret MoBaseMo
 		return ret
 	}
@@ -278,7 +282,7 @@ func (o *ResourcepoolLease) GetResource() MoBaseMo {
 // GetResourceOk returns a tuple with the Resource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourcepoolLease) GetResourceOk() (*MoBaseMo, bool) {
-	if o == nil || o.Resource == nil {
+	if o == nil || IsNil(o.Resource) {
 		return nil, false
 	}
 	return o.Resource, true
@@ -286,7 +290,7 @@ func (o *ResourcepoolLease) GetResourceOk() (*MoBaseMo, bool) {
 
 // HasResource returns a boolean if a field has been set.
 func (o *ResourcepoolLease) HasResource() bool {
-	if o != nil && o.Resource != nil {
+	if o != nil && !IsNil(o.Resource) {
 		return true
 	}
 
@@ -300,7 +304,7 @@ func (o *ResourcepoolLease) SetResource(v MoBaseMo) {
 
 // GetResourceType returns the ResourceType field value if set, zero value otherwise.
 func (o *ResourcepoolLease) GetResourceType() string {
-	if o == nil || o.ResourceType == nil {
+	if o == nil || IsNil(o.ResourceType) {
 		var ret string
 		return ret
 	}
@@ -310,7 +314,7 @@ func (o *ResourcepoolLease) GetResourceType() string {
 // GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourcepoolLease) GetResourceTypeOk() (*string, bool) {
-	if o == nil || o.ResourceType == nil {
+	if o == nil || IsNil(o.ResourceType) {
 		return nil, false
 	}
 	return o.ResourceType, true
@@ -318,7 +322,7 @@ func (o *ResourcepoolLease) GetResourceTypeOk() (*string, bool) {
 
 // HasResourceType returns a boolean if a field has been set.
 func (o *ResourcepoolLease) HasResourceType() bool {
-	if o != nil && o.ResourceType != nil {
+	if o != nil && !IsNil(o.ResourceType) {
 		return true
 	}
 
@@ -330,224 +334,305 @@ func (o *ResourcepoolLease) SetResourceType(v string) {
 	o.ResourceType = &v
 }
 
-// GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise.
+// GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolLease) GetAssignedToEntity() MoBaseMoRelationship {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil || IsNil(o.AssignedToEntity.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.AssignedToEntity
+	return *o.AssignedToEntity.Get()
 }
 
 // GetAssignedToEntityOk returns a tuple with the AssignedToEntity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolLease) GetAssignedToEntityOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssignedToEntity, true
+	return o.AssignedToEntity.Get(), o.AssignedToEntity.IsSet()
 }
 
 // HasAssignedToEntity returns a boolean if a field has been set.
 func (o *ResourcepoolLease) HasAssignedToEntity() bool {
-	if o != nil && o.AssignedToEntity != nil {
+	if o != nil && o.AssignedToEntity.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssignedToEntity gets a reference to the given MoBaseMoRelationship and assigns it to the AssignedToEntity field.
+// SetAssignedToEntity gets a reference to the given NullableMoBaseMoRelationship and assigns it to the AssignedToEntity field.
 func (o *ResourcepoolLease) SetAssignedToEntity(v MoBaseMoRelationship) {
-	o.AssignedToEntity = &v
+	o.AssignedToEntity.Set(&v)
 }
 
-// GetLeasedResource returns the LeasedResource field value if set, zero value otherwise.
+// SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+func (o *ResourcepoolLease) SetAssignedToEntityNil() {
+	o.AssignedToEntity.Set(nil)
+}
+
+// UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
+func (o *ResourcepoolLease) UnsetAssignedToEntity() {
+	o.AssignedToEntity.Unset()
+}
+
+// GetLeasedResource returns the LeasedResource field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolLease) GetLeasedResource() ResourcepoolLeaseResourceRelationship {
-	if o == nil || o.LeasedResource == nil {
+	if o == nil || IsNil(o.LeasedResource.Get()) {
 		var ret ResourcepoolLeaseResourceRelationship
 		return ret
 	}
-	return *o.LeasedResource
+	return *o.LeasedResource.Get()
 }
 
 // GetLeasedResourceOk returns a tuple with the LeasedResource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolLease) GetLeasedResourceOk() (*ResourcepoolLeaseResourceRelationship, bool) {
-	if o == nil || o.LeasedResource == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LeasedResource, true
+	return o.LeasedResource.Get(), o.LeasedResource.IsSet()
 }
 
 // HasLeasedResource returns a boolean if a field has been set.
 func (o *ResourcepoolLease) HasLeasedResource() bool {
-	if o != nil && o.LeasedResource != nil {
+	if o != nil && o.LeasedResource.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLeasedResource gets a reference to the given ResourcepoolLeaseResourceRelationship and assigns it to the LeasedResource field.
+// SetLeasedResource gets a reference to the given NullableResourcepoolLeaseResourceRelationship and assigns it to the LeasedResource field.
 func (o *ResourcepoolLease) SetLeasedResource(v ResourcepoolLeaseResourceRelationship) {
-	o.LeasedResource = &v
+	o.LeasedResource.Set(&v)
 }
 
-// GetPool returns the Pool field value if set, zero value otherwise.
+// SetLeasedResourceNil sets the value for LeasedResource to be an explicit nil
+func (o *ResourcepoolLease) SetLeasedResourceNil() {
+	o.LeasedResource.Set(nil)
+}
+
+// UnsetLeasedResource ensures that no value is present for LeasedResource, not even an explicit nil
+func (o *ResourcepoolLease) UnsetLeasedResource() {
+	o.LeasedResource.Unset()
+}
+
+// GetPool returns the Pool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolLease) GetPool() ResourcepoolPoolRelationship {
-	if o == nil || o.Pool == nil {
+	if o == nil || IsNil(o.Pool.Get()) {
 		var ret ResourcepoolPoolRelationship
 		return ret
 	}
-	return *o.Pool
+	return *o.Pool.Get()
 }
 
 // GetPoolOk returns a tuple with the Pool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolLease) GetPoolOk() (*ResourcepoolPoolRelationship, bool) {
-	if o == nil || o.Pool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pool, true
+	return o.Pool.Get(), o.Pool.IsSet()
 }
 
 // HasPool returns a boolean if a field has been set.
 func (o *ResourcepoolLease) HasPool() bool {
-	if o != nil && o.Pool != nil {
+	if o != nil && o.Pool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPool gets a reference to the given ResourcepoolPoolRelationship and assigns it to the Pool field.
+// SetPool gets a reference to the given NullableResourcepoolPoolRelationship and assigns it to the Pool field.
 func (o *ResourcepoolLease) SetPool(v ResourcepoolPoolRelationship) {
-	o.Pool = &v
+	o.Pool.Set(&v)
 }
 
-// GetPoolMember returns the PoolMember field value if set, zero value otherwise.
+// SetPoolNil sets the value for Pool to be an explicit nil
+func (o *ResourcepoolLease) SetPoolNil() {
+	o.Pool.Set(nil)
+}
+
+// UnsetPool ensures that no value is present for Pool, not even an explicit nil
+func (o *ResourcepoolLease) UnsetPool() {
+	o.Pool.Unset()
+}
+
+// GetPoolMember returns the PoolMember field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolLease) GetPoolMember() ResourcepoolPoolMemberRelationship {
-	if o == nil || o.PoolMember == nil {
+	if o == nil || IsNil(o.PoolMember.Get()) {
 		var ret ResourcepoolPoolMemberRelationship
 		return ret
 	}
-	return *o.PoolMember
+	return *o.PoolMember.Get()
 }
 
 // GetPoolMemberOk returns a tuple with the PoolMember field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolLease) GetPoolMemberOk() (*ResourcepoolPoolMemberRelationship, bool) {
-	if o == nil || o.PoolMember == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PoolMember, true
+	return o.PoolMember.Get(), o.PoolMember.IsSet()
 }
 
 // HasPoolMember returns a boolean if a field has been set.
 func (o *ResourcepoolLease) HasPoolMember() bool {
-	if o != nil && o.PoolMember != nil {
+	if o != nil && o.PoolMember.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPoolMember gets a reference to the given ResourcepoolPoolMemberRelationship and assigns it to the PoolMember field.
+// SetPoolMember gets a reference to the given NullableResourcepoolPoolMemberRelationship and assigns it to the PoolMember field.
 func (o *ResourcepoolLease) SetPoolMember(v ResourcepoolPoolMemberRelationship) {
-	o.PoolMember = &v
+	o.PoolMember.Set(&v)
 }
 
-// GetUniverse returns the Universe field value if set, zero value otherwise.
+// SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+func (o *ResourcepoolLease) SetPoolMemberNil() {
+	o.PoolMember.Set(nil)
+}
+
+// UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
+func (o *ResourcepoolLease) UnsetPoolMember() {
+	o.PoolMember.Unset()
+}
+
+// GetUniverse returns the Universe field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourcepoolLease) GetUniverse() ResourcepoolUniverseRelationship {
-	if o == nil || o.Universe == nil {
+	if o == nil || IsNil(o.Universe.Get()) {
 		var ret ResourcepoolUniverseRelationship
 		return ret
 	}
-	return *o.Universe
+	return *o.Universe.Get()
 }
 
 // GetUniverseOk returns a tuple with the Universe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcepoolLease) GetUniverseOk() (*ResourcepoolUniverseRelationship, bool) {
-	if o == nil || o.Universe == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Universe, true
+	return o.Universe.Get(), o.Universe.IsSet()
 }
 
 // HasUniverse returns a boolean if a field has been set.
 func (o *ResourcepoolLease) HasUniverse() bool {
-	if o != nil && o.Universe != nil {
+	if o != nil && o.Universe.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUniverse gets a reference to the given ResourcepoolUniverseRelationship and assigns it to the Universe field.
+// SetUniverse gets a reference to the given NullableResourcepoolUniverseRelationship and assigns it to the Universe field.
 func (o *ResourcepoolLease) SetUniverse(v ResourcepoolUniverseRelationship) {
-	o.Universe = &v
+	o.Universe.Set(&v)
+}
+
+// SetUniverseNil sets the value for Universe to be an explicit nil
+func (o *ResourcepoolLease) SetUniverseNil() {
+	o.Universe.Set(nil)
+}
+
+// UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
+func (o *ResourcepoolLease) UnsetUniverse() {
+	o.Universe.Unset()
 }
 
 func (o ResourcepoolLease) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ResourcepoolLease) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolAbstractLease, errPoolAbstractLease := json.Marshal(o.PoolAbstractLease)
 	if errPoolAbstractLease != nil {
-		return []byte{}, errPoolAbstractLease
+		return map[string]interface{}{}, errPoolAbstractLease
 	}
 	errPoolAbstractLease = json.Unmarshal([]byte(serializedPoolAbstractLease), &toSerialize)
 	if errPoolAbstractLease != nil {
-		return []byte{}, errPoolAbstractLease
+		return map[string]interface{}{}, errPoolAbstractLease
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Condition != nil {
 		toSerialize["Condition"] = o.Condition
 	}
-	if o.Feature != nil {
+	if !IsNil(o.Feature) {
 		toSerialize["Feature"] = o.Feature
 	}
-	if o.IsExclusiveAtAssignedEntity != nil {
+	if !IsNil(o.IsExclusiveAtAssignedEntity) {
 		toSerialize["IsExclusiveAtAssignedEntity"] = o.IsExclusiveAtAssignedEntity
 	}
 	if o.LeaseParameters.IsSet() {
 		toSerialize["LeaseParameters"] = o.LeaseParameters.Get()
 	}
-	if o.Resource != nil {
+	if !IsNil(o.Resource) {
 		toSerialize["Resource"] = o.Resource
 	}
-	if o.ResourceType != nil {
+	if !IsNil(o.ResourceType) {
 		toSerialize["ResourceType"] = o.ResourceType
 	}
-	if o.AssignedToEntity != nil {
-		toSerialize["AssignedToEntity"] = o.AssignedToEntity
+	if o.AssignedToEntity.IsSet() {
+		toSerialize["AssignedToEntity"] = o.AssignedToEntity.Get()
 	}
-	if o.LeasedResource != nil {
-		toSerialize["LeasedResource"] = o.LeasedResource
+	if o.LeasedResource.IsSet() {
+		toSerialize["LeasedResource"] = o.LeasedResource.Get()
 	}
-	if o.Pool != nil {
-		toSerialize["Pool"] = o.Pool
+	if o.Pool.IsSet() {
+		toSerialize["Pool"] = o.Pool.Get()
 	}
-	if o.PoolMember != nil {
-		toSerialize["PoolMember"] = o.PoolMember
+	if o.PoolMember.IsSet() {
+		toSerialize["PoolMember"] = o.PoolMember.Get()
 	}
-	if o.Universe != nil {
-		toSerialize["Universe"] = o.Universe
+	if o.Universe.IsSet() {
+		toSerialize["Universe"] = o.Universe.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ResourcepoolLease) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ResourcepoolLease) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ResourcepoolLeaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -561,17 +646,17 @@ func (o *ResourcepoolLease) UnmarshalJSON(bytes []byte) (err error) {
 		LeaseParameters             NullableResourcepoolLeaseParameters `json:"LeaseParameters,omitempty"`
 		Resource                    *MoBaseMo                           `json:"Resource,omitempty"`
 		// The type of resource present in the pool, such as 'server' can be a RackUnit or Blade. * `None` - The resource cannot consider for Resource Pool. * `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.
-		ResourceType     *string                                `json:"ResourceType,omitempty"`
-		AssignedToEntity *MoBaseMoRelationship                  `json:"AssignedToEntity,omitempty"`
-		LeasedResource   *ResourcepoolLeaseResourceRelationship `json:"LeasedResource,omitempty"`
-		Pool             *ResourcepoolPoolRelationship          `json:"Pool,omitempty"`
-		PoolMember       *ResourcepoolPoolMemberRelationship    `json:"PoolMember,omitempty"`
-		Universe         *ResourcepoolUniverseRelationship      `json:"Universe,omitempty"`
+		ResourceType     *string                                       `json:"ResourceType,omitempty"`
+		AssignedToEntity NullableMoBaseMoRelationship                  `json:"AssignedToEntity,omitempty"`
+		LeasedResource   NullableResourcepoolLeaseResourceRelationship `json:"LeasedResource,omitempty"`
+		Pool             NullableResourcepoolPoolRelationship          `json:"Pool,omitempty"`
+		PoolMember       NullableResourcepoolPoolMemberRelationship    `json:"PoolMember,omitempty"`
+		Universe         NullableResourcepoolUniverseRelationship      `json:"Universe,omitempty"`
 	}
 
 	varResourcepoolLeaseWithoutEmbeddedStruct := ResourcepoolLeaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varResourcepoolLeaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varResourcepoolLeaseWithoutEmbeddedStruct)
 	if err == nil {
 		varResourcepoolLease := _ResourcepoolLease{}
 		varResourcepoolLease.ClassId = varResourcepoolLeaseWithoutEmbeddedStruct.ClassId
@@ -594,7 +679,7 @@ func (o *ResourcepoolLease) UnmarshalJSON(bytes []byte) (err error) {
 
 	varResourcepoolLease := _ResourcepoolLease{}
 
-	err = json.Unmarshal(bytes, &varResourcepoolLease)
+	err = json.Unmarshal(data, &varResourcepoolLease)
 	if err == nil {
 		o.PoolAbstractLease = varResourcepoolLease.PoolAbstractLease
 	} else {
@@ -603,7 +688,7 @@ func (o *ResourcepoolLease) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Condition")

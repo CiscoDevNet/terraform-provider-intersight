@@ -56,6 +56,16 @@ func getAdapterHostEthInterfaceSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"active_oper_state": {
+			Description: "The operational state of the Active vNIC. vNIC operational state information is updated by events from the adapter. This operational state is applicable to primary vNIC. If a host is powered off, this property might not be accurate as we may or may not receive events from the adapter. For Intersight Managed Domains Mode domains (IMM), the vNIC's peer object Vethernet will have the current operational state of the connection when a host is powered off.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"active_veth_oper_state": {
+			Description: "The operational state of the Active Vethernet peer of a vNIC in Intersight Managed Mode. This state is updated by events from Fabric Interconnect or by periodic updates from Fabric Interconnect. When a Fabric Interconnect is not connected to Intersight or if the Fabric Interconnect is powered down, this property will not be updated. This state is not applicable for standalone servers.\n* `unknown` - The operational state of the Vethernet is not known.\n* `adminDown` - The operational state of the Vethernet is admin down.\n* `up` - The operational state of the Vethernet is Up.\n* `down` - The operational state of the Vethernet is Down.\n* `noLicense` - The operational state of the Vethernet is no license.\n* `linkUp` - The operational state of the Vethernet is link up.\n* `hardwareFailure` - The operational state of the Vethernet is hardware failure.\n* `softwareFailure` - The operational state of the Vethernet is software failure.\n* `errorDisabled` - The operational state of the Vethernet is error disabled.\n* `linkDown` - The operational state of the Vethernet is link down.\n* `sfpNotPresent` - The operational state of the Vethernet is SFP not present.\n* `udldAggrDown` - The operational state of the Vethernet is UDLD aggregate down.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"adapter_unit": {
 			Description: "A reference to a adapterUnit resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -470,7 +480,12 @@ func getAdapterHostEthInterfaceSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"standby_oper_state": {
-			Description: "Standby Operational state of an Interface.",
+			Description: "The operational state of the standby vNIC. vNIC operational state information is updated by events from the adapter. This operational state is applicable only to failover vNIC. If a host is powered off, this property might not be accurate as we may or may not receive events from the adapter. For Intersight Managed Mode domains (IMM), the vNIC's peer object Vethernet will have the current operational state of the connection when a host is powered off.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"standby_veth_oper_state": {
+			Description: "The operational state of the Standby Vethernet peer of a failover vNIC in Intersight Managed Mode. This state is updated by events from Fabric Interconnect or by periodic updates from Fabric Interconnect. When a Fabric Interconnect is not connected to Intersight or if the Fabric Interconnect is powered down, this property will not be updated. This state is not applicable for standalone servers.\n* `unknown` - The operational state of the Vethernet is not known.\n* `adminDown` - The operational state of the Vethernet is admin down.\n* `up` - The operational state of the Vethernet is Up.\n* `down` - The operational state of the Vethernet is Down.\n* `noLicense` - The operational state of the Vethernet is no license.\n* `linkUp` - The operational state of the Vethernet is link up.\n* `hardwareFailure` - The operational state of the Vethernet is hardware failure.\n* `softwareFailure` - The operational state of the Vethernet is software failure.\n* `errorDisabled` - The operational state of the Vethernet is error disabled.\n* `linkDown` - The operational state of the Vethernet is link down.\n* `sfpNotPresent` - The operational state of the Vethernet is SFP not present.\n* `udldAggrDown` - The operational state of the Vethernet is UDLD aggregate down.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -773,6 +788,16 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 			x := p[0]
 			o.SetAcknowledgedPeerInterface(x)
 		}
+	}
+
+	if v, ok := d.GetOk("active_oper_state"); ok {
+		x := (v.(string))
+		o.SetActiveOperState(x)
+	}
+
+	if v, ok := d.GetOk("active_veth_oper_state"); ok {
+		x := (v.(string))
+		o.SetActiveVethOperState(x)
 	}
 
 	if v, ok := d.GetOk("adapter_unit"); ok {
@@ -1269,6 +1294,11 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 		o.SetStandbyOperState(x)
 	}
 
+	if v, ok := d.GetOk("standby_veth_oper_state"); ok {
+		x := (v.(string))
+		o.SetStandbyVethOperState(x)
+	}
+
 	if v, ok := d.GetOk("standby_vethernet"); ok {
 		p := make([]models.NetworkVethernetRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1525,6 +1555,8 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 				temp["account_moid"] = (s.GetAccountMoid())
 
 				temp["acknowledged_peer_interface"] = flattenMapEtherPhysicalPortBaseRelationship(s.GetAcknowledgedPeerInterface(), d)
+				temp["active_oper_state"] = (s.GetActiveOperState())
+				temp["active_veth_oper_state"] = (s.GetActiveVethOperState())
 
 				temp["adapter_unit"] = flattenMapAdapterUnitRelationship(s.GetAdapterUnit(), d)
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
@@ -1571,6 +1603,7 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 				temp["rn"] = (s.GetRn())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["standby_oper_state"] = (s.GetStandbyOperState())
+				temp["standby_veth_oper_state"] = (s.GetStandbyVethOperState())
 
 				temp["standby_vethernet"] = flattenMapNetworkVethernetRelationship(s.GetStandbyVethernet(), d)
 				temp["standby_vif_id"] = (s.GetStandbyVifId())

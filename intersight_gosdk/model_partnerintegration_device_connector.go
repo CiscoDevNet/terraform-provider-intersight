@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PartnerintegrationDeviceConnector type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PartnerintegrationDeviceConnector{}
 
 // PartnerintegrationDeviceConnector Recipe for device connector build and deploy.
 type PartnerintegrationDeviceConnector struct {
@@ -39,8 +43,8 @@ type PartnerintegrationDeviceConnector struct {
 	// Name of source file to upload.
 	SrcFileName *string `json:"SrcFileName,omitempty"`
 	// An array of relationships to partnerintegrationDcLogs resources.
-	Logs                 []PartnerintegrationDcLogsRelationship `json:"Logs,omitempty"`
-	Organization         *OrganizationOrganizationRelationship  `json:"Organization,omitempty"`
+	Logs                 []PartnerintegrationDcLogsRelationship       `json:"Logs,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -123,7 +127,7 @@ func (o *PartnerintegrationDeviceConnector) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *PartnerintegrationDeviceConnector) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *PartnerintegrationDeviceConnector) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationDeviceConnector) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -141,7 +145,7 @@ func (o *PartnerintegrationDeviceConnector) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *PartnerintegrationDeviceConnector) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *PartnerintegrationDeviceConnector) SetAction(v string) {
 
 // GetBuildStartTime returns the BuildStartTime field value if set, zero value otherwise.
 func (o *PartnerintegrationDeviceConnector) GetBuildStartTime() string {
-	if o == nil || o.BuildStartTime == nil {
+	if o == nil || IsNil(o.BuildStartTime) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *PartnerintegrationDeviceConnector) GetBuildStartTime() string {
 // GetBuildStartTimeOk returns a tuple with the BuildStartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationDeviceConnector) GetBuildStartTimeOk() (*string, bool) {
-	if o == nil || o.BuildStartTime == nil {
+	if o == nil || IsNil(o.BuildStartTime) {
 		return nil, false
 	}
 	return o.BuildStartTime, true
@@ -173,7 +177,7 @@ func (o *PartnerintegrationDeviceConnector) GetBuildStartTimeOk() (*string, bool
 
 // HasBuildStartTime returns a boolean if a field has been set.
 func (o *PartnerintegrationDeviceConnector) HasBuildStartTime() bool {
-	if o != nil && o.BuildStartTime != nil {
+	if o != nil && !IsNil(o.BuildStartTime) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *PartnerintegrationDeviceConnector) SetBuildStartTime(v string) {
 
 // GetBuildStatus returns the BuildStatus field value if set, zero value otherwise.
 func (o *PartnerintegrationDeviceConnector) GetBuildStatus() string {
-	if o == nil || o.BuildStatus == nil {
+	if o == nil || IsNil(o.BuildStatus) {
 		var ret string
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *PartnerintegrationDeviceConnector) GetBuildStatus() string {
 // GetBuildStatusOk returns a tuple with the BuildStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationDeviceConnector) GetBuildStatusOk() (*string, bool) {
-	if o == nil || o.BuildStatus == nil {
+	if o == nil || IsNil(o.BuildStatus) {
 		return nil, false
 	}
 	return o.BuildStatus, true
@@ -205,7 +209,7 @@ func (o *PartnerintegrationDeviceConnector) GetBuildStatusOk() (*string, bool) {
 
 // HasBuildStatus returns a boolean if a field has been set.
 func (o *PartnerintegrationDeviceConnector) HasBuildStatus() bool {
-	if o != nil && o.BuildStatus != nil {
+	if o != nil && !IsNil(o.BuildStatus) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *PartnerintegrationDeviceConnector) SetBuildStatus(v string) {
 
 // GetImageName returns the ImageName field value if set, zero value otherwise.
 func (o *PartnerintegrationDeviceConnector) GetImageName() string {
-	if o == nil || o.ImageName == nil {
+	if o == nil || IsNil(o.ImageName) {
 		var ret string
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *PartnerintegrationDeviceConnector) GetImageName() string {
 // GetImageNameOk returns a tuple with the ImageName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationDeviceConnector) GetImageNameOk() (*string, bool) {
-	if o == nil || o.ImageName == nil {
+	if o == nil || IsNil(o.ImageName) {
 		return nil, false
 	}
 	return o.ImageName, true
@@ -237,7 +241,7 @@ func (o *PartnerintegrationDeviceConnector) GetImageNameOk() (*string, bool) {
 
 // HasImageName returns a boolean if a field has been set.
 func (o *PartnerintegrationDeviceConnector) HasImageName() bool {
-	if o != nil && o.ImageName != nil {
+	if o != nil && !IsNil(o.ImageName) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *PartnerintegrationDeviceConnector) SetImageName(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *PartnerintegrationDeviceConnector) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *PartnerintegrationDeviceConnector) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationDeviceConnector) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -269,7 +273,7 @@ func (o *PartnerintegrationDeviceConnector) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *PartnerintegrationDeviceConnector) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *PartnerintegrationDeviceConnector) SetName(v string) {
 
 // GetSrcBucket returns the SrcBucket field value if set, zero value otherwise.
 func (o *PartnerintegrationDeviceConnector) GetSrcBucket() string {
-	if o == nil || o.SrcBucket == nil {
+	if o == nil || IsNil(o.SrcBucket) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *PartnerintegrationDeviceConnector) GetSrcBucket() string {
 // GetSrcBucketOk returns a tuple with the SrcBucket field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationDeviceConnector) GetSrcBucketOk() (*string, bool) {
-	if o == nil || o.SrcBucket == nil {
+	if o == nil || IsNil(o.SrcBucket) {
 		return nil, false
 	}
 	return o.SrcBucket, true
@@ -301,7 +305,7 @@ func (o *PartnerintegrationDeviceConnector) GetSrcBucketOk() (*string, bool) {
 
 // HasSrcBucket returns a boolean if a field has been set.
 func (o *PartnerintegrationDeviceConnector) HasSrcBucket() bool {
-	if o != nil && o.SrcBucket != nil {
+	if o != nil && !IsNil(o.SrcBucket) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *PartnerintegrationDeviceConnector) SetSrcBucket(v string) {
 
 // GetSrcFileName returns the SrcFileName field value if set, zero value otherwise.
 func (o *PartnerintegrationDeviceConnector) GetSrcFileName() string {
-	if o == nil || o.SrcFileName == nil {
+	if o == nil || IsNil(o.SrcFileName) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *PartnerintegrationDeviceConnector) GetSrcFileName() string {
 // GetSrcFileNameOk returns a tuple with the SrcFileName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationDeviceConnector) GetSrcFileNameOk() (*string, bool) {
-	if o == nil || o.SrcFileName == nil {
+	if o == nil || IsNil(o.SrcFileName) {
 		return nil, false
 	}
 	return o.SrcFileName, true
@@ -333,7 +337,7 @@ func (o *PartnerintegrationDeviceConnector) GetSrcFileNameOk() (*string, bool) {
 
 // HasSrcFileName returns a boolean if a field has been set.
 func (o *PartnerintegrationDeviceConnector) HasSrcFileName() bool {
-	if o != nil && o.SrcFileName != nil {
+	if o != nil && !IsNil(o.SrcFileName) {
 		return true
 	}
 
@@ -358,7 +362,7 @@ func (o *PartnerintegrationDeviceConnector) GetLogs() []PartnerintegrationDcLogs
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerintegrationDeviceConnector) GetLogsOk() ([]PartnerintegrationDcLogsRelationship, bool) {
-	if o == nil || o.Logs == nil {
+	if o == nil || IsNil(o.Logs) {
 		return nil, false
 	}
 	return o.Logs, true
@@ -366,7 +370,7 @@ func (o *PartnerintegrationDeviceConnector) GetLogsOk() ([]PartnerintegrationDcL
 
 // HasLogs returns a boolean if a field has been set.
 func (o *PartnerintegrationDeviceConnector) HasLogs() bool {
-	if o != nil && o.Logs != nil {
+	if o != nil && IsNil(o.Logs) {
 		return true
 	}
 
@@ -378,90 +382,127 @@ func (o *PartnerintegrationDeviceConnector) SetLogs(v []PartnerintegrationDcLogs
 	o.Logs = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PartnerintegrationDeviceConnector) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerintegrationDeviceConnector) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *PartnerintegrationDeviceConnector) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *PartnerintegrationDeviceConnector) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *PartnerintegrationDeviceConnector) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *PartnerintegrationDeviceConnector) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o PartnerintegrationDeviceConnector) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PartnerintegrationDeviceConnector) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
-	if o.BuildStartTime != nil {
+	if !IsNil(o.BuildStartTime) {
 		toSerialize["BuildStartTime"] = o.BuildStartTime
 	}
-	if o.BuildStatus != nil {
+	if !IsNil(o.BuildStatus) {
 		toSerialize["BuildStatus"] = o.BuildStatus
 	}
-	if o.ImageName != nil {
+	if !IsNil(o.ImageName) {
 		toSerialize["ImageName"] = o.ImageName
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.SrcBucket != nil {
+	if !IsNil(o.SrcBucket) {
 		toSerialize["SrcBucket"] = o.SrcBucket
 	}
-	if o.SrcFileName != nil {
+	if !IsNil(o.SrcFileName) {
 		toSerialize["SrcFileName"] = o.SrcFileName
 	}
 	if o.Logs != nil {
 		toSerialize["Logs"] = o.Logs
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PartnerintegrationDeviceConnector) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PartnerintegrationDeviceConnector) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PartnerintegrationDeviceConnectorWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -482,13 +523,13 @@ func (o *PartnerintegrationDeviceConnector) UnmarshalJSON(bytes []byte) (err err
 		// Name of source file to upload.
 		SrcFileName *string `json:"SrcFileName,omitempty"`
 		// An array of relationships to partnerintegrationDcLogs resources.
-		Logs         []PartnerintegrationDcLogsRelationship `json:"Logs,omitempty"`
-		Organization *OrganizationOrganizationRelationship  `json:"Organization,omitempty"`
+		Logs         []PartnerintegrationDcLogsRelationship       `json:"Logs,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varPartnerintegrationDeviceConnectorWithoutEmbeddedStruct := PartnerintegrationDeviceConnectorWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPartnerintegrationDeviceConnectorWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPartnerintegrationDeviceConnectorWithoutEmbeddedStruct)
 	if err == nil {
 		varPartnerintegrationDeviceConnector := _PartnerintegrationDeviceConnector{}
 		varPartnerintegrationDeviceConnector.ClassId = varPartnerintegrationDeviceConnectorWithoutEmbeddedStruct.ClassId
@@ -509,7 +550,7 @@ func (o *PartnerintegrationDeviceConnector) UnmarshalJSON(bytes []byte) (err err
 
 	varPartnerintegrationDeviceConnector := _PartnerintegrationDeviceConnector{}
 
-	err = json.Unmarshal(bytes, &varPartnerintegrationDeviceConnector)
+	err = json.Unmarshal(data, &varPartnerintegrationDeviceConnector)
 	if err == nil {
 		o.MoBaseMo = varPartnerintegrationDeviceConnector.MoBaseMo
 	} else {
@@ -518,7 +559,7 @@ func (o *PartnerintegrationDeviceConnector) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

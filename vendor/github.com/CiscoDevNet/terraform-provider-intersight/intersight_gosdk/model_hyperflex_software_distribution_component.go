@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexSoftwareDistributionComponent type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexSoftwareDistributionComponent{}
 
 // HyperflexSoftwareDistributionComponent A HyperFlex Software Distribution Component.
 type HyperflexSoftwareDistributionComponent struct {
@@ -34,8 +38,8 @@ type HyperflexSoftwareDistributionComponent struct {
 	FilePath        *string  `json:"FilePath,omitempty"`
 	FilesToDownload []string `json:"FilesToDownload,omitempty"`
 	// The HyperFlex Software Distribution Component Version.
-	Version                     *string                                           `json:"Version,omitempty"`
-	SoftwareDistributionVersion *HyperflexSoftwareDistributionVersionRelationship `json:"SoftwareDistributionVersion,omitempty"`
+	Version                     *string                                                  `json:"Version,omitempty"`
+	SoftwareDistributionVersion NullableHyperflexSoftwareDistributionVersionRelationship `json:"SoftwareDistributionVersion,omitempty"`
 	AdditionalProperties        map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *HyperflexSoftwareDistributionComponent) SetObjectType(v string) {
 
 // GetBucketName returns the BucketName field value if set, zero value otherwise.
 func (o *HyperflexSoftwareDistributionComponent) GetBucketName() string {
-	if o == nil || o.BucketName == nil {
+	if o == nil || IsNil(o.BucketName) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetBucketName() string {
 // GetBucketNameOk returns a tuple with the BucketName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSoftwareDistributionComponent) GetBucketNameOk() (*string, bool) {
-	if o == nil || o.BucketName == nil {
+	if o == nil || IsNil(o.BucketName) {
 		return nil, false
 	}
 	return o.BucketName, true
@@ -132,7 +136,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetBucketNameOk() (*string, boo
 
 // HasBucketName returns a boolean if a field has been set.
 func (o *HyperflexSoftwareDistributionComponent) HasBucketName() bool {
-	if o != nil && o.BucketName != nil {
+	if o != nil && !IsNil(o.BucketName) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *HyperflexSoftwareDistributionComponent) SetBucketName(v string) {
 
 // GetComponentId returns the ComponentId field value if set, zero value otherwise.
 func (o *HyperflexSoftwareDistributionComponent) GetComponentId() string {
-	if o == nil || o.ComponentId == nil {
+	if o == nil || IsNil(o.ComponentId) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetComponentId() string {
 // GetComponentIdOk returns a tuple with the ComponentId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSoftwareDistributionComponent) GetComponentIdOk() (*string, bool) {
-	if o == nil || o.ComponentId == nil {
+	if o == nil || IsNil(o.ComponentId) {
 		return nil, false
 	}
 	return o.ComponentId, true
@@ -164,7 +168,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetComponentIdOk() (*string, bo
 
 // HasComponentId returns a boolean if a field has been set.
 func (o *HyperflexSoftwareDistributionComponent) HasComponentId() bool {
-	if o != nil && o.ComponentId != nil {
+	if o != nil && !IsNil(o.ComponentId) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *HyperflexSoftwareDistributionComponent) SetComponentId(v string) {
 
 // GetComponentName returns the ComponentName field value if set, zero value otherwise.
 func (o *HyperflexSoftwareDistributionComponent) GetComponentName() string {
-	if o == nil || o.ComponentName == nil {
+	if o == nil || IsNil(o.ComponentName) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetComponentName() string {
 // GetComponentNameOk returns a tuple with the ComponentName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSoftwareDistributionComponent) GetComponentNameOk() (*string, bool) {
-	if o == nil || o.ComponentName == nil {
+	if o == nil || IsNil(o.ComponentName) {
 		return nil, false
 	}
 	return o.ComponentName, true
@@ -196,7 +200,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetComponentNameOk() (*string, 
 
 // HasComponentName returns a boolean if a field has been set.
 func (o *HyperflexSoftwareDistributionComponent) HasComponentName() bool {
-	if o != nil && o.ComponentName != nil {
+	if o != nil && !IsNil(o.ComponentName) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *HyperflexSoftwareDistributionComponent) SetComponentName(v string) {
 
 // GetFilePath returns the FilePath field value if set, zero value otherwise.
 func (o *HyperflexSoftwareDistributionComponent) GetFilePath() string {
-	if o == nil || o.FilePath == nil {
+	if o == nil || IsNil(o.FilePath) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetFilePath() string {
 // GetFilePathOk returns a tuple with the FilePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSoftwareDistributionComponent) GetFilePathOk() (*string, bool) {
-	if o == nil || o.FilePath == nil {
+	if o == nil || IsNil(o.FilePath) {
 		return nil, false
 	}
 	return o.FilePath, true
@@ -228,7 +232,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetFilePathOk() (*string, bool)
 
 // HasFilePath returns a boolean if a field has been set.
 func (o *HyperflexSoftwareDistributionComponent) HasFilePath() bool {
-	if o != nil && o.FilePath != nil {
+	if o != nil && !IsNil(o.FilePath) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetFilesToDownload() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSoftwareDistributionComponent) GetFilesToDownloadOk() ([]string, bool) {
-	if o == nil || o.FilesToDownload == nil {
+	if o == nil || IsNil(o.FilesToDownload) {
 		return nil, false
 	}
 	return o.FilesToDownload, true
@@ -261,7 +265,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetFilesToDownloadOk() ([]strin
 
 // HasFilesToDownload returns a boolean if a field has been set.
 func (o *HyperflexSoftwareDistributionComponent) HasFilesToDownload() bool {
-	if o != nil && o.FilesToDownload != nil {
+	if o != nil && IsNil(o.FilesToDownload) {
 		return true
 	}
 
@@ -275,7 +279,7 @@ func (o *HyperflexSoftwareDistributionComponent) SetFilesToDownload(v []string) 
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HyperflexSoftwareDistributionComponent) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -285,7 +289,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSoftwareDistributionComponent) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -293,7 +297,7 @@ func (o *HyperflexSoftwareDistributionComponent) GetVersionOk() (*string, bool) 
 
 // HasVersion returns a boolean if a field has been set.
 func (o *HyperflexSoftwareDistributionComponent) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -305,84 +309,121 @@ func (o *HyperflexSoftwareDistributionComponent) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetSoftwareDistributionVersion returns the SoftwareDistributionVersion field value if set, zero value otherwise.
+// GetSoftwareDistributionVersion returns the SoftwareDistributionVersion field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSoftwareDistributionComponent) GetSoftwareDistributionVersion() HyperflexSoftwareDistributionVersionRelationship {
-	if o == nil || o.SoftwareDistributionVersion == nil {
+	if o == nil || IsNil(o.SoftwareDistributionVersion.Get()) {
 		var ret HyperflexSoftwareDistributionVersionRelationship
 		return ret
 	}
-	return *o.SoftwareDistributionVersion
+	return *o.SoftwareDistributionVersion.Get()
 }
 
 // GetSoftwareDistributionVersionOk returns a tuple with the SoftwareDistributionVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSoftwareDistributionComponent) GetSoftwareDistributionVersionOk() (*HyperflexSoftwareDistributionVersionRelationship, bool) {
-	if o == nil || o.SoftwareDistributionVersion == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SoftwareDistributionVersion, true
+	return o.SoftwareDistributionVersion.Get(), o.SoftwareDistributionVersion.IsSet()
 }
 
 // HasSoftwareDistributionVersion returns a boolean if a field has been set.
 func (o *HyperflexSoftwareDistributionComponent) HasSoftwareDistributionVersion() bool {
-	if o != nil && o.SoftwareDistributionVersion != nil {
+	if o != nil && o.SoftwareDistributionVersion.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSoftwareDistributionVersion gets a reference to the given HyperflexSoftwareDistributionVersionRelationship and assigns it to the SoftwareDistributionVersion field.
+// SetSoftwareDistributionVersion gets a reference to the given NullableHyperflexSoftwareDistributionVersionRelationship and assigns it to the SoftwareDistributionVersion field.
 func (o *HyperflexSoftwareDistributionComponent) SetSoftwareDistributionVersion(v HyperflexSoftwareDistributionVersionRelationship) {
-	o.SoftwareDistributionVersion = &v
+	o.SoftwareDistributionVersion.Set(&v)
+}
+
+// SetSoftwareDistributionVersionNil sets the value for SoftwareDistributionVersion to be an explicit nil
+func (o *HyperflexSoftwareDistributionComponent) SetSoftwareDistributionVersionNil() {
+	o.SoftwareDistributionVersion.Set(nil)
+}
+
+// UnsetSoftwareDistributionVersion ensures that no value is present for SoftwareDistributionVersion, not even an explicit nil
+func (o *HyperflexSoftwareDistributionComponent) UnsetSoftwareDistributionVersion() {
+	o.SoftwareDistributionVersion.Unset()
 }
 
 func (o HyperflexSoftwareDistributionComponent) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexSoftwareDistributionComponent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BucketName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BucketName) {
 		toSerialize["BucketName"] = o.BucketName
 	}
-	if o.ComponentId != nil {
+	if !IsNil(o.ComponentId) {
 		toSerialize["ComponentId"] = o.ComponentId
 	}
-	if o.ComponentName != nil {
+	if !IsNil(o.ComponentName) {
 		toSerialize["ComponentName"] = o.ComponentName
 	}
-	if o.FilePath != nil {
+	if !IsNil(o.FilePath) {
 		toSerialize["FilePath"] = o.FilePath
 	}
 	if o.FilesToDownload != nil {
 		toSerialize["FilesToDownload"] = o.FilesToDownload
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.SoftwareDistributionVersion != nil {
-		toSerialize["SoftwareDistributionVersion"] = o.SoftwareDistributionVersion
+	if o.SoftwareDistributionVersion.IsSet() {
+		toSerialize["SoftwareDistributionVersion"] = o.SoftwareDistributionVersion.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexSoftwareDistributionComponent) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexSoftwareDistributionComponent) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexSoftwareDistributionComponentWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -398,13 +439,13 @@ func (o *HyperflexSoftwareDistributionComponent) UnmarshalJSON(bytes []byte) (er
 		FilePath        *string  `json:"FilePath,omitempty"`
 		FilesToDownload []string `json:"FilesToDownload,omitempty"`
 		// The HyperFlex Software Distribution Component Version.
-		Version                     *string                                           `json:"Version,omitempty"`
-		SoftwareDistributionVersion *HyperflexSoftwareDistributionVersionRelationship `json:"SoftwareDistributionVersion,omitempty"`
+		Version                     *string                                                  `json:"Version,omitempty"`
+		SoftwareDistributionVersion NullableHyperflexSoftwareDistributionVersionRelationship `json:"SoftwareDistributionVersion,omitempty"`
 	}
 
 	varHyperflexSoftwareDistributionComponentWithoutEmbeddedStruct := HyperflexSoftwareDistributionComponentWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSoftwareDistributionComponentWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexSoftwareDistributionComponentWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexSoftwareDistributionComponent := _HyperflexSoftwareDistributionComponent{}
 		varHyperflexSoftwareDistributionComponent.ClassId = varHyperflexSoftwareDistributionComponentWithoutEmbeddedStruct.ClassId
@@ -423,7 +464,7 @@ func (o *HyperflexSoftwareDistributionComponent) UnmarshalJSON(bytes []byte) (er
 
 	varHyperflexSoftwareDistributionComponent := _HyperflexSoftwareDistributionComponent{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSoftwareDistributionComponent)
+	err = json.Unmarshal(data, &varHyperflexSoftwareDistributionComponent)
 	if err == nil {
 		o.MoBaseMo = varHyperflexSoftwareDistributionComponent.MoBaseMo
 	} else {
@@ -432,7 +473,7 @@ func (o *HyperflexSoftwareDistributionComponent) UnmarshalJSON(bytes []byte) (er
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BucketName")

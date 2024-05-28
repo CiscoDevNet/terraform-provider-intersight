@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the AssetDeviceRegistration type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetDeviceRegistration{}
 
 // AssetDeviceRegistration DeviceRegistration represents a device connector enabled endpoint which has registered with Intersight.
 type AssetDeviceRegistration struct {
@@ -45,17 +49,19 @@ type AssetDeviceRegistration struct {
 	ReadOnly *bool    `json:"ReadOnly,omitempty"`
 	Serial   []string `json:"Serial,omitempty"`
 	// The vendor of the managed device.
-	Vendor        *string                 `json:"Vendor,omitempty"`
-	Account       *IamAccountRelationship `json:"Account,omitempty"`
-	ClaimedByUser *IamUserRelationship    `json:"ClaimedByUser,omitempty"`
+	Vendor        *string                        `json:"Vendor,omitempty"`
+	Account       NullableIamAccountRelationship `json:"Account,omitempty"`
+	ClaimedByUser NullableIamUserRelationship    `json:"ClaimedByUser,omitempty"`
 	// An array of relationships to assetClusterMember resources.
-	ClusterMembers       []AssetClusterMemberRelationship      `json:"ClusterMembers,omitempty"`
-	DeviceClaim          *AssetDeviceClaimRelationship         `json:"DeviceClaim,omitempty"`
-	DeviceConfiguration  *AssetDeviceConfigurationRelationship `json:"DeviceConfiguration,omitempty"`
-	DomainGroup          *IamDomainGroupRelationship           `json:"DomainGroup,omitempty"`
-	ParentConnection     *AssetDeviceRegistrationRelationship  `json:"ParentConnection,omitempty"`
-	Target               *AssetTargetRelationship              `json:"Target,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ClusterMembers []AssetClusterMemberRelationship `json:"ClusterMembers,omitempty"`
+	// An array of relationships to moBaseMo resources.
+	CustomPermissionResources []MoBaseMoRelationship                       `json:"CustomPermissionResources,omitempty"`
+	DeviceClaim               NullableAssetDeviceClaimRelationship         `json:"DeviceClaim,omitempty"`
+	DeviceConfiguration       NullableAssetDeviceConfigurationRelationship `json:"DeviceConfiguration,omitempty"`
+	DomainGroup               NullableIamDomainGroupRelationship           `json:"DomainGroup,omitempty"`
+	ParentConnection          NullableAssetDeviceRegistrationRelationship  `json:"ParentConnection,omitempty"`
+	Target                    NullableAssetTargetRelationship              `json:"Target,omitempty"`
+	AdditionalProperties      map[string]interface{}
 }
 
 type _AssetDeviceRegistration AssetDeviceRegistration
@@ -141,7 +147,7 @@ func (o *AssetDeviceRegistration) SetObjectType(v string) {
 
 // GetAccessKeyId returns the AccessKeyId field value if set, zero value otherwise.
 func (o *AssetDeviceRegistration) GetAccessKeyId() string {
-	if o == nil || o.AccessKeyId == nil {
+	if o == nil || IsNil(o.AccessKeyId) {
 		var ret string
 		return ret
 	}
@@ -151,7 +157,7 @@ func (o *AssetDeviceRegistration) GetAccessKeyId() string {
 // GetAccessKeyIdOk returns a tuple with the AccessKeyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceRegistration) GetAccessKeyIdOk() (*string, bool) {
-	if o == nil || o.AccessKeyId == nil {
+	if o == nil || IsNil(o.AccessKeyId) {
 		return nil, false
 	}
 	return o.AccessKeyId, true
@@ -159,7 +165,7 @@ func (o *AssetDeviceRegistration) GetAccessKeyIdOk() (*string, bool) {
 
 // HasAccessKeyId returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasAccessKeyId() bool {
-	if o != nil && o.AccessKeyId != nil {
+	if o != nil && !IsNil(o.AccessKeyId) {
 		return true
 	}
 
@@ -173,7 +179,7 @@ func (o *AssetDeviceRegistration) SetAccessKeyId(v string) {
 
 // GetClaimedByUserName returns the ClaimedByUserName field value if set, zero value otherwise.
 func (o *AssetDeviceRegistration) GetClaimedByUserName() string {
-	if o == nil || o.ClaimedByUserName == nil {
+	if o == nil || IsNil(o.ClaimedByUserName) {
 		var ret string
 		return ret
 	}
@@ -183,7 +189,7 @@ func (o *AssetDeviceRegistration) GetClaimedByUserName() string {
 // GetClaimedByUserNameOk returns a tuple with the ClaimedByUserName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceRegistration) GetClaimedByUserNameOk() (*string, bool) {
-	if o == nil || o.ClaimedByUserName == nil {
+	if o == nil || IsNil(o.ClaimedByUserName) {
 		return nil, false
 	}
 	return o.ClaimedByUserName, true
@@ -191,7 +197,7 @@ func (o *AssetDeviceRegistration) GetClaimedByUserNameOk() (*string, bool) {
 
 // HasClaimedByUserName returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasClaimedByUserName() bool {
-	if o != nil && o.ClaimedByUserName != nil {
+	if o != nil && !IsNil(o.ClaimedByUserName) {
 		return true
 	}
 
@@ -205,7 +211,7 @@ func (o *AssetDeviceRegistration) SetClaimedByUserName(v string) {
 
 // GetClaimedTime returns the ClaimedTime field value if set, zero value otherwise.
 func (o *AssetDeviceRegistration) GetClaimedTime() time.Time {
-	if o == nil || o.ClaimedTime == nil {
+	if o == nil || IsNil(o.ClaimedTime) {
 		var ret time.Time
 		return ret
 	}
@@ -215,7 +221,7 @@ func (o *AssetDeviceRegistration) GetClaimedTime() time.Time {
 // GetClaimedTimeOk returns a tuple with the ClaimedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceRegistration) GetClaimedTimeOk() (*time.Time, bool) {
-	if o == nil || o.ClaimedTime == nil {
+	if o == nil || IsNil(o.ClaimedTime) {
 		return nil, false
 	}
 	return o.ClaimedTime, true
@@ -223,7 +229,7 @@ func (o *AssetDeviceRegistration) GetClaimedTimeOk() (*time.Time, bool) {
 
 // HasClaimedTime returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasClaimedTime() bool {
-	if o != nil && o.ClaimedTime != nil {
+	if o != nil && !IsNil(o.ClaimedTime) {
 		return true
 	}
 
@@ -248,7 +254,7 @@ func (o *AssetDeviceRegistration) GetDeviceHostname() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetDeviceHostnameOk() ([]string, bool) {
-	if o == nil || o.DeviceHostname == nil {
+	if o == nil || IsNil(o.DeviceHostname) {
 		return nil, false
 	}
 	return o.DeviceHostname, true
@@ -256,7 +262,7 @@ func (o *AssetDeviceRegistration) GetDeviceHostnameOk() ([]string, bool) {
 
 // HasDeviceHostname returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasDeviceHostname() bool {
-	if o != nil && o.DeviceHostname != nil {
+	if o != nil && IsNil(o.DeviceHostname) {
 		return true
 	}
 
@@ -281,7 +287,7 @@ func (o *AssetDeviceRegistration) GetDeviceIpAddress() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetDeviceIpAddressOk() ([]string, bool) {
-	if o == nil || o.DeviceIpAddress == nil {
+	if o == nil || IsNil(o.DeviceIpAddress) {
 		return nil, false
 	}
 	return o.DeviceIpAddress, true
@@ -289,7 +295,7 @@ func (o *AssetDeviceRegistration) GetDeviceIpAddressOk() ([]string, bool) {
 
 // HasDeviceIpAddress returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasDeviceIpAddress() bool {
-	if o != nil && o.DeviceIpAddress != nil {
+	if o != nil && IsNil(o.DeviceIpAddress) {
 		return true
 	}
 
@@ -303,7 +309,7 @@ func (o *AssetDeviceRegistration) SetDeviceIpAddress(v []string) {
 
 // GetExecutionMode returns the ExecutionMode field value if set, zero value otherwise.
 func (o *AssetDeviceRegistration) GetExecutionMode() string {
-	if o == nil || o.ExecutionMode == nil {
+	if o == nil || IsNil(o.ExecutionMode) {
 		var ret string
 		return ret
 	}
@@ -313,7 +319,7 @@ func (o *AssetDeviceRegistration) GetExecutionMode() string {
 // GetExecutionModeOk returns a tuple with the ExecutionMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceRegistration) GetExecutionModeOk() (*string, bool) {
-	if o == nil || o.ExecutionMode == nil {
+	if o == nil || IsNil(o.ExecutionMode) {
 		return nil, false
 	}
 	return o.ExecutionMode, true
@@ -321,7 +327,7 @@ func (o *AssetDeviceRegistration) GetExecutionModeOk() (*string, bool) {
 
 // HasExecutionMode returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasExecutionMode() bool {
-	if o != nil && o.ExecutionMode != nil {
+	if o != nil && !IsNil(o.ExecutionMode) {
 		return true
 	}
 
@@ -335,7 +341,7 @@ func (o *AssetDeviceRegistration) SetExecutionMode(v string) {
 
 // GetParentSignature returns the ParentSignature field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeviceRegistration) GetParentSignature() AssetClaimSignature {
-	if o == nil || o.ParentSignature.Get() == nil {
+	if o == nil || IsNil(o.ParentSignature.Get()) {
 		var ret AssetClaimSignature
 		return ret
 	}
@@ -389,7 +395,7 @@ func (o *AssetDeviceRegistration) GetPid() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetPidOk() ([]string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -397,7 +403,7 @@ func (o *AssetDeviceRegistration) GetPidOk() ([]string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && IsNil(o.Pid) {
 		return true
 	}
 
@@ -411,7 +417,7 @@ func (o *AssetDeviceRegistration) SetPid(v []string) {
 
 // GetPlatformType returns the PlatformType field value if set, zero value otherwise.
 func (o *AssetDeviceRegistration) GetPlatformType() string {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		var ret string
 		return ret
 	}
@@ -421,7 +427,7 @@ func (o *AssetDeviceRegistration) GetPlatformType() string {
 // GetPlatformTypeOk returns a tuple with the PlatformType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceRegistration) GetPlatformTypeOk() (*string, bool) {
-	if o == nil || o.PlatformType == nil {
+	if o == nil || IsNil(o.PlatformType) {
 		return nil, false
 	}
 	return o.PlatformType, true
@@ -429,7 +435,7 @@ func (o *AssetDeviceRegistration) GetPlatformTypeOk() (*string, bool) {
 
 // HasPlatformType returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasPlatformType() bool {
-	if o != nil && o.PlatformType != nil {
+	if o != nil && !IsNil(o.PlatformType) {
 		return true
 	}
 
@@ -443,7 +449,7 @@ func (o *AssetDeviceRegistration) SetPlatformType(v string) {
 
 // GetPublicAccessKey returns the PublicAccessKey field value if set, zero value otherwise.
 func (o *AssetDeviceRegistration) GetPublicAccessKey() string {
-	if o == nil || o.PublicAccessKey == nil {
+	if o == nil || IsNil(o.PublicAccessKey) {
 		var ret string
 		return ret
 	}
@@ -453,7 +459,7 @@ func (o *AssetDeviceRegistration) GetPublicAccessKey() string {
 // GetPublicAccessKeyOk returns a tuple with the PublicAccessKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceRegistration) GetPublicAccessKeyOk() (*string, bool) {
-	if o == nil || o.PublicAccessKey == nil {
+	if o == nil || IsNil(o.PublicAccessKey) {
 		return nil, false
 	}
 	return o.PublicAccessKey, true
@@ -461,7 +467,7 @@ func (o *AssetDeviceRegistration) GetPublicAccessKeyOk() (*string, bool) {
 
 // HasPublicAccessKey returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasPublicAccessKey() bool {
-	if o != nil && o.PublicAccessKey != nil {
+	if o != nil && !IsNil(o.PublicAccessKey) {
 		return true
 	}
 
@@ -475,7 +481,7 @@ func (o *AssetDeviceRegistration) SetPublicAccessKey(v string) {
 
 // GetReadOnly returns the ReadOnly field value if set, zero value otherwise.
 func (o *AssetDeviceRegistration) GetReadOnly() bool {
-	if o == nil || o.ReadOnly == nil {
+	if o == nil || IsNil(o.ReadOnly) {
 		var ret bool
 		return ret
 	}
@@ -485,7 +491,7 @@ func (o *AssetDeviceRegistration) GetReadOnly() bool {
 // GetReadOnlyOk returns a tuple with the ReadOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceRegistration) GetReadOnlyOk() (*bool, bool) {
-	if o == nil || o.ReadOnly == nil {
+	if o == nil || IsNil(o.ReadOnly) {
 		return nil, false
 	}
 	return o.ReadOnly, true
@@ -493,7 +499,7 @@ func (o *AssetDeviceRegistration) GetReadOnlyOk() (*bool, bool) {
 
 // HasReadOnly returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasReadOnly() bool {
-	if o != nil && o.ReadOnly != nil {
+	if o != nil && !IsNil(o.ReadOnly) {
 		return true
 	}
 
@@ -518,7 +524,7 @@ func (o *AssetDeviceRegistration) GetSerial() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetSerialOk() ([]string, bool) {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		return nil, false
 	}
 	return o.Serial, true
@@ -526,7 +532,7 @@ func (o *AssetDeviceRegistration) GetSerialOk() ([]string, bool) {
 
 // HasSerial returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasSerial() bool {
-	if o != nil && o.Serial != nil {
+	if o != nil && IsNil(o.Serial) {
 		return true
 	}
 
@@ -540,7 +546,7 @@ func (o *AssetDeviceRegistration) SetSerial(v []string) {
 
 // GetVendor returns the Vendor field value if set, zero value otherwise.
 func (o *AssetDeviceRegistration) GetVendor() string {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		var ret string
 		return ret
 	}
@@ -550,7 +556,7 @@ func (o *AssetDeviceRegistration) GetVendor() string {
 // GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceRegistration) GetVendorOk() (*string, bool) {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		return nil, false
 	}
 	return o.Vendor, true
@@ -558,7 +564,7 @@ func (o *AssetDeviceRegistration) GetVendorOk() (*string, bool) {
 
 // HasVendor returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasVendor() bool {
-	if o != nil && o.Vendor != nil {
+	if o != nil && !IsNil(o.Vendor) {
 		return true
 	}
 
@@ -570,68 +576,90 @@ func (o *AssetDeviceRegistration) SetVendor(v string) {
 	o.Vendor = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeviceRegistration) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *AssetDeviceRegistration) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetClaimedByUser returns the ClaimedByUser field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *AssetDeviceRegistration) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *AssetDeviceRegistration) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetClaimedByUser returns the ClaimedByUser field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeviceRegistration) GetClaimedByUser() IamUserRelationship {
-	if o == nil || o.ClaimedByUser == nil {
+	if o == nil || IsNil(o.ClaimedByUser.Get()) {
 		var ret IamUserRelationship
 		return ret
 	}
-	return *o.ClaimedByUser
+	return *o.ClaimedByUser.Get()
 }
 
 // GetClaimedByUserOk returns a tuple with the ClaimedByUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetClaimedByUserOk() (*IamUserRelationship, bool) {
-	if o == nil || o.ClaimedByUser == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClaimedByUser, true
+	return o.ClaimedByUser.Get(), o.ClaimedByUser.IsSet()
 }
 
 // HasClaimedByUser returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasClaimedByUser() bool {
-	if o != nil && o.ClaimedByUser != nil {
+	if o != nil && o.ClaimedByUser.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClaimedByUser gets a reference to the given IamUserRelationship and assigns it to the ClaimedByUser field.
+// SetClaimedByUser gets a reference to the given NullableIamUserRelationship and assigns it to the ClaimedByUser field.
 func (o *AssetDeviceRegistration) SetClaimedByUser(v IamUserRelationship) {
-	o.ClaimedByUser = &v
+	o.ClaimedByUser.Set(&v)
+}
+
+// SetClaimedByUserNil sets the value for ClaimedByUser to be an explicit nil
+func (o *AssetDeviceRegistration) SetClaimedByUserNil() {
+	o.ClaimedByUser.Set(nil)
+}
+
+// UnsetClaimedByUser ensures that no value is present for ClaimedByUser, not even an explicit nil
+func (o *AssetDeviceRegistration) UnsetClaimedByUser() {
+	o.ClaimedByUser.Unset()
 }
 
 // GetClusterMembers returns the ClusterMembers field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -647,7 +675,7 @@ func (o *AssetDeviceRegistration) GetClusterMembers() []AssetClusterMemberRelati
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetClusterMembersOk() ([]AssetClusterMemberRelationship, bool) {
-	if o == nil || o.ClusterMembers == nil {
+	if o == nil || IsNil(o.ClusterMembers) {
 		return nil, false
 	}
 	return o.ClusterMembers, true
@@ -655,7 +683,7 @@ func (o *AssetDeviceRegistration) GetClusterMembersOk() ([]AssetClusterMemberRel
 
 // HasClusterMembers returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasClusterMembers() bool {
-	if o != nil && o.ClusterMembers != nil {
+	if o != nil && IsNil(o.ClusterMembers) {
 		return true
 	}
 
@@ -667,189 +695,281 @@ func (o *AssetDeviceRegistration) SetClusterMembers(v []AssetClusterMemberRelati
 	o.ClusterMembers = v
 }
 
-// GetDeviceClaim returns the DeviceClaim field value if set, zero value otherwise.
+// GetCustomPermissionResources returns the CustomPermissionResources field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AssetDeviceRegistration) GetCustomPermissionResources() []MoBaseMoRelationship {
+	if o == nil {
+		var ret []MoBaseMoRelationship
+		return ret
+	}
+	return o.CustomPermissionResources
+}
+
+// GetCustomPermissionResourcesOk returns a tuple with the CustomPermissionResources field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AssetDeviceRegistration) GetCustomPermissionResourcesOk() ([]MoBaseMoRelationship, bool) {
+	if o == nil || IsNil(o.CustomPermissionResources) {
+		return nil, false
+	}
+	return o.CustomPermissionResources, true
+}
+
+// HasCustomPermissionResources returns a boolean if a field has been set.
+func (o *AssetDeviceRegistration) HasCustomPermissionResources() bool {
+	if o != nil && IsNil(o.CustomPermissionResources) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomPermissionResources gets a reference to the given []MoBaseMoRelationship and assigns it to the CustomPermissionResources field.
+func (o *AssetDeviceRegistration) SetCustomPermissionResources(v []MoBaseMoRelationship) {
+	o.CustomPermissionResources = v
+}
+
+// GetDeviceClaim returns the DeviceClaim field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeviceRegistration) GetDeviceClaim() AssetDeviceClaimRelationship {
-	if o == nil || o.DeviceClaim == nil {
+	if o == nil || IsNil(o.DeviceClaim.Get()) {
 		var ret AssetDeviceClaimRelationship
 		return ret
 	}
-	return *o.DeviceClaim
+	return *o.DeviceClaim.Get()
 }
 
 // GetDeviceClaimOk returns a tuple with the DeviceClaim field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetDeviceClaimOk() (*AssetDeviceClaimRelationship, bool) {
-	if o == nil || o.DeviceClaim == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeviceClaim, true
+	return o.DeviceClaim.Get(), o.DeviceClaim.IsSet()
 }
 
 // HasDeviceClaim returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasDeviceClaim() bool {
-	if o != nil && o.DeviceClaim != nil {
+	if o != nil && o.DeviceClaim.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeviceClaim gets a reference to the given AssetDeviceClaimRelationship and assigns it to the DeviceClaim field.
+// SetDeviceClaim gets a reference to the given NullableAssetDeviceClaimRelationship and assigns it to the DeviceClaim field.
 func (o *AssetDeviceRegistration) SetDeviceClaim(v AssetDeviceClaimRelationship) {
-	o.DeviceClaim = &v
+	o.DeviceClaim.Set(&v)
 }
 
-// GetDeviceConfiguration returns the DeviceConfiguration field value if set, zero value otherwise.
+// SetDeviceClaimNil sets the value for DeviceClaim to be an explicit nil
+func (o *AssetDeviceRegistration) SetDeviceClaimNil() {
+	o.DeviceClaim.Set(nil)
+}
+
+// UnsetDeviceClaim ensures that no value is present for DeviceClaim, not even an explicit nil
+func (o *AssetDeviceRegistration) UnsetDeviceClaim() {
+	o.DeviceClaim.Unset()
+}
+
+// GetDeviceConfiguration returns the DeviceConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeviceRegistration) GetDeviceConfiguration() AssetDeviceConfigurationRelationship {
-	if o == nil || o.DeviceConfiguration == nil {
+	if o == nil || IsNil(o.DeviceConfiguration.Get()) {
 		var ret AssetDeviceConfigurationRelationship
 		return ret
 	}
-	return *o.DeviceConfiguration
+	return *o.DeviceConfiguration.Get()
 }
 
 // GetDeviceConfigurationOk returns a tuple with the DeviceConfiguration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetDeviceConfigurationOk() (*AssetDeviceConfigurationRelationship, bool) {
-	if o == nil || o.DeviceConfiguration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeviceConfiguration, true
+	return o.DeviceConfiguration.Get(), o.DeviceConfiguration.IsSet()
 }
 
 // HasDeviceConfiguration returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasDeviceConfiguration() bool {
-	if o != nil && o.DeviceConfiguration != nil {
+	if o != nil && o.DeviceConfiguration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeviceConfiguration gets a reference to the given AssetDeviceConfigurationRelationship and assigns it to the DeviceConfiguration field.
+// SetDeviceConfiguration gets a reference to the given NullableAssetDeviceConfigurationRelationship and assigns it to the DeviceConfiguration field.
 func (o *AssetDeviceRegistration) SetDeviceConfiguration(v AssetDeviceConfigurationRelationship) {
-	o.DeviceConfiguration = &v
+	o.DeviceConfiguration.Set(&v)
 }
 
-// GetDomainGroup returns the DomainGroup field value if set, zero value otherwise.
+// SetDeviceConfigurationNil sets the value for DeviceConfiguration to be an explicit nil
+func (o *AssetDeviceRegistration) SetDeviceConfigurationNil() {
+	o.DeviceConfiguration.Set(nil)
+}
+
+// UnsetDeviceConfiguration ensures that no value is present for DeviceConfiguration, not even an explicit nil
+func (o *AssetDeviceRegistration) UnsetDeviceConfiguration() {
+	o.DeviceConfiguration.Unset()
+}
+
+// GetDomainGroup returns the DomainGroup field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeviceRegistration) GetDomainGroup() IamDomainGroupRelationship {
-	if o == nil || o.DomainGroup == nil {
+	if o == nil || IsNil(o.DomainGroup.Get()) {
 		var ret IamDomainGroupRelationship
 		return ret
 	}
-	return *o.DomainGroup
+	return *o.DomainGroup.Get()
 }
 
 // GetDomainGroupOk returns a tuple with the DomainGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetDomainGroupOk() (*IamDomainGroupRelationship, bool) {
-	if o == nil || o.DomainGroup == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DomainGroup, true
+	return o.DomainGroup.Get(), o.DomainGroup.IsSet()
 }
 
 // HasDomainGroup returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasDomainGroup() bool {
-	if o != nil && o.DomainGroup != nil {
+	if o != nil && o.DomainGroup.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDomainGroup gets a reference to the given IamDomainGroupRelationship and assigns it to the DomainGroup field.
+// SetDomainGroup gets a reference to the given NullableIamDomainGroupRelationship and assigns it to the DomainGroup field.
 func (o *AssetDeviceRegistration) SetDomainGroup(v IamDomainGroupRelationship) {
-	o.DomainGroup = &v
+	o.DomainGroup.Set(&v)
 }
 
-// GetParentConnection returns the ParentConnection field value if set, zero value otherwise.
+// SetDomainGroupNil sets the value for DomainGroup to be an explicit nil
+func (o *AssetDeviceRegistration) SetDomainGroupNil() {
+	o.DomainGroup.Set(nil)
+}
+
+// UnsetDomainGroup ensures that no value is present for DomainGroup, not even an explicit nil
+func (o *AssetDeviceRegistration) UnsetDomainGroup() {
+	o.DomainGroup.Unset()
+}
+
+// GetParentConnection returns the ParentConnection field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeviceRegistration) GetParentConnection() AssetDeviceRegistrationRelationship {
-	if o == nil || o.ParentConnection == nil {
+	if o == nil || IsNil(o.ParentConnection.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.ParentConnection
+	return *o.ParentConnection.Get()
 }
 
 // GetParentConnectionOk returns a tuple with the ParentConnection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetParentConnectionOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.ParentConnection == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ParentConnection, true
+	return o.ParentConnection.Get(), o.ParentConnection.IsSet()
 }
 
 // HasParentConnection returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasParentConnection() bool {
-	if o != nil && o.ParentConnection != nil {
+	if o != nil && o.ParentConnection.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetParentConnection gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the ParentConnection field.
+// SetParentConnection gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the ParentConnection field.
 func (o *AssetDeviceRegistration) SetParentConnection(v AssetDeviceRegistrationRelationship) {
-	o.ParentConnection = &v
+	o.ParentConnection.Set(&v)
 }
 
-// GetTarget returns the Target field value if set, zero value otherwise.
+// SetParentConnectionNil sets the value for ParentConnection to be an explicit nil
+func (o *AssetDeviceRegistration) SetParentConnectionNil() {
+	o.ParentConnection.Set(nil)
+}
+
+// UnsetParentConnection ensures that no value is present for ParentConnection, not even an explicit nil
+func (o *AssetDeviceRegistration) UnsetParentConnection() {
+	o.ParentConnection.Unset()
+}
+
+// GetTarget returns the Target field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeviceRegistration) GetTarget() AssetTargetRelationship {
-	if o == nil || o.Target == nil {
+	if o == nil || IsNil(o.Target.Get()) {
 		var ret AssetTargetRelationship
 		return ret
 	}
-	return *o.Target
+	return *o.Target.Get()
 }
 
 // GetTargetOk returns a tuple with the Target field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeviceRegistration) GetTargetOk() (*AssetTargetRelationship, bool) {
-	if o == nil || o.Target == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Target, true
+	return o.Target.Get(), o.Target.IsSet()
 }
 
 // HasTarget returns a boolean if a field has been set.
 func (o *AssetDeviceRegistration) HasTarget() bool {
-	if o != nil && o.Target != nil {
+	if o != nil && o.Target.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTarget gets a reference to the given AssetTargetRelationship and assigns it to the Target field.
+// SetTarget gets a reference to the given NullableAssetTargetRelationship and assigns it to the Target field.
 func (o *AssetDeviceRegistration) SetTarget(v AssetTargetRelationship) {
-	o.Target = &v
+	o.Target.Set(&v)
+}
+
+// SetTargetNil sets the value for Target to be an explicit nil
+func (o *AssetDeviceRegistration) SetTargetNil() {
+	o.Target.Set(nil)
+}
+
+// UnsetTarget ensures that no value is present for Target, not even an explicit nil
+func (o *AssetDeviceRegistration) UnsetTarget() {
+	o.Target.Unset()
 }
 
 func (o AssetDeviceRegistration) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetDeviceRegistration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedAssetDeviceConnection, errAssetDeviceConnection := json.Marshal(o.AssetDeviceConnection)
 	if errAssetDeviceConnection != nil {
-		return []byte{}, errAssetDeviceConnection
+		return map[string]interface{}{}, errAssetDeviceConnection
 	}
 	errAssetDeviceConnection = json.Unmarshal([]byte(serializedAssetDeviceConnection), &toSerialize)
 	if errAssetDeviceConnection != nil {
-		return []byte{}, errAssetDeviceConnection
+		return map[string]interface{}{}, errAssetDeviceConnection
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccessKeyId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessKeyId) {
 		toSerialize["AccessKeyId"] = o.AccessKeyId
 	}
-	if o.ClaimedByUserName != nil {
+	if !IsNil(o.ClaimedByUserName) {
 		toSerialize["ClaimedByUserName"] = o.ClaimedByUserName
 	}
-	if o.ClaimedTime != nil {
+	if !IsNil(o.ClaimedTime) {
 		toSerialize["ClaimedTime"] = o.ClaimedTime
 	}
 	if o.DeviceHostname != nil {
@@ -858,7 +978,7 @@ func (o AssetDeviceRegistration) MarshalJSON() ([]byte, error) {
 	if o.DeviceIpAddress != nil {
 		toSerialize["DeviceIpAddress"] = o.DeviceIpAddress
 	}
-	if o.ExecutionMode != nil {
+	if !IsNil(o.ExecutionMode) {
 		toSerialize["ExecutionMode"] = o.ExecutionMode
 	}
 	if o.ParentSignature.IsSet() {
@@ -867,54 +987,79 @@ func (o AssetDeviceRegistration) MarshalJSON() ([]byte, error) {
 	if o.Pid != nil {
 		toSerialize["Pid"] = o.Pid
 	}
-	if o.PlatformType != nil {
+	if !IsNil(o.PlatformType) {
 		toSerialize["PlatformType"] = o.PlatformType
 	}
-	if o.PublicAccessKey != nil {
+	if !IsNil(o.PublicAccessKey) {
 		toSerialize["PublicAccessKey"] = o.PublicAccessKey
 	}
-	if o.ReadOnly != nil {
+	if !IsNil(o.ReadOnly) {
 		toSerialize["ReadOnly"] = o.ReadOnly
 	}
 	if o.Serial != nil {
 		toSerialize["Serial"] = o.Serial
 	}
-	if o.Vendor != nil {
+	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.ClaimedByUser != nil {
-		toSerialize["ClaimedByUser"] = o.ClaimedByUser
+	if o.ClaimedByUser.IsSet() {
+		toSerialize["ClaimedByUser"] = o.ClaimedByUser.Get()
 	}
 	if o.ClusterMembers != nil {
 		toSerialize["ClusterMembers"] = o.ClusterMembers
 	}
-	if o.DeviceClaim != nil {
-		toSerialize["DeviceClaim"] = o.DeviceClaim
+	if o.CustomPermissionResources != nil {
+		toSerialize["CustomPermissionResources"] = o.CustomPermissionResources
 	}
-	if o.DeviceConfiguration != nil {
-		toSerialize["DeviceConfiguration"] = o.DeviceConfiguration
+	if o.DeviceClaim.IsSet() {
+		toSerialize["DeviceClaim"] = o.DeviceClaim.Get()
 	}
-	if o.DomainGroup != nil {
-		toSerialize["DomainGroup"] = o.DomainGroup
+	if o.DeviceConfiguration.IsSet() {
+		toSerialize["DeviceConfiguration"] = o.DeviceConfiguration.Get()
 	}
-	if o.ParentConnection != nil {
-		toSerialize["ParentConnection"] = o.ParentConnection
+	if o.DomainGroup.IsSet() {
+		toSerialize["DomainGroup"] = o.DomainGroup.Get()
 	}
-	if o.Target != nil {
-		toSerialize["Target"] = o.Target
+	if o.ParentConnection.IsSet() {
+		toSerialize["ParentConnection"] = o.ParentConnection.Get()
+	}
+	if o.Target.IsSet() {
+		toSerialize["Target"] = o.Target.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetDeviceRegistration) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetDeviceRegistration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetDeviceRegistrationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -940,21 +1085,23 @@ func (o *AssetDeviceRegistration) UnmarshalJSON(bytes []byte) (err error) {
 		ReadOnly *bool    `json:"ReadOnly,omitempty"`
 		Serial   []string `json:"Serial,omitempty"`
 		// The vendor of the managed device.
-		Vendor        *string                 `json:"Vendor,omitempty"`
-		Account       *IamAccountRelationship `json:"Account,omitempty"`
-		ClaimedByUser *IamUserRelationship    `json:"ClaimedByUser,omitempty"`
+		Vendor        *string                        `json:"Vendor,omitempty"`
+		Account       NullableIamAccountRelationship `json:"Account,omitempty"`
+		ClaimedByUser NullableIamUserRelationship    `json:"ClaimedByUser,omitempty"`
 		// An array of relationships to assetClusterMember resources.
-		ClusterMembers      []AssetClusterMemberRelationship      `json:"ClusterMembers,omitempty"`
-		DeviceClaim         *AssetDeviceClaimRelationship         `json:"DeviceClaim,omitempty"`
-		DeviceConfiguration *AssetDeviceConfigurationRelationship `json:"DeviceConfiguration,omitempty"`
-		DomainGroup         *IamDomainGroupRelationship           `json:"DomainGroup,omitempty"`
-		ParentConnection    *AssetDeviceRegistrationRelationship  `json:"ParentConnection,omitempty"`
-		Target              *AssetTargetRelationship              `json:"Target,omitempty"`
+		ClusterMembers []AssetClusterMemberRelationship `json:"ClusterMembers,omitempty"`
+		// An array of relationships to moBaseMo resources.
+		CustomPermissionResources []MoBaseMoRelationship                       `json:"CustomPermissionResources,omitempty"`
+		DeviceClaim               NullableAssetDeviceClaimRelationship         `json:"DeviceClaim,omitempty"`
+		DeviceConfiguration       NullableAssetDeviceConfigurationRelationship `json:"DeviceConfiguration,omitempty"`
+		DomainGroup               NullableIamDomainGroupRelationship           `json:"DomainGroup,omitempty"`
+		ParentConnection          NullableAssetDeviceRegistrationRelationship  `json:"ParentConnection,omitempty"`
+		Target                    NullableAssetTargetRelationship              `json:"Target,omitempty"`
 	}
 
 	varAssetDeviceRegistrationWithoutEmbeddedStruct := AssetDeviceRegistrationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetDeviceRegistrationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetDeviceRegistrationWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetDeviceRegistration := _AssetDeviceRegistration{}
 		varAssetDeviceRegistration.ClassId = varAssetDeviceRegistrationWithoutEmbeddedStruct.ClassId
@@ -975,6 +1122,7 @@ func (o *AssetDeviceRegistration) UnmarshalJSON(bytes []byte) (err error) {
 		varAssetDeviceRegistration.Account = varAssetDeviceRegistrationWithoutEmbeddedStruct.Account
 		varAssetDeviceRegistration.ClaimedByUser = varAssetDeviceRegistrationWithoutEmbeddedStruct.ClaimedByUser
 		varAssetDeviceRegistration.ClusterMembers = varAssetDeviceRegistrationWithoutEmbeddedStruct.ClusterMembers
+		varAssetDeviceRegistration.CustomPermissionResources = varAssetDeviceRegistrationWithoutEmbeddedStruct.CustomPermissionResources
 		varAssetDeviceRegistration.DeviceClaim = varAssetDeviceRegistrationWithoutEmbeddedStruct.DeviceClaim
 		varAssetDeviceRegistration.DeviceConfiguration = varAssetDeviceRegistrationWithoutEmbeddedStruct.DeviceConfiguration
 		varAssetDeviceRegistration.DomainGroup = varAssetDeviceRegistrationWithoutEmbeddedStruct.DomainGroup
@@ -987,7 +1135,7 @@ func (o *AssetDeviceRegistration) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetDeviceRegistration := _AssetDeviceRegistration{}
 
-	err = json.Unmarshal(bytes, &varAssetDeviceRegistration)
+	err = json.Unmarshal(data, &varAssetDeviceRegistration)
 	if err == nil {
 		o.AssetDeviceConnection = varAssetDeviceRegistration.AssetDeviceConnection
 	} else {
@@ -996,7 +1144,7 @@ func (o *AssetDeviceRegistration) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessKeyId")
@@ -1015,6 +1163,7 @@ func (o *AssetDeviceRegistration) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "ClaimedByUser")
 		delete(additionalProperties, "ClusterMembers")
+		delete(additionalProperties, "CustomPermissionResources")
 		delete(additionalProperties, "DeviceClaim")
 		delete(additionalProperties, "DeviceConfiguration")
 		delete(additionalProperties, "DomainGroup")

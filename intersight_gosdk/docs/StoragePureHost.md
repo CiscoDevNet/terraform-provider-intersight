@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureHost"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureHost"]
 **HostGroupName** | Pointer to **string** | Name of host group where the host belongs to. Empty if host is not part of any HostGroup. | [optional] [readonly] 
-**Array** | Pointer to [**StoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
-**HostGroup** | Pointer to [**StoragePureHostGroupRelationship**](StoragePureHostGroupRelationship.md) |  | [optional] 
-**ProtectionGroup** | Pointer to [**StoragePureProtectionGroupRelationship**](StoragePureProtectionGroupRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
+**HostGroup** | Pointer to [**NullableStoragePureHostGroupRelationship**](StoragePureHostGroupRelationship.md) |  | [optional] 
+**ProtectionGroup** | Pointer to [**NullableStoragePureProtectionGroupRelationship**](StoragePureProtectionGroupRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -121,6 +121,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StoragePureHost) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StoragePureHost) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetHostGroup
 
 `func (o *StoragePureHost) GetHostGroup() StoragePureHostGroupRelationship`
@@ -146,6 +156,16 @@ SetHostGroup sets HostGroup field to given value.
 
 HasHostGroup returns a boolean if a field has been set.
 
+### SetHostGroupNil
+
+`func (o *StoragePureHost) SetHostGroupNil(b bool)`
+
+ SetHostGroupNil sets the value for HostGroup to be an explicit nil
+
+### UnsetHostGroup
+`func (o *StoragePureHost) UnsetHostGroup()`
+
+UnsetHostGroup ensures that no value is present for HostGroup, not even an explicit nil
 ### GetProtectionGroup
 
 `func (o *StoragePureHost) GetProtectionGroup() StoragePureProtectionGroupRelationship`
@@ -171,6 +191,16 @@ SetProtectionGroup sets ProtectionGroup field to given value.
 
 HasProtectionGroup returns a boolean if a field has been set.
 
+### SetProtectionGroupNil
+
+`func (o *StoragePureHost) SetProtectionGroupNil(b bool)`
+
+ SetProtectionGroupNil sets the value for ProtectionGroup to be an explicit nil
+
+### UnsetProtectionGroup
+`func (o *StoragePureHost) UnsetProtectionGroup()`
+
+UnsetProtectionGroup ensures that no value is present for ProtectionGroup, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StoragePureHost) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -196,6 +226,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StoragePureHost) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StoragePureHost) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

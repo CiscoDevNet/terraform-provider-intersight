@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageHitachiPool type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageHitachiPool{}
 
 // StorageHitachiPool A pool entity in Hitachi storage array.
 type StorageHitachiPool struct {
@@ -43,9 +47,9 @@ type StorageHitachiPool struct {
 	// Total capacity of the reserved page (bytes) of the DP volume that is related to the DP pool.
 	TotalReservedCapacity *int64 `json:"TotalReservedCapacity,omitempty"`
 	// The warning threshold set for the pool (%).
-	WarningThreshold     *int64                               `json:"WarningThreshold,omitempty"`
-	Array                *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	WarningThreshold     *int64                                      `json:"WarningThreshold,omitempty"`
+	Array                NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,7 +128,7 @@ func (o *StorageHitachiPool) SetObjectType(v string) {
 
 // GetBlockingModeBlockade returns the BlockingModeBlockade field value if set, zero value otherwise.
 func (o *StorageHitachiPool) GetBlockingModeBlockade() string {
-	if o == nil || o.BlockingModeBlockade == nil {
+	if o == nil || IsNil(o.BlockingModeBlockade) {
 		var ret string
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *StorageHitachiPool) GetBlockingModeBlockade() string {
 // GetBlockingModeBlockadeOk returns a tuple with the BlockingModeBlockade field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPool) GetBlockingModeBlockadeOk() (*string, bool) {
-	if o == nil || o.BlockingModeBlockade == nil {
+	if o == nil || IsNil(o.BlockingModeBlockade) {
 		return nil, false
 	}
 	return o.BlockingModeBlockade, true
@@ -142,7 +146,7 @@ func (o *StorageHitachiPool) GetBlockingModeBlockadeOk() (*string, bool) {
 
 // HasBlockingModeBlockade returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasBlockingModeBlockade() bool {
-	if o != nil && o.BlockingModeBlockade != nil {
+	if o != nil && !IsNil(o.BlockingModeBlockade) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *StorageHitachiPool) SetBlockingModeBlockade(v string) {
 
 // GetBlockingModeFull returns the BlockingModeFull field value if set, zero value otherwise.
 func (o *StorageHitachiPool) GetBlockingModeFull() string {
-	if o == nil || o.BlockingModeFull == nil {
+	if o == nil || IsNil(o.BlockingModeFull) {
 		var ret string
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *StorageHitachiPool) GetBlockingModeFull() string {
 // GetBlockingModeFullOk returns a tuple with the BlockingModeFull field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPool) GetBlockingModeFullOk() (*string, bool) {
-	if o == nil || o.BlockingModeFull == nil {
+	if o == nil || IsNil(o.BlockingModeFull) {
 		return nil, false
 	}
 	return o.BlockingModeFull, true
@@ -174,7 +178,7 @@ func (o *StorageHitachiPool) GetBlockingModeFullOk() (*string, bool) {
 
 // HasBlockingModeFull returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasBlockingModeFull() bool {
-	if o != nil && o.BlockingModeFull != nil {
+	if o != nil && !IsNil(o.BlockingModeFull) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *StorageHitachiPool) SetBlockingModeFull(v string) {
 
 // GetDepletionThreshold returns the DepletionThreshold field value if set, zero value otherwise.
 func (o *StorageHitachiPool) GetDepletionThreshold() string {
-	if o == nil || o.DepletionThreshold == nil {
+	if o == nil || IsNil(o.DepletionThreshold) {
 		var ret string
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *StorageHitachiPool) GetDepletionThreshold() string {
 // GetDepletionThresholdOk returns a tuple with the DepletionThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPool) GetDepletionThresholdOk() (*string, bool) {
-	if o == nil || o.DepletionThreshold == nil {
+	if o == nil || IsNil(o.DepletionThreshold) {
 		return nil, false
 	}
 	return o.DepletionThreshold, true
@@ -206,7 +210,7 @@ func (o *StorageHitachiPool) GetDepletionThresholdOk() (*string, bool) {
 
 // HasDepletionThreshold returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasDepletionThreshold() bool {
-	if o != nil && o.DepletionThreshold != nil {
+	if o != nil && !IsNil(o.DepletionThreshold) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *StorageHitachiPool) SetDepletionThreshold(v string) {
 
 // GetIsShrinking returns the IsShrinking field value if set, zero value otherwise.
 func (o *StorageHitachiPool) GetIsShrinking() bool {
-	if o == nil || o.IsShrinking == nil {
+	if o == nil || IsNil(o.IsShrinking) {
 		var ret bool
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *StorageHitachiPool) GetIsShrinking() bool {
 // GetIsShrinkingOk returns a tuple with the IsShrinking field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPool) GetIsShrinkingOk() (*bool, bool) {
-	if o == nil || o.IsShrinking == nil {
+	if o == nil || IsNil(o.IsShrinking) {
 		return nil, false
 	}
 	return o.IsShrinking, true
@@ -238,7 +242,7 @@ func (o *StorageHitachiPool) GetIsShrinkingOk() (*bool, bool) {
 
 // HasIsShrinking returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasIsShrinking() bool {
-	if o != nil && o.IsShrinking != nil {
+	if o != nil && !IsNil(o.IsShrinking) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *StorageHitachiPool) SetIsShrinking(v bool) {
 
 // GetMonitoringMode returns the MonitoringMode field value if set, zero value otherwise.
 func (o *StorageHitachiPool) GetMonitoringMode() string {
-	if o == nil || o.MonitoringMode == nil {
+	if o == nil || IsNil(o.MonitoringMode) {
 		var ret string
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *StorageHitachiPool) GetMonitoringMode() string {
 // GetMonitoringModeOk returns a tuple with the MonitoringMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPool) GetMonitoringModeOk() (*string, bool) {
-	if o == nil || o.MonitoringMode == nil {
+	if o == nil || IsNil(o.MonitoringMode) {
 		return nil, false
 	}
 	return o.MonitoringMode, true
@@ -270,7 +274,7 @@ func (o *StorageHitachiPool) GetMonitoringModeOk() (*string, bool) {
 
 // HasMonitoringMode returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasMonitoringMode() bool {
-	if o != nil && o.MonitoringMode != nil {
+	if o != nil && !IsNil(o.MonitoringMode) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *StorageHitachiPool) SetMonitoringMode(v string) {
 
 // GetMonitoringStatus returns the MonitoringStatus field value if set, zero value otherwise.
 func (o *StorageHitachiPool) GetMonitoringStatus() string {
-	if o == nil || o.MonitoringStatus == nil {
+	if o == nil || IsNil(o.MonitoringStatus) {
 		var ret string
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *StorageHitachiPool) GetMonitoringStatus() string {
 // GetMonitoringStatusOk returns a tuple with the MonitoringStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPool) GetMonitoringStatusOk() (*string, bool) {
-	if o == nil || o.MonitoringStatus == nil {
+	if o == nil || IsNil(o.MonitoringStatus) {
 		return nil, false
 	}
 	return o.MonitoringStatus, true
@@ -302,7 +306,7 @@ func (o *StorageHitachiPool) GetMonitoringStatusOk() (*string, bool) {
 
 // HasMonitoringStatus returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasMonitoringStatus() bool {
-	if o != nil && o.MonitoringStatus != nil {
+	if o != nil && !IsNil(o.MonitoringStatus) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *StorageHitachiPool) SetMonitoringStatus(v string) {
 
 // GetPoolActionMode returns the PoolActionMode field value if set, zero value otherwise.
 func (o *StorageHitachiPool) GetPoolActionMode() string {
-	if o == nil || o.PoolActionMode == nil {
+	if o == nil || IsNil(o.PoolActionMode) {
 		var ret string
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *StorageHitachiPool) GetPoolActionMode() string {
 // GetPoolActionModeOk returns a tuple with the PoolActionMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPool) GetPoolActionModeOk() (*string, bool) {
-	if o == nil || o.PoolActionMode == nil {
+	if o == nil || IsNil(o.PoolActionMode) {
 		return nil, false
 	}
 	return o.PoolActionMode, true
@@ -334,7 +338,7 @@ func (o *StorageHitachiPool) GetPoolActionModeOk() (*string, bool) {
 
 // HasPoolActionMode returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasPoolActionMode() bool {
-	if o != nil && o.PoolActionMode != nil {
+	if o != nil && !IsNil(o.PoolActionMode) {
 		return true
 	}
 
@@ -348,7 +352,7 @@ func (o *StorageHitachiPool) SetPoolActionMode(v string) {
 
 // GetProgressOfReplacing returns the ProgressOfReplacing field value if set, zero value otherwise.
 func (o *StorageHitachiPool) GetProgressOfReplacing() string {
-	if o == nil || o.ProgressOfReplacing == nil {
+	if o == nil || IsNil(o.ProgressOfReplacing) {
 		var ret string
 		return ret
 	}
@@ -358,7 +362,7 @@ func (o *StorageHitachiPool) GetProgressOfReplacing() string {
 // GetProgressOfReplacingOk returns a tuple with the ProgressOfReplacing field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPool) GetProgressOfReplacingOk() (*string, bool) {
-	if o == nil || o.ProgressOfReplacing == nil {
+	if o == nil || IsNil(o.ProgressOfReplacing) {
 		return nil, false
 	}
 	return o.ProgressOfReplacing, true
@@ -366,7 +370,7 @@ func (o *StorageHitachiPool) GetProgressOfReplacingOk() (*string, bool) {
 
 // HasProgressOfReplacing returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasProgressOfReplacing() bool {
-	if o != nil && o.ProgressOfReplacing != nil {
+	if o != nil && !IsNil(o.ProgressOfReplacing) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *StorageHitachiPool) SetProgressOfReplacing(v string) {
 
 // GetTotalReservedCapacity returns the TotalReservedCapacity field value if set, zero value otherwise.
 func (o *StorageHitachiPool) GetTotalReservedCapacity() int64 {
-	if o == nil || o.TotalReservedCapacity == nil {
+	if o == nil || IsNil(o.TotalReservedCapacity) {
 		var ret int64
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *StorageHitachiPool) GetTotalReservedCapacity() int64 {
 // GetTotalReservedCapacityOk returns a tuple with the TotalReservedCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPool) GetTotalReservedCapacityOk() (*int64, bool) {
-	if o == nil || o.TotalReservedCapacity == nil {
+	if o == nil || IsNil(o.TotalReservedCapacity) {
 		return nil, false
 	}
 	return o.TotalReservedCapacity, true
@@ -398,7 +402,7 @@ func (o *StorageHitachiPool) GetTotalReservedCapacityOk() (*int64, bool) {
 
 // HasTotalReservedCapacity returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasTotalReservedCapacity() bool {
-	if o != nil && o.TotalReservedCapacity != nil {
+	if o != nil && !IsNil(o.TotalReservedCapacity) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *StorageHitachiPool) SetTotalReservedCapacity(v int64) {
 
 // GetWarningThreshold returns the WarningThreshold field value if set, zero value otherwise.
 func (o *StorageHitachiPool) GetWarningThreshold() int64 {
-	if o == nil || o.WarningThreshold == nil {
+	if o == nil || IsNil(o.WarningThreshold) {
 		var ret int64
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *StorageHitachiPool) GetWarningThreshold() int64 {
 // GetWarningThresholdOk returns a tuple with the WarningThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiPool) GetWarningThresholdOk() (*int64, bool) {
-	if o == nil || o.WarningThreshold == nil {
+	if o == nil || IsNil(o.WarningThreshold) {
 		return nil, false
 	}
 	return o.WarningThreshold, true
@@ -430,7 +434,7 @@ func (o *StorageHitachiPool) GetWarningThresholdOk() (*int64, bool) {
 
 // HasWarningThreshold returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasWarningThreshold() bool {
-	if o != nil && o.WarningThreshold != nil {
+	if o != nil && !IsNil(o.WarningThreshold) {
 		return true
 	}
 
@@ -442,131 +446,179 @@ func (o *StorageHitachiPool) SetWarningThreshold(v int64) {
 	o.WarningThreshold = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiPool) GetArray() StorageHitachiArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageHitachiArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiPool) GetArrayOk() (*StorageHitachiArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageHitachiArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageHitachiArrayRelationship and assigns it to the Array field.
 func (o *StorageHitachiPool) SetArray(v StorageHitachiArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageHitachiPool) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageHitachiPool) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiPool) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiPool) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageHitachiPool) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageHitachiPool) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageHitachiPool) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageHitachiPool) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageHitachiPool) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageHitachiPool) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseDiskPool, errStorageBaseDiskPool := json.Marshal(o.StorageBaseDiskPool)
 	if errStorageBaseDiskPool != nil {
-		return []byte{}, errStorageBaseDiskPool
+		return map[string]interface{}{}, errStorageBaseDiskPool
 	}
 	errStorageBaseDiskPool = json.Unmarshal([]byte(serializedStorageBaseDiskPool), &toSerialize)
 	if errStorageBaseDiskPool != nil {
-		return []byte{}, errStorageBaseDiskPool
+		return map[string]interface{}{}, errStorageBaseDiskPool
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BlockingModeBlockade != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BlockingModeBlockade) {
 		toSerialize["BlockingModeBlockade"] = o.BlockingModeBlockade
 	}
-	if o.BlockingModeFull != nil {
+	if !IsNil(o.BlockingModeFull) {
 		toSerialize["BlockingModeFull"] = o.BlockingModeFull
 	}
-	if o.DepletionThreshold != nil {
+	if !IsNil(o.DepletionThreshold) {
 		toSerialize["DepletionThreshold"] = o.DepletionThreshold
 	}
-	if o.IsShrinking != nil {
+	if !IsNil(o.IsShrinking) {
 		toSerialize["IsShrinking"] = o.IsShrinking
 	}
-	if o.MonitoringMode != nil {
+	if !IsNil(o.MonitoringMode) {
 		toSerialize["MonitoringMode"] = o.MonitoringMode
 	}
-	if o.MonitoringStatus != nil {
+	if !IsNil(o.MonitoringStatus) {
 		toSerialize["MonitoringStatus"] = o.MonitoringStatus
 	}
-	if o.PoolActionMode != nil {
+	if !IsNil(o.PoolActionMode) {
 		toSerialize["PoolActionMode"] = o.PoolActionMode
 	}
-	if o.ProgressOfReplacing != nil {
+	if !IsNil(o.ProgressOfReplacing) {
 		toSerialize["ProgressOfReplacing"] = o.ProgressOfReplacing
 	}
-	if o.TotalReservedCapacity != nil {
+	if !IsNil(o.TotalReservedCapacity) {
 		toSerialize["TotalReservedCapacity"] = o.TotalReservedCapacity
 	}
-	if o.WarningThreshold != nil {
+	if !IsNil(o.WarningThreshold) {
 		toSerialize["WarningThreshold"] = o.WarningThreshold
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageHitachiPool) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageHitachiPool) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageHitachiPoolWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -591,14 +643,14 @@ func (o *StorageHitachiPool) UnmarshalJSON(bytes []byte) (err error) {
 		// Total capacity of the reserved page (bytes) of the DP volume that is related to the DP pool.
 		TotalReservedCapacity *int64 `json:"TotalReservedCapacity,omitempty"`
 		// The warning threshold set for the pool (%).
-		WarningThreshold *int64                               `json:"WarningThreshold,omitempty"`
-		Array            *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		WarningThreshold *int64                                      `json:"WarningThreshold,omitempty"`
+		Array            NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageHitachiPoolWithoutEmbeddedStruct := StorageHitachiPoolWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiPoolWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageHitachiPoolWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageHitachiPool := _StorageHitachiPool{}
 		varStorageHitachiPool.ClassId = varStorageHitachiPoolWithoutEmbeddedStruct.ClassId
@@ -622,7 +674,7 @@ func (o *StorageHitachiPool) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageHitachiPool := _StorageHitachiPool{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiPool)
+	err = json.Unmarshal(data, &varStorageHitachiPool)
 	if err == nil {
 		o.StorageBaseDiskPool = varStorageHitachiPool.StorageBaseDiskPool
 	} else {
@@ -631,7 +683,7 @@ func (o *StorageHitachiPool) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BlockingModeBlockade")

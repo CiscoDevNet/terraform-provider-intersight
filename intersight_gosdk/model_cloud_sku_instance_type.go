@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudSkuInstanceType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudSkuInstanceType{}
 
 // CloudSkuInstanceType Details for an instance type.
 type CloudSkuInstanceType struct {
@@ -146,7 +150,7 @@ func (o *CloudSkuInstanceType) SetObjectType(v string) {
 
 // GetArchitectureType returns the ArchitectureType field value if set, zero value otherwise.
 func (o *CloudSkuInstanceType) GetArchitectureType() string {
-	if o == nil || o.ArchitectureType == nil {
+	if o == nil || IsNil(o.ArchitectureType) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *CloudSkuInstanceType) GetArchitectureType() string {
 // GetArchitectureTypeOk returns a tuple with the ArchitectureType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuInstanceType) GetArchitectureTypeOk() (*string, bool) {
-	if o == nil || o.ArchitectureType == nil {
+	if o == nil || IsNil(o.ArchitectureType) {
 		return nil, false
 	}
 	return o.ArchitectureType, true
@@ -164,7 +168,7 @@ func (o *CloudSkuInstanceType) GetArchitectureTypeOk() (*string, bool) {
 
 // HasArchitectureType returns a boolean if a field has been set.
 func (o *CloudSkuInstanceType) HasArchitectureType() bool {
-	if o != nil && o.ArchitectureType != nil {
+	if o != nil && !IsNil(o.ArchitectureType) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *CloudSkuInstanceType) SetArchitectureType(v string) {
 
 // GetCpuUnit returns the CpuUnit field value if set, zero value otherwise.
 func (o *CloudSkuInstanceType) GetCpuUnit() string {
-	if o == nil || o.CpuUnit == nil {
+	if o == nil || IsNil(o.CpuUnit) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *CloudSkuInstanceType) GetCpuUnit() string {
 // GetCpuUnitOk returns a tuple with the CpuUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuInstanceType) GetCpuUnitOk() (*string, bool) {
-	if o == nil || o.CpuUnit == nil {
+	if o == nil || IsNil(o.CpuUnit) {
 		return nil, false
 	}
 	return o.CpuUnit, true
@@ -196,7 +200,7 @@ func (o *CloudSkuInstanceType) GetCpuUnitOk() (*string, bool) {
 
 // HasCpuUnit returns a boolean if a field has been set.
 func (o *CloudSkuInstanceType) HasCpuUnit() bool {
-	if o != nil && o.CpuUnit != nil {
+	if o != nil && !IsNil(o.CpuUnit) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *CloudSkuInstanceType) SetCpuUnit(v string) {
 
 // GetCudaSupport returns the CudaSupport field value if set, zero value otherwise.
 func (o *CloudSkuInstanceType) GetCudaSupport() bool {
-	if o == nil || o.CudaSupport == nil {
+	if o == nil || IsNil(o.CudaSupport) {
 		var ret bool
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *CloudSkuInstanceType) GetCudaSupport() bool {
 // GetCudaSupportOk returns a tuple with the CudaSupport field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuInstanceType) GetCudaSupportOk() (*bool, bool) {
-	if o == nil || o.CudaSupport == nil {
+	if o == nil || IsNil(o.CudaSupport) {
 		return nil, false
 	}
 	return o.CudaSupport, true
@@ -228,7 +232,7 @@ func (o *CloudSkuInstanceType) GetCudaSupportOk() (*bool, bool) {
 
 // HasCudaSupport returns a boolean if a field has been set.
 func (o *CloudSkuInstanceType) HasCudaSupport() bool {
-	if o != nil && o.CudaSupport != nil {
+	if o != nil && !IsNil(o.CudaSupport) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *CloudSkuInstanceType) SetCudaSupport(v bool) {
 
 // GetLocalStorageSize returns the LocalStorageSize field value if set, zero value otherwise.
 func (o *CloudSkuInstanceType) GetLocalStorageSize() float32 {
-	if o == nil || o.LocalStorageSize == nil {
+	if o == nil || IsNil(o.LocalStorageSize) {
 		var ret float32
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *CloudSkuInstanceType) GetLocalStorageSize() float32 {
 // GetLocalStorageSizeOk returns a tuple with the LocalStorageSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuInstanceType) GetLocalStorageSizeOk() (*float32, bool) {
-	if o == nil || o.LocalStorageSize == nil {
+	if o == nil || IsNil(o.LocalStorageSize) {
 		return nil, false
 	}
 	return o.LocalStorageSize, true
@@ -260,7 +264,7 @@ func (o *CloudSkuInstanceType) GetLocalStorageSizeOk() (*float32, bool) {
 
 // HasLocalStorageSize returns a boolean if a field has been set.
 func (o *CloudSkuInstanceType) HasLocalStorageSize() bool {
-	if o != nil && o.LocalStorageSize != nil {
+	if o != nil && !IsNil(o.LocalStorageSize) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *CloudSkuInstanceType) SetLocalStorageSize(v float32) {
 
 // GetLocalStorageSizeUnit returns the LocalStorageSizeUnit field value if set, zero value otherwise.
 func (o *CloudSkuInstanceType) GetLocalStorageSizeUnit() string {
-	if o == nil || o.LocalStorageSizeUnit == nil {
+	if o == nil || IsNil(o.LocalStorageSizeUnit) {
 		var ret string
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *CloudSkuInstanceType) GetLocalStorageSizeUnit() string {
 // GetLocalStorageSizeUnitOk returns a tuple with the LocalStorageSizeUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuInstanceType) GetLocalStorageSizeUnitOk() (*string, bool) {
-	if o == nil || o.LocalStorageSizeUnit == nil {
+	if o == nil || IsNil(o.LocalStorageSizeUnit) {
 		return nil, false
 	}
 	return o.LocalStorageSizeUnit, true
@@ -292,7 +296,7 @@ func (o *CloudSkuInstanceType) GetLocalStorageSizeUnitOk() (*string, bool) {
 
 // HasLocalStorageSizeUnit returns a boolean if a field has been set.
 func (o *CloudSkuInstanceType) HasLocalStorageSizeUnit() bool {
-	if o != nil && o.LocalStorageSizeUnit != nil {
+	if o != nil && !IsNil(o.LocalStorageSizeUnit) {
 		return true
 	}
 
@@ -306,7 +310,7 @@ func (o *CloudSkuInstanceType) SetLocalStorageSizeUnit(v string) {
 
 // GetMemorySize returns the MemorySize field value if set, zero value otherwise.
 func (o *CloudSkuInstanceType) GetMemorySize() float32 {
-	if o == nil || o.MemorySize == nil {
+	if o == nil || IsNil(o.MemorySize) {
 		var ret float32
 		return ret
 	}
@@ -316,7 +320,7 @@ func (o *CloudSkuInstanceType) GetMemorySize() float32 {
 // GetMemorySizeOk returns a tuple with the MemorySize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuInstanceType) GetMemorySizeOk() (*float32, bool) {
-	if o == nil || o.MemorySize == nil {
+	if o == nil || IsNil(o.MemorySize) {
 		return nil, false
 	}
 	return o.MemorySize, true
@@ -324,7 +328,7 @@ func (o *CloudSkuInstanceType) GetMemorySizeOk() (*float32, bool) {
 
 // HasMemorySize returns a boolean if a field has been set.
 func (o *CloudSkuInstanceType) HasMemorySize() bool {
-	if o != nil && o.MemorySize != nil {
+	if o != nil && !IsNil(o.MemorySize) {
 		return true
 	}
 
@@ -338,7 +342,7 @@ func (o *CloudSkuInstanceType) SetMemorySize(v float32) {
 
 // GetMemorySizeUnit returns the MemorySizeUnit field value if set, zero value otherwise.
 func (o *CloudSkuInstanceType) GetMemorySizeUnit() string {
-	if o == nil || o.MemorySizeUnit == nil {
+	if o == nil || IsNil(o.MemorySizeUnit) {
 		var ret string
 		return ret
 	}
@@ -348,7 +352,7 @@ func (o *CloudSkuInstanceType) GetMemorySizeUnit() string {
 // GetMemorySizeUnitOk returns a tuple with the MemorySizeUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuInstanceType) GetMemorySizeUnitOk() (*string, bool) {
-	if o == nil || o.MemorySizeUnit == nil {
+	if o == nil || IsNil(o.MemorySizeUnit) {
 		return nil, false
 	}
 	return o.MemorySizeUnit, true
@@ -356,7 +360,7 @@ func (o *CloudSkuInstanceType) GetMemorySizeUnitOk() (*string, bool) {
 
 // HasMemorySizeUnit returns a boolean if a field has been set.
 func (o *CloudSkuInstanceType) HasMemorySizeUnit() bool {
-	if o != nil && o.MemorySizeUnit != nil {
+	if o != nil && !IsNil(o.MemorySizeUnit) {
 		return true
 	}
 
@@ -370,7 +374,7 @@ func (o *CloudSkuInstanceType) SetMemorySizeUnit(v string) {
 
 // GetNetworkPerformance returns the NetworkPerformance field value if set, zero value otherwise.
 func (o *CloudSkuInstanceType) GetNetworkPerformance() string {
-	if o == nil || o.NetworkPerformance == nil {
+	if o == nil || IsNil(o.NetworkPerformance) {
 		var ret string
 		return ret
 	}
@@ -380,7 +384,7 @@ func (o *CloudSkuInstanceType) GetNetworkPerformance() string {
 // GetNetworkPerformanceOk returns a tuple with the NetworkPerformance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuInstanceType) GetNetworkPerformanceOk() (*string, bool) {
-	if o == nil || o.NetworkPerformance == nil {
+	if o == nil || IsNil(o.NetworkPerformance) {
 		return nil, false
 	}
 	return o.NetworkPerformance, true
@@ -388,7 +392,7 @@ func (o *CloudSkuInstanceType) GetNetworkPerformanceOk() (*string, bool) {
 
 // HasNetworkPerformance returns a boolean if a field has been set.
 func (o *CloudSkuInstanceType) HasNetworkPerformance() bool {
-	if o != nil && o.NetworkPerformance != nil {
+	if o != nil && !IsNil(o.NetworkPerformance) {
 		return true
 	}
 
@@ -402,7 +406,7 @@ func (o *CloudSkuInstanceType) SetNetworkPerformance(v string) {
 
 // GetNumOfCpus returns the NumOfCpus field value if set, zero value otherwise.
 func (o *CloudSkuInstanceType) GetNumOfCpus() int64 {
-	if o == nil || o.NumOfCpus == nil {
+	if o == nil || IsNil(o.NumOfCpus) {
 		var ret int64
 		return ret
 	}
@@ -412,7 +416,7 @@ func (o *CloudSkuInstanceType) GetNumOfCpus() int64 {
 // GetNumOfCpusOk returns a tuple with the NumOfCpus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuInstanceType) GetNumOfCpusOk() (*int64, bool) {
-	if o == nil || o.NumOfCpus == nil {
+	if o == nil || IsNil(o.NumOfCpus) {
 		return nil, false
 	}
 	return o.NumOfCpus, true
@@ -420,7 +424,7 @@ func (o *CloudSkuInstanceType) GetNumOfCpusOk() (*int64, bool) {
 
 // HasNumOfCpus returns a boolean if a field has been set.
 func (o *CloudSkuInstanceType) HasNumOfCpus() bool {
-	if o != nil && o.NumOfCpus != nil {
+	if o != nil && !IsNil(o.NumOfCpus) {
 		return true
 	}
 
@@ -434,7 +438,7 @@ func (o *CloudSkuInstanceType) SetNumOfCpus(v int64) {
 
 // GetNumOfNics returns the NumOfNics field value if set, zero value otherwise.
 func (o *CloudSkuInstanceType) GetNumOfNics() int64 {
-	if o == nil || o.NumOfNics == nil {
+	if o == nil || IsNil(o.NumOfNics) {
 		var ret int64
 		return ret
 	}
@@ -444,7 +448,7 @@ func (o *CloudSkuInstanceType) GetNumOfNics() int64 {
 // GetNumOfNicsOk returns a tuple with the NumOfNics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuInstanceType) GetNumOfNicsOk() (*int64, bool) {
-	if o == nil || o.NumOfNics == nil {
+	if o == nil || IsNil(o.NumOfNics) {
 		return nil, false
 	}
 	return o.NumOfNics, true
@@ -452,7 +456,7 @@ func (o *CloudSkuInstanceType) GetNumOfNicsOk() (*int64, bool) {
 
 // HasNumOfNics returns a boolean if a field has been set.
 func (o *CloudSkuInstanceType) HasNumOfNics() bool {
-	if o != nil && o.NumOfNics != nil {
+	if o != nil && !IsNil(o.NumOfNics) {
 		return true
 	}
 
@@ -465,49 +469,53 @@ func (o *CloudSkuInstanceType) SetNumOfNics(v int64) {
 }
 
 func (o CloudSkuInstanceType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudSkuInstanceType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCloudBaseSku, errCloudBaseSku := json.Marshal(o.CloudBaseSku)
 	if errCloudBaseSku != nil {
-		return []byte{}, errCloudBaseSku
+		return map[string]interface{}{}, errCloudBaseSku
 	}
 	errCloudBaseSku = json.Unmarshal([]byte(serializedCloudBaseSku), &toSerialize)
 	if errCloudBaseSku != nil {
-		return []byte{}, errCloudBaseSku
+		return map[string]interface{}{}, errCloudBaseSku
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ArchitectureType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ArchitectureType) {
 		toSerialize["ArchitectureType"] = o.ArchitectureType
 	}
-	if o.CpuUnit != nil {
+	if !IsNil(o.CpuUnit) {
 		toSerialize["CpuUnit"] = o.CpuUnit
 	}
-	if o.CudaSupport != nil {
+	if !IsNil(o.CudaSupport) {
 		toSerialize["CudaSupport"] = o.CudaSupport
 	}
-	if o.LocalStorageSize != nil {
+	if !IsNil(o.LocalStorageSize) {
 		toSerialize["LocalStorageSize"] = o.LocalStorageSize
 	}
-	if o.LocalStorageSizeUnit != nil {
+	if !IsNil(o.LocalStorageSizeUnit) {
 		toSerialize["LocalStorageSizeUnit"] = o.LocalStorageSizeUnit
 	}
-	if o.MemorySize != nil {
+	if !IsNil(o.MemorySize) {
 		toSerialize["MemorySize"] = o.MemorySize
 	}
-	if o.MemorySizeUnit != nil {
+	if !IsNil(o.MemorySizeUnit) {
 		toSerialize["MemorySizeUnit"] = o.MemorySizeUnit
 	}
-	if o.NetworkPerformance != nil {
+	if !IsNil(o.NetworkPerformance) {
 		toSerialize["NetworkPerformance"] = o.NetworkPerformance
 	}
-	if o.NumOfCpus != nil {
+	if !IsNil(o.NumOfCpus) {
 		toSerialize["NumOfCpus"] = o.NumOfCpus
 	}
-	if o.NumOfNics != nil {
+	if !IsNil(o.NumOfNics) {
 		toSerialize["NumOfNics"] = o.NumOfNics
 	}
 
@@ -515,10 +523,32 @@ func (o CloudSkuInstanceType) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudSkuInstanceType) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudSkuInstanceType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudSkuInstanceTypeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -548,7 +578,7 @@ func (o *CloudSkuInstanceType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudSkuInstanceTypeWithoutEmbeddedStruct := CloudSkuInstanceTypeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudSkuInstanceTypeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudSkuInstanceTypeWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudSkuInstanceType := _CloudSkuInstanceType{}
 		varCloudSkuInstanceType.ClassId = varCloudSkuInstanceTypeWithoutEmbeddedStruct.ClassId
@@ -570,7 +600,7 @@ func (o *CloudSkuInstanceType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudSkuInstanceType := _CloudSkuInstanceType{}
 
-	err = json.Unmarshal(bytes, &varCloudSkuInstanceType)
+	err = json.Unmarshal(data, &varCloudSkuInstanceType)
 	if err == nil {
 		o.CloudBaseSku = varCloudSkuInstanceType.CloudBaseSku
 	} else {
@@ -579,7 +609,7 @@ func (o *CloudSkuInstanceType) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ArchitectureType")

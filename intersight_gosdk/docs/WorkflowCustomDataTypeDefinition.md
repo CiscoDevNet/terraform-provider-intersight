@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **ParameterSet** | Pointer to [**[]WorkflowParameterSet**](WorkflowParameterSet.md) |  | [optional] 
 **Properties** | Pointer to [**NullableWorkflowCustomDataTypeProperties**](WorkflowCustomDataTypeProperties.md) |  | [optional] 
 **TypeDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
-**Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
-**ClonedFrom** | Pointer to [**WorkflowCustomDataTypeDefinitionRelationship**](WorkflowCustomDataTypeDefinitionRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableWorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
+**ClonedFrom** | Pointer to [**NullableWorkflowCustomDataTypeDefinitionRelationship**](WorkflowCustomDataTypeDefinitionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -305,6 +305,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *WorkflowCustomDataTypeDefinition) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *WorkflowCustomDataTypeDefinition) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 ### GetClonedFrom
 
 `func (o *WorkflowCustomDataTypeDefinition) GetClonedFrom() WorkflowCustomDataTypeDefinitionRelationship`
@@ -330,6 +340,16 @@ SetClonedFrom sets ClonedFrom field to given value.
 
 HasClonedFrom returns a boolean if a field has been set.
 
+### SetClonedFromNil
+
+`func (o *WorkflowCustomDataTypeDefinition) SetClonedFromNil(b bool)`
+
+ SetClonedFromNil sets the value for ClonedFrom to be an explicit nil
+
+### UnsetClonedFrom
+`func (o *WorkflowCustomDataTypeDefinition) UnsetClonedFrom()`
+
+UnsetClonedFrom ensures that no value is present for ClonedFrom, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

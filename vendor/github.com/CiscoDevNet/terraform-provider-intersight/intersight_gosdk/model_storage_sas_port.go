@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageSasPort type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageSasPort{}
 
 // StorageSasPort Sas Port details of the SAS endpoint.
 type StorageSasPort struct {
@@ -33,10 +37,10 @@ type StorageSasPort struct {
 	// The description for the link.
 	LinkDescription *string `json:"LinkDescription,omitempty"`
 	// The link speed negotiated for communication.
-	LinkSpeed            *string                              `json:"LinkSpeed,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	StoragePhysicalDisk  *StoragePhysicalDiskRelationship     `json:"StoragePhysicalDisk,omitempty"`
+	LinkSpeed            *string                                     `json:"LinkSpeed,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	StoragePhysicalDisk  NullableStoragePhysicalDiskRelationship     `json:"StoragePhysicalDisk,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *StorageSasPort) SetObjectType(v string) {
 
 // GetAddress returns the Address field value if set, zero value otherwise.
 func (o *StorageSasPort) GetAddress() string {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *StorageSasPort) GetAddress() string {
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageSasPort) GetAddressOk() (*string, bool) {
-	if o == nil || o.Address == nil {
+	if o == nil || IsNil(o.Address) {
 		return nil, false
 	}
 	return o.Address, true
@@ -133,7 +137,7 @@ func (o *StorageSasPort) GetAddressOk() (*string, bool) {
 
 // HasAddress returns a boolean if a field has been set.
 func (o *StorageSasPort) HasAddress() bool {
-	if o != nil && o.Address != nil {
+	if o != nil && !IsNil(o.Address) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *StorageSasPort) SetAddress(v string) {
 
 // GetDiskId returns the DiskId field value if set, zero value otherwise.
 func (o *StorageSasPort) GetDiskId() int64 {
-	if o == nil || o.DiskId == nil {
+	if o == nil || IsNil(o.DiskId) {
 		var ret int64
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *StorageSasPort) GetDiskId() int64 {
 // GetDiskIdOk returns a tuple with the DiskId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageSasPort) GetDiskIdOk() (*int64, bool) {
-	if o == nil || o.DiskId == nil {
+	if o == nil || IsNil(o.DiskId) {
 		return nil, false
 	}
 	return o.DiskId, true
@@ -165,7 +169,7 @@ func (o *StorageSasPort) GetDiskIdOk() (*int64, bool) {
 
 // HasDiskId returns a boolean if a field has been set.
 func (o *StorageSasPort) HasDiskId() bool {
-	if o != nil && o.DiskId != nil {
+	if o != nil && !IsNil(o.DiskId) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *StorageSasPort) SetDiskId(v int64) {
 
 // GetEndPointId returns the EndPointId field value if set, zero value otherwise.
 func (o *StorageSasPort) GetEndPointId() int64 {
-	if o == nil || o.EndPointId == nil {
+	if o == nil || IsNil(o.EndPointId) {
 		var ret int64
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *StorageSasPort) GetEndPointId() int64 {
 // GetEndPointIdOk returns a tuple with the EndPointId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageSasPort) GetEndPointIdOk() (*int64, bool) {
-	if o == nil || o.EndPointId == nil {
+	if o == nil || IsNil(o.EndPointId) {
 		return nil, false
 	}
 	return o.EndPointId, true
@@ -197,7 +201,7 @@ func (o *StorageSasPort) GetEndPointIdOk() (*int64, bool) {
 
 // HasEndPointId returns a boolean if a field has been set.
 func (o *StorageSasPort) HasEndPointId() bool {
-	if o != nil && o.EndPointId != nil {
+	if o != nil && !IsNil(o.EndPointId) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *StorageSasPort) SetEndPointId(v int64) {
 
 // GetLinkDescription returns the LinkDescription field value if set, zero value otherwise.
 func (o *StorageSasPort) GetLinkDescription() string {
-	if o == nil || o.LinkDescription == nil {
+	if o == nil || IsNil(o.LinkDescription) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *StorageSasPort) GetLinkDescription() string {
 // GetLinkDescriptionOk returns a tuple with the LinkDescription field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageSasPort) GetLinkDescriptionOk() (*string, bool) {
-	if o == nil || o.LinkDescription == nil {
+	if o == nil || IsNil(o.LinkDescription) {
 		return nil, false
 	}
 	return o.LinkDescription, true
@@ -229,7 +233,7 @@ func (o *StorageSasPort) GetLinkDescriptionOk() (*string, bool) {
 
 // HasLinkDescription returns a boolean if a field has been set.
 func (o *StorageSasPort) HasLinkDescription() bool {
-	if o != nil && o.LinkDescription != nil {
+	if o != nil && !IsNil(o.LinkDescription) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *StorageSasPort) SetLinkDescription(v string) {
 
 // GetLinkSpeed returns the LinkSpeed field value if set, zero value otherwise.
 func (o *StorageSasPort) GetLinkSpeed() string {
-	if o == nil || o.LinkSpeed == nil {
+	if o == nil || IsNil(o.LinkSpeed) {
 		var ret string
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *StorageSasPort) GetLinkSpeed() string {
 // GetLinkSpeedOk returns a tuple with the LinkSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageSasPort) GetLinkSpeedOk() (*string, bool) {
-	if o == nil || o.LinkSpeed == nil {
+	if o == nil || IsNil(o.LinkSpeed) {
 		return nil, false
 	}
 	return o.LinkSpeed, true
@@ -261,7 +265,7 @@ func (o *StorageSasPort) GetLinkSpeedOk() (*string, bool) {
 
 // HasLinkSpeed returns a boolean if a field has been set.
 func (o *StorageSasPort) HasLinkSpeed() bool {
-	if o != nil && o.LinkSpeed != nil {
+	if o != nil && !IsNil(o.LinkSpeed) {
 		return true
 	}
 
@@ -273,151 +277,210 @@ func (o *StorageSasPort) SetLinkSpeed(v string) {
 	o.LinkSpeed = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageSasPort) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageSasPort) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *StorageSasPort) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *StorageSasPort) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *StorageSasPort) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *StorageSasPort) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageSasPort) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageSasPort) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageSasPort) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageSasPort) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetStoragePhysicalDisk returns the StoragePhysicalDisk field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageSasPort) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageSasPort) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetStoragePhysicalDisk returns the StoragePhysicalDisk field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageSasPort) GetStoragePhysicalDisk() StoragePhysicalDiskRelationship {
-	if o == nil || o.StoragePhysicalDisk == nil {
+	if o == nil || IsNil(o.StoragePhysicalDisk.Get()) {
 		var ret StoragePhysicalDiskRelationship
 		return ret
 	}
-	return *o.StoragePhysicalDisk
+	return *o.StoragePhysicalDisk.Get()
 }
 
 // GetStoragePhysicalDiskOk returns a tuple with the StoragePhysicalDisk field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageSasPort) GetStoragePhysicalDiskOk() (*StoragePhysicalDiskRelationship, bool) {
-	if o == nil || o.StoragePhysicalDisk == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StoragePhysicalDisk, true
+	return o.StoragePhysicalDisk.Get(), o.StoragePhysicalDisk.IsSet()
 }
 
 // HasStoragePhysicalDisk returns a boolean if a field has been set.
 func (o *StorageSasPort) HasStoragePhysicalDisk() bool {
-	if o != nil && o.StoragePhysicalDisk != nil {
+	if o != nil && o.StoragePhysicalDisk.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStoragePhysicalDisk gets a reference to the given StoragePhysicalDiskRelationship and assigns it to the StoragePhysicalDisk field.
+// SetStoragePhysicalDisk gets a reference to the given NullableStoragePhysicalDiskRelationship and assigns it to the StoragePhysicalDisk field.
 func (o *StorageSasPort) SetStoragePhysicalDisk(v StoragePhysicalDiskRelationship) {
-	o.StoragePhysicalDisk = &v
+	o.StoragePhysicalDisk.Set(&v)
+}
+
+// SetStoragePhysicalDiskNil sets the value for StoragePhysicalDisk to be an explicit nil
+func (o *StorageSasPort) SetStoragePhysicalDiskNil() {
+	o.StoragePhysicalDisk.Set(nil)
+}
+
+// UnsetStoragePhysicalDisk ensures that no value is present for StoragePhysicalDisk, not even an explicit nil
+func (o *StorageSasPort) UnsetStoragePhysicalDisk() {
+	o.StoragePhysicalDisk.Unset()
 }
 
 func (o StorageSasPort) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageSasPort) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Address != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Address) {
 		toSerialize["Address"] = o.Address
 	}
-	if o.DiskId != nil {
+	if !IsNil(o.DiskId) {
 		toSerialize["DiskId"] = o.DiskId
 	}
-	if o.EndPointId != nil {
+	if !IsNil(o.EndPointId) {
 		toSerialize["EndPointId"] = o.EndPointId
 	}
-	if o.LinkDescription != nil {
+	if !IsNil(o.LinkDescription) {
 		toSerialize["LinkDescription"] = o.LinkDescription
 	}
-	if o.LinkSpeed != nil {
+	if !IsNil(o.LinkSpeed) {
 		toSerialize["LinkSpeed"] = o.LinkSpeed
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.StoragePhysicalDisk != nil {
-		toSerialize["StoragePhysicalDisk"] = o.StoragePhysicalDisk
+	if o.StoragePhysicalDisk.IsSet() {
+		toSerialize["StoragePhysicalDisk"] = o.StoragePhysicalDisk.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageSasPort) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageSasPort) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageSasPortWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -432,15 +495,15 @@ func (o *StorageSasPort) UnmarshalJSON(bytes []byte) (err error) {
 		// The description for the link.
 		LinkDescription *string `json:"LinkDescription,omitempty"`
 		// The link speed negotiated for communication.
-		LinkSpeed           *string                              `json:"LinkSpeed,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		StoragePhysicalDisk *StoragePhysicalDiskRelationship     `json:"StoragePhysicalDisk,omitempty"`
+		LinkSpeed           *string                                     `json:"LinkSpeed,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		StoragePhysicalDisk NullableStoragePhysicalDiskRelationship     `json:"StoragePhysicalDisk,omitempty"`
 	}
 
 	varStorageSasPortWithoutEmbeddedStruct := StorageSasPortWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageSasPortWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageSasPortWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageSasPort := _StorageSasPort{}
 		varStorageSasPort.ClassId = varStorageSasPortWithoutEmbeddedStruct.ClassId
@@ -460,7 +523,7 @@ func (o *StorageSasPort) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageSasPort := _StorageSasPort{}
 
-	err = json.Unmarshal(bytes, &varStorageSasPort)
+	err = json.Unmarshal(data, &varStorageSasPort)
 	if err == nil {
 		o.InventoryBase = varStorageSasPort.InventoryBase
 	} else {
@@ -469,7 +532,7 @@ func (o *StorageSasPort) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Address")

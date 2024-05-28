@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **PolicyPrefix** | Pointer to **string** | Policy prefix for the policies of the imported chassis profile. | [optional] 
 **PolicyTypes** | Pointer to **[]string** |  | [optional] 
 **ProfileName** | Pointer to **string** | Profile name for the imported chassis profile. | [optional] 
-**Chassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
-**ChassisProfile** | Pointer to [**ChassisProfileRelationship**](ChassisProfileRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Chassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**ChassisProfile** | Pointer to [**NullableChassisProfileRelationship**](ChassisProfileRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -208,6 +208,16 @@ SetChassis sets Chassis field to given value.
 
 HasChassis returns a boolean if a field has been set.
 
+### SetChassisNil
+
+`func (o *ChassisConfigImport) SetChassisNil(b bool)`
+
+ SetChassisNil sets the value for Chassis to be an explicit nil
+
+### UnsetChassis
+`func (o *ChassisConfigImport) UnsetChassis()`
+
+UnsetChassis ensures that no value is present for Chassis, not even an explicit nil
 ### GetChassisProfile
 
 `func (o *ChassisConfigImport) GetChassisProfile() ChassisProfileRelationship`
@@ -233,6 +243,16 @@ SetChassisProfile sets ChassisProfile field to given value.
 
 HasChassisProfile returns a boolean if a field has been set.
 
+### SetChassisProfileNil
+
+`func (o *ChassisConfigImport) SetChassisProfileNil(b bool)`
+
+ SetChassisProfileNil sets the value for ChassisProfile to be an explicit nil
+
+### UnsetChassisProfile
+`func (o *ChassisConfigImport) UnsetChassisProfile()`
+
+UnsetChassisProfile ensures that no value is present for ChassisProfile, not even an explicit nil
 ### GetOrganization
 
 `func (o *ChassisConfigImport) GetOrganization() OrganizationOrganizationRelationship`
@@ -258,6 +278,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *ChassisConfigImport) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *ChassisConfigImport) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

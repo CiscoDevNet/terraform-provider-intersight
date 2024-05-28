@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **StorageUtilization** | Pointer to **float32** | The storage utilization is computed based on total capacity and current capacity utilization. | [optional] [readonly] 
 **UtilizationPercentage** | Pointer to **float32** | The storage utilization percentage is computed based on total capacity and current capacity utilization. | [optional] [readonly] 
 **UtilizationTrendPercentage** | Pointer to **float32** | The storage utilization trend percentage represents the trend in percentage computed using the first and last point from historical data. | [optional] [readonly] 
-**AssociatedProfile** | Pointer to [**PolicyAbstractProfileRelationship**](PolicyAbstractProfileRelationship.md) |  | [optional] 
+**AssociatedProfile** | Pointer to [**NullablePolicyAbstractProfileRelationship**](PolicyAbstractProfileRelationship.md) |  | [optional] 
 **ChildClusters** | Pointer to [**[]HyperflexBaseClusterRelationship**](HyperflexBaseClusterRelationship.md) | An array of relationships to hyperflexBaseCluster resources. | [optional] 
 
 ## Methods
@@ -519,6 +519,16 @@ SetAssociatedProfile sets AssociatedProfile field to given value.
 
 HasAssociatedProfile returns a boolean if a field has been set.
 
+### SetAssociatedProfileNil
+
+`func (o *HyperflexBaseCluster) SetAssociatedProfileNil(b bool)`
+
+ SetAssociatedProfileNil sets the value for AssociatedProfile to be an explicit nil
+
+### UnsetAssociatedProfile
+`func (o *HyperflexBaseCluster) UnsetAssociatedProfile()`
+
+UnsetAssociatedProfile ensures that no value is present for AssociatedProfile, not even an explicit nil
 ### GetChildClusters
 
 `func (o *HyperflexBaseCluster) GetChildClusters() []HyperflexBaseClusterRelationship`

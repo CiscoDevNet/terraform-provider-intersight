@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppExportPolicyRule type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppExportPolicyRule{}
 
 // StorageNetAppExportPolicyRule NetApp export rules are the functional elements of an export policy. Export rules match client access requests to a volume against specific parameters you configure to determine how to handle the client access requests.
 type StorageNetAppExportPolicyRule struct {
@@ -122,7 +126,7 @@ func (o *StorageNetAppExportPolicyRule) GetClientMatch() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppExportPolicyRule) GetClientMatchOk() ([]string, bool) {
-	if o == nil || o.ClientMatch == nil {
+	if o == nil || IsNil(o.ClientMatch) {
 		return nil, false
 	}
 	return o.ClientMatch, true
@@ -130,7 +134,7 @@ func (o *StorageNetAppExportPolicyRule) GetClientMatchOk() ([]string, bool) {
 
 // HasClientMatch returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicyRule) HasClientMatch() bool {
-	if o != nil && o.ClientMatch != nil {
+	if o != nil && IsNil(o.ClientMatch) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *StorageNetAppExportPolicyRule) SetClientMatch(v []string) {
 
 // GetIndex returns the Index field value if set, zero value otherwise.
 func (o *StorageNetAppExportPolicyRule) GetIndex() int64 {
-	if o == nil || o.Index == nil {
+	if o == nil || IsNil(o.Index) {
 		var ret int64
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *StorageNetAppExportPolicyRule) GetIndex() int64 {
 // GetIndexOk returns a tuple with the Index field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppExportPolicyRule) GetIndexOk() (*int64, bool) {
-	if o == nil || o.Index == nil {
+	if o == nil || IsNil(o.Index) {
 		return nil, false
 	}
 	return o.Index, true
@@ -162,7 +166,7 @@ func (o *StorageNetAppExportPolicyRule) GetIndexOk() (*int64, bool) {
 
 // HasIndex returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicyRule) HasIndex() bool {
-	if o != nil && o.Index != nil {
+	if o != nil && !IsNil(o.Index) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *StorageNetAppExportPolicyRule) GetProtocols() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppExportPolicyRule) GetProtocolsOk() ([]string, bool) {
-	if o == nil || o.Protocols == nil {
+	if o == nil || IsNil(o.Protocols) {
 		return nil, false
 	}
 	return o.Protocols, true
@@ -195,7 +199,7 @@ func (o *StorageNetAppExportPolicyRule) GetProtocolsOk() ([]string, bool) {
 
 // HasProtocols returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicyRule) HasProtocols() bool {
-	if o != nil && o.Protocols != nil {
+	if o != nil && IsNil(o.Protocols) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *StorageNetAppExportPolicyRule) GetRoRule() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppExportPolicyRule) GetRoRuleOk() ([]string, bool) {
-	if o == nil || o.RoRule == nil {
+	if o == nil || IsNil(o.RoRule) {
 		return nil, false
 	}
 	return o.RoRule, true
@@ -228,7 +232,7 @@ func (o *StorageNetAppExportPolicyRule) GetRoRuleOk() ([]string, bool) {
 
 // HasRoRule returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicyRule) HasRoRule() bool {
-	if o != nil && o.RoRule != nil {
+	if o != nil && IsNil(o.RoRule) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *StorageNetAppExportPolicyRule) GetRwRule() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppExportPolicyRule) GetRwRuleOk() ([]string, bool) {
-	if o == nil || o.RwRule == nil {
+	if o == nil || IsNil(o.RwRule) {
 		return nil, false
 	}
 	return o.RwRule, true
@@ -261,7 +265,7 @@ func (o *StorageNetAppExportPolicyRule) GetRwRuleOk() ([]string, bool) {
 
 // HasRwRule returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicyRule) HasRwRule() bool {
-	if o != nil && o.RwRule != nil {
+	if o != nil && IsNil(o.RwRule) {
 		return true
 	}
 
@@ -286,7 +290,7 @@ func (o *StorageNetAppExportPolicyRule) GetSuperUser() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppExportPolicyRule) GetSuperUserOk() ([]string, bool) {
-	if o == nil || o.SuperUser == nil {
+	if o == nil || IsNil(o.SuperUser) {
 		return nil, false
 	}
 	return o.SuperUser, true
@@ -294,7 +298,7 @@ func (o *StorageNetAppExportPolicyRule) GetSuperUserOk() ([]string, bool) {
 
 // HasSuperUser returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicyRule) HasSuperUser() bool {
-	if o != nil && o.SuperUser != nil {
+	if o != nil && IsNil(o.SuperUser) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *StorageNetAppExportPolicyRule) SetSuperUser(v []string) {
 
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *StorageNetAppExportPolicyRule) GetUser() string {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User) {
 		var ret string
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *StorageNetAppExportPolicyRule) GetUser() string {
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppExportPolicyRule) GetUserOk() (*string, bool) {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User) {
 		return nil, false
 	}
 	return o.User, true
@@ -326,7 +330,7 @@ func (o *StorageNetAppExportPolicyRule) GetUserOk() (*string, bool) {
 
 // HasUser returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicyRule) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && !IsNil(o.User) {
 		return true
 	}
 
@@ -339,25 +343,29 @@ func (o *StorageNetAppExportPolicyRule) SetUser(v string) {
 }
 
 func (o StorageNetAppExportPolicyRule) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppExportPolicyRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ClientMatch != nil {
 		toSerialize["ClientMatch"] = o.ClientMatch
 	}
-	if o.Index != nil {
+	if !IsNil(o.Index) {
 		toSerialize["Index"] = o.Index
 	}
 	if o.Protocols != nil {
@@ -372,7 +380,7 @@ func (o StorageNetAppExportPolicyRule) MarshalJSON() ([]byte, error) {
 	if o.SuperUser != nil {
 		toSerialize["SuperUser"] = o.SuperUser
 	}
-	if o.User != nil {
+	if !IsNil(o.User) {
 		toSerialize["User"] = o.User
 	}
 
@@ -380,10 +388,32 @@ func (o StorageNetAppExportPolicyRule) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppExportPolicyRule) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppExportPolicyRule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppExportPolicyRuleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -402,7 +432,7 @@ func (o *StorageNetAppExportPolicyRule) UnmarshalJSON(bytes []byte) (err error) 
 
 	varStorageNetAppExportPolicyRuleWithoutEmbeddedStruct := StorageNetAppExportPolicyRuleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppExportPolicyRuleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppExportPolicyRuleWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppExportPolicyRule := _StorageNetAppExportPolicyRule{}
 		varStorageNetAppExportPolicyRule.ClassId = varStorageNetAppExportPolicyRuleWithoutEmbeddedStruct.ClassId
@@ -421,7 +451,7 @@ func (o *StorageNetAppExportPolicyRule) UnmarshalJSON(bytes []byte) (err error) 
 
 	varStorageNetAppExportPolicyRule := _StorageNetAppExportPolicyRule{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppExportPolicyRule)
+	err = json.Unmarshal(data, &varStorageNetAppExportPolicyRule)
 	if err == nil {
 		o.MoBaseComplexType = varStorageNetAppExportPolicyRule.MoBaseComplexType
 	} else {
@@ -430,7 +460,7 @@ func (o *StorageNetAppExportPolicyRule) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClientMatch")

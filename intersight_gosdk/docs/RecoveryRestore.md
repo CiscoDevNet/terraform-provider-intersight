@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recovery.Restore"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recovery.Restore"]
 **ConfigParams** | Pointer to [**NullableRecoveryConfigParams**](RecoveryConfigParams.md) |  | [optional] 
-**BackupInfo** | Pointer to [**RecoveryAbstractBackupInfoRelationship**](RecoveryAbstractBackupInfoRelationship.md) |  | [optional] 
-**Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Workflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**BackupInfo** | Pointer to [**NullableRecoveryAbstractBackupInfoRelationship**](RecoveryAbstractBackupInfoRelationship.md) |  | [optional] 
+**Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Workflow** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -131,6 +131,16 @@ SetBackupInfo sets BackupInfo field to given value.
 
 HasBackupInfo returns a boolean if a field has been set.
 
+### SetBackupInfoNil
+
+`func (o *RecoveryRestore) SetBackupInfoNil(b bool)`
+
+ SetBackupInfoNil sets the value for BackupInfo to be an explicit nil
+
+### UnsetBackupInfo
+`func (o *RecoveryRestore) UnsetBackupInfo()`
+
+UnsetBackupInfo ensures that no value is present for BackupInfo, not even an explicit nil
 ### GetDevice
 
 `func (o *RecoveryRestore) GetDevice() AssetDeviceRegistrationRelationship`
@@ -156,6 +166,16 @@ SetDevice sets Device field to given value.
 
 HasDevice returns a boolean if a field has been set.
 
+### SetDeviceNil
+
+`func (o *RecoveryRestore) SetDeviceNil(b bool)`
+
+ SetDeviceNil sets the value for Device to be an explicit nil
+
+### UnsetDevice
+`func (o *RecoveryRestore) UnsetDevice()`
+
+UnsetDevice ensures that no value is present for Device, not even an explicit nil
 ### GetOrganization
 
 `func (o *RecoveryRestore) GetOrganization() OrganizationOrganizationRelationship`
@@ -181,6 +201,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *RecoveryRestore) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *RecoveryRestore) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetWorkflow
 
 `func (o *RecoveryRestore) GetWorkflow() WorkflowWorkflowInfoRelationship`
@@ -206,6 +236,16 @@ SetWorkflow sets Workflow field to given value.
 
 HasWorkflow returns a boolean if a field has been set.
 
+### SetWorkflowNil
+
+`func (o *RecoveryRestore) SetWorkflowNil(b bool)`
+
+ SetWorkflowNil sets the value for Workflow to be an explicit nil
+
+### UnsetWorkflow
+`func (o *RecoveryRestore) UnsetWorkflow()`
+
+UnsetWorkflow ensures that no value is present for Workflow, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

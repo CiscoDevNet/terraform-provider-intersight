@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "partnerintegration.Model"]
 **Data** | Pointer to **interface{}** | Endpoint model in yaml format. | [optional] 
 **Name** | Pointer to **string** | Placeholder name for the model. | [optional] 
-**Inventory** | Pointer to [**PartnerintegrationInventoryRelationship**](PartnerintegrationInventoryRelationship.md) |  | [optional] 
+**Inventory** | Pointer to [**NullablePartnerintegrationInventoryRelationship**](PartnerintegrationInventoryRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -154,6 +154,16 @@ SetInventory sets Inventory field to given value.
 
 HasInventory returns a boolean if a field has been set.
 
+### SetInventoryNil
+
+`func (o *PartnerintegrationModel) SetInventoryNil(b bool)`
+
+ SetInventoryNil sets the value for Inventory to be an explicit nil
+
+### UnsetInventory
+`func (o *PartnerintegrationModel) UnsetInventory()`
+
+UnsetInventory ensures that no value is present for Inventory, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

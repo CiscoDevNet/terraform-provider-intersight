@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Domain** | Pointer to **string** | LDAP server domain the Group resides in. | [optional] 
 **Name** | Pointer to **string** | LDAP Group name in the LDAP server database. | [optional] 
 **EndPointRole** | Pointer to [**[]IamEndPointRoleRelationship**](IamEndPointRoleRelationship.md) | An array of relationships to iamEndPointRole resources. | [optional] 
-**LdapPolicy** | Pointer to [**IamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
+**LdapPolicy** | Pointer to [**NullableIamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -180,6 +180,16 @@ SetLdapPolicy sets LdapPolicy field to given value.
 
 HasLdapPolicy returns a boolean if a field has been set.
 
+### SetLdapPolicyNil
+
+`func (o *IamLdapGroup) SetLdapPolicyNil(b bool)`
+
+ SetLdapPolicyNil sets the value for LdapPolicy to be an explicit nil
+
+### UnsetLdapPolicy
+`func (o *IamLdapGroup) UnsetLdapPolicy()`
+
+UnsetLdapPolicy ensures that no value is present for LdapPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

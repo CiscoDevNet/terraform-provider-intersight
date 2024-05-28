@@ -17,8 +17,8 @@ Name | Type | Description | Notes
 **RestartCountTotal** | Pointer to **int64** | Total number of restarts since last deployment. | [optional] [readonly] 
 **RunningCount** | Pointer to **int64** | Number of replicas running. The number of instances of the application currently running. | [optional] [readonly] 
 **StatusChecks** | Pointer to [**[]ApplianceStatusCheck**](ApplianceStatusCheck.md) |  | [optional] 
-**GroupStatus** | Pointer to [**ApplianceGroupStatusRelationship**](ApplianceGroupStatusRelationship.md) |  | [optional] 
-**SystemStatus** | Pointer to [**ApplianceSystemStatusRelationship**](ApplianceSystemStatusRelationship.md) |  | [optional] 
+**GroupStatus** | Pointer to [**NullableApplianceGroupStatusRelationship**](ApplianceGroupStatusRelationship.md) |  | [optional] 
+**SystemStatus** | Pointer to [**NullableApplianceSystemStatusRelationship**](ApplianceSystemStatusRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -399,6 +399,16 @@ SetGroupStatus sets GroupStatus field to given value.
 
 HasGroupStatus returns a boolean if a field has been set.
 
+### SetGroupStatusNil
+
+`func (o *ApplianceAppStatus) SetGroupStatusNil(b bool)`
+
+ SetGroupStatusNil sets the value for GroupStatus to be an explicit nil
+
+### UnsetGroupStatus
+`func (o *ApplianceAppStatus) UnsetGroupStatus()`
+
+UnsetGroupStatus ensures that no value is present for GroupStatus, not even an explicit nil
 ### GetSystemStatus
 
 `func (o *ApplianceAppStatus) GetSystemStatus() ApplianceSystemStatusRelationship`
@@ -424,6 +434,16 @@ SetSystemStatus sets SystemStatus field to given value.
 
 HasSystemStatus returns a boolean if a field has been set.
 
+### SetSystemStatusNil
+
+`func (o *ApplianceAppStatus) SetSystemStatusNil(b bool)`
+
+ SetSystemStatusNil sets the value for SystemStatus to be an explicit nil
+
+### UnsetSystemStatus
+`func (o *ApplianceAppStatus) UnsetSystemStatus()`
+
+UnsetSystemStatus ensures that no value is present for SystemStatus, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

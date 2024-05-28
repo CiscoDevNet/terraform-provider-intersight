@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **RenewAuthorization** | Pointer to **bool** | Trigger renew authorization. | [optional] 
 **RenewIdCertificate** | Pointer to **bool** | Trigger renew registration. | [optional] 
 **ShowAgentTechSupport** | Pointer to **bool** | Trigger show tech support feature. | [optional] 
-**AccountLicenseData** | Pointer to [**LicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
+**AccountLicenseData** | Pointer to [**NullableLicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -352,6 +352,16 @@ SetAccountLicenseData sets AccountLicenseData field to given value.
 
 HasAccountLicenseData returns a boolean if a field has been set.
 
+### SetAccountLicenseDataNil
+
+`func (o *LicenseCustomerOp) SetAccountLicenseDataNil(b bool)`
+
+ SetAccountLicenseDataNil sets the value for AccountLicenseData to be an explicit nil
+
+### UnsetAccountLicenseData
+`func (o *LicenseCustomerOp) UnsetAccountLicenseData()`
+
+UnsetAccountLicenseData ensures that no value is present for AccountLicenseData, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

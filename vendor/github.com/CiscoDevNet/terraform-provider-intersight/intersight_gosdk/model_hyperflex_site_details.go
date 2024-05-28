@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexSiteDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexSiteDetails{}
 
 // HyperflexSiteDetails Site details of the HyperFlex node.
 type HyperflexSiteDetails struct {
@@ -108,7 +112,7 @@ func (o *HyperflexSiteDetails) SetObjectType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HyperflexSiteDetails) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *HyperflexSiteDetails) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSiteDetails) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -126,7 +130,7 @@ func (o *HyperflexSiteDetails) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *HyperflexSiteDetails) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *HyperflexSiteDetails) SetName(v string) {
 
 // GetNumNodes returns the NumNodes field value if set, zero value otherwise.
 func (o *HyperflexSiteDetails) GetNumNodes() int64 {
-	if o == nil || o.NumNodes == nil {
+	if o == nil || IsNil(o.NumNodes) {
 		var ret int64
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *HyperflexSiteDetails) GetNumNodes() int64 {
 // GetNumNodesOk returns a tuple with the NumNodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSiteDetails) GetNumNodesOk() (*int64, bool) {
-	if o == nil || o.NumNodes == nil {
+	if o == nil || IsNil(o.NumNodes) {
 		return nil, false
 	}
 	return o.NumNodes, true
@@ -158,7 +162,7 @@ func (o *HyperflexSiteDetails) GetNumNodesOk() (*int64, bool) {
 
 // HasNumNodes returns a boolean if a field has been set.
 func (o *HyperflexSiteDetails) HasNumNodes() bool {
-	if o != nil && o.NumNodes != nil {
+	if o != nil && !IsNil(o.NumNodes) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *HyperflexSiteDetails) SetNumNodes(v int64) {
 
 // GetZoneUuid returns the ZoneUuid field value if set, zero value otherwise.
 func (o *HyperflexSiteDetails) GetZoneUuid() string {
-	if o == nil || o.ZoneUuid == nil {
+	if o == nil || IsNil(o.ZoneUuid) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *HyperflexSiteDetails) GetZoneUuid() string {
 // GetZoneUuidOk returns a tuple with the ZoneUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSiteDetails) GetZoneUuidOk() (*string, bool) {
-	if o == nil || o.ZoneUuid == nil {
+	if o == nil || IsNil(o.ZoneUuid) {
 		return nil, false
 	}
 	return o.ZoneUuid, true
@@ -190,7 +194,7 @@ func (o *HyperflexSiteDetails) GetZoneUuidOk() (*string, bool) {
 
 // HasZoneUuid returns a boolean if a field has been set.
 func (o *HyperflexSiteDetails) HasZoneUuid() bool {
-	if o != nil && o.ZoneUuid != nil {
+	if o != nil && !IsNil(o.ZoneUuid) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *HyperflexSiteDetails) SetZoneUuid(v string) {
 }
 
 func (o HyperflexSiteDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexSiteDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Name != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.NumNodes != nil {
+	if !IsNil(o.NumNodes) {
 		toSerialize["NumNodes"] = o.NumNodes
 	}
-	if o.ZoneUuid != nil {
+	if !IsNil(o.ZoneUuid) {
 		toSerialize["ZoneUuid"] = o.ZoneUuid
 	}
 
@@ -232,10 +240,32 @@ func (o HyperflexSiteDetails) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexSiteDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexSiteDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexSiteDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *HyperflexSiteDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexSiteDetailsWithoutEmbeddedStruct := HyperflexSiteDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSiteDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexSiteDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexSiteDetails := _HyperflexSiteDetails{}
 		varHyperflexSiteDetails.ClassId = varHyperflexSiteDetailsWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *HyperflexSiteDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexSiteDetails := _HyperflexSiteDetails{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSiteDetails)
+	err = json.Unmarshal(data, &varHyperflexSiteDetails)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexSiteDetails.MoBaseComplexType
 	} else {
@@ -275,7 +305,7 @@ func (o *HyperflexSiteDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Name")

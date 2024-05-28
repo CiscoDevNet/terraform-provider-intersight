@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the OnpremImagePackage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OnpremImagePackage{}
 
 // OnpremImagePackage ImagePackage encapsulates a software image package. ImagePackage can be a docker image, a UI web image, an endpoint (e.g. UCSM) image, a device connector image or an ansible scripts package.
 type OnpremImagePackage struct {
@@ -119,7 +123,7 @@ func (o *OnpremImagePackage) SetObjectType(v string) {
 
 // GetFilePath returns the FilePath field value if set, zero value otherwise.
 func (o *OnpremImagePackage) GetFilePath() string {
-	if o == nil || o.FilePath == nil {
+	if o == nil || IsNil(o.FilePath) {
 		var ret string
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *OnpremImagePackage) GetFilePath() string {
 // GetFilePathOk returns a tuple with the FilePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremImagePackage) GetFilePathOk() (*string, bool) {
-	if o == nil || o.FilePath == nil {
+	if o == nil || IsNil(o.FilePath) {
 		return nil, false
 	}
 	return o.FilePath, true
@@ -137,7 +141,7 @@ func (o *OnpremImagePackage) GetFilePathOk() (*string, bool) {
 
 // HasFilePath returns a boolean if a field has been set.
 func (o *OnpremImagePackage) HasFilePath() bool {
-	if o != nil && o.FilePath != nil {
+	if o != nil && !IsNil(o.FilePath) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *OnpremImagePackage) SetFilePath(v string) {
 
 // GetFileSha returns the FileSha field value if set, zero value otherwise.
 func (o *OnpremImagePackage) GetFileSha() string {
-	if o == nil || o.FileSha == nil {
+	if o == nil || IsNil(o.FileSha) {
 		var ret string
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *OnpremImagePackage) GetFileSha() string {
 // GetFileShaOk returns a tuple with the FileSha field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremImagePackage) GetFileShaOk() (*string, bool) {
-	if o == nil || o.FileSha == nil {
+	if o == nil || IsNil(o.FileSha) {
 		return nil, false
 	}
 	return o.FileSha, true
@@ -169,7 +173,7 @@ func (o *OnpremImagePackage) GetFileShaOk() (*string, bool) {
 
 // HasFileSha returns a boolean if a field has been set.
 func (o *OnpremImagePackage) HasFileSha() bool {
-	if o != nil && o.FileSha != nil {
+	if o != nil && !IsNil(o.FileSha) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *OnpremImagePackage) SetFileSha(v string) {
 
 // GetFileSize returns the FileSize field value if set, zero value otherwise.
 func (o *OnpremImagePackage) GetFileSize() int64 {
-	if o == nil || o.FileSize == nil {
+	if o == nil || IsNil(o.FileSize) {
 		var ret int64
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *OnpremImagePackage) GetFileSize() int64 {
 // GetFileSizeOk returns a tuple with the FileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremImagePackage) GetFileSizeOk() (*int64, bool) {
-	if o == nil || o.FileSize == nil {
+	if o == nil || IsNil(o.FileSize) {
 		return nil, false
 	}
 	return o.FileSize, true
@@ -201,7 +205,7 @@ func (o *OnpremImagePackage) GetFileSizeOk() (*int64, bool) {
 
 // HasFileSize returns a boolean if a field has been set.
 func (o *OnpremImagePackage) HasFileSize() bool {
-	if o != nil && o.FileSize != nil {
+	if o != nil && !IsNil(o.FileSize) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *OnpremImagePackage) SetFileSize(v int64) {
 
 // GetFileTime returns the FileTime field value if set, zero value otherwise.
 func (o *OnpremImagePackage) GetFileTime() time.Time {
-	if o == nil || o.FileTime == nil {
+	if o == nil || IsNil(o.FileTime) {
 		var ret time.Time
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *OnpremImagePackage) GetFileTime() time.Time {
 // GetFileTimeOk returns a tuple with the FileTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremImagePackage) GetFileTimeOk() (*time.Time, bool) {
-	if o == nil || o.FileTime == nil {
+	if o == nil || IsNil(o.FileTime) {
 		return nil, false
 	}
 	return o.FileTime, true
@@ -233,7 +237,7 @@ func (o *OnpremImagePackage) GetFileTimeOk() (*time.Time, bool) {
 
 // HasFileTime returns a boolean if a field has been set.
 func (o *OnpremImagePackage) HasFileTime() bool {
-	if o != nil && o.FileTime != nil {
+	if o != nil && !IsNil(o.FileTime) {
 		return true
 	}
 
@@ -247,7 +251,7 @@ func (o *OnpremImagePackage) SetFileTime(v time.Time) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *OnpremImagePackage) GetFilename() string {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -257,7 +261,7 @@ func (o *OnpremImagePackage) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremImagePackage) GetFilenameOk() (*string, bool) {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -265,7 +269,7 @@ func (o *OnpremImagePackage) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *OnpremImagePackage) HasFilename() bool {
-	if o != nil && o.Filename != nil {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *OnpremImagePackage) SetFilename(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *OnpremImagePackage) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -289,7 +293,7 @@ func (o *OnpremImagePackage) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremImagePackage) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -297,7 +301,7 @@ func (o *OnpremImagePackage) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *OnpremImagePackage) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -311,7 +315,7 @@ func (o *OnpremImagePackage) SetName(v string) {
 
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
 func (o *OnpremImagePackage) GetPackageType() string {
-	if o == nil || o.PackageType == nil {
+	if o == nil || IsNil(o.PackageType) {
 		var ret string
 		return ret
 	}
@@ -321,7 +325,7 @@ func (o *OnpremImagePackage) GetPackageType() string {
 // GetPackageTypeOk returns a tuple with the PackageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremImagePackage) GetPackageTypeOk() (*string, bool) {
-	if o == nil || o.PackageType == nil {
+	if o == nil || IsNil(o.PackageType) {
 		return nil, false
 	}
 	return o.PackageType, true
@@ -329,7 +333,7 @@ func (o *OnpremImagePackage) GetPackageTypeOk() (*string, bool) {
 
 // HasPackageType returns a boolean if a field has been set.
 func (o *OnpremImagePackage) HasPackageType() bool {
-	if o != nil && o.PackageType != nil {
+	if o != nil && !IsNil(o.PackageType) {
 		return true
 	}
 
@@ -343,7 +347,7 @@ func (o *OnpremImagePackage) SetPackageType(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *OnpremImagePackage) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -353,7 +357,7 @@ func (o *OnpremImagePackage) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremImagePackage) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -361,7 +365,7 @@ func (o *OnpremImagePackage) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *OnpremImagePackage) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -374,43 +378,47 @@ func (o *OnpremImagePackage) SetVersion(v string) {
 }
 
 func (o OnpremImagePackage) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OnpremImagePackage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FilePath != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FilePath) {
 		toSerialize["FilePath"] = o.FilePath
 	}
-	if o.FileSha != nil {
+	if !IsNil(o.FileSha) {
 		toSerialize["FileSha"] = o.FileSha
 	}
-	if o.FileSize != nil {
+	if !IsNil(o.FileSize) {
 		toSerialize["FileSize"] = o.FileSize
 	}
-	if o.FileTime != nil {
+	if !IsNil(o.FileTime) {
 		toSerialize["FileTime"] = o.FileTime
 	}
-	if o.Filename != nil {
+	if !IsNil(o.Filename) {
 		toSerialize["Filename"] = o.Filename
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PackageType != nil {
+	if !IsNil(o.PackageType) {
 		toSerialize["PackageType"] = o.PackageType
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 
@@ -418,10 +426,32 @@ func (o OnpremImagePackage) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OnpremImagePackage) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OnpremImagePackage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OnpremImagePackageWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -447,7 +477,7 @@ func (o *OnpremImagePackage) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOnpremImagePackageWithoutEmbeddedStruct := OnpremImagePackageWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOnpremImagePackageWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOnpremImagePackageWithoutEmbeddedStruct)
 	if err == nil {
 		varOnpremImagePackage := _OnpremImagePackage{}
 		varOnpremImagePackage.ClassId = varOnpremImagePackageWithoutEmbeddedStruct.ClassId
@@ -467,7 +497,7 @@ func (o *OnpremImagePackage) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOnpremImagePackage := _OnpremImagePackage{}
 
-	err = json.Unmarshal(bytes, &varOnpremImagePackage)
+	err = json.Unmarshal(data, &varOnpremImagePackage)
 	if err == nil {
 		o.MoBaseComplexType = varOnpremImagePackage.MoBaseComplexType
 	} else {
@@ -476,7 +506,7 @@ func (o *OnpremImagePackage) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FilePath")

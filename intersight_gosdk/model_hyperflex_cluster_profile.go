@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexClusterProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexClusterProfile{}
 
 // HyperflexClusterProfile A profile specifying configuration settings for a HyperFlex cluster.
 type HyperflexClusterProfile struct {
@@ -54,27 +58,27 @@ type HyperflexClusterProfile struct {
 	// The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party). * `HyperFlexDp` - The type of storage is HyperFlex Data Platform. * `ThirdParty` - The type of storage is 3rd Party Storage (PureStorage, etc..).
 	StorageType *string `json:"StorageType,omitempty"`
 	// The WWxN prefix in the form of 20:00:00:25:B5:XX.
-	WwxnPrefix        *string                                     `json:"WwxnPrefix,omitempty"`
-	AssociatedCluster *HyperflexClusterRelationship               `json:"AssociatedCluster,omitempty"`
-	AutoSupport       *HyperflexAutoSupportPolicyRelationship     `json:"AutoSupport,omitempty"`
-	ClusterNetwork    *HyperflexClusterNetworkPolicyRelationship  `json:"ClusterNetwork,omitempty"`
-	ClusterStorage    *HyperflexClusterStoragePolicyRelationship  `json:"ClusterStorage,omitempty"`
-	ConfigResult      *HyperflexConfigResultRelationship          `json:"ConfigResult,omitempty"`
-	ExtFcStorage      *HyperflexExtFcStoragePolicyRelationship    `json:"ExtFcStorage,omitempty"`
-	ExtIscsiStorage   *HyperflexExtIscsiStoragePolicyRelationship `json:"ExtIscsiStorage,omitempty"`
-	Httpproxypolicy   *CommHttpProxyPolicyRelationship            `json:"Httpproxypolicy,omitempty"`
-	LocalCredential   *HyperflexLocalCredentialPolicyRelationship `json:"LocalCredential,omitempty"`
-	NodeConfig        *HyperflexNodeConfigPolicyRelationship      `json:"NodeConfig,omitempty"`
+	WwxnPrefix        *string                                            `json:"WwxnPrefix,omitempty"`
+	AssociatedCluster NullableHyperflexClusterRelationship               `json:"AssociatedCluster,omitempty"`
+	AutoSupport       NullableHyperflexAutoSupportPolicyRelationship     `json:"AutoSupport,omitempty"`
+	ClusterNetwork    NullableHyperflexClusterNetworkPolicyRelationship  `json:"ClusterNetwork,omitempty"`
+	ClusterStorage    NullableHyperflexClusterStoragePolicyRelationship  `json:"ClusterStorage,omitempty"`
+	ConfigResult      NullableHyperflexConfigResultRelationship          `json:"ConfigResult,omitempty"`
+	ExtFcStorage      NullableHyperflexExtFcStoragePolicyRelationship    `json:"ExtFcStorage,omitempty"`
+	ExtIscsiStorage   NullableHyperflexExtIscsiStoragePolicyRelationship `json:"ExtIscsiStorage,omitempty"`
+	Httpproxypolicy   NullableCommHttpProxyPolicyRelationship            `json:"Httpproxypolicy,omitempty"`
+	LocalCredential   NullableHyperflexLocalCredentialPolicyRelationship `json:"LocalCredential,omitempty"`
+	NodeConfig        NullableHyperflexNodeConfigPolicyRelationship      `json:"NodeConfig,omitempty"`
 	// An array of relationships to hyperflexNodeProfile resources.
-	NodeProfileConfig []HyperflexNodeProfileRelationship       `json:"NodeProfileConfig,omitempty"`
-	Organization      *OrganizationOrganizationRelationship    `json:"Organization,omitempty"`
-	ProxySetting      *HyperflexProxySettingPolicyRelationship `json:"ProxySetting,omitempty"`
+	NodeProfileConfig []HyperflexNodeProfileRelationship              `json:"NodeProfileConfig,omitempty"`
+	Organization      NullableOrganizationOrganizationRelationship    `json:"Organization,omitempty"`
+	ProxySetting      NullableHyperflexProxySettingPolicyRelationship `json:"ProxySetting,omitempty"`
 	// An array of relationships to workflowWorkflowInfo resources.
-	RunningWorkflows     []WorkflowWorkflowInfoRelationship          `json:"RunningWorkflows,omitempty"`
-	SoftwareVersion      *HyperflexSoftwareVersionPolicyRelationship `json:"SoftwareVersion,omitempty"`
-	SysConfig            *HyperflexSysConfigPolicyRelationship       `json:"SysConfig,omitempty"`
-	UcsmConfig           *HyperflexUcsmConfigPolicyRelationship      `json:"UcsmConfig,omitempty"`
-	VcenterConfig        *HyperflexVcenterConfigPolicyRelationship   `json:"VcenterConfig,omitempty"`
+	RunningWorkflows     []WorkflowWorkflowInfoRelationship                 `json:"RunningWorkflows,omitempty"`
+	SoftwareVersion      NullableHyperflexSoftwareVersionPolicyRelationship `json:"SoftwareVersion,omitempty"`
+	SysConfig            NullableHyperflexSysConfigPolicyRelationship       `json:"SysConfig,omitempty"`
+	UcsmConfig           NullableHyperflexUcsmConfigPolicyRelationship      `json:"UcsmConfig,omitempty"`
+	VcenterConfig        NullableHyperflexVcenterConfigPolicyRelationship   `json:"VcenterConfig,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -169,7 +173,7 @@ func (o *HyperflexClusterProfile) SetObjectType(v string) {
 
 // GetClusterInternalSubnet returns the ClusterInternalSubnet field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetClusterInternalSubnet() CommIpV4Interface {
-	if o == nil || o.ClusterInternalSubnet.Get() == nil {
+	if o == nil || IsNil(o.ClusterInternalSubnet.Get()) {
 		var ret CommIpV4Interface
 		return ret
 	}
@@ -212,7 +216,7 @@ func (o *HyperflexClusterProfile) UnsetClusterInternalSubnet() {
 
 // GetDataIpAddress returns the DataIpAddress field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetDataIpAddress() string {
-	if o == nil || o.DataIpAddress == nil {
+	if o == nil || IsNil(o.DataIpAddress) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *HyperflexClusterProfile) GetDataIpAddress() string {
 // GetDataIpAddressOk returns a tuple with the DataIpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetDataIpAddressOk() (*string, bool) {
-	if o == nil || o.DataIpAddress == nil {
+	if o == nil || IsNil(o.DataIpAddress) {
 		return nil, false
 	}
 	return o.DataIpAddress, true
@@ -230,7 +234,7 @@ func (o *HyperflexClusterProfile) GetDataIpAddressOk() (*string, bool) {
 
 // HasDataIpAddress returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasDataIpAddress() bool {
-	if o != nil && o.DataIpAddress != nil {
+	if o != nil && !IsNil(o.DataIpAddress) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *HyperflexClusterProfile) SetDataIpAddress(v string) {
 
 // GetHostNamePrefix returns the HostNamePrefix field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetHostNamePrefix() string {
-	if o == nil || o.HostNamePrefix == nil {
+	if o == nil || IsNil(o.HostNamePrefix) {
 		var ret string
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *HyperflexClusterProfile) GetHostNamePrefix() string {
 // GetHostNamePrefixOk returns a tuple with the HostNamePrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetHostNamePrefixOk() (*string, bool) {
-	if o == nil || o.HostNamePrefix == nil {
+	if o == nil || IsNil(o.HostNamePrefix) {
 		return nil, false
 	}
 	return o.HostNamePrefix, true
@@ -262,7 +266,7 @@ func (o *HyperflexClusterProfile) GetHostNamePrefixOk() (*string, bool) {
 
 // HasHostNamePrefix returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasHostNamePrefix() bool {
-	if o != nil && o.HostNamePrefix != nil {
+	if o != nil && !IsNil(o.HostNamePrefix) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *HyperflexClusterProfile) SetHostNamePrefix(v string) {
 
 // GetHypervisorControlIpAddress returns the HypervisorControlIpAddress field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetHypervisorControlIpAddress() string {
-	if o == nil || o.HypervisorControlIpAddress == nil {
+	if o == nil || IsNil(o.HypervisorControlIpAddress) {
 		var ret string
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *HyperflexClusterProfile) GetHypervisorControlIpAddress() string {
 // GetHypervisorControlIpAddressOk returns a tuple with the HypervisorControlIpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetHypervisorControlIpAddressOk() (*string, bool) {
-	if o == nil || o.HypervisorControlIpAddress == nil {
+	if o == nil || IsNil(o.HypervisorControlIpAddress) {
 		return nil, false
 	}
 	return o.HypervisorControlIpAddress, true
@@ -294,7 +298,7 @@ func (o *HyperflexClusterProfile) GetHypervisorControlIpAddressOk() (*string, bo
 
 // HasHypervisorControlIpAddress returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasHypervisorControlIpAddress() bool {
-	if o != nil && o.HypervisorControlIpAddress != nil {
+	if o != nil && !IsNil(o.HypervisorControlIpAddress) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *HyperflexClusterProfile) SetHypervisorControlIpAddress(v string) {
 
 // GetHypervisorType returns the HypervisorType field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetHypervisorType() string {
-	if o == nil || o.HypervisorType == nil {
+	if o == nil || IsNil(o.HypervisorType) {
 		var ret string
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *HyperflexClusterProfile) GetHypervisorType() string {
 // GetHypervisorTypeOk returns a tuple with the HypervisorType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetHypervisorTypeOk() (*string, bool) {
-	if o == nil || o.HypervisorType == nil {
+	if o == nil || IsNil(o.HypervisorType) {
 		return nil, false
 	}
 	return o.HypervisorType, true
@@ -326,7 +330,7 @@ func (o *HyperflexClusterProfile) GetHypervisorTypeOk() (*string, bool) {
 
 // HasHypervisorType returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasHypervisorType() bool {
-	if o != nil && o.HypervisorType != nil {
+	if o != nil && !IsNil(o.HypervisorType) {
 		return true
 	}
 
@@ -340,7 +344,7 @@ func (o *HyperflexClusterProfile) SetHypervisorType(v string) {
 
 // GetIsNicBased returns the IsNicBased field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetIsNicBased() bool {
-	if o == nil || o.IsNicBased == nil {
+	if o == nil || IsNil(o.IsNicBased) {
 		var ret bool
 		return ret
 	}
@@ -350,7 +354,7 @@ func (o *HyperflexClusterProfile) GetIsNicBased() bool {
 // GetIsNicBasedOk returns a tuple with the IsNicBased field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetIsNicBasedOk() (*bool, bool) {
-	if o == nil || o.IsNicBased == nil {
+	if o == nil || IsNil(o.IsNicBased) {
 		return nil, false
 	}
 	return o.IsNicBased, true
@@ -358,7 +362,7 @@ func (o *HyperflexClusterProfile) GetIsNicBasedOk() (*bool, bool) {
 
 // HasIsNicBased returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasIsNicBased() bool {
-	if o != nil && o.IsNicBased != nil {
+	if o != nil && !IsNil(o.IsNicBased) {
 		return true
 	}
 
@@ -372,7 +376,7 @@ func (o *HyperflexClusterProfile) SetIsNicBased(v bool) {
 
 // GetMacAddressPrefix returns the MacAddressPrefix field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetMacAddressPrefix() string {
-	if o == nil || o.MacAddressPrefix == nil {
+	if o == nil || IsNil(o.MacAddressPrefix) {
 		var ret string
 		return ret
 	}
@@ -382,7 +386,7 @@ func (o *HyperflexClusterProfile) GetMacAddressPrefix() string {
 // GetMacAddressPrefixOk returns a tuple with the MacAddressPrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetMacAddressPrefixOk() (*string, bool) {
-	if o == nil || o.MacAddressPrefix == nil {
+	if o == nil || IsNil(o.MacAddressPrefix) {
 		return nil, false
 	}
 	return o.MacAddressPrefix, true
@@ -390,7 +394,7 @@ func (o *HyperflexClusterProfile) GetMacAddressPrefixOk() (*string, bool) {
 
 // HasMacAddressPrefix returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasMacAddressPrefix() bool {
-	if o != nil && o.MacAddressPrefix != nil {
+	if o != nil && !IsNil(o.MacAddressPrefix) {
 		return true
 	}
 
@@ -404,7 +408,7 @@ func (o *HyperflexClusterProfile) SetMacAddressPrefix(v string) {
 
 // GetMgmtIpAddress returns the MgmtIpAddress field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetMgmtIpAddress() string {
-	if o == nil || o.MgmtIpAddress == nil {
+	if o == nil || IsNil(o.MgmtIpAddress) {
 		var ret string
 		return ret
 	}
@@ -414,7 +418,7 @@ func (o *HyperflexClusterProfile) GetMgmtIpAddress() string {
 // GetMgmtIpAddressOk returns a tuple with the MgmtIpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetMgmtIpAddressOk() (*string, bool) {
-	if o == nil || o.MgmtIpAddress == nil {
+	if o == nil || IsNil(o.MgmtIpAddress) {
 		return nil, false
 	}
 	return o.MgmtIpAddress, true
@@ -422,7 +426,7 @@ func (o *HyperflexClusterProfile) GetMgmtIpAddressOk() (*string, bool) {
 
 // HasMgmtIpAddress returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasMgmtIpAddress() bool {
-	if o != nil && o.MgmtIpAddress != nil {
+	if o != nil && !IsNil(o.MgmtIpAddress) {
 		return true
 	}
 
@@ -436,7 +440,7 @@ func (o *HyperflexClusterProfile) SetMgmtIpAddress(v string) {
 
 // GetMgmtPlatform returns the MgmtPlatform field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetMgmtPlatform() string {
-	if o == nil || o.MgmtPlatform == nil {
+	if o == nil || IsNil(o.MgmtPlatform) {
 		var ret string
 		return ret
 	}
@@ -446,7 +450,7 @@ func (o *HyperflexClusterProfile) GetMgmtPlatform() string {
 // GetMgmtPlatformOk returns a tuple with the MgmtPlatform field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetMgmtPlatformOk() (*string, bool) {
-	if o == nil || o.MgmtPlatform == nil {
+	if o == nil || IsNil(o.MgmtPlatform) {
 		return nil, false
 	}
 	return o.MgmtPlatform, true
@@ -454,7 +458,7 @@ func (o *HyperflexClusterProfile) GetMgmtPlatformOk() (*string, bool) {
 
 // HasMgmtPlatform returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasMgmtPlatform() bool {
-	if o != nil && o.MgmtPlatform != nil {
+	if o != nil && !IsNil(o.MgmtPlatform) {
 		return true
 	}
 
@@ -468,7 +472,7 @@ func (o *HyperflexClusterProfile) SetMgmtPlatform(v string) {
 
 // GetReplication returns the Replication field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetReplication() int64 {
-	if o == nil || o.Replication == nil {
+	if o == nil || IsNil(o.Replication) {
 		var ret int64
 		return ret
 	}
@@ -478,7 +482,7 @@ func (o *HyperflexClusterProfile) GetReplication() int64 {
 // GetReplicationOk returns a tuple with the Replication field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetReplicationOk() (*int64, bool) {
-	if o == nil || o.Replication == nil {
+	if o == nil || IsNil(o.Replication) {
 		return nil, false
 	}
 	return o.Replication, true
@@ -486,7 +490,7 @@ func (o *HyperflexClusterProfile) GetReplicationOk() (*int64, bool) {
 
 // HasReplication returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasReplication() bool {
-	if o != nil && o.Replication != nil {
+	if o != nil && !IsNil(o.Replication) {
 		return true
 	}
 
@@ -500,7 +504,7 @@ func (o *HyperflexClusterProfile) SetReplication(v int64) {
 
 // GetStorageClientIpAddress returns the StorageClientIpAddress field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetStorageClientIpAddress() string {
-	if o == nil || o.StorageClientIpAddress == nil {
+	if o == nil || IsNil(o.StorageClientIpAddress) {
 		var ret string
 		return ret
 	}
@@ -510,7 +514,7 @@ func (o *HyperflexClusterProfile) GetStorageClientIpAddress() string {
 // GetStorageClientIpAddressOk returns a tuple with the StorageClientIpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetStorageClientIpAddressOk() (*string, bool) {
-	if o == nil || o.StorageClientIpAddress == nil {
+	if o == nil || IsNil(o.StorageClientIpAddress) {
 		return nil, false
 	}
 	return o.StorageClientIpAddress, true
@@ -518,7 +522,7 @@ func (o *HyperflexClusterProfile) GetStorageClientIpAddressOk() (*string, bool) 
 
 // HasStorageClientIpAddress returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasStorageClientIpAddress() bool {
-	if o != nil && o.StorageClientIpAddress != nil {
+	if o != nil && !IsNil(o.StorageClientIpAddress) {
 		return true
 	}
 
@@ -532,7 +536,7 @@ func (o *HyperflexClusterProfile) SetStorageClientIpAddress(v string) {
 
 // GetStorageClientNetmask returns the StorageClientNetmask field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetStorageClientNetmask() string {
-	if o == nil || o.StorageClientNetmask == nil {
+	if o == nil || IsNil(o.StorageClientNetmask) {
 		var ret string
 		return ret
 	}
@@ -542,7 +546,7 @@ func (o *HyperflexClusterProfile) GetStorageClientNetmask() string {
 // GetStorageClientNetmaskOk returns a tuple with the StorageClientNetmask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetStorageClientNetmaskOk() (*string, bool) {
-	if o == nil || o.StorageClientNetmask == nil {
+	if o == nil || IsNil(o.StorageClientNetmask) {
 		return nil, false
 	}
 	return o.StorageClientNetmask, true
@@ -550,7 +554,7 @@ func (o *HyperflexClusterProfile) GetStorageClientNetmaskOk() (*string, bool) {
 
 // HasStorageClientNetmask returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasStorageClientNetmask() bool {
-	if o != nil && o.StorageClientNetmask != nil {
+	if o != nil && !IsNil(o.StorageClientNetmask) {
 		return true
 	}
 
@@ -564,7 +568,7 @@ func (o *HyperflexClusterProfile) SetStorageClientNetmask(v string) {
 
 // GetStorageClientVlan returns the StorageClientVlan field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetStorageClientVlan() HyperflexNamedVlan {
-	if o == nil || o.StorageClientVlan.Get() == nil {
+	if o == nil || IsNil(o.StorageClientVlan.Get()) {
 		var ret HyperflexNamedVlan
 		return ret
 	}
@@ -607,7 +611,7 @@ func (o *HyperflexClusterProfile) UnsetStorageClientVlan() {
 
 // GetStorageClusterAuxiliaryIp returns the StorageClusterAuxiliaryIp field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetStorageClusterAuxiliaryIp() string {
-	if o == nil || o.StorageClusterAuxiliaryIp == nil {
+	if o == nil || IsNil(o.StorageClusterAuxiliaryIp) {
 		var ret string
 		return ret
 	}
@@ -617,7 +621,7 @@ func (o *HyperflexClusterProfile) GetStorageClusterAuxiliaryIp() string {
 // GetStorageClusterAuxiliaryIpOk returns a tuple with the StorageClusterAuxiliaryIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetStorageClusterAuxiliaryIpOk() (*string, bool) {
-	if o == nil || o.StorageClusterAuxiliaryIp == nil {
+	if o == nil || IsNil(o.StorageClusterAuxiliaryIp) {
 		return nil, false
 	}
 	return o.StorageClusterAuxiliaryIp, true
@@ -625,7 +629,7 @@ func (o *HyperflexClusterProfile) GetStorageClusterAuxiliaryIpOk() (*string, boo
 
 // HasStorageClusterAuxiliaryIp returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasStorageClusterAuxiliaryIp() bool {
-	if o != nil && o.StorageClusterAuxiliaryIp != nil {
+	if o != nil && !IsNil(o.StorageClusterAuxiliaryIp) {
 		return true
 	}
 
@@ -639,7 +643,7 @@ func (o *HyperflexClusterProfile) SetStorageClusterAuxiliaryIp(v string) {
 
 // GetStorageDataVlan returns the StorageDataVlan field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetStorageDataVlan() HyperflexNamedVlan {
-	if o == nil || o.StorageDataVlan.Get() == nil {
+	if o == nil || IsNil(o.StorageDataVlan.Get()) {
 		var ret HyperflexNamedVlan
 		return ret
 	}
@@ -682,7 +686,7 @@ func (o *HyperflexClusterProfile) UnsetStorageDataVlan() {
 
 // GetStorageType returns the StorageType field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetStorageType() string {
-	if o == nil || o.StorageType == nil {
+	if o == nil || IsNil(o.StorageType) {
 		var ret string
 		return ret
 	}
@@ -692,7 +696,7 @@ func (o *HyperflexClusterProfile) GetStorageType() string {
 // GetStorageTypeOk returns a tuple with the StorageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetStorageTypeOk() (*string, bool) {
-	if o == nil || o.StorageType == nil {
+	if o == nil || IsNil(o.StorageType) {
 		return nil, false
 	}
 	return o.StorageType, true
@@ -700,7 +704,7 @@ func (o *HyperflexClusterProfile) GetStorageTypeOk() (*string, bool) {
 
 // HasStorageType returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasStorageType() bool {
-	if o != nil && o.StorageType != nil {
+	if o != nil && !IsNil(o.StorageType) {
 		return true
 	}
 
@@ -714,7 +718,7 @@ func (o *HyperflexClusterProfile) SetStorageType(v string) {
 
 // GetWwxnPrefix returns the WwxnPrefix field value if set, zero value otherwise.
 func (o *HyperflexClusterProfile) GetWwxnPrefix() string {
-	if o == nil || o.WwxnPrefix == nil {
+	if o == nil || IsNil(o.WwxnPrefix) {
 		var ret string
 		return ret
 	}
@@ -724,7 +728,7 @@ func (o *HyperflexClusterProfile) GetWwxnPrefix() string {
 // GetWwxnPrefixOk returns a tuple with the WwxnPrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexClusterProfile) GetWwxnPrefixOk() (*string, bool) {
-	if o == nil || o.WwxnPrefix == nil {
+	if o == nil || IsNil(o.WwxnPrefix) {
 		return nil, false
 	}
 	return o.WwxnPrefix, true
@@ -732,7 +736,7 @@ func (o *HyperflexClusterProfile) GetWwxnPrefixOk() (*string, bool) {
 
 // HasWwxnPrefix returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasWwxnPrefix() bool {
-	if o != nil && o.WwxnPrefix != nil {
+	if o != nil && !IsNil(o.WwxnPrefix) {
 		return true
 	}
 
@@ -744,324 +748,434 @@ func (o *HyperflexClusterProfile) SetWwxnPrefix(v string) {
 	o.WwxnPrefix = &v
 }
 
-// GetAssociatedCluster returns the AssociatedCluster field value if set, zero value otherwise.
+// GetAssociatedCluster returns the AssociatedCluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetAssociatedCluster() HyperflexClusterRelationship {
-	if o == nil || o.AssociatedCluster == nil {
+	if o == nil || IsNil(o.AssociatedCluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.AssociatedCluster
+	return *o.AssociatedCluster.Get()
 }
 
 // GetAssociatedClusterOk returns a tuple with the AssociatedCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetAssociatedClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.AssociatedCluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssociatedCluster, true
+	return o.AssociatedCluster.Get(), o.AssociatedCluster.IsSet()
 }
 
 // HasAssociatedCluster returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasAssociatedCluster() bool {
-	if o != nil && o.AssociatedCluster != nil {
+	if o != nil && o.AssociatedCluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssociatedCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the AssociatedCluster field.
+// SetAssociatedCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the AssociatedCluster field.
 func (o *HyperflexClusterProfile) SetAssociatedCluster(v HyperflexClusterRelationship) {
-	o.AssociatedCluster = &v
+	o.AssociatedCluster.Set(&v)
 }
 
-// GetAutoSupport returns the AutoSupport field value if set, zero value otherwise.
+// SetAssociatedClusterNil sets the value for AssociatedCluster to be an explicit nil
+func (o *HyperflexClusterProfile) SetAssociatedClusterNil() {
+	o.AssociatedCluster.Set(nil)
+}
+
+// UnsetAssociatedCluster ensures that no value is present for AssociatedCluster, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetAssociatedCluster() {
+	o.AssociatedCluster.Unset()
+}
+
+// GetAutoSupport returns the AutoSupport field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetAutoSupport() HyperflexAutoSupportPolicyRelationship {
-	if o == nil || o.AutoSupport == nil {
+	if o == nil || IsNil(o.AutoSupport.Get()) {
 		var ret HyperflexAutoSupportPolicyRelationship
 		return ret
 	}
-	return *o.AutoSupport
+	return *o.AutoSupport.Get()
 }
 
 // GetAutoSupportOk returns a tuple with the AutoSupport field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetAutoSupportOk() (*HyperflexAutoSupportPolicyRelationship, bool) {
-	if o == nil || o.AutoSupport == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AutoSupport, true
+	return o.AutoSupport.Get(), o.AutoSupport.IsSet()
 }
 
 // HasAutoSupport returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasAutoSupport() bool {
-	if o != nil && o.AutoSupport != nil {
+	if o != nil && o.AutoSupport.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAutoSupport gets a reference to the given HyperflexAutoSupportPolicyRelationship and assigns it to the AutoSupport field.
+// SetAutoSupport gets a reference to the given NullableHyperflexAutoSupportPolicyRelationship and assigns it to the AutoSupport field.
 func (o *HyperflexClusterProfile) SetAutoSupport(v HyperflexAutoSupportPolicyRelationship) {
-	o.AutoSupport = &v
+	o.AutoSupport.Set(&v)
 }
 
-// GetClusterNetwork returns the ClusterNetwork field value if set, zero value otherwise.
+// SetAutoSupportNil sets the value for AutoSupport to be an explicit nil
+func (o *HyperflexClusterProfile) SetAutoSupportNil() {
+	o.AutoSupport.Set(nil)
+}
+
+// UnsetAutoSupport ensures that no value is present for AutoSupport, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetAutoSupport() {
+	o.AutoSupport.Unset()
+}
+
+// GetClusterNetwork returns the ClusterNetwork field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetClusterNetwork() HyperflexClusterNetworkPolicyRelationship {
-	if o == nil || o.ClusterNetwork == nil {
+	if o == nil || IsNil(o.ClusterNetwork.Get()) {
 		var ret HyperflexClusterNetworkPolicyRelationship
 		return ret
 	}
-	return *o.ClusterNetwork
+	return *o.ClusterNetwork.Get()
 }
 
 // GetClusterNetworkOk returns a tuple with the ClusterNetwork field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetClusterNetworkOk() (*HyperflexClusterNetworkPolicyRelationship, bool) {
-	if o == nil || o.ClusterNetwork == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClusterNetwork, true
+	return o.ClusterNetwork.Get(), o.ClusterNetwork.IsSet()
 }
 
 // HasClusterNetwork returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasClusterNetwork() bool {
-	if o != nil && o.ClusterNetwork != nil {
+	if o != nil && o.ClusterNetwork.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClusterNetwork gets a reference to the given HyperflexClusterNetworkPolicyRelationship and assigns it to the ClusterNetwork field.
+// SetClusterNetwork gets a reference to the given NullableHyperflexClusterNetworkPolicyRelationship and assigns it to the ClusterNetwork field.
 func (o *HyperflexClusterProfile) SetClusterNetwork(v HyperflexClusterNetworkPolicyRelationship) {
-	o.ClusterNetwork = &v
+	o.ClusterNetwork.Set(&v)
 }
 
-// GetClusterStorage returns the ClusterStorage field value if set, zero value otherwise.
+// SetClusterNetworkNil sets the value for ClusterNetwork to be an explicit nil
+func (o *HyperflexClusterProfile) SetClusterNetworkNil() {
+	o.ClusterNetwork.Set(nil)
+}
+
+// UnsetClusterNetwork ensures that no value is present for ClusterNetwork, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetClusterNetwork() {
+	o.ClusterNetwork.Unset()
+}
+
+// GetClusterStorage returns the ClusterStorage field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetClusterStorage() HyperflexClusterStoragePolicyRelationship {
-	if o == nil || o.ClusterStorage == nil {
+	if o == nil || IsNil(o.ClusterStorage.Get()) {
 		var ret HyperflexClusterStoragePolicyRelationship
 		return ret
 	}
-	return *o.ClusterStorage
+	return *o.ClusterStorage.Get()
 }
 
 // GetClusterStorageOk returns a tuple with the ClusterStorage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetClusterStorageOk() (*HyperflexClusterStoragePolicyRelationship, bool) {
-	if o == nil || o.ClusterStorage == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClusterStorage, true
+	return o.ClusterStorage.Get(), o.ClusterStorage.IsSet()
 }
 
 // HasClusterStorage returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasClusterStorage() bool {
-	if o != nil && o.ClusterStorage != nil {
+	if o != nil && o.ClusterStorage.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClusterStorage gets a reference to the given HyperflexClusterStoragePolicyRelationship and assigns it to the ClusterStorage field.
+// SetClusterStorage gets a reference to the given NullableHyperflexClusterStoragePolicyRelationship and assigns it to the ClusterStorage field.
 func (o *HyperflexClusterProfile) SetClusterStorage(v HyperflexClusterStoragePolicyRelationship) {
-	o.ClusterStorage = &v
+	o.ClusterStorage.Set(&v)
 }
 
-// GetConfigResult returns the ConfigResult field value if set, zero value otherwise.
+// SetClusterStorageNil sets the value for ClusterStorage to be an explicit nil
+func (o *HyperflexClusterProfile) SetClusterStorageNil() {
+	o.ClusterStorage.Set(nil)
+}
+
+// UnsetClusterStorage ensures that no value is present for ClusterStorage, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetClusterStorage() {
+	o.ClusterStorage.Unset()
+}
+
+// GetConfigResult returns the ConfigResult field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetConfigResult() HyperflexConfigResultRelationship {
-	if o == nil || o.ConfigResult == nil {
+	if o == nil || IsNil(o.ConfigResult.Get()) {
 		var ret HyperflexConfigResultRelationship
 		return ret
 	}
-	return *o.ConfigResult
+	return *o.ConfigResult.Get()
 }
 
 // GetConfigResultOk returns a tuple with the ConfigResult field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetConfigResultOk() (*HyperflexConfigResultRelationship, bool) {
-	if o == nil || o.ConfigResult == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ConfigResult, true
+	return o.ConfigResult.Get(), o.ConfigResult.IsSet()
 }
 
 // HasConfigResult returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasConfigResult() bool {
-	if o != nil && o.ConfigResult != nil {
+	if o != nil && o.ConfigResult.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetConfigResult gets a reference to the given HyperflexConfigResultRelationship and assigns it to the ConfigResult field.
+// SetConfigResult gets a reference to the given NullableHyperflexConfigResultRelationship and assigns it to the ConfigResult field.
 func (o *HyperflexClusterProfile) SetConfigResult(v HyperflexConfigResultRelationship) {
-	o.ConfigResult = &v
+	o.ConfigResult.Set(&v)
 }
 
-// GetExtFcStorage returns the ExtFcStorage field value if set, zero value otherwise.
+// SetConfigResultNil sets the value for ConfigResult to be an explicit nil
+func (o *HyperflexClusterProfile) SetConfigResultNil() {
+	o.ConfigResult.Set(nil)
+}
+
+// UnsetConfigResult ensures that no value is present for ConfigResult, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetConfigResult() {
+	o.ConfigResult.Unset()
+}
+
+// GetExtFcStorage returns the ExtFcStorage field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetExtFcStorage() HyperflexExtFcStoragePolicyRelationship {
-	if o == nil || o.ExtFcStorage == nil {
+	if o == nil || IsNil(o.ExtFcStorage.Get()) {
 		var ret HyperflexExtFcStoragePolicyRelationship
 		return ret
 	}
-	return *o.ExtFcStorage
+	return *o.ExtFcStorage.Get()
 }
 
 // GetExtFcStorageOk returns a tuple with the ExtFcStorage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetExtFcStorageOk() (*HyperflexExtFcStoragePolicyRelationship, bool) {
-	if o == nil || o.ExtFcStorage == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExtFcStorage, true
+	return o.ExtFcStorage.Get(), o.ExtFcStorage.IsSet()
 }
 
 // HasExtFcStorage returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasExtFcStorage() bool {
-	if o != nil && o.ExtFcStorage != nil {
+	if o != nil && o.ExtFcStorage.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExtFcStorage gets a reference to the given HyperflexExtFcStoragePolicyRelationship and assigns it to the ExtFcStorage field.
+// SetExtFcStorage gets a reference to the given NullableHyperflexExtFcStoragePolicyRelationship and assigns it to the ExtFcStorage field.
 func (o *HyperflexClusterProfile) SetExtFcStorage(v HyperflexExtFcStoragePolicyRelationship) {
-	o.ExtFcStorage = &v
+	o.ExtFcStorage.Set(&v)
 }
 
-// GetExtIscsiStorage returns the ExtIscsiStorage field value if set, zero value otherwise.
+// SetExtFcStorageNil sets the value for ExtFcStorage to be an explicit nil
+func (o *HyperflexClusterProfile) SetExtFcStorageNil() {
+	o.ExtFcStorage.Set(nil)
+}
+
+// UnsetExtFcStorage ensures that no value is present for ExtFcStorage, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetExtFcStorage() {
+	o.ExtFcStorage.Unset()
+}
+
+// GetExtIscsiStorage returns the ExtIscsiStorage field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetExtIscsiStorage() HyperflexExtIscsiStoragePolicyRelationship {
-	if o == nil || o.ExtIscsiStorage == nil {
+	if o == nil || IsNil(o.ExtIscsiStorage.Get()) {
 		var ret HyperflexExtIscsiStoragePolicyRelationship
 		return ret
 	}
-	return *o.ExtIscsiStorage
+	return *o.ExtIscsiStorage.Get()
 }
 
 // GetExtIscsiStorageOk returns a tuple with the ExtIscsiStorage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetExtIscsiStorageOk() (*HyperflexExtIscsiStoragePolicyRelationship, bool) {
-	if o == nil || o.ExtIscsiStorage == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExtIscsiStorage, true
+	return o.ExtIscsiStorage.Get(), o.ExtIscsiStorage.IsSet()
 }
 
 // HasExtIscsiStorage returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasExtIscsiStorage() bool {
-	if o != nil && o.ExtIscsiStorage != nil {
+	if o != nil && o.ExtIscsiStorage.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExtIscsiStorage gets a reference to the given HyperflexExtIscsiStoragePolicyRelationship and assigns it to the ExtIscsiStorage field.
+// SetExtIscsiStorage gets a reference to the given NullableHyperflexExtIscsiStoragePolicyRelationship and assigns it to the ExtIscsiStorage field.
 func (o *HyperflexClusterProfile) SetExtIscsiStorage(v HyperflexExtIscsiStoragePolicyRelationship) {
-	o.ExtIscsiStorage = &v
+	o.ExtIscsiStorage.Set(&v)
 }
 
-// GetHttpproxypolicy returns the Httpproxypolicy field value if set, zero value otherwise.
+// SetExtIscsiStorageNil sets the value for ExtIscsiStorage to be an explicit nil
+func (o *HyperflexClusterProfile) SetExtIscsiStorageNil() {
+	o.ExtIscsiStorage.Set(nil)
+}
+
+// UnsetExtIscsiStorage ensures that no value is present for ExtIscsiStorage, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetExtIscsiStorage() {
+	o.ExtIscsiStorage.Unset()
+}
+
+// GetHttpproxypolicy returns the Httpproxypolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetHttpproxypolicy() CommHttpProxyPolicyRelationship {
-	if o == nil || o.Httpproxypolicy == nil {
+	if o == nil || IsNil(o.Httpproxypolicy.Get()) {
 		var ret CommHttpProxyPolicyRelationship
 		return ret
 	}
-	return *o.Httpproxypolicy
+	return *o.Httpproxypolicy.Get()
 }
 
 // GetHttpproxypolicyOk returns a tuple with the Httpproxypolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetHttpproxypolicyOk() (*CommHttpProxyPolicyRelationship, bool) {
-	if o == nil || o.Httpproxypolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Httpproxypolicy, true
+	return o.Httpproxypolicy.Get(), o.Httpproxypolicy.IsSet()
 }
 
 // HasHttpproxypolicy returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasHttpproxypolicy() bool {
-	if o != nil && o.Httpproxypolicy != nil {
+	if o != nil && o.Httpproxypolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHttpproxypolicy gets a reference to the given CommHttpProxyPolicyRelationship and assigns it to the Httpproxypolicy field.
+// SetHttpproxypolicy gets a reference to the given NullableCommHttpProxyPolicyRelationship and assigns it to the Httpproxypolicy field.
 func (o *HyperflexClusterProfile) SetHttpproxypolicy(v CommHttpProxyPolicyRelationship) {
-	o.Httpproxypolicy = &v
+	o.Httpproxypolicy.Set(&v)
 }
 
-// GetLocalCredential returns the LocalCredential field value if set, zero value otherwise.
+// SetHttpproxypolicyNil sets the value for Httpproxypolicy to be an explicit nil
+func (o *HyperflexClusterProfile) SetHttpproxypolicyNil() {
+	o.Httpproxypolicy.Set(nil)
+}
+
+// UnsetHttpproxypolicy ensures that no value is present for Httpproxypolicy, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetHttpproxypolicy() {
+	o.Httpproxypolicy.Unset()
+}
+
+// GetLocalCredential returns the LocalCredential field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetLocalCredential() HyperflexLocalCredentialPolicyRelationship {
-	if o == nil || o.LocalCredential == nil {
+	if o == nil || IsNil(o.LocalCredential.Get()) {
 		var ret HyperflexLocalCredentialPolicyRelationship
 		return ret
 	}
-	return *o.LocalCredential
+	return *o.LocalCredential.Get()
 }
 
 // GetLocalCredentialOk returns a tuple with the LocalCredential field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetLocalCredentialOk() (*HyperflexLocalCredentialPolicyRelationship, bool) {
-	if o == nil || o.LocalCredential == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocalCredential, true
+	return o.LocalCredential.Get(), o.LocalCredential.IsSet()
 }
 
 // HasLocalCredential returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasLocalCredential() bool {
-	if o != nil && o.LocalCredential != nil {
+	if o != nil && o.LocalCredential.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocalCredential gets a reference to the given HyperflexLocalCredentialPolicyRelationship and assigns it to the LocalCredential field.
+// SetLocalCredential gets a reference to the given NullableHyperflexLocalCredentialPolicyRelationship and assigns it to the LocalCredential field.
 func (o *HyperflexClusterProfile) SetLocalCredential(v HyperflexLocalCredentialPolicyRelationship) {
-	o.LocalCredential = &v
+	o.LocalCredential.Set(&v)
 }
 
-// GetNodeConfig returns the NodeConfig field value if set, zero value otherwise.
+// SetLocalCredentialNil sets the value for LocalCredential to be an explicit nil
+func (o *HyperflexClusterProfile) SetLocalCredentialNil() {
+	o.LocalCredential.Set(nil)
+}
+
+// UnsetLocalCredential ensures that no value is present for LocalCredential, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetLocalCredential() {
+	o.LocalCredential.Unset()
+}
+
+// GetNodeConfig returns the NodeConfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetNodeConfig() HyperflexNodeConfigPolicyRelationship {
-	if o == nil || o.NodeConfig == nil {
+	if o == nil || IsNil(o.NodeConfig.Get()) {
 		var ret HyperflexNodeConfigPolicyRelationship
 		return ret
 	}
-	return *o.NodeConfig
+	return *o.NodeConfig.Get()
 }
 
 // GetNodeConfigOk returns a tuple with the NodeConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetNodeConfigOk() (*HyperflexNodeConfigPolicyRelationship, bool) {
-	if o == nil || o.NodeConfig == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NodeConfig, true
+	return o.NodeConfig.Get(), o.NodeConfig.IsSet()
 }
 
 // HasNodeConfig returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasNodeConfig() bool {
-	if o != nil && o.NodeConfig != nil {
+	if o != nil && o.NodeConfig.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNodeConfig gets a reference to the given HyperflexNodeConfigPolicyRelationship and assigns it to the NodeConfig field.
+// SetNodeConfig gets a reference to the given NullableHyperflexNodeConfigPolicyRelationship and assigns it to the NodeConfig field.
 func (o *HyperflexClusterProfile) SetNodeConfig(v HyperflexNodeConfigPolicyRelationship) {
-	o.NodeConfig = &v
+	o.NodeConfig.Set(&v)
+}
+
+// SetNodeConfigNil sets the value for NodeConfig to be an explicit nil
+func (o *HyperflexClusterProfile) SetNodeConfigNil() {
+	o.NodeConfig.Set(nil)
+}
+
+// UnsetNodeConfig ensures that no value is present for NodeConfig, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetNodeConfig() {
+	o.NodeConfig.Unset()
 }
 
 // GetNodeProfileConfig returns the NodeProfileConfig field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1077,7 +1191,7 @@ func (o *HyperflexClusterProfile) GetNodeProfileConfig() []HyperflexNodeProfileR
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetNodeProfileConfigOk() ([]HyperflexNodeProfileRelationship, bool) {
-	if o == nil || o.NodeProfileConfig == nil {
+	if o == nil || IsNil(o.NodeProfileConfig) {
 		return nil, false
 	}
 	return o.NodeProfileConfig, true
@@ -1085,7 +1199,7 @@ func (o *HyperflexClusterProfile) GetNodeProfileConfigOk() ([]HyperflexNodeProfi
 
 // HasNodeProfileConfig returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasNodeProfileConfig() bool {
-	if o != nil && o.NodeProfileConfig != nil {
+	if o != nil && IsNil(o.NodeProfileConfig) {
 		return true
 	}
 
@@ -1097,68 +1211,90 @@ func (o *HyperflexClusterProfile) SetNodeProfileConfig(v []HyperflexNodeProfileR
 	o.NodeProfileConfig = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *HyperflexClusterProfile) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetProxySetting returns the ProxySetting field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *HyperflexClusterProfile) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetProxySetting returns the ProxySetting field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetProxySetting() HyperflexProxySettingPolicyRelationship {
-	if o == nil || o.ProxySetting == nil {
+	if o == nil || IsNil(o.ProxySetting.Get()) {
 		var ret HyperflexProxySettingPolicyRelationship
 		return ret
 	}
-	return *o.ProxySetting
+	return *o.ProxySetting.Get()
 }
 
 // GetProxySettingOk returns a tuple with the ProxySetting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetProxySettingOk() (*HyperflexProxySettingPolicyRelationship, bool) {
-	if o == nil || o.ProxySetting == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProxySetting, true
+	return o.ProxySetting.Get(), o.ProxySetting.IsSet()
 }
 
 // HasProxySetting returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasProxySetting() bool {
-	if o != nil && o.ProxySetting != nil {
+	if o != nil && o.ProxySetting.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProxySetting gets a reference to the given HyperflexProxySettingPolicyRelationship and assigns it to the ProxySetting field.
+// SetProxySetting gets a reference to the given NullableHyperflexProxySettingPolicyRelationship and assigns it to the ProxySetting field.
 func (o *HyperflexClusterProfile) SetProxySetting(v HyperflexProxySettingPolicyRelationship) {
-	o.ProxySetting = &v
+	o.ProxySetting.Set(&v)
+}
+
+// SetProxySettingNil sets the value for ProxySetting to be an explicit nil
+func (o *HyperflexClusterProfile) SetProxySettingNil() {
+	o.ProxySetting.Set(nil)
+}
+
+// UnsetProxySetting ensures that no value is present for ProxySetting, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetProxySetting() {
+	o.ProxySetting.Unset()
 }
 
 // GetRunningWorkflows returns the RunningWorkflows field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1174,7 +1310,7 @@ func (o *HyperflexClusterProfile) GetRunningWorkflows() []WorkflowWorkflowInfoRe
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetRunningWorkflowsOk() ([]WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.RunningWorkflows == nil {
+	if o == nil || IsNil(o.RunningWorkflows) {
 		return nil, false
 	}
 	return o.RunningWorkflows, true
@@ -1182,7 +1318,7 @@ func (o *HyperflexClusterProfile) GetRunningWorkflowsOk() ([]WorkflowWorkflowInf
 
 // HasRunningWorkflows returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasRunningWorkflows() bool {
-	if o != nil && o.RunningWorkflows != nil {
+	if o != nil && IsNil(o.RunningWorkflows) {
 		return true
 	}
 
@@ -1194,264 +1330,334 @@ func (o *HyperflexClusterProfile) SetRunningWorkflows(v []WorkflowWorkflowInfoRe
 	o.RunningWorkflows = v
 }
 
-// GetSoftwareVersion returns the SoftwareVersion field value if set, zero value otherwise.
+// GetSoftwareVersion returns the SoftwareVersion field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetSoftwareVersion() HyperflexSoftwareVersionPolicyRelationship {
-	if o == nil || o.SoftwareVersion == nil {
+	if o == nil || IsNil(o.SoftwareVersion.Get()) {
 		var ret HyperflexSoftwareVersionPolicyRelationship
 		return ret
 	}
-	return *o.SoftwareVersion
+	return *o.SoftwareVersion.Get()
 }
 
 // GetSoftwareVersionOk returns a tuple with the SoftwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetSoftwareVersionOk() (*HyperflexSoftwareVersionPolicyRelationship, bool) {
-	if o == nil || o.SoftwareVersion == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SoftwareVersion, true
+	return o.SoftwareVersion.Get(), o.SoftwareVersion.IsSet()
 }
 
 // HasSoftwareVersion returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasSoftwareVersion() bool {
-	if o != nil && o.SoftwareVersion != nil {
+	if o != nil && o.SoftwareVersion.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSoftwareVersion gets a reference to the given HyperflexSoftwareVersionPolicyRelationship and assigns it to the SoftwareVersion field.
+// SetSoftwareVersion gets a reference to the given NullableHyperflexSoftwareVersionPolicyRelationship and assigns it to the SoftwareVersion field.
 func (o *HyperflexClusterProfile) SetSoftwareVersion(v HyperflexSoftwareVersionPolicyRelationship) {
-	o.SoftwareVersion = &v
+	o.SoftwareVersion.Set(&v)
 }
 
-// GetSysConfig returns the SysConfig field value if set, zero value otherwise.
+// SetSoftwareVersionNil sets the value for SoftwareVersion to be an explicit nil
+func (o *HyperflexClusterProfile) SetSoftwareVersionNil() {
+	o.SoftwareVersion.Set(nil)
+}
+
+// UnsetSoftwareVersion ensures that no value is present for SoftwareVersion, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetSoftwareVersion() {
+	o.SoftwareVersion.Unset()
+}
+
+// GetSysConfig returns the SysConfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetSysConfig() HyperflexSysConfigPolicyRelationship {
-	if o == nil || o.SysConfig == nil {
+	if o == nil || IsNil(o.SysConfig.Get()) {
 		var ret HyperflexSysConfigPolicyRelationship
 		return ret
 	}
-	return *o.SysConfig
+	return *o.SysConfig.Get()
 }
 
 // GetSysConfigOk returns a tuple with the SysConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetSysConfigOk() (*HyperflexSysConfigPolicyRelationship, bool) {
-	if o == nil || o.SysConfig == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SysConfig, true
+	return o.SysConfig.Get(), o.SysConfig.IsSet()
 }
 
 // HasSysConfig returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasSysConfig() bool {
-	if o != nil && o.SysConfig != nil {
+	if o != nil && o.SysConfig.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSysConfig gets a reference to the given HyperflexSysConfigPolicyRelationship and assigns it to the SysConfig field.
+// SetSysConfig gets a reference to the given NullableHyperflexSysConfigPolicyRelationship and assigns it to the SysConfig field.
 func (o *HyperflexClusterProfile) SetSysConfig(v HyperflexSysConfigPolicyRelationship) {
-	o.SysConfig = &v
+	o.SysConfig.Set(&v)
 }
 
-// GetUcsmConfig returns the UcsmConfig field value if set, zero value otherwise.
+// SetSysConfigNil sets the value for SysConfig to be an explicit nil
+func (o *HyperflexClusterProfile) SetSysConfigNil() {
+	o.SysConfig.Set(nil)
+}
+
+// UnsetSysConfig ensures that no value is present for SysConfig, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetSysConfig() {
+	o.SysConfig.Unset()
+}
+
+// GetUcsmConfig returns the UcsmConfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetUcsmConfig() HyperflexUcsmConfigPolicyRelationship {
-	if o == nil || o.UcsmConfig == nil {
+	if o == nil || IsNil(o.UcsmConfig.Get()) {
 		var ret HyperflexUcsmConfigPolicyRelationship
 		return ret
 	}
-	return *o.UcsmConfig
+	return *o.UcsmConfig.Get()
 }
 
 // GetUcsmConfigOk returns a tuple with the UcsmConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetUcsmConfigOk() (*HyperflexUcsmConfigPolicyRelationship, bool) {
-	if o == nil || o.UcsmConfig == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.UcsmConfig, true
+	return o.UcsmConfig.Get(), o.UcsmConfig.IsSet()
 }
 
 // HasUcsmConfig returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasUcsmConfig() bool {
-	if o != nil && o.UcsmConfig != nil {
+	if o != nil && o.UcsmConfig.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUcsmConfig gets a reference to the given HyperflexUcsmConfigPolicyRelationship and assigns it to the UcsmConfig field.
+// SetUcsmConfig gets a reference to the given NullableHyperflexUcsmConfigPolicyRelationship and assigns it to the UcsmConfig field.
 func (o *HyperflexClusterProfile) SetUcsmConfig(v HyperflexUcsmConfigPolicyRelationship) {
-	o.UcsmConfig = &v
+	o.UcsmConfig.Set(&v)
 }
 
-// GetVcenterConfig returns the VcenterConfig field value if set, zero value otherwise.
+// SetUcsmConfigNil sets the value for UcsmConfig to be an explicit nil
+func (o *HyperflexClusterProfile) SetUcsmConfigNil() {
+	o.UcsmConfig.Set(nil)
+}
+
+// UnsetUcsmConfig ensures that no value is present for UcsmConfig, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetUcsmConfig() {
+	o.UcsmConfig.Unset()
+}
+
+// GetVcenterConfig returns the VcenterConfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterProfile) GetVcenterConfig() HyperflexVcenterConfigPolicyRelationship {
-	if o == nil || o.VcenterConfig == nil {
+	if o == nil || IsNil(o.VcenterConfig.Get()) {
 		var ret HyperflexVcenterConfigPolicyRelationship
 		return ret
 	}
-	return *o.VcenterConfig
+	return *o.VcenterConfig.Get()
 }
 
 // GetVcenterConfigOk returns a tuple with the VcenterConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexClusterProfile) GetVcenterConfigOk() (*HyperflexVcenterConfigPolicyRelationship, bool) {
-	if o == nil || o.VcenterConfig == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VcenterConfig, true
+	return o.VcenterConfig.Get(), o.VcenterConfig.IsSet()
 }
 
 // HasVcenterConfig returns a boolean if a field has been set.
 func (o *HyperflexClusterProfile) HasVcenterConfig() bool {
-	if o != nil && o.VcenterConfig != nil {
+	if o != nil && o.VcenterConfig.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVcenterConfig gets a reference to the given HyperflexVcenterConfigPolicyRelationship and assigns it to the VcenterConfig field.
+// SetVcenterConfig gets a reference to the given NullableHyperflexVcenterConfigPolicyRelationship and assigns it to the VcenterConfig field.
 func (o *HyperflexClusterProfile) SetVcenterConfig(v HyperflexVcenterConfigPolicyRelationship) {
-	o.VcenterConfig = &v
+	o.VcenterConfig.Set(&v)
+}
+
+// SetVcenterConfigNil sets the value for VcenterConfig to be an explicit nil
+func (o *HyperflexClusterProfile) SetVcenterConfigNil() {
+	o.VcenterConfig.Set(nil)
+}
+
+// UnsetVcenterConfig ensures that no value is present for VcenterConfig, not even an explicit nil
+func (o *HyperflexClusterProfile) UnsetVcenterConfig() {
+	o.VcenterConfig.Unset()
 }
 
 func (o HyperflexClusterProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexClusterProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractConfigProfile, errPolicyAbstractConfigProfile := json.Marshal(o.PolicyAbstractConfigProfile)
 	if errPolicyAbstractConfigProfile != nil {
-		return []byte{}, errPolicyAbstractConfigProfile
+		return map[string]interface{}{}, errPolicyAbstractConfigProfile
 	}
 	errPolicyAbstractConfigProfile = json.Unmarshal([]byte(serializedPolicyAbstractConfigProfile), &toSerialize)
 	if errPolicyAbstractConfigProfile != nil {
-		return []byte{}, errPolicyAbstractConfigProfile
+		return map[string]interface{}{}, errPolicyAbstractConfigProfile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ClusterInternalSubnet.IsSet() {
 		toSerialize["ClusterInternalSubnet"] = o.ClusterInternalSubnet.Get()
 	}
-	if o.DataIpAddress != nil {
+	if !IsNil(o.DataIpAddress) {
 		toSerialize["DataIpAddress"] = o.DataIpAddress
 	}
-	if o.HostNamePrefix != nil {
+	if !IsNil(o.HostNamePrefix) {
 		toSerialize["HostNamePrefix"] = o.HostNamePrefix
 	}
-	if o.HypervisorControlIpAddress != nil {
+	if !IsNil(o.HypervisorControlIpAddress) {
 		toSerialize["HypervisorControlIpAddress"] = o.HypervisorControlIpAddress
 	}
-	if o.HypervisorType != nil {
+	if !IsNil(o.HypervisorType) {
 		toSerialize["HypervisorType"] = o.HypervisorType
 	}
-	if o.IsNicBased != nil {
+	if !IsNil(o.IsNicBased) {
 		toSerialize["IsNicBased"] = o.IsNicBased
 	}
-	if o.MacAddressPrefix != nil {
+	if !IsNil(o.MacAddressPrefix) {
 		toSerialize["MacAddressPrefix"] = o.MacAddressPrefix
 	}
-	if o.MgmtIpAddress != nil {
+	if !IsNil(o.MgmtIpAddress) {
 		toSerialize["MgmtIpAddress"] = o.MgmtIpAddress
 	}
-	if o.MgmtPlatform != nil {
+	if !IsNil(o.MgmtPlatform) {
 		toSerialize["MgmtPlatform"] = o.MgmtPlatform
 	}
-	if o.Replication != nil {
+	if !IsNil(o.Replication) {
 		toSerialize["Replication"] = o.Replication
 	}
-	if o.StorageClientIpAddress != nil {
+	if !IsNil(o.StorageClientIpAddress) {
 		toSerialize["StorageClientIpAddress"] = o.StorageClientIpAddress
 	}
-	if o.StorageClientNetmask != nil {
+	if !IsNil(o.StorageClientNetmask) {
 		toSerialize["StorageClientNetmask"] = o.StorageClientNetmask
 	}
 	if o.StorageClientVlan.IsSet() {
 		toSerialize["StorageClientVlan"] = o.StorageClientVlan.Get()
 	}
-	if o.StorageClusterAuxiliaryIp != nil {
+	if !IsNil(o.StorageClusterAuxiliaryIp) {
 		toSerialize["StorageClusterAuxiliaryIp"] = o.StorageClusterAuxiliaryIp
 	}
 	if o.StorageDataVlan.IsSet() {
 		toSerialize["StorageDataVlan"] = o.StorageDataVlan.Get()
 	}
-	if o.StorageType != nil {
+	if !IsNil(o.StorageType) {
 		toSerialize["StorageType"] = o.StorageType
 	}
-	if o.WwxnPrefix != nil {
+	if !IsNil(o.WwxnPrefix) {
 		toSerialize["WwxnPrefix"] = o.WwxnPrefix
 	}
-	if o.AssociatedCluster != nil {
-		toSerialize["AssociatedCluster"] = o.AssociatedCluster
+	if o.AssociatedCluster.IsSet() {
+		toSerialize["AssociatedCluster"] = o.AssociatedCluster.Get()
 	}
-	if o.AutoSupport != nil {
-		toSerialize["AutoSupport"] = o.AutoSupport
+	if o.AutoSupport.IsSet() {
+		toSerialize["AutoSupport"] = o.AutoSupport.Get()
 	}
-	if o.ClusterNetwork != nil {
-		toSerialize["ClusterNetwork"] = o.ClusterNetwork
+	if o.ClusterNetwork.IsSet() {
+		toSerialize["ClusterNetwork"] = o.ClusterNetwork.Get()
 	}
-	if o.ClusterStorage != nil {
-		toSerialize["ClusterStorage"] = o.ClusterStorage
+	if o.ClusterStorage.IsSet() {
+		toSerialize["ClusterStorage"] = o.ClusterStorage.Get()
 	}
-	if o.ConfigResult != nil {
-		toSerialize["ConfigResult"] = o.ConfigResult
+	if o.ConfigResult.IsSet() {
+		toSerialize["ConfigResult"] = o.ConfigResult.Get()
 	}
-	if o.ExtFcStorage != nil {
-		toSerialize["ExtFcStorage"] = o.ExtFcStorage
+	if o.ExtFcStorage.IsSet() {
+		toSerialize["ExtFcStorage"] = o.ExtFcStorage.Get()
 	}
-	if o.ExtIscsiStorage != nil {
-		toSerialize["ExtIscsiStorage"] = o.ExtIscsiStorage
+	if o.ExtIscsiStorage.IsSet() {
+		toSerialize["ExtIscsiStorage"] = o.ExtIscsiStorage.Get()
 	}
-	if o.Httpproxypolicy != nil {
-		toSerialize["Httpproxypolicy"] = o.Httpproxypolicy
+	if o.Httpproxypolicy.IsSet() {
+		toSerialize["Httpproxypolicy"] = o.Httpproxypolicy.Get()
 	}
-	if o.LocalCredential != nil {
-		toSerialize["LocalCredential"] = o.LocalCredential
+	if o.LocalCredential.IsSet() {
+		toSerialize["LocalCredential"] = o.LocalCredential.Get()
 	}
-	if o.NodeConfig != nil {
-		toSerialize["NodeConfig"] = o.NodeConfig
+	if o.NodeConfig.IsSet() {
+		toSerialize["NodeConfig"] = o.NodeConfig.Get()
 	}
 	if o.NodeProfileConfig != nil {
 		toSerialize["NodeProfileConfig"] = o.NodeProfileConfig
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.ProxySetting != nil {
-		toSerialize["ProxySetting"] = o.ProxySetting
+	if o.ProxySetting.IsSet() {
+		toSerialize["ProxySetting"] = o.ProxySetting.Get()
 	}
 	if o.RunningWorkflows != nil {
 		toSerialize["RunningWorkflows"] = o.RunningWorkflows
 	}
-	if o.SoftwareVersion != nil {
-		toSerialize["SoftwareVersion"] = o.SoftwareVersion
+	if o.SoftwareVersion.IsSet() {
+		toSerialize["SoftwareVersion"] = o.SoftwareVersion.Get()
 	}
-	if o.SysConfig != nil {
-		toSerialize["SysConfig"] = o.SysConfig
+	if o.SysConfig.IsSet() {
+		toSerialize["SysConfig"] = o.SysConfig.Get()
 	}
-	if o.UcsmConfig != nil {
-		toSerialize["UcsmConfig"] = o.UcsmConfig
+	if o.UcsmConfig.IsSet() {
+		toSerialize["UcsmConfig"] = o.UcsmConfig.Get()
 	}
-	if o.VcenterConfig != nil {
-		toSerialize["VcenterConfig"] = o.VcenterConfig
+	if o.VcenterConfig.IsSet() {
+		toSerialize["VcenterConfig"] = o.VcenterConfig.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexClusterProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexClusterProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1487,32 +1693,32 @@ func (o *HyperflexClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party). * `HyperFlexDp` - The type of storage is HyperFlex Data Platform. * `ThirdParty` - The type of storage is 3rd Party Storage (PureStorage, etc..).
 		StorageType *string `json:"StorageType,omitempty"`
 		// The WWxN prefix in the form of 20:00:00:25:B5:XX.
-		WwxnPrefix        *string                                     `json:"WwxnPrefix,omitempty"`
-		AssociatedCluster *HyperflexClusterRelationship               `json:"AssociatedCluster,omitempty"`
-		AutoSupport       *HyperflexAutoSupportPolicyRelationship     `json:"AutoSupport,omitempty"`
-		ClusterNetwork    *HyperflexClusterNetworkPolicyRelationship  `json:"ClusterNetwork,omitempty"`
-		ClusterStorage    *HyperflexClusterStoragePolicyRelationship  `json:"ClusterStorage,omitempty"`
-		ConfigResult      *HyperflexConfigResultRelationship          `json:"ConfigResult,omitempty"`
-		ExtFcStorage      *HyperflexExtFcStoragePolicyRelationship    `json:"ExtFcStorage,omitempty"`
-		ExtIscsiStorage   *HyperflexExtIscsiStoragePolicyRelationship `json:"ExtIscsiStorage,omitempty"`
-		Httpproxypolicy   *CommHttpProxyPolicyRelationship            `json:"Httpproxypolicy,omitempty"`
-		LocalCredential   *HyperflexLocalCredentialPolicyRelationship `json:"LocalCredential,omitempty"`
-		NodeConfig        *HyperflexNodeConfigPolicyRelationship      `json:"NodeConfig,omitempty"`
+		WwxnPrefix        *string                                            `json:"WwxnPrefix,omitempty"`
+		AssociatedCluster NullableHyperflexClusterRelationship               `json:"AssociatedCluster,omitempty"`
+		AutoSupport       NullableHyperflexAutoSupportPolicyRelationship     `json:"AutoSupport,omitempty"`
+		ClusterNetwork    NullableHyperflexClusterNetworkPolicyRelationship  `json:"ClusterNetwork,omitempty"`
+		ClusterStorage    NullableHyperflexClusterStoragePolicyRelationship  `json:"ClusterStorage,omitempty"`
+		ConfigResult      NullableHyperflexConfigResultRelationship          `json:"ConfigResult,omitempty"`
+		ExtFcStorage      NullableHyperflexExtFcStoragePolicyRelationship    `json:"ExtFcStorage,omitempty"`
+		ExtIscsiStorage   NullableHyperflexExtIscsiStoragePolicyRelationship `json:"ExtIscsiStorage,omitempty"`
+		Httpproxypolicy   NullableCommHttpProxyPolicyRelationship            `json:"Httpproxypolicy,omitempty"`
+		LocalCredential   NullableHyperflexLocalCredentialPolicyRelationship `json:"LocalCredential,omitempty"`
+		NodeConfig        NullableHyperflexNodeConfigPolicyRelationship      `json:"NodeConfig,omitempty"`
 		// An array of relationships to hyperflexNodeProfile resources.
-		NodeProfileConfig []HyperflexNodeProfileRelationship       `json:"NodeProfileConfig,omitempty"`
-		Organization      *OrganizationOrganizationRelationship    `json:"Organization,omitempty"`
-		ProxySetting      *HyperflexProxySettingPolicyRelationship `json:"ProxySetting,omitempty"`
+		NodeProfileConfig []HyperflexNodeProfileRelationship              `json:"NodeProfileConfig,omitempty"`
+		Organization      NullableOrganizationOrganizationRelationship    `json:"Organization,omitempty"`
+		ProxySetting      NullableHyperflexProxySettingPolicyRelationship `json:"ProxySetting,omitempty"`
 		// An array of relationships to workflowWorkflowInfo resources.
-		RunningWorkflows []WorkflowWorkflowInfoRelationship          `json:"RunningWorkflows,omitempty"`
-		SoftwareVersion  *HyperflexSoftwareVersionPolicyRelationship `json:"SoftwareVersion,omitempty"`
-		SysConfig        *HyperflexSysConfigPolicyRelationship       `json:"SysConfig,omitempty"`
-		UcsmConfig       *HyperflexUcsmConfigPolicyRelationship      `json:"UcsmConfig,omitempty"`
-		VcenterConfig    *HyperflexVcenterConfigPolicyRelationship   `json:"VcenterConfig,omitempty"`
+		RunningWorkflows []WorkflowWorkflowInfoRelationship                 `json:"RunningWorkflows,omitempty"`
+		SoftwareVersion  NullableHyperflexSoftwareVersionPolicyRelationship `json:"SoftwareVersion,omitempty"`
+		SysConfig        NullableHyperflexSysConfigPolicyRelationship       `json:"SysConfig,omitempty"`
+		UcsmConfig       NullableHyperflexUcsmConfigPolicyRelationship      `json:"UcsmConfig,omitempty"`
+		VcenterConfig    NullableHyperflexVcenterConfigPolicyRelationship   `json:"VcenterConfig,omitempty"`
 	}
 
 	varHyperflexClusterProfileWithoutEmbeddedStruct := HyperflexClusterProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexClusterProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexClusterProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexClusterProfile := _HyperflexClusterProfile{}
 		varHyperflexClusterProfile.ClassId = varHyperflexClusterProfileWithoutEmbeddedStruct.ClassId
@@ -1559,7 +1765,7 @@ func (o *HyperflexClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexClusterProfile := _HyperflexClusterProfile{}
 
-	err = json.Unmarshal(bytes, &varHyperflexClusterProfile)
+	err = json.Unmarshal(data, &varHyperflexClusterProfile)
 	if err == nil {
 		o.PolicyAbstractConfigProfile = varHyperflexClusterProfile.PolicyAbstractConfigProfile
 	} else {
@@ -1568,7 +1774,7 @@ func (o *HyperflexClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterInternalSubnet")

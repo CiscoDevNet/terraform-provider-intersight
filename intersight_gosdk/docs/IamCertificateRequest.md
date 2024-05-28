@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **SelfSigned** | Pointer to **bool** | Whether the user wants the generated CSR to be self-signed by the appliance. | [optional] 
 **Subject** | Pointer to [**NullablePkixDistinguishedName**](PkixDistinguishedName.md) |  | [optional] 
 **SubjectAlternateName** | Pointer to [**NullablePkixSubjectAlternateName**](PkixSubjectAlternateName.md) |  | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**Certificate** | Pointer to [**IamCertificateRelationship**](IamCertificateRelationship.md) |  | [optional] 
-**PrivateKeySpec** | Pointer to [**IamPrivateKeySpecRelationship**](IamPrivateKeySpecRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Certificate** | Pointer to [**NullableIamCertificateRelationship**](IamCertificateRelationship.md) |  | [optional] 
+**PrivateKeySpec** | Pointer to [**NullableIamPrivateKeySpecRelationship**](IamPrivateKeySpecRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -270,6 +270,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *IamCertificateRequest) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *IamCertificateRequest) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetCertificate
 
 `func (o *IamCertificateRequest) GetCertificate() IamCertificateRelationship`
@@ -295,6 +305,16 @@ SetCertificate sets Certificate field to given value.
 
 HasCertificate returns a boolean if a field has been set.
 
+### SetCertificateNil
+
+`func (o *IamCertificateRequest) SetCertificateNil(b bool)`
+
+ SetCertificateNil sets the value for Certificate to be an explicit nil
+
+### UnsetCertificate
+`func (o *IamCertificateRequest) UnsetCertificate()`
+
+UnsetCertificate ensures that no value is present for Certificate, not even an explicit nil
 ### GetPrivateKeySpec
 
 `func (o *IamCertificateRequest) GetPrivateKeySpec() IamPrivateKeySpecRelationship`
@@ -320,6 +340,16 @@ SetPrivateKeySpec sets PrivateKeySpec field to given value.
 
 HasPrivateKeySpec returns a boolean if a field has been set.
 
+### SetPrivateKeySpecNil
+
+`func (o *IamCertificateRequest) SetPrivateKeySpecNil(b bool)`
+
+ SetPrivateKeySpecNil sets the value for PrivateKeySpec to be an explicit nil
+
+### UnsetPrivateKeySpec
+`func (o *IamCertificateRequest) UnsetPrivateKeySpec()`
+
+UnsetPrivateKeySpec ensures that no value is present for PrivateKeySpec, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

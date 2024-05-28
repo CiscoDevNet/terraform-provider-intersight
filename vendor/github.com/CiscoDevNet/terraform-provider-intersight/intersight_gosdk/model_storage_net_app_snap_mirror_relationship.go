@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppSnapMirrorRelationship type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppSnapMirrorRelationship{}
 
 // StorageNetAppSnapMirrorRelationship NetApp SnapMirror relationship.
 type StorageNetAppSnapMirrorRelationship struct {
@@ -41,10 +45,10 @@ type StorageNetAppSnapMirrorRelationship struct {
 	// State of the relationship.
 	State *string `json:"State,omitempty"`
 	// Uuid of the NetApp SnapMirror relationship.
-	Uuid                 *string                                        `json:"Uuid,omitempty"`
-	Array                *StorageNetAppClusterRelationship              `json:"Array,omitempty"`
-	DestinationTenant    *StorageNetAppStorageVmRelationship            `json:"DestinationTenant,omitempty"`
-	Policy               *StorageNetAppBaseSnapMirrorPolicyRelationship `json:"Policy,omitempty"`
+	Uuid                 *string                                               `json:"Uuid,omitempty"`
+	Array                NullableStorageNetAppClusterRelationship              `json:"Array,omitempty"`
+	DestinationTenant    NullableStorageNetAppStorageVmRelationship            `json:"DestinationTenant,omitempty"`
+	Policy               NullableStorageNetAppBaseSnapMirrorPolicyRelationship `json:"Policy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -123,7 +127,7 @@ func (o *StorageNetAppSnapMirrorRelationship) SetObjectType(v string) {
 
 // GetDestinationPath returns the DestinationPath field value if set, zero value otherwise.
 func (o *StorageNetAppSnapMirrorRelationship) GetDestinationPath() string {
-	if o == nil || o.DestinationPath == nil {
+	if o == nil || IsNil(o.DestinationPath) {
 		var ret string
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetDestinationPath() string {
 // GetDestinationPathOk returns a tuple with the DestinationPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppSnapMirrorRelationship) GetDestinationPathOk() (*string, bool) {
-	if o == nil || o.DestinationPath == nil {
+	if o == nil || IsNil(o.DestinationPath) {
 		return nil, false
 	}
 	return o.DestinationPath, true
@@ -141,7 +145,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetDestinationPathOk() (*string, b
 
 // HasDestinationPath returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasDestinationPath() bool {
-	if o != nil && o.DestinationPath != nil {
+	if o != nil && !IsNil(o.DestinationPath) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *StorageNetAppSnapMirrorRelationship) SetDestinationPath(v string) {
 
 // GetHealthy returns the Healthy field value if set, zero value otherwise.
 func (o *StorageNetAppSnapMirrorRelationship) GetHealthy() string {
-	if o == nil || o.Healthy == nil {
+	if o == nil || IsNil(o.Healthy) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetHealthy() string {
 // GetHealthyOk returns a tuple with the Healthy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppSnapMirrorRelationship) GetHealthyOk() (*string, bool) {
-	if o == nil || o.Healthy == nil {
+	if o == nil || IsNil(o.Healthy) {
 		return nil, false
 	}
 	return o.Healthy, true
@@ -173,7 +177,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetHealthyOk() (*string, bool) {
 
 // HasHealthy returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasHealthy() bool {
-	if o != nil && o.Healthy != nil {
+	if o != nil && !IsNil(o.Healthy) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *StorageNetAppSnapMirrorRelationship) SetHealthy(v string) {
 
 // GetLagTime returns the LagTime field value if set, zero value otherwise.
 func (o *StorageNetAppSnapMirrorRelationship) GetLagTime() string {
-	if o == nil || o.LagTime == nil {
+	if o == nil || IsNil(o.LagTime) {
 		var ret string
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetLagTime() string {
 // GetLagTimeOk returns a tuple with the LagTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppSnapMirrorRelationship) GetLagTimeOk() (*string, bool) {
-	if o == nil || o.LagTime == nil {
+	if o == nil || IsNil(o.LagTime) {
 		return nil, false
 	}
 	return o.LagTime, true
@@ -205,7 +209,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetLagTimeOk() (*string, bool) {
 
 // HasLagTime returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasLagTime() bool {
-	if o != nil && o.LagTime != nil {
+	if o != nil && !IsNil(o.LagTime) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *StorageNetAppSnapMirrorRelationship) SetLagTime(v string) {
 
 // GetPolicyName returns the PolicyName field value if set, zero value otherwise.
 func (o *StorageNetAppSnapMirrorRelationship) GetPolicyName() string {
-	if o == nil || o.PolicyName == nil {
+	if o == nil || IsNil(o.PolicyName) {
 		var ret string
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetPolicyName() string {
 // GetPolicyNameOk returns a tuple with the PolicyName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppSnapMirrorRelationship) GetPolicyNameOk() (*string, bool) {
-	if o == nil || o.PolicyName == nil {
+	if o == nil || IsNil(o.PolicyName) {
 		return nil, false
 	}
 	return o.PolicyName, true
@@ -237,7 +241,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetPolicyNameOk() (*string, bool) 
 
 // HasPolicyName returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasPolicyName() bool {
-	if o != nil && o.PolicyName != nil {
+	if o != nil && !IsNil(o.PolicyName) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *StorageNetAppSnapMirrorRelationship) SetPolicyName(v string) {
 
 // GetPolicyType returns the PolicyType field value if set, zero value otherwise.
 func (o *StorageNetAppSnapMirrorRelationship) GetPolicyType() string {
-	if o == nil || o.PolicyType == nil {
+	if o == nil || IsNil(o.PolicyType) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetPolicyType() string {
 // GetPolicyTypeOk returns a tuple with the PolicyType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppSnapMirrorRelationship) GetPolicyTypeOk() (*string, bool) {
-	if o == nil || o.PolicyType == nil {
+	if o == nil || IsNil(o.PolicyType) {
 		return nil, false
 	}
 	return o.PolicyType, true
@@ -269,7 +273,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetPolicyTypeOk() (*string, bool) 
 
 // HasPolicyType returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasPolicyType() bool {
-	if o != nil && o.PolicyType != nil {
+	if o != nil && !IsNil(o.PolicyType) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *StorageNetAppSnapMirrorRelationship) SetPolicyType(v string) {
 
 // GetPolicyUuid returns the PolicyUuid field value if set, zero value otherwise.
 func (o *StorageNetAppSnapMirrorRelationship) GetPolicyUuid() string {
-	if o == nil || o.PolicyUuid == nil {
+	if o == nil || IsNil(o.PolicyUuid) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetPolicyUuid() string {
 // GetPolicyUuidOk returns a tuple with the PolicyUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppSnapMirrorRelationship) GetPolicyUuidOk() (*string, bool) {
-	if o == nil || o.PolicyUuid == nil {
+	if o == nil || IsNil(o.PolicyUuid) {
 		return nil, false
 	}
 	return o.PolicyUuid, true
@@ -301,7 +305,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetPolicyUuidOk() (*string, bool) 
 
 // HasPolicyUuid returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasPolicyUuid() bool {
-	if o != nil && o.PolicyUuid != nil {
+	if o != nil && !IsNil(o.PolicyUuid) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *StorageNetAppSnapMirrorRelationship) SetPolicyUuid(v string) {
 
 // GetSourcePath returns the SourcePath field value if set, zero value otherwise.
 func (o *StorageNetAppSnapMirrorRelationship) GetSourcePath() string {
-	if o == nil || o.SourcePath == nil {
+	if o == nil || IsNil(o.SourcePath) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetSourcePath() string {
 // GetSourcePathOk returns a tuple with the SourcePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppSnapMirrorRelationship) GetSourcePathOk() (*string, bool) {
-	if o == nil || o.SourcePath == nil {
+	if o == nil || IsNil(o.SourcePath) {
 		return nil, false
 	}
 	return o.SourcePath, true
@@ -333,7 +337,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetSourcePathOk() (*string, bool) 
 
 // HasSourcePath returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasSourcePath() bool {
-	if o != nil && o.SourcePath != nil {
+	if o != nil && !IsNil(o.SourcePath) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *StorageNetAppSnapMirrorRelationship) SetSourcePath(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *StorageNetAppSnapMirrorRelationship) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppSnapMirrorRelationship) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -365,7 +369,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *StorageNetAppSnapMirrorRelationship) SetState(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *StorageNetAppSnapMirrorRelationship) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -389,7 +393,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppSnapMirrorRelationship) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -397,7 +401,7 @@ func (o *StorageNetAppSnapMirrorRelationship) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -409,163 +413,222 @@ func (o *StorageNetAppSnapMirrorRelationship) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppSnapMirrorRelationship) GetArray() StorageNetAppClusterRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageNetAppClusterRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppSnapMirrorRelationship) GetArrayOk() (*StorageNetAppClusterRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageNetAppClusterRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageNetAppClusterRelationship and assigns it to the Array field.
 func (o *StorageNetAppSnapMirrorRelationship) SetArray(v StorageNetAppClusterRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetDestinationTenant returns the DestinationTenant field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageNetAppSnapMirrorRelationship) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageNetAppSnapMirrorRelationship) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetDestinationTenant returns the DestinationTenant field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppSnapMirrorRelationship) GetDestinationTenant() StorageNetAppStorageVmRelationship {
-	if o == nil || o.DestinationTenant == nil {
+	if o == nil || IsNil(o.DestinationTenant.Get()) {
 		var ret StorageNetAppStorageVmRelationship
 		return ret
 	}
-	return *o.DestinationTenant
+	return *o.DestinationTenant.Get()
 }
 
 // GetDestinationTenantOk returns a tuple with the DestinationTenant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppSnapMirrorRelationship) GetDestinationTenantOk() (*StorageNetAppStorageVmRelationship, bool) {
-	if o == nil || o.DestinationTenant == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DestinationTenant, true
+	return o.DestinationTenant.Get(), o.DestinationTenant.IsSet()
 }
 
 // HasDestinationTenant returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasDestinationTenant() bool {
-	if o != nil && o.DestinationTenant != nil {
+	if o != nil && o.DestinationTenant.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDestinationTenant gets a reference to the given StorageNetAppStorageVmRelationship and assigns it to the DestinationTenant field.
+// SetDestinationTenant gets a reference to the given NullableStorageNetAppStorageVmRelationship and assigns it to the DestinationTenant field.
 func (o *StorageNetAppSnapMirrorRelationship) SetDestinationTenant(v StorageNetAppStorageVmRelationship) {
-	o.DestinationTenant = &v
+	o.DestinationTenant.Set(&v)
 }
 
-// GetPolicy returns the Policy field value if set, zero value otherwise.
+// SetDestinationTenantNil sets the value for DestinationTenant to be an explicit nil
+func (o *StorageNetAppSnapMirrorRelationship) SetDestinationTenantNil() {
+	o.DestinationTenant.Set(nil)
+}
+
+// UnsetDestinationTenant ensures that no value is present for DestinationTenant, not even an explicit nil
+func (o *StorageNetAppSnapMirrorRelationship) UnsetDestinationTenant() {
+	o.DestinationTenant.Unset()
+}
+
+// GetPolicy returns the Policy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppSnapMirrorRelationship) GetPolicy() StorageNetAppBaseSnapMirrorPolicyRelationship {
-	if o == nil || o.Policy == nil {
+	if o == nil || IsNil(o.Policy.Get()) {
 		var ret StorageNetAppBaseSnapMirrorPolicyRelationship
 		return ret
 	}
-	return *o.Policy
+	return *o.Policy.Get()
 }
 
 // GetPolicyOk returns a tuple with the Policy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppSnapMirrorRelationship) GetPolicyOk() (*StorageNetAppBaseSnapMirrorPolicyRelationship, bool) {
-	if o == nil || o.Policy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Policy, true
+	return o.Policy.Get(), o.Policy.IsSet()
 }
 
 // HasPolicy returns a boolean if a field has been set.
 func (o *StorageNetAppSnapMirrorRelationship) HasPolicy() bool {
-	if o != nil && o.Policy != nil {
+	if o != nil && o.Policy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPolicy gets a reference to the given StorageNetAppBaseSnapMirrorPolicyRelationship and assigns it to the Policy field.
+// SetPolicy gets a reference to the given NullableStorageNetAppBaseSnapMirrorPolicyRelationship and assigns it to the Policy field.
 func (o *StorageNetAppSnapMirrorRelationship) SetPolicy(v StorageNetAppBaseSnapMirrorPolicyRelationship) {
-	o.Policy = &v
+	o.Policy.Set(&v)
+}
+
+// SetPolicyNil sets the value for Policy to be an explicit nil
+func (o *StorageNetAppSnapMirrorRelationship) SetPolicyNil() {
+	o.Policy.Set(nil)
+}
+
+// UnsetPolicy ensures that no value is present for Policy, not even an explicit nil
+func (o *StorageNetAppSnapMirrorRelationship) UnsetPolicy() {
+	o.Policy.Unset()
 }
 
 func (o StorageNetAppSnapMirrorRelationship) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppSnapMirrorRelationship) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DestinationPath != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DestinationPath) {
 		toSerialize["DestinationPath"] = o.DestinationPath
 	}
-	if o.Healthy != nil {
+	if !IsNil(o.Healthy) {
 		toSerialize["Healthy"] = o.Healthy
 	}
-	if o.LagTime != nil {
+	if !IsNil(o.LagTime) {
 		toSerialize["LagTime"] = o.LagTime
 	}
-	if o.PolicyName != nil {
+	if !IsNil(o.PolicyName) {
 		toSerialize["PolicyName"] = o.PolicyName
 	}
-	if o.PolicyType != nil {
+	if !IsNil(o.PolicyType) {
 		toSerialize["PolicyType"] = o.PolicyType
 	}
-	if o.PolicyUuid != nil {
+	if !IsNil(o.PolicyUuid) {
 		toSerialize["PolicyUuid"] = o.PolicyUuid
 	}
-	if o.SourcePath != nil {
+	if !IsNil(o.SourcePath) {
 		toSerialize["SourcePath"] = o.SourcePath
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.DestinationTenant != nil {
-		toSerialize["DestinationTenant"] = o.DestinationTenant
+	if o.DestinationTenant.IsSet() {
+		toSerialize["DestinationTenant"] = o.DestinationTenant.Get()
 	}
-	if o.Policy != nil {
-		toSerialize["Policy"] = o.Policy
+	if o.Policy.IsSet() {
+		toSerialize["Policy"] = o.Policy.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppSnapMirrorRelationship) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppSnapMirrorRelationship) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppSnapMirrorRelationshipWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -588,15 +651,15 @@ func (o *StorageNetAppSnapMirrorRelationship) UnmarshalJSON(bytes []byte) (err e
 		// State of the relationship.
 		State *string `json:"State,omitempty"`
 		// Uuid of the NetApp SnapMirror relationship.
-		Uuid              *string                                        `json:"Uuid,omitempty"`
-		Array             *StorageNetAppClusterRelationship              `json:"Array,omitempty"`
-		DestinationTenant *StorageNetAppStorageVmRelationship            `json:"DestinationTenant,omitempty"`
-		Policy            *StorageNetAppBaseSnapMirrorPolicyRelationship `json:"Policy,omitempty"`
+		Uuid              *string                                               `json:"Uuid,omitempty"`
+		Array             NullableStorageNetAppClusterRelationship              `json:"Array,omitempty"`
+		DestinationTenant NullableStorageNetAppStorageVmRelationship            `json:"DestinationTenant,omitempty"`
+		Policy            NullableStorageNetAppBaseSnapMirrorPolicyRelationship `json:"Policy,omitempty"`
 	}
 
 	varStorageNetAppSnapMirrorRelationshipWithoutEmbeddedStruct := StorageNetAppSnapMirrorRelationshipWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppSnapMirrorRelationshipWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppSnapMirrorRelationshipWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppSnapMirrorRelationship := _StorageNetAppSnapMirrorRelationship{}
 		varStorageNetAppSnapMirrorRelationship.ClassId = varStorageNetAppSnapMirrorRelationshipWithoutEmbeddedStruct.ClassId
@@ -620,7 +683,7 @@ func (o *StorageNetAppSnapMirrorRelationship) UnmarshalJSON(bytes []byte) (err e
 
 	varStorageNetAppSnapMirrorRelationship := _StorageNetAppSnapMirrorRelationship{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppSnapMirrorRelationship)
+	err = json.Unmarshal(data, &varStorageNetAppSnapMirrorRelationship)
 	if err == nil {
 		o.MoBaseMo = varStorageNetAppSnapMirrorRelationship.MoBaseMo
 	} else {
@@ -629,7 +692,7 @@ func (o *StorageNetAppSnapMirrorRelationship) UnmarshalJSON(bytes []byte) (err e
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DestinationPath")

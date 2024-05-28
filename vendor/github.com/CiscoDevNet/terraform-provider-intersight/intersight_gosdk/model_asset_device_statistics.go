@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetDeviceStatistics type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetDeviceStatistics{}
 
 // AssetDeviceStatistics Type for saving device statistics related information for HyperFlex and UCS devices. It is used in asset.DeploymentDevice object to save the current device statistics.
 type AssetDeviceStatistics struct {
@@ -117,7 +121,7 @@ func (o *AssetDeviceStatistics) SetObjectType(v string) {
 
 // GetClusterDeploymentType returns the ClusterDeploymentType field value if set, zero value otherwise.
 func (o *AssetDeviceStatistics) GetClusterDeploymentType() string {
-	if o == nil || o.ClusterDeploymentType == nil {
+	if o == nil || IsNil(o.ClusterDeploymentType) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *AssetDeviceStatistics) GetClusterDeploymentType() string {
 // GetClusterDeploymentTypeOk returns a tuple with the ClusterDeploymentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceStatistics) GetClusterDeploymentTypeOk() (*string, bool) {
-	if o == nil || o.ClusterDeploymentType == nil {
+	if o == nil || IsNil(o.ClusterDeploymentType) {
 		return nil, false
 	}
 	return o.ClusterDeploymentType, true
@@ -135,7 +139,7 @@ func (o *AssetDeviceStatistics) GetClusterDeploymentTypeOk() (*string, bool) {
 
 // HasClusterDeploymentType returns a boolean if a field has been set.
 func (o *AssetDeviceStatistics) HasClusterDeploymentType() bool {
-	if o != nil && o.ClusterDeploymentType != nil {
+	if o != nil && !IsNil(o.ClusterDeploymentType) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *AssetDeviceStatistics) SetClusterDeploymentType(v string) {
 
 // GetClusterDeviceMoid returns the ClusterDeviceMoid field value if set, zero value otherwise.
 func (o *AssetDeviceStatistics) GetClusterDeviceMoid() string {
-	if o == nil || o.ClusterDeviceMoid == nil {
+	if o == nil || IsNil(o.ClusterDeviceMoid) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *AssetDeviceStatistics) GetClusterDeviceMoid() string {
 // GetClusterDeviceMoidOk returns a tuple with the ClusterDeviceMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceStatistics) GetClusterDeviceMoidOk() (*string, bool) {
-	if o == nil || o.ClusterDeviceMoid == nil {
+	if o == nil || IsNil(o.ClusterDeviceMoid) {
 		return nil, false
 	}
 	return o.ClusterDeviceMoid, true
@@ -167,7 +171,7 @@ func (o *AssetDeviceStatistics) GetClusterDeviceMoidOk() (*string, bool) {
 
 // HasClusterDeviceMoid returns a boolean if a field has been set.
 func (o *AssetDeviceStatistics) HasClusterDeviceMoid() bool {
-	if o != nil && o.ClusterDeviceMoid != nil {
+	if o != nil && !IsNil(o.ClusterDeviceMoid) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *AssetDeviceStatistics) SetClusterDeviceMoid(v string) {
 
 // GetClusterName returns the ClusterName field value if set, zero value otherwise.
 func (o *AssetDeviceStatistics) GetClusterName() string {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *AssetDeviceStatistics) GetClusterName() string {
 // GetClusterNameOk returns a tuple with the ClusterName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceStatistics) GetClusterNameOk() (*string, bool) {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		return nil, false
 	}
 	return o.ClusterName, true
@@ -199,7 +203,7 @@ func (o *AssetDeviceStatistics) GetClusterNameOk() (*string, bool) {
 
 // HasClusterName returns a boolean if a field has been set.
 func (o *AssetDeviceStatistics) HasClusterName() bool {
-	if o != nil && o.ClusterName != nil {
+	if o != nil && !IsNil(o.ClusterName) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *AssetDeviceStatistics) SetClusterName(v string) {
 
 // GetClusterReplicationFactor returns the ClusterReplicationFactor field value if set, zero value otherwise.
 func (o *AssetDeviceStatistics) GetClusterReplicationFactor() int64 {
-	if o == nil || o.ClusterReplicationFactor == nil {
+	if o == nil || IsNil(o.ClusterReplicationFactor) {
 		var ret int64
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *AssetDeviceStatistics) GetClusterReplicationFactor() int64 {
 // GetClusterReplicationFactorOk returns a tuple with the ClusterReplicationFactor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceStatistics) GetClusterReplicationFactorOk() (*int64, bool) {
-	if o == nil || o.ClusterReplicationFactor == nil {
+	if o == nil || IsNil(o.ClusterReplicationFactor) {
 		return nil, false
 	}
 	return o.ClusterReplicationFactor, true
@@ -231,7 +235,7 @@ func (o *AssetDeviceStatistics) GetClusterReplicationFactorOk() (*int64, bool) {
 
 // HasClusterReplicationFactor returns a boolean if a field has been set.
 func (o *AssetDeviceStatistics) HasClusterReplicationFactor() bool {
-	if o != nil && o.ClusterReplicationFactor != nil {
+	if o != nil && !IsNil(o.ClusterReplicationFactor) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *AssetDeviceStatistics) SetClusterReplicationFactor(v int64) {
 
 // GetConnected returns the Connected field value if set, zero value otherwise.
 func (o *AssetDeviceStatistics) GetConnected() int64 {
-	if o == nil || o.Connected == nil {
+	if o == nil || IsNil(o.Connected) {
 		var ret int64
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *AssetDeviceStatistics) GetConnected() int64 {
 // GetConnectedOk returns a tuple with the Connected field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceStatistics) GetConnectedOk() (*int64, bool) {
-	if o == nil || o.Connected == nil {
+	if o == nil || IsNil(o.Connected) {
 		return nil, false
 	}
 	return o.Connected, true
@@ -263,7 +267,7 @@ func (o *AssetDeviceStatistics) GetConnectedOk() (*int64, bool) {
 
 // HasConnected returns a boolean if a field has been set.
 func (o *AssetDeviceStatistics) HasConnected() bool {
-	if o != nil && o.Connected != nil {
+	if o != nil && !IsNil(o.Connected) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *AssetDeviceStatistics) SetConnected(v int64) {
 
 // GetMembershipRatio returns the MembershipRatio field value if set, zero value otherwise.
 func (o *AssetDeviceStatistics) GetMembershipRatio() float32 {
-	if o == nil || o.MembershipRatio == nil {
+	if o == nil || IsNil(o.MembershipRatio) {
 		var ret float32
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *AssetDeviceStatistics) GetMembershipRatio() float32 {
 // GetMembershipRatioOk returns a tuple with the MembershipRatio field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceStatistics) GetMembershipRatioOk() (*float32, bool) {
-	if o == nil || o.MembershipRatio == nil {
+	if o == nil || IsNil(o.MembershipRatio) {
 		return nil, false
 	}
 	return o.MembershipRatio, true
@@ -295,7 +299,7 @@ func (o *AssetDeviceStatistics) GetMembershipRatioOk() (*float32, bool) {
 
 // HasMembershipRatio returns a boolean if a field has been set.
 func (o *AssetDeviceStatistics) HasMembershipRatio() bool {
-	if o != nil && o.MembershipRatio != nil {
+	if o != nil && !IsNil(o.MembershipRatio) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *AssetDeviceStatistics) SetMembershipRatio(v float32) {
 
 // GetMemoryMirroringFactor returns the MemoryMirroringFactor field value if set, zero value otherwise.
 func (o *AssetDeviceStatistics) GetMemoryMirroringFactor() float32 {
-	if o == nil || o.MemoryMirroringFactor == nil {
+	if o == nil || IsNil(o.MemoryMirroringFactor) {
 		var ret float32
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *AssetDeviceStatistics) GetMemoryMirroringFactor() float32 {
 // GetMemoryMirroringFactorOk returns a tuple with the MemoryMirroringFactor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeviceStatistics) GetMemoryMirroringFactorOk() (*float32, bool) {
-	if o == nil || o.MemoryMirroringFactor == nil {
+	if o == nil || IsNil(o.MemoryMirroringFactor) {
 		return nil, false
 	}
 	return o.MemoryMirroringFactor, true
@@ -327,7 +331,7 @@ func (o *AssetDeviceStatistics) GetMemoryMirroringFactorOk() (*float32, bool) {
 
 // HasMemoryMirroringFactor returns a boolean if a field has been set.
 func (o *AssetDeviceStatistics) HasMemoryMirroringFactor() bool {
-	if o != nil && o.MemoryMirroringFactor != nil {
+	if o != nil && !IsNil(o.MemoryMirroringFactor) {
 		return true
 	}
 
@@ -341,7 +345,7 @@ func (o *AssetDeviceStatistics) SetMemoryMirroringFactor(v float32) {
 
 // GetVmHost returns the VmHost field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeviceStatistics) GetVmHost() AssetVmHost {
-	if o == nil || o.VmHost.Get() == nil {
+	if o == nil || IsNil(o.VmHost.Get()) {
 		var ret AssetVmHost
 		return ret
 	}
@@ -383,40 +387,44 @@ func (o *AssetDeviceStatistics) UnsetVmHost() {
 }
 
 func (o AssetDeviceStatistics) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetDeviceStatistics) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClusterDeploymentType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClusterDeploymentType) {
 		toSerialize["ClusterDeploymentType"] = o.ClusterDeploymentType
 	}
-	if o.ClusterDeviceMoid != nil {
+	if !IsNil(o.ClusterDeviceMoid) {
 		toSerialize["ClusterDeviceMoid"] = o.ClusterDeviceMoid
 	}
-	if o.ClusterName != nil {
+	if !IsNil(o.ClusterName) {
 		toSerialize["ClusterName"] = o.ClusterName
 	}
-	if o.ClusterReplicationFactor != nil {
+	if !IsNil(o.ClusterReplicationFactor) {
 		toSerialize["ClusterReplicationFactor"] = o.ClusterReplicationFactor
 	}
-	if o.Connected != nil {
+	if !IsNil(o.Connected) {
 		toSerialize["Connected"] = o.Connected
 	}
-	if o.MembershipRatio != nil {
+	if !IsNil(o.MembershipRatio) {
 		toSerialize["MembershipRatio"] = o.MembershipRatio
 	}
-	if o.MemoryMirroringFactor != nil {
+	if !IsNil(o.MemoryMirroringFactor) {
 		toSerialize["MemoryMirroringFactor"] = o.MemoryMirroringFactor
 	}
 	if o.VmHost.IsSet() {
@@ -427,10 +435,32 @@ func (o AssetDeviceStatistics) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetDeviceStatistics) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetDeviceStatistics) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetDeviceStatisticsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -455,7 +485,7 @@ func (o *AssetDeviceStatistics) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetDeviceStatisticsWithoutEmbeddedStruct := AssetDeviceStatisticsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetDeviceStatisticsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetDeviceStatisticsWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetDeviceStatistics := _AssetDeviceStatistics{}
 		varAssetDeviceStatistics.ClassId = varAssetDeviceStatisticsWithoutEmbeddedStruct.ClassId
@@ -475,7 +505,7 @@ func (o *AssetDeviceStatistics) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetDeviceStatistics := _AssetDeviceStatistics{}
 
-	err = json.Unmarshal(bytes, &varAssetDeviceStatistics)
+	err = json.Unmarshal(data, &varAssetDeviceStatistics)
 	if err == nil {
 		o.MoBaseComplexType = varAssetDeviceStatistics.MoBaseComplexType
 	} else {
@@ -484,7 +514,7 @@ func (o *AssetDeviceStatistics) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterDeploymentType")

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "sdcard.PolicyInventory"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "sdcard.PolicyInventory"]
 **Partitions** | Pointer to [**[]SdcardPartition**](SdcardPartition.md) |  | [optional] 
-**TargetMo** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**TargetMo** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -128,6 +128,16 @@ SetTargetMo sets TargetMo field to given value.
 
 HasTargetMo returns a boolean if a field has been set.
 
+### SetTargetMoNil
+
+`func (o *SdcardPolicyInventory) SetTargetMoNil(b bool)`
+
+ SetTargetMoNil sets the value for TargetMo to be an explicit nil
+
+### UnsetTargetMo
+`func (o *SdcardPolicyInventory) UnsetTargetMo()`
+
+UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -17,9 +17,9 @@ Name | Type | Description | Notes
 **SmtpRecipients** | Pointer to **[]string** |  | [optional] 
 **SmtpServer** | Pointer to **string** | IP address or hostname of the SMTP server. The SMTP server is used by the managed device to send email notifications. | [optional] 
 **UserName** | Pointer to **string** | SMTP username from which email notification is sent. | [optional] 
-**ApplianceAccount** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**Certificate** | Pointer to [**IamTrustPointRelationship**](IamTrustPointRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ApplianceAccount** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Certificate** | Pointer to [**NullableIamTrustPointRelationship**](IamTrustPointRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
 ## Methods
@@ -391,6 +391,16 @@ SetApplianceAccount sets ApplianceAccount field to given value.
 
 HasApplianceAccount returns a boolean if a field has been set.
 
+### SetApplianceAccountNil
+
+`func (o *SmtpPolicy) SetApplianceAccountNil(b bool)`
+
+ SetApplianceAccountNil sets the value for ApplianceAccount to be an explicit nil
+
+### UnsetApplianceAccount
+`func (o *SmtpPolicy) UnsetApplianceAccount()`
+
+UnsetApplianceAccount ensures that no value is present for ApplianceAccount, not even an explicit nil
 ### GetCertificate
 
 `func (o *SmtpPolicy) GetCertificate() IamTrustPointRelationship`
@@ -416,6 +426,16 @@ SetCertificate sets Certificate field to given value.
 
 HasCertificate returns a boolean if a field has been set.
 
+### SetCertificateNil
+
+`func (o *SmtpPolicy) SetCertificateNil(b bool)`
+
+ SetCertificateNil sets the value for Certificate to be an explicit nil
+
+### UnsetCertificate
+`func (o *SmtpPolicy) UnsetCertificate()`
+
+UnsetCertificate ensures that no value is present for Certificate, not even an explicit nil
 ### GetOrganization
 
 `func (o *SmtpPolicy) GetOrganization() OrganizationOrganizationRelationship`
@@ -441,6 +461,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *SmtpPolicy) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *SmtpPolicy) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetProfiles
 
 `func (o *SmtpPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship`

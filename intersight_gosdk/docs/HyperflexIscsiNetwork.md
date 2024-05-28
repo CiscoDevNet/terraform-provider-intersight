@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **Version** | Pointer to **int64** | Version of Network configuration in Inventory. | [optional] [readonly] 
 **VlanName** | Pointer to **string** | The Virtual local area network (VLAN) name of the HyperFlex iSCSI network. | [optional] [readonly] 
 **Vlanid** | Pointer to **int64** | The VLAN ID of the HyperFlex iSCSI network. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -414,6 +414,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *HyperflexIscsiNetwork) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *HyperflexIscsiNetwork) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

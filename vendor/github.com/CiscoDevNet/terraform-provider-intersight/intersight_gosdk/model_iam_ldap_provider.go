@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamLdapProvider type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamLdapProvider{}
 
 // IamLdapProvider LDAP Provider or LDAP Server for user authentication.
 type IamLdapProvider struct {
@@ -27,8 +31,8 @@ type IamLdapProvider struct {
 	// LDAP Server Port for connection establishment.
 	Port *int64 `json:"Port,omitempty"`
 	// LDAP Server Address, can be IP address or hostname.
-	Server               *string                    `json:"Server,omitempty"`
-	LdapPolicy           *IamLdapPolicyRelationship `json:"LdapPolicy,omitempty"`
+	Server               *string                           `json:"Server,omitempty"`
+	LdapPolicy           NullableIamLdapPolicyRelationship `json:"LdapPolicy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *IamLdapProvider) SetObjectType(v string) {
 
 // GetPort returns the Port field value if set, zero value otherwise.
 func (o *IamLdapProvider) GetPort() int64 {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret int64
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *IamLdapProvider) GetPort() int64 {
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapProvider) GetPortOk() (*int64, bool) {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
 	return o.Port, true
@@ -129,7 +133,7 @@ func (o *IamLdapProvider) GetPortOk() (*int64, bool) {
 
 // HasPort returns a boolean if a field has been set.
 func (o *IamLdapProvider) HasPort() bool {
-	if o != nil && o.Port != nil {
+	if o != nil && !IsNil(o.Port) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *IamLdapProvider) SetPort(v int64) {
 
 // GetServer returns the Server field value if set, zero value otherwise.
 func (o *IamLdapProvider) GetServer() string {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *IamLdapProvider) GetServer() string {
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapProvider) GetServerOk() (*string, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server) {
 		return nil, false
 	}
 	return o.Server, true
@@ -161,7 +165,7 @@ func (o *IamLdapProvider) GetServerOk() (*string, bool) {
 
 // HasServer returns a boolean if a field has been set.
 func (o *IamLdapProvider) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && !IsNil(o.Server) {
 		return true
 	}
 
@@ -173,72 +177,109 @@ func (o *IamLdapProvider) SetServer(v string) {
 	o.Server = &v
 }
 
-// GetLdapPolicy returns the LdapPolicy field value if set, zero value otherwise.
+// GetLdapPolicy returns the LdapPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamLdapProvider) GetLdapPolicy() IamLdapPolicyRelationship {
-	if o == nil || o.LdapPolicy == nil {
+	if o == nil || IsNil(o.LdapPolicy.Get()) {
 		var ret IamLdapPolicyRelationship
 		return ret
 	}
-	return *o.LdapPolicy
+	return *o.LdapPolicy.Get()
 }
 
 // GetLdapPolicyOk returns a tuple with the LdapPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamLdapProvider) GetLdapPolicyOk() (*IamLdapPolicyRelationship, bool) {
-	if o == nil || o.LdapPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LdapPolicy, true
+	return o.LdapPolicy.Get(), o.LdapPolicy.IsSet()
 }
 
 // HasLdapPolicy returns a boolean if a field has been set.
 func (o *IamLdapProvider) HasLdapPolicy() bool {
-	if o != nil && o.LdapPolicy != nil {
+	if o != nil && o.LdapPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLdapPolicy gets a reference to the given IamLdapPolicyRelationship and assigns it to the LdapPolicy field.
+// SetLdapPolicy gets a reference to the given NullableIamLdapPolicyRelationship and assigns it to the LdapPolicy field.
 func (o *IamLdapProvider) SetLdapPolicy(v IamLdapPolicyRelationship) {
-	o.LdapPolicy = &v
+	o.LdapPolicy.Set(&v)
+}
+
+// SetLdapPolicyNil sets the value for LdapPolicy to be an explicit nil
+func (o *IamLdapProvider) SetLdapPolicyNil() {
+	o.LdapPolicy.Set(nil)
+}
+
+// UnsetLdapPolicy ensures that no value is present for LdapPolicy, not even an explicit nil
+func (o *IamLdapProvider) UnsetLdapPolicy() {
+	o.LdapPolicy.Unset()
 }
 
 func (o IamLdapProvider) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamLdapProvider) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Port != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Port) {
 		toSerialize["Port"] = o.Port
 	}
-	if o.Server != nil {
+	if !IsNil(o.Server) {
 		toSerialize["Server"] = o.Server
 	}
-	if o.LdapPolicy != nil {
-		toSerialize["LdapPolicy"] = o.LdapPolicy
+	if o.LdapPolicy.IsSet() {
+		toSerialize["LdapPolicy"] = o.LdapPolicy.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamLdapProvider) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamLdapProvider) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamLdapProviderWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -247,13 +288,13 @@ func (o *IamLdapProvider) UnmarshalJSON(bytes []byte) (err error) {
 		// LDAP Server Port for connection establishment.
 		Port *int64 `json:"Port,omitempty"`
 		// LDAP Server Address, can be IP address or hostname.
-		Server     *string                    `json:"Server,omitempty"`
-		LdapPolicy *IamLdapPolicyRelationship `json:"LdapPolicy,omitempty"`
+		Server     *string                           `json:"Server,omitempty"`
+		LdapPolicy NullableIamLdapPolicyRelationship `json:"LdapPolicy,omitempty"`
 	}
 
 	varIamLdapProviderWithoutEmbeddedStruct := IamLdapProviderWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamLdapProviderWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamLdapProviderWithoutEmbeddedStruct)
 	if err == nil {
 		varIamLdapProvider := _IamLdapProvider{}
 		varIamLdapProvider.ClassId = varIamLdapProviderWithoutEmbeddedStruct.ClassId
@@ -268,7 +309,7 @@ func (o *IamLdapProvider) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamLdapProvider := _IamLdapProvider{}
 
-	err = json.Unmarshal(bytes, &varIamLdapProvider)
+	err = json.Unmarshal(data, &varIamLdapProvider)
 	if err == nil {
 		o.MoBaseMo = varIamLdapProvider.MoBaseMo
 	} else {
@@ -277,7 +318,7 @@ func (o *IamLdapProvider) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Port")

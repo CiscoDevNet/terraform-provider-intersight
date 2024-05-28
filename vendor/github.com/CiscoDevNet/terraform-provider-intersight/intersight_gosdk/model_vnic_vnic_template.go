@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicVnicTemplate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicVnicTemplate{}
 
 // VnicVnicTemplate The vNIC template consists of the common vNIC configuration, which can be reused across multiple vNICs. vNICs can be created from the template using the Derive operation. Additionally, an existing vNIC can be attached to a template to use the configuration set in the template. To derive vNICs from a vNIC template, you must use the asynchronous /v1/bulk/MoCloners bulk API. Deriving vNICs from a vNIC Template URL: /v1/bulk/MoCloners Method: POST Headers:   - Key: \"prefer\"     Value: \"respond-async\" Body: >  {     \"Sources\": [       {         \"Moid\": \"xxxxx\",         \"ObjectType\": \"vnic.VnicTemplate\"      }     ],     \"Targets\": [       {         \"Name\": \"test-vn2\",         \"MacAddressType\": \"POOL\",         \"Placement\": {             \"AutoSlotId\": true,             \"AutoPciLink\": true         },         \"LanConnectivityPolicy\": \"aaaaa\",         \"ObjectType\": \"vnic.EthIf\"      }     ],     \"WorkflowNameSuffix\": \"Derive vNIC from a Template\",     \"Organization\": {         \"Moid\": \"ooooo\",         \"ObjectType\": \"organization.Organization\"     } } The API response includes the \"AsyncResult\"->bulk.Result MO reference. API clients must poll the bulk.Result MO to monitor the status of the operation. The bulk.Result object also includes a reference to a monitoring workflow, which is accessible from the 'Requests' tab in the UI. Managing Template Updates When the vNIC template is updated, the system initiates an automatic call to the /v1/bulk/MoMergers API to synchronize the template changes to all derived vNIC instances asynchronously. The status of the sync operation can be obtained by performing a query on vnic EthIf MO - $filter=SrcTemplate.Moid eq 'xxx'&$apply=groupby ( (TemplateSyncStatus), aggregate ($count as count)) Override Option for vNIC Templates When enabled, this feature allows the configuration of the derived vNIC to override the configuration available in the template during vNIC create or update. You can query the list of overridable properties for a vNIC template from the Template Catalog. Use the following catalog API query: URL: /v1/capability/TemplateCatalogs Query: $filter= (Name eq ‘VnicTemplate’)&$select=AllowedOverrideList Once a property is overridden on a derived vNIC, it will be added to the ‘OverriddenList’ property on the vnic EthIf MO: URL: /v1/vnic/EthIfs Query: $select=SrcTemplate, OverriddenList When override is disabled on the template, derived vNIC will have same configuration as the template.
 type VnicVnicTemplate struct {
@@ -38,8 +42,8 @@ type VnicVnicTemplate struct {
 	SwitchId        *string                 `json:"SwitchId,omitempty"`
 	TemplateActions []MotemplateActionEntry `json:"TemplateActions,omitempty"`
 	// The number of objects derived from a Template MO instance.
-	UsageCount           *int64                                `json:"UsageCount,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	UsageCount           *int64                                       `json:"UsageCount,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,7 +128,7 @@ func (o *VnicVnicTemplate) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *VnicVnicTemplate) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *VnicVnicTemplate) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVnicTemplate) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -142,7 +146,7 @@ func (o *VnicVnicTemplate) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *VnicVnicTemplate) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *VnicVnicTemplate) SetDescription(v string) {
 
 // GetEnableOverride returns the EnableOverride field value if set, zero value otherwise.
 func (o *VnicVnicTemplate) GetEnableOverride() bool {
-	if o == nil || o.EnableOverride == nil {
+	if o == nil || IsNil(o.EnableOverride) {
 		var ret bool
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *VnicVnicTemplate) GetEnableOverride() bool {
 // GetEnableOverrideOk returns a tuple with the EnableOverride field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVnicTemplate) GetEnableOverrideOk() (*bool, bool) {
-	if o == nil || o.EnableOverride == nil {
+	if o == nil || IsNil(o.EnableOverride) {
 		return nil, false
 	}
 	return o.EnableOverride, true
@@ -174,7 +178,7 @@ func (o *VnicVnicTemplate) GetEnableOverrideOk() (*bool, bool) {
 
 // HasEnableOverride returns a boolean if a field has been set.
 func (o *VnicVnicTemplate) HasEnableOverride() bool {
-	if o != nil && o.EnableOverride != nil {
+	if o != nil && !IsNil(o.EnableOverride) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *VnicVnicTemplate) SetEnableOverride(v bool) {
 
 // GetLcpUsageCount returns the LcpUsageCount field value if set, zero value otherwise.
 func (o *VnicVnicTemplate) GetLcpUsageCount() int64 {
-	if o == nil || o.LcpUsageCount == nil {
+	if o == nil || IsNil(o.LcpUsageCount) {
 		var ret int64
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *VnicVnicTemplate) GetLcpUsageCount() int64 {
 // GetLcpUsageCountOk returns a tuple with the LcpUsageCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVnicTemplate) GetLcpUsageCountOk() (*int64, bool) {
-	if o == nil || o.LcpUsageCount == nil {
+	if o == nil || IsNil(o.LcpUsageCount) {
 		return nil, false
 	}
 	return o.LcpUsageCount, true
@@ -206,7 +210,7 @@ func (o *VnicVnicTemplate) GetLcpUsageCountOk() (*int64, bool) {
 
 // HasLcpUsageCount returns a boolean if a field has been set.
 func (o *VnicVnicTemplate) HasLcpUsageCount() bool {
-	if o != nil && o.LcpUsageCount != nil {
+	if o != nil && !IsNil(o.LcpUsageCount) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *VnicVnicTemplate) SetLcpUsageCount(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VnicVnicTemplate) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *VnicVnicTemplate) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVnicTemplate) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -238,7 +242,7 @@ func (o *VnicVnicTemplate) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *VnicVnicTemplate) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *VnicVnicTemplate) SetName(v string) {
 
 // GetPeerVnicName returns the PeerVnicName field value if set, zero value otherwise.
 func (o *VnicVnicTemplate) GetPeerVnicName() string {
-	if o == nil || o.PeerVnicName == nil {
+	if o == nil || IsNil(o.PeerVnicName) {
 		var ret string
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *VnicVnicTemplate) GetPeerVnicName() string {
 // GetPeerVnicNameOk returns a tuple with the PeerVnicName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVnicTemplate) GetPeerVnicNameOk() (*string, bool) {
-	if o == nil || o.PeerVnicName == nil {
+	if o == nil || IsNil(o.PeerVnicName) {
 		return nil, false
 	}
 	return o.PeerVnicName, true
@@ -270,7 +274,7 @@ func (o *VnicVnicTemplate) GetPeerVnicNameOk() (*string, bool) {
 
 // HasPeerVnicName returns a boolean if a field has been set.
 func (o *VnicVnicTemplate) HasPeerVnicName() bool {
-	if o != nil && o.PeerVnicName != nil {
+	if o != nil && !IsNil(o.PeerVnicName) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *VnicVnicTemplate) SetPeerVnicName(v string) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *VnicVnicTemplate) GetSwitchId() string {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret string
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *VnicVnicTemplate) GetSwitchId() string {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVnicTemplate) GetSwitchIdOk() (*string, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -302,7 +306,7 @@ func (o *VnicVnicTemplate) GetSwitchIdOk() (*string, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *VnicVnicTemplate) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -327,7 +331,7 @@ func (o *VnicVnicTemplate) GetTemplateActions() []MotemplateActionEntry {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicVnicTemplate) GetTemplateActionsOk() ([]MotemplateActionEntry, bool) {
-	if o == nil || o.TemplateActions == nil {
+	if o == nil || IsNil(o.TemplateActions) {
 		return nil, false
 	}
 	return o.TemplateActions, true
@@ -335,7 +339,7 @@ func (o *VnicVnicTemplate) GetTemplateActionsOk() ([]MotemplateActionEntry, bool
 
 // HasTemplateActions returns a boolean if a field has been set.
 func (o *VnicVnicTemplate) HasTemplateActions() bool {
-	if o != nil && o.TemplateActions != nil {
+	if o != nil && IsNil(o.TemplateActions) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *VnicVnicTemplate) SetTemplateActions(v []MotemplateActionEntry) {
 
 // GetUsageCount returns the UsageCount field value if set, zero value otherwise.
 func (o *VnicVnicTemplate) GetUsageCount() int64 {
-	if o == nil || o.UsageCount == nil {
+	if o == nil || IsNil(o.UsageCount) {
 		var ret int64
 		return ret
 	}
@@ -359,7 +363,7 @@ func (o *VnicVnicTemplate) GetUsageCount() int64 {
 // GetUsageCountOk returns a tuple with the UsageCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVnicTemplate) GetUsageCountOk() (*int64, bool) {
-	if o == nil || o.UsageCount == nil {
+	if o == nil || IsNil(o.UsageCount) {
 		return nil, false
 	}
 	return o.UsageCount, true
@@ -367,7 +371,7 @@ func (o *VnicVnicTemplate) GetUsageCountOk() (*int64, bool) {
 
 // HasUsageCount returns a boolean if a field has been set.
 func (o *VnicVnicTemplate) HasUsageCount() bool {
-	if o != nil && o.UsageCount != nil {
+	if o != nil && !IsNil(o.UsageCount) {
 		return true
 	}
 
@@ -379,90 +383,127 @@ func (o *VnicVnicTemplate) SetUsageCount(v int64) {
 	o.UsageCount = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicVnicTemplate) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicVnicTemplate) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *VnicVnicTemplate) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *VnicVnicTemplate) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *VnicVnicTemplate) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *VnicVnicTemplate) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o VnicVnicTemplate) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicVnicTemplate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVnicBaseEthIf, errVnicBaseEthIf := json.Marshal(o.VnicBaseEthIf)
 	if errVnicBaseEthIf != nil {
-		return []byte{}, errVnicBaseEthIf
+		return map[string]interface{}{}, errVnicBaseEthIf
 	}
 	errVnicBaseEthIf = json.Unmarshal([]byte(serializedVnicBaseEthIf), &toSerialize)
 	if errVnicBaseEthIf != nil {
-		return []byte{}, errVnicBaseEthIf
+		return map[string]interface{}{}, errVnicBaseEthIf
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.EnableOverride != nil {
+	if !IsNil(o.EnableOverride) {
 		toSerialize["EnableOverride"] = o.EnableOverride
 	}
-	if o.LcpUsageCount != nil {
+	if !IsNil(o.LcpUsageCount) {
 		toSerialize["LcpUsageCount"] = o.LcpUsageCount
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PeerVnicName != nil {
+	if !IsNil(o.PeerVnicName) {
 		toSerialize["PeerVnicName"] = o.PeerVnicName
 	}
-	if o.SwitchId != nil {
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
 	if o.TemplateActions != nil {
 		toSerialize["TemplateActions"] = o.TemplateActions
 	}
-	if o.UsageCount != nil {
+	if !IsNil(o.UsageCount) {
 		toSerialize["UsageCount"] = o.UsageCount
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicVnicTemplate) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicVnicTemplate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicVnicTemplateWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -482,13 +523,13 @@ func (o *VnicVnicTemplate) UnmarshalJSON(bytes []byte) (err error) {
 		SwitchId        *string                 `json:"SwitchId,omitempty"`
 		TemplateActions []MotemplateActionEntry `json:"TemplateActions,omitempty"`
 		// The number of objects derived from a Template MO instance.
-		UsageCount   *int64                                `json:"UsageCount,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		UsageCount   *int64                                       `json:"UsageCount,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varVnicVnicTemplateWithoutEmbeddedStruct := VnicVnicTemplateWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicVnicTemplateWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicVnicTemplateWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicVnicTemplate := _VnicVnicTemplate{}
 		varVnicVnicTemplate.ClassId = varVnicVnicTemplateWithoutEmbeddedStruct.ClassId
@@ -509,7 +550,7 @@ func (o *VnicVnicTemplate) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicVnicTemplate := _VnicVnicTemplate{}
 
-	err = json.Unmarshal(bytes, &varVnicVnicTemplate)
+	err = json.Unmarshal(data, &varVnicVnicTemplate)
 	if err == nil {
 		o.VnicBaseEthIf = varVnicVnicTemplate.VnicBaseEthIf
 	} else {
@@ -518,7 +559,7 @@ func (o *VnicVnicTemplate) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

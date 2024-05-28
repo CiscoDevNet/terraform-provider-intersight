@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.BackupCluster"]
 **BackupDataStore** | Pointer to **string** | Defines the backup source cluster and its references. | [optional] [readonly] 
 **SrcClusterUuid** | Pointer to **string** | UUID for the cluster to allow lookups across unclaim/reclaim. | [optional] [readonly] 
-**SrcCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**TgtCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**SrcCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**TgtCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -145,6 +145,16 @@ SetSrcCluster sets SrcCluster field to given value.
 
 HasSrcCluster returns a boolean if a field has been set.
 
+### SetSrcClusterNil
+
+`func (o *HyperflexBackupCluster) SetSrcClusterNil(b bool)`
+
+ SetSrcClusterNil sets the value for SrcCluster to be an explicit nil
+
+### UnsetSrcCluster
+`func (o *HyperflexBackupCluster) UnsetSrcCluster()`
+
+UnsetSrcCluster ensures that no value is present for SrcCluster, not even an explicit nil
 ### GetTgtCluster
 
 `func (o *HyperflexBackupCluster) GetTgtCluster() HyperflexClusterRelationship`
@@ -170,6 +180,16 @@ SetTgtCluster sets TgtCluster field to given value.
 
 HasTgtCluster returns a boolean if a field has been set.
 
+### SetTgtClusterNil
+
+`func (o *HyperflexBackupCluster) SetTgtClusterNil(b bool)`
+
+ SetTgtClusterNil sets the value for TgtCluster to be an explicit nil
+
+### UnsetTgtCluster
+`func (o *HyperflexBackupCluster) UnsetTgtCluster()`
+
+UnsetTgtCluster ensures that no value is present for TgtCluster, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

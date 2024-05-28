@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryNiaLicenseState type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryNiaLicenseState{}
 
 // NiatelemetryNiaLicenseState Object available at device scope for license information. This determines the usage of this attribute.
 type NiatelemetryNiaLicenseState struct {
@@ -37,8 +41,8 @@ type NiatelemetryNiaLicenseState struct {
 	// Serial number of device being inventoried. The serial number is unique per device.
 	Serial *string `json:"Serial,omitempty"`
 	// Name of fabric domain of the controller.
-	SiteName             *string                               `json:"SiteName,omitempty"`
-	Device               *NiatelemetryNiaInventoryRelationship `json:"Device,omitempty"`
+	SiteName             *string                                      `json:"SiteName,omitempty"`
+	Device               NullableNiatelemetryNiaInventoryRelationship `json:"Device,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *NiatelemetryNiaLicenseState) SetObjectType(v string) {
 
 // GetFeatureActivated returns the FeatureActivated field value if set, zero value otherwise.
 func (o *NiatelemetryNiaLicenseState) GetFeatureActivated() string {
-	if o == nil || o.FeatureActivated == nil {
+	if o == nil || IsNil(o.FeatureActivated) {
 		var ret string
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *NiatelemetryNiaLicenseState) GetFeatureActivated() string {
 // GetFeatureActivatedOk returns a tuple with the FeatureActivated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaLicenseState) GetFeatureActivatedOk() (*string, bool) {
-	if o == nil || o.FeatureActivated == nil {
+	if o == nil || IsNil(o.FeatureActivated) {
 		return nil, false
 	}
 	return o.FeatureActivated, true
@@ -135,7 +139,7 @@ func (o *NiatelemetryNiaLicenseState) GetFeatureActivatedOk() (*string, bool) {
 
 // HasFeatureActivated returns a boolean if a field has been set.
 func (o *NiatelemetryNiaLicenseState) HasFeatureActivated() bool {
-	if o != nil && o.FeatureActivated != nil {
+	if o != nil && !IsNil(o.FeatureActivated) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *NiatelemetryNiaLicenseState) SetFeatureActivated(v string) {
 
 // GetLicenseActivated returns the LicenseActivated field value if set, zero value otherwise.
 func (o *NiatelemetryNiaLicenseState) GetLicenseActivated() string {
-	if o == nil || o.LicenseActivated == nil {
+	if o == nil || IsNil(o.LicenseActivated) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *NiatelemetryNiaLicenseState) GetLicenseActivated() string {
 // GetLicenseActivatedOk returns a tuple with the LicenseActivated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaLicenseState) GetLicenseActivatedOk() (*string, bool) {
-	if o == nil || o.LicenseActivated == nil {
+	if o == nil || IsNil(o.LicenseActivated) {
 		return nil, false
 	}
 	return o.LicenseActivated, true
@@ -167,7 +171,7 @@ func (o *NiatelemetryNiaLicenseState) GetLicenseActivatedOk() (*string, bool) {
 
 // HasLicenseActivated returns a boolean if a field has been set.
 func (o *NiatelemetryNiaLicenseState) HasLicenseActivated() bool {
-	if o != nil && o.LicenseActivated != nil {
+	if o != nil && !IsNil(o.LicenseActivated) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *NiatelemetryNiaLicenseState) SetLicenseActivated(v string) {
 
 // GetPidType returns the PidType field value if set, zero value otherwise.
 func (o *NiatelemetryNiaLicenseState) GetPidType() string {
-	if o == nil || o.PidType == nil {
+	if o == nil || IsNil(o.PidType) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *NiatelemetryNiaLicenseState) GetPidType() string {
 // GetPidTypeOk returns a tuple with the PidType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaLicenseState) GetPidTypeOk() (*string, bool) {
-	if o == nil || o.PidType == nil {
+	if o == nil || IsNil(o.PidType) {
 		return nil, false
 	}
 	return o.PidType, true
@@ -199,7 +203,7 @@ func (o *NiatelemetryNiaLicenseState) GetPidTypeOk() (*string, bool) {
 
 // HasPidType returns a boolean if a field has been set.
 func (o *NiatelemetryNiaLicenseState) HasPidType() bool {
-	if o != nil && o.PidType != nil {
+	if o != nil && !IsNil(o.PidType) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *NiatelemetryNiaLicenseState) SetPidType(v string) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryNiaLicenseState) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *NiatelemetryNiaLicenseState) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaLicenseState) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -231,7 +235,7 @@ func (o *NiatelemetryNiaLicenseState) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryNiaLicenseState) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *NiatelemetryNiaLicenseState) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryNiaLicenseState) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *NiatelemetryNiaLicenseState) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaLicenseState) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -263,7 +267,7 @@ func (o *NiatelemetryNiaLicenseState) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryNiaLicenseState) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *NiatelemetryNiaLicenseState) SetRecordVersion(v string) {
 
 // GetSerial returns the Serial field value if set, zero value otherwise.
 func (o *NiatelemetryNiaLicenseState) GetSerial() string {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *NiatelemetryNiaLicenseState) GetSerial() string {
 // GetSerialOk returns a tuple with the Serial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaLicenseState) GetSerialOk() (*string, bool) {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		return nil, false
 	}
 	return o.Serial, true
@@ -295,7 +299,7 @@ func (o *NiatelemetryNiaLicenseState) GetSerialOk() (*string, bool) {
 
 // HasSerial returns a boolean if a field has been set.
 func (o *NiatelemetryNiaLicenseState) HasSerial() bool {
-	if o != nil && o.Serial != nil {
+	if o != nil && !IsNil(o.Serial) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *NiatelemetryNiaLicenseState) SetSerial(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryNiaLicenseState) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *NiatelemetryNiaLicenseState) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNiaLicenseState) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -327,7 +331,7 @@ func (o *NiatelemetryNiaLicenseState) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryNiaLicenseState) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -339,87 +343,124 @@ func (o *NiatelemetryNiaLicenseState) SetSiteName(v string) {
 	o.SiteName = &v
 }
 
-// GetDevice returns the Device field value if set, zero value otherwise.
+// GetDevice returns the Device field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryNiaLicenseState) GetDevice() NiatelemetryNiaInventoryRelationship {
-	if o == nil || o.Device == nil {
+	if o == nil || IsNil(o.Device.Get()) {
 		var ret NiatelemetryNiaInventoryRelationship
 		return ret
 	}
-	return *o.Device
+	return *o.Device.Get()
 }
 
 // GetDeviceOk returns a tuple with the Device field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNiaLicenseState) GetDeviceOk() (*NiatelemetryNiaInventoryRelationship, bool) {
-	if o == nil || o.Device == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Device, true
+	return o.Device.Get(), o.Device.IsSet()
 }
 
 // HasDevice returns a boolean if a field has been set.
 func (o *NiatelemetryNiaLicenseState) HasDevice() bool {
-	if o != nil && o.Device != nil {
+	if o != nil && o.Device.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDevice gets a reference to the given NiatelemetryNiaInventoryRelationship and assigns it to the Device field.
+// SetDevice gets a reference to the given NullableNiatelemetryNiaInventoryRelationship and assigns it to the Device field.
 func (o *NiatelemetryNiaLicenseState) SetDevice(v NiatelemetryNiaInventoryRelationship) {
-	o.Device = &v
+	o.Device.Set(&v)
+}
+
+// SetDeviceNil sets the value for Device to be an explicit nil
+func (o *NiatelemetryNiaLicenseState) SetDeviceNil() {
+	o.Device.Set(nil)
+}
+
+// UnsetDevice ensures that no value is present for Device, not even an explicit nil
+func (o *NiatelemetryNiaLicenseState) UnsetDevice() {
+	o.Device.Unset()
 }
 
 func (o NiatelemetryNiaLicenseState) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryNiaLicenseState) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FeatureActivated != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FeatureActivated) {
 		toSerialize["FeatureActivated"] = o.FeatureActivated
 	}
-	if o.LicenseActivated != nil {
+	if !IsNil(o.LicenseActivated) {
 		toSerialize["LicenseActivated"] = o.LicenseActivated
 	}
-	if o.PidType != nil {
+	if !IsNil(o.PidType) {
 		toSerialize["PidType"] = o.PidType
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.Serial != nil {
+	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.Device != nil {
-		toSerialize["Device"] = o.Device
+	if o.Device.IsSet() {
+		toSerialize["Device"] = o.Device.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryNiaLicenseState) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryNiaLicenseState) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryNiaLicenseStateWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -438,13 +479,13 @@ func (o *NiatelemetryNiaLicenseState) UnmarshalJSON(bytes []byte) (err error) {
 		// Serial number of device being inventoried. The serial number is unique per device.
 		Serial *string `json:"Serial,omitempty"`
 		// Name of fabric domain of the controller.
-		SiteName *string                               `json:"SiteName,omitempty"`
-		Device   *NiatelemetryNiaInventoryRelationship `json:"Device,omitempty"`
+		SiteName *string                                      `json:"SiteName,omitempty"`
+		Device   NullableNiatelemetryNiaInventoryRelationship `json:"Device,omitempty"`
 	}
 
 	varNiatelemetryNiaLicenseStateWithoutEmbeddedStruct := NiatelemetryNiaLicenseStateWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNiaLicenseStateWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryNiaLicenseStateWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryNiaLicenseState := _NiatelemetryNiaLicenseState{}
 		varNiatelemetryNiaLicenseState.ClassId = varNiatelemetryNiaLicenseStateWithoutEmbeddedStruct.ClassId
@@ -464,7 +505,7 @@ func (o *NiatelemetryNiaLicenseState) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryNiaLicenseState := _NiatelemetryNiaLicenseState{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNiaLicenseState)
+	err = json.Unmarshal(data, &varNiatelemetryNiaLicenseState)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryNiaLicenseState.MoBaseMo
 	} else {
@@ -473,7 +514,7 @@ func (o *NiatelemetryNiaLicenseState) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FeatureActivated")

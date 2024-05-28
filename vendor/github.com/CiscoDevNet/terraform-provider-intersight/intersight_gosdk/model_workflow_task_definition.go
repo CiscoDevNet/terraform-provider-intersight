@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowTaskDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowTaskDefinition{}
 
 // WorkflowTaskDefinition Used to define a task which can be included within a workflow. Task definition conveys the intent that we want to achieve with the task. We can have a standalone task definition that is bound to a single implementation for that task, or we can define an TaskDefinition that will serve as the interface task definition which is linked to multiple implementation tasks. Each implemented TaskDefinition will be bound to its own implementation so we can achieve a case where single TaskDefinition has multiple implementations.
 type WorkflowTaskDefinition struct {
@@ -40,13 +44,13 @@ type WorkflowTaskDefinition struct {
 	// If set to true, the task requires access to secure properties and uses an encryption token associated with a workflow moid to encrypt or decrypt the secure properties.
 	SecurePropAccess *bool `json:"SecurePropAccess,omitempty"`
 	// The version of the task definition so we can support multiple versions of a task definition.
-	Version    *int64                              `json:"Version,omitempty"`
-	Catalog    *WorkflowCatalogRelationship        `json:"Catalog,omitempty"`
-	ClonedFrom *WorkflowTaskDefinitionRelationship `json:"ClonedFrom,omitempty"`
+	Version    *int64                                     `json:"Version,omitempty"`
+	Catalog    NullableWorkflowCatalogRelationship        `json:"Catalog,omitempty"`
+	ClonedFrom NullableWorkflowTaskDefinitionRelationship `json:"ClonedFrom,omitempty"`
 	// An array of relationships to workflowTaskDefinition resources.
-	ImplementedTasks     []WorkflowTaskDefinitionRelationship `json:"ImplementedTasks,omitempty"`
-	InterfaceTask        *WorkflowTaskDefinitionRelationship  `json:"InterfaceTask,omitempty"`
-	TaskMetadata         *WorkflowTaskMetadataRelationship    `json:"TaskMetadata,omitempty"`
+	ImplementedTasks     []WorkflowTaskDefinitionRelationship       `json:"ImplementedTasks,omitempty"`
+	InterfaceTask        NullableWorkflowTaskDefinitionRelationship `json:"InterfaceTask,omitempty"`
+	TaskMetadata         NullableWorkflowTaskMetadataRelationship   `json:"TaskMetadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -129,7 +133,7 @@ func (o *WorkflowTaskDefinition) SetObjectType(v string) {
 
 // GetDefaultVersion returns the DefaultVersion field value if set, zero value otherwise.
 func (o *WorkflowTaskDefinition) GetDefaultVersion() bool {
-	if o == nil || o.DefaultVersion == nil {
+	if o == nil || IsNil(o.DefaultVersion) {
 		var ret bool
 		return ret
 	}
@@ -139,7 +143,7 @@ func (o *WorkflowTaskDefinition) GetDefaultVersion() bool {
 // GetDefaultVersionOk returns a tuple with the DefaultVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskDefinition) GetDefaultVersionOk() (*bool, bool) {
-	if o == nil || o.DefaultVersion == nil {
+	if o == nil || IsNil(o.DefaultVersion) {
 		return nil, false
 	}
 	return o.DefaultVersion, true
@@ -147,7 +151,7 @@ func (o *WorkflowTaskDefinition) GetDefaultVersionOk() (*bool, bool) {
 
 // HasDefaultVersion returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasDefaultVersion() bool {
-	if o != nil && o.DefaultVersion != nil {
+	if o != nil && !IsNil(o.DefaultVersion) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *WorkflowTaskDefinition) SetDefaultVersion(v bool) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *WorkflowTaskDefinition) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -171,7 +175,7 @@ func (o *WorkflowTaskDefinition) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskDefinition) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -179,7 +183,7 @@ func (o *WorkflowTaskDefinition) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -193,7 +197,7 @@ func (o *WorkflowTaskDefinition) SetDescription(v string) {
 
 // GetInternalProperties returns the InternalProperties field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskDefinition) GetInternalProperties() WorkflowInternalProperties {
-	if o == nil || o.InternalProperties.Get() == nil {
+	if o == nil || IsNil(o.InternalProperties.Get()) {
 		var ret WorkflowInternalProperties
 		return ret
 	}
@@ -236,7 +240,7 @@ func (o *WorkflowTaskDefinition) UnsetInternalProperties() {
 
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *WorkflowTaskDefinition) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
@@ -246,7 +250,7 @@ func (o *WorkflowTaskDefinition) GetLabel() string {
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskDefinition) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
 	return o.Label, true
@@ -254,7 +258,7 @@ func (o *WorkflowTaskDefinition) GetLabelOk() (*string, bool) {
 
 // HasLabel returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && !IsNil(o.Label) {
 		return true
 	}
 
@@ -268,7 +272,7 @@ func (o *WorkflowTaskDefinition) SetLabel(v string) {
 
 // GetLicenseEntitlement returns the LicenseEntitlement field value if set, zero value otherwise.
 func (o *WorkflowTaskDefinition) GetLicenseEntitlement() string {
-	if o == nil || o.LicenseEntitlement == nil {
+	if o == nil || IsNil(o.LicenseEntitlement) {
 		var ret string
 		return ret
 	}
@@ -278,7 +282,7 @@ func (o *WorkflowTaskDefinition) GetLicenseEntitlement() string {
 // GetLicenseEntitlementOk returns a tuple with the LicenseEntitlement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskDefinition) GetLicenseEntitlementOk() (*string, bool) {
-	if o == nil || o.LicenseEntitlement == nil {
+	if o == nil || IsNil(o.LicenseEntitlement) {
 		return nil, false
 	}
 	return o.LicenseEntitlement, true
@@ -286,7 +290,7 @@ func (o *WorkflowTaskDefinition) GetLicenseEntitlementOk() (*string, bool) {
 
 // HasLicenseEntitlement returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasLicenseEntitlement() bool {
-	if o != nil && o.LicenseEntitlement != nil {
+	if o != nil && !IsNil(o.LicenseEntitlement) {
 		return true
 	}
 
@@ -300,7 +304,7 @@ func (o *WorkflowTaskDefinition) SetLicenseEntitlement(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkflowTaskDefinition) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -310,7 +314,7 @@ func (o *WorkflowTaskDefinition) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskDefinition) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -318,7 +322,7 @@ func (o *WorkflowTaskDefinition) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -332,7 +336,7 @@ func (o *WorkflowTaskDefinition) SetName(v string) {
 
 // GetProperties returns the Properties field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskDefinition) GetProperties() WorkflowProperties {
-	if o == nil || o.Properties.Get() == nil {
+	if o == nil || IsNil(o.Properties.Get()) {
 		var ret WorkflowProperties
 		return ret
 	}
@@ -386,7 +390,7 @@ func (o *WorkflowTaskDefinition) GetRollbackTasks() []WorkflowRollbackTask {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskDefinition) GetRollbackTasksOk() ([]WorkflowRollbackTask, bool) {
-	if o == nil || o.RollbackTasks == nil {
+	if o == nil || IsNil(o.RollbackTasks) {
 		return nil, false
 	}
 	return o.RollbackTasks, true
@@ -394,7 +398,7 @@ func (o *WorkflowTaskDefinition) GetRollbackTasksOk() ([]WorkflowRollbackTask, b
 
 // HasRollbackTasks returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasRollbackTasks() bool {
-	if o != nil && o.RollbackTasks != nil {
+	if o != nil && IsNil(o.RollbackTasks) {
 		return true
 	}
 
@@ -408,7 +412,7 @@ func (o *WorkflowTaskDefinition) SetRollbackTasks(v []WorkflowRollbackTask) {
 
 // GetSecurePropAccess returns the SecurePropAccess field value if set, zero value otherwise.
 func (o *WorkflowTaskDefinition) GetSecurePropAccess() bool {
-	if o == nil || o.SecurePropAccess == nil {
+	if o == nil || IsNil(o.SecurePropAccess) {
 		var ret bool
 		return ret
 	}
@@ -418,7 +422,7 @@ func (o *WorkflowTaskDefinition) GetSecurePropAccess() bool {
 // GetSecurePropAccessOk returns a tuple with the SecurePropAccess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskDefinition) GetSecurePropAccessOk() (*bool, bool) {
-	if o == nil || o.SecurePropAccess == nil {
+	if o == nil || IsNil(o.SecurePropAccess) {
 		return nil, false
 	}
 	return o.SecurePropAccess, true
@@ -426,7 +430,7 @@ func (o *WorkflowTaskDefinition) GetSecurePropAccessOk() (*bool, bool) {
 
 // HasSecurePropAccess returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasSecurePropAccess() bool {
-	if o != nil && o.SecurePropAccess != nil {
+	if o != nil && !IsNil(o.SecurePropAccess) {
 		return true
 	}
 
@@ -440,7 +444,7 @@ func (o *WorkflowTaskDefinition) SetSecurePropAccess(v bool) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *WorkflowTaskDefinition) GetVersion() int64 {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret int64
 		return ret
 	}
@@ -450,7 +454,7 @@ func (o *WorkflowTaskDefinition) GetVersion() int64 {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTaskDefinition) GetVersionOk() (*int64, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -458,7 +462,7 @@ func (o *WorkflowTaskDefinition) GetVersionOk() (*int64, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -470,68 +474,90 @@ func (o *WorkflowTaskDefinition) SetVersion(v int64) {
 	o.Version = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskDefinition) GetCatalog() WorkflowCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret WorkflowCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskDefinition) GetCatalogOk() (*WorkflowCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given WorkflowCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableWorkflowCatalogRelationship and assigns it to the Catalog field.
 func (o *WorkflowTaskDefinition) SetCatalog(v WorkflowCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
 }
 
-// GetClonedFrom returns the ClonedFrom field value if set, zero value otherwise.
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *WorkflowTaskDefinition) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *WorkflowTaskDefinition) UnsetCatalog() {
+	o.Catalog.Unset()
+}
+
+// GetClonedFrom returns the ClonedFrom field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskDefinition) GetClonedFrom() WorkflowTaskDefinitionRelationship {
-	if o == nil || o.ClonedFrom == nil {
+	if o == nil || IsNil(o.ClonedFrom.Get()) {
 		var ret WorkflowTaskDefinitionRelationship
 		return ret
 	}
-	return *o.ClonedFrom
+	return *o.ClonedFrom.Get()
 }
 
 // GetClonedFromOk returns a tuple with the ClonedFrom field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskDefinition) GetClonedFromOk() (*WorkflowTaskDefinitionRelationship, bool) {
-	if o == nil || o.ClonedFrom == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClonedFrom, true
+	return o.ClonedFrom.Get(), o.ClonedFrom.IsSet()
 }
 
 // HasClonedFrom returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasClonedFrom() bool {
-	if o != nil && o.ClonedFrom != nil {
+	if o != nil && o.ClonedFrom.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClonedFrom gets a reference to the given WorkflowTaskDefinitionRelationship and assigns it to the ClonedFrom field.
+// SetClonedFrom gets a reference to the given NullableWorkflowTaskDefinitionRelationship and assigns it to the ClonedFrom field.
 func (o *WorkflowTaskDefinition) SetClonedFrom(v WorkflowTaskDefinitionRelationship) {
-	o.ClonedFrom = &v
+	o.ClonedFrom.Set(&v)
+}
+
+// SetClonedFromNil sets the value for ClonedFrom to be an explicit nil
+func (o *WorkflowTaskDefinition) SetClonedFromNil() {
+	o.ClonedFrom.Set(nil)
+}
+
+// UnsetClonedFrom ensures that no value is present for ClonedFrom, not even an explicit nil
+func (o *WorkflowTaskDefinition) UnsetClonedFrom() {
+	o.ClonedFrom.Unset()
 }
 
 // GetImplementedTasks returns the ImplementedTasks field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -547,7 +573,7 @@ func (o *WorkflowTaskDefinition) GetImplementedTasks() []WorkflowTaskDefinitionR
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskDefinition) GetImplementedTasksOk() ([]WorkflowTaskDefinitionRelationship, bool) {
-	if o == nil || o.ImplementedTasks == nil {
+	if o == nil || IsNil(o.ImplementedTasks) {
 		return nil, false
 	}
 	return o.ImplementedTasks, true
@@ -555,7 +581,7 @@ func (o *WorkflowTaskDefinition) GetImplementedTasksOk() ([]WorkflowTaskDefiniti
 
 // HasImplementedTasks returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasImplementedTasks() bool {
-	if o != nil && o.ImplementedTasks != nil {
+	if o != nil && IsNil(o.ImplementedTasks) {
 		return true
 	}
 
@@ -567,102 +593,128 @@ func (o *WorkflowTaskDefinition) SetImplementedTasks(v []WorkflowTaskDefinitionR
 	o.ImplementedTasks = v
 }
 
-// GetInterfaceTask returns the InterfaceTask field value if set, zero value otherwise.
+// GetInterfaceTask returns the InterfaceTask field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskDefinition) GetInterfaceTask() WorkflowTaskDefinitionRelationship {
-	if o == nil || o.InterfaceTask == nil {
+	if o == nil || IsNil(o.InterfaceTask.Get()) {
 		var ret WorkflowTaskDefinitionRelationship
 		return ret
 	}
-	return *o.InterfaceTask
+	return *o.InterfaceTask.Get()
 }
 
 // GetInterfaceTaskOk returns a tuple with the InterfaceTask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskDefinition) GetInterfaceTaskOk() (*WorkflowTaskDefinitionRelationship, bool) {
-	if o == nil || o.InterfaceTask == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InterfaceTask, true
+	return o.InterfaceTask.Get(), o.InterfaceTask.IsSet()
 }
 
 // HasInterfaceTask returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasInterfaceTask() bool {
-	if o != nil && o.InterfaceTask != nil {
+	if o != nil && o.InterfaceTask.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInterfaceTask gets a reference to the given WorkflowTaskDefinitionRelationship and assigns it to the InterfaceTask field.
+// SetInterfaceTask gets a reference to the given NullableWorkflowTaskDefinitionRelationship and assigns it to the InterfaceTask field.
 func (o *WorkflowTaskDefinition) SetInterfaceTask(v WorkflowTaskDefinitionRelationship) {
-	o.InterfaceTask = &v
+	o.InterfaceTask.Set(&v)
 }
 
-// GetTaskMetadata returns the TaskMetadata field value if set, zero value otherwise.
+// SetInterfaceTaskNil sets the value for InterfaceTask to be an explicit nil
+func (o *WorkflowTaskDefinition) SetInterfaceTaskNil() {
+	o.InterfaceTask.Set(nil)
+}
+
+// UnsetInterfaceTask ensures that no value is present for InterfaceTask, not even an explicit nil
+func (o *WorkflowTaskDefinition) UnsetInterfaceTask() {
+	o.InterfaceTask.Unset()
+}
+
+// GetTaskMetadata returns the TaskMetadata field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskDefinition) GetTaskMetadata() WorkflowTaskMetadataRelationship {
-	if o == nil || o.TaskMetadata == nil {
+	if o == nil || IsNil(o.TaskMetadata.Get()) {
 		var ret WorkflowTaskMetadataRelationship
 		return ret
 	}
-	return *o.TaskMetadata
+	return *o.TaskMetadata.Get()
 }
 
 // GetTaskMetadataOk returns a tuple with the TaskMetadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTaskDefinition) GetTaskMetadataOk() (*WorkflowTaskMetadataRelationship, bool) {
-	if o == nil || o.TaskMetadata == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TaskMetadata, true
+	return o.TaskMetadata.Get(), o.TaskMetadata.IsSet()
 }
 
 // HasTaskMetadata returns a boolean if a field has been set.
 func (o *WorkflowTaskDefinition) HasTaskMetadata() bool {
-	if o != nil && o.TaskMetadata != nil {
+	if o != nil && o.TaskMetadata.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTaskMetadata gets a reference to the given WorkflowTaskMetadataRelationship and assigns it to the TaskMetadata field.
+// SetTaskMetadata gets a reference to the given NullableWorkflowTaskMetadataRelationship and assigns it to the TaskMetadata field.
 func (o *WorkflowTaskDefinition) SetTaskMetadata(v WorkflowTaskMetadataRelationship) {
-	o.TaskMetadata = &v
+	o.TaskMetadata.Set(&v)
+}
+
+// SetTaskMetadataNil sets the value for TaskMetadata to be an explicit nil
+func (o *WorkflowTaskDefinition) SetTaskMetadataNil() {
+	o.TaskMetadata.Set(nil)
+}
+
+// UnsetTaskMetadata ensures that no value is present for TaskMetadata, not even an explicit nil
+func (o *WorkflowTaskDefinition) UnsetTaskMetadata() {
+	o.TaskMetadata.Unset()
 }
 
 func (o WorkflowTaskDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowTaskDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DefaultVersion != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DefaultVersion) {
 		toSerialize["DefaultVersion"] = o.DefaultVersion
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
 	if o.InternalProperties.IsSet() {
 		toSerialize["InternalProperties"] = o.InternalProperties.Get()
 	}
-	if o.Label != nil {
+	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
 	}
-	if o.LicenseEntitlement != nil {
+	if !IsNil(o.LicenseEntitlement) {
 		toSerialize["LicenseEntitlement"] = o.LicenseEntitlement
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.Properties.IsSet() {
@@ -671,36 +723,58 @@ func (o WorkflowTaskDefinition) MarshalJSON() ([]byte, error) {
 	if o.RollbackTasks != nil {
 		toSerialize["RollbackTasks"] = o.RollbackTasks
 	}
-	if o.SecurePropAccess != nil {
+	if !IsNil(o.SecurePropAccess) {
 		toSerialize["SecurePropAccess"] = o.SecurePropAccess
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
-	if o.ClonedFrom != nil {
-		toSerialize["ClonedFrom"] = o.ClonedFrom
+	if o.ClonedFrom.IsSet() {
+		toSerialize["ClonedFrom"] = o.ClonedFrom.Get()
 	}
 	if o.ImplementedTasks != nil {
 		toSerialize["ImplementedTasks"] = o.ImplementedTasks
 	}
-	if o.InterfaceTask != nil {
-		toSerialize["InterfaceTask"] = o.InterfaceTask
+	if o.InterfaceTask.IsSet() {
+		toSerialize["InterfaceTask"] = o.InterfaceTask.Get()
 	}
-	if o.TaskMetadata != nil {
-		toSerialize["TaskMetadata"] = o.TaskMetadata
+	if o.TaskMetadata.IsSet() {
+		toSerialize["TaskMetadata"] = o.TaskMetadata.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowTaskDefinition) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowTaskDefinition) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowTaskDefinitionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -722,18 +796,18 @@ func (o *WorkflowTaskDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		// If set to true, the task requires access to secure properties and uses an encryption token associated with a workflow moid to encrypt or decrypt the secure properties.
 		SecurePropAccess *bool `json:"SecurePropAccess,omitempty"`
 		// The version of the task definition so we can support multiple versions of a task definition.
-		Version    *int64                              `json:"Version,omitempty"`
-		Catalog    *WorkflowCatalogRelationship        `json:"Catalog,omitempty"`
-		ClonedFrom *WorkflowTaskDefinitionRelationship `json:"ClonedFrom,omitempty"`
+		Version    *int64                                     `json:"Version,omitempty"`
+		Catalog    NullableWorkflowCatalogRelationship        `json:"Catalog,omitempty"`
+		ClonedFrom NullableWorkflowTaskDefinitionRelationship `json:"ClonedFrom,omitempty"`
 		// An array of relationships to workflowTaskDefinition resources.
-		ImplementedTasks []WorkflowTaskDefinitionRelationship `json:"ImplementedTasks,omitempty"`
-		InterfaceTask    *WorkflowTaskDefinitionRelationship  `json:"InterfaceTask,omitempty"`
-		TaskMetadata     *WorkflowTaskMetadataRelationship    `json:"TaskMetadata,omitempty"`
+		ImplementedTasks []WorkflowTaskDefinitionRelationship       `json:"ImplementedTasks,omitempty"`
+		InterfaceTask    NullableWorkflowTaskDefinitionRelationship `json:"InterfaceTask,omitempty"`
+		TaskMetadata     NullableWorkflowTaskMetadataRelationship   `json:"TaskMetadata,omitempty"`
 	}
 
 	varWorkflowTaskDefinitionWithoutEmbeddedStruct := WorkflowTaskDefinitionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowTaskDefinitionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowTaskDefinitionWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowTaskDefinition := _WorkflowTaskDefinition{}
 		varWorkflowTaskDefinition.ClassId = varWorkflowTaskDefinitionWithoutEmbeddedStruct.ClassId
@@ -760,7 +834,7 @@ func (o *WorkflowTaskDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowTaskDefinition := _WorkflowTaskDefinition{}
 
-	err = json.Unmarshal(bytes, &varWorkflowTaskDefinition)
+	err = json.Unmarshal(data, &varWorkflowTaskDefinition)
 	if err == nil {
 		o.MoBaseMo = varWorkflowTaskDefinition.MoBaseMo
 	} else {
@@ -769,7 +843,7 @@ func (o *WorkflowTaskDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DefaultVersion")

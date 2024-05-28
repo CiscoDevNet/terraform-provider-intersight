@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PowerPolicyInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PowerPolicyInventory{}
 
 // PowerPolicyInventory Power Management policy models a configuration that can be applied to Chassis or Server to manage Power Related Features.
 type PowerPolicyInventory struct {
@@ -39,8 +43,8 @@ type PowerPolicyInventory struct {
 	// Sets the power save mode of the chassis. If the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in power save mode. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 	PowerSaveMode *string `json:"PowerSaveMode,omitempty"`
 	// Sets the Power Redundancy Mode of the Chassis.  Redundancy Mode determines the number of PSUs the chassis keeps as redundant.  N+2 mode is only supported for Cisco UCS X series Chassis. * `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis. * `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained. * `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy. * `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.
-	RedundancyMode       *string               `json:"RedundancyMode,omitempty"`
-	TargetMo             *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+	RedundancyMode       *string                      `json:"RedundancyMode,omitempty"`
+	TargetMo             NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *PowerPolicyInventory) SetObjectType(v string) {
 
 // GetAllocatedBudget returns the AllocatedBudget field value if set, zero value otherwise.
 func (o *PowerPolicyInventory) GetAllocatedBudget() int64 {
-	if o == nil || o.AllocatedBudget == nil {
+	if o == nil || IsNil(o.AllocatedBudget) {
 		var ret int64
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *PowerPolicyInventory) GetAllocatedBudget() int64 {
 // GetAllocatedBudgetOk returns a tuple with the AllocatedBudget field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerPolicyInventory) GetAllocatedBudgetOk() (*int64, bool) {
-	if o == nil || o.AllocatedBudget == nil {
+	if o == nil || IsNil(o.AllocatedBudget) {
 		return nil, false
 	}
 	return o.AllocatedBudget, true
@@ -137,7 +141,7 @@ func (o *PowerPolicyInventory) GetAllocatedBudgetOk() (*int64, bool) {
 
 // HasAllocatedBudget returns a boolean if a field has been set.
 func (o *PowerPolicyInventory) HasAllocatedBudget() bool {
-	if o != nil && o.AllocatedBudget != nil {
+	if o != nil && !IsNil(o.AllocatedBudget) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *PowerPolicyInventory) SetAllocatedBudget(v int64) {
 
 // GetDynamicRebalancing returns the DynamicRebalancing field value if set, zero value otherwise.
 func (o *PowerPolicyInventory) GetDynamicRebalancing() string {
-	if o == nil || o.DynamicRebalancing == nil {
+	if o == nil || IsNil(o.DynamicRebalancing) {
 		var ret string
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *PowerPolicyInventory) GetDynamicRebalancing() string {
 // GetDynamicRebalancingOk returns a tuple with the DynamicRebalancing field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerPolicyInventory) GetDynamicRebalancingOk() (*string, bool) {
-	if o == nil || o.DynamicRebalancing == nil {
+	if o == nil || IsNil(o.DynamicRebalancing) {
 		return nil, false
 	}
 	return o.DynamicRebalancing, true
@@ -169,7 +173,7 @@ func (o *PowerPolicyInventory) GetDynamicRebalancingOk() (*string, bool) {
 
 // HasDynamicRebalancing returns a boolean if a field has been set.
 func (o *PowerPolicyInventory) HasDynamicRebalancing() bool {
-	if o != nil && o.DynamicRebalancing != nil {
+	if o != nil && !IsNil(o.DynamicRebalancing) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *PowerPolicyInventory) SetDynamicRebalancing(v string) {
 
 // GetExtendedPowerCapacity returns the ExtendedPowerCapacity field value if set, zero value otherwise.
 func (o *PowerPolicyInventory) GetExtendedPowerCapacity() string {
-	if o == nil || o.ExtendedPowerCapacity == nil {
+	if o == nil || IsNil(o.ExtendedPowerCapacity) {
 		var ret string
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *PowerPolicyInventory) GetExtendedPowerCapacity() string {
 // GetExtendedPowerCapacityOk returns a tuple with the ExtendedPowerCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerPolicyInventory) GetExtendedPowerCapacityOk() (*string, bool) {
-	if o == nil || o.ExtendedPowerCapacity == nil {
+	if o == nil || IsNil(o.ExtendedPowerCapacity) {
 		return nil, false
 	}
 	return o.ExtendedPowerCapacity, true
@@ -201,7 +205,7 @@ func (o *PowerPolicyInventory) GetExtendedPowerCapacityOk() (*string, bool) {
 
 // HasExtendedPowerCapacity returns a boolean if a field has been set.
 func (o *PowerPolicyInventory) HasExtendedPowerCapacity() bool {
-	if o != nil && o.ExtendedPowerCapacity != nil {
+	if o != nil && !IsNil(o.ExtendedPowerCapacity) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *PowerPolicyInventory) SetExtendedPowerCapacity(v string) {
 
 // GetPowerPriority returns the PowerPriority field value if set, zero value otherwise.
 func (o *PowerPolicyInventory) GetPowerPriority() string {
-	if o == nil || o.PowerPriority == nil {
+	if o == nil || IsNil(o.PowerPriority) {
 		var ret string
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *PowerPolicyInventory) GetPowerPriority() string {
 // GetPowerPriorityOk returns a tuple with the PowerPriority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerPolicyInventory) GetPowerPriorityOk() (*string, bool) {
-	if o == nil || o.PowerPriority == nil {
+	if o == nil || IsNil(o.PowerPriority) {
 		return nil, false
 	}
 	return o.PowerPriority, true
@@ -233,7 +237,7 @@ func (o *PowerPolicyInventory) GetPowerPriorityOk() (*string, bool) {
 
 // HasPowerPriority returns a boolean if a field has been set.
 func (o *PowerPolicyInventory) HasPowerPriority() bool {
-	if o != nil && o.PowerPriority != nil {
+	if o != nil && !IsNil(o.PowerPriority) {
 		return true
 	}
 
@@ -247,7 +251,7 @@ func (o *PowerPolicyInventory) SetPowerPriority(v string) {
 
 // GetPowerProfiling returns the PowerProfiling field value if set, zero value otherwise.
 func (o *PowerPolicyInventory) GetPowerProfiling() string {
-	if o == nil || o.PowerProfiling == nil {
+	if o == nil || IsNil(o.PowerProfiling) {
 		var ret string
 		return ret
 	}
@@ -257,7 +261,7 @@ func (o *PowerPolicyInventory) GetPowerProfiling() string {
 // GetPowerProfilingOk returns a tuple with the PowerProfiling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerPolicyInventory) GetPowerProfilingOk() (*string, bool) {
-	if o == nil || o.PowerProfiling == nil {
+	if o == nil || IsNil(o.PowerProfiling) {
 		return nil, false
 	}
 	return o.PowerProfiling, true
@@ -265,7 +269,7 @@ func (o *PowerPolicyInventory) GetPowerProfilingOk() (*string, bool) {
 
 // HasPowerProfiling returns a boolean if a field has been set.
 func (o *PowerPolicyInventory) HasPowerProfiling() bool {
-	if o != nil && o.PowerProfiling != nil {
+	if o != nil && !IsNil(o.PowerProfiling) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *PowerPolicyInventory) SetPowerProfiling(v string) {
 
 // GetPowerRestoreState returns the PowerRestoreState field value if set, zero value otherwise.
 func (o *PowerPolicyInventory) GetPowerRestoreState() string {
-	if o == nil || o.PowerRestoreState == nil {
+	if o == nil || IsNil(o.PowerRestoreState) {
 		var ret string
 		return ret
 	}
@@ -289,7 +293,7 @@ func (o *PowerPolicyInventory) GetPowerRestoreState() string {
 // GetPowerRestoreStateOk returns a tuple with the PowerRestoreState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerPolicyInventory) GetPowerRestoreStateOk() (*string, bool) {
-	if o == nil || o.PowerRestoreState == nil {
+	if o == nil || IsNil(o.PowerRestoreState) {
 		return nil, false
 	}
 	return o.PowerRestoreState, true
@@ -297,7 +301,7 @@ func (o *PowerPolicyInventory) GetPowerRestoreStateOk() (*string, bool) {
 
 // HasPowerRestoreState returns a boolean if a field has been set.
 func (o *PowerPolicyInventory) HasPowerRestoreState() bool {
-	if o != nil && o.PowerRestoreState != nil {
+	if o != nil && !IsNil(o.PowerRestoreState) {
 		return true
 	}
 
@@ -311,7 +315,7 @@ func (o *PowerPolicyInventory) SetPowerRestoreState(v string) {
 
 // GetPowerSaveMode returns the PowerSaveMode field value if set, zero value otherwise.
 func (o *PowerPolicyInventory) GetPowerSaveMode() string {
-	if o == nil || o.PowerSaveMode == nil {
+	if o == nil || IsNil(o.PowerSaveMode) {
 		var ret string
 		return ret
 	}
@@ -321,7 +325,7 @@ func (o *PowerPolicyInventory) GetPowerSaveMode() string {
 // GetPowerSaveModeOk returns a tuple with the PowerSaveMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerPolicyInventory) GetPowerSaveModeOk() (*string, bool) {
-	if o == nil || o.PowerSaveMode == nil {
+	if o == nil || IsNil(o.PowerSaveMode) {
 		return nil, false
 	}
 	return o.PowerSaveMode, true
@@ -329,7 +333,7 @@ func (o *PowerPolicyInventory) GetPowerSaveModeOk() (*string, bool) {
 
 // HasPowerSaveMode returns a boolean if a field has been set.
 func (o *PowerPolicyInventory) HasPowerSaveMode() bool {
-	if o != nil && o.PowerSaveMode != nil {
+	if o != nil && !IsNil(o.PowerSaveMode) {
 		return true
 	}
 
@@ -343,7 +347,7 @@ func (o *PowerPolicyInventory) SetPowerSaveMode(v string) {
 
 // GetRedundancyMode returns the RedundancyMode field value if set, zero value otherwise.
 func (o *PowerPolicyInventory) GetRedundancyMode() string {
-	if o == nil || o.RedundancyMode == nil {
+	if o == nil || IsNil(o.RedundancyMode) {
 		var ret string
 		return ret
 	}
@@ -353,7 +357,7 @@ func (o *PowerPolicyInventory) GetRedundancyMode() string {
 // GetRedundancyModeOk returns a tuple with the RedundancyMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PowerPolicyInventory) GetRedundancyModeOk() (*string, bool) {
-	if o == nil || o.RedundancyMode == nil {
+	if o == nil || IsNil(o.RedundancyMode) {
 		return nil, false
 	}
 	return o.RedundancyMode, true
@@ -361,7 +365,7 @@ func (o *PowerPolicyInventory) GetRedundancyModeOk() (*string, bool) {
 
 // HasRedundancyMode returns a boolean if a field has been set.
 func (o *PowerPolicyInventory) HasRedundancyMode() bool {
-	if o != nil && o.RedundancyMode != nil {
+	if o != nil && !IsNil(o.RedundancyMode) {
 		return true
 	}
 
@@ -373,90 +377,127 @@ func (o *PowerPolicyInventory) SetRedundancyMode(v string) {
 	o.RedundancyMode = &v
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PowerPolicyInventory) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PowerPolicyInventory) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *PowerPolicyInventory) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *PowerPolicyInventory) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *PowerPolicyInventory) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *PowerPolicyInventory) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o PowerPolicyInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PowerPolicyInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicyInventory, errPolicyAbstractPolicyInventory := json.Marshal(o.PolicyAbstractPolicyInventory)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
 	errPolicyAbstractPolicyInventory = json.Unmarshal([]byte(serializedPolicyAbstractPolicyInventory), &toSerialize)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AllocatedBudget != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AllocatedBudget) {
 		toSerialize["AllocatedBudget"] = o.AllocatedBudget
 	}
-	if o.DynamicRebalancing != nil {
+	if !IsNil(o.DynamicRebalancing) {
 		toSerialize["DynamicRebalancing"] = o.DynamicRebalancing
 	}
-	if o.ExtendedPowerCapacity != nil {
+	if !IsNil(o.ExtendedPowerCapacity) {
 		toSerialize["ExtendedPowerCapacity"] = o.ExtendedPowerCapacity
 	}
-	if o.PowerPriority != nil {
+	if !IsNil(o.PowerPriority) {
 		toSerialize["PowerPriority"] = o.PowerPriority
 	}
-	if o.PowerProfiling != nil {
+	if !IsNil(o.PowerProfiling) {
 		toSerialize["PowerProfiling"] = o.PowerProfiling
 	}
-	if o.PowerRestoreState != nil {
+	if !IsNil(o.PowerRestoreState) {
 		toSerialize["PowerRestoreState"] = o.PowerRestoreState
 	}
-	if o.PowerSaveMode != nil {
+	if !IsNil(o.PowerSaveMode) {
 		toSerialize["PowerSaveMode"] = o.PowerSaveMode
 	}
-	if o.RedundancyMode != nil {
+	if !IsNil(o.RedundancyMode) {
 		toSerialize["RedundancyMode"] = o.RedundancyMode
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PowerPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PowerPolicyInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PowerPolicyInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -477,13 +518,13 @@ func (o *PowerPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// Sets the power save mode of the chassis. If the requested power budget is less than available power capacity,  the additional PSUs not required to comply with redundancy policy are placed in power save mode. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 		PowerSaveMode *string `json:"PowerSaveMode,omitempty"`
 		// Sets the Power Redundancy Mode of the Chassis.  Redundancy Mode determines the number of PSUs the chassis keeps as redundant.  N+2 mode is only supported for Cisco UCS X series Chassis. * `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis. * `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained. * `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy. * `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.
-		RedundancyMode *string               `json:"RedundancyMode,omitempty"`
-		TargetMo       *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+		RedundancyMode *string                      `json:"RedundancyMode,omitempty"`
+		TargetMo       NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	}
 
 	varPowerPolicyInventoryWithoutEmbeddedStruct := PowerPolicyInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPowerPolicyInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPowerPolicyInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varPowerPolicyInventory := _PowerPolicyInventory{}
 		varPowerPolicyInventory.ClassId = varPowerPolicyInventoryWithoutEmbeddedStruct.ClassId
@@ -504,7 +545,7 @@ func (o *PowerPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPowerPolicyInventory := _PowerPolicyInventory{}
 
-	err = json.Unmarshal(bytes, &varPowerPolicyInventory)
+	err = json.Unmarshal(data, &varPowerPolicyInventory)
 	if err == nil {
 		o.PolicyAbstractPolicyInventory = varPowerPolicyInventory.PolicyAbstractPolicyInventory
 	} else {
@@ -513,7 +554,7 @@ func (o *PowerPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllocatedBudget")

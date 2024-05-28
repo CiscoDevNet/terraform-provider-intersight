@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **IqnPrefix** | Pointer to **string** | Prefix of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
 **IqnSuffix** | Pointer to **string** | Suffix of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
 **Reservation** | Pointer to [**IqnpoolReservationReference**](IqnpoolReservationReference.md) |  | [optional] 
-**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**Pool** | Pointer to [**IqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**IqnpoolPoolMemberRelationship**](IqnpoolPoolMemberRelationship.md) |  | [optional] 
-**Universe** | Pointer to [**IqnpoolUniverseRelationship**](IqnpoolUniverseRelationship.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableIqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**NullableIqnpoolPoolMemberRelationship**](IqnpoolPoolMemberRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**NullableIqnpoolUniverseRelationship**](IqnpoolUniverseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -225,6 +225,16 @@ SetAssignedToEntity sets AssignedToEntity field to given value.
 
 HasAssignedToEntity returns a boolean if a field has been set.
 
+### SetAssignedToEntityNil
+
+`func (o *IqnpoolLease) SetAssignedToEntityNil(b bool)`
+
+ SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+
+### UnsetAssignedToEntity
+`func (o *IqnpoolLease) UnsetAssignedToEntity()`
+
+UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
 ### GetPool
 
 `func (o *IqnpoolLease) GetPool() IqnpoolPoolRelationship`
@@ -250,6 +260,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *IqnpoolLease) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *IqnpoolLease) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetPoolMember
 
 `func (o *IqnpoolLease) GetPoolMember() IqnpoolPoolMemberRelationship`
@@ -275,6 +295,16 @@ SetPoolMember sets PoolMember field to given value.
 
 HasPoolMember returns a boolean if a field has been set.
 
+### SetPoolMemberNil
+
+`func (o *IqnpoolLease) SetPoolMemberNil(b bool)`
+
+ SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+
+### UnsetPoolMember
+`func (o *IqnpoolLease) UnsetPoolMember()`
+
+UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
 ### GetUniverse
 
 `func (o *IqnpoolLease) GetUniverse() IqnpoolUniverseRelationship`
@@ -300,6 +330,16 @@ SetUniverse sets Universe field to given value.
 
 HasUniverse returns a boolean if a field has been set.
 
+### SetUniverseNil
+
+`func (o *IqnpoolLease) SetUniverseNil(b bool)`
+
+ SetUniverseNil sets the value for Universe to be an explicit nil
+
+### UnsetUniverse
+`func (o *IqnpoolLease) UnsetUniverse()`
+
+UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

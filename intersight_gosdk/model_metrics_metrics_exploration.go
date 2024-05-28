@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MetricsMetricsExploration type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MetricsMetricsExploration{}
 
 // MetricsMetricsExploration Contains info regarding metrics query and templating information.
 type MetricsMetricsExploration struct {
@@ -36,8 +40,8 @@ type MetricsMetricsExploration struct {
 	Name       *string  `json:"Name,omitempty"`
 	RawQueries []string `json:"RawQueries,omitempty"`
 	// Chart configuration options.
-	VisualConfig         interface{}                           `json:"VisualConfig,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	VisualConfig         interface{}                                  `json:"VisualConfig,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -116,7 +120,7 @@ func (o *MetricsMetricsExploration) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *MetricsMetricsExploration) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *MetricsMetricsExploration) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricsMetricsExploration) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -134,7 +138,7 @@ func (o *MetricsMetricsExploration) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *MetricsMetricsExploration) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *MetricsMetricsExploration) SetDescription(v string) {
 
 // GetGranularity returns the Granularity field value if set, zero value otherwise.
 func (o *MetricsMetricsExploration) GetGranularity() string {
-	if o == nil || o.Granularity == nil {
+	if o == nil || IsNil(o.Granularity) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *MetricsMetricsExploration) GetGranularity() string {
 // GetGranularityOk returns a tuple with the Granularity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricsMetricsExploration) GetGranularityOk() (*string, bool) {
-	if o == nil || o.Granularity == nil {
+	if o == nil || IsNil(o.Granularity) {
 		return nil, false
 	}
 	return o.Granularity, true
@@ -166,7 +170,7 @@ func (o *MetricsMetricsExploration) GetGranularityOk() (*string, bool) {
 
 // HasGranularity returns a boolean if a field has been set.
 func (o *MetricsMetricsExploration) HasGranularity() bool {
-	if o != nil && o.Granularity != nil {
+	if o != nil && !IsNil(o.Granularity) {
 		return true
 	}
 
@@ -191,7 +195,7 @@ func (o *MetricsMetricsExploration) GetIntervals() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MetricsMetricsExploration) GetIntervalsOk() ([]string, bool) {
-	if o == nil || o.Intervals == nil {
+	if o == nil || IsNil(o.Intervals) {
 		return nil, false
 	}
 	return o.Intervals, true
@@ -199,7 +203,7 @@ func (o *MetricsMetricsExploration) GetIntervalsOk() ([]string, bool) {
 
 // HasIntervals returns a boolean if a field has been set.
 func (o *MetricsMetricsExploration) HasIntervals() bool {
-	if o != nil && o.Intervals != nil {
+	if o != nil && IsNil(o.Intervals) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *MetricsMetricsExploration) SetIntervals(v []string) {
 
 // GetIsWidget returns the IsWidget field value if set, zero value otherwise.
 func (o *MetricsMetricsExploration) GetIsWidget() bool {
-	if o == nil || o.IsWidget == nil {
+	if o == nil || IsNil(o.IsWidget) {
 		var ret bool
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *MetricsMetricsExploration) GetIsWidget() bool {
 // GetIsWidgetOk returns a tuple with the IsWidget field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricsMetricsExploration) GetIsWidgetOk() (*bool, bool) {
-	if o == nil || o.IsWidget == nil {
+	if o == nil || IsNil(o.IsWidget) {
 		return nil, false
 	}
 	return o.IsWidget, true
@@ -231,7 +235,7 @@ func (o *MetricsMetricsExploration) GetIsWidgetOk() (*bool, bool) {
 
 // HasIsWidget returns a boolean if a field has been set.
 func (o *MetricsMetricsExploration) HasIsWidget() bool {
-	if o != nil && o.IsWidget != nil {
+	if o != nil && !IsNil(o.IsWidget) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *MetricsMetricsExploration) GetMetricCriteria() []MetricsMetricCriterion
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MetricsMetricsExploration) GetMetricCriteriaOk() ([]MetricsMetricCriterion, bool) {
-	if o == nil || o.MetricCriteria == nil {
+	if o == nil || IsNil(o.MetricCriteria) {
 		return nil, false
 	}
 	return o.MetricCriteria, true
@@ -264,7 +268,7 @@ func (o *MetricsMetricsExploration) GetMetricCriteriaOk() ([]MetricsMetricCriter
 
 // HasMetricCriteria returns a boolean if a field has been set.
 func (o *MetricsMetricsExploration) HasMetricCriteria() bool {
-	if o != nil && o.MetricCriteria != nil {
+	if o != nil && IsNil(o.MetricCriteria) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *MetricsMetricsExploration) SetMetricCriteria(v []MetricsMetricCriterion
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *MetricsMetricsExploration) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *MetricsMetricsExploration) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricsMetricsExploration) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -296,7 +300,7 @@ func (o *MetricsMetricsExploration) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *MetricsMetricsExploration) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -321,7 +325,7 @@ func (o *MetricsMetricsExploration) GetRawQueries() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MetricsMetricsExploration) GetRawQueriesOk() ([]string, bool) {
-	if o == nil || o.RawQueries == nil {
+	if o == nil || IsNil(o.RawQueries) {
 		return nil, false
 	}
 	return o.RawQueries, true
@@ -329,7 +333,7 @@ func (o *MetricsMetricsExploration) GetRawQueriesOk() ([]string, bool) {
 
 // HasRawQueries returns a boolean if a field has been set.
 func (o *MetricsMetricsExploration) HasRawQueries() bool {
-	if o != nil && o.RawQueries != nil {
+	if o != nil && IsNil(o.RawQueries) {
 		return true
 	}
 
@@ -354,7 +358,7 @@ func (o *MetricsMetricsExploration) GetVisualConfig() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MetricsMetricsExploration) GetVisualConfigOk() (*interface{}, bool) {
-	if o == nil || o.VisualConfig == nil {
+	if o == nil || IsNil(o.VisualConfig) {
 		return nil, false
 	}
 	return &o.VisualConfig, true
@@ -362,7 +366,7 @@ func (o *MetricsMetricsExploration) GetVisualConfigOk() (*interface{}, bool) {
 
 // HasVisualConfig returns a boolean if a field has been set.
 func (o *MetricsMetricsExploration) HasVisualConfig() bool {
-	if o != nil && o.VisualConfig != nil {
+	if o != nil && IsNil(o.VisualConfig) {
 		return true
 	}
 
@@ -374,70 +378,85 @@ func (o *MetricsMetricsExploration) SetVisualConfig(v interface{}) {
 	o.VisualConfig = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MetricsMetricsExploration) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MetricsMetricsExploration) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *MetricsMetricsExploration) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *MetricsMetricsExploration) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *MetricsMetricsExploration) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *MetricsMetricsExploration) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o MetricsMetricsExploration) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MetricsMetricsExploration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Granularity != nil {
+	if !IsNil(o.Granularity) {
 		toSerialize["Granularity"] = o.Granularity
 	}
 	if o.Intervals != nil {
 		toSerialize["Intervals"] = o.Intervals
 	}
-	if o.IsWidget != nil {
+	if !IsNil(o.IsWidget) {
 		toSerialize["IsWidget"] = o.IsWidget
 	}
 	if o.MetricCriteria != nil {
 		toSerialize["MetricCriteria"] = o.MetricCriteria
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.RawQueries != nil {
@@ -446,18 +465,40 @@ func (o MetricsMetricsExploration) MarshalJSON() ([]byte, error) {
 	if o.VisualConfig != nil {
 		toSerialize["VisualConfig"] = o.VisualConfig
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MetricsMetricsExploration) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MetricsMetricsExploration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MetricsMetricsExplorationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -475,13 +516,13 @@ func (o *MetricsMetricsExploration) UnmarshalJSON(bytes []byte) (err error) {
 		Name       *string  `json:"Name,omitempty"`
 		RawQueries []string `json:"RawQueries,omitempty"`
 		// Chart configuration options.
-		VisualConfig interface{}                           `json:"VisualConfig,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		VisualConfig interface{}                                  `json:"VisualConfig,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varMetricsMetricsExplorationWithoutEmbeddedStruct := MetricsMetricsExplorationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMetricsMetricsExplorationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMetricsMetricsExplorationWithoutEmbeddedStruct)
 	if err == nil {
 		varMetricsMetricsExploration := _MetricsMetricsExploration{}
 		varMetricsMetricsExploration.ClassId = varMetricsMetricsExplorationWithoutEmbeddedStruct.ClassId
@@ -502,7 +543,7 @@ func (o *MetricsMetricsExploration) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMetricsMetricsExploration := _MetricsMetricsExploration{}
 
-	err = json.Unmarshal(bytes, &varMetricsMetricsExploration)
+	err = json.Unmarshal(data, &varMetricsMetricsExploration)
 	if err == nil {
 		o.MoBaseMo = varMetricsMetricsExploration.MoBaseMo
 	} else {
@@ -511,7 +552,7 @@ func (o *MetricsMetricsExploration) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **ModUser** | Pointer to **string** | The UserID or email who last modified this folder. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name for this folder. You can have multiple versions of the folder with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). | [optional] 
 **Assets** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] 
-**Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
-**ParentFolder** | Pointer to [**WorkspaceFolderRelationship**](WorkspaceFolderRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableWorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
+**ParentFolder** | Pointer to [**NullableWorkspaceFolderRelationship**](WorkspaceFolderRelationship.md) |  | [optional] 
 **SubFolders** | Pointer to [**[]WorkspaceFolderRelationship**](WorkspaceFolderRelationship.md) | An array of relationships to workspaceFolder resources. | [optional] 
 
 ## Methods
@@ -234,6 +234,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *WorkspaceFolder) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *WorkspaceFolder) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 ### GetParentFolder
 
 `func (o *WorkspaceFolder) GetParentFolder() WorkspaceFolderRelationship`
@@ -259,6 +269,16 @@ SetParentFolder sets ParentFolder field to given value.
 
 HasParentFolder returns a boolean if a field has been set.
 
+### SetParentFolderNil
+
+`func (o *WorkspaceFolder) SetParentFolderNil(b bool)`
+
+ SetParentFolderNil sets the value for ParentFolder to be an explicit nil
+
+### UnsetParentFolder
+`func (o *WorkspaceFolder) UnsetParentFolder()`
+
+UnsetParentFolder ensures that no value is present for ParentFolder, not even an explicit nil
 ### GetSubFolders
 
 `func (o *WorkspaceFolder) GetSubFolders() []WorkspaceFolderRelationship`

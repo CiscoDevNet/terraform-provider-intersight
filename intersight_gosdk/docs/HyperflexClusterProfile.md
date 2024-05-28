@@ -23,24 +23,24 @@ Name | Type | Description | Notes
 **StorageDataVlan** | Pointer to [**NullableHyperflexNamedVlan**](HyperflexNamedVlan.md) |  | [optional] 
 **StorageType** | Pointer to **string** | The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party). * &#x60;HyperFlexDp&#x60; - The type of storage is HyperFlex Data Platform. * &#x60;ThirdParty&#x60; - The type of storage is 3rd Party Storage (PureStorage, etc..). | [optional] [default to "HyperFlexDp"]
 **WwxnPrefix** | Pointer to **string** | The WWxN prefix in the form of 20:00:00:25:B5:XX. | [optional] 
-**AssociatedCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**AutoSupport** | Pointer to [**HyperflexAutoSupportPolicyRelationship**](HyperflexAutoSupportPolicyRelationship.md) |  | [optional] 
-**ClusterNetwork** | Pointer to [**HyperflexClusterNetworkPolicyRelationship**](HyperflexClusterNetworkPolicyRelationship.md) |  | [optional] 
-**ClusterStorage** | Pointer to [**HyperflexClusterStoragePolicyRelationship**](HyperflexClusterStoragePolicyRelationship.md) |  | [optional] 
-**ConfigResult** | Pointer to [**HyperflexConfigResultRelationship**](HyperflexConfigResultRelationship.md) |  | [optional] 
-**ExtFcStorage** | Pointer to [**HyperflexExtFcStoragePolicyRelationship**](HyperflexExtFcStoragePolicyRelationship.md) |  | [optional] 
-**ExtIscsiStorage** | Pointer to [**HyperflexExtIscsiStoragePolicyRelationship**](HyperflexExtIscsiStoragePolicyRelationship.md) |  | [optional] 
-**Httpproxypolicy** | Pointer to [**CommHttpProxyPolicyRelationship**](CommHttpProxyPolicyRelationship.md) |  | [optional] 
-**LocalCredential** | Pointer to [**HyperflexLocalCredentialPolicyRelationship**](HyperflexLocalCredentialPolicyRelationship.md) |  | [optional] 
-**NodeConfig** | Pointer to [**HyperflexNodeConfigPolicyRelationship**](HyperflexNodeConfigPolicyRelationship.md) |  | [optional] 
+**AssociatedCluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**AutoSupport** | Pointer to [**NullableHyperflexAutoSupportPolicyRelationship**](HyperflexAutoSupportPolicyRelationship.md) |  | [optional] 
+**ClusterNetwork** | Pointer to [**NullableHyperflexClusterNetworkPolicyRelationship**](HyperflexClusterNetworkPolicyRelationship.md) |  | [optional] 
+**ClusterStorage** | Pointer to [**NullableHyperflexClusterStoragePolicyRelationship**](HyperflexClusterStoragePolicyRelationship.md) |  | [optional] 
+**ConfigResult** | Pointer to [**NullableHyperflexConfigResultRelationship**](HyperflexConfigResultRelationship.md) |  | [optional] 
+**ExtFcStorage** | Pointer to [**NullableHyperflexExtFcStoragePolicyRelationship**](HyperflexExtFcStoragePolicyRelationship.md) |  | [optional] 
+**ExtIscsiStorage** | Pointer to [**NullableHyperflexExtIscsiStoragePolicyRelationship**](HyperflexExtIscsiStoragePolicyRelationship.md) |  | [optional] 
+**Httpproxypolicy** | Pointer to [**NullableCommHttpProxyPolicyRelationship**](CommHttpProxyPolicyRelationship.md) |  | [optional] 
+**LocalCredential** | Pointer to [**NullableHyperflexLocalCredentialPolicyRelationship**](HyperflexLocalCredentialPolicyRelationship.md) |  | [optional] 
+**NodeConfig** | Pointer to [**NullableHyperflexNodeConfigPolicyRelationship**](HyperflexNodeConfigPolicyRelationship.md) |  | [optional] 
 **NodeProfileConfig** | Pointer to [**[]HyperflexNodeProfileRelationship**](HyperflexNodeProfileRelationship.md) | An array of relationships to hyperflexNodeProfile resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**ProxySetting** | Pointer to [**HyperflexProxySettingPolicyRelationship**](HyperflexProxySettingPolicyRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ProxySetting** | Pointer to [**NullableHyperflexProxySettingPolicyRelationship**](HyperflexProxySettingPolicyRelationship.md) |  | [optional] 
 **RunningWorkflows** | Pointer to [**[]WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) | An array of relationships to workflowWorkflowInfo resources. | [optional] [readonly] 
-**SoftwareVersion** | Pointer to [**HyperflexSoftwareVersionPolicyRelationship**](HyperflexSoftwareVersionPolicyRelationship.md) |  | [optional] 
-**SysConfig** | Pointer to [**HyperflexSysConfigPolicyRelationship**](HyperflexSysConfigPolicyRelationship.md) |  | [optional] 
-**UcsmConfig** | Pointer to [**HyperflexUcsmConfigPolicyRelationship**](HyperflexUcsmConfigPolicyRelationship.md) |  | [optional] 
-**VcenterConfig** | Pointer to [**HyperflexVcenterConfigPolicyRelationship**](HyperflexVcenterConfigPolicyRelationship.md) |  | [optional] 
+**SoftwareVersion** | Pointer to [**NullableHyperflexSoftwareVersionPolicyRelationship**](HyperflexSoftwareVersionPolicyRelationship.md) |  | [optional] 
+**SysConfig** | Pointer to [**NullableHyperflexSysConfigPolicyRelationship**](HyperflexSysConfigPolicyRelationship.md) |  | [optional] 
+**UcsmConfig** | Pointer to [**NullableHyperflexUcsmConfigPolicyRelationship**](HyperflexUcsmConfigPolicyRelationship.md) |  | [optional] 
+**VcenterConfig** | Pointer to [**NullableHyperflexVcenterConfigPolicyRelationship**](HyperflexVcenterConfigPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -581,6 +581,16 @@ SetAssociatedCluster sets AssociatedCluster field to given value.
 
 HasAssociatedCluster returns a boolean if a field has been set.
 
+### SetAssociatedClusterNil
+
+`func (o *HyperflexClusterProfile) SetAssociatedClusterNil(b bool)`
+
+ SetAssociatedClusterNil sets the value for AssociatedCluster to be an explicit nil
+
+### UnsetAssociatedCluster
+`func (o *HyperflexClusterProfile) UnsetAssociatedCluster()`
+
+UnsetAssociatedCluster ensures that no value is present for AssociatedCluster, not even an explicit nil
 ### GetAutoSupport
 
 `func (o *HyperflexClusterProfile) GetAutoSupport() HyperflexAutoSupportPolicyRelationship`
@@ -606,6 +616,16 @@ SetAutoSupport sets AutoSupport field to given value.
 
 HasAutoSupport returns a boolean if a field has been set.
 
+### SetAutoSupportNil
+
+`func (o *HyperflexClusterProfile) SetAutoSupportNil(b bool)`
+
+ SetAutoSupportNil sets the value for AutoSupport to be an explicit nil
+
+### UnsetAutoSupport
+`func (o *HyperflexClusterProfile) UnsetAutoSupport()`
+
+UnsetAutoSupport ensures that no value is present for AutoSupport, not even an explicit nil
 ### GetClusterNetwork
 
 `func (o *HyperflexClusterProfile) GetClusterNetwork() HyperflexClusterNetworkPolicyRelationship`
@@ -631,6 +651,16 @@ SetClusterNetwork sets ClusterNetwork field to given value.
 
 HasClusterNetwork returns a boolean if a field has been set.
 
+### SetClusterNetworkNil
+
+`func (o *HyperflexClusterProfile) SetClusterNetworkNil(b bool)`
+
+ SetClusterNetworkNil sets the value for ClusterNetwork to be an explicit nil
+
+### UnsetClusterNetwork
+`func (o *HyperflexClusterProfile) UnsetClusterNetwork()`
+
+UnsetClusterNetwork ensures that no value is present for ClusterNetwork, not even an explicit nil
 ### GetClusterStorage
 
 `func (o *HyperflexClusterProfile) GetClusterStorage() HyperflexClusterStoragePolicyRelationship`
@@ -656,6 +686,16 @@ SetClusterStorage sets ClusterStorage field to given value.
 
 HasClusterStorage returns a boolean if a field has been set.
 
+### SetClusterStorageNil
+
+`func (o *HyperflexClusterProfile) SetClusterStorageNil(b bool)`
+
+ SetClusterStorageNil sets the value for ClusterStorage to be an explicit nil
+
+### UnsetClusterStorage
+`func (o *HyperflexClusterProfile) UnsetClusterStorage()`
+
+UnsetClusterStorage ensures that no value is present for ClusterStorage, not even an explicit nil
 ### GetConfigResult
 
 `func (o *HyperflexClusterProfile) GetConfigResult() HyperflexConfigResultRelationship`
@@ -681,6 +721,16 @@ SetConfigResult sets ConfigResult field to given value.
 
 HasConfigResult returns a boolean if a field has been set.
 
+### SetConfigResultNil
+
+`func (o *HyperflexClusterProfile) SetConfigResultNil(b bool)`
+
+ SetConfigResultNil sets the value for ConfigResult to be an explicit nil
+
+### UnsetConfigResult
+`func (o *HyperflexClusterProfile) UnsetConfigResult()`
+
+UnsetConfigResult ensures that no value is present for ConfigResult, not even an explicit nil
 ### GetExtFcStorage
 
 `func (o *HyperflexClusterProfile) GetExtFcStorage() HyperflexExtFcStoragePolicyRelationship`
@@ -706,6 +756,16 @@ SetExtFcStorage sets ExtFcStorage field to given value.
 
 HasExtFcStorage returns a boolean if a field has been set.
 
+### SetExtFcStorageNil
+
+`func (o *HyperflexClusterProfile) SetExtFcStorageNil(b bool)`
+
+ SetExtFcStorageNil sets the value for ExtFcStorage to be an explicit nil
+
+### UnsetExtFcStorage
+`func (o *HyperflexClusterProfile) UnsetExtFcStorage()`
+
+UnsetExtFcStorage ensures that no value is present for ExtFcStorage, not even an explicit nil
 ### GetExtIscsiStorage
 
 `func (o *HyperflexClusterProfile) GetExtIscsiStorage() HyperflexExtIscsiStoragePolicyRelationship`
@@ -731,6 +791,16 @@ SetExtIscsiStorage sets ExtIscsiStorage field to given value.
 
 HasExtIscsiStorage returns a boolean if a field has been set.
 
+### SetExtIscsiStorageNil
+
+`func (o *HyperflexClusterProfile) SetExtIscsiStorageNil(b bool)`
+
+ SetExtIscsiStorageNil sets the value for ExtIscsiStorage to be an explicit nil
+
+### UnsetExtIscsiStorage
+`func (o *HyperflexClusterProfile) UnsetExtIscsiStorage()`
+
+UnsetExtIscsiStorage ensures that no value is present for ExtIscsiStorage, not even an explicit nil
 ### GetHttpproxypolicy
 
 `func (o *HyperflexClusterProfile) GetHttpproxypolicy() CommHttpProxyPolicyRelationship`
@@ -756,6 +826,16 @@ SetHttpproxypolicy sets Httpproxypolicy field to given value.
 
 HasHttpproxypolicy returns a boolean if a field has been set.
 
+### SetHttpproxypolicyNil
+
+`func (o *HyperflexClusterProfile) SetHttpproxypolicyNil(b bool)`
+
+ SetHttpproxypolicyNil sets the value for Httpproxypolicy to be an explicit nil
+
+### UnsetHttpproxypolicy
+`func (o *HyperflexClusterProfile) UnsetHttpproxypolicy()`
+
+UnsetHttpproxypolicy ensures that no value is present for Httpproxypolicy, not even an explicit nil
 ### GetLocalCredential
 
 `func (o *HyperflexClusterProfile) GetLocalCredential() HyperflexLocalCredentialPolicyRelationship`
@@ -781,6 +861,16 @@ SetLocalCredential sets LocalCredential field to given value.
 
 HasLocalCredential returns a boolean if a field has been set.
 
+### SetLocalCredentialNil
+
+`func (o *HyperflexClusterProfile) SetLocalCredentialNil(b bool)`
+
+ SetLocalCredentialNil sets the value for LocalCredential to be an explicit nil
+
+### UnsetLocalCredential
+`func (o *HyperflexClusterProfile) UnsetLocalCredential()`
+
+UnsetLocalCredential ensures that no value is present for LocalCredential, not even an explicit nil
 ### GetNodeConfig
 
 `func (o *HyperflexClusterProfile) GetNodeConfig() HyperflexNodeConfigPolicyRelationship`
@@ -806,6 +896,16 @@ SetNodeConfig sets NodeConfig field to given value.
 
 HasNodeConfig returns a boolean if a field has been set.
 
+### SetNodeConfigNil
+
+`func (o *HyperflexClusterProfile) SetNodeConfigNil(b bool)`
+
+ SetNodeConfigNil sets the value for NodeConfig to be an explicit nil
+
+### UnsetNodeConfig
+`func (o *HyperflexClusterProfile) UnsetNodeConfig()`
+
+UnsetNodeConfig ensures that no value is present for NodeConfig, not even an explicit nil
 ### GetNodeProfileConfig
 
 `func (o *HyperflexClusterProfile) GetNodeProfileConfig() []HyperflexNodeProfileRelationship`
@@ -866,6 +966,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *HyperflexClusterProfile) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *HyperflexClusterProfile) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetProxySetting
 
 `func (o *HyperflexClusterProfile) GetProxySetting() HyperflexProxySettingPolicyRelationship`
@@ -891,6 +1001,16 @@ SetProxySetting sets ProxySetting field to given value.
 
 HasProxySetting returns a boolean if a field has been set.
 
+### SetProxySettingNil
+
+`func (o *HyperflexClusterProfile) SetProxySettingNil(b bool)`
+
+ SetProxySettingNil sets the value for ProxySetting to be an explicit nil
+
+### UnsetProxySetting
+`func (o *HyperflexClusterProfile) UnsetProxySetting()`
+
+UnsetProxySetting ensures that no value is present for ProxySetting, not even an explicit nil
 ### GetRunningWorkflows
 
 `func (o *HyperflexClusterProfile) GetRunningWorkflows() []WorkflowWorkflowInfoRelationship`
@@ -951,6 +1071,16 @@ SetSoftwareVersion sets SoftwareVersion field to given value.
 
 HasSoftwareVersion returns a boolean if a field has been set.
 
+### SetSoftwareVersionNil
+
+`func (o *HyperflexClusterProfile) SetSoftwareVersionNil(b bool)`
+
+ SetSoftwareVersionNil sets the value for SoftwareVersion to be an explicit nil
+
+### UnsetSoftwareVersion
+`func (o *HyperflexClusterProfile) UnsetSoftwareVersion()`
+
+UnsetSoftwareVersion ensures that no value is present for SoftwareVersion, not even an explicit nil
 ### GetSysConfig
 
 `func (o *HyperflexClusterProfile) GetSysConfig() HyperflexSysConfigPolicyRelationship`
@@ -976,6 +1106,16 @@ SetSysConfig sets SysConfig field to given value.
 
 HasSysConfig returns a boolean if a field has been set.
 
+### SetSysConfigNil
+
+`func (o *HyperflexClusterProfile) SetSysConfigNil(b bool)`
+
+ SetSysConfigNil sets the value for SysConfig to be an explicit nil
+
+### UnsetSysConfig
+`func (o *HyperflexClusterProfile) UnsetSysConfig()`
+
+UnsetSysConfig ensures that no value is present for SysConfig, not even an explicit nil
 ### GetUcsmConfig
 
 `func (o *HyperflexClusterProfile) GetUcsmConfig() HyperflexUcsmConfigPolicyRelationship`
@@ -1001,6 +1141,16 @@ SetUcsmConfig sets UcsmConfig field to given value.
 
 HasUcsmConfig returns a boolean if a field has been set.
 
+### SetUcsmConfigNil
+
+`func (o *HyperflexClusterProfile) SetUcsmConfigNil(b bool)`
+
+ SetUcsmConfigNil sets the value for UcsmConfig to be an explicit nil
+
+### UnsetUcsmConfig
+`func (o *HyperflexClusterProfile) UnsetUcsmConfig()`
+
+UnsetUcsmConfig ensures that no value is present for UcsmConfig, not even an explicit nil
 ### GetVcenterConfig
 
 `func (o *HyperflexClusterProfile) GetVcenterConfig() HyperflexVcenterConfigPolicyRelationship`
@@ -1026,6 +1176,16 @@ SetVcenterConfig sets VcenterConfig field to given value.
 
 HasVcenterConfig returns a boolean if a field has been set.
 
+### SetVcenterConfigNil
+
+`func (o *HyperflexClusterProfile) SetVcenterConfigNil(b bool)`
+
+ SetVcenterConfigNil sets the value for VcenterConfig to be an explicit nil
+
+### UnsetVcenterConfig
+`func (o *HyperflexClusterProfile) UnsetVcenterConfig()`
+
+UnsetVcenterConfig ensures that no value is present for VcenterConfig, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryAppDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryAppDetails{}
 
 // NiatelemetryAppDetails Details of apps installed on Nexus Dashboard.
 type NiatelemetryAppDetails struct {
@@ -35,8 +39,8 @@ type NiatelemetryAppDetails struct {
 	// Number of sites on which particular app installed on ND.
 	NumberOfSitesOnboarded *int64 `json:"NumberOfSitesOnboarded,omitempty"`
 	// Type of apps running on ND.
-	Type                 *string                              `json:"Type,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Type                 *string                                     `json:"Type,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *NiatelemetryAppDetails) SetObjectType(v string) {
 
 // GetAppName returns the AppName field value if set, zero value otherwise.
 func (o *NiatelemetryAppDetails) GetAppName() string {
-	if o == nil || o.AppName == nil {
+	if o == nil || IsNil(o.AppName) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *NiatelemetryAppDetails) GetAppName() string {
 // GetAppNameOk returns a tuple with the AppName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryAppDetails) GetAppNameOk() (*string, bool) {
-	if o == nil || o.AppName == nil {
+	if o == nil || IsNil(o.AppName) {
 		return nil, false
 	}
 	return o.AppName, true
@@ -133,7 +137,7 @@ func (o *NiatelemetryAppDetails) GetAppNameOk() (*string, bool) {
 
 // HasAppName returns a boolean if a field has been set.
 func (o *NiatelemetryAppDetails) HasAppName() bool {
-	if o != nil && o.AppName != nil {
+	if o != nil && !IsNil(o.AppName) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *NiatelemetryAppDetails) SetAppName(v string) {
 
 // GetAppStatus returns the AppStatus field value if set, zero value otherwise.
 func (o *NiatelemetryAppDetails) GetAppStatus() string {
-	if o == nil || o.AppStatus == nil {
+	if o == nil || IsNil(o.AppStatus) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *NiatelemetryAppDetails) GetAppStatus() string {
 // GetAppStatusOk returns a tuple with the AppStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryAppDetails) GetAppStatusOk() (*string, bool) {
-	if o == nil || o.AppStatus == nil {
+	if o == nil || IsNil(o.AppStatus) {
 		return nil, false
 	}
 	return o.AppStatus, true
@@ -165,7 +169,7 @@ func (o *NiatelemetryAppDetails) GetAppStatusOk() (*string, bool) {
 
 // HasAppStatus returns a boolean if a field has been set.
 func (o *NiatelemetryAppDetails) HasAppStatus() bool {
-	if o != nil && o.AppStatus != nil {
+	if o != nil && !IsNil(o.AppStatus) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *NiatelemetryAppDetails) SetAppStatus(v string) {
 
 // GetAppVersion returns the AppVersion field value if set, zero value otherwise.
 func (o *NiatelemetryAppDetails) GetAppVersion() string {
-	if o == nil || o.AppVersion == nil {
+	if o == nil || IsNil(o.AppVersion) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *NiatelemetryAppDetails) GetAppVersion() string {
 // GetAppVersionOk returns a tuple with the AppVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryAppDetails) GetAppVersionOk() (*string, bool) {
-	if o == nil || o.AppVersion == nil {
+	if o == nil || IsNil(o.AppVersion) {
 		return nil, false
 	}
 	return o.AppVersion, true
@@ -197,7 +201,7 @@ func (o *NiatelemetryAppDetails) GetAppVersionOk() (*string, bool) {
 
 // HasAppVersion returns a boolean if a field has been set.
 func (o *NiatelemetryAppDetails) HasAppVersion() bool {
-	if o != nil && o.AppVersion != nil {
+	if o != nil && !IsNil(o.AppVersion) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *NiatelemetryAppDetails) SetAppVersion(v string) {
 
 // GetNexusDashboard returns the NexusDashboard field value if set, zero value otherwise.
 func (o *NiatelemetryAppDetails) GetNexusDashboard() string {
-	if o == nil || o.NexusDashboard == nil {
+	if o == nil || IsNil(o.NexusDashboard) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *NiatelemetryAppDetails) GetNexusDashboard() string {
 // GetNexusDashboardOk returns a tuple with the NexusDashboard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryAppDetails) GetNexusDashboardOk() (*string, bool) {
-	if o == nil || o.NexusDashboard == nil {
+	if o == nil || IsNil(o.NexusDashboard) {
 		return nil, false
 	}
 	return o.NexusDashboard, true
@@ -229,7 +233,7 @@ func (o *NiatelemetryAppDetails) GetNexusDashboardOk() (*string, bool) {
 
 // HasNexusDashboard returns a boolean if a field has been set.
 func (o *NiatelemetryAppDetails) HasNexusDashboard() bool {
-	if o != nil && o.NexusDashboard != nil {
+	if o != nil && !IsNil(o.NexusDashboard) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *NiatelemetryAppDetails) SetNexusDashboard(v string) {
 
 // GetNumberOfSitesOnboarded returns the NumberOfSitesOnboarded field value if set, zero value otherwise.
 func (o *NiatelemetryAppDetails) GetNumberOfSitesOnboarded() int64 {
-	if o == nil || o.NumberOfSitesOnboarded == nil {
+	if o == nil || IsNil(o.NumberOfSitesOnboarded) {
 		var ret int64
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *NiatelemetryAppDetails) GetNumberOfSitesOnboarded() int64 {
 // GetNumberOfSitesOnboardedOk returns a tuple with the NumberOfSitesOnboarded field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryAppDetails) GetNumberOfSitesOnboardedOk() (*int64, bool) {
-	if o == nil || o.NumberOfSitesOnboarded == nil {
+	if o == nil || IsNil(o.NumberOfSitesOnboarded) {
 		return nil, false
 	}
 	return o.NumberOfSitesOnboarded, true
@@ -261,7 +265,7 @@ func (o *NiatelemetryAppDetails) GetNumberOfSitesOnboardedOk() (*int64, bool) {
 
 // HasNumberOfSitesOnboarded returns a boolean if a field has been set.
 func (o *NiatelemetryAppDetails) HasNumberOfSitesOnboarded() bool {
-	if o != nil && o.NumberOfSitesOnboarded != nil {
+	if o != nil && !IsNil(o.NumberOfSitesOnboarded) {
 		return true
 	}
 
@@ -275,7 +279,7 @@ func (o *NiatelemetryAppDetails) SetNumberOfSitesOnboarded(v int64) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *NiatelemetryAppDetails) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -285,7 +289,7 @@ func (o *NiatelemetryAppDetails) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryAppDetails) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -293,7 +297,7 @@ func (o *NiatelemetryAppDetails) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *NiatelemetryAppDetails) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -305,84 +309,121 @@ func (o *NiatelemetryAppDetails) SetType(v string) {
 	o.Type = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryAppDetails) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryAppDetails) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryAppDetails) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryAppDetails) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryAppDetails) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryAppDetails) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryAppDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryAppDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AppName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AppName) {
 		toSerialize["AppName"] = o.AppName
 	}
-	if o.AppStatus != nil {
+	if !IsNil(o.AppStatus) {
 		toSerialize["AppStatus"] = o.AppStatus
 	}
-	if o.AppVersion != nil {
+	if !IsNil(o.AppVersion) {
 		toSerialize["AppVersion"] = o.AppVersion
 	}
-	if o.NexusDashboard != nil {
+	if !IsNil(o.NexusDashboard) {
 		toSerialize["NexusDashboard"] = o.NexusDashboard
 	}
-	if o.NumberOfSitesOnboarded != nil {
+	if !IsNil(o.NumberOfSitesOnboarded) {
 		toSerialize["NumberOfSitesOnboarded"] = o.NumberOfSitesOnboarded
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryAppDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryAppDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryAppDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -399,13 +440,13 @@ func (o *NiatelemetryAppDetails) UnmarshalJSON(bytes []byte) (err error) {
 		// Number of sites on which particular app installed on ND.
 		NumberOfSitesOnboarded *int64 `json:"NumberOfSitesOnboarded,omitempty"`
 		// Type of apps running on ND.
-		Type             *string                              `json:"Type,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Type             *string                                     `json:"Type,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryAppDetailsWithoutEmbeddedStruct := NiatelemetryAppDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryAppDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryAppDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryAppDetails := _NiatelemetryAppDetails{}
 		varNiatelemetryAppDetails.ClassId = varNiatelemetryAppDetailsWithoutEmbeddedStruct.ClassId
@@ -424,7 +465,7 @@ func (o *NiatelemetryAppDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryAppDetails := _NiatelemetryAppDetails{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryAppDetails)
+	err = json.Unmarshal(data, &varNiatelemetryAppDetails)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryAppDetails.MoBaseMo
 	} else {
@@ -433,7 +474,7 @@ func (o *NiatelemetryAppDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AppName")

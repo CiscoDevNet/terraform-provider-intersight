@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **LocalConfigurationLocked** | Pointer to **bool** | Specifies whether configuration through the platforms local management interface has been disabled, with only configuration through the Intersight service enabled. | [optional] 
 **LogLevel** | Pointer to **string** | The log level of the device connector service. | [optional] 
 **TunneledKvm** | Pointer to **bool** | Specifies whether Tunneled vKVM is enabled on the device connector. | [optional] [readonly] 
-**Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -170,6 +170,16 @@ SetDevice sets Device field to given value.
 
 HasDevice returns a boolean if a field has been set.
 
+### SetDeviceNil
+
+`func (o *AssetDeviceConfiguration) SetDeviceNil(b bool)`
+
+ SetDeviceNil sets the value for Device to be an explicit nil
+
+### UnsetDevice
+`func (o *AssetDeviceConfiguration) UnsetDevice()`
+
+UnsetDevice ensures that no value is present for Device, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Description of the profile. | [optional] 
 **Name** | Pointer to **string** | Name of the profile instance or profile template. | [optional] 
 **Type** | Pointer to **string** | Defines the type of the profile. Accepted values are instance or template. * &#x60;instance&#x60; - The profile defines the configuration for a specific instance of a target. | [optional] [default to "instance"]
-**SrcTemplate** | Pointer to [**PolicyAbstractProfileRelationship**](PolicyAbstractProfileRelationship.md) |  | [optional] 
+**SrcTemplate** | Pointer to [**NullablePolicyAbstractProfileRelationship**](PolicyAbstractProfileRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -170,6 +170,16 @@ SetSrcTemplate sets SrcTemplate field to given value.
 
 HasSrcTemplate returns a boolean if a field has been set.
 
+### SetSrcTemplateNil
+
+`func (o *PolicyAbstractProfile) SetSrcTemplateNil(b bool)`
+
+ SetSrcTemplateNil sets the value for SrcTemplate to be an explicit nil
+
+### UnsetSrcTemplate
+`func (o *PolicyAbstractProfile) UnsetSrcTemplate()`
+
+UnsetSrcTemplate ensures that no value is present for SrcTemplate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

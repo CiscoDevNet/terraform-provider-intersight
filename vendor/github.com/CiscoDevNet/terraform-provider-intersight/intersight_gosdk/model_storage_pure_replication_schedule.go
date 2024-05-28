@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StoragePureReplicationSchedule type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StoragePureReplicationSchedule{}
 
 // StoragePureReplicationSchedule Pure snapshot replication schedule entity.
 type StoragePureReplicationSchedule struct {
@@ -28,10 +32,10 @@ type StoragePureReplicationSchedule struct {
 	DailyLimit                   *int64                           `json:"DailyLimit,omitempty"`
 	ReplicationBlackoutIntervals []StoragePureReplicationBlackout `json:"ReplicationBlackoutIntervals,omitempty"`
 	// Duration to keep the daily limit snapshots on target array. StorageArray deletes the snapshots permanently from the targets beyond this period.
-	SnapshotExpiryTime   *string                                 `json:"SnapshotExpiryTime,omitempty"`
-	Array                *StoragePureArrayRelationship           `json:"Array,omitempty"`
-	ProtectionGroup      *StoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+	SnapshotExpiryTime   *string                                        `json:"SnapshotExpiryTime,omitempty"`
+	Array                NullableStoragePureArrayRelationship           `json:"Array,omitempty"`
+	ProtectionGroup      NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,7 +114,7 @@ func (o *StoragePureReplicationSchedule) SetObjectType(v string) {
 
 // GetDailyLimit returns the DailyLimit field value if set, zero value otherwise.
 func (o *StoragePureReplicationSchedule) GetDailyLimit() int64 {
-	if o == nil || o.DailyLimit == nil {
+	if o == nil || IsNil(o.DailyLimit) {
 		var ret int64
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *StoragePureReplicationSchedule) GetDailyLimit() int64 {
 // GetDailyLimitOk returns a tuple with the DailyLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureReplicationSchedule) GetDailyLimitOk() (*int64, bool) {
-	if o == nil || o.DailyLimit == nil {
+	if o == nil || IsNil(o.DailyLimit) {
 		return nil, false
 	}
 	return o.DailyLimit, true
@@ -128,7 +132,7 @@ func (o *StoragePureReplicationSchedule) GetDailyLimitOk() (*int64, bool) {
 
 // HasDailyLimit returns a boolean if a field has been set.
 func (o *StoragePureReplicationSchedule) HasDailyLimit() bool {
-	if o != nil && o.DailyLimit != nil {
+	if o != nil && !IsNil(o.DailyLimit) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *StoragePureReplicationSchedule) GetReplicationBlackoutIntervals() []Sto
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureReplicationSchedule) GetReplicationBlackoutIntervalsOk() ([]StoragePureReplicationBlackout, bool) {
-	if o == nil || o.ReplicationBlackoutIntervals == nil {
+	if o == nil || IsNil(o.ReplicationBlackoutIntervals) {
 		return nil, false
 	}
 	return o.ReplicationBlackoutIntervals, true
@@ -161,7 +165,7 @@ func (o *StoragePureReplicationSchedule) GetReplicationBlackoutIntervalsOk() ([]
 
 // HasReplicationBlackoutIntervals returns a boolean if a field has been set.
 func (o *StoragePureReplicationSchedule) HasReplicationBlackoutIntervals() bool {
-	if o != nil && o.ReplicationBlackoutIntervals != nil {
+	if o != nil && IsNil(o.ReplicationBlackoutIntervals) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *StoragePureReplicationSchedule) SetReplicationBlackoutIntervals(v []Sto
 
 // GetSnapshotExpiryTime returns the SnapshotExpiryTime field value if set, zero value otherwise.
 func (o *StoragePureReplicationSchedule) GetSnapshotExpiryTime() string {
-	if o == nil || o.SnapshotExpiryTime == nil {
+	if o == nil || IsNil(o.SnapshotExpiryTime) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *StoragePureReplicationSchedule) GetSnapshotExpiryTime() string {
 // GetSnapshotExpiryTimeOk returns a tuple with the SnapshotExpiryTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureReplicationSchedule) GetSnapshotExpiryTimeOk() (*string, bool) {
-	if o == nil || o.SnapshotExpiryTime == nil {
+	if o == nil || IsNil(o.SnapshotExpiryTime) {
 		return nil, false
 	}
 	return o.SnapshotExpiryTime, true
@@ -193,7 +197,7 @@ func (o *StoragePureReplicationSchedule) GetSnapshotExpiryTimeOk() (*string, boo
 
 // HasSnapshotExpiryTime returns a boolean if a field has been set.
 func (o *StoragePureReplicationSchedule) HasSnapshotExpiryTime() bool {
-	if o != nil && o.SnapshotExpiryTime != nil {
+	if o != nil && !IsNil(o.SnapshotExpiryTime) {
 		return true
 	}
 
@@ -205,145 +209,204 @@ func (o *StoragePureReplicationSchedule) SetSnapshotExpiryTime(v string) {
 	o.SnapshotExpiryTime = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureReplicationSchedule) GetArray() StoragePureArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StoragePureArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureReplicationSchedule) GetArrayOk() (*StoragePureArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StoragePureReplicationSchedule) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StoragePureArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStoragePureArrayRelationship and assigns it to the Array field.
 func (o *StoragePureReplicationSchedule) SetArray(v StoragePureArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetProtectionGroup returns the ProtectionGroup field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StoragePureReplicationSchedule) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StoragePureReplicationSchedule) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetProtectionGroup returns the ProtectionGroup field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureReplicationSchedule) GetProtectionGroup() StoragePureProtectionGroupRelationship {
-	if o == nil || o.ProtectionGroup == nil {
+	if o == nil || IsNil(o.ProtectionGroup.Get()) {
 		var ret StoragePureProtectionGroupRelationship
 		return ret
 	}
-	return *o.ProtectionGroup
+	return *o.ProtectionGroup.Get()
 }
 
 // GetProtectionGroupOk returns a tuple with the ProtectionGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureReplicationSchedule) GetProtectionGroupOk() (*StoragePureProtectionGroupRelationship, bool) {
-	if o == nil || o.ProtectionGroup == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProtectionGroup, true
+	return o.ProtectionGroup.Get(), o.ProtectionGroup.IsSet()
 }
 
 // HasProtectionGroup returns a boolean if a field has been set.
 func (o *StoragePureReplicationSchedule) HasProtectionGroup() bool {
-	if o != nil && o.ProtectionGroup != nil {
+	if o != nil && o.ProtectionGroup.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProtectionGroup gets a reference to the given StoragePureProtectionGroupRelationship and assigns it to the ProtectionGroup field.
+// SetProtectionGroup gets a reference to the given NullableStoragePureProtectionGroupRelationship and assigns it to the ProtectionGroup field.
 func (o *StoragePureReplicationSchedule) SetProtectionGroup(v StoragePureProtectionGroupRelationship) {
-	o.ProtectionGroup = &v
+	o.ProtectionGroup.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetProtectionGroupNil sets the value for ProtectionGroup to be an explicit nil
+func (o *StoragePureReplicationSchedule) SetProtectionGroupNil() {
+	o.ProtectionGroup.Set(nil)
+}
+
+// UnsetProtectionGroup ensures that no value is present for ProtectionGroup, not even an explicit nil
+func (o *StoragePureReplicationSchedule) UnsetProtectionGroup() {
+	o.ProtectionGroup.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureReplicationSchedule) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureReplicationSchedule) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StoragePureReplicationSchedule) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StoragePureReplicationSchedule) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StoragePureReplicationSchedule) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StoragePureReplicationSchedule) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StoragePureReplicationSchedule) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StoragePureReplicationSchedule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseReplicationSchedule, errStorageBaseReplicationSchedule := json.Marshal(o.StorageBaseReplicationSchedule)
 	if errStorageBaseReplicationSchedule != nil {
-		return []byte{}, errStorageBaseReplicationSchedule
+		return map[string]interface{}{}, errStorageBaseReplicationSchedule
 	}
 	errStorageBaseReplicationSchedule = json.Unmarshal([]byte(serializedStorageBaseReplicationSchedule), &toSerialize)
 	if errStorageBaseReplicationSchedule != nil {
-		return []byte{}, errStorageBaseReplicationSchedule
+		return map[string]interface{}{}, errStorageBaseReplicationSchedule
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DailyLimit != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DailyLimit) {
 		toSerialize["DailyLimit"] = o.DailyLimit
 	}
 	if o.ReplicationBlackoutIntervals != nil {
 		toSerialize["ReplicationBlackoutIntervals"] = o.ReplicationBlackoutIntervals
 	}
-	if o.SnapshotExpiryTime != nil {
+	if !IsNil(o.SnapshotExpiryTime) {
 		toSerialize["SnapshotExpiryTime"] = o.SnapshotExpiryTime
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.ProtectionGroup != nil {
-		toSerialize["ProtectionGroup"] = o.ProtectionGroup
+	if o.ProtectionGroup.IsSet() {
+		toSerialize["ProtectionGroup"] = o.ProtectionGroup.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StoragePureReplicationSchedule) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StoragePureReplicationSchedule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StoragePureReplicationScheduleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -353,15 +416,15 @@ func (o *StoragePureReplicationSchedule) UnmarshalJSON(bytes []byte) (err error)
 		DailyLimit                   *int64                           `json:"DailyLimit,omitempty"`
 		ReplicationBlackoutIntervals []StoragePureReplicationBlackout `json:"ReplicationBlackoutIntervals,omitempty"`
 		// Duration to keep the daily limit snapshots on target array. StorageArray deletes the snapshots permanently from the targets beyond this period.
-		SnapshotExpiryTime *string                                 `json:"SnapshotExpiryTime,omitempty"`
-		Array              *StoragePureArrayRelationship           `json:"Array,omitempty"`
-		ProtectionGroup    *StoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
-		RegisteredDevice   *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+		SnapshotExpiryTime *string                                        `json:"SnapshotExpiryTime,omitempty"`
+		Array              NullableStoragePureArrayRelationship           `json:"Array,omitempty"`
+		ProtectionGroup    NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
+		RegisteredDevice   NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStoragePureReplicationScheduleWithoutEmbeddedStruct := StoragePureReplicationScheduleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStoragePureReplicationScheduleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStoragePureReplicationScheduleWithoutEmbeddedStruct)
 	if err == nil {
 		varStoragePureReplicationSchedule := _StoragePureReplicationSchedule{}
 		varStoragePureReplicationSchedule.ClassId = varStoragePureReplicationScheduleWithoutEmbeddedStruct.ClassId
@@ -379,7 +442,7 @@ func (o *StoragePureReplicationSchedule) UnmarshalJSON(bytes []byte) (err error)
 
 	varStoragePureReplicationSchedule := _StoragePureReplicationSchedule{}
 
-	err = json.Unmarshal(bytes, &varStoragePureReplicationSchedule)
+	err = json.Unmarshal(data, &varStoragePureReplicationSchedule)
 	if err == nil {
 		o.StorageBaseReplicationSchedule = varStoragePureReplicationSchedule.StorageBaseReplicationSchedule
 	} else {
@@ -388,7 +451,7 @@ func (o *StoragePureReplicationSchedule) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DailyLimit")

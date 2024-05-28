@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowTargetDataType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowTargetDataType{}
 
 // WorkflowTargetDataType Data type to capture a target endpoint or device.
 type WorkflowTargetDataType struct {
@@ -114,7 +118,7 @@ func (o *WorkflowTargetDataType) SetObjectType(v string) {
 
 // GetCustomDataTypeProperties returns the CustomDataTypeProperties field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTargetDataType) GetCustomDataTypeProperties() WorkflowCustomDataProperty {
-	if o == nil || o.CustomDataTypeProperties.Get() == nil {
+	if o == nil || IsNil(o.CustomDataTypeProperties.Get()) {
 		var ret WorkflowCustomDataProperty
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *WorkflowTargetDataType) UnsetCustomDataTypeProperties() {
 
 // GetIsArray returns the IsArray field value if set, zero value otherwise.
 func (o *WorkflowTargetDataType) GetIsArray() bool {
-	if o == nil || o.IsArray == nil {
+	if o == nil || IsNil(o.IsArray) {
 		var ret bool
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *WorkflowTargetDataType) GetIsArray() bool {
 // GetIsArrayOk returns a tuple with the IsArray field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTargetDataType) GetIsArrayOk() (*bool, bool) {
-	if o == nil || o.IsArray == nil {
+	if o == nil || IsNil(o.IsArray) {
 		return nil, false
 	}
 	return o.IsArray, true
@@ -175,7 +179,7 @@ func (o *WorkflowTargetDataType) GetIsArrayOk() (*bool, bool) {
 
 // HasIsArray returns a boolean if a field has been set.
 func (o *WorkflowTargetDataType) HasIsArray() bool {
-	if o != nil && o.IsArray != nil {
+	if o != nil && !IsNil(o.IsArray) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *WorkflowTargetDataType) SetIsArray(v bool) {
 
 // GetMax returns the Max field value if set, zero value otherwise.
 func (o *WorkflowTargetDataType) GetMax() int64 {
-	if o == nil || o.Max == nil {
+	if o == nil || IsNil(o.Max) {
 		var ret int64
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *WorkflowTargetDataType) GetMax() int64 {
 // GetMaxOk returns a tuple with the Max field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTargetDataType) GetMaxOk() (*int64, bool) {
-	if o == nil || o.Max == nil {
+	if o == nil || IsNil(o.Max) {
 		return nil, false
 	}
 	return o.Max, true
@@ -207,7 +211,7 @@ func (o *WorkflowTargetDataType) GetMaxOk() (*int64, bool) {
 
 // HasMax returns a boolean if a field has been set.
 func (o *WorkflowTargetDataType) HasMax() bool {
-	if o != nil && o.Max != nil {
+	if o != nil && !IsNil(o.Max) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *WorkflowTargetDataType) SetMax(v int64) {
 
 // GetMin returns the Min field value if set, zero value otherwise.
 func (o *WorkflowTargetDataType) GetMin() int64 {
-	if o == nil || o.Min == nil {
+	if o == nil || IsNil(o.Min) {
 		var ret int64
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *WorkflowTargetDataType) GetMin() int64 {
 // GetMinOk returns a tuple with the Min field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowTargetDataType) GetMinOk() (*int64, bool) {
-	if o == nil || o.Min == nil {
+	if o == nil || IsNil(o.Min) {
 		return nil, false
 	}
 	return o.Min, true
@@ -239,7 +243,7 @@ func (o *WorkflowTargetDataType) GetMinOk() (*int64, bool) {
 
 // HasMin returns a boolean if a field has been set.
 func (o *WorkflowTargetDataType) HasMin() bool {
-	if o != nil && o.Min != nil {
+	if o != nil && !IsNil(o.Min) {
 		return true
 	}
 
@@ -264,7 +268,7 @@ func (o *WorkflowTargetDataType) GetProperties() []WorkflowTargetProperty {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowTargetDataType) GetPropertiesOk() ([]WorkflowTargetProperty, bool) {
-	if o == nil || o.Properties == nil {
+	if o == nil || IsNil(o.Properties) {
 		return nil, false
 	}
 	return o.Properties, true
@@ -272,7 +276,7 @@ func (o *WorkflowTargetDataType) GetPropertiesOk() ([]WorkflowTargetProperty, bo
 
 // HasProperties returns a boolean if a field has been set.
 func (o *WorkflowTargetDataType) HasProperties() bool {
-	if o != nil && o.Properties != nil {
+	if o != nil && IsNil(o.Properties) {
 		return true
 	}
 
@@ -285,31 +289,35 @@ func (o *WorkflowTargetDataType) SetProperties(v []WorkflowTargetProperty) {
 }
 
 func (o WorkflowTargetDataType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowTargetDataType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowBaseDataType, errWorkflowBaseDataType := json.Marshal(o.WorkflowBaseDataType)
 	if errWorkflowBaseDataType != nil {
-		return []byte{}, errWorkflowBaseDataType
+		return map[string]interface{}{}, errWorkflowBaseDataType
 	}
 	errWorkflowBaseDataType = json.Unmarshal([]byte(serializedWorkflowBaseDataType), &toSerialize)
 	if errWorkflowBaseDataType != nil {
-		return []byte{}, errWorkflowBaseDataType
+		return map[string]interface{}{}, errWorkflowBaseDataType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.CustomDataTypeProperties.IsSet() {
 		toSerialize["CustomDataTypeProperties"] = o.CustomDataTypeProperties.Get()
 	}
-	if o.IsArray != nil {
+	if !IsNil(o.IsArray) {
 		toSerialize["IsArray"] = o.IsArray
 	}
-	if o.Max != nil {
+	if !IsNil(o.Max) {
 		toSerialize["Max"] = o.Max
 	}
-	if o.Min != nil {
+	if !IsNil(o.Min) {
 		toSerialize["Min"] = o.Min
 	}
 	if o.Properties != nil {
@@ -320,10 +328,32 @@ func (o WorkflowTargetDataType) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowTargetDataType) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowTargetDataType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowTargetDataTypeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -341,7 +371,7 @@ func (o *WorkflowTargetDataType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowTargetDataTypeWithoutEmbeddedStruct := WorkflowTargetDataTypeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowTargetDataTypeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowTargetDataTypeWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowTargetDataType := _WorkflowTargetDataType{}
 		varWorkflowTargetDataType.ClassId = varWorkflowTargetDataTypeWithoutEmbeddedStruct.ClassId
@@ -358,7 +388,7 @@ func (o *WorkflowTargetDataType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowTargetDataType := _WorkflowTargetDataType{}
 
-	err = json.Unmarshal(bytes, &varWorkflowTargetDataType)
+	err = json.Unmarshal(data, &varWorkflowTargetDataType)
 	if err == nil {
 		o.WorkflowBaseDataType = varWorkflowTargetDataType.WorkflowBaseDataType
 	} else {
@@ -367,7 +397,7 @@ func (o *WorkflowTargetDataType) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CustomDataTypeProperties")

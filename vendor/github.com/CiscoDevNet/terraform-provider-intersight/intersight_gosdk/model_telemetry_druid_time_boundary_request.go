@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,7 +13,11 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 )
+
+// checks if the TelemetryDruidTimeBoundaryRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidTimeBoundaryRequest{}
 
 // TelemetryDruidTimeBoundaryRequest Time boundary queries return the earliest and latest data points of a data set.
 type TelemetryDruidTimeBoundaryRequest struct {
@@ -97,7 +101,7 @@ func (o *TelemetryDruidTimeBoundaryRequest) SetDataSource(v TelemetryDruidDataSo
 
 // GetBound returns the Bound field value if set, zero value otherwise.
 func (o *TelemetryDruidTimeBoundaryRequest) GetBound() string {
-	if o == nil || o.Bound == nil {
+	if o == nil || IsNil(o.Bound) {
 		var ret string
 		return ret
 	}
@@ -107,7 +111,7 @@ func (o *TelemetryDruidTimeBoundaryRequest) GetBound() string {
 // GetBoundOk returns a tuple with the Bound field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidTimeBoundaryRequest) GetBoundOk() (*string, bool) {
-	if o == nil || o.Bound == nil {
+	if o == nil || IsNil(o.Bound) {
 		return nil, false
 	}
 	return o.Bound, true
@@ -115,7 +119,7 @@ func (o *TelemetryDruidTimeBoundaryRequest) GetBoundOk() (*string, bool) {
 
 // HasBound returns a boolean if a field has been set.
 func (o *TelemetryDruidTimeBoundaryRequest) HasBound() bool {
-	if o != nil && o.Bound != nil {
+	if o != nil && !IsNil(o.Bound) {
 		return true
 	}
 
@@ -129,7 +133,7 @@ func (o *TelemetryDruidTimeBoundaryRequest) SetBound(v string) {
 
 // GetFilter returns the Filter field value if set, zero value otherwise.
 func (o *TelemetryDruidTimeBoundaryRequest) GetFilter() TelemetryDruidFilter {
-	if o == nil || o.Filter == nil {
+	if o == nil || IsNil(o.Filter) {
 		var ret TelemetryDruidFilter
 		return ret
 	}
@@ -139,7 +143,7 @@ func (o *TelemetryDruidTimeBoundaryRequest) GetFilter() TelemetryDruidFilter {
 // GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidTimeBoundaryRequest) GetFilterOk() (*TelemetryDruidFilter, bool) {
-	if o == nil || o.Filter == nil {
+	if o == nil || IsNil(o.Filter) {
 		return nil, false
 	}
 	return o.Filter, true
@@ -147,7 +151,7 @@ func (o *TelemetryDruidTimeBoundaryRequest) GetFilterOk() (*TelemetryDruidFilter
 
 // HasFilter returns a boolean if a field has been set.
 func (o *TelemetryDruidTimeBoundaryRequest) HasFilter() bool {
-	if o != nil && o.Filter != nil {
+	if o != nil && !IsNil(o.Filter) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *TelemetryDruidTimeBoundaryRequest) SetFilter(v TelemetryDruidFilter) {
 
 // GetContext returns the Context field value if set, zero value otherwise.
 func (o *TelemetryDruidTimeBoundaryRequest) GetContext() TelemetryDruidQueryContext {
-	if o == nil || o.Context == nil {
+	if o == nil || IsNil(o.Context) {
 		var ret TelemetryDruidQueryContext
 		return ret
 	}
@@ -171,7 +175,7 @@ func (o *TelemetryDruidTimeBoundaryRequest) GetContext() TelemetryDruidQueryCont
 // GetContextOk returns a tuple with the Context field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidTimeBoundaryRequest) GetContextOk() (*TelemetryDruidQueryContext, bool) {
-	if o == nil || o.Context == nil {
+	if o == nil || IsNil(o.Context) {
 		return nil, false
 	}
 	return o.Context, true
@@ -179,7 +183,7 @@ func (o *TelemetryDruidTimeBoundaryRequest) GetContextOk() (*TelemetryDruidQuery
 
 // HasContext returns a boolean if a field has been set.
 func (o *TelemetryDruidTimeBoundaryRequest) HasContext() bool {
-	if o != nil && o.Context != nil {
+	if o != nil && !IsNil(o.Context) {
 		return true
 	}
 
@@ -192,20 +196,24 @@ func (o *TelemetryDruidTimeBoundaryRequest) SetContext(v TelemetryDruidQueryCont
 }
 
 func (o TelemetryDruidTimeBoundaryRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidTimeBoundaryRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["queryType"] = o.QueryType
-	}
-	if true {
-		toSerialize["dataSource"] = o.DataSource
-	}
-	if o.Bound != nil {
+	toSerialize["queryType"] = o.QueryType
+	toSerialize["dataSource"] = o.DataSource
+	if !IsNil(o.Bound) {
 		toSerialize["bound"] = o.Bound
 	}
-	if o.Filter != nil {
+	if !IsNil(o.Filter) {
 		toSerialize["filter"] = o.Filter
 	}
-	if o.Context != nil {
+	if !IsNil(o.Context) {
 		toSerialize["context"] = o.Context
 	}
 
@@ -213,19 +221,45 @@ func (o TelemetryDruidTimeBoundaryRequest) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidTimeBoundaryRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidTimeBoundaryRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"queryType",
+		"dataSource",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTelemetryDruidTimeBoundaryRequest := _TelemetryDruidTimeBoundaryRequest{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidTimeBoundaryRequest); err == nil {
-		*o = TelemetryDruidTimeBoundaryRequest(varTelemetryDruidTimeBoundaryRequest)
+	err = json.Unmarshal(data, &varTelemetryDruidTimeBoundaryRequest)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidTimeBoundaryRequest(varTelemetryDruidTimeBoundaryRequest)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "queryType")
 		delete(additionalProperties, "dataSource")
 		delete(additionalProperties, "bound")

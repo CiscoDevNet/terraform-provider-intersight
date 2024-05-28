@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the TamAdvisoryInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TamAdvisoryInfo{}
 
 // TamAdvisoryInfo State of an advisory in the context of a given account. Used to capture a given account's preferences regarding  associated advisory.
 type TamAdvisoryInfo struct {
@@ -25,9 +29,9 @@ type TamAdvisoryInfo struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Current state of the advisory for the owner. Indicates if the user is interested in getting updates for the advisory. * `active` - Advisory is currently active and the user wants to receive updates for this advisory. * `acknowledged` - Advisory is seen and acknowledged by the user and she no longer wants to recieve updates.
-	State                *string                      `json:"State,omitempty"`
-	Account              *IamAccountRelationship      `json:"Account,omitempty"`
-	Advisory             *TamBaseAdvisoryRelationship `json:"Advisory,omitempty"`
+	State                *string                             `json:"State,omitempty"`
+	Account              NullableIamAccountRelationship      `json:"Account,omitempty"`
+	Advisory             NullableTamBaseAdvisoryRelationship `json:"Advisory,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,7 +114,7 @@ func (o *TamAdvisoryInfo) SetObjectType(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *TamAdvisoryInfo) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *TamAdvisoryInfo) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TamAdvisoryInfo) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -128,7 +132,7 @@ func (o *TamAdvisoryInfo) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *TamAdvisoryInfo) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -140,118 +144,166 @@ func (o *TamAdvisoryInfo) SetState(v string) {
 	o.State = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TamAdvisoryInfo) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TamAdvisoryInfo) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *TamAdvisoryInfo) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *TamAdvisoryInfo) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetAdvisory returns the Advisory field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *TamAdvisoryInfo) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *TamAdvisoryInfo) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetAdvisory returns the Advisory field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TamAdvisoryInfo) GetAdvisory() TamBaseAdvisoryRelationship {
-	if o == nil || o.Advisory == nil {
+	if o == nil || IsNil(o.Advisory.Get()) {
 		var ret TamBaseAdvisoryRelationship
 		return ret
 	}
-	return *o.Advisory
+	return *o.Advisory.Get()
 }
 
 // GetAdvisoryOk returns a tuple with the Advisory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TamAdvisoryInfo) GetAdvisoryOk() (*TamBaseAdvisoryRelationship, bool) {
-	if o == nil || o.Advisory == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Advisory, true
+	return o.Advisory.Get(), o.Advisory.IsSet()
 }
 
 // HasAdvisory returns a boolean if a field has been set.
 func (o *TamAdvisoryInfo) HasAdvisory() bool {
-	if o != nil && o.Advisory != nil {
+	if o != nil && o.Advisory.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAdvisory gets a reference to the given TamBaseAdvisoryRelationship and assigns it to the Advisory field.
+// SetAdvisory gets a reference to the given NullableTamBaseAdvisoryRelationship and assigns it to the Advisory field.
 func (o *TamAdvisoryInfo) SetAdvisory(v TamBaseAdvisoryRelationship) {
-	o.Advisory = &v
+	o.Advisory.Set(&v)
+}
+
+// SetAdvisoryNil sets the value for Advisory to be an explicit nil
+func (o *TamAdvisoryInfo) SetAdvisoryNil() {
+	o.Advisory.Set(nil)
+}
+
+// UnsetAdvisory ensures that no value is present for Advisory, not even an explicit nil
+func (o *TamAdvisoryInfo) UnsetAdvisory() {
+	o.Advisory.Unset()
 }
 
 func (o TamAdvisoryInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TamAdvisoryInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.State != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.Advisory != nil {
-		toSerialize["Advisory"] = o.Advisory
+	if o.Advisory.IsSet() {
+		toSerialize["Advisory"] = o.Advisory.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TamAdvisoryInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TamAdvisoryInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type TamAdvisoryInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Current state of the advisory for the owner. Indicates if the user is interested in getting updates for the advisory. * `active` - Advisory is currently active and the user wants to receive updates for this advisory. * `acknowledged` - Advisory is seen and acknowledged by the user and she no longer wants to recieve updates.
-		State    *string                      `json:"State,omitempty"`
-		Account  *IamAccountRelationship      `json:"Account,omitempty"`
-		Advisory *TamBaseAdvisoryRelationship `json:"Advisory,omitempty"`
+		State    *string                             `json:"State,omitempty"`
+		Account  NullableIamAccountRelationship      `json:"Account,omitempty"`
+		Advisory NullableTamBaseAdvisoryRelationship `json:"Advisory,omitempty"`
 	}
 
 	varTamAdvisoryInfoWithoutEmbeddedStruct := TamAdvisoryInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varTamAdvisoryInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varTamAdvisoryInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varTamAdvisoryInfo := _TamAdvisoryInfo{}
 		varTamAdvisoryInfo.ClassId = varTamAdvisoryInfoWithoutEmbeddedStruct.ClassId
@@ -266,7 +318,7 @@ func (o *TamAdvisoryInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varTamAdvisoryInfo := _TamAdvisoryInfo{}
 
-	err = json.Unmarshal(bytes, &varTamAdvisoryInfo)
+	err = json.Unmarshal(data, &varTamAdvisoryInfo)
 	if err == nil {
 		o.MoBaseMo = varTamAdvisoryInfo.MoBaseMo
 	} else {
@@ -275,7 +327,7 @@ func (o *TamAdvisoryInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "State")

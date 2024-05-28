@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **TaskName** | Pointer to **string** | The name of the task that is created. | [optional] [readonly] 
 **TaskStatus** | Pointer to **string** | Denotes the status of the task creation. * &#x60;none&#x60; - Indicates the default status * &#x60;InProgress&#x60; - Indicates that operation is in progress * &#x60;Completed&#x60; - Indicates that the operation is complete * &#x60;Failed&#x60; - Indicates that the operation has failed. Check the failureReason attribute for more details. | [optional] [readonly] [default to "none"]
 **TaskVersion** | Pointer to **int64** | The version number of the created tasks. | [optional] [readonly] 
-**TaskGenerationRequest** | Pointer to [**OpenapiTaskGenerationRequestRelationship**](OpenapiTaskGenerationRequestRelationship.md) |  | [optional] 
+**TaskGenerationRequest** | Pointer to [**NullableOpenapiTaskGenerationRequestRelationship**](OpenapiTaskGenerationRequestRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -222,6 +222,16 @@ SetTaskGenerationRequest sets TaskGenerationRequest field to given value.
 
 HasTaskGenerationRequest returns a boolean if a field has been set.
 
+### SetTaskGenerationRequestNil
+
+`func (o *OpenapiTaskGenerationResult) SetTaskGenerationRequestNil(b bool)`
+
+ SetTaskGenerationRequestNil sets the value for TaskGenerationRequest to be an explicit nil
+
+### UnsetTaskGenerationRequest
+`func (o *OpenapiTaskGenerationResult) UnsetTaskGenerationRequest()`
+
+UnsetTaskGenerationRequest ensures that no value is present for TaskGenerationRequest, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

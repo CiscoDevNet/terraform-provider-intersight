@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricApplianceRole type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricApplianceRole{}
 
 // FabricApplianceRole Configuration object sent by user to create an appliance port.
 type FabricApplianceRole struct {
@@ -27,11 +31,11 @@ type FabricApplianceRole struct {
 	// Port mode to be set on the appliance port. * `trunk` - Trunk Mode Switch Port Type. * `access` - Access Mode Switch Port Type.
 	Mode *string `json:"Mode,omitempty"`
 	// The 'name' of the System QoS Class. * `Best Effort` - QoS Priority for Best-effort traffic. * `FC` - QoS Priority for FC traffic. * `Platinum` - QoS Priority for Platinum traffic. * `Gold` - QoS Priority for Gold traffic. * `Silver` - QoS Priority for Silver traffic. * `Bronze` - QoS Priority for Bronze traffic.
-	Priority                *string                                    `json:"Priority,omitempty"`
-	EthNetworkControlPolicy *FabricEthNetworkControlPolicyRelationship `json:"EthNetworkControlPolicy,omitempty"`
-	EthNetworkGroupPolicy   *FabricEthNetworkGroupPolicyRelationship   `json:"EthNetworkGroupPolicy,omitempty"`
-	FlowControlPolicy       *FabricFlowControlPolicyRelationship       `json:"FlowControlPolicy,omitempty"`
-	LinkControlPolicy       *FabricLinkControlPolicyRelationship       `json:"LinkControlPolicy,omitempty"`
+	Priority                *string                                           `json:"Priority,omitempty"`
+	EthNetworkControlPolicy NullableFabricEthNetworkControlPolicyRelationship `json:"EthNetworkControlPolicy,omitempty"`
+	EthNetworkGroupPolicy   NullableFabricEthNetworkGroupPolicyRelationship   `json:"EthNetworkGroupPolicy,omitempty"`
+	FlowControlPolicy       NullableFabricFlowControlPolicyRelationship       `json:"FlowControlPolicy,omitempty"`
+	LinkControlPolicy       NullableFabricLinkControlPolicyRelationship       `json:"LinkControlPolicy,omitempty"`
 	AdditionalProperties    map[string]interface{}
 }
 
@@ -122,7 +126,7 @@ func (o *FabricApplianceRole) SetObjectType(v string) {
 
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *FabricApplianceRole) GetMode() string {
-	if o == nil || o.Mode == nil {
+	if o == nil || IsNil(o.Mode) {
 		var ret string
 		return ret
 	}
@@ -132,7 +136,7 @@ func (o *FabricApplianceRole) GetMode() string {
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricApplianceRole) GetModeOk() (*string, bool) {
-	if o == nil || o.Mode == nil {
+	if o == nil || IsNil(o.Mode) {
 		return nil, false
 	}
 	return o.Mode, true
@@ -140,7 +144,7 @@ func (o *FabricApplianceRole) GetModeOk() (*string, bool) {
 
 // HasMode returns a boolean if a field has been set.
 func (o *FabricApplianceRole) HasMode() bool {
-	if o != nil && o.Mode != nil {
+	if o != nil && !IsNil(o.Mode) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *FabricApplianceRole) SetMode(v string) {
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *FabricApplianceRole) GetPriority() string {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		var ret string
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *FabricApplianceRole) GetPriority() string {
 // GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricApplianceRole) GetPriorityOk() (*string, bool) {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
 	return o.Priority, true
@@ -172,7 +176,7 @@ func (o *FabricApplianceRole) GetPriorityOk() (*string, bool) {
 
 // HasPriority returns a boolean if a field has been set.
 func (o *FabricApplianceRole) HasPriority() bool {
-	if o != nil && o.Priority != nil {
+	if o != nil && !IsNil(o.Priority) {
 		return true
 	}
 
@@ -184,177 +188,247 @@ func (o *FabricApplianceRole) SetPriority(v string) {
 	o.Priority = &v
 }
 
-// GetEthNetworkControlPolicy returns the EthNetworkControlPolicy field value if set, zero value otherwise.
+// GetEthNetworkControlPolicy returns the EthNetworkControlPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricApplianceRole) GetEthNetworkControlPolicy() FabricEthNetworkControlPolicyRelationship {
-	if o == nil || o.EthNetworkControlPolicy == nil {
+	if o == nil || IsNil(o.EthNetworkControlPolicy.Get()) {
 		var ret FabricEthNetworkControlPolicyRelationship
 		return ret
 	}
-	return *o.EthNetworkControlPolicy
+	return *o.EthNetworkControlPolicy.Get()
 }
 
 // GetEthNetworkControlPolicyOk returns a tuple with the EthNetworkControlPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricApplianceRole) GetEthNetworkControlPolicyOk() (*FabricEthNetworkControlPolicyRelationship, bool) {
-	if o == nil || o.EthNetworkControlPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EthNetworkControlPolicy, true
+	return o.EthNetworkControlPolicy.Get(), o.EthNetworkControlPolicy.IsSet()
 }
 
 // HasEthNetworkControlPolicy returns a boolean if a field has been set.
 func (o *FabricApplianceRole) HasEthNetworkControlPolicy() bool {
-	if o != nil && o.EthNetworkControlPolicy != nil {
+	if o != nil && o.EthNetworkControlPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEthNetworkControlPolicy gets a reference to the given FabricEthNetworkControlPolicyRelationship and assigns it to the EthNetworkControlPolicy field.
+// SetEthNetworkControlPolicy gets a reference to the given NullableFabricEthNetworkControlPolicyRelationship and assigns it to the EthNetworkControlPolicy field.
 func (o *FabricApplianceRole) SetEthNetworkControlPolicy(v FabricEthNetworkControlPolicyRelationship) {
-	o.EthNetworkControlPolicy = &v
+	o.EthNetworkControlPolicy.Set(&v)
 }
 
-// GetEthNetworkGroupPolicy returns the EthNetworkGroupPolicy field value if set, zero value otherwise.
+// SetEthNetworkControlPolicyNil sets the value for EthNetworkControlPolicy to be an explicit nil
+func (o *FabricApplianceRole) SetEthNetworkControlPolicyNil() {
+	o.EthNetworkControlPolicy.Set(nil)
+}
+
+// UnsetEthNetworkControlPolicy ensures that no value is present for EthNetworkControlPolicy, not even an explicit nil
+func (o *FabricApplianceRole) UnsetEthNetworkControlPolicy() {
+	o.EthNetworkControlPolicy.Unset()
+}
+
+// GetEthNetworkGroupPolicy returns the EthNetworkGroupPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricApplianceRole) GetEthNetworkGroupPolicy() FabricEthNetworkGroupPolicyRelationship {
-	if o == nil || o.EthNetworkGroupPolicy == nil {
+	if o == nil || IsNil(o.EthNetworkGroupPolicy.Get()) {
 		var ret FabricEthNetworkGroupPolicyRelationship
 		return ret
 	}
-	return *o.EthNetworkGroupPolicy
+	return *o.EthNetworkGroupPolicy.Get()
 }
 
 // GetEthNetworkGroupPolicyOk returns a tuple with the EthNetworkGroupPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricApplianceRole) GetEthNetworkGroupPolicyOk() (*FabricEthNetworkGroupPolicyRelationship, bool) {
-	if o == nil || o.EthNetworkGroupPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EthNetworkGroupPolicy, true
+	return o.EthNetworkGroupPolicy.Get(), o.EthNetworkGroupPolicy.IsSet()
 }
 
 // HasEthNetworkGroupPolicy returns a boolean if a field has been set.
 func (o *FabricApplianceRole) HasEthNetworkGroupPolicy() bool {
-	if o != nil && o.EthNetworkGroupPolicy != nil {
+	if o != nil && o.EthNetworkGroupPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEthNetworkGroupPolicy gets a reference to the given FabricEthNetworkGroupPolicyRelationship and assigns it to the EthNetworkGroupPolicy field.
+// SetEthNetworkGroupPolicy gets a reference to the given NullableFabricEthNetworkGroupPolicyRelationship and assigns it to the EthNetworkGroupPolicy field.
 func (o *FabricApplianceRole) SetEthNetworkGroupPolicy(v FabricEthNetworkGroupPolicyRelationship) {
-	o.EthNetworkGroupPolicy = &v
+	o.EthNetworkGroupPolicy.Set(&v)
 }
 
-// GetFlowControlPolicy returns the FlowControlPolicy field value if set, zero value otherwise.
+// SetEthNetworkGroupPolicyNil sets the value for EthNetworkGroupPolicy to be an explicit nil
+func (o *FabricApplianceRole) SetEthNetworkGroupPolicyNil() {
+	o.EthNetworkGroupPolicy.Set(nil)
+}
+
+// UnsetEthNetworkGroupPolicy ensures that no value is present for EthNetworkGroupPolicy, not even an explicit nil
+func (o *FabricApplianceRole) UnsetEthNetworkGroupPolicy() {
+	o.EthNetworkGroupPolicy.Unset()
+}
+
+// GetFlowControlPolicy returns the FlowControlPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricApplianceRole) GetFlowControlPolicy() FabricFlowControlPolicyRelationship {
-	if o == nil || o.FlowControlPolicy == nil {
+	if o == nil || IsNil(o.FlowControlPolicy.Get()) {
 		var ret FabricFlowControlPolicyRelationship
 		return ret
 	}
-	return *o.FlowControlPolicy
+	return *o.FlowControlPolicy.Get()
 }
 
 // GetFlowControlPolicyOk returns a tuple with the FlowControlPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricApplianceRole) GetFlowControlPolicyOk() (*FabricFlowControlPolicyRelationship, bool) {
-	if o == nil || o.FlowControlPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.FlowControlPolicy, true
+	return o.FlowControlPolicy.Get(), o.FlowControlPolicy.IsSet()
 }
 
 // HasFlowControlPolicy returns a boolean if a field has been set.
 func (o *FabricApplianceRole) HasFlowControlPolicy() bool {
-	if o != nil && o.FlowControlPolicy != nil {
+	if o != nil && o.FlowControlPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFlowControlPolicy gets a reference to the given FabricFlowControlPolicyRelationship and assigns it to the FlowControlPolicy field.
+// SetFlowControlPolicy gets a reference to the given NullableFabricFlowControlPolicyRelationship and assigns it to the FlowControlPolicy field.
 func (o *FabricApplianceRole) SetFlowControlPolicy(v FabricFlowControlPolicyRelationship) {
-	o.FlowControlPolicy = &v
+	o.FlowControlPolicy.Set(&v)
 }
 
-// GetLinkControlPolicy returns the LinkControlPolicy field value if set, zero value otherwise.
+// SetFlowControlPolicyNil sets the value for FlowControlPolicy to be an explicit nil
+func (o *FabricApplianceRole) SetFlowControlPolicyNil() {
+	o.FlowControlPolicy.Set(nil)
+}
+
+// UnsetFlowControlPolicy ensures that no value is present for FlowControlPolicy, not even an explicit nil
+func (o *FabricApplianceRole) UnsetFlowControlPolicy() {
+	o.FlowControlPolicy.Unset()
+}
+
+// GetLinkControlPolicy returns the LinkControlPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricApplianceRole) GetLinkControlPolicy() FabricLinkControlPolicyRelationship {
-	if o == nil || o.LinkControlPolicy == nil {
+	if o == nil || IsNil(o.LinkControlPolicy.Get()) {
 		var ret FabricLinkControlPolicyRelationship
 		return ret
 	}
-	return *o.LinkControlPolicy
+	return *o.LinkControlPolicy.Get()
 }
 
 // GetLinkControlPolicyOk returns a tuple with the LinkControlPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricApplianceRole) GetLinkControlPolicyOk() (*FabricLinkControlPolicyRelationship, bool) {
-	if o == nil || o.LinkControlPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LinkControlPolicy, true
+	return o.LinkControlPolicy.Get(), o.LinkControlPolicy.IsSet()
 }
 
 // HasLinkControlPolicy returns a boolean if a field has been set.
 func (o *FabricApplianceRole) HasLinkControlPolicy() bool {
-	if o != nil && o.LinkControlPolicy != nil {
+	if o != nil && o.LinkControlPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLinkControlPolicy gets a reference to the given FabricLinkControlPolicyRelationship and assigns it to the LinkControlPolicy field.
+// SetLinkControlPolicy gets a reference to the given NullableFabricLinkControlPolicyRelationship and assigns it to the LinkControlPolicy field.
 func (o *FabricApplianceRole) SetLinkControlPolicy(v FabricLinkControlPolicyRelationship) {
-	o.LinkControlPolicy = &v
+	o.LinkControlPolicy.Set(&v)
+}
+
+// SetLinkControlPolicyNil sets the value for LinkControlPolicy to be an explicit nil
+func (o *FabricApplianceRole) SetLinkControlPolicyNil() {
+	o.LinkControlPolicy.Set(nil)
+}
+
+// UnsetLinkControlPolicy ensures that no value is present for LinkControlPolicy, not even an explicit nil
+func (o *FabricApplianceRole) UnsetLinkControlPolicy() {
+	o.LinkControlPolicy.Unset()
 }
 
 func (o FabricApplianceRole) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricApplianceRole) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFabricTransceiverRole, errFabricTransceiverRole := json.Marshal(o.FabricTransceiverRole)
 	if errFabricTransceiverRole != nil {
-		return []byte{}, errFabricTransceiverRole
+		return map[string]interface{}{}, errFabricTransceiverRole
 	}
 	errFabricTransceiverRole = json.Unmarshal([]byte(serializedFabricTransceiverRole), &toSerialize)
 	if errFabricTransceiverRole != nil {
-		return []byte{}, errFabricTransceiverRole
+		return map[string]interface{}{}, errFabricTransceiverRole
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Mode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Mode) {
 		toSerialize["Mode"] = o.Mode
 	}
-	if o.Priority != nil {
+	if !IsNil(o.Priority) {
 		toSerialize["Priority"] = o.Priority
 	}
-	if o.EthNetworkControlPolicy != nil {
-		toSerialize["EthNetworkControlPolicy"] = o.EthNetworkControlPolicy
+	if o.EthNetworkControlPolicy.IsSet() {
+		toSerialize["EthNetworkControlPolicy"] = o.EthNetworkControlPolicy.Get()
 	}
-	if o.EthNetworkGroupPolicy != nil {
-		toSerialize["EthNetworkGroupPolicy"] = o.EthNetworkGroupPolicy
+	if o.EthNetworkGroupPolicy.IsSet() {
+		toSerialize["EthNetworkGroupPolicy"] = o.EthNetworkGroupPolicy.Get()
 	}
-	if o.FlowControlPolicy != nil {
-		toSerialize["FlowControlPolicy"] = o.FlowControlPolicy
+	if o.FlowControlPolicy.IsSet() {
+		toSerialize["FlowControlPolicy"] = o.FlowControlPolicy.Get()
 	}
-	if o.LinkControlPolicy != nil {
-		toSerialize["LinkControlPolicy"] = o.LinkControlPolicy
+	if o.LinkControlPolicy.IsSet() {
+		toSerialize["LinkControlPolicy"] = o.LinkControlPolicy.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricApplianceRole) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricApplianceRole) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricApplianceRoleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -363,16 +437,16 @@ func (o *FabricApplianceRole) UnmarshalJSON(bytes []byte) (err error) {
 		// Port mode to be set on the appliance port. * `trunk` - Trunk Mode Switch Port Type. * `access` - Access Mode Switch Port Type.
 		Mode *string `json:"Mode,omitempty"`
 		// The 'name' of the System QoS Class. * `Best Effort` - QoS Priority for Best-effort traffic. * `FC` - QoS Priority for FC traffic. * `Platinum` - QoS Priority for Platinum traffic. * `Gold` - QoS Priority for Gold traffic. * `Silver` - QoS Priority for Silver traffic. * `Bronze` - QoS Priority for Bronze traffic.
-		Priority                *string                                    `json:"Priority,omitempty"`
-		EthNetworkControlPolicy *FabricEthNetworkControlPolicyRelationship `json:"EthNetworkControlPolicy,omitempty"`
-		EthNetworkGroupPolicy   *FabricEthNetworkGroupPolicyRelationship   `json:"EthNetworkGroupPolicy,omitempty"`
-		FlowControlPolicy       *FabricFlowControlPolicyRelationship       `json:"FlowControlPolicy,omitempty"`
-		LinkControlPolicy       *FabricLinkControlPolicyRelationship       `json:"LinkControlPolicy,omitempty"`
+		Priority                *string                                           `json:"Priority,omitempty"`
+		EthNetworkControlPolicy NullableFabricEthNetworkControlPolicyRelationship `json:"EthNetworkControlPolicy,omitempty"`
+		EthNetworkGroupPolicy   NullableFabricEthNetworkGroupPolicyRelationship   `json:"EthNetworkGroupPolicy,omitempty"`
+		FlowControlPolicy       NullableFabricFlowControlPolicyRelationship       `json:"FlowControlPolicy,omitempty"`
+		LinkControlPolicy       NullableFabricLinkControlPolicyRelationship       `json:"LinkControlPolicy,omitempty"`
 	}
 
 	varFabricApplianceRoleWithoutEmbeddedStruct := FabricApplianceRoleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricApplianceRoleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricApplianceRoleWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricApplianceRole := _FabricApplianceRole{}
 		varFabricApplianceRole.ClassId = varFabricApplianceRoleWithoutEmbeddedStruct.ClassId
@@ -390,7 +464,7 @@ func (o *FabricApplianceRole) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricApplianceRole := _FabricApplianceRole{}
 
-	err = json.Unmarshal(bytes, &varFabricApplianceRole)
+	err = json.Unmarshal(data, &varFabricApplianceRole)
 	if err == nil {
 		o.FabricTransceiverRole = varFabricApplianceRole.FabricTransceiverRole
 	} else {
@@ -399,7 +473,7 @@ func (o *FabricApplianceRole) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Mode")

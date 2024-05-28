@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.UplinkPcRole"]
 **AdminSpeed** | Pointer to **string** | Admin configured speed for the port. * &#x60;Auto&#x60; - Admin configurable speed AUTO ( default ). * &#x60;1Gbps&#x60; - Admin configurable speed 1Gbps. * &#x60;10Gbps&#x60; - Admin configurable speed 10Gbps. * &#x60;25Gbps&#x60; - Admin configurable speed 25Gbps. * &#x60;40Gbps&#x60; - Admin configurable speed 40Gbps. * &#x60;100Gbps&#x60; - Admin configurable speed 100Gbps. * &#x60;NegAuto25Gbps&#x60; - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108. | [optional] [default to "Auto"]
 **EthNetworkGroupPolicy** | Pointer to [**[]FabricEthNetworkGroupPolicyRelationship**](FabricEthNetworkGroupPolicyRelationship.md) | An array of relationships to fabricEthNetworkGroupPolicy resources. | [optional] 
-**FlowControlPolicy** | Pointer to [**FabricFlowControlPolicyRelationship**](FabricFlowControlPolicyRelationship.md) |  | [optional] 
-**LinkAggregationPolicy** | Pointer to [**FabricLinkAggregationPolicyRelationship**](FabricLinkAggregationPolicyRelationship.md) |  | [optional] 
-**LinkControlPolicy** | Pointer to [**FabricLinkControlPolicyRelationship**](FabricLinkControlPolicyRelationship.md) |  | [optional] 
+**FlowControlPolicy** | Pointer to [**NullableFabricFlowControlPolicyRelationship**](FabricFlowControlPolicyRelationship.md) |  | [optional] 
+**LinkAggregationPolicy** | Pointer to [**NullableFabricLinkAggregationPolicyRelationship**](FabricLinkAggregationPolicyRelationship.md) |  | [optional] 
+**LinkControlPolicy** | Pointer to [**NullableFabricLinkControlPolicyRelationship**](FabricLinkControlPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -156,6 +156,16 @@ SetFlowControlPolicy sets FlowControlPolicy field to given value.
 
 HasFlowControlPolicy returns a boolean if a field has been set.
 
+### SetFlowControlPolicyNil
+
+`func (o *FabricUplinkPcRole) SetFlowControlPolicyNil(b bool)`
+
+ SetFlowControlPolicyNil sets the value for FlowControlPolicy to be an explicit nil
+
+### UnsetFlowControlPolicy
+`func (o *FabricUplinkPcRole) UnsetFlowControlPolicy()`
+
+UnsetFlowControlPolicy ensures that no value is present for FlowControlPolicy, not even an explicit nil
 ### GetLinkAggregationPolicy
 
 `func (o *FabricUplinkPcRole) GetLinkAggregationPolicy() FabricLinkAggregationPolicyRelationship`
@@ -181,6 +191,16 @@ SetLinkAggregationPolicy sets LinkAggregationPolicy field to given value.
 
 HasLinkAggregationPolicy returns a boolean if a field has been set.
 
+### SetLinkAggregationPolicyNil
+
+`func (o *FabricUplinkPcRole) SetLinkAggregationPolicyNil(b bool)`
+
+ SetLinkAggregationPolicyNil sets the value for LinkAggregationPolicy to be an explicit nil
+
+### UnsetLinkAggregationPolicy
+`func (o *FabricUplinkPcRole) UnsetLinkAggregationPolicy()`
+
+UnsetLinkAggregationPolicy ensures that no value is present for LinkAggregationPolicy, not even an explicit nil
 ### GetLinkControlPolicy
 
 `func (o *FabricUplinkPcRole) GetLinkControlPolicy() FabricLinkControlPolicyRelationship`
@@ -206,6 +226,16 @@ SetLinkControlPolicy sets LinkControlPolicy field to given value.
 
 HasLinkControlPolicy returns a boolean if a field has been set.
 
+### SetLinkControlPolicyNil
+
+`func (o *FabricUplinkPcRole) SetLinkControlPolicyNil(b bool)`
+
+ SetLinkControlPolicyNil sets the value for LinkControlPolicy to be an explicit nil
+
+### UnsetLinkControlPolicy
+`func (o *FabricUplinkPcRole) UnsetLinkControlPolicy()`
+
+UnsetLinkControlPolicy ensures that no value is present for LinkControlPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

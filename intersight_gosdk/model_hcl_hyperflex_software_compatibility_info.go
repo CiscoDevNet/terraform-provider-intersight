@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HclHyperflexSoftwareCompatibilityInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HclHyperflexSoftwareCompatibilityInfo{}
 
 // HclHyperflexSoftwareCompatibilityInfo Lists software compatibility information between different HperFlex component versions like HyperFlex Data Platform, Hypervisor, Drive Firmware, etc.
 type HclHyperflexSoftwareCompatibilityInfo struct {
@@ -38,8 +42,8 @@ type HclHyperflexSoftwareCompatibilityInfo struct {
 	// Minimum supported HyperFlex Data Platform build version.
 	MinMgmtVersion *string `json:"MinMgmtVersion,omitempty"`
 	// UCS Server Firmware component software version.
-	ServerFwVersion      *string                          `json:"ServerFwVersion,omitempty"`
-	AppCatalog           *HyperflexAppCatalogRelationship `json:"AppCatalog,omitempty"`
+	ServerFwVersion      *string                                 `json:"ServerFwVersion,omitempty"`
+	AppCatalog           NullableHyperflexAppCatalogRelationship `json:"AppCatalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -133,7 +137,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetConstraints() []HclConstraint
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetConstraintsOk() ([]HclConstraint, bool) {
-	if o == nil || o.Constraints == nil {
+	if o == nil || IsNil(o.Constraints) {
 		return nil, false
 	}
 	return o.Constraints, true
@@ -141,7 +145,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetConstraintsOk() ([]HclConstra
 
 // HasConstraints returns a boolean if a field has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) HasConstraints() bool {
-	if o != nil && o.Constraints != nil {
+	if o != nil && IsNil(o.Constraints) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) SetConstraints(v []HclConstraint
 
 // GetHxdpVersion returns the HxdpVersion field value if set, zero value otherwise.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetHxdpVersion() string {
-	if o == nil || o.HxdpVersion == nil {
+	if o == nil || IsNil(o.HxdpVersion) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetHxdpVersion() string {
 // GetHxdpVersionOk returns a tuple with the HxdpVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetHxdpVersionOk() (*string, bool) {
-	if o == nil || o.HxdpVersion == nil {
+	if o == nil || IsNil(o.HxdpVersion) {
 		return nil, false
 	}
 	return o.HxdpVersion, true
@@ -173,7 +177,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetHxdpVersionOk() (*string, boo
 
 // HasHxdpVersion returns a boolean if a field has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) HasHxdpVersion() bool {
-	if o != nil && o.HxdpVersion != nil {
+	if o != nil && !IsNil(o.HxdpVersion) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) SetHxdpVersion(v string) {
 
 // GetHypervisorType returns the HypervisorType field value if set, zero value otherwise.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetHypervisorType() string {
-	if o == nil || o.HypervisorType == nil {
+	if o == nil || IsNil(o.HypervisorType) {
 		var ret string
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetHypervisorType() string {
 // GetHypervisorTypeOk returns a tuple with the HypervisorType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetHypervisorTypeOk() (*string, bool) {
-	if o == nil || o.HypervisorType == nil {
+	if o == nil || IsNil(o.HypervisorType) {
 		return nil, false
 	}
 	return o.HypervisorType, true
@@ -205,7 +209,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetHypervisorTypeOk() (*string, 
 
 // HasHypervisorType returns a boolean if a field has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) HasHypervisorType() bool {
-	if o != nil && o.HypervisorType != nil {
+	if o != nil && !IsNil(o.HypervisorType) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) SetHypervisorType(v string) {
 
 // GetHypervisorVersion returns the HypervisorVersion field value if set, zero value otherwise.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetHypervisorVersion() string {
-	if o == nil || o.HypervisorVersion == nil {
+	if o == nil || IsNil(o.HypervisorVersion) {
 		var ret string
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetHypervisorVersion() string {
 // GetHypervisorVersionOk returns a tuple with the HypervisorVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetHypervisorVersionOk() (*string, bool) {
-	if o == nil || o.HypervisorVersion == nil {
+	if o == nil || IsNil(o.HypervisorVersion) {
 		return nil, false
 	}
 	return o.HypervisorVersion, true
@@ -237,7 +241,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetHypervisorVersionOk() (*strin
 
 // HasHypervisorVersion returns a boolean if a field has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) HasHypervisorVersion() bool {
-	if o != nil && o.HypervisorVersion != nil {
+	if o != nil && !IsNil(o.HypervisorVersion) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) SetHypervisorVersion(v string) {
 
 // GetIsMgmtBuild returns the IsMgmtBuild field value if set, zero value otherwise.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetIsMgmtBuild() string {
-	if o == nil || o.IsMgmtBuild == nil {
+	if o == nil || IsNil(o.IsMgmtBuild) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetIsMgmtBuild() string {
 // GetIsMgmtBuildOk returns a tuple with the IsMgmtBuild field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetIsMgmtBuildOk() (*string, bool) {
-	if o == nil || o.IsMgmtBuild == nil {
+	if o == nil || IsNil(o.IsMgmtBuild) {
 		return nil, false
 	}
 	return o.IsMgmtBuild, true
@@ -269,7 +273,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetIsMgmtBuildOk() (*string, boo
 
 // HasIsMgmtBuild returns a boolean if a field has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) HasIsMgmtBuild() bool {
-	if o != nil && o.IsMgmtBuild != nil {
+	if o != nil && !IsNil(o.IsMgmtBuild) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) SetIsMgmtBuild(v string) {
 
 // GetMaxMgmtVersion returns the MaxMgmtVersion field value if set, zero value otherwise.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetMaxMgmtVersion() string {
-	if o == nil || o.MaxMgmtVersion == nil {
+	if o == nil || IsNil(o.MaxMgmtVersion) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetMaxMgmtVersion() string {
 // GetMaxMgmtVersionOk returns a tuple with the MaxMgmtVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetMaxMgmtVersionOk() (*string, bool) {
-	if o == nil || o.MaxMgmtVersion == nil {
+	if o == nil || IsNil(o.MaxMgmtVersion) {
 		return nil, false
 	}
 	return o.MaxMgmtVersion, true
@@ -301,7 +305,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetMaxMgmtVersionOk() (*string, 
 
 // HasMaxMgmtVersion returns a boolean if a field has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) HasMaxMgmtVersion() bool {
-	if o != nil && o.MaxMgmtVersion != nil {
+	if o != nil && !IsNil(o.MaxMgmtVersion) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) SetMaxMgmtVersion(v string) {
 
 // GetMinMgmtVersion returns the MinMgmtVersion field value if set, zero value otherwise.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetMinMgmtVersion() string {
-	if o == nil || o.MinMgmtVersion == nil {
+	if o == nil || IsNil(o.MinMgmtVersion) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetMinMgmtVersion() string {
 // GetMinMgmtVersionOk returns a tuple with the MinMgmtVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetMinMgmtVersionOk() (*string, bool) {
-	if o == nil || o.MinMgmtVersion == nil {
+	if o == nil || IsNil(o.MinMgmtVersion) {
 		return nil, false
 	}
 	return o.MinMgmtVersion, true
@@ -333,7 +337,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetMinMgmtVersionOk() (*string, 
 
 // HasMinMgmtVersion returns a boolean if a field has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) HasMinMgmtVersion() bool {
-	if o != nil && o.MinMgmtVersion != nil {
+	if o != nil && !IsNil(o.MinMgmtVersion) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) SetMinMgmtVersion(v string) {
 
 // GetServerFwVersion returns the ServerFwVersion field value if set, zero value otherwise.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetServerFwVersion() string {
-	if o == nil || o.ServerFwVersion == nil {
+	if o == nil || IsNil(o.ServerFwVersion) {
 		var ret string
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetServerFwVersion() string {
 // GetServerFwVersionOk returns a tuple with the ServerFwVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetServerFwVersionOk() (*string, bool) {
-	if o == nil || o.ServerFwVersion == nil {
+	if o == nil || IsNil(o.ServerFwVersion) {
 		return nil, false
 	}
 	return o.ServerFwVersion, true
@@ -365,7 +369,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) GetServerFwVersionOk() (*string,
 
 // HasServerFwVersion returns a boolean if a field has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) HasServerFwVersion() bool {
-	if o != nil && o.ServerFwVersion != nil {
+	if o != nil && !IsNil(o.ServerFwVersion) {
 		return true
 	}
 
@@ -377,90 +381,127 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) SetServerFwVersion(v string) {
 	o.ServerFwVersion = &v
 }
 
-// GetAppCatalog returns the AppCatalog field value if set, zero value otherwise.
+// GetAppCatalog returns the AppCatalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetAppCatalog() HyperflexAppCatalogRelationship {
-	if o == nil || o.AppCatalog == nil {
+	if o == nil || IsNil(o.AppCatalog.Get()) {
 		var ret HyperflexAppCatalogRelationship
 		return ret
 	}
-	return *o.AppCatalog
+	return *o.AppCatalog.Get()
 }
 
 // GetAppCatalogOk returns a tuple with the AppCatalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HclHyperflexSoftwareCompatibilityInfo) GetAppCatalogOk() (*HyperflexAppCatalogRelationship, bool) {
-	if o == nil || o.AppCatalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AppCatalog, true
+	return o.AppCatalog.Get(), o.AppCatalog.IsSet()
 }
 
 // HasAppCatalog returns a boolean if a field has been set.
 func (o *HclHyperflexSoftwareCompatibilityInfo) HasAppCatalog() bool {
-	if o != nil && o.AppCatalog != nil {
+	if o != nil && o.AppCatalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAppCatalog gets a reference to the given HyperflexAppCatalogRelationship and assigns it to the AppCatalog field.
+// SetAppCatalog gets a reference to the given NullableHyperflexAppCatalogRelationship and assigns it to the AppCatalog field.
 func (o *HclHyperflexSoftwareCompatibilityInfo) SetAppCatalog(v HyperflexAppCatalogRelationship) {
-	o.AppCatalog = &v
+	o.AppCatalog.Set(&v)
+}
+
+// SetAppCatalogNil sets the value for AppCatalog to be an explicit nil
+func (o *HclHyperflexSoftwareCompatibilityInfo) SetAppCatalogNil() {
+	o.AppCatalog.Set(nil)
+}
+
+// UnsetAppCatalog ensures that no value is present for AppCatalog, not even an explicit nil
+func (o *HclHyperflexSoftwareCompatibilityInfo) UnsetAppCatalog() {
+	o.AppCatalog.Unset()
 }
 
 func (o HclHyperflexSoftwareCompatibilityInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HclHyperflexSoftwareCompatibilityInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Constraints != nil {
 		toSerialize["Constraints"] = o.Constraints
 	}
-	if o.HxdpVersion != nil {
+	if !IsNil(o.HxdpVersion) {
 		toSerialize["HxdpVersion"] = o.HxdpVersion
 	}
-	if o.HypervisorType != nil {
+	if !IsNil(o.HypervisorType) {
 		toSerialize["HypervisorType"] = o.HypervisorType
 	}
-	if o.HypervisorVersion != nil {
+	if !IsNil(o.HypervisorVersion) {
 		toSerialize["HypervisorVersion"] = o.HypervisorVersion
 	}
-	if o.IsMgmtBuild != nil {
+	if !IsNil(o.IsMgmtBuild) {
 		toSerialize["IsMgmtBuild"] = o.IsMgmtBuild
 	}
-	if o.MaxMgmtVersion != nil {
+	if !IsNil(o.MaxMgmtVersion) {
 		toSerialize["MaxMgmtVersion"] = o.MaxMgmtVersion
 	}
-	if o.MinMgmtVersion != nil {
+	if !IsNil(o.MinMgmtVersion) {
 		toSerialize["MinMgmtVersion"] = o.MinMgmtVersion
 	}
-	if o.ServerFwVersion != nil {
+	if !IsNil(o.ServerFwVersion) {
 		toSerialize["ServerFwVersion"] = o.ServerFwVersion
 	}
-	if o.AppCatalog != nil {
-		toSerialize["AppCatalog"] = o.AppCatalog
+	if o.AppCatalog.IsSet() {
+		toSerialize["AppCatalog"] = o.AppCatalog.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HclHyperflexSoftwareCompatibilityInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HclHyperflexSoftwareCompatibilityInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HclHyperflexSoftwareCompatibilityInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -480,13 +521,13 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) UnmarshalJSON(bytes []byte) (err
 		// Minimum supported HyperFlex Data Platform build version.
 		MinMgmtVersion *string `json:"MinMgmtVersion,omitempty"`
 		// UCS Server Firmware component software version.
-		ServerFwVersion *string                          `json:"ServerFwVersion,omitempty"`
-		AppCatalog      *HyperflexAppCatalogRelationship `json:"AppCatalog,omitempty"`
+		ServerFwVersion *string                                 `json:"ServerFwVersion,omitempty"`
+		AppCatalog      NullableHyperflexAppCatalogRelationship `json:"AppCatalog,omitempty"`
 	}
 
 	varHclHyperflexSoftwareCompatibilityInfoWithoutEmbeddedStruct := HclHyperflexSoftwareCompatibilityInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHclHyperflexSoftwareCompatibilityInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHclHyperflexSoftwareCompatibilityInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varHclHyperflexSoftwareCompatibilityInfo := _HclHyperflexSoftwareCompatibilityInfo{}
 		varHclHyperflexSoftwareCompatibilityInfo.ClassId = varHclHyperflexSoftwareCompatibilityInfoWithoutEmbeddedStruct.ClassId
@@ -507,7 +548,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) UnmarshalJSON(bytes []byte) (err
 
 	varHclHyperflexSoftwareCompatibilityInfo := _HclHyperflexSoftwareCompatibilityInfo{}
 
-	err = json.Unmarshal(bytes, &varHclHyperflexSoftwareCompatibilityInfo)
+	err = json.Unmarshal(data, &varHclHyperflexSoftwareCompatibilityInfo)
 	if err == nil {
 		o.MoBaseMo = varHclHyperflexSoftwareCompatibilityInfo.MoBaseMo
 	} else {
@@ -516,7 +557,7 @@ func (o *HclHyperflexSoftwareCompatibilityInfo) UnmarshalJSON(bytes []byte) (err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Constraints")

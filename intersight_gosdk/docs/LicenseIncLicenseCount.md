@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **PremierDistributedMod8SlotCount** | Pointer to **int64** | The total number of devices claimed in the DistributedMod8Slot premier tier Intersight Nexus Cloud. | [optional] [readonly] 
 **PremierMod4SlotCount** | Pointer to **int64** | The total number of devices claimed in the modular 4 slot premier tier Intersight Nexus Cloud. | [optional] [readonly] 
 **PremierMod8SlotCount** | Pointer to **int64** | The total number of devices claimed in the modular 8 slot premier tier Intersight Nexus Cloud. | [optional] [readonly] 
-**AccountLicenseData** | Pointer to [**LicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
+**AccountLicenseData** | Pointer to [**NullableLicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -326,6 +326,16 @@ SetAccountLicenseData sets AccountLicenseData field to given value.
 
 HasAccountLicenseData returns a boolean if a field has been set.
 
+### SetAccountLicenseDataNil
+
+`func (o *LicenseIncLicenseCount) SetAccountLicenseDataNil(b bool)`
+
+ SetAccountLicenseDataNil sets the value for AccountLicenseData to be an explicit nil
+
+### UnsetAccountLicenseData
+`func (o *LicenseIncLicenseCount) UnsetAccountLicenseData()`
+
+UnsetAccountLicenseData ensures that no value is present for AccountLicenseData, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,10 +18,10 @@ Name | Type | Description | Notes
 **Temperature** | Pointer to **string** | The current temperature of the switch. | [optional] [readonly] 
 **Type** | Pointer to **string** | The type information of the switch. | [optional] 
 **VendorId** | Pointer to **string** | The vendor id of the switch. | [optional] [readonly] 
-**ComputeBoard** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**ComputeBoard** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **Links** | Pointer to [**[]PciLinkRelationship**](PciLinkRelationship.md) | An array of relationships to pciLink resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 
 ## Methods
@@ -408,6 +408,16 @@ SetComputeBoard sets ComputeBoard field to given value.
 
 HasComputeBoard returns a boolean if a field has been set.
 
+### SetComputeBoardNil
+
+`func (o *PciSwitch) SetComputeBoardNil(b bool)`
+
+ SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+
+### UnsetComputeBoard
+`func (o *PciSwitch) UnsetComputeBoard()`
+
+UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *PciSwitch) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -433,6 +443,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *PciSwitch) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *PciSwitch) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetLinks
 
 `func (o *PciSwitch) GetLinks() []PciLinkRelationship`
@@ -493,6 +513,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *PciSwitch) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *PciSwitch) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetRunningFirmware
 
 `func (o *PciSwitch) GetRunningFirmware() []FirmwareRunningFirmwareRelationship`

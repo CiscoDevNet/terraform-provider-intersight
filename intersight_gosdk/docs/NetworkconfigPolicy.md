@@ -15,8 +15,8 @@ Name | Type | Description | Notes
 **EnableIpv6dnsFromDhcp** | Pointer to **bool** | If enabled, Cisco IMC retrieves the DNS server addresses from DHCP. Use DHCP field must be enabled for IPv6 in Cisco IMC to enable it. | [optional] 
 **PreferredIpv4dnsServer** | Pointer to **string** | IP address of the primary DNS server. | [optional] 
 **PreferredIpv6dnsServer** | Pointer to **string** | IP address of the primary DNS server. | [optional] 
-**ApplianceAccount** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ApplianceAccount** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
 ## Methods
@@ -328,6 +328,16 @@ SetApplianceAccount sets ApplianceAccount field to given value.
 
 HasApplianceAccount returns a boolean if a field has been set.
 
+### SetApplianceAccountNil
+
+`func (o *NetworkconfigPolicy) SetApplianceAccountNil(b bool)`
+
+ SetApplianceAccountNil sets the value for ApplianceAccount to be an explicit nil
+
+### UnsetApplianceAccount
+`func (o *NetworkconfigPolicy) UnsetApplianceAccount()`
+
+UnsetApplianceAccount ensures that no value is present for ApplianceAccount, not even an explicit nil
 ### GetOrganization
 
 `func (o *NetworkconfigPolicy) GetOrganization() OrganizationOrganizationRelationship`
@@ -353,6 +363,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *NetworkconfigPolicy) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *NetworkconfigPolicy) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetProfiles
 
 `func (o *NetworkconfigPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship`

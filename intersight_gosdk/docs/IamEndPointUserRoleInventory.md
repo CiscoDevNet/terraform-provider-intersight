@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
 **Password** | Pointer to **string** | The password must have a minimum of 8 and a maximum of 127 characters. For servers with IPMI user role enabled, the maximum length is limited to 20 characters. When strong password is enabled, must satisfy below requirements: A. The password must not contain the User&#39;s Name. B. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &amp;, *, -, _, +, &#x3D;). | [optional] 
 **EndPointRole** | Pointer to [**[]IamEndPointRoleRelationship**](IamEndPointRoleRelationship.md) | An array of relationships to iamEndPointRole resources. | [optional] [readonly] 
-**EndPointUser** | Pointer to [**IamEndPointUserInventoryRelationship**](IamEndPointUserInventoryRelationship.md) |  | [optional] 
-**EndPointUserPolicy** | Pointer to [**IamEndPointUserPolicyInventoryRelationship**](IamEndPointUserPolicyInventoryRelationship.md) |  | [optional] 
+**EndPointUser** | Pointer to [**NullableIamEndPointUserInventoryRelationship**](IamEndPointUserInventoryRelationship.md) |  | [optional] 
+**EndPointUserPolicy** | Pointer to [**NullableIamEndPointUserPolicyInventoryRelationship**](IamEndPointUserPolicyInventoryRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -233,6 +233,16 @@ SetEndPointUser sets EndPointUser field to given value.
 
 HasEndPointUser returns a boolean if a field has been set.
 
+### SetEndPointUserNil
+
+`func (o *IamEndPointUserRoleInventory) SetEndPointUserNil(b bool)`
+
+ SetEndPointUserNil sets the value for EndPointUser to be an explicit nil
+
+### UnsetEndPointUser
+`func (o *IamEndPointUserRoleInventory) UnsetEndPointUser()`
+
+UnsetEndPointUser ensures that no value is present for EndPointUser, not even an explicit nil
 ### GetEndPointUserPolicy
 
 `func (o *IamEndPointUserRoleInventory) GetEndPointUserPolicy() IamEndPointUserPolicyInventoryRelationship`
@@ -258,6 +268,16 @@ SetEndPointUserPolicy sets EndPointUserPolicy field to given value.
 
 HasEndPointUserPolicy returns a boolean if a field has been set.
 
+### SetEndPointUserPolicyNil
+
+`func (o *IamEndPointUserRoleInventory) SetEndPointUserPolicyNil(b bool)`
+
+ SetEndPointUserPolicyNil sets the value for EndPointUserPolicy to be an explicit nil
+
+### UnsetEndPointUserPolicy
+`func (o *IamEndPointUserRoleInventory) UnsetEndPointUserPolicy()`
+
+UnsetEndPointUserPolicy ensures that no value is present for EndPointUserPolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

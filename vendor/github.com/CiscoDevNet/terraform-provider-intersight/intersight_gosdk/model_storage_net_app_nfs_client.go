@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppNfsClient type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppNfsClient{}
 
 // StorageNetAppNfsClient A currently connected NFS client.
 type StorageNetAppNfsClient struct {
@@ -39,9 +43,9 @@ type StorageNetAppNfsClient struct {
 	// The parent volume name for the NFS client.
 	VolumeName *string `json:"VolumeName,omitempty"`
 	// Unique identifier for the NetApp Volume.
-	VolumeUuid           *string                             `json:"VolumeUuid,omitempty"`
-	StorageContainer     *StorageNetAppVolumeRelationship    `json:"StorageContainer,omitempty"`
-	Tenant               *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+	VolumeUuid           *string                                    `json:"VolumeUuid,omitempty"`
+	StorageContainer     NullableStorageNetAppVolumeRelationship    `json:"StorageContainer,omitempty"`
+	Tenant               NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -120,7 +124,7 @@ func (o *StorageNetAppNfsClient) SetObjectType(v string) {
 
 // GetClientIp returns the ClientIp field value if set, zero value otherwise.
 func (o *StorageNetAppNfsClient) GetClientIp() string {
-	if o == nil || o.ClientIp == nil {
+	if o == nil || IsNil(o.ClientIp) {
 		var ret string
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *StorageNetAppNfsClient) GetClientIp() string {
 // GetClientIpOk returns a tuple with the ClientIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsClient) GetClientIpOk() (*string, bool) {
-	if o == nil || o.ClientIp == nil {
+	if o == nil || IsNil(o.ClientIp) {
 		return nil, false
 	}
 	return o.ClientIp, true
@@ -138,7 +142,7 @@ func (o *StorageNetAppNfsClient) GetClientIpOk() (*string, bool) {
 
 // HasClientIp returns a boolean if a field has been set.
 func (o *StorageNetAppNfsClient) HasClientIp() bool {
-	if o != nil && o.ClientIp != nil {
+	if o != nil && !IsNil(o.ClientIp) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *StorageNetAppNfsClient) SetClientIp(v string) {
 
 // GetIdleDuration returns the IdleDuration field value if set, zero value otherwise.
 func (o *StorageNetAppNfsClient) GetIdleDuration() string {
-	if o == nil || o.IdleDuration == nil {
+	if o == nil || IsNil(o.IdleDuration) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *StorageNetAppNfsClient) GetIdleDuration() string {
 // GetIdleDurationOk returns a tuple with the IdleDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsClient) GetIdleDurationOk() (*string, bool) {
-	if o == nil || o.IdleDuration == nil {
+	if o == nil || IsNil(o.IdleDuration) {
 		return nil, false
 	}
 	return o.IdleDuration, true
@@ -170,7 +174,7 @@ func (o *StorageNetAppNfsClient) GetIdleDurationOk() (*string, bool) {
 
 // HasIdleDuration returns a boolean if a field has been set.
 func (o *StorageNetAppNfsClient) HasIdleDuration() bool {
-	if o != nil && o.IdleDuration != nil {
+	if o != nil && !IsNil(o.IdleDuration) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *StorageNetAppNfsClient) SetIdleDuration(v string) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *StorageNetAppNfsClient) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *StorageNetAppNfsClient) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsClient) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -202,7 +206,7 @@ func (o *StorageNetAppNfsClient) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *StorageNetAppNfsClient) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *StorageNetAppNfsClient) SetProtocol(v string) {
 
 // GetServerIp returns the ServerIp field value if set, zero value otherwise.
 func (o *StorageNetAppNfsClient) GetServerIp() string {
-	if o == nil || o.ServerIp == nil {
+	if o == nil || IsNil(o.ServerIp) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *StorageNetAppNfsClient) GetServerIp() string {
 // GetServerIpOk returns a tuple with the ServerIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsClient) GetServerIpOk() (*string, bool) {
-	if o == nil || o.ServerIp == nil {
+	if o == nil || IsNil(o.ServerIp) {
 		return nil, false
 	}
 	return o.ServerIp, true
@@ -234,7 +238,7 @@ func (o *StorageNetAppNfsClient) GetServerIpOk() (*string, bool) {
 
 // HasServerIp returns a boolean if a field has been set.
 func (o *StorageNetAppNfsClient) HasServerIp() bool {
-	if o != nil && o.ServerIp != nil {
+	if o != nil && !IsNil(o.ServerIp) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *StorageNetAppNfsClient) SetServerIp(v string) {
 
 // GetSvmName returns the SvmName field value if set, zero value otherwise.
 func (o *StorageNetAppNfsClient) GetSvmName() string {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		var ret string
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *StorageNetAppNfsClient) GetSvmName() string {
 // GetSvmNameOk returns a tuple with the SvmName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsClient) GetSvmNameOk() (*string, bool) {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		return nil, false
 	}
 	return o.SvmName, true
@@ -266,7 +270,7 @@ func (o *StorageNetAppNfsClient) GetSvmNameOk() (*string, bool) {
 
 // HasSvmName returns a boolean if a field has been set.
 func (o *StorageNetAppNfsClient) HasSvmName() bool {
-	if o != nil && o.SvmName != nil {
+	if o != nil && !IsNil(o.SvmName) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *StorageNetAppNfsClient) SetSvmName(v string) {
 
 // GetSvmUuid returns the SvmUuid field value if set, zero value otherwise.
 func (o *StorageNetAppNfsClient) GetSvmUuid() string {
-	if o == nil || o.SvmUuid == nil {
+	if o == nil || IsNil(o.SvmUuid) {
 		var ret string
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *StorageNetAppNfsClient) GetSvmUuid() string {
 // GetSvmUuidOk returns a tuple with the SvmUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsClient) GetSvmUuidOk() (*string, bool) {
-	if o == nil || o.SvmUuid == nil {
+	if o == nil || IsNil(o.SvmUuid) {
 		return nil, false
 	}
 	return o.SvmUuid, true
@@ -298,7 +302,7 @@ func (o *StorageNetAppNfsClient) GetSvmUuidOk() (*string, bool) {
 
 // HasSvmUuid returns a boolean if a field has been set.
 func (o *StorageNetAppNfsClient) HasSvmUuid() bool {
-	if o != nil && o.SvmUuid != nil {
+	if o != nil && !IsNil(o.SvmUuid) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *StorageNetAppNfsClient) SetSvmUuid(v string) {
 
 // GetVolumeName returns the VolumeName field value if set, zero value otherwise.
 func (o *StorageNetAppNfsClient) GetVolumeName() string {
-	if o == nil || o.VolumeName == nil {
+	if o == nil || IsNil(o.VolumeName) {
 		var ret string
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *StorageNetAppNfsClient) GetVolumeName() string {
 // GetVolumeNameOk returns a tuple with the VolumeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsClient) GetVolumeNameOk() (*string, bool) {
-	if o == nil || o.VolumeName == nil {
+	if o == nil || IsNil(o.VolumeName) {
 		return nil, false
 	}
 	return o.VolumeName, true
@@ -330,7 +334,7 @@ func (o *StorageNetAppNfsClient) GetVolumeNameOk() (*string, bool) {
 
 // HasVolumeName returns a boolean if a field has been set.
 func (o *StorageNetAppNfsClient) HasVolumeName() bool {
-	if o != nil && o.VolumeName != nil {
+	if o != nil && !IsNil(o.VolumeName) {
 		return true
 	}
 
@@ -344,7 +348,7 @@ func (o *StorageNetAppNfsClient) SetVolumeName(v string) {
 
 // GetVolumeUuid returns the VolumeUuid field value if set, zero value otherwise.
 func (o *StorageNetAppNfsClient) GetVolumeUuid() string {
-	if o == nil || o.VolumeUuid == nil {
+	if o == nil || IsNil(o.VolumeUuid) {
 		var ret string
 		return ret
 	}
@@ -354,7 +358,7 @@ func (o *StorageNetAppNfsClient) GetVolumeUuid() string {
 // GetVolumeUuidOk returns a tuple with the VolumeUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppNfsClient) GetVolumeUuidOk() (*string, bool) {
-	if o == nil || o.VolumeUuid == nil {
+	if o == nil || IsNil(o.VolumeUuid) {
 		return nil, false
 	}
 	return o.VolumeUuid, true
@@ -362,7 +366,7 @@ func (o *StorageNetAppNfsClient) GetVolumeUuidOk() (*string, bool) {
 
 // HasVolumeUuid returns a boolean if a field has been set.
 func (o *StorageNetAppNfsClient) HasVolumeUuid() bool {
-	if o != nil && o.VolumeUuid != nil {
+	if o != nil && !IsNil(o.VolumeUuid) {
 		return true
 	}
 
@@ -374,125 +378,173 @@ func (o *StorageNetAppNfsClient) SetVolumeUuid(v string) {
 	o.VolumeUuid = &v
 }
 
-// GetStorageContainer returns the StorageContainer field value if set, zero value otherwise.
+// GetStorageContainer returns the StorageContainer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppNfsClient) GetStorageContainer() StorageNetAppVolumeRelationship {
-	if o == nil || o.StorageContainer == nil {
+	if o == nil || IsNil(o.StorageContainer.Get()) {
 		var ret StorageNetAppVolumeRelationship
 		return ret
 	}
-	return *o.StorageContainer
+	return *o.StorageContainer.Get()
 }
 
 // GetStorageContainerOk returns a tuple with the StorageContainer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppNfsClient) GetStorageContainerOk() (*StorageNetAppVolumeRelationship, bool) {
-	if o == nil || o.StorageContainer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageContainer, true
+	return o.StorageContainer.Get(), o.StorageContainer.IsSet()
 }
 
 // HasStorageContainer returns a boolean if a field has been set.
 func (o *StorageNetAppNfsClient) HasStorageContainer() bool {
-	if o != nil && o.StorageContainer != nil {
+	if o != nil && o.StorageContainer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageContainer gets a reference to the given StorageNetAppVolumeRelationship and assigns it to the StorageContainer field.
+// SetStorageContainer gets a reference to the given NullableStorageNetAppVolumeRelationship and assigns it to the StorageContainer field.
 func (o *StorageNetAppNfsClient) SetStorageContainer(v StorageNetAppVolumeRelationship) {
-	o.StorageContainer = &v
+	o.StorageContainer.Set(&v)
 }
 
-// GetTenant returns the Tenant field value if set, zero value otherwise.
+// SetStorageContainerNil sets the value for StorageContainer to be an explicit nil
+func (o *StorageNetAppNfsClient) SetStorageContainerNil() {
+	o.StorageContainer.Set(nil)
+}
+
+// UnsetStorageContainer ensures that no value is present for StorageContainer, not even an explicit nil
+func (o *StorageNetAppNfsClient) UnsetStorageContainer() {
+	o.StorageContainer.Unset()
+}
+
+// GetTenant returns the Tenant field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppNfsClient) GetTenant() StorageNetAppStorageVmRelationship {
-	if o == nil || o.Tenant == nil {
+	if o == nil || IsNil(o.Tenant.Get()) {
 		var ret StorageNetAppStorageVmRelationship
 		return ret
 	}
-	return *o.Tenant
+	return *o.Tenant.Get()
 }
 
 // GetTenantOk returns a tuple with the Tenant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppNfsClient) GetTenantOk() (*StorageNetAppStorageVmRelationship, bool) {
-	if o == nil || o.Tenant == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tenant, true
+	return o.Tenant.Get(), o.Tenant.IsSet()
 }
 
 // HasTenant returns a boolean if a field has been set.
 func (o *StorageNetAppNfsClient) HasTenant() bool {
-	if o != nil && o.Tenant != nil {
+	if o != nil && o.Tenant.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTenant gets a reference to the given StorageNetAppStorageVmRelationship and assigns it to the Tenant field.
+// SetTenant gets a reference to the given NullableStorageNetAppStorageVmRelationship and assigns it to the Tenant field.
 func (o *StorageNetAppNfsClient) SetTenant(v StorageNetAppStorageVmRelationship) {
-	o.Tenant = &v
+	o.Tenant.Set(&v)
+}
+
+// SetTenantNil sets the value for Tenant to be an explicit nil
+func (o *StorageNetAppNfsClient) SetTenantNil() {
+	o.Tenant.Set(nil)
+}
+
+// UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
+func (o *StorageNetAppNfsClient) UnsetTenant() {
+	o.Tenant.Unset()
 }
 
 func (o StorageNetAppNfsClient) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppNfsClient) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClientIp != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClientIp) {
 		toSerialize["ClientIp"] = o.ClientIp
 	}
-	if o.IdleDuration != nil {
+	if !IsNil(o.IdleDuration) {
 		toSerialize["IdleDuration"] = o.IdleDuration
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
-	if o.ServerIp != nil {
+	if !IsNil(o.ServerIp) {
 		toSerialize["ServerIp"] = o.ServerIp
 	}
-	if o.SvmName != nil {
+	if !IsNil(o.SvmName) {
 		toSerialize["SvmName"] = o.SvmName
 	}
-	if o.SvmUuid != nil {
+	if !IsNil(o.SvmUuid) {
 		toSerialize["SvmUuid"] = o.SvmUuid
 	}
-	if o.VolumeName != nil {
+	if !IsNil(o.VolumeName) {
 		toSerialize["VolumeName"] = o.VolumeName
 	}
-	if o.VolumeUuid != nil {
+	if !IsNil(o.VolumeUuid) {
 		toSerialize["VolumeUuid"] = o.VolumeUuid
 	}
-	if o.StorageContainer != nil {
-		toSerialize["StorageContainer"] = o.StorageContainer
+	if o.StorageContainer.IsSet() {
+		toSerialize["StorageContainer"] = o.StorageContainer.Get()
 	}
-	if o.Tenant != nil {
-		toSerialize["Tenant"] = o.Tenant
+	if o.Tenant.IsSet() {
+		toSerialize["Tenant"] = o.Tenant.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppNfsClient) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppNfsClient) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppNfsClientWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -513,14 +565,14 @@ func (o *StorageNetAppNfsClient) UnmarshalJSON(bytes []byte) (err error) {
 		// The parent volume name for the NFS client.
 		VolumeName *string `json:"VolumeName,omitempty"`
 		// Unique identifier for the NetApp Volume.
-		VolumeUuid       *string                             `json:"VolumeUuid,omitempty"`
-		StorageContainer *StorageNetAppVolumeRelationship    `json:"StorageContainer,omitempty"`
-		Tenant           *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+		VolumeUuid       *string                                    `json:"VolumeUuid,omitempty"`
+		StorageContainer NullableStorageNetAppVolumeRelationship    `json:"StorageContainer,omitempty"`
+		Tenant           NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	}
 
 	varStorageNetAppNfsClientWithoutEmbeddedStruct := StorageNetAppNfsClientWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppNfsClientWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppNfsClientWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppNfsClient := _StorageNetAppNfsClient{}
 		varStorageNetAppNfsClient.ClassId = varStorageNetAppNfsClientWithoutEmbeddedStruct.ClassId
@@ -542,7 +594,7 @@ func (o *StorageNetAppNfsClient) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppNfsClient := _StorageNetAppNfsClient{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppNfsClient)
+	err = json.Unmarshal(data, &varStorageNetAppNfsClient)
 	if err == nil {
 		o.MoBaseMo = varStorageNetAppNfsClient.MoBaseMo
 	} else {
@@ -551,7 +603,7 @@ func (o *StorageNetAppNfsClient) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClientIp")

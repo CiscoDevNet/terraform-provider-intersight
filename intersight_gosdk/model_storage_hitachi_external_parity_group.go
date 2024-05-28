@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageHitachiExternalParityGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageHitachiExternalParityGroup{}
 
 // StorageHitachiExternalParityGroup A external parity group in Hitachi storage array.
 type StorageHitachiExternalParityGroup struct {
@@ -49,9 +53,9 @@ type StorageHitachiExternalParityGroup struct {
 	// From among the open volumes in the external parity group, the total capacity of volumes to which paths are not allocated (KB).
 	UnallocatedOpenVolumeCapacity *int64 `json:"UnallocatedOpenVolumeCapacity,omitempty"`
 	// Usage rate of the external parity group.
-	UsedCapacityRate     *int64                               `json:"UsedCapacityRate,omitempty"`
-	Array                *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	UsedCapacityRate     *int64                                      `json:"UsedCapacityRate,omitempty"`
+	Array                NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -130,7 +134,7 @@ func (o *StorageHitachiExternalParityGroup) SetObjectType(v string) {
 
 // GetAllocatableOpenVolumeCapacity returns the AllocatableOpenVolumeCapacity field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetAllocatableOpenVolumeCapacity() int64 {
-	if o == nil || o.AllocatableOpenVolumeCapacity == nil {
+	if o == nil || IsNil(o.AllocatableOpenVolumeCapacity) {
 		var ret int64
 		return ret
 	}
@@ -140,7 +144,7 @@ func (o *StorageHitachiExternalParityGroup) GetAllocatableOpenVolumeCapacity() i
 // GetAllocatableOpenVolumeCapacityOk returns a tuple with the AllocatableOpenVolumeCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetAllocatableOpenVolumeCapacityOk() (*int64, bool) {
-	if o == nil || o.AllocatableOpenVolumeCapacity == nil {
+	if o == nil || IsNil(o.AllocatableOpenVolumeCapacity) {
 		return nil, false
 	}
 	return o.AllocatableOpenVolumeCapacity, true
@@ -148,7 +152,7 @@ func (o *StorageHitachiExternalParityGroup) GetAllocatableOpenVolumeCapacityOk()
 
 // HasAllocatableOpenVolumeCapacity returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasAllocatableOpenVolumeCapacity() bool {
-	if o != nil && o.AllocatableOpenVolumeCapacity != nil {
+	if o != nil && !IsNil(o.AllocatableOpenVolumeCapacity) {
 		return true
 	}
 
@@ -162,7 +166,7 @@ func (o *StorageHitachiExternalParityGroup) SetAllocatableOpenVolumeCapacity(v i
 
 // GetAllocatedOpenVolumeCapacity returns the AllocatedOpenVolumeCapacity field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetAllocatedOpenVolumeCapacity() int64 {
-	if o == nil || o.AllocatedOpenVolumeCapacity == nil {
+	if o == nil || IsNil(o.AllocatedOpenVolumeCapacity) {
 		var ret int64
 		return ret
 	}
@@ -172,7 +176,7 @@ func (o *StorageHitachiExternalParityGroup) GetAllocatedOpenVolumeCapacity() int
 // GetAllocatedOpenVolumeCapacityOk returns a tuple with the AllocatedOpenVolumeCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetAllocatedOpenVolumeCapacityOk() (*int64, bool) {
-	if o == nil || o.AllocatedOpenVolumeCapacity == nil {
+	if o == nil || IsNil(o.AllocatedOpenVolumeCapacity) {
 		return nil, false
 	}
 	return o.AllocatedOpenVolumeCapacity, true
@@ -180,7 +184,7 @@ func (o *StorageHitachiExternalParityGroup) GetAllocatedOpenVolumeCapacityOk() (
 
 // HasAllocatedOpenVolumeCapacity returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasAllocatedOpenVolumeCapacity() bool {
-	if o != nil && o.AllocatedOpenVolumeCapacity != nil {
+	if o != nil && !IsNil(o.AllocatedOpenVolumeCapacity) {
 		return true
 	}
 
@@ -194,7 +198,7 @@ func (o *StorageHitachiExternalParityGroup) SetAllocatedOpenVolumeCapacity(v int
 
 // GetAvailableVolumeCapacity returns the AvailableVolumeCapacity field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetAvailableVolumeCapacity() int64 {
-	if o == nil || o.AvailableVolumeCapacity == nil {
+	if o == nil || IsNil(o.AvailableVolumeCapacity) {
 		var ret int64
 		return ret
 	}
@@ -204,7 +208,7 @@ func (o *StorageHitachiExternalParityGroup) GetAvailableVolumeCapacity() int64 {
 // GetAvailableVolumeCapacityOk returns a tuple with the AvailableVolumeCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetAvailableVolumeCapacityOk() (*int64, bool) {
-	if o == nil || o.AvailableVolumeCapacity == nil {
+	if o == nil || IsNil(o.AvailableVolumeCapacity) {
 		return nil, false
 	}
 	return o.AvailableVolumeCapacity, true
@@ -212,7 +216,7 @@ func (o *StorageHitachiExternalParityGroup) GetAvailableVolumeCapacityOk() (*int
 
 // HasAvailableVolumeCapacity returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasAvailableVolumeCapacity() bool {
-	if o != nil && o.AvailableVolumeCapacity != nil {
+	if o != nil && !IsNil(o.AvailableVolumeCapacity) {
 		return true
 	}
 
@@ -226,7 +230,7 @@ func (o *StorageHitachiExternalParityGroup) SetAvailableVolumeCapacity(v int64) 
 
 // GetClprId returns the ClprId field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetClprId() int64 {
-	if o == nil || o.ClprId == nil {
+	if o == nil || IsNil(o.ClprId) {
 		var ret int64
 		return ret
 	}
@@ -236,7 +240,7 @@ func (o *StorageHitachiExternalParityGroup) GetClprId() int64 {
 // GetClprIdOk returns a tuple with the ClprId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetClprIdOk() (*int64, bool) {
-	if o == nil || o.ClprId == nil {
+	if o == nil || IsNil(o.ClprId) {
 		return nil, false
 	}
 	return o.ClprId, true
@@ -244,7 +248,7 @@ func (o *StorageHitachiExternalParityGroup) GetClprIdOk() (*int64, bool) {
 
 // HasClprId returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasClprId() bool {
-	if o != nil && o.ClprId != nil {
+	if o != nil && !IsNil(o.ClprId) {
 		return true
 	}
 
@@ -258,7 +262,7 @@ func (o *StorageHitachiExternalParityGroup) SetClprId(v int64) {
 
 // GetEmulationType returns the EmulationType field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetEmulationType() string {
-	if o == nil || o.EmulationType == nil {
+	if o == nil || IsNil(o.EmulationType) {
 		var ret string
 		return ret
 	}
@@ -268,7 +272,7 @@ func (o *StorageHitachiExternalParityGroup) GetEmulationType() string {
 // GetEmulationTypeOk returns a tuple with the EmulationType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetEmulationTypeOk() (*string, bool) {
-	if o == nil || o.EmulationType == nil {
+	if o == nil || IsNil(o.EmulationType) {
 		return nil, false
 	}
 	return o.EmulationType, true
@@ -276,7 +280,7 @@ func (o *StorageHitachiExternalParityGroup) GetEmulationTypeOk() (*string, bool)
 
 // HasEmulationType returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasEmulationType() bool {
-	if o != nil && o.EmulationType != nil {
+	if o != nil && !IsNil(o.EmulationType) {
 		return true
 	}
 
@@ -290,7 +294,7 @@ func (o *StorageHitachiExternalParityGroup) SetEmulationType(v string) {
 
 // GetExternalProductId returns the ExternalProductId field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetExternalProductId() string {
-	if o == nil || o.ExternalProductId == nil {
+	if o == nil || IsNil(o.ExternalProductId) {
 		var ret string
 		return ret
 	}
@@ -300,7 +304,7 @@ func (o *StorageHitachiExternalParityGroup) GetExternalProductId() string {
 // GetExternalProductIdOk returns a tuple with the ExternalProductId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetExternalProductIdOk() (*string, bool) {
-	if o == nil || o.ExternalProductId == nil {
+	if o == nil || IsNil(o.ExternalProductId) {
 		return nil, false
 	}
 	return o.ExternalProductId, true
@@ -308,7 +312,7 @@ func (o *StorageHitachiExternalParityGroup) GetExternalProductIdOk() (*string, b
 
 // HasExternalProductId returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasExternalProductId() bool {
-	if o != nil && o.ExternalProductId != nil {
+	if o != nil && !IsNil(o.ExternalProductId) {
 		return true
 	}
 
@@ -322,7 +326,7 @@ func (o *StorageHitachiExternalParityGroup) SetExternalProductId(v string) {
 
 // GetLargestAvailableCapacity returns the LargestAvailableCapacity field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetLargestAvailableCapacity() int64 {
-	if o == nil || o.LargestAvailableCapacity == nil {
+	if o == nil || IsNil(o.LargestAvailableCapacity) {
 		var ret int64
 		return ret
 	}
@@ -332,7 +336,7 @@ func (o *StorageHitachiExternalParityGroup) GetLargestAvailableCapacity() int64 
 // GetLargestAvailableCapacityOk returns a tuple with the LargestAvailableCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetLargestAvailableCapacityOk() (*int64, bool) {
-	if o == nil || o.LargestAvailableCapacity == nil {
+	if o == nil || IsNil(o.LargestAvailableCapacity) {
 		return nil, false
 	}
 	return o.LargestAvailableCapacity, true
@@ -340,7 +344,7 @@ func (o *StorageHitachiExternalParityGroup) GetLargestAvailableCapacityOk() (*in
 
 // HasLargestAvailableCapacity returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasLargestAvailableCapacity() bool {
-	if o != nil && o.LargestAvailableCapacity != nil {
+	if o != nil && !IsNil(o.LargestAvailableCapacity) {
 		return true
 	}
 
@@ -354,7 +358,7 @@ func (o *StorageHitachiExternalParityGroup) SetLargestAvailableCapacity(v int64)
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -364,7 +368,7 @@ func (o *StorageHitachiExternalParityGroup) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -372,7 +376,7 @@ func (o *StorageHitachiExternalParityGroup) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -386,7 +390,7 @@ func (o *StorageHitachiExternalParityGroup) SetName(v string) {
 
 // GetReservedOpenVolumeCapacity returns the ReservedOpenVolumeCapacity field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetReservedOpenVolumeCapacity() int64 {
-	if o == nil || o.ReservedOpenVolumeCapacity == nil {
+	if o == nil || IsNil(o.ReservedOpenVolumeCapacity) {
 		var ret int64
 		return ret
 	}
@@ -396,7 +400,7 @@ func (o *StorageHitachiExternalParityGroup) GetReservedOpenVolumeCapacity() int6
 // GetReservedOpenVolumeCapacityOk returns a tuple with the ReservedOpenVolumeCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetReservedOpenVolumeCapacityOk() (*int64, bool) {
-	if o == nil || o.ReservedOpenVolumeCapacity == nil {
+	if o == nil || IsNil(o.ReservedOpenVolumeCapacity) {
 		return nil, false
 	}
 	return o.ReservedOpenVolumeCapacity, true
@@ -404,7 +408,7 @@ func (o *StorageHitachiExternalParityGroup) GetReservedOpenVolumeCapacityOk() (*
 
 // HasReservedOpenVolumeCapacity returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasReservedOpenVolumeCapacity() bool {
-	if o != nil && o.ReservedOpenVolumeCapacity != nil {
+	if o != nil && !IsNil(o.ReservedOpenVolumeCapacity) {
 		return true
 	}
 
@@ -429,7 +433,7 @@ func (o *StorageHitachiExternalParityGroup) GetSpaces() []StorageSpace {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiExternalParityGroup) GetSpacesOk() ([]StorageSpace, bool) {
-	if o == nil || o.Spaces == nil {
+	if o == nil || IsNil(o.Spaces) {
 		return nil, false
 	}
 	return o.Spaces, true
@@ -437,7 +441,7 @@ func (o *StorageHitachiExternalParityGroup) GetSpacesOk() ([]StorageSpace, bool)
 
 // HasSpaces returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasSpaces() bool {
-	if o != nil && o.Spaces != nil {
+	if o != nil && IsNil(o.Spaces) {
 		return true
 	}
 
@@ -451,7 +455,7 @@ func (o *StorageHitachiExternalParityGroup) SetSpaces(v []StorageSpace) {
 
 // GetStorageUtilization returns the StorageUtilization field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetStorageUtilization() StorageHitachiCapacity {
-	if o == nil || o.StorageUtilization == nil {
+	if o == nil || IsNil(o.StorageUtilization) {
 		var ret StorageHitachiCapacity
 		return ret
 	}
@@ -461,7 +465,7 @@ func (o *StorageHitachiExternalParityGroup) GetStorageUtilization() StorageHitac
 // GetStorageUtilizationOk returns a tuple with the StorageUtilization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetStorageUtilizationOk() (*StorageHitachiCapacity, bool) {
-	if o == nil || o.StorageUtilization == nil {
+	if o == nil || IsNil(o.StorageUtilization) {
 		return nil, false
 	}
 	return o.StorageUtilization, true
@@ -469,7 +473,7 @@ func (o *StorageHitachiExternalParityGroup) GetStorageUtilizationOk() (*StorageH
 
 // HasStorageUtilization returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasStorageUtilization() bool {
-	if o != nil && o.StorageUtilization != nil {
+	if o != nil && !IsNil(o.StorageUtilization) {
 		return true
 	}
 
@@ -483,7 +487,7 @@ func (o *StorageHitachiExternalParityGroup) SetStorageUtilization(v StorageHitac
 
 // GetTotalOpenVolumeCapacity returns the TotalOpenVolumeCapacity field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetTotalOpenVolumeCapacity() int64 {
-	if o == nil || o.TotalOpenVolumeCapacity == nil {
+	if o == nil || IsNil(o.TotalOpenVolumeCapacity) {
 		var ret int64
 		return ret
 	}
@@ -493,7 +497,7 @@ func (o *StorageHitachiExternalParityGroup) GetTotalOpenVolumeCapacity() int64 {
 // GetTotalOpenVolumeCapacityOk returns a tuple with the TotalOpenVolumeCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetTotalOpenVolumeCapacityOk() (*int64, bool) {
-	if o == nil || o.TotalOpenVolumeCapacity == nil {
+	if o == nil || IsNil(o.TotalOpenVolumeCapacity) {
 		return nil, false
 	}
 	return o.TotalOpenVolumeCapacity, true
@@ -501,7 +505,7 @@ func (o *StorageHitachiExternalParityGroup) GetTotalOpenVolumeCapacityOk() (*int
 
 // HasTotalOpenVolumeCapacity returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasTotalOpenVolumeCapacity() bool {
-	if o != nil && o.TotalOpenVolumeCapacity != nil {
+	if o != nil && !IsNil(o.TotalOpenVolumeCapacity) {
 		return true
 	}
 
@@ -515,7 +519,7 @@ func (o *StorageHitachiExternalParityGroup) SetTotalOpenVolumeCapacity(v int64) 
 
 // GetUnallocatedOpenVolumeCapacity returns the UnallocatedOpenVolumeCapacity field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetUnallocatedOpenVolumeCapacity() int64 {
-	if o == nil || o.UnallocatedOpenVolumeCapacity == nil {
+	if o == nil || IsNil(o.UnallocatedOpenVolumeCapacity) {
 		var ret int64
 		return ret
 	}
@@ -525,7 +529,7 @@ func (o *StorageHitachiExternalParityGroup) GetUnallocatedOpenVolumeCapacity() i
 // GetUnallocatedOpenVolumeCapacityOk returns a tuple with the UnallocatedOpenVolumeCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetUnallocatedOpenVolumeCapacityOk() (*int64, bool) {
-	if o == nil || o.UnallocatedOpenVolumeCapacity == nil {
+	if o == nil || IsNil(o.UnallocatedOpenVolumeCapacity) {
 		return nil, false
 	}
 	return o.UnallocatedOpenVolumeCapacity, true
@@ -533,7 +537,7 @@ func (o *StorageHitachiExternalParityGroup) GetUnallocatedOpenVolumeCapacityOk()
 
 // HasUnallocatedOpenVolumeCapacity returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasUnallocatedOpenVolumeCapacity() bool {
-	if o != nil && o.UnallocatedOpenVolumeCapacity != nil {
+	if o != nil && !IsNil(o.UnallocatedOpenVolumeCapacity) {
 		return true
 	}
 
@@ -547,7 +551,7 @@ func (o *StorageHitachiExternalParityGroup) SetUnallocatedOpenVolumeCapacity(v i
 
 // GetUsedCapacityRate returns the UsedCapacityRate field value if set, zero value otherwise.
 func (o *StorageHitachiExternalParityGroup) GetUsedCapacityRate() int64 {
-	if o == nil || o.UsedCapacityRate == nil {
+	if o == nil || IsNil(o.UsedCapacityRate) {
 		var ret int64
 		return ret
 	}
@@ -557,7 +561,7 @@ func (o *StorageHitachiExternalParityGroup) GetUsedCapacityRate() int64 {
 // GetUsedCapacityRateOk returns a tuple with the UsedCapacityRate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiExternalParityGroup) GetUsedCapacityRateOk() (*int64, bool) {
-	if o == nil || o.UsedCapacityRate == nil {
+	if o == nil || IsNil(o.UsedCapacityRate) {
 		return nil, false
 	}
 	return o.UsedCapacityRate, true
@@ -565,7 +569,7 @@ func (o *StorageHitachiExternalParityGroup) GetUsedCapacityRateOk() (*int64, boo
 
 // HasUsedCapacityRate returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasUsedCapacityRate() bool {
-	if o != nil && o.UsedCapacityRate != nil {
+	if o != nil && !IsNil(o.UsedCapacityRate) {
 		return true
 	}
 
@@ -577,143 +581,191 @@ func (o *StorageHitachiExternalParityGroup) SetUsedCapacityRate(v int64) {
 	o.UsedCapacityRate = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiExternalParityGroup) GetArray() StorageHitachiArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageHitachiArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiExternalParityGroup) GetArrayOk() (*StorageHitachiArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageHitachiArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageHitachiArrayRelationship and assigns it to the Array field.
 func (o *StorageHitachiExternalParityGroup) SetArray(v StorageHitachiArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageHitachiExternalParityGroup) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageHitachiExternalParityGroup) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiExternalParityGroup) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiExternalParityGroup) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageHitachiExternalParityGroup) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageHitachiExternalParityGroup) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageHitachiExternalParityGroup) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageHitachiExternalParityGroup) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageHitachiExternalParityGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageHitachiExternalParityGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AllocatableOpenVolumeCapacity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AllocatableOpenVolumeCapacity) {
 		toSerialize["AllocatableOpenVolumeCapacity"] = o.AllocatableOpenVolumeCapacity
 	}
-	if o.AllocatedOpenVolumeCapacity != nil {
+	if !IsNil(o.AllocatedOpenVolumeCapacity) {
 		toSerialize["AllocatedOpenVolumeCapacity"] = o.AllocatedOpenVolumeCapacity
 	}
-	if o.AvailableVolumeCapacity != nil {
+	if !IsNil(o.AvailableVolumeCapacity) {
 		toSerialize["AvailableVolumeCapacity"] = o.AvailableVolumeCapacity
 	}
-	if o.ClprId != nil {
+	if !IsNil(o.ClprId) {
 		toSerialize["ClprId"] = o.ClprId
 	}
-	if o.EmulationType != nil {
+	if !IsNil(o.EmulationType) {
 		toSerialize["EmulationType"] = o.EmulationType
 	}
-	if o.ExternalProductId != nil {
+	if !IsNil(o.ExternalProductId) {
 		toSerialize["ExternalProductId"] = o.ExternalProductId
 	}
-	if o.LargestAvailableCapacity != nil {
+	if !IsNil(o.LargestAvailableCapacity) {
 		toSerialize["LargestAvailableCapacity"] = o.LargestAvailableCapacity
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.ReservedOpenVolumeCapacity != nil {
+	if !IsNil(o.ReservedOpenVolumeCapacity) {
 		toSerialize["ReservedOpenVolumeCapacity"] = o.ReservedOpenVolumeCapacity
 	}
 	if o.Spaces != nil {
 		toSerialize["Spaces"] = o.Spaces
 	}
-	if o.StorageUtilization != nil {
+	if !IsNil(o.StorageUtilization) {
 		toSerialize["StorageUtilization"] = o.StorageUtilization
 	}
-	if o.TotalOpenVolumeCapacity != nil {
+	if !IsNil(o.TotalOpenVolumeCapacity) {
 		toSerialize["TotalOpenVolumeCapacity"] = o.TotalOpenVolumeCapacity
 	}
-	if o.UnallocatedOpenVolumeCapacity != nil {
+	if !IsNil(o.UnallocatedOpenVolumeCapacity) {
 		toSerialize["UnallocatedOpenVolumeCapacity"] = o.UnallocatedOpenVolumeCapacity
 	}
-	if o.UsedCapacityRate != nil {
+	if !IsNil(o.UsedCapacityRate) {
 		toSerialize["UsedCapacityRate"] = o.UsedCapacityRate
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageHitachiExternalParityGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageHitachiExternalParityGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageHitachiExternalParityGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -744,14 +796,14 @@ func (o *StorageHitachiExternalParityGroup) UnmarshalJSON(bytes []byte) (err err
 		// From among the open volumes in the external parity group, the total capacity of volumes to which paths are not allocated (KB).
 		UnallocatedOpenVolumeCapacity *int64 `json:"UnallocatedOpenVolumeCapacity,omitempty"`
 		// Usage rate of the external parity group.
-		UsedCapacityRate *int64                               `json:"UsedCapacityRate,omitempty"`
-		Array            *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		UsedCapacityRate *int64                                      `json:"UsedCapacityRate,omitempty"`
+		Array            NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageHitachiExternalParityGroupWithoutEmbeddedStruct := StorageHitachiExternalParityGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiExternalParityGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageHitachiExternalParityGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageHitachiExternalParityGroup := _StorageHitachiExternalParityGroup{}
 		varStorageHitachiExternalParityGroup.ClassId = varStorageHitachiExternalParityGroupWithoutEmbeddedStruct.ClassId
@@ -779,7 +831,7 @@ func (o *StorageHitachiExternalParityGroup) UnmarshalJSON(bytes []byte) (err err
 
 	varStorageHitachiExternalParityGroup := _StorageHitachiExternalParityGroup{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiExternalParityGroup)
+	err = json.Unmarshal(data, &varStorageHitachiExternalParityGroup)
 	if err == nil {
 		o.MoBaseMo = varStorageHitachiExternalParityGroup.MoBaseMo
 	} else {
@@ -788,7 +840,7 @@ func (o *StorageHitachiExternalParityGroup) UnmarshalJSON(bytes []byte) (err err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllocatableOpenVolumeCapacity")

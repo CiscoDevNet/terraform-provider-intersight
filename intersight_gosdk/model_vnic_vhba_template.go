@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicVhbaTemplate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicVhbaTemplate{}
 
 // VnicVhbaTemplate The vHBA template consists of the common vHBA configuration, which can be reused across multiple vHBAs. vHBAs can be created from the template using the Derive operation. Additionally, an existing vHBA can be attached to a template to use the configuration set in the template. To derive vHBAs from a vHBA template, you must use the asynchronous /v1/bulk/MoCloners bulk API. Deriving vHBAs from a vHBA Template URL: /v1/bulk/MoCloners Method: POST Headers:   - Key: \"prefer\"     Value: \"respond-async\" Body: >  {     \"Sources\": [       {         \"Moid\": \"xxxx\",         \"ObjectType\": \"vnic.VhbaTemplate\"      }     ],     \"Targets\": [       {         \"Name\": \"test-vh2\",         \"SanConnectivityPolicy\": \"aaaaa\",         \"ObjectType\": \"vnic.FcIf\"      }     ],     \"WorkflowNameSuffix\": \"Derive vHBA from a Template\",     \"Organization\": {         \"Moid\": \"oooo\",         \"ObjectType\": \"organization.Organization\"     } } The API response includes the \"AsyncResult\"->bulk.Result MO reference. API clients must poll the bulk.Result MO to monitor the status of the operation. The bulk.Result object also includes a reference to a monitoring workflow, which is accessible from the 'Requests' tab in the UI. Managing Template Updates When the vHBA template is updated, the system initiates an automatic call to the /v1/bulk/MoMergers API to synchronize the template changes to all derived vHBA instances asynchronously. The status of the sync operation can be obtained by performing a query on vnic EthIf MO - $filter=SrcTemplate.Moid eq 'xxx'&$apply=groupby ( (TemplateSyncStatus), aggregate ($count as count)) Override Option for vHBA Templates When enabled, this feature allows the configuration of the derived vHBA to override the configuration available in the template during vHBA create or update. You can query the list of overridable properties for a vHBA template from the Template Catalog. Use the following catalog API query: URL: /v1/capability/TemplateCatalogs Query: $filter= (Name eq ‘VhbaTemplate’)&$select=AllowedOverrideList Once a property is overridden on a derived vHBA, it will be added to the ‘OverriddenList’ property on the vnic FcIf MO. URL: /v1/vnic/FcIfs Query: $select=SrcTemplate, OverriddenList When override is disabled on the template, derived vHBA will have same configuration as the template.
 type VnicVhbaTemplate struct {
@@ -38,8 +42,8 @@ type VnicVhbaTemplate struct {
 	SwitchId        *string                 `json:"SwitchId,omitempty"`
 	TemplateActions []MotemplateActionEntry `json:"TemplateActions,omitempty"`
 	// The number of objects derived from a Template MO instance.
-	UsageCount           *int64                                `json:"UsageCount,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	UsageCount           *int64                                       `json:"UsageCount,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -124,7 +128,7 @@ func (o *VnicVhbaTemplate) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *VnicVhbaTemplate) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -134,7 +138,7 @@ func (o *VnicVhbaTemplate) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVhbaTemplate) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -142,7 +146,7 @@ func (o *VnicVhbaTemplate) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *VnicVhbaTemplate) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *VnicVhbaTemplate) SetDescription(v string) {
 
 // GetEnableOverride returns the EnableOverride field value if set, zero value otherwise.
 func (o *VnicVhbaTemplate) GetEnableOverride() bool {
-	if o == nil || o.EnableOverride == nil {
+	if o == nil || IsNil(o.EnableOverride) {
 		var ret bool
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *VnicVhbaTemplate) GetEnableOverride() bool {
 // GetEnableOverrideOk returns a tuple with the EnableOverride field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVhbaTemplate) GetEnableOverrideOk() (*bool, bool) {
-	if o == nil || o.EnableOverride == nil {
+	if o == nil || IsNil(o.EnableOverride) {
 		return nil, false
 	}
 	return o.EnableOverride, true
@@ -174,7 +178,7 @@ func (o *VnicVhbaTemplate) GetEnableOverrideOk() (*bool, bool) {
 
 // HasEnableOverride returns a boolean if a field has been set.
 func (o *VnicVhbaTemplate) HasEnableOverride() bool {
-	if o != nil && o.EnableOverride != nil {
+	if o != nil && !IsNil(o.EnableOverride) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *VnicVhbaTemplate) SetEnableOverride(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VnicVhbaTemplate) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *VnicVhbaTemplate) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVhbaTemplate) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -206,7 +210,7 @@ func (o *VnicVhbaTemplate) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *VnicVhbaTemplate) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *VnicVhbaTemplate) SetName(v string) {
 
 // GetPeerVhbaName returns the PeerVhbaName field value if set, zero value otherwise.
 func (o *VnicVhbaTemplate) GetPeerVhbaName() string {
-	if o == nil || o.PeerVhbaName == nil {
+	if o == nil || IsNil(o.PeerVhbaName) {
 		var ret string
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *VnicVhbaTemplate) GetPeerVhbaName() string {
 // GetPeerVhbaNameOk returns a tuple with the PeerVhbaName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVhbaTemplate) GetPeerVhbaNameOk() (*string, bool) {
-	if o == nil || o.PeerVhbaName == nil {
+	if o == nil || IsNil(o.PeerVhbaName) {
 		return nil, false
 	}
 	return o.PeerVhbaName, true
@@ -238,7 +242,7 @@ func (o *VnicVhbaTemplate) GetPeerVhbaNameOk() (*string, bool) {
 
 // HasPeerVhbaName returns a boolean if a field has been set.
 func (o *VnicVhbaTemplate) HasPeerVhbaName() bool {
-	if o != nil && o.PeerVhbaName != nil {
+	if o != nil && !IsNil(o.PeerVhbaName) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *VnicVhbaTemplate) SetPeerVhbaName(v string) {
 
 // GetScpUsageCount returns the ScpUsageCount field value if set, zero value otherwise.
 func (o *VnicVhbaTemplate) GetScpUsageCount() int64 {
-	if o == nil || o.ScpUsageCount == nil {
+	if o == nil || IsNil(o.ScpUsageCount) {
 		var ret int64
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *VnicVhbaTemplate) GetScpUsageCount() int64 {
 // GetScpUsageCountOk returns a tuple with the ScpUsageCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVhbaTemplate) GetScpUsageCountOk() (*int64, bool) {
-	if o == nil || o.ScpUsageCount == nil {
+	if o == nil || IsNil(o.ScpUsageCount) {
 		return nil, false
 	}
 	return o.ScpUsageCount, true
@@ -270,7 +274,7 @@ func (o *VnicVhbaTemplate) GetScpUsageCountOk() (*int64, bool) {
 
 // HasScpUsageCount returns a boolean if a field has been set.
 func (o *VnicVhbaTemplate) HasScpUsageCount() bool {
-	if o != nil && o.ScpUsageCount != nil {
+	if o != nil && !IsNil(o.ScpUsageCount) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *VnicVhbaTemplate) SetScpUsageCount(v int64) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *VnicVhbaTemplate) GetSwitchId() string {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret string
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *VnicVhbaTemplate) GetSwitchId() string {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVhbaTemplate) GetSwitchIdOk() (*string, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -302,7 +306,7 @@ func (o *VnicVhbaTemplate) GetSwitchIdOk() (*string, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *VnicVhbaTemplate) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -327,7 +331,7 @@ func (o *VnicVhbaTemplate) GetTemplateActions() []MotemplateActionEntry {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicVhbaTemplate) GetTemplateActionsOk() ([]MotemplateActionEntry, bool) {
-	if o == nil || o.TemplateActions == nil {
+	if o == nil || IsNil(o.TemplateActions) {
 		return nil, false
 	}
 	return o.TemplateActions, true
@@ -335,7 +339,7 @@ func (o *VnicVhbaTemplate) GetTemplateActionsOk() ([]MotemplateActionEntry, bool
 
 // HasTemplateActions returns a boolean if a field has been set.
 func (o *VnicVhbaTemplate) HasTemplateActions() bool {
-	if o != nil && o.TemplateActions != nil {
+	if o != nil && IsNil(o.TemplateActions) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *VnicVhbaTemplate) SetTemplateActions(v []MotemplateActionEntry) {
 
 // GetUsageCount returns the UsageCount field value if set, zero value otherwise.
 func (o *VnicVhbaTemplate) GetUsageCount() int64 {
-	if o == nil || o.UsageCount == nil {
+	if o == nil || IsNil(o.UsageCount) {
 		var ret int64
 		return ret
 	}
@@ -359,7 +363,7 @@ func (o *VnicVhbaTemplate) GetUsageCount() int64 {
 // GetUsageCountOk returns a tuple with the UsageCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicVhbaTemplate) GetUsageCountOk() (*int64, bool) {
-	if o == nil || o.UsageCount == nil {
+	if o == nil || IsNil(o.UsageCount) {
 		return nil, false
 	}
 	return o.UsageCount, true
@@ -367,7 +371,7 @@ func (o *VnicVhbaTemplate) GetUsageCountOk() (*int64, bool) {
 
 // HasUsageCount returns a boolean if a field has been set.
 func (o *VnicVhbaTemplate) HasUsageCount() bool {
-	if o != nil && o.UsageCount != nil {
+	if o != nil && !IsNil(o.UsageCount) {
 		return true
 	}
 
@@ -379,90 +383,127 @@ func (o *VnicVhbaTemplate) SetUsageCount(v int64) {
 	o.UsageCount = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicVhbaTemplate) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicVhbaTemplate) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *VnicVhbaTemplate) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *VnicVhbaTemplate) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *VnicVhbaTemplate) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *VnicVhbaTemplate) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o VnicVhbaTemplate) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicVhbaTemplate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVnicBaseFcIf, errVnicBaseFcIf := json.Marshal(o.VnicBaseFcIf)
 	if errVnicBaseFcIf != nil {
-		return []byte{}, errVnicBaseFcIf
+		return map[string]interface{}{}, errVnicBaseFcIf
 	}
 	errVnicBaseFcIf = json.Unmarshal([]byte(serializedVnicBaseFcIf), &toSerialize)
 	if errVnicBaseFcIf != nil {
-		return []byte{}, errVnicBaseFcIf
+		return map[string]interface{}{}, errVnicBaseFcIf
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.EnableOverride != nil {
+	if !IsNil(o.EnableOverride) {
 		toSerialize["EnableOverride"] = o.EnableOverride
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PeerVhbaName != nil {
+	if !IsNil(o.PeerVhbaName) {
 		toSerialize["PeerVhbaName"] = o.PeerVhbaName
 	}
-	if o.ScpUsageCount != nil {
+	if !IsNil(o.ScpUsageCount) {
 		toSerialize["ScpUsageCount"] = o.ScpUsageCount
 	}
-	if o.SwitchId != nil {
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
 	if o.TemplateActions != nil {
 		toSerialize["TemplateActions"] = o.TemplateActions
 	}
-	if o.UsageCount != nil {
+	if !IsNil(o.UsageCount) {
 		toSerialize["UsageCount"] = o.UsageCount
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicVhbaTemplate) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicVhbaTemplate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicVhbaTemplateWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -482,13 +523,13 @@ func (o *VnicVhbaTemplate) UnmarshalJSON(bytes []byte) (err error) {
 		SwitchId        *string                 `json:"SwitchId,omitempty"`
 		TemplateActions []MotemplateActionEntry `json:"TemplateActions,omitempty"`
 		// The number of objects derived from a Template MO instance.
-		UsageCount   *int64                                `json:"UsageCount,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		UsageCount   *int64                                       `json:"UsageCount,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varVnicVhbaTemplateWithoutEmbeddedStruct := VnicVhbaTemplateWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicVhbaTemplateWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicVhbaTemplateWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicVhbaTemplate := _VnicVhbaTemplate{}
 		varVnicVhbaTemplate.ClassId = varVnicVhbaTemplateWithoutEmbeddedStruct.ClassId
@@ -509,7 +550,7 @@ func (o *VnicVhbaTemplate) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicVhbaTemplate := _VnicVhbaTemplate{}
 
-	err = json.Unmarshal(bytes, &varVnicVhbaTemplate)
+	err = json.Unmarshal(data, &varVnicVhbaTemplate)
 	if err == nil {
 		o.VnicBaseFcIf = varVnicVhbaTemplate.VnicBaseFcIf
 	} else {
@@ -518,7 +559,7 @@ func (o *VnicVhbaTemplate) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

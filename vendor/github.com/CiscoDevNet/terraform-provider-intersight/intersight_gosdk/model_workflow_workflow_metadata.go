@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowWorkflowMetadata type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowWorkflowMetadata{}
 
 // WorkflowWorkflowMetadata Workflow metadata is a collection of properties that are common across all the versions of a workflow.
 type WorkflowWorkflowMetadata struct {
@@ -31,8 +35,8 @@ type WorkflowWorkflowMetadata struct {
 	// The name for this workflow metadata. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_).
 	Name *string `json:"Name,omitempty"`
 	// An array of relationships to iamRole resources.
-	AssociatedRoles      []IamRoleRelationship        `json:"AssociatedRoles,omitempty"`
-	Catalog              *WorkflowCatalogRelationship `json:"Catalog,omitempty"`
+	AssociatedRoles      []IamRoleRelationship               `json:"AssociatedRoles,omitempty"`
+	Catalog              NullableWorkflowCatalogRelationship `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *WorkflowWorkflowMetadata) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *WorkflowWorkflowMetadata) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *WorkflowWorkflowMetadata) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowMetadata) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -129,7 +133,7 @@ func (o *WorkflowWorkflowMetadata) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *WorkflowWorkflowMetadata) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *WorkflowWorkflowMetadata) SetDescription(v string) {
 
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *WorkflowWorkflowMetadata) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *WorkflowWorkflowMetadata) GetLabel() string {
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowMetadata) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
 	return o.Label, true
@@ -161,7 +165,7 @@ func (o *WorkflowWorkflowMetadata) GetLabelOk() (*string, bool) {
 
 // HasLabel returns a boolean if a field has been set.
 func (o *WorkflowWorkflowMetadata) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && !IsNil(o.Label) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *WorkflowWorkflowMetadata) SetLabel(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkflowWorkflowMetadata) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *WorkflowWorkflowMetadata) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowMetadata) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -193,7 +197,7 @@ func (o *WorkflowWorkflowMetadata) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *WorkflowWorkflowMetadata) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *WorkflowWorkflowMetadata) GetAssociatedRoles() []IamRoleRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowMetadata) GetAssociatedRolesOk() ([]IamRoleRelationship, bool) {
-	if o == nil || o.AssociatedRoles == nil {
+	if o == nil || IsNil(o.AssociatedRoles) {
 		return nil, false
 	}
 	return o.AssociatedRoles, true
@@ -226,7 +230,7 @@ func (o *WorkflowWorkflowMetadata) GetAssociatedRolesOk() ([]IamRoleRelationship
 
 // HasAssociatedRoles returns a boolean if a field has been set.
 func (o *WorkflowWorkflowMetadata) HasAssociatedRoles() bool {
-	if o != nil && o.AssociatedRoles != nil {
+	if o != nil && IsNil(o.AssociatedRoles) {
 		return true
 	}
 
@@ -238,78 +242,115 @@ func (o *WorkflowWorkflowMetadata) SetAssociatedRoles(v []IamRoleRelationship) {
 	o.AssociatedRoles = v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowWorkflowMetadata) GetCatalog() WorkflowCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret WorkflowCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowMetadata) GetCatalogOk() (*WorkflowCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *WorkflowWorkflowMetadata) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given WorkflowCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableWorkflowCatalogRelationship and assigns it to the Catalog field.
 func (o *WorkflowWorkflowMetadata) SetCatalog(v WorkflowCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
+}
+
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *WorkflowWorkflowMetadata) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *WorkflowWorkflowMetadata) UnsetCatalog() {
+	o.Catalog.Unset()
 }
 
 func (o WorkflowWorkflowMetadata) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowWorkflowMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Label != nil {
+	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.AssociatedRoles != nil {
 		toSerialize["AssociatedRoles"] = o.AssociatedRoles
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowWorkflowMetadata) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowWorkflowMetadata) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowWorkflowMetadataWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -322,13 +363,13 @@ func (o *WorkflowWorkflowMetadata) UnmarshalJSON(bytes []byte) (err error) {
 		// The name for this workflow metadata. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_).
 		Name *string `json:"Name,omitempty"`
 		// An array of relationships to iamRole resources.
-		AssociatedRoles []IamRoleRelationship        `json:"AssociatedRoles,omitempty"`
-		Catalog         *WorkflowCatalogRelationship `json:"Catalog,omitempty"`
+		AssociatedRoles []IamRoleRelationship               `json:"AssociatedRoles,omitempty"`
+		Catalog         NullableWorkflowCatalogRelationship `json:"Catalog,omitempty"`
 	}
 
 	varWorkflowWorkflowMetadataWithoutEmbeddedStruct := WorkflowWorkflowMetadataWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowWorkflowMetadataWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowWorkflowMetadataWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowWorkflowMetadata := _WorkflowWorkflowMetadata{}
 		varWorkflowWorkflowMetadata.ClassId = varWorkflowWorkflowMetadataWithoutEmbeddedStruct.ClassId
@@ -345,7 +386,7 @@ func (o *WorkflowWorkflowMetadata) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowWorkflowMetadata := _WorkflowWorkflowMetadata{}
 
-	err = json.Unmarshal(bytes, &varWorkflowWorkflowMetadata)
+	err = json.Unmarshal(data, &varWorkflowWorkflowMetadata)
 	if err == nil {
 		o.MoBaseMo = varWorkflowWorkflowMetadata.MoBaseMo
 	} else {
@@ -354,7 +395,7 @@ func (o *WorkflowWorkflowMetadata) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

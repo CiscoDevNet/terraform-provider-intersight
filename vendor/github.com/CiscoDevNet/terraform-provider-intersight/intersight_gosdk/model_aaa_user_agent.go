@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AaaUserAgent type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AaaUserAgent{}
 
 // AaaUserAgent A user agent of an API request. The user agent has information about the operating system family and version that initiated the request. The user agent also has information about the software client that made the request which includes the software type (browser, SDK, etc.) and version.
 type AaaUserAgent struct {
@@ -114,7 +118,7 @@ func (o *AaaUserAgent) SetObjectType(v string) {
 
 // GetOsFamily returns the OsFamily field value if set, zero value otherwise.
 func (o *AaaUserAgent) GetOsFamily() string {
-	if o == nil || o.OsFamily == nil {
+	if o == nil || IsNil(o.OsFamily) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *AaaUserAgent) GetOsFamily() string {
 // GetOsFamilyOk returns a tuple with the OsFamily field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaUserAgent) GetOsFamilyOk() (*string, bool) {
-	if o == nil || o.OsFamily == nil {
+	if o == nil || IsNil(o.OsFamily) {
 		return nil, false
 	}
 	return o.OsFamily, true
@@ -132,7 +136,7 @@ func (o *AaaUserAgent) GetOsFamilyOk() (*string, bool) {
 
 // HasOsFamily returns a boolean if a field has been set.
 func (o *AaaUserAgent) HasOsFamily() bool {
-	if o != nil && o.OsFamily != nil {
+	if o != nil && !IsNil(o.OsFamily) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *AaaUserAgent) SetOsFamily(v string) {
 
 // GetOsVersion returns the OsVersion field value if set, zero value otherwise.
 func (o *AaaUserAgent) GetOsVersion() string {
-	if o == nil || o.OsVersion == nil {
+	if o == nil || IsNil(o.OsVersion) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *AaaUserAgent) GetOsVersion() string {
 // GetOsVersionOk returns a tuple with the OsVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaUserAgent) GetOsVersionOk() (*string, bool) {
-	if o == nil || o.OsVersion == nil {
+	if o == nil || IsNil(o.OsVersion) {
 		return nil, false
 	}
 	return o.OsVersion, true
@@ -164,7 +168,7 @@ func (o *AaaUserAgent) GetOsVersionOk() (*string, bool) {
 
 // HasOsVersion returns a boolean if a field has been set.
 func (o *AaaUserAgent) HasOsVersion() bool {
-	if o != nil && o.OsVersion != nil {
+	if o != nil && !IsNil(o.OsVersion) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *AaaUserAgent) SetOsVersion(v string) {
 
 // GetSoftwareFamily returns the SoftwareFamily field value if set, zero value otherwise.
 func (o *AaaUserAgent) GetSoftwareFamily() string {
-	if o == nil || o.SoftwareFamily == nil {
+	if o == nil || IsNil(o.SoftwareFamily) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *AaaUserAgent) GetSoftwareFamily() string {
 // GetSoftwareFamilyOk returns a tuple with the SoftwareFamily field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaUserAgent) GetSoftwareFamilyOk() (*string, bool) {
-	if o == nil || o.SoftwareFamily == nil {
+	if o == nil || IsNil(o.SoftwareFamily) {
 		return nil, false
 	}
 	return o.SoftwareFamily, true
@@ -196,7 +200,7 @@ func (o *AaaUserAgent) GetSoftwareFamilyOk() (*string, bool) {
 
 // HasSoftwareFamily returns a boolean if a field has been set.
 func (o *AaaUserAgent) HasSoftwareFamily() bool {
-	if o != nil && o.SoftwareFamily != nil {
+	if o != nil && !IsNil(o.SoftwareFamily) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *AaaUserAgent) SetSoftwareFamily(v string) {
 
 // GetSoftwareSubtype returns the SoftwareSubtype field value if set, zero value otherwise.
 func (o *AaaUserAgent) GetSoftwareSubtype() string {
-	if o == nil || o.SoftwareSubtype == nil {
+	if o == nil || IsNil(o.SoftwareSubtype) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *AaaUserAgent) GetSoftwareSubtype() string {
 // GetSoftwareSubtypeOk returns a tuple with the SoftwareSubtype field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaUserAgent) GetSoftwareSubtypeOk() (*string, bool) {
-	if o == nil || o.SoftwareSubtype == nil {
+	if o == nil || IsNil(o.SoftwareSubtype) {
 		return nil, false
 	}
 	return o.SoftwareSubtype, true
@@ -228,7 +232,7 @@ func (o *AaaUserAgent) GetSoftwareSubtypeOk() (*string, bool) {
 
 // HasSoftwareSubtype returns a boolean if a field has been set.
 func (o *AaaUserAgent) HasSoftwareSubtype() bool {
-	if o != nil && o.SoftwareSubtype != nil {
+	if o != nil && !IsNil(o.SoftwareSubtype) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *AaaUserAgent) SetSoftwareSubtype(v string) {
 
 // GetSoftwareType returns the SoftwareType field value if set, zero value otherwise.
 func (o *AaaUserAgent) GetSoftwareType() string {
-	if o == nil || o.SoftwareType == nil {
+	if o == nil || IsNil(o.SoftwareType) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *AaaUserAgent) GetSoftwareType() string {
 // GetSoftwareTypeOk returns a tuple with the SoftwareType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaUserAgent) GetSoftwareTypeOk() (*string, bool) {
-	if o == nil || o.SoftwareType == nil {
+	if o == nil || IsNil(o.SoftwareType) {
 		return nil, false
 	}
 	return o.SoftwareType, true
@@ -260,7 +264,7 @@ func (o *AaaUserAgent) GetSoftwareTypeOk() (*string, bool) {
 
 // HasSoftwareType returns a boolean if a field has been set.
 func (o *AaaUserAgent) HasSoftwareType() bool {
-	if o != nil && o.SoftwareType != nil {
+	if o != nil && !IsNil(o.SoftwareType) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *AaaUserAgent) SetSoftwareType(v string) {
 
 // GetSoftwareVersion returns the SoftwareVersion field value if set, zero value otherwise.
 func (o *AaaUserAgent) GetSoftwareVersion() string {
-	if o == nil || o.SoftwareVersion == nil {
+	if o == nil || IsNil(o.SoftwareVersion) {
 		var ret string
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *AaaUserAgent) GetSoftwareVersion() string {
 // GetSoftwareVersionOk returns a tuple with the SoftwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaUserAgent) GetSoftwareVersionOk() (*string, bool) {
-	if o == nil || o.SoftwareVersion == nil {
+	if o == nil || IsNil(o.SoftwareVersion) {
 		return nil, false
 	}
 	return o.SoftwareVersion, true
@@ -292,7 +296,7 @@ func (o *AaaUserAgent) GetSoftwareVersionOk() (*string, bool) {
 
 // HasSoftwareVersion returns a boolean if a field has been set.
 func (o *AaaUserAgent) HasSoftwareVersion() bool {
-	if o != nil && o.SoftwareVersion != nil {
+	if o != nil && !IsNil(o.SoftwareVersion) {
 		return true
 	}
 
@@ -305,37 +309,41 @@ func (o *AaaUserAgent) SetSoftwareVersion(v string) {
 }
 
 func (o AaaUserAgent) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AaaUserAgent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.OsFamily != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.OsFamily) {
 		toSerialize["OsFamily"] = o.OsFamily
 	}
-	if o.OsVersion != nil {
+	if !IsNil(o.OsVersion) {
 		toSerialize["OsVersion"] = o.OsVersion
 	}
-	if o.SoftwareFamily != nil {
+	if !IsNil(o.SoftwareFamily) {
 		toSerialize["SoftwareFamily"] = o.SoftwareFamily
 	}
-	if o.SoftwareSubtype != nil {
+	if !IsNil(o.SoftwareSubtype) {
 		toSerialize["SoftwareSubtype"] = o.SoftwareSubtype
 	}
-	if o.SoftwareType != nil {
+	if !IsNil(o.SoftwareType) {
 		toSerialize["SoftwareType"] = o.SoftwareType
 	}
-	if o.SoftwareVersion != nil {
+	if !IsNil(o.SoftwareVersion) {
 		toSerialize["SoftwareVersion"] = o.SoftwareVersion
 	}
 
@@ -343,10 +351,32 @@ func (o AaaUserAgent) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AaaUserAgent) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AaaUserAgent) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AaaUserAgentWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -368,7 +398,7 @@ func (o *AaaUserAgent) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAaaUserAgentWithoutEmbeddedStruct := AaaUserAgentWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAaaUserAgentWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAaaUserAgentWithoutEmbeddedStruct)
 	if err == nil {
 		varAaaUserAgent := _AaaUserAgent{}
 		varAaaUserAgent.ClassId = varAaaUserAgentWithoutEmbeddedStruct.ClassId
@@ -386,7 +416,7 @@ func (o *AaaUserAgent) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAaaUserAgent := _AaaUserAgent{}
 
-	err = json.Unmarshal(bytes, &varAaaUserAgent)
+	err = json.Unmarshal(data, &varAaaUserAgent)
 	if err == nil {
 		o.MoBaseComplexType = varAaaUserAgent.MoBaseComplexType
 	} else {
@@ -395,7 +425,7 @@ func (o *AaaUserAgent) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "OsFamily")

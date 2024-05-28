@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OpenapiTaskGenerationRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OpenapiTaskGenerationRequest{}
 
 // OpenapiTaskGenerationRequest Creates a request which has information about the tasks that need to be created from the previously uploaded OpenAPI specification file. This object internally triggers a workflow that creates tasks which can be used in workflows.
 type OpenapiTaskGenerationRequest struct {
@@ -40,10 +44,10 @@ type OpenapiTaskGenerationRequest struct {
 	TaskPrefix *string               `json:"TaskPrefix,omitempty"`
 	TaskTags   []OpenapiKeyValuePair `json:"TaskTags,omitempty"`
 	// Specifies the URL of the endpoint that the created task communicates with. It is defaulted to intersight.com for internal endpoints.
-	Url                  *string                               `json:"Url,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	Source               *OpenapiProcessFileRelationship       `json:"Source,omitempty"`
-	Workflow             *WorkflowWorkflowInfoRelationship     `json:"Workflow,omitempty"`
+	Url                  *string                                      `json:"Url,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	Source               NullableOpenapiProcessFileRelationship       `json:"Source,omitempty"`
+	Workflow             NullableWorkflowWorkflowInfoRelationship     `json:"Workflow,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -130,7 +134,7 @@ func (o *OpenapiTaskGenerationRequest) SetObjectType(v string) {
 
 // GetEndpointType returns the EndpointType field value if set, zero value otherwise.
 func (o *OpenapiTaskGenerationRequest) GetEndpointType() string {
-	if o == nil || o.EndpointType == nil {
+	if o == nil || IsNil(o.EndpointType) {
 		var ret string
 		return ret
 	}
@@ -140,7 +144,7 @@ func (o *OpenapiTaskGenerationRequest) GetEndpointType() string {
 // GetEndpointTypeOk returns a tuple with the EndpointType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiTaskGenerationRequest) GetEndpointTypeOk() (*string, bool) {
-	if o == nil || o.EndpointType == nil {
+	if o == nil || IsNil(o.EndpointType) {
 		return nil, false
 	}
 	return o.EndpointType, true
@@ -148,7 +152,7 @@ func (o *OpenapiTaskGenerationRequest) GetEndpointTypeOk() (*string, bool) {
 
 // HasEndpointType returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasEndpointType() bool {
-	if o != nil && o.EndpointType != nil {
+	if o != nil && !IsNil(o.EndpointType) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *OpenapiTaskGenerationRequest) GetFailedTasks() []OpenapiFailedTask {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OpenapiTaskGenerationRequest) GetFailedTasksOk() ([]OpenapiFailedTask, bool) {
-	if o == nil || o.FailedTasks == nil {
+	if o == nil || IsNil(o.FailedTasks) {
 		return nil, false
 	}
 	return o.FailedTasks, true
@@ -181,7 +185,7 @@ func (o *OpenapiTaskGenerationRequest) GetFailedTasksOk() ([]OpenapiFailedTask, 
 
 // HasFailedTasks returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasFailedTasks() bool {
-	if o != nil && o.FailedTasks != nil {
+	if o != nil && IsNil(o.FailedTasks) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *OpenapiTaskGenerationRequest) GetHeaderParameters() []OpenapiKeyValuePa
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OpenapiTaskGenerationRequest) GetHeaderParametersOk() ([]OpenapiKeyValuePair, bool) {
-	if o == nil || o.HeaderParameters == nil {
+	if o == nil || IsNil(o.HeaderParameters) {
 		return nil, false
 	}
 	return o.HeaderParameters, true
@@ -214,7 +218,7 @@ func (o *OpenapiTaskGenerationRequest) GetHeaderParametersOk() ([]OpenapiKeyValu
 
 // HasHeaderParameters returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasHeaderParameters() bool {
-	if o != nil && o.HeaderParameters != nil {
+	if o != nil && IsNil(o.HeaderParameters) {
 		return true
 	}
 
@@ -228,7 +232,7 @@ func (o *OpenapiTaskGenerationRequest) SetHeaderParameters(v []OpenapiKeyValuePa
 
 // GetIsValidateRequest returns the IsValidateRequest field value if set, zero value otherwise.
 func (o *OpenapiTaskGenerationRequest) GetIsValidateRequest() bool {
-	if o == nil || o.IsValidateRequest == nil {
+	if o == nil || IsNil(o.IsValidateRequest) {
 		var ret bool
 		return ret
 	}
@@ -238,7 +242,7 @@ func (o *OpenapiTaskGenerationRequest) GetIsValidateRequest() bool {
 // GetIsValidateRequestOk returns a tuple with the IsValidateRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiTaskGenerationRequest) GetIsValidateRequestOk() (*bool, bool) {
-	if o == nil || o.IsValidateRequest == nil {
+	if o == nil || IsNil(o.IsValidateRequest) {
 		return nil, false
 	}
 	return o.IsValidateRequest, true
@@ -246,7 +250,7 @@ func (o *OpenapiTaskGenerationRequest) GetIsValidateRequestOk() (*bool, bool) {
 
 // HasIsValidateRequest returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasIsValidateRequest() bool {
-	if o != nil && o.IsValidateRequest != nil {
+	if o != nil && !IsNil(o.IsValidateRequest) {
 		return true
 	}
 
@@ -260,7 +264,7 @@ func (o *OpenapiTaskGenerationRequest) SetIsValidateRequest(v bool) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *OpenapiTaskGenerationRequest) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -270,7 +274,7 @@ func (o *OpenapiTaskGenerationRequest) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiTaskGenerationRequest) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -278,7 +282,7 @@ func (o *OpenapiTaskGenerationRequest) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -303,7 +307,7 @@ func (o *OpenapiTaskGenerationRequest) GetQueryParameters() []OpenapiKeyValuePai
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OpenapiTaskGenerationRequest) GetQueryParametersOk() ([]OpenapiKeyValuePair, bool) {
-	if o == nil || o.QueryParameters == nil {
+	if o == nil || IsNil(o.QueryParameters) {
 		return nil, false
 	}
 	return o.QueryParameters, true
@@ -311,7 +315,7 @@ func (o *OpenapiTaskGenerationRequest) GetQueryParametersOk() ([]OpenapiKeyValue
 
 // HasQueryParameters returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasQueryParameters() bool {
-	if o != nil && o.QueryParameters != nil {
+	if o != nil && IsNil(o.QueryParameters) {
 		return true
 	}
 
@@ -336,7 +340,7 @@ func (o *OpenapiTaskGenerationRequest) GetSelectedApis() []OpenapiApiInfo {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OpenapiTaskGenerationRequest) GetSelectedApisOk() ([]OpenapiApiInfo, bool) {
-	if o == nil || o.SelectedApis == nil {
+	if o == nil || IsNil(o.SelectedApis) {
 		return nil, false
 	}
 	return o.SelectedApis, true
@@ -344,7 +348,7 @@ func (o *OpenapiTaskGenerationRequest) GetSelectedApisOk() ([]OpenapiApiInfo, bo
 
 // HasSelectedApis returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasSelectedApis() bool {
-	if o != nil && o.SelectedApis != nil {
+	if o != nil && IsNil(o.SelectedApis) {
 		return true
 	}
 
@@ -358,7 +362,7 @@ func (o *OpenapiTaskGenerationRequest) SetSelectedApis(v []OpenapiApiInfo) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *OpenapiTaskGenerationRequest) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -368,7 +372,7 @@ func (o *OpenapiTaskGenerationRequest) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiTaskGenerationRequest) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -376,7 +380,7 @@ func (o *OpenapiTaskGenerationRequest) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -390,7 +394,7 @@ func (o *OpenapiTaskGenerationRequest) SetStatus(v string) {
 
 // GetTaskPrefix returns the TaskPrefix field value if set, zero value otherwise.
 func (o *OpenapiTaskGenerationRequest) GetTaskPrefix() string {
-	if o == nil || o.TaskPrefix == nil {
+	if o == nil || IsNil(o.TaskPrefix) {
 		var ret string
 		return ret
 	}
@@ -400,7 +404,7 @@ func (o *OpenapiTaskGenerationRequest) GetTaskPrefix() string {
 // GetTaskPrefixOk returns a tuple with the TaskPrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiTaskGenerationRequest) GetTaskPrefixOk() (*string, bool) {
-	if o == nil || o.TaskPrefix == nil {
+	if o == nil || IsNil(o.TaskPrefix) {
 		return nil, false
 	}
 	return o.TaskPrefix, true
@@ -408,7 +412,7 @@ func (o *OpenapiTaskGenerationRequest) GetTaskPrefixOk() (*string, bool) {
 
 // HasTaskPrefix returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasTaskPrefix() bool {
-	if o != nil && o.TaskPrefix != nil {
+	if o != nil && !IsNil(o.TaskPrefix) {
 		return true
 	}
 
@@ -433,7 +437,7 @@ func (o *OpenapiTaskGenerationRequest) GetTaskTags() []OpenapiKeyValuePair {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OpenapiTaskGenerationRequest) GetTaskTagsOk() ([]OpenapiKeyValuePair, bool) {
-	if o == nil || o.TaskTags == nil {
+	if o == nil || IsNil(o.TaskTags) {
 		return nil, false
 	}
 	return o.TaskTags, true
@@ -441,7 +445,7 @@ func (o *OpenapiTaskGenerationRequest) GetTaskTagsOk() ([]OpenapiKeyValuePair, b
 
 // HasTaskTags returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasTaskTags() bool {
-	if o != nil && o.TaskTags != nil {
+	if o != nil && IsNil(o.TaskTags) {
 		return true
 	}
 
@@ -455,7 +459,7 @@ func (o *OpenapiTaskGenerationRequest) SetTaskTags(v []OpenapiKeyValuePair) {
 
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *OpenapiTaskGenerationRequest) GetUrl() string {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
 	}
@@ -465,7 +469,7 @@ func (o *OpenapiTaskGenerationRequest) GetUrl() string {
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OpenapiTaskGenerationRequest) GetUrlOk() (*string, bool) {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
 	return o.Url, true
@@ -473,7 +477,7 @@ func (o *OpenapiTaskGenerationRequest) GetUrlOk() (*string, bool) {
 
 // HasUrl returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasUrl() bool {
-	if o != nil && o.Url != nil {
+	if o != nil && !IsNil(o.Url) {
 		return true
 	}
 
@@ -485,119 +489,156 @@ func (o *OpenapiTaskGenerationRequest) SetUrl(v string) {
 	o.Url = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OpenapiTaskGenerationRequest) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OpenapiTaskGenerationRequest) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *OpenapiTaskGenerationRequest) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetSource returns the Source field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *OpenapiTaskGenerationRequest) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *OpenapiTaskGenerationRequest) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetSource returns the Source field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OpenapiTaskGenerationRequest) GetSource() OpenapiProcessFileRelationship {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source.Get()) {
 		var ret OpenapiProcessFileRelationship
 		return ret
 	}
-	return *o.Source
+	return *o.Source.Get()
 }
 
 // GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OpenapiTaskGenerationRequest) GetSourceOk() (*OpenapiProcessFileRelationship, bool) {
-	if o == nil || o.Source == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Source, true
+	return o.Source.Get(), o.Source.IsSet()
 }
 
 // HasSource returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasSource() bool {
-	if o != nil && o.Source != nil {
+	if o != nil && o.Source.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSource gets a reference to the given OpenapiProcessFileRelationship and assigns it to the Source field.
+// SetSource gets a reference to the given NullableOpenapiProcessFileRelationship and assigns it to the Source field.
 func (o *OpenapiTaskGenerationRequest) SetSource(v OpenapiProcessFileRelationship) {
-	o.Source = &v
+	o.Source.Set(&v)
 }
 
-// GetWorkflow returns the Workflow field value if set, zero value otherwise.
+// SetSourceNil sets the value for Source to be an explicit nil
+func (o *OpenapiTaskGenerationRequest) SetSourceNil() {
+	o.Source.Set(nil)
+}
+
+// UnsetSource ensures that no value is present for Source, not even an explicit nil
+func (o *OpenapiTaskGenerationRequest) UnsetSource() {
+	o.Source.Unset()
+}
+
+// GetWorkflow returns the Workflow field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OpenapiTaskGenerationRequest) GetWorkflow() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.Workflow == nil {
+	if o == nil || IsNil(o.Workflow.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.Workflow
+	return *o.Workflow.Get()
 }
 
 // GetWorkflowOk returns a tuple with the Workflow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OpenapiTaskGenerationRequest) GetWorkflowOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.Workflow == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Workflow, true
+	return o.Workflow.Get(), o.Workflow.IsSet()
 }
 
 // HasWorkflow returns a boolean if a field has been set.
 func (o *OpenapiTaskGenerationRequest) HasWorkflow() bool {
-	if o != nil && o.Workflow != nil {
+	if o != nil && o.Workflow.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflow gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the Workflow field.
+// SetWorkflow gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the Workflow field.
 func (o *OpenapiTaskGenerationRequest) SetWorkflow(v WorkflowWorkflowInfoRelationship) {
-	o.Workflow = &v
+	o.Workflow.Set(&v)
+}
+
+// SetWorkflowNil sets the value for Workflow to be an explicit nil
+func (o *OpenapiTaskGenerationRequest) SetWorkflowNil() {
+	o.Workflow.Set(nil)
+}
+
+// UnsetWorkflow ensures that no value is present for Workflow, not even an explicit nil
+func (o *OpenapiTaskGenerationRequest) UnsetWorkflow() {
+	o.Workflow.Unset()
 }
 
 func (o OpenapiTaskGenerationRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OpenapiTaskGenerationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EndpointType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EndpointType) {
 		toSerialize["EndpointType"] = o.EndpointType
 	}
 	if o.FailedTasks != nil {
@@ -606,10 +647,10 @@ func (o OpenapiTaskGenerationRequest) MarshalJSON() ([]byte, error) {
 	if o.HeaderParameters != nil {
 		toSerialize["HeaderParameters"] = o.HeaderParameters
 	}
-	if o.IsValidateRequest != nil {
+	if !IsNil(o.IsValidateRequest) {
 		toSerialize["IsValidateRequest"] = o.IsValidateRequest
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
 	if o.QueryParameters != nil {
@@ -618,36 +659,58 @@ func (o OpenapiTaskGenerationRequest) MarshalJSON() ([]byte, error) {
 	if o.SelectedApis != nil {
 		toSerialize["SelectedApis"] = o.SelectedApis
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.TaskPrefix != nil {
+	if !IsNil(o.TaskPrefix) {
 		toSerialize["TaskPrefix"] = o.TaskPrefix
 	}
 	if o.TaskTags != nil {
 		toSerialize["TaskTags"] = o.TaskTags
 	}
-	if o.Url != nil {
+	if !IsNil(o.Url) {
 		toSerialize["Url"] = o.Url
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.Source != nil {
-		toSerialize["Source"] = o.Source
+	if o.Source.IsSet() {
+		toSerialize["Source"] = o.Source.Get()
 	}
-	if o.Workflow != nil {
-		toSerialize["Workflow"] = o.Workflow
+	if o.Workflow.IsSet() {
+		toSerialize["Workflow"] = o.Workflow.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OpenapiTaskGenerationRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OpenapiTaskGenerationRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OpenapiTaskGenerationRequestWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -669,15 +732,15 @@ func (o *OpenapiTaskGenerationRequest) UnmarshalJSON(bytes []byte) (err error) {
 		TaskPrefix *string               `json:"TaskPrefix,omitempty"`
 		TaskTags   []OpenapiKeyValuePair `json:"TaskTags,omitempty"`
 		// Specifies the URL of the endpoint that the created task communicates with. It is defaulted to intersight.com for internal endpoints.
-		Url          *string                               `json:"Url,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-		Source       *OpenapiProcessFileRelationship       `json:"Source,omitempty"`
-		Workflow     *WorkflowWorkflowInfoRelationship     `json:"Workflow,omitempty"`
+		Url          *string                                      `json:"Url,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		Source       NullableOpenapiProcessFileRelationship       `json:"Source,omitempty"`
+		Workflow     NullableWorkflowWorkflowInfoRelationship     `json:"Workflow,omitempty"`
 	}
 
 	varOpenapiTaskGenerationRequestWithoutEmbeddedStruct := OpenapiTaskGenerationRequestWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOpenapiTaskGenerationRequestWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOpenapiTaskGenerationRequestWithoutEmbeddedStruct)
 	if err == nil {
 		varOpenapiTaskGenerationRequest := _OpenapiTaskGenerationRequest{}
 		varOpenapiTaskGenerationRequest.ClassId = varOpenapiTaskGenerationRequestWithoutEmbeddedStruct.ClassId
@@ -703,7 +766,7 @@ func (o *OpenapiTaskGenerationRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOpenapiTaskGenerationRequest := _OpenapiTaskGenerationRequest{}
 
-	err = json.Unmarshal(bytes, &varOpenapiTaskGenerationRequest)
+	err = json.Unmarshal(data, &varOpenapiTaskGenerationRequest)
 	if err == nil {
 		o.MoBaseMo = varOpenapiTaskGenerationRequest.MoBaseMo
 	} else {
@@ -712,7 +775,7 @@ func (o *OpenapiTaskGenerationRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EndpointType")

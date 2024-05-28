@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceNetworkLinkStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceNetworkLinkStatus{}
 
 // ApplianceNetworkLinkStatus Link between two nodes of an Intersight Appliance cluster.
 type ApplianceNetworkLinkStatus struct {
@@ -29,9 +33,9 @@ type ApplianceNetworkLinkStatus struct {
 	// Time to reach the destination endpoint in milliseconds from the source endpoint.
 	PingTime *float32 `json:"PingTime,omitempty"`
 	// Hostname of the source endpoint.
-	SourceHostname       *string                              `json:"SourceHostname,omitempty"`
-	NodeOpStatus         *ApplianceNodeOpStatusRelationship   `json:"NodeOpStatus,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SourceHostname       *string                                     `json:"SourceHostname,omitempty"`
+	NodeOpStatus         NullableApplianceNodeOpStatusRelationship   `json:"NodeOpStatus,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,7 +114,7 @@ func (o *ApplianceNetworkLinkStatus) SetObjectType(v string) {
 
 // GetDestinationHostname returns the DestinationHostname field value if set, zero value otherwise.
 func (o *ApplianceNetworkLinkStatus) GetDestinationHostname() string {
-	if o == nil || o.DestinationHostname == nil {
+	if o == nil || IsNil(o.DestinationHostname) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *ApplianceNetworkLinkStatus) GetDestinationHostname() string {
 // GetDestinationHostnameOk returns a tuple with the DestinationHostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNetworkLinkStatus) GetDestinationHostnameOk() (*string, bool) {
-	if o == nil || o.DestinationHostname == nil {
+	if o == nil || IsNil(o.DestinationHostname) {
 		return nil, false
 	}
 	return o.DestinationHostname, true
@@ -128,7 +132,7 @@ func (o *ApplianceNetworkLinkStatus) GetDestinationHostnameOk() (*string, bool) 
 
 // HasDestinationHostname returns a boolean if a field has been set.
 func (o *ApplianceNetworkLinkStatus) HasDestinationHostname() bool {
-	if o != nil && o.DestinationHostname != nil {
+	if o != nil && !IsNil(o.DestinationHostname) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *ApplianceNetworkLinkStatus) SetDestinationHostname(v string) {
 
 // GetPingTime returns the PingTime field value if set, zero value otherwise.
 func (o *ApplianceNetworkLinkStatus) GetPingTime() float32 {
-	if o == nil || o.PingTime == nil {
+	if o == nil || IsNil(o.PingTime) {
 		var ret float32
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *ApplianceNetworkLinkStatus) GetPingTime() float32 {
 // GetPingTimeOk returns a tuple with the PingTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNetworkLinkStatus) GetPingTimeOk() (*float32, bool) {
-	if o == nil || o.PingTime == nil {
+	if o == nil || IsNil(o.PingTime) {
 		return nil, false
 	}
 	return o.PingTime, true
@@ -160,7 +164,7 @@ func (o *ApplianceNetworkLinkStatus) GetPingTimeOk() (*float32, bool) {
 
 // HasPingTime returns a boolean if a field has been set.
 func (o *ApplianceNetworkLinkStatus) HasPingTime() bool {
-	if o != nil && o.PingTime != nil {
+	if o != nil && !IsNil(o.PingTime) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *ApplianceNetworkLinkStatus) SetPingTime(v float32) {
 
 // GetSourceHostname returns the SourceHostname field value if set, zero value otherwise.
 func (o *ApplianceNetworkLinkStatus) GetSourceHostname() string {
-	if o == nil || o.SourceHostname == nil {
+	if o == nil || IsNil(o.SourceHostname) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *ApplianceNetworkLinkStatus) GetSourceHostname() string {
 // GetSourceHostnameOk returns a tuple with the SourceHostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNetworkLinkStatus) GetSourceHostnameOk() (*string, bool) {
-	if o == nil || o.SourceHostname == nil {
+	if o == nil || IsNil(o.SourceHostname) {
 		return nil, false
 	}
 	return o.SourceHostname, true
@@ -192,7 +196,7 @@ func (o *ApplianceNetworkLinkStatus) GetSourceHostnameOk() (*string, bool) {
 
 // HasSourceHostname returns a boolean if a field has been set.
 func (o *ApplianceNetworkLinkStatus) HasSourceHostname() bool {
-	if o != nil && o.SourceHostname != nil {
+	if o != nil && !IsNil(o.SourceHostname) {
 		return true
 	}
 
@@ -204,110 +208,158 @@ func (o *ApplianceNetworkLinkStatus) SetSourceHostname(v string) {
 	o.SourceHostname = &v
 }
 
-// GetNodeOpStatus returns the NodeOpStatus field value if set, zero value otherwise.
+// GetNodeOpStatus returns the NodeOpStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceNetworkLinkStatus) GetNodeOpStatus() ApplianceNodeOpStatusRelationship {
-	if o == nil || o.NodeOpStatus == nil {
+	if o == nil || IsNil(o.NodeOpStatus.Get()) {
 		var ret ApplianceNodeOpStatusRelationship
 		return ret
 	}
-	return *o.NodeOpStatus
+	return *o.NodeOpStatus.Get()
 }
 
 // GetNodeOpStatusOk returns a tuple with the NodeOpStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceNetworkLinkStatus) GetNodeOpStatusOk() (*ApplianceNodeOpStatusRelationship, bool) {
-	if o == nil || o.NodeOpStatus == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NodeOpStatus, true
+	return o.NodeOpStatus.Get(), o.NodeOpStatus.IsSet()
 }
 
 // HasNodeOpStatus returns a boolean if a field has been set.
 func (o *ApplianceNetworkLinkStatus) HasNodeOpStatus() bool {
-	if o != nil && o.NodeOpStatus != nil {
+	if o != nil && o.NodeOpStatus.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNodeOpStatus gets a reference to the given ApplianceNodeOpStatusRelationship and assigns it to the NodeOpStatus field.
+// SetNodeOpStatus gets a reference to the given NullableApplianceNodeOpStatusRelationship and assigns it to the NodeOpStatus field.
 func (o *ApplianceNetworkLinkStatus) SetNodeOpStatus(v ApplianceNodeOpStatusRelationship) {
-	o.NodeOpStatus = &v
+	o.NodeOpStatus.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNodeOpStatusNil sets the value for NodeOpStatus to be an explicit nil
+func (o *ApplianceNetworkLinkStatus) SetNodeOpStatusNil() {
+	o.NodeOpStatus.Set(nil)
+}
+
+// UnsetNodeOpStatus ensures that no value is present for NodeOpStatus, not even an explicit nil
+func (o *ApplianceNetworkLinkStatus) UnsetNodeOpStatus() {
+	o.NodeOpStatus.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceNetworkLinkStatus) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceNetworkLinkStatus) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ApplianceNetworkLinkStatus) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ApplianceNetworkLinkStatus) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ApplianceNetworkLinkStatus) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ApplianceNetworkLinkStatus) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o ApplianceNetworkLinkStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceNetworkLinkStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DestinationHostname != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DestinationHostname) {
 		toSerialize["DestinationHostname"] = o.DestinationHostname
 	}
-	if o.PingTime != nil {
+	if !IsNil(o.PingTime) {
 		toSerialize["PingTime"] = o.PingTime
 	}
-	if o.SourceHostname != nil {
+	if !IsNil(o.SourceHostname) {
 		toSerialize["SourceHostname"] = o.SourceHostname
 	}
-	if o.NodeOpStatus != nil {
-		toSerialize["NodeOpStatus"] = o.NodeOpStatus
+	if o.NodeOpStatus.IsSet() {
+		toSerialize["NodeOpStatus"] = o.NodeOpStatus.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceNetworkLinkStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceNetworkLinkStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceNetworkLinkStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -318,14 +370,14 @@ func (o *ApplianceNetworkLinkStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// Time to reach the destination endpoint in milliseconds from the source endpoint.
 		PingTime *float32 `json:"PingTime,omitempty"`
 		// Hostname of the source endpoint.
-		SourceHostname   *string                              `json:"SourceHostname,omitempty"`
-		NodeOpStatus     *ApplianceNodeOpStatusRelationship   `json:"NodeOpStatus,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SourceHostname   *string                                     `json:"SourceHostname,omitempty"`
+		NodeOpStatus     NullableApplianceNodeOpStatusRelationship   `json:"NodeOpStatus,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varApplianceNetworkLinkStatusWithoutEmbeddedStruct := ApplianceNetworkLinkStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceNetworkLinkStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceNetworkLinkStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceNetworkLinkStatus := _ApplianceNetworkLinkStatus{}
 		varApplianceNetworkLinkStatus.ClassId = varApplianceNetworkLinkStatusWithoutEmbeddedStruct.ClassId
@@ -342,7 +394,7 @@ func (o *ApplianceNetworkLinkStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceNetworkLinkStatus := _ApplianceNetworkLinkStatus{}
 
-	err = json.Unmarshal(bytes, &varApplianceNetworkLinkStatus)
+	err = json.Unmarshal(data, &varApplianceNetworkLinkStatus)
 	if err == nil {
 		o.MoBaseMo = varApplianceNetworkLinkStatus.MoBaseMo
 	} else {
@@ -351,7 +403,7 @@ func (o *ApplianceNetworkLinkStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DestinationHostname")

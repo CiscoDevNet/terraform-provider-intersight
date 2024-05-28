@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the CloudVolumeAttachment type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudVolumeAttachment{}
 
 // CloudVolumeAttachment Volume attachment details for the virtual machine.
 type CloudVolumeAttachment struct {
@@ -117,7 +121,7 @@ func (o *CloudVolumeAttachment) SetObjectType(v string) {
 
 // GetAttachedTime returns the AttachedTime field value if set, zero value otherwise.
 func (o *CloudVolumeAttachment) GetAttachedTime() time.Time {
-	if o == nil || o.AttachedTime == nil {
+	if o == nil || IsNil(o.AttachedTime) {
 		var ret time.Time
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *CloudVolumeAttachment) GetAttachedTime() time.Time {
 // GetAttachedTimeOk returns a tuple with the AttachedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudVolumeAttachment) GetAttachedTimeOk() (*time.Time, bool) {
-	if o == nil || o.AttachedTime == nil {
+	if o == nil || IsNil(o.AttachedTime) {
 		return nil, false
 	}
 	return o.AttachedTime, true
@@ -135,7 +139,7 @@ func (o *CloudVolumeAttachment) GetAttachedTimeOk() (*time.Time, bool) {
 
 // HasAttachedTime returns a boolean if a field has been set.
 func (o *CloudVolumeAttachment) HasAttachedTime() bool {
-	if o != nil && o.AttachedTime != nil {
+	if o != nil && !IsNil(o.AttachedTime) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *CloudVolumeAttachment) SetAttachedTime(v time.Time) {
 
 // GetAutoDelete returns the AutoDelete field value if set, zero value otherwise.
 func (o *CloudVolumeAttachment) GetAutoDelete() bool {
-	if o == nil || o.AutoDelete == nil {
+	if o == nil || IsNil(o.AutoDelete) {
 		var ret bool
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *CloudVolumeAttachment) GetAutoDelete() bool {
 // GetAutoDeleteOk returns a tuple with the AutoDelete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudVolumeAttachment) GetAutoDeleteOk() (*bool, bool) {
-	if o == nil || o.AutoDelete == nil {
+	if o == nil || IsNil(o.AutoDelete) {
 		return nil, false
 	}
 	return o.AutoDelete, true
@@ -167,7 +171,7 @@ func (o *CloudVolumeAttachment) GetAutoDeleteOk() (*bool, bool) {
 
 // HasAutoDelete returns a boolean if a field has been set.
 func (o *CloudVolumeAttachment) HasAutoDelete() bool {
-	if o != nil && o.AutoDelete != nil {
+	if o != nil && !IsNil(o.AutoDelete) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *CloudVolumeAttachment) SetAutoDelete(v bool) {
 
 // GetDetachedTime returns the DetachedTime field value if set, zero value otherwise.
 func (o *CloudVolumeAttachment) GetDetachedTime() time.Time {
-	if o == nil || o.DetachedTime == nil {
+	if o == nil || IsNil(o.DetachedTime) {
 		var ret time.Time
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *CloudVolumeAttachment) GetDetachedTime() time.Time {
 // GetDetachedTimeOk returns a tuple with the DetachedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudVolumeAttachment) GetDetachedTimeOk() (*time.Time, bool) {
-	if o == nil || o.DetachedTime == nil {
+	if o == nil || IsNil(o.DetachedTime) {
 		return nil, false
 	}
 	return o.DetachedTime, true
@@ -199,7 +203,7 @@ func (o *CloudVolumeAttachment) GetDetachedTimeOk() (*time.Time, bool) {
 
 // HasDetachedTime returns a boolean if a field has been set.
 func (o *CloudVolumeAttachment) HasDetachedTime() bool {
-	if o != nil && o.DetachedTime != nil {
+	if o != nil && !IsNil(o.DetachedTime) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *CloudVolumeAttachment) SetDetachedTime(v time.Time) {
 
 // GetDeviceName returns the DeviceName field value if set, zero value otherwise.
 func (o *CloudVolumeAttachment) GetDeviceName() string {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *CloudVolumeAttachment) GetDeviceName() string {
 // GetDeviceNameOk returns a tuple with the DeviceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudVolumeAttachment) GetDeviceNameOk() (*string, bool) {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		return nil, false
 	}
 	return o.DeviceName, true
@@ -231,7 +235,7 @@ func (o *CloudVolumeAttachment) GetDeviceNameOk() (*string, bool) {
 
 // HasDeviceName returns a boolean if a field has been set.
 func (o *CloudVolumeAttachment) HasDeviceName() bool {
-	if o != nil && o.DeviceName != nil {
+	if o != nil && !IsNil(o.DeviceName) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *CloudVolumeAttachment) SetDeviceName(v string) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *CloudVolumeAttachment) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *CloudVolumeAttachment) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudVolumeAttachment) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -263,7 +267,7 @@ func (o *CloudVolumeAttachment) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *CloudVolumeAttachment) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *CloudVolumeAttachment) SetIdentity(v string) {
 
 // GetIndex returns the Index field value if set, zero value otherwise.
 func (o *CloudVolumeAttachment) GetIndex() int64 {
-	if o == nil || o.Index == nil {
+	if o == nil || IsNil(o.Index) {
 		var ret int64
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *CloudVolumeAttachment) GetIndex() int64 {
 // GetIndexOk returns a tuple with the Index field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudVolumeAttachment) GetIndexOk() (*int64, bool) {
-	if o == nil || o.Index == nil {
+	if o == nil || IsNil(o.Index) {
 		return nil, false
 	}
 	return o.Index, true
@@ -295,7 +299,7 @@ func (o *CloudVolumeAttachment) GetIndexOk() (*int64, bool) {
 
 // HasIndex returns a boolean if a field has been set.
 func (o *CloudVolumeAttachment) HasIndex() bool {
-	if o != nil && o.Index != nil {
+	if o != nil && !IsNil(o.Index) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *CloudVolumeAttachment) SetIndex(v int64) {
 
 // GetIsRoot returns the IsRoot field value if set, zero value otherwise.
 func (o *CloudVolumeAttachment) GetIsRoot() bool {
-	if o == nil || o.IsRoot == nil {
+	if o == nil || IsNil(o.IsRoot) {
 		var ret bool
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *CloudVolumeAttachment) GetIsRoot() bool {
 // GetIsRootOk returns a tuple with the IsRoot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudVolumeAttachment) GetIsRootOk() (*bool, bool) {
-	if o == nil || o.IsRoot == nil {
+	if o == nil || IsNil(o.IsRoot) {
 		return nil, false
 	}
 	return o.IsRoot, true
@@ -327,7 +331,7 @@ func (o *CloudVolumeAttachment) GetIsRootOk() (*bool, bool) {
 
 // HasIsRoot returns a boolean if a field has been set.
 func (o *CloudVolumeAttachment) HasIsRoot() bool {
-	if o != nil && o.IsRoot != nil {
+	if o != nil && !IsNil(o.IsRoot) {
 		return true
 	}
 
@@ -340,40 +344,44 @@ func (o *CloudVolumeAttachment) SetIsRoot(v bool) {
 }
 
 func (o CloudVolumeAttachment) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudVolumeAttachment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AttachedTime != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AttachedTime) {
 		toSerialize["AttachedTime"] = o.AttachedTime
 	}
-	if o.AutoDelete != nil {
+	if !IsNil(o.AutoDelete) {
 		toSerialize["AutoDelete"] = o.AutoDelete
 	}
-	if o.DetachedTime != nil {
+	if !IsNil(o.DetachedTime) {
 		toSerialize["DetachedTime"] = o.DetachedTime
 	}
-	if o.DeviceName != nil {
+	if !IsNil(o.DeviceName) {
 		toSerialize["DeviceName"] = o.DeviceName
 	}
-	if o.Identity != nil {
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.Index != nil {
+	if !IsNil(o.Index) {
 		toSerialize["Index"] = o.Index
 	}
-	if o.IsRoot != nil {
+	if !IsNil(o.IsRoot) {
 		toSerialize["IsRoot"] = o.IsRoot
 	}
 
@@ -381,10 +389,32 @@ func (o CloudVolumeAttachment) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudVolumeAttachment) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudVolumeAttachment) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudVolumeAttachmentWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -408,7 +438,7 @@ func (o *CloudVolumeAttachment) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudVolumeAttachmentWithoutEmbeddedStruct := CloudVolumeAttachmentWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudVolumeAttachmentWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudVolumeAttachmentWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudVolumeAttachment := _CloudVolumeAttachment{}
 		varCloudVolumeAttachment.ClassId = varCloudVolumeAttachmentWithoutEmbeddedStruct.ClassId
@@ -427,7 +457,7 @@ func (o *CloudVolumeAttachment) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudVolumeAttachment := _CloudVolumeAttachment{}
 
-	err = json.Unmarshal(bytes, &varCloudVolumeAttachment)
+	err = json.Unmarshal(data, &varCloudVolumeAttachment)
 	if err == nil {
 		o.MoBaseComplexType = varCloudVolumeAttachment.MoBaseComplexType
 	} else {
@@ -436,7 +466,7 @@ func (o *CloudVolumeAttachment) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AttachedTime")

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "license.SmartlicenseToken"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "license.SmartlicenseToken"]
 **Token** | Pointer to **string** | Smart license registration token. | [optional] 
-**AccountLicenseData** | Pointer to [**LicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
+**AccountLicenseData** | Pointer to [**NullableLicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -118,6 +118,16 @@ SetAccountLicenseData sets AccountLicenseData field to given value.
 
 HasAccountLicenseData returns a boolean if a field has been set.
 
+### SetAccountLicenseDataNil
+
+`func (o *LicenseSmartlicenseToken) SetAccountLicenseDataNil(b bool)`
+
+ SetAccountLicenseDataNil sets the value for AccountLicenseData to be an explicit nil
+
+### UnsetAccountLicenseData
+`func (o *LicenseSmartlicenseToken) UnsetAccountLicenseData()`
+
+UnsetAccountLicenseData ensures that no value is present for AccountLicenseData, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

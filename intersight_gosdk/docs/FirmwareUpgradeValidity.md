@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.UpgradeValidity"]
 **ErrorMessage** | Pointer to **string** | The error string returned while checking for a target device&#39;s validity for firmware upgrade. | [optional] [readonly] 
 **IsValid** | Pointer to **bool** | This flag denotes whether the target device is a valid target for firmware upgrade. | [optional] [readonly] 
-**Server** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**Server** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -144,6 +144,16 @@ SetServer sets Server field to given value.
 
 HasServer returns a boolean if a field has been set.
 
+### SetServerNil
+
+`func (o *FirmwareUpgradeValidity) SetServerNil(b bool)`
+
+ SetServerNil sets the value for Server to be an explicit nil
+
+### UnsetServer
+`func (o *FirmwareUpgradeValidity) UnsetServer()`
+
+UnsetServer ensures that no value is present for Server, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

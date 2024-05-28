@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentIoCardBase type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentIoCardBase{}
 
 // EquipmentIoCardBase Abstract class for hif and nif ports collection that can be extended by chassis/febric extender.
 type EquipmentIoCardBase struct {
@@ -46,8 +50,8 @@ type EquipmentIoCardBase struct {
 	// This field identifies the Vendor ID for the IO card module.
 	Vid *string `json:"Vid,omitempty"`
 	// An array of relationships to etherHostPort resources.
-	HostPorts      []EtherHostPortRelationship       `json:"HostPorts,omitempty"`
-	MgmtController *ManagementControllerRelationship `json:"MgmtController,omitempty"`
+	HostPorts      []EtherHostPortRelationship              `json:"HostPorts,omitempty"`
+	MgmtController NullableManagementControllerRelationship `json:"MgmtController,omitempty"`
 	// An array of relationships to etherNetworkPort resources.
 	NetworkPorts []EtherNetworkPortRelationship `json:"NetworkPorts,omitempty"`
 	// An array of relationships to portSubGroup resources.
@@ -126,7 +130,7 @@ func (o *EquipmentIoCardBase) SetObjectType(v string) {
 
 // GetConnectionStatus returns the ConnectionStatus field value if set, zero value otherwise.
 func (o *EquipmentIoCardBase) GetConnectionStatus() string {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		var ret string
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *EquipmentIoCardBase) GetConnectionStatus() string {
 // GetConnectionStatusOk returns a tuple with the ConnectionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardBase) GetConnectionStatusOk() (*string, bool) {
-	if o == nil || o.ConnectionStatus == nil {
+	if o == nil || IsNil(o.ConnectionStatus) {
 		return nil, false
 	}
 	return o.ConnectionStatus, true
@@ -144,7 +148,7 @@ func (o *EquipmentIoCardBase) GetConnectionStatusOk() (*string, bool) {
 
 // HasConnectionStatus returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasConnectionStatus() bool {
-	if o != nil && o.ConnectionStatus != nil {
+	if o != nil && !IsNil(o.ConnectionStatus) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *EquipmentIoCardBase) SetConnectionStatus(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *EquipmentIoCardBase) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *EquipmentIoCardBase) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardBase) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -176,7 +180,7 @@ func (o *EquipmentIoCardBase) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *EquipmentIoCardBase) SetDescription(v string) {
 
 // GetModuleId returns the ModuleId field value if set, zero value otherwise.
 func (o *EquipmentIoCardBase) GetModuleId() int64 {
-	if o == nil || o.ModuleId == nil {
+	if o == nil || IsNil(o.ModuleId) {
 		var ret int64
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *EquipmentIoCardBase) GetModuleId() int64 {
 // GetModuleIdOk returns a tuple with the ModuleId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardBase) GetModuleIdOk() (*int64, bool) {
-	if o == nil || o.ModuleId == nil {
+	if o == nil || IsNil(o.ModuleId) {
 		return nil, false
 	}
 	return o.ModuleId, true
@@ -208,7 +212,7 @@ func (o *EquipmentIoCardBase) GetModuleIdOk() (*int64, bool) {
 
 // HasModuleId returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasModuleId() bool {
-	if o != nil && o.ModuleId != nil {
+	if o != nil && !IsNil(o.ModuleId) {
 		return true
 	}
 
@@ -233,7 +237,7 @@ func (o *EquipmentIoCardBase) GetOperReason() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCardBase) GetOperReasonOk() ([]string, bool) {
-	if o == nil || o.OperReason == nil {
+	if o == nil || IsNil(o.OperReason) {
 		return nil, false
 	}
 	return o.OperReason, true
@@ -241,7 +245,7 @@ func (o *EquipmentIoCardBase) GetOperReasonOk() ([]string, bool) {
 
 // HasOperReason returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasOperReason() bool {
-	if o != nil && o.OperReason != nil {
+	if o != nil && IsNil(o.OperReason) {
 		return true
 	}
 
@@ -255,7 +259,7 @@ func (o *EquipmentIoCardBase) SetOperReason(v []string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *EquipmentIoCardBase) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -265,7 +269,7 @@ func (o *EquipmentIoCardBase) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardBase) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -273,7 +277,7 @@ func (o *EquipmentIoCardBase) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -287,7 +291,7 @@ func (o *EquipmentIoCardBase) SetOperState(v string) {
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
 func (o *EquipmentIoCardBase) GetPartNumber() string {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		var ret string
 		return ret
 	}
@@ -297,7 +301,7 @@ func (o *EquipmentIoCardBase) GetPartNumber() string {
 // GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardBase) GetPartNumberOk() (*string, bool) {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		return nil, false
 	}
 	return o.PartNumber, true
@@ -305,7 +309,7 @@ func (o *EquipmentIoCardBase) GetPartNumberOk() (*string, bool) {
 
 // HasPartNumber returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasPartNumber() bool {
-	if o != nil && o.PartNumber != nil {
+	if o != nil && !IsNil(o.PartNumber) {
 		return true
 	}
 
@@ -319,7 +323,7 @@ func (o *EquipmentIoCardBase) SetPartNumber(v string) {
 
 // GetPid returns the Pid field value if set, zero value otherwise.
 func (o *EquipmentIoCardBase) GetPid() string {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		var ret string
 		return ret
 	}
@@ -329,7 +333,7 @@ func (o *EquipmentIoCardBase) GetPid() string {
 // GetPidOk returns a tuple with the Pid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardBase) GetPidOk() (*string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -337,7 +341,7 @@ func (o *EquipmentIoCardBase) GetPidOk() (*string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && !IsNil(o.Pid) {
 		return true
 	}
 
@@ -351,7 +355,7 @@ func (o *EquipmentIoCardBase) SetPid(v string) {
 
 // GetProductName returns the ProductName field value if set, zero value otherwise.
 func (o *EquipmentIoCardBase) GetProductName() string {
-	if o == nil || o.ProductName == nil {
+	if o == nil || IsNil(o.ProductName) {
 		var ret string
 		return ret
 	}
@@ -361,7 +365,7 @@ func (o *EquipmentIoCardBase) GetProductName() string {
 // GetProductNameOk returns a tuple with the ProductName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardBase) GetProductNameOk() (*string, bool) {
-	if o == nil || o.ProductName == nil {
+	if o == nil || IsNil(o.ProductName) {
 		return nil, false
 	}
 	return o.ProductName, true
@@ -369,7 +373,7 @@ func (o *EquipmentIoCardBase) GetProductNameOk() (*string, bool) {
 
 // HasProductName returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasProductName() bool {
-	if o != nil && o.ProductName != nil {
+	if o != nil && !IsNil(o.ProductName) {
 		return true
 	}
 
@@ -383,7 +387,7 @@ func (o *EquipmentIoCardBase) SetProductName(v string) {
 
 // GetSku returns the Sku field value if set, zero value otherwise.
 func (o *EquipmentIoCardBase) GetSku() string {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		var ret string
 		return ret
 	}
@@ -393,7 +397,7 @@ func (o *EquipmentIoCardBase) GetSku() string {
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardBase) GetSkuOk() (*string, bool) {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		return nil, false
 	}
 	return o.Sku, true
@@ -401,7 +405,7 @@ func (o *EquipmentIoCardBase) GetSkuOk() (*string, bool) {
 
 // HasSku returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasSku() bool {
-	if o != nil && o.Sku != nil {
+	if o != nil && !IsNil(o.Sku) {
 		return true
 	}
 
@@ -415,7 +419,7 @@ func (o *EquipmentIoCardBase) SetSku(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *EquipmentIoCardBase) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -425,7 +429,7 @@ func (o *EquipmentIoCardBase) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardBase) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -433,7 +437,7 @@ func (o *EquipmentIoCardBase) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -447,7 +451,7 @@ func (o *EquipmentIoCardBase) SetVersion(v string) {
 
 // GetVid returns the Vid field value if set, zero value otherwise.
 func (o *EquipmentIoCardBase) GetVid() string {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		var ret string
 		return ret
 	}
@@ -457,7 +461,7 @@ func (o *EquipmentIoCardBase) GetVid() string {
 // GetVidOk returns a tuple with the Vid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardBase) GetVidOk() (*string, bool) {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		return nil, false
 	}
 	return o.Vid, true
@@ -465,7 +469,7 @@ func (o *EquipmentIoCardBase) GetVidOk() (*string, bool) {
 
 // HasVid returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasVid() bool {
-	if o != nil && o.Vid != nil {
+	if o != nil && !IsNil(o.Vid) {
 		return true
 	}
 
@@ -490,7 +494,7 @@ func (o *EquipmentIoCardBase) GetHostPorts() []EtherHostPortRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCardBase) GetHostPortsOk() ([]EtherHostPortRelationship, bool) {
-	if o == nil || o.HostPorts == nil {
+	if o == nil || IsNil(o.HostPorts) {
 		return nil, false
 	}
 	return o.HostPorts, true
@@ -498,7 +502,7 @@ func (o *EquipmentIoCardBase) GetHostPortsOk() ([]EtherHostPortRelationship, boo
 
 // HasHostPorts returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasHostPorts() bool {
-	if o != nil && o.HostPorts != nil {
+	if o != nil && IsNil(o.HostPorts) {
 		return true
 	}
 
@@ -510,36 +514,47 @@ func (o *EquipmentIoCardBase) SetHostPorts(v []EtherHostPortRelationship) {
 	o.HostPorts = v
 }
 
-// GetMgmtController returns the MgmtController field value if set, zero value otherwise.
+// GetMgmtController returns the MgmtController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentIoCardBase) GetMgmtController() ManagementControllerRelationship {
-	if o == nil || o.MgmtController == nil {
+	if o == nil || IsNil(o.MgmtController.Get()) {
 		var ret ManagementControllerRelationship
 		return ret
 	}
-	return *o.MgmtController
+	return *o.MgmtController.Get()
 }
 
 // GetMgmtControllerOk returns a tuple with the MgmtController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCardBase) GetMgmtControllerOk() (*ManagementControllerRelationship, bool) {
-	if o == nil || o.MgmtController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.MgmtController, true
+	return o.MgmtController.Get(), o.MgmtController.IsSet()
 }
 
 // HasMgmtController returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasMgmtController() bool {
-	if o != nil && o.MgmtController != nil {
+	if o != nil && o.MgmtController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMgmtController gets a reference to the given ManagementControllerRelationship and assigns it to the MgmtController field.
+// SetMgmtController gets a reference to the given NullableManagementControllerRelationship and assigns it to the MgmtController field.
 func (o *EquipmentIoCardBase) SetMgmtController(v ManagementControllerRelationship) {
-	o.MgmtController = &v
+	o.MgmtController.Set(&v)
+}
+
+// SetMgmtControllerNil sets the value for MgmtController to be an explicit nil
+func (o *EquipmentIoCardBase) SetMgmtControllerNil() {
+	o.MgmtController.Set(nil)
+}
+
+// UnsetMgmtController ensures that no value is present for MgmtController, not even an explicit nil
+func (o *EquipmentIoCardBase) UnsetMgmtController() {
+	o.MgmtController.Unset()
 }
 
 // GetNetworkPorts returns the NetworkPorts field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -555,7 +570,7 @@ func (o *EquipmentIoCardBase) GetNetworkPorts() []EtherNetworkPortRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCardBase) GetNetworkPortsOk() ([]EtherNetworkPortRelationship, bool) {
-	if o == nil || o.NetworkPorts == nil {
+	if o == nil || IsNil(o.NetworkPorts) {
 		return nil, false
 	}
 	return o.NetworkPorts, true
@@ -563,7 +578,7 @@ func (o *EquipmentIoCardBase) GetNetworkPortsOk() ([]EtherNetworkPortRelationshi
 
 // HasNetworkPorts returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasNetworkPorts() bool {
-	if o != nil && o.NetworkPorts != nil {
+	if o != nil && IsNil(o.NetworkPorts) {
 		return true
 	}
 
@@ -588,7 +603,7 @@ func (o *EquipmentIoCardBase) GetSubGroup() []PortSubGroupRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCardBase) GetSubGroupOk() ([]PortSubGroupRelationship, bool) {
-	if o == nil || o.SubGroup == nil {
+	if o == nil || IsNil(o.SubGroup) {
 		return nil, false
 	}
 	return o.SubGroup, true
@@ -596,7 +611,7 @@ func (o *EquipmentIoCardBase) GetSubGroupOk() ([]PortSubGroupRelationship, bool)
 
 // HasSubGroup returns a boolean if a field has been set.
 func (o *EquipmentIoCardBase) HasSubGroup() bool {
-	if o != nil && o.SubGroup != nil {
+	if o != nil && IsNil(o.SubGroup) {
 		return true
 	}
 
@@ -609,59 +624,63 @@ func (o *EquipmentIoCardBase) SetSubGroup(v []PortSubGroupRelationship) {
 }
 
 func (o EquipmentIoCardBase) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentIoCardBase) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConnectionStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.ModuleId != nil {
+	if !IsNil(o.ModuleId) {
 		toSerialize["ModuleId"] = o.ModuleId
 	}
 	if o.OperReason != nil {
 		toSerialize["OperReason"] = o.OperReason
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.PartNumber != nil {
+	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if o.Pid != nil {
+	if !IsNil(o.Pid) {
 		toSerialize["Pid"] = o.Pid
 	}
-	if o.ProductName != nil {
+	if !IsNil(o.ProductName) {
 		toSerialize["ProductName"] = o.ProductName
 	}
-	if o.Sku != nil {
+	if !IsNil(o.Sku) {
 		toSerialize["Sku"] = o.Sku
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.Vid != nil {
+	if !IsNil(o.Vid) {
 		toSerialize["Vid"] = o.Vid
 	}
 	if o.HostPorts != nil {
 		toSerialize["HostPorts"] = o.HostPorts
 	}
-	if o.MgmtController != nil {
-		toSerialize["MgmtController"] = o.MgmtController
+	if o.MgmtController.IsSet() {
+		toSerialize["MgmtController"] = o.MgmtController.Get()
 	}
 	if o.NetworkPorts != nil {
 		toSerialize["NetworkPorts"] = o.NetworkPorts
@@ -674,10 +693,32 @@ func (o EquipmentIoCardBase) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentIoCardBase) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentIoCardBase) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentIoCardBaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -705,8 +746,8 @@ func (o *EquipmentIoCardBase) UnmarshalJSON(bytes []byte) (err error) {
 		// This field identifies the Vendor ID for the IO card module.
 		Vid *string `json:"Vid,omitempty"`
 		// An array of relationships to etherHostPort resources.
-		HostPorts      []EtherHostPortRelationship       `json:"HostPorts,omitempty"`
-		MgmtController *ManagementControllerRelationship `json:"MgmtController,omitempty"`
+		HostPorts      []EtherHostPortRelationship              `json:"HostPorts,omitempty"`
+		MgmtController NullableManagementControllerRelationship `json:"MgmtController,omitempty"`
 		// An array of relationships to etherNetworkPort resources.
 		NetworkPorts []EtherNetworkPortRelationship `json:"NetworkPorts,omitempty"`
 		// An array of relationships to portSubGroup resources.
@@ -715,7 +756,7 @@ func (o *EquipmentIoCardBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentIoCardBaseWithoutEmbeddedStruct := EquipmentIoCardBaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentIoCardBaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentIoCardBaseWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentIoCardBase := _EquipmentIoCardBase{}
 		varEquipmentIoCardBase.ClassId = varEquipmentIoCardBaseWithoutEmbeddedStruct.ClassId
@@ -742,7 +783,7 @@ func (o *EquipmentIoCardBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentIoCardBase := _EquipmentIoCardBase{}
 
-	err = json.Unmarshal(bytes, &varEquipmentIoCardBase)
+	err = json.Unmarshal(data, &varEquipmentIoCardBase)
 	if err == nil {
 		o.EquipmentBase = varEquipmentIoCardBase.EquipmentBase
 	} else {
@@ -751,7 +792,7 @@ func (o *EquipmentIoCardBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConnectionStatus")

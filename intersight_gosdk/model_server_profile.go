@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ServerProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ServerProfile{}
 
 // ServerProfile A profile specifying configuration settings for a physical server.
 type ServerProfile struct {
@@ -46,19 +50,19 @@ type ServerProfile struct {
 	// User label assigned to the server profile.
 	UserLabel *string `json:"UserLabel,omitempty"`
 	// The UUID address that is assigned to the server based on the UUID pool.
-	Uuid                 *string                       `json:"Uuid,omitempty"`
-	AssignedServer       *ComputePhysicalRelationship  `json:"AssignedServer,omitempty"`
-	AssociatedServer     *ComputePhysicalRelationship  `json:"AssociatedServer,omitempty"`
-	AssociatedServerPool *ResourcepoolPoolRelationship `json:"AssociatedServerPool,omitempty"`
+	Uuid                 *string                              `json:"Uuid,omitempty"`
+	AssignedServer       NullableComputePhysicalRelationship  `json:"AssignedServer,omitempty"`
+	AssociatedServer     NullableComputePhysicalRelationship  `json:"AssociatedServer,omitempty"`
+	AssociatedServerPool NullableResourcepoolPoolRelationship `json:"AssociatedServerPool,omitempty"`
 	// An array of relationships to serverConfigChangeDetail resources.
-	ConfigChangeDetails []ServerConfigChangeDetailRelationship `json:"ConfigChangeDetails,omitempty"`
-	LeasedServer        *ComputePhysicalRelationship           `json:"LeasedServer,omitempty"`
-	Organization        *OrganizationOrganizationRelationship  `json:"Organization,omitempty"`
-	ResourceLease       *ResourcepoolLeaseRelationship         `json:"ResourceLease,omitempty"`
+	ConfigChangeDetails []ServerConfigChangeDetailRelationship       `json:"ConfigChangeDetails,omitempty"`
+	LeasedServer        NullableComputePhysicalRelationship          `json:"LeasedServer,omitempty"`
+	Organization        NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	ResourceLease       NullableResourcepoolLeaseRelationship        `json:"ResourceLease,omitempty"`
 	// An array of relationships to workflowWorkflowInfo resources.
-	RunningWorkflows     []WorkflowWorkflowInfoRelationship `json:"RunningWorkflows,omitempty"`
-	ServerPool           *ResourcepoolPoolRelationship      `json:"ServerPool,omitempty"`
-	UuidLease            *UuidpoolUuidLeaseRelationship     `json:"UuidLease,omitempty"`
+	RunningWorkflows     []WorkflowWorkflowInfoRelationship    `json:"RunningWorkflows,omitempty"`
+	ServerPool           NullableResourcepoolPoolRelationship  `json:"ServerPool,omitempty"`
+	UuidLease            NullableUuidpoolUuidLeaseRelationship `json:"UuidLease,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -149,7 +153,7 @@ func (o *ServerProfile) SetObjectType(v string) {
 
 // GetConfigChangeContext returns the ConfigChangeContext field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerProfile) GetConfigChangeContext() PolicyConfigChangeContext {
-	if o == nil || o.ConfigChangeContext.Get() == nil {
+	if o == nil || IsNil(o.ConfigChangeContext.Get()) {
 		var ret PolicyConfigChangeContext
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *ServerProfile) UnsetConfigChangeContext() {
 
 // GetConfigChanges returns the ConfigChanges field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerProfile) GetConfigChanges() PolicyConfigChange {
-	if o == nil || o.ConfigChanges.Get() == nil {
+	if o == nil || IsNil(o.ConfigChanges.Get()) {
 		var ret PolicyConfigChange
 		return ret
 	}
@@ -235,7 +239,7 @@ func (o *ServerProfile) UnsetConfigChanges() {
 
 // GetDeployStatus returns the DeployStatus field value if set, zero value otherwise.
 func (o *ServerProfile) GetDeployStatus() string {
-	if o == nil || o.DeployStatus == nil {
+	if o == nil || IsNil(o.DeployStatus) {
 		var ret string
 		return ret
 	}
@@ -245,7 +249,7 @@ func (o *ServerProfile) GetDeployStatus() string {
 // GetDeployStatusOk returns a tuple with the DeployStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerProfile) GetDeployStatusOk() (*string, bool) {
-	if o == nil || o.DeployStatus == nil {
+	if o == nil || IsNil(o.DeployStatus) {
 		return nil, false
 	}
 	return o.DeployStatus, true
@@ -253,7 +257,7 @@ func (o *ServerProfile) GetDeployStatusOk() (*string, bool) {
 
 // HasDeployStatus returns a boolean if a field has been set.
 func (o *ServerProfile) HasDeployStatus() bool {
-	if o != nil && o.DeployStatus != nil {
+	if o != nil && !IsNil(o.DeployStatus) {
 		return true
 	}
 
@@ -267,7 +271,7 @@ func (o *ServerProfile) SetDeployStatus(v string) {
 
 // GetDeployedSwitches returns the DeployedSwitches field value if set, zero value otherwise.
 func (o *ServerProfile) GetDeployedSwitches() string {
-	if o == nil || o.DeployedSwitches == nil {
+	if o == nil || IsNil(o.DeployedSwitches) {
 		var ret string
 		return ret
 	}
@@ -277,7 +281,7 @@ func (o *ServerProfile) GetDeployedSwitches() string {
 // GetDeployedSwitchesOk returns a tuple with the DeployedSwitches field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerProfile) GetDeployedSwitchesOk() (*string, bool) {
-	if o == nil || o.DeployedSwitches == nil {
+	if o == nil || IsNil(o.DeployedSwitches) {
 		return nil, false
 	}
 	return o.DeployedSwitches, true
@@ -285,7 +289,7 @@ func (o *ServerProfile) GetDeployedSwitchesOk() (*string, bool) {
 
 // HasDeployedSwitches returns a boolean if a field has been set.
 func (o *ServerProfile) HasDeployedSwitches() bool {
-	if o != nil && o.DeployedSwitches != nil {
+	if o != nil && !IsNil(o.DeployedSwitches) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *ServerProfile) GetInternalReservationReferences() []PoolReservationRefe
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetInternalReservationReferencesOk() ([]PoolReservationReference, bool) {
-	if o == nil || o.InternalReservationReferences == nil {
+	if o == nil || IsNil(o.InternalReservationReferences) {
 		return nil, false
 	}
 	return o.InternalReservationReferences, true
@@ -318,7 +322,7 @@ func (o *ServerProfile) GetInternalReservationReferencesOk() ([]PoolReservationR
 
 // HasInternalReservationReferences returns a boolean if a field has been set.
 func (o *ServerProfile) HasInternalReservationReferences() bool {
-	if o != nil && o.InternalReservationReferences != nil {
+	if o != nil && IsNil(o.InternalReservationReferences) {
 		return true
 	}
 
@@ -332,7 +336,7 @@ func (o *ServerProfile) SetInternalReservationReferences(v []PoolReservationRefe
 
 // GetIsPmcDeployedSecurePassphraseSet returns the IsPmcDeployedSecurePassphraseSet field value if set, zero value otherwise.
 func (o *ServerProfile) GetIsPmcDeployedSecurePassphraseSet() bool {
-	if o == nil || o.IsPmcDeployedSecurePassphraseSet == nil {
+	if o == nil || IsNil(o.IsPmcDeployedSecurePassphraseSet) {
 		var ret bool
 		return ret
 	}
@@ -342,7 +346,7 @@ func (o *ServerProfile) GetIsPmcDeployedSecurePassphraseSet() bool {
 // GetIsPmcDeployedSecurePassphraseSetOk returns a tuple with the IsPmcDeployedSecurePassphraseSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerProfile) GetIsPmcDeployedSecurePassphraseSetOk() (*bool, bool) {
-	if o == nil || o.IsPmcDeployedSecurePassphraseSet == nil {
+	if o == nil || IsNil(o.IsPmcDeployedSecurePassphraseSet) {
 		return nil, false
 	}
 	return o.IsPmcDeployedSecurePassphraseSet, true
@@ -350,7 +354,7 @@ func (o *ServerProfile) GetIsPmcDeployedSecurePassphraseSetOk() (*bool, bool) {
 
 // HasIsPmcDeployedSecurePassphraseSet returns a boolean if a field has been set.
 func (o *ServerProfile) HasIsPmcDeployedSecurePassphraseSet() bool {
-	if o != nil && o.IsPmcDeployedSecurePassphraseSet != nil {
+	if o != nil && !IsNil(o.IsPmcDeployedSecurePassphraseSet) {
 		return true
 	}
 
@@ -364,7 +368,7 @@ func (o *ServerProfile) SetIsPmcDeployedSecurePassphraseSet(v bool) {
 
 // GetPmcDeployedSecurePassphrase returns the PmcDeployedSecurePassphrase field value if set, zero value otherwise.
 func (o *ServerProfile) GetPmcDeployedSecurePassphrase() string {
-	if o == nil || o.PmcDeployedSecurePassphrase == nil {
+	if o == nil || IsNil(o.PmcDeployedSecurePassphrase) {
 		var ret string
 		return ret
 	}
@@ -374,7 +378,7 @@ func (o *ServerProfile) GetPmcDeployedSecurePassphrase() string {
 // GetPmcDeployedSecurePassphraseOk returns a tuple with the PmcDeployedSecurePassphrase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerProfile) GetPmcDeployedSecurePassphraseOk() (*string, bool) {
-	if o == nil || o.PmcDeployedSecurePassphrase == nil {
+	if o == nil || IsNil(o.PmcDeployedSecurePassphrase) {
 		return nil, false
 	}
 	return o.PmcDeployedSecurePassphrase, true
@@ -382,7 +386,7 @@ func (o *ServerProfile) GetPmcDeployedSecurePassphraseOk() (*string, bool) {
 
 // HasPmcDeployedSecurePassphrase returns a boolean if a field has been set.
 func (o *ServerProfile) HasPmcDeployedSecurePassphrase() bool {
-	if o != nil && o.PmcDeployedSecurePassphrase != nil {
+	if o != nil && !IsNil(o.PmcDeployedSecurePassphrase) {
 		return true
 	}
 
@@ -407,7 +411,7 @@ func (o *ServerProfile) GetReservationReferences() []PoolReservationReference {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetReservationReferencesOk() ([]PoolReservationReference, bool) {
-	if o == nil || o.ReservationReferences == nil {
+	if o == nil || IsNil(o.ReservationReferences) {
 		return nil, false
 	}
 	return o.ReservationReferences, true
@@ -415,7 +419,7 @@ func (o *ServerProfile) GetReservationReferencesOk() ([]PoolReservationReference
 
 // HasReservationReferences returns a boolean if a field has been set.
 func (o *ServerProfile) HasReservationReferences() bool {
-	if o != nil && o.ReservationReferences != nil {
+	if o != nil && IsNil(o.ReservationReferences) {
 		return true
 	}
 
@@ -429,7 +433,7 @@ func (o *ServerProfile) SetReservationReferences(v []PoolReservationReference) {
 
 // GetServerAssignmentMode returns the ServerAssignmentMode field value if set, zero value otherwise.
 func (o *ServerProfile) GetServerAssignmentMode() string {
-	if o == nil || o.ServerAssignmentMode == nil {
+	if o == nil || IsNil(o.ServerAssignmentMode) {
 		var ret string
 		return ret
 	}
@@ -439,7 +443,7 @@ func (o *ServerProfile) GetServerAssignmentMode() string {
 // GetServerAssignmentModeOk returns a tuple with the ServerAssignmentMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerProfile) GetServerAssignmentModeOk() (*string, bool) {
-	if o == nil || o.ServerAssignmentMode == nil {
+	if o == nil || IsNil(o.ServerAssignmentMode) {
 		return nil, false
 	}
 	return o.ServerAssignmentMode, true
@@ -447,7 +451,7 @@ func (o *ServerProfile) GetServerAssignmentModeOk() (*string, bool) {
 
 // HasServerAssignmentMode returns a boolean if a field has been set.
 func (o *ServerProfile) HasServerAssignmentMode() bool {
-	if o != nil && o.ServerAssignmentMode != nil {
+	if o != nil && !IsNil(o.ServerAssignmentMode) {
 		return true
 	}
 
@@ -461,7 +465,7 @@ func (o *ServerProfile) SetServerAssignmentMode(v string) {
 
 // GetServerPreAssignBySerial returns the ServerPreAssignBySerial field value if set, zero value otherwise.
 func (o *ServerProfile) GetServerPreAssignBySerial() string {
-	if o == nil || o.ServerPreAssignBySerial == nil {
+	if o == nil || IsNil(o.ServerPreAssignBySerial) {
 		var ret string
 		return ret
 	}
@@ -471,7 +475,7 @@ func (o *ServerProfile) GetServerPreAssignBySerial() string {
 // GetServerPreAssignBySerialOk returns a tuple with the ServerPreAssignBySerial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerProfile) GetServerPreAssignBySerialOk() (*string, bool) {
-	if o == nil || o.ServerPreAssignBySerial == nil {
+	if o == nil || IsNil(o.ServerPreAssignBySerial) {
 		return nil, false
 	}
 	return o.ServerPreAssignBySerial, true
@@ -479,7 +483,7 @@ func (o *ServerProfile) GetServerPreAssignBySerialOk() (*string, bool) {
 
 // HasServerPreAssignBySerial returns a boolean if a field has been set.
 func (o *ServerProfile) HasServerPreAssignBySerial() bool {
-	if o != nil && o.ServerPreAssignBySerial != nil {
+	if o != nil && !IsNil(o.ServerPreAssignBySerial) {
 		return true
 	}
 
@@ -493,7 +497,7 @@ func (o *ServerProfile) SetServerPreAssignBySerial(v string) {
 
 // GetServerPreAssignBySlot returns the ServerPreAssignBySlot field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerProfile) GetServerPreAssignBySlot() ServerServerAssignTypeSlot {
-	if o == nil || o.ServerPreAssignBySlot.Get() == nil {
+	if o == nil || IsNil(o.ServerPreAssignBySlot.Get()) {
 		var ret ServerServerAssignTypeSlot
 		return ret
 	}
@@ -536,7 +540,7 @@ func (o *ServerProfile) UnsetServerPreAssignBySlot() {
 
 // GetStaticUuidAddress returns the StaticUuidAddress field value if set, zero value otherwise.
 func (o *ServerProfile) GetStaticUuidAddress() string {
-	if o == nil || o.StaticUuidAddress == nil {
+	if o == nil || IsNil(o.StaticUuidAddress) {
 		var ret string
 		return ret
 	}
@@ -546,7 +550,7 @@ func (o *ServerProfile) GetStaticUuidAddress() string {
 // GetStaticUuidAddressOk returns a tuple with the StaticUuidAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerProfile) GetStaticUuidAddressOk() (*string, bool) {
-	if o == nil || o.StaticUuidAddress == nil {
+	if o == nil || IsNil(o.StaticUuidAddress) {
 		return nil, false
 	}
 	return o.StaticUuidAddress, true
@@ -554,7 +558,7 @@ func (o *ServerProfile) GetStaticUuidAddressOk() (*string, bool) {
 
 // HasStaticUuidAddress returns a boolean if a field has been set.
 func (o *ServerProfile) HasStaticUuidAddress() bool {
-	if o != nil && o.StaticUuidAddress != nil {
+	if o != nil && !IsNil(o.StaticUuidAddress) {
 		return true
 	}
 
@@ -568,7 +572,7 @@ func (o *ServerProfile) SetStaticUuidAddress(v string) {
 
 // GetUserLabel returns the UserLabel field value if set, zero value otherwise.
 func (o *ServerProfile) GetUserLabel() string {
-	if o == nil || o.UserLabel == nil {
+	if o == nil || IsNil(o.UserLabel) {
 		var ret string
 		return ret
 	}
@@ -578,7 +582,7 @@ func (o *ServerProfile) GetUserLabel() string {
 // GetUserLabelOk returns a tuple with the UserLabel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerProfile) GetUserLabelOk() (*string, bool) {
-	if o == nil || o.UserLabel == nil {
+	if o == nil || IsNil(o.UserLabel) {
 		return nil, false
 	}
 	return o.UserLabel, true
@@ -586,7 +590,7 @@ func (o *ServerProfile) GetUserLabelOk() (*string, bool) {
 
 // HasUserLabel returns a boolean if a field has been set.
 func (o *ServerProfile) HasUserLabel() bool {
-	if o != nil && o.UserLabel != nil {
+	if o != nil && !IsNil(o.UserLabel) {
 		return true
 	}
 
@@ -600,7 +604,7 @@ func (o *ServerProfile) SetUserLabel(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *ServerProfile) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -610,7 +614,7 @@ func (o *ServerProfile) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerProfile) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -618,7 +622,7 @@ func (o *ServerProfile) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *ServerProfile) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -630,100 +634,133 @@ func (o *ServerProfile) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetAssignedServer returns the AssignedServer field value if set, zero value otherwise.
+// GetAssignedServer returns the AssignedServer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerProfile) GetAssignedServer() ComputePhysicalRelationship {
-	if o == nil || o.AssignedServer == nil {
+	if o == nil || IsNil(o.AssignedServer.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.AssignedServer
+	return *o.AssignedServer.Get()
 }
 
 // GetAssignedServerOk returns a tuple with the AssignedServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetAssignedServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.AssignedServer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssignedServer, true
+	return o.AssignedServer.Get(), o.AssignedServer.IsSet()
 }
 
 // HasAssignedServer returns a boolean if a field has been set.
 func (o *ServerProfile) HasAssignedServer() bool {
-	if o != nil && o.AssignedServer != nil {
+	if o != nil && o.AssignedServer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssignedServer gets a reference to the given ComputePhysicalRelationship and assigns it to the AssignedServer field.
+// SetAssignedServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the AssignedServer field.
 func (o *ServerProfile) SetAssignedServer(v ComputePhysicalRelationship) {
-	o.AssignedServer = &v
+	o.AssignedServer.Set(&v)
 }
 
-// GetAssociatedServer returns the AssociatedServer field value if set, zero value otherwise.
+// SetAssignedServerNil sets the value for AssignedServer to be an explicit nil
+func (o *ServerProfile) SetAssignedServerNil() {
+	o.AssignedServer.Set(nil)
+}
+
+// UnsetAssignedServer ensures that no value is present for AssignedServer, not even an explicit nil
+func (o *ServerProfile) UnsetAssignedServer() {
+	o.AssignedServer.Unset()
+}
+
+// GetAssociatedServer returns the AssociatedServer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerProfile) GetAssociatedServer() ComputePhysicalRelationship {
-	if o == nil || o.AssociatedServer == nil {
+	if o == nil || IsNil(o.AssociatedServer.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.AssociatedServer
+	return *o.AssociatedServer.Get()
 }
 
 // GetAssociatedServerOk returns a tuple with the AssociatedServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetAssociatedServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.AssociatedServer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssociatedServer, true
+	return o.AssociatedServer.Get(), o.AssociatedServer.IsSet()
 }
 
 // HasAssociatedServer returns a boolean if a field has been set.
 func (o *ServerProfile) HasAssociatedServer() bool {
-	if o != nil && o.AssociatedServer != nil {
+	if o != nil && o.AssociatedServer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssociatedServer gets a reference to the given ComputePhysicalRelationship and assigns it to the AssociatedServer field.
+// SetAssociatedServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the AssociatedServer field.
 func (o *ServerProfile) SetAssociatedServer(v ComputePhysicalRelationship) {
-	o.AssociatedServer = &v
+	o.AssociatedServer.Set(&v)
 }
 
-// GetAssociatedServerPool returns the AssociatedServerPool field value if set, zero value otherwise.
+// SetAssociatedServerNil sets the value for AssociatedServer to be an explicit nil
+func (o *ServerProfile) SetAssociatedServerNil() {
+	o.AssociatedServer.Set(nil)
+}
+
+// UnsetAssociatedServer ensures that no value is present for AssociatedServer, not even an explicit nil
+func (o *ServerProfile) UnsetAssociatedServer() {
+	o.AssociatedServer.Unset()
+}
+
+// GetAssociatedServerPool returns the AssociatedServerPool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerProfile) GetAssociatedServerPool() ResourcepoolPoolRelationship {
-	if o == nil || o.AssociatedServerPool == nil {
+	if o == nil || IsNil(o.AssociatedServerPool.Get()) {
 		var ret ResourcepoolPoolRelationship
 		return ret
 	}
-	return *o.AssociatedServerPool
+	return *o.AssociatedServerPool.Get()
 }
 
 // GetAssociatedServerPoolOk returns a tuple with the AssociatedServerPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetAssociatedServerPoolOk() (*ResourcepoolPoolRelationship, bool) {
-	if o == nil || o.AssociatedServerPool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssociatedServerPool, true
+	return o.AssociatedServerPool.Get(), o.AssociatedServerPool.IsSet()
 }
 
 // HasAssociatedServerPool returns a boolean if a field has been set.
 func (o *ServerProfile) HasAssociatedServerPool() bool {
-	if o != nil && o.AssociatedServerPool != nil {
+	if o != nil && o.AssociatedServerPool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssociatedServerPool gets a reference to the given ResourcepoolPoolRelationship and assigns it to the AssociatedServerPool field.
+// SetAssociatedServerPool gets a reference to the given NullableResourcepoolPoolRelationship and assigns it to the AssociatedServerPool field.
 func (o *ServerProfile) SetAssociatedServerPool(v ResourcepoolPoolRelationship) {
-	o.AssociatedServerPool = &v
+	o.AssociatedServerPool.Set(&v)
+}
+
+// SetAssociatedServerPoolNil sets the value for AssociatedServerPool to be an explicit nil
+func (o *ServerProfile) SetAssociatedServerPoolNil() {
+	o.AssociatedServerPool.Set(nil)
+}
+
+// UnsetAssociatedServerPool ensures that no value is present for AssociatedServerPool, not even an explicit nil
+func (o *ServerProfile) UnsetAssociatedServerPool() {
+	o.AssociatedServerPool.Unset()
 }
 
 // GetConfigChangeDetails returns the ConfigChangeDetails field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -739,7 +776,7 @@ func (o *ServerProfile) GetConfigChangeDetails() []ServerConfigChangeDetailRelat
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetConfigChangeDetailsOk() ([]ServerConfigChangeDetailRelationship, bool) {
-	if o == nil || o.ConfigChangeDetails == nil {
+	if o == nil || IsNil(o.ConfigChangeDetails) {
 		return nil, false
 	}
 	return o.ConfigChangeDetails, true
@@ -747,7 +784,7 @@ func (o *ServerProfile) GetConfigChangeDetailsOk() ([]ServerConfigChangeDetailRe
 
 // HasConfigChangeDetails returns a boolean if a field has been set.
 func (o *ServerProfile) HasConfigChangeDetails() bool {
-	if o != nil && o.ConfigChangeDetails != nil {
+	if o != nil && IsNil(o.ConfigChangeDetails) {
 		return true
 	}
 
@@ -759,100 +796,133 @@ func (o *ServerProfile) SetConfigChangeDetails(v []ServerConfigChangeDetailRelat
 	o.ConfigChangeDetails = v
 }
 
-// GetLeasedServer returns the LeasedServer field value if set, zero value otherwise.
+// GetLeasedServer returns the LeasedServer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerProfile) GetLeasedServer() ComputePhysicalRelationship {
-	if o == nil || o.LeasedServer == nil {
+	if o == nil || IsNil(o.LeasedServer.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.LeasedServer
+	return *o.LeasedServer.Get()
 }
 
 // GetLeasedServerOk returns a tuple with the LeasedServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetLeasedServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.LeasedServer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LeasedServer, true
+	return o.LeasedServer.Get(), o.LeasedServer.IsSet()
 }
 
 // HasLeasedServer returns a boolean if a field has been set.
 func (o *ServerProfile) HasLeasedServer() bool {
-	if o != nil && o.LeasedServer != nil {
+	if o != nil && o.LeasedServer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLeasedServer gets a reference to the given ComputePhysicalRelationship and assigns it to the LeasedServer field.
+// SetLeasedServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the LeasedServer field.
 func (o *ServerProfile) SetLeasedServer(v ComputePhysicalRelationship) {
-	o.LeasedServer = &v
+	o.LeasedServer.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetLeasedServerNil sets the value for LeasedServer to be an explicit nil
+func (o *ServerProfile) SetLeasedServerNil() {
+	o.LeasedServer.Set(nil)
+}
+
+// UnsetLeasedServer ensures that no value is present for LeasedServer, not even an explicit nil
+func (o *ServerProfile) UnsetLeasedServer() {
+	o.LeasedServer.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerProfile) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *ServerProfile) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *ServerProfile) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetResourceLease returns the ResourceLease field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *ServerProfile) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *ServerProfile) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetResourceLease returns the ResourceLease field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerProfile) GetResourceLease() ResourcepoolLeaseRelationship {
-	if o == nil || o.ResourceLease == nil {
+	if o == nil || IsNil(o.ResourceLease.Get()) {
 		var ret ResourcepoolLeaseRelationship
 		return ret
 	}
-	return *o.ResourceLease
+	return *o.ResourceLease.Get()
 }
 
 // GetResourceLeaseOk returns a tuple with the ResourceLease field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetResourceLeaseOk() (*ResourcepoolLeaseRelationship, bool) {
-	if o == nil || o.ResourceLease == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ResourceLease, true
+	return o.ResourceLease.Get(), o.ResourceLease.IsSet()
 }
 
 // HasResourceLease returns a boolean if a field has been set.
 func (o *ServerProfile) HasResourceLease() bool {
-	if o != nil && o.ResourceLease != nil {
+	if o != nil && o.ResourceLease.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetResourceLease gets a reference to the given ResourcepoolLeaseRelationship and assigns it to the ResourceLease field.
+// SetResourceLease gets a reference to the given NullableResourcepoolLeaseRelationship and assigns it to the ResourceLease field.
 func (o *ServerProfile) SetResourceLease(v ResourcepoolLeaseRelationship) {
-	o.ResourceLease = &v
+	o.ResourceLease.Set(&v)
+}
+
+// SetResourceLeaseNil sets the value for ResourceLease to be an explicit nil
+func (o *ServerProfile) SetResourceLeaseNil() {
+	o.ResourceLease.Set(nil)
+}
+
+// UnsetResourceLease ensures that no value is present for ResourceLease, not even an explicit nil
+func (o *ServerProfile) UnsetResourceLease() {
+	o.ResourceLease.Unset()
 }
 
 // GetRunningWorkflows returns the RunningWorkflows field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -868,7 +938,7 @@ func (o *ServerProfile) GetRunningWorkflows() []WorkflowWorkflowInfoRelationship
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetRunningWorkflowsOk() ([]WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.RunningWorkflows == nil {
+	if o == nil || IsNil(o.RunningWorkflows) {
 		return nil, false
 	}
 	return o.RunningWorkflows, true
@@ -876,7 +946,7 @@ func (o *ServerProfile) GetRunningWorkflowsOk() ([]WorkflowWorkflowInfoRelations
 
 // HasRunningWorkflows returns a boolean if a field has been set.
 func (o *ServerProfile) HasRunningWorkflows() bool {
-	if o != nil && o.RunningWorkflows != nil {
+	if o != nil && IsNil(o.RunningWorkflows) {
 		return true
 	}
 
@@ -888,167 +958,215 @@ func (o *ServerProfile) SetRunningWorkflows(v []WorkflowWorkflowInfoRelationship
 	o.RunningWorkflows = v
 }
 
-// GetServerPool returns the ServerPool field value if set, zero value otherwise.
+// GetServerPool returns the ServerPool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerProfile) GetServerPool() ResourcepoolPoolRelationship {
-	if o == nil || o.ServerPool == nil {
+	if o == nil || IsNil(o.ServerPool.Get()) {
 		var ret ResourcepoolPoolRelationship
 		return ret
 	}
-	return *o.ServerPool
+	return *o.ServerPool.Get()
 }
 
 // GetServerPoolOk returns a tuple with the ServerPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetServerPoolOk() (*ResourcepoolPoolRelationship, bool) {
-	if o == nil || o.ServerPool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServerPool, true
+	return o.ServerPool.Get(), o.ServerPool.IsSet()
 }
 
 // HasServerPool returns a boolean if a field has been set.
 func (o *ServerProfile) HasServerPool() bool {
-	if o != nil && o.ServerPool != nil {
+	if o != nil && o.ServerPool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServerPool gets a reference to the given ResourcepoolPoolRelationship and assigns it to the ServerPool field.
+// SetServerPool gets a reference to the given NullableResourcepoolPoolRelationship and assigns it to the ServerPool field.
 func (o *ServerProfile) SetServerPool(v ResourcepoolPoolRelationship) {
-	o.ServerPool = &v
+	o.ServerPool.Set(&v)
 }
 
-// GetUuidLease returns the UuidLease field value if set, zero value otherwise.
+// SetServerPoolNil sets the value for ServerPool to be an explicit nil
+func (o *ServerProfile) SetServerPoolNil() {
+	o.ServerPool.Set(nil)
+}
+
+// UnsetServerPool ensures that no value is present for ServerPool, not even an explicit nil
+func (o *ServerProfile) UnsetServerPool() {
+	o.ServerPool.Unset()
+}
+
+// GetUuidLease returns the UuidLease field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ServerProfile) GetUuidLease() UuidpoolUuidLeaseRelationship {
-	if o == nil || o.UuidLease == nil {
+	if o == nil || IsNil(o.UuidLease.Get()) {
 		var ret UuidpoolUuidLeaseRelationship
 		return ret
 	}
-	return *o.UuidLease
+	return *o.UuidLease.Get()
 }
 
 // GetUuidLeaseOk returns a tuple with the UuidLease field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ServerProfile) GetUuidLeaseOk() (*UuidpoolUuidLeaseRelationship, bool) {
-	if o == nil || o.UuidLease == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.UuidLease, true
+	return o.UuidLease.Get(), o.UuidLease.IsSet()
 }
 
 // HasUuidLease returns a boolean if a field has been set.
 func (o *ServerProfile) HasUuidLease() bool {
-	if o != nil && o.UuidLease != nil {
+	if o != nil && o.UuidLease.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUuidLease gets a reference to the given UuidpoolUuidLeaseRelationship and assigns it to the UuidLease field.
+// SetUuidLease gets a reference to the given NullableUuidpoolUuidLeaseRelationship and assigns it to the UuidLease field.
 func (o *ServerProfile) SetUuidLease(v UuidpoolUuidLeaseRelationship) {
-	o.UuidLease = &v
+	o.UuidLease.Set(&v)
+}
+
+// SetUuidLeaseNil sets the value for UuidLease to be an explicit nil
+func (o *ServerProfile) SetUuidLeaseNil() {
+	o.UuidLease.Set(nil)
+}
+
+// UnsetUuidLease ensures that no value is present for UuidLease, not even an explicit nil
+func (o *ServerProfile) UnsetUuidLease() {
+	o.UuidLease.Unset()
 }
 
 func (o ServerProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ServerProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedServerBaseProfile, errServerBaseProfile := json.Marshal(o.ServerBaseProfile)
 	if errServerBaseProfile != nil {
-		return []byte{}, errServerBaseProfile
+		return map[string]interface{}{}, errServerBaseProfile
 	}
 	errServerBaseProfile = json.Unmarshal([]byte(serializedServerBaseProfile), &toSerialize)
 	if errServerBaseProfile != nil {
-		return []byte{}, errServerBaseProfile
+		return map[string]interface{}{}, errServerBaseProfile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ConfigChangeContext.IsSet() {
 		toSerialize["ConfigChangeContext"] = o.ConfigChangeContext.Get()
 	}
 	if o.ConfigChanges.IsSet() {
 		toSerialize["ConfigChanges"] = o.ConfigChanges.Get()
 	}
-	if o.DeployStatus != nil {
+	if !IsNil(o.DeployStatus) {
 		toSerialize["DeployStatus"] = o.DeployStatus
 	}
-	if o.DeployedSwitches != nil {
+	if !IsNil(o.DeployedSwitches) {
 		toSerialize["DeployedSwitches"] = o.DeployedSwitches
 	}
 	if o.InternalReservationReferences != nil {
 		toSerialize["InternalReservationReferences"] = o.InternalReservationReferences
 	}
-	if o.IsPmcDeployedSecurePassphraseSet != nil {
+	if !IsNil(o.IsPmcDeployedSecurePassphraseSet) {
 		toSerialize["IsPmcDeployedSecurePassphraseSet"] = o.IsPmcDeployedSecurePassphraseSet
 	}
-	if o.PmcDeployedSecurePassphrase != nil {
+	if !IsNil(o.PmcDeployedSecurePassphrase) {
 		toSerialize["PmcDeployedSecurePassphrase"] = o.PmcDeployedSecurePassphrase
 	}
 	if o.ReservationReferences != nil {
 		toSerialize["ReservationReferences"] = o.ReservationReferences
 	}
-	if o.ServerAssignmentMode != nil {
+	if !IsNil(o.ServerAssignmentMode) {
 		toSerialize["ServerAssignmentMode"] = o.ServerAssignmentMode
 	}
-	if o.ServerPreAssignBySerial != nil {
+	if !IsNil(o.ServerPreAssignBySerial) {
 		toSerialize["ServerPreAssignBySerial"] = o.ServerPreAssignBySerial
 	}
 	if o.ServerPreAssignBySlot.IsSet() {
 		toSerialize["ServerPreAssignBySlot"] = o.ServerPreAssignBySlot.Get()
 	}
-	if o.StaticUuidAddress != nil {
+	if !IsNil(o.StaticUuidAddress) {
 		toSerialize["StaticUuidAddress"] = o.StaticUuidAddress
 	}
-	if o.UserLabel != nil {
+	if !IsNil(o.UserLabel) {
 		toSerialize["UserLabel"] = o.UserLabel
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.AssignedServer != nil {
-		toSerialize["AssignedServer"] = o.AssignedServer
+	if o.AssignedServer.IsSet() {
+		toSerialize["AssignedServer"] = o.AssignedServer.Get()
 	}
-	if o.AssociatedServer != nil {
-		toSerialize["AssociatedServer"] = o.AssociatedServer
+	if o.AssociatedServer.IsSet() {
+		toSerialize["AssociatedServer"] = o.AssociatedServer.Get()
 	}
-	if o.AssociatedServerPool != nil {
-		toSerialize["AssociatedServerPool"] = o.AssociatedServerPool
+	if o.AssociatedServerPool.IsSet() {
+		toSerialize["AssociatedServerPool"] = o.AssociatedServerPool.Get()
 	}
 	if o.ConfigChangeDetails != nil {
 		toSerialize["ConfigChangeDetails"] = o.ConfigChangeDetails
 	}
-	if o.LeasedServer != nil {
-		toSerialize["LeasedServer"] = o.LeasedServer
+	if o.LeasedServer.IsSet() {
+		toSerialize["LeasedServer"] = o.LeasedServer.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.ResourceLease != nil {
-		toSerialize["ResourceLease"] = o.ResourceLease
+	if o.ResourceLease.IsSet() {
+		toSerialize["ResourceLease"] = o.ResourceLease.Get()
 	}
 	if o.RunningWorkflows != nil {
 		toSerialize["RunningWorkflows"] = o.RunningWorkflows
 	}
-	if o.ServerPool != nil {
-		toSerialize["ServerPool"] = o.ServerPool
+	if o.ServerPool.IsSet() {
+		toSerialize["ServerPool"] = o.ServerPool.Get()
 	}
-	if o.UuidLease != nil {
-		toSerialize["UuidLease"] = o.UuidLease
+	if o.UuidLease.IsSet() {
+		toSerialize["UuidLease"] = o.UuidLease.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ServerProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ServerProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1076,24 +1194,24 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// User label assigned to the server profile.
 		UserLabel *string `json:"UserLabel,omitempty"`
 		// The UUID address that is assigned to the server based on the UUID pool.
-		Uuid                 *string                       `json:"Uuid,omitempty"`
-		AssignedServer       *ComputePhysicalRelationship  `json:"AssignedServer,omitempty"`
-		AssociatedServer     *ComputePhysicalRelationship  `json:"AssociatedServer,omitempty"`
-		AssociatedServerPool *ResourcepoolPoolRelationship `json:"AssociatedServerPool,omitempty"`
+		Uuid                 *string                              `json:"Uuid,omitempty"`
+		AssignedServer       NullableComputePhysicalRelationship  `json:"AssignedServer,omitempty"`
+		AssociatedServer     NullableComputePhysicalRelationship  `json:"AssociatedServer,omitempty"`
+		AssociatedServerPool NullableResourcepoolPoolRelationship `json:"AssociatedServerPool,omitempty"`
 		// An array of relationships to serverConfigChangeDetail resources.
-		ConfigChangeDetails []ServerConfigChangeDetailRelationship `json:"ConfigChangeDetails,omitempty"`
-		LeasedServer        *ComputePhysicalRelationship           `json:"LeasedServer,omitempty"`
-		Organization        *OrganizationOrganizationRelationship  `json:"Organization,omitempty"`
-		ResourceLease       *ResourcepoolLeaseRelationship         `json:"ResourceLease,omitempty"`
+		ConfigChangeDetails []ServerConfigChangeDetailRelationship       `json:"ConfigChangeDetails,omitempty"`
+		LeasedServer        NullableComputePhysicalRelationship          `json:"LeasedServer,omitempty"`
+		Organization        NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		ResourceLease       NullableResourcepoolLeaseRelationship        `json:"ResourceLease,omitempty"`
 		// An array of relationships to workflowWorkflowInfo resources.
-		RunningWorkflows []WorkflowWorkflowInfoRelationship `json:"RunningWorkflows,omitempty"`
-		ServerPool       *ResourcepoolPoolRelationship      `json:"ServerPool,omitempty"`
-		UuidLease        *UuidpoolUuidLeaseRelationship     `json:"UuidLease,omitempty"`
+		RunningWorkflows []WorkflowWorkflowInfoRelationship    `json:"RunningWorkflows,omitempty"`
+		ServerPool       NullableResourcepoolPoolRelationship  `json:"ServerPool,omitempty"`
+		UuidLease        NullableUuidpoolUuidLeaseRelationship `json:"UuidLease,omitempty"`
 	}
 
 	varServerProfileWithoutEmbeddedStruct := ServerProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varServerProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varServerProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varServerProfile := _ServerProfile{}
 		varServerProfile.ClassId = varServerProfileWithoutEmbeddedStruct.ClassId
@@ -1129,7 +1247,7 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varServerProfile := _ServerProfile{}
 
-	err = json.Unmarshal(bytes, &varServerProfile)
+	err = json.Unmarshal(data, &varServerProfile)
 	if err == nil {
 		o.ServerBaseProfile = varServerProfile.ServerBaseProfile
 	} else {
@@ -1138,7 +1256,7 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigChangeContext")

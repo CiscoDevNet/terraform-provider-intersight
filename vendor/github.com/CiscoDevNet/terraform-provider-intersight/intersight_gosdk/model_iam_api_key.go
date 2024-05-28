@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the IamApiKey type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamApiKey{}
 
 // IamApiKey An API key is used to authenticate and authorize API requests sent by a client using the HTTP signature scheme. API keys can be used by unattended, daemon clients that need to send requests to Intersight programmatically. API keys are based on public key cryptography. To create an API key, the user must specify: 1. The purpose (description) of the API key, 2. The cryptographic hash algorithm, which is used to compute the digest of the body of HTTP requests, 3. The cryptographic parameters to generate a private/public key pair, e.g. RSA, ECDSA, EDDSA, key modulus, and 4. The signing algorithm, e.g. RSA PKCS v1.5, RSA PSS, ECDSA, EDDSA. The generated private key and public key are encoded in PEM format. The client owns the private key and is responsible for maintaining the confidentiality of the private key. The server holds the public key. The client must have a cryptographic provider compatible with the cryptographic parameters specified in the API key. For example, if you use the powershell SDK to write the client, make sure the appropriate cryptographic providers are installed on the local system. If you create an RSA key pair with modulus set to 2048, the client must support 2048-bit private keys. A maximum of 3 API keys per user is allowed. API keys are used to sign HTTP requests as follows: 1. A cryptographic digest of the body of the HTTP request is calculated using one of the supported cryptographic hash algorithms. 2. The value of the digest is base-64 encoded in the `Digest` HTTP header. 3. A signature is calculated as specified in the HTTP signature scheme, and the signature is added to the `Authorization` HTTP request header. All published Intersight SDKs support API keys.
 type IamApiKey struct {
@@ -47,9 +51,9 @@ type IamApiKey struct {
 	// The signing algorithm used by the client to authenticate API requests to Intersight. The signing algorithm must be compatible with the key generation specification. * `RSASSA-PKCS1-v1_5` - RSASSA-PKCS1-v1_5 is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).RSASSA-PKCS1-v1_5 is included only for compatibility with existing applications. * `RSASSA-PSS` - RSASSA-PSS is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).It combines the RSASP1 and RSAVP1 primitives with the EMSA-PSS encoding method.In the interest of increased robustness, RSASSA-PSS is required in new applications. * `Ed25519` - The Ed25519 signature algorithm, as specified in [RFC 8032](https://tools.ietf.org/html/rfc8032).Ed25519 is a public-key signature system with several attractive features, includingfast single-signature verification, very fast signing, fast key generation and high security level. * `Ecdsa` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is encoded as a ASN.1 DER SEQUENCE with two INTEGERs (r and s), as defined in RFC3279.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side. * `EcdsaP1363Format` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is the raw concatenation of r and s, as defined in the ISO/IEC 7816-8 IEEE P.1363 standard.In that format, r and s are represented as unsigned, big endian numbers.Extra padding bytes (of value 0x00) is applied so that both r and s encodings have the same size.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.
 	SigningAlgorithm *string `json:"SigningAlgorithm,omitempty"`
 	// The timestamp at which an expiry date was first set on this API key. For expiring API keys, this field is same as the create time of the API key. For never-expiring API keys, this field is set initially to zero time value. If a never-expiry API key is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.
-	StartTime            *time.Time                 `json:"StartTime,omitempty"`
-	Permission           *IamPermissionRelationship `json:"Permission,omitempty"`
-	User                 *IamUserRelationship       `json:"User,omitempty"`
+	StartTime            *time.Time                        `json:"StartTime,omitempty"`
+	Permission           NullableIamPermissionRelationship `json:"Permission,omitempty"`
+	User                 NullableIamUserRelationship       `json:"User,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -144,7 +148,7 @@ func (o *IamApiKey) SetObjectType(v string) {
 
 // GetAdminStatus returns the AdminStatus field value if set, zero value otherwise.
 func (o *IamApiKey) GetAdminStatus() string {
-	if o == nil || o.AdminStatus == nil {
+	if o == nil || IsNil(o.AdminStatus) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *IamApiKey) GetAdminStatus() string {
 // GetAdminStatusOk returns a tuple with the AdminStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamApiKey) GetAdminStatusOk() (*string, bool) {
-	if o == nil || o.AdminStatus == nil {
+	if o == nil || IsNil(o.AdminStatus) {
 		return nil, false
 	}
 	return o.AdminStatus, true
@@ -162,7 +166,7 @@ func (o *IamApiKey) GetAdminStatusOk() (*string, bool) {
 
 // HasAdminStatus returns a boolean if a field has been set.
 func (o *IamApiKey) HasAdminStatus() bool {
-	if o != nil && o.AdminStatus != nil {
+	if o != nil && !IsNil(o.AdminStatus) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *IamApiKey) SetAdminStatus(v string) {
 
 // GetExpiryDateTime returns the ExpiryDateTime field value if set, zero value otherwise.
 func (o *IamApiKey) GetExpiryDateTime() time.Time {
-	if o == nil || o.ExpiryDateTime == nil {
+	if o == nil || IsNil(o.ExpiryDateTime) {
 		var ret time.Time
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *IamApiKey) GetExpiryDateTime() time.Time {
 // GetExpiryDateTimeOk returns a tuple with the ExpiryDateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamApiKey) GetExpiryDateTimeOk() (*time.Time, bool) {
-	if o == nil || o.ExpiryDateTime == nil {
+	if o == nil || IsNil(o.ExpiryDateTime) {
 		return nil, false
 	}
 	return o.ExpiryDateTime, true
@@ -194,7 +198,7 @@ func (o *IamApiKey) GetExpiryDateTimeOk() (*time.Time, bool) {
 
 // HasExpiryDateTime returns a boolean if a field has been set.
 func (o *IamApiKey) HasExpiryDateTime() bool {
-	if o != nil && o.ExpiryDateTime != nil {
+	if o != nil && !IsNil(o.ExpiryDateTime) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *IamApiKey) SetExpiryDateTime(v time.Time) {
 
 // GetHashAlgorithm returns the HashAlgorithm field value if set, zero value otherwise.
 func (o *IamApiKey) GetHashAlgorithm() string {
-	if o == nil || o.HashAlgorithm == nil {
+	if o == nil || IsNil(o.HashAlgorithm) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *IamApiKey) GetHashAlgorithm() string {
 // GetHashAlgorithmOk returns a tuple with the HashAlgorithm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamApiKey) GetHashAlgorithmOk() (*string, bool) {
-	if o == nil || o.HashAlgorithm == nil {
+	if o == nil || IsNil(o.HashAlgorithm) {
 		return nil, false
 	}
 	return o.HashAlgorithm, true
@@ -226,7 +230,7 @@ func (o *IamApiKey) GetHashAlgorithmOk() (*string, bool) {
 
 // HasHashAlgorithm returns a boolean if a field has been set.
 func (o *IamApiKey) HasHashAlgorithm() bool {
-	if o != nil && o.HashAlgorithm != nil {
+	if o != nil && !IsNil(o.HashAlgorithm) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *IamApiKey) SetHashAlgorithm(v string) {
 
 // GetIsNeverExpiring returns the IsNeverExpiring field value if set, zero value otherwise.
 func (o *IamApiKey) GetIsNeverExpiring() bool {
-	if o == nil || o.IsNeverExpiring == nil {
+	if o == nil || IsNil(o.IsNeverExpiring) {
 		var ret bool
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *IamApiKey) GetIsNeverExpiring() bool {
 // GetIsNeverExpiringOk returns a tuple with the IsNeverExpiring field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamApiKey) GetIsNeverExpiringOk() (*bool, bool) {
-	if o == nil || o.IsNeverExpiring == nil {
+	if o == nil || IsNil(o.IsNeverExpiring) {
 		return nil, false
 	}
 	return o.IsNeverExpiring, true
@@ -258,7 +262,7 @@ func (o *IamApiKey) GetIsNeverExpiringOk() (*bool, bool) {
 
 // HasIsNeverExpiring returns a boolean if a field has been set.
 func (o *IamApiKey) HasIsNeverExpiring() bool {
-	if o != nil && o.IsNeverExpiring != nil {
+	if o != nil && !IsNil(o.IsNeverExpiring) {
 		return true
 	}
 
@@ -272,7 +276,7 @@ func (o *IamApiKey) SetIsNeverExpiring(v bool) {
 
 // GetKeySpec returns the KeySpec field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamApiKey) GetKeySpec() PkixKeyGenerationSpec {
-	if o == nil || o.KeySpec.Get() == nil {
+	if o == nil || IsNil(o.KeySpec.Get()) {
 		var ret PkixKeyGenerationSpec
 		return ret
 	}
@@ -315,7 +319,7 @@ func (o *IamApiKey) UnsetKeySpec() {
 
 // GetLastUsedIp returns the LastUsedIp field value if set, zero value otherwise.
 func (o *IamApiKey) GetLastUsedIp() string {
-	if o == nil || o.LastUsedIp == nil {
+	if o == nil || IsNil(o.LastUsedIp) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *IamApiKey) GetLastUsedIp() string {
 // GetLastUsedIpOk returns a tuple with the LastUsedIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamApiKey) GetLastUsedIpOk() (*string, bool) {
-	if o == nil || o.LastUsedIp == nil {
+	if o == nil || IsNil(o.LastUsedIp) {
 		return nil, false
 	}
 	return o.LastUsedIp, true
@@ -333,7 +337,7 @@ func (o *IamApiKey) GetLastUsedIpOk() (*string, bool) {
 
 // HasLastUsedIp returns a boolean if a field has been set.
 func (o *IamApiKey) HasLastUsedIp() bool {
-	if o != nil && o.LastUsedIp != nil {
+	if o != nil && !IsNil(o.LastUsedIp) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *IamApiKey) SetLastUsedIp(v string) {
 
 // GetLastUsedTime returns the LastUsedTime field value if set, zero value otherwise.
 func (o *IamApiKey) GetLastUsedTime() time.Time {
-	if o == nil || o.LastUsedTime == nil {
+	if o == nil || IsNil(o.LastUsedTime) {
 		var ret time.Time
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *IamApiKey) GetLastUsedTime() time.Time {
 // GetLastUsedTimeOk returns a tuple with the LastUsedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamApiKey) GetLastUsedTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastUsedTime == nil {
+	if o == nil || IsNil(o.LastUsedTime) {
 		return nil, false
 	}
 	return o.LastUsedTime, true
@@ -365,7 +369,7 @@ func (o *IamApiKey) GetLastUsedTimeOk() (*time.Time, bool) {
 
 // HasLastUsedTime returns a boolean if a field has been set.
 func (o *IamApiKey) HasLastUsedTime() bool {
-	if o != nil && o.LastUsedTime != nil {
+	if o != nil && !IsNil(o.LastUsedTime) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *IamApiKey) SetLastUsedTime(v time.Time) {
 
 // GetOperStatus returns the OperStatus field value if set, zero value otherwise.
 func (o *IamApiKey) GetOperStatus() string {
-	if o == nil || o.OperStatus == nil {
+	if o == nil || IsNil(o.OperStatus) {
 		var ret string
 		return ret
 	}
@@ -389,7 +393,7 @@ func (o *IamApiKey) GetOperStatus() string {
 // GetOperStatusOk returns a tuple with the OperStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamApiKey) GetOperStatusOk() (*string, bool) {
-	if o == nil || o.OperStatus == nil {
+	if o == nil || IsNil(o.OperStatus) {
 		return nil, false
 	}
 	return o.OperStatus, true
@@ -397,7 +401,7 @@ func (o *IamApiKey) GetOperStatusOk() (*string, bool) {
 
 // HasOperStatus returns a boolean if a field has been set.
 func (o *IamApiKey) HasOperStatus() bool {
-	if o != nil && o.OperStatus != nil {
+	if o != nil && !IsNil(o.OperStatus) {
 		return true
 	}
 
@@ -411,7 +415,7 @@ func (o *IamApiKey) SetOperStatus(v string) {
 
 // GetPrivateKey returns the PrivateKey field value if set, zero value otherwise.
 func (o *IamApiKey) GetPrivateKey() string {
-	if o == nil || o.PrivateKey == nil {
+	if o == nil || IsNil(o.PrivateKey) {
 		var ret string
 		return ret
 	}
@@ -421,7 +425,7 @@ func (o *IamApiKey) GetPrivateKey() string {
 // GetPrivateKeyOk returns a tuple with the PrivateKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamApiKey) GetPrivateKeyOk() (*string, bool) {
-	if o == nil || o.PrivateKey == nil {
+	if o == nil || IsNil(o.PrivateKey) {
 		return nil, false
 	}
 	return o.PrivateKey, true
@@ -429,7 +433,7 @@ func (o *IamApiKey) GetPrivateKeyOk() (*string, bool) {
 
 // HasPrivateKey returns a boolean if a field has been set.
 func (o *IamApiKey) HasPrivateKey() bool {
-	if o != nil && o.PrivateKey != nil {
+	if o != nil && !IsNil(o.PrivateKey) {
 		return true
 	}
 
@@ -443,7 +447,7 @@ func (o *IamApiKey) SetPrivateKey(v string) {
 
 // GetPurpose returns the Purpose field value if set, zero value otherwise.
 func (o *IamApiKey) GetPurpose() string {
-	if o == nil || o.Purpose == nil {
+	if o == nil || IsNil(o.Purpose) {
 		var ret string
 		return ret
 	}
@@ -453,7 +457,7 @@ func (o *IamApiKey) GetPurpose() string {
 // GetPurposeOk returns a tuple with the Purpose field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamApiKey) GetPurposeOk() (*string, bool) {
-	if o == nil || o.Purpose == nil {
+	if o == nil || IsNil(o.Purpose) {
 		return nil, false
 	}
 	return o.Purpose, true
@@ -461,7 +465,7 @@ func (o *IamApiKey) GetPurposeOk() (*string, bool) {
 
 // HasPurpose returns a boolean if a field has been set.
 func (o *IamApiKey) HasPurpose() bool {
-	if o != nil && o.Purpose != nil {
+	if o != nil && !IsNil(o.Purpose) {
 		return true
 	}
 
@@ -475,7 +479,7 @@ func (o *IamApiKey) SetPurpose(v string) {
 
 // GetSigningAlgorithm returns the SigningAlgorithm field value if set, zero value otherwise.
 func (o *IamApiKey) GetSigningAlgorithm() string {
-	if o == nil || o.SigningAlgorithm == nil {
+	if o == nil || IsNil(o.SigningAlgorithm) {
 		var ret string
 		return ret
 	}
@@ -485,7 +489,7 @@ func (o *IamApiKey) GetSigningAlgorithm() string {
 // GetSigningAlgorithmOk returns a tuple with the SigningAlgorithm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamApiKey) GetSigningAlgorithmOk() (*string, bool) {
-	if o == nil || o.SigningAlgorithm == nil {
+	if o == nil || IsNil(o.SigningAlgorithm) {
 		return nil, false
 	}
 	return o.SigningAlgorithm, true
@@ -493,7 +497,7 @@ func (o *IamApiKey) GetSigningAlgorithmOk() (*string, bool) {
 
 // HasSigningAlgorithm returns a boolean if a field has been set.
 func (o *IamApiKey) HasSigningAlgorithm() bool {
-	if o != nil && o.SigningAlgorithm != nil {
+	if o != nil && !IsNil(o.SigningAlgorithm) {
 		return true
 	}
 
@@ -507,7 +511,7 @@ func (o *IamApiKey) SetSigningAlgorithm(v string) {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *IamApiKey) GetStartTime() time.Time {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -517,7 +521,7 @@ func (o *IamApiKey) GetStartTime() time.Time {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamApiKey) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -525,7 +529,7 @@ func (o *IamApiKey) GetStartTimeOk() (*time.Time, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *IamApiKey) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -537,137 +541,185 @@ func (o *IamApiKey) SetStartTime(v time.Time) {
 	o.StartTime = &v
 }
 
-// GetPermission returns the Permission field value if set, zero value otherwise.
+// GetPermission returns the Permission field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamApiKey) GetPermission() IamPermissionRelationship {
-	if o == nil || o.Permission == nil {
+	if o == nil || IsNil(o.Permission.Get()) {
 		var ret IamPermissionRelationship
 		return ret
 	}
-	return *o.Permission
+	return *o.Permission.Get()
 }
 
 // GetPermissionOk returns a tuple with the Permission field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamApiKey) GetPermissionOk() (*IamPermissionRelationship, bool) {
-	if o == nil || o.Permission == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Permission, true
+	return o.Permission.Get(), o.Permission.IsSet()
 }
 
 // HasPermission returns a boolean if a field has been set.
 func (o *IamApiKey) HasPermission() bool {
-	if o != nil && o.Permission != nil {
+	if o != nil && o.Permission.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPermission gets a reference to the given IamPermissionRelationship and assigns it to the Permission field.
+// SetPermission gets a reference to the given NullableIamPermissionRelationship and assigns it to the Permission field.
 func (o *IamApiKey) SetPermission(v IamPermissionRelationship) {
-	o.Permission = &v
+	o.Permission.Set(&v)
 }
 
-// GetUser returns the User field value if set, zero value otherwise.
+// SetPermissionNil sets the value for Permission to be an explicit nil
+func (o *IamApiKey) SetPermissionNil() {
+	o.Permission.Set(nil)
+}
+
+// UnsetPermission ensures that no value is present for Permission, not even an explicit nil
+func (o *IamApiKey) UnsetPermission() {
+	o.Permission.Unset()
+}
+
+// GetUser returns the User field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamApiKey) GetUser() IamUserRelationship {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User.Get()) {
 		var ret IamUserRelationship
 		return ret
 	}
-	return *o.User
+	return *o.User.Get()
 }
 
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamApiKey) GetUserOk() (*IamUserRelationship, bool) {
-	if o == nil || o.User == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.User, true
+	return o.User.Get(), o.User.IsSet()
 }
 
 // HasUser returns a boolean if a field has been set.
 func (o *IamApiKey) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && o.User.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUser gets a reference to the given IamUserRelationship and assigns it to the User field.
+// SetUser gets a reference to the given NullableIamUserRelationship and assigns it to the User field.
 func (o *IamApiKey) SetUser(v IamUserRelationship) {
-	o.User = &v
+	o.User.Set(&v)
+}
+
+// SetUserNil sets the value for User to be an explicit nil
+func (o *IamApiKey) SetUserNil() {
+	o.User.Set(nil)
+}
+
+// UnsetUser ensures that no value is present for User, not even an explicit nil
+func (o *IamApiKey) UnsetUser() {
+	o.User.Unset()
 }
 
 func (o IamApiKey) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamApiKey) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminStatus) {
 		toSerialize["AdminStatus"] = o.AdminStatus
 	}
-	if o.ExpiryDateTime != nil {
+	if !IsNil(o.ExpiryDateTime) {
 		toSerialize["ExpiryDateTime"] = o.ExpiryDateTime
 	}
-	if o.HashAlgorithm != nil {
+	if !IsNil(o.HashAlgorithm) {
 		toSerialize["HashAlgorithm"] = o.HashAlgorithm
 	}
-	if o.IsNeverExpiring != nil {
+	if !IsNil(o.IsNeverExpiring) {
 		toSerialize["IsNeverExpiring"] = o.IsNeverExpiring
 	}
 	if o.KeySpec.IsSet() {
 		toSerialize["KeySpec"] = o.KeySpec.Get()
 	}
-	if o.LastUsedIp != nil {
+	if !IsNil(o.LastUsedIp) {
 		toSerialize["LastUsedIp"] = o.LastUsedIp
 	}
-	if o.LastUsedTime != nil {
+	if !IsNil(o.LastUsedTime) {
 		toSerialize["LastUsedTime"] = o.LastUsedTime
 	}
-	if o.OperStatus != nil {
+	if !IsNil(o.OperStatus) {
 		toSerialize["OperStatus"] = o.OperStatus
 	}
-	if o.PrivateKey != nil {
+	if !IsNil(o.PrivateKey) {
 		toSerialize["PrivateKey"] = o.PrivateKey
 	}
-	if o.Purpose != nil {
+	if !IsNil(o.Purpose) {
 		toSerialize["Purpose"] = o.Purpose
 	}
-	if o.SigningAlgorithm != nil {
+	if !IsNil(o.SigningAlgorithm) {
 		toSerialize["SigningAlgorithm"] = o.SigningAlgorithm
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Permission != nil {
-		toSerialize["Permission"] = o.Permission
+	if o.Permission.IsSet() {
+		toSerialize["Permission"] = o.Permission.Get()
 	}
-	if o.User != nil {
-		toSerialize["User"] = o.User
+	if o.User.IsSet() {
+		toSerialize["User"] = o.User.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamApiKey) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamApiKey) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamApiKeyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -695,14 +747,14 @@ func (o *IamApiKey) UnmarshalJSON(bytes []byte) (err error) {
 		// The signing algorithm used by the client to authenticate API requests to Intersight. The signing algorithm must be compatible with the key generation specification. * `RSASSA-PKCS1-v1_5` - RSASSA-PKCS1-v1_5 is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).RSASSA-PKCS1-v1_5 is included only for compatibility with existing applications. * `RSASSA-PSS` - RSASSA-PSS is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).It combines the RSASP1 and RSAVP1 primitives with the EMSA-PSS encoding method.In the interest of increased robustness, RSASSA-PSS is required in new applications. * `Ed25519` - The Ed25519 signature algorithm, as specified in [RFC 8032](https://tools.ietf.org/html/rfc8032).Ed25519 is a public-key signature system with several attractive features, includingfast single-signature verification, very fast signing, fast key generation and high security level. * `Ecdsa` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is encoded as a ASN.1 DER SEQUENCE with two INTEGERs (r and s), as defined in RFC3279.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side. * `EcdsaP1363Format` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is the raw concatenation of r and s, as defined in the ISO/IEC 7816-8 IEEE P.1363 standard.In that format, r and s are represented as unsigned, big endian numbers.Extra padding bytes (of value 0x00) is applied so that both r and s encodings have the same size.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.
 		SigningAlgorithm *string `json:"SigningAlgorithm,omitempty"`
 		// The timestamp at which an expiry date was first set on this API key. For expiring API keys, this field is same as the create time of the API key. For never-expiring API keys, this field is set initially to zero time value. If a never-expiry API key is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.
-		StartTime  *time.Time                 `json:"StartTime,omitempty"`
-		Permission *IamPermissionRelationship `json:"Permission,omitempty"`
-		User       *IamUserRelationship       `json:"User,omitempty"`
+		StartTime  *time.Time                        `json:"StartTime,omitempty"`
+		Permission NullableIamPermissionRelationship `json:"Permission,omitempty"`
+		User       NullableIamUserRelationship       `json:"User,omitempty"`
 	}
 
 	varIamApiKeyWithoutEmbeddedStruct := IamApiKeyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamApiKeyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamApiKeyWithoutEmbeddedStruct)
 	if err == nil {
 		varIamApiKey := _IamApiKey{}
 		varIamApiKey.ClassId = varIamApiKeyWithoutEmbeddedStruct.ClassId
@@ -728,7 +780,7 @@ func (o *IamApiKey) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamApiKey := _IamApiKey{}
 
-	err = json.Unmarshal(bytes, &varIamApiKey)
+	err = json.Unmarshal(data, &varIamApiKey)
 	if err == nil {
 		o.MoBaseMo = varIamApiKey.MoBaseMo
 	} else {
@@ -737,7 +789,7 @@ func (o *IamApiKey) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminStatus")

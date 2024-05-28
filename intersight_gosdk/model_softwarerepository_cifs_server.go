@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SoftwarerepositoryCifsServer type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwarerepositoryCifsServer{}
 
 // SoftwarerepositoryCifsServer An external file repository accessible through the CIFS protocol.
 type SoftwarerepositoryCifsServer struct {
@@ -118,7 +122,7 @@ func (o *SoftwarerepositoryCifsServer) SetObjectType(v string) {
 
 // GetFileLocation returns the FileLocation field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCifsServer) GetFileLocation() string {
-	if o == nil || o.FileLocation == nil {
+	if o == nil || IsNil(o.FileLocation) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *SoftwarerepositoryCifsServer) GetFileLocation() string {
 // GetFileLocationOk returns a tuple with the FileLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCifsServer) GetFileLocationOk() (*string, bool) {
-	if o == nil || o.FileLocation == nil {
+	if o == nil || IsNil(o.FileLocation) {
 		return nil, false
 	}
 	return o.FileLocation, true
@@ -136,7 +140,7 @@ func (o *SoftwarerepositoryCifsServer) GetFileLocationOk() (*string, bool) {
 
 // HasFileLocation returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCifsServer) HasFileLocation() bool {
-	if o != nil && o.FileLocation != nil {
+	if o != nil && !IsNil(o.FileLocation) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *SoftwarerepositoryCifsServer) SetFileLocation(v string) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCifsServer) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *SoftwarerepositoryCifsServer) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCifsServer) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -168,7 +172,7 @@ func (o *SoftwarerepositoryCifsServer) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCifsServer) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *SoftwarerepositoryCifsServer) SetIsPasswordSet(v bool) {
 
 // GetMountOption returns the MountOption field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCifsServer) GetMountOption() string {
-	if o == nil || o.MountOption == nil {
+	if o == nil || IsNil(o.MountOption) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *SoftwarerepositoryCifsServer) GetMountOption() string {
 // GetMountOptionOk returns a tuple with the MountOption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCifsServer) GetMountOptionOk() (*string, bool) {
-	if o == nil || o.MountOption == nil {
+	if o == nil || IsNil(o.MountOption) {
 		return nil, false
 	}
 	return o.MountOption, true
@@ -200,7 +204,7 @@ func (o *SoftwarerepositoryCifsServer) GetMountOptionOk() (*string, bool) {
 
 // HasMountOption returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCifsServer) HasMountOption() bool {
-	if o != nil && o.MountOption != nil {
+	if o != nil && !IsNil(o.MountOption) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *SoftwarerepositoryCifsServer) SetMountOption(v string) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCifsServer) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *SoftwarerepositoryCifsServer) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCifsServer) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -232,7 +236,7 @@ func (o *SoftwarerepositoryCifsServer) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCifsServer) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *SoftwarerepositoryCifsServer) SetPassword(v string) {
 
 // GetRemoteFile returns the RemoteFile field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCifsServer) GetRemoteFile() string {
-	if o == nil || o.RemoteFile == nil {
+	if o == nil || IsNil(o.RemoteFile) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *SoftwarerepositoryCifsServer) GetRemoteFile() string {
 // GetRemoteFileOk returns a tuple with the RemoteFile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCifsServer) GetRemoteFileOk() (*string, bool) {
-	if o == nil || o.RemoteFile == nil {
+	if o == nil || IsNil(o.RemoteFile) {
 		return nil, false
 	}
 	return o.RemoteFile, true
@@ -264,7 +268,7 @@ func (o *SoftwarerepositoryCifsServer) GetRemoteFileOk() (*string, bool) {
 
 // HasRemoteFile returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCifsServer) HasRemoteFile() bool {
-	if o != nil && o.RemoteFile != nil {
+	if o != nil && !IsNil(o.RemoteFile) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *SoftwarerepositoryCifsServer) SetRemoteFile(v string) {
 
 // GetRemoteIp returns the RemoteIp field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCifsServer) GetRemoteIp() string {
-	if o == nil || o.RemoteIp == nil {
+	if o == nil || IsNil(o.RemoteIp) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *SoftwarerepositoryCifsServer) GetRemoteIp() string {
 // GetRemoteIpOk returns a tuple with the RemoteIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCifsServer) GetRemoteIpOk() (*string, bool) {
-	if o == nil || o.RemoteIp == nil {
+	if o == nil || IsNil(o.RemoteIp) {
 		return nil, false
 	}
 	return o.RemoteIp, true
@@ -296,7 +300,7 @@ func (o *SoftwarerepositoryCifsServer) GetRemoteIpOk() (*string, bool) {
 
 // HasRemoteIp returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCifsServer) HasRemoteIp() bool {
-	if o != nil && o.RemoteIp != nil {
+	if o != nil && !IsNil(o.RemoteIp) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *SoftwarerepositoryCifsServer) SetRemoteIp(v string) {
 
 // GetRemoteShare returns the RemoteShare field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCifsServer) GetRemoteShare() string {
-	if o == nil || o.RemoteShare == nil {
+	if o == nil || IsNil(o.RemoteShare) {
 		var ret string
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *SoftwarerepositoryCifsServer) GetRemoteShare() string {
 // GetRemoteShareOk returns a tuple with the RemoteShare field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCifsServer) GetRemoteShareOk() (*string, bool) {
-	if o == nil || o.RemoteShare == nil {
+	if o == nil || IsNil(o.RemoteShare) {
 		return nil, false
 	}
 	return o.RemoteShare, true
@@ -328,7 +332,7 @@ func (o *SoftwarerepositoryCifsServer) GetRemoteShareOk() (*string, bool) {
 
 // HasRemoteShare returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCifsServer) HasRemoteShare() bool {
-	if o != nil && o.RemoteShare != nil {
+	if o != nil && !IsNil(o.RemoteShare) {
 		return true
 	}
 
@@ -342,7 +346,7 @@ func (o *SoftwarerepositoryCifsServer) SetRemoteShare(v string) {
 
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *SoftwarerepositoryCifsServer) GetUsername() string {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		var ret string
 		return ret
 	}
@@ -352,7 +356,7 @@ func (o *SoftwarerepositoryCifsServer) GetUsername() string {
 // GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryCifsServer) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		return nil, false
 	}
 	return o.Username, true
@@ -360,7 +364,7 @@ func (o *SoftwarerepositoryCifsServer) GetUsernameOk() (*string, bool) {
 
 // HasUsername returns a boolean if a field has been set.
 func (o *SoftwarerepositoryCifsServer) HasUsername() bool {
-	if o != nil && o.Username != nil {
+	if o != nil && !IsNil(o.Username) {
 		return true
 	}
 
@@ -373,43 +377,47 @@ func (o *SoftwarerepositoryCifsServer) SetUsername(v string) {
 }
 
 func (o SoftwarerepositoryCifsServer) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwarerepositoryCifsServer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedSoftwarerepositoryFileServer, errSoftwarerepositoryFileServer := json.Marshal(o.SoftwarerepositoryFileServer)
 	if errSoftwarerepositoryFileServer != nil {
-		return []byte{}, errSoftwarerepositoryFileServer
+		return map[string]interface{}{}, errSoftwarerepositoryFileServer
 	}
 	errSoftwarerepositoryFileServer = json.Unmarshal([]byte(serializedSoftwarerepositoryFileServer), &toSerialize)
 	if errSoftwarerepositoryFileServer != nil {
-		return []byte{}, errSoftwarerepositoryFileServer
+		return map[string]interface{}{}, errSoftwarerepositoryFileServer
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FileLocation != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FileLocation) {
 		toSerialize["FileLocation"] = o.FileLocation
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.MountOption != nil {
+	if !IsNil(o.MountOption) {
 		toSerialize["MountOption"] = o.MountOption
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.RemoteFile != nil {
+	if !IsNil(o.RemoteFile) {
 		toSerialize["RemoteFile"] = o.RemoteFile
 	}
-	if o.RemoteIp != nil {
+	if !IsNil(o.RemoteIp) {
 		toSerialize["RemoteIp"] = o.RemoteIp
 	}
-	if o.RemoteShare != nil {
+	if !IsNil(o.RemoteShare) {
 		toSerialize["RemoteShare"] = o.RemoteShare
 	}
-	if o.Username != nil {
+	if !IsNil(o.Username) {
 		toSerialize["Username"] = o.Username
 	}
 
@@ -417,10 +425,32 @@ func (o SoftwarerepositoryCifsServer) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwarerepositoryCifsServer) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwarerepositoryCifsServer) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwarerepositoryCifsServerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -446,7 +476,7 @@ func (o *SoftwarerepositoryCifsServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSoftwarerepositoryCifsServerWithoutEmbeddedStruct := SoftwarerepositoryCifsServerWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryCifsServerWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwarerepositoryCifsServerWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwarerepositoryCifsServer := _SoftwarerepositoryCifsServer{}
 		varSoftwarerepositoryCifsServer.ClassId = varSoftwarerepositoryCifsServerWithoutEmbeddedStruct.ClassId
@@ -466,7 +496,7 @@ func (o *SoftwarerepositoryCifsServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSoftwarerepositoryCifsServer := _SoftwarerepositoryCifsServer{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryCifsServer)
+	err = json.Unmarshal(data, &varSoftwarerepositoryCifsServer)
 	if err == nil {
 		o.SoftwarerepositoryFileServer = varSoftwarerepositoryCifsServer.SoftwarerepositoryFileServer
 	} else {
@@ -475,7 +505,7 @@ func (o *SoftwarerepositoryCifsServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FileLocation")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricVlan type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricVlan{}
 
 // FabricVlan Configuration object for Virtual LAN.
 type FabricVlan struct {
@@ -35,10 +39,10 @@ type FabricVlan struct {
 	// The sharing type of this VLAN. * `None` - This represents a regular VLAN. * `Primary` - This represents a primary VLAN. * `Isolated` - This represents an isolated VLAN. * `Community` - This represents a community VLAN.
 	SharingType *string `json:"SharingType,omitempty"`
 	// The identifier for this Virtual LAN.
-	VlanId               *int64                              `json:"VlanId,omitempty"`
-	EthNetworkPolicy     *FabricEthNetworkPolicyRelationship `json:"EthNetworkPolicy,omitempty"`
-	MulticastPolicy      *FabricMulticastPolicyRelationship  `json:"MulticastPolicy,omitempty"`
-	VlanSet              *FabricVlanSetRelationship          `json:"VlanSet,omitempty"`
+	VlanId               *int64                                     `json:"VlanId,omitempty"`
+	EthNetworkPolicy     NullableFabricEthNetworkPolicyRelationship `json:"EthNetworkPolicy,omitempty"`
+	MulticastPolicy      NullableFabricMulticastPolicyRelationship  `json:"MulticastPolicy,omitempty"`
+	VlanSet              NullableFabricVlanSetRelationship          `json:"VlanSet,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -129,7 +133,7 @@ func (o *FabricVlan) SetObjectType(v string) {
 
 // GetAutoAllowOnUplinks returns the AutoAllowOnUplinks field value if set, zero value otherwise.
 func (o *FabricVlan) GetAutoAllowOnUplinks() bool {
-	if o == nil || o.AutoAllowOnUplinks == nil {
+	if o == nil || IsNil(o.AutoAllowOnUplinks) {
 		var ret bool
 		return ret
 	}
@@ -139,7 +143,7 @@ func (o *FabricVlan) GetAutoAllowOnUplinks() bool {
 // GetAutoAllowOnUplinksOk returns a tuple with the AutoAllowOnUplinks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVlan) GetAutoAllowOnUplinksOk() (*bool, bool) {
-	if o == nil || o.AutoAllowOnUplinks == nil {
+	if o == nil || IsNil(o.AutoAllowOnUplinks) {
 		return nil, false
 	}
 	return o.AutoAllowOnUplinks, true
@@ -147,7 +151,7 @@ func (o *FabricVlan) GetAutoAllowOnUplinksOk() (*bool, bool) {
 
 // HasAutoAllowOnUplinks returns a boolean if a field has been set.
 func (o *FabricVlan) HasAutoAllowOnUplinks() bool {
-	if o != nil && o.AutoAllowOnUplinks != nil {
+	if o != nil && !IsNil(o.AutoAllowOnUplinks) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *FabricVlan) SetAutoAllowOnUplinks(v bool) {
 
 // GetIsNative returns the IsNative field value if set, zero value otherwise.
 func (o *FabricVlan) GetIsNative() bool {
-	if o == nil || o.IsNative == nil {
+	if o == nil || IsNil(o.IsNative) {
 		var ret bool
 		return ret
 	}
@@ -171,7 +175,7 @@ func (o *FabricVlan) GetIsNative() bool {
 // GetIsNativeOk returns a tuple with the IsNative field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVlan) GetIsNativeOk() (*bool, bool) {
-	if o == nil || o.IsNative == nil {
+	if o == nil || IsNil(o.IsNative) {
 		return nil, false
 	}
 	return o.IsNative, true
@@ -179,7 +183,7 @@ func (o *FabricVlan) GetIsNativeOk() (*bool, bool) {
 
 // HasIsNative returns a boolean if a field has been set.
 func (o *FabricVlan) HasIsNative() bool {
-	if o != nil && o.IsNative != nil {
+	if o != nil && !IsNil(o.IsNative) {
 		return true
 	}
 
@@ -193,7 +197,7 @@ func (o *FabricVlan) SetIsNative(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *FabricVlan) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -203,7 +207,7 @@ func (o *FabricVlan) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVlan) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -211,7 +215,7 @@ func (o *FabricVlan) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *FabricVlan) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -225,7 +229,7 @@ func (o *FabricVlan) SetName(v string) {
 
 // GetPrimaryVlanId returns the PrimaryVlanId field value if set, zero value otherwise.
 func (o *FabricVlan) GetPrimaryVlanId() int64 {
-	if o == nil || o.PrimaryVlanId == nil {
+	if o == nil || IsNil(o.PrimaryVlanId) {
 		var ret int64
 		return ret
 	}
@@ -235,7 +239,7 @@ func (o *FabricVlan) GetPrimaryVlanId() int64 {
 // GetPrimaryVlanIdOk returns a tuple with the PrimaryVlanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVlan) GetPrimaryVlanIdOk() (*int64, bool) {
-	if o == nil || o.PrimaryVlanId == nil {
+	if o == nil || IsNil(o.PrimaryVlanId) {
 		return nil, false
 	}
 	return o.PrimaryVlanId, true
@@ -243,7 +247,7 @@ func (o *FabricVlan) GetPrimaryVlanIdOk() (*int64, bool) {
 
 // HasPrimaryVlanId returns a boolean if a field has been set.
 func (o *FabricVlan) HasPrimaryVlanId() bool {
-	if o != nil && o.PrimaryVlanId != nil {
+	if o != nil && !IsNil(o.PrimaryVlanId) {
 		return true
 	}
 
@@ -257,7 +261,7 @@ func (o *FabricVlan) SetPrimaryVlanId(v int64) {
 
 // GetSharingType returns the SharingType field value if set, zero value otherwise.
 func (o *FabricVlan) GetSharingType() string {
-	if o == nil || o.SharingType == nil {
+	if o == nil || IsNil(o.SharingType) {
 		var ret string
 		return ret
 	}
@@ -267,7 +271,7 @@ func (o *FabricVlan) GetSharingType() string {
 // GetSharingTypeOk returns a tuple with the SharingType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVlan) GetSharingTypeOk() (*string, bool) {
-	if o == nil || o.SharingType == nil {
+	if o == nil || IsNil(o.SharingType) {
 		return nil, false
 	}
 	return o.SharingType, true
@@ -275,7 +279,7 @@ func (o *FabricVlan) GetSharingTypeOk() (*string, bool) {
 
 // HasSharingType returns a boolean if a field has been set.
 func (o *FabricVlan) HasSharingType() bool {
-	if o != nil && o.SharingType != nil {
+	if o != nil && !IsNil(o.SharingType) {
 		return true
 	}
 
@@ -289,7 +293,7 @@ func (o *FabricVlan) SetSharingType(v string) {
 
 // GetVlanId returns the VlanId field value if set, zero value otherwise.
 func (o *FabricVlan) GetVlanId() int64 {
-	if o == nil || o.VlanId == nil {
+	if o == nil || IsNil(o.VlanId) {
 		var ret int64
 		return ret
 	}
@@ -299,7 +303,7 @@ func (o *FabricVlan) GetVlanId() int64 {
 // GetVlanIdOk returns a tuple with the VlanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVlan) GetVlanIdOk() (*int64, bool) {
-	if o == nil || o.VlanId == nil {
+	if o == nil || IsNil(o.VlanId) {
 		return nil, false
 	}
 	return o.VlanId, true
@@ -307,7 +311,7 @@ func (o *FabricVlan) GetVlanIdOk() (*int64, bool) {
 
 // HasVlanId returns a boolean if a field has been set.
 func (o *FabricVlan) HasVlanId() bool {
-	if o != nil && o.VlanId != nil {
+	if o != nil && !IsNil(o.VlanId) {
 		return true
 	}
 
@@ -319,154 +323,213 @@ func (o *FabricVlan) SetVlanId(v int64) {
 	o.VlanId = &v
 }
 
-// GetEthNetworkPolicy returns the EthNetworkPolicy field value if set, zero value otherwise.
+// GetEthNetworkPolicy returns the EthNetworkPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricVlan) GetEthNetworkPolicy() FabricEthNetworkPolicyRelationship {
-	if o == nil || o.EthNetworkPolicy == nil {
+	if o == nil || IsNil(o.EthNetworkPolicy.Get()) {
 		var ret FabricEthNetworkPolicyRelationship
 		return ret
 	}
-	return *o.EthNetworkPolicy
+	return *o.EthNetworkPolicy.Get()
 }
 
 // GetEthNetworkPolicyOk returns a tuple with the EthNetworkPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricVlan) GetEthNetworkPolicyOk() (*FabricEthNetworkPolicyRelationship, bool) {
-	if o == nil || o.EthNetworkPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EthNetworkPolicy, true
+	return o.EthNetworkPolicy.Get(), o.EthNetworkPolicy.IsSet()
 }
 
 // HasEthNetworkPolicy returns a boolean if a field has been set.
 func (o *FabricVlan) HasEthNetworkPolicy() bool {
-	if o != nil && o.EthNetworkPolicy != nil {
+	if o != nil && o.EthNetworkPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEthNetworkPolicy gets a reference to the given FabricEthNetworkPolicyRelationship and assigns it to the EthNetworkPolicy field.
+// SetEthNetworkPolicy gets a reference to the given NullableFabricEthNetworkPolicyRelationship and assigns it to the EthNetworkPolicy field.
 func (o *FabricVlan) SetEthNetworkPolicy(v FabricEthNetworkPolicyRelationship) {
-	o.EthNetworkPolicy = &v
+	o.EthNetworkPolicy.Set(&v)
 }
 
-// GetMulticastPolicy returns the MulticastPolicy field value if set, zero value otherwise.
+// SetEthNetworkPolicyNil sets the value for EthNetworkPolicy to be an explicit nil
+func (o *FabricVlan) SetEthNetworkPolicyNil() {
+	o.EthNetworkPolicy.Set(nil)
+}
+
+// UnsetEthNetworkPolicy ensures that no value is present for EthNetworkPolicy, not even an explicit nil
+func (o *FabricVlan) UnsetEthNetworkPolicy() {
+	o.EthNetworkPolicy.Unset()
+}
+
+// GetMulticastPolicy returns the MulticastPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricVlan) GetMulticastPolicy() FabricMulticastPolicyRelationship {
-	if o == nil || o.MulticastPolicy == nil {
+	if o == nil || IsNil(o.MulticastPolicy.Get()) {
 		var ret FabricMulticastPolicyRelationship
 		return ret
 	}
-	return *o.MulticastPolicy
+	return *o.MulticastPolicy.Get()
 }
 
 // GetMulticastPolicyOk returns a tuple with the MulticastPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricVlan) GetMulticastPolicyOk() (*FabricMulticastPolicyRelationship, bool) {
-	if o == nil || o.MulticastPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.MulticastPolicy, true
+	return o.MulticastPolicy.Get(), o.MulticastPolicy.IsSet()
 }
 
 // HasMulticastPolicy returns a boolean if a field has been set.
 func (o *FabricVlan) HasMulticastPolicy() bool {
-	if o != nil && o.MulticastPolicy != nil {
+	if o != nil && o.MulticastPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMulticastPolicy gets a reference to the given FabricMulticastPolicyRelationship and assigns it to the MulticastPolicy field.
+// SetMulticastPolicy gets a reference to the given NullableFabricMulticastPolicyRelationship and assigns it to the MulticastPolicy field.
 func (o *FabricVlan) SetMulticastPolicy(v FabricMulticastPolicyRelationship) {
-	o.MulticastPolicy = &v
+	o.MulticastPolicy.Set(&v)
 }
 
-// GetVlanSet returns the VlanSet field value if set, zero value otherwise.
+// SetMulticastPolicyNil sets the value for MulticastPolicy to be an explicit nil
+func (o *FabricVlan) SetMulticastPolicyNil() {
+	o.MulticastPolicy.Set(nil)
+}
+
+// UnsetMulticastPolicy ensures that no value is present for MulticastPolicy, not even an explicit nil
+func (o *FabricVlan) UnsetMulticastPolicy() {
+	o.MulticastPolicy.Unset()
+}
+
+// GetVlanSet returns the VlanSet field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricVlan) GetVlanSet() FabricVlanSetRelationship {
-	if o == nil || o.VlanSet == nil {
+	if o == nil || IsNil(o.VlanSet.Get()) {
 		var ret FabricVlanSetRelationship
 		return ret
 	}
-	return *o.VlanSet
+	return *o.VlanSet.Get()
 }
 
 // GetVlanSetOk returns a tuple with the VlanSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricVlan) GetVlanSetOk() (*FabricVlanSetRelationship, bool) {
-	if o == nil || o.VlanSet == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VlanSet, true
+	return o.VlanSet.Get(), o.VlanSet.IsSet()
 }
 
 // HasVlanSet returns a boolean if a field has been set.
 func (o *FabricVlan) HasVlanSet() bool {
-	if o != nil && o.VlanSet != nil {
+	if o != nil && o.VlanSet.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVlanSet gets a reference to the given FabricVlanSetRelationship and assigns it to the VlanSet field.
+// SetVlanSet gets a reference to the given NullableFabricVlanSetRelationship and assigns it to the VlanSet field.
 func (o *FabricVlan) SetVlanSet(v FabricVlanSetRelationship) {
-	o.VlanSet = &v
+	o.VlanSet.Set(&v)
+}
+
+// SetVlanSetNil sets the value for VlanSet to be an explicit nil
+func (o *FabricVlan) SetVlanSetNil() {
+	o.VlanSet.Set(nil)
+}
+
+// UnsetVlanSet ensures that no value is present for VlanSet, not even an explicit nil
+func (o *FabricVlan) UnsetVlanSet() {
+	o.VlanSet.Unset()
 }
 
 func (o FabricVlan) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricVlan) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AutoAllowOnUplinks != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AutoAllowOnUplinks) {
 		toSerialize["AutoAllowOnUplinks"] = o.AutoAllowOnUplinks
 	}
-	if o.IsNative != nil {
+	if !IsNil(o.IsNative) {
 		toSerialize["IsNative"] = o.IsNative
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PrimaryVlanId != nil {
+	if !IsNil(o.PrimaryVlanId) {
 		toSerialize["PrimaryVlanId"] = o.PrimaryVlanId
 	}
-	if o.SharingType != nil {
+	if !IsNil(o.SharingType) {
 		toSerialize["SharingType"] = o.SharingType
 	}
-	if o.VlanId != nil {
+	if !IsNil(o.VlanId) {
 		toSerialize["VlanId"] = o.VlanId
 	}
-	if o.EthNetworkPolicy != nil {
-		toSerialize["EthNetworkPolicy"] = o.EthNetworkPolicy
+	if o.EthNetworkPolicy.IsSet() {
+		toSerialize["EthNetworkPolicy"] = o.EthNetworkPolicy.Get()
 	}
-	if o.MulticastPolicy != nil {
-		toSerialize["MulticastPolicy"] = o.MulticastPolicy
+	if o.MulticastPolicy.IsSet() {
+		toSerialize["MulticastPolicy"] = o.MulticastPolicy.Get()
 	}
-	if o.VlanSet != nil {
-		toSerialize["VlanSet"] = o.VlanSet
+	if o.VlanSet.IsSet() {
+		toSerialize["VlanSet"] = o.VlanSet.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricVlan) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricVlan) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricVlanWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -483,15 +546,15 @@ func (o *FabricVlan) UnmarshalJSON(bytes []byte) (err error) {
 		// The sharing type of this VLAN. * `None` - This represents a regular VLAN. * `Primary` - This represents a primary VLAN. * `Isolated` - This represents an isolated VLAN. * `Community` - This represents a community VLAN.
 		SharingType *string `json:"SharingType,omitempty"`
 		// The identifier for this Virtual LAN.
-		VlanId           *int64                              `json:"VlanId,omitempty"`
-		EthNetworkPolicy *FabricEthNetworkPolicyRelationship `json:"EthNetworkPolicy,omitempty"`
-		MulticastPolicy  *FabricMulticastPolicyRelationship  `json:"MulticastPolicy,omitempty"`
-		VlanSet          *FabricVlanSetRelationship          `json:"VlanSet,omitempty"`
+		VlanId           *int64                                     `json:"VlanId,omitempty"`
+		EthNetworkPolicy NullableFabricEthNetworkPolicyRelationship `json:"EthNetworkPolicy,omitempty"`
+		MulticastPolicy  NullableFabricMulticastPolicyRelationship  `json:"MulticastPolicy,omitempty"`
+		VlanSet          NullableFabricVlanSetRelationship          `json:"VlanSet,omitempty"`
 	}
 
 	varFabricVlanWithoutEmbeddedStruct := FabricVlanWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricVlanWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricVlanWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricVlan := _FabricVlan{}
 		varFabricVlan.ClassId = varFabricVlanWithoutEmbeddedStruct.ClassId
@@ -512,7 +575,7 @@ func (o *FabricVlan) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricVlan := _FabricVlan{}
 
-	err = json.Unmarshal(bytes, &varFabricVlan)
+	err = json.Unmarshal(data, &varFabricVlan)
 	if err == nil {
 		o.MoBaseMo = varFabricVlan.MoBaseMo
 	} else {
@@ -521,7 +584,7 @@ func (o *FabricVlan) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AutoAllowOnUplinks")

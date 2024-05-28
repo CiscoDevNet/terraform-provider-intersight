@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexStPlatformClusterHealingInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexStPlatformClusterHealingInfo{}
 
 // HyperflexStPlatformClusterHealingInfo The detailed status of the cluster healing process.
 type HyperflexStPlatformClusterHealingInfo struct {
@@ -113,7 +117,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) SetObjectType(v string) {
 
 // GetEstimatedCompletionTimeInSeconds returns the EstimatedCompletionTimeInSeconds field value if set, zero value otherwise.
 func (o *HyperflexStPlatformClusterHealingInfo) GetEstimatedCompletionTimeInSeconds() int64 {
-	if o == nil || o.EstimatedCompletionTimeInSeconds == nil {
+	if o == nil || IsNil(o.EstimatedCompletionTimeInSeconds) {
 		var ret int64
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetEstimatedCompletionTimeInSeco
 // GetEstimatedCompletionTimeInSecondsOk returns a tuple with the EstimatedCompletionTimeInSeconds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexStPlatformClusterHealingInfo) GetEstimatedCompletionTimeInSecondsOk() (*int64, bool) {
-	if o == nil || o.EstimatedCompletionTimeInSeconds == nil {
+	if o == nil || IsNil(o.EstimatedCompletionTimeInSeconds) {
 		return nil, false
 	}
 	return o.EstimatedCompletionTimeInSeconds, true
@@ -131,7 +135,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetEstimatedCompletionTimeInSeco
 
 // HasEstimatedCompletionTimeInSeconds returns a boolean if a field has been set.
 func (o *HyperflexStPlatformClusterHealingInfo) HasEstimatedCompletionTimeInSeconds() bool {
-	if o != nil && o.EstimatedCompletionTimeInSeconds != nil {
+	if o != nil && !IsNil(o.EstimatedCompletionTimeInSeconds) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) SetEstimatedCompletionTimeInSeco
 
 // GetInProgress returns the InProgress field value if set, zero value otherwise.
 func (o *HyperflexStPlatformClusterHealingInfo) GetInProgress() bool {
-	if o == nil || o.InProgress == nil {
+	if o == nil || IsNil(o.InProgress) {
 		var ret bool
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetInProgress() bool {
 // GetInProgressOk returns a tuple with the InProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexStPlatformClusterHealingInfo) GetInProgressOk() (*bool, bool) {
-	if o == nil || o.InProgress == nil {
+	if o == nil || IsNil(o.InProgress) {
 		return nil, false
 	}
 	return o.InProgress, true
@@ -163,7 +167,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetInProgressOk() (*bool, bool) 
 
 // HasInProgress returns a boolean if a field has been set.
 func (o *HyperflexStPlatformClusterHealingInfo) HasInProgress() bool {
-	if o != nil && o.InProgress != nil {
+	if o != nil && !IsNil(o.InProgress) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetMessages() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexStPlatformClusterHealingInfo) GetMessagesOk() ([]string, bool) {
-	if o == nil || o.Messages == nil {
+	if o == nil || IsNil(o.Messages) {
 		return nil, false
 	}
 	return o.Messages, true
@@ -196,7 +200,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetMessagesOk() ([]string, bool)
 
 // HasMessages returns a boolean if a field has been set.
 func (o *HyperflexStPlatformClusterHealingInfo) HasMessages() bool {
-	if o != nil && o.Messages != nil {
+	if o != nil && IsNil(o.Messages) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetMessagesIterator() interface{
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexStPlatformClusterHealingInfo) GetMessagesIteratorOk() (*interface{}, bool) {
-	if o == nil || o.MessagesIterator == nil {
+	if o == nil || IsNil(o.MessagesIterator) {
 		return nil, false
 	}
 	return &o.MessagesIterator, true
@@ -229,7 +233,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetMessagesIteratorOk() (*interf
 
 // HasMessagesIterator returns a boolean if a field has been set.
 func (o *HyperflexStPlatformClusterHealingInfo) HasMessagesIterator() bool {
-	if o != nil && o.MessagesIterator != nil {
+	if o != nil && IsNil(o.MessagesIterator) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) SetMessagesIterator(v interface{
 
 // GetMessagesSize returns the MessagesSize field value if set, zero value otherwise.
 func (o *HyperflexStPlatformClusterHealingInfo) GetMessagesSize() int64 {
-	if o == nil || o.MessagesSize == nil {
+	if o == nil || IsNil(o.MessagesSize) {
 		var ret int64
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetMessagesSize() int64 {
 // GetMessagesSizeOk returns a tuple with the MessagesSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexStPlatformClusterHealingInfo) GetMessagesSizeOk() (*int64, bool) {
-	if o == nil || o.MessagesSize == nil {
+	if o == nil || IsNil(o.MessagesSize) {
 		return nil, false
 	}
 	return o.MessagesSize, true
@@ -261,7 +265,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetMessagesSizeOk() (*int64, boo
 
 // HasMessagesSize returns a boolean if a field has been set.
 func (o *HyperflexStPlatformClusterHealingInfo) HasMessagesSize() bool {
-	if o != nil && o.MessagesSize != nil {
+	if o != nil && !IsNil(o.MessagesSize) {
 		return true
 	}
 
@@ -275,7 +279,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) SetMessagesSize(v int64) {
 
 // GetPercentComplete returns the PercentComplete field value if set, zero value otherwise.
 func (o *HyperflexStPlatformClusterHealingInfo) GetPercentComplete() int64 {
-	if o == nil || o.PercentComplete == nil {
+	if o == nil || IsNil(o.PercentComplete) {
 		var ret int64
 		return ret
 	}
@@ -285,7 +289,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetPercentComplete() int64 {
 // GetPercentCompleteOk returns a tuple with the PercentComplete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexStPlatformClusterHealingInfo) GetPercentCompleteOk() (*int64, bool) {
-	if o == nil || o.PercentComplete == nil {
+	if o == nil || IsNil(o.PercentComplete) {
 		return nil, false
 	}
 	return o.PercentComplete, true
@@ -293,7 +297,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) GetPercentCompleteOk() (*int64, 
 
 // HasPercentComplete returns a boolean if a field has been set.
 func (o *HyperflexStPlatformClusterHealingInfo) HasPercentComplete() bool {
-	if o != nil && o.PercentComplete != nil {
+	if o != nil && !IsNil(o.PercentComplete) {
 		return true
 	}
 
@@ -306,25 +310,29 @@ func (o *HyperflexStPlatformClusterHealingInfo) SetPercentComplete(v int64) {
 }
 
 func (o HyperflexStPlatformClusterHealingInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexStPlatformClusterHealingInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EstimatedCompletionTimeInSeconds != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EstimatedCompletionTimeInSeconds) {
 		toSerialize["EstimatedCompletionTimeInSeconds"] = o.EstimatedCompletionTimeInSeconds
 	}
-	if o.InProgress != nil {
+	if !IsNil(o.InProgress) {
 		toSerialize["InProgress"] = o.InProgress
 	}
 	if o.Messages != nil {
@@ -333,10 +341,10 @@ func (o HyperflexStPlatformClusterHealingInfo) MarshalJSON() ([]byte, error) {
 	if o.MessagesIterator != nil {
 		toSerialize["MessagesIterator"] = o.MessagesIterator
 	}
-	if o.MessagesSize != nil {
+	if !IsNil(o.MessagesSize) {
 		toSerialize["MessagesSize"] = o.MessagesSize
 	}
-	if o.PercentComplete != nil {
+	if !IsNil(o.PercentComplete) {
 		toSerialize["PercentComplete"] = o.PercentComplete
 	}
 
@@ -344,10 +352,32 @@ func (o HyperflexStPlatformClusterHealingInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexStPlatformClusterHealingInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexStPlatformClusterHealingInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexStPlatformClusterHealingInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -368,7 +398,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) UnmarshalJSON(bytes []byte) (err
 
 	varHyperflexStPlatformClusterHealingInfoWithoutEmbeddedStruct := HyperflexStPlatformClusterHealingInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexStPlatformClusterHealingInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexStPlatformClusterHealingInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexStPlatformClusterHealingInfo := _HyperflexStPlatformClusterHealingInfo{}
 		varHyperflexStPlatformClusterHealingInfo.ClassId = varHyperflexStPlatformClusterHealingInfoWithoutEmbeddedStruct.ClassId
@@ -386,7 +416,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) UnmarshalJSON(bytes []byte) (err
 
 	varHyperflexStPlatformClusterHealingInfo := _HyperflexStPlatformClusterHealingInfo{}
 
-	err = json.Unmarshal(bytes, &varHyperflexStPlatformClusterHealingInfo)
+	err = json.Unmarshal(data, &varHyperflexStPlatformClusterHealingInfo)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexStPlatformClusterHealingInfo.MoBaseComplexType
 	} else {
@@ -395,7 +425,7 @@ func (o *HyperflexStPlatformClusterHealingInfo) UnmarshalJSON(bytes []byte) (err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EstimatedCompletionTimeInSeconds")

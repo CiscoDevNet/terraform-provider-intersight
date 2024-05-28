@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 **SourceIp** | Pointer to **string** | The source IP of the client. | [optional] [readonly] 
 **Timestamp** | Pointer to **time.Time** | The creation time of AuditRecordLocal, which is the time when the affected MO was created/modified/deleted. | [optional] [readonly] 
 **UserIdOrEmail** | Pointer to **string** | The userId or the email of the associated user that made the change. In case that user is later deleted, we still have some reference to the information. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**Sessions** | Pointer to [**IamSessionRelationship**](IamSessionRelationship.md) |  | [optional] 
-**User** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Sessions** | Pointer to [**NullableIamSessionRelationship**](IamSessionRelationship.md) |  | [optional] 
+**User** | Pointer to [**NullableIamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -276,6 +276,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *AaaAuditRecord) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *AaaAuditRecord) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetSessions
 
 `func (o *AaaAuditRecord) GetSessions() IamSessionRelationship`
@@ -301,6 +311,16 @@ SetSessions sets Sessions field to given value.
 
 HasSessions returns a boolean if a field has been set.
 
+### SetSessionsNil
+
+`func (o *AaaAuditRecord) SetSessionsNil(b bool)`
+
+ SetSessionsNil sets the value for Sessions to be an explicit nil
+
+### UnsetSessions
+`func (o *AaaAuditRecord) UnsetSessions()`
+
+UnsetSessions ensures that no value is present for Sessions, not even an explicit nil
 ### GetUser
 
 `func (o *AaaAuditRecord) GetUser() IamUserRelationship`
@@ -326,6 +346,16 @@ SetUser sets User field to given value.
 
 HasUser returns a boolean if a field has been set.
 
+### SetUserNil
+
+`func (o *AaaAuditRecord) SetUserNil(b bool)`
+
+ SetUserNil sets the value for User to be an explicit nil
+
+### UnsetUser
+`func (o *AaaAuditRecord) UnsetUser()`
+
+UnsetUser ensures that no value is present for User, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

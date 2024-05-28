@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **UsedCapacityInBytes** | Pointer to **int64** | Used capacity of iSCSI LUN in bytes. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | UUID of the HyperFlex iSCSI LUN. | [optional] [readonly] 
 **Version** | Pointer to **int64** | Version of the HyperFlex iSCSI lun. | [optional] [readonly] 
-**Target** | Pointer to [**HyperflexTargetRelationship**](HyperflexTargetRelationship.md) |  | [optional] 
+**Target** | Pointer to [**NullableHyperflexTargetRelationship**](HyperflexTargetRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -456,6 +456,16 @@ SetTarget sets Target field to given value.
 
 HasTarget returns a boolean if a field has been set.
 
+### SetTargetNil
+
+`func (o *HyperflexLun) SetTargetNil(b bool)`
+
+ SetTargetNil sets the value for Target to be an explicit nil
+
+### UnsetTarget
+`func (o *HyperflexLun) UnsetTarget()`
+
+UnsetTarget ensures that no value is present for Target, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

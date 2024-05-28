@@ -11,13 +11,13 @@ Name | Type | Description | Notes
 **IpV4Address** | Pointer to **string** | IPv4 Address to be reserved. | [optional] [readonly] 
 **IpV6Address** | Pointer to **string** | IPv6 Address to be reserved. | [optional] [readonly] 
 **VrfMoid** | Pointer to **string** | The moid of the Virtual Routing and Forwarding MO. | [optional] 
-**BlockHead** | Pointer to [**IppoolShadowBlockRelationship**](IppoolShadowBlockRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Pool** | Pointer to [**IppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**IppoolPoolMemberRelationship**](IppoolPoolMemberRelationship.md) |  | [optional] 
-**ShadowPool** | Pointer to [**IppoolShadowPoolRelationship**](IppoolShadowPoolRelationship.md) |  | [optional] 
-**Universe** | Pointer to [**IppoolUniverseRelationship**](IppoolUniverseRelationship.md) |  | [optional] 
-**Vrf** | Pointer to [**VrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
+**BlockHead** | Pointer to [**NullableIppoolShadowBlockRelationship**](IppoolShadowBlockRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableIppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**NullableIppoolPoolMemberRelationship**](IppoolPoolMemberRelationship.md) |  | [optional] 
+**ShadowPool** | Pointer to [**NullableIppoolShadowPoolRelationship**](IppoolShadowPoolRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**NullableIppoolUniverseRelationship**](IppoolUniverseRelationship.md) |  | [optional] 
+**Vrf** | Pointer to [**NullableVrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -228,6 +228,16 @@ SetBlockHead sets BlockHead field to given value.
 
 HasBlockHead returns a boolean if a field has been set.
 
+### SetBlockHeadNil
+
+`func (o *IppoolReservation) SetBlockHeadNil(b bool)`
+
+ SetBlockHeadNil sets the value for BlockHead to be an explicit nil
+
+### UnsetBlockHead
+`func (o *IppoolReservation) UnsetBlockHead()`
+
+UnsetBlockHead ensures that no value is present for BlockHead, not even an explicit nil
 ### GetOrganization
 
 `func (o *IppoolReservation) GetOrganization() OrganizationOrganizationRelationship`
@@ -253,6 +263,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *IppoolReservation) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *IppoolReservation) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetPool
 
 `func (o *IppoolReservation) GetPool() IppoolPoolRelationship`
@@ -278,6 +298,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *IppoolReservation) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *IppoolReservation) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetPoolMember
 
 `func (o *IppoolReservation) GetPoolMember() IppoolPoolMemberRelationship`
@@ -303,6 +333,16 @@ SetPoolMember sets PoolMember field to given value.
 
 HasPoolMember returns a boolean if a field has been set.
 
+### SetPoolMemberNil
+
+`func (o *IppoolReservation) SetPoolMemberNil(b bool)`
+
+ SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+
+### UnsetPoolMember
+`func (o *IppoolReservation) UnsetPoolMember()`
+
+UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
 ### GetShadowPool
 
 `func (o *IppoolReservation) GetShadowPool() IppoolShadowPoolRelationship`
@@ -328,6 +368,16 @@ SetShadowPool sets ShadowPool field to given value.
 
 HasShadowPool returns a boolean if a field has been set.
 
+### SetShadowPoolNil
+
+`func (o *IppoolReservation) SetShadowPoolNil(b bool)`
+
+ SetShadowPoolNil sets the value for ShadowPool to be an explicit nil
+
+### UnsetShadowPool
+`func (o *IppoolReservation) UnsetShadowPool()`
+
+UnsetShadowPool ensures that no value is present for ShadowPool, not even an explicit nil
 ### GetUniverse
 
 `func (o *IppoolReservation) GetUniverse() IppoolUniverseRelationship`
@@ -353,6 +403,16 @@ SetUniverse sets Universe field to given value.
 
 HasUniverse returns a boolean if a field has been set.
 
+### SetUniverseNil
+
+`func (o *IppoolReservation) SetUniverseNil(b bool)`
+
+ SetUniverseNil sets the value for Universe to be an explicit nil
+
+### UnsetUniverse
+`func (o *IppoolReservation) UnsetUniverse()`
+
+UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
 ### GetVrf
 
 `func (o *IppoolReservation) GetVrf() VrfVrfRelationship`
@@ -378,6 +438,16 @@ SetVrf sets Vrf field to given value.
 
 HasVrf returns a boolean if a field has been set.
 
+### SetVrfNil
+
+`func (o *IppoolReservation) SetVrfNil(b bool)`
+
+ SetVrfNil sets the value for Vrf to be an explicit nil
+
+### UnsetVrf
+`func (o *IppoolReservation) UnsetVrf()`
+
+UnsetVrf ensures that no value is present for Vrf, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

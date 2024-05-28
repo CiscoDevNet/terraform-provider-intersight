@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the LicenseIksCustomerOp type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LicenseIksCustomerOp{}
 
 // LicenseIksCustomerOp Customer operation object to refresh the registration or start the trial period of the IKS license tiers.
 type LicenseIksCustomerOp struct {
@@ -31,8 +35,8 @@ type LicenseIksCustomerOp struct {
 	// The default Trial or Grace period the customer is entitled to.
 	EvaluationPeriod *int64 `json:"EvaluationPeriod,omitempty"`
 	// The number of days the trial Trial or Grace period is extended. The trial or grace period can be extended once.
-	ExtraEvaluation      *int64                                 `json:"ExtraEvaluation,omitempty"`
-	AccountLicenseData   *LicenseAccountLicenseDataRelationship `json:"AccountLicenseData,omitempty"`
+	ExtraEvaluation      *int64                                        `json:"ExtraEvaluation,omitempty"`
+	AccountLicenseData   NullableLicenseAccountLicenseDataRelationship `json:"AccountLicenseData,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *LicenseIksCustomerOp) SetObjectType(v string) {
 
 // GetActiveAdmin returns the ActiveAdmin field value if set, zero value otherwise.
 func (o *LicenseIksCustomerOp) GetActiveAdmin() bool {
-	if o == nil || o.ActiveAdmin == nil {
+	if o == nil || IsNil(o.ActiveAdmin) {
 		var ret bool
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *LicenseIksCustomerOp) GetActiveAdmin() bool {
 // GetActiveAdminOk returns a tuple with the ActiveAdmin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseIksCustomerOp) GetActiveAdminOk() (*bool, bool) {
-	if o == nil || o.ActiveAdmin == nil {
+	if o == nil || IsNil(o.ActiveAdmin) {
 		return nil, false
 	}
 	return o.ActiveAdmin, true
@@ -129,7 +133,7 @@ func (o *LicenseIksCustomerOp) GetActiveAdminOk() (*bool, bool) {
 
 // HasActiveAdmin returns a boolean if a field has been set.
 func (o *LicenseIksCustomerOp) HasActiveAdmin() bool {
-	if o != nil && o.ActiveAdmin != nil {
+	if o != nil && !IsNil(o.ActiveAdmin) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *LicenseIksCustomerOp) SetActiveAdmin(v bool) {
 
 // GetEnableTrial returns the EnableTrial field value if set, zero value otherwise.
 func (o *LicenseIksCustomerOp) GetEnableTrial() bool {
-	if o == nil || o.EnableTrial == nil {
+	if o == nil || IsNil(o.EnableTrial) {
 		var ret bool
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *LicenseIksCustomerOp) GetEnableTrial() bool {
 // GetEnableTrialOk returns a tuple with the EnableTrial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseIksCustomerOp) GetEnableTrialOk() (*bool, bool) {
-	if o == nil || o.EnableTrial == nil {
+	if o == nil || IsNil(o.EnableTrial) {
 		return nil, false
 	}
 	return o.EnableTrial, true
@@ -161,7 +165,7 @@ func (o *LicenseIksCustomerOp) GetEnableTrialOk() (*bool, bool) {
 
 // HasEnableTrial returns a boolean if a field has been set.
 func (o *LicenseIksCustomerOp) HasEnableTrial() bool {
-	if o != nil && o.EnableTrial != nil {
+	if o != nil && !IsNil(o.EnableTrial) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *LicenseIksCustomerOp) SetEnableTrial(v bool) {
 
 // GetEvaluationPeriod returns the EvaluationPeriod field value if set, zero value otherwise.
 func (o *LicenseIksCustomerOp) GetEvaluationPeriod() int64 {
-	if o == nil || o.EvaluationPeriod == nil {
+	if o == nil || IsNil(o.EvaluationPeriod) {
 		var ret int64
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *LicenseIksCustomerOp) GetEvaluationPeriod() int64 {
 // GetEvaluationPeriodOk returns a tuple with the EvaluationPeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseIksCustomerOp) GetEvaluationPeriodOk() (*int64, bool) {
-	if o == nil || o.EvaluationPeriod == nil {
+	if o == nil || IsNil(o.EvaluationPeriod) {
 		return nil, false
 	}
 	return o.EvaluationPeriod, true
@@ -193,7 +197,7 @@ func (o *LicenseIksCustomerOp) GetEvaluationPeriodOk() (*int64, bool) {
 
 // HasEvaluationPeriod returns a boolean if a field has been set.
 func (o *LicenseIksCustomerOp) HasEvaluationPeriod() bool {
-	if o != nil && o.EvaluationPeriod != nil {
+	if o != nil && !IsNil(o.EvaluationPeriod) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *LicenseIksCustomerOp) SetEvaluationPeriod(v int64) {
 
 // GetExtraEvaluation returns the ExtraEvaluation field value if set, zero value otherwise.
 func (o *LicenseIksCustomerOp) GetExtraEvaluation() int64 {
-	if o == nil || o.ExtraEvaluation == nil {
+	if o == nil || IsNil(o.ExtraEvaluation) {
 		var ret int64
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *LicenseIksCustomerOp) GetExtraEvaluation() int64 {
 // GetExtraEvaluationOk returns a tuple with the ExtraEvaluation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LicenseIksCustomerOp) GetExtraEvaluationOk() (*int64, bool) {
-	if o == nil || o.ExtraEvaluation == nil {
+	if o == nil || IsNil(o.ExtraEvaluation) {
 		return nil, false
 	}
 	return o.ExtraEvaluation, true
@@ -225,7 +229,7 @@ func (o *LicenseIksCustomerOp) GetExtraEvaluationOk() (*int64, bool) {
 
 // HasExtraEvaluation returns a boolean if a field has been set.
 func (o *LicenseIksCustomerOp) HasExtraEvaluation() bool {
-	if o != nil && o.ExtraEvaluation != nil {
+	if o != nil && !IsNil(o.ExtraEvaluation) {
 		return true
 	}
 
@@ -237,78 +241,115 @@ func (o *LicenseIksCustomerOp) SetExtraEvaluation(v int64) {
 	o.ExtraEvaluation = &v
 }
 
-// GetAccountLicenseData returns the AccountLicenseData field value if set, zero value otherwise.
+// GetAccountLicenseData returns the AccountLicenseData field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *LicenseIksCustomerOp) GetAccountLicenseData() LicenseAccountLicenseDataRelationship {
-	if o == nil || o.AccountLicenseData == nil {
+	if o == nil || IsNil(o.AccountLicenseData.Get()) {
 		var ret LicenseAccountLicenseDataRelationship
 		return ret
 	}
-	return *o.AccountLicenseData
+	return *o.AccountLicenseData.Get()
 }
 
 // GetAccountLicenseDataOk returns a tuple with the AccountLicenseData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *LicenseIksCustomerOp) GetAccountLicenseDataOk() (*LicenseAccountLicenseDataRelationship, bool) {
-	if o == nil || o.AccountLicenseData == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccountLicenseData, true
+	return o.AccountLicenseData.Get(), o.AccountLicenseData.IsSet()
 }
 
 // HasAccountLicenseData returns a boolean if a field has been set.
 func (o *LicenseIksCustomerOp) HasAccountLicenseData() bool {
-	if o != nil && o.AccountLicenseData != nil {
+	if o != nil && o.AccountLicenseData.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccountLicenseData gets a reference to the given LicenseAccountLicenseDataRelationship and assigns it to the AccountLicenseData field.
+// SetAccountLicenseData gets a reference to the given NullableLicenseAccountLicenseDataRelationship and assigns it to the AccountLicenseData field.
 func (o *LicenseIksCustomerOp) SetAccountLicenseData(v LicenseAccountLicenseDataRelationship) {
-	o.AccountLicenseData = &v
+	o.AccountLicenseData.Set(&v)
+}
+
+// SetAccountLicenseDataNil sets the value for AccountLicenseData to be an explicit nil
+func (o *LicenseIksCustomerOp) SetAccountLicenseDataNil() {
+	o.AccountLicenseData.Set(nil)
+}
+
+// UnsetAccountLicenseData ensures that no value is present for AccountLicenseData, not even an explicit nil
+func (o *LicenseIksCustomerOp) UnsetAccountLicenseData() {
+	o.AccountLicenseData.Unset()
 }
 
 func (o LicenseIksCustomerOp) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o LicenseIksCustomerOp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ActiveAdmin != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ActiveAdmin) {
 		toSerialize["ActiveAdmin"] = o.ActiveAdmin
 	}
-	if o.EnableTrial != nil {
+	if !IsNil(o.EnableTrial) {
 		toSerialize["EnableTrial"] = o.EnableTrial
 	}
-	if o.EvaluationPeriod != nil {
+	if !IsNil(o.EvaluationPeriod) {
 		toSerialize["EvaluationPeriod"] = o.EvaluationPeriod
 	}
-	if o.ExtraEvaluation != nil {
+	if !IsNil(o.ExtraEvaluation) {
 		toSerialize["ExtraEvaluation"] = o.ExtraEvaluation
 	}
-	if o.AccountLicenseData != nil {
-		toSerialize["AccountLicenseData"] = o.AccountLicenseData
+	if o.AccountLicenseData.IsSet() {
+		toSerialize["AccountLicenseData"] = o.AccountLicenseData.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *LicenseIksCustomerOp) UnmarshalJSON(bytes []byte) (err error) {
+func (o *LicenseIksCustomerOp) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type LicenseIksCustomerOpWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -321,13 +362,13 @@ func (o *LicenseIksCustomerOp) UnmarshalJSON(bytes []byte) (err error) {
 		// The default Trial or Grace period the customer is entitled to.
 		EvaluationPeriod *int64 `json:"EvaluationPeriod,omitempty"`
 		// The number of days the trial Trial or Grace period is extended. The trial or grace period can be extended once.
-		ExtraEvaluation    *int64                                 `json:"ExtraEvaluation,omitempty"`
-		AccountLicenseData *LicenseAccountLicenseDataRelationship `json:"AccountLicenseData,omitempty"`
+		ExtraEvaluation    *int64                                        `json:"ExtraEvaluation,omitempty"`
+		AccountLicenseData NullableLicenseAccountLicenseDataRelationship `json:"AccountLicenseData,omitempty"`
 	}
 
 	varLicenseIksCustomerOpWithoutEmbeddedStruct := LicenseIksCustomerOpWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varLicenseIksCustomerOpWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varLicenseIksCustomerOpWithoutEmbeddedStruct)
 	if err == nil {
 		varLicenseIksCustomerOp := _LicenseIksCustomerOp{}
 		varLicenseIksCustomerOp.ClassId = varLicenseIksCustomerOpWithoutEmbeddedStruct.ClassId
@@ -344,7 +385,7 @@ func (o *LicenseIksCustomerOp) UnmarshalJSON(bytes []byte) (err error) {
 
 	varLicenseIksCustomerOp := _LicenseIksCustomerOp{}
 
-	err = json.Unmarshal(bytes, &varLicenseIksCustomerOp)
+	err = json.Unmarshal(data, &varLicenseIksCustomerOp)
 	if err == nil {
 		o.MoBaseMo = varLicenseIksCustomerOp.MoBaseMo
 	} else {
@@ -353,7 +394,7 @@ func (o *LicenseIksCustomerOp) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ActiveAdmin")

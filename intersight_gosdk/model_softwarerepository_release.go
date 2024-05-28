@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the SoftwarerepositoryRelease type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SoftwarerepositoryRelease{}
 
 // SoftwarerepositoryRelease A Cisco release containing one or more firmware images. Cisco releases images for rack server components or blade server components or for Fabric Interconnect components. The version for the firmware images is the same as specific Cisco release version.
 type SoftwarerepositoryRelease struct {
@@ -33,8 +37,8 @@ type SoftwarerepositoryRelease struct {
 	// The platform type for which the images are released. This can be a Fabric Interconnect or compute server hardware. * `FabricSwitch` - The images in a release that correspond to Fabric Interconnect switches. * `ComputeSystem` - The images in a release that correspond to servers.
 	Type *string `json:"Type,omitempty"`
 	// Cisco provided release version.
-	Version              *string                                `json:"Version,omitempty"`
-	Catalog              *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+	Version              *string                                       `json:"Version,omitempty"`
+	Catalog              NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *SoftwarerepositoryRelease) SetObjectType(v string) {
 
 // GetReleaseDate returns the ReleaseDate field value if set, zero value otherwise.
 func (o *SoftwarerepositoryRelease) GetReleaseDate() time.Time {
-	if o == nil || o.ReleaseDate == nil {
+	if o == nil || IsNil(o.ReleaseDate) {
 		var ret time.Time
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *SoftwarerepositoryRelease) GetReleaseDate() time.Time {
 // GetReleaseDateOk returns a tuple with the ReleaseDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryRelease) GetReleaseDateOk() (*time.Time, bool) {
-	if o == nil || o.ReleaseDate == nil {
+	if o == nil || IsNil(o.ReleaseDate) {
 		return nil, false
 	}
 	return o.ReleaseDate, true
@@ -135,7 +139,7 @@ func (o *SoftwarerepositoryRelease) GetReleaseDateOk() (*time.Time, bool) {
 
 // HasReleaseDate returns a boolean if a field has been set.
 func (o *SoftwarerepositoryRelease) HasReleaseDate() bool {
-	if o != nil && o.ReleaseDate != nil {
+	if o != nil && !IsNil(o.ReleaseDate) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *SoftwarerepositoryRelease) SetReleaseDate(v time.Time) {
 
 // GetReleaseNotesUrl returns the ReleaseNotesUrl field value if set, zero value otherwise.
 func (o *SoftwarerepositoryRelease) GetReleaseNotesUrl() string {
-	if o == nil || o.ReleaseNotesUrl == nil {
+	if o == nil || IsNil(o.ReleaseNotesUrl) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *SoftwarerepositoryRelease) GetReleaseNotesUrl() string {
 // GetReleaseNotesUrlOk returns a tuple with the ReleaseNotesUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryRelease) GetReleaseNotesUrlOk() (*string, bool) {
-	if o == nil || o.ReleaseNotesUrl == nil {
+	if o == nil || IsNil(o.ReleaseNotesUrl) {
 		return nil, false
 	}
 	return o.ReleaseNotesUrl, true
@@ -167,7 +171,7 @@ func (o *SoftwarerepositoryRelease) GetReleaseNotesUrlOk() (*string, bool) {
 
 // HasReleaseNotesUrl returns a boolean if a field has been set.
 func (o *SoftwarerepositoryRelease) HasReleaseNotesUrl() bool {
-	if o != nil && o.ReleaseNotesUrl != nil {
+	if o != nil && !IsNil(o.ReleaseNotesUrl) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *SoftwarerepositoryRelease) GetSupportedModels() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryRelease) GetSupportedModelsOk() ([]string, bool) {
-	if o == nil || o.SupportedModels == nil {
+	if o == nil || IsNil(o.SupportedModels) {
 		return nil, false
 	}
 	return o.SupportedModels, true
@@ -200,7 +204,7 @@ func (o *SoftwarerepositoryRelease) GetSupportedModelsOk() ([]string, bool) {
 
 // HasSupportedModels returns a boolean if a field has been set.
 func (o *SoftwarerepositoryRelease) HasSupportedModels() bool {
-	if o != nil && o.SupportedModels != nil {
+	if o != nil && IsNil(o.SupportedModels) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *SoftwarerepositoryRelease) SetSupportedModels(v []string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *SoftwarerepositoryRelease) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *SoftwarerepositoryRelease) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryRelease) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -232,7 +236,7 @@ func (o *SoftwarerepositoryRelease) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *SoftwarerepositoryRelease) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *SoftwarerepositoryRelease) SetType(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *SoftwarerepositoryRelease) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *SoftwarerepositoryRelease) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoftwarerepositoryRelease) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -264,7 +268,7 @@ func (o *SoftwarerepositoryRelease) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *SoftwarerepositoryRelease) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -276,81 +280,118 @@ func (o *SoftwarerepositoryRelease) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoftwarerepositoryRelease) GetCatalog() SoftwarerepositoryCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret SoftwarerepositoryCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwarerepositoryRelease) GetCatalogOk() (*SoftwarerepositoryCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *SoftwarerepositoryRelease) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given SoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableSoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
 func (o *SoftwarerepositoryRelease) SetCatalog(v SoftwarerepositoryCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
+}
+
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *SoftwarerepositoryRelease) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *SoftwarerepositoryRelease) UnsetCatalog() {
+	o.Catalog.Unset()
 }
 
 func (o SoftwarerepositoryRelease) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SoftwarerepositoryRelease) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ReleaseDate != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ReleaseDate) {
 		toSerialize["ReleaseDate"] = o.ReleaseDate
 	}
-	if o.ReleaseNotesUrl != nil {
+	if !IsNil(o.ReleaseNotesUrl) {
 		toSerialize["ReleaseNotesUrl"] = o.ReleaseNotesUrl
 	}
 	if o.SupportedModels != nil {
 		toSerialize["SupportedModels"] = o.SupportedModels
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SoftwarerepositoryRelease) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SoftwarerepositoryRelease) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SoftwarerepositoryReleaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -364,13 +405,13 @@ func (o *SoftwarerepositoryRelease) UnmarshalJSON(bytes []byte) (err error) {
 		// The platform type for which the images are released. This can be a Fabric Interconnect or compute server hardware. * `FabricSwitch` - The images in a release that correspond to Fabric Interconnect switches. * `ComputeSystem` - The images in a release that correspond to servers.
 		Type *string `json:"Type,omitempty"`
 		// Cisco provided release version.
-		Version *string                                `json:"Version,omitempty"`
-		Catalog *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+		Version *string                                       `json:"Version,omitempty"`
+		Catalog NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	}
 
 	varSoftwarerepositoryReleaseWithoutEmbeddedStruct := SoftwarerepositoryReleaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryReleaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSoftwarerepositoryReleaseWithoutEmbeddedStruct)
 	if err == nil {
 		varSoftwarerepositoryRelease := _SoftwarerepositoryRelease{}
 		varSoftwarerepositoryRelease.ClassId = varSoftwarerepositoryReleaseWithoutEmbeddedStruct.ClassId
@@ -388,7 +429,7 @@ func (o *SoftwarerepositoryRelease) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSoftwarerepositoryRelease := _SoftwarerepositoryRelease{}
 
-	err = json.Unmarshal(bytes, &varSoftwarerepositoryRelease)
+	err = json.Unmarshal(data, &varSoftwarerepositoryRelease)
 	if err == nil {
 		o.MoBaseMo = varSoftwarerepositoryRelease.MoBaseMo
 	} else {
@@ -397,7 +438,7 @@ func (o *SoftwarerepositoryRelease) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ReleaseDate")

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **State** | Pointer to **string** | The state of the VPC (pending | available). | [optional] [readonly] 
 **Tenancy** | Pointer to **string** | The allowed tenancy of instances launched into the VPC. | [optional] [readonly] 
 **VpcTags** | Pointer to [**[]CloudCloudTag**](CloudCloudTag.md) |  | [optional] 
-**AwsBillingUnit** | Pointer to [**CloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
+**AwsBillingUnit** | Pointer to [**NullableCloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -330,6 +330,16 @@ SetAwsBillingUnit sets AwsBillingUnit field to given value.
 
 HasAwsBillingUnit returns a boolean if a field has been set.
 
+### SetAwsBillingUnitNil
+
+`func (o *CloudAwsVpc) SetAwsBillingUnitNil(b bool)`
+
+ SetAwsBillingUnitNil sets the value for AwsBillingUnit to be an explicit nil
+
+### UnsetAwsBillingUnit
+`func (o *CloudAwsVpc) UnsetAwsBillingUnit()`
+
+UnsetAwsBillingUnit ensures that no value is present for AwsBillingUnit, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

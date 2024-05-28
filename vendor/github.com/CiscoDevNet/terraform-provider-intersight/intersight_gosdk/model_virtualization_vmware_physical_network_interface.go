@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwarePhysicalNetworkInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwarePhysicalNetworkInterface{}
 
 // VirtualizationVmwarePhysicalNetworkInterface Details of VMware physical network interface.
 type VirtualizationVmwarePhysicalNetworkInterface struct {
@@ -33,8 +37,8 @@ type VirtualizationVmwarePhysicalNetworkInterface struct {
 	// PCI info for physical network interface.
 	Pci *string `json:"Pci,omitempty"`
 	// Switch associated with the physical network interface.
-	SwitchName           *string                               `json:"SwitchName,omitempty"`
-	Host                 *VirtualizationVmwareHostRelationship `json:"Host,omitempty"`
+	SwitchName           *string                                      `json:"SwitchName,omitempty"`
+	Host                 NullableVirtualizationVmwareHostRelationship `json:"Host,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -113,7 +117,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) SetObjectType(v string) {
 
 // GetDriver returns the Driver field value if set, zero value otherwise.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetDriver() string {
-	if o == nil || o.Driver == nil {
+	if o == nil || IsNil(o.Driver) {
 		var ret string
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) GetDriver() string {
 // GetDriverOk returns a tuple with the Driver field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetDriverOk() (*string, bool) {
-	if o == nil || o.Driver == nil {
+	if o == nil || IsNil(o.Driver) {
 		return nil, false
 	}
 	return o.Driver, true
@@ -131,7 +135,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) GetDriverOk() (*string, b
 
 // HasDriver returns a boolean if a field has been set.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) HasDriver() bool {
-	if o != nil && o.Driver != nil {
+	if o != nil && !IsNil(o.Driver) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) SetDriver(v string) {
 
 // GetLinkSpeed returns the LinkSpeed field value if set, zero value otherwise.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetLinkSpeed() int32 {
-	if o == nil || o.LinkSpeed == nil {
+	if o == nil || IsNil(o.LinkSpeed) {
 		var ret int32
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) GetLinkSpeed() int32 {
 // GetLinkSpeedOk returns a tuple with the LinkSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetLinkSpeedOk() (*int32, bool) {
-	if o == nil || o.LinkSpeed == nil {
+	if o == nil || IsNil(o.LinkSpeed) {
 		return nil, false
 	}
 	return o.LinkSpeed, true
@@ -163,7 +167,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) GetLinkSpeedOk() (*int32,
 
 // HasLinkSpeed returns a boolean if a field has been set.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) HasLinkSpeed() bool {
-	if o != nil && o.LinkSpeed != nil {
+	if o != nil && !IsNil(o.LinkSpeed) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) SetLinkSpeed(v int32) {
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -195,7 +199,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) GetMacAddressOk() (*strin
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) SetMacAddress(v string) {
 
 // GetPci returns the Pci field value if set, zero value otherwise.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetPci() string {
-	if o == nil || o.Pci == nil {
+	if o == nil || IsNil(o.Pci) {
 		var ret string
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) GetPci() string {
 // GetPciOk returns a tuple with the Pci field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetPciOk() (*string, bool) {
-	if o == nil || o.Pci == nil {
+	if o == nil || IsNil(o.Pci) {
 		return nil, false
 	}
 	return o.Pci, true
@@ -227,7 +231,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) GetPciOk() (*string, bool
 
 // HasPci returns a boolean if a field has been set.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) HasPci() bool {
-	if o != nil && o.Pci != nil {
+	if o != nil && !IsNil(o.Pci) {
 		return true
 	}
 
@@ -241,7 +245,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) SetPci(v string) {
 
 // GetSwitchName returns the SwitchName field value if set, zero value otherwise.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetSwitchName() string {
-	if o == nil || o.SwitchName == nil {
+	if o == nil || IsNil(o.SwitchName) {
 		var ret string
 		return ret
 	}
@@ -251,7 +255,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) GetSwitchName() string {
 // GetSwitchNameOk returns a tuple with the SwitchName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetSwitchNameOk() (*string, bool) {
-	if o == nil || o.SwitchName == nil {
+	if o == nil || IsNil(o.SwitchName) {
 		return nil, false
 	}
 	return o.SwitchName, true
@@ -259,7 +263,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) GetSwitchNameOk() (*strin
 
 // HasSwitchName returns a boolean if a field has been set.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) HasSwitchName() bool {
-	if o != nil && o.SwitchName != nil {
+	if o != nil && !IsNil(o.SwitchName) {
 		return true
 	}
 
@@ -271,81 +275,118 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) SetSwitchName(v string) {
 	o.SwitchName = &v
 }
 
-// GetHost returns the Host field value if set, zero value otherwise.
+// GetHost returns the Host field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetHost() VirtualizationVmwareHostRelationship {
-	if o == nil || o.Host == nil {
+	if o == nil || IsNil(o.Host.Get()) {
 		var ret VirtualizationVmwareHostRelationship
 		return ret
 	}
-	return *o.Host
+	return *o.Host.Get()
 }
 
 // GetHostOk returns a tuple with the Host field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwarePhysicalNetworkInterface) GetHostOk() (*VirtualizationVmwareHostRelationship, bool) {
-	if o == nil || o.Host == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Host, true
+	return o.Host.Get(), o.Host.IsSet()
 }
 
 // HasHost returns a boolean if a field has been set.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) HasHost() bool {
-	if o != nil && o.Host != nil {
+	if o != nil && o.Host.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHost gets a reference to the given VirtualizationVmwareHostRelationship and assigns it to the Host field.
+// SetHost gets a reference to the given NullableVirtualizationVmwareHostRelationship and assigns it to the Host field.
 func (o *VirtualizationVmwarePhysicalNetworkInterface) SetHost(v VirtualizationVmwareHostRelationship) {
-	o.Host = &v
+	o.Host.Set(&v)
+}
+
+// SetHostNil sets the value for Host to be an explicit nil
+func (o *VirtualizationVmwarePhysicalNetworkInterface) SetHostNil() {
+	o.Host.Set(nil)
+}
+
+// UnsetHost ensures that no value is present for Host, not even an explicit nil
+func (o *VirtualizationVmwarePhysicalNetworkInterface) UnsetHost() {
+	o.Host.Unset()
 }
 
 func (o VirtualizationVmwarePhysicalNetworkInterface) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwarePhysicalNetworkInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBasePhysicalNetworkInterface, errVirtualizationBasePhysicalNetworkInterface := json.Marshal(o.VirtualizationBasePhysicalNetworkInterface)
 	if errVirtualizationBasePhysicalNetworkInterface != nil {
-		return []byte{}, errVirtualizationBasePhysicalNetworkInterface
+		return map[string]interface{}{}, errVirtualizationBasePhysicalNetworkInterface
 	}
 	errVirtualizationBasePhysicalNetworkInterface = json.Unmarshal([]byte(serializedVirtualizationBasePhysicalNetworkInterface), &toSerialize)
 	if errVirtualizationBasePhysicalNetworkInterface != nil {
-		return []byte{}, errVirtualizationBasePhysicalNetworkInterface
+		return map[string]interface{}{}, errVirtualizationBasePhysicalNetworkInterface
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Driver != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Driver) {
 		toSerialize["Driver"] = o.Driver
 	}
-	if o.LinkSpeed != nil {
+	if !IsNil(o.LinkSpeed) {
 		toSerialize["LinkSpeed"] = o.LinkSpeed
 	}
-	if o.MacAddress != nil {
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
-	if o.Pci != nil {
+	if !IsNil(o.Pci) {
 		toSerialize["Pci"] = o.Pci
 	}
-	if o.SwitchName != nil {
+	if !IsNil(o.SwitchName) {
 		toSerialize["SwitchName"] = o.SwitchName
 	}
-	if o.Host != nil {
-		toSerialize["Host"] = o.Host
+	if o.Host.IsSet() {
+		toSerialize["Host"] = o.Host.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwarePhysicalNetworkInterface) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwarePhysicalNetworkInterface) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwarePhysicalNetworkInterfaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -360,13 +401,13 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) UnmarshalJSON(bytes []byt
 		// PCI info for physical network interface.
 		Pci *string `json:"Pci,omitempty"`
 		// Switch associated with the physical network interface.
-		SwitchName *string                               `json:"SwitchName,omitempty"`
-		Host       *VirtualizationVmwareHostRelationship `json:"Host,omitempty"`
+		SwitchName *string                                      `json:"SwitchName,omitempty"`
+		Host       NullableVirtualizationVmwareHostRelationship `json:"Host,omitempty"`
 	}
 
 	varVirtualizationVmwarePhysicalNetworkInterfaceWithoutEmbeddedStruct := VirtualizationVmwarePhysicalNetworkInterfaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwarePhysicalNetworkInterfaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwarePhysicalNetworkInterfaceWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwarePhysicalNetworkInterface := _VirtualizationVmwarePhysicalNetworkInterface{}
 		varVirtualizationVmwarePhysicalNetworkInterface.ClassId = varVirtualizationVmwarePhysicalNetworkInterfaceWithoutEmbeddedStruct.ClassId
@@ -384,7 +425,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) UnmarshalJSON(bytes []byt
 
 	varVirtualizationVmwarePhysicalNetworkInterface := _VirtualizationVmwarePhysicalNetworkInterface{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwarePhysicalNetworkInterface)
+	err = json.Unmarshal(data, &varVirtualizationVmwarePhysicalNetworkInterface)
 	if err == nil {
 		o.VirtualizationBasePhysicalNetworkInterface = varVirtualizationVmwarePhysicalNetworkInterface.VirtualizationBasePhysicalNetworkInterface
 	} else {
@@ -393,7 +434,7 @@ func (o *VirtualizationVmwarePhysicalNetworkInterface) UnmarshalJSON(bytes []byt
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Driver")

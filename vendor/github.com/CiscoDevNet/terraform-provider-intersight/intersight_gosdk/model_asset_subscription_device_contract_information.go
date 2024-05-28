@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetSubscriptionDeviceContractInformation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetSubscriptionDeviceContractInformation{}
 
 // AssetSubscriptionDeviceContractInformation Contains information about Cisco devices associated with consumption-based subscriptions. In addition to device installation status and customer address, information about returns and replacements is also recorded here. We listen to messages sent by Cisco Install Base and create/update an instance of this object.
 type AssetSubscriptionDeviceContractInformation struct {
@@ -30,9 +34,9 @@ type AssetSubscriptionDeviceContractInformation struct {
 	// Product identifier for the specified Cisco device. It is used to distinguish between HyperFlex and UCS devices.
 	DevicePid *string `json:"DevicePid,omitempty"`
 	// Identifies the consumption-based subscription.
-	SubscriptionRefId         *string                                     `json:"SubscriptionRefId,omitempty"`
-	DeviceContractInformation *AssetDeviceContractInformationRelationship `json:"DeviceContractInformation,omitempty"`
-	RegisteredDevice          *AssetDeviceRegistrationRelationship        `json:"RegisteredDevice,omitempty"`
+	SubscriptionRefId         *string                                            `json:"SubscriptionRefId,omitempty"`
+	DeviceContractInformation NullableAssetDeviceContractInformationRelationship `json:"DeviceContractInformation,omitempty"`
+	RegisteredDevice          NullableAssetDeviceRegistrationRelationship        `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties      map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *AssetSubscriptionDeviceContractInformation) SetObjectType(v string) {
 
 // GetDeviceId returns the DeviceId field value if set, zero value otherwise.
 func (o *AssetSubscriptionDeviceContractInformation) GetDeviceId() string {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *AssetSubscriptionDeviceContractInformation) GetDeviceId() string {
 // GetDeviceIdOk returns a tuple with the DeviceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetSubscriptionDeviceContractInformation) GetDeviceIdOk() (*string, bool) {
-	if o == nil || o.DeviceId == nil {
+	if o == nil || IsNil(o.DeviceId) {
 		return nil, false
 	}
 	return o.DeviceId, true
@@ -129,7 +133,7 @@ func (o *AssetSubscriptionDeviceContractInformation) GetDeviceIdOk() (*string, b
 
 // HasDeviceId returns a boolean if a field has been set.
 func (o *AssetSubscriptionDeviceContractInformation) HasDeviceId() bool {
-	if o != nil && o.DeviceId != nil {
+	if o != nil && !IsNil(o.DeviceId) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *AssetSubscriptionDeviceContractInformation) SetDeviceId(v string) {
 
 // GetDeviceInformation returns the DeviceInformation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetSubscriptionDeviceContractInformation) GetDeviceInformation() AssetDeviceInformation {
-	if o == nil || o.DeviceInformation.Get() == nil {
+	if o == nil || IsNil(o.DeviceInformation.Get()) {
 		var ret AssetDeviceInformation
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *AssetSubscriptionDeviceContractInformation) UnsetDeviceInformation() {
 
 // GetDevicePid returns the DevicePid field value if set, zero value otherwise.
 func (o *AssetSubscriptionDeviceContractInformation) GetDevicePid() string {
-	if o == nil || o.DevicePid == nil {
+	if o == nil || IsNil(o.DevicePid) {
 		var ret string
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *AssetSubscriptionDeviceContractInformation) GetDevicePid() string {
 // GetDevicePidOk returns a tuple with the DevicePid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetSubscriptionDeviceContractInformation) GetDevicePidOk() (*string, bool) {
-	if o == nil || o.DevicePid == nil {
+	if o == nil || IsNil(o.DevicePid) {
 		return nil, false
 	}
 	return o.DevicePid, true
@@ -204,7 +208,7 @@ func (o *AssetSubscriptionDeviceContractInformation) GetDevicePidOk() (*string, 
 
 // HasDevicePid returns a boolean if a field has been set.
 func (o *AssetSubscriptionDeviceContractInformation) HasDevicePid() bool {
-	if o != nil && o.DevicePid != nil {
+	if o != nil && !IsNil(o.DevicePid) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *AssetSubscriptionDeviceContractInformation) SetDevicePid(v string) {
 
 // GetSubscriptionRefId returns the SubscriptionRefId field value if set, zero value otherwise.
 func (o *AssetSubscriptionDeviceContractInformation) GetSubscriptionRefId() string {
-	if o == nil || o.SubscriptionRefId == nil {
+	if o == nil || IsNil(o.SubscriptionRefId) {
 		var ret string
 		return ret
 	}
@@ -228,7 +232,7 @@ func (o *AssetSubscriptionDeviceContractInformation) GetSubscriptionRefId() stri
 // GetSubscriptionRefIdOk returns a tuple with the SubscriptionRefId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetSubscriptionDeviceContractInformation) GetSubscriptionRefIdOk() (*string, bool) {
-	if o == nil || o.SubscriptionRefId == nil {
+	if o == nil || IsNil(o.SubscriptionRefId) {
 		return nil, false
 	}
 	return o.SubscriptionRefId, true
@@ -236,7 +240,7 @@ func (o *AssetSubscriptionDeviceContractInformation) GetSubscriptionRefIdOk() (*
 
 // HasSubscriptionRefId returns a boolean if a field has been set.
 func (o *AssetSubscriptionDeviceContractInformation) HasSubscriptionRefId() bool {
-	if o != nil && o.SubscriptionRefId != nil {
+	if o != nil && !IsNil(o.SubscriptionRefId) {
 		return true
 	}
 
@@ -248,113 +252,161 @@ func (o *AssetSubscriptionDeviceContractInformation) SetSubscriptionRefId(v stri
 	o.SubscriptionRefId = &v
 }
 
-// GetDeviceContractInformation returns the DeviceContractInformation field value if set, zero value otherwise.
+// GetDeviceContractInformation returns the DeviceContractInformation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetSubscriptionDeviceContractInformation) GetDeviceContractInformation() AssetDeviceContractInformationRelationship {
-	if o == nil || o.DeviceContractInformation == nil {
+	if o == nil || IsNil(o.DeviceContractInformation.Get()) {
 		var ret AssetDeviceContractInformationRelationship
 		return ret
 	}
-	return *o.DeviceContractInformation
+	return *o.DeviceContractInformation.Get()
 }
 
 // GetDeviceContractInformationOk returns a tuple with the DeviceContractInformation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetSubscriptionDeviceContractInformation) GetDeviceContractInformationOk() (*AssetDeviceContractInformationRelationship, bool) {
-	if o == nil || o.DeviceContractInformation == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeviceContractInformation, true
+	return o.DeviceContractInformation.Get(), o.DeviceContractInformation.IsSet()
 }
 
 // HasDeviceContractInformation returns a boolean if a field has been set.
 func (o *AssetSubscriptionDeviceContractInformation) HasDeviceContractInformation() bool {
-	if o != nil && o.DeviceContractInformation != nil {
+	if o != nil && o.DeviceContractInformation.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeviceContractInformation gets a reference to the given AssetDeviceContractInformationRelationship and assigns it to the DeviceContractInformation field.
+// SetDeviceContractInformation gets a reference to the given NullableAssetDeviceContractInformationRelationship and assigns it to the DeviceContractInformation field.
 func (o *AssetSubscriptionDeviceContractInformation) SetDeviceContractInformation(v AssetDeviceContractInformationRelationship) {
-	o.DeviceContractInformation = &v
+	o.DeviceContractInformation.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetDeviceContractInformationNil sets the value for DeviceContractInformation to be an explicit nil
+func (o *AssetSubscriptionDeviceContractInformation) SetDeviceContractInformationNil() {
+	o.DeviceContractInformation.Set(nil)
+}
+
+// UnsetDeviceContractInformation ensures that no value is present for DeviceContractInformation, not even an explicit nil
+func (o *AssetSubscriptionDeviceContractInformation) UnsetDeviceContractInformation() {
+	o.DeviceContractInformation.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetSubscriptionDeviceContractInformation) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetSubscriptionDeviceContractInformation) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *AssetSubscriptionDeviceContractInformation) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *AssetSubscriptionDeviceContractInformation) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *AssetSubscriptionDeviceContractInformation) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *AssetSubscriptionDeviceContractInformation) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o AssetSubscriptionDeviceContractInformation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetSubscriptionDeviceContractInformation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeviceId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeviceId) {
 		toSerialize["DeviceId"] = o.DeviceId
 	}
 	if o.DeviceInformation.IsSet() {
 		toSerialize["DeviceInformation"] = o.DeviceInformation.Get()
 	}
-	if o.DevicePid != nil {
+	if !IsNil(o.DevicePid) {
 		toSerialize["DevicePid"] = o.DevicePid
 	}
-	if o.SubscriptionRefId != nil {
+	if !IsNil(o.SubscriptionRefId) {
 		toSerialize["SubscriptionRefId"] = o.SubscriptionRefId
 	}
-	if o.DeviceContractInformation != nil {
-		toSerialize["DeviceContractInformation"] = o.DeviceContractInformation
+	if o.DeviceContractInformation.IsSet() {
+		toSerialize["DeviceContractInformation"] = o.DeviceContractInformation.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetSubscriptionDeviceContractInformation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetSubscriptionDeviceContractInformation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetSubscriptionDeviceContractInformationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -366,14 +418,14 @@ func (o *AssetSubscriptionDeviceContractInformation) UnmarshalJSON(bytes []byte)
 		// Product identifier for the specified Cisco device. It is used to distinguish between HyperFlex and UCS devices.
 		DevicePid *string `json:"DevicePid,omitempty"`
 		// Identifies the consumption-based subscription.
-		SubscriptionRefId         *string                                     `json:"SubscriptionRefId,omitempty"`
-		DeviceContractInformation *AssetDeviceContractInformationRelationship `json:"DeviceContractInformation,omitempty"`
-		RegisteredDevice          *AssetDeviceRegistrationRelationship        `json:"RegisteredDevice,omitempty"`
+		SubscriptionRefId         *string                                            `json:"SubscriptionRefId,omitempty"`
+		DeviceContractInformation NullableAssetDeviceContractInformationRelationship `json:"DeviceContractInformation,omitempty"`
+		RegisteredDevice          NullableAssetDeviceRegistrationRelationship        `json:"RegisteredDevice,omitempty"`
 	}
 
 	varAssetSubscriptionDeviceContractInformationWithoutEmbeddedStruct := AssetSubscriptionDeviceContractInformationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetSubscriptionDeviceContractInformationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetSubscriptionDeviceContractInformationWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetSubscriptionDeviceContractInformation := _AssetSubscriptionDeviceContractInformation{}
 		varAssetSubscriptionDeviceContractInformation.ClassId = varAssetSubscriptionDeviceContractInformationWithoutEmbeddedStruct.ClassId
@@ -391,7 +443,7 @@ func (o *AssetSubscriptionDeviceContractInformation) UnmarshalJSON(bytes []byte)
 
 	varAssetSubscriptionDeviceContractInformation := _AssetSubscriptionDeviceContractInformation{}
 
-	err = json.Unmarshal(bytes, &varAssetSubscriptionDeviceContractInformation)
+	err = json.Unmarshal(data, &varAssetSubscriptionDeviceContractInformation)
 	if err == nil {
 		o.MoBaseMo = varAssetSubscriptionDeviceContractInformation.MoBaseMo
 	} else {
@@ -400,7 +452,7 @@ func (o *AssetSubscriptionDeviceContractInformation) UnmarshalJSON(bytes []byte)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeviceId")

@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.Cluster"]
 **ConnectionStatus** | Pointer to **string** | Status of the endpoint connection of this Kubernetes cluster. * &#x60;&#x60; - The target details have been persisted but Intersight has not yet attempted to connect to the target. * &#x60;Connected&#x60; - Intersight is able to establish a connection to the target and initiate management activities. * &#x60;NotConnected&#x60; - Intersight is unable to establish a connection to the target. * &#x60;ClaimInProgress&#x60; - Claim of the target is in progress. A connection to the target has not been fully established. * &#x60;UnclaimInProgress&#x60; - Unclaim of the target is in progress. Intersight is able to connect to the target and all management operations are supported. * &#x60;Unclaimed&#x60; - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight. * &#x60;Claimed&#x60; - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect. | [optional] [default to ""]
 **KubeConfig** | Pointer to **string** | Kubeconfig for the cluster to collect inventory for. | [optional] 
-**ClusterAddonProfile** | Pointer to [**KubernetesClusterAddonProfileRelationship**](KubernetesClusterAddonProfileRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ClusterAddonProfile** | Pointer to [**NullableKubernetesClusterAddonProfileRelationship**](KubernetesClusterAddonProfileRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **RegisteredDevices** | Pointer to [**[]AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) | An array of relationships to assetDeviceRegistration resources. | [optional] 
 
 ## Methods
@@ -146,6 +146,16 @@ SetClusterAddonProfile sets ClusterAddonProfile field to given value.
 
 HasClusterAddonProfile returns a boolean if a field has been set.
 
+### SetClusterAddonProfileNil
+
+`func (o *KubernetesCluster) SetClusterAddonProfileNil(b bool)`
+
+ SetClusterAddonProfileNil sets the value for ClusterAddonProfile to be an explicit nil
+
+### UnsetClusterAddonProfile
+`func (o *KubernetesCluster) UnsetClusterAddonProfile()`
+
+UnsetClusterAddonProfile ensures that no value is present for ClusterAddonProfile, not even an explicit nil
 ### GetOrganization
 
 `func (o *KubernetesCluster) GetOrganization() OrganizationOrganizationRelationship`
@@ -171,6 +181,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *KubernetesCluster) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *KubernetesCluster) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetRegisteredDevices
 
 `func (o *KubernetesCluster) GetRegisteredDevices() []AssetDeviceRegistrationRelationship`

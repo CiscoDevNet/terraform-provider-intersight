@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VmediaMapping type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VmediaMapping{}
 
 // VmediaMapping Virtual Media mapping settings required to map images from remote server.
 type VmediaMapping struct {
@@ -140,7 +144,7 @@ func (o *VmediaMapping) SetObjectType(v string) {
 
 // GetAuthenticationProtocol returns the AuthenticationProtocol field value if set, zero value otherwise.
 func (o *VmediaMapping) GetAuthenticationProtocol() string {
-	if o == nil || o.AuthenticationProtocol == nil {
+	if o == nil || IsNil(o.AuthenticationProtocol) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *VmediaMapping) GetAuthenticationProtocol() string {
 // GetAuthenticationProtocolOk returns a tuple with the AuthenticationProtocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetAuthenticationProtocolOk() (*string, bool) {
-	if o == nil || o.AuthenticationProtocol == nil {
+	if o == nil || IsNil(o.AuthenticationProtocol) {
 		return nil, false
 	}
 	return o.AuthenticationProtocol, true
@@ -158,7 +162,7 @@ func (o *VmediaMapping) GetAuthenticationProtocolOk() (*string, bool) {
 
 // HasAuthenticationProtocol returns a boolean if a field has been set.
 func (o *VmediaMapping) HasAuthenticationProtocol() bool {
-	if o != nil && o.AuthenticationProtocol != nil {
+	if o != nil && !IsNil(o.AuthenticationProtocol) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *VmediaMapping) SetAuthenticationProtocol(v string) {
 
 // GetDeviceType returns the DeviceType field value if set, zero value otherwise.
 func (o *VmediaMapping) GetDeviceType() string {
-	if o == nil || o.DeviceType == nil {
+	if o == nil || IsNil(o.DeviceType) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *VmediaMapping) GetDeviceType() string {
 // GetDeviceTypeOk returns a tuple with the DeviceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetDeviceTypeOk() (*string, bool) {
-	if o == nil || o.DeviceType == nil {
+	if o == nil || IsNil(o.DeviceType) {
 		return nil, false
 	}
 	return o.DeviceType, true
@@ -190,7 +194,7 @@ func (o *VmediaMapping) GetDeviceTypeOk() (*string, bool) {
 
 // HasDeviceType returns a boolean if a field has been set.
 func (o *VmediaMapping) HasDeviceType() bool {
-	if o != nil && o.DeviceType != nil {
+	if o != nil && !IsNil(o.DeviceType) {
 		return true
 	}
 
@@ -204,7 +208,7 @@ func (o *VmediaMapping) SetDeviceType(v string) {
 
 // GetFileLocation returns the FileLocation field value if set, zero value otherwise.
 func (o *VmediaMapping) GetFileLocation() string {
-	if o == nil || o.FileLocation == nil {
+	if o == nil || IsNil(o.FileLocation) {
 		var ret string
 		return ret
 	}
@@ -214,7 +218,7 @@ func (o *VmediaMapping) GetFileLocation() string {
 // GetFileLocationOk returns a tuple with the FileLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetFileLocationOk() (*string, bool) {
-	if o == nil || o.FileLocation == nil {
+	if o == nil || IsNil(o.FileLocation) {
 		return nil, false
 	}
 	return o.FileLocation, true
@@ -222,7 +226,7 @@ func (o *VmediaMapping) GetFileLocationOk() (*string, bool) {
 
 // HasFileLocation returns a boolean if a field has been set.
 func (o *VmediaMapping) HasFileLocation() bool {
-	if o != nil && o.FileLocation != nil {
+	if o != nil && !IsNil(o.FileLocation) {
 		return true
 	}
 
@@ -236,7 +240,7 @@ func (o *VmediaMapping) SetFileLocation(v string) {
 
 // GetHostName returns the HostName field value if set, zero value otherwise.
 func (o *VmediaMapping) GetHostName() string {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		var ret string
 		return ret
 	}
@@ -246,7 +250,7 @@ func (o *VmediaMapping) GetHostName() string {
 // GetHostNameOk returns a tuple with the HostName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetHostNameOk() (*string, bool) {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		return nil, false
 	}
 	return o.HostName, true
@@ -254,7 +258,7 @@ func (o *VmediaMapping) GetHostNameOk() (*string, bool) {
 
 // HasHostName returns a boolean if a field has been set.
 func (o *VmediaMapping) HasHostName() bool {
-	if o != nil && o.HostName != nil {
+	if o != nil && !IsNil(o.HostName) {
 		return true
 	}
 
@@ -268,7 +272,7 @@ func (o *VmediaMapping) SetHostName(v string) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *VmediaMapping) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -278,7 +282,7 @@ func (o *VmediaMapping) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -286,7 +290,7 @@ func (o *VmediaMapping) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *VmediaMapping) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -300,7 +304,7 @@ func (o *VmediaMapping) SetIsPasswordSet(v bool) {
 
 // GetMountOptions returns the MountOptions field value if set, zero value otherwise.
 func (o *VmediaMapping) GetMountOptions() string {
-	if o == nil || o.MountOptions == nil {
+	if o == nil || IsNil(o.MountOptions) {
 		var ret string
 		return ret
 	}
@@ -310,7 +314,7 @@ func (o *VmediaMapping) GetMountOptions() string {
 // GetMountOptionsOk returns a tuple with the MountOptions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetMountOptionsOk() (*string, bool) {
-	if o == nil || o.MountOptions == nil {
+	if o == nil || IsNil(o.MountOptions) {
 		return nil, false
 	}
 	return o.MountOptions, true
@@ -318,7 +322,7 @@ func (o *VmediaMapping) GetMountOptionsOk() (*string, bool) {
 
 // HasMountOptions returns a boolean if a field has been set.
 func (o *VmediaMapping) HasMountOptions() bool {
-	if o != nil && o.MountOptions != nil {
+	if o != nil && !IsNil(o.MountOptions) {
 		return true
 	}
 
@@ -332,7 +336,7 @@ func (o *VmediaMapping) SetMountOptions(v string) {
 
 // GetMountProtocol returns the MountProtocol field value if set, zero value otherwise.
 func (o *VmediaMapping) GetMountProtocol() string {
-	if o == nil || o.MountProtocol == nil {
+	if o == nil || IsNil(o.MountProtocol) {
 		var ret string
 		return ret
 	}
@@ -342,7 +346,7 @@ func (o *VmediaMapping) GetMountProtocol() string {
 // GetMountProtocolOk returns a tuple with the MountProtocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetMountProtocolOk() (*string, bool) {
-	if o == nil || o.MountProtocol == nil {
+	if o == nil || IsNil(o.MountProtocol) {
 		return nil, false
 	}
 	return o.MountProtocol, true
@@ -350,7 +354,7 @@ func (o *VmediaMapping) GetMountProtocolOk() (*string, bool) {
 
 // HasMountProtocol returns a boolean if a field has been set.
 func (o *VmediaMapping) HasMountProtocol() bool {
-	if o != nil && o.MountProtocol != nil {
+	if o != nil && !IsNil(o.MountProtocol) {
 		return true
 	}
 
@@ -364,7 +368,7 @@ func (o *VmediaMapping) SetMountProtocol(v string) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *VmediaMapping) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -374,7 +378,7 @@ func (o *VmediaMapping) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -382,7 +386,7 @@ func (o *VmediaMapping) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *VmediaMapping) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -396,7 +400,7 @@ func (o *VmediaMapping) SetPassword(v string) {
 
 // GetRemoteFile returns the RemoteFile field value if set, zero value otherwise.
 func (o *VmediaMapping) GetRemoteFile() string {
-	if o == nil || o.RemoteFile == nil {
+	if o == nil || IsNil(o.RemoteFile) {
 		var ret string
 		return ret
 	}
@@ -406,7 +410,7 @@ func (o *VmediaMapping) GetRemoteFile() string {
 // GetRemoteFileOk returns a tuple with the RemoteFile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetRemoteFileOk() (*string, bool) {
-	if o == nil || o.RemoteFile == nil {
+	if o == nil || IsNil(o.RemoteFile) {
 		return nil, false
 	}
 	return o.RemoteFile, true
@@ -414,7 +418,7 @@ func (o *VmediaMapping) GetRemoteFileOk() (*string, bool) {
 
 // HasRemoteFile returns a boolean if a field has been set.
 func (o *VmediaMapping) HasRemoteFile() bool {
-	if o != nil && o.RemoteFile != nil {
+	if o != nil && !IsNil(o.RemoteFile) {
 		return true
 	}
 
@@ -428,7 +432,7 @@ func (o *VmediaMapping) SetRemoteFile(v string) {
 
 // GetRemotePath returns the RemotePath field value if set, zero value otherwise.
 func (o *VmediaMapping) GetRemotePath() string {
-	if o == nil || o.RemotePath == nil {
+	if o == nil || IsNil(o.RemotePath) {
 		var ret string
 		return ret
 	}
@@ -438,7 +442,7 @@ func (o *VmediaMapping) GetRemotePath() string {
 // GetRemotePathOk returns a tuple with the RemotePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetRemotePathOk() (*string, bool) {
-	if o == nil || o.RemotePath == nil {
+	if o == nil || IsNil(o.RemotePath) {
 		return nil, false
 	}
 	return o.RemotePath, true
@@ -446,7 +450,7 @@ func (o *VmediaMapping) GetRemotePathOk() (*string, bool) {
 
 // HasRemotePath returns a boolean if a field has been set.
 func (o *VmediaMapping) HasRemotePath() bool {
-	if o != nil && o.RemotePath != nil {
+	if o != nil && !IsNil(o.RemotePath) {
 		return true
 	}
 
@@ -460,7 +464,7 @@ func (o *VmediaMapping) SetRemotePath(v string) {
 
 // GetSanitizedFileLocation returns the SanitizedFileLocation field value if set, zero value otherwise.
 func (o *VmediaMapping) GetSanitizedFileLocation() string {
-	if o == nil || o.SanitizedFileLocation == nil {
+	if o == nil || IsNil(o.SanitizedFileLocation) {
 		var ret string
 		return ret
 	}
@@ -470,7 +474,7 @@ func (o *VmediaMapping) GetSanitizedFileLocation() string {
 // GetSanitizedFileLocationOk returns a tuple with the SanitizedFileLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetSanitizedFileLocationOk() (*string, bool) {
-	if o == nil || o.SanitizedFileLocation == nil {
+	if o == nil || IsNil(o.SanitizedFileLocation) {
 		return nil, false
 	}
 	return o.SanitizedFileLocation, true
@@ -478,7 +482,7 @@ func (o *VmediaMapping) GetSanitizedFileLocationOk() (*string, bool) {
 
 // HasSanitizedFileLocation returns a boolean if a field has been set.
 func (o *VmediaMapping) HasSanitizedFileLocation() bool {
-	if o != nil && o.SanitizedFileLocation != nil {
+	if o != nil && !IsNil(o.SanitizedFileLocation) {
 		return true
 	}
 
@@ -492,7 +496,7 @@ func (o *VmediaMapping) SetSanitizedFileLocation(v string) {
 
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *VmediaMapping) GetUsername() string {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		var ret string
 		return ret
 	}
@@ -502,7 +506,7 @@ func (o *VmediaMapping) GetUsername() string {
 // GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		return nil, false
 	}
 	return o.Username, true
@@ -510,7 +514,7 @@ func (o *VmediaMapping) GetUsernameOk() (*string, bool) {
 
 // HasUsername returns a boolean if a field has been set.
 func (o *VmediaMapping) HasUsername() bool {
-	if o != nil && o.Username != nil {
+	if o != nil && !IsNil(o.Username) {
 		return true
 	}
 
@@ -524,7 +528,7 @@ func (o *VmediaMapping) SetUsername(v string) {
 
 // GetVolumeName returns the VolumeName field value if set, zero value otherwise.
 func (o *VmediaMapping) GetVolumeName() string {
-	if o == nil || o.VolumeName == nil {
+	if o == nil || IsNil(o.VolumeName) {
 		var ret string
 		return ret
 	}
@@ -534,7 +538,7 @@ func (o *VmediaMapping) GetVolumeName() string {
 // GetVolumeNameOk returns a tuple with the VolumeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VmediaMapping) GetVolumeNameOk() (*string, bool) {
-	if o == nil || o.VolumeName == nil {
+	if o == nil || IsNil(o.VolumeName) {
 		return nil, false
 	}
 	return o.VolumeName, true
@@ -542,7 +546,7 @@ func (o *VmediaMapping) GetVolumeNameOk() (*string, bool) {
 
 // HasVolumeName returns a boolean if a field has been set.
 func (o *VmediaMapping) HasVolumeName() bool {
-	if o != nil && o.VolumeName != nil {
+	if o != nil && !IsNil(o.VolumeName) {
 		return true
 	}
 
@@ -555,58 +559,62 @@ func (o *VmediaMapping) SetVolumeName(v string) {
 }
 
 func (o VmediaMapping) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VmediaMapping) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AuthenticationProtocol != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AuthenticationProtocol) {
 		toSerialize["AuthenticationProtocol"] = o.AuthenticationProtocol
 	}
-	if o.DeviceType != nil {
+	if !IsNil(o.DeviceType) {
 		toSerialize["DeviceType"] = o.DeviceType
 	}
-	if o.FileLocation != nil {
+	if !IsNil(o.FileLocation) {
 		toSerialize["FileLocation"] = o.FileLocation
 	}
-	if o.HostName != nil {
+	if !IsNil(o.HostName) {
 		toSerialize["HostName"] = o.HostName
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.MountOptions != nil {
+	if !IsNil(o.MountOptions) {
 		toSerialize["MountOptions"] = o.MountOptions
 	}
-	if o.MountProtocol != nil {
+	if !IsNil(o.MountProtocol) {
 		toSerialize["MountProtocol"] = o.MountProtocol
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.RemoteFile != nil {
+	if !IsNil(o.RemoteFile) {
 		toSerialize["RemoteFile"] = o.RemoteFile
 	}
-	if o.RemotePath != nil {
+	if !IsNil(o.RemotePath) {
 		toSerialize["RemotePath"] = o.RemotePath
 	}
-	if o.SanitizedFileLocation != nil {
+	if !IsNil(o.SanitizedFileLocation) {
 		toSerialize["SanitizedFileLocation"] = o.SanitizedFileLocation
 	}
-	if o.Username != nil {
+	if !IsNil(o.Username) {
 		toSerialize["Username"] = o.Username
 	}
-	if o.VolumeName != nil {
+	if !IsNil(o.VolumeName) {
 		toSerialize["VolumeName"] = o.VolumeName
 	}
 
@@ -614,10 +622,32 @@ func (o VmediaMapping) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VmediaMapping) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VmediaMapping) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VmediaMappingWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -653,7 +683,7 @@ func (o *VmediaMapping) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVmediaMappingWithoutEmbeddedStruct := VmediaMappingWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVmediaMappingWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVmediaMappingWithoutEmbeddedStruct)
 	if err == nil {
 		varVmediaMapping := _VmediaMapping{}
 		varVmediaMapping.ClassId = varVmediaMappingWithoutEmbeddedStruct.ClassId
@@ -678,7 +708,7 @@ func (o *VmediaMapping) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVmediaMapping := _VmediaMapping{}
 
-	err = json.Unmarshal(bytes, &varVmediaMapping)
+	err = json.Unmarshal(data, &varVmediaMapping)
 	if err == nil {
 		o.MoBaseComplexType = varVmediaMapping.MoBaseComplexType
 	} else {
@@ -687,7 +717,7 @@ func (o *VmediaMapping) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AuthenticationProtocol")

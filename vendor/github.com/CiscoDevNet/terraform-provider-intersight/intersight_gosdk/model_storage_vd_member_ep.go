@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageVdMemberEp type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageVdMemberEp{}
 
 // StorageVdMemberEp Reference to LocalDisk to build up a VirtualDrive.
 type StorageVdMemberEp struct {
@@ -33,10 +37,10 @@ type StorageVdMemberEp struct {
 	// The span id number of the virtual drive.
 	SpanId *string `json:"SpanId,omitempty"`
 	// The local disk slot number as id.
-	VdMemberEpId         *int64                               `json:"VdMemberEpId,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	StorageVirtualDrive  *StorageVirtualDriveRelationship     `json:"StorageVirtualDrive,omitempty"`
+	VdMemberEpId         *int64                                      `json:"VdMemberEpId,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	StorageVirtualDrive  NullableStorageVirtualDriveRelationship     `json:"StorageVirtualDrive,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *StorageVdMemberEp) SetObjectType(v string) {
 
 // GetOperQualifierReason returns the OperQualifierReason field value if set, zero value otherwise.
 func (o *StorageVdMemberEp) GetOperQualifierReason() string {
-	if o == nil || o.OperQualifierReason == nil {
+	if o == nil || IsNil(o.OperQualifierReason) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *StorageVdMemberEp) GetOperQualifierReason() string {
 // GetOperQualifierReasonOk returns a tuple with the OperQualifierReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVdMemberEp) GetOperQualifierReasonOk() (*string, bool) {
-	if o == nil || o.OperQualifierReason == nil {
+	if o == nil || IsNil(o.OperQualifierReason) {
 		return nil, false
 	}
 	return o.OperQualifierReason, true
@@ -133,7 +137,7 @@ func (o *StorageVdMemberEp) GetOperQualifierReasonOk() (*string, bool) {
 
 // HasOperQualifierReason returns a boolean if a field has been set.
 func (o *StorageVdMemberEp) HasOperQualifierReason() bool {
-	if o != nil && o.OperQualifierReason != nil {
+	if o != nil && !IsNil(o.OperQualifierReason) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *StorageVdMemberEp) SetOperQualifierReason(v string) {
 
 // GetPresence returns the Presence field value if set, zero value otherwise.
 func (o *StorageVdMemberEp) GetPresence() string {
-	if o == nil || o.Presence == nil {
+	if o == nil || IsNil(o.Presence) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *StorageVdMemberEp) GetPresence() string {
 // GetPresenceOk returns a tuple with the Presence field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVdMemberEp) GetPresenceOk() (*string, bool) {
-	if o == nil || o.Presence == nil {
+	if o == nil || IsNil(o.Presence) {
 		return nil, false
 	}
 	return o.Presence, true
@@ -165,7 +169,7 @@ func (o *StorageVdMemberEp) GetPresenceOk() (*string, bool) {
 
 // HasPresence returns a boolean if a field has been set.
 func (o *StorageVdMemberEp) HasPresence() bool {
-	if o != nil && o.Presence != nil {
+	if o != nil && !IsNil(o.Presence) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *StorageVdMemberEp) SetPresence(v string) {
 
 // GetRole returns the Role field value if set, zero value otherwise.
 func (o *StorageVdMemberEp) GetRole() string {
-	if o == nil || o.Role == nil {
+	if o == nil || IsNil(o.Role) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *StorageVdMemberEp) GetRole() string {
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVdMemberEp) GetRoleOk() (*string, bool) {
-	if o == nil || o.Role == nil {
+	if o == nil || IsNil(o.Role) {
 		return nil, false
 	}
 	return o.Role, true
@@ -197,7 +201,7 @@ func (o *StorageVdMemberEp) GetRoleOk() (*string, bool) {
 
 // HasRole returns a boolean if a field has been set.
 func (o *StorageVdMemberEp) HasRole() bool {
-	if o != nil && o.Role != nil {
+	if o != nil && !IsNil(o.Role) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *StorageVdMemberEp) SetRole(v string) {
 
 // GetSpanId returns the SpanId field value if set, zero value otherwise.
 func (o *StorageVdMemberEp) GetSpanId() string {
-	if o == nil || o.SpanId == nil {
+	if o == nil || IsNil(o.SpanId) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *StorageVdMemberEp) GetSpanId() string {
 // GetSpanIdOk returns a tuple with the SpanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVdMemberEp) GetSpanIdOk() (*string, bool) {
-	if o == nil || o.SpanId == nil {
+	if o == nil || IsNil(o.SpanId) {
 		return nil, false
 	}
 	return o.SpanId, true
@@ -229,7 +233,7 @@ func (o *StorageVdMemberEp) GetSpanIdOk() (*string, bool) {
 
 // HasSpanId returns a boolean if a field has been set.
 func (o *StorageVdMemberEp) HasSpanId() bool {
-	if o != nil && o.SpanId != nil {
+	if o != nil && !IsNil(o.SpanId) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *StorageVdMemberEp) SetSpanId(v string) {
 
 // GetVdMemberEpId returns the VdMemberEpId field value if set, zero value otherwise.
 func (o *StorageVdMemberEp) GetVdMemberEpId() int64 {
-	if o == nil || o.VdMemberEpId == nil {
+	if o == nil || IsNil(o.VdMemberEpId) {
 		var ret int64
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *StorageVdMemberEp) GetVdMemberEpId() int64 {
 // GetVdMemberEpIdOk returns a tuple with the VdMemberEpId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageVdMemberEp) GetVdMemberEpIdOk() (*int64, bool) {
-	if o == nil || o.VdMemberEpId == nil {
+	if o == nil || IsNil(o.VdMemberEpId) {
 		return nil, false
 	}
 	return o.VdMemberEpId, true
@@ -261,7 +265,7 @@ func (o *StorageVdMemberEp) GetVdMemberEpIdOk() (*int64, bool) {
 
 // HasVdMemberEpId returns a boolean if a field has been set.
 func (o *StorageVdMemberEp) HasVdMemberEpId() bool {
-	if o != nil && o.VdMemberEpId != nil {
+	if o != nil && !IsNil(o.VdMemberEpId) {
 		return true
 	}
 
@@ -273,151 +277,210 @@ func (o *StorageVdMemberEp) SetVdMemberEpId(v int64) {
 	o.VdMemberEpId = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVdMemberEp) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVdMemberEp) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *StorageVdMemberEp) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *StorageVdMemberEp) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *StorageVdMemberEp) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *StorageVdMemberEp) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVdMemberEp) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVdMemberEp) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageVdMemberEp) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageVdMemberEp) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetStorageVirtualDrive returns the StorageVirtualDrive field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageVdMemberEp) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageVdMemberEp) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetStorageVirtualDrive returns the StorageVirtualDrive field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageVdMemberEp) GetStorageVirtualDrive() StorageVirtualDriveRelationship {
-	if o == nil || o.StorageVirtualDrive == nil {
+	if o == nil || IsNil(o.StorageVirtualDrive.Get()) {
 		var ret StorageVirtualDriveRelationship
 		return ret
 	}
-	return *o.StorageVirtualDrive
+	return *o.StorageVirtualDrive.Get()
 }
 
 // GetStorageVirtualDriveOk returns a tuple with the StorageVirtualDrive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageVdMemberEp) GetStorageVirtualDriveOk() (*StorageVirtualDriveRelationship, bool) {
-	if o == nil || o.StorageVirtualDrive == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageVirtualDrive, true
+	return o.StorageVirtualDrive.Get(), o.StorageVirtualDrive.IsSet()
 }
 
 // HasStorageVirtualDrive returns a boolean if a field has been set.
 func (o *StorageVdMemberEp) HasStorageVirtualDrive() bool {
-	if o != nil && o.StorageVirtualDrive != nil {
+	if o != nil && o.StorageVirtualDrive.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageVirtualDrive gets a reference to the given StorageVirtualDriveRelationship and assigns it to the StorageVirtualDrive field.
+// SetStorageVirtualDrive gets a reference to the given NullableStorageVirtualDriveRelationship and assigns it to the StorageVirtualDrive field.
 func (o *StorageVdMemberEp) SetStorageVirtualDrive(v StorageVirtualDriveRelationship) {
-	o.StorageVirtualDrive = &v
+	o.StorageVirtualDrive.Set(&v)
+}
+
+// SetStorageVirtualDriveNil sets the value for StorageVirtualDrive to be an explicit nil
+func (o *StorageVdMemberEp) SetStorageVirtualDriveNil() {
+	o.StorageVirtualDrive.Set(nil)
+}
+
+// UnsetStorageVirtualDrive ensures that no value is present for StorageVirtualDrive, not even an explicit nil
+func (o *StorageVdMemberEp) UnsetStorageVirtualDrive() {
+	o.StorageVirtualDrive.Unset()
 }
 
 func (o StorageVdMemberEp) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageVdMemberEp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.OperQualifierReason != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.OperQualifierReason) {
 		toSerialize["OperQualifierReason"] = o.OperQualifierReason
 	}
-	if o.Presence != nil {
+	if !IsNil(o.Presence) {
 		toSerialize["Presence"] = o.Presence
 	}
-	if o.Role != nil {
+	if !IsNil(o.Role) {
 		toSerialize["Role"] = o.Role
 	}
-	if o.SpanId != nil {
+	if !IsNil(o.SpanId) {
 		toSerialize["SpanId"] = o.SpanId
 	}
-	if o.VdMemberEpId != nil {
+	if !IsNil(o.VdMemberEpId) {
 		toSerialize["VdMemberEpId"] = o.VdMemberEpId
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.StorageVirtualDrive != nil {
-		toSerialize["StorageVirtualDrive"] = o.StorageVirtualDrive
+	if o.StorageVirtualDrive.IsSet() {
+		toSerialize["StorageVirtualDrive"] = o.StorageVirtualDrive.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageVdMemberEp) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageVdMemberEp) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageVdMemberEpWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -432,15 +495,15 @@ func (o *StorageVdMemberEp) UnmarshalJSON(bytes []byte) (err error) {
 		// The span id number of the virtual drive.
 		SpanId *string `json:"SpanId,omitempty"`
 		// The local disk slot number as id.
-		VdMemberEpId        *int64                               `json:"VdMemberEpId,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		StorageVirtualDrive *StorageVirtualDriveRelationship     `json:"StorageVirtualDrive,omitempty"`
+		VdMemberEpId        *int64                                      `json:"VdMemberEpId,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		StorageVirtualDrive NullableStorageVirtualDriveRelationship     `json:"StorageVirtualDrive,omitempty"`
 	}
 
 	varStorageVdMemberEpWithoutEmbeddedStruct := StorageVdMemberEpWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageVdMemberEpWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageVdMemberEpWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageVdMemberEp := _StorageVdMemberEp{}
 		varStorageVdMemberEp.ClassId = varStorageVdMemberEpWithoutEmbeddedStruct.ClassId
@@ -460,7 +523,7 @@ func (o *StorageVdMemberEp) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageVdMemberEp := _StorageVdMemberEp{}
 
-	err = json.Unmarshal(bytes, &varStorageVdMemberEp)
+	err = json.Unmarshal(data, &varStorageVdMemberEp)
 	if err == nil {
 		o.InventoryBase = varStorageVdMemberEp.InventoryBase
 	} else {
@@ -469,7 +532,7 @@ func (o *StorageVdMemberEp) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "OperQualifierReason")

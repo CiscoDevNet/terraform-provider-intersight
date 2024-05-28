@@ -31,14 +31,14 @@ Name | Type | Description | Notes
 **Uuid** | Pointer to **string** | The uuid of the virtual drive. | [optional] [readonly] 
 **VendorUuid** | Pointer to **string** | The UUID value of the vendor. | [optional] [readonly] 
 **VirtualDriveId** | Pointer to **string** | The identifier for this Virtual drive. | [optional] [readonly] 
-**DiskGroup** | Pointer to [**StorageDiskGroupRelationship**](StorageDiskGroupRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**DiskGroup** | Pointer to [**NullableStorageDiskGroupRelationship**](StorageDiskGroupRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PhysicalDiskUsages** | Pointer to [**[]StoragePhysicalDiskUsageRelationship**](StoragePhysicalDiskUsageRelationship.md) | An array of relationships to storagePhysicalDiskUsage resources. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StorageController** | Pointer to [**StorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
-**StorageVirtualDriveContainer** | Pointer to [**StorageVirtualDriveContainerRelationship**](StorageVirtualDriveContainerRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageController** | Pointer to [**NullableStorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
+**StorageVirtualDriveContainer** | Pointer to [**NullableStorageVirtualDriveContainerRelationship**](StorageVirtualDriveContainerRelationship.md) |  | [optional] 
 **VdMemberEps** | Pointer to [**[]StorageVdMemberEpRelationship**](StorageVdMemberEpRelationship.md) | An array of relationships to storageVdMemberEp resources. | [optional] [readonly] 
-**VirtualDriveExtension** | Pointer to [**StorageVirtualDriveExtensionRelationship**](StorageVirtualDriveExtensionRelationship.md) |  | [optional] 
+**VirtualDriveExtension** | Pointer to [**NullableStorageVirtualDriveExtensionRelationship**](StorageVirtualDriveExtensionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -749,6 +749,16 @@ SetDiskGroup sets DiskGroup field to given value.
 
 HasDiskGroup returns a boolean if a field has been set.
 
+### SetDiskGroupNil
+
+`func (o *StorageVirtualDrive) SetDiskGroupNil(b bool)`
+
+ SetDiskGroupNil sets the value for DiskGroup to be an explicit nil
+
+### UnsetDiskGroup
+`func (o *StorageVirtualDrive) UnsetDiskGroup()`
+
+UnsetDiskGroup ensures that no value is present for DiskGroup, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *StorageVirtualDrive) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -774,6 +784,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StorageVirtualDrive) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StorageVirtualDrive) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetPhysicalDiskUsages
 
 `func (o *StorageVirtualDrive) GetPhysicalDiskUsages() []StoragePhysicalDiskUsageRelationship`
@@ -834,6 +854,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageVirtualDrive) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageVirtualDrive) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageController
 
 `func (o *StorageVirtualDrive) GetStorageController() StorageControllerRelationship`
@@ -859,6 +889,16 @@ SetStorageController sets StorageController field to given value.
 
 HasStorageController returns a boolean if a field has been set.
 
+### SetStorageControllerNil
+
+`func (o *StorageVirtualDrive) SetStorageControllerNil(b bool)`
+
+ SetStorageControllerNil sets the value for StorageController to be an explicit nil
+
+### UnsetStorageController
+`func (o *StorageVirtualDrive) UnsetStorageController()`
+
+UnsetStorageController ensures that no value is present for StorageController, not even an explicit nil
 ### GetStorageVirtualDriveContainer
 
 `func (o *StorageVirtualDrive) GetStorageVirtualDriveContainer() StorageVirtualDriveContainerRelationship`
@@ -884,6 +924,16 @@ SetStorageVirtualDriveContainer sets StorageVirtualDriveContainer field to given
 
 HasStorageVirtualDriveContainer returns a boolean if a field has been set.
 
+### SetStorageVirtualDriveContainerNil
+
+`func (o *StorageVirtualDrive) SetStorageVirtualDriveContainerNil(b bool)`
+
+ SetStorageVirtualDriveContainerNil sets the value for StorageVirtualDriveContainer to be an explicit nil
+
+### UnsetStorageVirtualDriveContainer
+`func (o *StorageVirtualDrive) UnsetStorageVirtualDriveContainer()`
+
+UnsetStorageVirtualDriveContainer ensures that no value is present for StorageVirtualDriveContainer, not even an explicit nil
 ### GetVdMemberEps
 
 `func (o *StorageVirtualDrive) GetVdMemberEps() []StorageVdMemberEpRelationship`
@@ -944,6 +994,16 @@ SetVirtualDriveExtension sets VirtualDriveExtension field to given value.
 
 HasVirtualDriveExtension returns a boolean if a field has been set.
 
+### SetVirtualDriveExtensionNil
+
+`func (o *StorageVirtualDrive) SetVirtualDriveExtensionNil(b bool)`
+
+ SetVirtualDriveExtensionNil sets the value for VirtualDriveExtension to be an explicit nil
+
+### UnsetVirtualDriveExtension
+`func (o *StorageVirtualDrive) UnsetVirtualDriveExtension()`
+
+UnsetVirtualDriveExtension ensures that no value is present for VirtualDriveExtension, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

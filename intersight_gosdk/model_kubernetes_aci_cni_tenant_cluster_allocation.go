@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesAciCniTenantClusterAllocation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesAciCniTenantClusterAllocation{}
 
 // KubernetesAciCniTenantClusterAllocation Internally generated parameter allocations for a k8s cluster using a particular ACI CNI profile.
 type KubernetesAciCniTenantClusterAllocation struct {
@@ -31,8 +35,8 @@ type KubernetesAciCniTenantClusterAllocation struct {
 	// End of VLAN range allocated to this tenant cluster.
 	VlanEnd *string `json:"VlanEnd,omitempty"`
 	// Start of VLAN range allocated to this tenant cluster.
-	VlanStart            *string                               `json:"VlanStart,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	VlanStart            *string                                      `json:"VlanStart,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) SetObjectType(v string) {
 
 // GetNodeSvcIpSubnet returns the NodeSvcIpSubnet field value if set, zero value otherwise.
 func (o *KubernetesAciCniTenantClusterAllocation) GetNodeSvcIpSubnet() string {
-	if o == nil || o.NodeSvcIpSubnet == nil {
+	if o == nil || IsNil(o.NodeSvcIpSubnet) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) GetNodeSvcIpSubnet() string {
 // GetNodeSvcIpSubnetOk returns a tuple with the NodeSvcIpSubnet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniTenantClusterAllocation) GetNodeSvcIpSubnetOk() (*string, bool) {
-	if o == nil || o.NodeSvcIpSubnet == nil {
+	if o == nil || IsNil(o.NodeSvcIpSubnet) {
 		return nil, false
 	}
 	return o.NodeSvcIpSubnet, true
@@ -129,7 +133,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) GetNodeSvcIpSubnetOk() (*strin
 
 // HasNodeSvcIpSubnet returns a boolean if a field has been set.
 func (o *KubernetesAciCniTenantClusterAllocation) HasNodeSvcIpSubnet() bool {
-	if o != nil && o.NodeSvcIpSubnet != nil {
+	if o != nil && !IsNil(o.NodeSvcIpSubnet) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) SetNodeSvcIpSubnet(v string) {
 
 // GetPodIpSubnet returns the PodIpSubnet field value if set, zero value otherwise.
 func (o *KubernetesAciCniTenantClusterAllocation) GetPodIpSubnet() string {
-	if o == nil || o.PodIpSubnet == nil {
+	if o == nil || IsNil(o.PodIpSubnet) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) GetPodIpSubnet() string {
 // GetPodIpSubnetOk returns a tuple with the PodIpSubnet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniTenantClusterAllocation) GetPodIpSubnetOk() (*string, bool) {
-	if o == nil || o.PodIpSubnet == nil {
+	if o == nil || IsNil(o.PodIpSubnet) {
 		return nil, false
 	}
 	return o.PodIpSubnet, true
@@ -161,7 +165,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) GetPodIpSubnetOk() (*string, b
 
 // HasPodIpSubnet returns a boolean if a field has been set.
 func (o *KubernetesAciCniTenantClusterAllocation) HasPodIpSubnet() bool {
-	if o != nil && o.PodIpSubnet != nil {
+	if o != nil && !IsNil(o.PodIpSubnet) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) SetPodIpSubnet(v string) {
 
 // GetVlanEnd returns the VlanEnd field value if set, zero value otherwise.
 func (o *KubernetesAciCniTenantClusterAllocation) GetVlanEnd() string {
-	if o == nil || o.VlanEnd == nil {
+	if o == nil || IsNil(o.VlanEnd) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) GetVlanEnd() string {
 // GetVlanEndOk returns a tuple with the VlanEnd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniTenantClusterAllocation) GetVlanEndOk() (*string, bool) {
-	if o == nil || o.VlanEnd == nil {
+	if o == nil || IsNil(o.VlanEnd) {
 		return nil, false
 	}
 	return o.VlanEnd, true
@@ -193,7 +197,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) GetVlanEndOk() (*string, bool)
 
 // HasVlanEnd returns a boolean if a field has been set.
 func (o *KubernetesAciCniTenantClusterAllocation) HasVlanEnd() bool {
-	if o != nil && o.VlanEnd != nil {
+	if o != nil && !IsNil(o.VlanEnd) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) SetVlanEnd(v string) {
 
 // GetVlanStart returns the VlanStart field value if set, zero value otherwise.
 func (o *KubernetesAciCniTenantClusterAllocation) GetVlanStart() string {
-	if o == nil || o.VlanStart == nil {
+	if o == nil || IsNil(o.VlanStart) {
 		var ret string
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) GetVlanStart() string {
 // GetVlanStartOk returns a tuple with the VlanStart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniTenantClusterAllocation) GetVlanStartOk() (*string, bool) {
-	if o == nil || o.VlanStart == nil {
+	if o == nil || IsNil(o.VlanStart) {
 		return nil, false
 	}
 	return o.VlanStart, true
@@ -225,7 +229,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) GetVlanStartOk() (*string, boo
 
 // HasVlanStart returns a boolean if a field has been set.
 func (o *KubernetesAciCniTenantClusterAllocation) HasVlanStart() bool {
-	if o != nil && o.VlanStart != nil {
+	if o != nil && !IsNil(o.VlanStart) {
 		return true
 	}
 
@@ -237,78 +241,115 @@ func (o *KubernetesAciCniTenantClusterAllocation) SetVlanStart(v string) {
 	o.VlanStart = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesAciCniTenantClusterAllocation) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAciCniTenantClusterAllocation) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *KubernetesAciCniTenantClusterAllocation) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *KubernetesAciCniTenantClusterAllocation) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *KubernetesAciCniTenantClusterAllocation) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *KubernetesAciCniTenantClusterAllocation) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 func (o KubernetesAciCniTenantClusterAllocation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesAciCniTenantClusterAllocation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.NodeSvcIpSubnet != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.NodeSvcIpSubnet) {
 		toSerialize["NodeSvcIpSubnet"] = o.NodeSvcIpSubnet
 	}
-	if o.PodIpSubnet != nil {
+	if !IsNil(o.PodIpSubnet) {
 		toSerialize["PodIpSubnet"] = o.PodIpSubnet
 	}
-	if o.VlanEnd != nil {
+	if !IsNil(o.VlanEnd) {
 		toSerialize["VlanEnd"] = o.VlanEnd
 	}
-	if o.VlanStart != nil {
+	if !IsNil(o.VlanStart) {
 		toSerialize["VlanStart"] = o.VlanStart
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesAciCniTenantClusterAllocation) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesAciCniTenantClusterAllocation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesAciCniTenantClusterAllocationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -321,13 +362,13 @@ func (o *KubernetesAciCniTenantClusterAllocation) UnmarshalJSON(bytes []byte) (e
 		// End of VLAN range allocated to this tenant cluster.
 		VlanEnd *string `json:"VlanEnd,omitempty"`
 		// Start of VLAN range allocated to this tenant cluster.
-		VlanStart    *string                               `json:"VlanStart,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		VlanStart    *string                                      `json:"VlanStart,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varKubernetesAciCniTenantClusterAllocationWithoutEmbeddedStruct := KubernetesAciCniTenantClusterAllocationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesAciCniTenantClusterAllocationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesAciCniTenantClusterAllocationWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesAciCniTenantClusterAllocation := _KubernetesAciCniTenantClusterAllocation{}
 		varKubernetesAciCniTenantClusterAllocation.ClassId = varKubernetesAciCniTenantClusterAllocationWithoutEmbeddedStruct.ClassId
@@ -344,7 +385,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) UnmarshalJSON(bytes []byte) (e
 
 	varKubernetesAciCniTenantClusterAllocation := _KubernetesAciCniTenantClusterAllocation{}
 
-	err = json.Unmarshal(bytes, &varKubernetesAciCniTenantClusterAllocation)
+	err = json.Unmarshal(data, &varKubernetesAciCniTenantClusterAllocation)
 	if err == nil {
 		o.MoBaseMo = varKubernetesAciCniTenantClusterAllocation.MoBaseMo
 	} else {
@@ -353,7 +394,7 @@ func (o *KubernetesAciCniTenantClusterAllocation) UnmarshalJSON(bytes []byte) (e
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "NodeSvcIpSubnet")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the BiosSystemBootOrder type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BiosSystemBootOrder{}
 
 // BiosSystemBootOrder Actual Boot Order of the system.
 type BiosSystemBootOrder struct {
@@ -29,11 +33,11 @@ type BiosSystemBootOrder struct {
 	// The Distinguished Name for this object, used to uniquely identify this object.
 	Dn *string `json:"Dn,omitempty"`
 	// Secure boot if set to enabled, enforces that device boots using only software that is trusted by the Original Equipment Manufacturer (OEM). * `NotAvailable` - Set the state of Secure Boot to Not Available. * `Disabled` - Set the state of Secure Boot to Disabled. * `Enabled` - Set the state of Secure Boot to Enabled.
-	SecureBoot *string               `json:"SecureBoot,omitempty"`
-	BiosUnit   *BiosUnitRelationship `json:"BiosUnit,omitempty"`
+	SecureBoot *string                      `json:"SecureBoot,omitempty"`
+	BiosUnit   NullableBiosUnitRelationship `json:"BiosUnit,omitempty"`
 	// An array of relationships to biosBootDevice resources.
-	BootDevices          []BiosBootDeviceRelationship         `json:"BootDevices,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	BootDevices          []BiosBootDeviceRelationship                `json:"BootDevices,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,7 +116,7 @@ func (o *BiosSystemBootOrder) SetObjectType(v string) {
 
 // GetBootMode returns the BootMode field value if set, zero value otherwise.
 func (o *BiosSystemBootOrder) GetBootMode() string {
-	if o == nil || o.BootMode == nil {
+	if o == nil || IsNil(o.BootMode) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *BiosSystemBootOrder) GetBootMode() string {
 // GetBootModeOk returns a tuple with the BootMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BiosSystemBootOrder) GetBootModeOk() (*string, bool) {
-	if o == nil || o.BootMode == nil {
+	if o == nil || IsNil(o.BootMode) {
 		return nil, false
 	}
 	return o.BootMode, true
@@ -130,7 +134,7 @@ func (o *BiosSystemBootOrder) GetBootModeOk() (*string, bool) {
 
 // HasBootMode returns a boolean if a field has been set.
 func (o *BiosSystemBootOrder) HasBootMode() bool {
-	if o != nil && o.BootMode != nil {
+	if o != nil && !IsNil(o.BootMode) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *BiosSystemBootOrder) SetBootMode(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *BiosSystemBootOrder) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *BiosSystemBootOrder) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BiosSystemBootOrder) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -162,7 +166,7 @@ func (o *BiosSystemBootOrder) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *BiosSystemBootOrder) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *BiosSystemBootOrder) SetDn(v string) {
 
 // GetSecureBoot returns the SecureBoot field value if set, zero value otherwise.
 func (o *BiosSystemBootOrder) GetSecureBoot() string {
-	if o == nil || o.SecureBoot == nil {
+	if o == nil || IsNil(o.SecureBoot) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *BiosSystemBootOrder) GetSecureBoot() string {
 // GetSecureBootOk returns a tuple with the SecureBoot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BiosSystemBootOrder) GetSecureBootOk() (*string, bool) {
-	if o == nil || o.SecureBoot == nil {
+	if o == nil || IsNil(o.SecureBoot) {
 		return nil, false
 	}
 	return o.SecureBoot, true
@@ -194,7 +198,7 @@ func (o *BiosSystemBootOrder) GetSecureBootOk() (*string, bool) {
 
 // HasSecureBoot returns a boolean if a field has been set.
 func (o *BiosSystemBootOrder) HasSecureBoot() bool {
-	if o != nil && o.SecureBoot != nil {
+	if o != nil && !IsNil(o.SecureBoot) {
 		return true
 	}
 
@@ -206,36 +210,47 @@ func (o *BiosSystemBootOrder) SetSecureBoot(v string) {
 	o.SecureBoot = &v
 }
 
-// GetBiosUnit returns the BiosUnit field value if set, zero value otherwise.
+// GetBiosUnit returns the BiosUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BiosSystemBootOrder) GetBiosUnit() BiosUnitRelationship {
-	if o == nil || o.BiosUnit == nil {
+	if o == nil || IsNil(o.BiosUnit.Get()) {
 		var ret BiosUnitRelationship
 		return ret
 	}
-	return *o.BiosUnit
+	return *o.BiosUnit.Get()
 }
 
 // GetBiosUnitOk returns a tuple with the BiosUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BiosSystemBootOrder) GetBiosUnitOk() (*BiosUnitRelationship, bool) {
-	if o == nil || o.BiosUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BiosUnit, true
+	return o.BiosUnit.Get(), o.BiosUnit.IsSet()
 }
 
 // HasBiosUnit returns a boolean if a field has been set.
 func (o *BiosSystemBootOrder) HasBiosUnit() bool {
-	if o != nil && o.BiosUnit != nil {
+	if o != nil && o.BiosUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBiosUnit gets a reference to the given BiosUnitRelationship and assigns it to the BiosUnit field.
+// SetBiosUnit gets a reference to the given NullableBiosUnitRelationship and assigns it to the BiosUnit field.
 func (o *BiosSystemBootOrder) SetBiosUnit(v BiosUnitRelationship) {
-	o.BiosUnit = &v
+	o.BiosUnit.Set(&v)
+}
+
+// SetBiosUnitNil sets the value for BiosUnit to be an explicit nil
+func (o *BiosSystemBootOrder) SetBiosUnitNil() {
+	o.BiosUnit.Set(nil)
+}
+
+// UnsetBiosUnit ensures that no value is present for BiosUnit, not even an explicit nil
+func (o *BiosSystemBootOrder) UnsetBiosUnit() {
+	o.BiosUnit.Unset()
 }
 
 // GetBootDevices returns the BootDevices field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -251,7 +266,7 @@ func (o *BiosSystemBootOrder) GetBootDevices() []BiosBootDeviceRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BiosSystemBootOrder) GetBootDevicesOk() ([]BiosBootDeviceRelationship, bool) {
-	if o == nil || o.BootDevices == nil {
+	if o == nil || IsNil(o.BootDevices) {
 		return nil, false
 	}
 	return o.BootDevices, true
@@ -259,7 +274,7 @@ func (o *BiosSystemBootOrder) GetBootDevicesOk() ([]BiosBootDeviceRelationship, 
 
 // HasBootDevices returns a boolean if a field has been set.
 func (o *BiosSystemBootOrder) HasBootDevices() bool {
-	if o != nil && o.BootDevices != nil {
+	if o != nil && IsNil(o.BootDevices) {
 		return true
 	}
 
@@ -271,81 +286,118 @@ func (o *BiosSystemBootOrder) SetBootDevices(v []BiosBootDeviceRelationship) {
 	o.BootDevices = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BiosSystemBootOrder) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BiosSystemBootOrder) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *BiosSystemBootOrder) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *BiosSystemBootOrder) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *BiosSystemBootOrder) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *BiosSystemBootOrder) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o BiosSystemBootOrder) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BiosSystemBootOrder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BootMode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BootMode) {
 		toSerialize["BootMode"] = o.BootMode
 	}
-	if o.Dn != nil {
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.SecureBoot != nil {
+	if !IsNil(o.SecureBoot) {
 		toSerialize["SecureBoot"] = o.SecureBoot
 	}
-	if o.BiosUnit != nil {
-		toSerialize["BiosUnit"] = o.BiosUnit
+	if o.BiosUnit.IsSet() {
+		toSerialize["BiosUnit"] = o.BiosUnit.Get()
 	}
 	if o.BootDevices != nil {
 		toSerialize["BootDevices"] = o.BootDevices
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *BiosSystemBootOrder) UnmarshalJSON(bytes []byte) (err error) {
+func (o *BiosSystemBootOrder) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type BiosSystemBootOrderWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -356,16 +408,16 @@ func (o *BiosSystemBootOrder) UnmarshalJSON(bytes []byte) (err error) {
 		// The Distinguished Name for this object, used to uniquely identify this object.
 		Dn *string `json:"Dn,omitempty"`
 		// Secure boot if set to enabled, enforces that device boots using only software that is trusted by the Original Equipment Manufacturer (OEM). * `NotAvailable` - Set the state of Secure Boot to Not Available. * `Disabled` - Set the state of Secure Boot to Disabled. * `Enabled` - Set the state of Secure Boot to Enabled.
-		SecureBoot *string               `json:"SecureBoot,omitempty"`
-		BiosUnit   *BiosUnitRelationship `json:"BiosUnit,omitempty"`
+		SecureBoot *string                      `json:"SecureBoot,omitempty"`
+		BiosUnit   NullableBiosUnitRelationship `json:"BiosUnit,omitempty"`
 		// An array of relationships to biosBootDevice resources.
-		BootDevices      []BiosBootDeviceRelationship         `json:"BootDevices,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		BootDevices      []BiosBootDeviceRelationship                `json:"BootDevices,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varBiosSystemBootOrderWithoutEmbeddedStruct := BiosSystemBootOrderWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varBiosSystemBootOrderWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varBiosSystemBootOrderWithoutEmbeddedStruct)
 	if err == nil {
 		varBiosSystemBootOrder := _BiosSystemBootOrder{}
 		varBiosSystemBootOrder.ClassId = varBiosSystemBootOrderWithoutEmbeddedStruct.ClassId
@@ -383,7 +435,7 @@ func (o *BiosSystemBootOrder) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBiosSystemBootOrder := _BiosSystemBootOrder{}
 
-	err = json.Unmarshal(bytes, &varBiosSystemBootOrder)
+	err = json.Unmarshal(data, &varBiosSystemBootOrder)
 	if err == nil {
 		o.MoBaseMo = varBiosSystemBootOrder.MoBaseMo
 	} else {
@@ -392,7 +444,7 @@ func (o *BiosSystemBootOrder) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BootMode")

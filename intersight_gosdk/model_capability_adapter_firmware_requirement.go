@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilityAdapterFirmwareRequirement type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilityAdapterFirmwareRequirement{}
 
 // CapabilityAdapterFirmwareRequirement Firmware requirements for enabling Intersight based management for an adaptor.
 type CapabilityAdapterFirmwareRequirement struct {
@@ -113,7 +117,7 @@ func (o *CapabilityAdapterFirmwareRequirement) SetObjectType(v string) {
 
 // GetAdapterSeries returns the AdapterSeries field value if set, zero value otherwise.
 func (o *CapabilityAdapterFirmwareRequirement) GetAdapterSeries() string {
-	if o == nil || o.AdapterSeries == nil {
+	if o == nil || IsNil(o.AdapterSeries) {
 		var ret string
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetAdapterSeries() string {
 // GetAdapterSeriesOk returns a tuple with the AdapterSeries field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityAdapterFirmwareRequirement) GetAdapterSeriesOk() (*string, bool) {
-	if o == nil || o.AdapterSeries == nil {
+	if o == nil || IsNil(o.AdapterSeries) {
 		return nil, false
 	}
 	return o.AdapterSeries, true
@@ -131,7 +135,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetAdapterSeriesOk() (*string, bo
 
 // HasAdapterSeries returns a boolean if a field has been set.
 func (o *CapabilityAdapterFirmwareRequirement) HasAdapterSeries() bool {
-	if o != nil && o.AdapterSeries != nil {
+	if o != nil && !IsNil(o.AdapterSeries) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *CapabilityAdapterFirmwareRequirement) SetAdapterSeries(v string) {
 
 // GetIgnoreEmptyCurrentVersion returns the IgnoreEmptyCurrentVersion field value if set, zero value otherwise.
 func (o *CapabilityAdapterFirmwareRequirement) GetIgnoreEmptyCurrentVersion() bool {
-	if o == nil || o.IgnoreEmptyCurrentVersion == nil {
+	if o == nil || IsNil(o.IgnoreEmptyCurrentVersion) {
 		var ret bool
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetIgnoreEmptyCurrentVersion() bo
 // GetIgnoreEmptyCurrentVersionOk returns a tuple with the IgnoreEmptyCurrentVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityAdapterFirmwareRequirement) GetIgnoreEmptyCurrentVersionOk() (*bool, bool) {
-	if o == nil || o.IgnoreEmptyCurrentVersion == nil {
+	if o == nil || IsNil(o.IgnoreEmptyCurrentVersion) {
 		return nil, false
 	}
 	return o.IgnoreEmptyCurrentVersion, true
@@ -163,7 +167,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetIgnoreEmptyCurrentVersionOk() 
 
 // HasIgnoreEmptyCurrentVersion returns a boolean if a field has been set.
 func (o *CapabilityAdapterFirmwareRequirement) HasIgnoreEmptyCurrentVersion() bool {
-	if o != nil && o.IgnoreEmptyCurrentVersion != nil {
+	if o != nil && !IsNil(o.IgnoreEmptyCurrentVersion) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *CapabilityAdapterFirmwareRequirement) SetIgnoreEmptyCurrentVersion(v bo
 
 // GetMinimumAdapterVersion returns the MinimumAdapterVersion field value if set, zero value otherwise.
 func (o *CapabilityAdapterFirmwareRequirement) GetMinimumAdapterVersion() string {
-	if o == nil || o.MinimumAdapterVersion == nil {
+	if o == nil || IsNil(o.MinimumAdapterVersion) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetMinimumAdapterVersion() string
 // GetMinimumAdapterVersionOk returns a tuple with the MinimumAdapterVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityAdapterFirmwareRequirement) GetMinimumAdapterVersionOk() (*string, bool) {
-	if o == nil || o.MinimumAdapterVersion == nil {
+	if o == nil || IsNil(o.MinimumAdapterVersion) {
 		return nil, false
 	}
 	return o.MinimumAdapterVersion, true
@@ -195,7 +199,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetMinimumAdapterVersionOk() (*st
 
 // HasMinimumAdapterVersion returns a boolean if a field has been set.
 func (o *CapabilityAdapterFirmwareRequirement) HasMinimumAdapterVersion() bool {
-	if o != nil && o.MinimumAdapterVersion != nil {
+	if o != nil && !IsNil(o.MinimumAdapterVersion) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *CapabilityAdapterFirmwareRequirement) SetMinimumAdapterVersion(v string
 
 // GetMinimumBmcVersion returns the MinimumBmcVersion field value if set, zero value otherwise.
 func (o *CapabilityAdapterFirmwareRequirement) GetMinimumBmcVersion() string {
-	if o == nil || o.MinimumBmcVersion == nil {
+	if o == nil || IsNil(o.MinimumBmcVersion) {
 		var ret string
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetMinimumBmcVersion() string {
 // GetMinimumBmcVersionOk returns a tuple with the MinimumBmcVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityAdapterFirmwareRequirement) GetMinimumBmcVersionOk() (*string, bool) {
-	if o == nil || o.MinimumBmcVersion == nil {
+	if o == nil || IsNil(o.MinimumBmcVersion) {
 		return nil, false
 	}
 	return o.MinimumBmcVersion, true
@@ -227,7 +231,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetMinimumBmcVersionOk() (*string
 
 // HasMinimumBmcVersion returns a boolean if a field has been set.
 func (o *CapabilityAdapterFirmwareRequirement) HasMinimumBmcVersion() bool {
-	if o != nil && o.MinimumBmcVersion != nil {
+	if o != nil && !IsNil(o.MinimumBmcVersion) {
 		return true
 	}
 
@@ -241,7 +245,7 @@ func (o *CapabilityAdapterFirmwareRequirement) SetMinimumBmcVersion(v string) {
 
 // GetRecommendedBmcVersion returns the RecommendedBmcVersion field value if set, zero value otherwise.
 func (o *CapabilityAdapterFirmwareRequirement) GetRecommendedBmcVersion() string {
-	if o == nil || o.RecommendedBmcVersion == nil {
+	if o == nil || IsNil(o.RecommendedBmcVersion) {
 		var ret string
 		return ret
 	}
@@ -251,7 +255,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetRecommendedBmcVersion() string
 // GetRecommendedBmcVersionOk returns a tuple with the RecommendedBmcVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityAdapterFirmwareRequirement) GetRecommendedBmcVersionOk() (*string, bool) {
-	if o == nil || o.RecommendedBmcVersion == nil {
+	if o == nil || IsNil(o.RecommendedBmcVersion) {
 		return nil, false
 	}
 	return o.RecommendedBmcVersion, true
@@ -259,7 +263,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetRecommendedBmcVersionOk() (*st
 
 // HasRecommendedBmcVersion returns a boolean if a field has been set.
 func (o *CapabilityAdapterFirmwareRequirement) HasRecommendedBmcVersion() bool {
-	if o != nil && o.RecommendedBmcVersion != nil {
+	if o != nil && !IsNil(o.RecommendedBmcVersion) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetSupportedModels() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilityAdapterFirmwareRequirement) GetSupportedModelsOk() ([]string, bool) {
-	if o == nil || o.SupportedModels == nil {
+	if o == nil || IsNil(o.SupportedModels) {
 		return nil, false
 	}
 	return o.SupportedModels, true
@@ -292,7 +296,7 @@ func (o *CapabilityAdapterFirmwareRequirement) GetSupportedModelsOk() ([]string,
 
 // HasSupportedModels returns a boolean if a field has been set.
 func (o *CapabilityAdapterFirmwareRequirement) HasSupportedModels() bool {
-	if o != nil && o.SupportedModels != nil {
+	if o != nil && IsNil(o.SupportedModels) {
 		return true
 	}
 
@@ -305,34 +309,38 @@ func (o *CapabilityAdapterFirmwareRequirement) SetSupportedModels(v []string) {
 }
 
 func (o CapabilityAdapterFirmwareRequirement) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilityAdapterFirmwareRequirement) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityCapability, errCapabilityCapability := json.Marshal(o.CapabilityCapability)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
 	errCapabilityCapability = json.Unmarshal([]byte(serializedCapabilityCapability), &toSerialize)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdapterSeries != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdapterSeries) {
 		toSerialize["AdapterSeries"] = o.AdapterSeries
 	}
-	if o.IgnoreEmptyCurrentVersion != nil {
+	if !IsNil(o.IgnoreEmptyCurrentVersion) {
 		toSerialize["IgnoreEmptyCurrentVersion"] = o.IgnoreEmptyCurrentVersion
 	}
-	if o.MinimumAdapterVersion != nil {
+	if !IsNil(o.MinimumAdapterVersion) {
 		toSerialize["MinimumAdapterVersion"] = o.MinimumAdapterVersion
 	}
-	if o.MinimumBmcVersion != nil {
+	if !IsNil(o.MinimumBmcVersion) {
 		toSerialize["MinimumBmcVersion"] = o.MinimumBmcVersion
 	}
-	if o.RecommendedBmcVersion != nil {
+	if !IsNil(o.RecommendedBmcVersion) {
 		toSerialize["RecommendedBmcVersion"] = o.RecommendedBmcVersion
 	}
 	if o.SupportedModels != nil {
@@ -343,10 +351,32 @@ func (o CapabilityAdapterFirmwareRequirement) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilityAdapterFirmwareRequirement) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilityAdapterFirmwareRequirement) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilityAdapterFirmwareRequirementWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -367,7 +397,7 @@ func (o *CapabilityAdapterFirmwareRequirement) UnmarshalJSON(bytes []byte) (err 
 
 	varCapabilityAdapterFirmwareRequirementWithoutEmbeddedStruct := CapabilityAdapterFirmwareRequirementWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilityAdapterFirmwareRequirementWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilityAdapterFirmwareRequirementWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilityAdapterFirmwareRequirement := _CapabilityAdapterFirmwareRequirement{}
 		varCapabilityAdapterFirmwareRequirement.ClassId = varCapabilityAdapterFirmwareRequirementWithoutEmbeddedStruct.ClassId
@@ -385,7 +415,7 @@ func (o *CapabilityAdapterFirmwareRequirement) UnmarshalJSON(bytes []byte) (err 
 
 	varCapabilityAdapterFirmwareRequirement := _CapabilityAdapterFirmwareRequirement{}
 
-	err = json.Unmarshal(bytes, &varCapabilityAdapterFirmwareRequirement)
+	err = json.Unmarshal(data, &varCapabilityAdapterFirmwareRequirement)
 	if err == nil {
 		o.CapabilityCapability = varCapabilityAdapterFirmwareRequirement.CapabilityCapability
 	} else {
@@ -394,7 +424,7 @@ func (o *CapabilityAdapterFirmwareRequirement) UnmarshalJSON(bytes []byte) (err 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdapterSeries")

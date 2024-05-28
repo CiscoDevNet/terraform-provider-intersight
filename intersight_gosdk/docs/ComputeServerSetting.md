@@ -28,10 +28,10 @@ Name | Type | Description | Notes
 **StorageVirtualDriveOperation** | Pointer to [**NullableComputeStorageVirtualDriveOperation**](ComputeStorageVirtualDriveOperation.md) |  | [optional] 
 **TpmReset** | Pointer to **string** | Clear the configuration of TPM chip in the server. * &#x60;None&#x60; - Perform no action on the TPM. * &#x60;ClearTpm&#x60; - Clear the configuration and restore factory defaults of TPM chip in the server. | [optional] [default to "None"]
 **TunneledKvmState** | Pointer to **string** | By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state. * &#x60;Ready&#x60; - Tunneled vKVM is ready to be configured on the server. * &#x60;Enable&#x60; - Tunneled vKVM is enabled for the server. * &#x60;Disable&#x60; - Tunneled vKVM is disabled for the server. | [optional] [default to "Ready"]
-**LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**RunningWorkflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
-**Server** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**LocatorLed** | Pointer to [**NullableEquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RunningWorkflow** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**Server** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -757,6 +757,16 @@ SetLocatorLed sets LocatorLed field to given value.
 
 HasLocatorLed returns a boolean if a field has been set.
 
+### SetLocatorLedNil
+
+`func (o *ComputeServerSetting) SetLocatorLedNil(b bool)`
+
+ SetLocatorLedNil sets the value for LocatorLed to be an explicit nil
+
+### UnsetLocatorLed
+`func (o *ComputeServerSetting) UnsetLocatorLed()`
+
+UnsetLocatorLed ensures that no value is present for LocatorLed, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *ComputeServerSetting) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -782,6 +792,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *ComputeServerSetting) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *ComputeServerSetting) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetRunningWorkflow
 
 `func (o *ComputeServerSetting) GetRunningWorkflow() WorkflowWorkflowInfoRelationship`
@@ -807,6 +827,16 @@ SetRunningWorkflow sets RunningWorkflow field to given value.
 
 HasRunningWorkflow returns a boolean if a field has been set.
 
+### SetRunningWorkflowNil
+
+`func (o *ComputeServerSetting) SetRunningWorkflowNil(b bool)`
+
+ SetRunningWorkflowNil sets the value for RunningWorkflow to be an explicit nil
+
+### UnsetRunningWorkflow
+`func (o *ComputeServerSetting) UnsetRunningWorkflow()`
+
+UnsetRunningWorkflow ensures that no value is present for RunningWorkflow, not even an explicit nil
 ### GetServer
 
 `func (o *ComputeServerSetting) GetServer() ComputePhysicalRelationship`
@@ -832,6 +862,16 @@ SetServer sets Server field to given value.
 
 HasServer returns a boolean if a field has been set.
 
+### SetServerNil
+
+`func (o *ComputeServerSetting) SetServerNil(b bool)`
+
+ SetServerNil sets the value for Server to be an explicit nil
+
+### UnsetServer
+`func (o *ComputeServerSetting) UnsetServer()`
+
+UnsetServer ensures that no value is present for Server, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

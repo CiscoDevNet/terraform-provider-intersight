@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **ControllerId** | Pointer to **int64** | The id of the graphics controller. | [optional] [readonly] 
 **PciAddr** | Pointer to **string** | The PCI address of the graphics controller. | [optional] [readonly] 
 **PciSlot** | Pointer to **string** | The PCI slot information of the graphics controller. | [optional] [readonly] 
-**GraphicsCard** | Pointer to [**GraphicsCardRelationship**](GraphicsCardRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**GraphicsCard** | Pointer to [**NullableGraphicsCardRelationship**](GraphicsCardRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -172,6 +172,16 @@ SetGraphicsCard sets GraphicsCard field to given value.
 
 HasGraphicsCard returns a boolean if a field has been set.
 
+### SetGraphicsCardNil
+
+`func (o *GraphicsController) SetGraphicsCardNil(b bool)`
+
+ SetGraphicsCardNil sets the value for GraphicsCard to be an explicit nil
+
+### UnsetGraphicsCard
+`func (o *GraphicsController) UnsetGraphicsCard()`
+
+UnsetGraphicsCard ensures that no value is present for GraphicsCard, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *GraphicsController) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -197,6 +207,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *GraphicsController) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *GraphicsController) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *GraphicsController) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -222,6 +242,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *GraphicsController) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *GraphicsController) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

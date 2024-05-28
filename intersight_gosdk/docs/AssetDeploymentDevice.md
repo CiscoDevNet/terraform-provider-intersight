@@ -17,11 +17,11 @@ Name | Type | Description | Notes
 **UnitOfMeasure** | Pointer to [**[]AssetMeteringType**](AssetMeteringType.md) |  | [optional] 
 **VirtualizationPlatform** | Pointer to **string** | Virtualization platform is used to identify the hypervisor type. example \&quot;ESXi\&quot;. | [optional] [readonly] 
 **Workload** | Pointer to **string** | Workload/Usecase running on the device. | [optional] [readonly] 
-**Deployment** | Pointer to [**AssetDeploymentRelationship**](AssetDeploymentRelationship.md) |  | [optional] 
-**DeviceContractInformation** | Pointer to [**AssetDeviceContractInformationRelationship**](AssetDeviceContractInformationRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Subscription** | Pointer to [**AssetSubscriptionRelationship**](AssetSubscriptionRelationship.md) |  | [optional] 
-**SubscriptionAccount** | Pointer to [**AssetSubscriptionAccountRelationship**](AssetSubscriptionAccountRelationship.md) |  | [optional] 
+**Deployment** | Pointer to [**NullableAssetDeploymentRelationship**](AssetDeploymentRelationship.md) |  | [optional] 
+**DeviceContractInformation** | Pointer to [**NullableAssetDeviceContractInformationRelationship**](AssetDeviceContractInformationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Subscription** | Pointer to [**NullableAssetSubscriptionRelationship**](AssetSubscriptionRelationship.md) |  | [optional] 
+**SubscriptionAccount** | Pointer to [**NullableAssetSubscriptionAccountRelationship**](AssetSubscriptionAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -422,6 +422,16 @@ SetDeployment sets Deployment field to given value.
 
 HasDeployment returns a boolean if a field has been set.
 
+### SetDeploymentNil
+
+`func (o *AssetDeploymentDevice) SetDeploymentNil(b bool)`
+
+ SetDeploymentNil sets the value for Deployment to be an explicit nil
+
+### UnsetDeployment
+`func (o *AssetDeploymentDevice) UnsetDeployment()`
+
+UnsetDeployment ensures that no value is present for Deployment, not even an explicit nil
 ### GetDeviceContractInformation
 
 `func (o *AssetDeploymentDevice) GetDeviceContractInformation() AssetDeviceContractInformationRelationship`
@@ -447,6 +457,16 @@ SetDeviceContractInformation sets DeviceContractInformation field to given value
 
 HasDeviceContractInformation returns a boolean if a field has been set.
 
+### SetDeviceContractInformationNil
+
+`func (o *AssetDeploymentDevice) SetDeviceContractInformationNil(b bool)`
+
+ SetDeviceContractInformationNil sets the value for DeviceContractInformation to be an explicit nil
+
+### UnsetDeviceContractInformation
+`func (o *AssetDeploymentDevice) UnsetDeviceContractInformation()`
+
+UnsetDeviceContractInformation ensures that no value is present for DeviceContractInformation, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *AssetDeploymentDevice) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -472,6 +492,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *AssetDeploymentDevice) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *AssetDeploymentDevice) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetSubscription
 
 `func (o *AssetDeploymentDevice) GetSubscription() AssetSubscriptionRelationship`
@@ -497,6 +527,16 @@ SetSubscription sets Subscription field to given value.
 
 HasSubscription returns a boolean if a field has been set.
 
+### SetSubscriptionNil
+
+`func (o *AssetDeploymentDevice) SetSubscriptionNil(b bool)`
+
+ SetSubscriptionNil sets the value for Subscription to be an explicit nil
+
+### UnsetSubscription
+`func (o *AssetDeploymentDevice) UnsetSubscription()`
+
+UnsetSubscription ensures that no value is present for Subscription, not even an explicit nil
 ### GetSubscriptionAccount
 
 `func (o *AssetDeploymentDevice) GetSubscriptionAccount() AssetSubscriptionAccountRelationship`
@@ -522,6 +562,16 @@ SetSubscriptionAccount sets SubscriptionAccount field to given value.
 
 HasSubscriptionAccount returns a boolean if a field has been set.
 
+### SetSubscriptionAccountNil
+
+`func (o *AssetDeploymentDevice) SetSubscriptionAccountNil(b bool)`
+
+ SetSubscriptionAccountNil sets the value for SubscriptionAccount to be an explicit nil
+
+### UnsetSubscriptionAccount
+`func (o *AssetDeploymentDevice) UnsetSubscriptionAccount()`
+
+UnsetSubscriptionAccount ensures that no value is present for SubscriptionAccount, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -7,7 +7,9 @@ import (
 	"log"
 	"reflect"
 	"regexp"
+	"strconv"
 	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -157,9 +159,9 @@ func resourceFirmwarePolicy() *schema.Resource {
 							Default:     "firmware.ModelBundleVersion",
 						},
 						"model_family": {
-							Description:  "The server family that will be impacted by this upgrade.\n* `UCSC-C220-M5` - The upgrade on all C220-M5 servers claimed in setup.\n* `UCSC-C220-M4` - The upgrade on all C220-M4 servers claimed in setup.\n* `UCSC-C240-M4` - The upgrade on all C240-M4 servers claimed in setup.\n* `UCSC-C460-M4` - The upgrade on all C460-M4 servers claimed in setup.\n* `UCSC-C240-M5` - The upgrade on all C240-M5 servers claimed in setup.\n* `UCSC-C480-M5` - The upgrade on all C480-M5 servers claimed in setup.\n* `UCSB-B200-M5` - The upgrade on all B200-M5 servers claimed in setup.\n* `UCSB-B480-M5` - The upgrade on all B480-M5 servers claimed in setup.\n* `UCSC-C220-M6` - The upgrade on all C220-M6 servers claimed in setup.\n* `UCSC-C240-M6` - The upgrade on all C240-M6 servers claimed in setup.\n* `UCSC-C225-M6` - The upgrade on all C225-M6 servers claimed in setup.\n* `UCSC-C245-M6` - The upgrade on all C245-M6 servers claimed in setup.\n* `UCSB-B200-M6` - The upgrade on all B200-M6 servers claimed in setup.\n* `UCSX-210C-M6` - The upgrade on all 210C-M6 servers claimed in setup.\n* `UCSX-210C-M7` - The upgrade on all 210C-M7 servers claimed in setup.\n* `UCSC-C220-M7` - The upgrade on all C220-M7 servers claimed in setup.\n* `UCSC-C240-M7` - The upgrade on all C240-M7 servers claimed in setup.\n* `UCSC-C125` - The upgrade on all C125 servers claimed in setup.\n* `UCSX-410C-M7` - The upgrade on all 410C-M7 servers claimed in setup.",
+							Description:  "The server family that will be impacted by this upgrade.\n* `UCSC-C220-M5` - The upgrade on all C220-M5 servers claimed in setup.\n* `UCSC-C220-M4` - The upgrade on all C220-M4 servers claimed in setup.\n* `UCSC-C240-M4` - The upgrade on all C240-M4 servers claimed in setup.\n* `UCSC-C460-M4` - The upgrade on all C460-M4 servers claimed in setup.\n* `UCSC-C240-M5` - The upgrade on all C240-M5 servers claimed in setup.\n* `UCSC-C480-M5` - The upgrade on all C480-M5 servers claimed in setup.\n* `UCSB-B200-M5` - The upgrade on all B200-M5 servers claimed in setup.\n* `UCSB-B480-M5` - The upgrade on all B480-M5 servers claimed in setup.\n* `UCSC-C220-M6` - The upgrade on all C220-M6 servers claimed in setup.\n* `UCSC-C240-M6` - The upgrade on all C240-M6 servers claimed in setup.\n* `UCSC-C225-M6` - The upgrade on all C225-M6 servers claimed in setup.\n* `UCSC-C245-M6` - The upgrade on all C245-M6 servers claimed in setup.\n* `UCSB-B200-M6` - The upgrade on all B200-M6 servers claimed in setup.\n* `UCSX-210C-M6` - The upgrade on all 210C-M6 servers claimed in setup.\n* `UCSX-210C-M7` - The upgrade on all 210C-M7 servers claimed in setup.\n* `UCSC-C220-M7` - The upgrade on all C220-M7 servers claimed in setup.\n* `UCSC-C240-M7` - The upgrade on all C240-M7 servers claimed in setup.\n* `UCSC-C125` - The upgrade on all C125 servers claimed in setup.\n* `UCSX-410C-M7` - The upgrade on all 410C-M7 servers claimed in setup.\n* `UCSC-C245-M8SX` - The upgrade on all UCSC-C245-M8SX servers claimed in setup.\n* `UCSC-C225-M8S` - The upgrade on all UCSC-C225-M8S servers claimed in setup.\n* `UCSC-C225-M8N` - The upgrade on all UCSC-C225-M8N servers claimed in setup.",
 							Type:         schema.TypeString,
-							ValidateFunc: validation.StringInSlice([]string{"UCSC-C220-M5", "UCSC-C220-M4", "UCSC-C240-M4", "UCSC-C460-M4", "UCSC-C240-M5", "UCSC-C480-M5", "UCSB-B200-M5", "UCSB-B480-M5", "UCSC-C220-M6", "UCSC-C240-M6", "UCSC-C225-M6", "UCSC-C245-M6", "UCSB-B200-M6", "UCSX-210C-M6", "UCSX-210C-M7", "UCSC-C220-M7", "UCSC-C240-M7", "UCSC-C125", "UCSX-410C-M7"}, false),
+							ValidateFunc: validation.StringInSlice([]string{"UCSC-C220-M5", "UCSC-C220-M4", "UCSC-C240-M4", "UCSC-C460-M4", "UCSC-C240-M5", "UCSC-C480-M5", "UCSB-B200-M5", "UCSB-B480-M5", "UCSC-C220-M6", "UCSC-C240-M6", "UCSC-C225-M6", "UCSC-C245-M6", "UCSB-B200-M6", "UCSX-210C-M6", "UCSX-210C-M7", "UCSC-C220-M7", "UCSC-C240-M7", "UCSC-C125", "UCSX-410C-M7", "UCSC-C245-M8SX", "UCSC-C225-M8S", "UCSC-C225-M8N"}, false),
 							Optional:     true,
 							Default:      "UCSC-C220-M5",
 						},
@@ -782,8 +784,16 @@ func resourceFirmwarePolicyCreate(c context.Context, d *schema.ResourceData, met
 		}
 		return diag.Errorf("error occurred while creating FirmwarePolicy: %s", responseErr.Error())
 	}
-	log.Printf("Moid: %s", resultMo.GetMoid())
-	d.SetId(resultMo.GetMoid())
+	if len(resultMo.GetMoid()) != 0 {
+		log.Printf("Moid: %s", resultMo.GetMoid())
+		d.SetId(resultMo.GetMoid())
+	} else {
+		d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
+		log.Printf("Mo: %v", resultMo)
+	}
+	if len(resultMo.GetMoid()) == 0 {
+		return de
+	}
 	return append(de, resourceFirmwarePolicyRead(c, d, meta)...)
 }
 func detachFirmwarePolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -811,6 +821,9 @@ func detachFirmwarePolicyProfiles(d *schema.ResourceData, meta interface{}) diag
 func resourceFirmwarePolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	var de diag.Diagnostics
+	if len(d.Id()) == 0 {
+		return de
+	}
 	conn := meta.(*Config)
 	r := conn.ApiClient.FirmwareApi.GetFirmwarePolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()

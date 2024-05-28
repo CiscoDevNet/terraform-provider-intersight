@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareModelBundleVersion type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareModelBundleVersion{}
 
 // FirmwareModelBundleVersion Model-version combination for the firmware upgrade.
 type FirmwareModelBundleVersion struct {
@@ -26,7 +30,7 @@ type FirmwareModelBundleVersion struct {
 	ObjectType string `json:"ObjectType"`
 	// The bundle version to which the server will be upgraded.
 	BundleVersion *string `json:"BundleVersion,omitempty"`
-	// The server family that will be impacted by this upgrade. * `UCSC-C220-M5` - The upgrade on all C220-M5 servers claimed in setup. * `UCSC-C220-M4` - The upgrade on all C220-M4 servers claimed in setup. * `UCSC-C240-M4` - The upgrade on all C240-M4 servers claimed in setup. * `UCSC-C460-M4` - The upgrade on all C460-M4 servers claimed in setup. * `UCSC-C240-M5` - The upgrade on all C240-M5 servers claimed in setup. * `UCSC-C480-M5` - The upgrade on all C480-M5 servers claimed in setup. * `UCSB-B200-M5` - The upgrade on all B200-M5 servers claimed in setup. * `UCSB-B480-M5` - The upgrade on all B480-M5 servers claimed in setup. * `UCSC-C220-M6` - The upgrade on all C220-M6 servers claimed in setup. * `UCSC-C240-M6` - The upgrade on all C240-M6 servers claimed in setup. * `UCSC-C225-M6` - The upgrade on all C225-M6 servers claimed in setup. * `UCSC-C245-M6` - The upgrade on all C245-M6 servers claimed in setup. * `UCSB-B200-M6` - The upgrade on all B200-M6 servers claimed in setup. * `UCSX-210C-M6` - The upgrade on all 210C-M6 servers claimed in setup. * `UCSX-210C-M7` - The upgrade on all 210C-M7 servers claimed in setup. * `UCSC-C220-M7` - The upgrade on all C220-M7 servers claimed in setup. * `UCSC-C240-M7` - The upgrade on all C240-M7 servers claimed in setup. * `UCSC-C125` - The upgrade on all C125 servers claimed in setup. * `UCSX-410C-M7` - The upgrade on all 410C-M7 servers claimed in setup.
+	// The server family that will be impacted by this upgrade. * `UCSC-C220-M5` - The upgrade on all C220-M5 servers claimed in setup. * `UCSC-C220-M4` - The upgrade on all C220-M4 servers claimed in setup. * `UCSC-C240-M4` - The upgrade on all C240-M4 servers claimed in setup. * `UCSC-C460-M4` - The upgrade on all C460-M4 servers claimed in setup. * `UCSC-C240-M5` - The upgrade on all C240-M5 servers claimed in setup. * `UCSC-C480-M5` - The upgrade on all C480-M5 servers claimed in setup. * `UCSB-B200-M5` - The upgrade on all B200-M5 servers claimed in setup. * `UCSB-B480-M5` - The upgrade on all B480-M5 servers claimed in setup. * `UCSC-C220-M6` - The upgrade on all C220-M6 servers claimed in setup. * `UCSC-C240-M6` - The upgrade on all C240-M6 servers claimed in setup. * `UCSC-C225-M6` - The upgrade on all C225-M6 servers claimed in setup. * `UCSC-C245-M6` - The upgrade on all C245-M6 servers claimed in setup. * `UCSB-B200-M6` - The upgrade on all B200-M6 servers claimed in setup. * `UCSX-210C-M6` - The upgrade on all 210C-M6 servers claimed in setup. * `UCSX-210C-M7` - The upgrade on all 210C-M7 servers claimed in setup. * `UCSC-C220-M7` - The upgrade on all C220-M7 servers claimed in setup. * `UCSC-C240-M7` - The upgrade on all C240-M7 servers claimed in setup. * `UCSC-C125` - The upgrade on all C125 servers claimed in setup. * `UCSX-410C-M7` - The upgrade on all 410C-M7 servers claimed in setup. * `UCSC-C245-M8SX` - The upgrade on all UCSC-C245-M8SX servers claimed in setup. * `UCSC-C225-M8S` - The upgrade on all UCSC-C225-M8S servers claimed in setup. * `UCSC-C225-M8N` - The upgrade on all UCSC-C225-M8N servers claimed in setup.
 	ModelFamily          *string `json:"ModelFamily,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -110,7 +114,7 @@ func (o *FirmwareModelBundleVersion) SetObjectType(v string) {
 
 // GetBundleVersion returns the BundleVersion field value if set, zero value otherwise.
 func (o *FirmwareModelBundleVersion) GetBundleVersion() string {
-	if o == nil || o.BundleVersion == nil {
+	if o == nil || IsNil(o.BundleVersion) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *FirmwareModelBundleVersion) GetBundleVersion() string {
 // GetBundleVersionOk returns a tuple with the BundleVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareModelBundleVersion) GetBundleVersionOk() (*string, bool) {
-	if o == nil || o.BundleVersion == nil {
+	if o == nil || IsNil(o.BundleVersion) {
 		return nil, false
 	}
 	return o.BundleVersion, true
@@ -128,7 +132,7 @@ func (o *FirmwareModelBundleVersion) GetBundleVersionOk() (*string, bool) {
 
 // HasBundleVersion returns a boolean if a field has been set.
 func (o *FirmwareModelBundleVersion) HasBundleVersion() bool {
-	if o != nil && o.BundleVersion != nil {
+	if o != nil && !IsNil(o.BundleVersion) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *FirmwareModelBundleVersion) SetBundleVersion(v string) {
 
 // GetModelFamily returns the ModelFamily field value if set, zero value otherwise.
 func (o *FirmwareModelBundleVersion) GetModelFamily() string {
-	if o == nil || o.ModelFamily == nil {
+	if o == nil || IsNil(o.ModelFamily) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *FirmwareModelBundleVersion) GetModelFamily() string {
 // GetModelFamilyOk returns a tuple with the ModelFamily field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareModelBundleVersion) GetModelFamilyOk() (*string, bool) {
-	if o == nil || o.ModelFamily == nil {
+	if o == nil || IsNil(o.ModelFamily) {
 		return nil, false
 	}
 	return o.ModelFamily, true
@@ -160,7 +164,7 @@ func (o *FirmwareModelBundleVersion) GetModelFamilyOk() (*string, bool) {
 
 // HasModelFamily returns a boolean if a field has been set.
 func (o *FirmwareModelBundleVersion) HasModelFamily() bool {
-	if o != nil && o.ModelFamily != nil {
+	if o != nil && !IsNil(o.ModelFamily) {
 		return true
 	}
 
@@ -173,25 +177,29 @@ func (o *FirmwareModelBundleVersion) SetModelFamily(v string) {
 }
 
 func (o FirmwareModelBundleVersion) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareModelBundleVersion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BundleVersion != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BundleVersion) {
 		toSerialize["BundleVersion"] = o.BundleVersion
 	}
-	if o.ModelFamily != nil {
+	if !IsNil(o.ModelFamily) {
 		toSerialize["ModelFamily"] = o.ModelFamily
 	}
 
@@ -199,10 +207,32 @@ func (o FirmwareModelBundleVersion) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareModelBundleVersion) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareModelBundleVersion) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareModelBundleVersionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -210,13 +240,13 @@ func (o *FirmwareModelBundleVersion) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The bundle version to which the server will be upgraded.
 		BundleVersion *string `json:"BundleVersion,omitempty"`
-		// The server family that will be impacted by this upgrade. * `UCSC-C220-M5` - The upgrade on all C220-M5 servers claimed in setup. * `UCSC-C220-M4` - The upgrade on all C220-M4 servers claimed in setup. * `UCSC-C240-M4` - The upgrade on all C240-M4 servers claimed in setup. * `UCSC-C460-M4` - The upgrade on all C460-M4 servers claimed in setup. * `UCSC-C240-M5` - The upgrade on all C240-M5 servers claimed in setup. * `UCSC-C480-M5` - The upgrade on all C480-M5 servers claimed in setup. * `UCSB-B200-M5` - The upgrade on all B200-M5 servers claimed in setup. * `UCSB-B480-M5` - The upgrade on all B480-M5 servers claimed in setup. * `UCSC-C220-M6` - The upgrade on all C220-M6 servers claimed in setup. * `UCSC-C240-M6` - The upgrade on all C240-M6 servers claimed in setup. * `UCSC-C225-M6` - The upgrade on all C225-M6 servers claimed in setup. * `UCSC-C245-M6` - The upgrade on all C245-M6 servers claimed in setup. * `UCSB-B200-M6` - The upgrade on all B200-M6 servers claimed in setup. * `UCSX-210C-M6` - The upgrade on all 210C-M6 servers claimed in setup. * `UCSX-210C-M7` - The upgrade on all 210C-M7 servers claimed in setup. * `UCSC-C220-M7` - The upgrade on all C220-M7 servers claimed in setup. * `UCSC-C240-M7` - The upgrade on all C240-M7 servers claimed in setup. * `UCSC-C125` - The upgrade on all C125 servers claimed in setup. * `UCSX-410C-M7` - The upgrade on all 410C-M7 servers claimed in setup.
+		// The server family that will be impacted by this upgrade. * `UCSC-C220-M5` - The upgrade on all C220-M5 servers claimed in setup. * `UCSC-C220-M4` - The upgrade on all C220-M4 servers claimed in setup. * `UCSC-C240-M4` - The upgrade on all C240-M4 servers claimed in setup. * `UCSC-C460-M4` - The upgrade on all C460-M4 servers claimed in setup. * `UCSC-C240-M5` - The upgrade on all C240-M5 servers claimed in setup. * `UCSC-C480-M5` - The upgrade on all C480-M5 servers claimed in setup. * `UCSB-B200-M5` - The upgrade on all B200-M5 servers claimed in setup. * `UCSB-B480-M5` - The upgrade on all B480-M5 servers claimed in setup. * `UCSC-C220-M6` - The upgrade on all C220-M6 servers claimed in setup. * `UCSC-C240-M6` - The upgrade on all C240-M6 servers claimed in setup. * `UCSC-C225-M6` - The upgrade on all C225-M6 servers claimed in setup. * `UCSC-C245-M6` - The upgrade on all C245-M6 servers claimed in setup. * `UCSB-B200-M6` - The upgrade on all B200-M6 servers claimed in setup. * `UCSX-210C-M6` - The upgrade on all 210C-M6 servers claimed in setup. * `UCSX-210C-M7` - The upgrade on all 210C-M7 servers claimed in setup. * `UCSC-C220-M7` - The upgrade on all C220-M7 servers claimed in setup. * `UCSC-C240-M7` - The upgrade on all C240-M7 servers claimed in setup. * `UCSC-C125` - The upgrade on all C125 servers claimed in setup. * `UCSX-410C-M7` - The upgrade on all 410C-M7 servers claimed in setup. * `UCSC-C245-M8SX` - The upgrade on all UCSC-C245-M8SX servers claimed in setup. * `UCSC-C225-M8S` - The upgrade on all UCSC-C225-M8S servers claimed in setup. * `UCSC-C225-M8N` - The upgrade on all UCSC-C225-M8N servers claimed in setup.
 		ModelFamily *string `json:"ModelFamily,omitempty"`
 	}
 
 	varFirmwareModelBundleVersionWithoutEmbeddedStruct := FirmwareModelBundleVersionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareModelBundleVersionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareModelBundleVersionWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareModelBundleVersion := _FirmwareModelBundleVersion{}
 		varFirmwareModelBundleVersion.ClassId = varFirmwareModelBundleVersionWithoutEmbeddedStruct.ClassId
@@ -230,7 +260,7 @@ func (o *FirmwareModelBundleVersion) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareModelBundleVersion := _FirmwareModelBundleVersion{}
 
-	err = json.Unmarshal(bytes, &varFirmwareModelBundleVersion)
+	err = json.Unmarshal(data, &varFirmwareModelBundleVersion)
 	if err == nil {
 		o.MoBaseComplexType = varFirmwareModelBundleVersion.MoBaseComplexType
 	} else {
@@ -239,7 +269,7 @@ func (o *FirmwareModelBundleVersion) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BundleVersion")

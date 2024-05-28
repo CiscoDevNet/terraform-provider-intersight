@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageEnclosureDiskSlotEp type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageEnclosureDiskSlotEp{}
 
 // StorageEnclosureDiskSlotEp Physical Disk slots on the enclosure.
 type StorageEnclosureDiskSlotEp struct {
@@ -31,10 +35,10 @@ type StorageEnclosureDiskSlotEp struct {
 	// This field identifies the disk is present in the enclosure slot.
 	Presence *string `json:"Presence,omitempty"`
 	// This field represents the slot Id in the storage enclosure.
-	Slot                 *string                              `json:"Slot,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	StorageEnclosure     *StorageEnclosureRelationship        `json:"StorageEnclosure,omitempty"`
+	Slot                 *string                                     `json:"Slot,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	StorageEnclosure     NullableStorageEnclosureRelationship        `json:"StorageEnclosure,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -113,7 +117,7 @@ func (o *StorageEnclosureDiskSlotEp) SetObjectType(v string) {
 
 // GetDrivePath returns the DrivePath field value if set, zero value otherwise.
 func (o *StorageEnclosureDiskSlotEp) GetDrivePath() string {
-	if o == nil || o.DrivePath == nil {
+	if o == nil || IsNil(o.DrivePath) {
 		var ret string
 		return ret
 	}
@@ -123,7 +127,7 @@ func (o *StorageEnclosureDiskSlotEp) GetDrivePath() string {
 // GetDrivePathOk returns a tuple with the DrivePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageEnclosureDiskSlotEp) GetDrivePathOk() (*string, bool) {
-	if o == nil || o.DrivePath == nil {
+	if o == nil || IsNil(o.DrivePath) {
 		return nil, false
 	}
 	return o.DrivePath, true
@@ -131,7 +135,7 @@ func (o *StorageEnclosureDiskSlotEp) GetDrivePathOk() (*string, bool) {
 
 // HasDrivePath returns a boolean if a field has been set.
 func (o *StorageEnclosureDiskSlotEp) HasDrivePath() bool {
-	if o != nil && o.DrivePath != nil {
+	if o != nil && !IsNil(o.DrivePath) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *StorageEnclosureDiskSlotEp) SetDrivePath(v string) {
 
 // GetHealth returns the Health field value if set, zero value otherwise.
 func (o *StorageEnclosureDiskSlotEp) GetHealth() string {
-	if o == nil || o.Health == nil {
+	if o == nil || IsNil(o.Health) {
 		var ret string
 		return ret
 	}
@@ -155,7 +159,7 @@ func (o *StorageEnclosureDiskSlotEp) GetHealth() string {
 // GetHealthOk returns a tuple with the Health field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageEnclosureDiskSlotEp) GetHealthOk() (*string, bool) {
-	if o == nil || o.Health == nil {
+	if o == nil || IsNil(o.Health) {
 		return nil, false
 	}
 	return o.Health, true
@@ -163,7 +167,7 @@ func (o *StorageEnclosureDiskSlotEp) GetHealthOk() (*string, bool) {
 
 // HasHealth returns a boolean if a field has been set.
 func (o *StorageEnclosureDiskSlotEp) HasHealth() bool {
-	if o != nil && o.Health != nil {
+	if o != nil && !IsNil(o.Health) {
 		return true
 	}
 
@@ -177,7 +181,7 @@ func (o *StorageEnclosureDiskSlotEp) SetHealth(v string) {
 
 // GetPresence returns the Presence field value if set, zero value otherwise.
 func (o *StorageEnclosureDiskSlotEp) GetPresence() string {
-	if o == nil || o.Presence == nil {
+	if o == nil || IsNil(o.Presence) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *StorageEnclosureDiskSlotEp) GetPresence() string {
 // GetPresenceOk returns a tuple with the Presence field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageEnclosureDiskSlotEp) GetPresenceOk() (*string, bool) {
-	if o == nil || o.Presence == nil {
+	if o == nil || IsNil(o.Presence) {
 		return nil, false
 	}
 	return o.Presence, true
@@ -195,7 +199,7 @@ func (o *StorageEnclosureDiskSlotEp) GetPresenceOk() (*string, bool) {
 
 // HasPresence returns a boolean if a field has been set.
 func (o *StorageEnclosureDiskSlotEp) HasPresence() bool {
-	if o != nil && o.Presence != nil {
+	if o != nil && !IsNil(o.Presence) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *StorageEnclosureDiskSlotEp) SetPresence(v string) {
 
 // GetSlot returns the Slot field value if set, zero value otherwise.
 func (o *StorageEnclosureDiskSlotEp) GetSlot() string {
-	if o == nil || o.Slot == nil {
+	if o == nil || IsNil(o.Slot) {
 		var ret string
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *StorageEnclosureDiskSlotEp) GetSlot() string {
 // GetSlotOk returns a tuple with the Slot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageEnclosureDiskSlotEp) GetSlotOk() (*string, bool) {
-	if o == nil || o.Slot == nil {
+	if o == nil || IsNil(o.Slot) {
 		return nil, false
 	}
 	return o.Slot, true
@@ -227,7 +231,7 @@ func (o *StorageEnclosureDiskSlotEp) GetSlotOk() (*string, bool) {
 
 // HasSlot returns a boolean if a field has been set.
 func (o *StorageEnclosureDiskSlotEp) HasSlot() bool {
-	if o != nil && o.Slot != nil {
+	if o != nil && !IsNil(o.Slot) {
 		return true
 	}
 
@@ -239,148 +243,207 @@ func (o *StorageEnclosureDiskSlotEp) SetSlot(v string) {
 	o.Slot = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageEnclosureDiskSlotEp) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageEnclosureDiskSlotEp) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *StorageEnclosureDiskSlotEp) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *StorageEnclosureDiskSlotEp) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *StorageEnclosureDiskSlotEp) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *StorageEnclosureDiskSlotEp) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageEnclosureDiskSlotEp) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageEnclosureDiskSlotEp) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageEnclosureDiskSlotEp) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageEnclosureDiskSlotEp) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetStorageEnclosure returns the StorageEnclosure field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageEnclosureDiskSlotEp) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageEnclosureDiskSlotEp) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetStorageEnclosure returns the StorageEnclosure field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageEnclosureDiskSlotEp) GetStorageEnclosure() StorageEnclosureRelationship {
-	if o == nil || o.StorageEnclosure == nil {
+	if o == nil || IsNil(o.StorageEnclosure.Get()) {
 		var ret StorageEnclosureRelationship
 		return ret
 	}
-	return *o.StorageEnclosure
+	return *o.StorageEnclosure.Get()
 }
 
 // GetStorageEnclosureOk returns a tuple with the StorageEnclosure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageEnclosureDiskSlotEp) GetStorageEnclosureOk() (*StorageEnclosureRelationship, bool) {
-	if o == nil || o.StorageEnclosure == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageEnclosure, true
+	return o.StorageEnclosure.Get(), o.StorageEnclosure.IsSet()
 }
 
 // HasStorageEnclosure returns a boolean if a field has been set.
 func (o *StorageEnclosureDiskSlotEp) HasStorageEnclosure() bool {
-	if o != nil && o.StorageEnclosure != nil {
+	if o != nil && o.StorageEnclosure.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageEnclosure gets a reference to the given StorageEnclosureRelationship and assigns it to the StorageEnclosure field.
+// SetStorageEnclosure gets a reference to the given NullableStorageEnclosureRelationship and assigns it to the StorageEnclosure field.
 func (o *StorageEnclosureDiskSlotEp) SetStorageEnclosure(v StorageEnclosureRelationship) {
-	o.StorageEnclosure = &v
+	o.StorageEnclosure.Set(&v)
+}
+
+// SetStorageEnclosureNil sets the value for StorageEnclosure to be an explicit nil
+func (o *StorageEnclosureDiskSlotEp) SetStorageEnclosureNil() {
+	o.StorageEnclosure.Set(nil)
+}
+
+// UnsetStorageEnclosure ensures that no value is present for StorageEnclosure, not even an explicit nil
+func (o *StorageEnclosureDiskSlotEp) UnsetStorageEnclosure() {
+	o.StorageEnclosure.Unset()
 }
 
 func (o StorageEnclosureDiskSlotEp) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageEnclosureDiskSlotEp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DrivePath != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DrivePath) {
 		toSerialize["DrivePath"] = o.DrivePath
 	}
-	if o.Health != nil {
+	if !IsNil(o.Health) {
 		toSerialize["Health"] = o.Health
 	}
-	if o.Presence != nil {
+	if !IsNil(o.Presence) {
 		toSerialize["Presence"] = o.Presence
 	}
-	if o.Slot != nil {
+	if !IsNil(o.Slot) {
 		toSerialize["Slot"] = o.Slot
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.StorageEnclosure != nil {
-		toSerialize["StorageEnclosure"] = o.StorageEnclosure
+	if o.StorageEnclosure.IsSet() {
+		toSerialize["StorageEnclosure"] = o.StorageEnclosure.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageEnclosureDiskSlotEp) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageEnclosureDiskSlotEp) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageEnclosureDiskSlotEpWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -393,15 +456,15 @@ func (o *StorageEnclosureDiskSlotEp) UnmarshalJSON(bytes []byte) (err error) {
 		// This field identifies the disk is present in the enclosure slot.
 		Presence *string `json:"Presence,omitempty"`
 		// This field represents the slot Id in the storage enclosure.
-		Slot                *string                              `json:"Slot,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		StorageEnclosure    *StorageEnclosureRelationship        `json:"StorageEnclosure,omitempty"`
+		Slot                *string                                     `json:"Slot,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		StorageEnclosure    NullableStorageEnclosureRelationship        `json:"StorageEnclosure,omitempty"`
 	}
 
 	varStorageEnclosureDiskSlotEpWithoutEmbeddedStruct := StorageEnclosureDiskSlotEpWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageEnclosureDiskSlotEpWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageEnclosureDiskSlotEpWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageEnclosureDiskSlotEp := _StorageEnclosureDiskSlotEp{}
 		varStorageEnclosureDiskSlotEp.ClassId = varStorageEnclosureDiskSlotEpWithoutEmbeddedStruct.ClassId
@@ -420,7 +483,7 @@ func (o *StorageEnclosureDiskSlotEp) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageEnclosureDiskSlotEp := _StorageEnclosureDiskSlotEp{}
 
-	err = json.Unmarshal(bytes, &varStorageEnclosureDiskSlotEp)
+	err = json.Unmarshal(data, &varStorageEnclosureDiskSlotEp)
 	if err == nil {
 		o.InventoryBase = varStorageEnclosureDiskSlotEp.InventoryBase
 	} else {
@@ -429,7 +492,7 @@ func (o *StorageEnclosureDiskSlotEp) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DrivePath")

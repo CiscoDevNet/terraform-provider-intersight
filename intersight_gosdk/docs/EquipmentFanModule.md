@@ -16,15 +16,15 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | This field is to abstract the status of the fan module. | [optional] [readonly] 
 **TrayId** | Pointer to **int64** | Tray identifier for the fan module. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for this Fan Module. | [optional] [readonly] 
-**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
-**EquipmentExpanderModule** | Pointer to [**EquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) |  | [optional] 
-**EquipmentIoCard** | Pointer to [**EquipmentIoCardRelationship**](EquipmentIoCardRelationship.md) |  | [optional] 
-**EquipmentRackEnclosure** | Pointer to [**EquipmentRackEnclosureRelationship**](EquipmentRackEnclosureRelationship.md) |  | [optional] 
+**ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**EquipmentExpanderModule** | Pointer to [**NullableEquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) |  | [optional] 
+**EquipmentIoCard** | Pointer to [**NullableEquipmentIoCardRelationship**](EquipmentIoCardRelationship.md) |  | [optional] 
+**EquipmentRackEnclosure** | Pointer to [**NullableEquipmentRackEnclosureRelationship**](EquipmentRackEnclosureRelationship.md) |  | [optional] 
 **Fans** | Pointer to [**[]EquipmentFanRelationship**](EquipmentFanRelationship.md) | An array of relationships to equipmentFan resources. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -370,6 +370,16 @@ SetComputeRackUnit sets ComputeRackUnit field to given value.
 
 HasComputeRackUnit returns a boolean if a field has been set.
 
+### SetComputeRackUnitNil
+
+`func (o *EquipmentFanModule) SetComputeRackUnitNil(b bool)`
+
+ SetComputeRackUnitNil sets the value for ComputeRackUnit to be an explicit nil
+
+### UnsetComputeRackUnit
+`func (o *EquipmentFanModule) UnsetComputeRackUnit()`
+
+UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
 ### GetEquipmentChassis
 
 `func (o *EquipmentFanModule) GetEquipmentChassis() EquipmentChassisRelationship`
@@ -395,6 +405,16 @@ SetEquipmentChassis sets EquipmentChassis field to given value.
 
 HasEquipmentChassis returns a boolean if a field has been set.
 
+### SetEquipmentChassisNil
+
+`func (o *EquipmentFanModule) SetEquipmentChassisNil(b bool)`
+
+ SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+
+### UnsetEquipmentChassis
+`func (o *EquipmentFanModule) UnsetEquipmentChassis()`
+
+UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
 ### GetEquipmentExpanderModule
 
 `func (o *EquipmentFanModule) GetEquipmentExpanderModule() EquipmentExpanderModuleRelationship`
@@ -420,6 +440,16 @@ SetEquipmentExpanderModule sets EquipmentExpanderModule field to given value.
 
 HasEquipmentExpanderModule returns a boolean if a field has been set.
 
+### SetEquipmentExpanderModuleNil
+
+`func (o *EquipmentFanModule) SetEquipmentExpanderModuleNil(b bool)`
+
+ SetEquipmentExpanderModuleNil sets the value for EquipmentExpanderModule to be an explicit nil
+
+### UnsetEquipmentExpanderModule
+`func (o *EquipmentFanModule) UnsetEquipmentExpanderModule()`
+
+UnsetEquipmentExpanderModule ensures that no value is present for EquipmentExpanderModule, not even an explicit nil
 ### GetEquipmentIoCard
 
 `func (o *EquipmentFanModule) GetEquipmentIoCard() EquipmentIoCardRelationship`
@@ -445,6 +475,16 @@ SetEquipmentIoCard sets EquipmentIoCard field to given value.
 
 HasEquipmentIoCard returns a boolean if a field has been set.
 
+### SetEquipmentIoCardNil
+
+`func (o *EquipmentFanModule) SetEquipmentIoCardNil(b bool)`
+
+ SetEquipmentIoCardNil sets the value for EquipmentIoCard to be an explicit nil
+
+### UnsetEquipmentIoCard
+`func (o *EquipmentFanModule) UnsetEquipmentIoCard()`
+
+UnsetEquipmentIoCard ensures that no value is present for EquipmentIoCard, not even an explicit nil
 ### GetEquipmentRackEnclosure
 
 `func (o *EquipmentFanModule) GetEquipmentRackEnclosure() EquipmentRackEnclosureRelationship`
@@ -470,6 +510,16 @@ SetEquipmentRackEnclosure sets EquipmentRackEnclosure field to given value.
 
 HasEquipmentRackEnclosure returns a boolean if a field has been set.
 
+### SetEquipmentRackEnclosureNil
+
+`func (o *EquipmentFanModule) SetEquipmentRackEnclosureNil(b bool)`
+
+ SetEquipmentRackEnclosureNil sets the value for EquipmentRackEnclosure to be an explicit nil
+
+### UnsetEquipmentRackEnclosure
+`func (o *EquipmentFanModule) UnsetEquipmentRackEnclosure()`
+
+UnsetEquipmentRackEnclosure ensures that no value is present for EquipmentRackEnclosure, not even an explicit nil
 ### GetFans
 
 `func (o *EquipmentFanModule) GetFans() []EquipmentFanRelationship`
@@ -530,6 +580,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *EquipmentFanModule) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *EquipmentFanModule) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetNetworkElement
 
 `func (o *EquipmentFanModule) GetNetworkElement() NetworkElementRelationship`
@@ -555,6 +615,16 @@ SetNetworkElement sets NetworkElement field to given value.
 
 HasNetworkElement returns a boolean if a field has been set.
 
+### SetNetworkElementNil
+
+`func (o *EquipmentFanModule) SetNetworkElementNil(b bool)`
+
+ SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+
+### UnsetNetworkElement
+`func (o *EquipmentFanModule) UnsetNetworkElement()`
+
+UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EquipmentFanModule) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -580,6 +650,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EquipmentFanModule) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EquipmentFanModule) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

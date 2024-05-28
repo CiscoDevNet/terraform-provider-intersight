@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "macpool.Pool"]
 **MacBlocks** | Pointer to [**[]MacpoolBlock**](MacpoolBlock.md) |  | [optional] 
 **BlockHeads** | Pointer to [**[]MacpoolIdBlockRelationship**](MacpoolIdBlockRelationship.md) | An array of relationships to macpoolIdBlock resources. | [optional] [readonly] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Reservations** | Pointer to [**[]MacpoolReservationRelationship**](MacpoolReservationRelationship.md) | An array of relationships to macpoolReservation resources. | [optional] 
 
 ## Methods
@@ -165,6 +165,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *MacpoolPool) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *MacpoolPool) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetReservations
 
 `func (o *MacpoolPool) GetReservations() []MacpoolReservationRelationship`

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Revision** | Pointer to **string** | This field displays the revised version of the associated component or hardware (if any). | [optional] [readonly] 
 **Serial** | Pointer to **string** | This field displays the serial number of the associated component or hardware. | [optional] [readonly] 
 **Vendor** | Pointer to **string** | This field displays the vendor information of the associated component or hardware. | [optional] [readonly] 
-**PreviousFru** | Pointer to [**EquipmentFruRelationship**](EquipmentFruRelationship.md) |  | [optional] 
+**PreviousFru** | Pointer to [**NullableEquipmentFruRelationship**](EquipmentFruRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -248,6 +248,16 @@ SetPreviousFru sets PreviousFru field to given value.
 
 HasPreviousFru returns a boolean if a field has been set.
 
+### SetPreviousFruNil
+
+`func (o *EquipmentBase) SetPreviousFruNil(b bool)`
+
+ SetPreviousFruNil sets the value for PreviousFru to be an explicit nil
+
+### UnsetPreviousFru
+`func (o *EquipmentBase) UnsetPreviousFru()`
+
+UnsetPreviousFru ensures that no value is present for PreviousFru, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

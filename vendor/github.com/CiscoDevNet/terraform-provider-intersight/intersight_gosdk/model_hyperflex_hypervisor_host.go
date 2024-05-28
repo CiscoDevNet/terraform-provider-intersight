@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexHypervisorHost type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexHypervisorHost{}
 
 // HyperflexHypervisorHost A host appliance in the HyperFlex Cluster.
 type HyperflexHypervisorHost struct {
@@ -52,9 +56,9 @@ type HyperflexHypervisorHost struct {
 	// The controller virtual machine template version.
 	TemplateVersion *string `json:"TemplateVersion,omitempty"`
 	// Configured number of virtual CPUs for Controller virtual machine.
-	VirtualCpus          *int32                        `json:"VirtualCpus,omitempty"`
-	Cluster              *HyperflexClusterRelationship `json:"Cluster,omitempty"`
-	Node                 *HyperflexNodeRelationship    `json:"Node,omitempty"`
+	VirtualCpus          *int32                               `json:"VirtualCpus,omitempty"`
+	Cluster              NullableHyperflexClusterRelationship `json:"Cluster,omitempty"`
+	Node                 NullableHyperflexNodeRelationship    `json:"Node,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -137,7 +141,7 @@ func (o *HyperflexHypervisorHost) SetObjectType(v string) {
 
 // GetConfiguredMemory returns the ConfiguredMemory field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetConfiguredMemory() int64 {
-	if o == nil || o.ConfiguredMemory == nil {
+	if o == nil || IsNil(o.ConfiguredMemory) {
 		var ret int64
 		return ret
 	}
@@ -147,7 +151,7 @@ func (o *HyperflexHypervisorHost) GetConfiguredMemory() int64 {
 // GetConfiguredMemoryOk returns a tuple with the ConfiguredMemory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetConfiguredMemoryOk() (*int64, bool) {
-	if o == nil || o.ConfiguredMemory == nil {
+	if o == nil || IsNil(o.ConfiguredMemory) {
 		return nil, false
 	}
 	return o.ConfiguredMemory, true
@@ -155,7 +159,7 @@ func (o *HyperflexHypervisorHost) GetConfiguredMemoryOk() (*int64, bool) {
 
 // HasConfiguredMemory returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasConfiguredMemory() bool {
-	if o != nil && o.ConfiguredMemory != nil {
+	if o != nil && !IsNil(o.ConfiguredMemory) {
 		return true
 	}
 
@@ -169,7 +173,7 @@ func (o *HyperflexHypervisorHost) SetConfiguredMemory(v int64) {
 
 // GetControllerVmDisplayVersion returns the ControllerVmDisplayVersion field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetControllerVmDisplayVersion() string {
-	if o == nil || o.ControllerVmDisplayVersion == nil {
+	if o == nil || IsNil(o.ControllerVmDisplayVersion) {
 		var ret string
 		return ret
 	}
@@ -179,7 +183,7 @@ func (o *HyperflexHypervisorHost) GetControllerVmDisplayVersion() string {
 // GetControllerVmDisplayVersionOk returns a tuple with the ControllerVmDisplayVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetControllerVmDisplayVersionOk() (*string, bool) {
-	if o == nil || o.ControllerVmDisplayVersion == nil {
+	if o == nil || IsNil(o.ControllerVmDisplayVersion) {
 		return nil, false
 	}
 	return o.ControllerVmDisplayVersion, true
@@ -187,7 +191,7 @@ func (o *HyperflexHypervisorHost) GetControllerVmDisplayVersionOk() (*string, bo
 
 // HasControllerVmDisplayVersion returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasControllerVmDisplayVersion() bool {
-	if o != nil && o.ControllerVmDisplayVersion != nil {
+	if o != nil && !IsNil(o.ControllerVmDisplayVersion) {
 		return true
 	}
 
@@ -201,7 +205,7 @@ func (o *HyperflexHypervisorHost) SetControllerVmDisplayVersion(v string) {
 
 // GetControllerVmHxdpDisplayVersion returns the ControllerVmHxdpDisplayVersion field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetControllerVmHxdpDisplayVersion() string {
-	if o == nil || o.ControllerVmHxdpDisplayVersion == nil {
+	if o == nil || IsNil(o.ControllerVmHxdpDisplayVersion) {
 		var ret string
 		return ret
 	}
@@ -211,7 +215,7 @@ func (o *HyperflexHypervisorHost) GetControllerVmHxdpDisplayVersion() string {
 // GetControllerVmHxdpDisplayVersionOk returns a tuple with the ControllerVmHxdpDisplayVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetControllerVmHxdpDisplayVersionOk() (*string, bool) {
-	if o == nil || o.ControllerVmHxdpDisplayVersion == nil {
+	if o == nil || IsNil(o.ControllerVmHxdpDisplayVersion) {
 		return nil, false
 	}
 	return o.ControllerVmHxdpDisplayVersion, true
@@ -219,7 +223,7 @@ func (o *HyperflexHypervisorHost) GetControllerVmHxdpDisplayVersionOk() (*string
 
 // HasControllerVmHxdpDisplayVersion returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasControllerVmHxdpDisplayVersion() bool {
-	if o != nil && o.ControllerVmHxdpDisplayVersion != nil {
+	if o != nil && !IsNil(o.ControllerVmHxdpDisplayVersion) {
 		return true
 	}
 
@@ -233,7 +237,7 @@ func (o *HyperflexHypervisorHost) SetControllerVmHxdpDisplayVersion(v string) {
 
 // GetControllerVmHxdpVersion returns the ControllerVmHxdpVersion field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetControllerVmHxdpVersion() string {
-	if o == nil || o.ControllerVmHxdpVersion == nil {
+	if o == nil || IsNil(o.ControllerVmHxdpVersion) {
 		var ret string
 		return ret
 	}
@@ -243,7 +247,7 @@ func (o *HyperflexHypervisorHost) GetControllerVmHxdpVersion() string {
 // GetControllerVmHxdpVersionOk returns a tuple with the ControllerVmHxdpVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetControllerVmHxdpVersionOk() (*string, bool) {
-	if o == nil || o.ControllerVmHxdpVersion == nil {
+	if o == nil || IsNil(o.ControllerVmHxdpVersion) {
 		return nil, false
 	}
 	return o.ControllerVmHxdpVersion, true
@@ -251,7 +255,7 @@ func (o *HyperflexHypervisorHost) GetControllerVmHxdpVersionOk() (*string, bool)
 
 // HasControllerVmHxdpVersion returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasControllerVmHxdpVersion() bool {
-	if o != nil && o.ControllerVmHxdpVersion != nil {
+	if o != nil && !IsNil(o.ControllerVmHxdpVersion) {
 		return true
 	}
 
@@ -265,7 +269,7 @@ func (o *HyperflexHypervisorHost) SetControllerVmHxdpVersion(v string) {
 
 // GetControllerVmUuid returns the ControllerVmUuid field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetControllerVmUuid() string {
-	if o == nil || o.ControllerVmUuid == nil {
+	if o == nil || IsNil(o.ControllerVmUuid) {
 		var ret string
 		return ret
 	}
@@ -275,7 +279,7 @@ func (o *HyperflexHypervisorHost) GetControllerVmUuid() string {
 // GetControllerVmUuidOk returns a tuple with the ControllerVmUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetControllerVmUuidOk() (*string, bool) {
-	if o == nil || o.ControllerVmUuid == nil {
+	if o == nil || IsNil(o.ControllerVmUuid) {
 		return nil, false
 	}
 	return o.ControllerVmUuid, true
@@ -283,7 +287,7 @@ func (o *HyperflexHypervisorHost) GetControllerVmUuidOk() (*string, bool) {
 
 // HasControllerVmUuid returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasControllerVmUuid() bool {
-	if o != nil && o.ControllerVmUuid != nil {
+	if o != nil && !IsNil(o.ControllerVmUuid) {
 		return true
 	}
 
@@ -297,7 +301,7 @@ func (o *HyperflexHypervisorHost) SetControllerVmUuid(v string) {
 
 // GetControllerVmVersion returns the ControllerVmVersion field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetControllerVmVersion() string {
-	if o == nil || o.ControllerVmVersion == nil {
+	if o == nil || IsNil(o.ControllerVmVersion) {
 		var ret string
 		return ret
 	}
@@ -307,7 +311,7 @@ func (o *HyperflexHypervisorHost) GetControllerVmVersion() string {
 // GetControllerVmVersionOk returns a tuple with the ControllerVmVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetControllerVmVersionOk() (*string, bool) {
-	if o == nil || o.ControllerVmVersion == nil {
+	if o == nil || IsNil(o.ControllerVmVersion) {
 		return nil, false
 	}
 	return o.ControllerVmVersion, true
@@ -315,7 +319,7 @@ func (o *HyperflexHypervisorHost) GetControllerVmVersionOk() (*string, bool) {
 
 // HasControllerVmVersion returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasControllerVmVersion() bool {
-	if o != nil && o.ControllerVmVersion != nil {
+	if o != nil && !IsNil(o.ControllerVmVersion) {
 		return true
 	}
 
@@ -329,7 +333,7 @@ func (o *HyperflexHypervisorHost) SetControllerVmVersion(v string) {
 
 // GetDataIp returns the DataIp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexHypervisorHost) GetDataIp() NetworkHyperFlexNetworkAddress {
-	if o == nil || o.DataIp.Get() == nil {
+	if o == nil || IsNil(o.DataIp.Get()) {
 		var ret NetworkHyperFlexNetworkAddress
 		return ret
 	}
@@ -372,7 +376,7 @@ func (o *HyperflexHypervisorHost) UnsetDataIp() {
 
 // GetHostStatus returns the HostStatus field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetHostStatus() string {
-	if o == nil || o.HostStatus == nil {
+	if o == nil || IsNil(o.HostStatus) {
 		var ret string
 		return ret
 	}
@@ -382,7 +386,7 @@ func (o *HyperflexHypervisorHost) GetHostStatus() string {
 // GetHostStatusOk returns a tuple with the HostStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetHostStatusOk() (*string, bool) {
-	if o == nil || o.HostStatus == nil {
+	if o == nil || IsNil(o.HostStatus) {
 		return nil, false
 	}
 	return o.HostStatus, true
@@ -390,7 +394,7 @@ func (o *HyperflexHypervisorHost) GetHostStatusOk() (*string, bool) {
 
 // HasHostStatus returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasHostStatus() bool {
-	if o != nil && o.HostStatus != nil {
+	if o != nil && !IsNil(o.HostStatus) {
 		return true
 	}
 
@@ -404,7 +408,7 @@ func (o *HyperflexHypervisorHost) SetHostStatus(v string) {
 
 // GetHypervisor returns the Hypervisor field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetHypervisor() string {
-	if o == nil || o.Hypervisor == nil {
+	if o == nil || IsNil(o.Hypervisor) {
 		var ret string
 		return ret
 	}
@@ -414,7 +418,7 @@ func (o *HyperflexHypervisorHost) GetHypervisor() string {
 // GetHypervisorOk returns a tuple with the Hypervisor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetHypervisorOk() (*string, bool) {
-	if o == nil || o.Hypervisor == nil {
+	if o == nil || IsNil(o.Hypervisor) {
 		return nil, false
 	}
 	return o.Hypervisor, true
@@ -422,7 +426,7 @@ func (o *HyperflexHypervisorHost) GetHypervisorOk() (*string, bool) {
 
 // HasHypervisor returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasHypervisor() bool {
-	if o != nil && o.Hypervisor != nil {
+	if o != nil && !IsNil(o.Hypervisor) {
 		return true
 	}
 
@@ -436,7 +440,7 @@ func (o *HyperflexHypervisorHost) SetHypervisor(v string) {
 
 // GetIp returns the Ip field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexHypervisorHost) GetIp() NetworkHyperFlexNetworkAddress {
-	if o == nil || o.Ip.Get() == nil {
+	if o == nil || IsNil(o.Ip.Get()) {
 		var ret NetworkHyperFlexNetworkAddress
 		return ret
 	}
@@ -479,7 +483,7 @@ func (o *HyperflexHypervisorHost) UnsetIp() {
 
 // GetLockdown returns the Lockdown field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetLockdown() bool {
-	if o == nil || o.Lockdown == nil {
+	if o == nil || IsNil(o.Lockdown) {
 		var ret bool
 		return ret
 	}
@@ -489,7 +493,7 @@ func (o *HyperflexHypervisorHost) GetLockdown() bool {
 // GetLockdownOk returns a tuple with the Lockdown field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetLockdownOk() (*bool, bool) {
-	if o == nil || o.Lockdown == nil {
+	if o == nil || IsNil(o.Lockdown) {
 		return nil, false
 	}
 	return o.Lockdown, true
@@ -497,7 +501,7 @@ func (o *HyperflexHypervisorHost) GetLockdownOk() (*bool, bool) {
 
 // HasLockdown returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasLockdown() bool {
-	if o != nil && o.Lockdown != nil {
+	if o != nil && !IsNil(o.Lockdown) {
 		return true
 	}
 
@@ -511,7 +515,7 @@ func (o *HyperflexHypervisorHost) SetLockdown(v bool) {
 
 // GetMgmtIp returns the MgmtIp field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexHypervisorHost) GetMgmtIp() NetworkHyperFlexNetworkAddress {
-	if o == nil || o.MgmtIp.Get() == nil {
+	if o == nil || IsNil(o.MgmtIp.Get()) {
 		var ret NetworkHyperFlexNetworkAddress
 		return ret
 	}
@@ -554,7 +558,7 @@ func (o *HyperflexHypervisorHost) UnsetMgmtIp() {
 
 // GetOsVersion returns the OsVersion field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetOsVersion() string {
-	if o == nil || o.OsVersion == nil {
+	if o == nil || IsNil(o.OsVersion) {
 		var ret string
 		return ret
 	}
@@ -564,7 +568,7 @@ func (o *HyperflexHypervisorHost) GetOsVersion() string {
 // GetOsVersionOk returns a tuple with the OsVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetOsVersionOk() (*string, bool) {
-	if o == nil || o.OsVersion == nil {
+	if o == nil || IsNil(o.OsVersion) {
 		return nil, false
 	}
 	return o.OsVersion, true
@@ -572,7 +576,7 @@ func (o *HyperflexHypervisorHost) GetOsVersionOk() (*string, bool) {
 
 // HasOsVersion returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasOsVersion() bool {
-	if o != nil && o.OsVersion != nil {
+	if o != nil && !IsNil(o.OsVersion) {
 		return true
 	}
 
@@ -586,7 +590,7 @@ func (o *HyperflexHypervisorHost) SetOsVersion(v string) {
 
 // GetRole returns the Role field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetRole() string {
-	if o == nil || o.Role == nil {
+	if o == nil || IsNil(o.Role) {
 		var ret string
 		return ret
 	}
@@ -596,7 +600,7 @@ func (o *HyperflexHypervisorHost) GetRole() string {
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetRoleOk() (*string, bool) {
-	if o == nil || o.Role == nil {
+	if o == nil || IsNil(o.Role) {
 		return nil, false
 	}
 	return o.Role, true
@@ -604,7 +608,7 @@ func (o *HyperflexHypervisorHost) GetRoleOk() (*string, bool) {
 
 // HasRole returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasRole() bool {
-	if o != nil && o.Role != nil {
+	if o != nil && !IsNil(o.Role) {
 		return true
 	}
 
@@ -618,7 +622,7 @@ func (o *HyperflexHypervisorHost) SetRole(v string) {
 
 // GetTemplateVersion returns the TemplateVersion field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetTemplateVersion() string {
-	if o == nil || o.TemplateVersion == nil {
+	if o == nil || IsNil(o.TemplateVersion) {
 		var ret string
 		return ret
 	}
@@ -628,7 +632,7 @@ func (o *HyperflexHypervisorHost) GetTemplateVersion() string {
 // GetTemplateVersionOk returns a tuple with the TemplateVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetTemplateVersionOk() (*string, bool) {
-	if o == nil || o.TemplateVersion == nil {
+	if o == nil || IsNil(o.TemplateVersion) {
 		return nil, false
 	}
 	return o.TemplateVersion, true
@@ -636,7 +640,7 @@ func (o *HyperflexHypervisorHost) GetTemplateVersionOk() (*string, bool) {
 
 // HasTemplateVersion returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasTemplateVersion() bool {
-	if o != nil && o.TemplateVersion != nil {
+	if o != nil && !IsNil(o.TemplateVersion) {
 		return true
 	}
 
@@ -650,7 +654,7 @@ func (o *HyperflexHypervisorHost) SetTemplateVersion(v string) {
 
 // GetVirtualCpus returns the VirtualCpus field value if set, zero value otherwise.
 func (o *HyperflexHypervisorHost) GetVirtualCpus() int32 {
-	if o == nil || o.VirtualCpus == nil {
+	if o == nil || IsNil(o.VirtualCpus) {
 		var ret int32
 		return ret
 	}
@@ -660,7 +664,7 @@ func (o *HyperflexHypervisorHost) GetVirtualCpus() int32 {
 // GetVirtualCpusOk returns a tuple with the VirtualCpus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHypervisorHost) GetVirtualCpusOk() (*int32, bool) {
-	if o == nil || o.VirtualCpus == nil {
+	if o == nil || IsNil(o.VirtualCpus) {
 		return nil, false
 	}
 	return o.VirtualCpus, true
@@ -668,7 +672,7 @@ func (o *HyperflexHypervisorHost) GetVirtualCpusOk() (*int32, bool) {
 
 // HasVirtualCpus returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasVirtualCpus() bool {
-	if o != nil && o.VirtualCpus != nil {
+	if o != nil && !IsNil(o.VirtualCpus) {
 		return true
 	}
 
@@ -680,149 +684,197 @@ func (o *HyperflexHypervisorHost) SetVirtualCpus(v int32) {
 	o.VirtualCpus = &v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexHypervisorHost) GetCluster() HyperflexClusterRelationship {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.Cluster
+	return *o.Cluster.Get()
 }
 
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexHypervisorHost) GetClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.Cluster.Get(), o.Cluster.IsSet()
 }
 
 // HasCluster returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && o.Cluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the Cluster field.
+// SetCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the Cluster field.
 func (o *HyperflexHypervisorHost) SetCluster(v HyperflexClusterRelationship) {
-	o.Cluster = &v
+	o.Cluster.Set(&v)
 }
 
-// GetNode returns the Node field value if set, zero value otherwise.
+// SetClusterNil sets the value for Cluster to be an explicit nil
+func (o *HyperflexHypervisorHost) SetClusterNil() {
+	o.Cluster.Set(nil)
+}
+
+// UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
+func (o *HyperflexHypervisorHost) UnsetCluster() {
+	o.Cluster.Unset()
+}
+
+// GetNode returns the Node field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexHypervisorHost) GetNode() HyperflexNodeRelationship {
-	if o == nil || o.Node == nil {
+	if o == nil || IsNil(o.Node.Get()) {
 		var ret HyperflexNodeRelationship
 		return ret
 	}
-	return *o.Node
+	return *o.Node.Get()
 }
 
 // GetNodeOk returns a tuple with the Node field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexHypervisorHost) GetNodeOk() (*HyperflexNodeRelationship, bool) {
-	if o == nil || o.Node == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Node, true
+	return o.Node.Get(), o.Node.IsSet()
 }
 
 // HasNode returns a boolean if a field has been set.
 func (o *HyperflexHypervisorHost) HasNode() bool {
-	if o != nil && o.Node != nil {
+	if o != nil && o.Node.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNode gets a reference to the given HyperflexNodeRelationship and assigns it to the Node field.
+// SetNode gets a reference to the given NullableHyperflexNodeRelationship and assigns it to the Node field.
 func (o *HyperflexHypervisorHost) SetNode(v HyperflexNodeRelationship) {
-	o.Node = &v
+	o.Node.Set(&v)
+}
+
+// SetNodeNil sets the value for Node to be an explicit nil
+func (o *HyperflexHypervisorHost) SetNodeNil() {
+	o.Node.Set(nil)
+}
+
+// UnsetNode ensures that no value is present for Node, not even an explicit nil
+func (o *HyperflexHypervisorHost) UnsetNode() {
+	o.Node.Unset()
 }
 
 func (o HyperflexHypervisorHost) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexHypervisorHost) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseHost, errVirtualizationBaseHost := json.Marshal(o.VirtualizationBaseHost)
 	if errVirtualizationBaseHost != nil {
-		return []byte{}, errVirtualizationBaseHost
+		return map[string]interface{}{}, errVirtualizationBaseHost
 	}
 	errVirtualizationBaseHost = json.Unmarshal([]byte(serializedVirtualizationBaseHost), &toSerialize)
 	if errVirtualizationBaseHost != nil {
-		return []byte{}, errVirtualizationBaseHost
+		return map[string]interface{}{}, errVirtualizationBaseHost
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConfiguredMemory != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConfiguredMemory) {
 		toSerialize["ConfiguredMemory"] = o.ConfiguredMemory
 	}
-	if o.ControllerVmDisplayVersion != nil {
+	if !IsNil(o.ControllerVmDisplayVersion) {
 		toSerialize["ControllerVmDisplayVersion"] = o.ControllerVmDisplayVersion
 	}
-	if o.ControllerVmHxdpDisplayVersion != nil {
+	if !IsNil(o.ControllerVmHxdpDisplayVersion) {
 		toSerialize["ControllerVmHxdpDisplayVersion"] = o.ControllerVmHxdpDisplayVersion
 	}
-	if o.ControllerVmHxdpVersion != nil {
+	if !IsNil(o.ControllerVmHxdpVersion) {
 		toSerialize["ControllerVmHxdpVersion"] = o.ControllerVmHxdpVersion
 	}
-	if o.ControllerVmUuid != nil {
+	if !IsNil(o.ControllerVmUuid) {
 		toSerialize["ControllerVmUuid"] = o.ControllerVmUuid
 	}
-	if o.ControllerVmVersion != nil {
+	if !IsNil(o.ControllerVmVersion) {
 		toSerialize["ControllerVmVersion"] = o.ControllerVmVersion
 	}
 	if o.DataIp.IsSet() {
 		toSerialize["DataIp"] = o.DataIp.Get()
 	}
-	if o.HostStatus != nil {
+	if !IsNil(o.HostStatus) {
 		toSerialize["HostStatus"] = o.HostStatus
 	}
-	if o.Hypervisor != nil {
+	if !IsNil(o.Hypervisor) {
 		toSerialize["Hypervisor"] = o.Hypervisor
 	}
 	if o.Ip.IsSet() {
 		toSerialize["Ip"] = o.Ip.Get()
 	}
-	if o.Lockdown != nil {
+	if !IsNil(o.Lockdown) {
 		toSerialize["Lockdown"] = o.Lockdown
 	}
 	if o.MgmtIp.IsSet() {
 		toSerialize["MgmtIp"] = o.MgmtIp.Get()
 	}
-	if o.OsVersion != nil {
+	if !IsNil(o.OsVersion) {
 		toSerialize["OsVersion"] = o.OsVersion
 	}
-	if o.Role != nil {
+	if !IsNil(o.Role) {
 		toSerialize["Role"] = o.Role
 	}
-	if o.TemplateVersion != nil {
+	if !IsNil(o.TemplateVersion) {
 		toSerialize["TemplateVersion"] = o.TemplateVersion
 	}
-	if o.VirtualCpus != nil {
+	if !IsNil(o.VirtualCpus) {
 		toSerialize["VirtualCpus"] = o.VirtualCpus
 	}
-	if o.Cluster != nil {
-		toSerialize["Cluster"] = o.Cluster
+	if o.Cluster.IsSet() {
+		toSerialize["Cluster"] = o.Cluster.Get()
 	}
-	if o.Node != nil {
-		toSerialize["Node"] = o.Node
+	if o.Node.IsSet() {
+		toSerialize["Node"] = o.Node.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexHypervisorHost) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexHypervisorHost) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexHypervisorHostWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -856,14 +908,14 @@ func (o *HyperflexHypervisorHost) UnmarshalJSON(bytes []byte) (err error) {
 		// The controller virtual machine template version.
 		TemplateVersion *string `json:"TemplateVersion,omitempty"`
 		// Configured number of virtual CPUs for Controller virtual machine.
-		VirtualCpus *int32                        `json:"VirtualCpus,omitempty"`
-		Cluster     *HyperflexClusterRelationship `json:"Cluster,omitempty"`
-		Node        *HyperflexNodeRelationship    `json:"Node,omitempty"`
+		VirtualCpus *int32                               `json:"VirtualCpus,omitempty"`
+		Cluster     NullableHyperflexClusterRelationship `json:"Cluster,omitempty"`
+		Node        NullableHyperflexNodeRelationship    `json:"Node,omitempty"`
 	}
 
 	varHyperflexHypervisorHostWithoutEmbeddedStruct := HyperflexHypervisorHostWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHypervisorHostWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexHypervisorHostWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexHypervisorHost := _HyperflexHypervisorHost{}
 		varHyperflexHypervisorHost.ClassId = varHyperflexHypervisorHostWithoutEmbeddedStruct.ClassId
@@ -893,7 +945,7 @@ func (o *HyperflexHypervisorHost) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexHypervisorHost := _HyperflexHypervisorHost{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHypervisorHost)
+	err = json.Unmarshal(data, &varHyperflexHypervisorHost)
 	if err == nil {
 		o.VirtualizationBaseHost = varHyperflexHypervisorHost.VirtualizationBaseHost
 	} else {
@@ -902,7 +954,7 @@ func (o *HyperflexHypervisorHost) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfiguredMemory")

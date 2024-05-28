@@ -11,11 +11,11 @@ Name | Type | Description | Notes
 **IksUtilityContainer** | Pointer to **string** | The iks utility container to use for the kubernetes version. | [optional] 
 **KubernetesVersion** | Pointer to **string** | Desired Kubernetes version. | [optional] 
 **Name** | Pointer to **string** | The name of this IKS kubernetes version. | [optional] 
-**BootIso** | Pointer to [**SoftwareSolutionDistributableRelationship**](SoftwareSolutionDistributableRelationship.md) |  | [optional] 
-**Catalog** | Pointer to [**KubernetesCatalogRelationship**](KubernetesCatalogRelationship.md) |  | [optional] 
-**OvaImageTemplate** | Pointer to [**SoftwareSolutionDistributableRelationship**](SoftwareSolutionDistributableRelationship.md) |  | [optional] 
-**Qcow2NodeTemplate** | Pointer to [**SoftwareSolutionDistributableRelationship**](SoftwareSolutionDistributableRelationship.md) |  | [optional] 
-**Qcow2VirtualMachineTemplate** | Pointer to [**SoftwareSolutionDistributableRelationship**](SoftwareSolutionDistributableRelationship.md) |  | [optional] 
+**BootIso** | Pointer to [**NullableSoftwareSolutionDistributableRelationship**](SoftwareSolutionDistributableRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableKubernetesCatalogRelationship**](KubernetesCatalogRelationship.md) |  | [optional] 
+**OvaImageTemplate** | Pointer to [**NullableSoftwareSolutionDistributableRelationship**](SoftwareSolutionDistributableRelationship.md) |  | [optional] 
+**Qcow2NodeTemplate** | Pointer to [**NullableSoftwareSolutionDistributableRelationship**](SoftwareSolutionDistributableRelationship.md) |  | [optional] 
+**Qcow2VirtualMachineTemplate** | Pointer to [**NullableSoftwareSolutionDistributableRelationship**](SoftwareSolutionDistributableRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -236,6 +236,16 @@ SetBootIso sets BootIso field to given value.
 
 HasBootIso returns a boolean if a field has been set.
 
+### SetBootIsoNil
+
+`func (o *KubernetesVersion) SetBootIsoNil(b bool)`
+
+ SetBootIsoNil sets the value for BootIso to be an explicit nil
+
+### UnsetBootIso
+`func (o *KubernetesVersion) UnsetBootIso()`
+
+UnsetBootIso ensures that no value is present for BootIso, not even an explicit nil
 ### GetCatalog
 
 `func (o *KubernetesVersion) GetCatalog() KubernetesCatalogRelationship`
@@ -261,6 +271,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *KubernetesVersion) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *KubernetesVersion) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 ### GetOvaImageTemplate
 
 `func (o *KubernetesVersion) GetOvaImageTemplate() SoftwareSolutionDistributableRelationship`
@@ -286,6 +306,16 @@ SetOvaImageTemplate sets OvaImageTemplate field to given value.
 
 HasOvaImageTemplate returns a boolean if a field has been set.
 
+### SetOvaImageTemplateNil
+
+`func (o *KubernetesVersion) SetOvaImageTemplateNil(b bool)`
+
+ SetOvaImageTemplateNil sets the value for OvaImageTemplate to be an explicit nil
+
+### UnsetOvaImageTemplate
+`func (o *KubernetesVersion) UnsetOvaImageTemplate()`
+
+UnsetOvaImageTemplate ensures that no value is present for OvaImageTemplate, not even an explicit nil
 ### GetQcow2NodeTemplate
 
 `func (o *KubernetesVersion) GetQcow2NodeTemplate() SoftwareSolutionDistributableRelationship`
@@ -311,6 +341,16 @@ SetQcow2NodeTemplate sets Qcow2NodeTemplate field to given value.
 
 HasQcow2NodeTemplate returns a boolean if a field has been set.
 
+### SetQcow2NodeTemplateNil
+
+`func (o *KubernetesVersion) SetQcow2NodeTemplateNil(b bool)`
+
+ SetQcow2NodeTemplateNil sets the value for Qcow2NodeTemplate to be an explicit nil
+
+### UnsetQcow2NodeTemplate
+`func (o *KubernetesVersion) UnsetQcow2NodeTemplate()`
+
+UnsetQcow2NodeTemplate ensures that no value is present for Qcow2NodeTemplate, not even an explicit nil
 ### GetQcow2VirtualMachineTemplate
 
 `func (o *KubernetesVersion) GetQcow2VirtualMachineTemplate() SoftwareSolutionDistributableRelationship`
@@ -336,6 +376,16 @@ SetQcow2VirtualMachineTemplate sets Qcow2VirtualMachineTemplate field to given v
 
 HasQcow2VirtualMachineTemplate returns a boolean if a field has been set.
 
+### SetQcow2VirtualMachineTemplateNil
+
+`func (o *KubernetesVersion) SetQcow2VirtualMachineTemplateNil(b bool)`
+
+ SetQcow2VirtualMachineTemplateNil sets the value for Qcow2VirtualMachineTemplate to be an explicit nil
+
+### UnsetQcow2VirtualMachineTemplate
+`func (o *KubernetesVersion) UnsetQcow2VirtualMachineTemplate()`
+
+UnsetQcow2VirtualMachineTemplate ensures that no value is present for Qcow2VirtualMachineTemplate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

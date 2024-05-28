@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ResourceLicenseResourceCount type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceLicenseResourceCount{}
 
 // ResourceLicenseResourceCount LicenseResourceCount tracks the server count info for 3 different licensing tiers.
 type ResourceLicenseResourceCount struct {
@@ -27,8 +31,8 @@ type ResourceLicenseResourceCount struct {
 	// Type of licensing defined for this resource group. Used for licensing group. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type. * `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud. * `INC-Premier-CentralizedMod8Slot` - Premier modular license tier of switch type CentralizedMod8Slot for Intersight Nexus Cloud. * `INC-Premier-DistributedMod8Slot` - Premier modular license tier of switch type DistributedMod8Slot for Intersight Nexus Cloud. * `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.
 	LicenseType *string `json:"LicenseType,omitempty"`
 	// The number of resource belongs to this licensing tier.
-	ResourceCount *int64                  `json:"ResourceCount,omitempty"`
-	Account       *IamAccountRelationship `json:"Account,omitempty"`
+	ResourceCount *int64                         `json:"ResourceCount,omitempty"`
+	Account       NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to resourceGroup resources.
 	LicenseGroups        []ResourceGroupRelationship `json:"LicenseGroups,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -109,7 +113,7 @@ func (o *ResourceLicenseResourceCount) SetObjectType(v string) {
 
 // GetLicenseType returns the LicenseType field value if set, zero value otherwise.
 func (o *ResourceLicenseResourceCount) GetLicenseType() string {
-	if o == nil || o.LicenseType == nil {
+	if o == nil || IsNil(o.LicenseType) {
 		var ret string
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *ResourceLicenseResourceCount) GetLicenseType() string {
 // GetLicenseTypeOk returns a tuple with the LicenseType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceLicenseResourceCount) GetLicenseTypeOk() (*string, bool) {
-	if o == nil || o.LicenseType == nil {
+	if o == nil || IsNil(o.LicenseType) {
 		return nil, false
 	}
 	return o.LicenseType, true
@@ -127,7 +131,7 @@ func (o *ResourceLicenseResourceCount) GetLicenseTypeOk() (*string, bool) {
 
 // HasLicenseType returns a boolean if a field has been set.
 func (o *ResourceLicenseResourceCount) HasLicenseType() bool {
-	if o != nil && o.LicenseType != nil {
+	if o != nil && !IsNil(o.LicenseType) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *ResourceLicenseResourceCount) SetLicenseType(v string) {
 
 // GetResourceCount returns the ResourceCount field value if set, zero value otherwise.
 func (o *ResourceLicenseResourceCount) GetResourceCount() int64 {
-	if o == nil || o.ResourceCount == nil {
+	if o == nil || IsNil(o.ResourceCount) {
 		var ret int64
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *ResourceLicenseResourceCount) GetResourceCount() int64 {
 // GetResourceCountOk returns a tuple with the ResourceCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceLicenseResourceCount) GetResourceCountOk() (*int64, bool) {
-	if o == nil || o.ResourceCount == nil {
+	if o == nil || IsNil(o.ResourceCount) {
 		return nil, false
 	}
 	return o.ResourceCount, true
@@ -159,7 +163,7 @@ func (o *ResourceLicenseResourceCount) GetResourceCountOk() (*int64, bool) {
 
 // HasResourceCount returns a boolean if a field has been set.
 func (o *ResourceLicenseResourceCount) HasResourceCount() bool {
-	if o != nil && o.ResourceCount != nil {
+	if o != nil && !IsNil(o.ResourceCount) {
 		return true
 	}
 
@@ -171,36 +175,47 @@ func (o *ResourceLicenseResourceCount) SetResourceCount(v int64) {
 	o.ResourceCount = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceLicenseResourceCount) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceLicenseResourceCount) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ResourceLicenseResourceCount) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ResourceLicenseResourceCount) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ResourceLicenseResourceCount) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ResourceLicenseResourceCount) UnsetAccount() {
+	o.Account.Unset()
 }
 
 // GetLicenseGroups returns the LicenseGroups field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -216,7 +231,7 @@ func (o *ResourceLicenseResourceCount) GetLicenseGroups() []ResourceGroupRelatio
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceLicenseResourceCount) GetLicenseGroupsOk() ([]ResourceGroupRelationship, bool) {
-	if o == nil || o.LicenseGroups == nil {
+	if o == nil || IsNil(o.LicenseGroups) {
 		return nil, false
 	}
 	return o.LicenseGroups, true
@@ -224,7 +239,7 @@ func (o *ResourceLicenseResourceCount) GetLicenseGroupsOk() ([]ResourceGroupRela
 
 // HasLicenseGroups returns a boolean if a field has been set.
 func (o *ResourceLicenseResourceCount) HasLicenseGroups() bool {
-	if o != nil && o.LicenseGroups != nil {
+	if o != nil && IsNil(o.LicenseGroups) {
 		return true
 	}
 
@@ -237,29 +252,33 @@ func (o *ResourceLicenseResourceCount) SetLicenseGroups(v []ResourceGroupRelatio
 }
 
 func (o ResourceLicenseResourceCount) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ResourceLicenseResourceCount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.LicenseType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.LicenseType) {
 		toSerialize["LicenseType"] = o.LicenseType
 	}
-	if o.ResourceCount != nil {
+	if !IsNil(o.ResourceCount) {
 		toSerialize["ResourceCount"] = o.ResourceCount
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 	if o.LicenseGroups != nil {
 		toSerialize["LicenseGroups"] = o.LicenseGroups
@@ -269,10 +288,32 @@ func (o ResourceLicenseResourceCount) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ResourceLicenseResourceCount) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ResourceLicenseResourceCount) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ResourceLicenseResourceCountWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -281,15 +322,15 @@ func (o *ResourceLicenseResourceCount) UnmarshalJSON(bytes []byte) (err error) {
 		// Type of licensing defined for this resource group. Used for licensing group. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type. * `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud. * `INC-Premier-CentralizedMod8Slot` - Premier modular license tier of switch type CentralizedMod8Slot for Intersight Nexus Cloud. * `INC-Premier-DistributedMod8Slot` - Premier modular license tier of switch type DistributedMod8Slot for Intersight Nexus Cloud. * `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.
 		LicenseType *string `json:"LicenseType,omitempty"`
 		// The number of resource belongs to this licensing tier.
-		ResourceCount *int64                  `json:"ResourceCount,omitempty"`
-		Account       *IamAccountRelationship `json:"Account,omitempty"`
+		ResourceCount *int64                         `json:"ResourceCount,omitempty"`
+		Account       NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to resourceGroup resources.
 		LicenseGroups []ResourceGroupRelationship `json:"LicenseGroups,omitempty"`
 	}
 
 	varResourceLicenseResourceCountWithoutEmbeddedStruct := ResourceLicenseResourceCountWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varResourceLicenseResourceCountWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varResourceLicenseResourceCountWithoutEmbeddedStruct)
 	if err == nil {
 		varResourceLicenseResourceCount := _ResourceLicenseResourceCount{}
 		varResourceLicenseResourceCount.ClassId = varResourceLicenseResourceCountWithoutEmbeddedStruct.ClassId
@@ -305,7 +346,7 @@ func (o *ResourceLicenseResourceCount) UnmarshalJSON(bytes []byte) (err error) {
 
 	varResourceLicenseResourceCount := _ResourceLicenseResourceCount{}
 
-	err = json.Unmarshal(bytes, &varResourceLicenseResourceCount)
+	err = json.Unmarshal(data, &varResourceLicenseResourceCount)
 	if err == nil {
 		o.MoBaseMo = varResourceLicenseResourceCount.MoBaseMo
 	} else {
@@ -314,7 +355,7 @@ func (o *ResourceLicenseResourceCount) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "LicenseType")

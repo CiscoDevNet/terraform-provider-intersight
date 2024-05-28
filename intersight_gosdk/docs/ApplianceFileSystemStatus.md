@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **OperationalStatus** | Pointer to **string** | Operational status of the file system. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * &#x60;Unknown&#x60; - The status of the appliance node is unknown. * &#x60;Operational&#x60; - The appliance node is operational. * &#x60;Impaired&#x60; - The appliance node is impaired. * &#x60;AttentionNeeded&#x60; - The appliance node needs attention. * &#x60;ReadyToJoin&#x60; - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * &#x60;OutOfService&#x60; - The user has taken this node (part of a cluster) to out of service. * &#x60;ReadyForReplacement&#x60; - The cluster node is ready to be replaced. * &#x60;ReplacementInProgress&#x60; - The cluster node replacement is in progress. * &#x60;ReplacementFailed&#x60; - There was a failure during the cluster node replacement. | [optional] [readonly] [default to "Unknown"]
 **StatusChecks** | Pointer to [**[]ApplianceStatusCheck**](ApplianceStatusCheck.md) |  | [optional] 
 **Usage** | Pointer to **float32** | Percentage of the file system capacity currently in use. | [optional] [readonly] 
-**NodeStatus** | Pointer to [**ApplianceNodeStatusRelationship**](ApplianceNodeStatusRelationship.md) |  | [optional] 
+**NodeStatus** | Pointer to [**NullableApplianceNodeStatusRelationship**](ApplianceNodeStatusRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -232,6 +232,16 @@ SetNodeStatus sets NodeStatus field to given value.
 
 HasNodeStatus returns a boolean if a field has been set.
 
+### SetNodeStatusNil
+
+`func (o *ApplianceFileSystemStatus) SetNodeStatusNil(b bool)`
+
+ SetNodeStatusNil sets the value for NodeStatus to be an explicit nil
+
+### UnsetNodeStatus
+`func (o *ApplianceFileSystemStatus) UnsetNodeStatus()`
+
+UnsetNodeStatus ensures that no value is present for NodeStatus, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

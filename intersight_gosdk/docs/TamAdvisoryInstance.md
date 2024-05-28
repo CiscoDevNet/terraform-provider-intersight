@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **LastStateChangeTime** | Pointer to **time.Time** | Timestamp when a state change was observed on this advisory instnace. | [optional] [readonly] 
 **LastVerifiedTime** | Pointer to **time.Time** | Timestamp when this advisory was last evaluated. | [optional] [readonly] 
 **State** | Pointer to **string** | Current state of the advisory instance (Active/Cleared/Unknown etc.). * &#x60;unknown&#x60; - Intersight is unable to determine if the Advisory instance is applicable for the affected managed object. * &#x60;active&#x60; - Advisory instance is currently active and applicable for the affected managed object. * &#x60;cleared&#x60; - Advisory instance is no longer applicable for the affected managed object. | [optional] [default to "unknown"]
-**Advisory** | Pointer to [**TamBaseAdvisoryRelationship**](TamBaseAdvisoryRelationship.md) |  | [optional] 
-**AffectedObject** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**DeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Advisory** | Pointer to [**NullableTamBaseAdvisoryRelationship**](TamBaseAdvisoryRelationship.md) |  | [optional] 
+**AffectedObject** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**DeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -224,6 +224,16 @@ SetAdvisory sets Advisory field to given value.
 
 HasAdvisory returns a boolean if a field has been set.
 
+### SetAdvisoryNil
+
+`func (o *TamAdvisoryInstance) SetAdvisoryNil(b bool)`
+
+ SetAdvisoryNil sets the value for Advisory to be an explicit nil
+
+### UnsetAdvisory
+`func (o *TamAdvisoryInstance) UnsetAdvisory()`
+
+UnsetAdvisory ensures that no value is present for Advisory, not even an explicit nil
 ### GetAffectedObject
 
 `func (o *TamAdvisoryInstance) GetAffectedObject() MoBaseMoRelationship`
@@ -249,6 +259,16 @@ SetAffectedObject sets AffectedObject field to given value.
 
 HasAffectedObject returns a boolean if a field has been set.
 
+### SetAffectedObjectNil
+
+`func (o *TamAdvisoryInstance) SetAffectedObjectNil(b bool)`
+
+ SetAffectedObjectNil sets the value for AffectedObject to be an explicit nil
+
+### UnsetAffectedObject
+`func (o *TamAdvisoryInstance) UnsetAffectedObject()`
+
+UnsetAffectedObject ensures that no value is present for AffectedObject, not even an explicit nil
 ### GetDeviceRegistration
 
 `func (o *TamAdvisoryInstance) GetDeviceRegistration() AssetDeviceRegistrationRelationship`
@@ -274,6 +294,16 @@ SetDeviceRegistration sets DeviceRegistration field to given value.
 
 HasDeviceRegistration returns a boolean if a field has been set.
 
+### SetDeviceRegistrationNil
+
+`func (o *TamAdvisoryInstance) SetDeviceRegistrationNil(b bool)`
+
+ SetDeviceRegistrationNil sets the value for DeviceRegistration to be an explicit nil
+
+### UnsetDeviceRegistration
+`func (o *TamAdvisoryInstance) UnsetDeviceRegistration()`
+
+UnsetDeviceRegistration ensures that no value is present for DeviceRegistration, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

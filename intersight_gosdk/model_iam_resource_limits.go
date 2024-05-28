@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamResourceLimits type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamResourceLimits{}
 
 // IamResourceLimits The resource limits used to limit resources such as User accounts.
 type IamResourceLimits struct {
@@ -33,8 +37,8 @@ type IamResourceLimits struct {
 	// The maximum expiration period (in seconds) allowed for App Registration. The default value is 180 days or 15552000 seconds. It is shown to user in days for readability.
 	MaxAppRegistrationExpiry *int64 `json:"MaxAppRegistrationExpiry,omitempty"`
 	// The maximum number of users allowed in an account. The default value is 200.
-	PerAccountUserLimit  *int64                  `json:"PerAccountUserLimit,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	PerAccountUserLimit  *int64                         `json:"PerAccountUserLimit,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -129,7 +133,7 @@ func (o *IamResourceLimits) SetObjectType(v string) {
 
 // GetAllowApiKeysWithoutExpiry returns the AllowApiKeysWithoutExpiry field value if set, zero value otherwise.
 func (o *IamResourceLimits) GetAllowApiKeysWithoutExpiry() bool {
-	if o == nil || o.AllowApiKeysWithoutExpiry == nil {
+	if o == nil || IsNil(o.AllowApiKeysWithoutExpiry) {
 		var ret bool
 		return ret
 	}
@@ -139,7 +143,7 @@ func (o *IamResourceLimits) GetAllowApiKeysWithoutExpiry() bool {
 // GetAllowApiKeysWithoutExpiryOk returns a tuple with the AllowApiKeysWithoutExpiry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamResourceLimits) GetAllowApiKeysWithoutExpiryOk() (*bool, bool) {
-	if o == nil || o.AllowApiKeysWithoutExpiry == nil {
+	if o == nil || IsNil(o.AllowApiKeysWithoutExpiry) {
 		return nil, false
 	}
 	return o.AllowApiKeysWithoutExpiry, true
@@ -147,7 +151,7 @@ func (o *IamResourceLimits) GetAllowApiKeysWithoutExpiryOk() (*bool, bool) {
 
 // HasAllowApiKeysWithoutExpiry returns a boolean if a field has been set.
 func (o *IamResourceLimits) HasAllowApiKeysWithoutExpiry() bool {
-	if o != nil && o.AllowApiKeysWithoutExpiry != nil {
+	if o != nil && !IsNil(o.AllowApiKeysWithoutExpiry) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *IamResourceLimits) SetAllowApiKeysWithoutExpiry(v bool) {
 
 // GetAllowAppRegistrationsWithoutExpiry returns the AllowAppRegistrationsWithoutExpiry field value if set, zero value otherwise.
 func (o *IamResourceLimits) GetAllowAppRegistrationsWithoutExpiry() bool {
-	if o == nil || o.AllowAppRegistrationsWithoutExpiry == nil {
+	if o == nil || IsNil(o.AllowAppRegistrationsWithoutExpiry) {
 		var ret bool
 		return ret
 	}
@@ -171,7 +175,7 @@ func (o *IamResourceLimits) GetAllowAppRegistrationsWithoutExpiry() bool {
 // GetAllowAppRegistrationsWithoutExpiryOk returns a tuple with the AllowAppRegistrationsWithoutExpiry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamResourceLimits) GetAllowAppRegistrationsWithoutExpiryOk() (*bool, bool) {
-	if o == nil || o.AllowAppRegistrationsWithoutExpiry == nil {
+	if o == nil || IsNil(o.AllowAppRegistrationsWithoutExpiry) {
 		return nil, false
 	}
 	return o.AllowAppRegistrationsWithoutExpiry, true
@@ -179,7 +183,7 @@ func (o *IamResourceLimits) GetAllowAppRegistrationsWithoutExpiryOk() (*bool, bo
 
 // HasAllowAppRegistrationsWithoutExpiry returns a boolean if a field has been set.
 func (o *IamResourceLimits) HasAllowAppRegistrationsWithoutExpiry() bool {
-	if o != nil && o.AllowAppRegistrationsWithoutExpiry != nil {
+	if o != nil && !IsNil(o.AllowAppRegistrationsWithoutExpiry) {
 		return true
 	}
 
@@ -193,7 +197,7 @@ func (o *IamResourceLimits) SetAllowAppRegistrationsWithoutExpiry(v bool) {
 
 // GetMaxApiKeyExpiry returns the MaxApiKeyExpiry field value if set, zero value otherwise.
 func (o *IamResourceLimits) GetMaxApiKeyExpiry() int64 {
-	if o == nil || o.MaxApiKeyExpiry == nil {
+	if o == nil || IsNil(o.MaxApiKeyExpiry) {
 		var ret int64
 		return ret
 	}
@@ -203,7 +207,7 @@ func (o *IamResourceLimits) GetMaxApiKeyExpiry() int64 {
 // GetMaxApiKeyExpiryOk returns a tuple with the MaxApiKeyExpiry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamResourceLimits) GetMaxApiKeyExpiryOk() (*int64, bool) {
-	if o == nil || o.MaxApiKeyExpiry == nil {
+	if o == nil || IsNil(o.MaxApiKeyExpiry) {
 		return nil, false
 	}
 	return o.MaxApiKeyExpiry, true
@@ -211,7 +215,7 @@ func (o *IamResourceLimits) GetMaxApiKeyExpiryOk() (*int64, bool) {
 
 // HasMaxApiKeyExpiry returns a boolean if a field has been set.
 func (o *IamResourceLimits) HasMaxApiKeyExpiry() bool {
-	if o != nil && o.MaxApiKeyExpiry != nil {
+	if o != nil && !IsNil(o.MaxApiKeyExpiry) {
 		return true
 	}
 
@@ -225,7 +229,7 @@ func (o *IamResourceLimits) SetMaxApiKeyExpiry(v int64) {
 
 // GetMaxAppRegistrationExpiry returns the MaxAppRegistrationExpiry field value if set, zero value otherwise.
 func (o *IamResourceLimits) GetMaxAppRegistrationExpiry() int64 {
-	if o == nil || o.MaxAppRegistrationExpiry == nil {
+	if o == nil || IsNil(o.MaxAppRegistrationExpiry) {
 		var ret int64
 		return ret
 	}
@@ -235,7 +239,7 @@ func (o *IamResourceLimits) GetMaxAppRegistrationExpiry() int64 {
 // GetMaxAppRegistrationExpiryOk returns a tuple with the MaxAppRegistrationExpiry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamResourceLimits) GetMaxAppRegistrationExpiryOk() (*int64, bool) {
-	if o == nil || o.MaxAppRegistrationExpiry == nil {
+	if o == nil || IsNil(o.MaxAppRegistrationExpiry) {
 		return nil, false
 	}
 	return o.MaxAppRegistrationExpiry, true
@@ -243,7 +247,7 @@ func (o *IamResourceLimits) GetMaxAppRegistrationExpiryOk() (*int64, bool) {
 
 // HasMaxAppRegistrationExpiry returns a boolean if a field has been set.
 func (o *IamResourceLimits) HasMaxAppRegistrationExpiry() bool {
-	if o != nil && o.MaxAppRegistrationExpiry != nil {
+	if o != nil && !IsNil(o.MaxAppRegistrationExpiry) {
 		return true
 	}
 
@@ -257,7 +261,7 @@ func (o *IamResourceLimits) SetMaxAppRegistrationExpiry(v int64) {
 
 // GetPerAccountUserLimit returns the PerAccountUserLimit field value if set, zero value otherwise.
 func (o *IamResourceLimits) GetPerAccountUserLimit() int64 {
-	if o == nil || o.PerAccountUserLimit == nil {
+	if o == nil || IsNil(o.PerAccountUserLimit) {
 		var ret int64
 		return ret
 	}
@@ -267,7 +271,7 @@ func (o *IamResourceLimits) GetPerAccountUserLimit() int64 {
 // GetPerAccountUserLimitOk returns a tuple with the PerAccountUserLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamResourceLimits) GetPerAccountUserLimitOk() (*int64, bool) {
-	if o == nil || o.PerAccountUserLimit == nil {
+	if o == nil || IsNil(o.PerAccountUserLimit) {
 		return nil, false
 	}
 	return o.PerAccountUserLimit, true
@@ -275,7 +279,7 @@ func (o *IamResourceLimits) GetPerAccountUserLimitOk() (*int64, bool) {
 
 // HasPerAccountUserLimit returns a boolean if a field has been set.
 func (o *IamResourceLimits) HasPerAccountUserLimit() bool {
-	if o != nil && o.PerAccountUserLimit != nil {
+	if o != nil && !IsNil(o.PerAccountUserLimit) {
 		return true
 	}
 
@@ -287,81 +291,118 @@ func (o *IamResourceLimits) SetPerAccountUserLimit(v int64) {
 	o.PerAccountUserLimit = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamResourceLimits) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamResourceLimits) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *IamResourceLimits) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *IamResourceLimits) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *IamResourceLimits) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *IamResourceLimits) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o IamResourceLimits) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamResourceLimits) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AllowApiKeysWithoutExpiry != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AllowApiKeysWithoutExpiry) {
 		toSerialize["AllowApiKeysWithoutExpiry"] = o.AllowApiKeysWithoutExpiry
 	}
-	if o.AllowAppRegistrationsWithoutExpiry != nil {
+	if !IsNil(o.AllowAppRegistrationsWithoutExpiry) {
 		toSerialize["AllowAppRegistrationsWithoutExpiry"] = o.AllowAppRegistrationsWithoutExpiry
 	}
-	if o.MaxApiKeyExpiry != nil {
+	if !IsNil(o.MaxApiKeyExpiry) {
 		toSerialize["MaxApiKeyExpiry"] = o.MaxApiKeyExpiry
 	}
-	if o.MaxAppRegistrationExpiry != nil {
+	if !IsNil(o.MaxAppRegistrationExpiry) {
 		toSerialize["MaxAppRegistrationExpiry"] = o.MaxAppRegistrationExpiry
 	}
-	if o.PerAccountUserLimit != nil {
+	if !IsNil(o.PerAccountUserLimit) {
 		toSerialize["PerAccountUserLimit"] = o.PerAccountUserLimit
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamResourceLimits) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamResourceLimits) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamResourceLimitsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -376,13 +417,13 @@ func (o *IamResourceLimits) UnmarshalJSON(bytes []byte) (err error) {
 		// The maximum expiration period (in seconds) allowed for App Registration. The default value is 180 days or 15552000 seconds. It is shown to user in days for readability.
 		MaxAppRegistrationExpiry *int64 `json:"MaxAppRegistrationExpiry,omitempty"`
 		// The maximum number of users allowed in an account. The default value is 200.
-		PerAccountUserLimit *int64                  `json:"PerAccountUserLimit,omitempty"`
-		Account             *IamAccountRelationship `json:"Account,omitempty"`
+		PerAccountUserLimit *int64                         `json:"PerAccountUserLimit,omitempty"`
+		Account             NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varIamResourceLimitsWithoutEmbeddedStruct := IamResourceLimitsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamResourceLimitsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamResourceLimitsWithoutEmbeddedStruct)
 	if err == nil {
 		varIamResourceLimits := _IamResourceLimits{}
 		varIamResourceLimits.ClassId = varIamResourceLimitsWithoutEmbeddedStruct.ClassId
@@ -400,7 +441,7 @@ func (o *IamResourceLimits) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamResourceLimits := _IamResourceLimits{}
 
-	err = json.Unmarshal(bytes, &varIamResourceLimits)
+	err = json.Unmarshal(data, &varIamResourceLimits)
 	if err == nil {
 		o.MoBaseMo = varIamResourceLimits.MoBaseMo
 	} else {
@@ -409,7 +450,7 @@ func (o *IamResourceLimits) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllowApiKeysWithoutExpiry")

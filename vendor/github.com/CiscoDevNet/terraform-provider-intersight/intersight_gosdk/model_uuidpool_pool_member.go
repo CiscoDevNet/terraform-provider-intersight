@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the UuidpoolPoolMember type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UuidpoolPoolMember{}
 
 // UuidpoolPoolMember PoolMember represents a single UUID that is part of a pool.
 type UuidpoolPoolMember struct {
@@ -25,12 +29,12 @@ type UuidpoolPoolMember struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// UUID Prefix+Suffix of this PoolMember.
-	Uuid                 *string                          `json:"Uuid,omitempty"`
-	AssignedToEntity     *MoBaseMoRelationship            `json:"AssignedToEntity,omitempty"`
-	BlockHead            *UuidpoolBlockRelationship       `json:"BlockHead,omitempty"`
-	Peer                 *UuidpoolUuidLeaseRelationship   `json:"Peer,omitempty"`
-	Pool                 *UuidpoolPoolRelationship        `json:"Pool,omitempty"`
-	Reservation          *UuidpoolReservationRelationship `json:"Reservation,omitempty"`
+	Uuid                 *string                                 `json:"Uuid,omitempty"`
+	AssignedToEntity     NullableMoBaseMoRelationship            `json:"AssignedToEntity,omitempty"`
+	BlockHead            NullableUuidpoolBlockRelationship       `json:"BlockHead,omitempty"`
+	Peer                 NullableUuidpoolUuidLeaseRelationship   `json:"Peer,omitempty"`
+	Pool                 NullableUuidpoolPoolRelationship        `json:"Pool,omitempty"`
+	Reservation          NullableUuidpoolReservationRelationship `json:"Reservation,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *UuidpoolPoolMember) SetObjectType(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *UuidpoolPoolMember) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *UuidpoolPoolMember) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UuidpoolPoolMember) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -133,7 +137,7 @@ func (o *UuidpoolPoolMember) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *UuidpoolPoolMember) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -145,226 +149,307 @@ func (o *UuidpoolPoolMember) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise.
+// GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UuidpoolPoolMember) GetAssignedToEntity() MoBaseMoRelationship {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil || IsNil(o.AssignedToEntity.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.AssignedToEntity
+	return *o.AssignedToEntity.Get()
 }
 
 // GetAssignedToEntityOk returns a tuple with the AssignedToEntity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UuidpoolPoolMember) GetAssignedToEntityOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssignedToEntity, true
+	return o.AssignedToEntity.Get(), o.AssignedToEntity.IsSet()
 }
 
 // HasAssignedToEntity returns a boolean if a field has been set.
 func (o *UuidpoolPoolMember) HasAssignedToEntity() bool {
-	if o != nil && o.AssignedToEntity != nil {
+	if o != nil && o.AssignedToEntity.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssignedToEntity gets a reference to the given MoBaseMoRelationship and assigns it to the AssignedToEntity field.
+// SetAssignedToEntity gets a reference to the given NullableMoBaseMoRelationship and assigns it to the AssignedToEntity field.
 func (o *UuidpoolPoolMember) SetAssignedToEntity(v MoBaseMoRelationship) {
-	o.AssignedToEntity = &v
+	o.AssignedToEntity.Set(&v)
 }
 
-// GetBlockHead returns the BlockHead field value if set, zero value otherwise.
+// SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+func (o *UuidpoolPoolMember) SetAssignedToEntityNil() {
+	o.AssignedToEntity.Set(nil)
+}
+
+// UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
+func (o *UuidpoolPoolMember) UnsetAssignedToEntity() {
+	o.AssignedToEntity.Unset()
+}
+
+// GetBlockHead returns the BlockHead field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UuidpoolPoolMember) GetBlockHead() UuidpoolBlockRelationship {
-	if o == nil || o.BlockHead == nil {
+	if o == nil || IsNil(o.BlockHead.Get()) {
 		var ret UuidpoolBlockRelationship
 		return ret
 	}
-	return *o.BlockHead
+	return *o.BlockHead.Get()
 }
 
 // GetBlockHeadOk returns a tuple with the BlockHead field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UuidpoolPoolMember) GetBlockHeadOk() (*UuidpoolBlockRelationship, bool) {
-	if o == nil || o.BlockHead == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BlockHead, true
+	return o.BlockHead.Get(), o.BlockHead.IsSet()
 }
 
 // HasBlockHead returns a boolean if a field has been set.
 func (o *UuidpoolPoolMember) HasBlockHead() bool {
-	if o != nil && o.BlockHead != nil {
+	if o != nil && o.BlockHead.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBlockHead gets a reference to the given UuidpoolBlockRelationship and assigns it to the BlockHead field.
+// SetBlockHead gets a reference to the given NullableUuidpoolBlockRelationship and assigns it to the BlockHead field.
 func (o *UuidpoolPoolMember) SetBlockHead(v UuidpoolBlockRelationship) {
-	o.BlockHead = &v
+	o.BlockHead.Set(&v)
 }
 
-// GetPeer returns the Peer field value if set, zero value otherwise.
+// SetBlockHeadNil sets the value for BlockHead to be an explicit nil
+func (o *UuidpoolPoolMember) SetBlockHeadNil() {
+	o.BlockHead.Set(nil)
+}
+
+// UnsetBlockHead ensures that no value is present for BlockHead, not even an explicit nil
+func (o *UuidpoolPoolMember) UnsetBlockHead() {
+	o.BlockHead.Unset()
+}
+
+// GetPeer returns the Peer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UuidpoolPoolMember) GetPeer() UuidpoolUuidLeaseRelationship {
-	if o == nil || o.Peer == nil {
+	if o == nil || IsNil(o.Peer.Get()) {
 		var ret UuidpoolUuidLeaseRelationship
 		return ret
 	}
-	return *o.Peer
+	return *o.Peer.Get()
 }
 
 // GetPeerOk returns a tuple with the Peer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UuidpoolPoolMember) GetPeerOk() (*UuidpoolUuidLeaseRelationship, bool) {
-	if o == nil || o.Peer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Peer, true
+	return o.Peer.Get(), o.Peer.IsSet()
 }
 
 // HasPeer returns a boolean if a field has been set.
 func (o *UuidpoolPoolMember) HasPeer() bool {
-	if o != nil && o.Peer != nil {
+	if o != nil && o.Peer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPeer gets a reference to the given UuidpoolUuidLeaseRelationship and assigns it to the Peer field.
+// SetPeer gets a reference to the given NullableUuidpoolUuidLeaseRelationship and assigns it to the Peer field.
 func (o *UuidpoolPoolMember) SetPeer(v UuidpoolUuidLeaseRelationship) {
-	o.Peer = &v
+	o.Peer.Set(&v)
 }
 
-// GetPool returns the Pool field value if set, zero value otherwise.
+// SetPeerNil sets the value for Peer to be an explicit nil
+func (o *UuidpoolPoolMember) SetPeerNil() {
+	o.Peer.Set(nil)
+}
+
+// UnsetPeer ensures that no value is present for Peer, not even an explicit nil
+func (o *UuidpoolPoolMember) UnsetPeer() {
+	o.Peer.Unset()
+}
+
+// GetPool returns the Pool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UuidpoolPoolMember) GetPool() UuidpoolPoolRelationship {
-	if o == nil || o.Pool == nil {
+	if o == nil || IsNil(o.Pool.Get()) {
 		var ret UuidpoolPoolRelationship
 		return ret
 	}
-	return *o.Pool
+	return *o.Pool.Get()
 }
 
 // GetPoolOk returns a tuple with the Pool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UuidpoolPoolMember) GetPoolOk() (*UuidpoolPoolRelationship, bool) {
-	if o == nil || o.Pool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pool, true
+	return o.Pool.Get(), o.Pool.IsSet()
 }
 
 // HasPool returns a boolean if a field has been set.
 func (o *UuidpoolPoolMember) HasPool() bool {
-	if o != nil && o.Pool != nil {
+	if o != nil && o.Pool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPool gets a reference to the given UuidpoolPoolRelationship and assigns it to the Pool field.
+// SetPool gets a reference to the given NullableUuidpoolPoolRelationship and assigns it to the Pool field.
 func (o *UuidpoolPoolMember) SetPool(v UuidpoolPoolRelationship) {
-	o.Pool = &v
+	o.Pool.Set(&v)
 }
 
-// GetReservation returns the Reservation field value if set, zero value otherwise.
+// SetPoolNil sets the value for Pool to be an explicit nil
+func (o *UuidpoolPoolMember) SetPoolNil() {
+	o.Pool.Set(nil)
+}
+
+// UnsetPool ensures that no value is present for Pool, not even an explicit nil
+func (o *UuidpoolPoolMember) UnsetPool() {
+	o.Pool.Unset()
+}
+
+// GetReservation returns the Reservation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UuidpoolPoolMember) GetReservation() UuidpoolReservationRelationship {
-	if o == nil || o.Reservation == nil {
+	if o == nil || IsNil(o.Reservation.Get()) {
 		var ret UuidpoolReservationRelationship
 		return ret
 	}
-	return *o.Reservation
+	return *o.Reservation.Get()
 }
 
 // GetReservationOk returns a tuple with the Reservation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UuidpoolPoolMember) GetReservationOk() (*UuidpoolReservationRelationship, bool) {
-	if o == nil || o.Reservation == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Reservation, true
+	return o.Reservation.Get(), o.Reservation.IsSet()
 }
 
 // HasReservation returns a boolean if a field has been set.
 func (o *UuidpoolPoolMember) HasReservation() bool {
-	if o != nil && o.Reservation != nil {
+	if o != nil && o.Reservation.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReservation gets a reference to the given UuidpoolReservationRelationship and assigns it to the Reservation field.
+// SetReservation gets a reference to the given NullableUuidpoolReservationRelationship and assigns it to the Reservation field.
 func (o *UuidpoolPoolMember) SetReservation(v UuidpoolReservationRelationship) {
-	o.Reservation = &v
+	o.Reservation.Set(&v)
+}
+
+// SetReservationNil sets the value for Reservation to be an explicit nil
+func (o *UuidpoolPoolMember) SetReservationNil() {
+	o.Reservation.Set(nil)
+}
+
+// UnsetReservation ensures that no value is present for Reservation, not even an explicit nil
+func (o *UuidpoolPoolMember) UnsetReservation() {
+	o.Reservation.Unset()
 }
 
 func (o UuidpoolPoolMember) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UuidpoolPoolMember) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolAbstractIdPoolMember, errPoolAbstractIdPoolMember := json.Marshal(o.PoolAbstractIdPoolMember)
 	if errPoolAbstractIdPoolMember != nil {
-		return []byte{}, errPoolAbstractIdPoolMember
+		return map[string]interface{}{}, errPoolAbstractIdPoolMember
 	}
 	errPoolAbstractIdPoolMember = json.Unmarshal([]byte(serializedPoolAbstractIdPoolMember), &toSerialize)
 	if errPoolAbstractIdPoolMember != nil {
-		return []byte{}, errPoolAbstractIdPoolMember
+		return map[string]interface{}{}, errPoolAbstractIdPoolMember
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Uuid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.AssignedToEntity != nil {
-		toSerialize["AssignedToEntity"] = o.AssignedToEntity
+	if o.AssignedToEntity.IsSet() {
+		toSerialize["AssignedToEntity"] = o.AssignedToEntity.Get()
 	}
-	if o.BlockHead != nil {
-		toSerialize["BlockHead"] = o.BlockHead
+	if o.BlockHead.IsSet() {
+		toSerialize["BlockHead"] = o.BlockHead.Get()
 	}
-	if o.Peer != nil {
-		toSerialize["Peer"] = o.Peer
+	if o.Peer.IsSet() {
+		toSerialize["Peer"] = o.Peer.Get()
 	}
-	if o.Pool != nil {
-		toSerialize["Pool"] = o.Pool
+	if o.Pool.IsSet() {
+		toSerialize["Pool"] = o.Pool.Get()
 	}
-	if o.Reservation != nil {
-		toSerialize["Reservation"] = o.Reservation
+	if o.Reservation.IsSet() {
+		toSerialize["Reservation"] = o.Reservation.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *UuidpoolPoolMember) UnmarshalJSON(bytes []byte) (err error) {
+func (o *UuidpoolPoolMember) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type UuidpoolPoolMemberWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// UUID Prefix+Suffix of this PoolMember.
-		Uuid             *string                          `json:"Uuid,omitempty"`
-		AssignedToEntity *MoBaseMoRelationship            `json:"AssignedToEntity,omitempty"`
-		BlockHead        *UuidpoolBlockRelationship       `json:"BlockHead,omitempty"`
-		Peer             *UuidpoolUuidLeaseRelationship   `json:"Peer,omitempty"`
-		Pool             *UuidpoolPoolRelationship        `json:"Pool,omitempty"`
-		Reservation      *UuidpoolReservationRelationship `json:"Reservation,omitempty"`
+		Uuid             *string                                 `json:"Uuid,omitempty"`
+		AssignedToEntity NullableMoBaseMoRelationship            `json:"AssignedToEntity,omitempty"`
+		BlockHead        NullableUuidpoolBlockRelationship       `json:"BlockHead,omitempty"`
+		Peer             NullableUuidpoolUuidLeaseRelationship   `json:"Peer,omitempty"`
+		Pool             NullableUuidpoolPoolRelationship        `json:"Pool,omitempty"`
+		Reservation      NullableUuidpoolReservationRelationship `json:"Reservation,omitempty"`
 	}
 
 	varUuidpoolPoolMemberWithoutEmbeddedStruct := UuidpoolPoolMemberWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varUuidpoolPoolMemberWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varUuidpoolPoolMemberWithoutEmbeddedStruct)
 	if err == nil {
 		varUuidpoolPoolMember := _UuidpoolPoolMember{}
 		varUuidpoolPoolMember.ClassId = varUuidpoolPoolMemberWithoutEmbeddedStruct.ClassId
@@ -382,7 +467,7 @@ func (o *UuidpoolPoolMember) UnmarshalJSON(bytes []byte) (err error) {
 
 	varUuidpoolPoolMember := _UuidpoolPoolMember{}
 
-	err = json.Unmarshal(bytes, &varUuidpoolPoolMember)
+	err = json.Unmarshal(data, &varUuidpoolPoolMember)
 	if err == nil {
 		o.PoolAbstractIdPoolMember = varUuidpoolPoolMember.PoolAbstractIdPoolMember
 	} else {
@@ -391,7 +476,7 @@ func (o *UuidpoolPoolMember) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Uuid")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the ApplianceDeviceCertificate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceDeviceCertificate{}
 
 // ApplianceDeviceCertificate DeviceCertificate managed object stores the CA Certificate used by device connector and it allow tracks it renewal.
 type ApplianceDeviceCertificate struct {
@@ -122,7 +126,7 @@ func (o *ApplianceDeviceCertificate) SetObjectType(v string) {
 
 // GetCaCertificate returns the CaCertificate field value if set, zero value otherwise.
 func (o *ApplianceDeviceCertificate) GetCaCertificate() string {
-	if o == nil || o.CaCertificate == nil {
+	if o == nil || IsNil(o.CaCertificate) {
 		var ret string
 		return ret
 	}
@@ -132,7 +136,7 @@ func (o *ApplianceDeviceCertificate) GetCaCertificate() string {
 // GetCaCertificateOk returns a tuple with the CaCertificate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceCertificate) GetCaCertificateOk() (*string, bool) {
-	if o == nil || o.CaCertificate == nil {
+	if o == nil || IsNil(o.CaCertificate) {
 		return nil, false
 	}
 	return o.CaCertificate, true
@@ -140,7 +144,7 @@ func (o *ApplianceDeviceCertificate) GetCaCertificateOk() (*string, bool) {
 
 // HasCaCertificate returns a boolean if a field has been set.
 func (o *ApplianceDeviceCertificate) HasCaCertificate() bool {
-	if o != nil && o.CaCertificate != nil {
+	if o != nil && !IsNil(o.CaCertificate) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *ApplianceDeviceCertificate) SetCaCertificate(v string) {
 
 // GetCaCertificateExpiryTime returns the CaCertificateExpiryTime field value if set, zero value otherwise.
 func (o *ApplianceDeviceCertificate) GetCaCertificateExpiryTime() time.Time {
-	if o == nil || o.CaCertificateExpiryTime == nil {
+	if o == nil || IsNil(o.CaCertificateExpiryTime) {
 		var ret time.Time
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *ApplianceDeviceCertificate) GetCaCertificateExpiryTime() time.Time {
 // GetCaCertificateExpiryTimeOk returns a tuple with the CaCertificateExpiryTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceCertificate) GetCaCertificateExpiryTimeOk() (*time.Time, bool) {
-	if o == nil || o.CaCertificateExpiryTime == nil {
+	if o == nil || IsNil(o.CaCertificateExpiryTime) {
 		return nil, false
 	}
 	return o.CaCertificateExpiryTime, true
@@ -172,7 +176,7 @@ func (o *ApplianceDeviceCertificate) GetCaCertificateExpiryTimeOk() (*time.Time,
 
 // HasCaCertificateExpiryTime returns a boolean if a field has been set.
 func (o *ApplianceDeviceCertificate) HasCaCertificateExpiryTime() bool {
-	if o != nil && o.CaCertificateExpiryTime != nil {
+	if o != nil && !IsNil(o.CaCertificateExpiryTime) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *ApplianceDeviceCertificate) SetCaCertificateExpiryTime(v time.Time) {
 
 // GetCertificateRenewalExpiryTime returns the CertificateRenewalExpiryTime field value if set, zero value otherwise.
 func (o *ApplianceDeviceCertificate) GetCertificateRenewalExpiryTime() time.Time {
-	if o == nil || o.CertificateRenewalExpiryTime == nil {
+	if o == nil || IsNil(o.CertificateRenewalExpiryTime) {
 		var ret time.Time
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *ApplianceDeviceCertificate) GetCertificateRenewalExpiryTime() time.Time
 // GetCertificateRenewalExpiryTimeOk returns a tuple with the CertificateRenewalExpiryTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceCertificate) GetCertificateRenewalExpiryTimeOk() (*time.Time, bool) {
-	if o == nil || o.CertificateRenewalExpiryTime == nil {
+	if o == nil || IsNil(o.CertificateRenewalExpiryTime) {
 		return nil, false
 	}
 	return o.CertificateRenewalExpiryTime, true
@@ -204,7 +208,7 @@ func (o *ApplianceDeviceCertificate) GetCertificateRenewalExpiryTimeOk() (*time.
 
 // HasCertificateRenewalExpiryTime returns a boolean if a field has been set.
 func (o *ApplianceDeviceCertificate) HasCertificateRenewalExpiryTime() bool {
-	if o != nil && o.CertificateRenewalExpiryTime != nil {
+	if o != nil && !IsNil(o.CertificateRenewalExpiryTime) {
 		return true
 	}
 
@@ -229,7 +233,7 @@ func (o *ApplianceDeviceCertificate) GetCompletedPhases() []ApplianceCertRenewal
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceDeviceCertificate) GetCompletedPhasesOk() ([]ApplianceCertRenewalPhase, bool) {
-	if o == nil || o.CompletedPhases == nil {
+	if o == nil || IsNil(o.CompletedPhases) {
 		return nil, false
 	}
 	return o.CompletedPhases, true
@@ -237,7 +241,7 @@ func (o *ApplianceDeviceCertificate) GetCompletedPhasesOk() ([]ApplianceCertRene
 
 // HasCompletedPhases returns a boolean if a field has been set.
 func (o *ApplianceDeviceCertificate) HasCompletedPhases() bool {
-	if o != nil && o.CompletedPhases != nil {
+	if o != nil && IsNil(o.CompletedPhases) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *ApplianceDeviceCertificate) SetCompletedPhases(v []ApplianceCertRenewal
 
 // GetConfigurationMoId returns the ConfigurationMoId field value if set, zero value otherwise.
 func (o *ApplianceDeviceCertificate) GetConfigurationMoId() string {
-	if o == nil || o.ConfigurationMoId == nil {
+	if o == nil || IsNil(o.ConfigurationMoId) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *ApplianceDeviceCertificate) GetConfigurationMoId() string {
 // GetConfigurationMoIdOk returns a tuple with the ConfigurationMoId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceCertificate) GetConfigurationMoIdOk() (*string, bool) {
-	if o == nil || o.ConfigurationMoId == nil {
+	if o == nil || IsNil(o.ConfigurationMoId) {
 		return nil, false
 	}
 	return o.ConfigurationMoId, true
@@ -269,7 +273,7 @@ func (o *ApplianceDeviceCertificate) GetConfigurationMoIdOk() (*string, bool) {
 
 // HasConfigurationMoId returns a boolean if a field has been set.
 func (o *ApplianceDeviceCertificate) HasConfigurationMoId() bool {
-	if o != nil && o.ConfigurationMoId != nil {
+	if o != nil && !IsNil(o.ConfigurationMoId) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *ApplianceDeviceCertificate) SetConfigurationMoId(v string) {
 
 // GetCurrentPhase returns the CurrentPhase field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceDeviceCertificate) GetCurrentPhase() ApplianceCertRenewalPhase {
-	if o == nil || o.CurrentPhase.Get() == nil {
+	if o == nil || IsNil(o.CurrentPhase.Get()) {
 		var ret ApplianceCertRenewalPhase
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *ApplianceDeviceCertificate) UnsetCurrentPhase() {
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *ApplianceDeviceCertificate) GetEndTime() time.Time {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -336,7 +340,7 @@ func (o *ApplianceDeviceCertificate) GetEndTime() time.Time {
 // GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceCertificate) GetEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
 	return o.EndTime, true
@@ -344,7 +348,7 @@ func (o *ApplianceDeviceCertificate) GetEndTimeOk() (*time.Time, bool) {
 
 // HasEndTime returns a boolean if a field has been set.
 func (o *ApplianceDeviceCertificate) HasEndTime() bool {
-	if o != nil && o.EndTime != nil {
+	if o != nil && !IsNil(o.EndTime) {
 		return true
 	}
 
@@ -358,7 +362,7 @@ func (o *ApplianceDeviceCertificate) SetEndTime(v time.Time) {
 
 // GetLastSuccessPollTime returns the LastSuccessPollTime field value if set, zero value otherwise.
 func (o *ApplianceDeviceCertificate) GetLastSuccessPollTime() time.Time {
-	if o == nil || o.LastSuccessPollTime == nil {
+	if o == nil || IsNil(o.LastSuccessPollTime) {
 		var ret time.Time
 		return ret
 	}
@@ -368,7 +372,7 @@ func (o *ApplianceDeviceCertificate) GetLastSuccessPollTime() time.Time {
 // GetLastSuccessPollTimeOk returns a tuple with the LastSuccessPollTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceCertificate) GetLastSuccessPollTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastSuccessPollTime == nil {
+	if o == nil || IsNil(o.LastSuccessPollTime) {
 		return nil, false
 	}
 	return o.LastSuccessPollTime, true
@@ -376,7 +380,7 @@ func (o *ApplianceDeviceCertificate) GetLastSuccessPollTimeOk() (*time.Time, boo
 
 // HasLastSuccessPollTime returns a boolean if a field has been set.
 func (o *ApplianceDeviceCertificate) HasLastSuccessPollTime() bool {
-	if o != nil && o.LastSuccessPollTime != nil {
+	if o != nil && !IsNil(o.LastSuccessPollTime) {
 		return true
 	}
 
@@ -401,7 +405,7 @@ func (o *ApplianceDeviceCertificate) GetMessages() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceDeviceCertificate) GetMessagesOk() ([]string, bool) {
-	if o == nil || o.Messages == nil {
+	if o == nil || IsNil(o.Messages) {
 		return nil, false
 	}
 	return o.Messages, true
@@ -409,7 +413,7 @@ func (o *ApplianceDeviceCertificate) GetMessagesOk() ([]string, bool) {
 
 // HasMessages returns a boolean if a field has been set.
 func (o *ApplianceDeviceCertificate) HasMessages() bool {
-	if o != nil && o.Messages != nil {
+	if o != nil && IsNil(o.Messages) {
 		return true
 	}
 
@@ -423,7 +427,7 @@ func (o *ApplianceDeviceCertificate) SetMessages(v []string) {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *ApplianceDeviceCertificate) GetStartTime() time.Time {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -433,7 +437,7 @@ func (o *ApplianceDeviceCertificate) GetStartTime() time.Time {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceCertificate) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -441,7 +445,7 @@ func (o *ApplianceDeviceCertificate) GetStartTimeOk() (*time.Time, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *ApplianceDeviceCertificate) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -455,7 +459,7 @@ func (o *ApplianceDeviceCertificate) SetStartTime(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ApplianceDeviceCertificate) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -465,7 +469,7 @@ func (o *ApplianceDeviceCertificate) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceDeviceCertificate) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -473,7 +477,7 @@ func (o *ApplianceDeviceCertificate) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *ApplianceDeviceCertificate) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -486,52 +490,56 @@ func (o *ApplianceDeviceCertificate) SetStatus(v string) {
 }
 
 func (o ApplianceDeviceCertificate) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceDeviceCertificate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CaCertificate != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CaCertificate) {
 		toSerialize["CaCertificate"] = o.CaCertificate
 	}
-	if o.CaCertificateExpiryTime != nil {
+	if !IsNil(o.CaCertificateExpiryTime) {
 		toSerialize["CaCertificateExpiryTime"] = o.CaCertificateExpiryTime
 	}
-	if o.CertificateRenewalExpiryTime != nil {
+	if !IsNil(o.CertificateRenewalExpiryTime) {
 		toSerialize["CertificateRenewalExpiryTime"] = o.CertificateRenewalExpiryTime
 	}
 	if o.CompletedPhases != nil {
 		toSerialize["CompletedPhases"] = o.CompletedPhases
 	}
-	if o.ConfigurationMoId != nil {
+	if !IsNil(o.ConfigurationMoId) {
 		toSerialize["ConfigurationMoId"] = o.ConfigurationMoId
 	}
 	if o.CurrentPhase.IsSet() {
 		toSerialize["CurrentPhase"] = o.CurrentPhase.Get()
 	}
-	if o.EndTime != nil {
+	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
 	}
-	if o.LastSuccessPollTime != nil {
+	if !IsNil(o.LastSuccessPollTime) {
 		toSerialize["LastSuccessPollTime"] = o.LastSuccessPollTime
 	}
 	if o.Messages != nil {
 		toSerialize["Messages"] = o.Messages
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 
@@ -539,10 +547,32 @@ func (o ApplianceDeviceCertificate) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceDeviceCertificate) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceDeviceCertificate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceDeviceCertificateWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -571,7 +601,7 @@ func (o *ApplianceDeviceCertificate) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceDeviceCertificateWithoutEmbeddedStruct := ApplianceDeviceCertificateWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceDeviceCertificateWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceDeviceCertificateWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceDeviceCertificate := _ApplianceDeviceCertificate{}
 		varApplianceDeviceCertificate.ClassId = varApplianceDeviceCertificateWithoutEmbeddedStruct.ClassId
@@ -594,7 +624,7 @@ func (o *ApplianceDeviceCertificate) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceDeviceCertificate := _ApplianceDeviceCertificate{}
 
-	err = json.Unmarshal(bytes, &varApplianceDeviceCertificate)
+	err = json.Unmarshal(data, &varApplianceDeviceCertificate)
 	if err == nil {
 		o.MoBaseMo = varApplianceDeviceCertificate.MoBaseMo
 	} else {
@@ -603,7 +633,7 @@ func (o *ApplianceDeviceCertificate) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CaCertificate")

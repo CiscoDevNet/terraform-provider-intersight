@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamLocalUserPasswordPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamLocalUserPasswordPolicy{}
 
 // IamLocalUserPasswordPolicy Configuration for LocalUserPasswordPolicy.
 type IamLocalUserPasswordPolicy struct {
@@ -47,8 +51,8 @@ type IamLocalUserPasswordPolicy struct {
 	// Minimum number of required upper case characters.
 	MinUpperCase *int64 `json:"MinUpperCase,omitempty"`
 	// Number of previous passwords disallowed.
-	NumPreviousPasswordsDisallowed *int64                  `json:"NumPreviousPasswordsDisallowed,omitempty"`
-	Account                        *IamAccountRelationship `json:"Account,omitempty"`
+	NumPreviousPasswordsDisallowed *int64                         `json:"NumPreviousPasswordsDisallowed,omitempty"`
+	Account                        NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties           map[string]interface{}
 }
 
@@ -175,7 +179,7 @@ func (o *IamLocalUserPasswordPolicy) SetObjectType(v string) {
 
 // GetEnableLockOutForAdminUser returns the EnableLockOutForAdminUser field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetEnableLockOutForAdminUser() bool {
-	if o == nil || o.EnableLockOutForAdminUser == nil {
+	if o == nil || IsNil(o.EnableLockOutForAdminUser) {
 		var ret bool
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *IamLocalUserPasswordPolicy) GetEnableLockOutForAdminUser() bool {
 // GetEnableLockOutForAdminUserOk returns a tuple with the EnableLockOutForAdminUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetEnableLockOutForAdminUserOk() (*bool, bool) {
-	if o == nil || o.EnableLockOutForAdminUser == nil {
+	if o == nil || IsNil(o.EnableLockOutForAdminUser) {
 		return nil, false
 	}
 	return o.EnableLockOutForAdminUser, true
@@ -193,7 +197,7 @@ func (o *IamLocalUserPasswordPolicy) GetEnableLockOutForAdminUserOk() (*bool, bo
 
 // HasEnableLockOutForAdminUser returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasEnableLockOutForAdminUser() bool {
-	if o != nil && o.EnableLockOutForAdminUser != nil {
+	if o != nil && !IsNil(o.EnableLockOutForAdminUser) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *IamLocalUserPasswordPolicy) SetEnableLockOutForAdminUser(v bool) {
 
 // GetFailedLoginTrackerWindow returns the FailedLoginTrackerWindow field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetFailedLoginTrackerWindow() int64 {
-	if o == nil || o.FailedLoginTrackerWindow == nil {
+	if o == nil || IsNil(o.FailedLoginTrackerWindow) {
 		var ret int64
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *IamLocalUserPasswordPolicy) GetFailedLoginTrackerWindow() int64 {
 // GetFailedLoginTrackerWindowOk returns a tuple with the FailedLoginTrackerWindow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetFailedLoginTrackerWindowOk() (*int64, bool) {
-	if o == nil || o.FailedLoginTrackerWindow == nil {
+	if o == nil || IsNil(o.FailedLoginTrackerWindow) {
 		return nil, false
 	}
 	return o.FailedLoginTrackerWindow, true
@@ -225,7 +229,7 @@ func (o *IamLocalUserPasswordPolicy) GetFailedLoginTrackerWindowOk() (*int64, bo
 
 // HasFailedLoginTrackerWindow returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasFailedLoginTrackerWindow() bool {
-	if o != nil && o.FailedLoginTrackerWindow != nil {
+	if o != nil && !IsNil(o.FailedLoginTrackerWindow) {
 		return true
 	}
 
@@ -239,7 +243,7 @@ func (o *IamLocalUserPasswordPolicy) SetFailedLoginTrackerWindow(v int64) {
 
 // GetLockOutTimePeriod returns the LockOutTimePeriod field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetLockOutTimePeriod() int64 {
-	if o == nil || o.LockOutTimePeriod == nil {
+	if o == nil || IsNil(o.LockOutTimePeriod) {
 		var ret int64
 		return ret
 	}
@@ -249,7 +253,7 @@ func (o *IamLocalUserPasswordPolicy) GetLockOutTimePeriod() int64 {
 // GetLockOutTimePeriodOk returns a tuple with the LockOutTimePeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetLockOutTimePeriodOk() (*int64, bool) {
-	if o == nil || o.LockOutTimePeriod == nil {
+	if o == nil || IsNil(o.LockOutTimePeriod) {
 		return nil, false
 	}
 	return o.LockOutTimePeriod, true
@@ -257,7 +261,7 @@ func (o *IamLocalUserPasswordPolicy) GetLockOutTimePeriodOk() (*int64, bool) {
 
 // HasLockOutTimePeriod returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasLockOutTimePeriod() bool {
-	if o != nil && o.LockOutTimePeriod != nil {
+	if o != nil && !IsNil(o.LockOutTimePeriod) {
 		return true
 	}
 
@@ -271,7 +275,7 @@ func (o *IamLocalUserPasswordPolicy) SetLockOutTimePeriod(v int64) {
 
 // GetMaxFailedLoginsAllowed returns the MaxFailedLoginsAllowed field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetMaxFailedLoginsAllowed() int64 {
-	if o == nil || o.MaxFailedLoginsAllowed == nil {
+	if o == nil || IsNil(o.MaxFailedLoginsAllowed) {
 		var ret int64
 		return ret
 	}
@@ -281,7 +285,7 @@ func (o *IamLocalUserPasswordPolicy) GetMaxFailedLoginsAllowed() int64 {
 // GetMaxFailedLoginsAllowedOk returns a tuple with the MaxFailedLoginsAllowed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetMaxFailedLoginsAllowedOk() (*int64, bool) {
-	if o == nil || o.MaxFailedLoginsAllowed == nil {
+	if o == nil || IsNil(o.MaxFailedLoginsAllowed) {
 		return nil, false
 	}
 	return o.MaxFailedLoginsAllowed, true
@@ -289,7 +293,7 @@ func (o *IamLocalUserPasswordPolicy) GetMaxFailedLoginsAllowedOk() (*int64, bool
 
 // HasMaxFailedLoginsAllowed returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasMaxFailedLoginsAllowed() bool {
-	if o != nil && o.MaxFailedLoginsAllowed != nil {
+	if o != nil && !IsNil(o.MaxFailedLoginsAllowed) {
 		return true
 	}
 
@@ -303,7 +307,7 @@ func (o *IamLocalUserPasswordPolicy) SetMaxFailedLoginsAllowed(v int64) {
 
 // GetMinCharDifference returns the MinCharDifference field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetMinCharDifference() int64 {
-	if o == nil || o.MinCharDifference == nil {
+	if o == nil || IsNil(o.MinCharDifference) {
 		var ret int64
 		return ret
 	}
@@ -313,7 +317,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinCharDifference() int64 {
 // GetMinCharDifferenceOk returns a tuple with the MinCharDifference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetMinCharDifferenceOk() (*int64, bool) {
-	if o == nil || o.MinCharDifference == nil {
+	if o == nil || IsNil(o.MinCharDifference) {
 		return nil, false
 	}
 	return o.MinCharDifference, true
@@ -321,7 +325,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinCharDifferenceOk() (*int64, bool) {
 
 // HasMinCharDifference returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasMinCharDifference() bool {
-	if o != nil && o.MinCharDifference != nil {
+	if o != nil && !IsNil(o.MinCharDifference) {
 		return true
 	}
 
@@ -335,7 +339,7 @@ func (o *IamLocalUserPasswordPolicy) SetMinCharDifference(v int64) {
 
 // GetMinDaysBetweenPasswordChange returns the MinDaysBetweenPasswordChange field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetMinDaysBetweenPasswordChange() int64 {
-	if o == nil || o.MinDaysBetweenPasswordChange == nil {
+	if o == nil || IsNil(o.MinDaysBetweenPasswordChange) {
 		var ret int64
 		return ret
 	}
@@ -345,7 +349,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinDaysBetweenPasswordChange() int64 {
 // GetMinDaysBetweenPasswordChangeOk returns a tuple with the MinDaysBetweenPasswordChange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetMinDaysBetweenPasswordChangeOk() (*int64, bool) {
-	if o == nil || o.MinDaysBetweenPasswordChange == nil {
+	if o == nil || IsNil(o.MinDaysBetweenPasswordChange) {
 		return nil, false
 	}
 	return o.MinDaysBetweenPasswordChange, true
@@ -353,7 +357,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinDaysBetweenPasswordChangeOk() (*int64
 
 // HasMinDaysBetweenPasswordChange returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasMinDaysBetweenPasswordChange() bool {
-	if o != nil && o.MinDaysBetweenPasswordChange != nil {
+	if o != nil && !IsNil(o.MinDaysBetweenPasswordChange) {
 		return true
 	}
 
@@ -367,7 +371,7 @@ func (o *IamLocalUserPasswordPolicy) SetMinDaysBetweenPasswordChange(v int64) {
 
 // GetMinLengthPassword returns the MinLengthPassword field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetMinLengthPassword() int64 {
-	if o == nil || o.MinLengthPassword == nil {
+	if o == nil || IsNil(o.MinLengthPassword) {
 		var ret int64
 		return ret
 	}
@@ -377,7 +381,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinLengthPassword() int64 {
 // GetMinLengthPasswordOk returns a tuple with the MinLengthPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetMinLengthPasswordOk() (*int64, bool) {
-	if o == nil || o.MinLengthPassword == nil {
+	if o == nil || IsNil(o.MinLengthPassword) {
 		return nil, false
 	}
 	return o.MinLengthPassword, true
@@ -385,7 +389,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinLengthPasswordOk() (*int64, bool) {
 
 // HasMinLengthPassword returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasMinLengthPassword() bool {
-	if o != nil && o.MinLengthPassword != nil {
+	if o != nil && !IsNil(o.MinLengthPassword) {
 		return true
 	}
 
@@ -399,7 +403,7 @@ func (o *IamLocalUserPasswordPolicy) SetMinLengthPassword(v int64) {
 
 // GetMinLowerCase returns the MinLowerCase field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetMinLowerCase() int64 {
-	if o == nil || o.MinLowerCase == nil {
+	if o == nil || IsNil(o.MinLowerCase) {
 		var ret int64
 		return ret
 	}
@@ -409,7 +413,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinLowerCase() int64 {
 // GetMinLowerCaseOk returns a tuple with the MinLowerCase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetMinLowerCaseOk() (*int64, bool) {
-	if o == nil || o.MinLowerCase == nil {
+	if o == nil || IsNil(o.MinLowerCase) {
 		return nil, false
 	}
 	return o.MinLowerCase, true
@@ -417,7 +421,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinLowerCaseOk() (*int64, bool) {
 
 // HasMinLowerCase returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasMinLowerCase() bool {
-	if o != nil && o.MinLowerCase != nil {
+	if o != nil && !IsNil(o.MinLowerCase) {
 		return true
 	}
 
@@ -431,7 +435,7 @@ func (o *IamLocalUserPasswordPolicy) SetMinLowerCase(v int64) {
 
 // GetMinNumeric returns the MinNumeric field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetMinNumeric() int64 {
-	if o == nil || o.MinNumeric == nil {
+	if o == nil || IsNil(o.MinNumeric) {
 		var ret int64
 		return ret
 	}
@@ -441,7 +445,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinNumeric() int64 {
 // GetMinNumericOk returns a tuple with the MinNumeric field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetMinNumericOk() (*int64, bool) {
-	if o == nil || o.MinNumeric == nil {
+	if o == nil || IsNil(o.MinNumeric) {
 		return nil, false
 	}
 	return o.MinNumeric, true
@@ -449,7 +453,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinNumericOk() (*int64, bool) {
 
 // HasMinNumeric returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasMinNumeric() bool {
-	if o != nil && o.MinNumeric != nil {
+	if o != nil && !IsNil(o.MinNumeric) {
 		return true
 	}
 
@@ -463,7 +467,7 @@ func (o *IamLocalUserPasswordPolicy) SetMinNumeric(v int64) {
 
 // GetMinSpecialChar returns the MinSpecialChar field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetMinSpecialChar() int64 {
-	if o == nil || o.MinSpecialChar == nil {
+	if o == nil || IsNil(o.MinSpecialChar) {
 		var ret int64
 		return ret
 	}
@@ -473,7 +477,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinSpecialChar() int64 {
 // GetMinSpecialCharOk returns a tuple with the MinSpecialChar field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetMinSpecialCharOk() (*int64, bool) {
-	if o == nil || o.MinSpecialChar == nil {
+	if o == nil || IsNil(o.MinSpecialChar) {
 		return nil, false
 	}
 	return o.MinSpecialChar, true
@@ -481,7 +485,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinSpecialCharOk() (*int64, bool) {
 
 // HasMinSpecialChar returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasMinSpecialChar() bool {
-	if o != nil && o.MinSpecialChar != nil {
+	if o != nil && !IsNil(o.MinSpecialChar) {
 		return true
 	}
 
@@ -495,7 +499,7 @@ func (o *IamLocalUserPasswordPolicy) SetMinSpecialChar(v int64) {
 
 // GetMinUpperCase returns the MinUpperCase field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetMinUpperCase() int64 {
-	if o == nil || o.MinUpperCase == nil {
+	if o == nil || IsNil(o.MinUpperCase) {
 		var ret int64
 		return ret
 	}
@@ -505,7 +509,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinUpperCase() int64 {
 // GetMinUpperCaseOk returns a tuple with the MinUpperCase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetMinUpperCaseOk() (*int64, bool) {
-	if o == nil || o.MinUpperCase == nil {
+	if o == nil || IsNil(o.MinUpperCase) {
 		return nil, false
 	}
 	return o.MinUpperCase, true
@@ -513,7 +517,7 @@ func (o *IamLocalUserPasswordPolicy) GetMinUpperCaseOk() (*int64, bool) {
 
 // HasMinUpperCase returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasMinUpperCase() bool {
-	if o != nil && o.MinUpperCase != nil {
+	if o != nil && !IsNil(o.MinUpperCase) {
 		return true
 	}
 
@@ -527,7 +531,7 @@ func (o *IamLocalUserPasswordPolicy) SetMinUpperCase(v int64) {
 
 // GetNumPreviousPasswordsDisallowed returns the NumPreviousPasswordsDisallowed field value if set, zero value otherwise.
 func (o *IamLocalUserPasswordPolicy) GetNumPreviousPasswordsDisallowed() int64 {
-	if o == nil || o.NumPreviousPasswordsDisallowed == nil {
+	if o == nil || IsNil(o.NumPreviousPasswordsDisallowed) {
 		var ret int64
 		return ret
 	}
@@ -537,7 +541,7 @@ func (o *IamLocalUserPasswordPolicy) GetNumPreviousPasswordsDisallowed() int64 {
 // GetNumPreviousPasswordsDisallowedOk returns a tuple with the NumPreviousPasswordsDisallowed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLocalUserPasswordPolicy) GetNumPreviousPasswordsDisallowedOk() (*int64, bool) {
-	if o == nil || o.NumPreviousPasswordsDisallowed == nil {
+	if o == nil || IsNil(o.NumPreviousPasswordsDisallowed) {
 		return nil, false
 	}
 	return o.NumPreviousPasswordsDisallowed, true
@@ -545,7 +549,7 @@ func (o *IamLocalUserPasswordPolicy) GetNumPreviousPasswordsDisallowedOk() (*int
 
 // HasNumPreviousPasswordsDisallowed returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasNumPreviousPasswordsDisallowed() bool {
-	if o != nil && o.NumPreviousPasswordsDisallowed != nil {
+	if o != nil && !IsNil(o.NumPreviousPasswordsDisallowed) {
 		return true
 	}
 
@@ -557,102 +561,139 @@ func (o *IamLocalUserPasswordPolicy) SetNumPreviousPasswordsDisallowed(v int64) 
 	o.NumPreviousPasswordsDisallowed = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamLocalUserPasswordPolicy) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamLocalUserPasswordPolicy) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *IamLocalUserPasswordPolicy) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *IamLocalUserPasswordPolicy) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *IamLocalUserPasswordPolicy) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *IamLocalUserPasswordPolicy) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o IamLocalUserPasswordPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamLocalUserPasswordPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EnableLockOutForAdminUser != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EnableLockOutForAdminUser) {
 		toSerialize["EnableLockOutForAdminUser"] = o.EnableLockOutForAdminUser
 	}
-	if o.FailedLoginTrackerWindow != nil {
+	if !IsNil(o.FailedLoginTrackerWindow) {
 		toSerialize["FailedLoginTrackerWindow"] = o.FailedLoginTrackerWindow
 	}
-	if o.LockOutTimePeriod != nil {
+	if !IsNil(o.LockOutTimePeriod) {
 		toSerialize["LockOutTimePeriod"] = o.LockOutTimePeriod
 	}
-	if o.MaxFailedLoginsAllowed != nil {
+	if !IsNil(o.MaxFailedLoginsAllowed) {
 		toSerialize["MaxFailedLoginsAllowed"] = o.MaxFailedLoginsAllowed
 	}
-	if o.MinCharDifference != nil {
+	if !IsNil(o.MinCharDifference) {
 		toSerialize["MinCharDifference"] = o.MinCharDifference
 	}
-	if o.MinDaysBetweenPasswordChange != nil {
+	if !IsNil(o.MinDaysBetweenPasswordChange) {
 		toSerialize["MinDaysBetweenPasswordChange"] = o.MinDaysBetweenPasswordChange
 	}
-	if o.MinLengthPassword != nil {
+	if !IsNil(o.MinLengthPassword) {
 		toSerialize["MinLengthPassword"] = o.MinLengthPassword
 	}
-	if o.MinLowerCase != nil {
+	if !IsNil(o.MinLowerCase) {
 		toSerialize["MinLowerCase"] = o.MinLowerCase
 	}
-	if o.MinNumeric != nil {
+	if !IsNil(o.MinNumeric) {
 		toSerialize["MinNumeric"] = o.MinNumeric
 	}
-	if o.MinSpecialChar != nil {
+	if !IsNil(o.MinSpecialChar) {
 		toSerialize["MinSpecialChar"] = o.MinSpecialChar
 	}
-	if o.MinUpperCase != nil {
+	if !IsNil(o.MinUpperCase) {
 		toSerialize["MinUpperCase"] = o.MinUpperCase
 	}
-	if o.NumPreviousPasswordsDisallowed != nil {
+	if !IsNil(o.NumPreviousPasswordsDisallowed) {
 		toSerialize["NumPreviousPasswordsDisallowed"] = o.NumPreviousPasswordsDisallowed
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamLocalUserPasswordPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamLocalUserPasswordPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamLocalUserPasswordPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -681,13 +722,13 @@ func (o *IamLocalUserPasswordPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// Minimum number of required upper case characters.
 		MinUpperCase *int64 `json:"MinUpperCase,omitempty"`
 		// Number of previous passwords disallowed.
-		NumPreviousPasswordsDisallowed *int64                  `json:"NumPreviousPasswordsDisallowed,omitempty"`
-		Account                        *IamAccountRelationship `json:"Account,omitempty"`
+		NumPreviousPasswordsDisallowed *int64                         `json:"NumPreviousPasswordsDisallowed,omitempty"`
+		Account                        NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varIamLocalUserPasswordPolicyWithoutEmbeddedStruct := IamLocalUserPasswordPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamLocalUserPasswordPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamLocalUserPasswordPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varIamLocalUserPasswordPolicy := _IamLocalUserPasswordPolicy{}
 		varIamLocalUserPasswordPolicy.ClassId = varIamLocalUserPasswordPolicyWithoutEmbeddedStruct.ClassId
@@ -712,7 +753,7 @@ func (o *IamLocalUserPasswordPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamLocalUserPasswordPolicy := _IamLocalUserPasswordPolicy{}
 
-	err = json.Unmarshal(bytes, &varIamLocalUserPasswordPolicy)
+	err = json.Unmarshal(data, &varIamLocalUserPasswordPolicy)
 	if err == nil {
 		o.MoBaseMo = varIamLocalUserPasswordPolicy.MoBaseMo
 	} else {
@@ -721,7 +762,7 @@ func (o *IamLocalUserPasswordPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EnableLockOutForAdminUser")

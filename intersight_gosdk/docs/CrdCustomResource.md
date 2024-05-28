@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **TargetId** | Pointer to **string** | Target ID for public cloud DC. | [optional] 
 **TargetMoid** | Pointer to **string** | Target Moid for public cloud DC. | [optional] 
 **TargetType** | Pointer to **string** | Target type for public cloud DC. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -336,6 +336,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *CrdCustomResource) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *CrdCustomResource) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

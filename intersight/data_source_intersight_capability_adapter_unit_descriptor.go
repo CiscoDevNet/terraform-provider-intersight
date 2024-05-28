@@ -525,6 +525,11 @@ func getCapabilityAdapterUnitDescriptorSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"vic_id": {
+			Description: "Vic Id assigned for the adapter.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 	}
 	return schemaMap
 }
@@ -1117,6 +1122,11 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 		}
 	}
 
+	if v, ok := d.GetOk("vic_id"); ok {
+		x := (v.(string))
+		o.SetVicId(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of CapabilityAdapterUnitDescriptor object failed with error : %s", err.Error())
@@ -1197,6 +1207,7 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["vic_id"] = (s.GetVicId())
 				capabilityAdapterUnitDescriptorResults = append(capabilityAdapterUnitDescriptorResults, temp)
 			}
 		}

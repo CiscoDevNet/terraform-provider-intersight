@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Created** | Pointer to **time.Time** | Creation time of the volume. | [optional] [readonly] 
 **Serial** | Pointer to **string** | Serial number of the volume. | [optional] [readonly] 
 **Source** | Pointer to **string** | Source from which the volume is created. Applicable only if the volume is cloned from other volume or snapshot. | [optional] [readonly] 
-**Array** | Pointer to [**StoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
-**ProtectionGroup** | Pointer to [**StoragePureProtectionGroupRelationship**](StoragePureProtectionGroupRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
+**ProtectionGroup** | Pointer to [**NullableStoragePureProtectionGroupRelationship**](StoragePureProtectionGroupRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -172,6 +172,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StoragePureVolume) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StoragePureVolume) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetProtectionGroup
 
 `func (o *StoragePureVolume) GetProtectionGroup() StoragePureProtectionGroupRelationship`
@@ -197,6 +207,16 @@ SetProtectionGroup sets ProtectionGroup field to given value.
 
 HasProtectionGroup returns a boolean if a field has been set.
 
+### SetProtectionGroupNil
+
+`func (o *StoragePureVolume) SetProtectionGroupNil(b bool)`
+
+ SetProtectionGroupNil sets the value for ProtectionGroup to be an explicit nil
+
+### UnsetProtectionGroup
+`func (o *StoragePureVolume) UnsetProtectionGroup()`
+
+UnsetProtectionGroup ensures that no value is present for ProtectionGroup, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StoragePureVolume) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -222,6 +242,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StoragePureVolume) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StoragePureVolume) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

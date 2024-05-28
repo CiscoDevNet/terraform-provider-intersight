@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetClientCertificateCredential type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetClientCertificateCredential{}
 
 // AssetClientCertificateCredential A credential which performs authentication with TLS client certificates.
 type AssetClientCertificateCredential struct {
@@ -108,7 +112,7 @@ func (o *AssetClientCertificateCredential) SetObjectType(v string) {
 
 // GetClientCertificate returns the ClientCertificate field value if set, zero value otherwise.
 func (o *AssetClientCertificateCredential) GetClientCertificate() string {
-	if o == nil || o.ClientCertificate == nil {
+	if o == nil || IsNil(o.ClientCertificate) {
 		var ret string
 		return ret
 	}
@@ -118,7 +122,7 @@ func (o *AssetClientCertificateCredential) GetClientCertificate() string {
 // GetClientCertificateOk returns a tuple with the ClientCertificate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetClientCertificateCredential) GetClientCertificateOk() (*string, bool) {
-	if o == nil || o.ClientCertificate == nil {
+	if o == nil || IsNil(o.ClientCertificate) {
 		return nil, false
 	}
 	return o.ClientCertificate, true
@@ -126,7 +130,7 @@ func (o *AssetClientCertificateCredential) GetClientCertificateOk() (*string, bo
 
 // HasClientCertificate returns a boolean if a field has been set.
 func (o *AssetClientCertificateCredential) HasClientCertificate() bool {
-	if o != nil && o.ClientCertificate != nil {
+	if o != nil && !IsNil(o.ClientCertificate) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *AssetClientCertificateCredential) SetClientCertificate(v string) {
 
 // GetClientKey returns the ClientKey field value if set, zero value otherwise.
 func (o *AssetClientCertificateCredential) GetClientKey() string {
-	if o == nil || o.ClientKey == nil {
+	if o == nil || IsNil(o.ClientKey) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *AssetClientCertificateCredential) GetClientKey() string {
 // GetClientKeyOk returns a tuple with the ClientKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetClientCertificateCredential) GetClientKeyOk() (*string, bool) {
-	if o == nil || o.ClientKey == nil {
+	if o == nil || IsNil(o.ClientKey) {
 		return nil, false
 	}
 	return o.ClientKey, true
@@ -158,7 +162,7 @@ func (o *AssetClientCertificateCredential) GetClientKeyOk() (*string, bool) {
 
 // HasClientKey returns a boolean if a field has been set.
 func (o *AssetClientCertificateCredential) HasClientKey() bool {
-	if o != nil && o.ClientKey != nil {
+	if o != nil && !IsNil(o.ClientKey) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *AssetClientCertificateCredential) SetClientKey(v string) {
 
 // GetIsClientKeySet returns the IsClientKeySet field value if set, zero value otherwise.
 func (o *AssetClientCertificateCredential) GetIsClientKeySet() bool {
-	if o == nil || o.IsClientKeySet == nil {
+	if o == nil || IsNil(o.IsClientKeySet) {
 		var ret bool
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *AssetClientCertificateCredential) GetIsClientKeySet() bool {
 // GetIsClientKeySetOk returns a tuple with the IsClientKeySet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetClientCertificateCredential) GetIsClientKeySetOk() (*bool, bool) {
-	if o == nil || o.IsClientKeySet == nil {
+	if o == nil || IsNil(o.IsClientKeySet) {
 		return nil, false
 	}
 	return o.IsClientKeySet, true
@@ -190,7 +194,7 @@ func (o *AssetClientCertificateCredential) GetIsClientKeySetOk() (*bool, bool) {
 
 // HasIsClientKeySet returns a boolean if a field has been set.
 func (o *AssetClientCertificateCredential) HasIsClientKeySet() bool {
-	if o != nil && o.IsClientKeySet != nil {
+	if o != nil && !IsNil(o.IsClientKeySet) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *AssetClientCertificateCredential) SetIsClientKeySet(v bool) {
 }
 
 func (o AssetClientCertificateCredential) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetClientCertificateCredential) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedAssetCredential, errAssetCredential := json.Marshal(o.AssetCredential)
 	if errAssetCredential != nil {
-		return []byte{}, errAssetCredential
+		return map[string]interface{}{}, errAssetCredential
 	}
 	errAssetCredential = json.Unmarshal([]byte(serializedAssetCredential), &toSerialize)
 	if errAssetCredential != nil {
-		return []byte{}, errAssetCredential
+		return map[string]interface{}{}, errAssetCredential
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClientCertificate != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClientCertificate) {
 		toSerialize["ClientCertificate"] = o.ClientCertificate
 	}
-	if o.ClientKey != nil {
+	if !IsNil(o.ClientKey) {
 		toSerialize["ClientKey"] = o.ClientKey
 	}
-	if o.IsClientKeySet != nil {
+	if !IsNil(o.IsClientKeySet) {
 		toSerialize["IsClientKeySet"] = o.IsClientKeySet
 	}
 
@@ -232,10 +240,32 @@ func (o AssetClientCertificateCredential) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetClientCertificateCredential) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetClientCertificateCredential) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetClientCertificateCredentialWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -251,7 +281,7 @@ func (o *AssetClientCertificateCredential) UnmarshalJSON(bytes []byte) (err erro
 
 	varAssetClientCertificateCredentialWithoutEmbeddedStruct := AssetClientCertificateCredentialWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetClientCertificateCredentialWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetClientCertificateCredentialWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetClientCertificateCredential := _AssetClientCertificateCredential{}
 		varAssetClientCertificateCredential.ClassId = varAssetClientCertificateCredentialWithoutEmbeddedStruct.ClassId
@@ -266,7 +296,7 @@ func (o *AssetClientCertificateCredential) UnmarshalJSON(bytes []byte) (err erro
 
 	varAssetClientCertificateCredential := _AssetClientCertificateCredential{}
 
-	err = json.Unmarshal(bytes, &varAssetClientCertificateCredential)
+	err = json.Unmarshal(data, &varAssetClientCertificateCredential)
 	if err == nil {
 		o.AssetCredential = varAssetClientCertificateCredential.AssetCredential
 	} else {
@@ -275,7 +305,7 @@ func (o *AssetClientCertificateCredential) UnmarshalJSON(bytes []byte) (err erro
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClientCertificate")

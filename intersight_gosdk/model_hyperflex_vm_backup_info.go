@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexVmBackupInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexVmBackupInfo{}
 
 // HyperflexVmBackupInfo Virtual Machine backup information.
 type HyperflexVmBackupInfo struct {
@@ -41,12 +45,12 @@ type HyperflexVmBackupInfo struct {
 	// Name for the source cluster this Virtual Machine is residing on.
 	SrcClusterName *string `json:"SrcClusterName,omitempty"`
 	// Name for the target cluster this Virtual Machine is residing on.
-	TgtClusterName       *string                             `json:"TgtClusterName,omitempty"`
-	VmEntityReference    NullableHyperflexEntityReference    `json:"VmEntityReference,omitempty"`
-	VmInfo               NullableHyperflexVirtualMachine     `json:"VmInfo,omitempty"`
-	SrcBackupCluster     *HyperflexBackupClusterRelationship `json:"SrcBackupCluster,omitempty"`
-	SrcCluster           *HyperflexClusterRelationship       `json:"SrcCluster,omitempty"`
-	TgtCluster           *HyperflexClusterRelationship       `json:"TgtCluster,omitempty"`
+	TgtClusterName       *string                                    `json:"TgtClusterName,omitempty"`
+	VmEntityReference    NullableHyperflexEntityReference           `json:"VmEntityReference,omitempty"`
+	VmInfo               NullableHyperflexVirtualMachine            `json:"VmInfo,omitempty"`
+	SrcBackupCluster     NullableHyperflexBackupClusterRelationship `json:"SrcBackupCluster,omitempty"`
+	SrcCluster           NullableHyperflexClusterRelationship       `json:"SrcCluster,omitempty"`
+	TgtCluster           NullableHyperflexClusterRelationship       `json:"TgtCluster,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,7 +129,7 @@ func (o *HyperflexVmBackupInfo) SetObjectType(v string) {
 
 // GetBackupStatus returns the BackupStatus field value if set, zero value otherwise.
 func (o *HyperflexVmBackupInfo) GetBackupStatus() string {
-	if o == nil || o.BackupStatus == nil {
+	if o == nil || IsNil(o.BackupStatus) {
 		var ret string
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *HyperflexVmBackupInfo) GetBackupStatus() string {
 // GetBackupStatusOk returns a tuple with the BackupStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVmBackupInfo) GetBackupStatusOk() (*string, bool) {
-	if o == nil || o.BackupStatus == nil {
+	if o == nil || IsNil(o.BackupStatus) {
 		return nil, false
 	}
 	return o.BackupStatus, true
@@ -143,7 +147,7 @@ func (o *HyperflexVmBackupInfo) GetBackupStatusOk() (*string, bool) {
 
 // HasBackupStatus returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasBackupStatus() bool {
-	if o != nil && o.BackupStatus != nil {
+	if o != nil && !IsNil(o.BackupStatus) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *HyperflexVmBackupInfo) SetBackupStatus(v string) {
 
 // GetClusterEntityReference returns the ClusterEntityReference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVmBackupInfo) GetClusterEntityReference() HyperflexEntityReference {
-	if o == nil || o.ClusterEntityReference.Get() == nil {
+	if o == nil || IsNil(o.ClusterEntityReference.Get()) {
 		var ret HyperflexEntityReference
 		return ret
 	}
@@ -211,7 +215,7 @@ func (o *HyperflexVmBackupInfo) GetClusterIdProtectionInfoMap() []HyperflexMapCl
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVmBackupInfo) GetClusterIdProtectionInfoMapOk() ([]HyperflexMapClusterIdToProtectionInfo, bool) {
-	if o == nil || o.ClusterIdProtectionInfoMap == nil {
+	if o == nil || IsNil(o.ClusterIdProtectionInfoMap) {
 		return nil, false
 	}
 	return o.ClusterIdProtectionInfoMap, true
@@ -219,7 +223,7 @@ func (o *HyperflexVmBackupInfo) GetClusterIdProtectionInfoMapOk() ([]HyperflexMa
 
 // HasClusterIdProtectionInfoMap returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasClusterIdProtectionInfoMap() bool {
-	if o != nil && o.ClusterIdProtectionInfoMap != nil {
+	if o != nil && IsNil(o.ClusterIdProtectionInfoMap) {
 		return true
 	}
 
@@ -233,7 +237,7 @@ func (o *HyperflexVmBackupInfo) SetClusterIdProtectionInfoMap(v []HyperflexMapCl
 
 // GetError returns the Error field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVmBackupInfo) GetError() HyperflexErrorStack {
-	if o == nil || o.Error.Get() == nil {
+	if o == nil || IsNil(o.Error.Get()) {
 		var ret HyperflexErrorStack
 		return ret
 	}
@@ -276,7 +280,7 @@ func (o *HyperflexVmBackupInfo) UnsetError() {
 
 // GetLocalSnapshotRetentionCount returns the LocalSnapshotRetentionCount field value if set, zero value otherwise.
 func (o *HyperflexVmBackupInfo) GetLocalSnapshotRetentionCount() int64 {
-	if o == nil || o.LocalSnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.LocalSnapshotRetentionCount) {
 		var ret int64
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *HyperflexVmBackupInfo) GetLocalSnapshotRetentionCount() int64 {
 // GetLocalSnapshotRetentionCountOk returns a tuple with the LocalSnapshotRetentionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVmBackupInfo) GetLocalSnapshotRetentionCountOk() (*int64, bool) {
-	if o == nil || o.LocalSnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.LocalSnapshotRetentionCount) {
 		return nil, false
 	}
 	return o.LocalSnapshotRetentionCount, true
@@ -294,7 +298,7 @@ func (o *HyperflexVmBackupInfo) GetLocalSnapshotRetentionCountOk() (*int64, bool
 
 // HasLocalSnapshotRetentionCount returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasLocalSnapshotRetentionCount() bool {
-	if o != nil && o.LocalSnapshotRetentionCount != nil {
+	if o != nil && !IsNil(o.LocalSnapshotRetentionCount) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *HyperflexVmBackupInfo) SetLocalSnapshotRetentionCount(v int64) {
 
 // GetPowerOn returns the PowerOn field value if set, zero value otherwise.
 func (o *HyperflexVmBackupInfo) GetPowerOn() bool {
-	if o == nil || o.PowerOn == nil {
+	if o == nil || IsNil(o.PowerOn) {
 		var ret bool
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *HyperflexVmBackupInfo) GetPowerOn() bool {
 // GetPowerOnOk returns a tuple with the PowerOn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVmBackupInfo) GetPowerOnOk() (*bool, bool) {
-	if o == nil || o.PowerOn == nil {
+	if o == nil || IsNil(o.PowerOn) {
 		return nil, false
 	}
 	return o.PowerOn, true
@@ -326,7 +330,7 @@ func (o *HyperflexVmBackupInfo) GetPowerOnOk() (*bool, bool) {
 
 // HasPowerOn returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasPowerOn() bool {
-	if o != nil && o.PowerOn != nil {
+	if o != nil && !IsNil(o.PowerOn) {
 		return true
 	}
 
@@ -340,7 +344,7 @@ func (o *HyperflexVmBackupInfo) SetPowerOn(v bool) {
 
 // GetProtectionStatus returns the ProtectionStatus field value if set, zero value otherwise.
 func (o *HyperflexVmBackupInfo) GetProtectionStatus() string {
-	if o == nil || o.ProtectionStatus == nil {
+	if o == nil || IsNil(o.ProtectionStatus) {
 		var ret string
 		return ret
 	}
@@ -350,7 +354,7 @@ func (o *HyperflexVmBackupInfo) GetProtectionStatus() string {
 // GetProtectionStatusOk returns a tuple with the ProtectionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVmBackupInfo) GetProtectionStatusOk() (*string, bool) {
-	if o == nil || o.ProtectionStatus == nil {
+	if o == nil || IsNil(o.ProtectionStatus) {
 		return nil, false
 	}
 	return o.ProtectionStatus, true
@@ -358,7 +362,7 @@ func (o *HyperflexVmBackupInfo) GetProtectionStatusOk() (*string, bool) {
 
 // HasProtectionStatus returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasProtectionStatus() bool {
-	if o != nil && o.ProtectionStatus != nil {
+	if o != nil && !IsNil(o.ProtectionStatus) {
 		return true
 	}
 
@@ -383,7 +387,7 @@ func (o *HyperflexVmBackupInfo) GetSchedule() []HyperflexReplicationClusterRefer
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVmBackupInfo) GetScheduleOk() ([]HyperflexReplicationClusterReferenceToSchedule, bool) {
-	if o == nil || o.Schedule == nil {
+	if o == nil || IsNil(o.Schedule) {
 		return nil, false
 	}
 	return o.Schedule, true
@@ -391,7 +395,7 @@ func (o *HyperflexVmBackupInfo) GetScheduleOk() ([]HyperflexReplicationClusterRe
 
 // HasSchedule returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasSchedule() bool {
-	if o != nil && o.Schedule != nil {
+	if o != nil && IsNil(o.Schedule) {
 		return true
 	}
 
@@ -405,7 +409,7 @@ func (o *HyperflexVmBackupInfo) SetSchedule(v []HyperflexReplicationClusterRefer
 
 // GetSnapshotRetentionCount returns the SnapshotRetentionCount field value if set, zero value otherwise.
 func (o *HyperflexVmBackupInfo) GetSnapshotRetentionCount() int64 {
-	if o == nil || o.SnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.SnapshotRetentionCount) {
 		var ret int64
 		return ret
 	}
@@ -415,7 +419,7 @@ func (o *HyperflexVmBackupInfo) GetSnapshotRetentionCount() int64 {
 // GetSnapshotRetentionCountOk returns a tuple with the SnapshotRetentionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVmBackupInfo) GetSnapshotRetentionCountOk() (*int64, bool) {
-	if o == nil || o.SnapshotRetentionCount == nil {
+	if o == nil || IsNil(o.SnapshotRetentionCount) {
 		return nil, false
 	}
 	return o.SnapshotRetentionCount, true
@@ -423,7 +427,7 @@ func (o *HyperflexVmBackupInfo) GetSnapshotRetentionCountOk() (*int64, bool) {
 
 // HasSnapshotRetentionCount returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasSnapshotRetentionCount() bool {
-	if o != nil && o.SnapshotRetentionCount != nil {
+	if o != nil && !IsNil(o.SnapshotRetentionCount) {
 		return true
 	}
 
@@ -437,7 +441,7 @@ func (o *HyperflexVmBackupInfo) SetSnapshotRetentionCount(v int64) {
 
 // GetSrcClusterName returns the SrcClusterName field value if set, zero value otherwise.
 func (o *HyperflexVmBackupInfo) GetSrcClusterName() string {
-	if o == nil || o.SrcClusterName == nil {
+	if o == nil || IsNil(o.SrcClusterName) {
 		var ret string
 		return ret
 	}
@@ -447,7 +451,7 @@ func (o *HyperflexVmBackupInfo) GetSrcClusterName() string {
 // GetSrcClusterNameOk returns a tuple with the SrcClusterName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVmBackupInfo) GetSrcClusterNameOk() (*string, bool) {
-	if o == nil || o.SrcClusterName == nil {
+	if o == nil || IsNil(o.SrcClusterName) {
 		return nil, false
 	}
 	return o.SrcClusterName, true
@@ -455,7 +459,7 @@ func (o *HyperflexVmBackupInfo) GetSrcClusterNameOk() (*string, bool) {
 
 // HasSrcClusterName returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasSrcClusterName() bool {
-	if o != nil && o.SrcClusterName != nil {
+	if o != nil && !IsNil(o.SrcClusterName) {
 		return true
 	}
 
@@ -469,7 +473,7 @@ func (o *HyperflexVmBackupInfo) SetSrcClusterName(v string) {
 
 // GetTgtClusterName returns the TgtClusterName field value if set, zero value otherwise.
 func (o *HyperflexVmBackupInfo) GetTgtClusterName() string {
-	if o == nil || o.TgtClusterName == nil {
+	if o == nil || IsNil(o.TgtClusterName) {
 		var ret string
 		return ret
 	}
@@ -479,7 +483,7 @@ func (o *HyperflexVmBackupInfo) GetTgtClusterName() string {
 // GetTgtClusterNameOk returns a tuple with the TgtClusterName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVmBackupInfo) GetTgtClusterNameOk() (*string, bool) {
-	if o == nil || o.TgtClusterName == nil {
+	if o == nil || IsNil(o.TgtClusterName) {
 		return nil, false
 	}
 	return o.TgtClusterName, true
@@ -487,7 +491,7 @@ func (o *HyperflexVmBackupInfo) GetTgtClusterNameOk() (*string, bool) {
 
 // HasTgtClusterName returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasTgtClusterName() bool {
-	if o != nil && o.TgtClusterName != nil {
+	if o != nil && !IsNil(o.TgtClusterName) {
 		return true
 	}
 
@@ -501,7 +505,7 @@ func (o *HyperflexVmBackupInfo) SetTgtClusterName(v string) {
 
 // GetVmEntityReference returns the VmEntityReference field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVmBackupInfo) GetVmEntityReference() HyperflexEntityReference {
-	if o == nil || o.VmEntityReference.Get() == nil {
+	if o == nil || IsNil(o.VmEntityReference.Get()) {
 		var ret HyperflexEntityReference
 		return ret
 	}
@@ -544,7 +548,7 @@ func (o *HyperflexVmBackupInfo) UnsetVmEntityReference() {
 
 // GetVmInfo returns the VmInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVmBackupInfo) GetVmInfo() HyperflexVirtualMachine {
-	if o == nil || o.VmInfo.Get() == nil {
+	if o == nil || IsNil(o.VmInfo.Get()) {
 		var ret HyperflexVirtualMachine
 		return ret
 	}
@@ -585,119 +589,156 @@ func (o *HyperflexVmBackupInfo) UnsetVmInfo() {
 	o.VmInfo.Unset()
 }
 
-// GetSrcBackupCluster returns the SrcBackupCluster field value if set, zero value otherwise.
+// GetSrcBackupCluster returns the SrcBackupCluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVmBackupInfo) GetSrcBackupCluster() HyperflexBackupClusterRelationship {
-	if o == nil || o.SrcBackupCluster == nil {
+	if o == nil || IsNil(o.SrcBackupCluster.Get()) {
 		var ret HyperflexBackupClusterRelationship
 		return ret
 	}
-	return *o.SrcBackupCluster
+	return *o.SrcBackupCluster.Get()
 }
 
 // GetSrcBackupClusterOk returns a tuple with the SrcBackupCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVmBackupInfo) GetSrcBackupClusterOk() (*HyperflexBackupClusterRelationship, bool) {
-	if o == nil || o.SrcBackupCluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SrcBackupCluster, true
+	return o.SrcBackupCluster.Get(), o.SrcBackupCluster.IsSet()
 }
 
 // HasSrcBackupCluster returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasSrcBackupCluster() bool {
-	if o != nil && o.SrcBackupCluster != nil {
+	if o != nil && o.SrcBackupCluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSrcBackupCluster gets a reference to the given HyperflexBackupClusterRelationship and assigns it to the SrcBackupCluster field.
+// SetSrcBackupCluster gets a reference to the given NullableHyperflexBackupClusterRelationship and assigns it to the SrcBackupCluster field.
 func (o *HyperflexVmBackupInfo) SetSrcBackupCluster(v HyperflexBackupClusterRelationship) {
-	o.SrcBackupCluster = &v
+	o.SrcBackupCluster.Set(&v)
 }
 
-// GetSrcCluster returns the SrcCluster field value if set, zero value otherwise.
+// SetSrcBackupClusterNil sets the value for SrcBackupCluster to be an explicit nil
+func (o *HyperflexVmBackupInfo) SetSrcBackupClusterNil() {
+	o.SrcBackupCluster.Set(nil)
+}
+
+// UnsetSrcBackupCluster ensures that no value is present for SrcBackupCluster, not even an explicit nil
+func (o *HyperflexVmBackupInfo) UnsetSrcBackupCluster() {
+	o.SrcBackupCluster.Unset()
+}
+
+// GetSrcCluster returns the SrcCluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVmBackupInfo) GetSrcCluster() HyperflexClusterRelationship {
-	if o == nil || o.SrcCluster == nil {
+	if o == nil || IsNil(o.SrcCluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.SrcCluster
+	return *o.SrcCluster.Get()
 }
 
 // GetSrcClusterOk returns a tuple with the SrcCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVmBackupInfo) GetSrcClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.SrcCluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SrcCluster, true
+	return o.SrcCluster.Get(), o.SrcCluster.IsSet()
 }
 
 // HasSrcCluster returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasSrcCluster() bool {
-	if o != nil && o.SrcCluster != nil {
+	if o != nil && o.SrcCluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSrcCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the SrcCluster field.
+// SetSrcCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the SrcCluster field.
 func (o *HyperflexVmBackupInfo) SetSrcCluster(v HyperflexClusterRelationship) {
-	o.SrcCluster = &v
+	o.SrcCluster.Set(&v)
 }
 
-// GetTgtCluster returns the TgtCluster field value if set, zero value otherwise.
+// SetSrcClusterNil sets the value for SrcCluster to be an explicit nil
+func (o *HyperflexVmBackupInfo) SetSrcClusterNil() {
+	o.SrcCluster.Set(nil)
+}
+
+// UnsetSrcCluster ensures that no value is present for SrcCluster, not even an explicit nil
+func (o *HyperflexVmBackupInfo) UnsetSrcCluster() {
+	o.SrcCluster.Unset()
+}
+
+// GetTgtCluster returns the TgtCluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVmBackupInfo) GetTgtCluster() HyperflexClusterRelationship {
-	if o == nil || o.TgtCluster == nil {
+	if o == nil || IsNil(o.TgtCluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.TgtCluster
+	return *o.TgtCluster.Get()
 }
 
 // GetTgtClusterOk returns a tuple with the TgtCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVmBackupInfo) GetTgtClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.TgtCluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TgtCluster, true
+	return o.TgtCluster.Get(), o.TgtCluster.IsSet()
 }
 
 // HasTgtCluster returns a boolean if a field has been set.
 func (o *HyperflexVmBackupInfo) HasTgtCluster() bool {
-	if o != nil && o.TgtCluster != nil {
+	if o != nil && o.TgtCluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTgtCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the TgtCluster field.
+// SetTgtCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the TgtCluster field.
 func (o *HyperflexVmBackupInfo) SetTgtCluster(v HyperflexClusterRelationship) {
-	o.TgtCluster = &v
+	o.TgtCluster.Set(&v)
+}
+
+// SetTgtClusterNil sets the value for TgtCluster to be an explicit nil
+func (o *HyperflexVmBackupInfo) SetTgtClusterNil() {
+	o.TgtCluster.Set(nil)
+}
+
+// UnsetTgtCluster ensures that no value is present for TgtCluster, not even an explicit nil
+func (o *HyperflexVmBackupInfo) UnsetTgtCluster() {
+	o.TgtCluster.Unset()
 }
 
 func (o HyperflexVmBackupInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexVmBackupInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BackupStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BackupStatus) {
 		toSerialize["BackupStatus"] = o.BackupStatus
 	}
 	if o.ClusterEntityReference.IsSet() {
@@ -709,25 +750,25 @@ func (o HyperflexVmBackupInfo) MarshalJSON() ([]byte, error) {
 	if o.Error.IsSet() {
 		toSerialize["Error"] = o.Error.Get()
 	}
-	if o.LocalSnapshotRetentionCount != nil {
+	if !IsNil(o.LocalSnapshotRetentionCount) {
 		toSerialize["LocalSnapshotRetentionCount"] = o.LocalSnapshotRetentionCount
 	}
-	if o.PowerOn != nil {
+	if !IsNil(o.PowerOn) {
 		toSerialize["PowerOn"] = o.PowerOn
 	}
-	if o.ProtectionStatus != nil {
+	if !IsNil(o.ProtectionStatus) {
 		toSerialize["ProtectionStatus"] = o.ProtectionStatus
 	}
 	if o.Schedule != nil {
 		toSerialize["Schedule"] = o.Schedule
 	}
-	if o.SnapshotRetentionCount != nil {
+	if !IsNil(o.SnapshotRetentionCount) {
 		toSerialize["SnapshotRetentionCount"] = o.SnapshotRetentionCount
 	}
-	if o.SrcClusterName != nil {
+	if !IsNil(o.SrcClusterName) {
 		toSerialize["SrcClusterName"] = o.SrcClusterName
 	}
-	if o.TgtClusterName != nil {
+	if !IsNil(o.TgtClusterName) {
 		toSerialize["TgtClusterName"] = o.TgtClusterName
 	}
 	if o.VmEntityReference.IsSet() {
@@ -736,24 +777,46 @@ func (o HyperflexVmBackupInfo) MarshalJSON() ([]byte, error) {
 	if o.VmInfo.IsSet() {
 		toSerialize["VmInfo"] = o.VmInfo.Get()
 	}
-	if o.SrcBackupCluster != nil {
-		toSerialize["SrcBackupCluster"] = o.SrcBackupCluster
+	if o.SrcBackupCluster.IsSet() {
+		toSerialize["SrcBackupCluster"] = o.SrcBackupCluster.Get()
 	}
-	if o.SrcCluster != nil {
-		toSerialize["SrcCluster"] = o.SrcCluster
+	if o.SrcCluster.IsSet() {
+		toSerialize["SrcCluster"] = o.SrcCluster.Get()
 	}
-	if o.TgtCluster != nil {
-		toSerialize["TgtCluster"] = o.TgtCluster
+	if o.TgtCluster.IsSet() {
+		toSerialize["TgtCluster"] = o.TgtCluster.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexVmBackupInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexVmBackupInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexVmBackupInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -776,17 +839,17 @@ func (o *HyperflexVmBackupInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// Name for the source cluster this Virtual Machine is residing on.
 		SrcClusterName *string `json:"SrcClusterName,omitempty"`
 		// Name for the target cluster this Virtual Machine is residing on.
-		TgtClusterName    *string                             `json:"TgtClusterName,omitempty"`
-		VmEntityReference NullableHyperflexEntityReference    `json:"VmEntityReference,omitempty"`
-		VmInfo            NullableHyperflexVirtualMachine     `json:"VmInfo,omitempty"`
-		SrcBackupCluster  *HyperflexBackupClusterRelationship `json:"SrcBackupCluster,omitempty"`
-		SrcCluster        *HyperflexClusterRelationship       `json:"SrcCluster,omitempty"`
-		TgtCluster        *HyperflexClusterRelationship       `json:"TgtCluster,omitempty"`
+		TgtClusterName    *string                                    `json:"TgtClusterName,omitempty"`
+		VmEntityReference NullableHyperflexEntityReference           `json:"VmEntityReference,omitempty"`
+		VmInfo            NullableHyperflexVirtualMachine            `json:"VmInfo,omitempty"`
+		SrcBackupCluster  NullableHyperflexBackupClusterRelationship `json:"SrcBackupCluster,omitempty"`
+		SrcCluster        NullableHyperflexClusterRelationship       `json:"SrcCluster,omitempty"`
+		TgtCluster        NullableHyperflexClusterRelationship       `json:"TgtCluster,omitempty"`
 	}
 
 	varHyperflexVmBackupInfoWithoutEmbeddedStruct := HyperflexVmBackupInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexVmBackupInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexVmBackupInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexVmBackupInfo := _HyperflexVmBackupInfo{}
 		varHyperflexVmBackupInfo.ClassId = varHyperflexVmBackupInfoWithoutEmbeddedStruct.ClassId
@@ -814,7 +877,7 @@ func (o *HyperflexVmBackupInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexVmBackupInfo := _HyperflexVmBackupInfo{}
 
-	err = json.Unmarshal(bytes, &varHyperflexVmBackupInfo)
+	err = json.Unmarshal(data, &varHyperflexVmBackupInfo)
 	if err == nil {
 		o.MoBaseMo = varHyperflexVmBackupInfo.MoBaseMo
 	} else {
@@ -823,7 +886,7 @@ func (o *HyperflexVmBackupInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BackupStatus")

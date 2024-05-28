@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the ApplianceBackup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceBackup{}
 
 // ApplianceBackup Backup tracks all backup requests to create a full system backup of the Intersight Appliance. There will be only one Backup managed object with a 'Started' state at any time. All other Backup managed objects will be in terminal states.
 type ApplianceBackup struct {
@@ -39,8 +43,8 @@ type ApplianceBackup struct {
 	// Start date and time of the backup process.
 	StartTime *time.Time `json:"StartTime,omitempty"`
 	// Status of the backup managed object. * `Started` - Backup or restore process has started. * `Created` - Backup or restore is in created state. * `Failed` - Backup or restore process has failed. * `Completed` - Backup or restore process has completed. * `Copied` - Backup file has been copied. * `Cleanup Failed` - Cleanup of the old backup has failed.
-	Status               *string                 `json:"Status,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	Status               *string                        `json:"Status,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +125,7 @@ func (o *ApplianceBackup) SetObjectType(v string) {
 
 // GetElapsedTime returns the ElapsedTime field value if set, zero value otherwise.
 func (o *ApplianceBackup) GetElapsedTime() int64 {
-	if o == nil || o.ElapsedTime == nil {
+	if o == nil || IsNil(o.ElapsedTime) {
 		var ret int64
 		return ret
 	}
@@ -131,7 +135,7 @@ func (o *ApplianceBackup) GetElapsedTime() int64 {
 // GetElapsedTimeOk returns a tuple with the ElapsedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackup) GetElapsedTimeOk() (*int64, bool) {
-	if o == nil || o.ElapsedTime == nil {
+	if o == nil || IsNil(o.ElapsedTime) {
 		return nil, false
 	}
 	return o.ElapsedTime, true
@@ -139,7 +143,7 @@ func (o *ApplianceBackup) GetElapsedTimeOk() (*int64, bool) {
 
 // HasElapsedTime returns a boolean if a field has been set.
 func (o *ApplianceBackup) HasElapsedTime() bool {
-	if o != nil && o.ElapsedTime != nil {
+	if o != nil && !IsNil(o.ElapsedTime) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *ApplianceBackup) SetElapsedTime(v int64) {
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *ApplianceBackup) GetEndTime() time.Time {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -163,7 +167,7 @@ func (o *ApplianceBackup) GetEndTime() time.Time {
 // GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackup) GetEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
 	return o.EndTime, true
@@ -171,7 +175,7 @@ func (o *ApplianceBackup) GetEndTimeOk() (*time.Time, bool) {
 
 // HasEndTime returns a boolean if a field has been set.
 func (o *ApplianceBackup) HasEndTime() bool {
-	if o != nil && o.EndTime != nil {
+	if o != nil && !IsNil(o.EndTime) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *ApplianceBackup) SetEndTime(v time.Time) {
 
 // GetIsManual returns the IsManual field value if set, zero value otherwise.
 func (o *ApplianceBackup) GetIsManual() bool {
-	if o == nil || o.IsManual == nil {
+	if o == nil || IsNil(o.IsManual) {
 		var ret bool
 		return ret
 	}
@@ -195,7 +199,7 @@ func (o *ApplianceBackup) GetIsManual() bool {
 // GetIsManualOk returns a tuple with the IsManual field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackup) GetIsManualOk() (*bool, bool) {
-	if o == nil || o.IsManual == nil {
+	if o == nil || IsNil(o.IsManual) {
 		return nil, false
 	}
 	return o.IsManual, true
@@ -203,7 +207,7 @@ func (o *ApplianceBackup) GetIsManualOk() (*bool, bool) {
 
 // HasIsManual returns a boolean if a field has been set.
 func (o *ApplianceBackup) HasIsManual() bool {
-	if o != nil && o.IsManual != nil {
+	if o != nil && !IsNil(o.IsManual) {
 		return true
 	}
 
@@ -217,7 +221,7 @@ func (o *ApplianceBackup) SetIsManual(v bool) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *ApplianceBackup) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -227,7 +231,7 @@ func (o *ApplianceBackup) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackup) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -235,7 +239,7 @@ func (o *ApplianceBackup) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *ApplianceBackup) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -260,7 +264,7 @@ func (o *ApplianceBackup) GetMessages() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceBackup) GetMessagesOk() ([]string, bool) {
-	if o == nil || o.Messages == nil {
+	if o == nil || IsNil(o.Messages) {
 		return nil, false
 	}
 	return o.Messages, true
@@ -268,7 +272,7 @@ func (o *ApplianceBackup) GetMessagesOk() ([]string, bool) {
 
 // HasMessages returns a boolean if a field has been set.
 func (o *ApplianceBackup) HasMessages() bool {
-	if o != nil && o.Messages != nil {
+	if o != nil && IsNil(o.Messages) {
 		return true
 	}
 
@@ -282,7 +286,7 @@ func (o *ApplianceBackup) SetMessages(v []string) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *ApplianceBackup) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -292,7 +296,7 @@ func (o *ApplianceBackup) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackup) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -300,7 +304,7 @@ func (o *ApplianceBackup) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *ApplianceBackup) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -314,7 +318,7 @@ func (o *ApplianceBackup) SetPassword(v string) {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *ApplianceBackup) GetStartTime() time.Time {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -324,7 +328,7 @@ func (o *ApplianceBackup) GetStartTime() time.Time {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackup) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -332,7 +336,7 @@ func (o *ApplianceBackup) GetStartTimeOk() (*time.Time, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *ApplianceBackup) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -346,7 +350,7 @@ func (o *ApplianceBackup) SetStartTime(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ApplianceBackup) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -356,7 +360,7 @@ func (o *ApplianceBackup) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackup) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -364,7 +368,7 @@ func (o *ApplianceBackup) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *ApplianceBackup) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -376,90 +380,127 @@ func (o *ApplianceBackup) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceBackup) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceBackup) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ApplianceBackup) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ApplianceBackup) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ApplianceBackup) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ApplianceBackup) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o ApplianceBackup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceBackup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedApplianceBackupBase, errApplianceBackupBase := json.Marshal(o.ApplianceBackupBase)
 	if errApplianceBackupBase != nil {
-		return []byte{}, errApplianceBackupBase
+		return map[string]interface{}{}, errApplianceBackupBase
 	}
 	errApplianceBackupBase = json.Unmarshal([]byte(serializedApplianceBackupBase), &toSerialize)
 	if errApplianceBackupBase != nil {
-		return []byte{}, errApplianceBackupBase
+		return map[string]interface{}{}, errApplianceBackupBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ElapsedTime != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ElapsedTime) {
 		toSerialize["ElapsedTime"] = o.ElapsedTime
 	}
-	if o.EndTime != nil {
+	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
 	}
-	if o.IsManual != nil {
+	if !IsNil(o.IsManual) {
 		toSerialize["IsManual"] = o.IsManual
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
 	if o.Messages != nil {
 		toSerialize["Messages"] = o.Messages
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceBackup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceBackup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceBackupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -479,13 +520,13 @@ func (o *ApplianceBackup) UnmarshalJSON(bytes []byte) (err error) {
 		// Start date and time of the backup process.
 		StartTime *time.Time `json:"StartTime,omitempty"`
 		// Status of the backup managed object. * `Started` - Backup or restore process has started. * `Created` - Backup or restore is in created state. * `Failed` - Backup or restore process has failed. * `Completed` - Backup or restore process has completed. * `Copied` - Backup file has been copied. * `Cleanup Failed` - Cleanup of the old backup has failed.
-		Status  *string                 `json:"Status,omitempty"`
-		Account *IamAccountRelationship `json:"Account,omitempty"`
+		Status  *string                        `json:"Status,omitempty"`
+		Account NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varApplianceBackupWithoutEmbeddedStruct := ApplianceBackupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceBackupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceBackupWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceBackup := _ApplianceBackup{}
 		varApplianceBackup.ClassId = varApplianceBackupWithoutEmbeddedStruct.ClassId
@@ -506,7 +547,7 @@ func (o *ApplianceBackup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceBackup := _ApplianceBackup{}
 
-	err = json.Unmarshal(bytes, &varApplianceBackup)
+	err = json.Unmarshal(data, &varApplianceBackup)
 	if err == nil {
 		o.ApplianceBackupBase = varApplianceBackup.ApplianceBackupBase
 	} else {
@@ -515,7 +556,7 @@ func (o *ApplianceBackup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ElapsedTime")

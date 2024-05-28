@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryPodSnmpPolicies type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryPodSnmpPolicies{}
 
 // NiatelemetryPodSnmpPolicies Object to capture Pod SNMP Policy details.
 type NiatelemetryPodSnmpPolicies struct {
@@ -41,8 +45,8 @@ type NiatelemetryPodSnmpPolicies struct {
 	// List of Dn of the SNMP Trap Fwd Server in APIC.
 	SnmpTrapFwdServer *string `json:"SnmpTrapFwdServer,omitempty"`
 	// List of Dn of the SNMP user in APIC.
-	SnmpUser             *string                              `json:"SnmpUser,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SnmpUser             *string                                     `json:"SnmpUser,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +125,7 @@ func (o *NiatelemetryPodSnmpPolicies) SetObjectType(v string) {
 
 // GetAdminSt returns the AdminSt field value if set, zero value otherwise.
 func (o *NiatelemetryPodSnmpPolicies) GetAdminSt() string {
-	if o == nil || o.AdminSt == nil {
+	if o == nil || IsNil(o.AdminSt) {
 		var ret string
 		return ret
 	}
@@ -131,7 +135,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetAdminSt() string {
 // GetAdminStOk returns a tuple with the AdminSt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryPodSnmpPolicies) GetAdminStOk() (*string, bool) {
-	if o == nil || o.AdminSt == nil {
+	if o == nil || IsNil(o.AdminSt) {
 		return nil, false
 	}
 	return o.AdminSt, true
@@ -139,7 +143,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetAdminStOk() (*string, bool) {
 
 // HasAdminSt returns a boolean if a field has been set.
 func (o *NiatelemetryPodSnmpPolicies) HasAdminSt() bool {
-	if o != nil && o.AdminSt != nil {
+	if o != nil && !IsNil(o.AdminSt) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *NiatelemetryPodSnmpPolicies) SetAdminSt(v string) {
 
 // GetPolDn returns the PolDn field value if set, zero value otherwise.
 func (o *NiatelemetryPodSnmpPolicies) GetPolDn() string {
-	if o == nil || o.PolDn == nil {
+	if o == nil || IsNil(o.PolDn) {
 		var ret string
 		return ret
 	}
@@ -163,7 +167,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetPolDn() string {
 // GetPolDnOk returns a tuple with the PolDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryPodSnmpPolicies) GetPolDnOk() (*string, bool) {
-	if o == nil || o.PolDn == nil {
+	if o == nil || IsNil(o.PolDn) {
 		return nil, false
 	}
 	return o.PolDn, true
@@ -171,7 +175,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetPolDnOk() (*string, bool) {
 
 // HasPolDn returns a boolean if a field has been set.
 func (o *NiatelemetryPodSnmpPolicies) HasPolDn() bool {
-	if o != nil && o.PolDn != nil {
+	if o != nil && !IsNil(o.PolDn) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *NiatelemetryPodSnmpPolicies) SetPolDn(v string) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryPodSnmpPolicies) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -195,7 +199,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryPodSnmpPolicies) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -203,7 +207,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryPodSnmpPolicies) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -217,7 +221,7 @@ func (o *NiatelemetryPodSnmpPolicies) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryPodSnmpPolicies) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -227,7 +231,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryPodSnmpPolicies) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -235,7 +239,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryPodSnmpPolicies) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -249,7 +253,7 @@ func (o *NiatelemetryPodSnmpPolicies) SetRecordVersion(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryPodSnmpPolicies) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -259,7 +263,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryPodSnmpPolicies) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -267,7 +271,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryPodSnmpPolicies) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -281,7 +285,7 @@ func (o *NiatelemetryPodSnmpPolicies) SetSiteName(v string) {
 
 // GetSnmpClientGrp returns the SnmpClientGrp field value if set, zero value otherwise.
 func (o *NiatelemetryPodSnmpPolicies) GetSnmpClientGrp() string {
-	if o == nil || o.SnmpClientGrp == nil {
+	if o == nil || IsNil(o.SnmpClientGrp) {
 		var ret string
 		return ret
 	}
@@ -291,7 +295,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetSnmpClientGrp() string {
 // GetSnmpClientGrpOk returns a tuple with the SnmpClientGrp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryPodSnmpPolicies) GetSnmpClientGrpOk() (*string, bool) {
-	if o == nil || o.SnmpClientGrp == nil {
+	if o == nil || IsNil(o.SnmpClientGrp) {
 		return nil, false
 	}
 	return o.SnmpClientGrp, true
@@ -299,7 +303,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetSnmpClientGrpOk() (*string, bool) {
 
 // HasSnmpClientGrp returns a boolean if a field has been set.
 func (o *NiatelemetryPodSnmpPolicies) HasSnmpClientGrp() bool {
-	if o != nil && o.SnmpClientGrp != nil {
+	if o != nil && !IsNil(o.SnmpClientGrp) {
 		return true
 	}
 
@@ -313,7 +317,7 @@ func (o *NiatelemetryPodSnmpPolicies) SetSnmpClientGrp(v string) {
 
 // GetSnmpCommunity returns the SnmpCommunity field value if set, zero value otherwise.
 func (o *NiatelemetryPodSnmpPolicies) GetSnmpCommunity() string {
-	if o == nil || o.SnmpCommunity == nil {
+	if o == nil || IsNil(o.SnmpCommunity) {
 		var ret string
 		return ret
 	}
@@ -323,7 +327,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetSnmpCommunity() string {
 // GetSnmpCommunityOk returns a tuple with the SnmpCommunity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryPodSnmpPolicies) GetSnmpCommunityOk() (*string, bool) {
-	if o == nil || o.SnmpCommunity == nil {
+	if o == nil || IsNil(o.SnmpCommunity) {
 		return nil, false
 	}
 	return o.SnmpCommunity, true
@@ -331,7 +335,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetSnmpCommunityOk() (*string, bool) {
 
 // HasSnmpCommunity returns a boolean if a field has been set.
 func (o *NiatelemetryPodSnmpPolicies) HasSnmpCommunity() bool {
-	if o != nil && o.SnmpCommunity != nil {
+	if o != nil && !IsNil(o.SnmpCommunity) {
 		return true
 	}
 
@@ -345,7 +349,7 @@ func (o *NiatelemetryPodSnmpPolicies) SetSnmpCommunity(v string) {
 
 // GetSnmpTrapFwdServer returns the SnmpTrapFwdServer field value if set, zero value otherwise.
 func (o *NiatelemetryPodSnmpPolicies) GetSnmpTrapFwdServer() string {
-	if o == nil || o.SnmpTrapFwdServer == nil {
+	if o == nil || IsNil(o.SnmpTrapFwdServer) {
 		var ret string
 		return ret
 	}
@@ -355,7 +359,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetSnmpTrapFwdServer() string {
 // GetSnmpTrapFwdServerOk returns a tuple with the SnmpTrapFwdServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryPodSnmpPolicies) GetSnmpTrapFwdServerOk() (*string, bool) {
-	if o == nil || o.SnmpTrapFwdServer == nil {
+	if o == nil || IsNil(o.SnmpTrapFwdServer) {
 		return nil, false
 	}
 	return o.SnmpTrapFwdServer, true
@@ -363,7 +367,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetSnmpTrapFwdServerOk() (*string, bool) {
 
 // HasSnmpTrapFwdServer returns a boolean if a field has been set.
 func (o *NiatelemetryPodSnmpPolicies) HasSnmpTrapFwdServer() bool {
-	if o != nil && o.SnmpTrapFwdServer != nil {
+	if o != nil && !IsNil(o.SnmpTrapFwdServer) {
 		return true
 	}
 
@@ -377,7 +381,7 @@ func (o *NiatelemetryPodSnmpPolicies) SetSnmpTrapFwdServer(v string) {
 
 // GetSnmpUser returns the SnmpUser field value if set, zero value otherwise.
 func (o *NiatelemetryPodSnmpPolicies) GetSnmpUser() string {
-	if o == nil || o.SnmpUser == nil {
+	if o == nil || IsNil(o.SnmpUser) {
 		var ret string
 		return ret
 	}
@@ -387,7 +391,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetSnmpUser() string {
 // GetSnmpUserOk returns a tuple with the SnmpUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryPodSnmpPolicies) GetSnmpUserOk() (*string, bool) {
-	if o == nil || o.SnmpUser == nil {
+	if o == nil || IsNil(o.SnmpUser) {
 		return nil, false
 	}
 	return o.SnmpUser, true
@@ -395,7 +399,7 @@ func (o *NiatelemetryPodSnmpPolicies) GetSnmpUserOk() (*string, bool) {
 
 // HasSnmpUser returns a boolean if a field has been set.
 func (o *NiatelemetryPodSnmpPolicies) HasSnmpUser() bool {
-	if o != nil && o.SnmpUser != nil {
+	if o != nil && !IsNil(o.SnmpUser) {
 		return true
 	}
 
@@ -407,93 +411,130 @@ func (o *NiatelemetryPodSnmpPolicies) SetSnmpUser(v string) {
 	o.SnmpUser = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryPodSnmpPolicies) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryPodSnmpPolicies) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryPodSnmpPolicies) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryPodSnmpPolicies) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryPodSnmpPolicies) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryPodSnmpPolicies) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryPodSnmpPolicies) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryPodSnmpPolicies) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminSt != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminSt) {
 		toSerialize["AdminSt"] = o.AdminSt
 	}
-	if o.PolDn != nil {
+	if !IsNil(o.PolDn) {
 		toSerialize["PolDn"] = o.PolDn
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.SnmpClientGrp != nil {
+	if !IsNil(o.SnmpClientGrp) {
 		toSerialize["SnmpClientGrp"] = o.SnmpClientGrp
 	}
-	if o.SnmpCommunity != nil {
+	if !IsNil(o.SnmpCommunity) {
 		toSerialize["SnmpCommunity"] = o.SnmpCommunity
 	}
-	if o.SnmpTrapFwdServer != nil {
+	if !IsNil(o.SnmpTrapFwdServer) {
 		toSerialize["SnmpTrapFwdServer"] = o.SnmpTrapFwdServer
 	}
-	if o.SnmpUser != nil {
+	if !IsNil(o.SnmpUser) {
 		toSerialize["SnmpUser"] = o.SnmpUser
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryPodSnmpPolicies) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryPodSnmpPolicies) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryPodSnmpPoliciesWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -516,13 +557,13 @@ func (o *NiatelemetryPodSnmpPolicies) UnmarshalJSON(bytes []byte) (err error) {
 		// List of Dn of the SNMP Trap Fwd Server in APIC.
 		SnmpTrapFwdServer *string `json:"SnmpTrapFwdServer,omitempty"`
 		// List of Dn of the SNMP user in APIC.
-		SnmpUser         *string                              `json:"SnmpUser,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SnmpUser         *string                                     `json:"SnmpUser,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryPodSnmpPoliciesWithoutEmbeddedStruct := NiatelemetryPodSnmpPoliciesWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryPodSnmpPoliciesWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryPodSnmpPoliciesWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryPodSnmpPolicies := _NiatelemetryPodSnmpPolicies{}
 		varNiatelemetryPodSnmpPolicies.ClassId = varNiatelemetryPodSnmpPoliciesWithoutEmbeddedStruct.ClassId
@@ -544,7 +585,7 @@ func (o *NiatelemetryPodSnmpPolicies) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryPodSnmpPolicies := _NiatelemetryPodSnmpPolicies{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryPodSnmpPolicies)
+	err = json.Unmarshal(data, &varNiatelemetryPodSnmpPolicies)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryPodSnmpPolicies.MoBaseMo
 	} else {
@@ -553,7 +594,7 @@ func (o *NiatelemetryPodSnmpPolicies) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminSt")

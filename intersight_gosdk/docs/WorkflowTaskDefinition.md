@@ -16,11 +16,11 @@ Name | Type | Description | Notes
 **RollbackTasks** | Pointer to [**[]WorkflowRollbackTask**](WorkflowRollbackTask.md) |  | [optional] 
 **SecurePropAccess** | Pointer to **bool** | If set to true, the task requires access to secure properties and uses an encryption token associated with a workflow moid to encrypt or decrypt the secure properties. | [optional] [readonly] 
 **Version** | Pointer to **int64** | The version of the task definition so we can support multiple versions of a task definition. | [optional] [default to 1]
-**Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
-**ClonedFrom** | Pointer to [**WorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableWorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
+**ClonedFrom** | Pointer to [**NullableWorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
 **ImplementedTasks** | Pointer to [**[]WorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) | An array of relationships to workflowTaskDefinition resources. | [optional] 
-**InterfaceTask** | Pointer to [**WorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
-**TaskMetadata** | Pointer to [**WorkflowTaskMetadataRelationship**](WorkflowTaskMetadataRelationship.md) |  | [optional] 
+**InterfaceTask** | Pointer to [**NullableWorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
+**TaskMetadata** | Pointer to [**NullableWorkflowTaskMetadataRelationship**](WorkflowTaskMetadataRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -386,6 +386,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *WorkflowTaskDefinition) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *WorkflowTaskDefinition) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 ### GetClonedFrom
 
 `func (o *WorkflowTaskDefinition) GetClonedFrom() WorkflowTaskDefinitionRelationship`
@@ -411,6 +421,16 @@ SetClonedFrom sets ClonedFrom field to given value.
 
 HasClonedFrom returns a boolean if a field has been set.
 
+### SetClonedFromNil
+
+`func (o *WorkflowTaskDefinition) SetClonedFromNil(b bool)`
+
+ SetClonedFromNil sets the value for ClonedFrom to be an explicit nil
+
+### UnsetClonedFrom
+`func (o *WorkflowTaskDefinition) UnsetClonedFrom()`
+
+UnsetClonedFrom ensures that no value is present for ClonedFrom, not even an explicit nil
 ### GetImplementedTasks
 
 `func (o *WorkflowTaskDefinition) GetImplementedTasks() []WorkflowTaskDefinitionRelationship`
@@ -471,6 +491,16 @@ SetInterfaceTask sets InterfaceTask field to given value.
 
 HasInterfaceTask returns a boolean if a field has been set.
 
+### SetInterfaceTaskNil
+
+`func (o *WorkflowTaskDefinition) SetInterfaceTaskNil(b bool)`
+
+ SetInterfaceTaskNil sets the value for InterfaceTask to be an explicit nil
+
+### UnsetInterfaceTask
+`func (o *WorkflowTaskDefinition) UnsetInterfaceTask()`
+
+UnsetInterfaceTask ensures that no value is present for InterfaceTask, not even an explicit nil
 ### GetTaskMetadata
 
 `func (o *WorkflowTaskDefinition) GetTaskMetadata() WorkflowTaskMetadataRelationship`
@@ -496,6 +526,16 @@ SetTaskMetadata sets TaskMetadata field to given value.
 
 HasTaskMetadata returns a boolean if a field has been set.
 
+### SetTaskMetadataNil
+
+`func (o *WorkflowTaskDefinition) SetTaskMetadataNil(b bool)`
+
+ SetTaskMetadataNil sets the value for TaskMetadata to be an explicit nil
+
+### UnsetTaskMetadata
+`func (o *WorkflowTaskDefinition) UnsetTaskMetadata()`
+
+UnsetTaskMetadata ensures that no value is present for TaskMetadata, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "port.Group"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "port.Group"]
 **Transport** | Pointer to **string** | Type of port group. Values are Eth or Fc. | [optional] [readonly] 
-**EquipmentSharedIoModule** | Pointer to [**EquipmentSharedIoModuleRelationship**](EquipmentSharedIoModuleRelationship.md) |  | [optional] 
-**EquipmentSwitchCard** | Pointer to [**EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
+**EquipmentSharedIoModule** | Pointer to [**NullableEquipmentSharedIoModuleRelationship**](EquipmentSharedIoModuleRelationship.md) |  | [optional] 
+**EquipmentSwitchCard** | Pointer to [**NullableEquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
 **EthernetPorts** | Pointer to [**[]EtherPhysicalPortRelationship**](EtherPhysicalPortRelationship.md) | An array of relationships to etherPhysicalPort resources. | [optional] [readonly] 
 **FcPorts** | Pointer to [**[]FcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) | An array of relationships to fcPhysicalPort resources. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **SubGroups** | Pointer to [**[]PortSubGroupRelationship**](PortSubGroupRelationship.md) | An array of relationships to portSubGroup resources. | [optional] [readonly] 
 
 ## Methods
@@ -124,6 +124,16 @@ SetEquipmentSharedIoModule sets EquipmentSharedIoModule field to given value.
 
 HasEquipmentSharedIoModule returns a boolean if a field has been set.
 
+### SetEquipmentSharedIoModuleNil
+
+`func (o *PortGroup) SetEquipmentSharedIoModuleNil(b bool)`
+
+ SetEquipmentSharedIoModuleNil sets the value for EquipmentSharedIoModule to be an explicit nil
+
+### UnsetEquipmentSharedIoModule
+`func (o *PortGroup) UnsetEquipmentSharedIoModule()`
+
+UnsetEquipmentSharedIoModule ensures that no value is present for EquipmentSharedIoModule, not even an explicit nil
 ### GetEquipmentSwitchCard
 
 `func (o *PortGroup) GetEquipmentSwitchCard() EquipmentSwitchCardRelationship`
@@ -149,6 +159,16 @@ SetEquipmentSwitchCard sets EquipmentSwitchCard field to given value.
 
 HasEquipmentSwitchCard returns a boolean if a field has been set.
 
+### SetEquipmentSwitchCardNil
+
+`func (o *PortGroup) SetEquipmentSwitchCardNil(b bool)`
+
+ SetEquipmentSwitchCardNil sets the value for EquipmentSwitchCard to be an explicit nil
+
+### UnsetEquipmentSwitchCard
+`func (o *PortGroup) UnsetEquipmentSwitchCard()`
+
+UnsetEquipmentSwitchCard ensures that no value is present for EquipmentSwitchCard, not even an explicit nil
 ### GetEthernetPorts
 
 `func (o *PortGroup) GetEthernetPorts() []EtherPhysicalPortRelationship`
@@ -244,6 +264,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *PortGroup) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *PortGroup) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *PortGroup) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -269,6 +299,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *PortGroup) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *PortGroup) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetSubGroups
 
 `func (o *PortGroup) GetSubGroups() []PortSubGroupRelationship`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the BootStaticIpV4Settings type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BootStaticIpV4Settings{}
 
 // BootStaticIpV4Settings Lists the properties that can be used for static IPv4 configuration in HTTP boot.
 type BootStaticIpV4Settings struct {
@@ -110,7 +114,7 @@ func (o *BootStaticIpV4Settings) SetObjectType(v string) {
 
 // GetDnsIp returns the DnsIp field value if set, zero value otherwise.
 func (o *BootStaticIpV4Settings) GetDnsIp() string {
-	if o == nil || o.DnsIp == nil {
+	if o == nil || IsNil(o.DnsIp) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *BootStaticIpV4Settings) GetDnsIp() string {
 // GetDnsIpOk returns a tuple with the DnsIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootStaticIpV4Settings) GetDnsIpOk() (*string, bool) {
-	if o == nil || o.DnsIp == nil {
+	if o == nil || IsNil(o.DnsIp) {
 		return nil, false
 	}
 	return o.DnsIp, true
@@ -128,7 +132,7 @@ func (o *BootStaticIpV4Settings) GetDnsIpOk() (*string, bool) {
 
 // HasDnsIp returns a boolean if a field has been set.
 func (o *BootStaticIpV4Settings) HasDnsIp() bool {
-	if o != nil && o.DnsIp != nil {
+	if o != nil && !IsNil(o.DnsIp) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *BootStaticIpV4Settings) SetDnsIp(v string) {
 
 // GetGatewayIp returns the GatewayIp field value if set, zero value otherwise.
 func (o *BootStaticIpV4Settings) GetGatewayIp() string {
-	if o == nil || o.GatewayIp == nil {
+	if o == nil || IsNil(o.GatewayIp) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *BootStaticIpV4Settings) GetGatewayIp() string {
 // GetGatewayIpOk returns a tuple with the GatewayIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootStaticIpV4Settings) GetGatewayIpOk() (*string, bool) {
-	if o == nil || o.GatewayIp == nil {
+	if o == nil || IsNil(o.GatewayIp) {
 		return nil, false
 	}
 	return o.GatewayIp, true
@@ -160,7 +164,7 @@ func (o *BootStaticIpV4Settings) GetGatewayIpOk() (*string, bool) {
 
 // HasGatewayIp returns a boolean if a field has been set.
 func (o *BootStaticIpV4Settings) HasGatewayIp() bool {
-	if o != nil && o.GatewayIp != nil {
+	if o != nil && !IsNil(o.GatewayIp) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *BootStaticIpV4Settings) SetGatewayIp(v string) {
 
 // GetIp returns the Ip field value if set, zero value otherwise.
 func (o *BootStaticIpV4Settings) GetIp() string {
-	if o == nil || o.Ip == nil {
+	if o == nil || IsNil(o.Ip) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *BootStaticIpV4Settings) GetIp() string {
 // GetIpOk returns a tuple with the Ip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootStaticIpV4Settings) GetIpOk() (*string, bool) {
-	if o == nil || o.Ip == nil {
+	if o == nil || IsNil(o.Ip) {
 		return nil, false
 	}
 	return o.Ip, true
@@ -192,7 +196,7 @@ func (o *BootStaticIpV4Settings) GetIpOk() (*string, bool) {
 
 // HasIp returns a boolean if a field has been set.
 func (o *BootStaticIpV4Settings) HasIp() bool {
-	if o != nil && o.Ip != nil {
+	if o != nil && !IsNil(o.Ip) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *BootStaticIpV4Settings) SetIp(v string) {
 
 // GetNetworkMask returns the NetworkMask field value if set, zero value otherwise.
 func (o *BootStaticIpV4Settings) GetNetworkMask() string {
-	if o == nil || o.NetworkMask == nil {
+	if o == nil || IsNil(o.NetworkMask) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *BootStaticIpV4Settings) GetNetworkMask() string {
 // GetNetworkMaskOk returns a tuple with the NetworkMask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootStaticIpV4Settings) GetNetworkMaskOk() (*string, bool) {
-	if o == nil || o.NetworkMask == nil {
+	if o == nil || IsNil(o.NetworkMask) {
 		return nil, false
 	}
 	return o.NetworkMask, true
@@ -224,7 +228,7 @@ func (o *BootStaticIpV4Settings) GetNetworkMaskOk() (*string, bool) {
 
 // HasNetworkMask returns a boolean if a field has been set.
 func (o *BootStaticIpV4Settings) HasNetworkMask() bool {
-	if o != nil && o.NetworkMask != nil {
+	if o != nil && !IsNil(o.NetworkMask) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *BootStaticIpV4Settings) SetNetworkMask(v string) {
 }
 
 func (o BootStaticIpV4Settings) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BootStaticIpV4Settings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DnsIp != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DnsIp) {
 		toSerialize["DnsIp"] = o.DnsIp
 	}
-	if o.GatewayIp != nil {
+	if !IsNil(o.GatewayIp) {
 		toSerialize["GatewayIp"] = o.GatewayIp
 	}
-	if o.Ip != nil {
+	if !IsNil(o.Ip) {
 		toSerialize["Ip"] = o.Ip
 	}
-	if o.NetworkMask != nil {
+	if !IsNil(o.NetworkMask) {
 		toSerialize["NetworkMask"] = o.NetworkMask
 	}
 
@@ -269,10 +277,32 @@ func (o BootStaticIpV4Settings) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *BootStaticIpV4Settings) UnmarshalJSON(bytes []byte) (err error) {
+func (o *BootStaticIpV4Settings) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type BootStaticIpV4SettingsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *BootStaticIpV4Settings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBootStaticIpV4SettingsWithoutEmbeddedStruct := BootStaticIpV4SettingsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varBootStaticIpV4SettingsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varBootStaticIpV4SettingsWithoutEmbeddedStruct)
 	if err == nil {
 		varBootStaticIpV4Settings := _BootStaticIpV4Settings{}
 		varBootStaticIpV4Settings.ClassId = varBootStaticIpV4SettingsWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *BootStaticIpV4Settings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varBootStaticIpV4Settings := _BootStaticIpV4Settings{}
 
-	err = json.Unmarshal(bytes, &varBootStaticIpV4Settings)
+	err = json.Unmarshal(data, &varBootStaticIpV4Settings)
 	if err == nil {
 		o.MoBaseComplexType = varBootStaticIpV4Settings.MoBaseComplexType
 	} else {
@@ -315,7 +345,7 @@ func (o *BootStaticIpV4Settings) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DnsIp")

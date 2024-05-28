@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the WorkflowWorkflowInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowWorkflowInfo{}
 
 // WorkflowWorkflowInfo Contains information for a workflow which is an execution instance of the workflow definition given in the relationship. The workflow definition will provide the schema of the inputs taken to start the workflow execution and the schema of the outputs generated at the end of successful workflow execution. The sequence of tasks to be executed is also provided in the workflow definition. For a workflow to successfully start execution the following properties must be provided- Name, AssociatedObject that carries the relationship to Organization under which the workflow must be executed, WorkflowDefinition, and Inputs with all the required data in order to start workflow execution.
 type WorkflowWorkflowInfo struct {
@@ -79,15 +83,15 @@ type WorkflowWorkflowInfo struct {
 	WaitReason  *string                     `json:"WaitReason,omitempty"`
 	WorkflowCtx NullableWorkflowWorkflowCtx `json:"WorkflowCtx,omitempty"`
 	// The current state of the workflow execution instance. A draft workflow execution will be in NotStarted state and when \"Start\" action is issued then the workflow will move into Waiting state until the first task of the workflow is scheduled at which time it will move into InProgress state. When execution reaches a final state it move to either Completed, Failed or Terminated state. For more details look at the description for each state. * `NotStarted` - Initially all the workflow instances are at \"NotStarted\" state. A workflow can be drafted in this state by issuing Create action. When a workflow is in this state the inputs can be updated until the workflow is started. * `InProgress` - A workflow execution moves into \"InProgress\" state when the first task of the workflow is scheduled for execution and continues to remain in that state as long as there are tasks executing or yet to be scheduled for execution. * `Waiting` - Workflow can go to waiting state due to execution of wait task present in the workflow or the workflow has not started yet either due to duplicate workflow is running or due to workflow throttling. Once Workflow engine picks up the workflow for execution, it will move to in progress state. * `Completed` - A workflow execution moves into Completed state when the execution path of the workflow has reached the Success node in the workflow design and there are no more tasks to be executed. Completed is the final state for the workflow execution instance and no further actions are allowed on this workflow instance. * `Failed` - A workflow execution moves into a Failed state when the execution path of the workflow has reached the Failed node in the workflow design and there are no more tasks to be scheduled. A Failed node can be reached when the last executed task has failed or timed out and there are no further retries available for the task. Also as per the workflow design, the last executed task did not specify an OnFailure task to be executed and hence by default, the execution will reach the Failed node. Actions like \"Rerun\", \"RetryFailed\" and \"RetryFromTask\" can be issued on failed workflow instances. Please refer to the \"Action\" description for more details. * `Terminated` - A workflow execution moves to Terminated state when user issues a \"Cancel\" action or due to internal errors caused during workflow execution. e.g. - Task input transformation has failed. Terminated is a final state of the workflow, no further action are allowed on this workflow instance. * `Canceled` - A workflow execution moves to Canceled state when a user issues a \"Cancel\" action. Cancel is not a final state, the workflow engine will issue cancel to all the running tasks and then move the workflow to the \"Terminated\" state. * `Paused` - A workflow execution moves to Paused state when user issues a \"Pause\" action. When in paused state the current running task will complete its execution but no further tasks will be scheduled until the workflow is resumed. A paused workflow is resumed when the user issues a \"Resume\" action. Paused workflows can be canceled by user.
-	WorkflowStatus   *string                               `json:"WorkflowStatus,omitempty"`
-	Account          *IamAccountRelationship               `json:"Account,omitempty"`
-	AssociatedObject *MoBaseMoRelationship                 `json:"AssociatedObject,omitempty"`
-	Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	ParentTaskInfo   *WorkflowTaskInfoRelationship         `json:"ParentTaskInfo,omitempty"`
-	Permission       *IamPermissionRelationship            `json:"Permission,omitempty"`
+	WorkflowStatus   *string                                      `json:"WorkflowStatus,omitempty"`
+	Account          NullableIamAccountRelationship               `json:"Account,omitempty"`
+	AssociatedObject NullableMoBaseMoRelationship                 `json:"AssociatedObject,omitempty"`
+	Organization     NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	ParentTaskInfo   NullableWorkflowTaskInfoRelationship         `json:"ParentTaskInfo,omitempty"`
+	Permission       NullableIamPermissionRelationship            `json:"Permission,omitempty"`
 	// An array of relationships to workflowTaskInfo resources.
-	TaskInfos            []WorkflowTaskInfoRelationship          `json:"TaskInfos,omitempty"`
-	WorkflowDefinition   *WorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
+	TaskInfos            []WorkflowTaskInfoRelationship                 `json:"TaskInfos,omitempty"`
+	WorkflowDefinition   NullableWorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -178,7 +182,7 @@ func (o *WorkflowWorkflowInfo) SetObjectType(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *WorkflowWorkflowInfo) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
 	return o.Action, true
@@ -196,7 +200,7 @@ func (o *WorkflowWorkflowInfo) GetActionOk() (*string, bool) {
 
 // HasAction returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !IsNil(o.Action) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *WorkflowWorkflowInfo) SetAction(v string) {
 
 // GetCleanupTime returns the CleanupTime field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetCleanupTime() time.Time {
-	if o == nil || o.CleanupTime == nil {
+	if o == nil || IsNil(o.CleanupTime) {
 		var ret time.Time
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *WorkflowWorkflowInfo) GetCleanupTime() time.Time {
 // GetCleanupTimeOk returns a tuple with the CleanupTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetCleanupTimeOk() (*time.Time, bool) {
-	if o == nil || o.CleanupTime == nil {
+	if o == nil || IsNil(o.CleanupTime) {
 		return nil, false
 	}
 	return o.CleanupTime, true
@@ -228,7 +232,7 @@ func (o *WorkflowWorkflowInfo) GetCleanupTimeOk() (*time.Time, bool) {
 
 // HasCleanupTime returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasCleanupTime() bool {
-	if o != nil && o.CleanupTime != nil {
+	if o != nil && !IsNil(o.CleanupTime) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *WorkflowWorkflowInfo) SetCleanupTime(v time.Time) {
 
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetEmail() string {
-	if o == nil || o.Email == nil {
+	if o == nil || IsNil(o.Email) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *WorkflowWorkflowInfo) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetEmailOk() (*string, bool) {
-	if o == nil || o.Email == nil {
+	if o == nil || IsNil(o.Email) {
 		return nil, false
 	}
 	return o.Email, true
@@ -260,7 +264,7 @@ func (o *WorkflowWorkflowInfo) GetEmailOk() (*string, bool) {
 
 // HasEmail returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasEmail() bool {
-	if o != nil && o.Email != nil {
+	if o != nil && !IsNil(o.Email) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *WorkflowWorkflowInfo) SetEmail(v string) {
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetEndTime() time.Time {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *WorkflowWorkflowInfo) GetEndTime() time.Time {
 // GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
 	return o.EndTime, true
@@ -292,7 +296,7 @@ func (o *WorkflowWorkflowInfo) GetEndTimeOk() (*time.Time, bool) {
 
 // HasEndTime returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasEndTime() bool {
-	if o != nil && o.EndTime != nil {
+	if o != nil && !IsNil(o.EndTime) {
 		return true
 	}
 
@@ -306,7 +310,7 @@ func (o *WorkflowWorkflowInfo) SetEndTime(v time.Time) {
 
 // GetFailedWorkflowCleanupDuration returns the FailedWorkflowCleanupDuration field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetFailedWorkflowCleanupDuration() int64 {
-	if o == nil || o.FailedWorkflowCleanupDuration == nil {
+	if o == nil || IsNil(o.FailedWorkflowCleanupDuration) {
 		var ret int64
 		return ret
 	}
@@ -316,7 +320,7 @@ func (o *WorkflowWorkflowInfo) GetFailedWorkflowCleanupDuration() int64 {
 // GetFailedWorkflowCleanupDurationOk returns a tuple with the FailedWorkflowCleanupDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetFailedWorkflowCleanupDurationOk() (*int64, bool) {
-	if o == nil || o.FailedWorkflowCleanupDuration == nil {
+	if o == nil || IsNil(o.FailedWorkflowCleanupDuration) {
 		return nil, false
 	}
 	return o.FailedWorkflowCleanupDuration, true
@@ -324,7 +328,7 @@ func (o *WorkflowWorkflowInfo) GetFailedWorkflowCleanupDurationOk() (*int64, boo
 
 // HasFailedWorkflowCleanupDuration returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasFailedWorkflowCleanupDuration() bool {
-	if o != nil && o.FailedWorkflowCleanupDuration != nil {
+	if o != nil && !IsNil(o.FailedWorkflowCleanupDuration) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *WorkflowWorkflowInfo) GetInput() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowInfo) GetInputOk() (*interface{}, bool) {
-	if o == nil || o.Input == nil {
+	if o == nil || IsNil(o.Input) {
 		return nil, false
 	}
 	return &o.Input, true
@@ -357,7 +361,7 @@ func (o *WorkflowWorkflowInfo) GetInputOk() (*interface{}, bool) {
 
 // HasInput returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasInput() bool {
-	if o != nil && o.Input != nil {
+	if o != nil && IsNil(o.Input) {
 		return true
 	}
 
@@ -371,7 +375,7 @@ func (o *WorkflowWorkflowInfo) SetInput(v interface{}) {
 
 // GetInstId returns the InstId field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetInstId() string {
-	if o == nil || o.InstId == nil {
+	if o == nil || IsNil(o.InstId) {
 		var ret string
 		return ret
 	}
@@ -381,7 +385,7 @@ func (o *WorkflowWorkflowInfo) GetInstId() string {
 // GetInstIdOk returns a tuple with the InstId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetInstIdOk() (*string, bool) {
-	if o == nil || o.InstId == nil {
+	if o == nil || IsNil(o.InstId) {
 		return nil, false
 	}
 	return o.InstId, true
@@ -389,7 +393,7 @@ func (o *WorkflowWorkflowInfo) GetInstIdOk() (*string, bool) {
 
 // HasInstId returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasInstId() bool {
-	if o != nil && o.InstId != nil {
+	if o != nil && !IsNil(o.InstId) {
 		return true
 	}
 
@@ -403,7 +407,7 @@ func (o *WorkflowWorkflowInfo) SetInstId(v string) {
 
 // GetInternal returns the Internal field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetInternal() bool {
-	if o == nil || o.Internal == nil {
+	if o == nil || IsNil(o.Internal) {
 		var ret bool
 		return ret
 	}
@@ -413,7 +417,7 @@ func (o *WorkflowWorkflowInfo) GetInternal() bool {
 // GetInternalOk returns a tuple with the Internal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetInternalOk() (*bool, bool) {
-	if o == nil || o.Internal == nil {
+	if o == nil || IsNil(o.Internal) {
 		return nil, false
 	}
 	return o.Internal, true
@@ -421,7 +425,7 @@ func (o *WorkflowWorkflowInfo) GetInternalOk() (*bool, bool) {
 
 // HasInternal returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasInternal() bool {
-	if o != nil && o.Internal != nil {
+	if o != nil && !IsNil(o.Internal) {
 		return true
 	}
 
@@ -435,7 +439,7 @@ func (o *WorkflowWorkflowInfo) SetInternal(v bool) {
 
 // GetLastAction returns the LastAction field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetLastAction() string {
-	if o == nil || o.LastAction == nil {
+	if o == nil || IsNil(o.LastAction) {
 		var ret string
 		return ret
 	}
@@ -445,7 +449,7 @@ func (o *WorkflowWorkflowInfo) GetLastAction() string {
 // GetLastActionOk returns a tuple with the LastAction field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetLastActionOk() (*string, bool) {
-	if o == nil || o.LastAction == nil {
+	if o == nil || IsNil(o.LastAction) {
 		return nil, false
 	}
 	return o.LastAction, true
@@ -453,7 +457,7 @@ func (o *WorkflowWorkflowInfo) GetLastActionOk() (*string, bool) {
 
 // HasLastAction returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasLastAction() bool {
-	if o != nil && o.LastAction != nil {
+	if o != nil && !IsNil(o.LastAction) {
 		return true
 	}
 
@@ -478,7 +482,7 @@ func (o *WorkflowWorkflowInfo) GetMessage() []WorkflowMessage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowInfo) GetMessageOk() ([]WorkflowMessage, bool) {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -486,7 +490,7 @@ func (o *WorkflowWorkflowInfo) GetMessageOk() ([]WorkflowMessage, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasMessage() bool {
-	if o != nil && o.Message != nil {
+	if o != nil && IsNil(o.Message) {
 		return true
 	}
 
@@ -500,7 +504,7 @@ func (o *WorkflowWorkflowInfo) SetMessage(v []WorkflowMessage) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -510,7 +514,7 @@ func (o *WorkflowWorkflowInfo) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -518,7 +522,7 @@ func (o *WorkflowWorkflowInfo) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -543,7 +547,7 @@ func (o *WorkflowWorkflowInfo) GetOutput() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowInfo) GetOutputOk() (*interface{}, bool) {
-	if o == nil || o.Output == nil {
+	if o == nil || IsNil(o.Output) {
 		return nil, false
 	}
 	return &o.Output, true
@@ -551,7 +555,7 @@ func (o *WorkflowWorkflowInfo) GetOutputOk() (*interface{}, bool) {
 
 // HasOutput returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasOutput() bool {
-	if o != nil && o.Output != nil {
+	if o != nil && IsNil(o.Output) {
 		return true
 	}
 
@@ -565,7 +569,7 @@ func (o *WorkflowWorkflowInfo) SetOutput(v interface{}) {
 
 // GetPauseReason returns the PauseReason field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetPauseReason() string {
-	if o == nil || o.PauseReason == nil {
+	if o == nil || IsNil(o.PauseReason) {
 		var ret string
 		return ret
 	}
@@ -575,7 +579,7 @@ func (o *WorkflowWorkflowInfo) GetPauseReason() string {
 // GetPauseReasonOk returns a tuple with the PauseReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetPauseReasonOk() (*string, bool) {
-	if o == nil || o.PauseReason == nil {
+	if o == nil || IsNil(o.PauseReason) {
 		return nil, false
 	}
 	return o.PauseReason, true
@@ -583,7 +587,7 @@ func (o *WorkflowWorkflowInfo) GetPauseReasonOk() (*string, bool) {
 
 // HasPauseReason returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasPauseReason() bool {
-	if o != nil && o.PauseReason != nil {
+	if o != nil && !IsNil(o.PauseReason) {
 		return true
 	}
 
@@ -597,7 +601,7 @@ func (o *WorkflowWorkflowInfo) SetPauseReason(v string) {
 
 // GetProgress returns the Progress field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetProgress() float32 {
-	if o == nil || o.Progress == nil {
+	if o == nil || IsNil(o.Progress) {
 		var ret float32
 		return ret
 	}
@@ -607,7 +611,7 @@ func (o *WorkflowWorkflowInfo) GetProgress() float32 {
 // GetProgressOk returns a tuple with the Progress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetProgressOk() (*float32, bool) {
-	if o == nil || o.Progress == nil {
+	if o == nil || IsNil(o.Progress) {
 		return nil, false
 	}
 	return o.Progress, true
@@ -615,7 +619,7 @@ func (o *WorkflowWorkflowInfo) GetProgressOk() (*float32, bool) {
 
 // HasProgress returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasProgress() bool {
-	if o != nil && o.Progress != nil {
+	if o != nil && !IsNil(o.Progress) {
 		return true
 	}
 
@@ -629,7 +633,7 @@ func (o *WorkflowWorkflowInfo) SetProgress(v float32) {
 
 // GetProperties returns the Properties field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowWorkflowInfo) GetProperties() WorkflowWorkflowInfoProperties {
-	if o == nil || o.Properties.Get() == nil {
+	if o == nil || IsNil(o.Properties.Get()) {
 		var ret WorkflowWorkflowInfoProperties
 		return ret
 	}
@@ -672,7 +676,7 @@ func (o *WorkflowWorkflowInfo) UnsetProperties() {
 
 // GetRetryFromTaskName returns the RetryFromTaskName field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetRetryFromTaskName() string {
-	if o == nil || o.RetryFromTaskName == nil {
+	if o == nil || IsNil(o.RetryFromTaskName) {
 		var ret string
 		return ret
 	}
@@ -682,7 +686,7 @@ func (o *WorkflowWorkflowInfo) GetRetryFromTaskName() string {
 // GetRetryFromTaskNameOk returns a tuple with the RetryFromTaskName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetRetryFromTaskNameOk() (*string, bool) {
-	if o == nil || o.RetryFromTaskName == nil {
+	if o == nil || IsNil(o.RetryFromTaskName) {
 		return nil, false
 	}
 	return o.RetryFromTaskName, true
@@ -690,7 +694,7 @@ func (o *WorkflowWorkflowInfo) GetRetryFromTaskNameOk() (*string, bool) {
 
 // HasRetryFromTaskName returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasRetryFromTaskName() bool {
-	if o != nil && o.RetryFromTaskName != nil {
+	if o != nil && !IsNil(o.RetryFromTaskName) {
 		return true
 	}
 
@@ -704,7 +708,7 @@ func (o *WorkflowWorkflowInfo) SetRetryFromTaskName(v string) {
 
 // GetSrc returns the Src field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetSrc() string {
-	if o == nil || o.Src == nil {
+	if o == nil || IsNil(o.Src) {
 		var ret string
 		return ret
 	}
@@ -714,7 +718,7 @@ func (o *WorkflowWorkflowInfo) GetSrc() string {
 // GetSrcOk returns a tuple with the Src field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetSrcOk() (*string, bool) {
-	if o == nil || o.Src == nil {
+	if o == nil || IsNil(o.Src) {
 		return nil, false
 	}
 	return o.Src, true
@@ -722,7 +726,7 @@ func (o *WorkflowWorkflowInfo) GetSrcOk() (*string, bool) {
 
 // HasSrc returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasSrc() bool {
-	if o != nil && o.Src != nil {
+	if o != nil && !IsNil(o.Src) {
 		return true
 	}
 
@@ -736,7 +740,7 @@ func (o *WorkflowWorkflowInfo) SetSrc(v string) {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetStartTime() time.Time {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -746,7 +750,7 @@ func (o *WorkflowWorkflowInfo) GetStartTime() time.Time {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -754,7 +758,7 @@ func (o *WorkflowWorkflowInfo) GetStartTimeOk() (*time.Time, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -769,7 +773,7 @@ func (o *WorkflowWorkflowInfo) SetStartTime(v time.Time) {
 // GetStatus returns the Status field value if set, zero value otherwise.
 // Deprecated
 func (o *WorkflowWorkflowInfo) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -780,7 +784,7 @@ func (o *WorkflowWorkflowInfo) GetStatus() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *WorkflowWorkflowInfo) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -788,7 +792,7 @@ func (o *WorkflowWorkflowInfo) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -803,7 +807,7 @@ func (o *WorkflowWorkflowInfo) SetStatus(v string) {
 
 // GetSuccessWorkflowCleanupDuration returns the SuccessWorkflowCleanupDuration field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetSuccessWorkflowCleanupDuration() int64 {
-	if o == nil || o.SuccessWorkflowCleanupDuration == nil {
+	if o == nil || IsNil(o.SuccessWorkflowCleanupDuration) {
 		var ret int64
 		return ret
 	}
@@ -813,7 +817,7 @@ func (o *WorkflowWorkflowInfo) GetSuccessWorkflowCleanupDuration() int64 {
 // GetSuccessWorkflowCleanupDurationOk returns a tuple with the SuccessWorkflowCleanupDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetSuccessWorkflowCleanupDurationOk() (*int64, bool) {
-	if o == nil || o.SuccessWorkflowCleanupDuration == nil {
+	if o == nil || IsNil(o.SuccessWorkflowCleanupDuration) {
 		return nil, false
 	}
 	return o.SuccessWorkflowCleanupDuration, true
@@ -821,7 +825,7 @@ func (o *WorkflowWorkflowInfo) GetSuccessWorkflowCleanupDurationOk() (*int64, bo
 
 // HasSuccessWorkflowCleanupDuration returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasSuccessWorkflowCleanupDuration() bool {
-	if o != nil && o.SuccessWorkflowCleanupDuration != nil {
+	if o != nil && !IsNil(o.SuccessWorkflowCleanupDuration) {
 		return true
 	}
 
@@ -835,7 +839,7 @@ func (o *WorkflowWorkflowInfo) SetSuccessWorkflowCleanupDuration(v int64) {
 
 // GetTaskInfoUpdate returns the TaskInfoUpdate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowWorkflowInfo) GetTaskInfoUpdate() WorkflowTaskInfoUpdate {
-	if o == nil || o.TaskInfoUpdate.Get() == nil {
+	if o == nil || IsNil(o.TaskInfoUpdate.Get()) {
 		var ret WorkflowTaskInfoUpdate
 		return ret
 	}
@@ -878,7 +882,7 @@ func (o *WorkflowWorkflowInfo) UnsetTaskInfoUpdate() {
 
 // GetTraceId returns the TraceId field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetTraceId() string {
-	if o == nil || o.TraceId == nil {
+	if o == nil || IsNil(o.TraceId) {
 		var ret string
 		return ret
 	}
@@ -888,7 +892,7 @@ func (o *WorkflowWorkflowInfo) GetTraceId() string {
 // GetTraceIdOk returns a tuple with the TraceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetTraceIdOk() (*string, bool) {
-	if o == nil || o.TraceId == nil {
+	if o == nil || IsNil(o.TraceId) {
 		return nil, false
 	}
 	return o.TraceId, true
@@ -896,7 +900,7 @@ func (o *WorkflowWorkflowInfo) GetTraceIdOk() (*string, bool) {
 
 // HasTraceId returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasTraceId() bool {
-	if o != nil && o.TraceId != nil {
+	if o != nil && !IsNil(o.TraceId) {
 		return true
 	}
 
@@ -910,7 +914,7 @@ func (o *WorkflowWorkflowInfo) SetTraceId(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -920,7 +924,7 @@ func (o *WorkflowWorkflowInfo) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -928,7 +932,7 @@ func (o *WorkflowWorkflowInfo) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -942,7 +946,7 @@ func (o *WorkflowWorkflowInfo) SetType(v string) {
 
 // GetUserActionRequired returns the UserActionRequired field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetUserActionRequired() bool {
-	if o == nil || o.UserActionRequired == nil {
+	if o == nil || IsNil(o.UserActionRequired) {
 		var ret bool
 		return ret
 	}
@@ -952,7 +956,7 @@ func (o *WorkflowWorkflowInfo) GetUserActionRequired() bool {
 // GetUserActionRequiredOk returns a tuple with the UserActionRequired field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetUserActionRequiredOk() (*bool, bool) {
-	if o == nil || o.UserActionRequired == nil {
+	if o == nil || IsNil(o.UserActionRequired) {
 		return nil, false
 	}
 	return o.UserActionRequired, true
@@ -960,7 +964,7 @@ func (o *WorkflowWorkflowInfo) GetUserActionRequiredOk() (*bool, bool) {
 
 // HasUserActionRequired returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasUserActionRequired() bool {
-	if o != nil && o.UserActionRequired != nil {
+	if o != nil && !IsNil(o.UserActionRequired) {
 		return true
 	}
 
@@ -974,7 +978,7 @@ func (o *WorkflowWorkflowInfo) SetUserActionRequired(v bool) {
 
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetUserId() string {
-	if o == nil || o.UserId == nil {
+	if o == nil || IsNil(o.UserId) {
 		var ret string
 		return ret
 	}
@@ -984,7 +988,7 @@ func (o *WorkflowWorkflowInfo) GetUserId() string {
 // GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetUserIdOk() (*string, bool) {
-	if o == nil || o.UserId == nil {
+	if o == nil || IsNil(o.UserId) {
 		return nil, false
 	}
 	return o.UserId, true
@@ -992,7 +996,7 @@ func (o *WorkflowWorkflowInfo) GetUserIdOk() (*string, bool) {
 
 // HasUserId returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasUserId() bool {
-	if o != nil && o.UserId != nil {
+	if o != nil && !IsNil(o.UserId) {
 		return true
 	}
 
@@ -1017,7 +1021,7 @@ func (o *WorkflowWorkflowInfo) GetVariable() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowInfo) GetVariableOk() (*interface{}, bool) {
-	if o == nil || o.Variable == nil {
+	if o == nil || IsNil(o.Variable) {
 		return nil, false
 	}
 	return &o.Variable, true
@@ -1025,7 +1029,7 @@ func (o *WorkflowWorkflowInfo) GetVariableOk() (*interface{}, bool) {
 
 // HasVariable returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasVariable() bool {
-	if o != nil && o.Variable != nil {
+	if o != nil && IsNil(o.Variable) {
 		return true
 	}
 
@@ -1039,7 +1043,7 @@ func (o *WorkflowWorkflowInfo) SetVariable(v interface{}) {
 
 // GetWaitReason returns the WaitReason field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetWaitReason() string {
-	if o == nil || o.WaitReason == nil {
+	if o == nil || IsNil(o.WaitReason) {
 		var ret string
 		return ret
 	}
@@ -1049,7 +1053,7 @@ func (o *WorkflowWorkflowInfo) GetWaitReason() string {
 // GetWaitReasonOk returns a tuple with the WaitReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetWaitReasonOk() (*string, bool) {
-	if o == nil || o.WaitReason == nil {
+	if o == nil || IsNil(o.WaitReason) {
 		return nil, false
 	}
 	return o.WaitReason, true
@@ -1057,7 +1061,7 @@ func (o *WorkflowWorkflowInfo) GetWaitReasonOk() (*string, bool) {
 
 // HasWaitReason returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasWaitReason() bool {
-	if o != nil && o.WaitReason != nil {
+	if o != nil && !IsNil(o.WaitReason) {
 		return true
 	}
 
@@ -1071,7 +1075,7 @@ func (o *WorkflowWorkflowInfo) SetWaitReason(v string) {
 
 // GetWorkflowCtx returns the WorkflowCtx field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowWorkflowInfo) GetWorkflowCtx() WorkflowWorkflowCtx {
-	if o == nil || o.WorkflowCtx.Get() == nil {
+	if o == nil || IsNil(o.WorkflowCtx.Get()) {
 		var ret WorkflowWorkflowCtx
 		return ret
 	}
@@ -1114,7 +1118,7 @@ func (o *WorkflowWorkflowInfo) UnsetWorkflowCtx() {
 
 // GetWorkflowStatus returns the WorkflowStatus field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetWorkflowStatus() string {
-	if o == nil || o.WorkflowStatus == nil {
+	if o == nil || IsNil(o.WorkflowStatus) {
 		var ret string
 		return ret
 	}
@@ -1124,7 +1128,7 @@ func (o *WorkflowWorkflowInfo) GetWorkflowStatus() string {
 // GetWorkflowStatusOk returns a tuple with the WorkflowStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowWorkflowInfo) GetWorkflowStatusOk() (*string, bool) {
-	if o == nil || o.WorkflowStatus == nil {
+	if o == nil || IsNil(o.WorkflowStatus) {
 		return nil, false
 	}
 	return o.WorkflowStatus, true
@@ -1132,7 +1136,7 @@ func (o *WorkflowWorkflowInfo) GetWorkflowStatusOk() (*string, bool) {
 
 // HasWorkflowStatus returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasWorkflowStatus() bool {
-	if o != nil && o.WorkflowStatus != nil {
+	if o != nil && !IsNil(o.WorkflowStatus) {
 		return true
 	}
 
@@ -1144,164 +1148,219 @@ func (o *WorkflowWorkflowInfo) SetWorkflowStatus(v string) {
 	o.WorkflowStatus = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowWorkflowInfo) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowInfo) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *WorkflowWorkflowInfo) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetAssociatedObject returns the AssociatedObject field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *WorkflowWorkflowInfo) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *WorkflowWorkflowInfo) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetAssociatedObject returns the AssociatedObject field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowWorkflowInfo) GetAssociatedObject() MoBaseMoRelationship {
-	if o == nil || o.AssociatedObject == nil {
+	if o == nil || IsNil(o.AssociatedObject.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.AssociatedObject
+	return *o.AssociatedObject.Get()
 }
 
 // GetAssociatedObjectOk returns a tuple with the AssociatedObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowInfo) GetAssociatedObjectOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.AssociatedObject == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssociatedObject, true
+	return o.AssociatedObject.Get(), o.AssociatedObject.IsSet()
 }
 
 // HasAssociatedObject returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasAssociatedObject() bool {
-	if o != nil && o.AssociatedObject != nil {
+	if o != nil && o.AssociatedObject.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssociatedObject gets a reference to the given MoBaseMoRelationship and assigns it to the AssociatedObject field.
+// SetAssociatedObject gets a reference to the given NullableMoBaseMoRelationship and assigns it to the AssociatedObject field.
 func (o *WorkflowWorkflowInfo) SetAssociatedObject(v MoBaseMoRelationship) {
-	o.AssociatedObject = &v
+	o.AssociatedObject.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetAssociatedObjectNil sets the value for AssociatedObject to be an explicit nil
+func (o *WorkflowWorkflowInfo) SetAssociatedObjectNil() {
+	o.AssociatedObject.Set(nil)
+}
+
+// UnsetAssociatedObject ensures that no value is present for AssociatedObject, not even an explicit nil
+func (o *WorkflowWorkflowInfo) UnsetAssociatedObject() {
+	o.AssociatedObject.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowWorkflowInfo) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowInfo) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *WorkflowWorkflowInfo) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetParentTaskInfo returns the ParentTaskInfo field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *WorkflowWorkflowInfo) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *WorkflowWorkflowInfo) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetParentTaskInfo returns the ParentTaskInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowWorkflowInfo) GetParentTaskInfo() WorkflowTaskInfoRelationship {
-	if o == nil || o.ParentTaskInfo == nil {
+	if o == nil || IsNil(o.ParentTaskInfo.Get()) {
 		var ret WorkflowTaskInfoRelationship
 		return ret
 	}
-	return *o.ParentTaskInfo
+	return *o.ParentTaskInfo.Get()
 }
 
 // GetParentTaskInfoOk returns a tuple with the ParentTaskInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowInfo) GetParentTaskInfoOk() (*WorkflowTaskInfoRelationship, bool) {
-	if o == nil || o.ParentTaskInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ParentTaskInfo, true
+	return o.ParentTaskInfo.Get(), o.ParentTaskInfo.IsSet()
 }
 
 // HasParentTaskInfo returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasParentTaskInfo() bool {
-	if o != nil && o.ParentTaskInfo != nil {
+	if o != nil && o.ParentTaskInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetParentTaskInfo gets a reference to the given WorkflowTaskInfoRelationship and assigns it to the ParentTaskInfo field.
+// SetParentTaskInfo gets a reference to the given NullableWorkflowTaskInfoRelationship and assigns it to the ParentTaskInfo field.
 func (o *WorkflowWorkflowInfo) SetParentTaskInfo(v WorkflowTaskInfoRelationship) {
-	o.ParentTaskInfo = &v
+	o.ParentTaskInfo.Set(&v)
 }
 
-// GetPermission returns the Permission field value if set, zero value otherwise.
+// SetParentTaskInfoNil sets the value for ParentTaskInfo to be an explicit nil
+func (o *WorkflowWorkflowInfo) SetParentTaskInfoNil() {
+	o.ParentTaskInfo.Set(nil)
+}
+
+// UnsetParentTaskInfo ensures that no value is present for ParentTaskInfo, not even an explicit nil
+func (o *WorkflowWorkflowInfo) UnsetParentTaskInfo() {
+	o.ParentTaskInfo.Unset()
+}
+
+// GetPermission returns the Permission field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowWorkflowInfo) GetPermission() IamPermissionRelationship {
-	if o == nil || o.Permission == nil {
+	if o == nil || IsNil(o.Permission.Get()) {
 		var ret IamPermissionRelationship
 		return ret
 	}
-	return *o.Permission
+	return *o.Permission.Get()
 }
 
 // GetPermissionOk returns a tuple with the Permission field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowInfo) GetPermissionOk() (*IamPermissionRelationship, bool) {
-	if o == nil || o.Permission == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Permission, true
+	return o.Permission.Get(), o.Permission.IsSet()
 }
 
 // HasPermission returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasPermission() bool {
-	if o != nil && o.Permission != nil {
+	if o != nil && o.Permission.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPermission gets a reference to the given IamPermissionRelationship and assigns it to the Permission field.
+// SetPermission gets a reference to the given NullableIamPermissionRelationship and assigns it to the Permission field.
 func (o *WorkflowWorkflowInfo) SetPermission(v IamPermissionRelationship) {
-	o.Permission = &v
+	o.Permission.Set(&v)
+}
+
+// SetPermissionNil sets the value for Permission to be an explicit nil
+func (o *WorkflowWorkflowInfo) SetPermissionNil() {
+	o.Permission.Set(nil)
+}
+
+// UnsetPermission ensures that no value is present for Permission, not even an explicit nil
+func (o *WorkflowWorkflowInfo) UnsetPermission() {
+	o.Permission.Unset()
 }
 
 // GetTaskInfos returns the TaskInfos field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1317,7 +1376,7 @@ func (o *WorkflowWorkflowInfo) GetTaskInfos() []WorkflowTaskInfoRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowInfo) GetTaskInfosOk() ([]WorkflowTaskInfoRelationship, bool) {
-	if o == nil || o.TaskInfos == nil {
+	if o == nil || IsNil(o.TaskInfos) {
 		return nil, false
 	}
 	return o.TaskInfos, true
@@ -1325,7 +1384,7 @@ func (o *WorkflowWorkflowInfo) GetTaskInfosOk() ([]WorkflowTaskInfoRelationship,
 
 // HasTaskInfos returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasTaskInfos() bool {
-	if o != nil && o.TaskInfos != nil {
+	if o != nil && IsNil(o.TaskInfos) {
 		return true
 	}
 
@@ -1337,171 +1396,208 @@ func (o *WorkflowWorkflowInfo) SetTaskInfos(v []WorkflowTaskInfoRelationship) {
 	o.TaskInfos = v
 }
 
-// GetWorkflowDefinition returns the WorkflowDefinition field value if set, zero value otherwise.
+// GetWorkflowDefinition returns the WorkflowDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowWorkflowInfo) GetWorkflowDefinition() WorkflowWorkflowDefinitionRelationship {
-	if o == nil || o.WorkflowDefinition == nil {
+	if o == nil || IsNil(o.WorkflowDefinition.Get()) {
 		var ret WorkflowWorkflowDefinitionRelationship
 		return ret
 	}
-	return *o.WorkflowDefinition
+	return *o.WorkflowDefinition.Get()
 }
 
 // GetWorkflowDefinitionOk returns a tuple with the WorkflowDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowWorkflowInfo) GetWorkflowDefinitionOk() (*WorkflowWorkflowDefinitionRelationship, bool) {
-	if o == nil || o.WorkflowDefinition == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.WorkflowDefinition, true
+	return o.WorkflowDefinition.Get(), o.WorkflowDefinition.IsSet()
 }
 
 // HasWorkflowDefinition returns a boolean if a field has been set.
 func (o *WorkflowWorkflowInfo) HasWorkflowDefinition() bool {
-	if o != nil && o.WorkflowDefinition != nil {
+	if o != nil && o.WorkflowDefinition.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWorkflowDefinition gets a reference to the given WorkflowWorkflowDefinitionRelationship and assigns it to the WorkflowDefinition field.
+// SetWorkflowDefinition gets a reference to the given NullableWorkflowWorkflowDefinitionRelationship and assigns it to the WorkflowDefinition field.
 func (o *WorkflowWorkflowInfo) SetWorkflowDefinition(v WorkflowWorkflowDefinitionRelationship) {
-	o.WorkflowDefinition = &v
+	o.WorkflowDefinition.Set(&v)
+}
+
+// SetWorkflowDefinitionNil sets the value for WorkflowDefinition to be an explicit nil
+func (o *WorkflowWorkflowInfo) SetWorkflowDefinitionNil() {
+	o.WorkflowDefinition.Set(nil)
+}
+
+// UnsetWorkflowDefinition ensures that no value is present for WorkflowDefinition, not even an explicit nil
+func (o *WorkflowWorkflowInfo) UnsetWorkflowDefinition() {
+	o.WorkflowDefinition.Unset()
 }
 
 func (o WorkflowWorkflowInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowWorkflowInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Action != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
 		toSerialize["Action"] = o.Action
 	}
-	if o.CleanupTime != nil {
+	if !IsNil(o.CleanupTime) {
 		toSerialize["CleanupTime"] = o.CleanupTime
 	}
-	if o.Email != nil {
+	if !IsNil(o.Email) {
 		toSerialize["Email"] = o.Email
 	}
-	if o.EndTime != nil {
+	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
 	}
-	if o.FailedWorkflowCleanupDuration != nil {
+	if !IsNil(o.FailedWorkflowCleanupDuration) {
 		toSerialize["FailedWorkflowCleanupDuration"] = o.FailedWorkflowCleanupDuration
 	}
 	if o.Input != nil {
 		toSerialize["Input"] = o.Input
 	}
-	if o.InstId != nil {
+	if !IsNil(o.InstId) {
 		toSerialize["InstId"] = o.InstId
 	}
-	if o.Internal != nil {
+	if !IsNil(o.Internal) {
 		toSerialize["Internal"] = o.Internal
 	}
-	if o.LastAction != nil {
+	if !IsNil(o.LastAction) {
 		toSerialize["LastAction"] = o.LastAction
 	}
 	if o.Message != nil {
 		toSerialize["Message"] = o.Message
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.Output != nil {
 		toSerialize["Output"] = o.Output
 	}
-	if o.PauseReason != nil {
+	if !IsNil(o.PauseReason) {
 		toSerialize["PauseReason"] = o.PauseReason
 	}
-	if o.Progress != nil {
+	if !IsNil(o.Progress) {
 		toSerialize["Progress"] = o.Progress
 	}
 	if o.Properties.IsSet() {
 		toSerialize["Properties"] = o.Properties.Get()
 	}
-	if o.RetryFromTaskName != nil {
+	if !IsNil(o.RetryFromTaskName) {
 		toSerialize["RetryFromTaskName"] = o.RetryFromTaskName
 	}
-	if o.Src != nil {
+	if !IsNil(o.Src) {
 		toSerialize["Src"] = o.Src
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.SuccessWorkflowCleanupDuration != nil {
+	if !IsNil(o.SuccessWorkflowCleanupDuration) {
 		toSerialize["SuccessWorkflowCleanupDuration"] = o.SuccessWorkflowCleanupDuration
 	}
 	if o.TaskInfoUpdate.IsSet() {
 		toSerialize["TaskInfoUpdate"] = o.TaskInfoUpdate.Get()
 	}
-	if o.TraceId != nil {
+	if !IsNil(o.TraceId) {
 		toSerialize["TraceId"] = o.TraceId
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.UserActionRequired != nil {
+	if !IsNil(o.UserActionRequired) {
 		toSerialize["UserActionRequired"] = o.UserActionRequired
 	}
-	if o.UserId != nil {
+	if !IsNil(o.UserId) {
 		toSerialize["UserId"] = o.UserId
 	}
 	if o.Variable != nil {
 		toSerialize["Variable"] = o.Variable
 	}
-	if o.WaitReason != nil {
+	if !IsNil(o.WaitReason) {
 		toSerialize["WaitReason"] = o.WaitReason
 	}
 	if o.WorkflowCtx.IsSet() {
 		toSerialize["WorkflowCtx"] = o.WorkflowCtx.Get()
 	}
-	if o.WorkflowStatus != nil {
+	if !IsNil(o.WorkflowStatus) {
 		toSerialize["WorkflowStatus"] = o.WorkflowStatus
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.AssociatedObject != nil {
-		toSerialize["AssociatedObject"] = o.AssociatedObject
+	if o.AssociatedObject.IsSet() {
+		toSerialize["AssociatedObject"] = o.AssociatedObject.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.ParentTaskInfo != nil {
-		toSerialize["ParentTaskInfo"] = o.ParentTaskInfo
+	if o.ParentTaskInfo.IsSet() {
+		toSerialize["ParentTaskInfo"] = o.ParentTaskInfo.Get()
 	}
-	if o.Permission != nil {
-		toSerialize["Permission"] = o.Permission
+	if o.Permission.IsSet() {
+		toSerialize["Permission"] = o.Permission.Get()
 	}
 	if o.TaskInfos != nil {
 		toSerialize["TaskInfos"] = o.TaskInfos
 	}
-	if o.WorkflowDefinition != nil {
-		toSerialize["WorkflowDefinition"] = o.WorkflowDefinition
+	if o.WorkflowDefinition.IsSet() {
+		toSerialize["WorkflowDefinition"] = o.WorkflowDefinition.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowWorkflowInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowWorkflowInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1561,20 +1657,20 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		WaitReason  *string                     `json:"WaitReason,omitempty"`
 		WorkflowCtx NullableWorkflowWorkflowCtx `json:"WorkflowCtx,omitempty"`
 		// The current state of the workflow execution instance. A draft workflow execution will be in NotStarted state and when \"Start\" action is issued then the workflow will move into Waiting state until the first task of the workflow is scheduled at which time it will move into InProgress state. When execution reaches a final state it move to either Completed, Failed or Terminated state. For more details look at the description for each state. * `NotStarted` - Initially all the workflow instances are at \"NotStarted\" state. A workflow can be drafted in this state by issuing Create action. When a workflow is in this state the inputs can be updated until the workflow is started. * `InProgress` - A workflow execution moves into \"InProgress\" state when the first task of the workflow is scheduled for execution and continues to remain in that state as long as there are tasks executing or yet to be scheduled for execution. * `Waiting` - Workflow can go to waiting state due to execution of wait task present in the workflow or the workflow has not started yet either due to duplicate workflow is running or due to workflow throttling. Once Workflow engine picks up the workflow for execution, it will move to in progress state. * `Completed` - A workflow execution moves into Completed state when the execution path of the workflow has reached the Success node in the workflow design and there are no more tasks to be executed. Completed is the final state for the workflow execution instance and no further actions are allowed on this workflow instance. * `Failed` - A workflow execution moves into a Failed state when the execution path of the workflow has reached the Failed node in the workflow design and there are no more tasks to be scheduled. A Failed node can be reached when the last executed task has failed or timed out and there are no further retries available for the task. Also as per the workflow design, the last executed task did not specify an OnFailure task to be executed and hence by default, the execution will reach the Failed node. Actions like \"Rerun\", \"RetryFailed\" and \"RetryFromTask\" can be issued on failed workflow instances. Please refer to the \"Action\" description for more details. * `Terminated` - A workflow execution moves to Terminated state when user issues a \"Cancel\" action or due to internal errors caused during workflow execution. e.g. - Task input transformation has failed. Terminated is a final state of the workflow, no further action are allowed on this workflow instance. * `Canceled` - A workflow execution moves to Canceled state when a user issues a \"Cancel\" action. Cancel is not a final state, the workflow engine will issue cancel to all the running tasks and then move the workflow to the \"Terminated\" state. * `Paused` - A workflow execution moves to Paused state when user issues a \"Pause\" action. When in paused state the current running task will complete its execution but no further tasks will be scheduled until the workflow is resumed. A paused workflow is resumed when the user issues a \"Resume\" action. Paused workflows can be canceled by user.
-		WorkflowStatus   *string                               `json:"WorkflowStatus,omitempty"`
-		Account          *IamAccountRelationship               `json:"Account,omitempty"`
-		AssociatedObject *MoBaseMoRelationship                 `json:"AssociatedObject,omitempty"`
-		Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-		ParentTaskInfo   *WorkflowTaskInfoRelationship         `json:"ParentTaskInfo,omitempty"`
-		Permission       *IamPermissionRelationship            `json:"Permission,omitempty"`
+		WorkflowStatus   *string                                      `json:"WorkflowStatus,omitempty"`
+		Account          NullableIamAccountRelationship               `json:"Account,omitempty"`
+		AssociatedObject NullableMoBaseMoRelationship                 `json:"AssociatedObject,omitempty"`
+		Organization     NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		ParentTaskInfo   NullableWorkflowTaskInfoRelationship         `json:"ParentTaskInfo,omitempty"`
+		Permission       NullableIamPermissionRelationship            `json:"Permission,omitempty"`
 		// An array of relationships to workflowTaskInfo resources.
-		TaskInfos          []WorkflowTaskInfoRelationship          `json:"TaskInfos,omitempty"`
-		WorkflowDefinition *WorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
+		TaskInfos          []WorkflowTaskInfoRelationship                 `json:"TaskInfos,omitempty"`
+		WorkflowDefinition NullableWorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
 	}
 
 	varWorkflowWorkflowInfoWithoutEmbeddedStruct := WorkflowWorkflowInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowWorkflowInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowWorkflowInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowWorkflowInfo := _WorkflowWorkflowInfo{}
 		varWorkflowWorkflowInfo.ClassId = varWorkflowWorkflowInfoWithoutEmbeddedStruct.ClassId
@@ -1622,7 +1718,7 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowWorkflowInfo := _WorkflowWorkflowInfo{}
 
-	err = json.Unmarshal(bytes, &varWorkflowWorkflowInfo)
+	err = json.Unmarshal(data, &varWorkflowWorkflowInfo)
 	if err == nil {
 		o.MoBaseMo = varWorkflowWorkflowInfo.MoBaseMo
 	} else {
@@ -1631,7 +1727,7 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")

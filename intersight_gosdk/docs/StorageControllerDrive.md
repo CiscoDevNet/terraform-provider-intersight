@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **PartitionCount** | Pointer to **int64** | Total Partition count in local storage. | [optional] [readonly] 
 **StorageId** | Pointer to **string** | The Id of the local Storage. | [optional] [readonly] 
 **Type** | Pointer to **string** | The type of storage like internal or external. * &#x60;Unknown&#x60; - Not any of the known Storage Types. * &#x60;Internal&#x60; - The internal storage type. * &#x60;External&#x60; - The external storage type. | [optional] [readonly] [default to "Unknown"]
-**ComputeBoard** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**ComputeBoard** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **StorageItem** | Pointer to [**[]StorageItemRelationship**](StorageItemRelationship.md) | An array of relationships to storageItem resources. | [optional] [readonly] 
 
 ## Methods
@@ -250,6 +250,16 @@ SetComputeBoard sets ComputeBoard field to given value.
 
 HasComputeBoard returns a boolean if a field has been set.
 
+### SetComputeBoardNil
+
+`func (o *StorageControllerDrive) SetComputeBoardNil(b bool)`
+
+ SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+
+### UnsetComputeBoard
+`func (o *StorageControllerDrive) UnsetComputeBoard()`
+
+UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageControllerDrive) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -275,6 +285,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageControllerDrive) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageControllerDrive) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageItem
 
 `func (o *StorageControllerDrive) GetStorageItem() []StorageItemRelationship`

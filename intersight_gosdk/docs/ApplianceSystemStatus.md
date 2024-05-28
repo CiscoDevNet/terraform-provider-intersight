@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **StatusChecks** | Pointer to [**[]ApplianceStatusCheck**](ApplianceStatusCheck.md) |  | [optional] 
 **AppStatuses** | Pointer to [**[]ApplianceAppStatusRelationship**](ApplianceAppStatusRelationship.md) | An array of relationships to applianceAppStatus resources. | [optional] [readonly] 
 **GroupStatuses** | Pointer to [**[]ApplianceGroupStatusRelationship**](ApplianceGroupStatusRelationship.md) | An array of relationships to applianceGroupStatus resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**SystemInfo** | Pointer to [**ApplianceSystemInfoRelationship**](ApplianceSystemInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**SystemInfo** | Pointer to [**NullableApplianceSystemInfoRelationship**](ApplianceSystemInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -227,6 +227,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *ApplianceSystemStatus) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *ApplianceSystemStatus) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetSystemInfo
 
 `func (o *ApplianceSystemStatus) GetSystemInfo() ApplianceSystemInfoRelationship`
@@ -252,6 +262,16 @@ SetSystemInfo sets SystemInfo field to given value.
 
 HasSystemInfo returns a boolean if a field has been set.
 
+### SetSystemInfoNil
+
+`func (o *ApplianceSystemStatus) SetSystemInfoNil(b bool)`
+
+ SetSystemInfoNil sets the value for SystemInfo to be an explicit nil
+
+### UnsetSystemInfo
+`func (o *ApplianceSystemStatus) UnsetSystemInfo()`
+
+UnsetSystemInfo ensures that no value is present for SystemInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

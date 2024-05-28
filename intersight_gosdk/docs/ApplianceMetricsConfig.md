@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **StatusMessage** | Pointer to **string** | The overall metrics collection Status based on resource constraints. | [optional] [readonly] 
 **SystemEnabled** | Pointer to **bool** | Metric collection state defined by the system. | [optional] [readonly] [default to false]
 **UserEnabled** | Pointer to **bool** | Configured metric collection state by the account administrator. | [optional] [default to false]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -300,6 +300,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *ApplianceMetricsConfig) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *ApplianceMetricsConfig) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

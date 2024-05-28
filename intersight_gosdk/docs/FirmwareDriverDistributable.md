@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Directory** | Pointer to **string** | Indicates in which directory path this driver will be added. | [optional] 
 **Osname** | Pointer to **string** | The operating system name to which this driver is compatible. | [optional] 
 **Osversion** | Pointer to **string** | OS Version. It is populated as part of the image import operation. | [optional] 
-**Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableSoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -196,6 +196,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *FirmwareDriverDistributable) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *FirmwareDriverDistributable) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

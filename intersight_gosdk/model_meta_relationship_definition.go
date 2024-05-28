@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MetaRelationshipDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MetaRelationshipDefinition{}
 
 // MetaRelationshipDefinition Definitions for the relationship in a meta.
 type MetaRelationshipDefinition struct {
@@ -118,7 +122,7 @@ func (o *MetaRelationshipDefinition) SetObjectType(v string) {
 
 // GetApiAccess returns the ApiAccess field value if set, zero value otherwise.
 func (o *MetaRelationshipDefinition) GetApiAccess() string {
-	if o == nil || o.ApiAccess == nil {
+	if o == nil || IsNil(o.ApiAccess) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *MetaRelationshipDefinition) GetApiAccess() string {
 // GetApiAccessOk returns a tuple with the ApiAccess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaRelationshipDefinition) GetApiAccessOk() (*string, bool) {
-	if o == nil || o.ApiAccess == nil {
+	if o == nil || IsNil(o.ApiAccess) {
 		return nil, false
 	}
 	return o.ApiAccess, true
@@ -136,7 +140,7 @@ func (o *MetaRelationshipDefinition) GetApiAccessOk() (*string, bool) {
 
 // HasApiAccess returns a boolean if a field has been set.
 func (o *MetaRelationshipDefinition) HasApiAccess() bool {
-	if o != nil && o.ApiAccess != nil {
+	if o != nil && !IsNil(o.ApiAccess) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *MetaRelationshipDefinition) SetApiAccess(v string) {
 
 // GetCollection returns the Collection field value if set, zero value otherwise.
 func (o *MetaRelationshipDefinition) GetCollection() bool {
-	if o == nil || o.Collection == nil {
+	if o == nil || IsNil(o.Collection) {
 		var ret bool
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *MetaRelationshipDefinition) GetCollection() bool {
 // GetCollectionOk returns a tuple with the Collection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaRelationshipDefinition) GetCollectionOk() (*bool, bool) {
-	if o == nil || o.Collection == nil {
+	if o == nil || IsNil(o.Collection) {
 		return nil, false
 	}
 	return o.Collection, true
@@ -168,7 +172,7 @@ func (o *MetaRelationshipDefinition) GetCollectionOk() (*bool, bool) {
 
 // HasCollection returns a boolean if a field has been set.
 func (o *MetaRelationshipDefinition) HasCollection() bool {
-	if o != nil && o.Collection != nil {
+	if o != nil && !IsNil(o.Collection) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *MetaRelationshipDefinition) SetCollection(v bool) {
 
 // GetExport returns the Export field value if set, zero value otherwise.
 func (o *MetaRelationshipDefinition) GetExport() bool {
-	if o == nil || o.Export == nil {
+	if o == nil || IsNil(o.Export) {
 		var ret bool
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *MetaRelationshipDefinition) GetExport() bool {
 // GetExportOk returns a tuple with the Export field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaRelationshipDefinition) GetExportOk() (*bool, bool) {
-	if o == nil || o.Export == nil {
+	if o == nil || IsNil(o.Export) {
 		return nil, false
 	}
 	return o.Export, true
@@ -200,7 +204,7 @@ func (o *MetaRelationshipDefinition) GetExportOk() (*bool, bool) {
 
 // HasExport returns a boolean if a field has been set.
 func (o *MetaRelationshipDefinition) HasExport() bool {
-	if o != nil && o.Export != nil {
+	if o != nil && !IsNil(o.Export) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *MetaRelationshipDefinition) SetExport(v bool) {
 
 // GetExportWithPeer returns the ExportWithPeer field value if set, zero value otherwise.
 func (o *MetaRelationshipDefinition) GetExportWithPeer() bool {
-	if o == nil || o.ExportWithPeer == nil {
+	if o == nil || IsNil(o.ExportWithPeer) {
 		var ret bool
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *MetaRelationshipDefinition) GetExportWithPeer() bool {
 // GetExportWithPeerOk returns a tuple with the ExportWithPeer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaRelationshipDefinition) GetExportWithPeerOk() (*bool, bool) {
-	if o == nil || o.ExportWithPeer == nil {
+	if o == nil || IsNil(o.ExportWithPeer) {
 		return nil, false
 	}
 	return o.ExportWithPeer, true
@@ -232,7 +236,7 @@ func (o *MetaRelationshipDefinition) GetExportWithPeerOk() (*bool, bool) {
 
 // HasExportWithPeer returns a boolean if a field has been set.
 func (o *MetaRelationshipDefinition) HasExportWithPeer() bool {
-	if o != nil && o.ExportWithPeer != nil {
+	if o != nil && !IsNil(o.ExportWithPeer) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *MetaRelationshipDefinition) SetExportWithPeer(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *MetaRelationshipDefinition) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *MetaRelationshipDefinition) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaRelationshipDefinition) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -264,7 +268,7 @@ func (o *MetaRelationshipDefinition) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *MetaRelationshipDefinition) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *MetaRelationshipDefinition) SetName(v string) {
 
 // GetPeerRelName returns the PeerRelName field value if set, zero value otherwise.
 func (o *MetaRelationshipDefinition) GetPeerRelName() string {
-	if o == nil || o.PeerRelName == nil {
+	if o == nil || IsNil(o.PeerRelName) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *MetaRelationshipDefinition) GetPeerRelName() string {
 // GetPeerRelNameOk returns a tuple with the PeerRelName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaRelationshipDefinition) GetPeerRelNameOk() (*string, bool) {
-	if o == nil || o.PeerRelName == nil {
+	if o == nil || IsNil(o.PeerRelName) {
 		return nil, false
 	}
 	return o.PeerRelName, true
@@ -296,7 +300,7 @@ func (o *MetaRelationshipDefinition) GetPeerRelNameOk() (*string, bool) {
 
 // HasPeerRelName returns a boolean if a field has been set.
 func (o *MetaRelationshipDefinition) HasPeerRelName() bool {
-	if o != nil && o.PeerRelName != nil {
+	if o != nil && !IsNil(o.PeerRelName) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *MetaRelationshipDefinition) SetPeerRelName(v string) {
 
 // GetPeerSync returns the PeerSync field value if set, zero value otherwise.
 func (o *MetaRelationshipDefinition) GetPeerSync() bool {
-	if o == nil || o.PeerSync == nil {
+	if o == nil || IsNil(o.PeerSync) {
 		var ret bool
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *MetaRelationshipDefinition) GetPeerSync() bool {
 // GetPeerSyncOk returns a tuple with the PeerSync field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaRelationshipDefinition) GetPeerSyncOk() (*bool, bool) {
-	if o == nil || o.PeerSync == nil {
+	if o == nil || IsNil(o.PeerSync) {
 		return nil, false
 	}
 	return o.PeerSync, true
@@ -328,7 +332,7 @@ func (o *MetaRelationshipDefinition) GetPeerSyncOk() (*bool, bool) {
 
 // HasPeerSync returns a boolean if a field has been set.
 func (o *MetaRelationshipDefinition) HasPeerSync() bool {
-	if o != nil && o.PeerSync != nil {
+	if o != nil && !IsNil(o.PeerSync) {
 		return true
 	}
 
@@ -342,7 +346,7 @@ func (o *MetaRelationshipDefinition) SetPeerSync(v bool) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *MetaRelationshipDefinition) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -352,7 +356,7 @@ func (o *MetaRelationshipDefinition) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetaRelationshipDefinition) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -360,7 +364,7 @@ func (o *MetaRelationshipDefinition) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *MetaRelationshipDefinition) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -373,43 +377,47 @@ func (o *MetaRelationshipDefinition) SetType(v string) {
 }
 
 func (o MetaRelationshipDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MetaRelationshipDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ApiAccess != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ApiAccess) {
 		toSerialize["ApiAccess"] = o.ApiAccess
 	}
-	if o.Collection != nil {
+	if !IsNil(o.Collection) {
 		toSerialize["Collection"] = o.Collection
 	}
-	if o.Export != nil {
+	if !IsNil(o.Export) {
 		toSerialize["Export"] = o.Export
 	}
-	if o.ExportWithPeer != nil {
+	if !IsNil(o.ExportWithPeer) {
 		toSerialize["ExportWithPeer"] = o.ExportWithPeer
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PeerRelName != nil {
+	if !IsNil(o.PeerRelName) {
 		toSerialize["PeerRelName"] = o.PeerRelName
 	}
-	if o.PeerSync != nil {
+	if !IsNil(o.PeerSync) {
 		toSerialize["PeerSync"] = o.PeerSync
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 
@@ -417,10 +425,32 @@ func (o MetaRelationshipDefinition) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MetaRelationshipDefinition) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MetaRelationshipDefinition) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MetaRelationshipDefinitionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -446,7 +476,7 @@ func (o *MetaRelationshipDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMetaRelationshipDefinitionWithoutEmbeddedStruct := MetaRelationshipDefinitionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMetaRelationshipDefinitionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMetaRelationshipDefinitionWithoutEmbeddedStruct)
 	if err == nil {
 		varMetaRelationshipDefinition := _MetaRelationshipDefinition{}
 		varMetaRelationshipDefinition.ClassId = varMetaRelationshipDefinitionWithoutEmbeddedStruct.ClassId
@@ -466,7 +496,7 @@ func (o *MetaRelationshipDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMetaRelationshipDefinition := _MetaRelationshipDefinition{}
 
-	err = json.Unmarshal(bytes, &varMetaRelationshipDefinition)
+	err = json.Unmarshal(data, &varMetaRelationshipDefinition)
 	if err == nil {
 		o.MoBaseComplexType = varMetaRelationshipDefinition.MoBaseComplexType
 	} else {
@@ -475,7 +505,7 @@ func (o *MetaRelationshipDefinition) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ApiAccess")

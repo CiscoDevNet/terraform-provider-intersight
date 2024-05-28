@@ -12,10 +12,10 @@ Name | Type | Description | Notes
 **LicenseGrace** | Pointer to **string** | The number of days this port&#39;s license has been in Grace Period for. | [optional] [readonly] 
 **LicenseState** | Pointer to **string** | The state of the port&#39;s licensing. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the Physical Port. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**PortGroup** | Pointer to [**PortGroupRelationship**](PortGroupRelationship.md) |  | [optional] 
-**PortSubGroup** | Pointer to [**PortSubGroupRelationship**](PortSubGroupRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PortGroup** | Pointer to [**NullablePortGroupRelationship**](PortGroupRelationship.md) |  | [optional] 
+**PortSubGroup** | Pointer to [**NullablePortSubGroupRelationship**](PortSubGroupRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -251,6 +251,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *EtherPhysicalPort) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *EtherPhysicalPort) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetPortGroup
 
 `func (o *EtherPhysicalPort) GetPortGroup() PortGroupRelationship`
@@ -276,6 +286,16 @@ SetPortGroup sets PortGroup field to given value.
 
 HasPortGroup returns a boolean if a field has been set.
 
+### SetPortGroupNil
+
+`func (o *EtherPhysicalPort) SetPortGroupNil(b bool)`
+
+ SetPortGroupNil sets the value for PortGroup to be an explicit nil
+
+### UnsetPortGroup
+`func (o *EtherPhysicalPort) UnsetPortGroup()`
+
+UnsetPortGroup ensures that no value is present for PortGroup, not even an explicit nil
 ### GetPortSubGroup
 
 `func (o *EtherPhysicalPort) GetPortSubGroup() PortSubGroupRelationship`
@@ -301,6 +321,16 @@ SetPortSubGroup sets PortSubGroup field to given value.
 
 HasPortSubGroup returns a boolean if a field has been set.
 
+### SetPortSubGroupNil
+
+`func (o *EtherPhysicalPort) SetPortSubGroupNil(b bool)`
+
+ SetPortSubGroupNil sets the value for PortSubGroup to be an explicit nil
+
+### UnsetPortSubGroup
+`func (o *EtherPhysicalPort) UnsetPortSubGroup()`
+
+UnsetPortSubGroup ensures that no value is present for PortSubGroup, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EtherPhysicalPort) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -326,6 +356,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EtherPhysicalPort) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EtherPhysicalPort) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicFcVhbaPolicyInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicFcVhbaPolicyInventory{}
 
 // VnicFcVhbaPolicyInventory A Fibre Channel Quality of Service (QoS) policy assigns a system class to the outgoing traffic for a vHBA. This system class determines the quality of service for the outgoing traffic. For certain adapters additional controls can also be specified like burst and rate on the outgoing traffic.
 type VnicFcVhbaPolicyInventory struct {
@@ -31,8 +35,8 @@ type VnicFcVhbaPolicyInventory struct {
 	// Name of the virtual HBA interface.
 	Name *string `json:"Name,omitempty"`
 	// The priortity matching the System QoS specified in the fabric profile. * `Best Effort` - QoS Priority for Best-effort traffic. * `FC` - QoS Priority for FC traffic. * `Platinum` - QoS Priority for Platinum traffic. * `Gold` - QoS Priority for Gold traffic. * `Silver` - QoS Priority for Silver traffic. * `Bronze` - QoS Priority for Bronze traffic.
-	Priority             *string               `json:"Priority,omitempty"`
-	TargetMo             *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+	Priority             *string                      `json:"Priority,omitempty"`
+	TargetMo             NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *VnicFcVhbaPolicyInventory) SetObjectType(v string) {
 
 // GetCos returns the Cos field value if set, zero value otherwise.
 func (o *VnicFcVhbaPolicyInventory) GetCos() int64 {
-	if o == nil || o.Cos == nil {
+	if o == nil || IsNil(o.Cos) {
 		var ret int64
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *VnicFcVhbaPolicyInventory) GetCos() int64 {
 // GetCosOk returns a tuple with the Cos field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcVhbaPolicyInventory) GetCosOk() (*int64, bool) {
-	if o == nil || o.Cos == nil {
+	if o == nil || IsNil(o.Cos) {
 		return nil, false
 	}
 	return o.Cos, true
@@ -137,7 +141,7 @@ func (o *VnicFcVhbaPolicyInventory) GetCosOk() (*int64, bool) {
 
 // HasCos returns a boolean if a field has been set.
 func (o *VnicFcVhbaPolicyInventory) HasCos() bool {
-	if o != nil && o.Cos != nil {
+	if o != nil && !IsNil(o.Cos) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *VnicFcVhbaPolicyInventory) SetCos(v int64) {
 
 // GetMaxDataFieldSize returns the MaxDataFieldSize field value if set, zero value otherwise.
 func (o *VnicFcVhbaPolicyInventory) GetMaxDataFieldSize() int64 {
-	if o == nil || o.MaxDataFieldSize == nil {
+	if o == nil || IsNil(o.MaxDataFieldSize) {
 		var ret int64
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *VnicFcVhbaPolicyInventory) GetMaxDataFieldSize() int64 {
 // GetMaxDataFieldSizeOk returns a tuple with the MaxDataFieldSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcVhbaPolicyInventory) GetMaxDataFieldSizeOk() (*int64, bool) {
-	if o == nil || o.MaxDataFieldSize == nil {
+	if o == nil || IsNil(o.MaxDataFieldSize) {
 		return nil, false
 	}
 	return o.MaxDataFieldSize, true
@@ -169,7 +173,7 @@ func (o *VnicFcVhbaPolicyInventory) GetMaxDataFieldSizeOk() (*int64, bool) {
 
 // HasMaxDataFieldSize returns a boolean if a field has been set.
 func (o *VnicFcVhbaPolicyInventory) HasMaxDataFieldSize() bool {
-	if o != nil && o.MaxDataFieldSize != nil {
+	if o != nil && !IsNil(o.MaxDataFieldSize) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *VnicFcVhbaPolicyInventory) SetMaxDataFieldSize(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VnicFcVhbaPolicyInventory) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -193,7 +197,7 @@ func (o *VnicFcVhbaPolicyInventory) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcVhbaPolicyInventory) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -201,7 +205,7 @@ func (o *VnicFcVhbaPolicyInventory) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *VnicFcVhbaPolicyInventory) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -215,7 +219,7 @@ func (o *VnicFcVhbaPolicyInventory) SetName(v string) {
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *VnicFcVhbaPolicyInventory) GetPriority() string {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		var ret string
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *VnicFcVhbaPolicyInventory) GetPriority() string {
 // GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcVhbaPolicyInventory) GetPriorityOk() (*string, bool) {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
 	return o.Priority, true
@@ -233,7 +237,7 @@ func (o *VnicFcVhbaPolicyInventory) GetPriorityOk() (*string, bool) {
 
 // HasPriority returns a boolean if a field has been set.
 func (o *VnicFcVhbaPolicyInventory) HasPriority() bool {
-	if o != nil && o.Priority != nil {
+	if o != nil && !IsNil(o.Priority) {
 		return true
 	}
 
@@ -245,78 +249,115 @@ func (o *VnicFcVhbaPolicyInventory) SetPriority(v string) {
 	o.Priority = &v
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicFcVhbaPolicyInventory) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicFcVhbaPolicyInventory) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *VnicFcVhbaPolicyInventory) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *VnicFcVhbaPolicyInventory) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *VnicFcVhbaPolicyInventory) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *VnicFcVhbaPolicyInventory) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o VnicFcVhbaPolicyInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicFcVhbaPolicyInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractInventory, errPolicyAbstractInventory := json.Marshal(o.PolicyAbstractInventory)
 	if errPolicyAbstractInventory != nil {
-		return []byte{}, errPolicyAbstractInventory
+		return map[string]interface{}{}, errPolicyAbstractInventory
 	}
 	errPolicyAbstractInventory = json.Unmarshal([]byte(serializedPolicyAbstractInventory), &toSerialize)
 	if errPolicyAbstractInventory != nil {
-		return []byte{}, errPolicyAbstractInventory
+		return map[string]interface{}{}, errPolicyAbstractInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Cos != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Cos) {
 		toSerialize["Cos"] = o.Cos
 	}
-	if o.MaxDataFieldSize != nil {
+	if !IsNil(o.MaxDataFieldSize) {
 		toSerialize["MaxDataFieldSize"] = o.MaxDataFieldSize
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Priority != nil {
+	if !IsNil(o.Priority) {
 		toSerialize["Priority"] = o.Priority
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicFcVhbaPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicFcVhbaPolicyInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicFcVhbaPolicyInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -329,13 +370,13 @@ func (o *VnicFcVhbaPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// Name of the virtual HBA interface.
 		Name *string `json:"Name,omitempty"`
 		// The priortity matching the System QoS specified in the fabric profile. * `Best Effort` - QoS Priority for Best-effort traffic. * `FC` - QoS Priority for FC traffic. * `Platinum` - QoS Priority for Platinum traffic. * `Gold` - QoS Priority for Gold traffic. * `Silver` - QoS Priority for Silver traffic. * `Bronze` - QoS Priority for Bronze traffic.
-		Priority *string               `json:"Priority,omitempty"`
-		TargetMo *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+		Priority *string                      `json:"Priority,omitempty"`
+		TargetMo NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	}
 
 	varVnicFcVhbaPolicyInventoryWithoutEmbeddedStruct := VnicFcVhbaPolicyInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicFcVhbaPolicyInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicFcVhbaPolicyInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicFcVhbaPolicyInventory := _VnicFcVhbaPolicyInventory{}
 		varVnicFcVhbaPolicyInventory.ClassId = varVnicFcVhbaPolicyInventoryWithoutEmbeddedStruct.ClassId
@@ -352,7 +393,7 @@ func (o *VnicFcVhbaPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicFcVhbaPolicyInventory := _VnicFcVhbaPolicyInventory{}
 
-	err = json.Unmarshal(bytes, &varVnicFcVhbaPolicyInventory)
+	err = json.Unmarshal(data, &varVnicFcVhbaPolicyInventory)
 	if err == nil {
 		o.PolicyAbstractInventory = varVnicFcVhbaPolicyInventory.PolicyAbstractInventory
 	} else {
@@ -361,7 +402,7 @@ func (o *VnicFcVhbaPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Cos")

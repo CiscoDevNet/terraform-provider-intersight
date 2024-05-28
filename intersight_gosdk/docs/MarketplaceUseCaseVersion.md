@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **Locales** | Pointer to [**[]MarketplaceUseCaseVersionLocale**](MarketplaceUseCaseVersionLocale.md) |  | [optional] 
 **Resources** | Pointer to [**[]MarketplaceUseCaseVersionResource**](MarketplaceUseCaseVersionResource.md) |  | [optional] 
 **Version** | Pointer to **string** | A string version for each use case. | [optional] 
-**Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
-**UseCase** | Pointer to [**MarketplaceUseCaseRelationship**](MarketplaceUseCaseRelationship.md) |  | [optional] 
+**Catalog** | Pointer to [**NullableWorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
+**UseCase** | Pointer to [**NullableMarketplaceUseCaseRelationship**](MarketplaceUseCaseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -191,6 +191,16 @@ SetCatalog sets Catalog field to given value.
 
 HasCatalog returns a boolean if a field has been set.
 
+### SetCatalogNil
+
+`func (o *MarketplaceUseCaseVersion) SetCatalogNil(b bool)`
+
+ SetCatalogNil sets the value for Catalog to be an explicit nil
+
+### UnsetCatalog
+`func (o *MarketplaceUseCaseVersion) UnsetCatalog()`
+
+UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
 ### GetUseCase
 
 `func (o *MarketplaceUseCaseVersion) GetUseCase() MarketplaceUseCaseRelationship`
@@ -216,6 +226,16 @@ SetUseCase sets UseCase field to given value.
 
 HasUseCase returns a boolean if a field has been set.
 
+### SetUseCaseNil
+
+`func (o *MarketplaceUseCaseVersion) SetUseCaseNil(b bool)`
+
+ SetUseCaseNil sets the value for UseCase to be an explicit nil
+
+### UnsetUseCase
+`func (o *MarketplaceUseCaseVersion) UnsetUseCase()`
+
+UnsetUseCase ensures that no value is present for UseCase, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

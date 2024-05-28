@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PolicyConfigResultContext type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PolicyConfigResultContext{}
 
 // PolicyConfigResultContext The context for a validation/config result such as the related entity's name, type, MOID etc.
 type PolicyConfigResultContext struct {
@@ -125,7 +129,7 @@ func (o *PolicyConfigResultContext) GetEntityData() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PolicyConfigResultContext) GetEntityDataOk() (*interface{}, bool) {
-	if o == nil || o.EntityData == nil {
+	if o == nil || IsNil(o.EntityData) {
 		return nil, false
 	}
 	return &o.EntityData, true
@@ -133,7 +137,7 @@ func (o *PolicyConfigResultContext) GetEntityDataOk() (*interface{}, bool) {
 
 // HasEntityData returns a boolean if a field has been set.
 func (o *PolicyConfigResultContext) HasEntityData() bool {
-	if o != nil && o.EntityData != nil {
+	if o != nil && IsNil(o.EntityData) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *PolicyConfigResultContext) SetEntityData(v interface{}) {
 
 // GetEntityMoid returns the EntityMoid field value if set, zero value otherwise.
 func (o *PolicyConfigResultContext) GetEntityMoid() string {
-	if o == nil || o.EntityMoid == nil {
+	if o == nil || IsNil(o.EntityMoid) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *PolicyConfigResultContext) GetEntityMoid() string {
 // GetEntityMoidOk returns a tuple with the EntityMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyConfigResultContext) GetEntityMoidOk() (*string, bool) {
-	if o == nil || o.EntityMoid == nil {
+	if o == nil || IsNil(o.EntityMoid) {
 		return nil, false
 	}
 	return o.EntityMoid, true
@@ -165,7 +169,7 @@ func (o *PolicyConfigResultContext) GetEntityMoidOk() (*string, bool) {
 
 // HasEntityMoid returns a boolean if a field has been set.
 func (o *PolicyConfigResultContext) HasEntityMoid() bool {
-	if o != nil && o.EntityMoid != nil {
+	if o != nil && !IsNil(o.EntityMoid) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *PolicyConfigResultContext) SetEntityMoid(v string) {
 
 // GetEntityName returns the EntityName field value if set, zero value otherwise.
 func (o *PolicyConfigResultContext) GetEntityName() string {
-	if o == nil || o.EntityName == nil {
+	if o == nil || IsNil(o.EntityName) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *PolicyConfigResultContext) GetEntityName() string {
 // GetEntityNameOk returns a tuple with the EntityName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyConfigResultContext) GetEntityNameOk() (*string, bool) {
-	if o == nil || o.EntityName == nil {
+	if o == nil || IsNil(o.EntityName) {
 		return nil, false
 	}
 	return o.EntityName, true
@@ -197,7 +201,7 @@ func (o *PolicyConfigResultContext) GetEntityNameOk() (*string, bool) {
 
 // HasEntityName returns a boolean if a field has been set.
 func (o *PolicyConfigResultContext) HasEntityName() bool {
-	if o != nil && o.EntityName != nil {
+	if o != nil && !IsNil(o.EntityName) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *PolicyConfigResultContext) SetEntityName(v string) {
 
 // GetEntityType returns the EntityType field value if set, zero value otherwise.
 func (o *PolicyConfigResultContext) GetEntityType() string {
-	if o == nil || o.EntityType == nil {
+	if o == nil || IsNil(o.EntityType) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *PolicyConfigResultContext) GetEntityType() string {
 // GetEntityTypeOk returns a tuple with the EntityType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyConfigResultContext) GetEntityTypeOk() (*string, bool) {
-	if o == nil || o.EntityType == nil {
+	if o == nil || IsNil(o.EntityType) {
 		return nil, false
 	}
 	return o.EntityType, true
@@ -229,7 +233,7 @@ func (o *PolicyConfigResultContext) GetEntityTypeOk() (*string, bool) {
 
 // HasEntityType returns a boolean if a field has been set.
 func (o *PolicyConfigResultContext) HasEntityType() bool {
-	if o != nil && o.EntityType != nil {
+	if o != nil && !IsNil(o.EntityType) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *PolicyConfigResultContext) SetEntityType(v string) {
 
 // GetParentMoid returns the ParentMoid field value if set, zero value otherwise.
 func (o *PolicyConfigResultContext) GetParentMoid() string {
-	if o == nil || o.ParentMoid == nil {
+	if o == nil || IsNil(o.ParentMoid) {
 		var ret string
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *PolicyConfigResultContext) GetParentMoid() string {
 // GetParentMoidOk returns a tuple with the ParentMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyConfigResultContext) GetParentMoidOk() (*string, bool) {
-	if o == nil || o.ParentMoid == nil {
+	if o == nil || IsNil(o.ParentMoid) {
 		return nil, false
 	}
 	return o.ParentMoid, true
@@ -261,7 +265,7 @@ func (o *PolicyConfigResultContext) GetParentMoidOk() (*string, bool) {
 
 // HasParentMoid returns a boolean if a field has been set.
 func (o *PolicyConfigResultContext) HasParentMoid() bool {
-	if o != nil && o.ParentMoid != nil {
+	if o != nil && !IsNil(o.ParentMoid) {
 		return true
 	}
 
@@ -275,7 +279,7 @@ func (o *PolicyConfigResultContext) SetParentMoid(v string) {
 
 // GetParentType returns the ParentType field value if set, zero value otherwise.
 func (o *PolicyConfigResultContext) GetParentType() string {
-	if o == nil || o.ParentType == nil {
+	if o == nil || IsNil(o.ParentType) {
 		var ret string
 		return ret
 	}
@@ -285,7 +289,7 @@ func (o *PolicyConfigResultContext) GetParentType() string {
 // GetParentTypeOk returns a tuple with the ParentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyConfigResultContext) GetParentTypeOk() (*string, bool) {
-	if o == nil || o.ParentType == nil {
+	if o == nil || IsNil(o.ParentType) {
 		return nil, false
 	}
 	return o.ParentType, true
@@ -293,7 +297,7 @@ func (o *PolicyConfigResultContext) GetParentTypeOk() (*string, bool) {
 
 // HasParentType returns a boolean if a field has been set.
 func (o *PolicyConfigResultContext) HasParentType() bool {
-	if o != nil && o.ParentType != nil {
+	if o != nil && !IsNil(o.ParentType) {
 		return true
 	}
 
@@ -306,37 +310,41 @@ func (o *PolicyConfigResultContext) SetParentType(v string) {
 }
 
 func (o PolicyConfigResultContext) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PolicyConfigResultContext) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.EntityData != nil {
 		toSerialize["EntityData"] = o.EntityData
 	}
-	if o.EntityMoid != nil {
+	if !IsNil(o.EntityMoid) {
 		toSerialize["EntityMoid"] = o.EntityMoid
 	}
-	if o.EntityName != nil {
+	if !IsNil(o.EntityName) {
 		toSerialize["EntityName"] = o.EntityName
 	}
-	if o.EntityType != nil {
+	if !IsNil(o.EntityType) {
 		toSerialize["EntityType"] = o.EntityType
 	}
-	if o.ParentMoid != nil {
+	if !IsNil(o.ParentMoid) {
 		toSerialize["ParentMoid"] = o.ParentMoid
 	}
-	if o.ParentType != nil {
+	if !IsNil(o.ParentType) {
 		toSerialize["ParentType"] = o.ParentType
 	}
 
@@ -344,10 +352,32 @@ func (o PolicyConfigResultContext) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PolicyConfigResultContext) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PolicyConfigResultContext) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PolicyConfigResultContextWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -369,7 +399,7 @@ func (o *PolicyConfigResultContext) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPolicyConfigResultContextWithoutEmbeddedStruct := PolicyConfigResultContextWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPolicyConfigResultContextWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPolicyConfigResultContextWithoutEmbeddedStruct)
 	if err == nil {
 		varPolicyConfigResultContext := _PolicyConfigResultContext{}
 		varPolicyConfigResultContext.ClassId = varPolicyConfigResultContextWithoutEmbeddedStruct.ClassId
@@ -387,7 +417,7 @@ func (o *PolicyConfigResultContext) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPolicyConfigResultContext := _PolicyConfigResultContext{}
 
-	err = json.Unmarshal(bytes, &varPolicyConfigResultContext)
+	err = json.Unmarshal(data, &varPolicyConfigResultContext)
 	if err == nil {
 		o.MoBaseComplexType = varPolicyConfigResultContext.MoBaseComplexType
 	} else {
@@ -396,7 +426,7 @@ func (o *PolicyConfigResultContext) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EntityData")

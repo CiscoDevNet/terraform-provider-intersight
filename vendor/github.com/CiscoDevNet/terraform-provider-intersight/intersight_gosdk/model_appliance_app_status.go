@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceAppStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceAppStatus{}
 
 // ApplianceAppStatus Status of an application.
 type ApplianceAppStatus struct {
@@ -42,10 +46,10 @@ type ApplianceAppStatus struct {
 	// Total number of restarts since last deployment.
 	RestartCountTotal *int64 `json:"RestartCountTotal,omitempty"`
 	// Number of replicas running. The number of instances of the application currently running.
-	RunningCount         *int64                             `json:"RunningCount,omitempty"`
-	StatusChecks         []ApplianceStatusCheck             `json:"StatusChecks,omitempty"`
-	GroupStatus          *ApplianceGroupStatusRelationship  `json:"GroupStatus,omitempty"`
-	SystemStatus         *ApplianceSystemStatusRelationship `json:"SystemStatus,omitempty"`
+	RunningCount         *int64                                    `json:"RunningCount,omitempty"`
+	StatusChecks         []ApplianceStatusCheck                    `json:"StatusChecks,omitempty"`
+	GroupStatus          NullableApplianceGroupStatusRelationship  `json:"GroupStatus,omitempty"`
+	SystemStatus         NullableApplianceSystemStatusRelationship `json:"SystemStatus,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -135,7 +139,7 @@ func (o *ApplianceAppStatus) GetApiStatuses() []ApplianceApiStatus {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceAppStatus) GetApiStatusesOk() ([]ApplianceApiStatus, bool) {
-	if o == nil || o.ApiStatuses == nil {
+	if o == nil || IsNil(o.ApiStatuses) {
 		return nil, false
 	}
 	return o.ApiStatuses, true
@@ -143,7 +147,7 @@ func (o *ApplianceAppStatus) GetApiStatusesOk() ([]ApplianceApiStatus, bool) {
 
 // HasApiStatuses returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasApiStatuses() bool {
-	if o != nil && o.ApiStatuses != nil {
+	if o != nil && IsNil(o.ApiStatuses) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *ApplianceAppStatus) SetApiStatuses(v []ApplianceApiStatus) {
 
 // GetAppLabel returns the AppLabel field value if set, zero value otherwise.
 func (o *ApplianceAppStatus) GetAppLabel() string {
-	if o == nil || o.AppLabel == nil {
+	if o == nil || IsNil(o.AppLabel) {
 		var ret string
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *ApplianceAppStatus) GetAppLabel() string {
 // GetAppLabelOk returns a tuple with the AppLabel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceAppStatus) GetAppLabelOk() (*string, bool) {
-	if o == nil || o.AppLabel == nil {
+	if o == nil || IsNil(o.AppLabel) {
 		return nil, false
 	}
 	return o.AppLabel, true
@@ -175,7 +179,7 @@ func (o *ApplianceAppStatus) GetAppLabelOk() (*string, bool) {
 
 // HasAppLabel returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasAppLabel() bool {
-	if o != nil && o.AppLabel != nil {
+	if o != nil && !IsNil(o.AppLabel) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *ApplianceAppStatus) SetAppLabel(v string) {
 
 // GetOperationalStatus returns the OperationalStatus field value if set, zero value otherwise.
 func (o *ApplianceAppStatus) GetOperationalStatus() string {
-	if o == nil || o.OperationalStatus == nil {
+	if o == nil || IsNil(o.OperationalStatus) {
 		var ret string
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *ApplianceAppStatus) GetOperationalStatus() string {
 // GetOperationalStatusOk returns a tuple with the OperationalStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceAppStatus) GetOperationalStatusOk() (*string, bool) {
-	if o == nil || o.OperationalStatus == nil {
+	if o == nil || IsNil(o.OperationalStatus) {
 		return nil, false
 	}
 	return o.OperationalStatus, true
@@ -207,7 +211,7 @@ func (o *ApplianceAppStatus) GetOperationalStatusOk() (*string, bool) {
 
 // HasOperationalStatus returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasOperationalStatus() bool {
-	if o != nil && o.OperationalStatus != nil {
+	if o != nil && !IsNil(o.OperationalStatus) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *ApplianceAppStatus) SetOperationalStatus(v string) {
 
 // GetReadyCount returns the ReadyCount field value if set, zero value otherwise.
 func (o *ApplianceAppStatus) GetReadyCount() int64 {
-	if o == nil || o.ReadyCount == nil {
+	if o == nil || IsNil(o.ReadyCount) {
 		var ret int64
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *ApplianceAppStatus) GetReadyCount() int64 {
 // GetReadyCountOk returns a tuple with the ReadyCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceAppStatus) GetReadyCountOk() (*int64, bool) {
-	if o == nil || o.ReadyCount == nil {
+	if o == nil || IsNil(o.ReadyCount) {
 		return nil, false
 	}
 	return o.ReadyCount, true
@@ -239,7 +243,7 @@ func (o *ApplianceAppStatus) GetReadyCountOk() (*int64, bool) {
 
 // HasReadyCount returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasReadyCount() bool {
-	if o != nil && o.ReadyCount != nil {
+	if o != nil && !IsNil(o.ReadyCount) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *ApplianceAppStatus) SetReadyCount(v int64) {
 
 // GetReplicaCount returns the ReplicaCount field value if set, zero value otherwise.
 func (o *ApplianceAppStatus) GetReplicaCount() int64 {
-	if o == nil || o.ReplicaCount == nil {
+	if o == nil || IsNil(o.ReplicaCount) {
 		var ret int64
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *ApplianceAppStatus) GetReplicaCount() int64 {
 // GetReplicaCountOk returns a tuple with the ReplicaCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceAppStatus) GetReplicaCountOk() (*int64, bool) {
-	if o == nil || o.ReplicaCount == nil {
+	if o == nil || IsNil(o.ReplicaCount) {
 		return nil, false
 	}
 	return o.ReplicaCount, true
@@ -271,7 +275,7 @@ func (o *ApplianceAppStatus) GetReplicaCountOk() (*int64, bool) {
 
 // HasReplicaCount returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasReplicaCount() bool {
-	if o != nil && o.ReplicaCount != nil {
+	if o != nil && !IsNil(o.ReplicaCount) {
 		return true
 	}
 
@@ -285,7 +289,7 @@ func (o *ApplianceAppStatus) SetReplicaCount(v int64) {
 
 // GetRestartCount1Hour returns the RestartCount1Hour field value if set, zero value otherwise.
 func (o *ApplianceAppStatus) GetRestartCount1Hour() int64 {
-	if o == nil || o.RestartCount1Hour == nil {
+	if o == nil || IsNil(o.RestartCount1Hour) {
 		var ret int64
 		return ret
 	}
@@ -295,7 +299,7 @@ func (o *ApplianceAppStatus) GetRestartCount1Hour() int64 {
 // GetRestartCount1HourOk returns a tuple with the RestartCount1Hour field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceAppStatus) GetRestartCount1HourOk() (*int64, bool) {
-	if o == nil || o.RestartCount1Hour == nil {
+	if o == nil || IsNil(o.RestartCount1Hour) {
 		return nil, false
 	}
 	return o.RestartCount1Hour, true
@@ -303,7 +307,7 @@ func (o *ApplianceAppStatus) GetRestartCount1HourOk() (*int64, bool) {
 
 // HasRestartCount1Hour returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasRestartCount1Hour() bool {
-	if o != nil && o.RestartCount1Hour != nil {
+	if o != nil && !IsNil(o.RestartCount1Hour) {
 		return true
 	}
 
@@ -317,7 +321,7 @@ func (o *ApplianceAppStatus) SetRestartCount1Hour(v int64) {
 
 // GetRestartCount24Hours returns the RestartCount24Hours field value if set, zero value otherwise.
 func (o *ApplianceAppStatus) GetRestartCount24Hours() int64 {
-	if o == nil || o.RestartCount24Hours == nil {
+	if o == nil || IsNil(o.RestartCount24Hours) {
 		var ret int64
 		return ret
 	}
@@ -327,7 +331,7 @@ func (o *ApplianceAppStatus) GetRestartCount24Hours() int64 {
 // GetRestartCount24HoursOk returns a tuple with the RestartCount24Hours field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceAppStatus) GetRestartCount24HoursOk() (*int64, bool) {
-	if o == nil || o.RestartCount24Hours == nil {
+	if o == nil || IsNil(o.RestartCount24Hours) {
 		return nil, false
 	}
 	return o.RestartCount24Hours, true
@@ -335,7 +339,7 @@ func (o *ApplianceAppStatus) GetRestartCount24HoursOk() (*int64, bool) {
 
 // HasRestartCount24Hours returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasRestartCount24Hours() bool {
-	if o != nil && o.RestartCount24Hours != nil {
+	if o != nil && !IsNil(o.RestartCount24Hours) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *ApplianceAppStatus) SetRestartCount24Hours(v int64) {
 
 // GetRestartCount5Mins returns the RestartCount5Mins field value if set, zero value otherwise.
 func (o *ApplianceAppStatus) GetRestartCount5Mins() int64 {
-	if o == nil || o.RestartCount5Mins == nil {
+	if o == nil || IsNil(o.RestartCount5Mins) {
 		var ret int64
 		return ret
 	}
@@ -359,7 +363,7 @@ func (o *ApplianceAppStatus) GetRestartCount5Mins() int64 {
 // GetRestartCount5MinsOk returns a tuple with the RestartCount5Mins field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceAppStatus) GetRestartCount5MinsOk() (*int64, bool) {
-	if o == nil || o.RestartCount5Mins == nil {
+	if o == nil || IsNil(o.RestartCount5Mins) {
 		return nil, false
 	}
 	return o.RestartCount5Mins, true
@@ -367,7 +371,7 @@ func (o *ApplianceAppStatus) GetRestartCount5MinsOk() (*int64, bool) {
 
 // HasRestartCount5Mins returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasRestartCount5Mins() bool {
-	if o != nil && o.RestartCount5Mins != nil {
+	if o != nil && !IsNil(o.RestartCount5Mins) {
 		return true
 	}
 
@@ -381,7 +385,7 @@ func (o *ApplianceAppStatus) SetRestartCount5Mins(v int64) {
 
 // GetRestartCountTotal returns the RestartCountTotal field value if set, zero value otherwise.
 func (o *ApplianceAppStatus) GetRestartCountTotal() int64 {
-	if o == nil || o.RestartCountTotal == nil {
+	if o == nil || IsNil(o.RestartCountTotal) {
 		var ret int64
 		return ret
 	}
@@ -391,7 +395,7 @@ func (o *ApplianceAppStatus) GetRestartCountTotal() int64 {
 // GetRestartCountTotalOk returns a tuple with the RestartCountTotal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceAppStatus) GetRestartCountTotalOk() (*int64, bool) {
-	if o == nil || o.RestartCountTotal == nil {
+	if o == nil || IsNil(o.RestartCountTotal) {
 		return nil, false
 	}
 	return o.RestartCountTotal, true
@@ -399,7 +403,7 @@ func (o *ApplianceAppStatus) GetRestartCountTotalOk() (*int64, bool) {
 
 // HasRestartCountTotal returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasRestartCountTotal() bool {
-	if o != nil && o.RestartCountTotal != nil {
+	if o != nil && !IsNil(o.RestartCountTotal) {
 		return true
 	}
 
@@ -413,7 +417,7 @@ func (o *ApplianceAppStatus) SetRestartCountTotal(v int64) {
 
 // GetRunningCount returns the RunningCount field value if set, zero value otherwise.
 func (o *ApplianceAppStatus) GetRunningCount() int64 {
-	if o == nil || o.RunningCount == nil {
+	if o == nil || IsNil(o.RunningCount) {
 		var ret int64
 		return ret
 	}
@@ -423,7 +427,7 @@ func (o *ApplianceAppStatus) GetRunningCount() int64 {
 // GetRunningCountOk returns a tuple with the RunningCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceAppStatus) GetRunningCountOk() (*int64, bool) {
-	if o == nil || o.RunningCount == nil {
+	if o == nil || IsNil(o.RunningCount) {
 		return nil, false
 	}
 	return o.RunningCount, true
@@ -431,7 +435,7 @@ func (o *ApplianceAppStatus) GetRunningCountOk() (*int64, bool) {
 
 // HasRunningCount returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasRunningCount() bool {
-	if o != nil && o.RunningCount != nil {
+	if o != nil && !IsNil(o.RunningCount) {
 		return true
 	}
 
@@ -456,7 +460,7 @@ func (o *ApplianceAppStatus) GetStatusChecks() []ApplianceStatusCheck {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceAppStatus) GetStatusChecksOk() ([]ApplianceStatusCheck, bool) {
-	if o == nil || o.StatusChecks == nil {
+	if o == nil || IsNil(o.StatusChecks) {
 		return nil, false
 	}
 	return o.StatusChecks, true
@@ -464,7 +468,7 @@ func (o *ApplianceAppStatus) GetStatusChecksOk() ([]ApplianceStatusCheck, bool) 
 
 // HasStatusChecks returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasStatusChecks() bool {
-	if o != nil && o.StatusChecks != nil {
+	if o != nil && IsNil(o.StatusChecks) {
 		return true
 	}
 
@@ -476,134 +480,182 @@ func (o *ApplianceAppStatus) SetStatusChecks(v []ApplianceStatusCheck) {
 	o.StatusChecks = v
 }
 
-// GetGroupStatus returns the GroupStatus field value if set, zero value otherwise.
+// GetGroupStatus returns the GroupStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceAppStatus) GetGroupStatus() ApplianceGroupStatusRelationship {
-	if o == nil || o.GroupStatus == nil {
+	if o == nil || IsNil(o.GroupStatus.Get()) {
 		var ret ApplianceGroupStatusRelationship
 		return ret
 	}
-	return *o.GroupStatus
+	return *o.GroupStatus.Get()
 }
 
 // GetGroupStatusOk returns a tuple with the GroupStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceAppStatus) GetGroupStatusOk() (*ApplianceGroupStatusRelationship, bool) {
-	if o == nil || o.GroupStatus == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.GroupStatus, true
+	return o.GroupStatus.Get(), o.GroupStatus.IsSet()
 }
 
 // HasGroupStatus returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasGroupStatus() bool {
-	if o != nil && o.GroupStatus != nil {
+	if o != nil && o.GroupStatus.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGroupStatus gets a reference to the given ApplianceGroupStatusRelationship and assigns it to the GroupStatus field.
+// SetGroupStatus gets a reference to the given NullableApplianceGroupStatusRelationship and assigns it to the GroupStatus field.
 func (o *ApplianceAppStatus) SetGroupStatus(v ApplianceGroupStatusRelationship) {
-	o.GroupStatus = &v
+	o.GroupStatus.Set(&v)
 }
 
-// GetSystemStatus returns the SystemStatus field value if set, zero value otherwise.
+// SetGroupStatusNil sets the value for GroupStatus to be an explicit nil
+func (o *ApplianceAppStatus) SetGroupStatusNil() {
+	o.GroupStatus.Set(nil)
+}
+
+// UnsetGroupStatus ensures that no value is present for GroupStatus, not even an explicit nil
+func (o *ApplianceAppStatus) UnsetGroupStatus() {
+	o.GroupStatus.Unset()
+}
+
+// GetSystemStatus returns the SystemStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceAppStatus) GetSystemStatus() ApplianceSystemStatusRelationship {
-	if o == nil || o.SystemStatus == nil {
+	if o == nil || IsNil(o.SystemStatus.Get()) {
 		var ret ApplianceSystemStatusRelationship
 		return ret
 	}
-	return *o.SystemStatus
+	return *o.SystemStatus.Get()
 }
 
 // GetSystemStatusOk returns a tuple with the SystemStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceAppStatus) GetSystemStatusOk() (*ApplianceSystemStatusRelationship, bool) {
-	if o == nil || o.SystemStatus == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SystemStatus, true
+	return o.SystemStatus.Get(), o.SystemStatus.IsSet()
 }
 
 // HasSystemStatus returns a boolean if a field has been set.
 func (o *ApplianceAppStatus) HasSystemStatus() bool {
-	if o != nil && o.SystemStatus != nil {
+	if o != nil && o.SystemStatus.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSystemStatus gets a reference to the given ApplianceSystemStatusRelationship and assigns it to the SystemStatus field.
+// SetSystemStatus gets a reference to the given NullableApplianceSystemStatusRelationship and assigns it to the SystemStatus field.
 func (o *ApplianceAppStatus) SetSystemStatus(v ApplianceSystemStatusRelationship) {
-	o.SystemStatus = &v
+	o.SystemStatus.Set(&v)
+}
+
+// SetSystemStatusNil sets the value for SystemStatus to be an explicit nil
+func (o *ApplianceAppStatus) SetSystemStatusNil() {
+	o.SystemStatus.Set(nil)
+}
+
+// UnsetSystemStatus ensures that no value is present for SystemStatus, not even an explicit nil
+func (o *ApplianceAppStatus) UnsetSystemStatus() {
+	o.SystemStatus.Unset()
 }
 
 func (o ApplianceAppStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceAppStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ApiStatuses != nil {
 		toSerialize["ApiStatuses"] = o.ApiStatuses
 	}
-	if o.AppLabel != nil {
+	if !IsNil(o.AppLabel) {
 		toSerialize["AppLabel"] = o.AppLabel
 	}
-	if o.OperationalStatus != nil {
+	if !IsNil(o.OperationalStatus) {
 		toSerialize["OperationalStatus"] = o.OperationalStatus
 	}
-	if o.ReadyCount != nil {
+	if !IsNil(o.ReadyCount) {
 		toSerialize["ReadyCount"] = o.ReadyCount
 	}
-	if o.ReplicaCount != nil {
+	if !IsNil(o.ReplicaCount) {
 		toSerialize["ReplicaCount"] = o.ReplicaCount
 	}
-	if o.RestartCount1Hour != nil {
+	if !IsNil(o.RestartCount1Hour) {
 		toSerialize["RestartCount1Hour"] = o.RestartCount1Hour
 	}
-	if o.RestartCount24Hours != nil {
+	if !IsNil(o.RestartCount24Hours) {
 		toSerialize["RestartCount24Hours"] = o.RestartCount24Hours
 	}
-	if o.RestartCount5Mins != nil {
+	if !IsNil(o.RestartCount5Mins) {
 		toSerialize["RestartCount5Mins"] = o.RestartCount5Mins
 	}
-	if o.RestartCountTotal != nil {
+	if !IsNil(o.RestartCountTotal) {
 		toSerialize["RestartCountTotal"] = o.RestartCountTotal
 	}
-	if o.RunningCount != nil {
+	if !IsNil(o.RunningCount) {
 		toSerialize["RunningCount"] = o.RunningCount
 	}
 	if o.StatusChecks != nil {
 		toSerialize["StatusChecks"] = o.StatusChecks
 	}
-	if o.GroupStatus != nil {
-		toSerialize["GroupStatus"] = o.GroupStatus
+	if o.GroupStatus.IsSet() {
+		toSerialize["GroupStatus"] = o.GroupStatus.Get()
 	}
-	if o.SystemStatus != nil {
-		toSerialize["SystemStatus"] = o.SystemStatus
+	if o.SystemStatus.IsSet() {
+		toSerialize["SystemStatus"] = o.SystemStatus.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceAppStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceAppStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceAppStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -627,15 +679,15 @@ func (o *ApplianceAppStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// Total number of restarts since last deployment.
 		RestartCountTotal *int64 `json:"RestartCountTotal,omitempty"`
 		// Number of replicas running. The number of instances of the application currently running.
-		RunningCount *int64                             `json:"RunningCount,omitempty"`
-		StatusChecks []ApplianceStatusCheck             `json:"StatusChecks,omitempty"`
-		GroupStatus  *ApplianceGroupStatusRelationship  `json:"GroupStatus,omitempty"`
-		SystemStatus *ApplianceSystemStatusRelationship `json:"SystemStatus,omitempty"`
+		RunningCount *int64                                    `json:"RunningCount,omitempty"`
+		StatusChecks []ApplianceStatusCheck                    `json:"StatusChecks,omitempty"`
+		GroupStatus  NullableApplianceGroupStatusRelationship  `json:"GroupStatus,omitempty"`
+		SystemStatus NullableApplianceSystemStatusRelationship `json:"SystemStatus,omitempty"`
 	}
 
 	varApplianceAppStatusWithoutEmbeddedStruct := ApplianceAppStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceAppStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceAppStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceAppStatus := _ApplianceAppStatus{}
 		varApplianceAppStatus.ClassId = varApplianceAppStatusWithoutEmbeddedStruct.ClassId
@@ -660,7 +712,7 @@ func (o *ApplianceAppStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceAppStatus := _ApplianceAppStatus{}
 
-	err = json.Unmarshal(bytes, &varApplianceAppStatus)
+	err = json.Unmarshal(data, &varApplianceAppStatus)
 	if err == nil {
 		o.MoBaseMo = varApplianceAppStatus.MoBaseMo
 	} else {
@@ -669,7 +721,7 @@ func (o *ApplianceAppStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ApiStatuses")

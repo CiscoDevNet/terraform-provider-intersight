@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageRemoteKeySetting type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageRemoteKeySetting{}
 
 // StorageRemoteKeySetting Models the remote key configuration required for disk encryption.
 type StorageRemoteKeySetting struct {
@@ -109,7 +113,7 @@ func (o *StorageRemoteKeySetting) SetObjectType(v string) {
 
 // GetAuthCredentials returns the AuthCredentials field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageRemoteKeySetting) GetAuthCredentials() StorageKmipAuthCredentials {
-	if o == nil || o.AuthCredentials.Get() == nil {
+	if o == nil || IsNil(o.AuthCredentials.Get()) {
 		var ret StorageKmipAuthCredentials
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *StorageRemoteKeySetting) UnsetAuthCredentials() {
 
 // GetIsExistingKeySet returns the IsExistingKeySet field value if set, zero value otherwise.
 func (o *StorageRemoteKeySetting) GetIsExistingKeySet() bool {
-	if o == nil || o.IsExistingKeySet == nil {
+	if o == nil || IsNil(o.IsExistingKeySet) {
 		var ret bool
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *StorageRemoteKeySetting) GetIsExistingKeySet() bool {
 // GetIsExistingKeySetOk returns a tuple with the IsExistingKeySet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageRemoteKeySetting) GetIsExistingKeySetOk() (*bool, bool) {
-	if o == nil || o.IsExistingKeySet == nil {
+	if o == nil || IsNil(o.IsExistingKeySet) {
 		return nil, false
 	}
 	return o.IsExistingKeySet, true
@@ -170,7 +174,7 @@ func (o *StorageRemoteKeySetting) GetIsExistingKeySetOk() (*bool, bool) {
 
 // HasIsExistingKeySet returns a boolean if a field has been set.
 func (o *StorageRemoteKeySetting) HasIsExistingKeySet() bool {
-	if o != nil && o.IsExistingKeySet != nil {
+	if o != nil && !IsNil(o.IsExistingKeySet) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *StorageRemoteKeySetting) SetIsExistingKeySet(v bool) {
 
 // GetPrimaryServer returns the PrimaryServer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageRemoteKeySetting) GetPrimaryServer() StorageKmipServer {
-	if o == nil || o.PrimaryServer.Get() == nil {
+	if o == nil || IsNil(o.PrimaryServer.Get()) {
 		var ret StorageKmipServer
 		return ret
 	}
@@ -227,7 +231,7 @@ func (o *StorageRemoteKeySetting) UnsetPrimaryServer() {
 
 // GetSecondaryServer returns the SecondaryServer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageRemoteKeySetting) GetSecondaryServer() StorageKmipServer {
-	if o == nil || o.SecondaryServer.Get() == nil {
+	if o == nil || IsNil(o.SecondaryServer.Get()) {
 		var ret StorageKmipServer
 		return ret
 	}
@@ -270,7 +274,7 @@ func (o *StorageRemoteKeySetting) UnsetSecondaryServer() {
 
 // GetServerCertificate returns the ServerCertificate field value if set, zero value otherwise.
 func (o *StorageRemoteKeySetting) GetServerCertificate() string {
-	if o == nil || o.ServerCertificate == nil {
+	if o == nil || IsNil(o.ServerCertificate) {
 		var ret string
 		return ret
 	}
@@ -280,7 +284,7 @@ func (o *StorageRemoteKeySetting) GetServerCertificate() string {
 // GetServerCertificateOk returns a tuple with the ServerCertificate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageRemoteKeySetting) GetServerCertificateOk() (*string, bool) {
-	if o == nil || o.ServerCertificate == nil {
+	if o == nil || IsNil(o.ServerCertificate) {
 		return nil, false
 	}
 	return o.ServerCertificate, true
@@ -288,7 +292,7 @@ func (o *StorageRemoteKeySetting) GetServerCertificateOk() (*string, bool) {
 
 // HasServerCertificate returns a boolean if a field has been set.
 func (o *StorageRemoteKeySetting) HasServerCertificate() bool {
-	if o != nil && o.ServerCertificate != nil {
+	if o != nil && !IsNil(o.ServerCertificate) {
 		return true
 	}
 
@@ -301,25 +305,29 @@ func (o *StorageRemoteKeySetting) SetServerCertificate(v string) {
 }
 
 func (o StorageRemoteKeySetting) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageRemoteKeySetting) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AuthCredentials.IsSet() {
 		toSerialize["AuthCredentials"] = o.AuthCredentials.Get()
 	}
-	if o.IsExistingKeySet != nil {
+	if !IsNil(o.IsExistingKeySet) {
 		toSerialize["IsExistingKeySet"] = o.IsExistingKeySet
 	}
 	if o.PrimaryServer.IsSet() {
@@ -328,7 +336,7 @@ func (o StorageRemoteKeySetting) MarshalJSON() ([]byte, error) {
 	if o.SecondaryServer.IsSet() {
 		toSerialize["SecondaryServer"] = o.SecondaryServer.Get()
 	}
-	if o.ServerCertificate != nil {
+	if !IsNil(o.ServerCertificate) {
 		toSerialize["ServerCertificate"] = o.ServerCertificate
 	}
 
@@ -336,10 +344,32 @@ func (o StorageRemoteKeySetting) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageRemoteKeySetting) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageRemoteKeySetting) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageRemoteKeySettingWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -356,7 +386,7 @@ func (o *StorageRemoteKeySetting) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageRemoteKeySettingWithoutEmbeddedStruct := StorageRemoteKeySettingWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageRemoteKeySettingWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageRemoteKeySettingWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageRemoteKeySetting := _StorageRemoteKeySetting{}
 		varStorageRemoteKeySetting.ClassId = varStorageRemoteKeySettingWithoutEmbeddedStruct.ClassId
@@ -373,7 +403,7 @@ func (o *StorageRemoteKeySetting) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageRemoteKeySetting := _StorageRemoteKeySetting{}
 
-	err = json.Unmarshal(bytes, &varStorageRemoteKeySetting)
+	err = json.Unmarshal(data, &varStorageRemoteKeySetting)
 	if err == nil {
 		o.MoBaseComplexType = varStorageRemoteKeySetting.MoBaseComplexType
 	} else {
@@ -382,7 +412,7 @@ func (o *StorageRemoteKeySetting) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AuthCredentials")

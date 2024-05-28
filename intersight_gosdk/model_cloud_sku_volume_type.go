@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudSkuVolumeType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudSkuVolumeType{}
 
 // CloudSkuVolumeType Stores information about the volume types.
 type CloudSkuVolumeType struct {
@@ -140,7 +144,7 @@ func (o *CloudSkuVolumeType) SetObjectType(v string) {
 
 // GetIopsUnit returns the IopsUnit field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetIopsUnit() string {
-	if o == nil || o.IopsUnit == nil {
+	if o == nil || IsNil(o.IopsUnit) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *CloudSkuVolumeType) GetIopsUnit() string {
 // GetIopsUnitOk returns a tuple with the IopsUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetIopsUnitOk() (*string, bool) {
-	if o == nil || o.IopsUnit == nil {
+	if o == nil || IsNil(o.IopsUnit) {
 		return nil, false
 	}
 	return o.IopsUnit, true
@@ -158,7 +162,7 @@ func (o *CloudSkuVolumeType) GetIopsUnitOk() (*string, bool) {
 
 // HasIopsUnit returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasIopsUnit() bool {
-	if o != nil && o.IopsUnit != nil {
+	if o != nil && !IsNil(o.IopsUnit) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *CloudSkuVolumeType) SetIopsUnit(v string) {
 
 // GetIsBootable returns the IsBootable field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetIsBootable() bool {
-	if o == nil || o.IsBootable == nil {
+	if o == nil || IsNil(o.IsBootable) {
 		var ret bool
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *CloudSkuVolumeType) GetIsBootable() bool {
 // GetIsBootableOk returns a tuple with the IsBootable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetIsBootableOk() (*bool, bool) {
-	if o == nil || o.IsBootable == nil {
+	if o == nil || IsNil(o.IsBootable) {
 		return nil, false
 	}
 	return o.IsBootable, true
@@ -190,7 +194,7 @@ func (o *CloudSkuVolumeType) GetIsBootableOk() (*bool, bool) {
 
 // HasIsBootable returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasIsBootable() bool {
-	if o != nil && o.IsBootable != nil {
+	if o != nil && !IsNil(o.IsBootable) {
 		return true
 	}
 
@@ -204,7 +208,7 @@ func (o *CloudSkuVolumeType) SetIsBootable(v bool) {
 
 // GetIsDefault returns the IsDefault field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetIsDefault() bool {
-	if o == nil || o.IsDefault == nil {
+	if o == nil || IsNil(o.IsDefault) {
 		var ret bool
 		return ret
 	}
@@ -214,7 +218,7 @@ func (o *CloudSkuVolumeType) GetIsDefault() bool {
 // GetIsDefaultOk returns a tuple with the IsDefault field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetIsDefaultOk() (*bool, bool) {
-	if o == nil || o.IsDefault == nil {
+	if o == nil || IsNil(o.IsDefault) {
 		return nil, false
 	}
 	return o.IsDefault, true
@@ -222,7 +226,7 @@ func (o *CloudSkuVolumeType) GetIsDefaultOk() (*bool, bool) {
 
 // HasIsDefault returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasIsDefault() bool {
-	if o != nil && o.IsDefault != nil {
+	if o != nil && !IsNil(o.IsDefault) {
 		return true
 	}
 
@@ -236,7 +240,7 @@ func (o *CloudSkuVolumeType) SetIsDefault(v bool) {
 
 // GetIsProvisionedIops returns the IsProvisionedIops field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetIsProvisionedIops() bool {
-	if o == nil || o.IsProvisionedIops == nil {
+	if o == nil || IsNil(o.IsProvisionedIops) {
 		var ret bool
 		return ret
 	}
@@ -246,7 +250,7 @@ func (o *CloudSkuVolumeType) GetIsProvisionedIops() bool {
 // GetIsProvisionedIopsOk returns a tuple with the IsProvisionedIops field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetIsProvisionedIopsOk() (*bool, bool) {
-	if o == nil || o.IsProvisionedIops == nil {
+	if o == nil || IsNil(o.IsProvisionedIops) {
 		return nil, false
 	}
 	return o.IsProvisionedIops, true
@@ -254,7 +258,7 @@ func (o *CloudSkuVolumeType) GetIsProvisionedIopsOk() (*bool, bool) {
 
 // HasIsProvisionedIops returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasIsProvisionedIops() bool {
-	if o != nil && o.IsProvisionedIops != nil {
+	if o != nil && !IsNil(o.IsProvisionedIops) {
 		return true
 	}
 
@@ -268,7 +272,7 @@ func (o *CloudSkuVolumeType) SetIsProvisionedIops(v bool) {
 
 // GetMaxIops returns the MaxIops field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetMaxIops() float64 {
-	if o == nil || o.MaxIops == nil {
+	if o == nil || IsNil(o.MaxIops) {
 		var ret float64
 		return ret
 	}
@@ -278,7 +282,7 @@ func (o *CloudSkuVolumeType) GetMaxIops() float64 {
 // GetMaxIopsOk returns a tuple with the MaxIops field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetMaxIopsOk() (*float64, bool) {
-	if o == nil || o.MaxIops == nil {
+	if o == nil || IsNil(o.MaxIops) {
 		return nil, false
 	}
 	return o.MaxIops, true
@@ -286,7 +290,7 @@ func (o *CloudSkuVolumeType) GetMaxIopsOk() (*float64, bool) {
 
 // HasMaxIops returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasMaxIops() bool {
-	if o != nil && o.MaxIops != nil {
+	if o != nil && !IsNil(o.MaxIops) {
 		return true
 	}
 
@@ -300,7 +304,7 @@ func (o *CloudSkuVolumeType) SetMaxIops(v float64) {
 
 // GetMaxReadIops returns the MaxReadIops field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetMaxReadIops() float64 {
-	if o == nil || o.MaxReadIops == nil {
+	if o == nil || IsNil(o.MaxReadIops) {
 		var ret float64
 		return ret
 	}
@@ -310,7 +314,7 @@ func (o *CloudSkuVolumeType) GetMaxReadIops() float64 {
 // GetMaxReadIopsOk returns a tuple with the MaxReadIops field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetMaxReadIopsOk() (*float64, bool) {
-	if o == nil || o.MaxReadIops == nil {
+	if o == nil || IsNil(o.MaxReadIops) {
 		return nil, false
 	}
 	return o.MaxReadIops, true
@@ -318,7 +322,7 @@ func (o *CloudSkuVolumeType) GetMaxReadIopsOk() (*float64, bool) {
 
 // HasMaxReadIops returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasMaxReadIops() bool {
-	if o != nil && o.MaxReadIops != nil {
+	if o != nil && !IsNil(o.MaxReadIops) {
 		return true
 	}
 
@@ -332,7 +336,7 @@ func (o *CloudSkuVolumeType) SetMaxReadIops(v float64) {
 
 // GetMaxReadThroughput returns the MaxReadThroughput field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetMaxReadThroughput() float64 {
-	if o == nil || o.MaxReadThroughput == nil {
+	if o == nil || IsNil(o.MaxReadThroughput) {
 		var ret float64
 		return ret
 	}
@@ -342,7 +346,7 @@ func (o *CloudSkuVolumeType) GetMaxReadThroughput() float64 {
 // GetMaxReadThroughputOk returns a tuple with the MaxReadThroughput field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetMaxReadThroughputOk() (*float64, bool) {
-	if o == nil || o.MaxReadThroughput == nil {
+	if o == nil || IsNil(o.MaxReadThroughput) {
 		return nil, false
 	}
 	return o.MaxReadThroughput, true
@@ -350,7 +354,7 @@ func (o *CloudSkuVolumeType) GetMaxReadThroughputOk() (*float64, bool) {
 
 // HasMaxReadThroughput returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasMaxReadThroughput() bool {
-	if o != nil && o.MaxReadThroughput != nil {
+	if o != nil && !IsNil(o.MaxReadThroughput) {
 		return true
 	}
 
@@ -364,7 +368,7 @@ func (o *CloudSkuVolumeType) SetMaxReadThroughput(v float64) {
 
 // GetMaxThroughput returns the MaxThroughput field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetMaxThroughput() float64 {
-	if o == nil || o.MaxThroughput == nil {
+	if o == nil || IsNil(o.MaxThroughput) {
 		var ret float64
 		return ret
 	}
@@ -374,7 +378,7 @@ func (o *CloudSkuVolumeType) GetMaxThroughput() float64 {
 // GetMaxThroughputOk returns a tuple with the MaxThroughput field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetMaxThroughputOk() (*float64, bool) {
-	if o == nil || o.MaxThroughput == nil {
+	if o == nil || IsNil(o.MaxThroughput) {
 		return nil, false
 	}
 	return o.MaxThroughput, true
@@ -382,7 +386,7 @@ func (o *CloudSkuVolumeType) GetMaxThroughputOk() (*float64, bool) {
 
 // HasMaxThroughput returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasMaxThroughput() bool {
-	if o != nil && o.MaxThroughput != nil {
+	if o != nil && !IsNil(o.MaxThroughput) {
 		return true
 	}
 
@@ -396,7 +400,7 @@ func (o *CloudSkuVolumeType) SetMaxThroughput(v float64) {
 
 // GetMaxVolumeSize returns the MaxVolumeSize field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetMaxVolumeSize() float64 {
-	if o == nil || o.MaxVolumeSize == nil {
+	if o == nil || IsNil(o.MaxVolumeSize) {
 		var ret float64
 		return ret
 	}
@@ -406,7 +410,7 @@ func (o *CloudSkuVolumeType) GetMaxVolumeSize() float64 {
 // GetMaxVolumeSizeOk returns a tuple with the MaxVolumeSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetMaxVolumeSizeOk() (*float64, bool) {
-	if o == nil || o.MaxVolumeSize == nil {
+	if o == nil || IsNil(o.MaxVolumeSize) {
 		return nil, false
 	}
 	return o.MaxVolumeSize, true
@@ -414,7 +418,7 @@ func (o *CloudSkuVolumeType) GetMaxVolumeSizeOk() (*float64, bool) {
 
 // HasMaxVolumeSize returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasMaxVolumeSize() bool {
-	if o != nil && o.MaxVolumeSize != nil {
+	if o != nil && !IsNil(o.MaxVolumeSize) {
 		return true
 	}
 
@@ -428,7 +432,7 @@ func (o *CloudSkuVolumeType) SetMaxVolumeSize(v float64) {
 
 // GetMaxWriteIops returns the MaxWriteIops field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetMaxWriteIops() float64 {
-	if o == nil || o.MaxWriteIops == nil {
+	if o == nil || IsNil(o.MaxWriteIops) {
 		var ret float64
 		return ret
 	}
@@ -438,7 +442,7 @@ func (o *CloudSkuVolumeType) GetMaxWriteIops() float64 {
 // GetMaxWriteIopsOk returns a tuple with the MaxWriteIops field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetMaxWriteIopsOk() (*float64, bool) {
-	if o == nil || o.MaxWriteIops == nil {
+	if o == nil || IsNil(o.MaxWriteIops) {
 		return nil, false
 	}
 	return o.MaxWriteIops, true
@@ -446,7 +450,7 @@ func (o *CloudSkuVolumeType) GetMaxWriteIopsOk() (*float64, bool) {
 
 // HasMaxWriteIops returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasMaxWriteIops() bool {
-	if o != nil && o.MaxWriteIops != nil {
+	if o != nil && !IsNil(o.MaxWriteIops) {
 		return true
 	}
 
@@ -460,7 +464,7 @@ func (o *CloudSkuVolumeType) SetMaxWriteIops(v float64) {
 
 // GetMaxWriteThroughput returns the MaxWriteThroughput field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetMaxWriteThroughput() float64 {
-	if o == nil || o.MaxWriteThroughput == nil {
+	if o == nil || IsNil(o.MaxWriteThroughput) {
 		var ret float64
 		return ret
 	}
@@ -470,7 +474,7 @@ func (o *CloudSkuVolumeType) GetMaxWriteThroughput() float64 {
 // GetMaxWriteThroughputOk returns a tuple with the MaxWriteThroughput field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetMaxWriteThroughputOk() (*float64, bool) {
-	if o == nil || o.MaxWriteThroughput == nil {
+	if o == nil || IsNil(o.MaxWriteThroughput) {
 		return nil, false
 	}
 	return o.MaxWriteThroughput, true
@@ -478,7 +482,7 @@ func (o *CloudSkuVolumeType) GetMaxWriteThroughputOk() (*float64, bool) {
 
 // HasMaxWriteThroughput returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasMaxWriteThroughput() bool {
-	if o != nil && o.MaxWriteThroughput != nil {
+	if o != nil && !IsNil(o.MaxWriteThroughput) {
 		return true
 	}
 
@@ -492,7 +496,7 @@ func (o *CloudSkuVolumeType) SetMaxWriteThroughput(v float64) {
 
 // GetMinVolumeSize returns the MinVolumeSize field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetMinVolumeSize() float64 {
-	if o == nil || o.MinVolumeSize == nil {
+	if o == nil || IsNil(o.MinVolumeSize) {
 		var ret float64
 		return ret
 	}
@@ -502,7 +506,7 @@ func (o *CloudSkuVolumeType) GetMinVolumeSize() float64 {
 // GetMinVolumeSizeOk returns a tuple with the MinVolumeSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetMinVolumeSizeOk() (*float64, bool) {
-	if o == nil || o.MinVolumeSize == nil {
+	if o == nil || IsNil(o.MinVolumeSize) {
 		return nil, false
 	}
 	return o.MinVolumeSize, true
@@ -510,7 +514,7 @@ func (o *CloudSkuVolumeType) GetMinVolumeSizeOk() (*float64, bool) {
 
 // HasMinVolumeSize returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasMinVolumeSize() bool {
-	if o != nil && o.MinVolumeSize != nil {
+	if o != nil && !IsNil(o.MinVolumeSize) {
 		return true
 	}
 
@@ -524,7 +528,7 @@ func (o *CloudSkuVolumeType) SetMinVolumeSize(v float64) {
 
 // GetThroughputUnit returns the ThroughputUnit field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetThroughputUnit() string {
-	if o == nil || o.ThroughputUnit == nil {
+	if o == nil || IsNil(o.ThroughputUnit) {
 		var ret string
 		return ret
 	}
@@ -534,7 +538,7 @@ func (o *CloudSkuVolumeType) GetThroughputUnit() string {
 // GetThroughputUnitOk returns a tuple with the ThroughputUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetThroughputUnitOk() (*string, bool) {
-	if o == nil || o.ThroughputUnit == nil {
+	if o == nil || IsNil(o.ThroughputUnit) {
 		return nil, false
 	}
 	return o.ThroughputUnit, true
@@ -542,7 +546,7 @@ func (o *CloudSkuVolumeType) GetThroughputUnitOk() (*string, bool) {
 
 // HasThroughputUnit returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasThroughputUnit() bool {
-	if o != nil && o.ThroughputUnit != nil {
+	if o != nil && !IsNil(o.ThroughputUnit) {
 		return true
 	}
 
@@ -556,7 +560,7 @@ func (o *CloudSkuVolumeType) SetThroughputUnit(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -566,7 +570,7 @@ func (o *CloudSkuVolumeType) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -574,7 +578,7 @@ func (o *CloudSkuVolumeType) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -588,7 +592,7 @@ func (o *CloudSkuVolumeType) SetType(v string) {
 
 // GetVolumeSizeUnit returns the VolumeSizeUnit field value if set, zero value otherwise.
 func (o *CloudSkuVolumeType) GetVolumeSizeUnit() string {
-	if o == nil || o.VolumeSizeUnit == nil {
+	if o == nil || IsNil(o.VolumeSizeUnit) {
 		var ret string
 		return ret
 	}
@@ -598,7 +602,7 @@ func (o *CloudSkuVolumeType) GetVolumeSizeUnit() string {
 // GetVolumeSizeUnitOk returns a tuple with the VolumeSizeUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudSkuVolumeType) GetVolumeSizeUnitOk() (*string, bool) {
-	if o == nil || o.VolumeSizeUnit == nil {
+	if o == nil || IsNil(o.VolumeSizeUnit) {
 		return nil, false
 	}
 	return o.VolumeSizeUnit, true
@@ -606,7 +610,7 @@ func (o *CloudSkuVolumeType) GetVolumeSizeUnitOk() (*string, bool) {
 
 // HasVolumeSizeUnit returns a boolean if a field has been set.
 func (o *CloudSkuVolumeType) HasVolumeSizeUnit() bool {
-	if o != nil && o.VolumeSizeUnit != nil {
+	if o != nil && !IsNil(o.VolumeSizeUnit) {
 		return true
 	}
 
@@ -619,64 +623,68 @@ func (o *CloudSkuVolumeType) SetVolumeSizeUnit(v string) {
 }
 
 func (o CloudSkuVolumeType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudSkuVolumeType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCloudBaseSku, errCloudBaseSku := json.Marshal(o.CloudBaseSku)
 	if errCloudBaseSku != nil {
-		return []byte{}, errCloudBaseSku
+		return map[string]interface{}{}, errCloudBaseSku
 	}
 	errCloudBaseSku = json.Unmarshal([]byte(serializedCloudBaseSku), &toSerialize)
 	if errCloudBaseSku != nil {
-		return []byte{}, errCloudBaseSku
+		return map[string]interface{}{}, errCloudBaseSku
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IopsUnit != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IopsUnit) {
 		toSerialize["IopsUnit"] = o.IopsUnit
 	}
-	if o.IsBootable != nil {
+	if !IsNil(o.IsBootable) {
 		toSerialize["IsBootable"] = o.IsBootable
 	}
-	if o.IsDefault != nil {
+	if !IsNil(o.IsDefault) {
 		toSerialize["IsDefault"] = o.IsDefault
 	}
-	if o.IsProvisionedIops != nil {
+	if !IsNil(o.IsProvisionedIops) {
 		toSerialize["IsProvisionedIops"] = o.IsProvisionedIops
 	}
-	if o.MaxIops != nil {
+	if !IsNil(o.MaxIops) {
 		toSerialize["MaxIops"] = o.MaxIops
 	}
-	if o.MaxReadIops != nil {
+	if !IsNil(o.MaxReadIops) {
 		toSerialize["MaxReadIops"] = o.MaxReadIops
 	}
-	if o.MaxReadThroughput != nil {
+	if !IsNil(o.MaxReadThroughput) {
 		toSerialize["MaxReadThroughput"] = o.MaxReadThroughput
 	}
-	if o.MaxThroughput != nil {
+	if !IsNil(o.MaxThroughput) {
 		toSerialize["MaxThroughput"] = o.MaxThroughput
 	}
-	if o.MaxVolumeSize != nil {
+	if !IsNil(o.MaxVolumeSize) {
 		toSerialize["MaxVolumeSize"] = o.MaxVolumeSize
 	}
-	if o.MaxWriteIops != nil {
+	if !IsNil(o.MaxWriteIops) {
 		toSerialize["MaxWriteIops"] = o.MaxWriteIops
 	}
-	if o.MaxWriteThroughput != nil {
+	if !IsNil(o.MaxWriteThroughput) {
 		toSerialize["MaxWriteThroughput"] = o.MaxWriteThroughput
 	}
-	if o.MinVolumeSize != nil {
+	if !IsNil(o.MinVolumeSize) {
 		toSerialize["MinVolumeSize"] = o.MinVolumeSize
 	}
-	if o.ThroughputUnit != nil {
+	if !IsNil(o.ThroughputUnit) {
 		toSerialize["ThroughputUnit"] = o.ThroughputUnit
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.VolumeSizeUnit != nil {
+	if !IsNil(o.VolumeSizeUnit) {
 		toSerialize["VolumeSizeUnit"] = o.VolumeSizeUnit
 	}
 
@@ -684,10 +692,32 @@ func (o CloudSkuVolumeType) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudSkuVolumeType) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudSkuVolumeType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudSkuVolumeTypeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -727,7 +757,7 @@ func (o *CloudSkuVolumeType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudSkuVolumeTypeWithoutEmbeddedStruct := CloudSkuVolumeTypeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudSkuVolumeTypeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudSkuVolumeTypeWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudSkuVolumeType := _CloudSkuVolumeType{}
 		varCloudSkuVolumeType.ClassId = varCloudSkuVolumeTypeWithoutEmbeddedStruct.ClassId
@@ -754,7 +784,7 @@ func (o *CloudSkuVolumeType) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudSkuVolumeType := _CloudSkuVolumeType{}
 
-	err = json.Unmarshal(bytes, &varCloudSkuVolumeType)
+	err = json.Unmarshal(data, &varCloudSkuVolumeType)
 	if err == nil {
 		o.CloudBaseSku = varCloudSkuVolumeType.CloudBaseSku
 	} else {
@@ -763,7 +793,7 @@ func (o *CloudSkuVolumeType) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IopsUnit")

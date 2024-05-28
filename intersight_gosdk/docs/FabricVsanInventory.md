@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **OperState** | Pointer to **string** | Operational state of the VSAN. * &#x60;&#x60; - Default value to represent the operational state of isolated vsan. * &#x60;Up&#x60; - VSAN operational state is up. * &#x60;Down&#x60; - VSAN operational state is down. | [optional] [readonly] [default to ""]
 **SmartZoning** | Pointer to **string** | Smart zoning status on the VSAN. It can be enabled or disabled. * &#x60;&#x60; - Default value to represent the smart zoning status of isolated vsan. * &#x60;Enabled&#x60; - VSAN smart zoning state is enabled. * &#x60;Disabled&#x60; - VSAN smart zoning state is disabled. | [optional] [readonly] [default to ""]
 **VsanId** | Pointer to **int64** | Identifier for the VSAN. It is an integer from 1 to 4094. | [optional] [readonly] 
-**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -275,6 +275,16 @@ SetNetworkElement sets NetworkElement field to given value.
 
 HasNetworkElement returns a boolean if a field has been set.
 
+### SetNetworkElementNil
+
+`func (o *FabricVsanInventory) SetNetworkElementNil(b bool)`
+
+ SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+
+### UnsetNetworkElement
+`func (o *FabricVsanInventory) UnsetNetworkElement()`
+
+UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *FabricVsanInventory) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -300,6 +310,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *FabricVsanInventory) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *FabricVsanInventory) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

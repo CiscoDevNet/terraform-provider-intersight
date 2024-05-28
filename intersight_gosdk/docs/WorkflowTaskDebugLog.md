@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **RetryCount** | Pointer to **int64** | A counter for number of retries. | [optional] [readonly] 
 **TaskDebugLogEntries** | Pointer to **interface{}** | Holds information helpful in isolating task failures. | [optional] [readonly] 
 **TaskInstId** | Pointer to **string** | The unique identifier for task instance. | [optional] [readonly] 
-**TaskInfo** | Pointer to [**WorkflowTaskInfoRelationship**](WorkflowTaskInfoRelationship.md) |  | [optional] 
-**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**TaskInfo** | Pointer to [**NullableWorkflowTaskInfoRelationship**](WorkflowTaskInfoRelationship.md) |  | [optional] 
+**WorkflowInfo** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -181,6 +181,16 @@ SetTaskInfo sets TaskInfo field to given value.
 
 HasTaskInfo returns a boolean if a field has been set.
 
+### SetTaskInfoNil
+
+`func (o *WorkflowTaskDebugLog) SetTaskInfoNil(b bool)`
+
+ SetTaskInfoNil sets the value for TaskInfo to be an explicit nil
+
+### UnsetTaskInfo
+`func (o *WorkflowTaskDebugLog) UnsetTaskInfo()`
+
+UnsetTaskInfo ensures that no value is present for TaskInfo, not even an explicit nil
 ### GetWorkflowInfo
 
 `func (o *WorkflowTaskDebugLog) GetWorkflowInfo() WorkflowWorkflowInfoRelationship`
@@ -206,6 +216,16 @@ SetWorkflowInfo sets WorkflowInfo field to given value.
 
 HasWorkflowInfo returns a boolean if a field has been set.
 
+### SetWorkflowInfoNil
+
+`func (o *WorkflowTaskDebugLog) SetWorkflowInfoNil(b bool)`
+
+ SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+
+### UnsetWorkflowInfo
+`func (o *WorkflowTaskDebugLog) UnsetWorkflowInfo()`
+
+UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

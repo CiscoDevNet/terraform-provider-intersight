@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -14,6 +14,9 @@ package intersight
 import (
 	"encoding/json"
 )
+
+// checks if the TelemetryDruidSegmentMetadataResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidSegmentMetadataResult{}
 
 // TelemetryDruidSegmentMetadataResult Metadata about a Druid segment
 type TelemetryDruidSegmentMetadataResult struct {
@@ -55,7 +58,7 @@ func NewTelemetryDruidSegmentMetadataResultWithDefaults() *TelemetryDruidSegment
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *TelemetryDruidSegmentMetadataResult) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -65,7 +68,7 @@ func (o *TelemetryDruidSegmentMetadataResult) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidSegmentMetadataResult) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -73,7 +76,7 @@ func (o *TelemetryDruidSegmentMetadataResult) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *TelemetryDruidSegmentMetadataResult) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -87,7 +90,7 @@ func (o *TelemetryDruidSegmentMetadataResult) SetId(v string) {
 
 // GetIntervals returns the Intervals field value if set, zero value otherwise.
 func (o *TelemetryDruidSegmentMetadataResult) GetIntervals() string {
-	if o == nil || o.Intervals == nil {
+	if o == nil || IsNil(o.Intervals) {
 		var ret string
 		return ret
 	}
@@ -97,7 +100,7 @@ func (o *TelemetryDruidSegmentMetadataResult) GetIntervals() string {
 // GetIntervalsOk returns a tuple with the Intervals field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidSegmentMetadataResult) GetIntervalsOk() (*string, bool) {
-	if o == nil || o.Intervals == nil {
+	if o == nil || IsNil(o.Intervals) {
 		return nil, false
 	}
 	return o.Intervals, true
@@ -105,7 +108,7 @@ func (o *TelemetryDruidSegmentMetadataResult) GetIntervalsOk() (*string, bool) {
 
 // HasIntervals returns a boolean if a field has been set.
 func (o *TelemetryDruidSegmentMetadataResult) HasIntervals() bool {
-	if o != nil && o.Intervals != nil {
+	if o != nil && !IsNil(o.Intervals) {
 		return true
 	}
 
@@ -119,7 +122,7 @@ func (o *TelemetryDruidSegmentMetadataResult) SetIntervals(v string) {
 
 // GetColumns returns the Columns field value if set, zero value otherwise.
 func (o *TelemetryDruidSegmentMetadataResult) GetColumns() map[string]interface{} {
-	if o == nil || o.Columns == nil {
+	if o == nil || IsNil(o.Columns) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -129,15 +132,15 @@ func (o *TelemetryDruidSegmentMetadataResult) GetColumns() map[string]interface{
 // GetColumnsOk returns a tuple with the Columns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidSegmentMetadataResult) GetColumnsOk() (map[string]interface{}, bool) {
-	if o == nil || o.Columns == nil {
-		return nil, false
+	if o == nil || IsNil(o.Columns) {
+		return map[string]interface{}{}, false
 	}
 	return o.Columns, true
 }
 
 // HasColumns returns a boolean if a field has been set.
 func (o *TelemetryDruidSegmentMetadataResult) HasColumns() bool {
-	if o != nil && o.Columns != nil {
+	if o != nil && !IsNil(o.Columns) {
 		return true
 	}
 
@@ -151,7 +154,7 @@ func (o *TelemetryDruidSegmentMetadataResult) SetColumns(v map[string]interface{
 
 // GetAggregators returns the Aggregators field value if set, zero value otherwise.
 func (o *TelemetryDruidSegmentMetadataResult) GetAggregators() map[string]interface{} {
-	if o == nil || o.Aggregators == nil {
+	if o == nil || IsNil(o.Aggregators) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -161,15 +164,15 @@ func (o *TelemetryDruidSegmentMetadataResult) GetAggregators() map[string]interf
 // GetAggregatorsOk returns a tuple with the Aggregators field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidSegmentMetadataResult) GetAggregatorsOk() (map[string]interface{}, bool) {
-	if o == nil || o.Aggregators == nil {
-		return nil, false
+	if o == nil || IsNil(o.Aggregators) {
+		return map[string]interface{}{}, false
 	}
 	return o.Aggregators, true
 }
 
 // HasAggregators returns a boolean if a field has been set.
 func (o *TelemetryDruidSegmentMetadataResult) HasAggregators() bool {
-	if o != nil && o.Aggregators != nil {
+	if o != nil && !IsNil(o.Aggregators) {
 		return true
 	}
 
@@ -183,7 +186,7 @@ func (o *TelemetryDruidSegmentMetadataResult) SetAggregators(v map[string]interf
 
 // GetQueryGranularity returns the QueryGranularity field value if set, zero value otherwise.
 func (o *TelemetryDruidSegmentMetadataResult) GetQueryGranularity() map[string]interface{} {
-	if o == nil || o.QueryGranularity == nil {
+	if o == nil || IsNil(o.QueryGranularity) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -193,15 +196,15 @@ func (o *TelemetryDruidSegmentMetadataResult) GetQueryGranularity() map[string]i
 // GetQueryGranularityOk returns a tuple with the QueryGranularity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidSegmentMetadataResult) GetQueryGranularityOk() (map[string]interface{}, bool) {
-	if o == nil || o.QueryGranularity == nil {
-		return nil, false
+	if o == nil || IsNil(o.QueryGranularity) {
+		return map[string]interface{}{}, false
 	}
 	return o.QueryGranularity, true
 }
 
 // HasQueryGranularity returns a boolean if a field has been set.
 func (o *TelemetryDruidSegmentMetadataResult) HasQueryGranularity() bool {
-	if o != nil && o.QueryGranularity != nil {
+	if o != nil && !IsNil(o.QueryGranularity) {
 		return true
 	}
 
@@ -215,7 +218,7 @@ func (o *TelemetryDruidSegmentMetadataResult) SetQueryGranularity(v map[string]i
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *TelemetryDruidSegmentMetadataResult) GetSize() int32 {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		var ret int32
 		return ret
 	}
@@ -225,7 +228,7 @@ func (o *TelemetryDruidSegmentMetadataResult) GetSize() int32 {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidSegmentMetadataResult) GetSizeOk() (*int32, bool) {
-	if o == nil || o.Size == nil {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -233,7 +236,7 @@ func (o *TelemetryDruidSegmentMetadataResult) GetSizeOk() (*int32, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *TelemetryDruidSegmentMetadataResult) HasSize() bool {
-	if o != nil && o.Size != nil {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -247,7 +250,7 @@ func (o *TelemetryDruidSegmentMetadataResult) SetSize(v int32) {
 
 // GetNumRows returns the NumRows field value if set, zero value otherwise.
 func (o *TelemetryDruidSegmentMetadataResult) GetNumRows() int32 {
-	if o == nil || o.NumRows == nil {
+	if o == nil || IsNil(o.NumRows) {
 		var ret int32
 		return ret
 	}
@@ -257,7 +260,7 @@ func (o *TelemetryDruidSegmentMetadataResult) GetNumRows() int32 {
 // GetNumRowsOk returns a tuple with the NumRows field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidSegmentMetadataResult) GetNumRowsOk() (*int32, bool) {
-	if o == nil || o.NumRows == nil {
+	if o == nil || IsNil(o.NumRows) {
 		return nil, false
 	}
 	return o.NumRows, true
@@ -265,7 +268,7 @@ func (o *TelemetryDruidSegmentMetadataResult) GetNumRowsOk() (*int32, bool) {
 
 // HasNumRows returns a boolean if a field has been set.
 func (o *TelemetryDruidSegmentMetadataResult) HasNumRows() bool {
-	if o != nil && o.NumRows != nil {
+	if o != nil && !IsNil(o.NumRows) {
 		return true
 	}
 
@@ -278,26 +281,34 @@ func (o *TelemetryDruidSegmentMetadataResult) SetNumRows(v int32) {
 }
 
 func (o TelemetryDruidSegmentMetadataResult) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidSegmentMetadataResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Intervals != nil {
+	if !IsNil(o.Intervals) {
 		toSerialize["intervals"] = o.Intervals
 	}
-	if o.Columns != nil {
+	if !IsNil(o.Columns) {
 		toSerialize["columns"] = o.Columns
 	}
-	if o.Aggregators != nil {
+	if !IsNil(o.Aggregators) {
 		toSerialize["aggregators"] = o.Aggregators
 	}
-	if o.QueryGranularity != nil {
+	if !IsNil(o.QueryGranularity) {
 		toSerialize["queryGranularity"] = o.QueryGranularity
 	}
-	if o.Size != nil {
+	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
-	if o.NumRows != nil {
+	if !IsNil(o.NumRows) {
 		toSerialize["numRows"] = o.NumRows
 	}
 
@@ -305,19 +316,23 @@ func (o TelemetryDruidSegmentMetadataResult) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidSegmentMetadataResult) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidSegmentMetadataResult) UnmarshalJSON(data []byte) (err error) {
 	varTelemetryDruidSegmentMetadataResult := _TelemetryDruidSegmentMetadataResult{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidSegmentMetadataResult); err == nil {
-		*o = TelemetryDruidSegmentMetadataResult(varTelemetryDruidSegmentMetadataResult)
+	err = json.Unmarshal(data, &varTelemetryDruidSegmentMetadataResult)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidSegmentMetadataResult(varTelemetryDruidSegmentMetadataResult)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "intervals")
 		delete(additionalProperties, "columns")

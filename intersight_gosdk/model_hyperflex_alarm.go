@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexAlarm type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexAlarm{}
 
 // HyperflexAlarm An alarm representing a fault in the HyperFlex cluster configuration or hardware.
 type HyperflexAlarm struct {
@@ -55,8 +59,8 @@ type HyperflexAlarm struct {
 	// The unique identifier for this alarm instance.
 	Uuid *string `json:"Uuid,omitempty"`
 	// An array of relationships to infraBaseCluster resources.
-	AncestorMos          []InfraBaseClusterRelationship `json:"AncestorMos,omitempty"`
-	Cluster              *HyperflexClusterRelationship  `json:"Cluster,omitempty"`
+	AncestorMos          []InfraBaseClusterRelationship       `json:"AncestorMos,omitempty"`
+	Cluster              NullableHyperflexClusterRelationship `json:"Cluster,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -135,7 +139,7 @@ func (o *HyperflexAlarm) SetObjectType(v string) {
 
 // GetAcknowledged returns the Acknowledged field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetAcknowledged() bool {
-	if o == nil || o.Acknowledged == nil {
+	if o == nil || IsNil(o.Acknowledged) {
 		var ret bool
 		return ret
 	}
@@ -145,7 +149,7 @@ func (o *HyperflexAlarm) GetAcknowledged() bool {
 // GetAcknowledgedOk returns a tuple with the Acknowledged field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetAcknowledgedOk() (*bool, bool) {
-	if o == nil || o.Acknowledged == nil {
+	if o == nil || IsNil(o.Acknowledged) {
 		return nil, false
 	}
 	return o.Acknowledged, true
@@ -153,7 +157,7 @@ func (o *HyperflexAlarm) GetAcknowledgedOk() (*bool, bool) {
 
 // HasAcknowledged returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasAcknowledged() bool {
-	if o != nil && o.Acknowledged != nil {
+	if o != nil && !IsNil(o.Acknowledged) {
 		return true
 	}
 
@@ -167,7 +171,7 @@ func (o *HyperflexAlarm) SetAcknowledged(v bool) {
 
 // GetAcknowledgedBy returns the AcknowledgedBy field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetAcknowledgedBy() string {
-	if o == nil || o.AcknowledgedBy == nil {
+	if o == nil || IsNil(o.AcknowledgedBy) {
 		var ret string
 		return ret
 	}
@@ -177,7 +181,7 @@ func (o *HyperflexAlarm) GetAcknowledgedBy() string {
 // GetAcknowledgedByOk returns a tuple with the AcknowledgedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetAcknowledgedByOk() (*string, bool) {
-	if o == nil || o.AcknowledgedBy == nil {
+	if o == nil || IsNil(o.AcknowledgedBy) {
 		return nil, false
 	}
 	return o.AcknowledgedBy, true
@@ -185,7 +189,7 @@ func (o *HyperflexAlarm) GetAcknowledgedByOk() (*string, bool) {
 
 // HasAcknowledgedBy returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasAcknowledgedBy() bool {
-	if o != nil && o.AcknowledgedBy != nil {
+	if o != nil && !IsNil(o.AcknowledgedBy) {
 		return true
 	}
 
@@ -199,7 +203,7 @@ func (o *HyperflexAlarm) SetAcknowledgedBy(v string) {
 
 // GetAcknowledgedTime returns the AcknowledgedTime field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetAcknowledgedTime() int64 {
-	if o == nil || o.AcknowledgedTime == nil {
+	if o == nil || IsNil(o.AcknowledgedTime) {
 		var ret int64
 		return ret
 	}
@@ -209,7 +213,7 @@ func (o *HyperflexAlarm) GetAcknowledgedTime() int64 {
 // GetAcknowledgedTimeOk returns a tuple with the AcknowledgedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetAcknowledgedTimeOk() (*int64, bool) {
-	if o == nil || o.AcknowledgedTime == nil {
+	if o == nil || IsNil(o.AcknowledgedTime) {
 		return nil, false
 	}
 	return o.AcknowledgedTime, true
@@ -217,7 +221,7 @@ func (o *HyperflexAlarm) GetAcknowledgedTimeOk() (*int64, bool) {
 
 // HasAcknowledgedTime returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasAcknowledgedTime() bool {
-	if o != nil && o.AcknowledgedTime != nil {
+	if o != nil && !IsNil(o.AcknowledgedTime) {
 		return true
 	}
 
@@ -231,7 +235,7 @@ func (o *HyperflexAlarm) SetAcknowledgedTime(v int64) {
 
 // GetAcknowledgedTimeAsUtc returns the AcknowledgedTimeAsUtc field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetAcknowledgedTimeAsUtc() string {
-	if o == nil || o.AcknowledgedTimeAsUtc == nil {
+	if o == nil || IsNil(o.AcknowledgedTimeAsUtc) {
 		var ret string
 		return ret
 	}
@@ -241,7 +245,7 @@ func (o *HyperflexAlarm) GetAcknowledgedTimeAsUtc() string {
 // GetAcknowledgedTimeAsUtcOk returns a tuple with the AcknowledgedTimeAsUtc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetAcknowledgedTimeAsUtcOk() (*string, bool) {
-	if o == nil || o.AcknowledgedTimeAsUtc == nil {
+	if o == nil || IsNil(o.AcknowledgedTimeAsUtc) {
 		return nil, false
 	}
 	return o.AcknowledgedTimeAsUtc, true
@@ -249,7 +253,7 @@ func (o *HyperflexAlarm) GetAcknowledgedTimeAsUtcOk() (*string, bool) {
 
 // HasAcknowledgedTimeAsUtc returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasAcknowledgedTimeAsUtc() bool {
-	if o != nil && o.AcknowledgedTimeAsUtc != nil {
+	if o != nil && !IsNil(o.AcknowledgedTimeAsUtc) {
 		return true
 	}
 
@@ -263,7 +267,7 @@ func (o *HyperflexAlarm) SetAcknowledgedTimeAsUtc(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -273,7 +277,7 @@ func (o *HyperflexAlarm) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -281,7 +285,7 @@ func (o *HyperflexAlarm) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -295,7 +299,7 @@ func (o *HyperflexAlarm) SetDescription(v string) {
 
 // GetEntityData returns the EntityData field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetEntityData() string {
-	if o == nil || o.EntityData == nil {
+	if o == nil || IsNil(o.EntityData) {
 		var ret string
 		return ret
 	}
@@ -305,7 +309,7 @@ func (o *HyperflexAlarm) GetEntityData() string {
 // GetEntityDataOk returns a tuple with the EntityData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetEntityDataOk() (*string, bool) {
-	if o == nil || o.EntityData == nil {
+	if o == nil || IsNil(o.EntityData) {
 		return nil, false
 	}
 	return o.EntityData, true
@@ -313,7 +317,7 @@ func (o *HyperflexAlarm) GetEntityDataOk() (*string, bool) {
 
 // HasEntityData returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasEntityData() bool {
-	if o != nil && o.EntityData != nil {
+	if o != nil && !IsNil(o.EntityData) {
 		return true
 	}
 
@@ -327,7 +331,7 @@ func (o *HyperflexAlarm) SetEntityData(v string) {
 
 // GetEntityName returns the EntityName field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetEntityName() string {
-	if o == nil || o.EntityName == nil {
+	if o == nil || IsNil(o.EntityName) {
 		var ret string
 		return ret
 	}
@@ -337,7 +341,7 @@ func (o *HyperflexAlarm) GetEntityName() string {
 // GetEntityNameOk returns a tuple with the EntityName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetEntityNameOk() (*string, bool) {
-	if o == nil || o.EntityName == nil {
+	if o == nil || IsNil(o.EntityName) {
 		return nil, false
 	}
 	return o.EntityName, true
@@ -345,7 +349,7 @@ func (o *HyperflexAlarm) GetEntityNameOk() (*string, bool) {
 
 // HasEntityName returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasEntityName() bool {
-	if o != nil && o.EntityName != nil {
+	if o != nil && !IsNil(o.EntityName) {
 		return true
 	}
 
@@ -359,7 +363,7 @@ func (o *HyperflexAlarm) SetEntityName(v string) {
 
 // GetEntityType returns the EntityType field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetEntityType() string {
-	if o == nil || o.EntityType == nil {
+	if o == nil || IsNil(o.EntityType) {
 		var ret string
 		return ret
 	}
@@ -369,7 +373,7 @@ func (o *HyperflexAlarm) GetEntityType() string {
 // GetEntityTypeOk returns a tuple with the EntityType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetEntityTypeOk() (*string, bool) {
-	if o == nil || o.EntityType == nil {
+	if o == nil || IsNil(o.EntityType) {
 		return nil, false
 	}
 	return o.EntityType, true
@@ -377,7 +381,7 @@ func (o *HyperflexAlarm) GetEntityTypeOk() (*string, bool) {
 
 // HasEntityType returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasEntityType() bool {
-	if o != nil && o.EntityType != nil {
+	if o != nil && !IsNil(o.EntityType) {
 		return true
 	}
 
@@ -391,7 +395,7 @@ func (o *HyperflexAlarm) SetEntityType(v string) {
 
 // GetEntityUuId returns the EntityUuId field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetEntityUuId() string {
-	if o == nil || o.EntityUuId == nil {
+	if o == nil || IsNil(o.EntityUuId) {
 		var ret string
 		return ret
 	}
@@ -401,7 +405,7 @@ func (o *HyperflexAlarm) GetEntityUuId() string {
 // GetEntityUuIdOk returns a tuple with the EntityUuId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetEntityUuIdOk() (*string, bool) {
-	if o == nil || o.EntityUuId == nil {
+	if o == nil || IsNil(o.EntityUuId) {
 		return nil, false
 	}
 	return o.EntityUuId, true
@@ -409,7 +413,7 @@ func (o *HyperflexAlarm) GetEntityUuIdOk() (*string, bool) {
 
 // HasEntityUuId returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasEntityUuId() bool {
-	if o != nil && o.EntityUuId != nil {
+	if o != nil && !IsNil(o.EntityUuId) {
 		return true
 	}
 
@@ -423,7 +427,7 @@ func (o *HyperflexAlarm) SetEntityUuId(v string) {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetMessage() string {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -433,7 +437,7 @@ func (o *HyperflexAlarm) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetMessageOk() (*string, bool) {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -441,7 +445,7 @@ func (o *HyperflexAlarm) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasMessage() bool {
-	if o != nil && o.Message != nil {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -455,7 +459,7 @@ func (o *HyperflexAlarm) SetMessage(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -465,7 +469,7 @@ func (o *HyperflexAlarm) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -473,7 +477,7 @@ func (o *HyperflexAlarm) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -487,7 +491,7 @@ func (o *HyperflexAlarm) SetName(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -497,7 +501,7 @@ func (o *HyperflexAlarm) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -505,7 +509,7 @@ func (o *HyperflexAlarm) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -519,7 +523,7 @@ func (o *HyperflexAlarm) SetStatus(v string) {
 
 // GetTriggeredTime returns the TriggeredTime field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetTriggeredTime() int64 {
-	if o == nil || o.TriggeredTime == nil {
+	if o == nil || IsNil(o.TriggeredTime) {
 		var ret int64
 		return ret
 	}
@@ -529,7 +533,7 @@ func (o *HyperflexAlarm) GetTriggeredTime() int64 {
 // GetTriggeredTimeOk returns a tuple with the TriggeredTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetTriggeredTimeOk() (*int64, bool) {
-	if o == nil || o.TriggeredTime == nil {
+	if o == nil || IsNil(o.TriggeredTime) {
 		return nil, false
 	}
 	return o.TriggeredTime, true
@@ -537,7 +541,7 @@ func (o *HyperflexAlarm) GetTriggeredTimeOk() (*int64, bool) {
 
 // HasTriggeredTime returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasTriggeredTime() bool {
-	if o != nil && o.TriggeredTime != nil {
+	if o != nil && !IsNil(o.TriggeredTime) {
 		return true
 	}
 
@@ -551,7 +555,7 @@ func (o *HyperflexAlarm) SetTriggeredTime(v int64) {
 
 // GetTriggeredTimeAsUtc returns the TriggeredTimeAsUtc field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetTriggeredTimeAsUtc() string {
-	if o == nil || o.TriggeredTimeAsUtc == nil {
+	if o == nil || IsNil(o.TriggeredTimeAsUtc) {
 		var ret string
 		return ret
 	}
@@ -561,7 +565,7 @@ func (o *HyperflexAlarm) GetTriggeredTimeAsUtc() string {
 // GetTriggeredTimeAsUtcOk returns a tuple with the TriggeredTimeAsUtc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetTriggeredTimeAsUtcOk() (*string, bool) {
-	if o == nil || o.TriggeredTimeAsUtc == nil {
+	if o == nil || IsNil(o.TriggeredTimeAsUtc) {
 		return nil, false
 	}
 	return o.TriggeredTimeAsUtc, true
@@ -569,7 +573,7 @@ func (o *HyperflexAlarm) GetTriggeredTimeAsUtcOk() (*string, bool) {
 
 // HasTriggeredTimeAsUtc returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasTriggeredTimeAsUtc() bool {
-	if o != nil && o.TriggeredTimeAsUtc != nil {
+	if o != nil && !IsNil(o.TriggeredTimeAsUtc) {
 		return true
 	}
 
@@ -583,7 +587,7 @@ func (o *HyperflexAlarm) SetTriggeredTimeAsUtc(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *HyperflexAlarm) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -593,7 +597,7 @@ func (o *HyperflexAlarm) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexAlarm) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -601,7 +605,7 @@ func (o *HyperflexAlarm) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -626,7 +630,7 @@ func (o *HyperflexAlarm) GetAncestorMos() []InfraBaseClusterRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexAlarm) GetAncestorMosOk() ([]InfraBaseClusterRelationship, bool) {
-	if o == nil || o.AncestorMos == nil {
+	if o == nil || IsNil(o.AncestorMos) {
 		return nil, false
 	}
 	return o.AncestorMos, true
@@ -634,7 +638,7 @@ func (o *HyperflexAlarm) GetAncestorMosOk() ([]InfraBaseClusterRelationship, boo
 
 // HasAncestorMos returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasAncestorMos() bool {
-	if o != nil && o.AncestorMos != nil {
+	if o != nil && IsNil(o.AncestorMos) {
 		return true
 	}
 
@@ -646,114 +650,151 @@ func (o *HyperflexAlarm) SetAncestorMos(v []InfraBaseClusterRelationship) {
 	o.AncestorMos = v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexAlarm) GetCluster() HyperflexClusterRelationship {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.Cluster
+	return *o.Cluster.Get()
 }
 
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexAlarm) GetClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.Cluster.Get(), o.Cluster.IsSet()
 }
 
 // HasCluster returns a boolean if a field has been set.
 func (o *HyperflexAlarm) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && o.Cluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the Cluster field.
+// SetCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the Cluster field.
 func (o *HyperflexAlarm) SetCluster(v HyperflexClusterRelationship) {
-	o.Cluster = &v
+	o.Cluster.Set(&v)
+}
+
+// SetClusterNil sets the value for Cluster to be an explicit nil
+func (o *HyperflexAlarm) SetClusterNil() {
+	o.Cluster.Set(nil)
+}
+
+// UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
+func (o *HyperflexAlarm) UnsetCluster() {
+	o.Cluster.Unset()
 }
 
 func (o HyperflexAlarm) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexAlarm) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Acknowledged != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Acknowledged) {
 		toSerialize["Acknowledged"] = o.Acknowledged
 	}
-	if o.AcknowledgedBy != nil {
+	if !IsNil(o.AcknowledgedBy) {
 		toSerialize["AcknowledgedBy"] = o.AcknowledgedBy
 	}
-	if o.AcknowledgedTime != nil {
+	if !IsNil(o.AcknowledgedTime) {
 		toSerialize["AcknowledgedTime"] = o.AcknowledgedTime
 	}
-	if o.AcknowledgedTimeAsUtc != nil {
+	if !IsNil(o.AcknowledgedTimeAsUtc) {
 		toSerialize["AcknowledgedTimeAsUtc"] = o.AcknowledgedTimeAsUtc
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.EntityData != nil {
+	if !IsNil(o.EntityData) {
 		toSerialize["EntityData"] = o.EntityData
 	}
-	if o.EntityName != nil {
+	if !IsNil(o.EntityName) {
 		toSerialize["EntityName"] = o.EntityName
 	}
-	if o.EntityType != nil {
+	if !IsNil(o.EntityType) {
 		toSerialize["EntityType"] = o.EntityType
 	}
-	if o.EntityUuId != nil {
+	if !IsNil(o.EntityUuId) {
 		toSerialize["EntityUuId"] = o.EntityUuId
 	}
-	if o.Message != nil {
+	if !IsNil(o.Message) {
 		toSerialize["Message"] = o.Message
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.TriggeredTime != nil {
+	if !IsNil(o.TriggeredTime) {
 		toSerialize["TriggeredTime"] = o.TriggeredTime
 	}
-	if o.TriggeredTimeAsUtc != nil {
+	if !IsNil(o.TriggeredTimeAsUtc) {
 		toSerialize["TriggeredTimeAsUtc"] = o.TriggeredTimeAsUtc
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
 	if o.AncestorMos != nil {
 		toSerialize["AncestorMos"] = o.AncestorMos
 	}
-	if o.Cluster != nil {
-		toSerialize["Cluster"] = o.Cluster
+	if o.Cluster.IsSet() {
+		toSerialize["Cluster"] = o.Cluster.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexAlarm) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexAlarm) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexAlarmWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -790,13 +831,13 @@ func (o *HyperflexAlarm) UnmarshalJSON(bytes []byte) (err error) {
 		// The unique identifier for this alarm instance.
 		Uuid *string `json:"Uuid,omitempty"`
 		// An array of relationships to infraBaseCluster resources.
-		AncestorMos []InfraBaseClusterRelationship `json:"AncestorMos,omitempty"`
-		Cluster     *HyperflexClusterRelationship  `json:"Cluster,omitempty"`
+		AncestorMos []InfraBaseClusterRelationship       `json:"AncestorMos,omitempty"`
+		Cluster     NullableHyperflexClusterRelationship `json:"Cluster,omitempty"`
 	}
 
 	varHyperflexAlarmWithoutEmbeddedStruct := HyperflexAlarmWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexAlarmWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexAlarmWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexAlarm := _HyperflexAlarm{}
 		varHyperflexAlarm.ClassId = varHyperflexAlarmWithoutEmbeddedStruct.ClassId
@@ -825,7 +866,7 @@ func (o *HyperflexAlarm) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexAlarm := _HyperflexAlarm{}
 
-	err = json.Unmarshal(bytes, &varHyperflexAlarm)
+	err = json.Unmarshal(data, &varHyperflexAlarm)
 	if err == nil {
 		o.MoBaseMo = varHyperflexAlarm.MoBaseMo
 	} else {
@@ -834,7 +875,7 @@ func (o *HyperflexAlarm) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Acknowledged")

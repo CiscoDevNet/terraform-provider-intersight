@@ -19,14 +19,15 @@ Name | Type | Description | Notes
 **ReadOnly** | Pointer to **bool** | Flag reported by devices to indicate an administrator of the device has disabled management operations of the device connector and only monitoring is permitted. | [optional] [readonly] 
 **Serial** | Pointer to **[]string** |  | [optional] 
 **Vendor** | Pointer to **string** | The vendor of the managed device. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**ClaimedByUser** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**ClaimedByUser** | Pointer to [**NullableIamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 **ClusterMembers** | Pointer to [**[]AssetClusterMemberRelationship**](AssetClusterMemberRelationship.md) | An array of relationships to assetClusterMember resources. | [optional] [readonly] 
-**DeviceClaim** | Pointer to [**AssetDeviceClaimRelationship**](AssetDeviceClaimRelationship.md) |  | [optional] 
-**DeviceConfiguration** | Pointer to [**AssetDeviceConfigurationRelationship**](AssetDeviceConfigurationRelationship.md) |  | [optional] 
-**DomainGroup** | Pointer to [**IamDomainGroupRelationship**](IamDomainGroupRelationship.md) |  | [optional] 
-**ParentConnection** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Target** | Pointer to [**AssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
+**CustomPermissionResources** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
+**DeviceClaim** | Pointer to [**NullableAssetDeviceClaimRelationship**](AssetDeviceClaimRelationship.md) |  | [optional] 
+**DeviceConfiguration** | Pointer to [**NullableAssetDeviceConfigurationRelationship**](AssetDeviceConfigurationRelationship.md) |  | [optional] 
+**DomainGroup** | Pointer to [**NullableIamDomainGroupRelationship**](IamDomainGroupRelationship.md) |  | [optional] 
+**ParentConnection** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Target** | Pointer to [**NullableAssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -487,6 +488,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *AssetDeviceRegistration) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *AssetDeviceRegistration) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetClaimedByUser
 
 `func (o *AssetDeviceRegistration) GetClaimedByUser() IamUserRelationship`
@@ -512,6 +523,16 @@ SetClaimedByUser sets ClaimedByUser field to given value.
 
 HasClaimedByUser returns a boolean if a field has been set.
 
+### SetClaimedByUserNil
+
+`func (o *AssetDeviceRegistration) SetClaimedByUserNil(b bool)`
+
+ SetClaimedByUserNil sets the value for ClaimedByUser to be an explicit nil
+
+### UnsetClaimedByUser
+`func (o *AssetDeviceRegistration) UnsetClaimedByUser()`
+
+UnsetClaimedByUser ensures that no value is present for ClaimedByUser, not even an explicit nil
 ### GetClusterMembers
 
 `func (o *AssetDeviceRegistration) GetClusterMembers() []AssetClusterMemberRelationship`
@@ -547,6 +568,41 @@ HasClusterMembers returns a boolean if a field has been set.
 `func (o *AssetDeviceRegistration) UnsetClusterMembers()`
 
 UnsetClusterMembers ensures that no value is present for ClusterMembers, not even an explicit nil
+### GetCustomPermissionResources
+
+`func (o *AssetDeviceRegistration) GetCustomPermissionResources() []MoBaseMoRelationship`
+
+GetCustomPermissionResources returns the CustomPermissionResources field if non-nil, zero value otherwise.
+
+### GetCustomPermissionResourcesOk
+
+`func (o *AssetDeviceRegistration) GetCustomPermissionResourcesOk() (*[]MoBaseMoRelationship, bool)`
+
+GetCustomPermissionResourcesOk returns a tuple with the CustomPermissionResources field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomPermissionResources
+
+`func (o *AssetDeviceRegistration) SetCustomPermissionResources(v []MoBaseMoRelationship)`
+
+SetCustomPermissionResources sets CustomPermissionResources field to given value.
+
+### HasCustomPermissionResources
+
+`func (o *AssetDeviceRegistration) HasCustomPermissionResources() bool`
+
+HasCustomPermissionResources returns a boolean if a field has been set.
+
+### SetCustomPermissionResourcesNil
+
+`func (o *AssetDeviceRegistration) SetCustomPermissionResourcesNil(b bool)`
+
+ SetCustomPermissionResourcesNil sets the value for CustomPermissionResources to be an explicit nil
+
+### UnsetCustomPermissionResources
+`func (o *AssetDeviceRegistration) UnsetCustomPermissionResources()`
+
+UnsetCustomPermissionResources ensures that no value is present for CustomPermissionResources, not even an explicit nil
 ### GetDeviceClaim
 
 `func (o *AssetDeviceRegistration) GetDeviceClaim() AssetDeviceClaimRelationship`
@@ -572,6 +628,16 @@ SetDeviceClaim sets DeviceClaim field to given value.
 
 HasDeviceClaim returns a boolean if a field has been set.
 
+### SetDeviceClaimNil
+
+`func (o *AssetDeviceRegistration) SetDeviceClaimNil(b bool)`
+
+ SetDeviceClaimNil sets the value for DeviceClaim to be an explicit nil
+
+### UnsetDeviceClaim
+`func (o *AssetDeviceRegistration) UnsetDeviceClaim()`
+
+UnsetDeviceClaim ensures that no value is present for DeviceClaim, not even an explicit nil
 ### GetDeviceConfiguration
 
 `func (o *AssetDeviceRegistration) GetDeviceConfiguration() AssetDeviceConfigurationRelationship`
@@ -597,6 +663,16 @@ SetDeviceConfiguration sets DeviceConfiguration field to given value.
 
 HasDeviceConfiguration returns a boolean if a field has been set.
 
+### SetDeviceConfigurationNil
+
+`func (o *AssetDeviceRegistration) SetDeviceConfigurationNil(b bool)`
+
+ SetDeviceConfigurationNil sets the value for DeviceConfiguration to be an explicit nil
+
+### UnsetDeviceConfiguration
+`func (o *AssetDeviceRegistration) UnsetDeviceConfiguration()`
+
+UnsetDeviceConfiguration ensures that no value is present for DeviceConfiguration, not even an explicit nil
 ### GetDomainGroup
 
 `func (o *AssetDeviceRegistration) GetDomainGroup() IamDomainGroupRelationship`
@@ -622,6 +698,16 @@ SetDomainGroup sets DomainGroup field to given value.
 
 HasDomainGroup returns a boolean if a field has been set.
 
+### SetDomainGroupNil
+
+`func (o *AssetDeviceRegistration) SetDomainGroupNil(b bool)`
+
+ SetDomainGroupNil sets the value for DomainGroup to be an explicit nil
+
+### UnsetDomainGroup
+`func (o *AssetDeviceRegistration) UnsetDomainGroup()`
+
+UnsetDomainGroup ensures that no value is present for DomainGroup, not even an explicit nil
 ### GetParentConnection
 
 `func (o *AssetDeviceRegistration) GetParentConnection() AssetDeviceRegistrationRelationship`
@@ -647,6 +733,16 @@ SetParentConnection sets ParentConnection field to given value.
 
 HasParentConnection returns a boolean if a field has been set.
 
+### SetParentConnectionNil
+
+`func (o *AssetDeviceRegistration) SetParentConnectionNil(b bool)`
+
+ SetParentConnectionNil sets the value for ParentConnection to be an explicit nil
+
+### UnsetParentConnection
+`func (o *AssetDeviceRegistration) UnsetParentConnection()`
+
+UnsetParentConnection ensures that no value is present for ParentConnection, not even an explicit nil
 ### GetTarget
 
 `func (o *AssetDeviceRegistration) GetTarget() AssetTargetRelationship`
@@ -672,6 +768,16 @@ SetTarget sets Target field to given value.
 
 HasTarget returns a boolean if a field has been set.
 
+### SetTargetNil
+
+`func (o *AssetDeviceRegistration) SetTargetNil(b bool)`
+
+ SetTargetNil sets the value for Target to be an explicit nil
+
+### UnsetTarget
+`func (o *AssetDeviceRegistration) UnsetTarget()`
+
+UnsetTarget ensures that no value is present for Target, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

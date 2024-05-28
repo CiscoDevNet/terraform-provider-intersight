@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the ApplianceImageBundle type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceImageBundle{}
 
 // ApplianceImageBundle ImageBundle keeps track of all the software bundles installed in the Intersight Appliances. Each ImageBundle managed object is derived from a software upgrade manifest. ImageBundle has additional properties computed during the manifest processing. Additional properties are the dynamic attributes of the software packages declared in the software manifest. For example, SHA256 values of the software packages are computed during the software manifest processing. An ImageBundle managed object named 'current' is always present in the Intersight Appliance. The software upgrade service creates another ImageBundle managed object named 'pending' when there is a pending software upgrade. The upgrade service renames the 'pending' bundle to the 'current' bundle after the software upgrade is successful.
 type ApplianceImageBundle struct {
@@ -153,7 +157,7 @@ func (o *ApplianceImageBundle) GetAnsiblePackages() []OnpremImagePackage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceImageBundle) GetAnsiblePackagesOk() ([]OnpremImagePackage, bool) {
-	if o == nil || o.AnsiblePackages == nil {
+	if o == nil || IsNil(o.AnsiblePackages) {
 		return nil, false
 	}
 	return o.AnsiblePackages, true
@@ -161,7 +165,7 @@ func (o *ApplianceImageBundle) GetAnsiblePackagesOk() ([]OnpremImagePackage, boo
 
 // HasAnsiblePackages returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasAnsiblePackages() bool {
-	if o != nil && o.AnsiblePackages != nil {
+	if o != nil && IsNil(o.AnsiblePackages) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *ApplianceImageBundle) SetAnsiblePackages(v []OnpremImagePackage) {
 
 // GetAutoUpgrade returns the AutoUpgrade field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetAutoUpgrade() bool {
-	if o == nil || o.AutoUpgrade == nil {
+	if o == nil || IsNil(o.AutoUpgrade) {
 		var ret bool
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *ApplianceImageBundle) GetAutoUpgrade() bool {
 // GetAutoUpgradeOk returns a tuple with the AutoUpgrade field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetAutoUpgradeOk() (*bool, bool) {
-	if o == nil || o.AutoUpgrade == nil {
+	if o == nil || IsNil(o.AutoUpgrade) {
 		return nil, false
 	}
 	return o.AutoUpgrade, true
@@ -193,7 +197,7 @@ func (o *ApplianceImageBundle) GetAutoUpgradeOk() (*bool, bool) {
 
 // HasAutoUpgrade returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasAutoUpgrade() bool {
-	if o != nil && o.AutoUpgrade != nil {
+	if o != nil && !IsNil(o.AutoUpgrade) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *ApplianceImageBundle) GetDcPackages() []OnpremImagePackage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceImageBundle) GetDcPackagesOk() ([]OnpremImagePackage, bool) {
-	if o == nil || o.DcPackages == nil {
+	if o == nil || IsNil(o.DcPackages) {
 		return nil, false
 	}
 	return o.DcPackages, true
@@ -226,7 +230,7 @@ func (o *ApplianceImageBundle) GetDcPackagesOk() ([]OnpremImagePackage, bool) {
 
 // HasDcPackages returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasDcPackages() bool {
-	if o != nil && o.DcPackages != nil {
+	if o != nil && IsNil(o.DcPackages) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *ApplianceImageBundle) GetDebugPackages() []OnpremImagePackage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceImageBundle) GetDebugPackagesOk() ([]OnpremImagePackage, bool) {
-	if o == nil || o.DebugPackages == nil {
+	if o == nil || IsNil(o.DebugPackages) {
 		return nil, false
 	}
 	return o.DebugPackages, true
@@ -259,7 +263,7 @@ func (o *ApplianceImageBundle) GetDebugPackagesOk() ([]OnpremImagePackage, bool)
 
 // HasDebugPackages returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasDebugPackages() bool {
-	if o != nil && o.DebugPackages != nil {
+	if o != nil && IsNil(o.DebugPackages) {
 		return true
 	}
 
@@ -273,7 +277,7 @@ func (o *ApplianceImageBundle) SetDebugPackages(v []OnpremImagePackage) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -283,7 +287,7 @@ func (o *ApplianceImageBundle) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -291,7 +295,7 @@ func (o *ApplianceImageBundle) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *ApplianceImageBundle) GetEndpointPackages() []OnpremImagePackage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceImageBundle) GetEndpointPackagesOk() ([]OnpremImagePackage, bool) {
-	if o == nil || o.EndpointPackages == nil {
+	if o == nil || IsNil(o.EndpointPackages) {
 		return nil, false
 	}
 	return o.EndpointPackages, true
@@ -324,7 +328,7 @@ func (o *ApplianceImageBundle) GetEndpointPackagesOk() ([]OnpremImagePackage, bo
 
 // HasEndpointPackages returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasEndpointPackages() bool {
-	if o != nil && o.EndpointPackages != nil {
+	if o != nil && IsNil(o.EndpointPackages) {
 		return true
 	}
 
@@ -338,7 +342,7 @@ func (o *ApplianceImageBundle) SetEndpointPackages(v []OnpremImagePackage) {
 
 // GetFingerprint returns the Fingerprint field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetFingerprint() string {
-	if o == nil || o.Fingerprint == nil {
+	if o == nil || IsNil(o.Fingerprint) {
 		var ret string
 		return ret
 	}
@@ -348,7 +352,7 @@ func (o *ApplianceImageBundle) GetFingerprint() string {
 // GetFingerprintOk returns a tuple with the Fingerprint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetFingerprintOk() (*string, bool) {
-	if o == nil || o.Fingerprint == nil {
+	if o == nil || IsNil(o.Fingerprint) {
 		return nil, false
 	}
 	return o.Fingerprint, true
@@ -356,7 +360,7 @@ func (o *ApplianceImageBundle) GetFingerprintOk() (*string, bool) {
 
 // HasFingerprint returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasFingerprint() bool {
-	if o != nil && o.Fingerprint != nil {
+	if o != nil && !IsNil(o.Fingerprint) {
 		return true
 	}
 
@@ -370,7 +374,7 @@ func (o *ApplianceImageBundle) SetFingerprint(v string) {
 
 // GetHasError returns the HasError field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetHasError() bool {
-	if o == nil || o.HasError == nil {
+	if o == nil || IsNil(o.HasError) {
 		var ret bool
 		return ret
 	}
@@ -380,7 +384,7 @@ func (o *ApplianceImageBundle) GetHasError() bool {
 // GetHasErrorOk returns a tuple with the HasError field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetHasErrorOk() (*bool, bool) {
-	if o == nil || o.HasError == nil {
+	if o == nil || IsNil(o.HasError) {
 		return nil, false
 	}
 	return o.HasError, true
@@ -388,7 +392,7 @@ func (o *ApplianceImageBundle) GetHasErrorOk() (*bool, bool) {
 
 // HasHasError returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasHasError() bool {
-	if o != nil && o.HasError != nil {
+	if o != nil && !IsNil(o.HasError) {
 		return true
 	}
 
@@ -413,7 +417,7 @@ func (o *ApplianceImageBundle) GetInfraPackages() []OnpremImagePackage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceImageBundle) GetInfraPackagesOk() ([]OnpremImagePackage, bool) {
-	if o == nil || o.InfraPackages == nil {
+	if o == nil || IsNil(o.InfraPackages) {
 		return nil, false
 	}
 	return o.InfraPackages, true
@@ -421,7 +425,7 @@ func (o *ApplianceImageBundle) GetInfraPackagesOk() ([]OnpremImagePackage, bool)
 
 // HasInfraPackages returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasInfraPackages() bool {
-	if o != nil && o.InfraPackages != nil {
+	if o != nil && IsNil(o.InfraPackages) {
 		return true
 	}
 
@@ -446,7 +450,7 @@ func (o *ApplianceImageBundle) GetInitPackages() []OnpremImagePackage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceImageBundle) GetInitPackagesOk() ([]OnpremImagePackage, bool) {
-	if o == nil || o.InitPackages == nil {
+	if o == nil || IsNil(o.InitPackages) {
 		return nil, false
 	}
 	return o.InitPackages, true
@@ -454,7 +458,7 @@ func (o *ApplianceImageBundle) GetInitPackagesOk() ([]OnpremImagePackage, bool) 
 
 // HasInitPackages returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasInitPackages() bool {
-	if o != nil && o.InitPackages != nil {
+	if o != nil && IsNil(o.InitPackages) {
 		return true
 	}
 
@@ -468,7 +472,7 @@ func (o *ApplianceImageBundle) SetInitPackages(v []OnpremImagePackage) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -478,7 +482,7 @@ func (o *ApplianceImageBundle) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -486,7 +490,7 @@ func (o *ApplianceImageBundle) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -500,7 +504,7 @@ func (o *ApplianceImageBundle) SetName(v string) {
 
 // GetNotes returns the Notes field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetNotes() string {
-	if o == nil || o.Notes == nil {
+	if o == nil || IsNil(o.Notes) {
 		var ret string
 		return ret
 	}
@@ -510,7 +514,7 @@ func (o *ApplianceImageBundle) GetNotes() string {
 // GetNotesOk returns a tuple with the Notes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetNotesOk() (*string, bool) {
-	if o == nil || o.Notes == nil {
+	if o == nil || IsNil(o.Notes) {
 		return nil, false
 	}
 	return o.Notes, true
@@ -518,7 +522,7 @@ func (o *ApplianceImageBundle) GetNotesOk() (*string, bool) {
 
 // HasNotes returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasNotes() bool {
-	if o != nil && o.Notes != nil {
+	if o != nil && !IsNil(o.Notes) {
 		return true
 	}
 
@@ -532,7 +536,7 @@ func (o *ApplianceImageBundle) SetNotes(v string) {
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetPriority() string {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		var ret string
 		return ret
 	}
@@ -542,7 +546,7 @@ func (o *ApplianceImageBundle) GetPriority() string {
 // GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetPriorityOk() (*string, bool) {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
 	return o.Priority, true
@@ -550,7 +554,7 @@ func (o *ApplianceImageBundle) GetPriorityOk() (*string, bool) {
 
 // HasPriority returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasPriority() bool {
-	if o != nil && o.Priority != nil {
+	if o != nil && !IsNil(o.Priority) {
 		return true
 	}
 
@@ -564,7 +568,7 @@ func (o *ApplianceImageBundle) SetPriority(v string) {
 
 // GetReleaseTime returns the ReleaseTime field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetReleaseTime() time.Time {
-	if o == nil || o.ReleaseTime == nil {
+	if o == nil || IsNil(o.ReleaseTime) {
 		var ret time.Time
 		return ret
 	}
@@ -574,7 +578,7 @@ func (o *ApplianceImageBundle) GetReleaseTime() time.Time {
 // GetReleaseTimeOk returns a tuple with the ReleaseTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetReleaseTimeOk() (*time.Time, bool) {
-	if o == nil || o.ReleaseTime == nil {
+	if o == nil || IsNil(o.ReleaseTime) {
 		return nil, false
 	}
 	return o.ReleaseTime, true
@@ -582,7 +586,7 @@ func (o *ApplianceImageBundle) GetReleaseTimeOk() (*time.Time, bool) {
 
 // HasReleaseTime returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasReleaseTime() bool {
-	if o != nil && o.ReleaseTime != nil {
+	if o != nil && !IsNil(o.ReleaseTime) {
 		return true
 	}
 
@@ -607,7 +611,7 @@ func (o *ApplianceImageBundle) GetServicePackages() []OnpremImagePackage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceImageBundle) GetServicePackagesOk() ([]OnpremImagePackage, bool) {
-	if o == nil || o.ServicePackages == nil {
+	if o == nil || IsNil(o.ServicePackages) {
 		return nil, false
 	}
 	return o.ServicePackages, true
@@ -615,7 +619,7 @@ func (o *ApplianceImageBundle) GetServicePackagesOk() ([]OnpremImagePackage, boo
 
 // HasServicePackages returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasServicePackages() bool {
-	if o != nil && o.ServicePackages != nil {
+	if o != nil && IsNil(o.ServicePackages) {
 		return true
 	}
 
@@ -629,7 +633,7 @@ func (o *ApplianceImageBundle) SetServicePackages(v []OnpremImagePackage) {
 
 // GetStatusMessage returns the StatusMessage field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetStatusMessage() string {
-	if o == nil || o.StatusMessage == nil {
+	if o == nil || IsNil(o.StatusMessage) {
 		var ret string
 		return ret
 	}
@@ -639,7 +643,7 @@ func (o *ApplianceImageBundle) GetStatusMessage() string {
 // GetStatusMessageOk returns a tuple with the StatusMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetStatusMessageOk() (*string, bool) {
-	if o == nil || o.StatusMessage == nil {
+	if o == nil || IsNil(o.StatusMessage) {
 		return nil, false
 	}
 	return o.StatusMessage, true
@@ -647,7 +651,7 @@ func (o *ApplianceImageBundle) GetStatusMessageOk() (*string, bool) {
 
 // HasStatusMessage returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasStatusMessage() bool {
-	if o != nil && o.StatusMessage != nil {
+	if o != nil && !IsNil(o.StatusMessage) {
 		return true
 	}
 
@@ -672,7 +676,7 @@ func (o *ApplianceImageBundle) GetSystemPackages() []OnpremImagePackage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceImageBundle) GetSystemPackagesOk() ([]OnpremImagePackage, bool) {
-	if o == nil || o.SystemPackages == nil {
+	if o == nil || IsNil(o.SystemPackages) {
 		return nil, false
 	}
 	return o.SystemPackages, true
@@ -680,7 +684,7 @@ func (o *ApplianceImageBundle) GetSystemPackagesOk() ([]OnpremImagePackage, bool
 
 // HasSystemPackages returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasSystemPackages() bool {
-	if o != nil && o.SystemPackages != nil {
+	if o != nil && IsNil(o.SystemPackages) {
 		return true
 	}
 
@@ -705,7 +709,7 @@ func (o *ApplianceImageBundle) GetUiPackages() []OnpremImagePackage {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceImageBundle) GetUiPackagesOk() ([]OnpremImagePackage, bool) {
-	if o == nil || o.UiPackages == nil {
+	if o == nil || IsNil(o.UiPackages) {
 		return nil, false
 	}
 	return o.UiPackages, true
@@ -713,7 +717,7 @@ func (o *ApplianceImageBundle) GetUiPackagesOk() ([]OnpremImagePackage, bool) {
 
 // HasUiPackages returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasUiPackages() bool {
-	if o != nil && o.UiPackages != nil {
+	if o != nil && IsNil(o.UiPackages) {
 		return true
 	}
 
@@ -727,7 +731,7 @@ func (o *ApplianceImageBundle) SetUiPackages(v []OnpremImagePackage) {
 
 // GetUpgradeEndTime returns the UpgradeEndTime field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetUpgradeEndTime() time.Time {
-	if o == nil || o.UpgradeEndTime == nil {
+	if o == nil || IsNil(o.UpgradeEndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -737,7 +741,7 @@ func (o *ApplianceImageBundle) GetUpgradeEndTime() time.Time {
 // GetUpgradeEndTimeOk returns a tuple with the UpgradeEndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetUpgradeEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.UpgradeEndTime == nil {
+	if o == nil || IsNil(o.UpgradeEndTime) {
 		return nil, false
 	}
 	return o.UpgradeEndTime, true
@@ -745,7 +749,7 @@ func (o *ApplianceImageBundle) GetUpgradeEndTimeOk() (*time.Time, bool) {
 
 // HasUpgradeEndTime returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasUpgradeEndTime() bool {
-	if o != nil && o.UpgradeEndTime != nil {
+	if o != nil && !IsNil(o.UpgradeEndTime) {
 		return true
 	}
 
@@ -759,7 +763,7 @@ func (o *ApplianceImageBundle) SetUpgradeEndTime(v time.Time) {
 
 // GetUpgradeGracePeriod returns the UpgradeGracePeriod field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetUpgradeGracePeriod() int64 {
-	if o == nil || o.UpgradeGracePeriod == nil {
+	if o == nil || IsNil(o.UpgradeGracePeriod) {
 		var ret int64
 		return ret
 	}
@@ -769,7 +773,7 @@ func (o *ApplianceImageBundle) GetUpgradeGracePeriod() int64 {
 // GetUpgradeGracePeriodOk returns a tuple with the UpgradeGracePeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetUpgradeGracePeriodOk() (*int64, bool) {
-	if o == nil || o.UpgradeGracePeriod == nil {
+	if o == nil || IsNil(o.UpgradeGracePeriod) {
 		return nil, false
 	}
 	return o.UpgradeGracePeriod, true
@@ -777,7 +781,7 @@ func (o *ApplianceImageBundle) GetUpgradeGracePeriodOk() (*int64, bool) {
 
 // HasUpgradeGracePeriod returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasUpgradeGracePeriod() bool {
-	if o != nil && o.UpgradeGracePeriod != nil {
+	if o != nil && !IsNil(o.UpgradeGracePeriod) {
 		return true
 	}
 
@@ -791,7 +795,7 @@ func (o *ApplianceImageBundle) SetUpgradeGracePeriod(v int64) {
 
 // GetUpgradeImpactDuration returns the UpgradeImpactDuration field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetUpgradeImpactDuration() int64 {
-	if o == nil || o.UpgradeImpactDuration == nil {
+	if o == nil || IsNil(o.UpgradeImpactDuration) {
 		var ret int64
 		return ret
 	}
@@ -801,7 +805,7 @@ func (o *ApplianceImageBundle) GetUpgradeImpactDuration() int64 {
 // GetUpgradeImpactDurationOk returns a tuple with the UpgradeImpactDuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetUpgradeImpactDurationOk() (*int64, bool) {
-	if o == nil || o.UpgradeImpactDuration == nil {
+	if o == nil || IsNil(o.UpgradeImpactDuration) {
 		return nil, false
 	}
 	return o.UpgradeImpactDuration, true
@@ -809,7 +813,7 @@ func (o *ApplianceImageBundle) GetUpgradeImpactDurationOk() (*int64, bool) {
 
 // HasUpgradeImpactDuration returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasUpgradeImpactDuration() bool {
-	if o != nil && o.UpgradeImpactDuration != nil {
+	if o != nil && !IsNil(o.UpgradeImpactDuration) {
 		return true
 	}
 
@@ -823,7 +827,7 @@ func (o *ApplianceImageBundle) SetUpgradeImpactDuration(v int64) {
 
 // GetUpgradeImpactEnum returns the UpgradeImpactEnum field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetUpgradeImpactEnum() string {
-	if o == nil || o.UpgradeImpactEnum == nil {
+	if o == nil || IsNil(o.UpgradeImpactEnum) {
 		var ret string
 		return ret
 	}
@@ -833,7 +837,7 @@ func (o *ApplianceImageBundle) GetUpgradeImpactEnum() string {
 // GetUpgradeImpactEnumOk returns a tuple with the UpgradeImpactEnum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetUpgradeImpactEnumOk() (*string, bool) {
-	if o == nil || o.UpgradeImpactEnum == nil {
+	if o == nil || IsNil(o.UpgradeImpactEnum) {
 		return nil, false
 	}
 	return o.UpgradeImpactEnum, true
@@ -841,7 +845,7 @@ func (o *ApplianceImageBundle) GetUpgradeImpactEnumOk() (*string, bool) {
 
 // HasUpgradeImpactEnum returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasUpgradeImpactEnum() bool {
-	if o != nil && o.UpgradeImpactEnum != nil {
+	if o != nil && !IsNil(o.UpgradeImpactEnum) {
 		return true
 	}
 
@@ -855,7 +859,7 @@ func (o *ApplianceImageBundle) SetUpgradeImpactEnum(v string) {
 
 // GetUpgradeStartTime returns the UpgradeStartTime field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetUpgradeStartTime() time.Time {
-	if o == nil || o.UpgradeStartTime == nil {
+	if o == nil || IsNil(o.UpgradeStartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -865,7 +869,7 @@ func (o *ApplianceImageBundle) GetUpgradeStartTime() time.Time {
 // GetUpgradeStartTimeOk returns a tuple with the UpgradeStartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetUpgradeStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.UpgradeStartTime == nil {
+	if o == nil || IsNil(o.UpgradeStartTime) {
 		return nil, false
 	}
 	return o.UpgradeStartTime, true
@@ -873,7 +877,7 @@ func (o *ApplianceImageBundle) GetUpgradeStartTimeOk() (*time.Time, bool) {
 
 // HasUpgradeStartTime returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasUpgradeStartTime() bool {
-	if o != nil && o.UpgradeStartTime != nil {
+	if o != nil && !IsNil(o.UpgradeStartTime) {
 		return true
 	}
 
@@ -887,7 +891,7 @@ func (o *ApplianceImageBundle) SetUpgradeStartTime(v time.Time) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *ApplianceImageBundle) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -897,7 +901,7 @@ func (o *ApplianceImageBundle) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceImageBundle) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -905,7 +909,7 @@ func (o *ApplianceImageBundle) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *ApplianceImageBundle) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -918,25 +922,29 @@ func (o *ApplianceImageBundle) SetVersion(v string) {
 }
 
 func (o ApplianceImageBundle) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceImageBundle) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AnsiblePackages != nil {
 		toSerialize["AnsiblePackages"] = o.AnsiblePackages
 	}
-	if o.AutoUpgrade != nil {
+	if !IsNil(o.AutoUpgrade) {
 		toSerialize["AutoUpgrade"] = o.AutoUpgrade
 	}
 	if o.DcPackages != nil {
@@ -945,16 +953,16 @@ func (o ApplianceImageBundle) MarshalJSON() ([]byte, error) {
 	if o.DebugPackages != nil {
 		toSerialize["DebugPackages"] = o.DebugPackages
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
 	if o.EndpointPackages != nil {
 		toSerialize["EndpointPackages"] = o.EndpointPackages
 	}
-	if o.Fingerprint != nil {
+	if !IsNil(o.Fingerprint) {
 		toSerialize["Fingerprint"] = o.Fingerprint
 	}
-	if o.HasError != nil {
+	if !IsNil(o.HasError) {
 		toSerialize["HasError"] = o.HasError
 	}
 	if o.InfraPackages != nil {
@@ -963,22 +971,22 @@ func (o ApplianceImageBundle) MarshalJSON() ([]byte, error) {
 	if o.InitPackages != nil {
 		toSerialize["InitPackages"] = o.InitPackages
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Notes != nil {
+	if !IsNil(o.Notes) {
 		toSerialize["Notes"] = o.Notes
 	}
-	if o.Priority != nil {
+	if !IsNil(o.Priority) {
 		toSerialize["Priority"] = o.Priority
 	}
-	if o.ReleaseTime != nil {
+	if !IsNil(o.ReleaseTime) {
 		toSerialize["ReleaseTime"] = o.ReleaseTime
 	}
 	if o.ServicePackages != nil {
 		toSerialize["ServicePackages"] = o.ServicePackages
 	}
-	if o.StatusMessage != nil {
+	if !IsNil(o.StatusMessage) {
 		toSerialize["StatusMessage"] = o.StatusMessage
 	}
 	if o.SystemPackages != nil {
@@ -987,22 +995,22 @@ func (o ApplianceImageBundle) MarshalJSON() ([]byte, error) {
 	if o.UiPackages != nil {
 		toSerialize["UiPackages"] = o.UiPackages
 	}
-	if o.UpgradeEndTime != nil {
+	if !IsNil(o.UpgradeEndTime) {
 		toSerialize["UpgradeEndTime"] = o.UpgradeEndTime
 	}
-	if o.UpgradeGracePeriod != nil {
+	if !IsNil(o.UpgradeGracePeriod) {
 		toSerialize["UpgradeGracePeriod"] = o.UpgradeGracePeriod
 	}
-	if o.UpgradeImpactDuration != nil {
+	if !IsNil(o.UpgradeImpactDuration) {
 		toSerialize["UpgradeImpactDuration"] = o.UpgradeImpactDuration
 	}
-	if o.UpgradeImpactEnum != nil {
+	if !IsNil(o.UpgradeImpactEnum) {
 		toSerialize["UpgradeImpactEnum"] = o.UpgradeImpactEnum
 	}
-	if o.UpgradeStartTime != nil {
+	if !IsNil(o.UpgradeStartTime) {
 		toSerialize["UpgradeStartTime"] = o.UpgradeStartTime
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 
@@ -1010,10 +1018,32 @@ func (o ApplianceImageBundle) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceImageBundle) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceImageBundle) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceImageBundleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1062,7 +1092,7 @@ func (o *ApplianceImageBundle) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceImageBundleWithoutEmbeddedStruct := ApplianceImageBundleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceImageBundleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceImageBundleWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceImageBundle := _ApplianceImageBundle{}
 		varApplianceImageBundle.ClassId = varApplianceImageBundleWithoutEmbeddedStruct.ClassId
@@ -1098,7 +1128,7 @@ func (o *ApplianceImageBundle) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceImageBundle := _ApplianceImageBundle{}
 
-	err = json.Unmarshal(bytes, &varApplianceImageBundle)
+	err = json.Unmarshal(data, &varApplianceImageBundle)
 	if err == nil {
 		o.MoBaseMo = varApplianceImageBundle.MoBaseMo
 	} else {
@@ -1107,7 +1137,7 @@ func (o *ApplianceImageBundle) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AnsiblePackages")

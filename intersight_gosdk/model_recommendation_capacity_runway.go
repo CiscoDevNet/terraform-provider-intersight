@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the RecommendationCapacityRunway type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RecommendationCapacityRunway{}
 
 // RecommendationCapacityRunway Entity representing the new capacity runway based on recommendations.
 type RecommendationCapacityRunway struct {
@@ -33,11 +37,11 @@ type RecommendationCapacityRunway struct {
 	// Total capacity of the cluster after the recommended hardware is added.
 	TotalCapacity *int64 `json:"TotalCapacity,omitempty"`
 	// Unit for the new capacity. * `TB` - The Enum value TB represents that the measurement unit is in terabytes. * `MB` - The Enum value MB represents that the measurement unit is in megabytes. * `GB` - The Enum value GB represents that the measurement unit is in gigabytes. * `MHz` - The Enum value MHz represents that the measurement unit is in megahertz. * `GHz` - The Enum value GHz represents that the measurement unit is in gigahertz. * `Percentage` - The Enum value Percentage represents that the expansion request is in the percentage of resource increase. For example, a 20% increase in CPU capacity.
-	Unit             *string                       `json:"Unit,omitempty"`
-	ForecastInstance *ForecastInstanceRelationship `json:"ForecastInstance,omitempty"`
+	Unit             *string                              `json:"Unit,omitempty"`
+	ForecastInstance NullableForecastInstanceRelationship `json:"ForecastInstance,omitempty"`
 	// An array of relationships to recommendationPhysicalItem resources.
-	PhysicalItem         []RecommendationPhysicalItemRelationship `json:"PhysicalItem,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
+	PhysicalItem         []RecommendationPhysicalItemRelationship    `json:"PhysicalItem,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -116,7 +120,7 @@ func (o *RecommendationCapacityRunway) SetObjectType(v string) {
 
 // GetAdditionalCapacity returns the AdditionalCapacity field value if set, zero value otherwise.
 func (o *RecommendationCapacityRunway) GetAdditionalCapacity() int64 {
-	if o == nil || o.AdditionalCapacity == nil {
+	if o == nil || IsNil(o.AdditionalCapacity) {
 		var ret int64
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *RecommendationCapacityRunway) GetAdditionalCapacity() int64 {
 // GetAdditionalCapacityOk returns a tuple with the AdditionalCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationCapacityRunway) GetAdditionalCapacityOk() (*int64, bool) {
-	if o == nil || o.AdditionalCapacity == nil {
+	if o == nil || IsNil(o.AdditionalCapacity) {
 		return nil, false
 	}
 	return o.AdditionalCapacity, true
@@ -134,7 +138,7 @@ func (o *RecommendationCapacityRunway) GetAdditionalCapacityOk() (*int64, bool) 
 
 // HasAdditionalCapacity returns a boolean if a field has been set.
 func (o *RecommendationCapacityRunway) HasAdditionalCapacity() bool {
-	if o != nil && o.AdditionalCapacity != nil {
+	if o != nil && !IsNil(o.AdditionalCapacity) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *RecommendationCapacityRunway) SetAdditionalCapacity(v int64) {
 
 // GetPeriod returns the Period field value if set, zero value otherwise.
 func (o *RecommendationCapacityRunway) GetPeriod() int64 {
-	if o == nil || o.Period == nil {
+	if o == nil || IsNil(o.Period) {
 		var ret int64
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *RecommendationCapacityRunway) GetPeriod() int64 {
 // GetPeriodOk returns a tuple with the Period field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationCapacityRunway) GetPeriodOk() (*int64, bool) {
-	if o == nil || o.Period == nil {
+	if o == nil || IsNil(o.Period) {
 		return nil, false
 	}
 	return o.Period, true
@@ -166,7 +170,7 @@ func (o *RecommendationCapacityRunway) GetPeriodOk() (*int64, bool) {
 
 // HasPeriod returns a boolean if a field has been set.
 func (o *RecommendationCapacityRunway) HasPeriod() bool {
-	if o != nil && o.Period != nil {
+	if o != nil && !IsNil(o.Period) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *RecommendationCapacityRunway) SetPeriod(v int64) {
 
 // GetRunway returns the Runway field value if set, zero value otherwise.
 func (o *RecommendationCapacityRunway) GetRunway() int64 {
-	if o == nil || o.Runway == nil {
+	if o == nil || IsNil(o.Runway) {
 		var ret int64
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *RecommendationCapacityRunway) GetRunway() int64 {
 // GetRunwayOk returns a tuple with the Runway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationCapacityRunway) GetRunwayOk() (*int64, bool) {
-	if o == nil || o.Runway == nil {
+	if o == nil || IsNil(o.Runway) {
 		return nil, false
 	}
 	return o.Runway, true
@@ -198,7 +202,7 @@ func (o *RecommendationCapacityRunway) GetRunwayOk() (*int64, bool) {
 
 // HasRunway returns a boolean if a field has been set.
 func (o *RecommendationCapacityRunway) HasRunway() bool {
-	if o != nil && o.Runway != nil {
+	if o != nil && !IsNil(o.Runway) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *RecommendationCapacityRunway) SetRunway(v int64) {
 
 // GetTotalCapacity returns the TotalCapacity field value if set, zero value otherwise.
 func (o *RecommendationCapacityRunway) GetTotalCapacity() int64 {
-	if o == nil || o.TotalCapacity == nil {
+	if o == nil || IsNil(o.TotalCapacity) {
 		var ret int64
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *RecommendationCapacityRunway) GetTotalCapacity() int64 {
 // GetTotalCapacityOk returns a tuple with the TotalCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationCapacityRunway) GetTotalCapacityOk() (*int64, bool) {
-	if o == nil || o.TotalCapacity == nil {
+	if o == nil || IsNil(o.TotalCapacity) {
 		return nil, false
 	}
 	return o.TotalCapacity, true
@@ -230,7 +234,7 @@ func (o *RecommendationCapacityRunway) GetTotalCapacityOk() (*int64, bool) {
 
 // HasTotalCapacity returns a boolean if a field has been set.
 func (o *RecommendationCapacityRunway) HasTotalCapacity() bool {
-	if o != nil && o.TotalCapacity != nil {
+	if o != nil && !IsNil(o.TotalCapacity) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *RecommendationCapacityRunway) SetTotalCapacity(v int64) {
 
 // GetUnit returns the Unit field value if set, zero value otherwise.
 func (o *RecommendationCapacityRunway) GetUnit() string {
-	if o == nil || o.Unit == nil {
+	if o == nil || IsNil(o.Unit) {
 		var ret string
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *RecommendationCapacityRunway) GetUnit() string {
 // GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RecommendationCapacityRunway) GetUnitOk() (*string, bool) {
-	if o == nil || o.Unit == nil {
+	if o == nil || IsNil(o.Unit) {
 		return nil, false
 	}
 	return o.Unit, true
@@ -262,7 +266,7 @@ func (o *RecommendationCapacityRunway) GetUnitOk() (*string, bool) {
 
 // HasUnit returns a boolean if a field has been set.
 func (o *RecommendationCapacityRunway) HasUnit() bool {
-	if o != nil && o.Unit != nil {
+	if o != nil && !IsNil(o.Unit) {
 		return true
 	}
 
@@ -274,36 +278,47 @@ func (o *RecommendationCapacityRunway) SetUnit(v string) {
 	o.Unit = &v
 }
 
-// GetForecastInstance returns the ForecastInstance field value if set, zero value otherwise.
+// GetForecastInstance returns the ForecastInstance field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecommendationCapacityRunway) GetForecastInstance() ForecastInstanceRelationship {
-	if o == nil || o.ForecastInstance == nil {
+	if o == nil || IsNil(o.ForecastInstance.Get()) {
 		var ret ForecastInstanceRelationship
 		return ret
 	}
-	return *o.ForecastInstance
+	return *o.ForecastInstance.Get()
 }
 
 // GetForecastInstanceOk returns a tuple with the ForecastInstance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationCapacityRunway) GetForecastInstanceOk() (*ForecastInstanceRelationship, bool) {
-	if o == nil || o.ForecastInstance == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ForecastInstance, true
+	return o.ForecastInstance.Get(), o.ForecastInstance.IsSet()
 }
 
 // HasForecastInstance returns a boolean if a field has been set.
 func (o *RecommendationCapacityRunway) HasForecastInstance() bool {
-	if o != nil && o.ForecastInstance != nil {
+	if o != nil && o.ForecastInstance.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetForecastInstance gets a reference to the given ForecastInstanceRelationship and assigns it to the ForecastInstance field.
+// SetForecastInstance gets a reference to the given NullableForecastInstanceRelationship and assigns it to the ForecastInstance field.
 func (o *RecommendationCapacityRunway) SetForecastInstance(v ForecastInstanceRelationship) {
-	o.ForecastInstance = &v
+	o.ForecastInstance.Set(&v)
+}
+
+// SetForecastInstanceNil sets the value for ForecastInstance to be an explicit nil
+func (o *RecommendationCapacityRunway) SetForecastInstanceNil() {
+	o.ForecastInstance.Set(nil)
+}
+
+// UnsetForecastInstance ensures that no value is present for ForecastInstance, not even an explicit nil
+func (o *RecommendationCapacityRunway) UnsetForecastInstance() {
+	o.ForecastInstance.Unset()
 }
 
 // GetPhysicalItem returns the PhysicalItem field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -319,7 +334,7 @@ func (o *RecommendationCapacityRunway) GetPhysicalItem() []RecommendationPhysica
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationCapacityRunway) GetPhysicalItemOk() ([]RecommendationPhysicalItemRelationship, bool) {
-	if o == nil || o.PhysicalItem == nil {
+	if o == nil || IsNil(o.PhysicalItem) {
 		return nil, false
 	}
 	return o.PhysicalItem, true
@@ -327,7 +342,7 @@ func (o *RecommendationCapacityRunway) GetPhysicalItemOk() ([]RecommendationPhys
 
 // HasPhysicalItem returns a boolean if a field has been set.
 func (o *RecommendationCapacityRunway) HasPhysicalItem() bool {
-	if o != nil && o.PhysicalItem != nil {
+	if o != nil && IsNil(o.PhysicalItem) {
 		return true
 	}
 
@@ -339,87 +354,124 @@ func (o *RecommendationCapacityRunway) SetPhysicalItem(v []RecommendationPhysica
 	o.PhysicalItem = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecommendationCapacityRunway) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecommendationCapacityRunway) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *RecommendationCapacityRunway) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *RecommendationCapacityRunway) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *RecommendationCapacityRunway) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *RecommendationCapacityRunway) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o RecommendationCapacityRunway) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RecommendationCapacityRunway) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedRecommendationBase, errRecommendationBase := json.Marshal(o.RecommendationBase)
 	if errRecommendationBase != nil {
-		return []byte{}, errRecommendationBase
+		return map[string]interface{}{}, errRecommendationBase
 	}
 	errRecommendationBase = json.Unmarshal([]byte(serializedRecommendationBase), &toSerialize)
 	if errRecommendationBase != nil {
-		return []byte{}, errRecommendationBase
+		return map[string]interface{}{}, errRecommendationBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdditionalCapacity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdditionalCapacity) {
 		toSerialize["AdditionalCapacity"] = o.AdditionalCapacity
 	}
-	if o.Period != nil {
+	if !IsNil(o.Period) {
 		toSerialize["Period"] = o.Period
 	}
-	if o.Runway != nil {
+	if !IsNil(o.Runway) {
 		toSerialize["Runway"] = o.Runway
 	}
-	if o.TotalCapacity != nil {
+	if !IsNil(o.TotalCapacity) {
 		toSerialize["TotalCapacity"] = o.TotalCapacity
 	}
-	if o.Unit != nil {
+	if !IsNil(o.Unit) {
 		toSerialize["Unit"] = o.Unit
 	}
-	if o.ForecastInstance != nil {
-		toSerialize["ForecastInstance"] = o.ForecastInstance
+	if o.ForecastInstance.IsSet() {
+		toSerialize["ForecastInstance"] = o.ForecastInstance.Get()
 	}
 	if o.PhysicalItem != nil {
 		toSerialize["PhysicalItem"] = o.PhysicalItem
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *RecommendationCapacityRunway) UnmarshalJSON(bytes []byte) (err error) {
+func (o *RecommendationCapacityRunway) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type RecommendationCapacityRunwayWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -434,16 +486,16 @@ func (o *RecommendationCapacityRunway) UnmarshalJSON(bytes []byte) (err error) {
 		// Total capacity of the cluster after the recommended hardware is added.
 		TotalCapacity *int64 `json:"TotalCapacity,omitempty"`
 		// Unit for the new capacity. * `TB` - The Enum value TB represents that the measurement unit is in terabytes. * `MB` - The Enum value MB represents that the measurement unit is in megabytes. * `GB` - The Enum value GB represents that the measurement unit is in gigabytes. * `MHz` - The Enum value MHz represents that the measurement unit is in megahertz. * `GHz` - The Enum value GHz represents that the measurement unit is in gigahertz. * `Percentage` - The Enum value Percentage represents that the expansion request is in the percentage of resource increase. For example, a 20% increase in CPU capacity.
-		Unit             *string                       `json:"Unit,omitempty"`
-		ForecastInstance *ForecastInstanceRelationship `json:"ForecastInstance,omitempty"`
+		Unit             *string                              `json:"Unit,omitempty"`
+		ForecastInstance NullableForecastInstanceRelationship `json:"ForecastInstance,omitempty"`
 		// An array of relationships to recommendationPhysicalItem resources.
-		PhysicalItem     []RecommendationPhysicalItemRelationship `json:"PhysicalItem,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
+		PhysicalItem     []RecommendationPhysicalItemRelationship    `json:"PhysicalItem,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varRecommendationCapacityRunwayWithoutEmbeddedStruct := RecommendationCapacityRunwayWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varRecommendationCapacityRunwayWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varRecommendationCapacityRunwayWithoutEmbeddedStruct)
 	if err == nil {
 		varRecommendationCapacityRunway := _RecommendationCapacityRunway{}
 		varRecommendationCapacityRunway.ClassId = varRecommendationCapacityRunwayWithoutEmbeddedStruct.ClassId
@@ -463,7 +515,7 @@ func (o *RecommendationCapacityRunway) UnmarshalJSON(bytes []byte) (err error) {
 
 	varRecommendationCapacityRunway := _RecommendationCapacityRunway{}
 
-	err = json.Unmarshal(bytes, &varRecommendationCapacityRunway)
+	err = json.Unmarshal(data, &varRecommendationCapacityRunway)
 	if err == nil {
 		o.RecommendationBase = varRecommendationCapacityRunway.RecommendationBase
 	} else {
@@ -472,7 +524,7 @@ func (o *RecommendationCapacityRunway) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdditionalCapacity")

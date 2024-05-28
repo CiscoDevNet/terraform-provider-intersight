@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **LinkWidth** | Pointer to **string** | The upstream link width of the PCI device. | [optional] [readonly] 
 **PciSlot** | Pointer to **string** | The slot name of the PCI device. | [optional] [readonly] 
 **SlotStatus** | Pointer to **string** | The health information of the PCI device. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**PciSwitch** | Pointer to [**PciSwitchRelationship**](PciSwitchRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PciSwitch** | Pointer to [**NullablePciSwitchRelationship**](PciSwitchRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -250,6 +250,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *PciLink) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *PciLink) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetPciSwitch
 
 `func (o *PciLink) GetPciSwitch() PciSwitchRelationship`
@@ -275,6 +285,16 @@ SetPciSwitch sets PciSwitch field to given value.
 
 HasPciSwitch returns a boolean if a field has been set.
 
+### SetPciSwitchNil
+
+`func (o *PciLink) SetPciSwitchNil(b bool)`
+
+ SetPciSwitchNil sets the value for PciSwitch to be an explicit nil
+
+### UnsetPciSwitch
+`func (o *PciLink) UnsetPciSwitch()`
+
+UnsetPciSwitch ensures that no value is present for PciSwitch, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *PciLink) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -300,6 +320,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *PciLink) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *PciLink) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricElementIdentity type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricElementIdentity{}
 
 // FabricElementIdentity Identity object that uniquely represents a network element object under the domain.
 type FabricElementIdentity struct {
@@ -32,9 +36,9 @@ type FabricElementIdentity struct {
 	// Replacement type specifies whether it is single FI or domain replacement. * `None` - The default action is none. * `Individual` - Replacement of single network element. * `Domain` - Domain indicates the replacement of Fabric Interconnect domain.
 	ReplacementType *string `json:"ReplacementType,omitempty"`
 	// Switch Identifier that uniquely represents the fabric object. * `A` - Switch Identifier of Fabric Interconnect A. * `B` - Switch Identifier of Fabric Interconnect B.
-	SwitchId             *string                     `json:"SwitchId,omitempty"`
-	NetworkElement       *NetworkElementRelationship `json:"NetworkElement,omitempty"`
-	ReplacementTarget    *NetworkElementRelationship `json:"ReplacementTarget,omitempty"`
+	SwitchId             *string                            `json:"SwitchId,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship `json:"NetworkElement,omitempty"`
+	ReplacementTarget    NullableNetworkElementRelationship `json:"ReplacementTarget,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *FabricElementIdentity) SetObjectType(v string) {
 
 // GetDomain returns the Domain field value if set, zero value otherwise.
 func (o *FabricElementIdentity) GetDomain() string {
-	if o == nil || o.Domain == nil {
+	if o == nil || IsNil(o.Domain) {
 		var ret string
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *FabricElementIdentity) GetDomain() string {
 // GetDomainOk returns a tuple with the Domain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricElementIdentity) GetDomainOk() (*string, bool) {
-	if o == nil || o.Domain == nil {
+	if o == nil || IsNil(o.Domain) {
 		return nil, false
 	}
 	return o.Domain, true
@@ -137,7 +141,7 @@ func (o *FabricElementIdentity) GetDomainOk() (*string, bool) {
 
 // HasDomain returns a boolean if a field has been set.
 func (o *FabricElementIdentity) HasDomain() bool {
-	if o != nil && o.Domain != nil {
+	if o != nil && !IsNil(o.Domain) {
 		return true
 	}
 
@@ -151,7 +155,7 @@ func (o *FabricElementIdentity) SetDomain(v string) {
 
 // GetPartialDeploymentStatus returns the PartialDeploymentStatus field value if set, zero value otherwise.
 func (o *FabricElementIdentity) GetPartialDeploymentStatus() string {
-	if o == nil || o.PartialDeploymentStatus == nil {
+	if o == nil || IsNil(o.PartialDeploymentStatus) {
 		var ret string
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *FabricElementIdentity) GetPartialDeploymentStatus() string {
 // GetPartialDeploymentStatusOk returns a tuple with the PartialDeploymentStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricElementIdentity) GetPartialDeploymentStatusOk() (*string, bool) {
-	if o == nil || o.PartialDeploymentStatus == nil {
+	if o == nil || IsNil(o.PartialDeploymentStatus) {
 		return nil, false
 	}
 	return o.PartialDeploymentStatus, true
@@ -169,7 +173,7 @@ func (o *FabricElementIdentity) GetPartialDeploymentStatusOk() (*string, bool) {
 
 // HasPartialDeploymentStatus returns a boolean if a field has been set.
 func (o *FabricElementIdentity) HasPartialDeploymentStatus() bool {
-	if o != nil && o.PartialDeploymentStatus != nil {
+	if o != nil && !IsNil(o.PartialDeploymentStatus) {
 		return true
 	}
 
@@ -194,7 +198,7 @@ func (o *FabricElementIdentity) GetPostDeployAction() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricElementIdentity) GetPostDeployActionOk() ([]string, bool) {
-	if o == nil || o.PostDeployAction == nil {
+	if o == nil || IsNil(o.PostDeployAction) {
 		return nil, false
 	}
 	return o.PostDeployAction, true
@@ -202,7 +206,7 @@ func (o *FabricElementIdentity) GetPostDeployActionOk() ([]string, bool) {
 
 // HasPostDeployAction returns a boolean if a field has been set.
 func (o *FabricElementIdentity) HasPostDeployAction() bool {
-	if o != nil && o.PostDeployAction != nil {
+	if o != nil && IsNil(o.PostDeployAction) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *FabricElementIdentity) SetPostDeployAction(v []string) {
 
 // GetReplacementType returns the ReplacementType field value if set, zero value otherwise.
 func (o *FabricElementIdentity) GetReplacementType() string {
-	if o == nil || o.ReplacementType == nil {
+	if o == nil || IsNil(o.ReplacementType) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *FabricElementIdentity) GetReplacementType() string {
 // GetReplacementTypeOk returns a tuple with the ReplacementType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricElementIdentity) GetReplacementTypeOk() (*string, bool) {
-	if o == nil || o.ReplacementType == nil {
+	if o == nil || IsNil(o.ReplacementType) {
 		return nil, false
 	}
 	return o.ReplacementType, true
@@ -234,7 +238,7 @@ func (o *FabricElementIdentity) GetReplacementTypeOk() (*string, bool) {
 
 // HasReplacementType returns a boolean if a field has been set.
 func (o *FabricElementIdentity) HasReplacementType() bool {
-	if o != nil && o.ReplacementType != nil {
+	if o != nil && !IsNil(o.ReplacementType) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *FabricElementIdentity) SetReplacementType(v string) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *FabricElementIdentity) GetSwitchId() string {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret string
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *FabricElementIdentity) GetSwitchId() string {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricElementIdentity) GetSwitchIdOk() (*string, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -266,7 +270,7 @@ func (o *FabricElementIdentity) GetSwitchIdOk() (*string, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *FabricElementIdentity) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -278,116 +282,164 @@ func (o *FabricElementIdentity) SetSwitchId(v string) {
 	o.SwitchId = &v
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricElementIdentity) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricElementIdentity) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *FabricElementIdentity) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *FabricElementIdentity) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetReplacementTarget returns the ReplacementTarget field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *FabricElementIdentity) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *FabricElementIdentity) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetReplacementTarget returns the ReplacementTarget field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricElementIdentity) GetReplacementTarget() NetworkElementRelationship {
-	if o == nil || o.ReplacementTarget == nil {
+	if o == nil || IsNil(o.ReplacementTarget.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.ReplacementTarget
+	return *o.ReplacementTarget.Get()
 }
 
 // GetReplacementTargetOk returns a tuple with the ReplacementTarget field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricElementIdentity) GetReplacementTargetOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.ReplacementTarget == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReplacementTarget, true
+	return o.ReplacementTarget.Get(), o.ReplacementTarget.IsSet()
 }
 
 // HasReplacementTarget returns a boolean if a field has been set.
 func (o *FabricElementIdentity) HasReplacementTarget() bool {
-	if o != nil && o.ReplacementTarget != nil {
+	if o != nil && o.ReplacementTarget.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReplacementTarget gets a reference to the given NetworkElementRelationship and assigns it to the ReplacementTarget field.
+// SetReplacementTarget gets a reference to the given NullableNetworkElementRelationship and assigns it to the ReplacementTarget field.
 func (o *FabricElementIdentity) SetReplacementTarget(v NetworkElementRelationship) {
-	o.ReplacementTarget = &v
+	o.ReplacementTarget.Set(&v)
+}
+
+// SetReplacementTargetNil sets the value for ReplacementTarget to be an explicit nil
+func (o *FabricElementIdentity) SetReplacementTargetNil() {
+	o.ReplacementTarget.Set(nil)
+}
+
+// UnsetReplacementTarget ensures that no value is present for ReplacementTarget, not even an explicit nil
+func (o *FabricElementIdentity) UnsetReplacementTarget() {
+	o.ReplacementTarget.Unset()
 }
 
 func (o FabricElementIdentity) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricElementIdentity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentIdentity, errEquipmentIdentity := json.Marshal(o.EquipmentIdentity)
 	if errEquipmentIdentity != nil {
-		return []byte{}, errEquipmentIdentity
+		return map[string]interface{}{}, errEquipmentIdentity
 	}
 	errEquipmentIdentity = json.Unmarshal([]byte(serializedEquipmentIdentity), &toSerialize)
 	if errEquipmentIdentity != nil {
-		return []byte{}, errEquipmentIdentity
+		return map[string]interface{}{}, errEquipmentIdentity
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Domain != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Domain) {
 		toSerialize["Domain"] = o.Domain
 	}
-	if o.PartialDeploymentStatus != nil {
+	if !IsNil(o.PartialDeploymentStatus) {
 		toSerialize["PartialDeploymentStatus"] = o.PartialDeploymentStatus
 	}
 	if o.PostDeployAction != nil {
 		toSerialize["PostDeployAction"] = o.PostDeployAction
 	}
-	if o.ReplacementType != nil {
+	if !IsNil(o.ReplacementType) {
 		toSerialize["ReplacementType"] = o.ReplacementType
 	}
-	if o.SwitchId != nil {
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.ReplacementTarget != nil {
-		toSerialize["ReplacementTarget"] = o.ReplacementTarget
+	if o.ReplacementTarget.IsSet() {
+		toSerialize["ReplacementTarget"] = o.ReplacementTarget.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricElementIdentity) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricElementIdentity) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricElementIdentityWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -401,14 +453,14 @@ func (o *FabricElementIdentity) UnmarshalJSON(bytes []byte) (err error) {
 		// Replacement type specifies whether it is single FI or domain replacement. * `None` - The default action is none. * `Individual` - Replacement of single network element. * `Domain` - Domain indicates the replacement of Fabric Interconnect domain.
 		ReplacementType *string `json:"ReplacementType,omitempty"`
 		// Switch Identifier that uniquely represents the fabric object. * `A` - Switch Identifier of Fabric Interconnect A. * `B` - Switch Identifier of Fabric Interconnect B.
-		SwitchId          *string                     `json:"SwitchId,omitempty"`
-		NetworkElement    *NetworkElementRelationship `json:"NetworkElement,omitempty"`
-		ReplacementTarget *NetworkElementRelationship `json:"ReplacementTarget,omitempty"`
+		SwitchId          *string                            `json:"SwitchId,omitempty"`
+		NetworkElement    NullableNetworkElementRelationship `json:"NetworkElement,omitempty"`
+		ReplacementTarget NullableNetworkElementRelationship `json:"ReplacementTarget,omitempty"`
 	}
 
 	varFabricElementIdentityWithoutEmbeddedStruct := FabricElementIdentityWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricElementIdentityWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricElementIdentityWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricElementIdentity := _FabricElementIdentity{}
 		varFabricElementIdentity.ClassId = varFabricElementIdentityWithoutEmbeddedStruct.ClassId
@@ -427,7 +479,7 @@ func (o *FabricElementIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricElementIdentity := _FabricElementIdentity{}
 
-	err = json.Unmarshal(bytes, &varFabricElementIdentity)
+	err = json.Unmarshal(data, &varFabricElementIdentity)
 	if err == nil {
 		o.EquipmentIdentity = varFabricElementIdentity.EquipmentIdentity
 	} else {
@@ -436,7 +488,7 @@ func (o *FabricElementIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Domain")

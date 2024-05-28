@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **NumActiveInitiators** | Pointer to **int64** | Number of active initiators in the initiator group. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | UUID of the HyperFlex iSCSI target. | [optional] [readonly] 
 **Version** | Pointer to **int64** | Version of the Initiator Group. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 **InitiatorGroups** | Pointer to [**[]HyperflexInitiatorGroupRelationship**](HyperflexInitiatorGroupRelationship.md) | An array of relationships to hyperflexInitiatorGroup resources. | [optional] [readonly] 
 **Luns** | Pointer to [**[]HyperflexLunRelationship**](HyperflexLunRelationship.md) | An array of relationships to hyperflexLun resources. | [optional] [readonly] 
 
@@ -322,6 +322,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *HyperflexTarget) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *HyperflexTarget) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 ### GetInitiatorGroups
 
 `func (o *HyperflexTarget) GetInitiatorGroups() []HyperflexInitiatorGroupRelationship`

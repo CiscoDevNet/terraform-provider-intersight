@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppSensor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppSensor{}
 
 // StorageNetAppSensor Information for a particular sensor on a NetApp storage array controller.
 type StorageNetAppSensor struct {
@@ -23,8 +27,8 @@ type StorageNetAppSensor struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                         `json:"ObjectType"`
-	ArrayController      *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+	ObjectType           string                                `json:"ObjectType"`
+	ArrayController      NullableStorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,77 +105,114 @@ func (o *StorageNetAppSensor) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetArrayController returns the ArrayController field value if set, zero value otherwise.
+// GetArrayController returns the ArrayController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppSensor) GetArrayController() StorageNetAppNodeRelationship {
-	if o == nil || o.ArrayController == nil {
+	if o == nil || IsNil(o.ArrayController.Get()) {
 		var ret StorageNetAppNodeRelationship
 		return ret
 	}
-	return *o.ArrayController
+	return *o.ArrayController.Get()
 }
 
 // GetArrayControllerOk returns a tuple with the ArrayController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppSensor) GetArrayControllerOk() (*StorageNetAppNodeRelationship, bool) {
-	if o == nil || o.ArrayController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ArrayController, true
+	return o.ArrayController.Get(), o.ArrayController.IsSet()
 }
 
 // HasArrayController returns a boolean if a field has been set.
 func (o *StorageNetAppSensor) HasArrayController() bool {
-	if o != nil && o.ArrayController != nil {
+	if o != nil && o.ArrayController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArrayController gets a reference to the given StorageNetAppNodeRelationship and assigns it to the ArrayController field.
+// SetArrayController gets a reference to the given NullableStorageNetAppNodeRelationship and assigns it to the ArrayController field.
 func (o *StorageNetAppSensor) SetArrayController(v StorageNetAppNodeRelationship) {
-	o.ArrayController = &v
+	o.ArrayController.Set(&v)
+}
+
+// SetArrayControllerNil sets the value for ArrayController to be an explicit nil
+func (o *StorageNetAppSensor) SetArrayControllerNil() {
+	o.ArrayController.Set(nil)
+}
+
+// UnsetArrayController ensures that no value is present for ArrayController, not even an explicit nil
+func (o *StorageNetAppSensor) UnsetArrayController() {
+	o.ArrayController.Unset()
 }
 
 func (o StorageNetAppSensor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppSensor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBaseSensor, errEquipmentBaseSensor := json.Marshal(o.EquipmentBaseSensor)
 	if errEquipmentBaseSensor != nil {
-		return []byte{}, errEquipmentBaseSensor
+		return map[string]interface{}{}, errEquipmentBaseSensor
 	}
 	errEquipmentBaseSensor = json.Unmarshal([]byte(serializedEquipmentBaseSensor), &toSerialize)
 	if errEquipmentBaseSensor != nil {
-		return []byte{}, errEquipmentBaseSensor
+		return map[string]interface{}{}, errEquipmentBaseSensor
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ArrayController != nil {
-		toSerialize["ArrayController"] = o.ArrayController
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.ArrayController.IsSet() {
+		toSerialize["ArrayController"] = o.ArrayController.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppSensor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppSensor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppSensorWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType      string                         `json:"ObjectType"`
-		ArrayController *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+		ObjectType      string                                `json:"ObjectType"`
+		ArrayController NullableStorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
 	}
 
 	varStorageNetAppSensorWithoutEmbeddedStruct := StorageNetAppSensorWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppSensorWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppSensorWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppSensor := _StorageNetAppSensor{}
 		varStorageNetAppSensor.ClassId = varStorageNetAppSensorWithoutEmbeddedStruct.ClassId
@@ -184,7 +225,7 @@ func (o *StorageNetAppSensor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppSensor := _StorageNetAppSensor{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppSensor)
+	err = json.Unmarshal(data, &varStorageNetAppSensor)
 	if err == nil {
 		o.EquipmentBaseSensor = varStorageNetAppSensor.EquipmentBaseSensor
 	} else {
@@ -193,7 +234,7 @@ func (o *StorageNetAppSensor) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ArrayController")

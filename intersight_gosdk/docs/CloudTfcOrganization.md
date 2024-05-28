@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **NumUsers** | Pointer to **int64** | The number of users in this organization. | [optional] [readonly] 
 **RunCeiling** | Pointer to **int64** | The max number of simultaneous runs allowed in this organization. | [optional] [readonly] 
 **VcsProviders** | Pointer to **int64** | Total number of VCS providers in the organization. | [optional] [readonly] 
-**Target** | Pointer to [**AssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
+**Target** | Pointer to [**NullableAssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -300,6 +300,16 @@ SetTarget sets Target field to given value.
 
 HasTarget returns a boolean if a field has been set.
 
+### SetTargetNil
+
+`func (o *CloudTfcOrganization) SetTargetNil(b bool)`
+
+ SetTargetNil sets the value for Target to be an explicit nil
+
+### UnsetTarget
+`func (o *CloudTfcOrganization) UnsetTarget()`
+
+UnsetTarget ensures that no value is present for Target, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

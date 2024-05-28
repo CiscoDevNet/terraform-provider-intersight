@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.VirtualMachineNodeProfile"]
 **Interfaces** | Pointer to [**[]KubernetesEthernet**](KubernetesEthernet.md) |  | [optional] 
 **IpAddresses** | Pointer to [**[]IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) | An array of relationships to ippoolIpLease resources. | [optional] 
-**NodeIp** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
-**VirtualMachine** | Pointer to [**VirtualizationVirtualMachineRelationship**](VirtualizationVirtualMachineRelationship.md) |  | [optional] 
+**NodeIp** | Pointer to [**NullableIppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
+**VirtualMachine** | Pointer to [**NullableVirtualizationVirtualMachineRelationship**](VirtualizationVirtualMachineRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -165,6 +165,16 @@ SetNodeIp sets NodeIp field to given value.
 
 HasNodeIp returns a boolean if a field has been set.
 
+### SetNodeIpNil
+
+`func (o *KubernetesVirtualMachineNodeProfile) SetNodeIpNil(b bool)`
+
+ SetNodeIpNil sets the value for NodeIp to be an explicit nil
+
+### UnsetNodeIp
+`func (o *KubernetesVirtualMachineNodeProfile) UnsetNodeIp()`
+
+UnsetNodeIp ensures that no value is present for NodeIp, not even an explicit nil
 ### GetVirtualMachine
 
 `func (o *KubernetesVirtualMachineNodeProfile) GetVirtualMachine() VirtualizationVirtualMachineRelationship`
@@ -190,6 +200,16 @@ SetVirtualMachine sets VirtualMachine field to given value.
 
 HasVirtualMachine returns a boolean if a field has been set.
 
+### SetVirtualMachineNil
+
+`func (o *KubernetesVirtualMachineNodeProfile) SetVirtualMachineNil(b bool)`
+
+ SetVirtualMachineNil sets the value for VirtualMachine to be an explicit nil
+
+### UnsetVirtualMachine
+`func (o *KubernetesVirtualMachineNodeProfile) UnsetVirtualMachine()`
+
+UnsetVirtualMachine ensures that no value is present for VirtualMachine, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

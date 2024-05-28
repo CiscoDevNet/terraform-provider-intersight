@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the StoragePureVolume type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StoragePureVolume{}
 
 // StoragePureVolume A volume entity in PureStorage FlashArray.
 type StoragePureVolume struct {
@@ -30,10 +34,10 @@ type StoragePureVolume struct {
 	// Serial number of the volume.
 	Serial *string `json:"Serial,omitempty"`
 	// Source from which the volume is created. Applicable only if the volume is cloned from other volume or snapshot.
-	Source               *string                                 `json:"Source,omitempty"`
-	Array                *StoragePureArrayRelationship           `json:"Array,omitempty"`
-	ProtectionGroup      *StoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+	Source               *string                                        `json:"Source,omitempty"`
+	Array                NullableStoragePureArrayRelationship           `json:"Array,omitempty"`
+	ProtectionGroup      NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,7 +116,7 @@ func (o *StoragePureVolume) SetObjectType(v string) {
 
 // GetCreated returns the Created field value if set, zero value otherwise.
 func (o *StoragePureVolume) GetCreated() time.Time {
-	if o == nil || o.Created == nil {
+	if o == nil || IsNil(o.Created) {
 		var ret time.Time
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *StoragePureVolume) GetCreated() time.Time {
 // GetCreatedOk returns a tuple with the Created field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureVolume) GetCreatedOk() (*time.Time, bool) {
-	if o == nil || o.Created == nil {
+	if o == nil || IsNil(o.Created) {
 		return nil, false
 	}
 	return o.Created, true
@@ -130,7 +134,7 @@ func (o *StoragePureVolume) GetCreatedOk() (*time.Time, bool) {
 
 // HasCreated returns a boolean if a field has been set.
 func (o *StoragePureVolume) HasCreated() bool {
-	if o != nil && o.Created != nil {
+	if o != nil && !IsNil(o.Created) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *StoragePureVolume) SetCreated(v time.Time) {
 
 // GetSerial returns the Serial field value if set, zero value otherwise.
 func (o *StoragePureVolume) GetSerial() string {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *StoragePureVolume) GetSerial() string {
 // GetSerialOk returns a tuple with the Serial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureVolume) GetSerialOk() (*string, bool) {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		return nil, false
 	}
 	return o.Serial, true
@@ -162,7 +166,7 @@ func (o *StoragePureVolume) GetSerialOk() (*string, bool) {
 
 // HasSerial returns a boolean if a field has been set.
 func (o *StoragePureVolume) HasSerial() bool {
-	if o != nil && o.Serial != nil {
+	if o != nil && !IsNil(o.Serial) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *StoragePureVolume) SetSerial(v string) {
 
 // GetSource returns the Source field value if set, zero value otherwise.
 func (o *StoragePureVolume) GetSource() string {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *StoragePureVolume) GetSource() string {
 // GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StoragePureVolume) GetSourceOk() (*string, bool) {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source) {
 		return nil, false
 	}
 	return o.Source, true
@@ -194,7 +198,7 @@ func (o *StoragePureVolume) GetSourceOk() (*string, bool) {
 
 // HasSource returns a boolean if a field has been set.
 func (o *StoragePureVolume) HasSource() bool {
-	if o != nil && o.Source != nil {
+	if o != nil && !IsNil(o.Source) {
 		return true
 	}
 
@@ -206,145 +210,204 @@ func (o *StoragePureVolume) SetSource(v string) {
 	o.Source = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureVolume) GetArray() StoragePureArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StoragePureArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureVolume) GetArrayOk() (*StoragePureArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StoragePureVolume) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StoragePureArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStoragePureArrayRelationship and assigns it to the Array field.
 func (o *StoragePureVolume) SetArray(v StoragePureArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetProtectionGroup returns the ProtectionGroup field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StoragePureVolume) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StoragePureVolume) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetProtectionGroup returns the ProtectionGroup field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureVolume) GetProtectionGroup() StoragePureProtectionGroupRelationship {
-	if o == nil || o.ProtectionGroup == nil {
+	if o == nil || IsNil(o.ProtectionGroup.Get()) {
 		var ret StoragePureProtectionGroupRelationship
 		return ret
 	}
-	return *o.ProtectionGroup
+	return *o.ProtectionGroup.Get()
 }
 
 // GetProtectionGroupOk returns a tuple with the ProtectionGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureVolume) GetProtectionGroupOk() (*StoragePureProtectionGroupRelationship, bool) {
-	if o == nil || o.ProtectionGroup == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProtectionGroup, true
+	return o.ProtectionGroup.Get(), o.ProtectionGroup.IsSet()
 }
 
 // HasProtectionGroup returns a boolean if a field has been set.
 func (o *StoragePureVolume) HasProtectionGroup() bool {
-	if o != nil && o.ProtectionGroup != nil {
+	if o != nil && o.ProtectionGroup.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProtectionGroup gets a reference to the given StoragePureProtectionGroupRelationship and assigns it to the ProtectionGroup field.
+// SetProtectionGroup gets a reference to the given NullableStoragePureProtectionGroupRelationship and assigns it to the ProtectionGroup field.
 func (o *StoragePureVolume) SetProtectionGroup(v StoragePureProtectionGroupRelationship) {
-	o.ProtectionGroup = &v
+	o.ProtectionGroup.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetProtectionGroupNil sets the value for ProtectionGroup to be an explicit nil
+func (o *StoragePureVolume) SetProtectionGroupNil() {
+	o.ProtectionGroup.Set(nil)
+}
+
+// UnsetProtectionGroup ensures that no value is present for ProtectionGroup, not even an explicit nil
+func (o *StoragePureVolume) UnsetProtectionGroup() {
+	o.ProtectionGroup.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureVolume) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureVolume) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StoragePureVolume) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StoragePureVolume) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StoragePureVolume) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StoragePureVolume) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StoragePureVolume) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StoragePureVolume) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseVolume, errStorageBaseVolume := json.Marshal(o.StorageBaseVolume)
 	if errStorageBaseVolume != nil {
-		return []byte{}, errStorageBaseVolume
+		return map[string]interface{}{}, errStorageBaseVolume
 	}
 	errStorageBaseVolume = json.Unmarshal([]byte(serializedStorageBaseVolume), &toSerialize)
 	if errStorageBaseVolume != nil {
-		return []byte{}, errStorageBaseVolume
+		return map[string]interface{}{}, errStorageBaseVolume
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Created != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Created) {
 		toSerialize["Created"] = o.Created
 	}
-	if o.Serial != nil {
+	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
 	}
-	if o.Source != nil {
+	if !IsNil(o.Source) {
 		toSerialize["Source"] = o.Source
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.ProtectionGroup != nil {
-		toSerialize["ProtectionGroup"] = o.ProtectionGroup
+	if o.ProtectionGroup.IsSet() {
+		toSerialize["ProtectionGroup"] = o.ProtectionGroup.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StoragePureVolume) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StoragePureVolume) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StoragePureVolumeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -355,15 +418,15 @@ func (o *StoragePureVolume) UnmarshalJSON(bytes []byte) (err error) {
 		// Serial number of the volume.
 		Serial *string `json:"Serial,omitempty"`
 		// Source from which the volume is created. Applicable only if the volume is cloned from other volume or snapshot.
-		Source           *string                                 `json:"Source,omitempty"`
-		Array            *StoragePureArrayRelationship           `json:"Array,omitempty"`
-		ProtectionGroup  *StoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+		Source           *string                                        `json:"Source,omitempty"`
+		Array            NullableStoragePureArrayRelationship           `json:"Array,omitempty"`
+		ProtectionGroup  NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStoragePureVolumeWithoutEmbeddedStruct := StoragePureVolumeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStoragePureVolumeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStoragePureVolumeWithoutEmbeddedStruct)
 	if err == nil {
 		varStoragePureVolume := _StoragePureVolume{}
 		varStoragePureVolume.ClassId = varStoragePureVolumeWithoutEmbeddedStruct.ClassId
@@ -381,7 +444,7 @@ func (o *StoragePureVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStoragePureVolume := _StoragePureVolume{}
 
-	err = json.Unmarshal(bytes, &varStoragePureVolume)
+	err = json.Unmarshal(data, &varStoragePureVolume)
 	if err == nil {
 		o.StorageBaseVolume = varStoragePureVolume.StorageBaseVolume
 	} else {
@@ -390,7 +453,7 @@ func (o *StoragePureVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Created")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwareVmCpuShareInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareVmCpuShareInfo{}
 
 // VirtualizationVmwareVmCpuShareInfo Information about the virtual machine's CPU sharing and limits.
 type VirtualizationVmwareVmCpuShareInfo struct {
@@ -110,7 +114,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) SetObjectType(v string) {
 
 // GetCpuLimit returns the CpuLimit field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuLimit() int64 {
-	if o == nil || o.CpuLimit == nil {
+	if o == nil || IsNil(o.CpuLimit) {
 		var ret int64
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuLimit() int64 {
 // GetCpuLimitOk returns a tuple with the CpuLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuLimitOk() (*int64, bool) {
-	if o == nil || o.CpuLimit == nil {
+	if o == nil || IsNil(o.CpuLimit) {
 		return nil, false
 	}
 	return o.CpuLimit, true
@@ -128,7 +132,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuLimitOk() (*int64, bool) {
 
 // HasCpuLimit returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVmCpuShareInfo) HasCpuLimit() bool {
-	if o != nil && o.CpuLimit != nil {
+	if o != nil && !IsNil(o.CpuLimit) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) SetCpuLimit(v int64) {
 
 // GetCpuOverheadLimit returns the CpuOverheadLimit field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuOverheadLimit() int64 {
-	if o == nil || o.CpuOverheadLimit == nil {
+	if o == nil || IsNil(o.CpuOverheadLimit) {
 		var ret int64
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuOverheadLimit() int64 {
 // GetCpuOverheadLimitOk returns a tuple with the CpuOverheadLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuOverheadLimitOk() (*int64, bool) {
-	if o == nil || o.CpuOverheadLimit == nil {
+	if o == nil || IsNil(o.CpuOverheadLimit) {
 		return nil, false
 	}
 	return o.CpuOverheadLimit, true
@@ -160,7 +164,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuOverheadLimitOk() (*int64, bo
 
 // HasCpuOverheadLimit returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVmCpuShareInfo) HasCpuOverheadLimit() bool {
-	if o != nil && o.CpuOverheadLimit != nil {
+	if o != nil && !IsNil(o.CpuOverheadLimit) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) SetCpuOverheadLimit(v int64) {
 
 // GetCpuReservation returns the CpuReservation field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuReservation() int64 {
-	if o == nil || o.CpuReservation == nil {
+	if o == nil || IsNil(o.CpuReservation) {
 		var ret int64
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuReservation() int64 {
 // GetCpuReservationOk returns a tuple with the CpuReservation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuReservationOk() (*int64, bool) {
-	if o == nil || o.CpuReservation == nil {
+	if o == nil || IsNil(o.CpuReservation) {
 		return nil, false
 	}
 	return o.CpuReservation, true
@@ -192,7 +196,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuReservationOk() (*int64, bool
 
 // HasCpuReservation returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVmCpuShareInfo) HasCpuReservation() bool {
-	if o != nil && o.CpuReservation != nil {
+	if o != nil && !IsNil(o.CpuReservation) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) SetCpuReservation(v int64) {
 
 // GetCpuShares returns the CpuShares field value if set, zero value otherwise.
 func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuShares() int64 {
-	if o == nil || o.CpuShares == nil {
+	if o == nil || IsNil(o.CpuShares) {
 		var ret int64
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuShares() int64 {
 // GetCpuSharesOk returns a tuple with the CpuShares field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuSharesOk() (*int64, bool) {
-	if o == nil || o.CpuShares == nil {
+	if o == nil || IsNil(o.CpuShares) {
 		return nil, false
 	}
 	return o.CpuShares, true
@@ -224,7 +228,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) GetCpuSharesOk() (*int64, bool) {
 
 // HasCpuShares returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVmCpuShareInfo) HasCpuShares() bool {
-	if o != nil && o.CpuShares != nil {
+	if o != nil && !IsNil(o.CpuShares) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *VirtualizationVmwareVmCpuShareInfo) SetCpuShares(v int64) {
 }
 
 func (o VirtualizationVmwareVmCpuShareInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareVmCpuShareInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CpuLimit != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CpuLimit) {
 		toSerialize["CpuLimit"] = o.CpuLimit
 	}
-	if o.CpuOverheadLimit != nil {
+	if !IsNil(o.CpuOverheadLimit) {
 		toSerialize["CpuOverheadLimit"] = o.CpuOverheadLimit
 	}
-	if o.CpuReservation != nil {
+	if !IsNil(o.CpuReservation) {
 		toSerialize["CpuReservation"] = o.CpuReservation
 	}
-	if o.CpuShares != nil {
+	if !IsNil(o.CpuShares) {
 		toSerialize["CpuShares"] = o.CpuShares
 	}
 
@@ -269,10 +277,32 @@ func (o VirtualizationVmwareVmCpuShareInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareVmCpuShareInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareVmCpuShareInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareVmCpuShareInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) UnmarshalJSON(bytes []byte) (err er
 
 	varVirtualizationVmwareVmCpuShareInfoWithoutEmbeddedStruct := VirtualizationVmwareVmCpuShareInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareVmCpuShareInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareVmCpuShareInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareVmCpuShareInfo := _VirtualizationVmwareVmCpuShareInfo{}
 		varVirtualizationVmwareVmCpuShareInfo.ClassId = varVirtualizationVmwareVmCpuShareInfoWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) UnmarshalJSON(bytes []byte) (err er
 
 	varVirtualizationVmwareVmCpuShareInfo := _VirtualizationVmwareVmCpuShareInfo{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareVmCpuShareInfo)
+	err = json.Unmarshal(data, &varVirtualizationVmwareVmCpuShareInfo)
 	if err == nil {
 		o.MoBaseComplexType = varVirtualizationVmwareVmCpuShareInfo.MoBaseComplexType
 	} else {
@@ -315,7 +345,7 @@ func (o *VirtualizationVmwareVmCpuShareInfo) UnmarshalJSON(bytes []byte) (err er
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CpuLimit")

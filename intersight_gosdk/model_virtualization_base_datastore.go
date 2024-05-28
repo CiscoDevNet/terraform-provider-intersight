@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationBaseDatastore type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationBaseDatastore{}
 
 // VirtualizationBaseDatastore Common attributes of a datastore allocated to a hypervisor. Serves as a base class for all concrete datastore types. A datastore is assigned to a datacenter and virtual machines use it for storage. The datastore could be backed by NFS, VMFS, etc.
 type VirtualizationBaseDatastore struct {
@@ -117,7 +121,7 @@ func (o *VirtualizationBaseDatastore) SetObjectType(v string) {
 
 // GetCapacity returns the Capacity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationBaseDatastore) GetCapacity() VirtualizationStorageCapacity {
-	if o == nil || o.Capacity.Get() == nil {
+	if o == nil || IsNil(o.Capacity.Get()) {
 		var ret VirtualizationStorageCapacity
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *VirtualizationBaseDatastore) UnsetCapacity() {
 
 // GetHostCount returns the HostCount field value if set, zero value otherwise.
 func (o *VirtualizationBaseDatastore) GetHostCount() int64 {
-	if o == nil || o.HostCount == nil {
+	if o == nil || IsNil(o.HostCount) {
 		var ret int64
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *VirtualizationBaseDatastore) GetHostCount() int64 {
 // GetHostCountOk returns a tuple with the HostCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseDatastore) GetHostCountOk() (*int64, bool) {
-	if o == nil || o.HostCount == nil {
+	if o == nil || IsNil(o.HostCount) {
 		return nil, false
 	}
 	return o.HostCount, true
@@ -178,7 +182,7 @@ func (o *VirtualizationBaseDatastore) GetHostCountOk() (*int64, bool) {
 
 // HasHostCount returns a boolean if a field has been set.
 func (o *VirtualizationBaseDatastore) HasHostCount() bool {
-	if o != nil && o.HostCount != nil {
+	if o != nil && !IsNil(o.HostCount) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *VirtualizationBaseDatastore) SetHostCount(v int64) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *VirtualizationBaseDatastore) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -202,7 +206,7 @@ func (o *VirtualizationBaseDatastore) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseDatastore) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -210,7 +214,7 @@ func (o *VirtualizationBaseDatastore) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *VirtualizationBaseDatastore) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *VirtualizationBaseDatastore) SetIdentity(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VirtualizationBaseDatastore) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -234,7 +238,7 @@ func (o *VirtualizationBaseDatastore) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseDatastore) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -242,7 +246,7 @@ func (o *VirtualizationBaseDatastore) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *VirtualizationBaseDatastore) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *VirtualizationBaseDatastore) SetName(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *VirtualizationBaseDatastore) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -266,7 +270,7 @@ func (o *VirtualizationBaseDatastore) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseDatastore) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -274,7 +278,7 @@ func (o *VirtualizationBaseDatastore) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *VirtualizationBaseDatastore) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -288,7 +292,7 @@ func (o *VirtualizationBaseDatastore) SetType(v string) {
 
 // GetVmCount returns the VmCount field value if set, zero value otherwise.
 func (o *VirtualizationBaseDatastore) GetVmCount() int64 {
-	if o == nil || o.VmCount == nil {
+	if o == nil || IsNil(o.VmCount) {
 		var ret int64
 		return ret
 	}
@@ -298,7 +302,7 @@ func (o *VirtualizationBaseDatastore) GetVmCount() int64 {
 // GetVmCountOk returns a tuple with the VmCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationBaseDatastore) GetVmCountOk() (*int64, bool) {
-	if o == nil || o.VmCount == nil {
+	if o == nil || IsNil(o.VmCount) {
 		return nil, false
 	}
 	return o.VmCount, true
@@ -306,7 +310,7 @@ func (o *VirtualizationBaseDatastore) GetVmCountOk() (*int64, bool) {
 
 // HasVmCount returns a boolean if a field has been set.
 func (o *VirtualizationBaseDatastore) HasVmCount() bool {
-	if o != nil && o.VmCount != nil {
+	if o != nil && !IsNil(o.VmCount) {
 		return true
 	}
 
@@ -319,37 +323,41 @@ func (o *VirtualizationBaseDatastore) SetVmCount(v int64) {
 }
 
 func (o VirtualizationBaseDatastore) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationBaseDatastore) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseSourceDevice, errVirtualizationBaseSourceDevice := json.Marshal(o.VirtualizationBaseSourceDevice)
 	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
+		return map[string]interface{}{}, errVirtualizationBaseSourceDevice
 	}
 	errVirtualizationBaseSourceDevice = json.Unmarshal([]byte(serializedVirtualizationBaseSourceDevice), &toSerialize)
 	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
+		return map[string]interface{}{}, errVirtualizationBaseSourceDevice
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Capacity.IsSet() {
 		toSerialize["Capacity"] = o.Capacity.Get()
 	}
-	if o.HostCount != nil {
+	if !IsNil(o.HostCount) {
 		toSerialize["HostCount"] = o.HostCount
 	}
-	if o.Identity != nil {
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.VmCount != nil {
+	if !IsNil(o.VmCount) {
 		toSerialize["VmCount"] = o.VmCount
 	}
 
@@ -357,10 +365,32 @@ func (o VirtualizationBaseDatastore) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationBaseDatastore) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationBaseDatastore) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationBaseDatastoreWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -381,7 +411,7 @@ func (o *VirtualizationBaseDatastore) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationBaseDatastoreWithoutEmbeddedStruct := VirtualizationBaseDatastoreWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationBaseDatastoreWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationBaseDatastoreWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationBaseDatastore := _VirtualizationBaseDatastore{}
 		varVirtualizationBaseDatastore.ClassId = varVirtualizationBaseDatastoreWithoutEmbeddedStruct.ClassId
@@ -399,7 +429,7 @@ func (o *VirtualizationBaseDatastore) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVirtualizationBaseDatastore := _VirtualizationBaseDatastore{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationBaseDatastore)
+	err = json.Unmarshal(data, &varVirtualizationBaseDatastore)
 	if err == nil {
 		o.VirtualizationBaseSourceDevice = varVirtualizationBaseDatastore.VirtualizationBaseSourceDevice
 	} else {
@@ -408,7 +438,7 @@ func (o *VirtualizationBaseDatastore) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Capacity")

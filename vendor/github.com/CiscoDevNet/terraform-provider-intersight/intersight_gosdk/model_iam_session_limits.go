@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamSessionLimits type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamSessionLimits{}
 
 // IamSessionLimits The session related configuration limits.
 type IamSessionLimits struct {
@@ -31,9 +35,9 @@ type IamSessionLimits struct {
 	// The maximum number of sessions allowed per user. Default value is 32.
 	PerUserLimit *int64 `json:"PerUserLimit,omitempty"`
 	// The session expiry duration in seconds. The minimum value is 350 seconds and the maximum value is 31536000 seconds (1 year). The system default value is 57600 seconds.
-	SessionTimeOut       *int64                     `json:"SessionTimeOut,omitempty"`
-	Account              *IamAccountRelationship    `json:"Account,omitempty"`
-	Permission           *IamPermissionRelationship `json:"Permission,omitempty"`
+	SessionTimeOut       *int64                            `json:"SessionTimeOut,omitempty"`
+	Account              NullableIamAccountRelationship    `json:"Account,omitempty"`
+	Permission           NullableIamPermissionRelationship `json:"Permission,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -128,7 +132,7 @@ func (o *IamSessionLimits) SetObjectType(v string) {
 
 // GetIdleTimeOut returns the IdleTimeOut field value if set, zero value otherwise.
 func (o *IamSessionLimits) GetIdleTimeOut() int64 {
-	if o == nil || o.IdleTimeOut == nil {
+	if o == nil || IsNil(o.IdleTimeOut) {
 		var ret int64
 		return ret
 	}
@@ -138,7 +142,7 @@ func (o *IamSessionLimits) GetIdleTimeOut() int64 {
 // GetIdleTimeOutOk returns a tuple with the IdleTimeOut field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamSessionLimits) GetIdleTimeOutOk() (*int64, bool) {
-	if o == nil || o.IdleTimeOut == nil {
+	if o == nil || IsNil(o.IdleTimeOut) {
 		return nil, false
 	}
 	return o.IdleTimeOut, true
@@ -146,7 +150,7 @@ func (o *IamSessionLimits) GetIdleTimeOutOk() (*int64, bool) {
 
 // HasIdleTimeOut returns a boolean if a field has been set.
 func (o *IamSessionLimits) HasIdleTimeOut() bool {
-	if o != nil && o.IdleTimeOut != nil {
+	if o != nil && !IsNil(o.IdleTimeOut) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *IamSessionLimits) SetIdleTimeOut(v int64) {
 
 // GetMaximumLimit returns the MaximumLimit field value if set, zero value otherwise.
 func (o *IamSessionLimits) GetMaximumLimit() int64 {
-	if o == nil || o.MaximumLimit == nil {
+	if o == nil || IsNil(o.MaximumLimit) {
 		var ret int64
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *IamSessionLimits) GetMaximumLimit() int64 {
 // GetMaximumLimitOk returns a tuple with the MaximumLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamSessionLimits) GetMaximumLimitOk() (*int64, bool) {
-	if o == nil || o.MaximumLimit == nil {
+	if o == nil || IsNil(o.MaximumLimit) {
 		return nil, false
 	}
 	return o.MaximumLimit, true
@@ -178,7 +182,7 @@ func (o *IamSessionLimits) GetMaximumLimitOk() (*int64, bool) {
 
 // HasMaximumLimit returns a boolean if a field has been set.
 func (o *IamSessionLimits) HasMaximumLimit() bool {
-	if o != nil && o.MaximumLimit != nil {
+	if o != nil && !IsNil(o.MaximumLimit) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *IamSessionLimits) SetMaximumLimit(v int64) {
 
 // GetPerUserLimit returns the PerUserLimit field value if set, zero value otherwise.
 func (o *IamSessionLimits) GetPerUserLimit() int64 {
-	if o == nil || o.PerUserLimit == nil {
+	if o == nil || IsNil(o.PerUserLimit) {
 		var ret int64
 		return ret
 	}
@@ -202,7 +206,7 @@ func (o *IamSessionLimits) GetPerUserLimit() int64 {
 // GetPerUserLimitOk returns a tuple with the PerUserLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamSessionLimits) GetPerUserLimitOk() (*int64, bool) {
-	if o == nil || o.PerUserLimit == nil {
+	if o == nil || IsNil(o.PerUserLimit) {
 		return nil, false
 	}
 	return o.PerUserLimit, true
@@ -210,7 +214,7 @@ func (o *IamSessionLimits) GetPerUserLimitOk() (*int64, bool) {
 
 // HasPerUserLimit returns a boolean if a field has been set.
 func (o *IamSessionLimits) HasPerUserLimit() bool {
-	if o != nil && o.PerUserLimit != nil {
+	if o != nil && !IsNil(o.PerUserLimit) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *IamSessionLimits) SetPerUserLimit(v int64) {
 
 // GetSessionTimeOut returns the SessionTimeOut field value if set, zero value otherwise.
 func (o *IamSessionLimits) GetSessionTimeOut() int64 {
-	if o == nil || o.SessionTimeOut == nil {
+	if o == nil || IsNil(o.SessionTimeOut) {
 		var ret int64
 		return ret
 	}
@@ -234,7 +238,7 @@ func (o *IamSessionLimits) GetSessionTimeOut() int64 {
 // GetSessionTimeOutOk returns a tuple with the SessionTimeOut field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamSessionLimits) GetSessionTimeOutOk() (*int64, bool) {
-	if o == nil || o.SessionTimeOut == nil {
+	if o == nil || IsNil(o.SessionTimeOut) {
 		return nil, false
 	}
 	return o.SessionTimeOut, true
@@ -242,7 +246,7 @@ func (o *IamSessionLimits) GetSessionTimeOutOk() (*int64, bool) {
 
 // HasSessionTimeOut returns a boolean if a field has been set.
 func (o *IamSessionLimits) HasSessionTimeOut() bool {
-	if o != nil && o.SessionTimeOut != nil {
+	if o != nil && !IsNil(o.SessionTimeOut) {
 		return true
 	}
 
@@ -254,113 +258,161 @@ func (o *IamSessionLimits) SetSessionTimeOut(v int64) {
 	o.SessionTimeOut = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamSessionLimits) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamSessionLimits) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *IamSessionLimits) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *IamSessionLimits) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetPermission returns the Permission field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *IamSessionLimits) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *IamSessionLimits) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetPermission returns the Permission field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamSessionLimits) GetPermission() IamPermissionRelationship {
-	if o == nil || o.Permission == nil {
+	if o == nil || IsNil(o.Permission.Get()) {
 		var ret IamPermissionRelationship
 		return ret
 	}
-	return *o.Permission
+	return *o.Permission.Get()
 }
 
 // GetPermissionOk returns a tuple with the Permission field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamSessionLimits) GetPermissionOk() (*IamPermissionRelationship, bool) {
-	if o == nil || o.Permission == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Permission, true
+	return o.Permission.Get(), o.Permission.IsSet()
 }
 
 // HasPermission returns a boolean if a field has been set.
 func (o *IamSessionLimits) HasPermission() bool {
-	if o != nil && o.Permission != nil {
+	if o != nil && o.Permission.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPermission gets a reference to the given IamPermissionRelationship and assigns it to the Permission field.
+// SetPermission gets a reference to the given NullableIamPermissionRelationship and assigns it to the Permission field.
 func (o *IamSessionLimits) SetPermission(v IamPermissionRelationship) {
-	o.Permission = &v
+	o.Permission.Set(&v)
+}
+
+// SetPermissionNil sets the value for Permission to be an explicit nil
+func (o *IamSessionLimits) SetPermissionNil() {
+	o.Permission.Set(nil)
+}
+
+// UnsetPermission ensures that no value is present for Permission, not even an explicit nil
+func (o *IamSessionLimits) UnsetPermission() {
+	o.Permission.Unset()
 }
 
 func (o IamSessionLimits) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamSessionLimits) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IdleTimeOut != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IdleTimeOut) {
 		toSerialize["IdleTimeOut"] = o.IdleTimeOut
 	}
-	if o.MaximumLimit != nil {
+	if !IsNil(o.MaximumLimit) {
 		toSerialize["MaximumLimit"] = o.MaximumLimit
 	}
-	if o.PerUserLimit != nil {
+	if !IsNil(o.PerUserLimit) {
 		toSerialize["PerUserLimit"] = o.PerUserLimit
 	}
-	if o.SessionTimeOut != nil {
+	if !IsNil(o.SessionTimeOut) {
 		toSerialize["SessionTimeOut"] = o.SessionTimeOut
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.Permission != nil {
-		toSerialize["Permission"] = o.Permission
+	if o.Permission.IsSet() {
+		toSerialize["Permission"] = o.Permission.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamSessionLimits) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamSessionLimits) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamSessionLimitsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -373,14 +425,14 @@ func (o *IamSessionLimits) UnmarshalJSON(bytes []byte) (err error) {
 		// The maximum number of sessions allowed per user. Default value is 32.
 		PerUserLimit *int64 `json:"PerUserLimit,omitempty"`
 		// The session expiry duration in seconds. The minimum value is 350 seconds and the maximum value is 31536000 seconds (1 year). The system default value is 57600 seconds.
-		SessionTimeOut *int64                     `json:"SessionTimeOut,omitempty"`
-		Account        *IamAccountRelationship    `json:"Account,omitempty"`
-		Permission     *IamPermissionRelationship `json:"Permission,omitempty"`
+		SessionTimeOut *int64                            `json:"SessionTimeOut,omitempty"`
+		Account        NullableIamAccountRelationship    `json:"Account,omitempty"`
+		Permission     NullableIamPermissionRelationship `json:"Permission,omitempty"`
 	}
 
 	varIamSessionLimitsWithoutEmbeddedStruct := IamSessionLimitsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamSessionLimitsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamSessionLimitsWithoutEmbeddedStruct)
 	if err == nil {
 		varIamSessionLimits := _IamSessionLimits{}
 		varIamSessionLimits.ClassId = varIamSessionLimitsWithoutEmbeddedStruct.ClassId
@@ -398,7 +450,7 @@ func (o *IamSessionLimits) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamSessionLimits := _IamSessionLimits{}
 
-	err = json.Unmarshal(bytes, &varIamSessionLimits)
+	err = json.Unmarshal(data, &varIamSessionLimits)
 	if err == nil {
 		o.MoBaseMo = varIamSessionLimits.MoBaseMo
 	} else {
@@ -407,7 +459,7 @@ func (o *IamSessionLimits) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IdleTimeOut")

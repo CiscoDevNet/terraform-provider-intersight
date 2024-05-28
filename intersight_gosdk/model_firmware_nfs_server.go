@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareNfsServer type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareNfsServer{}
 
 // FirmwareNfsServer Network share file server.
 type FirmwareNfsServer struct {
@@ -112,7 +116,7 @@ func (o *FirmwareNfsServer) SetObjectType(v string) {
 
 // GetFileLocation returns the FileLocation field value if set, zero value otherwise.
 func (o *FirmwareNfsServer) GetFileLocation() string {
-	if o == nil || o.FileLocation == nil {
+	if o == nil || IsNil(o.FileLocation) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *FirmwareNfsServer) GetFileLocation() string {
 // GetFileLocationOk returns a tuple with the FileLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareNfsServer) GetFileLocationOk() (*string, bool) {
-	if o == nil || o.FileLocation == nil {
+	if o == nil || IsNil(o.FileLocation) {
 		return nil, false
 	}
 	return o.FileLocation, true
@@ -130,7 +134,7 @@ func (o *FirmwareNfsServer) GetFileLocationOk() (*string, bool) {
 
 // HasFileLocation returns a boolean if a field has been set.
 func (o *FirmwareNfsServer) HasFileLocation() bool {
-	if o != nil && o.FileLocation != nil {
+	if o != nil && !IsNil(o.FileLocation) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *FirmwareNfsServer) SetFileLocation(v string) {
 
 // GetMountOptions returns the MountOptions field value if set, zero value otherwise.
 func (o *FirmwareNfsServer) GetMountOptions() string {
-	if o == nil || o.MountOptions == nil {
+	if o == nil || IsNil(o.MountOptions) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *FirmwareNfsServer) GetMountOptions() string {
 // GetMountOptionsOk returns a tuple with the MountOptions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareNfsServer) GetMountOptionsOk() (*string, bool) {
-	if o == nil || o.MountOptions == nil {
+	if o == nil || IsNil(o.MountOptions) {
 		return nil, false
 	}
 	return o.MountOptions, true
@@ -162,7 +166,7 @@ func (o *FirmwareNfsServer) GetMountOptionsOk() (*string, bool) {
 
 // HasMountOptions returns a boolean if a field has been set.
 func (o *FirmwareNfsServer) HasMountOptions() bool {
-	if o != nil && o.MountOptions != nil {
+	if o != nil && !IsNil(o.MountOptions) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *FirmwareNfsServer) SetMountOptions(v string) {
 
 // GetRemoteFile returns the RemoteFile field value if set, zero value otherwise.
 func (o *FirmwareNfsServer) GetRemoteFile() string {
-	if o == nil || o.RemoteFile == nil {
+	if o == nil || IsNil(o.RemoteFile) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *FirmwareNfsServer) GetRemoteFile() string {
 // GetRemoteFileOk returns a tuple with the RemoteFile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareNfsServer) GetRemoteFileOk() (*string, bool) {
-	if o == nil || o.RemoteFile == nil {
+	if o == nil || IsNil(o.RemoteFile) {
 		return nil, false
 	}
 	return o.RemoteFile, true
@@ -194,7 +198,7 @@ func (o *FirmwareNfsServer) GetRemoteFileOk() (*string, bool) {
 
 // HasRemoteFile returns a boolean if a field has been set.
 func (o *FirmwareNfsServer) HasRemoteFile() bool {
-	if o != nil && o.RemoteFile != nil {
+	if o != nil && !IsNil(o.RemoteFile) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *FirmwareNfsServer) SetRemoteFile(v string) {
 
 // GetRemoteIp returns the RemoteIp field value if set, zero value otherwise.
 func (o *FirmwareNfsServer) GetRemoteIp() string {
-	if o == nil || o.RemoteIp == nil {
+	if o == nil || IsNil(o.RemoteIp) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *FirmwareNfsServer) GetRemoteIp() string {
 // GetRemoteIpOk returns a tuple with the RemoteIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareNfsServer) GetRemoteIpOk() (*string, bool) {
-	if o == nil || o.RemoteIp == nil {
+	if o == nil || IsNil(o.RemoteIp) {
 		return nil, false
 	}
 	return o.RemoteIp, true
@@ -226,7 +230,7 @@ func (o *FirmwareNfsServer) GetRemoteIpOk() (*string, bool) {
 
 // HasRemoteIp returns a boolean if a field has been set.
 func (o *FirmwareNfsServer) HasRemoteIp() bool {
-	if o != nil && o.RemoteIp != nil {
+	if o != nil && !IsNil(o.RemoteIp) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *FirmwareNfsServer) SetRemoteIp(v string) {
 
 // GetRemoteShare returns the RemoteShare field value if set, zero value otherwise.
 func (o *FirmwareNfsServer) GetRemoteShare() string {
-	if o == nil || o.RemoteShare == nil {
+	if o == nil || IsNil(o.RemoteShare) {
 		var ret string
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *FirmwareNfsServer) GetRemoteShare() string {
 // GetRemoteShareOk returns a tuple with the RemoteShare field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareNfsServer) GetRemoteShareOk() (*string, bool) {
-	if o == nil || o.RemoteShare == nil {
+	if o == nil || IsNil(o.RemoteShare) {
 		return nil, false
 	}
 	return o.RemoteShare, true
@@ -258,7 +262,7 @@ func (o *FirmwareNfsServer) GetRemoteShareOk() (*string, bool) {
 
 // HasRemoteShare returns a boolean if a field has been set.
 func (o *FirmwareNfsServer) HasRemoteShare() bool {
-	if o != nil && o.RemoteShare != nil {
+	if o != nil && !IsNil(o.RemoteShare) {
 		return true
 	}
 
@@ -271,34 +275,38 @@ func (o *FirmwareNfsServer) SetRemoteShare(v string) {
 }
 
 func (o FirmwareNfsServer) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareNfsServer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FileLocation != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FileLocation) {
 		toSerialize["FileLocation"] = o.FileLocation
 	}
-	if o.MountOptions != nil {
+	if !IsNil(o.MountOptions) {
 		toSerialize["MountOptions"] = o.MountOptions
 	}
-	if o.RemoteFile != nil {
+	if !IsNil(o.RemoteFile) {
 		toSerialize["RemoteFile"] = o.RemoteFile
 	}
-	if o.RemoteIp != nil {
+	if !IsNil(o.RemoteIp) {
 		toSerialize["RemoteIp"] = o.RemoteIp
 	}
-	if o.RemoteShare != nil {
+	if !IsNil(o.RemoteShare) {
 		toSerialize["RemoteShare"] = o.RemoteShare
 	}
 
@@ -306,10 +314,32 @@ func (o FirmwareNfsServer) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareNfsServer) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareNfsServer) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareNfsServerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -329,7 +359,7 @@ func (o *FirmwareNfsServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareNfsServerWithoutEmbeddedStruct := FirmwareNfsServerWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareNfsServerWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareNfsServerWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareNfsServer := _FirmwareNfsServer{}
 		varFirmwareNfsServer.ClassId = varFirmwareNfsServerWithoutEmbeddedStruct.ClassId
@@ -346,7 +376,7 @@ func (o *FirmwareNfsServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareNfsServer := _FirmwareNfsServer{}
 
-	err = json.Unmarshal(bytes, &varFirmwareNfsServer)
+	err = json.Unmarshal(data, &varFirmwareNfsServer)
 	if err == nil {
 		o.MoBaseComplexType = varFirmwareNfsServer.MoBaseComplexType
 	} else {
@@ -355,7 +385,7 @@ func (o *FirmwareNfsServer) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FileLocation")

@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.UpgradeImpact"]
 **Chassis** | Pointer to [**[]EquipmentChassisRelationship**](EquipmentChassisRelationship.md) | An array of relationships to equipmentChassis resources. | [optional] 
 **Device** | Pointer to [**[]AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) | An array of relationships to assetDeviceRegistration resources. | [optional] [readonly] 
-**Distributable** | Pointer to [**FirmwareDistributableRelationship**](FirmwareDistributableRelationship.md) |  | [optional] 
+**Distributable** | Pointer to [**NullableFirmwareDistributableRelationship**](FirmwareDistributableRelationship.md) |  | [optional] 
 **NetworkElements** | Pointer to [**[]NetworkElementRelationship**](NetworkElementRelationship.md) | An array of relationships to networkElement resources. | [optional] 
-**Release** | Pointer to [**SoftwarerepositoryReleaseRelationship**](SoftwarerepositoryReleaseRelationship.md) |  | [optional] 
+**Release** | Pointer to [**NullableSoftwarerepositoryReleaseRelationship**](SoftwarerepositoryReleaseRelationship.md) |  | [optional] 
 **Server** | Pointer to [**[]ComputePhysicalRelationship**](ComputePhysicalRelationship.md) | An array of relationships to computePhysical resources. | [optional] 
 
 ## Methods
@@ -167,6 +167,16 @@ SetDistributable sets Distributable field to given value.
 
 HasDistributable returns a boolean if a field has been set.
 
+### SetDistributableNil
+
+`func (o *FirmwareUpgradeImpact) SetDistributableNil(b bool)`
+
+ SetDistributableNil sets the value for Distributable to be an explicit nil
+
+### UnsetDistributable
+`func (o *FirmwareUpgradeImpact) UnsetDistributable()`
+
+UnsetDistributable ensures that no value is present for Distributable, not even an explicit nil
 ### GetNetworkElements
 
 `func (o *FirmwareUpgradeImpact) GetNetworkElements() []NetworkElementRelationship`
@@ -227,6 +237,16 @@ SetRelease sets Release field to given value.
 
 HasRelease returns a boolean if a field has been set.
 
+### SetReleaseNil
+
+`func (o *FirmwareUpgradeImpact) SetReleaseNil(b bool)`
+
+ SetReleaseNil sets the value for Release to be an explicit nil
+
+### UnsetRelease
+`func (o *FirmwareUpgradeImpact) UnsetRelease()`
+
+UnsetRelease ensures that no value is present for Release, not even an explicit nil
 ### GetServer
 
 `func (o *FirmwareUpgradeImpact) GetServer() []ComputePhysicalRelationship`

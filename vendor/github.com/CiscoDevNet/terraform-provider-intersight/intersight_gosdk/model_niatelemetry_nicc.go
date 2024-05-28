@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryNicc type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryNicc{}
 
 // NiatelemetryNicc Object to capture NICC properties.
 type NiatelemetryNicc struct {
@@ -31,8 +35,8 @@ type NiatelemetryNicc struct {
 	// NICC state last updated timestamp. It indicates the last updated timestamp for operational state of NICC app.
 	NiccStateLastUpdateTs *string `json:"NiccStateLastUpdateTs,omitempty"`
 	// NICC version. NiccVersion is used to check compatibility with Nexus Cloud features.
-	NiccVersion          *string                              `json:"NiccVersion,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	NiccVersion          *string                                     `json:"NiccVersion,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *NiatelemetryNicc) SetObjectType(v string) {
 
 // GetConfigIssues returns the ConfigIssues field value if set, zero value otherwise.
 func (o *NiatelemetryNicc) GetConfigIssues() string {
-	if o == nil || o.ConfigIssues == nil {
+	if o == nil || IsNil(o.ConfigIssues) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *NiatelemetryNicc) GetConfigIssues() string {
 // GetConfigIssuesOk returns a tuple with the ConfigIssues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNicc) GetConfigIssuesOk() (*string, bool) {
-	if o == nil || o.ConfigIssues == nil {
+	if o == nil || IsNil(o.ConfigIssues) {
 		return nil, false
 	}
 	return o.ConfigIssues, true
@@ -129,7 +133,7 @@ func (o *NiatelemetryNicc) GetConfigIssuesOk() (*string, bool) {
 
 // HasConfigIssues returns a boolean if a field has been set.
 func (o *NiatelemetryNicc) HasConfigIssues() bool {
-	if o != nil && o.ConfigIssues != nil {
+	if o != nil && !IsNil(o.ConfigIssues) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *NiatelemetryNicc) SetConfigIssues(v string) {
 
 // GetNiccState returns the NiccState field value if set, zero value otherwise.
 func (o *NiatelemetryNicc) GetNiccState() string {
-	if o == nil || o.NiccState == nil {
+	if o == nil || IsNil(o.NiccState) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *NiatelemetryNicc) GetNiccState() string {
 // GetNiccStateOk returns a tuple with the NiccState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNicc) GetNiccStateOk() (*string, bool) {
-	if o == nil || o.NiccState == nil {
+	if o == nil || IsNil(o.NiccState) {
 		return nil, false
 	}
 	return o.NiccState, true
@@ -161,7 +165,7 @@ func (o *NiatelemetryNicc) GetNiccStateOk() (*string, bool) {
 
 // HasNiccState returns a boolean if a field has been set.
 func (o *NiatelemetryNicc) HasNiccState() bool {
-	if o != nil && o.NiccState != nil {
+	if o != nil && !IsNil(o.NiccState) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *NiatelemetryNicc) SetNiccState(v string) {
 
 // GetNiccStateLastUpdateTs returns the NiccStateLastUpdateTs field value if set, zero value otherwise.
 func (o *NiatelemetryNicc) GetNiccStateLastUpdateTs() string {
-	if o == nil || o.NiccStateLastUpdateTs == nil {
+	if o == nil || IsNil(o.NiccStateLastUpdateTs) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *NiatelemetryNicc) GetNiccStateLastUpdateTs() string {
 // GetNiccStateLastUpdateTsOk returns a tuple with the NiccStateLastUpdateTs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNicc) GetNiccStateLastUpdateTsOk() (*string, bool) {
-	if o == nil || o.NiccStateLastUpdateTs == nil {
+	if o == nil || IsNil(o.NiccStateLastUpdateTs) {
 		return nil, false
 	}
 	return o.NiccStateLastUpdateTs, true
@@ -193,7 +197,7 @@ func (o *NiatelemetryNicc) GetNiccStateLastUpdateTsOk() (*string, bool) {
 
 // HasNiccStateLastUpdateTs returns a boolean if a field has been set.
 func (o *NiatelemetryNicc) HasNiccStateLastUpdateTs() bool {
-	if o != nil && o.NiccStateLastUpdateTs != nil {
+	if o != nil && !IsNil(o.NiccStateLastUpdateTs) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *NiatelemetryNicc) SetNiccStateLastUpdateTs(v string) {
 
 // GetNiccVersion returns the NiccVersion field value if set, zero value otherwise.
 func (o *NiatelemetryNicc) GetNiccVersion() string {
-	if o == nil || o.NiccVersion == nil {
+	if o == nil || IsNil(o.NiccVersion) {
 		var ret string
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *NiatelemetryNicc) GetNiccVersion() string {
 // GetNiccVersionOk returns a tuple with the NiccVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNicc) GetNiccVersionOk() (*string, bool) {
-	if o == nil || o.NiccVersion == nil {
+	if o == nil || IsNil(o.NiccVersion) {
 		return nil, false
 	}
 	return o.NiccVersion, true
@@ -225,7 +229,7 @@ func (o *NiatelemetryNicc) GetNiccVersionOk() (*string, bool) {
 
 // HasNiccVersion returns a boolean if a field has been set.
 func (o *NiatelemetryNicc) HasNiccVersion() bool {
-	if o != nil && o.NiccVersion != nil {
+	if o != nil && !IsNil(o.NiccVersion) {
 		return true
 	}
 
@@ -237,78 +241,115 @@ func (o *NiatelemetryNicc) SetNiccVersion(v string) {
 	o.NiccVersion = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryNicc) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNicc) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryNicc) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryNicc) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryNicc) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryNicc) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryNicc) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryNicc) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConfigIssues != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConfigIssues) {
 		toSerialize["ConfigIssues"] = o.ConfigIssues
 	}
-	if o.NiccState != nil {
+	if !IsNil(o.NiccState) {
 		toSerialize["NiccState"] = o.NiccState
 	}
-	if o.NiccStateLastUpdateTs != nil {
+	if !IsNil(o.NiccStateLastUpdateTs) {
 		toSerialize["NiccStateLastUpdateTs"] = o.NiccStateLastUpdateTs
 	}
-	if o.NiccVersion != nil {
+	if !IsNil(o.NiccVersion) {
 		toSerialize["NiccVersion"] = o.NiccVersion
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryNicc) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryNicc) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryNiccWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -321,13 +362,13 @@ func (o *NiatelemetryNicc) UnmarshalJSON(bytes []byte) (err error) {
 		// NICC state last updated timestamp. It indicates the last updated timestamp for operational state of NICC app.
 		NiccStateLastUpdateTs *string `json:"NiccStateLastUpdateTs,omitempty"`
 		// NICC version. NiccVersion is used to check compatibility with Nexus Cloud features.
-		NiccVersion      *string                              `json:"NiccVersion,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		NiccVersion      *string                                     `json:"NiccVersion,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryNiccWithoutEmbeddedStruct := NiatelemetryNiccWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNiccWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryNiccWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryNicc := _NiatelemetryNicc{}
 		varNiatelemetryNicc.ClassId = varNiatelemetryNiccWithoutEmbeddedStruct.ClassId
@@ -344,7 +385,7 @@ func (o *NiatelemetryNicc) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryNicc := _NiatelemetryNicc{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNicc)
+	err = json.Unmarshal(data, &varNiatelemetryNicc)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryNicc.MoBaseMo
 	} else {
@@ -353,7 +394,7 @@ func (o *NiatelemetryNicc) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigIssues")

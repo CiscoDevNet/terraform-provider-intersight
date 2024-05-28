@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesVersion type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesVersion{}
 
 // KubernetesVersion A policy capturing software versions for a Kubernetes cluster.
 type KubernetesVersion struct {
@@ -32,12 +36,12 @@ type KubernetesVersion struct {
 	// Desired Kubernetes version.
 	KubernetesVersion *string `json:"KubernetesVersion,omitempty"`
 	// The name of this IKS kubernetes version.
-	Name                        *string                                    `json:"Name,omitempty"`
-	BootIso                     *SoftwareSolutionDistributableRelationship `json:"BootIso,omitempty"`
-	Catalog                     *KubernetesCatalogRelationship             `json:"Catalog,omitempty"`
-	OvaImageTemplate            *SoftwareSolutionDistributableRelationship `json:"OvaImageTemplate,omitempty"`
-	Qcow2NodeTemplate           *SoftwareSolutionDistributableRelationship `json:"Qcow2NodeTemplate,omitempty"`
-	Qcow2VirtualMachineTemplate *SoftwareSolutionDistributableRelationship `json:"Qcow2VirtualMachineTemplate,omitempty"`
+	Name                        *string                                           `json:"Name,omitempty"`
+	BootIso                     NullableSoftwareSolutionDistributableRelationship `json:"BootIso,omitempty"`
+	Catalog                     NullableKubernetesCatalogRelationship             `json:"Catalog,omitempty"`
+	OvaImageTemplate            NullableSoftwareSolutionDistributableRelationship `json:"OvaImageTemplate,omitempty"`
+	Qcow2NodeTemplate           NullableSoftwareSolutionDistributableRelationship `json:"Qcow2NodeTemplate,omitempty"`
+	Qcow2VirtualMachineTemplate NullableSoftwareSolutionDistributableRelationship `json:"Qcow2VirtualMachineTemplate,omitempty"`
 	AdditionalProperties        map[string]interface{}
 }
 
@@ -127,7 +131,7 @@ func (o *KubernetesVersion) GetEssentialAddons() []KubernetesAddonVersionReferen
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVersion) GetEssentialAddonsOk() ([]KubernetesAddonVersionReference, bool) {
-	if o == nil || o.EssentialAddons == nil {
+	if o == nil || IsNil(o.EssentialAddons) {
 		return nil, false
 	}
 	return o.EssentialAddons, true
@@ -135,7 +139,7 @@ func (o *KubernetesVersion) GetEssentialAddonsOk() ([]KubernetesAddonVersionRefe
 
 // HasEssentialAddons returns a boolean if a field has been set.
 func (o *KubernetesVersion) HasEssentialAddons() bool {
-	if o != nil && o.EssentialAddons != nil {
+	if o != nil && IsNil(o.EssentialAddons) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *KubernetesVersion) SetEssentialAddons(v []KubernetesAddonVersionReferen
 
 // GetHelmOperatorVersion returns the HelmOperatorVersion field value if set, zero value otherwise.
 func (o *KubernetesVersion) GetHelmOperatorVersion() string {
-	if o == nil || o.HelmOperatorVersion == nil {
+	if o == nil || IsNil(o.HelmOperatorVersion) {
 		var ret string
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *KubernetesVersion) GetHelmOperatorVersion() string {
 // GetHelmOperatorVersionOk returns a tuple with the HelmOperatorVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesVersion) GetHelmOperatorVersionOk() (*string, bool) {
-	if o == nil || o.HelmOperatorVersion == nil {
+	if o == nil || IsNil(o.HelmOperatorVersion) {
 		return nil, false
 	}
 	return o.HelmOperatorVersion, true
@@ -167,7 +171,7 @@ func (o *KubernetesVersion) GetHelmOperatorVersionOk() (*string, bool) {
 
 // HasHelmOperatorVersion returns a boolean if a field has been set.
 func (o *KubernetesVersion) HasHelmOperatorVersion() bool {
-	if o != nil && o.HelmOperatorVersion != nil {
+	if o != nil && !IsNil(o.HelmOperatorVersion) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *KubernetesVersion) SetHelmOperatorVersion(v string) {
 
 // GetIksUtilityContainer returns the IksUtilityContainer field value if set, zero value otherwise.
 func (o *KubernetesVersion) GetIksUtilityContainer() string {
-	if o == nil || o.IksUtilityContainer == nil {
+	if o == nil || IsNil(o.IksUtilityContainer) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *KubernetesVersion) GetIksUtilityContainer() string {
 // GetIksUtilityContainerOk returns a tuple with the IksUtilityContainer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesVersion) GetIksUtilityContainerOk() (*string, bool) {
-	if o == nil || o.IksUtilityContainer == nil {
+	if o == nil || IsNil(o.IksUtilityContainer) {
 		return nil, false
 	}
 	return o.IksUtilityContainer, true
@@ -199,7 +203,7 @@ func (o *KubernetesVersion) GetIksUtilityContainerOk() (*string, bool) {
 
 // HasIksUtilityContainer returns a boolean if a field has been set.
 func (o *KubernetesVersion) HasIksUtilityContainer() bool {
-	if o != nil && o.IksUtilityContainer != nil {
+	if o != nil && !IsNil(o.IksUtilityContainer) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *KubernetesVersion) SetIksUtilityContainer(v string) {
 
 // GetKubernetesVersion returns the KubernetesVersion field value if set, zero value otherwise.
 func (o *KubernetesVersion) GetKubernetesVersion() string {
-	if o == nil || o.KubernetesVersion == nil {
+	if o == nil || IsNil(o.KubernetesVersion) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *KubernetesVersion) GetKubernetesVersion() string {
 // GetKubernetesVersionOk returns a tuple with the KubernetesVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesVersion) GetKubernetesVersionOk() (*string, bool) {
-	if o == nil || o.KubernetesVersion == nil {
+	if o == nil || IsNil(o.KubernetesVersion) {
 		return nil, false
 	}
 	return o.KubernetesVersion, true
@@ -231,7 +235,7 @@ func (o *KubernetesVersion) GetKubernetesVersionOk() (*string, bool) {
 
 // HasKubernetesVersion returns a boolean if a field has been set.
 func (o *KubernetesVersion) HasKubernetesVersion() bool {
-	if o != nil && o.KubernetesVersion != nil {
+	if o != nil && !IsNil(o.KubernetesVersion) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *KubernetesVersion) SetKubernetesVersion(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *KubernetesVersion) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *KubernetesVersion) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesVersion) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -263,7 +267,7 @@ func (o *KubernetesVersion) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *KubernetesVersion) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -275,221 +279,302 @@ func (o *KubernetesVersion) SetName(v string) {
 	o.Name = &v
 }
 
-// GetBootIso returns the BootIso field value if set, zero value otherwise.
+// GetBootIso returns the BootIso field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesVersion) GetBootIso() SoftwareSolutionDistributableRelationship {
-	if o == nil || o.BootIso == nil {
+	if o == nil || IsNil(o.BootIso.Get()) {
 		var ret SoftwareSolutionDistributableRelationship
 		return ret
 	}
-	return *o.BootIso
+	return *o.BootIso.Get()
 }
 
 // GetBootIsoOk returns a tuple with the BootIso field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVersion) GetBootIsoOk() (*SoftwareSolutionDistributableRelationship, bool) {
-	if o == nil || o.BootIso == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BootIso, true
+	return o.BootIso.Get(), o.BootIso.IsSet()
 }
 
 // HasBootIso returns a boolean if a field has been set.
 func (o *KubernetesVersion) HasBootIso() bool {
-	if o != nil && o.BootIso != nil {
+	if o != nil && o.BootIso.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBootIso gets a reference to the given SoftwareSolutionDistributableRelationship and assigns it to the BootIso field.
+// SetBootIso gets a reference to the given NullableSoftwareSolutionDistributableRelationship and assigns it to the BootIso field.
 func (o *KubernetesVersion) SetBootIso(v SoftwareSolutionDistributableRelationship) {
-	o.BootIso = &v
+	o.BootIso.Set(&v)
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// SetBootIsoNil sets the value for BootIso to be an explicit nil
+func (o *KubernetesVersion) SetBootIsoNil() {
+	o.BootIso.Set(nil)
+}
+
+// UnsetBootIso ensures that no value is present for BootIso, not even an explicit nil
+func (o *KubernetesVersion) UnsetBootIso() {
+	o.BootIso.Unset()
+}
+
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesVersion) GetCatalog() KubernetesCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret KubernetesCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVersion) GetCatalogOk() (*KubernetesCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *KubernetesVersion) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given KubernetesCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableKubernetesCatalogRelationship and assigns it to the Catalog field.
 func (o *KubernetesVersion) SetCatalog(v KubernetesCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
 }
 
-// GetOvaImageTemplate returns the OvaImageTemplate field value if set, zero value otherwise.
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *KubernetesVersion) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *KubernetesVersion) UnsetCatalog() {
+	o.Catalog.Unset()
+}
+
+// GetOvaImageTemplate returns the OvaImageTemplate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesVersion) GetOvaImageTemplate() SoftwareSolutionDistributableRelationship {
-	if o == nil || o.OvaImageTemplate == nil {
+	if o == nil || IsNil(o.OvaImageTemplate.Get()) {
 		var ret SoftwareSolutionDistributableRelationship
 		return ret
 	}
-	return *o.OvaImageTemplate
+	return *o.OvaImageTemplate.Get()
 }
 
 // GetOvaImageTemplateOk returns a tuple with the OvaImageTemplate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVersion) GetOvaImageTemplateOk() (*SoftwareSolutionDistributableRelationship, bool) {
-	if o == nil || o.OvaImageTemplate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.OvaImageTemplate, true
+	return o.OvaImageTemplate.Get(), o.OvaImageTemplate.IsSet()
 }
 
 // HasOvaImageTemplate returns a boolean if a field has been set.
 func (o *KubernetesVersion) HasOvaImageTemplate() bool {
-	if o != nil && o.OvaImageTemplate != nil {
+	if o != nil && o.OvaImageTemplate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOvaImageTemplate gets a reference to the given SoftwareSolutionDistributableRelationship and assigns it to the OvaImageTemplate field.
+// SetOvaImageTemplate gets a reference to the given NullableSoftwareSolutionDistributableRelationship and assigns it to the OvaImageTemplate field.
 func (o *KubernetesVersion) SetOvaImageTemplate(v SoftwareSolutionDistributableRelationship) {
-	o.OvaImageTemplate = &v
+	o.OvaImageTemplate.Set(&v)
 }
 
-// GetQcow2NodeTemplate returns the Qcow2NodeTemplate field value if set, zero value otherwise.
+// SetOvaImageTemplateNil sets the value for OvaImageTemplate to be an explicit nil
+func (o *KubernetesVersion) SetOvaImageTemplateNil() {
+	o.OvaImageTemplate.Set(nil)
+}
+
+// UnsetOvaImageTemplate ensures that no value is present for OvaImageTemplate, not even an explicit nil
+func (o *KubernetesVersion) UnsetOvaImageTemplate() {
+	o.OvaImageTemplate.Unset()
+}
+
+// GetQcow2NodeTemplate returns the Qcow2NodeTemplate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesVersion) GetQcow2NodeTemplate() SoftwareSolutionDistributableRelationship {
-	if o == nil || o.Qcow2NodeTemplate == nil {
+	if o == nil || IsNil(o.Qcow2NodeTemplate.Get()) {
 		var ret SoftwareSolutionDistributableRelationship
 		return ret
 	}
-	return *o.Qcow2NodeTemplate
+	return *o.Qcow2NodeTemplate.Get()
 }
 
 // GetQcow2NodeTemplateOk returns a tuple with the Qcow2NodeTemplate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVersion) GetQcow2NodeTemplateOk() (*SoftwareSolutionDistributableRelationship, bool) {
-	if o == nil || o.Qcow2NodeTemplate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Qcow2NodeTemplate, true
+	return o.Qcow2NodeTemplate.Get(), o.Qcow2NodeTemplate.IsSet()
 }
 
 // HasQcow2NodeTemplate returns a boolean if a field has been set.
 func (o *KubernetesVersion) HasQcow2NodeTemplate() bool {
-	if o != nil && o.Qcow2NodeTemplate != nil {
+	if o != nil && o.Qcow2NodeTemplate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetQcow2NodeTemplate gets a reference to the given SoftwareSolutionDistributableRelationship and assigns it to the Qcow2NodeTemplate field.
+// SetQcow2NodeTemplate gets a reference to the given NullableSoftwareSolutionDistributableRelationship and assigns it to the Qcow2NodeTemplate field.
 func (o *KubernetesVersion) SetQcow2NodeTemplate(v SoftwareSolutionDistributableRelationship) {
-	o.Qcow2NodeTemplate = &v
+	o.Qcow2NodeTemplate.Set(&v)
 }
 
-// GetQcow2VirtualMachineTemplate returns the Qcow2VirtualMachineTemplate field value if set, zero value otherwise.
+// SetQcow2NodeTemplateNil sets the value for Qcow2NodeTemplate to be an explicit nil
+func (o *KubernetesVersion) SetQcow2NodeTemplateNil() {
+	o.Qcow2NodeTemplate.Set(nil)
+}
+
+// UnsetQcow2NodeTemplate ensures that no value is present for Qcow2NodeTemplate, not even an explicit nil
+func (o *KubernetesVersion) UnsetQcow2NodeTemplate() {
+	o.Qcow2NodeTemplate.Unset()
+}
+
+// GetQcow2VirtualMachineTemplate returns the Qcow2VirtualMachineTemplate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesVersion) GetQcow2VirtualMachineTemplate() SoftwareSolutionDistributableRelationship {
-	if o == nil || o.Qcow2VirtualMachineTemplate == nil {
+	if o == nil || IsNil(o.Qcow2VirtualMachineTemplate.Get()) {
 		var ret SoftwareSolutionDistributableRelationship
 		return ret
 	}
-	return *o.Qcow2VirtualMachineTemplate
+	return *o.Qcow2VirtualMachineTemplate.Get()
 }
 
 // GetQcow2VirtualMachineTemplateOk returns a tuple with the Qcow2VirtualMachineTemplate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVersion) GetQcow2VirtualMachineTemplateOk() (*SoftwareSolutionDistributableRelationship, bool) {
-	if o == nil || o.Qcow2VirtualMachineTemplate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Qcow2VirtualMachineTemplate, true
+	return o.Qcow2VirtualMachineTemplate.Get(), o.Qcow2VirtualMachineTemplate.IsSet()
 }
 
 // HasQcow2VirtualMachineTemplate returns a boolean if a field has been set.
 func (o *KubernetesVersion) HasQcow2VirtualMachineTemplate() bool {
-	if o != nil && o.Qcow2VirtualMachineTemplate != nil {
+	if o != nil && o.Qcow2VirtualMachineTemplate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetQcow2VirtualMachineTemplate gets a reference to the given SoftwareSolutionDistributableRelationship and assigns it to the Qcow2VirtualMachineTemplate field.
+// SetQcow2VirtualMachineTemplate gets a reference to the given NullableSoftwareSolutionDistributableRelationship and assigns it to the Qcow2VirtualMachineTemplate field.
 func (o *KubernetesVersion) SetQcow2VirtualMachineTemplate(v SoftwareSolutionDistributableRelationship) {
-	o.Qcow2VirtualMachineTemplate = &v
+	o.Qcow2VirtualMachineTemplate.Set(&v)
+}
+
+// SetQcow2VirtualMachineTemplateNil sets the value for Qcow2VirtualMachineTemplate to be an explicit nil
+func (o *KubernetesVersion) SetQcow2VirtualMachineTemplateNil() {
+	o.Qcow2VirtualMachineTemplate.Set(nil)
+}
+
+// UnsetQcow2VirtualMachineTemplate ensures that no value is present for Qcow2VirtualMachineTemplate, not even an explicit nil
+func (o *KubernetesVersion) UnsetQcow2VirtualMachineTemplate() {
+	o.Qcow2VirtualMachineTemplate.Unset()
 }
 
 func (o KubernetesVersion) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesVersion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.EssentialAddons != nil {
 		toSerialize["EssentialAddons"] = o.EssentialAddons
 	}
-	if o.HelmOperatorVersion != nil {
+	if !IsNil(o.HelmOperatorVersion) {
 		toSerialize["HelmOperatorVersion"] = o.HelmOperatorVersion
 	}
-	if o.IksUtilityContainer != nil {
+	if !IsNil(o.IksUtilityContainer) {
 		toSerialize["IksUtilityContainer"] = o.IksUtilityContainer
 	}
-	if o.KubernetesVersion != nil {
+	if !IsNil(o.KubernetesVersion) {
 		toSerialize["KubernetesVersion"] = o.KubernetesVersion
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.BootIso != nil {
-		toSerialize["BootIso"] = o.BootIso
+	if o.BootIso.IsSet() {
+		toSerialize["BootIso"] = o.BootIso.Get()
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
-	if o.OvaImageTemplate != nil {
-		toSerialize["OvaImageTemplate"] = o.OvaImageTemplate
+	if o.OvaImageTemplate.IsSet() {
+		toSerialize["OvaImageTemplate"] = o.OvaImageTemplate.Get()
 	}
-	if o.Qcow2NodeTemplate != nil {
-		toSerialize["Qcow2NodeTemplate"] = o.Qcow2NodeTemplate
+	if o.Qcow2NodeTemplate.IsSet() {
+		toSerialize["Qcow2NodeTemplate"] = o.Qcow2NodeTemplate.Get()
 	}
-	if o.Qcow2VirtualMachineTemplate != nil {
-		toSerialize["Qcow2VirtualMachineTemplate"] = o.Qcow2VirtualMachineTemplate
+	if o.Qcow2VirtualMachineTemplate.IsSet() {
+		toSerialize["Qcow2VirtualMachineTemplate"] = o.Qcow2VirtualMachineTemplate.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesVersion) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesVersion) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesVersionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -503,17 +588,17 @@ func (o *KubernetesVersion) UnmarshalJSON(bytes []byte) (err error) {
 		// Desired Kubernetes version.
 		KubernetesVersion *string `json:"KubernetesVersion,omitempty"`
 		// The name of this IKS kubernetes version.
-		Name                        *string                                    `json:"Name,omitempty"`
-		BootIso                     *SoftwareSolutionDistributableRelationship `json:"BootIso,omitempty"`
-		Catalog                     *KubernetesCatalogRelationship             `json:"Catalog,omitempty"`
-		OvaImageTemplate            *SoftwareSolutionDistributableRelationship `json:"OvaImageTemplate,omitempty"`
-		Qcow2NodeTemplate           *SoftwareSolutionDistributableRelationship `json:"Qcow2NodeTemplate,omitempty"`
-		Qcow2VirtualMachineTemplate *SoftwareSolutionDistributableRelationship `json:"Qcow2VirtualMachineTemplate,omitempty"`
+		Name                        *string                                           `json:"Name,omitempty"`
+		BootIso                     NullableSoftwareSolutionDistributableRelationship `json:"BootIso,omitempty"`
+		Catalog                     NullableKubernetesCatalogRelationship             `json:"Catalog,omitempty"`
+		OvaImageTemplate            NullableSoftwareSolutionDistributableRelationship `json:"OvaImageTemplate,omitempty"`
+		Qcow2NodeTemplate           NullableSoftwareSolutionDistributableRelationship `json:"Qcow2NodeTemplate,omitempty"`
+		Qcow2VirtualMachineTemplate NullableSoftwareSolutionDistributableRelationship `json:"Qcow2VirtualMachineTemplate,omitempty"`
 	}
 
 	varKubernetesVersionWithoutEmbeddedStruct := KubernetesVersionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesVersionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesVersionWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesVersion := _KubernetesVersion{}
 		varKubernetesVersion.ClassId = varKubernetesVersionWithoutEmbeddedStruct.ClassId
@@ -535,7 +620,7 @@ func (o *KubernetesVersion) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesVersion := _KubernetesVersion{}
 
-	err = json.Unmarshal(bytes, &varKubernetesVersion)
+	err = json.Unmarshal(data, &varKubernetesVersion)
 	if err == nil {
 		o.MoBaseMo = varKubernetesVersion.MoBaseMo
 	} else {
@@ -544,7 +629,7 @@ func (o *KubernetesVersion) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EssentialAddons")

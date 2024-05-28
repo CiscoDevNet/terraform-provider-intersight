@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceNodeOpStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceNodeOpStatus{}
 
 // ApplianceNodeOpStatus Status of an Intersight Appliance node.
 type ApplianceNodeOpStatus struct {
@@ -36,15 +40,15 @@ type ApplianceNodeOpStatus struct {
 	// State of the node in terms of its readiness to host Kubernetes pods. * `Down` - The node is yet to come up and join as a member of theKubernetes cluster. * `Preparing` - The node has come up and joined the Kubernetes cluster,preparing to host Kubernetes pods. * `Ready` - The node is ready to host Kubernetes pods.
 	NodeState *string `json:"NodeState,omitempty"`
 	// Operational status of the Intersight Appliance node. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * `Unknown` - The status of the appliance node is unknown. * `Operational` - The appliance node is operational. * `Impaired` - The appliance node is impaired. * `AttentionNeeded` - The appliance node needs attention. * `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * `OutOfService` - The user has taken this node (part of a cluster) to out of service. * `ReadyForReplacement` - The cluster node is ready to be replaced. * `ReplacementInProgress` - The cluster node replacement is in progress. * `ReplacementFailed` - There was a failure during the cluster node replacement.
-	OperationalStatus *string                 `json:"OperationalStatus,omitempty"`
-	Account           *IamAccountRelationship `json:"Account,omitempty"`
+	OperationalStatus *string                        `json:"OperationalStatus,omitempty"`
+	Account           NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to applianceFileSystemOpStatus resources.
 	FileSystemOpStatuses []ApplianceFileSystemOpStatusRelationship `json:"FileSystemOpStatuses,omitempty"`
 	// An array of relationships to applianceNetworkLinkStatus resources.
-	NetworkLinkStatuses  []ApplianceNetworkLinkStatusRelationship `json:"NetworkLinkStatuses,omitempty"`
-	NodeInfo             *ApplianceNodeInfoRelationship           `json:"NodeInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
-	SystemOpStatus       *ApplianceSystemOpStatusRelationship     `json:"SystemOpStatus,omitempty"`
+	NetworkLinkStatuses  []ApplianceNetworkLinkStatusRelationship    `json:"NetworkLinkStatuses,omitempty"`
+	NodeInfo             NullableApplianceNodeInfoRelationship       `json:"NodeInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SystemOpStatus       NullableApplianceSystemOpStatusRelationship `json:"SystemOpStatus,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -134,7 +138,7 @@ func (o *ApplianceNodeOpStatus) GetClusterNetworkStatus() []ApplianceNetworkStat
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceNodeOpStatus) GetClusterNetworkStatusOk() ([]ApplianceNetworkStatus, bool) {
-	if o == nil || o.ClusterNetworkStatus == nil {
+	if o == nil || IsNil(o.ClusterNetworkStatus) {
 		return nil, false
 	}
 	return o.ClusterNetworkStatus, true
@@ -142,7 +146,7 @@ func (o *ApplianceNodeOpStatus) GetClusterNetworkStatusOk() ([]ApplianceNetworkS
 
 // HasClusterNetworkStatus returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasClusterNetworkStatus() bool {
-	if o != nil && o.ClusterNetworkStatus != nil {
+	if o != nil && IsNil(o.ClusterNetworkStatus) {
 		return true
 	}
 
@@ -156,7 +160,7 @@ func (o *ApplianceNodeOpStatus) SetClusterNetworkStatus(v []ApplianceNetworkStat
 
 // GetCpuUsage returns the CpuUsage field value if set, zero value otherwise.
 func (o *ApplianceNodeOpStatus) GetCpuUsage() float32 {
-	if o == nil || o.CpuUsage == nil {
+	if o == nil || IsNil(o.CpuUsage) {
 		var ret float32
 		return ret
 	}
@@ -166,7 +170,7 @@ func (o *ApplianceNodeOpStatus) GetCpuUsage() float32 {
 // GetCpuUsageOk returns a tuple with the CpuUsage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeOpStatus) GetCpuUsageOk() (*float32, bool) {
-	if o == nil || o.CpuUsage == nil {
+	if o == nil || IsNil(o.CpuUsage) {
 		return nil, false
 	}
 	return o.CpuUsage, true
@@ -174,7 +178,7 @@ func (o *ApplianceNodeOpStatus) GetCpuUsageOk() (*float32, bool) {
 
 // HasCpuUsage returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasCpuUsage() bool {
-	if o != nil && o.CpuUsage != nil {
+	if o != nil && !IsNil(o.CpuUsage) {
 		return true
 	}
 
@@ -188,7 +192,7 @@ func (o *ApplianceNodeOpStatus) SetCpuUsage(v float32) {
 
 // GetMemUsage returns the MemUsage field value if set, zero value otherwise.
 func (o *ApplianceNodeOpStatus) GetMemUsage() float32 {
-	if o == nil || o.MemUsage == nil {
+	if o == nil || IsNil(o.MemUsage) {
 		var ret float32
 		return ret
 	}
@@ -198,7 +202,7 @@ func (o *ApplianceNodeOpStatus) GetMemUsage() float32 {
 // GetMemUsageOk returns a tuple with the MemUsage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeOpStatus) GetMemUsageOk() (*float32, bool) {
-	if o == nil || o.MemUsage == nil {
+	if o == nil || IsNil(o.MemUsage) {
 		return nil, false
 	}
 	return o.MemUsage, true
@@ -206,7 +210,7 @@ func (o *ApplianceNodeOpStatus) GetMemUsageOk() (*float32, bool) {
 
 // HasMemUsage returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasMemUsage() bool {
-	if o != nil && o.MemUsage != nil {
+	if o != nil && !IsNil(o.MemUsage) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *ApplianceNodeOpStatus) SetMemUsage(v float32) {
 
 // GetNodeHostname returns the NodeHostname field value if set, zero value otherwise.
 func (o *ApplianceNodeOpStatus) GetNodeHostname() string {
-	if o == nil || o.NodeHostname == nil {
+	if o == nil || IsNil(o.NodeHostname) {
 		var ret string
 		return ret
 	}
@@ -230,7 +234,7 @@ func (o *ApplianceNodeOpStatus) GetNodeHostname() string {
 // GetNodeHostnameOk returns a tuple with the NodeHostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeOpStatus) GetNodeHostnameOk() (*string, bool) {
-	if o == nil || o.NodeHostname == nil {
+	if o == nil || IsNil(o.NodeHostname) {
 		return nil, false
 	}
 	return o.NodeHostname, true
@@ -238,7 +242,7 @@ func (o *ApplianceNodeOpStatus) GetNodeHostnameOk() (*string, bool) {
 
 // HasNodeHostname returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasNodeHostname() bool {
-	if o != nil && o.NodeHostname != nil {
+	if o != nil && !IsNil(o.NodeHostname) {
 		return true
 	}
 
@@ -252,7 +256,7 @@ func (o *ApplianceNodeOpStatus) SetNodeHostname(v string) {
 
 // GetNodeId returns the NodeId field value if set, zero value otherwise.
 func (o *ApplianceNodeOpStatus) GetNodeId() int64 {
-	if o == nil || o.NodeId == nil {
+	if o == nil || IsNil(o.NodeId) {
 		var ret int64
 		return ret
 	}
@@ -262,7 +266,7 @@ func (o *ApplianceNodeOpStatus) GetNodeId() int64 {
 // GetNodeIdOk returns a tuple with the NodeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeOpStatus) GetNodeIdOk() (*int64, bool) {
-	if o == nil || o.NodeId == nil {
+	if o == nil || IsNil(o.NodeId) {
 		return nil, false
 	}
 	return o.NodeId, true
@@ -270,7 +274,7 @@ func (o *ApplianceNodeOpStatus) GetNodeIdOk() (*int64, bool) {
 
 // HasNodeId returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasNodeId() bool {
-	if o != nil && o.NodeId != nil {
+	if o != nil && !IsNil(o.NodeId) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *ApplianceNodeOpStatus) SetNodeId(v int64) {
 
 // GetNodeState returns the NodeState field value if set, zero value otherwise.
 func (o *ApplianceNodeOpStatus) GetNodeState() string {
-	if o == nil || o.NodeState == nil {
+	if o == nil || IsNil(o.NodeState) {
 		var ret string
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *ApplianceNodeOpStatus) GetNodeState() string {
 // GetNodeStateOk returns a tuple with the NodeState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeOpStatus) GetNodeStateOk() (*string, bool) {
-	if o == nil || o.NodeState == nil {
+	if o == nil || IsNil(o.NodeState) {
 		return nil, false
 	}
 	return o.NodeState, true
@@ -302,7 +306,7 @@ func (o *ApplianceNodeOpStatus) GetNodeStateOk() (*string, bool) {
 
 // HasNodeState returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasNodeState() bool {
-	if o != nil && o.NodeState != nil {
+	if o != nil && !IsNil(o.NodeState) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *ApplianceNodeOpStatus) SetNodeState(v string) {
 
 // GetOperationalStatus returns the OperationalStatus field value if set, zero value otherwise.
 func (o *ApplianceNodeOpStatus) GetOperationalStatus() string {
-	if o == nil || o.OperationalStatus == nil {
+	if o == nil || IsNil(o.OperationalStatus) {
 		var ret string
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *ApplianceNodeOpStatus) GetOperationalStatus() string {
 // GetOperationalStatusOk returns a tuple with the OperationalStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceNodeOpStatus) GetOperationalStatusOk() (*string, bool) {
-	if o == nil || o.OperationalStatus == nil {
+	if o == nil || IsNil(o.OperationalStatus) {
 		return nil, false
 	}
 	return o.OperationalStatus, true
@@ -334,7 +338,7 @@ func (o *ApplianceNodeOpStatus) GetOperationalStatusOk() (*string, bool) {
 
 // HasOperationalStatus returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasOperationalStatus() bool {
-	if o != nil && o.OperationalStatus != nil {
+	if o != nil && !IsNil(o.OperationalStatus) {
 		return true
 	}
 
@@ -346,36 +350,47 @@ func (o *ApplianceNodeOpStatus) SetOperationalStatus(v string) {
 	o.OperationalStatus = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceNodeOpStatus) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceNodeOpStatus) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ApplianceNodeOpStatus) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ApplianceNodeOpStatus) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ApplianceNodeOpStatus) UnsetAccount() {
+	o.Account.Unset()
 }
 
 // GetFileSystemOpStatuses returns the FileSystemOpStatuses field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -391,7 +406,7 @@ func (o *ApplianceNodeOpStatus) GetFileSystemOpStatuses() []ApplianceFileSystemO
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceNodeOpStatus) GetFileSystemOpStatusesOk() ([]ApplianceFileSystemOpStatusRelationship, bool) {
-	if o == nil || o.FileSystemOpStatuses == nil {
+	if o == nil || IsNil(o.FileSystemOpStatuses) {
 		return nil, false
 	}
 	return o.FileSystemOpStatuses, true
@@ -399,7 +414,7 @@ func (o *ApplianceNodeOpStatus) GetFileSystemOpStatusesOk() ([]ApplianceFileSyst
 
 // HasFileSystemOpStatuses returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasFileSystemOpStatuses() bool {
-	if o != nil && o.FileSystemOpStatuses != nil {
+	if o != nil && IsNil(o.FileSystemOpStatuses) {
 		return true
 	}
 
@@ -424,7 +439,7 @@ func (o *ApplianceNodeOpStatus) GetNetworkLinkStatuses() []ApplianceNetworkLinkS
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceNodeOpStatus) GetNetworkLinkStatusesOk() ([]ApplianceNetworkLinkStatusRelationship, bool) {
-	if o == nil || o.NetworkLinkStatuses == nil {
+	if o == nil || IsNil(o.NetworkLinkStatuses) {
 		return nil, false
 	}
 	return o.NetworkLinkStatuses, true
@@ -432,7 +447,7 @@ func (o *ApplianceNodeOpStatus) GetNetworkLinkStatusesOk() ([]ApplianceNetworkLi
 
 // HasNetworkLinkStatuses returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasNetworkLinkStatuses() bool {
-	if o != nil && o.NetworkLinkStatuses != nil {
+	if o != nil && IsNil(o.NetworkLinkStatuses) {
 		return true
 	}
 
@@ -444,141 +459,178 @@ func (o *ApplianceNodeOpStatus) SetNetworkLinkStatuses(v []ApplianceNetworkLinkS
 	o.NetworkLinkStatuses = v
 }
 
-// GetNodeInfo returns the NodeInfo field value if set, zero value otherwise.
+// GetNodeInfo returns the NodeInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceNodeOpStatus) GetNodeInfo() ApplianceNodeInfoRelationship {
-	if o == nil || o.NodeInfo == nil {
+	if o == nil || IsNil(o.NodeInfo.Get()) {
 		var ret ApplianceNodeInfoRelationship
 		return ret
 	}
-	return *o.NodeInfo
+	return *o.NodeInfo.Get()
 }
 
 // GetNodeInfoOk returns a tuple with the NodeInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceNodeOpStatus) GetNodeInfoOk() (*ApplianceNodeInfoRelationship, bool) {
-	if o == nil || o.NodeInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NodeInfo, true
+	return o.NodeInfo.Get(), o.NodeInfo.IsSet()
 }
 
 // HasNodeInfo returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasNodeInfo() bool {
-	if o != nil && o.NodeInfo != nil {
+	if o != nil && o.NodeInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNodeInfo gets a reference to the given ApplianceNodeInfoRelationship and assigns it to the NodeInfo field.
+// SetNodeInfo gets a reference to the given NullableApplianceNodeInfoRelationship and assigns it to the NodeInfo field.
 func (o *ApplianceNodeOpStatus) SetNodeInfo(v ApplianceNodeInfoRelationship) {
-	o.NodeInfo = &v
+	o.NodeInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNodeInfoNil sets the value for NodeInfo to be an explicit nil
+func (o *ApplianceNodeOpStatus) SetNodeInfoNil() {
+	o.NodeInfo.Set(nil)
+}
+
+// UnsetNodeInfo ensures that no value is present for NodeInfo, not even an explicit nil
+func (o *ApplianceNodeOpStatus) UnsetNodeInfo() {
+	o.NodeInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceNodeOpStatus) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceNodeOpStatus) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ApplianceNodeOpStatus) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetSystemOpStatus returns the SystemOpStatus field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ApplianceNodeOpStatus) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ApplianceNodeOpStatus) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetSystemOpStatus returns the SystemOpStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceNodeOpStatus) GetSystemOpStatus() ApplianceSystemOpStatusRelationship {
-	if o == nil || o.SystemOpStatus == nil {
+	if o == nil || IsNil(o.SystemOpStatus.Get()) {
 		var ret ApplianceSystemOpStatusRelationship
 		return ret
 	}
-	return *o.SystemOpStatus
+	return *o.SystemOpStatus.Get()
 }
 
 // GetSystemOpStatusOk returns a tuple with the SystemOpStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceNodeOpStatus) GetSystemOpStatusOk() (*ApplianceSystemOpStatusRelationship, bool) {
-	if o == nil || o.SystemOpStatus == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SystemOpStatus, true
+	return o.SystemOpStatus.Get(), o.SystemOpStatus.IsSet()
 }
 
 // HasSystemOpStatus returns a boolean if a field has been set.
 func (o *ApplianceNodeOpStatus) HasSystemOpStatus() bool {
-	if o != nil && o.SystemOpStatus != nil {
+	if o != nil && o.SystemOpStatus.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSystemOpStatus gets a reference to the given ApplianceSystemOpStatusRelationship and assigns it to the SystemOpStatus field.
+// SetSystemOpStatus gets a reference to the given NullableApplianceSystemOpStatusRelationship and assigns it to the SystemOpStatus field.
 func (o *ApplianceNodeOpStatus) SetSystemOpStatus(v ApplianceSystemOpStatusRelationship) {
-	o.SystemOpStatus = &v
+	o.SystemOpStatus.Set(&v)
+}
+
+// SetSystemOpStatusNil sets the value for SystemOpStatus to be an explicit nil
+func (o *ApplianceNodeOpStatus) SetSystemOpStatusNil() {
+	o.SystemOpStatus.Set(nil)
+}
+
+// UnsetSystemOpStatus ensures that no value is present for SystemOpStatus, not even an explicit nil
+func (o *ApplianceNodeOpStatus) UnsetSystemOpStatus() {
+	o.SystemOpStatus.Unset()
 }
 
 func (o ApplianceNodeOpStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceNodeOpStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.ClusterNetworkStatus != nil {
 		toSerialize["ClusterNetworkStatus"] = o.ClusterNetworkStatus
 	}
-	if o.CpuUsage != nil {
+	if !IsNil(o.CpuUsage) {
 		toSerialize["CpuUsage"] = o.CpuUsage
 	}
-	if o.MemUsage != nil {
+	if !IsNil(o.MemUsage) {
 		toSerialize["MemUsage"] = o.MemUsage
 	}
-	if o.NodeHostname != nil {
+	if !IsNil(o.NodeHostname) {
 		toSerialize["NodeHostname"] = o.NodeHostname
 	}
-	if o.NodeId != nil {
+	if !IsNil(o.NodeId) {
 		toSerialize["NodeId"] = o.NodeId
 	}
-	if o.NodeState != nil {
+	if !IsNil(o.NodeState) {
 		toSerialize["NodeState"] = o.NodeState
 	}
-	if o.OperationalStatus != nil {
+	if !IsNil(o.OperationalStatus) {
 		toSerialize["OperationalStatus"] = o.OperationalStatus
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 	if o.FileSystemOpStatuses != nil {
 		toSerialize["FileSystemOpStatuses"] = o.FileSystemOpStatuses
@@ -586,24 +638,46 @@ func (o ApplianceNodeOpStatus) MarshalJSON() ([]byte, error) {
 	if o.NetworkLinkStatuses != nil {
 		toSerialize["NetworkLinkStatuses"] = o.NetworkLinkStatuses
 	}
-	if o.NodeInfo != nil {
-		toSerialize["NodeInfo"] = o.NodeInfo
+	if o.NodeInfo.IsSet() {
+		toSerialize["NodeInfo"] = o.NodeInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.SystemOpStatus != nil {
-		toSerialize["SystemOpStatus"] = o.SystemOpStatus
+	if o.SystemOpStatus.IsSet() {
+		toSerialize["SystemOpStatus"] = o.SystemOpStatus.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceNodeOpStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceNodeOpStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceNodeOpStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -621,20 +695,20 @@ func (o *ApplianceNodeOpStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// State of the node in terms of its readiness to host Kubernetes pods. * `Down` - The node is yet to come up and join as a member of theKubernetes cluster. * `Preparing` - The node has come up and joined the Kubernetes cluster,preparing to host Kubernetes pods. * `Ready` - The node is ready to host Kubernetes pods.
 		NodeState *string `json:"NodeState,omitempty"`
 		// Operational status of the Intersight Appliance node. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * `Unknown` - The status of the appliance node is unknown. * `Operational` - The appliance node is operational. * `Impaired` - The appliance node is impaired. * `AttentionNeeded` - The appliance node needs attention. * `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * `OutOfService` - The user has taken this node (part of a cluster) to out of service. * `ReadyForReplacement` - The cluster node is ready to be replaced. * `ReplacementInProgress` - The cluster node replacement is in progress. * `ReplacementFailed` - There was a failure during the cluster node replacement.
-		OperationalStatus *string                 `json:"OperationalStatus,omitempty"`
-		Account           *IamAccountRelationship `json:"Account,omitempty"`
+		OperationalStatus *string                        `json:"OperationalStatus,omitempty"`
+		Account           NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to applianceFileSystemOpStatus resources.
 		FileSystemOpStatuses []ApplianceFileSystemOpStatusRelationship `json:"FileSystemOpStatuses,omitempty"`
 		// An array of relationships to applianceNetworkLinkStatus resources.
-		NetworkLinkStatuses []ApplianceNetworkLinkStatusRelationship `json:"NetworkLinkStatuses,omitempty"`
-		NodeInfo            *ApplianceNodeInfoRelationship           `json:"NodeInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
-		SystemOpStatus      *ApplianceSystemOpStatusRelationship     `json:"SystemOpStatus,omitempty"`
+		NetworkLinkStatuses []ApplianceNetworkLinkStatusRelationship    `json:"NetworkLinkStatuses,omitempty"`
+		NodeInfo            NullableApplianceNodeInfoRelationship       `json:"NodeInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SystemOpStatus      NullableApplianceSystemOpStatusRelationship `json:"SystemOpStatus,omitempty"`
 	}
 
 	varApplianceNodeOpStatusWithoutEmbeddedStruct := ApplianceNodeOpStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceNodeOpStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceNodeOpStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceNodeOpStatus := _ApplianceNodeOpStatus{}
 		varApplianceNodeOpStatus.ClassId = varApplianceNodeOpStatusWithoutEmbeddedStruct.ClassId
@@ -659,7 +733,7 @@ func (o *ApplianceNodeOpStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceNodeOpStatus := _ApplianceNodeOpStatus{}
 
-	err = json.Unmarshal(bytes, &varApplianceNodeOpStatus)
+	err = json.Unmarshal(data, &varApplianceNodeOpStatus)
 	if err == nil {
 		o.MoBaseMo = varApplianceNodeOpStatus.MoBaseMo
 	} else {
@@ -668,7 +742,7 @@ func (o *ApplianceNodeOpStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterNetworkStatus")

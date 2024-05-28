@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VirtualizationVmwareDistributedSwitch type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VirtualizationVmwareDistributedSwitch{}
 
 // VirtualizationVmwareDistributedSwitch The VMware Distributed Virtual Switch object is represented here.
 type VirtualizationVmwareDistributedSwitch struct {
@@ -47,8 +51,8 @@ type VirtualizationVmwareDistributedSwitch struct {
 	// Universally Unique Id of this distributed virtual switch.
 	Uuid *string `json:"Uuid,omitempty"`
 	// The running config's version details are represented.
-	Version    *string                                     `json:"Version,omitempty"`
-	Datacenter *VirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
+	Version    *string                                            `json:"Version,omitempty"`
+	Datacenter NullableVirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
 	// An array of relationships to virtualizationVmwareHost resources.
 	Hosts                []VirtualizationVmwareHostRelationship `json:"Hosts,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -129,7 +133,7 @@ func (o *VirtualizationVmwareDistributedSwitch) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDistributedSwitch) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -139,7 +143,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDistributedSwitch) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -147,7 +151,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetDescriptionOk() (*string, boo
 
 // HasDescription returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -161,7 +165,7 @@ func (o *VirtualizationVmwareDistributedSwitch) SetDescription(v string) {
 
 // GetDiscoveryProtocol returns the DiscoveryProtocol field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareDistributedSwitch) GetDiscoveryProtocol() VirtualizationVmwareDiscoveryProtocol {
-	if o == nil || o.DiscoveryProtocol.Get() == nil {
+	if o == nil || IsNil(o.DiscoveryProtocol.Get()) {
 		var ret VirtualizationVmwareDiscoveryProtocol
 		return ret
 	}
@@ -204,7 +208,7 @@ func (o *VirtualizationVmwareDistributedSwitch) UnsetDiscoveryProtocol() {
 
 // GetMaxPort returns the MaxPort field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDistributedSwitch) GetMaxPort() int64 {
-	if o == nil || o.MaxPort == nil {
+	if o == nil || IsNil(o.MaxPort) {
 		var ret int64
 		return ret
 	}
@@ -214,7 +218,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetMaxPort() int64 {
 // GetMaxPortOk returns a tuple with the MaxPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDistributedSwitch) GetMaxPortOk() (*int64, bool) {
-	if o == nil || o.MaxPort == nil {
+	if o == nil || IsNil(o.MaxPort) {
 		return nil, false
 	}
 	return o.MaxPort, true
@@ -222,7 +226,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetMaxPortOk() (*int64, bool) {
 
 // HasMaxPort returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasMaxPort() bool {
-	if o != nil && o.MaxPort != nil {
+	if o != nil && !IsNil(o.MaxPort) {
 		return true
 	}
 
@@ -236,7 +240,7 @@ func (o *VirtualizationVmwareDistributedSwitch) SetMaxPort(v int64) {
 
 // GetMtu returns the Mtu field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDistributedSwitch) GetMtu() int64 {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		var ret int64
 		return ret
 	}
@@ -246,7 +250,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetMtu() int64 {
 // GetMtuOk returns a tuple with the Mtu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDistributedSwitch) GetMtuOk() (*int64, bool) {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		return nil, false
 	}
 	return o.Mtu, true
@@ -254,7 +258,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetMtuOk() (*int64, bool) {
 
 // HasMtu returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasMtu() bool {
-	if o != nil && o.Mtu != nil {
+	if o != nil && !IsNil(o.Mtu) {
 		return true
 	}
 
@@ -268,7 +272,7 @@ func (o *VirtualizationVmwareDistributedSwitch) SetMtu(v int64) {
 
 // GetNetworkIoControl returns the NetworkIoControl field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDistributedSwitch) GetNetworkIoControl() bool {
-	if o == nil || o.NetworkIoControl == nil {
+	if o == nil || IsNil(o.NetworkIoControl) {
 		var ret bool
 		return ret
 	}
@@ -278,7 +282,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetNetworkIoControl() bool {
 // GetNetworkIoControlOk returns a tuple with the NetworkIoControl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDistributedSwitch) GetNetworkIoControlOk() (*bool, bool) {
-	if o == nil || o.NetworkIoControl == nil {
+	if o == nil || IsNil(o.NetworkIoControl) {
 		return nil, false
 	}
 	return o.NetworkIoControl, true
@@ -286,7 +290,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetNetworkIoControlOk() (*bool, 
 
 // HasNetworkIoControl returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasNetworkIoControl() bool {
-	if o != nil && o.NetworkIoControl != nil {
+	if o != nil && !IsNil(o.NetworkIoControl) {
 		return true
 	}
 
@@ -300,7 +304,7 @@ func (o *VirtualizationVmwareDistributedSwitch) SetNetworkIoControl(v bool) {
 
 // GetNicTeamingAndFailover returns the NicTeamingAndFailover field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareDistributedSwitch) GetNicTeamingAndFailover() VirtualizationVmwareTeamingAndFailover {
-	if o == nil || o.NicTeamingAndFailover.Get() == nil {
+	if o == nil || IsNil(o.NicTeamingAndFailover.Get()) {
 		var ret VirtualizationVmwareTeamingAndFailover
 		return ret
 	}
@@ -343,7 +347,7 @@ func (o *VirtualizationVmwareDistributedSwitch) UnsetNicTeamingAndFailover() {
 
 // GetNumHosts returns the NumHosts field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDistributedSwitch) GetNumHosts() int64 {
-	if o == nil || o.NumHosts == nil {
+	if o == nil || IsNil(o.NumHosts) {
 		var ret int64
 		return ret
 	}
@@ -353,7 +357,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetNumHosts() int64 {
 // GetNumHostsOk returns a tuple with the NumHosts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDistributedSwitch) GetNumHostsOk() (*int64, bool) {
-	if o == nil || o.NumHosts == nil {
+	if o == nil || IsNil(o.NumHosts) {
 		return nil, false
 	}
 	return o.NumHosts, true
@@ -361,7 +365,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetNumHostsOk() (*int64, bool) {
 
 // HasNumHosts returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasNumHosts() bool {
-	if o != nil && o.NumHosts != nil {
+	if o != nil && !IsNil(o.NumHosts) {
 		return true
 	}
 
@@ -375,7 +379,7 @@ func (o *VirtualizationVmwareDistributedSwitch) SetNumHosts(v int64) {
 
 // GetNumNetworks returns the NumNetworks field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDistributedSwitch) GetNumNetworks() int64 {
-	if o == nil || o.NumNetworks == nil {
+	if o == nil || IsNil(o.NumNetworks) {
 		var ret int64
 		return ret
 	}
@@ -385,7 +389,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetNumNetworks() int64 {
 // GetNumNetworksOk returns a tuple with the NumNetworks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDistributedSwitch) GetNumNetworksOk() (*int64, bool) {
-	if o == nil || o.NumNetworks == nil {
+	if o == nil || IsNil(o.NumNetworks) {
 		return nil, false
 	}
 	return o.NumNetworks, true
@@ -393,7 +397,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetNumNetworksOk() (*int64, bool
 
 // HasNumNetworks returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasNumNetworks() bool {
-	if o != nil && o.NumNetworks != nil {
+	if o != nil && !IsNil(o.NumNetworks) {
 		return true
 	}
 
@@ -407,7 +411,7 @@ func (o *VirtualizationVmwareDistributedSwitch) SetNumNetworks(v int64) {
 
 // GetNumStandAlonePorts returns the NumStandAlonePorts field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDistributedSwitch) GetNumStandAlonePorts() int64 {
-	if o == nil || o.NumStandAlonePorts == nil {
+	if o == nil || IsNil(o.NumStandAlonePorts) {
 		var ret int64
 		return ret
 	}
@@ -417,7 +421,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetNumStandAlonePorts() int64 {
 // GetNumStandAlonePortsOk returns a tuple with the NumStandAlonePorts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDistributedSwitch) GetNumStandAlonePortsOk() (*int64, bool) {
-	if o == nil || o.NumStandAlonePorts == nil {
+	if o == nil || IsNil(o.NumStandAlonePorts) {
 		return nil, false
 	}
 	return o.NumStandAlonePorts, true
@@ -425,7 +429,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetNumStandAlonePortsOk() (*int6
 
 // HasNumStandAlonePorts returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasNumStandAlonePorts() bool {
-	if o != nil && o.NumStandAlonePorts != nil {
+	if o != nil && !IsNil(o.NumStandAlonePorts) {
 		return true
 	}
 
@@ -439,7 +443,7 @@ func (o *VirtualizationVmwareDistributedSwitch) SetNumStandAlonePorts(v int64) {
 
 // GetNumUplinks returns the NumUplinks field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDistributedSwitch) GetNumUplinks() int64 {
-	if o == nil || o.NumUplinks == nil {
+	if o == nil || IsNil(o.NumUplinks) {
 		var ret int64
 		return ret
 	}
@@ -449,7 +453,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetNumUplinks() int64 {
 // GetNumUplinksOk returns a tuple with the NumUplinks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDistributedSwitch) GetNumUplinksOk() (*int64, bool) {
-	if o == nil || o.NumUplinks == nil {
+	if o == nil || IsNil(o.NumUplinks) {
 		return nil, false
 	}
 	return o.NumUplinks, true
@@ -457,7 +461,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetNumUplinksOk() (*int64, bool)
 
 // HasNumUplinks returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasNumUplinks() bool {
-	if o != nil && o.NumUplinks != nil {
+	if o != nil && !IsNil(o.NumUplinks) {
 		return true
 	}
 
@@ -482,7 +486,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetResourceAllocationSystemTraff
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareDistributedSwitch) GetResourceAllocationSystemTrafficOk() ([]VirtualizationVmwareResourceAllocationSystemTrafficTypes, bool) {
-	if o == nil || o.ResourceAllocationSystemTraffic == nil {
+	if o == nil || IsNil(o.ResourceAllocationSystemTraffic) {
 		return nil, false
 	}
 	return o.ResourceAllocationSystemTraffic, true
@@ -490,7 +494,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetResourceAllocationSystemTraff
 
 // HasResourceAllocationSystemTraffic returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasResourceAllocationSystemTraffic() bool {
-	if o != nil && o.ResourceAllocationSystemTraffic != nil {
+	if o != nil && IsNil(o.ResourceAllocationSystemTraffic) {
 		return true
 	}
 
@@ -504,7 +508,7 @@ func (o *VirtualizationVmwareDistributedSwitch) SetResourceAllocationSystemTraff
 
 // GetSwitchCapacity returns the SwitchCapacity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareDistributedSwitch) GetSwitchCapacity() VirtualizationStorageCapacity {
-	if o == nil || o.SwitchCapacity.Get() == nil {
+	if o == nil || IsNil(o.SwitchCapacity.Get()) {
 		var ret VirtualizationStorageCapacity
 		return ret
 	}
@@ -547,7 +551,7 @@ func (o *VirtualizationVmwareDistributedSwitch) UnsetSwitchCapacity() {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDistributedSwitch) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -557,7 +561,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDistributedSwitch) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -565,7 +569,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -579,7 +583,7 @@ func (o *VirtualizationVmwareDistributedSwitch) SetUuid(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDistributedSwitch) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -589,7 +593,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualizationVmwareDistributedSwitch) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -597,7 +601,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -609,36 +613,47 @@ func (o *VirtualizationVmwareDistributedSwitch) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetDatacenter returns the Datacenter field value if set, zero value otherwise.
+// GetDatacenter returns the Datacenter field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareDistributedSwitch) GetDatacenter() VirtualizationVmwareDatacenterRelationship {
-	if o == nil || o.Datacenter == nil {
+	if o == nil || IsNil(o.Datacenter.Get()) {
 		var ret VirtualizationVmwareDatacenterRelationship
 		return ret
 	}
-	return *o.Datacenter
+	return *o.Datacenter.Get()
 }
 
 // GetDatacenterOk returns a tuple with the Datacenter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareDistributedSwitch) GetDatacenterOk() (*VirtualizationVmwareDatacenterRelationship, bool) {
-	if o == nil || o.Datacenter == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Datacenter, true
+	return o.Datacenter.Get(), o.Datacenter.IsSet()
 }
 
 // HasDatacenter returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasDatacenter() bool {
-	if o != nil && o.Datacenter != nil {
+	if o != nil && o.Datacenter.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDatacenter gets a reference to the given VirtualizationVmwareDatacenterRelationship and assigns it to the Datacenter field.
+// SetDatacenter gets a reference to the given NullableVirtualizationVmwareDatacenterRelationship and assigns it to the Datacenter field.
 func (o *VirtualizationVmwareDistributedSwitch) SetDatacenter(v VirtualizationVmwareDatacenterRelationship) {
-	o.Datacenter = &v
+	o.Datacenter.Set(&v)
+}
+
+// SetDatacenterNil sets the value for Datacenter to be an explicit nil
+func (o *VirtualizationVmwareDistributedSwitch) SetDatacenterNil() {
+	o.Datacenter.Set(nil)
+}
+
+// UnsetDatacenter ensures that no value is present for Datacenter, not even an explicit nil
+func (o *VirtualizationVmwareDistributedSwitch) UnsetDatacenter() {
+	o.Datacenter.Unset()
 }
 
 // GetHosts returns the Hosts field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -654,7 +669,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetHosts() []VirtualizationVmwar
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VirtualizationVmwareDistributedSwitch) GetHostsOk() ([]VirtualizationVmwareHostRelationship, bool) {
-	if o == nil || o.Hosts == nil {
+	if o == nil || IsNil(o.Hosts) {
 		return nil, false
 	}
 	return o.Hosts, true
@@ -662,7 +677,7 @@ func (o *VirtualizationVmwareDistributedSwitch) GetHostsOk() ([]VirtualizationVm
 
 // HasHosts returns a boolean if a field has been set.
 func (o *VirtualizationVmwareDistributedSwitch) HasHosts() bool {
-	if o != nil && o.Hosts != nil {
+	if o != nil && IsNil(o.Hosts) {
 		return true
 	}
 
@@ -675,49 +690,53 @@ func (o *VirtualizationVmwareDistributedSwitch) SetHosts(v []VirtualizationVmwar
 }
 
 func (o VirtualizationVmwareDistributedSwitch) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VirtualizationVmwareDistributedSwitch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseDistributedSwitch, errVirtualizationBaseDistributedSwitch := json.Marshal(o.VirtualizationBaseDistributedSwitch)
 	if errVirtualizationBaseDistributedSwitch != nil {
-		return []byte{}, errVirtualizationBaseDistributedSwitch
+		return map[string]interface{}{}, errVirtualizationBaseDistributedSwitch
 	}
 	errVirtualizationBaseDistributedSwitch = json.Unmarshal([]byte(serializedVirtualizationBaseDistributedSwitch), &toSerialize)
 	if errVirtualizationBaseDistributedSwitch != nil {
-		return []byte{}, errVirtualizationBaseDistributedSwitch
+		return map[string]interface{}{}, errVirtualizationBaseDistributedSwitch
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
 	if o.DiscoveryProtocol.IsSet() {
 		toSerialize["DiscoveryProtocol"] = o.DiscoveryProtocol.Get()
 	}
-	if o.MaxPort != nil {
+	if !IsNil(o.MaxPort) {
 		toSerialize["MaxPort"] = o.MaxPort
 	}
-	if o.Mtu != nil {
+	if !IsNil(o.Mtu) {
 		toSerialize["Mtu"] = o.Mtu
 	}
-	if o.NetworkIoControl != nil {
+	if !IsNil(o.NetworkIoControl) {
 		toSerialize["NetworkIoControl"] = o.NetworkIoControl
 	}
 	if o.NicTeamingAndFailover.IsSet() {
 		toSerialize["NicTeamingAndFailover"] = o.NicTeamingAndFailover.Get()
 	}
-	if o.NumHosts != nil {
+	if !IsNil(o.NumHosts) {
 		toSerialize["NumHosts"] = o.NumHosts
 	}
-	if o.NumNetworks != nil {
+	if !IsNil(o.NumNetworks) {
 		toSerialize["NumNetworks"] = o.NumNetworks
 	}
-	if o.NumStandAlonePorts != nil {
+	if !IsNil(o.NumStandAlonePorts) {
 		toSerialize["NumStandAlonePorts"] = o.NumStandAlonePorts
 	}
-	if o.NumUplinks != nil {
+	if !IsNil(o.NumUplinks) {
 		toSerialize["NumUplinks"] = o.NumUplinks
 	}
 	if o.ResourceAllocationSystemTraffic != nil {
@@ -726,14 +745,14 @@ func (o VirtualizationVmwareDistributedSwitch) MarshalJSON() ([]byte, error) {
 	if o.SwitchCapacity.IsSet() {
 		toSerialize["SwitchCapacity"] = o.SwitchCapacity.Get()
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.Datacenter != nil {
-		toSerialize["Datacenter"] = o.Datacenter
+	if o.Datacenter.IsSet() {
+		toSerialize["Datacenter"] = o.Datacenter.Get()
 	}
 	if o.Hosts != nil {
 		toSerialize["Hosts"] = o.Hosts
@@ -743,10 +762,32 @@ func (o VirtualizationVmwareDistributedSwitch) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VirtualizationVmwareDistributedSwitch) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VirtualizationVmwareDistributedSwitch) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VirtualizationVmwareDistributedSwitchWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -775,15 +816,15 @@ func (o *VirtualizationVmwareDistributedSwitch) UnmarshalJSON(bytes []byte) (err
 		// Universally Unique Id of this distributed virtual switch.
 		Uuid *string `json:"Uuid,omitempty"`
 		// The running config's version details are represented.
-		Version    *string                                     `json:"Version,omitempty"`
-		Datacenter *VirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
+		Version    *string                                            `json:"Version,omitempty"`
+		Datacenter NullableVirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
 		// An array of relationships to virtualizationVmwareHost resources.
 		Hosts []VirtualizationVmwareHostRelationship `json:"Hosts,omitempty"`
 	}
 
 	varVirtualizationVmwareDistributedSwitchWithoutEmbeddedStruct := VirtualizationVmwareDistributedSwitchWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareDistributedSwitchWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVirtualizationVmwareDistributedSwitchWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationVmwareDistributedSwitch := _VirtualizationVmwareDistributedSwitch{}
 		varVirtualizationVmwareDistributedSwitch.ClassId = varVirtualizationVmwareDistributedSwitchWithoutEmbeddedStruct.ClassId
@@ -811,7 +852,7 @@ func (o *VirtualizationVmwareDistributedSwitch) UnmarshalJSON(bytes []byte) (err
 
 	varVirtualizationVmwareDistributedSwitch := _VirtualizationVmwareDistributedSwitch{}
 
-	err = json.Unmarshal(bytes, &varVirtualizationVmwareDistributedSwitch)
+	err = json.Unmarshal(data, &varVirtualizationVmwareDistributedSwitch)
 	if err == nil {
 		o.VirtualizationBaseDistributedSwitch = varVirtualizationVmwareDistributedSwitch.VirtualizationBaseDistributedSwitch
 	} else {
@@ -820,7 +861,7 @@ func (o *VirtualizationVmwareDistributedSwitch) UnmarshalJSON(bytes []byte) (err
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

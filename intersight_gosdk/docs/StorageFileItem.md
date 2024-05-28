@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **Size** | Pointer to **string** | Total size of the local Storage File. | [optional] [readonly] 
 **Type** | Pointer to **string** | File type like CSV, ISO image. | [optional] [readonly] 
 **UpdateTime** | Pointer to **string** | Timestamp to indicate the uploaded time for this file. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StorageItem** | Pointer to [**StorageItemRelationship**](StorageItemRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageItem** | Pointer to [**NullableStorageItemRelationship**](StorageItemRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -275,6 +275,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageFileItem) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageFileItem) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageItem
 
 `func (o *StorageFileItem) GetStorageItem() StorageItemRelationship`
@@ -300,6 +310,16 @@ SetStorageItem sets StorageItem field to given value.
 
 HasStorageItem returns a boolean if a field has been set.
 
+### SetStorageItemNil
+
+`func (o *StorageFileItem) SetStorageItemNil(b bool)`
+
+ SetStorageItemNil sets the value for StorageItem to be an explicit nil
+
+### UnsetStorageItem
+`func (o *StorageFileItem) UnsetStorageItem()`
+
+UnsetStorageItem ensures that no value is present for StorageItem, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

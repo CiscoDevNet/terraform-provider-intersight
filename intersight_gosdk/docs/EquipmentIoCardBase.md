@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **Version** | Pointer to **string** | This field identifies the version of the IO card module. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for the IO card module. | [optional] [readonly] 
 **HostPorts** | Pointer to [**[]EtherHostPortRelationship**](EtherHostPortRelationship.md) | An array of relationships to etherHostPort resources. | [optional] 
-**MgmtController** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
+**MgmtController** | Pointer to [**NullableManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
 **NetworkPorts** | Pointer to [**[]EtherNetworkPortRelationship**](EtherNetworkPortRelationship.md) | An array of relationships to etherNetworkPort resources. | [optional] 
 **SubGroup** | Pointer to [**[]PortSubGroupRelationship**](PortSubGroupRelationship.md) | An array of relationships to portSubGroup resources. | [optional] [readonly] 
 
@@ -426,6 +426,16 @@ SetMgmtController sets MgmtController field to given value.
 
 HasMgmtController returns a boolean if a field has been set.
 
+### SetMgmtControllerNil
+
+`func (o *EquipmentIoCardBase) SetMgmtControllerNil(b bool)`
+
+ SetMgmtControllerNil sets the value for MgmtController to be an explicit nil
+
+### UnsetMgmtController
+`func (o *EquipmentIoCardBase) UnsetMgmtController()`
+
+UnsetMgmtController ensures that no value is present for MgmtController, not even an explicit nil
 ### GetNetworkPorts
 
 `func (o *EquipmentIoCardBase) GetNetworkPorts() []EtherNetworkPortRelationship`

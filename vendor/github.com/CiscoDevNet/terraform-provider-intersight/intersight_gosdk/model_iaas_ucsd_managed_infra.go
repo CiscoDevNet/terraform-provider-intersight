@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IaasUcsdManagedInfra type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IaasUcsdManagedInfra{}
 
 // IaasUcsdManagedInfra Describes about UCSD Managed infrastructure statistics.
 type IaasUcsdManagedInfra struct {
@@ -45,8 +49,8 @@ type IaasUcsdManagedInfra struct {
 	// Total virtual datacenters in UCSD.
 	VdcCount *int64 `json:"VdcCount,omitempty"`
 	// Total Virtual machines in UCSD.
-	VmCount              *int64                    `json:"VmCount,omitempty"`
-	Guid                 *IaasUcsdInfoRelationship `json:"Guid,omitempty"`
+	VmCount              *int64                           `json:"VmCount,omitempty"`
+	Guid                 NullableIaasUcsdInfoRelationship `json:"Guid,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,7 +129,7 @@ func (o *IaasUcsdManagedInfra) SetObjectType(v string) {
 
 // GetAdvancedCatalogCount returns the AdvancedCatalogCount field value if set, zero value otherwise.
 func (o *IaasUcsdManagedInfra) GetAdvancedCatalogCount() int64 {
-	if o == nil || o.AdvancedCatalogCount == nil {
+	if o == nil || IsNil(o.AdvancedCatalogCount) {
 		var ret int64
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *IaasUcsdManagedInfra) GetAdvancedCatalogCount() int64 {
 // GetAdvancedCatalogCountOk returns a tuple with the AdvancedCatalogCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdManagedInfra) GetAdvancedCatalogCountOk() (*int64, bool) {
-	if o == nil || o.AdvancedCatalogCount == nil {
+	if o == nil || IsNil(o.AdvancedCatalogCount) {
 		return nil, false
 	}
 	return o.AdvancedCatalogCount, true
@@ -143,7 +147,7 @@ func (o *IaasUcsdManagedInfra) GetAdvancedCatalogCountOk() (*int64, bool) {
 
 // HasAdvancedCatalogCount returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasAdvancedCatalogCount() bool {
-	if o != nil && o.AdvancedCatalogCount != nil {
+	if o != nil && !IsNil(o.AdvancedCatalogCount) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *IaasUcsdManagedInfra) SetAdvancedCatalogCount(v int64) {
 
 // GetBmCatalogCount returns the BmCatalogCount field value if set, zero value otherwise.
 func (o *IaasUcsdManagedInfra) GetBmCatalogCount() int64 {
-	if o == nil || o.BmCatalogCount == nil {
+	if o == nil || IsNil(o.BmCatalogCount) {
 		var ret int64
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *IaasUcsdManagedInfra) GetBmCatalogCount() int64 {
 // GetBmCatalogCountOk returns a tuple with the BmCatalogCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdManagedInfra) GetBmCatalogCountOk() (*int64, bool) {
-	if o == nil || o.BmCatalogCount == nil {
+	if o == nil || IsNil(o.BmCatalogCount) {
 		return nil, false
 	}
 	return o.BmCatalogCount, true
@@ -175,7 +179,7 @@ func (o *IaasUcsdManagedInfra) GetBmCatalogCountOk() (*int64, bool) {
 
 // HasBmCatalogCount returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasBmCatalogCount() bool {
-	if o != nil && o.BmCatalogCount != nil {
+	if o != nil && !IsNil(o.BmCatalogCount) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *IaasUcsdManagedInfra) SetBmCatalogCount(v int64) {
 
 // GetContainerCatalogCount returns the ContainerCatalogCount field value if set, zero value otherwise.
 func (o *IaasUcsdManagedInfra) GetContainerCatalogCount() int64 {
-	if o == nil || o.ContainerCatalogCount == nil {
+	if o == nil || IsNil(o.ContainerCatalogCount) {
 		var ret int64
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *IaasUcsdManagedInfra) GetContainerCatalogCount() int64 {
 // GetContainerCatalogCountOk returns a tuple with the ContainerCatalogCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdManagedInfra) GetContainerCatalogCountOk() (*int64, bool) {
-	if o == nil || o.ContainerCatalogCount == nil {
+	if o == nil || IsNil(o.ContainerCatalogCount) {
 		return nil, false
 	}
 	return o.ContainerCatalogCount, true
@@ -207,7 +211,7 @@ func (o *IaasUcsdManagedInfra) GetContainerCatalogCountOk() (*int64, bool) {
 
 // HasContainerCatalogCount returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasContainerCatalogCount() bool {
-	if o != nil && o.ContainerCatalogCount != nil {
+	if o != nil && !IsNil(o.ContainerCatalogCount) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *IaasUcsdManagedInfra) SetContainerCatalogCount(v int64) {
 
 // GetEsxiHostCount returns the EsxiHostCount field value if set, zero value otherwise.
 func (o *IaasUcsdManagedInfra) GetEsxiHostCount() int64 {
-	if o == nil || o.EsxiHostCount == nil {
+	if o == nil || IsNil(o.EsxiHostCount) {
 		var ret int64
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *IaasUcsdManagedInfra) GetEsxiHostCount() int64 {
 // GetEsxiHostCountOk returns a tuple with the EsxiHostCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdManagedInfra) GetEsxiHostCountOk() (*int64, bool) {
-	if o == nil || o.EsxiHostCount == nil {
+	if o == nil || IsNil(o.EsxiHostCount) {
 		return nil, false
 	}
 	return o.EsxiHostCount, true
@@ -239,7 +243,7 @@ func (o *IaasUcsdManagedInfra) GetEsxiHostCountOk() (*int64, bool) {
 
 // HasEsxiHostCount returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasEsxiHostCount() bool {
-	if o != nil && o.EsxiHostCount != nil {
+	if o != nil && !IsNil(o.EsxiHostCount) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *IaasUcsdManagedInfra) SetEsxiHostCount(v int64) {
 
 // GetExternalGroupCount returns the ExternalGroupCount field value if set, zero value otherwise.
 func (o *IaasUcsdManagedInfra) GetExternalGroupCount() int64 {
-	if o == nil || o.ExternalGroupCount == nil {
+	if o == nil || IsNil(o.ExternalGroupCount) {
 		var ret int64
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *IaasUcsdManagedInfra) GetExternalGroupCount() int64 {
 // GetExternalGroupCountOk returns a tuple with the ExternalGroupCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdManagedInfra) GetExternalGroupCountOk() (*int64, bool) {
-	if o == nil || o.ExternalGroupCount == nil {
+	if o == nil || IsNil(o.ExternalGroupCount) {
 		return nil, false
 	}
 	return o.ExternalGroupCount, true
@@ -271,7 +275,7 @@ func (o *IaasUcsdManagedInfra) GetExternalGroupCountOk() (*int64, bool) {
 
 // HasExternalGroupCount returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasExternalGroupCount() bool {
-	if o != nil && o.ExternalGroupCount != nil {
+	if o != nil && !IsNil(o.ExternalGroupCount) {
 		return true
 	}
 
@@ -285,7 +289,7 @@ func (o *IaasUcsdManagedInfra) SetExternalGroupCount(v int64) {
 
 // GetHypervHostCount returns the HypervHostCount field value if set, zero value otherwise.
 func (o *IaasUcsdManagedInfra) GetHypervHostCount() int64 {
-	if o == nil || o.HypervHostCount == nil {
+	if o == nil || IsNil(o.HypervHostCount) {
 		var ret int64
 		return ret
 	}
@@ -295,7 +299,7 @@ func (o *IaasUcsdManagedInfra) GetHypervHostCount() int64 {
 // GetHypervHostCountOk returns a tuple with the HypervHostCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdManagedInfra) GetHypervHostCountOk() (*int64, bool) {
-	if o == nil || o.HypervHostCount == nil {
+	if o == nil || IsNil(o.HypervHostCount) {
 		return nil, false
 	}
 	return o.HypervHostCount, true
@@ -303,7 +307,7 @@ func (o *IaasUcsdManagedInfra) GetHypervHostCountOk() (*int64, bool) {
 
 // HasHypervHostCount returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasHypervHostCount() bool {
-	if o != nil && o.HypervHostCount != nil {
+	if o != nil && !IsNil(o.HypervHostCount) {
 		return true
 	}
 
@@ -317,7 +321,7 @@ func (o *IaasUcsdManagedInfra) SetHypervHostCount(v int64) {
 
 // GetLocalGroupCount returns the LocalGroupCount field value if set, zero value otherwise.
 func (o *IaasUcsdManagedInfra) GetLocalGroupCount() int64 {
-	if o == nil || o.LocalGroupCount == nil {
+	if o == nil || IsNil(o.LocalGroupCount) {
 		var ret int64
 		return ret
 	}
@@ -327,7 +331,7 @@ func (o *IaasUcsdManagedInfra) GetLocalGroupCount() int64 {
 // GetLocalGroupCountOk returns a tuple with the LocalGroupCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdManagedInfra) GetLocalGroupCountOk() (*int64, bool) {
-	if o == nil || o.LocalGroupCount == nil {
+	if o == nil || IsNil(o.LocalGroupCount) {
 		return nil, false
 	}
 	return o.LocalGroupCount, true
@@ -335,7 +339,7 @@ func (o *IaasUcsdManagedInfra) GetLocalGroupCountOk() (*int64, bool) {
 
 // HasLocalGroupCount returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasLocalGroupCount() bool {
-	if o != nil && o.LocalGroupCount != nil {
+	if o != nil && !IsNil(o.LocalGroupCount) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *IaasUcsdManagedInfra) SetLocalGroupCount(v int64) {
 
 // GetStandardCatalogCount returns the StandardCatalogCount field value if set, zero value otherwise.
 func (o *IaasUcsdManagedInfra) GetStandardCatalogCount() int64 {
-	if o == nil || o.StandardCatalogCount == nil {
+	if o == nil || IsNil(o.StandardCatalogCount) {
 		var ret int64
 		return ret
 	}
@@ -359,7 +363,7 @@ func (o *IaasUcsdManagedInfra) GetStandardCatalogCount() int64 {
 // GetStandardCatalogCountOk returns a tuple with the StandardCatalogCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdManagedInfra) GetStandardCatalogCountOk() (*int64, bool) {
-	if o == nil || o.StandardCatalogCount == nil {
+	if o == nil || IsNil(o.StandardCatalogCount) {
 		return nil, false
 	}
 	return o.StandardCatalogCount, true
@@ -367,7 +371,7 @@ func (o *IaasUcsdManagedInfra) GetStandardCatalogCountOk() (*int64, bool) {
 
 // HasStandardCatalogCount returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasStandardCatalogCount() bool {
-	if o != nil && o.StandardCatalogCount != nil {
+	if o != nil && !IsNil(o.StandardCatalogCount) {
 		return true
 	}
 
@@ -381,7 +385,7 @@ func (o *IaasUcsdManagedInfra) SetStandardCatalogCount(v int64) {
 
 // GetUserCount returns the UserCount field value if set, zero value otherwise.
 func (o *IaasUcsdManagedInfra) GetUserCount() int64 {
-	if o == nil || o.UserCount == nil {
+	if o == nil || IsNil(o.UserCount) {
 		var ret int64
 		return ret
 	}
@@ -391,7 +395,7 @@ func (o *IaasUcsdManagedInfra) GetUserCount() int64 {
 // GetUserCountOk returns a tuple with the UserCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdManagedInfra) GetUserCountOk() (*int64, bool) {
-	if o == nil || o.UserCount == nil {
+	if o == nil || IsNil(o.UserCount) {
 		return nil, false
 	}
 	return o.UserCount, true
@@ -399,7 +403,7 @@ func (o *IaasUcsdManagedInfra) GetUserCountOk() (*int64, bool) {
 
 // HasUserCount returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasUserCount() bool {
-	if o != nil && o.UserCount != nil {
+	if o != nil && !IsNil(o.UserCount) {
 		return true
 	}
 
@@ -413,7 +417,7 @@ func (o *IaasUcsdManagedInfra) SetUserCount(v int64) {
 
 // GetVdcCount returns the VdcCount field value if set, zero value otherwise.
 func (o *IaasUcsdManagedInfra) GetVdcCount() int64 {
-	if o == nil || o.VdcCount == nil {
+	if o == nil || IsNil(o.VdcCount) {
 		var ret int64
 		return ret
 	}
@@ -423,7 +427,7 @@ func (o *IaasUcsdManagedInfra) GetVdcCount() int64 {
 // GetVdcCountOk returns a tuple with the VdcCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdManagedInfra) GetVdcCountOk() (*int64, bool) {
-	if o == nil || o.VdcCount == nil {
+	if o == nil || IsNil(o.VdcCount) {
 		return nil, false
 	}
 	return o.VdcCount, true
@@ -431,7 +435,7 @@ func (o *IaasUcsdManagedInfra) GetVdcCountOk() (*int64, bool) {
 
 // HasVdcCount returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasVdcCount() bool {
-	if o != nil && o.VdcCount != nil {
+	if o != nil && !IsNil(o.VdcCount) {
 		return true
 	}
 
@@ -445,7 +449,7 @@ func (o *IaasUcsdManagedInfra) SetVdcCount(v int64) {
 
 // GetVmCount returns the VmCount field value if set, zero value otherwise.
 func (o *IaasUcsdManagedInfra) GetVmCount() int64 {
-	if o == nil || o.VmCount == nil {
+	if o == nil || IsNil(o.VmCount) {
 		var ret int64
 		return ret
 	}
@@ -455,7 +459,7 @@ func (o *IaasUcsdManagedInfra) GetVmCount() int64 {
 // GetVmCountOk returns a tuple with the VmCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasUcsdManagedInfra) GetVmCountOk() (*int64, bool) {
-	if o == nil || o.VmCount == nil {
+	if o == nil || IsNil(o.VmCount) {
 		return nil, false
 	}
 	return o.VmCount, true
@@ -463,7 +467,7 @@ func (o *IaasUcsdManagedInfra) GetVmCountOk() (*int64, bool) {
 
 // HasVmCount returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasVmCount() bool {
-	if o != nil && o.VmCount != nil {
+	if o != nil && !IsNil(o.VmCount) {
 		return true
 	}
 
@@ -475,99 +479,136 @@ func (o *IaasUcsdManagedInfra) SetVmCount(v int64) {
 	o.VmCount = &v
 }
 
-// GetGuid returns the Guid field value if set, zero value otherwise.
+// GetGuid returns the Guid field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IaasUcsdManagedInfra) GetGuid() IaasUcsdInfoRelationship {
-	if o == nil || o.Guid == nil {
+	if o == nil || IsNil(o.Guid.Get()) {
 		var ret IaasUcsdInfoRelationship
 		return ret
 	}
-	return *o.Guid
+	return *o.Guid.Get()
 }
 
 // GetGuidOk returns a tuple with the Guid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasUcsdManagedInfra) GetGuidOk() (*IaasUcsdInfoRelationship, bool) {
-	if o == nil || o.Guid == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Guid, true
+	return o.Guid.Get(), o.Guid.IsSet()
 }
 
 // HasGuid returns a boolean if a field has been set.
 func (o *IaasUcsdManagedInfra) HasGuid() bool {
-	if o != nil && o.Guid != nil {
+	if o != nil && o.Guid.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGuid gets a reference to the given IaasUcsdInfoRelationship and assigns it to the Guid field.
+// SetGuid gets a reference to the given NullableIaasUcsdInfoRelationship and assigns it to the Guid field.
 func (o *IaasUcsdManagedInfra) SetGuid(v IaasUcsdInfoRelationship) {
-	o.Guid = &v
+	o.Guid.Set(&v)
+}
+
+// SetGuidNil sets the value for Guid to be an explicit nil
+func (o *IaasUcsdManagedInfra) SetGuidNil() {
+	o.Guid.Set(nil)
+}
+
+// UnsetGuid ensures that no value is present for Guid, not even an explicit nil
+func (o *IaasUcsdManagedInfra) UnsetGuid() {
+	o.Guid.Unset()
 }
 
 func (o IaasUcsdManagedInfra) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IaasUcsdManagedInfra) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdvancedCatalogCount != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdvancedCatalogCount) {
 		toSerialize["AdvancedCatalogCount"] = o.AdvancedCatalogCount
 	}
-	if o.BmCatalogCount != nil {
+	if !IsNil(o.BmCatalogCount) {
 		toSerialize["BmCatalogCount"] = o.BmCatalogCount
 	}
-	if o.ContainerCatalogCount != nil {
+	if !IsNil(o.ContainerCatalogCount) {
 		toSerialize["ContainerCatalogCount"] = o.ContainerCatalogCount
 	}
-	if o.EsxiHostCount != nil {
+	if !IsNil(o.EsxiHostCount) {
 		toSerialize["EsxiHostCount"] = o.EsxiHostCount
 	}
-	if o.ExternalGroupCount != nil {
+	if !IsNil(o.ExternalGroupCount) {
 		toSerialize["ExternalGroupCount"] = o.ExternalGroupCount
 	}
-	if o.HypervHostCount != nil {
+	if !IsNil(o.HypervHostCount) {
 		toSerialize["HypervHostCount"] = o.HypervHostCount
 	}
-	if o.LocalGroupCount != nil {
+	if !IsNil(o.LocalGroupCount) {
 		toSerialize["LocalGroupCount"] = o.LocalGroupCount
 	}
-	if o.StandardCatalogCount != nil {
+	if !IsNil(o.StandardCatalogCount) {
 		toSerialize["StandardCatalogCount"] = o.StandardCatalogCount
 	}
-	if o.UserCount != nil {
+	if !IsNil(o.UserCount) {
 		toSerialize["UserCount"] = o.UserCount
 	}
-	if o.VdcCount != nil {
+	if !IsNil(o.VdcCount) {
 		toSerialize["VdcCount"] = o.VdcCount
 	}
-	if o.VmCount != nil {
+	if !IsNil(o.VmCount) {
 		toSerialize["VmCount"] = o.VmCount
 	}
-	if o.Guid != nil {
-		toSerialize["Guid"] = o.Guid
+	if o.Guid.IsSet() {
+		toSerialize["Guid"] = o.Guid.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IaasUcsdManagedInfra) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IaasUcsdManagedInfra) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IaasUcsdManagedInfraWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -594,13 +635,13 @@ func (o *IaasUcsdManagedInfra) UnmarshalJSON(bytes []byte) (err error) {
 		// Total virtual datacenters in UCSD.
 		VdcCount *int64 `json:"VdcCount,omitempty"`
 		// Total Virtual machines in UCSD.
-		VmCount *int64                    `json:"VmCount,omitempty"`
-		Guid    *IaasUcsdInfoRelationship `json:"Guid,omitempty"`
+		VmCount *int64                           `json:"VmCount,omitempty"`
+		Guid    NullableIaasUcsdInfoRelationship `json:"Guid,omitempty"`
 	}
 
 	varIaasUcsdManagedInfraWithoutEmbeddedStruct := IaasUcsdManagedInfraWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIaasUcsdManagedInfraWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIaasUcsdManagedInfraWithoutEmbeddedStruct)
 	if err == nil {
 		varIaasUcsdManagedInfra := _IaasUcsdManagedInfra{}
 		varIaasUcsdManagedInfra.ClassId = varIaasUcsdManagedInfraWithoutEmbeddedStruct.ClassId
@@ -624,7 +665,7 @@ func (o *IaasUcsdManagedInfra) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIaasUcsdManagedInfra := _IaasUcsdManagedInfra{}
 
-	err = json.Unmarshal(bytes, &varIaasUcsdManagedInfra)
+	err = json.Unmarshal(data, &varIaasUcsdManagedInfra)
 	if err == nil {
 		o.MoBaseMo = varIaasUcsdManagedInfra.MoBaseMo
 	} else {
@@ -633,7 +674,7 @@ func (o *IaasUcsdManagedInfra) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdvancedCatalogCount")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicFcErrorRecoverySettings type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicFcErrorRecoverySettings{}
 
 // VnicFcErrorRecoverySettings Fibre Channel Error Recovery Settings.
 type VnicFcErrorRecoverySettings struct {
@@ -128,7 +132,7 @@ func (o *VnicFcErrorRecoverySettings) SetObjectType(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *VnicFcErrorRecoverySettings) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -138,7 +142,7 @@ func (o *VnicFcErrorRecoverySettings) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcErrorRecoverySettings) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -146,7 +150,7 @@ func (o *VnicFcErrorRecoverySettings) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *VnicFcErrorRecoverySettings) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *VnicFcErrorRecoverySettings) SetEnabled(v bool) {
 
 // GetIoRetryCount returns the IoRetryCount field value if set, zero value otherwise.
 func (o *VnicFcErrorRecoverySettings) GetIoRetryCount() int64 {
-	if o == nil || o.IoRetryCount == nil {
+	if o == nil || IsNil(o.IoRetryCount) {
 		var ret int64
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *VnicFcErrorRecoverySettings) GetIoRetryCount() int64 {
 // GetIoRetryCountOk returns a tuple with the IoRetryCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcErrorRecoverySettings) GetIoRetryCountOk() (*int64, bool) {
-	if o == nil || o.IoRetryCount == nil {
+	if o == nil || IsNil(o.IoRetryCount) {
 		return nil, false
 	}
 	return o.IoRetryCount, true
@@ -178,7 +182,7 @@ func (o *VnicFcErrorRecoverySettings) GetIoRetryCountOk() (*int64, bool) {
 
 // HasIoRetryCount returns a boolean if a field has been set.
 func (o *VnicFcErrorRecoverySettings) HasIoRetryCount() bool {
-	if o != nil && o.IoRetryCount != nil {
+	if o != nil && !IsNil(o.IoRetryCount) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *VnicFcErrorRecoverySettings) SetIoRetryCount(v int64) {
 
 // GetIoRetryTimeout returns the IoRetryTimeout field value if set, zero value otherwise.
 func (o *VnicFcErrorRecoverySettings) GetIoRetryTimeout() int64 {
-	if o == nil || o.IoRetryTimeout == nil {
+	if o == nil || IsNil(o.IoRetryTimeout) {
 		var ret int64
 		return ret
 	}
@@ -202,7 +206,7 @@ func (o *VnicFcErrorRecoverySettings) GetIoRetryTimeout() int64 {
 // GetIoRetryTimeoutOk returns a tuple with the IoRetryTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcErrorRecoverySettings) GetIoRetryTimeoutOk() (*int64, bool) {
-	if o == nil || o.IoRetryTimeout == nil {
+	if o == nil || IsNil(o.IoRetryTimeout) {
 		return nil, false
 	}
 	return o.IoRetryTimeout, true
@@ -210,7 +214,7 @@ func (o *VnicFcErrorRecoverySettings) GetIoRetryTimeoutOk() (*int64, bool) {
 
 // HasIoRetryTimeout returns a boolean if a field has been set.
 func (o *VnicFcErrorRecoverySettings) HasIoRetryTimeout() bool {
-	if o != nil && o.IoRetryTimeout != nil {
+	if o != nil && !IsNil(o.IoRetryTimeout) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *VnicFcErrorRecoverySettings) SetIoRetryTimeout(v int64) {
 
 // GetLinkDownTimeout returns the LinkDownTimeout field value if set, zero value otherwise.
 func (o *VnicFcErrorRecoverySettings) GetLinkDownTimeout() int64 {
-	if o == nil || o.LinkDownTimeout == nil {
+	if o == nil || IsNil(o.LinkDownTimeout) {
 		var ret int64
 		return ret
 	}
@@ -234,7 +238,7 @@ func (o *VnicFcErrorRecoverySettings) GetLinkDownTimeout() int64 {
 // GetLinkDownTimeoutOk returns a tuple with the LinkDownTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcErrorRecoverySettings) GetLinkDownTimeoutOk() (*int64, bool) {
-	if o == nil || o.LinkDownTimeout == nil {
+	if o == nil || IsNil(o.LinkDownTimeout) {
 		return nil, false
 	}
 	return o.LinkDownTimeout, true
@@ -242,7 +246,7 @@ func (o *VnicFcErrorRecoverySettings) GetLinkDownTimeoutOk() (*int64, bool) {
 
 // HasLinkDownTimeout returns a boolean if a field has been set.
 func (o *VnicFcErrorRecoverySettings) HasLinkDownTimeout() bool {
-	if o != nil && o.LinkDownTimeout != nil {
+	if o != nil && !IsNil(o.LinkDownTimeout) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *VnicFcErrorRecoverySettings) SetLinkDownTimeout(v int64) {
 
 // GetPortDownTimeout returns the PortDownTimeout field value if set, zero value otherwise.
 func (o *VnicFcErrorRecoverySettings) GetPortDownTimeout() int64 {
-	if o == nil || o.PortDownTimeout == nil {
+	if o == nil || IsNil(o.PortDownTimeout) {
 		var ret int64
 		return ret
 	}
@@ -266,7 +270,7 @@ func (o *VnicFcErrorRecoverySettings) GetPortDownTimeout() int64 {
 // GetPortDownTimeoutOk returns a tuple with the PortDownTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicFcErrorRecoverySettings) GetPortDownTimeoutOk() (*int64, bool) {
-	if o == nil || o.PortDownTimeout == nil {
+	if o == nil || IsNil(o.PortDownTimeout) {
 		return nil, false
 	}
 	return o.PortDownTimeout, true
@@ -274,7 +278,7 @@ func (o *VnicFcErrorRecoverySettings) GetPortDownTimeoutOk() (*int64, bool) {
 
 // HasPortDownTimeout returns a boolean if a field has been set.
 func (o *VnicFcErrorRecoverySettings) HasPortDownTimeout() bool {
-	if o != nil && o.PortDownTimeout != nil {
+	if o != nil && !IsNil(o.PortDownTimeout) {
 		return true
 	}
 
@@ -287,34 +291,38 @@ func (o *VnicFcErrorRecoverySettings) SetPortDownTimeout(v int64) {
 }
 
 func (o VnicFcErrorRecoverySettings) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicFcErrorRecoverySettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Enabled != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.IoRetryCount != nil {
+	if !IsNil(o.IoRetryCount) {
 		toSerialize["IoRetryCount"] = o.IoRetryCount
 	}
-	if o.IoRetryTimeout != nil {
+	if !IsNil(o.IoRetryTimeout) {
 		toSerialize["IoRetryTimeout"] = o.IoRetryTimeout
 	}
-	if o.LinkDownTimeout != nil {
+	if !IsNil(o.LinkDownTimeout) {
 		toSerialize["LinkDownTimeout"] = o.LinkDownTimeout
 	}
-	if o.PortDownTimeout != nil {
+	if !IsNil(o.PortDownTimeout) {
 		toSerialize["PortDownTimeout"] = o.PortDownTimeout
 	}
 
@@ -322,10 +330,32 @@ func (o VnicFcErrorRecoverySettings) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicFcErrorRecoverySettings) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicFcErrorRecoverySettings) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicFcErrorRecoverySettingsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -345,7 +375,7 @@ func (o *VnicFcErrorRecoverySettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicFcErrorRecoverySettingsWithoutEmbeddedStruct := VnicFcErrorRecoverySettingsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicFcErrorRecoverySettingsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicFcErrorRecoverySettingsWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicFcErrorRecoverySettings := _VnicFcErrorRecoverySettings{}
 		varVnicFcErrorRecoverySettings.ClassId = varVnicFcErrorRecoverySettingsWithoutEmbeddedStruct.ClassId
@@ -362,7 +392,7 @@ func (o *VnicFcErrorRecoverySettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicFcErrorRecoverySettings := _VnicFcErrorRecoverySettings{}
 
-	err = json.Unmarshal(bytes, &varVnicFcErrorRecoverySettings)
+	err = json.Unmarshal(data, &varVnicFcErrorRecoverySettings)
 	if err == nil {
 		o.MoBaseComplexType = varVnicFcErrorRecoverySettings.MoBaseComplexType
 	} else {
@@ -371,7 +401,7 @@ func (o *VnicFcErrorRecoverySettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Enabled")

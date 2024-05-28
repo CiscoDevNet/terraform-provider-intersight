@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NotificationAlarmMoCondition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NotificationAlarmMoCondition{}
 
 // NotificationAlarmMoCondition This condition type gives the ability to subscribe to the cond.Alarm ObjectType and provide a list of Severities you're interested in.
 type NotificationAlarmMoCondition struct {
@@ -105,7 +109,7 @@ func (o *NotificationAlarmMoCondition) SetObjectType(v string) {
 
 // GetOdataFilter returns the OdataFilter field value if set, zero value otherwise.
 func (o *NotificationAlarmMoCondition) GetOdataFilter() string {
-	if o == nil || o.OdataFilter == nil {
+	if o == nil || IsNil(o.OdataFilter) {
 		var ret string
 		return ret
 	}
@@ -115,7 +119,7 @@ func (o *NotificationAlarmMoCondition) GetOdataFilter() string {
 // GetOdataFilterOk returns a tuple with the OdataFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NotificationAlarmMoCondition) GetOdataFilterOk() (*string, bool) {
-	if o == nil || o.OdataFilter == nil {
+	if o == nil || IsNil(o.OdataFilter) {
 		return nil, false
 	}
 	return o.OdataFilter, true
@@ -123,7 +127,7 @@ func (o *NotificationAlarmMoCondition) GetOdataFilterOk() (*string, bool) {
 
 // HasOdataFilter returns a boolean if a field has been set.
 func (o *NotificationAlarmMoCondition) HasOdataFilter() bool {
-	if o != nil && o.OdataFilter != nil {
+	if o != nil && !IsNil(o.OdataFilter) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *NotificationAlarmMoCondition) GetSeverity() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NotificationAlarmMoCondition) GetSeverityOk() ([]string, bool) {
-	if o == nil || o.Severity == nil {
+	if o == nil || IsNil(o.Severity) {
 		return nil, false
 	}
 	return o.Severity, true
@@ -156,7 +160,7 @@ func (o *NotificationAlarmMoCondition) GetSeverityOk() ([]string, bool) {
 
 // HasSeverity returns a boolean if a field has been set.
 func (o *NotificationAlarmMoCondition) HasSeverity() bool {
-	if o != nil && o.Severity != nil {
+	if o != nil && IsNil(o.Severity) {
 		return true
 	}
 
@@ -169,22 +173,26 @@ func (o *NotificationAlarmMoCondition) SetSeverity(v []string) {
 }
 
 func (o NotificationAlarmMoCondition) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NotificationAlarmMoCondition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedNotificationAbstractMoCondition, errNotificationAbstractMoCondition := json.Marshal(o.NotificationAbstractMoCondition)
 	if errNotificationAbstractMoCondition != nil {
-		return []byte{}, errNotificationAbstractMoCondition
+		return map[string]interface{}{}, errNotificationAbstractMoCondition
 	}
 	errNotificationAbstractMoCondition = json.Unmarshal([]byte(serializedNotificationAbstractMoCondition), &toSerialize)
 	if errNotificationAbstractMoCondition != nil {
-		return []byte{}, errNotificationAbstractMoCondition
+		return map[string]interface{}{}, errNotificationAbstractMoCondition
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.OdataFilter != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.OdataFilter) {
 		toSerialize["OdataFilter"] = o.OdataFilter
 	}
 	if o.Severity != nil {
@@ -195,10 +203,32 @@ func (o NotificationAlarmMoCondition) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NotificationAlarmMoCondition) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NotificationAlarmMoCondition) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NotificationAlarmMoConditionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -211,7 +241,7 @@ func (o *NotificationAlarmMoCondition) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNotificationAlarmMoConditionWithoutEmbeddedStruct := NotificationAlarmMoConditionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNotificationAlarmMoConditionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNotificationAlarmMoConditionWithoutEmbeddedStruct)
 	if err == nil {
 		varNotificationAlarmMoCondition := _NotificationAlarmMoCondition{}
 		varNotificationAlarmMoCondition.ClassId = varNotificationAlarmMoConditionWithoutEmbeddedStruct.ClassId
@@ -225,7 +255,7 @@ func (o *NotificationAlarmMoCondition) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNotificationAlarmMoCondition := _NotificationAlarmMoCondition{}
 
-	err = json.Unmarshal(bytes, &varNotificationAlarmMoCondition)
+	err = json.Unmarshal(data, &varNotificationAlarmMoCondition)
 	if err == nil {
 		o.NotificationAbstractMoCondition = varNotificationAlarmMoCondition.NotificationAbstractMoCondition
 	} else {
@@ -234,7 +264,7 @@ func (o *NotificationAlarmMoCondition) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "OdataFilter")

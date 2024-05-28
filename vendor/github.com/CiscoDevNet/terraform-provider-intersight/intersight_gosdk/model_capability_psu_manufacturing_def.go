@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilityPsuManufacturingDef type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilityPsuManufacturingDef{}
 
 // CapabilityPsuManufacturingDef Power supply unit properties.
 type CapabilityPsuManufacturingDef struct {
@@ -114,7 +118,7 @@ func (o *CapabilityPsuManufacturingDef) SetObjectType(v string) {
 
 // GetCaption returns the Caption field value if set, zero value otherwise.
 func (o *CapabilityPsuManufacturingDef) GetCaption() string {
-	if o == nil || o.Caption == nil {
+	if o == nil || IsNil(o.Caption) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *CapabilityPsuManufacturingDef) GetCaption() string {
 // GetCaptionOk returns a tuple with the Caption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityPsuManufacturingDef) GetCaptionOk() (*string, bool) {
-	if o == nil || o.Caption == nil {
+	if o == nil || IsNil(o.Caption) {
 		return nil, false
 	}
 	return o.Caption, true
@@ -132,7 +136,7 @@ func (o *CapabilityPsuManufacturingDef) GetCaptionOk() (*string, bool) {
 
 // HasCaption returns a boolean if a field has been set.
 func (o *CapabilityPsuManufacturingDef) HasCaption() bool {
-	if o != nil && o.Caption != nil {
+	if o != nil && !IsNil(o.Caption) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *CapabilityPsuManufacturingDef) SetCaption(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CapabilityPsuManufacturingDef) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *CapabilityPsuManufacturingDef) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityPsuManufacturingDef) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -164,7 +168,7 @@ func (o *CapabilityPsuManufacturingDef) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CapabilityPsuManufacturingDef) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *CapabilityPsuManufacturingDef) SetDescription(v string) {
 
 // GetPid returns the Pid field value if set, zero value otherwise.
 func (o *CapabilityPsuManufacturingDef) GetPid() string {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		var ret string
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *CapabilityPsuManufacturingDef) GetPid() string {
 // GetPidOk returns a tuple with the Pid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityPsuManufacturingDef) GetPidOk() (*string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -196,7 +200,7 @@ func (o *CapabilityPsuManufacturingDef) GetPidOk() (*string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *CapabilityPsuManufacturingDef) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && !IsNil(o.Pid) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *CapabilityPsuManufacturingDef) SetPid(v string) {
 
 // GetProductName returns the ProductName field value if set, zero value otherwise.
 func (o *CapabilityPsuManufacturingDef) GetProductName() string {
-	if o == nil || o.ProductName == nil {
+	if o == nil || IsNil(o.ProductName) {
 		var ret string
 		return ret
 	}
@@ -220,7 +224,7 @@ func (o *CapabilityPsuManufacturingDef) GetProductName() string {
 // GetProductNameOk returns a tuple with the ProductName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityPsuManufacturingDef) GetProductNameOk() (*string, bool) {
-	if o == nil || o.ProductName == nil {
+	if o == nil || IsNil(o.ProductName) {
 		return nil, false
 	}
 	return o.ProductName, true
@@ -228,7 +232,7 @@ func (o *CapabilityPsuManufacturingDef) GetProductNameOk() (*string, bool) {
 
 // HasProductName returns a boolean if a field has been set.
 func (o *CapabilityPsuManufacturingDef) HasProductName() bool {
-	if o != nil && o.ProductName != nil {
+	if o != nil && !IsNil(o.ProductName) {
 		return true
 	}
 
@@ -242,7 +246,7 @@ func (o *CapabilityPsuManufacturingDef) SetProductName(v string) {
 
 // GetSku returns the Sku field value if set, zero value otherwise.
 func (o *CapabilityPsuManufacturingDef) GetSku() string {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		var ret string
 		return ret
 	}
@@ -252,7 +256,7 @@ func (o *CapabilityPsuManufacturingDef) GetSku() string {
 // GetSkuOk returns a tuple with the Sku field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityPsuManufacturingDef) GetSkuOk() (*string, bool) {
-	if o == nil || o.Sku == nil {
+	if o == nil || IsNil(o.Sku) {
 		return nil, false
 	}
 	return o.Sku, true
@@ -260,7 +264,7 @@ func (o *CapabilityPsuManufacturingDef) GetSkuOk() (*string, bool) {
 
 // HasSku returns a boolean if a field has been set.
 func (o *CapabilityPsuManufacturingDef) HasSku() bool {
-	if o != nil && o.Sku != nil {
+	if o != nil && !IsNil(o.Sku) {
 		return true
 	}
 
@@ -274,7 +278,7 @@ func (o *CapabilityPsuManufacturingDef) SetSku(v string) {
 
 // GetVid returns the Vid field value if set, zero value otherwise.
 func (o *CapabilityPsuManufacturingDef) GetVid() string {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		var ret string
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *CapabilityPsuManufacturingDef) GetVid() string {
 // GetVidOk returns a tuple with the Vid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityPsuManufacturingDef) GetVidOk() (*string, bool) {
-	if o == nil || o.Vid == nil {
+	if o == nil || IsNil(o.Vid) {
 		return nil, false
 	}
 	return o.Vid, true
@@ -292,7 +296,7 @@ func (o *CapabilityPsuManufacturingDef) GetVidOk() (*string, bool) {
 
 // HasVid returns a boolean if a field has been set.
 func (o *CapabilityPsuManufacturingDef) HasVid() bool {
-	if o != nil && o.Vid != nil {
+	if o != nil && !IsNil(o.Vid) {
 		return true
 	}
 
@@ -305,37 +309,41 @@ func (o *CapabilityPsuManufacturingDef) SetVid(v string) {
 }
 
 func (o CapabilityPsuManufacturingDef) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilityPsuManufacturingDef) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityCapability, errCapabilityCapability := json.Marshal(o.CapabilityCapability)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
 	errCapabilityCapability = json.Unmarshal([]byte(serializedCapabilityCapability), &toSerialize)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Caption != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Caption) {
 		toSerialize["Caption"] = o.Caption
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Pid != nil {
+	if !IsNil(o.Pid) {
 		toSerialize["Pid"] = o.Pid
 	}
-	if o.ProductName != nil {
+	if !IsNil(o.ProductName) {
 		toSerialize["ProductName"] = o.ProductName
 	}
-	if o.Sku != nil {
+	if !IsNil(o.Sku) {
 		toSerialize["Sku"] = o.Sku
 	}
-	if o.Vid != nil {
+	if !IsNil(o.Vid) {
 		toSerialize["Vid"] = o.Vid
 	}
 
@@ -343,10 +351,32 @@ func (o CapabilityPsuManufacturingDef) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilityPsuManufacturingDef) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilityPsuManufacturingDef) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilityPsuManufacturingDefWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -368,7 +398,7 @@ func (o *CapabilityPsuManufacturingDef) UnmarshalJSON(bytes []byte) (err error) 
 
 	varCapabilityPsuManufacturingDefWithoutEmbeddedStruct := CapabilityPsuManufacturingDefWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilityPsuManufacturingDefWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilityPsuManufacturingDefWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilityPsuManufacturingDef := _CapabilityPsuManufacturingDef{}
 		varCapabilityPsuManufacturingDef.ClassId = varCapabilityPsuManufacturingDefWithoutEmbeddedStruct.ClassId
@@ -386,7 +416,7 @@ func (o *CapabilityPsuManufacturingDef) UnmarshalJSON(bytes []byte) (err error) 
 
 	varCapabilityPsuManufacturingDef := _CapabilityPsuManufacturingDef{}
 
-	err = json.Unmarshal(bytes, &varCapabilityPsuManufacturingDef)
+	err = json.Unmarshal(data, &varCapabilityPsuManufacturingDef)
 	if err == nil {
 		o.CapabilityCapability = varCapabilityPsuManufacturingDef.CapabilityCapability
 	} else {
@@ -395,7 +425,7 @@ func (o *CapabilityPsuManufacturingDef) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Caption")

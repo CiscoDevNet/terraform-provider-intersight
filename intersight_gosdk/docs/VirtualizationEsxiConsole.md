@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.EsxiConsole"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.EsxiConsole"]
 **StreamId** | Pointer to **string** | The stream ID of the host console session opened. | [optional] [readonly] 
-**DeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
+**DeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Host** | Pointer to [**NullableVirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -119,6 +119,16 @@ SetDeviceRegistration sets DeviceRegistration field to given value.
 
 HasDeviceRegistration returns a boolean if a field has been set.
 
+### SetDeviceRegistrationNil
+
+`func (o *VirtualizationEsxiConsole) SetDeviceRegistrationNil(b bool)`
+
+ SetDeviceRegistrationNil sets the value for DeviceRegistration to be an explicit nil
+
+### UnsetDeviceRegistration
+`func (o *VirtualizationEsxiConsole) UnsetDeviceRegistration()`
+
+UnsetDeviceRegistration ensures that no value is present for DeviceRegistration, not even an explicit nil
 ### GetHost
 
 `func (o *VirtualizationEsxiConsole) GetHost() VirtualizationVmwareHostRelationship`
@@ -144,6 +154,16 @@ SetHost sets Host field to given value.
 
 HasHost returns a boolean if a field has been set.
 
+### SetHostNil
+
+`func (o *VirtualizationEsxiConsole) SetHostNil(b bool)`
+
+ SetHostNil sets the value for Host to be an explicit nil
+
+### UnsetHost
+`func (o *VirtualizationEsxiConsole) UnsetHost()`
+
+UnsetHost ensures that no value is present for Host, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 **LastLoginTime** | Pointer to **time.Time** | The last login time for user. | [optional] [readonly] 
 **TokenId** | Pointer to **string** | Token identifier. Not the Access Token itself. | [optional] [readonly] 
 **UserMeta** | Pointer to [**NullableIamClientMeta**](IamClientMeta.md) |  | [optional] 
-**AppRegistration** | Pointer to [**IamAppRegistrationRelationship**](IamAppRegistrationRelationship.md) |  | [optional] 
-**Permission** | Pointer to [**IamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
-**User** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
+**AppRegistration** | Pointer to [**NullableIamAppRegistrationRelationship**](IamAppRegistrationRelationship.md) |  | [optional] 
+**Permission** | Pointer to [**NullableIamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
+**User** | Pointer to [**NullableIamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -338,6 +338,16 @@ SetAppRegistration sets AppRegistration field to given value.
 
 HasAppRegistration returns a boolean if a field has been set.
 
+### SetAppRegistrationNil
+
+`func (o *IamOAuthToken) SetAppRegistrationNil(b bool)`
+
+ SetAppRegistrationNil sets the value for AppRegistration to be an explicit nil
+
+### UnsetAppRegistration
+`func (o *IamOAuthToken) UnsetAppRegistration()`
+
+UnsetAppRegistration ensures that no value is present for AppRegistration, not even an explicit nil
 ### GetPermission
 
 `func (o *IamOAuthToken) GetPermission() IamPermissionRelationship`
@@ -363,6 +373,16 @@ SetPermission sets Permission field to given value.
 
 HasPermission returns a boolean if a field has been set.
 
+### SetPermissionNil
+
+`func (o *IamOAuthToken) SetPermissionNil(b bool)`
+
+ SetPermissionNil sets the value for Permission to be an explicit nil
+
+### UnsetPermission
+`func (o *IamOAuthToken) UnsetPermission()`
+
+UnsetPermission ensures that no value is present for Permission, not even an explicit nil
 ### GetUser
 
 `func (o *IamOAuthToken) GetUser() IamUserRelationship`
@@ -388,6 +408,16 @@ SetUser sets User field to given value.
 
 HasUser returns a boolean if a field has been set.
 
+### SetUserNil
+
+`func (o *IamOAuthToken) SetUserNil(b bool)`
+
+ SetUserNil sets the value for User to be an explicit nil
+
+### UnsetUser
+`func (o *IamOAuthToken) UnsetUser()`
+
+UnsetUser ensures that no value is present for User, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

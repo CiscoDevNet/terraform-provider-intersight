@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **PublicIpAddress** | Pointer to **[]string** |  | [optional] 
 **SecurityGroups** | Pointer to **[]string** |  | [optional] 
 **Status** | Pointer to **string** | The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use. | [optional] [readonly] 
-**AwsSubnet** | Pointer to [**CloudAwsSubnetRelationship**](CloudAwsSubnetRelationship.md) |  | [optional] 
+**AwsSubnet** | Pointer to [**NullableCloudAwsSubnetRelationship**](CloudAwsSubnetRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -340,6 +340,16 @@ SetAwsSubnet sets AwsSubnet field to given value.
 
 HasAwsSubnet returns a boolean if a field has been set.
 
+### SetAwsSubnetNil
+
+`func (o *CloudAwsNetworkInterface) SetAwsSubnetNil(b bool)`
+
+ SetAwsSubnetNil sets the value for AwsSubnet to be an explicit nil
+
+### UnsetAwsSubnet
+`func (o *CloudAwsNetworkInterface) UnsetAwsSubnet()`
+
+UnsetAwsSubnet ensures that no value is present for AwsSubnet, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

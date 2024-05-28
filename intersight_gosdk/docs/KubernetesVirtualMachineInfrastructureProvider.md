@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.VirtualMachineInfrastructureProvider"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.VirtualMachineInfrastructureProvider"]
 **InfraConfig** | Pointer to [**NullableKubernetesBaseVirtualMachineInfraConfig**](KubernetesBaseVirtualMachineInfraConfig.md) |  | [optional] 
-**InfraConfigPolicy** | Pointer to [**KubernetesVirtualMachineInfraConfigPolicyRelationship**](KubernetesVirtualMachineInfraConfigPolicyRelationship.md) |  | [optional] 
-**InstanceType** | Pointer to [**KubernetesVirtualMachineInstanceTypeRelationship**](KubernetesVirtualMachineInstanceTypeRelationship.md) |  | [optional] 
-**Target** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**InfraConfigPolicy** | Pointer to [**NullableKubernetesVirtualMachineInfraConfigPolicyRelationship**](KubernetesVirtualMachineInfraConfigPolicyRelationship.md) |  | [optional] 
+**InstanceType** | Pointer to [**NullableKubernetesVirtualMachineInstanceTypeRelationship**](KubernetesVirtualMachineInstanceTypeRelationship.md) |  | [optional] 
+**Target** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -130,6 +130,16 @@ SetInfraConfigPolicy sets InfraConfigPolicy field to given value.
 
 HasInfraConfigPolicy returns a boolean if a field has been set.
 
+### SetInfraConfigPolicyNil
+
+`func (o *KubernetesVirtualMachineInfrastructureProvider) SetInfraConfigPolicyNil(b bool)`
+
+ SetInfraConfigPolicyNil sets the value for InfraConfigPolicy to be an explicit nil
+
+### UnsetInfraConfigPolicy
+`func (o *KubernetesVirtualMachineInfrastructureProvider) UnsetInfraConfigPolicy()`
+
+UnsetInfraConfigPolicy ensures that no value is present for InfraConfigPolicy, not even an explicit nil
 ### GetInstanceType
 
 `func (o *KubernetesVirtualMachineInfrastructureProvider) GetInstanceType() KubernetesVirtualMachineInstanceTypeRelationship`
@@ -155,6 +165,16 @@ SetInstanceType sets InstanceType field to given value.
 
 HasInstanceType returns a boolean if a field has been set.
 
+### SetInstanceTypeNil
+
+`func (o *KubernetesVirtualMachineInfrastructureProvider) SetInstanceTypeNil(b bool)`
+
+ SetInstanceTypeNil sets the value for InstanceType to be an explicit nil
+
+### UnsetInstanceType
+`func (o *KubernetesVirtualMachineInfrastructureProvider) UnsetInstanceType()`
+
+UnsetInstanceType ensures that no value is present for InstanceType, not even an explicit nil
 ### GetTarget
 
 `func (o *KubernetesVirtualMachineInfrastructureProvider) GetTarget() AssetDeviceRegistrationRelationship`
@@ -180,6 +200,16 @@ SetTarget sets Target field to given value.
 
 HasTarget returns a boolean if a field has been set.
 
+### SetTargetNil
+
+`func (o *KubernetesVirtualMachineInfrastructureProvider) SetTargetNil(b bool)`
+
+ SetTargetNil sets the value for Target to be an explicit nil
+
+### UnsetTarget
+`func (o *KubernetesVirtualMachineInfrastructureProvider) UnsetTarget()`
+
+UnsetTarget ensures that no value is present for Target, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

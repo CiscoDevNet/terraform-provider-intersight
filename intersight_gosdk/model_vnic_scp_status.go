@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicScpStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicScpStatus{}
 
 // VnicScpStatus An internal MO to check if a SCP can be deployed or not on a specific Server Profile.
 type VnicScpStatus struct {
@@ -27,9 +31,9 @@ type VnicScpStatus struct {
 	// The reason for the status - it will be empty if status is ok or validating. If error, it will have the appropriate message indicating the reason for failure.
 	Reason *string `json:"Reason,omitempty"`
 	// Indicates if the LCP is ready for Deploy or not. * `ok` - No issues with the LCP/SCP/VIF. * `error` - The LCP/SCP/VIF cannot be deployed due to error. * `validating` - Validation in progress for the LCP.
-	Status               *string                                  `json:"Status,omitempty"`
-	VhbaInfo             []VnicVifStatus                          `json:"VhbaInfo,omitempty"`
-	Profile              *PolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
+	Status               *string                                         `json:"Status,omitempty"`
+	VhbaInfo             []VnicVifStatus                                 `json:"VhbaInfo,omitempty"`
+	Profile              NullablePolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,7 +116,7 @@ func (o *VnicScpStatus) SetObjectType(v string) {
 
 // GetReason returns the Reason field value if set, zero value otherwise.
 func (o *VnicScpStatus) GetReason() string {
-	if o == nil || o.Reason == nil {
+	if o == nil || IsNil(o.Reason) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *VnicScpStatus) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicScpStatus) GetReasonOk() (*string, bool) {
-	if o == nil || o.Reason == nil {
+	if o == nil || IsNil(o.Reason) {
 		return nil, false
 	}
 	return o.Reason, true
@@ -130,7 +134,7 @@ func (o *VnicScpStatus) GetReasonOk() (*string, bool) {
 
 // HasReason returns a boolean if a field has been set.
 func (o *VnicScpStatus) HasReason() bool {
-	if o != nil && o.Reason != nil {
+	if o != nil && !IsNil(o.Reason) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *VnicScpStatus) SetReason(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *VnicScpStatus) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *VnicScpStatus) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicScpStatus) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -162,7 +166,7 @@ func (o *VnicScpStatus) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *VnicScpStatus) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *VnicScpStatus) GetVhbaInfo() []VnicVifStatus {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicScpStatus) GetVhbaInfoOk() ([]VnicVifStatus, bool) {
-	if o == nil || o.VhbaInfo == nil {
+	if o == nil || IsNil(o.VhbaInfo) {
 		return nil, false
 	}
 	return o.VhbaInfo, true
@@ -195,7 +199,7 @@ func (o *VnicScpStatus) GetVhbaInfoOk() ([]VnicVifStatus, bool) {
 
 // HasVhbaInfo returns a boolean if a field has been set.
 func (o *VnicScpStatus) HasVhbaInfo() bool {
-	if o != nil && o.VhbaInfo != nil {
+	if o != nil && IsNil(o.VhbaInfo) {
 		return true
 	}
 
@@ -207,75 +211,112 @@ func (o *VnicScpStatus) SetVhbaInfo(v []VnicVifStatus) {
 	o.VhbaInfo = v
 }
 
-// GetProfile returns the Profile field value if set, zero value otherwise.
+// GetProfile returns the Profile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VnicScpStatus) GetProfile() PolicyAbstractConfigProfileRelationship {
-	if o == nil || o.Profile == nil {
+	if o == nil || IsNil(o.Profile.Get()) {
 		var ret PolicyAbstractConfigProfileRelationship
 		return ret
 	}
-	return *o.Profile
+	return *o.Profile.Get()
 }
 
 // GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VnicScpStatus) GetProfileOk() (*PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Profile, true
+	return o.Profile.Get(), o.Profile.IsSet()
 }
 
 // HasProfile returns a boolean if a field has been set.
 func (o *VnicScpStatus) HasProfile() bool {
-	if o != nil && o.Profile != nil {
+	if o != nil && o.Profile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProfile gets a reference to the given PolicyAbstractConfigProfileRelationship and assigns it to the Profile field.
+// SetProfile gets a reference to the given NullablePolicyAbstractConfigProfileRelationship and assigns it to the Profile field.
 func (o *VnicScpStatus) SetProfile(v PolicyAbstractConfigProfileRelationship) {
-	o.Profile = &v
+	o.Profile.Set(&v)
+}
+
+// SetProfileNil sets the value for Profile to be an explicit nil
+func (o *VnicScpStatus) SetProfileNil() {
+	o.Profile.Set(nil)
+}
+
+// UnsetProfile ensures that no value is present for Profile, not even an explicit nil
+func (o *VnicScpStatus) UnsetProfile() {
+	o.Profile.Unset()
 }
 
 func (o VnicScpStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicScpStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Reason != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Reason) {
 		toSerialize["Reason"] = o.Reason
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 	if o.VhbaInfo != nil {
 		toSerialize["VhbaInfo"] = o.VhbaInfo
 	}
-	if o.Profile != nil {
-		toSerialize["Profile"] = o.Profile
+	if o.Profile.IsSet() {
+		toSerialize["Profile"] = o.Profile.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicScpStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicScpStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicScpStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -284,14 +325,14 @@ func (o *VnicScpStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// The reason for the status - it will be empty if status is ok or validating. If error, it will have the appropriate message indicating the reason for failure.
 		Reason *string `json:"Reason,omitempty"`
 		// Indicates if the LCP is ready for Deploy or not. * `ok` - No issues with the LCP/SCP/VIF. * `error` - The LCP/SCP/VIF cannot be deployed due to error. * `validating` - Validation in progress for the LCP.
-		Status   *string                                  `json:"Status,omitempty"`
-		VhbaInfo []VnicVifStatus                          `json:"VhbaInfo,omitempty"`
-		Profile  *PolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
+		Status   *string                                         `json:"Status,omitempty"`
+		VhbaInfo []VnicVifStatus                                 `json:"VhbaInfo,omitempty"`
+		Profile  NullablePolicyAbstractConfigProfileRelationship `json:"Profile,omitempty"`
 	}
 
 	varVnicScpStatusWithoutEmbeddedStruct := VnicScpStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicScpStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicScpStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicScpStatus := _VnicScpStatus{}
 		varVnicScpStatus.ClassId = varVnicScpStatusWithoutEmbeddedStruct.ClassId
@@ -307,7 +348,7 @@ func (o *VnicScpStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicScpStatus := _VnicScpStatus{}
 
-	err = json.Unmarshal(bytes, &varVnicScpStatus)
+	err = json.Unmarshal(data, &varVnicScpStatus)
 	if err == nil {
 		o.MoBaseMo = varVnicScpStatus.MoBaseMo
 	} else {
@@ -316,7 +357,7 @@ func (o *VnicScpStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Reason")

@@ -24,8 +24,8 @@ Name | Type | Description | Notes
 **Vendor** | Pointer to **string** | Vendor of the storage device. | [optional] 
 **VirtualDiskPath** | Pointer to **string** | Path of the virtual disk. | [optional] 
 **VmIdentity** | Pointer to **string** | Identity of the virtual machine where the virtual disk is created. | [optional] 
-**Datastore** | Pointer to [**VirtualizationVmwareDatastoreRelationship**](VirtualizationVmwareDatastoreRelationship.md) |  | [optional] 
-**VirtualMachine** | Pointer to [**VirtualizationVmwareVirtualMachineRelationship**](VirtualizationVmwareVirtualMachineRelationship.md) |  | [optional] 
+**Datastore** | Pointer to [**NullableVirtualizationVmwareDatastoreRelationship**](VirtualizationVmwareDatastoreRelationship.md) |  | [optional] 
+**VirtualMachine** | Pointer to [**NullableVirtualizationVmwareVirtualMachineRelationship**](VirtualizationVmwareVirtualMachineRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -571,6 +571,16 @@ SetDatastore sets Datastore field to given value.
 
 HasDatastore returns a boolean if a field has been set.
 
+### SetDatastoreNil
+
+`func (o *VirtualizationVmwareVirtualDisk) SetDatastoreNil(b bool)`
+
+ SetDatastoreNil sets the value for Datastore to be an explicit nil
+
+### UnsetDatastore
+`func (o *VirtualizationVmwareVirtualDisk) UnsetDatastore()`
+
+UnsetDatastore ensures that no value is present for Datastore, not even an explicit nil
 ### GetVirtualMachine
 
 `func (o *VirtualizationVmwareVirtualDisk) GetVirtualMachine() VirtualizationVmwareVirtualMachineRelationship`
@@ -596,6 +606,16 @@ SetVirtualMachine sets VirtualMachine field to given value.
 
 HasVirtualMachine returns a boolean if a field has been set.
 
+### SetVirtualMachineNil
+
+`func (o *VirtualizationVmwareVirtualDisk) SetVirtualMachineNil(b bool)`
+
+ SetVirtualMachineNil sets the value for VirtualMachine to be an explicit nil
+
+### UnsetVirtualMachine
+`func (o *VirtualizationVmwareVirtualDisk) UnsetVirtualMachine()`
+
+UnsetVirtualMachine ensures that no value is present for VirtualMachine, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

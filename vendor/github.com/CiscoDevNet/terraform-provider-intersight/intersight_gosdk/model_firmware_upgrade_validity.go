@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareUpgradeValidity type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareUpgradeValidity{}
 
 // FirmwareUpgradeValidity Upgrade Validity API that performs basic validity checks for performing a firmware upgrade on the endpoint. The API checks whether the endpoint satisfies the basic platform requirements that are needed for firmware upgrade to happen. Support is currently available only for Standalone servers.
 type FirmwareUpgradeValidity struct {
@@ -27,8 +31,8 @@ type FirmwareUpgradeValidity struct {
 	// The error string returned while checking for a target device's validity for firmware upgrade.
 	ErrorMessage *string `json:"ErrorMessage,omitempty"`
 	// This flag denotes whether the target device is a valid target for firmware upgrade.
-	IsValid              *bool                        `json:"IsValid,omitempty"`
-	Server               *ComputePhysicalRelationship `json:"Server,omitempty"`
+	IsValid              *bool                               `json:"IsValid,omitempty"`
+	Server               NullableComputePhysicalRelationship `json:"Server,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,7 +111,7 @@ func (o *FirmwareUpgradeValidity) SetObjectType(v string) {
 
 // GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise.
 func (o *FirmwareUpgradeValidity) GetErrorMessage() string {
-	if o == nil || o.ErrorMessage == nil {
+	if o == nil || IsNil(o.ErrorMessage) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *FirmwareUpgradeValidity) GetErrorMessage() string {
 // GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeValidity) GetErrorMessageOk() (*string, bool) {
-	if o == nil || o.ErrorMessage == nil {
+	if o == nil || IsNil(o.ErrorMessage) {
 		return nil, false
 	}
 	return o.ErrorMessage, true
@@ -125,7 +129,7 @@ func (o *FirmwareUpgradeValidity) GetErrorMessageOk() (*string, bool) {
 
 // HasErrorMessage returns a boolean if a field has been set.
 func (o *FirmwareUpgradeValidity) HasErrorMessage() bool {
-	if o != nil && o.ErrorMessage != nil {
+	if o != nil && !IsNil(o.ErrorMessage) {
 		return true
 	}
 
@@ -139,7 +143,7 @@ func (o *FirmwareUpgradeValidity) SetErrorMessage(v string) {
 
 // GetIsValid returns the IsValid field value if set, zero value otherwise.
 func (o *FirmwareUpgradeValidity) GetIsValid() bool {
-	if o == nil || o.IsValid == nil {
+	if o == nil || IsNil(o.IsValid) {
 		var ret bool
 		return ret
 	}
@@ -149,7 +153,7 @@ func (o *FirmwareUpgradeValidity) GetIsValid() bool {
 // GetIsValidOk returns a tuple with the IsValid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeValidity) GetIsValidOk() (*bool, bool) {
-	if o == nil || o.IsValid == nil {
+	if o == nil || IsNil(o.IsValid) {
 		return nil, false
 	}
 	return o.IsValid, true
@@ -157,7 +161,7 @@ func (o *FirmwareUpgradeValidity) GetIsValidOk() (*bool, bool) {
 
 // HasIsValid returns a boolean if a field has been set.
 func (o *FirmwareUpgradeValidity) HasIsValid() bool {
-	if o != nil && o.IsValid != nil {
+	if o != nil && !IsNil(o.IsValid) {
 		return true
 	}
 
@@ -169,72 +173,109 @@ func (o *FirmwareUpgradeValidity) SetIsValid(v bool) {
 	o.IsValid = &v
 }
 
-// GetServer returns the Server field value if set, zero value otherwise.
+// GetServer returns the Server field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareUpgradeValidity) GetServer() ComputePhysicalRelationship {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.Server
+	return *o.Server.Get()
 }
 
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeValidity) GetServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Server, true
+	return o.Server.Get(), o.Server.IsSet()
 }
 
 // HasServer returns a boolean if a field has been set.
 func (o *FirmwareUpgradeValidity) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && o.Server.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServer gets a reference to the given ComputePhysicalRelationship and assigns it to the Server field.
+// SetServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the Server field.
 func (o *FirmwareUpgradeValidity) SetServer(v ComputePhysicalRelationship) {
-	o.Server = &v
+	o.Server.Set(&v)
+}
+
+// SetServerNil sets the value for Server to be an explicit nil
+func (o *FirmwareUpgradeValidity) SetServerNil() {
+	o.Server.Set(nil)
+}
+
+// UnsetServer ensures that no value is present for Server, not even an explicit nil
+func (o *FirmwareUpgradeValidity) UnsetServer() {
+	o.Server.Unset()
 }
 
 func (o FirmwareUpgradeValidity) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareUpgradeValidity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ErrorMessage != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ErrorMessage) {
 		toSerialize["ErrorMessage"] = o.ErrorMessage
 	}
-	if o.IsValid != nil {
+	if !IsNil(o.IsValid) {
 		toSerialize["IsValid"] = o.IsValid
 	}
-	if o.Server != nil {
-		toSerialize["Server"] = o.Server
+	if o.Server.IsSet() {
+		toSerialize["Server"] = o.Server.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareUpgradeValidity) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareUpgradeValidity) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareUpgradeValidityWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -243,13 +284,13 @@ func (o *FirmwareUpgradeValidity) UnmarshalJSON(bytes []byte) (err error) {
 		// The error string returned while checking for a target device's validity for firmware upgrade.
 		ErrorMessage *string `json:"ErrorMessage,omitempty"`
 		// This flag denotes whether the target device is a valid target for firmware upgrade.
-		IsValid *bool                        `json:"IsValid,omitempty"`
-		Server  *ComputePhysicalRelationship `json:"Server,omitempty"`
+		IsValid *bool                               `json:"IsValid,omitempty"`
+		Server  NullableComputePhysicalRelationship `json:"Server,omitempty"`
 	}
 
 	varFirmwareUpgradeValidityWithoutEmbeddedStruct := FirmwareUpgradeValidityWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUpgradeValidityWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareUpgradeValidityWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareUpgradeValidity := _FirmwareUpgradeValidity{}
 		varFirmwareUpgradeValidity.ClassId = varFirmwareUpgradeValidityWithoutEmbeddedStruct.ClassId
@@ -264,7 +305,7 @@ func (o *FirmwareUpgradeValidity) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareUpgradeValidity := _FirmwareUpgradeValidity{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUpgradeValidity)
+	err = json.Unmarshal(data, &varFirmwareUpgradeValidity)
 	if err == nil {
 		o.MoBaseMo = varFirmwareUpgradeValidity.MoBaseMo
 	} else {
@@ -273,7 +314,7 @@ func (o *FirmwareUpgradeValidity) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ErrorMessage")

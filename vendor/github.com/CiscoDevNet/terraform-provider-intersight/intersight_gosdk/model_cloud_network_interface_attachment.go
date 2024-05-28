@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CloudNetworkInterfaceAttachment type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudNetworkInterfaceAttachment{}
 
 // CloudNetworkInterfaceAttachment Network interface details.
 type CloudNetworkInterfaceAttachment struct {
@@ -122,7 +126,7 @@ func (o *CloudNetworkInterfaceAttachment) SetObjectType(v string) {
 
 // GetAccessConfig returns the AccessConfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudNetworkInterfaceAttachment) GetAccessConfig() CloudNetworkAccessConfig {
-	if o == nil || o.AccessConfig.Get() == nil {
+	if o == nil || IsNil(o.AccessConfig.Get()) {
 		var ret CloudNetworkAccessConfig
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *CloudNetworkInterfaceAttachment) UnsetAccessConfig() {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *CloudNetworkInterfaceAttachment) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -175,7 +179,7 @@ func (o *CloudNetworkInterfaceAttachment) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInterfaceAttachment) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -183,7 +187,7 @@ func (o *CloudNetworkInterfaceAttachment) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *CloudNetworkInterfaceAttachment) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -197,7 +201,7 @@ func (o *CloudNetworkInterfaceAttachment) SetIdentity(v string) {
 
 // GetIpForwardingEnabled returns the IpForwardingEnabled field value if set, zero value otherwise.
 func (o *CloudNetworkInterfaceAttachment) GetIpForwardingEnabled() bool {
-	if o == nil || o.IpForwardingEnabled == nil {
+	if o == nil || IsNil(o.IpForwardingEnabled) {
 		var ret bool
 		return ret
 	}
@@ -207,7 +211,7 @@ func (o *CloudNetworkInterfaceAttachment) GetIpForwardingEnabled() bool {
 // GetIpForwardingEnabledOk returns a tuple with the IpForwardingEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInterfaceAttachment) GetIpForwardingEnabledOk() (*bool, bool) {
-	if o == nil || o.IpForwardingEnabled == nil {
+	if o == nil || IsNil(o.IpForwardingEnabled) {
 		return nil, false
 	}
 	return o.IpForwardingEnabled, true
@@ -215,7 +219,7 @@ func (o *CloudNetworkInterfaceAttachment) GetIpForwardingEnabledOk() (*bool, boo
 
 // HasIpForwardingEnabled returns a boolean if a field has been set.
 func (o *CloudNetworkInterfaceAttachment) HasIpForwardingEnabled() bool {
-	if o != nil && o.IpForwardingEnabled != nil {
+	if o != nil && !IsNil(o.IpForwardingEnabled) {
 		return true
 	}
 
@@ -229,7 +233,7 @@ func (o *CloudNetworkInterfaceAttachment) SetIpForwardingEnabled(v bool) {
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *CloudNetworkInterfaceAttachment) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -239,7 +243,7 @@ func (o *CloudNetworkInterfaceAttachment) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInterfaceAttachment) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -247,7 +251,7 @@ func (o *CloudNetworkInterfaceAttachment) GetMacAddressOk() (*string, bool) {
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *CloudNetworkInterfaceAttachment) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -261,7 +265,7 @@ func (o *CloudNetworkInterfaceAttachment) SetMacAddress(v string) {
 
 // GetNetworkId returns the NetworkId field value if set, zero value otherwise.
 func (o *CloudNetworkInterfaceAttachment) GetNetworkId() string {
-	if o == nil || o.NetworkId == nil {
+	if o == nil || IsNil(o.NetworkId) {
 		var ret string
 		return ret
 	}
@@ -271,7 +275,7 @@ func (o *CloudNetworkInterfaceAttachment) GetNetworkId() string {
 // GetNetworkIdOk returns a tuple with the NetworkId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInterfaceAttachment) GetNetworkIdOk() (*string, bool) {
-	if o == nil || o.NetworkId == nil {
+	if o == nil || IsNil(o.NetworkId) {
 		return nil, false
 	}
 	return o.NetworkId, true
@@ -279,7 +283,7 @@ func (o *CloudNetworkInterfaceAttachment) GetNetworkIdOk() (*string, bool) {
 
 // HasNetworkId returns a boolean if a field has been set.
 func (o *CloudNetworkInterfaceAttachment) HasNetworkId() bool {
-	if o != nil && o.NetworkId != nil {
+	if o != nil && !IsNil(o.NetworkId) {
 		return true
 	}
 
@@ -293,7 +297,7 @@ func (o *CloudNetworkInterfaceAttachment) SetNetworkId(v string) {
 
 // GetNetworkName returns the NetworkName field value if set, zero value otherwise.
 func (o *CloudNetworkInterfaceAttachment) GetNetworkName() string {
-	if o == nil || o.NetworkName == nil {
+	if o == nil || IsNil(o.NetworkName) {
 		var ret string
 		return ret
 	}
@@ -303,7 +307,7 @@ func (o *CloudNetworkInterfaceAttachment) GetNetworkName() string {
 // GetNetworkNameOk returns a tuple with the NetworkName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInterfaceAttachment) GetNetworkNameOk() (*string, bool) {
-	if o == nil || o.NetworkName == nil {
+	if o == nil || IsNil(o.NetworkName) {
 		return nil, false
 	}
 	return o.NetworkName, true
@@ -311,7 +315,7 @@ func (o *CloudNetworkInterfaceAttachment) GetNetworkNameOk() (*string, bool) {
 
 // HasNetworkName returns a boolean if a field has been set.
 func (o *CloudNetworkInterfaceAttachment) HasNetworkName() bool {
-	if o != nil && o.NetworkName != nil {
+	if o != nil && !IsNil(o.NetworkName) {
 		return true
 	}
 
@@ -325,7 +329,7 @@ func (o *CloudNetworkInterfaceAttachment) SetNetworkName(v string) {
 
 // GetNicIndex returns the NicIndex field value if set, zero value otherwise.
 func (o *CloudNetworkInterfaceAttachment) GetNicIndex() int64 {
-	if o == nil || o.NicIndex == nil {
+	if o == nil || IsNil(o.NicIndex) {
 		var ret int64
 		return ret
 	}
@@ -335,7 +339,7 @@ func (o *CloudNetworkInterfaceAttachment) GetNicIndex() int64 {
 // GetNicIndexOk returns a tuple with the NicIndex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInterfaceAttachment) GetNicIndexOk() (*int64, bool) {
-	if o == nil || o.NicIndex == nil {
+	if o == nil || IsNil(o.NicIndex) {
 		return nil, false
 	}
 	return o.NicIndex, true
@@ -343,7 +347,7 @@ func (o *CloudNetworkInterfaceAttachment) GetNicIndexOk() (*int64, bool) {
 
 // HasNicIndex returns a boolean if a field has been set.
 func (o *CloudNetworkInterfaceAttachment) HasNicIndex() bool {
-	if o != nil && o.NicIndex != nil {
+	if o != nil && !IsNil(o.NicIndex) {
 		return true
 	}
 
@@ -368,7 +372,7 @@ func (o *CloudNetworkInterfaceAttachment) GetPrivateAddress() []CloudNetworkAddr
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudNetworkInterfaceAttachment) GetPrivateAddressOk() ([]CloudNetworkAddress, bool) {
-	if o == nil || o.PrivateAddress == nil {
+	if o == nil || IsNil(o.PrivateAddress) {
 		return nil, false
 	}
 	return o.PrivateAddress, true
@@ -376,7 +380,7 @@ func (o *CloudNetworkInterfaceAttachment) GetPrivateAddressOk() ([]CloudNetworkA
 
 // HasPrivateAddress returns a boolean if a field has been set.
 func (o *CloudNetworkInterfaceAttachment) HasPrivateAddress() bool {
-	if o != nil && o.PrivateAddress != nil {
+	if o != nil && IsNil(o.PrivateAddress) {
 		return true
 	}
 
@@ -401,7 +405,7 @@ func (o *CloudNetworkInterfaceAttachment) GetPublicAddress() []CloudNetworkAddre
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudNetworkInterfaceAttachment) GetPublicAddressOk() ([]CloudNetworkAddress, bool) {
-	if o == nil || o.PublicAddress == nil {
+	if o == nil || IsNil(o.PublicAddress) {
 		return nil, false
 	}
 	return o.PublicAddress, true
@@ -409,7 +413,7 @@ func (o *CloudNetworkInterfaceAttachment) GetPublicAddressOk() ([]CloudNetworkAd
 
 // HasPublicAddress returns a boolean if a field has been set.
 func (o *CloudNetworkInterfaceAttachment) HasPublicAddress() bool {
-	if o != nil && o.PublicAddress != nil {
+	if o != nil && IsNil(o.PublicAddress) {
 		return true
 	}
 
@@ -434,7 +438,7 @@ func (o *CloudNetworkInterfaceAttachment) GetSecurityGroups() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudNetworkInterfaceAttachment) GetSecurityGroupsOk() ([]string, bool) {
-	if o == nil || o.SecurityGroups == nil {
+	if o == nil || IsNil(o.SecurityGroups) {
 		return nil, false
 	}
 	return o.SecurityGroups, true
@@ -442,7 +446,7 @@ func (o *CloudNetworkInterfaceAttachment) GetSecurityGroupsOk() ([]string, bool)
 
 // HasSecurityGroups returns a boolean if a field has been set.
 func (o *CloudNetworkInterfaceAttachment) HasSecurityGroups() bool {
-	if o != nil && o.SecurityGroups != nil {
+	if o != nil && IsNil(o.SecurityGroups) {
 		return true
 	}
 
@@ -456,7 +460,7 @@ func (o *CloudNetworkInterfaceAttachment) SetSecurityGroups(v []string) {
 
 // GetSubNetworkId returns the SubNetworkId field value if set, zero value otherwise.
 func (o *CloudNetworkInterfaceAttachment) GetSubNetworkId() string {
-	if o == nil || o.SubNetworkId == nil {
+	if o == nil || IsNil(o.SubNetworkId) {
 		var ret string
 		return ret
 	}
@@ -466,7 +470,7 @@ func (o *CloudNetworkInterfaceAttachment) GetSubNetworkId() string {
 // GetSubNetworkIdOk returns a tuple with the SubNetworkId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInterfaceAttachment) GetSubNetworkIdOk() (*string, bool) {
-	if o == nil || o.SubNetworkId == nil {
+	if o == nil || IsNil(o.SubNetworkId) {
 		return nil, false
 	}
 	return o.SubNetworkId, true
@@ -474,7 +478,7 @@ func (o *CloudNetworkInterfaceAttachment) GetSubNetworkIdOk() (*string, bool) {
 
 // HasSubNetworkId returns a boolean if a field has been set.
 func (o *CloudNetworkInterfaceAttachment) HasSubNetworkId() bool {
-	if o != nil && o.SubNetworkId != nil {
+	if o != nil && !IsNil(o.SubNetworkId) {
 		return true
 	}
 
@@ -488,7 +492,7 @@ func (o *CloudNetworkInterfaceAttachment) SetSubNetworkId(v string) {
 
 // GetSubNetworkName returns the SubNetworkName field value if set, zero value otherwise.
 func (o *CloudNetworkInterfaceAttachment) GetSubNetworkName() string {
-	if o == nil || o.SubNetworkName == nil {
+	if o == nil || IsNil(o.SubNetworkName) {
 		var ret string
 		return ret
 	}
@@ -498,7 +502,7 @@ func (o *CloudNetworkInterfaceAttachment) GetSubNetworkName() string {
 // GetSubNetworkNameOk returns a tuple with the SubNetworkName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudNetworkInterfaceAttachment) GetSubNetworkNameOk() (*string, bool) {
-	if o == nil || o.SubNetworkName == nil {
+	if o == nil || IsNil(o.SubNetworkName) {
 		return nil, false
 	}
 	return o.SubNetworkName, true
@@ -506,7 +510,7 @@ func (o *CloudNetworkInterfaceAttachment) GetSubNetworkNameOk() (*string, bool) 
 
 // HasSubNetworkName returns a boolean if a field has been set.
 func (o *CloudNetworkInterfaceAttachment) HasSubNetworkName() bool {
-	if o != nil && o.SubNetworkName != nil {
+	if o != nil && !IsNil(o.SubNetworkName) {
 		return true
 	}
 
@@ -519,40 +523,44 @@ func (o *CloudNetworkInterfaceAttachment) SetSubNetworkName(v string) {
 }
 
 func (o CloudNetworkInterfaceAttachment) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudNetworkInterfaceAttachment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AccessConfig.IsSet() {
 		toSerialize["AccessConfig"] = o.AccessConfig.Get()
 	}
-	if o.Identity != nil {
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
-	if o.IpForwardingEnabled != nil {
+	if !IsNil(o.IpForwardingEnabled) {
 		toSerialize["IpForwardingEnabled"] = o.IpForwardingEnabled
 	}
-	if o.MacAddress != nil {
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
-	if o.NetworkId != nil {
+	if !IsNil(o.NetworkId) {
 		toSerialize["NetworkId"] = o.NetworkId
 	}
-	if o.NetworkName != nil {
+	if !IsNil(o.NetworkName) {
 		toSerialize["NetworkName"] = o.NetworkName
 	}
-	if o.NicIndex != nil {
+	if !IsNil(o.NicIndex) {
 		toSerialize["NicIndex"] = o.NicIndex
 	}
 	if o.PrivateAddress != nil {
@@ -564,10 +572,10 @@ func (o CloudNetworkInterfaceAttachment) MarshalJSON() ([]byte, error) {
 	if o.SecurityGroups != nil {
 		toSerialize["SecurityGroups"] = o.SecurityGroups
 	}
-	if o.SubNetworkId != nil {
+	if !IsNil(o.SubNetworkId) {
 		toSerialize["SubNetworkId"] = o.SubNetworkId
 	}
-	if o.SubNetworkName != nil {
+	if !IsNil(o.SubNetworkName) {
 		toSerialize["SubNetworkName"] = o.SubNetworkName
 	}
 
@@ -575,10 +583,32 @@ func (o CloudNetworkInterfaceAttachment) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudNetworkInterfaceAttachment) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudNetworkInterfaceAttachment) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudNetworkInterfaceAttachmentWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -608,7 +638,7 @@ func (o *CloudNetworkInterfaceAttachment) UnmarshalJSON(bytes []byte) (err error
 
 	varCloudNetworkInterfaceAttachmentWithoutEmbeddedStruct := CloudNetworkInterfaceAttachmentWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudNetworkInterfaceAttachmentWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudNetworkInterfaceAttachmentWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudNetworkInterfaceAttachment := _CloudNetworkInterfaceAttachment{}
 		varCloudNetworkInterfaceAttachment.ClassId = varCloudNetworkInterfaceAttachmentWithoutEmbeddedStruct.ClassId
@@ -632,7 +662,7 @@ func (o *CloudNetworkInterfaceAttachment) UnmarshalJSON(bytes []byte) (err error
 
 	varCloudNetworkInterfaceAttachment := _CloudNetworkInterfaceAttachment{}
 
-	err = json.Unmarshal(bytes, &varCloudNetworkInterfaceAttachment)
+	err = json.Unmarshal(data, &varCloudNetworkInterfaceAttachment)
 	if err == nil {
 		o.MoBaseComplexType = varCloudNetworkInterfaceAttachment.MoBaseComplexType
 	} else {
@@ -641,7 +671,7 @@ func (o *CloudNetworkInterfaceAttachment) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessConfig")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexHxResiliencyInfoDt type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexHxResiliencyInfoDt{}
 
 // HyperflexHxResiliencyInfoDt A representation of the data health status and ability of the cluster to tolerate failures.
 type HyperflexHxResiliencyInfoDt struct {
@@ -115,7 +119,7 @@ func (o *HyperflexHxResiliencyInfoDt) SetObjectType(v string) {
 
 // GetDataReplicationFactor returns the DataReplicationFactor field value if set, zero value otherwise.
 func (o *HyperflexHxResiliencyInfoDt) GetDataReplicationFactor() string {
-	if o == nil || o.DataReplicationFactor == nil {
+	if o == nil || IsNil(o.DataReplicationFactor) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetDataReplicationFactor() string {
 // GetDataReplicationFactorOk returns a tuple with the DataReplicationFactor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxResiliencyInfoDt) GetDataReplicationFactorOk() (*string, bool) {
-	if o == nil || o.DataReplicationFactor == nil {
+	if o == nil || IsNil(o.DataReplicationFactor) {
 		return nil, false
 	}
 	return o.DataReplicationFactor, true
@@ -133,7 +137,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetDataReplicationFactorOk() (*string, boo
 
 // HasDataReplicationFactor returns a boolean if a field has been set.
 func (o *HyperflexHxResiliencyInfoDt) HasDataReplicationFactor() bool {
-	if o != nil && o.DataReplicationFactor != nil {
+	if o != nil && !IsNil(o.DataReplicationFactor) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *HyperflexHxResiliencyInfoDt) SetDataReplicationFactor(v string) {
 
 // GetHddFailuresTolerable returns the HddFailuresTolerable field value if set, zero value otherwise.
 func (o *HyperflexHxResiliencyInfoDt) GetHddFailuresTolerable() int64 {
-	if o == nil || o.HddFailuresTolerable == nil {
+	if o == nil || IsNil(o.HddFailuresTolerable) {
 		var ret int64
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetHddFailuresTolerable() int64 {
 // GetHddFailuresTolerableOk returns a tuple with the HddFailuresTolerable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxResiliencyInfoDt) GetHddFailuresTolerableOk() (*int64, bool) {
-	if o == nil || o.HddFailuresTolerable == nil {
+	if o == nil || IsNil(o.HddFailuresTolerable) {
 		return nil, false
 	}
 	return o.HddFailuresTolerable, true
@@ -165,7 +169,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetHddFailuresTolerableOk() (*int64, bool)
 
 // HasHddFailuresTolerable returns a boolean if a field has been set.
 func (o *HyperflexHxResiliencyInfoDt) HasHddFailuresTolerable() bool {
-	if o != nil && o.HddFailuresTolerable != nil {
+	if o != nil && !IsNil(o.HddFailuresTolerable) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetMessages() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexHxResiliencyInfoDt) GetMessagesOk() ([]string, bool) {
-	if o == nil || o.Messages == nil {
+	if o == nil || IsNil(o.Messages) {
 		return nil, false
 	}
 	return o.Messages, true
@@ -198,7 +202,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetMessagesOk() ([]string, bool) {
 
 // HasMessages returns a boolean if a field has been set.
 func (o *HyperflexHxResiliencyInfoDt) HasMessages() bool {
-	if o != nil && o.Messages != nil {
+	if o != nil && IsNil(o.Messages) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *HyperflexHxResiliencyInfoDt) SetMessages(v []string) {
 
 // GetNodeFailuresTolerable returns the NodeFailuresTolerable field value if set, zero value otherwise.
 func (o *HyperflexHxResiliencyInfoDt) GetNodeFailuresTolerable() int64 {
-	if o == nil || o.NodeFailuresTolerable == nil {
+	if o == nil || IsNil(o.NodeFailuresTolerable) {
 		var ret int64
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetNodeFailuresTolerable() int64 {
 // GetNodeFailuresTolerableOk returns a tuple with the NodeFailuresTolerable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxResiliencyInfoDt) GetNodeFailuresTolerableOk() (*int64, bool) {
-	if o == nil || o.NodeFailuresTolerable == nil {
+	if o == nil || IsNil(o.NodeFailuresTolerable) {
 		return nil, false
 	}
 	return o.NodeFailuresTolerable, true
@@ -230,7 +234,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetNodeFailuresTolerableOk() (*int64, bool
 
 // HasNodeFailuresTolerable returns a boolean if a field has been set.
 func (o *HyperflexHxResiliencyInfoDt) HasNodeFailuresTolerable() bool {
-	if o != nil && o.NodeFailuresTolerable != nil {
+	if o != nil && !IsNil(o.NodeFailuresTolerable) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *HyperflexHxResiliencyInfoDt) SetNodeFailuresTolerable(v int64) {
 
 // GetPolicyCompliance returns the PolicyCompliance field value if set, zero value otherwise.
 func (o *HyperflexHxResiliencyInfoDt) GetPolicyCompliance() string {
-	if o == nil || o.PolicyCompliance == nil {
+	if o == nil || IsNil(o.PolicyCompliance) {
 		var ret string
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetPolicyCompliance() string {
 // GetPolicyComplianceOk returns a tuple with the PolicyCompliance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxResiliencyInfoDt) GetPolicyComplianceOk() (*string, bool) {
-	if o == nil || o.PolicyCompliance == nil {
+	if o == nil || IsNil(o.PolicyCompliance) {
 		return nil, false
 	}
 	return o.PolicyCompliance, true
@@ -262,7 +266,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetPolicyComplianceOk() (*string, bool) {
 
 // HasPolicyCompliance returns a boolean if a field has been set.
 func (o *HyperflexHxResiliencyInfoDt) HasPolicyCompliance() bool {
-	if o != nil && o.PolicyCompliance != nil {
+	if o != nil && !IsNil(o.PolicyCompliance) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *HyperflexHxResiliencyInfoDt) SetPolicyCompliance(v string) {
 
 // GetResiliencyState returns the ResiliencyState field value if set, zero value otherwise.
 func (o *HyperflexHxResiliencyInfoDt) GetResiliencyState() string {
-	if o == nil || o.ResiliencyState == nil {
+	if o == nil || IsNil(o.ResiliencyState) {
 		var ret string
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetResiliencyState() string {
 // GetResiliencyStateOk returns a tuple with the ResiliencyState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxResiliencyInfoDt) GetResiliencyStateOk() (*string, bool) {
-	if o == nil || o.ResiliencyState == nil {
+	if o == nil || IsNil(o.ResiliencyState) {
 		return nil, false
 	}
 	return o.ResiliencyState, true
@@ -294,7 +298,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetResiliencyStateOk() (*string, bool) {
 
 // HasResiliencyState returns a boolean if a field has been set.
 func (o *HyperflexHxResiliencyInfoDt) HasResiliencyState() bool {
-	if o != nil && o.ResiliencyState != nil {
+	if o != nil && !IsNil(o.ResiliencyState) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *HyperflexHxResiliencyInfoDt) SetResiliencyState(v string) {
 
 // GetSsdFailuresTolerable returns the SsdFailuresTolerable field value if set, zero value otherwise.
 func (o *HyperflexHxResiliencyInfoDt) GetSsdFailuresTolerable() int64 {
-	if o == nil || o.SsdFailuresTolerable == nil {
+	if o == nil || IsNil(o.SsdFailuresTolerable) {
 		var ret int64
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetSsdFailuresTolerable() int64 {
 // GetSsdFailuresTolerableOk returns a tuple with the SsdFailuresTolerable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexHxResiliencyInfoDt) GetSsdFailuresTolerableOk() (*int64, bool) {
-	if o == nil || o.SsdFailuresTolerable == nil {
+	if o == nil || IsNil(o.SsdFailuresTolerable) {
 		return nil, false
 	}
 	return o.SsdFailuresTolerable, true
@@ -326,7 +330,7 @@ func (o *HyperflexHxResiliencyInfoDt) GetSsdFailuresTolerableOk() (*int64, bool)
 
 // HasSsdFailuresTolerable returns a boolean if a field has been set.
 func (o *HyperflexHxResiliencyInfoDt) HasSsdFailuresTolerable() bool {
-	if o != nil && o.SsdFailuresTolerable != nil {
+	if o != nil && !IsNil(o.SsdFailuresTolerable) {
 		return true
 	}
 
@@ -339,40 +343,44 @@ func (o *HyperflexHxResiliencyInfoDt) SetSsdFailuresTolerable(v int64) {
 }
 
 func (o HyperflexHxResiliencyInfoDt) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexHxResiliencyInfoDt) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DataReplicationFactor != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DataReplicationFactor) {
 		toSerialize["DataReplicationFactor"] = o.DataReplicationFactor
 	}
-	if o.HddFailuresTolerable != nil {
+	if !IsNil(o.HddFailuresTolerable) {
 		toSerialize["HddFailuresTolerable"] = o.HddFailuresTolerable
 	}
 	if o.Messages != nil {
 		toSerialize["Messages"] = o.Messages
 	}
-	if o.NodeFailuresTolerable != nil {
+	if !IsNil(o.NodeFailuresTolerable) {
 		toSerialize["NodeFailuresTolerable"] = o.NodeFailuresTolerable
 	}
-	if o.PolicyCompliance != nil {
+	if !IsNil(o.PolicyCompliance) {
 		toSerialize["PolicyCompliance"] = o.PolicyCompliance
 	}
-	if o.ResiliencyState != nil {
+	if !IsNil(o.ResiliencyState) {
 		toSerialize["ResiliencyState"] = o.ResiliencyState
 	}
-	if o.SsdFailuresTolerable != nil {
+	if !IsNil(o.SsdFailuresTolerable) {
 		toSerialize["SsdFailuresTolerable"] = o.SsdFailuresTolerable
 	}
 
@@ -380,10 +388,32 @@ func (o HyperflexHxResiliencyInfoDt) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexHxResiliencyInfoDt) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexHxResiliencyInfoDt) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexHxResiliencyInfoDtWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -406,7 +436,7 @@ func (o *HyperflexHxResiliencyInfoDt) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexHxResiliencyInfoDtWithoutEmbeddedStruct := HyperflexHxResiliencyInfoDtWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHxResiliencyInfoDtWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexHxResiliencyInfoDtWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexHxResiliencyInfoDt := _HyperflexHxResiliencyInfoDt{}
 		varHyperflexHxResiliencyInfoDt.ClassId = varHyperflexHxResiliencyInfoDtWithoutEmbeddedStruct.ClassId
@@ -425,7 +455,7 @@ func (o *HyperflexHxResiliencyInfoDt) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexHxResiliencyInfoDt := _HyperflexHxResiliencyInfoDt{}
 
-	err = json.Unmarshal(bytes, &varHyperflexHxResiliencyInfoDt)
+	err = json.Unmarshal(data, &varHyperflexHxResiliencyInfoDt)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexHxResiliencyInfoDt.MoBaseComplexType
 	} else {
@@ -434,7 +464,7 @@ func (o *HyperflexHxResiliencyInfoDt) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DataReplicationFactor")

@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **PostDeployAction** | Pointer to **[]string** |  | [optional] 
 **ReplacementType** | Pointer to **string** | Replacement type specifies whether it is single FI or domain replacement. * &#x60;None&#x60; - The default action is none. * &#x60;Individual&#x60; - Replacement of single network element. * &#x60;Domain&#x60; - Domain indicates the replacement of Fabric Interconnect domain. | [optional] [default to "None"]
 **SwitchId** | Pointer to **string** | Switch Identifier that uniquely represents the fabric object. * &#x60;A&#x60; - Switch Identifier of Fabric Interconnect A. * &#x60;B&#x60; - Switch Identifier of Fabric Interconnect B. | [optional] [readonly] [default to "A"]
-**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
-**ReplacementTarget** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**ReplacementTarget** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -233,6 +233,16 @@ SetNetworkElement sets NetworkElement field to given value.
 
 HasNetworkElement returns a boolean if a field has been set.
 
+### SetNetworkElementNil
+
+`func (o *FabricElementIdentity) SetNetworkElementNil(b bool)`
+
+ SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+
+### UnsetNetworkElement
+`func (o *FabricElementIdentity) UnsetNetworkElement()`
+
+UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
 ### GetReplacementTarget
 
 `func (o *FabricElementIdentity) GetReplacementTarget() NetworkElementRelationship`
@@ -258,6 +268,16 @@ SetReplacementTarget sets ReplacementTarget field to given value.
 
 HasReplacementTarget returns a boolean if a field has been set.
 
+### SetReplacementTargetNil
+
+`func (o *FabricElementIdentity) SetReplacementTargetNil(b bool)`
+
+ SetReplacementTargetNil sets the value for ReplacementTarget to be an explicit nil
+
+### UnsetReplacementTarget
+`func (o *FabricElementIdentity) UnsetReplacementTarget()`
+
+UnsetReplacementTarget ensures that no value is present for ReplacementTarget, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

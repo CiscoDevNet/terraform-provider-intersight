@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StoragePureHostGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StoragePureHostGroup{}
 
 // StoragePureHostGroup A host group represents a collection of hosts with common connectivity to volumes. Once a connection has been established between a host group and a volume, all of the hosts within the host group are able to access the volume through the connection. These connections are called shared connections because the connection is shared between all of the hosts within the host group.
 type StoragePureHostGroup struct {
@@ -23,13 +27,13 @@ type StoragePureHostGroup struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string                        `json:"ObjectType"`
-	HostNames  []string                      `json:"HostNames,omitempty"`
-	Array      *StoragePureArrayRelationship `json:"Array,omitempty"`
+	ObjectType string                               `json:"ObjectType"`
+	HostNames  []string                             `json:"HostNames,omitempty"`
+	Array      NullableStoragePureArrayRelationship `json:"Array,omitempty"`
 	// An array of relationships to storagePureHost resources.
-	Hosts                []StoragePureHostRelationship           `json:"Hosts,omitempty"`
-	ProtectionGroup      *StoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+	Hosts                []StoragePureHostRelationship                  `json:"Hosts,omitempty"`
+	ProtectionGroup      NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -119,7 +123,7 @@ func (o *StoragePureHostGroup) GetHostNames() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureHostGroup) GetHostNamesOk() ([]string, bool) {
-	if o == nil || o.HostNames == nil {
+	if o == nil || IsNil(o.HostNames) {
 		return nil, false
 	}
 	return o.HostNames, true
@@ -127,7 +131,7 @@ func (o *StoragePureHostGroup) GetHostNamesOk() ([]string, bool) {
 
 // HasHostNames returns a boolean if a field has been set.
 func (o *StoragePureHostGroup) HasHostNames() bool {
-	if o != nil && o.HostNames != nil {
+	if o != nil && IsNil(o.HostNames) {
 		return true
 	}
 
@@ -139,36 +143,47 @@ func (o *StoragePureHostGroup) SetHostNames(v []string) {
 	o.HostNames = v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureHostGroup) GetArray() StoragePureArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StoragePureArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureHostGroup) GetArrayOk() (*StoragePureArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StoragePureHostGroup) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StoragePureArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStoragePureArrayRelationship and assigns it to the Array field.
 func (o *StoragePureHostGroup) SetArray(v StoragePureArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
+}
+
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StoragePureHostGroup) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StoragePureHostGroup) UnsetArray() {
+	o.Array.Unset()
 }
 
 // GetHosts returns the Hosts field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -184,7 +199,7 @@ func (o *StoragePureHostGroup) GetHosts() []StoragePureHostRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureHostGroup) GetHostsOk() ([]StoragePureHostRelationship, bool) {
-	if o == nil || o.Hosts == nil {
+	if o == nil || IsNil(o.Hosts) {
 		return nil, false
 	}
 	return o.Hosts, true
@@ -192,7 +207,7 @@ func (o *StoragePureHostGroup) GetHostsOk() ([]StoragePureHostRelationship, bool
 
 // HasHosts returns a boolean if a field has been set.
 func (o *StoragePureHostGroup) HasHosts() bool {
-	if o != nil && o.Hosts != nil {
+	if o != nil && IsNil(o.Hosts) {
 		return true
 	}
 
@@ -204,126 +219,174 @@ func (o *StoragePureHostGroup) SetHosts(v []StoragePureHostRelationship) {
 	o.Hosts = v
 }
 
-// GetProtectionGroup returns the ProtectionGroup field value if set, zero value otherwise.
+// GetProtectionGroup returns the ProtectionGroup field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureHostGroup) GetProtectionGroup() StoragePureProtectionGroupRelationship {
-	if o == nil || o.ProtectionGroup == nil {
+	if o == nil || IsNil(o.ProtectionGroup.Get()) {
 		var ret StoragePureProtectionGroupRelationship
 		return ret
 	}
-	return *o.ProtectionGroup
+	return *o.ProtectionGroup.Get()
 }
 
 // GetProtectionGroupOk returns a tuple with the ProtectionGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureHostGroup) GetProtectionGroupOk() (*StoragePureProtectionGroupRelationship, bool) {
-	if o == nil || o.ProtectionGroup == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProtectionGroup, true
+	return o.ProtectionGroup.Get(), o.ProtectionGroup.IsSet()
 }
 
 // HasProtectionGroup returns a boolean if a field has been set.
 func (o *StoragePureHostGroup) HasProtectionGroup() bool {
-	if o != nil && o.ProtectionGroup != nil {
+	if o != nil && o.ProtectionGroup.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProtectionGroup gets a reference to the given StoragePureProtectionGroupRelationship and assigns it to the ProtectionGroup field.
+// SetProtectionGroup gets a reference to the given NullableStoragePureProtectionGroupRelationship and assigns it to the ProtectionGroup field.
 func (o *StoragePureHostGroup) SetProtectionGroup(v StoragePureProtectionGroupRelationship) {
-	o.ProtectionGroup = &v
+	o.ProtectionGroup.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetProtectionGroupNil sets the value for ProtectionGroup to be an explicit nil
+func (o *StoragePureHostGroup) SetProtectionGroupNil() {
+	o.ProtectionGroup.Set(nil)
+}
+
+// UnsetProtectionGroup ensures that no value is present for ProtectionGroup, not even an explicit nil
+func (o *StoragePureHostGroup) UnsetProtectionGroup() {
+	o.ProtectionGroup.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StoragePureHostGroup) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StoragePureHostGroup) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StoragePureHostGroup) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StoragePureHostGroup) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StoragePureHostGroup) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StoragePureHostGroup) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StoragePureHostGroup) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StoragePureHostGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseHostGroup, errStorageBaseHostGroup := json.Marshal(o.StorageBaseHostGroup)
 	if errStorageBaseHostGroup != nil {
-		return []byte{}, errStorageBaseHostGroup
+		return map[string]interface{}{}, errStorageBaseHostGroup
 	}
 	errStorageBaseHostGroup = json.Unmarshal([]byte(serializedStorageBaseHostGroup), &toSerialize)
 	if errStorageBaseHostGroup != nil {
-		return []byte{}, errStorageBaseHostGroup
+		return map[string]interface{}{}, errStorageBaseHostGroup
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.HostNames != nil {
 		toSerialize["HostNames"] = o.HostNames
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
 	if o.Hosts != nil {
 		toSerialize["Hosts"] = o.Hosts
 	}
-	if o.ProtectionGroup != nil {
-		toSerialize["ProtectionGroup"] = o.ProtectionGroup
+	if o.ProtectionGroup.IsSet() {
+		toSerialize["ProtectionGroup"] = o.ProtectionGroup.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StoragePureHostGroup) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StoragePureHostGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StoragePureHostGroupWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string                        `json:"ObjectType"`
-		HostNames  []string                      `json:"HostNames,omitempty"`
-		Array      *StoragePureArrayRelationship `json:"Array,omitempty"`
+		ObjectType string                               `json:"ObjectType"`
+		HostNames  []string                             `json:"HostNames,omitempty"`
+		Array      NullableStoragePureArrayRelationship `json:"Array,omitempty"`
 		// An array of relationships to storagePureHost resources.
-		Hosts            []StoragePureHostRelationship           `json:"Hosts,omitempty"`
-		ProtectionGroup  *StoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+		Hosts            []StoragePureHostRelationship                  `json:"Hosts,omitempty"`
+		ProtectionGroup  NullableStoragePureProtectionGroupRelationship `json:"ProtectionGroup,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStoragePureHostGroupWithoutEmbeddedStruct := StoragePureHostGroupWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStoragePureHostGroupWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStoragePureHostGroupWithoutEmbeddedStruct)
 	if err == nil {
 		varStoragePureHostGroup := _StoragePureHostGroup{}
 		varStoragePureHostGroup.ClassId = varStoragePureHostGroupWithoutEmbeddedStruct.ClassId
@@ -340,7 +403,7 @@ func (o *StoragePureHostGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStoragePureHostGroup := _StoragePureHostGroup{}
 
-	err = json.Unmarshal(bytes, &varStoragePureHostGroup)
+	err = json.Unmarshal(data, &varStoragePureHostGroup)
 	if err == nil {
 		o.StorageBaseHostGroup = varStoragePureHostGroup.StorageBaseHostGroup
 	} else {
@@ -349,7 +412,7 @@ func (o *StoragePureHostGroup) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "HostNames")

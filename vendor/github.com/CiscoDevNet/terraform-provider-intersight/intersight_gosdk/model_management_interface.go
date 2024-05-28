@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ManagementInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ManagementInterface{}
 
 // ManagementInterface Interface that provides access to the management controller.
 type ManagementInterface struct {
@@ -53,11 +57,11 @@ type ManagementInterface struct {
 	// Virtual hostname configured for the interface in case of clustered environment.
 	VirtualHostName *string `json:"VirtualHostName,omitempty"`
 	// VlanId configured for the interface.
-	VlanId               *int64                               `json:"VlanId,omitempty"`
-	EquipmentChassis     *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	ManagementController *ManagementControllerRelationship    `json:"ManagementController,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	VlanId               *int64                                      `json:"VlanId,omitempty"`
+	EquipmentChassis     NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	ManagementController NullableManagementControllerRelationship    `json:"ManagementController,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -136,7 +140,7 @@ func (o *ManagementInterface) SetObjectType(v string) {
 
 // GetGateway returns the Gateway field value if set, zero value otherwise.
 func (o *ManagementInterface) GetGateway() string {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		var ret string
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *ManagementInterface) GetGateway() string {
 // GetGatewayOk returns a tuple with the Gateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetGatewayOk() (*string, bool) {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		return nil, false
 	}
 	return o.Gateway, true
@@ -154,7 +158,7 @@ func (o *ManagementInterface) GetGatewayOk() (*string, bool) {
 
 // HasGateway returns a boolean if a field has been set.
 func (o *ManagementInterface) HasGateway() bool {
-	if o != nil && o.Gateway != nil {
+	if o != nil && !IsNil(o.Gateway) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *ManagementInterface) SetGateway(v string) {
 
 // GetHostName returns the HostName field value if set, zero value otherwise.
 func (o *ManagementInterface) GetHostName() string {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		var ret string
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *ManagementInterface) GetHostName() string {
 // GetHostNameOk returns a tuple with the HostName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetHostNameOk() (*string, bool) {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		return nil, false
 	}
 	return o.HostName, true
@@ -186,7 +190,7 @@ func (o *ManagementInterface) GetHostNameOk() (*string, bool) {
 
 // HasHostName returns a boolean if a field has been set.
 func (o *ManagementInterface) HasHostName() bool {
-	if o != nil && o.HostName != nil {
+	if o != nil && !IsNil(o.HostName) {
 		return true
 	}
 
@@ -200,7 +204,7 @@ func (o *ManagementInterface) SetHostName(v string) {
 
 // GetIpAddress returns the IpAddress field value if set, zero value otherwise.
 func (o *ManagementInterface) GetIpAddress() string {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		var ret string
 		return ret
 	}
@@ -210,7 +214,7 @@ func (o *ManagementInterface) GetIpAddress() string {
 // GetIpAddressOk returns a tuple with the IpAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetIpAddressOk() (*string, bool) {
-	if o == nil || o.IpAddress == nil {
+	if o == nil || IsNil(o.IpAddress) {
 		return nil, false
 	}
 	return o.IpAddress, true
@@ -218,7 +222,7 @@ func (o *ManagementInterface) GetIpAddressOk() (*string, bool) {
 
 // HasIpAddress returns a boolean if a field has been set.
 func (o *ManagementInterface) HasIpAddress() bool {
-	if o != nil && o.IpAddress != nil {
+	if o != nil && !IsNil(o.IpAddress) {
 		return true
 	}
 
@@ -232,7 +236,7 @@ func (o *ManagementInterface) SetIpAddress(v string) {
 
 // GetIpv4Address returns the Ipv4Address field value if set, zero value otherwise.
 func (o *ManagementInterface) GetIpv4Address() string {
-	if o == nil || o.Ipv4Address == nil {
+	if o == nil || IsNil(o.Ipv4Address) {
 		var ret string
 		return ret
 	}
@@ -242,7 +246,7 @@ func (o *ManagementInterface) GetIpv4Address() string {
 // GetIpv4AddressOk returns a tuple with the Ipv4Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetIpv4AddressOk() (*string, bool) {
-	if o == nil || o.Ipv4Address == nil {
+	if o == nil || IsNil(o.Ipv4Address) {
 		return nil, false
 	}
 	return o.Ipv4Address, true
@@ -250,7 +254,7 @@ func (o *ManagementInterface) GetIpv4AddressOk() (*string, bool) {
 
 // HasIpv4Address returns a boolean if a field has been set.
 func (o *ManagementInterface) HasIpv4Address() bool {
-	if o != nil && o.Ipv4Address != nil {
+	if o != nil && !IsNil(o.Ipv4Address) {
 		return true
 	}
 
@@ -264,7 +268,7 @@ func (o *ManagementInterface) SetIpv4Address(v string) {
 
 // GetIpv4Gateway returns the Ipv4Gateway field value if set, zero value otherwise.
 func (o *ManagementInterface) GetIpv4Gateway() string {
-	if o == nil || o.Ipv4Gateway == nil {
+	if o == nil || IsNil(o.Ipv4Gateway) {
 		var ret string
 		return ret
 	}
@@ -274,7 +278,7 @@ func (o *ManagementInterface) GetIpv4Gateway() string {
 // GetIpv4GatewayOk returns a tuple with the Ipv4Gateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetIpv4GatewayOk() (*string, bool) {
-	if o == nil || o.Ipv4Gateway == nil {
+	if o == nil || IsNil(o.Ipv4Gateway) {
 		return nil, false
 	}
 	return o.Ipv4Gateway, true
@@ -282,7 +286,7 @@ func (o *ManagementInterface) GetIpv4GatewayOk() (*string, bool) {
 
 // HasIpv4Gateway returns a boolean if a field has been set.
 func (o *ManagementInterface) HasIpv4Gateway() bool {
-	if o != nil && o.Ipv4Gateway != nil {
+	if o != nil && !IsNil(o.Ipv4Gateway) {
 		return true
 	}
 
@@ -296,7 +300,7 @@ func (o *ManagementInterface) SetIpv4Gateway(v string) {
 
 // GetIpv4Mask returns the Ipv4Mask field value if set, zero value otherwise.
 func (o *ManagementInterface) GetIpv4Mask() string {
-	if o == nil || o.Ipv4Mask == nil {
+	if o == nil || IsNil(o.Ipv4Mask) {
 		var ret string
 		return ret
 	}
@@ -306,7 +310,7 @@ func (o *ManagementInterface) GetIpv4Mask() string {
 // GetIpv4MaskOk returns a tuple with the Ipv4Mask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetIpv4MaskOk() (*string, bool) {
-	if o == nil || o.Ipv4Mask == nil {
+	if o == nil || IsNil(o.Ipv4Mask) {
 		return nil, false
 	}
 	return o.Ipv4Mask, true
@@ -314,7 +318,7 @@ func (o *ManagementInterface) GetIpv4MaskOk() (*string, bool) {
 
 // HasIpv4Mask returns a boolean if a field has been set.
 func (o *ManagementInterface) HasIpv4Mask() bool {
-	if o != nil && o.Ipv4Mask != nil {
+	if o != nil && !IsNil(o.Ipv4Mask) {
 		return true
 	}
 
@@ -328,7 +332,7 @@ func (o *ManagementInterface) SetIpv4Mask(v string) {
 
 // GetIpv6Address returns the Ipv6Address field value if set, zero value otherwise.
 func (o *ManagementInterface) GetIpv6Address() string {
-	if o == nil || o.Ipv6Address == nil {
+	if o == nil || IsNil(o.Ipv6Address) {
 		var ret string
 		return ret
 	}
@@ -338,7 +342,7 @@ func (o *ManagementInterface) GetIpv6Address() string {
 // GetIpv6AddressOk returns a tuple with the Ipv6Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetIpv6AddressOk() (*string, bool) {
-	if o == nil || o.Ipv6Address == nil {
+	if o == nil || IsNil(o.Ipv6Address) {
 		return nil, false
 	}
 	return o.Ipv6Address, true
@@ -346,7 +350,7 @@ func (o *ManagementInterface) GetIpv6AddressOk() (*string, bool) {
 
 // HasIpv6Address returns a boolean if a field has been set.
 func (o *ManagementInterface) HasIpv6Address() bool {
-	if o != nil && o.Ipv6Address != nil {
+	if o != nil && !IsNil(o.Ipv6Address) {
 		return true
 	}
 
@@ -360,7 +364,7 @@ func (o *ManagementInterface) SetIpv6Address(v string) {
 
 // GetIpv6Gateway returns the Ipv6Gateway field value if set, zero value otherwise.
 func (o *ManagementInterface) GetIpv6Gateway() string {
-	if o == nil || o.Ipv6Gateway == nil {
+	if o == nil || IsNil(o.Ipv6Gateway) {
 		var ret string
 		return ret
 	}
@@ -370,7 +374,7 @@ func (o *ManagementInterface) GetIpv6Gateway() string {
 // GetIpv6GatewayOk returns a tuple with the Ipv6Gateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetIpv6GatewayOk() (*string, bool) {
-	if o == nil || o.Ipv6Gateway == nil {
+	if o == nil || IsNil(o.Ipv6Gateway) {
 		return nil, false
 	}
 	return o.Ipv6Gateway, true
@@ -378,7 +382,7 @@ func (o *ManagementInterface) GetIpv6GatewayOk() (*string, bool) {
 
 // HasIpv6Gateway returns a boolean if a field has been set.
 func (o *ManagementInterface) HasIpv6Gateway() bool {
-	if o != nil && o.Ipv6Gateway != nil {
+	if o != nil && !IsNil(o.Ipv6Gateway) {
 		return true
 	}
 
@@ -392,7 +396,7 @@ func (o *ManagementInterface) SetIpv6Gateway(v string) {
 
 // GetIpv6Prefix returns the Ipv6Prefix field value if set, zero value otherwise.
 func (o *ManagementInterface) GetIpv6Prefix() int64 {
-	if o == nil || o.Ipv6Prefix == nil {
+	if o == nil || IsNil(o.Ipv6Prefix) {
 		var ret int64
 		return ret
 	}
@@ -402,7 +406,7 @@ func (o *ManagementInterface) GetIpv6Prefix() int64 {
 // GetIpv6PrefixOk returns a tuple with the Ipv6Prefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetIpv6PrefixOk() (*int64, bool) {
-	if o == nil || o.Ipv6Prefix == nil {
+	if o == nil || IsNil(o.Ipv6Prefix) {
 		return nil, false
 	}
 	return o.Ipv6Prefix, true
@@ -410,7 +414,7 @@ func (o *ManagementInterface) GetIpv6PrefixOk() (*int64, bool) {
 
 // HasIpv6Prefix returns a boolean if a field has been set.
 func (o *ManagementInterface) HasIpv6Prefix() bool {
-	if o != nil && o.Ipv6Prefix != nil {
+	if o != nil && !IsNil(o.Ipv6Prefix) {
 		return true
 	}
 
@@ -424,7 +428,7 @@ func (o *ManagementInterface) SetIpv6Prefix(v int64) {
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *ManagementInterface) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -434,7 +438,7 @@ func (o *ManagementInterface) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -442,7 +446,7 @@ func (o *ManagementInterface) GetMacAddressOk() (*string, bool) {
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *ManagementInterface) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -456,7 +460,7 @@ func (o *ManagementInterface) SetMacAddress(v string) {
 
 // GetMask returns the Mask field value if set, zero value otherwise.
 func (o *ManagementInterface) GetMask() string {
-	if o == nil || o.Mask == nil {
+	if o == nil || IsNil(o.Mask) {
 		var ret string
 		return ret
 	}
@@ -466,7 +470,7 @@ func (o *ManagementInterface) GetMask() string {
 // GetMaskOk returns a tuple with the Mask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetMaskOk() (*string, bool) {
-	if o == nil || o.Mask == nil {
+	if o == nil || IsNil(o.Mask) {
 		return nil, false
 	}
 	return o.Mask, true
@@ -474,7 +478,7 @@ func (o *ManagementInterface) GetMaskOk() (*string, bool) {
 
 // HasMask returns a boolean if a field has been set.
 func (o *ManagementInterface) HasMask() bool {
-	if o != nil && o.Mask != nil {
+	if o != nil && !IsNil(o.Mask) {
 		return true
 	}
 
@@ -488,7 +492,7 @@ func (o *ManagementInterface) SetMask(v string) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *ManagementInterface) GetSwitchId() string {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret string
 		return ret
 	}
@@ -498,7 +502,7 @@ func (o *ManagementInterface) GetSwitchId() string {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetSwitchIdOk() (*string, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -506,7 +510,7 @@ func (o *ManagementInterface) GetSwitchIdOk() (*string, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *ManagementInterface) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -520,7 +524,7 @@ func (o *ManagementInterface) SetSwitchId(v string) {
 
 // GetUemConnStatus returns the UemConnStatus field value if set, zero value otherwise.
 func (o *ManagementInterface) GetUemConnStatus() string {
-	if o == nil || o.UemConnStatus == nil {
+	if o == nil || IsNil(o.UemConnStatus) {
 		var ret string
 		return ret
 	}
@@ -530,7 +534,7 @@ func (o *ManagementInterface) GetUemConnStatus() string {
 // GetUemConnStatusOk returns a tuple with the UemConnStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetUemConnStatusOk() (*string, bool) {
-	if o == nil || o.UemConnStatus == nil {
+	if o == nil || IsNil(o.UemConnStatus) {
 		return nil, false
 	}
 	return o.UemConnStatus, true
@@ -538,7 +542,7 @@ func (o *ManagementInterface) GetUemConnStatusOk() (*string, bool) {
 
 // HasUemConnStatus returns a boolean if a field has been set.
 func (o *ManagementInterface) HasUemConnStatus() bool {
-	if o != nil && o.UemConnStatus != nil {
+	if o != nil && !IsNil(o.UemConnStatus) {
 		return true
 	}
 
@@ -552,7 +556,7 @@ func (o *ManagementInterface) SetUemConnStatus(v string) {
 
 // GetVirtualHostName returns the VirtualHostName field value if set, zero value otherwise.
 func (o *ManagementInterface) GetVirtualHostName() string {
-	if o == nil || o.VirtualHostName == nil {
+	if o == nil || IsNil(o.VirtualHostName) {
 		var ret string
 		return ret
 	}
@@ -562,7 +566,7 @@ func (o *ManagementInterface) GetVirtualHostName() string {
 // GetVirtualHostNameOk returns a tuple with the VirtualHostName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetVirtualHostNameOk() (*string, bool) {
-	if o == nil || o.VirtualHostName == nil {
+	if o == nil || IsNil(o.VirtualHostName) {
 		return nil, false
 	}
 	return o.VirtualHostName, true
@@ -570,7 +574,7 @@ func (o *ManagementInterface) GetVirtualHostNameOk() (*string, bool) {
 
 // HasVirtualHostName returns a boolean if a field has been set.
 func (o *ManagementInterface) HasVirtualHostName() bool {
-	if o != nil && o.VirtualHostName != nil {
+	if o != nil && !IsNil(o.VirtualHostName) {
 		return true
 	}
 
@@ -584,7 +588,7 @@ func (o *ManagementInterface) SetVirtualHostName(v string) {
 
 // GetVlanId returns the VlanId field value if set, zero value otherwise.
 func (o *ManagementInterface) GetVlanId() int64 {
-	if o == nil || o.VlanId == nil {
+	if o == nil || IsNil(o.VlanId) {
 		var ret int64
 		return ret
 	}
@@ -594,7 +598,7 @@ func (o *ManagementInterface) GetVlanId() int64 {
 // GetVlanIdOk returns a tuple with the VlanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManagementInterface) GetVlanIdOk() (*int64, bool) {
-	if o == nil || o.VlanId == nil {
+	if o == nil || IsNil(o.VlanId) {
 		return nil, false
 	}
 	return o.VlanId, true
@@ -602,7 +606,7 @@ func (o *ManagementInterface) GetVlanIdOk() (*int64, bool) {
 
 // HasVlanId returns a boolean if a field has been set.
 func (o *ManagementInterface) HasVlanId() bool {
-	if o != nil && o.VlanId != nil {
+	if o != nil && !IsNil(o.VlanId) {
 		return true
 	}
 
@@ -614,216 +618,286 @@ func (o *ManagementInterface) SetVlanId(v int64) {
 	o.VlanId = &v
 }
 
-// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise.
+// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementInterface) GetEquipmentChassis() EquipmentChassisRelationship {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil || IsNil(o.EquipmentChassis.Get()) {
 		var ret EquipmentChassisRelationship
 		return ret
 	}
-	return *o.EquipmentChassis
+	return *o.EquipmentChassis.Get()
 }
 
 // GetEquipmentChassisOk returns a tuple with the EquipmentChassis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementInterface) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool) {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentChassis, true
+	return o.EquipmentChassis.Get(), o.EquipmentChassis.IsSet()
 }
 
 // HasEquipmentChassis returns a boolean if a field has been set.
 func (o *ManagementInterface) HasEquipmentChassis() bool {
-	if o != nil && o.EquipmentChassis != nil {
+	if o != nil && o.EquipmentChassis.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentChassis gets a reference to the given EquipmentChassisRelationship and assigns it to the EquipmentChassis field.
+// SetEquipmentChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the EquipmentChassis field.
 func (o *ManagementInterface) SetEquipmentChassis(v EquipmentChassisRelationship) {
-	o.EquipmentChassis = &v
+	o.EquipmentChassis.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+func (o *ManagementInterface) SetEquipmentChassisNil() {
+	o.EquipmentChassis.Set(nil)
+}
+
+// UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
+func (o *ManagementInterface) UnsetEquipmentChassis() {
+	o.EquipmentChassis.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementInterface) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementInterface) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *ManagementInterface) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *ManagementInterface) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetManagementController returns the ManagementController field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *ManagementInterface) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *ManagementInterface) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetManagementController returns the ManagementController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementInterface) GetManagementController() ManagementControllerRelationship {
-	if o == nil || o.ManagementController == nil {
+	if o == nil || IsNil(o.ManagementController.Get()) {
 		var ret ManagementControllerRelationship
 		return ret
 	}
-	return *o.ManagementController
+	return *o.ManagementController.Get()
 }
 
 // GetManagementControllerOk returns a tuple with the ManagementController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementInterface) GetManagementControllerOk() (*ManagementControllerRelationship, bool) {
-	if o == nil || o.ManagementController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ManagementController, true
+	return o.ManagementController.Get(), o.ManagementController.IsSet()
 }
 
 // HasManagementController returns a boolean if a field has been set.
 func (o *ManagementInterface) HasManagementController() bool {
-	if o != nil && o.ManagementController != nil {
+	if o != nil && o.ManagementController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetManagementController gets a reference to the given ManagementControllerRelationship and assigns it to the ManagementController field.
+// SetManagementController gets a reference to the given NullableManagementControllerRelationship and assigns it to the ManagementController field.
 func (o *ManagementInterface) SetManagementController(v ManagementControllerRelationship) {
-	o.ManagementController = &v
+	o.ManagementController.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetManagementControllerNil sets the value for ManagementController to be an explicit nil
+func (o *ManagementInterface) SetManagementControllerNil() {
+	o.ManagementController.Set(nil)
+}
+
+// UnsetManagementController ensures that no value is present for ManagementController, not even an explicit nil
+func (o *ManagementInterface) UnsetManagementController() {
+	o.ManagementController.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManagementInterface) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ManagementInterface) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ManagementInterface) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ManagementInterface) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ManagementInterface) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ManagementInterface) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o ManagementInterface) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ManagementInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Gateway != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Gateway) {
 		toSerialize["Gateway"] = o.Gateway
 	}
-	if o.HostName != nil {
+	if !IsNil(o.HostName) {
 		toSerialize["HostName"] = o.HostName
 	}
-	if o.IpAddress != nil {
+	if !IsNil(o.IpAddress) {
 		toSerialize["IpAddress"] = o.IpAddress
 	}
-	if o.Ipv4Address != nil {
+	if !IsNil(o.Ipv4Address) {
 		toSerialize["Ipv4Address"] = o.Ipv4Address
 	}
-	if o.Ipv4Gateway != nil {
+	if !IsNil(o.Ipv4Gateway) {
 		toSerialize["Ipv4Gateway"] = o.Ipv4Gateway
 	}
-	if o.Ipv4Mask != nil {
+	if !IsNil(o.Ipv4Mask) {
 		toSerialize["Ipv4Mask"] = o.Ipv4Mask
 	}
-	if o.Ipv6Address != nil {
+	if !IsNil(o.Ipv6Address) {
 		toSerialize["Ipv6Address"] = o.Ipv6Address
 	}
-	if o.Ipv6Gateway != nil {
+	if !IsNil(o.Ipv6Gateway) {
 		toSerialize["Ipv6Gateway"] = o.Ipv6Gateway
 	}
-	if o.Ipv6Prefix != nil {
+	if !IsNil(o.Ipv6Prefix) {
 		toSerialize["Ipv6Prefix"] = o.Ipv6Prefix
 	}
-	if o.MacAddress != nil {
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
-	if o.Mask != nil {
+	if !IsNil(o.Mask) {
 		toSerialize["Mask"] = o.Mask
 	}
-	if o.SwitchId != nil {
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
-	if o.UemConnStatus != nil {
+	if !IsNil(o.UemConnStatus) {
 		toSerialize["UemConnStatus"] = o.UemConnStatus
 	}
-	if o.VirtualHostName != nil {
+	if !IsNil(o.VirtualHostName) {
 		toSerialize["VirtualHostName"] = o.VirtualHostName
 	}
-	if o.VlanId != nil {
+	if !IsNil(o.VlanId) {
 		toSerialize["VlanId"] = o.VlanId
 	}
-	if o.EquipmentChassis != nil {
-		toSerialize["EquipmentChassis"] = o.EquipmentChassis
+	if o.EquipmentChassis.IsSet() {
+		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.ManagementController != nil {
-		toSerialize["ManagementController"] = o.ManagementController
+	if o.ManagementController.IsSet() {
+		toSerialize["ManagementController"] = o.ManagementController.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ManagementInterface) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ManagementInterface) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ManagementInterfaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -858,16 +932,16 @@ func (o *ManagementInterface) UnmarshalJSON(bytes []byte) (err error) {
 		// Virtual hostname configured for the interface in case of clustered environment.
 		VirtualHostName *string `json:"VirtualHostName,omitempty"`
 		// VlanId configured for the interface.
-		VlanId               *int64                               `json:"VlanId,omitempty"`
-		EquipmentChassis     *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
-		InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		ManagementController *ManagementControllerRelationship    `json:"ManagementController,omitempty"`
-		RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		VlanId               *int64                                      `json:"VlanId,omitempty"`
+		EquipmentChassis     NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
+		InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		ManagementController NullableManagementControllerRelationship    `json:"ManagementController,omitempty"`
+		RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varManagementInterfaceWithoutEmbeddedStruct := ManagementInterfaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varManagementInterfaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varManagementInterfaceWithoutEmbeddedStruct)
 	if err == nil {
 		varManagementInterface := _ManagementInterface{}
 		varManagementInterface.ClassId = varManagementInterfaceWithoutEmbeddedStruct.ClassId
@@ -898,7 +972,7 @@ func (o *ManagementInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varManagementInterface := _ManagementInterface{}
 
-	err = json.Unmarshal(bytes, &varManagementInterface)
+	err = json.Unmarshal(data, &varManagementInterface)
 	if err == nil {
 		o.InventoryBase = varManagementInterface.InventoryBase
 	} else {
@@ -907,7 +981,7 @@ func (o *ManagementInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Gateway")

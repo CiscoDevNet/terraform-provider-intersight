@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareComponentDescriptor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareComponentDescriptor{}
 
 // FirmwareComponentDescriptor Descriptor to uniquely identify each component.
 type FirmwareComponentDescriptor struct {
@@ -104,7 +108,7 @@ func (o *FirmwareComponentDescriptor) SetObjectType(v string) {
 
 // GetBrandString returns the BrandString field value if set, zero value otherwise.
 func (o *FirmwareComponentDescriptor) GetBrandString() string {
-	if o == nil || o.BrandString == nil {
+	if o == nil || IsNil(o.BrandString) {
 		var ret string
 		return ret
 	}
@@ -114,7 +118,7 @@ func (o *FirmwareComponentDescriptor) GetBrandString() string {
 // GetBrandStringOk returns a tuple with the BrandString field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentDescriptor) GetBrandStringOk() (*string, bool) {
-	if o == nil || o.BrandString == nil {
+	if o == nil || IsNil(o.BrandString) {
 		return nil, false
 	}
 	return o.BrandString, true
@@ -122,7 +126,7 @@ func (o *FirmwareComponentDescriptor) GetBrandStringOk() (*string, bool) {
 
 // HasBrandString returns a boolean if a field has been set.
 func (o *FirmwareComponentDescriptor) HasBrandString() bool {
-	if o != nil && o.BrandString != nil {
+	if o != nil && !IsNil(o.BrandString) {
 		return true
 	}
 
@@ -136,7 +140,7 @@ func (o *FirmwareComponentDescriptor) SetBrandString(v string) {
 
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *FirmwareComponentDescriptor) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *FirmwareComponentDescriptor) GetLabel() string {
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentDescriptor) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
 	return o.Label, true
@@ -154,7 +158,7 @@ func (o *FirmwareComponentDescriptor) GetLabelOk() (*string, bool) {
 
 // HasLabel returns a boolean if a field has been set.
 func (o *FirmwareComponentDescriptor) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && !IsNil(o.Label) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *FirmwareComponentDescriptor) SetLabel(v string) {
 
 // GetRevision returns the Revision field value if set, zero value otherwise.
 func (o *FirmwareComponentDescriptor) GetRevision() string {
-	if o == nil || o.Revision == nil {
+	if o == nil || IsNil(o.Revision) {
 		var ret string
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *FirmwareComponentDescriptor) GetRevision() string {
 // GetRevisionOk returns a tuple with the Revision field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareComponentDescriptor) GetRevisionOk() (*string, bool) {
-	if o == nil || o.Revision == nil {
+	if o == nil || IsNil(o.Revision) {
 		return nil, false
 	}
 	return o.Revision, true
@@ -186,7 +190,7 @@ func (o *FirmwareComponentDescriptor) GetRevisionOk() (*string, bool) {
 
 // HasRevision returns a boolean if a field has been set.
 func (o *FirmwareComponentDescriptor) HasRevision() bool {
-	if o != nil && o.Revision != nil {
+	if o != nil && !IsNil(o.Revision) {
 		return true
 	}
 
@@ -199,28 +203,32 @@ func (o *FirmwareComponentDescriptor) SetRevision(v string) {
 }
 
 func (o FirmwareComponentDescriptor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareComponentDescriptor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityHardwareDescriptor, errCapabilityHardwareDescriptor := json.Marshal(o.CapabilityHardwareDescriptor)
 	if errCapabilityHardwareDescriptor != nil {
-		return []byte{}, errCapabilityHardwareDescriptor
+		return map[string]interface{}{}, errCapabilityHardwareDescriptor
 	}
 	errCapabilityHardwareDescriptor = json.Unmarshal([]byte(serializedCapabilityHardwareDescriptor), &toSerialize)
 	if errCapabilityHardwareDescriptor != nil {
-		return []byte{}, errCapabilityHardwareDescriptor
+		return map[string]interface{}{}, errCapabilityHardwareDescriptor
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BrandString != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BrandString) {
 		toSerialize["BrandString"] = o.BrandString
 	}
-	if o.Label != nil {
+	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
 	}
-	if o.Revision != nil {
+	if !IsNil(o.Revision) {
 		toSerialize["Revision"] = o.Revision
 	}
 
@@ -228,10 +236,32 @@ func (o FirmwareComponentDescriptor) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareComponentDescriptor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareComponentDescriptor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareComponentDescriptorWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -247,7 +277,7 @@ func (o *FirmwareComponentDescriptor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareComponentDescriptorWithoutEmbeddedStruct := FirmwareComponentDescriptorWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareComponentDescriptorWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareComponentDescriptorWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareComponentDescriptor := _FirmwareComponentDescriptor{}
 		varFirmwareComponentDescriptor.ClassId = varFirmwareComponentDescriptorWithoutEmbeddedStruct.ClassId
@@ -262,7 +292,7 @@ func (o *FirmwareComponentDescriptor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareComponentDescriptor := _FirmwareComponentDescriptor{}
 
-	err = json.Unmarshal(bytes, &varFirmwareComponentDescriptor)
+	err = json.Unmarshal(data, &varFirmwareComponentDescriptor)
 	if err == nil {
 		o.CapabilityHardwareDescriptor = varFirmwareComponentDescriptor.CapabilityHardwareDescriptor
 	} else {
@@ -271,7 +301,7 @@ func (o *FirmwareComponentDescriptor) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BrandString")

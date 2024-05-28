@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamTrustPoint type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamTrustPoint{}
 
 // IamTrustPoint To affirm the identity of trusted source. Allows import of third-party CA certificates in X.509 (CER) format. It can be a root CA or an trust chain that leads to a root CA.
 type IamTrustPoint struct {
@@ -26,8 +30,8 @@ type IamTrustPoint struct {
 	ObjectType   string            `json:"ObjectType"`
 	Certificates []X509Certificate `json:"Certificates,omitempty"`
 	// The certificate information for this trusted point. The certificate must be in Base64 encoded X.509 (CER) format.
-	Chain   *string                 `json:"Chain,omitempty"`
-	Account *IamAccountRelationship `json:"Account,omitempty"`
+	Chain   *string                        `json:"Chain,omitempty"`
+	Account NullableIamAccountRelationship `json:"Account,omitempty"`
 	// An array of relationships to moBaseMo resources.
 	AssignedToEntity     []MoBaseMoRelationship `json:"AssignedToEntity,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -119,7 +123,7 @@ func (o *IamTrustPoint) GetCertificates() []X509Certificate {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamTrustPoint) GetCertificatesOk() ([]X509Certificate, bool) {
-	if o == nil || o.Certificates == nil {
+	if o == nil || IsNil(o.Certificates) {
 		return nil, false
 	}
 	return o.Certificates, true
@@ -127,7 +131,7 @@ func (o *IamTrustPoint) GetCertificatesOk() ([]X509Certificate, bool) {
 
 // HasCertificates returns a boolean if a field has been set.
 func (o *IamTrustPoint) HasCertificates() bool {
-	if o != nil && o.Certificates != nil {
+	if o != nil && IsNil(o.Certificates) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *IamTrustPoint) SetCertificates(v []X509Certificate) {
 
 // GetChain returns the Chain field value if set, zero value otherwise.
 func (o *IamTrustPoint) GetChain() string {
-	if o == nil || o.Chain == nil {
+	if o == nil || IsNil(o.Chain) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *IamTrustPoint) GetChain() string {
 // GetChainOk returns a tuple with the Chain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamTrustPoint) GetChainOk() (*string, bool) {
-	if o == nil || o.Chain == nil {
+	if o == nil || IsNil(o.Chain) {
 		return nil, false
 	}
 	return o.Chain, true
@@ -159,7 +163,7 @@ func (o *IamTrustPoint) GetChainOk() (*string, bool) {
 
 // HasChain returns a boolean if a field has been set.
 func (o *IamTrustPoint) HasChain() bool {
-	if o != nil && o.Chain != nil {
+	if o != nil && !IsNil(o.Chain) {
 		return true
 	}
 
@@ -171,36 +175,47 @@ func (o *IamTrustPoint) SetChain(v string) {
 	o.Chain = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamTrustPoint) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamTrustPoint) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *IamTrustPoint) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *IamTrustPoint) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *IamTrustPoint) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *IamTrustPoint) UnsetAccount() {
+	o.Account.Unset()
 }
 
 // GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -216,7 +231,7 @@ func (o *IamTrustPoint) GetAssignedToEntity() []MoBaseMoRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IamTrustPoint) GetAssignedToEntityOk() ([]MoBaseMoRelationship, bool) {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil || IsNil(o.AssignedToEntity) {
 		return nil, false
 	}
 	return o.AssignedToEntity, true
@@ -224,7 +239,7 @@ func (o *IamTrustPoint) GetAssignedToEntityOk() ([]MoBaseMoRelationship, bool) {
 
 // HasAssignedToEntity returns a boolean if a field has been set.
 func (o *IamTrustPoint) HasAssignedToEntity() bool {
-	if o != nil && o.AssignedToEntity != nil {
+	if o != nil && IsNil(o.AssignedToEntity) {
 		return true
 	}
 
@@ -237,29 +252,33 @@ func (o *IamTrustPoint) SetAssignedToEntity(v []MoBaseMoRelationship) {
 }
 
 func (o IamTrustPoint) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamTrustPoint) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Certificates != nil {
 		toSerialize["Certificates"] = o.Certificates
 	}
-	if o.Chain != nil {
+	if !IsNil(o.Chain) {
 		toSerialize["Chain"] = o.Chain
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 	if o.AssignedToEntity != nil {
 		toSerialize["AssignedToEntity"] = o.AssignedToEntity
@@ -269,10 +288,32 @@ func (o IamTrustPoint) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamTrustPoint) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamTrustPoint) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamTrustPointWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -280,15 +321,15 @@ func (o *IamTrustPoint) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType   string            `json:"ObjectType"`
 		Certificates []X509Certificate `json:"Certificates,omitempty"`
 		// The certificate information for this trusted point. The certificate must be in Base64 encoded X.509 (CER) format.
-		Chain   *string                 `json:"Chain,omitempty"`
-		Account *IamAccountRelationship `json:"Account,omitempty"`
+		Chain   *string                        `json:"Chain,omitempty"`
+		Account NullableIamAccountRelationship `json:"Account,omitempty"`
 		// An array of relationships to moBaseMo resources.
 		AssignedToEntity []MoBaseMoRelationship `json:"AssignedToEntity,omitempty"`
 	}
 
 	varIamTrustPointWithoutEmbeddedStruct := IamTrustPointWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamTrustPointWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamTrustPointWithoutEmbeddedStruct)
 	if err == nil {
 		varIamTrustPoint := _IamTrustPoint{}
 		varIamTrustPoint.ClassId = varIamTrustPointWithoutEmbeddedStruct.ClassId
@@ -304,7 +345,7 @@ func (o *IamTrustPoint) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamTrustPoint := _IamTrustPoint{}
 
-	err = json.Unmarshal(bytes, &varIamTrustPoint)
+	err = json.Unmarshal(data, &varIamTrustPoint)
 	if err == nil {
 		o.MoBaseMo = varIamTrustPoint.MoBaseMo
 	} else {
@@ -313,7 +354,7 @@ func (o *IamTrustPoint) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Certificates")

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **HealthDataSchemaVersion** | Pointer to **string** | Version of compliant health data API schema. | [optional] [readonly] 
 **Source** | Pointer to **string** | Set as &#39;Intersight&#39;. Especially useful in cases such as when this API is consumed by an external dashboard. This field allows such dashboards to aggregate health status across multiple  sources (Intersight, Meraki etc.). | [optional] [readonly] 
 **StatusTimeStamp** | Pointer to **time.Time** | Time stamp when the status was generated. The status reported by this API may lag the real time status by up to 5 minutes. | [optional] [readonly] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -206,6 +206,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *MonitoringHealthStatus) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *MonitoringHealthStatus) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

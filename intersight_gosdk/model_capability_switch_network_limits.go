@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilitySwitchNetworkLimits type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilitySwitchNetworkLimits{}
 
 // CapabilitySwitchNetworkLimits Object combines and lists the network-config limits for each of the Fabric/Switch platforms.
 type CapabilitySwitchNetworkLimits struct {
@@ -132,7 +136,7 @@ func (o *CapabilitySwitchNetworkLimits) SetObjectType(v string) {
 
 // GetMaxCompressedPortVlanCount returns the MaxCompressedPortVlanCount field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaxCompressedPortVlanCount() int64 {
-	if o == nil || o.MaxCompressedPortVlanCount == nil {
+	if o == nil || IsNil(o.MaxCompressedPortVlanCount) {
 		var ret int64
 		return ret
 	}
@@ -142,7 +146,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaxCompressedPortVlanCount() int64 {
 // GetMaxCompressedPortVlanCountOk returns a tuple with the MaxCompressedPortVlanCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaxCompressedPortVlanCountOk() (*int64, bool) {
-	if o == nil || o.MaxCompressedPortVlanCount == nil {
+	if o == nil || IsNil(o.MaxCompressedPortVlanCount) {
 		return nil, false
 	}
 	return o.MaxCompressedPortVlanCount, true
@@ -150,7 +154,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaxCompressedPortVlanCountOk() (*int6
 
 // HasMaxCompressedPortVlanCount returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaxCompressedPortVlanCount() bool {
-	if o != nil && o.MaxCompressedPortVlanCount != nil {
+	if o != nil && !IsNil(o.MaxCompressedPortVlanCount) {
 		return true
 	}
 
@@ -164,7 +168,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaxCompressedPortVlanCount(v int64) {
 
 // GetMaxUncompressedPortVlanCount returns the MaxUncompressedPortVlanCount field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaxUncompressedPortVlanCount() int64 {
-	if o == nil || o.MaxUncompressedPortVlanCount == nil {
+	if o == nil || IsNil(o.MaxUncompressedPortVlanCount) {
 		var ret int64
 		return ret
 	}
@@ -174,7 +178,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaxUncompressedPortVlanCount() int64 
 // GetMaxUncompressedPortVlanCountOk returns a tuple with the MaxUncompressedPortVlanCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaxUncompressedPortVlanCountOk() (*int64, bool) {
-	if o == nil || o.MaxUncompressedPortVlanCount == nil {
+	if o == nil || IsNil(o.MaxUncompressedPortVlanCount) {
 		return nil, false
 	}
 	return o.MaxUncompressedPortVlanCount, true
@@ -182,7 +186,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaxUncompressedPortVlanCountOk() (*in
 
 // HasMaxUncompressedPortVlanCount returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaxUncompressedPortVlanCount() bool {
-	if o != nil && o.MaxUncompressedPortVlanCount != nil {
+	if o != nil && !IsNil(o.MaxUncompressedPortVlanCount) {
 		return true
 	}
 
@@ -196,7 +200,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaxUncompressedPortVlanCount(v int64)
 
 // GetMaximumActiveTrafficMonitoringSessions returns the MaximumActiveTrafficMonitoringSessions field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumActiveTrafficMonitoringSessions() int64 {
-	if o == nil || o.MaximumActiveTrafficMonitoringSessions == nil {
+	if o == nil || IsNil(o.MaximumActiveTrafficMonitoringSessions) {
 		var ret int64
 		return ret
 	}
@@ -206,7 +210,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumActiveTrafficMonitoringSession
 // GetMaximumActiveTrafficMonitoringSessionsOk returns a tuple with the MaximumActiveTrafficMonitoringSessions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumActiveTrafficMonitoringSessionsOk() (*int64, bool) {
-	if o == nil || o.MaximumActiveTrafficMonitoringSessions == nil {
+	if o == nil || IsNil(o.MaximumActiveTrafficMonitoringSessions) {
 		return nil, false
 	}
 	return o.MaximumActiveTrafficMonitoringSessions, true
@@ -214,7 +218,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumActiveTrafficMonitoringSession
 
 // HasMaximumActiveTrafficMonitoringSessions returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumActiveTrafficMonitoringSessions() bool {
-	if o != nil && o.MaximumActiveTrafficMonitoringSessions != nil {
+	if o != nil && !IsNil(o.MaximumActiveTrafficMonitoringSessions) {
 		return true
 	}
 
@@ -228,7 +232,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumActiveTrafficMonitoringSession
 
 // GetMaximumEthernetPortChannels returns the MaximumEthernetPortChannels field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumEthernetPortChannels() int64 {
-	if o == nil || o.MaximumEthernetPortChannels == nil {
+	if o == nil || IsNil(o.MaximumEthernetPortChannels) {
 		var ret int64
 		return ret
 	}
@@ -238,7 +242,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumEthernetPortChannels() int64 {
 // GetMaximumEthernetPortChannelsOk returns a tuple with the MaximumEthernetPortChannels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumEthernetPortChannelsOk() (*int64, bool) {
-	if o == nil || o.MaximumEthernetPortChannels == nil {
+	if o == nil || IsNil(o.MaximumEthernetPortChannels) {
 		return nil, false
 	}
 	return o.MaximumEthernetPortChannels, true
@@ -246,7 +250,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumEthernetPortChannelsOk() (*int
 
 // HasMaximumEthernetPortChannels returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumEthernetPortChannels() bool {
-	if o != nil && o.MaximumEthernetPortChannels != nil {
+	if o != nil && !IsNil(o.MaximumEthernetPortChannels) {
 		return true
 	}
 
@@ -260,7 +264,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumEthernetPortChannels(v int64) 
 
 // GetMaximumEthernetUplinkPorts returns the MaximumEthernetUplinkPorts field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumEthernetUplinkPorts() int64 {
-	if o == nil || o.MaximumEthernetUplinkPorts == nil {
+	if o == nil || IsNil(o.MaximumEthernetUplinkPorts) {
 		var ret int64
 		return ret
 	}
@@ -270,7 +274,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumEthernetUplinkPorts() int64 {
 // GetMaximumEthernetUplinkPortsOk returns a tuple with the MaximumEthernetUplinkPorts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumEthernetUplinkPortsOk() (*int64, bool) {
-	if o == nil || o.MaximumEthernetUplinkPorts == nil {
+	if o == nil || IsNil(o.MaximumEthernetUplinkPorts) {
 		return nil, false
 	}
 	return o.MaximumEthernetUplinkPorts, true
@@ -278,7 +282,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumEthernetUplinkPortsOk() (*int6
 
 // HasMaximumEthernetUplinkPorts returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumEthernetUplinkPorts() bool {
-	if o != nil && o.MaximumEthernetUplinkPorts != nil {
+	if o != nil && !IsNil(o.MaximumEthernetUplinkPorts) {
 		return true
 	}
 
@@ -292,7 +296,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumEthernetUplinkPorts(v int64) {
 
 // GetMaximumFcPortChannelMembers returns the MaximumFcPortChannelMembers field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumFcPortChannelMembers() int64 {
-	if o == nil || o.MaximumFcPortChannelMembers == nil {
+	if o == nil || IsNil(o.MaximumFcPortChannelMembers) {
 		var ret int64
 		return ret
 	}
@@ -302,7 +306,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumFcPortChannelMembers() int64 {
 // GetMaximumFcPortChannelMembersOk returns a tuple with the MaximumFcPortChannelMembers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumFcPortChannelMembersOk() (*int64, bool) {
-	if o == nil || o.MaximumFcPortChannelMembers == nil {
+	if o == nil || IsNil(o.MaximumFcPortChannelMembers) {
 		return nil, false
 	}
 	return o.MaximumFcPortChannelMembers, true
@@ -310,7 +314,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumFcPortChannelMembersOk() (*int
 
 // HasMaximumFcPortChannelMembers returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumFcPortChannelMembers() bool {
-	if o != nil && o.MaximumFcPortChannelMembers != nil {
+	if o != nil && !IsNil(o.MaximumFcPortChannelMembers) {
 		return true
 	}
 
@@ -324,7 +328,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumFcPortChannelMembers(v int64) 
 
 // GetMaximumFcPortChannels returns the MaximumFcPortChannels field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumFcPortChannels() int64 {
-	if o == nil || o.MaximumFcPortChannels == nil {
+	if o == nil || IsNil(o.MaximumFcPortChannels) {
 		var ret int64
 		return ret
 	}
@@ -334,7 +338,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumFcPortChannels() int64 {
 // GetMaximumFcPortChannelsOk returns a tuple with the MaximumFcPortChannels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumFcPortChannelsOk() (*int64, bool) {
-	if o == nil || o.MaximumFcPortChannels == nil {
+	if o == nil || IsNil(o.MaximumFcPortChannels) {
 		return nil, false
 	}
 	return o.MaximumFcPortChannels, true
@@ -342,7 +346,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumFcPortChannelsOk() (*int64, bo
 
 // HasMaximumFcPortChannels returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumFcPortChannels() bool {
-	if o != nil && o.MaximumFcPortChannels != nil {
+	if o != nil && !IsNil(o.MaximumFcPortChannels) {
 		return true
 	}
 
@@ -356,7 +360,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumFcPortChannels(v int64) {
 
 // GetMaximumIgmpGroups returns the MaximumIgmpGroups field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumIgmpGroups() int64 {
-	if o == nil || o.MaximumIgmpGroups == nil {
+	if o == nil || IsNil(o.MaximumIgmpGroups) {
 		var ret int64
 		return ret
 	}
@@ -366,7 +370,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumIgmpGroups() int64 {
 // GetMaximumIgmpGroupsOk returns a tuple with the MaximumIgmpGroups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumIgmpGroupsOk() (*int64, bool) {
-	if o == nil || o.MaximumIgmpGroups == nil {
+	if o == nil || IsNil(o.MaximumIgmpGroups) {
 		return nil, false
 	}
 	return o.MaximumIgmpGroups, true
@@ -374,7 +378,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumIgmpGroupsOk() (*int64, bool) 
 
 // HasMaximumIgmpGroups returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumIgmpGroups() bool {
-	if o != nil && o.MaximumIgmpGroups != nil {
+	if o != nil && !IsNil(o.MaximumIgmpGroups) {
 		return true
 	}
 
@@ -388,7 +392,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumIgmpGroups(v int64) {
 
 // GetMaximumPortChannelMembers returns the MaximumPortChannelMembers field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumPortChannelMembers() int64 {
-	if o == nil || o.MaximumPortChannelMembers == nil {
+	if o == nil || IsNil(o.MaximumPortChannelMembers) {
 		var ret int64
 		return ret
 	}
@@ -398,7 +402,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumPortChannelMembers() int64 {
 // GetMaximumPortChannelMembersOk returns a tuple with the MaximumPortChannelMembers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumPortChannelMembersOk() (*int64, bool) {
-	if o == nil || o.MaximumPortChannelMembers == nil {
+	if o == nil || IsNil(o.MaximumPortChannelMembers) {
 		return nil, false
 	}
 	return o.MaximumPortChannelMembers, true
@@ -406,7 +410,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumPortChannelMembersOk() (*int64
 
 // HasMaximumPortChannelMembers returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumPortChannelMembers() bool {
-	if o != nil && o.MaximumPortChannelMembers != nil {
+	if o != nil && !IsNil(o.MaximumPortChannelMembers) {
 		return true
 	}
 
@@ -420,7 +424,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumPortChannelMembers(v int64) {
 
 // GetMaximumPrimaryVlan returns the MaximumPrimaryVlan field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumPrimaryVlan() int64 {
-	if o == nil || o.MaximumPrimaryVlan == nil {
+	if o == nil || IsNil(o.MaximumPrimaryVlan) {
 		var ret int64
 		return ret
 	}
@@ -430,7 +434,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumPrimaryVlan() int64 {
 // GetMaximumPrimaryVlanOk returns a tuple with the MaximumPrimaryVlan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumPrimaryVlanOk() (*int64, bool) {
-	if o == nil || o.MaximumPrimaryVlan == nil {
+	if o == nil || IsNil(o.MaximumPrimaryVlan) {
 		return nil, false
 	}
 	return o.MaximumPrimaryVlan, true
@@ -438,7 +442,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumPrimaryVlanOk() (*int64, bool)
 
 // HasMaximumPrimaryVlan returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumPrimaryVlan() bool {
-	if o != nil && o.MaximumPrimaryVlan != nil {
+	if o != nil && !IsNil(o.MaximumPrimaryVlan) {
 		return true
 	}
 
@@ -452,7 +456,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumPrimaryVlan(v int64) {
 
 // GetMaximumSecondaryVlan returns the MaximumSecondaryVlan field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumSecondaryVlan() int64 {
-	if o == nil || o.MaximumSecondaryVlan == nil {
+	if o == nil || IsNil(o.MaximumSecondaryVlan) {
 		var ret int64
 		return ret
 	}
@@ -462,7 +466,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumSecondaryVlan() int64 {
 // GetMaximumSecondaryVlanOk returns a tuple with the MaximumSecondaryVlan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumSecondaryVlanOk() (*int64, bool) {
-	if o == nil || o.MaximumSecondaryVlan == nil {
+	if o == nil || IsNil(o.MaximumSecondaryVlan) {
 		return nil, false
 	}
 	return o.MaximumSecondaryVlan, true
@@ -470,7 +474,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumSecondaryVlanOk() (*int64, boo
 
 // HasMaximumSecondaryVlan returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumSecondaryVlan() bool {
-	if o != nil && o.MaximumSecondaryVlan != nil {
+	if o != nil && !IsNil(o.MaximumSecondaryVlan) {
 		return true
 	}
 
@@ -484,7 +488,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumSecondaryVlan(v int64) {
 
 // GetMaximumSecondaryVlanPerPrimary returns the MaximumSecondaryVlanPerPrimary field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumSecondaryVlanPerPrimary() int64 {
-	if o == nil || o.MaximumSecondaryVlanPerPrimary == nil {
+	if o == nil || IsNil(o.MaximumSecondaryVlanPerPrimary) {
 		var ret int64
 		return ret
 	}
@@ -494,7 +498,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumSecondaryVlanPerPrimary() int6
 // GetMaximumSecondaryVlanPerPrimaryOk returns a tuple with the MaximumSecondaryVlanPerPrimary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumSecondaryVlanPerPrimaryOk() (*int64, bool) {
-	if o == nil || o.MaximumSecondaryVlanPerPrimary == nil {
+	if o == nil || IsNil(o.MaximumSecondaryVlanPerPrimary) {
 		return nil, false
 	}
 	return o.MaximumSecondaryVlanPerPrimary, true
@@ -502,7 +506,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumSecondaryVlanPerPrimaryOk() (*
 
 // HasMaximumSecondaryVlanPerPrimary returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumSecondaryVlanPerPrimary() bool {
-	if o != nil && o.MaximumSecondaryVlanPerPrimary != nil {
+	if o != nil && !IsNil(o.MaximumSecondaryVlanPerPrimary) {
 		return true
 	}
 
@@ -516,7 +520,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumSecondaryVlanPerPrimary(v int6
 
 // GetMaximumVifs returns the MaximumVifs field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumVifs() int64 {
-	if o == nil || o.MaximumVifs == nil {
+	if o == nil || IsNil(o.MaximumVifs) {
 		var ret int64
 		return ret
 	}
@@ -526,7 +530,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumVifs() int64 {
 // GetMaximumVifsOk returns a tuple with the MaximumVifs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumVifsOk() (*int64, bool) {
-	if o == nil || o.MaximumVifs == nil {
+	if o == nil || IsNil(o.MaximumVifs) {
 		return nil, false
 	}
 	return o.MaximumVifs, true
@@ -534,7 +538,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumVifsOk() (*int64, bool) {
 
 // HasMaximumVifs returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumVifs() bool {
-	if o != nil && o.MaximumVifs != nil {
+	if o != nil && !IsNil(o.MaximumVifs) {
 		return true
 	}
 
@@ -548,7 +552,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumVifs(v int64) {
 
 // GetMaximumVlans returns the MaximumVlans field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumVlans() int64 {
-	if o == nil || o.MaximumVlans == nil {
+	if o == nil || IsNil(o.MaximumVlans) {
 		var ret int64
 		return ret
 	}
@@ -558,7 +562,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumVlans() int64 {
 // GetMaximumVlansOk returns a tuple with the MaximumVlans field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMaximumVlansOk() (*int64, bool) {
-	if o == nil || o.MaximumVlans == nil {
+	if o == nil || IsNil(o.MaximumVlans) {
 		return nil, false
 	}
 	return o.MaximumVlans, true
@@ -566,7 +570,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMaximumVlansOk() (*int64, bool) {
 
 // HasMaximumVlans returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMaximumVlans() bool {
-	if o != nil && o.MaximumVlans != nil {
+	if o != nil && !IsNil(o.MaximumVlans) {
 		return true
 	}
 
@@ -580,7 +584,7 @@ func (o *CapabilitySwitchNetworkLimits) SetMaximumVlans(v int64) {
 
 // GetMinimumActiveFans returns the MinimumActiveFans field value if set, zero value otherwise.
 func (o *CapabilitySwitchNetworkLimits) GetMinimumActiveFans() int64 {
-	if o == nil || o.MinimumActiveFans == nil {
+	if o == nil || IsNil(o.MinimumActiveFans) {
 		var ret int64
 		return ret
 	}
@@ -590,7 +594,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMinimumActiveFans() int64 {
 // GetMinimumActiveFansOk returns a tuple with the MinimumActiveFans field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchNetworkLimits) GetMinimumActiveFansOk() (*int64, bool) {
-	if o == nil || o.MinimumActiveFans == nil {
+	if o == nil || IsNil(o.MinimumActiveFans) {
 		return nil, false
 	}
 	return o.MinimumActiveFans, true
@@ -598,7 +602,7 @@ func (o *CapabilitySwitchNetworkLimits) GetMinimumActiveFansOk() (*int64, bool) 
 
 // HasMinimumActiveFans returns a boolean if a field has been set.
 func (o *CapabilitySwitchNetworkLimits) HasMinimumActiveFans() bool {
-	if o != nil && o.MinimumActiveFans != nil {
+	if o != nil && !IsNil(o.MinimumActiveFans) {
 		return true
 	}
 
@@ -611,64 +615,68 @@ func (o *CapabilitySwitchNetworkLimits) SetMinimumActiveFans(v int64) {
 }
 
 func (o CapabilitySwitchNetworkLimits) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilitySwitchNetworkLimits) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.MaxCompressedPortVlanCount != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MaxCompressedPortVlanCount) {
 		toSerialize["MaxCompressedPortVlanCount"] = o.MaxCompressedPortVlanCount
 	}
-	if o.MaxUncompressedPortVlanCount != nil {
+	if !IsNil(o.MaxUncompressedPortVlanCount) {
 		toSerialize["MaxUncompressedPortVlanCount"] = o.MaxUncompressedPortVlanCount
 	}
-	if o.MaximumActiveTrafficMonitoringSessions != nil {
+	if !IsNil(o.MaximumActiveTrafficMonitoringSessions) {
 		toSerialize["MaximumActiveTrafficMonitoringSessions"] = o.MaximumActiveTrafficMonitoringSessions
 	}
-	if o.MaximumEthernetPortChannels != nil {
+	if !IsNil(o.MaximumEthernetPortChannels) {
 		toSerialize["MaximumEthernetPortChannels"] = o.MaximumEthernetPortChannels
 	}
-	if o.MaximumEthernetUplinkPorts != nil {
+	if !IsNil(o.MaximumEthernetUplinkPorts) {
 		toSerialize["MaximumEthernetUplinkPorts"] = o.MaximumEthernetUplinkPorts
 	}
-	if o.MaximumFcPortChannelMembers != nil {
+	if !IsNil(o.MaximumFcPortChannelMembers) {
 		toSerialize["MaximumFcPortChannelMembers"] = o.MaximumFcPortChannelMembers
 	}
-	if o.MaximumFcPortChannels != nil {
+	if !IsNil(o.MaximumFcPortChannels) {
 		toSerialize["MaximumFcPortChannels"] = o.MaximumFcPortChannels
 	}
-	if o.MaximumIgmpGroups != nil {
+	if !IsNil(o.MaximumIgmpGroups) {
 		toSerialize["MaximumIgmpGroups"] = o.MaximumIgmpGroups
 	}
-	if o.MaximumPortChannelMembers != nil {
+	if !IsNil(o.MaximumPortChannelMembers) {
 		toSerialize["MaximumPortChannelMembers"] = o.MaximumPortChannelMembers
 	}
-	if o.MaximumPrimaryVlan != nil {
+	if !IsNil(o.MaximumPrimaryVlan) {
 		toSerialize["MaximumPrimaryVlan"] = o.MaximumPrimaryVlan
 	}
-	if o.MaximumSecondaryVlan != nil {
+	if !IsNil(o.MaximumSecondaryVlan) {
 		toSerialize["MaximumSecondaryVlan"] = o.MaximumSecondaryVlan
 	}
-	if o.MaximumSecondaryVlanPerPrimary != nil {
+	if !IsNil(o.MaximumSecondaryVlanPerPrimary) {
 		toSerialize["MaximumSecondaryVlanPerPrimary"] = o.MaximumSecondaryVlanPerPrimary
 	}
-	if o.MaximumVifs != nil {
+	if !IsNil(o.MaximumVifs) {
 		toSerialize["MaximumVifs"] = o.MaximumVifs
 	}
-	if o.MaximumVlans != nil {
+	if !IsNil(o.MaximumVlans) {
 		toSerialize["MaximumVlans"] = o.MaximumVlans
 	}
-	if o.MinimumActiveFans != nil {
+	if !IsNil(o.MinimumActiveFans) {
 		toSerialize["MinimumActiveFans"] = o.MinimumActiveFans
 	}
 
@@ -676,10 +684,32 @@ func (o CapabilitySwitchNetworkLimits) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilitySwitchNetworkLimits) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilitySwitchNetworkLimits) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilitySwitchNetworkLimitsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -719,7 +749,7 @@ func (o *CapabilitySwitchNetworkLimits) UnmarshalJSON(bytes []byte) (err error) 
 
 	varCapabilitySwitchNetworkLimitsWithoutEmbeddedStruct := CapabilitySwitchNetworkLimitsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchNetworkLimitsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilitySwitchNetworkLimitsWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilitySwitchNetworkLimits := _CapabilitySwitchNetworkLimits{}
 		varCapabilitySwitchNetworkLimits.ClassId = varCapabilitySwitchNetworkLimitsWithoutEmbeddedStruct.ClassId
@@ -746,7 +776,7 @@ func (o *CapabilitySwitchNetworkLimits) UnmarshalJSON(bytes []byte) (err error) 
 
 	varCapabilitySwitchNetworkLimits := _CapabilitySwitchNetworkLimits{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchNetworkLimits)
+	err = json.Unmarshal(data, &varCapabilitySwitchNetworkLimits)
 	if err == nil {
 		o.MoBaseComplexType = varCapabilitySwitchNetworkLimits.MoBaseComplexType
 	} else {
@@ -755,7 +785,7 @@ func (o *CapabilitySwitchNetworkLimits) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MaxCompressedPortVlanCount")

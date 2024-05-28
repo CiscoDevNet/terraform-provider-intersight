@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryNexusDashboards type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryNexusDashboards{}
 
 // NiatelemetryNexusDashboards Object is available for Nexus Dashboard devices.
 type NiatelemetryNexusDashboards struct {
@@ -58,8 +62,8 @@ type NiatelemetryNexusDashboards struct {
 	// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
 	RecordType *string `json:"RecordType,omitempty"`
 	// Type of site added to Multi-Site Orchestrator.
-	TypeOfSiteInMso      *string                              `json:"TypeOfSiteInMso,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	TypeOfSiteInMso      *string                                     `json:"TypeOfSiteInMso,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -138,7 +142,7 @@ func (o *NiatelemetryNexusDashboards) SetObjectType(v string) {
 
 // GetClusterName returns the ClusterName field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetClusterName() string {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		var ret string
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *NiatelemetryNexusDashboards) GetClusterName() string {
 // GetClusterNameOk returns a tuple with the ClusterName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetClusterNameOk() (*string, bool) {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		return nil, false
 	}
 	return o.ClusterName, true
@@ -156,7 +160,7 @@ func (o *NiatelemetryNexusDashboards) GetClusterNameOk() (*string, bool) {
 
 // HasClusterName returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasClusterName() bool {
-	if o != nil && o.ClusterName != nil {
+	if o != nil && !IsNil(o.ClusterName) {
 		return true
 	}
 
@@ -170,7 +174,7 @@ func (o *NiatelemetryNexusDashboards) SetClusterName(v string) {
 
 // GetClusterUuid returns the ClusterUuid field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetClusterUuid() string {
-	if o == nil || o.ClusterUuid == nil {
+	if o == nil || IsNil(o.ClusterUuid) {
 		var ret string
 		return ret
 	}
@@ -180,7 +184,7 @@ func (o *NiatelemetryNexusDashboards) GetClusterUuid() string {
 // GetClusterUuidOk returns a tuple with the ClusterUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetClusterUuidOk() (*string, bool) {
-	if o == nil || o.ClusterUuid == nil {
+	if o == nil || IsNil(o.ClusterUuid) {
 		return nil, false
 	}
 	return o.ClusterUuid, true
@@ -188,7 +192,7 @@ func (o *NiatelemetryNexusDashboards) GetClusterUuidOk() (*string, bool) {
 
 // HasClusterUuid returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasClusterUuid() bool {
-	if o != nil && o.ClusterUuid != nil {
+	if o != nil && !IsNil(o.ClusterUuid) {
 		return true
 	}
 
@@ -202,7 +206,7 @@ func (o *NiatelemetryNexusDashboards) SetClusterUuid(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -212,7 +216,7 @@ func (o *NiatelemetryNexusDashboards) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -220,7 +224,7 @@ func (o *NiatelemetryNexusDashboards) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -234,7 +238,7 @@ func (o *NiatelemetryNexusDashboards) SetDn(v string) {
 
 // GetIsClusterHealthy returns the IsClusterHealthy field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetIsClusterHealthy() string {
-	if o == nil || o.IsClusterHealthy == nil {
+	if o == nil || IsNil(o.IsClusterHealthy) {
 		var ret string
 		return ret
 	}
@@ -244,7 +248,7 @@ func (o *NiatelemetryNexusDashboards) GetIsClusterHealthy() string {
 // GetIsClusterHealthyOk returns a tuple with the IsClusterHealthy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetIsClusterHealthyOk() (*string, bool) {
-	if o == nil || o.IsClusterHealthy == nil {
+	if o == nil || IsNil(o.IsClusterHealthy) {
 		return nil, false
 	}
 	return o.IsClusterHealthy, true
@@ -252,7 +256,7 @@ func (o *NiatelemetryNexusDashboards) GetIsClusterHealthyOk() (*string, bool) {
 
 // HasIsClusterHealthy returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasIsClusterHealthy() bool {
-	if o != nil && o.IsClusterHealthy != nil {
+	if o != nil && !IsNil(o.IsClusterHealthy) {
 		return true
 	}
 
@@ -266,7 +270,7 @@ func (o *NiatelemetryNexusDashboards) SetIsClusterHealthy(v string) {
 
 // GetNdClusterSize returns the NdClusterSize field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNdClusterSize() int64 {
-	if o == nil || o.NdClusterSize == nil {
+	if o == nil || IsNil(o.NdClusterSize) {
 		var ret int64
 		return ret
 	}
@@ -276,7 +280,7 @@ func (o *NiatelemetryNexusDashboards) GetNdClusterSize() int64 {
 // GetNdClusterSizeOk returns a tuple with the NdClusterSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetNdClusterSizeOk() (*int64, bool) {
-	if o == nil || o.NdClusterSize == nil {
+	if o == nil || IsNil(o.NdClusterSize) {
 		return nil, false
 	}
 	return o.NdClusterSize, true
@@ -284,7 +288,7 @@ func (o *NiatelemetryNexusDashboards) GetNdClusterSizeOk() (*int64, bool) {
 
 // HasNdClusterSize returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNdClusterSize() bool {
-	if o != nil && o.NdClusterSize != nil {
+	if o != nil && !IsNil(o.NdClusterSize) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *NiatelemetryNexusDashboards) GetNdSites() []NiatelemetrySites {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNexusDashboards) GetNdSitesOk() ([]NiatelemetrySites, bool) {
-	if o == nil || o.NdSites == nil {
+	if o == nil || IsNil(o.NdSites) {
 		return nil, false
 	}
 	return o.NdSites, true
@@ -317,7 +321,7 @@ func (o *NiatelemetryNexusDashboards) GetNdSitesOk() ([]NiatelemetrySites, bool)
 
 // HasNdSites returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNdSites() bool {
-	if o != nil && o.NdSites != nil {
+	if o != nil && IsNil(o.NdSites) {
 		return true
 	}
 
@@ -331,7 +335,7 @@ func (o *NiatelemetryNexusDashboards) SetNdSites(v []NiatelemetrySites) {
 
 // GetNdType returns the NdType field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNdType() string {
-	if o == nil || o.NdType == nil {
+	if o == nil || IsNil(o.NdType) {
 		var ret string
 		return ret
 	}
@@ -341,7 +345,7 @@ func (o *NiatelemetryNexusDashboards) GetNdType() string {
 // GetNdTypeOk returns a tuple with the NdType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetNdTypeOk() (*string, bool) {
-	if o == nil || o.NdType == nil {
+	if o == nil || IsNil(o.NdType) {
 		return nil, false
 	}
 	return o.NdType, true
@@ -349,7 +353,7 @@ func (o *NiatelemetryNexusDashboards) GetNdTypeOk() (*string, bool) {
 
 // HasNdType returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNdType() bool {
-	if o != nil && o.NdType != nil {
+	if o != nil && !IsNil(o.NdType) {
 		return true
 	}
 
@@ -363,7 +367,7 @@ func (o *NiatelemetryNexusDashboards) SetNdType(v string) {
 
 // GetNdVersion returns the NdVersion field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNdVersion() string {
-	if o == nil || o.NdVersion == nil {
+	if o == nil || IsNil(o.NdVersion) {
 		var ret string
 		return ret
 	}
@@ -373,7 +377,7 @@ func (o *NiatelemetryNexusDashboards) GetNdVersion() string {
 // GetNdVersionOk returns a tuple with the NdVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetNdVersionOk() (*string, bool) {
-	if o == nil || o.NdVersion == nil {
+	if o == nil || IsNil(o.NdVersion) {
 		return nil, false
 	}
 	return o.NdVersion, true
@@ -381,7 +385,7 @@ func (o *NiatelemetryNexusDashboards) GetNdVersionOk() (*string, bool) {
 
 // HasNdVersion returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNdVersion() bool {
-	if o != nil && o.NdVersion != nil {
+	if o != nil && !IsNil(o.NdVersion) {
 		return true
 	}
 
@@ -395,7 +399,7 @@ func (o *NiatelemetryNexusDashboards) SetNdVersion(v string) {
 
 // GetNumberOfApps returns the NumberOfApps field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNumberOfApps() int64 {
-	if o == nil || o.NumberOfApps == nil {
+	if o == nil || IsNil(o.NumberOfApps) {
 		var ret int64
 		return ret
 	}
@@ -405,7 +409,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfApps() int64 {
 // GetNumberOfAppsOk returns a tuple with the NumberOfApps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetNumberOfAppsOk() (*int64, bool) {
-	if o == nil || o.NumberOfApps == nil {
+	if o == nil || IsNil(o.NumberOfApps) {
 		return nil, false
 	}
 	return o.NumberOfApps, true
@@ -413,7 +417,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfAppsOk() (*int64, bool) {
 
 // HasNumberOfApps returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNumberOfApps() bool {
-	if o != nil && o.NumberOfApps != nil {
+	if o != nil && !IsNil(o.NumberOfApps) {
 		return true
 	}
 
@@ -427,7 +431,7 @@ func (o *NiatelemetryNexusDashboards) SetNumberOfApps(v int64) {
 
 // GetNumberOfInsightGroups returns the NumberOfInsightGroups field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNumberOfInsightGroups() int64 {
-	if o == nil || o.NumberOfInsightGroups == nil {
+	if o == nil || IsNil(o.NumberOfInsightGroups) {
 		var ret int64
 		return ret
 	}
@@ -437,7 +441,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfInsightGroups() int64 {
 // GetNumberOfInsightGroupsOk returns a tuple with the NumberOfInsightGroups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetNumberOfInsightGroupsOk() (*int64, bool) {
-	if o == nil || o.NumberOfInsightGroups == nil {
+	if o == nil || IsNil(o.NumberOfInsightGroups) {
 		return nil, false
 	}
 	return o.NumberOfInsightGroups, true
@@ -445,7 +449,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfInsightGroupsOk() (*int64, bool
 
 // HasNumberOfInsightGroups returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNumberOfInsightGroups() bool {
-	if o != nil && o.NumberOfInsightGroups != nil {
+	if o != nil && !IsNil(o.NumberOfInsightGroups) {
 		return true
 	}
 
@@ -459,7 +463,7 @@ func (o *NiatelemetryNexusDashboards) SetNumberOfInsightGroups(v int64) {
 
 // GetNumberOfNirDashboards returns the NumberOfNirDashboards field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNumberOfNirDashboards() int64 {
-	if o == nil || o.NumberOfNirDashboards == nil {
+	if o == nil || IsNil(o.NumberOfNirDashboards) {
 		var ret int64
 		return ret
 	}
@@ -469,7 +473,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfNirDashboards() int64 {
 // GetNumberOfNirDashboardsOk returns a tuple with the NumberOfNirDashboards field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetNumberOfNirDashboardsOk() (*int64, bool) {
-	if o == nil || o.NumberOfNirDashboards == nil {
+	if o == nil || IsNil(o.NumberOfNirDashboards) {
 		return nil, false
 	}
 	return o.NumberOfNirDashboards, true
@@ -477,7 +481,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfNirDashboardsOk() (*int64, bool
 
 // HasNumberOfNirDashboards returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNumberOfNirDashboards() bool {
-	if o != nil && o.NumberOfNirDashboards != nil {
+	if o != nil && !IsNil(o.NumberOfNirDashboards) {
 		return true
 	}
 
@@ -491,7 +495,7 @@ func (o *NiatelemetryNexusDashboards) SetNumberOfNirDashboards(v int64) {
 
 // GetNumberOfSchemasInMso returns the NumberOfSchemasInMso field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNumberOfSchemasInMso() int64 {
-	if o == nil || o.NumberOfSchemasInMso == nil {
+	if o == nil || IsNil(o.NumberOfSchemasInMso) {
 		var ret int64
 		return ret
 	}
@@ -501,7 +505,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfSchemasInMso() int64 {
 // GetNumberOfSchemasInMsoOk returns a tuple with the NumberOfSchemasInMso field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetNumberOfSchemasInMsoOk() (*int64, bool) {
-	if o == nil || o.NumberOfSchemasInMso == nil {
+	if o == nil || IsNil(o.NumberOfSchemasInMso) {
 		return nil, false
 	}
 	return o.NumberOfSchemasInMso, true
@@ -509,7 +513,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfSchemasInMsoOk() (*int64, bool)
 
 // HasNumberOfSchemasInMso returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNumberOfSchemasInMso() bool {
-	if o != nil && o.NumberOfSchemasInMso != nil {
+	if o != nil && !IsNil(o.NumberOfSchemasInMso) {
 		return true
 	}
 
@@ -523,7 +527,7 @@ func (o *NiatelemetryNexusDashboards) SetNumberOfSchemasInMso(v int64) {
 
 // GetNumberOfSitesInMso returns the NumberOfSitesInMso field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNumberOfSitesInMso() int64 {
-	if o == nil || o.NumberOfSitesInMso == nil {
+	if o == nil || IsNil(o.NumberOfSitesInMso) {
 		var ret int64
 		return ret
 	}
@@ -533,7 +537,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfSitesInMso() int64 {
 // GetNumberOfSitesInMsoOk returns a tuple with the NumberOfSitesInMso field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetNumberOfSitesInMsoOk() (*int64, bool) {
-	if o == nil || o.NumberOfSitesInMso == nil {
+	if o == nil || IsNil(o.NumberOfSitesInMso) {
 		return nil, false
 	}
 	return o.NumberOfSitesInMso, true
@@ -541,7 +545,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfSitesInMsoOk() (*int64, bool) {
 
 // HasNumberOfSitesInMso returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNumberOfSitesInMso() bool {
-	if o != nil && o.NumberOfSitesInMso != nil {
+	if o != nil && !IsNil(o.NumberOfSitesInMso) {
 		return true
 	}
 
@@ -555,7 +559,7 @@ func (o *NiatelemetryNexusDashboards) SetNumberOfSitesInMso(v int64) {
 
 // GetNumberOfSitesServiced returns the NumberOfSitesServiced field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNumberOfSitesServiced() int64 {
-	if o == nil || o.NumberOfSitesServiced == nil {
+	if o == nil || IsNil(o.NumberOfSitesServiced) {
 		var ret int64
 		return ret
 	}
@@ -565,7 +569,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfSitesServiced() int64 {
 // GetNumberOfSitesServicedOk returns a tuple with the NumberOfSitesServiced field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetNumberOfSitesServicedOk() (*int64, bool) {
-	if o == nil || o.NumberOfSitesServiced == nil {
+	if o == nil || IsNil(o.NumberOfSitesServiced) {
 		return nil, false
 	}
 	return o.NumberOfSitesServiced, true
@@ -573,7 +577,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfSitesServicedOk() (*int64, bool
 
 // HasNumberOfSitesServiced returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNumberOfSitesServiced() bool {
-	if o != nil && o.NumberOfSitesServiced != nil {
+	if o != nil && !IsNil(o.NumberOfSitesServiced) {
 		return true
 	}
 
@@ -587,7 +591,7 @@ func (o *NiatelemetryNexusDashboards) SetNumberOfSitesServiced(v int64) {
 
 // GetNumberOfTenantsInMso returns the NumberOfTenantsInMso field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNumberOfTenantsInMso() int64 {
-	if o == nil || o.NumberOfTenantsInMso == nil {
+	if o == nil || IsNil(o.NumberOfTenantsInMso) {
 		var ret int64
 		return ret
 	}
@@ -597,7 +601,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfTenantsInMso() int64 {
 // GetNumberOfTenantsInMsoOk returns a tuple with the NumberOfTenantsInMso field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetNumberOfTenantsInMsoOk() (*int64, bool) {
-	if o == nil || o.NumberOfTenantsInMso == nil {
+	if o == nil || IsNil(o.NumberOfTenantsInMso) {
 		return nil, false
 	}
 	return o.NumberOfTenantsInMso, true
@@ -605,7 +609,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfTenantsInMsoOk() (*int64, bool)
 
 // HasNumberOfTenantsInMso returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNumberOfTenantsInMso() bool {
-	if o != nil && o.NumberOfTenantsInMso != nil {
+	if o != nil && !IsNil(o.NumberOfTenantsInMso) {
 		return true
 	}
 
@@ -619,7 +623,7 @@ func (o *NiatelemetryNexusDashboards) SetNumberOfTenantsInMso(v int64) {
 
 // GetNumberOfVxlanFabricSitesInMso returns the NumberOfVxlanFabricSitesInMso field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetNumberOfVxlanFabricSitesInMso() int64 {
-	if o == nil || o.NumberOfVxlanFabricSitesInMso == nil {
+	if o == nil || IsNil(o.NumberOfVxlanFabricSitesInMso) {
 		var ret int64
 		return ret
 	}
@@ -629,7 +633,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfVxlanFabricSitesInMso() int64 {
 // GetNumberOfVxlanFabricSitesInMsoOk returns a tuple with the NumberOfVxlanFabricSitesInMso field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetNumberOfVxlanFabricSitesInMsoOk() (*int64, bool) {
-	if o == nil || o.NumberOfVxlanFabricSitesInMso == nil {
+	if o == nil || IsNil(o.NumberOfVxlanFabricSitesInMso) {
 		return nil, false
 	}
 	return o.NumberOfVxlanFabricSitesInMso, true
@@ -637,7 +641,7 @@ func (o *NiatelemetryNexusDashboards) GetNumberOfVxlanFabricSitesInMsoOk() (*int
 
 // HasNumberOfVxlanFabricSitesInMso returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasNumberOfVxlanFabricSitesInMso() bool {
-	if o != nil && o.NumberOfVxlanFabricSitesInMso != nil {
+	if o != nil && !IsNil(o.NumberOfVxlanFabricSitesInMso) {
 		return true
 	}
 
@@ -651,7 +655,7 @@ func (o *NiatelemetryNexusDashboards) SetNumberOfVxlanFabricSitesInMso(v int64) 
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -661,7 +665,7 @@ func (o *NiatelemetryNexusDashboards) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -669,7 +673,7 @@ func (o *NiatelemetryNexusDashboards) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -683,7 +687,7 @@ func (o *NiatelemetryNexusDashboards) SetRecordType(v string) {
 
 // GetTypeOfSiteInMso returns the TypeOfSiteInMso field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetTypeOfSiteInMso() string {
-	if o == nil || o.TypeOfSiteInMso == nil {
+	if o == nil || IsNil(o.TypeOfSiteInMso) {
 		var ret string
 		return ret
 	}
@@ -693,7 +697,7 @@ func (o *NiatelemetryNexusDashboards) GetTypeOfSiteInMso() string {
 // GetTypeOfSiteInMsoOk returns a tuple with the TypeOfSiteInMso field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryNexusDashboards) GetTypeOfSiteInMsoOk() (*string, bool) {
-	if o == nil || o.TypeOfSiteInMso == nil {
+	if o == nil || IsNil(o.TypeOfSiteInMso) {
 		return nil, false
 	}
 	return o.TypeOfSiteInMso, true
@@ -701,7 +705,7 @@ func (o *NiatelemetryNexusDashboards) GetTypeOfSiteInMsoOk() (*string, bool) {
 
 // HasTypeOfSiteInMso returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasTypeOfSiteInMso() bool {
-	if o != nil && o.TypeOfSiteInMso != nil {
+	if o != nil && !IsNil(o.TypeOfSiteInMso) {
 		return true
 	}
 
@@ -713,120 +717,157 @@ func (o *NiatelemetryNexusDashboards) SetTypeOfSiteInMso(v string) {
 	o.TypeOfSiteInMso = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryNexusDashboards) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryNexusDashboards) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryNexusDashboards) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryNexusDashboards) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryNexusDashboards) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryNexusDashboards) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryNexusDashboards) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryNexusDashboards) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClusterName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClusterName) {
 		toSerialize["ClusterName"] = o.ClusterName
 	}
-	if o.ClusterUuid != nil {
+	if !IsNil(o.ClusterUuid) {
 		toSerialize["ClusterUuid"] = o.ClusterUuid
 	}
-	if o.Dn != nil {
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.IsClusterHealthy != nil {
+	if !IsNil(o.IsClusterHealthy) {
 		toSerialize["IsClusterHealthy"] = o.IsClusterHealthy
 	}
-	if o.NdClusterSize != nil {
+	if !IsNil(o.NdClusterSize) {
 		toSerialize["NdClusterSize"] = o.NdClusterSize
 	}
 	if o.NdSites != nil {
 		toSerialize["NdSites"] = o.NdSites
 	}
-	if o.NdType != nil {
+	if !IsNil(o.NdType) {
 		toSerialize["NdType"] = o.NdType
 	}
-	if o.NdVersion != nil {
+	if !IsNil(o.NdVersion) {
 		toSerialize["NdVersion"] = o.NdVersion
 	}
-	if o.NumberOfApps != nil {
+	if !IsNil(o.NumberOfApps) {
 		toSerialize["NumberOfApps"] = o.NumberOfApps
 	}
-	if o.NumberOfInsightGroups != nil {
+	if !IsNil(o.NumberOfInsightGroups) {
 		toSerialize["NumberOfInsightGroups"] = o.NumberOfInsightGroups
 	}
-	if o.NumberOfNirDashboards != nil {
+	if !IsNil(o.NumberOfNirDashboards) {
 		toSerialize["NumberOfNirDashboards"] = o.NumberOfNirDashboards
 	}
-	if o.NumberOfSchemasInMso != nil {
+	if !IsNil(o.NumberOfSchemasInMso) {
 		toSerialize["NumberOfSchemasInMso"] = o.NumberOfSchemasInMso
 	}
-	if o.NumberOfSitesInMso != nil {
+	if !IsNil(o.NumberOfSitesInMso) {
 		toSerialize["NumberOfSitesInMso"] = o.NumberOfSitesInMso
 	}
-	if o.NumberOfSitesServiced != nil {
+	if !IsNil(o.NumberOfSitesServiced) {
 		toSerialize["NumberOfSitesServiced"] = o.NumberOfSitesServiced
 	}
-	if o.NumberOfTenantsInMso != nil {
+	if !IsNil(o.NumberOfTenantsInMso) {
 		toSerialize["NumberOfTenantsInMso"] = o.NumberOfTenantsInMso
 	}
-	if o.NumberOfVxlanFabricSitesInMso != nil {
+	if !IsNil(o.NumberOfVxlanFabricSitesInMso) {
 		toSerialize["NumberOfVxlanFabricSitesInMso"] = o.NumberOfVxlanFabricSitesInMso
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.TypeOfSiteInMso != nil {
+	if !IsNil(o.TypeOfSiteInMso) {
 		toSerialize["TypeOfSiteInMso"] = o.TypeOfSiteInMso
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryNexusDashboards) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryNexusDashboards) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryNexusDashboardsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -866,13 +907,13 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(bytes []byte) (err error) {
 		// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
 		RecordType *string `json:"RecordType,omitempty"`
 		// Type of site added to Multi-Site Orchestrator.
-		TypeOfSiteInMso  *string                              `json:"TypeOfSiteInMso,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		TypeOfSiteInMso  *string                                     `json:"TypeOfSiteInMso,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryNexusDashboardsWithoutEmbeddedStruct := NiatelemetryNexusDashboardsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNexusDashboardsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryNexusDashboardsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryNexusDashboards := _NiatelemetryNexusDashboards{}
 		varNiatelemetryNexusDashboards.ClassId = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ClassId
@@ -903,7 +944,7 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryNexusDashboards := _NiatelemetryNexusDashboards{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryNexusDashboards)
+	err = json.Unmarshal(data, &varNiatelemetryNexusDashboards)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryNexusDashboards.MoBaseMo
 	} else {
@@ -912,7 +953,7 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterName")

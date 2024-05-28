@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IaasMostRunTasks type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IaasMostRunTasks{}
 
 // IaasMostRunTasks Describes most run workflow tasks within UCSD.
 type IaasMostRunTasks struct {
@@ -31,8 +35,8 @@ type IaasMostRunTasks struct {
 	// Name of the task executed in UCSD.
 	TaskName *string `json:"TaskName,omitempty"`
 	// Type of the task whether it is system task or custom task.
-	TaskType             *string                   `json:"TaskType,omitempty"`
-	Guid                 *IaasUcsdInfoRelationship `json:"Guid,omitempty"`
+	TaskType             *string                          `json:"TaskType,omitempty"`
+	Guid                 NullableIaasUcsdInfoRelationship `json:"Guid,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *IaasMostRunTasks) SetObjectType(v string) {
 
 // GetTaskCategory returns the TaskCategory field value if set, zero value otherwise.
 func (o *IaasMostRunTasks) GetTaskCategory() string {
-	if o == nil || o.TaskCategory == nil {
+	if o == nil || IsNil(o.TaskCategory) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *IaasMostRunTasks) GetTaskCategory() string {
 // GetTaskCategoryOk returns a tuple with the TaskCategory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasMostRunTasks) GetTaskCategoryOk() (*string, bool) {
-	if o == nil || o.TaskCategory == nil {
+	if o == nil || IsNil(o.TaskCategory) {
 		return nil, false
 	}
 	return o.TaskCategory, true
@@ -129,7 +133,7 @@ func (o *IaasMostRunTasks) GetTaskCategoryOk() (*string, bool) {
 
 // HasTaskCategory returns a boolean if a field has been set.
 func (o *IaasMostRunTasks) HasTaskCategory() bool {
-	if o != nil && o.TaskCategory != nil {
+	if o != nil && !IsNil(o.TaskCategory) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *IaasMostRunTasks) SetTaskCategory(v string) {
 
 // GetTaskExecutionCount returns the TaskExecutionCount field value if set, zero value otherwise.
 func (o *IaasMostRunTasks) GetTaskExecutionCount() int64 {
-	if o == nil || o.TaskExecutionCount == nil {
+	if o == nil || IsNil(o.TaskExecutionCount) {
 		var ret int64
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *IaasMostRunTasks) GetTaskExecutionCount() int64 {
 // GetTaskExecutionCountOk returns a tuple with the TaskExecutionCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasMostRunTasks) GetTaskExecutionCountOk() (*int64, bool) {
-	if o == nil || o.TaskExecutionCount == nil {
+	if o == nil || IsNil(o.TaskExecutionCount) {
 		return nil, false
 	}
 	return o.TaskExecutionCount, true
@@ -161,7 +165,7 @@ func (o *IaasMostRunTasks) GetTaskExecutionCountOk() (*int64, bool) {
 
 // HasTaskExecutionCount returns a boolean if a field has been set.
 func (o *IaasMostRunTasks) HasTaskExecutionCount() bool {
-	if o != nil && o.TaskExecutionCount != nil {
+	if o != nil && !IsNil(o.TaskExecutionCount) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *IaasMostRunTasks) SetTaskExecutionCount(v int64) {
 
 // GetTaskName returns the TaskName field value if set, zero value otherwise.
 func (o *IaasMostRunTasks) GetTaskName() string {
-	if o == nil || o.TaskName == nil {
+	if o == nil || IsNil(o.TaskName) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *IaasMostRunTasks) GetTaskName() string {
 // GetTaskNameOk returns a tuple with the TaskName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasMostRunTasks) GetTaskNameOk() (*string, bool) {
-	if o == nil || o.TaskName == nil {
+	if o == nil || IsNil(o.TaskName) {
 		return nil, false
 	}
 	return o.TaskName, true
@@ -193,7 +197,7 @@ func (o *IaasMostRunTasks) GetTaskNameOk() (*string, bool) {
 
 // HasTaskName returns a boolean if a field has been set.
 func (o *IaasMostRunTasks) HasTaskName() bool {
-	if o != nil && o.TaskName != nil {
+	if o != nil && !IsNil(o.TaskName) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *IaasMostRunTasks) SetTaskName(v string) {
 
 // GetTaskType returns the TaskType field value if set, zero value otherwise.
 func (o *IaasMostRunTasks) GetTaskType() string {
-	if o == nil || o.TaskType == nil {
+	if o == nil || IsNil(o.TaskType) {
 		var ret string
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *IaasMostRunTasks) GetTaskType() string {
 // GetTaskTypeOk returns a tuple with the TaskType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasMostRunTasks) GetTaskTypeOk() (*string, bool) {
-	if o == nil || o.TaskType == nil {
+	if o == nil || IsNil(o.TaskType) {
 		return nil, false
 	}
 	return o.TaskType, true
@@ -225,7 +229,7 @@ func (o *IaasMostRunTasks) GetTaskTypeOk() (*string, bool) {
 
 // HasTaskType returns a boolean if a field has been set.
 func (o *IaasMostRunTasks) HasTaskType() bool {
-	if o != nil && o.TaskType != nil {
+	if o != nil && !IsNil(o.TaskType) {
 		return true
 	}
 
@@ -237,78 +241,115 @@ func (o *IaasMostRunTasks) SetTaskType(v string) {
 	o.TaskType = &v
 }
 
-// GetGuid returns the Guid field value if set, zero value otherwise.
+// GetGuid returns the Guid field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IaasMostRunTasks) GetGuid() IaasUcsdInfoRelationship {
-	if o == nil || o.Guid == nil {
+	if o == nil || IsNil(o.Guid.Get()) {
 		var ret IaasUcsdInfoRelationship
 		return ret
 	}
-	return *o.Guid
+	return *o.Guid.Get()
 }
 
 // GetGuidOk returns a tuple with the Guid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasMostRunTasks) GetGuidOk() (*IaasUcsdInfoRelationship, bool) {
-	if o == nil || o.Guid == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Guid, true
+	return o.Guid.Get(), o.Guid.IsSet()
 }
 
 // HasGuid returns a boolean if a field has been set.
 func (o *IaasMostRunTasks) HasGuid() bool {
-	if o != nil && o.Guid != nil {
+	if o != nil && o.Guid.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGuid gets a reference to the given IaasUcsdInfoRelationship and assigns it to the Guid field.
+// SetGuid gets a reference to the given NullableIaasUcsdInfoRelationship and assigns it to the Guid field.
 func (o *IaasMostRunTasks) SetGuid(v IaasUcsdInfoRelationship) {
-	o.Guid = &v
+	o.Guid.Set(&v)
+}
+
+// SetGuidNil sets the value for Guid to be an explicit nil
+func (o *IaasMostRunTasks) SetGuidNil() {
+	o.Guid.Set(nil)
+}
+
+// UnsetGuid ensures that no value is present for Guid, not even an explicit nil
+func (o *IaasMostRunTasks) UnsetGuid() {
+	o.Guid.Unset()
 }
 
 func (o IaasMostRunTasks) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IaasMostRunTasks) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.TaskCategory != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.TaskCategory) {
 		toSerialize["TaskCategory"] = o.TaskCategory
 	}
-	if o.TaskExecutionCount != nil {
+	if !IsNil(o.TaskExecutionCount) {
 		toSerialize["TaskExecutionCount"] = o.TaskExecutionCount
 	}
-	if o.TaskName != nil {
+	if !IsNil(o.TaskName) {
 		toSerialize["TaskName"] = o.TaskName
 	}
-	if o.TaskType != nil {
+	if !IsNil(o.TaskType) {
 		toSerialize["TaskType"] = o.TaskType
 	}
-	if o.Guid != nil {
-		toSerialize["Guid"] = o.Guid
+	if o.Guid.IsSet() {
+		toSerialize["Guid"] = o.Guid.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IaasMostRunTasks) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IaasMostRunTasks) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IaasMostRunTasksWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -321,13 +362,13 @@ func (o *IaasMostRunTasks) UnmarshalJSON(bytes []byte) (err error) {
 		// Name of the task executed in UCSD.
 		TaskName *string `json:"TaskName,omitempty"`
 		// Type of the task whether it is system task or custom task.
-		TaskType *string                   `json:"TaskType,omitempty"`
-		Guid     *IaasUcsdInfoRelationship `json:"Guid,omitempty"`
+		TaskType *string                          `json:"TaskType,omitempty"`
+		Guid     NullableIaasUcsdInfoRelationship `json:"Guid,omitempty"`
 	}
 
 	varIaasMostRunTasksWithoutEmbeddedStruct := IaasMostRunTasksWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIaasMostRunTasksWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIaasMostRunTasksWithoutEmbeddedStruct)
 	if err == nil {
 		varIaasMostRunTasks := _IaasMostRunTasks{}
 		varIaasMostRunTasks.ClassId = varIaasMostRunTasksWithoutEmbeddedStruct.ClassId
@@ -344,7 +385,7 @@ func (o *IaasMostRunTasks) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIaasMostRunTasks := _IaasMostRunTasks{}
 
-	err = json.Unmarshal(bytes, &varIaasMostRunTasks)
+	err = json.Unmarshal(data, &varIaasMostRunTasks)
 	if err == nil {
 		o.MoBaseMo = varIaasMostRunTasks.MoBaseMo
 	} else {
@@ -353,7 +394,7 @@ func (o *IaasMostRunTasks) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "TaskCategory")

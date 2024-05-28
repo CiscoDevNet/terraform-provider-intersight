@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageBatteryBackupUnit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageBatteryBackupUnit{}
 
 // StorageBatteryBackupUnit Information of Battery Backup Unit in the storage controller.
 type StorageBatteryBackupUnit struct {
@@ -73,10 +77,10 @@ type StorageBatteryBackupUnit struct {
 	// This refers to the type of the battery backup unit of the storage controller.
 	Type *string `json:"Type,omitempty"`
 	// This holds the volatage (in Volts) of the battery backup unit of the storage controller.
-	VoltageInVolts       *string                              `json:"VoltageInVolts,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	StorageController    *StorageControllerRelationship       `json:"StorageController,omitempty"`
+	VoltageInVolts       *string                                     `json:"VoltageInVolts,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	StorageController    NullableStorageControllerRelationship       `json:"StorageController,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -155,7 +159,7 @@ func (o *StorageBatteryBackupUnit) SetObjectType(v string) {
 
 // GetCapacitanceInPercent returns the CapacitanceInPercent field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetCapacitanceInPercent() int64 {
-	if o == nil || o.CapacitanceInPercent == nil {
+	if o == nil || IsNil(o.CapacitanceInPercent) {
 		var ret int64
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *StorageBatteryBackupUnit) GetCapacitanceInPercent() int64 {
 // GetCapacitanceInPercentOk returns a tuple with the CapacitanceInPercent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetCapacitanceInPercentOk() (*int64, bool) {
-	if o == nil || o.CapacitanceInPercent == nil {
+	if o == nil || IsNil(o.CapacitanceInPercent) {
 		return nil, false
 	}
 	return o.CapacitanceInPercent, true
@@ -173,7 +177,7 @@ func (o *StorageBatteryBackupUnit) GetCapacitanceInPercentOk() (*int64, bool) {
 
 // HasCapacitanceInPercent returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasCapacitanceInPercent() bool {
-	if o != nil && o.CapacitanceInPercent != nil {
+	if o != nil && !IsNil(o.CapacitanceInPercent) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *StorageBatteryBackupUnit) SetCapacitanceInPercent(v int64) {
 
 // GetChargingState returns the ChargingState field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetChargingState() string {
-	if o == nil || o.ChargingState == nil {
+	if o == nil || IsNil(o.ChargingState) {
 		var ret string
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *StorageBatteryBackupUnit) GetChargingState() string {
 // GetChargingStateOk returns a tuple with the ChargingState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetChargingStateOk() (*string, bool) {
-	if o == nil || o.ChargingState == nil {
+	if o == nil || IsNil(o.ChargingState) {
 		return nil, false
 	}
 	return o.ChargingState, true
@@ -205,7 +209,7 @@ func (o *StorageBatteryBackupUnit) GetChargingStateOk() (*string, bool) {
 
 // HasChargingState returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasChargingState() bool {
-	if o != nil && o.ChargingState != nil {
+	if o != nil && !IsNil(o.ChargingState) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *StorageBatteryBackupUnit) SetChargingState(v string) {
 
 // GetCurrentInAmps returns the CurrentInAmps field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetCurrentInAmps() float32 {
-	if o == nil || o.CurrentInAmps == nil {
+	if o == nil || IsNil(o.CurrentInAmps) {
 		var ret float32
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *StorageBatteryBackupUnit) GetCurrentInAmps() float32 {
 // GetCurrentInAmpsOk returns a tuple with the CurrentInAmps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetCurrentInAmpsOk() (*float32, bool) {
-	if o == nil || o.CurrentInAmps == nil {
+	if o == nil || IsNil(o.CurrentInAmps) {
 		return nil, false
 	}
 	return o.CurrentInAmps, true
@@ -237,7 +241,7 @@ func (o *StorageBatteryBackupUnit) GetCurrentInAmpsOk() (*float32, bool) {
 
 // HasCurrentInAmps returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasCurrentInAmps() bool {
-	if o != nil && o.CurrentInAmps != nil {
+	if o != nil && !IsNil(o.CurrentInAmps) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *StorageBatteryBackupUnit) SetCurrentInAmps(v float32) {
 
 // GetDesignCapacityInJoules returns the DesignCapacityInJoules field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetDesignCapacityInJoules() string {
-	if o == nil || o.DesignCapacityInJoules == nil {
+	if o == nil || IsNil(o.DesignCapacityInJoules) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *StorageBatteryBackupUnit) GetDesignCapacityInJoules() string {
 // GetDesignCapacityInJoulesOk returns a tuple with the DesignCapacityInJoules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetDesignCapacityInJoulesOk() (*string, bool) {
-	if o == nil || o.DesignCapacityInJoules == nil {
+	if o == nil || IsNil(o.DesignCapacityInJoules) {
 		return nil, false
 	}
 	return o.DesignCapacityInJoules, true
@@ -269,7 +273,7 @@ func (o *StorageBatteryBackupUnit) GetDesignCapacityInJoulesOk() (*string, bool)
 
 // HasDesignCapacityInJoules returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasDesignCapacityInJoules() bool {
-	if o != nil && o.DesignCapacityInJoules != nil {
+	if o != nil && !IsNil(o.DesignCapacityInJoules) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *StorageBatteryBackupUnit) SetDesignCapacityInJoules(v string) {
 
 // GetDesignVoltageInVolts returns the DesignVoltageInVolts field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetDesignVoltageInVolts() float32 {
-	if o == nil || o.DesignVoltageInVolts == nil {
+	if o == nil || IsNil(o.DesignVoltageInVolts) {
 		var ret float32
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *StorageBatteryBackupUnit) GetDesignVoltageInVolts() float32 {
 // GetDesignVoltageInVoltsOk returns a tuple with the DesignVoltageInVolts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetDesignVoltageInVoltsOk() (*float32, bool) {
-	if o == nil || o.DesignVoltageInVolts == nil {
+	if o == nil || IsNil(o.DesignVoltageInVolts) {
 		return nil, false
 	}
 	return o.DesignVoltageInVolts, true
@@ -301,7 +305,7 @@ func (o *StorageBatteryBackupUnit) GetDesignVoltageInVoltsOk() (*float32, bool) 
 
 // HasDesignVoltageInVolts returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasDesignVoltageInVolts() bool {
-	if o != nil && o.DesignVoltageInVolts != nil {
+	if o != nil && !IsNil(o.DesignVoltageInVolts) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *StorageBatteryBackupUnit) SetDesignVoltageInVolts(v float32) {
 
 // GetDeviceName returns the DeviceName field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetDeviceName() string {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *StorageBatteryBackupUnit) GetDeviceName() string {
 // GetDeviceNameOk returns a tuple with the DeviceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetDeviceNameOk() (*string, bool) {
-	if o == nil || o.DeviceName == nil {
+	if o == nil || IsNil(o.DeviceName) {
 		return nil, false
 	}
 	return o.DeviceName, true
@@ -333,7 +337,7 @@ func (o *StorageBatteryBackupUnit) GetDeviceNameOk() (*string, bool) {
 
 // HasDeviceName returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasDeviceName() bool {
-	if o != nil && o.DeviceName != nil {
+	if o != nil && !IsNil(o.DeviceName) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *StorageBatteryBackupUnit) SetDeviceName(v string) {
 
 // GetIsBatteryPresent returns the IsBatteryPresent field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetIsBatteryPresent() bool {
-	if o == nil || o.IsBatteryPresent == nil {
+	if o == nil || IsNil(o.IsBatteryPresent) {
 		var ret bool
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *StorageBatteryBackupUnit) GetIsBatteryPresent() bool {
 // GetIsBatteryPresentOk returns a tuple with the IsBatteryPresent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetIsBatteryPresentOk() (*bool, bool) {
-	if o == nil || o.IsBatteryPresent == nil {
+	if o == nil || IsNil(o.IsBatteryPresent) {
 		return nil, false
 	}
 	return o.IsBatteryPresent, true
@@ -365,7 +369,7 @@ func (o *StorageBatteryBackupUnit) GetIsBatteryPresentOk() (*bool, bool) {
 
 // HasIsBatteryPresent returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasIsBatteryPresent() bool {
-	if o != nil && o.IsBatteryPresent != nil {
+	if o != nil && !IsNil(o.IsBatteryPresent) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *StorageBatteryBackupUnit) SetIsBatteryPresent(v bool) {
 
 // GetIsCapacitor returns the IsCapacitor field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetIsCapacitor() bool {
-	if o == nil || o.IsCapacitor == nil {
+	if o == nil || IsNil(o.IsCapacitor) {
 		var ret bool
 		return ret
 	}
@@ -389,7 +393,7 @@ func (o *StorageBatteryBackupUnit) GetIsCapacitor() bool {
 // GetIsCapacitorOk returns a tuple with the IsCapacitor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetIsCapacitorOk() (*bool, bool) {
-	if o == nil || o.IsCapacitor == nil {
+	if o == nil || IsNil(o.IsCapacitor) {
 		return nil, false
 	}
 	return o.IsCapacitor, true
@@ -397,7 +401,7 @@ func (o *StorageBatteryBackupUnit) GetIsCapacitorOk() (*bool, bool) {
 
 // HasIsCapacitor returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasIsCapacitor() bool {
-	if o != nil && o.IsCapacitor != nil {
+	if o != nil && !IsNil(o.IsCapacitor) {
 		return true
 	}
 
@@ -411,7 +415,7 @@ func (o *StorageBatteryBackupUnit) SetIsCapacitor(v bool) {
 
 // GetIsLearnCycleRequested returns the IsLearnCycleRequested field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetIsLearnCycleRequested() bool {
-	if o == nil || o.IsLearnCycleRequested == nil {
+	if o == nil || IsNil(o.IsLearnCycleRequested) {
 		var ret bool
 		return ret
 	}
@@ -421,7 +425,7 @@ func (o *StorageBatteryBackupUnit) GetIsLearnCycleRequested() bool {
 // GetIsLearnCycleRequestedOk returns a tuple with the IsLearnCycleRequested field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetIsLearnCycleRequestedOk() (*bool, bool) {
-	if o == nil || o.IsLearnCycleRequested == nil {
+	if o == nil || IsNil(o.IsLearnCycleRequested) {
 		return nil, false
 	}
 	return o.IsLearnCycleRequested, true
@@ -429,7 +433,7 @@ func (o *StorageBatteryBackupUnit) GetIsLearnCycleRequestedOk() (*bool, bool) {
 
 // HasIsLearnCycleRequested returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasIsLearnCycleRequested() bool {
-	if o != nil && o.IsLearnCycleRequested != nil {
+	if o != nil && !IsNil(o.IsLearnCycleRequested) {
 		return true
 	}
 
@@ -443,7 +447,7 @@ func (o *StorageBatteryBackupUnit) SetIsLearnCycleRequested(v bool) {
 
 // GetIsLearnCycleTransparent returns the IsLearnCycleTransparent field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetIsLearnCycleTransparent() bool {
-	if o == nil || o.IsLearnCycleTransparent == nil {
+	if o == nil || IsNil(o.IsLearnCycleTransparent) {
 		var ret bool
 		return ret
 	}
@@ -453,7 +457,7 @@ func (o *StorageBatteryBackupUnit) GetIsLearnCycleTransparent() bool {
 // GetIsLearnCycleTransparentOk returns a tuple with the IsLearnCycleTransparent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetIsLearnCycleTransparentOk() (*bool, bool) {
-	if o == nil || o.IsLearnCycleTransparent == nil {
+	if o == nil || IsNil(o.IsLearnCycleTransparent) {
 		return nil, false
 	}
 	return o.IsLearnCycleTransparent, true
@@ -461,7 +465,7 @@ func (o *StorageBatteryBackupUnit) GetIsLearnCycleTransparentOk() (*bool, bool) 
 
 // HasIsLearnCycleTransparent returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasIsLearnCycleTransparent() bool {
-	if o != nil && o.IsLearnCycleTransparent != nil {
+	if o != nil && !IsNil(o.IsLearnCycleTransparent) {
 		return true
 	}
 
@@ -475,7 +479,7 @@ func (o *StorageBatteryBackupUnit) SetIsLearnCycleTransparent(v bool) {
 
 // GetIsTemperatureHigh returns the IsTemperatureHigh field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetIsTemperatureHigh() bool {
-	if o == nil || o.IsTemperatureHigh == nil {
+	if o == nil || IsNil(o.IsTemperatureHigh) {
 		var ret bool
 		return ret
 	}
@@ -485,7 +489,7 @@ func (o *StorageBatteryBackupUnit) GetIsTemperatureHigh() bool {
 // GetIsTemperatureHighOk returns a tuple with the IsTemperatureHigh field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetIsTemperatureHighOk() (*bool, bool) {
-	if o == nil || o.IsTemperatureHigh == nil {
+	if o == nil || IsNil(o.IsTemperatureHigh) {
 		return nil, false
 	}
 	return o.IsTemperatureHigh, true
@@ -493,7 +497,7 @@ func (o *StorageBatteryBackupUnit) GetIsTemperatureHighOk() (*bool, bool) {
 
 // HasIsTemperatureHigh returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasIsTemperatureHigh() bool {
-	if o != nil && o.IsTemperatureHigh != nil {
+	if o != nil && !IsNil(o.IsTemperatureHigh) {
 		return true
 	}
 
@@ -507,7 +511,7 @@ func (o *StorageBatteryBackupUnit) SetIsTemperatureHigh(v bool) {
 
 // GetIsVoltageLow returns the IsVoltageLow field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetIsVoltageLow() bool {
-	if o == nil || o.IsVoltageLow == nil {
+	if o == nil || IsNil(o.IsVoltageLow) {
 		var ret bool
 		return ret
 	}
@@ -517,7 +521,7 @@ func (o *StorageBatteryBackupUnit) GetIsVoltageLow() bool {
 // GetIsVoltageLowOk returns a tuple with the IsVoltageLow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetIsVoltageLowOk() (*bool, bool) {
-	if o == nil || o.IsVoltageLow == nil {
+	if o == nil || IsNil(o.IsVoltageLow) {
 		return nil, false
 	}
 	return o.IsVoltageLow, true
@@ -525,7 +529,7 @@ func (o *StorageBatteryBackupUnit) GetIsVoltageLowOk() (*bool, bool) {
 
 // HasIsVoltageLow returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasIsVoltageLow() bool {
-	if o != nil && o.IsVoltageLow != nil {
+	if o != nil && !IsNil(o.IsVoltageLow) {
 		return true
 	}
 
@@ -539,7 +543,7 @@ func (o *StorageBatteryBackupUnit) SetIsVoltageLow(v bool) {
 
 // GetLearnCycleProgressEndTimeStamp returns the LearnCycleProgressEndTimeStamp field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetLearnCycleProgressEndTimeStamp() string {
-	if o == nil || o.LearnCycleProgressEndTimeStamp == nil {
+	if o == nil || IsNil(o.LearnCycleProgressEndTimeStamp) {
 		var ret string
 		return ret
 	}
@@ -549,7 +553,7 @@ func (o *StorageBatteryBackupUnit) GetLearnCycleProgressEndTimeStamp() string {
 // GetLearnCycleProgressEndTimeStampOk returns a tuple with the LearnCycleProgressEndTimeStamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetLearnCycleProgressEndTimeStampOk() (*string, bool) {
-	if o == nil || o.LearnCycleProgressEndTimeStamp == nil {
+	if o == nil || IsNil(o.LearnCycleProgressEndTimeStamp) {
 		return nil, false
 	}
 	return o.LearnCycleProgressEndTimeStamp, true
@@ -557,7 +561,7 @@ func (o *StorageBatteryBackupUnit) GetLearnCycleProgressEndTimeStampOk() (*strin
 
 // HasLearnCycleProgressEndTimeStamp returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasLearnCycleProgressEndTimeStamp() bool {
-	if o != nil && o.LearnCycleProgressEndTimeStamp != nil {
+	if o != nil && !IsNil(o.LearnCycleProgressEndTimeStamp) {
 		return true
 	}
 
@@ -571,7 +575,7 @@ func (o *StorageBatteryBackupUnit) SetLearnCycleProgressEndTimeStamp(v string) {
 
 // GetLearnCycleProgressStartTimeStamp returns the LearnCycleProgressStartTimeStamp field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetLearnCycleProgressStartTimeStamp() string {
-	if o == nil || o.LearnCycleProgressStartTimeStamp == nil {
+	if o == nil || IsNil(o.LearnCycleProgressStartTimeStamp) {
 		var ret string
 		return ret
 	}
@@ -581,7 +585,7 @@ func (o *StorageBatteryBackupUnit) GetLearnCycleProgressStartTimeStamp() string 
 // GetLearnCycleProgressStartTimeStampOk returns a tuple with the LearnCycleProgressStartTimeStamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetLearnCycleProgressStartTimeStampOk() (*string, bool) {
-	if o == nil || o.LearnCycleProgressStartTimeStamp == nil {
+	if o == nil || IsNil(o.LearnCycleProgressStartTimeStamp) {
 		return nil, false
 	}
 	return o.LearnCycleProgressStartTimeStamp, true
@@ -589,7 +593,7 @@ func (o *StorageBatteryBackupUnit) GetLearnCycleProgressStartTimeStampOk() (*str
 
 // HasLearnCycleProgressStartTimeStamp returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasLearnCycleProgressStartTimeStamp() bool {
-	if o != nil && o.LearnCycleProgressStartTimeStamp != nil {
+	if o != nil && !IsNil(o.LearnCycleProgressStartTimeStamp) {
 		return true
 	}
 
@@ -603,7 +607,7 @@ func (o *StorageBatteryBackupUnit) SetLearnCycleProgressStartTimeStamp(v string)
 
 // GetLearnCycleProgressStatus returns the LearnCycleProgressStatus field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetLearnCycleProgressStatus() string {
-	if o == nil || o.LearnCycleProgressStatus == nil {
+	if o == nil || IsNil(o.LearnCycleProgressStatus) {
 		var ret string
 		return ret
 	}
@@ -613,7 +617,7 @@ func (o *StorageBatteryBackupUnit) GetLearnCycleProgressStatus() string {
 // GetLearnCycleProgressStatusOk returns a tuple with the LearnCycleProgressStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetLearnCycleProgressStatusOk() (*string, bool) {
-	if o == nil || o.LearnCycleProgressStatus == nil {
+	if o == nil || IsNil(o.LearnCycleProgressStatus) {
 		return nil, false
 	}
 	return o.LearnCycleProgressStatus, true
@@ -621,7 +625,7 @@ func (o *StorageBatteryBackupUnit) GetLearnCycleProgressStatusOk() (*string, boo
 
 // HasLearnCycleProgressStatus returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasLearnCycleProgressStatus() bool {
-	if o != nil && o.LearnCycleProgressStatus != nil {
+	if o != nil && !IsNil(o.LearnCycleProgressStatus) {
 		return true
 	}
 
@@ -635,7 +639,7 @@ func (o *StorageBatteryBackupUnit) SetLearnCycleProgressStatus(v string) {
 
 // GetLearnMode returns the LearnMode field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetLearnMode() string {
-	if o == nil || o.LearnMode == nil {
+	if o == nil || IsNil(o.LearnMode) {
 		var ret string
 		return ret
 	}
@@ -645,7 +649,7 @@ func (o *StorageBatteryBackupUnit) GetLearnMode() string {
 // GetLearnModeOk returns a tuple with the LearnMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetLearnModeOk() (*string, bool) {
-	if o == nil || o.LearnMode == nil {
+	if o == nil || IsNil(o.LearnMode) {
 		return nil, false
 	}
 	return o.LearnMode, true
@@ -653,7 +657,7 @@ func (o *StorageBatteryBackupUnit) GetLearnModeOk() (*string, bool) {
 
 // HasLearnMode returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasLearnMode() bool {
-	if o != nil && o.LearnMode != nil {
+	if o != nil && !IsNil(o.LearnMode) {
 		return true
 	}
 
@@ -667,7 +671,7 @@ func (o *StorageBatteryBackupUnit) SetLearnMode(v string) {
 
 // GetManufacturingDate returns the ManufacturingDate field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetManufacturingDate() string {
-	if o == nil || o.ManufacturingDate == nil {
+	if o == nil || IsNil(o.ManufacturingDate) {
 		var ret string
 		return ret
 	}
@@ -677,7 +681,7 @@ func (o *StorageBatteryBackupUnit) GetManufacturingDate() string {
 // GetManufacturingDateOk returns a tuple with the ManufacturingDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetManufacturingDateOk() (*string, bool) {
-	if o == nil || o.ManufacturingDate == nil {
+	if o == nil || IsNil(o.ManufacturingDate) {
 		return nil, false
 	}
 	return o.ManufacturingDate, true
@@ -685,7 +689,7 @@ func (o *StorageBatteryBackupUnit) GetManufacturingDateOk() (*string, bool) {
 
 // HasManufacturingDate returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasManufacturingDate() bool {
-	if o != nil && o.ManufacturingDate != nil {
+	if o != nil && !IsNil(o.ManufacturingDate) {
 		return true
 	}
 
@@ -699,7 +703,7 @@ func (o *StorageBatteryBackupUnit) SetManufacturingDate(v string) {
 
 // GetModuleVersion returns the ModuleVersion field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetModuleVersion() string {
-	if o == nil || o.ModuleVersion == nil {
+	if o == nil || IsNil(o.ModuleVersion) {
 		var ret string
 		return ret
 	}
@@ -709,7 +713,7 @@ func (o *StorageBatteryBackupUnit) GetModuleVersion() string {
 // GetModuleVersionOk returns a tuple with the ModuleVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetModuleVersionOk() (*string, bool) {
-	if o == nil || o.ModuleVersion == nil {
+	if o == nil || IsNil(o.ModuleVersion) {
 		return nil, false
 	}
 	return o.ModuleVersion, true
@@ -717,7 +721,7 @@ func (o *StorageBatteryBackupUnit) GetModuleVersionOk() (*string, bool) {
 
 // HasModuleVersion returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasModuleVersion() bool {
-	if o != nil && o.ModuleVersion != nil {
+	if o != nil && !IsNil(o.ModuleVersion) {
 		return true
 	}
 
@@ -731,7 +735,7 @@ func (o *StorageBatteryBackupUnit) SetModuleVersion(v string) {
 
 // GetNextLearnCycleTimeStamp returns the NextLearnCycleTimeStamp field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetNextLearnCycleTimeStamp() string {
-	if o == nil || o.NextLearnCycleTimeStamp == nil {
+	if o == nil || IsNil(o.NextLearnCycleTimeStamp) {
 		var ret string
 		return ret
 	}
@@ -741,7 +745,7 @@ func (o *StorageBatteryBackupUnit) GetNextLearnCycleTimeStamp() string {
 // GetNextLearnCycleTimeStampOk returns a tuple with the NextLearnCycleTimeStamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetNextLearnCycleTimeStampOk() (*string, bool) {
-	if o == nil || o.NextLearnCycleTimeStamp == nil {
+	if o == nil || IsNil(o.NextLearnCycleTimeStamp) {
 		return nil, false
 	}
 	return o.NextLearnCycleTimeStamp, true
@@ -749,7 +753,7 @@ func (o *StorageBatteryBackupUnit) GetNextLearnCycleTimeStampOk() (*string, bool
 
 // HasNextLearnCycleTimeStamp returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasNextLearnCycleTimeStamp() bool {
-	if o != nil && o.NextLearnCycleTimeStamp != nil {
+	if o != nil && !IsNil(o.NextLearnCycleTimeStamp) {
 		return true
 	}
 
@@ -763,7 +767,7 @@ func (o *StorageBatteryBackupUnit) SetNextLearnCycleTimeStamp(v string) {
 
 // GetPackEnergyInJoules returns the PackEnergyInJoules field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetPackEnergyInJoules() string {
-	if o == nil || o.PackEnergyInJoules == nil {
+	if o == nil || IsNil(o.PackEnergyInJoules) {
 		var ret string
 		return ret
 	}
@@ -773,7 +777,7 @@ func (o *StorageBatteryBackupUnit) GetPackEnergyInJoules() string {
 // GetPackEnergyInJoulesOk returns a tuple with the PackEnergyInJoules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetPackEnergyInJoulesOk() (*string, bool) {
-	if o == nil || o.PackEnergyInJoules == nil {
+	if o == nil || IsNil(o.PackEnergyInJoules) {
 		return nil, false
 	}
 	return o.PackEnergyInJoules, true
@@ -781,7 +785,7 @@ func (o *StorageBatteryBackupUnit) GetPackEnergyInJoulesOk() (*string, bool) {
 
 // HasPackEnergyInJoules returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasPackEnergyInJoules() bool {
-	if o != nil && o.PackEnergyInJoules != nil {
+	if o != nil && !IsNil(o.PackEnergyInJoules) {
 		return true
 	}
 
@@ -795,7 +799,7 @@ func (o *StorageBatteryBackupUnit) SetPackEnergyInJoules(v string) {
 
 // GetRemainingPoolSpaceInPercent returns the RemainingPoolSpaceInPercent field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetRemainingPoolSpaceInPercent() int64 {
-	if o == nil || o.RemainingPoolSpaceInPercent == nil {
+	if o == nil || IsNil(o.RemainingPoolSpaceInPercent) {
 		var ret int64
 		return ret
 	}
@@ -805,7 +809,7 @@ func (o *StorageBatteryBackupUnit) GetRemainingPoolSpaceInPercent() int64 {
 // GetRemainingPoolSpaceInPercentOk returns a tuple with the RemainingPoolSpaceInPercent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetRemainingPoolSpaceInPercentOk() (*int64, bool) {
-	if o == nil || o.RemainingPoolSpaceInPercent == nil {
+	if o == nil || IsNil(o.RemainingPoolSpaceInPercent) {
 		return nil, false
 	}
 	return o.RemainingPoolSpaceInPercent, true
@@ -813,7 +817,7 @@ func (o *StorageBatteryBackupUnit) GetRemainingPoolSpaceInPercentOk() (*int64, b
 
 // HasRemainingPoolSpaceInPercent returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasRemainingPoolSpaceInPercent() bool {
-	if o != nil && o.RemainingPoolSpaceInPercent != nil {
+	if o != nil && !IsNil(o.RemainingPoolSpaceInPercent) {
 		return true
 	}
 
@@ -827,7 +831,7 @@ func (o *StorageBatteryBackupUnit) SetRemainingPoolSpaceInPercent(v int64) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -837,7 +841,7 @@ func (o *StorageBatteryBackupUnit) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -845,7 +849,7 @@ func (o *StorageBatteryBackupUnit) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -859,7 +863,7 @@ func (o *StorageBatteryBackupUnit) SetStatus(v string) {
 
 // GetTemperatureInCel returns the TemperatureInCel field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetTemperatureInCel() int64 {
-	if o == nil || o.TemperatureInCel == nil {
+	if o == nil || IsNil(o.TemperatureInCel) {
 		var ret int64
 		return ret
 	}
@@ -869,7 +873,7 @@ func (o *StorageBatteryBackupUnit) GetTemperatureInCel() int64 {
 // GetTemperatureInCelOk returns a tuple with the TemperatureInCel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetTemperatureInCelOk() (*int64, bool) {
-	if o == nil || o.TemperatureInCel == nil {
+	if o == nil || IsNil(o.TemperatureInCel) {
 		return nil, false
 	}
 	return o.TemperatureInCel, true
@@ -877,7 +881,7 @@ func (o *StorageBatteryBackupUnit) GetTemperatureInCelOk() (*int64, bool) {
 
 // HasTemperatureInCel returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasTemperatureInCel() bool {
-	if o != nil && o.TemperatureInCel != nil {
+	if o != nil && !IsNil(o.TemperatureInCel) {
 		return true
 	}
 
@@ -891,7 +895,7 @@ func (o *StorageBatteryBackupUnit) SetTemperatureInCel(v int64) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -901,7 +905,7 @@ func (o *StorageBatteryBackupUnit) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -909,7 +913,7 @@ func (o *StorageBatteryBackupUnit) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -923,7 +927,7 @@ func (o *StorageBatteryBackupUnit) SetType(v string) {
 
 // GetVoltageInVolts returns the VoltageInVolts field value if set, zero value otherwise.
 func (o *StorageBatteryBackupUnit) GetVoltageInVolts() string {
-	if o == nil || o.VoltageInVolts == nil {
+	if o == nil || IsNil(o.VoltageInVolts) {
 		var ret string
 		return ret
 	}
@@ -933,7 +937,7 @@ func (o *StorageBatteryBackupUnit) GetVoltageInVolts() string {
 // GetVoltageInVoltsOk returns a tuple with the VoltageInVolts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageBatteryBackupUnit) GetVoltageInVoltsOk() (*string, bool) {
-	if o == nil || o.VoltageInVolts == nil {
+	if o == nil || IsNil(o.VoltageInVolts) {
 		return nil, false
 	}
 	return o.VoltageInVolts, true
@@ -941,7 +945,7 @@ func (o *StorageBatteryBackupUnit) GetVoltageInVoltsOk() (*string, bool) {
 
 // HasVoltageInVolts returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasVoltageInVolts() bool {
-	if o != nil && o.VoltageInVolts != nil {
+	if o != nil && !IsNil(o.VoltageInVolts) {
 		return true
 	}
 
@@ -953,211 +957,270 @@ func (o *StorageBatteryBackupUnit) SetVoltageInVolts(v string) {
 	o.VoltageInVolts = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageBatteryBackupUnit) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageBatteryBackupUnit) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *StorageBatteryBackupUnit) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *StorageBatteryBackupUnit) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *StorageBatteryBackupUnit) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageBatteryBackupUnit) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageBatteryBackupUnit) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageBatteryBackupUnit) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetStorageController returns the StorageController field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageBatteryBackupUnit) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageBatteryBackupUnit) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetStorageController returns the StorageController field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageBatteryBackupUnit) GetStorageController() StorageControllerRelationship {
-	if o == nil || o.StorageController == nil {
+	if o == nil || IsNil(o.StorageController.Get()) {
 		var ret StorageControllerRelationship
 		return ret
 	}
-	return *o.StorageController
+	return *o.StorageController.Get()
 }
 
 // GetStorageControllerOk returns a tuple with the StorageController field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageBatteryBackupUnit) GetStorageControllerOk() (*StorageControllerRelationship, bool) {
-	if o == nil || o.StorageController == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageController, true
+	return o.StorageController.Get(), o.StorageController.IsSet()
 }
 
 // HasStorageController returns a boolean if a field has been set.
 func (o *StorageBatteryBackupUnit) HasStorageController() bool {
-	if o != nil && o.StorageController != nil {
+	if o != nil && o.StorageController.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageController gets a reference to the given StorageControllerRelationship and assigns it to the StorageController field.
+// SetStorageController gets a reference to the given NullableStorageControllerRelationship and assigns it to the StorageController field.
 func (o *StorageBatteryBackupUnit) SetStorageController(v StorageControllerRelationship) {
-	o.StorageController = &v
+	o.StorageController.Set(&v)
+}
+
+// SetStorageControllerNil sets the value for StorageController to be an explicit nil
+func (o *StorageBatteryBackupUnit) SetStorageControllerNil() {
+	o.StorageController.Set(nil)
+}
+
+// UnsetStorageController ensures that no value is present for StorageController, not even an explicit nil
+func (o *StorageBatteryBackupUnit) UnsetStorageController() {
+	o.StorageController.Unset()
 }
 
 func (o StorageBatteryBackupUnit) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageBatteryBackupUnit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CapacitanceInPercent != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CapacitanceInPercent) {
 		toSerialize["CapacitanceInPercent"] = o.CapacitanceInPercent
 	}
-	if o.ChargingState != nil {
+	if !IsNil(o.ChargingState) {
 		toSerialize["ChargingState"] = o.ChargingState
 	}
-	if o.CurrentInAmps != nil {
+	if !IsNil(o.CurrentInAmps) {
 		toSerialize["CurrentInAmps"] = o.CurrentInAmps
 	}
-	if o.DesignCapacityInJoules != nil {
+	if !IsNil(o.DesignCapacityInJoules) {
 		toSerialize["DesignCapacityInJoules"] = o.DesignCapacityInJoules
 	}
-	if o.DesignVoltageInVolts != nil {
+	if !IsNil(o.DesignVoltageInVolts) {
 		toSerialize["DesignVoltageInVolts"] = o.DesignVoltageInVolts
 	}
-	if o.DeviceName != nil {
+	if !IsNil(o.DeviceName) {
 		toSerialize["DeviceName"] = o.DeviceName
 	}
-	if o.IsBatteryPresent != nil {
+	if !IsNil(o.IsBatteryPresent) {
 		toSerialize["IsBatteryPresent"] = o.IsBatteryPresent
 	}
-	if o.IsCapacitor != nil {
+	if !IsNil(o.IsCapacitor) {
 		toSerialize["IsCapacitor"] = o.IsCapacitor
 	}
-	if o.IsLearnCycleRequested != nil {
+	if !IsNil(o.IsLearnCycleRequested) {
 		toSerialize["IsLearnCycleRequested"] = o.IsLearnCycleRequested
 	}
-	if o.IsLearnCycleTransparent != nil {
+	if !IsNil(o.IsLearnCycleTransparent) {
 		toSerialize["IsLearnCycleTransparent"] = o.IsLearnCycleTransparent
 	}
-	if o.IsTemperatureHigh != nil {
+	if !IsNil(o.IsTemperatureHigh) {
 		toSerialize["IsTemperatureHigh"] = o.IsTemperatureHigh
 	}
-	if o.IsVoltageLow != nil {
+	if !IsNil(o.IsVoltageLow) {
 		toSerialize["IsVoltageLow"] = o.IsVoltageLow
 	}
-	if o.LearnCycleProgressEndTimeStamp != nil {
+	if !IsNil(o.LearnCycleProgressEndTimeStamp) {
 		toSerialize["LearnCycleProgressEndTimeStamp"] = o.LearnCycleProgressEndTimeStamp
 	}
-	if o.LearnCycleProgressStartTimeStamp != nil {
+	if !IsNil(o.LearnCycleProgressStartTimeStamp) {
 		toSerialize["LearnCycleProgressStartTimeStamp"] = o.LearnCycleProgressStartTimeStamp
 	}
-	if o.LearnCycleProgressStatus != nil {
+	if !IsNil(o.LearnCycleProgressStatus) {
 		toSerialize["LearnCycleProgressStatus"] = o.LearnCycleProgressStatus
 	}
-	if o.LearnMode != nil {
+	if !IsNil(o.LearnMode) {
 		toSerialize["LearnMode"] = o.LearnMode
 	}
-	if o.ManufacturingDate != nil {
+	if !IsNil(o.ManufacturingDate) {
 		toSerialize["ManufacturingDate"] = o.ManufacturingDate
 	}
-	if o.ModuleVersion != nil {
+	if !IsNil(o.ModuleVersion) {
 		toSerialize["ModuleVersion"] = o.ModuleVersion
 	}
-	if o.NextLearnCycleTimeStamp != nil {
+	if !IsNil(o.NextLearnCycleTimeStamp) {
 		toSerialize["NextLearnCycleTimeStamp"] = o.NextLearnCycleTimeStamp
 	}
-	if o.PackEnergyInJoules != nil {
+	if !IsNil(o.PackEnergyInJoules) {
 		toSerialize["PackEnergyInJoules"] = o.PackEnergyInJoules
 	}
-	if o.RemainingPoolSpaceInPercent != nil {
+	if !IsNil(o.RemainingPoolSpaceInPercent) {
 		toSerialize["RemainingPoolSpaceInPercent"] = o.RemainingPoolSpaceInPercent
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.TemperatureInCel != nil {
+	if !IsNil(o.TemperatureInCel) {
 		toSerialize["TemperatureInCel"] = o.TemperatureInCel
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.VoltageInVolts != nil {
+	if !IsNil(o.VoltageInVolts) {
 		toSerialize["VoltageInVolts"] = o.VoltageInVolts
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.StorageController != nil {
-		toSerialize["StorageController"] = o.StorageController
+	if o.StorageController.IsSet() {
+		toSerialize["StorageController"] = o.StorageController.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageBatteryBackupUnit) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageBatteryBackupUnit) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageBatteryBackupUnitWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1212,15 +1275,15 @@ func (o *StorageBatteryBackupUnit) UnmarshalJSON(bytes []byte) (err error) {
 		// This refers to the type of the battery backup unit of the storage controller.
 		Type *string `json:"Type,omitempty"`
 		// This holds the volatage (in Volts) of the battery backup unit of the storage controller.
-		VoltageInVolts      *string                              `json:"VoltageInVolts,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		StorageController   *StorageControllerRelationship       `json:"StorageController,omitempty"`
+		VoltageInVolts      *string                                     `json:"VoltageInVolts,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		StorageController   NullableStorageControllerRelationship       `json:"StorageController,omitempty"`
 	}
 
 	varStorageBatteryBackupUnitWithoutEmbeddedStruct := StorageBatteryBackupUnitWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageBatteryBackupUnitWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageBatteryBackupUnitWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageBatteryBackupUnit := _StorageBatteryBackupUnit{}
 		varStorageBatteryBackupUnit.ClassId = varStorageBatteryBackupUnitWithoutEmbeddedStruct.ClassId
@@ -1260,7 +1323,7 @@ func (o *StorageBatteryBackupUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageBatteryBackupUnit := _StorageBatteryBackupUnit{}
 
-	err = json.Unmarshal(bytes, &varStorageBatteryBackupUnit)
+	err = json.Unmarshal(data, &varStorageBatteryBackupUnit)
 	if err == nil {
 		o.EquipmentBase = varStorageBatteryBackupUnit.EquipmentBase
 	} else {
@@ -1269,7 +1332,7 @@ func (o *StorageBatteryBackupUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CapacitanceInPercent")

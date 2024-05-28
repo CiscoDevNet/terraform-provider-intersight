@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentIoCard type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentIoCard{}
 
 // EquipmentIoCard I/O module on a chassis which multiplexes traffic from blade servers.
 type EquipmentIoCard struct {
@@ -30,14 +34,14 @@ type EquipmentIoCard struct {
 	DcSupported       *bool              `json:"DcSupported,omitempty"`
 	InbandIpAddresses []ComputeIpAddress `json:"InbandIpAddresses,omitempty"`
 	// Location of IOM within a chassis. The value can be left or right.
-	Side             *string                       `json:"Side,omitempty"`
-	EquipmentChassis *EquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
-	EquipmentFex     *EquipmentFexRelationship     `json:"EquipmentFex,omitempty"`
+	Side             *string                              `json:"Side,omitempty"`
+	EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
+	EquipmentFex     NullableEquipmentFexRelationship     `json:"EquipmentFex,omitempty"`
 	// An array of relationships to equipmentFanModule resources.
-	FanModules                 []EquipmentFanModuleRelationship     `json:"FanModules,omitempty"`
-	InventoryDeviceInfo        *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	PhysicalDeviceRegistration *AssetDeviceRegistrationRelationship `json:"PhysicalDeviceRegistration,omitempty"`
-	RegisteredDevice           *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	FanModules                 []EquipmentFanModuleRelationship            `json:"FanModules,omitempty"`
+	InventoryDeviceInfo        NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	PhysicalDeviceRegistration NullableAssetDeviceRegistrationRelationship `json:"PhysicalDeviceRegistration,omitempty"`
+	RegisteredDevice           NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties       map[string]interface{}
 }
 
@@ -116,7 +120,7 @@ func (o *EquipmentIoCard) SetObjectType(v string) {
 
 // GetConnectionPath returns the ConnectionPath field value if set, zero value otherwise.
 func (o *EquipmentIoCard) GetConnectionPath() string {
-	if o == nil || o.ConnectionPath == nil {
+	if o == nil || IsNil(o.ConnectionPath) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *EquipmentIoCard) GetConnectionPath() string {
 // GetConnectionPathOk returns a tuple with the ConnectionPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCard) GetConnectionPathOk() (*string, bool) {
-	if o == nil || o.ConnectionPath == nil {
+	if o == nil || IsNil(o.ConnectionPath) {
 		return nil, false
 	}
 	return o.ConnectionPath, true
@@ -134,7 +138,7 @@ func (o *EquipmentIoCard) GetConnectionPathOk() (*string, bool) {
 
 // HasConnectionPath returns a boolean if a field has been set.
 func (o *EquipmentIoCard) HasConnectionPath() bool {
-	if o != nil && o.ConnectionPath != nil {
+	if o != nil && !IsNil(o.ConnectionPath) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *EquipmentIoCard) SetConnectionPath(v string) {
 
 // GetDcSupported returns the DcSupported field value if set, zero value otherwise.
 func (o *EquipmentIoCard) GetDcSupported() bool {
-	if o == nil || o.DcSupported == nil {
+	if o == nil || IsNil(o.DcSupported) {
 		var ret bool
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *EquipmentIoCard) GetDcSupported() bool {
 // GetDcSupportedOk returns a tuple with the DcSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCard) GetDcSupportedOk() (*bool, bool) {
-	if o == nil || o.DcSupported == nil {
+	if o == nil || IsNil(o.DcSupported) {
 		return nil, false
 	}
 	return o.DcSupported, true
@@ -166,7 +170,7 @@ func (o *EquipmentIoCard) GetDcSupportedOk() (*bool, bool) {
 
 // HasDcSupported returns a boolean if a field has been set.
 func (o *EquipmentIoCard) HasDcSupported() bool {
-	if o != nil && o.DcSupported != nil {
+	if o != nil && !IsNil(o.DcSupported) {
 		return true
 	}
 
@@ -191,7 +195,7 @@ func (o *EquipmentIoCard) GetInbandIpAddresses() []ComputeIpAddress {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCard) GetInbandIpAddressesOk() ([]ComputeIpAddress, bool) {
-	if o == nil || o.InbandIpAddresses == nil {
+	if o == nil || IsNil(o.InbandIpAddresses) {
 		return nil, false
 	}
 	return o.InbandIpAddresses, true
@@ -199,7 +203,7 @@ func (o *EquipmentIoCard) GetInbandIpAddressesOk() ([]ComputeIpAddress, bool) {
 
 // HasInbandIpAddresses returns a boolean if a field has been set.
 func (o *EquipmentIoCard) HasInbandIpAddresses() bool {
-	if o != nil && o.InbandIpAddresses != nil {
+	if o != nil && IsNil(o.InbandIpAddresses) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *EquipmentIoCard) SetInbandIpAddresses(v []ComputeIpAddress) {
 
 // GetSide returns the Side field value if set, zero value otherwise.
 func (o *EquipmentIoCard) GetSide() string {
-	if o == nil || o.Side == nil {
+	if o == nil || IsNil(o.Side) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *EquipmentIoCard) GetSide() string {
 // GetSideOk returns a tuple with the Side field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCard) GetSideOk() (*string, bool) {
-	if o == nil || o.Side == nil {
+	if o == nil || IsNil(o.Side) {
 		return nil, false
 	}
 	return o.Side, true
@@ -231,7 +235,7 @@ func (o *EquipmentIoCard) GetSideOk() (*string, bool) {
 
 // HasSide returns a boolean if a field has been set.
 func (o *EquipmentIoCard) HasSide() bool {
-	if o != nil && o.Side != nil {
+	if o != nil && !IsNil(o.Side) {
 		return true
 	}
 
@@ -243,68 +247,90 @@ func (o *EquipmentIoCard) SetSide(v string) {
 	o.Side = &v
 }
 
-// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise.
+// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentIoCard) GetEquipmentChassis() EquipmentChassisRelationship {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil || IsNil(o.EquipmentChassis.Get()) {
 		var ret EquipmentChassisRelationship
 		return ret
 	}
-	return *o.EquipmentChassis
+	return *o.EquipmentChassis.Get()
 }
 
 // GetEquipmentChassisOk returns a tuple with the EquipmentChassis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCard) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool) {
-	if o == nil || o.EquipmentChassis == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentChassis, true
+	return o.EquipmentChassis.Get(), o.EquipmentChassis.IsSet()
 }
 
 // HasEquipmentChassis returns a boolean if a field has been set.
 func (o *EquipmentIoCard) HasEquipmentChassis() bool {
-	if o != nil && o.EquipmentChassis != nil {
+	if o != nil && o.EquipmentChassis.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentChassis gets a reference to the given EquipmentChassisRelationship and assigns it to the EquipmentChassis field.
+// SetEquipmentChassis gets a reference to the given NullableEquipmentChassisRelationship and assigns it to the EquipmentChassis field.
 func (o *EquipmentIoCard) SetEquipmentChassis(v EquipmentChassisRelationship) {
-	o.EquipmentChassis = &v
+	o.EquipmentChassis.Set(&v)
 }
 
-// GetEquipmentFex returns the EquipmentFex field value if set, zero value otherwise.
+// SetEquipmentChassisNil sets the value for EquipmentChassis to be an explicit nil
+func (o *EquipmentIoCard) SetEquipmentChassisNil() {
+	o.EquipmentChassis.Set(nil)
+}
+
+// UnsetEquipmentChassis ensures that no value is present for EquipmentChassis, not even an explicit nil
+func (o *EquipmentIoCard) UnsetEquipmentChassis() {
+	o.EquipmentChassis.Unset()
+}
+
+// GetEquipmentFex returns the EquipmentFex field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentIoCard) GetEquipmentFex() EquipmentFexRelationship {
-	if o == nil || o.EquipmentFex == nil {
+	if o == nil || IsNil(o.EquipmentFex.Get()) {
 		var ret EquipmentFexRelationship
 		return ret
 	}
-	return *o.EquipmentFex
+	return *o.EquipmentFex.Get()
 }
 
 // GetEquipmentFexOk returns a tuple with the EquipmentFex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCard) GetEquipmentFexOk() (*EquipmentFexRelationship, bool) {
-	if o == nil || o.EquipmentFex == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentFex, true
+	return o.EquipmentFex.Get(), o.EquipmentFex.IsSet()
 }
 
 // HasEquipmentFex returns a boolean if a field has been set.
 func (o *EquipmentIoCard) HasEquipmentFex() bool {
-	if o != nil && o.EquipmentFex != nil {
+	if o != nil && o.EquipmentFex.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentFex gets a reference to the given EquipmentFexRelationship and assigns it to the EquipmentFex field.
+// SetEquipmentFex gets a reference to the given NullableEquipmentFexRelationship and assigns it to the EquipmentFex field.
 func (o *EquipmentIoCard) SetEquipmentFex(v EquipmentFexRelationship) {
-	o.EquipmentFex = &v
+	o.EquipmentFex.Set(&v)
+}
+
+// SetEquipmentFexNil sets the value for EquipmentFex to be an explicit nil
+func (o *EquipmentIoCard) SetEquipmentFexNil() {
+	o.EquipmentFex.Set(nil)
+}
+
+// UnsetEquipmentFex ensures that no value is present for EquipmentFex, not even an explicit nil
+func (o *EquipmentIoCard) UnsetEquipmentFex() {
+	o.EquipmentFex.Unset()
 }
 
 // GetFanModules returns the FanModules field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -320,7 +346,7 @@ func (o *EquipmentIoCard) GetFanModules() []EquipmentFanModuleRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCard) GetFanModulesOk() ([]EquipmentFanModuleRelationship, bool) {
-	if o == nil || o.FanModules == nil {
+	if o == nil || IsNil(o.FanModules) {
 		return nil, false
 	}
 	return o.FanModules, true
@@ -328,7 +354,7 @@ func (o *EquipmentIoCard) GetFanModulesOk() ([]EquipmentFanModuleRelationship, b
 
 // HasFanModules returns a boolean if a field has been set.
 func (o *EquipmentIoCard) HasFanModules() bool {
-	if o != nil && o.FanModules != nil {
+	if o != nil && IsNil(o.FanModules) {
 		return true
 	}
 
@@ -340,157 +366,216 @@ func (o *EquipmentIoCard) SetFanModules(v []EquipmentFanModuleRelationship) {
 	o.FanModules = v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentIoCard) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCard) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *EquipmentIoCard) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *EquipmentIoCard) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetPhysicalDeviceRegistration returns the PhysicalDeviceRegistration field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *EquipmentIoCard) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *EquipmentIoCard) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetPhysicalDeviceRegistration returns the PhysicalDeviceRegistration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentIoCard) GetPhysicalDeviceRegistration() AssetDeviceRegistrationRelationship {
-	if o == nil || o.PhysicalDeviceRegistration == nil {
+	if o == nil || IsNil(o.PhysicalDeviceRegistration.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.PhysicalDeviceRegistration
+	return *o.PhysicalDeviceRegistration.Get()
 }
 
 // GetPhysicalDeviceRegistrationOk returns a tuple with the PhysicalDeviceRegistration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCard) GetPhysicalDeviceRegistrationOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.PhysicalDeviceRegistration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PhysicalDeviceRegistration, true
+	return o.PhysicalDeviceRegistration.Get(), o.PhysicalDeviceRegistration.IsSet()
 }
 
 // HasPhysicalDeviceRegistration returns a boolean if a field has been set.
 func (o *EquipmentIoCard) HasPhysicalDeviceRegistration() bool {
-	if o != nil && o.PhysicalDeviceRegistration != nil {
+	if o != nil && o.PhysicalDeviceRegistration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPhysicalDeviceRegistration gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the PhysicalDeviceRegistration field.
+// SetPhysicalDeviceRegistration gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the PhysicalDeviceRegistration field.
 func (o *EquipmentIoCard) SetPhysicalDeviceRegistration(v AssetDeviceRegistrationRelationship) {
-	o.PhysicalDeviceRegistration = &v
+	o.PhysicalDeviceRegistration.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetPhysicalDeviceRegistrationNil sets the value for PhysicalDeviceRegistration to be an explicit nil
+func (o *EquipmentIoCard) SetPhysicalDeviceRegistrationNil() {
+	o.PhysicalDeviceRegistration.Set(nil)
+}
+
+// UnsetPhysicalDeviceRegistration ensures that no value is present for PhysicalDeviceRegistration, not even an explicit nil
+func (o *EquipmentIoCard) UnsetPhysicalDeviceRegistration() {
+	o.PhysicalDeviceRegistration.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentIoCard) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentIoCard) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *EquipmentIoCard) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *EquipmentIoCard) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *EquipmentIoCard) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *EquipmentIoCard) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o EquipmentIoCard) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentIoCard) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentIoCardBase, errEquipmentIoCardBase := json.Marshal(o.EquipmentIoCardBase)
 	if errEquipmentIoCardBase != nil {
-		return []byte{}, errEquipmentIoCardBase
+		return map[string]interface{}{}, errEquipmentIoCardBase
 	}
 	errEquipmentIoCardBase = json.Unmarshal([]byte(serializedEquipmentIoCardBase), &toSerialize)
 	if errEquipmentIoCardBase != nil {
-		return []byte{}, errEquipmentIoCardBase
+		return map[string]interface{}{}, errEquipmentIoCardBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConnectionPath != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConnectionPath) {
 		toSerialize["ConnectionPath"] = o.ConnectionPath
 	}
-	if o.DcSupported != nil {
+	if !IsNil(o.DcSupported) {
 		toSerialize["DcSupported"] = o.DcSupported
 	}
 	if o.InbandIpAddresses != nil {
 		toSerialize["InbandIpAddresses"] = o.InbandIpAddresses
 	}
-	if o.Side != nil {
+	if !IsNil(o.Side) {
 		toSerialize["Side"] = o.Side
 	}
-	if o.EquipmentChassis != nil {
-		toSerialize["EquipmentChassis"] = o.EquipmentChassis
+	if o.EquipmentChassis.IsSet() {
+		toSerialize["EquipmentChassis"] = o.EquipmentChassis.Get()
 	}
-	if o.EquipmentFex != nil {
-		toSerialize["EquipmentFex"] = o.EquipmentFex
+	if o.EquipmentFex.IsSet() {
+		toSerialize["EquipmentFex"] = o.EquipmentFex.Get()
 	}
 	if o.FanModules != nil {
 		toSerialize["FanModules"] = o.FanModules
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.PhysicalDeviceRegistration != nil {
-		toSerialize["PhysicalDeviceRegistration"] = o.PhysicalDeviceRegistration
+	if o.PhysicalDeviceRegistration.IsSet() {
+		toSerialize["PhysicalDeviceRegistration"] = o.PhysicalDeviceRegistration.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentIoCard) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentIoCard) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentIoCardWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -502,19 +587,19 @@ func (o *EquipmentIoCard) UnmarshalJSON(bytes []byte) (err error) {
 		DcSupported       *bool              `json:"DcSupported,omitempty"`
 		InbandIpAddresses []ComputeIpAddress `json:"InbandIpAddresses,omitempty"`
 		// Location of IOM within a chassis. The value can be left or right.
-		Side             *string                       `json:"Side,omitempty"`
-		EquipmentChassis *EquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
-		EquipmentFex     *EquipmentFexRelationship     `json:"EquipmentFex,omitempty"`
+		Side             *string                              `json:"Side,omitempty"`
+		EquipmentChassis NullableEquipmentChassisRelationship `json:"EquipmentChassis,omitempty"`
+		EquipmentFex     NullableEquipmentFexRelationship     `json:"EquipmentFex,omitempty"`
 		// An array of relationships to equipmentFanModule resources.
-		FanModules                 []EquipmentFanModuleRelationship     `json:"FanModules,omitempty"`
-		InventoryDeviceInfo        *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		PhysicalDeviceRegistration *AssetDeviceRegistrationRelationship `json:"PhysicalDeviceRegistration,omitempty"`
-		RegisteredDevice           *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		FanModules                 []EquipmentFanModuleRelationship            `json:"FanModules,omitempty"`
+		InventoryDeviceInfo        NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		PhysicalDeviceRegistration NullableAssetDeviceRegistrationRelationship `json:"PhysicalDeviceRegistration,omitempty"`
+		RegisteredDevice           NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varEquipmentIoCardWithoutEmbeddedStruct := EquipmentIoCardWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentIoCardWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentIoCardWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentIoCard := _EquipmentIoCard{}
 		varEquipmentIoCard.ClassId = varEquipmentIoCardWithoutEmbeddedStruct.ClassId
@@ -536,7 +621,7 @@ func (o *EquipmentIoCard) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentIoCard := _EquipmentIoCard{}
 
-	err = json.Unmarshal(bytes, &varEquipmentIoCard)
+	err = json.Unmarshal(data, &varEquipmentIoCard)
 	if err == nil {
 		o.EquipmentIoCardBase = varEquipmentIoCard.EquipmentIoCardBase
 	} else {
@@ -545,7 +630,7 @@ func (o *EquipmentIoCard) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConnectionPath")

@@ -60,27 +60,27 @@ Name | Type | Description | Notes
 **FcPortChannels** | Pointer to [**[]FcPortChannelRelationship**](FcPortChannelRelationship.md) | An array of relationships to fcPortChannel resources. | [optional] [readonly] 
 **FeatureControl** | Pointer to [**[]NetworkFeatureControlRelationship**](NetworkFeatureControlRelationship.md) | An array of relationships to networkFeatureControl resources. | [optional] [readonly] 
 **InterfaceList** | Pointer to [**[]NetworkInterfaceListRelationship**](NetworkInterfaceListRelationship.md) | An array of relationships to networkInterfaceList resources. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **LicenseFile** | Pointer to [**[]NetworkLicenseFileRelationship**](NetworkLicenseFileRelationship.md) | An array of relationships to networkLicenseFile resources. | [optional] [readonly] 
 **LldpNeighbor** | Pointer to [**[]NetworkDiscoveredNeighborRelationship**](NetworkDiscoveredNeighborRelationship.md) | An array of relationships to networkDiscoveredNeighbor resources. | [optional] [readonly] 
-**LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
-**ManagementController** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
-**ManagementEntity** | Pointer to [**ManagementEntityRelationship**](ManagementEntityRelationship.md) |  | [optional] 
-**NetworkFcZoneInfo** | Pointer to [**NetworkFcZoneInfoRelationship**](NetworkFcZoneInfoRelationship.md) |  | [optional] 
-**NetworkVlanPortInfo** | Pointer to [**NetworkVlanPortInfoRelationship**](NetworkVlanPortInfoRelationship.md) |  | [optional] 
+**LocatorLed** | Pointer to [**NullableEquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
+**ManagementController** | Pointer to [**NullableManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
+**ManagementEntity** | Pointer to [**NullableManagementEntityRelationship**](ManagementEntityRelationship.md) |  | [optional] 
+**NetworkFcZoneInfo** | Pointer to [**NullableNetworkFcZoneInfoRelationship**](NetworkFcZoneInfoRelationship.md) |  | [optional] 
+**NetworkVlanPortInfo** | Pointer to [**NullableNetworkVlanPortInfoRelationship**](NetworkVlanPortInfoRelationship.md) |  | [optional] 
 **NtpServer** | Pointer to [**[]NtpNtpServerRelationship**](NtpNtpServerRelationship.md) | An array of relationships to ntpNtpServer resources. | [optional] [readonly] 
 **PortMacBindings** | Pointer to [**[]PortMacBindingRelationship**](PortMacBindingRelationship.md) | An array of relationships to portMacBinding resources. | [optional] [readonly] 
 **ProcessorUnit** | Pointer to [**[]ProcessorUnitRelationship**](ProcessorUnitRelationship.md) | An array of relationships to processorUnit resources. | [optional] 
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **Sensors** | Pointer to [**[]EquipmentSensorRelationship**](EquipmentSensorRelationship.md) | An array of relationships to equipmentSensor resources. | [optional] [readonly] 
 **StorageItems** | Pointer to [**[]StorageItemRelationship**](StorageItemRelationship.md) | An array of relationships to storageItem resources. | [optional] [readonly] 
 **SupervisorCard** | Pointer to [**[]NetworkSupervisorCardRelationship**](NetworkSupervisorCardRelationship.md) | An array of relationships to networkSupervisorCard resources. | [optional] 
-**TopSystem** | Pointer to [**TopSystemRelationship**](TopSystemRelationship.md) |  | [optional] 
-**UcsmRunningFirmware** | Pointer to [**FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) |  | [optional] 
+**TopSystem** | Pointer to [**NullableTopSystemRelationship**](TopSystemRelationship.md) |  | [optional] 
+**UcsmRunningFirmware** | Pointer to [**NullableFirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) |  | [optional] 
 **Veths** | Pointer to [**[]NetworkVethernetRelationship**](NetworkVethernetRelationship.md) | An array of relationships to networkVethernet resources. | [optional] [readonly] 
 **Vfcs** | Pointer to [**[]NetworkVfcRelationship**](NetworkVfcRelationship.md) | An array of relationships to networkVfc resources. | [optional] [readonly] 
-**VpcDomain** | Pointer to [**NetworkVpcDomainRelationship**](NetworkVpcDomainRelationship.md) |  | [optional] 
+**VpcDomain** | Pointer to [**NullableNetworkVpcDomainRelationship**](NetworkVpcDomainRelationship.md) |  | [optional] 
 **VpcMember** | Pointer to [**[]NetworkVpcMemberRelationship**](NetworkVpcMemberRelationship.md) | An array of relationships to networkVpcMember resources. | [optional] [readonly] 
 **VpcPeer** | Pointer to [**[]NetworkVpcPeerRelationship**](NetworkVpcPeerRelationship.md) | An array of relationships to networkVpcPeer resources. | [optional] [readonly] 
 **Vrf** | Pointer to [**[]NetworkVrfRelationship**](NetworkVrfRelationship.md) | An array of relationships to networkVrf resources. | [optional] [readonly] 
@@ -1619,6 +1619,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *NetworkElement) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *NetworkElement) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetLicenseFile
 
 `func (o *NetworkElement) GetLicenseFile() []NetworkLicenseFileRelationship`
@@ -1714,6 +1724,16 @@ SetLocatorLed sets LocatorLed field to given value.
 
 HasLocatorLed returns a boolean if a field has been set.
 
+### SetLocatorLedNil
+
+`func (o *NetworkElement) SetLocatorLedNil(b bool)`
+
+ SetLocatorLedNil sets the value for LocatorLed to be an explicit nil
+
+### UnsetLocatorLed
+`func (o *NetworkElement) UnsetLocatorLed()`
+
+UnsetLocatorLed ensures that no value is present for LocatorLed, not even an explicit nil
 ### GetManagementController
 
 `func (o *NetworkElement) GetManagementController() ManagementControllerRelationship`
@@ -1739,6 +1759,16 @@ SetManagementController sets ManagementController field to given value.
 
 HasManagementController returns a boolean if a field has been set.
 
+### SetManagementControllerNil
+
+`func (o *NetworkElement) SetManagementControllerNil(b bool)`
+
+ SetManagementControllerNil sets the value for ManagementController to be an explicit nil
+
+### UnsetManagementController
+`func (o *NetworkElement) UnsetManagementController()`
+
+UnsetManagementController ensures that no value is present for ManagementController, not even an explicit nil
 ### GetManagementEntity
 
 `func (o *NetworkElement) GetManagementEntity() ManagementEntityRelationship`
@@ -1764,6 +1794,16 @@ SetManagementEntity sets ManagementEntity field to given value.
 
 HasManagementEntity returns a boolean if a field has been set.
 
+### SetManagementEntityNil
+
+`func (o *NetworkElement) SetManagementEntityNil(b bool)`
+
+ SetManagementEntityNil sets the value for ManagementEntity to be an explicit nil
+
+### UnsetManagementEntity
+`func (o *NetworkElement) UnsetManagementEntity()`
+
+UnsetManagementEntity ensures that no value is present for ManagementEntity, not even an explicit nil
 ### GetNetworkFcZoneInfo
 
 `func (o *NetworkElement) GetNetworkFcZoneInfo() NetworkFcZoneInfoRelationship`
@@ -1789,6 +1829,16 @@ SetNetworkFcZoneInfo sets NetworkFcZoneInfo field to given value.
 
 HasNetworkFcZoneInfo returns a boolean if a field has been set.
 
+### SetNetworkFcZoneInfoNil
+
+`func (o *NetworkElement) SetNetworkFcZoneInfoNil(b bool)`
+
+ SetNetworkFcZoneInfoNil sets the value for NetworkFcZoneInfo to be an explicit nil
+
+### UnsetNetworkFcZoneInfo
+`func (o *NetworkElement) UnsetNetworkFcZoneInfo()`
+
+UnsetNetworkFcZoneInfo ensures that no value is present for NetworkFcZoneInfo, not even an explicit nil
 ### GetNetworkVlanPortInfo
 
 `func (o *NetworkElement) GetNetworkVlanPortInfo() NetworkVlanPortInfoRelationship`
@@ -1814,6 +1864,16 @@ SetNetworkVlanPortInfo sets NetworkVlanPortInfo field to given value.
 
 HasNetworkVlanPortInfo returns a boolean if a field has been set.
 
+### SetNetworkVlanPortInfoNil
+
+`func (o *NetworkElement) SetNetworkVlanPortInfoNil(b bool)`
+
+ SetNetworkVlanPortInfoNil sets the value for NetworkVlanPortInfo to be an explicit nil
+
+### UnsetNetworkVlanPortInfo
+`func (o *NetworkElement) UnsetNetworkVlanPortInfo()`
+
+UnsetNetworkVlanPortInfo ensures that no value is present for NetworkVlanPortInfo, not even an explicit nil
 ### GetNtpServer
 
 `func (o *NetworkElement) GetNtpServer() []NtpNtpServerRelationship`
@@ -1979,6 +2039,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *NetworkElement) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *NetworkElement) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetSensors
 
 `func (o *NetworkElement) GetSensors() []EquipmentSensorRelationship`
@@ -2109,6 +2179,16 @@ SetTopSystem sets TopSystem field to given value.
 
 HasTopSystem returns a boolean if a field has been set.
 
+### SetTopSystemNil
+
+`func (o *NetworkElement) SetTopSystemNil(b bool)`
+
+ SetTopSystemNil sets the value for TopSystem to be an explicit nil
+
+### UnsetTopSystem
+`func (o *NetworkElement) UnsetTopSystem()`
+
+UnsetTopSystem ensures that no value is present for TopSystem, not even an explicit nil
 ### GetUcsmRunningFirmware
 
 `func (o *NetworkElement) GetUcsmRunningFirmware() FirmwareRunningFirmwareRelationship`
@@ -2134,6 +2214,16 @@ SetUcsmRunningFirmware sets UcsmRunningFirmware field to given value.
 
 HasUcsmRunningFirmware returns a boolean if a field has been set.
 
+### SetUcsmRunningFirmwareNil
+
+`func (o *NetworkElement) SetUcsmRunningFirmwareNil(b bool)`
+
+ SetUcsmRunningFirmwareNil sets the value for UcsmRunningFirmware to be an explicit nil
+
+### UnsetUcsmRunningFirmware
+`func (o *NetworkElement) UnsetUcsmRunningFirmware()`
+
+UnsetUcsmRunningFirmware ensures that no value is present for UcsmRunningFirmware, not even an explicit nil
 ### GetVeths
 
 `func (o *NetworkElement) GetVeths() []NetworkVethernetRelationship`
@@ -2229,6 +2319,16 @@ SetVpcDomain sets VpcDomain field to given value.
 
 HasVpcDomain returns a boolean if a field has been set.
 
+### SetVpcDomainNil
+
+`func (o *NetworkElement) SetVpcDomainNil(b bool)`
+
+ SetVpcDomainNil sets the value for VpcDomain to be an explicit nil
+
+### UnsetVpcDomain
+`func (o *NetworkElement) UnsetVpcDomain()`
+
+UnsetVpcDomain ensures that no value is present for VpcDomain, not even an explicit nil
 ### GetVpcMember
 
 `func (o *NetworkElement) GetVpcMember() []NetworkVpcMemberRelationship`

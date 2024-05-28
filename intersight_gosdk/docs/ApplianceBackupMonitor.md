@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Filename** | Pointer to **string** | Filename of the backup for the backup monitor. | [optional] [readonly] 
 **LastBackupRotationStatus** | Pointer to **string** | Status of the oldest Intersight Appliance backup cleanup. * &#x60;BackupFound&#x60; - Backup is successful and complete. * &#x60;BackupFailed&#x60; - The current Backup failed. * &#x60;BackupOutdated&#x60; - Backup is old and outdated. * &#x60;BackupCleanupFailed&#x60; - Cleanup of the old backup has failed. | [optional] [readonly] [default to "BackupFound"]
 **LastBackupStatus** | Pointer to **string** | Status of the most recent Intersight Appliance backup. * &#x60;BackupFound&#x60; - Backup is successful and complete. * &#x60;BackupFailed&#x60; - The current Backup failed. * &#x60;BackupOutdated&#x60; - Backup is old and outdated. * &#x60;BackupCleanupFailed&#x60; - Cleanup of the old backup has failed. | [optional] [readonly] [default to "BackupFound"]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -170,6 +170,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *ApplianceBackupMonitor) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *ApplianceBackupMonitor) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

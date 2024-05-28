@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **EgressRules** | Pointer to [**[]CloudSecurityGroupRule**](CloudSecurityGroupRule.md) |  | [optional] 
 **IngressRules** | Pointer to [**[]CloudSecurityGroupRule**](CloudSecurityGroupRule.md) |  | [optional] 
 **SecurityGroupTags** | Pointer to [**[]CloudCloudTag**](CloudCloudTag.md) |  | [optional] 
-**AwsBillingUnit** | Pointer to [**CloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
-**Location** | Pointer to [**CloudAwsVpcRelationship**](CloudAwsVpcRelationship.md) |  | [optional] 
+**AwsBillingUnit** | Pointer to [**NullableCloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
+**Location** | Pointer to [**NullableCloudAwsVpcRelationship**](CloudAwsVpcRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -201,6 +201,16 @@ SetAwsBillingUnit sets AwsBillingUnit field to given value.
 
 HasAwsBillingUnit returns a boolean if a field has been set.
 
+### SetAwsBillingUnitNil
+
+`func (o *CloudAwsSecurityGroup) SetAwsBillingUnitNil(b bool)`
+
+ SetAwsBillingUnitNil sets the value for AwsBillingUnit to be an explicit nil
+
+### UnsetAwsBillingUnit
+`func (o *CloudAwsSecurityGroup) UnsetAwsBillingUnit()`
+
+UnsetAwsBillingUnit ensures that no value is present for AwsBillingUnit, not even an explicit nil
 ### GetLocation
 
 `func (o *CloudAwsSecurityGroup) GetLocation() CloudAwsVpcRelationship`
@@ -226,6 +236,16 @@ SetLocation sets Location field to given value.
 
 HasLocation returns a boolean if a field has been set.
 
+### SetLocationNil
+
+`func (o *CloudAwsSecurityGroup) SetLocationNil(b bool)`
+
+ SetLocationNil sets the value for Location to be an explicit nil
+
+### UnsetLocation
+`func (o *CloudAwsSecurityGroup) UnsetLocation()`
+
+UnsetLocation ensures that no value is present for Location, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

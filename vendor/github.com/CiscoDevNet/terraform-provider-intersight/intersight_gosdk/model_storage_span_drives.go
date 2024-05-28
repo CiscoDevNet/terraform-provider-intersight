@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageSpanDrives type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageSpanDrives{}
 
 // StorageSpanDrives This models a single span group of disks in a RAID group.
 type StorageSpanDrives struct {
@@ -104,7 +108,7 @@ func (o *StorageSpanDrives) SetObjectType(v string) {
 
 // GetSlots returns the Slots field value if set, zero value otherwise.
 func (o *StorageSpanDrives) GetSlots() string {
-	if o == nil || o.Slots == nil {
+	if o == nil || IsNil(o.Slots) {
 		var ret string
 		return ret
 	}
@@ -114,7 +118,7 @@ func (o *StorageSpanDrives) GetSlots() string {
 // GetSlotsOk returns a tuple with the Slots field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageSpanDrives) GetSlotsOk() (*string, bool) {
-	if o == nil || o.Slots == nil {
+	if o == nil || IsNil(o.Slots) {
 		return nil, false
 	}
 	return o.Slots, true
@@ -122,7 +126,7 @@ func (o *StorageSpanDrives) GetSlotsOk() (*string, bool) {
 
 // HasSlots returns a boolean if a field has been set.
 func (o *StorageSpanDrives) HasSlots() bool {
-	if o != nil && o.Slots != nil {
+	if o != nil && !IsNil(o.Slots) {
 		return true
 	}
 
@@ -135,22 +139,26 @@ func (o *StorageSpanDrives) SetSlots(v string) {
 }
 
 func (o StorageSpanDrives) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageSpanDrives) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Slots != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Slots) {
 		toSerialize["Slots"] = o.Slots
 	}
 
@@ -158,10 +166,32 @@ func (o StorageSpanDrives) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageSpanDrives) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageSpanDrives) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageSpanDrivesWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -173,7 +203,7 @@ func (o *StorageSpanDrives) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageSpanDrivesWithoutEmbeddedStruct := StorageSpanDrivesWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageSpanDrivesWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageSpanDrivesWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageSpanDrives := _StorageSpanDrives{}
 		varStorageSpanDrives.ClassId = varStorageSpanDrivesWithoutEmbeddedStruct.ClassId
@@ -186,7 +216,7 @@ func (o *StorageSpanDrives) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageSpanDrives := _StorageSpanDrives{}
 
-	err = json.Unmarshal(bytes, &varStorageSpanDrives)
+	err = json.Unmarshal(data, &varStorageSpanDrives)
 	if err == nil {
 		o.MoBaseComplexType = varStorageSpanDrives.MoBaseComplexType
 	} else {
@@ -195,7 +225,7 @@ func (o *StorageSpanDrives) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Slots")

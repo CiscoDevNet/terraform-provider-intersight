@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppLunMap type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppLunMap{}
 
 // StorageNetAppLunMap NetApp LUN mapping is the process of associating a LUN with an initiator group. When a LUN is mapped to an initiator group, initiators in the initiator group are granted access to the LUN.
 type StorageNetAppLunMap struct {
@@ -29,9 +33,9 @@ type StorageNetAppLunMap struct {
 	// Universally unique identifier of the LUN.
 	LunUuid *string `json:"LunUuid,omitempty"`
 	// An array of relationships to storageNetAppInitiatorGroup resources.
-	Host                 []StorageNetAppInitiatorGroupRelationship `json:"Host,omitempty"`
-	Tenant               *StorageNetAppStorageVmRelationship       `json:"Tenant,omitempty"`
-	Volume               *StorageNetAppLunRelationship             `json:"Volume,omitempty"`
+	Host                 []StorageNetAppInitiatorGroupRelationship  `json:"Host,omitempty"`
+	Tenant               NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+	Volume               NullableStorageNetAppLunRelationship       `json:"Volume,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,7 +114,7 @@ func (o *StorageNetAppLunMap) SetObjectType(v string) {
 
 // GetIgroupUuid returns the IgroupUuid field value if set, zero value otherwise.
 func (o *StorageNetAppLunMap) GetIgroupUuid() string {
-	if o == nil || o.IgroupUuid == nil {
+	if o == nil || IsNil(o.IgroupUuid) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *StorageNetAppLunMap) GetIgroupUuid() string {
 // GetIgroupUuidOk returns a tuple with the IgroupUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppLunMap) GetIgroupUuidOk() (*string, bool) {
-	if o == nil || o.IgroupUuid == nil {
+	if o == nil || IsNil(o.IgroupUuid) {
 		return nil, false
 	}
 	return o.IgroupUuid, true
@@ -128,7 +132,7 @@ func (o *StorageNetAppLunMap) GetIgroupUuidOk() (*string, bool) {
 
 // HasIgroupUuid returns a boolean if a field has been set.
 func (o *StorageNetAppLunMap) HasIgroupUuid() bool {
-	if o != nil && o.IgroupUuid != nil {
+	if o != nil && !IsNil(o.IgroupUuid) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *StorageNetAppLunMap) SetIgroupUuid(v string) {
 
 // GetLunUuid returns the LunUuid field value if set, zero value otherwise.
 func (o *StorageNetAppLunMap) GetLunUuid() string {
-	if o == nil || o.LunUuid == nil {
+	if o == nil || IsNil(o.LunUuid) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *StorageNetAppLunMap) GetLunUuid() string {
 // GetLunUuidOk returns a tuple with the LunUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppLunMap) GetLunUuidOk() (*string, bool) {
-	if o == nil || o.LunUuid == nil {
+	if o == nil || IsNil(o.LunUuid) {
 		return nil, false
 	}
 	return o.LunUuid, true
@@ -160,7 +164,7 @@ func (o *StorageNetAppLunMap) GetLunUuidOk() (*string, bool) {
 
 // HasLunUuid returns a boolean if a field has been set.
 func (o *StorageNetAppLunMap) HasLunUuid() bool {
-	if o != nil && o.LunUuid != nil {
+	if o != nil && !IsNil(o.LunUuid) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *StorageNetAppLunMap) GetHost() []StorageNetAppInitiatorGroupRelationshi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppLunMap) GetHostOk() ([]StorageNetAppInitiatorGroupRelationship, bool) {
-	if o == nil || o.Host == nil {
+	if o == nil || IsNil(o.Host) {
 		return nil, false
 	}
 	return o.Host, true
@@ -193,7 +197,7 @@ func (o *StorageNetAppLunMap) GetHostOk() ([]StorageNetAppInitiatorGroupRelation
 
 // HasHost returns a boolean if a field has been set.
 func (o *StorageNetAppLunMap) HasHost() bool {
-	if o != nil && o.Host != nil {
+	if o != nil && IsNil(o.Host) {
 		return true
 	}
 
@@ -205,110 +209,158 @@ func (o *StorageNetAppLunMap) SetHost(v []StorageNetAppInitiatorGroupRelationshi
 	o.Host = v
 }
 
-// GetTenant returns the Tenant field value if set, zero value otherwise.
+// GetTenant returns the Tenant field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppLunMap) GetTenant() StorageNetAppStorageVmRelationship {
-	if o == nil || o.Tenant == nil {
+	if o == nil || IsNil(o.Tenant.Get()) {
 		var ret StorageNetAppStorageVmRelationship
 		return ret
 	}
-	return *o.Tenant
+	return *o.Tenant.Get()
 }
 
 // GetTenantOk returns a tuple with the Tenant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppLunMap) GetTenantOk() (*StorageNetAppStorageVmRelationship, bool) {
-	if o == nil || o.Tenant == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tenant, true
+	return o.Tenant.Get(), o.Tenant.IsSet()
 }
 
 // HasTenant returns a boolean if a field has been set.
 func (o *StorageNetAppLunMap) HasTenant() bool {
-	if o != nil && o.Tenant != nil {
+	if o != nil && o.Tenant.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTenant gets a reference to the given StorageNetAppStorageVmRelationship and assigns it to the Tenant field.
+// SetTenant gets a reference to the given NullableStorageNetAppStorageVmRelationship and assigns it to the Tenant field.
 func (o *StorageNetAppLunMap) SetTenant(v StorageNetAppStorageVmRelationship) {
-	o.Tenant = &v
+	o.Tenant.Set(&v)
 }
 
-// GetVolume returns the Volume field value if set, zero value otherwise.
+// SetTenantNil sets the value for Tenant to be an explicit nil
+func (o *StorageNetAppLunMap) SetTenantNil() {
+	o.Tenant.Set(nil)
+}
+
+// UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
+func (o *StorageNetAppLunMap) UnsetTenant() {
+	o.Tenant.Unset()
+}
+
+// GetVolume returns the Volume field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppLunMap) GetVolume() StorageNetAppLunRelationship {
-	if o == nil || o.Volume == nil {
+	if o == nil || IsNil(o.Volume.Get()) {
 		var ret StorageNetAppLunRelationship
 		return ret
 	}
-	return *o.Volume
+	return *o.Volume.Get()
 }
 
 // GetVolumeOk returns a tuple with the Volume field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppLunMap) GetVolumeOk() (*StorageNetAppLunRelationship, bool) {
-	if o == nil || o.Volume == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Volume, true
+	return o.Volume.Get(), o.Volume.IsSet()
 }
 
 // HasVolume returns a boolean if a field has been set.
 func (o *StorageNetAppLunMap) HasVolume() bool {
-	if o != nil && o.Volume != nil {
+	if o != nil && o.Volume.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVolume gets a reference to the given StorageNetAppLunRelationship and assigns it to the Volume field.
+// SetVolume gets a reference to the given NullableStorageNetAppLunRelationship and assigns it to the Volume field.
 func (o *StorageNetAppLunMap) SetVolume(v StorageNetAppLunRelationship) {
-	o.Volume = &v
+	o.Volume.Set(&v)
+}
+
+// SetVolumeNil sets the value for Volume to be an explicit nil
+func (o *StorageNetAppLunMap) SetVolumeNil() {
+	o.Volume.Set(nil)
+}
+
+// UnsetVolume ensures that no value is present for Volume, not even an explicit nil
+func (o *StorageNetAppLunMap) UnsetVolume() {
+	o.Volume.Unset()
 }
 
 func (o StorageNetAppLunMap) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppLunMap) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseHostLun, errStorageBaseHostLun := json.Marshal(o.StorageBaseHostLun)
 	if errStorageBaseHostLun != nil {
-		return []byte{}, errStorageBaseHostLun
+		return map[string]interface{}{}, errStorageBaseHostLun
 	}
 	errStorageBaseHostLun = json.Unmarshal([]byte(serializedStorageBaseHostLun), &toSerialize)
 	if errStorageBaseHostLun != nil {
-		return []byte{}, errStorageBaseHostLun
+		return map[string]interface{}{}, errStorageBaseHostLun
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IgroupUuid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IgroupUuid) {
 		toSerialize["IgroupUuid"] = o.IgroupUuid
 	}
-	if o.LunUuid != nil {
+	if !IsNil(o.LunUuid) {
 		toSerialize["LunUuid"] = o.LunUuid
 	}
 	if o.Host != nil {
 		toSerialize["Host"] = o.Host
 	}
-	if o.Tenant != nil {
-		toSerialize["Tenant"] = o.Tenant
+	if o.Tenant.IsSet() {
+		toSerialize["Tenant"] = o.Tenant.Get()
 	}
-	if o.Volume != nil {
-		toSerialize["Volume"] = o.Volume
+	if o.Volume.IsSet() {
+		toSerialize["Volume"] = o.Volume.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppLunMap) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppLunMap) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppLunMapWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -319,14 +371,14 @@ func (o *StorageNetAppLunMap) UnmarshalJSON(bytes []byte) (err error) {
 		// Universally unique identifier of the LUN.
 		LunUuid *string `json:"LunUuid,omitempty"`
 		// An array of relationships to storageNetAppInitiatorGroup resources.
-		Host   []StorageNetAppInitiatorGroupRelationship `json:"Host,omitempty"`
-		Tenant *StorageNetAppStorageVmRelationship       `json:"Tenant,omitempty"`
-		Volume *StorageNetAppLunRelationship             `json:"Volume,omitempty"`
+		Host   []StorageNetAppInitiatorGroupRelationship  `json:"Host,omitempty"`
+		Tenant NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+		Volume NullableStorageNetAppLunRelationship       `json:"Volume,omitempty"`
 	}
 
 	varStorageNetAppLunMapWithoutEmbeddedStruct := StorageNetAppLunMapWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppLunMapWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppLunMapWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppLunMap := _StorageNetAppLunMap{}
 		varStorageNetAppLunMap.ClassId = varStorageNetAppLunMapWithoutEmbeddedStruct.ClassId
@@ -343,7 +395,7 @@ func (o *StorageNetAppLunMap) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppLunMap := _StorageNetAppLunMap{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppLunMap)
+	err = json.Unmarshal(data, &varStorageNetAppLunMap)
 	if err == nil {
 		o.StorageBaseHostLun = varStorageNetAppLunMap.StorageBaseHostLun
 	} else {
@@ -352,7 +404,7 @@ func (o *StorageNetAppLunMap) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IgroupUuid")

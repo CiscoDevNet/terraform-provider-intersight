@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | Status of the Intersight Appliance&#39;s software install. * &#x60;NotReady&#x60; - Cluster is not ready. Install cannot be triggered. * &#x60;Ready&#x60; - Cluster is ready. Install can be triggered. * &#x60;InProgress&#x60; - Install is currently in progress. * &#x60;Success&#x60; - Install was run and succeeded. * &#x60;Fail&#x60; - Install was run and failed. | [optional] [readonly] [default to "NotReady"]
 **TotalNodes** | Pointer to **int64** | Total number of nodes in the system. | [optional] [readonly] 
 **TotalPhases** | Pointer to **int64** | TotalPhase represents the total number of the install phases for one install. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -418,6 +418,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *ApplianceDeviceClusterInstall) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *ApplianceDeviceClusterInstall) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

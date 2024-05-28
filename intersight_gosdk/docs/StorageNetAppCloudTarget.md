@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **SslEnabled** | Pointer to **bool** | SSL/HTTPS enabled or not. | [optional] [readonly] 
 **Used** | Pointer to **int64** | The amount of cloud space used by all the aggregates attached to the target, in bytes. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Uuid of the cloud target. | [optional] [readonly] 
-**Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -544,6 +544,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StorageNetAppCloudTarget) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StorageNetAppCloudTarget) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **RestartCount5Mins** | Pointer to **int64** | Number of instance restarts in the last 5 minutes. | [optional] [readonly] 
 **RestartCountTotal** | Pointer to **int64** | Total number of restarts since last deployment. | [optional] [readonly] 
 **RunningCount** | Pointer to **int64** | Number of replicas running. The number of instances of the application currently running. | [optional] [readonly] 
-**GroupOpStatus** | Pointer to [**ApplianceGroupOpStatusRelationship**](ApplianceGroupOpStatusRelationship.md) |  | [optional] 
-**SystemOpStatus** | Pointer to [**ApplianceSystemOpStatusRelationship**](ApplianceSystemOpStatusRelationship.md) |  | [optional] 
+**GroupOpStatus** | Pointer to [**NullableApplianceGroupOpStatusRelationship**](ApplianceGroupOpStatusRelationship.md) |  | [optional] 
+**SystemOpStatus** | Pointer to [**NullableApplianceSystemOpStatusRelationship**](ApplianceSystemOpStatusRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -363,6 +363,16 @@ SetGroupOpStatus sets GroupOpStatus field to given value.
 
 HasGroupOpStatus returns a boolean if a field has been set.
 
+### SetGroupOpStatusNil
+
+`func (o *ApplianceAppOpStatus) SetGroupOpStatusNil(b bool)`
+
+ SetGroupOpStatusNil sets the value for GroupOpStatus to be an explicit nil
+
+### UnsetGroupOpStatus
+`func (o *ApplianceAppOpStatus) UnsetGroupOpStatus()`
+
+UnsetGroupOpStatus ensures that no value is present for GroupOpStatus, not even an explicit nil
 ### GetSystemOpStatus
 
 `func (o *ApplianceAppOpStatus) GetSystemOpStatus() ApplianceSystemOpStatusRelationship`
@@ -388,6 +398,16 @@ SetSystemOpStatus sets SystemOpStatus field to given value.
 
 HasSystemOpStatus returns a boolean if a field has been set.
 
+### SetSystemOpStatusNil
+
+`func (o *ApplianceAppOpStatus) SetSystemOpStatusNil(b bool)`
+
+ SetSystemOpStatusNil sets the value for SystemOpStatus to be an explicit nil
+
+### UnsetSystemOpStatus
+`func (o *ApplianceAppOpStatus) UnsetSystemOpStatus()`
+
+UnsetSystemOpStatus ensures that no value is present for SystemOpStatus, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

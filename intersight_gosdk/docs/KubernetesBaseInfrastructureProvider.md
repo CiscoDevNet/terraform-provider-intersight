@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "kubernetes.VirtualMachineInfrastructureProvider"]
 **Description** | Pointer to **string** | Description for the infrastructure provider. | [optional] 
 **Name** | Pointer to **string** | Name of an infrastructure provider. | [optional] 
-**NodeGroup** | Pointer to [**KubernetesNodeGroupProfileRelationship**](KubernetesNodeGroupProfileRelationship.md) |  | [optional] 
+**NodeGroup** | Pointer to [**NullableKubernetesNodeGroupProfileRelationship**](KubernetesNodeGroupProfileRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -144,6 +144,16 @@ SetNodeGroup sets NodeGroup field to given value.
 
 HasNodeGroup returns a boolean if a field has been set.
 
+### SetNodeGroupNil
+
+`func (o *KubernetesBaseInfrastructureProvider) SetNodeGroupNil(b bool)`
+
+ SetNodeGroupNil sets the value for NodeGroup to be an explicit nil
+
+### UnsetNodeGroup
+`func (o *KubernetesBaseInfrastructureProvider) UnsetNodeGroup()`
+
+UnsetNodeGroup ensures that no value is present for NodeGroup, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -9,11 +9,11 @@ Name | Type | Description | Notes
 **IpType** | Pointer to **string** | Type of the IP address requested. * &#x60;IPv4&#x60; - IP V4 address type requested. * &#x60;IPv6&#x60; - IP V6 address type requested. | [optional] [readonly] [default to "IPv4"]
 **IpV4Address** | Pointer to **string** | IPv4 Address of this pool member. | [optional] [readonly] 
 **IpV6Address** | Pointer to **string** | IPv6 Address of this pool member. | [optional] [readonly] 
-**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**IpBlock** | Pointer to [**IppoolShadowBlockRelationship**](IppoolShadowBlockRelationship.md) |  | [optional] 
-**Peer** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
-**Pool** | Pointer to [**IppoolShadowPoolRelationship**](IppoolShadowPoolRelationship.md) |  | [optional] 
-**Reservation** | Pointer to [**IppoolReservationRelationship**](IppoolReservationRelationship.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**IpBlock** | Pointer to [**NullableIppoolShadowBlockRelationship**](IppoolShadowBlockRelationship.md) |  | [optional] 
+**Peer** | Pointer to [**NullableIppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableIppoolShadowPoolRelationship**](IppoolShadowPoolRelationship.md) |  | [optional] 
+**Reservation** | Pointer to [**NullableIppoolReservationRelationship**](IppoolReservationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -174,6 +174,16 @@ SetAssignedToEntity sets AssignedToEntity field to given value.
 
 HasAssignedToEntity returns a boolean if a field has been set.
 
+### SetAssignedToEntityNil
+
+`func (o *IppoolPoolMember) SetAssignedToEntityNil(b bool)`
+
+ SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+
+### UnsetAssignedToEntity
+`func (o *IppoolPoolMember) UnsetAssignedToEntity()`
+
+UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
 ### GetIpBlock
 
 `func (o *IppoolPoolMember) GetIpBlock() IppoolShadowBlockRelationship`
@@ -199,6 +209,16 @@ SetIpBlock sets IpBlock field to given value.
 
 HasIpBlock returns a boolean if a field has been set.
 
+### SetIpBlockNil
+
+`func (o *IppoolPoolMember) SetIpBlockNil(b bool)`
+
+ SetIpBlockNil sets the value for IpBlock to be an explicit nil
+
+### UnsetIpBlock
+`func (o *IppoolPoolMember) UnsetIpBlock()`
+
+UnsetIpBlock ensures that no value is present for IpBlock, not even an explicit nil
 ### GetPeer
 
 `func (o *IppoolPoolMember) GetPeer() IppoolIpLeaseRelationship`
@@ -224,6 +244,16 @@ SetPeer sets Peer field to given value.
 
 HasPeer returns a boolean if a field has been set.
 
+### SetPeerNil
+
+`func (o *IppoolPoolMember) SetPeerNil(b bool)`
+
+ SetPeerNil sets the value for Peer to be an explicit nil
+
+### UnsetPeer
+`func (o *IppoolPoolMember) UnsetPeer()`
+
+UnsetPeer ensures that no value is present for Peer, not even an explicit nil
 ### GetPool
 
 `func (o *IppoolPoolMember) GetPool() IppoolShadowPoolRelationship`
@@ -249,6 +279,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *IppoolPoolMember) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *IppoolPoolMember) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetReservation
 
 `func (o *IppoolPoolMember) GetReservation() IppoolReservationRelationship`
@@ -274,6 +314,16 @@ SetReservation sets Reservation field to given value.
 
 HasReservation returns a boolean if a field has been set.
 
+### SetReservationNil
+
+`func (o *IppoolPoolMember) SetReservationNil(b bool)`
+
+ SetReservationNil sets the value for Reservation to be an explicit nil
+
+### UnsetReservation
+`func (o *IppoolPoolMember) UnsetReservation()`
+
+UnsetReservation ensures that no value is present for Reservation, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NetworkVethernet type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NetworkVethernet{}
 
 // NetworkVethernet Vethernet configured on a Fabric Interconnect.
 type NetworkVethernet struct {
@@ -24,13 +28,27 @@ type NetworkVethernet struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Port or portchannel interface configured for vitual ethernet interface.
+	BoundInterfaceDn *string `json:"BoundInterfaceDn,omitempty"`
+	// Burst defined on QoS policy.
+	Burst *int64 `json:"Burst,omitempty"`
 	// Description for the vNIC.
 	Description *string `json:"Description,omitempty"`
+	// Operational Reason of the virtual etherent interface on the Fabric Interconnect. When the operational state is down, Operreason indicates the reason why the vNIC is not operational. Some common reasons are admindown, error disabled.
+	OperReason *string `json:"OperReason,omitempty"`
+	// The operational state of the Active Vethernet peer of a vNIC in Intersight Managed Mode. This state is updated by events from Fabric Interconnect or by periodic updates from Fabric Interconnect. When a Fabric Interconnect is not connected to Intersight or if the Fabric Interconnect is powered down, this property will not be updated. * `unknown` - The operational state of the Vethernet is not known. * `adminDown` - The operational state of the Vethernet is admin down. * `up` - The operational state of the Vethernet is Up. * `down` - The operational state of the Vethernet is Down. * `noLicense` - The operational state of the Vethernet is no license. * `linkUp` - The operational state of the Vethernet is link up. * `hardwareFailure` - The operational state of the Vethernet is hardware failure. * `softwareFailure` - The operational state of the Vethernet is software failure. * `errorDisabled` - The operational state of the Vethernet is error disabled. * `linkDown` - The operational state of the Vethernet is link down. * `sfpNotPresent` - The operational state of the Vethernet is SFP not present. * `udldAggrDown` - The operational state of the Vethernet is UDLD aggregate down.
+	OperState *string `json:"OperState,omitempty"`
+	// Uplink port or portchannel interface pinned to a vitual ethernet interface.
+	PinnedInterfaceDn *string `json:"PinnedInterfaceDn,omitempty"`
+	// Rate limit defined on QoS policy.
+	Ratelimit *int64 `json:"Ratelimit,omitempty"`
 	// Vethernet Identifier on a Fabric Interconnect.
-	VethId                  *int64                               `json:"VethId,omitempty"`
-	AdapterHostEthInterface *AdapterHostEthInterfaceRelationship `json:"AdapterHostEthInterface,omitempty"`
-	NetworkElement          *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice        *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	VethId                  *int64                                      `json:"VethId,omitempty"`
+	AdapterHostEthInterface NullableAdapterHostEthInterfaceRelationship `json:"AdapterHostEthInterface,omitempty"`
+	BoundInterface          NullableInventoryInterfaceRelationship      `json:"BoundInterface,omitempty"`
+	NetworkElement          NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	PinnedInterface         NullableInventoryInterfaceRelationship      `json:"PinnedInterface,omitempty"`
+	RegisteredDevice        NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties    map[string]interface{}
 }
 
@@ -107,9 +125,73 @@ func (o *NetworkVethernet) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetBoundInterfaceDn returns the BoundInterfaceDn field value if set, zero value otherwise.
+func (o *NetworkVethernet) GetBoundInterfaceDn() string {
+	if o == nil || IsNil(o.BoundInterfaceDn) {
+		var ret string
+		return ret
+	}
+	return *o.BoundInterfaceDn
+}
+
+// GetBoundInterfaceDnOk returns a tuple with the BoundInterfaceDn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkVethernet) GetBoundInterfaceDnOk() (*string, bool) {
+	if o == nil || IsNil(o.BoundInterfaceDn) {
+		return nil, false
+	}
+	return o.BoundInterfaceDn, true
+}
+
+// HasBoundInterfaceDn returns a boolean if a field has been set.
+func (o *NetworkVethernet) HasBoundInterfaceDn() bool {
+	if o != nil && !IsNil(o.BoundInterfaceDn) {
+		return true
+	}
+
+	return false
+}
+
+// SetBoundInterfaceDn gets a reference to the given string and assigns it to the BoundInterfaceDn field.
+func (o *NetworkVethernet) SetBoundInterfaceDn(v string) {
+	o.BoundInterfaceDn = &v
+}
+
+// GetBurst returns the Burst field value if set, zero value otherwise.
+func (o *NetworkVethernet) GetBurst() int64 {
+	if o == nil || IsNil(o.Burst) {
+		var ret int64
+		return ret
+	}
+	return *o.Burst
+}
+
+// GetBurstOk returns a tuple with the Burst field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkVethernet) GetBurstOk() (*int64, bool) {
+	if o == nil || IsNil(o.Burst) {
+		return nil, false
+	}
+	return o.Burst, true
+}
+
+// HasBurst returns a boolean if a field has been set.
+func (o *NetworkVethernet) HasBurst() bool {
+	if o != nil && !IsNil(o.Burst) {
+		return true
+	}
+
+	return false
+}
+
+// SetBurst gets a reference to the given int64 and assigns it to the Burst field.
+func (o *NetworkVethernet) SetBurst(v int64) {
+	o.Burst = &v
+}
+
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *NetworkVethernet) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -119,7 +201,7 @@ func (o *NetworkVethernet) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVethernet) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -127,7 +209,7 @@ func (o *NetworkVethernet) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *NetworkVethernet) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -139,9 +221,137 @@ func (o *NetworkVethernet) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetOperReason returns the OperReason field value if set, zero value otherwise.
+func (o *NetworkVethernet) GetOperReason() string {
+	if o == nil || IsNil(o.OperReason) {
+		var ret string
+		return ret
+	}
+	return *o.OperReason
+}
+
+// GetOperReasonOk returns a tuple with the OperReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkVethernet) GetOperReasonOk() (*string, bool) {
+	if o == nil || IsNil(o.OperReason) {
+		return nil, false
+	}
+	return o.OperReason, true
+}
+
+// HasOperReason returns a boolean if a field has been set.
+func (o *NetworkVethernet) HasOperReason() bool {
+	if o != nil && !IsNil(o.OperReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperReason gets a reference to the given string and assigns it to the OperReason field.
+func (o *NetworkVethernet) SetOperReason(v string) {
+	o.OperReason = &v
+}
+
+// GetOperState returns the OperState field value if set, zero value otherwise.
+func (o *NetworkVethernet) GetOperState() string {
+	if o == nil || IsNil(o.OperState) {
+		var ret string
+		return ret
+	}
+	return *o.OperState
+}
+
+// GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkVethernet) GetOperStateOk() (*string, bool) {
+	if o == nil || IsNil(o.OperState) {
+		return nil, false
+	}
+	return o.OperState, true
+}
+
+// HasOperState returns a boolean if a field has been set.
+func (o *NetworkVethernet) HasOperState() bool {
+	if o != nil && !IsNil(o.OperState) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperState gets a reference to the given string and assigns it to the OperState field.
+func (o *NetworkVethernet) SetOperState(v string) {
+	o.OperState = &v
+}
+
+// GetPinnedInterfaceDn returns the PinnedInterfaceDn field value if set, zero value otherwise.
+func (o *NetworkVethernet) GetPinnedInterfaceDn() string {
+	if o == nil || IsNil(o.PinnedInterfaceDn) {
+		var ret string
+		return ret
+	}
+	return *o.PinnedInterfaceDn
+}
+
+// GetPinnedInterfaceDnOk returns a tuple with the PinnedInterfaceDn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkVethernet) GetPinnedInterfaceDnOk() (*string, bool) {
+	if o == nil || IsNil(o.PinnedInterfaceDn) {
+		return nil, false
+	}
+	return o.PinnedInterfaceDn, true
+}
+
+// HasPinnedInterfaceDn returns a boolean if a field has been set.
+func (o *NetworkVethernet) HasPinnedInterfaceDn() bool {
+	if o != nil && !IsNil(o.PinnedInterfaceDn) {
+		return true
+	}
+
+	return false
+}
+
+// SetPinnedInterfaceDn gets a reference to the given string and assigns it to the PinnedInterfaceDn field.
+func (o *NetworkVethernet) SetPinnedInterfaceDn(v string) {
+	o.PinnedInterfaceDn = &v
+}
+
+// GetRatelimit returns the Ratelimit field value if set, zero value otherwise.
+func (o *NetworkVethernet) GetRatelimit() int64 {
+	if o == nil || IsNil(o.Ratelimit) {
+		var ret int64
+		return ret
+	}
+	return *o.Ratelimit
+}
+
+// GetRatelimitOk returns a tuple with the Ratelimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkVethernet) GetRatelimitOk() (*int64, bool) {
+	if o == nil || IsNil(o.Ratelimit) {
+		return nil, false
+	}
+	return o.Ratelimit, true
+}
+
+// HasRatelimit returns a boolean if a field has been set.
+func (o *NetworkVethernet) HasRatelimit() bool {
+	if o != nil && !IsNil(o.Ratelimit) {
+		return true
+	}
+
+	return false
+}
+
+// SetRatelimit gets a reference to the given int64 and assigns it to the Ratelimit field.
+func (o *NetworkVethernet) SetRatelimit(v int64) {
+	o.Ratelimit = &v
+}
+
 // GetVethId returns the VethId field value if set, zero value otherwise.
 func (o *NetworkVethernet) GetVethId() int64 {
-	if o == nil || o.VethId == nil {
+	if o == nil || IsNil(o.VethId) {
 		var ret int64
 		return ret
 	}
@@ -151,7 +361,7 @@ func (o *NetworkVethernet) GetVethId() int64 {
 // GetVethIdOk returns a tuple with the VethId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVethernet) GetVethIdOk() (*int64, bool) {
-	if o == nil || o.VethId == nil {
+	if o == nil || IsNil(o.VethId) {
 		return nil, false
 	}
 	return o.VethId, true
@@ -159,7 +369,7 @@ func (o *NetworkVethernet) GetVethIdOk() (*int64, bool) {
 
 // HasVethId returns a boolean if a field has been set.
 func (o *NetworkVethernet) HasVethId() bool {
-	if o != nil && o.VethId != nil {
+	if o != nil && !IsNil(o.VethId) {
 		return true
 	}
 
@@ -171,167 +381,358 @@ func (o *NetworkVethernet) SetVethId(v int64) {
 	o.VethId = &v
 }
 
-// GetAdapterHostEthInterface returns the AdapterHostEthInterface field value if set, zero value otherwise.
+// GetAdapterHostEthInterface returns the AdapterHostEthInterface field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkVethernet) GetAdapterHostEthInterface() AdapterHostEthInterfaceRelationship {
-	if o == nil || o.AdapterHostEthInterface == nil {
+	if o == nil || IsNil(o.AdapterHostEthInterface.Get()) {
 		var ret AdapterHostEthInterfaceRelationship
 		return ret
 	}
-	return *o.AdapterHostEthInterface
+	return *o.AdapterHostEthInterface.Get()
 }
 
 // GetAdapterHostEthInterfaceOk returns a tuple with the AdapterHostEthInterface field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkVethernet) GetAdapterHostEthInterfaceOk() (*AdapterHostEthInterfaceRelationship, bool) {
-	if o == nil || o.AdapterHostEthInterface == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdapterHostEthInterface, true
+	return o.AdapterHostEthInterface.Get(), o.AdapterHostEthInterface.IsSet()
 }
 
 // HasAdapterHostEthInterface returns a boolean if a field has been set.
 func (o *NetworkVethernet) HasAdapterHostEthInterface() bool {
-	if o != nil && o.AdapterHostEthInterface != nil {
+	if o != nil && o.AdapterHostEthInterface.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAdapterHostEthInterface gets a reference to the given AdapterHostEthInterfaceRelationship and assigns it to the AdapterHostEthInterface field.
+// SetAdapterHostEthInterface gets a reference to the given NullableAdapterHostEthInterfaceRelationship and assigns it to the AdapterHostEthInterface field.
 func (o *NetworkVethernet) SetAdapterHostEthInterface(v AdapterHostEthInterfaceRelationship) {
-	o.AdapterHostEthInterface = &v
+	o.AdapterHostEthInterface.Set(&v)
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// SetAdapterHostEthInterfaceNil sets the value for AdapterHostEthInterface to be an explicit nil
+func (o *NetworkVethernet) SetAdapterHostEthInterfaceNil() {
+	o.AdapterHostEthInterface.Set(nil)
+}
+
+// UnsetAdapterHostEthInterface ensures that no value is present for AdapterHostEthInterface, not even an explicit nil
+func (o *NetworkVethernet) UnsetAdapterHostEthInterface() {
+	o.AdapterHostEthInterface.Unset()
+}
+
+// GetBoundInterface returns the BoundInterface field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkVethernet) GetBoundInterface() InventoryInterfaceRelationship {
+	if o == nil || IsNil(o.BoundInterface.Get()) {
+		var ret InventoryInterfaceRelationship
+		return ret
+	}
+	return *o.BoundInterface.Get()
+}
+
+// GetBoundInterfaceOk returns a tuple with the BoundInterface field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkVethernet) GetBoundInterfaceOk() (*InventoryInterfaceRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BoundInterface.Get(), o.BoundInterface.IsSet()
+}
+
+// HasBoundInterface returns a boolean if a field has been set.
+func (o *NetworkVethernet) HasBoundInterface() bool {
+	if o != nil && o.BoundInterface.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBoundInterface gets a reference to the given NullableInventoryInterfaceRelationship and assigns it to the BoundInterface field.
+func (o *NetworkVethernet) SetBoundInterface(v InventoryInterfaceRelationship) {
+	o.BoundInterface.Set(&v)
+}
+
+// SetBoundInterfaceNil sets the value for BoundInterface to be an explicit nil
+func (o *NetworkVethernet) SetBoundInterfaceNil() {
+	o.BoundInterface.Set(nil)
+}
+
+// UnsetBoundInterface ensures that no value is present for BoundInterface, not even an explicit nil
+func (o *NetworkVethernet) UnsetBoundInterface() {
+	o.BoundInterface.Unset()
+}
+
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkVethernet) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkVethernet) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *NetworkVethernet) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *NetworkVethernet) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *NetworkVethernet) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *NetworkVethernet) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetPinnedInterface returns the PinnedInterface field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkVethernet) GetPinnedInterface() InventoryInterfaceRelationship {
+	if o == nil || IsNil(o.PinnedInterface.Get()) {
+		var ret InventoryInterfaceRelationship
+		return ret
+	}
+	return *o.PinnedInterface.Get()
+}
+
+// GetPinnedInterfaceOk returns a tuple with the PinnedInterface field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkVethernet) GetPinnedInterfaceOk() (*InventoryInterfaceRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PinnedInterface.Get(), o.PinnedInterface.IsSet()
+}
+
+// HasPinnedInterface returns a boolean if a field has been set.
+func (o *NetworkVethernet) HasPinnedInterface() bool {
+	if o != nil && o.PinnedInterface.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPinnedInterface gets a reference to the given NullableInventoryInterfaceRelationship and assigns it to the PinnedInterface field.
+func (o *NetworkVethernet) SetPinnedInterface(v InventoryInterfaceRelationship) {
+	o.PinnedInterface.Set(&v)
+}
+
+// SetPinnedInterfaceNil sets the value for PinnedInterface to be an explicit nil
+func (o *NetworkVethernet) SetPinnedInterfaceNil() {
+	o.PinnedInterface.Set(nil)
+}
+
+// UnsetPinnedInterface ensures that no value is present for PinnedInterface, not even an explicit nil
+func (o *NetworkVethernet) UnsetPinnedInterface() {
+	o.PinnedInterface.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkVethernet) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkVethernet) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NetworkVethernet) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NetworkVethernet) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NetworkVethernet) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NetworkVethernet) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NetworkVethernet) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NetworkVethernet) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BoundInterfaceDn) {
+		toSerialize["BoundInterfaceDn"] = o.BoundInterfaceDn
 	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Burst) {
+		toSerialize["Burst"] = o.Burst
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.VethId != nil {
+	if !IsNil(o.OperReason) {
+		toSerialize["OperReason"] = o.OperReason
+	}
+	if !IsNil(o.OperState) {
+		toSerialize["OperState"] = o.OperState
+	}
+	if !IsNil(o.PinnedInterfaceDn) {
+		toSerialize["PinnedInterfaceDn"] = o.PinnedInterfaceDn
+	}
+	if !IsNil(o.Ratelimit) {
+		toSerialize["Ratelimit"] = o.Ratelimit
+	}
+	if !IsNil(o.VethId) {
 		toSerialize["VethId"] = o.VethId
 	}
-	if o.AdapterHostEthInterface != nil {
-		toSerialize["AdapterHostEthInterface"] = o.AdapterHostEthInterface
+	if o.AdapterHostEthInterface.IsSet() {
+		toSerialize["AdapterHostEthInterface"] = o.AdapterHostEthInterface.Get()
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.BoundInterface.IsSet() {
+		toSerialize["BoundInterface"] = o.BoundInterface.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
+	}
+	if o.PinnedInterface.IsSet() {
+		toSerialize["PinnedInterface"] = o.PinnedInterface.Get()
+	}
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NetworkVethernet) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NetworkVethernet) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NetworkVethernetWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Port or portchannel interface configured for vitual ethernet interface.
+		BoundInterfaceDn *string `json:"BoundInterfaceDn,omitempty"`
+		// Burst defined on QoS policy.
+		Burst *int64 `json:"Burst,omitempty"`
 		// Description for the vNIC.
 		Description *string `json:"Description,omitempty"`
+		// Operational Reason of the virtual etherent interface on the Fabric Interconnect. When the operational state is down, Operreason indicates the reason why the vNIC is not operational. Some common reasons are admindown, error disabled.
+		OperReason *string `json:"OperReason,omitempty"`
+		// The operational state of the Active Vethernet peer of a vNIC in Intersight Managed Mode. This state is updated by events from Fabric Interconnect or by periodic updates from Fabric Interconnect. When a Fabric Interconnect is not connected to Intersight or if the Fabric Interconnect is powered down, this property will not be updated. * `unknown` - The operational state of the Vethernet is not known. * `adminDown` - The operational state of the Vethernet is admin down. * `up` - The operational state of the Vethernet is Up. * `down` - The operational state of the Vethernet is Down. * `noLicense` - The operational state of the Vethernet is no license. * `linkUp` - The operational state of the Vethernet is link up. * `hardwareFailure` - The operational state of the Vethernet is hardware failure. * `softwareFailure` - The operational state of the Vethernet is software failure. * `errorDisabled` - The operational state of the Vethernet is error disabled. * `linkDown` - The operational state of the Vethernet is link down. * `sfpNotPresent` - The operational state of the Vethernet is SFP not present. * `udldAggrDown` - The operational state of the Vethernet is UDLD aggregate down.
+		OperState *string `json:"OperState,omitempty"`
+		// Uplink port or portchannel interface pinned to a vitual ethernet interface.
+		PinnedInterfaceDn *string `json:"PinnedInterfaceDn,omitempty"`
+		// Rate limit defined on QoS policy.
+		Ratelimit *int64 `json:"Ratelimit,omitempty"`
 		// Vethernet Identifier on a Fabric Interconnect.
-		VethId                  *int64                               `json:"VethId,omitempty"`
-		AdapterHostEthInterface *AdapterHostEthInterfaceRelationship `json:"AdapterHostEthInterface,omitempty"`
-		NetworkElement          *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice        *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		VethId                  *int64                                      `json:"VethId,omitempty"`
+		AdapterHostEthInterface NullableAdapterHostEthInterfaceRelationship `json:"AdapterHostEthInterface,omitempty"`
+		BoundInterface          NullableInventoryInterfaceRelationship      `json:"BoundInterface,omitempty"`
+		NetworkElement          NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		PinnedInterface         NullableInventoryInterfaceRelationship      `json:"PinnedInterface,omitempty"`
+		RegisteredDevice        NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNetworkVethernetWithoutEmbeddedStruct := NetworkVethernetWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNetworkVethernetWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNetworkVethernetWithoutEmbeddedStruct)
 	if err == nil {
 		varNetworkVethernet := _NetworkVethernet{}
 		varNetworkVethernet.ClassId = varNetworkVethernetWithoutEmbeddedStruct.ClassId
 		varNetworkVethernet.ObjectType = varNetworkVethernetWithoutEmbeddedStruct.ObjectType
+		varNetworkVethernet.BoundInterfaceDn = varNetworkVethernetWithoutEmbeddedStruct.BoundInterfaceDn
+		varNetworkVethernet.Burst = varNetworkVethernetWithoutEmbeddedStruct.Burst
 		varNetworkVethernet.Description = varNetworkVethernetWithoutEmbeddedStruct.Description
+		varNetworkVethernet.OperReason = varNetworkVethernetWithoutEmbeddedStruct.OperReason
+		varNetworkVethernet.OperState = varNetworkVethernetWithoutEmbeddedStruct.OperState
+		varNetworkVethernet.PinnedInterfaceDn = varNetworkVethernetWithoutEmbeddedStruct.PinnedInterfaceDn
+		varNetworkVethernet.Ratelimit = varNetworkVethernetWithoutEmbeddedStruct.Ratelimit
 		varNetworkVethernet.VethId = varNetworkVethernetWithoutEmbeddedStruct.VethId
 		varNetworkVethernet.AdapterHostEthInterface = varNetworkVethernetWithoutEmbeddedStruct.AdapterHostEthInterface
+		varNetworkVethernet.BoundInterface = varNetworkVethernetWithoutEmbeddedStruct.BoundInterface
 		varNetworkVethernet.NetworkElement = varNetworkVethernetWithoutEmbeddedStruct.NetworkElement
+		varNetworkVethernet.PinnedInterface = varNetworkVethernetWithoutEmbeddedStruct.PinnedInterface
 		varNetworkVethernet.RegisteredDevice = varNetworkVethernetWithoutEmbeddedStruct.RegisteredDevice
 		*o = NetworkVethernet(varNetworkVethernet)
 	} else {
@@ -340,7 +741,7 @@ func (o *NetworkVethernet) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNetworkVethernet := _NetworkVethernet{}
 
-	err = json.Unmarshal(bytes, &varNetworkVethernet)
+	err = json.Unmarshal(data, &varNetworkVethernet)
 	if err == nil {
 		o.InventoryBase = varNetworkVethernet.InventoryBase
 	} else {
@@ -349,13 +750,21 @@ func (o *NetworkVethernet) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "BoundInterfaceDn")
+		delete(additionalProperties, "Burst")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "OperReason")
+		delete(additionalProperties, "OperState")
+		delete(additionalProperties, "PinnedInterfaceDn")
+		delete(additionalProperties, "Ratelimit")
 		delete(additionalProperties, "VethId")
 		delete(additionalProperties, "AdapterHostEthInterface")
+		delete(additionalProperties, "BoundInterface")
 		delete(additionalProperties, "NetworkElement")
+		delete(additionalProperties, "PinnedInterface")
 		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowAnsiblePlaySession type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowAnsiblePlaySession{}
 
 // WorkflowAnsiblePlaySession This models a single Ansible playbook execution session on the Ansible Control node. While execution of the respective Ansible task, the below provided property values are used to construct the SSH Batch executor, which gets executed on the endpoint.
 type WorkflowAnsiblePlaySession struct {
@@ -110,7 +114,7 @@ func (o *WorkflowAnsiblePlaySession) SetObjectType(v string) {
 
 // GetCommandLineArguments returns the CommandLineArguments field value if set, zero value otherwise.
 func (o *WorkflowAnsiblePlaySession) GetCommandLineArguments() string {
-	if o == nil || o.CommandLineArguments == nil {
+	if o == nil || IsNil(o.CommandLineArguments) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *WorkflowAnsiblePlaySession) GetCommandLineArguments() string {
 // GetCommandLineArgumentsOk returns a tuple with the CommandLineArguments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowAnsiblePlaySession) GetCommandLineArgumentsOk() (*string, bool) {
-	if o == nil || o.CommandLineArguments == nil {
+	if o == nil || IsNil(o.CommandLineArguments) {
 		return nil, false
 	}
 	return o.CommandLineArguments, true
@@ -128,7 +132,7 @@ func (o *WorkflowAnsiblePlaySession) GetCommandLineArgumentsOk() (*string, bool)
 
 // HasCommandLineArguments returns a boolean if a field has been set.
 func (o *WorkflowAnsiblePlaySession) HasCommandLineArguments() bool {
-	if o != nil && o.CommandLineArguments != nil {
+	if o != nil && !IsNil(o.CommandLineArguments) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *WorkflowAnsiblePlaySession) SetCommandLineArguments(v string) {
 
 // GetHostInventory returns the HostInventory field value if set, zero value otherwise.
 func (o *WorkflowAnsiblePlaySession) GetHostInventory() string {
-	if o == nil || o.HostInventory == nil {
+	if o == nil || IsNil(o.HostInventory) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *WorkflowAnsiblePlaySession) GetHostInventory() string {
 // GetHostInventoryOk returns a tuple with the HostInventory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowAnsiblePlaySession) GetHostInventoryOk() (*string, bool) {
-	if o == nil || o.HostInventory == nil {
+	if o == nil || IsNil(o.HostInventory) {
 		return nil, false
 	}
 	return o.HostInventory, true
@@ -160,7 +164,7 @@ func (o *WorkflowAnsiblePlaySession) GetHostInventoryOk() (*string, bool) {
 
 // HasHostInventory returns a boolean if a field has been set.
 func (o *WorkflowAnsiblePlaySession) HasHostInventory() bool {
-	if o != nil && o.HostInventory != nil {
+	if o != nil && !IsNil(o.HostInventory) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *WorkflowAnsiblePlaySession) SetHostInventory(v string) {
 
 // GetPlaybookPath returns the PlaybookPath field value if set, zero value otherwise.
 func (o *WorkflowAnsiblePlaySession) GetPlaybookPath() string {
-	if o == nil || o.PlaybookPath == nil {
+	if o == nil || IsNil(o.PlaybookPath) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *WorkflowAnsiblePlaySession) GetPlaybookPath() string {
 // GetPlaybookPathOk returns a tuple with the PlaybookPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowAnsiblePlaySession) GetPlaybookPathOk() (*string, bool) {
-	if o == nil || o.PlaybookPath == nil {
+	if o == nil || IsNil(o.PlaybookPath) {
 		return nil, false
 	}
 	return o.PlaybookPath, true
@@ -192,7 +196,7 @@ func (o *WorkflowAnsiblePlaySession) GetPlaybookPathOk() (*string, bool) {
 
 // HasPlaybookPath returns a boolean if a field has been set.
 func (o *WorkflowAnsiblePlaySession) HasPlaybookPath() bool {
-	if o != nil && o.PlaybookPath != nil {
+	if o != nil && !IsNil(o.PlaybookPath) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *WorkflowAnsiblePlaySession) SetPlaybookPath(v string) {
 
 // GetSshOpTimeout returns the SshOpTimeout field value if set, zero value otherwise.
 func (o *WorkflowAnsiblePlaySession) GetSshOpTimeout() string {
-	if o == nil || o.SshOpTimeout == nil {
+	if o == nil || IsNil(o.SshOpTimeout) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *WorkflowAnsiblePlaySession) GetSshOpTimeout() string {
 // GetSshOpTimeoutOk returns a tuple with the SshOpTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowAnsiblePlaySession) GetSshOpTimeoutOk() (*string, bool) {
-	if o == nil || o.SshOpTimeout == nil {
+	if o == nil || IsNil(o.SshOpTimeout) {
 		return nil, false
 	}
 	return o.SshOpTimeout, true
@@ -224,7 +228,7 @@ func (o *WorkflowAnsiblePlaySession) GetSshOpTimeoutOk() (*string, bool) {
 
 // HasSshOpTimeout returns a boolean if a field has been set.
 func (o *WorkflowAnsiblePlaySession) HasSshOpTimeout() bool {
-	if o != nil && o.SshOpTimeout != nil {
+	if o != nil && !IsNil(o.SshOpTimeout) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *WorkflowAnsiblePlaySession) SetSshOpTimeout(v string) {
 }
 
 func (o WorkflowAnsiblePlaySession) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowAnsiblePlaySession) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowApi, errWorkflowApi := json.Marshal(o.WorkflowApi)
 	if errWorkflowApi != nil {
-		return []byte{}, errWorkflowApi
+		return map[string]interface{}{}, errWorkflowApi
 	}
 	errWorkflowApi = json.Unmarshal([]byte(serializedWorkflowApi), &toSerialize)
 	if errWorkflowApi != nil {
-		return []byte{}, errWorkflowApi
+		return map[string]interface{}{}, errWorkflowApi
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CommandLineArguments != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CommandLineArguments) {
 		toSerialize["CommandLineArguments"] = o.CommandLineArguments
 	}
-	if o.HostInventory != nil {
+	if !IsNil(o.HostInventory) {
 		toSerialize["HostInventory"] = o.HostInventory
 	}
-	if o.PlaybookPath != nil {
+	if !IsNil(o.PlaybookPath) {
 		toSerialize["PlaybookPath"] = o.PlaybookPath
 	}
-	if o.SshOpTimeout != nil {
+	if !IsNil(o.SshOpTimeout) {
 		toSerialize["SshOpTimeout"] = o.SshOpTimeout
 	}
 
@@ -269,10 +277,32 @@ func (o WorkflowAnsiblePlaySession) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowAnsiblePlaySession) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowAnsiblePlaySession) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowAnsiblePlaySessionWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *WorkflowAnsiblePlaySession) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowAnsiblePlaySessionWithoutEmbeddedStruct := WorkflowAnsiblePlaySessionWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowAnsiblePlaySessionWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowAnsiblePlaySessionWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowAnsiblePlaySession := _WorkflowAnsiblePlaySession{}
 		varWorkflowAnsiblePlaySession.ClassId = varWorkflowAnsiblePlaySessionWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *WorkflowAnsiblePlaySession) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowAnsiblePlaySession := _WorkflowAnsiblePlaySession{}
 
-	err = json.Unmarshal(bytes, &varWorkflowAnsiblePlaySession)
+	err = json.Unmarshal(data, &varWorkflowAnsiblePlaySession)
 	if err == nil {
 		o.WorkflowApi = varWorkflowAnsiblePlaySession.WorkflowApi
 	} else {
@@ -315,7 +345,7 @@ func (o *WorkflowAnsiblePlaySession) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CommandLineArguments")

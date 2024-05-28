@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HclOperatingSystem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HclOperatingSystem{}
 
 // HclOperatingSystem Collection used to store operating system details.
 type HclOperatingSystem struct {
@@ -25,8 +29,8 @@ type HclOperatingSystem struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Version of the Operating System.
-	Version              *string                               `json:"Version,omitempty"`
-	Vendor               *HclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
+	Version              *string                                      `json:"Version,omitempty"`
+	Vendor               NullableHclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -105,7 +109,7 @@ func (o *HclOperatingSystem) SetObjectType(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HclOperatingSystem) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -115,7 +119,7 @@ func (o *HclOperatingSystem) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HclOperatingSystem) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -123,7 +127,7 @@ func (o *HclOperatingSystem) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *HclOperatingSystem) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -135,82 +139,119 @@ func (o *HclOperatingSystem) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetVendor returns the Vendor field value if set, zero value otherwise.
+// GetVendor returns the Vendor field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HclOperatingSystem) GetVendor() HclOperatingSystemVendorRelationship {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor.Get()) {
 		var ret HclOperatingSystemVendorRelationship
 		return ret
 	}
-	return *o.Vendor
+	return *o.Vendor.Get()
 }
 
 // GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HclOperatingSystem) GetVendorOk() (*HclOperatingSystemVendorRelationship, bool) {
-	if o == nil || o.Vendor == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Vendor, true
+	return o.Vendor.Get(), o.Vendor.IsSet()
 }
 
 // HasVendor returns a boolean if a field has been set.
 func (o *HclOperatingSystem) HasVendor() bool {
-	if o != nil && o.Vendor != nil {
+	if o != nil && o.Vendor.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVendor gets a reference to the given HclOperatingSystemVendorRelationship and assigns it to the Vendor field.
+// SetVendor gets a reference to the given NullableHclOperatingSystemVendorRelationship and assigns it to the Vendor field.
 func (o *HclOperatingSystem) SetVendor(v HclOperatingSystemVendorRelationship) {
-	o.Vendor = &v
+	o.Vendor.Set(&v)
+}
+
+// SetVendorNil sets the value for Vendor to be an explicit nil
+func (o *HclOperatingSystem) SetVendorNil() {
+	o.Vendor.Set(nil)
+}
+
+// UnsetVendor ensures that no value is present for Vendor, not even an explicit nil
+func (o *HclOperatingSystem) UnsetVendor() {
+	o.Vendor.Unset()
 }
 
 func (o HclOperatingSystem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HclOperatingSystem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Version != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.Vendor != nil {
-		toSerialize["Vendor"] = o.Vendor
+	if o.Vendor.IsSet() {
+		toSerialize["Vendor"] = o.Vendor.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HclOperatingSystem) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HclOperatingSystem) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HclOperatingSystemWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Version of the Operating System.
-		Version *string                               `json:"Version,omitempty"`
-		Vendor  *HclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
+		Version *string                                      `json:"Version,omitempty"`
+		Vendor  NullableHclOperatingSystemVendorRelationship `json:"Vendor,omitempty"`
 	}
 
 	varHclOperatingSystemWithoutEmbeddedStruct := HclOperatingSystemWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHclOperatingSystemWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHclOperatingSystemWithoutEmbeddedStruct)
 	if err == nil {
 		varHclOperatingSystem := _HclOperatingSystem{}
 		varHclOperatingSystem.ClassId = varHclOperatingSystemWithoutEmbeddedStruct.ClassId
@@ -224,7 +265,7 @@ func (o *HclOperatingSystem) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHclOperatingSystem := _HclOperatingSystem{}
 
-	err = json.Unmarshal(bytes, &varHclOperatingSystem)
+	err = json.Unmarshal(data, &varHclOperatingSystem)
 	if err == nil {
 		o.MoBaseMo = varHclOperatingSystem.MoBaseMo
 	} else {
@@ -233,7 +274,7 @@ func (o *HclOperatingSystem) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Version")

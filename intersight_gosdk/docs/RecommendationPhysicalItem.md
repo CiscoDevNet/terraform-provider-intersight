@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **SourceMoid** | Pointer to **string** | Moid of the managed object which represents the existing physical entity. | [optional] [readonly] 
 **Unit** | Pointer to **string** | Unit of the new capacity. * &#x60;TB&#x60; - The Enum value TB represents that the measurement unit is in terabytes. * &#x60;MB&#x60; - The Enum value MB represents that the measurement unit is in megabytes. * &#x60;GB&#x60; - The Enum value GB represents that the measurement unit is in gigabytes. * &#x60;MHz&#x60; - The Enum value MHz represents that the measurement unit is in megahertz. * &#x60;GHz&#x60; - The Enum value GHz represents that the measurement unit is in gigahertz. * &#x60;Percentage&#x60; - The Enum value Percentage represents that the expansion request is in the percentage of resource increase. For example, a 20% increase in CPU capacity. | [optional] [readonly] [default to "TB"]
 **Uuid** | Pointer to **string** | Uuid of the recommended physical device. | [optional] [readonly] 
-**CapacityRunway** | Pointer to [**RecommendationCapacityRunwayRelationship**](RecommendationCapacityRunwayRelationship.md) |  | [optional] 
-**ClusterExpansion** | Pointer to [**RecommendationClusterExpansionRelationship**](RecommendationClusterExpansionRelationship.md) |  | [optional] 
+**CapacityRunway** | Pointer to [**NullableRecommendationCapacityRunwayRelationship**](RecommendationCapacityRunwayRelationship.md) |  | [optional] 
+**ClusterExpansion** | Pointer to [**NullableRecommendationClusterExpansionRelationship**](RecommendationClusterExpansionRelationship.md) |  | [optional] 
 **PhysicalItem** | Pointer to [**[]RecommendationPhysicalItemRelationship**](RecommendationPhysicalItemRelationship.md) | An array of relationships to recommendationPhysicalItem resources. | [optional] [readonly] 
 
 ## Methods
@@ -354,6 +354,16 @@ SetCapacityRunway sets CapacityRunway field to given value.
 
 HasCapacityRunway returns a boolean if a field has been set.
 
+### SetCapacityRunwayNil
+
+`func (o *RecommendationPhysicalItem) SetCapacityRunwayNil(b bool)`
+
+ SetCapacityRunwayNil sets the value for CapacityRunway to be an explicit nil
+
+### UnsetCapacityRunway
+`func (o *RecommendationPhysicalItem) UnsetCapacityRunway()`
+
+UnsetCapacityRunway ensures that no value is present for CapacityRunway, not even an explicit nil
 ### GetClusterExpansion
 
 `func (o *RecommendationPhysicalItem) GetClusterExpansion() RecommendationClusterExpansionRelationship`
@@ -379,6 +389,16 @@ SetClusterExpansion sets ClusterExpansion field to given value.
 
 HasClusterExpansion returns a boolean if a field has been set.
 
+### SetClusterExpansionNil
+
+`func (o *RecommendationPhysicalItem) SetClusterExpansionNil(b bool)`
+
+ SetClusterExpansionNil sets the value for ClusterExpansion to be an explicit nil
+
+### UnsetClusterExpansion
+`func (o *RecommendationPhysicalItem) UnsetClusterExpansion()`
+
+UnsetClusterExpansion ensures that no value is present for ClusterExpansion, not even an explicit nil
 ### GetPhysicalItem
 
 `func (o *RecommendationPhysicalItem) GetPhysicalItem() []RecommendationPhysicalItemRelationship`

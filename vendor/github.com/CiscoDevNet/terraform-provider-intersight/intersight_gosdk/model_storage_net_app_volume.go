@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppVolume type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppVolume{}
 
 // StorageNetAppVolume NetApp volume are data containers that enable you to partition and manage your data.
 type StorageNetAppVolume struct {
@@ -54,13 +58,13 @@ type StorageNetAppVolume struct {
 	// NetApp volume type. The volume type can be Read-write, Data-protection, or Load-sharing. * `data-protection` - Prevents modification of the data on the Volume. * `read-write` - Data on the Volume can be modified. * `load-sharing` - The volume type is Load Sharing DP.
 	Type *string `json:"Type,omitempty"`
 	// Universally unique identifier of a NetApp Volume.
-	Uuid  *string                           `json:"Uuid,omitempty"`
-	Array *StorageNetAppClusterRelationship `json:"Array,omitempty"`
+	Uuid  *string                                  `json:"Uuid,omitempty"`
+	Array NullableStorageNetAppClusterRelationship `json:"Array,omitempty"`
 	// An array of relationships to storageNetAppAggregate resources.
 	DiskPool []StorageNetAppAggregateRelationship `json:"DiskPool,omitempty"`
 	// An array of relationships to storageNetAppVolumeEvent resources.
-	Events               []StorageNetAppVolumeEventRelationship `json:"Events,omitempty"`
-	Tenant               *StorageNetAppStorageVmRelationship    `json:"Tenant,omitempty"`
+	Events               []StorageNetAppVolumeEventRelationship     `json:"Events,omitempty"`
+	Tenant               NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -139,7 +143,7 @@ func (o *StorageNetAppVolume) SetObjectType(v string) {
 
 // GetAutosizeMode returns the AutosizeMode field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetAutosizeMode() string {
-	if o == nil || o.AutosizeMode == nil {
+	if o == nil || IsNil(o.AutosizeMode) {
 		var ret string
 		return ret
 	}
@@ -149,7 +153,7 @@ func (o *StorageNetAppVolume) GetAutosizeMode() string {
 // GetAutosizeModeOk returns a tuple with the AutosizeMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetAutosizeModeOk() (*string, bool) {
-	if o == nil || o.AutosizeMode == nil {
+	if o == nil || IsNil(o.AutosizeMode) {
 		return nil, false
 	}
 	return o.AutosizeMode, true
@@ -157,7 +161,7 @@ func (o *StorageNetAppVolume) GetAutosizeModeOk() (*string, bool) {
 
 // HasAutosizeMode returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasAutosizeMode() bool {
-	if o != nil && o.AutosizeMode != nil {
+	if o != nil && !IsNil(o.AutosizeMode) {
 		return true
 	}
 
@@ -171,7 +175,7 @@ func (o *StorageNetAppVolume) SetAutosizeMode(v string) {
 
 // GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage {
-	if o == nil || o.AvgPerformanceMetrics == nil {
+	if o == nil || IsNil(o.AvgPerformanceMetrics) {
 		var ret StorageNetAppPerformanceMetricsAverage
 		return ret
 	}
@@ -181,7 +185,7 @@ func (o *StorageNetAppVolume) GetAvgPerformanceMetrics() StorageNetAppPerformanc
 // GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool) {
-	if o == nil || o.AvgPerformanceMetrics == nil {
+	if o == nil || IsNil(o.AvgPerformanceMetrics) {
 		return nil, false
 	}
 	return o.AvgPerformanceMetrics, true
@@ -189,7 +193,7 @@ func (o *StorageNetAppVolume) GetAvgPerformanceMetricsOk() (*StorageNetAppPerfor
 
 // HasAvgPerformanceMetrics returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasAvgPerformanceMetrics() bool {
-	if o != nil && o.AvgPerformanceMetrics != nil {
+	if o != nil && !IsNil(o.AvgPerformanceMetrics) {
 		return true
 	}
 
@@ -203,7 +207,7 @@ func (o *StorageNetAppVolume) SetAvgPerformanceMetrics(v StorageNetAppPerformanc
 
 // GetExportPolicyName returns the ExportPolicyName field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetExportPolicyName() string {
-	if o == nil || o.ExportPolicyName == nil {
+	if o == nil || IsNil(o.ExportPolicyName) {
 		var ret string
 		return ret
 	}
@@ -213,7 +217,7 @@ func (o *StorageNetAppVolume) GetExportPolicyName() string {
 // GetExportPolicyNameOk returns a tuple with the ExportPolicyName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetExportPolicyNameOk() (*string, bool) {
-	if o == nil || o.ExportPolicyName == nil {
+	if o == nil || IsNil(o.ExportPolicyName) {
 		return nil, false
 	}
 	return o.ExportPolicyName, true
@@ -221,7 +225,7 @@ func (o *StorageNetAppVolume) GetExportPolicyNameOk() (*string, bool) {
 
 // HasExportPolicyName returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasExportPolicyName() bool {
-	if o != nil && o.ExportPolicyName != nil {
+	if o != nil && !IsNil(o.ExportPolicyName) {
 		return true
 	}
 
@@ -235,7 +239,7 @@ func (o *StorageNetAppVolume) SetExportPolicyName(v string) {
 
 // GetFlexCacheEndpointType returns the FlexCacheEndpointType field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetFlexCacheEndpointType() string {
-	if o == nil || o.FlexCacheEndpointType == nil {
+	if o == nil || IsNil(o.FlexCacheEndpointType) {
 		var ret string
 		return ret
 	}
@@ -245,7 +249,7 @@ func (o *StorageNetAppVolume) GetFlexCacheEndpointType() string {
 // GetFlexCacheEndpointTypeOk returns a tuple with the FlexCacheEndpointType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetFlexCacheEndpointTypeOk() (*string, bool) {
-	if o == nil || o.FlexCacheEndpointType == nil {
+	if o == nil || IsNil(o.FlexCacheEndpointType) {
 		return nil, false
 	}
 	return o.FlexCacheEndpointType, true
@@ -253,7 +257,7 @@ func (o *StorageNetAppVolume) GetFlexCacheEndpointTypeOk() (*string, bool) {
 
 // HasFlexCacheEndpointType returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasFlexCacheEndpointType() bool {
-	if o != nil && o.FlexCacheEndpointType != nil {
+	if o != nil && !IsNil(o.FlexCacheEndpointType) {
 		return true
 	}
 
@@ -267,7 +271,7 @@ func (o *StorageNetAppVolume) SetFlexCacheEndpointType(v string) {
 
 // GetIsObjectStore returns the IsObjectStore field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetIsObjectStore() bool {
-	if o == nil || o.IsObjectStore == nil {
+	if o == nil || IsNil(o.IsObjectStore) {
 		var ret bool
 		return ret
 	}
@@ -277,7 +281,7 @@ func (o *StorageNetAppVolume) GetIsObjectStore() bool {
 // GetIsObjectStoreOk returns a tuple with the IsObjectStore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetIsObjectStoreOk() (*bool, bool) {
-	if o == nil || o.IsObjectStore == nil {
+	if o == nil || IsNil(o.IsObjectStore) {
 		return nil, false
 	}
 	return o.IsObjectStore, true
@@ -285,7 +289,7 @@ func (o *StorageNetAppVolume) GetIsObjectStoreOk() (*bool, bool) {
 
 // HasIsObjectStore returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasIsObjectStore() bool {
-	if o != nil && o.IsObjectStore != nil {
+	if o != nil && !IsNil(o.IsObjectStore) {
 		return true
 	}
 
@@ -299,7 +303,7 @@ func (o *StorageNetAppVolume) SetIsObjectStore(v bool) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -309,7 +313,7 @@ func (o *StorageNetAppVolume) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -317,7 +321,7 @@ func (o *StorageNetAppVolume) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -331,7 +335,7 @@ func (o *StorageNetAppVolume) SetKey(v string) {
 
 // GetSnapshotAutodeleteEnabled returns the SnapshotAutodeleteEnabled field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetSnapshotAutodeleteEnabled() bool {
-	if o == nil || o.SnapshotAutodeleteEnabled == nil {
+	if o == nil || IsNil(o.SnapshotAutodeleteEnabled) {
 		var ret bool
 		return ret
 	}
@@ -341,7 +345,7 @@ func (o *StorageNetAppVolume) GetSnapshotAutodeleteEnabled() bool {
 // GetSnapshotAutodeleteEnabledOk returns a tuple with the SnapshotAutodeleteEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetSnapshotAutodeleteEnabledOk() (*bool, bool) {
-	if o == nil || o.SnapshotAutodeleteEnabled == nil {
+	if o == nil || IsNil(o.SnapshotAutodeleteEnabled) {
 		return nil, false
 	}
 	return o.SnapshotAutodeleteEnabled, true
@@ -349,7 +353,7 @@ func (o *StorageNetAppVolume) GetSnapshotAutodeleteEnabledOk() (*bool, bool) {
 
 // HasSnapshotAutodeleteEnabled returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasSnapshotAutodeleteEnabled() bool {
-	if o != nil && o.SnapshotAutodeleteEnabled != nil {
+	if o != nil && !IsNil(o.SnapshotAutodeleteEnabled) {
 		return true
 	}
 
@@ -363,7 +367,7 @@ func (o *StorageNetAppVolume) SetSnapshotAutodeleteEnabled(v bool) {
 
 // GetSnapshotPolicyName returns the SnapshotPolicyName field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetSnapshotPolicyName() string {
-	if o == nil || o.SnapshotPolicyName == nil {
+	if o == nil || IsNil(o.SnapshotPolicyName) {
 		var ret string
 		return ret
 	}
@@ -373,7 +377,7 @@ func (o *StorageNetAppVolume) GetSnapshotPolicyName() string {
 // GetSnapshotPolicyNameOk returns a tuple with the SnapshotPolicyName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetSnapshotPolicyNameOk() (*string, bool) {
-	if o == nil || o.SnapshotPolicyName == nil {
+	if o == nil || IsNil(o.SnapshotPolicyName) {
 		return nil, false
 	}
 	return o.SnapshotPolicyName, true
@@ -381,7 +385,7 @@ func (o *StorageNetAppVolume) GetSnapshotPolicyNameOk() (*string, bool) {
 
 // HasSnapshotPolicyName returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasSnapshotPolicyName() bool {
-	if o != nil && o.SnapshotPolicyName != nil {
+	if o != nil && !IsNil(o.SnapshotPolicyName) {
 		return true
 	}
 
@@ -395,7 +399,7 @@ func (o *StorageNetAppVolume) SetSnapshotPolicyName(v string) {
 
 // GetSnapshotPolicyUuid returns the SnapshotPolicyUuid field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetSnapshotPolicyUuid() string {
-	if o == nil || o.SnapshotPolicyUuid == nil {
+	if o == nil || IsNil(o.SnapshotPolicyUuid) {
 		var ret string
 		return ret
 	}
@@ -405,7 +409,7 @@ func (o *StorageNetAppVolume) GetSnapshotPolicyUuid() string {
 // GetSnapshotPolicyUuidOk returns a tuple with the SnapshotPolicyUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetSnapshotPolicyUuidOk() (*string, bool) {
-	if o == nil || o.SnapshotPolicyUuid == nil {
+	if o == nil || IsNil(o.SnapshotPolicyUuid) {
 		return nil, false
 	}
 	return o.SnapshotPolicyUuid, true
@@ -413,7 +417,7 @@ func (o *StorageNetAppVolume) GetSnapshotPolicyUuidOk() (*string, bool) {
 
 // HasSnapshotPolicyUuid returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasSnapshotPolicyUuid() bool {
-	if o != nil && o.SnapshotPolicyUuid != nil {
+	if o != nil && !IsNil(o.SnapshotPolicyUuid) {
 		return true
 	}
 
@@ -427,7 +431,7 @@ func (o *StorageNetAppVolume) SetSnapshotPolicyUuid(v string) {
 
 // GetSnapshotReservePercent returns the SnapshotReservePercent field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetSnapshotReservePercent() int64 {
-	if o == nil || o.SnapshotReservePercent == nil {
+	if o == nil || IsNil(o.SnapshotReservePercent) {
 		var ret int64
 		return ret
 	}
@@ -437,7 +441,7 @@ func (o *StorageNetAppVolume) GetSnapshotReservePercent() int64 {
 // GetSnapshotReservePercentOk returns a tuple with the SnapshotReservePercent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetSnapshotReservePercentOk() (*int64, bool) {
-	if o == nil || o.SnapshotReservePercent == nil {
+	if o == nil || IsNil(o.SnapshotReservePercent) {
 		return nil, false
 	}
 	return o.SnapshotReservePercent, true
@@ -445,7 +449,7 @@ func (o *StorageNetAppVolume) GetSnapshotReservePercentOk() (*int64, bool) {
 
 // HasSnapshotReservePercent returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasSnapshotReservePercent() bool {
-	if o != nil && o.SnapshotReservePercent != nil {
+	if o != nil && !IsNil(o.SnapshotReservePercent) {
 		return true
 	}
 
@@ -459,7 +463,7 @@ func (o *StorageNetAppVolume) SetSnapshotReservePercent(v int64) {
 
 // GetSnapshotUsed returns the SnapshotUsed field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetSnapshotUsed() float64 {
-	if o == nil || o.SnapshotUsed == nil {
+	if o == nil || IsNil(o.SnapshotUsed) {
 		var ret float64
 		return ret
 	}
@@ -469,7 +473,7 @@ func (o *StorageNetAppVolume) GetSnapshotUsed() float64 {
 // GetSnapshotUsedOk returns a tuple with the SnapshotUsed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetSnapshotUsedOk() (*float64, bool) {
-	if o == nil || o.SnapshotUsed == nil {
+	if o == nil || IsNil(o.SnapshotUsed) {
 		return nil, false
 	}
 	return o.SnapshotUsed, true
@@ -477,7 +481,7 @@ func (o *StorageNetAppVolume) GetSnapshotUsedOk() (*float64, bool) {
 
 // HasSnapshotUsed returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasSnapshotUsed() bool {
-	if o != nil && o.SnapshotUsed != nil {
+	if o != nil && !IsNil(o.SnapshotUsed) {
 		return true
 	}
 
@@ -491,7 +495,7 @@ func (o *StorageNetAppVolume) SetSnapshotUsed(v float64) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -501,7 +505,7 @@ func (o *StorageNetAppVolume) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -509,7 +513,7 @@ func (o *StorageNetAppVolume) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -523,7 +527,7 @@ func (o *StorageNetAppVolume) SetState(v string) {
 
 // GetStyle returns the Style field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetStyle() string {
-	if o == nil || o.Style == nil {
+	if o == nil || IsNil(o.Style) {
 		var ret string
 		return ret
 	}
@@ -533,7 +537,7 @@ func (o *StorageNetAppVolume) GetStyle() string {
 // GetStyleOk returns a tuple with the Style field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetStyleOk() (*string, bool) {
-	if o == nil || o.Style == nil {
+	if o == nil || IsNil(o.Style) {
 		return nil, false
 	}
 	return o.Style, true
@@ -541,7 +545,7 @@ func (o *StorageNetAppVolume) GetStyleOk() (*string, bool) {
 
 // HasStyle returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasStyle() bool {
-	if o != nil && o.Style != nil {
+	if o != nil && !IsNil(o.Style) {
 		return true
 	}
 
@@ -555,7 +559,7 @@ func (o *StorageNetAppVolume) SetStyle(v string) {
 
 // GetSvmName returns the SvmName field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetSvmName() string {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		var ret string
 		return ret
 	}
@@ -565,7 +569,7 @@ func (o *StorageNetAppVolume) GetSvmName() string {
 // GetSvmNameOk returns a tuple with the SvmName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetSvmNameOk() (*string, bool) {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		return nil, false
 	}
 	return o.SvmName, true
@@ -573,7 +577,7 @@ func (o *StorageNetAppVolume) GetSvmNameOk() (*string, bool) {
 
 // HasSvmName returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasSvmName() bool {
-	if o != nil && o.SvmName != nil {
+	if o != nil && !IsNil(o.SvmName) {
 		return true
 	}
 
@@ -587,7 +591,7 @@ func (o *StorageNetAppVolume) SetSvmName(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -597,7 +601,7 @@ func (o *StorageNetAppVolume) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -605,7 +609,7 @@ func (o *StorageNetAppVolume) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -619,7 +623,7 @@ func (o *StorageNetAppVolume) SetType(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *StorageNetAppVolume) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -629,7 +633,7 @@ func (o *StorageNetAppVolume) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppVolume) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -637,7 +641,7 @@ func (o *StorageNetAppVolume) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -649,36 +653,47 @@ func (o *StorageNetAppVolume) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppVolume) GetArray() StorageNetAppClusterRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageNetAppClusterRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppVolume) GetArrayOk() (*StorageNetAppClusterRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageNetAppClusterRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageNetAppClusterRelationship and assigns it to the Array field.
 func (o *StorageNetAppVolume) SetArray(v StorageNetAppClusterRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
+}
+
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageNetAppVolume) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageNetAppVolume) UnsetArray() {
+	o.Array.Unset()
 }
 
 // GetDiskPool returns the DiskPool field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -694,7 +709,7 @@ func (o *StorageNetAppVolume) GetDiskPool() []StorageNetAppAggregateRelationship
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppVolume) GetDiskPoolOk() ([]StorageNetAppAggregateRelationship, bool) {
-	if o == nil || o.DiskPool == nil {
+	if o == nil || IsNil(o.DiskPool) {
 		return nil, false
 	}
 	return o.DiskPool, true
@@ -702,7 +717,7 @@ func (o *StorageNetAppVolume) GetDiskPoolOk() ([]StorageNetAppAggregateRelations
 
 // HasDiskPool returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasDiskPool() bool {
-	if o != nil && o.DiskPool != nil {
+	if o != nil && IsNil(o.DiskPool) {
 		return true
 	}
 
@@ -727,7 +742,7 @@ func (o *StorageNetAppVolume) GetEvents() []StorageNetAppVolumeEventRelationship
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppVolume) GetEventsOk() ([]StorageNetAppVolumeEventRelationship, bool) {
-	if o == nil || o.Events == nil {
+	if o == nil || IsNil(o.Events) {
 		return nil, false
 	}
 	return o.Events, true
@@ -735,7 +750,7 @@ func (o *StorageNetAppVolume) GetEventsOk() ([]StorageNetAppVolumeEventRelations
 
 // HasEvents returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasEvents() bool {
-	if o != nil && o.Events != nil {
+	if o != nil && IsNil(o.Events) {
 		return true
 	}
 
@@ -747,104 +762,119 @@ func (o *StorageNetAppVolume) SetEvents(v []StorageNetAppVolumeEventRelationship
 	o.Events = v
 }
 
-// GetTenant returns the Tenant field value if set, zero value otherwise.
+// GetTenant returns the Tenant field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppVolume) GetTenant() StorageNetAppStorageVmRelationship {
-	if o == nil || o.Tenant == nil {
+	if o == nil || IsNil(o.Tenant.Get()) {
 		var ret StorageNetAppStorageVmRelationship
 		return ret
 	}
-	return *o.Tenant
+	return *o.Tenant.Get()
 }
 
 // GetTenantOk returns a tuple with the Tenant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppVolume) GetTenantOk() (*StorageNetAppStorageVmRelationship, bool) {
-	if o == nil || o.Tenant == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tenant, true
+	return o.Tenant.Get(), o.Tenant.IsSet()
 }
 
 // HasTenant returns a boolean if a field has been set.
 func (o *StorageNetAppVolume) HasTenant() bool {
-	if o != nil && o.Tenant != nil {
+	if o != nil && o.Tenant.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTenant gets a reference to the given StorageNetAppStorageVmRelationship and assigns it to the Tenant field.
+// SetTenant gets a reference to the given NullableStorageNetAppStorageVmRelationship and assigns it to the Tenant field.
 func (o *StorageNetAppVolume) SetTenant(v StorageNetAppStorageVmRelationship) {
-	o.Tenant = &v
+	o.Tenant.Set(&v)
+}
+
+// SetTenantNil sets the value for Tenant to be an explicit nil
+func (o *StorageNetAppVolume) SetTenantNil() {
+	o.Tenant.Set(nil)
+}
+
+// UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
+func (o *StorageNetAppVolume) UnsetTenant() {
+	o.Tenant.Unset()
 }
 
 func (o StorageNetAppVolume) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppVolume) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseStorageContainer, errStorageBaseStorageContainer := json.Marshal(o.StorageBaseStorageContainer)
 	if errStorageBaseStorageContainer != nil {
-		return []byte{}, errStorageBaseStorageContainer
+		return map[string]interface{}{}, errStorageBaseStorageContainer
 	}
 	errStorageBaseStorageContainer = json.Unmarshal([]byte(serializedStorageBaseStorageContainer), &toSerialize)
 	if errStorageBaseStorageContainer != nil {
-		return []byte{}, errStorageBaseStorageContainer
+		return map[string]interface{}{}, errStorageBaseStorageContainer
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AutosizeMode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AutosizeMode) {
 		toSerialize["AutosizeMode"] = o.AutosizeMode
 	}
-	if o.AvgPerformanceMetrics != nil {
+	if !IsNil(o.AvgPerformanceMetrics) {
 		toSerialize["AvgPerformanceMetrics"] = o.AvgPerformanceMetrics
 	}
-	if o.ExportPolicyName != nil {
+	if !IsNil(o.ExportPolicyName) {
 		toSerialize["ExportPolicyName"] = o.ExportPolicyName
 	}
-	if o.FlexCacheEndpointType != nil {
+	if !IsNil(o.FlexCacheEndpointType) {
 		toSerialize["FlexCacheEndpointType"] = o.FlexCacheEndpointType
 	}
-	if o.IsObjectStore != nil {
+	if !IsNil(o.IsObjectStore) {
 		toSerialize["IsObjectStore"] = o.IsObjectStore
 	}
-	if o.Key != nil {
+	if !IsNil(o.Key) {
 		toSerialize["Key"] = o.Key
 	}
-	if o.SnapshotAutodeleteEnabled != nil {
+	if !IsNil(o.SnapshotAutodeleteEnabled) {
 		toSerialize["SnapshotAutodeleteEnabled"] = o.SnapshotAutodeleteEnabled
 	}
-	if o.SnapshotPolicyName != nil {
+	if !IsNil(o.SnapshotPolicyName) {
 		toSerialize["SnapshotPolicyName"] = o.SnapshotPolicyName
 	}
-	if o.SnapshotPolicyUuid != nil {
+	if !IsNil(o.SnapshotPolicyUuid) {
 		toSerialize["SnapshotPolicyUuid"] = o.SnapshotPolicyUuid
 	}
-	if o.SnapshotReservePercent != nil {
+	if !IsNil(o.SnapshotReservePercent) {
 		toSerialize["SnapshotReservePercent"] = o.SnapshotReservePercent
 	}
-	if o.SnapshotUsed != nil {
+	if !IsNil(o.SnapshotUsed) {
 		toSerialize["SnapshotUsed"] = o.SnapshotUsed
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Style != nil {
+	if !IsNil(o.Style) {
 		toSerialize["Style"] = o.Style
 	}
-	if o.SvmName != nil {
+	if !IsNil(o.SvmName) {
 		toSerialize["SvmName"] = o.SvmName
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
 	if o.DiskPool != nil {
 		toSerialize["DiskPool"] = o.DiskPool
@@ -852,18 +882,40 @@ func (o StorageNetAppVolume) MarshalJSON() ([]byte, error) {
 	if o.Events != nil {
 		toSerialize["Events"] = o.Events
 	}
-	if o.Tenant != nil {
-		toSerialize["Tenant"] = o.Tenant
+	if o.Tenant.IsSet() {
+		toSerialize["Tenant"] = o.Tenant.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppVolume) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppVolume) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppVolumeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -899,18 +951,18 @@ func (o *StorageNetAppVolume) UnmarshalJSON(bytes []byte) (err error) {
 		// NetApp volume type. The volume type can be Read-write, Data-protection, or Load-sharing. * `data-protection` - Prevents modification of the data on the Volume. * `read-write` - Data on the Volume can be modified. * `load-sharing` - The volume type is Load Sharing DP.
 		Type *string `json:"Type,omitempty"`
 		// Universally unique identifier of a NetApp Volume.
-		Uuid  *string                           `json:"Uuid,omitempty"`
-		Array *StorageNetAppClusterRelationship `json:"Array,omitempty"`
+		Uuid  *string                                  `json:"Uuid,omitempty"`
+		Array NullableStorageNetAppClusterRelationship `json:"Array,omitempty"`
 		// An array of relationships to storageNetAppAggregate resources.
 		DiskPool []StorageNetAppAggregateRelationship `json:"DiskPool,omitempty"`
 		// An array of relationships to storageNetAppVolumeEvent resources.
-		Events []StorageNetAppVolumeEventRelationship `json:"Events,omitempty"`
-		Tenant *StorageNetAppStorageVmRelationship    `json:"Tenant,omitempty"`
+		Events []StorageNetAppVolumeEventRelationship     `json:"Events,omitempty"`
+		Tenant NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	}
 
 	varStorageNetAppVolumeWithoutEmbeddedStruct := StorageNetAppVolumeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppVolumeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppVolumeWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppVolume := _StorageNetAppVolume{}
 		varStorageNetAppVolume.ClassId = varStorageNetAppVolumeWithoutEmbeddedStruct.ClassId
@@ -942,7 +994,7 @@ func (o *StorageNetAppVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppVolume := _StorageNetAppVolume{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppVolume)
+	err = json.Unmarshal(data, &varStorageNetAppVolume)
 	if err == nil {
 		o.StorageBaseStorageContainer = varStorageNetAppVolume.StorageBaseStorageContainer
 	} else {
@@ -951,7 +1003,7 @@ func (o *StorageNetAppVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AutosizeMode")

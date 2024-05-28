@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesBaremetalNodeProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesBaremetalNodeProfile{}
 
 // KubernetesBaremetalNodeProfile A profile specifying configuration settings for a baremetal node. Users can do operations like Drain, Cordon, Rebuild on a node.
 type KubernetesBaremetalNodeProfile struct {
@@ -27,7 +31,7 @@ type KubernetesBaremetalNodeProfile struct {
 	// Network interface from NetworkInfo (by name) to use for kubernetes VIP.
 	KubernetesNic        *string                                `json:"KubernetesNic,omitempty"`
 	NetworkInfo          NullableKubernetesBaremetalNetworkInfo `json:"NetworkInfo,omitempty"`
-	Server               *ComputeRackUnitRelationship           `json:"Server,omitempty"`
+	Server               NullableComputeRackUnitRelationship    `json:"Server,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,7 +116,7 @@ func (o *KubernetesBaremetalNodeProfile) SetObjectType(v string) {
 
 // GetKubernetesNic returns the KubernetesNic field value if set, zero value otherwise.
 func (o *KubernetesBaremetalNodeProfile) GetKubernetesNic() string {
-	if o == nil || o.KubernetesNic == nil {
+	if o == nil || IsNil(o.KubernetesNic) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *KubernetesBaremetalNodeProfile) GetKubernetesNic() string {
 // GetKubernetesNicOk returns a tuple with the KubernetesNic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesBaremetalNodeProfile) GetKubernetesNicOk() (*string, bool) {
-	if o == nil || o.KubernetesNic == nil {
+	if o == nil || IsNil(o.KubernetesNic) {
 		return nil, false
 	}
 	return o.KubernetesNic, true
@@ -130,7 +134,7 @@ func (o *KubernetesBaremetalNodeProfile) GetKubernetesNicOk() (*string, bool) {
 
 // HasKubernetesNic returns a boolean if a field has been set.
 func (o *KubernetesBaremetalNodeProfile) HasKubernetesNic() bool {
-	if o != nil && o.KubernetesNic != nil {
+	if o != nil && !IsNil(o.KubernetesNic) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *KubernetesBaremetalNodeProfile) SetKubernetesNic(v string) {
 
 // GetNetworkInfo returns the NetworkInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesBaremetalNodeProfile) GetNetworkInfo() KubernetesBaremetalNetworkInfo {
-	if o == nil || o.NetworkInfo.Get() == nil {
+	if o == nil || IsNil(o.NetworkInfo.Get()) {
 		var ret KubernetesBaremetalNetworkInfo
 		return ret
 	}
@@ -185,72 +189,109 @@ func (o *KubernetesBaremetalNodeProfile) UnsetNetworkInfo() {
 	o.NetworkInfo.Unset()
 }
 
-// GetServer returns the Server field value if set, zero value otherwise.
+// GetServer returns the Server field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesBaremetalNodeProfile) GetServer() ComputeRackUnitRelationship {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server.Get()) {
 		var ret ComputeRackUnitRelationship
 		return ret
 	}
-	return *o.Server
+	return *o.Server.Get()
 }
 
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesBaremetalNodeProfile) GetServerOk() (*ComputeRackUnitRelationship, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Server, true
+	return o.Server.Get(), o.Server.IsSet()
 }
 
 // HasServer returns a boolean if a field has been set.
 func (o *KubernetesBaremetalNodeProfile) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && o.Server.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServer gets a reference to the given ComputeRackUnitRelationship and assigns it to the Server field.
+// SetServer gets a reference to the given NullableComputeRackUnitRelationship and assigns it to the Server field.
 func (o *KubernetesBaremetalNodeProfile) SetServer(v ComputeRackUnitRelationship) {
-	o.Server = &v
+	o.Server.Set(&v)
+}
+
+// SetServerNil sets the value for Server to be an explicit nil
+func (o *KubernetesBaremetalNodeProfile) SetServerNil() {
+	o.Server.Set(nil)
+}
+
+// UnsetServer ensures that no value is present for Server, not even an explicit nil
+func (o *KubernetesBaremetalNodeProfile) UnsetServer() {
+	o.Server.Unset()
 }
 
 func (o KubernetesBaremetalNodeProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesBaremetalNodeProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedKubernetesNodeProfile, errKubernetesNodeProfile := json.Marshal(o.KubernetesNodeProfile)
 	if errKubernetesNodeProfile != nil {
-		return []byte{}, errKubernetesNodeProfile
+		return map[string]interface{}{}, errKubernetesNodeProfile
 	}
 	errKubernetesNodeProfile = json.Unmarshal([]byte(serializedKubernetesNodeProfile), &toSerialize)
 	if errKubernetesNodeProfile != nil {
-		return []byte{}, errKubernetesNodeProfile
+		return map[string]interface{}{}, errKubernetesNodeProfile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.KubernetesNic != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.KubernetesNic) {
 		toSerialize["KubernetesNic"] = o.KubernetesNic
 	}
 	if o.NetworkInfo.IsSet() {
 		toSerialize["NetworkInfo"] = o.NetworkInfo.Get()
 	}
-	if o.Server != nil {
-		toSerialize["Server"] = o.Server
+	if o.Server.IsSet() {
+		toSerialize["Server"] = o.Server.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesBaremetalNodeProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesBaremetalNodeProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesBaremetalNodeProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -259,12 +300,12 @@ func (o *KubernetesBaremetalNodeProfile) UnmarshalJSON(bytes []byte) (err error)
 		// Network interface from NetworkInfo (by name) to use for kubernetes VIP.
 		KubernetesNic *string                                `json:"KubernetesNic,omitempty"`
 		NetworkInfo   NullableKubernetesBaremetalNetworkInfo `json:"NetworkInfo,omitempty"`
-		Server        *ComputeRackUnitRelationship           `json:"Server,omitempty"`
+		Server        NullableComputeRackUnitRelationship    `json:"Server,omitempty"`
 	}
 
 	varKubernetesBaremetalNodeProfileWithoutEmbeddedStruct := KubernetesBaremetalNodeProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesBaremetalNodeProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesBaremetalNodeProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesBaremetalNodeProfile := _KubernetesBaremetalNodeProfile{}
 		varKubernetesBaremetalNodeProfile.ClassId = varKubernetesBaremetalNodeProfileWithoutEmbeddedStruct.ClassId
@@ -279,7 +320,7 @@ func (o *KubernetesBaremetalNodeProfile) UnmarshalJSON(bytes []byte) (err error)
 
 	varKubernetesBaremetalNodeProfile := _KubernetesBaremetalNodeProfile{}
 
-	err = json.Unmarshal(bytes, &varKubernetesBaremetalNodeProfile)
+	err = json.Unmarshal(data, &varKubernetesBaremetalNodeProfile)
 	if err == nil {
 		o.KubernetesNodeProfile = varKubernetesBaremetalNodeProfile.KubernetesNodeProfile
 	} else {
@@ -288,7 +329,7 @@ func (o *KubernetesBaremetalNodeProfile) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "KubernetesNic")

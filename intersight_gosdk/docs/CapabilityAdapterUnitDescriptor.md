@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **NumberOfPciLinks** | Pointer to **int64** | Indicates number of PCI Links of the adapter. | [optional] [default to 1]
 **PciLink** | Pointer to **int64** | Indicates PCI Link status of adapter. | [optional] [default to 0]
 **PromCardType** | Pointer to **string** | Prom card type for the adapter. | [optional] 
+**VicId** | Pointer to **string** | Vic Id assigned for the adapter. | [optional] 
 
 ## Methods
 
@@ -491,6 +492,31 @@ SetPromCardType sets PromCardType field to given value.
 `func (o *CapabilityAdapterUnitDescriptor) HasPromCardType() bool`
 
 HasPromCardType returns a boolean if a field has been set.
+
+### GetVicId
+
+`func (o *CapabilityAdapterUnitDescriptor) GetVicId() string`
+
+GetVicId returns the VicId field if non-nil, zero value otherwise.
+
+### GetVicIdOk
+
+`func (o *CapabilityAdapterUnitDescriptor) GetVicIdOk() (*string, bool)`
+
+GetVicIdOk returns a tuple with the VicId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVicId
+
+`func (o *CapabilityAdapterUnitDescriptor) SetVicId(v string)`
+
+SetVicId sets VicId field to given value.
+
+### HasVicId
+
+`func (o *CapabilityAdapterUnitDescriptor) HasVicId() bool`
+
+HasVicId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

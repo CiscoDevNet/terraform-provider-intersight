@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppBaseEvent type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppBaseEvent{}
 
 // StorageNetAppBaseEvent An event is a notification that is generated automatically when a predefined condition occurs or when an object crosses a threshold.
 type StorageNetAppBaseEvent struct {
@@ -126,7 +130,7 @@ func (o *StorageNetAppBaseEvent) SetObjectType(v string) {
 
 // GetCause returns the Cause field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetCause() string {
-	if o == nil || o.Cause == nil {
+	if o == nil || IsNil(o.Cause) {
 		var ret string
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *StorageNetAppBaseEvent) GetCause() string {
 // GetCauseOk returns a tuple with the Cause field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetCauseOk() (*string, bool) {
-	if o == nil || o.Cause == nil {
+	if o == nil || IsNil(o.Cause) {
 		return nil, false
 	}
 	return o.Cause, true
@@ -144,7 +148,7 @@ func (o *StorageNetAppBaseEvent) GetCauseOk() (*string, bool) {
 
 // HasCause returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasCause() bool {
-	if o != nil && o.Cause != nil {
+	if o != nil && !IsNil(o.Cause) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *StorageNetAppBaseEvent) SetCause(v string) {
 
 // GetClusterUuid returns the ClusterUuid field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetClusterUuid() string {
-	if o == nil || o.ClusterUuid == nil {
+	if o == nil || IsNil(o.ClusterUuid) {
 		var ret string
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *StorageNetAppBaseEvent) GetClusterUuid() string {
 // GetClusterUuidOk returns a tuple with the ClusterUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetClusterUuidOk() (*string, bool) {
-	if o == nil || o.ClusterUuid == nil {
+	if o == nil || IsNil(o.ClusterUuid) {
 		return nil, false
 	}
 	return o.ClusterUuid, true
@@ -176,7 +180,7 @@ func (o *StorageNetAppBaseEvent) GetClusterUuidOk() (*string, bool) {
 
 // HasClusterUuid returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasClusterUuid() bool {
-	if o != nil && o.ClusterUuid != nil {
+	if o != nil && !IsNil(o.ClusterUuid) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *StorageNetAppBaseEvent) SetClusterUuid(v string) {
 
 // GetCurrentState returns the CurrentState field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetCurrentState() string {
-	if o == nil || o.CurrentState == nil {
+	if o == nil || IsNil(o.CurrentState) {
 		var ret string
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *StorageNetAppBaseEvent) GetCurrentState() string {
 // GetCurrentStateOk returns a tuple with the CurrentState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetCurrentStateOk() (*string, bool) {
-	if o == nil || o.CurrentState == nil {
+	if o == nil || IsNil(o.CurrentState) {
 		return nil, false
 	}
 	return o.CurrentState, true
@@ -208,7 +212,7 @@ func (o *StorageNetAppBaseEvent) GetCurrentStateOk() (*string, bool) {
 
 // HasCurrentState returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasCurrentState() bool {
-	if o != nil && o.CurrentState != nil {
+	if o != nil && !IsNil(o.CurrentState) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *StorageNetAppBaseEvent) SetCurrentState(v string) {
 
 // GetDuration returns the Duration field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetDuration() string {
-	if o == nil || o.Duration == nil {
+	if o == nil || IsNil(o.Duration) {
 		var ret string
 		return ret
 	}
@@ -232,7 +236,7 @@ func (o *StorageNetAppBaseEvent) GetDuration() string {
 // GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetDurationOk() (*string, bool) {
-	if o == nil || o.Duration == nil {
+	if o == nil || IsNil(o.Duration) {
 		return nil, false
 	}
 	return o.Duration, true
@@ -240,7 +244,7 @@ func (o *StorageNetAppBaseEvent) GetDurationOk() (*string, bool) {
 
 // HasDuration returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasDuration() bool {
-	if o != nil && o.Duration != nil {
+	if o != nil && !IsNil(o.Duration) {
 		return true
 	}
 
@@ -254,7 +258,7 @@ func (o *StorageNetAppBaseEvent) SetDuration(v string) {
 
 // GetImpactArea returns the ImpactArea field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetImpactArea() string {
-	if o == nil || o.ImpactArea == nil {
+	if o == nil || IsNil(o.ImpactArea) {
 		var ret string
 		return ret
 	}
@@ -264,7 +268,7 @@ func (o *StorageNetAppBaseEvent) GetImpactArea() string {
 // GetImpactAreaOk returns a tuple with the ImpactArea field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetImpactAreaOk() (*string, bool) {
-	if o == nil || o.ImpactArea == nil {
+	if o == nil || IsNil(o.ImpactArea) {
 		return nil, false
 	}
 	return o.ImpactArea, true
@@ -272,7 +276,7 @@ func (o *StorageNetAppBaseEvent) GetImpactAreaOk() (*string, bool) {
 
 // HasImpactArea returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasImpactArea() bool {
-	if o != nil && o.ImpactArea != nil {
+	if o != nil && !IsNil(o.ImpactArea) {
 		return true
 	}
 
@@ -286,7 +290,7 @@ func (o *StorageNetAppBaseEvent) SetImpactArea(v string) {
 
 // GetImpactLevel returns the ImpactLevel field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetImpactLevel() string {
-	if o == nil || o.ImpactLevel == nil {
+	if o == nil || IsNil(o.ImpactLevel) {
 		var ret string
 		return ret
 	}
@@ -296,7 +300,7 @@ func (o *StorageNetAppBaseEvent) GetImpactLevel() string {
 // GetImpactLevelOk returns a tuple with the ImpactLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetImpactLevelOk() (*string, bool) {
-	if o == nil || o.ImpactLevel == nil {
+	if o == nil || IsNil(o.ImpactLevel) {
 		return nil, false
 	}
 	return o.ImpactLevel, true
@@ -304,7 +308,7 @@ func (o *StorageNetAppBaseEvent) GetImpactLevelOk() (*string, bool) {
 
 // HasImpactLevel returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasImpactLevel() bool {
-	if o != nil && o.ImpactLevel != nil {
+	if o != nil && !IsNil(o.ImpactLevel) {
 		return true
 	}
 
@@ -318,7 +322,7 @@ func (o *StorageNetAppBaseEvent) SetImpactLevel(v string) {
 
 // GetImpactResourceName returns the ImpactResourceName field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetImpactResourceName() string {
-	if o == nil || o.ImpactResourceName == nil {
+	if o == nil || IsNil(o.ImpactResourceName) {
 		var ret string
 		return ret
 	}
@@ -328,7 +332,7 @@ func (o *StorageNetAppBaseEvent) GetImpactResourceName() string {
 // GetImpactResourceNameOk returns a tuple with the ImpactResourceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetImpactResourceNameOk() (*string, bool) {
-	if o == nil || o.ImpactResourceName == nil {
+	if o == nil || IsNil(o.ImpactResourceName) {
 		return nil, false
 	}
 	return o.ImpactResourceName, true
@@ -336,7 +340,7 @@ func (o *StorageNetAppBaseEvent) GetImpactResourceNameOk() (*string, bool) {
 
 // HasImpactResourceName returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasImpactResourceName() bool {
-	if o != nil && o.ImpactResourceName != nil {
+	if o != nil && !IsNil(o.ImpactResourceName) {
 		return true
 	}
 
@@ -350,7 +354,7 @@ func (o *StorageNetAppBaseEvent) SetImpactResourceName(v string) {
 
 // GetImpactResourceType returns the ImpactResourceType field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetImpactResourceType() string {
-	if o == nil || o.ImpactResourceType == nil {
+	if o == nil || IsNil(o.ImpactResourceType) {
 		var ret string
 		return ret
 	}
@@ -360,7 +364,7 @@ func (o *StorageNetAppBaseEvent) GetImpactResourceType() string {
 // GetImpactResourceTypeOk returns a tuple with the ImpactResourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetImpactResourceTypeOk() (*string, bool) {
-	if o == nil || o.ImpactResourceType == nil {
+	if o == nil || IsNil(o.ImpactResourceType) {
 		return nil, false
 	}
 	return o.ImpactResourceType, true
@@ -368,7 +372,7 @@ func (o *StorageNetAppBaseEvent) GetImpactResourceTypeOk() (*string, bool) {
 
 // HasImpactResourceType returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasImpactResourceType() bool {
-	if o != nil && o.ImpactResourceType != nil {
+	if o != nil && !IsNil(o.ImpactResourceType) {
 		return true
 	}
 
@@ -382,7 +386,7 @@ func (o *StorageNetAppBaseEvent) SetImpactResourceType(v string) {
 
 // GetImpactResourceUuid returns the ImpactResourceUuid field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetImpactResourceUuid() string {
-	if o == nil || o.ImpactResourceUuid == nil {
+	if o == nil || IsNil(o.ImpactResourceUuid) {
 		var ret string
 		return ret
 	}
@@ -392,7 +396,7 @@ func (o *StorageNetAppBaseEvent) GetImpactResourceUuid() string {
 // GetImpactResourceUuidOk returns a tuple with the ImpactResourceUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetImpactResourceUuidOk() (*string, bool) {
-	if o == nil || o.ImpactResourceUuid == nil {
+	if o == nil || IsNil(o.ImpactResourceUuid) {
 		return nil, false
 	}
 	return o.ImpactResourceUuid, true
@@ -400,7 +404,7 @@ func (o *StorageNetAppBaseEvent) GetImpactResourceUuidOk() (*string, bool) {
 
 // HasImpactResourceUuid returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasImpactResourceUuid() bool {
-	if o != nil && o.ImpactResourceUuid != nil {
+	if o != nil && !IsNil(o.ImpactResourceUuid) {
 		return true
 	}
 
@@ -414,7 +418,7 @@ func (o *StorageNetAppBaseEvent) SetImpactResourceUuid(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -424,7 +428,7 @@ func (o *StorageNetAppBaseEvent) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -432,7 +436,7 @@ func (o *StorageNetAppBaseEvent) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -446,7 +450,7 @@ func (o *StorageNetAppBaseEvent) SetName(v string) {
 
 // GetNodeUuid returns the NodeUuid field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetNodeUuid() string {
-	if o == nil || o.NodeUuid == nil {
+	if o == nil || IsNil(o.NodeUuid) {
 		var ret string
 		return ret
 	}
@@ -456,7 +460,7 @@ func (o *StorageNetAppBaseEvent) GetNodeUuid() string {
 // GetNodeUuidOk returns a tuple with the NodeUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetNodeUuidOk() (*string, bool) {
-	if o == nil || o.NodeUuid == nil {
+	if o == nil || IsNil(o.NodeUuid) {
 		return nil, false
 	}
 	return o.NodeUuid, true
@@ -464,7 +468,7 @@ func (o *StorageNetAppBaseEvent) GetNodeUuidOk() (*string, bool) {
 
 // HasNodeUuid returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasNodeUuid() bool {
-	if o != nil && o.NodeUuid != nil {
+	if o != nil && !IsNil(o.NodeUuid) {
 		return true
 	}
 
@@ -478,7 +482,7 @@ func (o *StorageNetAppBaseEvent) SetNodeUuid(v string) {
 
 // GetSeverity returns the Severity field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetSeverity() string {
-	if o == nil || o.Severity == nil {
+	if o == nil || IsNil(o.Severity) {
 		var ret string
 		return ret
 	}
@@ -488,7 +492,7 @@ func (o *StorageNetAppBaseEvent) GetSeverity() string {
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetSeverityOk() (*string, bool) {
-	if o == nil || o.Severity == nil {
+	if o == nil || IsNil(o.Severity) {
 		return nil, false
 	}
 	return o.Severity, true
@@ -496,7 +500,7 @@ func (o *StorageNetAppBaseEvent) GetSeverityOk() (*string, bool) {
 
 // HasSeverity returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasSeverity() bool {
-	if o != nil && o.Severity != nil {
+	if o != nil && !IsNil(o.Severity) {
 		return true
 	}
 
@@ -510,7 +514,7 @@ func (o *StorageNetAppBaseEvent) SetSeverity(v string) {
 
 // GetSvmUuid returns the SvmUuid field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetSvmUuid() string {
-	if o == nil || o.SvmUuid == nil {
+	if o == nil || IsNil(o.SvmUuid) {
 		var ret string
 		return ret
 	}
@@ -520,7 +524,7 @@ func (o *StorageNetAppBaseEvent) GetSvmUuid() string {
 // GetSvmUuidOk returns a tuple with the SvmUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetSvmUuidOk() (*string, bool) {
-	if o == nil || o.SvmUuid == nil {
+	if o == nil || IsNil(o.SvmUuid) {
 		return nil, false
 	}
 	return o.SvmUuid, true
@@ -528,7 +532,7 @@ func (o *StorageNetAppBaseEvent) GetSvmUuidOk() (*string, bool) {
 
 // HasSvmUuid returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasSvmUuid() bool {
-	if o != nil && o.SvmUuid != nil {
+	if o != nil && !IsNil(o.SvmUuid) {
 		return true
 	}
 
@@ -542,7 +546,7 @@ func (o *StorageNetAppBaseEvent) SetSvmUuid(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *StorageNetAppBaseEvent) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -552,7 +556,7 @@ func (o *StorageNetAppBaseEvent) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppBaseEvent) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -560,7 +564,7 @@ func (o *StorageNetAppBaseEvent) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *StorageNetAppBaseEvent) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -573,61 +577,65 @@ func (o *StorageNetAppBaseEvent) SetUuid(v string) {
 }
 
 func (o StorageNetAppBaseEvent) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppBaseEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Cause != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Cause) {
 		toSerialize["Cause"] = o.Cause
 	}
-	if o.ClusterUuid != nil {
+	if !IsNil(o.ClusterUuid) {
 		toSerialize["ClusterUuid"] = o.ClusterUuid
 	}
-	if o.CurrentState != nil {
+	if !IsNil(o.CurrentState) {
 		toSerialize["CurrentState"] = o.CurrentState
 	}
-	if o.Duration != nil {
+	if !IsNil(o.Duration) {
 		toSerialize["Duration"] = o.Duration
 	}
-	if o.ImpactArea != nil {
+	if !IsNil(o.ImpactArea) {
 		toSerialize["ImpactArea"] = o.ImpactArea
 	}
-	if o.ImpactLevel != nil {
+	if !IsNil(o.ImpactLevel) {
 		toSerialize["ImpactLevel"] = o.ImpactLevel
 	}
-	if o.ImpactResourceName != nil {
+	if !IsNil(o.ImpactResourceName) {
 		toSerialize["ImpactResourceName"] = o.ImpactResourceName
 	}
-	if o.ImpactResourceType != nil {
+	if !IsNil(o.ImpactResourceType) {
 		toSerialize["ImpactResourceType"] = o.ImpactResourceType
 	}
-	if o.ImpactResourceUuid != nil {
+	if !IsNil(o.ImpactResourceUuid) {
 		toSerialize["ImpactResourceUuid"] = o.ImpactResourceUuid
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.NodeUuid != nil {
+	if !IsNil(o.NodeUuid) {
 		toSerialize["NodeUuid"] = o.NodeUuid
 	}
-	if o.Severity != nil {
+	if !IsNil(o.Severity) {
 		toSerialize["Severity"] = o.Severity
 	}
-	if o.SvmUuid != nil {
+	if !IsNil(o.SvmUuid) {
 		toSerialize["SvmUuid"] = o.SvmUuid
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
 
@@ -635,10 +643,32 @@ func (o StorageNetAppBaseEvent) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppBaseEvent) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppBaseEvent) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppBaseEventWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -676,7 +706,7 @@ func (o *StorageNetAppBaseEvent) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppBaseEventWithoutEmbeddedStruct := StorageNetAppBaseEventWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppBaseEventWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppBaseEventWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppBaseEvent := _StorageNetAppBaseEvent{}
 		varStorageNetAppBaseEvent.ClassId = varStorageNetAppBaseEventWithoutEmbeddedStruct.ClassId
@@ -702,7 +732,7 @@ func (o *StorageNetAppBaseEvent) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppBaseEvent := _StorageNetAppBaseEvent{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppBaseEvent)
+	err = json.Unmarshal(data, &varStorageNetAppBaseEvent)
 	if err == nil {
 		o.MoBaseMo = varStorageNetAppBaseEvent.MoBaseMo
 	} else {
@@ -711,7 +741,7 @@ func (o *StorageNetAppBaseEvent) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Cause")

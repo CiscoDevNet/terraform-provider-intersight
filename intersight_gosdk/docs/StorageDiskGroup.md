@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name to identity this disk group in the controller. | [optional] 
 **RaidType** | Pointer to **string** | Raid level of the virtual drives in this diskgroup. | [optional] 
 **DedicatedHotSpares** | Pointer to [**[]StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) | An array of relationships to storagePhysicalDisk resources. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **Spans** | Pointer to [**[]StorageSpanRelationship**](StorageSpanRelationship.md) | An array of relationships to storageSpan resources. | [optional] 
-**StorageController** | Pointer to [**StorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
+**StorageController** | Pointer to [**NullableStorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
 **VirtualDrives** | Pointer to [**[]StorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) | An array of relationships to storageVirtualDrive resources. | [optional] 
 
 ## Methods
@@ -183,6 +183,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageDiskGroup) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageDiskGroup) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetSpans
 
 `func (o *StorageDiskGroup) GetSpans() []StorageSpanRelationship`
@@ -243,6 +253,16 @@ SetStorageController sets StorageController field to given value.
 
 HasStorageController returns a boolean if a field has been set.
 
+### SetStorageControllerNil
+
+`func (o *StorageDiskGroup) SetStorageControllerNil(b bool)`
+
+ SetStorageControllerNil sets the value for StorageController to be an explicit nil
+
+### UnsetStorageController
+`func (o *StorageDiskGroup) UnsetStorageController()`
+
+UnsetStorageController ensures that no value is present for StorageController, not even an explicit nil
 ### GetVirtualDrives
 
 `func (o *StorageDiskGroup) GetVirtualDrives() []StorageVirtualDriveRelationship`

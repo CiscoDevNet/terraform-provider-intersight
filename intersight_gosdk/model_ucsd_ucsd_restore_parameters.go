@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the UcsdUcsdRestoreParameters type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UcsdUcsdRestoreParameters{}
 
 // UcsdUcsdRestoreParameters Restore Configuration Parameters for UCS Director restore workflow.
 type UcsdUcsdRestoreParameters struct {
@@ -116,7 +120,7 @@ func (o *UcsdUcsdRestoreParameters) SetObjectType(v string) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *UcsdUcsdRestoreParameters) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *UcsdUcsdRestoreParameters) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdUcsdRestoreParameters) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -134,7 +138,7 @@ func (o *UcsdUcsdRestoreParameters) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *UcsdUcsdRestoreParameters) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *UcsdUcsdRestoreParameters) SetIsPasswordSet(v bool) {
 
 // GetLocation returns the Location field value if set, zero value otherwise.
 func (o *UcsdUcsdRestoreParameters) GetLocation() string {
-	if o == nil || o.Location == nil {
+	if o == nil || IsNil(o.Location) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *UcsdUcsdRestoreParameters) GetLocation() string {
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdUcsdRestoreParameters) GetLocationOk() (*string, bool) {
-	if o == nil || o.Location == nil {
+	if o == nil || IsNil(o.Location) {
 		return nil, false
 	}
 	return o.Location, true
@@ -166,7 +170,7 @@ func (o *UcsdUcsdRestoreParameters) GetLocationOk() (*string, bool) {
 
 // HasLocation returns a boolean if a field has been set.
 func (o *UcsdUcsdRestoreParameters) HasLocation() bool {
-	if o != nil && o.Location != nil {
+	if o != nil && !IsNil(o.Location) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *UcsdUcsdRestoreParameters) SetLocation(v string) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *UcsdUcsdRestoreParameters) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *UcsdUcsdRestoreParameters) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdUcsdRestoreParameters) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -198,7 +202,7 @@ func (o *UcsdUcsdRestoreParameters) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *UcsdUcsdRestoreParameters) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *UcsdUcsdRestoreParameters) SetPassword(v string) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *UcsdUcsdRestoreParameters) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *UcsdUcsdRestoreParameters) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdUcsdRestoreParameters) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -230,7 +234,7 @@ func (o *UcsdUcsdRestoreParameters) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *UcsdUcsdRestoreParameters) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *UcsdUcsdRestoreParameters) SetProtocol(v string) {
 
 // GetRestoreConfigurationFiles returns the RestoreConfigurationFiles field value if set, zero value otherwise.
 func (o *UcsdUcsdRestoreParameters) GetRestoreConfigurationFiles() bool {
-	if o == nil || o.RestoreConfigurationFiles == nil {
+	if o == nil || IsNil(o.RestoreConfigurationFiles) {
 		var ret bool
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *UcsdUcsdRestoreParameters) GetRestoreConfigurationFiles() bool {
 // GetRestoreConfigurationFilesOk returns a tuple with the RestoreConfigurationFiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdUcsdRestoreParameters) GetRestoreConfigurationFilesOk() (*bool, bool) {
-	if o == nil || o.RestoreConfigurationFiles == nil {
+	if o == nil || IsNil(o.RestoreConfigurationFiles) {
 		return nil, false
 	}
 	return o.RestoreConfigurationFiles, true
@@ -262,7 +266,7 @@ func (o *UcsdUcsdRestoreParameters) GetRestoreConfigurationFilesOk() (*bool, boo
 
 // HasRestoreConfigurationFiles returns a boolean if a field has been set.
 func (o *UcsdUcsdRestoreParameters) HasRestoreConfigurationFiles() bool {
-	if o != nil && o.RestoreConfigurationFiles != nil {
+	if o != nil && !IsNil(o.RestoreConfigurationFiles) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *UcsdUcsdRestoreParameters) SetRestoreConfigurationFiles(v bool) {
 
 // GetRestoreLicense returns the RestoreLicense field value if set, zero value otherwise.
 func (o *UcsdUcsdRestoreParameters) GetRestoreLicense() bool {
-	if o == nil || o.RestoreLicense == nil {
+	if o == nil || IsNil(o.RestoreLicense) {
 		var ret bool
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *UcsdUcsdRestoreParameters) GetRestoreLicense() bool {
 // GetRestoreLicenseOk returns a tuple with the RestoreLicense field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdUcsdRestoreParameters) GetRestoreLicenseOk() (*bool, bool) {
-	if o == nil || o.RestoreLicense == nil {
+	if o == nil || IsNil(o.RestoreLicense) {
 		return nil, false
 	}
 	return o.RestoreLicense, true
@@ -294,7 +298,7 @@ func (o *UcsdUcsdRestoreParameters) GetRestoreLicenseOk() (*bool, bool) {
 
 // HasRestoreLicense returns a boolean if a field has been set.
 func (o *UcsdUcsdRestoreParameters) HasRestoreLicense() bool {
-	if o != nil && o.RestoreLicense != nil {
+	if o != nil && !IsNil(o.RestoreLicense) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *UcsdUcsdRestoreParameters) SetRestoreLicense(v bool) {
 
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *UcsdUcsdRestoreParameters) GetUsername() string {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		var ret string
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *UcsdUcsdRestoreParameters) GetUsername() string {
 // GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdUcsdRestoreParameters) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		return nil, false
 	}
 	return o.Username, true
@@ -326,7 +330,7 @@ func (o *UcsdUcsdRestoreParameters) GetUsernameOk() (*string, bool) {
 
 // HasUsername returns a boolean if a field has been set.
 func (o *UcsdUcsdRestoreParameters) HasUsername() bool {
-	if o != nil && o.Username != nil {
+	if o != nil && !IsNil(o.Username) {
 		return true
 	}
 
@@ -339,40 +343,44 @@ func (o *UcsdUcsdRestoreParameters) SetUsername(v string) {
 }
 
 func (o UcsdUcsdRestoreParameters) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UcsdUcsdRestoreParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedRecoveryConfigParams, errRecoveryConfigParams := json.Marshal(o.RecoveryConfigParams)
 	if errRecoveryConfigParams != nil {
-		return []byte{}, errRecoveryConfigParams
+		return map[string]interface{}{}, errRecoveryConfigParams
 	}
 	errRecoveryConfigParams = json.Unmarshal([]byte(serializedRecoveryConfigParams), &toSerialize)
 	if errRecoveryConfigParams != nil {
-		return []byte{}, errRecoveryConfigParams
+		return map[string]interface{}{}, errRecoveryConfigParams
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsPasswordSet != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.Location != nil {
+	if !IsNil(o.Location) {
 		toSerialize["Location"] = o.Location
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
-	if o.RestoreConfigurationFiles != nil {
+	if !IsNil(o.RestoreConfigurationFiles) {
 		toSerialize["RestoreConfigurationFiles"] = o.RestoreConfigurationFiles
 	}
-	if o.RestoreLicense != nil {
+	if !IsNil(o.RestoreLicense) {
 		toSerialize["RestoreLicense"] = o.RestoreLicense
 	}
-	if o.Username != nil {
+	if !IsNil(o.Username) {
 		toSerialize["Username"] = o.Username
 	}
 
@@ -380,10 +388,32 @@ func (o UcsdUcsdRestoreParameters) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *UcsdUcsdRestoreParameters) UnmarshalJSON(bytes []byte) (err error) {
+func (o *UcsdUcsdRestoreParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type UcsdUcsdRestoreParametersWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -407,7 +437,7 @@ func (o *UcsdUcsdRestoreParameters) UnmarshalJSON(bytes []byte) (err error) {
 
 	varUcsdUcsdRestoreParametersWithoutEmbeddedStruct := UcsdUcsdRestoreParametersWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varUcsdUcsdRestoreParametersWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varUcsdUcsdRestoreParametersWithoutEmbeddedStruct)
 	if err == nil {
 		varUcsdUcsdRestoreParameters := _UcsdUcsdRestoreParameters{}
 		varUcsdUcsdRestoreParameters.ClassId = varUcsdUcsdRestoreParametersWithoutEmbeddedStruct.ClassId
@@ -426,7 +456,7 @@ func (o *UcsdUcsdRestoreParameters) UnmarshalJSON(bytes []byte) (err error) {
 
 	varUcsdUcsdRestoreParameters := _UcsdUcsdRestoreParameters{}
 
-	err = json.Unmarshal(bytes, &varUcsdUcsdRestoreParameters)
+	err = json.Unmarshal(data, &varUcsdUcsdRestoreParameters)
 	if err == nil {
 		o.RecoveryConfigParams = varUcsdUcsdRestoreParameters.RecoveryConfigParams
 	} else {
@@ -435,7 +465,7 @@ func (o *UcsdUcsdRestoreParameters) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsPasswordSet")

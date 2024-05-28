@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the CondAlarm type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CondAlarm{}
 
 // CondAlarm A state-full entity representing a found problem. Alarms can be reported by the managed system itself or can be determined by Intersight.
 type CondAlarm struct {
@@ -64,10 +68,10 @@ type CondAlarm struct {
 	// The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * `None` - The Enum value None represents that there is no severity. * `Info` - The Enum value Info represents the Informational level of severity. * `Critical` - The Enum value Critical represents the Critical level of severity. * `Warning` - The Enum value Warning represents the Warning level of severity. * `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared.
 	Severity *string `json:"Severity,omitempty"`
 	// Indicates whether the alarm is marked for suppression or not.
-	Suppressed           *bool                                `json:"Suppressed,omitempty"`
-	AffectedMo           *MoBaseMoRelationship                `json:"AffectedMo,omitempty"`
-	Definition           *CondAlarmDefinitionRelationship     `json:"Definition,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Suppressed           *bool                                       `json:"Suppressed,omitempty"`
+	AffectedMo           NullableMoBaseMoRelationship                `json:"AffectedMo,omitempty"`
+	Definition           NullableCondAlarmDefinitionRelationship     `json:"Definition,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -150,7 +154,7 @@ func (o *CondAlarm) SetObjectType(v string) {
 
 // GetAcknowledge returns the Acknowledge field value if set, zero value otherwise.
 func (o *CondAlarm) GetAcknowledge() string {
-	if o == nil || o.Acknowledge == nil {
+	if o == nil || IsNil(o.Acknowledge) {
 		var ret string
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *CondAlarm) GetAcknowledge() string {
 // GetAcknowledgeOk returns a tuple with the Acknowledge field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetAcknowledgeOk() (*string, bool) {
-	if o == nil || o.Acknowledge == nil {
+	if o == nil || IsNil(o.Acknowledge) {
 		return nil, false
 	}
 	return o.Acknowledge, true
@@ -168,7 +172,7 @@ func (o *CondAlarm) GetAcknowledgeOk() (*string, bool) {
 
 // HasAcknowledge returns a boolean if a field has been set.
 func (o *CondAlarm) HasAcknowledge() bool {
-	if o != nil && o.Acknowledge != nil {
+	if o != nil && !IsNil(o.Acknowledge) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *CondAlarm) SetAcknowledge(v string) {
 
 // GetAcknowledgeBy returns the AcknowledgeBy field value if set, zero value otherwise.
 func (o *CondAlarm) GetAcknowledgeBy() string {
-	if o == nil || o.AcknowledgeBy == nil {
+	if o == nil || IsNil(o.AcknowledgeBy) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *CondAlarm) GetAcknowledgeBy() string {
 // GetAcknowledgeByOk returns a tuple with the AcknowledgeBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetAcknowledgeByOk() (*string, bool) {
-	if o == nil || o.AcknowledgeBy == nil {
+	if o == nil || IsNil(o.AcknowledgeBy) {
 		return nil, false
 	}
 	return o.AcknowledgeBy, true
@@ -200,7 +204,7 @@ func (o *CondAlarm) GetAcknowledgeByOk() (*string, bool) {
 
 // HasAcknowledgeBy returns a boolean if a field has been set.
 func (o *CondAlarm) HasAcknowledgeBy() bool {
-	if o != nil && o.AcknowledgeBy != nil {
+	if o != nil && !IsNil(o.AcknowledgeBy) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *CondAlarm) SetAcknowledgeBy(v string) {
 
 // GetAcknowledgeTime returns the AcknowledgeTime field value if set, zero value otherwise.
 func (o *CondAlarm) GetAcknowledgeTime() time.Time {
-	if o == nil || o.AcknowledgeTime == nil {
+	if o == nil || IsNil(o.AcknowledgeTime) {
 		var ret time.Time
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *CondAlarm) GetAcknowledgeTime() time.Time {
 // GetAcknowledgeTimeOk returns a tuple with the AcknowledgeTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetAcknowledgeTimeOk() (*time.Time, bool) {
-	if o == nil || o.AcknowledgeTime == nil {
+	if o == nil || IsNil(o.AcknowledgeTime) {
 		return nil, false
 	}
 	return o.AcknowledgeTime, true
@@ -232,7 +236,7 @@ func (o *CondAlarm) GetAcknowledgeTimeOk() (*time.Time, bool) {
 
 // HasAcknowledgeTime returns a boolean if a field has been set.
 func (o *CondAlarm) HasAcknowledgeTime() bool {
-	if o != nil && o.AcknowledgeTime != nil {
+	if o != nil && !IsNil(o.AcknowledgeTime) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *CondAlarm) SetAcknowledgeTime(v time.Time) {
 
 // GetAffectedMoDisplayName returns the AffectedMoDisplayName field value if set, zero value otherwise.
 func (o *CondAlarm) GetAffectedMoDisplayName() string {
-	if o == nil || o.AffectedMoDisplayName == nil {
+	if o == nil || IsNil(o.AffectedMoDisplayName) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *CondAlarm) GetAffectedMoDisplayName() string {
 // GetAffectedMoDisplayNameOk returns a tuple with the AffectedMoDisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetAffectedMoDisplayNameOk() (*string, bool) {
-	if o == nil || o.AffectedMoDisplayName == nil {
+	if o == nil || IsNil(o.AffectedMoDisplayName) {
 		return nil, false
 	}
 	return o.AffectedMoDisplayName, true
@@ -264,7 +268,7 @@ func (o *CondAlarm) GetAffectedMoDisplayNameOk() (*string, bool) {
 
 // HasAffectedMoDisplayName returns a boolean if a field has been set.
 func (o *CondAlarm) HasAffectedMoDisplayName() bool {
-	if o != nil && o.AffectedMoDisplayName != nil {
+	if o != nil && !IsNil(o.AffectedMoDisplayName) {
 		return true
 	}
 
@@ -279,7 +283,7 @@ func (o *CondAlarm) SetAffectedMoDisplayName(v string) {
 // GetAffectedMoId returns the AffectedMoId field value if set, zero value otherwise.
 // Deprecated
 func (o *CondAlarm) GetAffectedMoId() string {
-	if o == nil || o.AffectedMoId == nil {
+	if o == nil || IsNil(o.AffectedMoId) {
 		var ret string
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *CondAlarm) GetAffectedMoId() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *CondAlarm) GetAffectedMoIdOk() (*string, bool) {
-	if o == nil || o.AffectedMoId == nil {
+	if o == nil || IsNil(o.AffectedMoId) {
 		return nil, false
 	}
 	return o.AffectedMoId, true
@@ -298,7 +302,7 @@ func (o *CondAlarm) GetAffectedMoIdOk() (*string, bool) {
 
 // HasAffectedMoId returns a boolean if a field has been set.
 func (o *CondAlarm) HasAffectedMoId() bool {
-	if o != nil && o.AffectedMoId != nil {
+	if o != nil && !IsNil(o.AffectedMoId) {
 		return true
 	}
 
@@ -314,7 +318,7 @@ func (o *CondAlarm) SetAffectedMoId(v string) {
 // GetAffectedMoType returns the AffectedMoType field value if set, zero value otherwise.
 // Deprecated
 func (o *CondAlarm) GetAffectedMoType() string {
-	if o == nil || o.AffectedMoType == nil {
+	if o == nil || IsNil(o.AffectedMoType) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *CondAlarm) GetAffectedMoType() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *CondAlarm) GetAffectedMoTypeOk() (*string, bool) {
-	if o == nil || o.AffectedMoType == nil {
+	if o == nil || IsNil(o.AffectedMoType) {
 		return nil, false
 	}
 	return o.AffectedMoType, true
@@ -333,7 +337,7 @@ func (o *CondAlarm) GetAffectedMoTypeOk() (*string, bool) {
 
 // HasAffectedMoType returns a boolean if a field has been set.
 func (o *CondAlarm) HasAffectedMoType() bool {
-	if o != nil && o.AffectedMoType != nil {
+	if o != nil && !IsNil(o.AffectedMoType) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *CondAlarm) SetAffectedMoType(v string) {
 // GetAffectedObject returns the AffectedObject field value if set, zero value otherwise.
 // Deprecated
 func (o *CondAlarm) GetAffectedObject() string {
-	if o == nil || o.AffectedObject == nil {
+	if o == nil || IsNil(o.AffectedObject) {
 		var ret string
 		return ret
 	}
@@ -360,7 +364,7 @@ func (o *CondAlarm) GetAffectedObject() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *CondAlarm) GetAffectedObjectOk() (*string, bool) {
-	if o == nil || o.AffectedObject == nil {
+	if o == nil || IsNil(o.AffectedObject) {
 		return nil, false
 	}
 	return o.AffectedObject, true
@@ -368,7 +372,7 @@ func (o *CondAlarm) GetAffectedObjectOk() (*string, bool) {
 
 // HasAffectedObject returns a boolean if a field has been set.
 func (o *CondAlarm) HasAffectedObject() bool {
-	if o != nil && o.AffectedObject != nil {
+	if o != nil && !IsNil(o.AffectedObject) {
 		return true
 	}
 
@@ -383,7 +387,7 @@ func (o *CondAlarm) SetAffectedObject(v string) {
 
 // GetAncestorMoId returns the AncestorMoId field value if set, zero value otherwise.
 func (o *CondAlarm) GetAncestorMoId() string {
-	if o == nil || o.AncestorMoId == nil {
+	if o == nil || IsNil(o.AncestorMoId) {
 		var ret string
 		return ret
 	}
@@ -393,7 +397,7 @@ func (o *CondAlarm) GetAncestorMoId() string {
 // GetAncestorMoIdOk returns a tuple with the AncestorMoId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetAncestorMoIdOk() (*string, bool) {
-	if o == nil || o.AncestorMoId == nil {
+	if o == nil || IsNil(o.AncestorMoId) {
 		return nil, false
 	}
 	return o.AncestorMoId, true
@@ -401,7 +405,7 @@ func (o *CondAlarm) GetAncestorMoIdOk() (*string, bool) {
 
 // HasAncestorMoId returns a boolean if a field has been set.
 func (o *CondAlarm) HasAncestorMoId() bool {
-	if o != nil && o.AncestorMoId != nil {
+	if o != nil && !IsNil(o.AncestorMoId) {
 		return true
 	}
 
@@ -415,7 +419,7 @@ func (o *CondAlarm) SetAncestorMoId(v string) {
 
 // GetAncestorMoType returns the AncestorMoType field value if set, zero value otherwise.
 func (o *CondAlarm) GetAncestorMoType() string {
-	if o == nil || o.AncestorMoType == nil {
+	if o == nil || IsNil(o.AncestorMoType) {
 		var ret string
 		return ret
 	}
@@ -425,7 +429,7 @@ func (o *CondAlarm) GetAncestorMoType() string {
 // GetAncestorMoTypeOk returns a tuple with the AncestorMoType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetAncestorMoTypeOk() (*string, bool) {
-	if o == nil || o.AncestorMoType == nil {
+	if o == nil || IsNil(o.AncestorMoType) {
 		return nil, false
 	}
 	return o.AncestorMoType, true
@@ -433,7 +437,7 @@ func (o *CondAlarm) GetAncestorMoTypeOk() (*string, bool) {
 
 // HasAncestorMoType returns a boolean if a field has been set.
 func (o *CondAlarm) HasAncestorMoType() bool {
-	if o != nil && o.AncestorMoType != nil {
+	if o != nil && !IsNil(o.AncestorMoType) {
 		return true
 	}
 
@@ -447,7 +451,7 @@ func (o *CondAlarm) SetAncestorMoType(v string) {
 
 // GetCode returns the Code field value if set, zero value otherwise.
 func (o *CondAlarm) GetCode() string {
-	if o == nil || o.Code == nil {
+	if o == nil || IsNil(o.Code) {
 		var ret string
 		return ret
 	}
@@ -457,7 +461,7 @@ func (o *CondAlarm) GetCode() string {
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetCodeOk() (*string, bool) {
-	if o == nil || o.Code == nil {
+	if o == nil || IsNil(o.Code) {
 		return nil, false
 	}
 	return o.Code, true
@@ -465,7 +469,7 @@ func (o *CondAlarm) GetCodeOk() (*string, bool) {
 
 // HasCode returns a boolean if a field has been set.
 func (o *CondAlarm) HasCode() bool {
-	if o != nil && o.Code != nil {
+	if o != nil && !IsNil(o.Code) {
 		return true
 	}
 
@@ -479,7 +483,7 @@ func (o *CondAlarm) SetCode(v string) {
 
 // GetCreationTime returns the CreationTime field value if set, zero value otherwise.
 func (o *CondAlarm) GetCreationTime() time.Time {
-	if o == nil || o.CreationTime == nil {
+	if o == nil || IsNil(o.CreationTime) {
 		var ret time.Time
 		return ret
 	}
@@ -489,7 +493,7 @@ func (o *CondAlarm) GetCreationTime() time.Time {
 // GetCreationTimeOk returns a tuple with the CreationTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetCreationTimeOk() (*time.Time, bool) {
-	if o == nil || o.CreationTime == nil {
+	if o == nil || IsNil(o.CreationTime) {
 		return nil, false
 	}
 	return o.CreationTime, true
@@ -497,7 +501,7 @@ func (o *CondAlarm) GetCreationTimeOk() (*time.Time, bool) {
 
 // HasCreationTime returns a boolean if a field has been set.
 func (o *CondAlarm) HasCreationTime() bool {
-	if o != nil && o.CreationTime != nil {
+	if o != nil && !IsNil(o.CreationTime) {
 		return true
 	}
 
@@ -511,7 +515,7 @@ func (o *CondAlarm) SetCreationTime(v time.Time) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CondAlarm) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -521,7 +525,7 @@ func (o *CondAlarm) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -529,7 +533,7 @@ func (o *CondAlarm) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CondAlarm) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -543,7 +547,7 @@ func (o *CondAlarm) SetDescription(v string) {
 
 // GetLastTransitionTime returns the LastTransitionTime field value if set, zero value otherwise.
 func (o *CondAlarm) GetLastTransitionTime() time.Time {
-	if o == nil || o.LastTransitionTime == nil {
+	if o == nil || IsNil(o.LastTransitionTime) {
 		var ret time.Time
 		return ret
 	}
@@ -553,7 +557,7 @@ func (o *CondAlarm) GetLastTransitionTime() time.Time {
 // GetLastTransitionTimeOk returns a tuple with the LastTransitionTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetLastTransitionTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastTransitionTime == nil {
+	if o == nil || IsNil(o.LastTransitionTime) {
 		return nil, false
 	}
 	return o.LastTransitionTime, true
@@ -561,7 +565,7 @@ func (o *CondAlarm) GetLastTransitionTimeOk() (*time.Time, bool) {
 
 // HasLastTransitionTime returns a boolean if a field has been set.
 func (o *CondAlarm) HasLastTransitionTime() bool {
-	if o != nil && o.LastTransitionTime != nil {
+	if o != nil && !IsNil(o.LastTransitionTime) {
 		return true
 	}
 
@@ -576,7 +580,7 @@ func (o *CondAlarm) SetLastTransitionTime(v time.Time) {
 // GetMsAffectedObject returns the MsAffectedObject field value if set, zero value otherwise.
 // Deprecated
 func (o *CondAlarm) GetMsAffectedObject() string {
-	if o == nil || o.MsAffectedObject == nil {
+	if o == nil || IsNil(o.MsAffectedObject) {
 		var ret string
 		return ret
 	}
@@ -587,7 +591,7 @@ func (o *CondAlarm) GetMsAffectedObject() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *CondAlarm) GetMsAffectedObjectOk() (*string, bool) {
-	if o == nil || o.MsAffectedObject == nil {
+	if o == nil || IsNil(o.MsAffectedObject) {
 		return nil, false
 	}
 	return o.MsAffectedObject, true
@@ -595,7 +599,7 @@ func (o *CondAlarm) GetMsAffectedObjectOk() (*string, bool) {
 
 // HasMsAffectedObject returns a boolean if a field has been set.
 func (o *CondAlarm) HasMsAffectedObject() bool {
-	if o != nil && o.MsAffectedObject != nil {
+	if o != nil && !IsNil(o.MsAffectedObject) {
 		return true
 	}
 
@@ -610,7 +614,7 @@ func (o *CondAlarm) SetMsAffectedObject(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CondAlarm) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -620,7 +624,7 @@ func (o *CondAlarm) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -628,7 +632,7 @@ func (o *CondAlarm) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CondAlarm) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -642,7 +646,7 @@ func (o *CondAlarm) SetName(v string) {
 
 // GetOrigSeverity returns the OrigSeverity field value if set, zero value otherwise.
 func (o *CondAlarm) GetOrigSeverity() string {
-	if o == nil || o.OrigSeverity == nil {
+	if o == nil || IsNil(o.OrigSeverity) {
 		var ret string
 		return ret
 	}
@@ -652,7 +656,7 @@ func (o *CondAlarm) GetOrigSeverity() string {
 // GetOrigSeverityOk returns a tuple with the OrigSeverity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetOrigSeverityOk() (*string, bool) {
-	if o == nil || o.OrigSeverity == nil {
+	if o == nil || IsNil(o.OrigSeverity) {
 		return nil, false
 	}
 	return o.OrigSeverity, true
@@ -660,7 +664,7 @@ func (o *CondAlarm) GetOrigSeverityOk() (*string, bool) {
 
 // HasOrigSeverity returns a boolean if a field has been set.
 func (o *CondAlarm) HasOrigSeverity() bool {
-	if o != nil && o.OrigSeverity != nil {
+	if o != nil && !IsNil(o.OrigSeverity) {
 		return true
 	}
 
@@ -674,7 +678,7 @@ func (o *CondAlarm) SetOrigSeverity(v string) {
 
 // GetSeverity returns the Severity field value if set, zero value otherwise.
 func (o *CondAlarm) GetSeverity() string {
-	if o == nil || o.Severity == nil {
+	if o == nil || IsNil(o.Severity) {
 		var ret string
 		return ret
 	}
@@ -684,7 +688,7 @@ func (o *CondAlarm) GetSeverity() string {
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetSeverityOk() (*string, bool) {
-	if o == nil || o.Severity == nil {
+	if o == nil || IsNil(o.Severity) {
 		return nil, false
 	}
 	return o.Severity, true
@@ -692,7 +696,7 @@ func (o *CondAlarm) GetSeverityOk() (*string, bool) {
 
 // HasSeverity returns a boolean if a field has been set.
 func (o *CondAlarm) HasSeverity() bool {
-	if o != nil && o.Severity != nil {
+	if o != nil && !IsNil(o.Severity) {
 		return true
 	}
 
@@ -706,7 +710,7 @@ func (o *CondAlarm) SetSeverity(v string) {
 
 // GetSuppressed returns the Suppressed field value if set, zero value otherwise.
 func (o *CondAlarm) GetSuppressed() bool {
-	if o == nil || o.Suppressed == nil {
+	if o == nil || IsNil(o.Suppressed) {
 		var ret bool
 		return ret
 	}
@@ -716,7 +720,7 @@ func (o *CondAlarm) GetSuppressed() bool {
 // GetSuppressedOk returns a tuple with the Suppressed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondAlarm) GetSuppressedOk() (*bool, bool) {
-	if o == nil || o.Suppressed == nil {
+	if o == nil || IsNil(o.Suppressed) {
 		return nil, false
 	}
 	return o.Suppressed, true
@@ -724,7 +728,7 @@ func (o *CondAlarm) GetSuppressedOk() (*bool, bool) {
 
 // HasSuppressed returns a boolean if a field has been set.
 func (o *CondAlarm) HasSuppressed() bool {
-	if o != nil && o.Suppressed != nil {
+	if o != nil && !IsNil(o.Suppressed) {
 		return true
 	}
 
@@ -736,190 +740,249 @@ func (o *CondAlarm) SetSuppressed(v bool) {
 	o.Suppressed = &v
 }
 
-// GetAffectedMo returns the AffectedMo field value if set, zero value otherwise.
+// GetAffectedMo returns the AffectedMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondAlarm) GetAffectedMo() MoBaseMoRelationship {
-	if o == nil || o.AffectedMo == nil {
+	if o == nil || IsNil(o.AffectedMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.AffectedMo
+	return *o.AffectedMo.Get()
 }
 
 // GetAffectedMoOk returns a tuple with the AffectedMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CondAlarm) GetAffectedMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.AffectedMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AffectedMo, true
+	return o.AffectedMo.Get(), o.AffectedMo.IsSet()
 }
 
 // HasAffectedMo returns a boolean if a field has been set.
 func (o *CondAlarm) HasAffectedMo() bool {
-	if o != nil && o.AffectedMo != nil {
+	if o != nil && o.AffectedMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAffectedMo gets a reference to the given MoBaseMoRelationship and assigns it to the AffectedMo field.
+// SetAffectedMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the AffectedMo field.
 func (o *CondAlarm) SetAffectedMo(v MoBaseMoRelationship) {
-	o.AffectedMo = &v
+	o.AffectedMo.Set(&v)
 }
 
-// GetDefinition returns the Definition field value if set, zero value otherwise.
+// SetAffectedMoNil sets the value for AffectedMo to be an explicit nil
+func (o *CondAlarm) SetAffectedMoNil() {
+	o.AffectedMo.Set(nil)
+}
+
+// UnsetAffectedMo ensures that no value is present for AffectedMo, not even an explicit nil
+func (o *CondAlarm) UnsetAffectedMo() {
+	o.AffectedMo.Unset()
+}
+
+// GetDefinition returns the Definition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondAlarm) GetDefinition() CondAlarmDefinitionRelationship {
-	if o == nil || o.Definition == nil {
+	if o == nil || IsNil(o.Definition.Get()) {
 		var ret CondAlarmDefinitionRelationship
 		return ret
 	}
-	return *o.Definition
+	return *o.Definition.Get()
 }
 
 // GetDefinitionOk returns a tuple with the Definition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CondAlarm) GetDefinitionOk() (*CondAlarmDefinitionRelationship, bool) {
-	if o == nil || o.Definition == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Definition, true
+	return o.Definition.Get(), o.Definition.IsSet()
 }
 
 // HasDefinition returns a boolean if a field has been set.
 func (o *CondAlarm) HasDefinition() bool {
-	if o != nil && o.Definition != nil {
+	if o != nil && o.Definition.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDefinition gets a reference to the given CondAlarmDefinitionRelationship and assigns it to the Definition field.
+// SetDefinition gets a reference to the given NullableCondAlarmDefinitionRelationship and assigns it to the Definition field.
 func (o *CondAlarm) SetDefinition(v CondAlarmDefinitionRelationship) {
-	o.Definition = &v
+	o.Definition.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetDefinitionNil sets the value for Definition to be an explicit nil
+func (o *CondAlarm) SetDefinitionNil() {
+	o.Definition.Set(nil)
+}
+
+// UnsetDefinition ensures that no value is present for Definition, not even an explicit nil
+func (o *CondAlarm) UnsetDefinition() {
+	o.Definition.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondAlarm) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CondAlarm) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *CondAlarm) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *CondAlarm) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *CondAlarm) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *CondAlarm) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o CondAlarm) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CondAlarm) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Acknowledge != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Acknowledge) {
 		toSerialize["Acknowledge"] = o.Acknowledge
 	}
-	if o.AcknowledgeBy != nil {
+	if !IsNil(o.AcknowledgeBy) {
 		toSerialize["AcknowledgeBy"] = o.AcknowledgeBy
 	}
-	if o.AcknowledgeTime != nil {
+	if !IsNil(o.AcknowledgeTime) {
 		toSerialize["AcknowledgeTime"] = o.AcknowledgeTime
 	}
-	if o.AffectedMoDisplayName != nil {
+	if !IsNil(o.AffectedMoDisplayName) {
 		toSerialize["AffectedMoDisplayName"] = o.AffectedMoDisplayName
 	}
-	if o.AffectedMoId != nil {
+	if !IsNil(o.AffectedMoId) {
 		toSerialize["AffectedMoId"] = o.AffectedMoId
 	}
-	if o.AffectedMoType != nil {
+	if !IsNil(o.AffectedMoType) {
 		toSerialize["AffectedMoType"] = o.AffectedMoType
 	}
-	if o.AffectedObject != nil {
+	if !IsNil(o.AffectedObject) {
 		toSerialize["AffectedObject"] = o.AffectedObject
 	}
-	if o.AncestorMoId != nil {
+	if !IsNil(o.AncestorMoId) {
 		toSerialize["AncestorMoId"] = o.AncestorMoId
 	}
-	if o.AncestorMoType != nil {
+	if !IsNil(o.AncestorMoType) {
 		toSerialize["AncestorMoType"] = o.AncestorMoType
 	}
-	if o.Code != nil {
+	if !IsNil(o.Code) {
 		toSerialize["Code"] = o.Code
 	}
-	if o.CreationTime != nil {
+	if !IsNil(o.CreationTime) {
 		toSerialize["CreationTime"] = o.CreationTime
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.LastTransitionTime != nil {
+	if !IsNil(o.LastTransitionTime) {
 		toSerialize["LastTransitionTime"] = o.LastTransitionTime
 	}
-	if o.MsAffectedObject != nil {
+	if !IsNil(o.MsAffectedObject) {
 		toSerialize["MsAffectedObject"] = o.MsAffectedObject
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OrigSeverity != nil {
+	if !IsNil(o.OrigSeverity) {
 		toSerialize["OrigSeverity"] = o.OrigSeverity
 	}
-	if o.Severity != nil {
+	if !IsNil(o.Severity) {
 		toSerialize["Severity"] = o.Severity
 	}
-	if o.Suppressed != nil {
+	if !IsNil(o.Suppressed) {
 		toSerialize["Suppressed"] = o.Suppressed
 	}
-	if o.AffectedMo != nil {
-		toSerialize["AffectedMo"] = o.AffectedMo
+	if o.AffectedMo.IsSet() {
+		toSerialize["AffectedMo"] = o.AffectedMo.Get()
 	}
-	if o.Definition != nil {
-		toSerialize["Definition"] = o.Definition
+	if o.Definition.IsSet() {
+		toSerialize["Definition"] = o.Definition.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CondAlarm) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CondAlarmWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -964,15 +1027,15 @@ func (o *CondAlarm) UnmarshalJSON(bytes []byte) (err error) {
 		// The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * `None` - The Enum value None represents that there is no severity. * `Info` - The Enum value Info represents the Informational level of severity. * `Critical` - The Enum value Critical represents the Critical level of severity. * `Warning` - The Enum value Warning represents the Warning level of severity. * `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared.
 		Severity *string `json:"Severity,omitempty"`
 		// Indicates whether the alarm is marked for suppression or not.
-		Suppressed       *bool                                `json:"Suppressed,omitempty"`
-		AffectedMo       *MoBaseMoRelationship                `json:"AffectedMo,omitempty"`
-		Definition       *CondAlarmDefinitionRelationship     `json:"Definition,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Suppressed       *bool                                       `json:"Suppressed,omitempty"`
+		AffectedMo       NullableMoBaseMoRelationship                `json:"AffectedMo,omitempty"`
+		Definition       NullableCondAlarmDefinitionRelationship     `json:"Definition,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varCondAlarmWithoutEmbeddedStruct := CondAlarmWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCondAlarmWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCondAlarmWithoutEmbeddedStruct)
 	if err == nil {
 		varCondAlarm := _CondAlarm{}
 		varCondAlarm.ClassId = varCondAlarmWithoutEmbeddedStruct.ClassId
@@ -1005,7 +1068,7 @@ func (o *CondAlarm) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCondAlarm := _CondAlarm{}
 
-	err = json.Unmarshal(bytes, &varCondAlarm)
+	err = json.Unmarshal(data, &varCondAlarm)
 	if err == nil {
 		o.MoBaseMo = varCondAlarm.MoBaseMo
 	} else {
@@ -1014,7 +1077,7 @@ func (o *CondAlarm) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Acknowledge")

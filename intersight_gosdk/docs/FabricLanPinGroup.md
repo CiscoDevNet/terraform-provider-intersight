@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.LanPinGroup"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.LanPinGroup"]
-**PinTargetInterfaceRole** | Pointer to [**FabricAbstractInterfaceRoleRelationship**](FabricAbstractInterfaceRoleRelationship.md) |  | [optional] 
+**PinTargetInterfaceRole** | Pointer to [**NullableFabricAbstractInterfaceRoleRelationship**](FabricAbstractInterfaceRoleRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetPinTargetInterfaceRole sets PinTargetInterfaceRole field to given value.
 
 HasPinTargetInterfaceRole returns a boolean if a field has been set.
 
+### SetPinTargetInterfaceRoleNil
+
+`func (o *FabricLanPinGroup) SetPinTargetInterfaceRoleNil(b bool)`
+
+ SetPinTargetInterfaceRoleNil sets the value for PinTargetInterfaceRole to be an explicit nil
+
+### UnsetPinTargetInterfaceRole
+`func (o *FabricLanPinGroup) UnsetPinTargetInterfaceRole()`
+
+UnsetPinTargetInterfaceRole ensures that no value is present for PinTargetInterfaceRole, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

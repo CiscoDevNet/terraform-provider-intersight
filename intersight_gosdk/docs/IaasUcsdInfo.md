@@ -19,11 +19,11 @@ Name | Type | Description | Notes
 **ConnectorPack** | Pointer to [**[]IaasConnectorPackRelationship**](IaasConnectorPackRelationship.md) | An array of relationships to iaasConnectorPack resources. | [optional] [readonly] 
 **CustomTaskInfo** | Pointer to [**[]IaasCustomTaskInfoRelationship**](IaasCustomTaskInfoRelationship.md) | An array of relationships to iaasCustomTaskInfo resources. | [optional] [readonly] 
 **DeviceStatus** | Pointer to [**[]IaasDeviceStatusRelationship**](IaasDeviceStatusRelationship.md) | An array of relationships to iaasDeviceStatus resources. | [optional] [readonly] 
-**LicenseInfo** | Pointer to [**IaasLicenseInfoRelationship**](IaasLicenseInfoRelationship.md) |  | [optional] 
+**LicenseInfo** | Pointer to [**NullableIaasLicenseInfoRelationship**](IaasLicenseInfoRelationship.md) |  | [optional] 
 **MostRunTasks** | Pointer to [**[]IaasMostRunTasksRelationship**](IaasMostRunTasksRelationship.md) | An array of relationships to iaasMostRunTasks resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **SystemTaskInfo** | Pointer to [**[]IaasSystemTaskInfoRelationship**](IaasSystemTaskInfoRelationship.md) | An array of relationships to iaasSystemTaskInfo resources. | [optional] [readonly] 
-**UcsdManagedInfra** | Pointer to [**IaasUcsdManagedInfraRelationship**](IaasUcsdManagedInfraRelationship.md) |  | [optional] 
+**UcsdManagedInfra** | Pointer to [**NullableIaasUcsdManagedInfraRelationship**](IaasUcsdManagedInfraRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -464,6 +464,16 @@ SetLicenseInfo sets LicenseInfo field to given value.
 
 HasLicenseInfo returns a boolean if a field has been set.
 
+### SetLicenseInfoNil
+
+`func (o *IaasUcsdInfo) SetLicenseInfoNil(b bool)`
+
+ SetLicenseInfoNil sets the value for LicenseInfo to be an explicit nil
+
+### UnsetLicenseInfo
+`func (o *IaasUcsdInfo) UnsetLicenseInfo()`
+
+UnsetLicenseInfo ensures that no value is present for LicenseInfo, not even an explicit nil
 ### GetMostRunTasks
 
 `func (o *IaasUcsdInfo) GetMostRunTasks() []IaasMostRunTasksRelationship`
@@ -524,6 +534,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *IaasUcsdInfo) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *IaasUcsdInfo) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetSystemTaskInfo
 
 `func (o *IaasUcsdInfo) GetSystemTaskInfo() []IaasSystemTaskInfoRelationship`
@@ -584,6 +604,16 @@ SetUcsdManagedInfra sets UcsdManagedInfra field to given value.
 
 HasUcsdManagedInfra returns a boolean if a field has been set.
 
+### SetUcsdManagedInfraNil
+
+`func (o *IaasUcsdInfo) SetUcsdManagedInfraNil(b bool)`
+
+ SetUcsdManagedInfraNil sets the value for UcsdManagedInfra to be an explicit nil
+
+### UnsetUcsdManagedInfra
+`func (o *IaasUcsdInfo) UnsetUcsdManagedInfra()`
+
+UnsetUcsdManagedInfra ensures that no value is present for UcsdManagedInfra, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

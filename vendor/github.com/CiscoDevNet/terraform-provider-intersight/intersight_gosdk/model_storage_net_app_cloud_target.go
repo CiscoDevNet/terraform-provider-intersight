@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppCloudTarget type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppCloudTarget{}
 
 // StorageNetAppCloudTarget Cloud target is a collection of cloud provider configuration information for targets e.g., AWS_S3 or Azure_Cloud.
 type StorageNetAppCloudTarget struct {
@@ -56,8 +60,8 @@ type StorageNetAppCloudTarget struct {
 	// The amount of cloud space used by all the aggregates attached to the target, in bytes.
 	Used *int64 `json:"Used,omitempty"`
 	// Uuid of the cloud target.
-	Uuid                 *string                           `json:"Uuid,omitempty"`
-	Array                *StorageNetAppClusterRelationship `json:"Array,omitempty"`
+	Uuid                 *string                                  `json:"Uuid,omitempty"`
+	Array                NullableStorageNetAppClusterRelationship `json:"Array,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -136,7 +140,7 @@ func (o *StorageNetAppCloudTarget) SetObjectType(v string) {
 
 // GetAccessKey returns the AccessKey field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetAccessKey() string {
-	if o == nil || o.AccessKey == nil {
+	if o == nil || IsNil(o.AccessKey) {
 		var ret string
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *StorageNetAppCloudTarget) GetAccessKey() string {
 // GetAccessKeyOk returns a tuple with the AccessKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetAccessKeyOk() (*string, bool) {
-	if o == nil || o.AccessKey == nil {
+	if o == nil || IsNil(o.AccessKey) {
 		return nil, false
 	}
 	return o.AccessKey, true
@@ -154,7 +158,7 @@ func (o *StorageNetAppCloudTarget) GetAccessKeyOk() (*string, bool) {
 
 // HasAccessKey returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasAccessKey() bool {
-	if o != nil && o.AccessKey != nil {
+	if o != nil && !IsNil(o.AccessKey) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *StorageNetAppCloudTarget) SetAccessKey(v string) {
 
 // GetAuthenticationType returns the AuthenticationType field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetAuthenticationType() string {
-	if o == nil || o.AuthenticationType == nil {
+	if o == nil || IsNil(o.AuthenticationType) {
 		var ret string
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *StorageNetAppCloudTarget) GetAuthenticationType() string {
 // GetAuthenticationTypeOk returns a tuple with the AuthenticationType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetAuthenticationTypeOk() (*string, bool) {
-	if o == nil || o.AuthenticationType == nil {
+	if o == nil || IsNil(o.AuthenticationType) {
 		return nil, false
 	}
 	return o.AuthenticationType, true
@@ -186,7 +190,7 @@ func (o *StorageNetAppCloudTarget) GetAuthenticationTypeOk() (*string, bool) {
 
 // HasAuthenticationType returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasAuthenticationType() bool {
-	if o != nil && o.AuthenticationType != nil {
+	if o != nil && !IsNil(o.AuthenticationType) {
 		return true
 	}
 
@@ -200,7 +204,7 @@ func (o *StorageNetAppCloudTarget) SetAuthenticationType(v string) {
 
 // GetAzureAccount returns the AzureAccount field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetAzureAccount() string {
-	if o == nil || o.AzureAccount == nil {
+	if o == nil || IsNil(o.AzureAccount) {
 		var ret string
 		return ret
 	}
@@ -210,7 +214,7 @@ func (o *StorageNetAppCloudTarget) GetAzureAccount() string {
 // GetAzureAccountOk returns a tuple with the AzureAccount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetAzureAccountOk() (*string, bool) {
-	if o == nil || o.AzureAccount == nil {
+	if o == nil || IsNil(o.AzureAccount) {
 		return nil, false
 	}
 	return o.AzureAccount, true
@@ -218,7 +222,7 @@ func (o *StorageNetAppCloudTarget) GetAzureAccountOk() (*string, bool) {
 
 // HasAzureAccount returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasAzureAccount() bool {
-	if o != nil && o.AzureAccount != nil {
+	if o != nil && !IsNil(o.AzureAccount) {
 		return true
 	}
 
@@ -232,7 +236,7 @@ func (o *StorageNetAppCloudTarget) SetAzureAccount(v string) {
 
 // GetCapUrl returns the CapUrl field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetCapUrl() string {
-	if o == nil || o.CapUrl == nil {
+	if o == nil || IsNil(o.CapUrl) {
 		var ret string
 		return ret
 	}
@@ -242,7 +246,7 @@ func (o *StorageNetAppCloudTarget) GetCapUrl() string {
 // GetCapUrlOk returns a tuple with the CapUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetCapUrlOk() (*string, bool) {
-	if o == nil || o.CapUrl == nil {
+	if o == nil || IsNil(o.CapUrl) {
 		return nil, false
 	}
 	return o.CapUrl, true
@@ -250,7 +254,7 @@ func (o *StorageNetAppCloudTarget) GetCapUrlOk() (*string, bool) {
 
 // HasCapUrl returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasCapUrl() bool {
-	if o != nil && o.CapUrl != nil {
+	if o != nil && !IsNil(o.CapUrl) {
 		return true
 	}
 
@@ -264,7 +268,7 @@ func (o *StorageNetAppCloudTarget) SetCapUrl(v string) {
 
 // GetCertificateValidationEnabled returns the CertificateValidationEnabled field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetCertificateValidationEnabled() bool {
-	if o == nil || o.CertificateValidationEnabled == nil {
+	if o == nil || IsNil(o.CertificateValidationEnabled) {
 		var ret bool
 		return ret
 	}
@@ -274,7 +278,7 @@ func (o *StorageNetAppCloudTarget) GetCertificateValidationEnabled() bool {
 // GetCertificateValidationEnabledOk returns a tuple with the CertificateValidationEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetCertificateValidationEnabledOk() (*bool, bool) {
-	if o == nil || o.CertificateValidationEnabled == nil {
+	if o == nil || IsNil(o.CertificateValidationEnabled) {
 		return nil, false
 	}
 	return o.CertificateValidationEnabled, true
@@ -282,7 +286,7 @@ func (o *StorageNetAppCloudTarget) GetCertificateValidationEnabledOk() (*bool, b
 
 // HasCertificateValidationEnabled returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasCertificateValidationEnabled() bool {
-	if o != nil && o.CertificateValidationEnabled != nil {
+	if o != nil && !IsNil(o.CertificateValidationEnabled) {
 		return true
 	}
 
@@ -307,7 +311,7 @@ func (o *StorageNetAppCloudTarget) GetCloudStorage() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppCloudTarget) GetCloudStorageOk() ([]string, bool) {
-	if o == nil || o.CloudStorage == nil {
+	if o == nil || IsNil(o.CloudStorage) {
 		return nil, false
 	}
 	return o.CloudStorage, true
@@ -315,7 +319,7 @@ func (o *StorageNetAppCloudTarget) GetCloudStorageOk() ([]string, bool) {
 
 // HasCloudStorage returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasCloudStorage() bool {
-	if o != nil && o.CloudStorage != nil {
+	if o != nil && IsNil(o.CloudStorage) {
 		return true
 	}
 
@@ -329,7 +333,7 @@ func (o *StorageNetAppCloudTarget) SetCloudStorage(v []string) {
 
 // GetContainer returns the Container field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetContainer() string {
-	if o == nil || o.Container == nil {
+	if o == nil || IsNil(o.Container) {
 		var ret string
 		return ret
 	}
@@ -339,7 +343,7 @@ func (o *StorageNetAppCloudTarget) GetContainer() string {
 // GetContainerOk returns a tuple with the Container field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetContainerOk() (*string, bool) {
-	if o == nil || o.Container == nil {
+	if o == nil || IsNil(o.Container) {
 		return nil, false
 	}
 	return o.Container, true
@@ -347,7 +351,7 @@ func (o *StorageNetAppCloudTarget) GetContainerOk() (*string, bool) {
 
 // HasContainer returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasContainer() bool {
-	if o != nil && o.Container != nil {
+	if o != nil && !IsNil(o.Container) {
 		return true
 	}
 
@@ -361,7 +365,7 @@ func (o *StorageNetAppCloudTarget) SetContainer(v string) {
 
 // GetIpspace returns the Ipspace field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetIpspace() string {
-	if o == nil || o.Ipspace == nil {
+	if o == nil || IsNil(o.Ipspace) {
 		var ret string
 		return ret
 	}
@@ -371,7 +375,7 @@ func (o *StorageNetAppCloudTarget) GetIpspace() string {
 // GetIpspaceOk returns a tuple with the Ipspace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetIpspaceOk() (*string, bool) {
-	if o == nil || o.Ipspace == nil {
+	if o == nil || IsNil(o.Ipspace) {
 		return nil, false
 	}
 	return o.Ipspace, true
@@ -379,7 +383,7 @@ func (o *StorageNetAppCloudTarget) GetIpspaceOk() (*string, bool) {
 
 // HasIpspace returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasIpspace() bool {
-	if o != nil && o.Ipspace != nil {
+	if o != nil && !IsNil(o.Ipspace) {
 		return true
 	}
 
@@ -393,7 +397,7 @@ func (o *StorageNetAppCloudTarget) SetIpspace(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -403,7 +407,7 @@ func (o *StorageNetAppCloudTarget) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -411,7 +415,7 @@ func (o *StorageNetAppCloudTarget) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -425,7 +429,7 @@ func (o *StorageNetAppCloudTarget) SetName(v string) {
 
 // GetOwner returns the Owner field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetOwner() string {
-	if o == nil || o.Owner == nil {
+	if o == nil || IsNil(o.Owner) {
 		var ret string
 		return ret
 	}
@@ -435,7 +439,7 @@ func (o *StorageNetAppCloudTarget) GetOwner() string {
 // GetOwnerOk returns a tuple with the Owner field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetOwnerOk() (*string, bool) {
-	if o == nil || o.Owner == nil {
+	if o == nil || IsNil(o.Owner) {
 		return nil, false
 	}
 	return o.Owner, true
@@ -443,7 +447,7 @@ func (o *StorageNetAppCloudTarget) GetOwnerOk() (*string, bool) {
 
 // HasOwner returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasOwner() bool {
-	if o != nil && o.Owner != nil {
+	if o != nil && !IsNil(o.Owner) {
 		return true
 	}
 
@@ -457,7 +461,7 @@ func (o *StorageNetAppCloudTarget) SetOwner(v string) {
 
 // GetPort returns the Port field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetPort() int64 {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret int64
 		return ret
 	}
@@ -467,7 +471,7 @@ func (o *StorageNetAppCloudTarget) GetPort() int64 {
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetPortOk() (*int64, bool) {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
 	return o.Port, true
@@ -475,7 +479,7 @@ func (o *StorageNetAppCloudTarget) GetPortOk() (*int64, bool) {
 
 // HasPort returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasPort() bool {
-	if o != nil && o.Port != nil {
+	if o != nil && !IsNil(o.Port) {
 		return true
 	}
 
@@ -489,7 +493,7 @@ func (o *StorageNetAppCloudTarget) SetPort(v int64) {
 
 // GetProviderType returns the ProviderType field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetProviderType() string {
-	if o == nil || o.ProviderType == nil {
+	if o == nil || IsNil(o.ProviderType) {
 		var ret string
 		return ret
 	}
@@ -499,7 +503,7 @@ func (o *StorageNetAppCloudTarget) GetProviderType() string {
 // GetProviderTypeOk returns a tuple with the ProviderType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetProviderTypeOk() (*string, bool) {
-	if o == nil || o.ProviderType == nil {
+	if o == nil || IsNil(o.ProviderType) {
 		return nil, false
 	}
 	return o.ProviderType, true
@@ -507,7 +511,7 @@ func (o *StorageNetAppCloudTarget) GetProviderTypeOk() (*string, bool) {
 
 // HasProviderType returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasProviderType() bool {
-	if o != nil && o.ProviderType != nil {
+	if o != nil && !IsNil(o.ProviderType) {
 		return true
 	}
 
@@ -521,7 +525,7 @@ func (o *StorageNetAppCloudTarget) SetProviderType(v string) {
 
 // GetServer returns the Server field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetServer() string {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server) {
 		var ret string
 		return ret
 	}
@@ -531,7 +535,7 @@ func (o *StorageNetAppCloudTarget) GetServer() string {
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetServerOk() (*string, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server) {
 		return nil, false
 	}
 	return o.Server, true
@@ -539,7 +543,7 @@ func (o *StorageNetAppCloudTarget) GetServerOk() (*string, bool) {
 
 // HasServer returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && !IsNil(o.Server) {
 		return true
 	}
 
@@ -553,7 +557,7 @@ func (o *StorageNetAppCloudTarget) SetServer(v string) {
 
 // GetSnapMirrorUse returns the SnapMirrorUse field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetSnapMirrorUse() string {
-	if o == nil || o.SnapMirrorUse == nil {
+	if o == nil || IsNil(o.SnapMirrorUse) {
 		var ret string
 		return ret
 	}
@@ -563,7 +567,7 @@ func (o *StorageNetAppCloudTarget) GetSnapMirrorUse() string {
 // GetSnapMirrorUseOk returns a tuple with the SnapMirrorUse field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetSnapMirrorUseOk() (*string, bool) {
-	if o == nil || o.SnapMirrorUse == nil {
+	if o == nil || IsNil(o.SnapMirrorUse) {
 		return nil, false
 	}
 	return o.SnapMirrorUse, true
@@ -571,7 +575,7 @@ func (o *StorageNetAppCloudTarget) GetSnapMirrorUseOk() (*string, bool) {
 
 // HasSnapMirrorUse returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasSnapMirrorUse() bool {
-	if o != nil && o.SnapMirrorUse != nil {
+	if o != nil && !IsNil(o.SnapMirrorUse) {
 		return true
 	}
 
@@ -585,7 +589,7 @@ func (o *StorageNetAppCloudTarget) SetSnapMirrorUse(v string) {
 
 // GetSslEnabled returns the SslEnabled field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetSslEnabled() bool {
-	if o == nil || o.SslEnabled == nil {
+	if o == nil || IsNil(o.SslEnabled) {
 		var ret bool
 		return ret
 	}
@@ -595,7 +599,7 @@ func (o *StorageNetAppCloudTarget) GetSslEnabled() bool {
 // GetSslEnabledOk returns a tuple with the SslEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetSslEnabledOk() (*bool, bool) {
-	if o == nil || o.SslEnabled == nil {
+	if o == nil || IsNil(o.SslEnabled) {
 		return nil, false
 	}
 	return o.SslEnabled, true
@@ -603,7 +607,7 @@ func (o *StorageNetAppCloudTarget) GetSslEnabledOk() (*bool, bool) {
 
 // HasSslEnabled returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasSslEnabled() bool {
-	if o != nil && o.SslEnabled != nil {
+	if o != nil && !IsNil(o.SslEnabled) {
 		return true
 	}
 
@@ -617,7 +621,7 @@ func (o *StorageNetAppCloudTarget) SetSslEnabled(v bool) {
 
 // GetUsed returns the Used field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetUsed() int64 {
-	if o == nil || o.Used == nil {
+	if o == nil || IsNil(o.Used) {
 		var ret int64
 		return ret
 	}
@@ -627,7 +631,7 @@ func (o *StorageNetAppCloudTarget) GetUsed() int64 {
 // GetUsedOk returns a tuple with the Used field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetUsedOk() (*int64, bool) {
-	if o == nil || o.Used == nil {
+	if o == nil || IsNil(o.Used) {
 		return nil, false
 	}
 	return o.Used, true
@@ -635,7 +639,7 @@ func (o *StorageNetAppCloudTarget) GetUsedOk() (*int64, bool) {
 
 // HasUsed returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasUsed() bool {
-	if o != nil && o.Used != nil {
+	if o != nil && !IsNil(o.Used) {
 		return true
 	}
 
@@ -649,7 +653,7 @@ func (o *StorageNetAppCloudTarget) SetUsed(v int64) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *StorageNetAppCloudTarget) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -659,7 +663,7 @@ func (o *StorageNetAppCloudTarget) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppCloudTarget) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -667,7 +671,7 @@ func (o *StorageNetAppCloudTarget) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -679,117 +683,154 @@ func (o *StorageNetAppCloudTarget) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppCloudTarget) GetArray() StorageNetAppClusterRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageNetAppClusterRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppCloudTarget) GetArrayOk() (*StorageNetAppClusterRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageNetAppCloudTarget) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageNetAppClusterRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageNetAppClusterRelationship and assigns it to the Array field.
 func (o *StorageNetAppCloudTarget) SetArray(v StorageNetAppClusterRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
+}
+
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageNetAppCloudTarget) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageNetAppCloudTarget) UnsetArray() {
+	o.Array.Unset()
 }
 
 func (o StorageNetAppCloudTarget) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppCloudTarget) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccessKey != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessKey) {
 		toSerialize["AccessKey"] = o.AccessKey
 	}
-	if o.AuthenticationType != nil {
+	if !IsNil(o.AuthenticationType) {
 		toSerialize["AuthenticationType"] = o.AuthenticationType
 	}
-	if o.AzureAccount != nil {
+	if !IsNil(o.AzureAccount) {
 		toSerialize["AzureAccount"] = o.AzureAccount
 	}
-	if o.CapUrl != nil {
+	if !IsNil(o.CapUrl) {
 		toSerialize["CapUrl"] = o.CapUrl
 	}
-	if o.CertificateValidationEnabled != nil {
+	if !IsNil(o.CertificateValidationEnabled) {
 		toSerialize["CertificateValidationEnabled"] = o.CertificateValidationEnabled
 	}
 	if o.CloudStorage != nil {
 		toSerialize["CloudStorage"] = o.CloudStorage
 	}
-	if o.Container != nil {
+	if !IsNil(o.Container) {
 		toSerialize["Container"] = o.Container
 	}
-	if o.Ipspace != nil {
+	if !IsNil(o.Ipspace) {
 		toSerialize["Ipspace"] = o.Ipspace
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Owner != nil {
+	if !IsNil(o.Owner) {
 		toSerialize["Owner"] = o.Owner
 	}
-	if o.Port != nil {
+	if !IsNil(o.Port) {
 		toSerialize["Port"] = o.Port
 	}
-	if o.ProviderType != nil {
+	if !IsNil(o.ProviderType) {
 		toSerialize["ProviderType"] = o.ProviderType
 	}
-	if o.Server != nil {
+	if !IsNil(o.Server) {
 		toSerialize["Server"] = o.Server
 	}
-	if o.SnapMirrorUse != nil {
+	if !IsNil(o.SnapMirrorUse) {
 		toSerialize["SnapMirrorUse"] = o.SnapMirrorUse
 	}
-	if o.SslEnabled != nil {
+	if !IsNil(o.SslEnabled) {
 		toSerialize["SslEnabled"] = o.SslEnabled
 	}
-	if o.Used != nil {
+	if !IsNil(o.Used) {
 		toSerialize["Used"] = o.Used
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppCloudTarget) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppCloudTarget) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppCloudTargetWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -827,13 +868,13 @@ func (o *StorageNetAppCloudTarget) UnmarshalJSON(bytes []byte) (err error) {
 		// The amount of cloud space used by all the aggregates attached to the target, in bytes.
 		Used *int64 `json:"Used,omitempty"`
 		// Uuid of the cloud target.
-		Uuid  *string                           `json:"Uuid,omitempty"`
-		Array *StorageNetAppClusterRelationship `json:"Array,omitempty"`
+		Uuid  *string                                  `json:"Uuid,omitempty"`
+		Array NullableStorageNetAppClusterRelationship `json:"Array,omitempty"`
 	}
 
 	varStorageNetAppCloudTargetWithoutEmbeddedStruct := StorageNetAppCloudTargetWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppCloudTargetWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppCloudTargetWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppCloudTarget := _StorageNetAppCloudTarget{}
 		varStorageNetAppCloudTarget.ClassId = varStorageNetAppCloudTargetWithoutEmbeddedStruct.ClassId
@@ -863,7 +904,7 @@ func (o *StorageNetAppCloudTarget) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppCloudTarget := _StorageNetAppCloudTarget{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppCloudTarget)
+	err = json.Unmarshal(data, &varStorageNetAppCloudTarget)
 	if err == nil {
 		o.MoBaseMo = varStorageNetAppCloudTarget.MoBaseMo
 	} else {
@@ -872,7 +913,7 @@ func (o *StorageNetAppCloudTarget) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessKey")

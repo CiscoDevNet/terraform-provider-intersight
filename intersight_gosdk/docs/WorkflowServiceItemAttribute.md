@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **Datatype** | Pointer to **string** | Datatype, if any, backing the service item attribute definition. | [optional] [readonly] 
 **Name** | Pointer to **string** | Attribute name which is used in the attribute definition of the service item. | [optional] 
 **Type** | Pointer to **string** | Type of the service item attribute. * &#x60;None&#x60; - Default value if the service item attribute does not belong to any of the existing types. * &#x60;Configuration&#x60; - The service item attribute is a configuration from the designer or the end user. * &#x60;Inventory&#x60; - The service item attribute captures the inventory of the resource created by the service item deployment. * &#x60;Health&#x60; - The service item attribute describes the health of the resource created by the service item deployment. * &#x60;Output&#x60; - The service item attribute captures the artifact generated after performing an action on the service item. | [optional] [readonly] [default to "None"]
-**ServiceItemDefinition** | Pointer to [**WorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
-**ServiceItemInstance** | Pointer to [**WorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
+**ServiceItemDefinition** | Pointer to [**NullableWorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
+**ServiceItemInstance** | Pointer to [**NullableWorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -207,6 +207,16 @@ SetServiceItemDefinition sets ServiceItemDefinition field to given value.
 
 HasServiceItemDefinition returns a boolean if a field has been set.
 
+### SetServiceItemDefinitionNil
+
+`func (o *WorkflowServiceItemAttribute) SetServiceItemDefinitionNil(b bool)`
+
+ SetServiceItemDefinitionNil sets the value for ServiceItemDefinition to be an explicit nil
+
+### UnsetServiceItemDefinition
+`func (o *WorkflowServiceItemAttribute) UnsetServiceItemDefinition()`
+
+UnsetServiceItemDefinition ensures that no value is present for ServiceItemDefinition, not even an explicit nil
 ### GetServiceItemInstance
 
 `func (o *WorkflowServiceItemAttribute) GetServiceItemInstance() WorkflowServiceItemInstanceRelationship`
@@ -232,6 +242,16 @@ SetServiceItemInstance sets ServiceItemInstance field to given value.
 
 HasServiceItemInstance returns a boolean if a field has been set.
 
+### SetServiceItemInstanceNil
+
+`func (o *WorkflowServiceItemAttribute) SetServiceItemInstanceNil(b bool)`
+
+ SetServiceItemInstanceNil sets the value for ServiceItemInstance to be an explicit nil
+
+### UnsetServiceItemInstance
+`func (o *WorkflowServiceItemAttribute) UnsetServiceItemInstance()`
+
+UnsetServiceItemInstance ensures that no value is present for ServiceItemInstance, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

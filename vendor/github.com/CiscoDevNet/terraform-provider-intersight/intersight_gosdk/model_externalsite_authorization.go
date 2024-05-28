@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ExternalsiteAuthorization type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ExternalsiteAuthorization{}
 
 // ExternalsiteAuthorization An authentication request that will be used to get authorized from external repository like cisco.com in order to download the image. This MO creation is a one time configuration before calling firmware.Upgrade API. This MO has to be modified with updated details whenever the user has updated the credentials in external repository.
 type ExternalsiteAuthorization struct {
@@ -33,8 +37,8 @@ type ExternalsiteAuthorization struct {
 	// The repository type to which this authorization will be requested. Cisco is the only available repository today. * `cisco` - Cisco as an external site from where the resources like image will be downloaded.
 	RepositoryType *string `json:"RepositoryType,omitempty"`
 	// The username that has permission to download the image from external repository like cisco.com.
-	UserId               *string                 `json:"UserId,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	UserId               *string                        `json:"UserId,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -117,7 +121,7 @@ func (o *ExternalsiteAuthorization) SetObjectType(v string) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *ExternalsiteAuthorization) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -127,7 +131,7 @@ func (o *ExternalsiteAuthorization) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExternalsiteAuthorization) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -135,7 +139,7 @@ func (o *ExternalsiteAuthorization) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *ExternalsiteAuthorization) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -149,7 +153,7 @@ func (o *ExternalsiteAuthorization) SetIsPasswordSet(v bool) {
 
 // GetIsUserIdSet returns the IsUserIdSet field value if set, zero value otherwise.
 func (o *ExternalsiteAuthorization) GetIsUserIdSet() bool {
-	if o == nil || o.IsUserIdSet == nil {
+	if o == nil || IsNil(o.IsUserIdSet) {
 		var ret bool
 		return ret
 	}
@@ -159,7 +163,7 @@ func (o *ExternalsiteAuthorization) GetIsUserIdSet() bool {
 // GetIsUserIdSetOk returns a tuple with the IsUserIdSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExternalsiteAuthorization) GetIsUserIdSetOk() (*bool, bool) {
-	if o == nil || o.IsUserIdSet == nil {
+	if o == nil || IsNil(o.IsUserIdSet) {
 		return nil, false
 	}
 	return o.IsUserIdSet, true
@@ -167,7 +171,7 @@ func (o *ExternalsiteAuthorization) GetIsUserIdSetOk() (*bool, bool) {
 
 // HasIsUserIdSet returns a boolean if a field has been set.
 func (o *ExternalsiteAuthorization) HasIsUserIdSet() bool {
-	if o != nil && o.IsUserIdSet != nil {
+	if o != nil && !IsNil(o.IsUserIdSet) {
 		return true
 	}
 
@@ -181,7 +185,7 @@ func (o *ExternalsiteAuthorization) SetIsUserIdSet(v bool) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *ExternalsiteAuthorization) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *ExternalsiteAuthorization) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExternalsiteAuthorization) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -199,7 +203,7 @@ func (o *ExternalsiteAuthorization) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *ExternalsiteAuthorization) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *ExternalsiteAuthorization) SetPassword(v string) {
 
 // GetRepositoryType returns the RepositoryType field value if set, zero value otherwise.
 func (o *ExternalsiteAuthorization) GetRepositoryType() string {
-	if o == nil || o.RepositoryType == nil {
+	if o == nil || IsNil(o.RepositoryType) {
 		var ret string
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *ExternalsiteAuthorization) GetRepositoryType() string {
 // GetRepositoryTypeOk returns a tuple with the RepositoryType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExternalsiteAuthorization) GetRepositoryTypeOk() (*string, bool) {
-	if o == nil || o.RepositoryType == nil {
+	if o == nil || IsNil(o.RepositoryType) {
 		return nil, false
 	}
 	return o.RepositoryType, true
@@ -231,7 +235,7 @@ func (o *ExternalsiteAuthorization) GetRepositoryTypeOk() (*string, bool) {
 
 // HasRepositoryType returns a boolean if a field has been set.
 func (o *ExternalsiteAuthorization) HasRepositoryType() bool {
-	if o != nil && o.RepositoryType != nil {
+	if o != nil && !IsNil(o.RepositoryType) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *ExternalsiteAuthorization) SetRepositoryType(v string) {
 
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *ExternalsiteAuthorization) GetUserId() string {
-	if o == nil || o.UserId == nil {
+	if o == nil || IsNil(o.UserId) {
 		var ret string
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *ExternalsiteAuthorization) GetUserId() string {
 // GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExternalsiteAuthorization) GetUserIdOk() (*string, bool) {
-	if o == nil || o.UserId == nil {
+	if o == nil || IsNil(o.UserId) {
 		return nil, false
 	}
 	return o.UserId, true
@@ -263,7 +267,7 @@ func (o *ExternalsiteAuthorization) GetUserIdOk() (*string, bool) {
 
 // HasUserId returns a boolean if a field has been set.
 func (o *ExternalsiteAuthorization) HasUserId() bool {
-	if o != nil && o.UserId != nil {
+	if o != nil && !IsNil(o.UserId) {
 		return true
 	}
 
@@ -275,81 +279,118 @@ func (o *ExternalsiteAuthorization) SetUserId(v string) {
 	o.UserId = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ExternalsiteAuthorization) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ExternalsiteAuthorization) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ExternalsiteAuthorization) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ExternalsiteAuthorization) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ExternalsiteAuthorization) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ExternalsiteAuthorization) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o ExternalsiteAuthorization) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ExternalsiteAuthorization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsPasswordSet != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.IsUserIdSet != nil {
+	if !IsNil(o.IsUserIdSet) {
 		toSerialize["IsUserIdSet"] = o.IsUserIdSet
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.RepositoryType != nil {
+	if !IsNil(o.RepositoryType) {
 		toSerialize["RepositoryType"] = o.RepositoryType
 	}
-	if o.UserId != nil {
+	if !IsNil(o.UserId) {
 		toSerialize["UserId"] = o.UserId
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ExternalsiteAuthorization) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ExternalsiteAuthorization) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ExternalsiteAuthorizationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -364,13 +405,13 @@ func (o *ExternalsiteAuthorization) UnmarshalJSON(bytes []byte) (err error) {
 		// The repository type to which this authorization will be requested. Cisco is the only available repository today. * `cisco` - Cisco as an external site from where the resources like image will be downloaded.
 		RepositoryType *string `json:"RepositoryType,omitempty"`
 		// The username that has permission to download the image from external repository like cisco.com.
-		UserId  *string                 `json:"UserId,omitempty"`
-		Account *IamAccountRelationship `json:"Account,omitempty"`
+		UserId  *string                        `json:"UserId,omitempty"`
+		Account NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varExternalsiteAuthorizationWithoutEmbeddedStruct := ExternalsiteAuthorizationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varExternalsiteAuthorizationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varExternalsiteAuthorizationWithoutEmbeddedStruct)
 	if err == nil {
 		varExternalsiteAuthorization := _ExternalsiteAuthorization{}
 		varExternalsiteAuthorization.ClassId = varExternalsiteAuthorizationWithoutEmbeddedStruct.ClassId
@@ -388,7 +429,7 @@ func (o *ExternalsiteAuthorization) UnmarshalJSON(bytes []byte) (err error) {
 
 	varExternalsiteAuthorization := _ExternalsiteAuthorization{}
 
-	err = json.Unmarshal(bytes, &varExternalsiteAuthorization)
+	err = json.Unmarshal(data, &varExternalsiteAuthorization)
 	if err == nil {
 		o.MoBaseMo = varExternalsiteAuthorization.MoBaseMo
 	} else {
@@ -397,7 +438,7 @@ func (o *ExternalsiteAuthorization) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsPasswordSet")

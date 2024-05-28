@@ -7,6 +7,7 @@ import (
 	"log"
 	"reflect"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 
@@ -2333,8 +2334,13 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		}
 		return diag.Errorf("error occurred while creating ServerProfile: %s", responseErr.Error())
 	}
-	log.Printf("Moid: %s", resultMo.GetMoid())
-	d.SetId(resultMo.GetMoid())
+	if len(resultMo.GetMoid()) != 0 {
+		log.Printf("Moid: %s", resultMo.GetMoid())
+		d.SetId(resultMo.GetMoid())
+	} else {
+		d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
+		log.Printf("Mo: %v", resultMo)
+	}
 	if deploy_flag {
 		time.Sleep(5 * time.Second)
 		o.SetAction("Deploy")
@@ -2400,12 +2406,18 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 			}
 		}
 	}
+	if len(resultMo.GetMoid()) == 0 {
+		return de
+	}
 	return append(de, resourceServerProfileRead(c, d, meta)...)
 }
 
 func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	var de diag.Diagnostics
+	if len(d.Id()) == 0 {
+		return de
+	}
 	conn := meta.(*Config)
 	r := conn.ApiClient.ServerApi.GetServerProfileByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()

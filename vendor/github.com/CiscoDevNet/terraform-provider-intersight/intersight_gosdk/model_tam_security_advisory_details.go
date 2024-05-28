@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the TamSecurityAdvisoryDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TamSecurityAdvisoryDetails{}
 
 // TamSecurityAdvisoryDetails Details pertaining to a security advisory defined by a given advisory.
 type TamSecurityAdvisoryDetails struct {
@@ -115,7 +119,7 @@ func (o *TamSecurityAdvisoryDetails) SetObjectType(v string) {
 
 // GetBaseScore returns the BaseScore field value if set, zero value otherwise.
 func (o *TamSecurityAdvisoryDetails) GetBaseScore() float32 {
-	if o == nil || o.BaseScore == nil {
+	if o == nil || IsNil(o.BaseScore) {
 		var ret float32
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *TamSecurityAdvisoryDetails) GetBaseScore() float32 {
 // GetBaseScoreOk returns a tuple with the BaseScore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TamSecurityAdvisoryDetails) GetBaseScoreOk() (*float32, bool) {
-	if o == nil || o.BaseScore == nil {
+	if o == nil || IsNil(o.BaseScore) {
 		return nil, false
 	}
 	return o.BaseScore, true
@@ -133,7 +137,7 @@ func (o *TamSecurityAdvisoryDetails) GetBaseScoreOk() (*float32, bool) {
 
 // HasBaseScore returns a boolean if a field has been set.
 func (o *TamSecurityAdvisoryDetails) HasBaseScore() bool {
-	if o != nil && o.BaseScore != nil {
+	if o != nil && !IsNil(o.BaseScore) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *TamSecurityAdvisoryDetails) GetCveIds() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TamSecurityAdvisoryDetails) GetCveIdsOk() ([]string, bool) {
-	if o == nil || o.CveIds == nil {
+	if o == nil || IsNil(o.CveIds) {
 		return nil, false
 	}
 	return o.CveIds, true
@@ -166,7 +170,7 @@ func (o *TamSecurityAdvisoryDetails) GetCveIdsOk() ([]string, bool) {
 
 // HasCveIds returns a boolean if a field has been set.
 func (o *TamSecurityAdvisoryDetails) HasCveIds() bool {
-	if o != nil && o.CveIds != nil {
+	if o != nil && IsNil(o.CveIds) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *TamSecurityAdvisoryDetails) SetCveIds(v []string) {
 
 // GetEnvironmentalScore returns the EnvironmentalScore field value if set, zero value otherwise.
 func (o *TamSecurityAdvisoryDetails) GetEnvironmentalScore() float32 {
-	if o == nil || o.EnvironmentalScore == nil {
+	if o == nil || IsNil(o.EnvironmentalScore) {
 		var ret float32
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *TamSecurityAdvisoryDetails) GetEnvironmentalScore() float32 {
 // GetEnvironmentalScoreOk returns a tuple with the EnvironmentalScore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TamSecurityAdvisoryDetails) GetEnvironmentalScoreOk() (*float32, bool) {
-	if o == nil || o.EnvironmentalScore == nil {
+	if o == nil || IsNil(o.EnvironmentalScore) {
 		return nil, false
 	}
 	return o.EnvironmentalScore, true
@@ -198,7 +202,7 @@ func (o *TamSecurityAdvisoryDetails) GetEnvironmentalScoreOk() (*float32, bool) 
 
 // HasEnvironmentalScore returns a boolean if a field has been set.
 func (o *TamSecurityAdvisoryDetails) HasEnvironmentalScore() bool {
-	if o != nil && o.EnvironmentalScore != nil {
+	if o != nil && !IsNil(o.EnvironmentalScore) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *TamSecurityAdvisoryDetails) SetEnvironmentalScore(v float32) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *TamSecurityAdvisoryDetails) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *TamSecurityAdvisoryDetails) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TamSecurityAdvisoryDetails) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -230,7 +234,7 @@ func (o *TamSecurityAdvisoryDetails) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *TamSecurityAdvisoryDetails) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *TamSecurityAdvisoryDetails) SetStatus(v string) {
 
 // GetTemporalScore returns the TemporalScore field value if set, zero value otherwise.
 func (o *TamSecurityAdvisoryDetails) GetTemporalScore() float32 {
-	if o == nil || o.TemporalScore == nil {
+	if o == nil || IsNil(o.TemporalScore) {
 		var ret float32
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *TamSecurityAdvisoryDetails) GetTemporalScore() float32 {
 // GetTemporalScoreOk returns a tuple with the TemporalScore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TamSecurityAdvisoryDetails) GetTemporalScoreOk() (*float32, bool) {
-	if o == nil || o.TemporalScore == nil {
+	if o == nil || IsNil(o.TemporalScore) {
 		return nil, false
 	}
 	return o.TemporalScore, true
@@ -262,7 +266,7 @@ func (o *TamSecurityAdvisoryDetails) GetTemporalScoreOk() (*float32, bool) {
 
 // HasTemporalScore returns a boolean if a field has been set.
 func (o *TamSecurityAdvisoryDetails) HasTemporalScore() bool {
-	if o != nil && o.TemporalScore != nil {
+	if o != nil && !IsNil(o.TemporalScore) {
 		return true
 	}
 
@@ -275,34 +279,38 @@ func (o *TamSecurityAdvisoryDetails) SetTemporalScore(v float32) {
 }
 
 func (o TamSecurityAdvisoryDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TamSecurityAdvisoryDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedTamBaseAdvisoryDetails, errTamBaseAdvisoryDetails := json.Marshal(o.TamBaseAdvisoryDetails)
 	if errTamBaseAdvisoryDetails != nil {
-		return []byte{}, errTamBaseAdvisoryDetails
+		return map[string]interface{}{}, errTamBaseAdvisoryDetails
 	}
 	errTamBaseAdvisoryDetails = json.Unmarshal([]byte(serializedTamBaseAdvisoryDetails), &toSerialize)
 	if errTamBaseAdvisoryDetails != nil {
-		return []byte{}, errTamBaseAdvisoryDetails
+		return map[string]interface{}{}, errTamBaseAdvisoryDetails
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BaseScore != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BaseScore) {
 		toSerialize["BaseScore"] = o.BaseScore
 	}
 	if o.CveIds != nil {
 		toSerialize["CveIds"] = o.CveIds
 	}
-	if o.EnvironmentalScore != nil {
+	if !IsNil(o.EnvironmentalScore) {
 		toSerialize["EnvironmentalScore"] = o.EnvironmentalScore
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.TemporalScore != nil {
+	if !IsNil(o.TemporalScore) {
 		toSerialize["TemporalScore"] = o.TemporalScore
 	}
 
@@ -310,10 +318,32 @@ func (o TamSecurityAdvisoryDetails) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TamSecurityAdvisoryDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TamSecurityAdvisoryDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type TamSecurityAdvisoryDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -332,7 +362,7 @@ func (o *TamSecurityAdvisoryDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varTamSecurityAdvisoryDetailsWithoutEmbeddedStruct := TamSecurityAdvisoryDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varTamSecurityAdvisoryDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varTamSecurityAdvisoryDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varTamSecurityAdvisoryDetails := _TamSecurityAdvisoryDetails{}
 		varTamSecurityAdvisoryDetails.ClassId = varTamSecurityAdvisoryDetailsWithoutEmbeddedStruct.ClassId
@@ -349,7 +379,7 @@ func (o *TamSecurityAdvisoryDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	varTamSecurityAdvisoryDetails := _TamSecurityAdvisoryDetails{}
 
-	err = json.Unmarshal(bytes, &varTamSecurityAdvisoryDetails)
+	err = json.Unmarshal(data, &varTamSecurityAdvisoryDetails)
 	if err == nil {
 		o.TamBaseAdvisoryDetails = varTamSecurityAdvisoryDetails.TamBaseAdvisoryDetails
 	} else {
@@ -358,7 +388,7 @@ func (o *TamSecurityAdvisoryDetails) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BaseScore")

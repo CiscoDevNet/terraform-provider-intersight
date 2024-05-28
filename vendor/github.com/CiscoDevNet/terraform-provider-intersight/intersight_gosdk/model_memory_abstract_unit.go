@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MemoryAbstractUnit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MemoryAbstractUnit{}
 
 // MemoryAbstractUnit Abstract class for all memory units.
 type MemoryAbstractUnit struct {
@@ -133,7 +137,7 @@ func (o *MemoryAbstractUnit) SetObjectType(v string) {
 
 // GetAdminState returns the AdminState field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetAdminState() string {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		var ret string
 		return ret
 	}
@@ -143,7 +147,7 @@ func (o *MemoryAbstractUnit) GetAdminState() string {
 // GetAdminStateOk returns a tuple with the AdminState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetAdminStateOk() (*string, bool) {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		return nil, false
 	}
 	return o.AdminState, true
@@ -151,7 +155,7 @@ func (o *MemoryAbstractUnit) GetAdminStateOk() (*string, bool) {
 
 // HasAdminState returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasAdminState() bool {
-	if o != nil && o.AdminState != nil {
+	if o != nil && !IsNil(o.AdminState) {
 		return true
 	}
 
@@ -165,7 +169,7 @@ func (o *MemoryAbstractUnit) SetAdminState(v string) {
 
 // GetArrayId returns the ArrayId field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetArrayId() int64 {
-	if o == nil || o.ArrayId == nil {
+	if o == nil || IsNil(o.ArrayId) {
 		var ret int64
 		return ret
 	}
@@ -175,7 +179,7 @@ func (o *MemoryAbstractUnit) GetArrayId() int64 {
 // GetArrayIdOk returns a tuple with the ArrayId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetArrayIdOk() (*int64, bool) {
-	if o == nil || o.ArrayId == nil {
+	if o == nil || IsNil(o.ArrayId) {
 		return nil, false
 	}
 	return o.ArrayId, true
@@ -183,7 +187,7 @@ func (o *MemoryAbstractUnit) GetArrayIdOk() (*int64, bool) {
 
 // HasArrayId returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasArrayId() bool {
-	if o != nil && o.ArrayId != nil {
+	if o != nil && !IsNil(o.ArrayId) {
 		return true
 	}
 
@@ -197,7 +201,7 @@ func (o *MemoryAbstractUnit) SetArrayId(v int64) {
 
 // GetBank returns the Bank field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetBank() int64 {
-	if o == nil || o.Bank == nil {
+	if o == nil || IsNil(o.Bank) {
 		var ret int64
 		return ret
 	}
@@ -207,7 +211,7 @@ func (o *MemoryAbstractUnit) GetBank() int64 {
 // GetBankOk returns a tuple with the Bank field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetBankOk() (*int64, bool) {
-	if o == nil || o.Bank == nil {
+	if o == nil || IsNil(o.Bank) {
 		return nil, false
 	}
 	return o.Bank, true
@@ -215,7 +219,7 @@ func (o *MemoryAbstractUnit) GetBankOk() (*int64, bool) {
 
 // HasBank returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasBank() bool {
-	if o != nil && o.Bank != nil {
+	if o != nil && !IsNil(o.Bank) {
 		return true
 	}
 
@@ -229,7 +233,7 @@ func (o *MemoryAbstractUnit) SetBank(v int64) {
 
 // GetCapacity returns the Capacity field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetCapacity() string {
-	if o == nil || o.Capacity == nil {
+	if o == nil || IsNil(o.Capacity) {
 		var ret string
 		return ret
 	}
@@ -239,7 +243,7 @@ func (o *MemoryAbstractUnit) GetCapacity() string {
 // GetCapacityOk returns a tuple with the Capacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetCapacityOk() (*string, bool) {
-	if o == nil || o.Capacity == nil {
+	if o == nil || IsNil(o.Capacity) {
 		return nil, false
 	}
 	return o.Capacity, true
@@ -247,7 +251,7 @@ func (o *MemoryAbstractUnit) GetCapacityOk() (*string, bool) {
 
 // HasCapacity returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasCapacity() bool {
-	if o != nil && o.Capacity != nil {
+	if o != nil && !IsNil(o.Capacity) {
 		return true
 	}
 
@@ -261,7 +265,7 @@ func (o *MemoryAbstractUnit) SetCapacity(v string) {
 
 // GetClock returns the Clock field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetClock() string {
-	if o == nil || o.Clock == nil {
+	if o == nil || IsNil(o.Clock) {
 		var ret string
 		return ret
 	}
@@ -271,7 +275,7 @@ func (o *MemoryAbstractUnit) GetClock() string {
 // GetClockOk returns a tuple with the Clock field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetClockOk() (*string, bool) {
-	if o == nil || o.Clock == nil {
+	if o == nil || IsNil(o.Clock) {
 		return nil, false
 	}
 	return o.Clock, true
@@ -279,7 +283,7 @@ func (o *MemoryAbstractUnit) GetClockOk() (*string, bool) {
 
 // HasClock returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasClock() bool {
-	if o != nil && o.Clock != nil {
+	if o != nil && !IsNil(o.Clock) {
 		return true
 	}
 
@@ -293,7 +297,7 @@ func (o *MemoryAbstractUnit) SetClock(v string) {
 
 // GetFormFactor returns the FormFactor field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetFormFactor() string {
-	if o == nil || o.FormFactor == nil {
+	if o == nil || IsNil(o.FormFactor) {
 		var ret string
 		return ret
 	}
@@ -303,7 +307,7 @@ func (o *MemoryAbstractUnit) GetFormFactor() string {
 // GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetFormFactorOk() (*string, bool) {
-	if o == nil || o.FormFactor == nil {
+	if o == nil || IsNil(o.FormFactor) {
 		return nil, false
 	}
 	return o.FormFactor, true
@@ -311,7 +315,7 @@ func (o *MemoryAbstractUnit) GetFormFactorOk() (*string, bool) {
 
 // HasFormFactor returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasFormFactor() bool {
-	if o != nil && o.FormFactor != nil {
+	if o != nil && !IsNil(o.FormFactor) {
 		return true
 	}
 
@@ -325,7 +329,7 @@ func (o *MemoryAbstractUnit) SetFormFactor(v string) {
 
 // GetLatency returns the Latency field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetLatency() string {
-	if o == nil || o.Latency == nil {
+	if o == nil || IsNil(o.Latency) {
 		var ret string
 		return ret
 	}
@@ -335,7 +339,7 @@ func (o *MemoryAbstractUnit) GetLatency() string {
 // GetLatencyOk returns a tuple with the Latency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetLatencyOk() (*string, bool) {
-	if o == nil || o.Latency == nil {
+	if o == nil || IsNil(o.Latency) {
 		return nil, false
 	}
 	return o.Latency, true
@@ -343,7 +347,7 @@ func (o *MemoryAbstractUnit) GetLatencyOk() (*string, bool) {
 
 // HasLatency returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasLatency() bool {
-	if o != nil && o.Latency != nil {
+	if o != nil && !IsNil(o.Latency) {
 		return true
 	}
 
@@ -357,7 +361,7 @@ func (o *MemoryAbstractUnit) SetLatency(v string) {
 
 // GetLocation returns the Location field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetLocation() string {
-	if o == nil || o.Location == nil {
+	if o == nil || IsNil(o.Location) {
 		var ret string
 		return ret
 	}
@@ -367,7 +371,7 @@ func (o *MemoryAbstractUnit) GetLocation() string {
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetLocationOk() (*string, bool) {
-	if o == nil || o.Location == nil {
+	if o == nil || IsNil(o.Location) {
 		return nil, false
 	}
 	return o.Location, true
@@ -375,7 +379,7 @@ func (o *MemoryAbstractUnit) GetLocationOk() (*string, bool) {
 
 // HasLocation returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasLocation() bool {
-	if o != nil && o.Location != nil {
+	if o != nil && !IsNil(o.Location) {
 		return true
 	}
 
@@ -389,7 +393,7 @@ func (o *MemoryAbstractUnit) SetLocation(v string) {
 
 // GetOperPowerState returns the OperPowerState field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetOperPowerState() string {
-	if o == nil || o.OperPowerState == nil {
+	if o == nil || IsNil(o.OperPowerState) {
 		var ret string
 		return ret
 	}
@@ -399,7 +403,7 @@ func (o *MemoryAbstractUnit) GetOperPowerState() string {
 // GetOperPowerStateOk returns a tuple with the OperPowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetOperPowerStateOk() (*string, bool) {
-	if o == nil || o.OperPowerState == nil {
+	if o == nil || IsNil(o.OperPowerState) {
 		return nil, false
 	}
 	return o.OperPowerState, true
@@ -407,7 +411,7 @@ func (o *MemoryAbstractUnit) GetOperPowerStateOk() (*string, bool) {
 
 // HasOperPowerState returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasOperPowerState() bool {
-	if o != nil && o.OperPowerState != nil {
+	if o != nil && !IsNil(o.OperPowerState) {
 		return true
 	}
 
@@ -432,7 +436,7 @@ func (o *MemoryAbstractUnit) GetOperReason() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryAbstractUnit) GetOperReasonOk() ([]string, bool) {
-	if o == nil || o.OperReason == nil {
+	if o == nil || IsNil(o.OperReason) {
 		return nil, false
 	}
 	return o.OperReason, true
@@ -440,7 +444,7 @@ func (o *MemoryAbstractUnit) GetOperReasonOk() ([]string, bool) {
 
 // HasOperReason returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasOperReason() bool {
-	if o != nil && o.OperReason != nil {
+	if o != nil && IsNil(o.OperReason) {
 		return true
 	}
 
@@ -454,7 +458,7 @@ func (o *MemoryAbstractUnit) SetOperReason(v []string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -464,7 +468,7 @@ func (o *MemoryAbstractUnit) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -472,7 +476,7 @@ func (o *MemoryAbstractUnit) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -486,7 +490,7 @@ func (o *MemoryAbstractUnit) SetOperState(v string) {
 
 // GetOperability returns the Operability field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetOperability() string {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		var ret string
 		return ret
 	}
@@ -496,7 +500,7 @@ func (o *MemoryAbstractUnit) GetOperability() string {
 // GetOperabilityOk returns a tuple with the Operability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetOperabilityOk() (*string, bool) {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		return nil, false
 	}
 	return o.Operability, true
@@ -504,7 +508,7 @@ func (o *MemoryAbstractUnit) GetOperabilityOk() (*string, bool) {
 
 // HasOperability returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasOperability() bool {
-	if o != nil && o.Operability != nil {
+	if o != nil && !IsNil(o.Operability) {
 		return true
 	}
 
@@ -518,7 +522,7 @@ func (o *MemoryAbstractUnit) SetOperability(v string) {
 
 // GetSet returns the Set field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetSet() int64 {
-	if o == nil || o.Set == nil {
+	if o == nil || IsNil(o.Set) {
 		var ret int64
 		return ret
 	}
@@ -528,7 +532,7 @@ func (o *MemoryAbstractUnit) GetSet() int64 {
 // GetSetOk returns a tuple with the Set field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetSetOk() (*int64, bool) {
-	if o == nil || o.Set == nil {
+	if o == nil || IsNil(o.Set) {
 		return nil, false
 	}
 	return o.Set, true
@@ -536,7 +540,7 @@ func (o *MemoryAbstractUnit) GetSetOk() (*int64, bool) {
 
 // HasSet returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasSet() bool {
-	if o != nil && o.Set != nil {
+	if o != nil && !IsNil(o.Set) {
 		return true
 	}
 
@@ -550,7 +554,7 @@ func (o *MemoryAbstractUnit) SetSet(v int64) {
 
 // GetSpeed returns the Speed field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetSpeed() string {
-	if o == nil || o.Speed == nil {
+	if o == nil || IsNil(o.Speed) {
 		var ret string
 		return ret
 	}
@@ -560,7 +564,7 @@ func (o *MemoryAbstractUnit) GetSpeed() string {
 // GetSpeedOk returns a tuple with the Speed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetSpeedOk() (*string, bool) {
-	if o == nil || o.Speed == nil {
+	if o == nil || IsNil(o.Speed) {
 		return nil, false
 	}
 	return o.Speed, true
@@ -568,7 +572,7 @@ func (o *MemoryAbstractUnit) GetSpeedOk() (*string, bool) {
 
 // HasSpeed returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasSpeed() bool {
-	if o != nil && o.Speed != nil {
+	if o != nil && !IsNil(o.Speed) {
 		return true
 	}
 
@@ -582,7 +586,7 @@ func (o *MemoryAbstractUnit) SetSpeed(v string) {
 
 // GetThermal returns the Thermal field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetThermal() string {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		var ret string
 		return ret
 	}
@@ -592,7 +596,7 @@ func (o *MemoryAbstractUnit) GetThermal() string {
 // GetThermalOk returns a tuple with the Thermal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetThermalOk() (*string, bool) {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		return nil, false
 	}
 	return o.Thermal, true
@@ -600,7 +604,7 @@ func (o *MemoryAbstractUnit) GetThermalOk() (*string, bool) {
 
 // HasThermal returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasThermal() bool {
-	if o != nil && o.Thermal != nil {
+	if o != nil && !IsNil(o.Thermal) {
 		return true
 	}
 
@@ -614,7 +618,7 @@ func (o *MemoryAbstractUnit) SetThermal(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -624,7 +628,7 @@ func (o *MemoryAbstractUnit) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -632,7 +636,7 @@ func (o *MemoryAbstractUnit) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -646,7 +650,7 @@ func (o *MemoryAbstractUnit) SetType(v string) {
 
 // GetVisibility returns the Visibility field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetVisibility() string {
-	if o == nil || o.Visibility == nil {
+	if o == nil || IsNil(o.Visibility) {
 		var ret string
 		return ret
 	}
@@ -656,7 +660,7 @@ func (o *MemoryAbstractUnit) GetVisibility() string {
 // GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetVisibilityOk() (*string, bool) {
-	if o == nil || o.Visibility == nil {
+	if o == nil || IsNil(o.Visibility) {
 		return nil, false
 	}
 	return o.Visibility, true
@@ -664,7 +668,7 @@ func (o *MemoryAbstractUnit) GetVisibilityOk() (*string, bool) {
 
 // HasVisibility returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasVisibility() bool {
-	if o != nil && o.Visibility != nil {
+	if o != nil && !IsNil(o.Visibility) {
 		return true
 	}
 
@@ -678,7 +682,7 @@ func (o *MemoryAbstractUnit) SetVisibility(v string) {
 
 // GetWidth returns the Width field value if set, zero value otherwise.
 func (o *MemoryAbstractUnit) GetWidth() string {
-	if o == nil || o.Width == nil {
+	if o == nil || IsNil(o.Width) {
 		var ret string
 		return ret
 	}
@@ -688,7 +692,7 @@ func (o *MemoryAbstractUnit) GetWidth() string {
 // GetWidthOk returns a tuple with the Width field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryAbstractUnit) GetWidthOk() (*string, bool) {
-	if o == nil || o.Width == nil {
+	if o == nil || IsNil(o.Width) {
 		return nil, false
 	}
 	return o.Width, true
@@ -696,7 +700,7 @@ func (o *MemoryAbstractUnit) GetWidthOk() (*string, bool) {
 
 // HasWidth returns a boolean if a field has been set.
 func (o *MemoryAbstractUnit) HasWidth() bool {
-	if o != nil && o.Width != nil {
+	if o != nil && !IsNil(o.Width) {
 		return true
 	}
 
@@ -709,73 +713,77 @@ func (o *MemoryAbstractUnit) SetWidth(v string) {
 }
 
 func (o MemoryAbstractUnit) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MemoryAbstractUnit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminState) {
 		toSerialize["AdminState"] = o.AdminState
 	}
-	if o.ArrayId != nil {
+	if !IsNil(o.ArrayId) {
 		toSerialize["ArrayId"] = o.ArrayId
 	}
-	if o.Bank != nil {
+	if !IsNil(o.Bank) {
 		toSerialize["Bank"] = o.Bank
 	}
-	if o.Capacity != nil {
+	if !IsNil(o.Capacity) {
 		toSerialize["Capacity"] = o.Capacity
 	}
-	if o.Clock != nil {
+	if !IsNil(o.Clock) {
 		toSerialize["Clock"] = o.Clock
 	}
-	if o.FormFactor != nil {
+	if !IsNil(o.FormFactor) {
 		toSerialize["FormFactor"] = o.FormFactor
 	}
-	if o.Latency != nil {
+	if !IsNil(o.Latency) {
 		toSerialize["Latency"] = o.Latency
 	}
-	if o.Location != nil {
+	if !IsNil(o.Location) {
 		toSerialize["Location"] = o.Location
 	}
-	if o.OperPowerState != nil {
+	if !IsNil(o.OperPowerState) {
 		toSerialize["OperPowerState"] = o.OperPowerState
 	}
 	if o.OperReason != nil {
 		toSerialize["OperReason"] = o.OperReason
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.Operability != nil {
+	if !IsNil(o.Operability) {
 		toSerialize["Operability"] = o.Operability
 	}
-	if o.Set != nil {
+	if !IsNil(o.Set) {
 		toSerialize["Set"] = o.Set
 	}
-	if o.Speed != nil {
+	if !IsNil(o.Speed) {
 		toSerialize["Speed"] = o.Speed
 	}
-	if o.Thermal != nil {
+	if !IsNil(o.Thermal) {
 		toSerialize["Thermal"] = o.Thermal
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Visibility != nil {
+	if !IsNil(o.Visibility) {
 		toSerialize["Visibility"] = o.Visibility
 	}
-	if o.Width != nil {
+	if !IsNil(o.Width) {
 		toSerialize["Width"] = o.Width
 	}
 
@@ -783,10 +791,32 @@ func (o MemoryAbstractUnit) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MemoryAbstractUnit) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MemoryAbstractUnit) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MemoryAbstractUnitWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -831,7 +861,7 @@ func (o *MemoryAbstractUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMemoryAbstractUnitWithoutEmbeddedStruct := MemoryAbstractUnitWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMemoryAbstractUnitWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMemoryAbstractUnitWithoutEmbeddedStruct)
 	if err == nil {
 		varMemoryAbstractUnit := _MemoryAbstractUnit{}
 		varMemoryAbstractUnit.ClassId = varMemoryAbstractUnitWithoutEmbeddedStruct.ClassId
@@ -861,7 +891,7 @@ func (o *MemoryAbstractUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMemoryAbstractUnit := _MemoryAbstractUnit{}
 
-	err = json.Unmarshal(bytes, &varMemoryAbstractUnit)
+	err = json.Unmarshal(data, &varMemoryAbstractUnit)
 	if err == nil {
 		o.EquipmentBase = varMemoryAbstractUnit.EquipmentBase
 	} else {
@@ -870,7 +900,7 @@ func (o *MemoryAbstractUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminState")

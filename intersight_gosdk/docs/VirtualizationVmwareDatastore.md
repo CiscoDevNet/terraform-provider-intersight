@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 **UnCommitted** | Pointer to **int64** | Space uncommitted in this datastore in bytes. | [optional] 
 **Url** | Pointer to **string** | The URL to access this datastore (example - &#39;ds:///vmfs/volumes/562a4e8a-0eeb5372-dd61-78baf9cb9afa/&#39;). | [optional] 
 **VmTemplateCount** | Pointer to **int64** | Number of virtual machine templates relying on (using) this datastore. | [optional] 
-**Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](VirtualizationVmwareClusterRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableVirtualizationVmwareClusterRelationship**](VirtualizationVmwareClusterRelationship.md) |  | [optional] 
 **Clusters** | Pointer to [**[]VirtualizationVmwareClusterRelationship**](VirtualizationVmwareClusterRelationship.md) | An array of relationships to virtualizationVmwareCluster resources. | [optional] 
-**Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
-**DatastoreCluster** | Pointer to [**VirtualizationVmwareDatastoreClusterRelationship**](VirtualizationVmwareDatastoreClusterRelationship.md) |  | [optional] 
+**Datacenter** | Pointer to [**NullableVirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
+**DatastoreCluster** | Pointer to [**NullableVirtualizationVmwareDatastoreClusterRelationship**](VirtualizationVmwareDatastoreClusterRelationship.md) |  | [optional] 
 **Hosts** | Pointer to [**[]VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) | An array of relationships to virtualizationVmwareHost resources. | [optional] [readonly] 
 
 ## Methods
@@ -330,6 +330,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *VirtualizationVmwareDatastore) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *VirtualizationVmwareDatastore) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 ### GetClusters
 
 `func (o *VirtualizationVmwareDatastore) GetClusters() []VirtualizationVmwareClusterRelationship`
@@ -390,6 +400,16 @@ SetDatacenter sets Datacenter field to given value.
 
 HasDatacenter returns a boolean if a field has been set.
 
+### SetDatacenterNil
+
+`func (o *VirtualizationVmwareDatastore) SetDatacenterNil(b bool)`
+
+ SetDatacenterNil sets the value for Datacenter to be an explicit nil
+
+### UnsetDatacenter
+`func (o *VirtualizationVmwareDatastore) UnsetDatacenter()`
+
+UnsetDatacenter ensures that no value is present for Datacenter, not even an explicit nil
 ### GetDatastoreCluster
 
 `func (o *VirtualizationVmwareDatastore) GetDatastoreCluster() VirtualizationVmwareDatastoreClusterRelationship`
@@ -415,6 +435,16 @@ SetDatastoreCluster sets DatastoreCluster field to given value.
 
 HasDatastoreCluster returns a boolean if a field has been set.
 
+### SetDatastoreClusterNil
+
+`func (o *VirtualizationVmwareDatastore) SetDatastoreClusterNil(b bool)`
+
+ SetDatastoreClusterNil sets the value for DatastoreCluster to be an explicit nil
+
+### UnsetDatastoreCluster
+`func (o *VirtualizationVmwareDatastore) UnsetDatastoreCluster()`
+
+UnsetDatastoreCluster ensures that no value is present for DatastoreCluster, not even an explicit nil
 ### GetHosts
 
 `func (o *VirtualizationVmwareDatastore) GetHosts() []VirtualizationVmwareHostRelationship`

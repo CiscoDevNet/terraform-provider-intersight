@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiaapiNewReleaseDetail type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiaapiNewReleaseDetail{}
 
 // NiaapiNewReleaseDetail The detail content of of this post.
 type NiaapiNewReleaseDetail struct {
@@ -118,7 +122,7 @@ func (o *NiaapiNewReleaseDetail) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *NiaapiNewReleaseDetail) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *NiaapiNewReleaseDetail) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiNewReleaseDetail) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -136,7 +140,7 @@ func (o *NiaapiNewReleaseDetail) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *NiaapiNewReleaseDetail) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *NiaapiNewReleaseDetail) SetDescription(v string) {
 
 // GetLink returns the Link field value if set, zero value otherwise.
 func (o *NiaapiNewReleaseDetail) GetLink() string {
-	if o == nil || o.Link == nil {
+	if o == nil || IsNil(o.Link) {
 		var ret string
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *NiaapiNewReleaseDetail) GetLink() string {
 // GetLinkOk returns a tuple with the Link field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiNewReleaseDetail) GetLinkOk() (*string, bool) {
-	if o == nil || o.Link == nil {
+	if o == nil || IsNil(o.Link) {
 		return nil, false
 	}
 	return o.Link, true
@@ -168,7 +172,7 @@ func (o *NiaapiNewReleaseDetail) GetLinkOk() (*string, bool) {
 
 // HasLink returns a boolean if a field has been set.
 func (o *NiaapiNewReleaseDetail) HasLink() bool {
-	if o != nil && o.Link != nil {
+	if o != nil && !IsNil(o.Link) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *NiaapiNewReleaseDetail) SetLink(v string) {
 
 // GetReleaseNoteLink returns the ReleaseNoteLink field value if set, zero value otherwise.
 func (o *NiaapiNewReleaseDetail) GetReleaseNoteLink() string {
-	if o == nil || o.ReleaseNoteLink == nil {
+	if o == nil || IsNil(o.ReleaseNoteLink) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *NiaapiNewReleaseDetail) GetReleaseNoteLink() string {
 // GetReleaseNoteLinkOk returns a tuple with the ReleaseNoteLink field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiNewReleaseDetail) GetReleaseNoteLinkOk() (*string, bool) {
-	if o == nil || o.ReleaseNoteLink == nil {
+	if o == nil || IsNil(o.ReleaseNoteLink) {
 		return nil, false
 	}
 	return o.ReleaseNoteLink, true
@@ -200,7 +204,7 @@ func (o *NiaapiNewReleaseDetail) GetReleaseNoteLinkOk() (*string, bool) {
 
 // HasReleaseNoteLink returns a boolean if a field has been set.
 func (o *NiaapiNewReleaseDetail) HasReleaseNoteLink() bool {
-	if o != nil && o.ReleaseNoteLink != nil {
+	if o != nil && !IsNil(o.ReleaseNoteLink) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *NiaapiNewReleaseDetail) SetReleaseNoteLink(v string) {
 
 // GetReleaseNoteLinkTitle returns the ReleaseNoteLinkTitle field value if set, zero value otherwise.
 func (o *NiaapiNewReleaseDetail) GetReleaseNoteLinkTitle() string {
-	if o == nil || o.ReleaseNoteLinkTitle == nil {
+	if o == nil || IsNil(o.ReleaseNoteLinkTitle) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *NiaapiNewReleaseDetail) GetReleaseNoteLinkTitle() string {
 // GetReleaseNoteLinkTitleOk returns a tuple with the ReleaseNoteLinkTitle field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiNewReleaseDetail) GetReleaseNoteLinkTitleOk() (*string, bool) {
-	if o == nil || o.ReleaseNoteLinkTitle == nil {
+	if o == nil || IsNil(o.ReleaseNoteLinkTitle) {
 		return nil, false
 	}
 	return o.ReleaseNoteLinkTitle, true
@@ -232,7 +236,7 @@ func (o *NiaapiNewReleaseDetail) GetReleaseNoteLinkTitleOk() (*string, bool) {
 
 // HasReleaseNoteLinkTitle returns a boolean if a field has been set.
 func (o *NiaapiNewReleaseDetail) HasReleaseNoteLinkTitle() bool {
-	if o != nil && o.ReleaseNoteLinkTitle != nil {
+	if o != nil && !IsNil(o.ReleaseNoteLinkTitle) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *NiaapiNewReleaseDetail) SetReleaseNoteLinkTitle(v string) {
 
 // GetSoftwareDownloadLink returns the SoftwareDownloadLink field value if set, zero value otherwise.
 func (o *NiaapiNewReleaseDetail) GetSoftwareDownloadLink() string {
-	if o == nil || o.SoftwareDownloadLink == nil {
+	if o == nil || IsNil(o.SoftwareDownloadLink) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *NiaapiNewReleaseDetail) GetSoftwareDownloadLink() string {
 // GetSoftwareDownloadLinkOk returns a tuple with the SoftwareDownloadLink field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiNewReleaseDetail) GetSoftwareDownloadLinkOk() (*string, bool) {
-	if o == nil || o.SoftwareDownloadLink == nil {
+	if o == nil || IsNil(o.SoftwareDownloadLink) {
 		return nil, false
 	}
 	return o.SoftwareDownloadLink, true
@@ -264,7 +268,7 @@ func (o *NiaapiNewReleaseDetail) GetSoftwareDownloadLinkOk() (*string, bool) {
 
 // HasSoftwareDownloadLink returns a boolean if a field has been set.
 func (o *NiaapiNewReleaseDetail) HasSoftwareDownloadLink() bool {
-	if o != nil && o.SoftwareDownloadLink != nil {
+	if o != nil && !IsNil(o.SoftwareDownloadLink) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *NiaapiNewReleaseDetail) SetSoftwareDownloadLink(v string) {
 
 // GetSoftwareDownloadLinkTitle returns the SoftwareDownloadLinkTitle field value if set, zero value otherwise.
 func (o *NiaapiNewReleaseDetail) GetSoftwareDownloadLinkTitle() string {
-	if o == nil || o.SoftwareDownloadLinkTitle == nil {
+	if o == nil || IsNil(o.SoftwareDownloadLinkTitle) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *NiaapiNewReleaseDetail) GetSoftwareDownloadLinkTitle() string {
 // GetSoftwareDownloadLinkTitleOk returns a tuple with the SoftwareDownloadLinkTitle field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiNewReleaseDetail) GetSoftwareDownloadLinkTitleOk() (*string, bool) {
-	if o == nil || o.SoftwareDownloadLinkTitle == nil {
+	if o == nil || IsNil(o.SoftwareDownloadLinkTitle) {
 		return nil, false
 	}
 	return o.SoftwareDownloadLinkTitle, true
@@ -296,7 +300,7 @@ func (o *NiaapiNewReleaseDetail) GetSoftwareDownloadLinkTitleOk() (*string, bool
 
 // HasSoftwareDownloadLinkTitle returns a boolean if a field has been set.
 func (o *NiaapiNewReleaseDetail) HasSoftwareDownloadLinkTitle() bool {
-	if o != nil && o.SoftwareDownloadLinkTitle != nil {
+	if o != nil && !IsNil(o.SoftwareDownloadLinkTitle) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *NiaapiNewReleaseDetail) SetSoftwareDownloadLinkTitle(v string) {
 
 // GetTitle returns the Title field value if set, zero value otherwise.
 func (o *NiaapiNewReleaseDetail) GetTitle() string {
-	if o == nil || o.Title == nil {
+	if o == nil || IsNil(o.Title) {
 		var ret string
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *NiaapiNewReleaseDetail) GetTitle() string {
 // GetTitleOk returns a tuple with the Title field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiNewReleaseDetail) GetTitleOk() (*string, bool) {
-	if o == nil || o.Title == nil {
+	if o == nil || IsNil(o.Title) {
 		return nil, false
 	}
 	return o.Title, true
@@ -328,7 +332,7 @@ func (o *NiaapiNewReleaseDetail) GetTitleOk() (*string, bool) {
 
 // HasTitle returns a boolean if a field has been set.
 func (o *NiaapiNewReleaseDetail) HasTitle() bool {
-	if o != nil && o.Title != nil {
+	if o != nil && !IsNil(o.Title) {
 		return true
 	}
 
@@ -342,7 +346,7 @@ func (o *NiaapiNewReleaseDetail) SetTitle(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *NiaapiNewReleaseDetail) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -352,7 +356,7 @@ func (o *NiaapiNewReleaseDetail) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiaapiNewReleaseDetail) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -360,7 +364,7 @@ func (o *NiaapiNewReleaseDetail) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *NiaapiNewReleaseDetail) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -373,43 +377,47 @@ func (o *NiaapiNewReleaseDetail) SetVersion(v string) {
 }
 
 func (o NiaapiNewReleaseDetail) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiaapiNewReleaseDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.Link != nil {
+	if !IsNil(o.Link) {
 		toSerialize["Link"] = o.Link
 	}
-	if o.ReleaseNoteLink != nil {
+	if !IsNil(o.ReleaseNoteLink) {
 		toSerialize["ReleaseNoteLink"] = o.ReleaseNoteLink
 	}
-	if o.ReleaseNoteLinkTitle != nil {
+	if !IsNil(o.ReleaseNoteLinkTitle) {
 		toSerialize["ReleaseNoteLinkTitle"] = o.ReleaseNoteLinkTitle
 	}
-	if o.SoftwareDownloadLink != nil {
+	if !IsNil(o.SoftwareDownloadLink) {
 		toSerialize["SoftwareDownloadLink"] = o.SoftwareDownloadLink
 	}
-	if o.SoftwareDownloadLinkTitle != nil {
+	if !IsNil(o.SoftwareDownloadLinkTitle) {
 		toSerialize["SoftwareDownloadLinkTitle"] = o.SoftwareDownloadLinkTitle
 	}
-	if o.Title != nil {
+	if !IsNil(o.Title) {
 		toSerialize["Title"] = o.Title
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
 
@@ -417,10 +425,32 @@ func (o NiaapiNewReleaseDetail) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiaapiNewReleaseDetail) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiaapiNewReleaseDetail) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiaapiNewReleaseDetailWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -446,7 +476,7 @@ func (o *NiaapiNewReleaseDetail) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiaapiNewReleaseDetailWithoutEmbeddedStruct := NiaapiNewReleaseDetailWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiaapiNewReleaseDetailWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiaapiNewReleaseDetailWithoutEmbeddedStruct)
 	if err == nil {
 		varNiaapiNewReleaseDetail := _NiaapiNewReleaseDetail{}
 		varNiaapiNewReleaseDetail.ClassId = varNiaapiNewReleaseDetailWithoutEmbeddedStruct.ClassId
@@ -466,7 +496,7 @@ func (o *NiaapiNewReleaseDetail) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiaapiNewReleaseDetail := _NiaapiNewReleaseDetail{}
 
-	err = json.Unmarshal(bytes, &varNiaapiNewReleaseDetail)
+	err = json.Unmarshal(data, &varNiaapiNewReleaseDetail)
 	if err == nil {
 		o.MoBaseComplexType = varNiaapiNewReleaseDetail.MoBaseComplexType
 	} else {
@@ -475,7 +505,7 @@ func (o *NiaapiNewReleaseDetail) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

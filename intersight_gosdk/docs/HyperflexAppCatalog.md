@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.AppCatalog"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.AppCatalog"]
 **Version** | Pointer to **string** | The catalog version used in HyperFlex cluster configuration service. | [optional] 
-**FeatureLimitExternal** | Pointer to [**HyperflexFeatureLimitExternalRelationship**](HyperflexFeatureLimitExternalRelationship.md) |  | [optional] 
-**FeatureLimitInternal** | Pointer to [**HyperflexFeatureLimitInternalRelationship**](HyperflexFeatureLimitInternalRelationship.md) |  | [optional] 
+**FeatureLimitExternal** | Pointer to [**NullableHyperflexFeatureLimitExternalRelationship**](HyperflexFeatureLimitExternalRelationship.md) |  | [optional] 
+**FeatureLimitInternal** | Pointer to [**NullableHyperflexFeatureLimitInternalRelationship**](HyperflexFeatureLimitInternalRelationship.md) |  | [optional] 
 **HxdpVersions** | Pointer to [**[]HyperflexHxdpVersionRelationship**](HyperflexHxdpVersionRelationship.md) | An array of relationships to hyperflexHxdpVersion resources. | [optional] 
 **HyperflexCapabilityInfos** | Pointer to [**[]HyperflexCapabilityInfoRelationship**](HyperflexCapabilityInfoRelationship.md) | An array of relationships to hyperflexCapabilityInfo resources. | [optional] 
 **HyperflexSoftwareCompatibilityInfos** | Pointer to [**[]HclHyperflexSoftwareCompatibilityInfoRelationship**](HclHyperflexSoftwareCompatibilityInfoRelationship.md) | An array of relationships to hclHyperflexSoftwareCompatibilityInfo resources. | [optional] 
-**ServerFirmwareVersion** | Pointer to [**HyperflexServerFirmwareVersionRelationship**](HyperflexServerFirmwareVersionRelationship.md) |  | [optional] 
-**ServerModel** | Pointer to [**HyperflexServerModelRelationship**](HyperflexServerModelRelationship.md) |  | [optional] 
+**ServerFirmwareVersion** | Pointer to [**NullableHyperflexServerFirmwareVersionRelationship**](HyperflexServerFirmwareVersionRelationship.md) |  | [optional] 
+**ServerModel** | Pointer to [**NullableHyperflexServerModelRelationship**](HyperflexServerModelRelationship.md) |  | [optional] 
 **SoftwareDistributions** | Pointer to [**[]HyperflexSoftwareDistributionEntryRelationship**](HyperflexSoftwareDistributionEntryRelationship.md) | An array of relationships to hyperflexSoftwareDistributionEntry resources. | [optional] 
 
 ## Methods
@@ -125,6 +125,16 @@ SetFeatureLimitExternal sets FeatureLimitExternal field to given value.
 
 HasFeatureLimitExternal returns a boolean if a field has been set.
 
+### SetFeatureLimitExternalNil
+
+`func (o *HyperflexAppCatalog) SetFeatureLimitExternalNil(b bool)`
+
+ SetFeatureLimitExternalNil sets the value for FeatureLimitExternal to be an explicit nil
+
+### UnsetFeatureLimitExternal
+`func (o *HyperflexAppCatalog) UnsetFeatureLimitExternal()`
+
+UnsetFeatureLimitExternal ensures that no value is present for FeatureLimitExternal, not even an explicit nil
 ### GetFeatureLimitInternal
 
 `func (o *HyperflexAppCatalog) GetFeatureLimitInternal() HyperflexFeatureLimitInternalRelationship`
@@ -150,6 +160,16 @@ SetFeatureLimitInternal sets FeatureLimitInternal field to given value.
 
 HasFeatureLimitInternal returns a boolean if a field has been set.
 
+### SetFeatureLimitInternalNil
+
+`func (o *HyperflexAppCatalog) SetFeatureLimitInternalNil(b bool)`
+
+ SetFeatureLimitInternalNil sets the value for FeatureLimitInternal to be an explicit nil
+
+### UnsetFeatureLimitInternal
+`func (o *HyperflexAppCatalog) UnsetFeatureLimitInternal()`
+
+UnsetFeatureLimitInternal ensures that no value is present for FeatureLimitInternal, not even an explicit nil
 ### GetHxdpVersions
 
 `func (o *HyperflexAppCatalog) GetHxdpVersions() []HyperflexHxdpVersionRelationship`
@@ -280,6 +300,16 @@ SetServerFirmwareVersion sets ServerFirmwareVersion field to given value.
 
 HasServerFirmwareVersion returns a boolean if a field has been set.
 
+### SetServerFirmwareVersionNil
+
+`func (o *HyperflexAppCatalog) SetServerFirmwareVersionNil(b bool)`
+
+ SetServerFirmwareVersionNil sets the value for ServerFirmwareVersion to be an explicit nil
+
+### UnsetServerFirmwareVersion
+`func (o *HyperflexAppCatalog) UnsetServerFirmwareVersion()`
+
+UnsetServerFirmwareVersion ensures that no value is present for ServerFirmwareVersion, not even an explicit nil
 ### GetServerModel
 
 `func (o *HyperflexAppCatalog) GetServerModel() HyperflexServerModelRelationship`
@@ -305,6 +335,16 @@ SetServerModel sets ServerModel field to given value.
 
 HasServerModel returns a boolean if a field has been set.
 
+### SetServerModelNil
+
+`func (o *HyperflexAppCatalog) SetServerModelNil(b bool)`
+
+ SetServerModelNil sets the value for ServerModel to be an explicit nil
+
+### UnsetServerModel
+`func (o *HyperflexAppCatalog) UnsetServerModel()`
+
+UnsetServerModel ensures that no value is present for ServerModel, not even an explicit nil
 ### GetSoftwareDistributions
 
 `func (o *HyperflexAppCatalog) GetSoftwareDistributions() []HyperflexSoftwareDistributionEntryRelationship`

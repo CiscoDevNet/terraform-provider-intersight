@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.PowerShellBatchApiExecutor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.PowerShellBatchApiExecutor"]
-**ErrorResponseHandler** | Pointer to [**WorkflowErrorResponseHandlerRelationship**](WorkflowErrorResponseHandlerRelationship.md) |  | [optional] 
-**TaskDefinition** | Pointer to [**WorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
+**ErrorResponseHandler** | Pointer to [**NullableWorkflowErrorResponseHandlerRelationship**](WorkflowErrorResponseHandlerRelationship.md) |  | [optional] 
+**TaskDefinition** | Pointer to [**NullableWorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -93,6 +93,16 @@ SetErrorResponseHandler sets ErrorResponseHandler field to given value.
 
 HasErrorResponseHandler returns a boolean if a field has been set.
 
+### SetErrorResponseHandlerNil
+
+`func (o *WorkflowPowerShellBatchApiExecutor) SetErrorResponseHandlerNil(b bool)`
+
+ SetErrorResponseHandlerNil sets the value for ErrorResponseHandler to be an explicit nil
+
+### UnsetErrorResponseHandler
+`func (o *WorkflowPowerShellBatchApiExecutor) UnsetErrorResponseHandler()`
+
+UnsetErrorResponseHandler ensures that no value is present for ErrorResponseHandler, not even an explicit nil
 ### GetTaskDefinition
 
 `func (o *WorkflowPowerShellBatchApiExecutor) GetTaskDefinition() WorkflowTaskDefinitionRelationship`
@@ -118,6 +128,16 @@ SetTaskDefinition sets TaskDefinition field to given value.
 
 HasTaskDefinition returns a boolean if a field has been set.
 
+### SetTaskDefinitionNil
+
+`func (o *WorkflowPowerShellBatchApiExecutor) SetTaskDefinitionNil(b bool)`
+
+ SetTaskDefinitionNil sets the value for TaskDefinition to be an explicit nil
+
+### UnsetTaskDefinition
+`func (o *WorkflowPowerShellBatchApiExecutor) UnsetTaskDefinition()`
+
+UnsetTaskDefinition ensures that no value is present for TaskDefinition, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

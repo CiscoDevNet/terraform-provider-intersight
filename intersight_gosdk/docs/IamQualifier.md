@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Qualifier"]
 **Name** | Pointer to **string** | The name of the SAML attribute used to qualify a user to user group. By default this is memberOf attribute in SAML assertion. | [optional] [readonly] 
 **Value** | Pointer to **[]string** |  | [optional] 
-**Usergroup** | Pointer to [**IamUserGroupRelationship**](IamUserGroupRelationship.md) |  | [optional] 
+**Usergroup** | Pointer to [**NullableIamUserGroupRelationship**](IamUserGroupRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -154,6 +154,16 @@ SetUsergroup sets Usergroup field to given value.
 
 HasUsergroup returns a boolean if a field has been set.
 
+### SetUsergroupNil
+
+`func (o *IamQualifier) SetUsergroupNil(b bool)`
+
+ SetUsergroupNil sets the value for Usergroup to be an explicit nil
+
+### UnsetUsergroup
+`func (o *IamQualifier) UnsetUsergroup()`
+
+UnsetUsergroup ensures that no value is present for Usergroup, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ComputeBladeIdentity type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComputeBladeIdentity{}
 
 // ComputeBladeIdentity Identity object that uniquely represents a blade server object under a DR.
 type ComputeBladeIdentity struct {
@@ -120,7 +124,7 @@ func (o *ComputeBladeIdentity) SetObjectType(v string) {
 
 // GetChassisId returns the ChassisId field value if set, zero value otherwise.
 func (o *ComputeBladeIdentity) GetChassisId() int64 {
-	if o == nil || o.ChassisId == nil {
+	if o == nil || IsNil(o.ChassisId) {
 		var ret int64
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *ComputeBladeIdentity) GetChassisId() int64 {
 // GetChassisIdOk returns a tuple with the ChassisId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeBladeIdentity) GetChassisIdOk() (*int64, bool) {
-	if o == nil || o.ChassisId == nil {
+	if o == nil || IsNil(o.ChassisId) {
 		return nil, false
 	}
 	return o.ChassisId, true
@@ -138,7 +142,7 @@ func (o *ComputeBladeIdentity) GetChassisIdOk() (*int64, bool) {
 
 // HasChassisId returns a boolean if a field has been set.
 func (o *ComputeBladeIdentity) HasChassisId() bool {
-	if o != nil && o.ChassisId != nil {
+	if o != nil && !IsNil(o.ChassisId) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *ComputeBladeIdentity) SetChassisId(v int64) {
 
 // GetCurrentChassisId returns the CurrentChassisId field value if set, zero value otherwise.
 func (o *ComputeBladeIdentity) GetCurrentChassisId() int64 {
-	if o == nil || o.CurrentChassisId == nil {
+	if o == nil || IsNil(o.CurrentChassisId) {
 		var ret int64
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *ComputeBladeIdentity) GetCurrentChassisId() int64 {
 // GetCurrentChassisIdOk returns a tuple with the CurrentChassisId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeBladeIdentity) GetCurrentChassisIdOk() (*int64, bool) {
-	if o == nil || o.CurrentChassisId == nil {
+	if o == nil || IsNil(o.CurrentChassisId) {
 		return nil, false
 	}
 	return o.CurrentChassisId, true
@@ -170,7 +174,7 @@ func (o *ComputeBladeIdentity) GetCurrentChassisIdOk() (*int64, bool) {
 
 // HasCurrentChassisId returns a boolean if a field has been set.
 func (o *ComputeBladeIdentity) HasCurrentChassisId() bool {
-	if o != nil && o.CurrentChassisId != nil {
+	if o != nil && !IsNil(o.CurrentChassisId) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *ComputeBladeIdentity) SetCurrentChassisId(v int64) {
 
 // GetCurrentSlotId returns the CurrentSlotId field value if set, zero value otherwise.
 func (o *ComputeBladeIdentity) GetCurrentSlotId() int64 {
-	if o == nil || o.CurrentSlotId == nil {
+	if o == nil || IsNil(o.CurrentSlotId) {
 		var ret int64
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *ComputeBladeIdentity) GetCurrentSlotId() int64 {
 // GetCurrentSlotIdOk returns a tuple with the CurrentSlotId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeBladeIdentity) GetCurrentSlotIdOk() (*int64, bool) {
-	if o == nil || o.CurrentSlotId == nil {
+	if o == nil || IsNil(o.CurrentSlotId) {
 		return nil, false
 	}
 	return o.CurrentSlotId, true
@@ -202,7 +206,7 @@ func (o *ComputeBladeIdentity) GetCurrentSlotIdOk() (*int64, bool) {
 
 // HasCurrentSlotId returns a boolean if a field has been set.
 func (o *ComputeBladeIdentity) HasCurrentSlotId() bool {
-	if o != nil && o.CurrentSlotId != nil {
+	if o != nil && !IsNil(o.CurrentSlotId) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *ComputeBladeIdentity) SetCurrentSlotId(v int64) {
 
 // GetFirmwareSupportability returns the FirmwareSupportability field value if set, zero value otherwise.
 func (o *ComputeBladeIdentity) GetFirmwareSupportability() string {
-	if o == nil || o.FirmwareSupportability == nil {
+	if o == nil || IsNil(o.FirmwareSupportability) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *ComputeBladeIdentity) GetFirmwareSupportability() string {
 // GetFirmwareSupportabilityOk returns a tuple with the FirmwareSupportability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeBladeIdentity) GetFirmwareSupportabilityOk() (*string, bool) {
-	if o == nil || o.FirmwareSupportability == nil {
+	if o == nil || IsNil(o.FirmwareSupportability) {
 		return nil, false
 	}
 	return o.FirmwareSupportability, true
@@ -234,7 +238,7 @@ func (o *ComputeBladeIdentity) GetFirmwareSupportabilityOk() (*string, bool) {
 
 // HasFirmwareSupportability returns a boolean if a field has been set.
 func (o *ComputeBladeIdentity) HasFirmwareSupportability() bool {
-	if o != nil && o.FirmwareSupportability != nil {
+	if o != nil && !IsNil(o.FirmwareSupportability) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *ComputeBladeIdentity) SetFirmwareSupportability(v string) {
 
 // GetManagerSlotId returns the ManagerSlotId field value if set, zero value otherwise.
 func (o *ComputeBladeIdentity) GetManagerSlotId() int64 {
-	if o == nil || o.ManagerSlotId == nil {
+	if o == nil || IsNil(o.ManagerSlotId) {
 		var ret int64
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *ComputeBladeIdentity) GetManagerSlotId() int64 {
 // GetManagerSlotIdOk returns a tuple with the ManagerSlotId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeBladeIdentity) GetManagerSlotIdOk() (*int64, bool) {
-	if o == nil || o.ManagerSlotId == nil {
+	if o == nil || IsNil(o.ManagerSlotId) {
 		return nil, false
 	}
 	return o.ManagerSlotId, true
@@ -266,7 +270,7 @@ func (o *ComputeBladeIdentity) GetManagerSlotIdOk() (*int64, bool) {
 
 // HasManagerSlotId returns a boolean if a field has been set.
 func (o *ComputeBladeIdentity) HasManagerSlotId() bool {
-	if o != nil && o.ManagerSlotId != nil {
+	if o != nil && !IsNil(o.ManagerSlotId) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *ComputeBladeIdentity) SetManagerSlotId(v int64) {
 
 // GetPresence returns the Presence field value if set, zero value otherwise.
 func (o *ComputeBladeIdentity) GetPresence() string {
-	if o == nil || o.Presence == nil {
+	if o == nil || IsNil(o.Presence) {
 		var ret string
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *ComputeBladeIdentity) GetPresence() string {
 // GetPresenceOk returns a tuple with the Presence field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeBladeIdentity) GetPresenceOk() (*string, bool) {
-	if o == nil || o.Presence == nil {
+	if o == nil || IsNil(o.Presence) {
 		return nil, false
 	}
 	return o.Presence, true
@@ -298,7 +302,7 @@ func (o *ComputeBladeIdentity) GetPresenceOk() (*string, bool) {
 
 // HasPresence returns a boolean if a field has been set.
 func (o *ComputeBladeIdentity) HasPresence() bool {
-	if o != nil && o.Presence != nil {
+	if o != nil && !IsNil(o.Presence) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *ComputeBladeIdentity) SetPresence(v string) {
 
 // GetSlotId returns the SlotId field value if set, zero value otherwise.
 func (o *ComputeBladeIdentity) GetSlotId() int64 {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		var ret int64
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *ComputeBladeIdentity) GetSlotId() int64 {
 // GetSlotIdOk returns a tuple with the SlotId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeBladeIdentity) GetSlotIdOk() (*int64, bool) {
-	if o == nil || o.SlotId == nil {
+	if o == nil || IsNil(o.SlotId) {
 		return nil, false
 	}
 	return o.SlotId, true
@@ -330,7 +334,7 @@ func (o *ComputeBladeIdentity) GetSlotIdOk() (*int64, bool) {
 
 // HasSlotId returns a boolean if a field has been set.
 func (o *ComputeBladeIdentity) HasSlotId() bool {
-	if o != nil && o.SlotId != nil {
+	if o != nil && !IsNil(o.SlotId) {
 		return true
 	}
 
@@ -355,7 +359,7 @@ func (o *ComputeBladeIdentity) GetManagedNodes() []ComputeBladeIdentityRelations
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeBladeIdentity) GetManagedNodesOk() ([]ComputeBladeIdentityRelationship, bool) {
-	if o == nil || o.ManagedNodes == nil {
+	if o == nil || IsNil(o.ManagedNodes) {
 		return nil, false
 	}
 	return o.ManagedNodes, true
@@ -363,7 +367,7 @@ func (o *ComputeBladeIdentity) GetManagedNodesOk() ([]ComputeBladeIdentityRelati
 
 // HasManagedNodes returns a boolean if a field has been set.
 func (o *ComputeBladeIdentity) HasManagedNodes() bool {
-	if o != nil && o.ManagedNodes != nil {
+	if o != nil && IsNil(o.ManagedNodes) {
 		return true
 	}
 
@@ -376,40 +380,44 @@ func (o *ComputeBladeIdentity) SetManagedNodes(v []ComputeBladeIdentityRelations
 }
 
 func (o ComputeBladeIdentity) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComputeBladeIdentity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentPhysicalIdentity, errEquipmentPhysicalIdentity := json.Marshal(o.EquipmentPhysicalIdentity)
 	if errEquipmentPhysicalIdentity != nil {
-		return []byte{}, errEquipmentPhysicalIdentity
+		return map[string]interface{}{}, errEquipmentPhysicalIdentity
 	}
 	errEquipmentPhysicalIdentity = json.Unmarshal([]byte(serializedEquipmentPhysicalIdentity), &toSerialize)
 	if errEquipmentPhysicalIdentity != nil {
-		return []byte{}, errEquipmentPhysicalIdentity
+		return map[string]interface{}{}, errEquipmentPhysicalIdentity
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ChassisId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ChassisId) {
 		toSerialize["ChassisId"] = o.ChassisId
 	}
-	if o.CurrentChassisId != nil {
+	if !IsNil(o.CurrentChassisId) {
 		toSerialize["CurrentChassisId"] = o.CurrentChassisId
 	}
-	if o.CurrentSlotId != nil {
+	if !IsNil(o.CurrentSlotId) {
 		toSerialize["CurrentSlotId"] = o.CurrentSlotId
 	}
-	if o.FirmwareSupportability != nil {
+	if !IsNil(o.FirmwareSupportability) {
 		toSerialize["FirmwareSupportability"] = o.FirmwareSupportability
 	}
-	if o.ManagerSlotId != nil {
+	if !IsNil(o.ManagerSlotId) {
 		toSerialize["ManagerSlotId"] = o.ManagerSlotId
 	}
-	if o.Presence != nil {
+	if !IsNil(o.Presence) {
 		toSerialize["Presence"] = o.Presence
 	}
-	if o.SlotId != nil {
+	if !IsNil(o.SlotId) {
 		toSerialize["SlotId"] = o.SlotId
 	}
 	if o.ManagedNodes != nil {
@@ -420,10 +428,32 @@ func (o ComputeBladeIdentity) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ComputeBladeIdentity) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ComputeBladeIdentity) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ComputeBladeIdentityWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -449,7 +479,7 @@ func (o *ComputeBladeIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	varComputeBladeIdentityWithoutEmbeddedStruct := ComputeBladeIdentityWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varComputeBladeIdentityWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varComputeBladeIdentityWithoutEmbeddedStruct)
 	if err == nil {
 		varComputeBladeIdentity := _ComputeBladeIdentity{}
 		varComputeBladeIdentity.ClassId = varComputeBladeIdentityWithoutEmbeddedStruct.ClassId
@@ -469,7 +499,7 @@ func (o *ComputeBladeIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	varComputeBladeIdentity := _ComputeBladeIdentity{}
 
-	err = json.Unmarshal(bytes, &varComputeBladeIdentity)
+	err = json.Unmarshal(data, &varComputeBladeIdentity)
 	if err == nil {
 		o.EquipmentPhysicalIdentity = varComputeBladeIdentity.EquipmentPhysicalIdentity
 	} else {
@@ -478,7 +508,7 @@ func (o *ComputeBladeIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ChassisId")

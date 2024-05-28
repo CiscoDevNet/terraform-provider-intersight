@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceRemoteFileImport type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceRemoteFileImport{}
 
 // ApplianceRemoteFileImport The properties of appliance.RemoteFileImport are used to create an scp or sftp request to import a firmware image.
 type ApplianceRemoteFileImport struct {
@@ -39,8 +43,8 @@ type ApplianceRemoteFileImport struct {
 	// Specifies if this is an scp or sftp request. * `scp` - Secure Copy Protocol (SCP) to access the file server. * `sftp` - SSH File Transfer Protocol (SFTP) to access file server. * `cifs` - Common Internet File System (CIFS) Protocol to access file server.
 	Protocol *string `json:"Protocol,omitempty"`
 	// The username for the remote request.
-	Username             *string                 `json:"Username,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	Username             *string                        `json:"Username,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -123,7 +127,7 @@ func (o *ApplianceRemoteFileImport) SetObjectType(v string) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *ApplianceRemoteFileImport) GetFilename() string {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *ApplianceRemoteFileImport) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceRemoteFileImport) GetFilenameOk() (*string, bool) {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -141,7 +145,7 @@ func (o *ApplianceRemoteFileImport) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *ApplianceRemoteFileImport) HasFilename() bool {
-	if o != nil && o.Filename != nil {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *ApplianceRemoteFileImport) SetFilename(v string) {
 
 // GetHostname returns the Hostname field value if set, zero value otherwise.
 func (o *ApplianceRemoteFileImport) GetHostname() string {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *ApplianceRemoteFileImport) GetHostname() string {
 // GetHostnameOk returns a tuple with the Hostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceRemoteFileImport) GetHostnameOk() (*string, bool) {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		return nil, false
 	}
 	return o.Hostname, true
@@ -173,7 +177,7 @@ func (o *ApplianceRemoteFileImport) GetHostnameOk() (*string, bool) {
 
 // HasHostname returns a boolean if a field has been set.
 func (o *ApplianceRemoteFileImport) HasHostname() bool {
-	if o != nil && o.Hostname != nil {
+	if o != nil && !IsNil(o.Hostname) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *ApplianceRemoteFileImport) SetHostname(v string) {
 
 // GetIsPasswordSet returns the IsPasswordSet field value if set, zero value otherwise.
 func (o *ApplianceRemoteFileImport) GetIsPasswordSet() bool {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		var ret bool
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *ApplianceRemoteFileImport) GetIsPasswordSet() bool {
 // GetIsPasswordSetOk returns a tuple with the IsPasswordSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceRemoteFileImport) GetIsPasswordSetOk() (*bool, bool) {
-	if o == nil || o.IsPasswordSet == nil {
+	if o == nil || IsNil(o.IsPasswordSet) {
 		return nil, false
 	}
 	return o.IsPasswordSet, true
@@ -205,7 +209,7 @@ func (o *ApplianceRemoteFileImport) GetIsPasswordSetOk() (*bool, bool) {
 
 // HasIsPasswordSet returns a boolean if a field has been set.
 func (o *ApplianceRemoteFileImport) HasIsPasswordSet() bool {
-	if o != nil && o.IsPasswordSet != nil {
+	if o != nil && !IsNil(o.IsPasswordSet) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *ApplianceRemoteFileImport) SetIsPasswordSet(v bool) {
 
 // GetPassword returns the Password field value if set, zero value otherwise.
 func (o *ApplianceRemoteFileImport) GetPassword() string {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *ApplianceRemoteFileImport) GetPassword() string {
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceRemoteFileImport) GetPasswordOk() (*string, bool) {
-	if o == nil || o.Password == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
 	return o.Password, true
@@ -237,7 +241,7 @@ func (o *ApplianceRemoteFileImport) GetPasswordOk() (*string, bool) {
 
 // HasPassword returns a boolean if a field has been set.
 func (o *ApplianceRemoteFileImport) HasPassword() bool {
-	if o != nil && o.Password != nil {
+	if o != nil && !IsNil(o.Password) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *ApplianceRemoteFileImport) SetPassword(v string) {
 
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *ApplianceRemoteFileImport) GetPath() string {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		var ret string
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *ApplianceRemoteFileImport) GetPath() string {
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceRemoteFileImport) GetPathOk() (*string, bool) {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		return nil, false
 	}
 	return o.Path, true
@@ -269,7 +273,7 @@ func (o *ApplianceRemoteFileImport) GetPathOk() (*string, bool) {
 
 // HasPath returns a boolean if a field has been set.
 func (o *ApplianceRemoteFileImport) HasPath() bool {
-	if o != nil && o.Path != nil {
+	if o != nil && !IsNil(o.Path) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *ApplianceRemoteFileImport) SetPath(v string) {
 
 // GetPort returns the Port field value if set, zero value otherwise.
 func (o *ApplianceRemoteFileImport) GetPort() int64 {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret int64
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *ApplianceRemoteFileImport) GetPort() int64 {
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceRemoteFileImport) GetPortOk() (*int64, bool) {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
 	return o.Port, true
@@ -301,7 +305,7 @@ func (o *ApplianceRemoteFileImport) GetPortOk() (*int64, bool) {
 
 // HasPort returns a boolean if a field has been set.
 func (o *ApplianceRemoteFileImport) HasPort() bool {
-	if o != nil && o.Port != nil {
+	if o != nil && !IsNil(o.Port) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *ApplianceRemoteFileImport) SetPort(v int64) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *ApplianceRemoteFileImport) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *ApplianceRemoteFileImport) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceRemoteFileImport) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -333,7 +337,7 @@ func (o *ApplianceRemoteFileImport) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *ApplianceRemoteFileImport) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *ApplianceRemoteFileImport) SetProtocol(v string) {
 
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *ApplianceRemoteFileImport) GetUsername() string {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		var ret string
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *ApplianceRemoteFileImport) GetUsername() string {
 // GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceRemoteFileImport) GetUsernameOk() (*string, bool) {
-	if o == nil || o.Username == nil {
+	if o == nil || IsNil(o.Username) {
 		return nil, false
 	}
 	return o.Username, true
@@ -365,7 +369,7 @@ func (o *ApplianceRemoteFileImport) GetUsernameOk() (*string, bool) {
 
 // HasUsername returns a boolean if a field has been set.
 func (o *ApplianceRemoteFileImport) HasUsername() bool {
-	if o != nil && o.Username != nil {
+	if o != nil && !IsNil(o.Username) {
 		return true
 	}
 
@@ -377,90 +381,127 @@ func (o *ApplianceRemoteFileImport) SetUsername(v string) {
 	o.Username = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceRemoteFileImport) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceRemoteFileImport) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ApplianceRemoteFileImport) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ApplianceRemoteFileImport) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ApplianceRemoteFileImport) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ApplianceRemoteFileImport) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o ApplianceRemoteFileImport) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceRemoteFileImport) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Filename != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Filename) {
 		toSerialize["Filename"] = o.Filename
 	}
-	if o.Hostname != nil {
+	if !IsNil(o.Hostname) {
 		toSerialize["Hostname"] = o.Hostname
 	}
-	if o.IsPasswordSet != nil {
+	if !IsNil(o.IsPasswordSet) {
 		toSerialize["IsPasswordSet"] = o.IsPasswordSet
 	}
-	if o.Password != nil {
+	if !IsNil(o.Password) {
 		toSerialize["Password"] = o.Password
 	}
-	if o.Path != nil {
+	if !IsNil(o.Path) {
 		toSerialize["Path"] = o.Path
 	}
-	if o.Port != nil {
+	if !IsNil(o.Port) {
 		toSerialize["Port"] = o.Port
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
-	if o.Username != nil {
+	if !IsNil(o.Username) {
 		toSerialize["Username"] = o.Username
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceRemoteFileImport) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceRemoteFileImport) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceRemoteFileImportWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -481,13 +522,13 @@ func (o *ApplianceRemoteFileImport) UnmarshalJSON(bytes []byte) (err error) {
 		// Specifies if this is an scp or sftp request. * `scp` - Secure Copy Protocol (SCP) to access the file server. * `sftp` - SSH File Transfer Protocol (SFTP) to access file server. * `cifs` - Common Internet File System (CIFS) Protocol to access file server.
 		Protocol *string `json:"Protocol,omitempty"`
 		// The username for the remote request.
-		Username *string                 `json:"Username,omitempty"`
-		Account  *IamAccountRelationship `json:"Account,omitempty"`
+		Username *string                        `json:"Username,omitempty"`
+		Account  NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varApplianceRemoteFileImportWithoutEmbeddedStruct := ApplianceRemoteFileImportWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceRemoteFileImportWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceRemoteFileImportWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceRemoteFileImport := _ApplianceRemoteFileImport{}
 		varApplianceRemoteFileImport.ClassId = varApplianceRemoteFileImportWithoutEmbeddedStruct.ClassId
@@ -508,7 +549,7 @@ func (o *ApplianceRemoteFileImport) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceRemoteFileImport := _ApplianceRemoteFileImport{}
 
-	err = json.Unmarshal(bytes, &varApplianceRemoteFileImport)
+	err = json.Unmarshal(data, &varApplianceRemoteFileImport)
 	if err == nil {
 		o.MoBaseMo = varApplianceRemoteFileImport.MoBaseMo
 	} else {
@@ -517,7 +558,7 @@ func (o *ApplianceRemoteFileImport) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Filename")

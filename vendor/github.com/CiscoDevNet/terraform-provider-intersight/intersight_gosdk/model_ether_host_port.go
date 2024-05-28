@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EtherHostPort type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EtherHostPort{}
 
 // EtherHostPort Model object contains the details of host port available on IO card or fabric extender.
 type EtherHostPort struct {
@@ -29,9 +33,9 @@ type EtherHostPort struct {
 	// Fabric extender identifier for this port.
 	ModuleId *int64 `json:"ModuleId,omitempty"`
 	// Host Port Speed of IO card or fabric extender.
-	Speed                *string                              `json:"Speed,omitempty"`
-	EquipmentIoCardBase  *EquipmentIoCardBaseRelationship     `json:"EquipmentIoCardBase,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Speed                *string                                     `json:"Speed,omitempty"`
+	EquipmentIoCardBase  NullableEquipmentIoCardBaseRelationship     `json:"EquipmentIoCardBase,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,7 +114,7 @@ func (o *EtherHostPort) SetObjectType(v string) {
 
 // GetAggregatePortId returns the AggregatePortId field value if set, zero value otherwise.
 func (o *EtherHostPort) GetAggregatePortId() int64 {
-	if o == nil || o.AggregatePortId == nil {
+	if o == nil || IsNil(o.AggregatePortId) {
 		var ret int64
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *EtherHostPort) GetAggregatePortId() int64 {
 // GetAggregatePortIdOk returns a tuple with the AggregatePortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EtherHostPort) GetAggregatePortIdOk() (*int64, bool) {
-	if o == nil || o.AggregatePortId == nil {
+	if o == nil || IsNil(o.AggregatePortId) {
 		return nil, false
 	}
 	return o.AggregatePortId, true
@@ -128,7 +132,7 @@ func (o *EtherHostPort) GetAggregatePortIdOk() (*int64, bool) {
 
 // HasAggregatePortId returns a boolean if a field has been set.
 func (o *EtherHostPort) HasAggregatePortId() bool {
-	if o != nil && o.AggregatePortId != nil {
+	if o != nil && !IsNil(o.AggregatePortId) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *EtherHostPort) SetAggregatePortId(v int64) {
 
 // GetModuleId returns the ModuleId field value if set, zero value otherwise.
 func (o *EtherHostPort) GetModuleId() int64 {
-	if o == nil || o.ModuleId == nil {
+	if o == nil || IsNil(o.ModuleId) {
 		var ret int64
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *EtherHostPort) GetModuleId() int64 {
 // GetModuleIdOk returns a tuple with the ModuleId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EtherHostPort) GetModuleIdOk() (*int64, bool) {
-	if o == nil || o.ModuleId == nil {
+	if o == nil || IsNil(o.ModuleId) {
 		return nil, false
 	}
 	return o.ModuleId, true
@@ -160,7 +164,7 @@ func (o *EtherHostPort) GetModuleIdOk() (*int64, bool) {
 
 // HasModuleId returns a boolean if a field has been set.
 func (o *EtherHostPort) HasModuleId() bool {
-	if o != nil && o.ModuleId != nil {
+	if o != nil && !IsNil(o.ModuleId) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *EtherHostPort) SetModuleId(v int64) {
 
 // GetSpeed returns the Speed field value if set, zero value otherwise.
 func (o *EtherHostPort) GetSpeed() string {
-	if o == nil || o.Speed == nil {
+	if o == nil || IsNil(o.Speed) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *EtherHostPort) GetSpeed() string {
 // GetSpeedOk returns a tuple with the Speed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EtherHostPort) GetSpeedOk() (*string, bool) {
-	if o == nil || o.Speed == nil {
+	if o == nil || IsNil(o.Speed) {
 		return nil, false
 	}
 	return o.Speed, true
@@ -192,7 +196,7 @@ func (o *EtherHostPort) GetSpeedOk() (*string, bool) {
 
 // HasSpeed returns a boolean if a field has been set.
 func (o *EtherHostPort) HasSpeed() bool {
-	if o != nil && o.Speed != nil {
+	if o != nil && !IsNil(o.Speed) {
 		return true
 	}
 
@@ -204,110 +208,158 @@ func (o *EtherHostPort) SetSpeed(v string) {
 	o.Speed = &v
 }
 
-// GetEquipmentIoCardBase returns the EquipmentIoCardBase field value if set, zero value otherwise.
+// GetEquipmentIoCardBase returns the EquipmentIoCardBase field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EtherHostPort) GetEquipmentIoCardBase() EquipmentIoCardBaseRelationship {
-	if o == nil || o.EquipmentIoCardBase == nil {
+	if o == nil || IsNil(o.EquipmentIoCardBase.Get()) {
 		var ret EquipmentIoCardBaseRelationship
 		return ret
 	}
-	return *o.EquipmentIoCardBase
+	return *o.EquipmentIoCardBase.Get()
 }
 
 // GetEquipmentIoCardBaseOk returns a tuple with the EquipmentIoCardBase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EtherHostPort) GetEquipmentIoCardBaseOk() (*EquipmentIoCardBaseRelationship, bool) {
-	if o == nil || o.EquipmentIoCardBase == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.EquipmentIoCardBase, true
+	return o.EquipmentIoCardBase.Get(), o.EquipmentIoCardBase.IsSet()
 }
 
 // HasEquipmentIoCardBase returns a boolean if a field has been set.
 func (o *EtherHostPort) HasEquipmentIoCardBase() bool {
-	if o != nil && o.EquipmentIoCardBase != nil {
+	if o != nil && o.EquipmentIoCardBase.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEquipmentIoCardBase gets a reference to the given EquipmentIoCardBaseRelationship and assigns it to the EquipmentIoCardBase field.
+// SetEquipmentIoCardBase gets a reference to the given NullableEquipmentIoCardBaseRelationship and assigns it to the EquipmentIoCardBase field.
 func (o *EtherHostPort) SetEquipmentIoCardBase(v EquipmentIoCardBaseRelationship) {
-	o.EquipmentIoCardBase = &v
+	o.EquipmentIoCardBase.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetEquipmentIoCardBaseNil sets the value for EquipmentIoCardBase to be an explicit nil
+func (o *EtherHostPort) SetEquipmentIoCardBaseNil() {
+	o.EquipmentIoCardBase.Set(nil)
+}
+
+// UnsetEquipmentIoCardBase ensures that no value is present for EquipmentIoCardBase, not even an explicit nil
+func (o *EtherHostPort) UnsetEquipmentIoCardBase() {
+	o.EquipmentIoCardBase.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EtherHostPort) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EtherHostPort) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *EtherHostPort) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *EtherHostPort) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *EtherHostPort) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *EtherHostPort) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o EtherHostPort) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EtherHostPort) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEtherPhysicalPortBase, errEtherPhysicalPortBase := json.Marshal(o.EtherPhysicalPortBase)
 	if errEtherPhysicalPortBase != nil {
-		return []byte{}, errEtherPhysicalPortBase
+		return map[string]interface{}{}, errEtherPhysicalPortBase
 	}
 	errEtherPhysicalPortBase = json.Unmarshal([]byte(serializedEtherPhysicalPortBase), &toSerialize)
 	if errEtherPhysicalPortBase != nil {
-		return []byte{}, errEtherPhysicalPortBase
+		return map[string]interface{}{}, errEtherPhysicalPortBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AggregatePortId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AggregatePortId) {
 		toSerialize["AggregatePortId"] = o.AggregatePortId
 	}
-	if o.ModuleId != nil {
+	if !IsNil(o.ModuleId) {
 		toSerialize["ModuleId"] = o.ModuleId
 	}
-	if o.Speed != nil {
+	if !IsNil(o.Speed) {
 		toSerialize["Speed"] = o.Speed
 	}
-	if o.EquipmentIoCardBase != nil {
-		toSerialize["EquipmentIoCardBase"] = o.EquipmentIoCardBase
+	if o.EquipmentIoCardBase.IsSet() {
+		toSerialize["EquipmentIoCardBase"] = o.EquipmentIoCardBase.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EtherHostPort) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EtherHostPort) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EtherHostPortWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -318,14 +370,14 @@ func (o *EtherHostPort) UnmarshalJSON(bytes []byte) (err error) {
 		// Fabric extender identifier for this port.
 		ModuleId *int64 `json:"ModuleId,omitempty"`
 		// Host Port Speed of IO card or fabric extender.
-		Speed               *string                              `json:"Speed,omitempty"`
-		EquipmentIoCardBase *EquipmentIoCardBaseRelationship     `json:"EquipmentIoCardBase,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Speed               *string                                     `json:"Speed,omitempty"`
+		EquipmentIoCardBase NullableEquipmentIoCardBaseRelationship     `json:"EquipmentIoCardBase,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varEtherHostPortWithoutEmbeddedStruct := EtherHostPortWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEtherHostPortWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEtherHostPortWithoutEmbeddedStruct)
 	if err == nil {
 		varEtherHostPort := _EtherHostPort{}
 		varEtherHostPort.ClassId = varEtherHostPortWithoutEmbeddedStruct.ClassId
@@ -342,7 +394,7 @@ func (o *EtherHostPort) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEtherHostPort := _EtherHostPort{}
 
-	err = json.Unmarshal(bytes, &varEtherHostPort)
+	err = json.Unmarshal(data, &varEtherHostPort)
 	if err == nil {
 		o.EtherPhysicalPortBase = varEtherHostPort.EtherPhysicalPortBase
 	} else {
@@ -351,7 +403,7 @@ func (o *EtherHostPort) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AggregatePortId")

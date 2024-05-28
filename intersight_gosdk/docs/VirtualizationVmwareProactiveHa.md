@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **LastAcknowledgedAlarmTime** | Pointer to **time.Time** | Last recognized alarm time for a proactive HA alarm instance in a vCenter. | [optional] [readonly] 
 **LastSentAlarmTime** | Pointer to **time.Time** | Time at which the last alarm was sent from cloud to the device connector. | [optional] [readonly] 
 **AlarmDefinitions** | Pointer to [**[]CondAlarmDefinitionRelationship**](CondAlarmDefinitionRelationship.md) | An array of relationships to condAlarmDefinition resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -180,6 +180,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *VirtualizationVmwareProactiveHa) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *VirtualizationVmwareProactiveHa) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

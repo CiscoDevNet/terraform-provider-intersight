@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexNodeProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexNodeProfile{}
 
 // HyperflexNodeProfile A configuration profile per node in the HyperFlex cluster. It defines node settings such as IP address configuration for hypervisor management network, storage data network, HyperFlex management network, and the assigned physical server.
 type HyperflexNodeProfile struct {
@@ -37,10 +41,10 @@ type HyperflexNodeProfile struct {
 	// IP address for Hypervisor management network.
 	HypervisorMgmtIp *string `json:"HypervisorMgmtIp,omitempty"`
 	// The role that this node performs in the HyperFlex cluster. * `Unknown` - The node role is not available. * `Storage` - The node persists data and contributes to the storage capacity of a cluster. * `Compute` - The node contributes to the compute capacity of a cluster.
-	NodeRole             *string                              `json:"NodeRole,omitempty"`
-	AssignedServer       *ComputePhysicalRelationship         `json:"AssignedServer,omitempty"`
-	ClusterProfile       *HyperflexClusterProfileRelationship `json:"ClusterProfile,omitempty"`
-	Node                 *HyperflexNodeRelationship           `json:"Node,omitempty"`
+	NodeRole             *string                                     `json:"NodeRole,omitempty"`
+	AssignedServer       NullableComputePhysicalRelationship         `json:"AssignedServer,omitempty"`
+	ClusterProfile       NullableHyperflexClusterProfileRelationship `json:"ClusterProfile,omitempty"`
+	Node                 NullableHyperflexNodeRelationship           `json:"Node,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -127,7 +131,7 @@ func (o *HyperflexNodeProfile) SetObjectType(v string) {
 
 // GetHxdpDataIp returns the HxdpDataIp field value if set, zero value otherwise.
 func (o *HyperflexNodeProfile) GetHxdpDataIp() string {
-	if o == nil || o.HxdpDataIp == nil {
+	if o == nil || IsNil(o.HxdpDataIp) {
 		var ret string
 		return ret
 	}
@@ -137,7 +141,7 @@ func (o *HyperflexNodeProfile) GetHxdpDataIp() string {
 // GetHxdpDataIpOk returns a tuple with the HxdpDataIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNodeProfile) GetHxdpDataIpOk() (*string, bool) {
-	if o == nil || o.HxdpDataIp == nil {
+	if o == nil || IsNil(o.HxdpDataIp) {
 		return nil, false
 	}
 	return o.HxdpDataIp, true
@@ -145,7 +149,7 @@ func (o *HyperflexNodeProfile) GetHxdpDataIpOk() (*string, bool) {
 
 // HasHxdpDataIp returns a boolean if a field has been set.
 func (o *HyperflexNodeProfile) HasHxdpDataIp() bool {
-	if o != nil && o.HxdpDataIp != nil {
+	if o != nil && !IsNil(o.HxdpDataIp) {
 		return true
 	}
 
@@ -159,7 +163,7 @@ func (o *HyperflexNodeProfile) SetHxdpDataIp(v string) {
 
 // GetHxdpMgmtIp returns the HxdpMgmtIp field value if set, zero value otherwise.
 func (o *HyperflexNodeProfile) GetHxdpMgmtIp() string {
-	if o == nil || o.HxdpMgmtIp == nil {
+	if o == nil || IsNil(o.HxdpMgmtIp) {
 		var ret string
 		return ret
 	}
@@ -169,7 +173,7 @@ func (o *HyperflexNodeProfile) GetHxdpMgmtIp() string {
 // GetHxdpMgmtIpOk returns a tuple with the HxdpMgmtIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNodeProfile) GetHxdpMgmtIpOk() (*string, bool) {
-	if o == nil || o.HxdpMgmtIp == nil {
+	if o == nil || IsNil(o.HxdpMgmtIp) {
 		return nil, false
 	}
 	return o.HxdpMgmtIp, true
@@ -177,7 +181,7 @@ func (o *HyperflexNodeProfile) GetHxdpMgmtIpOk() (*string, bool) {
 
 // HasHxdpMgmtIp returns a boolean if a field has been set.
 func (o *HyperflexNodeProfile) HasHxdpMgmtIp() bool {
-	if o != nil && o.HxdpMgmtIp != nil {
+	if o != nil && !IsNil(o.HxdpMgmtIp) {
 		return true
 	}
 
@@ -191,7 +195,7 @@ func (o *HyperflexNodeProfile) SetHxdpMgmtIp(v string) {
 
 // GetHxdpStorageClientIp returns the HxdpStorageClientIp field value if set, zero value otherwise.
 func (o *HyperflexNodeProfile) GetHxdpStorageClientIp() string {
-	if o == nil || o.HxdpStorageClientIp == nil {
+	if o == nil || IsNil(o.HxdpStorageClientIp) {
 		var ret string
 		return ret
 	}
@@ -201,7 +205,7 @@ func (o *HyperflexNodeProfile) GetHxdpStorageClientIp() string {
 // GetHxdpStorageClientIpOk returns a tuple with the HxdpStorageClientIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNodeProfile) GetHxdpStorageClientIpOk() (*string, bool) {
-	if o == nil || o.HxdpStorageClientIp == nil {
+	if o == nil || IsNil(o.HxdpStorageClientIp) {
 		return nil, false
 	}
 	return o.HxdpStorageClientIp, true
@@ -209,7 +213,7 @@ func (o *HyperflexNodeProfile) GetHxdpStorageClientIpOk() (*string, bool) {
 
 // HasHxdpStorageClientIp returns a boolean if a field has been set.
 func (o *HyperflexNodeProfile) HasHxdpStorageClientIp() bool {
-	if o != nil && o.HxdpStorageClientIp != nil {
+	if o != nil && !IsNil(o.HxdpStorageClientIp) {
 		return true
 	}
 
@@ -223,7 +227,7 @@ func (o *HyperflexNodeProfile) SetHxdpStorageClientIp(v string) {
 
 // GetHypervisorControlIp returns the HypervisorControlIp field value if set, zero value otherwise.
 func (o *HyperflexNodeProfile) GetHypervisorControlIp() string {
-	if o == nil || o.HypervisorControlIp == nil {
+	if o == nil || IsNil(o.HypervisorControlIp) {
 		var ret string
 		return ret
 	}
@@ -233,7 +237,7 @@ func (o *HyperflexNodeProfile) GetHypervisorControlIp() string {
 // GetHypervisorControlIpOk returns a tuple with the HypervisorControlIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNodeProfile) GetHypervisorControlIpOk() (*string, bool) {
-	if o == nil || o.HypervisorControlIp == nil {
+	if o == nil || IsNil(o.HypervisorControlIp) {
 		return nil, false
 	}
 	return o.HypervisorControlIp, true
@@ -241,7 +245,7 @@ func (o *HyperflexNodeProfile) GetHypervisorControlIpOk() (*string, bool) {
 
 // HasHypervisorControlIp returns a boolean if a field has been set.
 func (o *HyperflexNodeProfile) HasHypervisorControlIp() bool {
-	if o != nil && o.HypervisorControlIp != nil {
+	if o != nil && !IsNil(o.HypervisorControlIp) {
 		return true
 	}
 
@@ -255,7 +259,7 @@ func (o *HyperflexNodeProfile) SetHypervisorControlIp(v string) {
 
 // GetHypervisorDataIp returns the HypervisorDataIp field value if set, zero value otherwise.
 func (o *HyperflexNodeProfile) GetHypervisorDataIp() string {
-	if o == nil || o.HypervisorDataIp == nil {
+	if o == nil || IsNil(o.HypervisorDataIp) {
 		var ret string
 		return ret
 	}
@@ -265,7 +269,7 @@ func (o *HyperflexNodeProfile) GetHypervisorDataIp() string {
 // GetHypervisorDataIpOk returns a tuple with the HypervisorDataIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNodeProfile) GetHypervisorDataIpOk() (*string, bool) {
-	if o == nil || o.HypervisorDataIp == nil {
+	if o == nil || IsNil(o.HypervisorDataIp) {
 		return nil, false
 	}
 	return o.HypervisorDataIp, true
@@ -273,7 +277,7 @@ func (o *HyperflexNodeProfile) GetHypervisorDataIpOk() (*string, bool) {
 
 // HasHypervisorDataIp returns a boolean if a field has been set.
 func (o *HyperflexNodeProfile) HasHypervisorDataIp() bool {
-	if o != nil && o.HypervisorDataIp != nil {
+	if o != nil && !IsNil(o.HypervisorDataIp) {
 		return true
 	}
 
@@ -287,7 +291,7 @@ func (o *HyperflexNodeProfile) SetHypervisorDataIp(v string) {
 
 // GetHypervisorMgmtIp returns the HypervisorMgmtIp field value if set, zero value otherwise.
 func (o *HyperflexNodeProfile) GetHypervisorMgmtIp() string {
-	if o == nil || o.HypervisorMgmtIp == nil {
+	if o == nil || IsNil(o.HypervisorMgmtIp) {
 		var ret string
 		return ret
 	}
@@ -297,7 +301,7 @@ func (o *HyperflexNodeProfile) GetHypervisorMgmtIp() string {
 // GetHypervisorMgmtIpOk returns a tuple with the HypervisorMgmtIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNodeProfile) GetHypervisorMgmtIpOk() (*string, bool) {
-	if o == nil || o.HypervisorMgmtIp == nil {
+	if o == nil || IsNil(o.HypervisorMgmtIp) {
 		return nil, false
 	}
 	return o.HypervisorMgmtIp, true
@@ -305,7 +309,7 @@ func (o *HyperflexNodeProfile) GetHypervisorMgmtIpOk() (*string, bool) {
 
 // HasHypervisorMgmtIp returns a boolean if a field has been set.
 func (o *HyperflexNodeProfile) HasHypervisorMgmtIp() bool {
-	if o != nil && o.HypervisorMgmtIp != nil {
+	if o != nil && !IsNil(o.HypervisorMgmtIp) {
 		return true
 	}
 
@@ -319,7 +323,7 @@ func (o *HyperflexNodeProfile) SetHypervisorMgmtIp(v string) {
 
 // GetNodeRole returns the NodeRole field value if set, zero value otherwise.
 func (o *HyperflexNodeProfile) GetNodeRole() string {
-	if o == nil || o.NodeRole == nil {
+	if o == nil || IsNil(o.NodeRole) {
 		var ret string
 		return ret
 	}
@@ -329,7 +333,7 @@ func (o *HyperflexNodeProfile) GetNodeRole() string {
 // GetNodeRoleOk returns a tuple with the NodeRole field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexNodeProfile) GetNodeRoleOk() (*string, bool) {
-	if o == nil || o.NodeRole == nil {
+	if o == nil || IsNil(o.NodeRole) {
 		return nil, false
 	}
 	return o.NodeRole, true
@@ -337,7 +341,7 @@ func (o *HyperflexNodeProfile) GetNodeRoleOk() (*string, bool) {
 
 // HasNodeRole returns a boolean if a field has been set.
 func (o *HyperflexNodeProfile) HasNodeRole() bool {
-	if o != nil && o.NodeRole != nil {
+	if o != nil && !IsNil(o.NodeRole) {
 		return true
 	}
 
@@ -349,157 +353,216 @@ func (o *HyperflexNodeProfile) SetNodeRole(v string) {
 	o.NodeRole = &v
 }
 
-// GetAssignedServer returns the AssignedServer field value if set, zero value otherwise.
+// GetAssignedServer returns the AssignedServer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexNodeProfile) GetAssignedServer() ComputePhysicalRelationship {
-	if o == nil || o.AssignedServer == nil {
+	if o == nil || IsNil(o.AssignedServer.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.AssignedServer
+	return *o.AssignedServer.Get()
 }
 
 // GetAssignedServerOk returns a tuple with the AssignedServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexNodeProfile) GetAssignedServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.AssignedServer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssignedServer, true
+	return o.AssignedServer.Get(), o.AssignedServer.IsSet()
 }
 
 // HasAssignedServer returns a boolean if a field has been set.
 func (o *HyperflexNodeProfile) HasAssignedServer() bool {
-	if o != nil && o.AssignedServer != nil {
+	if o != nil && o.AssignedServer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssignedServer gets a reference to the given ComputePhysicalRelationship and assigns it to the AssignedServer field.
+// SetAssignedServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the AssignedServer field.
 func (o *HyperflexNodeProfile) SetAssignedServer(v ComputePhysicalRelationship) {
-	o.AssignedServer = &v
+	o.AssignedServer.Set(&v)
 }
 
-// GetClusterProfile returns the ClusterProfile field value if set, zero value otherwise.
+// SetAssignedServerNil sets the value for AssignedServer to be an explicit nil
+func (o *HyperflexNodeProfile) SetAssignedServerNil() {
+	o.AssignedServer.Set(nil)
+}
+
+// UnsetAssignedServer ensures that no value is present for AssignedServer, not even an explicit nil
+func (o *HyperflexNodeProfile) UnsetAssignedServer() {
+	o.AssignedServer.Unset()
+}
+
+// GetClusterProfile returns the ClusterProfile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexNodeProfile) GetClusterProfile() HyperflexClusterProfileRelationship {
-	if o == nil || o.ClusterProfile == nil {
+	if o == nil || IsNil(o.ClusterProfile.Get()) {
 		var ret HyperflexClusterProfileRelationship
 		return ret
 	}
-	return *o.ClusterProfile
+	return *o.ClusterProfile.Get()
 }
 
 // GetClusterProfileOk returns a tuple with the ClusterProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexNodeProfile) GetClusterProfileOk() (*HyperflexClusterProfileRelationship, bool) {
-	if o == nil || o.ClusterProfile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClusterProfile, true
+	return o.ClusterProfile.Get(), o.ClusterProfile.IsSet()
 }
 
 // HasClusterProfile returns a boolean if a field has been set.
 func (o *HyperflexNodeProfile) HasClusterProfile() bool {
-	if o != nil && o.ClusterProfile != nil {
+	if o != nil && o.ClusterProfile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClusterProfile gets a reference to the given HyperflexClusterProfileRelationship and assigns it to the ClusterProfile field.
+// SetClusterProfile gets a reference to the given NullableHyperflexClusterProfileRelationship and assigns it to the ClusterProfile field.
 func (o *HyperflexNodeProfile) SetClusterProfile(v HyperflexClusterProfileRelationship) {
-	o.ClusterProfile = &v
+	o.ClusterProfile.Set(&v)
 }
 
-// GetNode returns the Node field value if set, zero value otherwise.
+// SetClusterProfileNil sets the value for ClusterProfile to be an explicit nil
+func (o *HyperflexNodeProfile) SetClusterProfileNil() {
+	o.ClusterProfile.Set(nil)
+}
+
+// UnsetClusterProfile ensures that no value is present for ClusterProfile, not even an explicit nil
+func (o *HyperflexNodeProfile) UnsetClusterProfile() {
+	o.ClusterProfile.Unset()
+}
+
+// GetNode returns the Node field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexNodeProfile) GetNode() HyperflexNodeRelationship {
-	if o == nil || o.Node == nil {
+	if o == nil || IsNil(o.Node.Get()) {
 		var ret HyperflexNodeRelationship
 		return ret
 	}
-	return *o.Node
+	return *o.Node.Get()
 }
 
 // GetNodeOk returns a tuple with the Node field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexNodeProfile) GetNodeOk() (*HyperflexNodeRelationship, bool) {
-	if o == nil || o.Node == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Node, true
+	return o.Node.Get(), o.Node.IsSet()
 }
 
 // HasNode returns a boolean if a field has been set.
 func (o *HyperflexNodeProfile) HasNode() bool {
-	if o != nil && o.Node != nil {
+	if o != nil && o.Node.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNode gets a reference to the given HyperflexNodeRelationship and assigns it to the Node field.
+// SetNode gets a reference to the given NullableHyperflexNodeRelationship and assigns it to the Node field.
 func (o *HyperflexNodeProfile) SetNode(v HyperflexNodeRelationship) {
-	o.Node = &v
+	o.Node.Set(&v)
+}
+
+// SetNodeNil sets the value for Node to be an explicit nil
+func (o *HyperflexNodeProfile) SetNodeNil() {
+	o.Node.Set(nil)
+}
+
+// UnsetNode ensures that no value is present for Node, not even an explicit nil
+func (o *HyperflexNodeProfile) UnsetNode() {
+	o.Node.Unset()
 }
 
 func (o HyperflexNodeProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexNodeProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractConfigProfile, errPolicyAbstractConfigProfile := json.Marshal(o.PolicyAbstractConfigProfile)
 	if errPolicyAbstractConfigProfile != nil {
-		return []byte{}, errPolicyAbstractConfigProfile
+		return map[string]interface{}{}, errPolicyAbstractConfigProfile
 	}
 	errPolicyAbstractConfigProfile = json.Unmarshal([]byte(serializedPolicyAbstractConfigProfile), &toSerialize)
 	if errPolicyAbstractConfigProfile != nil {
-		return []byte{}, errPolicyAbstractConfigProfile
+		return map[string]interface{}{}, errPolicyAbstractConfigProfile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.HxdpDataIp != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.HxdpDataIp) {
 		toSerialize["HxdpDataIp"] = o.HxdpDataIp
 	}
-	if o.HxdpMgmtIp != nil {
+	if !IsNil(o.HxdpMgmtIp) {
 		toSerialize["HxdpMgmtIp"] = o.HxdpMgmtIp
 	}
-	if o.HxdpStorageClientIp != nil {
+	if !IsNil(o.HxdpStorageClientIp) {
 		toSerialize["HxdpStorageClientIp"] = o.HxdpStorageClientIp
 	}
-	if o.HypervisorControlIp != nil {
+	if !IsNil(o.HypervisorControlIp) {
 		toSerialize["HypervisorControlIp"] = o.HypervisorControlIp
 	}
-	if o.HypervisorDataIp != nil {
+	if !IsNil(o.HypervisorDataIp) {
 		toSerialize["HypervisorDataIp"] = o.HypervisorDataIp
 	}
-	if o.HypervisorMgmtIp != nil {
+	if !IsNil(o.HypervisorMgmtIp) {
 		toSerialize["HypervisorMgmtIp"] = o.HypervisorMgmtIp
 	}
-	if o.NodeRole != nil {
+	if !IsNil(o.NodeRole) {
 		toSerialize["NodeRole"] = o.NodeRole
 	}
-	if o.AssignedServer != nil {
-		toSerialize["AssignedServer"] = o.AssignedServer
+	if o.AssignedServer.IsSet() {
+		toSerialize["AssignedServer"] = o.AssignedServer.Get()
 	}
-	if o.ClusterProfile != nil {
-		toSerialize["ClusterProfile"] = o.ClusterProfile
+	if o.ClusterProfile.IsSet() {
+		toSerialize["ClusterProfile"] = o.ClusterProfile.Get()
 	}
-	if o.Node != nil {
-		toSerialize["Node"] = o.Node
+	if o.Node.IsSet() {
+		toSerialize["Node"] = o.Node.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexNodeProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexNodeProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexNodeProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -518,15 +581,15 @@ func (o *HyperflexNodeProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// IP address for Hypervisor management network.
 		HypervisorMgmtIp *string `json:"HypervisorMgmtIp,omitempty"`
 		// The role that this node performs in the HyperFlex cluster. * `Unknown` - The node role is not available. * `Storage` - The node persists data and contributes to the storage capacity of a cluster. * `Compute` - The node contributes to the compute capacity of a cluster.
-		NodeRole       *string                              `json:"NodeRole,omitempty"`
-		AssignedServer *ComputePhysicalRelationship         `json:"AssignedServer,omitempty"`
-		ClusterProfile *HyperflexClusterProfileRelationship `json:"ClusterProfile,omitempty"`
-		Node           *HyperflexNodeRelationship           `json:"Node,omitempty"`
+		NodeRole       *string                                     `json:"NodeRole,omitempty"`
+		AssignedServer NullableComputePhysicalRelationship         `json:"AssignedServer,omitempty"`
+		ClusterProfile NullableHyperflexClusterProfileRelationship `json:"ClusterProfile,omitempty"`
+		Node           NullableHyperflexNodeRelationship           `json:"Node,omitempty"`
 	}
 
 	varHyperflexNodeProfileWithoutEmbeddedStruct := HyperflexNodeProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexNodeProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexNodeProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexNodeProfile := _HyperflexNodeProfile{}
 		varHyperflexNodeProfile.ClassId = varHyperflexNodeProfileWithoutEmbeddedStruct.ClassId
@@ -548,7 +611,7 @@ func (o *HyperflexNodeProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexNodeProfile := _HyperflexNodeProfile{}
 
-	err = json.Unmarshal(bytes, &varHyperflexNodeProfile)
+	err = json.Unmarshal(data, &varHyperflexNodeProfile)
 	if err == nil {
 		o.PolicyAbstractConfigProfile = varHyperflexNodeProfile.PolicyAbstractConfigProfile
 	} else {
@@ -557,7 +620,7 @@ func (o *HyperflexNodeProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "HxdpDataIp")

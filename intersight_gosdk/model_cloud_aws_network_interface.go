@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the CloudAwsNetworkInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudAwsNetworkInterface{}
 
 // CloudAwsNetworkInterface AWS Network Interface object is represented here.It is Virtual interface that can be attached to an instance in a Virtual Private Cloud (VPC).
 type CloudAwsNetworkInterface struct {
@@ -36,8 +40,8 @@ type CloudAwsNetworkInterface struct {
 	PublicIpAddress []string `json:"PublicIpAddress,omitempty"`
 	SecurityGroups  []string `json:"SecurityGroups,omitempty"`
 	// The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.
-	Status               *string                     `json:"Status,omitempty"`
-	AwsSubnet            *CloudAwsSubnetRelationship `json:"AwsSubnet,omitempty"`
+	Status               *string                            `json:"Status,omitempty"`
+	AwsSubnet            NullableCloudAwsSubnetRelationship `json:"AwsSubnet,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *CloudAwsNetworkInterface) SetObjectType(v string) {
 
 // GetInstanceAttachment returns the InstanceAttachment field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudAwsNetworkInterface) GetInstanceAttachment() CloudNetworkInstanceAttachment {
-	if o == nil || o.InstanceAttachment.Get() == nil {
+	if o == nil || IsNil(o.InstanceAttachment.Get()) {
 		var ret CloudNetworkInstanceAttachment
 		return ret
 	}
@@ -161,7 +165,7 @@ func (o *CloudAwsNetworkInterface) UnsetInstanceAttachment() {
 
 // GetNicCreateTime returns the NicCreateTime field value if set, zero value otherwise.
 func (o *CloudAwsNetworkInterface) GetNicCreateTime() time.Time {
-	if o == nil || o.NicCreateTime == nil {
+	if o == nil || IsNil(o.NicCreateTime) {
 		var ret time.Time
 		return ret
 	}
@@ -171,7 +175,7 @@ func (o *CloudAwsNetworkInterface) GetNicCreateTime() time.Time {
 // GetNicCreateTimeOk returns a tuple with the NicCreateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsNetworkInterface) GetNicCreateTimeOk() (*time.Time, bool) {
-	if o == nil || o.NicCreateTime == nil {
+	if o == nil || IsNil(o.NicCreateTime) {
 		return nil, false
 	}
 	return o.NicCreateTime, true
@@ -179,7 +183,7 @@ func (o *CloudAwsNetworkInterface) GetNicCreateTimeOk() (*time.Time, bool) {
 
 // HasNicCreateTime returns a boolean if a field has been set.
 func (o *CloudAwsNetworkInterface) HasNicCreateTime() bool {
-	if o != nil && o.NicCreateTime != nil {
+	if o != nil && !IsNil(o.NicCreateTime) {
 		return true
 	}
 
@@ -193,7 +197,7 @@ func (o *CloudAwsNetworkInterface) SetNicCreateTime(v time.Time) {
 
 // GetPrivateDnsName returns the PrivateDnsName field value if set, zero value otherwise.
 func (o *CloudAwsNetworkInterface) GetPrivateDnsName() string {
-	if o == nil || o.PrivateDnsName == nil {
+	if o == nil || IsNil(o.PrivateDnsName) {
 		var ret string
 		return ret
 	}
@@ -203,7 +207,7 @@ func (o *CloudAwsNetworkInterface) GetPrivateDnsName() string {
 // GetPrivateDnsNameOk returns a tuple with the PrivateDnsName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsNetworkInterface) GetPrivateDnsNameOk() (*string, bool) {
-	if o == nil || o.PrivateDnsName == nil {
+	if o == nil || IsNil(o.PrivateDnsName) {
 		return nil, false
 	}
 	return o.PrivateDnsName, true
@@ -211,7 +215,7 @@ func (o *CloudAwsNetworkInterface) GetPrivateDnsNameOk() (*string, bool) {
 
 // HasPrivateDnsName returns a boolean if a field has been set.
 func (o *CloudAwsNetworkInterface) HasPrivateDnsName() bool {
-	if o != nil && o.PrivateDnsName != nil {
+	if o != nil && !IsNil(o.PrivateDnsName) {
 		return true
 	}
 
@@ -236,7 +240,7 @@ func (o *CloudAwsNetworkInterface) GetPrivateIpAddress() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsNetworkInterface) GetPrivateIpAddressOk() ([]string, bool) {
-	if o == nil || o.PrivateIpAddress == nil {
+	if o == nil || IsNil(o.PrivateIpAddress) {
 		return nil, false
 	}
 	return o.PrivateIpAddress, true
@@ -244,7 +248,7 @@ func (o *CloudAwsNetworkInterface) GetPrivateIpAddressOk() ([]string, bool) {
 
 // HasPrivateIpAddress returns a boolean if a field has been set.
 func (o *CloudAwsNetworkInterface) HasPrivateIpAddress() bool {
-	if o != nil && o.PrivateIpAddress != nil {
+	if o != nil && IsNil(o.PrivateIpAddress) {
 		return true
 	}
 
@@ -258,7 +262,7 @@ func (o *CloudAwsNetworkInterface) SetPrivateIpAddress(v []string) {
 
 // GetPublicDnsName returns the PublicDnsName field value if set, zero value otherwise.
 func (o *CloudAwsNetworkInterface) GetPublicDnsName() string {
-	if o == nil || o.PublicDnsName == nil {
+	if o == nil || IsNil(o.PublicDnsName) {
 		var ret string
 		return ret
 	}
@@ -268,7 +272,7 @@ func (o *CloudAwsNetworkInterface) GetPublicDnsName() string {
 // GetPublicDnsNameOk returns a tuple with the PublicDnsName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsNetworkInterface) GetPublicDnsNameOk() (*string, bool) {
-	if o == nil || o.PublicDnsName == nil {
+	if o == nil || IsNil(o.PublicDnsName) {
 		return nil, false
 	}
 	return o.PublicDnsName, true
@@ -276,7 +280,7 @@ func (o *CloudAwsNetworkInterface) GetPublicDnsNameOk() (*string, bool) {
 
 // HasPublicDnsName returns a boolean if a field has been set.
 func (o *CloudAwsNetworkInterface) HasPublicDnsName() bool {
-	if o != nil && o.PublicDnsName != nil {
+	if o != nil && !IsNil(o.PublicDnsName) {
 		return true
 	}
 
@@ -301,7 +305,7 @@ func (o *CloudAwsNetworkInterface) GetPublicIpAddress() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsNetworkInterface) GetPublicIpAddressOk() ([]string, bool) {
-	if o == nil || o.PublicIpAddress == nil {
+	if o == nil || IsNil(o.PublicIpAddress) {
 		return nil, false
 	}
 	return o.PublicIpAddress, true
@@ -309,7 +313,7 @@ func (o *CloudAwsNetworkInterface) GetPublicIpAddressOk() ([]string, bool) {
 
 // HasPublicIpAddress returns a boolean if a field has been set.
 func (o *CloudAwsNetworkInterface) HasPublicIpAddress() bool {
-	if o != nil && o.PublicIpAddress != nil {
+	if o != nil && IsNil(o.PublicIpAddress) {
 		return true
 	}
 
@@ -334,7 +338,7 @@ func (o *CloudAwsNetworkInterface) GetSecurityGroups() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsNetworkInterface) GetSecurityGroupsOk() ([]string, bool) {
-	if o == nil || o.SecurityGroups == nil {
+	if o == nil || IsNil(o.SecurityGroups) {
 		return nil, false
 	}
 	return o.SecurityGroups, true
@@ -342,7 +346,7 @@ func (o *CloudAwsNetworkInterface) GetSecurityGroupsOk() ([]string, bool) {
 
 // HasSecurityGroups returns a boolean if a field has been set.
 func (o *CloudAwsNetworkInterface) HasSecurityGroups() bool {
-	if o != nil && o.SecurityGroups != nil {
+	if o != nil && IsNil(o.SecurityGroups) {
 		return true
 	}
 
@@ -356,7 +360,7 @@ func (o *CloudAwsNetworkInterface) SetSecurityGroups(v []string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *CloudAwsNetworkInterface) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -366,7 +370,7 @@ func (o *CloudAwsNetworkInterface) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudAwsNetworkInterface) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -374,7 +378,7 @@ func (o *CloudAwsNetworkInterface) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *CloudAwsNetworkInterface) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -386,67 +390,82 @@ func (o *CloudAwsNetworkInterface) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetAwsSubnet returns the AwsSubnet field value if set, zero value otherwise.
+// GetAwsSubnet returns the AwsSubnet field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudAwsNetworkInterface) GetAwsSubnet() CloudAwsSubnetRelationship {
-	if o == nil || o.AwsSubnet == nil {
+	if o == nil || IsNil(o.AwsSubnet.Get()) {
 		var ret CloudAwsSubnetRelationship
 		return ret
 	}
-	return *o.AwsSubnet
+	return *o.AwsSubnet.Get()
 }
 
 // GetAwsSubnetOk returns a tuple with the AwsSubnet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudAwsNetworkInterface) GetAwsSubnetOk() (*CloudAwsSubnetRelationship, bool) {
-	if o == nil || o.AwsSubnet == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AwsSubnet, true
+	return o.AwsSubnet.Get(), o.AwsSubnet.IsSet()
 }
 
 // HasAwsSubnet returns a boolean if a field has been set.
 func (o *CloudAwsNetworkInterface) HasAwsSubnet() bool {
-	if o != nil && o.AwsSubnet != nil {
+	if o != nil && o.AwsSubnet.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAwsSubnet gets a reference to the given CloudAwsSubnetRelationship and assigns it to the AwsSubnet field.
+// SetAwsSubnet gets a reference to the given NullableCloudAwsSubnetRelationship and assigns it to the AwsSubnet field.
 func (o *CloudAwsNetworkInterface) SetAwsSubnet(v CloudAwsSubnetRelationship) {
-	o.AwsSubnet = &v
+	o.AwsSubnet.Set(&v)
+}
+
+// SetAwsSubnetNil sets the value for AwsSubnet to be an explicit nil
+func (o *CloudAwsNetworkInterface) SetAwsSubnetNil() {
+	o.AwsSubnet.Set(nil)
+}
+
+// UnsetAwsSubnet ensures that no value is present for AwsSubnet, not even an explicit nil
+func (o *CloudAwsNetworkInterface) UnsetAwsSubnet() {
+	o.AwsSubnet.Unset()
 }
 
 func (o CloudAwsNetworkInterface) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudAwsNetworkInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCloudBaseNetworkInterface, errCloudBaseNetworkInterface := json.Marshal(o.CloudBaseNetworkInterface)
 	if errCloudBaseNetworkInterface != nil {
-		return []byte{}, errCloudBaseNetworkInterface
+		return map[string]interface{}{}, errCloudBaseNetworkInterface
 	}
 	errCloudBaseNetworkInterface = json.Unmarshal([]byte(serializedCloudBaseNetworkInterface), &toSerialize)
 	if errCloudBaseNetworkInterface != nil {
-		return []byte{}, errCloudBaseNetworkInterface
+		return map[string]interface{}{}, errCloudBaseNetworkInterface
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.InstanceAttachment.IsSet() {
 		toSerialize["InstanceAttachment"] = o.InstanceAttachment.Get()
 	}
-	if o.NicCreateTime != nil {
+	if !IsNil(o.NicCreateTime) {
 		toSerialize["NicCreateTime"] = o.NicCreateTime
 	}
-	if o.PrivateDnsName != nil {
+	if !IsNil(o.PrivateDnsName) {
 		toSerialize["PrivateDnsName"] = o.PrivateDnsName
 	}
 	if o.PrivateIpAddress != nil {
 		toSerialize["PrivateIpAddress"] = o.PrivateIpAddress
 	}
-	if o.PublicDnsName != nil {
+	if !IsNil(o.PublicDnsName) {
 		toSerialize["PublicDnsName"] = o.PublicDnsName
 	}
 	if o.PublicIpAddress != nil {
@@ -455,21 +474,43 @@ func (o CloudAwsNetworkInterface) MarshalJSON() ([]byte, error) {
 	if o.SecurityGroups != nil {
 		toSerialize["SecurityGroups"] = o.SecurityGroups
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.AwsSubnet != nil {
-		toSerialize["AwsSubnet"] = o.AwsSubnet
+	if o.AwsSubnet.IsSet() {
+		toSerialize["AwsSubnet"] = o.AwsSubnet.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudAwsNetworkInterface) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudAwsNetworkInterface) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudAwsNetworkInterfaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -486,13 +527,13 @@ func (o *CloudAwsNetworkInterface) UnmarshalJSON(bytes []byte) (err error) {
 		PublicIpAddress []string `json:"PublicIpAddress,omitempty"`
 		SecurityGroups  []string `json:"SecurityGroups,omitempty"`
 		// The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.
-		Status    *string                     `json:"Status,omitempty"`
-		AwsSubnet *CloudAwsSubnetRelationship `json:"AwsSubnet,omitempty"`
+		Status    *string                            `json:"Status,omitempty"`
+		AwsSubnet NullableCloudAwsSubnetRelationship `json:"AwsSubnet,omitempty"`
 	}
 
 	varCloudAwsNetworkInterfaceWithoutEmbeddedStruct := CloudAwsNetworkInterfaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsNetworkInterfaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudAwsNetworkInterfaceWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudAwsNetworkInterface := _CloudAwsNetworkInterface{}
 		varCloudAwsNetworkInterface.ClassId = varCloudAwsNetworkInterfaceWithoutEmbeddedStruct.ClassId
@@ -513,7 +554,7 @@ func (o *CloudAwsNetworkInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudAwsNetworkInterface := _CloudAwsNetworkInterface{}
 
-	err = json.Unmarshal(bytes, &varCloudAwsNetworkInterface)
+	err = json.Unmarshal(data, &varCloudAwsNetworkInterface)
 	if err == nil {
 		o.CloudBaseNetworkInterface = varCloudAwsNetworkInterface.CloudBaseNetworkInterface
 	} else {
@@ -522,7 +563,7 @@ func (o *CloudAwsNetworkInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "InstanceAttachment")

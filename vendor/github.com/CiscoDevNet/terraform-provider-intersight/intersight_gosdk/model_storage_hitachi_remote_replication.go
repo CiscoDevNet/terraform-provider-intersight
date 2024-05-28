@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageHitachiRemoteReplication type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageHitachiRemoteReplication{}
 
 // StorageHitachiRemoteReplication A remote copy pair entity in Hitachi storage array.
 type StorageHitachiRemoteReplication struct {
@@ -59,9 +63,9 @@ type StorageHitachiRemoteReplication struct {
 	// LDEV number of secondary volume.
 	SvolLdevId *int64 `json:"SvolLdevId,omitempty"`
 	// Serial number of the storage system on the S-VOL.
-	SvolStorageSerial    *string                              `json:"SvolStorageSerial,omitempty"`
-	Array                *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SvolStorageSerial    *string                                     `json:"SvolStorageSerial,omitempty"`
+	Array                NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -140,7 +144,7 @@ func (o *StorageHitachiRemoteReplication) SetObjectType(v string) {
 
 // GetConsistencyGroupId returns the ConsistencyGroupId field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetConsistencyGroupId() string {
-	if o == nil || o.ConsistencyGroupId == nil {
+	if o == nil || IsNil(o.ConsistencyGroupId) {
 		var ret string
 		return ret
 	}
@@ -150,7 +154,7 @@ func (o *StorageHitachiRemoteReplication) GetConsistencyGroupId() string {
 // GetConsistencyGroupIdOk returns a tuple with the ConsistencyGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetConsistencyGroupIdOk() (*string, bool) {
-	if o == nil || o.ConsistencyGroupId == nil {
+	if o == nil || IsNil(o.ConsistencyGroupId) {
 		return nil, false
 	}
 	return o.ConsistencyGroupId, true
@@ -158,7 +162,7 @@ func (o *StorageHitachiRemoteReplication) GetConsistencyGroupIdOk() (*string, bo
 
 // HasConsistencyGroupId returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasConsistencyGroupId() bool {
-	if o != nil && o.ConsistencyGroupId != nil {
+	if o != nil && !IsNil(o.ConsistencyGroupId) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *StorageHitachiRemoteReplication) SetConsistencyGroupId(v string) {
 
 // GetCopyPace returns the CopyPace field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetCopyPace() string {
-	if o == nil || o.CopyPace == nil {
+	if o == nil || IsNil(o.CopyPace) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *StorageHitachiRemoteReplication) GetCopyPace() string {
 // GetCopyPaceOk returns a tuple with the CopyPace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetCopyPaceOk() (*string, bool) {
-	if o == nil || o.CopyPace == nil {
+	if o == nil || IsNil(o.CopyPace) {
 		return nil, false
 	}
 	return o.CopyPace, true
@@ -190,7 +194,7 @@ func (o *StorageHitachiRemoteReplication) GetCopyPaceOk() (*string, bool) {
 
 // HasCopyPace returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasCopyPace() bool {
-	if o != nil && o.CopyPace != nil {
+	if o != nil && !IsNil(o.CopyPace) {
 		return true
 	}
 
@@ -204,7 +208,7 @@ func (o *StorageHitachiRemoteReplication) SetCopyPace(v string) {
 
 // GetDeltaStatus returns the DeltaStatus field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetDeltaStatus() string {
-	if o == nil || o.DeltaStatus == nil {
+	if o == nil || IsNil(o.DeltaStatus) {
 		var ret string
 		return ret
 	}
@@ -214,7 +218,7 @@ func (o *StorageHitachiRemoteReplication) GetDeltaStatus() string {
 // GetDeltaStatusOk returns a tuple with the DeltaStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetDeltaStatusOk() (*string, bool) {
-	if o == nil || o.DeltaStatus == nil {
+	if o == nil || IsNil(o.DeltaStatus) {
 		return nil, false
 	}
 	return o.DeltaStatus, true
@@ -222,7 +226,7 @@ func (o *StorageHitachiRemoteReplication) GetDeltaStatusOk() (*string, bool) {
 
 // HasDeltaStatus returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasDeltaStatus() bool {
-	if o != nil && o.DeltaStatus != nil {
+	if o != nil && !IsNil(o.DeltaStatus) {
 		return true
 	}
 
@@ -236,7 +240,7 @@ func (o *StorageHitachiRemoteReplication) SetDeltaStatus(v string) {
 
 // GetFenceLevel returns the FenceLevel field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetFenceLevel() string {
-	if o == nil || o.FenceLevel == nil {
+	if o == nil || IsNil(o.FenceLevel) {
 		var ret string
 		return ret
 	}
@@ -246,7 +250,7 @@ func (o *StorageHitachiRemoteReplication) GetFenceLevel() string {
 // GetFenceLevelOk returns a tuple with the FenceLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetFenceLevelOk() (*string, bool) {
-	if o == nil || o.FenceLevel == nil {
+	if o == nil || IsNil(o.FenceLevel) {
 		return nil, false
 	}
 	return o.FenceLevel, true
@@ -254,7 +258,7 @@ func (o *StorageHitachiRemoteReplication) GetFenceLevelOk() (*string, bool) {
 
 // HasFenceLevel returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasFenceLevel() bool {
-	if o != nil && o.FenceLevel != nil {
+	if o != nil && !IsNil(o.FenceLevel) {
 		return true
 	}
 
@@ -268,7 +272,7 @@ func (o *StorageHitachiRemoteReplication) SetFenceLevel(v string) {
 
 // GetMuNumber returns the MuNumber field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetMuNumber() string {
-	if o == nil || o.MuNumber == nil {
+	if o == nil || IsNil(o.MuNumber) {
 		var ret string
 		return ret
 	}
@@ -278,7 +282,7 @@ func (o *StorageHitachiRemoteReplication) GetMuNumber() string {
 // GetMuNumberOk returns a tuple with the MuNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetMuNumberOk() (*string, bool) {
-	if o == nil || o.MuNumber == nil {
+	if o == nil || IsNil(o.MuNumber) {
 		return nil, false
 	}
 	return o.MuNumber, true
@@ -286,7 +290,7 @@ func (o *StorageHitachiRemoteReplication) GetMuNumberOk() (*string, bool) {
 
 // HasMuNumber returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasMuNumber() bool {
-	if o != nil && o.MuNumber != nil {
+	if o != nil && !IsNil(o.MuNumber) {
 		return true
 	}
 
@@ -300,7 +304,7 @@ func (o *StorageHitachiRemoteReplication) SetMuNumber(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -310,7 +314,7 @@ func (o *StorageHitachiRemoteReplication) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -318,7 +322,7 @@ func (o *StorageHitachiRemoteReplication) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -332,7 +336,7 @@ func (o *StorageHitachiRemoteReplication) SetName(v string) {
 
 // GetPathGroupId returns the PathGroupId field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetPathGroupId() string {
-	if o == nil || o.PathGroupId == nil {
+	if o == nil || IsNil(o.PathGroupId) {
 		var ret string
 		return ret
 	}
@@ -342,7 +346,7 @@ func (o *StorageHitachiRemoteReplication) GetPathGroupId() string {
 // GetPathGroupIdOk returns a tuple with the PathGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetPathGroupIdOk() (*string, bool) {
-	if o == nil || o.PathGroupId == nil {
+	if o == nil || IsNil(o.PathGroupId) {
 		return nil, false
 	}
 	return o.PathGroupId, true
@@ -350,7 +354,7 @@ func (o *StorageHitachiRemoteReplication) GetPathGroupIdOk() (*string, bool) {
 
 // HasPathGroupId returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasPathGroupId() bool {
-	if o != nil && o.PathGroupId != nil {
+	if o != nil && !IsNil(o.PathGroupId) {
 		return true
 	}
 
@@ -364,7 +368,7 @@ func (o *StorageHitachiRemoteReplication) SetPathGroupId(v string) {
 
 // GetPvolIoMode returns the PvolIoMode field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetPvolIoMode() string {
-	if o == nil || o.PvolIoMode == nil {
+	if o == nil || IsNil(o.PvolIoMode) {
 		var ret string
 		return ret
 	}
@@ -374,7 +378,7 @@ func (o *StorageHitachiRemoteReplication) GetPvolIoMode() string {
 // GetPvolIoModeOk returns a tuple with the PvolIoMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetPvolIoModeOk() (*string, bool) {
-	if o == nil || o.PvolIoMode == nil {
+	if o == nil || IsNil(o.PvolIoMode) {
 		return nil, false
 	}
 	return o.PvolIoMode, true
@@ -382,7 +386,7 @@ func (o *StorageHitachiRemoteReplication) GetPvolIoModeOk() (*string, bool) {
 
 // HasPvolIoMode returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasPvolIoMode() bool {
-	if o != nil && o.PvolIoMode != nil {
+	if o != nil && !IsNil(o.PvolIoMode) {
 		return true
 	}
 
@@ -396,7 +400,7 @@ func (o *StorageHitachiRemoteReplication) SetPvolIoMode(v string) {
 
 // GetPvolJournalId returns the PvolJournalId field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetPvolJournalId() string {
-	if o == nil || o.PvolJournalId == nil {
+	if o == nil || IsNil(o.PvolJournalId) {
 		var ret string
 		return ret
 	}
@@ -406,7 +410,7 @@ func (o *StorageHitachiRemoteReplication) GetPvolJournalId() string {
 // GetPvolJournalIdOk returns a tuple with the PvolJournalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetPvolJournalIdOk() (*string, bool) {
-	if o == nil || o.PvolJournalId == nil {
+	if o == nil || IsNil(o.PvolJournalId) {
 		return nil, false
 	}
 	return o.PvolJournalId, true
@@ -414,7 +418,7 @@ func (o *StorageHitachiRemoteReplication) GetPvolJournalIdOk() (*string, bool) {
 
 // HasPvolJournalId returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasPvolJournalId() bool {
-	if o != nil && o.PvolJournalId != nil {
+	if o != nil && !IsNil(o.PvolJournalId) {
 		return true
 	}
 
@@ -428,7 +432,7 @@ func (o *StorageHitachiRemoteReplication) SetPvolJournalId(v string) {
 
 // GetPvolLdevId returns the PvolLdevId field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetPvolLdevId() int64 {
-	if o == nil || o.PvolLdevId == nil {
+	if o == nil || IsNil(o.PvolLdevId) {
 		var ret int64
 		return ret
 	}
@@ -438,7 +442,7 @@ func (o *StorageHitachiRemoteReplication) GetPvolLdevId() int64 {
 // GetPvolLdevIdOk returns a tuple with the PvolLdevId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetPvolLdevIdOk() (*int64, bool) {
-	if o == nil || o.PvolLdevId == nil {
+	if o == nil || IsNil(o.PvolLdevId) {
 		return nil, false
 	}
 	return o.PvolLdevId, true
@@ -446,7 +450,7 @@ func (o *StorageHitachiRemoteReplication) GetPvolLdevIdOk() (*int64, bool) {
 
 // HasPvolLdevId returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasPvolLdevId() bool {
-	if o != nil && o.PvolLdevId != nil {
+	if o != nil && !IsNil(o.PvolLdevId) {
 		return true
 	}
 
@@ -460,7 +464,7 @@ func (o *StorageHitachiRemoteReplication) SetPvolLdevId(v int64) {
 
 // GetPvolStorageSerial returns the PvolStorageSerial field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetPvolStorageSerial() string {
-	if o == nil || o.PvolStorageSerial == nil {
+	if o == nil || IsNil(o.PvolStorageSerial) {
 		var ret string
 		return ret
 	}
@@ -470,7 +474,7 @@ func (o *StorageHitachiRemoteReplication) GetPvolStorageSerial() string {
 // GetPvolStorageSerialOk returns a tuple with the PvolStorageSerial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetPvolStorageSerialOk() (*string, bool) {
-	if o == nil || o.PvolStorageSerial == nil {
+	if o == nil || IsNil(o.PvolStorageSerial) {
 		return nil, false
 	}
 	return o.PvolStorageSerial, true
@@ -478,7 +482,7 @@ func (o *StorageHitachiRemoteReplication) GetPvolStorageSerialOk() (*string, boo
 
 // HasPvolStorageSerial returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasPvolStorageSerial() bool {
-	if o != nil && o.PvolStorageSerial != nil {
+	if o != nil && !IsNil(o.PvolStorageSerial) {
 		return true
 	}
 
@@ -492,7 +496,7 @@ func (o *StorageHitachiRemoteReplication) SetPvolStorageSerial(v string) {
 
 // GetQuorumDiskId returns the QuorumDiskId field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetQuorumDiskId() string {
-	if o == nil || o.QuorumDiskId == nil {
+	if o == nil || IsNil(o.QuorumDiskId) {
 		var ret string
 		return ret
 	}
@@ -502,7 +506,7 @@ func (o *StorageHitachiRemoteReplication) GetQuorumDiskId() string {
 // GetQuorumDiskIdOk returns a tuple with the QuorumDiskId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetQuorumDiskIdOk() (*string, bool) {
-	if o == nil || o.QuorumDiskId == nil {
+	if o == nil || IsNil(o.QuorumDiskId) {
 		return nil, false
 	}
 	return o.QuorumDiskId, true
@@ -510,7 +514,7 @@ func (o *StorageHitachiRemoteReplication) GetQuorumDiskIdOk() (*string, bool) {
 
 // HasQuorumDiskId returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasQuorumDiskId() bool {
-	if o != nil && o.QuorumDiskId != nil {
+	if o != nil && !IsNil(o.QuorumDiskId) {
 		return true
 	}
 
@@ -524,7 +528,7 @@ func (o *StorageHitachiRemoteReplication) SetQuorumDiskId(v string) {
 
 // GetReplicationType returns the ReplicationType field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetReplicationType() string {
-	if o == nil || o.ReplicationType == nil {
+	if o == nil || IsNil(o.ReplicationType) {
 		var ret string
 		return ret
 	}
@@ -534,7 +538,7 @@ func (o *StorageHitachiRemoteReplication) GetReplicationType() string {
 // GetReplicationTypeOk returns a tuple with the ReplicationType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetReplicationTypeOk() (*string, bool) {
-	if o == nil || o.ReplicationType == nil {
+	if o == nil || IsNil(o.ReplicationType) {
 		return nil, false
 	}
 	return o.ReplicationType, true
@@ -542,7 +546,7 @@ func (o *StorageHitachiRemoteReplication) GetReplicationTypeOk() (*string, bool)
 
 // HasReplicationType returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasReplicationType() bool {
-	if o != nil && o.ReplicationType != nil {
+	if o != nil && !IsNil(o.ReplicationType) {
 		return true
 	}
 
@@ -556,7 +560,7 @@ func (o *StorageHitachiRemoteReplication) SetReplicationType(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -566,7 +570,7 @@ func (o *StorageHitachiRemoteReplication) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -574,7 +578,7 @@ func (o *StorageHitachiRemoteReplication) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -588,7 +592,7 @@ func (o *StorageHitachiRemoteReplication) SetStatus(v string) {
 
 // GetSvolIoMode returns the SvolIoMode field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetSvolIoMode() string {
-	if o == nil || o.SvolIoMode == nil {
+	if o == nil || IsNil(o.SvolIoMode) {
 		var ret string
 		return ret
 	}
@@ -598,7 +602,7 @@ func (o *StorageHitachiRemoteReplication) GetSvolIoMode() string {
 // GetSvolIoModeOk returns a tuple with the SvolIoMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetSvolIoModeOk() (*string, bool) {
-	if o == nil || o.SvolIoMode == nil {
+	if o == nil || IsNil(o.SvolIoMode) {
 		return nil, false
 	}
 	return o.SvolIoMode, true
@@ -606,7 +610,7 @@ func (o *StorageHitachiRemoteReplication) GetSvolIoModeOk() (*string, bool) {
 
 // HasSvolIoMode returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasSvolIoMode() bool {
-	if o != nil && o.SvolIoMode != nil {
+	if o != nil && !IsNil(o.SvolIoMode) {
 		return true
 	}
 
@@ -620,7 +624,7 @@ func (o *StorageHitachiRemoteReplication) SetSvolIoMode(v string) {
 
 // GetSvolJournalId returns the SvolJournalId field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetSvolJournalId() string {
-	if o == nil || o.SvolJournalId == nil {
+	if o == nil || IsNil(o.SvolJournalId) {
 		var ret string
 		return ret
 	}
@@ -630,7 +634,7 @@ func (o *StorageHitachiRemoteReplication) GetSvolJournalId() string {
 // GetSvolJournalIdOk returns a tuple with the SvolJournalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetSvolJournalIdOk() (*string, bool) {
-	if o == nil || o.SvolJournalId == nil {
+	if o == nil || IsNil(o.SvolJournalId) {
 		return nil, false
 	}
 	return o.SvolJournalId, true
@@ -638,7 +642,7 @@ func (o *StorageHitachiRemoteReplication) GetSvolJournalIdOk() (*string, bool) {
 
 // HasSvolJournalId returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasSvolJournalId() bool {
-	if o != nil && o.SvolJournalId != nil {
+	if o != nil && !IsNil(o.SvolJournalId) {
 		return true
 	}
 
@@ -652,7 +656,7 @@ func (o *StorageHitachiRemoteReplication) SetSvolJournalId(v string) {
 
 // GetSvolLdevId returns the SvolLdevId field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetSvolLdevId() int64 {
-	if o == nil || o.SvolLdevId == nil {
+	if o == nil || IsNil(o.SvolLdevId) {
 		var ret int64
 		return ret
 	}
@@ -662,7 +666,7 @@ func (o *StorageHitachiRemoteReplication) GetSvolLdevId() int64 {
 // GetSvolLdevIdOk returns a tuple with the SvolLdevId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetSvolLdevIdOk() (*int64, bool) {
-	if o == nil || o.SvolLdevId == nil {
+	if o == nil || IsNil(o.SvolLdevId) {
 		return nil, false
 	}
 	return o.SvolLdevId, true
@@ -670,7 +674,7 @@ func (o *StorageHitachiRemoteReplication) GetSvolLdevIdOk() (*int64, bool) {
 
 // HasSvolLdevId returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasSvolLdevId() bool {
-	if o != nil && o.SvolLdevId != nil {
+	if o != nil && !IsNil(o.SvolLdevId) {
 		return true
 	}
 
@@ -684,7 +688,7 @@ func (o *StorageHitachiRemoteReplication) SetSvolLdevId(v int64) {
 
 // GetSvolStorageSerial returns the SvolStorageSerial field value if set, zero value otherwise.
 func (o *StorageHitachiRemoteReplication) GetSvolStorageSerial() string {
-	if o == nil || o.SvolStorageSerial == nil {
+	if o == nil || IsNil(o.SvolStorageSerial) {
 		var ret string
 		return ret
 	}
@@ -694,7 +698,7 @@ func (o *StorageHitachiRemoteReplication) GetSvolStorageSerial() string {
 // GetSvolStorageSerialOk returns a tuple with the SvolStorageSerial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiRemoteReplication) GetSvolStorageSerialOk() (*string, bool) {
-	if o == nil || o.SvolStorageSerial == nil {
+	if o == nil || IsNil(o.SvolStorageSerial) {
 		return nil, false
 	}
 	return o.SvolStorageSerial, true
@@ -702,7 +706,7 @@ func (o *StorageHitachiRemoteReplication) GetSvolStorageSerialOk() (*string, boo
 
 // HasSvolStorageSerial returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasSvolStorageSerial() bool {
-	if o != nil && o.SvolStorageSerial != nil {
+	if o != nil && !IsNil(o.SvolStorageSerial) {
 		return true
 	}
 
@@ -714,155 +718,203 @@ func (o *StorageHitachiRemoteReplication) SetSvolStorageSerial(v string) {
 	o.SvolStorageSerial = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiRemoteReplication) GetArray() StorageHitachiArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageHitachiArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiRemoteReplication) GetArrayOk() (*StorageHitachiArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageHitachiArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageHitachiArrayRelationship and assigns it to the Array field.
 func (o *StorageHitachiRemoteReplication) SetArray(v StorageHitachiArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageHitachiRemoteReplication) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageHitachiRemoteReplication) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiRemoteReplication) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiRemoteReplication) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageHitachiRemoteReplication) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageHitachiRemoteReplication) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageHitachiRemoteReplication) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageHitachiRemoteReplication) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageHitachiRemoteReplication) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageHitachiRemoteReplication) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ConsistencyGroupId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ConsistencyGroupId) {
 		toSerialize["ConsistencyGroupId"] = o.ConsistencyGroupId
 	}
-	if o.CopyPace != nil {
+	if !IsNil(o.CopyPace) {
 		toSerialize["CopyPace"] = o.CopyPace
 	}
-	if o.DeltaStatus != nil {
+	if !IsNil(o.DeltaStatus) {
 		toSerialize["DeltaStatus"] = o.DeltaStatus
 	}
-	if o.FenceLevel != nil {
+	if !IsNil(o.FenceLevel) {
 		toSerialize["FenceLevel"] = o.FenceLevel
 	}
-	if o.MuNumber != nil {
+	if !IsNil(o.MuNumber) {
 		toSerialize["MuNumber"] = o.MuNumber
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PathGroupId != nil {
+	if !IsNil(o.PathGroupId) {
 		toSerialize["PathGroupId"] = o.PathGroupId
 	}
-	if o.PvolIoMode != nil {
+	if !IsNil(o.PvolIoMode) {
 		toSerialize["PvolIoMode"] = o.PvolIoMode
 	}
-	if o.PvolJournalId != nil {
+	if !IsNil(o.PvolJournalId) {
 		toSerialize["PvolJournalId"] = o.PvolJournalId
 	}
-	if o.PvolLdevId != nil {
+	if !IsNil(o.PvolLdevId) {
 		toSerialize["PvolLdevId"] = o.PvolLdevId
 	}
-	if o.PvolStorageSerial != nil {
+	if !IsNil(o.PvolStorageSerial) {
 		toSerialize["PvolStorageSerial"] = o.PvolStorageSerial
 	}
-	if o.QuorumDiskId != nil {
+	if !IsNil(o.QuorumDiskId) {
 		toSerialize["QuorumDiskId"] = o.QuorumDiskId
 	}
-	if o.ReplicationType != nil {
+	if !IsNil(o.ReplicationType) {
 		toSerialize["ReplicationType"] = o.ReplicationType
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.SvolIoMode != nil {
+	if !IsNil(o.SvolIoMode) {
 		toSerialize["SvolIoMode"] = o.SvolIoMode
 	}
-	if o.SvolJournalId != nil {
+	if !IsNil(o.SvolJournalId) {
 		toSerialize["SvolJournalId"] = o.SvolJournalId
 	}
-	if o.SvolLdevId != nil {
+	if !IsNil(o.SvolLdevId) {
 		toSerialize["SvolLdevId"] = o.SvolLdevId
 	}
-	if o.SvolStorageSerial != nil {
+	if !IsNil(o.SvolStorageSerial) {
 		toSerialize["SvolStorageSerial"] = o.SvolStorageSerial
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageHitachiRemoteReplication) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageHitachiRemoteReplication) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageHitachiRemoteReplicationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -903,14 +955,14 @@ func (o *StorageHitachiRemoteReplication) UnmarshalJSON(bytes []byte) (err error
 		// LDEV number of secondary volume.
 		SvolLdevId *int64 `json:"SvolLdevId,omitempty"`
 		// Serial number of the storage system on the S-VOL.
-		SvolStorageSerial *string                              `json:"SvolStorageSerial,omitempty"`
-		Array             *StorageHitachiArrayRelationship     `json:"Array,omitempty"`
-		RegisteredDevice  *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SvolStorageSerial *string                                     `json:"SvolStorageSerial,omitempty"`
+		Array             NullableStorageHitachiArrayRelationship     `json:"Array,omitempty"`
+		RegisteredDevice  NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageHitachiRemoteReplicationWithoutEmbeddedStruct := StorageHitachiRemoteReplicationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiRemoteReplicationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageHitachiRemoteReplicationWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageHitachiRemoteReplication := _StorageHitachiRemoteReplication{}
 		varStorageHitachiRemoteReplication.ClassId = varStorageHitachiRemoteReplicationWithoutEmbeddedStruct.ClassId
@@ -942,7 +994,7 @@ func (o *StorageHitachiRemoteReplication) UnmarshalJSON(bytes []byte) (err error
 
 	varStorageHitachiRemoteReplication := _StorageHitachiRemoteReplication{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiRemoteReplication)
+	err = json.Unmarshal(data, &varStorageHitachiRemoteReplication)
 	if err == nil {
 		o.MoBaseMo = varStorageHitachiRemoteReplication.MoBaseMo
 	} else {
@@ -951,7 +1003,7 @@ func (o *StorageHitachiRemoteReplication) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConsistencyGroupId")

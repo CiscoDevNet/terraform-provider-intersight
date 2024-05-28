@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the InventoryDnMoBinding type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InventoryDnMoBinding{}
 
 // InventoryDnMoBinding DnMoBinding provides a binding between a Intersight MO and a UCSM MO which has a DN.
 type InventoryDnMoBinding struct {
@@ -29,8 +33,8 @@ type InventoryDnMoBinding struct {
 	// The MO ID of the target MO for this particular Distinguished Name (dn).
 	TargetMoId *string `json:"TargetMoId,omitempty"`
 	// The type of the target MO for this particular Distinguished Name (dn).
-	TargetMoType         *string                              `json:"TargetMoType,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	TargetMoType         *string                                     `json:"TargetMoType,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,7 +113,7 @@ func (o *InventoryDnMoBinding) SetObjectType(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *InventoryDnMoBinding) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *InventoryDnMoBinding) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryDnMoBinding) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -127,7 +131,7 @@ func (o *InventoryDnMoBinding) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *InventoryDnMoBinding) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *InventoryDnMoBinding) SetDn(v string) {
 
 // GetTargetMoId returns the TargetMoId field value if set, zero value otherwise.
 func (o *InventoryDnMoBinding) GetTargetMoId() string {
-	if o == nil || o.TargetMoId == nil {
+	if o == nil || IsNil(o.TargetMoId) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *InventoryDnMoBinding) GetTargetMoId() string {
 // GetTargetMoIdOk returns a tuple with the TargetMoId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryDnMoBinding) GetTargetMoIdOk() (*string, bool) {
-	if o == nil || o.TargetMoId == nil {
+	if o == nil || IsNil(o.TargetMoId) {
 		return nil, false
 	}
 	return o.TargetMoId, true
@@ -159,7 +163,7 @@ func (o *InventoryDnMoBinding) GetTargetMoIdOk() (*string, bool) {
 
 // HasTargetMoId returns a boolean if a field has been set.
 func (o *InventoryDnMoBinding) HasTargetMoId() bool {
-	if o != nil && o.TargetMoId != nil {
+	if o != nil && !IsNil(o.TargetMoId) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *InventoryDnMoBinding) SetTargetMoId(v string) {
 
 // GetTargetMoType returns the TargetMoType field value if set, zero value otherwise.
 func (o *InventoryDnMoBinding) GetTargetMoType() string {
-	if o == nil || o.TargetMoType == nil {
+	if o == nil || IsNil(o.TargetMoType) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *InventoryDnMoBinding) GetTargetMoType() string {
 // GetTargetMoTypeOk returns a tuple with the TargetMoType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryDnMoBinding) GetTargetMoTypeOk() (*string, bool) {
-	if o == nil || o.TargetMoType == nil {
+	if o == nil || IsNil(o.TargetMoType) {
 		return nil, false
 	}
 	return o.TargetMoType, true
@@ -191,7 +195,7 @@ func (o *InventoryDnMoBinding) GetTargetMoTypeOk() (*string, bool) {
 
 // HasTargetMoType returns a boolean if a field has been set.
 func (o *InventoryDnMoBinding) HasTargetMoType() bool {
-	if o != nil && o.TargetMoType != nil {
+	if o != nil && !IsNil(o.TargetMoType) {
 		return true
 	}
 
@@ -203,75 +207,112 @@ func (o *InventoryDnMoBinding) SetTargetMoType(v string) {
 	o.TargetMoType = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InventoryDnMoBinding) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InventoryDnMoBinding) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *InventoryDnMoBinding) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *InventoryDnMoBinding) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *InventoryDnMoBinding) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *InventoryDnMoBinding) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o InventoryDnMoBinding) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o InventoryDnMoBinding) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Dn != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.TargetMoId != nil {
+	if !IsNil(o.TargetMoId) {
 		toSerialize["TargetMoId"] = o.TargetMoId
 	}
-	if o.TargetMoType != nil {
+	if !IsNil(o.TargetMoType) {
 		toSerialize["TargetMoType"] = o.TargetMoType
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *InventoryDnMoBinding) UnmarshalJSON(bytes []byte) (err error) {
+func (o *InventoryDnMoBinding) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type InventoryDnMoBindingWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -282,13 +323,13 @@ func (o *InventoryDnMoBinding) UnmarshalJSON(bytes []byte) (err error) {
 		// The MO ID of the target MO for this particular Distinguished Name (dn).
 		TargetMoId *string `json:"TargetMoId,omitempty"`
 		// The type of the target MO for this particular Distinguished Name (dn).
-		TargetMoType     *string                              `json:"TargetMoType,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		TargetMoType     *string                                     `json:"TargetMoType,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varInventoryDnMoBindingWithoutEmbeddedStruct := InventoryDnMoBindingWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varInventoryDnMoBindingWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varInventoryDnMoBindingWithoutEmbeddedStruct)
 	if err == nil {
 		varInventoryDnMoBinding := _InventoryDnMoBinding{}
 		varInventoryDnMoBinding.ClassId = varInventoryDnMoBindingWithoutEmbeddedStruct.ClassId
@@ -304,7 +345,7 @@ func (o *InventoryDnMoBinding) UnmarshalJSON(bytes []byte) (err error) {
 
 	varInventoryDnMoBinding := _InventoryDnMoBinding{}
 
-	err = json.Unmarshal(bytes, &varInventoryDnMoBinding)
+	err = json.Unmarshal(data, &varInventoryDnMoBinding)
 	if err == nil {
 		o.MoBaseMo = varInventoryDnMoBinding.MoBaseMo
 	} else {
@@ -313,7 +354,7 @@ func (o *InventoryDnMoBinding) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Dn")

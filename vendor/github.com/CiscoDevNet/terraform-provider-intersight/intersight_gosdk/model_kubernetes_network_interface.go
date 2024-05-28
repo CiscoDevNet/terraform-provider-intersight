@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesNetworkInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesNetworkInterface{}
 
 // KubernetesNetworkInterface Abstract Network Interface Configuration.
 type KubernetesNetworkInterface struct {
@@ -119,7 +123,7 @@ func (o *KubernetesNetworkInterface) GetAddresses() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNetworkInterface) GetAddressesOk() ([]string, bool) {
-	if o == nil || o.Addresses == nil {
+	if o == nil || IsNil(o.Addresses) {
 		return nil, false
 	}
 	return o.Addresses, true
@@ -127,7 +131,7 @@ func (o *KubernetesNetworkInterface) GetAddressesOk() ([]string, bool) {
 
 // HasAddresses returns a boolean if a field has been set.
 func (o *KubernetesNetworkInterface) HasAddresses() bool {
-	if o != nil && o.Addresses != nil {
+	if o != nil && IsNil(o.Addresses) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *KubernetesNetworkInterface) SetAddresses(v []string) {
 // GetGateway returns the Gateway field value if set, zero value otherwise.
 // Deprecated
 func (o *KubernetesNetworkInterface) GetGateway() string {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *KubernetesNetworkInterface) GetGateway() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *KubernetesNetworkInterface) GetGatewayOk() (*string, bool) {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		return nil, false
 	}
 	return o.Gateway, true
@@ -161,7 +165,7 @@ func (o *KubernetesNetworkInterface) GetGatewayOk() (*string, bool) {
 
 // HasGateway returns a boolean if a field has been set.
 func (o *KubernetesNetworkInterface) HasGateway() bool {
-	if o != nil && o.Gateway != nil {
+	if o != nil && !IsNil(o.Gateway) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *KubernetesNetworkInterface) GetIpV4Configs() []KubernetesIpV4Config {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNetworkInterface) GetIpV4ConfigsOk() ([]KubernetesIpV4Config, bool) {
-	if o == nil || o.IpV4Configs == nil {
+	if o == nil || IsNil(o.IpV4Configs) {
 		return nil, false
 	}
 	return o.IpV4Configs, true
@@ -195,7 +199,7 @@ func (o *KubernetesNetworkInterface) GetIpV4ConfigsOk() ([]KubernetesIpV4Config,
 
 // HasIpV4Configs returns a boolean if a field has been set.
 func (o *KubernetesNetworkInterface) HasIpV4Configs() bool {
-	if o != nil && o.IpV4Configs != nil {
+	if o != nil && IsNil(o.IpV4Configs) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *KubernetesNetworkInterface) SetIpV4Configs(v []KubernetesIpV4Config) {
 
 // GetMtu returns the Mtu field value if set, zero value otherwise.
 func (o *KubernetesNetworkInterface) GetMtu() int64 {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		var ret int64
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *KubernetesNetworkInterface) GetMtu() int64 {
 // GetMtuOk returns a tuple with the Mtu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNetworkInterface) GetMtuOk() (*int64, bool) {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		return nil, false
 	}
 	return o.Mtu, true
@@ -227,7 +231,7 @@ func (o *KubernetesNetworkInterface) GetMtuOk() (*int64, bool) {
 
 // HasMtu returns a boolean if a field has been set.
 func (o *KubernetesNetworkInterface) HasMtu() bool {
-	if o != nil && o.Mtu != nil {
+	if o != nil && !IsNil(o.Mtu) {
 		return true
 	}
 
@@ -241,7 +245,7 @@ func (o *KubernetesNetworkInterface) SetMtu(v int64) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *KubernetesNetworkInterface) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -251,7 +255,7 @@ func (o *KubernetesNetworkInterface) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNetworkInterface) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -259,7 +263,7 @@ func (o *KubernetesNetworkInterface) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *KubernetesNetworkInterface) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -284,7 +288,7 @@ func (o *KubernetesNetworkInterface) GetRoutes() []KubernetesRoute {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNetworkInterface) GetRoutesOk() ([]KubernetesRoute, bool) {
-	if o == nil || o.Routes == nil {
+	if o == nil || IsNil(o.Routes) {
 		return nil, false
 	}
 	return o.Routes, true
@@ -292,7 +296,7 @@ func (o *KubernetesNetworkInterface) GetRoutesOk() ([]KubernetesRoute, bool) {
 
 // HasRoutes returns a boolean if a field has been set.
 func (o *KubernetesNetworkInterface) HasRoutes() bool {
-	if o != nil && o.Routes != nil {
+	if o != nil && IsNil(o.Routes) {
 		return true
 	}
 
@@ -305,34 +309,38 @@ func (o *KubernetesNetworkInterface) SetRoutes(v []KubernetesRoute) {
 }
 
 func (o KubernetesNetworkInterface) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesNetworkInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Addresses != nil {
 		toSerialize["Addresses"] = o.Addresses
 	}
-	if o.Gateway != nil {
+	if !IsNil(o.Gateway) {
 		toSerialize["Gateway"] = o.Gateway
 	}
 	if o.IpV4Configs != nil {
 		toSerialize["IpV4Configs"] = o.IpV4Configs
 	}
-	if o.Mtu != nil {
+	if !IsNil(o.Mtu) {
 		toSerialize["Mtu"] = o.Mtu
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
 	if o.Routes != nil {
@@ -343,10 +351,32 @@ func (o KubernetesNetworkInterface) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesNetworkInterface) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesNetworkInterface) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesNetworkInterfaceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -366,7 +396,7 @@ func (o *KubernetesNetworkInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesNetworkInterfaceWithoutEmbeddedStruct := KubernetesNetworkInterfaceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesNetworkInterfaceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesNetworkInterfaceWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesNetworkInterface := _KubernetesNetworkInterface{}
 		varKubernetesNetworkInterface.ClassId = varKubernetesNetworkInterfaceWithoutEmbeddedStruct.ClassId
@@ -384,7 +414,7 @@ func (o *KubernetesNetworkInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesNetworkInterface := _KubernetesNetworkInterface{}
 
-	err = json.Unmarshal(bytes, &varKubernetesNetworkInterface)
+	err = json.Unmarshal(data, &varKubernetesNetworkInterface)
 	if err == nil {
 		o.MoBaseComplexType = varKubernetesNetworkInterface.MoBaseComplexType
 	} else {
@@ -393,7 +423,7 @@ func (o *KubernetesNetworkInterface) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Addresses")

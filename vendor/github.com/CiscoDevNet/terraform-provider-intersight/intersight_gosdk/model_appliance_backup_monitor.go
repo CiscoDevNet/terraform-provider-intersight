@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceBackupMonitor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceBackupMonitor{}
 
 // ApplianceBackupMonitor BackupMonitor keeps track of the Appliance's backup history and sets the status to BackupFound, BackupFailed, or  BackupNotFound based on when the last backup was scheduled.
 type ApplianceBackupMonitor struct {
@@ -29,8 +33,8 @@ type ApplianceBackupMonitor struct {
 	// Status of the oldest Intersight Appliance backup cleanup. * `BackupFound` - Backup is successful and complete. * `BackupFailed` - The current Backup failed. * `BackupOutdated` - Backup is old and outdated. * `BackupCleanupFailed` - Cleanup of the old backup has failed.
 	LastBackupRotationStatus *string `json:"LastBackupRotationStatus,omitempty"`
 	// Status of the most recent Intersight Appliance backup. * `BackupFound` - Backup is successful and complete. * `BackupFailed` - The current Backup failed. * `BackupOutdated` - Backup is old and outdated. * `BackupCleanupFailed` - Cleanup of the old backup has failed.
-	LastBackupStatus     *string                 `json:"LastBackupStatus,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	LastBackupStatus     *string                        `json:"LastBackupStatus,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,7 +113,7 @@ func (o *ApplianceBackupMonitor) SetObjectType(v string) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *ApplianceBackupMonitor) GetFilename() string {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -119,7 +123,7 @@ func (o *ApplianceBackupMonitor) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupMonitor) GetFilenameOk() (*string, bool) {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -127,7 +131,7 @@ func (o *ApplianceBackupMonitor) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *ApplianceBackupMonitor) HasFilename() bool {
-	if o != nil && o.Filename != nil {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -141,7 +145,7 @@ func (o *ApplianceBackupMonitor) SetFilename(v string) {
 
 // GetLastBackupRotationStatus returns the LastBackupRotationStatus field value if set, zero value otherwise.
 func (o *ApplianceBackupMonitor) GetLastBackupRotationStatus() string {
-	if o == nil || o.LastBackupRotationStatus == nil {
+	if o == nil || IsNil(o.LastBackupRotationStatus) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *ApplianceBackupMonitor) GetLastBackupRotationStatus() string {
 // GetLastBackupRotationStatusOk returns a tuple with the LastBackupRotationStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupMonitor) GetLastBackupRotationStatusOk() (*string, bool) {
-	if o == nil || o.LastBackupRotationStatus == nil {
+	if o == nil || IsNil(o.LastBackupRotationStatus) {
 		return nil, false
 	}
 	return o.LastBackupRotationStatus, true
@@ -159,7 +163,7 @@ func (o *ApplianceBackupMonitor) GetLastBackupRotationStatusOk() (*string, bool)
 
 // HasLastBackupRotationStatus returns a boolean if a field has been set.
 func (o *ApplianceBackupMonitor) HasLastBackupRotationStatus() bool {
-	if o != nil && o.LastBackupRotationStatus != nil {
+	if o != nil && !IsNil(o.LastBackupRotationStatus) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *ApplianceBackupMonitor) SetLastBackupRotationStatus(v string) {
 
 // GetLastBackupStatus returns the LastBackupStatus field value if set, zero value otherwise.
 func (o *ApplianceBackupMonitor) GetLastBackupStatus() string {
-	if o == nil || o.LastBackupStatus == nil {
+	if o == nil || IsNil(o.LastBackupStatus) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *ApplianceBackupMonitor) GetLastBackupStatus() string {
 // GetLastBackupStatusOk returns a tuple with the LastBackupStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceBackupMonitor) GetLastBackupStatusOk() (*string, bool) {
-	if o == nil || o.LastBackupStatus == nil {
+	if o == nil || IsNil(o.LastBackupStatus) {
 		return nil, false
 	}
 	return o.LastBackupStatus, true
@@ -191,7 +195,7 @@ func (o *ApplianceBackupMonitor) GetLastBackupStatusOk() (*string, bool) {
 
 // HasLastBackupStatus returns a boolean if a field has been set.
 func (o *ApplianceBackupMonitor) HasLastBackupStatus() bool {
-	if o != nil && o.LastBackupStatus != nil {
+	if o != nil && !IsNil(o.LastBackupStatus) {
 		return true
 	}
 
@@ -203,75 +207,112 @@ func (o *ApplianceBackupMonitor) SetLastBackupStatus(v string) {
 	o.LastBackupStatus = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceBackupMonitor) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceBackupMonitor) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ApplianceBackupMonitor) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ApplianceBackupMonitor) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ApplianceBackupMonitor) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ApplianceBackupMonitor) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o ApplianceBackupMonitor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceBackupMonitor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Filename != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Filename) {
 		toSerialize["Filename"] = o.Filename
 	}
-	if o.LastBackupRotationStatus != nil {
+	if !IsNil(o.LastBackupRotationStatus) {
 		toSerialize["LastBackupRotationStatus"] = o.LastBackupRotationStatus
 	}
-	if o.LastBackupStatus != nil {
+	if !IsNil(o.LastBackupStatus) {
 		toSerialize["LastBackupStatus"] = o.LastBackupStatus
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceBackupMonitor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceBackupMonitor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceBackupMonitorWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -282,13 +323,13 @@ func (o *ApplianceBackupMonitor) UnmarshalJSON(bytes []byte) (err error) {
 		// Status of the oldest Intersight Appliance backup cleanup. * `BackupFound` - Backup is successful and complete. * `BackupFailed` - The current Backup failed. * `BackupOutdated` - Backup is old and outdated. * `BackupCleanupFailed` - Cleanup of the old backup has failed.
 		LastBackupRotationStatus *string `json:"LastBackupRotationStatus,omitempty"`
 		// Status of the most recent Intersight Appliance backup. * `BackupFound` - Backup is successful and complete. * `BackupFailed` - The current Backup failed. * `BackupOutdated` - Backup is old and outdated. * `BackupCleanupFailed` - Cleanup of the old backup has failed.
-		LastBackupStatus *string                 `json:"LastBackupStatus,omitempty"`
-		Account          *IamAccountRelationship `json:"Account,omitempty"`
+		LastBackupStatus *string                        `json:"LastBackupStatus,omitempty"`
+		Account          NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varApplianceBackupMonitorWithoutEmbeddedStruct := ApplianceBackupMonitorWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceBackupMonitorWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceBackupMonitorWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceBackupMonitor := _ApplianceBackupMonitor{}
 		varApplianceBackupMonitor.ClassId = varApplianceBackupMonitorWithoutEmbeddedStruct.ClassId
@@ -304,7 +345,7 @@ func (o *ApplianceBackupMonitor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceBackupMonitor := _ApplianceBackupMonitor{}
 
-	err = json.Unmarshal(bytes, &varApplianceBackupMonitor)
+	err = json.Unmarshal(data, &varApplianceBackupMonitor)
 	if err == nil {
 		o.MoBaseMo = varApplianceBackupMonitor.MoBaseMo
 	} else {
@@ -313,7 +354,7 @@ func (o *ApplianceBackupMonitor) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Filename")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryLeafPolGrpDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryLeafPolGrpDetails{}
 
 // NiatelemetryLeafPolGrpDetails Object to capture leaf pol group details.
 type NiatelemetryLeafPolGrpDetails struct {
@@ -41,8 +45,8 @@ type NiatelemetryLeafPolGrpDetails struct {
 	// Name of the APIC site from which this data is being collected.
 	SiteName *string `json:"SiteName,omitempty"`
 	// State of fabric node control pol.
-	State                *string                              `json:"State,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	State                *string                                     `json:"State,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +125,7 @@ func (o *NiatelemetryLeafPolGrpDetails) SetObjectType(v string) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetryLeafPolGrpDetails) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -131,7 +135,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLeafPolGrpDetails) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -139,7 +143,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetryLeafPolGrpDetails) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *NiatelemetryLeafPolGrpDetails) SetDn(v string) {
 
 // GetFabricNodeControlDn returns the FabricNodeControlDn field value if set, zero value otherwise.
 func (o *NiatelemetryLeafPolGrpDetails) GetFabricNodeControlDn() string {
-	if o == nil || o.FabricNodeControlDn == nil {
+	if o == nil || IsNil(o.FabricNodeControlDn) {
 		var ret string
 		return ret
 	}
@@ -163,7 +167,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetFabricNodeControlDn() string {
 // GetFabricNodeControlDnOk returns a tuple with the FabricNodeControlDn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLeafPolGrpDetails) GetFabricNodeControlDnOk() (*string, bool) {
-	if o == nil || o.FabricNodeControlDn == nil {
+	if o == nil || IsNil(o.FabricNodeControlDn) {
 		return nil, false
 	}
 	return o.FabricNodeControlDn, true
@@ -171,7 +175,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetFabricNodeControlDnOk() (*string, boo
 
 // HasFabricNodeControlDn returns a boolean if a field has been set.
 func (o *NiatelemetryLeafPolGrpDetails) HasFabricNodeControlDn() bool {
-	if o != nil && o.FabricNodeControlDn != nil {
+	if o != nil && !IsNil(o.FabricNodeControlDn) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *NiatelemetryLeafPolGrpDetails) SetFabricNodeControlDn(v string) {
 
 // GetFabricNodeControlPolName returns the FabricNodeControlPolName field value if set, zero value otherwise.
 func (o *NiatelemetryLeafPolGrpDetails) GetFabricNodeControlPolName() string {
-	if o == nil || o.FabricNodeControlPolName == nil {
+	if o == nil || IsNil(o.FabricNodeControlPolName) {
 		var ret string
 		return ret
 	}
@@ -195,7 +199,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetFabricNodeControlPolName() string {
 // GetFabricNodeControlPolNameOk returns a tuple with the FabricNodeControlPolName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLeafPolGrpDetails) GetFabricNodeControlPolNameOk() (*string, bool) {
-	if o == nil || o.FabricNodeControlPolName == nil {
+	if o == nil || IsNil(o.FabricNodeControlPolName) {
 		return nil, false
 	}
 	return o.FabricNodeControlPolName, true
@@ -203,7 +207,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetFabricNodeControlPolNameOk() (*string
 
 // HasFabricNodeControlPolName returns a boolean if a field has been set.
 func (o *NiatelemetryLeafPolGrpDetails) HasFabricNodeControlPolName() bool {
-	if o != nil && o.FabricNodeControlPolName != nil {
+	if o != nil && !IsNil(o.FabricNodeControlPolName) {
 		return true
 	}
 
@@ -217,7 +221,7 @@ func (o *NiatelemetryLeafPolGrpDetails) SetFabricNodeControlPolName(v string) {
 
 // GetLeafPolGroupName returns the LeafPolGroupName field value if set, zero value otherwise.
 func (o *NiatelemetryLeafPolGrpDetails) GetLeafPolGroupName() string {
-	if o == nil || o.LeafPolGroupName == nil {
+	if o == nil || IsNil(o.LeafPolGroupName) {
 		var ret string
 		return ret
 	}
@@ -227,7 +231,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetLeafPolGroupName() string {
 // GetLeafPolGroupNameOk returns a tuple with the LeafPolGroupName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLeafPolGrpDetails) GetLeafPolGroupNameOk() (*string, bool) {
-	if o == nil || o.LeafPolGroupName == nil {
+	if o == nil || IsNil(o.LeafPolGroupName) {
 		return nil, false
 	}
 	return o.LeafPolGroupName, true
@@ -235,7 +239,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetLeafPolGroupNameOk() (*string, bool) 
 
 // HasLeafPolGroupName returns a boolean if a field has been set.
 func (o *NiatelemetryLeafPolGrpDetails) HasLeafPolGroupName() bool {
-	if o != nil && o.LeafPolGroupName != nil {
+	if o != nil && !IsNil(o.LeafPolGroupName) {
 		return true
 	}
 
@@ -249,7 +253,7 @@ func (o *NiatelemetryLeafPolGrpDetails) SetLeafPolGroupName(v string) {
 
 // GetLeafProfileName returns the LeafProfileName field value if set, zero value otherwise.
 func (o *NiatelemetryLeafPolGrpDetails) GetLeafProfileName() string {
-	if o == nil || o.LeafProfileName == nil {
+	if o == nil || IsNil(o.LeafProfileName) {
 		var ret string
 		return ret
 	}
@@ -259,7 +263,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetLeafProfileName() string {
 // GetLeafProfileNameOk returns a tuple with the LeafProfileName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLeafPolGrpDetails) GetLeafProfileNameOk() (*string, bool) {
-	if o == nil || o.LeafProfileName == nil {
+	if o == nil || IsNil(o.LeafProfileName) {
 		return nil, false
 	}
 	return o.LeafProfileName, true
@@ -267,7 +271,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetLeafProfileNameOk() (*string, bool) {
 
 // HasLeafProfileName returns a boolean if a field has been set.
 func (o *NiatelemetryLeafPolGrpDetails) HasLeafProfileName() bool {
-	if o != nil && o.LeafProfileName != nil {
+	if o != nil && !IsNil(o.LeafProfileName) {
 		return true
 	}
 
@@ -281,7 +285,7 @@ func (o *NiatelemetryLeafPolGrpDetails) SetLeafProfileName(v string) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryLeafPolGrpDetails) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -291,7 +295,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLeafPolGrpDetails) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -299,7 +303,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryLeafPolGrpDetails) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -313,7 +317,7 @@ func (o *NiatelemetryLeafPolGrpDetails) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryLeafPolGrpDetails) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -323,7 +327,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLeafPolGrpDetails) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -331,7 +335,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryLeafPolGrpDetails) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -345,7 +349,7 @@ func (o *NiatelemetryLeafPolGrpDetails) SetRecordVersion(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryLeafPolGrpDetails) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -355,7 +359,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLeafPolGrpDetails) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -363,7 +367,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryLeafPolGrpDetails) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -377,7 +381,7 @@ func (o *NiatelemetryLeafPolGrpDetails) SetSiteName(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *NiatelemetryLeafPolGrpDetails) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -387,7 +391,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryLeafPolGrpDetails) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -395,7 +399,7 @@ func (o *NiatelemetryLeafPolGrpDetails) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *NiatelemetryLeafPolGrpDetails) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -407,93 +411,130 @@ func (o *NiatelemetryLeafPolGrpDetails) SetState(v string) {
 	o.State = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryLeafPolGrpDetails) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryLeafPolGrpDetails) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryLeafPolGrpDetails) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryLeafPolGrpDetails) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryLeafPolGrpDetails) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryLeafPolGrpDetails) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryLeafPolGrpDetails) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryLeafPolGrpDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Dn != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.FabricNodeControlDn != nil {
+	if !IsNil(o.FabricNodeControlDn) {
 		toSerialize["FabricNodeControlDn"] = o.FabricNodeControlDn
 	}
-	if o.FabricNodeControlPolName != nil {
+	if !IsNil(o.FabricNodeControlPolName) {
 		toSerialize["FabricNodeControlPolName"] = o.FabricNodeControlPolName
 	}
-	if o.LeafPolGroupName != nil {
+	if !IsNil(o.LeafPolGroupName) {
 		toSerialize["LeafPolGroupName"] = o.LeafPolGroupName
 	}
-	if o.LeafProfileName != nil {
+	if !IsNil(o.LeafProfileName) {
 		toSerialize["LeafProfileName"] = o.LeafProfileName
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryLeafPolGrpDetails) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryLeafPolGrpDetails) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryLeafPolGrpDetailsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -516,13 +557,13 @@ func (o *NiatelemetryLeafPolGrpDetails) UnmarshalJSON(bytes []byte) (err error) 
 		// Name of the APIC site from which this data is being collected.
 		SiteName *string `json:"SiteName,omitempty"`
 		// State of fabric node control pol.
-		State            *string                              `json:"State,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		State            *string                                     `json:"State,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryLeafPolGrpDetailsWithoutEmbeddedStruct := NiatelemetryLeafPolGrpDetailsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryLeafPolGrpDetailsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryLeafPolGrpDetailsWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryLeafPolGrpDetails := _NiatelemetryLeafPolGrpDetails{}
 		varNiatelemetryLeafPolGrpDetails.ClassId = varNiatelemetryLeafPolGrpDetailsWithoutEmbeddedStruct.ClassId
@@ -544,7 +585,7 @@ func (o *NiatelemetryLeafPolGrpDetails) UnmarshalJSON(bytes []byte) (err error) 
 
 	varNiatelemetryLeafPolGrpDetails := _NiatelemetryLeafPolGrpDetails{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryLeafPolGrpDetails)
+	err = json.Unmarshal(data, &varNiatelemetryLeafPolGrpDetails)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryLeafPolGrpDetails.MoBaseMo
 	} else {
@@ -553,7 +594,7 @@ func (o *NiatelemetryLeafPolGrpDetails) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Dn")

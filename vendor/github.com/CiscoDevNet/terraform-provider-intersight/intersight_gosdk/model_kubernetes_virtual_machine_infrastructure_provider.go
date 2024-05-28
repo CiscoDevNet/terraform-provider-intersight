@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesVirtualMachineInfrastructureProvider type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesVirtualMachineInfrastructureProvider{}
 
 // KubernetesVirtualMachineInfrastructureProvider Infrastructure backend for providing virtual machines from a target.
 type KubernetesVirtualMachineInfrastructureProvider struct {
@@ -23,11 +27,11 @@ type KubernetesVirtualMachineInfrastructureProvider struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                                                 `json:"ObjectType"`
-	InfraConfig          NullableKubernetesBaseVirtualMachineInfraConfig        `json:"InfraConfig,omitempty"`
-	InfraConfigPolicy    *KubernetesVirtualMachineInfraConfigPolicyRelationship `json:"InfraConfigPolicy,omitempty"`
-	InstanceType         *KubernetesVirtualMachineInstanceTypeRelationship      `json:"InstanceType,omitempty"`
-	Target               *AssetDeviceRegistrationRelationship                   `json:"Target,omitempty"`
+	ObjectType           string                                                        `json:"ObjectType"`
+	InfraConfig          NullableKubernetesBaseVirtualMachineInfraConfig               `json:"InfraConfig,omitempty"`
+	InfraConfigPolicy    NullableKubernetesVirtualMachineInfraConfigPolicyRelationship `json:"InfraConfigPolicy,omitempty"`
+	InstanceType         NullableKubernetesVirtualMachineInstanceTypeRelationship      `json:"InstanceType,omitempty"`
+	Target               NullableAssetDeviceRegistrationRelationship                   `json:"Target,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -106,7 +110,7 @@ func (o *KubernetesVirtualMachineInfrastructureProvider) SetObjectType(v string)
 
 // GetInfraConfig returns the InfraConfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesVirtualMachineInfrastructureProvider) GetInfraConfig() KubernetesBaseVirtualMachineInfraConfig {
-	if o == nil || o.InfraConfig.Get() == nil {
+	if o == nil || IsNil(o.InfraConfig.Get()) {
 		var ret KubernetesBaseVirtualMachineInfraConfig
 		return ret
 	}
@@ -147,153 +151,212 @@ func (o *KubernetesVirtualMachineInfrastructureProvider) UnsetInfraConfig() {
 	o.InfraConfig.Unset()
 }
 
-// GetInfraConfigPolicy returns the InfraConfigPolicy field value if set, zero value otherwise.
+// GetInfraConfigPolicy returns the InfraConfigPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesVirtualMachineInfrastructureProvider) GetInfraConfigPolicy() KubernetesVirtualMachineInfraConfigPolicyRelationship {
-	if o == nil || o.InfraConfigPolicy == nil {
+	if o == nil || IsNil(o.InfraConfigPolicy.Get()) {
 		var ret KubernetesVirtualMachineInfraConfigPolicyRelationship
 		return ret
 	}
-	return *o.InfraConfigPolicy
+	return *o.InfraConfigPolicy.Get()
 }
 
 // GetInfraConfigPolicyOk returns a tuple with the InfraConfigPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVirtualMachineInfrastructureProvider) GetInfraConfigPolicyOk() (*KubernetesVirtualMachineInfraConfigPolicyRelationship, bool) {
-	if o == nil || o.InfraConfigPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InfraConfigPolicy, true
+	return o.InfraConfigPolicy.Get(), o.InfraConfigPolicy.IsSet()
 }
 
 // HasInfraConfigPolicy returns a boolean if a field has been set.
 func (o *KubernetesVirtualMachineInfrastructureProvider) HasInfraConfigPolicy() bool {
-	if o != nil && o.InfraConfigPolicy != nil {
+	if o != nil && o.InfraConfigPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInfraConfigPolicy gets a reference to the given KubernetesVirtualMachineInfraConfigPolicyRelationship and assigns it to the InfraConfigPolicy field.
+// SetInfraConfigPolicy gets a reference to the given NullableKubernetesVirtualMachineInfraConfigPolicyRelationship and assigns it to the InfraConfigPolicy field.
 func (o *KubernetesVirtualMachineInfrastructureProvider) SetInfraConfigPolicy(v KubernetesVirtualMachineInfraConfigPolicyRelationship) {
-	o.InfraConfigPolicy = &v
+	o.InfraConfigPolicy.Set(&v)
 }
 
-// GetInstanceType returns the InstanceType field value if set, zero value otherwise.
+// SetInfraConfigPolicyNil sets the value for InfraConfigPolicy to be an explicit nil
+func (o *KubernetesVirtualMachineInfrastructureProvider) SetInfraConfigPolicyNil() {
+	o.InfraConfigPolicy.Set(nil)
+}
+
+// UnsetInfraConfigPolicy ensures that no value is present for InfraConfigPolicy, not even an explicit nil
+func (o *KubernetesVirtualMachineInfrastructureProvider) UnsetInfraConfigPolicy() {
+	o.InfraConfigPolicy.Unset()
+}
+
+// GetInstanceType returns the InstanceType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesVirtualMachineInfrastructureProvider) GetInstanceType() KubernetesVirtualMachineInstanceTypeRelationship {
-	if o == nil || o.InstanceType == nil {
+	if o == nil || IsNil(o.InstanceType.Get()) {
 		var ret KubernetesVirtualMachineInstanceTypeRelationship
 		return ret
 	}
-	return *o.InstanceType
+	return *o.InstanceType.Get()
 }
 
 // GetInstanceTypeOk returns a tuple with the InstanceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVirtualMachineInfrastructureProvider) GetInstanceTypeOk() (*KubernetesVirtualMachineInstanceTypeRelationship, bool) {
-	if o == nil || o.InstanceType == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InstanceType, true
+	return o.InstanceType.Get(), o.InstanceType.IsSet()
 }
 
 // HasInstanceType returns a boolean if a field has been set.
 func (o *KubernetesVirtualMachineInfrastructureProvider) HasInstanceType() bool {
-	if o != nil && o.InstanceType != nil {
+	if o != nil && o.InstanceType.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInstanceType gets a reference to the given KubernetesVirtualMachineInstanceTypeRelationship and assigns it to the InstanceType field.
+// SetInstanceType gets a reference to the given NullableKubernetesVirtualMachineInstanceTypeRelationship and assigns it to the InstanceType field.
 func (o *KubernetesVirtualMachineInfrastructureProvider) SetInstanceType(v KubernetesVirtualMachineInstanceTypeRelationship) {
-	o.InstanceType = &v
+	o.InstanceType.Set(&v)
 }
 
-// GetTarget returns the Target field value if set, zero value otherwise.
+// SetInstanceTypeNil sets the value for InstanceType to be an explicit nil
+func (o *KubernetesVirtualMachineInfrastructureProvider) SetInstanceTypeNil() {
+	o.InstanceType.Set(nil)
+}
+
+// UnsetInstanceType ensures that no value is present for InstanceType, not even an explicit nil
+func (o *KubernetesVirtualMachineInfrastructureProvider) UnsetInstanceType() {
+	o.InstanceType.Unset()
+}
+
+// GetTarget returns the Target field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesVirtualMachineInfrastructureProvider) GetTarget() AssetDeviceRegistrationRelationship {
-	if o == nil || o.Target == nil {
+	if o == nil || IsNil(o.Target.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.Target
+	return *o.Target.Get()
 }
 
 // GetTargetOk returns a tuple with the Target field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesVirtualMachineInfrastructureProvider) GetTargetOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.Target == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Target, true
+	return o.Target.Get(), o.Target.IsSet()
 }
 
 // HasTarget returns a boolean if a field has been set.
 func (o *KubernetesVirtualMachineInfrastructureProvider) HasTarget() bool {
-	if o != nil && o.Target != nil {
+	if o != nil && o.Target.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTarget gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the Target field.
+// SetTarget gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the Target field.
 func (o *KubernetesVirtualMachineInfrastructureProvider) SetTarget(v AssetDeviceRegistrationRelationship) {
-	o.Target = &v
+	o.Target.Set(&v)
+}
+
+// SetTargetNil sets the value for Target to be an explicit nil
+func (o *KubernetesVirtualMachineInfrastructureProvider) SetTargetNil() {
+	o.Target.Set(nil)
+}
+
+// UnsetTarget ensures that no value is present for Target, not even an explicit nil
+func (o *KubernetesVirtualMachineInfrastructureProvider) UnsetTarget() {
+	o.Target.Unset()
 }
 
 func (o KubernetesVirtualMachineInfrastructureProvider) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesVirtualMachineInfrastructureProvider) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedKubernetesBaseInfrastructureProvider, errKubernetesBaseInfrastructureProvider := json.Marshal(o.KubernetesBaseInfrastructureProvider)
 	if errKubernetesBaseInfrastructureProvider != nil {
-		return []byte{}, errKubernetesBaseInfrastructureProvider
+		return map[string]interface{}{}, errKubernetesBaseInfrastructureProvider
 	}
 	errKubernetesBaseInfrastructureProvider = json.Unmarshal([]byte(serializedKubernetesBaseInfrastructureProvider), &toSerialize)
 	if errKubernetesBaseInfrastructureProvider != nil {
-		return []byte{}, errKubernetesBaseInfrastructureProvider
+		return map[string]interface{}{}, errKubernetesBaseInfrastructureProvider
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.InfraConfig.IsSet() {
 		toSerialize["InfraConfig"] = o.InfraConfig.Get()
 	}
-	if o.InfraConfigPolicy != nil {
-		toSerialize["InfraConfigPolicy"] = o.InfraConfigPolicy
+	if o.InfraConfigPolicy.IsSet() {
+		toSerialize["InfraConfigPolicy"] = o.InfraConfigPolicy.Get()
 	}
-	if o.InstanceType != nil {
-		toSerialize["InstanceType"] = o.InstanceType
+	if o.InstanceType.IsSet() {
+		toSerialize["InstanceType"] = o.InstanceType.Get()
 	}
-	if o.Target != nil {
-		toSerialize["Target"] = o.Target
+	if o.Target.IsSet() {
+		toSerialize["Target"] = o.Target.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesVirtualMachineInfrastructureProvider) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesVirtualMachineInfrastructureProvider) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesVirtualMachineInfrastructureProviderWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType        string                                                 `json:"ObjectType"`
-		InfraConfig       NullableKubernetesBaseVirtualMachineInfraConfig        `json:"InfraConfig,omitempty"`
-		InfraConfigPolicy *KubernetesVirtualMachineInfraConfigPolicyRelationship `json:"InfraConfigPolicy,omitempty"`
-		InstanceType      *KubernetesVirtualMachineInstanceTypeRelationship      `json:"InstanceType,omitempty"`
-		Target            *AssetDeviceRegistrationRelationship                   `json:"Target,omitempty"`
+		ObjectType        string                                                        `json:"ObjectType"`
+		InfraConfig       NullableKubernetesBaseVirtualMachineInfraConfig               `json:"InfraConfig,omitempty"`
+		InfraConfigPolicy NullableKubernetesVirtualMachineInfraConfigPolicyRelationship `json:"InfraConfigPolicy,omitempty"`
+		InstanceType      NullableKubernetesVirtualMachineInstanceTypeRelationship      `json:"InstanceType,omitempty"`
+		Target            NullableAssetDeviceRegistrationRelationship                   `json:"Target,omitempty"`
 	}
 
 	varKubernetesVirtualMachineInfrastructureProviderWithoutEmbeddedStruct := KubernetesVirtualMachineInfrastructureProviderWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesVirtualMachineInfrastructureProviderWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesVirtualMachineInfrastructureProviderWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesVirtualMachineInfrastructureProvider := _KubernetesVirtualMachineInfrastructureProvider{}
 		varKubernetesVirtualMachineInfrastructureProvider.ClassId = varKubernetesVirtualMachineInfrastructureProviderWithoutEmbeddedStruct.ClassId
@@ -309,7 +372,7 @@ func (o *KubernetesVirtualMachineInfrastructureProvider) UnmarshalJSON(bytes []b
 
 	varKubernetesVirtualMachineInfrastructureProvider := _KubernetesVirtualMachineInfrastructureProvider{}
 
-	err = json.Unmarshal(bytes, &varKubernetesVirtualMachineInfrastructureProvider)
+	err = json.Unmarshal(data, &varKubernetesVirtualMachineInfrastructureProvider)
 	if err == nil {
 		o.KubernetesBaseInfrastructureProvider = varKubernetesVirtualMachineInfrastructureProvider.KubernetesBaseInfrastructureProvider
 	} else {
@@ -318,7 +381,7 @@ func (o *KubernetesVirtualMachineInfrastructureProvider) UnmarshalJSON(bytes []b
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "InfraConfig")

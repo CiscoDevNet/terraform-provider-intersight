@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ProcessorUnit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ProcessorUnit{}
 
 // ProcessorUnit The CPU present on a server.
 type ProcessorUnit struct {
@@ -56,13 +60,13 @@ type ProcessorUnit struct {
 	// The CPU stepping of the installed processor.
 	Stepping *string `json:"Stepping,omitempty"`
 	// The temperature of the processor in centigrade.
-	Thermal              *string                              `json:"Thermal,omitempty"`
-	ComputeBlade         *ComputeBladeRelationship            `json:"ComputeBlade,omitempty"`
-	ComputeBoard         *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
-	ComputeRackUnit      *ComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Thermal              *string                                     `json:"Thermal,omitempty"`
+	ComputeBlade         NullableComputeBladeRelationship            `json:"ComputeBlade,omitempty"`
+	ComputeBoard         NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+	ComputeRackUnit      NullableComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +145,7 @@ func (o *ProcessorUnit) SetObjectType(v string) {
 
 // GetArchitecture returns the Architecture field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetArchitecture() string {
-	if o == nil || o.Architecture == nil {
+	if o == nil || IsNil(o.Architecture) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *ProcessorUnit) GetArchitecture() string {
 // GetArchitectureOk returns a tuple with the Architecture field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetArchitectureOk() (*string, bool) {
-	if o == nil || o.Architecture == nil {
+	if o == nil || IsNil(o.Architecture) {
 		return nil, false
 	}
 	return o.Architecture, true
@@ -159,7 +163,7 @@ func (o *ProcessorUnit) GetArchitectureOk() (*string, bool) {
 
 // HasArchitecture returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasArchitecture() bool {
-	if o != nil && o.Architecture != nil {
+	if o != nil && !IsNil(o.Architecture) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *ProcessorUnit) SetArchitecture(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *ProcessorUnit) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -191,7 +195,7 @@ func (o *ProcessorUnit) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -205,7 +209,7 @@ func (o *ProcessorUnit) SetDescription(v string) {
 
 // GetIsPlatformSupported returns the IsPlatformSupported field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetIsPlatformSupported() bool {
-	if o == nil || o.IsPlatformSupported == nil {
+	if o == nil || IsNil(o.IsPlatformSupported) {
 		var ret bool
 		return ret
 	}
@@ -215,7 +219,7 @@ func (o *ProcessorUnit) GetIsPlatformSupported() bool {
 // GetIsPlatformSupportedOk returns a tuple with the IsPlatformSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetIsPlatformSupportedOk() (*bool, bool) {
-	if o == nil || o.IsPlatformSupported == nil {
+	if o == nil || IsNil(o.IsPlatformSupported) {
 		return nil, false
 	}
 	return o.IsPlatformSupported, true
@@ -223,7 +227,7 @@ func (o *ProcessorUnit) GetIsPlatformSupportedOk() (*bool, bool) {
 
 // HasIsPlatformSupported returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasIsPlatformSupported() bool {
-	if o != nil && o.IsPlatformSupported != nil {
+	if o != nil && !IsNil(o.IsPlatformSupported) {
 		return true
 	}
 
@@ -237,7 +241,7 @@ func (o *ProcessorUnit) SetIsPlatformSupported(v bool) {
 
 // GetNumCores returns the NumCores field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetNumCores() int64 {
-	if o == nil || o.NumCores == nil {
+	if o == nil || IsNil(o.NumCores) {
 		var ret int64
 		return ret
 	}
@@ -247,7 +251,7 @@ func (o *ProcessorUnit) GetNumCores() int64 {
 // GetNumCoresOk returns a tuple with the NumCores field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetNumCoresOk() (*int64, bool) {
-	if o == nil || o.NumCores == nil {
+	if o == nil || IsNil(o.NumCores) {
 		return nil, false
 	}
 	return o.NumCores, true
@@ -255,7 +259,7 @@ func (o *ProcessorUnit) GetNumCoresOk() (*int64, bool) {
 
 // HasNumCores returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasNumCores() bool {
-	if o != nil && o.NumCores != nil {
+	if o != nil && !IsNil(o.NumCores) {
 		return true
 	}
 
@@ -269,7 +273,7 @@ func (o *ProcessorUnit) SetNumCores(v int64) {
 
 // GetNumCoresEnabled returns the NumCoresEnabled field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetNumCoresEnabled() string {
-	if o == nil || o.NumCoresEnabled == nil {
+	if o == nil || IsNil(o.NumCoresEnabled) {
 		var ret string
 		return ret
 	}
@@ -279,7 +283,7 @@ func (o *ProcessorUnit) GetNumCoresEnabled() string {
 // GetNumCoresEnabledOk returns a tuple with the NumCoresEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetNumCoresEnabledOk() (*string, bool) {
-	if o == nil || o.NumCoresEnabled == nil {
+	if o == nil || IsNil(o.NumCoresEnabled) {
 		return nil, false
 	}
 	return o.NumCoresEnabled, true
@@ -287,7 +291,7 @@ func (o *ProcessorUnit) GetNumCoresEnabledOk() (*string, bool) {
 
 // HasNumCoresEnabled returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasNumCoresEnabled() bool {
-	if o != nil && o.NumCoresEnabled != nil {
+	if o != nil && !IsNil(o.NumCoresEnabled) {
 		return true
 	}
 
@@ -301,7 +305,7 @@ func (o *ProcessorUnit) SetNumCoresEnabled(v string) {
 
 // GetNumThreads returns the NumThreads field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetNumThreads() string {
-	if o == nil || o.NumThreads == nil {
+	if o == nil || IsNil(o.NumThreads) {
 		var ret string
 		return ret
 	}
@@ -311,7 +315,7 @@ func (o *ProcessorUnit) GetNumThreads() string {
 // GetNumThreadsOk returns a tuple with the NumThreads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetNumThreadsOk() (*string, bool) {
-	if o == nil || o.NumThreads == nil {
+	if o == nil || IsNil(o.NumThreads) {
 		return nil, false
 	}
 	return o.NumThreads, true
@@ -319,7 +323,7 @@ func (o *ProcessorUnit) GetNumThreadsOk() (*string, bool) {
 
 // HasNumThreads returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasNumThreads() bool {
-	if o != nil && o.NumThreads != nil {
+	if o != nil && !IsNil(o.NumThreads) {
 		return true
 	}
 
@@ -333,7 +337,7 @@ func (o *ProcessorUnit) SetNumThreads(v string) {
 
 // GetOperPowerState returns the OperPowerState field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetOperPowerState() string {
-	if o == nil || o.OperPowerState == nil {
+	if o == nil || IsNil(o.OperPowerState) {
 		var ret string
 		return ret
 	}
@@ -343,7 +347,7 @@ func (o *ProcessorUnit) GetOperPowerState() string {
 // GetOperPowerStateOk returns a tuple with the OperPowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetOperPowerStateOk() (*string, bool) {
-	if o == nil || o.OperPowerState == nil {
+	if o == nil || IsNil(o.OperPowerState) {
 		return nil, false
 	}
 	return o.OperPowerState, true
@@ -351,7 +355,7 @@ func (o *ProcessorUnit) GetOperPowerStateOk() (*string, bool) {
 
 // HasOperPowerState returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasOperPowerState() bool {
-	if o != nil && o.OperPowerState != nil {
+	if o != nil && !IsNil(o.OperPowerState) {
 		return true
 	}
 
@@ -376,7 +380,7 @@ func (o *ProcessorUnit) GetOperReason() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProcessorUnit) GetOperReasonOk() ([]string, bool) {
-	if o == nil || o.OperReason == nil {
+	if o == nil || IsNil(o.OperReason) {
 		return nil, false
 	}
 	return o.OperReason, true
@@ -384,7 +388,7 @@ func (o *ProcessorUnit) GetOperReasonOk() ([]string, bool) {
 
 // HasOperReason returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasOperReason() bool {
-	if o != nil && o.OperReason != nil {
+	if o != nil && IsNil(o.OperReason) {
 		return true
 	}
 
@@ -398,7 +402,7 @@ func (o *ProcessorUnit) SetOperReason(v []string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -408,7 +412,7 @@ func (o *ProcessorUnit) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -416,7 +420,7 @@ func (o *ProcessorUnit) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -430,7 +434,7 @@ func (o *ProcessorUnit) SetOperState(v string) {
 
 // GetOperability returns the Operability field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetOperability() string {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		var ret string
 		return ret
 	}
@@ -440,7 +444,7 @@ func (o *ProcessorUnit) GetOperability() string {
 // GetOperabilityOk returns a tuple with the Operability field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetOperabilityOk() (*string, bool) {
-	if o == nil || o.Operability == nil {
+	if o == nil || IsNil(o.Operability) {
 		return nil, false
 	}
 	return o.Operability, true
@@ -448,7 +452,7 @@ func (o *ProcessorUnit) GetOperabilityOk() (*string, bool) {
 
 // HasOperability returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasOperability() bool {
-	if o != nil && o.Operability != nil {
+	if o != nil && !IsNil(o.Operability) {
 		return true
 	}
 
@@ -462,7 +466,7 @@ func (o *ProcessorUnit) SetOperability(v string) {
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetPartNumber() string {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		var ret string
 		return ret
 	}
@@ -472,7 +476,7 @@ func (o *ProcessorUnit) GetPartNumber() string {
 // GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetPartNumberOk() (*string, bool) {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		return nil, false
 	}
 	return o.PartNumber, true
@@ -480,7 +484,7 @@ func (o *ProcessorUnit) GetPartNumberOk() (*string, bool) {
 
 // HasPartNumber returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasPartNumber() bool {
-	if o != nil && o.PartNumber != nil {
+	if o != nil && !IsNil(o.PartNumber) {
 		return true
 	}
 
@@ -494,7 +498,7 @@ func (o *ProcessorUnit) SetPartNumber(v string) {
 
 // GetPid returns the Pid field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetPid() string {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		var ret string
 		return ret
 	}
@@ -504,7 +508,7 @@ func (o *ProcessorUnit) GetPid() string {
 // GetPidOk returns a tuple with the Pid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetPidOk() (*string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -512,7 +516,7 @@ func (o *ProcessorUnit) GetPidOk() (*string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && !IsNil(o.Pid) {
 		return true
 	}
 
@@ -526,7 +530,7 @@ func (o *ProcessorUnit) SetPid(v string) {
 
 // GetProcessorId returns the ProcessorId field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetProcessorId() int64 {
-	if o == nil || o.ProcessorId == nil {
+	if o == nil || IsNil(o.ProcessorId) {
 		var ret int64
 		return ret
 	}
@@ -536,7 +540,7 @@ func (o *ProcessorUnit) GetProcessorId() int64 {
 // GetProcessorIdOk returns a tuple with the ProcessorId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetProcessorIdOk() (*int64, bool) {
-	if o == nil || o.ProcessorId == nil {
+	if o == nil || IsNil(o.ProcessorId) {
 		return nil, false
 	}
 	return o.ProcessorId, true
@@ -544,7 +548,7 @@ func (o *ProcessorUnit) GetProcessorIdOk() (*int64, bool) {
 
 // HasProcessorId returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasProcessorId() bool {
-	if o != nil && o.ProcessorId != nil {
+	if o != nil && !IsNil(o.ProcessorId) {
 		return true
 	}
 
@@ -558,7 +562,7 @@ func (o *ProcessorUnit) SetProcessorId(v int64) {
 
 // GetSocketDesignation returns the SocketDesignation field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetSocketDesignation() string {
-	if o == nil || o.SocketDesignation == nil {
+	if o == nil || IsNil(o.SocketDesignation) {
 		var ret string
 		return ret
 	}
@@ -568,7 +572,7 @@ func (o *ProcessorUnit) GetSocketDesignation() string {
 // GetSocketDesignationOk returns a tuple with the SocketDesignation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetSocketDesignationOk() (*string, bool) {
-	if o == nil || o.SocketDesignation == nil {
+	if o == nil || IsNil(o.SocketDesignation) {
 		return nil, false
 	}
 	return o.SocketDesignation, true
@@ -576,7 +580,7 @@ func (o *ProcessorUnit) GetSocketDesignationOk() (*string, bool) {
 
 // HasSocketDesignation returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasSocketDesignation() bool {
-	if o != nil && o.SocketDesignation != nil {
+	if o != nil && !IsNil(o.SocketDesignation) {
 		return true
 	}
 
@@ -590,7 +594,7 @@ func (o *ProcessorUnit) SetSocketDesignation(v string) {
 
 // GetSpeed returns the Speed field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetSpeed() float32 {
-	if o == nil || o.Speed == nil {
+	if o == nil || IsNil(o.Speed) {
 		var ret float32
 		return ret
 	}
@@ -600,7 +604,7 @@ func (o *ProcessorUnit) GetSpeed() float32 {
 // GetSpeedOk returns a tuple with the Speed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetSpeedOk() (*float32, bool) {
-	if o == nil || o.Speed == nil {
+	if o == nil || IsNil(o.Speed) {
 		return nil, false
 	}
 	return o.Speed, true
@@ -608,7 +612,7 @@ func (o *ProcessorUnit) GetSpeedOk() (*float32, bool) {
 
 // HasSpeed returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasSpeed() bool {
-	if o != nil && o.Speed != nil {
+	if o != nil && !IsNil(o.Speed) {
 		return true
 	}
 
@@ -622,7 +626,7 @@ func (o *ProcessorUnit) SetSpeed(v float32) {
 
 // GetStepping returns the Stepping field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetStepping() string {
-	if o == nil || o.Stepping == nil {
+	if o == nil || IsNil(o.Stepping) {
 		var ret string
 		return ret
 	}
@@ -632,7 +636,7 @@ func (o *ProcessorUnit) GetStepping() string {
 // GetSteppingOk returns a tuple with the Stepping field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetSteppingOk() (*string, bool) {
-	if o == nil || o.Stepping == nil {
+	if o == nil || IsNil(o.Stepping) {
 		return nil, false
 	}
 	return o.Stepping, true
@@ -640,7 +644,7 @@ func (o *ProcessorUnit) GetSteppingOk() (*string, bool) {
 
 // HasStepping returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasStepping() bool {
-	if o != nil && o.Stepping != nil {
+	if o != nil && !IsNil(o.Stepping) {
 		return true
 	}
 
@@ -654,7 +658,7 @@ func (o *ProcessorUnit) SetStepping(v string) {
 
 // GetThermal returns the Thermal field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetThermal() string {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		var ret string
 		return ret
 	}
@@ -664,7 +668,7 @@ func (o *ProcessorUnit) GetThermal() string {
 // GetThermalOk returns a tuple with the Thermal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProcessorUnit) GetThermalOk() (*string, bool) {
-	if o == nil || o.Thermal == nil {
+	if o == nil || IsNil(o.Thermal) {
 		return nil, false
 	}
 	return o.Thermal, true
@@ -672,7 +676,7 @@ func (o *ProcessorUnit) GetThermalOk() (*string, bool) {
 
 // HasThermal returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasThermal() bool {
-	if o != nil && o.Thermal != nil {
+	if o != nil && !IsNil(o.Thermal) {
 		return true
 	}
 
@@ -684,292 +688,384 @@ func (o *ProcessorUnit) SetThermal(v string) {
 	o.Thermal = &v
 }
 
-// GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise.
+// GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ProcessorUnit) GetComputeBlade() ComputeBladeRelationship {
-	if o == nil || o.ComputeBlade == nil {
+	if o == nil || IsNil(o.ComputeBlade.Get()) {
 		var ret ComputeBladeRelationship
 		return ret
 	}
-	return *o.ComputeBlade
+	return *o.ComputeBlade.Get()
 }
 
 // GetComputeBladeOk returns a tuple with the ComputeBlade field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProcessorUnit) GetComputeBladeOk() (*ComputeBladeRelationship, bool) {
-	if o == nil || o.ComputeBlade == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBlade, true
+	return o.ComputeBlade.Get(), o.ComputeBlade.IsSet()
 }
 
 // HasComputeBlade returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasComputeBlade() bool {
-	if o != nil && o.ComputeBlade != nil {
+	if o != nil && o.ComputeBlade.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBlade gets a reference to the given ComputeBladeRelationship and assigns it to the ComputeBlade field.
+// SetComputeBlade gets a reference to the given NullableComputeBladeRelationship and assigns it to the ComputeBlade field.
 func (o *ProcessorUnit) SetComputeBlade(v ComputeBladeRelationship) {
-	o.ComputeBlade = &v
+	o.ComputeBlade.Set(&v)
 }
 
-// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise.
+// SetComputeBladeNil sets the value for ComputeBlade to be an explicit nil
+func (o *ProcessorUnit) SetComputeBladeNil() {
+	o.ComputeBlade.Set(nil)
+}
+
+// UnsetComputeBlade ensures that no value is present for ComputeBlade, not even an explicit nil
+func (o *ProcessorUnit) UnsetComputeBlade() {
+	o.ComputeBlade.Unset()
+}
+
+// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ProcessorUnit) GetComputeBoard() ComputeBoardRelationship {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil || IsNil(o.ComputeBoard.Get()) {
 		var ret ComputeBoardRelationship
 		return ret
 	}
-	return *o.ComputeBoard
+	return *o.ComputeBoard.Get()
 }
 
 // GetComputeBoardOk returns a tuple with the ComputeBoard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProcessorUnit) GetComputeBoardOk() (*ComputeBoardRelationship, bool) {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBoard, true
+	return o.ComputeBoard.Get(), o.ComputeBoard.IsSet()
 }
 
 // HasComputeBoard returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasComputeBoard() bool {
-	if o != nil && o.ComputeBoard != nil {
+	if o != nil && o.ComputeBoard.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBoard gets a reference to the given ComputeBoardRelationship and assigns it to the ComputeBoard field.
+// SetComputeBoard gets a reference to the given NullableComputeBoardRelationship and assigns it to the ComputeBoard field.
 func (o *ProcessorUnit) SetComputeBoard(v ComputeBoardRelationship) {
-	o.ComputeBoard = &v
+	o.ComputeBoard.Set(&v)
 }
 
-// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise.
+// SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+func (o *ProcessorUnit) SetComputeBoardNil() {
+	o.ComputeBoard.Set(nil)
+}
+
+// UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
+func (o *ProcessorUnit) UnsetComputeBoard() {
+	o.ComputeBoard.Unset()
+}
+
+// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ProcessorUnit) GetComputeRackUnit() ComputeRackUnitRelationship {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil || IsNil(o.ComputeRackUnit.Get()) {
 		var ret ComputeRackUnitRelationship
 		return ret
 	}
-	return *o.ComputeRackUnit
+	return *o.ComputeRackUnit.Get()
 }
 
 // GetComputeRackUnitOk returns a tuple with the ComputeRackUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProcessorUnit) GetComputeRackUnitOk() (*ComputeRackUnitRelationship, bool) {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeRackUnit, true
+	return o.ComputeRackUnit.Get(), o.ComputeRackUnit.IsSet()
 }
 
 // HasComputeRackUnit returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasComputeRackUnit() bool {
-	if o != nil && o.ComputeRackUnit != nil {
+	if o != nil && o.ComputeRackUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeRackUnit gets a reference to the given ComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
+// SetComputeRackUnit gets a reference to the given NullableComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
 func (o *ProcessorUnit) SetComputeRackUnit(v ComputeRackUnitRelationship) {
-	o.ComputeRackUnit = &v
+	o.ComputeRackUnit.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetComputeRackUnitNil sets the value for ComputeRackUnit to be an explicit nil
+func (o *ProcessorUnit) SetComputeRackUnitNil() {
+	o.ComputeRackUnit.Set(nil)
+}
+
+// UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
+func (o *ProcessorUnit) UnsetComputeRackUnit() {
+	o.ComputeRackUnit.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ProcessorUnit) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProcessorUnit) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *ProcessorUnit) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *ProcessorUnit) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *ProcessorUnit) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ProcessorUnit) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProcessorUnit) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *ProcessorUnit) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *ProcessorUnit) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *ProcessorUnit) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ProcessorUnit) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProcessorUnit) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ProcessorUnit) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ProcessorUnit) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ProcessorUnit) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ProcessorUnit) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o ProcessorUnit) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ProcessorUnit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Architecture != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Architecture) {
 		toSerialize["Architecture"] = o.Architecture
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.IsPlatformSupported != nil {
+	if !IsNil(o.IsPlatformSupported) {
 		toSerialize["IsPlatformSupported"] = o.IsPlatformSupported
 	}
-	if o.NumCores != nil {
+	if !IsNil(o.NumCores) {
 		toSerialize["NumCores"] = o.NumCores
 	}
-	if o.NumCoresEnabled != nil {
+	if !IsNil(o.NumCoresEnabled) {
 		toSerialize["NumCoresEnabled"] = o.NumCoresEnabled
 	}
-	if o.NumThreads != nil {
+	if !IsNil(o.NumThreads) {
 		toSerialize["NumThreads"] = o.NumThreads
 	}
-	if o.OperPowerState != nil {
+	if !IsNil(o.OperPowerState) {
 		toSerialize["OperPowerState"] = o.OperPowerState
 	}
 	if o.OperReason != nil {
 		toSerialize["OperReason"] = o.OperReason
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.Operability != nil {
+	if !IsNil(o.Operability) {
 		toSerialize["Operability"] = o.Operability
 	}
-	if o.PartNumber != nil {
+	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if o.Pid != nil {
+	if !IsNil(o.Pid) {
 		toSerialize["Pid"] = o.Pid
 	}
-	if o.ProcessorId != nil {
+	if !IsNil(o.ProcessorId) {
 		toSerialize["ProcessorId"] = o.ProcessorId
 	}
-	if o.SocketDesignation != nil {
+	if !IsNil(o.SocketDesignation) {
 		toSerialize["SocketDesignation"] = o.SocketDesignation
 	}
-	if o.Speed != nil {
+	if !IsNil(o.Speed) {
 		toSerialize["Speed"] = o.Speed
 	}
-	if o.Stepping != nil {
+	if !IsNil(o.Stepping) {
 		toSerialize["Stepping"] = o.Stepping
 	}
-	if o.Thermal != nil {
+	if !IsNil(o.Thermal) {
 		toSerialize["Thermal"] = o.Thermal
 	}
-	if o.ComputeBlade != nil {
-		toSerialize["ComputeBlade"] = o.ComputeBlade
+	if o.ComputeBlade.IsSet() {
+		toSerialize["ComputeBlade"] = o.ComputeBlade.Get()
 	}
-	if o.ComputeBoard != nil {
-		toSerialize["ComputeBoard"] = o.ComputeBoard
+	if o.ComputeBoard.IsSet() {
+		toSerialize["ComputeBoard"] = o.ComputeBoard.Get()
 	}
-	if o.ComputeRackUnit != nil {
-		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit
+	if o.ComputeRackUnit.IsSet() {
+		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ProcessorUnit) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ProcessorUnit) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ProcessorUnitWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1007,18 +1103,18 @@ func (o *ProcessorUnit) UnmarshalJSON(bytes []byte) (err error) {
 		// The CPU stepping of the installed processor.
 		Stepping *string `json:"Stepping,omitempty"`
 		// The temperature of the processor in centigrade.
-		Thermal             *string                              `json:"Thermal,omitempty"`
-		ComputeBlade        *ComputeBladeRelationship            `json:"ComputeBlade,omitempty"`
-		ComputeBoard        *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
-		ComputeRackUnit     *ComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		NetworkElement      *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Thermal             *string                                     `json:"Thermal,omitempty"`
+		ComputeBlade        NullableComputeBladeRelationship            `json:"ComputeBlade,omitempty"`
+		ComputeBoard        NullableComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
+		ComputeRackUnit     NullableComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		NetworkElement      NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varProcessorUnitWithoutEmbeddedStruct := ProcessorUnitWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varProcessorUnitWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varProcessorUnitWithoutEmbeddedStruct)
 	if err == nil {
 		varProcessorUnit := _ProcessorUnit{}
 		varProcessorUnit.ClassId = varProcessorUnitWithoutEmbeddedStruct.ClassId
@@ -1053,7 +1149,7 @@ func (o *ProcessorUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	varProcessorUnit := _ProcessorUnit{}
 
-	err = json.Unmarshal(bytes, &varProcessorUnit)
+	err = json.Unmarshal(data, &varProcessorUnit)
 	if err == nil {
 		o.EquipmentBase = varProcessorUnit.EquipmentBase
 	} else {
@@ -1062,7 +1158,7 @@ func (o *ProcessorUnit) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Architecture")

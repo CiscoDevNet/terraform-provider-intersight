@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the HyperflexVolume type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexVolume{}
 
 // HyperflexVolume A HyperFlex Volume entity.
 type HyperflexVolume struct {
@@ -44,9 +48,9 @@ type HyperflexVolume struct {
 	// The mode of the HyperFlex volume. * `Block` - It is a Block virtual disk. * `Filesystem` - It is a File system virtual disk. * `` - Disk mode is either unknown or not supported.
 	VolumeMode *string `json:"VolumeMode,omitempty"`
 	// The type of the HyperFlex volume.
-	VolumeType           *string                                `json:"VolumeType,omitempty"`
-	Cluster              *HyperflexClusterRelationship          `json:"Cluster,omitempty"`
-	StorageContainer     *HyperflexStorageContainerRelationship `json:"StorageContainer,omitempty"`
+	VolumeType           *string                                       `json:"VolumeType,omitempty"`
+	Cluster              NullableHyperflexClusterRelationship          `json:"Cluster,omitempty"`
+	StorageContainer     NullableHyperflexStorageContainerRelationship `json:"StorageContainer,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,7 +129,7 @@ func (o *HyperflexVolume) SetObjectType(v string) {
 
 // GetCapacity returns the Capacity field value if set, zero value otherwise.
 func (o *HyperflexVolume) GetCapacity() int64 {
-	if o == nil || o.Capacity == nil {
+	if o == nil || IsNil(o.Capacity) {
 		var ret int64
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *HyperflexVolume) GetCapacity() int64 {
 // GetCapacityOk returns a tuple with the Capacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVolume) GetCapacityOk() (*int64, bool) {
-	if o == nil || o.Capacity == nil {
+	if o == nil || IsNil(o.Capacity) {
 		return nil, false
 	}
 	return o.Capacity, true
@@ -143,7 +147,7 @@ func (o *HyperflexVolume) GetCapacityOk() (*int64, bool) {
 
 // HasCapacity returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasCapacity() bool {
-	if o != nil && o.Capacity != nil {
+	if o != nil && !IsNil(o.Capacity) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *HyperflexVolume) SetCapacity(v int64) {
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
 func (o *HyperflexVolume) GetClientId() string {
-	if o == nil || o.ClientId == nil {
+	if o == nil || IsNil(o.ClientId) {
 		var ret string
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *HyperflexVolume) GetClientId() string {
 // GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVolume) GetClientIdOk() (*string, bool) {
-	if o == nil || o.ClientId == nil {
+	if o == nil || IsNil(o.ClientId) {
 		return nil, false
 	}
 	return o.ClientId, true
@@ -175,7 +179,7 @@ func (o *HyperflexVolume) GetClientIdOk() (*string, bool) {
 
 // HasClientId returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasClientId() bool {
-	if o != nil && o.ClientId != nil {
+	if o != nil && !IsNil(o.ClientId) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *HyperflexVolume) SetClientId(v string) {
 
 // GetLastModifiedTime returns the LastModifiedTime field value if set, zero value otherwise.
 func (o *HyperflexVolume) GetLastModifiedTime() time.Time {
-	if o == nil || o.LastModifiedTime == nil {
+	if o == nil || IsNil(o.LastModifiedTime) {
 		var ret time.Time
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *HyperflexVolume) GetLastModifiedTime() time.Time {
 // GetLastModifiedTimeOk returns a tuple with the LastModifiedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVolume) GetLastModifiedTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastModifiedTime == nil {
+	if o == nil || IsNil(o.LastModifiedTime) {
 		return nil, false
 	}
 	return o.LastModifiedTime, true
@@ -207,7 +211,7 @@ func (o *HyperflexVolume) GetLastModifiedTimeOk() (*time.Time, bool) {
 
 // HasLastModifiedTime returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasLastModifiedTime() bool {
-	if o != nil && o.LastModifiedTime != nil {
+	if o != nil && !IsNil(o.LastModifiedTime) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *HyperflexVolume) SetLastModifiedTime(v time.Time) {
 
 // GetLunUuid returns the LunUuid field value if set, zero value otherwise.
 func (o *HyperflexVolume) GetLunUuid() string {
-	if o == nil || o.LunUuid == nil {
+	if o == nil || IsNil(o.LunUuid) {
 		var ret string
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *HyperflexVolume) GetLunUuid() string {
 // GetLunUuidOk returns a tuple with the LunUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVolume) GetLunUuidOk() (*string, bool) {
-	if o == nil || o.LunUuid == nil {
+	if o == nil || IsNil(o.LunUuid) {
 		return nil, false
 	}
 	return o.LunUuid, true
@@ -239,7 +243,7 @@ func (o *HyperflexVolume) GetLunUuidOk() (*string, bool) {
 
 // HasLunUuid returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasLunUuid() bool {
-	if o != nil && o.LunUuid != nil {
+	if o != nil && !IsNil(o.LunUuid) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *HyperflexVolume) SetLunUuid(v string) {
 
 // GetSerialNumber returns the SerialNumber field value if set, zero value otherwise.
 func (o *HyperflexVolume) GetSerialNumber() string {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		var ret string
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *HyperflexVolume) GetSerialNumber() string {
 // GetSerialNumberOk returns a tuple with the SerialNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVolume) GetSerialNumberOk() (*string, bool) {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		return nil, false
 	}
 	return o.SerialNumber, true
@@ -271,7 +275,7 @@ func (o *HyperflexVolume) GetSerialNumberOk() (*string, bool) {
 
 // HasSerialNumber returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasSerialNumber() bool {
-	if o != nil && o.SerialNumber != nil {
+	if o != nil && !IsNil(o.SerialNumber) {
 		return true
 	}
 
@@ -285,7 +289,7 @@ func (o *HyperflexVolume) SetSerialNumber(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *HyperflexVolume) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -295,7 +299,7 @@ func (o *HyperflexVolume) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVolume) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -303,7 +307,7 @@ func (o *HyperflexVolume) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -317,7 +321,7 @@ func (o *HyperflexVolume) SetUuid(v string) {
 
 // GetVolumeAccessMode returns the VolumeAccessMode field value if set, zero value otherwise.
 func (o *HyperflexVolume) GetVolumeAccessMode() string {
-	if o == nil || o.VolumeAccessMode == nil {
+	if o == nil || IsNil(o.VolumeAccessMode) {
 		var ret string
 		return ret
 	}
@@ -327,7 +331,7 @@ func (o *HyperflexVolume) GetVolumeAccessMode() string {
 // GetVolumeAccessModeOk returns a tuple with the VolumeAccessMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVolume) GetVolumeAccessModeOk() (*string, bool) {
-	if o == nil || o.VolumeAccessMode == nil {
+	if o == nil || IsNil(o.VolumeAccessMode) {
 		return nil, false
 	}
 	return o.VolumeAccessMode, true
@@ -335,7 +339,7 @@ func (o *HyperflexVolume) GetVolumeAccessModeOk() (*string, bool) {
 
 // HasVolumeAccessMode returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasVolumeAccessMode() bool {
-	if o != nil && o.VolumeAccessMode != nil {
+	if o != nil && !IsNil(o.VolumeAccessMode) {
 		return true
 	}
 
@@ -349,7 +353,7 @@ func (o *HyperflexVolume) SetVolumeAccessMode(v string) {
 
 // GetVolumeCreateTime returns the VolumeCreateTime field value if set, zero value otherwise.
 func (o *HyperflexVolume) GetVolumeCreateTime() time.Time {
-	if o == nil || o.VolumeCreateTime == nil {
+	if o == nil || IsNil(o.VolumeCreateTime) {
 		var ret time.Time
 		return ret
 	}
@@ -359,7 +363,7 @@ func (o *HyperflexVolume) GetVolumeCreateTime() time.Time {
 // GetVolumeCreateTimeOk returns a tuple with the VolumeCreateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVolume) GetVolumeCreateTimeOk() (*time.Time, bool) {
-	if o == nil || o.VolumeCreateTime == nil {
+	if o == nil || IsNil(o.VolumeCreateTime) {
 		return nil, false
 	}
 	return o.VolumeCreateTime, true
@@ -367,7 +371,7 @@ func (o *HyperflexVolume) GetVolumeCreateTimeOk() (*time.Time, bool) {
 
 // HasVolumeCreateTime returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasVolumeCreateTime() bool {
-	if o != nil && o.VolumeCreateTime != nil {
+	if o != nil && !IsNil(o.VolumeCreateTime) {
 		return true
 	}
 
@@ -381,7 +385,7 @@ func (o *HyperflexVolume) SetVolumeCreateTime(v time.Time) {
 
 // GetVolumeMode returns the VolumeMode field value if set, zero value otherwise.
 func (o *HyperflexVolume) GetVolumeMode() string {
-	if o == nil || o.VolumeMode == nil {
+	if o == nil || IsNil(o.VolumeMode) {
 		var ret string
 		return ret
 	}
@@ -391,7 +395,7 @@ func (o *HyperflexVolume) GetVolumeMode() string {
 // GetVolumeModeOk returns a tuple with the VolumeMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVolume) GetVolumeModeOk() (*string, bool) {
-	if o == nil || o.VolumeMode == nil {
+	if o == nil || IsNil(o.VolumeMode) {
 		return nil, false
 	}
 	return o.VolumeMode, true
@@ -399,7 +403,7 @@ func (o *HyperflexVolume) GetVolumeModeOk() (*string, bool) {
 
 // HasVolumeMode returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasVolumeMode() bool {
-	if o != nil && o.VolumeMode != nil {
+	if o != nil && !IsNil(o.VolumeMode) {
 		return true
 	}
 
@@ -413,7 +417,7 @@ func (o *HyperflexVolume) SetVolumeMode(v string) {
 
 // GetVolumeType returns the VolumeType field value if set, zero value otherwise.
 func (o *HyperflexVolume) GetVolumeType() string {
-	if o == nil || o.VolumeType == nil {
+	if o == nil || IsNil(o.VolumeType) {
 		var ret string
 		return ret
 	}
@@ -423,7 +427,7 @@ func (o *HyperflexVolume) GetVolumeType() string {
 // GetVolumeTypeOk returns a tuple with the VolumeType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVolume) GetVolumeTypeOk() (*string, bool) {
-	if o == nil || o.VolumeType == nil {
+	if o == nil || IsNil(o.VolumeType) {
 		return nil, false
 	}
 	return o.VolumeType, true
@@ -431,7 +435,7 @@ func (o *HyperflexVolume) GetVolumeTypeOk() (*string, bool) {
 
 // HasVolumeType returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasVolumeType() bool {
-	if o != nil && o.VolumeType != nil {
+	if o != nil && !IsNil(o.VolumeType) {
 		return true
 	}
 
@@ -443,131 +447,179 @@ func (o *HyperflexVolume) SetVolumeType(v string) {
 	o.VolumeType = &v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVolume) GetCluster() HyperflexClusterRelationship {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.Cluster
+	return *o.Cluster.Get()
 }
 
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVolume) GetClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return o.Cluster.Get(), o.Cluster.IsSet()
 }
 
 // HasCluster returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && o.Cluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the Cluster field.
+// SetCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the Cluster field.
 func (o *HyperflexVolume) SetCluster(v HyperflexClusterRelationship) {
-	o.Cluster = &v
+	o.Cluster.Set(&v)
 }
 
-// GetStorageContainer returns the StorageContainer field value if set, zero value otherwise.
+// SetClusterNil sets the value for Cluster to be an explicit nil
+func (o *HyperflexVolume) SetClusterNil() {
+	o.Cluster.Set(nil)
+}
+
+// UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
+func (o *HyperflexVolume) UnsetCluster() {
+	o.Cluster.Unset()
+}
+
+// GetStorageContainer returns the StorageContainer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexVolume) GetStorageContainer() HyperflexStorageContainerRelationship {
-	if o == nil || o.StorageContainer == nil {
+	if o == nil || IsNil(o.StorageContainer.Get()) {
 		var ret HyperflexStorageContainerRelationship
 		return ret
 	}
-	return *o.StorageContainer
+	return *o.StorageContainer.Get()
 }
 
 // GetStorageContainerOk returns a tuple with the StorageContainer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexVolume) GetStorageContainerOk() (*HyperflexStorageContainerRelationship, bool) {
-	if o == nil || o.StorageContainer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageContainer, true
+	return o.StorageContainer.Get(), o.StorageContainer.IsSet()
 }
 
 // HasStorageContainer returns a boolean if a field has been set.
 func (o *HyperflexVolume) HasStorageContainer() bool {
-	if o != nil && o.StorageContainer != nil {
+	if o != nil && o.StorageContainer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageContainer gets a reference to the given HyperflexStorageContainerRelationship and assigns it to the StorageContainer field.
+// SetStorageContainer gets a reference to the given NullableHyperflexStorageContainerRelationship and assigns it to the StorageContainer field.
 func (o *HyperflexVolume) SetStorageContainer(v HyperflexStorageContainerRelationship) {
-	o.StorageContainer = &v
+	o.StorageContainer.Set(&v)
+}
+
+// SetStorageContainerNil sets the value for StorageContainer to be an explicit nil
+func (o *HyperflexVolume) SetStorageContainerNil() {
+	o.StorageContainer.Set(nil)
+}
+
+// UnsetStorageContainer ensures that no value is present for StorageContainer, not even an explicit nil
+func (o *HyperflexVolume) UnsetStorageContainer() {
+	o.StorageContainer.Unset()
 }
 
 func (o HyperflexVolume) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexVolume) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseVolume, errStorageBaseVolume := json.Marshal(o.StorageBaseVolume)
 	if errStorageBaseVolume != nil {
-		return []byte{}, errStorageBaseVolume
+		return map[string]interface{}{}, errStorageBaseVolume
 	}
 	errStorageBaseVolume = json.Unmarshal([]byte(serializedStorageBaseVolume), &toSerialize)
 	if errStorageBaseVolume != nil {
-		return []byte{}, errStorageBaseVolume
+		return map[string]interface{}{}, errStorageBaseVolume
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Capacity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Capacity) {
 		toSerialize["Capacity"] = o.Capacity
 	}
-	if o.ClientId != nil {
+	if !IsNil(o.ClientId) {
 		toSerialize["ClientId"] = o.ClientId
 	}
-	if o.LastModifiedTime != nil {
+	if !IsNil(o.LastModifiedTime) {
 		toSerialize["LastModifiedTime"] = o.LastModifiedTime
 	}
-	if o.LunUuid != nil {
+	if !IsNil(o.LunUuid) {
 		toSerialize["LunUuid"] = o.LunUuid
 	}
-	if o.SerialNumber != nil {
+	if !IsNil(o.SerialNumber) {
 		toSerialize["SerialNumber"] = o.SerialNumber
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.VolumeAccessMode != nil {
+	if !IsNil(o.VolumeAccessMode) {
 		toSerialize["VolumeAccessMode"] = o.VolumeAccessMode
 	}
-	if o.VolumeCreateTime != nil {
+	if !IsNil(o.VolumeCreateTime) {
 		toSerialize["VolumeCreateTime"] = o.VolumeCreateTime
 	}
-	if o.VolumeMode != nil {
+	if !IsNil(o.VolumeMode) {
 		toSerialize["VolumeMode"] = o.VolumeMode
 	}
-	if o.VolumeType != nil {
+	if !IsNil(o.VolumeType) {
 		toSerialize["VolumeType"] = o.VolumeType
 	}
-	if o.Cluster != nil {
-		toSerialize["Cluster"] = o.Cluster
+	if o.Cluster.IsSet() {
+		toSerialize["Cluster"] = o.Cluster.Get()
 	}
-	if o.StorageContainer != nil {
-		toSerialize["StorageContainer"] = o.StorageContainer
+	if o.StorageContainer.IsSet() {
+		toSerialize["StorageContainer"] = o.StorageContainer.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexVolume) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexVolumeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -592,14 +644,14 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 		// The mode of the HyperFlex volume. * `Block` - It is a Block virtual disk. * `Filesystem` - It is a File system virtual disk. * `` - Disk mode is either unknown or not supported.
 		VolumeMode *string `json:"VolumeMode,omitempty"`
 		// The type of the HyperFlex volume.
-		VolumeType       *string                                `json:"VolumeType,omitempty"`
-		Cluster          *HyperflexClusterRelationship          `json:"Cluster,omitempty"`
-		StorageContainer *HyperflexStorageContainerRelationship `json:"StorageContainer,omitempty"`
+		VolumeType       *string                                       `json:"VolumeType,omitempty"`
+		Cluster          NullableHyperflexClusterRelationship          `json:"Cluster,omitempty"`
+		StorageContainer NullableHyperflexStorageContainerRelationship `json:"StorageContainer,omitempty"`
 	}
 
 	varHyperflexVolumeWithoutEmbeddedStruct := HyperflexVolumeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexVolumeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexVolumeWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexVolume := _HyperflexVolume{}
 		varHyperflexVolume.ClassId = varHyperflexVolumeWithoutEmbeddedStruct.ClassId
@@ -623,7 +675,7 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexVolume := _HyperflexVolume{}
 
-	err = json.Unmarshal(bytes, &varHyperflexVolume)
+	err = json.Unmarshal(data, &varHyperflexVolume)
 	if err == nil {
 		o.StorageBaseVolume = varHyperflexVolume.StorageBaseVolume
 	} else {
@@ -632,7 +684,7 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Capacity")

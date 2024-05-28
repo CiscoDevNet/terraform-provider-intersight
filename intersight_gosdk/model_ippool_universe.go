@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IppoolUniverse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IppoolUniverse{}
 
 // IppoolUniverse Universe represents a book keeping container to keep track of all IP Addresses for a given VRF.
 type IppoolUniverse struct {
@@ -23,8 +27,8 @@ type IppoolUniverse struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string              `json:"ObjectType"`
-	Vrf                  *VrfVrfRelationship `json:"Vrf,omitempty"`
+	ObjectType           string                     `json:"ObjectType"`
+	Vrf                  NullableVrfVrfRelationship `json:"Vrf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,77 +105,114 @@ func (o *IppoolUniverse) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetVrf returns the Vrf field value if set, zero value otherwise.
+// GetVrf returns the Vrf field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolUniverse) GetVrf() VrfVrfRelationship {
-	if o == nil || o.Vrf == nil {
+	if o == nil || IsNil(o.Vrf.Get()) {
 		var ret VrfVrfRelationship
 		return ret
 	}
-	return *o.Vrf
+	return *o.Vrf.Get()
 }
 
 // GetVrfOk returns a tuple with the Vrf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolUniverse) GetVrfOk() (*VrfVrfRelationship, bool) {
-	if o == nil || o.Vrf == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Vrf, true
+	return o.Vrf.Get(), o.Vrf.IsSet()
 }
 
 // HasVrf returns a boolean if a field has been set.
 func (o *IppoolUniverse) HasVrf() bool {
-	if o != nil && o.Vrf != nil {
+	if o != nil && o.Vrf.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVrf gets a reference to the given VrfVrfRelationship and assigns it to the Vrf field.
+// SetVrf gets a reference to the given NullableVrfVrfRelationship and assigns it to the Vrf field.
 func (o *IppoolUniverse) SetVrf(v VrfVrfRelationship) {
-	o.Vrf = &v
+	o.Vrf.Set(&v)
+}
+
+// SetVrfNil sets the value for Vrf to be an explicit nil
+func (o *IppoolUniverse) SetVrfNil() {
+	o.Vrf.Set(nil)
+}
+
+// UnsetVrf ensures that no value is present for Vrf, not even an explicit nil
+func (o *IppoolUniverse) UnsetVrf() {
+	o.Vrf.Unset()
 }
 
 func (o IppoolUniverse) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IppoolUniverse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Vrf != nil {
-		toSerialize["Vrf"] = o.Vrf
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.Vrf.IsSet() {
+		toSerialize["Vrf"] = o.Vrf.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IppoolUniverse) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IppoolUniverse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IppoolUniverseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string              `json:"ObjectType"`
-		Vrf        *VrfVrfRelationship `json:"Vrf,omitempty"`
+		ObjectType string                     `json:"ObjectType"`
+		Vrf        NullableVrfVrfRelationship `json:"Vrf,omitempty"`
 	}
 
 	varIppoolUniverseWithoutEmbeddedStruct := IppoolUniverseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIppoolUniverseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIppoolUniverseWithoutEmbeddedStruct)
 	if err == nil {
 		varIppoolUniverse := _IppoolUniverse{}
 		varIppoolUniverse.ClassId = varIppoolUniverseWithoutEmbeddedStruct.ClassId
@@ -184,7 +225,7 @@ func (o *IppoolUniverse) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIppoolUniverse := _IppoolUniverse{}
 
-	err = json.Unmarshal(bytes, &varIppoolUniverse)
+	err = json.Unmarshal(data, &varIppoolUniverse)
 	if err == nil {
 		o.MoBaseMo = varIppoolUniverse.MoBaseMo
 	} else {
@@ -193,7 +234,7 @@ func (o *IppoolUniverse) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Vrf")

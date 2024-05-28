@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PartnerintegrationLogs type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PartnerintegrationLogs{}
 
 // PartnerintegrationLogs Logs from the build operation.
 type PartnerintegrationLogs struct {
@@ -25,10 +29,10 @@ type PartnerintegrationLogs struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Stage in the build process these logs belong to. * `None` - Default value for the log stage. * `Backend` - Logs corresponding to backend build. * `Ui` - Logs corresponding to ui build stage. * `Apidocs` - Logs corresponding to the apidocs build stage.
-	Stage                *string                                  `json:"Stage,omitempty"`
-	Stderr               []string                                 `json:"Stderr,omitempty"`
-	Stdout               []string                                 `json:"Stdout,omitempty"`
-	Inventory            *PartnerintegrationInventoryRelationship `json:"Inventory,omitempty"`
+	Stage                *string                                         `json:"Stage,omitempty"`
+	Stderr               []string                                        `json:"Stderr,omitempty"`
+	Stdout               []string                                        `json:"Stdout,omitempty"`
+	Inventory            NullablePartnerintegrationInventoryRelationship `json:"Inventory,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,7 +111,7 @@ func (o *PartnerintegrationLogs) SetObjectType(v string) {
 
 // GetStage returns the Stage field value if set, zero value otherwise.
 func (o *PartnerintegrationLogs) GetStage() string {
-	if o == nil || o.Stage == nil {
+	if o == nil || IsNil(o.Stage) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *PartnerintegrationLogs) GetStage() string {
 // GetStageOk returns a tuple with the Stage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PartnerintegrationLogs) GetStageOk() (*string, bool) {
-	if o == nil || o.Stage == nil {
+	if o == nil || IsNil(o.Stage) {
 		return nil, false
 	}
 	return o.Stage, true
@@ -125,7 +129,7 @@ func (o *PartnerintegrationLogs) GetStageOk() (*string, bool) {
 
 // HasStage returns a boolean if a field has been set.
 func (o *PartnerintegrationLogs) HasStage() bool {
-	if o != nil && o.Stage != nil {
+	if o != nil && !IsNil(o.Stage) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *PartnerintegrationLogs) GetStderr() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerintegrationLogs) GetStderrOk() ([]string, bool) {
-	if o == nil || o.Stderr == nil {
+	if o == nil || IsNil(o.Stderr) {
 		return nil, false
 	}
 	return o.Stderr, true
@@ -158,7 +162,7 @@ func (o *PartnerintegrationLogs) GetStderrOk() ([]string, bool) {
 
 // HasStderr returns a boolean if a field has been set.
 func (o *PartnerintegrationLogs) HasStderr() bool {
-	if o != nil && o.Stderr != nil {
+	if o != nil && IsNil(o.Stderr) {
 		return true
 	}
 
@@ -183,7 +187,7 @@ func (o *PartnerintegrationLogs) GetStdout() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerintegrationLogs) GetStdoutOk() ([]string, bool) {
-	if o == nil || o.Stdout == nil {
+	if o == nil || IsNil(o.Stdout) {
 		return nil, false
 	}
 	return o.Stdout, true
@@ -191,7 +195,7 @@ func (o *PartnerintegrationLogs) GetStdoutOk() ([]string, bool) {
 
 // HasStdout returns a boolean if a field has been set.
 func (o *PartnerintegrationLogs) HasStdout() bool {
-	if o != nil && o.Stdout != nil {
+	if o != nil && IsNil(o.Stdout) {
 		return true
 	}
 
@@ -203,55 +207,70 @@ func (o *PartnerintegrationLogs) SetStdout(v []string) {
 	o.Stdout = v
 }
 
-// GetInventory returns the Inventory field value if set, zero value otherwise.
+// GetInventory returns the Inventory field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PartnerintegrationLogs) GetInventory() PartnerintegrationInventoryRelationship {
-	if o == nil || o.Inventory == nil {
+	if o == nil || IsNil(o.Inventory.Get()) {
 		var ret PartnerintegrationInventoryRelationship
 		return ret
 	}
-	return *o.Inventory
+	return *o.Inventory.Get()
 }
 
 // GetInventoryOk returns a tuple with the Inventory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerintegrationLogs) GetInventoryOk() (*PartnerintegrationInventoryRelationship, bool) {
-	if o == nil || o.Inventory == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Inventory, true
+	return o.Inventory.Get(), o.Inventory.IsSet()
 }
 
 // HasInventory returns a boolean if a field has been set.
 func (o *PartnerintegrationLogs) HasInventory() bool {
-	if o != nil && o.Inventory != nil {
+	if o != nil && o.Inventory.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventory gets a reference to the given PartnerintegrationInventoryRelationship and assigns it to the Inventory field.
+// SetInventory gets a reference to the given NullablePartnerintegrationInventoryRelationship and assigns it to the Inventory field.
 func (o *PartnerintegrationLogs) SetInventory(v PartnerintegrationInventoryRelationship) {
-	o.Inventory = &v
+	o.Inventory.Set(&v)
+}
+
+// SetInventoryNil sets the value for Inventory to be an explicit nil
+func (o *PartnerintegrationLogs) SetInventoryNil() {
+	o.Inventory.Set(nil)
+}
+
+// UnsetInventory ensures that no value is present for Inventory, not even an explicit nil
+func (o *PartnerintegrationLogs) UnsetInventory() {
+	o.Inventory.Unset()
 }
 
 func (o PartnerintegrationLogs) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PartnerintegrationLogs) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Stage != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Stage) {
 		toSerialize["Stage"] = o.Stage
 	}
 	if o.Stderr != nil {
@@ -260,33 +279,55 @@ func (o PartnerintegrationLogs) MarshalJSON() ([]byte, error) {
 	if o.Stdout != nil {
 		toSerialize["Stdout"] = o.Stdout
 	}
-	if o.Inventory != nil {
-		toSerialize["Inventory"] = o.Inventory
+	if o.Inventory.IsSet() {
+		toSerialize["Inventory"] = o.Inventory.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PartnerintegrationLogs) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PartnerintegrationLogs) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PartnerintegrationLogsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Stage in the build process these logs belong to. * `None` - Default value for the log stage. * `Backend` - Logs corresponding to backend build. * `Ui` - Logs corresponding to ui build stage. * `Apidocs` - Logs corresponding to the apidocs build stage.
-		Stage     *string                                  `json:"Stage,omitempty"`
-		Stderr    []string                                 `json:"Stderr,omitempty"`
-		Stdout    []string                                 `json:"Stdout,omitempty"`
-		Inventory *PartnerintegrationInventoryRelationship `json:"Inventory,omitempty"`
+		Stage     *string                                         `json:"Stage,omitempty"`
+		Stderr    []string                                        `json:"Stderr,omitempty"`
+		Stdout    []string                                        `json:"Stdout,omitempty"`
+		Inventory NullablePartnerintegrationInventoryRelationship `json:"Inventory,omitempty"`
 	}
 
 	varPartnerintegrationLogsWithoutEmbeddedStruct := PartnerintegrationLogsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPartnerintegrationLogsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPartnerintegrationLogsWithoutEmbeddedStruct)
 	if err == nil {
 		varPartnerintegrationLogs := _PartnerintegrationLogs{}
 		varPartnerintegrationLogs.ClassId = varPartnerintegrationLogsWithoutEmbeddedStruct.ClassId
@@ -302,7 +343,7 @@ func (o *PartnerintegrationLogs) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPartnerintegrationLogs := _PartnerintegrationLogs{}
 
-	err = json.Unmarshal(bytes, &varPartnerintegrationLogs)
+	err = json.Unmarshal(data, &varPartnerintegrationLogs)
 	if err == nil {
 		o.MoBaseMo = varPartnerintegrationLogs.MoBaseMo
 	} else {
@@ -311,7 +352,7 @@ func (o *PartnerintegrationLogs) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Stage")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricPortChannelRole type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricPortChannelRole{}
 
 // FabricPortChannelRole Configuration object sent by user to apply on a port-channel.
 type FabricPortChannelRole struct {
@@ -25,9 +29,9 @@ type FabricPortChannelRole struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
 	// Unique Identifier of the port-channel, local to this switch.
-	PcId                 *int64                        `json:"PcId,omitempty"`
-	Ports                []FabricPortIdentifier        `json:"Ports,omitempty"`
-	PortPolicy           *FabricPortPolicyRelationship `json:"PortPolicy,omitempty"`
+	PcId                 *int64                               `json:"PcId,omitempty"`
+	Ports                []FabricPortIdentifier               `json:"Ports,omitempty"`
+	PortPolicy           NullableFabricPortPolicyRelationship `json:"PortPolicy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -102,7 +106,7 @@ func (o *FabricPortChannelRole) SetObjectType(v string) {
 
 // GetPcId returns the PcId field value if set, zero value otherwise.
 func (o *FabricPortChannelRole) GetPcId() int64 {
-	if o == nil || o.PcId == nil {
+	if o == nil || IsNil(o.PcId) {
 		var ret int64
 		return ret
 	}
@@ -112,7 +116,7 @@ func (o *FabricPortChannelRole) GetPcId() int64 {
 // GetPcIdOk returns a tuple with the PcId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricPortChannelRole) GetPcIdOk() (*int64, bool) {
-	if o == nil || o.PcId == nil {
+	if o == nil || IsNil(o.PcId) {
 		return nil, false
 	}
 	return o.PcId, true
@@ -120,7 +124,7 @@ func (o *FabricPortChannelRole) GetPcIdOk() (*int64, bool) {
 
 // HasPcId returns a boolean if a field has been set.
 func (o *FabricPortChannelRole) HasPcId() bool {
-	if o != nil && o.PcId != nil {
+	if o != nil && !IsNil(o.PcId) {
 		return true
 	}
 
@@ -145,7 +149,7 @@ func (o *FabricPortChannelRole) GetPorts() []FabricPortIdentifier {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricPortChannelRole) GetPortsOk() ([]FabricPortIdentifier, bool) {
-	if o == nil || o.Ports == nil {
+	if o == nil || IsNil(o.Ports) {
 		return nil, false
 	}
 	return o.Ports, true
@@ -153,7 +157,7 @@ func (o *FabricPortChannelRole) GetPortsOk() ([]FabricPortIdentifier, bool) {
 
 // HasPorts returns a boolean if a field has been set.
 func (o *FabricPortChannelRole) HasPorts() bool {
-	if o != nil && o.Ports != nil {
+	if o != nil && IsNil(o.Ports) {
 		return true
 	}
 
@@ -165,86 +169,123 @@ func (o *FabricPortChannelRole) SetPorts(v []FabricPortIdentifier) {
 	o.Ports = v
 }
 
-// GetPortPolicy returns the PortPolicy field value if set, zero value otherwise.
+// GetPortPolicy returns the PortPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricPortChannelRole) GetPortPolicy() FabricPortPolicyRelationship {
-	if o == nil || o.PortPolicy == nil {
+	if o == nil || IsNil(o.PortPolicy.Get()) {
 		var ret FabricPortPolicyRelationship
 		return ret
 	}
-	return *o.PortPolicy
+	return *o.PortPolicy.Get()
 }
 
 // GetPortPolicyOk returns a tuple with the PortPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricPortChannelRole) GetPortPolicyOk() (*FabricPortPolicyRelationship, bool) {
-	if o == nil || o.PortPolicy == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PortPolicy, true
+	return o.PortPolicy.Get(), o.PortPolicy.IsSet()
 }
 
 // HasPortPolicy returns a boolean if a field has been set.
 func (o *FabricPortChannelRole) HasPortPolicy() bool {
-	if o != nil && o.PortPolicy != nil {
+	if o != nil && o.PortPolicy.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPortPolicy gets a reference to the given FabricPortPolicyRelationship and assigns it to the PortPolicy field.
+// SetPortPolicy gets a reference to the given NullableFabricPortPolicyRelationship and assigns it to the PortPolicy field.
 func (o *FabricPortChannelRole) SetPortPolicy(v FabricPortPolicyRelationship) {
-	o.PortPolicy = &v
+	o.PortPolicy.Set(&v)
+}
+
+// SetPortPolicyNil sets the value for PortPolicy to be an explicit nil
+func (o *FabricPortChannelRole) SetPortPolicyNil() {
+	o.PortPolicy.Set(nil)
+}
+
+// UnsetPortPolicy ensures that no value is present for PortPolicy, not even an explicit nil
+func (o *FabricPortChannelRole) UnsetPortPolicy() {
+	o.PortPolicy.Unset()
 }
 
 func (o FabricPortChannelRole) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricPortChannelRole) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFabricAbstractInterfaceRole, errFabricAbstractInterfaceRole := json.Marshal(o.FabricAbstractInterfaceRole)
 	if errFabricAbstractInterfaceRole != nil {
-		return []byte{}, errFabricAbstractInterfaceRole
+		return map[string]interface{}{}, errFabricAbstractInterfaceRole
 	}
 	errFabricAbstractInterfaceRole = json.Unmarshal([]byte(serializedFabricAbstractInterfaceRole), &toSerialize)
 	if errFabricAbstractInterfaceRole != nil {
-		return []byte{}, errFabricAbstractInterfaceRole
+		return map[string]interface{}{}, errFabricAbstractInterfaceRole
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.PcId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.PcId) {
 		toSerialize["PcId"] = o.PcId
 	}
 	if o.Ports != nil {
 		toSerialize["Ports"] = o.Ports
 	}
-	if o.PortPolicy != nil {
-		toSerialize["PortPolicy"] = o.PortPolicy
+	if o.PortPolicy.IsSet() {
+		toSerialize["PortPolicy"] = o.PortPolicy.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricPortChannelRole) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricPortChannelRole) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricPortChannelRoleWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ObjectType string `json:"ObjectType"`
 		// Unique Identifier of the port-channel, local to this switch.
-		PcId       *int64                        `json:"PcId,omitempty"`
-		Ports      []FabricPortIdentifier        `json:"Ports,omitempty"`
-		PortPolicy *FabricPortPolicyRelationship `json:"PortPolicy,omitempty"`
+		PcId       *int64                               `json:"PcId,omitempty"`
+		Ports      []FabricPortIdentifier               `json:"Ports,omitempty"`
+		PortPolicy NullableFabricPortPolicyRelationship `json:"PortPolicy,omitempty"`
 	}
 
 	varFabricPortChannelRoleWithoutEmbeddedStruct := FabricPortChannelRoleWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricPortChannelRoleWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricPortChannelRoleWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricPortChannelRole := _FabricPortChannelRole{}
 		varFabricPortChannelRole.ClassId = varFabricPortChannelRoleWithoutEmbeddedStruct.ClassId
@@ -259,7 +300,7 @@ func (o *FabricPortChannelRole) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricPortChannelRole := _FabricPortChannelRole{}
 
-	err = json.Unmarshal(bytes, &varFabricPortChannelRole)
+	err = json.Unmarshal(data, &varFabricPortChannelRole)
 	if err == nil {
 		o.FabricAbstractInterfaceRole = varFabricPortChannelRole.FabricAbstractInterfaceRole
 	} else {
@@ -268,7 +309,7 @@ func (o *FabricPortChannelRole) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "PcId")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the OsServerConfig type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OsServerConfig{}
 
 // OsServerConfig The server level OS install parameter for the uploaded CSV file.
 type OsServerConfig struct {
@@ -132,7 +136,7 @@ func (o *OsServerConfig) GetAdditionalParameters() []OsPlaceHolder {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsServerConfig) GetAdditionalParametersOk() ([]OsPlaceHolder, bool) {
-	if o == nil || o.AdditionalParameters == nil {
+	if o == nil || IsNil(o.AdditionalParameters) {
 		return nil, false
 	}
 	return o.AdditionalParameters, true
@@ -140,7 +144,7 @@ func (o *OsServerConfig) GetAdditionalParametersOk() ([]OsPlaceHolder, bool) {
 
 // HasAdditionalParameters returns a boolean if a field has been set.
 func (o *OsServerConfig) HasAdditionalParameters() bool {
-	if o != nil && o.AdditionalParameters != nil {
+	if o != nil && IsNil(o.AdditionalParameters) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *OsServerConfig) SetAdditionalParameters(v []OsPlaceHolder) {
 
 // GetAnswers returns the Answers field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsServerConfig) GetAnswers() OsAnswers {
-	if o == nil || o.Answers.Get() == nil {
+	if o == nil || IsNil(o.Answers.Get()) {
 		var ret OsAnswers
 		return ret
 	}
@@ -208,7 +212,7 @@ func (o *OsServerConfig) GetErrorMsgs() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OsServerConfig) GetErrorMsgsOk() ([]string, bool) {
-	if o == nil || o.ErrorMsgs == nil {
+	if o == nil || IsNil(o.ErrorMsgs) {
 		return nil, false
 	}
 	return o.ErrorMsgs, true
@@ -216,7 +220,7 @@ func (o *OsServerConfig) GetErrorMsgsOk() ([]string, bool) {
 
 // HasErrorMsgs returns a boolean if a field has been set.
 func (o *OsServerConfig) HasErrorMsgs() bool {
-	if o != nil && o.ErrorMsgs != nil {
+	if o != nil && IsNil(o.ErrorMsgs) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *OsServerConfig) SetErrorMsgs(v []string) {
 
 // GetInitiatorWwpn returns the InitiatorWwpn field value if set, zero value otherwise.
 func (o *OsServerConfig) GetInitiatorWwpn() string {
-	if o == nil || o.InitiatorWwpn == nil {
+	if o == nil || IsNil(o.InitiatorWwpn) {
 		var ret string
 		return ret
 	}
@@ -240,7 +244,7 @@ func (o *OsServerConfig) GetInitiatorWwpn() string {
 // GetInitiatorWwpnOk returns a tuple with the InitiatorWwpn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsServerConfig) GetInitiatorWwpnOk() (*string, bool) {
-	if o == nil || o.InitiatorWwpn == nil {
+	if o == nil || IsNil(o.InitiatorWwpn) {
 		return nil, false
 	}
 	return o.InitiatorWwpn, true
@@ -248,7 +252,7 @@ func (o *OsServerConfig) GetInitiatorWwpnOk() (*string, bool) {
 
 // HasInitiatorWwpn returns a boolean if a field has been set.
 func (o *OsServerConfig) HasInitiatorWwpn() bool {
-	if o != nil && o.InitiatorWwpn != nil {
+	if o != nil && !IsNil(o.InitiatorWwpn) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *OsServerConfig) SetInitiatorWwpn(v string) {
 
 // GetInstallTarget returns the InstallTarget field value if set, zero value otherwise.
 func (o *OsServerConfig) GetInstallTarget() string {
-	if o == nil || o.InstallTarget == nil {
+	if o == nil || IsNil(o.InstallTarget) {
 		var ret string
 		return ret
 	}
@@ -272,7 +276,7 @@ func (o *OsServerConfig) GetInstallTarget() string {
 // GetInstallTargetOk returns a tuple with the InstallTarget field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsServerConfig) GetInstallTargetOk() (*string, bool) {
-	if o == nil || o.InstallTarget == nil {
+	if o == nil || IsNil(o.InstallTarget) {
 		return nil, false
 	}
 	return o.InstallTarget, true
@@ -280,7 +284,7 @@ func (o *OsServerConfig) GetInstallTargetOk() (*string, bool) {
 
 // HasInstallTarget returns a boolean if a field has been set.
 func (o *OsServerConfig) HasInstallTarget() bool {
-	if o != nil && o.InstallTarget != nil {
+	if o != nil && !IsNil(o.InstallTarget) {
 		return true
 	}
 
@@ -294,7 +298,7 @@ func (o *OsServerConfig) SetInstallTarget(v string) {
 
 // GetLunId returns the LunId field value if set, zero value otherwise.
 func (o *OsServerConfig) GetLunId() int64 {
-	if o == nil || o.LunId == nil {
+	if o == nil || IsNil(o.LunId) {
 		var ret int64
 		return ret
 	}
@@ -304,7 +308,7 @@ func (o *OsServerConfig) GetLunId() int64 {
 // GetLunIdOk returns a tuple with the LunId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsServerConfig) GetLunIdOk() (*int64, bool) {
-	if o == nil || o.LunId == nil {
+	if o == nil || IsNil(o.LunId) {
 		return nil, false
 	}
 	return o.LunId, true
@@ -312,7 +316,7 @@ func (o *OsServerConfig) GetLunIdOk() (*int64, bool) {
 
 // HasLunId returns a boolean if a field has been set.
 func (o *OsServerConfig) HasLunId() bool {
-	if o != nil && o.LunId != nil {
+	if o != nil && !IsNil(o.LunId) {
 		return true
 	}
 
@@ -326,7 +330,7 @@ func (o *OsServerConfig) SetLunId(v int64) {
 
 // GetOperatingSystemParameters returns the OperatingSystemParameters field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsServerConfig) GetOperatingSystemParameters() OsOperatingSystemParameters {
-	if o == nil || o.OperatingSystemParameters.Get() == nil {
+	if o == nil || IsNil(o.OperatingSystemParameters.Get()) {
 		var ret OsOperatingSystemParameters
 		return ret
 	}
@@ -369,7 +373,7 @@ func (o *OsServerConfig) UnsetOperatingSystemParameters() {
 
 // GetProcessedInstallTarget returns the ProcessedInstallTarget field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsServerConfig) GetProcessedInstallTarget() OsInstallTarget {
-	if o == nil || o.ProcessedInstallTarget.Get() == nil {
+	if o == nil || IsNil(o.ProcessedInstallTarget.Get()) {
 		var ret OsInstallTarget
 		return ret
 	}
@@ -412,7 +416,7 @@ func (o *OsServerConfig) UnsetProcessedInstallTarget() {
 
 // GetSerialNumber returns the SerialNumber field value if set, zero value otherwise.
 func (o *OsServerConfig) GetSerialNumber() string {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		var ret string
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *OsServerConfig) GetSerialNumber() string {
 // GetSerialNumberOk returns a tuple with the SerialNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsServerConfig) GetSerialNumberOk() (*string, bool) {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		return nil, false
 	}
 	return o.SerialNumber, true
@@ -430,7 +434,7 @@ func (o *OsServerConfig) GetSerialNumberOk() (*string, bool) {
 
 // HasSerialNumber returns a boolean if a field has been set.
 func (o *OsServerConfig) HasSerialNumber() bool {
-	if o != nil && o.SerialNumber != nil {
+	if o != nil && !IsNil(o.SerialNumber) {
 		return true
 	}
 
@@ -444,7 +448,7 @@ func (o *OsServerConfig) SetSerialNumber(v string) {
 
 // GetTargetIqn returns the TargetIqn field value if set, zero value otherwise.
 func (o *OsServerConfig) GetTargetIqn() string {
-	if o == nil || o.TargetIqn == nil {
+	if o == nil || IsNil(o.TargetIqn) {
 		var ret string
 		return ret
 	}
@@ -454,7 +458,7 @@ func (o *OsServerConfig) GetTargetIqn() string {
 // GetTargetIqnOk returns a tuple with the TargetIqn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsServerConfig) GetTargetIqnOk() (*string, bool) {
-	if o == nil || o.TargetIqn == nil {
+	if o == nil || IsNil(o.TargetIqn) {
 		return nil, false
 	}
 	return o.TargetIqn, true
@@ -462,7 +466,7 @@ func (o *OsServerConfig) GetTargetIqnOk() (*string, bool) {
 
 // HasTargetIqn returns a boolean if a field has been set.
 func (o *OsServerConfig) HasTargetIqn() bool {
-	if o != nil && o.TargetIqn != nil {
+	if o != nil && !IsNil(o.TargetIqn) {
 		return true
 	}
 
@@ -476,7 +480,7 @@ func (o *OsServerConfig) SetTargetIqn(v string) {
 
 // GetTargetWwpn returns the TargetWwpn field value if set, zero value otherwise.
 func (o *OsServerConfig) GetTargetWwpn() string {
-	if o == nil || o.TargetWwpn == nil {
+	if o == nil || IsNil(o.TargetWwpn) {
 		var ret string
 		return ret
 	}
@@ -486,7 +490,7 @@ func (o *OsServerConfig) GetTargetWwpn() string {
 // GetTargetWwpnOk returns a tuple with the TargetWwpn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsServerConfig) GetTargetWwpnOk() (*string, bool) {
-	if o == nil || o.TargetWwpn == nil {
+	if o == nil || IsNil(o.TargetWwpn) {
 		return nil, false
 	}
 	return o.TargetWwpn, true
@@ -494,7 +498,7 @@ func (o *OsServerConfig) GetTargetWwpnOk() (*string, bool) {
 
 // HasTargetWwpn returns a boolean if a field has been set.
 func (o *OsServerConfig) HasTargetWwpn() bool {
-	if o != nil && o.TargetWwpn != nil {
+	if o != nil && !IsNil(o.TargetWwpn) {
 		return true
 	}
 
@@ -508,7 +512,7 @@ func (o *OsServerConfig) SetTargetWwpn(v string) {
 
 // GetVnicMac returns the VnicMac field value if set, zero value otherwise.
 func (o *OsServerConfig) GetVnicMac() string {
-	if o == nil || o.VnicMac == nil {
+	if o == nil || IsNil(o.VnicMac) {
 		var ret string
 		return ret
 	}
@@ -518,7 +522,7 @@ func (o *OsServerConfig) GetVnicMac() string {
 // GetVnicMacOk returns a tuple with the VnicMac field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OsServerConfig) GetVnicMacOk() (*string, bool) {
-	if o == nil || o.VnicMac == nil {
+	if o == nil || IsNil(o.VnicMac) {
 		return nil, false
 	}
 	return o.VnicMac, true
@@ -526,7 +530,7 @@ func (o *OsServerConfig) GetVnicMacOk() (*string, bool) {
 
 // HasVnicMac returns a boolean if a field has been set.
 func (o *OsServerConfig) HasVnicMac() bool {
-	if o != nil && o.VnicMac != nil {
+	if o != nil && !IsNil(o.VnicMac) {
 		return true
 	}
 
@@ -539,21 +543,25 @@ func (o *OsServerConfig) SetVnicMac(v string) {
 }
 
 func (o OsServerConfig) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OsServerConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AdditionalParameters != nil {
 		toSerialize["AdditionalParameters"] = o.AdditionalParameters
 	}
@@ -563,13 +571,13 @@ func (o OsServerConfig) MarshalJSON() ([]byte, error) {
 	if o.ErrorMsgs != nil {
 		toSerialize["ErrorMsgs"] = o.ErrorMsgs
 	}
-	if o.InitiatorWwpn != nil {
+	if !IsNil(o.InitiatorWwpn) {
 		toSerialize["InitiatorWwpn"] = o.InitiatorWwpn
 	}
-	if o.InstallTarget != nil {
+	if !IsNil(o.InstallTarget) {
 		toSerialize["InstallTarget"] = o.InstallTarget
 	}
-	if o.LunId != nil {
+	if !IsNil(o.LunId) {
 		toSerialize["LunId"] = o.LunId
 	}
 	if o.OperatingSystemParameters.IsSet() {
@@ -578,16 +586,16 @@ func (o OsServerConfig) MarshalJSON() ([]byte, error) {
 	if o.ProcessedInstallTarget.IsSet() {
 		toSerialize["ProcessedInstallTarget"] = o.ProcessedInstallTarget.Get()
 	}
-	if o.SerialNumber != nil {
+	if !IsNil(o.SerialNumber) {
 		toSerialize["SerialNumber"] = o.SerialNumber
 	}
-	if o.TargetIqn != nil {
+	if !IsNil(o.TargetIqn) {
 		toSerialize["TargetIqn"] = o.TargetIqn
 	}
-	if o.TargetWwpn != nil {
+	if !IsNil(o.TargetWwpn) {
 		toSerialize["TargetWwpn"] = o.TargetWwpn
 	}
-	if o.VnicMac != nil {
+	if !IsNil(o.VnicMac) {
 		toSerialize["VnicMac"] = o.VnicMac
 	}
 
@@ -595,10 +603,32 @@ func (o OsServerConfig) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OsServerConfig) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OsServerConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OsServerConfigWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -627,7 +657,7 @@ func (o *OsServerConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsServerConfigWithoutEmbeddedStruct := OsServerConfigWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOsServerConfigWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOsServerConfigWithoutEmbeddedStruct)
 	if err == nil {
 		varOsServerConfig := _OsServerConfig{}
 		varOsServerConfig.ClassId = varOsServerConfigWithoutEmbeddedStruct.ClassId
@@ -651,7 +681,7 @@ func (o *OsServerConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOsServerConfig := _OsServerConfig{}
 
-	err = json.Unmarshal(bytes, &varOsServerConfig)
+	err = json.Unmarshal(data, &varOsServerConfig)
 	if err == nil {
 		o.MoBaseComplexType = varOsServerConfig.MoBaseComplexType
 	} else {
@@ -660,7 +690,7 @@ func (o *OsServerConfig) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdditionalParameters")

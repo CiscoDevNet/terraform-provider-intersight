@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MemoryArray type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MemoryArray{}
 
 // MemoryArray Holder housing multiple memory units.
 type MemoryArray struct {
@@ -37,14 +41,14 @@ type MemoryArray struct {
 	// The maximum number of slots or sockets available for memory devices in the memory array.
 	MaxDevices *string `json:"MaxDevices,omitempty"`
 	// The power state indicator of the memory array.
-	OperPowerState      *string                          `json:"OperPowerState,omitempty"`
-	ComputeBlade        *ComputeBladeRelationship        `json:"ComputeBlade,omitempty"`
-	ComputeBoard        *ComputeBoardRelationship        `json:"ComputeBoard,omitempty"`
-	ComputeRackUnit     *ComputeRackUnitRelationship     `json:"ComputeRackUnit,omitempty"`
-	InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+	OperPowerState      *string                                 `json:"OperPowerState,omitempty"`
+	ComputeBlade        NullableComputeBladeRelationship        `json:"ComputeBlade,omitempty"`
+	ComputeBoard        NullableComputeBoardRelationship        `json:"ComputeBoard,omitempty"`
+	ComputeRackUnit     NullableComputeRackUnitRelationship     `json:"ComputeRackUnit,omitempty"`
+	InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 	// An array of relationships to memoryPersistentMemoryUnit resources.
-	PersistentMemoryUnits []MemoryPersistentMemoryUnitRelationship `json:"PersistentMemoryUnits,omitempty"`
-	RegisteredDevice      *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
+	PersistentMemoryUnits []MemoryPersistentMemoryUnitRelationship    `json:"PersistentMemoryUnits,omitempty"`
+	RegisteredDevice      NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to memoryUnit resources.
 	Units                []MemoryUnitRelationship `json:"Units,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -125,7 +129,7 @@ func (o *MemoryArray) SetObjectType(v string) {
 
 // GetArrayId returns the ArrayId field value if set, zero value otherwise.
 func (o *MemoryArray) GetArrayId() int64 {
-	if o == nil || o.ArrayId == nil {
+	if o == nil || IsNil(o.ArrayId) {
 		var ret int64
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *MemoryArray) GetArrayId() int64 {
 // GetArrayIdOk returns a tuple with the ArrayId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryArray) GetArrayIdOk() (*int64, bool) {
-	if o == nil || o.ArrayId == nil {
+	if o == nil || IsNil(o.ArrayId) {
 		return nil, false
 	}
 	return o.ArrayId, true
@@ -143,7 +147,7 @@ func (o *MemoryArray) GetArrayIdOk() (*int64, bool) {
 
 // HasArrayId returns a boolean if a field has been set.
 func (o *MemoryArray) HasArrayId() bool {
-	if o != nil && o.ArrayId != nil {
+	if o != nil && !IsNil(o.ArrayId) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *MemoryArray) SetArrayId(v int64) {
 
 // GetCpuId returns the CpuId field value if set, zero value otherwise.
 func (o *MemoryArray) GetCpuId() int64 {
-	if o == nil || o.CpuId == nil {
+	if o == nil || IsNil(o.CpuId) {
 		var ret int64
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *MemoryArray) GetCpuId() int64 {
 // GetCpuIdOk returns a tuple with the CpuId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryArray) GetCpuIdOk() (*int64, bool) {
-	if o == nil || o.CpuId == nil {
+	if o == nil || IsNil(o.CpuId) {
 		return nil, false
 	}
 	return o.CpuId, true
@@ -175,7 +179,7 @@ func (o *MemoryArray) GetCpuIdOk() (*int64, bool) {
 
 // HasCpuId returns a boolean if a field has been set.
 func (o *MemoryArray) HasCpuId() bool {
-	if o != nil && o.CpuId != nil {
+	if o != nil && !IsNil(o.CpuId) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *MemoryArray) SetCpuId(v int64) {
 
 // GetCurrentCapacity returns the CurrentCapacity field value if set, zero value otherwise.
 func (o *MemoryArray) GetCurrentCapacity() string {
-	if o == nil || o.CurrentCapacity == nil {
+	if o == nil || IsNil(o.CurrentCapacity) {
 		var ret string
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *MemoryArray) GetCurrentCapacity() string {
 // GetCurrentCapacityOk returns a tuple with the CurrentCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryArray) GetCurrentCapacityOk() (*string, bool) {
-	if o == nil || o.CurrentCapacity == nil {
+	if o == nil || IsNil(o.CurrentCapacity) {
 		return nil, false
 	}
 	return o.CurrentCapacity, true
@@ -207,7 +211,7 @@ func (o *MemoryArray) GetCurrentCapacityOk() (*string, bool) {
 
 // HasCurrentCapacity returns a boolean if a field has been set.
 func (o *MemoryArray) HasCurrentCapacity() bool {
-	if o != nil && o.CurrentCapacity != nil {
+	if o != nil && !IsNil(o.CurrentCapacity) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *MemoryArray) SetCurrentCapacity(v string) {
 
 // GetErrorCorrection returns the ErrorCorrection field value if set, zero value otherwise.
 func (o *MemoryArray) GetErrorCorrection() string {
-	if o == nil || o.ErrorCorrection == nil {
+	if o == nil || IsNil(o.ErrorCorrection) {
 		var ret string
 		return ret
 	}
@@ -231,7 +235,7 @@ func (o *MemoryArray) GetErrorCorrection() string {
 // GetErrorCorrectionOk returns a tuple with the ErrorCorrection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryArray) GetErrorCorrectionOk() (*string, bool) {
-	if o == nil || o.ErrorCorrection == nil {
+	if o == nil || IsNil(o.ErrorCorrection) {
 		return nil, false
 	}
 	return o.ErrorCorrection, true
@@ -239,7 +243,7 @@ func (o *MemoryArray) GetErrorCorrectionOk() (*string, bool) {
 
 // HasErrorCorrection returns a boolean if a field has been set.
 func (o *MemoryArray) HasErrorCorrection() bool {
-	if o != nil && o.ErrorCorrection != nil {
+	if o != nil && !IsNil(o.ErrorCorrection) {
 		return true
 	}
 
@@ -253,7 +257,7 @@ func (o *MemoryArray) SetErrorCorrection(v string) {
 
 // GetMaxCapacity returns the MaxCapacity field value if set, zero value otherwise.
 func (o *MemoryArray) GetMaxCapacity() string {
-	if o == nil || o.MaxCapacity == nil {
+	if o == nil || IsNil(o.MaxCapacity) {
 		var ret string
 		return ret
 	}
@@ -263,7 +267,7 @@ func (o *MemoryArray) GetMaxCapacity() string {
 // GetMaxCapacityOk returns a tuple with the MaxCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryArray) GetMaxCapacityOk() (*string, bool) {
-	if o == nil || o.MaxCapacity == nil {
+	if o == nil || IsNil(o.MaxCapacity) {
 		return nil, false
 	}
 	return o.MaxCapacity, true
@@ -271,7 +275,7 @@ func (o *MemoryArray) GetMaxCapacityOk() (*string, bool) {
 
 // HasMaxCapacity returns a boolean if a field has been set.
 func (o *MemoryArray) HasMaxCapacity() bool {
-	if o != nil && o.MaxCapacity != nil {
+	if o != nil && !IsNil(o.MaxCapacity) {
 		return true
 	}
 
@@ -285,7 +289,7 @@ func (o *MemoryArray) SetMaxCapacity(v string) {
 
 // GetMaxDevices returns the MaxDevices field value if set, zero value otherwise.
 func (o *MemoryArray) GetMaxDevices() string {
-	if o == nil || o.MaxDevices == nil {
+	if o == nil || IsNil(o.MaxDevices) {
 		var ret string
 		return ret
 	}
@@ -295,7 +299,7 @@ func (o *MemoryArray) GetMaxDevices() string {
 // GetMaxDevicesOk returns a tuple with the MaxDevices field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryArray) GetMaxDevicesOk() (*string, bool) {
-	if o == nil || o.MaxDevices == nil {
+	if o == nil || IsNil(o.MaxDevices) {
 		return nil, false
 	}
 	return o.MaxDevices, true
@@ -303,7 +307,7 @@ func (o *MemoryArray) GetMaxDevicesOk() (*string, bool) {
 
 // HasMaxDevices returns a boolean if a field has been set.
 func (o *MemoryArray) HasMaxDevices() bool {
-	if o != nil && o.MaxDevices != nil {
+	if o != nil && !IsNil(o.MaxDevices) {
 		return true
 	}
 
@@ -317,7 +321,7 @@ func (o *MemoryArray) SetMaxDevices(v string) {
 
 // GetOperPowerState returns the OperPowerState field value if set, zero value otherwise.
 func (o *MemoryArray) GetOperPowerState() string {
-	if o == nil || o.OperPowerState == nil {
+	if o == nil || IsNil(o.OperPowerState) {
 		var ret string
 		return ret
 	}
@@ -327,7 +331,7 @@ func (o *MemoryArray) GetOperPowerState() string {
 // GetOperPowerStateOk returns a tuple with the OperPowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MemoryArray) GetOperPowerStateOk() (*string, bool) {
-	if o == nil || o.OperPowerState == nil {
+	if o == nil || IsNil(o.OperPowerState) {
 		return nil, false
 	}
 	return o.OperPowerState, true
@@ -335,7 +339,7 @@ func (o *MemoryArray) GetOperPowerStateOk() (*string, bool) {
 
 // HasOperPowerState returns a boolean if a field has been set.
 func (o *MemoryArray) HasOperPowerState() bool {
-	if o != nil && o.OperPowerState != nil {
+	if o != nil && !IsNil(o.OperPowerState) {
 		return true
 	}
 
@@ -347,132 +351,176 @@ func (o *MemoryArray) SetOperPowerState(v string) {
 	o.OperPowerState = &v
 }
 
-// GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise.
+// GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryArray) GetComputeBlade() ComputeBladeRelationship {
-	if o == nil || o.ComputeBlade == nil {
+	if o == nil || IsNil(o.ComputeBlade.Get()) {
 		var ret ComputeBladeRelationship
 		return ret
 	}
-	return *o.ComputeBlade
+	return *o.ComputeBlade.Get()
 }
 
 // GetComputeBladeOk returns a tuple with the ComputeBlade field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryArray) GetComputeBladeOk() (*ComputeBladeRelationship, bool) {
-	if o == nil || o.ComputeBlade == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBlade, true
+	return o.ComputeBlade.Get(), o.ComputeBlade.IsSet()
 }
 
 // HasComputeBlade returns a boolean if a field has been set.
 func (o *MemoryArray) HasComputeBlade() bool {
-	if o != nil && o.ComputeBlade != nil {
+	if o != nil && o.ComputeBlade.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBlade gets a reference to the given ComputeBladeRelationship and assigns it to the ComputeBlade field.
+// SetComputeBlade gets a reference to the given NullableComputeBladeRelationship and assigns it to the ComputeBlade field.
 func (o *MemoryArray) SetComputeBlade(v ComputeBladeRelationship) {
-	o.ComputeBlade = &v
+	o.ComputeBlade.Set(&v)
 }
 
-// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise.
+// SetComputeBladeNil sets the value for ComputeBlade to be an explicit nil
+func (o *MemoryArray) SetComputeBladeNil() {
+	o.ComputeBlade.Set(nil)
+}
+
+// UnsetComputeBlade ensures that no value is present for ComputeBlade, not even an explicit nil
+func (o *MemoryArray) UnsetComputeBlade() {
+	o.ComputeBlade.Unset()
+}
+
+// GetComputeBoard returns the ComputeBoard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryArray) GetComputeBoard() ComputeBoardRelationship {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil || IsNil(o.ComputeBoard.Get()) {
 		var ret ComputeBoardRelationship
 		return ret
 	}
-	return *o.ComputeBoard
+	return *o.ComputeBoard.Get()
 }
 
 // GetComputeBoardOk returns a tuple with the ComputeBoard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryArray) GetComputeBoardOk() (*ComputeBoardRelationship, bool) {
-	if o == nil || o.ComputeBoard == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeBoard, true
+	return o.ComputeBoard.Get(), o.ComputeBoard.IsSet()
 }
 
 // HasComputeBoard returns a boolean if a field has been set.
 func (o *MemoryArray) HasComputeBoard() bool {
-	if o != nil && o.ComputeBoard != nil {
+	if o != nil && o.ComputeBoard.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeBoard gets a reference to the given ComputeBoardRelationship and assigns it to the ComputeBoard field.
+// SetComputeBoard gets a reference to the given NullableComputeBoardRelationship and assigns it to the ComputeBoard field.
 func (o *MemoryArray) SetComputeBoard(v ComputeBoardRelationship) {
-	o.ComputeBoard = &v
+	o.ComputeBoard.Set(&v)
 }
 
-// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise.
+// SetComputeBoardNil sets the value for ComputeBoard to be an explicit nil
+func (o *MemoryArray) SetComputeBoardNil() {
+	o.ComputeBoard.Set(nil)
+}
+
+// UnsetComputeBoard ensures that no value is present for ComputeBoard, not even an explicit nil
+func (o *MemoryArray) UnsetComputeBoard() {
+	o.ComputeBoard.Unset()
+}
+
+// GetComputeRackUnit returns the ComputeRackUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryArray) GetComputeRackUnit() ComputeRackUnitRelationship {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil || IsNil(o.ComputeRackUnit.Get()) {
 		var ret ComputeRackUnitRelationship
 		return ret
 	}
-	return *o.ComputeRackUnit
+	return *o.ComputeRackUnit.Get()
 }
 
 // GetComputeRackUnitOk returns a tuple with the ComputeRackUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryArray) GetComputeRackUnitOk() (*ComputeRackUnitRelationship, bool) {
-	if o == nil || o.ComputeRackUnit == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ComputeRackUnit, true
+	return o.ComputeRackUnit.Get(), o.ComputeRackUnit.IsSet()
 }
 
 // HasComputeRackUnit returns a boolean if a field has been set.
 func (o *MemoryArray) HasComputeRackUnit() bool {
-	if o != nil && o.ComputeRackUnit != nil {
+	if o != nil && o.ComputeRackUnit.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComputeRackUnit gets a reference to the given ComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
+// SetComputeRackUnit gets a reference to the given NullableComputeRackUnitRelationship and assigns it to the ComputeRackUnit field.
 func (o *MemoryArray) SetComputeRackUnit(v ComputeRackUnitRelationship) {
-	o.ComputeRackUnit = &v
+	o.ComputeRackUnit.Set(&v)
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// SetComputeRackUnitNil sets the value for ComputeRackUnit to be an explicit nil
+func (o *MemoryArray) SetComputeRackUnitNil() {
+	o.ComputeRackUnit.Set(nil)
+}
+
+// UnsetComputeRackUnit ensures that no value is present for ComputeRackUnit, not even an explicit nil
+func (o *MemoryArray) UnsetComputeRackUnit() {
+	o.ComputeRackUnit.Unset()
+}
+
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryArray) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryArray) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *MemoryArray) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *MemoryArray) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
+}
+
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *MemoryArray) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *MemoryArray) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
 }
 
 // GetPersistentMemoryUnits returns the PersistentMemoryUnits field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -488,7 +536,7 @@ func (o *MemoryArray) GetPersistentMemoryUnits() []MemoryPersistentMemoryUnitRel
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryArray) GetPersistentMemoryUnitsOk() ([]MemoryPersistentMemoryUnitRelationship, bool) {
-	if o == nil || o.PersistentMemoryUnits == nil {
+	if o == nil || IsNil(o.PersistentMemoryUnits) {
 		return nil, false
 	}
 	return o.PersistentMemoryUnits, true
@@ -496,7 +544,7 @@ func (o *MemoryArray) GetPersistentMemoryUnitsOk() ([]MemoryPersistentMemoryUnit
 
 // HasPersistentMemoryUnits returns a boolean if a field has been set.
 func (o *MemoryArray) HasPersistentMemoryUnits() bool {
-	if o != nil && o.PersistentMemoryUnits != nil {
+	if o != nil && IsNil(o.PersistentMemoryUnits) {
 		return true
 	}
 
@@ -508,36 +556,47 @@ func (o *MemoryArray) SetPersistentMemoryUnits(v []MemoryPersistentMemoryUnitRel
 	o.PersistentMemoryUnits = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MemoryArray) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryArray) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *MemoryArray) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *MemoryArray) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *MemoryArray) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *MemoryArray) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 // GetUnits returns the Units field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -553,7 +612,7 @@ func (o *MemoryArray) GetUnits() []MemoryUnitRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemoryArray) GetUnitsOk() ([]MemoryUnitRelationship, bool) {
-	if o == nil || o.Units == nil {
+	if o == nil || IsNil(o.Units) {
 		return nil, false
 	}
 	return o.Units, true
@@ -561,7 +620,7 @@ func (o *MemoryArray) GetUnitsOk() ([]MemoryUnitRelationship, bool) {
 
 // HasUnits returns a boolean if a field has been set.
 func (o *MemoryArray) HasUnits() bool {
-	if o != nil && o.Units != nil {
+	if o != nil && IsNil(o.Units) {
 		return true
 	}
 
@@ -574,59 +633,63 @@ func (o *MemoryArray) SetUnits(v []MemoryUnitRelationship) {
 }
 
 func (o MemoryArray) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MemoryArray) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ArrayId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ArrayId) {
 		toSerialize["ArrayId"] = o.ArrayId
 	}
-	if o.CpuId != nil {
+	if !IsNil(o.CpuId) {
 		toSerialize["CpuId"] = o.CpuId
 	}
-	if o.CurrentCapacity != nil {
+	if !IsNil(o.CurrentCapacity) {
 		toSerialize["CurrentCapacity"] = o.CurrentCapacity
 	}
-	if o.ErrorCorrection != nil {
+	if !IsNil(o.ErrorCorrection) {
 		toSerialize["ErrorCorrection"] = o.ErrorCorrection
 	}
-	if o.MaxCapacity != nil {
+	if !IsNil(o.MaxCapacity) {
 		toSerialize["MaxCapacity"] = o.MaxCapacity
 	}
-	if o.MaxDevices != nil {
+	if !IsNil(o.MaxDevices) {
 		toSerialize["MaxDevices"] = o.MaxDevices
 	}
-	if o.OperPowerState != nil {
+	if !IsNil(o.OperPowerState) {
 		toSerialize["OperPowerState"] = o.OperPowerState
 	}
-	if o.ComputeBlade != nil {
-		toSerialize["ComputeBlade"] = o.ComputeBlade
+	if o.ComputeBlade.IsSet() {
+		toSerialize["ComputeBlade"] = o.ComputeBlade.Get()
 	}
-	if o.ComputeBoard != nil {
-		toSerialize["ComputeBoard"] = o.ComputeBoard
+	if o.ComputeBoard.IsSet() {
+		toSerialize["ComputeBoard"] = o.ComputeBoard.Get()
 	}
-	if o.ComputeRackUnit != nil {
-		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit
+	if o.ComputeRackUnit.IsSet() {
+		toSerialize["ComputeRackUnit"] = o.ComputeRackUnit.Get()
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
 	if o.PersistentMemoryUnits != nil {
 		toSerialize["PersistentMemoryUnits"] = o.PersistentMemoryUnits
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 	if o.Units != nil {
 		toSerialize["Units"] = o.Units
@@ -636,10 +699,32 @@ func (o MemoryArray) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MemoryArray) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MemoryArray) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MemoryArrayWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -658,21 +743,21 @@ func (o *MemoryArray) UnmarshalJSON(bytes []byte) (err error) {
 		// The maximum number of slots or sockets available for memory devices in the memory array.
 		MaxDevices *string `json:"MaxDevices,omitempty"`
 		// The power state indicator of the memory array.
-		OperPowerState      *string                          `json:"OperPowerState,omitempty"`
-		ComputeBlade        *ComputeBladeRelationship        `json:"ComputeBlade,omitempty"`
-		ComputeBoard        *ComputeBoardRelationship        `json:"ComputeBoard,omitempty"`
-		ComputeRackUnit     *ComputeRackUnitRelationship     `json:"ComputeRackUnit,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
+		OperPowerState      *string                                 `json:"OperPowerState,omitempty"`
+		ComputeBlade        NullableComputeBladeRelationship        `json:"ComputeBlade,omitempty"`
+		ComputeBoard        NullableComputeBoardRelationship        `json:"ComputeBoard,omitempty"`
+		ComputeRackUnit     NullableComputeRackUnitRelationship     `json:"ComputeRackUnit,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 		// An array of relationships to memoryPersistentMemoryUnit resources.
-		PersistentMemoryUnits []MemoryPersistentMemoryUnitRelationship `json:"PersistentMemoryUnits,omitempty"`
-		RegisteredDevice      *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
+		PersistentMemoryUnits []MemoryPersistentMemoryUnitRelationship    `json:"PersistentMemoryUnits,omitempty"`
+		RegisteredDevice      NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 		// An array of relationships to memoryUnit resources.
 		Units []MemoryUnitRelationship `json:"Units,omitempty"`
 	}
 
 	varMemoryArrayWithoutEmbeddedStruct := MemoryArrayWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMemoryArrayWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMemoryArrayWithoutEmbeddedStruct)
 	if err == nil {
 		varMemoryArray := _MemoryArray{}
 		varMemoryArray.ClassId = varMemoryArrayWithoutEmbeddedStruct.ClassId
@@ -698,7 +783,7 @@ func (o *MemoryArray) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMemoryArray := _MemoryArray{}
 
-	err = json.Unmarshal(bytes, &varMemoryArray)
+	err = json.Unmarshal(data, &varMemoryArray)
 	if err == nil {
 		o.EquipmentBase = varMemoryArray.EquipmentBase
 	} else {
@@ -707,7 +792,7 @@ func (o *MemoryArray) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ArrayId")

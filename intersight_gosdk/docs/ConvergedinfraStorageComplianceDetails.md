@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **Os** | Pointer to **string** | The operating system name and version (e.g. NetApp ONTAP 9.10) running on the storage array for which the compliance is getting evaluated. | [optional] [readonly] 
 **Protocol** | Pointer to **string** | The protocol configured for the communication between the switch and the storage array. | [optional] [readonly] 
 **RefDevice** | Pointer to **string** | The reference device (e.g. adapter, fabric interconnect) against which the storage compliance is getting evaluated. * &#x60;Server&#x60; - The component type for a server in a converged infrastructure pod. * &#x60;Adapter&#x60; - The component type for an adapter on a server in a converged infrastructure pod. * &#x60;FabricInterconnect&#x60; - The component type for a fabric interconnect in a converged infrastructure pod. * &#x60;Nexus&#x60; - The component type for a nexus switch in a converged infrastructure pod. * &#x60;Storage&#x60; - The component type for a storage array in a converged infrastructure pod. | [optional] [readonly] [default to "Server"]
-**AdapterCompliance** | Pointer to [**ConvergedinfraAdapterComplianceDetailsRelationship**](ConvergedinfraAdapterComplianceDetailsRelationship.md) |  | [optional] 
-**PodCompliance** | Pointer to [**ConvergedinfraPodComplianceInfoRelationship**](ConvergedinfraPodComplianceInfoRelationship.md) |  | [optional] 
-**StorageArray** | Pointer to [**StorageBaseArrayRelationship**](StorageBaseArrayRelationship.md) |  | [optional] 
-**SwitchCompliance** | Pointer to [**ConvergedinfraSwitchComplianceDetailsRelationship**](ConvergedinfraSwitchComplianceDetailsRelationship.md) |  | [optional] 
+**AdapterCompliance** | Pointer to [**NullableConvergedinfraAdapterComplianceDetailsRelationship**](ConvergedinfraAdapterComplianceDetailsRelationship.md) |  | [optional] 
+**PodCompliance** | Pointer to [**NullableConvergedinfraPodComplianceInfoRelationship**](ConvergedinfraPodComplianceInfoRelationship.md) |  | [optional] 
+**StorageArray** | Pointer to [**NullableStorageBaseArrayRelationship**](StorageBaseArrayRelationship.md) |  | [optional] 
+**SwitchCompliance** | Pointer to [**NullableConvergedinfraSwitchComplianceDetailsRelationship**](ConvergedinfraSwitchComplianceDetailsRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -173,6 +173,16 @@ SetAdapterCompliance sets AdapterCompliance field to given value.
 
 HasAdapterCompliance returns a boolean if a field has been set.
 
+### SetAdapterComplianceNil
+
+`func (o *ConvergedinfraStorageComplianceDetails) SetAdapterComplianceNil(b bool)`
+
+ SetAdapterComplianceNil sets the value for AdapterCompliance to be an explicit nil
+
+### UnsetAdapterCompliance
+`func (o *ConvergedinfraStorageComplianceDetails) UnsetAdapterCompliance()`
+
+UnsetAdapterCompliance ensures that no value is present for AdapterCompliance, not even an explicit nil
 ### GetPodCompliance
 
 `func (o *ConvergedinfraStorageComplianceDetails) GetPodCompliance() ConvergedinfraPodComplianceInfoRelationship`
@@ -198,6 +208,16 @@ SetPodCompliance sets PodCompliance field to given value.
 
 HasPodCompliance returns a boolean if a field has been set.
 
+### SetPodComplianceNil
+
+`func (o *ConvergedinfraStorageComplianceDetails) SetPodComplianceNil(b bool)`
+
+ SetPodComplianceNil sets the value for PodCompliance to be an explicit nil
+
+### UnsetPodCompliance
+`func (o *ConvergedinfraStorageComplianceDetails) UnsetPodCompliance()`
+
+UnsetPodCompliance ensures that no value is present for PodCompliance, not even an explicit nil
 ### GetStorageArray
 
 `func (o *ConvergedinfraStorageComplianceDetails) GetStorageArray() StorageBaseArrayRelationship`
@@ -223,6 +243,16 @@ SetStorageArray sets StorageArray field to given value.
 
 HasStorageArray returns a boolean if a field has been set.
 
+### SetStorageArrayNil
+
+`func (o *ConvergedinfraStorageComplianceDetails) SetStorageArrayNil(b bool)`
+
+ SetStorageArrayNil sets the value for StorageArray to be an explicit nil
+
+### UnsetStorageArray
+`func (o *ConvergedinfraStorageComplianceDetails) UnsetStorageArray()`
+
+UnsetStorageArray ensures that no value is present for StorageArray, not even an explicit nil
 ### GetSwitchCompliance
 
 `func (o *ConvergedinfraStorageComplianceDetails) GetSwitchCompliance() ConvergedinfraSwitchComplianceDetailsRelationship`
@@ -248,6 +278,16 @@ SetSwitchCompliance sets SwitchCompliance field to given value.
 
 HasSwitchCompliance returns a boolean if a field has been set.
 
+### SetSwitchComplianceNil
+
+`func (o *ConvergedinfraStorageComplianceDetails) SetSwitchComplianceNil(b bool)`
+
+ SetSwitchComplianceNil sets the value for SwitchCompliance to be an explicit nil
+
+### UnsetSwitchCompliance
+`func (o *ConvergedinfraStorageComplianceDetails) UnsetSwitchCompliance()`
+
+UnsetSwitchCompliance ensures that no value is present for SwitchCompliance, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

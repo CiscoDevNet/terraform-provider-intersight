@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the MacpoolPoolMember type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MacpoolPoolMember{}
 
 // MacpoolPoolMember PoolMember represents a single MAC address that is part of a pool.
 type MacpoolPoolMember struct {
@@ -25,12 +29,12 @@ type MacpoolPoolMember struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// MAC Address of this pool member.
-	MacAddress           *string                         `json:"MacAddress,omitempty"`
-	AssignedToEntity     *MoBaseMoRelationship           `json:"AssignedToEntity,omitempty"`
-	BlockHead            *MacpoolIdBlockRelationship     `json:"BlockHead,omitempty"`
-	Peer                 *MacpoolLeaseRelationship       `json:"Peer,omitempty"`
-	Pool                 *MacpoolPoolRelationship        `json:"Pool,omitempty"`
-	Reservation          *MacpoolReservationRelationship `json:"Reservation,omitempty"`
+	MacAddress           *string                                `json:"MacAddress,omitempty"`
+	AssignedToEntity     NullableMoBaseMoRelationship           `json:"AssignedToEntity,omitempty"`
+	BlockHead            NullableMacpoolIdBlockRelationship     `json:"BlockHead,omitempty"`
+	Peer                 NullableMacpoolLeaseRelationship       `json:"Peer,omitempty"`
+	Pool                 NullableMacpoolPoolRelationship        `json:"Pool,omitempty"`
+	Reservation          NullableMacpoolReservationRelationship `json:"Reservation,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *MacpoolPoolMember) SetObjectType(v string) {
 
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *MacpoolPoolMember) GetMacAddress() string {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		var ret string
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *MacpoolPoolMember) GetMacAddress() string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MacpoolPoolMember) GetMacAddressOk() (*string, bool) {
-	if o == nil || o.MacAddress == nil {
+	if o == nil || IsNil(o.MacAddress) {
 		return nil, false
 	}
 	return o.MacAddress, true
@@ -133,7 +137,7 @@ func (o *MacpoolPoolMember) GetMacAddressOk() (*string, bool) {
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *MacpoolPoolMember) HasMacAddress() bool {
-	if o != nil && o.MacAddress != nil {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -145,226 +149,307 @@ func (o *MacpoolPoolMember) SetMacAddress(v string) {
 	o.MacAddress = &v
 }
 
-// GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise.
+// GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MacpoolPoolMember) GetAssignedToEntity() MoBaseMoRelationship {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil || IsNil(o.AssignedToEntity.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.AssignedToEntity
+	return *o.AssignedToEntity.Get()
 }
 
 // GetAssignedToEntityOk returns a tuple with the AssignedToEntity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MacpoolPoolMember) GetAssignedToEntityOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssignedToEntity, true
+	return o.AssignedToEntity.Get(), o.AssignedToEntity.IsSet()
 }
 
 // HasAssignedToEntity returns a boolean if a field has been set.
 func (o *MacpoolPoolMember) HasAssignedToEntity() bool {
-	if o != nil && o.AssignedToEntity != nil {
+	if o != nil && o.AssignedToEntity.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssignedToEntity gets a reference to the given MoBaseMoRelationship and assigns it to the AssignedToEntity field.
+// SetAssignedToEntity gets a reference to the given NullableMoBaseMoRelationship and assigns it to the AssignedToEntity field.
 func (o *MacpoolPoolMember) SetAssignedToEntity(v MoBaseMoRelationship) {
-	o.AssignedToEntity = &v
+	o.AssignedToEntity.Set(&v)
 }
 
-// GetBlockHead returns the BlockHead field value if set, zero value otherwise.
+// SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+func (o *MacpoolPoolMember) SetAssignedToEntityNil() {
+	o.AssignedToEntity.Set(nil)
+}
+
+// UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
+func (o *MacpoolPoolMember) UnsetAssignedToEntity() {
+	o.AssignedToEntity.Unset()
+}
+
+// GetBlockHead returns the BlockHead field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MacpoolPoolMember) GetBlockHead() MacpoolIdBlockRelationship {
-	if o == nil || o.BlockHead == nil {
+	if o == nil || IsNil(o.BlockHead.Get()) {
 		var ret MacpoolIdBlockRelationship
 		return ret
 	}
-	return *o.BlockHead
+	return *o.BlockHead.Get()
 }
 
 // GetBlockHeadOk returns a tuple with the BlockHead field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MacpoolPoolMember) GetBlockHeadOk() (*MacpoolIdBlockRelationship, bool) {
-	if o == nil || o.BlockHead == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.BlockHead, true
+	return o.BlockHead.Get(), o.BlockHead.IsSet()
 }
 
 // HasBlockHead returns a boolean if a field has been set.
 func (o *MacpoolPoolMember) HasBlockHead() bool {
-	if o != nil && o.BlockHead != nil {
+	if o != nil && o.BlockHead.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBlockHead gets a reference to the given MacpoolIdBlockRelationship and assigns it to the BlockHead field.
+// SetBlockHead gets a reference to the given NullableMacpoolIdBlockRelationship and assigns it to the BlockHead field.
 func (o *MacpoolPoolMember) SetBlockHead(v MacpoolIdBlockRelationship) {
-	o.BlockHead = &v
+	o.BlockHead.Set(&v)
 }
 
-// GetPeer returns the Peer field value if set, zero value otherwise.
+// SetBlockHeadNil sets the value for BlockHead to be an explicit nil
+func (o *MacpoolPoolMember) SetBlockHeadNil() {
+	o.BlockHead.Set(nil)
+}
+
+// UnsetBlockHead ensures that no value is present for BlockHead, not even an explicit nil
+func (o *MacpoolPoolMember) UnsetBlockHead() {
+	o.BlockHead.Unset()
+}
+
+// GetPeer returns the Peer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MacpoolPoolMember) GetPeer() MacpoolLeaseRelationship {
-	if o == nil || o.Peer == nil {
+	if o == nil || IsNil(o.Peer.Get()) {
 		var ret MacpoolLeaseRelationship
 		return ret
 	}
-	return *o.Peer
+	return *o.Peer.Get()
 }
 
 // GetPeerOk returns a tuple with the Peer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MacpoolPoolMember) GetPeerOk() (*MacpoolLeaseRelationship, bool) {
-	if o == nil || o.Peer == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Peer, true
+	return o.Peer.Get(), o.Peer.IsSet()
 }
 
 // HasPeer returns a boolean if a field has been set.
 func (o *MacpoolPoolMember) HasPeer() bool {
-	if o != nil && o.Peer != nil {
+	if o != nil && o.Peer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPeer gets a reference to the given MacpoolLeaseRelationship and assigns it to the Peer field.
+// SetPeer gets a reference to the given NullableMacpoolLeaseRelationship and assigns it to the Peer field.
 func (o *MacpoolPoolMember) SetPeer(v MacpoolLeaseRelationship) {
-	o.Peer = &v
+	o.Peer.Set(&v)
 }
 
-// GetPool returns the Pool field value if set, zero value otherwise.
+// SetPeerNil sets the value for Peer to be an explicit nil
+func (o *MacpoolPoolMember) SetPeerNil() {
+	o.Peer.Set(nil)
+}
+
+// UnsetPeer ensures that no value is present for Peer, not even an explicit nil
+func (o *MacpoolPoolMember) UnsetPeer() {
+	o.Peer.Unset()
+}
+
+// GetPool returns the Pool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MacpoolPoolMember) GetPool() MacpoolPoolRelationship {
-	if o == nil || o.Pool == nil {
+	if o == nil || IsNil(o.Pool.Get()) {
 		var ret MacpoolPoolRelationship
 		return ret
 	}
-	return *o.Pool
+	return *o.Pool.Get()
 }
 
 // GetPoolOk returns a tuple with the Pool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MacpoolPoolMember) GetPoolOk() (*MacpoolPoolRelationship, bool) {
-	if o == nil || o.Pool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pool, true
+	return o.Pool.Get(), o.Pool.IsSet()
 }
 
 // HasPool returns a boolean if a field has been set.
 func (o *MacpoolPoolMember) HasPool() bool {
-	if o != nil && o.Pool != nil {
+	if o != nil && o.Pool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPool gets a reference to the given MacpoolPoolRelationship and assigns it to the Pool field.
+// SetPool gets a reference to the given NullableMacpoolPoolRelationship and assigns it to the Pool field.
 func (o *MacpoolPoolMember) SetPool(v MacpoolPoolRelationship) {
-	o.Pool = &v
+	o.Pool.Set(&v)
 }
 
-// GetReservation returns the Reservation field value if set, zero value otherwise.
+// SetPoolNil sets the value for Pool to be an explicit nil
+func (o *MacpoolPoolMember) SetPoolNil() {
+	o.Pool.Set(nil)
+}
+
+// UnsetPool ensures that no value is present for Pool, not even an explicit nil
+func (o *MacpoolPoolMember) UnsetPool() {
+	o.Pool.Unset()
+}
+
+// GetReservation returns the Reservation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MacpoolPoolMember) GetReservation() MacpoolReservationRelationship {
-	if o == nil || o.Reservation == nil {
+	if o == nil || IsNil(o.Reservation.Get()) {
 		var ret MacpoolReservationRelationship
 		return ret
 	}
-	return *o.Reservation
+	return *o.Reservation.Get()
 }
 
 // GetReservationOk returns a tuple with the Reservation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MacpoolPoolMember) GetReservationOk() (*MacpoolReservationRelationship, bool) {
-	if o == nil || o.Reservation == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Reservation, true
+	return o.Reservation.Get(), o.Reservation.IsSet()
 }
 
 // HasReservation returns a boolean if a field has been set.
 func (o *MacpoolPoolMember) HasReservation() bool {
-	if o != nil && o.Reservation != nil {
+	if o != nil && o.Reservation.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReservation gets a reference to the given MacpoolReservationRelationship and assigns it to the Reservation field.
+// SetReservation gets a reference to the given NullableMacpoolReservationRelationship and assigns it to the Reservation field.
 func (o *MacpoolPoolMember) SetReservation(v MacpoolReservationRelationship) {
-	o.Reservation = &v
+	o.Reservation.Set(&v)
+}
+
+// SetReservationNil sets the value for Reservation to be an explicit nil
+func (o *MacpoolPoolMember) SetReservationNil() {
+	o.Reservation.Set(nil)
+}
+
+// UnsetReservation ensures that no value is present for Reservation, not even an explicit nil
+func (o *MacpoolPoolMember) UnsetReservation() {
+	o.Reservation.Unset()
 }
 
 func (o MacpoolPoolMember) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MacpoolPoolMember) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolAbstractIdPoolMember, errPoolAbstractIdPoolMember := json.Marshal(o.PoolAbstractIdPoolMember)
 	if errPoolAbstractIdPoolMember != nil {
-		return []byte{}, errPoolAbstractIdPoolMember
+		return map[string]interface{}{}, errPoolAbstractIdPoolMember
 	}
 	errPoolAbstractIdPoolMember = json.Unmarshal([]byte(serializedPoolAbstractIdPoolMember), &toSerialize)
 	if errPoolAbstractIdPoolMember != nil {
-		return []byte{}, errPoolAbstractIdPoolMember
+		return map[string]interface{}{}, errPoolAbstractIdPoolMember
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.MacAddress != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
-	if o.AssignedToEntity != nil {
-		toSerialize["AssignedToEntity"] = o.AssignedToEntity
+	if o.AssignedToEntity.IsSet() {
+		toSerialize["AssignedToEntity"] = o.AssignedToEntity.Get()
 	}
-	if o.BlockHead != nil {
-		toSerialize["BlockHead"] = o.BlockHead
+	if o.BlockHead.IsSet() {
+		toSerialize["BlockHead"] = o.BlockHead.Get()
 	}
-	if o.Peer != nil {
-		toSerialize["Peer"] = o.Peer
+	if o.Peer.IsSet() {
+		toSerialize["Peer"] = o.Peer.Get()
 	}
-	if o.Pool != nil {
-		toSerialize["Pool"] = o.Pool
+	if o.Pool.IsSet() {
+		toSerialize["Pool"] = o.Pool.Get()
 	}
-	if o.Reservation != nil {
-		toSerialize["Reservation"] = o.Reservation
+	if o.Reservation.IsSet() {
+		toSerialize["Reservation"] = o.Reservation.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *MacpoolPoolMember) UnmarshalJSON(bytes []byte) (err error) {
+func (o *MacpoolPoolMember) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type MacpoolPoolMemberWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// MAC Address of this pool member.
-		MacAddress       *string                         `json:"MacAddress,omitempty"`
-		AssignedToEntity *MoBaseMoRelationship           `json:"AssignedToEntity,omitempty"`
-		BlockHead        *MacpoolIdBlockRelationship     `json:"BlockHead,omitempty"`
-		Peer             *MacpoolLeaseRelationship       `json:"Peer,omitempty"`
-		Pool             *MacpoolPoolRelationship        `json:"Pool,omitempty"`
-		Reservation      *MacpoolReservationRelationship `json:"Reservation,omitempty"`
+		MacAddress       *string                                `json:"MacAddress,omitempty"`
+		AssignedToEntity NullableMoBaseMoRelationship           `json:"AssignedToEntity,omitempty"`
+		BlockHead        NullableMacpoolIdBlockRelationship     `json:"BlockHead,omitempty"`
+		Peer             NullableMacpoolLeaseRelationship       `json:"Peer,omitempty"`
+		Pool             NullableMacpoolPoolRelationship        `json:"Pool,omitempty"`
+		Reservation      NullableMacpoolReservationRelationship `json:"Reservation,omitempty"`
 	}
 
 	varMacpoolPoolMemberWithoutEmbeddedStruct := MacpoolPoolMemberWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varMacpoolPoolMemberWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varMacpoolPoolMemberWithoutEmbeddedStruct)
 	if err == nil {
 		varMacpoolPoolMember := _MacpoolPoolMember{}
 		varMacpoolPoolMember.ClassId = varMacpoolPoolMemberWithoutEmbeddedStruct.ClassId
@@ -382,7 +467,7 @@ func (o *MacpoolPoolMember) UnmarshalJSON(bytes []byte) (err error) {
 
 	varMacpoolPoolMember := _MacpoolPoolMember{}
 
-	err = json.Unmarshal(bytes, &varMacpoolPoolMember)
+	err = json.Unmarshal(data, &varMacpoolPoolMember)
 	if err == nil {
 		o.PoolAbstractIdPoolMember = varMacpoolPoolMember.PoolAbstractIdPoolMember
 	} else {
@@ -391,7 +476,7 @@ func (o *MacpoolPoolMember) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MacAddress")

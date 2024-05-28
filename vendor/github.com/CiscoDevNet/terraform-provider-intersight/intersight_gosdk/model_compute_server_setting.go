@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ComputeServerSetting type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComputeServerSetting{}
 
 // ComputeServerSetting Models the configurable properties of a server in Intersight.
 type ComputeServerSetting struct {
@@ -58,11 +62,11 @@ type ComputeServerSetting struct {
 	// Clear the configuration of TPM chip in the server. * `None` - Perform no action on the TPM. * `ClearTpm` - Clear the configuration and restore factory defaults of TPM chip in the server.
 	TpmReset *string `json:"TpmReset,omitempty"`
 	// By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state. * `Ready` - Tunneled vKVM is ready to be configured on the server. * `Enable` - Tunneled vKVM is enabled for the server. * `Disable` - Tunneled vKVM is disabled for the server.
-	TunneledKvmState     *string                              `json:"TunneledKvmState,omitempty"`
-	LocatorLed           *EquipmentLocatorLedRelationship     `json:"LocatorLed,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	RunningWorkflow      *WorkflowWorkflowInfoRelationship    `json:"RunningWorkflow,omitempty"`
-	Server               *ComputePhysicalRelationship         `json:"Server,omitempty"`
+	TunneledKvmState     *string                                     `json:"TunneledKvmState,omitempty"`
+	LocatorLed           NullableEquipmentLocatorLedRelationship     `json:"LocatorLed,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	RunningWorkflow      NullableWorkflowWorkflowInfoRelationship    `json:"RunningWorkflow,omitempty"`
+	Server               NullableComputePhysicalRelationship         `json:"Server,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -177,7 +181,7 @@ func (o *ComputeServerSetting) SetObjectType(v string) {
 
 // GetAdminLocatorLedState returns the AdminLocatorLedState field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetAdminLocatorLedState() string {
-	if o == nil || o.AdminLocatorLedState == nil {
+	if o == nil || IsNil(o.AdminLocatorLedState) {
 		var ret string
 		return ret
 	}
@@ -187,7 +191,7 @@ func (o *ComputeServerSetting) GetAdminLocatorLedState() string {
 // GetAdminLocatorLedStateOk returns a tuple with the AdminLocatorLedState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetAdminLocatorLedStateOk() (*string, bool) {
-	if o == nil || o.AdminLocatorLedState == nil {
+	if o == nil || IsNil(o.AdminLocatorLedState) {
 		return nil, false
 	}
 	return o.AdminLocatorLedState, true
@@ -195,7 +199,7 @@ func (o *ComputeServerSetting) GetAdminLocatorLedStateOk() (*string, bool) {
 
 // HasAdminLocatorLedState returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasAdminLocatorLedState() bool {
-	if o != nil && o.AdminLocatorLedState != nil {
+	if o != nil && !IsNil(o.AdminLocatorLedState) {
 		return true
 	}
 
@@ -209,7 +213,7 @@ func (o *ComputeServerSetting) SetAdminLocatorLedState(v string) {
 
 // GetAdminPowerState returns the AdminPowerState field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetAdminPowerState() string {
-	if o == nil || o.AdminPowerState == nil {
+	if o == nil || IsNil(o.AdminPowerState) {
 		var ret string
 		return ret
 	}
@@ -219,7 +223,7 @@ func (o *ComputeServerSetting) GetAdminPowerState() string {
 // GetAdminPowerStateOk returns a tuple with the AdminPowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetAdminPowerStateOk() (*string, bool) {
-	if o == nil || o.AdminPowerState == nil {
+	if o == nil || IsNil(o.AdminPowerState) {
 		return nil, false
 	}
 	return o.AdminPowerState, true
@@ -227,7 +231,7 @@ func (o *ComputeServerSetting) GetAdminPowerStateOk() (*string, bool) {
 
 // HasAdminPowerState returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasAdminPowerState() bool {
-	if o != nil && o.AdminPowerState != nil {
+	if o != nil && !IsNil(o.AdminPowerState) {
 		return true
 	}
 
@@ -241,7 +245,7 @@ func (o *ComputeServerSetting) SetAdminPowerState(v string) {
 
 // GetCertificatesAction returns the CertificatesAction field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetCertificatesAction() CertificatemanagementCertificateBase {
-	if o == nil || o.CertificatesAction.Get() == nil {
+	if o == nil || IsNil(o.CertificatesAction.Get()) {
 		var ret CertificatemanagementCertificateBase
 		return ret
 	}
@@ -284,7 +288,7 @@ func (o *ComputeServerSetting) UnsetCertificatesAction() {
 
 // GetClearSel returns the ClearSel field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetClearSel() string {
-	if o == nil || o.ClearSel == nil {
+	if o == nil || IsNil(o.ClearSel) {
 		var ret string
 		return ret
 	}
@@ -294,7 +298,7 @@ func (o *ComputeServerSetting) GetClearSel() string {
 // GetClearSelOk returns a tuple with the ClearSel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetClearSelOk() (*string, bool) {
-	if o == nil || o.ClearSel == nil {
+	if o == nil || IsNil(o.ClearSel) {
 		return nil, false
 	}
 	return o.ClearSel, true
@@ -302,7 +306,7 @@ func (o *ComputeServerSetting) GetClearSelOk() (*string, bool) {
 
 // HasClearSel returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasClearSel() bool {
-	if o != nil && o.ClearSel != nil {
+	if o != nil && !IsNil(o.ClearSel) {
 		return true
 	}
 
@@ -316,7 +320,7 @@ func (o *ComputeServerSetting) SetClearSel(v string) {
 
 // GetCmosReset returns the CmosReset field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetCmosReset() string {
-	if o == nil || o.CmosReset == nil {
+	if o == nil || IsNil(o.CmosReset) {
 		var ret string
 		return ret
 	}
@@ -326,7 +330,7 @@ func (o *ComputeServerSetting) GetCmosReset() string {
 // GetCmosResetOk returns a tuple with the CmosReset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetCmosResetOk() (*string, bool) {
-	if o == nil || o.CmosReset == nil {
+	if o == nil || IsNil(o.CmosReset) {
 		return nil, false
 	}
 	return o.CmosReset, true
@@ -334,7 +338,7 @@ func (o *ComputeServerSetting) GetCmosResetOk() (*string, bool) {
 
 // HasCmosReset returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasCmosReset() bool {
-	if o != nil && o.CmosReset != nil {
+	if o != nil && !IsNil(o.CmosReset) {
 		return true
 	}
 
@@ -348,7 +352,7 @@ func (o *ComputeServerSetting) SetCmosReset(v string) {
 
 // GetCollectSel returns the CollectSel field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetCollectSel() string {
-	if o == nil || o.CollectSel == nil {
+	if o == nil || IsNil(o.CollectSel) {
 		var ret string
 		return ret
 	}
@@ -358,7 +362,7 @@ func (o *ComputeServerSetting) GetCollectSel() string {
 // GetCollectSelOk returns a tuple with the CollectSel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetCollectSelOk() (*string, bool) {
-	if o == nil || o.CollectSel == nil {
+	if o == nil || IsNil(o.CollectSel) {
 		return nil, false
 	}
 	return o.CollectSel, true
@@ -366,7 +370,7 @@ func (o *ComputeServerSetting) GetCollectSelOk() (*string, bool) {
 
 // HasCollectSel returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasCollectSel() bool {
-	if o != nil && o.CollectSel != nil {
+	if o != nil && !IsNil(o.CollectSel) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *ComputeServerSetting) SetCollectSel(v string) {
 
 // GetConfigState returns the ConfigState field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetConfigState() string {
-	if o == nil || o.ConfigState == nil {
+	if o == nil || IsNil(o.ConfigState) {
 		var ret string
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *ComputeServerSetting) GetConfigState() string {
 // GetConfigStateOk returns a tuple with the ConfigState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetConfigStateOk() (*string, bool) {
-	if o == nil || o.ConfigState == nil {
+	if o == nil || IsNil(o.ConfigState) {
 		return nil, false
 	}
 	return o.ConfigState, true
@@ -398,7 +402,7 @@ func (o *ComputeServerSetting) GetConfigStateOk() (*string, bool) {
 
 // HasConfigState returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasConfigState() bool {
-	if o != nil && o.ConfigState != nil {
+	if o != nil && !IsNil(o.ConfigState) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *ComputeServerSetting) SetConfigState(v string) {
 
 // GetFrontPanelLockState returns the FrontPanelLockState field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetFrontPanelLockState() string {
-	if o == nil || o.FrontPanelLockState == nil {
+	if o == nil || IsNil(o.FrontPanelLockState) {
 		var ret string
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *ComputeServerSetting) GetFrontPanelLockState() string {
 // GetFrontPanelLockStateOk returns a tuple with the FrontPanelLockState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetFrontPanelLockStateOk() (*string, bool) {
-	if o == nil || o.FrontPanelLockState == nil {
+	if o == nil || IsNil(o.FrontPanelLockState) {
 		return nil, false
 	}
 	return o.FrontPanelLockState, true
@@ -430,7 +434,7 @@ func (o *ComputeServerSetting) GetFrontPanelLockStateOk() (*string, bool) {
 
 // HasFrontPanelLockState returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasFrontPanelLockState() bool {
-	if o != nil && o.FrontPanelLockState != nil {
+	if o != nil && !IsNil(o.FrontPanelLockState) {
 		return true
 	}
 
@@ -444,7 +448,7 @@ func (o *ComputeServerSetting) SetFrontPanelLockState(v string) {
 
 // GetHostInitConfiguration returns the HostInitConfiguration field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetHostInitConfiguration() string {
-	if o == nil || o.HostInitConfiguration == nil {
+	if o == nil || IsNil(o.HostInitConfiguration) {
 		var ret string
 		return ret
 	}
@@ -454,7 +458,7 @@ func (o *ComputeServerSetting) GetHostInitConfiguration() string {
 // GetHostInitConfigurationOk returns a tuple with the HostInitConfiguration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetHostInitConfigurationOk() (*string, bool) {
-	if o == nil || o.HostInitConfiguration == nil {
+	if o == nil || IsNil(o.HostInitConfiguration) {
 		return nil, false
 	}
 	return o.HostInitConfiguration, true
@@ -462,7 +466,7 @@ func (o *ComputeServerSetting) GetHostInitConfigurationOk() (*string, bool) {
 
 // HasHostInitConfiguration returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasHostInitConfiguration() bool {
-	if o != nil && o.HostInitConfiguration != nil {
+	if o != nil && !IsNil(o.HostInitConfiguration) {
 		return true
 	}
 
@@ -476,7 +480,7 @@ func (o *ComputeServerSetting) SetHostInitConfiguration(v string) {
 
 // GetKvmReset returns the KvmReset field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetKvmReset() string {
-	if o == nil || o.KvmReset == nil {
+	if o == nil || IsNil(o.KvmReset) {
 		var ret string
 		return ret
 	}
@@ -486,7 +490,7 @@ func (o *ComputeServerSetting) GetKvmReset() string {
 // GetKvmResetOk returns a tuple with the KvmReset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetKvmResetOk() (*string, bool) {
-	if o == nil || o.KvmReset == nil {
+	if o == nil || IsNil(o.KvmReset) {
 		return nil, false
 	}
 	return o.KvmReset, true
@@ -494,7 +498,7 @@ func (o *ComputeServerSetting) GetKvmResetOk() (*string, bool) {
 
 // HasKvmReset returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasKvmReset() bool {
-	if o != nil && o.KvmReset != nil {
+	if o != nil && !IsNil(o.KvmReset) {
 		return true
 	}
 
@@ -508,7 +512,7 @@ func (o *ComputeServerSetting) SetKvmReset(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -518,7 +522,7 @@ func (o *ComputeServerSetting) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -526,7 +530,7 @@ func (o *ComputeServerSetting) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -540,7 +544,7 @@ func (o *ComputeServerSetting) SetName(v string) {
 
 // GetOneTimeBootDevice returns the OneTimeBootDevice field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetOneTimeBootDevice() string {
-	if o == nil || o.OneTimeBootDevice == nil {
+	if o == nil || IsNil(o.OneTimeBootDevice) {
 		var ret string
 		return ret
 	}
@@ -550,7 +554,7 @@ func (o *ComputeServerSetting) GetOneTimeBootDevice() string {
 // GetOneTimeBootDeviceOk returns a tuple with the OneTimeBootDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetOneTimeBootDeviceOk() (*string, bool) {
-	if o == nil || o.OneTimeBootDevice == nil {
+	if o == nil || IsNil(o.OneTimeBootDevice) {
 		return nil, false
 	}
 	return o.OneTimeBootDevice, true
@@ -558,7 +562,7 @@ func (o *ComputeServerSetting) GetOneTimeBootDeviceOk() (*string, bool) {
 
 // HasOneTimeBootDevice returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasOneTimeBootDevice() bool {
-	if o != nil && o.OneTimeBootDevice != nil {
+	if o != nil && !IsNil(o.OneTimeBootDevice) {
 		return true
 	}
 
@@ -572,7 +576,7 @@ func (o *ComputeServerSetting) SetOneTimeBootDevice(v string) {
 
 // GetPersistentMemoryOperation returns the PersistentMemoryOperation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetPersistentMemoryOperation() ComputePersistentMemoryOperation {
-	if o == nil || o.PersistentMemoryOperation.Get() == nil {
+	if o == nil || IsNil(o.PersistentMemoryOperation.Get()) {
 		var ret ComputePersistentMemoryOperation
 		return ret
 	}
@@ -615,7 +619,7 @@ func (o *ComputeServerSetting) UnsetPersistentMemoryOperation() {
 
 // GetPersonalitySetting returns the PersonalitySetting field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetPersonalitySetting() ComputePersonalitySetting {
-	if o == nil || o.PersonalitySetting.Get() == nil {
+	if o == nil || IsNil(o.PersonalitySetting.Get()) {
 		var ret ComputePersonalitySetting
 		return ret
 	}
@@ -658,7 +662,7 @@ func (o *ComputeServerSetting) UnsetPersonalitySetting() {
 
 // GetServerConfig returns the ServerConfig field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetServerConfig() ComputeServerConfig {
-	if o == nil || o.ServerConfig.Get() == nil {
+	if o == nil || IsNil(o.ServerConfig.Get()) {
 		var ret ComputeServerConfig
 		return ret
 	}
@@ -712,7 +716,7 @@ func (o *ComputeServerSetting) GetServerOpStatus() []ComputeServerOpStatus {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeServerSetting) GetServerOpStatusOk() ([]ComputeServerOpStatus, bool) {
-	if o == nil || o.ServerOpStatus == nil {
+	if o == nil || IsNil(o.ServerOpStatus) {
 		return nil, false
 	}
 	return o.ServerOpStatus, true
@@ -720,7 +724,7 @@ func (o *ComputeServerSetting) GetServerOpStatusOk() ([]ComputeServerOpStatus, b
 
 // HasServerOpStatus returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasServerOpStatus() bool {
-	if o != nil && o.ServerOpStatus != nil {
+	if o != nil && IsNil(o.ServerOpStatus) {
 		return true
 	}
 
@@ -734,7 +738,7 @@ func (o *ComputeServerSetting) SetServerOpStatus(v []ComputeServerOpStatus) {
 
 // GetStorageControllerOperation returns the StorageControllerOperation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetStorageControllerOperation() ComputeStorageControllerOperation {
-	if o == nil || o.StorageControllerOperation.Get() == nil {
+	if o == nil || IsNil(o.StorageControllerOperation.Get()) {
 		var ret ComputeStorageControllerOperation
 		return ret
 	}
@@ -777,7 +781,7 @@ func (o *ComputeServerSetting) UnsetStorageControllerOperation() {
 
 // GetStoragePhysicalDriveOperation returns the StoragePhysicalDriveOperation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetStoragePhysicalDriveOperation() ComputeStoragePhysicalDriveOperation {
-	if o == nil || o.StoragePhysicalDriveOperation.Get() == nil {
+	if o == nil || IsNil(o.StoragePhysicalDriveOperation.Get()) {
 		var ret ComputeStoragePhysicalDriveOperation
 		return ret
 	}
@@ -820,7 +824,7 @@ func (o *ComputeServerSetting) UnsetStoragePhysicalDriveOperation() {
 
 // GetStorageUtilityImageOperation returns the StorageUtilityImageOperation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetStorageUtilityImageOperation() ComputeStorageUtilityImageOperation {
-	if o == nil || o.StorageUtilityImageOperation.Get() == nil {
+	if o == nil || IsNil(o.StorageUtilityImageOperation.Get()) {
 		var ret ComputeStorageUtilityImageOperation
 		return ret
 	}
@@ -863,7 +867,7 @@ func (o *ComputeServerSetting) UnsetStorageUtilityImageOperation() {
 
 // GetStorageVirtualDriveOperation returns the StorageVirtualDriveOperation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetStorageVirtualDriveOperation() ComputeStorageVirtualDriveOperation {
-	if o == nil || o.StorageVirtualDriveOperation.Get() == nil {
+	if o == nil || IsNil(o.StorageVirtualDriveOperation.Get()) {
 		var ret ComputeStorageVirtualDriveOperation
 		return ret
 	}
@@ -906,7 +910,7 @@ func (o *ComputeServerSetting) UnsetStorageVirtualDriveOperation() {
 
 // GetTpmReset returns the TpmReset field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetTpmReset() string {
-	if o == nil || o.TpmReset == nil {
+	if o == nil || IsNil(o.TpmReset) {
 		var ret string
 		return ret
 	}
@@ -916,7 +920,7 @@ func (o *ComputeServerSetting) GetTpmReset() string {
 // GetTpmResetOk returns a tuple with the TpmReset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetTpmResetOk() (*string, bool) {
-	if o == nil || o.TpmReset == nil {
+	if o == nil || IsNil(o.TpmReset) {
 		return nil, false
 	}
 	return o.TpmReset, true
@@ -924,7 +928,7 @@ func (o *ComputeServerSetting) GetTpmResetOk() (*string, bool) {
 
 // HasTpmReset returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasTpmReset() bool {
-	if o != nil && o.TpmReset != nil {
+	if o != nil && !IsNil(o.TpmReset) {
 		return true
 	}
 
@@ -938,7 +942,7 @@ func (o *ComputeServerSetting) SetTpmReset(v string) {
 
 // GetTunneledKvmState returns the TunneledKvmState field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetTunneledKvmState() string {
-	if o == nil || o.TunneledKvmState == nil {
+	if o == nil || IsNil(o.TunneledKvmState) {
 		var ret string
 		return ret
 	}
@@ -948,7 +952,7 @@ func (o *ComputeServerSetting) GetTunneledKvmState() string {
 // GetTunneledKvmStateOk returns a tuple with the TunneledKvmState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComputeServerSetting) GetTunneledKvmStateOk() (*string, bool) {
-	if o == nil || o.TunneledKvmState == nil {
+	if o == nil || IsNil(o.TunneledKvmState) {
 		return nil, false
 	}
 	return o.TunneledKvmState, true
@@ -956,7 +960,7 @@ func (o *ComputeServerSetting) GetTunneledKvmStateOk() (*string, bool) {
 
 // HasTunneledKvmState returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasTunneledKvmState() bool {
-	if o != nil && o.TunneledKvmState != nil {
+	if o != nil && !IsNil(o.TunneledKvmState) {
 		return true
 	}
 
@@ -968,184 +972,232 @@ func (o *ComputeServerSetting) SetTunneledKvmState(v string) {
 	o.TunneledKvmState = &v
 }
 
-// GetLocatorLed returns the LocatorLed field value if set, zero value otherwise.
+// GetLocatorLed returns the LocatorLed field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetLocatorLed() EquipmentLocatorLedRelationship {
-	if o == nil || o.LocatorLed == nil {
+	if o == nil || IsNil(o.LocatorLed.Get()) {
 		var ret EquipmentLocatorLedRelationship
 		return ret
 	}
-	return *o.LocatorLed
+	return *o.LocatorLed.Get()
 }
 
 // GetLocatorLedOk returns a tuple with the LocatorLed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeServerSetting) GetLocatorLedOk() (*EquipmentLocatorLedRelationship, bool) {
-	if o == nil || o.LocatorLed == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocatorLed, true
+	return o.LocatorLed.Get(), o.LocatorLed.IsSet()
 }
 
 // HasLocatorLed returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasLocatorLed() bool {
-	if o != nil && o.LocatorLed != nil {
+	if o != nil && o.LocatorLed.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocatorLed gets a reference to the given EquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
+// SetLocatorLed gets a reference to the given NullableEquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
 func (o *ComputeServerSetting) SetLocatorLed(v EquipmentLocatorLedRelationship) {
-	o.LocatorLed = &v
+	o.LocatorLed.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetLocatorLedNil sets the value for LocatorLed to be an explicit nil
+func (o *ComputeServerSetting) SetLocatorLedNil() {
+	o.LocatorLed.Set(nil)
+}
+
+// UnsetLocatorLed ensures that no value is present for LocatorLed, not even an explicit nil
+func (o *ComputeServerSetting) UnsetLocatorLed() {
+	o.LocatorLed.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeServerSetting) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ComputeServerSetting) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetRunningWorkflow returns the RunningWorkflow field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ComputeServerSetting) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ComputeServerSetting) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetRunningWorkflow returns the RunningWorkflow field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetRunningWorkflow() WorkflowWorkflowInfoRelationship {
-	if o == nil || o.RunningWorkflow == nil {
+	if o == nil || IsNil(o.RunningWorkflow.Get()) {
 		var ret WorkflowWorkflowInfoRelationship
 		return ret
 	}
-	return *o.RunningWorkflow
+	return *o.RunningWorkflow.Get()
 }
 
 // GetRunningWorkflowOk returns a tuple with the RunningWorkflow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeServerSetting) GetRunningWorkflowOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil || o.RunningWorkflow == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RunningWorkflow, true
+	return o.RunningWorkflow.Get(), o.RunningWorkflow.IsSet()
 }
 
 // HasRunningWorkflow returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasRunningWorkflow() bool {
-	if o != nil && o.RunningWorkflow != nil {
+	if o != nil && o.RunningWorkflow.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRunningWorkflow gets a reference to the given WorkflowWorkflowInfoRelationship and assigns it to the RunningWorkflow field.
+// SetRunningWorkflow gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the RunningWorkflow field.
 func (o *ComputeServerSetting) SetRunningWorkflow(v WorkflowWorkflowInfoRelationship) {
-	o.RunningWorkflow = &v
+	o.RunningWorkflow.Set(&v)
 }
 
-// GetServer returns the Server field value if set, zero value otherwise.
+// SetRunningWorkflowNil sets the value for RunningWorkflow to be an explicit nil
+func (o *ComputeServerSetting) SetRunningWorkflowNil() {
+	o.RunningWorkflow.Set(nil)
+}
+
+// UnsetRunningWorkflow ensures that no value is present for RunningWorkflow, not even an explicit nil
+func (o *ComputeServerSetting) UnsetRunningWorkflow() {
+	o.RunningWorkflow.Unset()
+}
+
+// GetServer returns the Server field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeServerSetting) GetServer() ComputePhysicalRelationship {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.Server
+	return *o.Server.Get()
 }
 
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComputeServerSetting) GetServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Server, true
+	return o.Server.Get(), o.Server.IsSet()
 }
 
 // HasServer returns a boolean if a field has been set.
 func (o *ComputeServerSetting) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && o.Server.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServer gets a reference to the given ComputePhysicalRelationship and assigns it to the Server field.
+// SetServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the Server field.
 func (o *ComputeServerSetting) SetServer(v ComputePhysicalRelationship) {
-	o.Server = &v
+	o.Server.Set(&v)
+}
+
+// SetServerNil sets the value for Server to be an explicit nil
+func (o *ComputeServerSetting) SetServerNil() {
+	o.Server.Set(nil)
+}
+
+// UnsetServer ensures that no value is present for Server, not even an explicit nil
+func (o *ComputeServerSetting) UnsetServer() {
+	o.Server.Unset()
 }
 
 func (o ComputeServerSetting) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComputeServerSetting) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminLocatorLedState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminLocatorLedState) {
 		toSerialize["AdminLocatorLedState"] = o.AdminLocatorLedState
 	}
-	if o.AdminPowerState != nil {
+	if !IsNil(o.AdminPowerState) {
 		toSerialize["AdminPowerState"] = o.AdminPowerState
 	}
 	if o.CertificatesAction.IsSet() {
 		toSerialize["CertificatesAction"] = o.CertificatesAction.Get()
 	}
-	if o.ClearSel != nil {
+	if !IsNil(o.ClearSel) {
 		toSerialize["ClearSel"] = o.ClearSel
 	}
-	if o.CmosReset != nil {
+	if !IsNil(o.CmosReset) {
 		toSerialize["CmosReset"] = o.CmosReset
 	}
-	if o.CollectSel != nil {
+	if !IsNil(o.CollectSel) {
 		toSerialize["CollectSel"] = o.CollectSel
 	}
-	if o.ConfigState != nil {
+	if !IsNil(o.ConfigState) {
 		toSerialize["ConfigState"] = o.ConfigState
 	}
-	if o.FrontPanelLockState != nil {
+	if !IsNil(o.FrontPanelLockState) {
 		toSerialize["FrontPanelLockState"] = o.FrontPanelLockState
 	}
-	if o.HostInitConfiguration != nil {
+	if !IsNil(o.HostInitConfiguration) {
 		toSerialize["HostInitConfiguration"] = o.HostInitConfiguration
 	}
-	if o.KvmReset != nil {
+	if !IsNil(o.KvmReset) {
 		toSerialize["KvmReset"] = o.KvmReset
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OneTimeBootDevice != nil {
+	if !IsNil(o.OneTimeBootDevice) {
 		toSerialize["OneTimeBootDevice"] = o.OneTimeBootDevice
 	}
 	if o.PersistentMemoryOperation.IsSet() {
@@ -1172,33 +1224,55 @@ func (o ComputeServerSetting) MarshalJSON() ([]byte, error) {
 	if o.StorageVirtualDriveOperation.IsSet() {
 		toSerialize["StorageVirtualDriveOperation"] = o.StorageVirtualDriveOperation.Get()
 	}
-	if o.TpmReset != nil {
+	if !IsNil(o.TpmReset) {
 		toSerialize["TpmReset"] = o.TpmReset
 	}
-	if o.TunneledKvmState != nil {
+	if !IsNil(o.TunneledKvmState) {
 		toSerialize["TunneledKvmState"] = o.TunneledKvmState
 	}
-	if o.LocatorLed != nil {
-		toSerialize["LocatorLed"] = o.LocatorLed
+	if o.LocatorLed.IsSet() {
+		toSerialize["LocatorLed"] = o.LocatorLed.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.RunningWorkflow != nil {
-		toSerialize["RunningWorkflow"] = o.RunningWorkflow
+	if o.RunningWorkflow.IsSet() {
+		toSerialize["RunningWorkflow"] = o.RunningWorkflow.Get()
 	}
-	if o.Server != nil {
-		toSerialize["Server"] = o.Server
+	if o.Server.IsSet() {
+		toSerialize["Server"] = o.Server.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ComputeServerSetting) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ComputeServerSetting) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ComputeServerSettingWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1238,16 +1312,16 @@ func (o *ComputeServerSetting) UnmarshalJSON(bytes []byte) (err error) {
 		// Clear the configuration of TPM chip in the server. * `None` - Perform no action on the TPM. * `ClearTpm` - Clear the configuration and restore factory defaults of TPM chip in the server.
 		TpmReset *string `json:"TpmReset,omitempty"`
 		// By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state. * `Ready` - Tunneled vKVM is ready to be configured on the server. * `Enable` - Tunneled vKVM is enabled for the server. * `Disable` - Tunneled vKVM is disabled for the server.
-		TunneledKvmState *string                              `json:"TunneledKvmState,omitempty"`
-		LocatorLed       *EquipmentLocatorLedRelationship     `json:"LocatorLed,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		RunningWorkflow  *WorkflowWorkflowInfoRelationship    `json:"RunningWorkflow,omitempty"`
-		Server           *ComputePhysicalRelationship         `json:"Server,omitempty"`
+		TunneledKvmState *string                                     `json:"TunneledKvmState,omitempty"`
+		LocatorLed       NullableEquipmentLocatorLedRelationship     `json:"LocatorLed,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		RunningWorkflow  NullableWorkflowWorkflowInfoRelationship    `json:"RunningWorkflow,omitempty"`
+		Server           NullableComputePhysicalRelationship         `json:"Server,omitempty"`
 	}
 
 	varComputeServerSettingWithoutEmbeddedStruct := ComputeServerSettingWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varComputeServerSettingWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varComputeServerSettingWithoutEmbeddedStruct)
 	if err == nil {
 		varComputeServerSetting := _ComputeServerSetting{}
 		varComputeServerSetting.ClassId = varComputeServerSettingWithoutEmbeddedStruct.ClassId
@@ -1285,7 +1359,7 @@ func (o *ComputeServerSetting) UnmarshalJSON(bytes []byte) (err error) {
 
 	varComputeServerSetting := _ComputeServerSetting{}
 
-	err = json.Unmarshal(bytes, &varComputeServerSetting)
+	err = json.Unmarshal(data, &varComputeServerSetting)
 	if err == nil {
 		o.InventoryBase = varComputeServerSetting.InventoryBase
 	} else {
@@ -1294,7 +1368,7 @@ func (o *ComputeServerSetting) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminLocatorLedState")

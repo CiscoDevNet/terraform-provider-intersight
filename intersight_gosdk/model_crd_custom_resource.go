@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CrdCustomResource type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CrdCustomResource{}
 
 // CrdCustomResource Custom kubernetes resource launcher service.
 type CrdCustomResource struct {
@@ -40,8 +44,8 @@ type CrdCustomResource struct {
 	// Target Moid for public cloud DC.
 	TargetMoid *string `json:"TargetMoid,omitempty"`
 	// Target type for public cloud DC.
-	TargetType           *string                 `json:"TargetType,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	TargetType           *string                        `json:"TargetType,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -120,7 +124,7 @@ func (o *CrdCustomResource) SetObjectType(v string) {
 
 // GetDcLauncher returns the DcLauncher field value if set, zero value otherwise.
 func (o *CrdCustomResource) GetDcLauncher() string {
-	if o == nil || o.DcLauncher == nil {
+	if o == nil || IsNil(o.DcLauncher) {
 		var ret string
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *CrdCustomResource) GetDcLauncher() string {
 // GetDcLauncherOk returns a tuple with the DcLauncher field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CrdCustomResource) GetDcLauncherOk() (*string, bool) {
-	if o == nil || o.DcLauncher == nil {
+	if o == nil || IsNil(o.DcLauncher) {
 		return nil, false
 	}
 	return o.DcLauncher, true
@@ -138,7 +142,7 @@ func (o *CrdCustomResource) GetDcLauncherOk() (*string, bool) {
 
 // HasDcLauncher returns a boolean if a field has been set.
 func (o *CrdCustomResource) HasDcLauncher() bool {
-	if o != nil && o.DcLauncher != nil {
+	if o != nil && !IsNil(o.DcLauncher) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *CrdCustomResource) SetDcLauncher(v string) {
 
 // GetImage returns the Image field value if set, zero value otherwise.
 func (o *CrdCustomResource) GetImage() string {
-	if o == nil || o.Image == nil {
+	if o == nil || IsNil(o.Image) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *CrdCustomResource) GetImage() string {
 // GetImageOk returns a tuple with the Image field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CrdCustomResource) GetImageOk() (*string, bool) {
-	if o == nil || o.Image == nil {
+	if o == nil || IsNil(o.Image) {
 		return nil, false
 	}
 	return o.Image, true
@@ -170,7 +174,7 @@ func (o *CrdCustomResource) GetImageOk() (*string, bool) {
 
 // HasImage returns a boolean if a field has been set.
 func (o *CrdCustomResource) HasImage() bool {
-	if o != nil && o.Image != nil {
+	if o != nil && !IsNil(o.Image) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *CrdCustomResource) SetImage(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CrdCustomResource) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *CrdCustomResource) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CrdCustomResource) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -202,7 +206,7 @@ func (o *CrdCustomResource) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CrdCustomResource) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *CrdCustomResource) SetName(v string) {
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
 func (o *CrdCustomResource) GetNamespace() string {
-	if o == nil || o.Namespace == nil {
+	if o == nil || IsNil(o.Namespace) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *CrdCustomResource) GetNamespace() string {
 // GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CrdCustomResource) GetNamespaceOk() (*string, bool) {
-	if o == nil || o.Namespace == nil {
+	if o == nil || IsNil(o.Namespace) {
 		return nil, false
 	}
 	return o.Namespace, true
@@ -234,7 +238,7 @@ func (o *CrdCustomResource) GetNamespaceOk() (*string, bool) {
 
 // HasNamespace returns a boolean if a field has been set.
 func (o *CrdCustomResource) HasNamespace() bool {
-	if o != nil && o.Namespace != nil {
+	if o != nil && !IsNil(o.Namespace) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *CrdCustomResource) SetNamespace(v string) {
 
 // GetPort returns the Port field value if set, zero value otherwise.
 func (o *CrdCustomResource) GetPort() int64 {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret int64
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *CrdCustomResource) GetPort() int64 {
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CrdCustomResource) GetPortOk() (*int64, bool) {
-	if o == nil || o.Port == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
 	return o.Port, true
@@ -266,7 +270,7 @@ func (o *CrdCustomResource) GetPortOk() (*int64, bool) {
 
 // HasPort returns a boolean if a field has been set.
 func (o *CrdCustomResource) HasPort() bool {
-	if o != nil && o.Port != nil {
+	if o != nil && !IsNil(o.Port) {
 		return true
 	}
 
@@ -291,7 +295,7 @@ func (o *CrdCustomResource) GetProperties() []CrdCustomResourceConfigProperty {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CrdCustomResource) GetPropertiesOk() ([]CrdCustomResourceConfigProperty, bool) {
-	if o == nil || o.Properties == nil {
+	if o == nil || IsNil(o.Properties) {
 		return nil, false
 	}
 	return o.Properties, true
@@ -299,7 +303,7 @@ func (o *CrdCustomResource) GetPropertiesOk() ([]CrdCustomResourceConfigProperty
 
 // HasProperties returns a boolean if a field has been set.
 func (o *CrdCustomResource) HasProperties() bool {
-	if o != nil && o.Properties != nil {
+	if o != nil && IsNil(o.Properties) {
 		return true
 	}
 
@@ -313,7 +317,7 @@ func (o *CrdCustomResource) SetProperties(v []CrdCustomResourceConfigProperty) {
 
 // GetTargetId returns the TargetId field value if set, zero value otherwise.
 func (o *CrdCustomResource) GetTargetId() string {
-	if o == nil || o.TargetId == nil {
+	if o == nil || IsNil(o.TargetId) {
 		var ret string
 		return ret
 	}
@@ -323,7 +327,7 @@ func (o *CrdCustomResource) GetTargetId() string {
 // GetTargetIdOk returns a tuple with the TargetId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CrdCustomResource) GetTargetIdOk() (*string, bool) {
-	if o == nil || o.TargetId == nil {
+	if o == nil || IsNil(o.TargetId) {
 		return nil, false
 	}
 	return o.TargetId, true
@@ -331,7 +335,7 @@ func (o *CrdCustomResource) GetTargetIdOk() (*string, bool) {
 
 // HasTargetId returns a boolean if a field has been set.
 func (o *CrdCustomResource) HasTargetId() bool {
-	if o != nil && o.TargetId != nil {
+	if o != nil && !IsNil(o.TargetId) {
 		return true
 	}
 
@@ -345,7 +349,7 @@ func (o *CrdCustomResource) SetTargetId(v string) {
 
 // GetTargetMoid returns the TargetMoid field value if set, zero value otherwise.
 func (o *CrdCustomResource) GetTargetMoid() string {
-	if o == nil || o.TargetMoid == nil {
+	if o == nil || IsNil(o.TargetMoid) {
 		var ret string
 		return ret
 	}
@@ -355,7 +359,7 @@ func (o *CrdCustomResource) GetTargetMoid() string {
 // GetTargetMoidOk returns a tuple with the TargetMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CrdCustomResource) GetTargetMoidOk() (*string, bool) {
-	if o == nil || o.TargetMoid == nil {
+	if o == nil || IsNil(o.TargetMoid) {
 		return nil, false
 	}
 	return o.TargetMoid, true
@@ -363,7 +367,7 @@ func (o *CrdCustomResource) GetTargetMoidOk() (*string, bool) {
 
 // HasTargetMoid returns a boolean if a field has been set.
 func (o *CrdCustomResource) HasTargetMoid() bool {
-	if o != nil && o.TargetMoid != nil {
+	if o != nil && !IsNil(o.TargetMoid) {
 		return true
 	}
 
@@ -377,7 +381,7 @@ func (o *CrdCustomResource) SetTargetMoid(v string) {
 
 // GetTargetType returns the TargetType field value if set, zero value otherwise.
 func (o *CrdCustomResource) GetTargetType() string {
-	if o == nil || o.TargetType == nil {
+	if o == nil || IsNil(o.TargetType) {
 		var ret string
 		return ret
 	}
@@ -387,7 +391,7 @@ func (o *CrdCustomResource) GetTargetType() string {
 // GetTargetTypeOk returns a tuple with the TargetType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CrdCustomResource) GetTargetTypeOk() (*string, bool) {
-	if o == nil || o.TargetType == nil {
+	if o == nil || IsNil(o.TargetType) {
 		return nil, false
 	}
 	return o.TargetType, true
@@ -395,7 +399,7 @@ func (o *CrdCustomResource) GetTargetTypeOk() (*string, bool) {
 
 // HasTargetType returns a boolean if a field has been set.
 func (o *CrdCustomResource) HasTargetType() bool {
-	if o != nil && o.TargetType != nil {
+	if o != nil && !IsNil(o.TargetType) {
 		return true
 	}
 
@@ -407,93 +411,130 @@ func (o *CrdCustomResource) SetTargetType(v string) {
 	o.TargetType = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CrdCustomResource) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CrdCustomResource) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *CrdCustomResource) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *CrdCustomResource) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *CrdCustomResource) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *CrdCustomResource) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o CrdCustomResource) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CrdCustomResource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DcLauncher != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DcLauncher) {
 		toSerialize["DcLauncher"] = o.DcLauncher
 	}
-	if o.Image != nil {
+	if !IsNil(o.Image) {
 		toSerialize["Image"] = o.Image
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.Namespace != nil {
+	if !IsNil(o.Namespace) {
 		toSerialize["Namespace"] = o.Namespace
 	}
-	if o.Port != nil {
+	if !IsNil(o.Port) {
 		toSerialize["Port"] = o.Port
 	}
 	if o.Properties != nil {
 		toSerialize["Properties"] = o.Properties
 	}
-	if o.TargetId != nil {
+	if !IsNil(o.TargetId) {
 		toSerialize["TargetId"] = o.TargetId
 	}
-	if o.TargetMoid != nil {
+	if !IsNil(o.TargetMoid) {
 		toSerialize["TargetMoid"] = o.TargetMoid
 	}
-	if o.TargetType != nil {
+	if !IsNil(o.TargetType) {
 		toSerialize["TargetType"] = o.TargetType
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CrdCustomResource) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CrdCustomResource) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CrdCustomResourceWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -515,13 +556,13 @@ func (o *CrdCustomResource) UnmarshalJSON(bytes []byte) (err error) {
 		// Target Moid for public cloud DC.
 		TargetMoid *string `json:"TargetMoid,omitempty"`
 		// Target type for public cloud DC.
-		TargetType *string                 `json:"TargetType,omitempty"`
-		Account    *IamAccountRelationship `json:"Account,omitempty"`
+		TargetType *string                        `json:"TargetType,omitempty"`
+		Account    NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varCrdCustomResourceWithoutEmbeddedStruct := CrdCustomResourceWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCrdCustomResourceWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCrdCustomResourceWithoutEmbeddedStruct)
 	if err == nil {
 		varCrdCustomResource := _CrdCustomResource{}
 		varCrdCustomResource.ClassId = varCrdCustomResourceWithoutEmbeddedStruct.ClassId
@@ -543,7 +584,7 @@ func (o *CrdCustomResource) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCrdCustomResource := _CrdCustomResource{}
 
-	err = json.Unmarshal(bytes, &varCrdCustomResource)
+	err = json.Unmarshal(data, &varCrdCustomResource)
 	if err == nil {
 		o.MoBaseMo = varCrdCustomResource.MoBaseMo
 	} else {
@@ -552,7 +593,7 @@ func (o *CrdCustomResource) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DcLauncher")

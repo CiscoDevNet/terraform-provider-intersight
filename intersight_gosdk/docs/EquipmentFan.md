@@ -17,10 +17,10 @@ Name | Type | Description | Notes
 **Sku** | Pointer to **string** | This field identifies the Stockkeeping Unit for this Fan Unit. | [optional] [readonly] 
 **TrayId** | Pointer to **int64** | Tray identifier for the fan module. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for this Fan Unit. | [optional] [readonly] 
-**EquipmentFanModule** | Pointer to [**EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) |  | [optional] 
-**EquipmentFex** | Pointer to [**EquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**EquipmentFanModule** | Pointer to [**NullableEquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) |  | [optional] 
+**EquipmentFex** | Pointer to [**NullableEquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -391,6 +391,16 @@ SetEquipmentFanModule sets EquipmentFanModule field to given value.
 
 HasEquipmentFanModule returns a boolean if a field has been set.
 
+### SetEquipmentFanModuleNil
+
+`func (o *EquipmentFan) SetEquipmentFanModuleNil(b bool)`
+
+ SetEquipmentFanModuleNil sets the value for EquipmentFanModule to be an explicit nil
+
+### UnsetEquipmentFanModule
+`func (o *EquipmentFan) UnsetEquipmentFanModule()`
+
+UnsetEquipmentFanModule ensures that no value is present for EquipmentFanModule, not even an explicit nil
 ### GetEquipmentFex
 
 `func (o *EquipmentFan) GetEquipmentFex() EquipmentFexRelationship`
@@ -416,6 +426,16 @@ SetEquipmentFex sets EquipmentFex field to given value.
 
 HasEquipmentFex returns a boolean if a field has been set.
 
+### SetEquipmentFexNil
+
+`func (o *EquipmentFan) SetEquipmentFexNil(b bool)`
+
+ SetEquipmentFexNil sets the value for EquipmentFex to be an explicit nil
+
+### UnsetEquipmentFex
+`func (o *EquipmentFan) UnsetEquipmentFex()`
+
+UnsetEquipmentFex ensures that no value is present for EquipmentFex, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentFan) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`
@@ -441,6 +461,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *EquipmentFan) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *EquipmentFan) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *EquipmentFan) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -466,6 +496,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *EquipmentFan) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *EquipmentFan) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

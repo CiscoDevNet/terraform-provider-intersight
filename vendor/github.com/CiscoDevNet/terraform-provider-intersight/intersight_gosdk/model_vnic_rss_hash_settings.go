@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicRssHashSettings type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicRssHashSettings{}
 
 // VnicRssHashSettings The RSS Hash parameters help the traffic distribution across the Receive Queues based on the IP address (IPv4 or IPv6) and TCP Port numbers. These options help ensure that a single flow is directed to the same receive queue ensuring in-order delivery.
 type VnicRssHashSettings struct {
@@ -150,7 +154,7 @@ func (o *VnicRssHashSettings) SetObjectType(v string) {
 
 // GetIpv4Hash returns the Ipv4Hash field value if set, zero value otherwise.
 func (o *VnicRssHashSettings) GetIpv4Hash() bool {
-	if o == nil || o.Ipv4Hash == nil {
+	if o == nil || IsNil(o.Ipv4Hash) {
 		var ret bool
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *VnicRssHashSettings) GetIpv4Hash() bool {
 // GetIpv4HashOk returns a tuple with the Ipv4Hash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRssHashSettings) GetIpv4HashOk() (*bool, bool) {
-	if o == nil || o.Ipv4Hash == nil {
+	if o == nil || IsNil(o.Ipv4Hash) {
 		return nil, false
 	}
 	return o.Ipv4Hash, true
@@ -168,7 +172,7 @@ func (o *VnicRssHashSettings) GetIpv4HashOk() (*bool, bool) {
 
 // HasIpv4Hash returns a boolean if a field has been set.
 func (o *VnicRssHashSettings) HasIpv4Hash() bool {
-	if o != nil && o.Ipv4Hash != nil {
+	if o != nil && !IsNil(o.Ipv4Hash) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *VnicRssHashSettings) SetIpv4Hash(v bool) {
 
 // GetIpv6ExtHash returns the Ipv6ExtHash field value if set, zero value otherwise.
 func (o *VnicRssHashSettings) GetIpv6ExtHash() bool {
-	if o == nil || o.Ipv6ExtHash == nil {
+	if o == nil || IsNil(o.Ipv6ExtHash) {
 		var ret bool
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *VnicRssHashSettings) GetIpv6ExtHash() bool {
 // GetIpv6ExtHashOk returns a tuple with the Ipv6ExtHash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRssHashSettings) GetIpv6ExtHashOk() (*bool, bool) {
-	if o == nil || o.Ipv6ExtHash == nil {
+	if o == nil || IsNil(o.Ipv6ExtHash) {
 		return nil, false
 	}
 	return o.Ipv6ExtHash, true
@@ -200,7 +204,7 @@ func (o *VnicRssHashSettings) GetIpv6ExtHashOk() (*bool, bool) {
 
 // HasIpv6ExtHash returns a boolean if a field has been set.
 func (o *VnicRssHashSettings) HasIpv6ExtHash() bool {
-	if o != nil && o.Ipv6ExtHash != nil {
+	if o != nil && !IsNil(o.Ipv6ExtHash) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *VnicRssHashSettings) SetIpv6ExtHash(v bool) {
 
 // GetIpv6Hash returns the Ipv6Hash field value if set, zero value otherwise.
 func (o *VnicRssHashSettings) GetIpv6Hash() bool {
-	if o == nil || o.Ipv6Hash == nil {
+	if o == nil || IsNil(o.Ipv6Hash) {
 		var ret bool
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *VnicRssHashSettings) GetIpv6Hash() bool {
 // GetIpv6HashOk returns a tuple with the Ipv6Hash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRssHashSettings) GetIpv6HashOk() (*bool, bool) {
-	if o == nil || o.Ipv6Hash == nil {
+	if o == nil || IsNil(o.Ipv6Hash) {
 		return nil, false
 	}
 	return o.Ipv6Hash, true
@@ -232,7 +236,7 @@ func (o *VnicRssHashSettings) GetIpv6HashOk() (*bool, bool) {
 
 // HasIpv6Hash returns a boolean if a field has been set.
 func (o *VnicRssHashSettings) HasIpv6Hash() bool {
-	if o != nil && o.Ipv6Hash != nil {
+	if o != nil && !IsNil(o.Ipv6Hash) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *VnicRssHashSettings) SetIpv6Hash(v bool) {
 
 // GetTcpIpv4Hash returns the TcpIpv4Hash field value if set, zero value otherwise.
 func (o *VnicRssHashSettings) GetTcpIpv4Hash() bool {
-	if o == nil || o.TcpIpv4Hash == nil {
+	if o == nil || IsNil(o.TcpIpv4Hash) {
 		var ret bool
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *VnicRssHashSettings) GetTcpIpv4Hash() bool {
 // GetTcpIpv4HashOk returns a tuple with the TcpIpv4Hash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRssHashSettings) GetTcpIpv4HashOk() (*bool, bool) {
-	if o == nil || o.TcpIpv4Hash == nil {
+	if o == nil || IsNil(o.TcpIpv4Hash) {
 		return nil, false
 	}
 	return o.TcpIpv4Hash, true
@@ -264,7 +268,7 @@ func (o *VnicRssHashSettings) GetTcpIpv4HashOk() (*bool, bool) {
 
 // HasTcpIpv4Hash returns a boolean if a field has been set.
 func (o *VnicRssHashSettings) HasTcpIpv4Hash() bool {
-	if o != nil && o.TcpIpv4Hash != nil {
+	if o != nil && !IsNil(o.TcpIpv4Hash) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *VnicRssHashSettings) SetTcpIpv4Hash(v bool) {
 
 // GetTcpIpv6ExtHash returns the TcpIpv6ExtHash field value if set, zero value otherwise.
 func (o *VnicRssHashSettings) GetTcpIpv6ExtHash() bool {
-	if o == nil || o.TcpIpv6ExtHash == nil {
+	if o == nil || IsNil(o.TcpIpv6ExtHash) {
 		var ret bool
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *VnicRssHashSettings) GetTcpIpv6ExtHash() bool {
 // GetTcpIpv6ExtHashOk returns a tuple with the TcpIpv6ExtHash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRssHashSettings) GetTcpIpv6ExtHashOk() (*bool, bool) {
-	if o == nil || o.TcpIpv6ExtHash == nil {
+	if o == nil || IsNil(o.TcpIpv6ExtHash) {
 		return nil, false
 	}
 	return o.TcpIpv6ExtHash, true
@@ -296,7 +300,7 @@ func (o *VnicRssHashSettings) GetTcpIpv6ExtHashOk() (*bool, bool) {
 
 // HasTcpIpv6ExtHash returns a boolean if a field has been set.
 func (o *VnicRssHashSettings) HasTcpIpv6ExtHash() bool {
-	if o != nil && o.TcpIpv6ExtHash != nil {
+	if o != nil && !IsNil(o.TcpIpv6ExtHash) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *VnicRssHashSettings) SetTcpIpv6ExtHash(v bool) {
 
 // GetTcpIpv6Hash returns the TcpIpv6Hash field value if set, zero value otherwise.
 func (o *VnicRssHashSettings) GetTcpIpv6Hash() bool {
-	if o == nil || o.TcpIpv6Hash == nil {
+	if o == nil || IsNil(o.TcpIpv6Hash) {
 		var ret bool
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *VnicRssHashSettings) GetTcpIpv6Hash() bool {
 // GetTcpIpv6HashOk returns a tuple with the TcpIpv6Hash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRssHashSettings) GetTcpIpv6HashOk() (*bool, bool) {
-	if o == nil || o.TcpIpv6Hash == nil {
+	if o == nil || IsNil(o.TcpIpv6Hash) {
 		return nil, false
 	}
 	return o.TcpIpv6Hash, true
@@ -328,7 +332,7 @@ func (o *VnicRssHashSettings) GetTcpIpv6HashOk() (*bool, bool) {
 
 // HasTcpIpv6Hash returns a boolean if a field has been set.
 func (o *VnicRssHashSettings) HasTcpIpv6Hash() bool {
-	if o != nil && o.TcpIpv6Hash != nil {
+	if o != nil && !IsNil(o.TcpIpv6Hash) {
 		return true
 	}
 
@@ -342,7 +346,7 @@ func (o *VnicRssHashSettings) SetTcpIpv6Hash(v bool) {
 
 // GetUdpIpv4Hash returns the UdpIpv4Hash field value if set, zero value otherwise.
 func (o *VnicRssHashSettings) GetUdpIpv4Hash() bool {
-	if o == nil || o.UdpIpv4Hash == nil {
+	if o == nil || IsNil(o.UdpIpv4Hash) {
 		var ret bool
 		return ret
 	}
@@ -352,7 +356,7 @@ func (o *VnicRssHashSettings) GetUdpIpv4Hash() bool {
 // GetUdpIpv4HashOk returns a tuple with the UdpIpv4Hash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRssHashSettings) GetUdpIpv4HashOk() (*bool, bool) {
-	if o == nil || o.UdpIpv4Hash == nil {
+	if o == nil || IsNil(o.UdpIpv4Hash) {
 		return nil, false
 	}
 	return o.UdpIpv4Hash, true
@@ -360,7 +364,7 @@ func (o *VnicRssHashSettings) GetUdpIpv4HashOk() (*bool, bool) {
 
 // HasUdpIpv4Hash returns a boolean if a field has been set.
 func (o *VnicRssHashSettings) HasUdpIpv4Hash() bool {
-	if o != nil && o.UdpIpv4Hash != nil {
+	if o != nil && !IsNil(o.UdpIpv4Hash) {
 		return true
 	}
 
@@ -374,7 +378,7 @@ func (o *VnicRssHashSettings) SetUdpIpv4Hash(v bool) {
 
 // GetUdpIpv6Hash returns the UdpIpv6Hash field value if set, zero value otherwise.
 func (o *VnicRssHashSettings) GetUdpIpv6Hash() bool {
-	if o == nil || o.UdpIpv6Hash == nil {
+	if o == nil || IsNil(o.UdpIpv6Hash) {
 		var ret bool
 		return ret
 	}
@@ -384,7 +388,7 @@ func (o *VnicRssHashSettings) GetUdpIpv6Hash() bool {
 // GetUdpIpv6HashOk returns a tuple with the UdpIpv6Hash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicRssHashSettings) GetUdpIpv6HashOk() (*bool, bool) {
-	if o == nil || o.UdpIpv6Hash == nil {
+	if o == nil || IsNil(o.UdpIpv6Hash) {
 		return nil, false
 	}
 	return o.UdpIpv6Hash, true
@@ -392,7 +396,7 @@ func (o *VnicRssHashSettings) GetUdpIpv6HashOk() (*bool, bool) {
 
 // HasUdpIpv6Hash returns a boolean if a field has been set.
 func (o *VnicRssHashSettings) HasUdpIpv6Hash() bool {
-	if o != nil && o.UdpIpv6Hash != nil {
+	if o != nil && !IsNil(o.UdpIpv6Hash) {
 		return true
 	}
 
@@ -405,43 +409,47 @@ func (o *VnicRssHashSettings) SetUdpIpv6Hash(v bool) {
 }
 
 func (o VnicRssHashSettings) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicRssHashSettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Ipv4Hash != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Ipv4Hash) {
 		toSerialize["Ipv4Hash"] = o.Ipv4Hash
 	}
-	if o.Ipv6ExtHash != nil {
+	if !IsNil(o.Ipv6ExtHash) {
 		toSerialize["Ipv6ExtHash"] = o.Ipv6ExtHash
 	}
-	if o.Ipv6Hash != nil {
+	if !IsNil(o.Ipv6Hash) {
 		toSerialize["Ipv6Hash"] = o.Ipv6Hash
 	}
-	if o.TcpIpv4Hash != nil {
+	if !IsNil(o.TcpIpv4Hash) {
 		toSerialize["TcpIpv4Hash"] = o.TcpIpv4Hash
 	}
-	if o.TcpIpv6ExtHash != nil {
+	if !IsNil(o.TcpIpv6ExtHash) {
 		toSerialize["TcpIpv6ExtHash"] = o.TcpIpv6ExtHash
 	}
-	if o.TcpIpv6Hash != nil {
+	if !IsNil(o.TcpIpv6Hash) {
 		toSerialize["TcpIpv6Hash"] = o.TcpIpv6Hash
 	}
-	if o.UdpIpv4Hash != nil {
+	if !IsNil(o.UdpIpv4Hash) {
 		toSerialize["UdpIpv4Hash"] = o.UdpIpv4Hash
 	}
-	if o.UdpIpv6Hash != nil {
+	if !IsNil(o.UdpIpv6Hash) {
 		toSerialize["UdpIpv6Hash"] = o.UdpIpv6Hash
 	}
 
@@ -449,10 +457,32 @@ func (o VnicRssHashSettings) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicRssHashSettings) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicRssHashSettings) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicRssHashSettingsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -478,7 +508,7 @@ func (o *VnicRssHashSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicRssHashSettingsWithoutEmbeddedStruct := VnicRssHashSettingsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicRssHashSettingsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicRssHashSettingsWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicRssHashSettings := _VnicRssHashSettings{}
 		varVnicRssHashSettings.ClassId = varVnicRssHashSettingsWithoutEmbeddedStruct.ClassId
@@ -498,7 +528,7 @@ func (o *VnicRssHashSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicRssHashSettings := _VnicRssHashSettings{}
 
-	err = json.Unmarshal(bytes, &varVnicRssHashSettings)
+	err = json.Unmarshal(data, &varVnicRssHashSettings)
 	if err == nil {
 		o.MoBaseComplexType = varVnicRssHashSettings.MoBaseComplexType
 	} else {
@@ -507,7 +537,7 @@ func (o *VnicRssHashSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Ipv4Hash")

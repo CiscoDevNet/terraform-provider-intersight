@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.ConfigResultEntry"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.ConfigResultEntry"]
-**ConfigResult** | Pointer to [**KubernetesConfigResultRelationship**](KubernetesConfigResultRelationship.md) |  | [optional] 
+**ConfigResult** | Pointer to [**NullableKubernetesConfigResultRelationship**](KubernetesConfigResultRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetConfigResult sets ConfigResult field to given value.
 
 HasConfigResult returns a boolean if a field has been set.
 
+### SetConfigResultNil
+
+`func (o *KubernetesConfigResultEntry) SetConfigResultNil(b bool)`
+
+ SetConfigResultNil sets the value for ConfigResult to be an explicit nil
+
+### UnsetConfigResult
+`func (o *KubernetesConfigResultEntry) UnsetConfigResult()`
+
+UnsetConfigResult ensures that no value is present for ConfigResult, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

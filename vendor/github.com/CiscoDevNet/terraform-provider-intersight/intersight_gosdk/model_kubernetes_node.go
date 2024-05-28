@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesNode type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesNode{}
 
 // KubernetesNode Node inventory represents the Kubernetes Node. One node represent one Kubernetes worker or master. A Kubernetes node is a worker machine in Kubernetes. A node may be a virtual machine or physical machine. Each node contains the services necessary to run pods and is managed by the master components.
 type KubernetesNode struct {
@@ -23,12 +27,12 @@ type KubernetesNode struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                               `json:"ObjectType"`
-	NodeAddresses        []KubernetesNodeAddress              `json:"NodeAddresses,omitempty"`
-	NodeInfo             NullableKubernetesNodeInfo           `json:"NodeInfo,omitempty"`
-	NodeSpec             NullableKubernetesNodeSpec           `json:"NodeSpec,omitempty"`
-	NodeStatuses         []KubernetesNodeStatus               `json:"NodeStatuses,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	ObjectType           string                                      `json:"ObjectType"`
+	NodeAddresses        []KubernetesNodeAddress                     `json:"NodeAddresses,omitempty"`
+	NodeInfo             NullableKubernetesNodeInfo                  `json:"NodeInfo,omitempty"`
+	NodeSpec             NullableKubernetesNodeSpec                  `json:"NodeSpec,omitempty"`
+	NodeStatuses         []KubernetesNodeStatus                      `json:"NodeStatuses,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *KubernetesNode) GetNodeAddresses() []KubernetesNodeAddress {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNode) GetNodeAddressesOk() ([]KubernetesNodeAddress, bool) {
-	if o == nil || o.NodeAddresses == nil {
+	if o == nil || IsNil(o.NodeAddresses) {
 		return nil, false
 	}
 	return o.NodeAddresses, true
@@ -126,7 +130,7 @@ func (o *KubernetesNode) GetNodeAddressesOk() ([]KubernetesNodeAddress, bool) {
 
 // HasNodeAddresses returns a boolean if a field has been set.
 func (o *KubernetesNode) HasNodeAddresses() bool {
-	if o != nil && o.NodeAddresses != nil {
+	if o != nil && IsNil(o.NodeAddresses) {
 		return true
 	}
 
@@ -140,7 +144,7 @@ func (o *KubernetesNode) SetNodeAddresses(v []KubernetesNodeAddress) {
 
 // GetNodeInfo returns the NodeInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesNode) GetNodeInfo() KubernetesNodeInfo {
-	if o == nil || o.NodeInfo.Get() == nil {
+	if o == nil || IsNil(o.NodeInfo.Get()) {
 		var ret KubernetesNodeInfo
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *KubernetesNode) UnsetNodeInfo() {
 
 // GetNodeSpec returns the NodeSpec field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesNode) GetNodeSpec() KubernetesNodeSpec {
-	if o == nil || o.NodeSpec.Get() == nil {
+	if o == nil || IsNil(o.NodeSpec.Get()) {
 		var ret KubernetesNodeSpec
 		return ret
 	}
@@ -237,7 +241,7 @@ func (o *KubernetesNode) GetNodeStatuses() []KubernetesNodeStatus {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNode) GetNodeStatusesOk() ([]KubernetesNodeStatus, bool) {
-	if o == nil || o.NodeStatuses == nil {
+	if o == nil || IsNil(o.NodeStatuses) {
 		return nil, false
 	}
 	return o.NodeStatuses, true
@@ -245,7 +249,7 @@ func (o *KubernetesNode) GetNodeStatusesOk() ([]KubernetesNodeStatus, bool) {
 
 // HasNodeStatuses returns a boolean if a field has been set.
 func (o *KubernetesNode) HasNodeStatuses() bool {
-	if o != nil && o.NodeStatuses != nil {
+	if o != nil && IsNil(o.NodeStatuses) {
 		return true
 	}
 
@@ -257,54 +261,69 @@ func (o *KubernetesNode) SetNodeStatuses(v []KubernetesNodeStatus) {
 	o.NodeStatuses = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesNode) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNode) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *KubernetesNode) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *KubernetesNode) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *KubernetesNode) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *KubernetesNode) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o KubernetesNode) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesNode) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedKubernetesAbstractNode, errKubernetesAbstractNode := json.Marshal(o.KubernetesAbstractNode)
 	if errKubernetesAbstractNode != nil {
-		return []byte{}, errKubernetesAbstractNode
+		return map[string]interface{}{}, errKubernetesAbstractNode
 	}
 	errKubernetesAbstractNode = json.Unmarshal([]byte(serializedKubernetesAbstractNode), &toSerialize)
 	if errKubernetesAbstractNode != nil {
-		return []byte{}, errKubernetesAbstractNode
+		return map[string]interface{}{}, errKubernetesAbstractNode
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.NodeAddresses != nil {
 		toSerialize["NodeAddresses"] = o.NodeAddresses
 	}
@@ -317,33 +336,55 @@ func (o KubernetesNode) MarshalJSON() ([]byte, error) {
 	if o.NodeStatuses != nil {
 		toSerialize["NodeStatuses"] = o.NodeStatuses
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesNode) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesNode) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesNodeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType       string                               `json:"ObjectType"`
-		NodeAddresses    []KubernetesNodeAddress              `json:"NodeAddresses,omitempty"`
-		NodeInfo         NullableKubernetesNodeInfo           `json:"NodeInfo,omitempty"`
-		NodeSpec         NullableKubernetesNodeSpec           `json:"NodeSpec,omitempty"`
-		NodeStatuses     []KubernetesNodeStatus               `json:"NodeStatuses,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		ObjectType       string                                      `json:"ObjectType"`
+		NodeAddresses    []KubernetesNodeAddress                     `json:"NodeAddresses,omitempty"`
+		NodeInfo         NullableKubernetesNodeInfo                  `json:"NodeInfo,omitempty"`
+		NodeSpec         NullableKubernetesNodeSpec                  `json:"NodeSpec,omitempty"`
+		NodeStatuses     []KubernetesNodeStatus                      `json:"NodeStatuses,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varKubernetesNodeWithoutEmbeddedStruct := KubernetesNodeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesNodeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesNodeWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesNode := _KubernetesNode{}
 		varKubernetesNode.ClassId = varKubernetesNodeWithoutEmbeddedStruct.ClassId
@@ -360,7 +401,7 @@ func (o *KubernetesNode) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesNode := _KubernetesNode{}
 
-	err = json.Unmarshal(bytes, &varKubernetesNode)
+	err = json.Unmarshal(data, &varKubernetesNode)
 	if err == nil {
 		o.KubernetesAbstractNode = varKubernetesNode.KubernetesAbstractNode
 	} else {
@@ -369,7 +410,7 @@ func (o *KubernetesNode) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "NodeAddresses")

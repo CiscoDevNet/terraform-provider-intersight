@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the OnpremUpgradePhase type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OnpremUpgradePhase{}
 
 // OnpremUpgradePhase UpgradePhase represents a phase of the Intersight Appliance software upgrade process. This data structure is shared by both the Intersight upgrade service and the Intersight Appliance's upgrade service.
 type OnpremUpgradePhase struct {
@@ -123,7 +127,7 @@ func (o *OnpremUpgradePhase) SetObjectType(v string) {
 
 // GetCurrentNode returns the CurrentNode field value if set, zero value otherwise.
 func (o *OnpremUpgradePhase) GetCurrentNode() int64 {
-	if o == nil || o.CurrentNode == nil {
+	if o == nil || IsNil(o.CurrentNode) {
 		var ret int64
 		return ret
 	}
@@ -133,7 +137,7 @@ func (o *OnpremUpgradePhase) GetCurrentNode() int64 {
 // GetCurrentNodeOk returns a tuple with the CurrentNode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremUpgradePhase) GetCurrentNodeOk() (*int64, bool) {
-	if o == nil || o.CurrentNode == nil {
+	if o == nil || IsNil(o.CurrentNode) {
 		return nil, false
 	}
 	return o.CurrentNode, true
@@ -141,7 +145,7 @@ func (o *OnpremUpgradePhase) GetCurrentNodeOk() (*int64, bool) {
 
 // HasCurrentNode returns a boolean if a field has been set.
 func (o *OnpremUpgradePhase) HasCurrentNode() bool {
-	if o != nil && o.CurrentNode != nil {
+	if o != nil && !IsNil(o.CurrentNode) {
 		return true
 	}
 
@@ -155,7 +159,7 @@ func (o *OnpremUpgradePhase) SetCurrentNode(v int64) {
 
 // GetCurrentNodeHostname returns the CurrentNodeHostname field value if set, zero value otherwise.
 func (o *OnpremUpgradePhase) GetCurrentNodeHostname() string {
-	if o == nil || o.CurrentNodeHostname == nil {
+	if o == nil || IsNil(o.CurrentNodeHostname) {
 		var ret string
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *OnpremUpgradePhase) GetCurrentNodeHostname() string {
 // GetCurrentNodeHostnameOk returns a tuple with the CurrentNodeHostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremUpgradePhase) GetCurrentNodeHostnameOk() (*string, bool) {
-	if o == nil || o.CurrentNodeHostname == nil {
+	if o == nil || IsNil(o.CurrentNodeHostname) {
 		return nil, false
 	}
 	return o.CurrentNodeHostname, true
@@ -173,7 +177,7 @@ func (o *OnpremUpgradePhase) GetCurrentNodeHostnameOk() (*string, bool) {
 
 // HasCurrentNodeHostname returns a boolean if a field has been set.
 func (o *OnpremUpgradePhase) HasCurrentNodeHostname() bool {
-	if o != nil && o.CurrentNodeHostname != nil {
+	if o != nil && !IsNil(o.CurrentNodeHostname) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *OnpremUpgradePhase) SetCurrentNodeHostname(v string) {
 
 // GetElapsedTime returns the ElapsedTime field value if set, zero value otherwise.
 func (o *OnpremUpgradePhase) GetElapsedTime() int64 {
-	if o == nil || o.ElapsedTime == nil {
+	if o == nil || IsNil(o.ElapsedTime) {
 		var ret int64
 		return ret
 	}
@@ -197,7 +201,7 @@ func (o *OnpremUpgradePhase) GetElapsedTime() int64 {
 // GetElapsedTimeOk returns a tuple with the ElapsedTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremUpgradePhase) GetElapsedTimeOk() (*int64, bool) {
-	if o == nil || o.ElapsedTime == nil {
+	if o == nil || IsNil(o.ElapsedTime) {
 		return nil, false
 	}
 	return o.ElapsedTime, true
@@ -205,7 +209,7 @@ func (o *OnpremUpgradePhase) GetElapsedTimeOk() (*int64, bool) {
 
 // HasElapsedTime returns a boolean if a field has been set.
 func (o *OnpremUpgradePhase) HasElapsedTime() bool {
-	if o != nil && o.ElapsedTime != nil {
+	if o != nil && !IsNil(o.ElapsedTime) {
 		return true
 	}
 
@@ -219,7 +223,7 @@ func (o *OnpremUpgradePhase) SetElapsedTime(v int64) {
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
 func (o *OnpremUpgradePhase) GetEndTime() time.Time {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		var ret time.Time
 		return ret
 	}
@@ -229,7 +233,7 @@ func (o *OnpremUpgradePhase) GetEndTime() time.Time {
 // GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremUpgradePhase) GetEndTimeOk() (*time.Time, bool) {
-	if o == nil || o.EndTime == nil {
+	if o == nil || IsNil(o.EndTime) {
 		return nil, false
 	}
 	return o.EndTime, true
@@ -237,7 +241,7 @@ func (o *OnpremUpgradePhase) GetEndTimeOk() (*time.Time, bool) {
 
 // HasEndTime returns a boolean if a field has been set.
 func (o *OnpremUpgradePhase) HasEndTime() bool {
-	if o != nil && o.EndTime != nil {
+	if o != nil && !IsNil(o.EndTime) {
 		return true
 	}
 
@@ -251,7 +255,7 @@ func (o *OnpremUpgradePhase) SetEndTime(v time.Time) {
 
 // GetFailed returns the Failed field value if set, zero value otherwise.
 func (o *OnpremUpgradePhase) GetFailed() bool {
-	if o == nil || o.Failed == nil {
+	if o == nil || IsNil(o.Failed) {
 		var ret bool
 		return ret
 	}
@@ -261,7 +265,7 @@ func (o *OnpremUpgradePhase) GetFailed() bool {
 // GetFailedOk returns a tuple with the Failed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremUpgradePhase) GetFailedOk() (*bool, bool) {
-	if o == nil || o.Failed == nil {
+	if o == nil || IsNil(o.Failed) {
 		return nil, false
 	}
 	return o.Failed, true
@@ -269,7 +273,7 @@ func (o *OnpremUpgradePhase) GetFailedOk() (*bool, bool) {
 
 // HasFailed returns a boolean if a field has been set.
 func (o *OnpremUpgradePhase) HasFailed() bool {
-	if o != nil && o.Failed != nil {
+	if o != nil && !IsNil(o.Failed) {
 		return true
 	}
 
@@ -283,7 +287,7 @@ func (o *OnpremUpgradePhase) SetFailed(v bool) {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *OnpremUpgradePhase) GetMessage() string {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -293,7 +297,7 @@ func (o *OnpremUpgradePhase) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremUpgradePhase) GetMessageOk() (*string, bool) {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -301,7 +305,7 @@ func (o *OnpremUpgradePhase) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *OnpremUpgradePhase) HasMessage() bool {
-	if o != nil && o.Message != nil {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -315,7 +319,7 @@ func (o *OnpremUpgradePhase) SetMessage(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *OnpremUpgradePhase) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -325,7 +329,7 @@ func (o *OnpremUpgradePhase) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremUpgradePhase) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -333,7 +337,7 @@ func (o *OnpremUpgradePhase) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *OnpremUpgradePhase) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -347,7 +351,7 @@ func (o *OnpremUpgradePhase) SetName(v string) {
 
 // GetRetryCount returns the RetryCount field value if set, zero value otherwise.
 func (o *OnpremUpgradePhase) GetRetryCount() int64 {
-	if o == nil || o.RetryCount == nil {
+	if o == nil || IsNil(o.RetryCount) {
 		var ret int64
 		return ret
 	}
@@ -357,7 +361,7 @@ func (o *OnpremUpgradePhase) GetRetryCount() int64 {
 // GetRetryCountOk returns a tuple with the RetryCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremUpgradePhase) GetRetryCountOk() (*int64, bool) {
-	if o == nil || o.RetryCount == nil {
+	if o == nil || IsNil(o.RetryCount) {
 		return nil, false
 	}
 	return o.RetryCount, true
@@ -365,7 +369,7 @@ func (o *OnpremUpgradePhase) GetRetryCountOk() (*int64, bool) {
 
 // HasRetryCount returns a boolean if a field has been set.
 func (o *OnpremUpgradePhase) HasRetryCount() bool {
-	if o != nil && o.RetryCount != nil {
+	if o != nil && !IsNil(o.RetryCount) {
 		return true
 	}
 
@@ -379,7 +383,7 @@ func (o *OnpremUpgradePhase) SetRetryCount(v int64) {
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
 func (o *OnpremUpgradePhase) GetStartTime() time.Time {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		var ret time.Time
 		return ret
 	}
@@ -389,7 +393,7 @@ func (o *OnpremUpgradePhase) GetStartTime() time.Time {
 // GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremUpgradePhase) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil || o.StartTime == nil {
+	if o == nil || IsNil(o.StartTime) {
 		return nil, false
 	}
 	return o.StartTime, true
@@ -397,7 +401,7 @@ func (o *OnpremUpgradePhase) GetStartTimeOk() (*time.Time, bool) {
 
 // HasStartTime returns a boolean if a field has been set.
 func (o *OnpremUpgradePhase) HasStartTime() bool {
-	if o != nil && o.StartTime != nil {
+	if o != nil && !IsNil(o.StartTime) {
 		return true
 	}
 
@@ -411,7 +415,7 @@ func (o *OnpremUpgradePhase) SetStartTime(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *OnpremUpgradePhase) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -421,7 +425,7 @@ func (o *OnpremUpgradePhase) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OnpremUpgradePhase) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -429,7 +433,7 @@ func (o *OnpremUpgradePhase) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *OnpremUpgradePhase) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -442,49 +446,53 @@ func (o *OnpremUpgradePhase) SetStatus(v string) {
 }
 
 func (o OnpremUpgradePhase) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OnpremUpgradePhase) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CurrentNode != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CurrentNode) {
 		toSerialize["CurrentNode"] = o.CurrentNode
 	}
-	if o.CurrentNodeHostname != nil {
+	if !IsNil(o.CurrentNodeHostname) {
 		toSerialize["CurrentNodeHostname"] = o.CurrentNodeHostname
 	}
-	if o.ElapsedTime != nil {
+	if !IsNil(o.ElapsedTime) {
 		toSerialize["ElapsedTime"] = o.ElapsedTime
 	}
-	if o.EndTime != nil {
+	if !IsNil(o.EndTime) {
 		toSerialize["EndTime"] = o.EndTime
 	}
-	if o.Failed != nil {
+	if !IsNil(o.Failed) {
 		toSerialize["Failed"] = o.Failed
 	}
-	if o.Message != nil {
+	if !IsNil(o.Message) {
 		toSerialize["Message"] = o.Message
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.RetryCount != nil {
+	if !IsNil(o.RetryCount) {
 		toSerialize["RetryCount"] = o.RetryCount
 	}
-	if o.StartTime != nil {
+	if !IsNil(o.StartTime) {
 		toSerialize["StartTime"] = o.StartTime
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 
@@ -492,10 +500,32 @@ func (o OnpremUpgradePhase) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *OnpremUpgradePhase) UnmarshalJSON(bytes []byte) (err error) {
+func (o *OnpremUpgradePhase) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type OnpremUpgradePhaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -525,7 +555,7 @@ func (o *OnpremUpgradePhase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOnpremUpgradePhaseWithoutEmbeddedStruct := OnpremUpgradePhaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varOnpremUpgradePhaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varOnpremUpgradePhaseWithoutEmbeddedStruct)
 	if err == nil {
 		varOnpremUpgradePhase := _OnpremUpgradePhase{}
 		varOnpremUpgradePhase.ClassId = varOnpremUpgradePhaseWithoutEmbeddedStruct.ClassId
@@ -547,7 +577,7 @@ func (o *OnpremUpgradePhase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varOnpremUpgradePhase := _OnpremUpgradePhase{}
 
-	err = json.Unmarshal(bytes, &varOnpremUpgradePhase)
+	err = json.Unmarshal(data, &varOnpremUpgradePhase)
 	if err == nil {
 		o.MoBaseComplexType = varOnpremUpgradePhase.MoBaseComplexType
 	} else {
@@ -556,7 +586,7 @@ func (o *OnpremUpgradePhase) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CurrentNode")

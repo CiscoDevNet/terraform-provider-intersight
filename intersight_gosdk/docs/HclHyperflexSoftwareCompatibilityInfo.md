@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **MaxMgmtVersion** | Pointer to **string** | Maximum supported HyperFlex Data Platform build version. | [optional] 
 **MinMgmtVersion** | Pointer to **string** | Minimum supported HyperFlex Data Platform build version. | [optional] 
 **ServerFwVersion** | Pointer to **string** | UCS Server Firmware component software version. | [optional] 
-**AppCatalog** | Pointer to [**HyperflexAppCatalogRelationship**](HyperflexAppCatalogRelationship.md) |  | [optional] 
+**AppCatalog** | Pointer to [**NullableHyperflexAppCatalogRelationship**](HyperflexAppCatalogRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -310,6 +310,16 @@ SetAppCatalog sets AppCatalog field to given value.
 
 HasAppCatalog returns a boolean if a field has been set.
 
+### SetAppCatalogNil
+
+`func (o *HclHyperflexSoftwareCompatibilityInfo) SetAppCatalogNil(b bool)`
+
+ SetAppCatalogNil sets the value for AppCatalog to be an explicit nil
+
+### UnsetAppCatalog
+`func (o *HclHyperflexSoftwareCompatibilityInfo) UnsetAppCatalog()`
+
+UnsetAppCatalog ensures that no value is present for AppCatalog, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

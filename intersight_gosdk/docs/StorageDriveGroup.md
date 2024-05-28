@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **SecureDriveGroup** | Pointer to **bool** | Enables/disables the drive encryption on all the drives used in this policy. This flag just enables the drive security and only after remote key setting configured, the actual encryption will be done. | [optional] 
 **Type** | Pointer to **int32** | Type of drive selection to be used for this drive group. * &#x60;0&#x60; - Drives are selected manually by the user. * &#x60;1&#x60; - Drives are selected automatically based on the RAID and virtual drive configuration. | [optional] [readonly] [default to 0]
 **VirtualDrives** | Pointer to [**[]StorageVirtualDriveConfiguration**](StorageVirtualDriveConfiguration.md) |  | [optional] 
-**StoragePolicy** | Pointer to [**StorageStoragePolicyRelationship**](StorageStoragePolicyRelationship.md) |  | [optional] 
+**StoragePolicy** | Pointer to [**NullableStorageStoragePolicyRelationship**](StorageStoragePolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -304,6 +304,16 @@ SetStoragePolicy sets StoragePolicy field to given value.
 
 HasStoragePolicy returns a boolean if a field has been set.
 
+### SetStoragePolicyNil
+
+`func (o *StorageDriveGroup) SetStoragePolicyNil(b bool)`
+
+ SetStoragePolicyNil sets the value for StoragePolicy to be an explicit nil
+
+### UnsetStoragePolicy
+`func (o *StorageDriveGroup) UnsetStoragePolicy()`
+
+UnsetStoragePolicy ensures that no value is present for StoragePolicy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

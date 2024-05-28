@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexDataProtectionPeer type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexDataProtectionPeer{}
 
 // HyperflexDataProtectionPeer Data Protection Peer describing the cluster pair from the HyperFlex backend.
 type HyperflexDataProtectionPeer struct {
@@ -26,8 +30,8 @@ type HyperflexDataProtectionPeer struct {
 	ObjectType           string                               `json:"ObjectType"`
 	Er                   NullableHyperflexEntityReference     `json:"Er,omitempty"`
 	PeerInfo             NullableHyperflexReplicationPeerInfo `json:"PeerInfo,omitempty"`
-	SrcCluster           *HyperflexClusterRelationship        `json:"SrcCluster,omitempty"`
-	TgtCluster           *HyperflexClusterRelationship        `json:"TgtCluster,omitempty"`
+	SrcCluster           NullableHyperflexClusterRelationship `json:"SrcCluster,omitempty"`
+	TgtCluster           NullableHyperflexClusterRelationship `json:"TgtCluster,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -106,7 +110,7 @@ func (o *HyperflexDataProtectionPeer) SetObjectType(v string) {
 
 // GetEr returns the Er field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexDataProtectionPeer) GetEr() HyperflexEntityReference {
-	if o == nil || o.Er.Get() == nil {
+	if o == nil || IsNil(o.Er.Get()) {
 		var ret HyperflexEntityReference
 		return ret
 	}
@@ -149,7 +153,7 @@ func (o *HyperflexDataProtectionPeer) UnsetEr() {
 
 // GetPeerInfo returns the PeerInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexDataProtectionPeer) GetPeerInfo() HyperflexReplicationPeerInfo {
-	if o == nil || o.PeerInfo.Get() == nil {
+	if o == nil || IsNil(o.PeerInfo.Get()) {
 		var ret HyperflexReplicationPeerInfo
 		return ret
 	}
@@ -190,107 +194,155 @@ func (o *HyperflexDataProtectionPeer) UnsetPeerInfo() {
 	o.PeerInfo.Unset()
 }
 
-// GetSrcCluster returns the SrcCluster field value if set, zero value otherwise.
+// GetSrcCluster returns the SrcCluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexDataProtectionPeer) GetSrcCluster() HyperflexClusterRelationship {
-	if o == nil || o.SrcCluster == nil {
+	if o == nil || IsNil(o.SrcCluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.SrcCluster
+	return *o.SrcCluster.Get()
 }
 
 // GetSrcClusterOk returns a tuple with the SrcCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexDataProtectionPeer) GetSrcClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.SrcCluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SrcCluster, true
+	return o.SrcCluster.Get(), o.SrcCluster.IsSet()
 }
 
 // HasSrcCluster returns a boolean if a field has been set.
 func (o *HyperflexDataProtectionPeer) HasSrcCluster() bool {
-	if o != nil && o.SrcCluster != nil {
+	if o != nil && o.SrcCluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSrcCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the SrcCluster field.
+// SetSrcCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the SrcCluster field.
 func (o *HyperflexDataProtectionPeer) SetSrcCluster(v HyperflexClusterRelationship) {
-	o.SrcCluster = &v
+	o.SrcCluster.Set(&v)
 }
 
-// GetTgtCluster returns the TgtCluster field value if set, zero value otherwise.
+// SetSrcClusterNil sets the value for SrcCluster to be an explicit nil
+func (o *HyperflexDataProtectionPeer) SetSrcClusterNil() {
+	o.SrcCluster.Set(nil)
+}
+
+// UnsetSrcCluster ensures that no value is present for SrcCluster, not even an explicit nil
+func (o *HyperflexDataProtectionPeer) UnsetSrcCluster() {
+	o.SrcCluster.Unset()
+}
+
+// GetTgtCluster returns the TgtCluster field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexDataProtectionPeer) GetTgtCluster() HyperflexClusterRelationship {
-	if o == nil || o.TgtCluster == nil {
+	if o == nil || IsNil(o.TgtCluster.Get()) {
 		var ret HyperflexClusterRelationship
 		return ret
 	}
-	return *o.TgtCluster
+	return *o.TgtCluster.Get()
 }
 
 // GetTgtClusterOk returns a tuple with the TgtCluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexDataProtectionPeer) GetTgtClusterOk() (*HyperflexClusterRelationship, bool) {
-	if o == nil || o.TgtCluster == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TgtCluster, true
+	return o.TgtCluster.Get(), o.TgtCluster.IsSet()
 }
 
 // HasTgtCluster returns a boolean if a field has been set.
 func (o *HyperflexDataProtectionPeer) HasTgtCluster() bool {
-	if o != nil && o.TgtCluster != nil {
+	if o != nil && o.TgtCluster.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTgtCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the TgtCluster field.
+// SetTgtCluster gets a reference to the given NullableHyperflexClusterRelationship and assigns it to the TgtCluster field.
 func (o *HyperflexDataProtectionPeer) SetTgtCluster(v HyperflexClusterRelationship) {
-	o.TgtCluster = &v
+	o.TgtCluster.Set(&v)
+}
+
+// SetTgtClusterNil sets the value for TgtCluster to be an explicit nil
+func (o *HyperflexDataProtectionPeer) SetTgtClusterNil() {
+	o.TgtCluster.Set(nil)
+}
+
+// UnsetTgtCluster ensures that no value is present for TgtCluster, not even an explicit nil
+func (o *HyperflexDataProtectionPeer) UnsetTgtCluster() {
+	o.TgtCluster.Unset()
 }
 
 func (o HyperflexDataProtectionPeer) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexDataProtectionPeer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Er.IsSet() {
 		toSerialize["Er"] = o.Er.Get()
 	}
 	if o.PeerInfo.IsSet() {
 		toSerialize["PeerInfo"] = o.PeerInfo.Get()
 	}
-	if o.SrcCluster != nil {
-		toSerialize["SrcCluster"] = o.SrcCluster
+	if o.SrcCluster.IsSet() {
+		toSerialize["SrcCluster"] = o.SrcCluster.Get()
 	}
-	if o.TgtCluster != nil {
-		toSerialize["TgtCluster"] = o.TgtCluster
+	if o.TgtCluster.IsSet() {
+		toSerialize["TgtCluster"] = o.TgtCluster.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexDataProtectionPeer) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexDataProtectionPeer) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexDataProtectionPeerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -298,13 +350,13 @@ func (o *HyperflexDataProtectionPeer) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string                               `json:"ObjectType"`
 		Er         NullableHyperflexEntityReference     `json:"Er,omitempty"`
 		PeerInfo   NullableHyperflexReplicationPeerInfo `json:"PeerInfo,omitempty"`
-		SrcCluster *HyperflexClusterRelationship        `json:"SrcCluster,omitempty"`
-		TgtCluster *HyperflexClusterRelationship        `json:"TgtCluster,omitempty"`
+		SrcCluster NullableHyperflexClusterRelationship `json:"SrcCluster,omitempty"`
+		TgtCluster NullableHyperflexClusterRelationship `json:"TgtCluster,omitempty"`
 	}
 
 	varHyperflexDataProtectionPeerWithoutEmbeddedStruct := HyperflexDataProtectionPeerWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexDataProtectionPeerWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexDataProtectionPeerWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexDataProtectionPeer := _HyperflexDataProtectionPeer{}
 		varHyperflexDataProtectionPeer.ClassId = varHyperflexDataProtectionPeerWithoutEmbeddedStruct.ClassId
@@ -320,7 +372,7 @@ func (o *HyperflexDataProtectionPeer) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexDataProtectionPeer := _HyperflexDataProtectionPeer{}
 
-	err = json.Unmarshal(bytes, &varHyperflexDataProtectionPeer)
+	err = json.Unmarshal(data, &varHyperflexDataProtectionPeer)
 	if err == nil {
 		o.MoBaseMo = varHyperflexDataProtectionPeer.MoBaseMo
 	} else {
@@ -329,7 +381,7 @@ func (o *HyperflexDataProtectionPeer) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Er")

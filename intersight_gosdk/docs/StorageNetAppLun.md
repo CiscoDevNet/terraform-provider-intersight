@@ -18,10 +18,10 @@ Name | Type | Description | Notes
 **SvmName** | Pointer to **string** | The storage virtual machine name for the lun. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Universally unique identifier of the LUN. | [optional] [readonly] 
 **VolumeName** | Pointer to **string** | The parent volume name for the lun. | [optional] [readonly] 
-**Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 **Events** | Pointer to [**[]StorageNetAppLunEventRelationship**](StorageNetAppLunEventRelationship.md) | An array of relationships to storageNetAppLunEvent resources. | [optional] [readonly] 
 **Host** | Pointer to [**[]StorageNetAppInitiatorGroupRelationship**](StorageNetAppInitiatorGroupRelationship.md) | An array of relationships to storageNetAppInitiatorGroup resources. | [optional] [readonly] 
-**StorageContainer** | Pointer to [**StorageNetAppVolumeRelationship**](StorageNetAppVolumeRelationship.md) |  | [optional] 
+**StorageContainer** | Pointer to [**NullableStorageNetAppVolumeRelationship**](StorageNetAppVolumeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -407,6 +407,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StorageNetAppLun) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StorageNetAppLun) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetEvents
 
 `func (o *StorageNetAppLun) GetEvents() []StorageNetAppLunEventRelationship`
@@ -502,6 +512,16 @@ SetStorageContainer sets StorageContainer field to given value.
 
 HasStorageContainer returns a boolean if a field has been set.
 
+### SetStorageContainerNil
+
+`func (o *StorageNetAppLun) SetStorageContainerNil(b bool)`
+
+ SetStorageContainerNil sets the value for StorageContainer to be an explicit nil
+
+### UnsetStorageContainer
+`func (o *StorageNetAppLun) UnsetStorageContainer()`
+
+UnsetStorageContainer ensures that no value is present for StorageContainer, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

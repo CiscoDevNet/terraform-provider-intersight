@@ -12,11 +12,11 @@ Name | Type | Description | Notes
 **LeaseParameters** | Pointer to [**NullableResourcepoolLeaseParameters**](ResourcepoolLeaseParameters.md) |  | [optional] 
 **Resource** | Pointer to [**MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **ResourceType** | Pointer to **string** | The type of resource present in the pool, such as &#39;server&#39; can be a RackUnit or Blade. * &#x60;None&#x60; - The resource cannot consider for Resource Pool. * &#x60;Server&#x60; - Resource Pool holds the server kind of resources, example - RackServer, Blade. | [optional] [default to "None"]
-**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**LeasedResource** | Pointer to [**ResourcepoolLeaseResourceRelationship**](ResourcepoolLeaseResourceRelationship.md) |  | [optional] 
-**Pool** | Pointer to [**ResourcepoolPoolRelationship**](ResourcepoolPoolRelationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**ResourcepoolPoolMemberRelationship**](ResourcepoolPoolMemberRelationship.md) |  | [optional] 
-**Universe** | Pointer to [**ResourcepoolUniverseRelationship**](ResourcepoolUniverseRelationship.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**LeasedResource** | Pointer to [**NullableResourcepoolLeaseResourceRelationship**](ResourcepoolLeaseResourceRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**NullableResourcepoolPoolRelationship**](ResourcepoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**NullableResourcepoolPoolMemberRelationship**](ResourcepoolPoolMemberRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**NullableResourcepoolUniverseRelationship**](ResourcepoolUniverseRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -272,6 +272,16 @@ SetAssignedToEntity sets AssignedToEntity field to given value.
 
 HasAssignedToEntity returns a boolean if a field has been set.
 
+### SetAssignedToEntityNil
+
+`func (o *ResourcepoolLease) SetAssignedToEntityNil(b bool)`
+
+ SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+
+### UnsetAssignedToEntity
+`func (o *ResourcepoolLease) UnsetAssignedToEntity()`
+
+UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
 ### GetLeasedResource
 
 `func (o *ResourcepoolLease) GetLeasedResource() ResourcepoolLeaseResourceRelationship`
@@ -297,6 +307,16 @@ SetLeasedResource sets LeasedResource field to given value.
 
 HasLeasedResource returns a boolean if a field has been set.
 
+### SetLeasedResourceNil
+
+`func (o *ResourcepoolLease) SetLeasedResourceNil(b bool)`
+
+ SetLeasedResourceNil sets the value for LeasedResource to be an explicit nil
+
+### UnsetLeasedResource
+`func (o *ResourcepoolLease) UnsetLeasedResource()`
+
+UnsetLeasedResource ensures that no value is present for LeasedResource, not even an explicit nil
 ### GetPool
 
 `func (o *ResourcepoolLease) GetPool() ResourcepoolPoolRelationship`
@@ -322,6 +342,16 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
+### SetPoolNil
+
+`func (o *ResourcepoolLease) SetPoolNil(b bool)`
+
+ SetPoolNil sets the value for Pool to be an explicit nil
+
+### UnsetPool
+`func (o *ResourcepoolLease) UnsetPool()`
+
+UnsetPool ensures that no value is present for Pool, not even an explicit nil
 ### GetPoolMember
 
 `func (o *ResourcepoolLease) GetPoolMember() ResourcepoolPoolMemberRelationship`
@@ -347,6 +377,16 @@ SetPoolMember sets PoolMember field to given value.
 
 HasPoolMember returns a boolean if a field has been set.
 
+### SetPoolMemberNil
+
+`func (o *ResourcepoolLease) SetPoolMemberNil(b bool)`
+
+ SetPoolMemberNil sets the value for PoolMember to be an explicit nil
+
+### UnsetPoolMember
+`func (o *ResourcepoolLease) UnsetPoolMember()`
+
+UnsetPoolMember ensures that no value is present for PoolMember, not even an explicit nil
 ### GetUniverse
 
 `func (o *ResourcepoolLease) GetUniverse() ResourcepoolUniverseRelationship`
@@ -372,6 +412,16 @@ SetUniverse sets Universe field to given value.
 
 HasUniverse returns a boolean if a field has been set.
 
+### SetUniverseNil
+
+`func (o *ResourcepoolLease) SetUniverseNil(b bool)`
+
+ SetUniverseNil sets the value for Universe to be an explicit nil
+
+### UnsetUniverse
+`func (o *ResourcepoolLease) UnsetUniverse()`
+
+UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

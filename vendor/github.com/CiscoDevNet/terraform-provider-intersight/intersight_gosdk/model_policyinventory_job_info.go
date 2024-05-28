@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the PolicyinventoryJobInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PolicyinventoryJobInfo{}
 
 // PolicyinventoryJobInfo Complex type representing the Job Information of a device.
 type PolicyinventoryJobInfo struct {
@@ -111,7 +115,7 @@ func (o *PolicyinventoryJobInfo) SetObjectType(v string) {
 
 // GetExecutionStatus returns the ExecutionStatus field value if set, zero value otherwise.
 func (o *PolicyinventoryJobInfo) GetExecutionStatus() string {
-	if o == nil || o.ExecutionStatus == nil {
+	if o == nil || IsNil(o.ExecutionStatus) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *PolicyinventoryJobInfo) GetExecutionStatus() string {
 // GetExecutionStatusOk returns a tuple with the ExecutionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyinventoryJobInfo) GetExecutionStatusOk() (*string, bool) {
-	if o == nil || o.ExecutionStatus == nil {
+	if o == nil || IsNil(o.ExecutionStatus) {
 		return nil, false
 	}
 	return o.ExecutionStatus, true
@@ -129,7 +133,7 @@ func (o *PolicyinventoryJobInfo) GetExecutionStatusOk() (*string, bool) {
 
 // HasExecutionStatus returns a boolean if a field has been set.
 func (o *PolicyinventoryJobInfo) HasExecutionStatus() bool {
-	if o != nil && o.ExecutionStatus != nil {
+	if o != nil && !IsNil(o.ExecutionStatus) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *PolicyinventoryJobInfo) SetExecutionStatus(v string) {
 
 // GetLastScheduledTime returns the LastScheduledTime field value if set, zero value otherwise.
 func (o *PolicyinventoryJobInfo) GetLastScheduledTime() time.Time {
-	if o == nil || o.LastScheduledTime == nil {
+	if o == nil || IsNil(o.LastScheduledTime) {
 		var ret time.Time
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *PolicyinventoryJobInfo) GetLastScheduledTime() time.Time {
 // GetLastScheduledTimeOk returns a tuple with the LastScheduledTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyinventoryJobInfo) GetLastScheduledTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastScheduledTime == nil {
+	if o == nil || IsNil(o.LastScheduledTime) {
 		return nil, false
 	}
 	return o.LastScheduledTime, true
@@ -161,7 +165,7 @@ func (o *PolicyinventoryJobInfo) GetLastScheduledTimeOk() (*time.Time, bool) {
 
 // HasLastScheduledTime returns a boolean if a field has been set.
 func (o *PolicyinventoryJobInfo) HasLastScheduledTime() bool {
-	if o != nil && o.LastScheduledTime != nil {
+	if o != nil && !IsNil(o.LastScheduledTime) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *PolicyinventoryJobInfo) SetLastScheduledTime(v time.Time) {
 
 // GetPolicyId returns the PolicyId field value if set, zero value otherwise.
 func (o *PolicyinventoryJobInfo) GetPolicyId() string {
-	if o == nil || o.PolicyId == nil {
+	if o == nil || IsNil(o.PolicyId) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *PolicyinventoryJobInfo) GetPolicyId() string {
 // GetPolicyIdOk returns a tuple with the PolicyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyinventoryJobInfo) GetPolicyIdOk() (*string, bool) {
-	if o == nil || o.PolicyId == nil {
+	if o == nil || IsNil(o.PolicyId) {
 		return nil, false
 	}
 	return o.PolicyId, true
@@ -193,7 +197,7 @@ func (o *PolicyinventoryJobInfo) GetPolicyIdOk() (*string, bool) {
 
 // HasPolicyId returns a boolean if a field has been set.
 func (o *PolicyinventoryJobInfo) HasPolicyId() bool {
-	if o != nil && o.PolicyId != nil {
+	if o != nil && !IsNil(o.PolicyId) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *PolicyinventoryJobInfo) SetPolicyId(v string) {
 
 // GetPolicyName returns the PolicyName field value if set, zero value otherwise.
 func (o *PolicyinventoryJobInfo) GetPolicyName() string {
-	if o == nil || o.PolicyName == nil {
+	if o == nil || IsNil(o.PolicyName) {
 		var ret string
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *PolicyinventoryJobInfo) GetPolicyName() string {
 // GetPolicyNameOk returns a tuple with the PolicyName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyinventoryJobInfo) GetPolicyNameOk() (*string, bool) {
-	if o == nil || o.PolicyName == nil {
+	if o == nil || IsNil(o.PolicyName) {
 		return nil, false
 	}
 	return o.PolicyName, true
@@ -225,7 +229,7 @@ func (o *PolicyinventoryJobInfo) GetPolicyNameOk() (*string, bool) {
 
 // HasPolicyName returns a boolean if a field has been set.
 func (o *PolicyinventoryJobInfo) HasPolicyName() bool {
-	if o != nil && o.PolicyName != nil {
+	if o != nil && !IsNil(o.PolicyName) {
 		return true
 	}
 
@@ -238,31 +242,35 @@ func (o *PolicyinventoryJobInfo) SetPolicyName(v string) {
 }
 
 func (o PolicyinventoryJobInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PolicyinventoryJobInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ExecutionStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ExecutionStatus) {
 		toSerialize["ExecutionStatus"] = o.ExecutionStatus
 	}
-	if o.LastScheduledTime != nil {
+	if !IsNil(o.LastScheduledTime) {
 		toSerialize["LastScheduledTime"] = o.LastScheduledTime
 	}
-	if o.PolicyId != nil {
+	if !IsNil(o.PolicyId) {
 		toSerialize["PolicyId"] = o.PolicyId
 	}
-	if o.PolicyName != nil {
+	if !IsNil(o.PolicyName) {
 		toSerialize["PolicyName"] = o.PolicyName
 	}
 
@@ -270,10 +278,32 @@ func (o PolicyinventoryJobInfo) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PolicyinventoryJobInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PolicyinventoryJobInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PolicyinventoryJobInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -291,7 +321,7 @@ func (o *PolicyinventoryJobInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPolicyinventoryJobInfoWithoutEmbeddedStruct := PolicyinventoryJobInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPolicyinventoryJobInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPolicyinventoryJobInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varPolicyinventoryJobInfo := _PolicyinventoryJobInfo{}
 		varPolicyinventoryJobInfo.ClassId = varPolicyinventoryJobInfoWithoutEmbeddedStruct.ClassId
@@ -307,7 +337,7 @@ func (o *PolicyinventoryJobInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varPolicyinventoryJobInfo := _PolicyinventoryJobInfo{}
 
-	err = json.Unmarshal(bytes, &varPolicyinventoryJobInfo)
+	err = json.Unmarshal(data, &varPolicyinventoryJobInfo)
 	if err == nil {
 		o.MoBaseComplexType = varPolicyinventoryJobInfo.MoBaseComplexType
 	} else {
@@ -316,7 +346,7 @@ func (o *PolicyinventoryJobInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExecutionStatus")

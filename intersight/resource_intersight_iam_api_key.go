@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"strconv"
 	"strings"
 	"time"
 
@@ -760,8 +761,13 @@ func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 		return diag.Errorf("error occurred while creating IamApiKey: %s", responseErr.Error())
 	}
-	log.Printf("Moid: %s", resultMo.GetMoid())
-	d.SetId(resultMo.GetMoid())
+	if len(resultMo.GetMoid()) != 0 {
+		log.Printf("Moid: %s", resultMo.GetMoid())
+		d.SetId(resultMo.GetMoid())
+	} else {
+		d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
+		log.Printf("Mo: %v", resultMo)
+	}
 	de = append(de, resourceIamApiKeyRead(c, d, meta)...)
 	if err := d.Set("private_key", (resultMo.GetPrivateKey())); err != nil {
 		return diag.Errorf("error occurred while setting property PrivateKey in IamApiKey object: %s", err.Error())
@@ -773,6 +779,9 @@ func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta int
 func resourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	var de diag.Diagnostics
+	if len(d.Id()) == 0 {
+		return de
+	}
 	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamApiKeyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()

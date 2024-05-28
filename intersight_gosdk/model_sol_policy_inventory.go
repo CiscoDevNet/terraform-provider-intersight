@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the SolPolicyInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SolPolicyInventory{}
 
 // SolPolicyInventory Policy for configuring Serial Over LAN settings on endpoint.
 type SolPolicyInventory struct {
@@ -31,8 +35,8 @@ type SolPolicyInventory struct {
 	// State of Serial Over LAN service on the endpoint.
 	Enabled *bool `json:"Enabled,omitempty"`
 	// SSH port used to access Serial Over LAN directly. Enables bypassing Cisco IMC shell to provide direct access to Serial Over LAN.
-	SshPort              *int64                `json:"SshPort,omitempty"`
-	TargetMo             *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+	SshPort              *int64                       `json:"SshPort,omitempty"`
+	TargetMo             NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *SolPolicyInventory) SetObjectType(v string) {
 
 // GetBaudRate returns the BaudRate field value if set, zero value otherwise.
 func (o *SolPolicyInventory) GetBaudRate() int32 {
-	if o == nil || o.BaudRate == nil {
+	if o == nil || IsNil(o.BaudRate) {
 		var ret int32
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *SolPolicyInventory) GetBaudRate() int32 {
 // GetBaudRateOk returns a tuple with the BaudRate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SolPolicyInventory) GetBaudRateOk() (*int32, bool) {
-	if o == nil || o.BaudRate == nil {
+	if o == nil || IsNil(o.BaudRate) {
 		return nil, false
 	}
 	return o.BaudRate, true
@@ -129,7 +133,7 @@ func (o *SolPolicyInventory) GetBaudRateOk() (*int32, bool) {
 
 // HasBaudRate returns a boolean if a field has been set.
 func (o *SolPolicyInventory) HasBaudRate() bool {
-	if o != nil && o.BaudRate != nil {
+	if o != nil && !IsNil(o.BaudRate) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *SolPolicyInventory) SetBaudRate(v int32) {
 
 // GetComPort returns the ComPort field value if set, zero value otherwise.
 func (o *SolPolicyInventory) GetComPort() string {
-	if o == nil || o.ComPort == nil {
+	if o == nil || IsNil(o.ComPort) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *SolPolicyInventory) GetComPort() string {
 // GetComPortOk returns a tuple with the ComPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SolPolicyInventory) GetComPortOk() (*string, bool) {
-	if o == nil || o.ComPort == nil {
+	if o == nil || IsNil(o.ComPort) {
 		return nil, false
 	}
 	return o.ComPort, true
@@ -161,7 +165,7 @@ func (o *SolPolicyInventory) GetComPortOk() (*string, bool) {
 
 // HasComPort returns a boolean if a field has been set.
 func (o *SolPolicyInventory) HasComPort() bool {
-	if o != nil && o.ComPort != nil {
+	if o != nil && !IsNil(o.ComPort) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *SolPolicyInventory) SetComPort(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *SolPolicyInventory) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *SolPolicyInventory) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SolPolicyInventory) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -193,7 +197,7 @@ func (o *SolPolicyInventory) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *SolPolicyInventory) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *SolPolicyInventory) SetEnabled(v bool) {
 
 // GetSshPort returns the SshPort field value if set, zero value otherwise.
 func (o *SolPolicyInventory) GetSshPort() int64 {
-	if o == nil || o.SshPort == nil {
+	if o == nil || IsNil(o.SshPort) {
 		var ret int64
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *SolPolicyInventory) GetSshPort() int64 {
 // GetSshPortOk returns a tuple with the SshPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SolPolicyInventory) GetSshPortOk() (*int64, bool) {
-	if o == nil || o.SshPort == nil {
+	if o == nil || IsNil(o.SshPort) {
 		return nil, false
 	}
 	return o.SshPort, true
@@ -225,7 +229,7 @@ func (o *SolPolicyInventory) GetSshPortOk() (*int64, bool) {
 
 // HasSshPort returns a boolean if a field has been set.
 func (o *SolPolicyInventory) HasSshPort() bool {
-	if o != nil && o.SshPort != nil {
+	if o != nil && !IsNil(o.SshPort) {
 		return true
 	}
 
@@ -237,78 +241,115 @@ func (o *SolPolicyInventory) SetSshPort(v int64) {
 	o.SshPort = &v
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SolPolicyInventory) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SolPolicyInventory) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *SolPolicyInventory) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *SolPolicyInventory) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *SolPolicyInventory) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *SolPolicyInventory) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o SolPolicyInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SolPolicyInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicyInventory, errPolicyAbstractPolicyInventory := json.Marshal(o.PolicyAbstractPolicyInventory)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
 	errPolicyAbstractPolicyInventory = json.Unmarshal([]byte(serializedPolicyAbstractPolicyInventory), &toSerialize)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BaudRate != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BaudRate) {
 		toSerialize["BaudRate"] = o.BaudRate
 	}
-	if o.ComPort != nil {
+	if !IsNil(o.ComPort) {
 		toSerialize["ComPort"] = o.ComPort
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.SshPort != nil {
+	if !IsNil(o.SshPort) {
 		toSerialize["SshPort"] = o.SshPort
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *SolPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *SolPolicyInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type SolPolicyInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -321,13 +362,13 @@ func (o *SolPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// State of Serial Over LAN service on the endpoint.
 		Enabled *bool `json:"Enabled,omitempty"`
 		// SSH port used to access Serial Over LAN directly. Enables bypassing Cisco IMC shell to provide direct access to Serial Over LAN.
-		SshPort  *int64                `json:"SshPort,omitempty"`
-		TargetMo *MoBaseMoRelationship `json:"TargetMo,omitempty"`
+		SshPort  *int64                       `json:"SshPort,omitempty"`
+		TargetMo NullableMoBaseMoRelationship `json:"TargetMo,omitempty"`
 	}
 
 	varSolPolicyInventoryWithoutEmbeddedStruct := SolPolicyInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varSolPolicyInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varSolPolicyInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varSolPolicyInventory := _SolPolicyInventory{}
 		varSolPolicyInventory.ClassId = varSolPolicyInventoryWithoutEmbeddedStruct.ClassId
@@ -344,7 +385,7 @@ func (o *SolPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varSolPolicyInventory := _SolPolicyInventory{}
 
-	err = json.Unmarshal(bytes, &varSolPolicyInventory)
+	err = json.Unmarshal(data, &varSolPolicyInventory)
 	if err == nil {
 		o.PolicyAbstractPolicyInventory = varSolPolicyInventory.PolicyAbstractPolicyInventory
 	} else {
@@ -353,7 +394,7 @@ func (o *SolPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BaudRate")

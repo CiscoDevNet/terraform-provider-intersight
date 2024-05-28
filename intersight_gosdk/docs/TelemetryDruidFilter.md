@@ -10,13 +10,13 @@ Name | Type | Description | Notes
 **ExtractionFn** | Pointer to [**TelemetryDruidExtractionFunction**](TelemetryDruidExtractionFunction.md) |  | [optional] 
 **Column** | **string** | Input column or virtual column name to filter. | 
 **MatchValueType** | **string** | String specifying the type of bounds to match. For example STRING, LONG, DOUBLE, FLOAT, ARRAY&lt;STRING&gt;, ARRAY&lt;LONG&gt;, or any other Druid type. The matchValueType determines how Druid interprets the matchValue to assist in converting to the type of the matched column and also defines the type of comparison used when matching values. | 
-**MatchValue** | **interface{}** | Value to match, must not be null. | 
+**MatchValue** | **map[string]interface{}** | Value to match, must not be null. | 
 **Dimensions** | [**[]TelemetryDruidDimensionSpec**](TelemetryDruidDimensionSpec.md) | A list of DimensionSpecs, making it possible to apply an extraction function if needed. | 
 **Fields** | [**[]TelemetryDruidFilter**](TelemetryDruidFilter.md) |  | 
 **Field** | [**TelemetryDruidFilter**](TelemetryDruidFilter.md) |  | 
 **Values** | **[]string** | List of string value to match. | 
-**Lower** | Pointer to **interface{}** | Lower bound value to match. At least one of lower or upper must not be null. | [optional] 
-**Upper** | Pointer to **interface{}** | Upper bound value to match. At least one of lower or upper must not be null. | [optional] 
+**Lower** | Pointer to **map[string]interface{}** | Lower bound value to match. At least one of lower or upper must not be null. | [optional] 
+**Upper** | Pointer to **map[string]interface{}** | Upper bound value to match. At least one of lower or upper must not be null. | [optional] 
 **LowerStrict** | Pointer to **bool** | Boolean indicating whether to perform strict comparison on the lower bound (\&quot;&gt;\&quot; instead of \&quot;&gt;&#x3D;\&quot;). | [optional] 
 **UpperStrict** | Pointer to **bool** | Boolean indicating whether to perform strict comparison on the upper bound (\&quot;&lt;\&quot; instead of \&quot;&lt;&#x3D;\&quot;). | [optional] 
 **Ordering** | Pointer to **string** | String that specifies the sorting order to use when comparing values against the bound. lexicographic - Sorts values by converting Strings to their UTF-8 byte array representations and comparing lexicographically, byte-by-byte. alphanumeric - Suitable for strings with both numeric and non-numeric content, e.g., \&quot;file12 sorts after file2\&quot; This ordering is not suitable for numbers with decimal points or negative numbers. For example, \&quot;1.3\&quot; precedes \&quot;1.15\&quot; in this ordering because \&quot;15\&quot; has more significant digits than \&quot;3\&quot;. Negative numbers are sorted after positive numbers (because numeric characters precede the \&quot;-\&quot; in the negative numbers). numeric - Sorts values as numbers, supports integers and floating point values. Negative values are supported. This sorting order will try to parse all string values as numbers. Unparseable values are treated as nulls, and nulls precede numbers. When comparing two unparseable values (e.g., \&quot;hello\&quot; and \&quot;world\&quot;), this ordering will sort by comparing the unparsed strings lexicographically. strlen - Sorts values by their string lengths. When there is a tie, this comparator falls back to using the String compareTo method. version - Sorts values as versions, e.g., \&quot;10.0 sorts after 9.0\&quot;, \&quot;1.0.0-SNAPSHOT sorts after 1.0.0\&quot;. | [optional] 
@@ -32,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewTelemetryDruidFilter
 
-`func NewTelemetryDruidFilter(type_ string, dimension string, value string, column string, matchValueType string, matchValue interface{}, dimensions []TelemetryDruidDimensionSpec, fields []TelemetryDruidFilter, field TelemetryDruidFilter, values []string, pattern string, intervals []string, query TelemetryDruidQuerySpec, expression string, ) *TelemetryDruidFilter`
+`func NewTelemetryDruidFilter(type_ string, dimension string, value string, column string, matchValueType string, matchValue map[string]interface{}, dimensions []TelemetryDruidDimensionSpec, fields []TelemetryDruidFilter, field TelemetryDruidFilter, values []string, pattern string, intervals []string, query TelemetryDruidQuerySpec, expression string, ) *TelemetryDruidFilter`
 
 NewTelemetryDruidFilter instantiates a new TelemetryDruidFilter object
 This constructor will assign default values to properties that have it defined,
@@ -174,34 +174,24 @@ SetMatchValueType sets MatchValueType field to given value.
 
 ### GetMatchValue
 
-`func (o *TelemetryDruidFilter) GetMatchValue() interface{}`
+`func (o *TelemetryDruidFilter) GetMatchValue() map[string]interface{}`
 
 GetMatchValue returns the MatchValue field if non-nil, zero value otherwise.
 
 ### GetMatchValueOk
 
-`func (o *TelemetryDruidFilter) GetMatchValueOk() (*interface{}, bool)`
+`func (o *TelemetryDruidFilter) GetMatchValueOk() (*map[string]interface{}, bool)`
 
 GetMatchValueOk returns a tuple with the MatchValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMatchValue
 
-`func (o *TelemetryDruidFilter) SetMatchValue(v interface{})`
+`func (o *TelemetryDruidFilter) SetMatchValue(v map[string]interface{})`
 
 SetMatchValue sets MatchValue field to given value.
 
 
-### SetMatchValueNil
-
-`func (o *TelemetryDruidFilter) SetMatchValueNil(b bool)`
-
- SetMatchValueNil sets the value for MatchValue to be an explicit nil
-
-### UnsetMatchValue
-`func (o *TelemetryDruidFilter) UnsetMatchValue()`
-
-UnsetMatchValue ensures that no value is present for MatchValue, not even an explicit nil
 ### GetDimensions
 
 `func (o *TelemetryDruidFilter) GetDimensions() []TelemetryDruidDimensionSpec`
@@ -284,20 +274,20 @@ SetValues sets Values field to given value.
 
 ### GetLower
 
-`func (o *TelemetryDruidFilter) GetLower() interface{}`
+`func (o *TelemetryDruidFilter) GetLower() map[string]interface{}`
 
 GetLower returns the Lower field if non-nil, zero value otherwise.
 
 ### GetLowerOk
 
-`func (o *TelemetryDruidFilter) GetLowerOk() (*interface{}, bool)`
+`func (o *TelemetryDruidFilter) GetLowerOk() (*map[string]interface{}, bool)`
 
 GetLowerOk returns a tuple with the Lower field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLower
 
-`func (o *TelemetryDruidFilter) SetLower(v interface{})`
+`func (o *TelemetryDruidFilter) SetLower(v map[string]interface{})`
 
 SetLower sets Lower field to given value.
 
@@ -307,32 +297,22 @@ SetLower sets Lower field to given value.
 
 HasLower returns a boolean if a field has been set.
 
-### SetLowerNil
-
-`func (o *TelemetryDruidFilter) SetLowerNil(b bool)`
-
- SetLowerNil sets the value for Lower to be an explicit nil
-
-### UnsetLower
-`func (o *TelemetryDruidFilter) UnsetLower()`
-
-UnsetLower ensures that no value is present for Lower, not even an explicit nil
 ### GetUpper
 
-`func (o *TelemetryDruidFilter) GetUpper() interface{}`
+`func (o *TelemetryDruidFilter) GetUpper() map[string]interface{}`
 
 GetUpper returns the Upper field if non-nil, zero value otherwise.
 
 ### GetUpperOk
 
-`func (o *TelemetryDruidFilter) GetUpperOk() (*interface{}, bool)`
+`func (o *TelemetryDruidFilter) GetUpperOk() (*map[string]interface{}, bool)`
 
 GetUpperOk returns a tuple with the Upper field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpper
 
-`func (o *TelemetryDruidFilter) SetUpper(v interface{})`
+`func (o *TelemetryDruidFilter) SetUpper(v map[string]interface{})`
 
 SetUpper sets Upper field to given value.
 
@@ -342,16 +322,6 @@ SetUpper sets Upper field to given value.
 
 HasUpper returns a boolean if a field has been set.
 
-### SetUpperNil
-
-`func (o *TelemetryDruidFilter) SetUpperNil(b bool)`
-
- SetUpperNil sets the value for Upper to be an explicit nil
-
-### UnsetUpper
-`func (o *TelemetryDruidFilter) UnsetUpper()`
-
-UnsetUpper ensures that no value is present for Upper, not even an explicit nil
 ### GetLowerStrict
 
 `func (o *TelemetryDruidFilter) GetLowerStrict() bool`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,7 +13,11 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 )
+
+// checks if the TelemetryDruidRangeFilter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidRangeFilter{}
 
 // TelemetryDruidRangeFilter The range filter is a replacement for the bound filter. It compares against any type of column and is designed to have has more SQL compliant behavior than the bound filter. It won't match null values, even if you don't specify a lower bound.
 type TelemetryDruidRangeFilter struct {
@@ -140,7 +144,7 @@ func (o *TelemetryDruidRangeFilter) GetLower() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TelemetryDruidRangeFilter) GetLowerOk() (*interface{}, bool) {
-	if o == nil || o.Lower == nil {
+	if o == nil || IsNil(o.Lower) {
 		return nil, false
 	}
 	return &o.Lower, true
@@ -148,7 +152,7 @@ func (o *TelemetryDruidRangeFilter) GetLowerOk() (*interface{}, bool) {
 
 // HasLower returns a boolean if a field has been set.
 func (o *TelemetryDruidRangeFilter) HasLower() bool {
-	if o != nil && o.Lower != nil {
+	if o != nil && IsNil(o.Lower) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *TelemetryDruidRangeFilter) GetUpper() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TelemetryDruidRangeFilter) GetUpperOk() (*interface{}, bool) {
-	if o == nil || o.Upper == nil {
+	if o == nil || IsNil(o.Upper) {
 		return nil, false
 	}
 	return &o.Upper, true
@@ -181,7 +185,7 @@ func (o *TelemetryDruidRangeFilter) GetUpperOk() (*interface{}, bool) {
 
 // HasUpper returns a boolean if a field has been set.
 func (o *TelemetryDruidRangeFilter) HasUpper() bool {
-	if o != nil && o.Upper != nil {
+	if o != nil && IsNil(o.Upper) {
 		return true
 	}
 
@@ -195,7 +199,7 @@ func (o *TelemetryDruidRangeFilter) SetUpper(v interface{}) {
 
 // GetLowerOpen returns the LowerOpen field value if set, zero value otherwise.
 func (o *TelemetryDruidRangeFilter) GetLowerOpen() bool {
-	if o == nil || o.LowerOpen == nil {
+	if o == nil || IsNil(o.LowerOpen) {
 		var ret bool
 		return ret
 	}
@@ -205,7 +209,7 @@ func (o *TelemetryDruidRangeFilter) GetLowerOpen() bool {
 // GetLowerOpenOk returns a tuple with the LowerOpen field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidRangeFilter) GetLowerOpenOk() (*bool, bool) {
-	if o == nil || o.LowerOpen == nil {
+	if o == nil || IsNil(o.LowerOpen) {
 		return nil, false
 	}
 	return o.LowerOpen, true
@@ -213,7 +217,7 @@ func (o *TelemetryDruidRangeFilter) GetLowerOpenOk() (*bool, bool) {
 
 // HasLowerOpen returns a boolean if a field has been set.
 func (o *TelemetryDruidRangeFilter) HasLowerOpen() bool {
-	if o != nil && o.LowerOpen != nil {
+	if o != nil && !IsNil(o.LowerOpen) {
 		return true
 	}
 
@@ -227,7 +231,7 @@ func (o *TelemetryDruidRangeFilter) SetLowerOpen(v bool) {
 
 // GetUpperOpen returns the UpperOpen field value if set, zero value otherwise.
 func (o *TelemetryDruidRangeFilter) GetUpperOpen() bool {
-	if o == nil || o.UpperOpen == nil {
+	if o == nil || IsNil(o.UpperOpen) {
 		var ret bool
 		return ret
 	}
@@ -237,7 +241,7 @@ func (o *TelemetryDruidRangeFilter) GetUpperOpen() bool {
 // GetUpperOpenOk returns a tuple with the UpperOpen field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidRangeFilter) GetUpperOpenOk() (*bool, bool) {
-	if o == nil || o.UpperOpen == nil {
+	if o == nil || IsNil(o.UpperOpen) {
 		return nil, false
 	}
 	return o.UpperOpen, true
@@ -245,7 +249,7 @@ func (o *TelemetryDruidRangeFilter) GetUpperOpenOk() (*bool, bool) {
 
 // HasUpperOpen returns a boolean if a field has been set.
 func (o *TelemetryDruidRangeFilter) HasUpperOpen() bool {
-	if o != nil && o.UpperOpen != nil {
+	if o != nil && !IsNil(o.UpperOpen) {
 		return true
 	}
 
@@ -258,26 +262,28 @@ func (o *TelemetryDruidRangeFilter) SetUpperOpen(v bool) {
 }
 
 func (o TelemetryDruidRangeFilter) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidRangeFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if true {
-		toSerialize["column"] = o.Column
-	}
-	if true {
-		toSerialize["matchValueType"] = o.MatchValueType
-	}
+	toSerialize["type"] = o.Type
+	toSerialize["column"] = o.Column
+	toSerialize["matchValueType"] = o.MatchValueType
 	if o.Lower != nil {
 		toSerialize["lower"] = o.Lower
 	}
 	if o.Upper != nil {
 		toSerialize["upper"] = o.Upper
 	}
-	if o.LowerOpen != nil {
+	if !IsNil(o.LowerOpen) {
 		toSerialize["lowerOpen"] = o.LowerOpen
 	}
-	if o.UpperOpen != nil {
+	if !IsNil(o.UpperOpen) {
 		toSerialize["upperOpen"] = o.UpperOpen
 	}
 
@@ -285,19 +291,46 @@ func (o TelemetryDruidRangeFilter) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidRangeFilter) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidRangeFilter) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"type",
+		"column",
+		"matchValueType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTelemetryDruidRangeFilter := _TelemetryDruidRangeFilter{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidRangeFilter); err == nil {
-		*o = TelemetryDruidRangeFilter(varTelemetryDruidRangeFilter)
+	err = json.Unmarshal(data, &varTelemetryDruidRangeFilter)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidRangeFilter(varTelemetryDruidRangeFilter)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "column")
 		delete(additionalProperties, "matchValueType")

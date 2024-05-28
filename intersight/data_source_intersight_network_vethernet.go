@@ -95,6 +95,51 @@ func getNetworkVethernetSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"bound_interface": {
+			Description: "A reference to a inventoryInterface resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"bound_interface_dn": {
+			Description: "Port or portchannel interface configured for vitual ethernet interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"burst": {
+			Description: "Burst defined on QoS policy.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -175,6 +220,16 @@ func getNetworkVethernetSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"oper_reason": {
+			Description: "Operational Reason of the virtual etherent interface on the Fabric Interconnect. When the operational state is down, Operreason indicates the reason why the vNIC is not operational. Some common reasons are admindown, error disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"oper_state": {
+			Description: "The operational state of the Active Vethernet peer of a vNIC in Intersight Managed Mode. This state is updated by events from Fabric Interconnect or by periodic updates from Fabric Interconnect. When a Fabric Interconnect is not connected to Intersight or if the Fabric Interconnect is powered down, this property will not be updated.\n* `unknown` - The operational state of the Vethernet is not known.\n* `adminDown` - The operational state of the Vethernet is admin down.\n* `up` - The operational state of the Vethernet is Up.\n* `down` - The operational state of the Vethernet is Down.\n* `noLicense` - The operational state of the Vethernet is no license.\n* `linkUp` - The operational state of the Vethernet is link up.\n* `hardwareFailure` - The operational state of the Vethernet is hardware failure.\n* `softwareFailure` - The operational state of the Vethernet is software failure.\n* `errorDisabled` - The operational state of the Vethernet is error disabled.\n* `linkDown` - The operational state of the Vethernet is link down.\n* `sfpNotPresent` - The operational state of the Vethernet is SFP not present.\n* `udldAggrDown` - The operational state of the Vethernet is UDLD aggregate down.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -248,6 +303,51 @@ func getNetworkVethernetSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"pinned_interface": {
+			Description: "A reference to a inventoryInterface resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"pinned_interface_dn": {
+			Description: "Uplink port or portchannel interface pinned to a vitual ethernet interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ratelimit": {
+			Description: "Rate limit defined on QoS policy.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -554,6 +654,59 @@ func dataSourceNetworkVethernetRead(c context.Context, d *schema.ResourceData, m
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("bound_interface"); ok {
+		p := make([]models.InventoryInterfaceRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsInventoryInterfaceRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetBoundInterface(x)
+		}
+	}
+
+	if v, ok := d.GetOk("bound_interface_dn"); ok {
+		x := (v.(string))
+		o.SetBoundInterfaceDn(x)
+	}
+
+	if v, ok := d.GetOkExists("burst"); ok {
+		x := int64(v.(int))
+		o.SetBurst(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -640,6 +793,16 @@ func dataSourceNetworkVethernetRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+
+	if v, ok := d.GetOk("oper_reason"); ok {
+		x := (v.(string))
+		o.SetOperReason(x)
+	}
+
+	if v, ok := d.GetOk("oper_state"); ok {
+		x := (v.(string))
+		o.SetOperState(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -734,6 +897,59 @@ func dataSourceNetworkVethernetRead(c context.Context, d *schema.ResourceData, m
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if v, ok := d.GetOk("pinned_interface"); ok {
+		p := make([]models.InventoryInterfaceRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsInventoryInterfaceRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPinnedInterface(x)
+		}
+	}
+
+	if v, ok := d.GetOk("pinned_interface_dn"); ok {
+		x := (v.(string))
+		o.SetPinnedInterfaceDn(x)
+	}
+
+	if v, ok := d.GetOkExists("ratelimit"); ok {
+		x := int64(v.(int))
+		o.SetRatelimit(x)
 	}
 
 	if v, ok := d.GetOk("registered_device"); ok {
@@ -942,6 +1158,10 @@ func dataSourceNetworkVethernetRead(c context.Context, d *schema.ResourceData, m
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["bound_interface"] = flattenMapInventoryInterfaceRelationship(s.GetBoundInterface(), d)
+				temp["bound_interface_dn"] = (s.GetBoundInterfaceDn())
+				temp["burst"] = (s.GetBurst())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -955,11 +1175,17 @@ func dataSourceNetworkVethernetRead(c context.Context, d *schema.ResourceData, m
 
 				temp["network_element"] = flattenMapNetworkElementRelationship(s.GetNetworkElement(), d)
 				temp["object_type"] = (s.GetObjectType())
+				temp["oper_reason"] = (s.GetOperReason())
+				temp["oper_state"] = (s.GetOperState())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+
+				temp["pinned_interface"] = flattenMapInventoryInterfaceRelationship(s.GetPinnedInterface(), d)
+				temp["pinned_interface_dn"] = (s.GetPinnedInterfaceDn())
+				temp["ratelimit"] = (s.GetRatelimit())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["rn"] = (s.GetRn())

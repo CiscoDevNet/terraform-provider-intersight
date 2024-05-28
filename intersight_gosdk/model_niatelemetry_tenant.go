@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NiatelemetryTenant type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryTenant{}
 
 // NiatelemetryTenant Object is available at Tenant scope.
 type NiatelemetryTenant struct {
@@ -101,8 +105,8 @@ type NiatelemetryTenant struct {
 	// Number of Client Contract between End Point Groups per tenant.
 	VzRtConsCount *int64 `json:"VzRtConsCount,omitempty"`
 	// Number of Client Contract between End Point Groups per tenant.
-	VzRtProvCount        *int64                               `json:"VzRtProvCount,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	VzRtProvCount        *int64                                      `json:"VzRtProvCount,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -181,7 +185,7 @@ func (o *NiatelemetryTenant) SetObjectType(v string) {
 
 // GetBfdIfPolCount returns the BfdIfPolCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetBfdIfPolCount() int64 {
-	if o == nil || o.BfdIfPolCount == nil {
+	if o == nil || IsNil(o.BfdIfPolCount) {
 		var ret int64
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *NiatelemetryTenant) GetBfdIfPolCount() int64 {
 // GetBfdIfPolCountOk returns a tuple with the BfdIfPolCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetBfdIfPolCountOk() (*int64, bool) {
-	if o == nil || o.BfdIfPolCount == nil {
+	if o == nil || IsNil(o.BfdIfPolCount) {
 		return nil, false
 	}
 	return o.BfdIfPolCount, true
@@ -199,7 +203,7 @@ func (o *NiatelemetryTenant) GetBfdIfPolCountOk() (*int64, bool) {
 
 // HasBfdIfPolCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasBfdIfPolCount() bool {
-	if o != nil && o.BfdIfPolCount != nil {
+	if o != nil && !IsNil(o.BfdIfPolCount) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *NiatelemetryTenant) SetBfdIfPolCount(v int64) {
 
 // GetBfdIfpCount returns the BfdIfpCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetBfdIfpCount() int64 {
-	if o == nil || o.BfdIfpCount == nil {
+	if o == nil || IsNil(o.BfdIfpCount) {
 		var ret int64
 		return ret
 	}
@@ -223,7 +227,7 @@ func (o *NiatelemetryTenant) GetBfdIfpCount() int64 {
 // GetBfdIfpCountOk returns a tuple with the BfdIfpCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetBfdIfpCountOk() (*int64, bool) {
-	if o == nil || o.BfdIfpCount == nil {
+	if o == nil || IsNil(o.BfdIfpCount) {
 		return nil, false
 	}
 	return o.BfdIfpCount, true
@@ -231,7 +235,7 @@ func (o *NiatelemetryTenant) GetBfdIfpCountOk() (*int64, bool) {
 
 // HasBfdIfpCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasBfdIfpCount() bool {
-	if o != nil && o.BfdIfpCount != nil {
+	if o != nil && !IsNil(o.BfdIfpCount) {
 		return true
 	}
 
@@ -245,7 +249,7 @@ func (o *NiatelemetryTenant) SetBfdIfpCount(v int64) {
 
 // GetDhcpRsProvCount returns the DhcpRsProvCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetDhcpRsProvCount() int64 {
-	if o == nil || o.DhcpRsProvCount == nil {
+	if o == nil || IsNil(o.DhcpRsProvCount) {
 		var ret int64
 		return ret
 	}
@@ -255,7 +259,7 @@ func (o *NiatelemetryTenant) GetDhcpRsProvCount() int64 {
 // GetDhcpRsProvCountOk returns a tuple with the DhcpRsProvCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetDhcpRsProvCountOk() (*int64, bool) {
-	if o == nil || o.DhcpRsProvCount == nil {
+	if o == nil || IsNil(o.DhcpRsProvCount) {
 		return nil, false
 	}
 	return o.DhcpRsProvCount, true
@@ -263,7 +267,7 @@ func (o *NiatelemetryTenant) GetDhcpRsProvCountOk() (*int64, bool) {
 
 // HasDhcpRsProvCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasDhcpRsProvCount() bool {
-	if o != nil && o.DhcpRsProvCount != nil {
+	if o != nil && !IsNil(o.DhcpRsProvCount) {
 		return true
 	}
 
@@ -277,7 +281,7 @@ func (o *NiatelemetryTenant) SetDhcpRsProvCount(v int64) {
 
 // GetDn returns the Dn field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetDn() string {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		var ret string
 		return ret
 	}
@@ -287,7 +291,7 @@ func (o *NiatelemetryTenant) GetDn() string {
 // GetDnOk returns a tuple with the Dn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetDnOk() (*string, bool) {
-	if o == nil || o.Dn == nil {
+	if o == nil || IsNil(o.Dn) {
 		return nil, false
 	}
 	return o.Dn, true
@@ -295,7 +299,7 @@ func (o *NiatelemetryTenant) GetDnOk() (*string, bool) {
 
 // HasDn returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasDn() bool {
-	if o != nil && o.Dn != nil {
+	if o != nil && !IsNil(o.Dn) {
 		return true
 	}
 
@@ -309,7 +313,7 @@ func (o *NiatelemetryTenant) SetDn(v string) {
 
 // GetFhsBdPolCount returns the FhsBdPolCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetFhsBdPolCount() int64 {
-	if o == nil || o.FhsBdPolCount == nil {
+	if o == nil || IsNil(o.FhsBdPolCount) {
 		var ret int64
 		return ret
 	}
@@ -319,7 +323,7 @@ func (o *NiatelemetryTenant) GetFhsBdPolCount() int64 {
 // GetFhsBdPolCountOk returns a tuple with the FhsBdPolCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetFhsBdPolCountOk() (*int64, bool) {
-	if o == nil || o.FhsBdPolCount == nil {
+	if o == nil || IsNil(o.FhsBdPolCount) {
 		return nil, false
 	}
 	return o.FhsBdPolCount, true
@@ -327,7 +331,7 @@ func (o *NiatelemetryTenant) GetFhsBdPolCountOk() (*int64, bool) {
 
 // HasFhsBdPolCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasFhsBdPolCount() bool {
-	if o != nil && o.FhsBdPolCount != nil {
+	if o != nil && !IsNil(o.FhsBdPolCount) {
 		return true
 	}
 
@@ -341,7 +345,7 @@ func (o *NiatelemetryTenant) SetFhsBdPolCount(v int64) {
 
 // GetFvApCount returns the FvApCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetFvApCount() int64 {
-	if o == nil || o.FvApCount == nil {
+	if o == nil || IsNil(o.FvApCount) {
 		var ret int64
 		return ret
 	}
@@ -351,7 +355,7 @@ func (o *NiatelemetryTenant) GetFvApCount() int64 {
 // GetFvApCountOk returns a tuple with the FvApCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetFvApCountOk() (*int64, bool) {
-	if o == nil || o.FvApCount == nil {
+	if o == nil || IsNil(o.FvApCount) {
 		return nil, false
 	}
 	return o.FvApCount, true
@@ -359,7 +363,7 @@ func (o *NiatelemetryTenant) GetFvApCountOk() (*int64, bool) {
 
 // HasFvApCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasFvApCount() bool {
-	if o != nil && o.FvApCount != nil {
+	if o != nil && !IsNil(o.FvApCount) {
 		return true
 	}
 
@@ -373,7 +377,7 @@ func (o *NiatelemetryTenant) SetFvApCount(v int64) {
 
 // GetFvBdCount returns the FvBdCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetFvBdCount() int64 {
-	if o == nil || o.FvBdCount == nil {
+	if o == nil || IsNil(o.FvBdCount) {
 		var ret int64
 		return ret
 	}
@@ -383,7 +387,7 @@ func (o *NiatelemetryTenant) GetFvBdCount() int64 {
 // GetFvBdCountOk returns a tuple with the FvBdCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetFvBdCountOk() (*int64, bool) {
-	if o == nil || o.FvBdCount == nil {
+	if o == nil || IsNil(o.FvBdCount) {
 		return nil, false
 	}
 	return o.FvBdCount, true
@@ -391,7 +395,7 @@ func (o *NiatelemetryTenant) GetFvBdCountOk() (*int64, bool) {
 
 // HasFvBdCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasFvBdCount() bool {
-	if o != nil && o.FvBdCount != nil {
+	if o != nil && !IsNil(o.FvBdCount) {
 		return true
 	}
 
@@ -405,7 +409,7 @@ func (o *NiatelemetryTenant) SetFvBdCount(v int64) {
 
 // GetFvBdSubnetCount returns the FvBdSubnetCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetFvBdSubnetCount() int64 {
-	if o == nil || o.FvBdSubnetCount == nil {
+	if o == nil || IsNil(o.FvBdSubnetCount) {
 		var ret int64
 		return ret
 	}
@@ -415,7 +419,7 @@ func (o *NiatelemetryTenant) GetFvBdSubnetCount() int64 {
 // GetFvBdSubnetCountOk returns a tuple with the FvBdSubnetCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetFvBdSubnetCountOk() (*int64, bool) {
-	if o == nil || o.FvBdSubnetCount == nil {
+	if o == nil || IsNil(o.FvBdSubnetCount) {
 		return nil, false
 	}
 	return o.FvBdSubnetCount, true
@@ -423,7 +427,7 @@ func (o *NiatelemetryTenant) GetFvBdSubnetCountOk() (*int64, bool) {
 
 // HasFvBdSubnetCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasFvBdSubnetCount() bool {
-	if o != nil && o.FvBdSubnetCount != nil {
+	if o != nil && !IsNil(o.FvBdSubnetCount) {
 		return true
 	}
 
@@ -437,7 +441,7 @@ func (o *NiatelemetryTenant) SetFvBdSubnetCount(v int64) {
 
 // GetFvBdnoArpCount returns the FvBdnoArpCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetFvBdnoArpCount() int64 {
-	if o == nil || o.FvBdnoArpCount == nil {
+	if o == nil || IsNil(o.FvBdnoArpCount) {
 		var ret int64
 		return ret
 	}
@@ -447,7 +451,7 @@ func (o *NiatelemetryTenant) GetFvBdnoArpCount() int64 {
 // GetFvBdnoArpCountOk returns a tuple with the FvBdnoArpCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetFvBdnoArpCountOk() (*int64, bool) {
-	if o == nil || o.FvBdnoArpCount == nil {
+	if o == nil || IsNil(o.FvBdnoArpCount) {
 		return nil, false
 	}
 	return o.FvBdnoArpCount, true
@@ -455,7 +459,7 @@ func (o *NiatelemetryTenant) GetFvBdnoArpCountOk() (*int64, bool) {
 
 // HasFvBdnoArpCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasFvBdnoArpCount() bool {
-	if o != nil && o.FvBdnoArpCount != nil {
+	if o != nil && !IsNil(o.FvBdnoArpCount) {
 		return true
 	}
 
@@ -469,7 +473,7 @@ func (o *NiatelemetryTenant) SetFvBdnoArpCount(v int64) {
 
 // GetFvCepCount returns the FvCepCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetFvCepCount() int64 {
-	if o == nil || o.FvCepCount == nil {
+	if o == nil || IsNil(o.FvCepCount) {
 		var ret int64
 		return ret
 	}
@@ -479,7 +483,7 @@ func (o *NiatelemetryTenant) GetFvCepCount() int64 {
 // GetFvCepCountOk returns a tuple with the FvCepCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetFvCepCountOk() (*int64, bool) {
-	if o == nil || o.FvCepCount == nil {
+	if o == nil || IsNil(o.FvCepCount) {
 		return nil, false
 	}
 	return o.FvCepCount, true
@@ -487,7 +491,7 @@ func (o *NiatelemetryTenant) GetFvCepCountOk() (*int64, bool) {
 
 // HasFvCepCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasFvCepCount() bool {
-	if o != nil && o.FvCepCount != nil {
+	if o != nil && !IsNil(o.FvCepCount) {
 		return true
 	}
 
@@ -501,7 +505,7 @@ func (o *NiatelemetryTenant) SetFvCepCount(v int64) {
 
 // GetFvRsBdToFhsCount returns the FvRsBdToFhsCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetFvRsBdToFhsCount() int64 {
-	if o == nil || o.FvRsBdToFhsCount == nil {
+	if o == nil || IsNil(o.FvRsBdToFhsCount) {
 		var ret int64
 		return ret
 	}
@@ -511,7 +515,7 @@ func (o *NiatelemetryTenant) GetFvRsBdToFhsCount() int64 {
 // GetFvRsBdToFhsCountOk returns a tuple with the FvRsBdToFhsCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetFvRsBdToFhsCountOk() (*int64, bool) {
-	if o == nil || o.FvRsBdToFhsCount == nil {
+	if o == nil || IsNil(o.FvRsBdToFhsCount) {
 		return nil, false
 	}
 	return o.FvRsBdToFhsCount, true
@@ -519,7 +523,7 @@ func (o *NiatelemetryTenant) GetFvRsBdToFhsCountOk() (*int64, bool) {
 
 // HasFvRsBdToFhsCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasFvRsBdToFhsCount() bool {
-	if o != nil && o.FvRsBdToFhsCount != nil {
+	if o != nil && !IsNil(o.FvRsBdToFhsCount) {
 		return true
 	}
 
@@ -533,7 +537,7 @@ func (o *NiatelemetryTenant) SetFvRsBdToFhsCount(v int64) {
 
 // GetFvRsBdToOutCount returns the FvRsBdToOutCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetFvRsBdToOutCount() int64 {
-	if o == nil || o.FvRsBdToOutCount == nil {
+	if o == nil || IsNil(o.FvRsBdToOutCount) {
 		var ret int64
 		return ret
 	}
@@ -543,7 +547,7 @@ func (o *NiatelemetryTenant) GetFvRsBdToOutCount() int64 {
 // GetFvRsBdToOutCountOk returns a tuple with the FvRsBdToOutCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetFvRsBdToOutCountOk() (*int64, bool) {
-	if o == nil || o.FvRsBdToOutCount == nil {
+	if o == nil || IsNil(o.FvRsBdToOutCount) {
 		return nil, false
 	}
 	return o.FvRsBdToOutCount, true
@@ -551,7 +555,7 @@ func (o *NiatelemetryTenant) GetFvRsBdToOutCountOk() (*int64, bool) {
 
 // HasFvRsBdToOutCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasFvRsBdToOutCount() bool {
-	if o != nil && o.FvRsBdToOutCount != nil {
+	if o != nil && !IsNil(o.FvRsBdToOutCount) {
 		return true
 	}
 
@@ -565,7 +569,7 @@ func (o *NiatelemetryTenant) SetFvRsBdToOutCount(v int64) {
 
 // GetFvSiteConnpCount returns the FvSiteConnpCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetFvSiteConnpCount() int64 {
-	if o == nil || o.FvSiteConnpCount == nil {
+	if o == nil || IsNil(o.FvSiteConnpCount) {
 		var ret int64
 		return ret
 	}
@@ -575,7 +579,7 @@ func (o *NiatelemetryTenant) GetFvSiteConnpCount() int64 {
 // GetFvSiteConnpCountOk returns a tuple with the FvSiteConnpCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetFvSiteConnpCountOk() (*int64, bool) {
-	if o == nil || o.FvSiteConnpCount == nil {
+	if o == nil || IsNil(o.FvSiteConnpCount) {
 		return nil, false
 	}
 	return o.FvSiteConnpCount, true
@@ -583,7 +587,7 @@ func (o *NiatelemetryTenant) GetFvSiteConnpCountOk() (*int64, bool) {
 
 // HasFvSiteConnpCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasFvSiteConnpCount() bool {
-	if o != nil && o.FvSiteConnpCount != nil {
+	if o != nil && !IsNil(o.FvSiteConnpCount) {
 		return true
 	}
 
@@ -597,7 +601,7 @@ func (o *NiatelemetryTenant) SetFvSiteConnpCount(v int64) {
 
 // GetFvSubnetCount returns the FvSubnetCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetFvSubnetCount() int64 {
-	if o == nil || o.FvSubnetCount == nil {
+	if o == nil || IsNil(o.FvSubnetCount) {
 		var ret int64
 		return ret
 	}
@@ -607,7 +611,7 @@ func (o *NiatelemetryTenant) GetFvSubnetCount() int64 {
 // GetFvSubnetCountOk returns a tuple with the FvSubnetCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetFvSubnetCountOk() (*int64, bool) {
-	if o == nil || o.FvSubnetCount == nil {
+	if o == nil || IsNil(o.FvSubnetCount) {
 		return nil, false
 	}
 	return o.FvSubnetCount, true
@@ -615,7 +619,7 @@ func (o *NiatelemetryTenant) GetFvSubnetCountOk() (*int64, bool) {
 
 // HasFvSubnetCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasFvSubnetCount() bool {
-	if o != nil && o.FvSubnetCount != nil {
+	if o != nil && !IsNil(o.FvSubnetCount) {
 		return true
 	}
 
@@ -629,7 +633,7 @@ func (o *NiatelemetryTenant) SetFvSubnetCount(v int64) {
 
 // GetIpStaticRouteCount returns the IpStaticRouteCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetIpStaticRouteCount() int64 {
-	if o == nil || o.IpStaticRouteCount == nil {
+	if o == nil || IsNil(o.IpStaticRouteCount) {
 		var ret int64
 		return ret
 	}
@@ -639,7 +643,7 @@ func (o *NiatelemetryTenant) GetIpStaticRouteCount() int64 {
 // GetIpStaticRouteCountOk returns a tuple with the IpStaticRouteCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetIpStaticRouteCountOk() (*int64, bool) {
-	if o == nil || o.IpStaticRouteCount == nil {
+	if o == nil || IsNil(o.IpStaticRouteCount) {
 		return nil, false
 	}
 	return o.IpStaticRouteCount, true
@@ -647,7 +651,7 @@ func (o *NiatelemetryTenant) GetIpStaticRouteCountOk() (*int64, bool) {
 
 // HasIpStaticRouteCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasIpStaticRouteCount() bool {
-	if o != nil && o.IpStaticRouteCount != nil {
+	if o != nil && !IsNil(o.IpStaticRouteCount) {
 		return true
 	}
 
@@ -661,7 +665,7 @@ func (o *NiatelemetryTenant) SetIpStaticRouteCount(v int64) {
 
 // GetL3MulticastCount returns the L3MulticastCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetL3MulticastCount() int64 {
-	if o == nil || o.L3MulticastCount == nil {
+	if o == nil || IsNil(o.L3MulticastCount) {
 		var ret int64
 		return ret
 	}
@@ -671,7 +675,7 @@ func (o *NiatelemetryTenant) GetL3MulticastCount() int64 {
 // GetL3MulticastCountOk returns a tuple with the L3MulticastCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetL3MulticastCountOk() (*int64, bool) {
-	if o == nil || o.L3MulticastCount == nil {
+	if o == nil || IsNil(o.L3MulticastCount) {
 		return nil, false
 	}
 	return o.L3MulticastCount, true
@@ -679,7 +683,7 @@ func (o *NiatelemetryTenant) GetL3MulticastCountOk() (*int64, bool) {
 
 // HasL3MulticastCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasL3MulticastCount() bool {
-	if o != nil && o.L3MulticastCount != nil {
+	if o != nil && !IsNil(o.L3MulticastCount) {
 		return true
 	}
 
@@ -693,7 +697,7 @@ func (o *NiatelemetryTenant) SetL3MulticastCount(v int64) {
 
 // GetL3MulticastCtxCount returns the L3MulticastCtxCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetL3MulticastCtxCount() int64 {
-	if o == nil || o.L3MulticastCtxCount == nil {
+	if o == nil || IsNil(o.L3MulticastCtxCount) {
 		var ret int64
 		return ret
 	}
@@ -703,7 +707,7 @@ func (o *NiatelemetryTenant) GetL3MulticastCtxCount() int64 {
 // GetL3MulticastCtxCountOk returns a tuple with the L3MulticastCtxCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetL3MulticastCtxCountOk() (*int64, bool) {
-	if o == nil || o.L3MulticastCtxCount == nil {
+	if o == nil || IsNil(o.L3MulticastCtxCount) {
 		return nil, false
 	}
 	return o.L3MulticastCtxCount, true
@@ -711,7 +715,7 @@ func (o *NiatelemetryTenant) GetL3MulticastCtxCountOk() (*int64, bool) {
 
 // HasL3MulticastCtxCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasL3MulticastCtxCount() bool {
-	if o != nil && o.L3MulticastCtxCount != nil {
+	if o != nil && !IsNil(o.L3MulticastCtxCount) {
 		return true
 	}
 
@@ -725,7 +729,7 @@ func (o *NiatelemetryTenant) SetL3MulticastCtxCount(v int64) {
 
 // GetL3MulticastIfCount returns the L3MulticastIfCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetL3MulticastIfCount() int64 {
-	if o == nil || o.L3MulticastIfCount == nil {
+	if o == nil || IsNil(o.L3MulticastIfCount) {
 		var ret int64
 		return ret
 	}
@@ -735,7 +739,7 @@ func (o *NiatelemetryTenant) GetL3MulticastIfCount() int64 {
 // GetL3MulticastIfCountOk returns a tuple with the L3MulticastIfCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetL3MulticastIfCountOk() (*int64, bool) {
-	if o == nil || o.L3MulticastIfCount == nil {
+	if o == nil || IsNil(o.L3MulticastIfCount) {
 		return nil, false
 	}
 	return o.L3MulticastIfCount, true
@@ -743,7 +747,7 @@ func (o *NiatelemetryTenant) GetL3MulticastIfCountOk() (*int64, bool) {
 
 // HasL3MulticastIfCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasL3MulticastIfCount() bool {
-	if o != nil && o.L3MulticastIfCount != nil {
+	if o != nil && !IsNil(o.L3MulticastIfCount) {
 		return true
 	}
 
@@ -757,7 +761,7 @@ func (o *NiatelemetryTenant) SetL3MulticastIfCount(v int64) {
 
 // GetL3outCount returns the L3outCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetL3outCount() int64 {
-	if o == nil || o.L3outCount == nil {
+	if o == nil || IsNil(o.L3outCount) {
 		var ret int64
 		return ret
 	}
@@ -767,7 +771,7 @@ func (o *NiatelemetryTenant) GetL3outCount() int64 {
 // GetL3outCountOk returns a tuple with the L3outCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetL3outCountOk() (*int64, bool) {
-	if o == nil || o.L3outCount == nil {
+	if o == nil || IsNil(o.L3outCount) {
 		return nil, false
 	}
 	return o.L3outCount, true
@@ -775,7 +779,7 @@ func (o *NiatelemetryTenant) GetL3outCountOk() (*int64, bool) {
 
 // HasL3outCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasL3outCount() bool {
-	if o != nil && o.L3outCount != nil {
+	if o != nil && !IsNil(o.L3outCount) {
 		return true
 	}
 
@@ -789,7 +793,7 @@ func (o *NiatelemetryTenant) SetL3outCount(v int64) {
 
 // GetQosCustomPolCount returns the QosCustomPolCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetQosCustomPolCount() int64 {
-	if o == nil || o.QosCustomPolCount == nil {
+	if o == nil || IsNil(o.QosCustomPolCount) {
 		var ret int64
 		return ret
 	}
@@ -799,7 +803,7 @@ func (o *NiatelemetryTenant) GetQosCustomPolCount() int64 {
 // GetQosCustomPolCountOk returns a tuple with the QosCustomPolCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetQosCustomPolCountOk() (*int64, bool) {
-	if o == nil || o.QosCustomPolCount == nil {
+	if o == nil || IsNil(o.QosCustomPolCount) {
 		return nil, false
 	}
 	return o.QosCustomPolCount, true
@@ -807,7 +811,7 @@ func (o *NiatelemetryTenant) GetQosCustomPolCountOk() (*int64, bool) {
 
 // HasQosCustomPolCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasQosCustomPolCount() bool {
-	if o != nil && o.QosCustomPolCount != nil {
+	if o != nil && !IsNil(o.QosCustomPolCount) {
 		return true
 	}
 
@@ -821,7 +825,7 @@ func (o *NiatelemetryTenant) SetQosCustomPolCount(v int64) {
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetRecordType() string {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		var ret string
 		return ret
 	}
@@ -831,7 +835,7 @@ func (o *NiatelemetryTenant) GetRecordType() string {
 // GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetRecordTypeOk() (*string, bool) {
-	if o == nil || o.RecordType == nil {
+	if o == nil || IsNil(o.RecordType) {
 		return nil, false
 	}
 	return o.RecordType, true
@@ -839,7 +843,7 @@ func (o *NiatelemetryTenant) GetRecordTypeOk() (*string, bool) {
 
 // HasRecordType returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasRecordType() bool {
-	if o != nil && o.RecordType != nil {
+	if o != nil && !IsNil(o.RecordType) {
 		return true
 	}
 
@@ -853,7 +857,7 @@ func (o *NiatelemetryTenant) SetRecordType(v string) {
 
 // GetRecordVersion returns the RecordVersion field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetRecordVersion() string {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		var ret string
 		return ret
 	}
@@ -863,7 +867,7 @@ func (o *NiatelemetryTenant) GetRecordVersion() string {
 // GetRecordVersionOk returns a tuple with the RecordVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetRecordVersionOk() (*string, bool) {
-	if o == nil || o.RecordVersion == nil {
+	if o == nil || IsNil(o.RecordVersion) {
 		return nil, false
 	}
 	return o.RecordVersion, true
@@ -871,7 +875,7 @@ func (o *NiatelemetryTenant) GetRecordVersionOk() (*string, bool) {
 
 // HasRecordVersion returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasRecordVersion() bool {
-	if o != nil && o.RecordVersion != nil {
+	if o != nil && !IsNil(o.RecordVersion) {
 		return true
 	}
 
@@ -885,7 +889,7 @@ func (o *NiatelemetryTenant) SetRecordVersion(v string) {
 
 // GetSiteName returns the SiteName field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetSiteName() string {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		var ret string
 		return ret
 	}
@@ -895,7 +899,7 @@ func (o *NiatelemetryTenant) GetSiteName() string {
 // GetSiteNameOk returns a tuple with the SiteName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetSiteNameOk() (*string, bool) {
-	if o == nil || o.SiteName == nil {
+	if o == nil || IsNil(o.SiteName) {
 		return nil, false
 	}
 	return o.SiteName, true
@@ -903,7 +907,7 @@ func (o *NiatelemetryTenant) GetSiteNameOk() (*string, bool) {
 
 // HasSiteName returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasSiteName() bool {
-	if o != nil && o.SiteName != nil {
+	if o != nil && !IsNil(o.SiteName) {
 		return true
 	}
 
@@ -917,7 +921,7 @@ func (o *NiatelemetryTenant) SetSiteName(v string) {
 
 // GetSsm returns the Ssm field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetSsm() string {
-	if o == nil || o.Ssm == nil {
+	if o == nil || IsNil(o.Ssm) {
 		var ret string
 		return ret
 	}
@@ -927,7 +931,7 @@ func (o *NiatelemetryTenant) GetSsm() string {
 // GetSsmOk returns a tuple with the Ssm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetSsmOk() (*string, bool) {
-	if o == nil || o.Ssm == nil {
+	if o == nil || IsNil(o.Ssm) {
 		return nil, false
 	}
 	return o.Ssm, true
@@ -935,7 +939,7 @@ func (o *NiatelemetryTenant) GetSsmOk() (*string, bool) {
 
 // HasSsm returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasSsm() bool {
-	if o != nil && o.Ssm != nil {
+	if o != nil && !IsNil(o.Ssm) {
 		return true
 	}
 
@@ -949,7 +953,7 @@ func (o *NiatelemetryTenant) SetSsm(v string) {
 
 // GetSsmCount returns the SsmCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetSsmCount() int64 {
-	if o == nil || o.SsmCount == nil {
+	if o == nil || IsNil(o.SsmCount) {
 		var ret int64
 		return ret
 	}
@@ -959,7 +963,7 @@ func (o *NiatelemetryTenant) GetSsmCount() int64 {
 // GetSsmCountOk returns a tuple with the SsmCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetSsmCountOk() (*int64, bool) {
-	if o == nil || o.SsmCount == nil {
+	if o == nil || IsNil(o.SsmCount) {
 		return nil, false
 	}
 	return o.SsmCount, true
@@ -967,7 +971,7 @@ func (o *NiatelemetryTenant) GetSsmCountOk() (*int64, bool) {
 
 // HasSsmCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasSsmCount() bool {
-	if o != nil && o.SsmCount != nil {
+	if o != nil && !IsNil(o.SsmCount) {
 		return true
 	}
 
@@ -981,7 +985,7 @@ func (o *NiatelemetryTenant) SetSsmCount(v int64) {
 
 // GetTcamOptCount returns the TcamOptCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetTcamOptCount() int64 {
-	if o == nil || o.TcamOptCount == nil {
+	if o == nil || IsNil(o.TcamOptCount) {
 		var ret int64
 		return ret
 	}
@@ -991,7 +995,7 @@ func (o *NiatelemetryTenant) GetTcamOptCount() int64 {
 // GetTcamOptCountOk returns a tuple with the TcamOptCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetTcamOptCountOk() (*int64, bool) {
-	if o == nil || o.TcamOptCount == nil {
+	if o == nil || IsNil(o.TcamOptCount) {
 		return nil, false
 	}
 	return o.TcamOptCount, true
@@ -999,7 +1003,7 @@ func (o *NiatelemetryTenant) GetTcamOptCountOk() (*int64, bool) {
 
 // HasTcamOptCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasTcamOptCount() bool {
-	if o != nil && o.TcamOptCount != nil {
+	if o != nil && !IsNil(o.TcamOptCount) {
 		return true
 	}
 
@@ -1013,7 +1017,7 @@ func (o *NiatelemetryTenant) SetTcamOptCount(v int64) {
 
 // GetTenantHealth returns the TenantHealth field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetTenantHealth() int64 {
-	if o == nil || o.TenantHealth == nil {
+	if o == nil || IsNil(o.TenantHealth) {
 		var ret int64
 		return ret
 	}
@@ -1023,7 +1027,7 @@ func (o *NiatelemetryTenant) GetTenantHealth() int64 {
 // GetTenantHealthOk returns a tuple with the TenantHealth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetTenantHealthOk() (*int64, bool) {
-	if o == nil || o.TenantHealth == nil {
+	if o == nil || IsNil(o.TenantHealth) {
 		return nil, false
 	}
 	return o.TenantHealth, true
@@ -1031,7 +1035,7 @@ func (o *NiatelemetryTenant) GetTenantHealthOk() (*int64, bool) {
 
 // HasTenantHealth returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasTenantHealth() bool {
-	if o != nil && o.TenantHealth != nil {
+	if o != nil && !IsNil(o.TenantHealth) {
 		return true
 	}
 
@@ -1045,7 +1049,7 @@ func (o *NiatelemetryTenant) SetTenantHealth(v int64) {
 
 // GetTraceRouteEpCount returns the TraceRouteEpCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetTraceRouteEpCount() int64 {
-	if o == nil || o.TraceRouteEpCount == nil {
+	if o == nil || IsNil(o.TraceRouteEpCount) {
 		var ret int64
 		return ret
 	}
@@ -1055,7 +1059,7 @@ func (o *NiatelemetryTenant) GetTraceRouteEpCount() int64 {
 // GetTraceRouteEpCountOk returns a tuple with the TraceRouteEpCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetTraceRouteEpCountOk() (*int64, bool) {
-	if o == nil || o.TraceRouteEpCount == nil {
+	if o == nil || IsNil(o.TraceRouteEpCount) {
 		return nil, false
 	}
 	return o.TraceRouteEpCount, true
@@ -1063,7 +1067,7 @@ func (o *NiatelemetryTenant) GetTraceRouteEpCountOk() (*int64, bool) {
 
 // HasTraceRouteEpCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasTraceRouteEpCount() bool {
-	if o != nil && o.TraceRouteEpCount != nil {
+	if o != nil && !IsNil(o.TraceRouteEpCount) {
 		return true
 	}
 
@@ -1077,7 +1081,7 @@ func (o *NiatelemetryTenant) SetTraceRouteEpCount(v int64) {
 
 // GetTraceRouteEpExtCount returns the TraceRouteEpExtCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetTraceRouteEpExtCount() int64 {
-	if o == nil || o.TraceRouteEpExtCount == nil {
+	if o == nil || IsNil(o.TraceRouteEpExtCount) {
 		var ret int64
 		return ret
 	}
@@ -1087,7 +1091,7 @@ func (o *NiatelemetryTenant) GetTraceRouteEpExtCount() int64 {
 // GetTraceRouteEpExtCountOk returns a tuple with the TraceRouteEpExtCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetTraceRouteEpExtCountOk() (*int64, bool) {
-	if o == nil || o.TraceRouteEpExtCount == nil {
+	if o == nil || IsNil(o.TraceRouteEpExtCount) {
 		return nil, false
 	}
 	return o.TraceRouteEpExtCount, true
@@ -1095,7 +1099,7 @@ func (o *NiatelemetryTenant) GetTraceRouteEpExtCountOk() (*int64, bool) {
 
 // HasTraceRouteEpExtCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasTraceRouteEpExtCount() bool {
-	if o != nil && o.TraceRouteEpExtCount != nil {
+	if o != nil && !IsNil(o.TraceRouteEpExtCount) {
 		return true
 	}
 
@@ -1109,7 +1113,7 @@ func (o *NiatelemetryTenant) SetTraceRouteEpExtCount(v int64) {
 
 // GetTraceRouteExtEpCount returns the TraceRouteExtEpCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetTraceRouteExtEpCount() int64 {
-	if o == nil || o.TraceRouteExtEpCount == nil {
+	if o == nil || IsNil(o.TraceRouteExtEpCount) {
 		var ret int64
 		return ret
 	}
@@ -1119,7 +1123,7 @@ func (o *NiatelemetryTenant) GetTraceRouteExtEpCount() int64 {
 // GetTraceRouteExtEpCountOk returns a tuple with the TraceRouteExtEpCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetTraceRouteExtEpCountOk() (*int64, bool) {
-	if o == nil || o.TraceRouteExtEpCount == nil {
+	if o == nil || IsNil(o.TraceRouteExtEpCount) {
 		return nil, false
 	}
 	return o.TraceRouteExtEpCount, true
@@ -1127,7 +1131,7 @@ func (o *NiatelemetryTenant) GetTraceRouteExtEpCountOk() (*int64, bool) {
 
 // HasTraceRouteExtEpCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasTraceRouteExtEpCount() bool {
-	if o != nil && o.TraceRouteExtEpCount != nil {
+	if o != nil && !IsNil(o.TraceRouteExtEpCount) {
 		return true
 	}
 
@@ -1141,7 +1145,7 @@ func (o *NiatelemetryTenant) SetTraceRouteExtEpCount(v int64) {
 
 // GetTraceRouteExtExtCount returns the TraceRouteExtExtCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetTraceRouteExtExtCount() int64 {
-	if o == nil || o.TraceRouteExtExtCount == nil {
+	if o == nil || IsNil(o.TraceRouteExtExtCount) {
 		var ret int64
 		return ret
 	}
@@ -1151,7 +1155,7 @@ func (o *NiatelemetryTenant) GetTraceRouteExtExtCount() int64 {
 // GetTraceRouteExtExtCountOk returns a tuple with the TraceRouteExtExtCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetTraceRouteExtExtCountOk() (*int64, bool) {
-	if o == nil || o.TraceRouteExtExtCount == nil {
+	if o == nil || IsNil(o.TraceRouteExtExtCount) {
 		return nil, false
 	}
 	return o.TraceRouteExtExtCount, true
@@ -1159,7 +1163,7 @@ func (o *NiatelemetryTenant) GetTraceRouteExtExtCountOk() (*int64, bool) {
 
 // HasTraceRouteExtExtCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasTraceRouteExtExtCount() bool {
-	if o != nil && o.TraceRouteExtExtCount != nil {
+	if o != nil && !IsNil(o.TraceRouteExtExtCount) {
 		return true
 	}
 
@@ -1173,7 +1177,7 @@ func (o *NiatelemetryTenant) SetTraceRouteExtExtCount(v int64) {
 
 // GetVnsAbsGraphCount returns the VnsAbsGraphCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetVnsAbsGraphCount() int64 {
-	if o == nil || o.VnsAbsGraphCount == nil {
+	if o == nil || IsNil(o.VnsAbsGraphCount) {
 		var ret int64
 		return ret
 	}
@@ -1183,7 +1187,7 @@ func (o *NiatelemetryTenant) GetVnsAbsGraphCount() int64 {
 // GetVnsAbsGraphCountOk returns a tuple with the VnsAbsGraphCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetVnsAbsGraphCountOk() (*int64, bool) {
-	if o == nil || o.VnsAbsGraphCount == nil {
+	if o == nil || IsNil(o.VnsAbsGraphCount) {
 		return nil, false
 	}
 	return o.VnsAbsGraphCount, true
@@ -1191,7 +1195,7 @@ func (o *NiatelemetryTenant) GetVnsAbsGraphCountOk() (*int64, bool) {
 
 // HasVnsAbsGraphCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasVnsAbsGraphCount() bool {
-	if o != nil && o.VnsAbsGraphCount != nil {
+	if o != nil && !IsNil(o.VnsAbsGraphCount) {
 		return true
 	}
 
@@ -1205,7 +1209,7 @@ func (o *NiatelemetryTenant) SetVnsAbsGraphCount(v int64) {
 
 // GetVnsBackupPolCount returns the VnsBackupPolCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetVnsBackupPolCount() int64 {
-	if o == nil || o.VnsBackupPolCount == nil {
+	if o == nil || IsNil(o.VnsBackupPolCount) {
 		var ret int64
 		return ret
 	}
@@ -1215,7 +1219,7 @@ func (o *NiatelemetryTenant) GetVnsBackupPolCount() int64 {
 // GetVnsBackupPolCountOk returns a tuple with the VnsBackupPolCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetVnsBackupPolCountOk() (*int64, bool) {
-	if o == nil || o.VnsBackupPolCount == nil {
+	if o == nil || IsNil(o.VnsBackupPolCount) {
 		return nil, false
 	}
 	return o.VnsBackupPolCount, true
@@ -1223,7 +1227,7 @@ func (o *NiatelemetryTenant) GetVnsBackupPolCountOk() (*int64, bool) {
 
 // HasVnsBackupPolCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasVnsBackupPolCount() bool {
-	if o != nil && o.VnsBackupPolCount != nil {
+	if o != nil && !IsNil(o.VnsBackupPolCount) {
 		return true
 	}
 
@@ -1237,7 +1241,7 @@ func (o *NiatelemetryTenant) SetVnsBackupPolCount(v int64) {
 
 // GetVnsRedirectDestCount returns the VnsRedirectDestCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetVnsRedirectDestCount() int64 {
-	if o == nil || o.VnsRedirectDestCount == nil {
+	if o == nil || IsNil(o.VnsRedirectDestCount) {
 		var ret int64
 		return ret
 	}
@@ -1247,7 +1251,7 @@ func (o *NiatelemetryTenant) GetVnsRedirectDestCount() int64 {
 // GetVnsRedirectDestCountOk returns a tuple with the VnsRedirectDestCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetVnsRedirectDestCountOk() (*int64, bool) {
-	if o == nil || o.VnsRedirectDestCount == nil {
+	if o == nil || IsNil(o.VnsRedirectDestCount) {
 		return nil, false
 	}
 	return o.VnsRedirectDestCount, true
@@ -1255,7 +1259,7 @@ func (o *NiatelemetryTenant) GetVnsRedirectDestCountOk() (*int64, bool) {
 
 // HasVnsRedirectDestCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasVnsRedirectDestCount() bool {
-	if o != nil && o.VnsRedirectDestCount != nil {
+	if o != nil && !IsNil(o.VnsRedirectDestCount) {
 		return true
 	}
 
@@ -1269,7 +1273,7 @@ func (o *NiatelemetryTenant) SetVnsRedirectDestCount(v int64) {
 
 // GetVnsSvcRedirectPolCount returns the VnsSvcRedirectPolCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetVnsSvcRedirectPolCount() int64 {
-	if o == nil || o.VnsSvcRedirectPolCount == nil {
+	if o == nil || IsNil(o.VnsSvcRedirectPolCount) {
 		var ret int64
 		return ret
 	}
@@ -1279,7 +1283,7 @@ func (o *NiatelemetryTenant) GetVnsSvcRedirectPolCount() int64 {
 // GetVnsSvcRedirectPolCountOk returns a tuple with the VnsSvcRedirectPolCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetVnsSvcRedirectPolCountOk() (*int64, bool) {
-	if o == nil || o.VnsSvcRedirectPolCount == nil {
+	if o == nil || IsNil(o.VnsSvcRedirectPolCount) {
 		return nil, false
 	}
 	return o.VnsSvcRedirectPolCount, true
@@ -1287,7 +1291,7 @@ func (o *NiatelemetryTenant) GetVnsSvcRedirectPolCountOk() (*int64, bool) {
 
 // HasVnsSvcRedirectPolCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasVnsSvcRedirectPolCount() bool {
-	if o != nil && o.VnsSvcRedirectPolCount != nil {
+	if o != nil && !IsNil(o.VnsSvcRedirectPolCount) {
 		return true
 	}
 
@@ -1301,7 +1305,7 @@ func (o *NiatelemetryTenant) SetVnsSvcRedirectPolCount(v int64) {
 
 // GetVrfCount returns the VrfCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetVrfCount() int64 {
-	if o == nil || o.VrfCount == nil {
+	if o == nil || IsNil(o.VrfCount) {
 		var ret int64
 		return ret
 	}
@@ -1311,7 +1315,7 @@ func (o *NiatelemetryTenant) GetVrfCount() int64 {
 // GetVrfCountOk returns a tuple with the VrfCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetVrfCountOk() (*int64, bool) {
-	if o == nil || o.VrfCount == nil {
+	if o == nil || IsNil(o.VrfCount) {
 		return nil, false
 	}
 	return o.VrfCount, true
@@ -1319,7 +1323,7 @@ func (o *NiatelemetryTenant) GetVrfCountOk() (*int64, bool) {
 
 // HasVrfCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasVrfCount() bool {
-	if o != nil && o.VrfCount != nil {
+	if o != nil && !IsNil(o.VrfCount) {
 		return true
 	}
 
@@ -1333,7 +1337,7 @@ func (o *NiatelemetryTenant) SetVrfCount(v int64) {
 
 // GetVzBrCpCount returns the VzBrCpCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetVzBrCpCount() int64 {
-	if o == nil || o.VzBrCpCount == nil {
+	if o == nil || IsNil(o.VzBrCpCount) {
 		var ret int64
 		return ret
 	}
@@ -1343,7 +1347,7 @@ func (o *NiatelemetryTenant) GetVzBrCpCount() int64 {
 // GetVzBrCpCountOk returns a tuple with the VzBrCpCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetVzBrCpCountOk() (*int64, bool) {
-	if o == nil || o.VzBrCpCount == nil {
+	if o == nil || IsNil(o.VzBrCpCount) {
 		return nil, false
 	}
 	return o.VzBrCpCount, true
@@ -1351,7 +1355,7 @@ func (o *NiatelemetryTenant) GetVzBrCpCountOk() (*int64, bool) {
 
 // HasVzBrCpCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasVzBrCpCount() bool {
-	if o != nil && o.VzBrCpCount != nil {
+	if o != nil && !IsNil(o.VzBrCpCount) {
 		return true
 	}
 
@@ -1365,7 +1369,7 @@ func (o *NiatelemetryTenant) SetVzBrCpCount(v int64) {
 
 // GetVzRtConsCount returns the VzRtConsCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetVzRtConsCount() int64 {
-	if o == nil || o.VzRtConsCount == nil {
+	if o == nil || IsNil(o.VzRtConsCount) {
 		var ret int64
 		return ret
 	}
@@ -1375,7 +1379,7 @@ func (o *NiatelemetryTenant) GetVzRtConsCount() int64 {
 // GetVzRtConsCountOk returns a tuple with the VzRtConsCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetVzRtConsCountOk() (*int64, bool) {
-	if o == nil || o.VzRtConsCount == nil {
+	if o == nil || IsNil(o.VzRtConsCount) {
 		return nil, false
 	}
 	return o.VzRtConsCount, true
@@ -1383,7 +1387,7 @@ func (o *NiatelemetryTenant) GetVzRtConsCountOk() (*int64, bool) {
 
 // HasVzRtConsCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasVzRtConsCount() bool {
-	if o != nil && o.VzRtConsCount != nil {
+	if o != nil && !IsNil(o.VzRtConsCount) {
 		return true
 	}
 
@@ -1397,7 +1401,7 @@ func (o *NiatelemetryTenant) SetVzRtConsCount(v int64) {
 
 // GetVzRtProvCount returns the VzRtProvCount field value if set, zero value otherwise.
 func (o *NiatelemetryTenant) GetVzRtProvCount() int64 {
-	if o == nil || o.VzRtProvCount == nil {
+	if o == nil || IsNil(o.VzRtProvCount) {
 		var ret int64
 		return ret
 	}
@@ -1407,7 +1411,7 @@ func (o *NiatelemetryTenant) GetVzRtProvCount() int64 {
 // GetVzRtProvCountOk returns a tuple with the VzRtProvCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NiatelemetryTenant) GetVzRtProvCountOk() (*int64, bool) {
-	if o == nil || o.VzRtProvCount == nil {
+	if o == nil || IsNil(o.VzRtProvCount) {
 		return nil, false
 	}
 	return o.VzRtProvCount, true
@@ -1415,7 +1419,7 @@ func (o *NiatelemetryTenant) GetVzRtProvCountOk() (*int64, bool) {
 
 // HasVzRtProvCount returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasVzRtProvCount() bool {
-	if o != nil && o.VzRtProvCount != nil {
+	if o != nil && !IsNil(o.VzRtProvCount) {
 		return true
 	}
 
@@ -1427,183 +1431,220 @@ func (o *NiatelemetryTenant) SetVzRtProvCount(v int64) {
 	o.VzRtProvCount = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NiatelemetryTenant) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NiatelemetryTenant) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NiatelemetryTenant) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NiatelemetryTenant) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NiatelemetryTenant) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NiatelemetryTenant) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NiatelemetryTenant) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NiatelemetryTenant) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BfdIfPolCount != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BfdIfPolCount) {
 		toSerialize["BfdIfPolCount"] = o.BfdIfPolCount
 	}
-	if o.BfdIfpCount != nil {
+	if !IsNil(o.BfdIfpCount) {
 		toSerialize["BfdIfpCount"] = o.BfdIfpCount
 	}
-	if o.DhcpRsProvCount != nil {
+	if !IsNil(o.DhcpRsProvCount) {
 		toSerialize["DhcpRsProvCount"] = o.DhcpRsProvCount
 	}
-	if o.Dn != nil {
+	if !IsNil(o.Dn) {
 		toSerialize["Dn"] = o.Dn
 	}
-	if o.FhsBdPolCount != nil {
+	if !IsNil(o.FhsBdPolCount) {
 		toSerialize["FhsBdPolCount"] = o.FhsBdPolCount
 	}
-	if o.FvApCount != nil {
+	if !IsNil(o.FvApCount) {
 		toSerialize["FvApCount"] = o.FvApCount
 	}
-	if o.FvBdCount != nil {
+	if !IsNil(o.FvBdCount) {
 		toSerialize["FvBdCount"] = o.FvBdCount
 	}
-	if o.FvBdSubnetCount != nil {
+	if !IsNil(o.FvBdSubnetCount) {
 		toSerialize["FvBdSubnetCount"] = o.FvBdSubnetCount
 	}
-	if o.FvBdnoArpCount != nil {
+	if !IsNil(o.FvBdnoArpCount) {
 		toSerialize["FvBdnoArpCount"] = o.FvBdnoArpCount
 	}
-	if o.FvCepCount != nil {
+	if !IsNil(o.FvCepCount) {
 		toSerialize["FvCepCount"] = o.FvCepCount
 	}
-	if o.FvRsBdToFhsCount != nil {
+	if !IsNil(o.FvRsBdToFhsCount) {
 		toSerialize["FvRsBdToFhsCount"] = o.FvRsBdToFhsCount
 	}
-	if o.FvRsBdToOutCount != nil {
+	if !IsNil(o.FvRsBdToOutCount) {
 		toSerialize["FvRsBdToOutCount"] = o.FvRsBdToOutCount
 	}
-	if o.FvSiteConnpCount != nil {
+	if !IsNil(o.FvSiteConnpCount) {
 		toSerialize["FvSiteConnpCount"] = o.FvSiteConnpCount
 	}
-	if o.FvSubnetCount != nil {
+	if !IsNil(o.FvSubnetCount) {
 		toSerialize["FvSubnetCount"] = o.FvSubnetCount
 	}
-	if o.IpStaticRouteCount != nil {
+	if !IsNil(o.IpStaticRouteCount) {
 		toSerialize["IpStaticRouteCount"] = o.IpStaticRouteCount
 	}
-	if o.L3MulticastCount != nil {
+	if !IsNil(o.L3MulticastCount) {
 		toSerialize["L3MulticastCount"] = o.L3MulticastCount
 	}
-	if o.L3MulticastCtxCount != nil {
+	if !IsNil(o.L3MulticastCtxCount) {
 		toSerialize["L3MulticastCtxCount"] = o.L3MulticastCtxCount
 	}
-	if o.L3MulticastIfCount != nil {
+	if !IsNil(o.L3MulticastIfCount) {
 		toSerialize["L3MulticastIfCount"] = o.L3MulticastIfCount
 	}
-	if o.L3outCount != nil {
+	if !IsNil(o.L3outCount) {
 		toSerialize["L3outCount"] = o.L3outCount
 	}
-	if o.QosCustomPolCount != nil {
+	if !IsNil(o.QosCustomPolCount) {
 		toSerialize["QosCustomPolCount"] = o.QosCustomPolCount
 	}
-	if o.RecordType != nil {
+	if !IsNil(o.RecordType) {
 		toSerialize["RecordType"] = o.RecordType
 	}
-	if o.RecordVersion != nil {
+	if !IsNil(o.RecordVersion) {
 		toSerialize["RecordVersion"] = o.RecordVersion
 	}
-	if o.SiteName != nil {
+	if !IsNil(o.SiteName) {
 		toSerialize["SiteName"] = o.SiteName
 	}
-	if o.Ssm != nil {
+	if !IsNil(o.Ssm) {
 		toSerialize["Ssm"] = o.Ssm
 	}
-	if o.SsmCount != nil {
+	if !IsNil(o.SsmCount) {
 		toSerialize["SsmCount"] = o.SsmCount
 	}
-	if o.TcamOptCount != nil {
+	if !IsNil(o.TcamOptCount) {
 		toSerialize["TcamOptCount"] = o.TcamOptCount
 	}
-	if o.TenantHealth != nil {
+	if !IsNil(o.TenantHealth) {
 		toSerialize["TenantHealth"] = o.TenantHealth
 	}
-	if o.TraceRouteEpCount != nil {
+	if !IsNil(o.TraceRouteEpCount) {
 		toSerialize["TraceRouteEpCount"] = o.TraceRouteEpCount
 	}
-	if o.TraceRouteEpExtCount != nil {
+	if !IsNil(o.TraceRouteEpExtCount) {
 		toSerialize["TraceRouteEpExtCount"] = o.TraceRouteEpExtCount
 	}
-	if o.TraceRouteExtEpCount != nil {
+	if !IsNil(o.TraceRouteExtEpCount) {
 		toSerialize["TraceRouteExtEpCount"] = o.TraceRouteExtEpCount
 	}
-	if o.TraceRouteExtExtCount != nil {
+	if !IsNil(o.TraceRouteExtExtCount) {
 		toSerialize["TraceRouteExtExtCount"] = o.TraceRouteExtExtCount
 	}
-	if o.VnsAbsGraphCount != nil {
+	if !IsNil(o.VnsAbsGraphCount) {
 		toSerialize["VnsAbsGraphCount"] = o.VnsAbsGraphCount
 	}
-	if o.VnsBackupPolCount != nil {
+	if !IsNil(o.VnsBackupPolCount) {
 		toSerialize["VnsBackupPolCount"] = o.VnsBackupPolCount
 	}
-	if o.VnsRedirectDestCount != nil {
+	if !IsNil(o.VnsRedirectDestCount) {
 		toSerialize["VnsRedirectDestCount"] = o.VnsRedirectDestCount
 	}
-	if o.VnsSvcRedirectPolCount != nil {
+	if !IsNil(o.VnsSvcRedirectPolCount) {
 		toSerialize["VnsSvcRedirectPolCount"] = o.VnsSvcRedirectPolCount
 	}
-	if o.VrfCount != nil {
+	if !IsNil(o.VrfCount) {
 		toSerialize["VrfCount"] = o.VrfCount
 	}
-	if o.VzBrCpCount != nil {
+	if !IsNil(o.VzBrCpCount) {
 		toSerialize["VzBrCpCount"] = o.VzBrCpCount
 	}
-	if o.VzRtConsCount != nil {
+	if !IsNil(o.VzRtConsCount) {
 		toSerialize["VzRtConsCount"] = o.VzRtConsCount
 	}
-	if o.VzRtProvCount != nil {
+	if !IsNil(o.VzRtProvCount) {
 		toSerialize["VzRtProvCount"] = o.VzRtProvCount
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NiatelemetryTenant) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NiatelemetryTenant) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NiatelemetryTenantWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1686,13 +1727,13 @@ func (o *NiatelemetryTenant) UnmarshalJSON(bytes []byte) (err error) {
 		// Number of Client Contract between End Point Groups per tenant.
 		VzRtConsCount *int64 `json:"VzRtConsCount,omitempty"`
 		// Number of Client Contract between End Point Groups per tenant.
-		VzRtProvCount    *int64                               `json:"VzRtProvCount,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		VzRtProvCount    *int64                                      `json:"VzRtProvCount,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNiatelemetryTenantWithoutEmbeddedStruct := NiatelemetryTenantWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryTenantWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryTenantWithoutEmbeddedStruct)
 	if err == nil {
 		varNiatelemetryTenant := _NiatelemetryTenant{}
 		varNiatelemetryTenant.ClassId = varNiatelemetryTenantWithoutEmbeddedStruct.ClassId
@@ -1744,7 +1785,7 @@ func (o *NiatelemetryTenant) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNiatelemetryTenant := _NiatelemetryTenant{}
 
-	err = json.Unmarshal(bytes, &varNiatelemetryTenant)
+	err = json.Unmarshal(data, &varNiatelemetryTenant)
 	if err == nil {
 		o.MoBaseMo = varNiatelemetryTenant.MoBaseMo
 	} else {
@@ -1753,7 +1794,7 @@ func (o *NiatelemetryTenant) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BfdIfPolCount")

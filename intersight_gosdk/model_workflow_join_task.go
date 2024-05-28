@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowJoinTask type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowJoinTask{}
 
 // WorkflowJoinTask A JoinTask is a control task that must follow a fork task and specify all the fork tasks that must complete and join before the worfklow can proceed to the task specified in the OnSuccess transition.
 type WorkflowJoinTask struct {
@@ -116,7 +120,7 @@ func (o *WorkflowJoinTask) GetJoinOnTasks() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowJoinTask) GetJoinOnTasksOk() ([]string, bool) {
-	if o == nil || o.JoinOnTasks == nil {
+	if o == nil || IsNil(o.JoinOnTasks) {
 		return nil, false
 	}
 	return o.JoinOnTasks, true
@@ -124,7 +128,7 @@ func (o *WorkflowJoinTask) GetJoinOnTasksOk() ([]string, bool) {
 
 // HasJoinOnTasks returns a boolean if a field has been set.
 func (o *WorkflowJoinTask) HasJoinOnTasks() bool {
-	if o != nil && o.JoinOnTasks != nil {
+	if o != nil && IsNil(o.JoinOnTasks) {
 		return true
 	}
 
@@ -138,7 +142,7 @@ func (o *WorkflowJoinTask) SetJoinOnTasks(v []string) {
 
 // GetOnSuccess returns the OnSuccess field value if set, zero value otherwise.
 func (o *WorkflowJoinTask) GetOnSuccess() string {
-	if o == nil || o.OnSuccess == nil {
+	if o == nil || IsNil(o.OnSuccess) {
 		var ret string
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *WorkflowJoinTask) GetOnSuccess() string {
 // GetOnSuccessOk returns a tuple with the OnSuccess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowJoinTask) GetOnSuccessOk() (*string, bool) {
-	if o == nil || o.OnSuccess == nil {
+	if o == nil || IsNil(o.OnSuccess) {
 		return nil, false
 	}
 	return o.OnSuccess, true
@@ -156,7 +160,7 @@ func (o *WorkflowJoinTask) GetOnSuccessOk() (*string, bool) {
 
 // HasOnSuccess returns a boolean if a field has been set.
 func (o *WorkflowJoinTask) HasOnSuccess() bool {
-	if o != nil && o.OnSuccess != nil {
+	if o != nil && !IsNil(o.OnSuccess) {
 		return true
 	}
 
@@ -169,25 +173,29 @@ func (o *WorkflowJoinTask) SetOnSuccess(v string) {
 }
 
 func (o WorkflowJoinTask) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowJoinTask) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowControlTask, errWorkflowControlTask := json.Marshal(o.WorkflowControlTask)
 	if errWorkflowControlTask != nil {
-		return []byte{}, errWorkflowControlTask
+		return map[string]interface{}{}, errWorkflowControlTask
 	}
 	errWorkflowControlTask = json.Unmarshal([]byte(serializedWorkflowControlTask), &toSerialize)
 	if errWorkflowControlTask != nil {
-		return []byte{}, errWorkflowControlTask
+		return map[string]interface{}{}, errWorkflowControlTask
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.JoinOnTasks != nil {
 		toSerialize["JoinOnTasks"] = o.JoinOnTasks
 	}
-	if o.OnSuccess != nil {
+	if !IsNil(o.OnSuccess) {
 		toSerialize["OnSuccess"] = o.OnSuccess
 	}
 
@@ -195,10 +203,32 @@ func (o WorkflowJoinTask) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowJoinTask) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowJoinTask) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowJoinTaskWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -211,7 +241,7 @@ func (o *WorkflowJoinTask) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowJoinTaskWithoutEmbeddedStruct := WorkflowJoinTaskWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowJoinTaskWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowJoinTaskWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowJoinTask := _WorkflowJoinTask{}
 		varWorkflowJoinTask.ClassId = varWorkflowJoinTaskWithoutEmbeddedStruct.ClassId
@@ -225,7 +255,7 @@ func (o *WorkflowJoinTask) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowJoinTask := _WorkflowJoinTask{}
 
-	err = json.Unmarshal(bytes, &varWorkflowJoinTask)
+	err = json.Unmarshal(data, &varWorkflowJoinTask)
 	if err == nil {
 		o.WorkflowControlTask = varWorkflowJoinTask.WorkflowControlTask
 	} else {
@@ -234,7 +264,7 @@ func (o *WorkflowJoinTask) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "JoinOnTasks")

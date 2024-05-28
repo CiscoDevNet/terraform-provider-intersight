@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageHitachiVolume type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageHitachiVolume{}
 
 // StorageHitachiVolume A volume entity in Hitachi storage array.
 type StorageHitachiVolume struct {
@@ -53,12 +57,12 @@ type StorageHitachiVolume struct {
 	// RAID type drive configuration.
 	RaidType *string `json:"RaidType,omitempty"`
 	// Status information of the volume. * `N/A` - The volume status is not available. * `NML` - The volume is in normal status. * `BLK` - The volume is in blocked state. * `BSY` - The volume status is being changed. * `Unknown` - The volume status is unknown (not supported).
-	Status *string                          `json:"Status,omitempty"`
-	Array  *StorageHitachiArrayRelationship `json:"Array,omitempty"`
+	Status *string                                 `json:"Status,omitempty"`
+	Array  NullableStorageHitachiArrayRelationship `json:"Array,omitempty"`
 	// An array of relationships to storageHitachiParityGroup resources.
-	ParityGroups         []StorageHitachiParityGroupRelationship `json:"ParityGroups,omitempty"`
-	Pool                 *StorageHitachiPoolRelationship         `json:"Pool,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+	ParityGroups         []StorageHitachiParityGroupRelationship     `json:"ParityGroups,omitempty"`
+	Pool                 NullableStorageHitachiPoolRelationship      `json:"Pool,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -148,7 +152,7 @@ func (o *StorageHitachiVolume) GetAttributes() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiVolume) GetAttributesOk() ([]string, bool) {
-	if o == nil || o.Attributes == nil {
+	if o == nil || IsNil(o.Attributes) {
 		return nil, false
 	}
 	return o.Attributes, true
@@ -156,7 +160,7 @@ func (o *StorageHitachiVolume) GetAttributesOk() ([]string, bool) {
 
 // HasAttributes returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasAttributes() bool {
-	if o != nil && o.Attributes != nil {
+	if o != nil && IsNil(o.Attributes) {
 		return true
 	}
 
@@ -170,7 +174,7 @@ func (o *StorageHitachiVolume) SetAttributes(v []string) {
 
 // GetClprId returns the ClprId field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetClprId() int64 {
-	if o == nil || o.ClprId == nil {
+	if o == nil || IsNil(o.ClprId) {
 		var ret int64
 		return ret
 	}
@@ -180,7 +184,7 @@ func (o *StorageHitachiVolume) GetClprId() int64 {
 // GetClprIdOk returns a tuple with the ClprId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetClprIdOk() (*int64, bool) {
-	if o == nil || o.ClprId == nil {
+	if o == nil || IsNil(o.ClprId) {
 		return nil, false
 	}
 	return o.ClprId, true
@@ -188,7 +192,7 @@ func (o *StorageHitachiVolume) GetClprIdOk() (*int64, bool) {
 
 // HasClprId returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasClprId() bool {
-	if o != nil && o.ClprId != nil {
+	if o != nil && !IsNil(o.ClprId) {
 		return true
 	}
 
@@ -202,7 +206,7 @@ func (o *StorageHitachiVolume) SetClprId(v int64) {
 
 // GetDataReductionMode returns the DataReductionMode field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetDataReductionMode() string {
-	if o == nil || o.DataReductionMode == nil {
+	if o == nil || IsNil(o.DataReductionMode) {
 		var ret string
 		return ret
 	}
@@ -212,7 +216,7 @@ func (o *StorageHitachiVolume) GetDataReductionMode() string {
 // GetDataReductionModeOk returns a tuple with the DataReductionMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetDataReductionModeOk() (*string, bool) {
-	if o == nil || o.DataReductionMode == nil {
+	if o == nil || IsNil(o.DataReductionMode) {
 		return nil, false
 	}
 	return o.DataReductionMode, true
@@ -220,7 +224,7 @@ func (o *StorageHitachiVolume) GetDataReductionModeOk() (*string, bool) {
 
 // HasDataReductionMode returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasDataReductionMode() bool {
-	if o != nil && o.DataReductionMode != nil {
+	if o != nil && !IsNil(o.DataReductionMode) {
 		return true
 	}
 
@@ -234,7 +238,7 @@ func (o *StorageHitachiVolume) SetDataReductionMode(v string) {
 
 // GetDataReductionStatus returns the DataReductionStatus field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetDataReductionStatus() string {
-	if o == nil || o.DataReductionStatus == nil {
+	if o == nil || IsNil(o.DataReductionStatus) {
 		var ret string
 		return ret
 	}
@@ -244,7 +248,7 @@ func (o *StorageHitachiVolume) GetDataReductionStatus() string {
 // GetDataReductionStatusOk returns a tuple with the DataReductionStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetDataReductionStatusOk() (*string, bool) {
-	if o == nil || o.DataReductionStatus == nil {
+	if o == nil || IsNil(o.DataReductionStatus) {
 		return nil, false
 	}
 	return o.DataReductionStatus, true
@@ -252,7 +256,7 @@ func (o *StorageHitachiVolume) GetDataReductionStatusOk() (*string, bool) {
 
 // HasDataReductionStatus returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasDataReductionStatus() bool {
-	if o != nil && o.DataReductionStatus != nil {
+	if o != nil && !IsNil(o.DataReductionStatus) {
 		return true
 	}
 
@@ -266,7 +270,7 @@ func (o *StorageHitachiVolume) SetDataReductionStatus(v string) {
 
 // GetDriveType returns the DriveType field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetDriveType() string {
-	if o == nil || o.DriveType == nil {
+	if o == nil || IsNil(o.DriveType) {
 		var ret string
 		return ret
 	}
@@ -276,7 +280,7 @@ func (o *StorageHitachiVolume) GetDriveType() string {
 // GetDriveTypeOk returns a tuple with the DriveType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetDriveTypeOk() (*string, bool) {
-	if o == nil || o.DriveType == nil {
+	if o == nil || IsNil(o.DriveType) {
 		return nil, false
 	}
 	return o.DriveType, true
@@ -284,7 +288,7 @@ func (o *StorageHitachiVolume) GetDriveTypeOk() (*string, bool) {
 
 // HasDriveType returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasDriveType() bool {
-	if o != nil && o.DriveType != nil {
+	if o != nil && !IsNil(o.DriveType) {
 		return true
 	}
 
@@ -298,7 +302,7 @@ func (o *StorageHitachiVolume) SetDriveType(v string) {
 
 // GetEmulationType returns the EmulationType field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetEmulationType() string {
-	if o == nil || o.EmulationType == nil {
+	if o == nil || IsNil(o.EmulationType) {
 		var ret string
 		return ret
 	}
@@ -308,7 +312,7 @@ func (o *StorageHitachiVolume) GetEmulationType() string {
 // GetEmulationTypeOk returns a tuple with the EmulationType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetEmulationTypeOk() (*string, bool) {
-	if o == nil || o.EmulationType == nil {
+	if o == nil || IsNil(o.EmulationType) {
 		return nil, false
 	}
 	return o.EmulationType, true
@@ -316,7 +320,7 @@ func (o *StorageHitachiVolume) GetEmulationTypeOk() (*string, bool) {
 
 // HasEmulationType returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasEmulationType() bool {
-	if o != nil && o.EmulationType != nil {
+	if o != nil && !IsNil(o.EmulationType) {
 		return true
 	}
 
@@ -330,7 +334,7 @@ func (o *StorageHitachiVolume) SetEmulationType(v string) {
 
 // GetIsFullAllocationEnabled returns the IsFullAllocationEnabled field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetIsFullAllocationEnabled() bool {
-	if o == nil || o.IsFullAllocationEnabled == nil {
+	if o == nil || IsNil(o.IsFullAllocationEnabled) {
 		var ret bool
 		return ret
 	}
@@ -340,7 +344,7 @@ func (o *StorageHitachiVolume) GetIsFullAllocationEnabled() bool {
 // GetIsFullAllocationEnabledOk returns a tuple with the IsFullAllocationEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetIsFullAllocationEnabledOk() (*bool, bool) {
-	if o == nil || o.IsFullAllocationEnabled == nil {
+	if o == nil || IsNil(o.IsFullAllocationEnabled) {
 		return nil, false
 	}
 	return o.IsFullAllocationEnabled, true
@@ -348,7 +352,7 @@ func (o *StorageHitachiVolume) GetIsFullAllocationEnabledOk() (*bool, bool) {
 
 // HasIsFullAllocationEnabled returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasIsFullAllocationEnabled() bool {
-	if o != nil && o.IsFullAllocationEnabled != nil {
+	if o != nil && !IsNil(o.IsFullAllocationEnabled) {
 		return true
 	}
 
@@ -362,7 +366,7 @@ func (o *StorageHitachiVolume) SetIsFullAllocationEnabled(v bool) {
 
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
@@ -372,7 +376,7 @@ func (o *StorageHitachiVolume) GetLabel() string {
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
 	return o.Label, true
@@ -380,7 +384,7 @@ func (o *StorageHitachiVolume) GetLabelOk() (*string, bool) {
 
 // HasLabel returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && !IsNil(o.Label) {
 		return true
 	}
 
@@ -394,7 +398,7 @@ func (o *StorageHitachiVolume) SetLabel(v string) {
 
 // GetNamespaceId returns the NamespaceId field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetNamespaceId() string {
-	if o == nil || o.NamespaceId == nil {
+	if o == nil || IsNil(o.NamespaceId) {
 		var ret string
 		return ret
 	}
@@ -404,7 +408,7 @@ func (o *StorageHitachiVolume) GetNamespaceId() string {
 // GetNamespaceIdOk returns a tuple with the NamespaceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetNamespaceIdOk() (*string, bool) {
-	if o == nil || o.NamespaceId == nil {
+	if o == nil || IsNil(o.NamespaceId) {
 		return nil, false
 	}
 	return o.NamespaceId, true
@@ -412,7 +416,7 @@ func (o *StorageHitachiVolume) GetNamespaceIdOk() (*string, bool) {
 
 // HasNamespaceId returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasNamespaceId() bool {
-	if o != nil && o.NamespaceId != nil {
+	if o != nil && !IsNil(o.NamespaceId) {
 		return true
 	}
 
@@ -426,7 +430,7 @@ func (o *StorageHitachiVolume) SetNamespaceId(v string) {
 
 // GetNumOfPaths returns the NumOfPaths field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetNumOfPaths() int64 {
-	if o == nil || o.NumOfPaths == nil {
+	if o == nil || IsNil(o.NumOfPaths) {
 		var ret int64
 		return ret
 	}
@@ -436,7 +440,7 @@ func (o *StorageHitachiVolume) GetNumOfPaths() int64 {
 // GetNumOfPathsOk returns a tuple with the NumOfPaths field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetNumOfPathsOk() (*int64, bool) {
-	if o == nil || o.NumOfPaths == nil {
+	if o == nil || IsNil(o.NumOfPaths) {
 		return nil, false
 	}
 	return o.NumOfPaths, true
@@ -444,7 +448,7 @@ func (o *StorageHitachiVolume) GetNumOfPathsOk() (*int64, bool) {
 
 // HasNumOfPaths returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasNumOfPaths() bool {
-	if o != nil && o.NumOfPaths != nil {
+	if o != nil && !IsNil(o.NumOfPaths) {
 		return true
 	}
 
@@ -458,7 +462,7 @@ func (o *StorageHitachiVolume) SetNumOfPaths(v int64) {
 
 // GetNvmSubsystemId returns the NvmSubsystemId field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetNvmSubsystemId() string {
-	if o == nil || o.NvmSubsystemId == nil {
+	if o == nil || IsNil(o.NvmSubsystemId) {
 		var ret string
 		return ret
 	}
@@ -468,7 +472,7 @@ func (o *StorageHitachiVolume) GetNvmSubsystemId() string {
 // GetNvmSubsystemIdOk returns a tuple with the NvmSubsystemId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetNvmSubsystemIdOk() (*string, bool) {
-	if o == nil || o.NvmSubsystemId == nil {
+	if o == nil || IsNil(o.NvmSubsystemId) {
 		return nil, false
 	}
 	return o.NvmSubsystemId, true
@@ -476,7 +480,7 @@ func (o *StorageHitachiVolume) GetNvmSubsystemIdOk() (*string, bool) {
 
 // HasNvmSubsystemId returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasNvmSubsystemId() bool {
-	if o != nil && o.NvmSubsystemId != nil {
+	if o != nil && !IsNil(o.NvmSubsystemId) {
 		return true
 	}
 
@@ -501,7 +505,7 @@ func (o *StorageHitachiVolume) GetParityGroupIds() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiVolume) GetParityGroupIdsOk() ([]string, bool) {
-	if o == nil || o.ParityGroupIds == nil {
+	if o == nil || IsNil(o.ParityGroupIds) {
 		return nil, false
 	}
 	return o.ParityGroupIds, true
@@ -509,7 +513,7 @@ func (o *StorageHitachiVolume) GetParityGroupIdsOk() ([]string, bool) {
 
 // HasParityGroupIds returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasParityGroupIds() bool {
-	if o != nil && o.ParityGroupIds != nil {
+	if o != nil && IsNil(o.ParityGroupIds) {
 		return true
 	}
 
@@ -523,7 +527,7 @@ func (o *StorageHitachiVolume) SetParityGroupIds(v []string) {
 
 // GetPoolId returns the PoolId field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetPoolId() string {
-	if o == nil || o.PoolId == nil {
+	if o == nil || IsNil(o.PoolId) {
 		var ret string
 		return ret
 	}
@@ -533,7 +537,7 @@ func (o *StorageHitachiVolume) GetPoolId() string {
 // GetPoolIdOk returns a tuple with the PoolId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetPoolIdOk() (*string, bool) {
-	if o == nil || o.PoolId == nil {
+	if o == nil || IsNil(o.PoolId) {
 		return nil, false
 	}
 	return o.PoolId, true
@@ -541,7 +545,7 @@ func (o *StorageHitachiVolume) GetPoolIdOk() (*string, bool) {
 
 // HasPoolId returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasPoolId() bool {
-	if o != nil && o.PoolId != nil {
+	if o != nil && !IsNil(o.PoolId) {
 		return true
 	}
 
@@ -555,7 +559,7 @@ func (o *StorageHitachiVolume) SetPoolId(v string) {
 
 // GetRaidLevel returns the RaidLevel field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetRaidLevel() string {
-	if o == nil || o.RaidLevel == nil {
+	if o == nil || IsNil(o.RaidLevel) {
 		var ret string
 		return ret
 	}
@@ -565,7 +569,7 @@ func (o *StorageHitachiVolume) GetRaidLevel() string {
 // GetRaidLevelOk returns a tuple with the RaidLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetRaidLevelOk() (*string, bool) {
-	if o == nil || o.RaidLevel == nil {
+	if o == nil || IsNil(o.RaidLevel) {
 		return nil, false
 	}
 	return o.RaidLevel, true
@@ -573,7 +577,7 @@ func (o *StorageHitachiVolume) GetRaidLevelOk() (*string, bool) {
 
 // HasRaidLevel returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasRaidLevel() bool {
-	if o != nil && o.RaidLevel != nil {
+	if o != nil && !IsNil(o.RaidLevel) {
 		return true
 	}
 
@@ -587,7 +591,7 @@ func (o *StorageHitachiVolume) SetRaidLevel(v string) {
 
 // GetRaidType returns the RaidType field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetRaidType() string {
-	if o == nil || o.RaidType == nil {
+	if o == nil || IsNil(o.RaidType) {
 		var ret string
 		return ret
 	}
@@ -597,7 +601,7 @@ func (o *StorageHitachiVolume) GetRaidType() string {
 // GetRaidTypeOk returns a tuple with the RaidType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetRaidTypeOk() (*string, bool) {
-	if o == nil || o.RaidType == nil {
+	if o == nil || IsNil(o.RaidType) {
 		return nil, false
 	}
 	return o.RaidType, true
@@ -605,7 +609,7 @@ func (o *StorageHitachiVolume) GetRaidTypeOk() (*string, bool) {
 
 // HasRaidType returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasRaidType() bool {
-	if o != nil && o.RaidType != nil {
+	if o != nil && !IsNil(o.RaidType) {
 		return true
 	}
 
@@ -619,7 +623,7 @@ func (o *StorageHitachiVolume) SetRaidType(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *StorageHitachiVolume) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -629,7 +633,7 @@ func (o *StorageHitachiVolume) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageHitachiVolume) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -637,7 +641,7 @@ func (o *StorageHitachiVolume) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -649,36 +653,47 @@ func (o *StorageHitachiVolume) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiVolume) GetArray() StorageHitachiArrayRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageHitachiArrayRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiVolume) GetArrayOk() (*StorageHitachiArrayRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageHitachiArrayRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageHitachiArrayRelationship and assigns it to the Array field.
 func (o *StorageHitachiVolume) SetArray(v StorageHitachiArrayRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
+}
+
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageHitachiVolume) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageHitachiVolume) UnsetArray() {
+	o.Array.Unset()
 }
 
 // GetParityGroups returns the ParityGroups field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -694,7 +709,7 @@ func (o *StorageHitachiVolume) GetParityGroups() []StorageHitachiParityGroupRela
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiVolume) GetParityGroupsOk() ([]StorageHitachiParityGroupRelationship, bool) {
-	if o == nil || o.ParityGroups == nil {
+	if o == nil || IsNil(o.ParityGroups) {
 		return nil, false
 	}
 	return o.ParityGroups, true
@@ -702,7 +717,7 @@ func (o *StorageHitachiVolume) GetParityGroupsOk() ([]StorageHitachiParityGroupR
 
 // HasParityGroups returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasParityGroups() bool {
-	if o != nil && o.ParityGroups != nil {
+	if o != nil && IsNil(o.ParityGroups) {
 		return true
 	}
 
@@ -714,155 +729,203 @@ func (o *StorageHitachiVolume) SetParityGroups(v []StorageHitachiParityGroupRela
 	o.ParityGroups = v
 }
 
-// GetPool returns the Pool field value if set, zero value otherwise.
+// GetPool returns the Pool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiVolume) GetPool() StorageHitachiPoolRelationship {
-	if o == nil || o.Pool == nil {
+	if o == nil || IsNil(o.Pool.Get()) {
 		var ret StorageHitachiPoolRelationship
 		return ret
 	}
-	return *o.Pool
+	return *o.Pool.Get()
 }
 
 // GetPoolOk returns a tuple with the Pool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiVolume) GetPoolOk() (*StorageHitachiPoolRelationship, bool) {
-	if o == nil || o.Pool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pool, true
+	return o.Pool.Get(), o.Pool.IsSet()
 }
 
 // HasPool returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasPool() bool {
-	if o != nil && o.Pool != nil {
+	if o != nil && o.Pool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPool gets a reference to the given StorageHitachiPoolRelationship and assigns it to the Pool field.
+// SetPool gets a reference to the given NullableStorageHitachiPoolRelationship and assigns it to the Pool field.
 func (o *StorageHitachiVolume) SetPool(v StorageHitachiPoolRelationship) {
-	o.Pool = &v
+	o.Pool.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetPoolNil sets the value for Pool to be an explicit nil
+func (o *StorageHitachiVolume) SetPoolNil() {
+	o.Pool.Set(nil)
+}
+
+// UnsetPool ensures that no value is present for Pool, not even an explicit nil
+func (o *StorageHitachiVolume) UnsetPool() {
+	o.Pool.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageHitachiVolume) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageHitachiVolume) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *StorageHitachiVolume) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *StorageHitachiVolume) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *StorageHitachiVolume) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *StorageHitachiVolume) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o StorageHitachiVolume) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageHitachiVolume) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseVolume, errStorageBaseVolume := json.Marshal(o.StorageBaseVolume)
 	if errStorageBaseVolume != nil {
-		return []byte{}, errStorageBaseVolume
+		return map[string]interface{}{}, errStorageBaseVolume
 	}
 	errStorageBaseVolume = json.Unmarshal([]byte(serializedStorageBaseVolume), &toSerialize)
 	if errStorageBaseVolume != nil {
-		return []byte{}, errStorageBaseVolume
+		return map[string]interface{}{}, errStorageBaseVolume
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Attributes != nil {
 		toSerialize["Attributes"] = o.Attributes
 	}
-	if o.ClprId != nil {
+	if !IsNil(o.ClprId) {
 		toSerialize["ClprId"] = o.ClprId
 	}
-	if o.DataReductionMode != nil {
+	if !IsNil(o.DataReductionMode) {
 		toSerialize["DataReductionMode"] = o.DataReductionMode
 	}
-	if o.DataReductionStatus != nil {
+	if !IsNil(o.DataReductionStatus) {
 		toSerialize["DataReductionStatus"] = o.DataReductionStatus
 	}
-	if o.DriveType != nil {
+	if !IsNil(o.DriveType) {
 		toSerialize["DriveType"] = o.DriveType
 	}
-	if o.EmulationType != nil {
+	if !IsNil(o.EmulationType) {
 		toSerialize["EmulationType"] = o.EmulationType
 	}
-	if o.IsFullAllocationEnabled != nil {
+	if !IsNil(o.IsFullAllocationEnabled) {
 		toSerialize["IsFullAllocationEnabled"] = o.IsFullAllocationEnabled
 	}
-	if o.Label != nil {
+	if !IsNil(o.Label) {
 		toSerialize["Label"] = o.Label
 	}
-	if o.NamespaceId != nil {
+	if !IsNil(o.NamespaceId) {
 		toSerialize["NamespaceId"] = o.NamespaceId
 	}
-	if o.NumOfPaths != nil {
+	if !IsNil(o.NumOfPaths) {
 		toSerialize["NumOfPaths"] = o.NumOfPaths
 	}
-	if o.NvmSubsystemId != nil {
+	if !IsNil(o.NvmSubsystemId) {
 		toSerialize["NvmSubsystemId"] = o.NvmSubsystemId
 	}
 	if o.ParityGroupIds != nil {
 		toSerialize["ParityGroupIds"] = o.ParityGroupIds
 	}
-	if o.PoolId != nil {
+	if !IsNil(o.PoolId) {
 		toSerialize["PoolId"] = o.PoolId
 	}
-	if o.RaidLevel != nil {
+	if !IsNil(o.RaidLevel) {
 		toSerialize["RaidLevel"] = o.RaidLevel
 	}
-	if o.RaidType != nil {
+	if !IsNil(o.RaidType) {
 		toSerialize["RaidType"] = o.RaidType
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
 	if o.ParityGroups != nil {
 		toSerialize["ParityGroups"] = o.ParityGroups
 	}
-	if o.Pool != nil {
-		toSerialize["Pool"] = o.Pool
+	if o.Pool.IsSet() {
+		toSerialize["Pool"] = o.Pool.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageHitachiVolume) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageHitachiVolume) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageHitachiVolumeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -897,17 +960,17 @@ func (o *StorageHitachiVolume) UnmarshalJSON(bytes []byte) (err error) {
 		// RAID type drive configuration.
 		RaidType *string `json:"RaidType,omitempty"`
 		// Status information of the volume. * `N/A` - The volume status is not available. * `NML` - The volume is in normal status. * `BLK` - The volume is in blocked state. * `BSY` - The volume status is being changed. * `Unknown` - The volume status is unknown (not supported).
-		Status *string                          `json:"Status,omitempty"`
-		Array  *StorageHitachiArrayRelationship `json:"Array,omitempty"`
+		Status *string                                 `json:"Status,omitempty"`
+		Array  NullableStorageHitachiArrayRelationship `json:"Array,omitempty"`
 		// An array of relationships to storageHitachiParityGroup resources.
-		ParityGroups     []StorageHitachiParityGroupRelationship `json:"ParityGroups,omitempty"`
-		Pool             *StorageHitachiPoolRelationship         `json:"Pool,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
+		ParityGroups     []StorageHitachiParityGroupRelationship     `json:"ParityGroups,omitempty"`
+		Pool             NullableStorageHitachiPoolRelationship      `json:"Pool,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageHitachiVolumeWithoutEmbeddedStruct := StorageHitachiVolumeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiVolumeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageHitachiVolumeWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageHitachiVolume := _StorageHitachiVolume{}
 		varStorageHitachiVolume.ClassId = varStorageHitachiVolumeWithoutEmbeddedStruct.ClassId
@@ -939,7 +1002,7 @@ func (o *StorageHitachiVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageHitachiVolume := _StorageHitachiVolume{}
 
-	err = json.Unmarshal(bytes, &varStorageHitachiVolume)
+	err = json.Unmarshal(data, &varStorageHitachiVolume)
 	if err == nil {
 		o.StorageBaseVolume = varStorageHitachiVolume.StorageBaseVolume
 	} else {
@@ -948,7 +1011,7 @@ func (o *StorageHitachiVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Attributes")

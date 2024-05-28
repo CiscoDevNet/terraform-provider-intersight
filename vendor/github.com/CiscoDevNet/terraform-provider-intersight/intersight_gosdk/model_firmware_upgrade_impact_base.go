@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareUpgradeImpactBase type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareUpgradeImpactBase{}
 
 // FirmwareUpgradeImpactBase Before submitting firmware upgrade operation, the estimate impact helps to know the list of components be impacted and require host reboot. This cannot be used for network share based upgrade.
 type FirmwareUpgradeImpactBase struct {
@@ -124,7 +128,7 @@ func (o *FirmwareUpgradeImpactBase) GetComponents() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeImpactBase) GetComponentsOk() ([]string, bool) {
-	if o == nil || o.Components == nil {
+	if o == nil || IsNil(o.Components) {
 		return nil, false
 	}
 	return o.Components, true
@@ -132,7 +136,7 @@ func (o *FirmwareUpgradeImpactBase) GetComponentsOk() ([]string, bool) {
 
 // HasComponents returns a boolean if a field has been set.
 func (o *FirmwareUpgradeImpactBase) HasComponents() bool {
-	if o != nil && o.Components != nil {
+	if o != nil && IsNil(o.Components) {
 		return true
 	}
 
@@ -146,7 +150,7 @@ func (o *FirmwareUpgradeImpactBase) SetComponents(v []string) {
 
 // GetComputationState returns the ComputationState field value if set, zero value otherwise.
 func (o *FirmwareUpgradeImpactBase) GetComputationState() string {
-	if o == nil || o.ComputationState == nil {
+	if o == nil || IsNil(o.ComputationState) {
 		var ret string
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *FirmwareUpgradeImpactBase) GetComputationState() string {
 // GetComputationStateOk returns a tuple with the ComputationState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeImpactBase) GetComputationStateOk() (*string, bool) {
-	if o == nil || o.ComputationState == nil {
+	if o == nil || IsNil(o.ComputationState) {
 		return nil, false
 	}
 	return o.ComputationState, true
@@ -164,7 +168,7 @@ func (o *FirmwareUpgradeImpactBase) GetComputationStateOk() (*string, bool) {
 
 // HasComputationState returns a boolean if a field has been set.
 func (o *FirmwareUpgradeImpactBase) HasComputationState() bool {
-	if o != nil && o.ComputationState != nil {
+	if o != nil && !IsNil(o.ComputationState) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *FirmwareUpgradeImpactBase) GetExcludeComponents() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeImpactBase) GetExcludeComponentsOk() ([]string, bool) {
-	if o == nil || o.ExcludeComponents == nil {
+	if o == nil || IsNil(o.ExcludeComponents) {
 		return nil, false
 	}
 	return o.ExcludeComponents, true
@@ -197,7 +201,7 @@ func (o *FirmwareUpgradeImpactBase) GetExcludeComponentsOk() ([]string, bool) {
 
 // HasExcludeComponents returns a boolean if a field has been set.
 func (o *FirmwareUpgradeImpactBase) HasExcludeComponents() bool {
-	if o != nil && o.ExcludeComponents != nil {
+	if o != nil && IsNil(o.ExcludeComponents) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *FirmwareUpgradeImpactBase) GetImpacts() []FirmwareBaseImpact {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareUpgradeImpactBase) GetImpactsOk() ([]FirmwareBaseImpact, bool) {
-	if o == nil || o.Impacts == nil {
+	if o == nil || IsNil(o.Impacts) {
 		return nil, false
 	}
 	return o.Impacts, true
@@ -230,7 +234,7 @@ func (o *FirmwareUpgradeImpactBase) GetImpactsOk() ([]FirmwareBaseImpact, bool) 
 
 // HasImpacts returns a boolean if a field has been set.
 func (o *FirmwareUpgradeImpactBase) HasImpacts() bool {
-	if o != nil && o.Impacts != nil {
+	if o != nil && IsNil(o.Impacts) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *FirmwareUpgradeImpactBase) SetImpacts(v []FirmwareBaseImpact) {
 
 // GetSummary returns the Summary field value if set, zero value otherwise.
 func (o *FirmwareUpgradeImpactBase) GetSummary() string {
-	if o == nil || o.Summary == nil {
+	if o == nil || IsNil(o.Summary) {
 		var ret string
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *FirmwareUpgradeImpactBase) GetSummary() string {
 // GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareUpgradeImpactBase) GetSummaryOk() (*string, bool) {
-	if o == nil || o.Summary == nil {
+	if o == nil || IsNil(o.Summary) {
 		return nil, false
 	}
 	return o.Summary, true
@@ -262,7 +266,7 @@ func (o *FirmwareUpgradeImpactBase) GetSummaryOk() (*string, bool) {
 
 // HasSummary returns a boolean if a field has been set.
 func (o *FirmwareUpgradeImpactBase) HasSummary() bool {
-	if o != nil && o.Summary != nil {
+	if o != nil && !IsNil(o.Summary) {
 		return true
 	}
 
@@ -275,25 +279,29 @@ func (o *FirmwareUpgradeImpactBase) SetSummary(v string) {
 }
 
 func (o FirmwareUpgradeImpactBase) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareUpgradeImpactBase) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Components != nil {
 		toSerialize["Components"] = o.Components
 	}
-	if o.ComputationState != nil {
+	if !IsNil(o.ComputationState) {
 		toSerialize["ComputationState"] = o.ComputationState
 	}
 	if o.ExcludeComponents != nil {
@@ -302,7 +310,7 @@ func (o FirmwareUpgradeImpactBase) MarshalJSON() ([]byte, error) {
 	if o.Impacts != nil {
 		toSerialize["Impacts"] = o.Impacts
 	}
-	if o.Summary != nil {
+	if !IsNil(o.Summary) {
 		toSerialize["Summary"] = o.Summary
 	}
 
@@ -310,10 +318,32 @@ func (o FirmwareUpgradeImpactBase) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareUpgradeImpactBase) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareUpgradeImpactBase) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareUpgradeImpactBaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -330,7 +360,7 @@ func (o *FirmwareUpgradeImpactBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareUpgradeImpactBaseWithoutEmbeddedStruct := FirmwareUpgradeImpactBaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUpgradeImpactBaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareUpgradeImpactBaseWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareUpgradeImpactBase := _FirmwareUpgradeImpactBase{}
 		varFirmwareUpgradeImpactBase.ClassId = varFirmwareUpgradeImpactBaseWithoutEmbeddedStruct.ClassId
@@ -347,7 +377,7 @@ func (o *FirmwareUpgradeImpactBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareUpgradeImpactBase := _FirmwareUpgradeImpactBase{}
 
-	err = json.Unmarshal(bytes, &varFirmwareUpgradeImpactBase)
+	err = json.Unmarshal(data, &varFirmwareUpgradeImpactBase)
 	if err == nil {
 		o.MoBaseMo = varFirmwareUpgradeImpactBase.MoBaseMo
 	} else {
@@ -356,7 +386,7 @@ func (o *FirmwareUpgradeImpactBase) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Components")

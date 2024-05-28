@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the EquipmentEndPointLog type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentEndPointLog{}
 
 // EquipmentEndPointLog End point log file information.
 type EquipmentEndPointLog struct {
@@ -34,9 +38,9 @@ type EquipmentEndPointLog struct {
 	// The end point log file type. * `None` - End point log file type None. * `SEL` - End point log file type SEL.
 	LogType *string `json:"LogType,omitempty"`
 	// The end point log collection status. * `None` - Log collection not started. * `CollectionInProgress` - Log file collection is in progress. * `CollectionCompleted` - Log file collection completed. * `CollectionFailed` - Log file collection failed. * `UploadInProgress` - Log file upload is in progress. * `UploadCompleted` - Log file upload completed. * `UploadFailed` - Log file upload failed to complete. * `DownloadUrlCreationFailed` - Download Url creation failed. * `Completed` - Log collection and upload completed.
-	Status               *string                              `json:"Status,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	Server               *ComputePhysicalRelationship         `json:"Server,omitempty"`
+	Status               *string                                     `json:"Status,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Server               NullableComputePhysicalRelationship         `json:"Server,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *EquipmentEndPointLog) SetObjectType(v string) {
 
 // GetCollectionTime returns the CollectionTime field value if set, zero value otherwise.
 func (o *EquipmentEndPointLog) GetCollectionTime() time.Time {
-	if o == nil || o.CollectionTime == nil {
+	if o == nil || IsNil(o.CollectionTime) {
 		var ret time.Time
 		return ret
 	}
@@ -125,7 +129,7 @@ func (o *EquipmentEndPointLog) GetCollectionTime() time.Time {
 // GetCollectionTimeOk returns a tuple with the CollectionTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentEndPointLog) GetCollectionTimeOk() (*time.Time, bool) {
-	if o == nil || o.CollectionTime == nil {
+	if o == nil || IsNil(o.CollectionTime) {
 		return nil, false
 	}
 	return o.CollectionTime, true
@@ -133,7 +137,7 @@ func (o *EquipmentEndPointLog) GetCollectionTimeOk() (*time.Time, bool) {
 
 // HasCollectionTime returns a boolean if a field has been set.
 func (o *EquipmentEndPointLog) HasCollectionTime() bool {
-	if o != nil && o.CollectionTime != nil {
+	if o != nil && !IsNil(o.CollectionTime) {
 		return true
 	}
 
@@ -147,7 +151,7 @@ func (o *EquipmentEndPointLog) SetCollectionTime(v time.Time) {
 
 // GetDownloadUrl returns the DownloadUrl field value if set, zero value otherwise.
 func (o *EquipmentEndPointLog) GetDownloadUrl() string {
-	if o == nil || o.DownloadUrl == nil {
+	if o == nil || IsNil(o.DownloadUrl) {
 		var ret string
 		return ret
 	}
@@ -157,7 +161,7 @@ func (o *EquipmentEndPointLog) GetDownloadUrl() string {
 // GetDownloadUrlOk returns a tuple with the DownloadUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentEndPointLog) GetDownloadUrlOk() (*string, bool) {
-	if o == nil || o.DownloadUrl == nil {
+	if o == nil || IsNil(o.DownloadUrl) {
 		return nil, false
 	}
 	return o.DownloadUrl, true
@@ -165,7 +169,7 @@ func (o *EquipmentEndPointLog) GetDownloadUrlOk() (*string, bool) {
 
 // HasDownloadUrl returns a boolean if a field has been set.
 func (o *EquipmentEndPointLog) HasDownloadUrl() bool {
-	if o != nil && o.DownloadUrl != nil {
+	if o != nil && !IsNil(o.DownloadUrl) {
 		return true
 	}
 
@@ -179,7 +183,7 @@ func (o *EquipmentEndPointLog) SetDownloadUrl(v string) {
 
 // GetFileName returns the FileName field value if set, zero value otherwise.
 func (o *EquipmentEndPointLog) GetFileName() string {
-	if o == nil || o.FileName == nil {
+	if o == nil || IsNil(o.FileName) {
 		var ret string
 		return ret
 	}
@@ -189,7 +193,7 @@ func (o *EquipmentEndPointLog) GetFileName() string {
 // GetFileNameOk returns a tuple with the FileName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentEndPointLog) GetFileNameOk() (*string, bool) {
-	if o == nil || o.FileName == nil {
+	if o == nil || IsNil(o.FileName) {
 		return nil, false
 	}
 	return o.FileName, true
@@ -197,7 +201,7 @@ func (o *EquipmentEndPointLog) GetFileNameOk() (*string, bool) {
 
 // HasFileName returns a boolean if a field has been set.
 func (o *EquipmentEndPointLog) HasFileName() bool {
-	if o != nil && o.FileName != nil {
+	if o != nil && !IsNil(o.FileName) {
 		return true
 	}
 
@@ -211,7 +215,7 @@ func (o *EquipmentEndPointLog) SetFileName(v string) {
 
 // GetLogType returns the LogType field value if set, zero value otherwise.
 func (o *EquipmentEndPointLog) GetLogType() string {
-	if o == nil || o.LogType == nil {
+	if o == nil || IsNil(o.LogType) {
 		var ret string
 		return ret
 	}
@@ -221,7 +225,7 @@ func (o *EquipmentEndPointLog) GetLogType() string {
 // GetLogTypeOk returns a tuple with the LogType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentEndPointLog) GetLogTypeOk() (*string, bool) {
-	if o == nil || o.LogType == nil {
+	if o == nil || IsNil(o.LogType) {
 		return nil, false
 	}
 	return o.LogType, true
@@ -229,7 +233,7 @@ func (o *EquipmentEndPointLog) GetLogTypeOk() (*string, bool) {
 
 // HasLogType returns a boolean if a field has been set.
 func (o *EquipmentEndPointLog) HasLogType() bool {
-	if o != nil && o.LogType != nil {
+	if o != nil && !IsNil(o.LogType) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *EquipmentEndPointLog) SetLogType(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *EquipmentEndPointLog) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -253,7 +257,7 @@ func (o *EquipmentEndPointLog) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentEndPointLog) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -261,7 +265,7 @@ func (o *EquipmentEndPointLog) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *EquipmentEndPointLog) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -273,116 +277,164 @@ func (o *EquipmentEndPointLog) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentEndPointLog) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentEndPointLog) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *EquipmentEndPointLog) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *EquipmentEndPointLog) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetServer returns the Server field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *EquipmentEndPointLog) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *EquipmentEndPointLog) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetServer returns the Server field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentEndPointLog) GetServer() ComputePhysicalRelationship {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server.Get()) {
 		var ret ComputePhysicalRelationship
 		return ret
 	}
-	return *o.Server
+	return *o.Server.Get()
 }
 
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EquipmentEndPointLog) GetServerOk() (*ComputePhysicalRelationship, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Server, true
+	return o.Server.Get(), o.Server.IsSet()
 }
 
 // HasServer returns a boolean if a field has been set.
 func (o *EquipmentEndPointLog) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && o.Server.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServer gets a reference to the given ComputePhysicalRelationship and assigns it to the Server field.
+// SetServer gets a reference to the given NullableComputePhysicalRelationship and assigns it to the Server field.
 func (o *EquipmentEndPointLog) SetServer(v ComputePhysicalRelationship) {
-	o.Server = &v
+	o.Server.Set(&v)
+}
+
+// SetServerNil sets the value for Server to be an explicit nil
+func (o *EquipmentEndPointLog) SetServerNil() {
+	o.Server.Set(nil)
+}
+
+// UnsetServer ensures that no value is present for Server, not even an explicit nil
+func (o *EquipmentEndPointLog) UnsetServer() {
+	o.Server.Unset()
 }
 
 func (o EquipmentEndPointLog) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentEndPointLog) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CollectionTime != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CollectionTime) {
 		toSerialize["CollectionTime"] = o.CollectionTime
 	}
-	if o.DownloadUrl != nil {
+	if !IsNil(o.DownloadUrl) {
 		toSerialize["DownloadUrl"] = o.DownloadUrl
 	}
-	if o.FileName != nil {
+	if !IsNil(o.FileName) {
 		toSerialize["FileName"] = o.FileName
 	}
-	if o.LogType != nil {
+	if !IsNil(o.LogType) {
 		toSerialize["LogType"] = o.LogType
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.Server != nil {
-		toSerialize["Server"] = o.Server
+	if o.Server.IsSet() {
+		toSerialize["Server"] = o.Server.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentEndPointLog) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentEndPointLog) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentEndPointLogWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -397,14 +449,14 @@ func (o *EquipmentEndPointLog) UnmarshalJSON(bytes []byte) (err error) {
 		// The end point log file type. * `None` - End point log file type None. * `SEL` - End point log file type SEL.
 		LogType *string `json:"LogType,omitempty"`
 		// The end point log collection status. * `None` - Log collection not started. * `CollectionInProgress` - Log file collection is in progress. * `CollectionCompleted` - Log file collection completed. * `CollectionFailed` - Log file collection failed. * `UploadInProgress` - Log file upload is in progress. * `UploadCompleted` - Log file upload completed. * `UploadFailed` - Log file upload failed to complete. * `DownloadUrlCreationFailed` - Download Url creation failed. * `Completed` - Log collection and upload completed.
-		Status           *string                              `json:"Status,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		Server           *ComputePhysicalRelationship         `json:"Server,omitempty"`
+		Status           *string                                     `json:"Status,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Server           NullableComputePhysicalRelationship         `json:"Server,omitempty"`
 	}
 
 	varEquipmentEndPointLogWithoutEmbeddedStruct := EquipmentEndPointLogWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentEndPointLogWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentEndPointLogWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentEndPointLog := _EquipmentEndPointLog{}
 		varEquipmentEndPointLog.ClassId = varEquipmentEndPointLogWithoutEmbeddedStruct.ClassId
@@ -423,7 +475,7 @@ func (o *EquipmentEndPointLog) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentEndPointLog := _EquipmentEndPointLog{}
 
-	err = json.Unmarshal(bytes, &varEquipmentEndPointLog)
+	err = json.Unmarshal(data, &varEquipmentEndPointLog)
 	if err == nil {
 		o.MoBaseMo = varEquipmentEndPointLog.MoBaseMo
 	} else {
@@ -432,7 +484,7 @@ func (o *EquipmentEndPointLog) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CollectionTime")

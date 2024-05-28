@@ -20,16 +20,16 @@ Name | Type | Description | Notes
 **VifId** | Pointer to **int64** | This should be the same as the channel number of the vfc created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vfc is created on the switch for every vHBA. | [optional] [readonly] 
 **Wwpn** | Pointer to **string** | The WWPN address that is assigned to the vHBA based on the wwn pool that has been assigned to the SAN Connectivity Policy. | [optional] [readonly] 
 **WwpnAddressType** | Pointer to **string** | Type of allocation selected to assign a WWPN address to the vhba. * &#x60;POOL&#x60; - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * &#x60;STATIC&#x60; - The user assigns a static mac/wwn address for the Virtual Interface. | [optional] [readonly] [default to "POOL"]
-**FcAdapterPolicy** | Pointer to [**VnicFcAdapterPolicyInventoryRelationship**](VnicFcAdapterPolicyInventoryRelationship.md) |  | [optional] 
-**FcNetworkPolicy** | Pointer to [**VnicFcNetworkPolicyInventoryRelationship**](VnicFcNetworkPolicyInventoryRelationship.md) |  | [optional] 
-**FcQosPolicy** | Pointer to [**VnicFcQosPolicyInventoryRelationship**](VnicFcQosPolicyInventoryRelationship.md) |  | [optional] 
+**FcAdapterPolicy** | Pointer to [**NullableVnicFcAdapterPolicyInventoryRelationship**](VnicFcAdapterPolicyInventoryRelationship.md) |  | [optional] 
+**FcNetworkPolicy** | Pointer to [**NullableVnicFcNetworkPolicyInventoryRelationship**](VnicFcNetworkPolicyInventoryRelationship.md) |  | [optional] 
+**FcQosPolicy** | Pointer to [**NullableVnicFcQosPolicyInventoryRelationship**](VnicFcQosPolicyInventoryRelationship.md) |  | [optional] 
 **FcZonePolicies** | Pointer to [**[]FabricFcZonePolicyRelationship**](FabricFcZonePolicyRelationship.md) | An array of relationships to fabricFcZonePolicy resources. | [optional] [readonly] 
-**SanConnectivityPolicy** | Pointer to [**VnicSanConnectivityPolicyInventoryRelationship**](VnicSanConnectivityPolicyInventoryRelationship.md) |  | [optional] 
-**ScpVhba** | Pointer to [**VnicFcIfInventoryRelationship**](VnicFcIfInventoryRelationship.md) |  | [optional] 
+**SanConnectivityPolicy** | Pointer to [**NullableVnicSanConnectivityPolicyInventoryRelationship**](VnicSanConnectivityPolicyInventoryRelationship.md) |  | [optional] 
+**ScpVhba** | Pointer to [**NullableVnicFcIfInventoryRelationship**](VnicFcIfInventoryRelationship.md) |  | [optional] 
 **SpVhbas** | Pointer to [**[]VnicFcIfInventoryRelationship**](VnicFcIfInventoryRelationship.md) | An array of relationships to vnicFcIfInventory resources. | [optional] [readonly] 
-**SrcTemplate** | Pointer to [**VnicVhbaTemplateRelationship**](VnicVhbaTemplateRelationship.md) |  | [optional] 
-**WwpnLease** | Pointer to [**FcpoolLeaseRelationship**](FcpoolLeaseRelationship.md) |  | [optional] 
-**WwpnPool** | Pointer to [**FcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
+**SrcTemplate** | Pointer to [**NullableVnicVhbaTemplateRelationship**](VnicVhbaTemplateRelationship.md) |  | [optional] 
+**WwpnLease** | Pointer to [**NullableFcpoolLeaseRelationship**](FcpoolLeaseRelationship.md) |  | [optional] 
+**WwpnPool** | Pointer to [**NullableFcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -505,6 +505,16 @@ SetFcAdapterPolicy sets FcAdapterPolicy field to given value.
 
 HasFcAdapterPolicy returns a boolean if a field has been set.
 
+### SetFcAdapterPolicyNil
+
+`func (o *VnicFcIfInventory) SetFcAdapterPolicyNil(b bool)`
+
+ SetFcAdapterPolicyNil sets the value for FcAdapterPolicy to be an explicit nil
+
+### UnsetFcAdapterPolicy
+`func (o *VnicFcIfInventory) UnsetFcAdapterPolicy()`
+
+UnsetFcAdapterPolicy ensures that no value is present for FcAdapterPolicy, not even an explicit nil
 ### GetFcNetworkPolicy
 
 `func (o *VnicFcIfInventory) GetFcNetworkPolicy() VnicFcNetworkPolicyInventoryRelationship`
@@ -530,6 +540,16 @@ SetFcNetworkPolicy sets FcNetworkPolicy field to given value.
 
 HasFcNetworkPolicy returns a boolean if a field has been set.
 
+### SetFcNetworkPolicyNil
+
+`func (o *VnicFcIfInventory) SetFcNetworkPolicyNil(b bool)`
+
+ SetFcNetworkPolicyNil sets the value for FcNetworkPolicy to be an explicit nil
+
+### UnsetFcNetworkPolicy
+`func (o *VnicFcIfInventory) UnsetFcNetworkPolicy()`
+
+UnsetFcNetworkPolicy ensures that no value is present for FcNetworkPolicy, not even an explicit nil
 ### GetFcQosPolicy
 
 `func (o *VnicFcIfInventory) GetFcQosPolicy() VnicFcQosPolicyInventoryRelationship`
@@ -555,6 +575,16 @@ SetFcQosPolicy sets FcQosPolicy field to given value.
 
 HasFcQosPolicy returns a boolean if a field has been set.
 
+### SetFcQosPolicyNil
+
+`func (o *VnicFcIfInventory) SetFcQosPolicyNil(b bool)`
+
+ SetFcQosPolicyNil sets the value for FcQosPolicy to be an explicit nil
+
+### UnsetFcQosPolicy
+`func (o *VnicFcIfInventory) UnsetFcQosPolicy()`
+
+UnsetFcQosPolicy ensures that no value is present for FcQosPolicy, not even an explicit nil
 ### GetFcZonePolicies
 
 `func (o *VnicFcIfInventory) GetFcZonePolicies() []FabricFcZonePolicyRelationship`
@@ -615,6 +645,16 @@ SetSanConnectivityPolicy sets SanConnectivityPolicy field to given value.
 
 HasSanConnectivityPolicy returns a boolean if a field has been set.
 
+### SetSanConnectivityPolicyNil
+
+`func (o *VnicFcIfInventory) SetSanConnectivityPolicyNil(b bool)`
+
+ SetSanConnectivityPolicyNil sets the value for SanConnectivityPolicy to be an explicit nil
+
+### UnsetSanConnectivityPolicy
+`func (o *VnicFcIfInventory) UnsetSanConnectivityPolicy()`
+
+UnsetSanConnectivityPolicy ensures that no value is present for SanConnectivityPolicy, not even an explicit nil
 ### GetScpVhba
 
 `func (o *VnicFcIfInventory) GetScpVhba() VnicFcIfInventoryRelationship`
@@ -640,6 +680,16 @@ SetScpVhba sets ScpVhba field to given value.
 
 HasScpVhba returns a boolean if a field has been set.
 
+### SetScpVhbaNil
+
+`func (o *VnicFcIfInventory) SetScpVhbaNil(b bool)`
+
+ SetScpVhbaNil sets the value for ScpVhba to be an explicit nil
+
+### UnsetScpVhba
+`func (o *VnicFcIfInventory) UnsetScpVhba()`
+
+UnsetScpVhba ensures that no value is present for ScpVhba, not even an explicit nil
 ### GetSpVhbas
 
 `func (o *VnicFcIfInventory) GetSpVhbas() []VnicFcIfInventoryRelationship`
@@ -700,6 +750,16 @@ SetSrcTemplate sets SrcTemplate field to given value.
 
 HasSrcTemplate returns a boolean if a field has been set.
 
+### SetSrcTemplateNil
+
+`func (o *VnicFcIfInventory) SetSrcTemplateNil(b bool)`
+
+ SetSrcTemplateNil sets the value for SrcTemplate to be an explicit nil
+
+### UnsetSrcTemplate
+`func (o *VnicFcIfInventory) UnsetSrcTemplate()`
+
+UnsetSrcTemplate ensures that no value is present for SrcTemplate, not even an explicit nil
 ### GetWwpnLease
 
 `func (o *VnicFcIfInventory) GetWwpnLease() FcpoolLeaseRelationship`
@@ -725,6 +785,16 @@ SetWwpnLease sets WwpnLease field to given value.
 
 HasWwpnLease returns a boolean if a field has been set.
 
+### SetWwpnLeaseNil
+
+`func (o *VnicFcIfInventory) SetWwpnLeaseNil(b bool)`
+
+ SetWwpnLeaseNil sets the value for WwpnLease to be an explicit nil
+
+### UnsetWwpnLease
+`func (o *VnicFcIfInventory) UnsetWwpnLease()`
+
+UnsetWwpnLease ensures that no value is present for WwpnLease, not even an explicit nil
 ### GetWwpnPool
 
 `func (o *VnicFcIfInventory) GetWwpnPool() FcpoolPoolRelationship`
@@ -750,6 +820,16 @@ SetWwpnPool sets WwpnPool field to given value.
 
 HasWwpnPool returns a boolean if a field has been set.
 
+### SetWwpnPoolNil
+
+`func (o *VnicFcIfInventory) SetWwpnPoolNil(b bool)`
+
+ SetWwpnPoolNil sets the value for WwpnPool to be an explicit nil
+
+### UnsetWwpnPool
+`func (o *VnicFcIfInventory) UnsetWwpnPool()`
+
+UnsetWwpnPool ensures that no value is present for WwpnPool, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | Status of the devices connection to the witness. Device will report status as either &#39;Connected&#39; or &#39;NotConnected&#39;. | [optional] [readonly] 
 **Version** | Pointer to **string** | The version of the custom witness server. Only applicable if custom witness has been enabled in the cluster, otherwise value is always empty. | [optional] [readonly] 
 **WitnessUrl** | Pointer to **string** | URL of the witness endpoint, including IP/host and path. Only applicable if custom witness has been enabled in the cluster, otherwise value is always empty. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableHyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -248,6 +248,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *HyperflexWitnessConfiguration) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *HyperflexWitnessConfiguration) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

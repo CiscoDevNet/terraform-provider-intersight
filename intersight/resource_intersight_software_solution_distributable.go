@@ -6,7 +6,9 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"strconv"
 	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -534,6 +536,7 @@ func resourceSoftwareSolutionDistributable() *schema.Resource {
 				Description: "The build which is recommended by Cisco.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "N",
 			},
 			"release": {
 				Description: "A reference to a softwarerepositoryRelease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1302,14 +1305,25 @@ func resourceSoftwareSolutionDistributableCreate(c context.Context, d *schema.Re
 		}
 		return diag.Errorf("error occurred while creating SoftwareSolutionDistributable: %s", responseErr.Error())
 	}
-	log.Printf("Moid: %s", resultMo.GetMoid())
-	d.SetId(resultMo.GetMoid())
+	if len(resultMo.GetMoid()) != 0 {
+		log.Printf("Moid: %s", resultMo.GetMoid())
+		d.SetId(resultMo.GetMoid())
+	} else {
+		d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
+		log.Printf("Mo: %v", resultMo)
+	}
+	if len(resultMo.GetMoid()) == 0 {
+		return de
+	}
 	return append(de, resourceSoftwareSolutionDistributableRead(c, d, meta)...)
 }
 
 func resourceSoftwareSolutionDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	var de diag.Diagnostics
+	if len(d.Id()) == 0 {
+		return de
+	}
 	conn := meta.(*Config)
 	r := conn.ApiClient.SoftwareApi.GetSoftwareSolutionDistributableByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()

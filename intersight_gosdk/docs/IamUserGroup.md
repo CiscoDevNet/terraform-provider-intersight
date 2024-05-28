@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.UserGroup"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.UserGroup"]
 **Name** | Pointer to **string** | The name of the user group which the dynamic user belongs to. | [optional] 
-**Idp** | Pointer to [**IamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
-**Idpreference** | Pointer to [**IamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
+**Idp** | Pointer to [**NullableIamIdpRelationship**](IamIdpRelationship.md) |  | [optional] 
+**Idpreference** | Pointer to [**NullableIamIdpReferenceRelationship**](IamIdpReferenceRelationship.md) |  | [optional] 
 **Permissions** | Pointer to [**[]IamPermissionRelationship**](IamPermissionRelationship.md) | An array of relationships to iamPermission resources. | [optional] 
-**Qualifier** | Pointer to [**IamQualifierRelationship**](IamQualifierRelationship.md) |  | [optional] 
+**Qualifier** | Pointer to [**NullableIamQualifierRelationship**](IamQualifierRelationship.md) |  | [optional] 
 **Users** | Pointer to [**[]IamUserRelationship**](IamUserRelationship.md) | An array of relationships to iamUser resources. | [optional] [readonly] 
 
 ## Methods
@@ -122,6 +122,16 @@ SetIdp sets Idp field to given value.
 
 HasIdp returns a boolean if a field has been set.
 
+### SetIdpNil
+
+`func (o *IamUserGroup) SetIdpNil(b bool)`
+
+ SetIdpNil sets the value for Idp to be an explicit nil
+
+### UnsetIdp
+`func (o *IamUserGroup) UnsetIdp()`
+
+UnsetIdp ensures that no value is present for Idp, not even an explicit nil
 ### GetIdpreference
 
 `func (o *IamUserGroup) GetIdpreference() IamIdpReferenceRelationship`
@@ -147,6 +157,16 @@ SetIdpreference sets Idpreference field to given value.
 
 HasIdpreference returns a boolean if a field has been set.
 
+### SetIdpreferenceNil
+
+`func (o *IamUserGroup) SetIdpreferenceNil(b bool)`
+
+ SetIdpreferenceNil sets the value for Idpreference to be an explicit nil
+
+### UnsetIdpreference
+`func (o *IamUserGroup) UnsetIdpreference()`
+
+UnsetIdpreference ensures that no value is present for Idpreference, not even an explicit nil
 ### GetPermissions
 
 `func (o *IamUserGroup) GetPermissions() []IamPermissionRelationship`
@@ -207,6 +227,16 @@ SetQualifier sets Qualifier field to given value.
 
 HasQualifier returns a boolean if a field has been set.
 
+### SetQualifierNil
+
+`func (o *IamUserGroup) SetQualifierNil(b bool)`
+
+ SetQualifierNil sets the value for Qualifier to be an explicit nil
+
+### UnsetQualifier
+`func (o *IamUserGroup) UnsetQualifier()`
+
+UnsetQualifier ensures that no value is present for Qualifier, not even an explicit nil
 ### GetUsers
 
 `func (o *IamUserGroup) GetUsers() []IamUserRelationship`

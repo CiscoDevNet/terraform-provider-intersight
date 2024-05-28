@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **Message** | Pointer to **string** | The user visible message which indicates any errors encountered in making the external API call to get the estimate. | [optional] [readonly] 
 **Status** | Pointer to **string** | The status of the external API call to get the estimate. * &#x60;None&#x60; - The Enum value None represents the default status value before any API call is made. * &#x60;Success&#x60; - The Enum value Success represents that the API call returned with success. * &#x60;Fail&#x60; - The Enum value Fail represents that the API call returned with a failure. | [optional] [readonly] [default to "None"]
 **TotalCost** | Pointer to **float32** | The total cost of all the recommended hardware in the bill of materials for the corresponding estimate. | [optional] [readonly] 
-**ClusterExpansion** | Pointer to [**RecommendationClusterExpansionRelationship**](RecommendationClusterExpansionRelationship.md) |  | [optional] 
-**EstimateOwner** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
+**ClusterExpansion** | Pointer to [**NullableRecommendationClusterExpansionRelationship**](RecommendationClusterExpansionRelationship.md) |  | [optional] 
+**EstimateOwner** | Pointer to [**NullableIamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -223,6 +223,16 @@ SetClusterExpansion sets ClusterExpansion field to given value.
 
 HasClusterExpansion returns a boolean if a field has been set.
 
+### SetClusterExpansionNil
+
+`func (o *RecommendationPurchaseOrderEstimate) SetClusterExpansionNil(b bool)`
+
+ SetClusterExpansionNil sets the value for ClusterExpansion to be an explicit nil
+
+### UnsetClusterExpansion
+`func (o *RecommendationPurchaseOrderEstimate) UnsetClusterExpansion()`
+
+UnsetClusterExpansion ensures that no value is present for ClusterExpansion, not even an explicit nil
 ### GetEstimateOwner
 
 `func (o *RecommendationPurchaseOrderEstimate) GetEstimateOwner() IamUserRelationship`
@@ -248,6 +258,16 @@ SetEstimateOwner sets EstimateOwner field to given value.
 
 HasEstimateOwner returns a boolean if a field has been set.
 
+### SetEstimateOwnerNil
+
+`func (o *RecommendationPurchaseOrderEstimate) SetEstimateOwnerNil(b bool)`
+
+ SetEstimateOwnerNil sets the value for EstimateOwner to be an explicit nil
+
+### UnsetEstimateOwner
+`func (o *RecommendationPurchaseOrderEstimate) UnsetEstimateOwner()`
+
+UnsetEstimateOwner ensures that no value is present for EstimateOwner, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

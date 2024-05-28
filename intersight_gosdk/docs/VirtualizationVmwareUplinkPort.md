@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Identity** | Pointer to **string** | The VMware managed object reference as a string. | [optional] 
 **Key** | Pointer to **string** | The internally assigned key of this uplink port object. This entity is not manipulated by users. | [optional] 
 **Name** | Pointer to **string** | User-provided name to identify the uplink port object. | [optional] 
-**DistributedNetwork** | Pointer to [**VirtualizationVmwareDistributedNetworkRelationship**](VirtualizationVmwareDistributedNetworkRelationship.md) |  | [optional] 
-**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
-**PhysicalNetworkInterface** | Pointer to [**VirtualizationVmwarePhysicalNetworkInterfaceRelationship**](VirtualizationVmwarePhysicalNetworkInterfaceRelationship.md) |  | [optional] 
+**DistributedNetwork** | Pointer to [**NullableVirtualizationVmwareDistributedNetworkRelationship**](VirtualizationVmwareDistributedNetworkRelationship.md) |  | [optional] 
+**Host** | Pointer to [**NullableVirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
+**PhysicalNetworkInterface** | Pointer to [**NullableVirtualizationVmwarePhysicalNetworkInterfaceRelationship**](VirtualizationVmwarePhysicalNetworkInterfaceRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -172,6 +172,16 @@ SetDistributedNetwork sets DistributedNetwork field to given value.
 
 HasDistributedNetwork returns a boolean if a field has been set.
 
+### SetDistributedNetworkNil
+
+`func (o *VirtualizationVmwareUplinkPort) SetDistributedNetworkNil(b bool)`
+
+ SetDistributedNetworkNil sets the value for DistributedNetwork to be an explicit nil
+
+### UnsetDistributedNetwork
+`func (o *VirtualizationVmwareUplinkPort) UnsetDistributedNetwork()`
+
+UnsetDistributedNetwork ensures that no value is present for DistributedNetwork, not even an explicit nil
 ### GetHost
 
 `func (o *VirtualizationVmwareUplinkPort) GetHost() VirtualizationVmwareHostRelationship`
@@ -197,6 +207,16 @@ SetHost sets Host field to given value.
 
 HasHost returns a boolean if a field has been set.
 
+### SetHostNil
+
+`func (o *VirtualizationVmwareUplinkPort) SetHostNil(b bool)`
+
+ SetHostNil sets the value for Host to be an explicit nil
+
+### UnsetHost
+`func (o *VirtualizationVmwareUplinkPort) UnsetHost()`
+
+UnsetHost ensures that no value is present for Host, not even an explicit nil
 ### GetPhysicalNetworkInterface
 
 `func (o *VirtualizationVmwareUplinkPort) GetPhysicalNetworkInterface() VirtualizationVmwarePhysicalNetworkInterfaceRelationship`
@@ -222,6 +242,16 @@ SetPhysicalNetworkInterface sets PhysicalNetworkInterface field to given value.
 
 HasPhysicalNetworkInterface returns a boolean if a field has been set.
 
+### SetPhysicalNetworkInterfaceNil
+
+`func (o *VirtualizationVmwareUplinkPort) SetPhysicalNetworkInterfaceNil(b bool)`
+
+ SetPhysicalNetworkInterfaceNil sets the value for PhysicalNetworkInterface to be an explicit nil
+
+### UnsetPhysicalNetworkInterface
+`func (o *VirtualizationVmwareUplinkPort) UnsetPhysicalNetworkInterface()`
+
+UnsetPhysicalNetworkInterface ensures that no value is present for PhysicalNetworkInterface, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

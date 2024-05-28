@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KvmPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KvmPolicy{}
 
 // KvmPolicy Policy to configure KVM Launch settings.
 type KvmPolicy struct {
@@ -35,8 +39,8 @@ type KvmPolicy struct {
 	// The port used for KVM communication.
 	RemotePort *int64 `json:"RemotePort,omitempty"`
 	// Enables Tunneled vKVM on the endpoint. Applicable only for Device Connectors that support Tunneled vKVM.
-	TunneledKvmEnabled *bool                                 `json:"TunneledKvmEnabled,omitempty"`
-	Organization       *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	TunneledKvmEnabled *bool                                        `json:"TunneledKvmEnabled,omitempty"`
+	Organization       NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -141,7 +145,7 @@ func (o *KvmPolicy) SetObjectType(v string) {
 
 // GetEnableLocalServerVideo returns the EnableLocalServerVideo field value if set, zero value otherwise.
 func (o *KvmPolicy) GetEnableLocalServerVideo() bool {
-	if o == nil || o.EnableLocalServerVideo == nil {
+	if o == nil || IsNil(o.EnableLocalServerVideo) {
 		var ret bool
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *KvmPolicy) GetEnableLocalServerVideo() bool {
 // GetEnableLocalServerVideoOk returns a tuple with the EnableLocalServerVideo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KvmPolicy) GetEnableLocalServerVideoOk() (*bool, bool) {
-	if o == nil || o.EnableLocalServerVideo == nil {
+	if o == nil || IsNil(o.EnableLocalServerVideo) {
 		return nil, false
 	}
 	return o.EnableLocalServerVideo, true
@@ -159,7 +163,7 @@ func (o *KvmPolicy) GetEnableLocalServerVideoOk() (*bool, bool) {
 
 // HasEnableLocalServerVideo returns a boolean if a field has been set.
 func (o *KvmPolicy) HasEnableLocalServerVideo() bool {
-	if o != nil && o.EnableLocalServerVideo != nil {
+	if o != nil && !IsNil(o.EnableLocalServerVideo) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *KvmPolicy) SetEnableLocalServerVideo(v bool) {
 
 // GetEnableVideoEncryption returns the EnableVideoEncryption field value if set, zero value otherwise.
 func (o *KvmPolicy) GetEnableVideoEncryption() bool {
-	if o == nil || o.EnableVideoEncryption == nil {
+	if o == nil || IsNil(o.EnableVideoEncryption) {
 		var ret bool
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *KvmPolicy) GetEnableVideoEncryption() bool {
 // GetEnableVideoEncryptionOk returns a tuple with the EnableVideoEncryption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KvmPolicy) GetEnableVideoEncryptionOk() (*bool, bool) {
-	if o == nil || o.EnableVideoEncryption == nil {
+	if o == nil || IsNil(o.EnableVideoEncryption) {
 		return nil, false
 	}
 	return o.EnableVideoEncryption, true
@@ -191,7 +195,7 @@ func (o *KvmPolicy) GetEnableVideoEncryptionOk() (*bool, bool) {
 
 // HasEnableVideoEncryption returns a boolean if a field has been set.
 func (o *KvmPolicy) HasEnableVideoEncryption() bool {
-	if o != nil && o.EnableVideoEncryption != nil {
+	if o != nil && !IsNil(o.EnableVideoEncryption) {
 		return true
 	}
 
@@ -205,7 +209,7 @@ func (o *KvmPolicy) SetEnableVideoEncryption(v bool) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *KvmPolicy) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -215,7 +219,7 @@ func (o *KvmPolicy) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KvmPolicy) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -223,7 +227,7 @@ func (o *KvmPolicy) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *KvmPolicy) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -237,7 +241,7 @@ func (o *KvmPolicy) SetEnabled(v bool) {
 
 // GetMaximumSessions returns the MaximumSessions field value if set, zero value otherwise.
 func (o *KvmPolicy) GetMaximumSessions() int64 {
-	if o == nil || o.MaximumSessions == nil {
+	if o == nil || IsNil(o.MaximumSessions) {
 		var ret int64
 		return ret
 	}
@@ -247,7 +251,7 @@ func (o *KvmPolicy) GetMaximumSessions() int64 {
 // GetMaximumSessionsOk returns a tuple with the MaximumSessions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KvmPolicy) GetMaximumSessionsOk() (*int64, bool) {
-	if o == nil || o.MaximumSessions == nil {
+	if o == nil || IsNil(o.MaximumSessions) {
 		return nil, false
 	}
 	return o.MaximumSessions, true
@@ -255,7 +259,7 @@ func (o *KvmPolicy) GetMaximumSessionsOk() (*int64, bool) {
 
 // HasMaximumSessions returns a boolean if a field has been set.
 func (o *KvmPolicy) HasMaximumSessions() bool {
-	if o != nil && o.MaximumSessions != nil {
+	if o != nil && !IsNil(o.MaximumSessions) {
 		return true
 	}
 
@@ -269,7 +273,7 @@ func (o *KvmPolicy) SetMaximumSessions(v int64) {
 
 // GetRemotePort returns the RemotePort field value if set, zero value otherwise.
 func (o *KvmPolicy) GetRemotePort() int64 {
-	if o == nil || o.RemotePort == nil {
+	if o == nil || IsNil(o.RemotePort) {
 		var ret int64
 		return ret
 	}
@@ -279,7 +283,7 @@ func (o *KvmPolicy) GetRemotePort() int64 {
 // GetRemotePortOk returns a tuple with the RemotePort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KvmPolicy) GetRemotePortOk() (*int64, bool) {
-	if o == nil || o.RemotePort == nil {
+	if o == nil || IsNil(o.RemotePort) {
 		return nil, false
 	}
 	return o.RemotePort, true
@@ -287,7 +291,7 @@ func (o *KvmPolicy) GetRemotePortOk() (*int64, bool) {
 
 // HasRemotePort returns a boolean if a field has been set.
 func (o *KvmPolicy) HasRemotePort() bool {
-	if o != nil && o.RemotePort != nil {
+	if o != nil && !IsNil(o.RemotePort) {
 		return true
 	}
 
@@ -301,7 +305,7 @@ func (o *KvmPolicy) SetRemotePort(v int64) {
 
 // GetTunneledKvmEnabled returns the TunneledKvmEnabled field value if set, zero value otherwise.
 func (o *KvmPolicy) GetTunneledKvmEnabled() bool {
-	if o == nil || o.TunneledKvmEnabled == nil {
+	if o == nil || IsNil(o.TunneledKvmEnabled) {
 		var ret bool
 		return ret
 	}
@@ -311,7 +315,7 @@ func (o *KvmPolicy) GetTunneledKvmEnabled() bool {
 // GetTunneledKvmEnabledOk returns a tuple with the TunneledKvmEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KvmPolicy) GetTunneledKvmEnabledOk() (*bool, bool) {
-	if o == nil || o.TunneledKvmEnabled == nil {
+	if o == nil || IsNil(o.TunneledKvmEnabled) {
 		return nil, false
 	}
 	return o.TunneledKvmEnabled, true
@@ -319,7 +323,7 @@ func (o *KvmPolicy) GetTunneledKvmEnabledOk() (*bool, bool) {
 
 // HasTunneledKvmEnabled returns a boolean if a field has been set.
 func (o *KvmPolicy) HasTunneledKvmEnabled() bool {
-	if o != nil && o.TunneledKvmEnabled != nil {
+	if o != nil && !IsNil(o.TunneledKvmEnabled) {
 		return true
 	}
 
@@ -331,36 +335,47 @@ func (o *KvmPolicy) SetTunneledKvmEnabled(v bool) {
 	o.TunneledKvmEnabled = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KvmPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KvmPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *KvmPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *KvmPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
+}
+
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *KvmPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *KvmPolicy) UnsetOrganization() {
+	o.Organization.Unset()
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -376,7 +391,7 @@ func (o *KvmPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KvmPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship, bool) {
-	if o == nil || o.Profiles == nil {
+	if o == nil || IsNil(o.Profiles) {
 		return nil, false
 	}
 	return o.Profiles, true
@@ -384,7 +399,7 @@ func (o *KvmPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship, 
 
 // HasProfiles returns a boolean if a field has been set.
 func (o *KvmPolicy) HasProfiles() bool {
-	if o != nil && o.Profiles != nil {
+	if o != nil && IsNil(o.Profiles) {
 		return true
 	}
 
@@ -397,41 +412,45 @@ func (o *KvmPolicy) SetProfiles(v []PolicyAbstractConfigProfileRelationship) {
 }
 
 func (o KvmPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KvmPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.EnableLocalServerVideo != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EnableLocalServerVideo) {
 		toSerialize["EnableLocalServerVideo"] = o.EnableLocalServerVideo
 	}
-	if o.EnableVideoEncryption != nil {
+	if !IsNil(o.EnableVideoEncryption) {
 		toSerialize["EnableVideoEncryption"] = o.EnableVideoEncryption
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.MaximumSessions != nil {
+	if !IsNil(o.MaximumSessions) {
 		toSerialize["MaximumSessions"] = o.MaximumSessions
 	}
-	if o.RemotePort != nil {
+	if !IsNil(o.RemotePort) {
 		toSerialize["RemotePort"] = o.RemotePort
 	}
-	if o.TunneledKvmEnabled != nil {
+	if !IsNil(o.TunneledKvmEnabled) {
 		toSerialize["TunneledKvmEnabled"] = o.TunneledKvmEnabled
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
 	if o.Profiles != nil {
 		toSerialize["Profiles"] = o.Profiles
@@ -441,10 +460,32 @@ func (o KvmPolicy) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KvmPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KvmPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KvmPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -461,15 +502,15 @@ func (o *KvmPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// The port used for KVM communication.
 		RemotePort *int64 `json:"RemotePort,omitempty"`
 		// Enables Tunneled vKVM on the endpoint. Applicable only for Device Connectors that support Tunneled vKVM.
-		TunneledKvmEnabled *bool                                 `json:"TunneledKvmEnabled,omitempty"`
-		Organization       *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		TunneledKvmEnabled *bool                                        `json:"TunneledKvmEnabled,omitempty"`
+		Organization       NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
 		Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	}
 
 	varKvmPolicyWithoutEmbeddedStruct := KvmPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKvmPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKvmPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varKvmPolicy := _KvmPolicy{}
 		varKvmPolicy.ClassId = varKvmPolicyWithoutEmbeddedStruct.ClassId
@@ -489,7 +530,7 @@ func (o *KvmPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKvmPolicy := _KvmPolicy{}
 
-	err = json.Unmarshal(bytes, &varKvmPolicy)
+	err = json.Unmarshal(data, &varKvmPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varKvmPolicy.PolicyAbstractPolicy
 	} else {
@@ -498,7 +539,7 @@ func (o *KvmPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EnableLocalServerVideo")

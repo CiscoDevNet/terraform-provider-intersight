@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilitySwitchDescriptor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilitySwitchDescriptor{}
 
 // CapabilitySwitchDescriptor Descriptor that uniquely identifies a Fabric interconnect.
 type CapabilitySwitchDescriptor struct {
@@ -112,7 +116,7 @@ func (o *CapabilitySwitchDescriptor) SetObjectType(v string) {
 
 // GetExpectedMemory returns the ExpectedMemory field value if set, zero value otherwise.
 func (o *CapabilitySwitchDescriptor) GetExpectedMemory() int64 {
-	if o == nil || o.ExpectedMemory == nil {
+	if o == nil || IsNil(o.ExpectedMemory) {
 		var ret int64
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *CapabilitySwitchDescriptor) GetExpectedMemory() int64 {
 // GetExpectedMemoryOk returns a tuple with the ExpectedMemory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchDescriptor) GetExpectedMemoryOk() (*int64, bool) {
-	if o == nil || o.ExpectedMemory == nil {
+	if o == nil || IsNil(o.ExpectedMemory) {
 		return nil, false
 	}
 	return o.ExpectedMemory, true
@@ -130,7 +134,7 @@ func (o *CapabilitySwitchDescriptor) GetExpectedMemoryOk() (*int64, bool) {
 
 // HasExpectedMemory returns a boolean if a field has been set.
 func (o *CapabilitySwitchDescriptor) HasExpectedMemory() bool {
-	if o != nil && o.ExpectedMemory != nil {
+	if o != nil && !IsNil(o.ExpectedMemory) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *CapabilitySwitchDescriptor) SetExpectedMemory(v int64) {
 
 // GetIsUcsxDirectSwitch returns the IsUcsxDirectSwitch field value if set, zero value otherwise.
 func (o *CapabilitySwitchDescriptor) GetIsUcsxDirectSwitch() bool {
-	if o == nil || o.IsUcsxDirectSwitch == nil {
+	if o == nil || IsNil(o.IsUcsxDirectSwitch) {
 		var ret bool
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *CapabilitySwitchDescriptor) GetIsUcsxDirectSwitch() bool {
 // GetIsUcsxDirectSwitchOk returns a tuple with the IsUcsxDirectSwitch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchDescriptor) GetIsUcsxDirectSwitchOk() (*bool, bool) {
-	if o == nil || o.IsUcsxDirectSwitch == nil {
+	if o == nil || IsNil(o.IsUcsxDirectSwitch) {
 		return nil, false
 	}
 	return o.IsUcsxDirectSwitch, true
@@ -162,7 +166,7 @@ func (o *CapabilitySwitchDescriptor) GetIsUcsxDirectSwitchOk() (*bool, bool) {
 
 // HasIsUcsxDirectSwitch returns a boolean if a field has been set.
 func (o *CapabilitySwitchDescriptor) HasIsUcsxDirectSwitch() bool {
-	if o != nil && o.IsUcsxDirectSwitch != nil {
+	if o != nil && !IsNil(o.IsUcsxDirectSwitch) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *CapabilitySwitchDescriptor) SetIsUcsxDirectSwitch(v bool) {
 
 // GetRevision returns the Revision field value if set, zero value otherwise.
 func (o *CapabilitySwitchDescriptor) GetRevision() string {
-	if o == nil || o.Revision == nil {
+	if o == nil || IsNil(o.Revision) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *CapabilitySwitchDescriptor) GetRevision() string {
 // GetRevisionOk returns a tuple with the Revision field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchDescriptor) GetRevisionOk() (*string, bool) {
-	if o == nil || o.Revision == nil {
+	if o == nil || IsNil(o.Revision) {
 		return nil, false
 	}
 	return o.Revision, true
@@ -194,7 +198,7 @@ func (o *CapabilitySwitchDescriptor) GetRevisionOk() (*string, bool) {
 
 // HasRevision returns a boolean if a field has been set.
 func (o *CapabilitySwitchDescriptor) HasRevision() bool {
-	if o != nil && o.Revision != nil {
+	if o != nil && !IsNil(o.Revision) {
 		return true
 	}
 
@@ -207,28 +211,32 @@ func (o *CapabilitySwitchDescriptor) SetRevision(v string) {
 }
 
 func (o CapabilitySwitchDescriptor) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilitySwitchDescriptor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityHardwareDescriptor, errCapabilityHardwareDescriptor := json.Marshal(o.CapabilityHardwareDescriptor)
 	if errCapabilityHardwareDescriptor != nil {
-		return []byte{}, errCapabilityHardwareDescriptor
+		return map[string]interface{}{}, errCapabilityHardwareDescriptor
 	}
 	errCapabilityHardwareDescriptor = json.Unmarshal([]byte(serializedCapabilityHardwareDescriptor), &toSerialize)
 	if errCapabilityHardwareDescriptor != nil {
-		return []byte{}, errCapabilityHardwareDescriptor
+		return map[string]interface{}{}, errCapabilityHardwareDescriptor
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ExpectedMemory != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ExpectedMemory) {
 		toSerialize["ExpectedMemory"] = o.ExpectedMemory
 	}
-	if o.IsUcsxDirectSwitch != nil {
+	if !IsNil(o.IsUcsxDirectSwitch) {
 		toSerialize["IsUcsxDirectSwitch"] = o.IsUcsxDirectSwitch
 	}
-	if o.Revision != nil {
+	if !IsNil(o.Revision) {
 		toSerialize["Revision"] = o.Revision
 	}
 
@@ -236,10 +244,32 @@ func (o CapabilitySwitchDescriptor) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilitySwitchDescriptor) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilitySwitchDescriptor) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilitySwitchDescriptorWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -255,7 +285,7 @@ func (o *CapabilitySwitchDescriptor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCapabilitySwitchDescriptorWithoutEmbeddedStruct := CapabilitySwitchDescriptorWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchDescriptorWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilitySwitchDescriptorWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilitySwitchDescriptor := _CapabilitySwitchDescriptor{}
 		varCapabilitySwitchDescriptor.ClassId = varCapabilitySwitchDescriptorWithoutEmbeddedStruct.ClassId
@@ -270,7 +300,7 @@ func (o *CapabilitySwitchDescriptor) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCapabilitySwitchDescriptor := _CapabilitySwitchDescriptor{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchDescriptor)
+	err = json.Unmarshal(data, &varCapabilitySwitchDescriptor)
 	if err == nil {
 		o.CapabilityHardwareDescriptor = varCapabilitySwitchDescriptor.CapabilityHardwareDescriptor
 	} else {
@@ -279,7 +309,7 @@ func (o *CapabilitySwitchDescriptor) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExpectedMemory")

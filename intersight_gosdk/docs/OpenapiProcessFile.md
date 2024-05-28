@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **FileProcessingStatus** | Pointer to **string** | Status of the OpenAPI specification processing operation. The OpenAPI specification file is processed to create APIMethod objects. * &#x60;none&#x60; - Indicates the default status * &#x60;InProgress&#x60; - Indicates that operation is in progress * &#x60;Completed&#x60; - Indicates that the operation is complete * &#x60;Failed&#x60; - Indicates that the operation has failed. Check the failureReason attribute for more details. | [optional] [readonly] [default to "none"]
 **FileValidationStatus** | Pointer to **string** | Status of the OpenAPI specification validation operation. * &#x60;none&#x60; - Indicates the default status * &#x60;InProgress&#x60; - Indicates that operation is in progress * &#x60;Completed&#x60; - Indicates that the operation is complete * &#x60;Failed&#x60; - Indicates that the operation has failed. Check the failureReason attribute for more details. | [optional] [readonly] [default to "none"]
 **SpecFilePath** | Pointer to **string** | The location of the previously uploaded OpenAPI specification file. | [optional] 
-**FileInfo** | Pointer to [**OpenapiOpenApiSpecificationRelationship**](OpenapiOpenApiSpecificationRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**FileInfo** | Pointer to [**NullableOpenapiOpenApiSpecificationRelationship**](OpenapiOpenApiSpecificationRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -223,6 +223,16 @@ SetFileInfo sets FileInfo field to given value.
 
 HasFileInfo returns a boolean if a field has been set.
 
+### SetFileInfoNil
+
+`func (o *OpenapiProcessFile) SetFileInfoNil(b bool)`
+
+ SetFileInfoNil sets the value for FileInfo to be an explicit nil
+
+### UnsetFileInfo
+`func (o *OpenapiProcessFile) UnsetFileInfo()`
+
+UnsetFileInfo ensures that no value is present for FileInfo, not even an explicit nil
 ### GetOrganization
 
 `func (o *OpenapiProcessFile) GetOrganization() OrganizationOrganizationRelationship`
@@ -248,6 +258,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *OpenapiProcessFile) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *OpenapiProcessFile) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

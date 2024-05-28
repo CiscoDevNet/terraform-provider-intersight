@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the WorkflowProperties type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WorkflowProperties{}
 
 // WorkflowProperties Properties for the task definition like the inputs, outputs, timeout and retry policies. Tasks are the building blocks for workflows.
 type WorkflowProperties struct {
@@ -146,7 +150,7 @@ func (o *WorkflowProperties) SetObjectType(v string) {
 
 // GetCloneable returns the Cloneable field value if set, zero value otherwise.
 func (o *WorkflowProperties) GetCloneable() bool {
-	if o == nil || o.Cloneable == nil {
+	if o == nil || IsNil(o.Cloneable) {
 		var ret bool
 		return ret
 	}
@@ -156,7 +160,7 @@ func (o *WorkflowProperties) GetCloneable() bool {
 // GetCloneableOk returns a tuple with the Cloneable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowProperties) GetCloneableOk() (*bool, bool) {
-	if o == nil || o.Cloneable == nil {
+	if o == nil || IsNil(o.Cloneable) {
 		return nil, false
 	}
 	return o.Cloneable, true
@@ -164,7 +168,7 @@ func (o *WorkflowProperties) GetCloneableOk() (*bool, bool) {
 
 // HasCloneable returns a boolean if a field has been set.
 func (o *WorkflowProperties) HasCloneable() bool {
-	if o != nil && o.Cloneable != nil {
+	if o != nil && !IsNil(o.Cloneable) {
 		return true
 	}
 
@@ -178,7 +182,7 @@ func (o *WorkflowProperties) SetCloneable(v bool) {
 
 // GetExternalMeta returns the ExternalMeta field value if set, zero value otherwise.
 func (o *WorkflowProperties) GetExternalMeta() bool {
-	if o == nil || o.ExternalMeta == nil {
+	if o == nil || IsNil(o.ExternalMeta) {
 		var ret bool
 		return ret
 	}
@@ -188,7 +192,7 @@ func (o *WorkflowProperties) GetExternalMeta() bool {
 // GetExternalMetaOk returns a tuple with the ExternalMeta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowProperties) GetExternalMetaOk() (*bool, bool) {
-	if o == nil || o.ExternalMeta == nil {
+	if o == nil || IsNil(o.ExternalMeta) {
 		return nil, false
 	}
 	return o.ExternalMeta, true
@@ -196,7 +200,7 @@ func (o *WorkflowProperties) GetExternalMetaOk() (*bool, bool) {
 
 // HasExternalMeta returns a boolean if a field has been set.
 func (o *WorkflowProperties) HasExternalMeta() bool {
-	if o != nil && o.ExternalMeta != nil {
+	if o != nil && !IsNil(o.ExternalMeta) {
 		return true
 	}
 
@@ -221,7 +225,7 @@ func (o *WorkflowProperties) GetInputDefinition() []WorkflowBaseDataType {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowProperties) GetInputDefinitionOk() ([]WorkflowBaseDataType, bool) {
-	if o == nil || o.InputDefinition == nil {
+	if o == nil || IsNil(o.InputDefinition) {
 		return nil, false
 	}
 	return o.InputDefinition, true
@@ -229,7 +233,7 @@ func (o *WorkflowProperties) GetInputDefinitionOk() ([]WorkflowBaseDataType, boo
 
 // HasInputDefinition returns a boolean if a field has been set.
 func (o *WorkflowProperties) HasInputDefinition() bool {
-	if o != nil && o.InputDefinition != nil {
+	if o != nil && IsNil(o.InputDefinition) {
 		return true
 	}
 
@@ -254,7 +258,7 @@ func (o *WorkflowProperties) GetOutputDefinition() []WorkflowBaseDataType {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkflowProperties) GetOutputDefinitionOk() ([]WorkflowBaseDataType, bool) {
-	if o == nil || o.OutputDefinition == nil {
+	if o == nil || IsNil(o.OutputDefinition) {
 		return nil, false
 	}
 	return o.OutputDefinition, true
@@ -262,7 +266,7 @@ func (o *WorkflowProperties) GetOutputDefinitionOk() ([]WorkflowBaseDataType, bo
 
 // HasOutputDefinition returns a boolean if a field has been set.
 func (o *WorkflowProperties) HasOutputDefinition() bool {
-	if o != nil && o.OutputDefinition != nil {
+	if o != nil && IsNil(o.OutputDefinition) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *WorkflowProperties) SetOutputDefinition(v []WorkflowBaseDataType) {
 
 // GetRetryCount returns the RetryCount field value if set, zero value otherwise.
 func (o *WorkflowProperties) GetRetryCount() int64 {
-	if o == nil || o.RetryCount == nil {
+	if o == nil || IsNil(o.RetryCount) {
 		var ret int64
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *WorkflowProperties) GetRetryCount() int64 {
 // GetRetryCountOk returns a tuple with the RetryCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowProperties) GetRetryCountOk() (*int64, bool) {
-	if o == nil || o.RetryCount == nil {
+	if o == nil || IsNil(o.RetryCount) {
 		return nil, false
 	}
 	return o.RetryCount, true
@@ -294,7 +298,7 @@ func (o *WorkflowProperties) GetRetryCountOk() (*int64, bool) {
 
 // HasRetryCount returns a boolean if a field has been set.
 func (o *WorkflowProperties) HasRetryCount() bool {
-	if o != nil && o.RetryCount != nil {
+	if o != nil && !IsNil(o.RetryCount) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *WorkflowProperties) SetRetryCount(v int64) {
 
 // GetRetryDelay returns the RetryDelay field value if set, zero value otherwise.
 func (o *WorkflowProperties) GetRetryDelay() int64 {
-	if o == nil || o.RetryDelay == nil {
+	if o == nil || IsNil(o.RetryDelay) {
 		var ret int64
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *WorkflowProperties) GetRetryDelay() int64 {
 // GetRetryDelayOk returns a tuple with the RetryDelay field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowProperties) GetRetryDelayOk() (*int64, bool) {
-	if o == nil || o.RetryDelay == nil {
+	if o == nil || IsNil(o.RetryDelay) {
 		return nil, false
 	}
 	return o.RetryDelay, true
@@ -326,7 +330,7 @@ func (o *WorkflowProperties) GetRetryDelayOk() (*int64, bool) {
 
 // HasRetryDelay returns a boolean if a field has been set.
 func (o *WorkflowProperties) HasRetryDelay() bool {
-	if o != nil && o.RetryDelay != nil {
+	if o != nil && !IsNil(o.RetryDelay) {
 		return true
 	}
 
@@ -340,7 +344,7 @@ func (o *WorkflowProperties) SetRetryDelay(v int64) {
 
 // GetRetryPolicy returns the RetryPolicy field value if set, zero value otherwise.
 func (o *WorkflowProperties) GetRetryPolicy() string {
-	if o == nil || o.RetryPolicy == nil {
+	if o == nil || IsNil(o.RetryPolicy) {
 		var ret string
 		return ret
 	}
@@ -350,7 +354,7 @@ func (o *WorkflowProperties) GetRetryPolicy() string {
 // GetRetryPolicyOk returns a tuple with the RetryPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowProperties) GetRetryPolicyOk() (*string, bool) {
-	if o == nil || o.RetryPolicy == nil {
+	if o == nil || IsNil(o.RetryPolicy) {
 		return nil, false
 	}
 	return o.RetryPolicy, true
@@ -358,7 +362,7 @@ func (o *WorkflowProperties) GetRetryPolicyOk() (*string, bool) {
 
 // HasRetryPolicy returns a boolean if a field has been set.
 func (o *WorkflowProperties) HasRetryPolicy() bool {
-	if o != nil && o.RetryPolicy != nil {
+	if o != nil && !IsNil(o.RetryPolicy) {
 		return true
 	}
 
@@ -372,7 +376,7 @@ func (o *WorkflowProperties) SetRetryPolicy(v string) {
 
 // GetStartsWorkflow returns the StartsWorkflow field value if set, zero value otherwise.
 func (o *WorkflowProperties) GetStartsWorkflow() bool {
-	if o == nil || o.StartsWorkflow == nil {
+	if o == nil || IsNil(o.StartsWorkflow) {
 		var ret bool
 		return ret
 	}
@@ -382,7 +386,7 @@ func (o *WorkflowProperties) GetStartsWorkflow() bool {
 // GetStartsWorkflowOk returns a tuple with the StartsWorkflow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowProperties) GetStartsWorkflowOk() (*bool, bool) {
-	if o == nil || o.StartsWorkflow == nil {
+	if o == nil || IsNil(o.StartsWorkflow) {
 		return nil, false
 	}
 	return o.StartsWorkflow, true
@@ -390,7 +394,7 @@ func (o *WorkflowProperties) GetStartsWorkflowOk() (*bool, bool) {
 
 // HasStartsWorkflow returns a boolean if a field has been set.
 func (o *WorkflowProperties) HasStartsWorkflow() bool {
-	if o != nil && o.StartsWorkflow != nil {
+	if o != nil && !IsNil(o.StartsWorkflow) {
 		return true
 	}
 
@@ -404,7 +408,7 @@ func (o *WorkflowProperties) SetStartsWorkflow(v bool) {
 
 // GetSupportStatus returns the SupportStatus field value if set, zero value otherwise.
 func (o *WorkflowProperties) GetSupportStatus() string {
-	if o == nil || o.SupportStatus == nil {
+	if o == nil || IsNil(o.SupportStatus) {
 		var ret string
 		return ret
 	}
@@ -414,7 +418,7 @@ func (o *WorkflowProperties) GetSupportStatus() string {
 // GetSupportStatusOk returns a tuple with the SupportStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowProperties) GetSupportStatusOk() (*string, bool) {
-	if o == nil || o.SupportStatus == nil {
+	if o == nil || IsNil(o.SupportStatus) {
 		return nil, false
 	}
 	return o.SupportStatus, true
@@ -422,7 +426,7 @@ func (o *WorkflowProperties) GetSupportStatusOk() (*string, bool) {
 
 // HasSupportStatus returns a boolean if a field has been set.
 func (o *WorkflowProperties) HasSupportStatus() bool {
-	if o != nil && o.SupportStatus != nil {
+	if o != nil && !IsNil(o.SupportStatus) {
 		return true
 	}
 
@@ -436,7 +440,7 @@ func (o *WorkflowProperties) SetSupportStatus(v string) {
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
 func (o *WorkflowProperties) GetTimeout() int64 {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		var ret int64
 		return ret
 	}
@@ -446,7 +450,7 @@ func (o *WorkflowProperties) GetTimeout() int64 {
 // GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowProperties) GetTimeoutOk() (*int64, bool) {
-	if o == nil || o.Timeout == nil {
+	if o == nil || IsNil(o.Timeout) {
 		return nil, false
 	}
 	return o.Timeout, true
@@ -454,7 +458,7 @@ func (o *WorkflowProperties) GetTimeoutOk() (*int64, bool) {
 
 // HasTimeout returns a boolean if a field has been set.
 func (o *WorkflowProperties) HasTimeout() bool {
-	if o != nil && o.Timeout != nil {
+	if o != nil && !IsNil(o.Timeout) {
 		return true
 	}
 
@@ -468,7 +472,7 @@ func (o *WorkflowProperties) SetTimeout(v int64) {
 
 // GetTimeoutPolicy returns the TimeoutPolicy field value if set, zero value otherwise.
 func (o *WorkflowProperties) GetTimeoutPolicy() string {
-	if o == nil || o.TimeoutPolicy == nil {
+	if o == nil || IsNil(o.TimeoutPolicy) {
 		var ret string
 		return ret
 	}
@@ -478,7 +482,7 @@ func (o *WorkflowProperties) GetTimeoutPolicy() string {
 // GetTimeoutPolicyOk returns a tuple with the TimeoutPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WorkflowProperties) GetTimeoutPolicyOk() (*string, bool) {
-	if o == nil || o.TimeoutPolicy == nil {
+	if o == nil || IsNil(o.TimeoutPolicy) {
 		return nil, false
 	}
 	return o.TimeoutPolicy, true
@@ -486,7 +490,7 @@ func (o *WorkflowProperties) GetTimeoutPolicyOk() (*string, bool) {
 
 // HasTimeoutPolicy returns a boolean if a field has been set.
 func (o *WorkflowProperties) HasTimeoutPolicy() bool {
-	if o != nil && o.TimeoutPolicy != nil {
+	if o != nil && !IsNil(o.TimeoutPolicy) {
 		return true
 	}
 
@@ -499,25 +503,29 @@ func (o *WorkflowProperties) SetTimeoutPolicy(v string) {
 }
 
 func (o WorkflowProperties) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WorkflowProperties) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Cloneable != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Cloneable) {
 		toSerialize["Cloneable"] = o.Cloneable
 	}
-	if o.ExternalMeta != nil {
+	if !IsNil(o.ExternalMeta) {
 		toSerialize["ExternalMeta"] = o.ExternalMeta
 	}
 	if o.InputDefinition != nil {
@@ -526,25 +534,25 @@ func (o WorkflowProperties) MarshalJSON() ([]byte, error) {
 	if o.OutputDefinition != nil {
 		toSerialize["OutputDefinition"] = o.OutputDefinition
 	}
-	if o.RetryCount != nil {
+	if !IsNil(o.RetryCount) {
 		toSerialize["RetryCount"] = o.RetryCount
 	}
-	if o.RetryDelay != nil {
+	if !IsNil(o.RetryDelay) {
 		toSerialize["RetryDelay"] = o.RetryDelay
 	}
-	if o.RetryPolicy != nil {
+	if !IsNil(o.RetryPolicy) {
 		toSerialize["RetryPolicy"] = o.RetryPolicy
 	}
-	if o.StartsWorkflow != nil {
+	if !IsNil(o.StartsWorkflow) {
 		toSerialize["StartsWorkflow"] = o.StartsWorkflow
 	}
-	if o.SupportStatus != nil {
+	if !IsNil(o.SupportStatus) {
 		toSerialize["SupportStatus"] = o.SupportStatus
 	}
-	if o.Timeout != nil {
+	if !IsNil(o.Timeout) {
 		toSerialize["Timeout"] = o.Timeout
 	}
-	if o.TimeoutPolicy != nil {
+	if !IsNil(o.TimeoutPolicy) {
 		toSerialize["TimeoutPolicy"] = o.TimeoutPolicy
 	}
 
@@ -552,10 +560,32 @@ func (o WorkflowProperties) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *WorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
+func (o *WorkflowProperties) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type WorkflowPropertiesWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -585,7 +615,7 @@ func (o *WorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowPropertiesWithoutEmbeddedStruct := WorkflowPropertiesWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varWorkflowPropertiesWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varWorkflowPropertiesWithoutEmbeddedStruct)
 	if err == nil {
 		varWorkflowProperties := _WorkflowProperties{}
 		varWorkflowProperties.ClassId = varWorkflowPropertiesWithoutEmbeddedStruct.ClassId
@@ -608,7 +638,7 @@ func (o *WorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 
 	varWorkflowProperties := _WorkflowProperties{}
 
-	err = json.Unmarshal(bytes, &varWorkflowProperties)
+	err = json.Unmarshal(data, &varWorkflowProperties)
 	if err == nil {
 		o.MoBaseComplexType = varWorkflowProperties.MoBaseComplexType
 	} else {
@@ -617,7 +647,7 @@ func (o *WorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Cloneable")

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **SiteType** | Pointer to **string** | Returns the type of the Nexus Cloud site. | [optional] 
 **SoftwareManagement** | Pointer to **bool** | Software management setting status, based on license type. | [optional] 
 **Uuid** | Pointer to **string** | Returns the uuid of the Nexus Cloud site. | [optional] 
-**NexusCloudAccount** | Pointer to [**NiatelemetryNexusCloudAccountRelationship**](NiatelemetryNexusCloudAccountRelationship.md) |  | [optional] 
+**NexusCloudAccount** | Pointer to [**NullableNiatelemetryNexusCloudAccountRelationship**](NiatelemetryNexusCloudAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -300,6 +300,16 @@ SetNexusCloudAccount sets NexusCloudAccount field to given value.
 
 HasNexusCloudAccount returns a boolean if a field has been set.
 
+### SetNexusCloudAccountNil
+
+`func (o *NiatelemetryNexusCloudSite) SetNexusCloudAccountNil(b bool)`
+
+ SetNexusCloudAccountNil sets the value for NexusCloudAccount to be an explicit nil
+
+### UnsetNexusCloudAccount
+`func (o *NiatelemetryNexusCloudSite) UnsetNexusCloudAccount()`
+
+UnsetNexusCloudAccount ensures that no value is present for NexusCloudAccount, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

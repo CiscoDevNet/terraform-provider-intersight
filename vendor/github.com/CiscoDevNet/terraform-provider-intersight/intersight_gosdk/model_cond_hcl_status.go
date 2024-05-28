@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the CondHclStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CondHclStatus{}
 
 // CondHclStatus The HCL status of a managed object after we have validated the managed object components' firmware and drivers against the HCL.
 type CondHclStatus struct {
@@ -60,9 +64,9 @@ type CondHclStatus struct {
 	// The HCL compatibility status of the managed object. The status can be one of the following \"Incomplete\" - there is no enough information to evaluate against the HCL data \"Validated\" - all components have been evaluated against the HCL and they all have \"Validated\" status \"Not-Listed\" - all components have been evaluated against the HCL and one or more have \"Not-Listed\" status. \"Not-Evaluated\" - server is not evaluated against the HCL because it is exempted. * `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL. * `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL. * `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL. * `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.
 	Status *string `json:"Status,omitempty"`
 	// An array of relationships to condHclStatusDetail resources.
-	Details              []CondHclStatusDetailRelationship    `json:"Details,omitempty"`
-	ManagedObject        *InventoryBaseRelationship           `json:"ManagedObject,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	Details              []CondHclStatusDetailRelationship           `json:"Details,omitempty"`
+	ManagedObject        NullableInventoryBaseRelationship           `json:"ManagedObject,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -141,7 +145,7 @@ func (o *CondHclStatus) SetObjectType(v string) {
 
 // GetComponentStatus returns the ComponentStatus field value if set, zero value otherwise.
 func (o *CondHclStatus) GetComponentStatus() string {
-	if o == nil || o.ComponentStatus == nil {
+	if o == nil || IsNil(o.ComponentStatus) {
 		var ret string
 		return ret
 	}
@@ -151,7 +155,7 @@ func (o *CondHclStatus) GetComponentStatus() string {
 // GetComponentStatusOk returns a tuple with the ComponentStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetComponentStatusOk() (*string, bool) {
-	if o == nil || o.ComponentStatus == nil {
+	if o == nil || IsNil(o.ComponentStatus) {
 		return nil, false
 	}
 	return o.ComponentStatus, true
@@ -159,7 +163,7 @@ func (o *CondHclStatus) GetComponentStatusOk() (*string, bool) {
 
 // HasComponentStatus returns a boolean if a field has been set.
 func (o *CondHclStatus) HasComponentStatus() bool {
-	if o != nil && o.ComponentStatus != nil {
+	if o != nil && !IsNil(o.ComponentStatus) {
 		return true
 	}
 
@@ -173,7 +177,7 @@ func (o *CondHclStatus) SetComponentStatus(v string) {
 
 // GetHardwareStatus returns the HardwareStatus field value if set, zero value otherwise.
 func (o *CondHclStatus) GetHardwareStatus() string {
-	if o == nil || o.HardwareStatus == nil {
+	if o == nil || IsNil(o.HardwareStatus) {
 		var ret string
 		return ret
 	}
@@ -183,7 +187,7 @@ func (o *CondHclStatus) GetHardwareStatus() string {
 // GetHardwareStatusOk returns a tuple with the HardwareStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetHardwareStatusOk() (*string, bool) {
-	if o == nil || o.HardwareStatus == nil {
+	if o == nil || IsNil(o.HardwareStatus) {
 		return nil, false
 	}
 	return o.HardwareStatus, true
@@ -191,7 +195,7 @@ func (o *CondHclStatus) GetHardwareStatusOk() (*string, bool) {
 
 // HasHardwareStatus returns a boolean if a field has been set.
 func (o *CondHclStatus) HasHardwareStatus() bool {
-	if o != nil && o.HardwareStatus != nil {
+	if o != nil && !IsNil(o.HardwareStatus) {
 		return true
 	}
 
@@ -205,7 +209,7 @@ func (o *CondHclStatus) SetHardwareStatus(v string) {
 
 // GetHclFirmwareVersion returns the HclFirmwareVersion field value if set, zero value otherwise.
 func (o *CondHclStatus) GetHclFirmwareVersion() string {
-	if o == nil || o.HclFirmwareVersion == nil {
+	if o == nil || IsNil(o.HclFirmwareVersion) {
 		var ret string
 		return ret
 	}
@@ -215,7 +219,7 @@ func (o *CondHclStatus) GetHclFirmwareVersion() string {
 // GetHclFirmwareVersionOk returns a tuple with the HclFirmwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetHclFirmwareVersionOk() (*string, bool) {
-	if o == nil || o.HclFirmwareVersion == nil {
+	if o == nil || IsNil(o.HclFirmwareVersion) {
 		return nil, false
 	}
 	return o.HclFirmwareVersion, true
@@ -223,7 +227,7 @@ func (o *CondHclStatus) GetHclFirmwareVersionOk() (*string, bool) {
 
 // HasHclFirmwareVersion returns a boolean if a field has been set.
 func (o *CondHclStatus) HasHclFirmwareVersion() bool {
-	if o != nil && o.HclFirmwareVersion != nil {
+	if o != nil && !IsNil(o.HclFirmwareVersion) {
 		return true
 	}
 
@@ -237,7 +241,7 @@ func (o *CondHclStatus) SetHclFirmwareVersion(v string) {
 
 // GetHclModel returns the HclModel field value if set, zero value otherwise.
 func (o *CondHclStatus) GetHclModel() string {
-	if o == nil || o.HclModel == nil {
+	if o == nil || IsNil(o.HclModel) {
 		var ret string
 		return ret
 	}
@@ -247,7 +251,7 @@ func (o *CondHclStatus) GetHclModel() string {
 // GetHclModelOk returns a tuple with the HclModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetHclModelOk() (*string, bool) {
-	if o == nil || o.HclModel == nil {
+	if o == nil || IsNil(o.HclModel) {
 		return nil, false
 	}
 	return o.HclModel, true
@@ -255,7 +259,7 @@ func (o *CondHclStatus) GetHclModelOk() (*string, bool) {
 
 // HasHclModel returns a boolean if a field has been set.
 func (o *CondHclStatus) HasHclModel() bool {
-	if o != nil && o.HclModel != nil {
+	if o != nil && !IsNil(o.HclModel) {
 		return true
 	}
 
@@ -269,7 +273,7 @@ func (o *CondHclStatus) SetHclModel(v string) {
 
 // GetHclOsVendor returns the HclOsVendor field value if set, zero value otherwise.
 func (o *CondHclStatus) GetHclOsVendor() string {
-	if o == nil || o.HclOsVendor == nil {
+	if o == nil || IsNil(o.HclOsVendor) {
 		var ret string
 		return ret
 	}
@@ -279,7 +283,7 @@ func (o *CondHclStatus) GetHclOsVendor() string {
 // GetHclOsVendorOk returns a tuple with the HclOsVendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetHclOsVendorOk() (*string, bool) {
-	if o == nil || o.HclOsVendor == nil {
+	if o == nil || IsNil(o.HclOsVendor) {
 		return nil, false
 	}
 	return o.HclOsVendor, true
@@ -287,7 +291,7 @@ func (o *CondHclStatus) GetHclOsVendorOk() (*string, bool) {
 
 // HasHclOsVendor returns a boolean if a field has been set.
 func (o *CondHclStatus) HasHclOsVendor() bool {
-	if o != nil && o.HclOsVendor != nil {
+	if o != nil && !IsNil(o.HclOsVendor) {
 		return true
 	}
 
@@ -301,7 +305,7 @@ func (o *CondHclStatus) SetHclOsVendor(v string) {
 
 // GetHclOsVersion returns the HclOsVersion field value if set, zero value otherwise.
 func (o *CondHclStatus) GetHclOsVersion() string {
-	if o == nil || o.HclOsVersion == nil {
+	if o == nil || IsNil(o.HclOsVersion) {
 		var ret string
 		return ret
 	}
@@ -311,7 +315,7 @@ func (o *CondHclStatus) GetHclOsVersion() string {
 // GetHclOsVersionOk returns a tuple with the HclOsVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetHclOsVersionOk() (*string, bool) {
-	if o == nil || o.HclOsVersion == nil {
+	if o == nil || IsNil(o.HclOsVersion) {
 		return nil, false
 	}
 	return o.HclOsVersion, true
@@ -319,7 +323,7 @@ func (o *CondHclStatus) GetHclOsVersionOk() (*string, bool) {
 
 // HasHclOsVersion returns a boolean if a field has been set.
 func (o *CondHclStatus) HasHclOsVersion() bool {
-	if o != nil && o.HclOsVersion != nil {
+	if o != nil && !IsNil(o.HclOsVersion) {
 		return true
 	}
 
@@ -333,7 +337,7 @@ func (o *CondHclStatus) SetHclOsVersion(v string) {
 
 // GetHclProcessor returns the HclProcessor field value if set, zero value otherwise.
 func (o *CondHclStatus) GetHclProcessor() string {
-	if o == nil || o.HclProcessor == nil {
+	if o == nil || IsNil(o.HclProcessor) {
 		var ret string
 		return ret
 	}
@@ -343,7 +347,7 @@ func (o *CondHclStatus) GetHclProcessor() string {
 // GetHclProcessorOk returns a tuple with the HclProcessor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetHclProcessorOk() (*string, bool) {
-	if o == nil || o.HclProcessor == nil {
+	if o == nil || IsNil(o.HclProcessor) {
 		return nil, false
 	}
 	return o.HclProcessor, true
@@ -351,7 +355,7 @@ func (o *CondHclStatus) GetHclProcessorOk() (*string, bool) {
 
 // HasHclProcessor returns a boolean if a field has been set.
 func (o *CondHclStatus) HasHclProcessor() bool {
-	if o != nil && o.HclProcessor != nil {
+	if o != nil && !IsNil(o.HclProcessor) {
 		return true
 	}
 
@@ -365,7 +369,7 @@ func (o *CondHclStatus) SetHclProcessor(v string) {
 
 // GetHclValidationTime returns the HclValidationTime field value if set, zero value otherwise.
 func (o *CondHclStatus) GetHclValidationTime() time.Time {
-	if o == nil || o.HclValidationTime == nil {
+	if o == nil || IsNil(o.HclValidationTime) {
 		var ret time.Time
 		return ret
 	}
@@ -375,7 +379,7 @@ func (o *CondHclStatus) GetHclValidationTime() time.Time {
 // GetHclValidationTimeOk returns a tuple with the HclValidationTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetHclValidationTimeOk() (*time.Time, bool) {
-	if o == nil || o.HclValidationTime == nil {
+	if o == nil || IsNil(o.HclValidationTime) {
 		return nil, false
 	}
 	return o.HclValidationTime, true
@@ -383,7 +387,7 @@ func (o *CondHclStatus) GetHclValidationTimeOk() (*time.Time, bool) {
 
 // HasHclValidationTime returns a boolean if a field has been set.
 func (o *CondHclStatus) HasHclValidationTime() bool {
-	if o != nil && o.HclValidationTime != nil {
+	if o != nil && !IsNil(o.HclValidationTime) {
 		return true
 	}
 
@@ -397,7 +401,7 @@ func (o *CondHclStatus) SetHclValidationTime(v time.Time) {
 
 // GetInvFirmwareVersion returns the InvFirmwareVersion field value if set, zero value otherwise.
 func (o *CondHclStatus) GetInvFirmwareVersion() string {
-	if o == nil || o.InvFirmwareVersion == nil {
+	if o == nil || IsNil(o.InvFirmwareVersion) {
 		var ret string
 		return ret
 	}
@@ -407,7 +411,7 @@ func (o *CondHclStatus) GetInvFirmwareVersion() string {
 // GetInvFirmwareVersionOk returns a tuple with the InvFirmwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetInvFirmwareVersionOk() (*string, bool) {
-	if o == nil || o.InvFirmwareVersion == nil {
+	if o == nil || IsNil(o.InvFirmwareVersion) {
 		return nil, false
 	}
 	return o.InvFirmwareVersion, true
@@ -415,7 +419,7 @@ func (o *CondHclStatus) GetInvFirmwareVersionOk() (*string, bool) {
 
 // HasInvFirmwareVersion returns a boolean if a field has been set.
 func (o *CondHclStatus) HasInvFirmwareVersion() bool {
-	if o != nil && o.InvFirmwareVersion != nil {
+	if o != nil && !IsNil(o.InvFirmwareVersion) {
 		return true
 	}
 
@@ -429,7 +433,7 @@ func (o *CondHclStatus) SetInvFirmwareVersion(v string) {
 
 // GetInvModel returns the InvModel field value if set, zero value otherwise.
 func (o *CondHclStatus) GetInvModel() string {
-	if o == nil || o.InvModel == nil {
+	if o == nil || IsNil(o.InvModel) {
 		var ret string
 		return ret
 	}
@@ -439,7 +443,7 @@ func (o *CondHclStatus) GetInvModel() string {
 // GetInvModelOk returns a tuple with the InvModel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetInvModelOk() (*string, bool) {
-	if o == nil || o.InvModel == nil {
+	if o == nil || IsNil(o.InvModel) {
 		return nil, false
 	}
 	return o.InvModel, true
@@ -447,7 +451,7 @@ func (o *CondHclStatus) GetInvModelOk() (*string, bool) {
 
 // HasInvModel returns a boolean if a field has been set.
 func (o *CondHclStatus) HasInvModel() bool {
-	if o != nil && o.InvModel != nil {
+	if o != nil && !IsNil(o.InvModel) {
 		return true
 	}
 
@@ -461,7 +465,7 @@ func (o *CondHclStatus) SetInvModel(v string) {
 
 // GetInvOsVendor returns the InvOsVendor field value if set, zero value otherwise.
 func (o *CondHclStatus) GetInvOsVendor() string {
-	if o == nil || o.InvOsVendor == nil {
+	if o == nil || IsNil(o.InvOsVendor) {
 		var ret string
 		return ret
 	}
@@ -471,7 +475,7 @@ func (o *CondHclStatus) GetInvOsVendor() string {
 // GetInvOsVendorOk returns a tuple with the InvOsVendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetInvOsVendorOk() (*string, bool) {
-	if o == nil || o.InvOsVendor == nil {
+	if o == nil || IsNil(o.InvOsVendor) {
 		return nil, false
 	}
 	return o.InvOsVendor, true
@@ -479,7 +483,7 @@ func (o *CondHclStatus) GetInvOsVendorOk() (*string, bool) {
 
 // HasInvOsVendor returns a boolean if a field has been set.
 func (o *CondHclStatus) HasInvOsVendor() bool {
-	if o != nil && o.InvOsVendor != nil {
+	if o != nil && !IsNil(o.InvOsVendor) {
 		return true
 	}
 
@@ -493,7 +497,7 @@ func (o *CondHclStatus) SetInvOsVendor(v string) {
 
 // GetInvOsVersion returns the InvOsVersion field value if set, zero value otherwise.
 func (o *CondHclStatus) GetInvOsVersion() string {
-	if o == nil || o.InvOsVersion == nil {
+	if o == nil || IsNil(o.InvOsVersion) {
 		var ret string
 		return ret
 	}
@@ -503,7 +507,7 @@ func (o *CondHclStatus) GetInvOsVersion() string {
 // GetInvOsVersionOk returns a tuple with the InvOsVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetInvOsVersionOk() (*string, bool) {
-	if o == nil || o.InvOsVersion == nil {
+	if o == nil || IsNil(o.InvOsVersion) {
 		return nil, false
 	}
 	return o.InvOsVersion, true
@@ -511,7 +515,7 @@ func (o *CondHclStatus) GetInvOsVersionOk() (*string, bool) {
 
 // HasInvOsVersion returns a boolean if a field has been set.
 func (o *CondHclStatus) HasInvOsVersion() bool {
-	if o != nil && o.InvOsVersion != nil {
+	if o != nil && !IsNil(o.InvOsVersion) {
 		return true
 	}
 
@@ -525,7 +529,7 @@ func (o *CondHclStatus) SetInvOsVersion(v string) {
 
 // GetInvProcessor returns the InvProcessor field value if set, zero value otherwise.
 func (o *CondHclStatus) GetInvProcessor() string {
-	if o == nil || o.InvProcessor == nil {
+	if o == nil || IsNil(o.InvProcessor) {
 		var ret string
 		return ret
 	}
@@ -535,7 +539,7 @@ func (o *CondHclStatus) GetInvProcessor() string {
 // GetInvProcessorOk returns a tuple with the InvProcessor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetInvProcessorOk() (*string, bool) {
-	if o == nil || o.InvProcessor == nil {
+	if o == nil || IsNil(o.InvProcessor) {
 		return nil, false
 	}
 	return o.InvProcessor, true
@@ -543,7 +547,7 @@ func (o *CondHclStatus) GetInvProcessorOk() (*string, bool) {
 
 // HasInvProcessor returns a boolean if a field has been set.
 func (o *CondHclStatus) HasInvProcessor() bool {
-	if o != nil && o.InvProcessor != nil {
+	if o != nil && !IsNil(o.InvProcessor) {
 		return true
 	}
 
@@ -557,7 +561,7 @@ func (o *CondHclStatus) SetInvProcessor(v string) {
 
 // GetReason returns the Reason field value if set, zero value otherwise.
 func (o *CondHclStatus) GetReason() string {
-	if o == nil || o.Reason == nil {
+	if o == nil || IsNil(o.Reason) {
 		var ret string
 		return ret
 	}
@@ -567,7 +571,7 @@ func (o *CondHclStatus) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetReasonOk() (*string, bool) {
-	if o == nil || o.Reason == nil {
+	if o == nil || IsNil(o.Reason) {
 		return nil, false
 	}
 	return o.Reason, true
@@ -575,7 +579,7 @@ func (o *CondHclStatus) GetReasonOk() (*string, bool) {
 
 // HasReason returns a boolean if a field has been set.
 func (o *CondHclStatus) HasReason() bool {
-	if o != nil && o.Reason != nil {
+	if o != nil && !IsNil(o.Reason) {
 		return true
 	}
 
@@ -589,7 +593,7 @@ func (o *CondHclStatus) SetReason(v string) {
 
 // GetServerReason returns the ServerReason field value if set, zero value otherwise.
 func (o *CondHclStatus) GetServerReason() string {
-	if o == nil || o.ServerReason == nil {
+	if o == nil || IsNil(o.ServerReason) {
 		var ret string
 		return ret
 	}
@@ -599,7 +603,7 @@ func (o *CondHclStatus) GetServerReason() string {
 // GetServerReasonOk returns a tuple with the ServerReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetServerReasonOk() (*string, bool) {
-	if o == nil || o.ServerReason == nil {
+	if o == nil || IsNil(o.ServerReason) {
 		return nil, false
 	}
 	return o.ServerReason, true
@@ -607,7 +611,7 @@ func (o *CondHclStatus) GetServerReasonOk() (*string, bool) {
 
 // HasServerReason returns a boolean if a field has been set.
 func (o *CondHclStatus) HasServerReason() bool {
-	if o != nil && o.ServerReason != nil {
+	if o != nil && !IsNil(o.ServerReason) {
 		return true
 	}
 
@@ -621,7 +625,7 @@ func (o *CondHclStatus) SetServerReason(v string) {
 
 // GetSoftwareStatus returns the SoftwareStatus field value if set, zero value otherwise.
 func (o *CondHclStatus) GetSoftwareStatus() string {
-	if o == nil || o.SoftwareStatus == nil {
+	if o == nil || IsNil(o.SoftwareStatus) {
 		var ret string
 		return ret
 	}
@@ -631,7 +635,7 @@ func (o *CondHclStatus) GetSoftwareStatus() string {
 // GetSoftwareStatusOk returns a tuple with the SoftwareStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetSoftwareStatusOk() (*string, bool) {
-	if o == nil || o.SoftwareStatus == nil {
+	if o == nil || IsNil(o.SoftwareStatus) {
 		return nil, false
 	}
 	return o.SoftwareStatus, true
@@ -639,7 +643,7 @@ func (o *CondHclStatus) GetSoftwareStatusOk() (*string, bool) {
 
 // HasSoftwareStatus returns a boolean if a field has been set.
 func (o *CondHclStatus) HasSoftwareStatus() bool {
-	if o != nil && o.SoftwareStatus != nil {
+	if o != nil && !IsNil(o.SoftwareStatus) {
 		return true
 	}
 
@@ -653,7 +657,7 @@ func (o *CondHclStatus) SetSoftwareStatus(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *CondHclStatus) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -663,7 +667,7 @@ func (o *CondHclStatus) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CondHclStatus) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -671,7 +675,7 @@ func (o *CondHclStatus) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *CondHclStatus) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -696,7 +700,7 @@ func (o *CondHclStatus) GetDetails() []CondHclStatusDetailRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CondHclStatus) GetDetailsOk() ([]CondHclStatusDetailRelationship, bool) {
-	if o == nil || o.Details == nil {
+	if o == nil || IsNil(o.Details) {
 		return nil, false
 	}
 	return o.Details, true
@@ -704,7 +708,7 @@ func (o *CondHclStatus) GetDetailsOk() ([]CondHclStatusDetailRelationship, bool)
 
 // HasDetails returns a boolean if a field has been set.
 func (o *CondHclStatus) HasDetails() bool {
-	if o != nil && o.Details != nil {
+	if o != nil && IsNil(o.Details) {
 		return true
 	}
 
@@ -716,155 +720,203 @@ func (o *CondHclStatus) SetDetails(v []CondHclStatusDetailRelationship) {
 	o.Details = v
 }
 
-// GetManagedObject returns the ManagedObject field value if set, zero value otherwise.
+// GetManagedObject returns the ManagedObject field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondHclStatus) GetManagedObject() InventoryBaseRelationship {
-	if o == nil || o.ManagedObject == nil {
+	if o == nil || IsNil(o.ManagedObject.Get()) {
 		var ret InventoryBaseRelationship
 		return ret
 	}
-	return *o.ManagedObject
+	return *o.ManagedObject.Get()
 }
 
 // GetManagedObjectOk returns a tuple with the ManagedObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CondHclStatus) GetManagedObjectOk() (*InventoryBaseRelationship, bool) {
-	if o == nil || o.ManagedObject == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ManagedObject, true
+	return o.ManagedObject.Get(), o.ManagedObject.IsSet()
 }
 
 // HasManagedObject returns a boolean if a field has been set.
 func (o *CondHclStatus) HasManagedObject() bool {
-	if o != nil && o.ManagedObject != nil {
+	if o != nil && o.ManagedObject.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetManagedObject gets a reference to the given InventoryBaseRelationship and assigns it to the ManagedObject field.
+// SetManagedObject gets a reference to the given NullableInventoryBaseRelationship and assigns it to the ManagedObject field.
 func (o *CondHclStatus) SetManagedObject(v InventoryBaseRelationship) {
-	o.ManagedObject = &v
+	o.ManagedObject.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetManagedObjectNil sets the value for ManagedObject to be an explicit nil
+func (o *CondHclStatus) SetManagedObjectNil() {
+	o.ManagedObject.Set(nil)
+}
+
+// UnsetManagedObject ensures that no value is present for ManagedObject, not even an explicit nil
+func (o *CondHclStatus) UnsetManagedObject() {
+	o.ManagedObject.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondHclStatus) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CondHclStatus) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *CondHclStatus) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *CondHclStatus) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *CondHclStatus) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *CondHclStatus) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o CondHclStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CondHclStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ComponentStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ComponentStatus) {
 		toSerialize["ComponentStatus"] = o.ComponentStatus
 	}
-	if o.HardwareStatus != nil {
+	if !IsNil(o.HardwareStatus) {
 		toSerialize["HardwareStatus"] = o.HardwareStatus
 	}
-	if o.HclFirmwareVersion != nil {
+	if !IsNil(o.HclFirmwareVersion) {
 		toSerialize["HclFirmwareVersion"] = o.HclFirmwareVersion
 	}
-	if o.HclModel != nil {
+	if !IsNil(o.HclModel) {
 		toSerialize["HclModel"] = o.HclModel
 	}
-	if o.HclOsVendor != nil {
+	if !IsNil(o.HclOsVendor) {
 		toSerialize["HclOsVendor"] = o.HclOsVendor
 	}
-	if o.HclOsVersion != nil {
+	if !IsNil(o.HclOsVersion) {
 		toSerialize["HclOsVersion"] = o.HclOsVersion
 	}
-	if o.HclProcessor != nil {
+	if !IsNil(o.HclProcessor) {
 		toSerialize["HclProcessor"] = o.HclProcessor
 	}
-	if o.HclValidationTime != nil {
+	if !IsNil(o.HclValidationTime) {
 		toSerialize["HclValidationTime"] = o.HclValidationTime
 	}
-	if o.InvFirmwareVersion != nil {
+	if !IsNil(o.InvFirmwareVersion) {
 		toSerialize["InvFirmwareVersion"] = o.InvFirmwareVersion
 	}
-	if o.InvModel != nil {
+	if !IsNil(o.InvModel) {
 		toSerialize["InvModel"] = o.InvModel
 	}
-	if o.InvOsVendor != nil {
+	if !IsNil(o.InvOsVendor) {
 		toSerialize["InvOsVendor"] = o.InvOsVendor
 	}
-	if o.InvOsVersion != nil {
+	if !IsNil(o.InvOsVersion) {
 		toSerialize["InvOsVersion"] = o.InvOsVersion
 	}
-	if o.InvProcessor != nil {
+	if !IsNil(o.InvProcessor) {
 		toSerialize["InvProcessor"] = o.InvProcessor
 	}
-	if o.Reason != nil {
+	if !IsNil(o.Reason) {
 		toSerialize["Reason"] = o.Reason
 	}
-	if o.ServerReason != nil {
+	if !IsNil(o.ServerReason) {
 		toSerialize["ServerReason"] = o.ServerReason
 	}
-	if o.SoftwareStatus != nil {
+	if !IsNil(o.SoftwareStatus) {
 		toSerialize["SoftwareStatus"] = o.SoftwareStatus
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
 	if o.Details != nil {
 		toSerialize["Details"] = o.Details
 	}
-	if o.ManagedObject != nil {
-		toSerialize["ManagedObject"] = o.ManagedObject
+	if o.ManagedObject.IsSet() {
+		toSerialize["ManagedObject"] = o.ManagedObject.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CondHclStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CondHclStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CondHclStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -905,14 +957,14 @@ func (o *CondHclStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// The HCL compatibility status of the managed object. The status can be one of the following \"Incomplete\" - there is no enough information to evaluate against the HCL data \"Validated\" - all components have been evaluated against the HCL and they all have \"Validated\" status \"Not-Listed\" - all components have been evaluated against the HCL and one or more have \"Not-Listed\" status. \"Not-Evaluated\" - server is not evaluated against the HCL because it is exempted. * `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information. * `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL. * `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL. * `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL. * `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.
 		Status *string `json:"Status,omitempty"`
 		// An array of relationships to condHclStatusDetail resources.
-		Details          []CondHclStatusDetailRelationship    `json:"Details,omitempty"`
-		ManagedObject    *InventoryBaseRelationship           `json:"ManagedObject,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Details          []CondHclStatusDetailRelationship           `json:"Details,omitempty"`
+		ManagedObject    NullableInventoryBaseRelationship           `json:"ManagedObject,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varCondHclStatusWithoutEmbeddedStruct := CondHclStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCondHclStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCondHclStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varCondHclStatus := _CondHclStatus{}
 		varCondHclStatus.ClassId = varCondHclStatusWithoutEmbeddedStruct.ClassId
@@ -944,7 +996,7 @@ func (o *CondHclStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCondHclStatus := _CondHclStatus{}
 
-	err = json.Unmarshal(bytes, &varCondHclStatus)
+	err = json.Unmarshal(data, &varCondHclStatus)
 	if err == nil {
 		o.MoBaseMo = varCondHclStatus.MoBaseMo
 	} else {
@@ -953,7 +1005,7 @@ func (o *CondHclStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ComponentStatus")

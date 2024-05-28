@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppDiskEvent"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppDiskEvent"]
-**Disk** | Pointer to [**StorageNetAppBaseDiskRelationship**](StorageNetAppBaseDiskRelationship.md) |  | [optional] 
+**Disk** | Pointer to [**NullableStorageNetAppBaseDiskRelationship**](StorageNetAppBaseDiskRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetDisk sets Disk field to given value.
 
 HasDisk returns a boolean if a field has been set.
 
+### SetDiskNil
+
+`func (o *StorageNetAppDiskEvent) SetDiskNil(b bool)`
+
+ SetDiskNil sets the value for Disk to be an explicit nil
+
+### UnsetDisk
+`func (o *StorageNetAppDiskEvent) UnsetDisk()`
+
+UnsetDisk ensures that no value is present for Disk, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

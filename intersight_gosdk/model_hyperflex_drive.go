@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexDrive type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexDrive{}
 
 // HyperflexDrive A Hyperflex drive entity attached to a node in a Hyperflex cluster.
 type HyperflexDrive struct {
@@ -55,9 +59,9 @@ type HyperflexDrive struct {
 	// The unique identifier of the Hyperflex drive.
 	Uuid *string `json:"Uuid,omitempty"`
 	// The firmware version of the Hyperflex drive.
-	Version              *string                          `json:"Version,omitempty"`
-	LocatorLed           *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
-	Node                 *HyperflexNodeRelationship       `json:"Node,omitempty"`
+	Version              *string                                 `json:"Version,omitempty"`
+	LocatorLed           NullableEquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
+	Node                 NullableHyperflexNodeRelationship       `json:"Node,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -136,7 +140,7 @@ func (o *HyperflexDrive) SetObjectType(v string) {
 
 // GetCapacity returns the Capacity field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetCapacity() int64 {
-	if o == nil || o.Capacity == nil {
+	if o == nil || IsNil(o.Capacity) {
 		var ret int64
 		return ret
 	}
@@ -146,7 +150,7 @@ func (o *HyperflexDrive) GetCapacity() int64 {
 // GetCapacityOk returns a tuple with the Capacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetCapacityOk() (*int64, bool) {
-	if o == nil || o.Capacity == nil {
+	if o == nil || IsNil(o.Capacity) {
 		return nil, false
 	}
 	return o.Capacity, true
@@ -154,7 +158,7 @@ func (o *HyperflexDrive) GetCapacityOk() (*int64, bool) {
 
 // HasCapacity returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasCapacity() bool {
-	if o != nil && o.Capacity != nil {
+	if o != nil && !IsNil(o.Capacity) {
 		return true
 	}
 
@@ -168,7 +172,7 @@ func (o *HyperflexDrive) SetCapacity(v int64) {
 
 // GetDiskUseState returns the DiskUseState field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetDiskUseState() string {
-	if o == nil || o.DiskUseState == nil {
+	if o == nil || IsNil(o.DiskUseState) {
 		var ret string
 		return ret
 	}
@@ -178,7 +182,7 @@ func (o *HyperflexDrive) GetDiskUseState() string {
 // GetDiskUseStateOk returns a tuple with the DiskUseState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetDiskUseStateOk() (*string, bool) {
-	if o == nil || o.DiskUseState == nil {
+	if o == nil || IsNil(o.DiskUseState) {
 		return nil, false
 	}
 	return o.DiskUseState, true
@@ -186,7 +190,7 @@ func (o *HyperflexDrive) GetDiskUseStateOk() (*string, bool) {
 
 // HasDiskUseState returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasDiskUseState() bool {
-	if o != nil && o.DiskUseState != nil {
+	if o != nil && !IsNil(o.DiskUseState) {
 		return true
 	}
 
@@ -200,7 +204,7 @@ func (o *HyperflexDrive) SetDiskUseState(v string) {
 
 // GetHostName returns the HostName field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetHostName() string {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		var ret string
 		return ret
 	}
@@ -210,7 +214,7 @@ func (o *HyperflexDrive) GetHostName() string {
 // GetHostNameOk returns a tuple with the HostName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetHostNameOk() (*string, bool) {
-	if o == nil || o.HostName == nil {
+	if o == nil || IsNil(o.HostName) {
 		return nil, false
 	}
 	return o.HostName, true
@@ -218,7 +222,7 @@ func (o *HyperflexDrive) GetHostNameOk() (*string, bool) {
 
 // HasHostName returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasHostName() bool {
-	if o != nil && o.HostName != nil {
+	if o != nil && !IsNil(o.HostName) {
 		return true
 	}
 
@@ -232,7 +236,7 @@ func (o *HyperflexDrive) SetHostName(v string) {
 
 // GetHostUuid returns the HostUuid field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetHostUuid() string {
-	if o == nil || o.HostUuid == nil {
+	if o == nil || IsNil(o.HostUuid) {
 		var ret string
 		return ret
 	}
@@ -242,7 +246,7 @@ func (o *HyperflexDrive) GetHostUuid() string {
 // GetHostUuidOk returns a tuple with the HostUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetHostUuidOk() (*string, bool) {
-	if o == nil || o.HostUuid == nil {
+	if o == nil || IsNil(o.HostUuid) {
 		return nil, false
 	}
 	return o.HostUuid, true
@@ -250,7 +254,7 @@ func (o *HyperflexDrive) GetHostUuidOk() (*string, bool) {
 
 // HasHostUuid returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasHostUuid() bool {
-	if o != nil && o.HostUuid != nil {
+	if o != nil && !IsNil(o.HostUuid) {
 		return true
 	}
 
@@ -264,7 +268,7 @@ func (o *HyperflexDrive) SetHostUuid(v string) {
 
 // GetModelNumber returns the ModelNumber field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetModelNumber() string {
-	if o == nil || o.ModelNumber == nil {
+	if o == nil || IsNil(o.ModelNumber) {
 		var ret string
 		return ret
 	}
@@ -274,7 +278,7 @@ func (o *HyperflexDrive) GetModelNumber() string {
 // GetModelNumberOk returns a tuple with the ModelNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetModelNumberOk() (*string, bool) {
-	if o == nil || o.ModelNumber == nil {
+	if o == nil || IsNil(o.ModelNumber) {
 		return nil, false
 	}
 	return o.ModelNumber, true
@@ -282,7 +286,7 @@ func (o *HyperflexDrive) GetModelNumberOk() (*string, bool) {
 
 // HasModelNumber returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasModelNumber() bool {
-	if o != nil && o.ModelNumber != nil {
+	if o != nil && !IsNil(o.ModelNumber) {
 		return true
 	}
 
@@ -296,7 +300,7 @@ func (o *HyperflexDrive) SetModelNumber(v string) {
 
 // GetNodeUuid returns the NodeUuid field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetNodeUuid() string {
-	if o == nil || o.NodeUuid == nil {
+	if o == nil || IsNil(o.NodeUuid) {
 		var ret string
 		return ret
 	}
@@ -306,7 +310,7 @@ func (o *HyperflexDrive) GetNodeUuid() string {
 // GetNodeUuidOk returns a tuple with the NodeUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetNodeUuidOk() (*string, bool) {
-	if o == nil || o.NodeUuid == nil {
+	if o == nil || IsNil(o.NodeUuid) {
 		return nil, false
 	}
 	return o.NodeUuid, true
@@ -314,7 +318,7 @@ func (o *HyperflexDrive) GetNodeUuidOk() (*string, bool) {
 
 // HasNodeUuid returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasNodeUuid() bool {
-	if o != nil && o.NodeUuid != nil {
+	if o != nil && !IsNil(o.NodeUuid) {
 		return true
 	}
 
@@ -328,7 +332,7 @@ func (o *HyperflexDrive) SetNodeUuid(v string) {
 
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetPath() string {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		var ret string
 		return ret
 	}
@@ -338,7 +342,7 @@ func (o *HyperflexDrive) GetPath() string {
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetPathOk() (*string, bool) {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		return nil, false
 	}
 	return o.Path, true
@@ -346,7 +350,7 @@ func (o *HyperflexDrive) GetPathOk() (*string, bool) {
 
 // HasPath returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasPath() bool {
-	if o != nil && o.Path != nil {
+	if o != nil && !IsNil(o.Path) {
 		return true
 	}
 
@@ -360,7 +364,7 @@ func (o *HyperflexDrive) SetPath(v string) {
 
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetProtocol() string {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		var ret string
 		return ret
 	}
@@ -370,7 +374,7 @@ func (o *HyperflexDrive) GetProtocol() string {
 // GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetProtocolOk() (*string, bool) {
-	if o == nil || o.Protocol == nil {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
 	return o.Protocol, true
@@ -378,7 +382,7 @@ func (o *HyperflexDrive) GetProtocolOk() (*string, bool) {
 
 // HasProtocol returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasProtocol() bool {
-	if o != nil && o.Protocol != nil {
+	if o != nil && !IsNil(o.Protocol) {
 		return true
 	}
 
@@ -392,7 +396,7 @@ func (o *HyperflexDrive) SetProtocol(v string) {
 
 // GetSerialNumber returns the SerialNumber field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetSerialNumber() string {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		var ret string
 		return ret
 	}
@@ -402,7 +406,7 @@ func (o *HyperflexDrive) GetSerialNumber() string {
 // GetSerialNumberOk returns a tuple with the SerialNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetSerialNumberOk() (*string, bool) {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		return nil, false
 	}
 	return o.SerialNumber, true
@@ -410,7 +414,7 @@ func (o *HyperflexDrive) GetSerialNumberOk() (*string, bool) {
 
 // HasSerialNumber returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasSerialNumber() bool {
-	if o != nil && o.SerialNumber != nil {
+	if o != nil && !IsNil(o.SerialNumber) {
 		return true
 	}
 
@@ -424,7 +428,7 @@ func (o *HyperflexDrive) SetSerialNumber(v string) {
 
 // GetSlotNumber returns the SlotNumber field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetSlotNumber() string {
-	if o == nil || o.SlotNumber == nil {
+	if o == nil || IsNil(o.SlotNumber) {
 		var ret string
 		return ret
 	}
@@ -434,7 +438,7 @@ func (o *HyperflexDrive) GetSlotNumber() string {
 // GetSlotNumberOk returns a tuple with the SlotNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetSlotNumberOk() (*string, bool) {
-	if o == nil || o.SlotNumber == nil {
+	if o == nil || IsNil(o.SlotNumber) {
 		return nil, false
 	}
 	return o.SlotNumber, true
@@ -442,7 +446,7 @@ func (o *HyperflexDrive) GetSlotNumberOk() (*string, bool) {
 
 // HasSlotNumber returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasSlotNumber() bool {
-	if o != nil && o.SlotNumber != nil {
+	if o != nil && !IsNil(o.SlotNumber) {
 		return true
 	}
 
@@ -456,7 +460,7 @@ func (o *HyperflexDrive) SetSlotNumber(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -466,7 +470,7 @@ func (o *HyperflexDrive) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -474,7 +478,7 @@ func (o *HyperflexDrive) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -488,7 +492,7 @@ func (o *HyperflexDrive) SetStatus(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -498,7 +502,7 @@ func (o *HyperflexDrive) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -506,7 +510,7 @@ func (o *HyperflexDrive) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -520,7 +524,7 @@ func (o *HyperflexDrive) SetType(v string) {
 
 // GetUsage returns the Usage field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetUsage() string {
-	if o == nil || o.Usage == nil {
+	if o == nil || IsNil(o.Usage) {
 		var ret string
 		return ret
 	}
@@ -530,7 +534,7 @@ func (o *HyperflexDrive) GetUsage() string {
 // GetUsageOk returns a tuple with the Usage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetUsageOk() (*string, bool) {
-	if o == nil || o.Usage == nil {
+	if o == nil || IsNil(o.Usage) {
 		return nil, false
 	}
 	return o.Usage, true
@@ -538,7 +542,7 @@ func (o *HyperflexDrive) GetUsageOk() (*string, bool) {
 
 // HasUsage returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasUsage() bool {
-	if o != nil && o.Usage != nil {
+	if o != nil && !IsNil(o.Usage) {
 		return true
 	}
 
@@ -552,7 +556,7 @@ func (o *HyperflexDrive) SetUsage(v string) {
 
 // GetUsedCapacity returns the UsedCapacity field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetUsedCapacity() int64 {
-	if o == nil || o.UsedCapacity == nil {
+	if o == nil || IsNil(o.UsedCapacity) {
 		var ret int64
 		return ret
 	}
@@ -562,7 +566,7 @@ func (o *HyperflexDrive) GetUsedCapacity() int64 {
 // GetUsedCapacityOk returns a tuple with the UsedCapacity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetUsedCapacityOk() (*int64, bool) {
-	if o == nil || o.UsedCapacity == nil {
+	if o == nil || IsNil(o.UsedCapacity) {
 		return nil, false
 	}
 	return o.UsedCapacity, true
@@ -570,7 +574,7 @@ func (o *HyperflexDrive) GetUsedCapacityOk() (*int64, bool) {
 
 // HasUsedCapacity returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasUsedCapacity() bool {
-	if o != nil && o.UsedCapacity != nil {
+	if o != nil && !IsNil(o.UsedCapacity) {
 		return true
 	}
 
@@ -584,7 +588,7 @@ func (o *HyperflexDrive) SetUsedCapacity(v int64) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -594,7 +598,7 @@ func (o *HyperflexDrive) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -602,7 +606,7 @@ func (o *HyperflexDrive) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -616,7 +620,7 @@ func (o *HyperflexDrive) SetUuid(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HyperflexDrive) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -626,7 +630,7 @@ func (o *HyperflexDrive) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexDrive) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -634,7 +638,7 @@ func (o *HyperflexDrive) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -646,149 +650,197 @@ func (o *HyperflexDrive) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetLocatorLed returns the LocatorLed field value if set, zero value otherwise.
+// GetLocatorLed returns the LocatorLed field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexDrive) GetLocatorLed() EquipmentLocatorLedRelationship {
-	if o == nil || o.LocatorLed == nil {
+	if o == nil || IsNil(o.LocatorLed.Get()) {
 		var ret EquipmentLocatorLedRelationship
 		return ret
 	}
-	return *o.LocatorLed
+	return *o.LocatorLed.Get()
 }
 
 // GetLocatorLedOk returns a tuple with the LocatorLed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexDrive) GetLocatorLedOk() (*EquipmentLocatorLedRelationship, bool) {
-	if o == nil || o.LocatorLed == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LocatorLed, true
+	return o.LocatorLed.Get(), o.LocatorLed.IsSet()
 }
 
 // HasLocatorLed returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasLocatorLed() bool {
-	if o != nil && o.LocatorLed != nil {
+	if o != nil && o.LocatorLed.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocatorLed gets a reference to the given EquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
+// SetLocatorLed gets a reference to the given NullableEquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
 func (o *HyperflexDrive) SetLocatorLed(v EquipmentLocatorLedRelationship) {
-	o.LocatorLed = &v
+	o.LocatorLed.Set(&v)
 }
 
-// GetNode returns the Node field value if set, zero value otherwise.
+// SetLocatorLedNil sets the value for LocatorLed to be an explicit nil
+func (o *HyperflexDrive) SetLocatorLedNil() {
+	o.LocatorLed.Set(nil)
+}
+
+// UnsetLocatorLed ensures that no value is present for LocatorLed, not even an explicit nil
+func (o *HyperflexDrive) UnsetLocatorLed() {
+	o.LocatorLed.Unset()
+}
+
+// GetNode returns the Node field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexDrive) GetNode() HyperflexNodeRelationship {
-	if o == nil || o.Node == nil {
+	if o == nil || IsNil(o.Node.Get()) {
 		var ret HyperflexNodeRelationship
 		return ret
 	}
-	return *o.Node
+	return *o.Node.Get()
 }
 
 // GetNodeOk returns a tuple with the Node field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexDrive) GetNodeOk() (*HyperflexNodeRelationship, bool) {
-	if o == nil || o.Node == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Node, true
+	return o.Node.Get(), o.Node.IsSet()
 }
 
 // HasNode returns a boolean if a field has been set.
 func (o *HyperflexDrive) HasNode() bool {
-	if o != nil && o.Node != nil {
+	if o != nil && o.Node.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNode gets a reference to the given HyperflexNodeRelationship and assigns it to the Node field.
+// SetNode gets a reference to the given NullableHyperflexNodeRelationship and assigns it to the Node field.
 func (o *HyperflexDrive) SetNode(v HyperflexNodeRelationship) {
-	o.Node = &v
+	o.Node.Set(&v)
+}
+
+// SetNodeNil sets the value for Node to be an explicit nil
+func (o *HyperflexDrive) SetNodeNil() {
+	o.Node.Set(nil)
+}
+
+// UnsetNode ensures that no value is present for Node, not even an explicit nil
+func (o *HyperflexDrive) UnsetNode() {
+	o.Node.Unset()
 }
 
 func (o HyperflexDrive) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexDrive) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Capacity != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Capacity) {
 		toSerialize["Capacity"] = o.Capacity
 	}
-	if o.DiskUseState != nil {
+	if !IsNil(o.DiskUseState) {
 		toSerialize["DiskUseState"] = o.DiskUseState
 	}
-	if o.HostName != nil {
+	if !IsNil(o.HostName) {
 		toSerialize["HostName"] = o.HostName
 	}
-	if o.HostUuid != nil {
+	if !IsNil(o.HostUuid) {
 		toSerialize["HostUuid"] = o.HostUuid
 	}
-	if o.ModelNumber != nil {
+	if !IsNil(o.ModelNumber) {
 		toSerialize["ModelNumber"] = o.ModelNumber
 	}
-	if o.NodeUuid != nil {
+	if !IsNil(o.NodeUuid) {
 		toSerialize["NodeUuid"] = o.NodeUuid
 	}
-	if o.Path != nil {
+	if !IsNil(o.Path) {
 		toSerialize["Path"] = o.Path
 	}
-	if o.Protocol != nil {
+	if !IsNil(o.Protocol) {
 		toSerialize["Protocol"] = o.Protocol
 	}
-	if o.SerialNumber != nil {
+	if !IsNil(o.SerialNumber) {
 		toSerialize["SerialNumber"] = o.SerialNumber
 	}
-	if o.SlotNumber != nil {
+	if !IsNil(o.SlotNumber) {
 		toSerialize["SlotNumber"] = o.SlotNumber
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Usage != nil {
+	if !IsNil(o.Usage) {
 		toSerialize["Usage"] = o.Usage
 	}
-	if o.UsedCapacity != nil {
+	if !IsNil(o.UsedCapacity) {
 		toSerialize["UsedCapacity"] = o.UsedCapacity
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.LocatorLed != nil {
-		toSerialize["LocatorLed"] = o.LocatorLed
+	if o.LocatorLed.IsSet() {
+		toSerialize["LocatorLed"] = o.LocatorLed.Get()
 	}
-	if o.Node != nil {
-		toSerialize["Node"] = o.Node
+	if o.Node.IsSet() {
+		toSerialize["Node"] = o.Node.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexDrive) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexDrive) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexDriveWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -825,14 +877,14 @@ func (o *HyperflexDrive) UnmarshalJSON(bytes []byte) (err error) {
 		// The unique identifier of the Hyperflex drive.
 		Uuid *string `json:"Uuid,omitempty"`
 		// The firmware version of the Hyperflex drive.
-		Version    *string                          `json:"Version,omitempty"`
-		LocatorLed *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
-		Node       *HyperflexNodeRelationship       `json:"Node,omitempty"`
+		Version    *string                                 `json:"Version,omitempty"`
+		LocatorLed NullableEquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
+		Node       NullableHyperflexNodeRelationship       `json:"Node,omitempty"`
 	}
 
 	varHyperflexDriveWithoutEmbeddedStruct := HyperflexDriveWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexDriveWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexDriveWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexDrive := _HyperflexDrive{}
 		varHyperflexDrive.ClassId = varHyperflexDriveWithoutEmbeddedStruct.ClassId
@@ -862,7 +914,7 @@ func (o *HyperflexDrive) UnmarshalJSON(bytes []byte) (err error) {
 
 	varHyperflexDrive := _HyperflexDrive{}
 
-	err = json.Unmarshal(bytes, &varHyperflexDrive)
+	err = json.Unmarshal(data, &varHyperflexDrive)
 	if err == nil {
 		o.MoBaseMo = varHyperflexDrive.MoBaseMo
 	} else {
@@ -871,7 +923,7 @@ func (o *HyperflexDrive) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Capacity")

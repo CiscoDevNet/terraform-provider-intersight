@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.UnsupportedVersionUpgrade"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.UnsupportedVersionUpgrade"]
 **UpgradeStatus** | Pointer to **string** | Workflow status of firmware upgrade. * &#x60;None&#x60; - Upgrade status is none when upgrade is in progress. * &#x60;Completed&#x60; - Upgrade completed successfully. * &#x60;Failed&#x60; - Upgrade status is failed when upgrade has failed. | [optional] [default to "None"]
-**Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**Distributable** | Pointer to [**FirmwareDistributableRelationship**](FirmwareDistributableRelationship.md) |  | [optional] 
-**PhysicalIdentity** | Pointer to [**EquipmentPhysicalIdentityRelationship**](EquipmentPhysicalIdentityRelationship.md) |  | [optional] 
+**Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Distributable** | Pointer to [**NullableFirmwareDistributableRelationship**](FirmwareDistributableRelationship.md) |  | [optional] 
+**PhysicalIdentity** | Pointer to [**NullableEquipmentPhysicalIdentityRelationship**](EquipmentPhysicalIdentityRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -120,6 +120,16 @@ SetDevice sets Device field to given value.
 
 HasDevice returns a boolean if a field has been set.
 
+### SetDeviceNil
+
+`func (o *FirmwareUnsupportedVersionUpgrade) SetDeviceNil(b bool)`
+
+ SetDeviceNil sets the value for Device to be an explicit nil
+
+### UnsetDevice
+`func (o *FirmwareUnsupportedVersionUpgrade) UnsetDevice()`
+
+UnsetDevice ensures that no value is present for Device, not even an explicit nil
 ### GetDistributable
 
 `func (o *FirmwareUnsupportedVersionUpgrade) GetDistributable() FirmwareDistributableRelationship`
@@ -145,6 +155,16 @@ SetDistributable sets Distributable field to given value.
 
 HasDistributable returns a boolean if a field has been set.
 
+### SetDistributableNil
+
+`func (o *FirmwareUnsupportedVersionUpgrade) SetDistributableNil(b bool)`
+
+ SetDistributableNil sets the value for Distributable to be an explicit nil
+
+### UnsetDistributable
+`func (o *FirmwareUnsupportedVersionUpgrade) UnsetDistributable()`
+
+UnsetDistributable ensures that no value is present for Distributable, not even an explicit nil
 ### GetPhysicalIdentity
 
 `func (o *FirmwareUnsupportedVersionUpgrade) GetPhysicalIdentity() EquipmentPhysicalIdentityRelationship`
@@ -170,6 +190,16 @@ SetPhysicalIdentity sets PhysicalIdentity field to given value.
 
 HasPhysicalIdentity returns a boolean if a field has been set.
 
+### SetPhysicalIdentityNil
+
+`func (o *FirmwareUnsupportedVersionUpgrade) SetPhysicalIdentityNil(b bool)`
+
+ SetPhysicalIdentityNil sets the value for PhysicalIdentity to be an explicit nil
+
+### UnsetPhysicalIdentity
+`func (o *FirmwareUnsupportedVersionUpgrade) UnsetPhysicalIdentity()`
+
+UnsetPhysicalIdentity ensures that no value is present for PhysicalIdentity, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

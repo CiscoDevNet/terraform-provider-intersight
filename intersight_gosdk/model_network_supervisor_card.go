@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NetworkSupervisorCard type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NetworkSupervisorCard{}
 
 // NetworkSupervisorCard Concrete class for supervisor card.
 type NetworkSupervisorCard struct {
@@ -47,9 +51,9 @@ type NetworkSupervisorCard struct {
 	// The type of the supervisor card.
 	Type *string `json:"Type,omitempty"`
 	// An array of relationships to fcPhysicalPort resources.
-	FcPorts              []FcPhysicalPortRelationship         `json:"FcPorts,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	FcPorts              []FcPhysicalPortRelationship                `json:"FcPorts,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -128,7 +132,7 @@ func (o *NetworkSupervisorCard) SetObjectType(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *NetworkSupervisorCard) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -138,7 +142,7 @@ func (o *NetworkSupervisorCard) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkSupervisorCard) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -146,7 +150,7 @@ func (o *NetworkSupervisorCard) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -160,7 +164,7 @@ func (o *NetworkSupervisorCard) SetDescription(v string) {
 
 // GetHardwareVersion returns the HardwareVersion field value if set, zero value otherwise.
 func (o *NetworkSupervisorCard) GetHardwareVersion() string {
-	if o == nil || o.HardwareVersion == nil {
+	if o == nil || IsNil(o.HardwareVersion) {
 		var ret string
 		return ret
 	}
@@ -170,7 +174,7 @@ func (o *NetworkSupervisorCard) GetHardwareVersion() string {
 // GetHardwareVersionOk returns a tuple with the HardwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkSupervisorCard) GetHardwareVersionOk() (*string, bool) {
-	if o == nil || o.HardwareVersion == nil {
+	if o == nil || IsNil(o.HardwareVersion) {
 		return nil, false
 	}
 	return o.HardwareVersion, true
@@ -178,7 +182,7 @@ func (o *NetworkSupervisorCard) GetHardwareVersionOk() (*string, bool) {
 
 // HasHardwareVersion returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasHardwareVersion() bool {
-	if o != nil && o.HardwareVersion != nil {
+	if o != nil && !IsNil(o.HardwareVersion) {
 		return true
 	}
 
@@ -192,7 +196,7 @@ func (o *NetworkSupervisorCard) SetHardwareVersion(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *NetworkSupervisorCard) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -202,7 +206,7 @@ func (o *NetworkSupervisorCard) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkSupervisorCard) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -210,7 +214,7 @@ func (o *NetworkSupervisorCard) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -224,7 +228,7 @@ func (o *NetworkSupervisorCard) SetName(v string) {
 
 // GetNumberOfPorts returns the NumberOfPorts field value if set, zero value otherwise.
 func (o *NetworkSupervisorCard) GetNumberOfPorts() int64 {
-	if o == nil || o.NumberOfPorts == nil {
+	if o == nil || IsNil(o.NumberOfPorts) {
 		var ret int64
 		return ret
 	}
@@ -234,7 +238,7 @@ func (o *NetworkSupervisorCard) GetNumberOfPorts() int64 {
 // GetNumberOfPortsOk returns a tuple with the NumberOfPorts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkSupervisorCard) GetNumberOfPortsOk() (*int64, bool) {
-	if o == nil || o.NumberOfPorts == nil {
+	if o == nil || IsNil(o.NumberOfPorts) {
 		return nil, false
 	}
 	return o.NumberOfPorts, true
@@ -242,7 +246,7 @@ func (o *NetworkSupervisorCard) GetNumberOfPortsOk() (*int64, bool) {
 
 // HasNumberOfPorts returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasNumberOfPorts() bool {
-	if o != nil && o.NumberOfPorts != nil {
+	if o != nil && !IsNil(o.NumberOfPorts) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *NetworkSupervisorCard) SetNumberOfPorts(v int64) {
 
 // GetOperReason returns the OperReason field value if set, zero value otherwise.
 func (o *NetworkSupervisorCard) GetOperReason() string {
-	if o == nil || o.OperReason == nil {
+	if o == nil || IsNil(o.OperReason) {
 		var ret string
 		return ret
 	}
@@ -266,7 +270,7 @@ func (o *NetworkSupervisorCard) GetOperReason() string {
 // GetOperReasonOk returns a tuple with the OperReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkSupervisorCard) GetOperReasonOk() (*string, bool) {
-	if o == nil || o.OperReason == nil {
+	if o == nil || IsNil(o.OperReason) {
 		return nil, false
 	}
 	return o.OperReason, true
@@ -274,7 +278,7 @@ func (o *NetworkSupervisorCard) GetOperReasonOk() (*string, bool) {
 
 // HasOperReason returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasOperReason() bool {
-	if o != nil && o.OperReason != nil {
+	if o != nil && !IsNil(o.OperReason) {
 		return true
 	}
 
@@ -288,7 +292,7 @@ func (o *NetworkSupervisorCard) SetOperReason(v string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *NetworkSupervisorCard) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -298,7 +302,7 @@ func (o *NetworkSupervisorCard) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkSupervisorCard) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -306,7 +310,7 @@ func (o *NetworkSupervisorCard) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -320,7 +324,7 @@ func (o *NetworkSupervisorCard) SetOperState(v string) {
 
 // GetPartNumber returns the PartNumber field value if set, zero value otherwise.
 func (o *NetworkSupervisorCard) GetPartNumber() string {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		var ret string
 		return ret
 	}
@@ -330,7 +334,7 @@ func (o *NetworkSupervisorCard) GetPartNumber() string {
 // GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkSupervisorCard) GetPartNumberOk() (*string, bool) {
-	if o == nil || o.PartNumber == nil {
+	if o == nil || IsNil(o.PartNumber) {
 		return nil, false
 	}
 	return o.PartNumber, true
@@ -338,7 +342,7 @@ func (o *NetworkSupervisorCard) GetPartNumberOk() (*string, bool) {
 
 // HasPartNumber returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasPartNumber() bool {
-	if o != nil && o.PartNumber != nil {
+	if o != nil && !IsNil(o.PartNumber) {
 		return true
 	}
 
@@ -352,7 +356,7 @@ func (o *NetworkSupervisorCard) SetPartNumber(v string) {
 
 // GetPowerState returns the PowerState field value if set, zero value otherwise.
 func (o *NetworkSupervisorCard) GetPowerState() string {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		var ret string
 		return ret
 	}
@@ -362,7 +366,7 @@ func (o *NetworkSupervisorCard) GetPowerState() string {
 // GetPowerStateOk returns a tuple with the PowerState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkSupervisorCard) GetPowerStateOk() (*string, bool) {
-	if o == nil || o.PowerState == nil {
+	if o == nil || IsNil(o.PowerState) {
 		return nil, false
 	}
 	return o.PowerState, true
@@ -370,7 +374,7 @@ func (o *NetworkSupervisorCard) GetPowerStateOk() (*string, bool) {
 
 // HasPowerState returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasPowerState() bool {
-	if o != nil && o.PowerState != nil {
+	if o != nil && !IsNil(o.PowerState) {
 		return true
 	}
 
@@ -384,7 +388,7 @@ func (o *NetworkSupervisorCard) SetPowerState(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *NetworkSupervisorCard) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -394,7 +398,7 @@ func (o *NetworkSupervisorCard) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkSupervisorCard) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -402,7 +406,7 @@ func (o *NetworkSupervisorCard) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -416,7 +420,7 @@ func (o *NetworkSupervisorCard) SetStatus(v string) {
 
 // GetSupervisorId returns the SupervisorId field value if set, zero value otherwise.
 func (o *NetworkSupervisorCard) GetSupervisorId() string {
-	if o == nil || o.SupervisorId == nil {
+	if o == nil || IsNil(o.SupervisorId) {
 		var ret string
 		return ret
 	}
@@ -426,7 +430,7 @@ func (o *NetworkSupervisorCard) GetSupervisorId() string {
 // GetSupervisorIdOk returns a tuple with the SupervisorId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkSupervisorCard) GetSupervisorIdOk() (*string, bool) {
-	if o == nil || o.SupervisorId == nil {
+	if o == nil || IsNil(o.SupervisorId) {
 		return nil, false
 	}
 	return o.SupervisorId, true
@@ -434,7 +438,7 @@ func (o *NetworkSupervisorCard) GetSupervisorIdOk() (*string, bool) {
 
 // HasSupervisorId returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasSupervisorId() bool {
-	if o != nil && o.SupervisorId != nil {
+	if o != nil && !IsNil(o.SupervisorId) {
 		return true
 	}
 
@@ -448,7 +452,7 @@ func (o *NetworkSupervisorCard) SetSupervisorId(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *NetworkSupervisorCard) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -458,7 +462,7 @@ func (o *NetworkSupervisorCard) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkSupervisorCard) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -466,7 +470,7 @@ func (o *NetworkSupervisorCard) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -491,7 +495,7 @@ func (o *NetworkSupervisorCard) GetFcPorts() []FcPhysicalPortRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkSupervisorCard) GetFcPortsOk() ([]FcPhysicalPortRelationship, bool) {
-	if o == nil || o.FcPorts == nil {
+	if o == nil || IsNil(o.FcPorts) {
 		return nil, false
 	}
 	return o.FcPorts, true
@@ -499,7 +503,7 @@ func (o *NetworkSupervisorCard) GetFcPortsOk() ([]FcPhysicalPortRelationship, bo
 
 // HasFcPorts returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasFcPorts() bool {
-	if o != nil && o.FcPorts != nil {
+	if o != nil && IsNil(o.FcPorts) {
 		return true
 	}
 
@@ -511,137 +515,185 @@ func (o *NetworkSupervisorCard) SetFcPorts(v []FcPhysicalPortRelationship) {
 	o.FcPorts = v
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkSupervisorCard) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkSupervisorCard) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *NetworkSupervisorCard) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *NetworkSupervisorCard) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *NetworkSupervisorCard) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkSupervisorCard) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkSupervisorCard) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NetworkSupervisorCard) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NetworkSupervisorCard) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NetworkSupervisorCard) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NetworkSupervisorCard) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NetworkSupervisorCard) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NetworkSupervisorCard) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedEquipmentBase, errEquipmentBase := json.Marshal(o.EquipmentBase)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
 	errEquipmentBase = json.Unmarshal([]byte(serializedEquipmentBase), &toSerialize)
 	if errEquipmentBase != nil {
-		return []byte{}, errEquipmentBase
+		return map[string]interface{}{}, errEquipmentBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Description != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
-	if o.HardwareVersion != nil {
+	if !IsNil(o.HardwareVersion) {
 		toSerialize["HardwareVersion"] = o.HardwareVersion
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.NumberOfPorts != nil {
+	if !IsNil(o.NumberOfPorts) {
 		toSerialize["NumberOfPorts"] = o.NumberOfPorts
 	}
-	if o.OperReason != nil {
+	if !IsNil(o.OperReason) {
 		toSerialize["OperReason"] = o.OperReason
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.PartNumber != nil {
+	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if o.PowerState != nil {
+	if !IsNil(o.PowerState) {
 		toSerialize["PowerState"] = o.PowerState
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.SupervisorId != nil {
+	if !IsNil(o.SupervisorId) {
 		toSerialize["SupervisorId"] = o.SupervisorId
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 	if o.FcPorts != nil {
 		toSerialize["FcPorts"] = o.FcPorts
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NetworkSupervisorCard) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NetworkSupervisorCard) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NetworkSupervisorCardWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -670,14 +722,14 @@ func (o *NetworkSupervisorCard) UnmarshalJSON(bytes []byte) (err error) {
 		// The type of the supervisor card.
 		Type *string `json:"Type,omitempty"`
 		// An array of relationships to fcPhysicalPort resources.
-		FcPorts          []FcPhysicalPortRelationship         `json:"FcPorts,omitempty"`
-		NetworkElement   *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		FcPorts          []FcPhysicalPortRelationship                `json:"FcPorts,omitempty"`
+		NetworkElement   NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNetworkSupervisorCardWithoutEmbeddedStruct := NetworkSupervisorCardWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNetworkSupervisorCardWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNetworkSupervisorCardWithoutEmbeddedStruct)
 	if err == nil {
 		varNetworkSupervisorCard := _NetworkSupervisorCard{}
 		varNetworkSupervisorCard.ClassId = varNetworkSupervisorCardWithoutEmbeddedStruct.ClassId
@@ -703,7 +755,7 @@ func (o *NetworkSupervisorCard) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNetworkSupervisorCard := _NetworkSupervisorCard{}
 
-	err = json.Unmarshal(bytes, &varNetworkSupervisorCard)
+	err = json.Unmarshal(data, &varNetworkSupervisorCard)
 	if err == nil {
 		o.EquipmentBase = varNetworkSupervisorCard.EquipmentBase
 	} else {
@@ -712,7 +764,7 @@ func (o *NetworkSupervisorCard) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Description")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageExternalLun type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageExternalLun{}
 
 // StorageExternalLun The following properties are restored for each LU on the external storage system.
 type StorageExternalLun struct {
@@ -112,7 +116,7 @@ func (o *StorageExternalLun) SetObjectType(v string) {
 
 // GetExternalLun returns the ExternalLun field value if set, zero value otherwise.
 func (o *StorageExternalLun) GetExternalLun() int64 {
-	if o == nil || o.ExternalLun == nil {
+	if o == nil || IsNil(o.ExternalLun) {
 		var ret int64
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *StorageExternalLun) GetExternalLun() int64 {
 // GetExternalLunOk returns a tuple with the ExternalLun field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalLun) GetExternalLunOk() (*int64, bool) {
-	if o == nil || o.ExternalLun == nil {
+	if o == nil || IsNil(o.ExternalLun) {
 		return nil, false
 	}
 	return o.ExternalLun, true
@@ -130,7 +134,7 @@ func (o *StorageExternalLun) GetExternalLunOk() (*int64, bool) {
 
 // HasExternalLun returns a boolean if a field has been set.
 func (o *StorageExternalLun) HasExternalLun() bool {
-	if o != nil && o.ExternalLun != nil {
+	if o != nil && !IsNil(o.ExternalLun) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *StorageExternalLun) SetExternalLun(v int64) {
 
 // GetExternalWwn returns the ExternalWwn field value if set, zero value otherwise.
 func (o *StorageExternalLun) GetExternalWwn() string {
-	if o == nil || o.ExternalWwn == nil {
+	if o == nil || IsNil(o.ExternalWwn) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *StorageExternalLun) GetExternalWwn() string {
 // GetExternalWwnOk returns a tuple with the ExternalWwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalLun) GetExternalWwnOk() (*string, bool) {
-	if o == nil || o.ExternalWwn == nil {
+	if o == nil || IsNil(o.ExternalWwn) {
 		return nil, false
 	}
 	return o.ExternalWwn, true
@@ -162,7 +166,7 @@ func (o *StorageExternalLun) GetExternalWwnOk() (*string, bool) {
 
 // HasExternalWwn returns a boolean if a field has been set.
 func (o *StorageExternalLun) HasExternalWwn() bool {
-	if o != nil && o.ExternalWwn != nil {
+	if o != nil && !IsNil(o.ExternalWwn) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *StorageExternalLun) SetExternalWwn(v string) {
 
 // GetPathStatus returns the PathStatus field value if set, zero value otherwise.
 func (o *StorageExternalLun) GetPathStatus() string {
-	if o == nil || o.PathStatus == nil {
+	if o == nil || IsNil(o.PathStatus) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *StorageExternalLun) GetPathStatus() string {
 // GetPathStatusOk returns a tuple with the PathStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalLun) GetPathStatusOk() (*string, bool) {
-	if o == nil || o.PathStatus == nil {
+	if o == nil || IsNil(o.PathStatus) {
 		return nil, false
 	}
 	return o.PathStatus, true
@@ -194,7 +198,7 @@ func (o *StorageExternalLun) GetPathStatusOk() (*string, bool) {
 
 // HasPathStatus returns a boolean if a field has been set.
 func (o *StorageExternalLun) HasPathStatus() bool {
-	if o != nil && o.PathStatus != nil {
+	if o != nil && !IsNil(o.PathStatus) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *StorageExternalLun) SetPathStatus(v string) {
 
 // GetPortId returns the PortId field value if set, zero value otherwise.
 func (o *StorageExternalLun) GetPortId() string {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *StorageExternalLun) GetPortId() string {
 // GetPortIdOk returns a tuple with the PortId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalLun) GetPortIdOk() (*string, bool) {
-	if o == nil || o.PortId == nil {
+	if o == nil || IsNil(o.PortId) {
 		return nil, false
 	}
 	return o.PortId, true
@@ -226,7 +230,7 @@ func (o *StorageExternalLun) GetPortIdOk() (*string, bool) {
 
 // HasPortId returns a boolean if a field has been set.
 func (o *StorageExternalLun) HasPortId() bool {
-	if o != nil && o.PortId != nil {
+	if o != nil && !IsNil(o.PortId) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *StorageExternalLun) SetPortId(v string) {
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *StorageExternalLun) GetPriority() int64 {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		var ret int64
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *StorageExternalLun) GetPriority() int64 {
 // GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageExternalLun) GetPriorityOk() (*int64, bool) {
-	if o == nil || o.Priority == nil {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
 	return o.Priority, true
@@ -258,7 +262,7 @@ func (o *StorageExternalLun) GetPriorityOk() (*int64, bool) {
 
 // HasPriority returns a boolean if a field has been set.
 func (o *StorageExternalLun) HasPriority() bool {
-	if o != nil && o.Priority != nil {
+	if o != nil && !IsNil(o.Priority) {
 		return true
 	}
 
@@ -271,34 +275,38 @@ func (o *StorageExternalLun) SetPriority(v int64) {
 }
 
 func (o StorageExternalLun) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageExternalLun) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ExternalLun != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ExternalLun) {
 		toSerialize["ExternalLun"] = o.ExternalLun
 	}
-	if o.ExternalWwn != nil {
+	if !IsNil(o.ExternalWwn) {
 		toSerialize["ExternalWwn"] = o.ExternalWwn
 	}
-	if o.PathStatus != nil {
+	if !IsNil(o.PathStatus) {
 		toSerialize["PathStatus"] = o.PathStatus
 	}
-	if o.PortId != nil {
+	if !IsNil(o.PortId) {
 		toSerialize["PortId"] = o.PortId
 	}
-	if o.Priority != nil {
+	if !IsNil(o.Priority) {
 		toSerialize["Priority"] = o.Priority
 	}
 
@@ -306,10 +314,32 @@ func (o StorageExternalLun) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageExternalLun) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageExternalLun) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageExternalLunWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -329,7 +359,7 @@ func (o *StorageExternalLun) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageExternalLunWithoutEmbeddedStruct := StorageExternalLunWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageExternalLunWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageExternalLunWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageExternalLun := _StorageExternalLun{}
 		varStorageExternalLun.ClassId = varStorageExternalLunWithoutEmbeddedStruct.ClassId
@@ -346,7 +376,7 @@ func (o *StorageExternalLun) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageExternalLun := _StorageExternalLun{}
 
-	err = json.Unmarshal(bytes, &varStorageExternalLun)
+	err = json.Unmarshal(data, &varStorageExternalLun)
 	if err == nil {
 		o.MoBaseComplexType = varStorageExternalLun.MoBaseComplexType
 	} else {
@@ -355,7 +385,7 @@ func (o *StorageExternalLun) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExternalLun")

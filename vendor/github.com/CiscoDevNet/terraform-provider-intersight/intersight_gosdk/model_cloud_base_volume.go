@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the CloudBaseVolume type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CloudBaseVolume{}
 
 // CloudBaseVolume A base Volume definition extended by cloud specific Volumes objects.
 type CloudBaseVolume struct {
@@ -122,7 +126,7 @@ func (o *CloudBaseVolume) SetObjectType(v string) {
 
 // GetBillingUnit returns the BillingUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseVolume) GetBillingUnit() CloudBillingUnit {
-	if o == nil || o.BillingUnit.Get() == nil {
+	if o == nil || IsNil(o.BillingUnit.Get()) {
 		var ret CloudBillingUnit
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *CloudBaseVolume) UnsetBillingUnit() {
 
 // GetEncryptionState returns the EncryptionState field value if set, zero value otherwise.
 func (o *CloudBaseVolume) GetEncryptionState() string {
-	if o == nil || o.EncryptionState == nil {
+	if o == nil || IsNil(o.EncryptionState) {
 		var ret string
 		return ret
 	}
@@ -175,7 +179,7 @@ func (o *CloudBaseVolume) GetEncryptionState() string {
 // GetEncryptionStateOk returns a tuple with the EncryptionState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseVolume) GetEncryptionStateOk() (*string, bool) {
-	if o == nil || o.EncryptionState == nil {
+	if o == nil || IsNil(o.EncryptionState) {
 		return nil, false
 	}
 	return o.EncryptionState, true
@@ -183,7 +187,7 @@ func (o *CloudBaseVolume) GetEncryptionStateOk() (*string, bool) {
 
 // HasEncryptionState returns a boolean if a field has been set.
 func (o *CloudBaseVolume) HasEncryptionState() bool {
-	if o != nil && o.EncryptionState != nil {
+	if o != nil && !IsNil(o.EncryptionState) {
 		return true
 	}
 
@@ -197,7 +201,7 @@ func (o *CloudBaseVolume) SetEncryptionState(v string) {
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
 func (o *CloudBaseVolume) GetIdentity() string {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		var ret string
 		return ret
 	}
@@ -207,7 +211,7 @@ func (o *CloudBaseVolume) GetIdentity() string {
 // GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseVolume) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
+	if o == nil || IsNil(o.Identity) {
 		return nil, false
 	}
 	return o.Identity, true
@@ -215,7 +219,7 @@ func (o *CloudBaseVolume) GetIdentityOk() (*string, bool) {
 
 // HasIdentity returns a boolean if a field has been set.
 func (o *CloudBaseVolume) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
+	if o != nil && !IsNil(o.Identity) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *CloudBaseVolume) GetInstanceAttachments() []CloudVolumeInstanceAttachme
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudBaseVolume) GetInstanceAttachmentsOk() ([]CloudVolumeInstanceAttachment, bool) {
-	if o == nil || o.InstanceAttachments == nil {
+	if o == nil || IsNil(o.InstanceAttachments) {
 		return nil, false
 	}
 	return o.InstanceAttachments, true
@@ -248,7 +252,7 @@ func (o *CloudBaseVolume) GetInstanceAttachmentsOk() ([]CloudVolumeInstanceAttac
 
 // HasInstanceAttachments returns a boolean if a field has been set.
 func (o *CloudBaseVolume) HasInstanceAttachments() bool {
-	if o != nil && o.InstanceAttachments != nil {
+	if o != nil && IsNil(o.InstanceAttachments) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *CloudBaseVolume) SetInstanceAttachments(v []CloudVolumeInstanceAttachme
 
 // GetIopsInfo returns the IopsInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseVolume) GetIopsInfo() CloudVolumeIopsInfo {
-	if o == nil || o.IopsInfo.Get() == nil {
+	if o == nil || IsNil(o.IopsInfo.Get()) {
 		var ret CloudVolumeIopsInfo
 		return ret
 	}
@@ -305,7 +309,7 @@ func (o *CloudBaseVolume) UnsetIopsInfo() {
 
 // GetRegionInfo returns the RegionInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseVolume) GetRegionInfo() CloudCloudRegion {
-	if o == nil || o.RegionInfo.Get() == nil {
+	if o == nil || IsNil(o.RegionInfo.Get()) {
 		var ret CloudCloudRegion
 		return ret
 	}
@@ -348,7 +352,7 @@ func (o *CloudBaseVolume) UnsetRegionInfo() {
 
 // GetSourceImageId returns the SourceImageId field value if set, zero value otherwise.
 func (o *CloudBaseVolume) GetSourceImageId() string {
-	if o == nil || o.SourceImageId == nil {
+	if o == nil || IsNil(o.SourceImageId) {
 		var ret string
 		return ret
 	}
@@ -358,7 +362,7 @@ func (o *CloudBaseVolume) GetSourceImageId() string {
 // GetSourceImageIdOk returns a tuple with the SourceImageId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseVolume) GetSourceImageIdOk() (*string, bool) {
-	if o == nil || o.SourceImageId == nil {
+	if o == nil || IsNil(o.SourceImageId) {
 		return nil, false
 	}
 	return o.SourceImageId, true
@@ -366,7 +370,7 @@ func (o *CloudBaseVolume) GetSourceImageIdOk() (*string, bool) {
 
 // HasSourceImageId returns a boolean if a field has been set.
 func (o *CloudBaseVolume) HasSourceImageId() bool {
-	if o != nil && o.SourceImageId != nil {
+	if o != nil && !IsNil(o.SourceImageId) {
 		return true
 	}
 
@@ -380,7 +384,7 @@ func (o *CloudBaseVolume) SetSourceImageId(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *CloudBaseVolume) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -390,7 +394,7 @@ func (o *CloudBaseVolume) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseVolume) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -398,7 +402,7 @@ func (o *CloudBaseVolume) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *CloudBaseVolume) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -412,7 +416,7 @@ func (o *CloudBaseVolume) SetState(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *CloudBaseVolume) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -422,7 +426,7 @@ func (o *CloudBaseVolume) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseVolume) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -430,7 +434,7 @@ func (o *CloudBaseVolume) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *CloudBaseVolume) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -444,7 +448,7 @@ func (o *CloudBaseVolume) SetUuid(v string) {
 
 // GetVolumeCreateTime returns the VolumeCreateTime field value if set, zero value otherwise.
 func (o *CloudBaseVolume) GetVolumeCreateTime() time.Time {
-	if o == nil || o.VolumeCreateTime == nil {
+	if o == nil || IsNil(o.VolumeCreateTime) {
 		var ret time.Time
 		return ret
 	}
@@ -454,7 +458,7 @@ func (o *CloudBaseVolume) GetVolumeCreateTime() time.Time {
 // GetVolumeCreateTimeOk returns a tuple with the VolumeCreateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CloudBaseVolume) GetVolumeCreateTimeOk() (*time.Time, bool) {
-	if o == nil || o.VolumeCreateTime == nil {
+	if o == nil || IsNil(o.VolumeCreateTime) {
 		return nil, false
 	}
 	return o.VolumeCreateTime, true
@@ -462,7 +466,7 @@ func (o *CloudBaseVolume) GetVolumeCreateTimeOk() (*time.Time, bool) {
 
 // HasVolumeCreateTime returns a boolean if a field has been set.
 func (o *CloudBaseVolume) HasVolumeCreateTime() bool {
-	if o != nil && o.VolumeCreateTime != nil {
+	if o != nil && !IsNil(o.VolumeCreateTime) {
 		return true
 	}
 
@@ -487,7 +491,7 @@ func (o *CloudBaseVolume) GetVolumeTags() []CloudCloudTag {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CloudBaseVolume) GetVolumeTagsOk() ([]CloudCloudTag, bool) {
-	if o == nil || o.VolumeTags == nil {
+	if o == nil || IsNil(o.VolumeTags) {
 		return nil, false
 	}
 	return o.VolumeTags, true
@@ -495,7 +499,7 @@ func (o *CloudBaseVolume) GetVolumeTagsOk() ([]CloudCloudTag, bool) {
 
 // HasVolumeTags returns a boolean if a field has been set.
 func (o *CloudBaseVolume) HasVolumeTags() bool {
-	if o != nil && o.VolumeTags != nil {
+	if o != nil && IsNil(o.VolumeTags) {
 		return true
 	}
 
@@ -509,7 +513,7 @@ func (o *CloudBaseVolume) SetVolumeTags(v []CloudCloudTag) {
 
 // GetVolumeType returns the VolumeType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseVolume) GetVolumeType() CloudVolumeType {
-	if o == nil || o.VolumeType.Get() == nil {
+	if o == nil || IsNil(o.VolumeType.Get()) {
 		var ret CloudVolumeType
 		return ret
 	}
@@ -552,7 +556,7 @@ func (o *CloudBaseVolume) UnsetVolumeType() {
 
 // GetZoneInfo returns the ZoneInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CloudBaseVolume) GetZoneInfo() CloudAvailabilityZone {
-	if o == nil || o.ZoneInfo.Get() == nil {
+	if o == nil || IsNil(o.ZoneInfo.Get()) {
 		var ret CloudAvailabilityZone
 		return ret
 	}
@@ -594,28 +598,32 @@ func (o *CloudBaseVolume) UnsetZoneInfo() {
 }
 
 func (o CloudBaseVolume) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CloudBaseVolume) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedVirtualizationBaseVirtualDisk, errVirtualizationBaseVirtualDisk := json.Marshal(o.VirtualizationBaseVirtualDisk)
 	if errVirtualizationBaseVirtualDisk != nil {
-		return []byte{}, errVirtualizationBaseVirtualDisk
+		return map[string]interface{}{}, errVirtualizationBaseVirtualDisk
 	}
 	errVirtualizationBaseVirtualDisk = json.Unmarshal([]byte(serializedVirtualizationBaseVirtualDisk), &toSerialize)
 	if errVirtualizationBaseVirtualDisk != nil {
-		return []byte{}, errVirtualizationBaseVirtualDisk
+		return map[string]interface{}{}, errVirtualizationBaseVirtualDisk
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.BillingUnit.IsSet() {
 		toSerialize["BillingUnit"] = o.BillingUnit.Get()
 	}
-	if o.EncryptionState != nil {
+	if !IsNil(o.EncryptionState) {
 		toSerialize["EncryptionState"] = o.EncryptionState
 	}
-	if o.Identity != nil {
+	if !IsNil(o.Identity) {
 		toSerialize["Identity"] = o.Identity
 	}
 	if o.InstanceAttachments != nil {
@@ -627,16 +635,16 @@ func (o CloudBaseVolume) MarshalJSON() ([]byte, error) {
 	if o.RegionInfo.IsSet() {
 		toSerialize["RegionInfo"] = o.RegionInfo.Get()
 	}
-	if o.SourceImageId != nil {
+	if !IsNil(o.SourceImageId) {
 		toSerialize["SourceImageId"] = o.SourceImageId
 	}
-	if o.State != nil {
+	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.VolumeCreateTime != nil {
+	if !IsNil(o.VolumeCreateTime) {
 		toSerialize["VolumeCreateTime"] = o.VolumeCreateTime
 	}
 	if o.VolumeTags != nil {
@@ -653,10 +661,32 @@ func (o CloudBaseVolume) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CloudBaseVolume) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CloudBaseVolume) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CloudBaseVolumeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -685,7 +715,7 @@ func (o *CloudBaseVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudBaseVolumeWithoutEmbeddedStruct := CloudBaseVolumeWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCloudBaseVolumeWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCloudBaseVolumeWithoutEmbeddedStruct)
 	if err == nil {
 		varCloudBaseVolume := _CloudBaseVolume{}
 		varCloudBaseVolume.ClassId = varCloudBaseVolumeWithoutEmbeddedStruct.ClassId
@@ -710,7 +740,7 @@ func (o *CloudBaseVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	varCloudBaseVolume := _CloudBaseVolume{}
 
-	err = json.Unmarshal(bytes, &varCloudBaseVolume)
+	err = json.Unmarshal(data, &varCloudBaseVolume)
 	if err == nil {
 		o.VirtualizationBaseVirtualDisk = varCloudBaseVolume.VirtualizationBaseVirtualDisk
 	} else {
@@ -719,7 +749,7 @@ func (o *CloudBaseVolume) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BillingUnit")

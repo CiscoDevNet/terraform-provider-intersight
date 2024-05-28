@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Method** | Pointer to **string** | The method type for the given API. * &#x60;GET&#x60; - Method type which indicates it is a GET API call. * &#x60;POST&#x60; - Method type which indicates it is a POST API call. * &#x60;PUT&#x60; - Method type which indicates it is a PUT API call. * &#x60;PATCH&#x60; - Method type which indicates it is a PATCH API call. * &#x60;DELETE&#x60; - Method type which indicates it is a DELETE API call. | [optional] [readonly] [default to "GET"]
 **Name** | Pointer to **string** | The description of the given API. | [optional] [readonly] 
 **Path** | Pointer to **string** | Path of the selected API endpoint. | [optional] [readonly] 
-**Source** | Pointer to [**OpenapiProcessFileRelationship**](OpenapiProcessFileRelationship.md) |  | [optional] 
+**Source** | Pointer to [**NullableOpenapiProcessFileRelationship**](OpenapiProcessFileRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -222,6 +222,16 @@ SetSource sets Source field to given value.
 
 HasSource returns a boolean if a field has been set.
 
+### SetSourceNil
+
+`func (o *OpenapiApiMethodMeta) SetSourceNil(b bool)`
+
+ SetSourceNil sets the value for Source to be an explicit nil
+
+### UnsetSource
+`func (o *OpenapiApiMethodMeta) UnsetSource()`
+
+UnsetSource ensures that no value is present for Source, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

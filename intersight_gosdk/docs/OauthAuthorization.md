@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **IsUserIdSet** | Pointer to **bool** | Indicates whether the value of the &#39;userId&#39; property has been set. | [optional] [readonly] [default to false]
 **Password** | Pointer to **string** | The password that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account&#39;s behalf. | [optional] 
 **UserId** | Pointer to **string** | The username that will be used by Intersight to create OAuth2 tokens for interacting with the external repository, on the user account&#39;s behalf. | [optional] 
-**AccessToken** | Pointer to [**OauthAccessTokenRelationship**](OauthAccessTokenRelationship.md) |  | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**AccessToken** | Pointer to [**NullableOauthAccessTokenRelationship**](OauthAccessTokenRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -223,6 +223,16 @@ SetAccessToken sets AccessToken field to given value.
 
 HasAccessToken returns a boolean if a field has been set.
 
+### SetAccessTokenNil
+
+`func (o *OauthAuthorization) SetAccessTokenNil(b bool)`
+
+ SetAccessTokenNil sets the value for AccessToken to be an explicit nil
+
+### UnsetAccessToken
+`func (o *OauthAuthorization) UnsetAccessToken()`
+
+UnsetAccessToken ensures that no value is present for AccessToken, not even an explicit nil
 ### GetAccount
 
 `func (o *OauthAuthorization) GetAccount() IamAccountRelationship`
@@ -248,6 +258,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *OauthAuthorization) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *OauthAuthorization) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

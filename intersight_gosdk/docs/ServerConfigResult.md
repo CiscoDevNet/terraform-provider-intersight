@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "server.ConfigResult"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "server.ConfigResult"]
-**Profile** | Pointer to [**ServerBaseProfileRelationship**](ServerBaseProfileRelationship.md) |  | [optional] 
+**Profile** | Pointer to [**NullableServerBaseProfileRelationship**](ServerBaseProfileRelationship.md) |  | [optional] 
 **ResultEntries** | Pointer to [**[]ServerConfigResultEntryRelationship**](ServerConfigResultEntryRelationship.md) | An array of relationships to serverConfigResultEntry resources. | [optional] 
 
 ## Methods
@@ -93,6 +93,16 @@ SetProfile sets Profile field to given value.
 
 HasProfile returns a boolean if a field has been set.
 
+### SetProfileNil
+
+`func (o *ServerConfigResult) SetProfileNil(b bool)`
+
+ SetProfileNil sets the value for Profile to be an explicit nil
+
+### UnsetProfile
+`func (o *ServerConfigResult) UnsetProfile()`
+
+UnsetProfile ensures that no value is present for Profile, not even an explicit nil
 ### GetResultEntries
 
 `func (o *ServerConfigResult) GetResultEntries() []ServerConfigResultEntryRelationship`

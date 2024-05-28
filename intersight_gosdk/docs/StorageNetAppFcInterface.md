@@ -12,10 +12,10 @@ Name | Type | Description | Notes
 **SvmName** | Pointer to **string** | The storage virtual machine name for the interface. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Uuid of NetApp FC Interface. | [optional] [readonly] 
 **VolumeName** | Pointer to **string** | The parent volume name for the interface. | [optional] [readonly] 
-**ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
+**ArrayController** | Pointer to [**NullableStorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
 **Events** | Pointer to [**[]StorageNetAppFcInterfaceEventRelationship**](StorageNetAppFcInterfaceEventRelationship.md) | An array of relationships to storageNetAppFcInterfaceEvent resources. | [optional] [readonly] 
-**PhysicalPort** | Pointer to [**StorageNetAppFcPortRelationship**](StorageNetAppFcPortRelationship.md) |  | [optional] 
-**Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
+**PhysicalPort** | Pointer to [**NullableStorageNetAppFcPortRelationship**](StorageNetAppFcPortRelationship.md) |  | [optional] 
+**Tenant** | Pointer to [**NullableStorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -251,6 +251,16 @@ SetArrayController sets ArrayController field to given value.
 
 HasArrayController returns a boolean if a field has been set.
 
+### SetArrayControllerNil
+
+`func (o *StorageNetAppFcInterface) SetArrayControllerNil(b bool)`
+
+ SetArrayControllerNil sets the value for ArrayController to be an explicit nil
+
+### UnsetArrayController
+`func (o *StorageNetAppFcInterface) UnsetArrayController()`
+
+UnsetArrayController ensures that no value is present for ArrayController, not even an explicit nil
 ### GetEvents
 
 `func (o *StorageNetAppFcInterface) GetEvents() []StorageNetAppFcInterfaceEventRelationship`
@@ -311,6 +321,16 @@ SetPhysicalPort sets PhysicalPort field to given value.
 
 HasPhysicalPort returns a boolean if a field has been set.
 
+### SetPhysicalPortNil
+
+`func (o *StorageNetAppFcInterface) SetPhysicalPortNil(b bool)`
+
+ SetPhysicalPortNil sets the value for PhysicalPort to be an explicit nil
+
+### UnsetPhysicalPort
+`func (o *StorageNetAppFcInterface) UnsetPhysicalPort()`
+
+UnsetPhysicalPort ensures that no value is present for PhysicalPort, not even an explicit nil
 ### GetTenant
 
 `func (o *StorageNetAppFcInterface) GetTenant() StorageNetAppStorageVmRelationship`
@@ -336,6 +356,16 @@ SetTenant sets Tenant field to given value.
 
 HasTenant returns a boolean if a field has been set.
 
+### SetTenantNil
+
+`func (o *StorageNetAppFcInterface) SetTenantNil(b bool)`
+
+ SetTenantNil sets the value for Tenant to be an explicit nil
+
+### UnsetTenant
+`func (o *StorageNetAppFcInterface) UnsetTenant()`
+
+UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

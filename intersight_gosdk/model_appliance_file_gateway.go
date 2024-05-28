@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the ApplianceFileGateway type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceFileGateway{}
 
 // ApplianceFileGateway FileGateway is a non-persistent model for accessing files from the Intersight. Intersight Appliances queries the FileGateway API, supplying a filename and version, to get the signed URL from the Intersight. Intersight Appliance services uses the signed URLs to download files and store them in the local image cache. Intersight will not store any record of the file access in the initial revision. This model is a pure pass through proxy for the cloud storage service.
 type ApplianceFileGateway struct {
@@ -42,8 +46,8 @@ type ApplianceFileGateway struct {
 	// Signed URL's validity period in minutes.
 	ValidityPeriod *int64 `json:"ValidityPeriod,omitempty"`
 	// File version as reported by the cloud storage service.
-	Version              *string                 `json:"Version,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	Version              *string                        `json:"Version,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -122,7 +126,7 @@ func (o *ApplianceFileGateway) SetObjectType(v string) {
 
 // GetBucketName returns the BucketName field value if set, zero value otherwise.
 func (o *ApplianceFileGateway) GetBucketName() string {
-	if o == nil || o.BucketName == nil {
+	if o == nil || IsNil(o.BucketName) {
 		var ret string
 		return ret
 	}
@@ -132,7 +136,7 @@ func (o *ApplianceFileGateway) GetBucketName() string {
 // GetBucketNameOk returns a tuple with the BucketName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceFileGateway) GetBucketNameOk() (*string, bool) {
-	if o == nil || o.BucketName == nil {
+	if o == nil || IsNil(o.BucketName) {
 		return nil, false
 	}
 	return o.BucketName, true
@@ -140,7 +144,7 @@ func (o *ApplianceFileGateway) GetBucketNameOk() (*string, bool) {
 
 // HasBucketName returns a boolean if a field has been set.
 func (o *ApplianceFileGateway) HasBucketName() bool {
-	if o != nil && o.BucketName != nil {
+	if o != nil && !IsNil(o.BucketName) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *ApplianceFileGateway) SetBucketName(v string) {
 
 // GetFileSize returns the FileSize field value if set, zero value otherwise.
 func (o *ApplianceFileGateway) GetFileSize() int64 {
-	if o == nil || o.FileSize == nil {
+	if o == nil || IsNil(o.FileSize) {
 		var ret int64
 		return ret
 	}
@@ -164,7 +168,7 @@ func (o *ApplianceFileGateway) GetFileSize() int64 {
 // GetFileSizeOk returns a tuple with the FileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceFileGateway) GetFileSizeOk() (*int64, bool) {
-	if o == nil || o.FileSize == nil {
+	if o == nil || IsNil(o.FileSize) {
 		return nil, false
 	}
 	return o.FileSize, true
@@ -172,7 +176,7 @@ func (o *ApplianceFileGateway) GetFileSizeOk() (*int64, bool) {
 
 // HasFileSize returns a boolean if a field has been set.
 func (o *ApplianceFileGateway) HasFileSize() bool {
-	if o != nil && o.FileSize != nil {
+	if o != nil && !IsNil(o.FileSize) {
 		return true
 	}
 
@@ -186,7 +190,7 @@ func (o *ApplianceFileGateway) SetFileSize(v int64) {
 
 // GetFileTime returns the FileTime field value if set, zero value otherwise.
 func (o *ApplianceFileGateway) GetFileTime() time.Time {
-	if o == nil || o.FileTime == nil {
+	if o == nil || IsNil(o.FileTime) {
 		var ret time.Time
 		return ret
 	}
@@ -196,7 +200,7 @@ func (o *ApplianceFileGateway) GetFileTime() time.Time {
 // GetFileTimeOk returns a tuple with the FileTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceFileGateway) GetFileTimeOk() (*time.Time, bool) {
-	if o == nil || o.FileTime == nil {
+	if o == nil || IsNil(o.FileTime) {
 		return nil, false
 	}
 	return o.FileTime, true
@@ -204,7 +208,7 @@ func (o *ApplianceFileGateway) GetFileTimeOk() (*time.Time, bool) {
 
 // HasFileTime returns a boolean if a field has been set.
 func (o *ApplianceFileGateway) HasFileTime() bool {
-	if o != nil && o.FileTime != nil {
+	if o != nil && !IsNil(o.FileTime) {
 		return true
 	}
 
@@ -218,7 +222,7 @@ func (o *ApplianceFileGateway) SetFileTime(v time.Time) {
 
 // GetFileType returns the FileType field value if set, zero value otherwise.
 func (o *ApplianceFileGateway) GetFileType() string {
-	if o == nil || o.FileType == nil {
+	if o == nil || IsNil(o.FileType) {
 		var ret string
 		return ret
 	}
@@ -228,7 +232,7 @@ func (o *ApplianceFileGateway) GetFileType() string {
 // GetFileTypeOk returns a tuple with the FileType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceFileGateway) GetFileTypeOk() (*string, bool) {
-	if o == nil || o.FileType == nil {
+	if o == nil || IsNil(o.FileType) {
 		return nil, false
 	}
 	return o.FileType, true
@@ -236,7 +240,7 @@ func (o *ApplianceFileGateway) GetFileTypeOk() (*string, bool) {
 
 // HasFileType returns a boolean if a field has been set.
 func (o *ApplianceFileGateway) HasFileType() bool {
-	if o != nil && o.FileType != nil {
+	if o != nil && !IsNil(o.FileType) {
 		return true
 	}
 
@@ -250,7 +254,7 @@ func (o *ApplianceFileGateway) SetFileType(v string) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *ApplianceFileGateway) GetFilename() string {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -260,7 +264,7 @@ func (o *ApplianceFileGateway) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceFileGateway) GetFilenameOk() (*string, bool) {
-	if o == nil || o.Filename == nil {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -268,7 +272,7 @@ func (o *ApplianceFileGateway) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *ApplianceFileGateway) HasFilename() bool {
-	if o != nil && o.Filename != nil {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -282,7 +286,7 @@ func (o *ApplianceFileGateway) SetFilename(v string) {
 
 // GetPresignedUrl returns the PresignedUrl field value if set, zero value otherwise.
 func (o *ApplianceFileGateway) GetPresignedUrl() string {
-	if o == nil || o.PresignedUrl == nil {
+	if o == nil || IsNil(o.PresignedUrl) {
 		var ret string
 		return ret
 	}
@@ -292,7 +296,7 @@ func (o *ApplianceFileGateway) GetPresignedUrl() string {
 // GetPresignedUrlOk returns a tuple with the PresignedUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceFileGateway) GetPresignedUrlOk() (*string, bool) {
-	if o == nil || o.PresignedUrl == nil {
+	if o == nil || IsNil(o.PresignedUrl) {
 		return nil, false
 	}
 	return o.PresignedUrl, true
@@ -300,7 +304,7 @@ func (o *ApplianceFileGateway) GetPresignedUrlOk() (*string, bool) {
 
 // HasPresignedUrl returns a boolean if a field has been set.
 func (o *ApplianceFileGateway) HasPresignedUrl() bool {
-	if o != nil && o.PresignedUrl != nil {
+	if o != nil && !IsNil(o.PresignedUrl) {
 		return true
 	}
 
@@ -314,7 +318,7 @@ func (o *ApplianceFileGateway) SetPresignedUrl(v string) {
 
 // GetServerCert returns the ServerCert field value if set, zero value otherwise.
 func (o *ApplianceFileGateway) GetServerCert() string {
-	if o == nil || o.ServerCert == nil {
+	if o == nil || IsNil(o.ServerCert) {
 		var ret string
 		return ret
 	}
@@ -324,7 +328,7 @@ func (o *ApplianceFileGateway) GetServerCert() string {
 // GetServerCertOk returns a tuple with the ServerCert field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceFileGateway) GetServerCertOk() (*string, bool) {
-	if o == nil || o.ServerCert == nil {
+	if o == nil || IsNil(o.ServerCert) {
 		return nil, false
 	}
 	return o.ServerCert, true
@@ -332,7 +336,7 @@ func (o *ApplianceFileGateway) GetServerCertOk() (*string, bool) {
 
 // HasServerCert returns a boolean if a field has been set.
 func (o *ApplianceFileGateway) HasServerCert() bool {
-	if o != nil && o.ServerCert != nil {
+	if o != nil && !IsNil(o.ServerCert) {
 		return true
 	}
 
@@ -346,7 +350,7 @@ func (o *ApplianceFileGateway) SetServerCert(v string) {
 
 // GetValidityPeriod returns the ValidityPeriod field value if set, zero value otherwise.
 func (o *ApplianceFileGateway) GetValidityPeriod() int64 {
-	if o == nil || o.ValidityPeriod == nil {
+	if o == nil || IsNil(o.ValidityPeriod) {
 		var ret int64
 		return ret
 	}
@@ -356,7 +360,7 @@ func (o *ApplianceFileGateway) GetValidityPeriod() int64 {
 // GetValidityPeriodOk returns a tuple with the ValidityPeriod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceFileGateway) GetValidityPeriodOk() (*int64, bool) {
-	if o == nil || o.ValidityPeriod == nil {
+	if o == nil || IsNil(o.ValidityPeriod) {
 		return nil, false
 	}
 	return o.ValidityPeriod, true
@@ -364,7 +368,7 @@ func (o *ApplianceFileGateway) GetValidityPeriodOk() (*int64, bool) {
 
 // HasValidityPeriod returns a boolean if a field has been set.
 func (o *ApplianceFileGateway) HasValidityPeriod() bool {
-	if o != nil && o.ValidityPeriod != nil {
+	if o != nil && !IsNil(o.ValidityPeriod) {
 		return true
 	}
 
@@ -378,7 +382,7 @@ func (o *ApplianceFileGateway) SetValidityPeriod(v int64) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *ApplianceFileGateway) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -388,7 +392,7 @@ func (o *ApplianceFileGateway) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceFileGateway) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -396,7 +400,7 @@ func (o *ApplianceFileGateway) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *ApplianceFileGateway) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -408,93 +412,130 @@ func (o *ApplianceFileGateway) SetVersion(v string) {
 	o.Version = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceFileGateway) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceFileGateway) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ApplianceFileGateway) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ApplianceFileGateway) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ApplianceFileGateway) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ApplianceFileGateway) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o ApplianceFileGateway) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceFileGateway) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BucketName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BucketName) {
 		toSerialize["BucketName"] = o.BucketName
 	}
-	if o.FileSize != nil {
+	if !IsNil(o.FileSize) {
 		toSerialize["FileSize"] = o.FileSize
 	}
-	if o.FileTime != nil {
+	if !IsNil(o.FileTime) {
 		toSerialize["FileTime"] = o.FileTime
 	}
-	if o.FileType != nil {
+	if !IsNil(o.FileType) {
 		toSerialize["FileType"] = o.FileType
 	}
-	if o.Filename != nil {
+	if !IsNil(o.Filename) {
 		toSerialize["Filename"] = o.Filename
 	}
-	if o.PresignedUrl != nil {
+	if !IsNil(o.PresignedUrl) {
 		toSerialize["PresignedUrl"] = o.PresignedUrl
 	}
-	if o.ServerCert != nil {
+	if !IsNil(o.ServerCert) {
 		toSerialize["ServerCert"] = o.ServerCert
 	}
-	if o.ValidityPeriod != nil {
+	if !IsNil(o.ValidityPeriod) {
 		toSerialize["ValidityPeriod"] = o.ValidityPeriod
 	}
-	if o.Version != nil {
+	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceFileGateway) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceFileGateway) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceFileGatewayWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -517,13 +558,13 @@ func (o *ApplianceFileGateway) UnmarshalJSON(bytes []byte) (err error) {
 		// Signed URL's validity period in minutes.
 		ValidityPeriod *int64 `json:"ValidityPeriod,omitempty"`
 		// File version as reported by the cloud storage service.
-		Version *string                 `json:"Version,omitempty"`
-		Account *IamAccountRelationship `json:"Account,omitempty"`
+		Version *string                        `json:"Version,omitempty"`
+		Account NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varApplianceFileGatewayWithoutEmbeddedStruct := ApplianceFileGatewayWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceFileGatewayWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceFileGatewayWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceFileGateway := _ApplianceFileGateway{}
 		varApplianceFileGateway.ClassId = varApplianceFileGatewayWithoutEmbeddedStruct.ClassId
@@ -545,7 +586,7 @@ func (o *ApplianceFileGateway) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceFileGateway := _ApplianceFileGateway{}
 
-	err = json.Unmarshal(bytes, &varApplianceFileGateway)
+	err = json.Unmarshal(data, &varApplianceFileGateway)
 	if err == nil {
 		o.MoBaseMo = varApplianceFileGateway.MoBaseMo
 	} else {
@@ -554,7 +595,7 @@ func (o *ApplianceFileGateway) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BucketName")

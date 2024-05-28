@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Stage** | Pointer to **string** | Stage in the build process these logs belong to. * &#x60;None&#x60; - Default value for the log stage. * &#x60;Backend&#x60; - Logs corresponding to backend build. * &#x60;Ui&#x60; - Logs corresponding to ui build stage. * &#x60;Apidocs&#x60; - Logs corresponding to the apidocs build stage. | [optional] [readonly] [default to "None"]
 **Stderr** | Pointer to **[]string** |  | [optional] 
 **Stdout** | Pointer to **[]string** |  | [optional] 
-**Inventory** | Pointer to [**PartnerintegrationInventoryRelationship**](PartnerintegrationInventoryRelationship.md) |  | [optional] 
+**Inventory** | Pointer to [**NullablePartnerintegrationInventoryRelationship**](PartnerintegrationInventoryRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -190,6 +190,16 @@ SetInventory sets Inventory field to given value.
 
 HasInventory returns a boolean if a field has been set.
 
+### SetInventoryNil
+
+`func (o *PartnerintegrationLogs) SetInventoryNil(b bool)`
+
+ SetInventoryNil sets the value for Inventory to be an explicit nil
+
+### UnsetInventory
+`func (o *PartnerintegrationLogs) UnsetInventory()`
+
+UnsetInventory ensures that no value is present for Inventory, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

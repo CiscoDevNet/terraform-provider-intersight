@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilitySwitchStorageLimits type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilitySwitchStorageLimits{}
 
 // CapabilitySwitchStorageLimits Object combines and lists the storage-config limits for each of the Fabric/Switch platforms.
 type CapabilitySwitchStorageLimits struct {
@@ -112,7 +116,7 @@ func (o *CapabilitySwitchStorageLimits) SetObjectType(v string) {
 
 // GetMaximumUserZoneCount returns the MaximumUserZoneCount field value if set, zero value otherwise.
 func (o *CapabilitySwitchStorageLimits) GetMaximumUserZoneCount() int64 {
-	if o == nil || o.MaximumUserZoneCount == nil {
+	if o == nil || IsNil(o.MaximumUserZoneCount) {
 		var ret int64
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *CapabilitySwitchStorageLimits) GetMaximumUserZoneCount() int64 {
 // GetMaximumUserZoneCountOk returns a tuple with the MaximumUserZoneCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchStorageLimits) GetMaximumUserZoneCountOk() (*int64, bool) {
-	if o == nil || o.MaximumUserZoneCount == nil {
+	if o == nil || IsNil(o.MaximumUserZoneCount) {
 		return nil, false
 	}
 	return o.MaximumUserZoneCount, true
@@ -130,7 +134,7 @@ func (o *CapabilitySwitchStorageLimits) GetMaximumUserZoneCountOk() (*int64, boo
 
 // HasMaximumUserZoneCount returns a boolean if a field has been set.
 func (o *CapabilitySwitchStorageLimits) HasMaximumUserZoneCount() bool {
-	if o != nil && o.MaximumUserZoneCount != nil {
+	if o != nil && !IsNil(o.MaximumUserZoneCount) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *CapabilitySwitchStorageLimits) SetMaximumUserZoneCount(v int64) {
 
 // GetMaximumVirtualFcInterfaces returns the MaximumVirtualFcInterfaces field value if set, zero value otherwise.
 func (o *CapabilitySwitchStorageLimits) GetMaximumVirtualFcInterfaces() int64 {
-	if o == nil || o.MaximumVirtualFcInterfaces == nil {
+	if o == nil || IsNil(o.MaximumVirtualFcInterfaces) {
 		var ret int64
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *CapabilitySwitchStorageLimits) GetMaximumVirtualFcInterfaces() int64 {
 // GetMaximumVirtualFcInterfacesOk returns a tuple with the MaximumVirtualFcInterfaces field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchStorageLimits) GetMaximumVirtualFcInterfacesOk() (*int64, bool) {
-	if o == nil || o.MaximumVirtualFcInterfaces == nil {
+	if o == nil || IsNil(o.MaximumVirtualFcInterfaces) {
 		return nil, false
 	}
 	return o.MaximumVirtualFcInterfaces, true
@@ -162,7 +166,7 @@ func (o *CapabilitySwitchStorageLimits) GetMaximumVirtualFcInterfacesOk() (*int6
 
 // HasMaximumVirtualFcInterfaces returns a boolean if a field has been set.
 func (o *CapabilitySwitchStorageLimits) HasMaximumVirtualFcInterfaces() bool {
-	if o != nil && o.MaximumVirtualFcInterfaces != nil {
+	if o != nil && !IsNil(o.MaximumVirtualFcInterfaces) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *CapabilitySwitchStorageLimits) SetMaximumVirtualFcInterfaces(v int64) {
 
 // GetMaximumVirtualFcInterfacesPerBladeServer returns the MaximumVirtualFcInterfacesPerBladeServer field value if set, zero value otherwise.
 func (o *CapabilitySwitchStorageLimits) GetMaximumVirtualFcInterfacesPerBladeServer() int64 {
-	if o == nil || o.MaximumVirtualFcInterfacesPerBladeServer == nil {
+	if o == nil || IsNil(o.MaximumVirtualFcInterfacesPerBladeServer) {
 		var ret int64
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *CapabilitySwitchStorageLimits) GetMaximumVirtualFcInterfacesPerBladeSer
 // GetMaximumVirtualFcInterfacesPerBladeServerOk returns a tuple with the MaximumVirtualFcInterfacesPerBladeServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchStorageLimits) GetMaximumVirtualFcInterfacesPerBladeServerOk() (*int64, bool) {
-	if o == nil || o.MaximumVirtualFcInterfacesPerBladeServer == nil {
+	if o == nil || IsNil(o.MaximumVirtualFcInterfacesPerBladeServer) {
 		return nil, false
 	}
 	return o.MaximumVirtualFcInterfacesPerBladeServer, true
@@ -194,7 +198,7 @@ func (o *CapabilitySwitchStorageLimits) GetMaximumVirtualFcInterfacesPerBladeSer
 
 // HasMaximumVirtualFcInterfacesPerBladeServer returns a boolean if a field has been set.
 func (o *CapabilitySwitchStorageLimits) HasMaximumVirtualFcInterfacesPerBladeServer() bool {
-	if o != nil && o.MaximumVirtualFcInterfacesPerBladeServer != nil {
+	if o != nil && !IsNil(o.MaximumVirtualFcInterfacesPerBladeServer) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *CapabilitySwitchStorageLimits) SetMaximumVirtualFcInterfacesPerBladeSer
 
 // GetMaximumVsans returns the MaximumVsans field value if set, zero value otherwise.
 func (o *CapabilitySwitchStorageLimits) GetMaximumVsans() int64 {
-	if o == nil || o.MaximumVsans == nil {
+	if o == nil || IsNil(o.MaximumVsans) {
 		var ret int64
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *CapabilitySwitchStorageLimits) GetMaximumVsans() int64 {
 // GetMaximumVsansOk returns a tuple with the MaximumVsans field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchStorageLimits) GetMaximumVsansOk() (*int64, bool) {
-	if o == nil || o.MaximumVsans == nil {
+	if o == nil || IsNil(o.MaximumVsans) {
 		return nil, false
 	}
 	return o.MaximumVsans, true
@@ -226,7 +230,7 @@ func (o *CapabilitySwitchStorageLimits) GetMaximumVsansOk() (*int64, bool) {
 
 // HasMaximumVsans returns a boolean if a field has been set.
 func (o *CapabilitySwitchStorageLimits) HasMaximumVsans() bool {
-	if o != nil && o.MaximumVsans != nil {
+	if o != nil && !IsNil(o.MaximumVsans) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *CapabilitySwitchStorageLimits) SetMaximumVsans(v int64) {
 
 // GetMaximumZoneCount returns the MaximumZoneCount field value if set, zero value otherwise.
 func (o *CapabilitySwitchStorageLimits) GetMaximumZoneCount() int64 {
-	if o == nil || o.MaximumZoneCount == nil {
+	if o == nil || IsNil(o.MaximumZoneCount) {
 		var ret int64
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *CapabilitySwitchStorageLimits) GetMaximumZoneCount() int64 {
 // GetMaximumZoneCountOk returns a tuple with the MaximumZoneCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilitySwitchStorageLimits) GetMaximumZoneCountOk() (*int64, bool) {
-	if o == nil || o.MaximumZoneCount == nil {
+	if o == nil || IsNil(o.MaximumZoneCount) {
 		return nil, false
 	}
 	return o.MaximumZoneCount, true
@@ -258,7 +262,7 @@ func (o *CapabilitySwitchStorageLimits) GetMaximumZoneCountOk() (*int64, bool) {
 
 // HasMaximumZoneCount returns a boolean if a field has been set.
 func (o *CapabilitySwitchStorageLimits) HasMaximumZoneCount() bool {
-	if o != nil && o.MaximumZoneCount != nil {
+	if o != nil && !IsNil(o.MaximumZoneCount) {
 		return true
 	}
 
@@ -271,34 +275,38 @@ func (o *CapabilitySwitchStorageLimits) SetMaximumZoneCount(v int64) {
 }
 
 func (o CapabilitySwitchStorageLimits) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilitySwitchStorageLimits) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.MaximumUserZoneCount != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.MaximumUserZoneCount) {
 		toSerialize["MaximumUserZoneCount"] = o.MaximumUserZoneCount
 	}
-	if o.MaximumVirtualFcInterfaces != nil {
+	if !IsNil(o.MaximumVirtualFcInterfaces) {
 		toSerialize["MaximumVirtualFcInterfaces"] = o.MaximumVirtualFcInterfaces
 	}
-	if o.MaximumVirtualFcInterfacesPerBladeServer != nil {
+	if !IsNil(o.MaximumVirtualFcInterfacesPerBladeServer) {
 		toSerialize["MaximumVirtualFcInterfacesPerBladeServer"] = o.MaximumVirtualFcInterfacesPerBladeServer
 	}
-	if o.MaximumVsans != nil {
+	if !IsNil(o.MaximumVsans) {
 		toSerialize["MaximumVsans"] = o.MaximumVsans
 	}
-	if o.MaximumZoneCount != nil {
+	if !IsNil(o.MaximumZoneCount) {
 		toSerialize["MaximumZoneCount"] = o.MaximumZoneCount
 	}
 
@@ -306,10 +314,32 @@ func (o CapabilitySwitchStorageLimits) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilitySwitchStorageLimits) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilitySwitchStorageLimits) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilitySwitchStorageLimitsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -329,7 +359,7 @@ func (o *CapabilitySwitchStorageLimits) UnmarshalJSON(bytes []byte) (err error) 
 
 	varCapabilitySwitchStorageLimitsWithoutEmbeddedStruct := CapabilitySwitchStorageLimitsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchStorageLimitsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilitySwitchStorageLimitsWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilitySwitchStorageLimits := _CapabilitySwitchStorageLimits{}
 		varCapabilitySwitchStorageLimits.ClassId = varCapabilitySwitchStorageLimitsWithoutEmbeddedStruct.ClassId
@@ -346,7 +376,7 @@ func (o *CapabilitySwitchStorageLimits) UnmarshalJSON(bytes []byte) (err error) 
 
 	varCapabilitySwitchStorageLimits := _CapabilitySwitchStorageLimits{}
 
-	err = json.Unmarshal(bytes, &varCapabilitySwitchStorageLimits)
+	err = json.Unmarshal(data, &varCapabilitySwitchStorageLimits)
 	if err == nil {
 		o.MoBaseComplexType = varCapabilitySwitchStorageLimits.MoBaseComplexType
 	} else {
@@ -355,7 +385,7 @@ func (o *CapabilitySwitchStorageLimits) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "MaximumUserZoneCount")

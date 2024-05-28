@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the PolicyAbstractConfigChangeDetail type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PolicyAbstractConfigChangeDetail{}
 
 // PolicyAbstractConfigChangeDetail Defines the details of a configuration change including change type, disruption and description of the change.
 type PolicyAbstractConfigChangeDetail struct {
@@ -126,7 +130,7 @@ func (o *PolicyAbstractConfigChangeDetail) GetChanges() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PolicyAbstractConfigChangeDetail) GetChangesOk() ([]string, bool) {
-	if o == nil || o.Changes == nil {
+	if o == nil || IsNil(o.Changes) {
 		return nil, false
 	}
 	return o.Changes, true
@@ -134,7 +138,7 @@ func (o *PolicyAbstractConfigChangeDetail) GetChangesOk() ([]string, bool) {
 
 // HasChanges returns a boolean if a field has been set.
 func (o *PolicyAbstractConfigChangeDetail) HasChanges() bool {
-	if o != nil && o.Changes != nil {
+	if o != nil && IsNil(o.Changes) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *PolicyAbstractConfigChangeDetail) SetChanges(v []string) {
 
 // GetConfigChangeContext returns the ConfigChangeContext field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PolicyAbstractConfigChangeDetail) GetConfigChangeContext() PolicyConfigResultContext {
-	if o == nil || o.ConfigChangeContext.Get() == nil {
+	if o == nil || IsNil(o.ConfigChangeContext.Get()) {
 		var ret PolicyConfigResultContext
 		return ret
 	}
@@ -191,7 +195,7 @@ func (o *PolicyAbstractConfigChangeDetail) UnsetConfigChangeContext() {
 
 // GetConfigChangeFlag returns the ConfigChangeFlag field value if set, zero value otherwise.
 func (o *PolicyAbstractConfigChangeDetail) GetConfigChangeFlag() string {
-	if o == nil || o.ConfigChangeFlag == nil {
+	if o == nil || IsNil(o.ConfigChangeFlag) {
 		var ret string
 		return ret
 	}
@@ -201,7 +205,7 @@ func (o *PolicyAbstractConfigChangeDetail) GetConfigChangeFlag() string {
 // GetConfigChangeFlagOk returns a tuple with the ConfigChangeFlag field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyAbstractConfigChangeDetail) GetConfigChangeFlagOk() (*string, bool) {
-	if o == nil || o.ConfigChangeFlag == nil {
+	if o == nil || IsNil(o.ConfigChangeFlag) {
 		return nil, false
 	}
 	return o.ConfigChangeFlag, true
@@ -209,7 +213,7 @@ func (o *PolicyAbstractConfigChangeDetail) GetConfigChangeFlagOk() (*string, boo
 
 // HasConfigChangeFlag returns a boolean if a field has been set.
 func (o *PolicyAbstractConfigChangeDetail) HasConfigChangeFlag() bool {
-	if o != nil && o.ConfigChangeFlag != nil {
+	if o != nil && !IsNil(o.ConfigChangeFlag) {
 		return true
 	}
 
@@ -234,7 +238,7 @@ func (o *PolicyAbstractConfigChangeDetail) GetDisruptions() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PolicyAbstractConfigChangeDetail) GetDisruptionsOk() ([]string, bool) {
-	if o == nil || o.Disruptions == nil {
+	if o == nil || IsNil(o.Disruptions) {
 		return nil, false
 	}
 	return o.Disruptions, true
@@ -242,7 +246,7 @@ func (o *PolicyAbstractConfigChangeDetail) GetDisruptionsOk() ([]string, bool) {
 
 // HasDisruptions returns a boolean if a field has been set.
 func (o *PolicyAbstractConfigChangeDetail) HasDisruptions() bool {
-	if o != nil && o.Disruptions != nil {
+	if o != nil && IsNil(o.Disruptions) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *PolicyAbstractConfigChangeDetail) SetDisruptions(v []string) {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *PolicyAbstractConfigChangeDetail) GetMessage() string {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -266,7 +270,7 @@ func (o *PolicyAbstractConfigChangeDetail) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyAbstractConfigChangeDetail) GetMessageOk() (*string, bool) {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -274,7 +278,7 @@ func (o *PolicyAbstractConfigChangeDetail) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *PolicyAbstractConfigChangeDetail) HasMessage() bool {
-	if o != nil && o.Message != nil {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -288,7 +292,7 @@ func (o *PolicyAbstractConfigChangeDetail) SetMessage(v string) {
 
 // GetModStatus returns the ModStatus field value if set, zero value otherwise.
 func (o *PolicyAbstractConfigChangeDetail) GetModStatus() string {
-	if o == nil || o.ModStatus == nil {
+	if o == nil || IsNil(o.ModStatus) {
 		var ret string
 		return ret
 	}
@@ -298,7 +302,7 @@ func (o *PolicyAbstractConfigChangeDetail) GetModStatus() string {
 // GetModStatusOk returns a tuple with the ModStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PolicyAbstractConfigChangeDetail) GetModStatusOk() (*string, bool) {
-	if o == nil || o.ModStatus == nil {
+	if o == nil || IsNil(o.ModStatus) {
 		return nil, false
 	}
 	return o.ModStatus, true
@@ -306,7 +310,7 @@ func (o *PolicyAbstractConfigChangeDetail) GetModStatusOk() (*string, bool) {
 
 // HasModStatus returns a boolean if a field has been set.
 func (o *PolicyAbstractConfigChangeDetail) HasModStatus() bool {
-	if o != nil && o.ModStatus != nil {
+	if o != nil && !IsNil(o.ModStatus) {
 		return true
 	}
 
@@ -319,37 +323,41 @@ func (o *PolicyAbstractConfigChangeDetail) SetModStatus(v string) {
 }
 
 func (o PolicyAbstractConfigChangeDetail) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PolicyAbstractConfigChangeDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Changes != nil {
 		toSerialize["Changes"] = o.Changes
 	}
 	if o.ConfigChangeContext.IsSet() {
 		toSerialize["ConfigChangeContext"] = o.ConfigChangeContext.Get()
 	}
-	if o.ConfigChangeFlag != nil {
+	if !IsNil(o.ConfigChangeFlag) {
 		toSerialize["ConfigChangeFlag"] = o.ConfigChangeFlag
 	}
 	if o.Disruptions != nil {
 		toSerialize["Disruptions"] = o.Disruptions
 	}
-	if o.Message != nil {
+	if !IsNil(o.Message) {
 		toSerialize["Message"] = o.Message
 	}
-	if o.ModStatus != nil {
+	if !IsNil(o.ModStatus) {
 		toSerialize["ModStatus"] = o.ModStatus
 	}
 
@@ -357,10 +365,32 @@ func (o PolicyAbstractConfigChangeDetail) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *PolicyAbstractConfigChangeDetail) UnmarshalJSON(bytes []byte) (err error) {
+func (o *PolicyAbstractConfigChangeDetail) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type PolicyAbstractConfigChangeDetailWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -379,7 +409,7 @@ func (o *PolicyAbstractConfigChangeDetail) UnmarshalJSON(bytes []byte) (err erro
 
 	varPolicyAbstractConfigChangeDetailWithoutEmbeddedStruct := PolicyAbstractConfigChangeDetailWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varPolicyAbstractConfigChangeDetailWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varPolicyAbstractConfigChangeDetailWithoutEmbeddedStruct)
 	if err == nil {
 		varPolicyAbstractConfigChangeDetail := _PolicyAbstractConfigChangeDetail{}
 		varPolicyAbstractConfigChangeDetail.ClassId = varPolicyAbstractConfigChangeDetailWithoutEmbeddedStruct.ClassId
@@ -397,7 +427,7 @@ func (o *PolicyAbstractConfigChangeDetail) UnmarshalJSON(bytes []byte) (err erro
 
 	varPolicyAbstractConfigChangeDetail := _PolicyAbstractConfigChangeDetail{}
 
-	err = json.Unmarshal(bytes, &varPolicyAbstractConfigChangeDetail)
+	err = json.Unmarshal(data, &varPolicyAbstractConfigChangeDetail)
 	if err == nil {
 		o.MoBaseMo = varPolicyAbstractConfigChangeDetail.MoBaseMo
 	} else {
@@ -406,7 +436,7 @@ func (o *PolicyAbstractConfigChangeDetail) UnmarshalJSON(bytes []byte) (err erro
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Changes")

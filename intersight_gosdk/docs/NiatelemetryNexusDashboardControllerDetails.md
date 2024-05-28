@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **SiteHealth** | Pointer to **int64** | Health of the site serviced by ND. | [optional] 
 **SiteName** | Pointer to **string** | Name of fabric domain of the controller. | [optional] 
 **VersionOfController** | Pointer to **string** | Version of the controller serviced by ND. | [optional] 
-**NexusDashboard** | Pointer to [**NiatelemetryNexusDashboardsRelationship**](NiatelemetryNexusDashboardsRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**NexusDashboard** | Pointer to [**NullableNiatelemetryNexusDashboardsRelationship**](NiatelemetryNexusDashboardsRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -171,6 +171,16 @@ SetNexusDashboard sets NexusDashboard field to given value.
 
 HasNexusDashboard returns a boolean if a field has been set.
 
+### SetNexusDashboardNil
+
+`func (o *NiatelemetryNexusDashboardControllerDetails) SetNexusDashboardNil(b bool)`
+
+ SetNexusDashboardNil sets the value for NexusDashboard to be an explicit nil
+
+### UnsetNexusDashboard
+`func (o *NiatelemetryNexusDashboardControllerDetails) UnsetNexusDashboard()`
+
+UnsetNexusDashboard ensures that no value is present for NexusDashboard, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *NiatelemetryNexusDashboardControllerDetails) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -196,6 +206,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *NiatelemetryNexusDashboardControllerDetails) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *NiatelemetryNexusDashboardControllerDetails) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

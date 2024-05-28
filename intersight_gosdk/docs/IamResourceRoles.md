@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.ResourceRoles"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.ResourceRoles"]
 **EndPointRoles** | Pointer to [**[]IamEndPointRoleRelationship**](IamEndPointRoleRelationship.md) | An array of relationships to iamEndPointRole resources. | [optional] [readonly] 
-**Permission** | Pointer to [**IamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
+**Permission** | Pointer to [**NullableIamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
 **PrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
-**Resource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Resource** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Roles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
 
 ## Methods
@@ -131,6 +131,16 @@ SetPermission sets Permission field to given value.
 
 HasPermission returns a boolean if a field has been set.
 
+### SetPermissionNil
+
+`func (o *IamResourceRoles) SetPermissionNil(b bool)`
+
+ SetPermissionNil sets the value for Permission to be an explicit nil
+
+### UnsetPermission
+`func (o *IamResourceRoles) UnsetPermission()`
+
+UnsetPermission ensures that no value is present for Permission, not even an explicit nil
 ### GetPrivilegeSets
 
 `func (o *IamResourceRoles) GetPrivilegeSets() []IamPrivilegeSetRelationship`
@@ -191,6 +201,16 @@ SetResource sets Resource field to given value.
 
 HasResource returns a boolean if a field has been set.
 
+### SetResourceNil
+
+`func (o *IamResourceRoles) SetResourceNil(b bool)`
+
+ SetResourceNil sets the value for Resource to be an explicit nil
+
+### UnsetResource
+`func (o *IamResourceRoles) UnsetResource()`
+
+UnsetResource ensures that no value is present for Resource, not even an explicit nil
 ### GetRoles
 
 `func (o *IamResourceRoles) GetRoles() []IamRoleRelationship`

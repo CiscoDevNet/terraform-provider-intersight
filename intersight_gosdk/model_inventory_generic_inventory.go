@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the InventoryGenericInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InventoryGenericInventory{}
 
 // InventoryGenericInventory Any inventory which is represented as a key / value pair. Example - moInvKv in UCSM representing OS tools running on ESX.
 type InventoryGenericInventory struct {
@@ -29,10 +33,10 @@ type InventoryGenericInventory struct {
 	// Type of inventory data for Generic Inventory data set.
 	Type *string `json:"Type,omitempty"`
 	// Value of inventory data for Generic Inventory data set.
-	Value                           *string                                      `json:"Value,omitempty"`
-	InventoryDeviceInfo             *InventoryDeviceInfoRelationship             `json:"InventoryDeviceInfo,omitempty"`
-	InventoryGenericInventoryHolder *InventoryGenericInventoryHolderRelationship `json:"InventoryGenericInventoryHolder,omitempty"`
-	RegisteredDevice                *AssetDeviceRegistrationRelationship         `json:"RegisteredDevice,omitempty"`
+	Value                           *string                                             `json:"Value,omitempty"`
+	InventoryDeviceInfo             NullableInventoryDeviceInfoRelationship             `json:"InventoryDeviceInfo,omitempty"`
+	InventoryGenericInventoryHolder NullableInventoryGenericInventoryHolderRelationship `json:"InventoryGenericInventoryHolder,omitempty"`
+	RegisteredDevice                NullableAssetDeviceRegistrationRelationship         `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties            map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *InventoryGenericInventory) SetObjectType(v string) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *InventoryGenericInventory) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *InventoryGenericInventory) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryGenericInventory) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -129,7 +133,7 @@ func (o *InventoryGenericInventory) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *InventoryGenericInventory) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -143,7 +147,7 @@ func (o *InventoryGenericInventory) SetKey(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *InventoryGenericInventory) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -153,7 +157,7 @@ func (o *InventoryGenericInventory) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryGenericInventory) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -161,7 +165,7 @@ func (o *InventoryGenericInventory) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *InventoryGenericInventory) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *InventoryGenericInventory) SetType(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *InventoryGenericInventory) GetValue() string {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *InventoryGenericInventory) GetValue() string {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InventoryGenericInventory) GetValueOk() (*string, bool) {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
 	return o.Value, true
@@ -193,7 +197,7 @@ func (o *InventoryGenericInventory) GetValueOk() (*string, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *InventoryGenericInventory) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -205,145 +209,204 @@ func (o *InventoryGenericInventory) SetValue(v string) {
 	o.Value = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InventoryGenericInventory) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InventoryGenericInventory) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *InventoryGenericInventory) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *InventoryGenericInventory) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetInventoryGenericInventoryHolder returns the InventoryGenericInventoryHolder field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *InventoryGenericInventory) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *InventoryGenericInventory) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetInventoryGenericInventoryHolder returns the InventoryGenericInventoryHolder field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InventoryGenericInventory) GetInventoryGenericInventoryHolder() InventoryGenericInventoryHolderRelationship {
-	if o == nil || o.InventoryGenericInventoryHolder == nil {
+	if o == nil || IsNil(o.InventoryGenericInventoryHolder.Get()) {
 		var ret InventoryGenericInventoryHolderRelationship
 		return ret
 	}
-	return *o.InventoryGenericInventoryHolder
+	return *o.InventoryGenericInventoryHolder.Get()
 }
 
 // GetInventoryGenericInventoryHolderOk returns a tuple with the InventoryGenericInventoryHolder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InventoryGenericInventory) GetInventoryGenericInventoryHolderOk() (*InventoryGenericInventoryHolderRelationship, bool) {
-	if o == nil || o.InventoryGenericInventoryHolder == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryGenericInventoryHolder, true
+	return o.InventoryGenericInventoryHolder.Get(), o.InventoryGenericInventoryHolder.IsSet()
 }
 
 // HasInventoryGenericInventoryHolder returns a boolean if a field has been set.
 func (o *InventoryGenericInventory) HasInventoryGenericInventoryHolder() bool {
-	if o != nil && o.InventoryGenericInventoryHolder != nil {
+	if o != nil && o.InventoryGenericInventoryHolder.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryGenericInventoryHolder gets a reference to the given InventoryGenericInventoryHolderRelationship and assigns it to the InventoryGenericInventoryHolder field.
+// SetInventoryGenericInventoryHolder gets a reference to the given NullableInventoryGenericInventoryHolderRelationship and assigns it to the InventoryGenericInventoryHolder field.
 func (o *InventoryGenericInventory) SetInventoryGenericInventoryHolder(v InventoryGenericInventoryHolderRelationship) {
-	o.InventoryGenericInventoryHolder = &v
+	o.InventoryGenericInventoryHolder.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetInventoryGenericInventoryHolderNil sets the value for InventoryGenericInventoryHolder to be an explicit nil
+func (o *InventoryGenericInventory) SetInventoryGenericInventoryHolderNil() {
+	o.InventoryGenericInventoryHolder.Set(nil)
+}
+
+// UnsetInventoryGenericInventoryHolder ensures that no value is present for InventoryGenericInventoryHolder, not even an explicit nil
+func (o *InventoryGenericInventory) UnsetInventoryGenericInventoryHolder() {
+	o.InventoryGenericInventoryHolder.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InventoryGenericInventory) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InventoryGenericInventory) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *InventoryGenericInventory) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *InventoryGenericInventory) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *InventoryGenericInventory) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *InventoryGenericInventory) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o InventoryGenericInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o InventoryGenericInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Key != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Key) {
 		toSerialize["Key"] = o.Key
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
-	if o.Value != nil {
+	if !IsNil(o.Value) {
 		toSerialize["Value"] = o.Value
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.InventoryGenericInventoryHolder != nil {
-		toSerialize["InventoryGenericInventoryHolder"] = o.InventoryGenericInventoryHolder
+	if o.InventoryGenericInventoryHolder.IsSet() {
+		toSerialize["InventoryGenericInventoryHolder"] = o.InventoryGenericInventoryHolder.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *InventoryGenericInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *InventoryGenericInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type InventoryGenericInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -354,15 +417,15 @@ func (o *InventoryGenericInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// Type of inventory data for Generic Inventory data set.
 		Type *string `json:"Type,omitempty"`
 		// Value of inventory data for Generic Inventory data set.
-		Value                           *string                                      `json:"Value,omitempty"`
-		InventoryDeviceInfo             *InventoryDeviceInfoRelationship             `json:"InventoryDeviceInfo,omitempty"`
-		InventoryGenericInventoryHolder *InventoryGenericInventoryHolderRelationship `json:"InventoryGenericInventoryHolder,omitempty"`
-		RegisteredDevice                *AssetDeviceRegistrationRelationship         `json:"RegisteredDevice,omitempty"`
+		Value                           *string                                             `json:"Value,omitempty"`
+		InventoryDeviceInfo             NullableInventoryDeviceInfoRelationship             `json:"InventoryDeviceInfo,omitempty"`
+		InventoryGenericInventoryHolder NullableInventoryGenericInventoryHolderRelationship `json:"InventoryGenericInventoryHolder,omitempty"`
+		RegisteredDevice                NullableAssetDeviceRegistrationRelationship         `json:"RegisteredDevice,omitempty"`
 	}
 
 	varInventoryGenericInventoryWithoutEmbeddedStruct := InventoryGenericInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varInventoryGenericInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varInventoryGenericInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varInventoryGenericInventory := _InventoryGenericInventory{}
 		varInventoryGenericInventory.ClassId = varInventoryGenericInventoryWithoutEmbeddedStruct.ClassId
@@ -380,7 +443,7 @@ func (o *InventoryGenericInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varInventoryGenericInventory := _InventoryGenericInventory{}
 
-	err = json.Unmarshal(bytes, &varInventoryGenericInventory)
+	err = json.Unmarshal(data, &varInventoryGenericInventory)
 	if err == nil {
 		o.InventoryBase = varInventoryGenericInventory.InventoryBase
 	} else {
@@ -389,7 +452,7 @@ func (o *InventoryGenericInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Key")

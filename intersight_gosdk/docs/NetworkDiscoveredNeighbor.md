@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **NeighborInterface** | Pointer to **string** | Neighboring device interface. | [optional] [readonly] 
 **NeighborPortId** | Pointer to **string** | PortID of the neighbor device configured. | [optional] [readonly] 
 **SwitchPortId** | Pointer to **string** | Name of the local interface. | [optional] [readonly] 
-**CdpNeighbor** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
-**LldpNeighbor** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**CdpNeighbor** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**LldpNeighbor** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -285,6 +285,16 @@ SetCdpNeighbor sets CdpNeighbor field to given value.
 
 HasCdpNeighbor returns a boolean if a field has been set.
 
+### SetCdpNeighborNil
+
+`func (o *NetworkDiscoveredNeighbor) SetCdpNeighborNil(b bool)`
+
+ SetCdpNeighborNil sets the value for CdpNeighbor to be an explicit nil
+
+### UnsetCdpNeighbor
+`func (o *NetworkDiscoveredNeighbor) UnsetCdpNeighbor()`
+
+UnsetCdpNeighbor ensures that no value is present for CdpNeighbor, not even an explicit nil
 ### GetLldpNeighbor
 
 `func (o *NetworkDiscoveredNeighbor) GetLldpNeighbor() NetworkElementRelationship`
@@ -310,6 +320,16 @@ SetLldpNeighbor sets LldpNeighbor field to given value.
 
 HasLldpNeighbor returns a boolean if a field has been set.
 
+### SetLldpNeighborNil
+
+`func (o *NetworkDiscoveredNeighbor) SetLldpNeighborNil(b bool)`
+
+ SetLldpNeighborNil sets the value for LldpNeighbor to be an explicit nil
+
+### UnsetLldpNeighbor
+`func (o *NetworkDiscoveredNeighbor) UnsetLldpNeighbor()`
+
+UnsetLldpNeighbor ensures that no value is present for LldpNeighbor, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CertificatemanagementPolicyInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CertificatemanagementPolicyInventory{}
 
 // CertificatemanagementPolicyInventory Certificate Management policy models a reusable certificate and private key configuration that can be applied to multiple servers via profile association.
 type CertificatemanagementPolicyInventory struct {
@@ -25,7 +29,7 @@ type CertificatemanagementPolicyInventory struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType           string                                 `json:"ObjectType"`
 	Certificates         []CertificatemanagementCertificateBase `json:"Certificates,omitempty"`
-	TargetMo             *MoBaseMoRelationship                  `json:"TargetMo,omitempty"`
+	TargetMo             NullableMoBaseMoRelationship           `json:"TargetMo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,7 +119,7 @@ func (o *CertificatemanagementPolicyInventory) GetCertificates() []Certificatema
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CertificatemanagementPolicyInventory) GetCertificatesOk() ([]CertificatemanagementCertificateBase, bool) {
-	if o == nil || o.Certificates == nil {
+	if o == nil || IsNil(o.Certificates) {
 		return nil, false
 	}
 	return o.Certificates, true
@@ -123,7 +127,7 @@ func (o *CertificatemanagementPolicyInventory) GetCertificatesOk() ([]Certificat
 
 // HasCertificates returns a boolean if a field has been set.
 func (o *CertificatemanagementPolicyInventory) HasCertificates() bool {
-	if o != nil && o.Certificates != nil {
+	if o != nil && IsNil(o.Certificates) {
 		return true
 	}
 
@@ -135,81 +139,118 @@ func (o *CertificatemanagementPolicyInventory) SetCertificates(v []Certificatema
 	o.Certificates = v
 }
 
-// GetTargetMo returns the TargetMo field value if set, zero value otherwise.
+// GetTargetMo returns the TargetMo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CertificatemanagementPolicyInventory) GetTargetMo() MoBaseMoRelationship {
-	if o == nil || o.TargetMo == nil {
+	if o == nil || IsNil(o.TargetMo.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.TargetMo
+	return *o.TargetMo.Get()
 }
 
 // GetTargetMoOk returns a tuple with the TargetMo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CertificatemanagementPolicyInventory) GetTargetMoOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.TargetMo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMo, true
+	return o.TargetMo.Get(), o.TargetMo.IsSet()
 }
 
 // HasTargetMo returns a boolean if a field has been set.
 func (o *CertificatemanagementPolicyInventory) HasTargetMo() bool {
-	if o != nil && o.TargetMo != nil {
+	if o != nil && o.TargetMo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetMo gets a reference to the given MoBaseMoRelationship and assigns it to the TargetMo field.
+// SetTargetMo gets a reference to the given NullableMoBaseMoRelationship and assigns it to the TargetMo field.
 func (o *CertificatemanagementPolicyInventory) SetTargetMo(v MoBaseMoRelationship) {
-	o.TargetMo = &v
+	o.TargetMo.Set(&v)
+}
+
+// SetTargetMoNil sets the value for TargetMo to be an explicit nil
+func (o *CertificatemanagementPolicyInventory) SetTargetMoNil() {
+	o.TargetMo.Set(nil)
+}
+
+// UnsetTargetMo ensures that no value is present for TargetMo, not even an explicit nil
+func (o *CertificatemanagementPolicyInventory) UnsetTargetMo() {
+	o.TargetMo.Unset()
 }
 
 func (o CertificatemanagementPolicyInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CertificatemanagementPolicyInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicyInventory, errPolicyAbstractPolicyInventory := json.Marshal(o.PolicyAbstractPolicyInventory)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
 	errPolicyAbstractPolicyInventory = json.Unmarshal([]byte(serializedPolicyAbstractPolicyInventory), &toSerialize)
 	if errPolicyAbstractPolicyInventory != nil {
-		return []byte{}, errPolicyAbstractPolicyInventory
+		return map[string]interface{}{}, errPolicyAbstractPolicyInventory
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.Certificates != nil {
 		toSerialize["Certificates"] = o.Certificates
 	}
-	if o.TargetMo != nil {
-		toSerialize["TargetMo"] = o.TargetMo
+	if o.TargetMo.IsSet() {
+		toSerialize["TargetMo"] = o.TargetMo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CertificatemanagementPolicyInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CertificatemanagementPolicyInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CertificatemanagementPolicyInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType   string                                 `json:"ObjectType"`
 		Certificates []CertificatemanagementCertificateBase `json:"Certificates,omitempty"`
-		TargetMo     *MoBaseMoRelationship                  `json:"TargetMo,omitempty"`
+		TargetMo     NullableMoBaseMoRelationship           `json:"TargetMo,omitempty"`
 	}
 
 	varCertificatemanagementPolicyInventoryWithoutEmbeddedStruct := CertificatemanagementPolicyInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCertificatemanagementPolicyInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCertificatemanagementPolicyInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varCertificatemanagementPolicyInventory := _CertificatemanagementPolicyInventory{}
 		varCertificatemanagementPolicyInventory.ClassId = varCertificatemanagementPolicyInventoryWithoutEmbeddedStruct.ClassId
@@ -223,7 +264,7 @@ func (o *CertificatemanagementPolicyInventory) UnmarshalJSON(bytes []byte) (err 
 
 	varCertificatemanagementPolicyInventory := _CertificatemanagementPolicyInventory{}
 
-	err = json.Unmarshal(bytes, &varCertificatemanagementPolicyInventory)
+	err = json.Unmarshal(data, &varCertificatemanagementPolicyInventory)
 	if err == nil {
 		o.PolicyAbstractPolicyInventory = varCertificatemanagementPolicyInventory.PolicyAbstractPolicyInventory
 	} else {
@@ -232,7 +273,7 @@ func (o *CertificatemanagementPolicyInventory) UnmarshalJSON(bytes []byte) (err 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Certificates")

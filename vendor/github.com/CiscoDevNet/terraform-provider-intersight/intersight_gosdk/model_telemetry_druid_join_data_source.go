@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,7 +13,11 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 )
+
+// checks if the TelemetryDruidJoinDataSource type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidJoinDataSource{}
 
 // TelemetryDruidJoinDataSource Join datasources allow you to do a SQL-style join of two datasources. Stacking joins on top of each other allows you to join arbitrarily many datasources. Joins are implemented with a broadcast hash-join algorithm. This means that all tables other than the leftmost \"base\" table must fit in memory. It also means that the join condition must be an equality. This feature is intended mainly to allow joining regular Druid tables with lookup, inline, and query datasources.
 type TelemetryDruidJoinDataSource struct {
@@ -201,43 +205,69 @@ func (o *TelemetryDruidJoinDataSource) SetJoinType(v string) {
 }
 
 func (o TelemetryDruidJoinDataSource) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidJoinDataSource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if true {
-		toSerialize["left"] = o.Left
-	}
-	if true {
-		toSerialize["right"] = o.Right
-	}
-	if true {
-		toSerialize["rightPrefix"] = o.RightPrefix
-	}
-	if true {
-		toSerialize["condition"] = o.Condition
-	}
-	if true {
-		toSerialize["joinType"] = o.JoinType
-	}
+	toSerialize["type"] = o.Type
+	toSerialize["left"] = o.Left
+	toSerialize["right"] = o.Right
+	toSerialize["rightPrefix"] = o.RightPrefix
+	toSerialize["condition"] = o.Condition
+	toSerialize["joinType"] = o.JoinType
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidJoinDataSource) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidJoinDataSource) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"type",
+		"left",
+		"right",
+		"rightPrefix",
+		"condition",
+		"joinType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTelemetryDruidJoinDataSource := _TelemetryDruidJoinDataSource{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidJoinDataSource); err == nil {
-		*o = TelemetryDruidJoinDataSource(varTelemetryDruidJoinDataSource)
+	err = json.Unmarshal(data, &varTelemetryDruidJoinDataSource)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidJoinDataSource(varTelemetryDruidJoinDataSource)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "left")
 		delete(additionalProperties, "right")

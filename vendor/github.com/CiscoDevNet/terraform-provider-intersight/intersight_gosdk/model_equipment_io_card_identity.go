@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the EquipmentIoCardIdentity type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EquipmentIoCardIdentity{}
 
 // EquipmentIoCardIdentity IoCardIdentity Complex type referenced in ChassisIdentity concrete MO.
 type EquipmentIoCardIdentity struct {
@@ -118,7 +122,7 @@ func (o *EquipmentIoCardIdentity) SetObjectType(v string) {
 
 // GetIoCardMoid returns the IoCardMoid field value if set, zero value otherwise.
 func (o *EquipmentIoCardIdentity) GetIoCardMoid() string {
-	if o == nil || o.IoCardMoid == nil {
+	if o == nil || IsNil(o.IoCardMoid) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *EquipmentIoCardIdentity) GetIoCardMoid() string {
 // GetIoCardMoidOk returns a tuple with the IoCardMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardIdentity) GetIoCardMoidOk() (*string, bool) {
-	if o == nil || o.IoCardMoid == nil {
+	if o == nil || IsNil(o.IoCardMoid) {
 		return nil, false
 	}
 	return o.IoCardMoid, true
@@ -136,7 +140,7 @@ func (o *EquipmentIoCardIdentity) GetIoCardMoidOk() (*string, bool) {
 
 // HasIoCardMoid returns a boolean if a field has been set.
 func (o *EquipmentIoCardIdentity) HasIoCardMoid() bool {
-	if o != nil && o.IoCardMoid != nil {
+	if o != nil && !IsNil(o.IoCardMoid) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *EquipmentIoCardIdentity) SetIoCardMoid(v string) {
 
 // GetLifecycle returns the Lifecycle field value if set, zero value otherwise.
 func (o *EquipmentIoCardIdentity) GetLifecycle() string {
-	if o == nil || o.Lifecycle == nil {
+	if o == nil || IsNil(o.Lifecycle) {
 		var ret string
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *EquipmentIoCardIdentity) GetLifecycle() string {
 // GetLifecycleOk returns a tuple with the Lifecycle field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardIdentity) GetLifecycleOk() (*string, bool) {
-	if o == nil || o.Lifecycle == nil {
+	if o == nil || IsNil(o.Lifecycle) {
 		return nil, false
 	}
 	return o.Lifecycle, true
@@ -168,7 +172,7 @@ func (o *EquipmentIoCardIdentity) GetLifecycleOk() (*string, bool) {
 
 // HasLifecycle returns a boolean if a field has been set.
 func (o *EquipmentIoCardIdentity) HasLifecycle() bool {
-	if o != nil && o.Lifecycle != nil {
+	if o != nil && !IsNil(o.Lifecycle) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *EquipmentIoCardIdentity) SetLifecycle(v string) {
 
 // GetModel returns the Model field value if set, zero value otherwise.
 func (o *EquipmentIoCardIdentity) GetModel() string {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *EquipmentIoCardIdentity) GetModel() string {
 // GetModelOk returns a tuple with the Model field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardIdentity) GetModelOk() (*string, bool) {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		return nil, false
 	}
 	return o.Model, true
@@ -200,7 +204,7 @@ func (o *EquipmentIoCardIdentity) GetModelOk() (*string, bool) {
 
 // HasModel returns a boolean if a field has been set.
 func (o *EquipmentIoCardIdentity) HasModel() bool {
-	if o != nil && o.Model != nil {
+	if o != nil && !IsNil(o.Model) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *EquipmentIoCardIdentity) SetModel(v string) {
 
 // GetModuleId returns the ModuleId field value if set, zero value otherwise.
 func (o *EquipmentIoCardIdentity) GetModuleId() int64 {
-	if o == nil || o.ModuleId == nil {
+	if o == nil || IsNil(o.ModuleId) {
 		var ret int64
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *EquipmentIoCardIdentity) GetModuleId() int64 {
 // GetModuleIdOk returns a tuple with the ModuleId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardIdentity) GetModuleIdOk() (*int64, bool) {
-	if o == nil || o.ModuleId == nil {
+	if o == nil || IsNil(o.ModuleId) {
 		return nil, false
 	}
 	return o.ModuleId, true
@@ -232,7 +236,7 @@ func (o *EquipmentIoCardIdentity) GetModuleIdOk() (*int64, bool) {
 
 // HasModuleId returns a boolean if a field has been set.
 func (o *EquipmentIoCardIdentity) HasModuleId() bool {
-	if o != nil && o.ModuleId != nil {
+	if o != nil && !IsNil(o.ModuleId) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *EquipmentIoCardIdentity) SetModuleId(v int64) {
 
 // GetNetworkElementMoid returns the NetworkElementMoid field value if set, zero value otherwise.
 func (o *EquipmentIoCardIdentity) GetNetworkElementMoid() string {
-	if o == nil || o.NetworkElementMoid == nil {
+	if o == nil || IsNil(o.NetworkElementMoid) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *EquipmentIoCardIdentity) GetNetworkElementMoid() string {
 // GetNetworkElementMoidOk returns a tuple with the NetworkElementMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardIdentity) GetNetworkElementMoidOk() (*string, bool) {
-	if o == nil || o.NetworkElementMoid == nil {
+	if o == nil || IsNil(o.NetworkElementMoid) {
 		return nil, false
 	}
 	return o.NetworkElementMoid, true
@@ -264,7 +268,7 @@ func (o *EquipmentIoCardIdentity) GetNetworkElementMoidOk() (*string, bool) {
 
 // HasNetworkElementMoid returns a boolean if a field has been set.
 func (o *EquipmentIoCardIdentity) HasNetworkElementMoid() bool {
-	if o != nil && o.NetworkElementMoid != nil {
+	if o != nil && !IsNil(o.NetworkElementMoid) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *EquipmentIoCardIdentity) SetNetworkElementMoid(v string) {
 
 // GetSerial returns the Serial field value if set, zero value otherwise.
 func (o *EquipmentIoCardIdentity) GetSerial() string {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *EquipmentIoCardIdentity) GetSerial() string {
 // GetSerialOk returns a tuple with the Serial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardIdentity) GetSerialOk() (*string, bool) {
-	if o == nil || o.Serial == nil {
+	if o == nil || IsNil(o.Serial) {
 		return nil, false
 	}
 	return o.Serial, true
@@ -296,7 +300,7 @@ func (o *EquipmentIoCardIdentity) GetSerialOk() (*string, bool) {
 
 // HasSerial returns a boolean if a field has been set.
 func (o *EquipmentIoCardIdentity) HasSerial() bool {
-	if o != nil && o.Serial != nil {
+	if o != nil && !IsNil(o.Serial) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *EquipmentIoCardIdentity) SetSerial(v string) {
 
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *EquipmentIoCardIdentity) GetSwitchId() int64 {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		var ret int64
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *EquipmentIoCardIdentity) GetSwitchId() int64 {
 // GetSwitchIdOk returns a tuple with the SwitchId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardIdentity) GetSwitchIdOk() (*int64, bool) {
-	if o == nil || o.SwitchId == nil {
+	if o == nil || IsNil(o.SwitchId) {
 		return nil, false
 	}
 	return o.SwitchId, true
@@ -328,7 +332,7 @@ func (o *EquipmentIoCardIdentity) GetSwitchIdOk() (*int64, bool) {
 
 // HasSwitchId returns a boolean if a field has been set.
 func (o *EquipmentIoCardIdentity) HasSwitchId() bool {
-	if o != nil && o.SwitchId != nil {
+	if o != nil && !IsNil(o.SwitchId) {
 		return true
 	}
 
@@ -342,7 +346,7 @@ func (o *EquipmentIoCardIdentity) SetSwitchId(v int64) {
 
 // GetVendor returns the Vendor field value if set, zero value otherwise.
 func (o *EquipmentIoCardIdentity) GetVendor() string {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		var ret string
 		return ret
 	}
@@ -352,7 +356,7 @@ func (o *EquipmentIoCardIdentity) GetVendor() string {
 // GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EquipmentIoCardIdentity) GetVendorOk() (*string, bool) {
-	if o == nil || o.Vendor == nil {
+	if o == nil || IsNil(o.Vendor) {
 		return nil, false
 	}
 	return o.Vendor, true
@@ -360,7 +364,7 @@ func (o *EquipmentIoCardIdentity) GetVendorOk() (*string, bool) {
 
 // HasVendor returns a boolean if a field has been set.
 func (o *EquipmentIoCardIdentity) HasVendor() bool {
-	if o != nil && o.Vendor != nil {
+	if o != nil && !IsNil(o.Vendor) {
 		return true
 	}
 
@@ -373,43 +377,47 @@ func (o *EquipmentIoCardIdentity) SetVendor(v string) {
 }
 
 func (o EquipmentIoCardIdentity) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EquipmentIoCardIdentity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IoCardMoid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IoCardMoid) {
 		toSerialize["IoCardMoid"] = o.IoCardMoid
 	}
-	if o.Lifecycle != nil {
+	if !IsNil(o.Lifecycle) {
 		toSerialize["Lifecycle"] = o.Lifecycle
 	}
-	if o.Model != nil {
+	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
 	}
-	if o.ModuleId != nil {
+	if !IsNil(o.ModuleId) {
 		toSerialize["ModuleId"] = o.ModuleId
 	}
-	if o.NetworkElementMoid != nil {
+	if !IsNil(o.NetworkElementMoid) {
 		toSerialize["NetworkElementMoid"] = o.NetworkElementMoid
 	}
-	if o.Serial != nil {
+	if !IsNil(o.Serial) {
 		toSerialize["Serial"] = o.Serial
 	}
-	if o.SwitchId != nil {
+	if !IsNil(o.SwitchId) {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
-	if o.Vendor != nil {
+	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
 
@@ -417,10 +425,32 @@ func (o EquipmentIoCardIdentity) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *EquipmentIoCardIdentity) UnmarshalJSON(bytes []byte) (err error) {
+func (o *EquipmentIoCardIdentity) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type EquipmentIoCardIdentityWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -446,7 +476,7 @@ func (o *EquipmentIoCardIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentIoCardIdentityWithoutEmbeddedStruct := EquipmentIoCardIdentityWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varEquipmentIoCardIdentityWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varEquipmentIoCardIdentityWithoutEmbeddedStruct)
 	if err == nil {
 		varEquipmentIoCardIdentity := _EquipmentIoCardIdentity{}
 		varEquipmentIoCardIdentity.ClassId = varEquipmentIoCardIdentityWithoutEmbeddedStruct.ClassId
@@ -466,7 +496,7 @@ func (o *EquipmentIoCardIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	varEquipmentIoCardIdentity := _EquipmentIoCardIdentity{}
 
-	err = json.Unmarshal(bytes, &varEquipmentIoCardIdentity)
+	err = json.Unmarshal(data, &varEquipmentIoCardIdentity)
 	if err == nil {
 		o.MoBaseComplexType = varEquipmentIoCardIdentity.MoBaseComplexType
 	} else {
@@ -475,7 +505,7 @@ func (o *EquipmentIoCardIdentity) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IoCardMoid")

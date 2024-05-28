@@ -64,8 +64,8 @@ Name | Type | Description | Notes
 **Version** | Pointer to **string** | Software version of device being inventoried. The various software version values for each device are available on cisco.com. | [optional] 
 **VniStatus** | Pointer to [**[]NiatelemetryVniStatus**](NiatelemetryVniStatus.md) |  | [optional] 
 **VpcPeerIpAddress** | Pointer to **string** | The TEP IP address of the node&#39;s vPC peer, if present. | [optional] 
-**LicenseState** | Pointer to [**NiatelemetryNiaLicenseStateRelationship**](NiatelemetryNiaLicenseStateRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**LicenseState** | Pointer to [**NullableNiatelemetryNiaLicenseStateRelationship**](NiatelemetryNiaLicenseStateRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -1711,6 +1711,16 @@ SetLicenseState sets LicenseState field to given value.
 
 HasLicenseState returns a boolean if a field has been set.
 
+### SetLicenseStateNil
+
+`func (o *NiatelemetryNiaInventory) SetLicenseStateNil(b bool)`
+
+ SetLicenseStateNil sets the value for LicenseState to be an explicit nil
+
+### UnsetLicenseState
+`func (o *NiatelemetryNiaInventory) UnsetLicenseState()`
+
+UnsetLicenseState ensures that no value is present for LicenseState, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *NiatelemetryNiaInventory) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -1736,6 +1746,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *NiatelemetryNiaInventory) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *NiatelemetryNiaInventory) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

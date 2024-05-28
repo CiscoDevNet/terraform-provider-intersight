@@ -27,11 +27,11 @@ Name | Type | Description | Notes
 **PowerState** | Pointer to **string** | Expected power state of virtual machine (PowerOn, PowerOff, Restart). * &#x60;PowerOff&#x60; - The virtual machine will be powered off if it is already not in powered off state. If it is already powered off, no side-effects are expected. * &#x60;PowerOn&#x60; - The virtual machine will be powered on if it is already not in powered on state. If it is already powered on, no side-effects are expected. * &#x60;Suspend&#x60; - The virtual machine will be put into  a suspended state. * &#x60;ShutDownGuestOS&#x60; - The guest operating system is shut down gracefully. * &#x60;RestartGuestOS&#x60; - It can either act as a reset switch and abruptly reset the guest operating system, or it can send a restart signal to the guest operating system so that it shuts down gracefully and restarts. * &#x60;Reset&#x60; - Resets the virtual machine abruptly, with no consideration for work in progress. * &#x60;Restart&#x60; - The virtual machine will be restarted only if it is in powered on state. If it is powered off, it will not be started up. * &#x60;Unknown&#x60; - Power state of the entity is unknown. | [optional] [default to "PowerOff"]
 **ProvisionType** | Pointer to **string** | Identifies the provision type to create a new virtual machine. * &#x60;OVA&#x60; - Deploy virtual machine using OVA/F file. * &#x60;Template&#x60; - Provision virtual machine using a template file. * &#x60;Discovered&#x60; - A virtual machine was &#39;discovered&#39; and not created from Intersight. No provisioning information is available. | [optional] [default to "OVA"]
 **VmConfig** | Pointer to [**NullableVirtualizationBaseVmConfiguration**](VirtualizationBaseVmConfiguration.md) |  | [optional] 
-**Cluster** | Pointer to [**VirtualizationBaseClusterRelationship**](VirtualizationBaseClusterRelationship.md) |  | [optional] 
-**Host** | Pointer to [**VirtualizationBaseHostRelationship**](VirtualizationBaseHostRelationship.md) |  | [optional] 
-**Inventory** | Pointer to [**VirtualizationBaseVirtualMachineRelationship**](VirtualizationBaseVirtualMachineRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**Cluster** | Pointer to [**NullableVirtualizationBaseClusterRelationship**](VirtualizationBaseClusterRelationship.md) |  | [optional] 
+**Host** | Pointer to [**NullableVirtualizationBaseHostRelationship**](VirtualizationBaseHostRelationship.md) |  | [optional] 
+**Inventory** | Pointer to [**NullableVirtualizationBaseVirtualMachineRelationship**](VirtualizationBaseVirtualMachineRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**WorkflowInfo** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -732,6 +732,16 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
+### SetClusterNil
+
+`func (o *VirtualizationVirtualMachine) SetClusterNil(b bool)`
+
+ SetClusterNil sets the value for Cluster to be an explicit nil
+
+### UnsetCluster
+`func (o *VirtualizationVirtualMachine) UnsetCluster()`
+
+UnsetCluster ensures that no value is present for Cluster, not even an explicit nil
 ### GetHost
 
 `func (o *VirtualizationVirtualMachine) GetHost() VirtualizationBaseHostRelationship`
@@ -757,6 +767,16 @@ SetHost sets Host field to given value.
 
 HasHost returns a boolean if a field has been set.
 
+### SetHostNil
+
+`func (o *VirtualizationVirtualMachine) SetHostNil(b bool)`
+
+ SetHostNil sets the value for Host to be an explicit nil
+
+### UnsetHost
+`func (o *VirtualizationVirtualMachine) UnsetHost()`
+
+UnsetHost ensures that no value is present for Host, not even an explicit nil
 ### GetInventory
 
 `func (o *VirtualizationVirtualMachine) GetInventory() VirtualizationBaseVirtualMachineRelationship`
@@ -782,6 +802,16 @@ SetInventory sets Inventory field to given value.
 
 HasInventory returns a boolean if a field has been set.
 
+### SetInventoryNil
+
+`func (o *VirtualizationVirtualMachine) SetInventoryNil(b bool)`
+
+ SetInventoryNil sets the value for Inventory to be an explicit nil
+
+### UnsetInventory
+`func (o *VirtualizationVirtualMachine) UnsetInventory()`
+
+UnsetInventory ensures that no value is present for Inventory, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *VirtualizationVirtualMachine) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -807,6 +837,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *VirtualizationVirtualMachine) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *VirtualizationVirtualMachine) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetWorkflowInfo
 
 `func (o *VirtualizationVirtualMachine) GetWorkflowInfo() WorkflowWorkflowInfoRelationship`
@@ -832,6 +872,16 @@ SetWorkflowInfo sets WorkflowInfo field to given value.
 
 HasWorkflowInfo returns a boolean if a field has been set.
 
+### SetWorkflowInfoNil
+
+`func (o *VirtualizationVirtualMachine) SetWorkflowInfoNil(b bool)`
+
+ SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+
+### UnsetWorkflowInfo
+`func (o *VirtualizationVirtualMachine) UnsetWorkflowInfo()`
+
+UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

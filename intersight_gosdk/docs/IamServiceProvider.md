@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **EntityId** | Pointer to **string** | Entity ID of the Intersight Service Provider. In SAML, the entity ID uniquely identifies the IdP/Service Provider. | [optional] [readonly] 
 **Metadata** | Pointer to **string** | Metadata of the Intersight Service Provider. User downloads the Intersight Service Provider metadata and integrates it with their IdP for authentication. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the Intersight Service Provider. | [optional] [readonly] 
-**System** | Pointer to [**IamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
+**System** | Pointer to [**NullableIamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -170,6 +170,16 @@ SetSystem sets System field to given value.
 
 HasSystem returns a boolean if a field has been set.
 
+### SetSystemNil
+
+`func (o *IamServiceProvider) SetSystemNil(b bool)`
+
+ SetSystemNil sets the value for System to be an explicit nil
+
+### UnsetSystem
+`func (o *IamServiceProvider) UnsetSystem()`
+
+UnsetSystem ensures that no value is present for System, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

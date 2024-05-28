@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the TechsupportmanagementTechSupportStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TechsupportmanagementTechSupportStatus{}
 
 // TechsupportmanagementTechSupportStatus The techsupport collection status.
 type TechsupportmanagementTechSupportStatus struct {
@@ -43,11 +47,11 @@ type TechsupportmanagementTechSupportStatus struct {
 	TechsupportDownloadUrl *string                                    `json:"TechsupportDownloadUrl,omitempty"`
 	TechsupportFiles       []TechsupportmanagementTechSupportFileInfo `json:"TechsupportFiles,omitempty"`
 	// The name of the role granted to the user that issued the techsupport request.
-	UserRole             *string                                             `json:"UserRole,omitempty"`
-	ClusterMember        *AssetClusterMemberRelationship                     `json:"ClusterMember,omitempty"`
-	DeviceRegistration   *AssetDeviceRegistrationRelationship                `json:"DeviceRegistration,omitempty"`
-	OriginResource       *MoBaseMoRelationship                               `json:"OriginResource,omitempty"`
-	TechSupportRequest   *TechsupportmanagementTechSupportBundleRelationship `json:"TechSupportRequest,omitempty"`
+	UserRole             *string                                                    `json:"UserRole,omitempty"`
+	ClusterMember        NullableAssetClusterMemberRelationship                     `json:"ClusterMember,omitempty"`
+	DeviceRegistration   NullableAssetDeviceRegistrationRelationship                `json:"DeviceRegistration,omitempty"`
+	OriginResource       NullableMoBaseMoRelationship                               `json:"OriginResource,omitempty"`
+	TechSupportRequest   NullableTechsupportmanagementTechSupportBundleRelationship `json:"TechSupportRequest,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -126,7 +130,7 @@ func (o *TechsupportmanagementTechSupportStatus) SetObjectType(v string) {
 
 // GetFileName returns the FileName field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportStatus) GetFileName() string {
-	if o == nil || o.FileName == nil {
+	if o == nil || IsNil(o.FileName) {
 		var ret string
 		return ret
 	}
@@ -136,7 +140,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetFileName() string {
 // GetFileNameOk returns a tuple with the FileName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportStatus) GetFileNameOk() (*string, bool) {
-	if o == nil || o.FileName == nil {
+	if o == nil || IsNil(o.FileName) {
 		return nil, false
 	}
 	return o.FileName, true
@@ -144,7 +148,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetFileNameOk() (*string, bool)
 
 // HasFileName returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasFileName() bool {
-	if o != nil && o.FileName != nil {
+	if o != nil && !IsNil(o.FileName) {
 		return true
 	}
 
@@ -158,7 +162,7 @@ func (o *TechsupportmanagementTechSupportStatus) SetFileName(v string) {
 
 // GetFileSize returns the FileSize field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportStatus) GetFileSize() int64 {
-	if o == nil || o.FileSize == nil {
+	if o == nil || IsNil(o.FileSize) {
 		var ret int64
 		return ret
 	}
@@ -168,7 +172,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetFileSize() int64 {
 // GetFileSizeOk returns a tuple with the FileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportStatus) GetFileSizeOk() (*int64, bool) {
-	if o == nil || o.FileSize == nil {
+	if o == nil || IsNil(o.FileSize) {
 		return nil, false
 	}
 	return o.FileSize, true
@@ -176,7 +180,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetFileSizeOk() (*int64, bool) 
 
 // HasFileSize returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasFileSize() bool {
-	if o != nil && o.FileSize != nil {
+	if o != nil && !IsNil(o.FileSize) {
 		return true
 	}
 
@@ -190,7 +194,7 @@ func (o *TechsupportmanagementTechSupportStatus) SetFileSize(v int64) {
 
 // GetReason returns the Reason field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportStatus) GetReason() string {
-	if o == nil || o.Reason == nil {
+	if o == nil || IsNil(o.Reason) {
 		var ret string
 		return ret
 	}
@@ -200,7 +204,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportStatus) GetReasonOk() (*string, bool) {
-	if o == nil || o.Reason == nil {
+	if o == nil || IsNil(o.Reason) {
 		return nil, false
 	}
 	return o.Reason, true
@@ -208,7 +212,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetReasonOk() (*string, bool) {
 
 // HasReason returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasReason() bool {
-	if o != nil && o.Reason != nil {
+	if o != nil && !IsNil(o.Reason) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *TechsupportmanagementTechSupportStatus) SetReason(v string) {
 
 // GetRelayReason returns the RelayReason field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportStatus) GetRelayReason() string {
-	if o == nil || o.RelayReason == nil {
+	if o == nil || IsNil(o.RelayReason) {
 		var ret string
 		return ret
 	}
@@ -232,7 +236,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetRelayReason() string {
 // GetRelayReasonOk returns a tuple with the RelayReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportStatus) GetRelayReasonOk() (*string, bool) {
-	if o == nil || o.RelayReason == nil {
+	if o == nil || IsNil(o.RelayReason) {
 		return nil, false
 	}
 	return o.RelayReason, true
@@ -240,7 +244,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetRelayReasonOk() (*string, bo
 
 // HasRelayReason returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasRelayReason() bool {
-	if o != nil && o.RelayReason != nil {
+	if o != nil && !IsNil(o.RelayReason) {
 		return true
 	}
 
@@ -254,7 +258,7 @@ func (o *TechsupportmanagementTechSupportStatus) SetRelayReason(v string) {
 
 // GetRelayStatus returns the RelayStatus field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportStatus) GetRelayStatus() string {
-	if o == nil || o.RelayStatus == nil {
+	if o == nil || IsNil(o.RelayStatus) {
 		var ret string
 		return ret
 	}
@@ -264,7 +268,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetRelayStatus() string {
 // GetRelayStatusOk returns a tuple with the RelayStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportStatus) GetRelayStatusOk() (*string, bool) {
-	if o == nil || o.RelayStatus == nil {
+	if o == nil || IsNil(o.RelayStatus) {
 		return nil, false
 	}
 	return o.RelayStatus, true
@@ -272,7 +276,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetRelayStatusOk() (*string, bo
 
 // HasRelayStatus returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasRelayStatus() bool {
-	if o != nil && o.RelayStatus != nil {
+	if o != nil && !IsNil(o.RelayStatus) {
 		return true
 	}
 
@@ -286,7 +290,7 @@ func (o *TechsupportmanagementTechSupportStatus) SetRelayStatus(v string) {
 
 // GetRequestTs returns the RequestTs field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportStatus) GetRequestTs() time.Time {
-	if o == nil || o.RequestTs == nil {
+	if o == nil || IsNil(o.RequestTs) {
 		var ret time.Time
 		return ret
 	}
@@ -296,7 +300,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetRequestTs() time.Time {
 // GetRequestTsOk returns a tuple with the RequestTs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportStatus) GetRequestTsOk() (*time.Time, bool) {
-	if o == nil || o.RequestTs == nil {
+	if o == nil || IsNil(o.RequestTs) {
 		return nil, false
 	}
 	return o.RequestTs, true
@@ -304,7 +308,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetRequestTsOk() (*time.Time, b
 
 // HasRequestTs returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasRequestTs() bool {
-	if o != nil && o.RequestTs != nil {
+	if o != nil && !IsNil(o.RequestTs) {
 		return true
 	}
 
@@ -318,7 +322,7 @@ func (o *TechsupportmanagementTechSupportStatus) SetRequestTs(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportStatus) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -328,7 +332,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportStatus) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -336,7 +340,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -350,7 +354,7 @@ func (o *TechsupportmanagementTechSupportStatus) SetStatus(v string) {
 
 // GetTechsupportDownloadUrl returns the TechsupportDownloadUrl field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportStatus) GetTechsupportDownloadUrl() string {
-	if o == nil || o.TechsupportDownloadUrl == nil {
+	if o == nil || IsNil(o.TechsupportDownloadUrl) {
 		var ret string
 		return ret
 	}
@@ -360,7 +364,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetTechsupportDownloadUrl() str
 // GetTechsupportDownloadUrlOk returns a tuple with the TechsupportDownloadUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportStatus) GetTechsupportDownloadUrlOk() (*string, bool) {
-	if o == nil || o.TechsupportDownloadUrl == nil {
+	if o == nil || IsNil(o.TechsupportDownloadUrl) {
 		return nil, false
 	}
 	return o.TechsupportDownloadUrl, true
@@ -368,7 +372,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetTechsupportDownloadUrlOk() (
 
 // HasTechsupportDownloadUrl returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasTechsupportDownloadUrl() bool {
-	if o != nil && o.TechsupportDownloadUrl != nil {
+	if o != nil && !IsNil(o.TechsupportDownloadUrl) {
 		return true
 	}
 
@@ -393,7 +397,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetTechsupportFiles() []Techsup
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TechsupportmanagementTechSupportStatus) GetTechsupportFilesOk() ([]TechsupportmanagementTechSupportFileInfo, bool) {
-	if o == nil || o.TechsupportFiles == nil {
+	if o == nil || IsNil(o.TechsupportFiles) {
 		return nil, false
 	}
 	return o.TechsupportFiles, true
@@ -401,7 +405,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetTechsupportFilesOk() ([]Tech
 
 // HasTechsupportFiles returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasTechsupportFiles() bool {
-	if o != nil && o.TechsupportFiles != nil {
+	if o != nil && IsNil(o.TechsupportFiles) {
 		return true
 	}
 
@@ -415,7 +419,7 @@ func (o *TechsupportmanagementTechSupportStatus) SetTechsupportFiles(v []Techsup
 
 // GetUserRole returns the UserRole field value if set, zero value otherwise.
 func (o *TechsupportmanagementTechSupportStatus) GetUserRole() string {
-	if o == nil || o.UserRole == nil {
+	if o == nil || IsNil(o.UserRole) {
 		var ret string
 		return ret
 	}
@@ -425,7 +429,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetUserRole() string {
 // GetUserRoleOk returns a tuple with the UserRole field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TechsupportmanagementTechSupportStatus) GetUserRoleOk() (*string, bool) {
-	if o == nil || o.UserRole == nil {
+	if o == nil || IsNil(o.UserRole) {
 		return nil, false
 	}
 	return o.UserRole, true
@@ -433,7 +437,7 @@ func (o *TechsupportmanagementTechSupportStatus) GetUserRoleOk() (*string, bool)
 
 // HasUserRole returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasUserRole() bool {
-	if o != nil && o.UserRole != nil {
+	if o != nil && !IsNil(o.UserRole) {
 		return true
 	}
 
@@ -445,201 +449,271 @@ func (o *TechsupportmanagementTechSupportStatus) SetUserRole(v string) {
 	o.UserRole = &v
 }
 
-// GetClusterMember returns the ClusterMember field value if set, zero value otherwise.
+// GetClusterMember returns the ClusterMember field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TechsupportmanagementTechSupportStatus) GetClusterMember() AssetClusterMemberRelationship {
-	if o == nil || o.ClusterMember == nil {
+	if o == nil || IsNil(o.ClusterMember.Get()) {
 		var ret AssetClusterMemberRelationship
 		return ret
 	}
-	return *o.ClusterMember
+	return *o.ClusterMember.Get()
 }
 
 // GetClusterMemberOk returns a tuple with the ClusterMember field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TechsupportmanagementTechSupportStatus) GetClusterMemberOk() (*AssetClusterMemberRelationship, bool) {
-	if o == nil || o.ClusterMember == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClusterMember, true
+	return o.ClusterMember.Get(), o.ClusterMember.IsSet()
 }
 
 // HasClusterMember returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasClusterMember() bool {
-	if o != nil && o.ClusterMember != nil {
+	if o != nil && o.ClusterMember.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClusterMember gets a reference to the given AssetClusterMemberRelationship and assigns it to the ClusterMember field.
+// SetClusterMember gets a reference to the given NullableAssetClusterMemberRelationship and assigns it to the ClusterMember field.
 func (o *TechsupportmanagementTechSupportStatus) SetClusterMember(v AssetClusterMemberRelationship) {
-	o.ClusterMember = &v
+	o.ClusterMember.Set(&v)
 }
 
-// GetDeviceRegistration returns the DeviceRegistration field value if set, zero value otherwise.
+// SetClusterMemberNil sets the value for ClusterMember to be an explicit nil
+func (o *TechsupportmanagementTechSupportStatus) SetClusterMemberNil() {
+	o.ClusterMember.Set(nil)
+}
+
+// UnsetClusterMember ensures that no value is present for ClusterMember, not even an explicit nil
+func (o *TechsupportmanagementTechSupportStatus) UnsetClusterMember() {
+	o.ClusterMember.Unset()
+}
+
+// GetDeviceRegistration returns the DeviceRegistration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TechsupportmanagementTechSupportStatus) GetDeviceRegistration() AssetDeviceRegistrationRelationship {
-	if o == nil || o.DeviceRegistration == nil {
+	if o == nil || IsNil(o.DeviceRegistration.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.DeviceRegistration
+	return *o.DeviceRegistration.Get()
 }
 
 // GetDeviceRegistrationOk returns a tuple with the DeviceRegistration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TechsupportmanagementTechSupportStatus) GetDeviceRegistrationOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.DeviceRegistration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeviceRegistration, true
+	return o.DeviceRegistration.Get(), o.DeviceRegistration.IsSet()
 }
 
 // HasDeviceRegistration returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasDeviceRegistration() bool {
-	if o != nil && o.DeviceRegistration != nil {
+	if o != nil && o.DeviceRegistration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeviceRegistration gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the DeviceRegistration field.
+// SetDeviceRegistration gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the DeviceRegistration field.
 func (o *TechsupportmanagementTechSupportStatus) SetDeviceRegistration(v AssetDeviceRegistrationRelationship) {
-	o.DeviceRegistration = &v
+	o.DeviceRegistration.Set(&v)
 }
 
-// GetOriginResource returns the OriginResource field value if set, zero value otherwise.
+// SetDeviceRegistrationNil sets the value for DeviceRegistration to be an explicit nil
+func (o *TechsupportmanagementTechSupportStatus) SetDeviceRegistrationNil() {
+	o.DeviceRegistration.Set(nil)
+}
+
+// UnsetDeviceRegistration ensures that no value is present for DeviceRegistration, not even an explicit nil
+func (o *TechsupportmanagementTechSupportStatus) UnsetDeviceRegistration() {
+	o.DeviceRegistration.Unset()
+}
+
+// GetOriginResource returns the OriginResource field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TechsupportmanagementTechSupportStatus) GetOriginResource() MoBaseMoRelationship {
-	if o == nil || o.OriginResource == nil {
+	if o == nil || IsNil(o.OriginResource.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.OriginResource
+	return *o.OriginResource.Get()
 }
 
 // GetOriginResourceOk returns a tuple with the OriginResource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TechsupportmanagementTechSupportStatus) GetOriginResourceOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.OriginResource == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.OriginResource, true
+	return o.OriginResource.Get(), o.OriginResource.IsSet()
 }
 
 // HasOriginResource returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasOriginResource() bool {
-	if o != nil && o.OriginResource != nil {
+	if o != nil && o.OriginResource.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOriginResource gets a reference to the given MoBaseMoRelationship and assigns it to the OriginResource field.
+// SetOriginResource gets a reference to the given NullableMoBaseMoRelationship and assigns it to the OriginResource field.
 func (o *TechsupportmanagementTechSupportStatus) SetOriginResource(v MoBaseMoRelationship) {
-	o.OriginResource = &v
+	o.OriginResource.Set(&v)
 }
 
-// GetTechSupportRequest returns the TechSupportRequest field value if set, zero value otherwise.
+// SetOriginResourceNil sets the value for OriginResource to be an explicit nil
+func (o *TechsupportmanagementTechSupportStatus) SetOriginResourceNil() {
+	o.OriginResource.Set(nil)
+}
+
+// UnsetOriginResource ensures that no value is present for OriginResource, not even an explicit nil
+func (o *TechsupportmanagementTechSupportStatus) UnsetOriginResource() {
+	o.OriginResource.Unset()
+}
+
+// GetTechSupportRequest returns the TechSupportRequest field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TechsupportmanagementTechSupportStatus) GetTechSupportRequest() TechsupportmanagementTechSupportBundleRelationship {
-	if o == nil || o.TechSupportRequest == nil {
+	if o == nil || IsNil(o.TechSupportRequest.Get()) {
 		var ret TechsupportmanagementTechSupportBundleRelationship
 		return ret
 	}
-	return *o.TechSupportRequest
+	return *o.TechSupportRequest.Get()
 }
 
 // GetTechSupportRequestOk returns a tuple with the TechSupportRequest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TechsupportmanagementTechSupportStatus) GetTechSupportRequestOk() (*TechsupportmanagementTechSupportBundleRelationship, bool) {
-	if o == nil || o.TechSupportRequest == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.TechSupportRequest, true
+	return o.TechSupportRequest.Get(), o.TechSupportRequest.IsSet()
 }
 
 // HasTechSupportRequest returns a boolean if a field has been set.
 func (o *TechsupportmanagementTechSupportStatus) HasTechSupportRequest() bool {
-	if o != nil && o.TechSupportRequest != nil {
+	if o != nil && o.TechSupportRequest.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTechSupportRequest gets a reference to the given TechsupportmanagementTechSupportBundleRelationship and assigns it to the TechSupportRequest field.
+// SetTechSupportRequest gets a reference to the given NullableTechsupportmanagementTechSupportBundleRelationship and assigns it to the TechSupportRequest field.
 func (o *TechsupportmanagementTechSupportStatus) SetTechSupportRequest(v TechsupportmanagementTechSupportBundleRelationship) {
-	o.TechSupportRequest = &v
+	o.TechSupportRequest.Set(&v)
+}
+
+// SetTechSupportRequestNil sets the value for TechSupportRequest to be an explicit nil
+func (o *TechsupportmanagementTechSupportStatus) SetTechSupportRequestNil() {
+	o.TechSupportRequest.Set(nil)
+}
+
+// UnsetTechSupportRequest ensures that no value is present for TechSupportRequest, not even an explicit nil
+func (o *TechsupportmanagementTechSupportStatus) UnsetTechSupportRequest() {
+	o.TechSupportRequest.Unset()
 }
 
 func (o TechsupportmanagementTechSupportStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TechsupportmanagementTechSupportStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.FileName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.FileName) {
 		toSerialize["FileName"] = o.FileName
 	}
-	if o.FileSize != nil {
+	if !IsNil(o.FileSize) {
 		toSerialize["FileSize"] = o.FileSize
 	}
-	if o.Reason != nil {
+	if !IsNil(o.Reason) {
 		toSerialize["Reason"] = o.Reason
 	}
-	if o.RelayReason != nil {
+	if !IsNil(o.RelayReason) {
 		toSerialize["RelayReason"] = o.RelayReason
 	}
-	if o.RelayStatus != nil {
+	if !IsNil(o.RelayStatus) {
 		toSerialize["RelayStatus"] = o.RelayStatus
 	}
-	if o.RequestTs != nil {
+	if !IsNil(o.RequestTs) {
 		toSerialize["RequestTs"] = o.RequestTs
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.TechsupportDownloadUrl != nil {
+	if !IsNil(o.TechsupportDownloadUrl) {
 		toSerialize["TechsupportDownloadUrl"] = o.TechsupportDownloadUrl
 	}
 	if o.TechsupportFiles != nil {
 		toSerialize["TechsupportFiles"] = o.TechsupportFiles
 	}
-	if o.UserRole != nil {
+	if !IsNil(o.UserRole) {
 		toSerialize["UserRole"] = o.UserRole
 	}
-	if o.ClusterMember != nil {
-		toSerialize["ClusterMember"] = o.ClusterMember
+	if o.ClusterMember.IsSet() {
+		toSerialize["ClusterMember"] = o.ClusterMember.Get()
 	}
-	if o.DeviceRegistration != nil {
-		toSerialize["DeviceRegistration"] = o.DeviceRegistration
+	if o.DeviceRegistration.IsSet() {
+		toSerialize["DeviceRegistration"] = o.DeviceRegistration.Get()
 	}
-	if o.OriginResource != nil {
-		toSerialize["OriginResource"] = o.OriginResource
+	if o.OriginResource.IsSet() {
+		toSerialize["OriginResource"] = o.OriginResource.Get()
 	}
-	if o.TechSupportRequest != nil {
-		toSerialize["TechSupportRequest"] = o.TechSupportRequest
+	if o.TechSupportRequest.IsSet() {
+		toSerialize["TechSupportRequest"] = o.TechSupportRequest.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type TechsupportmanagementTechSupportStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -663,16 +737,16 @@ func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(bytes []byte) (er
 		TechsupportDownloadUrl *string                                    `json:"TechsupportDownloadUrl,omitempty"`
 		TechsupportFiles       []TechsupportmanagementTechSupportFileInfo `json:"TechsupportFiles,omitempty"`
 		// The name of the role granted to the user that issued the techsupport request.
-		UserRole           *string                                             `json:"UserRole,omitempty"`
-		ClusterMember      *AssetClusterMemberRelationship                     `json:"ClusterMember,omitempty"`
-		DeviceRegistration *AssetDeviceRegistrationRelationship                `json:"DeviceRegistration,omitempty"`
-		OriginResource     *MoBaseMoRelationship                               `json:"OriginResource,omitempty"`
-		TechSupportRequest *TechsupportmanagementTechSupportBundleRelationship `json:"TechSupportRequest,omitempty"`
+		UserRole           *string                                                    `json:"UserRole,omitempty"`
+		ClusterMember      NullableAssetClusterMemberRelationship                     `json:"ClusterMember,omitempty"`
+		DeviceRegistration NullableAssetDeviceRegistrationRelationship                `json:"DeviceRegistration,omitempty"`
+		OriginResource     NullableMoBaseMoRelationship                               `json:"OriginResource,omitempty"`
+		TechSupportRequest NullableTechsupportmanagementTechSupportBundleRelationship `json:"TechSupportRequest,omitempty"`
 	}
 
 	varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct := TechsupportmanagementTechSupportStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varTechsupportmanagementTechSupportStatus := _TechsupportmanagementTechSupportStatus{}
 		varTechsupportmanagementTechSupportStatus.ClassId = varTechsupportmanagementTechSupportStatusWithoutEmbeddedStruct.ClassId
@@ -698,7 +772,7 @@ func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(bytes []byte) (er
 
 	varTechsupportmanagementTechSupportStatus := _TechsupportmanagementTechSupportStatus{}
 
-	err = json.Unmarshal(bytes, &varTechsupportmanagementTechSupportStatus)
+	err = json.Unmarshal(data, &varTechsupportmanagementTechSupportStatus)
 	if err == nil {
 		o.MoBaseMo = varTechsupportmanagementTechSupportStatus.MoBaseMo
 	} else {
@@ -707,7 +781,7 @@ func (o *TechsupportmanagementTechSupportStatus) UnmarshalJSON(bytes []byte) (er
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "FileName")

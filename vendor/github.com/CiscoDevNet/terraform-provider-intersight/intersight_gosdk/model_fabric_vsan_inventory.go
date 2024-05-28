@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricVsanInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricVsanInventory{}
 
 // FabricVsanInventory Inventory object for VSAN.
 type FabricVsanInventory struct {
@@ -37,9 +41,9 @@ type FabricVsanInventory struct {
 	// Smart zoning status on the VSAN. It can be enabled or disabled. * `` - Default value to represent the smart zoning status of isolated vsan. * `Enabled` - VSAN smart zoning state is enabled. * `Disabled` - VSAN smart zoning state is disabled.
 	SmartZoning *string `json:"SmartZoning,omitempty"`
 	// Identifier for the VSAN. It is an integer from 1 to 4094.
-	VsanId               *int64                               `json:"VsanId,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	VsanId               *int64                                      `json:"VsanId,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -118,7 +122,7 @@ func (o *FabricVsanInventory) SetObjectType(v string) {
 
 // GetAdminState returns the AdminState field value if set, zero value otherwise.
 func (o *FabricVsanInventory) GetAdminState() string {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		var ret string
 		return ret
 	}
@@ -128,7 +132,7 @@ func (o *FabricVsanInventory) GetAdminState() string {
 // GetAdminStateOk returns a tuple with the AdminState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVsanInventory) GetAdminStateOk() (*string, bool) {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		return nil, false
 	}
 	return o.AdminState, true
@@ -136,7 +140,7 @@ func (o *FabricVsanInventory) GetAdminStateOk() (*string, bool) {
 
 // HasAdminState returns a boolean if a field has been set.
 func (o *FabricVsanInventory) HasAdminState() bool {
-	if o != nil && o.AdminState != nil {
+	if o != nil && !IsNil(o.AdminState) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *FabricVsanInventory) SetAdminState(v string) {
 
 // GetInteropMode returns the InteropMode field value if set, zero value otherwise.
 func (o *FabricVsanInventory) GetInteropMode() string {
-	if o == nil || o.InteropMode == nil {
+	if o == nil || IsNil(o.InteropMode) {
 		var ret string
 		return ret
 	}
@@ -160,7 +164,7 @@ func (o *FabricVsanInventory) GetInteropMode() string {
 // GetInteropModeOk returns a tuple with the InteropMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVsanInventory) GetInteropModeOk() (*string, bool) {
-	if o == nil || o.InteropMode == nil {
+	if o == nil || IsNil(o.InteropMode) {
 		return nil, false
 	}
 	return o.InteropMode, true
@@ -168,7 +172,7 @@ func (o *FabricVsanInventory) GetInteropModeOk() (*string, bool) {
 
 // HasInteropMode returns a boolean if a field has been set.
 func (o *FabricVsanInventory) HasInteropMode() bool {
-	if o != nil && o.InteropMode != nil {
+	if o != nil && !IsNil(o.InteropMode) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *FabricVsanInventory) SetInteropMode(v string) {
 
 // GetLoadBalancing returns the LoadBalancing field value if set, zero value otherwise.
 func (o *FabricVsanInventory) GetLoadBalancing() string {
-	if o == nil || o.LoadBalancing == nil {
+	if o == nil || IsNil(o.LoadBalancing) {
 		var ret string
 		return ret
 	}
@@ -192,7 +196,7 @@ func (o *FabricVsanInventory) GetLoadBalancing() string {
 // GetLoadBalancingOk returns a tuple with the LoadBalancing field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVsanInventory) GetLoadBalancingOk() (*string, bool) {
-	if o == nil || o.LoadBalancing == nil {
+	if o == nil || IsNil(o.LoadBalancing) {
 		return nil, false
 	}
 	return o.LoadBalancing, true
@@ -200,7 +204,7 @@ func (o *FabricVsanInventory) GetLoadBalancingOk() (*string, bool) {
 
 // HasLoadBalancing returns a boolean if a field has been set.
 func (o *FabricVsanInventory) HasLoadBalancing() bool {
-	if o != nil && o.LoadBalancing != nil {
+	if o != nil && !IsNil(o.LoadBalancing) {
 		return true
 	}
 
@@ -214,7 +218,7 @@ func (o *FabricVsanInventory) SetLoadBalancing(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *FabricVsanInventory) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -224,7 +228,7 @@ func (o *FabricVsanInventory) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVsanInventory) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -232,7 +236,7 @@ func (o *FabricVsanInventory) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *FabricVsanInventory) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -246,7 +250,7 @@ func (o *FabricVsanInventory) SetName(v string) {
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
 func (o *FabricVsanInventory) GetOperState() string {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		var ret string
 		return ret
 	}
@@ -256,7 +260,7 @@ func (o *FabricVsanInventory) GetOperState() string {
 // GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVsanInventory) GetOperStateOk() (*string, bool) {
-	if o == nil || o.OperState == nil {
+	if o == nil || IsNil(o.OperState) {
 		return nil, false
 	}
 	return o.OperState, true
@@ -264,7 +268,7 @@ func (o *FabricVsanInventory) GetOperStateOk() (*string, bool) {
 
 // HasOperState returns a boolean if a field has been set.
 func (o *FabricVsanInventory) HasOperState() bool {
-	if o != nil && o.OperState != nil {
+	if o != nil && !IsNil(o.OperState) {
 		return true
 	}
 
@@ -278,7 +282,7 @@ func (o *FabricVsanInventory) SetOperState(v string) {
 
 // GetSmartZoning returns the SmartZoning field value if set, zero value otherwise.
 func (o *FabricVsanInventory) GetSmartZoning() string {
-	if o == nil || o.SmartZoning == nil {
+	if o == nil || IsNil(o.SmartZoning) {
 		var ret string
 		return ret
 	}
@@ -288,7 +292,7 @@ func (o *FabricVsanInventory) GetSmartZoning() string {
 // GetSmartZoningOk returns a tuple with the SmartZoning field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVsanInventory) GetSmartZoningOk() (*string, bool) {
-	if o == nil || o.SmartZoning == nil {
+	if o == nil || IsNil(o.SmartZoning) {
 		return nil, false
 	}
 	return o.SmartZoning, true
@@ -296,7 +300,7 @@ func (o *FabricVsanInventory) GetSmartZoningOk() (*string, bool) {
 
 // HasSmartZoning returns a boolean if a field has been set.
 func (o *FabricVsanInventory) HasSmartZoning() bool {
-	if o != nil && o.SmartZoning != nil {
+	if o != nil && !IsNil(o.SmartZoning) {
 		return true
 	}
 
@@ -310,7 +314,7 @@ func (o *FabricVsanInventory) SetSmartZoning(v string) {
 
 // GetVsanId returns the VsanId field value if set, zero value otherwise.
 func (o *FabricVsanInventory) GetVsanId() int64 {
-	if o == nil || o.VsanId == nil {
+	if o == nil || IsNil(o.VsanId) {
 		var ret int64
 		return ret
 	}
@@ -320,7 +324,7 @@ func (o *FabricVsanInventory) GetVsanId() int64 {
 // GetVsanIdOk returns a tuple with the VsanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricVsanInventory) GetVsanIdOk() (*int64, bool) {
-	if o == nil || o.VsanId == nil {
+	if o == nil || IsNil(o.VsanId) {
 		return nil, false
 	}
 	return o.VsanId, true
@@ -328,7 +332,7 @@ func (o *FabricVsanInventory) GetVsanIdOk() (*int64, bool) {
 
 // HasVsanId returns a boolean if a field has been set.
 func (o *FabricVsanInventory) HasVsanId() bool {
-	if o != nil && o.VsanId != nil {
+	if o != nil && !IsNil(o.VsanId) {
 		return true
 	}
 
@@ -340,122 +344,170 @@ func (o *FabricVsanInventory) SetVsanId(v int64) {
 	o.VsanId = &v
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricVsanInventory) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricVsanInventory) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *FabricVsanInventory) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *FabricVsanInventory) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *FabricVsanInventory) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *FabricVsanInventory) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricVsanInventory) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricVsanInventory) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *FabricVsanInventory) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *FabricVsanInventory) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *FabricVsanInventory) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *FabricVsanInventory) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o FabricVsanInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricVsanInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminState) {
 		toSerialize["AdminState"] = o.AdminState
 	}
-	if o.InteropMode != nil {
+	if !IsNil(o.InteropMode) {
 		toSerialize["InteropMode"] = o.InteropMode
 	}
-	if o.LoadBalancing != nil {
+	if !IsNil(o.LoadBalancing) {
 		toSerialize["LoadBalancing"] = o.LoadBalancing
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.OperState != nil {
+	if !IsNil(o.OperState) {
 		toSerialize["OperState"] = o.OperState
 	}
-	if o.SmartZoning != nil {
+	if !IsNil(o.SmartZoning) {
 		toSerialize["SmartZoning"] = o.SmartZoning
 	}
-	if o.VsanId != nil {
+	if !IsNil(o.VsanId) {
 		toSerialize["VsanId"] = o.VsanId
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricVsanInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricVsanInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricVsanInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -474,14 +526,14 @@ func (o *FabricVsanInventory) UnmarshalJSON(bytes []byte) (err error) {
 		// Smart zoning status on the VSAN. It can be enabled or disabled. * `` - Default value to represent the smart zoning status of isolated vsan. * `Enabled` - VSAN smart zoning state is enabled. * `Disabled` - VSAN smart zoning state is disabled.
 		SmartZoning *string `json:"SmartZoning,omitempty"`
 		// Identifier for the VSAN. It is an integer from 1 to 4094.
-		VsanId           *int64                               `json:"VsanId,omitempty"`
-		NetworkElement   *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		VsanId           *int64                                      `json:"VsanId,omitempty"`
+		NetworkElement   NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varFabricVsanInventoryWithoutEmbeddedStruct := FabricVsanInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricVsanInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricVsanInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricVsanInventory := _FabricVsanInventory{}
 		varFabricVsanInventory.ClassId = varFabricVsanInventoryWithoutEmbeddedStruct.ClassId
@@ -502,7 +554,7 @@ func (o *FabricVsanInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricVsanInventory := _FabricVsanInventory{}
 
-	err = json.Unmarshal(bytes, &varFabricVsanInventory)
+	err = json.Unmarshal(data, &varFabricVsanInventory)
 	if err == nil {
 		o.MoBaseMo = varFabricVsanInventory.MoBaseMo
 	} else {
@@ -511,7 +563,7 @@ func (o *FabricVsanInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminState")

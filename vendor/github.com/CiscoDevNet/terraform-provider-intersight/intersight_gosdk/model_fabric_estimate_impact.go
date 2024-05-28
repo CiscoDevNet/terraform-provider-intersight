@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricEstimateImpact type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricEstimateImpact{}
 
 // FabricEstimateImpact Before submitting switch profile deploy operation, the estimate impact helps to know the list of components be impacted and require switch reboot.
 type FabricEstimateImpact struct {
@@ -23,8 +27,8 @@ type FabricEstimateImpact struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                           `json:"ObjectType"`
-	Profile              *FabricSwitchProfileRelationship `json:"Profile,omitempty"`
+	ObjectType           string                                  `json:"ObjectType"`
+	Profile              NullableFabricSwitchProfileRelationship `json:"Profile,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -101,77 +105,114 @@ func (o *FabricEstimateImpact) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetProfile returns the Profile field value if set, zero value otherwise.
+// GetProfile returns the Profile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FabricEstimateImpact) GetProfile() FabricSwitchProfileRelationship {
-	if o == nil || o.Profile == nil {
+	if o == nil || IsNil(o.Profile.Get()) {
 		var ret FabricSwitchProfileRelationship
 		return ret
 	}
-	return *o.Profile
+	return *o.Profile.Get()
 }
 
 // GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FabricEstimateImpact) GetProfileOk() (*FabricSwitchProfileRelationship, bool) {
-	if o == nil || o.Profile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Profile, true
+	return o.Profile.Get(), o.Profile.IsSet()
 }
 
 // HasProfile returns a boolean if a field has been set.
 func (o *FabricEstimateImpact) HasProfile() bool {
-	if o != nil && o.Profile != nil {
+	if o != nil && o.Profile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetProfile gets a reference to the given FabricSwitchProfileRelationship and assigns it to the Profile field.
+// SetProfile gets a reference to the given NullableFabricSwitchProfileRelationship and assigns it to the Profile field.
 func (o *FabricEstimateImpact) SetProfile(v FabricSwitchProfileRelationship) {
-	o.Profile = &v
+	o.Profile.Set(&v)
+}
+
+// SetProfileNil sets the value for Profile to be an explicit nil
+func (o *FabricEstimateImpact) SetProfileNil() {
+	o.Profile.Set(nil)
+}
+
+// UnsetProfile ensures that no value is present for Profile, not even an explicit nil
+func (o *FabricEstimateImpact) UnsetProfile() {
+	o.Profile.Unset()
 }
 
 func (o FabricEstimateImpact) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricEstimateImpact) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Profile != nil {
-		toSerialize["Profile"] = o.Profile
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if o.Profile.IsSet() {
+		toSerialize["Profile"] = o.Profile.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricEstimateImpact) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricEstimateImpact) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricEstimateImpactWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string                           `json:"ObjectType"`
-		Profile    *FabricSwitchProfileRelationship `json:"Profile,omitempty"`
+		ObjectType string                                  `json:"ObjectType"`
+		Profile    NullableFabricSwitchProfileRelationship `json:"Profile,omitempty"`
 	}
 
 	varFabricEstimateImpactWithoutEmbeddedStruct := FabricEstimateImpactWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricEstimateImpactWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricEstimateImpactWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricEstimateImpact := _FabricEstimateImpact{}
 		varFabricEstimateImpact.ClassId = varFabricEstimateImpactWithoutEmbeddedStruct.ClassId
@@ -184,7 +225,7 @@ func (o *FabricEstimateImpact) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricEstimateImpact := _FabricEstimateImpact{}
 
-	err = json.Unmarshal(bytes, &varFabricEstimateImpact)
+	err = json.Unmarshal(data, &varFabricEstimateImpact)
 	if err == nil {
 		o.MoBaseMo = varFabricEstimateImpact.MoBaseMo
 	} else {
@@ -193,7 +234,7 @@ func (o *FabricEstimateImpact) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Profile")

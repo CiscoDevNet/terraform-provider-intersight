@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the UcsdconnectorRestClientMessage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UcsdconnectorRestClientMessage{}
 
 // UcsdconnectorRestClientMessage RestClient Message type which would constitute of the following types.
 type UcsdconnectorRestClientMessage struct {
@@ -110,7 +114,7 @@ func (o *UcsdconnectorRestClientMessage) SetObjectType(v string) {
 
 // GetBody returns the Body field value if set, zero value otherwise.
 func (o *UcsdconnectorRestClientMessage) GetBody() string {
-	if o == nil || o.Body == nil {
+	if o == nil || IsNil(o.Body) {
 		var ret string
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *UcsdconnectorRestClientMessage) GetBody() string {
 // GetBodyOk returns a tuple with the Body field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdconnectorRestClientMessage) GetBodyOk() (*string, bool) {
-	if o == nil || o.Body == nil {
+	if o == nil || IsNil(o.Body) {
 		return nil, false
 	}
 	return o.Body, true
@@ -128,7 +132,7 @@ func (o *UcsdconnectorRestClientMessage) GetBodyOk() (*string, bool) {
 
 // HasBody returns a boolean if a field has been set.
 func (o *UcsdconnectorRestClientMessage) HasBody() bool {
-	if o != nil && o.Body != nil {
+	if o != nil && !IsNil(o.Body) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *UcsdconnectorRestClientMessage) GetHeader() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UcsdconnectorRestClientMessage) GetHeaderOk() (*interface{}, bool) {
-	if o == nil || o.Header == nil {
+	if o == nil || IsNil(o.Header) {
 		return nil, false
 	}
 	return &o.Header, true
@@ -161,7 +165,7 @@ func (o *UcsdconnectorRestClientMessage) GetHeaderOk() (*interface{}, bool) {
 
 // HasHeader returns a boolean if a field has been set.
 func (o *UcsdconnectorRestClientMessage) HasHeader() bool {
-	if o != nil && o.Header != nil {
+	if o != nil && IsNil(o.Header) {
 		return true
 	}
 
@@ -175,7 +179,7 @@ func (o *UcsdconnectorRestClientMessage) SetHeader(v interface{}) {
 
 // GetMethod returns the Method field value if set, zero value otherwise.
 func (o *UcsdconnectorRestClientMessage) GetMethod() string {
-	if o == nil || o.Method == nil {
+	if o == nil || IsNil(o.Method) {
 		var ret string
 		return ret
 	}
@@ -185,7 +189,7 @@ func (o *UcsdconnectorRestClientMessage) GetMethod() string {
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdconnectorRestClientMessage) GetMethodOk() (*string, bool) {
-	if o == nil || o.Method == nil {
+	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
 	return o.Method, true
@@ -193,7 +197,7 @@ func (o *UcsdconnectorRestClientMessage) GetMethodOk() (*string, bool) {
 
 // HasMethod returns a boolean if a field has been set.
 func (o *UcsdconnectorRestClientMessage) HasMethod() bool {
-	if o != nil && o.Method != nil {
+	if o != nil && !IsNil(o.Method) {
 		return true
 	}
 
@@ -207,7 +211,7 @@ func (o *UcsdconnectorRestClientMessage) SetMethod(v string) {
 
 // GetRestUrl returns the RestUrl field value if set, zero value otherwise.
 func (o *UcsdconnectorRestClientMessage) GetRestUrl() string {
-	if o == nil || o.RestUrl == nil {
+	if o == nil || IsNil(o.RestUrl) {
 		var ret string
 		return ret
 	}
@@ -217,7 +221,7 @@ func (o *UcsdconnectorRestClientMessage) GetRestUrl() string {
 // GetRestUrlOk returns a tuple with the RestUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UcsdconnectorRestClientMessage) GetRestUrlOk() (*string, bool) {
-	if o == nil || o.RestUrl == nil {
+	if o == nil || IsNil(o.RestUrl) {
 		return nil, false
 	}
 	return o.RestUrl, true
@@ -225,7 +229,7 @@ func (o *UcsdconnectorRestClientMessage) GetRestUrlOk() (*string, bool) {
 
 // HasRestUrl returns a boolean if a field has been set.
 func (o *UcsdconnectorRestClientMessage) HasRestUrl() bool {
-	if o != nil && o.RestUrl != nil {
+	if o != nil && !IsNil(o.RestUrl) {
 		return true
 	}
 
@@ -238,31 +242,35 @@ func (o *UcsdconnectorRestClientMessage) SetRestUrl(v string) {
 }
 
 func (o UcsdconnectorRestClientMessage) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UcsdconnectorRestClientMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedConnectorAuthMessage, errConnectorAuthMessage := json.Marshal(o.ConnectorAuthMessage)
 	if errConnectorAuthMessage != nil {
-		return []byte{}, errConnectorAuthMessage
+		return map[string]interface{}{}, errConnectorAuthMessage
 	}
 	errConnectorAuthMessage = json.Unmarshal([]byte(serializedConnectorAuthMessage), &toSerialize)
 	if errConnectorAuthMessage != nil {
-		return []byte{}, errConnectorAuthMessage
+		return map[string]interface{}{}, errConnectorAuthMessage
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Body != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Body) {
 		toSerialize["Body"] = o.Body
 	}
 	if o.Header != nil {
 		toSerialize["Header"] = o.Header
 	}
-	if o.Method != nil {
+	if !IsNil(o.Method) {
 		toSerialize["Method"] = o.Method
 	}
-	if o.RestUrl != nil {
+	if !IsNil(o.RestUrl) {
 		toSerialize["RestUrl"] = o.RestUrl
 	}
 
@@ -270,10 +278,32 @@ func (o UcsdconnectorRestClientMessage) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *UcsdconnectorRestClientMessage) UnmarshalJSON(bytes []byte) (err error) {
+func (o *UcsdconnectorRestClientMessage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type UcsdconnectorRestClientMessageWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -291,7 +321,7 @@ func (o *UcsdconnectorRestClientMessage) UnmarshalJSON(bytes []byte) (err error)
 
 	varUcsdconnectorRestClientMessageWithoutEmbeddedStruct := UcsdconnectorRestClientMessageWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varUcsdconnectorRestClientMessageWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varUcsdconnectorRestClientMessageWithoutEmbeddedStruct)
 	if err == nil {
 		varUcsdconnectorRestClientMessage := _UcsdconnectorRestClientMessage{}
 		varUcsdconnectorRestClientMessage.ClassId = varUcsdconnectorRestClientMessageWithoutEmbeddedStruct.ClassId
@@ -307,7 +337,7 @@ func (o *UcsdconnectorRestClientMessage) UnmarshalJSON(bytes []byte) (err error)
 
 	varUcsdconnectorRestClientMessage := _UcsdconnectorRestClientMessage{}
 
-	err = json.Unmarshal(bytes, &varUcsdconnectorRestClientMessage)
+	err = json.Unmarshal(data, &varUcsdconnectorRestClientMessage)
 	if err == nil {
 		o.ConnectorAuthMessage = varUcsdconnectorRestClientMessage.ConnectorAuthMessage
 	} else {
@@ -316,7 +346,7 @@ func (o *UcsdconnectorRestClientMessage) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Body")

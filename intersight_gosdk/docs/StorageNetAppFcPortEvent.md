@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppFcPortEvent"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppFcPortEvent"]
-**FcPort** | Pointer to [**StorageNetAppFcPortRelationship**](StorageNetAppFcPortRelationship.md) |  | [optional] 
+**FcPort** | Pointer to [**NullableStorageNetAppFcPortRelationship**](StorageNetAppFcPortRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,6 +92,16 @@ SetFcPort sets FcPort field to given value.
 
 HasFcPort returns a boolean if a field has been set.
 
+### SetFcPortNil
+
+`func (o *StorageNetAppFcPortEvent) SetFcPortNil(b bool)`
+
+ SetFcPortNil sets the value for FcPort to be an explicit nil
+
+### UnsetFcPort
+`func (o *StorageNetAppFcPortEvent) UnsetFcPort()`
+
+UnsetFcPort ensures that no value is present for FcPort, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

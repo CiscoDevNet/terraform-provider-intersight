@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the VnicSriovSettings type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VnicSriovSettings{}
 
 // VnicSriovSettings Single Root Input Output Virtualization Settings that enable one physical ethernet socket to appear as multiple NICs to the hypervisor.
 type VnicSriovSettings struct {
@@ -134,7 +138,7 @@ func (o *VnicSriovSettings) SetObjectType(v string) {
 
 // GetCompCountPerVf returns the CompCountPerVf field value if set, zero value otherwise.
 func (o *VnicSriovSettings) GetCompCountPerVf() int64 {
-	if o == nil || o.CompCountPerVf == nil {
+	if o == nil || IsNil(o.CompCountPerVf) {
 		var ret int64
 		return ret
 	}
@@ -144,7 +148,7 @@ func (o *VnicSriovSettings) GetCompCountPerVf() int64 {
 // GetCompCountPerVfOk returns a tuple with the CompCountPerVf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicSriovSettings) GetCompCountPerVfOk() (*int64, bool) {
-	if o == nil || o.CompCountPerVf == nil {
+	if o == nil || IsNil(o.CompCountPerVf) {
 		return nil, false
 	}
 	return o.CompCountPerVf, true
@@ -152,7 +156,7 @@ func (o *VnicSriovSettings) GetCompCountPerVfOk() (*int64, bool) {
 
 // HasCompCountPerVf returns a boolean if a field has been set.
 func (o *VnicSriovSettings) HasCompCountPerVf() bool {
-	if o != nil && o.CompCountPerVf != nil {
+	if o != nil && !IsNil(o.CompCountPerVf) {
 		return true
 	}
 
@@ -166,7 +170,7 @@ func (o *VnicSriovSettings) SetCompCountPerVf(v int64) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *VnicSriovSettings) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -176,7 +180,7 @@ func (o *VnicSriovSettings) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicSriovSettings) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -184,7 +188,7 @@ func (o *VnicSriovSettings) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *VnicSriovSettings) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -198,7 +202,7 @@ func (o *VnicSriovSettings) SetEnabled(v bool) {
 
 // GetIntCountPerVf returns the IntCountPerVf field value if set, zero value otherwise.
 func (o *VnicSriovSettings) GetIntCountPerVf() int64 {
-	if o == nil || o.IntCountPerVf == nil {
+	if o == nil || IsNil(o.IntCountPerVf) {
 		var ret int64
 		return ret
 	}
@@ -208,7 +212,7 @@ func (o *VnicSriovSettings) GetIntCountPerVf() int64 {
 // GetIntCountPerVfOk returns a tuple with the IntCountPerVf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicSriovSettings) GetIntCountPerVfOk() (*int64, bool) {
-	if o == nil || o.IntCountPerVf == nil {
+	if o == nil || IsNil(o.IntCountPerVf) {
 		return nil, false
 	}
 	return o.IntCountPerVf, true
@@ -216,7 +220,7 @@ func (o *VnicSriovSettings) GetIntCountPerVfOk() (*int64, bool) {
 
 // HasIntCountPerVf returns a boolean if a field has been set.
 func (o *VnicSriovSettings) HasIntCountPerVf() bool {
-	if o != nil && o.IntCountPerVf != nil {
+	if o != nil && !IsNil(o.IntCountPerVf) {
 		return true
 	}
 
@@ -230,7 +234,7 @@ func (o *VnicSriovSettings) SetIntCountPerVf(v int64) {
 
 // GetRxCountPerVf returns the RxCountPerVf field value if set, zero value otherwise.
 func (o *VnicSriovSettings) GetRxCountPerVf() int64 {
-	if o == nil || o.RxCountPerVf == nil {
+	if o == nil || IsNil(o.RxCountPerVf) {
 		var ret int64
 		return ret
 	}
@@ -240,7 +244,7 @@ func (o *VnicSriovSettings) GetRxCountPerVf() int64 {
 // GetRxCountPerVfOk returns a tuple with the RxCountPerVf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicSriovSettings) GetRxCountPerVfOk() (*int64, bool) {
-	if o == nil || o.RxCountPerVf == nil {
+	if o == nil || IsNil(o.RxCountPerVf) {
 		return nil, false
 	}
 	return o.RxCountPerVf, true
@@ -248,7 +252,7 @@ func (o *VnicSriovSettings) GetRxCountPerVfOk() (*int64, bool) {
 
 // HasRxCountPerVf returns a boolean if a field has been set.
 func (o *VnicSriovSettings) HasRxCountPerVf() bool {
-	if o != nil && o.RxCountPerVf != nil {
+	if o != nil && !IsNil(o.RxCountPerVf) {
 		return true
 	}
 
@@ -262,7 +266,7 @@ func (o *VnicSriovSettings) SetRxCountPerVf(v int64) {
 
 // GetTxCountPerVf returns the TxCountPerVf field value if set, zero value otherwise.
 func (o *VnicSriovSettings) GetTxCountPerVf() int64 {
-	if o == nil || o.TxCountPerVf == nil {
+	if o == nil || IsNil(o.TxCountPerVf) {
 		var ret int64
 		return ret
 	}
@@ -272,7 +276,7 @@ func (o *VnicSriovSettings) GetTxCountPerVf() int64 {
 // GetTxCountPerVfOk returns a tuple with the TxCountPerVf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicSriovSettings) GetTxCountPerVfOk() (*int64, bool) {
-	if o == nil || o.TxCountPerVf == nil {
+	if o == nil || IsNil(o.TxCountPerVf) {
 		return nil, false
 	}
 	return o.TxCountPerVf, true
@@ -280,7 +284,7 @@ func (o *VnicSriovSettings) GetTxCountPerVfOk() (*int64, bool) {
 
 // HasTxCountPerVf returns a boolean if a field has been set.
 func (o *VnicSriovSettings) HasTxCountPerVf() bool {
-	if o != nil && o.TxCountPerVf != nil {
+	if o != nil && !IsNil(o.TxCountPerVf) {
 		return true
 	}
 
@@ -294,7 +298,7 @@ func (o *VnicSriovSettings) SetTxCountPerVf(v int64) {
 
 // GetVfCount returns the VfCount field value if set, zero value otherwise.
 func (o *VnicSriovSettings) GetVfCount() int64 {
-	if o == nil || o.VfCount == nil {
+	if o == nil || IsNil(o.VfCount) {
 		var ret int64
 		return ret
 	}
@@ -304,7 +308,7 @@ func (o *VnicSriovSettings) GetVfCount() int64 {
 // GetVfCountOk returns a tuple with the VfCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VnicSriovSettings) GetVfCountOk() (*int64, bool) {
-	if o == nil || o.VfCount == nil {
+	if o == nil || IsNil(o.VfCount) {
 		return nil, false
 	}
 	return o.VfCount, true
@@ -312,7 +316,7 @@ func (o *VnicSriovSettings) GetVfCountOk() (*int64, bool) {
 
 // HasVfCount returns a boolean if a field has been set.
 func (o *VnicSriovSettings) HasVfCount() bool {
-	if o != nil && o.VfCount != nil {
+	if o != nil && !IsNil(o.VfCount) {
 		return true
 	}
 
@@ -325,37 +329,41 @@ func (o *VnicSriovSettings) SetVfCount(v int64) {
 }
 
 func (o VnicSriovSettings) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VnicSriovSettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.CompCountPerVf != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CompCountPerVf) {
 		toSerialize["CompCountPerVf"] = o.CompCountPerVf
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["Enabled"] = o.Enabled
 	}
-	if o.IntCountPerVf != nil {
+	if !IsNil(o.IntCountPerVf) {
 		toSerialize["IntCountPerVf"] = o.IntCountPerVf
 	}
-	if o.RxCountPerVf != nil {
+	if !IsNil(o.RxCountPerVf) {
 		toSerialize["RxCountPerVf"] = o.RxCountPerVf
 	}
-	if o.TxCountPerVf != nil {
+	if !IsNil(o.TxCountPerVf) {
 		toSerialize["TxCountPerVf"] = o.TxCountPerVf
 	}
-	if o.VfCount != nil {
+	if !IsNil(o.VfCount) {
 		toSerialize["VfCount"] = o.VfCount
 	}
 
@@ -363,10 +371,32 @@ func (o VnicSriovSettings) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *VnicSriovSettings) UnmarshalJSON(bytes []byte) (err error) {
+func (o *VnicSriovSettings) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type VnicSriovSettingsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -388,7 +418,7 @@ func (o *VnicSriovSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicSriovSettingsWithoutEmbeddedStruct := VnicSriovSettingsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varVnicSriovSettingsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varVnicSriovSettingsWithoutEmbeddedStruct)
 	if err == nil {
 		varVnicSriovSettings := _VnicSriovSettings{}
 		varVnicSriovSettings.ClassId = varVnicSriovSettingsWithoutEmbeddedStruct.ClassId
@@ -406,7 +436,7 @@ func (o *VnicSriovSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	varVnicSriovSettings := _VnicSriovSettings{}
 
-	err = json.Unmarshal(bytes, &varVnicSriovSettings)
+	err = json.Unmarshal(data, &varVnicSriovSettings)
 	if err == nil {
 		o.MoBaseComplexType = varVnicSriovSettings.MoBaseComplexType
 	} else {
@@ -415,7 +445,7 @@ func (o *VnicSriovSettings) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CompCountPerVf")

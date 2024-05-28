@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexSoftwareVersionPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexSoftwareVersionPolicy{}
 
 // HyperflexSoftwareVersionPolicy A policy capturing software versions for different HyperFlex Cluster compatible components ( like HyperFlex Data Platform, Hypervisor, etc. ), that the user wishes to apply on the HyperFlex cluster.
 type HyperflexSoftwareVersionPolicy struct {
@@ -33,11 +37,11 @@ type HyperflexSoftwareVersionPolicy struct {
 	ServerFirmwareVersions []HyperflexServerFirmwareVersionInfo `json:"ServerFirmwareVersions,omitempty"`
 	UpgradeTypes           []string                             `json:"UpgradeTypes,omitempty"`
 	// An array of relationships to hyperflexClusterProfile resources.
-	ClusterProfiles           []HyperflexClusterProfileRelationship       `json:"ClusterProfiles,omitempty"`
-	HxdpVersionInfo           *SoftwareHyperflexDistributableRelationship `json:"HxdpVersionInfo,omitempty"`
-	HypervisorVersionInfo     *SoftwareHyperflexDistributableRelationship `json:"HypervisorVersionInfo,omitempty"`
-	Organization              *OrganizationOrganizationRelationship       `json:"Organization,omitempty"`
-	ServerFirmwareVersionInfo *FirmwareDistributableRelationship          `json:"ServerFirmwareVersionInfo,omitempty"`
+	ClusterProfiles           []HyperflexClusterProfileRelationship              `json:"ClusterProfiles,omitempty"`
+	HxdpVersionInfo           NullableSoftwareHyperflexDistributableRelationship `json:"HxdpVersionInfo,omitempty"`
+	HypervisorVersionInfo     NullableSoftwareHyperflexDistributableRelationship `json:"HypervisorVersionInfo,omitempty"`
+	Organization              NullableOrganizationOrganizationRelationship       `json:"Organization,omitempty"`
+	ServerFirmwareVersionInfo NullableFirmwareDistributableRelationship          `json:"ServerFirmwareVersionInfo,omitempty"`
 	AdditionalProperties      map[string]interface{}
 }
 
@@ -116,7 +120,7 @@ func (o *HyperflexSoftwareVersionPolicy) SetObjectType(v string) {
 
 // GetHxdpVersion returns the HxdpVersion field value if set, zero value otherwise.
 func (o *HyperflexSoftwareVersionPolicy) GetHxdpVersion() string {
-	if o == nil || o.HxdpVersion == nil {
+	if o == nil || IsNil(o.HxdpVersion) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetHxdpVersion() string {
 // GetHxdpVersionOk returns a tuple with the HxdpVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSoftwareVersionPolicy) GetHxdpVersionOk() (*string, bool) {
-	if o == nil || o.HxdpVersion == nil {
+	if o == nil || IsNil(o.HxdpVersion) {
 		return nil, false
 	}
 	return o.HxdpVersion, true
@@ -134,7 +138,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetHxdpVersionOk() (*string, bool) {
 
 // HasHxdpVersion returns a boolean if a field has been set.
 func (o *HyperflexSoftwareVersionPolicy) HasHxdpVersion() bool {
-	if o != nil && o.HxdpVersion != nil {
+	if o != nil && !IsNil(o.HxdpVersion) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *HyperflexSoftwareVersionPolicy) SetHxdpVersion(v string) {
 
 // GetHypervisorVersion returns the HypervisorVersion field value if set, zero value otherwise.
 func (o *HyperflexSoftwareVersionPolicy) GetHypervisorVersion() string {
-	if o == nil || o.HypervisorVersion == nil {
+	if o == nil || IsNil(o.HypervisorVersion) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetHypervisorVersion() string {
 // GetHypervisorVersionOk returns a tuple with the HypervisorVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSoftwareVersionPolicy) GetHypervisorVersionOk() (*string, bool) {
-	if o == nil || o.HypervisorVersion == nil {
+	if o == nil || IsNil(o.HypervisorVersion) {
 		return nil, false
 	}
 	return o.HypervisorVersion, true
@@ -166,7 +170,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetHypervisorVersionOk() (*string, bool
 
 // HasHypervisorVersion returns a boolean if a field has been set.
 func (o *HyperflexSoftwareVersionPolicy) HasHypervisorVersion() bool {
-	if o != nil && o.HypervisorVersion != nil {
+	if o != nil && !IsNil(o.HypervisorVersion) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *HyperflexSoftwareVersionPolicy) SetHypervisorVersion(v string) {
 
 // GetServerFirmwareVersion returns the ServerFirmwareVersion field value if set, zero value otherwise.
 func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersion() string {
-	if o == nil || o.ServerFirmwareVersion == nil {
+	if o == nil || IsNil(o.ServerFirmwareVersion) {
 		var ret string
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersion() string {
 // GetServerFirmwareVersionOk returns a tuple with the ServerFirmwareVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersionOk() (*string, bool) {
-	if o == nil || o.ServerFirmwareVersion == nil {
+	if o == nil || IsNil(o.ServerFirmwareVersion) {
 		return nil, false
 	}
 	return o.ServerFirmwareVersion, true
@@ -198,7 +202,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersionOk() (*string, 
 
 // HasServerFirmwareVersion returns a boolean if a field has been set.
 func (o *HyperflexSoftwareVersionPolicy) HasServerFirmwareVersion() bool {
-	if o != nil && o.ServerFirmwareVersion != nil {
+	if o != nil && !IsNil(o.ServerFirmwareVersion) {
 		return true
 	}
 
@@ -223,7 +227,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersions() []Hyperflex
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersionsOk() ([]HyperflexServerFirmwareVersionInfo, bool) {
-	if o == nil || o.ServerFirmwareVersions == nil {
+	if o == nil || IsNil(o.ServerFirmwareVersions) {
 		return nil, false
 	}
 	return o.ServerFirmwareVersions, true
@@ -231,7 +235,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersionsOk() ([]Hyperf
 
 // HasServerFirmwareVersions returns a boolean if a field has been set.
 func (o *HyperflexSoftwareVersionPolicy) HasServerFirmwareVersions() bool {
-	if o != nil && o.ServerFirmwareVersions != nil {
+	if o != nil && IsNil(o.ServerFirmwareVersions) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetUpgradeTypes() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSoftwareVersionPolicy) GetUpgradeTypesOk() ([]string, bool) {
-	if o == nil || o.UpgradeTypes == nil {
+	if o == nil || IsNil(o.UpgradeTypes) {
 		return nil, false
 	}
 	return o.UpgradeTypes, true
@@ -264,7 +268,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetUpgradeTypesOk() ([]string, bool) {
 
 // HasUpgradeTypes returns a boolean if a field has been set.
 func (o *HyperflexSoftwareVersionPolicy) HasUpgradeTypes() bool {
-	if o != nil && o.UpgradeTypes != nil {
+	if o != nil && IsNil(o.UpgradeTypes) {
 		return true
 	}
 
@@ -289,7 +293,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetClusterProfiles() []HyperflexCluster
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSoftwareVersionPolicy) GetClusterProfilesOk() ([]HyperflexClusterProfileRelationship, bool) {
-	if o == nil || o.ClusterProfiles == nil {
+	if o == nil || IsNil(o.ClusterProfiles) {
 		return nil, false
 	}
 	return o.ClusterProfiles, true
@@ -297,7 +301,7 @@ func (o *HyperflexSoftwareVersionPolicy) GetClusterProfilesOk() ([]HyperflexClus
 
 // HasClusterProfiles returns a boolean if a field has been set.
 func (o *HyperflexSoftwareVersionPolicy) HasClusterProfiles() bool {
-	if o != nil && o.ClusterProfiles != nil {
+	if o != nil && IsNil(o.ClusterProfiles) {
 		return true
 	}
 
@@ -309,157 +313,205 @@ func (o *HyperflexSoftwareVersionPolicy) SetClusterProfiles(v []HyperflexCluster
 	o.ClusterProfiles = v
 }
 
-// GetHxdpVersionInfo returns the HxdpVersionInfo field value if set, zero value otherwise.
+// GetHxdpVersionInfo returns the HxdpVersionInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSoftwareVersionPolicy) GetHxdpVersionInfo() SoftwareHyperflexDistributableRelationship {
-	if o == nil || o.HxdpVersionInfo == nil {
+	if o == nil || IsNil(o.HxdpVersionInfo.Get()) {
 		var ret SoftwareHyperflexDistributableRelationship
 		return ret
 	}
-	return *o.HxdpVersionInfo
+	return *o.HxdpVersionInfo.Get()
 }
 
 // GetHxdpVersionInfoOk returns a tuple with the HxdpVersionInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSoftwareVersionPolicy) GetHxdpVersionInfoOk() (*SoftwareHyperflexDistributableRelationship, bool) {
-	if o == nil || o.HxdpVersionInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.HxdpVersionInfo, true
+	return o.HxdpVersionInfo.Get(), o.HxdpVersionInfo.IsSet()
 }
 
 // HasHxdpVersionInfo returns a boolean if a field has been set.
 func (o *HyperflexSoftwareVersionPolicy) HasHxdpVersionInfo() bool {
-	if o != nil && o.HxdpVersionInfo != nil {
+	if o != nil && o.HxdpVersionInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHxdpVersionInfo gets a reference to the given SoftwareHyperflexDistributableRelationship and assigns it to the HxdpVersionInfo field.
+// SetHxdpVersionInfo gets a reference to the given NullableSoftwareHyperflexDistributableRelationship and assigns it to the HxdpVersionInfo field.
 func (o *HyperflexSoftwareVersionPolicy) SetHxdpVersionInfo(v SoftwareHyperflexDistributableRelationship) {
-	o.HxdpVersionInfo = &v
+	o.HxdpVersionInfo.Set(&v)
 }
 
-// GetHypervisorVersionInfo returns the HypervisorVersionInfo field value if set, zero value otherwise.
+// SetHxdpVersionInfoNil sets the value for HxdpVersionInfo to be an explicit nil
+func (o *HyperflexSoftwareVersionPolicy) SetHxdpVersionInfoNil() {
+	o.HxdpVersionInfo.Set(nil)
+}
+
+// UnsetHxdpVersionInfo ensures that no value is present for HxdpVersionInfo, not even an explicit nil
+func (o *HyperflexSoftwareVersionPolicy) UnsetHxdpVersionInfo() {
+	o.HxdpVersionInfo.Unset()
+}
+
+// GetHypervisorVersionInfo returns the HypervisorVersionInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSoftwareVersionPolicy) GetHypervisorVersionInfo() SoftwareHyperflexDistributableRelationship {
-	if o == nil || o.HypervisorVersionInfo == nil {
+	if o == nil || IsNil(o.HypervisorVersionInfo.Get()) {
 		var ret SoftwareHyperflexDistributableRelationship
 		return ret
 	}
-	return *o.HypervisorVersionInfo
+	return *o.HypervisorVersionInfo.Get()
 }
 
 // GetHypervisorVersionInfoOk returns a tuple with the HypervisorVersionInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSoftwareVersionPolicy) GetHypervisorVersionInfoOk() (*SoftwareHyperflexDistributableRelationship, bool) {
-	if o == nil || o.HypervisorVersionInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.HypervisorVersionInfo, true
+	return o.HypervisorVersionInfo.Get(), o.HypervisorVersionInfo.IsSet()
 }
 
 // HasHypervisorVersionInfo returns a boolean if a field has been set.
 func (o *HyperflexSoftwareVersionPolicy) HasHypervisorVersionInfo() bool {
-	if o != nil && o.HypervisorVersionInfo != nil {
+	if o != nil && o.HypervisorVersionInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHypervisorVersionInfo gets a reference to the given SoftwareHyperflexDistributableRelationship and assigns it to the HypervisorVersionInfo field.
+// SetHypervisorVersionInfo gets a reference to the given NullableSoftwareHyperflexDistributableRelationship and assigns it to the HypervisorVersionInfo field.
 func (o *HyperflexSoftwareVersionPolicy) SetHypervisorVersionInfo(v SoftwareHyperflexDistributableRelationship) {
-	o.HypervisorVersionInfo = &v
+	o.HypervisorVersionInfo.Set(&v)
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// SetHypervisorVersionInfoNil sets the value for HypervisorVersionInfo to be an explicit nil
+func (o *HyperflexSoftwareVersionPolicy) SetHypervisorVersionInfoNil() {
+	o.HypervisorVersionInfo.Set(nil)
+}
+
+// UnsetHypervisorVersionInfo ensures that no value is present for HypervisorVersionInfo, not even an explicit nil
+func (o *HyperflexSoftwareVersionPolicy) UnsetHypervisorVersionInfo() {
+	o.HypervisorVersionInfo.Unset()
+}
+
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSoftwareVersionPolicy) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSoftwareVersionPolicy) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *HyperflexSoftwareVersionPolicy) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *HyperflexSoftwareVersionPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetServerFirmwareVersionInfo returns the ServerFirmwareVersionInfo field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *HyperflexSoftwareVersionPolicy) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *HyperflexSoftwareVersionPolicy) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetServerFirmwareVersionInfo returns the ServerFirmwareVersionInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersionInfo() FirmwareDistributableRelationship {
-	if o == nil || o.ServerFirmwareVersionInfo == nil {
+	if o == nil || IsNil(o.ServerFirmwareVersionInfo.Get()) {
 		var ret FirmwareDistributableRelationship
 		return ret
 	}
-	return *o.ServerFirmwareVersionInfo
+	return *o.ServerFirmwareVersionInfo.Get()
 }
 
 // GetServerFirmwareVersionInfoOk returns a tuple with the ServerFirmwareVersionInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersionInfoOk() (*FirmwareDistributableRelationship, bool) {
-	if o == nil || o.ServerFirmwareVersionInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServerFirmwareVersionInfo, true
+	return o.ServerFirmwareVersionInfo.Get(), o.ServerFirmwareVersionInfo.IsSet()
 }
 
 // HasServerFirmwareVersionInfo returns a boolean if a field has been set.
 func (o *HyperflexSoftwareVersionPolicy) HasServerFirmwareVersionInfo() bool {
-	if o != nil && o.ServerFirmwareVersionInfo != nil {
+	if o != nil && o.ServerFirmwareVersionInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetServerFirmwareVersionInfo gets a reference to the given FirmwareDistributableRelationship and assigns it to the ServerFirmwareVersionInfo field.
+// SetServerFirmwareVersionInfo gets a reference to the given NullableFirmwareDistributableRelationship and assigns it to the ServerFirmwareVersionInfo field.
 func (o *HyperflexSoftwareVersionPolicy) SetServerFirmwareVersionInfo(v FirmwareDistributableRelationship) {
-	o.ServerFirmwareVersionInfo = &v
+	o.ServerFirmwareVersionInfo.Set(&v)
+}
+
+// SetServerFirmwareVersionInfoNil sets the value for ServerFirmwareVersionInfo to be an explicit nil
+func (o *HyperflexSoftwareVersionPolicy) SetServerFirmwareVersionInfoNil() {
+	o.ServerFirmwareVersionInfo.Set(nil)
+}
+
+// UnsetServerFirmwareVersionInfo ensures that no value is present for ServerFirmwareVersionInfo, not even an explicit nil
+func (o *HyperflexSoftwareVersionPolicy) UnsetServerFirmwareVersionInfo() {
+	o.ServerFirmwareVersionInfo.Unset()
 }
 
 func (o HyperflexSoftwareVersionPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexSoftwareVersionPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractPolicy, errPolicyAbstractPolicy := json.Marshal(o.PolicyAbstractPolicy)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
 	errPolicyAbstractPolicy = json.Unmarshal([]byte(serializedPolicyAbstractPolicy), &toSerialize)
 	if errPolicyAbstractPolicy != nil {
-		return []byte{}, errPolicyAbstractPolicy
+		return map[string]interface{}{}, errPolicyAbstractPolicy
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.HxdpVersion != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.HxdpVersion) {
 		toSerialize["HxdpVersion"] = o.HxdpVersion
 	}
-	if o.HypervisorVersion != nil {
+	if !IsNil(o.HypervisorVersion) {
 		toSerialize["HypervisorVersion"] = o.HypervisorVersion
 	}
-	if o.ServerFirmwareVersion != nil {
+	if !IsNil(o.ServerFirmwareVersion) {
 		toSerialize["ServerFirmwareVersion"] = o.ServerFirmwareVersion
 	}
 	if o.ServerFirmwareVersions != nil {
@@ -471,27 +523,49 @@ func (o HyperflexSoftwareVersionPolicy) MarshalJSON() ([]byte, error) {
 	if o.ClusterProfiles != nil {
 		toSerialize["ClusterProfiles"] = o.ClusterProfiles
 	}
-	if o.HxdpVersionInfo != nil {
-		toSerialize["HxdpVersionInfo"] = o.HxdpVersionInfo
+	if o.HxdpVersionInfo.IsSet() {
+		toSerialize["HxdpVersionInfo"] = o.HxdpVersionInfo.Get()
 	}
-	if o.HypervisorVersionInfo != nil {
-		toSerialize["HypervisorVersionInfo"] = o.HypervisorVersionInfo
+	if o.HypervisorVersionInfo.IsSet() {
+		toSerialize["HypervisorVersionInfo"] = o.HypervisorVersionInfo.Get()
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.ServerFirmwareVersionInfo != nil {
-		toSerialize["ServerFirmwareVersionInfo"] = o.ServerFirmwareVersionInfo
+	if o.ServerFirmwareVersionInfo.IsSet() {
+		toSerialize["ServerFirmwareVersionInfo"] = o.ServerFirmwareVersionInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexSoftwareVersionPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexSoftwareVersionPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexSoftwareVersionPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -506,16 +580,16 @@ func (o *HyperflexSoftwareVersionPolicy) UnmarshalJSON(bytes []byte) (err error)
 		ServerFirmwareVersions []HyperflexServerFirmwareVersionInfo `json:"ServerFirmwareVersions,omitempty"`
 		UpgradeTypes           []string                             `json:"UpgradeTypes,omitempty"`
 		// An array of relationships to hyperflexClusterProfile resources.
-		ClusterProfiles           []HyperflexClusterProfileRelationship       `json:"ClusterProfiles,omitempty"`
-		HxdpVersionInfo           *SoftwareHyperflexDistributableRelationship `json:"HxdpVersionInfo,omitempty"`
-		HypervisorVersionInfo     *SoftwareHyperflexDistributableRelationship `json:"HypervisorVersionInfo,omitempty"`
-		Organization              *OrganizationOrganizationRelationship       `json:"Organization,omitempty"`
-		ServerFirmwareVersionInfo *FirmwareDistributableRelationship          `json:"ServerFirmwareVersionInfo,omitempty"`
+		ClusterProfiles           []HyperflexClusterProfileRelationship              `json:"ClusterProfiles,omitempty"`
+		HxdpVersionInfo           NullableSoftwareHyperflexDistributableRelationship `json:"HxdpVersionInfo,omitempty"`
+		HypervisorVersionInfo     NullableSoftwareHyperflexDistributableRelationship `json:"HypervisorVersionInfo,omitempty"`
+		Organization              NullableOrganizationOrganizationRelationship       `json:"Organization,omitempty"`
+		ServerFirmwareVersionInfo NullableFirmwareDistributableRelationship          `json:"ServerFirmwareVersionInfo,omitempty"`
 	}
 
 	varHyperflexSoftwareVersionPolicyWithoutEmbeddedStruct := HyperflexSoftwareVersionPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSoftwareVersionPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexSoftwareVersionPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexSoftwareVersionPolicy := _HyperflexSoftwareVersionPolicy{}
 		varHyperflexSoftwareVersionPolicy.ClassId = varHyperflexSoftwareVersionPolicyWithoutEmbeddedStruct.ClassId
@@ -537,7 +611,7 @@ func (o *HyperflexSoftwareVersionPolicy) UnmarshalJSON(bytes []byte) (err error)
 
 	varHyperflexSoftwareVersionPolicy := _HyperflexSoftwareVersionPolicy{}
 
-	err = json.Unmarshal(bytes, &varHyperflexSoftwareVersionPolicy)
+	err = json.Unmarshal(data, &varHyperflexSoftwareVersionPolicy)
 	if err == nil {
 		o.PolicyAbstractPolicy = varHyperflexSoftwareVersionPolicy.PolicyAbstractPolicy
 	} else {
@@ -546,7 +620,7 @@ func (o *HyperflexSoftwareVersionPolicy) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "HxdpVersion")

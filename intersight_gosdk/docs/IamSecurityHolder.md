@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.SecurityHolder"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.SecurityHolder"]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
-**IpRulesConfiguration** | Pointer to [**IamIpAccessManagementRelationship**](IamIpAccessManagementRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**IpRulesConfiguration** | Pointer to [**NullableIamIpAccessManagementRelationship**](IamIpAccessManagementRelationship.md) |  | [optional] 
 **ResourcePermissions** | Pointer to [**[]IamResourcePermissionRelationship**](IamResourcePermissionRelationship.md) | An array of relationships to iamResourcePermission resources. | [optional] [readonly] 
 
 ## Methods
@@ -94,6 +94,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *IamSecurityHolder) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *IamSecurityHolder) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetIpRulesConfiguration
 
 `func (o *IamSecurityHolder) GetIpRulesConfiguration() IamIpAccessManagementRelationship`
@@ -119,6 +129,16 @@ SetIpRulesConfiguration sets IpRulesConfiguration field to given value.
 
 HasIpRulesConfiguration returns a boolean if a field has been set.
 
+### SetIpRulesConfigurationNil
+
+`func (o *IamSecurityHolder) SetIpRulesConfigurationNil(b bool)`
+
+ SetIpRulesConfigurationNil sets the value for IpRulesConfiguration to be an explicit nil
+
+### UnsetIpRulesConfiguration
+`func (o *IamSecurityHolder) UnsetIpRulesConfiguration()`
+
+UnsetIpRulesConfiguration ensures that no value is present for IpRulesConfiguration, not even an explicit nil
 ### GetResourcePermissions
 
 `func (o *IamSecurityHolder) GetResourcePermissions() []IamResourcePermissionRelationship`

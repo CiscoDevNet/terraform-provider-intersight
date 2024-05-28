@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the CapabilityUpdateConstraintMeta type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CapabilityUpdateConstraintMeta{}
 
 // CapabilityUpdateConstraintMeta Internal meta-data to enable update related constraints.
 type CapabilityUpdateConstraintMeta struct {
@@ -105,7 +109,7 @@ func (o *CapabilityUpdateConstraintMeta) SetObjectType(v string) {
 
 // GetIsSecureBootSupported returns the IsSecureBootSupported field value if set, zero value otherwise.
 func (o *CapabilityUpdateConstraintMeta) GetIsSecureBootSupported() bool {
-	if o == nil || o.IsSecureBootSupported == nil {
+	if o == nil || IsNil(o.IsSecureBootSupported) {
 		var ret bool
 		return ret
 	}
@@ -115,7 +119,7 @@ func (o *CapabilityUpdateConstraintMeta) GetIsSecureBootSupported() bool {
 // GetIsSecureBootSupportedOk returns a tuple with the IsSecureBootSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityUpdateConstraintMeta) GetIsSecureBootSupportedOk() (*bool, bool) {
-	if o == nil || o.IsSecureBootSupported == nil {
+	if o == nil || IsNil(o.IsSecureBootSupported) {
 		return nil, false
 	}
 	return o.IsSecureBootSupported, true
@@ -123,7 +127,7 @@ func (o *CapabilityUpdateConstraintMeta) GetIsSecureBootSupportedOk() (*bool, bo
 
 // HasIsSecureBootSupported returns a boolean if a field has been set.
 func (o *CapabilityUpdateConstraintMeta) HasIsSecureBootSupported() bool {
-	if o != nil && o.IsSecureBootSupported != nil {
+	if o != nil && !IsNil(o.IsSecureBootSupported) {
 		return true
 	}
 
@@ -137,7 +141,7 @@ func (o *CapabilityUpdateConstraintMeta) SetIsSecureBootSupported(v bool) {
 
 // GetMinSupportedVersion returns the MinSupportedVersion field value if set, zero value otherwise.
 func (o *CapabilityUpdateConstraintMeta) GetMinSupportedVersion() string {
-	if o == nil || o.MinSupportedVersion == nil {
+	if o == nil || IsNil(o.MinSupportedVersion) {
 		var ret string
 		return ret
 	}
@@ -147,7 +151,7 @@ func (o *CapabilityUpdateConstraintMeta) GetMinSupportedVersion() string {
 // GetMinSupportedVersionOk returns a tuple with the MinSupportedVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityUpdateConstraintMeta) GetMinSupportedVersionOk() (*string, bool) {
-	if o == nil || o.MinSupportedVersion == nil {
+	if o == nil || IsNil(o.MinSupportedVersion) {
 		return nil, false
 	}
 	return o.MinSupportedVersion, true
@@ -155,7 +159,7 @@ func (o *CapabilityUpdateConstraintMeta) GetMinSupportedVersionOk() (*string, bo
 
 // HasMinSupportedVersion returns a boolean if a field has been set.
 func (o *CapabilityUpdateConstraintMeta) HasMinSupportedVersion() bool {
-	if o != nil && o.MinSupportedVersion != nil {
+	if o != nil && !IsNil(o.MinSupportedVersion) {
 		return true
 	}
 
@@ -169,7 +173,7 @@ func (o *CapabilityUpdateConstraintMeta) SetMinSupportedVersion(v string) {
 
 // GetModel returns the Model field value if set, zero value otherwise.
 func (o *CapabilityUpdateConstraintMeta) GetModel() string {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		var ret string
 		return ret
 	}
@@ -179,7 +183,7 @@ func (o *CapabilityUpdateConstraintMeta) GetModel() string {
 // GetModelOk returns a tuple with the Model field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CapabilityUpdateConstraintMeta) GetModelOk() (*string, bool) {
-	if o == nil || o.Model == nil {
+	if o == nil || IsNil(o.Model) {
 		return nil, false
 	}
 	return o.Model, true
@@ -187,7 +191,7 @@ func (o *CapabilityUpdateConstraintMeta) GetModelOk() (*string, bool) {
 
 // HasModel returns a boolean if a field has been set.
 func (o *CapabilityUpdateConstraintMeta) HasModel() bool {
-	if o != nil && o.Model != nil {
+	if o != nil && !IsNil(o.Model) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *CapabilityUpdateConstraintMeta) GetSupportedPlatforms() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CapabilityUpdateConstraintMeta) GetSupportedPlatformsOk() ([]string, bool) {
-	if o == nil || o.SupportedPlatforms == nil {
+	if o == nil || IsNil(o.SupportedPlatforms) {
 		return nil, false
 	}
 	return o.SupportedPlatforms, true
@@ -220,7 +224,7 @@ func (o *CapabilityUpdateConstraintMeta) GetSupportedPlatformsOk() ([]string, bo
 
 // HasSupportedPlatforms returns a boolean if a field has been set.
 func (o *CapabilityUpdateConstraintMeta) HasSupportedPlatforms() bool {
-	if o != nil && o.SupportedPlatforms != nil {
+	if o != nil && IsNil(o.SupportedPlatforms) {
 		return true
 	}
 
@@ -233,28 +237,32 @@ func (o *CapabilityUpdateConstraintMeta) SetSupportedPlatforms(v []string) {
 }
 
 func (o CapabilityUpdateConstraintMeta) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CapabilityUpdateConstraintMeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedCapabilityCapability, errCapabilityCapability := json.Marshal(o.CapabilityCapability)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
 	errCapabilityCapability = json.Unmarshal([]byte(serializedCapabilityCapability), &toSerialize)
 	if errCapabilityCapability != nil {
-		return []byte{}, errCapabilityCapability
+		return map[string]interface{}{}, errCapabilityCapability
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsSecureBootSupported != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsSecureBootSupported) {
 		toSerialize["IsSecureBootSupported"] = o.IsSecureBootSupported
 	}
-	if o.MinSupportedVersion != nil {
+	if !IsNil(o.MinSupportedVersion) {
 		toSerialize["MinSupportedVersion"] = o.MinSupportedVersion
 	}
-	if o.Model != nil {
+	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
 	}
 	if o.SupportedPlatforms != nil {
@@ -265,10 +273,32 @@ func (o CapabilityUpdateConstraintMeta) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *CapabilityUpdateConstraintMeta) UnmarshalJSON(bytes []byte) (err error) {
+func (o *CapabilityUpdateConstraintMeta) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type CapabilityUpdateConstraintMetaWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -285,7 +315,7 @@ func (o *CapabilityUpdateConstraintMeta) UnmarshalJSON(bytes []byte) (err error)
 
 	varCapabilityUpdateConstraintMetaWithoutEmbeddedStruct := CapabilityUpdateConstraintMetaWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varCapabilityUpdateConstraintMetaWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varCapabilityUpdateConstraintMetaWithoutEmbeddedStruct)
 	if err == nil {
 		varCapabilityUpdateConstraintMeta := _CapabilityUpdateConstraintMeta{}
 		varCapabilityUpdateConstraintMeta.ClassId = varCapabilityUpdateConstraintMetaWithoutEmbeddedStruct.ClassId
@@ -301,7 +331,7 @@ func (o *CapabilityUpdateConstraintMeta) UnmarshalJSON(bytes []byte) (err error)
 
 	varCapabilityUpdateConstraintMeta := _CapabilityUpdateConstraintMeta{}
 
-	err = json.Unmarshal(bytes, &varCapabilityUpdateConstraintMeta)
+	err = json.Unmarshal(data, &varCapabilityUpdateConstraintMeta)
 	if err == nil {
 		o.CapabilityCapability = varCapabilityUpdateConstraintMeta.CapabilityCapability
 	} else {
@@ -310,7 +340,7 @@ func (o *CapabilityUpdateConstraintMeta) UnmarshalJSON(bytes []byte) (err error)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsSecureBootSupported")

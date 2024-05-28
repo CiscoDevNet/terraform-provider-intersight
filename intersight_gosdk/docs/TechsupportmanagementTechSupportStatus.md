@@ -16,10 +16,10 @@ Name | Type | Description | Notes
 **TechsupportDownloadUrl** | Pointer to **string** | The Url to download the techsupport file. | [optional] [readonly] 
 **TechsupportFiles** | Pointer to [**[]TechsupportmanagementTechSupportFileInfo**](TechsupportmanagementTechSupportFileInfo.md) |  | [optional] 
 **UserRole** | Pointer to **string** | The name of the role granted to the user that issued the techsupport request. | [optional] [readonly] 
-**ClusterMember** | Pointer to [**AssetClusterMemberRelationship**](AssetClusterMemberRelationship.md) |  | [optional] 
-**DeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**OriginResource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**TechSupportRequest** | Pointer to [**TechsupportmanagementTechSupportBundleRelationship**](TechsupportmanagementTechSupportBundleRelationship.md) |  | [optional] 
+**ClusterMember** | Pointer to [**NullableAssetClusterMemberRelationship**](AssetClusterMemberRelationship.md) |  | [optional] 
+**DeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**OriginResource** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**TechSupportRequest** | Pointer to [**NullableTechsupportmanagementTechSupportBundleRelationship**](TechsupportmanagementTechSupportBundleRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -365,6 +365,16 @@ SetClusterMember sets ClusterMember field to given value.
 
 HasClusterMember returns a boolean if a field has been set.
 
+### SetClusterMemberNil
+
+`func (o *TechsupportmanagementTechSupportStatus) SetClusterMemberNil(b bool)`
+
+ SetClusterMemberNil sets the value for ClusterMember to be an explicit nil
+
+### UnsetClusterMember
+`func (o *TechsupportmanagementTechSupportStatus) UnsetClusterMember()`
+
+UnsetClusterMember ensures that no value is present for ClusterMember, not even an explicit nil
 ### GetDeviceRegistration
 
 `func (o *TechsupportmanagementTechSupportStatus) GetDeviceRegistration() AssetDeviceRegistrationRelationship`
@@ -390,6 +400,16 @@ SetDeviceRegistration sets DeviceRegistration field to given value.
 
 HasDeviceRegistration returns a boolean if a field has been set.
 
+### SetDeviceRegistrationNil
+
+`func (o *TechsupportmanagementTechSupportStatus) SetDeviceRegistrationNil(b bool)`
+
+ SetDeviceRegistrationNil sets the value for DeviceRegistration to be an explicit nil
+
+### UnsetDeviceRegistration
+`func (o *TechsupportmanagementTechSupportStatus) UnsetDeviceRegistration()`
+
+UnsetDeviceRegistration ensures that no value is present for DeviceRegistration, not even an explicit nil
 ### GetOriginResource
 
 `func (o *TechsupportmanagementTechSupportStatus) GetOriginResource() MoBaseMoRelationship`
@@ -415,6 +435,16 @@ SetOriginResource sets OriginResource field to given value.
 
 HasOriginResource returns a boolean if a field has been set.
 
+### SetOriginResourceNil
+
+`func (o *TechsupportmanagementTechSupportStatus) SetOriginResourceNil(b bool)`
+
+ SetOriginResourceNil sets the value for OriginResource to be an explicit nil
+
+### UnsetOriginResource
+`func (o *TechsupportmanagementTechSupportStatus) UnsetOriginResource()`
+
+UnsetOriginResource ensures that no value is present for OriginResource, not even an explicit nil
 ### GetTechSupportRequest
 
 `func (o *TechsupportmanagementTechSupportStatus) GetTechSupportRequest() TechsupportmanagementTechSupportBundleRelationship`
@@ -440,6 +470,16 @@ SetTechSupportRequest sets TechSupportRequest field to given value.
 
 HasTechSupportRequest returns a boolean if a field has been set.
 
+### SetTechSupportRequestNil
+
+`func (o *TechsupportmanagementTechSupportStatus) SetTechSupportRequestNil(b bool)`
+
+ SetTechSupportRequestNil sets the value for TechSupportRequest to be an explicit nil
+
+### UnsetTechSupportRequest
+`func (o *TechsupportmanagementTechSupportStatus) UnsetTechSupportRequest()`
+
+UnsetTechSupportRequest ensures that no value is present for TechSupportRequest, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

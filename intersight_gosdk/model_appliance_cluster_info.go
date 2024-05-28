@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceClusterInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceClusterInfo{}
 
 // ApplianceClusterInfo ClusterInfo model is used for a peer appliance to create a cluster with an existing, fully configured appliance.
 type ApplianceClusterInfo struct {
@@ -41,8 +45,8 @@ type ApplianceClusterInfo struct {
 	// Subnet Mask of the peer node.
 	Subnetmask *string `json:"Subnetmask,omitempty"`
 	// The UUID of the peer appliance.
-	Uuid                 *string                 `json:"Uuid,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
+	Uuid                 *string                        `json:"Uuid,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +125,7 @@ func (o *ApplianceClusterInfo) SetObjectType(v string) {
 
 // GetDeploymentSize returns the DeploymentSize field value if set, zero value otherwise.
 func (o *ApplianceClusterInfo) GetDeploymentSize() string {
-	if o == nil || o.DeploymentSize == nil {
+	if o == nil || IsNil(o.DeploymentSize) {
 		var ret string
 		return ret
 	}
@@ -131,7 +135,7 @@ func (o *ApplianceClusterInfo) GetDeploymentSize() string {
 // GetDeploymentSizeOk returns a tuple with the DeploymentSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceClusterInfo) GetDeploymentSizeOk() (*string, bool) {
-	if o == nil || o.DeploymentSize == nil {
+	if o == nil || IsNil(o.DeploymentSize) {
 		return nil, false
 	}
 	return o.DeploymentSize, true
@@ -139,7 +143,7 @@ func (o *ApplianceClusterInfo) GetDeploymentSizeOk() (*string, bool) {
 
 // HasDeploymentSize returns a boolean if a field has been set.
 func (o *ApplianceClusterInfo) HasDeploymentSize() bool {
-	if o != nil && o.DeploymentSize != nil {
+	if o != nil && !IsNil(o.DeploymentSize) {
 		return true
 	}
 
@@ -153,7 +157,7 @@ func (o *ApplianceClusterInfo) SetDeploymentSize(v string) {
 
 // GetGateway returns the Gateway field value if set, zero value otherwise.
 func (o *ApplianceClusterInfo) GetGateway() string {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		var ret string
 		return ret
 	}
@@ -163,7 +167,7 @@ func (o *ApplianceClusterInfo) GetGateway() string {
 // GetGatewayOk returns a tuple with the Gateway field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceClusterInfo) GetGatewayOk() (*string, bool) {
-	if o == nil || o.Gateway == nil {
+	if o == nil || IsNil(o.Gateway) {
 		return nil, false
 	}
 	return o.Gateway, true
@@ -171,7 +175,7 @@ func (o *ApplianceClusterInfo) GetGatewayOk() (*string, bool) {
 
 // HasGateway returns a boolean if a field has been set.
 func (o *ApplianceClusterInfo) HasGateway() bool {
-	if o != nil && o.Gateway != nil {
+	if o != nil && !IsNil(o.Gateway) {
 		return true
 	}
 
@@ -185,7 +189,7 @@ func (o *ApplianceClusterInfo) SetGateway(v string) {
 
 // GetHostip returns the Hostip field value if set, zero value otherwise.
 func (o *ApplianceClusterInfo) GetHostip() string {
-	if o == nil || o.Hostip == nil {
+	if o == nil || IsNil(o.Hostip) {
 		var ret string
 		return ret
 	}
@@ -195,7 +199,7 @@ func (o *ApplianceClusterInfo) GetHostip() string {
 // GetHostipOk returns a tuple with the Hostip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceClusterInfo) GetHostipOk() (*string, bool) {
-	if o == nil || o.Hostip == nil {
+	if o == nil || IsNil(o.Hostip) {
 		return nil, false
 	}
 	return o.Hostip, true
@@ -203,7 +207,7 @@ func (o *ApplianceClusterInfo) GetHostipOk() (*string, bool) {
 
 // HasHostip returns a boolean if a field has been set.
 func (o *ApplianceClusterInfo) HasHostip() bool {
-	if o != nil && o.Hostip != nil {
+	if o != nil && !IsNil(o.Hostip) {
 		return true
 	}
 
@@ -217,7 +221,7 @@ func (o *ApplianceClusterInfo) SetHostip(v string) {
 
 // GetHostname returns the Hostname field value if set, zero value otherwise.
 func (o *ApplianceClusterInfo) GetHostname() string {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		var ret string
 		return ret
 	}
@@ -227,7 +231,7 @@ func (o *ApplianceClusterInfo) GetHostname() string {
 // GetHostnameOk returns a tuple with the Hostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceClusterInfo) GetHostnameOk() (*string, bool) {
-	if o == nil || o.Hostname == nil {
+	if o == nil || IsNil(o.Hostname) {
 		return nil, false
 	}
 	return o.Hostname, true
@@ -235,7 +239,7 @@ func (o *ApplianceClusterInfo) GetHostnameOk() (*string, bool) {
 
 // HasHostname returns a boolean if a field has been set.
 func (o *ApplianceClusterInfo) HasHostname() bool {
-	if o != nil && o.Hostname != nil {
+	if o != nil && !IsNil(o.Hostname) {
 		return true
 	}
 
@@ -249,7 +253,7 @@ func (o *ApplianceClusterInfo) SetHostname(v string) {
 
 // GetPeerkey returns the Peerkey field value if set, zero value otherwise.
 func (o *ApplianceClusterInfo) GetPeerkey() string {
-	if o == nil || o.Peerkey == nil {
+	if o == nil || IsNil(o.Peerkey) {
 		var ret string
 		return ret
 	}
@@ -259,7 +263,7 @@ func (o *ApplianceClusterInfo) GetPeerkey() string {
 // GetPeerkeyOk returns a tuple with the Peerkey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceClusterInfo) GetPeerkeyOk() (*string, bool) {
-	if o == nil || o.Peerkey == nil {
+	if o == nil || IsNil(o.Peerkey) {
 		return nil, false
 	}
 	return o.Peerkey, true
@@ -267,7 +271,7 @@ func (o *ApplianceClusterInfo) GetPeerkeyOk() (*string, bool) {
 
 // HasPeerkey returns a boolean if a field has been set.
 func (o *ApplianceClusterInfo) HasPeerkey() bool {
-	if o != nil && o.Peerkey != nil {
+	if o != nil && !IsNil(o.Peerkey) {
 		return true
 	}
 
@@ -281,7 +285,7 @@ func (o *ApplianceClusterInfo) SetPeerkey(v string) {
 
 // GetResponsekey returns the Responsekey field value if set, zero value otherwise.
 func (o *ApplianceClusterInfo) GetResponsekey() string {
-	if o == nil || o.Responsekey == nil {
+	if o == nil || IsNil(o.Responsekey) {
 		var ret string
 		return ret
 	}
@@ -291,7 +295,7 @@ func (o *ApplianceClusterInfo) GetResponsekey() string {
 // GetResponsekeyOk returns a tuple with the Responsekey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceClusterInfo) GetResponsekeyOk() (*string, bool) {
-	if o == nil || o.Responsekey == nil {
+	if o == nil || IsNil(o.Responsekey) {
 		return nil, false
 	}
 	return o.Responsekey, true
@@ -299,7 +303,7 @@ func (o *ApplianceClusterInfo) GetResponsekeyOk() (*string, bool) {
 
 // HasResponsekey returns a boolean if a field has been set.
 func (o *ApplianceClusterInfo) HasResponsekey() bool {
-	if o != nil && o.Responsekey != nil {
+	if o != nil && !IsNil(o.Responsekey) {
 		return true
 	}
 
@@ -313,7 +317,7 @@ func (o *ApplianceClusterInfo) SetResponsekey(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ApplianceClusterInfo) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -323,7 +327,7 @@ func (o *ApplianceClusterInfo) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceClusterInfo) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -331,7 +335,7 @@ func (o *ApplianceClusterInfo) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *ApplianceClusterInfo) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -345,7 +349,7 @@ func (o *ApplianceClusterInfo) SetStatus(v string) {
 
 // GetSubnetmask returns the Subnetmask field value if set, zero value otherwise.
 func (o *ApplianceClusterInfo) GetSubnetmask() string {
-	if o == nil || o.Subnetmask == nil {
+	if o == nil || IsNil(o.Subnetmask) {
 		var ret string
 		return ret
 	}
@@ -355,7 +359,7 @@ func (o *ApplianceClusterInfo) GetSubnetmask() string {
 // GetSubnetmaskOk returns a tuple with the Subnetmask field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceClusterInfo) GetSubnetmaskOk() (*string, bool) {
-	if o == nil || o.Subnetmask == nil {
+	if o == nil || IsNil(o.Subnetmask) {
 		return nil, false
 	}
 	return o.Subnetmask, true
@@ -363,7 +367,7 @@ func (o *ApplianceClusterInfo) GetSubnetmaskOk() (*string, bool) {
 
 // HasSubnetmask returns a boolean if a field has been set.
 func (o *ApplianceClusterInfo) HasSubnetmask() bool {
-	if o != nil && o.Subnetmask != nil {
+	if o != nil && !IsNil(o.Subnetmask) {
 		return true
 	}
 
@@ -377,7 +381,7 @@ func (o *ApplianceClusterInfo) SetSubnetmask(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *ApplianceClusterInfo) GetUuid() string {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -387,7 +391,7 @@ func (o *ApplianceClusterInfo) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceClusterInfo) GetUuidOk() (*string, bool) {
-	if o == nil || o.Uuid == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -395,7 +399,7 @@ func (o *ApplianceClusterInfo) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *ApplianceClusterInfo) HasUuid() bool {
-	if o != nil && o.Uuid != nil {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -407,93 +411,130 @@ func (o *ApplianceClusterInfo) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceClusterInfo) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceClusterInfo) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *ApplianceClusterInfo) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *ApplianceClusterInfo) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
+}
+
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *ApplianceClusterInfo) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *ApplianceClusterInfo) UnsetAccount() {
+	o.Account.Unset()
 }
 
 func (o ApplianceClusterInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceClusterInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.DeploymentSize != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DeploymentSize) {
 		toSerialize["DeploymentSize"] = o.DeploymentSize
 	}
-	if o.Gateway != nil {
+	if !IsNil(o.Gateway) {
 		toSerialize["Gateway"] = o.Gateway
 	}
-	if o.Hostip != nil {
+	if !IsNil(o.Hostip) {
 		toSerialize["Hostip"] = o.Hostip
 	}
-	if o.Hostname != nil {
+	if !IsNil(o.Hostname) {
 		toSerialize["Hostname"] = o.Hostname
 	}
-	if o.Peerkey != nil {
+	if !IsNil(o.Peerkey) {
 		toSerialize["Peerkey"] = o.Peerkey
 	}
-	if o.Responsekey != nil {
+	if !IsNil(o.Responsekey) {
 		toSerialize["Responsekey"] = o.Responsekey
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.Subnetmask != nil {
+	if !IsNil(o.Subnetmask) {
 		toSerialize["Subnetmask"] = o.Subnetmask
 	}
-	if o.Uuid != nil {
+	if !IsNil(o.Uuid) {
 		toSerialize["Uuid"] = o.Uuid
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceClusterInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceClusterInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceClusterInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -516,13 +557,13 @@ func (o *ApplianceClusterInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// Subnet Mask of the peer node.
 		Subnetmask *string `json:"Subnetmask,omitempty"`
 		// The UUID of the peer appliance.
-		Uuid    *string                 `json:"Uuid,omitempty"`
-		Account *IamAccountRelationship `json:"Account,omitempty"`
+		Uuid    *string                        `json:"Uuid,omitempty"`
+		Account NullableIamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varApplianceClusterInfoWithoutEmbeddedStruct := ApplianceClusterInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceClusterInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceClusterInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceClusterInfo := _ApplianceClusterInfo{}
 		varApplianceClusterInfo.ClassId = varApplianceClusterInfoWithoutEmbeddedStruct.ClassId
@@ -544,7 +585,7 @@ func (o *ApplianceClusterInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceClusterInfo := _ApplianceClusterInfo{}
 
-	err = json.Unmarshal(bytes, &varApplianceClusterInfo)
+	err = json.Unmarshal(data, &varApplianceClusterInfo)
 	if err == nil {
 		o.MoBaseMo = varApplianceClusterInfo.MoBaseMo
 	} else {
@@ -553,7 +594,7 @@ func (o *ApplianceClusterInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DeploymentSize")

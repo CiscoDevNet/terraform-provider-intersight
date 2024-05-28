@@ -13,12 +13,12 @@ Name | Type | Description | Notes
 **NodeId** | Pointer to **int64** | System assigned unique ID of the Intersight Appliance node. The system incrementally assigns identifiers to each node in the Intersight Appliance cluster starting with a value of 1. | [optional] [readonly] 
 **NodeState** | Pointer to **string** | State of the node in terms of its readiness to host Kubernetes pods. * &#x60;Down&#x60; - The node is yet to come up and join as a member of theKubernetes cluster. * &#x60;Preparing&#x60; - The node has come up and joined the Kubernetes cluster,preparing to host Kubernetes pods. * &#x60;Ready&#x60; - The node is ready to host Kubernetes pods. | [optional] [readonly] [default to "Down"]
 **OperationalStatus** | Pointer to **string** | Operational status of the Intersight Appliance node. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * &#x60;Unknown&#x60; - The status of the appliance node is unknown. * &#x60;Operational&#x60; - The appliance node is operational. * &#x60;Impaired&#x60; - The appliance node is impaired. * &#x60;AttentionNeeded&#x60; - The appliance node needs attention. * &#x60;ReadyToJoin&#x60; - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * &#x60;OutOfService&#x60; - The user has taken this node (part of a cluster) to out of service. * &#x60;ReadyForReplacement&#x60; - The cluster node is ready to be replaced. * &#x60;ReplacementInProgress&#x60; - The cluster node replacement is in progress. * &#x60;ReplacementFailed&#x60; - There was a failure during the cluster node replacement. | [optional] [readonly] [default to "Unknown"]
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **FileSystemOpStatuses** | Pointer to [**[]ApplianceFileSystemOpStatusRelationship**](ApplianceFileSystemOpStatusRelationship.md) | An array of relationships to applianceFileSystemOpStatus resources. | [optional] [readonly] 
 **NetworkLinkStatuses** | Pointer to [**[]ApplianceNetworkLinkStatusRelationship**](ApplianceNetworkLinkStatusRelationship.md) | An array of relationships to applianceNetworkLinkStatus resources. | [optional] [readonly] 
-**NodeInfo** | Pointer to [**ApplianceNodeInfoRelationship**](ApplianceNodeInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**SystemOpStatus** | Pointer to [**ApplianceSystemOpStatusRelationship**](ApplianceSystemOpStatusRelationship.md) |  | [optional] 
+**NodeInfo** | Pointer to [**NullableApplianceNodeInfoRelationship**](ApplianceNodeInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**SystemOpStatus** | Pointer to [**NullableApplianceSystemOpStatusRelationship**](ApplianceSystemOpStatusRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -289,6 +289,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *ApplianceNodeOpStatus) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *ApplianceNodeOpStatus) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 ### GetFileSystemOpStatuses
 
 `func (o *ApplianceNodeOpStatus) GetFileSystemOpStatuses() []ApplianceFileSystemOpStatusRelationship`
@@ -384,6 +394,16 @@ SetNodeInfo sets NodeInfo field to given value.
 
 HasNodeInfo returns a boolean if a field has been set.
 
+### SetNodeInfoNil
+
+`func (o *ApplianceNodeOpStatus) SetNodeInfoNil(b bool)`
+
+ SetNodeInfoNil sets the value for NodeInfo to be an explicit nil
+
+### UnsetNodeInfo
+`func (o *ApplianceNodeOpStatus) UnsetNodeInfo()`
+
+UnsetNodeInfo ensures that no value is present for NodeInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *ApplianceNodeOpStatus) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -409,6 +429,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *ApplianceNodeOpStatus) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *ApplianceNodeOpStatus) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetSystemOpStatus
 
 `func (o *ApplianceNodeOpStatus) GetSystemOpStatus() ApplianceSystemOpStatusRelationship`
@@ -434,6 +464,16 @@ SetSystemOpStatus sets SystemOpStatus field to given value.
 
 HasSystemOpStatus returns a boolean if a field has been set.
 
+### SetSystemOpStatusNil
+
+`func (o *ApplianceNodeOpStatus) SetSystemOpStatusNil(b bool)`
+
+ SetSystemOpStatusNil sets the value for SystemOpStatus to be an explicit nil
+
+### UnsetSystemOpStatus
+`func (o *ApplianceNodeOpStatus) UnsetSystemOpStatus()`
+
+UnsetSystemOpStatus ensures that no value is present for SystemOpStatus, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions{}
 
 // AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions Captures configuration specific to the Google Cloud Platform (GCP) Billing target for Workload Optimizer service.
 type AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions struct {
@@ -116,7 +120,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) SetObjectType(
 
 // GetBillingAccountId returns the BillingAccountId field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetBillingAccountId() string {
-	if o == nil || o.BillingAccountId == nil {
+	if o == nil || IsNil(o.BillingAccountId) {
 		var ret string
 		return ret
 	}
@@ -126,7 +130,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetBillingAcco
 // GetBillingAccountIdOk returns a tuple with the BillingAccountId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetBillingAccountIdOk() (*string, bool) {
-	if o == nil || o.BillingAccountId == nil {
+	if o == nil || IsNil(o.BillingAccountId) {
 		return nil, false
 	}
 	return o.BillingAccountId, true
@@ -134,7 +138,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetBillingAcco
 
 // HasBillingAccountId returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) HasBillingAccountId() bool {
-	if o != nil && o.BillingAccountId != nil {
+	if o != nil && !IsNil(o.BillingAccountId) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) SetBillingAcco
 
 // GetCostExportDataSetName returns the CostExportDataSetName field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetCostExportDataSetName() string {
-	if o == nil || o.CostExportDataSetName == nil {
+	if o == nil || IsNil(o.CostExportDataSetName) {
 		var ret string
 		return ret
 	}
@@ -158,7 +162,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetCostExportD
 // GetCostExportDataSetNameOk returns a tuple with the CostExportDataSetName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetCostExportDataSetNameOk() (*string, bool) {
-	if o == nil || o.CostExportDataSetName == nil {
+	if o == nil || IsNil(o.CostExportDataSetName) {
 		return nil, false
 	}
 	return o.CostExportDataSetName, true
@@ -166,7 +170,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetCostExportD
 
 // HasCostExportDataSetName returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) HasCostExportDataSetName() bool {
-	if o != nil && o.CostExportDataSetName != nil {
+	if o != nil && !IsNil(o.CostExportDataSetName) {
 		return true
 	}
 
@@ -180,7 +184,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) SetCostExportD
 
 // GetCostExportTableName returns the CostExportTableName field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetCostExportTableName() string {
-	if o == nil || o.CostExportTableName == nil {
+	if o == nil || IsNil(o.CostExportTableName) {
 		var ret string
 		return ret
 	}
@@ -190,7 +194,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetCostExportT
 // GetCostExportTableNameOk returns a tuple with the CostExportTableName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetCostExportTableNameOk() (*string, bool) {
-	if o == nil || o.CostExportTableName == nil {
+	if o == nil || IsNil(o.CostExportTableName) {
 		return nil, false
 	}
 	return o.CostExportTableName, true
@@ -198,7 +202,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetCostExportT
 
 // HasCostExportTableName returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) HasCostExportTableName() bool {
-	if o != nil && o.CostExportTableName != nil {
+	if o != nil && !IsNil(o.CostExportTableName) {
 		return true
 	}
 
@@ -212,7 +216,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) SetCostExportT
 
 // GetPricingExportDataSetName returns the PricingExportDataSetName field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetPricingExportDataSetName() string {
-	if o == nil || o.PricingExportDataSetName == nil {
+	if o == nil || IsNil(o.PricingExportDataSetName) {
 		var ret string
 		return ret
 	}
@@ -222,7 +226,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetPricingExpo
 // GetPricingExportDataSetNameOk returns a tuple with the PricingExportDataSetName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetPricingExportDataSetNameOk() (*string, bool) {
-	if o == nil || o.PricingExportDataSetName == nil {
+	if o == nil || IsNil(o.PricingExportDataSetName) {
 		return nil, false
 	}
 	return o.PricingExportDataSetName, true
@@ -230,7 +234,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetPricingExpo
 
 // HasPricingExportDataSetName returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) HasPricingExportDataSetName() bool {
-	if o != nil && o.PricingExportDataSetName != nil {
+	if o != nil && !IsNil(o.PricingExportDataSetName) {
 		return true
 	}
 
@@ -244,7 +248,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) SetPricingExpo
 
 // GetPricingExportTableName returns the PricingExportTableName field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetPricingExportTableName() string {
-	if o == nil || o.PricingExportTableName == nil {
+	if o == nil || IsNil(o.PricingExportTableName) {
 		var ret string
 		return ret
 	}
@@ -254,7 +258,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetPricingExpo
 // GetPricingExportTableNameOk returns a tuple with the PricingExportTableName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetPricingExportTableNameOk() (*string, bool) {
-	if o == nil || o.PricingExportTableName == nil {
+	if o == nil || IsNil(o.PricingExportTableName) {
 		return nil, false
 	}
 	return o.PricingExportTableName, true
@@ -262,7 +266,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetPricingExpo
 
 // HasPricingExportTableName returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) HasPricingExportTableName() bool {
-	if o != nil && o.PricingExportTableName != nil {
+	if o != nil && !IsNil(o.PricingExportTableName) {
 		return true
 	}
 
@@ -276,7 +280,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) SetPricingExpo
 
 // GetProjectId returns the ProjectId field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetProjectId() string {
-	if o == nil || o.ProjectId == nil {
+	if o == nil || IsNil(o.ProjectId) {
 		var ret string
 		return ret
 	}
@@ -286,7 +290,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetProjectId()
 // GetProjectIdOk returns a tuple with the ProjectId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetProjectIdOk() (*string, bool) {
-	if o == nil || o.ProjectId == nil {
+	if o == nil || IsNil(o.ProjectId) {
 		return nil, false
 	}
 	return o.ProjectId, true
@@ -294,7 +298,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetProjectIdOk
 
 // HasProjectId returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) HasProjectId() bool {
-	if o != nil && o.ProjectId != nil {
+	if o != nil && !IsNil(o.ProjectId) {
 		return true
 	}
 
@@ -308,7 +312,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) SetProjectId(v
 
 // GetResourceLevelCostEnabled returns the ResourceLevelCostEnabled field value if set, zero value otherwise.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetResourceLevelCostEnabled() bool {
-	if o == nil || o.ResourceLevelCostEnabled == nil {
+	if o == nil || IsNil(o.ResourceLevelCostEnabled) {
 		var ret bool
 		return ret
 	}
@@ -318,7 +322,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetResourceLev
 // GetResourceLevelCostEnabledOk returns a tuple with the ResourceLevelCostEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetResourceLevelCostEnabledOk() (*bool, bool) {
-	if o == nil || o.ResourceLevelCostEnabled == nil {
+	if o == nil || IsNil(o.ResourceLevelCostEnabled) {
 		return nil, false
 	}
 	return o.ResourceLevelCostEnabled, true
@@ -326,7 +330,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) GetResourceLev
 
 // HasResourceLevelCostEnabled returns a boolean if a field has been set.
 func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) HasResourceLevelCostEnabled() bool {
-	if o != nil && o.ResourceLevelCostEnabled != nil {
+	if o != nil && !IsNil(o.ResourceLevelCostEnabled) {
 		return true
 	}
 
@@ -339,40 +343,44 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) SetResourceLev
 }
 
 func (o AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedAssetServiceOptions, errAssetServiceOptions := json.Marshal(o.AssetServiceOptions)
 	if errAssetServiceOptions != nil {
-		return []byte{}, errAssetServiceOptions
+		return map[string]interface{}{}, errAssetServiceOptions
 	}
 	errAssetServiceOptions = json.Unmarshal([]byte(serializedAssetServiceOptions), &toSerialize)
 	if errAssetServiceOptions != nil {
-		return []byte{}, errAssetServiceOptions
+		return map[string]interface{}{}, errAssetServiceOptions
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.BillingAccountId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.BillingAccountId) {
 		toSerialize["BillingAccountId"] = o.BillingAccountId
 	}
-	if o.CostExportDataSetName != nil {
+	if !IsNil(o.CostExportDataSetName) {
 		toSerialize["CostExportDataSetName"] = o.CostExportDataSetName
 	}
-	if o.CostExportTableName != nil {
+	if !IsNil(o.CostExportTableName) {
 		toSerialize["CostExportTableName"] = o.CostExportTableName
 	}
-	if o.PricingExportDataSetName != nil {
+	if !IsNil(o.PricingExportDataSetName) {
 		toSerialize["PricingExportDataSetName"] = o.PricingExportDataSetName
 	}
-	if o.PricingExportTableName != nil {
+	if !IsNil(o.PricingExportTableName) {
 		toSerialize["PricingExportTableName"] = o.PricingExportTableName
 	}
-	if o.ProjectId != nil {
+	if !IsNil(o.ProjectId) {
 		toSerialize["ProjectId"] = o.ProjectId
 	}
-	if o.ResourceLevelCostEnabled != nil {
+	if !IsNil(o.ResourceLevelCostEnabled) {
 		toSerialize["ResourceLevelCostEnabled"] = o.ResourceLevelCostEnabled
 	}
 
@@ -380,10 +388,32 @@ func (o AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) MarshalJSON() (
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetWorkloadOptimizerGoogleCloudPlatformBillingOptionsWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -407,7 +437,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) UnmarshalJSON(
 
 	varAssetWorkloadOptimizerGoogleCloudPlatformBillingOptionsWithoutEmbeddedStruct := AssetWorkloadOptimizerGoogleCloudPlatformBillingOptionsWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetWorkloadOptimizerGoogleCloudPlatformBillingOptionsWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetWorkloadOptimizerGoogleCloudPlatformBillingOptionsWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetWorkloadOptimizerGoogleCloudPlatformBillingOptions := _AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions{}
 		varAssetWorkloadOptimizerGoogleCloudPlatformBillingOptions.ClassId = varAssetWorkloadOptimizerGoogleCloudPlatformBillingOptionsWithoutEmbeddedStruct.ClassId
@@ -426,7 +456,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) UnmarshalJSON(
 
 	varAssetWorkloadOptimizerGoogleCloudPlatformBillingOptions := _AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions{}
 
-	err = json.Unmarshal(bytes, &varAssetWorkloadOptimizerGoogleCloudPlatformBillingOptions)
+	err = json.Unmarshal(data, &varAssetWorkloadOptimizerGoogleCloudPlatformBillingOptions)
 	if err == nil {
 		o.AssetServiceOptions = varAssetWorkloadOptimizerGoogleCloudPlatformBillingOptions.AssetServiceOptions
 	} else {
@@ -435,7 +465,7 @@ func (o *AssetWorkloadOptimizerGoogleCloudPlatformBillingOptions) UnmarshalJSON(
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BillingAccountId")

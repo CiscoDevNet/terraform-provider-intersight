@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ForecastModel type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ForecastModel{}
 
 // ForecastModel Model encapsulates model type and the model generated based on the type for computing forecast. For example if linear regression predictive modeling is used then the model data contains slope, coefficient and RMSE.
 type ForecastModel struct {
@@ -107,7 +111,7 @@ func (o *ForecastModel) SetObjectType(v string) {
 
 // GetAccuracy returns the Accuracy field value if set, zero value otherwise.
 func (o *ForecastModel) GetAccuracy() float32 {
-	if o == nil || o.Accuracy == nil {
+	if o == nil || IsNil(o.Accuracy) {
 		var ret float32
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *ForecastModel) GetAccuracy() float32 {
 // GetAccuracyOk returns a tuple with the Accuracy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastModel) GetAccuracyOk() (*float32, bool) {
-	if o == nil || o.Accuracy == nil {
+	if o == nil || IsNil(o.Accuracy) {
 		return nil, false
 	}
 	return o.Accuracy, true
@@ -125,7 +129,7 @@ func (o *ForecastModel) GetAccuracyOk() (*float32, bool) {
 
 // HasAccuracy returns a boolean if a field has been set.
 func (o *ForecastModel) HasAccuracy() bool {
-	if o != nil && o.Accuracy != nil {
+	if o != nil && !IsNil(o.Accuracy) {
 		return true
 	}
 
@@ -150,7 +154,7 @@ func (o *ForecastModel) GetModelData() []float32 {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ForecastModel) GetModelDataOk() ([]float32, bool) {
-	if o == nil || o.ModelData == nil {
+	if o == nil || IsNil(o.ModelData) {
 		return nil, false
 	}
 	return o.ModelData, true
@@ -158,7 +162,7 @@ func (o *ForecastModel) GetModelDataOk() ([]float32, bool) {
 
 // HasModelData returns a boolean if a field has been set.
 func (o *ForecastModel) HasModelData() bool {
-	if o != nil && o.ModelData != nil {
+	if o != nil && IsNil(o.ModelData) {
 		return true
 	}
 
@@ -172,7 +176,7 @@ func (o *ForecastModel) SetModelData(v []float32) {
 
 // GetModelType returns the ModelType field value if set, zero value otherwise.
 func (o *ForecastModel) GetModelType() string {
-	if o == nil || o.ModelType == nil {
+	if o == nil || IsNil(o.ModelType) {
 		var ret string
 		return ret
 	}
@@ -182,7 +186,7 @@ func (o *ForecastModel) GetModelType() string {
 // GetModelTypeOk returns a tuple with the ModelType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ForecastModel) GetModelTypeOk() (*string, bool) {
-	if o == nil || o.ModelType == nil {
+	if o == nil || IsNil(o.ModelType) {
 		return nil, false
 	}
 	return o.ModelType, true
@@ -190,7 +194,7 @@ func (o *ForecastModel) GetModelTypeOk() (*string, bool) {
 
 // HasModelType returns a boolean if a field has been set.
 func (o *ForecastModel) HasModelType() bool {
-	if o != nil && o.ModelType != nil {
+	if o != nil && !IsNil(o.ModelType) {
 		return true
 	}
 
@@ -203,28 +207,32 @@ func (o *ForecastModel) SetModelType(v string) {
 }
 
 func (o ForecastModel) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ForecastModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Accuracy != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Accuracy) {
 		toSerialize["Accuracy"] = o.Accuracy
 	}
 	if o.ModelData != nil {
 		toSerialize["ModelData"] = o.ModelData
 	}
-	if o.ModelType != nil {
+	if !IsNil(o.ModelType) {
 		toSerialize["ModelType"] = o.ModelType
 	}
 
@@ -232,10 +240,32 @@ func (o ForecastModel) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ForecastModel) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ForecastModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ForecastModelWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -250,7 +280,7 @@ func (o *ForecastModel) UnmarshalJSON(bytes []byte) (err error) {
 
 	varForecastModelWithoutEmbeddedStruct := ForecastModelWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varForecastModelWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varForecastModelWithoutEmbeddedStruct)
 	if err == nil {
 		varForecastModel := _ForecastModel{}
 		varForecastModel.ClassId = varForecastModelWithoutEmbeddedStruct.ClassId
@@ -265,7 +295,7 @@ func (o *ForecastModel) UnmarshalJSON(bytes []byte) (err error) {
 
 	varForecastModel := _ForecastModel{}
 
-	err = json.Unmarshal(bytes, &varForecastModel)
+	err = json.Unmarshal(data, &varForecastModel)
 	if err == nil {
 		o.MoBaseComplexType = varForecastModel.MoBaseComplexType
 	} else {
@@ -274,7 +304,7 @@ func (o *ForecastModel) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Accuracy")

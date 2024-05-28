@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the I18nMessage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &I18nMessage{}
 
 // I18nMessage An i18n message that can be translated in multiple languages to support internationalization. An i18n message includes a unique message identifier, a text format string, a list of message parameters that can be used  to substitute parameters, and a translated string based on a user's locale.
 type I18nMessage struct {
@@ -107,7 +111,7 @@ func (o *I18nMessage) SetObjectType(v string) {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *I18nMessage) GetMessage() string {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -117,7 +121,7 @@ func (o *I18nMessage) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *I18nMessage) GetMessageOk() (*string, bool) {
-	if o == nil || o.Message == nil {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -125,7 +129,7 @@ func (o *I18nMessage) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *I18nMessage) HasMessage() bool {
-	if o != nil && o.Message != nil {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -139,7 +143,7 @@ func (o *I18nMessage) SetMessage(v string) {
 
 // GetMessageId returns the MessageId field value if set, zero value otherwise.
 func (o *I18nMessage) GetMessageId() string {
-	if o == nil || o.MessageId == nil {
+	if o == nil || IsNil(o.MessageId) {
 		var ret string
 		return ret
 	}
@@ -149,7 +153,7 @@ func (o *I18nMessage) GetMessageId() string {
 // GetMessageIdOk returns a tuple with the MessageId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *I18nMessage) GetMessageIdOk() (*string, bool) {
-	if o == nil || o.MessageId == nil {
+	if o == nil || IsNil(o.MessageId) {
 		return nil, false
 	}
 	return o.MessageId, true
@@ -157,7 +161,7 @@ func (o *I18nMessage) GetMessageIdOk() (*string, bool) {
 
 // HasMessageId returns a boolean if a field has been set.
 func (o *I18nMessage) HasMessageId() bool {
-	if o != nil && o.MessageId != nil {
+	if o != nil && !IsNil(o.MessageId) {
 		return true
 	}
 
@@ -182,7 +186,7 @@ func (o *I18nMessage) GetMessageParams() []I18nMessageParam {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *I18nMessage) GetMessageParamsOk() ([]I18nMessageParam, bool) {
-	if o == nil || o.MessageParams == nil {
+	if o == nil || IsNil(o.MessageParams) {
 		return nil, false
 	}
 	return o.MessageParams, true
@@ -190,7 +194,7 @@ func (o *I18nMessage) GetMessageParamsOk() ([]I18nMessageParam, bool) {
 
 // HasMessageParams returns a boolean if a field has been set.
 func (o *I18nMessage) HasMessageParams() bool {
-	if o != nil && o.MessageParams != nil {
+	if o != nil && IsNil(o.MessageParams) {
 		return true
 	}
 
@@ -203,25 +207,29 @@ func (o *I18nMessage) SetMessageParams(v []I18nMessageParam) {
 }
 
 func (o I18nMessage) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o I18nMessage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Message != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Message) {
 		toSerialize["Message"] = o.Message
 	}
-	if o.MessageId != nil {
+	if !IsNil(o.MessageId) {
 		toSerialize["MessageId"] = o.MessageId
 	}
 	if o.MessageParams != nil {
@@ -232,10 +240,32 @@ func (o I18nMessage) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *I18nMessage) UnmarshalJSON(bytes []byte) (err error) {
+func (o *I18nMessage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type I18nMessageWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -250,7 +280,7 @@ func (o *I18nMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	varI18nMessageWithoutEmbeddedStruct := I18nMessageWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varI18nMessageWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varI18nMessageWithoutEmbeddedStruct)
 	if err == nil {
 		varI18nMessage := _I18nMessage{}
 		varI18nMessage.ClassId = varI18nMessageWithoutEmbeddedStruct.ClassId
@@ -265,7 +295,7 @@ func (o *I18nMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	varI18nMessage := _I18nMessage{}
 
-	err = json.Unmarshal(bytes, &varI18nMessage)
+	err = json.Unmarshal(data, &varI18nMessage)
 	if err == nil {
 		o.MoBaseComplexType = varI18nMessage.MoBaseComplexType
 	} else {
@@ -274,7 +304,7 @@ func (o *I18nMessage) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Message")

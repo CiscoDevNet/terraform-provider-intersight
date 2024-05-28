@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesAciCniProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesAciCniProfile{}
 
 // KubernetesAciCniProfile Configuration for an ACI CNI profile.
 type KubernetesAciCniProfile struct {
@@ -59,9 +63,9 @@ type KubernetesAciCniProfile struct {
 	// An array of relationships to kubernetesAciCniTenantClusterAllocation resources.
 	ClusterAciAllocations []KubernetesAciCniTenantClusterAllocationRelationship `json:"ClusterAciAllocations,omitempty"`
 	// An array of relationships to kubernetesClusterProfile resources.
-	ClusterProfiles      []KubernetesClusterProfileRelationship `json:"ClusterProfiles,omitempty"`
-	Organization         *OrganizationOrganizationRelationship  `json:"Organization,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship   `json:"RegisteredDevice,omitempty"`
+	ClusterProfiles      []KubernetesClusterProfileRelationship       `json:"ClusterProfiles,omitempty"`
+	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship  `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -142,7 +146,7 @@ func (o *KubernetesAciCniProfile) SetObjectType(v string) {
 
 // GetAaepName returns the AaepName field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetAaepName() string {
-	if o == nil || o.AaepName == nil {
+	if o == nil || IsNil(o.AaepName) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *KubernetesAciCniProfile) GetAaepName() string {
 // GetAaepNameOk returns a tuple with the AaepName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetAaepNameOk() (*string, bool) {
-	if o == nil || o.AaepName == nil {
+	if o == nil || IsNil(o.AaepName) {
 		return nil, false
 	}
 	return o.AaepName, true
@@ -160,7 +164,7 @@ func (o *KubernetesAciCniProfile) GetAaepNameOk() (*string, bool) {
 
 // HasAaepName returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasAaepName() bool {
-	if o != nil && o.AaepName != nil {
+	if o != nil && !IsNil(o.AaepName) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *KubernetesAciCniProfile) SetAaepName(v string) {
 
 // GetExtSvcDynSubnetStart returns the ExtSvcDynSubnetStart field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetExtSvcDynSubnetStart() string {
-	if o == nil || o.ExtSvcDynSubnetStart == nil {
+	if o == nil || IsNil(o.ExtSvcDynSubnetStart) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *KubernetesAciCniProfile) GetExtSvcDynSubnetStart() string {
 // GetExtSvcDynSubnetStartOk returns a tuple with the ExtSvcDynSubnetStart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetExtSvcDynSubnetStartOk() (*string, bool) {
-	if o == nil || o.ExtSvcDynSubnetStart == nil {
+	if o == nil || IsNil(o.ExtSvcDynSubnetStart) {
 		return nil, false
 	}
 	return o.ExtSvcDynSubnetStart, true
@@ -192,7 +196,7 @@ func (o *KubernetesAciCniProfile) GetExtSvcDynSubnetStartOk() (*string, bool) {
 
 // HasExtSvcDynSubnetStart returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasExtSvcDynSubnetStart() bool {
-	if o != nil && o.ExtSvcDynSubnetStart != nil {
+	if o != nil && !IsNil(o.ExtSvcDynSubnetStart) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *KubernetesAciCniProfile) SetExtSvcDynSubnetStart(v string) {
 
 // GetExtSvcStaticSubnetStart returns the ExtSvcStaticSubnetStart field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetExtSvcStaticSubnetStart() string {
-	if o == nil || o.ExtSvcStaticSubnetStart == nil {
+	if o == nil || IsNil(o.ExtSvcStaticSubnetStart) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *KubernetesAciCniProfile) GetExtSvcStaticSubnetStart() string {
 // GetExtSvcStaticSubnetStartOk returns a tuple with the ExtSvcStaticSubnetStart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetExtSvcStaticSubnetStartOk() (*string, bool) {
-	if o == nil || o.ExtSvcStaticSubnetStart == nil {
+	if o == nil || IsNil(o.ExtSvcStaticSubnetStart) {
 		return nil, false
 	}
 	return o.ExtSvcStaticSubnetStart, true
@@ -224,7 +228,7 @@ func (o *KubernetesAciCniProfile) GetExtSvcStaticSubnetStartOk() (*string, bool)
 
 // HasExtSvcStaticSubnetStart returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasExtSvcStaticSubnetStart() bool {
-	if o != nil && o.ExtSvcStaticSubnetStart != nil {
+	if o != nil && !IsNil(o.ExtSvcStaticSubnetStart) {
 		return true
 	}
 
@@ -238,7 +242,7 @@ func (o *KubernetesAciCniProfile) SetExtSvcStaticSubnetStart(v string) {
 
 // GetInfraVlanId returns the InfraVlanId field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetInfraVlanId() int64 {
-	if o == nil || o.InfraVlanId == nil {
+	if o == nil || IsNil(o.InfraVlanId) {
 		var ret int64
 		return ret
 	}
@@ -248,7 +252,7 @@ func (o *KubernetesAciCniProfile) GetInfraVlanId() int64 {
 // GetInfraVlanIdOk returns a tuple with the InfraVlanId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetInfraVlanIdOk() (*int64, bool) {
-	if o == nil || o.InfraVlanId == nil {
+	if o == nil || IsNil(o.InfraVlanId) {
 		return nil, false
 	}
 	return o.InfraVlanId, true
@@ -256,7 +260,7 @@ func (o *KubernetesAciCniProfile) GetInfraVlanIdOk() (*int64, bool) {
 
 // HasInfraVlanId returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasInfraVlanId() bool {
-	if o != nil && o.InfraVlanId != nil {
+	if o != nil && !IsNil(o.InfraVlanId) {
 		return true
 	}
 
@@ -270,7 +274,7 @@ func (o *KubernetesAciCniProfile) SetInfraVlanId(v int64) {
 
 // GetL3OutNetworkName returns the L3OutNetworkName field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetL3OutNetworkName() string {
-	if o == nil || o.L3OutNetworkName == nil {
+	if o == nil || IsNil(o.L3OutNetworkName) {
 		var ret string
 		return ret
 	}
@@ -280,7 +284,7 @@ func (o *KubernetesAciCniProfile) GetL3OutNetworkName() string {
 // GetL3OutNetworkNameOk returns a tuple with the L3OutNetworkName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetL3OutNetworkNameOk() (*string, bool) {
-	if o == nil || o.L3OutNetworkName == nil {
+	if o == nil || IsNil(o.L3OutNetworkName) {
 		return nil, false
 	}
 	return o.L3OutNetworkName, true
@@ -288,7 +292,7 @@ func (o *KubernetesAciCniProfile) GetL3OutNetworkNameOk() (*string, bool) {
 
 // HasL3OutNetworkName returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasL3OutNetworkName() bool {
-	if o != nil && o.L3OutNetworkName != nil {
+	if o != nil && !IsNil(o.L3OutNetworkName) {
 		return true
 	}
 
@@ -302,7 +306,7 @@ func (o *KubernetesAciCniProfile) SetL3OutNetworkName(v string) {
 
 // GetL3OutPolicyName returns the L3OutPolicyName field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetL3OutPolicyName() string {
-	if o == nil || o.L3OutPolicyName == nil {
+	if o == nil || IsNil(o.L3OutPolicyName) {
 		var ret string
 		return ret
 	}
@@ -312,7 +316,7 @@ func (o *KubernetesAciCniProfile) GetL3OutPolicyName() string {
 // GetL3OutPolicyNameOk returns a tuple with the L3OutPolicyName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetL3OutPolicyNameOk() (*string, bool) {
-	if o == nil || o.L3OutPolicyName == nil {
+	if o == nil || IsNil(o.L3OutPolicyName) {
 		return nil, false
 	}
 	return o.L3OutPolicyName, true
@@ -320,7 +324,7 @@ func (o *KubernetesAciCniProfile) GetL3OutPolicyNameOk() (*string, bool) {
 
 // HasL3OutPolicyName returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasL3OutPolicyName() bool {
-	if o != nil && o.L3OutPolicyName != nil {
+	if o != nil && !IsNil(o.L3OutPolicyName) {
 		return true
 	}
 
@@ -334,7 +338,7 @@ func (o *KubernetesAciCniProfile) SetL3OutPolicyName(v string) {
 
 // GetL3OutTenant returns the L3OutTenant field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetL3OutTenant() string {
-	if o == nil || o.L3OutTenant == nil {
+	if o == nil || IsNil(o.L3OutTenant) {
 		var ret string
 		return ret
 	}
@@ -344,7 +348,7 @@ func (o *KubernetesAciCniProfile) GetL3OutTenant() string {
 // GetL3OutTenantOk returns a tuple with the L3OutTenant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetL3OutTenantOk() (*string, bool) {
-	if o == nil || o.L3OutTenant == nil {
+	if o == nil || IsNil(o.L3OutTenant) {
 		return nil, false
 	}
 	return o.L3OutTenant, true
@@ -352,7 +356,7 @@ func (o *KubernetesAciCniProfile) GetL3OutTenantOk() (*string, bool) {
 
 // HasL3OutTenant returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasL3OutTenant() bool {
-	if o != nil && o.L3OutTenant != nil {
+	if o != nil && !IsNil(o.L3OutTenant) {
 		return true
 	}
 
@@ -366,7 +370,7 @@ func (o *KubernetesAciCniProfile) SetL3OutTenant(v string) {
 
 // GetNestedVmmDomain returns the NestedVmmDomain field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetNestedVmmDomain() string {
-	if o == nil || o.NestedVmmDomain == nil {
+	if o == nil || IsNil(o.NestedVmmDomain) {
 		var ret string
 		return ret
 	}
@@ -376,7 +380,7 @@ func (o *KubernetesAciCniProfile) GetNestedVmmDomain() string {
 // GetNestedVmmDomainOk returns a tuple with the NestedVmmDomain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetNestedVmmDomainOk() (*string, bool) {
-	if o == nil || o.NestedVmmDomain == nil {
+	if o == nil || IsNil(o.NestedVmmDomain) {
 		return nil, false
 	}
 	return o.NestedVmmDomain, true
@@ -384,7 +388,7 @@ func (o *KubernetesAciCniProfile) GetNestedVmmDomainOk() (*string, bool) {
 
 // HasNestedVmmDomain returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasNestedVmmDomain() bool {
-	if o != nil && o.NestedVmmDomain != nil {
+	if o != nil && !IsNil(o.NestedVmmDomain) {
 		return true
 	}
 
@@ -398,7 +402,7 @@ func (o *KubernetesAciCniProfile) SetNestedVmmDomain(v string) {
 
 // GetNodeSvcSubnetStart returns the NodeSvcSubnetStart field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetNodeSvcSubnetStart() string {
-	if o == nil || o.NodeSvcSubnetStart == nil {
+	if o == nil || IsNil(o.NodeSvcSubnetStart) {
 		var ret string
 		return ret
 	}
@@ -408,7 +412,7 @@ func (o *KubernetesAciCniProfile) GetNodeSvcSubnetStart() string {
 // GetNodeSvcSubnetStartOk returns a tuple with the NodeSvcSubnetStart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetNodeSvcSubnetStartOk() (*string, bool) {
-	if o == nil || o.NodeSvcSubnetStart == nil {
+	if o == nil || IsNil(o.NodeSvcSubnetStart) {
 		return nil, false
 	}
 	return o.NodeSvcSubnetStart, true
@@ -416,7 +420,7 @@ func (o *KubernetesAciCniProfile) GetNodeSvcSubnetStartOk() (*string, bool) {
 
 // HasNodeSvcSubnetStart returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasNodeSvcSubnetStart() bool {
-	if o != nil && o.NodeSvcSubnetStart != nil {
+	if o != nil && !IsNil(o.NodeSvcSubnetStart) {
 		return true
 	}
 
@@ -430,7 +434,7 @@ func (o *KubernetesAciCniProfile) SetNodeSvcSubnetStart(v string) {
 
 // GetNodeVlanRangeEnd returns the NodeVlanRangeEnd field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetNodeVlanRangeEnd() int64 {
-	if o == nil || o.NodeVlanRangeEnd == nil {
+	if o == nil || IsNil(o.NodeVlanRangeEnd) {
 		var ret int64
 		return ret
 	}
@@ -440,7 +444,7 @@ func (o *KubernetesAciCniProfile) GetNodeVlanRangeEnd() int64 {
 // GetNodeVlanRangeEndOk returns a tuple with the NodeVlanRangeEnd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetNodeVlanRangeEndOk() (*int64, bool) {
-	if o == nil || o.NodeVlanRangeEnd == nil {
+	if o == nil || IsNil(o.NodeVlanRangeEnd) {
 		return nil, false
 	}
 	return o.NodeVlanRangeEnd, true
@@ -448,7 +452,7 @@ func (o *KubernetesAciCniProfile) GetNodeVlanRangeEndOk() (*int64, bool) {
 
 // HasNodeVlanRangeEnd returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasNodeVlanRangeEnd() bool {
-	if o != nil && o.NodeVlanRangeEnd != nil {
+	if o != nil && !IsNil(o.NodeVlanRangeEnd) {
 		return true
 	}
 
@@ -462,7 +466,7 @@ func (o *KubernetesAciCniProfile) SetNodeVlanRangeEnd(v int64) {
 
 // GetNodeVlanRangeStart returns the NodeVlanRangeStart field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetNodeVlanRangeStart() int64 {
-	if o == nil || o.NodeVlanRangeStart == nil {
+	if o == nil || IsNil(o.NodeVlanRangeStart) {
 		var ret int64
 		return ret
 	}
@@ -472,7 +476,7 @@ func (o *KubernetesAciCniProfile) GetNodeVlanRangeStart() int64 {
 // GetNodeVlanRangeStartOk returns a tuple with the NodeVlanRangeStart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetNodeVlanRangeStartOk() (*int64, bool) {
-	if o == nil || o.NodeVlanRangeStart == nil {
+	if o == nil || IsNil(o.NodeVlanRangeStart) {
 		return nil, false
 	}
 	return o.NodeVlanRangeStart, true
@@ -480,7 +484,7 @@ func (o *KubernetesAciCniProfile) GetNodeVlanRangeStartOk() (*int64, bool) {
 
 // HasNodeVlanRangeStart returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasNodeVlanRangeStart() bool {
-	if o != nil && o.NodeVlanRangeStart != nil {
+	if o != nil && !IsNil(o.NodeVlanRangeStart) {
 		return true
 	}
 
@@ -494,7 +498,7 @@ func (o *KubernetesAciCniProfile) SetNodeVlanRangeStart(v int64) {
 
 // GetNumberOfKubernetesClusters returns the NumberOfKubernetesClusters field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetNumberOfKubernetesClusters() int64 {
-	if o == nil || o.NumberOfKubernetesClusters == nil {
+	if o == nil || IsNil(o.NumberOfKubernetesClusters) {
 		var ret int64
 		return ret
 	}
@@ -504,7 +508,7 @@ func (o *KubernetesAciCniProfile) GetNumberOfKubernetesClusters() int64 {
 // GetNumberOfKubernetesClustersOk returns a tuple with the NumberOfKubernetesClusters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetNumberOfKubernetesClustersOk() (*int64, bool) {
-	if o == nil || o.NumberOfKubernetesClusters == nil {
+	if o == nil || IsNil(o.NumberOfKubernetesClusters) {
 		return nil, false
 	}
 	return o.NumberOfKubernetesClusters, true
@@ -512,7 +516,7 @@ func (o *KubernetesAciCniProfile) GetNumberOfKubernetesClustersOk() (*int64, boo
 
 // HasNumberOfKubernetesClusters returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasNumberOfKubernetesClusters() bool {
-	if o != nil && o.NumberOfKubernetesClusters != nil {
+	if o != nil && !IsNil(o.NumberOfKubernetesClusters) {
 		return true
 	}
 
@@ -526,7 +530,7 @@ func (o *KubernetesAciCniProfile) SetNumberOfKubernetesClusters(v int64) {
 
 // GetOpflexMulticastAddressRange returns the OpflexMulticastAddressRange field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetOpflexMulticastAddressRange() string {
-	if o == nil || o.OpflexMulticastAddressRange == nil {
+	if o == nil || IsNil(o.OpflexMulticastAddressRange) {
 		var ret string
 		return ret
 	}
@@ -536,7 +540,7 @@ func (o *KubernetesAciCniProfile) GetOpflexMulticastAddressRange() string {
 // GetOpflexMulticastAddressRangeOk returns a tuple with the OpflexMulticastAddressRange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetOpflexMulticastAddressRangeOk() (*string, bool) {
-	if o == nil || o.OpflexMulticastAddressRange == nil {
+	if o == nil || IsNil(o.OpflexMulticastAddressRange) {
 		return nil, false
 	}
 	return o.OpflexMulticastAddressRange, true
@@ -544,7 +548,7 @@ func (o *KubernetesAciCniProfile) GetOpflexMulticastAddressRangeOk() (*string, b
 
 // HasOpflexMulticastAddressRange returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasOpflexMulticastAddressRange() bool {
-	if o != nil && o.OpflexMulticastAddressRange != nil {
+	if o != nil && !IsNil(o.OpflexMulticastAddressRange) {
 		return true
 	}
 
@@ -558,7 +562,7 @@ func (o *KubernetesAciCniProfile) SetOpflexMulticastAddressRange(v string) {
 
 // GetPodSubnetStart returns the PodSubnetStart field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetPodSubnetStart() string {
-	if o == nil || o.PodSubnetStart == nil {
+	if o == nil || IsNil(o.PodSubnetStart) {
 		var ret string
 		return ret
 	}
@@ -568,7 +572,7 @@ func (o *KubernetesAciCniProfile) GetPodSubnetStart() string {
 // GetPodSubnetStartOk returns a tuple with the PodSubnetStart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetPodSubnetStartOk() (*string, bool) {
-	if o == nil || o.PodSubnetStart == nil {
+	if o == nil || IsNil(o.PodSubnetStart) {
 		return nil, false
 	}
 	return o.PodSubnetStart, true
@@ -576,7 +580,7 @@ func (o *KubernetesAciCniProfile) GetPodSubnetStartOk() (*string, bool) {
 
 // HasPodSubnetStart returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasPodSubnetStart() bool {
-	if o != nil && o.PodSubnetStart != nil {
+	if o != nil && !IsNil(o.PodSubnetStart) {
 		return true
 	}
 
@@ -590,7 +594,7 @@ func (o *KubernetesAciCniProfile) SetPodSubnetStart(v string) {
 
 // GetSvcSubnetStart returns the SvcSubnetStart field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetSvcSubnetStart() string {
-	if o == nil || o.SvcSubnetStart == nil {
+	if o == nil || IsNil(o.SvcSubnetStart) {
 		var ret string
 		return ret
 	}
@@ -600,7 +604,7 @@ func (o *KubernetesAciCniProfile) GetSvcSubnetStart() string {
 // GetSvcSubnetStartOk returns a tuple with the SvcSubnetStart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetSvcSubnetStartOk() (*string, bool) {
-	if o == nil || o.SvcSubnetStart == nil {
+	if o == nil || IsNil(o.SvcSubnetStart) {
 		return nil, false
 	}
 	return o.SvcSubnetStart, true
@@ -608,7 +612,7 @@ func (o *KubernetesAciCniProfile) GetSvcSubnetStartOk() (*string, bool) {
 
 // HasSvcSubnetStart returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasSvcSubnetStart() bool {
-	if o != nil && o.SvcSubnetStart != nil {
+	if o != nil && !IsNil(o.SvcSubnetStart) {
 		return true
 	}
 
@@ -622,7 +626,7 @@ func (o *KubernetesAciCniProfile) SetSvcSubnetStart(v string) {
 
 // GetVrf returns the Vrf field value if set, zero value otherwise.
 func (o *KubernetesAciCniProfile) GetVrf() string {
-	if o == nil || o.Vrf == nil {
+	if o == nil || IsNil(o.Vrf) {
 		var ret string
 		return ret
 	}
@@ -632,7 +636,7 @@ func (o *KubernetesAciCniProfile) GetVrf() string {
 // GetVrfOk returns a tuple with the Vrf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesAciCniProfile) GetVrfOk() (*string, bool) {
-	if o == nil || o.Vrf == nil {
+	if o == nil || IsNil(o.Vrf) {
 		return nil, false
 	}
 	return o.Vrf, true
@@ -640,7 +644,7 @@ func (o *KubernetesAciCniProfile) GetVrfOk() (*string, bool) {
 
 // HasVrf returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasVrf() bool {
-	if o != nil && o.Vrf != nil {
+	if o != nil && !IsNil(o.Vrf) {
 		return true
 	}
 
@@ -665,7 +669,7 @@ func (o *KubernetesAciCniProfile) GetClusterAciAllocations() []KubernetesAciCniT
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAciCniProfile) GetClusterAciAllocationsOk() ([]KubernetesAciCniTenantClusterAllocationRelationship, bool) {
-	if o == nil || o.ClusterAciAllocations == nil {
+	if o == nil || IsNil(o.ClusterAciAllocations) {
 		return nil, false
 	}
 	return o.ClusterAciAllocations, true
@@ -673,7 +677,7 @@ func (o *KubernetesAciCniProfile) GetClusterAciAllocationsOk() ([]KubernetesAciC
 
 // HasClusterAciAllocations returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasClusterAciAllocations() bool {
-	if o != nil && o.ClusterAciAllocations != nil {
+	if o != nil && IsNil(o.ClusterAciAllocations) {
 		return true
 	}
 
@@ -698,7 +702,7 @@ func (o *KubernetesAciCniProfile) GetClusterProfiles() []KubernetesClusterProfil
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAciCniProfile) GetClusterProfilesOk() ([]KubernetesClusterProfileRelationship, bool) {
-	if o == nil || o.ClusterProfiles == nil {
+	if o == nil || IsNil(o.ClusterProfiles) {
 		return nil, false
 	}
 	return o.ClusterProfiles, true
@@ -706,7 +710,7 @@ func (o *KubernetesAciCniProfile) GetClusterProfilesOk() ([]KubernetesClusterPro
 
 // HasClusterProfiles returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasClusterProfiles() bool {
-	if o != nil && o.ClusterProfiles != nil {
+	if o != nil && IsNil(o.ClusterProfiles) {
 		return true
 	}
 
@@ -718,132 +722,158 @@ func (o *KubernetesAciCniProfile) SetClusterProfiles(v []KubernetesClusterProfil
 	o.ClusterProfiles = v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesAciCniProfile) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret OrganizationOrganizationRelationship
 		return ret
 	}
-	return *o.Organization
+	return *o.Organization.Get()
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAciCniProfile) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return o.Organization.Get(), o.Organization.IsSet()
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && o.Organization.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
+// SetOrganization gets a reference to the given NullableOrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *KubernetesAciCniProfile) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
+	o.Organization.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetOrganizationNil sets the value for Organization to be an explicit nil
+func (o *KubernetesAciCniProfile) SetOrganizationNil() {
+	o.Organization.Set(nil)
+}
+
+// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+func (o *KubernetesAciCniProfile) UnsetOrganization() {
+	o.Organization.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesAciCniProfile) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesAciCniProfile) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *KubernetesAciCniProfile) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *KubernetesAciCniProfile) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *KubernetesAciCniProfile) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *KubernetesAciCniProfile) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o KubernetesAciCniProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesAciCniProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractProfile, errPolicyAbstractProfile := json.Marshal(o.PolicyAbstractProfile)
 	if errPolicyAbstractProfile != nil {
-		return []byte{}, errPolicyAbstractProfile
+		return map[string]interface{}{}, errPolicyAbstractProfile
 	}
 	errPolicyAbstractProfile = json.Unmarshal([]byte(serializedPolicyAbstractProfile), &toSerialize)
 	if errPolicyAbstractProfile != nil {
-		return []byte{}, errPolicyAbstractProfile
+		return map[string]interface{}{}, errPolicyAbstractProfile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AaepName != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AaepName) {
 		toSerialize["AaepName"] = o.AaepName
 	}
-	if o.ExtSvcDynSubnetStart != nil {
+	if !IsNil(o.ExtSvcDynSubnetStart) {
 		toSerialize["ExtSvcDynSubnetStart"] = o.ExtSvcDynSubnetStart
 	}
-	if o.ExtSvcStaticSubnetStart != nil {
+	if !IsNil(o.ExtSvcStaticSubnetStart) {
 		toSerialize["ExtSvcStaticSubnetStart"] = o.ExtSvcStaticSubnetStart
 	}
-	if o.InfraVlanId != nil {
+	if !IsNil(o.InfraVlanId) {
 		toSerialize["InfraVlanId"] = o.InfraVlanId
 	}
-	if o.L3OutNetworkName != nil {
+	if !IsNil(o.L3OutNetworkName) {
 		toSerialize["L3OutNetworkName"] = o.L3OutNetworkName
 	}
-	if o.L3OutPolicyName != nil {
+	if !IsNil(o.L3OutPolicyName) {
 		toSerialize["L3OutPolicyName"] = o.L3OutPolicyName
 	}
-	if o.L3OutTenant != nil {
+	if !IsNil(o.L3OutTenant) {
 		toSerialize["L3OutTenant"] = o.L3OutTenant
 	}
-	if o.NestedVmmDomain != nil {
+	if !IsNil(o.NestedVmmDomain) {
 		toSerialize["NestedVmmDomain"] = o.NestedVmmDomain
 	}
-	if o.NodeSvcSubnetStart != nil {
+	if !IsNil(o.NodeSvcSubnetStart) {
 		toSerialize["NodeSvcSubnetStart"] = o.NodeSvcSubnetStart
 	}
-	if o.NodeVlanRangeEnd != nil {
+	if !IsNil(o.NodeVlanRangeEnd) {
 		toSerialize["NodeVlanRangeEnd"] = o.NodeVlanRangeEnd
 	}
-	if o.NodeVlanRangeStart != nil {
+	if !IsNil(o.NodeVlanRangeStart) {
 		toSerialize["NodeVlanRangeStart"] = o.NodeVlanRangeStart
 	}
-	if o.NumberOfKubernetesClusters != nil {
+	if !IsNil(o.NumberOfKubernetesClusters) {
 		toSerialize["NumberOfKubernetesClusters"] = o.NumberOfKubernetesClusters
 	}
-	if o.OpflexMulticastAddressRange != nil {
+	if !IsNil(o.OpflexMulticastAddressRange) {
 		toSerialize["OpflexMulticastAddressRange"] = o.OpflexMulticastAddressRange
 	}
-	if o.PodSubnetStart != nil {
+	if !IsNil(o.PodSubnetStart) {
 		toSerialize["PodSubnetStart"] = o.PodSubnetStart
 	}
-	if o.SvcSubnetStart != nil {
+	if !IsNil(o.SvcSubnetStart) {
 		toSerialize["SvcSubnetStart"] = o.SvcSubnetStart
 	}
-	if o.Vrf != nil {
+	if !IsNil(o.Vrf) {
 		toSerialize["Vrf"] = o.Vrf
 	}
 	if o.ClusterAciAllocations != nil {
@@ -852,21 +882,43 @@ func (o KubernetesAciCniProfile) MarshalJSON() ([]byte, error) {
 	if o.ClusterProfiles != nil {
 		toSerialize["ClusterProfiles"] = o.ClusterProfiles
 	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
+	if o.Organization.IsSet() {
+		toSerialize["Organization"] = o.Organization.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesAciCniProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesAciCniProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesAciCniProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -907,14 +959,14 @@ func (o *KubernetesAciCniProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to kubernetesAciCniTenantClusterAllocation resources.
 		ClusterAciAllocations []KubernetesAciCniTenantClusterAllocationRelationship `json:"ClusterAciAllocations,omitempty"`
 		// An array of relationships to kubernetesClusterProfile resources.
-		ClusterProfiles  []KubernetesClusterProfileRelationship `json:"ClusterProfiles,omitempty"`
-		Organization     *OrganizationOrganizationRelationship  `json:"Organization,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship   `json:"RegisteredDevice,omitempty"`
+		ClusterProfiles  []KubernetesClusterProfileRelationship       `json:"ClusterProfiles,omitempty"`
+		Organization     NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship  `json:"RegisteredDevice,omitempty"`
 	}
 
 	varKubernetesAciCniProfileWithoutEmbeddedStruct := KubernetesAciCniProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesAciCniProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesAciCniProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesAciCniProfile := _KubernetesAciCniProfile{}
 		varKubernetesAciCniProfile.ClassId = varKubernetesAciCniProfileWithoutEmbeddedStruct.ClassId
@@ -946,7 +998,7 @@ func (o *KubernetesAciCniProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesAciCniProfile := _KubernetesAciCniProfile{}
 
-	err = json.Unmarshal(bytes, &varKubernetesAciCniProfile)
+	err = json.Unmarshal(data, &varKubernetesAciCniProfile)
 	if err == nil {
 		o.PolicyAbstractProfile = varKubernetesAciCniProfile.PolicyAbstractProfile
 	} else {
@@ -955,7 +1007,7 @@ func (o *KubernetesAciCniProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AaepName")

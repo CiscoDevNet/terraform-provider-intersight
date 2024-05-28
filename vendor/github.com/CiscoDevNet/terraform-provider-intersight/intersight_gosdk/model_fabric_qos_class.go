@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FabricQosClass type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricQosClass{}
 
 // FabricQosClass Type to represent the Best Effort QoS class.
 type FabricQosClass struct {
@@ -138,7 +142,7 @@ func (o *FabricQosClass) SetObjectType(v string) {
 
 // GetAdminState returns the AdminState field value if set, zero value otherwise.
 func (o *FabricQosClass) GetAdminState() string {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		var ret string
 		return ret
 	}
@@ -148,7 +152,7 @@ func (o *FabricQosClass) GetAdminState() string {
 // GetAdminStateOk returns a tuple with the AdminState field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricQosClass) GetAdminStateOk() (*string, bool) {
-	if o == nil || o.AdminState == nil {
+	if o == nil || IsNil(o.AdminState) {
 		return nil, false
 	}
 	return o.AdminState, true
@@ -156,7 +160,7 @@ func (o *FabricQosClass) GetAdminStateOk() (*string, bool) {
 
 // HasAdminState returns a boolean if a field has been set.
 func (o *FabricQosClass) HasAdminState() bool {
-	if o != nil && o.AdminState != nil {
+	if o != nil && !IsNil(o.AdminState) {
 		return true
 	}
 
@@ -170,7 +174,7 @@ func (o *FabricQosClass) SetAdminState(v string) {
 
 // GetBandwidthPercent returns the BandwidthPercent field value if set, zero value otherwise.
 func (o *FabricQosClass) GetBandwidthPercent() int64 {
-	if o == nil || o.BandwidthPercent == nil {
+	if o == nil || IsNil(o.BandwidthPercent) {
 		var ret int64
 		return ret
 	}
@@ -180,7 +184,7 @@ func (o *FabricQosClass) GetBandwidthPercent() int64 {
 // GetBandwidthPercentOk returns a tuple with the BandwidthPercent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricQosClass) GetBandwidthPercentOk() (*int64, bool) {
-	if o == nil || o.BandwidthPercent == nil {
+	if o == nil || IsNil(o.BandwidthPercent) {
 		return nil, false
 	}
 	return o.BandwidthPercent, true
@@ -188,7 +192,7 @@ func (o *FabricQosClass) GetBandwidthPercentOk() (*int64, bool) {
 
 // HasBandwidthPercent returns a boolean if a field has been set.
 func (o *FabricQosClass) HasBandwidthPercent() bool {
-	if o != nil && o.BandwidthPercent != nil {
+	if o != nil && !IsNil(o.BandwidthPercent) {
 		return true
 	}
 
@@ -202,7 +206,7 @@ func (o *FabricQosClass) SetBandwidthPercent(v int64) {
 
 // GetCos returns the Cos field value if set, zero value otherwise.
 func (o *FabricQosClass) GetCos() int64 {
-	if o == nil || o.Cos == nil {
+	if o == nil || IsNil(o.Cos) {
 		var ret int64
 		return ret
 	}
@@ -212,7 +216,7 @@ func (o *FabricQosClass) GetCos() int64 {
 // GetCosOk returns a tuple with the Cos field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricQosClass) GetCosOk() (*int64, bool) {
-	if o == nil || o.Cos == nil {
+	if o == nil || IsNil(o.Cos) {
 		return nil, false
 	}
 	return o.Cos, true
@@ -220,7 +224,7 @@ func (o *FabricQosClass) GetCosOk() (*int64, bool) {
 
 // HasCos returns a boolean if a field has been set.
 func (o *FabricQosClass) HasCos() bool {
-	if o != nil && o.Cos != nil {
+	if o != nil && !IsNil(o.Cos) {
 		return true
 	}
 
@@ -234,7 +238,7 @@ func (o *FabricQosClass) SetCos(v int64) {
 
 // GetMtu returns the Mtu field value if set, zero value otherwise.
 func (o *FabricQosClass) GetMtu() int64 {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		var ret int64
 		return ret
 	}
@@ -244,7 +248,7 @@ func (o *FabricQosClass) GetMtu() int64 {
 // GetMtuOk returns a tuple with the Mtu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricQosClass) GetMtuOk() (*int64, bool) {
-	if o == nil || o.Mtu == nil {
+	if o == nil || IsNil(o.Mtu) {
 		return nil, false
 	}
 	return o.Mtu, true
@@ -252,7 +256,7 @@ func (o *FabricQosClass) GetMtuOk() (*int64, bool) {
 
 // HasMtu returns a boolean if a field has been set.
 func (o *FabricQosClass) HasMtu() bool {
-	if o != nil && o.Mtu != nil {
+	if o != nil && !IsNil(o.Mtu) {
 		return true
 	}
 
@@ -266,7 +270,7 @@ func (o *FabricQosClass) SetMtu(v int64) {
 
 // GetMulticastOptimize returns the MulticastOptimize field value if set, zero value otherwise.
 func (o *FabricQosClass) GetMulticastOptimize() bool {
-	if o == nil || o.MulticastOptimize == nil {
+	if o == nil || IsNil(o.MulticastOptimize) {
 		var ret bool
 		return ret
 	}
@@ -276,7 +280,7 @@ func (o *FabricQosClass) GetMulticastOptimize() bool {
 // GetMulticastOptimizeOk returns a tuple with the MulticastOptimize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricQosClass) GetMulticastOptimizeOk() (*bool, bool) {
-	if o == nil || o.MulticastOptimize == nil {
+	if o == nil || IsNil(o.MulticastOptimize) {
 		return nil, false
 	}
 	return o.MulticastOptimize, true
@@ -284,7 +288,7 @@ func (o *FabricQosClass) GetMulticastOptimizeOk() (*bool, bool) {
 
 // HasMulticastOptimize returns a boolean if a field has been set.
 func (o *FabricQosClass) HasMulticastOptimize() bool {
-	if o != nil && o.MulticastOptimize != nil {
+	if o != nil && !IsNil(o.MulticastOptimize) {
 		return true
 	}
 
@@ -298,7 +302,7 @@ func (o *FabricQosClass) SetMulticastOptimize(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *FabricQosClass) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -308,7 +312,7 @@ func (o *FabricQosClass) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricQosClass) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -316,7 +320,7 @@ func (o *FabricQosClass) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *FabricQosClass) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -330,7 +334,7 @@ func (o *FabricQosClass) SetName(v string) {
 
 // GetPacketDrop returns the PacketDrop field value if set, zero value otherwise.
 func (o *FabricQosClass) GetPacketDrop() bool {
-	if o == nil || o.PacketDrop == nil {
+	if o == nil || IsNil(o.PacketDrop) {
 		var ret bool
 		return ret
 	}
@@ -340,7 +344,7 @@ func (o *FabricQosClass) GetPacketDrop() bool {
 // GetPacketDropOk returns a tuple with the PacketDrop field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricQosClass) GetPacketDropOk() (*bool, bool) {
-	if o == nil || o.PacketDrop == nil {
+	if o == nil || IsNil(o.PacketDrop) {
 		return nil, false
 	}
 	return o.PacketDrop, true
@@ -348,7 +352,7 @@ func (o *FabricQosClass) GetPacketDropOk() (*bool, bool) {
 
 // HasPacketDrop returns a boolean if a field has been set.
 func (o *FabricQosClass) HasPacketDrop() bool {
-	if o != nil && o.PacketDrop != nil {
+	if o != nil && !IsNil(o.PacketDrop) {
 		return true
 	}
 
@@ -362,7 +366,7 @@ func (o *FabricQosClass) SetPacketDrop(v bool) {
 
 // GetWeight returns the Weight field value if set, zero value otherwise.
 func (o *FabricQosClass) GetWeight() int64 {
-	if o == nil || o.Weight == nil {
+	if o == nil || IsNil(o.Weight) {
 		var ret int64
 		return ret
 	}
@@ -372,7 +376,7 @@ func (o *FabricQosClass) GetWeight() int64 {
 // GetWeightOk returns a tuple with the Weight field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FabricQosClass) GetWeightOk() (*int64, bool) {
-	if o == nil || o.Weight == nil {
+	if o == nil || IsNil(o.Weight) {
 		return nil, false
 	}
 	return o.Weight, true
@@ -380,7 +384,7 @@ func (o *FabricQosClass) GetWeightOk() (*int64, bool) {
 
 // HasWeight returns a boolean if a field has been set.
 func (o *FabricQosClass) HasWeight() bool {
-	if o != nil && o.Weight != nil {
+	if o != nil && !IsNil(o.Weight) {
 		return true
 	}
 
@@ -393,43 +397,47 @@ func (o *FabricQosClass) SetWeight(v int64) {
 }
 
 func (o FabricQosClass) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FabricQosClass) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AdminState != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminState) {
 		toSerialize["AdminState"] = o.AdminState
 	}
-	if o.BandwidthPercent != nil {
+	if !IsNil(o.BandwidthPercent) {
 		toSerialize["BandwidthPercent"] = o.BandwidthPercent
 	}
-	if o.Cos != nil {
+	if !IsNil(o.Cos) {
 		toSerialize["Cos"] = o.Cos
 	}
-	if o.Mtu != nil {
+	if !IsNil(o.Mtu) {
 		toSerialize["Mtu"] = o.Mtu
 	}
-	if o.MulticastOptimize != nil {
+	if !IsNil(o.MulticastOptimize) {
 		toSerialize["MulticastOptimize"] = o.MulticastOptimize
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if o.PacketDrop != nil {
+	if !IsNil(o.PacketDrop) {
 		toSerialize["PacketDrop"] = o.PacketDrop
 	}
-	if o.Weight != nil {
+	if !IsNil(o.Weight) {
 		toSerialize["Weight"] = o.Weight
 	}
 
@@ -437,10 +445,32 @@ func (o FabricQosClass) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FabricQosClass) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FabricQosClass) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FabricQosClassWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -466,7 +496,7 @@ func (o *FabricQosClass) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricQosClassWithoutEmbeddedStruct := FabricQosClassWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFabricQosClassWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricQosClassWithoutEmbeddedStruct)
 	if err == nil {
 		varFabricQosClass := _FabricQosClass{}
 		varFabricQosClass.ClassId = varFabricQosClassWithoutEmbeddedStruct.ClassId
@@ -486,7 +516,7 @@ func (o *FabricQosClass) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFabricQosClass := _FabricQosClass{}
 
-	err = json.Unmarshal(bytes, &varFabricQosClass)
+	err = json.Unmarshal(data, &varFabricQosClass)
 	if err == nil {
 		o.MoBaseComplexType = varFabricQosClass.MoBaseComplexType
 	} else {
@@ -495,7 +525,7 @@ func (o *FabricQosClass) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminState")

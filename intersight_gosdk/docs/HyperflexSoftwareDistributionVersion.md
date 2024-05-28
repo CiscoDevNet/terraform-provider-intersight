@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.SoftwareDistributionVersion"]
 **Version** | Pointer to **string** | The HyperFlex Software Distribution version. | [optional] 
 **DistributionComponents** | Pointer to [**[]HyperflexSoftwareDistributionComponentRelationship**](HyperflexSoftwareDistributionComponentRelationship.md) | An array of relationships to hyperflexSoftwareDistributionComponent resources. | [optional] 
-**SoftwareDistributionEntry** | Pointer to [**HyperflexSoftwareDistributionEntryRelationship**](HyperflexSoftwareDistributionEntryRelationship.md) |  | [optional] 
+**SoftwareDistributionEntry** | Pointer to [**NullableHyperflexSoftwareDistributionEntryRelationship**](HyperflexSoftwareDistributionEntryRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -154,6 +154,16 @@ SetSoftwareDistributionEntry sets SoftwareDistributionEntry field to given value
 
 HasSoftwareDistributionEntry returns a boolean if a field has been set.
 
+### SetSoftwareDistributionEntryNil
+
+`func (o *HyperflexSoftwareDistributionVersion) SetSoftwareDistributionEntryNil(b bool)`
+
+ SetSoftwareDistributionEntryNil sets the value for SoftwareDistributionEntry to be an explicit nil
+
+### UnsetSoftwareDistributionEntry
+`func (o *HyperflexSoftwareDistributionVersion) UnsetSoftwareDistributionEntry()`
+
+UnsetSoftwareDistributionEntry ensures that no value is present for SoftwareDistributionEntry, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the AssetOauthBearerTokenCredential type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetOauthBearerTokenCredential{}
 
 // AssetOauthBearerTokenCredential A credential which performs authentication based on a bearer token.
 type AssetOauthBearerTokenCredential struct {
@@ -110,7 +114,7 @@ func (o *AssetOauthBearerTokenCredential) SetObjectType(v string) {
 
 // GetIsTokenSet returns the IsTokenSet field value if set, zero value otherwise.
 func (o *AssetOauthBearerTokenCredential) GetIsTokenSet() bool {
-	if o == nil || o.IsTokenSet == nil {
+	if o == nil || IsNil(o.IsTokenSet) {
 		var ret bool
 		return ret
 	}
@@ -120,7 +124,7 @@ func (o *AssetOauthBearerTokenCredential) GetIsTokenSet() bool {
 // GetIsTokenSetOk returns a tuple with the IsTokenSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetOauthBearerTokenCredential) GetIsTokenSetOk() (*bool, bool) {
-	if o == nil || o.IsTokenSet == nil {
+	if o == nil || IsNil(o.IsTokenSet) {
 		return nil, false
 	}
 	return o.IsTokenSet, true
@@ -128,7 +132,7 @@ func (o *AssetOauthBearerTokenCredential) GetIsTokenSetOk() (*bool, bool) {
 
 // HasIsTokenSet returns a boolean if a field has been set.
 func (o *AssetOauthBearerTokenCredential) HasIsTokenSet() bool {
-	if o != nil && o.IsTokenSet != nil {
+	if o != nil && !IsNil(o.IsTokenSet) {
 		return true
 	}
 
@@ -142,7 +146,7 @@ func (o *AssetOauthBearerTokenCredential) SetIsTokenSet(v bool) {
 
 // GetScopeType returns the ScopeType field value if set, zero value otherwise.
 func (o *AssetOauthBearerTokenCredential) GetScopeType() string {
-	if o == nil || o.ScopeType == nil {
+	if o == nil || IsNil(o.ScopeType) {
 		var ret string
 		return ret
 	}
@@ -152,7 +156,7 @@ func (o *AssetOauthBearerTokenCredential) GetScopeType() string {
 // GetScopeTypeOk returns a tuple with the ScopeType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetOauthBearerTokenCredential) GetScopeTypeOk() (*string, bool) {
-	if o == nil || o.ScopeType == nil {
+	if o == nil || IsNil(o.ScopeType) {
 		return nil, false
 	}
 	return o.ScopeType, true
@@ -160,7 +164,7 @@ func (o *AssetOauthBearerTokenCredential) GetScopeTypeOk() (*string, bool) {
 
 // HasScopeType returns a boolean if a field has been set.
 func (o *AssetOauthBearerTokenCredential) HasScopeType() bool {
-	if o != nil && o.ScopeType != nil {
+	if o != nil && !IsNil(o.ScopeType) {
 		return true
 	}
 
@@ -174,7 +178,7 @@ func (o *AssetOauthBearerTokenCredential) SetScopeType(v string) {
 
 // GetScopeValue returns the ScopeValue field value if set, zero value otherwise.
 func (o *AssetOauthBearerTokenCredential) GetScopeValue() string {
-	if o == nil || o.ScopeValue == nil {
+	if o == nil || IsNil(o.ScopeValue) {
 		var ret string
 		return ret
 	}
@@ -184,7 +188,7 @@ func (o *AssetOauthBearerTokenCredential) GetScopeValue() string {
 // GetScopeValueOk returns a tuple with the ScopeValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetOauthBearerTokenCredential) GetScopeValueOk() (*string, bool) {
-	if o == nil || o.ScopeValue == nil {
+	if o == nil || IsNil(o.ScopeValue) {
 		return nil, false
 	}
 	return o.ScopeValue, true
@@ -192,7 +196,7 @@ func (o *AssetOauthBearerTokenCredential) GetScopeValueOk() (*string, bool) {
 
 // HasScopeValue returns a boolean if a field has been set.
 func (o *AssetOauthBearerTokenCredential) HasScopeValue() bool {
-	if o != nil && o.ScopeValue != nil {
+	if o != nil && !IsNil(o.ScopeValue) {
 		return true
 	}
 
@@ -206,7 +210,7 @@ func (o *AssetOauthBearerTokenCredential) SetScopeValue(v string) {
 
 // GetToken returns the Token field value if set, zero value otherwise.
 func (o *AssetOauthBearerTokenCredential) GetToken() string {
-	if o == nil || o.Token == nil {
+	if o == nil || IsNil(o.Token) {
 		var ret string
 		return ret
 	}
@@ -216,7 +220,7 @@ func (o *AssetOauthBearerTokenCredential) GetToken() string {
 // GetTokenOk returns a tuple with the Token field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetOauthBearerTokenCredential) GetTokenOk() (*string, bool) {
-	if o == nil || o.Token == nil {
+	if o == nil || IsNil(o.Token) {
 		return nil, false
 	}
 	return o.Token, true
@@ -224,7 +228,7 @@ func (o *AssetOauthBearerTokenCredential) GetTokenOk() (*string, bool) {
 
 // HasToken returns a boolean if a field has been set.
 func (o *AssetOauthBearerTokenCredential) HasToken() bool {
-	if o != nil && o.Token != nil {
+	if o != nil && !IsNil(o.Token) {
 		return true
 	}
 
@@ -237,31 +241,35 @@ func (o *AssetOauthBearerTokenCredential) SetToken(v string) {
 }
 
 func (o AssetOauthBearerTokenCredential) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetOauthBearerTokenCredential) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedAssetCredential, errAssetCredential := json.Marshal(o.AssetCredential)
 	if errAssetCredential != nil {
-		return []byte{}, errAssetCredential
+		return map[string]interface{}{}, errAssetCredential
 	}
 	errAssetCredential = json.Unmarshal([]byte(serializedAssetCredential), &toSerialize)
 	if errAssetCredential != nil {
-		return []byte{}, errAssetCredential
+		return map[string]interface{}{}, errAssetCredential
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IsTokenSet != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IsTokenSet) {
 		toSerialize["IsTokenSet"] = o.IsTokenSet
 	}
-	if o.ScopeType != nil {
+	if !IsNil(o.ScopeType) {
 		toSerialize["ScopeType"] = o.ScopeType
 	}
-	if o.ScopeValue != nil {
+	if !IsNil(o.ScopeValue) {
 		toSerialize["ScopeValue"] = o.ScopeValue
 	}
-	if o.Token != nil {
+	if !IsNil(o.Token) {
 		toSerialize["Token"] = o.Token
 	}
 
@@ -269,10 +277,32 @@ func (o AssetOauthBearerTokenCredential) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetOauthBearerTokenCredential) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetOauthBearerTokenCredential) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetOauthBearerTokenCredentialWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -290,7 +320,7 @@ func (o *AssetOauthBearerTokenCredential) UnmarshalJSON(bytes []byte) (err error
 
 	varAssetOauthBearerTokenCredentialWithoutEmbeddedStruct := AssetOauthBearerTokenCredentialWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetOauthBearerTokenCredentialWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetOauthBearerTokenCredentialWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetOauthBearerTokenCredential := _AssetOauthBearerTokenCredential{}
 		varAssetOauthBearerTokenCredential.ClassId = varAssetOauthBearerTokenCredentialWithoutEmbeddedStruct.ClassId
@@ -306,7 +336,7 @@ func (o *AssetOauthBearerTokenCredential) UnmarshalJSON(bytes []byte) (err error
 
 	varAssetOauthBearerTokenCredential := _AssetOauthBearerTokenCredential{}
 
-	err = json.Unmarshal(bytes, &varAssetOauthBearerTokenCredential)
+	err = json.Unmarshal(data, &varAssetOauthBearerTokenCredential)
 	if err == nil {
 		o.AssetCredential = varAssetOauthBearerTokenCredential.AssetCredential
 	} else {
@@ -315,7 +345,7 @@ func (o *AssetOauthBearerTokenCredential) UnmarshalJSON(bytes []byte) (err error
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IsTokenSet")

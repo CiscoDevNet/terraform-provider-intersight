@@ -18,10 +18,10 @@ Name | Type | Description | Notes
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
 **Vsan** | Pointer to **int64** | Virtual San that is associated to the port-channel. | [optional] [readonly] 
 **Wwn** | Pointer to **string** | World Wide Name of the port channel. | [optional] [readonly] 
-**EquipmentSwitchCard** | Pointer to [**EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
+**EquipmentSwitchCard** | Pointer to [**NullableEquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
 **FcNeighbor** | Pointer to [**[]FcNeighborRelationship**](FcNeighborRelationship.md) | An array of relationships to fcNeighbor resources. | [optional] [readonly] 
-**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -407,6 +407,16 @@ SetEquipmentSwitchCard sets EquipmentSwitchCard field to given value.
 
 HasEquipmentSwitchCard returns a boolean if a field has been set.
 
+### SetEquipmentSwitchCardNil
+
+`func (o *FcPortChannel) SetEquipmentSwitchCardNil(b bool)`
+
+ SetEquipmentSwitchCardNil sets the value for EquipmentSwitchCard to be an explicit nil
+
+### UnsetEquipmentSwitchCard
+`func (o *FcPortChannel) UnsetEquipmentSwitchCard()`
+
+UnsetEquipmentSwitchCard ensures that no value is present for EquipmentSwitchCard, not even an explicit nil
 ### GetFcNeighbor
 
 `func (o *FcPortChannel) GetFcNeighbor() []FcNeighborRelationship`
@@ -467,6 +477,16 @@ SetNetworkElement sets NetworkElement field to given value.
 
 HasNetworkElement returns a boolean if a field has been set.
 
+### SetNetworkElementNil
+
+`func (o *FcPortChannel) SetNetworkElementNil(b bool)`
+
+ SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+
+### UnsetNetworkElement
+`func (o *FcPortChannel) UnsetNetworkElement()`
+
+UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *FcPortChannel) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -492,6 +512,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *FcPortChannel) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *FcPortChannel) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

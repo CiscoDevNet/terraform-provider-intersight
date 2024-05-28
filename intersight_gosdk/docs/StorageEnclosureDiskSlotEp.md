@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **Health** | Pointer to **string** | This field identifies the health of the disk inserted in the slot. | [optional] 
 **Presence** | Pointer to **string** | This field identifies the disk is present in the enclosure slot. | [optional] 
 **Slot** | Pointer to **string** | This field represents the slot Id in the storage enclosure. | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
-**StorageEnclosure** | Pointer to [**StorageEnclosureRelationship**](StorageEnclosureRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageEnclosure** | Pointer to [**NullableStorageEnclosureRelationship**](StorageEnclosureRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -198,6 +198,16 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### SetInventoryDeviceInfoNil
+
+`func (o *StorageEnclosureDiskSlotEp) SetInventoryDeviceInfoNil(b bool)`
+
+ SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+
+### UnsetInventoryDeviceInfo
+`func (o *StorageEnclosureDiskSlotEp) UnsetInventoryDeviceInfo()`
+
+UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageEnclosureDiskSlotEp) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
@@ -223,6 +233,16 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### SetRegisteredDeviceNil
+
+`func (o *StorageEnclosureDiskSlotEp) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *StorageEnclosureDiskSlotEp) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 ### GetStorageEnclosure
 
 `func (o *StorageEnclosureDiskSlotEp) GetStorageEnclosure() StorageEnclosureRelationship`
@@ -248,6 +268,16 @@ SetStorageEnclosure sets StorageEnclosure field to given value.
 
 HasStorageEnclosure returns a boolean if a field has been set.
 
+### SetStorageEnclosureNil
+
+`func (o *StorageEnclosureDiskSlotEp) SetStorageEnclosureNil(b bool)`
+
+ SetStorageEnclosureNil sets the value for StorageEnclosure to be an explicit nil
+
+### UnsetStorageEnclosure
+`func (o *StorageEnclosureDiskSlotEp) UnsetStorageEnclosure()`
+
+UnsetStorageEnclosure ensures that no value is present for StorageEnclosure, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

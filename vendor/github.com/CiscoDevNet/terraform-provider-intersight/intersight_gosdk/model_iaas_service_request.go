@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IaasServiceRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IaasServiceRequest{}
 
 // IaasServiceRequest Gets last six months Service Requests from UCSD.
 type IaasServiceRequest struct {
@@ -39,9 +43,9 @@ type IaasServiceRequest struct {
 	// UCSD service request status.
 	Status *string `json:"Status,omitempty"`
 	// Executed workflow name for an SR.
-	WorkflowName         *string                              `json:"WorkflowName,omitempty"`
-	WorkflowSteps        []IaasWorkflowSteps                  `json:"WorkflowSteps,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	WorkflowName         *string                                     `json:"WorkflowName,omitempty"`
+	WorkflowSteps        []IaasWorkflowSteps                         `json:"WorkflowSteps,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -120,7 +124,7 @@ func (o *IaasServiceRequest) SetObjectType(v string) {
 
 // GetDuration returns the Duration field value if set, zero value otherwise.
 func (o *IaasServiceRequest) GetDuration() string {
-	if o == nil || o.Duration == nil {
+	if o == nil || IsNil(o.Duration) {
 		var ret string
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *IaasServiceRequest) GetDuration() string {
 // GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasServiceRequest) GetDurationOk() (*string, bool) {
-	if o == nil || o.Duration == nil {
+	if o == nil || IsNil(o.Duration) {
 		return nil, false
 	}
 	return o.Duration, true
@@ -138,7 +142,7 @@ func (o *IaasServiceRequest) GetDurationOk() (*string, bool) {
 
 // HasDuration returns a boolean if a field has been set.
 func (o *IaasServiceRequest) HasDuration() bool {
-	if o != nil && o.Duration != nil {
+	if o != nil && !IsNil(o.Duration) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *IaasServiceRequest) SetDuration(v string) {
 
 // GetInitiatingUser returns the InitiatingUser field value if set, zero value otherwise.
 func (o *IaasServiceRequest) GetInitiatingUser() string {
-	if o == nil || o.InitiatingUser == nil {
+	if o == nil || IsNil(o.InitiatingUser) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *IaasServiceRequest) GetInitiatingUser() string {
 // GetInitiatingUserOk returns a tuple with the InitiatingUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasServiceRequest) GetInitiatingUserOk() (*string, bool) {
-	if o == nil || o.InitiatingUser == nil {
+	if o == nil || IsNil(o.InitiatingUser) {
 		return nil, false
 	}
 	return o.InitiatingUser, true
@@ -170,7 +174,7 @@ func (o *IaasServiceRequest) GetInitiatingUserOk() (*string, bool) {
 
 // HasInitiatingUser returns a boolean if a field has been set.
 func (o *IaasServiceRequest) HasInitiatingUser() bool {
-	if o != nil && o.InitiatingUser != nil {
+	if o != nil && !IsNil(o.InitiatingUser) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *IaasServiceRequest) SetInitiatingUser(v string) {
 
 // GetRequestEndTime returns the RequestEndTime field value if set, zero value otherwise.
 func (o *IaasServiceRequest) GetRequestEndTime() string {
-	if o == nil || o.RequestEndTime == nil {
+	if o == nil || IsNil(o.RequestEndTime) {
 		var ret string
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *IaasServiceRequest) GetRequestEndTime() string {
 // GetRequestEndTimeOk returns a tuple with the RequestEndTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasServiceRequest) GetRequestEndTimeOk() (*string, bool) {
-	if o == nil || o.RequestEndTime == nil {
+	if o == nil || IsNil(o.RequestEndTime) {
 		return nil, false
 	}
 	return o.RequestEndTime, true
@@ -202,7 +206,7 @@ func (o *IaasServiceRequest) GetRequestEndTimeOk() (*string, bool) {
 
 // HasRequestEndTime returns a boolean if a field has been set.
 func (o *IaasServiceRequest) HasRequestEndTime() bool {
-	if o != nil && o.RequestEndTime != nil {
+	if o != nil && !IsNil(o.RequestEndTime) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *IaasServiceRequest) SetRequestEndTime(v string) {
 
 // GetRequestId returns the RequestId field value if set, zero value otherwise.
 func (o *IaasServiceRequest) GetRequestId() string {
-	if o == nil || o.RequestId == nil {
+	if o == nil || IsNil(o.RequestId) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *IaasServiceRequest) GetRequestId() string {
 // GetRequestIdOk returns a tuple with the RequestId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasServiceRequest) GetRequestIdOk() (*string, bool) {
-	if o == nil || o.RequestId == nil {
+	if o == nil || IsNil(o.RequestId) {
 		return nil, false
 	}
 	return o.RequestId, true
@@ -234,7 +238,7 @@ func (o *IaasServiceRequest) GetRequestIdOk() (*string, bool) {
 
 // HasRequestId returns a boolean if a field has been set.
 func (o *IaasServiceRequest) HasRequestId() bool {
-	if o != nil && o.RequestId != nil {
+	if o != nil && !IsNil(o.RequestId) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *IaasServiceRequest) SetRequestId(v string) {
 
 // GetRequestStartTime returns the RequestStartTime field value if set, zero value otherwise.
 func (o *IaasServiceRequest) GetRequestStartTime() string {
-	if o == nil || o.RequestStartTime == nil {
+	if o == nil || IsNil(o.RequestStartTime) {
 		var ret string
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *IaasServiceRequest) GetRequestStartTime() string {
 // GetRequestStartTimeOk returns a tuple with the RequestStartTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasServiceRequest) GetRequestStartTimeOk() (*string, bool) {
-	if o == nil || o.RequestStartTime == nil {
+	if o == nil || IsNil(o.RequestStartTime) {
 		return nil, false
 	}
 	return o.RequestStartTime, true
@@ -266,7 +270,7 @@ func (o *IaasServiceRequest) GetRequestStartTimeOk() (*string, bool) {
 
 // HasRequestStartTime returns a boolean if a field has been set.
 func (o *IaasServiceRequest) HasRequestStartTime() bool {
-	if o != nil && o.RequestStartTime != nil {
+	if o != nil && !IsNil(o.RequestStartTime) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *IaasServiceRequest) SetRequestStartTime(v string) {
 
 // GetRequestType returns the RequestType field value if set, zero value otherwise.
 func (o *IaasServiceRequest) GetRequestType() string {
-	if o == nil || o.RequestType == nil {
+	if o == nil || IsNil(o.RequestType) {
 		var ret string
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *IaasServiceRequest) GetRequestType() string {
 // GetRequestTypeOk returns a tuple with the RequestType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasServiceRequest) GetRequestTypeOk() (*string, bool) {
-	if o == nil || o.RequestType == nil {
+	if o == nil || IsNil(o.RequestType) {
 		return nil, false
 	}
 	return o.RequestType, true
@@ -298,7 +302,7 @@ func (o *IaasServiceRequest) GetRequestTypeOk() (*string, bool) {
 
 // HasRequestType returns a boolean if a field has been set.
 func (o *IaasServiceRequest) HasRequestType() bool {
-	if o != nil && o.RequestType != nil {
+	if o != nil && !IsNil(o.RequestType) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *IaasServiceRequest) SetRequestType(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *IaasServiceRequest) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *IaasServiceRequest) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasServiceRequest) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -330,7 +334,7 @@ func (o *IaasServiceRequest) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *IaasServiceRequest) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -344,7 +348,7 @@ func (o *IaasServiceRequest) SetStatus(v string) {
 
 // GetWorkflowName returns the WorkflowName field value if set, zero value otherwise.
 func (o *IaasServiceRequest) GetWorkflowName() string {
-	if o == nil || o.WorkflowName == nil {
+	if o == nil || IsNil(o.WorkflowName) {
 		var ret string
 		return ret
 	}
@@ -354,7 +358,7 @@ func (o *IaasServiceRequest) GetWorkflowName() string {
 // GetWorkflowNameOk returns a tuple with the WorkflowName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IaasServiceRequest) GetWorkflowNameOk() (*string, bool) {
-	if o == nil || o.WorkflowName == nil {
+	if o == nil || IsNil(o.WorkflowName) {
 		return nil, false
 	}
 	return o.WorkflowName, true
@@ -362,7 +366,7 @@ func (o *IaasServiceRequest) GetWorkflowNameOk() (*string, bool) {
 
 // HasWorkflowName returns a boolean if a field has been set.
 func (o *IaasServiceRequest) HasWorkflowName() bool {
-	if o != nil && o.WorkflowName != nil {
+	if o != nil && !IsNil(o.WorkflowName) {
 		return true
 	}
 
@@ -387,7 +391,7 @@ func (o *IaasServiceRequest) GetWorkflowSteps() []IaasWorkflowSteps {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasServiceRequest) GetWorkflowStepsOk() ([]IaasWorkflowSteps, bool) {
-	if o == nil || o.WorkflowSteps == nil {
+	if o == nil || IsNil(o.WorkflowSteps) {
 		return nil, false
 	}
 	return o.WorkflowSteps, true
@@ -395,7 +399,7 @@ func (o *IaasServiceRequest) GetWorkflowStepsOk() ([]IaasWorkflowSteps, bool) {
 
 // HasWorkflowSteps returns a boolean if a field has been set.
 func (o *IaasServiceRequest) HasWorkflowSteps() bool {
-	if o != nil && o.WorkflowSteps != nil {
+	if o != nil && IsNil(o.WorkflowSteps) {
 		return true
 	}
 
@@ -407,93 +411,130 @@ func (o *IaasServiceRequest) SetWorkflowSteps(v []IaasWorkflowSteps) {
 	o.WorkflowSteps = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IaasServiceRequest) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IaasServiceRequest) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *IaasServiceRequest) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *IaasServiceRequest) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *IaasServiceRequest) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *IaasServiceRequest) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o IaasServiceRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IaasServiceRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Duration != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Duration) {
 		toSerialize["Duration"] = o.Duration
 	}
-	if o.InitiatingUser != nil {
+	if !IsNil(o.InitiatingUser) {
 		toSerialize["InitiatingUser"] = o.InitiatingUser
 	}
-	if o.RequestEndTime != nil {
+	if !IsNil(o.RequestEndTime) {
 		toSerialize["RequestEndTime"] = o.RequestEndTime
 	}
-	if o.RequestId != nil {
+	if !IsNil(o.RequestId) {
 		toSerialize["RequestId"] = o.RequestId
 	}
-	if o.RequestStartTime != nil {
+	if !IsNil(o.RequestStartTime) {
 		toSerialize["RequestStartTime"] = o.RequestStartTime
 	}
-	if o.RequestType != nil {
+	if !IsNil(o.RequestType) {
 		toSerialize["RequestType"] = o.RequestType
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["Status"] = o.Status
 	}
-	if o.WorkflowName != nil {
+	if !IsNil(o.WorkflowName) {
 		toSerialize["WorkflowName"] = o.WorkflowName
 	}
 	if o.WorkflowSteps != nil {
 		toSerialize["WorkflowSteps"] = o.WorkflowSteps
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IaasServiceRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IaasServiceRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IaasServiceRequestWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -514,14 +555,14 @@ func (o *IaasServiceRequest) UnmarshalJSON(bytes []byte) (err error) {
 		// UCSD service request status.
 		Status *string `json:"Status,omitempty"`
 		// Executed workflow name for an SR.
-		WorkflowName     *string                              `json:"WorkflowName,omitempty"`
-		WorkflowSteps    []IaasWorkflowSteps                  `json:"WorkflowSteps,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		WorkflowName     *string                                     `json:"WorkflowName,omitempty"`
+		WorkflowSteps    []IaasWorkflowSteps                         `json:"WorkflowSteps,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varIaasServiceRequestWithoutEmbeddedStruct := IaasServiceRequestWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIaasServiceRequestWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIaasServiceRequestWithoutEmbeddedStruct)
 	if err == nil {
 		varIaasServiceRequest := _IaasServiceRequest{}
 		varIaasServiceRequest.ClassId = varIaasServiceRequestWithoutEmbeddedStruct.ClassId
@@ -543,7 +584,7 @@ func (o *IaasServiceRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIaasServiceRequest := _IaasServiceRequest{}
 
-	err = json.Unmarshal(bytes, &varIaasServiceRequest)
+	err = json.Unmarshal(data, &varIaasServiceRequest)
 	if err == nil {
 		o.MoBaseMo = varIaasServiceRequest.MoBaseMo
 	} else {
@@ -552,7 +593,7 @@ func (o *IaasServiceRequest) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Duration")

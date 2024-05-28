@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **State** | Pointer to **string** | The state of the NetApp Node. | [optional] [readonly] 
 **Systemid** | Pointer to **string** | The system id of the NetApp Node. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Universally unique identifier of NetApp Node. | [optional] [readonly] 
-**Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 **Events** | Pointer to [**[]StorageNetAppNodeEventRelationship**](StorageNetAppNodeEventRelationship.md) | An array of relationships to storageNetAppNodeEvent resources. | [optional] [readonly] 
 
 ## Methods
@@ -311,6 +311,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StorageNetAppNode) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StorageNetAppNode) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetEvents
 
 `func (o *StorageNetAppNode) GetEvents() []StorageNetAppNodeEventRelationship`

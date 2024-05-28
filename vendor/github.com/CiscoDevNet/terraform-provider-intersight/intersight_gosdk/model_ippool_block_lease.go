@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IppoolBlockLease type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IppoolBlockLease{}
 
 // IppoolBlockLease BlockLease represents an IP address that is allocated from a pool to a specific entity like server profile.
 type IppoolBlockLease struct {
@@ -25,13 +29,13 @@ type IppoolBlockLease struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Type of the IP address requested. * `IPv4` - IP V4 address type requested. * `IPv6` - IP V6 address type requested.
-	IpType           *string               `json:"IpType,omitempty"`
-	AssignedToEntity *MoBaseMoRelationship `json:"AssignedToEntity,omitempty"`
+	IpType           *string                      `json:"IpType,omitempty"`
+	AssignedToEntity NullableMoBaseMoRelationship `json:"AssignedToEntity,omitempty"`
 	// An array of relationships to ippoolIpLease resources.
-	IpLeases             []IppoolIpLeaseRelationship `json:"IpLeases,omitempty"`
-	Pool                 *IppoolPoolRelationship     `json:"Pool,omitempty"`
-	Universe             *IppoolUniverseRelationship `json:"Universe,omitempty"`
-	Vrf                  *VrfVrfRelationship         `json:"Vrf,omitempty"`
+	IpLeases             []IppoolIpLeaseRelationship        `json:"IpLeases,omitempty"`
+	Pool                 NullableIppoolPoolRelationship     `json:"Pool,omitempty"`
+	Universe             NullableIppoolUniverseRelationship `json:"Universe,omitempty"`
+	Vrf                  NullableVrfVrfRelationship         `json:"Vrf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,7 +118,7 @@ func (o *IppoolBlockLease) SetObjectType(v string) {
 
 // GetIpType returns the IpType field value if set, zero value otherwise.
 func (o *IppoolBlockLease) GetIpType() string {
-	if o == nil || o.IpType == nil {
+	if o == nil || IsNil(o.IpType) {
 		var ret string
 		return ret
 	}
@@ -124,7 +128,7 @@ func (o *IppoolBlockLease) GetIpType() string {
 // GetIpTypeOk returns a tuple with the IpType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IppoolBlockLease) GetIpTypeOk() (*string, bool) {
-	if o == nil || o.IpType == nil {
+	if o == nil || IsNil(o.IpType) {
 		return nil, false
 	}
 	return o.IpType, true
@@ -132,7 +136,7 @@ func (o *IppoolBlockLease) GetIpTypeOk() (*string, bool) {
 
 // HasIpType returns a boolean if a field has been set.
 func (o *IppoolBlockLease) HasIpType() bool {
-	if o != nil && o.IpType != nil {
+	if o != nil && !IsNil(o.IpType) {
 		return true
 	}
 
@@ -144,36 +148,47 @@ func (o *IppoolBlockLease) SetIpType(v string) {
 	o.IpType = &v
 }
 
-// GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise.
+// GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolBlockLease) GetAssignedToEntity() MoBaseMoRelationship {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil || IsNil(o.AssignedToEntity.Get()) {
 		var ret MoBaseMoRelationship
 		return ret
 	}
-	return *o.AssignedToEntity
+	return *o.AssignedToEntity.Get()
 }
 
 // GetAssignedToEntityOk returns a tuple with the AssignedToEntity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolBlockLease) GetAssignedToEntityOk() (*MoBaseMoRelationship, bool) {
-	if o == nil || o.AssignedToEntity == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AssignedToEntity, true
+	return o.AssignedToEntity.Get(), o.AssignedToEntity.IsSet()
 }
 
 // HasAssignedToEntity returns a boolean if a field has been set.
 func (o *IppoolBlockLease) HasAssignedToEntity() bool {
-	if o != nil && o.AssignedToEntity != nil {
+	if o != nil && o.AssignedToEntity.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAssignedToEntity gets a reference to the given MoBaseMoRelationship and assigns it to the AssignedToEntity field.
+// SetAssignedToEntity gets a reference to the given NullableMoBaseMoRelationship and assigns it to the AssignedToEntity field.
 func (o *IppoolBlockLease) SetAssignedToEntity(v MoBaseMoRelationship) {
-	o.AssignedToEntity = &v
+	o.AssignedToEntity.Set(&v)
+}
+
+// SetAssignedToEntityNil sets the value for AssignedToEntity to be an explicit nil
+func (o *IppoolBlockLease) SetAssignedToEntityNil() {
+	o.AssignedToEntity.Set(nil)
+}
+
+// UnsetAssignedToEntity ensures that no value is present for AssignedToEntity, not even an explicit nil
+func (o *IppoolBlockLease) UnsetAssignedToEntity() {
+	o.AssignedToEntity.Unset()
 }
 
 // GetIpLeases returns the IpLeases field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -189,7 +204,7 @@ func (o *IppoolBlockLease) GetIpLeases() []IppoolIpLeaseRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolBlockLease) GetIpLeasesOk() ([]IppoolIpLeaseRelationship, bool) {
-	if o == nil || o.IpLeases == nil {
+	if o == nil || IsNil(o.IpLeases) {
 		return nil, false
 	}
 	return o.IpLeases, true
@@ -197,7 +212,7 @@ func (o *IppoolBlockLease) GetIpLeasesOk() ([]IppoolIpLeaseRelationship, bool) {
 
 // HasIpLeases returns a boolean if a field has been set.
 func (o *IppoolBlockLease) HasIpLeases() bool {
-	if o != nil && o.IpLeases != nil {
+	if o != nil && IsNil(o.IpLeases) {
 		return true
 	}
 
@@ -209,163 +224,222 @@ func (o *IppoolBlockLease) SetIpLeases(v []IppoolIpLeaseRelationship) {
 	o.IpLeases = v
 }
 
-// GetPool returns the Pool field value if set, zero value otherwise.
+// GetPool returns the Pool field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolBlockLease) GetPool() IppoolPoolRelationship {
-	if o == nil || o.Pool == nil {
+	if o == nil || IsNil(o.Pool.Get()) {
 		var ret IppoolPoolRelationship
 		return ret
 	}
-	return *o.Pool
+	return *o.Pool.Get()
 }
 
 // GetPoolOk returns a tuple with the Pool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolBlockLease) GetPoolOk() (*IppoolPoolRelationship, bool) {
-	if o == nil || o.Pool == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pool, true
+	return o.Pool.Get(), o.Pool.IsSet()
 }
 
 // HasPool returns a boolean if a field has been set.
 func (o *IppoolBlockLease) HasPool() bool {
-	if o != nil && o.Pool != nil {
+	if o != nil && o.Pool.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPool gets a reference to the given IppoolPoolRelationship and assigns it to the Pool field.
+// SetPool gets a reference to the given NullableIppoolPoolRelationship and assigns it to the Pool field.
 func (o *IppoolBlockLease) SetPool(v IppoolPoolRelationship) {
-	o.Pool = &v
+	o.Pool.Set(&v)
 }
 
-// GetUniverse returns the Universe field value if set, zero value otherwise.
+// SetPoolNil sets the value for Pool to be an explicit nil
+func (o *IppoolBlockLease) SetPoolNil() {
+	o.Pool.Set(nil)
+}
+
+// UnsetPool ensures that no value is present for Pool, not even an explicit nil
+func (o *IppoolBlockLease) UnsetPool() {
+	o.Pool.Unset()
+}
+
+// GetUniverse returns the Universe field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolBlockLease) GetUniverse() IppoolUniverseRelationship {
-	if o == nil || o.Universe == nil {
+	if o == nil || IsNil(o.Universe.Get()) {
 		var ret IppoolUniverseRelationship
 		return ret
 	}
-	return *o.Universe
+	return *o.Universe.Get()
 }
 
 // GetUniverseOk returns a tuple with the Universe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolBlockLease) GetUniverseOk() (*IppoolUniverseRelationship, bool) {
-	if o == nil || o.Universe == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Universe, true
+	return o.Universe.Get(), o.Universe.IsSet()
 }
 
 // HasUniverse returns a boolean if a field has been set.
 func (o *IppoolBlockLease) HasUniverse() bool {
-	if o != nil && o.Universe != nil {
+	if o != nil && o.Universe.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUniverse gets a reference to the given IppoolUniverseRelationship and assigns it to the Universe field.
+// SetUniverse gets a reference to the given NullableIppoolUniverseRelationship and assigns it to the Universe field.
 func (o *IppoolBlockLease) SetUniverse(v IppoolUniverseRelationship) {
-	o.Universe = &v
+	o.Universe.Set(&v)
 }
 
-// GetVrf returns the Vrf field value if set, zero value otherwise.
+// SetUniverseNil sets the value for Universe to be an explicit nil
+func (o *IppoolBlockLease) SetUniverseNil() {
+	o.Universe.Set(nil)
+}
+
+// UnsetUniverse ensures that no value is present for Universe, not even an explicit nil
+func (o *IppoolBlockLease) UnsetUniverse() {
+	o.Universe.Unset()
+}
+
+// GetVrf returns the Vrf field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IppoolBlockLease) GetVrf() VrfVrfRelationship {
-	if o == nil || o.Vrf == nil {
+	if o == nil || IsNil(o.Vrf.Get()) {
 		var ret VrfVrfRelationship
 		return ret
 	}
-	return *o.Vrf
+	return *o.Vrf.Get()
 }
 
 // GetVrfOk returns a tuple with the Vrf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IppoolBlockLease) GetVrfOk() (*VrfVrfRelationship, bool) {
-	if o == nil || o.Vrf == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Vrf, true
+	return o.Vrf.Get(), o.Vrf.IsSet()
 }
 
 // HasVrf returns a boolean if a field has been set.
 func (o *IppoolBlockLease) HasVrf() bool {
-	if o != nil && o.Vrf != nil {
+	if o != nil && o.Vrf.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVrf gets a reference to the given VrfVrfRelationship and assigns it to the Vrf field.
+// SetVrf gets a reference to the given NullableVrfVrfRelationship and assigns it to the Vrf field.
 func (o *IppoolBlockLease) SetVrf(v VrfVrfRelationship) {
-	o.Vrf = &v
+	o.Vrf.Set(&v)
+}
+
+// SetVrfNil sets the value for Vrf to be an explicit nil
+func (o *IppoolBlockLease) SetVrfNil() {
+	o.Vrf.Set(nil)
+}
+
+// UnsetVrf ensures that no value is present for Vrf, not even an explicit nil
+func (o *IppoolBlockLease) UnsetVrf() {
+	o.Vrf.Unset()
 }
 
 func (o IppoolBlockLease) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IppoolBlockLease) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPoolAbstractBlockLease, errPoolAbstractBlockLease := json.Marshal(o.PoolAbstractBlockLease)
 	if errPoolAbstractBlockLease != nil {
-		return []byte{}, errPoolAbstractBlockLease
+		return map[string]interface{}{}, errPoolAbstractBlockLease
 	}
 	errPoolAbstractBlockLease = json.Unmarshal([]byte(serializedPoolAbstractBlockLease), &toSerialize)
 	if errPoolAbstractBlockLease != nil {
-		return []byte{}, errPoolAbstractBlockLease
+		return map[string]interface{}{}, errPoolAbstractBlockLease
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.IpType != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.IpType) {
 		toSerialize["IpType"] = o.IpType
 	}
-	if o.AssignedToEntity != nil {
-		toSerialize["AssignedToEntity"] = o.AssignedToEntity
+	if o.AssignedToEntity.IsSet() {
+		toSerialize["AssignedToEntity"] = o.AssignedToEntity.Get()
 	}
 	if o.IpLeases != nil {
 		toSerialize["IpLeases"] = o.IpLeases
 	}
-	if o.Pool != nil {
-		toSerialize["Pool"] = o.Pool
+	if o.Pool.IsSet() {
+		toSerialize["Pool"] = o.Pool.Get()
 	}
-	if o.Universe != nil {
-		toSerialize["Universe"] = o.Universe
+	if o.Universe.IsSet() {
+		toSerialize["Universe"] = o.Universe.Get()
 	}
-	if o.Vrf != nil {
-		toSerialize["Vrf"] = o.Vrf
+	if o.Vrf.IsSet() {
+		toSerialize["Vrf"] = o.Vrf.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IppoolBlockLease) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IppoolBlockLease) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IppoolBlockLeaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Type of the IP address requested. * `IPv4` - IP V4 address type requested. * `IPv6` - IP V6 address type requested.
-		IpType           *string               `json:"IpType,omitempty"`
-		AssignedToEntity *MoBaseMoRelationship `json:"AssignedToEntity,omitempty"`
+		IpType           *string                      `json:"IpType,omitempty"`
+		AssignedToEntity NullableMoBaseMoRelationship `json:"AssignedToEntity,omitempty"`
 		// An array of relationships to ippoolIpLease resources.
-		IpLeases []IppoolIpLeaseRelationship `json:"IpLeases,omitempty"`
-		Pool     *IppoolPoolRelationship     `json:"Pool,omitempty"`
-		Universe *IppoolUniverseRelationship `json:"Universe,omitempty"`
-		Vrf      *VrfVrfRelationship         `json:"Vrf,omitempty"`
+		IpLeases []IppoolIpLeaseRelationship        `json:"IpLeases,omitempty"`
+		Pool     NullableIppoolPoolRelationship     `json:"Pool,omitempty"`
+		Universe NullableIppoolUniverseRelationship `json:"Universe,omitempty"`
+		Vrf      NullableVrfVrfRelationship         `json:"Vrf,omitempty"`
 	}
 
 	varIppoolBlockLeaseWithoutEmbeddedStruct := IppoolBlockLeaseWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIppoolBlockLeaseWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIppoolBlockLeaseWithoutEmbeddedStruct)
 	if err == nil {
 		varIppoolBlockLease := _IppoolBlockLease{}
 		varIppoolBlockLease.ClassId = varIppoolBlockLeaseWithoutEmbeddedStruct.ClassId
@@ -383,7 +457,7 @@ func (o *IppoolBlockLease) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIppoolBlockLease := _IppoolBlockLease{}
 
-	err = json.Unmarshal(bytes, &varIppoolBlockLease)
+	err = json.Unmarshal(data, &varIppoolBlockLease)
 	if err == nil {
 		o.PoolAbstractBlockLease = varIppoolBlockLease.PoolAbstractBlockLease
 	} else {
@@ -392,7 +466,7 @@ func (o *IppoolBlockLease) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "IpType")

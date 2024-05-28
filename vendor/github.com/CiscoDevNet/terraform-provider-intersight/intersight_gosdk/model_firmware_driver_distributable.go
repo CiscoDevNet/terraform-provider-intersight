@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the FirmwareDriverDistributable type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FirmwareDriverDistributable{}
 
 // FirmwareDriverDistributable A device driver image distributed by Cisco.
 type FirmwareDriverDistributable struct {
@@ -31,8 +35,8 @@ type FirmwareDriverDistributable struct {
 	// The operating system name to which this driver is compatible.
 	Osname *string `json:"Osname,omitempty"`
 	// OS Version. It is populated as part of the image import operation.
-	Osversion            *string                                `json:"Osversion,omitempty"`
-	Catalog              *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+	Osversion            *string                                       `json:"Osversion,omitempty"`
+	Catalog              NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,6 +52,8 @@ func NewFirmwareDriverDistributable(classId string, objectType string) *Firmware
 	this.ObjectType = objectType
 	var importAction string = "None"
 	this.ImportAction = &importAction
+	var recommendedBuild string = "N"
+	this.RecommendedBuild = &recommendedBuild
 	var vendor string = "Cisco"
 	this.Vendor = &vendor
 	return &this
@@ -115,7 +121,7 @@ func (o *FirmwareDriverDistributable) SetObjectType(v string) {
 
 // GetCategory returns the Category field value if set, zero value otherwise.
 func (o *FirmwareDriverDistributable) GetCategory() string {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		var ret string
 		return ret
 	}
@@ -125,7 +131,7 @@ func (o *FirmwareDriverDistributable) GetCategory() string {
 // GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDriverDistributable) GetCategoryOk() (*string, bool) {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		return nil, false
 	}
 	return o.Category, true
@@ -133,7 +139,7 @@ func (o *FirmwareDriverDistributable) GetCategoryOk() (*string, bool) {
 
 // HasCategory returns a boolean if a field has been set.
 func (o *FirmwareDriverDistributable) HasCategory() bool {
-	if o != nil && o.Category != nil {
+	if o != nil && !IsNil(o.Category) {
 		return true
 	}
 
@@ -147,7 +153,7 @@ func (o *FirmwareDriverDistributable) SetCategory(v string) {
 
 // GetDirectory returns the Directory field value if set, zero value otherwise.
 func (o *FirmwareDriverDistributable) GetDirectory() string {
-	if o == nil || o.Directory == nil {
+	if o == nil || IsNil(o.Directory) {
 		var ret string
 		return ret
 	}
@@ -157,7 +163,7 @@ func (o *FirmwareDriverDistributable) GetDirectory() string {
 // GetDirectoryOk returns a tuple with the Directory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDriverDistributable) GetDirectoryOk() (*string, bool) {
-	if o == nil || o.Directory == nil {
+	if o == nil || IsNil(o.Directory) {
 		return nil, false
 	}
 	return o.Directory, true
@@ -165,7 +171,7 @@ func (o *FirmwareDriverDistributable) GetDirectoryOk() (*string, bool) {
 
 // HasDirectory returns a boolean if a field has been set.
 func (o *FirmwareDriverDistributable) HasDirectory() bool {
-	if o != nil && o.Directory != nil {
+	if o != nil && !IsNil(o.Directory) {
 		return true
 	}
 
@@ -179,7 +185,7 @@ func (o *FirmwareDriverDistributable) SetDirectory(v string) {
 
 // GetOsname returns the Osname field value if set, zero value otherwise.
 func (o *FirmwareDriverDistributable) GetOsname() string {
-	if o == nil || o.Osname == nil {
+	if o == nil || IsNil(o.Osname) {
 		var ret string
 		return ret
 	}
@@ -189,7 +195,7 @@ func (o *FirmwareDriverDistributable) GetOsname() string {
 // GetOsnameOk returns a tuple with the Osname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDriverDistributable) GetOsnameOk() (*string, bool) {
-	if o == nil || o.Osname == nil {
+	if o == nil || IsNil(o.Osname) {
 		return nil, false
 	}
 	return o.Osname, true
@@ -197,7 +203,7 @@ func (o *FirmwareDriverDistributable) GetOsnameOk() (*string, bool) {
 
 // HasOsname returns a boolean if a field has been set.
 func (o *FirmwareDriverDistributable) HasOsname() bool {
-	if o != nil && o.Osname != nil {
+	if o != nil && !IsNil(o.Osname) {
 		return true
 	}
 
@@ -211,7 +217,7 @@ func (o *FirmwareDriverDistributable) SetOsname(v string) {
 
 // GetOsversion returns the Osversion field value if set, zero value otherwise.
 func (o *FirmwareDriverDistributable) GetOsversion() string {
-	if o == nil || o.Osversion == nil {
+	if o == nil || IsNil(o.Osversion) {
 		var ret string
 		return ret
 	}
@@ -221,7 +227,7 @@ func (o *FirmwareDriverDistributable) GetOsversion() string {
 // GetOsversionOk returns a tuple with the Osversion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FirmwareDriverDistributable) GetOsversionOk() (*string, bool) {
-	if o == nil || o.Osversion == nil {
+	if o == nil || IsNil(o.Osversion) {
 		return nil, false
 	}
 	return o.Osversion, true
@@ -229,7 +235,7 @@ func (o *FirmwareDriverDistributable) GetOsversionOk() (*string, bool) {
 
 // HasOsversion returns a boolean if a field has been set.
 func (o *FirmwareDriverDistributable) HasOsversion() bool {
-	if o != nil && o.Osversion != nil {
+	if o != nil && !IsNil(o.Osversion) {
 		return true
 	}
 
@@ -241,78 +247,115 @@ func (o *FirmwareDriverDistributable) SetOsversion(v string) {
 	o.Osversion = &v
 }
 
-// GetCatalog returns the Catalog field value if set, zero value otherwise.
+// GetCatalog returns the Catalog field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FirmwareDriverDistributable) GetCatalog() SoftwarerepositoryCatalogRelationship {
-	if o == nil || o.Catalog == nil {
+	if o == nil || IsNil(o.Catalog.Get()) {
 		var ret SoftwarerepositoryCatalogRelationship
 		return ret
 	}
-	return *o.Catalog
+	return *o.Catalog.Get()
 }
 
 // GetCatalogOk returns a tuple with the Catalog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FirmwareDriverDistributable) GetCatalogOk() (*SoftwarerepositoryCatalogRelationship, bool) {
-	if o == nil || o.Catalog == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Catalog, true
+	return o.Catalog.Get(), o.Catalog.IsSet()
 }
 
 // HasCatalog returns a boolean if a field has been set.
 func (o *FirmwareDriverDistributable) HasCatalog() bool {
-	if o != nil && o.Catalog != nil {
+	if o != nil && o.Catalog.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCatalog gets a reference to the given SoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
+// SetCatalog gets a reference to the given NullableSoftwarerepositoryCatalogRelationship and assigns it to the Catalog field.
 func (o *FirmwareDriverDistributable) SetCatalog(v SoftwarerepositoryCatalogRelationship) {
-	o.Catalog = &v
+	o.Catalog.Set(&v)
+}
+
+// SetCatalogNil sets the value for Catalog to be an explicit nil
+func (o *FirmwareDriverDistributable) SetCatalogNil() {
+	o.Catalog.Set(nil)
+}
+
+// UnsetCatalog ensures that no value is present for Catalog, not even an explicit nil
+func (o *FirmwareDriverDistributable) UnsetCatalog() {
+	o.Catalog.Unset()
 }
 
 func (o FirmwareDriverDistributable) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FirmwareDriverDistributable) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedFirmwareBaseDistributable, errFirmwareBaseDistributable := json.Marshal(o.FirmwareBaseDistributable)
 	if errFirmwareBaseDistributable != nil {
-		return []byte{}, errFirmwareBaseDistributable
+		return map[string]interface{}{}, errFirmwareBaseDistributable
 	}
 	errFirmwareBaseDistributable = json.Unmarshal([]byte(serializedFirmwareBaseDistributable), &toSerialize)
 	if errFirmwareBaseDistributable != nil {
-		return []byte{}, errFirmwareBaseDistributable
+		return map[string]interface{}{}, errFirmwareBaseDistributable
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Category != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Category) {
 		toSerialize["Category"] = o.Category
 	}
-	if o.Directory != nil {
+	if !IsNil(o.Directory) {
 		toSerialize["Directory"] = o.Directory
 	}
-	if o.Osname != nil {
+	if !IsNil(o.Osname) {
 		toSerialize["Osname"] = o.Osname
 	}
-	if o.Osversion != nil {
+	if !IsNil(o.Osversion) {
 		toSerialize["Osversion"] = o.Osversion
 	}
-	if o.Catalog != nil {
-		toSerialize["Catalog"] = o.Catalog
+	if o.Catalog.IsSet() {
+		toSerialize["Catalog"] = o.Catalog.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *FirmwareDriverDistributable) UnmarshalJSON(bytes []byte) (err error) {
+func (o *FirmwareDriverDistributable) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type FirmwareDriverDistributableWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -325,13 +368,13 @@ func (o *FirmwareDriverDistributable) UnmarshalJSON(bytes []byte) (err error) {
 		// The operating system name to which this driver is compatible.
 		Osname *string `json:"Osname,omitempty"`
 		// OS Version. It is populated as part of the image import operation.
-		Osversion *string                                `json:"Osversion,omitempty"`
-		Catalog   *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+		Osversion *string                                       `json:"Osversion,omitempty"`
+		Catalog   NullableSoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	}
 
 	varFirmwareDriverDistributableWithoutEmbeddedStruct := FirmwareDriverDistributableWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varFirmwareDriverDistributableWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFirmwareDriverDistributableWithoutEmbeddedStruct)
 	if err == nil {
 		varFirmwareDriverDistributable := _FirmwareDriverDistributable{}
 		varFirmwareDriverDistributable.ClassId = varFirmwareDriverDistributableWithoutEmbeddedStruct.ClassId
@@ -348,7 +391,7 @@ func (o *FirmwareDriverDistributable) UnmarshalJSON(bytes []byte) (err error) {
 
 	varFirmwareDriverDistributable := _FirmwareDriverDistributable{}
 
-	err = json.Unmarshal(bytes, &varFirmwareDriverDistributable)
+	err = json.Unmarshal(data, &varFirmwareDriverDistributable)
 	if err == nil {
 		o.FirmwareBaseDistributable = varFirmwareDriverDistributable.FirmwareBaseDistributable
 	} else {
@@ -357,7 +400,7 @@ func (o *FirmwareDriverDistributable) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Category")

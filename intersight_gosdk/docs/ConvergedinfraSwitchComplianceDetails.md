@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Firmware** | Pointer to **string** | The firmware of the switch as received from inventory. | [optional] [readonly] 
 **Model** | Pointer to **string** | The model information of the switch. | [optional] [readonly] 
 **Type** | Pointer to **string** | The type of switch component. It must be set to either Fabric Interconnect, Nexus or MDS. * &#x60;FabricInterconnect&#x60; - The default Switch type of UCSM and IMM mode devices. * &#x60;NexusDevice&#x60; - Switch type of Nexus devices. * &#x60;MDSDevice&#x60; - Switch type of Nexus MDS devices. | [optional] [readonly] [default to "FabricInterconnect"]
-**PodCompliance** | Pointer to [**ConvergedinfraPodComplianceInfoRelationship**](ConvergedinfraPodComplianceInfoRelationship.md) |  | [optional] 
+**PodCompliance** | Pointer to [**NullableConvergedinfraPodComplianceInfoRelationship**](ConvergedinfraPodComplianceInfoRelationship.md) |  | [optional] 
 **StorageCompliances** | Pointer to [**[]ConvergedinfraStorageComplianceDetailsRelationship**](ConvergedinfraStorageComplianceDetailsRelationship.md) | An array of relationships to convergedinfraStorageComplianceDetails resources. | [optional] [readonly] 
-**Switch** | Pointer to [**NetworkElementSummaryRelationship**](NetworkElementSummaryRelationship.md) |  | [optional] 
+**Switch** | Pointer to [**NullableNetworkElementSummaryRelationship**](NetworkElementSummaryRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -172,6 +172,16 @@ SetPodCompliance sets PodCompliance field to given value.
 
 HasPodCompliance returns a boolean if a field has been set.
 
+### SetPodComplianceNil
+
+`func (o *ConvergedinfraSwitchComplianceDetails) SetPodComplianceNil(b bool)`
+
+ SetPodComplianceNil sets the value for PodCompliance to be an explicit nil
+
+### UnsetPodCompliance
+`func (o *ConvergedinfraSwitchComplianceDetails) UnsetPodCompliance()`
+
+UnsetPodCompliance ensures that no value is present for PodCompliance, not even an explicit nil
 ### GetStorageCompliances
 
 `func (o *ConvergedinfraSwitchComplianceDetails) GetStorageCompliances() []ConvergedinfraStorageComplianceDetailsRelationship`
@@ -232,6 +242,16 @@ SetSwitch sets Switch field to given value.
 
 HasSwitch returns a boolean if a field has been set.
 
+### SetSwitchNil
+
+`func (o *ConvergedinfraSwitchComplianceDetails) SetSwitchNil(b bool)`
+
+ SetSwitchNil sets the value for Switch to be an explicit nil
+
+### UnsetSwitch
+`func (o *ConvergedinfraSwitchComplianceDetails) UnsetSwitch()`
+
+UnsetSwitch ensures that no value is present for Switch, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

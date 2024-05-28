@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **RecordExpiryTime** | Pointer to **time.Time** | Expiration time of TXT Record. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of Domain Ownership Verification. * &#x60;Pending&#x60; - Domain verification is pending. * &#x60;Failed&#x60; - Domain verification failed. Re-generate token and verify. * &#x60;Verified&#x60; - Domain verification succeeded. * &#x60;Expired&#x60; - TXT Record for Domain verification expired. | [optional] [readonly] [default to "Pending"]
 **TxtRecord** | Pointer to **string** | Resource record used to verify Domain Ownership. Users need to verify the domain by adding the TXT Record in their DNS Host. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -258,6 +258,16 @@ SetAccount sets Account field to given value.
 
 HasAccount returns a boolean if a field has been set.
 
+### SetAccountNil
+
+`func (o *IamDomainNameInfo) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *IamDomainNameInfo) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

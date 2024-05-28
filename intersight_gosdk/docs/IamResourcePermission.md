@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.ResourcePermission"]
 **PermissionRoles** | Pointer to [**[]IamPermissionToRoles**](IamPermissionToRoles.md) |  | [optional] 
 **TargetApp** | Pointer to **string** | Name of the service owning the resource. | [optional] [readonly] 
-**Holder** | Pointer to [**IamSecurityHolderRelationship**](IamSecurityHolderRelationship.md) |  | [optional] 
-**Resource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Holder** | Pointer to [**NullableIamSecurityHolderRelationship**](IamSecurityHolderRelationship.md) |  | [optional] 
+**Resource** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -155,6 +155,16 @@ SetHolder sets Holder field to given value.
 
 HasHolder returns a boolean if a field has been set.
 
+### SetHolderNil
+
+`func (o *IamResourcePermission) SetHolderNil(b bool)`
+
+ SetHolderNil sets the value for Holder to be an explicit nil
+
+### UnsetHolder
+`func (o *IamResourcePermission) UnsetHolder()`
+
+UnsetHolder ensures that no value is present for Holder, not even an explicit nil
 ### GetResource
 
 `func (o *IamResourcePermission) GetResource() MoBaseMoRelationship`
@@ -180,6 +190,16 @@ SetResource sets Resource field to given value.
 
 HasResource returns a boolean if a field has been set.
 
+### SetResourceNil
+
+`func (o *IamResourcePermission) SetResourceNil(b bool)`
+
+ SetResourceNil sets the value for Resource to be an explicit nil
+
+### UnsetResource
+`func (o *IamResourcePermission) UnsetResource()`
+
+UnsetResource ensures that no value is present for Resource, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

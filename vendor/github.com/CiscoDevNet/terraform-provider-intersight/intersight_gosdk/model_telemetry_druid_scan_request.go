@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,7 +13,11 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 )
+
+// checks if the TelemetryDruidScanRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TelemetryDruidScanRequest{}
 
 // TelemetryDruidScanRequest The Scan query returns raw Apache Druid rows in streaming mode. In addition to straightforward usage where a Scan query is issued to the Broker, the Scan query can also be issued directly to Historical processes or streaming ingestion tasks. This can be useful if you want to retrieve large amounts of data in parallel.
 type TelemetryDruidScanRequest struct {
@@ -152,7 +156,7 @@ func (o *TelemetryDruidScanRequest) SetIntervals(v []string) {
 
 // GetResultFormat returns the ResultFormat field value if set, zero value otherwise.
 func (o *TelemetryDruidScanRequest) GetResultFormat() string {
-	if o == nil || o.ResultFormat == nil {
+	if o == nil || IsNil(o.ResultFormat) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *TelemetryDruidScanRequest) GetResultFormat() string {
 // GetResultFormatOk returns a tuple with the ResultFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanRequest) GetResultFormatOk() (*string, bool) {
-	if o == nil || o.ResultFormat == nil {
+	if o == nil || IsNil(o.ResultFormat) {
 		return nil, false
 	}
 	return o.ResultFormat, true
@@ -170,7 +174,7 @@ func (o *TelemetryDruidScanRequest) GetResultFormatOk() (*string, bool) {
 
 // HasResultFormat returns a boolean if a field has been set.
 func (o *TelemetryDruidScanRequest) HasResultFormat() bool {
-	if o != nil && o.ResultFormat != nil {
+	if o != nil && !IsNil(o.ResultFormat) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *TelemetryDruidScanRequest) SetResultFormat(v string) {
 
 // GetFilter returns the Filter field value if set, zero value otherwise.
 func (o *TelemetryDruidScanRequest) GetFilter() TelemetryDruidFilter {
-	if o == nil || o.Filter == nil {
+	if o == nil || IsNil(o.Filter) {
 		var ret TelemetryDruidFilter
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *TelemetryDruidScanRequest) GetFilter() TelemetryDruidFilter {
 // GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanRequest) GetFilterOk() (*TelemetryDruidFilter, bool) {
-	if o == nil || o.Filter == nil {
+	if o == nil || IsNil(o.Filter) {
 		return nil, false
 	}
 	return o.Filter, true
@@ -202,7 +206,7 @@ func (o *TelemetryDruidScanRequest) GetFilterOk() (*TelemetryDruidFilter, bool) 
 
 // HasFilter returns a boolean if a field has been set.
 func (o *TelemetryDruidScanRequest) HasFilter() bool {
-	if o != nil && o.Filter != nil {
+	if o != nil && !IsNil(o.Filter) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *TelemetryDruidScanRequest) SetFilter(v TelemetryDruidFilter) {
 
 // GetColumns returns the Columns field value if set, zero value otherwise.
 func (o *TelemetryDruidScanRequest) GetColumns() []string {
-	if o == nil || o.Columns == nil {
+	if o == nil || IsNil(o.Columns) {
 		var ret []string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *TelemetryDruidScanRequest) GetColumns() []string {
 // GetColumnsOk returns a tuple with the Columns field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanRequest) GetColumnsOk() ([]string, bool) {
-	if o == nil || o.Columns == nil {
+	if o == nil || IsNil(o.Columns) {
 		return nil, false
 	}
 	return o.Columns, true
@@ -234,7 +238,7 @@ func (o *TelemetryDruidScanRequest) GetColumnsOk() ([]string, bool) {
 
 // HasColumns returns a boolean if a field has been set.
 func (o *TelemetryDruidScanRequest) HasColumns() bool {
-	if o != nil && o.Columns != nil {
+	if o != nil && !IsNil(o.Columns) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *TelemetryDruidScanRequest) SetColumns(v []string) {
 
 // GetBatchSize returns the BatchSize field value if set, zero value otherwise.
 func (o *TelemetryDruidScanRequest) GetBatchSize() int32 {
-	if o == nil || o.BatchSize == nil {
+	if o == nil || IsNil(o.BatchSize) {
 		var ret int32
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *TelemetryDruidScanRequest) GetBatchSize() int32 {
 // GetBatchSizeOk returns a tuple with the BatchSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanRequest) GetBatchSizeOk() (*int32, bool) {
-	if o == nil || o.BatchSize == nil {
+	if o == nil || IsNil(o.BatchSize) {
 		return nil, false
 	}
 	return o.BatchSize, true
@@ -266,7 +270,7 @@ func (o *TelemetryDruidScanRequest) GetBatchSizeOk() (*int32, bool) {
 
 // HasBatchSize returns a boolean if a field has been set.
 func (o *TelemetryDruidScanRequest) HasBatchSize() bool {
-	if o != nil && o.BatchSize != nil {
+	if o != nil && !IsNil(o.BatchSize) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *TelemetryDruidScanRequest) SetBatchSize(v int32) {
 
 // GetLimit returns the Limit field value if set, zero value otherwise.
 func (o *TelemetryDruidScanRequest) GetLimit() int32 {
-	if o == nil || o.Limit == nil {
+	if o == nil || IsNil(o.Limit) {
 		var ret int32
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *TelemetryDruidScanRequest) GetLimit() int32 {
 // GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanRequest) GetLimitOk() (*int32, bool) {
-	if o == nil || o.Limit == nil {
+	if o == nil || IsNil(o.Limit) {
 		return nil, false
 	}
 	return o.Limit, true
@@ -298,7 +302,7 @@ func (o *TelemetryDruidScanRequest) GetLimitOk() (*int32, bool) {
 
 // HasLimit returns a boolean if a field has been set.
 func (o *TelemetryDruidScanRequest) HasLimit() bool {
-	if o != nil && o.Limit != nil {
+	if o != nil && !IsNil(o.Limit) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *TelemetryDruidScanRequest) SetLimit(v int32) {
 
 // GetOffset returns the Offset field value if set, zero value otherwise.
 func (o *TelemetryDruidScanRequest) GetOffset() int32 {
-	if o == nil || o.Offset == nil {
+	if o == nil || IsNil(o.Offset) {
 		var ret int32
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *TelemetryDruidScanRequest) GetOffset() int32 {
 // GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanRequest) GetOffsetOk() (*int32, bool) {
-	if o == nil || o.Offset == nil {
+	if o == nil || IsNil(o.Offset) {
 		return nil, false
 	}
 	return o.Offset, true
@@ -330,7 +334,7 @@ func (o *TelemetryDruidScanRequest) GetOffsetOk() (*int32, bool) {
 
 // HasOffset returns a boolean if a field has been set.
 func (o *TelemetryDruidScanRequest) HasOffset() bool {
-	if o != nil && o.Offset != nil {
+	if o != nil && !IsNil(o.Offset) {
 		return true
 	}
 
@@ -344,7 +348,7 @@ func (o *TelemetryDruidScanRequest) SetOffset(v int32) {
 
 // GetOrder returns the Order field value if set, zero value otherwise.
 func (o *TelemetryDruidScanRequest) GetOrder() string {
-	if o == nil || o.Order == nil {
+	if o == nil || IsNil(o.Order) {
 		var ret string
 		return ret
 	}
@@ -354,7 +358,7 @@ func (o *TelemetryDruidScanRequest) GetOrder() string {
 // GetOrderOk returns a tuple with the Order field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanRequest) GetOrderOk() (*string, bool) {
-	if o == nil || o.Order == nil {
+	if o == nil || IsNil(o.Order) {
 		return nil, false
 	}
 	return o.Order, true
@@ -362,7 +366,7 @@ func (o *TelemetryDruidScanRequest) GetOrderOk() (*string, bool) {
 
 // HasOrder returns a boolean if a field has been set.
 func (o *TelemetryDruidScanRequest) HasOrder() bool {
-	if o != nil && o.Order != nil {
+	if o != nil && !IsNil(o.Order) {
 		return true
 	}
 
@@ -376,7 +380,7 @@ func (o *TelemetryDruidScanRequest) SetOrder(v string) {
 
 // GetLegacy returns the Legacy field value if set, zero value otherwise.
 func (o *TelemetryDruidScanRequest) GetLegacy() bool {
-	if o == nil || o.Legacy == nil {
+	if o == nil || IsNil(o.Legacy) {
 		var ret bool
 		return ret
 	}
@@ -386,7 +390,7 @@ func (o *TelemetryDruidScanRequest) GetLegacy() bool {
 // GetLegacyOk returns a tuple with the Legacy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanRequest) GetLegacyOk() (*bool, bool) {
-	if o == nil || o.Legacy == nil {
+	if o == nil || IsNil(o.Legacy) {
 		return nil, false
 	}
 	return o.Legacy, true
@@ -394,7 +398,7 @@ func (o *TelemetryDruidScanRequest) GetLegacyOk() (*bool, bool) {
 
 // HasLegacy returns a boolean if a field has been set.
 func (o *TelemetryDruidScanRequest) HasLegacy() bool {
-	if o != nil && o.Legacy != nil {
+	if o != nil && !IsNil(o.Legacy) {
 		return true
 	}
 
@@ -408,7 +412,7 @@ func (o *TelemetryDruidScanRequest) SetLegacy(v bool) {
 
 // GetContext returns the Context field value if set, zero value otherwise.
 func (o *TelemetryDruidScanRequest) GetContext() TelemetryDruidQueryContext {
-	if o == nil || o.Context == nil {
+	if o == nil || IsNil(o.Context) {
 		var ret TelemetryDruidQueryContext
 		return ret
 	}
@@ -418,7 +422,7 @@ func (o *TelemetryDruidScanRequest) GetContext() TelemetryDruidQueryContext {
 // GetContextOk returns a tuple with the Context field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TelemetryDruidScanRequest) GetContextOk() (*TelemetryDruidQueryContext, bool) {
-	if o == nil || o.Context == nil {
+	if o == nil || IsNil(o.Context) {
 		return nil, false
 	}
 	return o.Context, true
@@ -426,7 +430,7 @@ func (o *TelemetryDruidScanRequest) GetContextOk() (*TelemetryDruidQueryContext,
 
 // HasContext returns a boolean if a field has been set.
 func (o *TelemetryDruidScanRequest) HasContext() bool {
-	if o != nil && o.Context != nil {
+	if o != nil && !IsNil(o.Context) {
 		return true
 	}
 
@@ -439,41 +443,43 @@ func (o *TelemetryDruidScanRequest) SetContext(v TelemetryDruidQueryContext) {
 }
 
 func (o TelemetryDruidScanRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TelemetryDruidScanRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["queryType"] = o.QueryType
-	}
-	if true {
-		toSerialize["dataSource"] = o.DataSource
-	}
-	if true {
-		toSerialize["intervals"] = o.Intervals
-	}
-	if o.ResultFormat != nil {
+	toSerialize["queryType"] = o.QueryType
+	toSerialize["dataSource"] = o.DataSource
+	toSerialize["intervals"] = o.Intervals
+	if !IsNil(o.ResultFormat) {
 		toSerialize["resultFormat"] = o.ResultFormat
 	}
-	if o.Filter != nil {
+	if !IsNil(o.Filter) {
 		toSerialize["filter"] = o.Filter
 	}
-	if o.Columns != nil {
+	if !IsNil(o.Columns) {
 		toSerialize["columns"] = o.Columns
 	}
-	if o.BatchSize != nil {
+	if !IsNil(o.BatchSize) {
 		toSerialize["batchSize"] = o.BatchSize
 	}
-	if o.Limit != nil {
+	if !IsNil(o.Limit) {
 		toSerialize["limit"] = o.Limit
 	}
-	if o.Offset != nil {
+	if !IsNil(o.Offset) {
 		toSerialize["offset"] = o.Offset
 	}
-	if o.Order != nil {
+	if !IsNil(o.Order) {
 		toSerialize["order"] = o.Order
 	}
-	if o.Legacy != nil {
+	if !IsNil(o.Legacy) {
 		toSerialize["legacy"] = o.Legacy
 	}
-	if o.Context != nil {
+	if !IsNil(o.Context) {
 		toSerialize["context"] = o.Context
 	}
 
@@ -481,19 +487,46 @@ func (o TelemetryDruidScanRequest) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *TelemetryDruidScanRequest) UnmarshalJSON(bytes []byte) (err error) {
+func (o *TelemetryDruidScanRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"queryType",
+		"dataSource",
+		"intervals",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTelemetryDruidScanRequest := _TelemetryDruidScanRequest{}
 
-	if err = json.Unmarshal(bytes, &varTelemetryDruidScanRequest); err == nil {
-		*o = TelemetryDruidScanRequest(varTelemetryDruidScanRequest)
+	err = json.Unmarshal(data, &varTelemetryDruidScanRequest)
+
+	if err != nil {
+		return err
 	}
+
+	*o = TelemetryDruidScanRequest(varTelemetryDruidScanRequest)
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "queryType")
 		delete(additionalProperties, "dataSource")
 		delete(additionalProperties, "intervals")

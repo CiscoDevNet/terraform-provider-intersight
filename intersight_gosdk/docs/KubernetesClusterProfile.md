@@ -13,22 +13,22 @@ Name | Type | Description | Notes
 **ManagedMode** | Pointer to **string** | Management mode for the cluster. In some cases Intersight kubernetes service is not required to provision and manage the management entities and endpoints (for e.g. EKS). In most other cases it will be required to provision and manage these entities and endpoints. * &#x60;Provided&#x60; - Cluster management entities and endpoints are provided by the infrastructure platform. * &#x60;Managed&#x60; - Cluster management entities and endpoints are provisioned and managed by Intersight kubernetes service. | [optional] [default to "Provided"]
 **ManagementConfig** | Pointer to [**NullableKubernetesClusterManagementConfig**](KubernetesClusterManagementConfig.md) |  | [optional] 
 **Status** | Pointer to **string** | Status of the Kubernetes cluster and its nodes. * &#x60;Undeployed&#x60; - The cluster is undeployed. * &#x60;Configuring&#x60; - The cluster is being configured. * &#x60;Deploying&#x60; - The cluster is being deployed. * &#x60;Undeploying&#x60; - The cluster is being undeployed. * &#x60;DeployFailedTerminal&#x60; - The Cluster Deploy failed creation and can not be recovered, only Delete or Undeploy operations are available for this Cluster. * &#x60;DeployFailed&#x60; - The cluster deployment failed. * &#x60;Upgrading&#x60; - The cluster is being upgraded. * &#x60;Deleting&#x60; - The cluster is being deleted. * &#x60;DeleteFailed&#x60; - The Cluster Delete failed and the Cluster can not be recovered, only Delete or Undeploy operations are available for this Cluster. * &#x60;Ready&#x60; - The cluster is ready for use. * &#x60;Active&#x60; - The cluster is being active. * &#x60;Shutdown&#x60; - All the nodes in the cluster are powered off. * &#x60;Terminated&#x60; - The cluster is terminated. * &#x60;Deployed&#x60; - The cluster is deployed. The cluster may not yet be ready for use. * &#x60;UndeployFailed&#x60; - The cluster undeploy action failed. * &#x60;NotReady&#x60; - The cluster is created and some nodes are not ready. | [optional] [default to "Undeployed"]
-**AciCniProfile** | Pointer to [**KubernetesAciCniProfileRelationship**](KubernetesAciCniProfileRelationship.md) |  | [optional] 
-**AssociatedCluster** | Pointer to [**KubernetesClusterRelationship**](KubernetesClusterRelationship.md) |  | [optional] 
+**AciCniProfile** | Pointer to [**NullableKubernetesAciCniProfileRelationship**](KubernetesAciCniProfileRelationship.md) |  | [optional] 
+**AssociatedCluster** | Pointer to [**NullableKubernetesClusterRelationship**](KubernetesClusterRelationship.md) |  | [optional] 
 **ClusterIpPools** | Pointer to [**[]IppoolPoolRelationship**](IppoolPoolRelationship.md) | An array of relationships to ippoolPool resources. | [optional] 
-**ContainerRuntimeConfig** | Pointer to [**KubernetesContainerRuntimePolicyRelationship**](KubernetesContainerRuntimePolicyRelationship.md) |  | [optional] 
-**ContainerRuntimeProxyPolicy** | Pointer to [**KubernetesHttpProxyPolicyRelationship**](KubernetesHttpProxyPolicyRelationship.md) |  | [optional] 
-**DeviceConnectorProxyPolicy** | Pointer to [**KubernetesHttpProxyPolicyRelationship**](KubernetesHttpProxyPolicyRelationship.md) |  | [optional] 
+**ContainerRuntimeConfig** | Pointer to [**NullableKubernetesContainerRuntimePolicyRelationship**](KubernetesContainerRuntimePolicyRelationship.md) |  | [optional] 
+**ContainerRuntimeProxyPolicy** | Pointer to [**NullableKubernetesHttpProxyPolicyRelationship**](KubernetesHttpProxyPolicyRelationship.md) |  | [optional] 
+**DeviceConnectorProxyPolicy** | Pointer to [**NullableKubernetesHttpProxyPolicyRelationship**](KubernetesHttpProxyPolicyRelationship.md) |  | [optional] 
 **LoadbalancerBlockIpLeases** | Pointer to [**[]IppoolBlockLeaseRelationship**](IppoolBlockLeaseRelationship.md) | An array of relationships to ippoolBlockLease resources. | [optional] 
 **LoadbalancerIpLeases** | Pointer to [**[]IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) | An array of relationships to ippoolIpLease resources. | [optional] 
-**MasterVipLease** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
-**NetConfig** | Pointer to [**KubernetesNetworkPolicyRelationship**](KubernetesNetworkPolicyRelationship.md) |  | [optional] 
+**MasterVipLease** | Pointer to [**NullableIppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
+**NetConfig** | Pointer to [**NullableKubernetesNetworkPolicyRelationship**](KubernetesNetworkPolicyRelationship.md) |  | [optional] 
 **NodeGroups** | Pointer to [**[]KubernetesNodeGroupProfileRelationship**](KubernetesNodeGroupProfileRelationship.md) | An array of relationships to kubernetesNodeGroupProfile resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**ParentSolutionProfile** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
-**SysConfig** | Pointer to [**KubernetesSysConfigPolicyRelationship**](KubernetesSysConfigPolicyRelationship.md) |  | [optional] 
-**TrustedRegistries** | Pointer to [**KubernetesTrustedRegistriesPolicyRelationship**](KubernetesTrustedRegistriesPolicyRelationship.md) |  | [optional] 
-**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ParentSolutionProfile** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**SysConfig** | Pointer to [**NullableKubernetesSysConfigPolicyRelationship**](KubernetesSysConfigPolicyRelationship.md) |  | [optional] 
+**TrustedRegistries** | Pointer to [**NullableKubernetesTrustedRegistriesPolicyRelationship**](KubernetesTrustedRegistriesPolicyRelationship.md) |  | [optional] 
+**WorkflowInfo** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -339,6 +339,16 @@ SetAciCniProfile sets AciCniProfile field to given value.
 
 HasAciCniProfile returns a boolean if a field has been set.
 
+### SetAciCniProfileNil
+
+`func (o *KubernetesClusterProfile) SetAciCniProfileNil(b bool)`
+
+ SetAciCniProfileNil sets the value for AciCniProfile to be an explicit nil
+
+### UnsetAciCniProfile
+`func (o *KubernetesClusterProfile) UnsetAciCniProfile()`
+
+UnsetAciCniProfile ensures that no value is present for AciCniProfile, not even an explicit nil
 ### GetAssociatedCluster
 
 `func (o *KubernetesClusterProfile) GetAssociatedCluster() KubernetesClusterRelationship`
@@ -364,6 +374,16 @@ SetAssociatedCluster sets AssociatedCluster field to given value.
 
 HasAssociatedCluster returns a boolean if a field has been set.
 
+### SetAssociatedClusterNil
+
+`func (o *KubernetesClusterProfile) SetAssociatedClusterNil(b bool)`
+
+ SetAssociatedClusterNil sets the value for AssociatedCluster to be an explicit nil
+
+### UnsetAssociatedCluster
+`func (o *KubernetesClusterProfile) UnsetAssociatedCluster()`
+
+UnsetAssociatedCluster ensures that no value is present for AssociatedCluster, not even an explicit nil
 ### GetClusterIpPools
 
 `func (o *KubernetesClusterProfile) GetClusterIpPools() []IppoolPoolRelationship`
@@ -424,6 +444,16 @@ SetContainerRuntimeConfig sets ContainerRuntimeConfig field to given value.
 
 HasContainerRuntimeConfig returns a boolean if a field has been set.
 
+### SetContainerRuntimeConfigNil
+
+`func (o *KubernetesClusterProfile) SetContainerRuntimeConfigNil(b bool)`
+
+ SetContainerRuntimeConfigNil sets the value for ContainerRuntimeConfig to be an explicit nil
+
+### UnsetContainerRuntimeConfig
+`func (o *KubernetesClusterProfile) UnsetContainerRuntimeConfig()`
+
+UnsetContainerRuntimeConfig ensures that no value is present for ContainerRuntimeConfig, not even an explicit nil
 ### GetContainerRuntimeProxyPolicy
 
 `func (o *KubernetesClusterProfile) GetContainerRuntimeProxyPolicy() KubernetesHttpProxyPolicyRelationship`
@@ -449,6 +479,16 @@ SetContainerRuntimeProxyPolicy sets ContainerRuntimeProxyPolicy field to given v
 
 HasContainerRuntimeProxyPolicy returns a boolean if a field has been set.
 
+### SetContainerRuntimeProxyPolicyNil
+
+`func (o *KubernetesClusterProfile) SetContainerRuntimeProxyPolicyNil(b bool)`
+
+ SetContainerRuntimeProxyPolicyNil sets the value for ContainerRuntimeProxyPolicy to be an explicit nil
+
+### UnsetContainerRuntimeProxyPolicy
+`func (o *KubernetesClusterProfile) UnsetContainerRuntimeProxyPolicy()`
+
+UnsetContainerRuntimeProxyPolicy ensures that no value is present for ContainerRuntimeProxyPolicy, not even an explicit nil
 ### GetDeviceConnectorProxyPolicy
 
 `func (o *KubernetesClusterProfile) GetDeviceConnectorProxyPolicy() KubernetesHttpProxyPolicyRelationship`
@@ -474,6 +514,16 @@ SetDeviceConnectorProxyPolicy sets DeviceConnectorProxyPolicy field to given val
 
 HasDeviceConnectorProxyPolicy returns a boolean if a field has been set.
 
+### SetDeviceConnectorProxyPolicyNil
+
+`func (o *KubernetesClusterProfile) SetDeviceConnectorProxyPolicyNil(b bool)`
+
+ SetDeviceConnectorProxyPolicyNil sets the value for DeviceConnectorProxyPolicy to be an explicit nil
+
+### UnsetDeviceConnectorProxyPolicy
+`func (o *KubernetesClusterProfile) UnsetDeviceConnectorProxyPolicy()`
+
+UnsetDeviceConnectorProxyPolicy ensures that no value is present for DeviceConnectorProxyPolicy, not even an explicit nil
 ### GetLoadbalancerBlockIpLeases
 
 `func (o *KubernetesClusterProfile) GetLoadbalancerBlockIpLeases() []IppoolBlockLeaseRelationship`
@@ -569,6 +619,16 @@ SetMasterVipLease sets MasterVipLease field to given value.
 
 HasMasterVipLease returns a boolean if a field has been set.
 
+### SetMasterVipLeaseNil
+
+`func (o *KubernetesClusterProfile) SetMasterVipLeaseNil(b bool)`
+
+ SetMasterVipLeaseNil sets the value for MasterVipLease to be an explicit nil
+
+### UnsetMasterVipLease
+`func (o *KubernetesClusterProfile) UnsetMasterVipLease()`
+
+UnsetMasterVipLease ensures that no value is present for MasterVipLease, not even an explicit nil
 ### GetNetConfig
 
 `func (o *KubernetesClusterProfile) GetNetConfig() KubernetesNetworkPolicyRelationship`
@@ -594,6 +654,16 @@ SetNetConfig sets NetConfig field to given value.
 
 HasNetConfig returns a boolean if a field has been set.
 
+### SetNetConfigNil
+
+`func (o *KubernetesClusterProfile) SetNetConfigNil(b bool)`
+
+ SetNetConfigNil sets the value for NetConfig to be an explicit nil
+
+### UnsetNetConfig
+`func (o *KubernetesClusterProfile) UnsetNetConfig()`
+
+UnsetNetConfig ensures that no value is present for NetConfig, not even an explicit nil
 ### GetNodeGroups
 
 `func (o *KubernetesClusterProfile) GetNodeGroups() []KubernetesNodeGroupProfileRelationship`
@@ -654,6 +724,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *KubernetesClusterProfile) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *KubernetesClusterProfile) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetParentSolutionProfile
 
 `func (o *KubernetesClusterProfile) GetParentSolutionProfile() MoBaseMoRelationship`
@@ -679,6 +759,16 @@ SetParentSolutionProfile sets ParentSolutionProfile field to given value.
 
 HasParentSolutionProfile returns a boolean if a field has been set.
 
+### SetParentSolutionProfileNil
+
+`func (o *KubernetesClusterProfile) SetParentSolutionProfileNil(b bool)`
+
+ SetParentSolutionProfileNil sets the value for ParentSolutionProfile to be an explicit nil
+
+### UnsetParentSolutionProfile
+`func (o *KubernetesClusterProfile) UnsetParentSolutionProfile()`
+
+UnsetParentSolutionProfile ensures that no value is present for ParentSolutionProfile, not even an explicit nil
 ### GetSysConfig
 
 `func (o *KubernetesClusterProfile) GetSysConfig() KubernetesSysConfigPolicyRelationship`
@@ -704,6 +794,16 @@ SetSysConfig sets SysConfig field to given value.
 
 HasSysConfig returns a boolean if a field has been set.
 
+### SetSysConfigNil
+
+`func (o *KubernetesClusterProfile) SetSysConfigNil(b bool)`
+
+ SetSysConfigNil sets the value for SysConfig to be an explicit nil
+
+### UnsetSysConfig
+`func (o *KubernetesClusterProfile) UnsetSysConfig()`
+
+UnsetSysConfig ensures that no value is present for SysConfig, not even an explicit nil
 ### GetTrustedRegistries
 
 `func (o *KubernetesClusterProfile) GetTrustedRegistries() KubernetesTrustedRegistriesPolicyRelationship`
@@ -729,6 +829,16 @@ SetTrustedRegistries sets TrustedRegistries field to given value.
 
 HasTrustedRegistries returns a boolean if a field has been set.
 
+### SetTrustedRegistriesNil
+
+`func (o *KubernetesClusterProfile) SetTrustedRegistriesNil(b bool)`
+
+ SetTrustedRegistriesNil sets the value for TrustedRegistries to be an explicit nil
+
+### UnsetTrustedRegistries
+`func (o *KubernetesClusterProfile) UnsetTrustedRegistries()`
+
+UnsetTrustedRegistries ensures that no value is present for TrustedRegistries, not even an explicit nil
 ### GetWorkflowInfo
 
 `func (o *KubernetesClusterProfile) GetWorkflowInfo() WorkflowWorkflowInfoRelationship`
@@ -754,6 +864,16 @@ SetWorkflowInfo sets WorkflowInfo field to given value.
 
 HasWorkflowInfo returns a boolean if a field has been set.
 
+### SetWorkflowInfoNil
+
+`func (o *KubernetesClusterProfile) SetWorkflowInfoNil(b bool)`
+
+ SetWorkflowInfoNil sets the value for WorkflowInfo to be an explicit nil
+
+### UnsetWorkflowInfo
+`func (o *KubernetesClusterProfile) UnsetWorkflowInfo()`
+
+UnsetWorkflowInfo ensures that no value is present for WorkflowInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

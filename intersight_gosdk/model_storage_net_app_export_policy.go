@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the StorageNetAppExportPolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageNetAppExportPolicy{}
 
 // StorageNetAppExportPolicy NetApp export policies enable client access control to volumes. Clients that match specific IP addresses and/or specific authentication types are granted access.
 type StorageNetAppExportPolicy struct {
@@ -30,9 +34,9 @@ type StorageNetAppExportPolicy struct {
 	// ID for the Export Policy.
 	PolicyId *int64 `json:"PolicyId,omitempty"`
 	// The storage virtual machine name for the export policy.
-	SvmName              *string                             `json:"SvmName,omitempty"`
-	Array                *StorageNetAppClusterRelationship   `json:"Array,omitempty"`
-	Tenant               *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+	SvmName              *string                                    `json:"SvmName,omitempty"`
+	Array                NullableStorageNetAppClusterRelationship   `json:"Array,omitempty"`
+	Tenant               NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *StorageNetAppExportPolicy) SetObjectType(v string) {
 
 // GetClusterUuid returns the ClusterUuid field value if set, zero value otherwise.
 func (o *StorageNetAppExportPolicy) GetClusterUuid() string {
-	if o == nil || o.ClusterUuid == nil {
+	if o == nil || IsNil(o.ClusterUuid) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *StorageNetAppExportPolicy) GetClusterUuid() string {
 // GetClusterUuidOk returns a tuple with the ClusterUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppExportPolicy) GetClusterUuidOk() (*string, bool) {
-	if o == nil || o.ClusterUuid == nil {
+	if o == nil || IsNil(o.ClusterUuid) {
 		return nil, false
 	}
 	return o.ClusterUuid, true
@@ -129,7 +133,7 @@ func (o *StorageNetAppExportPolicy) GetClusterUuidOk() (*string, bool) {
 
 // HasClusterUuid returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicy) HasClusterUuid() bool {
-	if o != nil && o.ClusterUuid != nil {
+	if o != nil && !IsNil(o.ClusterUuid) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *StorageNetAppExportPolicy) GetNetAppExportPolicyRule() []StorageNetAppE
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppExportPolicy) GetNetAppExportPolicyRuleOk() ([]StorageNetAppExportPolicyRule, bool) {
-	if o == nil || o.NetAppExportPolicyRule == nil {
+	if o == nil || IsNil(o.NetAppExportPolicyRule) {
 		return nil, false
 	}
 	return o.NetAppExportPolicyRule, true
@@ -162,7 +166,7 @@ func (o *StorageNetAppExportPolicy) GetNetAppExportPolicyRuleOk() ([]StorageNetA
 
 // HasNetAppExportPolicyRule returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicy) HasNetAppExportPolicyRule() bool {
-	if o != nil && o.NetAppExportPolicyRule != nil {
+	if o != nil && IsNil(o.NetAppExportPolicyRule) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *StorageNetAppExportPolicy) SetNetAppExportPolicyRule(v []StorageNetAppE
 
 // GetPolicyId returns the PolicyId field value if set, zero value otherwise.
 func (o *StorageNetAppExportPolicy) GetPolicyId() int64 {
-	if o == nil || o.PolicyId == nil {
+	if o == nil || IsNil(o.PolicyId) {
 		var ret int64
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *StorageNetAppExportPolicy) GetPolicyId() int64 {
 // GetPolicyIdOk returns a tuple with the PolicyId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppExportPolicy) GetPolicyIdOk() (*int64, bool) {
-	if o == nil || o.PolicyId == nil {
+	if o == nil || IsNil(o.PolicyId) {
 		return nil, false
 	}
 	return o.PolicyId, true
@@ -194,7 +198,7 @@ func (o *StorageNetAppExportPolicy) GetPolicyIdOk() (*int64, bool) {
 
 // HasPolicyId returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicy) HasPolicyId() bool {
-	if o != nil && o.PolicyId != nil {
+	if o != nil && !IsNil(o.PolicyId) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *StorageNetAppExportPolicy) SetPolicyId(v int64) {
 
 // GetSvmName returns the SvmName field value if set, zero value otherwise.
 func (o *StorageNetAppExportPolicy) GetSvmName() string {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *StorageNetAppExportPolicy) GetSvmName() string {
 // GetSvmNameOk returns a tuple with the SvmName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageNetAppExportPolicy) GetSvmNameOk() (*string, bool) {
-	if o == nil || o.SvmName == nil {
+	if o == nil || IsNil(o.SvmName) {
 		return nil, false
 	}
 	return o.SvmName, true
@@ -226,7 +230,7 @@ func (o *StorageNetAppExportPolicy) GetSvmNameOk() (*string, bool) {
 
 // HasSvmName returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicy) HasSvmName() bool {
-	if o != nil && o.SvmName != nil {
+	if o != nil && !IsNil(o.SvmName) {
 		return true
 	}
 
@@ -238,113 +242,161 @@ func (o *StorageNetAppExportPolicy) SetSvmName(v string) {
 	o.SvmName = &v
 }
 
-// GetArray returns the Array field value if set, zero value otherwise.
+// GetArray returns the Array field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppExportPolicy) GetArray() StorageNetAppClusterRelationship {
-	if o == nil || o.Array == nil {
+	if o == nil || IsNil(o.Array.Get()) {
 		var ret StorageNetAppClusterRelationship
 		return ret
 	}
-	return *o.Array
+	return *o.Array.Get()
 }
 
 // GetArrayOk returns a tuple with the Array field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppExportPolicy) GetArrayOk() (*StorageNetAppClusterRelationship, bool) {
-	if o == nil || o.Array == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Array, true
+	return o.Array.Get(), o.Array.IsSet()
 }
 
 // HasArray returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicy) HasArray() bool {
-	if o != nil && o.Array != nil {
+	if o != nil && o.Array.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetArray gets a reference to the given StorageNetAppClusterRelationship and assigns it to the Array field.
+// SetArray gets a reference to the given NullableStorageNetAppClusterRelationship and assigns it to the Array field.
 func (o *StorageNetAppExportPolicy) SetArray(v StorageNetAppClusterRelationship) {
-	o.Array = &v
+	o.Array.Set(&v)
 }
 
-// GetTenant returns the Tenant field value if set, zero value otherwise.
+// SetArrayNil sets the value for Array to be an explicit nil
+func (o *StorageNetAppExportPolicy) SetArrayNil() {
+	o.Array.Set(nil)
+}
+
+// UnsetArray ensures that no value is present for Array, not even an explicit nil
+func (o *StorageNetAppExportPolicy) UnsetArray() {
+	o.Array.Unset()
+}
+
+// GetTenant returns the Tenant field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StorageNetAppExportPolicy) GetTenant() StorageNetAppStorageVmRelationship {
-	if o == nil || o.Tenant == nil {
+	if o == nil || IsNil(o.Tenant.Get()) {
 		var ret StorageNetAppStorageVmRelationship
 		return ret
 	}
-	return *o.Tenant
+	return *o.Tenant.Get()
 }
 
 // GetTenantOk returns a tuple with the Tenant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *StorageNetAppExportPolicy) GetTenantOk() (*StorageNetAppStorageVmRelationship, bool) {
-	if o == nil || o.Tenant == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tenant, true
+	return o.Tenant.Get(), o.Tenant.IsSet()
 }
 
 // HasTenant returns a boolean if a field has been set.
 func (o *StorageNetAppExportPolicy) HasTenant() bool {
-	if o != nil && o.Tenant != nil {
+	if o != nil && o.Tenant.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTenant gets a reference to the given StorageNetAppStorageVmRelationship and assigns it to the Tenant field.
+// SetTenant gets a reference to the given NullableStorageNetAppStorageVmRelationship and assigns it to the Tenant field.
 func (o *StorageNetAppExportPolicy) SetTenant(v StorageNetAppStorageVmRelationship) {
-	o.Tenant = &v
+	o.Tenant.Set(&v)
+}
+
+// SetTenantNil sets the value for Tenant to be an explicit nil
+func (o *StorageNetAppExportPolicy) SetTenantNil() {
+	o.Tenant.Set(nil)
+}
+
+// UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
+func (o *StorageNetAppExportPolicy) UnsetTenant() {
+	o.Tenant.Unset()
 }
 
 func (o StorageNetAppExportPolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StorageNetAppExportPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedStorageBaseNfsExport, errStorageBaseNfsExport := json.Marshal(o.StorageBaseNfsExport)
 	if errStorageBaseNfsExport != nil {
-		return []byte{}, errStorageBaseNfsExport
+		return map[string]interface{}{}, errStorageBaseNfsExport
 	}
 	errStorageBaseNfsExport = json.Unmarshal([]byte(serializedStorageBaseNfsExport), &toSerialize)
 	if errStorageBaseNfsExport != nil {
-		return []byte{}, errStorageBaseNfsExport
+		return map[string]interface{}{}, errStorageBaseNfsExport
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClusterUuid != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClusterUuid) {
 		toSerialize["ClusterUuid"] = o.ClusterUuid
 	}
 	if o.NetAppExportPolicyRule != nil {
 		toSerialize["NetAppExportPolicyRule"] = o.NetAppExportPolicyRule
 	}
-	if o.PolicyId != nil {
+	if !IsNil(o.PolicyId) {
 		toSerialize["PolicyId"] = o.PolicyId
 	}
-	if o.SvmName != nil {
+	if !IsNil(o.SvmName) {
 		toSerialize["SvmName"] = o.SvmName
 	}
-	if o.Array != nil {
-		toSerialize["Array"] = o.Array
+	if o.Array.IsSet() {
+		toSerialize["Array"] = o.Array.Get()
 	}
-	if o.Tenant != nil {
-		toSerialize["Tenant"] = o.Tenant
+	if o.Tenant.IsSet() {
+		toSerialize["Tenant"] = o.Tenant.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *StorageNetAppExportPolicy) UnmarshalJSON(bytes []byte) (err error) {
+func (o *StorageNetAppExportPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type StorageNetAppExportPolicyWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -356,14 +408,14 @@ func (o *StorageNetAppExportPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// ID for the Export Policy.
 		PolicyId *int64 `json:"PolicyId,omitempty"`
 		// The storage virtual machine name for the export policy.
-		SvmName *string                             `json:"SvmName,omitempty"`
-		Array   *StorageNetAppClusterRelationship   `json:"Array,omitempty"`
-		Tenant  *StorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
+		SvmName *string                                    `json:"SvmName,omitempty"`
+		Array   NullableStorageNetAppClusterRelationship   `json:"Array,omitempty"`
+		Tenant  NullableStorageNetAppStorageVmRelationship `json:"Tenant,omitempty"`
 	}
 
 	varStorageNetAppExportPolicyWithoutEmbeddedStruct := StorageNetAppExportPolicyWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppExportPolicyWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varStorageNetAppExportPolicyWithoutEmbeddedStruct)
 	if err == nil {
 		varStorageNetAppExportPolicy := _StorageNetAppExportPolicy{}
 		varStorageNetAppExportPolicy.ClassId = varStorageNetAppExportPolicyWithoutEmbeddedStruct.ClassId
@@ -381,7 +433,7 @@ func (o *StorageNetAppExportPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	varStorageNetAppExportPolicy := _StorageNetAppExportPolicy{}
 
-	err = json.Unmarshal(bytes, &varStorageNetAppExportPolicy)
+	err = json.Unmarshal(data, &varStorageNetAppExportPolicy)
 	if err == nil {
 		o.StorageBaseNfsExport = varStorageNetAppExportPolicy.StorageBaseNfsExport
 	} else {
@@ -390,7 +442,7 @@ func (o *StorageNetAppExportPolicy) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterUuid")

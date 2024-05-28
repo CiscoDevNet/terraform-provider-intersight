@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the KubernetesNodeGroupProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesNodeGroupProfile{}
 
 // KubernetesNodeGroupProfile A configuration profile for a node group in a Kubernetes cluster.
 type KubernetesNodeGroupProfile struct {
@@ -35,14 +39,14 @@ type KubernetesNodeGroupProfile struct {
 	// Minimum number of available nodes this node group can scale down to during repair, replacement or upgrade operations.
 	Minsize *int64 `json:"Minsize,omitempty"`
 	// The node type ControlPlane, Worker or ControlPlaneWorker. * `Worker` - Node will be marked as a worker node. * `ControlPlane` - Node will be marked as a control plane node. * `ControlPlaneWorker` - Node will be both a controle plane and a worker.
-	NodeType       *string                                           `json:"NodeType,omitempty"`
-	Taints         []KubernetesNodeGroupTaint                        `json:"Taints,omitempty"`
-	ClusterProfile *KubernetesClusterProfileRelationship             `json:"ClusterProfile,omitempty"`
-	InfraProvider  *KubernetesBaseInfrastructureProviderRelationship `json:"InfraProvider,omitempty"`
+	NodeType       *string                                                  `json:"NodeType,omitempty"`
+	Taints         []KubernetesNodeGroupTaint                               `json:"Taints,omitempty"`
+	ClusterProfile NullableKubernetesClusterProfileRelationship             `json:"ClusterProfile,omitempty"`
+	InfraProvider  NullableKubernetesBaseInfrastructureProviderRelationship `json:"InfraProvider,omitempty"`
 	// An array of relationships to ippoolPool resources.
 	// Deprecated
-	IpPools           []IppoolPoolRelationship             `json:"IpPools,omitempty"`
-	KubernetesVersion *KubernetesVersionPolicyRelationship `json:"KubernetesVersion,omitempty"`
+	IpPools           []IppoolPoolRelationship                    `json:"IpPools,omitempty"`
+	KubernetesVersion NullableKubernetesVersionPolicyRelationship `json:"KubernetesVersion,omitempty"`
 	// An array of relationships to kubernetesNodeProfile resources.
 	Nodes                []KubernetesNodeProfileRelationship `json:"Nodes,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -135,7 +139,7 @@ func (o *KubernetesNodeGroupProfile) SetObjectType(v string) {
 
 // GetCurrentsize returns the Currentsize field value if set, zero value otherwise.
 func (o *KubernetesNodeGroupProfile) GetCurrentsize() int64 {
-	if o == nil || o.Currentsize == nil {
+	if o == nil || IsNil(o.Currentsize) {
 		var ret int64
 		return ret
 	}
@@ -145,7 +149,7 @@ func (o *KubernetesNodeGroupProfile) GetCurrentsize() int64 {
 // GetCurrentsizeOk returns a tuple with the Currentsize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeGroupProfile) GetCurrentsizeOk() (*int64, bool) {
-	if o == nil || o.Currentsize == nil {
+	if o == nil || IsNil(o.Currentsize) {
 		return nil, false
 	}
 	return o.Currentsize, true
@@ -153,7 +157,7 @@ func (o *KubernetesNodeGroupProfile) GetCurrentsizeOk() (*int64, bool) {
 
 // HasCurrentsize returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasCurrentsize() bool {
-	if o != nil && o.Currentsize != nil {
+	if o != nil && !IsNil(o.Currentsize) {
 		return true
 	}
 
@@ -167,7 +171,7 @@ func (o *KubernetesNodeGroupProfile) SetCurrentsize(v int64) {
 
 // GetDesiredsize returns the Desiredsize field value if set, zero value otherwise.
 func (o *KubernetesNodeGroupProfile) GetDesiredsize() int64 {
-	if o == nil || o.Desiredsize == nil {
+	if o == nil || IsNil(o.Desiredsize) {
 		var ret int64
 		return ret
 	}
@@ -177,7 +181,7 @@ func (o *KubernetesNodeGroupProfile) GetDesiredsize() int64 {
 // GetDesiredsizeOk returns a tuple with the Desiredsize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeGroupProfile) GetDesiredsizeOk() (*int64, bool) {
-	if o == nil || o.Desiredsize == nil {
+	if o == nil || IsNil(o.Desiredsize) {
 		return nil, false
 	}
 	return o.Desiredsize, true
@@ -185,7 +189,7 @@ func (o *KubernetesNodeGroupProfile) GetDesiredsizeOk() (*int64, bool) {
 
 // HasDesiredsize returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasDesiredsize() bool {
-	if o != nil && o.Desiredsize != nil {
+	if o != nil && !IsNil(o.Desiredsize) {
 		return true
 	}
 
@@ -210,7 +214,7 @@ func (o *KubernetesNodeGroupProfile) GetGpuConfig() []InfraBaseGpuConfiguration 
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNodeGroupProfile) GetGpuConfigOk() ([]InfraBaseGpuConfiguration, bool) {
-	if o == nil || o.GpuConfig == nil {
+	if o == nil || IsNil(o.GpuConfig) {
 		return nil, false
 	}
 	return o.GpuConfig, true
@@ -218,7 +222,7 @@ func (o *KubernetesNodeGroupProfile) GetGpuConfigOk() ([]InfraBaseGpuConfigurati
 
 // HasGpuConfig returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasGpuConfig() bool {
-	if o != nil && o.GpuConfig != nil {
+	if o != nil && IsNil(o.GpuConfig) {
 		return true
 	}
 
@@ -243,7 +247,7 @@ func (o *KubernetesNodeGroupProfile) GetLabels() []KubernetesNodeGroupLabel {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNodeGroupProfile) GetLabelsOk() ([]KubernetesNodeGroupLabel, bool) {
-	if o == nil || o.Labels == nil {
+	if o == nil || IsNil(o.Labels) {
 		return nil, false
 	}
 	return o.Labels, true
@@ -251,7 +255,7 @@ func (o *KubernetesNodeGroupProfile) GetLabelsOk() ([]KubernetesNodeGroupLabel, 
 
 // HasLabels returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasLabels() bool {
-	if o != nil && o.Labels != nil {
+	if o != nil && IsNil(o.Labels) {
 		return true
 	}
 
@@ -265,7 +269,7 @@ func (o *KubernetesNodeGroupProfile) SetLabels(v []KubernetesNodeGroupLabel) {
 
 // GetMaxsize returns the Maxsize field value if set, zero value otherwise.
 func (o *KubernetesNodeGroupProfile) GetMaxsize() int64 {
-	if o == nil || o.Maxsize == nil {
+	if o == nil || IsNil(o.Maxsize) {
 		var ret int64
 		return ret
 	}
@@ -275,7 +279,7 @@ func (o *KubernetesNodeGroupProfile) GetMaxsize() int64 {
 // GetMaxsizeOk returns a tuple with the Maxsize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeGroupProfile) GetMaxsizeOk() (*int64, bool) {
-	if o == nil || o.Maxsize == nil {
+	if o == nil || IsNil(o.Maxsize) {
 		return nil, false
 	}
 	return o.Maxsize, true
@@ -283,7 +287,7 @@ func (o *KubernetesNodeGroupProfile) GetMaxsizeOk() (*int64, bool) {
 
 // HasMaxsize returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasMaxsize() bool {
-	if o != nil && o.Maxsize != nil {
+	if o != nil && !IsNil(o.Maxsize) {
 		return true
 	}
 
@@ -297,7 +301,7 @@ func (o *KubernetesNodeGroupProfile) SetMaxsize(v int64) {
 
 // GetMinsize returns the Minsize field value if set, zero value otherwise.
 func (o *KubernetesNodeGroupProfile) GetMinsize() int64 {
-	if o == nil || o.Minsize == nil {
+	if o == nil || IsNil(o.Minsize) {
 		var ret int64
 		return ret
 	}
@@ -307,7 +311,7 @@ func (o *KubernetesNodeGroupProfile) GetMinsize() int64 {
 // GetMinsizeOk returns a tuple with the Minsize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeGroupProfile) GetMinsizeOk() (*int64, bool) {
-	if o == nil || o.Minsize == nil {
+	if o == nil || IsNil(o.Minsize) {
 		return nil, false
 	}
 	return o.Minsize, true
@@ -315,7 +319,7 @@ func (o *KubernetesNodeGroupProfile) GetMinsizeOk() (*int64, bool) {
 
 // HasMinsize returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasMinsize() bool {
-	if o != nil && o.Minsize != nil {
+	if o != nil && !IsNil(o.Minsize) {
 		return true
 	}
 
@@ -329,7 +333,7 @@ func (o *KubernetesNodeGroupProfile) SetMinsize(v int64) {
 
 // GetNodeType returns the NodeType field value if set, zero value otherwise.
 func (o *KubernetesNodeGroupProfile) GetNodeType() string {
-	if o == nil || o.NodeType == nil {
+	if o == nil || IsNil(o.NodeType) {
 		var ret string
 		return ret
 	}
@@ -339,7 +343,7 @@ func (o *KubernetesNodeGroupProfile) GetNodeType() string {
 // GetNodeTypeOk returns a tuple with the NodeType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesNodeGroupProfile) GetNodeTypeOk() (*string, bool) {
-	if o == nil || o.NodeType == nil {
+	if o == nil || IsNil(o.NodeType) {
 		return nil, false
 	}
 	return o.NodeType, true
@@ -347,7 +351,7 @@ func (o *KubernetesNodeGroupProfile) GetNodeTypeOk() (*string, bool) {
 
 // HasNodeType returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasNodeType() bool {
-	if o != nil && o.NodeType != nil {
+	if o != nil && !IsNil(o.NodeType) {
 		return true
 	}
 
@@ -372,7 +376,7 @@ func (o *KubernetesNodeGroupProfile) GetTaints() []KubernetesNodeGroupTaint {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNodeGroupProfile) GetTaintsOk() ([]KubernetesNodeGroupTaint, bool) {
-	if o == nil || o.Taints == nil {
+	if o == nil || IsNil(o.Taints) {
 		return nil, false
 	}
 	return o.Taints, true
@@ -380,7 +384,7 @@ func (o *KubernetesNodeGroupProfile) GetTaintsOk() ([]KubernetesNodeGroupTaint, 
 
 // HasTaints returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasTaints() bool {
-	if o != nil && o.Taints != nil {
+	if o != nil && IsNil(o.Taints) {
 		return true
 	}
 
@@ -392,68 +396,90 @@ func (o *KubernetesNodeGroupProfile) SetTaints(v []KubernetesNodeGroupTaint) {
 	o.Taints = v
 }
 
-// GetClusterProfile returns the ClusterProfile field value if set, zero value otherwise.
+// GetClusterProfile returns the ClusterProfile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesNodeGroupProfile) GetClusterProfile() KubernetesClusterProfileRelationship {
-	if o == nil || o.ClusterProfile == nil {
+	if o == nil || IsNil(o.ClusterProfile.Get()) {
 		var ret KubernetesClusterProfileRelationship
 		return ret
 	}
-	return *o.ClusterProfile
+	return *o.ClusterProfile.Get()
 }
 
 // GetClusterProfileOk returns a tuple with the ClusterProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNodeGroupProfile) GetClusterProfileOk() (*KubernetesClusterProfileRelationship, bool) {
-	if o == nil || o.ClusterProfile == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClusterProfile, true
+	return o.ClusterProfile.Get(), o.ClusterProfile.IsSet()
 }
 
 // HasClusterProfile returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasClusterProfile() bool {
-	if o != nil && o.ClusterProfile != nil {
+	if o != nil && o.ClusterProfile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetClusterProfile gets a reference to the given KubernetesClusterProfileRelationship and assigns it to the ClusterProfile field.
+// SetClusterProfile gets a reference to the given NullableKubernetesClusterProfileRelationship and assigns it to the ClusterProfile field.
 func (o *KubernetesNodeGroupProfile) SetClusterProfile(v KubernetesClusterProfileRelationship) {
-	o.ClusterProfile = &v
+	o.ClusterProfile.Set(&v)
 }
 
-// GetInfraProvider returns the InfraProvider field value if set, zero value otherwise.
+// SetClusterProfileNil sets the value for ClusterProfile to be an explicit nil
+func (o *KubernetesNodeGroupProfile) SetClusterProfileNil() {
+	o.ClusterProfile.Set(nil)
+}
+
+// UnsetClusterProfile ensures that no value is present for ClusterProfile, not even an explicit nil
+func (o *KubernetesNodeGroupProfile) UnsetClusterProfile() {
+	o.ClusterProfile.Unset()
+}
+
+// GetInfraProvider returns the InfraProvider field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesNodeGroupProfile) GetInfraProvider() KubernetesBaseInfrastructureProviderRelationship {
-	if o == nil || o.InfraProvider == nil {
+	if o == nil || IsNil(o.InfraProvider.Get()) {
 		var ret KubernetesBaseInfrastructureProviderRelationship
 		return ret
 	}
-	return *o.InfraProvider
+	return *o.InfraProvider.Get()
 }
 
 // GetInfraProviderOk returns a tuple with the InfraProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNodeGroupProfile) GetInfraProviderOk() (*KubernetesBaseInfrastructureProviderRelationship, bool) {
-	if o == nil || o.InfraProvider == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InfraProvider, true
+	return o.InfraProvider.Get(), o.InfraProvider.IsSet()
 }
 
 // HasInfraProvider returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasInfraProvider() bool {
-	if o != nil && o.InfraProvider != nil {
+	if o != nil && o.InfraProvider.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInfraProvider gets a reference to the given KubernetesBaseInfrastructureProviderRelationship and assigns it to the InfraProvider field.
+// SetInfraProvider gets a reference to the given NullableKubernetesBaseInfrastructureProviderRelationship and assigns it to the InfraProvider field.
 func (o *KubernetesNodeGroupProfile) SetInfraProvider(v KubernetesBaseInfrastructureProviderRelationship) {
-	o.InfraProvider = &v
+	o.InfraProvider.Set(&v)
+}
+
+// SetInfraProviderNil sets the value for InfraProvider to be an explicit nil
+func (o *KubernetesNodeGroupProfile) SetInfraProviderNil() {
+	o.InfraProvider.Set(nil)
+}
+
+// UnsetInfraProvider ensures that no value is present for InfraProvider, not even an explicit nil
+func (o *KubernetesNodeGroupProfile) UnsetInfraProvider() {
+	o.InfraProvider.Unset()
 }
 
 // GetIpPools returns the IpPools field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -471,7 +497,7 @@ func (o *KubernetesNodeGroupProfile) GetIpPools() []IppoolPoolRelationship {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 // Deprecated
 func (o *KubernetesNodeGroupProfile) GetIpPoolsOk() ([]IppoolPoolRelationship, bool) {
-	if o == nil || o.IpPools == nil {
+	if o == nil || IsNil(o.IpPools) {
 		return nil, false
 	}
 	return o.IpPools, true
@@ -479,7 +505,7 @@ func (o *KubernetesNodeGroupProfile) GetIpPoolsOk() ([]IppoolPoolRelationship, b
 
 // HasIpPools returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasIpPools() bool {
-	if o != nil && o.IpPools != nil {
+	if o != nil && IsNil(o.IpPools) {
 		return true
 	}
 
@@ -492,36 +518,47 @@ func (o *KubernetesNodeGroupProfile) SetIpPools(v []IppoolPoolRelationship) {
 	o.IpPools = v
 }
 
-// GetKubernetesVersion returns the KubernetesVersion field value if set, zero value otherwise.
+// GetKubernetesVersion returns the KubernetesVersion field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesNodeGroupProfile) GetKubernetesVersion() KubernetesVersionPolicyRelationship {
-	if o == nil || o.KubernetesVersion == nil {
+	if o == nil || IsNil(o.KubernetesVersion.Get()) {
 		var ret KubernetesVersionPolicyRelationship
 		return ret
 	}
-	return *o.KubernetesVersion
+	return *o.KubernetesVersion.Get()
 }
 
 // GetKubernetesVersionOk returns a tuple with the KubernetesVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNodeGroupProfile) GetKubernetesVersionOk() (*KubernetesVersionPolicyRelationship, bool) {
-	if o == nil || o.KubernetesVersion == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.KubernetesVersion, true
+	return o.KubernetesVersion.Get(), o.KubernetesVersion.IsSet()
 }
 
 // HasKubernetesVersion returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasKubernetesVersion() bool {
-	if o != nil && o.KubernetesVersion != nil {
+	if o != nil && o.KubernetesVersion.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetKubernetesVersion gets a reference to the given KubernetesVersionPolicyRelationship and assigns it to the KubernetesVersion field.
+// SetKubernetesVersion gets a reference to the given NullableKubernetesVersionPolicyRelationship and assigns it to the KubernetesVersion field.
 func (o *KubernetesNodeGroupProfile) SetKubernetesVersion(v KubernetesVersionPolicyRelationship) {
-	o.KubernetesVersion = &v
+	o.KubernetesVersion.Set(&v)
+}
+
+// SetKubernetesVersionNil sets the value for KubernetesVersion to be an explicit nil
+func (o *KubernetesNodeGroupProfile) SetKubernetesVersionNil() {
+	o.KubernetesVersion.Set(nil)
+}
+
+// UnsetKubernetesVersion ensures that no value is present for KubernetesVersion, not even an explicit nil
+func (o *KubernetesNodeGroupProfile) UnsetKubernetesVersion() {
+	o.KubernetesVersion.Unset()
 }
 
 // GetNodes returns the Nodes field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -537,7 +574,7 @@ func (o *KubernetesNodeGroupProfile) GetNodes() []KubernetesNodeProfileRelations
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *KubernetesNodeGroupProfile) GetNodesOk() ([]KubernetesNodeProfileRelationship, bool) {
-	if o == nil || o.Nodes == nil {
+	if o == nil || IsNil(o.Nodes) {
 		return nil, false
 	}
 	return o.Nodes, true
@@ -545,7 +582,7 @@ func (o *KubernetesNodeGroupProfile) GetNodesOk() ([]KubernetesNodeProfileRelati
 
 // HasNodes returns a boolean if a field has been set.
 func (o *KubernetesNodeGroupProfile) HasNodes() bool {
-	if o != nil && o.Nodes != nil {
+	if o != nil && IsNil(o.Nodes) {
 		return true
 	}
 
@@ -558,25 +595,29 @@ func (o *KubernetesNodeGroupProfile) SetNodes(v []KubernetesNodeProfileRelations
 }
 
 func (o KubernetesNodeGroupProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesNodeGroupProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedPolicyAbstractConfigProfile, errPolicyAbstractConfigProfile := json.Marshal(o.PolicyAbstractConfigProfile)
 	if errPolicyAbstractConfigProfile != nil {
-		return []byte{}, errPolicyAbstractConfigProfile
+		return map[string]interface{}{}, errPolicyAbstractConfigProfile
 	}
 	errPolicyAbstractConfigProfile = json.Unmarshal([]byte(serializedPolicyAbstractConfigProfile), &toSerialize)
 	if errPolicyAbstractConfigProfile != nil {
-		return []byte{}, errPolicyAbstractConfigProfile
+		return map[string]interface{}{}, errPolicyAbstractConfigProfile
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Currentsize != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Currentsize) {
 		toSerialize["Currentsize"] = o.Currentsize
 	}
-	if o.Desiredsize != nil {
+	if !IsNil(o.Desiredsize) {
 		toSerialize["Desiredsize"] = o.Desiredsize
 	}
 	if o.GpuConfig != nil {
@@ -585,29 +626,29 @@ func (o KubernetesNodeGroupProfile) MarshalJSON() ([]byte, error) {
 	if o.Labels != nil {
 		toSerialize["Labels"] = o.Labels
 	}
-	if o.Maxsize != nil {
+	if !IsNil(o.Maxsize) {
 		toSerialize["Maxsize"] = o.Maxsize
 	}
-	if o.Minsize != nil {
+	if !IsNil(o.Minsize) {
 		toSerialize["Minsize"] = o.Minsize
 	}
-	if o.NodeType != nil {
+	if !IsNil(o.NodeType) {
 		toSerialize["NodeType"] = o.NodeType
 	}
 	if o.Taints != nil {
 		toSerialize["Taints"] = o.Taints
 	}
-	if o.ClusterProfile != nil {
-		toSerialize["ClusterProfile"] = o.ClusterProfile
+	if o.ClusterProfile.IsSet() {
+		toSerialize["ClusterProfile"] = o.ClusterProfile.Get()
 	}
-	if o.InfraProvider != nil {
-		toSerialize["InfraProvider"] = o.InfraProvider
+	if o.InfraProvider.IsSet() {
+		toSerialize["InfraProvider"] = o.InfraProvider.Get()
 	}
 	if o.IpPools != nil {
 		toSerialize["IpPools"] = o.IpPools
 	}
-	if o.KubernetesVersion != nil {
-		toSerialize["KubernetesVersion"] = o.KubernetesVersion
+	if o.KubernetesVersion.IsSet() {
+		toSerialize["KubernetesVersion"] = o.KubernetesVersion.Get()
 	}
 	if o.Nodes != nil {
 		toSerialize["Nodes"] = o.Nodes
@@ -617,10 +658,32 @@ func (o KubernetesNodeGroupProfile) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *KubernetesNodeGroupProfile) UnmarshalJSON(bytes []byte) (err error) {
+func (o *KubernetesNodeGroupProfile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type KubernetesNodeGroupProfileWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -637,21 +700,21 @@ func (o *KubernetesNodeGroupProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// Minimum number of available nodes this node group can scale down to during repair, replacement or upgrade operations.
 		Minsize *int64 `json:"Minsize,omitempty"`
 		// The node type ControlPlane, Worker or ControlPlaneWorker. * `Worker` - Node will be marked as a worker node. * `ControlPlane` - Node will be marked as a control plane node. * `ControlPlaneWorker` - Node will be both a controle plane and a worker.
-		NodeType       *string                                           `json:"NodeType,omitempty"`
-		Taints         []KubernetesNodeGroupTaint                        `json:"Taints,omitempty"`
-		ClusterProfile *KubernetesClusterProfileRelationship             `json:"ClusterProfile,omitempty"`
-		InfraProvider  *KubernetesBaseInfrastructureProviderRelationship `json:"InfraProvider,omitempty"`
+		NodeType       *string                                                  `json:"NodeType,omitempty"`
+		Taints         []KubernetesNodeGroupTaint                               `json:"Taints,omitempty"`
+		ClusterProfile NullableKubernetesClusterProfileRelationship             `json:"ClusterProfile,omitempty"`
+		InfraProvider  NullableKubernetesBaseInfrastructureProviderRelationship `json:"InfraProvider,omitempty"`
 		// An array of relationships to ippoolPool resources.
 		// Deprecated
-		IpPools           []IppoolPoolRelationship             `json:"IpPools,omitempty"`
-		KubernetesVersion *KubernetesVersionPolicyRelationship `json:"KubernetesVersion,omitempty"`
+		IpPools           []IppoolPoolRelationship                    `json:"IpPools,omitempty"`
+		KubernetesVersion NullableKubernetesVersionPolicyRelationship `json:"KubernetesVersion,omitempty"`
 		// An array of relationships to kubernetesNodeProfile resources.
 		Nodes []KubernetesNodeProfileRelationship `json:"Nodes,omitempty"`
 	}
 
 	varKubernetesNodeGroupProfileWithoutEmbeddedStruct := KubernetesNodeGroupProfileWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varKubernetesNodeGroupProfileWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varKubernetesNodeGroupProfileWithoutEmbeddedStruct)
 	if err == nil {
 		varKubernetesNodeGroupProfile := _KubernetesNodeGroupProfile{}
 		varKubernetesNodeGroupProfile.ClassId = varKubernetesNodeGroupProfileWithoutEmbeddedStruct.ClassId
@@ -676,7 +739,7 @@ func (o *KubernetesNodeGroupProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	varKubernetesNodeGroupProfile := _KubernetesNodeGroupProfile{}
 
-	err = json.Unmarshal(bytes, &varKubernetesNodeGroupProfile)
+	err = json.Unmarshal(data, &varKubernetesNodeGroupProfile)
 	if err == nil {
 		o.PolicyAbstractConfigProfile = varKubernetesNodeGroupProfile.PolicyAbstractConfigProfile
 	} else {
@@ -685,7 +748,7 @@ func (o *KubernetesNodeGroupProfile) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Currentsize")

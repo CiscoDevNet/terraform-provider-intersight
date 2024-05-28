@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **Sources** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **Targets** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **WorkflowNameSuffix** | Pointer to **string** | A user-friendly short name to identify the workflow. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), comma or an underscore (_). | [optional] 
-**AsyncResult** | Pointer to [**BulkResultRelationship**](BulkResultRelationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**AsyncResult** | Pointer to [**NullableBulkResultRelationship**](BulkResultRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -263,6 +263,16 @@ SetAsyncResult sets AsyncResult field to given value.
 
 HasAsyncResult returns a boolean if a field has been set.
 
+### SetAsyncResultNil
+
+`func (o *BulkMoCloner) SetAsyncResultNil(b bool)`
+
+ SetAsyncResultNil sets the value for AsyncResult to be an explicit nil
+
+### UnsetAsyncResult
+`func (o *BulkMoCloner) UnsetAsyncResult()`
+
+UnsetAsyncResult ensures that no value is present for AsyncResult, not even an explicit nil
 ### GetOrganization
 
 `func (o *BulkMoCloner) GetOrganization() OrganizationOrganizationRelationship`
@@ -288,6 +298,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *BulkMoCloner) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *BulkMoCloner) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

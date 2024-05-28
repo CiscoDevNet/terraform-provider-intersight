@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the HyperflexVcenterConfiguration type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HyperflexVcenterConfiguration{}
 
 // HyperflexVcenterConfiguration The vCenter configuration of the HyperFlex cluster.
 type HyperflexVcenterConfiguration struct {
@@ -112,7 +116,7 @@ func (o *HyperflexVcenterConfiguration) SetObjectType(v string) {
 
 // GetClusterId returns the ClusterId field value if set, zero value otherwise.
 func (o *HyperflexVcenterConfiguration) GetClusterId() string {
-	if o == nil || o.ClusterId == nil {
+	if o == nil || IsNil(o.ClusterId) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *HyperflexVcenterConfiguration) GetClusterId() string {
 // GetClusterIdOk returns a tuple with the ClusterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVcenterConfiguration) GetClusterIdOk() (*string, bool) {
-	if o == nil || o.ClusterId == nil {
+	if o == nil || IsNil(o.ClusterId) {
 		return nil, false
 	}
 	return o.ClusterId, true
@@ -130,7 +134,7 @@ func (o *HyperflexVcenterConfiguration) GetClusterIdOk() (*string, bool) {
 
 // HasClusterId returns a boolean if a field has been set.
 func (o *HyperflexVcenterConfiguration) HasClusterId() bool {
-	if o != nil && o.ClusterId != nil {
+	if o != nil && !IsNil(o.ClusterId) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *HyperflexVcenterConfiguration) SetClusterId(v string) {
 
 // GetClusterName returns the ClusterName field value if set, zero value otherwise.
 func (o *HyperflexVcenterConfiguration) GetClusterName() string {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *HyperflexVcenterConfiguration) GetClusterName() string {
 // GetClusterNameOk returns a tuple with the ClusterName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVcenterConfiguration) GetClusterNameOk() (*string, bool) {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		return nil, false
 	}
 	return o.ClusterName, true
@@ -162,7 +166,7 @@ func (o *HyperflexVcenterConfiguration) GetClusterNameOk() (*string, bool) {
 
 // HasClusterName returns a boolean if a field has been set.
 func (o *HyperflexVcenterConfiguration) HasClusterName() bool {
-	if o != nil && o.ClusterName != nil {
+	if o != nil && !IsNil(o.ClusterName) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *HyperflexVcenterConfiguration) SetClusterName(v string) {
 
 // GetDatacenterId returns the DatacenterId field value if set, zero value otherwise.
 func (o *HyperflexVcenterConfiguration) GetDatacenterId() string {
-	if o == nil || o.DatacenterId == nil {
+	if o == nil || IsNil(o.DatacenterId) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *HyperflexVcenterConfiguration) GetDatacenterId() string {
 // GetDatacenterIdOk returns a tuple with the DatacenterId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVcenterConfiguration) GetDatacenterIdOk() (*string, bool) {
-	if o == nil || o.DatacenterId == nil {
+	if o == nil || IsNil(o.DatacenterId) {
 		return nil, false
 	}
 	return o.DatacenterId, true
@@ -194,7 +198,7 @@ func (o *HyperflexVcenterConfiguration) GetDatacenterIdOk() (*string, bool) {
 
 // HasDatacenterId returns a boolean if a field has been set.
 func (o *HyperflexVcenterConfiguration) HasDatacenterId() bool {
-	if o != nil && o.DatacenterId != nil {
+	if o != nil && !IsNil(o.DatacenterId) {
 		return true
 	}
 
@@ -208,7 +212,7 @@ func (o *HyperflexVcenterConfiguration) SetDatacenterId(v string) {
 
 // GetDatacenterName returns the DatacenterName field value if set, zero value otherwise.
 func (o *HyperflexVcenterConfiguration) GetDatacenterName() string {
-	if o == nil || o.DatacenterName == nil {
+	if o == nil || IsNil(o.DatacenterName) {
 		var ret string
 		return ret
 	}
@@ -218,7 +222,7 @@ func (o *HyperflexVcenterConfiguration) GetDatacenterName() string {
 // GetDatacenterNameOk returns a tuple with the DatacenterName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVcenterConfiguration) GetDatacenterNameOk() (*string, bool) {
-	if o == nil || o.DatacenterName == nil {
+	if o == nil || IsNil(o.DatacenterName) {
 		return nil, false
 	}
 	return o.DatacenterName, true
@@ -226,7 +230,7 @@ func (o *HyperflexVcenterConfiguration) GetDatacenterNameOk() (*string, bool) {
 
 // HasDatacenterName returns a boolean if a field has been set.
 func (o *HyperflexVcenterConfiguration) HasDatacenterName() bool {
-	if o != nil && o.DatacenterName != nil {
+	if o != nil && !IsNil(o.DatacenterName) {
 		return true
 	}
 
@@ -240,7 +244,7 @@ func (o *HyperflexVcenterConfiguration) SetDatacenterName(v string) {
 
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *HyperflexVcenterConfiguration) GetUrl() string {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *HyperflexVcenterConfiguration) GetUrl() string {
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HyperflexVcenterConfiguration) GetUrlOk() (*string, bool) {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
 	return o.Url, true
@@ -258,7 +262,7 @@ func (o *HyperflexVcenterConfiguration) GetUrlOk() (*string, bool) {
 
 // HasUrl returns a boolean if a field has been set.
 func (o *HyperflexVcenterConfiguration) HasUrl() bool {
-	if o != nil && o.Url != nil {
+	if o != nil && !IsNil(o.Url) {
 		return true
 	}
 
@@ -271,34 +275,38 @@ func (o *HyperflexVcenterConfiguration) SetUrl(v string) {
 }
 
 func (o HyperflexVcenterConfiguration) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HyperflexVcenterConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.ClusterId != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.ClusterId) {
 		toSerialize["ClusterId"] = o.ClusterId
 	}
-	if o.ClusterName != nil {
+	if !IsNil(o.ClusterName) {
 		toSerialize["ClusterName"] = o.ClusterName
 	}
-	if o.DatacenterId != nil {
+	if !IsNil(o.DatacenterId) {
 		toSerialize["DatacenterId"] = o.DatacenterId
 	}
-	if o.DatacenterName != nil {
+	if !IsNil(o.DatacenterName) {
 		toSerialize["DatacenterName"] = o.DatacenterName
 	}
-	if o.Url != nil {
+	if !IsNil(o.Url) {
 		toSerialize["Url"] = o.Url
 	}
 
@@ -306,10 +314,32 @@ func (o HyperflexVcenterConfiguration) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *HyperflexVcenterConfiguration) UnmarshalJSON(bytes []byte) (err error) {
+func (o *HyperflexVcenterConfiguration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type HyperflexVcenterConfigurationWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -329,7 +359,7 @@ func (o *HyperflexVcenterConfiguration) UnmarshalJSON(bytes []byte) (err error) 
 
 	varHyperflexVcenterConfigurationWithoutEmbeddedStruct := HyperflexVcenterConfigurationWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varHyperflexVcenterConfigurationWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varHyperflexVcenterConfigurationWithoutEmbeddedStruct)
 	if err == nil {
 		varHyperflexVcenterConfiguration := _HyperflexVcenterConfiguration{}
 		varHyperflexVcenterConfiguration.ClassId = varHyperflexVcenterConfigurationWithoutEmbeddedStruct.ClassId
@@ -346,7 +376,7 @@ func (o *HyperflexVcenterConfiguration) UnmarshalJSON(bytes []byte) (err error) 
 
 	varHyperflexVcenterConfiguration := _HyperflexVcenterConfiguration{}
 
-	err = json.Unmarshal(bytes, &varHyperflexVcenterConfiguration)
+	err = json.Unmarshal(data, &varHyperflexVcenterConfiguration)
 	if err == nil {
 		o.MoBaseComplexType = varHyperflexVcenterConfiguration.MoBaseComplexType
 	} else {
@@ -355,7 +385,7 @@ func (o *HyperflexVcenterConfiguration) UnmarshalJSON(bytes []byte) (err error) 
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterId")

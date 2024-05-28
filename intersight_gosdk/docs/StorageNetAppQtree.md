@@ -15,8 +15,8 @@ Name | Type | Description | Notes
 **SvmName** | Pointer to **string** | The storage virtual machine name for the qtree. | [optional] [readonly] 
 **VolumeName** | Pointer to **string** | The parent volume name for the qtree. | [optional] [readonly] 
 **VolumeUuid** | Pointer to **string** | NetApp Volume uuid, unique identifier for the NetApp volume. | [optional] [readonly] 
-**StorageContainer** | Pointer to [**StorageNetAppVolumeRelationship**](StorageNetAppVolumeRelationship.md) |  | [optional] 
-**Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
+**StorageContainer** | Pointer to [**NullableStorageNetAppVolumeRelationship**](StorageNetAppVolumeRelationship.md) |  | [optional] 
+**Tenant** | Pointer to [**NullableStorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -327,6 +327,16 @@ SetStorageContainer sets StorageContainer field to given value.
 
 HasStorageContainer returns a boolean if a field has been set.
 
+### SetStorageContainerNil
+
+`func (o *StorageNetAppQtree) SetStorageContainerNil(b bool)`
+
+ SetStorageContainerNil sets the value for StorageContainer to be an explicit nil
+
+### UnsetStorageContainer
+`func (o *StorageNetAppQtree) UnsetStorageContainer()`
+
+UnsetStorageContainer ensures that no value is present for StorageContainer, not even an explicit nil
 ### GetTenant
 
 `func (o *StorageNetAppQtree) GetTenant() StorageNetAppStorageVmRelationship`
@@ -352,6 +362,16 @@ SetTenant sets Tenant field to given value.
 
 HasTenant returns a boolean if a field has been set.
 
+### SetTenantNil
+
+`func (o *StorageNetAppQtree) SetTenantNil(b bool)`
+
+ SetTenantNil sets the value for Tenant to be an explicit nil
+
+### UnsetTenant
+`func (o *StorageNetAppQtree) UnsetTenant()`
+
+UnsetTenant ensures that no value is present for Tenant, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

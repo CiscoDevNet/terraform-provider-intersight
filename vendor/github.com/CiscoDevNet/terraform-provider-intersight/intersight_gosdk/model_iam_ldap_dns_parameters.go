@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the IamLdapDnsParameters type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IamLdapDnsParameters{}
 
 // IamLdapDnsParameters DNS settings used to access LDAP Providers.
 type IamLdapDnsParameters struct {
@@ -112,7 +116,7 @@ func (o *IamLdapDnsParameters) SetObjectType(v string) {
 
 // GetSearchDomain returns the SearchDomain field value if set, zero value otherwise.
 func (o *IamLdapDnsParameters) GetSearchDomain() string {
-	if o == nil || o.SearchDomain == nil {
+	if o == nil || IsNil(o.SearchDomain) {
 		var ret string
 		return ret
 	}
@@ -122,7 +126,7 @@ func (o *IamLdapDnsParameters) GetSearchDomain() string {
 // GetSearchDomainOk returns a tuple with the SearchDomain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapDnsParameters) GetSearchDomainOk() (*string, bool) {
-	if o == nil || o.SearchDomain == nil {
+	if o == nil || IsNil(o.SearchDomain) {
 		return nil, false
 	}
 	return o.SearchDomain, true
@@ -130,7 +134,7 @@ func (o *IamLdapDnsParameters) GetSearchDomainOk() (*string, bool) {
 
 // HasSearchDomain returns a boolean if a field has been set.
 func (o *IamLdapDnsParameters) HasSearchDomain() bool {
-	if o != nil && o.SearchDomain != nil {
+	if o != nil && !IsNil(o.SearchDomain) {
 		return true
 	}
 
@@ -144,7 +148,7 @@ func (o *IamLdapDnsParameters) SetSearchDomain(v string) {
 
 // GetSearchForest returns the SearchForest field value if set, zero value otherwise.
 func (o *IamLdapDnsParameters) GetSearchForest() string {
-	if o == nil || o.SearchForest == nil {
+	if o == nil || IsNil(o.SearchForest) {
 		var ret string
 		return ret
 	}
@@ -154,7 +158,7 @@ func (o *IamLdapDnsParameters) GetSearchForest() string {
 // GetSearchForestOk returns a tuple with the SearchForest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapDnsParameters) GetSearchForestOk() (*string, bool) {
-	if o == nil || o.SearchForest == nil {
+	if o == nil || IsNil(o.SearchForest) {
 		return nil, false
 	}
 	return o.SearchForest, true
@@ -162,7 +166,7 @@ func (o *IamLdapDnsParameters) GetSearchForestOk() (*string, bool) {
 
 // HasSearchForest returns a boolean if a field has been set.
 func (o *IamLdapDnsParameters) HasSearchForest() bool {
-	if o != nil && o.SearchForest != nil {
+	if o != nil && !IsNil(o.SearchForest) {
 		return true
 	}
 
@@ -176,7 +180,7 @@ func (o *IamLdapDnsParameters) SetSearchForest(v string) {
 
 // GetSource returns the Source field value if set, zero value otherwise.
 func (o *IamLdapDnsParameters) GetSource() string {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source) {
 		var ret string
 		return ret
 	}
@@ -186,7 +190,7 @@ func (o *IamLdapDnsParameters) GetSource() string {
 // GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IamLdapDnsParameters) GetSourceOk() (*string, bool) {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source) {
 		return nil, false
 	}
 	return o.Source, true
@@ -194,7 +198,7 @@ func (o *IamLdapDnsParameters) GetSourceOk() (*string, bool) {
 
 // HasSource returns a boolean if a field has been set.
 func (o *IamLdapDnsParameters) HasSource() bool {
-	if o != nil && o.Source != nil {
+	if o != nil && !IsNil(o.Source) {
 		return true
 	}
 
@@ -207,28 +211,32 @@ func (o *IamLdapDnsParameters) SetSource(v string) {
 }
 
 func (o IamLdapDnsParameters) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IamLdapDnsParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
 	errMoBaseComplexType = json.Unmarshal([]byte(serializedMoBaseComplexType), &toSerialize)
 	if errMoBaseComplexType != nil {
-		return []byte{}, errMoBaseComplexType
+		return map[string]interface{}{}, errMoBaseComplexType
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.SearchDomain != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.SearchDomain) {
 		toSerialize["SearchDomain"] = o.SearchDomain
 	}
-	if o.SearchForest != nil {
+	if !IsNil(o.SearchForest) {
 		toSerialize["SearchForest"] = o.SearchForest
 	}
-	if o.Source != nil {
+	if !IsNil(o.Source) {
 		toSerialize["Source"] = o.Source
 	}
 
@@ -236,10 +244,32 @@ func (o IamLdapDnsParameters) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *IamLdapDnsParameters) UnmarshalJSON(bytes []byte) (err error) {
+func (o *IamLdapDnsParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type IamLdapDnsParametersWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -255,7 +285,7 @@ func (o *IamLdapDnsParameters) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamLdapDnsParametersWithoutEmbeddedStruct := IamLdapDnsParametersWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varIamLdapDnsParametersWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varIamLdapDnsParametersWithoutEmbeddedStruct)
 	if err == nil {
 		varIamLdapDnsParameters := _IamLdapDnsParameters{}
 		varIamLdapDnsParameters.ClassId = varIamLdapDnsParametersWithoutEmbeddedStruct.ClassId
@@ -270,7 +300,7 @@ func (o *IamLdapDnsParameters) UnmarshalJSON(bytes []byte) (err error) {
 
 	varIamLdapDnsParameters := _IamLdapDnsParameters{}
 
-	err = json.Unmarshal(bytes, &varIamLdapDnsParameters)
+	err = json.Unmarshal(data, &varIamLdapDnsParameters)
 	if err == nil {
 		o.MoBaseComplexType = varIamLdapDnsParameters.MoBaseComplexType
 	} else {
@@ -279,7 +309,7 @@ func (o *IamLdapDnsParameters) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "SearchDomain")

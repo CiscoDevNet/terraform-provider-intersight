@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the AaaAuditRecord type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AaaAuditRecord{}
 
 // AaaAuditRecord AuditRecord presents the configuration changes made by the user per transaction.
 type AaaAuditRecord struct {
@@ -38,10 +42,10 @@ type AaaAuditRecord struct {
 	// The creation time of AuditRecordLocal, which is the time when the affected MO was created/modified/deleted.
 	Timestamp *time.Time `json:"Timestamp,omitempty"`
 	// The userId or the email of the associated user that made the change. In case that user is later deleted, we still have some reference to the information.
-	UserIdOrEmail        *string                 `json:"UserIdOrEmail,omitempty"`
-	Account              *IamAccountRelationship `json:"Account,omitempty"`
-	Sessions             *IamSessionRelationship `json:"Sessions,omitempty"`
-	User                 *IamUserRelationship    `json:"User,omitempty"`
+	UserIdOrEmail        *string                        `json:"UserIdOrEmail,omitempty"`
+	Account              NullableIamAccountRelationship `json:"Account,omitempty"`
+	Sessions             NullableIamSessionRelationship `json:"Sessions,omitempty"`
+	User                 NullableIamUserRelationship    `json:"User,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -120,7 +124,7 @@ func (o *AaaAuditRecord) SetObjectType(v string) {
 
 // GetAffectedObjectTypeLabel returns the AffectedObjectTypeLabel field value if set, zero value otherwise.
 func (o *AaaAuditRecord) GetAffectedObjectTypeLabel() string {
-	if o == nil || o.AffectedObjectTypeLabel == nil {
+	if o == nil || IsNil(o.AffectedObjectTypeLabel) {
 		var ret string
 		return ret
 	}
@@ -130,7 +134,7 @@ func (o *AaaAuditRecord) GetAffectedObjectTypeLabel() string {
 // GetAffectedObjectTypeLabelOk returns a tuple with the AffectedObjectTypeLabel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaAuditRecord) GetAffectedObjectTypeLabelOk() (*string, bool) {
-	if o == nil || o.AffectedObjectTypeLabel == nil {
+	if o == nil || IsNil(o.AffectedObjectTypeLabel) {
 		return nil, false
 	}
 	return o.AffectedObjectTypeLabel, true
@@ -138,7 +142,7 @@ func (o *AaaAuditRecord) GetAffectedObjectTypeLabelOk() (*string, bool) {
 
 // HasAffectedObjectTypeLabel returns a boolean if a field has been set.
 func (o *AaaAuditRecord) HasAffectedObjectTypeLabel() bool {
-	if o != nil && o.AffectedObjectTypeLabel != nil {
+	if o != nil && !IsNil(o.AffectedObjectTypeLabel) {
 		return true
 	}
 
@@ -152,7 +156,7 @@ func (o *AaaAuditRecord) SetAffectedObjectTypeLabel(v string) {
 
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *AaaAuditRecord) GetEmail() string {
-	if o == nil || o.Email == nil {
+	if o == nil || IsNil(o.Email) {
 		var ret string
 		return ret
 	}
@@ -162,7 +166,7 @@ func (o *AaaAuditRecord) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaAuditRecord) GetEmailOk() (*string, bool) {
-	if o == nil || o.Email == nil {
+	if o == nil || IsNil(o.Email) {
 		return nil, false
 	}
 	return o.Email, true
@@ -170,7 +174,7 @@ func (o *AaaAuditRecord) GetEmailOk() (*string, bool) {
 
 // HasEmail returns a boolean if a field has been set.
 func (o *AaaAuditRecord) HasEmail() bool {
-	if o != nil && o.Email != nil {
+	if o != nil && !IsNil(o.Email) {
 		return true
 	}
 
@@ -184,7 +188,7 @@ func (o *AaaAuditRecord) SetEmail(v string) {
 
 // GetInstId returns the InstId field value if set, zero value otherwise.
 func (o *AaaAuditRecord) GetInstId() string {
-	if o == nil || o.InstId == nil {
+	if o == nil || IsNil(o.InstId) {
 		var ret string
 		return ret
 	}
@@ -194,7 +198,7 @@ func (o *AaaAuditRecord) GetInstId() string {
 // GetInstIdOk returns a tuple with the InstId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaAuditRecord) GetInstIdOk() (*string, bool) {
-	if o == nil || o.InstId == nil {
+	if o == nil || IsNil(o.InstId) {
 		return nil, false
 	}
 	return o.InstId, true
@@ -202,7 +206,7 @@ func (o *AaaAuditRecord) GetInstIdOk() (*string, bool) {
 
 // HasInstId returns a boolean if a field has been set.
 func (o *AaaAuditRecord) HasInstId() bool {
-	if o != nil && o.InstId != nil {
+	if o != nil && !IsNil(o.InstId) {
 		return true
 	}
 
@@ -216,7 +220,7 @@ func (o *AaaAuditRecord) SetInstId(v string) {
 
 // GetSessionId returns the SessionId field value if set, zero value otherwise.
 func (o *AaaAuditRecord) GetSessionId() string {
-	if o == nil || o.SessionId == nil {
+	if o == nil || IsNil(o.SessionId) {
 		var ret string
 		return ret
 	}
@@ -226,7 +230,7 @@ func (o *AaaAuditRecord) GetSessionId() string {
 // GetSessionIdOk returns a tuple with the SessionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaAuditRecord) GetSessionIdOk() (*string, bool) {
-	if o == nil || o.SessionId == nil {
+	if o == nil || IsNil(o.SessionId) {
 		return nil, false
 	}
 	return o.SessionId, true
@@ -234,7 +238,7 @@ func (o *AaaAuditRecord) GetSessionIdOk() (*string, bool) {
 
 // HasSessionId returns a boolean if a field has been set.
 func (o *AaaAuditRecord) HasSessionId() bool {
-	if o != nil && o.SessionId != nil {
+	if o != nil && !IsNil(o.SessionId) {
 		return true
 	}
 
@@ -248,7 +252,7 @@ func (o *AaaAuditRecord) SetSessionId(v string) {
 
 // GetSourceIp returns the SourceIp field value if set, zero value otherwise.
 func (o *AaaAuditRecord) GetSourceIp() string {
-	if o == nil || o.SourceIp == nil {
+	if o == nil || IsNil(o.SourceIp) {
 		var ret string
 		return ret
 	}
@@ -258,7 +262,7 @@ func (o *AaaAuditRecord) GetSourceIp() string {
 // GetSourceIpOk returns a tuple with the SourceIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaAuditRecord) GetSourceIpOk() (*string, bool) {
-	if o == nil || o.SourceIp == nil {
+	if o == nil || IsNil(o.SourceIp) {
 		return nil, false
 	}
 	return o.SourceIp, true
@@ -266,7 +270,7 @@ func (o *AaaAuditRecord) GetSourceIpOk() (*string, bool) {
 
 // HasSourceIp returns a boolean if a field has been set.
 func (o *AaaAuditRecord) HasSourceIp() bool {
-	if o != nil && o.SourceIp != nil {
+	if o != nil && !IsNil(o.SourceIp) {
 		return true
 	}
 
@@ -280,7 +284,7 @@ func (o *AaaAuditRecord) SetSourceIp(v string) {
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *AaaAuditRecord) GetTimestamp() time.Time {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		var ret time.Time
 		return ret
 	}
@@ -290,7 +294,7 @@ func (o *AaaAuditRecord) GetTimestamp() time.Time {
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaAuditRecord) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
 	return o.Timestamp, true
@@ -298,7 +302,7 @@ func (o *AaaAuditRecord) GetTimestampOk() (*time.Time, bool) {
 
 // HasTimestamp returns a boolean if a field has been set.
 func (o *AaaAuditRecord) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
+	if o != nil && !IsNil(o.Timestamp) {
 		return true
 	}
 
@@ -312,7 +316,7 @@ func (o *AaaAuditRecord) SetTimestamp(v time.Time) {
 
 // GetUserIdOrEmail returns the UserIdOrEmail field value if set, zero value otherwise.
 func (o *AaaAuditRecord) GetUserIdOrEmail() string {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		var ret string
 		return ret
 	}
@@ -322,7 +326,7 @@ func (o *AaaAuditRecord) GetUserIdOrEmail() string {
 // GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AaaAuditRecord) GetUserIdOrEmailOk() (*string, bool) {
-	if o == nil || o.UserIdOrEmail == nil {
+	if o == nil || IsNil(o.UserIdOrEmail) {
 		return nil, false
 	}
 	return o.UserIdOrEmail, true
@@ -330,7 +334,7 @@ func (o *AaaAuditRecord) GetUserIdOrEmailOk() (*string, bool) {
 
 // HasUserIdOrEmail returns a boolean if a field has been set.
 func (o *AaaAuditRecord) HasUserIdOrEmail() bool {
-	if o != nil && o.UserIdOrEmail != nil {
+	if o != nil && !IsNil(o.UserIdOrEmail) {
 		return true
 	}
 
@@ -342,157 +346,216 @@ func (o *AaaAuditRecord) SetUserIdOrEmail(v string) {
 	o.UserIdOrEmail = &v
 }
 
-// GetAccount returns the Account field value if set, zero value otherwise.
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AaaAuditRecord) GetAccount() IamAccountRelationship {
-	if o == nil || o.Account == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret IamAccountRelationship
 		return ret
 	}
-	return *o.Account
+	return *o.Account.Get()
 }
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AaaAuditRecord) GetAccountOk() (*IamAccountRelationship, bool) {
-	if o == nil || o.Account == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Account, true
+	return o.Account.Get(), o.Account.IsSet()
 }
 
 // HasAccount returns a boolean if a field has been set.
 func (o *AaaAuditRecord) HasAccount() bool {
-	if o != nil && o.Account != nil {
+	if o != nil && o.Account.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccount gets a reference to the given IamAccountRelationship and assigns it to the Account field.
+// SetAccount gets a reference to the given NullableIamAccountRelationship and assigns it to the Account field.
 func (o *AaaAuditRecord) SetAccount(v IamAccountRelationship) {
-	o.Account = &v
+	o.Account.Set(&v)
 }
 
-// GetSessions returns the Sessions field value if set, zero value otherwise.
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *AaaAuditRecord) SetAccountNil() {
+	o.Account.Set(nil)
+}
+
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *AaaAuditRecord) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetSessions returns the Sessions field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AaaAuditRecord) GetSessions() IamSessionRelationship {
-	if o == nil || o.Sessions == nil {
+	if o == nil || IsNil(o.Sessions.Get()) {
 		var ret IamSessionRelationship
 		return ret
 	}
-	return *o.Sessions
+	return *o.Sessions.Get()
 }
 
 // GetSessionsOk returns a tuple with the Sessions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AaaAuditRecord) GetSessionsOk() (*IamSessionRelationship, bool) {
-	if o == nil || o.Sessions == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Sessions, true
+	return o.Sessions.Get(), o.Sessions.IsSet()
 }
 
 // HasSessions returns a boolean if a field has been set.
 func (o *AaaAuditRecord) HasSessions() bool {
-	if o != nil && o.Sessions != nil {
+	if o != nil && o.Sessions.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSessions gets a reference to the given IamSessionRelationship and assigns it to the Sessions field.
+// SetSessions gets a reference to the given NullableIamSessionRelationship and assigns it to the Sessions field.
 func (o *AaaAuditRecord) SetSessions(v IamSessionRelationship) {
-	o.Sessions = &v
+	o.Sessions.Set(&v)
 }
 
-// GetUser returns the User field value if set, zero value otherwise.
+// SetSessionsNil sets the value for Sessions to be an explicit nil
+func (o *AaaAuditRecord) SetSessionsNil() {
+	o.Sessions.Set(nil)
+}
+
+// UnsetSessions ensures that no value is present for Sessions, not even an explicit nil
+func (o *AaaAuditRecord) UnsetSessions() {
+	o.Sessions.Unset()
+}
+
+// GetUser returns the User field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AaaAuditRecord) GetUser() IamUserRelationship {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User.Get()) {
 		var ret IamUserRelationship
 		return ret
 	}
-	return *o.User
+	return *o.User.Get()
 }
 
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AaaAuditRecord) GetUserOk() (*IamUserRelationship, bool) {
-	if o == nil || o.User == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.User, true
+	return o.User.Get(), o.User.IsSet()
 }
 
 // HasUser returns a boolean if a field has been set.
 func (o *AaaAuditRecord) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && o.User.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUser gets a reference to the given IamUserRelationship and assigns it to the User field.
+// SetUser gets a reference to the given NullableIamUserRelationship and assigns it to the User field.
 func (o *AaaAuditRecord) SetUser(v IamUserRelationship) {
-	o.User = &v
+	o.User.Set(&v)
+}
+
+// SetUserNil sets the value for User to be an explicit nil
+func (o *AaaAuditRecord) SetUserNil() {
+	o.User.Set(nil)
+}
+
+// UnsetUser ensures that no value is present for User, not even an explicit nil
+func (o *AaaAuditRecord) UnsetUser() {
+	o.User.Unset()
 }
 
 func (o AaaAuditRecord) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AaaAuditRecord) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedAaaAbstractAuditRecord, errAaaAbstractAuditRecord := json.Marshal(o.AaaAbstractAuditRecord)
 	if errAaaAbstractAuditRecord != nil {
-		return []byte{}, errAaaAbstractAuditRecord
+		return map[string]interface{}{}, errAaaAbstractAuditRecord
 	}
 	errAaaAbstractAuditRecord = json.Unmarshal([]byte(serializedAaaAbstractAuditRecord), &toSerialize)
 	if errAaaAbstractAuditRecord != nil {
-		return []byte{}, errAaaAbstractAuditRecord
+		return map[string]interface{}{}, errAaaAbstractAuditRecord
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AffectedObjectTypeLabel != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AffectedObjectTypeLabel) {
 		toSerialize["AffectedObjectTypeLabel"] = o.AffectedObjectTypeLabel
 	}
-	if o.Email != nil {
+	if !IsNil(o.Email) {
 		toSerialize["Email"] = o.Email
 	}
-	if o.InstId != nil {
+	if !IsNil(o.InstId) {
 		toSerialize["InstId"] = o.InstId
 	}
-	if o.SessionId != nil {
+	if !IsNil(o.SessionId) {
 		toSerialize["SessionId"] = o.SessionId
 	}
-	if o.SourceIp != nil {
+	if !IsNil(o.SourceIp) {
 		toSerialize["SourceIp"] = o.SourceIp
 	}
-	if o.Timestamp != nil {
+	if !IsNil(o.Timestamp) {
 		toSerialize["Timestamp"] = o.Timestamp
 	}
-	if o.UserIdOrEmail != nil {
+	if !IsNil(o.UserIdOrEmail) {
 		toSerialize["UserIdOrEmail"] = o.UserIdOrEmail
 	}
-	if o.Account != nil {
-		toSerialize["Account"] = o.Account
+	if o.Account.IsSet() {
+		toSerialize["Account"] = o.Account.Get()
 	}
-	if o.Sessions != nil {
-		toSerialize["Sessions"] = o.Sessions
+	if o.Sessions.IsSet() {
+		toSerialize["Sessions"] = o.Sessions.Get()
 	}
-	if o.User != nil {
-		toSerialize["User"] = o.User
+	if o.User.IsSet() {
+		toSerialize["User"] = o.User.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AaaAuditRecord) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AaaAuditRecord) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AaaAuditRecordWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -511,15 +574,15 @@ func (o *AaaAuditRecord) UnmarshalJSON(bytes []byte) (err error) {
 		// The creation time of AuditRecordLocal, which is the time when the affected MO was created/modified/deleted.
 		Timestamp *time.Time `json:"Timestamp,omitempty"`
 		// The userId or the email of the associated user that made the change. In case that user is later deleted, we still have some reference to the information.
-		UserIdOrEmail *string                 `json:"UserIdOrEmail,omitempty"`
-		Account       *IamAccountRelationship `json:"Account,omitempty"`
-		Sessions      *IamSessionRelationship `json:"Sessions,omitempty"`
-		User          *IamUserRelationship    `json:"User,omitempty"`
+		UserIdOrEmail *string                        `json:"UserIdOrEmail,omitempty"`
+		Account       NullableIamAccountRelationship `json:"Account,omitempty"`
+		Sessions      NullableIamSessionRelationship `json:"Sessions,omitempty"`
+		User          NullableIamUserRelationship    `json:"User,omitempty"`
 	}
 
 	varAaaAuditRecordWithoutEmbeddedStruct := AaaAuditRecordWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAaaAuditRecordWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAaaAuditRecordWithoutEmbeddedStruct)
 	if err == nil {
 		varAaaAuditRecord := _AaaAuditRecord{}
 		varAaaAuditRecord.ClassId = varAaaAuditRecordWithoutEmbeddedStruct.ClassId
@@ -541,7 +604,7 @@ func (o *AaaAuditRecord) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAaaAuditRecord := _AaaAuditRecord{}
 
-	err = json.Unmarshal(bytes, &varAaaAuditRecord)
+	err = json.Unmarshal(data, &varAaaAuditRecord)
 	if err == nil {
 		o.AaaAbstractAuditRecord = varAaaAuditRecord.AaaAbstractAuditRecord
 	} else {
@@ -550,7 +613,7 @@ func (o *AaaAuditRecord) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AffectedObjectTypeLabel")

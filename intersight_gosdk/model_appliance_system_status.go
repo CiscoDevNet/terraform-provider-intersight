@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ApplianceSystemStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApplianceSystemStatus{}
 
 // ApplianceSystemStatus Status of the Intersight Appliance.
 type ApplianceSystemStatus struct {
@@ -30,9 +34,9 @@ type ApplianceSystemStatus struct {
 	// An array of relationships to applianceAppStatus resources.
 	AppStatuses []ApplianceAppStatusRelationship `json:"AppStatuses,omitempty"`
 	// An array of relationships to applianceGroupStatus resources.
-	GroupStatuses        []ApplianceGroupStatusRelationship   `json:"GroupStatuses,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	SystemInfo           *ApplianceSystemInfoRelationship     `json:"SystemInfo,omitempty"`
+	GroupStatuses        []ApplianceGroupStatusRelationship          `json:"GroupStatuses,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	SystemInfo           NullableApplianceSystemInfoRelationship     `json:"SystemInfo,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,7 +115,7 @@ func (o *ApplianceSystemStatus) SetObjectType(v string) {
 
 // GetOperationalStatus returns the OperationalStatus field value if set, zero value otherwise.
 func (o *ApplianceSystemStatus) GetOperationalStatus() string {
-	if o == nil || o.OperationalStatus == nil {
+	if o == nil || IsNil(o.OperationalStatus) {
 		var ret string
 		return ret
 	}
@@ -121,7 +125,7 @@ func (o *ApplianceSystemStatus) GetOperationalStatus() string {
 // GetOperationalStatusOk returns a tuple with the OperationalStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ApplianceSystemStatus) GetOperationalStatusOk() (*string, bool) {
-	if o == nil || o.OperationalStatus == nil {
+	if o == nil || IsNil(o.OperationalStatus) {
 		return nil, false
 	}
 	return o.OperationalStatus, true
@@ -129,7 +133,7 @@ func (o *ApplianceSystemStatus) GetOperationalStatusOk() (*string, bool) {
 
 // HasOperationalStatus returns a boolean if a field has been set.
 func (o *ApplianceSystemStatus) HasOperationalStatus() bool {
-	if o != nil && o.OperationalStatus != nil {
+	if o != nil && !IsNil(o.OperationalStatus) {
 		return true
 	}
 
@@ -154,7 +158,7 @@ func (o *ApplianceSystemStatus) GetStatusChecks() []ApplianceStatusCheck {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceSystemStatus) GetStatusChecksOk() ([]ApplianceStatusCheck, bool) {
-	if o == nil || o.StatusChecks == nil {
+	if o == nil || IsNil(o.StatusChecks) {
 		return nil, false
 	}
 	return o.StatusChecks, true
@@ -162,7 +166,7 @@ func (o *ApplianceSystemStatus) GetStatusChecksOk() ([]ApplianceStatusCheck, boo
 
 // HasStatusChecks returns a boolean if a field has been set.
 func (o *ApplianceSystemStatus) HasStatusChecks() bool {
-	if o != nil && o.StatusChecks != nil {
+	if o != nil && IsNil(o.StatusChecks) {
 		return true
 	}
 
@@ -187,7 +191,7 @@ func (o *ApplianceSystemStatus) GetAppStatuses() []ApplianceAppStatusRelationshi
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceSystemStatus) GetAppStatusesOk() ([]ApplianceAppStatusRelationship, bool) {
-	if o == nil || o.AppStatuses == nil {
+	if o == nil || IsNil(o.AppStatuses) {
 		return nil, false
 	}
 	return o.AppStatuses, true
@@ -195,7 +199,7 @@ func (o *ApplianceSystemStatus) GetAppStatusesOk() ([]ApplianceAppStatusRelation
 
 // HasAppStatuses returns a boolean if a field has been set.
 func (o *ApplianceSystemStatus) HasAppStatuses() bool {
-	if o != nil && o.AppStatuses != nil {
+	if o != nil && IsNil(o.AppStatuses) {
 		return true
 	}
 
@@ -220,7 +224,7 @@ func (o *ApplianceSystemStatus) GetGroupStatuses() []ApplianceGroupStatusRelatio
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceSystemStatus) GetGroupStatusesOk() ([]ApplianceGroupStatusRelationship, bool) {
-	if o == nil || o.GroupStatuses == nil {
+	if o == nil || IsNil(o.GroupStatuses) {
 		return nil, false
 	}
 	return o.GroupStatuses, true
@@ -228,7 +232,7 @@ func (o *ApplianceSystemStatus) GetGroupStatusesOk() ([]ApplianceGroupStatusRela
 
 // HasGroupStatuses returns a boolean if a field has been set.
 func (o *ApplianceSystemStatus) HasGroupStatuses() bool {
-	if o != nil && o.GroupStatuses != nil {
+	if o != nil && IsNil(o.GroupStatuses) {
 		return true
 	}
 
@@ -240,87 +244,113 @@ func (o *ApplianceSystemStatus) SetGroupStatuses(v []ApplianceGroupStatusRelatio
 	o.GroupStatuses = v
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceSystemStatus) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceSystemStatus) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *ApplianceSystemStatus) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *ApplianceSystemStatus) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
 }
 
-// GetSystemInfo returns the SystemInfo field value if set, zero value otherwise.
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *ApplianceSystemStatus) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *ApplianceSystemStatus) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
+// GetSystemInfo returns the SystemInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceSystemStatus) GetSystemInfo() ApplianceSystemInfoRelationship {
-	if o == nil || o.SystemInfo == nil {
+	if o == nil || IsNil(o.SystemInfo.Get()) {
 		var ret ApplianceSystemInfoRelationship
 		return ret
 	}
-	return *o.SystemInfo
+	return *o.SystemInfo.Get()
 }
 
 // GetSystemInfoOk returns a tuple with the SystemInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApplianceSystemStatus) GetSystemInfoOk() (*ApplianceSystemInfoRelationship, bool) {
-	if o == nil || o.SystemInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SystemInfo, true
+	return o.SystemInfo.Get(), o.SystemInfo.IsSet()
 }
 
 // HasSystemInfo returns a boolean if a field has been set.
 func (o *ApplianceSystemStatus) HasSystemInfo() bool {
-	if o != nil && o.SystemInfo != nil {
+	if o != nil && o.SystemInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSystemInfo gets a reference to the given ApplianceSystemInfoRelationship and assigns it to the SystemInfo field.
+// SetSystemInfo gets a reference to the given NullableApplianceSystemInfoRelationship and assigns it to the SystemInfo field.
 func (o *ApplianceSystemStatus) SetSystemInfo(v ApplianceSystemInfoRelationship) {
-	o.SystemInfo = &v
+	o.SystemInfo.Set(&v)
+}
+
+// SetSystemInfoNil sets the value for SystemInfo to be an explicit nil
+func (o *ApplianceSystemStatus) SetSystemInfoNil() {
+	o.SystemInfo.Set(nil)
+}
+
+// UnsetSystemInfo ensures that no value is present for SystemInfo, not even an explicit nil
+func (o *ApplianceSystemStatus) UnsetSystemInfo() {
+	o.SystemInfo.Unset()
 }
 
 func (o ApplianceSystemStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApplianceSystemStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.OperationalStatus != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.OperationalStatus) {
 		toSerialize["OperationalStatus"] = o.OperationalStatus
 	}
 	if o.StatusChecks != nil {
@@ -332,21 +362,43 @@ func (o ApplianceSystemStatus) MarshalJSON() ([]byte, error) {
 	if o.GroupStatuses != nil {
 		toSerialize["GroupStatuses"] = o.GroupStatuses
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
-	if o.SystemInfo != nil {
-		toSerialize["SystemInfo"] = o.SystemInfo
+	if o.SystemInfo.IsSet() {
+		toSerialize["SystemInfo"] = o.SystemInfo.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ApplianceSystemStatus) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ApplianceSystemStatus) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ApplianceSystemStatusWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -358,14 +410,14 @@ func (o *ApplianceSystemStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to applianceAppStatus resources.
 		AppStatuses []ApplianceAppStatusRelationship `json:"AppStatuses,omitempty"`
 		// An array of relationships to applianceGroupStatus resources.
-		GroupStatuses    []ApplianceGroupStatusRelationship   `json:"GroupStatuses,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-		SystemInfo       *ApplianceSystemInfoRelationship     `json:"SystemInfo,omitempty"`
+		GroupStatuses    []ApplianceGroupStatusRelationship          `json:"GroupStatuses,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		SystemInfo       NullableApplianceSystemInfoRelationship     `json:"SystemInfo,omitempty"`
 	}
 
 	varApplianceSystemStatusWithoutEmbeddedStruct := ApplianceSystemStatusWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varApplianceSystemStatusWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varApplianceSystemStatusWithoutEmbeddedStruct)
 	if err == nil {
 		varApplianceSystemStatus := _ApplianceSystemStatus{}
 		varApplianceSystemStatus.ClassId = varApplianceSystemStatusWithoutEmbeddedStruct.ClassId
@@ -383,7 +435,7 @@ func (o *ApplianceSystemStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	varApplianceSystemStatus := _ApplianceSystemStatus{}
 
-	err = json.Unmarshal(bytes, &varApplianceSystemStatus)
+	err = json.Unmarshal(data, &varApplianceSystemStatus)
 	if err == nil {
 		o.MoBaseMo = varApplianceSystemStatus.MoBaseMo
 	} else {
@@ -392,7 +444,7 @@ func (o *ApplianceSystemStatus) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "OperationalStatus")

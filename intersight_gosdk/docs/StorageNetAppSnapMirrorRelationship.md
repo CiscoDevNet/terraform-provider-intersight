@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 **SourcePath** | Pointer to **string** | Path to the source endpoint of a SnapMirror relationship. Examples: ONTAP FlexVol/FlexGroup - svm1:volume1; ONTAP SVM - svm1: ; ONTAP Consistency Group - svm1:/cg/cg_name. | [optional] [readonly] 
 **State** | Pointer to **string** | State of the relationship. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Uuid of the NetApp SnapMirror relationship. | [optional] [readonly] 
-**Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
-**DestinationTenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
-**Policy** | Pointer to [**StorageNetAppBaseSnapMirrorPolicyRelationship**](StorageNetAppBaseSnapMirrorPolicyRelationship.md) |  | [optional] 
+**Array** | Pointer to [**NullableStorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
+**DestinationTenant** | Pointer to [**NullableStorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
+**Policy** | Pointer to [**NullableStorageNetAppBaseSnapMirrorPolicyRelationship**](StorageNetAppBaseSnapMirrorPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -328,6 +328,16 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### SetArrayNil
+
+`func (o *StorageNetAppSnapMirrorRelationship) SetArrayNil(b bool)`
+
+ SetArrayNil sets the value for Array to be an explicit nil
+
+### UnsetArray
+`func (o *StorageNetAppSnapMirrorRelationship) UnsetArray()`
+
+UnsetArray ensures that no value is present for Array, not even an explicit nil
 ### GetDestinationTenant
 
 `func (o *StorageNetAppSnapMirrorRelationship) GetDestinationTenant() StorageNetAppStorageVmRelationship`
@@ -353,6 +363,16 @@ SetDestinationTenant sets DestinationTenant field to given value.
 
 HasDestinationTenant returns a boolean if a field has been set.
 
+### SetDestinationTenantNil
+
+`func (o *StorageNetAppSnapMirrorRelationship) SetDestinationTenantNil(b bool)`
+
+ SetDestinationTenantNil sets the value for DestinationTenant to be an explicit nil
+
+### UnsetDestinationTenant
+`func (o *StorageNetAppSnapMirrorRelationship) UnsetDestinationTenant()`
+
+UnsetDestinationTenant ensures that no value is present for DestinationTenant, not even an explicit nil
 ### GetPolicy
 
 `func (o *StorageNetAppSnapMirrorRelationship) GetPolicy() StorageNetAppBaseSnapMirrorPolicyRelationship`
@@ -378,6 +398,16 @@ SetPolicy sets Policy field to given value.
 
 HasPolicy returns a boolean if a field has been set.
 
+### SetPolicyNil
+
+`func (o *StorageNetAppSnapMirrorRelationship) SetPolicyNil(b bool)`
+
+ SetPolicyNil sets the value for Policy to be an explicit nil
+
+### UnsetPolicy
+`func (o *StorageNetAppSnapMirrorRelationship) UnsetPolicy()`
+
+UnsetPolicy ensures that no value is present for Policy, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

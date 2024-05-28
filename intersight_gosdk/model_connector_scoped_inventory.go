@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the ConnectorScopedInventory type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConnectorScopedInventory{}
 
 // ConnectorScopedInventory Abstract object defined to handle scoped inventory for a set of objects identified by the query parameters defined in the properties. All vendor specific scoped inventory objects will inherit from this object and the scoped inventory framework will address the inventory collection.
 type ConnectorScopedInventory struct {
@@ -105,7 +109,7 @@ func (o *ConnectorScopedInventory) SetObjectType(v string) {
 
 // GetNamingProperty returns the NamingProperty field value if set, zero value otherwise.
 func (o *ConnectorScopedInventory) GetNamingProperty() string {
-	if o == nil || o.NamingProperty == nil {
+	if o == nil || IsNil(o.NamingProperty) {
 		var ret string
 		return ret
 	}
@@ -115,7 +119,7 @@ func (o *ConnectorScopedInventory) GetNamingProperty() string {
 // GetNamingPropertyOk returns a tuple with the NamingProperty field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorScopedInventory) GetNamingPropertyOk() (*string, bool) {
-	if o == nil || o.NamingProperty == nil {
+	if o == nil || IsNil(o.NamingProperty) {
 		return nil, false
 	}
 	return o.NamingProperty, true
@@ -123,7 +127,7 @@ func (o *ConnectorScopedInventory) GetNamingPropertyOk() (*string, bool) {
 
 // HasNamingProperty returns a boolean if a field has been set.
 func (o *ConnectorScopedInventory) HasNamingProperty() bool {
-	if o != nil && o.NamingProperty != nil {
+	if o != nil && !IsNil(o.NamingProperty) {
 		return true
 	}
 
@@ -148,7 +152,7 @@ func (o *ConnectorScopedInventory) GetQueries() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConnectorScopedInventory) GetQueriesOk() (*interface{}, bool) {
-	if o == nil || o.Queries == nil {
+	if o == nil || IsNil(o.Queries) {
 		return nil, false
 	}
 	return &o.Queries, true
@@ -156,7 +160,7 @@ func (o *ConnectorScopedInventory) GetQueriesOk() (*interface{}, bool) {
 
 // HasQueries returns a boolean if a field has been set.
 func (o *ConnectorScopedInventory) HasQueries() bool {
-	if o != nil && o.Queries != nil {
+	if o != nil && IsNil(o.Queries) {
 		return true
 	}
 
@@ -170,7 +174,7 @@ func (o *ConnectorScopedInventory) SetQueries(v interface{}) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *ConnectorScopedInventory) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -180,7 +184,7 @@ func (o *ConnectorScopedInventory) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectorScopedInventory) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -188,7 +192,7 @@ func (o *ConnectorScopedInventory) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *ConnectorScopedInventory) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -213,7 +217,7 @@ func (o *ConnectorScopedInventory) GetValues() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConnectorScopedInventory) GetValuesOk() ([]string, bool) {
-	if o == nil || o.Values == nil {
+	if o == nil || IsNil(o.Values) {
 		return nil, false
 	}
 	return o.Values, true
@@ -221,7 +225,7 @@ func (o *ConnectorScopedInventory) GetValuesOk() ([]string, bool) {
 
 // HasValues returns a boolean if a field has been set.
 func (o *ConnectorScopedInventory) HasValues() bool {
-	if o != nil && o.Values != nil {
+	if o != nil && IsNil(o.Values) {
 		return true
 	}
 
@@ -234,28 +238,32 @@ func (o *ConnectorScopedInventory) SetValues(v []string) {
 }
 
 func (o ConnectorScopedInventory) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConnectorScopedInventory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.NamingProperty != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.NamingProperty) {
 		toSerialize["NamingProperty"] = o.NamingProperty
 	}
 	if o.Queries != nil {
 		toSerialize["Queries"] = o.Queries
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["Type"] = o.Type
 	}
 	if o.Values != nil {
@@ -266,10 +274,32 @@ func (o ConnectorScopedInventory) MarshalJSON() ([]byte, error) {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *ConnectorScopedInventory) UnmarshalJSON(bytes []byte) (err error) {
+func (o *ConnectorScopedInventory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type ConnectorScopedInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
@@ -286,7 +316,7 @@ func (o *ConnectorScopedInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorScopedInventoryWithoutEmbeddedStruct := ConnectorScopedInventoryWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varConnectorScopedInventoryWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varConnectorScopedInventoryWithoutEmbeddedStruct)
 	if err == nil {
 		varConnectorScopedInventory := _ConnectorScopedInventory{}
 		varConnectorScopedInventory.ClassId = varConnectorScopedInventoryWithoutEmbeddedStruct.ClassId
@@ -302,7 +332,7 @@ func (o *ConnectorScopedInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	varConnectorScopedInventory := _ConnectorScopedInventory{}
 
-	err = json.Unmarshal(bytes, &varConnectorScopedInventory)
+	err = json.Unmarshal(data, &varConnectorScopedInventory)
 	if err == nil {
 		o.MoBaseMo = varConnectorScopedInventory.MoBaseMo
 	} else {
@@ -311,7 +341,7 @@ func (o *ConnectorScopedInventory) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "NamingProperty")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,10 +13,14 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
 )
+
+// checks if the AssetDeployment type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetDeployment{}
 
 // AssetDeployment Contains information about Deployments associated with consumption-based subscriptions. We listen to messages sent by Cisco Install Base and create/update an instance of this object.
 type AssetDeployment struct {
@@ -42,8 +46,8 @@ type AssetDeployment struct {
 	UnitOfMeasure     []AssetMeteringType `json:"UnitOfMeasure,omitempty"`
 	Workloads         []string            `json:"Workloads,omitempty"`
 	// An array of relationships to assetDeploymentDevice resources.
-	Devices              []AssetDeploymentDeviceRelationship `json:"Devices,omitempty"`
-	Subscription         *AssetSubscriptionRelationship      `json:"Subscription,omitempty"`
+	Devices              []AssetDeploymentDeviceRelationship   `json:"Devices,omitempty"`
+	Subscription         NullableAssetSubscriptionRelationship `json:"Subscription,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -122,7 +126,7 @@ func (o *AssetDeployment) SetObjectType(v string) {
 
 // GetAlarmInfo returns the AlarmInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeployment) GetAlarmInfo() AssetDeploymentAlarmInfo {
-	if o == nil || o.AlarmInfo.Get() == nil {
+	if o == nil || IsNil(o.AlarmInfo.Get()) {
 		var ret AssetDeploymentAlarmInfo
 		return ret
 	}
@@ -165,7 +169,7 @@ func (o *AssetDeployment) UnsetAlarmInfo() {
 
 // GetDeploymentRefId returns the DeploymentRefId field value if set, zero value otherwise.
 func (o *AssetDeployment) GetDeploymentRefId() string {
-	if o == nil || o.DeploymentRefId == nil {
+	if o == nil || IsNil(o.DeploymentRefId) {
 		var ret string
 		return ret
 	}
@@ -175,7 +179,7 @@ func (o *AssetDeployment) GetDeploymentRefId() string {
 // GetDeploymentRefIdOk returns a tuple with the DeploymentRefId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeployment) GetDeploymentRefIdOk() (*string, bool) {
-	if o == nil || o.DeploymentRefId == nil {
+	if o == nil || IsNil(o.DeploymentRefId) {
 		return nil, false
 	}
 	return o.DeploymentRefId, true
@@ -183,7 +187,7 @@ func (o *AssetDeployment) GetDeploymentRefIdOk() (*string, bool) {
 
 // HasDeploymentRefId returns a boolean if a field has been set.
 func (o *AssetDeployment) HasDeploymentRefId() bool {
-	if o != nil && o.DeploymentRefId != nil {
+	if o != nil && !IsNil(o.DeploymentRefId) {
 		return true
 	}
 
@@ -197,7 +201,7 @@ func (o *AssetDeployment) SetDeploymentRefId(v string) {
 
 // GetEndCustomer returns the EndCustomer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeployment) GetEndCustomer() AssetCustomerInformation {
-	if o == nil || o.EndCustomer.Get() == nil {
+	if o == nil || IsNil(o.EndCustomer.Get()) {
 		var ret AssetCustomerInformation
 		return ret
 	}
@@ -240,7 +244,7 @@ func (o *AssetDeployment) UnsetEndCustomer() {
 
 // GetEndDate returns the EndDate field value if set, zero value otherwise.
 func (o *AssetDeployment) GetEndDate() time.Time {
-	if o == nil || o.EndDate == nil {
+	if o == nil || IsNil(o.EndDate) {
 		var ret time.Time
 		return ret
 	}
@@ -250,7 +254,7 @@ func (o *AssetDeployment) GetEndDate() time.Time {
 // GetEndDateOk returns a tuple with the EndDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeployment) GetEndDateOk() (*time.Time, bool) {
-	if o == nil || o.EndDate == nil {
+	if o == nil || IsNil(o.EndDate) {
 		return nil, false
 	}
 	return o.EndDate, true
@@ -258,7 +262,7 @@ func (o *AssetDeployment) GetEndDateOk() (*time.Time, bool) {
 
 // HasEndDate returns a boolean if a field has been set.
 func (o *AssetDeployment) HasEndDate() bool {
-	if o != nil && o.EndDate != nil {
+	if o != nil && !IsNil(o.EndDate) {
 		return true
 	}
 
@@ -272,7 +276,7 @@ func (o *AssetDeployment) SetEndDate(v time.Time) {
 
 // GetLicenseType returns the LicenseType field value if set, zero value otherwise.
 func (o *AssetDeployment) GetLicenseType() string {
-	if o == nil || o.LicenseType == nil {
+	if o == nil || IsNil(o.LicenseType) {
 		var ret string
 		return ret
 	}
@@ -282,7 +286,7 @@ func (o *AssetDeployment) GetLicenseType() string {
 // GetLicenseTypeOk returns a tuple with the LicenseType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeployment) GetLicenseTypeOk() (*string, bool) {
-	if o == nil || o.LicenseType == nil {
+	if o == nil || IsNil(o.LicenseType) {
 		return nil, false
 	}
 	return o.LicenseType, true
@@ -290,7 +294,7 @@ func (o *AssetDeployment) GetLicenseTypeOk() (*string, bool) {
 
 // HasLicenseType returns a boolean if a field has been set.
 func (o *AssetDeployment) HasLicenseType() bool {
-	if o != nil && o.LicenseType != nil {
+	if o != nil && !IsNil(o.LicenseType) {
 		return true
 	}
 
@@ -304,7 +308,7 @@ func (o *AssetDeployment) SetLicenseType(v string) {
 
 // GetMlbOfferType returns the MlbOfferType field value if set, zero value otherwise.
 func (o *AssetDeployment) GetMlbOfferType() string {
-	if o == nil || o.MlbOfferType == nil {
+	if o == nil || IsNil(o.MlbOfferType) {
 		var ret string
 		return ret
 	}
@@ -314,7 +318,7 @@ func (o *AssetDeployment) GetMlbOfferType() string {
 // GetMlbOfferTypeOk returns a tuple with the MlbOfferType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeployment) GetMlbOfferTypeOk() (*string, bool) {
-	if o == nil || o.MlbOfferType == nil {
+	if o == nil || IsNil(o.MlbOfferType) {
 		return nil, false
 	}
 	return o.MlbOfferType, true
@@ -322,7 +326,7 @@ func (o *AssetDeployment) GetMlbOfferTypeOk() (*string, bool) {
 
 // HasMlbOfferType returns a boolean if a field has been set.
 func (o *AssetDeployment) HasMlbOfferType() bool {
-	if o != nil && o.MlbOfferType != nil {
+	if o != nil && !IsNil(o.MlbOfferType) {
 		return true
 	}
 
@@ -336,7 +340,7 @@ func (o *AssetDeployment) SetMlbOfferType(v string) {
 
 // GetStartDate returns the StartDate field value if set, zero value otherwise.
 func (o *AssetDeployment) GetStartDate() time.Time {
-	if o == nil || o.StartDate == nil {
+	if o == nil || IsNil(o.StartDate) {
 		var ret time.Time
 		return ret
 	}
@@ -346,7 +350,7 @@ func (o *AssetDeployment) GetStartDate() time.Time {
 // GetStartDateOk returns a tuple with the StartDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeployment) GetStartDateOk() (*time.Time, bool) {
-	if o == nil || o.StartDate == nil {
+	if o == nil || IsNil(o.StartDate) {
 		return nil, false
 	}
 	return o.StartDate, true
@@ -354,7 +358,7 @@ func (o *AssetDeployment) GetStartDateOk() (*time.Time, bool) {
 
 // HasStartDate returns a boolean if a field has been set.
 func (o *AssetDeployment) HasStartDate() bool {
-	if o != nil && o.StartDate != nil {
+	if o != nil && !IsNil(o.StartDate) {
 		return true
 	}
 
@@ -368,7 +372,7 @@ func (o *AssetDeployment) SetStartDate(v time.Time) {
 
 // GetSubscriptionRefId returns the SubscriptionRefId field value if set, zero value otherwise.
 func (o *AssetDeployment) GetSubscriptionRefId() string {
-	if o == nil || o.SubscriptionRefId == nil {
+	if o == nil || IsNil(o.SubscriptionRefId) {
 		var ret string
 		return ret
 	}
@@ -378,7 +382,7 @@ func (o *AssetDeployment) GetSubscriptionRefId() string {
 // GetSubscriptionRefIdOk returns a tuple with the SubscriptionRefId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AssetDeployment) GetSubscriptionRefIdOk() (*string, bool) {
-	if o == nil || o.SubscriptionRefId == nil {
+	if o == nil || IsNil(o.SubscriptionRefId) {
 		return nil, false
 	}
 	return o.SubscriptionRefId, true
@@ -386,7 +390,7 @@ func (o *AssetDeployment) GetSubscriptionRefIdOk() (*string, bool) {
 
 // HasSubscriptionRefId returns a boolean if a field has been set.
 func (o *AssetDeployment) HasSubscriptionRefId() bool {
-	if o != nil && o.SubscriptionRefId != nil {
+	if o != nil && !IsNil(o.SubscriptionRefId) {
 		return true
 	}
 
@@ -411,7 +415,7 @@ func (o *AssetDeployment) GetUnitOfMeasure() []AssetMeteringType {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeployment) GetUnitOfMeasureOk() ([]AssetMeteringType, bool) {
-	if o == nil || o.UnitOfMeasure == nil {
+	if o == nil || IsNil(o.UnitOfMeasure) {
 		return nil, false
 	}
 	return o.UnitOfMeasure, true
@@ -419,7 +423,7 @@ func (o *AssetDeployment) GetUnitOfMeasureOk() ([]AssetMeteringType, bool) {
 
 // HasUnitOfMeasure returns a boolean if a field has been set.
 func (o *AssetDeployment) HasUnitOfMeasure() bool {
-	if o != nil && o.UnitOfMeasure != nil {
+	if o != nil && IsNil(o.UnitOfMeasure) {
 		return true
 	}
 
@@ -444,7 +448,7 @@ func (o *AssetDeployment) GetWorkloads() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeployment) GetWorkloadsOk() ([]string, bool) {
-	if o == nil || o.Workloads == nil {
+	if o == nil || IsNil(o.Workloads) {
 		return nil, false
 	}
 	return o.Workloads, true
@@ -452,7 +456,7 @@ func (o *AssetDeployment) GetWorkloadsOk() ([]string, bool) {
 
 // HasWorkloads returns a boolean if a field has been set.
 func (o *AssetDeployment) HasWorkloads() bool {
-	if o != nil && o.Workloads != nil {
+	if o != nil && IsNil(o.Workloads) {
 		return true
 	}
 
@@ -477,7 +481,7 @@ func (o *AssetDeployment) GetDevices() []AssetDeploymentDeviceRelationship {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeployment) GetDevicesOk() ([]AssetDeploymentDeviceRelationship, bool) {
-	if o == nil || o.Devices == nil {
+	if o == nil || IsNil(o.Devices) {
 		return nil, false
 	}
 	return o.Devices, true
@@ -485,7 +489,7 @@ func (o *AssetDeployment) GetDevicesOk() ([]AssetDeploymentDeviceRelationship, b
 
 // HasDevices returns a boolean if a field has been set.
 func (o *AssetDeployment) HasDevices() bool {
-	if o != nil && o.Devices != nil {
+	if o != nil && IsNil(o.Devices) {
 		return true
 	}
 
@@ -497,76 +501,91 @@ func (o *AssetDeployment) SetDevices(v []AssetDeploymentDeviceRelationship) {
 	o.Devices = v
 }
 
-// GetSubscription returns the Subscription field value if set, zero value otherwise.
+// GetSubscription returns the Subscription field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeployment) GetSubscription() AssetSubscriptionRelationship {
-	if o == nil || o.Subscription == nil {
+	if o == nil || IsNil(o.Subscription.Get()) {
 		var ret AssetSubscriptionRelationship
 		return ret
 	}
-	return *o.Subscription
+	return *o.Subscription.Get()
 }
 
 // GetSubscriptionOk returns a tuple with the Subscription field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AssetDeployment) GetSubscriptionOk() (*AssetSubscriptionRelationship, bool) {
-	if o == nil || o.Subscription == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Subscription, true
+	return o.Subscription.Get(), o.Subscription.IsSet()
 }
 
 // HasSubscription returns a boolean if a field has been set.
 func (o *AssetDeployment) HasSubscription() bool {
-	if o != nil && o.Subscription != nil {
+	if o != nil && o.Subscription.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSubscription gets a reference to the given AssetSubscriptionRelationship and assigns it to the Subscription field.
+// SetSubscription gets a reference to the given NullableAssetSubscriptionRelationship and assigns it to the Subscription field.
 func (o *AssetDeployment) SetSubscription(v AssetSubscriptionRelationship) {
-	o.Subscription = &v
+	o.Subscription.Set(&v)
+}
+
+// SetSubscriptionNil sets the value for Subscription to be an explicit nil
+func (o *AssetDeployment) SetSubscriptionNil() {
+	o.Subscription.Set(nil)
+}
+
+// UnsetSubscription ensures that no value is present for Subscription, not even an explicit nil
+func (o *AssetDeployment) UnsetSubscription() {
+	o.Subscription.Unset()
 }
 
 func (o AssetDeployment) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssetDeployment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
 	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
 	if o.AlarmInfo.IsSet() {
 		toSerialize["AlarmInfo"] = o.AlarmInfo.Get()
 	}
-	if o.DeploymentRefId != nil {
+	if !IsNil(o.DeploymentRefId) {
 		toSerialize["DeploymentRefId"] = o.DeploymentRefId
 	}
 	if o.EndCustomer.IsSet() {
 		toSerialize["EndCustomer"] = o.EndCustomer.Get()
 	}
-	if o.EndDate != nil {
+	if !IsNil(o.EndDate) {
 		toSerialize["EndDate"] = o.EndDate
 	}
-	if o.LicenseType != nil {
+	if !IsNil(o.LicenseType) {
 		toSerialize["LicenseType"] = o.LicenseType
 	}
-	if o.MlbOfferType != nil {
+	if !IsNil(o.MlbOfferType) {
 		toSerialize["MlbOfferType"] = o.MlbOfferType
 	}
-	if o.StartDate != nil {
+	if !IsNil(o.StartDate) {
 		toSerialize["StartDate"] = o.StartDate
 	}
-	if o.SubscriptionRefId != nil {
+	if !IsNil(o.SubscriptionRefId) {
 		toSerialize["SubscriptionRefId"] = o.SubscriptionRefId
 	}
 	if o.UnitOfMeasure != nil {
@@ -578,18 +597,40 @@ func (o AssetDeployment) MarshalJSON() ([]byte, error) {
 	if o.Devices != nil {
 		toSerialize["Devices"] = o.Devices
 	}
-	if o.Subscription != nil {
-		toSerialize["Subscription"] = o.Subscription
+	if o.Subscription.IsSet() {
+		toSerialize["Subscription"] = o.Subscription.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *AssetDeployment) UnmarshalJSON(bytes []byte) (err error) {
+func (o *AssetDeployment) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type AssetDeploymentWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -612,13 +653,13 @@ func (o *AssetDeployment) UnmarshalJSON(bytes []byte) (err error) {
 		UnitOfMeasure     []AssetMeteringType `json:"UnitOfMeasure,omitempty"`
 		Workloads         []string            `json:"Workloads,omitempty"`
 		// An array of relationships to assetDeploymentDevice resources.
-		Devices      []AssetDeploymentDeviceRelationship `json:"Devices,omitempty"`
-		Subscription *AssetSubscriptionRelationship      `json:"Subscription,omitempty"`
+		Devices      []AssetDeploymentDeviceRelationship   `json:"Devices,omitempty"`
+		Subscription NullableAssetSubscriptionRelationship `json:"Subscription,omitempty"`
 	}
 
 	varAssetDeploymentWithoutEmbeddedStruct := AssetDeploymentWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varAssetDeploymentWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varAssetDeploymentWithoutEmbeddedStruct)
 	if err == nil {
 		varAssetDeployment := _AssetDeployment{}
 		varAssetDeployment.ClassId = varAssetDeploymentWithoutEmbeddedStruct.ClassId
@@ -642,7 +683,7 @@ func (o *AssetDeployment) UnmarshalJSON(bytes []byte) (err error) {
 
 	varAssetDeployment := _AssetDeployment{}
 
-	err = json.Unmarshal(bytes, &varAssetDeployment)
+	err = json.Unmarshal(data, &varAssetDeployment)
 	if err == nil {
 		o.MoBaseMo = varAssetDeployment.MoBaseMo
 	} else {
@@ -651,7 +692,7 @@ func (o *AssetDeployment) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AlarmInfo")

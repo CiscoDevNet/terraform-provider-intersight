@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16342
+API version: 1.0.11-16711
 Contact: intersight@cisco.com
 */
 
@@ -13,9 +13,13 @@ package intersight
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
 )
+
+// checks if the NetworkVlanPortInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NetworkVlanPortInfo{}
 
 // NetworkVlanPortInfo Vlan Port information of a Fabric Interconnect.
 type NetworkVlanPortInfo struct {
@@ -43,10 +47,10 @@ type NetworkVlanPortInfo struct {
 	// The number of uncompressed VLAN port count on a Fabric Interconnect calculated by VLAN port group library.
 	UncompressedVlanPortCountValue *int64 `json:"UncompressedVlanPortCountValue,omitempty"`
 	// The maximum number of VLAN ports allowed on a Fabric Interconnect.
-	VlanPortLimit        *int64                               `json:"VlanPortLimit,omitempty"`
-	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	VlanPortLimit        *int64                                      `json:"VlanPortLimit,omitempty"`
+	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	NetworkElement       NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -125,7 +129,7 @@ func (o *NetworkVlanPortInfo) SetObjectType(v string) {
 
 // GetAccessVlanPortCount returns the AccessVlanPortCount field value if set, zero value otherwise.
 func (o *NetworkVlanPortInfo) GetAccessVlanPortCount() int64 {
-	if o == nil || o.AccessVlanPortCount == nil {
+	if o == nil || IsNil(o.AccessVlanPortCount) {
 		var ret int64
 		return ret
 	}
@@ -135,7 +139,7 @@ func (o *NetworkVlanPortInfo) GetAccessVlanPortCount() int64 {
 // GetAccessVlanPortCountOk returns a tuple with the AccessVlanPortCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVlanPortInfo) GetAccessVlanPortCountOk() (*int64, bool) {
-	if o == nil || o.AccessVlanPortCount == nil {
+	if o == nil || IsNil(o.AccessVlanPortCount) {
 		return nil, false
 	}
 	return o.AccessVlanPortCount, true
@@ -143,7 +147,7 @@ func (o *NetworkVlanPortInfo) GetAccessVlanPortCountOk() (*int64, bool) {
 
 // HasAccessVlanPortCount returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasAccessVlanPortCount() bool {
-	if o != nil && o.AccessVlanPortCount != nil {
+	if o != nil && !IsNil(o.AccessVlanPortCount) {
 		return true
 	}
 
@@ -157,7 +161,7 @@ func (o *NetworkVlanPortInfo) SetAccessVlanPortCount(v int64) {
 
 // GetBorderVlanPortCount returns the BorderVlanPortCount field value if set, zero value otherwise.
 func (o *NetworkVlanPortInfo) GetBorderVlanPortCount() int64 {
-	if o == nil || o.BorderVlanPortCount == nil {
+	if o == nil || IsNil(o.BorderVlanPortCount) {
 		var ret int64
 		return ret
 	}
@@ -167,7 +171,7 @@ func (o *NetworkVlanPortInfo) GetBorderVlanPortCount() int64 {
 // GetBorderVlanPortCountOk returns a tuple with the BorderVlanPortCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVlanPortInfo) GetBorderVlanPortCountOk() (*int64, bool) {
-	if o == nil || o.BorderVlanPortCount == nil {
+	if o == nil || IsNil(o.BorderVlanPortCount) {
 		return nil, false
 	}
 	return o.BorderVlanPortCount, true
@@ -175,7 +179,7 @@ func (o *NetworkVlanPortInfo) GetBorderVlanPortCountOk() (*int64, bool) {
 
 // HasBorderVlanPortCount returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasBorderVlanPortCount() bool {
-	if o != nil && o.BorderVlanPortCount != nil {
+	if o != nil && !IsNil(o.BorderVlanPortCount) {
 		return true
 	}
 
@@ -189,7 +193,7 @@ func (o *NetworkVlanPortInfo) SetBorderVlanPortCount(v int64) {
 
 // GetCompressedOptimizationSetsValue returns the CompressedOptimizationSetsValue field value if set, zero value otherwise.
 func (o *NetworkVlanPortInfo) GetCompressedOptimizationSetsValue() int64 {
-	if o == nil || o.CompressedOptimizationSetsValue == nil {
+	if o == nil || IsNil(o.CompressedOptimizationSetsValue) {
 		var ret int64
 		return ret
 	}
@@ -199,7 +203,7 @@ func (o *NetworkVlanPortInfo) GetCompressedOptimizationSetsValue() int64 {
 // GetCompressedOptimizationSetsValueOk returns a tuple with the CompressedOptimizationSetsValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVlanPortInfo) GetCompressedOptimizationSetsValueOk() (*int64, bool) {
-	if o == nil || o.CompressedOptimizationSetsValue == nil {
+	if o == nil || IsNil(o.CompressedOptimizationSetsValue) {
 		return nil, false
 	}
 	return o.CompressedOptimizationSetsValue, true
@@ -207,7 +211,7 @@ func (o *NetworkVlanPortInfo) GetCompressedOptimizationSetsValueOk() (*int64, bo
 
 // HasCompressedOptimizationSetsValue returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasCompressedOptimizationSetsValue() bool {
-	if o != nil && o.CompressedOptimizationSetsValue != nil {
+	if o != nil && !IsNil(o.CompressedOptimizationSetsValue) {
 		return true
 	}
 
@@ -222,7 +226,7 @@ func (o *NetworkVlanPortInfo) SetCompressedOptimizationSetsValue(v int64) {
 // GetCompressedVlanPortCount returns the CompressedVlanPortCount field value if set, zero value otherwise.
 // Deprecated
 func (o *NetworkVlanPortInfo) GetCompressedVlanPortCount() string {
-	if o == nil || o.CompressedVlanPortCount == nil {
+	if o == nil || IsNil(o.CompressedVlanPortCount) {
 		var ret string
 		return ret
 	}
@@ -233,7 +237,7 @@ func (o *NetworkVlanPortInfo) GetCompressedVlanPortCount() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *NetworkVlanPortInfo) GetCompressedVlanPortCountOk() (*string, bool) {
-	if o == nil || o.CompressedVlanPortCount == nil {
+	if o == nil || IsNil(o.CompressedVlanPortCount) {
 		return nil, false
 	}
 	return o.CompressedVlanPortCount, true
@@ -241,7 +245,7 @@ func (o *NetworkVlanPortInfo) GetCompressedVlanPortCountOk() (*string, bool) {
 
 // HasCompressedVlanPortCount returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasCompressedVlanPortCount() bool {
-	if o != nil && o.CompressedVlanPortCount != nil {
+	if o != nil && !IsNil(o.CompressedVlanPortCount) {
 		return true
 	}
 
@@ -256,7 +260,7 @@ func (o *NetworkVlanPortInfo) SetCompressedVlanPortCount(v string) {
 
 // GetCompressedVlanPortCountValue returns the CompressedVlanPortCountValue field value if set, zero value otherwise.
 func (o *NetworkVlanPortInfo) GetCompressedVlanPortCountValue() int64 {
-	if o == nil || o.CompressedVlanPortCountValue == nil {
+	if o == nil || IsNil(o.CompressedVlanPortCountValue) {
 		var ret int64
 		return ret
 	}
@@ -266,7 +270,7 @@ func (o *NetworkVlanPortInfo) GetCompressedVlanPortCountValue() int64 {
 // GetCompressedVlanPortCountValueOk returns a tuple with the CompressedVlanPortCountValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVlanPortInfo) GetCompressedVlanPortCountValueOk() (*int64, bool) {
-	if o == nil || o.CompressedVlanPortCountValue == nil {
+	if o == nil || IsNil(o.CompressedVlanPortCountValue) {
 		return nil, false
 	}
 	return o.CompressedVlanPortCountValue, true
@@ -274,7 +278,7 @@ func (o *NetworkVlanPortInfo) GetCompressedVlanPortCountValueOk() (*int64, bool)
 
 // HasCompressedVlanPortCountValue returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasCompressedVlanPortCountValue() bool {
-	if o != nil && o.CompressedVlanPortCountValue != nil {
+	if o != nil && !IsNil(o.CompressedVlanPortCountValue) {
 		return true
 	}
 
@@ -288,7 +292,7 @@ func (o *NetworkVlanPortInfo) SetCompressedVlanPortCountValue(v int64) {
 
 // GetTotalVlanPortCount returns the TotalVlanPortCount field value if set, zero value otherwise.
 func (o *NetworkVlanPortInfo) GetTotalVlanPortCount() int64 {
-	if o == nil || o.TotalVlanPortCount == nil {
+	if o == nil || IsNil(o.TotalVlanPortCount) {
 		var ret int64
 		return ret
 	}
@@ -298,7 +302,7 @@ func (o *NetworkVlanPortInfo) GetTotalVlanPortCount() int64 {
 // GetTotalVlanPortCountOk returns a tuple with the TotalVlanPortCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVlanPortInfo) GetTotalVlanPortCountOk() (*int64, bool) {
-	if o == nil || o.TotalVlanPortCount == nil {
+	if o == nil || IsNil(o.TotalVlanPortCount) {
 		return nil, false
 	}
 	return o.TotalVlanPortCount, true
@@ -306,7 +310,7 @@ func (o *NetworkVlanPortInfo) GetTotalVlanPortCountOk() (*int64, bool) {
 
 // HasTotalVlanPortCount returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasTotalVlanPortCount() bool {
-	if o != nil && o.TotalVlanPortCount != nil {
+	if o != nil && !IsNil(o.TotalVlanPortCount) {
 		return true
 	}
 
@@ -321,7 +325,7 @@ func (o *NetworkVlanPortInfo) SetTotalVlanPortCount(v int64) {
 // GetUncompressedVlanPortCount returns the UncompressedVlanPortCount field value if set, zero value otherwise.
 // Deprecated
 func (o *NetworkVlanPortInfo) GetUncompressedVlanPortCount() string {
-	if o == nil || o.UncompressedVlanPortCount == nil {
+	if o == nil || IsNil(o.UncompressedVlanPortCount) {
 		var ret string
 		return ret
 	}
@@ -332,7 +336,7 @@ func (o *NetworkVlanPortInfo) GetUncompressedVlanPortCount() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *NetworkVlanPortInfo) GetUncompressedVlanPortCountOk() (*string, bool) {
-	if o == nil || o.UncompressedVlanPortCount == nil {
+	if o == nil || IsNil(o.UncompressedVlanPortCount) {
 		return nil, false
 	}
 	return o.UncompressedVlanPortCount, true
@@ -340,7 +344,7 @@ func (o *NetworkVlanPortInfo) GetUncompressedVlanPortCountOk() (*string, bool) {
 
 // HasUncompressedVlanPortCount returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasUncompressedVlanPortCount() bool {
-	if o != nil && o.UncompressedVlanPortCount != nil {
+	if o != nil && !IsNil(o.UncompressedVlanPortCount) {
 		return true
 	}
 
@@ -355,7 +359,7 @@ func (o *NetworkVlanPortInfo) SetUncompressedVlanPortCount(v string) {
 
 // GetUncompressedVlanPortCountValue returns the UncompressedVlanPortCountValue field value if set, zero value otherwise.
 func (o *NetworkVlanPortInfo) GetUncompressedVlanPortCountValue() int64 {
-	if o == nil || o.UncompressedVlanPortCountValue == nil {
+	if o == nil || IsNil(o.UncompressedVlanPortCountValue) {
 		var ret int64
 		return ret
 	}
@@ -365,7 +369,7 @@ func (o *NetworkVlanPortInfo) GetUncompressedVlanPortCountValue() int64 {
 // GetUncompressedVlanPortCountValueOk returns a tuple with the UncompressedVlanPortCountValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVlanPortInfo) GetUncompressedVlanPortCountValueOk() (*int64, bool) {
-	if o == nil || o.UncompressedVlanPortCountValue == nil {
+	if o == nil || IsNil(o.UncompressedVlanPortCountValue) {
 		return nil, false
 	}
 	return o.UncompressedVlanPortCountValue, true
@@ -373,7 +377,7 @@ func (o *NetworkVlanPortInfo) GetUncompressedVlanPortCountValueOk() (*int64, boo
 
 // HasUncompressedVlanPortCountValue returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasUncompressedVlanPortCountValue() bool {
-	if o != nil && o.UncompressedVlanPortCountValue != nil {
+	if o != nil && !IsNil(o.UncompressedVlanPortCountValue) {
 		return true
 	}
 
@@ -387,7 +391,7 @@ func (o *NetworkVlanPortInfo) SetUncompressedVlanPortCountValue(v int64) {
 
 // GetVlanPortLimit returns the VlanPortLimit field value if set, zero value otherwise.
 func (o *NetworkVlanPortInfo) GetVlanPortLimit() int64 {
-	if o == nil || o.VlanPortLimit == nil {
+	if o == nil || IsNil(o.VlanPortLimit) {
 		var ret int64
 		return ret
 	}
@@ -397,7 +401,7 @@ func (o *NetworkVlanPortInfo) GetVlanPortLimit() int64 {
 // GetVlanPortLimitOk returns a tuple with the VlanPortLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NetworkVlanPortInfo) GetVlanPortLimitOk() (*int64, bool) {
-	if o == nil || o.VlanPortLimit == nil {
+	if o == nil || IsNil(o.VlanPortLimit) {
 		return nil, false
 	}
 	return o.VlanPortLimit, true
@@ -405,7 +409,7 @@ func (o *NetworkVlanPortInfo) GetVlanPortLimitOk() (*int64, bool) {
 
 // HasVlanPortLimit returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasVlanPortLimit() bool {
-	if o != nil && o.VlanPortLimit != nil {
+	if o != nil && !IsNil(o.VlanPortLimit) {
 		return true
 	}
 
@@ -417,163 +421,222 @@ func (o *NetworkVlanPortInfo) SetVlanPortLimit(v int64) {
 	o.VlanPortLimit = &v
 }
 
-// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
+// GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkVlanPortInfo) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil || IsNil(o.InventoryDeviceInfo.Get()) {
 		var ret InventoryDeviceInfoRelationship
 		return ret
 	}
-	return *o.InventoryDeviceInfo
+	return *o.InventoryDeviceInfo.Get()
 }
 
 // GetInventoryDeviceInfoOk returns a tuple with the InventoryDeviceInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkVlanPortInfo) GetInventoryDeviceInfoOk() (*InventoryDeviceInfoRelationship, bool) {
-	if o == nil || o.InventoryDeviceInfo == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.InventoryDeviceInfo, true
+	return o.InventoryDeviceInfo.Get(), o.InventoryDeviceInfo.IsSet()
 }
 
 // HasInventoryDeviceInfo returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasInventoryDeviceInfo() bool {
-	if o != nil && o.InventoryDeviceInfo != nil {
+	if o != nil && o.InventoryDeviceInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInventoryDeviceInfo gets a reference to the given InventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
+// SetInventoryDeviceInfo gets a reference to the given NullableInventoryDeviceInfoRelationship and assigns it to the InventoryDeviceInfo field.
 func (o *NetworkVlanPortInfo) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship) {
-	o.InventoryDeviceInfo = &v
+	o.InventoryDeviceInfo.Set(&v)
 }
 
-// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+// SetInventoryDeviceInfoNil sets the value for InventoryDeviceInfo to be an explicit nil
+func (o *NetworkVlanPortInfo) SetInventoryDeviceInfoNil() {
+	o.InventoryDeviceInfo.Set(nil)
+}
+
+// UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+func (o *NetworkVlanPortInfo) UnsetInventoryDeviceInfo() {
+	o.InventoryDeviceInfo.Unset()
+}
+
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkVlanPortInfo) GetNetworkElement() NetworkElementRelationship {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil || IsNil(o.NetworkElement.Get()) {
 		var ret NetworkElementRelationship
 		return ret
 	}
-	return *o.NetworkElement
+	return *o.NetworkElement.Get()
 }
 
 // GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkVlanPortInfo) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
-	if o == nil || o.NetworkElement == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkElement, true
+	return o.NetworkElement.Get(), o.NetworkElement.IsSet()
 }
 
 // HasNetworkElement returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasNetworkElement() bool {
-	if o != nil && o.NetworkElement != nil {
+	if o != nil && o.NetworkElement.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+// SetNetworkElement gets a reference to the given NullableNetworkElementRelationship and assigns it to the NetworkElement field.
 func (o *NetworkVlanPortInfo) SetNetworkElement(v NetworkElementRelationship) {
-	o.NetworkElement = &v
+	o.NetworkElement.Set(&v)
 }
 
-// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
+// SetNetworkElementNil sets the value for NetworkElement to be an explicit nil
+func (o *NetworkVlanPortInfo) SetNetworkElementNil() {
+	o.NetworkElement.Set(nil)
+}
+
+// UnsetNetworkElement ensures that no value is present for NetworkElement, not even an explicit nil
+func (o *NetworkVlanPortInfo) UnsetNetworkElement() {
+	o.NetworkElement.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkVlanPortInfo) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
 		var ret AssetDeviceRegistrationRelationship
 		return ret
 	}
-	return *o.RegisteredDevice
+	return *o.RegisteredDevice.Get()
 }
 
 // GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkVlanPortInfo) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
-	if o == nil || o.RegisteredDevice == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegisteredDevice, true
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
 }
 
 // HasRegisteredDevice returns a boolean if a field has been set.
 func (o *NetworkVlanPortInfo) HasRegisteredDevice() bool {
-	if o != nil && o.RegisteredDevice != nil {
+	if o != nil && o.RegisteredDevice.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRegisteredDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
 func (o *NetworkVlanPortInfo) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
-	o.RegisteredDevice = &v
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *NetworkVlanPortInfo) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *NetworkVlanPortInfo) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o NetworkVlanPortInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NetworkVlanPortInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedInventoryBase, errInventoryBase := json.Marshal(o.InventoryBase)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
 	errInventoryBase = json.Unmarshal([]byte(serializedInventoryBase), &toSerialize)
 	if errInventoryBase != nil {
-		return []byte{}, errInventoryBase
+		return map[string]interface{}{}, errInventoryBase
 	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.AccessVlanPortCount != nil {
+	toSerialize["ClassId"] = o.ClassId
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AccessVlanPortCount) {
 		toSerialize["AccessVlanPortCount"] = o.AccessVlanPortCount
 	}
-	if o.BorderVlanPortCount != nil {
+	if !IsNil(o.BorderVlanPortCount) {
 		toSerialize["BorderVlanPortCount"] = o.BorderVlanPortCount
 	}
-	if o.CompressedOptimizationSetsValue != nil {
+	if !IsNil(o.CompressedOptimizationSetsValue) {
 		toSerialize["CompressedOptimizationSetsValue"] = o.CompressedOptimizationSetsValue
 	}
-	if o.CompressedVlanPortCount != nil {
+	if !IsNil(o.CompressedVlanPortCount) {
 		toSerialize["CompressedVlanPortCount"] = o.CompressedVlanPortCount
 	}
-	if o.CompressedVlanPortCountValue != nil {
+	if !IsNil(o.CompressedVlanPortCountValue) {
 		toSerialize["CompressedVlanPortCountValue"] = o.CompressedVlanPortCountValue
 	}
-	if o.TotalVlanPortCount != nil {
+	if !IsNil(o.TotalVlanPortCount) {
 		toSerialize["TotalVlanPortCount"] = o.TotalVlanPortCount
 	}
-	if o.UncompressedVlanPortCount != nil {
+	if !IsNil(o.UncompressedVlanPortCount) {
 		toSerialize["UncompressedVlanPortCount"] = o.UncompressedVlanPortCount
 	}
-	if o.UncompressedVlanPortCountValue != nil {
+	if !IsNil(o.UncompressedVlanPortCountValue) {
 		toSerialize["UncompressedVlanPortCountValue"] = o.UncompressedVlanPortCountValue
 	}
-	if o.VlanPortLimit != nil {
+	if !IsNil(o.VlanPortLimit) {
 		toSerialize["VlanPortLimit"] = o.VlanPortLimit
 	}
-	if o.InventoryDeviceInfo != nil {
-		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	if o.InventoryDeviceInfo.IsSet() {
+		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
-	if o.NetworkElement != nil {
-		toSerialize["NetworkElement"] = o.NetworkElement
+	if o.NetworkElement.IsSet() {
+		toSerialize["NetworkElement"] = o.NetworkElement.Get()
 	}
-	if o.RegisteredDevice != nil {
-		toSerialize["RegisteredDevice"] = o.RegisteredDevice
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
 
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
-func (o *NetworkVlanPortInfo) UnmarshalJSON(bytes []byte) (err error) {
+func (o *NetworkVlanPortInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ClassId",
+		"ObjectType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	type NetworkVlanPortInfoWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -598,15 +661,15 @@ func (o *NetworkVlanPortInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// The number of uncompressed VLAN port count on a Fabric Interconnect calculated by VLAN port group library.
 		UncompressedVlanPortCountValue *int64 `json:"UncompressedVlanPortCountValue,omitempty"`
 		// The maximum number of VLAN ports allowed on a Fabric Interconnect.
-		VlanPortLimit       *int64                               `json:"VlanPortLimit,omitempty"`
-		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
-		NetworkElement      *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
-		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		VlanPortLimit       *int64                                      `json:"VlanPortLimit,omitempty"`
+		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		NetworkElement      NullableNetworkElementRelationship          `json:"NetworkElement,omitempty"`
+		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varNetworkVlanPortInfoWithoutEmbeddedStruct := NetworkVlanPortInfoWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(bytes, &varNetworkVlanPortInfoWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNetworkVlanPortInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varNetworkVlanPortInfo := _NetworkVlanPortInfo{}
 		varNetworkVlanPortInfo.ClassId = varNetworkVlanPortInfoWithoutEmbeddedStruct.ClassId
@@ -630,7 +693,7 @@ func (o *NetworkVlanPortInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	varNetworkVlanPortInfo := _NetworkVlanPortInfo{}
 
-	err = json.Unmarshal(bytes, &varNetworkVlanPortInfo)
+	err = json.Unmarshal(data, &varNetworkVlanPortInfo)
 	if err == nil {
 		o.InventoryBase = varNetworkVlanPortInfo.InventoryBase
 	} else {
@@ -639,7 +702,7 @@ func (o *NetworkVlanPortInfo) UnmarshalJSON(bytes []byte) (err error) {
 
 	additionalProperties := make(map[string]interface{})
 
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessVlanPortCount")
