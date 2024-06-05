@@ -209,6 +209,11 @@ func getCondHclStatusSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"management_mode": {
+			Description: "The management mode at which server is connected to intersight.\n* `IntersightStandalone` - Intersight Standalone mode of operation.\n* `UCSM` - Unified Computing System Manager mode of operation.\n* `Intersight` - Intersight managed mode of operation.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -733,6 +738,11 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	if v, ok := d.GetOk("management_mode"); ok {
+		x := (v.(string))
+		o.SetManagementMode(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1078,6 +1088,7 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 				temp["inv_processor"] = (s.GetInvProcessor())
 
 				temp["managed_object"] = flattenMapInventoryBaseRelationship(s.GetManagedObject(), d)
+				temp["management_mode"] = (s.GetManagementMode())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

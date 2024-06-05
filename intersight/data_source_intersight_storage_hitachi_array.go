@@ -95,8 +95,53 @@ func getStorageHitachiArraySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"device_location": {
+			Description: "The location of the device.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"address": {
+						Description: "The information about the address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"latitude": {
+						Description: "Location latitude in decimal degrees format.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"longitude": {
+						Description: "Location longitude in decimal degrees format.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"device_mo_id": {
 			Description: "The database identifier of the registered device of an object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"device_type": {
+			Description: "The categorization of the device type. Optional parameter to categorize devices by product type. For example, Meraki device types are wireless, appliance, switch, systemsManager, camera, cellularGateway, sensor, and secureConnect.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -107,6 +152,11 @@ func getStorageHitachiArraySchema() map[string]*schema.Schema {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"hardware_version": {
+			Description: "The hardware version of the device.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -631,9 +681,45 @@ func dataSourceStorageHitachiArrayRead(c context.Context, d *schema.ResourceData
 		o.SetDeviceId(x)
 	}
 
+	if v, ok := d.GetOk("device_location"); ok {
+		p := make([]models.EquipmentDeviceLocation, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.EquipmentDeviceLocation{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("equipment.DeviceLocation")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetDeviceLocation(x)
+		}
+	}
+
 	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
+	}
+
+	if v, ok := d.GetOk("device_type"); ok {
+		x := (v.(string))
+		o.SetDeviceType(x)
 	}
 
 	if v, ok := d.GetOk("dn"); ok {
@@ -644,6 +730,11 @@ func dataSourceStorageHitachiArrayRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("hardware_version"); ok {
+		x := (v.(string))
+		o.SetHardwareVersion(x)
 	}
 
 	if v, ok := d.GetOkExists("is_upgraded"); ok {
@@ -1091,9 +1182,13 @@ func dataSourceStorageHitachiArrayRead(c context.Context, d *schema.ResourceData
 				temp["ctl2_ip"] = (s.GetCtl2Ip())
 				temp["ctl2_micro_version"] = (s.GetCtl2MicroVersion())
 				temp["device_id"] = (s.GetDeviceId())
+
+				temp["device_location"] = flattenMapEquipmentDeviceLocation(s.GetDeviceLocation(), d)
 				temp["device_mo_id"] = (s.GetDeviceMoId())
+				temp["device_type"] = (s.GetDeviceType())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["hardware_version"] = (s.GetHardwareVersion())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 
 				temp["mod_time"] = (s.GetModTime()).String()

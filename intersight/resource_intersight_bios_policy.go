@@ -458,17 +458,10 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
-			"cbs_cmn_mem_dram_refresh_rate": {
-				Description:  "BIOS Token for setting DRAM Refresh Rate configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `3.9 usec` - Value - 3.9 usec for configuring CbsCmnMemDramRefreshRate token.\n* `7.8 usec` - Value - 7.8 usec for configuring CbsCmnMemDramRefreshRate token.",
-				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "3.9 usec", "7.8 usec"}, false),
-				Optional:     true,
-				Default:      "platform-default",
-			},
 			"cbs_cmn_mem_map_bank_interleave_ddr4": {
-				Description:  "BIOS Token for setting Chipset Interleave configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `enabled` - Value - enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.",
+				Description:  "BIOS Token for setting Chipset Interleave configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `Enabled` - Value - Enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "Enabled"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -558,20 +551,6 @@ func resourceBiosPolicy() *schema.Resource {
 			},
 			"cbs_dbg_cpu_lapic_mode": {
 				Description:  "BIOS Token for setting Local APIC Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode token.\n* `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode token.\n* `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode token.\n* `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode token.",
-				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Compatibility", "X2APIC", "XAPIC"}, false),
-				Optional:     true,
-				Default:      "platform-default",
-			},
-			"cbs_dbg_cpu_lapic_mode7xx2": {
-				Description:  "BIOS Token for setting Local APIC Mode 7xx2 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx2 token.\n* `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx2 token.\n* `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx2 token.",
-				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "X2APIC", "XAPIC"}, false),
-				Optional:     true,
-				Default:      "platform-default",
-			},
-			"cbs_dbg_cpu_lapic_mode7xx3": {
-				Description:  "BIOS Token for setting Local APIC Mode 7xx3 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx3 token.\n* `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode7xx3 token.\n* `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx3 token.\n* `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx3 token.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Compatibility", "X2APIC", "XAPIC"}, false),
 				Optional:     true,
@@ -3918,11 +3897,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnMemCtrllerPwrDnEnDdr(x)
 	}
 
-	if v, ok := d.GetOk("cbs_cmn_mem_dram_refresh_rate"); ok {
-		x := (v.(string))
-		o.SetCbsCmnMemDramRefreshRate(x)
-	}
-
 	if v, ok := d.GetOk("cbs_cmn_mem_map_bank_interleave_ddr4"); ok {
 		x := (v.(string))
 		o.SetCbsCmnMemMapBankInterleaveDdr4(x)
@@ -3991,16 +3965,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("cbs_dbg_cpu_lapic_mode"); ok {
 		x := (v.(string))
 		o.SetCbsDbgCpuLapicMode(x)
-	}
-
-	if v, ok := d.GetOk("cbs_dbg_cpu_lapic_mode7xx2"); ok {
-		x := (v.(string))
-		o.SetCbsDbgCpuLapicMode7xx2(x)
-	}
-
-	if v, ok := d.GetOk("cbs_dbg_cpu_lapic_mode7xx3"); ok {
-		x := (v.(string))
-		o.SetCbsDbgCpuLapicMode7xx3(x)
 	}
 
 	if v, ok := d.GetOk("cbs_dbg_cpu_snp_mem_cover"); ok {
@@ -6317,10 +6281,6 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property CbsCmnMemCtrllerPwrDnEnDdr in BiosPolicy object: %s", err.Error())
 	}
 
-	if err := d.Set("cbs_cmn_mem_dram_refresh_rate", (s.GetCbsCmnMemDramRefreshRate())); err != nil {
-		return diag.Errorf("error occurred while setting property CbsCmnMemDramRefreshRate in BiosPolicy object: %s", err.Error())
-	}
-
 	if err := d.Set("cbs_cmn_mem_map_bank_interleave_ddr4", (s.GetCbsCmnMemMapBankInterleaveDdr4())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsCmnMemMapBankInterleaveDdr4 in BiosPolicy object: %s", err.Error())
 	}
@@ -6375,14 +6335,6 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("cbs_dbg_cpu_lapic_mode", (s.GetCbsDbgCpuLapicMode())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsDbgCpuLapicMode in BiosPolicy object: %s", err.Error())
-	}
-
-	if err := d.Set("cbs_dbg_cpu_lapic_mode7xx2", (s.GetCbsDbgCpuLapicMode7xx2())); err != nil {
-		return diag.Errorf("error occurred while setting property CbsDbgCpuLapicMode7xx2 in BiosPolicy object: %s", err.Error())
-	}
-
-	if err := d.Set("cbs_dbg_cpu_lapic_mode7xx3", (s.GetCbsDbgCpuLapicMode7xx3())); err != nil {
-		return diag.Errorf("error occurred while setting property CbsDbgCpuLapicMode7xx3 in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_dbg_cpu_snp_mem_cover", (s.GetCbsDbgCpuSnpMemCover())); err != nil {
@@ -8298,12 +8250,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCbsCmnMemCtrllerPwrDnEnDdr(x)
 	}
 
-	if d.HasChange("cbs_cmn_mem_dram_refresh_rate") {
-		v := d.Get("cbs_cmn_mem_dram_refresh_rate")
-		x := (v.(string))
-		o.SetCbsCmnMemDramRefreshRate(x)
-	}
-
 	if d.HasChange("cbs_cmn_mem_map_bank_interleave_ddr4") {
 		v := d.Get("cbs_cmn_mem_map_bank_interleave_ddr4")
 		x := (v.(string))
@@ -8386,18 +8332,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("cbs_dbg_cpu_lapic_mode")
 		x := (v.(string))
 		o.SetCbsDbgCpuLapicMode(x)
-	}
-
-	if d.HasChange("cbs_dbg_cpu_lapic_mode7xx2") {
-		v := d.Get("cbs_dbg_cpu_lapic_mode7xx2")
-		x := (v.(string))
-		o.SetCbsDbgCpuLapicMode7xx2(x)
-	}
-
-	if d.HasChange("cbs_dbg_cpu_lapic_mode7xx3") {
-		v := d.Get("cbs_dbg_cpu_lapic_mode7xx3")
-		x := (v.(string))
-		o.SetCbsDbgCpuLapicMode7xx3(x)
 	}
 
 	if d.HasChange("cbs_dbg_cpu_snp_mem_cover") {

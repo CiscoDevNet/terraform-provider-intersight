@@ -24,6 +24,7 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `node_id`:(int) Node id of the node being replaced. 
+* `node_ip_changed`:(bool) If the node being replaced has a different IP. 
 * `remote_dns`:(string) Round robin DNS address, which should be able to resolve the hostnames of all the nodes in the cluster. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `start_time`:(string) Start date of the software install. UI can modify startTime to re-schedule an install. 

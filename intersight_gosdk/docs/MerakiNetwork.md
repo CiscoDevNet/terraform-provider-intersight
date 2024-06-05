@@ -6,9 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "meraki.Network"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "meraki.Network"]
-**Name** | Pointer to **string** | The Meraki network name seamlessly uniting devices for effortless connectivity. | [optional] 
-**NetworkId** | Pointer to **string** | The unique Meraki network id. | [optional] 
+**Name** | Pointer to **string** | The Meraki network name seamlessly uniting devices for effortless connectivity. | [optional] [readonly] 
+**NetworkId** | Pointer to **string** | The unique Meraki network id. | [optional] [readonly] 
 **NetworkTags** | Pointer to **[]string** |  | [optional] 
+**OrganizationId** | Pointer to **string** | The unique Meraki organization id. | [optional] [readonly] 
 **ProductTypes** | Pointer to **[]string** |  | [optional] 
 **Organization** | Pointer to [**NullableMerakiOrganizationRelationship**](MerakiOrganizationRelationship.md) |  | [optional] 
 
@@ -156,6 +157,31 @@ HasNetworkTags returns a boolean if a field has been set.
 `func (o *MerakiNetwork) UnsetNetworkTags()`
 
 UnsetNetworkTags ensures that no value is present for NetworkTags, not even an explicit nil
+### GetOrganizationId
+
+`func (o *MerakiNetwork) GetOrganizationId() string`
+
+GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
+
+### GetOrganizationIdOk
+
+`func (o *MerakiNetwork) GetOrganizationIdOk() (*string, bool)`
+
+GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrganizationId
+
+`func (o *MerakiNetwork) SetOrganizationId(v string)`
+
+SetOrganizationId sets OrganizationId field to given value.
+
+### HasOrganizationId
+
+`func (o *MerakiNetwork) HasOrganizationId() bool`
+
+HasOrganizationId returns a boolean if a field has been set.
+
 ### GetProductTypes
 
 `func (o *MerakiNetwork) GetProductTypes() []string`

@@ -146,7 +146,7 @@ func getApplianceClusterReplaceNodeSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the install phase.\n* `Backup` - Backup the currently running node.\n* `EnableBootstrap` - Disable echo and enable nginx on the currently running node.\n* `UpdateAnsibleHosts` - Update /etc/ansible/hosts on each node.\n* `SyncImages` - Sync images and manifest to each node.\n* `ConfigureEtcd` - Configure etcd on each node.\n* `DeployServices` - Deploy kubernetes services from node 1.\n* `InstallEquinox` - Configure and install equinox on each node.\n* `Validate` - Validate equinox is running in primary/secondary mode.\n* `CheckApplianceClusterState` - Check the appliance cluster status.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.",
+						Description: "Name of the install phase.\n* `Backup` - Backup the currently running node.\n* `EnableBootstrap` - Disable echo and enable nginx on the currently running node.\n* `UpdateAnsibleHosts` - Update /etc/ansible/hosts on each node.\n* `UpdateNetworkConfig` - Update Network config for node IP change scenario.\n* `SyncImages` - Sync images and manifest to each node.\n* `ConfigureEtcd` - Configure etcd on each node.\n* `DeployServices` - Deploy kubernetes services from node 1.\n* `InstallEquinox` - Configure and install equinox on each node.\n* `Validate` - Validate equinox is running in primary/secondary mode.\n* `CheckApplianceClusterState` - Check the appliance cluster status.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -226,7 +226,7 @@ func getApplianceClusterReplaceNodeSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"name": {
-						Description: "Name of the install phase.\n* `Backup` - Backup the currently running node.\n* `EnableBootstrap` - Disable echo and enable nginx on the currently running node.\n* `UpdateAnsibleHosts` - Update /etc/ansible/hosts on each node.\n* `SyncImages` - Sync images and manifest to each node.\n* `ConfigureEtcd` - Configure etcd on each node.\n* `DeployServices` - Deploy kubernetes services from node 1.\n* `InstallEquinox` - Configure and install equinox on each node.\n* `Validate` - Validate equinox is running in primary/secondary mode.\n* `CheckApplianceClusterState` - Check the appliance cluster status.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.",
+						Description: "Name of the install phase.\n* `Backup` - Backup the currently running node.\n* `EnableBootstrap` - Disable echo and enable nginx on the currently running node.\n* `UpdateAnsibleHosts` - Update /etc/ansible/hosts on each node.\n* `UpdateNetworkConfig` - Update Network config for node IP change scenario.\n* `SyncImages` - Sync images and manifest to each node.\n* `ConfigureEtcd` - Configure etcd on each node.\n* `DeployServices` - Deploy kubernetes services from node 1.\n* `InstallEquinox` - Configure and install equinox on each node.\n* `Validate` - Validate equinox is running in primary/secondary mode.\n* `CheckApplianceClusterState` - Check the appliance cluster status.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -355,6 +355,11 @@ func getApplianceClusterReplaceNodeSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"node_ip_changed": {
+			Description: "If the node being replaced has a different IP.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -956,6 +961,11 @@ func dataSourceApplianceClusterReplaceNodeRead(c context.Context, d *schema.Reso
 		o.SetNodeInfo(x)
 	}
 
+	if v, ok := d.GetOkExists("node_ip_changed"); ok {
+		x := (v.(bool))
+		o.SetNodeIpChanged(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1284,6 +1294,7 @@ func dataSourceApplianceClusterReplaceNodeRead(c context.Context, d *schema.Reso
 				temp["node_id"] = (s.GetNodeId())
 
 				temp["node_info"] = flattenListApplianceNodeIpInfo(s.GetNodeInfo(), d)
+				temp["node_ip_changed"] = (s.GetNodeIpChanged())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

@@ -6,8 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "meraki.Organization"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "meraki.Organization"]
-**Name** | Pointer to **string** | The Meraki organization name. | [optional] 
-**OrganizationId** | Pointer to **string** | The Meraki organization id. | [optional] 
+**Name** | Pointer to **string** | The Meraki organization name. | [optional] [readonly] 
+**OrganizationId** | Pointer to **string** | The Meraki organization id. | [optional] [readonly] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -118,6 +119,41 @@ SetOrganizationId sets OrganizationId field to given value.
 
 HasOrganizationId returns a boolean if a field has been set.
 
+### GetRegisteredDevice
+
+`func (o *MerakiOrganization) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
+
+GetRegisteredDevice returns the RegisteredDevice field if non-nil, zero value otherwise.
+
+### GetRegisteredDeviceOk
+
+`func (o *MerakiOrganization) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool)`
+
+GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegisteredDevice
+
+`func (o *MerakiOrganization) SetRegisteredDevice(v AssetDeviceRegistrationRelationship)`
+
+SetRegisteredDevice sets RegisteredDevice field to given value.
+
+### HasRegisteredDevice
+
+`func (o *MerakiOrganization) HasRegisteredDevice() bool`
+
+HasRegisteredDevice returns a boolean if a field has been set.
+
+### SetRegisteredDeviceNil
+
+`func (o *MerakiOrganization) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *MerakiOrganization) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

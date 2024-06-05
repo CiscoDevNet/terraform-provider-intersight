@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.ClusterReplaceNode"]
 **Hostname** | Pointer to **string** | Hostname of the node being replaced. | [optional] 
 **NodeId** | Pointer to **int64** | Node id of the node being replaced. | [optional] 
+**NodeIpChanged** | Pointer to **bool** | If the node being replaced has a different IP. | [optional] [readonly] 
 
 ## Methods
 
@@ -117,6 +118,31 @@ SetNodeId sets NodeId field to given value.
 `func (o *ApplianceClusterReplaceNode) HasNodeId() bool`
 
 HasNodeId returns a boolean if a field has been set.
+
+### GetNodeIpChanged
+
+`func (o *ApplianceClusterReplaceNode) GetNodeIpChanged() bool`
+
+GetNodeIpChanged returns the NodeIpChanged field if non-nil, zero value otherwise.
+
+### GetNodeIpChangedOk
+
+`func (o *ApplianceClusterReplaceNode) GetNodeIpChangedOk() (*bool, bool)`
+
+GetNodeIpChangedOk returns a tuple with the NodeIpChanged field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeIpChanged
+
+`func (o *ApplianceClusterReplaceNode) SetNodeIpChanged(v bool)`
+
+SetNodeIpChanged sets NodeIpChanged field to given value.
+
+### HasNodeIpChanged
+
+`func (o *ApplianceClusterReplaceNode) HasNodeIpChanged() bool`
+
+HasNodeIpChanged returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

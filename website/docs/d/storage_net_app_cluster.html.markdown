@@ -19,9 +19,11 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `default_admin_locked`:(bool) Indicates whether the default admin user is locked out. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
+* `device_type`:(string) The categorization of the device type. Optional parameter to categorize devices by product type. For example, Meraki device types are wireless, appliance, switch, systemsManager, camera, cellularGateway, sensor, and secureConnect. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `fips_compliant`:(bool) Indicates whether or not the software FIPS mode is enabled on the cluster. 
+* `hardware_version`:(string) The hardware version of the device. 
 * `insecure_ciphers`:(int) Number of SVMs on the cluster that use insecure ciphers. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `key`:(string) Unique identifier of NetApp Cluster across data center. 

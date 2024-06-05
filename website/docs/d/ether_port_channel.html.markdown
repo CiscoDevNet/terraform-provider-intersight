@@ -3,12 +3,12 @@ subcategory: "ether"
 layout: "intersight"
 page_title: "Intersight: intersight_ether_port_channel"
 description: |-
-        Model contains the details of the ethernet port-channels configured on the FI.
+        Ethernet port channels in a Fabric Interconnect are logical interfaces created by aggregating multiple physical Ethernet ports. This configuration enhances bandwidth, provides load balancing, and offers redundancy for network connections.
 
 ---
 
 # Data Source: intersight_ether_port_channel
-Model contains the details of the ethernet port-channels configured on the FI.
+Ethernet port channels in a Fabric Interconnect are logical interfaces created by aggregating multiple physical Ethernet ports. This configuration enhances bandwidth, provides load balancing, and offers redundancy for network connections.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

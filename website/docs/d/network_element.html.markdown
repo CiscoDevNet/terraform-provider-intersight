@@ -3,12 +3,12 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_element"
 description: |-
-        A Unified Computing Systems (UCS) Fabric Interconnect.
+        The Cisco UCS Fabric Interconnect module within a domain supporting a range of models including the 6400, 6500 series etc.
 
 ---
 
 # Data Source: intersight_network_element
-A Unified Computing Systems (UCS) Fabric Interconnect.
+The Cisco UCS Fabric Interconnect module within a domain supporting a range of models including the 6400, 6500 series etc.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

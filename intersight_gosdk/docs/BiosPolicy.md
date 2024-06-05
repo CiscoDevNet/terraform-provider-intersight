@@ -60,8 +60,7 @@ Name | Type | Description | Notes
 **CbsCmnGnbSmucppc** | Pointer to **string** | BIOS Token for setting CPPC configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnGnbSmucppc token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnGnbSmucppc token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnGnbSmucppc token. | [optional] [default to "platform-default"]
 **CbsCmnMemCtrlBankGroupSwapDdr4** | Pointer to **string** | BIOS Token for setting Bank Group Swap configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. | [optional] [default to "platform-default"]
 **CbsCmnMemCtrllerPwrDnEnDdr** | Pointer to **string** | BIOS Token for setting Power Down Enable configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token. | [optional] [default to "platform-default"]
-**CbsCmnMemDramRefreshRate** | Pointer to **string** | BIOS Token for setting DRAM Refresh Rate configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;3.9 usec&#x60; - Value - 3.9 usec for configuring CbsCmnMemDramRefreshRate token. * &#x60;7.8 usec&#x60; - Value - 7.8 usec for configuring CbsCmnMemDramRefreshRate token. | [optional] [default to "platform-default"]
-**CbsCmnMemMapBankInterleaveDdr4** | Pointer to **string** | BIOS Token for setting Chipset Interleave configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. | [optional] [default to "platform-default"]
+**CbsCmnMemMapBankInterleaveDdr4** | Pointer to **string** | BIOS Token for setting Chipset Interleave configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * &#x60;Enabled&#x60; - Value - Enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. | [optional] [default to "platform-default"]
 **CbsCmnMemSpeedDdr47xx2** | Pointer to **string** | BIOS Token for setting Memory Clock Speed 7xx2 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;667MHz&#x60; - Value - 667MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;800MHz&#x60; - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;933MHz&#x60; - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;1067MHz&#x60; - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;1200MHz&#x60; - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;1333MHz&#x60; - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;1467MHz&#x60; - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;1600MHz&#x60; - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemSpeedDdr47xx2 token. | [optional] [default to "platform-default"]
 **CbsCmnMemSpeedDdr47xx3** | Pointer to **string** | BIOS Token for setting Memory Clock Speed 7xx3 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;400MHz&#x60; - Value - 400MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;800MHz&#x60; - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;933MHz&#x60; - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1067MHz&#x60; - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1200MHz&#x60; - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1333MHz&#x60; - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1467MHz&#x60; - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1600MHz&#x60; - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1633MHz&#x60; - Value - 1633MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1667MHz&#x60; - Value - 1667MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1700MHz&#x60; - Value - 1700MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1733MHz&#x60; - Value - 1733MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1767MHz&#x60; - Value - 1767MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;1800MHz&#x60; - Value - 1800MHz for configuring CbsCmnMemSpeedDdr47xx3 token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnMemSpeedDdr47xx3 token. | [optional] [default to "platform-default"]
 **CbsCmnPreferredIo7xx2** | Pointer to **string** | BIOS Token for setting Preferred IO 7xx2 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCmnPreferredIo7xx2 token. * &#x60;Manual&#x60; - Value - Manual for configuring CbsCmnPreferredIo7xx2 token. | [optional] [default to "platform-default"]
@@ -75,8 +74,6 @@ Name | Type | Description | Notes
 **CbsCpuSmtCtrl** | Pointer to **string** | BIOS Token for setting CPU SMT Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsCpuSmtCtrl token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsCpuSmtCtrl token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsCpuSmtCtrl token. | [optional] [default to "platform-default"]
 **CbsDbgCpuGenCpuWdt** | Pointer to **string** | BIOS Token for setting Core Watchdog Timer Enable configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDbgCpuGenCpuWdt token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsDbgCpuGenCpuWdt token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsDbgCpuGenCpuWdt token. | [optional] [default to "platform-default"]
 **CbsDbgCpuLapicMode** | Pointer to **string** | BIOS Token for setting Local APIC Mode configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDbgCpuLapicMode token. * &#x60;Compatibility&#x60; - Value - Compatibility for configuring CbsDbgCpuLapicMode token. * &#x60;X2APIC&#x60; - Value - X2APIC for configuring CbsDbgCpuLapicMode token. * &#x60;XAPIC&#x60; - Value - XAPIC for configuring CbsDbgCpuLapicMode token. | [optional] [default to "platform-default"]
-**CbsDbgCpuLapicMode7xx2** | Pointer to **string** | BIOS Token for setting Local APIC Mode 7xx2 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDbgCpuLapicMode7xx2 token. * &#x60;X2APIC&#x60; - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx2 token. * &#x60;XAPIC&#x60; - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx2 token. | [optional] [default to "platform-default"]
-**CbsDbgCpuLapicMode7xx3** | Pointer to **string** | BIOS Token for setting Local APIC Mode 7xx3 configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDbgCpuLapicMode7xx3 token. * &#x60;Compatibility&#x60; - Value - Compatibility for configuring CbsDbgCpuLapicMode7xx3 token. * &#x60;X2APIC&#x60; - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx3 token. * &#x60;XAPIC&#x60; - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx3 token. | [optional] [default to "platform-default"]
 **CbsDbgCpuSnpMemCover** | Pointer to **string** | BIOS Token for setting SNP Memory Coverage configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDbgCpuSnpMemCover token. * &#x60;Custom&#x60; - Value - Custom for configuring CbsDbgCpuSnpMemCover token. * &#x60;disabled&#x60; - Value - disabled for configuring CbsDbgCpuSnpMemCover token. * &#x60;enabled&#x60; - Value - enabled for configuring CbsDbgCpuSnpMemCover token. | [optional] [default to "platform-default"]
 **CbsDbgCpuSnpMemSizeCover** | Pointer to **string** | BIOS Token for setting SNP Memory Size to Cover in MiB configuration (0 - 1048576 MiB). | [optional] [default to "platform-default"]
 **CbsDfCmn4linkMaxXgmiSpeed** | Pointer to **string** | BIOS Token for setting 4-link xGMI max speed configuration. * &#x60;platform-default&#x60; - Default value used by the platform for the BIOS setting. * &#x60;20Gbps&#x60; - Value - 20Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * &#x60;25Gbps&#x60; - Value - 25Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * &#x60;32Gbps&#x60; - Value - 32Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * &#x60;Auto&#x60; - Value - Auto for configuring CbsDfCmn4linkMaxXgmiSpeed token. | [optional] [default to "platform-default"]
@@ -1865,31 +1862,6 @@ SetCbsCmnMemCtrllerPwrDnEnDdr sets CbsCmnMemCtrllerPwrDnEnDdr field to given val
 
 HasCbsCmnMemCtrllerPwrDnEnDdr returns a boolean if a field has been set.
 
-### GetCbsCmnMemDramRefreshRate
-
-`func (o *BiosPolicy) GetCbsCmnMemDramRefreshRate() string`
-
-GetCbsCmnMemDramRefreshRate returns the CbsCmnMemDramRefreshRate field if non-nil, zero value otherwise.
-
-### GetCbsCmnMemDramRefreshRateOk
-
-`func (o *BiosPolicy) GetCbsCmnMemDramRefreshRateOk() (*string, bool)`
-
-GetCbsCmnMemDramRefreshRateOk returns a tuple with the CbsCmnMemDramRefreshRate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCbsCmnMemDramRefreshRate
-
-`func (o *BiosPolicy) SetCbsCmnMemDramRefreshRate(v string)`
-
-SetCbsCmnMemDramRefreshRate sets CbsCmnMemDramRefreshRate field to given value.
-
-### HasCbsCmnMemDramRefreshRate
-
-`func (o *BiosPolicy) HasCbsCmnMemDramRefreshRate() bool`
-
-HasCbsCmnMemDramRefreshRate returns a boolean if a field has been set.
-
 ### GetCbsCmnMemMapBankInterleaveDdr4
 
 `func (o *BiosPolicy) GetCbsCmnMemMapBankInterleaveDdr4() string`
@@ -2239,56 +2211,6 @@ SetCbsDbgCpuLapicMode sets CbsDbgCpuLapicMode field to given value.
 `func (o *BiosPolicy) HasCbsDbgCpuLapicMode() bool`
 
 HasCbsDbgCpuLapicMode returns a boolean if a field has been set.
-
-### GetCbsDbgCpuLapicMode7xx2
-
-`func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx2() string`
-
-GetCbsDbgCpuLapicMode7xx2 returns the CbsDbgCpuLapicMode7xx2 field if non-nil, zero value otherwise.
-
-### GetCbsDbgCpuLapicMode7xx2Ok
-
-`func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx2Ok() (*string, bool)`
-
-GetCbsDbgCpuLapicMode7xx2Ok returns a tuple with the CbsDbgCpuLapicMode7xx2 field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCbsDbgCpuLapicMode7xx2
-
-`func (o *BiosPolicy) SetCbsDbgCpuLapicMode7xx2(v string)`
-
-SetCbsDbgCpuLapicMode7xx2 sets CbsDbgCpuLapicMode7xx2 field to given value.
-
-### HasCbsDbgCpuLapicMode7xx2
-
-`func (o *BiosPolicy) HasCbsDbgCpuLapicMode7xx2() bool`
-
-HasCbsDbgCpuLapicMode7xx2 returns a boolean if a field has been set.
-
-### GetCbsDbgCpuLapicMode7xx3
-
-`func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx3() string`
-
-GetCbsDbgCpuLapicMode7xx3 returns the CbsDbgCpuLapicMode7xx3 field if non-nil, zero value otherwise.
-
-### GetCbsDbgCpuLapicMode7xx3Ok
-
-`func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx3Ok() (*string, bool)`
-
-GetCbsDbgCpuLapicMode7xx3Ok returns a tuple with the CbsDbgCpuLapicMode7xx3 field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCbsDbgCpuLapicMode7xx3
-
-`func (o *BiosPolicy) SetCbsDbgCpuLapicMode7xx3(v string)`
-
-SetCbsDbgCpuLapicMode7xx3 sets CbsDbgCpuLapicMode7xx3 field to given value.
-
-### HasCbsDbgCpuLapicMode7xx3
-
-`func (o *BiosPolicy) HasCbsDbgCpuLapicMode7xx3() bool`
-
-HasCbsDbgCpuLapicMode7xx3 returns a boolean if a field has been set.
 
 ### GetCbsDbgCpuSnpMemCover
 

@@ -11845,6 +11845,24 @@ func flattenMapEquipmentChassisRelationship(p models.EquipmentChassisRelationshi
 	equipmentchassisrelationships = append(equipmentchassisrelationships, equipmentchassisrelationship)
 	return equipmentchassisrelationships
 }
+func flattenMapEquipmentDeviceLocation(p models.EquipmentDeviceLocation, d *schema.ResourceData) []map[string]interface{} {
+	var equipmentdevicelocations []map[string]interface{}
+	var ret models.EquipmentDeviceLocation
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	equipmentdevicelocation := make(map[string]interface{})
+	equipmentdevicelocation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	equipmentdevicelocation["address"] = item.GetAddress()
+	equipmentdevicelocation["class_id"] = item.GetClassId()
+	equipmentdevicelocation["latitude"] = item.GetLatitude()
+	equipmentdevicelocation["longitude"] = item.GetLongitude()
+	equipmentdevicelocation["object_type"] = item.GetObjectType()
+
+	equipmentdevicelocations = append(equipmentdevicelocations, equipmentdevicelocation)
+	return equipmentdevicelocations
+}
 func flattenMapEquipmentExpanderModuleRelationship(p models.EquipmentExpanderModuleRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var equipmentexpandermodulerelationships []map[string]interface{}
 	var ret models.EquipmentExpanderModuleRelationship
@@ -17389,6 +17407,24 @@ func flattenMapMemoryPersistentMemoryRegionRelationship(p models.MemoryPersisten
 
 	memorypersistentmemoryregionrelationships = append(memorypersistentmemoryregionrelationships, memorypersistentmemoryregionrelationship)
 	return memorypersistentmemoryregionrelationships
+}
+func flattenMapMerakiNetworkRelationship(p models.MerakiNetworkRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var merakinetworkrelationships []map[string]interface{}
+	var ret models.MerakiNetworkRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	merakinetworkrelationship := make(map[string]interface{})
+	merakinetworkrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	merakinetworkrelationship["class_id"] = item.GetClassId()
+	merakinetworkrelationship["moid"] = item.GetMoid()
+	merakinetworkrelationship["object_type"] = item.GetObjectType()
+	merakinetworkrelationship["selector"] = item.GetSelector()
+
+	merakinetworkrelationships = append(merakinetworkrelationships, merakinetworkrelationship)
+	return merakinetworkrelationships
 }
 func flattenMapMerakiOrganizationRelationship(p models.MerakiOrganizationRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var merakiorganizationrelationships []map[string]interface{}

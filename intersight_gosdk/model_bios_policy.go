@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-16711
+API version: 1.0.11-17057
 Contact: intersight@cisco.com
 */
 
@@ -136,9 +136,7 @@ type BiosPolicy struct {
 	CbsCmnMemCtrlBankGroupSwapDdr4 *string `json:"CbsCmnMemCtrlBankGroupSwapDdr4,omitempty"`
 	// BIOS Token for setting Power Down Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `disabled` - Value - disabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `enabled` - Value - enabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token.
 	CbsCmnMemCtrllerPwrDnEnDdr *string `json:"CbsCmnMemCtrllerPwrDnEnDdr,omitempty"`
-	// BIOS Token for setting DRAM Refresh Rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `3.9 usec` - Value - 3.9 usec for configuring CbsCmnMemDramRefreshRate token. * `7.8 usec` - Value - 7.8 usec for configuring CbsCmnMemDramRefreshRate token.
-	CbsCmnMemDramRefreshRate *string `json:"CbsCmnMemDramRefreshRate,omitempty"`
-	// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `enabled` - Value - enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
+	// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `Enabled` - Value - Enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
 	CbsCmnMemMapBankInterleaveDdr4 *string `json:"CbsCmnMemMapBankInterleaveDdr4,omitempty"`
 	// BIOS Token for setting Memory Clock Speed 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `667MHz` - Value - 667MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `800MHz` - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `933MHz` - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1067MHz` - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1200MHz` - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1333MHz` - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1467MHz` - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1600MHz` - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `Auto` - Value - Auto for configuring CbsCmnMemSpeedDdr47xx2 token.
 	CbsCmnMemSpeedDdr47xx2 *string `json:"CbsCmnMemSpeedDdr47xx2,omitempty"`
@@ -166,10 +164,6 @@ type BiosPolicy struct {
 	CbsDbgCpuGenCpuWdt *string `json:"CbsDbgCpuGenCpuWdt,omitempty"`
 	// BIOS Token for setting Local APIC Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode token. * `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode token.
 	CbsDbgCpuLapicMode *string `json:"CbsDbgCpuLapicMode,omitempty"`
-	// BIOS Token for setting Local APIC Mode 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx2 token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx2 token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx2 token.
-	CbsDbgCpuLapicMode7xx2 *string `json:"CbsDbgCpuLapicMode7xx2,omitempty"`
-	// BIOS Token for setting Local APIC Mode 7xx3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx3 token. * `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode7xx3 token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx3 token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx3 token.
-	CbsDbgCpuLapicMode7xx3 *string `json:"CbsDbgCpuLapicMode7xx3,omitempty"`
 	// BIOS Token for setting SNP Memory Coverage configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuSnpMemCover token. * `Custom` - Value - Custom for configuring CbsDbgCpuSnpMemCover token. * `disabled` - Value - disabled for configuring CbsDbgCpuSnpMemCover token. * `enabled` - Value - enabled for configuring CbsDbgCpuSnpMemCover token.
 	CbsDbgCpuSnpMemCover *string `json:"CbsDbgCpuSnpMemCover,omitempty"`
 	// BIOS Token for setting SNP Memory Size to Cover in MiB configuration (0 - 1048576 MiB).
@@ -1046,8 +1040,6 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.CbsCmnMemCtrlBankGroupSwapDdr4 = &cbsCmnMemCtrlBankGroupSwapDdr4
 	var cbsCmnMemCtrllerPwrDnEnDdr string = "platform-default"
 	this.CbsCmnMemCtrllerPwrDnEnDdr = &cbsCmnMemCtrllerPwrDnEnDdr
-	var cbsCmnMemDramRefreshRate string = "platform-default"
-	this.CbsCmnMemDramRefreshRate = &cbsCmnMemDramRefreshRate
 	var cbsCmnMemMapBankInterleaveDdr4 string = "platform-default"
 	this.CbsCmnMemMapBankInterleaveDdr4 = &cbsCmnMemMapBankInterleaveDdr4
 	var cbsCmnMemSpeedDdr47xx2 string = "platform-default"
@@ -1076,10 +1068,6 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.CbsDbgCpuGenCpuWdt = &cbsDbgCpuGenCpuWdt
 	var cbsDbgCpuLapicMode string = "platform-default"
 	this.CbsDbgCpuLapicMode = &cbsDbgCpuLapicMode
-	var cbsDbgCpuLapicMode7xx2 string = "platform-default"
-	this.CbsDbgCpuLapicMode7xx2 = &cbsDbgCpuLapicMode7xx2
-	var cbsDbgCpuLapicMode7xx3 string = "platform-default"
-	this.CbsDbgCpuLapicMode7xx3 = &cbsDbgCpuLapicMode7xx3
 	var cbsDbgCpuSnpMemCover string = "platform-default"
 	this.CbsDbgCpuSnpMemCover = &cbsDbgCpuSnpMemCover
 	var cbsDbgCpuSnpMemSizeCover string = "platform-default"
@@ -1952,8 +1940,6 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.CbsCmnMemCtrlBankGroupSwapDdr4 = &cbsCmnMemCtrlBankGroupSwapDdr4
 	var cbsCmnMemCtrllerPwrDnEnDdr string = "platform-default"
 	this.CbsCmnMemCtrllerPwrDnEnDdr = &cbsCmnMemCtrllerPwrDnEnDdr
-	var cbsCmnMemDramRefreshRate string = "platform-default"
-	this.CbsCmnMemDramRefreshRate = &cbsCmnMemDramRefreshRate
 	var cbsCmnMemMapBankInterleaveDdr4 string = "platform-default"
 	this.CbsCmnMemMapBankInterleaveDdr4 = &cbsCmnMemMapBankInterleaveDdr4
 	var cbsCmnMemSpeedDdr47xx2 string = "platform-default"
@@ -1982,10 +1968,6 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.CbsDbgCpuGenCpuWdt = &cbsDbgCpuGenCpuWdt
 	var cbsDbgCpuLapicMode string = "platform-default"
 	this.CbsDbgCpuLapicMode = &cbsDbgCpuLapicMode
-	var cbsDbgCpuLapicMode7xx2 string = "platform-default"
-	this.CbsDbgCpuLapicMode7xx2 = &cbsDbgCpuLapicMode7xx2
-	var cbsDbgCpuLapicMode7xx3 string = "platform-default"
-	this.CbsDbgCpuLapicMode7xx3 = &cbsDbgCpuLapicMode7xx3
 	var cbsDbgCpuSnpMemCover string = "platform-default"
 	this.CbsDbgCpuSnpMemCover = &cbsDbgCpuSnpMemCover
 	var cbsDbgCpuSnpMemSizeCover string = "platform-default"
@@ -4517,38 +4499,6 @@ func (o *BiosPolicy) SetCbsCmnMemCtrllerPwrDnEnDdr(v string) {
 	o.CbsCmnMemCtrllerPwrDnEnDdr = &v
 }
 
-// GetCbsCmnMemDramRefreshRate returns the CbsCmnMemDramRefreshRate field value if set, zero value otherwise.
-func (o *BiosPolicy) GetCbsCmnMemDramRefreshRate() string {
-	if o == nil || IsNil(o.CbsCmnMemDramRefreshRate) {
-		var ret string
-		return ret
-	}
-	return *o.CbsCmnMemDramRefreshRate
-}
-
-// GetCbsCmnMemDramRefreshRateOk returns a tuple with the CbsCmnMemDramRefreshRate field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BiosPolicy) GetCbsCmnMemDramRefreshRateOk() (*string, bool) {
-	if o == nil || IsNil(o.CbsCmnMemDramRefreshRate) {
-		return nil, false
-	}
-	return o.CbsCmnMemDramRefreshRate, true
-}
-
-// HasCbsCmnMemDramRefreshRate returns a boolean if a field has been set.
-func (o *BiosPolicy) HasCbsCmnMemDramRefreshRate() bool {
-	if o != nil && !IsNil(o.CbsCmnMemDramRefreshRate) {
-		return true
-	}
-
-	return false
-}
-
-// SetCbsCmnMemDramRefreshRate gets a reference to the given string and assigns it to the CbsCmnMemDramRefreshRate field.
-func (o *BiosPolicy) SetCbsCmnMemDramRefreshRate(v string) {
-	o.CbsCmnMemDramRefreshRate = &v
-}
-
 // GetCbsCmnMemMapBankInterleaveDdr4 returns the CbsCmnMemMapBankInterleaveDdr4 field value if set, zero value otherwise.
 func (o *BiosPolicy) GetCbsCmnMemMapBankInterleaveDdr4() string {
 	if o == nil || IsNil(o.CbsCmnMemMapBankInterleaveDdr4) {
@@ -4995,70 +4945,6 @@ func (o *BiosPolicy) HasCbsDbgCpuLapicMode() bool {
 // SetCbsDbgCpuLapicMode gets a reference to the given string and assigns it to the CbsDbgCpuLapicMode field.
 func (o *BiosPolicy) SetCbsDbgCpuLapicMode(v string) {
 	o.CbsDbgCpuLapicMode = &v
-}
-
-// GetCbsDbgCpuLapicMode7xx2 returns the CbsDbgCpuLapicMode7xx2 field value if set, zero value otherwise.
-func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx2() string {
-	if o == nil || IsNil(o.CbsDbgCpuLapicMode7xx2) {
-		var ret string
-		return ret
-	}
-	return *o.CbsDbgCpuLapicMode7xx2
-}
-
-// GetCbsDbgCpuLapicMode7xx2Ok returns a tuple with the CbsDbgCpuLapicMode7xx2 field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx2Ok() (*string, bool) {
-	if o == nil || IsNil(o.CbsDbgCpuLapicMode7xx2) {
-		return nil, false
-	}
-	return o.CbsDbgCpuLapicMode7xx2, true
-}
-
-// HasCbsDbgCpuLapicMode7xx2 returns a boolean if a field has been set.
-func (o *BiosPolicy) HasCbsDbgCpuLapicMode7xx2() bool {
-	if o != nil && !IsNil(o.CbsDbgCpuLapicMode7xx2) {
-		return true
-	}
-
-	return false
-}
-
-// SetCbsDbgCpuLapicMode7xx2 gets a reference to the given string and assigns it to the CbsDbgCpuLapicMode7xx2 field.
-func (o *BiosPolicy) SetCbsDbgCpuLapicMode7xx2(v string) {
-	o.CbsDbgCpuLapicMode7xx2 = &v
-}
-
-// GetCbsDbgCpuLapicMode7xx3 returns the CbsDbgCpuLapicMode7xx3 field value if set, zero value otherwise.
-func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx3() string {
-	if o == nil || IsNil(o.CbsDbgCpuLapicMode7xx3) {
-		var ret string
-		return ret
-	}
-	return *o.CbsDbgCpuLapicMode7xx3
-}
-
-// GetCbsDbgCpuLapicMode7xx3Ok returns a tuple with the CbsDbgCpuLapicMode7xx3 field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BiosPolicy) GetCbsDbgCpuLapicMode7xx3Ok() (*string, bool) {
-	if o == nil || IsNil(o.CbsDbgCpuLapicMode7xx3) {
-		return nil, false
-	}
-	return o.CbsDbgCpuLapicMode7xx3, true
-}
-
-// HasCbsDbgCpuLapicMode7xx3 returns a boolean if a field has been set.
-func (o *BiosPolicy) HasCbsDbgCpuLapicMode7xx3() bool {
-	if o != nil && !IsNil(o.CbsDbgCpuLapicMode7xx3) {
-		return true
-	}
-
-	return false
-}
-
-// SetCbsDbgCpuLapicMode7xx3 gets a reference to the given string and assigns it to the CbsDbgCpuLapicMode7xx3 field.
-func (o *BiosPolicy) SetCbsDbgCpuLapicMode7xx3(v string) {
-	o.CbsDbgCpuLapicMode7xx3 = &v
 }
 
 // GetCbsDbgCpuSnpMemCover returns the CbsDbgCpuSnpMemCover field value if set, zero value otherwise.
@@ -17351,9 +17237,6 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CbsCmnMemCtrllerPwrDnEnDdr) {
 		toSerialize["CbsCmnMemCtrllerPwrDnEnDdr"] = o.CbsCmnMemCtrllerPwrDnEnDdr
 	}
-	if !IsNil(o.CbsCmnMemDramRefreshRate) {
-		toSerialize["CbsCmnMemDramRefreshRate"] = o.CbsCmnMemDramRefreshRate
-	}
 	if !IsNil(o.CbsCmnMemMapBankInterleaveDdr4) {
 		toSerialize["CbsCmnMemMapBankInterleaveDdr4"] = o.CbsCmnMemMapBankInterleaveDdr4
 	}
@@ -17395,12 +17278,6 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CbsDbgCpuLapicMode) {
 		toSerialize["CbsDbgCpuLapicMode"] = o.CbsDbgCpuLapicMode
-	}
-	if !IsNil(o.CbsDbgCpuLapicMode7xx2) {
-		toSerialize["CbsDbgCpuLapicMode7xx2"] = o.CbsDbgCpuLapicMode7xx2
-	}
-	if !IsNil(o.CbsDbgCpuLapicMode7xx3) {
-		toSerialize["CbsDbgCpuLapicMode7xx3"] = o.CbsDbgCpuLapicMode7xx3
 	}
 	if !IsNil(o.CbsDbgCpuSnpMemCover) {
 		toSerialize["CbsDbgCpuSnpMemCover"] = o.CbsDbgCpuSnpMemCover
@@ -18680,9 +18557,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		CbsCmnMemCtrlBankGroupSwapDdr4 *string `json:"CbsCmnMemCtrlBankGroupSwapDdr4,omitempty"`
 		// BIOS Token for setting Power Down Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `disabled` - Value - disabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `enabled` - Value - enabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token.
 		CbsCmnMemCtrllerPwrDnEnDdr *string `json:"CbsCmnMemCtrllerPwrDnEnDdr,omitempty"`
-		// BIOS Token for setting DRAM Refresh Rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `3.9 usec` - Value - 3.9 usec for configuring CbsCmnMemDramRefreshRate token. * `7.8 usec` - Value - 7.8 usec for configuring CbsCmnMemDramRefreshRate token.
-		CbsCmnMemDramRefreshRate *string `json:"CbsCmnMemDramRefreshRate,omitempty"`
-		// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `enabled` - Value - enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
+		// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `Enabled` - Value - Enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
 		CbsCmnMemMapBankInterleaveDdr4 *string `json:"CbsCmnMemMapBankInterleaveDdr4,omitempty"`
 		// BIOS Token for setting Memory Clock Speed 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `667MHz` - Value - 667MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `800MHz` - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `933MHz` - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1067MHz` - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1200MHz` - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1333MHz` - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1467MHz` - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1600MHz` - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `Auto` - Value - Auto for configuring CbsCmnMemSpeedDdr47xx2 token.
 		CbsCmnMemSpeedDdr47xx2 *string `json:"CbsCmnMemSpeedDdr47xx2,omitempty"`
@@ -18710,10 +18585,6 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		CbsDbgCpuGenCpuWdt *string `json:"CbsDbgCpuGenCpuWdt,omitempty"`
 		// BIOS Token for setting Local APIC Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode token. * `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode token.
 		CbsDbgCpuLapicMode *string `json:"CbsDbgCpuLapicMode,omitempty"`
-		// BIOS Token for setting Local APIC Mode 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx2 token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx2 token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx2 token.
-		CbsDbgCpuLapicMode7xx2 *string `json:"CbsDbgCpuLapicMode7xx2,omitempty"`
-		// BIOS Token for setting Local APIC Mode 7xx3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuLapicMode7xx3 token. * `Compatibility` - Value - Compatibility for configuring CbsDbgCpuLapicMode7xx3 token. * `X2APIC` - Value - X2APIC for configuring CbsDbgCpuLapicMode7xx3 token. * `XAPIC` - Value - XAPIC for configuring CbsDbgCpuLapicMode7xx3 token.
-		CbsDbgCpuLapicMode7xx3 *string `json:"CbsDbgCpuLapicMode7xx3,omitempty"`
 		// BIOS Token for setting SNP Memory Coverage configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuSnpMemCover token. * `Custom` - Value - Custom for configuring CbsDbgCpuSnpMemCover token. * `disabled` - Value - disabled for configuring CbsDbgCpuSnpMemCover token. * `enabled` - Value - enabled for configuring CbsDbgCpuSnpMemCover token.
 		CbsDbgCpuSnpMemCover *string `json:"CbsDbgCpuSnpMemCover,omitempty"`
 		// BIOS Token for setting SNP Memory Size to Cover in MiB configuration (0 - 1048576 MiB).
@@ -19532,7 +19403,6 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.CbsCmnGnbSmucppc = varBiosPolicyWithoutEmbeddedStruct.CbsCmnGnbSmucppc
 		varBiosPolicy.CbsCmnMemCtrlBankGroupSwapDdr4 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemCtrlBankGroupSwapDdr4
 		varBiosPolicy.CbsCmnMemCtrllerPwrDnEnDdr = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemCtrllerPwrDnEnDdr
-		varBiosPolicy.CbsCmnMemDramRefreshRate = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemDramRefreshRate
 		varBiosPolicy.CbsCmnMemMapBankInterleaveDdr4 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemMapBankInterleaveDdr4
 		varBiosPolicy.CbsCmnMemSpeedDdr47xx2 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemSpeedDdr47xx2
 		varBiosPolicy.CbsCmnMemSpeedDdr47xx3 = varBiosPolicyWithoutEmbeddedStruct.CbsCmnMemSpeedDdr47xx3
@@ -19547,8 +19417,6 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.CbsCpuSmtCtrl = varBiosPolicyWithoutEmbeddedStruct.CbsCpuSmtCtrl
 		varBiosPolicy.CbsDbgCpuGenCpuWdt = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuGenCpuWdt
 		varBiosPolicy.CbsDbgCpuLapicMode = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuLapicMode
-		varBiosPolicy.CbsDbgCpuLapicMode7xx2 = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuLapicMode7xx2
-		varBiosPolicy.CbsDbgCpuLapicMode7xx3 = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuLapicMode7xx3
 		varBiosPolicy.CbsDbgCpuSnpMemCover = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuSnpMemCover
 		varBiosPolicy.CbsDbgCpuSnpMemSizeCover = varBiosPolicyWithoutEmbeddedStruct.CbsDbgCpuSnpMemSizeCover
 		varBiosPolicy.CbsDfCmn4linkMaxXgmiSpeed = varBiosPolicyWithoutEmbeddedStruct.CbsDfCmn4linkMaxXgmiSpeed
@@ -20000,7 +19868,6 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "CbsCmnGnbSmucppc")
 		delete(additionalProperties, "CbsCmnMemCtrlBankGroupSwapDdr4")
 		delete(additionalProperties, "CbsCmnMemCtrllerPwrDnEnDdr")
-		delete(additionalProperties, "CbsCmnMemDramRefreshRate")
 		delete(additionalProperties, "CbsCmnMemMapBankInterleaveDdr4")
 		delete(additionalProperties, "CbsCmnMemSpeedDdr47xx2")
 		delete(additionalProperties, "CbsCmnMemSpeedDdr47xx3")
@@ -20015,8 +19882,6 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "CbsCpuSmtCtrl")
 		delete(additionalProperties, "CbsDbgCpuGenCpuWdt")
 		delete(additionalProperties, "CbsDbgCpuLapicMode")
-		delete(additionalProperties, "CbsDbgCpuLapicMode7xx2")
-		delete(additionalProperties, "CbsDbgCpuLapicMode7xx3")
 		delete(additionalProperties, "CbsDbgCpuSnpMemCover")
 		delete(additionalProperties, "CbsDbgCpuSnpMemSizeCover")
 		delete(additionalProperties, "CbsDfCmn4linkMaxXgmiSpeed")
