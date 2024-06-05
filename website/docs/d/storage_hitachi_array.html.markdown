@@ -22,8 +22,10 @@ The following arguments can be used to get data of already created objects in In
 * `ctl2_micro_version`:(string) GUM (Gateway for Unified Management) version of the controller 2. 
 * `device_id`:(string) ID of the Storage device. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
+* `device_type`:(string) The categorization of the device type. Optional parameter to categorize devices by product type. For example, Meraki device types are wireless, appliance, switch, systemsManager, camera, cellularGateway, sensor, and secureConnect. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `hardware_version`:(string) The hardware version of the device. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field displays the model number of the associated component or hardware. 

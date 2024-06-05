@@ -3,12 +3,12 @@ subcategory: "ether"
 layout: "intersight"
 page_title: "Intersight: intersight_ether_network_port"
 description: |-
-        Model contains the details of the ethernet port connected to the FI side.
+        Ethernet network port connected to the Fabric Interconnect. These ports facilitate the connection of the Fabric Interconnect to other network devices.
 
 ---
 
 # Data Source: intersight_ether_network_port
-Model contains the details of the ethernet port connected to the FI side.
+Ethernet network port connected to the Fabric Interconnect. These ports facilitate the connection of the Fabric Interconnect to other network devices.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

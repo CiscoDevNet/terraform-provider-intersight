@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **PricingExportDataSetName** | Pointer to **string** | Name of the BigQuery Pricing Export Data Set which is the dataset for negotiated pricing. | [optional] 
 **PricingExportTableName** | Pointer to **string** | The Google BigQuery Pricing Export Table Name field is auto-populated with the table used in BigQuery, cloud_pricing_export. There is no need to modify this name, unless you use a different table for negotiated pricing. The Default name is \&quot;cloud_pricing_export\&quot;. | [optional] 
 **ProjectId** | Pointer to **string** | The unique ID assigned to the project containing the cost and pricing exports. If the exports are in separate projects, multiple billing targets will be necessary. | [optional] 
-**ResourceLevelCostEnabled** | Pointer to **bool** | This flag will enable querying of detailed usage cost with resource level information included.  If not enabled, cost export data will be queried, if dataset and table name are provided. | [optional] 
+**ResourceLevelCostEnabled** | Pointer to **bool** | This flag will enable querying of detailed usage cost with resource level information included. If not enabled, cost export data will be queried, if dataset and table name are provided. | [optional] 
 
 ## Methods
 

@@ -3,12 +3,12 @@ subcategory: "fc"
 layout: "intersight"
 page_title: "Intersight: intersight_fc_port_channel"
 description: |-
-        Model contains the details of the ethernet port-channels configured on the FI.
+        Fibre Channel (FC) port channels in a Fabric Interconnect are logical links that aggregate multiple physical Fibre Channel (FC) ports into a single virtual connection. This configuration is primarily used to enhance the bandwidth and redundancy of storage network connections within a data center.
 
 ---
 
 # Data Source: intersight_fc_port_channel
-Model contains the details of the ethernet port-channels configured on the FI.
+Fibre Channel (FC) port channels in a Fabric Interconnect are logical links that aggregate multiple physical Fibre Channel (FC) ports into a single virtual connection. This configuration is primarily used to enhance the bandwidth and redundancy of storage network connections within a data center.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

@@ -18,8 +18,10 @@ The following arguments can be used to get data of already created objects in In
 * `api_version`:(string) Major version of REST API supported by the Pure storage array. Will be used as constraint for implementation tasks. If REST API version is less than 2.4, then this property returns the major version 1, else returns 2. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
+* `device_type`:(string) The categorization of the device type. Optional parameter to categorize devices by product type. For example, Meraki device types are wireless, appliance, switch, systemsManager, camera, cellularGateway, sensor, and secureConnect. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `hardware_version`:(string) The hardware version of the device. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field displays the model number of the associated component or hardware. 

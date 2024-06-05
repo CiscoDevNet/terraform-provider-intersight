@@ -3,12 +3,12 @@ subcategory: "fc"
 layout: "intersight"
 page_title: "Intersight: intersight_fc_physical_port"
 description: |-
-        Physical fibre channel port present on a FI.
+        The physical interface on the Fabric Interconnect to which a Fibre Channel (FC) target can be connected to within a data center.
 
 ---
 
 # Data Source: intersight_fc_physical_port
-Physical fibre channel port present on a FI.
+The physical interface on the Fabric Interconnect to which a Fibre Channel (FC) target can be connected to within a data center.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

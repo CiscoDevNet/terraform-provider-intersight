@@ -13577,6 +13577,24 @@ func TestFlattenMapEquipmentChassisRelationship(t *testing.T) {
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
+func TestFlattenMapEquipmentDeviceLocation(t *testing.T) {
+	p := models.EquipmentDeviceLocation{}
+	var d = &schema.ResourceData{}
+	c := `{"Address":"Address %d","ClassId":"equipment.DeviceLocation","Latitude":32.000000,"Longitude":32.000000,"ObjectType":"equipment.DeviceLocation"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapEquipmentDeviceLocation(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapEquipmentDeviceLocation(p, d)[0]
+	expectedOp := map[string]interface{}{"address": "Address 1", "class_id": "equipment.DeviceLocation", "latitude": 32.000000, "longitude": 32.000000, "object_type": "equipment.DeviceLocation"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
 func TestFlattenMapEquipmentExpanderModuleRelationship(t *testing.T) {
 	p := models.EquipmentExpanderModuleRelationship{}
 	var d = &schema.ResourceData{}
@@ -18289,6 +18307,24 @@ func TestFlattenMapMemoryPersistentMemoryRegionRelationship(t *testing.T) {
 	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
 	CheckError(t, err)
 	ffOp := flattenMapMemoryPersistentMemoryRegionRelationship(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapMerakiNetworkRelationship(t *testing.T) {
+	p := models.MerakiNetworkRelationship{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapMerakiNetworkRelationship(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapMerakiNetworkRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
