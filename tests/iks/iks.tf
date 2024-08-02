@@ -33,11 +33,13 @@ resource "intersight_kubernetes_cluster_addon_profile" "iks-terra-addons" {
   name = "iks-terra-addons"
   addons {
     addon_policy {
+      object_type = "kubernetes.AddonPolicy"
       moid = intersight_kubernetes_addon_policy.kap1.moid
     }
   }
   addons {
     addon_policy {
+      object_type = "kubernetes.AddonPolicy"
       moid = intersight_kubernetes_addon_policy.kap2.moid
     }
   }
