@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -128,6 +128,11 @@ func (o *VnicEthIfInventory) SetClassId(v string) {
 	o.ClassId = v
 }
 
+// GetDefaultClassId returns the default value "vnic.EthIfInventory" of the ClassId field.
+func (o *VnicEthIfInventory) GetDefaultClassId() interface{} {
+	return "vnic.EthIfInventory"
+}
+
 // GetObjectType returns the ObjectType field value
 func (o *VnicEthIfInventory) GetObjectType() string {
 	if o == nil {
@@ -150,6 +155,11 @@ func (o *VnicEthIfInventory) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *VnicEthIfInventory) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "vnic.EthIfInventory" of the ObjectType field.
+func (o *VnicEthIfInventory) GetDefaultObjectType() interface{} {
+	return "vnic.EthIfInventory"
 }
 
 // GetCdn returns the Cdn field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -483,7 +493,7 @@ func (o *VnicEthIfInventory) GetOverriddenListOk() ([]string, bool) {
 
 // HasOverriddenList returns a boolean if a field has been set.
 func (o *VnicEthIfInventory) HasOverriddenList() bool {
-	if o != nil && IsNil(o.OverriddenList) {
+	if o != nil && !IsNil(o.OverriddenList) {
 		return true
 	}
 
@@ -698,7 +708,7 @@ func (o *VnicEthIfInventory) GetTemplateActionsOk() ([]MotemplateActionEntry, bo
 
 // HasTemplateActions returns a boolean if a field has been set.
 func (o *VnicEthIfInventory) HasTemplateActions() bool {
-	if o != nil && IsNil(o.TemplateActions) {
+	if o != nil && !IsNil(o.TemplateActions) {
 		return true
 	}
 
@@ -731,7 +741,7 @@ func (o *VnicEthIfInventory) GetTemplateSyncErrorsOk() ([]MotemplateSyncError, b
 
 // HasTemplateSyncErrors returns a boolean if a field has been set.
 func (o *VnicEthIfInventory) HasTemplateSyncErrors() bool {
-	if o != nil && IsNil(o.TemplateSyncErrors) {
+	if o != nil && !IsNil(o.TemplateSyncErrors) {
 		return true
 	}
 
@@ -1086,7 +1096,7 @@ func (o *VnicEthIfInventory) GetFabricEthNetworkGroupPolicyOk() ([]FabricEthNetw
 
 // HasFabricEthNetworkGroupPolicy returns a boolean if a field has been set.
 func (o *VnicEthIfInventory) HasFabricEthNetworkGroupPolicy() bool {
-	if o != nil && IsNil(o.FabricEthNetworkGroupPolicy) {
+	if o != nil && !IsNil(o.FabricEthNetworkGroupPolicy) {
 		return true
 	}
 
@@ -1377,7 +1387,7 @@ func (o *VnicEthIfInventory) GetSpVnicsOk() ([]VnicEthIfInventoryRelationship, b
 
 // HasSpVnics returns a boolean if a field has been set.
 func (o *VnicEthIfInventory) HasSpVnics() bool {
-	if o != nil && IsNil(o.SpVnics) {
+	if o != nil && !IsNil(o.SpVnics) {
 		return true
 	}
 
@@ -1450,7 +1460,13 @@ func (o VnicEthIfInventory) ToMap() (map[string]interface{}, error) {
 	if errPolicyAbstractInventory != nil {
 		return map[string]interface{}{}, errPolicyAbstractInventory
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
 	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
 	toSerialize["ObjectType"] = o.ObjectType
 	if o.Cdn.IsSet() {
 		toSerialize["Cdn"] = o.Cdn.Get()
@@ -1571,6 +1587,13 @@ func (o *VnicEthIfInventory) UnmarshalJSON(data []byte) (err error) {
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -1580,11 +1603,23 @@ func (o *VnicEthIfInventory) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type VnicEthIfInventoryWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -169,6 +169,11 @@ func (o *VirtualizationVmwareVirtualMachine) SetClassId(v string) {
 	o.ClassId = v
 }
 
+// GetDefaultClassId returns the default value "virtualization.VmwareVirtualMachine" of the ClassId field.
+func (o *VirtualizationVmwareVirtualMachine) GetDefaultClassId() interface{} {
+	return "virtualization.VmwareVirtualMachine"
+}
+
 // GetObjectType returns the ObjectType field value
 func (o *VirtualizationVmwareVirtualMachine) GetObjectType() string {
 	if o == nil {
@@ -191,6 +196,11 @@ func (o *VirtualizationVmwareVirtualMachine) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *VirtualizationVmwareVirtualMachine) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "virtualization.VmwareVirtualMachine" of the ObjectType field.
+func (o *VirtualizationVmwareVirtualMachine) GetDefaultObjectType() interface{} {
+	return "virtualization.VmwareVirtualMachine"
 }
 
 // GetAnnotation returns the Annotation field value if set, zero value otherwise.
@@ -428,7 +438,7 @@ func (o *VirtualizationVmwareVirtualMachine) GetCustomAttributesOk() ([]string, 
 
 // HasCustomAttributes returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualMachine) HasCustomAttributes() bool {
-	if o != nil && IsNil(o.CustomAttributes) {
+	if o != nil && !IsNil(o.CustomAttributes) {
 		return true
 	}
 
@@ -568,7 +578,7 @@ func (o *VirtualizationVmwareVirtualMachine) GetDnsServerListOk() ([]string, boo
 
 // HasDnsServerList returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualMachine) HasDnsServerList() bool {
-	if o != nil && IsNil(o.DnsServerList) {
+	if o != nil && !IsNil(o.DnsServerList) {
 		return true
 	}
 
@@ -601,7 +611,7 @@ func (o *VirtualizationVmwareVirtualMachine) GetDnsSuffixListOk() ([]string, boo
 
 // HasDnsSuffixList returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualMachine) HasDnsSuffixList() bool {
-	if o != nil && IsNil(o.DnsSuffixList) {
+	if o != nil && !IsNil(o.DnsSuffixList) {
 		return true
 	}
 
@@ -634,7 +644,7 @@ func (o *VirtualizationVmwareVirtualMachine) GetExtraConfigOk() (*interface{}, b
 
 // HasExtraConfig returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualMachine) HasExtraConfig() bool {
-	if o != nil && IsNil(o.ExtraConfig) {
+	if o != nil && !IsNil(o.ExtraConfig) {
 		return true
 	}
 
@@ -859,7 +869,7 @@ func (o *VirtualizationVmwareVirtualMachine) GetMacAddressOk() ([]string, bool) 
 
 // HasMacAddress returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualMachine) HasMacAddress() bool {
-	if o != nil && IsNil(o.MacAddress) {
+	if o != nil && !IsNil(o.MacAddress) {
 		return true
 	}
 
@@ -999,7 +1009,7 @@ func (o *VirtualizationVmwareVirtualMachine) GetPassthroughDevicesOk() ([]int64,
 
 // HasPassthroughDevices returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualMachine) HasPassthroughDevices() bool {
-	if o != nil && IsNil(o.PassthroughDevices) {
+	if o != nil && !IsNil(o.PassthroughDevices) {
 		return true
 	}
 
@@ -1032,7 +1042,7 @@ func (o *VirtualizationVmwareVirtualMachine) GetPortGroupsOk() ([]string, bool) 
 
 // HasPortGroups returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualMachine) HasPortGroups() bool {
-	if o != nil && IsNil(o.PortGroups) {
+	if o != nil && !IsNil(o.PortGroups) {
 		return true
 	}
 
@@ -1332,7 +1342,7 @@ func (o *VirtualizationVmwareVirtualMachine) GetVirtualDisksOk() ([]int64, bool)
 
 // HasVirtualDisks returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualMachine) HasVirtualDisks() bool {
-	if o != nil && IsNil(o.VirtualDisks) {
+	if o != nil && !IsNil(o.VirtualDisks) {
 		return true
 	}
 
@@ -1365,7 +1375,7 @@ func (o *VirtualizationVmwareVirtualMachine) GetVirtualNetworkInterfacesOk() ([]
 
 // HasVirtualNetworkInterfaces returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualMachine) HasVirtualNetworkInterfaces() bool {
-	if o != nil && IsNil(o.VirtualNetworkInterfaces) {
+	if o != nil && !IsNil(o.VirtualNetworkInterfaces) {
 		return true
 	}
 
@@ -1676,7 +1686,7 @@ func (o *VirtualizationVmwareVirtualMachine) GetDatastoresOk() ([]Virtualization
 
 // HasDatastores returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualMachine) HasDatastores() bool {
-	if o != nil && IsNil(o.Datastores) {
+	if o != nil && !IsNil(o.Datastores) {
 		return true
 	}
 
@@ -1752,7 +1762,7 @@ func (o *VirtualizationVmwareVirtualMachine) GetNetworksOk() ([]VirtualizationBa
 
 // HasNetworks returns a boolean if a field has been set.
 func (o *VirtualizationVmwareVirtualMachine) HasNetworks() bool {
-	if o != nil && IsNil(o.Networks) {
+	if o != nil && !IsNil(o.Networks) {
 		return true
 	}
 
@@ -1825,7 +1835,13 @@ func (o VirtualizationVmwareVirtualMachine) ToMap() (map[string]interface{}, err
 	if errVirtualizationBaseVirtualMachine != nil {
 		return map[string]interface{}{}, errVirtualizationBaseVirtualMachine
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
 	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.Annotation) {
 		toSerialize["Annotation"] = o.Annotation
@@ -1985,6 +2001,13 @@ func (o *VirtualizationVmwareVirtualMachine) UnmarshalJSON(data []byte) (err err
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -1994,11 +2017,23 @@ func (o *VirtualizationVmwareVirtualMachine) UnmarshalJSON(data []byte) (err err
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type VirtualizationVmwareVirtualMachineWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`

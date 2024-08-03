@@ -20,6 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `is_consistency_group`:(bool) Whether the pair was created in the consistency group mode (CTG mode). 
 * `is_multistageable`:(bool) Whether the pair can be a multistage pair. 
+* `is_redirect_on_write`:(bool) Returns whether it is a Thin Image Advanced pair. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `mu_number`:(int) MU number of the primary volume. 

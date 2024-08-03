@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -34,9 +34,10 @@ type MerakiNetwork struct {
 	NetworkId   *string  `json:"NetworkId,omitempty"`
 	NetworkTags []string `json:"NetworkTags,omitempty"`
 	// The unique Meraki organization id.
-	OrganizationId       *string                                `json:"OrganizationId,omitempty"`
-	ProductTypes         []string                               `json:"ProductTypes,omitempty"`
-	Organization         NullableMerakiOrganizationRelationship `json:"Organization,omitempty"`
+	OrganizationId       *string                                     `json:"OrganizationId,omitempty"`
+	ProductTypes         []string                                    `json:"ProductTypes,omitempty"`
+	Organization         NullableMerakiOrganizationRelationship      `json:"Organization,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -89,6 +90,11 @@ func (o *MerakiNetwork) SetClassId(v string) {
 	o.ClassId = v
 }
 
+// GetDefaultClassId returns the default value "meraki.Network" of the ClassId field.
+func (o *MerakiNetwork) GetDefaultClassId() interface{} {
+	return "meraki.Network"
+}
+
 // GetObjectType returns the ObjectType field value
 func (o *MerakiNetwork) GetObjectType() string {
 	if o == nil {
@@ -111,6 +117,11 @@ func (o *MerakiNetwork) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *MerakiNetwork) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "meraki.Network" of the ObjectType field.
+func (o *MerakiNetwork) GetDefaultObjectType() interface{} {
+	return "meraki.Network"
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -198,7 +209,7 @@ func (o *MerakiNetwork) GetNetworkTagsOk() ([]string, bool) {
 
 // HasNetworkTags returns a boolean if a field has been set.
 func (o *MerakiNetwork) HasNetworkTags() bool {
-	if o != nil && IsNil(o.NetworkTags) {
+	if o != nil && !IsNil(o.NetworkTags) {
 		return true
 	}
 
@@ -263,7 +274,7 @@ func (o *MerakiNetwork) GetProductTypesOk() ([]string, bool) {
 
 // HasProductTypes returns a boolean if a field has been set.
 func (o *MerakiNetwork) HasProductTypes() bool {
-	if o != nil && IsNil(o.ProductTypes) {
+	if o != nil && !IsNil(o.ProductTypes) {
 		return true
 	}
 
@@ -318,6 +329,49 @@ func (o *MerakiNetwork) UnsetOrganization() {
 	o.Organization.Unset()
 }
 
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerakiNetwork) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
+		var ret AssetDeviceRegistrationRelationship
+		return ret
+	}
+	return *o.RegisteredDevice.Get()
+}
+
+// GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerakiNetwork) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
+}
+
+// HasRegisteredDevice returns a boolean if a field has been set.
+func (o *MerakiNetwork) HasRegisteredDevice() bool {
+	if o != nil && o.RegisteredDevice.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+func (o *MerakiNetwork) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *MerakiNetwork) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *MerakiNetwork) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
+}
+
 func (o MerakiNetwork) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -336,7 +390,13 @@ func (o MerakiNetwork) ToMap() (map[string]interface{}, error) {
 	if errMoBaseMo != nil {
 		return map[string]interface{}{}, errMoBaseMo
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
 	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
@@ -356,6 +416,9 @@ func (o MerakiNetwork) ToMap() (map[string]interface{}, error) {
 	if o.Organization.IsSet() {
 		toSerialize["Organization"] = o.Organization.Get()
 	}
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -373,6 +436,13 @@ func (o *MerakiNetwork) UnmarshalJSON(data []byte) (err error) {
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -382,11 +452,23 @@ func (o *MerakiNetwork) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type MerakiNetworkWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -398,9 +480,10 @@ func (o *MerakiNetwork) UnmarshalJSON(data []byte) (err error) {
 		NetworkId   *string  `json:"NetworkId,omitempty"`
 		NetworkTags []string `json:"NetworkTags,omitempty"`
 		// The unique Meraki organization id.
-		OrganizationId *string                                `json:"OrganizationId,omitempty"`
-		ProductTypes   []string                               `json:"ProductTypes,omitempty"`
-		Organization   NullableMerakiOrganizationRelationship `json:"Organization,omitempty"`
+		OrganizationId   *string                                     `json:"OrganizationId,omitempty"`
+		ProductTypes     []string                                    `json:"ProductTypes,omitempty"`
+		Organization     NullableMerakiOrganizationRelationship      `json:"Organization,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varMerakiNetworkWithoutEmbeddedStruct := MerakiNetworkWithoutEmbeddedStruct{}
@@ -416,6 +499,7 @@ func (o *MerakiNetwork) UnmarshalJSON(data []byte) (err error) {
 		varMerakiNetwork.OrganizationId = varMerakiNetworkWithoutEmbeddedStruct.OrganizationId
 		varMerakiNetwork.ProductTypes = varMerakiNetworkWithoutEmbeddedStruct.ProductTypes
 		varMerakiNetwork.Organization = varMerakiNetworkWithoutEmbeddedStruct.Organization
+		varMerakiNetwork.RegisteredDevice = varMerakiNetworkWithoutEmbeddedStruct.RegisteredDevice
 		*o = MerakiNetwork(varMerakiNetwork)
 	} else {
 		return err
@@ -441,6 +525,7 @@ func (o *MerakiNetwork) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "OrganizationId")
 		delete(additionalProperties, "ProductTypes")
 		delete(additionalProperties, "Organization")
+		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

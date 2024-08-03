@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -123,6 +123,11 @@ func (o *CapabilitySwitchCapability) SetClassId(v string) {
 	o.ClassId = v
 }
 
+// GetDefaultClassId returns the default value "capability.SwitchCapability" of the ClassId field.
+func (o *CapabilitySwitchCapability) GetDefaultClassId() interface{} {
+	return "capability.SwitchCapability"
+}
+
 // GetObjectType returns the ObjectType field value
 func (o *CapabilitySwitchCapability) GetObjectType() string {
 	if o == nil {
@@ -145,6 +150,11 @@ func (o *CapabilitySwitchCapability) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *CapabilitySwitchCapability) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "capability.SwitchCapability" of the ObjectType field.
+func (o *CapabilitySwitchCapability) GetDefaultObjectType() interface{} {
+	return "capability.SwitchCapability"
 }
 
 // GetDefaultFcoeVlan returns the DefaultFcoeVlan field value if set, zero value otherwise.
@@ -264,7 +274,7 @@ func (o *CapabilitySwitchCapability) GetFcEndHostModeReservedVsansOk() ([]Capabi
 
 // HasFcEndHostModeReservedVsans returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasFcEndHostModeReservedVsans() bool {
-	if o != nil && IsNil(o.FcEndHostModeReservedVsans) {
+	if o != nil && !IsNil(o.FcEndHostModeReservedVsans) {
 		return true
 	}
 
@@ -629,7 +639,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting100gSpeedOk() ([]Capabili
 
 // HasPortsSupporting100gSpeed returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupporting100gSpeed() bool {
-	if o != nil && IsNil(o.PortsSupporting100gSpeed) {
+	if o != nil && !IsNil(o.PortsSupporting100gSpeed) {
 		return true
 	}
 
@@ -662,7 +672,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting10gSpeedOk() ([]Capabilit
 
 // HasPortsSupporting10gSpeed returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupporting10gSpeed() bool {
-	if o != nil && IsNil(o.PortsSupporting10gSpeed) {
+	if o != nil && !IsNil(o.PortsSupporting10gSpeed) {
 		return true
 	}
 
@@ -695,7 +705,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting1gSpeedOk() ([]Capability
 
 // HasPortsSupporting1gSpeed returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupporting1gSpeed() bool {
-	if o != nil && IsNil(o.PortsSupporting1gSpeed) {
+	if o != nil && !IsNil(o.PortsSupporting1gSpeed) {
 		return true
 	}
 
@@ -728,7 +738,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting25gSpeedOk() ([]Capabilit
 
 // HasPortsSupporting25gSpeed returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupporting25gSpeed() bool {
-	if o != nil && IsNil(o.PortsSupporting25gSpeed) {
+	if o != nil && !IsNil(o.PortsSupporting25gSpeed) {
 		return true
 	}
 
@@ -761,7 +771,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupporting40gSpeedOk() ([]Capabilit
 
 // HasPortsSupporting40gSpeed returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupporting40gSpeed() bool {
-	if o != nil && IsNil(o.PortsSupporting40gSpeed) {
+	if o != nil && !IsNil(o.PortsSupporting40gSpeed) {
 		return true
 	}
 
@@ -794,7 +804,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupportingBreakoutOk() ([]Capabilit
 
 // HasPortsSupportingBreakout returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupportingBreakout() bool {
-	if o != nil && IsNil(o.PortsSupportingBreakout) {
+	if o != nil && !IsNil(o.PortsSupportingBreakout) {
 		return true
 	}
 
@@ -827,7 +837,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupportingFcoeOk() ([]CapabilityPor
 
 // HasPortsSupportingFcoe returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupportingFcoe() bool {
-	if o != nil && IsNil(o.PortsSupportingFcoe) {
+	if o != nil && !IsNil(o.PortsSupportingFcoe) {
 		return true
 	}
 
@@ -860,7 +870,7 @@ func (o *CapabilitySwitchCapability) GetPortsSupportingServerRoleOk() ([]Capabil
 
 // HasPortsSupportingServerRole returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasPortsSupportingServerRole() bool {
-	if o != nil && IsNil(o.PortsSupportingServerRole) {
+	if o != nil && !IsNil(o.PortsSupportingServerRole) {
 		return true
 	}
 
@@ -893,7 +903,7 @@ func (o *CapabilitySwitchCapability) GetReservedVsansOk() ([]CapabilityPortRange
 
 // HasReservedVsans returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasReservedVsans() bool {
-	if o != nil && IsNil(o.ReservedVsans) {
+	if o != nil && !IsNil(o.ReservedVsans) {
 		return true
 	}
 
@@ -958,7 +968,7 @@ func (o *CapabilitySwitchCapability) GetServerRoleSupportedOnBreakoutOk() ([]str
 
 // HasServerRoleSupportedOnBreakout returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasServerRoleSupportedOnBreakout() bool {
-	if o != nil && IsNil(o.ServerRoleSupportedOnBreakout) {
+	if o != nil && !IsNil(o.ServerRoleSupportedOnBreakout) {
 		return true
 	}
 
@@ -1034,7 +1044,7 @@ func (o *CapabilitySwitchCapability) GetSwitchingModeCapabilitiesOk() ([]Capabil
 
 // HasSwitchingModeCapabilities returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasSwitchingModeCapabilities() bool {
-	if o != nil && IsNil(o.SwitchingModeCapabilities) {
+	if o != nil && !IsNil(o.SwitchingModeCapabilities) {
 		return true
 	}
 
@@ -1110,7 +1120,7 @@ func (o *CapabilitySwitchCapability) GetUnifiedPortsOk() ([]CapabilityPortRange,
 
 // HasUnifiedPorts returns a boolean if a field has been set.
 func (o *CapabilitySwitchCapability) HasUnifiedPorts() bool {
-	if o != nil && IsNil(o.UnifiedPorts) {
+	if o != nil && !IsNil(o.UnifiedPorts) {
 		return true
 	}
 
@@ -1204,7 +1214,13 @@ func (o CapabilitySwitchCapability) ToMap() (map[string]interface{}, error) {
 	if errCapabilitySwitchCapabilityDef != nil {
 		return map[string]interface{}{}, errCapabilitySwitchCapabilityDef
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
 	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.DefaultFcoeVlan) {
 		toSerialize["DefaultFcoeVlan"] = o.DefaultFcoeVlan
@@ -1313,6 +1329,13 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(data []byte) (err error) {
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -1322,11 +1345,23 @@ func (o *CapabilitySwitchCapability) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type CapabilitySwitchCapabilityWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`

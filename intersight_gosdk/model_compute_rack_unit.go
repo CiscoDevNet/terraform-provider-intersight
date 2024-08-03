@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -132,6 +132,11 @@ func (o *ComputeRackUnit) SetClassId(v string) {
 	o.ClassId = v
 }
 
+// GetDefaultClassId returns the default value "compute.RackUnit" of the ClassId field.
+func (o *ComputeRackUnit) GetDefaultClassId() interface{} {
+	return "compute.RackUnit"
+}
+
 // GetObjectType returns the ObjectType field value
 func (o *ComputeRackUnit) GetObjectType() string {
 	if o == nil {
@@ -154,6 +159,11 @@ func (o *ComputeRackUnit) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *ComputeRackUnit) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "compute.RackUnit" of the ObjectType field.
+func (o *ComputeRackUnit) GetDefaultObjectType() interface{} {
+	return "compute.RackUnit"
 }
 
 // GetConnectionStatus returns the ConnectionStatus field value if set, zero value otherwise.
@@ -273,7 +283,7 @@ func (o *ComputeRackUnit) GetAdaptersOk() ([]AdapterUnitRelationship, bool) {
 
 // HasAdapters returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasAdapters() bool {
-	if o != nil && IsNil(o.Adapters) {
+	if o != nil && !IsNil(o.Adapters) {
 		return true
 	}
 
@@ -437,7 +447,7 @@ func (o *ComputeRackUnit) GetBiosunitsOk() ([]BiosUnitRelationship, bool) {
 
 // HasBiosunits returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasBiosunits() bool {
-	if o != nil && IsNil(o.Biosunits) {
+	if o != nil && !IsNil(o.Biosunits) {
 		return true
 	}
 
@@ -600,7 +610,7 @@ func (o *ComputeRackUnit) GetComputePersonalityOk() ([]ComputePersonalityRelatio
 
 // HasComputePersonality returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasComputePersonality() bool {
-	if o != nil && IsNil(o.ComputePersonality) {
+	if o != nil && !IsNil(o.ComputePersonality) {
 		return true
 	}
 
@@ -633,7 +643,7 @@ func (o *ComputeRackUnit) GetFanmodulesOk() ([]EquipmentFanModuleRelationship, b
 
 // HasFanmodules returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasFanmodules() bool {
-	if o != nil && IsNil(o.Fanmodules) {
+	if o != nil && !IsNil(o.Fanmodules) {
 		return true
 	}
 
@@ -666,7 +676,7 @@ func (o *ComputeRackUnit) GetGenericInventoryHoldersOk() ([]InventoryGenericInve
 
 // HasGenericInventoryHolders returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasGenericInventoryHolders() bool {
-	if o != nil && IsNil(o.GenericInventoryHolders) {
+	if o != nil && !IsNil(o.GenericInventoryHolders) {
 		return true
 	}
 
@@ -699,7 +709,7 @@ func (o *ComputeRackUnit) GetGraphicsCardsOk() ([]GraphicsCardRelationship, bool
 
 // HasGraphicsCards returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasGraphicsCards() bool {
-	if o != nil && IsNil(o.GraphicsCards) {
+	if o != nil && !IsNil(o.GraphicsCards) {
 		return true
 	}
 
@@ -732,7 +742,7 @@ func (o *ComputeRackUnit) GetHybridDriveSlotsOk() ([]EquipmentHybridDriveSlotRel
 
 // HasHybridDriveSlots returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasHybridDriveSlots() bool {
-	if o != nil && IsNil(o.HybridDriveSlots) {
+	if o != nil && !IsNil(o.HybridDriveSlots) {
 		return true
 	}
 
@@ -851,7 +861,7 @@ func (o *ComputeRackUnit) GetMemoryArraysOk() ([]MemoryArrayRelationship, bool) 
 
 // HasMemoryArrays returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasMemoryArrays() bool {
-	if o != nil && IsNil(o.MemoryArrays) {
+	if o != nil && !IsNil(o.MemoryArrays) {
 		return true
 	}
 
@@ -884,7 +894,7 @@ func (o *ComputeRackUnit) GetPciDevicesOk() ([]PciDeviceRelationship, bool) {
 
 // HasPciDevices returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasPciDevices() bool {
-	if o != nil && IsNil(o.PciDevices) {
+	if o != nil && !IsNil(o.PciDevices) {
 		return true
 	}
 
@@ -917,7 +927,7 @@ func (o *ComputeRackUnit) GetProcessorsOk() ([]ProcessorUnitRelationship, bool) 
 
 // HasProcessors returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasProcessors() bool {
-	if o != nil && IsNil(o.Processors) {
+	if o != nil && !IsNil(o.Processors) {
 		return true
 	}
 
@@ -950,7 +960,7 @@ func (o *ComputeRackUnit) GetPsusOk() ([]EquipmentPsuRelationship, bool) {
 
 // HasPsus returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasPsus() bool {
-	if o != nil && IsNil(o.Psus) {
+	if o != nil && !IsNil(o.Psus) {
 		return true
 	}
 
@@ -1069,7 +1079,7 @@ func (o *ComputeRackUnit) GetSasExpandersOk() ([]StorageSasExpanderRelationship,
 
 // HasSasExpanders returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasSasExpanders() bool {
-	if o != nil && IsNil(o.SasExpanders) {
+	if o != nil && !IsNil(o.SasExpanders) {
 		return true
 	}
 
@@ -1102,7 +1112,7 @@ func (o *ComputeRackUnit) GetStorageControllersOk() ([]StorageControllerRelation
 
 // HasStorageControllers returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasStorageControllers() bool {
-	if o != nil && IsNil(o.StorageControllers) {
+	if o != nil && !IsNil(o.StorageControllers) {
 		return true
 	}
 
@@ -1135,7 +1145,7 @@ func (o *ComputeRackUnit) GetStorageEnclosuresOk() ([]StorageEnclosureRelationsh
 
 // HasStorageEnclosures returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasStorageEnclosures() bool {
-	if o != nil && IsNil(o.StorageEnclosures) {
+	if o != nil && !IsNil(o.StorageEnclosures) {
 		return true
 	}
 
@@ -1211,7 +1221,7 @@ func (o *ComputeRackUnit) GetUnitPersonalityOk() ([]RackUnitPersonalityRelations
 
 // HasUnitPersonality returns a boolean if a field has been set.
 func (o *ComputeRackUnit) HasUnitPersonality() bool {
-	if o != nil && IsNil(o.UnitPersonality) {
+	if o != nil && !IsNil(o.UnitPersonality) {
 		return true
 	}
 
@@ -1241,7 +1251,13 @@ func (o ComputeRackUnit) ToMap() (map[string]interface{}, error) {
 	if errComputePhysical != nil {
 		return map[string]interface{}{}, errComputePhysical
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
 	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.ConnectionStatus) {
 		toSerialize["ConnectionStatus"] = o.ConnectionStatus
@@ -1347,6 +1363,13 @@ func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -1356,11 +1379,23 @@ func (o *ComputeRackUnit) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type ComputeRackUnitWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`

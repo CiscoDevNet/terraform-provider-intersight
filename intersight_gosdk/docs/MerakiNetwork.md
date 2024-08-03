@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **OrganizationId** | Pointer to **string** | The unique Meraki organization id. | [optional] [readonly] 
 **ProductTypes** | Pointer to **[]string** |  | [optional] 
 **Organization** | Pointer to [**NullableMerakiOrganizationRelationship**](MerakiOrganizationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -252,6 +253,41 @@ HasOrganization returns a boolean if a field has been set.
 `func (o *MerakiNetwork) UnsetOrganization()`
 
 UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
+### GetRegisteredDevice
+
+`func (o *MerakiNetwork) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
+
+GetRegisteredDevice returns the RegisteredDevice field if non-nil, zero value otherwise.
+
+### GetRegisteredDeviceOk
+
+`func (o *MerakiNetwork) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool)`
+
+GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegisteredDevice
+
+`func (o *MerakiNetwork) SetRegisteredDevice(v AssetDeviceRegistrationRelationship)`
+
+SetRegisteredDevice sets RegisteredDevice field to given value.
+
+### HasRegisteredDevice
+
+`func (o *MerakiNetwork) HasRegisteredDevice() bool`
+
+HasRegisteredDevice returns a boolean if a field has been set.
+
+### SetRegisteredDeviceNil
+
+`func (o *MerakiNetwork) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *MerakiNetwork) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

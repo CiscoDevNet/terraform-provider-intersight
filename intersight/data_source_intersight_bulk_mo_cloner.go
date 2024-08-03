@@ -1657,7 +1657,7 @@ func dataSourceBulkMoClonerRead(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			if v, ok := l["sources"]; ok {
+			if v, ok := l["class_id"]; ok {
 				{
 					x := (v.(string))
 					o.SetClassId(x)
@@ -1765,7 +1765,7 @@ func dataSourceBulkMoClonerRead(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			if v, ok := l["targets"]; ok {
+			if v, ok := l["class_id"]; ok {
 				{
 					x := (v.(string))
 					o.SetClassId(x)

@@ -224,6 +224,11 @@ func getPciNodeSchema() map[string]*schema.Schema {
 			Optional: true,
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
+		"oper_state": {
+			Description: "Operational state of the pcie node.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -807,6 +812,11 @@ func dataSourcePciNodeRead(c context.Context, d *schema.ResourceData, meta inter
 		o.SetOperReason(x)
 	}
 
+	if v, ok := d.GetOk("oper_state"); ok {
+		x := (v.(string))
+		o.SetOperState(x)
+	}
+
 	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -1188,6 +1198,7 @@ func dataSourcePciNodeRead(c context.Context, d *schema.ResourceData, meta inter
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_reason"] = (s.GetOperReason())
+				temp["oper_state"] = (s.GetOperState())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)

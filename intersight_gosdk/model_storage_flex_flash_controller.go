@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -95,6 +95,11 @@ func (o *StorageFlexFlashController) SetClassId(v string) {
 	o.ClassId = v
 }
 
+// GetDefaultClassId returns the default value "storage.FlexFlashController" of the ClassId field.
+func (o *StorageFlexFlashController) GetDefaultClassId() interface{} {
+	return "storage.FlexFlashController"
+}
+
 // GetObjectType returns the ObjectType field value
 func (o *StorageFlexFlashController) GetObjectType() string {
 	if o == nil {
@@ -117,6 +122,11 @@ func (o *StorageFlexFlashController) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *StorageFlexFlashController) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "storage.FlexFlashController" of the ObjectType field.
+func (o *StorageFlexFlashController) GetDefaultObjectType() interface{} {
+	return "storage.FlexFlashController"
 }
 
 // GetControllerState returns the ControllerState field value if set, zero value otherwise.
@@ -247,7 +257,7 @@ func (o *StorageFlexFlashController) GetFlexFlashControllerPropsOk() ([]StorageF
 
 // HasFlexFlashControllerProps returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasFlexFlashControllerProps() bool {
-	if o != nil && IsNil(o.FlexFlashControllerProps) {
+	if o != nil && !IsNil(o.FlexFlashControllerProps) {
 		return true
 	}
 
@@ -280,7 +290,7 @@ func (o *StorageFlexFlashController) GetFlexFlashPhysicalDrivesOk() ([]StorageFl
 
 // HasFlexFlashPhysicalDrives returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasFlexFlashPhysicalDrives() bool {
-	if o != nil && IsNil(o.FlexFlashPhysicalDrives) {
+	if o != nil && !IsNil(o.FlexFlashPhysicalDrives) {
 		return true
 	}
 
@@ -313,7 +323,7 @@ func (o *StorageFlexFlashController) GetFlexFlashVirtualDrivesOk() ([]StorageFle
 
 // HasFlexFlashVirtualDrives returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasFlexFlashVirtualDrives() bool {
-	if o != nil && IsNil(o.FlexFlashVirtualDrives) {
+	if o != nil && !IsNil(o.FlexFlashVirtualDrives) {
 		return true
 	}
 
@@ -432,7 +442,7 @@ func (o *StorageFlexFlashController) GetRunningFirmwareOk() ([]FirmwareRunningFi
 
 // HasRunningFirmware returns a boolean if a field has been set.
 func (o *StorageFlexFlashController) HasRunningFirmware() bool {
-	if o != nil && IsNil(o.RunningFirmware) {
+	if o != nil && !IsNil(o.RunningFirmware) {
 		return true
 	}
 
@@ -462,7 +472,13 @@ func (o StorageFlexFlashController) ToMap() (map[string]interface{}, error) {
 	if errEquipmentBase != nil {
 		return map[string]interface{}{}, errEquipmentBase
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
 	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.ControllerState) {
 		toSerialize["ControllerState"] = o.ControllerState
@@ -508,6 +524,13 @@ func (o *StorageFlexFlashController) UnmarshalJSON(data []byte) (err error) {
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -517,11 +540,23 @@ func (o *StorageFlexFlashController) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type StorageFlexFlashControllerWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`

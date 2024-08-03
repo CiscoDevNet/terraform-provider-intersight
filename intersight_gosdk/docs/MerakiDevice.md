@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Mac** | Pointer to **string** | The MAC address of the device. | [optional] [readonly] 
 **NetworkId** | Pointer to **string** | The unique Meraki network id. | [optional] [readonly] 
 **Network** | Pointer to [**NullableMerakiNetworkRelationship**](MerakiNetworkRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -154,6 +155,41 @@ HasNetwork returns a boolean if a field has been set.
 `func (o *MerakiDevice) UnsetNetwork()`
 
 UnsetNetwork ensures that no value is present for Network, not even an explicit nil
+### GetRegisteredDevice
+
+`func (o *MerakiDevice) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
+
+GetRegisteredDevice returns the RegisteredDevice field if non-nil, zero value otherwise.
+
+### GetRegisteredDeviceOk
+
+`func (o *MerakiDevice) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool)`
+
+GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegisteredDevice
+
+`func (o *MerakiDevice) SetRegisteredDevice(v AssetDeviceRegistrationRelationship)`
+
+SetRegisteredDevice sets RegisteredDevice field to given value.
+
+### HasRegisteredDevice
+
+`func (o *MerakiDevice) HasRegisteredDevice() bool`
+
+HasRegisteredDevice returns a boolean if a field has been set.
+
+### SetRegisteredDeviceNil
+
+`func (o *MerakiDevice) SetRegisteredDeviceNil(b bool)`
+
+ SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+
+### UnsetRegisteredDevice
+`func (o *MerakiDevice) UnsetRegisteredDevice()`
+
+UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

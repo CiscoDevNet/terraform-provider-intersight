@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -72,6 +72,7 @@ type ApplianceUpgrade struct {
 	Version              *string                                  `json:"Version,omitempty"`
 	Account              NullableIamAccountRelationship           `json:"Account,omitempty"`
 	ImageBundle          NullableApplianceImageBundleRelationship `json:"ImageBundle,omitempty"`
+	Requires             NullableApplianceUpgradeRelationship     `json:"Requires,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -128,6 +129,11 @@ func (o *ApplianceUpgrade) SetClassId(v string) {
 	o.ClassId = v
 }
 
+// GetDefaultClassId returns the default value "appliance.Upgrade" of the ClassId field.
+func (o *ApplianceUpgrade) GetDefaultClassId() interface{} {
+	return "appliance.Upgrade"
+}
+
 // GetObjectType returns the ObjectType field value
 func (o *ApplianceUpgrade) GetObjectType() string {
 	if o == nil {
@@ -150,6 +156,11 @@ func (o *ApplianceUpgrade) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *ApplianceUpgrade) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "appliance.Upgrade" of the ObjectType field.
+func (o *ApplianceUpgrade) GetDefaultObjectType() interface{} {
+	return "appliance.Upgrade"
 }
 
 // GetActive returns the Active field value if set, zero value otherwise.
@@ -269,7 +280,7 @@ func (o *ApplianceUpgrade) GetCompletedPhasesOk() ([]OnpremUpgradePhase, bool) {
 
 // HasCompletedPhases returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasCompletedPhases() bool {
-	if o != nil && IsNil(o.CompletedPhases) {
+	if o != nil && !IsNil(o.CompletedPhases) {
 		return true
 	}
 
@@ -569,7 +580,7 @@ func (o *ApplianceUpgrade) GetMessagesOk() ([]string, bool) {
 
 // HasMessages returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasMessages() bool {
-	if o != nil && IsNil(o.Messages) {
+	if o != nil && !IsNil(o.Messages) {
 		return true
 	}
 
@@ -602,7 +613,7 @@ func (o *ApplianceUpgrade) GetNodeInfoOk() ([]ApplianceNodeIpInfo, bool) {
 
 // HasNodeInfo returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasNodeInfo() bool {
-	if o != nil && IsNil(o.NodeInfo) {
+	if o != nil && !IsNil(o.NodeInfo) {
 		return true
 	}
 
@@ -667,7 +678,7 @@ func (o *ApplianceUpgrade) GetRollbackPhasesOk() ([]OnpremUpgradePhase, bool) {
 
 // HasRollbackPhases returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasRollbackPhases() bool {
-	if o != nil && IsNil(o.RollbackPhases) {
+	if o != nil && !IsNil(o.RollbackPhases) {
 		return true
 	}
 
@@ -732,7 +743,7 @@ func (o *ApplianceUpgrade) GetServicesOk() ([]string, bool) {
 
 // HasServices returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasServices() bool {
-	if o != nil && IsNil(o.Services) {
+	if o != nil && !IsNil(o.Services) {
 		return true
 	}
 
@@ -893,7 +904,7 @@ func (o *ApplianceUpgrade) GetUiPackagesOk() ([]string, bool) {
 
 // HasUiPackages returns a boolean if a field has been set.
 func (o *ApplianceUpgrade) HasUiPackages() bool {
-	if o != nil && IsNil(o.UiPackages) {
+	if o != nil && !IsNil(o.UiPackages) {
 		return true
 	}
 
@@ -1023,6 +1034,49 @@ func (o *ApplianceUpgrade) UnsetImageBundle() {
 	o.ImageBundle.Unset()
 }
 
+// GetRequires returns the Requires field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ApplianceUpgrade) GetRequires() ApplianceUpgradeRelationship {
+	if o == nil || IsNil(o.Requires.Get()) {
+		var ret ApplianceUpgradeRelationship
+		return ret
+	}
+	return *o.Requires.Get()
+}
+
+// GetRequiresOk returns a tuple with the Requires field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ApplianceUpgrade) GetRequiresOk() (*ApplianceUpgradeRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Requires.Get(), o.Requires.IsSet()
+}
+
+// HasRequires returns a boolean if a field has been set.
+func (o *ApplianceUpgrade) HasRequires() bool {
+	if o != nil && o.Requires.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRequires gets a reference to the given NullableApplianceUpgradeRelationship and assigns it to the Requires field.
+func (o *ApplianceUpgrade) SetRequires(v ApplianceUpgradeRelationship) {
+	o.Requires.Set(&v)
+}
+
+// SetRequiresNil sets the value for Requires to be an explicit nil
+func (o *ApplianceUpgrade) SetRequiresNil() {
+	o.Requires.Set(nil)
+}
+
+// UnsetRequires ensures that no value is present for Requires, not even an explicit nil
+func (o *ApplianceUpgrade) UnsetRequires() {
+	o.Requires.Unset()
+}
+
 func (o ApplianceUpgrade) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -1041,7 +1095,13 @@ func (o ApplianceUpgrade) ToMap() (map[string]interface{}, error) {
 	if errMoBaseMo != nil {
 		return map[string]interface{}{}, errMoBaseMo
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
 	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.Active) {
 		toSerialize["Active"] = o.Active
@@ -1121,6 +1181,9 @@ func (o ApplianceUpgrade) ToMap() (map[string]interface{}, error) {
 	if o.ImageBundle.IsSet() {
 		toSerialize["ImageBundle"] = o.ImageBundle.Get()
 	}
+	if o.Requires.IsSet() {
+		toSerialize["Requires"] = o.Requires.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1138,6 +1201,13 @@ func (o *ApplianceUpgrade) UnmarshalJSON(data []byte) (err error) {
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -1147,11 +1217,23 @@ func (o *ApplianceUpgrade) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type ApplianceUpgradeWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -1200,6 +1282,7 @@ func (o *ApplianceUpgrade) UnmarshalJSON(data []byte) (err error) {
 		Version     *string                                  `json:"Version,omitempty"`
 		Account     NullableIamAccountRelationship           `json:"Account,omitempty"`
 		ImageBundle NullableApplianceImageBundleRelationship `json:"ImageBundle,omitempty"`
+		Requires    NullableApplianceUpgradeRelationship     `json:"Requires,omitempty"`
 	}
 
 	varApplianceUpgradeWithoutEmbeddedStruct := ApplianceUpgradeWithoutEmbeddedStruct{}
@@ -1235,6 +1318,7 @@ func (o *ApplianceUpgrade) UnmarshalJSON(data []byte) (err error) {
 		varApplianceUpgrade.Version = varApplianceUpgradeWithoutEmbeddedStruct.Version
 		varApplianceUpgrade.Account = varApplianceUpgradeWithoutEmbeddedStruct.Account
 		varApplianceUpgrade.ImageBundle = varApplianceUpgradeWithoutEmbeddedStruct.ImageBundle
+		varApplianceUpgrade.Requires = varApplianceUpgradeWithoutEmbeddedStruct.Requires
 		*o = ApplianceUpgrade(varApplianceUpgrade)
 	} else {
 		return err
@@ -1280,6 +1364,7 @@ func (o *ApplianceUpgrade) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "ImageBundle")
+		delete(additionalProperties, "Requires")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

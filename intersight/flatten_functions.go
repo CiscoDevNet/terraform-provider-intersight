@@ -9628,6 +9628,24 @@ func flattenMapApplianceSystemStatusRelationship(p models.ApplianceSystemStatusR
 	appliancesystemstatusrelationships = append(appliancesystemstatusrelationships, appliancesystemstatusrelationship)
 	return appliancesystemstatusrelationships
 }
+func flattenMapApplianceUpgradeRelationship(p models.ApplianceUpgradeRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var applianceupgraderelationships []map[string]interface{}
+	var ret models.ApplianceUpgradeRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	applianceupgraderelationship := make(map[string]interface{})
+	applianceupgraderelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	applianceupgraderelationship["class_id"] = item.GetClassId()
+	applianceupgraderelationship["moid"] = item.GetMoid()
+	applianceupgraderelationship["object_type"] = item.GetObjectType()
+	applianceupgraderelationship["selector"] = item.GetSelector()
+
+	applianceupgraderelationships = append(applianceupgraderelationships, applianceupgraderelationship)
+	return applianceupgraderelationships
+}
 func flattenMapAssetAlarmSummary(p models.AssetAlarmSummary, d *schema.ResourceData) []map[string]interface{} {
 	var assetalarmsummarys []map[string]interface{}
 	var ret models.AssetAlarmSummary
@@ -16690,7 +16708,7 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["hostname"] = item.GetHostname()
 	kubernetesproxyconfig["is_password_set"] = item.GetIsPasswordSet()
 	kubernetesproxyconfig["object_type"] = item.GetObjectType()
-	password_x, exists := d.GetOk("http_proxy")
+	password_x, exists := d.GetOk("docker_http_proxy")
 	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]

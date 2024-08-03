@@ -160,6 +160,11 @@ func getStorageHitachiArraySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"ip": {
+			Description: "The representative IP address (IPv4) of the storage.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"is_upgraded": {
 			Description: "This field indicates the compute status of the catalog values for the associated component or hardware.",
 			Type:        schema.TypeBool,
@@ -737,6 +742,11 @@ func dataSourceStorageHitachiArrayRead(c context.Context, d *schema.ResourceData
 		o.SetHardwareVersion(x)
 	}
 
+	if v, ok := d.GetOk("ip"); ok {
+		x := (v.(string))
+		o.SetIp(x)
+	}
+
 	if v, ok := d.GetOkExists("is_upgraded"); ok {
 		x := (v.(bool))
 		o.SetIsUpgraded(x)
@@ -1189,6 +1199,7 @@ func dataSourceStorageHitachiArrayRead(c context.Context, d *schema.ResourceData
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["hardware_version"] = (s.GetHardwareVersion())
+				temp["ip"] = (s.GetIp())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 
 				temp["mod_time"] = (s.GetModTime()).String()

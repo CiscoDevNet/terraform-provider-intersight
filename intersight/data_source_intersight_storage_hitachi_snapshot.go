@@ -125,6 +125,11 @@ func getStorageHitachiSnapshotSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_redirect_on_write": {
+			Description: "Returns whether it is a Thin Image Advanced pair.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -579,6 +584,11 @@ func dataSourceStorageHitachiSnapshotRead(c context.Context, d *schema.ResourceD
 		o.SetIsMultistageable(x)
 	}
 
+	if v, ok := d.GetOkExists("is_redirect_on_write"); ok {
+		x := (v.(bool))
+		o.SetIsRedirectOnWrite(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -931,6 +941,7 @@ func dataSourceStorageHitachiSnapshotRead(c context.Context, d *schema.ResourceD
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["is_consistency_group"] = (s.GetIsConsistencyGroup())
 				temp["is_multistageable"] = (s.GetIsMultistageable())
+				temp["is_redirect_on_write"] = (s.GetIsRedirectOnWrite())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

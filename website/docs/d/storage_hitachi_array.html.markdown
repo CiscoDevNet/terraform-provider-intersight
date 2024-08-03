@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `hardware_version`:(string) The hardware version of the device. 
+* `ip`:(string) The representative IP address (IPv4) of the storage. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field displays the model number of the associated component or hardware. 
