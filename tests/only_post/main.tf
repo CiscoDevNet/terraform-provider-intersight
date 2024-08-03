@@ -92,18 +92,16 @@ resource "intersight_server_profile_template" "template1" {
 
 resource "intersight_bulk_mo_cloner" "clone_server1"{
        sources {
+               class_id = "server.ProfileTemplate"
                object_type = "server.ProfileTemplate"
                moid = intersight_server_profile_template.template1.moid
-               additional_properties = jsonencode({
-                ClassId = "server.ProfileTemplate"
-               })
        }
        targets {
+               class_id = "server.Profile"
                object_type = "server.Profile"
                additional_properties = jsonencode({
                 Name = "demotesting_DERIVED-4"
                 Description = "Sample description"
-                ClassId = "server.Profile"
                })
                tags = []
        }
