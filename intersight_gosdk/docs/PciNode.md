@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "pci.Node"]
 **ChassisId** | Pointer to **string** | The id of the chassis that the pcie node is currently located in. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
+**OperState** | Pointer to **string** | Operational state of the pcie node. | [optional] [readonly] 
 **SlotId** | Pointer to **string** | The slot number in the chassis that the pcie node is currently located in. | [optional] [readonly] 
 **ComputeBlade** | Pointer to [**NullableComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **GraphicsCards** | Pointer to [**[]GraphicsCardRelationship**](GraphicsCardRelationship.md) | An array of relationships to graphicsCard resources. | [optional] [readonly] 
@@ -133,6 +134,31 @@ HasOperReason returns a boolean if a field has been set.
 `func (o *PciNode) UnsetOperReason()`
 
 UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
+### GetOperState
+
+`func (o *PciNode) GetOperState() string`
+
+GetOperState returns the OperState field if non-nil, zero value otherwise.
+
+### GetOperStateOk
+
+`func (o *PciNode) GetOperStateOk() (*string, bool)`
+
+GetOperStateOk returns a tuple with the OperState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperState
+
+`func (o *PciNode) SetOperState(v string)`
+
+SetOperState sets OperState field to given value.
+
+### HasOperState
+
+`func (o *PciNode) HasOperState() bool`
+
+HasOperState returns a boolean if a field has been set.
+
 ### GetSlotId
 
 `func (o *PciNode) GetSlotId() string`

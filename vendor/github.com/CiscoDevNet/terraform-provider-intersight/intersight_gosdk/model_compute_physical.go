@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -488,7 +488,7 @@ func (o *ComputePhysical) GetKvmIpAddressesOk() ([]ComputeIpAddress, bool) {
 
 // HasKvmIpAddresses returns a boolean if a field has been set.
 func (o *ComputePhysical) HasKvmIpAddresses() bool {
-	if o != nil && IsNil(o.KvmIpAddresses) {
+	if o != nil && !IsNil(o.KvmIpAddresses) {
 		return true
 	}
 
@@ -1001,7 +1001,7 @@ func (o *ComputePhysical) GetOperReasonOk() ([]string, bool) {
 
 // HasOperReason returns a boolean if a field has been set.
 func (o *ComputePhysical) HasOperReason() bool {
-	if o != nil && IsNil(o.OperReason) {
+	if o != nil && !IsNil(o.OperReason) {
 		return true
 	}
 
@@ -1290,7 +1290,7 @@ func (o *ComputePhysical) GetBootCddDevicesOk() ([]BootCddDeviceRelationship, bo
 
 // HasBootCddDevices returns a boolean if a field has been set.
 func (o *ComputePhysical) HasBootCddDevices() bool {
-	if o != nil && IsNil(o.BootCddDevices) {
+	if o != nil && !IsNil(o.BootCddDevices) {
 		return true
 	}
 
@@ -1366,7 +1366,7 @@ func (o *ComputePhysical) GetBootHddDevicesOk() ([]BootHddDeviceRelationship, bo
 
 // HasBootHddDevices returns a boolean if a field has been set.
 func (o *ComputePhysical) HasBootHddDevices() bool {
-	if o != nil && IsNil(o.BootHddDevices) {
+	if o != nil && !IsNil(o.BootHddDevices) {
 		return true
 	}
 
@@ -1399,7 +1399,7 @@ func (o *ComputePhysical) GetBootIscsiDevicesOk() ([]BootIscsiDeviceRelationship
 
 // HasBootIscsiDevices returns a boolean if a field has been set.
 func (o *ComputePhysical) HasBootIscsiDevices() bool {
-	if o != nil && IsNil(o.BootIscsiDevices) {
+	if o != nil && !IsNil(o.BootIscsiDevices) {
 		return true
 	}
 
@@ -1432,7 +1432,7 @@ func (o *ComputePhysical) GetBootNvmeDevicesOk() ([]BootNvmeDeviceRelationship, 
 
 // HasBootNvmeDevices returns a boolean if a field has been set.
 func (o *ComputePhysical) HasBootNvmeDevices() bool {
-	if o != nil && IsNil(o.BootNvmeDevices) {
+	if o != nil && !IsNil(o.BootNvmeDevices) {
 		return true
 	}
 
@@ -1465,7 +1465,7 @@ func (o *ComputePhysical) GetBootPchStorageDevicesOk() ([]BootPchStorageDeviceRe
 
 // HasBootPchStorageDevices returns a boolean if a field has been set.
 func (o *ComputePhysical) HasBootPchStorageDevices() bool {
-	if o != nil && IsNil(o.BootPchStorageDevices) {
+	if o != nil && !IsNil(o.BootPchStorageDevices) {
 		return true
 	}
 
@@ -1498,7 +1498,7 @@ func (o *ComputePhysical) GetBootPxeDevicesOk() ([]BootPxeDeviceRelationship, bo
 
 // HasBootPxeDevices returns a boolean if a field has been set.
 func (o *ComputePhysical) HasBootPxeDevices() bool {
-	if o != nil && IsNil(o.BootPxeDevices) {
+	if o != nil && !IsNil(o.BootPxeDevices) {
 		return true
 	}
 
@@ -1531,7 +1531,7 @@ func (o *ComputePhysical) GetBootSanDevicesOk() ([]BootSanDeviceRelationship, bo
 
 // HasBootSanDevices returns a boolean if a field has been set.
 func (o *ComputePhysical) HasBootSanDevices() bool {
-	if o != nil && IsNil(o.BootSanDevices) {
+	if o != nil && !IsNil(o.BootSanDevices) {
 		return true
 	}
 
@@ -1564,7 +1564,7 @@ func (o *ComputePhysical) GetBootSdDevicesOk() ([]BootSdDeviceRelationship, bool
 
 // HasBootSdDevices returns a boolean if a field has been set.
 func (o *ComputePhysical) HasBootSdDevices() bool {
-	if o != nil && IsNil(o.BootSdDevices) {
+	if o != nil && !IsNil(o.BootSdDevices) {
 		return true
 	}
 
@@ -1597,7 +1597,7 @@ func (o *ComputePhysical) GetBootUefiShellDevicesOk() ([]BootUefiShellDeviceRela
 
 // HasBootUefiShellDevices returns a boolean if a field has been set.
 func (o *ComputePhysical) HasBootUefiShellDevices() bool {
-	if o != nil && IsNil(o.BootUefiShellDevices) {
+	if o != nil && !IsNil(o.BootUefiShellDevices) {
 		return true
 	}
 
@@ -1630,7 +1630,7 @@ func (o *ComputePhysical) GetBootUsbDevicesOk() ([]BootUsbDeviceRelationship, bo
 
 // HasBootUsbDevices returns a boolean if a field has been set.
 func (o *ComputePhysical) HasBootUsbDevices() bool {
-	if o != nil && IsNil(o.BootUsbDevices) {
+	if o != nil && !IsNil(o.BootUsbDevices) {
 		return true
 	}
 
@@ -1663,7 +1663,7 @@ func (o *ComputePhysical) GetBootVmediaDevicesOk() ([]BootVmediaDeviceRelationsh
 
 // HasBootVmediaDevices returns a boolean if a field has been set.
 func (o *ComputePhysical) HasBootVmediaDevices() bool {
-	if o != nil && IsNil(o.BootVmediaDevices) {
+	if o != nil && !IsNil(o.BootVmediaDevices) {
 		return true
 	}
 
@@ -1939,6 +1939,10 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -1948,11 +1952,23 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type ComputePhysicalWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`

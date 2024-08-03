@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ConcordanceRate** | Pointer to **int64** | Concordance rate for pairs. | [optional] [readonly] 
 **IsConsistencyGroup** | Pointer to **bool** | Whether the pair was created in the consistency group mode (CTG mode). | [optional] [readonly] 
 **IsMultistageable** | Pointer to **bool** | Whether the pair can be a multistage pair. | [optional] [readonly] 
+**IsRedirectOnWrite** | Pointer to **bool** | Returns whether it is a Thin Image Advanced pair. | [optional] [readonly] 
 **MuNumber** | Pointer to **int64** | MU number of the primary volume. | [optional] [readonly] 
 **Name** | Pointer to **string** | Object ID of the pair for snapshot data. | [optional] [readonly] 
 **PvolLdevId** | Pointer to **int64** | LDEV number of the primary volume. | [optional] [readonly] 
@@ -153,6 +154,31 @@ SetIsMultistageable sets IsMultistageable field to given value.
 `func (o *StorageHitachiSnapshot) HasIsMultistageable() bool`
 
 HasIsMultistageable returns a boolean if a field has been set.
+
+### GetIsRedirectOnWrite
+
+`func (o *StorageHitachiSnapshot) GetIsRedirectOnWrite() bool`
+
+GetIsRedirectOnWrite returns the IsRedirectOnWrite field if non-nil, zero value otherwise.
+
+### GetIsRedirectOnWriteOk
+
+`func (o *StorageHitachiSnapshot) GetIsRedirectOnWriteOk() (*bool, bool)`
+
+GetIsRedirectOnWriteOk returns a tuple with the IsRedirectOnWrite field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsRedirectOnWrite
+
+`func (o *StorageHitachiSnapshot) SetIsRedirectOnWrite(v bool)`
+
+SetIsRedirectOnWrite sets IsRedirectOnWrite field to given value.
+
+### HasIsRedirectOnWrite
+
+`func (o *StorageHitachiSnapshot) HasIsRedirectOnWrite() bool`
+
+HasIsRedirectOnWrite returns a boolean if a field has been set.
 
 ### GetMuNumber
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -116,6 +116,11 @@ func (o *ComputeBoard) SetClassId(v string) {
 	o.ClassId = v
 }
 
+// GetDefaultClassId returns the default value "compute.Board" of the ClassId field.
+func (o *ComputeBoard) GetDefaultClassId() interface{} {
+	return "compute.Board"
+}
+
 // GetObjectType returns the ObjectType field value
 func (o *ComputeBoard) GetObjectType() string {
 	if o == nil {
@@ -138,6 +143,11 @@ func (o *ComputeBoard) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *ComputeBoard) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "compute.Board" of the ObjectType field.
+func (o *ComputeBoard) GetDefaultObjectType() interface{} {
+	return "compute.Board"
 }
 
 // GetBoardId returns the BoardId field value if set, zero value otherwise.
@@ -257,7 +267,7 @@ func (o *ComputeBoard) GetOperReasonOk() ([]string, bool) {
 
 // HasOperReason returns a boolean if a field has been set.
 func (o *ComputeBoard) HasOperReason() bool {
-	if o != nil && IsNil(o.OperReason) {
+	if o != nil && !IsNil(o.OperReason) {
 		return true
 	}
 
@@ -376,7 +386,7 @@ func (o *ComputeBoard) GetEquipmentTpmsOk() ([]EquipmentTpmRelationship, bool) {
 
 // HasEquipmentTpms returns a boolean if a field has been set.
 func (o *ComputeBoard) HasEquipmentTpms() bool {
-	if o != nil && IsNil(o.EquipmentTpms) {
+	if o != nil && !IsNil(o.EquipmentTpms) {
 		return true
 	}
 
@@ -409,7 +419,7 @@ func (o *ComputeBoard) GetGraphicsCardsOk() ([]GraphicsCardRelationship, bool) {
 
 // HasGraphicsCards returns a boolean if a field has been set.
 func (o *ComputeBoard) HasGraphicsCards() bool {
-	if o != nil && IsNil(o.GraphicsCards) {
+	if o != nil && !IsNil(o.GraphicsCards) {
 		return true
 	}
 
@@ -442,7 +452,7 @@ func (o *ComputeBoard) GetHybridDriveSlotsOk() ([]EquipmentHybridDriveSlotRelati
 
 // HasHybridDriveSlots returns a boolean if a field has been set.
 func (o *ComputeBoard) HasHybridDriveSlots() bool {
-	if o != nil && IsNil(o.HybridDriveSlots) {
+	if o != nil && !IsNil(o.HybridDriveSlots) {
 		return true
 	}
 
@@ -518,7 +528,7 @@ func (o *ComputeBoard) GetMemoryArraysOk() ([]MemoryArrayRelationship, bool) {
 
 // HasMemoryArrays returns a boolean if a field has been set.
 func (o *ComputeBoard) HasMemoryArrays() bool {
-	if o != nil && IsNil(o.MemoryArrays) {
+	if o != nil && !IsNil(o.MemoryArrays) {
 		return true
 	}
 
@@ -551,7 +561,7 @@ func (o *ComputeBoard) GetPciCoprocessorCardsOk() ([]PciCoprocessorCardRelations
 
 // HasPciCoprocessorCards returns a boolean if a field has been set.
 func (o *ComputeBoard) HasPciCoprocessorCards() bool {
-	if o != nil && IsNil(o.PciCoprocessorCards) {
+	if o != nil && !IsNil(o.PciCoprocessorCards) {
 		return true
 	}
 
@@ -584,7 +594,7 @@ func (o *ComputeBoard) GetPciSwitchOk() ([]PciSwitchRelationship, bool) {
 
 // HasPciSwitch returns a boolean if a field has been set.
 func (o *ComputeBoard) HasPciSwitch() bool {
-	if o != nil && IsNil(o.PciSwitch) {
+	if o != nil && !IsNil(o.PciSwitch) {
 		return true
 	}
 
@@ -660,7 +670,7 @@ func (o *ComputeBoard) GetProcessorsOk() ([]ProcessorUnitRelationship, bool) {
 
 // HasProcessors returns a boolean if a field has been set.
 func (o *ComputeBoard) HasProcessors() bool {
-	if o != nil && IsNil(o.Processors) {
+	if o != nil && !IsNil(o.Processors) {
 		return true
 	}
 
@@ -736,7 +746,7 @@ func (o *ComputeBoard) GetSecurityUnitsOk() ([]SecurityUnitRelationship, bool) {
 
 // HasSecurityUnits returns a boolean if a field has been set.
 func (o *ComputeBoard) HasSecurityUnits() bool {
-	if o != nil && IsNil(o.SecurityUnits) {
+	if o != nil && !IsNil(o.SecurityUnits) {
 		return true
 	}
 
@@ -769,7 +779,7 @@ func (o *ComputeBoard) GetStorageControllerDrivesOk() ([]StorageControllerDriveR
 
 // HasStorageControllerDrives returns a boolean if a field has been set.
 func (o *ComputeBoard) HasStorageControllerDrives() bool {
-	if o != nil && IsNil(o.StorageControllerDrives) {
+	if o != nil && !IsNil(o.StorageControllerDrives) {
 		return true
 	}
 
@@ -802,7 +812,7 @@ func (o *ComputeBoard) GetStorageControllersOk() ([]StorageControllerRelationshi
 
 // HasStorageControllers returns a boolean if a field has been set.
 func (o *ComputeBoard) HasStorageControllers() bool {
-	if o != nil && IsNil(o.StorageControllers) {
+	if o != nil && !IsNil(o.StorageControllers) {
 		return true
 	}
 
@@ -835,7 +845,7 @@ func (o *ComputeBoard) GetStorageFlexFlashControllersOk() ([]StorageFlexFlashCon
 
 // HasStorageFlexFlashControllers returns a boolean if a field has been set.
 func (o *ComputeBoard) HasStorageFlexFlashControllers() bool {
-	if o != nil && IsNil(o.StorageFlexFlashControllers) {
+	if o != nil && !IsNil(o.StorageFlexFlashControllers) {
 		return true
 	}
 
@@ -868,7 +878,7 @@ func (o *ComputeBoard) GetStorageFlexUtilControllersOk() ([]StorageFlexUtilContr
 
 // HasStorageFlexUtilControllers returns a boolean if a field has been set.
 func (o *ComputeBoard) HasStorageFlexUtilControllers() bool {
-	if o != nil && IsNil(o.StorageFlexUtilControllers) {
+	if o != nil && !IsNil(o.StorageFlexUtilControllers) {
 		return true
 	}
 
@@ -898,7 +908,13 @@ func (o ComputeBoard) ToMap() (map[string]interface{}, error) {
 	if errEquipmentBase != nil {
 		return map[string]interface{}{}, errEquipmentBase
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
 	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.BoardId) {
 		toSerialize["BoardId"] = o.BoardId
@@ -980,6 +996,13 @@ func (o *ComputeBoard) UnmarshalJSON(data []byte) (err error) {
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -989,11 +1012,23 @@ func (o *ComputeBoard) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type ComputeBoardWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`

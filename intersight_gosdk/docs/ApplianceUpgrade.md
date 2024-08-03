@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **Version** | Pointer to **string** | Software upgrade manifest&#39;s version. | [optional] [readonly] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **ImageBundle** | Pointer to [**NullableApplianceImageBundleRelationship**](ApplianceImageBundleRelationship.md) |  | [optional] 
+**Requires** | Pointer to [**NullableApplianceUpgradeRelationship**](ApplianceUpgradeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -832,6 +833,41 @@ HasImageBundle returns a boolean if a field has been set.
 `func (o *ApplianceUpgrade) UnsetImageBundle()`
 
 UnsetImageBundle ensures that no value is present for ImageBundle, not even an explicit nil
+### GetRequires
+
+`func (o *ApplianceUpgrade) GetRequires() ApplianceUpgradeRelationship`
+
+GetRequires returns the Requires field if non-nil, zero value otherwise.
+
+### GetRequiresOk
+
+`func (o *ApplianceUpgrade) GetRequiresOk() (*ApplianceUpgradeRelationship, bool)`
+
+GetRequiresOk returns a tuple with the Requires field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequires
+
+`func (o *ApplianceUpgrade) SetRequires(v ApplianceUpgradeRelationship)`
+
+SetRequires sets Requires field to given value.
+
+### HasRequires
+
+`func (o *ApplianceUpgrade) HasRequires() bool`
+
+HasRequires returns a boolean if a field has been set.
+
+### SetRequiresNil
+
+`func (o *ApplianceUpgrade) SetRequiresNil(b bool)`
+
+ SetRequiresNil sets the value for Requires to be an explicit nil
+
+### UnsetRequires
+`func (o *ApplianceUpgrade) UnsetRequires()`
+
+UnsetRequires ensures that no value is present for Requires, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

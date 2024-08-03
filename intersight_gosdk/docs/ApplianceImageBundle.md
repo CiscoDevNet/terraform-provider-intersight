@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **UpgradeImpactEnum** | Pointer to **string** | UpgradeImpactEnum is used to indicate the kind of impact the upgrade has on currently running services on the appliance. * &#x60;None&#x60; - The upgrade has no effect on the system. * &#x60;Disruptive&#x60; - The services will not be functional during the upgrade. * &#x60;Disruptive-reboot&#x60; - The upgrade needs a reboot. | [optional] [readonly] [default to "None"]
 **UpgradeStartTime** | Pointer to **time.Time** | Start date of the software upgrade process. | [optional] [readonly] 
 **Version** | Pointer to **string** | Software upgrade manifest&#39;s version. | [optional] [readonly] 
+**Requires** | Pointer to [**NullableApplianceImageBundleRelationship**](ApplianceImageBundleRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -780,6 +781,41 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
+### GetRequires
+
+`func (o *ApplianceImageBundle) GetRequires() ApplianceImageBundleRelationship`
+
+GetRequires returns the Requires field if non-nil, zero value otherwise.
+
+### GetRequiresOk
+
+`func (o *ApplianceImageBundle) GetRequiresOk() (*ApplianceImageBundleRelationship, bool)`
+
+GetRequiresOk returns a tuple with the Requires field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequires
+
+`func (o *ApplianceImageBundle) SetRequires(v ApplianceImageBundleRelationship)`
+
+SetRequires sets Requires field to given value.
+
+### HasRequires
+
+`func (o *ApplianceImageBundle) HasRequires() bool`
+
+HasRequires returns a boolean if a field has been set.
+
+### SetRequiresNil
+
+`func (o *ApplianceImageBundle) SetRequiresNil(b bool)`
+
+ SetRequiresNil sets the value for Requires to be an explicit nil
+
+### UnsetRequires
+`func (o *ApplianceImageBundle) UnsetRequires()`
+
+UnsetRequires ensures that no value is present for Requires, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

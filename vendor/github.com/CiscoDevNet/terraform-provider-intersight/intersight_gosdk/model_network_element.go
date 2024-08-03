@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -236,6 +236,11 @@ func (o *NetworkElement) SetClassId(v string) {
 	o.ClassId = v
 }
 
+// GetDefaultClassId returns the default value "network.Element" of the ClassId field.
+func (o *NetworkElement) GetDefaultClassId() interface{} {
+	return "network.Element"
+}
+
 // GetObjectType returns the ObjectType field value
 func (o *NetworkElement) GetObjectType() string {
 	if o == nil {
@@ -258,6 +263,11 @@ func (o *NetworkElement) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *NetworkElement) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "network.Element" of the ObjectType field.
+func (o *NetworkElement) GetDefaultObjectType() interface{} {
+	return "network.Element"
 }
 
 // GetAdminEvacState returns the AdminEvacState field value if set, zero value otherwise.
@@ -1741,7 +1751,7 @@ func (o *NetworkElement) GetCardsOk() ([]EquipmentSwitchCardRelationship, bool) 
 
 // HasCards returns a boolean if a field has been set.
 func (o *NetworkElement) HasCards() bool {
-	if o != nil && IsNil(o.Cards) {
+	if o != nil && !IsNil(o.Cards) {
 		return true
 	}
 
@@ -1774,7 +1784,7 @@ func (o *NetworkElement) GetCdpNeighborOk() ([]NetworkDiscoveredNeighborRelation
 
 // HasCdpNeighbor returns a boolean if a field has been set.
 func (o *NetworkElement) HasCdpNeighbor() bool {
-	if o != nil && IsNil(o.CdpNeighbor) {
+	if o != nil && !IsNil(o.CdpNeighbor) {
 		return true
 	}
 
@@ -1807,7 +1817,7 @@ func (o *NetworkElement) GetConsoleOk() ([]ConsoleConsoleConfigRelationship, boo
 
 // HasConsole returns a boolean if a field has been set.
 func (o *NetworkElement) HasConsole() bool {
-	if o != nil && IsNil(o.Console) {
+	if o != nil && !IsNil(o.Console) {
 		return true
 	}
 
@@ -1840,7 +1850,7 @@ func (o *NetworkElement) GetDnsOk() ([]NetworkDnsRelationship, bool) {
 
 // HasDns returns a boolean if a field has been set.
 func (o *NetworkElement) HasDns() bool {
-	if o != nil && IsNil(o.Dns) {
+	if o != nil && !IsNil(o.Dns) {
 		return true
 	}
 
@@ -1873,7 +1883,7 @@ func (o *NetworkElement) GetEtherPortChannelsOk() ([]EtherPortChannelRelationshi
 
 // HasEtherPortChannels returns a boolean if a field has been set.
 func (o *NetworkElement) HasEtherPortChannels() bool {
-	if o != nil && IsNil(o.EtherPortChannels) {
+	if o != nil && !IsNil(o.EtherPortChannels) {
 		return true
 	}
 
@@ -1906,7 +1916,7 @@ func (o *NetworkElement) GetFanmodulesOk() ([]EquipmentFanModuleRelationship, bo
 
 // HasFanmodules returns a boolean if a field has been set.
 func (o *NetworkElement) HasFanmodules() bool {
-	if o != nil && IsNil(o.Fanmodules) {
+	if o != nil && !IsNil(o.Fanmodules) {
 		return true
 	}
 
@@ -1939,7 +1949,7 @@ func (o *NetworkElement) GetFcPortChannelsOk() ([]FcPortChannelRelationship, boo
 
 // HasFcPortChannels returns a boolean if a field has been set.
 func (o *NetworkElement) HasFcPortChannels() bool {
-	if o != nil && IsNil(o.FcPortChannels) {
+	if o != nil && !IsNil(o.FcPortChannels) {
 		return true
 	}
 
@@ -1972,7 +1982,7 @@ func (o *NetworkElement) GetFeatureControlOk() ([]NetworkFeatureControlRelations
 
 // HasFeatureControl returns a boolean if a field has been set.
 func (o *NetworkElement) HasFeatureControl() bool {
-	if o != nil && IsNil(o.FeatureControl) {
+	if o != nil && !IsNil(o.FeatureControl) {
 		return true
 	}
 
@@ -2005,7 +2015,7 @@ func (o *NetworkElement) GetInterfaceListOk() ([]NetworkInterfaceListRelationshi
 
 // HasInterfaceList returns a boolean if a field has been set.
 func (o *NetworkElement) HasInterfaceList() bool {
-	if o != nil && IsNil(o.InterfaceList) {
+	if o != nil && !IsNil(o.InterfaceList) {
 		return true
 	}
 
@@ -2081,7 +2091,7 @@ func (o *NetworkElement) GetLicenseFileOk() ([]NetworkLicenseFileRelationship, b
 
 // HasLicenseFile returns a boolean if a field has been set.
 func (o *NetworkElement) HasLicenseFile() bool {
-	if o != nil && IsNil(o.LicenseFile) {
+	if o != nil && !IsNil(o.LicenseFile) {
 		return true
 	}
 
@@ -2114,7 +2124,7 @@ func (o *NetworkElement) GetLldpNeighborOk() ([]NetworkDiscoveredNeighborRelatio
 
 // HasLldpNeighbor returns a boolean if a field has been set.
 func (o *NetworkElement) HasLldpNeighbor() bool {
-	if o != nil && IsNil(o.LldpNeighbor) {
+	if o != nil && !IsNil(o.LldpNeighbor) {
 		return true
 	}
 
@@ -2362,7 +2372,7 @@ func (o *NetworkElement) GetNtpServerOk() ([]NtpNtpServerRelationship, bool) {
 
 // HasNtpServer returns a boolean if a field has been set.
 func (o *NetworkElement) HasNtpServer() bool {
-	if o != nil && IsNil(o.NtpServer) {
+	if o != nil && !IsNil(o.NtpServer) {
 		return true
 	}
 
@@ -2395,7 +2405,7 @@ func (o *NetworkElement) GetPortMacBindingsOk() ([]PortMacBindingRelationship, b
 
 // HasPortMacBindings returns a boolean if a field has been set.
 func (o *NetworkElement) HasPortMacBindings() bool {
-	if o != nil && IsNil(o.PortMacBindings) {
+	if o != nil && !IsNil(o.PortMacBindings) {
 		return true
 	}
 
@@ -2428,7 +2438,7 @@ func (o *NetworkElement) GetProcessorUnitOk() ([]ProcessorUnitRelationship, bool
 
 // HasProcessorUnit returns a boolean if a field has been set.
 func (o *NetworkElement) HasProcessorUnit() bool {
-	if o != nil && IsNil(o.ProcessorUnit) {
+	if o != nil && !IsNil(o.ProcessorUnit) {
 		return true
 	}
 
@@ -2461,7 +2471,7 @@ func (o *NetworkElement) GetPsusOk() ([]EquipmentPsuRelationship, bool) {
 
 // HasPsus returns a boolean if a field has been set.
 func (o *NetworkElement) HasPsus() bool {
-	if o != nil && IsNil(o.Psus) {
+	if o != nil && !IsNil(o.Psus) {
 		return true
 	}
 
@@ -2537,7 +2547,7 @@ func (o *NetworkElement) GetSensorsOk() ([]EquipmentSensorRelationship, bool) {
 
 // HasSensors returns a boolean if a field has been set.
 func (o *NetworkElement) HasSensors() bool {
-	if o != nil && IsNil(o.Sensors) {
+	if o != nil && !IsNil(o.Sensors) {
 		return true
 	}
 
@@ -2570,7 +2580,7 @@ func (o *NetworkElement) GetStorageItemsOk() ([]StorageItemRelationship, bool) {
 
 // HasStorageItems returns a boolean if a field has been set.
 func (o *NetworkElement) HasStorageItems() bool {
-	if o != nil && IsNil(o.StorageItems) {
+	if o != nil && !IsNil(o.StorageItems) {
 		return true
 	}
 
@@ -2603,7 +2613,7 @@ func (o *NetworkElement) GetSupervisorCardOk() ([]NetworkSupervisorCardRelations
 
 // HasSupervisorCard returns a boolean if a field has been set.
 func (o *NetworkElement) HasSupervisorCard() bool {
-	if o != nil && IsNil(o.SupervisorCard) {
+	if o != nil && !IsNil(o.SupervisorCard) {
 		return true
 	}
 
@@ -2722,7 +2732,7 @@ func (o *NetworkElement) GetVethsOk() ([]NetworkVethernetRelationship, bool) {
 
 // HasVeths returns a boolean if a field has been set.
 func (o *NetworkElement) HasVeths() bool {
-	if o != nil && IsNil(o.Veths) {
+	if o != nil && !IsNil(o.Veths) {
 		return true
 	}
 
@@ -2755,7 +2765,7 @@ func (o *NetworkElement) GetVfcsOk() ([]NetworkVfcRelationship, bool) {
 
 // HasVfcs returns a boolean if a field has been set.
 func (o *NetworkElement) HasVfcs() bool {
-	if o != nil && IsNil(o.Vfcs) {
+	if o != nil && !IsNil(o.Vfcs) {
 		return true
 	}
 
@@ -2831,7 +2841,7 @@ func (o *NetworkElement) GetVpcMemberOk() ([]NetworkVpcMemberRelationship, bool)
 
 // HasVpcMember returns a boolean if a field has been set.
 func (o *NetworkElement) HasVpcMember() bool {
-	if o != nil && IsNil(o.VpcMember) {
+	if o != nil && !IsNil(o.VpcMember) {
 		return true
 	}
 
@@ -2864,7 +2874,7 @@ func (o *NetworkElement) GetVpcPeerOk() ([]NetworkVpcPeerRelationship, bool) {
 
 // HasVpcPeer returns a boolean if a field has been set.
 func (o *NetworkElement) HasVpcPeer() bool {
-	if o != nil && IsNil(o.VpcPeer) {
+	if o != nil && !IsNil(o.VpcPeer) {
 		return true
 	}
 
@@ -2897,7 +2907,7 @@ func (o *NetworkElement) GetVrfOk() ([]NetworkVrfRelationship, bool) {
 
 // HasVrf returns a boolean if a field has been set.
 func (o *NetworkElement) HasVrf() bool {
-	if o != nil && IsNil(o.Vrf) {
+	if o != nil && !IsNil(o.Vrf) {
 		return true
 	}
 
@@ -2927,7 +2937,13 @@ func (o NetworkElement) ToMap() (map[string]interface{}, error) {
 	if errEquipmentBase != nil {
 		return map[string]interface{}{}, errEquipmentBase
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
 	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.AdminEvacState) {
 		toSerialize["AdminEvacState"] = o.AdminEvacState
@@ -3180,6 +3196,13 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -3189,11 +3212,23 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type NetworkElementWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`

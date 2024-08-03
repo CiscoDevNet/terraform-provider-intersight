@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -38,6 +38,8 @@ type StorageHitachiArray struct {
 	Ctl2MicroVersion *string `json:"Ctl2MicroVersion,omitempty"`
 	// ID of the Storage device.
 	DeviceId *string `json:"DeviceId,omitempty"`
+	// The representative IP address (IPv4) of the storage.
+	Ip *string `json:"Ip,omitempty"`
 	// IP address of the SVP (Service Processor). The SVP provides out-of-band configuration and management of the storage system, and collects performance data for key components to enable diagnostic testing and analysis.
 	SvpIp *string `json:"SvpIp,omitempty"`
 	// Controller operated by the REST API.
@@ -95,6 +97,11 @@ func (o *StorageHitachiArray) SetClassId(v string) {
 	o.ClassId = v
 }
 
+// GetDefaultClassId returns the default value "storage.HitachiArray" of the ClassId field.
+func (o *StorageHitachiArray) GetDefaultClassId() interface{} {
+	return "storage.HitachiArray"
+}
+
 // GetObjectType returns the ObjectType field value
 func (o *StorageHitachiArray) GetObjectType() string {
 	if o == nil {
@@ -117,6 +124,11 @@ func (o *StorageHitachiArray) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *StorageHitachiArray) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "storage.HitachiArray" of the ObjectType field.
+func (o *StorageHitachiArray) GetDefaultObjectType() interface{} {
+	return "storage.HitachiArray"
 }
 
 // GetCtl1Ip returns the Ctl1Ip field value if set, zero value otherwise.
@@ -279,6 +291,38 @@ func (o *StorageHitachiArray) SetDeviceId(v string) {
 	o.DeviceId = &v
 }
 
+// GetIp returns the Ip field value if set, zero value otherwise.
+func (o *StorageHitachiArray) GetIp() string {
+	if o == nil || IsNil(o.Ip) {
+		var ret string
+		return ret
+	}
+	return *o.Ip
+}
+
+// GetIpOk returns a tuple with the Ip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageHitachiArray) GetIpOk() (*string, bool) {
+	if o == nil || IsNil(o.Ip) {
+		return nil, false
+	}
+	return o.Ip, true
+}
+
+// HasIp returns a boolean if a field has been set.
+func (o *StorageHitachiArray) HasIp() bool {
+	if o != nil && !IsNil(o.Ip) {
+		return true
+	}
+
+	return false
+}
+
+// SetIp gets a reference to the given string and assigns it to the Ip field.
+func (o *StorageHitachiArray) SetIp(v string) {
+	o.Ip = &v
+}
+
 // GetSvpIp returns the SvpIp field value if set, zero value otherwise.
 func (o *StorageHitachiArray) GetSvpIp() string {
 	if o == nil || IsNil(o.SvpIp) {
@@ -404,7 +448,13 @@ func (o StorageHitachiArray) ToMap() (map[string]interface{}, error) {
 	if errStorageBaseArray != nil {
 		return map[string]interface{}{}, errStorageBaseArray
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
 	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.Ctl1Ip) {
 		toSerialize["Ctl1Ip"] = o.Ctl1Ip
@@ -420,6 +470,9 @@ func (o StorageHitachiArray) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DeviceId) {
 		toSerialize["DeviceId"] = o.DeviceId
+	}
+	if !IsNil(o.Ip) {
+		toSerialize["Ip"] = o.Ip
 	}
 	if !IsNil(o.SvpIp) {
 		toSerialize["SvpIp"] = o.SvpIp
@@ -447,6 +500,13 @@ func (o *StorageHitachiArray) UnmarshalJSON(data []byte) (err error) {
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -456,11 +516,23 @@ func (o *StorageHitachiArray) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type StorageHitachiArrayWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -476,6 +548,8 @@ func (o *StorageHitachiArray) UnmarshalJSON(data []byte) (err error) {
 		Ctl2MicroVersion *string `json:"Ctl2MicroVersion,omitempty"`
 		// ID of the Storage device.
 		DeviceId *string `json:"DeviceId,omitempty"`
+		// The representative IP address (IPv4) of the storage.
+		Ip *string `json:"Ip,omitempty"`
 		// IP address of the SVP (Service Processor). The SVP provides out-of-band configuration and management of the storage system, and collects performance data for key components to enable diagnostic testing and analysis.
 		SvpIp *string `json:"SvpIp,omitempty"`
 		// Controller operated by the REST API.
@@ -495,6 +569,7 @@ func (o *StorageHitachiArray) UnmarshalJSON(data []byte) (err error) {
 		varStorageHitachiArray.Ctl2Ip = varStorageHitachiArrayWithoutEmbeddedStruct.Ctl2Ip
 		varStorageHitachiArray.Ctl2MicroVersion = varStorageHitachiArrayWithoutEmbeddedStruct.Ctl2MicroVersion
 		varStorageHitachiArray.DeviceId = varStorageHitachiArrayWithoutEmbeddedStruct.DeviceId
+		varStorageHitachiArray.Ip = varStorageHitachiArrayWithoutEmbeddedStruct.Ip
 		varStorageHitachiArray.SvpIp = varStorageHitachiArrayWithoutEmbeddedStruct.SvpIp
 		varStorageHitachiArray.TargetCtl = varStorageHitachiArrayWithoutEmbeddedStruct.TargetCtl
 		varStorageHitachiArray.RegisteredDevice = varStorageHitachiArrayWithoutEmbeddedStruct.RegisteredDevice
@@ -522,6 +597,7 @@ func (o *StorageHitachiArray) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Ctl2Ip")
 		delete(additionalProperties, "Ctl2MicroVersion")
 		delete(additionalProperties, "DeviceId")
+		delete(additionalProperties, "Ip")
 		delete(additionalProperties, "SvpIp")
 		delete(additionalProperties, "TargetCtl")
 		delete(additionalProperties, "RegisteredDevice")

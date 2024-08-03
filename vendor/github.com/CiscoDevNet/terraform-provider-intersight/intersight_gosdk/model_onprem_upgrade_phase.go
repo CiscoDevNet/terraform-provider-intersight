@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17057
+API version: 1.0.11-17227
 Contact: intersight@cisco.com
 */
 
@@ -41,7 +41,7 @@ type OnpremUpgradePhase struct {
 	Failed *bool `json:"Failed,omitempty"`
 	// Status message set during the upgrade phase.
 	Message *string `json:"Message,omitempty"`
-	// Name of the upgrade phase. * `init` - Upgrade service initialization phase. * `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running. * `SyncImages` - For a multinode system, sync image files between nodes. * `Prepare` - Upgrade service prepares folders and templated files. * `ServiceLoad` - Upgrade service loads the service images into the local docker cache. * `UiLoad` - Upgrade service loads the UI packages into the local cache. * `GenerateConfig` - Upgrade service generates the Kubernetes configuration files. * `DeployService` - Upgrade service deploys the Kubernetes services. * `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node. * `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node. * `VerifyPlaybookSuccess` - Verify the upgrade playbook for UpgradeOS or UpgradeServices completed successfully. * `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node. * `Success` - Upgrade completed successfully. * `Fail` - Indicates that the upgrade process has failed. * `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance. * `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.
+	// Name of the upgrade phase. * `init` - Upgrade service initialization phase. * `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running. * `monitor` - Monitor a required upgrade. * `SyncImages` - For a multinode system, sync image files between nodes. * `Prepare` - Upgrade service prepares folders and templated files. * `ServiceLoad` - Upgrade service loads the service images into the local docker cache. * `UiLoad` - Upgrade service loads the UI packages into the local cache. * `GenerateConfig` - Upgrade service generates the Kubernetes configuration files. * `DeployService` - Upgrade service deploys the Kubernetes services. * `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node. * `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node. * `VerifyPlaybookSuccess` - Verify the upgrade playbook for UpgradeOS or UpgradeServices completed successfully. * `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node. * `Success` - Upgrade completed successfully. * `Fail` - Indicates that the upgrade process has failed. * `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance. * `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.
 	Name *string `json:"Name,omitempty"`
 	// Retry count of the upgrade phase.
 	RetryCount *int64 `json:"RetryCount,omitempty"`
@@ -101,6 +101,11 @@ func (o *OnpremUpgradePhase) SetClassId(v string) {
 	o.ClassId = v
 }
 
+// GetDefaultClassId returns the default value "onprem.UpgradePhase" of the ClassId field.
+func (o *OnpremUpgradePhase) GetDefaultClassId() interface{} {
+	return "onprem.UpgradePhase"
+}
+
 // GetObjectType returns the ObjectType field value
 func (o *OnpremUpgradePhase) GetObjectType() string {
 	if o == nil {
@@ -123,6 +128,11 @@ func (o *OnpremUpgradePhase) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *OnpremUpgradePhase) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "onprem.UpgradePhase" of the ObjectType field.
+func (o *OnpremUpgradePhase) GetDefaultObjectType() interface{} {
+	return "onprem.UpgradePhase"
 }
 
 // GetCurrentNode returns the CurrentNode field value if set, zero value otherwise.
@@ -463,7 +473,13 @@ func (o OnpremUpgradePhase) ToMap() (map[string]interface{}, error) {
 	if errMoBaseComplexType != nil {
 		return map[string]interface{}{}, errMoBaseComplexType
 	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
 	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
 	toSerialize["ObjectType"] = o.ObjectType
 	if !IsNil(o.CurrentNode) {
 		toSerialize["CurrentNode"] = o.CurrentNode
@@ -512,6 +528,13 @@ func (o *OnpremUpgradePhase) UnmarshalJSON(data []byte) (err error) {
 		"ObjectType",
 	}
 
+	// defaultValueFuncMap captures the default values for required properties.
+	// These values are used when required properties are missing from the payload.
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
+	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
 	err = json.Unmarshal(data, &allProperties)
@@ -521,11 +544,23 @@ func (o *OnpremUpgradePhase) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
+			if _, ok := defaultValueFuncMap[requiredProperty]; ok {
+				allProperties[requiredProperty] = defaultValueFuncMap[requiredProperty]()
+				defaultValueApplied = true
+			}
+		}
+		if value, exists := allProperties[requiredProperty]; !exists || value == "" {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
 	}
 
+	if defaultValueApplied {
+		data, err = json.Marshal(allProperties)
+		if err != nil {
+			return err
+		}
+	}
 	type OnpremUpgradePhaseWithoutEmbeddedStruct struct {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
@@ -543,7 +578,7 @@ func (o *OnpremUpgradePhase) UnmarshalJSON(data []byte) (err error) {
 		Failed *bool `json:"Failed,omitempty"`
 		// Status message set during the upgrade phase.
 		Message *string `json:"Message,omitempty"`
-		// Name of the upgrade phase. * `init` - Upgrade service initialization phase. * `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running. * `SyncImages` - For a multinode system, sync image files between nodes. * `Prepare` - Upgrade service prepares folders and templated files. * `ServiceLoad` - Upgrade service loads the service images into the local docker cache. * `UiLoad` - Upgrade service loads the UI packages into the local cache. * `GenerateConfig` - Upgrade service generates the Kubernetes configuration files. * `DeployService` - Upgrade service deploys the Kubernetes services. * `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node. * `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node. * `VerifyPlaybookSuccess` - Verify the upgrade playbook for UpgradeOS or UpgradeServices completed successfully. * `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node. * `Success` - Upgrade completed successfully. * `Fail` - Indicates that the upgrade process has failed. * `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance. * `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.
+		// Name of the upgrade phase. * `init` - Upgrade service initialization phase. * `CheckCluster` - For a multinode system, check that all nodes in the cluster are connected and running. * `monitor` - Monitor a required upgrade. * `SyncImages` - For a multinode system, sync image files between nodes. * `Prepare` - Upgrade service prepares folders and templated files. * `ServiceLoad` - Upgrade service loads the service images into the local docker cache. * `UiLoad` - Upgrade service loads the UI packages into the local cache. * `GenerateConfig` - Upgrade service generates the Kubernetes configuration files. * `DeployService` - Upgrade service deploys the Kubernetes services. * `UpgradeOS` - Run /opt/cisco/bin/onprem-upgrade-start.sh for each node. * `UpgradeServices` - Run /opt/cisco/bin/onprem-upgrade-start.sh per node. * `VerifyPlaybookSuccess` - Verify the upgrade playbook for UpgradeOS or UpgradeServices completed successfully. * `FinishUpgrade` - Run /opt/cisco/bin/onprem-upgrade-finish.sh for each node. * `Success` - Upgrade completed successfully. * `Fail` - Indicates that the upgrade process has failed. * `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance. * `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.
 		Name *string `json:"Name,omitempty"`
 		// Retry count of the upgrade phase.
 		RetryCount *int64 `json:"RetryCount,omitempty"`

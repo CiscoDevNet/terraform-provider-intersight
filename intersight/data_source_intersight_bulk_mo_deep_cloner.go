@@ -1131,7 +1131,7 @@ func dataSourceBulkMoDeepClonerRead(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			if v, ok := l["targets"]; ok {
+			if v, ok := l["class_id"]; ok {
 				{
 					x := (v.(string))
 					o.SetClassId(x)
