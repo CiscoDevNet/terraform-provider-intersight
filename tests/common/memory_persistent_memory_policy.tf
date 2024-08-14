@@ -18,10 +18,10 @@ resource "intersight_memory_persistent_memory_policy" "memory_persistent_memory_
   logical_namespaces = [
     {
       additional_properties = ""
-      class_id              = "memory.PersistentMemoryLocalSecurity"
+      class_id              = "memory.PersistentMemoryLogicalNamespace"
       name                  = "logical_namespace_test"
       capacity              = 131072
-      object_type           = "memory.PersistentMemoryLocalSecurity"
+      object_type           = "memory.PersistentMemoryLogicalNamespace"
       mode                  = "block"
       socket_id             = 1
       socket_memory_id      = 6
