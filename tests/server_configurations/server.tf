@@ -1,5 +1,5 @@
-resource "intersight_server_profile" "server1" {
-  name = "server1"
+resource "intersight_server_profile" "tf_server_server_configurations" {
+  name = "tf_server_server_configurations"
   action = "No-op"
   tags {
     key = "server"
@@ -17,7 +17,7 @@ resource "intersight_server_profile" "server1" {
     object_type = "adapter.ConfigPolicy"
   }
   policy_bucket {
-    moid = intersight_boot_precision_policy.tf_boot_precision.moid
+    moid = intersight_boot_precision_policy.tf_boot_precision_server_configurations.moid
     object_type = "boot.PrecisionPolicy"
   }
   policy_bucket {

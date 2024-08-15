@@ -1,6 +1,6 @@
 
-resource "intersight_server_profile" "server1" {
-  name   = "server1"
+resource "intersight_server_profile" "tf_server_common" {
+  name   = "tf_server_common"
   action = "No-op"
   tags {
     key   = "server"

@@ -31,7 +31,7 @@ resource "intersight_adapter_config_policy" "adapter_config1" {
     }
   }
   profiles {
-    moid        = intersight_server_profile.server1.moid
+    moid        = intersight_server_profile.tf_server_common.moid
     object_type = "server.Profile"
   }
 }
