@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17227
+API version: 1.0.11-17956
 Contact: intersight@cisco.com
 */
 
@@ -23,7 +23,7 @@ var _ MappedNullable = &NetworkElementSummary{}
 
 // NetworkElementSummary View MO which aggregates information pertaining to a network element from mutiple MOs.
 type NetworkElementSummary struct {
-	ViewsView
+	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
@@ -47,7 +47,7 @@ type NetworkElementSummary struct {
 	ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
 	// The default domain name configured on the switch.
 	DefaultDomain *string `json:"DefaultDomain,omitempty"`
-	// The database identifier of the registered device of an object.
+	// The MoId of the registered device that coresponds to the server.
 	DeviceMoId *string `json:"DeviceMoId,omitempty"`
 	// The Distinguished Name unambiguously identifies an object in the system.
 	Dn *string `json:"Dn,omitempty"`
@@ -56,7 +56,7 @@ type NetworkElementSummary struct {
 	EthernetMode *string `json:"EthernetMode,omitempty"`
 	// The user configured Ethernet operational mode for this switch (End-Host or Switching). * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 	EthernetSwitchingMode *string `json:"EthernetSwitchingMode,omitempty"`
-	// The fault summary of the network Element out-of-band management interface.
+	// The fault summary for the server.
 	// Deprecated
 	FaultSummary *int64 `json:"FaultSummary,omitempty"`
 	// The user configured FC operational mode for this switch (End-Host or Switching).
@@ -86,9 +86,9 @@ type NetworkElementSummary struct {
 	IsUpgraded *bool `json:"IsUpgraded,omitempty"`
 	// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
-	// This field displays the model number of the associated component or hardware.
+	// This field identifies the model of the given component.
 	Model *string `json:"Model,omitempty"`
-	// Name of the ElementSummary object is saved in this property.
+	// The admin configured name of the system.
 	Name *string `json:"Name,omitempty"`
 	// Total number of Ethernet ports.
 	NumEtherPorts *int64 `json:"NumEtherPorts,omitempty"`
@@ -130,19 +130,17 @@ type NetworkElementSummary struct {
 	OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
 	// Part number of the switch.
 	PartNumber *string `json:"PartNumber,omitempty"`
-	// The flag to indicate the firmware of peer Fabric Interconnect is out of sync.
-	PeerFirmwareOutOfSync *bool `json:"PeerFirmwareOutOfSync,omitempty"`
-	// This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.
+	// This field identifies the presence (equipped) or absence of the given component.
 	Presence *string `json:"Presence,omitempty"`
 	// The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic.
 	ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
-	// This field displays the revised version of the associated component or hardware (if any).
+	// The product revision of the switch.
 	Revision *string `json:"Revision,omitempty"`
 	// The Relative Name uniquely identifies an object within a given context.
 	Rn *string `json:"Rn,omitempty"`
-	// This field displays the serial number of the associated component or hardware.
+	// This field identifies the serial of the given component.
 	Serial *string `json:"Serial,omitempty"`
-	// The source object type of this view MO.
+	// Stores the source object type used to fill the properties of this object.
 	SourceObjectType *string `json:"SourceObjectType,omitempty"`
 	// The status of the switch.
 	Status *string `json:"Status,omitempty"`
@@ -158,12 +156,11 @@ type NetworkElementSummary struct {
 	Thermal *string `json:"Thermal,omitempty"`
 	// Total available memory on this switch platform.
 	TotalMemory *int64 `json:"TotalMemory,omitempty"`
-	// The user defined label assigned to the switch.
-	UserLabel *string `json:"UserLabel,omitempty"`
-	// This field displays the vendor information of the associated component or hardware.
+	// This field identifies the vendor of the given component.
 	Vendor *string `json:"Vendor,omitempty"`
-	// Version holds the firmware version related information.
+	// Firmware version of the switch.
 	Version              *string                                     `json:"Version,omitempty"`
+	InventoryParent      NullableMoBaseMoRelationship                `json:"InventoryParent,omitempty"`
 	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -178,6 +175,8 @@ func NewNetworkElementSummary(classId string, objectType string) *NetworkElement
 	this := NetworkElementSummary{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var thermal string = "unknown"
+	this.Thermal = &thermal
 	return &this
 }
 
@@ -190,6 +189,8 @@ func NewNetworkElementSummaryWithDefaults() *NetworkElementSummary {
 	this.ClassId = classId
 	var objectType string = "network.ElementSummary"
 	this.ObjectType = objectType
+	var thermal string = "unknown"
+	this.Thermal = &thermal
 	return &this
 }
 
@@ -1871,38 +1872,6 @@ func (o *NetworkElementSummary) SetPartNumber(v string) {
 	o.PartNumber = &v
 }
 
-// GetPeerFirmwareOutOfSync returns the PeerFirmwareOutOfSync field value if set, zero value otherwise.
-func (o *NetworkElementSummary) GetPeerFirmwareOutOfSync() bool {
-	if o == nil || IsNil(o.PeerFirmwareOutOfSync) {
-		var ret bool
-		return ret
-	}
-	return *o.PeerFirmwareOutOfSync
-}
-
-// GetPeerFirmwareOutOfSyncOk returns a tuple with the PeerFirmwareOutOfSync field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NetworkElementSummary) GetPeerFirmwareOutOfSyncOk() (*bool, bool) {
-	if o == nil || IsNil(o.PeerFirmwareOutOfSync) {
-		return nil, false
-	}
-	return o.PeerFirmwareOutOfSync, true
-}
-
-// HasPeerFirmwareOutOfSync returns a boolean if a field has been set.
-func (o *NetworkElementSummary) HasPeerFirmwareOutOfSync() bool {
-	if o != nil && !IsNil(o.PeerFirmwareOutOfSync) {
-		return true
-	}
-
-	return false
-}
-
-// SetPeerFirmwareOutOfSync gets a reference to the given bool and assigns it to the PeerFirmwareOutOfSync field.
-func (o *NetworkElementSummary) SetPeerFirmwareOutOfSync(v bool) {
-	o.PeerFirmwareOutOfSync = &v
-}
-
 // GetPresence returns the Presence field value if set, zero value otherwise.
 func (o *NetworkElementSummary) GetPresence() string {
 	if o == nil || IsNil(o.Presence) {
@@ -2319,38 +2288,6 @@ func (o *NetworkElementSummary) SetTotalMemory(v int64) {
 	o.TotalMemory = &v
 }
 
-// GetUserLabel returns the UserLabel field value if set, zero value otherwise.
-func (o *NetworkElementSummary) GetUserLabel() string {
-	if o == nil || IsNil(o.UserLabel) {
-		var ret string
-		return ret
-	}
-	return *o.UserLabel
-}
-
-// GetUserLabelOk returns a tuple with the UserLabel field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NetworkElementSummary) GetUserLabelOk() (*string, bool) {
-	if o == nil || IsNil(o.UserLabel) {
-		return nil, false
-	}
-	return o.UserLabel, true
-}
-
-// HasUserLabel returns a boolean if a field has been set.
-func (o *NetworkElementSummary) HasUserLabel() bool {
-	if o != nil && !IsNil(o.UserLabel) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserLabel gets a reference to the given string and assigns it to the UserLabel field.
-func (o *NetworkElementSummary) SetUserLabel(v string) {
-	o.UserLabel = &v
-}
-
 // GetVendor returns the Vendor field value if set, zero value otherwise.
 func (o *NetworkElementSummary) GetVendor() string {
 	if o == nil || IsNil(o.Vendor) {
@@ -2415,6 +2352,49 @@ func (o *NetworkElementSummary) SetVersion(v string) {
 	o.Version = &v
 }
 
+// GetInventoryParent returns the InventoryParent field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NetworkElementSummary) GetInventoryParent() MoBaseMoRelationship {
+	if o == nil || IsNil(o.InventoryParent.Get()) {
+		var ret MoBaseMoRelationship
+		return ret
+	}
+	return *o.InventoryParent.Get()
+}
+
+// GetInventoryParentOk returns a tuple with the InventoryParent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NetworkElementSummary) GetInventoryParentOk() (*MoBaseMoRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InventoryParent.Get(), o.InventoryParent.IsSet()
+}
+
+// HasInventoryParent returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasInventoryParent() bool {
+	if o != nil && o.InventoryParent.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInventoryParent gets a reference to the given NullableMoBaseMoRelationship and assigns it to the InventoryParent field.
+func (o *NetworkElementSummary) SetInventoryParent(v MoBaseMoRelationship) {
+	o.InventoryParent.Set(&v)
+}
+
+// SetInventoryParentNil sets the value for InventoryParent to be an explicit nil
+func (o *NetworkElementSummary) SetInventoryParentNil() {
+	o.InventoryParent.Set(nil)
+}
+
+// UnsetInventoryParent ensures that no value is present for InventoryParent, not even an explicit nil
+func (o *NetworkElementSummary) UnsetInventoryParent() {
+	o.InventoryParent.Unset()
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkElementSummary) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || IsNil(o.RegisteredDevice.Get()) {
@@ -2468,13 +2448,13 @@ func (o NetworkElementSummary) MarshalJSON() ([]byte, error) {
 
 func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedViewsView, errViewsView := json.Marshal(o.ViewsView)
-	if errViewsView != nil {
-		return map[string]interface{}{}, errViewsView
+	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
+	if errMoBaseMo != nil {
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	errViewsView = json.Unmarshal([]byte(serializedViewsView), &toSerialize)
-	if errViewsView != nil {
-		return map[string]interface{}{}, errViewsView
+	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
+	if errMoBaseMo != nil {
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	if _, exists := toSerialize["ClassId"]; !exists {
 		toSerialize["ClassId"] = o.GetDefaultClassId()
@@ -2634,9 +2614,6 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PartNumber) {
 		toSerialize["PartNumber"] = o.PartNumber
 	}
-	if !IsNil(o.PeerFirmwareOutOfSync) {
-		toSerialize["PeerFirmwareOutOfSync"] = o.PeerFirmwareOutOfSync
-	}
 	if !IsNil(o.Presence) {
 		toSerialize["Presence"] = o.Presence
 	}
@@ -2676,14 +2653,14 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalMemory) {
 		toSerialize["TotalMemory"] = o.TotalMemory
 	}
-	if !IsNil(o.UserLabel) {
-		toSerialize["UserLabel"] = o.UserLabel
-	}
 	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
 	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
+	}
+	if o.InventoryParent.IsSet() {
+		toSerialize["InventoryParent"] = o.InventoryParent.Get()
 	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
@@ -2762,7 +2739,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
 		// The default domain name configured on the switch.
 		DefaultDomain *string `json:"DefaultDomain,omitempty"`
-		// The database identifier of the registered device of an object.
+		// The MoId of the registered device that coresponds to the server.
 		DeviceMoId *string `json:"DeviceMoId,omitempty"`
 		// The Distinguished Name unambiguously identifies an object in the system.
 		Dn *string `json:"Dn,omitempty"`
@@ -2771,7 +2748,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		EthernetMode *string `json:"EthernetMode,omitempty"`
 		// The user configured Ethernet operational mode for this switch (End-Host or Switching). * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 		EthernetSwitchingMode *string `json:"EthernetSwitchingMode,omitempty"`
-		// The fault summary of the network Element out-of-band management interface.
+		// The fault summary for the server.
 		// Deprecated
 		FaultSummary *int64 `json:"FaultSummary,omitempty"`
 		// The user configured FC operational mode for this switch (End-Host or Switching).
@@ -2801,9 +2778,9 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		IsUpgraded *bool `json:"IsUpgraded,omitempty"`
 		// The management mode of the fabric interconnect. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
-		// This field displays the model number of the associated component or hardware.
+		// This field identifies the model of the given component.
 		Model *string `json:"Model,omitempty"`
-		// Name of the ElementSummary object is saved in this property.
+		// The admin configured name of the system.
 		Name *string `json:"Name,omitempty"`
 		// Total number of Ethernet ports.
 		NumEtherPorts *int64 `json:"NumEtherPorts,omitempty"`
@@ -2845,19 +2822,17 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
 		// Part number of the switch.
 		PartNumber *string `json:"PartNumber,omitempty"`
-		// The flag to indicate the firmware of peer Fabric Interconnect is out of sync.
-		PeerFirmwareOutOfSync *bool `json:"PeerFirmwareOutOfSync,omitempty"`
-		// This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.
+		// This field identifies the presence (equipped) or absence of the given component.
 		Presence *string `json:"Presence,omitempty"`
 		// The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic.
 		ReservedVlanStartId *int64 `json:"ReservedVlanStartId,omitempty"`
-		// This field displays the revised version of the associated component or hardware (if any).
+		// The product revision of the switch.
 		Revision *string `json:"Revision,omitempty"`
 		// The Relative Name uniquely identifies an object within a given context.
 		Rn *string `json:"Rn,omitempty"`
-		// This field displays the serial number of the associated component or hardware.
+		// This field identifies the serial of the given component.
 		Serial *string `json:"Serial,omitempty"`
-		// The source object type of this view MO.
+		// Stores the source object type used to fill the properties of this object.
 		SourceObjectType *string `json:"SourceObjectType,omitempty"`
 		// The status of the switch.
 		Status *string `json:"Status,omitempty"`
@@ -2873,12 +2848,11 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		Thermal *string `json:"Thermal,omitempty"`
 		// Total available memory on this switch platform.
 		TotalMemory *int64 `json:"TotalMemory,omitempty"`
-		// The user defined label assigned to the switch.
-		UserLabel *string `json:"UserLabel,omitempty"`
-		// This field displays the vendor information of the associated component or hardware.
+		// This field identifies the vendor of the given component.
 		Vendor *string `json:"Vendor,omitempty"`
-		// Version holds the firmware version related information.
+		// Firmware version of the switch.
 		Version          *string                                     `json:"Version,omitempty"`
+		InventoryParent  NullableMoBaseMoRelationship                `json:"InventoryParent,omitempty"`
 		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
@@ -2939,7 +2913,6 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElementSummary.OutOfBandIpv6Prefix = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandIpv6Prefix
 		varNetworkElementSummary.OutOfBandMac = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandMac
 		varNetworkElementSummary.PartNumber = varNetworkElementSummaryWithoutEmbeddedStruct.PartNumber
-		varNetworkElementSummary.PeerFirmwareOutOfSync = varNetworkElementSummaryWithoutEmbeddedStruct.PeerFirmwareOutOfSync
 		varNetworkElementSummary.Presence = varNetworkElementSummaryWithoutEmbeddedStruct.Presence
 		varNetworkElementSummary.ReservedVlanStartId = varNetworkElementSummaryWithoutEmbeddedStruct.ReservedVlanStartId
 		varNetworkElementSummary.Revision = varNetworkElementSummaryWithoutEmbeddedStruct.Revision
@@ -2953,9 +2926,9 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElementSummary.SystemUpTime = varNetworkElementSummaryWithoutEmbeddedStruct.SystemUpTime
 		varNetworkElementSummary.Thermal = varNetworkElementSummaryWithoutEmbeddedStruct.Thermal
 		varNetworkElementSummary.TotalMemory = varNetworkElementSummaryWithoutEmbeddedStruct.TotalMemory
-		varNetworkElementSummary.UserLabel = varNetworkElementSummaryWithoutEmbeddedStruct.UserLabel
 		varNetworkElementSummary.Vendor = varNetworkElementSummaryWithoutEmbeddedStruct.Vendor
 		varNetworkElementSummary.Version = varNetworkElementSummaryWithoutEmbeddedStruct.Version
+		varNetworkElementSummary.InventoryParent = varNetworkElementSummaryWithoutEmbeddedStruct.InventoryParent
 		varNetworkElementSummary.RegisteredDevice = varNetworkElementSummaryWithoutEmbeddedStruct.RegisteredDevice
 		*o = NetworkElementSummary(varNetworkElementSummary)
 	} else {
@@ -2966,7 +2939,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 
 	err = json.Unmarshal(data, &varNetworkElementSummary)
 	if err == nil {
-		o.ViewsView = varNetworkElementSummary.ViewsView
+		o.MoBaseMo = varNetworkElementSummary.MoBaseMo
 	} else {
 		return err
 	}
@@ -3026,7 +2999,6 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "OutOfBandIpv6Prefix")
 		delete(additionalProperties, "OutOfBandMac")
 		delete(additionalProperties, "PartNumber")
-		delete(additionalProperties, "PeerFirmwareOutOfSync")
 		delete(additionalProperties, "Presence")
 		delete(additionalProperties, "ReservedVlanStartId")
 		delete(additionalProperties, "Revision")
@@ -3040,15 +3012,15 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "SystemUpTime")
 		delete(additionalProperties, "Thermal")
 		delete(additionalProperties, "TotalMemory")
-		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "Vendor")
 		delete(additionalProperties, "Version")
+		delete(additionalProperties, "InventoryParent")
 		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs
-		reflectViewsView := reflect.ValueOf(o.ViewsView)
-		for i := 0; i < reflectViewsView.Type().NumField(); i++ {
-			t := reflectViewsView.Type().Field(i)
+		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
+		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
+			t := reflectMoBaseMo.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

@@ -140,6 +140,11 @@ func getMerakiDeviceSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"lan_ip": {
+			Description: "LAN IP address of the device.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mac": {
 			Description: "The MAC address of the device.",
 			Type:        schema.TypeString,
@@ -201,7 +206,7 @@ func getMerakiDeviceSchema() map[string]*schema.Schema {
 			},
 		},
 		"network_id": {
-			Description: "The unique Meraki network id.",
+			Description: "The network the device belongs to.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -677,6 +682,11 @@ func dataSourceMerakiDeviceRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetIsUpgraded(x)
 	}
 
+	if v, ok := d.GetOk("lan_ip"); ok {
+		x := (v.(string))
+		o.SetLanIp(x)
+	}
+
 	if v, ok := d.GetOk("mac"); ok {
 		x := (v.(string))
 		o.SetMac(x)
@@ -1132,6 +1142,7 @@ func dataSourceMerakiDeviceRead(c context.Context, d *schema.ResourceData, meta 
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["hardware_version"] = (s.GetHardwareVersion())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
+				temp["lan_ip"] = (s.GetLanIp())
 				temp["mac"] = (s.GetMac())
 
 				temp["mod_time"] = (s.GetModTime()).String()

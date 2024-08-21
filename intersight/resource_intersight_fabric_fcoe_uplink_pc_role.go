@@ -114,6 +114,13 @@ func resourceFabricFcoeUplinkPcRole() *schema.Resource {
 					}
 					return
 				}},
+			"fec": {
+				Description:  "Forward error correction configuration for Fcoe Uplink Port Channel member ports.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Auto", "Cl91", "Cl74"}, false),
+				Optional:     true,
+				Default:      "Auto",
+			},
 			"link_aggregation_policy": {
 				Description: "A reference to a fabricLinkAggregationPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -611,6 +618,11 @@ func resourceFabricFcoeUplinkPcRoleCreate(c context.Context, d *schema.ResourceD
 
 	o.SetClassId("fabric.FcoeUplinkPcRole")
 
+	if v, ok := d.GetOk("fec"); ok {
+		x := (v.(string))
+		o.SetFec(x)
+	}
+
 	if v, ok := d.GetOk("link_aggregation_policy"); ok {
 		p := make([]models.FabricLinkAggregationPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -909,6 +921,10 @@ func resourceFabricFcoeUplinkPcRoleRead(c context.Context, d *schema.ResourceDat
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in FabricFcoeUplinkPcRole object: %s", err.Error())
 	}
 
+	if err := d.Set("fec", (s.GetFec())); err != nil {
+		return diag.Errorf("error occurred while setting property Fec in FabricFcoeUplinkPcRole object: %s", err.Error())
+	}
+
 	if err := d.Set("link_aggregation_policy", flattenMapFabricLinkAggregationPolicyRelationship(s.GetLinkAggregationPolicy(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property LinkAggregationPolicy in FabricFcoeUplinkPcRole object: %s", err.Error())
 	}
@@ -993,6 +1009,12 @@ func resourceFabricFcoeUplinkPcRoleUpdate(c context.Context, d *schema.ResourceD
 	}
 
 	o.SetClassId("fabric.FcoeUplinkPcRole")
+
+	if d.HasChange("fec") {
+		v := d.Get("fec")
+		x := (v.(string))
+		o.SetFec(x)
+	}
 
 	if d.HasChange("link_aggregation_policy") {
 		v := d.Get("link_aggregation_policy")

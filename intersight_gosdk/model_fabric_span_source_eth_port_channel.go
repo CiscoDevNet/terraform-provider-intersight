@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17227
+API version: 1.0.11-17956
 Contact: intersight@cisco.com
 */
 
@@ -18,37 +18,39 @@ import (
 	"strings"
 )
 
-// checks if the ViewsView type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ViewsView{}
+// checks if the FabricSpanSourceEthPortChannel type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FabricSpanSourceEthPortChannel{}
 
-// ViewsView An abstract representation of a view. A view provides read-only access to the object model. A view can combine and transform data from multiple data sources.
-type ViewsView struct {
-	MoBaseMo
+// FabricSpanSourceEthPortChannel Configures Ethernet SPAN Source Port Channel (Uplink) for a given SPAN session.
+type FabricSpanSourceEthPortChannel struct {
+	FabricAbstractSpanSourcePortChannel
 	AdditionalProperties map[string]interface{}
 }
 
-type _ViewsView ViewsView
+type _FabricSpanSourceEthPortChannel FabricSpanSourceEthPortChannel
 
-// NewViewsView instantiates a new ViewsView object
+// NewFabricSpanSourceEthPortChannel instantiates a new FabricSpanSourceEthPortChannel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewViewsView(classId string, objectType string) *ViewsView {
-	this := ViewsView{}
+func NewFabricSpanSourceEthPortChannel(classId string, objectType string) *FabricSpanSourceEthPortChannel {
+	this := FabricSpanSourceEthPortChannel{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var direction string = "Receive"
+	this.Direction = &direction
 	return &this
 }
 
-// NewViewsViewWithDefaults instantiates a new ViewsView object
+// NewFabricSpanSourceEthPortChannelWithDefaults instantiates a new FabricSpanSourceEthPortChannel object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewViewsViewWithDefaults() *ViewsView {
-	this := ViewsView{}
+func NewFabricSpanSourceEthPortChannelWithDefaults() *FabricSpanSourceEthPortChannel {
+	this := FabricSpanSourceEthPortChannel{}
 	return &this
 }
 
-func (o ViewsView) MarshalJSON() ([]byte, error) {
+func (o FabricSpanSourceEthPortChannel) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -56,15 +58,15 @@ func (o ViewsView) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ViewsView) ToMap() (map[string]interface{}, error) {
+func (o FabricSpanSourceEthPortChannel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
-	if errMoBaseMo != nil {
-		return map[string]interface{}{}, errMoBaseMo
+	serializedFabricAbstractSpanSourcePortChannel, errFabricAbstractSpanSourcePortChannel := json.Marshal(o.FabricAbstractSpanSourcePortChannel)
+	if errFabricAbstractSpanSourcePortChannel != nil {
+		return map[string]interface{}{}, errFabricAbstractSpanSourcePortChannel
 	}
-	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
-	if errMoBaseMo != nil {
-		return map[string]interface{}{}, errMoBaseMo
+	errFabricAbstractSpanSourcePortChannel = json.Unmarshal([]byte(serializedFabricAbstractSpanSourcePortChannel), &toSerialize)
+	if errFabricAbstractSpanSourcePortChannel != nil {
+		return map[string]interface{}{}, errFabricAbstractSpanSourcePortChannel
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -74,7 +76,7 @@ func (o ViewsView) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ViewsView) UnmarshalJSON(data []byte) (err error) {
+func (o *FabricSpanSourceEthPortChannel) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -85,7 +87,10 @@ func (o *ViewsView) UnmarshalJSON(data []byte) (err error) {
 
 	// defaultValueFuncMap captures the default values for required properties.
 	// These values are used when required properties are missing from the payload.
-	defaultValueFuncMap := map[string]func() interface{}{}
+	defaultValueFuncMap := map[string]func() interface{}{
+		"ClassId":    o.GetDefaultClassId,
+		"ObjectType": o.GetDefaultObjectType,
+	}
 	var defaultValueApplied bool
 	allProperties := make(map[string]interface{})
 
@@ -113,24 +118,24 @@ func (o *ViewsView) UnmarshalJSON(data []byte) (err error) {
 			return err
 		}
 	}
-	type ViewsViewWithoutEmbeddedStruct struct {
+	type FabricSpanSourceEthPortChannelWithoutEmbeddedStruct struct {
 	}
 
-	varViewsViewWithoutEmbeddedStruct := ViewsViewWithoutEmbeddedStruct{}
+	varFabricSpanSourceEthPortChannelWithoutEmbeddedStruct := FabricSpanSourceEthPortChannelWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(data, &varViewsViewWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varFabricSpanSourceEthPortChannelWithoutEmbeddedStruct)
 	if err == nil {
-		varViewsView := _ViewsView{}
-		*o = ViewsView(varViewsView)
+		varFabricSpanSourceEthPortChannel := _FabricSpanSourceEthPortChannel{}
+		*o = FabricSpanSourceEthPortChannel(varFabricSpanSourceEthPortChannel)
 	} else {
 		return err
 	}
 
-	varViewsView := _ViewsView{}
+	varFabricSpanSourceEthPortChannel := _FabricSpanSourceEthPortChannel{}
 
-	err = json.Unmarshal(data, &varViewsView)
+	err = json.Unmarshal(data, &varFabricSpanSourceEthPortChannel)
 	if err == nil {
-		o.MoBaseMo = varViewsView.MoBaseMo
+		o.FabricAbstractSpanSourcePortChannel = varFabricSpanSourceEthPortChannel.FabricAbstractSpanSourcePortChannel
 	} else {
 		return err
 	}
@@ -140,9 +145,9 @@ func (o *ViewsView) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 
 		// remove fields from embedded structs
-		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
-		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
-			t := reflectMoBaseMo.Type().Field(i)
+		reflectFabricAbstractSpanSourcePortChannel := reflect.ValueOf(o.FabricAbstractSpanSourcePortChannel)
+		for i := 0; i < reflectFabricAbstractSpanSourcePortChannel.Type().NumField(); i++ {
+			t := reflectFabricAbstractSpanSourcePortChannel.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""
@@ -163,38 +168,38 @@ func (o *ViewsView) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableViewsView struct {
-	value *ViewsView
+type NullableFabricSpanSourceEthPortChannel struct {
+	value *FabricSpanSourceEthPortChannel
 	isSet bool
 }
 
-func (v NullableViewsView) Get() *ViewsView {
+func (v NullableFabricSpanSourceEthPortChannel) Get() *FabricSpanSourceEthPortChannel {
 	return v.value
 }
 
-func (v *NullableViewsView) Set(val *ViewsView) {
+func (v *NullableFabricSpanSourceEthPortChannel) Set(val *FabricSpanSourceEthPortChannel) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableViewsView) IsSet() bool {
+func (v NullableFabricSpanSourceEthPortChannel) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableViewsView) Unset() {
+func (v *NullableFabricSpanSourceEthPortChannel) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableViewsView(val *ViewsView) *NullableViewsView {
-	return &NullableViewsView{value: val, isSet: true}
+func NewNullableFabricSpanSourceEthPortChannel(val *FabricSpanSourceEthPortChannel) *NullableFabricSpanSourceEthPortChannel {
+	return &NullableFabricSpanSourceEthPortChannel{value: val, isSet: true}
 }
 
-func (v NullableViewsView) MarshalJSON() ([]byte, error) {
+func (v NullableFabricSpanSourceEthPortChannel) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableViewsView) UnmarshalJSON(src []byte) error {
+func (v *NullableFabricSpanSourceEthPortChannel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

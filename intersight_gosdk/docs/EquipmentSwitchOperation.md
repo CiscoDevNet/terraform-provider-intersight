@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **AdminLocatorLedActionState** | Pointer to **string** | Defines status of action performed on AdminLocatorLedState. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [default to "None"]
 **ConfigEvacState** | Pointer to **string** | Captures the status of evacuation on this switch. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [default to "None"]
 **ForceEvac** | Pointer to **bool** | Evacuation is blocked by the system if it can cause a traffic outage in the domain. Select \&quot;Force Evacuation\&quot; only if system rejects the operation and you want to override that. | [optional] 
+**ResetAction** | Pointer to [**NullableEquipmentResetAction**](EquipmentResetAction.md) |  | [optional] 
+**ResetActionState** | Pointer to **string** | Current status of the reset operation executed on the Fabric Interconnect. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [default to "None"]
 **DeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NullableNetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 
@@ -197,6 +199,66 @@ SetForceEvac sets ForceEvac field to given value.
 `func (o *EquipmentSwitchOperation) HasForceEvac() bool`
 
 HasForceEvac returns a boolean if a field has been set.
+
+### GetResetAction
+
+`func (o *EquipmentSwitchOperation) GetResetAction() EquipmentResetAction`
+
+GetResetAction returns the ResetAction field if non-nil, zero value otherwise.
+
+### GetResetActionOk
+
+`func (o *EquipmentSwitchOperation) GetResetActionOk() (*EquipmentResetAction, bool)`
+
+GetResetActionOk returns a tuple with the ResetAction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResetAction
+
+`func (o *EquipmentSwitchOperation) SetResetAction(v EquipmentResetAction)`
+
+SetResetAction sets ResetAction field to given value.
+
+### HasResetAction
+
+`func (o *EquipmentSwitchOperation) HasResetAction() bool`
+
+HasResetAction returns a boolean if a field has been set.
+
+### SetResetActionNil
+
+`func (o *EquipmentSwitchOperation) SetResetActionNil(b bool)`
+
+ SetResetActionNil sets the value for ResetAction to be an explicit nil
+
+### UnsetResetAction
+`func (o *EquipmentSwitchOperation) UnsetResetAction()`
+
+UnsetResetAction ensures that no value is present for ResetAction, not even an explicit nil
+### GetResetActionState
+
+`func (o *EquipmentSwitchOperation) GetResetActionState() string`
+
+GetResetActionState returns the ResetActionState field if non-nil, zero value otherwise.
+
+### GetResetActionStateOk
+
+`func (o *EquipmentSwitchOperation) GetResetActionStateOk() (*string, bool)`
+
+GetResetActionStateOk returns a tuple with the ResetActionState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResetActionState
+
+`func (o *EquipmentSwitchOperation) SetResetActionState(v string)`
+
+SetResetActionState sets ResetActionState field to given value.
+
+### HasResetActionState
+
+`func (o *EquipmentSwitchOperation) HasResetActionState() bool`
+
+HasResetActionState returns a boolean if a field has been set.
 
 ### GetDeviceRegistration
 

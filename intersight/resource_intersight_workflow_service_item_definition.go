@@ -331,6 +331,17 @@ func resourceWorkflowServiceItemDefinition() *schema.Resource {
 					}
 					return
 				}},
+			"create_user": {
+				Description: "The user identifier who created or cloned the service item definition.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"cvd_id": {
 				Description: "The Cisco Validated Design (CVD) Identifier that this service item provides.",
 				Type:        schema.TypeString,
@@ -379,6 +390,17 @@ func resourceWorkflowServiceItemDefinition() *schema.Resource {
 				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"mod_user": {
+				Description: "The user identifier who last updated the service item definition.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -496,11 +518,11 @@ func resourceWorkflowServiceItemDefinition() *schema.Resource {
 				},
 			},
 			"publish_status": {
-				Description:  "Publish status of the service item.\n* `NotPublished` - A state of the service item or catalog item which is not yet published.\n* `Published` - A state denoting that the service item or catalog item is published.",
+				Description:  "The publish status of service item (Draft, Published, Archived).\n* `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested.\n* `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption.\n* `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"NotPublished", "Published"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"Draft", "Published", "Archived"}, false),
 				Optional:     true,
-				Default:      "NotPublished",
+				Default:      "Draft",
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -559,7 +581,7 @@ func resourceWorkflowServiceItemDefinition() *schema.Resource {
 				},
 			},
 			"user_id_or_email": {
-				Description: "The user identifier who created or updated the service item definition.",
+				Description: "This attribute is deprecated and replaced by createUser and modUser.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -1272,6 +1294,10 @@ func resourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Reso
 		return diag.Errorf("error occurred while setting property CreateTime in WorkflowServiceItemDefinition object: %s", err.Error())
 	}
 
+	if err := d.Set("create_user", (s.GetCreateUser())); err != nil {
+		return diag.Errorf("error occurred while setting property CreateUser in WorkflowServiceItemDefinition object: %s", err.Error())
+	}
+
 	if err := d.Set("cvd_id", (s.GetCvdId())); err != nil {
 		return diag.Errorf("error occurred while setting property CvdId in WorkflowServiceItemDefinition object: %s", err.Error())
 	}
@@ -1298,6 +1324,10 @@ func resourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Reso
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in WorkflowServiceItemDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("mod_user", (s.GetModUser())); err != nil {
+		return diag.Errorf("error occurred while setting property ModUser in WorkflowServiceItemDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {

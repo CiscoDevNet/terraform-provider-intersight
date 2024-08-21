@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.WorkloadOptimizerDynatraceOptions"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.WorkloadOptimizerDynatraceOptions"]
+**CollectTagInfo** | Pointer to **bool** | Collect tag information from Dynatrace. | [optional] [default to false]
 **CollectVmMetrics** | Pointer to **bool** | Overwrite Hypervisor or Cloud Provider Virtual Machine metrics with data from the target. | [optional] 
 **EnvironmentId** | Pointer to **string** | Each environment monitored with Dynatrace is identified with a unique character string—the environment ID. The Dynatrace API relies heavily on environment IDs to ensure that it pulls monitoring data from and pushes relevant external events to the correct Dynatrace environments. | [optional] 
 
@@ -67,6 +68,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCollectTagInfo
+
+`func (o *AssetWorkloadOptimizerDynatraceOptions) GetCollectTagInfo() bool`
+
+GetCollectTagInfo returns the CollectTagInfo field if non-nil, zero value otherwise.
+
+### GetCollectTagInfoOk
+
+`func (o *AssetWorkloadOptimizerDynatraceOptions) GetCollectTagInfoOk() (*bool, bool)`
+
+GetCollectTagInfoOk returns a tuple with the CollectTagInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCollectTagInfo
+
+`func (o *AssetWorkloadOptimizerDynatraceOptions) SetCollectTagInfo(v bool)`
+
+SetCollectTagInfo sets CollectTagInfo field to given value.
+
+### HasCollectTagInfo
+
+`func (o *AssetWorkloadOptimizerDynatraceOptions) HasCollectTagInfo() bool`
+
+HasCollectTagInfo returns a boolean if a field has been set.
 
 ### GetCollectVmMetrics
 

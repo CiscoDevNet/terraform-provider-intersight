@@ -95,6 +95,18 @@ func Test_intersight_TaskApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test TaskApiService CreateTaskMerakiScopedInventory", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.TaskApi.CreateTaskMerakiScopedInventory(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test TaskApiService CreateTaskNetAppScopedInventory", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

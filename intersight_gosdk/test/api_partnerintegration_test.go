@@ -71,6 +71,18 @@ func Test_intersight_PartnerintegrationApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test PartnerintegrationApiService CreatePartnerintegrationMetrics", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.PartnerintegrationApi.CreatePartnerintegrationMetrics(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PartnerintegrationApiService CreatePartnerintegrationModel", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -129,6 +141,19 @@ func Test_intersight_PartnerintegrationApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.PartnerintegrationApi.DeletePartnerintegrationInventory(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PartnerintegrationApiService DeletePartnerintegrationMetrics", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.PartnerintegrationApi.DeletePartnerintegrationMetrics(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -330,6 +355,32 @@ func Test_intersight_PartnerintegrationApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test PartnerintegrationApiService GetPartnerintegrationMetricsByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.PartnerintegrationApi.GetPartnerintegrationMetricsByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PartnerintegrationApiService GetPartnerintegrationMetricsList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.PartnerintegrationApi.GetPartnerintegrationMetricsList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PartnerintegrationApiService GetPartnerintegrationModelByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -412,6 +463,20 @@ func Test_intersight_PartnerintegrationApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test PartnerintegrationApiService PatchPartnerintegrationMetrics", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.PartnerintegrationApi.PatchPartnerintegrationMetrics(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PartnerintegrationApiService PatchPartnerintegrationModel", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -475,6 +540,20 @@ func Test_intersight_PartnerintegrationApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.PartnerintegrationApi.UpdatePartnerintegrationInventory(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PartnerintegrationApiService UpdatePartnerintegrationMetrics", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.PartnerintegrationApi.UpdatePartnerintegrationMetrics(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

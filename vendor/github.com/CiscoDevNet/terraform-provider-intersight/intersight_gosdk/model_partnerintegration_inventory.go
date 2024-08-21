@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17227
+API version: 1.0.11-17956
 Contact: intersight@cisco.com
 */
 
@@ -34,7 +34,7 @@ type PartnerintegrationInventory struct {
 	BuildFlags *string `json:"BuildFlags,omitempty"`
 	// Time when build was triggered.
 	BuildStartTime *string `json:"BuildStartTime,omitempty"`
-	// Status of build for inventory collection. * `None` - Default value of the status. i.e. done nothing. * `BackendInProgress` - The backend build is in progress. * `BackendFailed` - The backend build has failed. * `DockerInProgress` - The docker build is in progress. * `DockerFailed` - The docker build has failed. * `UiInProgress` - The UI build is in progress. * `UiFailed` - The inventory UI build has failed. * `ApidocsInProgress` - The apidocs build is in progress. * `ApidocsFailed` - The apidocs build has failed. * `Completed` - The operation completed successfully.
+	// Status of build for inventory collection. * `None` - Default value of the status. i.e. done nothing. * `BackendInProgress` - The backend build is in progress. * `BackendFailed` - The backend build has failed. * `MetricsCollectorBackendInProgress` - The Metrics Collector backend build is in progress. * `MetricsCollectorBackendFailed` - The Metrics Collector backend build has failed. * `DockerInProgress` - The docker build is in progress. * `DockerFailed` - The docker build has failed. * `UiInProgress` - The UI build is in progress. * `UiFailed` - The inventory UI build has failed. * `MetricsCollectorUiInProgress` - The Metrics Collector UI build is in progress. * `MetricsCollectorUiFailed` - The Metrics Collector UI build has failed. * `MetricsCollectorDependentBackendInProgress` - The Metrics Collector dependent backend build is in progress. * `MetricsCollectorDependentBackendFailed` - The Metrics Collector dependent backend build has failed. * `MetricsCollectorDependentDockerInProgress` - The Metrics Collector dependent docker build is in progress. * `MetricsCollectorDependentDockerFailed` - The Metrics Collector dependent docker build has failed. * `ApidocsInProgress` - The apidocs build is in progress. * `ApidocsFailed` - The apidocs build has failed. * `Completed` - The operation completed successfully.
 	BuildStatus *string `json:"BuildStatus,omitempty"`
 	// Time when deploy was triggered.
 	DeployStartTime *string `json:"DeployStartTime,omitempty"`
@@ -51,7 +51,8 @@ type PartnerintegrationInventory struct {
 	// An array of relationships to partnerintegrationEtl resources.
 	Etls []PartnerintegrationEtlRelationship `json:"Etls,omitempty"`
 	// An array of relationships to partnerintegrationLogs resources.
-	Logs []PartnerintegrationLogsRelationship `json:"Logs,omitempty"`
+	Logs    []PartnerintegrationLogsRelationship          `json:"Logs,omitempty"`
+	Metrics NullablePartnerintegrationMetricsRelationship `json:"Metrics,omitempty"`
 	// An array of relationships to partnerintegrationModel resources.
 	Models               []PartnerintegrationModelRelationship        `json:"Models,omitempty"`
 	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -532,6 +533,49 @@ func (o *PartnerintegrationInventory) SetLogs(v []PartnerintegrationLogsRelation
 	o.Logs = v
 }
 
+// GetMetrics returns the Metrics field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PartnerintegrationInventory) GetMetrics() PartnerintegrationMetricsRelationship {
+	if o == nil || IsNil(o.Metrics.Get()) {
+		var ret PartnerintegrationMetricsRelationship
+		return ret
+	}
+	return *o.Metrics.Get()
+}
+
+// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PartnerintegrationInventory) GetMetricsOk() (*PartnerintegrationMetricsRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Metrics.Get(), o.Metrics.IsSet()
+}
+
+// HasMetrics returns a boolean if a field has been set.
+func (o *PartnerintegrationInventory) HasMetrics() bool {
+	if o != nil && o.Metrics.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMetrics gets a reference to the given NullablePartnerintegrationMetricsRelationship and assigns it to the Metrics field.
+func (o *PartnerintegrationInventory) SetMetrics(v PartnerintegrationMetricsRelationship) {
+	o.Metrics.Set(&v)
+}
+
+// SetMetricsNil sets the value for Metrics to be an explicit nil
+func (o *PartnerintegrationInventory) SetMetricsNil() {
+	o.Metrics.Set(nil)
+}
+
+// UnsetMetrics ensures that no value is present for Metrics, not even an explicit nil
+func (o *PartnerintegrationInventory) UnsetMetrics() {
+	o.Metrics.Unset()
+}
+
 // GetModels returns the Models field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PartnerintegrationInventory) GetModels() []PartnerintegrationModelRelationship {
 	if o == nil {
@@ -670,6 +714,9 @@ func (o PartnerintegrationInventory) ToMap() (map[string]interface{}, error) {
 	if o.Logs != nil {
 		toSerialize["Logs"] = o.Logs
 	}
+	if o.Metrics.IsSet() {
+		toSerialize["Metrics"] = o.Metrics.Get()
+	}
 	if o.Models != nil {
 		toSerialize["Models"] = o.Models
 	}
@@ -737,7 +784,7 @@ func (o *PartnerintegrationInventory) UnmarshalJSON(data []byte) (err error) {
 		BuildFlags *string `json:"BuildFlags,omitempty"`
 		// Time when build was triggered.
 		BuildStartTime *string `json:"BuildStartTime,omitempty"`
-		// Status of build for inventory collection. * `None` - Default value of the status. i.e. done nothing. * `BackendInProgress` - The backend build is in progress. * `BackendFailed` - The backend build has failed. * `DockerInProgress` - The docker build is in progress. * `DockerFailed` - The docker build has failed. * `UiInProgress` - The UI build is in progress. * `UiFailed` - The inventory UI build has failed. * `ApidocsInProgress` - The apidocs build is in progress. * `ApidocsFailed` - The apidocs build has failed. * `Completed` - The operation completed successfully.
+		// Status of build for inventory collection. * `None` - Default value of the status. i.e. done nothing. * `BackendInProgress` - The backend build is in progress. * `BackendFailed` - The backend build has failed. * `MetricsCollectorBackendInProgress` - The Metrics Collector backend build is in progress. * `MetricsCollectorBackendFailed` - The Metrics Collector backend build has failed. * `DockerInProgress` - The docker build is in progress. * `DockerFailed` - The docker build has failed. * `UiInProgress` - The UI build is in progress. * `UiFailed` - The inventory UI build has failed. * `MetricsCollectorUiInProgress` - The Metrics Collector UI build is in progress. * `MetricsCollectorUiFailed` - The Metrics Collector UI build has failed. * `MetricsCollectorDependentBackendInProgress` - The Metrics Collector dependent backend build is in progress. * `MetricsCollectorDependentBackendFailed` - The Metrics Collector dependent backend build has failed. * `MetricsCollectorDependentDockerInProgress` - The Metrics Collector dependent docker build is in progress. * `MetricsCollectorDependentDockerFailed` - The Metrics Collector dependent docker build has failed. * `ApidocsInProgress` - The apidocs build is in progress. * `ApidocsFailed` - The apidocs build has failed. * `Completed` - The operation completed successfully.
 		BuildStatus *string `json:"BuildStatus,omitempty"`
 		// Time when deploy was triggered.
 		DeployStartTime *string `json:"DeployStartTime,omitempty"`
@@ -754,7 +801,8 @@ func (o *PartnerintegrationInventory) UnmarshalJSON(data []byte) (err error) {
 		// An array of relationships to partnerintegrationEtl resources.
 		Etls []PartnerintegrationEtlRelationship `json:"Etls,omitempty"`
 		// An array of relationships to partnerintegrationLogs resources.
-		Logs []PartnerintegrationLogsRelationship `json:"Logs,omitempty"`
+		Logs    []PartnerintegrationLogsRelationship          `json:"Logs,omitempty"`
+		Metrics NullablePartnerintegrationMetricsRelationship `json:"Metrics,omitempty"`
 		// An array of relationships to partnerintegrationModel resources.
 		Models       []PartnerintegrationModelRelationship        `json:"Models,omitempty"`
 		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -779,6 +827,7 @@ func (o *PartnerintegrationInventory) UnmarshalJSON(data []byte) (err error) {
 		varPartnerintegrationInventory.DocIssues = varPartnerintegrationInventoryWithoutEmbeddedStruct.DocIssues
 		varPartnerintegrationInventory.Etls = varPartnerintegrationInventoryWithoutEmbeddedStruct.Etls
 		varPartnerintegrationInventory.Logs = varPartnerintegrationInventoryWithoutEmbeddedStruct.Logs
+		varPartnerintegrationInventory.Metrics = varPartnerintegrationInventoryWithoutEmbeddedStruct.Metrics
 		varPartnerintegrationInventory.Models = varPartnerintegrationInventoryWithoutEmbeddedStruct.Models
 		varPartnerintegrationInventory.Organization = varPartnerintegrationInventoryWithoutEmbeddedStruct.Organization
 		*o = PartnerintegrationInventory(varPartnerintegrationInventory)
@@ -812,6 +861,7 @@ func (o *PartnerintegrationInventory) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "DocIssues")
 		delete(additionalProperties, "Etls")
 		delete(additionalProperties, "Logs")
+		delete(additionalProperties, "Metrics")
 		delete(additionalProperties, "Models")
 		delete(additionalProperties, "Organization")
 

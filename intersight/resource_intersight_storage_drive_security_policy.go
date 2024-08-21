@@ -134,6 +134,76 @@ func resourceStorageDriveSecurityPolicy() *schema.Resource {
 							Optional:    true,
 							Default:     "storage.KeySetting",
 						},
+						"key_type": {
+							Description:  "Method to be used for fetching the encryption key.\n* `Kmip` - Remote encryption using KMIP.\n* `Manual` - Drive encryption using manual key.",
+							Type:         schema.TypeString,
+							ValidateFunc: validation.StringInSlice([]string{"Kmip", "Manual"}, false),
+							Optional:     true,
+							Default:      "Kmip",
+						},
+						"manual_key": {
+							Description: "Manual key configuration.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "storage.LocalKeySetting",
+									},
+									"existing_key": {
+										Description:  "Current Security Key Passphrase which is already configured on the server.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9=!&#$%+^@_*-]+$"), ""), StringLenMaximum(32)),
+										Optional:     true,
+									},
+									"is_existing_key_set": {
+										Description: "Indicates whether the value of the 'existingKey' property has been set.",
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"is_new_key_set": {
+										Description: "Indicates whether the value of the 'newKey' property has been set.",
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"new_key": {
+										Description:  "New Security Key Passphrase to be configured on the controller.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9=!&#$%+^@_*-]+$"), ""), validation.StringLenBetween(8, 32)),
+										Optional:     true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "storage.LocalKeySetting",
+									},
+								},
+							},
+						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -141,7 +211,7 @@ func resourceStorageDriveSecurityPolicy() *schema.Resource {
 							Default:     "storage.KeySetting",
 						},
 						"remote_key": {
-							Description: "Remote key encryption using KMIP configuraiton.",
+							Description: "Remote key encryption using KMIP configuration.",
 							Type:        schema.TypeList,
 							MaxItems:    1,
 							Optional:    true,
@@ -216,6 +286,12 @@ func resourceStorageDriveSecurityPolicy() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Default:     "storage.RemoteKeySetting",
+									},
+									"existing_key": {
+										Description:  "Current Security Key Passphrase which is already configured on the server.",
+										Type:         schema.TypeString,
+										ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9=!&#$%+^@_*-]+$"), ""), StringLenMaximum(32)),
+										Optional:     true,
 									},
 									"is_existing_key_set": {
 										Description: "Indicates whether the value of the 'existingKey' property has been set.",
@@ -780,6 +856,56 @@ func resourceStorageDriveSecurityPolicyCreate(c context.Context, d *schema.Resou
 				}
 			}
 			o.SetClassId("storage.KeySetting")
+			if v, ok := l["key_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetKeyType(x)
+				}
+			}
+			if v, ok := l["manual_key"]; ok {
+				{
+					p := make([]models.StorageLocalKeySetting, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewStorageLocalKeySettingWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("storage.LocalKeySetting")
+						if v, ok := l["existing_key"]; ok {
+							{
+								x := (v.(string))
+								o.SetExistingKey(x)
+							}
+						}
+						if v, ok := l["new_key"]; ok {
+							{
+								x := (v.(string))
+								o.SetNewKey(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetManualKey(x)
+					}
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -854,6 +980,12 @@ func resourceStorageDriveSecurityPolicyCreate(c context.Context, d *schema.Resou
 							}
 						}
 						o.SetClassId("storage.RemoteKeySetting")
+						if v, ok := l["existing_key"]; ok {
+							{
+								x := (v.(string))
+								o.SetExistingKey(x)
+							}
+						}
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -1320,6 +1452,56 @@ func resourceStorageDriveSecurityPolicyUpdate(c context.Context, d *schema.Resou
 				}
 			}
 			o.SetClassId("storage.KeySetting")
+			if v, ok := l["key_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetKeyType(x)
+				}
+			}
+			if v, ok := l["manual_key"]; ok {
+				{
+					p := make([]models.StorageLocalKeySetting, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewStorageLocalKeySettingWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("storage.LocalKeySetting")
+						if v, ok := l["existing_key"]; ok {
+							{
+								x := (v.(string))
+								o.SetExistingKey(x)
+							}
+						}
+						if v, ok := l["new_key"]; ok {
+							{
+								x := (v.(string))
+								o.SetNewKey(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetManualKey(x)
+					}
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1394,6 +1576,12 @@ func resourceStorageDriveSecurityPolicyUpdate(c context.Context, d *schema.Resou
 							}
 						}
 						o.SetClassId("storage.RemoteKeySetting")
+						if v, ok := l["existing_key"]; ok {
+							{
+								x := (v.(string))
+								o.SetExistingKey(x)
+							}
+						}
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))

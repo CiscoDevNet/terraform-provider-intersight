@@ -96,7 +96,7 @@ func getFirmwareFirmwareSummarySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"model": {
-						Description: "Model deatils of component.",
+						Description: "Model details of component.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

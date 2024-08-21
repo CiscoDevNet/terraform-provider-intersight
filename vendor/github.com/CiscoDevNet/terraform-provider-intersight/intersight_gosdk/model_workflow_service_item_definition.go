@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17227
+API version: 1.0.11-17956
 Contact: intersight@cisco.com
 */
 
@@ -31,6 +31,8 @@ type WorkflowServiceItemDefinition struct {
 	// Service item definition can declare that only one instance can be allowed within the customer account.
 	AllowMultipleServiceItemInstances *bool                  `json:"AllowMultipleServiceItemInstances,omitempty"`
 	AttributeDefinition               []WorkflowBaseDataType `json:"AttributeDefinition,omitempty"`
+	// The user identifier who created or cloned the service item definition.
+	CreateUser *string `json:"CreateUser,omitempty"`
 	// The Cisco Validated Design (CVD) Identifier that this service item provides.
 	CvdId *string `json:"CvdId,omitempty"`
 	// The flag to indicate that service item instance will be deleted after the completion of decommission action.
@@ -41,15 +43,18 @@ type WorkflowServiceItemDefinition struct {
 	Label *string `json:"Label,omitempty"`
 	// License entitlement required to run this service item. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type. * `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud. * `INC-Premier-CentralizedMod8Slot` - Premier modular license tier of switch type CentralizedMod8Slot for Intersight Nexus Cloud. * `INC-Premier-DistributedMod8Slot` - Premier modular license tier of switch type DistributedMod8Slot for Intersight Nexus Cloud. * `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.
 	LicenseEntitlement *string `json:"LicenseEntitlement,omitempty"`
+	// The user identifier who last updated the service item definition.
+	ModUser *string `json:"ModUser,omitempty"`
 	// The name for this service item definition. You can have multiple versions of the service item with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_).
 	Name *string `json:"Name,omitempty"`
-	// Publish status of the service item. * `NotPublished` - A state of the service item or catalog item which is not yet published. * `Published` - A state denoting that the service item or catalog item is published.
+	// The publish status of service item (Draft, Published, Archived). * `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested. * `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption. * `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.
 	PublishStatus *string `json:"PublishStatus,omitempty"`
 	// State of service item considering the state of underlying service item actions definitions. * `Okay` - Deployment and other post-deployment actions are in valid state. * `Critical` - Deployment action is not in valid state. * `Warning` - Deployment action is in valid state, and one or more post-deployment actions are not in valid state.
 	Status *string `json:"Status,omitempty"`
 	// The service item can be marked as deprecated, supported or beta, the support status indicates that. When a new service item is introduced, it can be marked beta to indicate this is experimental and later moved to Supported status. When Service item is deprecated, it cannot be instantiated and used for a Catalog Item design. * `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported. * `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.
 	SupportStatus *string `json:"SupportStatus,omitempty"`
-	// The user identifier who created or updated the service item definition.
+	// This attribute is deprecated and replaced by createUser and modUser.
+	// Deprecated
 	UserIdOrEmail         *string                               `json:"UserIdOrEmail,omitempty"`
 	ValidationInformation NullableWorkflowValidationInformation `json:"ValidationInformation,omitempty"`
 	// The version of the service item to support multiple versions.
@@ -74,7 +79,7 @@ func NewWorkflowServiceItemDefinition(classId string, objectType string) *Workfl
 	this.AllowMultipleServiceItemInstances = &allowMultipleServiceItemInstances
 	var deleteInstanceOnDecommission bool = false
 	this.DeleteInstanceOnDecommission = &deleteInstanceOnDecommission
-	var publishStatus string = "NotPublished"
+	var publishStatus string = "Draft"
 	this.PublishStatus = &publishStatus
 	var supportStatus string = "Supported"
 	this.SupportStatus = &supportStatus
@@ -96,7 +101,7 @@ func NewWorkflowServiceItemDefinitionWithDefaults() *WorkflowServiceItemDefiniti
 	this.AllowMultipleServiceItemInstances = &allowMultipleServiceItemInstances
 	var deleteInstanceOnDecommission bool = false
 	this.DeleteInstanceOnDecommission = &deleteInstanceOnDecommission
-	var publishStatus string = "NotPublished"
+	var publishStatus string = "Draft"
 	this.PublishStatus = &publishStatus
 	var supportStatus string = "Supported"
 	this.SupportStatus = &supportStatus
@@ -226,6 +231,38 @@ func (o *WorkflowServiceItemDefinition) HasAttributeDefinition() bool {
 // SetAttributeDefinition gets a reference to the given []WorkflowBaseDataType and assigns it to the AttributeDefinition field.
 func (o *WorkflowServiceItemDefinition) SetAttributeDefinition(v []WorkflowBaseDataType) {
 	o.AttributeDefinition = v
+}
+
+// GetCreateUser returns the CreateUser field value if set, zero value otherwise.
+func (o *WorkflowServiceItemDefinition) GetCreateUser() string {
+	if o == nil || IsNil(o.CreateUser) {
+		var ret string
+		return ret
+	}
+	return *o.CreateUser
+}
+
+// GetCreateUserOk returns a tuple with the CreateUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemDefinition) GetCreateUserOk() (*string, bool) {
+	if o == nil || IsNil(o.CreateUser) {
+		return nil, false
+	}
+	return o.CreateUser, true
+}
+
+// HasCreateUser returns a boolean if a field has been set.
+func (o *WorkflowServiceItemDefinition) HasCreateUser() bool {
+	if o != nil && !IsNil(o.CreateUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreateUser gets a reference to the given string and assigns it to the CreateUser field.
+func (o *WorkflowServiceItemDefinition) SetCreateUser(v string) {
+	o.CreateUser = &v
 }
 
 // GetCvdId returns the CvdId field value if set, zero value otherwise.
@@ -388,6 +425,38 @@ func (o *WorkflowServiceItemDefinition) SetLicenseEntitlement(v string) {
 	o.LicenseEntitlement = &v
 }
 
+// GetModUser returns the ModUser field value if set, zero value otherwise.
+func (o *WorkflowServiceItemDefinition) GetModUser() string {
+	if o == nil || IsNil(o.ModUser) {
+		var ret string
+		return ret
+	}
+	return *o.ModUser
+}
+
+// GetModUserOk returns a tuple with the ModUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowServiceItemDefinition) GetModUserOk() (*string, bool) {
+	if o == nil || IsNil(o.ModUser) {
+		return nil, false
+	}
+	return o.ModUser, true
+}
+
+// HasModUser returns a boolean if a field has been set.
+func (o *WorkflowServiceItemDefinition) HasModUser() bool {
+	if o != nil && !IsNil(o.ModUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetModUser gets a reference to the given string and assigns it to the ModUser field.
+func (o *WorkflowServiceItemDefinition) SetModUser(v string) {
+	o.ModUser = &v
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *WorkflowServiceItemDefinition) GetName() string {
 	if o == nil || IsNil(o.Name) {
@@ -517,6 +586,7 @@ func (o *WorkflowServiceItemDefinition) SetSupportStatus(v string) {
 }
 
 // GetUserIdOrEmail returns the UserIdOrEmail field value if set, zero value otherwise.
+// Deprecated
 func (o *WorkflowServiceItemDefinition) GetUserIdOrEmail() string {
 	if o == nil || IsNil(o.UserIdOrEmail) {
 		var ret string
@@ -527,6 +597,7 @@ func (o *WorkflowServiceItemDefinition) GetUserIdOrEmail() string {
 
 // GetUserIdOrEmailOk returns a tuple with the UserIdOrEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *WorkflowServiceItemDefinition) GetUserIdOrEmailOk() (*string, bool) {
 	if o == nil || IsNil(o.UserIdOrEmail) {
 		return nil, false
@@ -544,6 +615,7 @@ func (o *WorkflowServiceItemDefinition) HasUserIdOrEmail() bool {
 }
 
 // SetUserIdOrEmail gets a reference to the given string and assigns it to the UserIdOrEmail field.
+// Deprecated
 func (o *WorkflowServiceItemDefinition) SetUserIdOrEmail(v string) {
 	o.UserIdOrEmail = &v
 }
@@ -731,6 +803,9 @@ func (o WorkflowServiceItemDefinition) ToMap() (map[string]interface{}, error) {
 	if o.AttributeDefinition != nil {
 		toSerialize["AttributeDefinition"] = o.AttributeDefinition
 	}
+	if !IsNil(o.CreateUser) {
+		toSerialize["CreateUser"] = o.CreateUser
+	}
 	if !IsNil(o.CvdId) {
 		toSerialize["CvdId"] = o.CvdId
 	}
@@ -745,6 +820,9 @@ func (o WorkflowServiceItemDefinition) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.LicenseEntitlement) {
 		toSerialize["LicenseEntitlement"] = o.LicenseEntitlement
+	}
+	if !IsNil(o.ModUser) {
+		toSerialize["ModUser"] = o.ModUser
 	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
@@ -831,6 +909,8 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(data []byte) (err error) {
 		// Service item definition can declare that only one instance can be allowed within the customer account.
 		AllowMultipleServiceItemInstances *bool                  `json:"AllowMultipleServiceItemInstances,omitempty"`
 		AttributeDefinition               []WorkflowBaseDataType `json:"AttributeDefinition,omitempty"`
+		// The user identifier who created or cloned the service item definition.
+		CreateUser *string `json:"CreateUser,omitempty"`
 		// The Cisco Validated Design (CVD) Identifier that this service item provides.
 		CvdId *string `json:"CvdId,omitempty"`
 		// The flag to indicate that service item instance will be deleted after the completion of decommission action.
@@ -841,15 +921,18 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(data []byte) (err error) {
 		Label *string `json:"Label,omitempty"`
 		// License entitlement required to run this service item. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type. * `INC-Premier-1GFixed` - Premier 1G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-10GFixed` - Premier 10G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-100GFixed` - Premier 100G Fixed license tier for Intersight Nexus Cloud. * `INC-Premier-Mod4Slot` - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * `INC-Premier-Mod8Slot` - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsFixed` - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * `INC-Premier-D2OpsMod` - Premier D2Ops modular license tier for Intersight Nexus Cloud. * `INC-Premier-CentralizedMod8Slot` - Premier modular license tier of switch type CentralizedMod8Slot for Intersight Nexus Cloud. * `INC-Premier-DistributedMod8Slot` - Premier modular license tier of switch type DistributedMod8Slot for Intersight Nexus Cloud. * `IntersightTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * `IWOTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * `IKSTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * `INCTrial` - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers.
 		LicenseEntitlement *string `json:"LicenseEntitlement,omitempty"`
+		// The user identifier who last updated the service item definition.
+		ModUser *string `json:"ModUser,omitempty"`
 		// The name for this service item definition. You can have multiple versions of the service item with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_).
 		Name *string `json:"Name,omitempty"`
-		// Publish status of the service item. * `NotPublished` - A state of the service item or catalog item which is not yet published. * `Published` - A state denoting that the service item or catalog item is published.
+		// The publish status of service item (Draft, Published, Archived). * `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested. * `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption. * `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.
 		PublishStatus *string `json:"PublishStatus,omitempty"`
 		// State of service item considering the state of underlying service item actions definitions. * `Okay` - Deployment and other post-deployment actions are in valid state. * `Critical` - Deployment action is not in valid state. * `Warning` - Deployment action is in valid state, and one or more post-deployment actions are not in valid state.
 		Status *string `json:"Status,omitempty"`
 		// The service item can be marked as deprecated, supported or beta, the support status indicates that. When a new service item is introduced, it can be marked beta to indicate this is experimental and later moved to Supported status. When Service item is deprecated, it cannot be instantiated and used for a Catalog Item design. * `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported. * `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.
 		SupportStatus *string `json:"SupportStatus,omitempty"`
-		// The user identifier who created or updated the service item definition.
+		// This attribute is deprecated and replaced by createUser and modUser.
+		// Deprecated
 		UserIdOrEmail         *string                               `json:"UserIdOrEmail,omitempty"`
 		ValidationInformation NullableWorkflowValidationInformation `json:"ValidationInformation,omitempty"`
 		// The version of the service item to support multiple versions.
@@ -868,11 +951,13 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(data []byte) (err error) {
 		varWorkflowServiceItemDefinition.ObjectType = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.ObjectType
 		varWorkflowServiceItemDefinition.AllowMultipleServiceItemInstances = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.AllowMultipleServiceItemInstances
 		varWorkflowServiceItemDefinition.AttributeDefinition = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.AttributeDefinition
+		varWorkflowServiceItemDefinition.CreateUser = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.CreateUser
 		varWorkflowServiceItemDefinition.CvdId = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.CvdId
 		varWorkflowServiceItemDefinition.DeleteInstanceOnDecommission = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.DeleteInstanceOnDecommission
 		varWorkflowServiceItemDefinition.Description = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.Description
 		varWorkflowServiceItemDefinition.Label = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.Label
 		varWorkflowServiceItemDefinition.LicenseEntitlement = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.LicenseEntitlement
+		varWorkflowServiceItemDefinition.ModUser = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.ModUser
 		varWorkflowServiceItemDefinition.Name = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.Name
 		varWorkflowServiceItemDefinition.PublishStatus = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.PublishStatus
 		varWorkflowServiceItemDefinition.Status = varWorkflowServiceItemDefinitionWithoutEmbeddedStruct.Status
@@ -903,11 +988,13 @@ func (o *WorkflowServiceItemDefinition) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllowMultipleServiceItemInstances")
 		delete(additionalProperties, "AttributeDefinition")
+		delete(additionalProperties, "CreateUser")
 		delete(additionalProperties, "CvdId")
 		delete(additionalProperties, "DeleteInstanceOnDecommission")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "Label")
 		delete(additionalProperties, "LicenseEntitlement")
+		delete(additionalProperties, "ModUser")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "PublishStatus")
 		delete(additionalProperties, "Status")

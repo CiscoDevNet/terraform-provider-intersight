@@ -80,6 +80,11 @@ func getFabricFcoeUplinkPcRoleSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"fec": {
+			Description: "Forward error correction configuration for Fcoe Uplink Port Channel member ports.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"link_aggregation_policy": {
 			Description: "A reference to a fabricLinkAggregationPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -554,6 +559,11 @@ func dataSourceFabricFcoeUplinkPcRoleRead(c context.Context, d *schema.ResourceD
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("fec"); ok {
+		x := (v.(string))
+		o.SetFec(x)
+	}
+
 	if v, ok := d.GetOk("link_aggregation_policy"); ok {
 		p := make([]models.FabricLinkAggregationPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -999,6 +1009,7 @@ func dataSourceFabricFcoeUplinkPcRoleRead(c context.Context, d *schema.ResourceD
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["fec"] = (s.GetFec())
 
 				temp["link_aggregation_policy"] = flattenMapFabricLinkAggregationPolicyRelationship(s.GetLinkAggregationPolicy(), d)
 

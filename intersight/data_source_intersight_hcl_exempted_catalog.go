@@ -184,6 +184,11 @@ func getHclExemptedCatalogSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"personality": {
+			Description: "It indicates the personality of the sever.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"processor_name": {
 			Description: "Name of the processor supported for the server.",
 			Type:        schema.TypeString,
@@ -575,6 +580,11 @@ func dataSourceHclExemptedCatalogRead(c context.Context, d *schema.ResourceData,
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("personality"); ok {
+		x := (v.(string))
+		o.SetPersonality(x)
+	}
+
 	if v, ok := d.GetOk("processor_name"); ok {
 		x := (v.(string))
 		o.SetProcessorName(x)
@@ -779,6 +789,7 @@ func dataSourceHclExemptedCatalogRead(c context.Context, d *schema.ResourceData,
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["personality"] = (s.GetPersonality())
 				temp["processor_name"] = (s.GetProcessorName())
 				temp["product_models"] = (s.GetProductModels())
 				temp["product_type"] = (s.GetProductType())

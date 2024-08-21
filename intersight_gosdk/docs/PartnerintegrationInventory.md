@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Action** | Pointer to **string** | Action to be performed on the inventory collection. * &#x60;None&#x60; - Default Value of the action, i.e. do nothing. * &#x60;Build&#x60; - Build the inventory service image. * &#x60;Deploy&#x60; - Deploy the inventory service on the appliance. | [optional] [default to "None"]
 **BuildFlags** | Pointer to **string** | Addtional flags to control build action. | [optional] 
 **BuildStartTime** | Pointer to **string** | Time when build was triggered. | [optional] [readonly] 
-**BuildStatus** | Pointer to **string** | Status of build for inventory collection. * &#x60;None&#x60; - Default value of the status. i.e. done nothing. * &#x60;BackendInProgress&#x60; - The backend build is in progress. * &#x60;BackendFailed&#x60; - The backend build has failed. * &#x60;DockerInProgress&#x60; - The docker build is in progress. * &#x60;DockerFailed&#x60; - The docker build has failed. * &#x60;UiInProgress&#x60; - The UI build is in progress. * &#x60;UiFailed&#x60; - The inventory UI build has failed. * &#x60;ApidocsInProgress&#x60; - The apidocs build is in progress. * &#x60;ApidocsFailed&#x60; - The apidocs build has failed. * &#x60;Completed&#x60; - The operation completed successfully. | [optional] [readonly] [default to "None"]
+**BuildStatus** | Pointer to **string** | Status of build for inventory collection. * &#x60;None&#x60; - Default value of the status. i.e. done nothing. * &#x60;BackendInProgress&#x60; - The backend build is in progress. * &#x60;BackendFailed&#x60; - The backend build has failed. * &#x60;MetricsCollectorBackendInProgress&#x60; - The Metrics Collector backend build is in progress. * &#x60;MetricsCollectorBackendFailed&#x60; - The Metrics Collector backend build has failed. * &#x60;DockerInProgress&#x60; - The docker build is in progress. * &#x60;DockerFailed&#x60; - The docker build has failed. * &#x60;UiInProgress&#x60; - The UI build is in progress. * &#x60;UiFailed&#x60; - The inventory UI build has failed. * &#x60;MetricsCollectorUiInProgress&#x60; - The Metrics Collector UI build is in progress. * &#x60;MetricsCollectorUiFailed&#x60; - The Metrics Collector UI build has failed. * &#x60;MetricsCollectorDependentBackendInProgress&#x60; - The Metrics Collector dependent backend build is in progress. * &#x60;MetricsCollectorDependentBackendFailed&#x60; - The Metrics Collector dependent backend build has failed. * &#x60;MetricsCollectorDependentDockerInProgress&#x60; - The Metrics Collector dependent docker build is in progress. * &#x60;MetricsCollectorDependentDockerFailed&#x60; - The Metrics Collector dependent docker build has failed. * &#x60;ApidocsInProgress&#x60; - The apidocs build is in progress. * &#x60;ApidocsFailed&#x60; - The apidocs build has failed. * &#x60;Completed&#x60; - The operation completed successfully. | [optional] [readonly] [default to "None"]
 **DeployStartTime** | Pointer to **string** | Time when deploy was triggered. | [optional] [readonly] 
 **DeployStatus** | Pointer to **string** | Status of deployment of the inventory microservice. * &#x60;None&#x60; - Default value of the status. i.e. done nothing. * &#x60;Completed&#x60; - The operation completed successfully. * &#x60;Failed&#x60; - The deploy operation failed. | [optional] [readonly] [default to "None"]
 **ImageName** | Pointer to **string** | Name of the docker image that is built. | [optional] [readonly] 
@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **DocIssues** | Pointer to [**[]PartnerintegrationDocIssuesRelationship**](PartnerintegrationDocIssuesRelationship.md) | An array of relationships to partnerintegrationDocIssues resources. | [optional] [readonly] 
 **Etls** | Pointer to [**[]PartnerintegrationEtlRelationship**](PartnerintegrationEtlRelationship.md) | An array of relationships to partnerintegrationEtl resources. | [optional] 
 **Logs** | Pointer to [**[]PartnerintegrationLogsRelationship**](PartnerintegrationLogsRelationship.md) | An array of relationships to partnerintegrationLogs resources. | [optional] [readonly] 
+**Metrics** | Pointer to [**NullablePartnerintegrationMetricsRelationship**](PartnerintegrationMetricsRelationship.md) |  | [optional] 
 **Models** | Pointer to [**[]PartnerintegrationModelRelationship**](PartnerintegrationModelRelationship.md) | An array of relationships to partnerintegrationModel resources. | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
@@ -410,6 +411,41 @@ HasLogs returns a boolean if a field has been set.
 `func (o *PartnerintegrationInventory) UnsetLogs()`
 
 UnsetLogs ensures that no value is present for Logs, not even an explicit nil
+### GetMetrics
+
+`func (o *PartnerintegrationInventory) GetMetrics() PartnerintegrationMetricsRelationship`
+
+GetMetrics returns the Metrics field if non-nil, zero value otherwise.
+
+### GetMetricsOk
+
+`func (o *PartnerintegrationInventory) GetMetricsOk() (*PartnerintegrationMetricsRelationship, bool)`
+
+GetMetricsOk returns a tuple with the Metrics field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetrics
+
+`func (o *PartnerintegrationInventory) SetMetrics(v PartnerintegrationMetricsRelationship)`
+
+SetMetrics sets Metrics field to given value.
+
+### HasMetrics
+
+`func (o *PartnerintegrationInventory) HasMetrics() bool`
+
+HasMetrics returns a boolean if a field has been set.
+
+### SetMetricsNil
+
+`func (o *PartnerintegrationInventory) SetMetricsNil(b bool)`
+
+ SetMetricsNil sets the value for Metrics to be an explicit nil
+
+### UnsetMetrics
+`func (o *PartnerintegrationInventory) UnsetMetrics()`
+
+UnsetMetrics ensures that no value is present for Metrics, not even an explicit nil
 ### GetModels
 
 `func (o *PartnerintegrationInventory) GetModels() []PartnerintegrationModelRelationship`

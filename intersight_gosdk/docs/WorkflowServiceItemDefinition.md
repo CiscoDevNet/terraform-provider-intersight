@@ -8,16 +8,18 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ServiceItemDefinition"]
 **AllowMultipleServiceItemInstances** | Pointer to **bool** | Service item definition can declare that only one instance can be allowed within the customer account. | [optional] [default to true]
 **AttributeDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
+**CreateUser** | Pointer to **string** | The user identifier who created or cloned the service item definition. | [optional] [readonly] 
 **CvdId** | Pointer to **string** | The Cisco Validated Design (CVD) Identifier that this service item provides. | [optional] 
 **DeleteInstanceOnDecommission** | Pointer to **bool** | The flag to indicate that service item instance will be deleted after the completion of decommission action. | [optional] [default to false]
 **Description** | Pointer to **string** | The description for this service item which provides information on what are the pre-requisites to deploy the service item and what features are supported on the service item. | [optional] 
 **Label** | Pointer to **string** | A user friendly short name to identify the service item. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). | [optional] 
 **LicenseEntitlement** | Pointer to **string** | License entitlement required to run this service item. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. * &#x60;IKS-Advantage&#x60; - IKS-Advantage as a License type. * &#x60;INC-Premier-1GFixed&#x60; - Premier 1G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-10GFixed&#x60; - Premier 10G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-100GFixed&#x60; - Premier 100G Fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-Mod4Slot&#x60; - Premier Modular 4 slot license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-Mod8Slot&#x60; - Premier Modular 8 slot license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-D2OpsFixed&#x60; - Premier D2Ops fixed license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-D2OpsMod&#x60; - Premier D2Ops modular license tier for Intersight Nexus Cloud. * &#x60;INC-Premier-CentralizedMod8Slot&#x60; - Premier modular license tier of switch type CentralizedMod8Slot for Intersight Nexus Cloud. * &#x60;INC-Premier-DistributedMod8Slot&#x60; - Premier modular license tier of switch type DistributedMod8Slot for Intersight Nexus Cloud. * &#x60;IntersightTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode Intersight tiers. * &#x60;IWOTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode IKS tiers. * &#x60;IKSTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode IWO tiers. * &#x60;INCTrial&#x60; - Virtual dummy license type to indicate trial. Used for UI display of trial mode Nexus tiers. | [optional] [readonly] [default to "Base"]
+**ModUser** | Pointer to **string** | The user identifier who last updated the service item definition. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name for this service item definition. You can have multiple versions of the service item with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_). | [optional] 
-**PublishStatus** | Pointer to **string** | Publish status of the service item. * &#x60;NotPublished&#x60; - A state of the service item or catalog item which is not yet published. * &#x60;Published&#x60; - A state denoting that the service item or catalog item is published. | [optional] [default to "NotPublished"]
+**PublishStatus** | Pointer to **string** | The publish status of service item (Draft, Published, Archived). * &#x60;Draft&#x60; - The enum specifies the option as Draft which means the meta definition is being designed and tested. * &#x60;Published&#x60; - The enum specifies the option as Published which means the meta definition is ready for consumption. * &#x60;Archived&#x60; - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed. | [optional] [default to "Draft"]
 **Status** | Pointer to **string** | State of service item considering the state of underlying service item actions definitions. * &#x60;Okay&#x60; - Deployment and other post-deployment actions are in valid state. * &#x60;Critical&#x60; - Deployment action is not in valid state. * &#x60;Warning&#x60; - Deployment action is in valid state, and one or more post-deployment actions are not in valid state. | [optional] [readonly] [default to "Okay"]
 **SupportStatus** | Pointer to **string** | The service item can be marked as deprecated, supported or beta, the support status indicates that. When a new service item is introduced, it can be marked beta to indicate this is experimental and later moved to Supported status. When Service item is deprecated, it cannot be instantiated and used for a Catalog Item design. * &#x60;Supported&#x60; - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * &#x60;Beta&#x60; - The definition is a Beta version and this version can under go changes until the version is marked supported. * &#x60;Deprecated&#x60; - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. | [optional] [default to "Supported"]
-**UserIdOrEmail** | Pointer to **string** | The user identifier who created or updated the service item definition. | [optional] [readonly] 
+**UserIdOrEmail** | Pointer to **string** | This attribute is deprecated and replaced by createUser and modUser. | [optional] [readonly] 
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **Version** | Pointer to **int64** | The version of the service item to support multiple versions. | [optional] [default to 1]
 **ActionDefinitions** | Pointer to [**[]WorkflowServiceItemActionDefinitionRelationship**](WorkflowServiceItemActionDefinitionRelationship.md) | An array of relationships to workflowServiceItemActionDefinition resources. | [optional] 
@@ -142,6 +144,31 @@ HasAttributeDefinition returns a boolean if a field has been set.
 `func (o *WorkflowServiceItemDefinition) UnsetAttributeDefinition()`
 
 UnsetAttributeDefinition ensures that no value is present for AttributeDefinition, not even an explicit nil
+### GetCreateUser
+
+`func (o *WorkflowServiceItemDefinition) GetCreateUser() string`
+
+GetCreateUser returns the CreateUser field if non-nil, zero value otherwise.
+
+### GetCreateUserOk
+
+`func (o *WorkflowServiceItemDefinition) GetCreateUserOk() (*string, bool)`
+
+GetCreateUserOk returns a tuple with the CreateUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreateUser
+
+`func (o *WorkflowServiceItemDefinition) SetCreateUser(v string)`
+
+SetCreateUser sets CreateUser field to given value.
+
+### HasCreateUser
+
+`func (o *WorkflowServiceItemDefinition) HasCreateUser() bool`
+
+HasCreateUser returns a boolean if a field has been set.
+
 ### GetCvdId
 
 `func (o *WorkflowServiceItemDefinition) GetCvdId() string`
@@ -266,6 +293,31 @@ SetLicenseEntitlement sets LicenseEntitlement field to given value.
 `func (o *WorkflowServiceItemDefinition) HasLicenseEntitlement() bool`
 
 HasLicenseEntitlement returns a boolean if a field has been set.
+
+### GetModUser
+
+`func (o *WorkflowServiceItemDefinition) GetModUser() string`
+
+GetModUser returns the ModUser field if non-nil, zero value otherwise.
+
+### GetModUserOk
+
+`func (o *WorkflowServiceItemDefinition) GetModUserOk() (*string, bool)`
+
+GetModUserOk returns a tuple with the ModUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModUser
+
+`func (o *WorkflowServiceItemDefinition) SetModUser(v string)`
+
+SetModUser sets ModUser field to given value.
+
+### HasModUser
+
+`func (o *WorkflowServiceItemDefinition) HasModUser() bool`
+
+HasModUser returns a boolean if a field has been set.
 
 ### GetName
 

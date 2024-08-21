@@ -87,7 +87,7 @@ This complex property has following sub-properties:
 * `raid0_drive`:(HashMap) - The list of disks where RAID0 virtual drives must be created on each individual drive. 
 This complex property has following sub-properties:
   + `drive_slots`:(string) The set of drive slots where RAID0 virtual drives must be created. 
-  + `drive_slots_list`:(string)(ReadOnly) The list of drive slots where RAID0 virtual drives must be created (comma seperated). 
+  + `drive_slots_list`:(string)(ReadOnly) The list of drive slots where RAID0 virtual drives must be created (comma separated). 
   + `enable`:(bool) If enabled, this will create a RAID0 virtual drive per disk and encompassing the whole disk. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `virtual_drive_policy`:(HashMap) - This defines the characteristics of a specific virtual drive. 

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **NtfnMessage** | Pointer to **string** | The notification message content is to display in the UI banner after the Customer&#39;s login to inform about planned maintenance operations on IWO. | [optional] 
 **ShowFromTime** | Pointer to **time.Time** | The date/time from which the maintenance banner message will be shown to the Customer after login in to  Intersight UI. | [optional] 
 **ShowUntilTime** | Pointer to **time.Time** | The date/time until which the maintenance banner message will be shown to the Customer after login into  Intersight UI. This will also be the time actual maintenance operation is planned for the finish of a  Customer&#39;s account. | [optional] 
+**Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -222,6 +223,41 @@ SetShowUntilTime sets ShowUntilTime field to given value.
 
 HasShowUntilTime returns a boolean if a field has been set.
 
+### GetAccount
+
+`func (o *IwotenantMaintenanceNotification) GetAccount() IamAccountRelationship`
+
+GetAccount returns the Account field if non-nil, zero value otherwise.
+
+### GetAccountOk
+
+`func (o *IwotenantMaintenanceNotification) GetAccountOk() (*IamAccountRelationship, bool)`
+
+GetAccountOk returns a tuple with the Account field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccount
+
+`func (o *IwotenantMaintenanceNotification) SetAccount(v IamAccountRelationship)`
+
+SetAccount sets Account field to given value.
+
+### HasAccount
+
+`func (o *IwotenantMaintenanceNotification) HasAccount() bool`
+
+HasAccount returns a boolean if a field has been set.
+
+### SetAccountNil
+
+`func (o *IwotenantMaintenanceNotification) SetAccountNil(b bool)`
+
+ SetAccountNil sets the value for Account to be an explicit nil
+
+### UnsetAccount
+`func (o *IwotenantMaintenanceNotification) UnsetAccount()`
+
+UnsetAccount ensures that no value is present for Account, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

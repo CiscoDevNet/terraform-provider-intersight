@@ -41,7 +41,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `publish_status`:(string) Publish status of the catalog item.* `NotPublished` - A state of the service item or catalog item which is not yet published.* `Published` - A state denoting that the service item or catalog item is published. 
+* `publish_status`:(string) Publish status of the catalog item.* `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested.* `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption.* `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed. 
 * `service_items`:(Array)
 This complex property has following sub-properties:
   + `description`:(string) The description of this service item. 

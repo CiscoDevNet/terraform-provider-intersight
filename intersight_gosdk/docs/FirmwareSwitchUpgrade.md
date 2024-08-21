@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.SwitchUpgrade"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.SwitchUpgrade"]
 **EnableFabricEvacuation** | Pointer to **bool** | The flag to enable or disable fabric evacuation during the switch firmware upgrade. In case of IMM, it is mandatory to have the Fabric Interconnects associated with domain profile for fabric evacuation to happen. | [optional] [default to true]
+**SkipWaitForIoPathConnectivity** | Pointer to **bool** | The flag to enable or disable the option to wait for IO paths connectivity during the switch firmware upgrade. | [optional] [default to false]
 **Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **NetworkElements** | Pointer to [**[]NetworkElementRelationship**](NetworkElementRelationship.md) | An array of relationships to networkElement resources. | [optional] 
 
@@ -93,6 +94,31 @@ SetEnableFabricEvacuation sets EnableFabricEvacuation field to given value.
 `func (o *FirmwareSwitchUpgrade) HasEnableFabricEvacuation() bool`
 
 HasEnableFabricEvacuation returns a boolean if a field has been set.
+
+### GetSkipWaitForIoPathConnectivity
+
+`func (o *FirmwareSwitchUpgrade) GetSkipWaitForIoPathConnectivity() bool`
+
+GetSkipWaitForIoPathConnectivity returns the SkipWaitForIoPathConnectivity field if non-nil, zero value otherwise.
+
+### GetSkipWaitForIoPathConnectivityOk
+
+`func (o *FirmwareSwitchUpgrade) GetSkipWaitForIoPathConnectivityOk() (*bool, bool)`
+
+GetSkipWaitForIoPathConnectivityOk returns a tuple with the SkipWaitForIoPathConnectivity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSkipWaitForIoPathConnectivity
+
+`func (o *FirmwareSwitchUpgrade) SetSkipWaitForIoPathConnectivity(v bool)`
+
+SetSkipWaitForIoPathConnectivity sets SkipWaitForIoPathConnectivity field to given value.
+
+### HasSkipWaitForIoPathConnectivity
+
+`func (o *FirmwareSwitchUpgrade) HasSkipWaitForIoPathConnectivity() bool`
+
+HasSkipWaitForIoPathConnectivity returns a boolean if a field has been set.
 
 ### GetDevice
 

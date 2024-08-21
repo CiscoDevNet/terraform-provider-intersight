@@ -841,7 +841,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Default:     "workflow.TaskInfoUpdate",
 						},
 						"status": {
-							Description:  "New status of the task being updated, only Failed and Completed statuses are supported.\n* `Scheduled` - The enum represents the status when task is in scheduled state.\n* `InProgress` - The enum represents the status when task is in-progress state.\n* `NoOp` - The enum represents the status when task is a noop.\n* `Timeout` - The enum represents the status when task has timed out.\n* `Completed` - The enum represents the status when task has completed.\n* `Failed` - The enum represents the status when task has failed.",
+							Description:  "New status of the task being updated, only Failed and Completed statuses are supported, Completed is the default value in case no status is provided.\n* `Scheduled` - The enum represents the status when task is in scheduled state.\n* `InProgress` - The enum represents the status when task is in-progress state.\n* `NoOp` - The enum represents the status when task is a noop.\n* `Timeout` - The enum represents the status when task has timed out.\n* `Completed` - The enum represents the status when task has completed.\n* `Failed` - The enum represents the status when task has failed.",
 							Type:         schema.TypeString,
 							ValidateFunc: validation.StringInSlice([]string{"Scheduled", "InProgress", "NoOp", "Timeout", "Completed", "Failed"}, false),
 							Optional:     true,

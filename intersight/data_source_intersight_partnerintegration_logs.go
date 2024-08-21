@@ -205,7 +205,7 @@ func getPartnerintegrationLogsSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"stage": {
-			Description: "Stage in the build process these logs belong to.\n* `None` - Default value for the log stage.\n* `Backend` - Logs corresponding to backend build.\n* `Ui` - Logs corresponding to ui build stage.\n* `Apidocs` - Logs corresponding to the apidocs build stage.",
+			Description: "Stage in the build process these logs belong to.\n* `None` - Default value for the log stage.\n* `Backend` - Logs corresponding to backend build.\n* `Ui` - Logs corresponding to ui build stage.\n* `Apidocs` - Logs corresponding to the apidocs build stage.\n* `MetricsCollectorBackend` - Logs corresponding to Metrics Collector backend build.\n* `MetricsCollectorDependentBackend` - Logs corresponding to Metrics Collector backend build.\n* `MetricsCollectorUi` - Logs corresponding to Metrics Collector ui build stage.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

@@ -153,6 +153,13 @@ func resourceFabricUplinkPcRole() *schema.Resource {
 					},
 				},
 			},
+			"fec": {
+				Description:  "Forward error correction configuration for Uplink Port Channel member ports.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Auto", "Cl91", "Cl74"}, false),
+				Optional:     true,
+				Default:      "Auto",
+			},
 			"flow_control_policy": {
 				Description: "A reference to a fabricFlowControlPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -732,6 +739,11 @@ func resourceFabricUplinkPcRoleCreate(c context.Context, d *schema.ResourceData,
 		}
 	}
 
+	if v, ok := d.GetOk("fec"); ok {
+		x := (v.(string))
+		o.SetFec(x)
+	}
+
 	if v, ok := d.GetOk("flow_control_policy"); ok {
 		p := make([]models.FabricFlowControlPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1077,6 +1089,10 @@ func resourceFabricUplinkPcRoleRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while setting property EthNetworkGroupPolicy in FabricUplinkPcRole object: %s", err.Error())
 	}
 
+	if err := d.Set("fec", (s.GetFec())); err != nil {
+		return diag.Errorf("error occurred while setting property Fec in FabricUplinkPcRole object: %s", err.Error())
+	}
+
 	if err := d.Set("flow_control_policy", flattenMapFabricFlowControlPolicyRelationship(s.GetFlowControlPolicy(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property FlowControlPolicy in FabricUplinkPcRole object: %s", err.Error())
 	}
@@ -1205,6 +1221,12 @@ func resourceFabricUplinkPcRoleUpdate(c context.Context, d *schema.ResourceData,
 			x = append(x, models.MoMoRefAsFabricEthNetworkGroupPolicyRelationship(o))
 		}
 		o.SetEthNetworkGroupPolicy(x)
+	}
+
+	if d.HasChange("fec") {
+		v := d.Get("fec")
+		x := (v.(string))
+		o.SetFec(x)
 	}
 
 	if d.HasChange("flow_control_policy") {

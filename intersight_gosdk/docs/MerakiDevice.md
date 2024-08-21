@@ -6,8 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "meraki.Device"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "meraki.Device"]
+**LanIp** | Pointer to **string** | LAN IP address of the device. | [optional] [readonly] 
 **Mac** | Pointer to **string** | The MAC address of the device. | [optional] [readonly] 
-**NetworkId** | Pointer to **string** | The unique Meraki network id. | [optional] [readonly] 
+**NetworkId** | Pointer to **string** | The network the device belongs to. | [optional] [readonly] 
 **Network** | Pointer to [**NullableMerakiNetworkRelationship**](MerakiNetworkRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetLanIp
+
+`func (o *MerakiDevice) GetLanIp() string`
+
+GetLanIp returns the LanIp field if non-nil, zero value otherwise.
+
+### GetLanIpOk
+
+`func (o *MerakiDevice) GetLanIpOk() (*string, bool)`
+
+GetLanIpOk returns a tuple with the LanIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLanIp
+
+`func (o *MerakiDevice) SetLanIp(v string)`
+
+SetLanIp sets LanIp field to given value.
+
+### HasLanIp
+
+`func (o *MerakiDevice) HasLanIp() bool`
+
+HasLanIp returns a boolean if a field has been set.
 
 ### GetMac
 

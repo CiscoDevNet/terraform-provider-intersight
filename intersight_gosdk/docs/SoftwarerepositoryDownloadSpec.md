@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.DownloadSpec"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.DownloadSpec"]
 **AuthToken** | Pointer to **string** | The OAuth2 token that will be used during image download by the endpoint to authenticate with file server. | [optional] 
+**CdnDisabled** | Pointer to **bool** | A boolean flag which indicates that the generated pre-signed url is not a CDN URL. An URL to Intersight storage source will be returned with the old domain name. This flag should be used when the  pre-signed CDN URL is not accessible from endpoint/appliance. | [optional] 
 **Certificate** | Pointer to **string** | The certificate of file server that will be used by the endpoint to validate the server before starting the file download. | [optional] 
 **Filename** | Pointer to **string** | The name of the firmware image. | [optional] 
 **Md5sum** | Pointer to **string** | MD5 sum of the firmware image that will be used by the endpoint to validate the integrity of the image, post download. | [optional] 
@@ -97,6 +98,31 @@ SetAuthToken sets AuthToken field to given value.
 `func (o *SoftwarerepositoryDownloadSpec) HasAuthToken() bool`
 
 HasAuthToken returns a boolean if a field has been set.
+
+### GetCdnDisabled
+
+`func (o *SoftwarerepositoryDownloadSpec) GetCdnDisabled() bool`
+
+GetCdnDisabled returns the CdnDisabled field if non-nil, zero value otherwise.
+
+### GetCdnDisabledOk
+
+`func (o *SoftwarerepositoryDownloadSpec) GetCdnDisabledOk() (*bool, bool)`
+
+GetCdnDisabledOk returns a tuple with the CdnDisabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCdnDisabled
+
+`func (o *SoftwarerepositoryDownloadSpec) SetCdnDisabled(v bool)`
+
+SetCdnDisabled sets CdnDisabled field to given value.
+
+### HasCdnDisabled
+
+`func (o *SoftwarerepositoryDownloadSpec) HasCdnDisabled() bool`
+
+HasCdnDisabled returns a boolean if a field has been set.
 
 ### GetCertificate
 

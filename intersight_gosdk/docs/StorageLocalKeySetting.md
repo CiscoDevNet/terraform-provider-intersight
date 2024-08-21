@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.LocalKeySetting"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.LocalKeySetting"]
-**ExistingKey** | Pointer to **string** | Existing key which is already configured on the server. | [optional] 
+**ExistingKey** | Pointer to **string** | Current Security Key Passphrase which is already configured on the server. | [optional] 
 **IsExistingKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;existingKey&#39; property has been set. | [optional] [readonly] [default to false]
 **IsNewKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;newKey&#39; property has been set. | [optional] [readonly] [default to false]
-**NewKey** | Pointer to **string** | New key to be configured on the controller. | [optional] 
+**NewKey** | Pointer to **string** | New Security Key Passphrase to be configured on the controller. | [optional] 
 
 ## Methods
 

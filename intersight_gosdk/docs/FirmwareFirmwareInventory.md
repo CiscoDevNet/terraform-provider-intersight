@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.FirmwareInventory"]
 **Category** | Pointer to **string** | Component category. For example, MRAID is under storage controller, CIMC is under management controller. | [optional] 
 **Label** | Pointer to **string** | The name of the component to reflect on UI. | [optional] 
-**Model** | Pointer to **string** | Model deatils of component. | [optional] 
+**Model** | Pointer to **string** | Model details of component. | [optional] 
 **UpdateUri** | Pointer to **string** | The redfish URI to get the firmware inventory of server components. | [optional] 
 **Vendor** | Pointer to **string** | The vendor of the component. | [optional] 
 **Version** | Pointer to **string** | The firmware running version on the component. | [optional] 

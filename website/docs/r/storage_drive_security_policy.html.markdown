@@ -22,8 +22,16 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `key_setting`:(HashMap) - Key details for supporting disk encryption. 
 This complex property has following sub-properties:
+  + `key_type`:(string) Method to be used for fetching the encryption key.* `Kmip` - Remote encryption using KMIP.* `Manual` - Drive encryption using manual key. 
+  + `manual_key`:(HashMap) - Manual key configuration. 
+This complex property has following sub-properties:
+    + `existing_key`:(string) Current Security Key Passphrase which is already configured on the server. 
+    + `is_existing_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'existingKey' property has been set. 
+    + `is_new_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'newKey' property has been set. 
+    + `new_key`:(string) New Security Key Passphrase to be configured on the controller. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `remote_key`:(HashMap) - Remote key encryption using KMIP configuraiton. 
+  + `remote_key`:(HashMap) - Remote key encryption using KMIP configuration. 
 This complex property has following sub-properties:
     + `auth_credentials`:(HashMap) - The authentication details of the KMIP server. It is required to login to the KMIP server. 
 This complex property has following sub-properties:
@@ -32,6 +40,7 @@ This complex property has following sub-properties:
     + `password`:(string) The password for the KMIP server login. 
     + `use_authentication`:(bool) Enables/disables the authentication for communicating with KMIP server. This flag enables the authentication which makes authentication mandatory. 
     + `username`:(string) The user name for the KMIP server login. 
+  + `existing_key`:(string) Current Security Key Passphrase which is already configured on the server. 
   + `is_existing_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'existingKey' property has been set. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `primary_server`:(HashMap) - Configuration of the primary KMIP server. 

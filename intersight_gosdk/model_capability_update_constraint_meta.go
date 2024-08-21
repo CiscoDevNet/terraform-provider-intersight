@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17227
+API version: 1.0.11-17956
 Contact: intersight@cisco.com
 */
 
@@ -33,9 +33,12 @@ type CapabilityUpdateConstraintMeta struct {
 	// Firmware version below which firmware update is not supported for this inventory unit.
 	MinSupportedVersion *string `json:"MinSupportedVersion,omitempty"`
 	// Model of the inventory unit which will be supported in firmware operation.
-	Model                *string  `json:"Model,omitempty"`
-	SupportedPlatforms   []string `json:"SupportedPlatforms,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Model *string `json:"Model,omitempty"`
+	// Platform type for which the constraint is to be enforced.
+	PlatformType             *string                               `json:"PlatformType,omitempty"`
+	ServerSpecificConstraint []CapabilityServerComponentConstraint `json:"ServerSpecificConstraint,omitempty"`
+	SupportedPlatforms       []string                              `json:"SupportedPlatforms,omitempty"`
+	AdditionalProperties     map[string]interface{}
 }
 
 type _CapabilityUpdateConstraintMeta CapabilityUpdateConstraintMeta
@@ -203,6 +206,71 @@ func (o *CapabilityUpdateConstraintMeta) SetModel(v string) {
 	o.Model = &v
 }
 
+// GetPlatformType returns the PlatformType field value if set, zero value otherwise.
+func (o *CapabilityUpdateConstraintMeta) GetPlatformType() string {
+	if o == nil || IsNil(o.PlatformType) {
+		var ret string
+		return ret
+	}
+	return *o.PlatformType
+}
+
+// GetPlatformTypeOk returns a tuple with the PlatformType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilityUpdateConstraintMeta) GetPlatformTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.PlatformType) {
+		return nil, false
+	}
+	return o.PlatformType, true
+}
+
+// HasPlatformType returns a boolean if a field has been set.
+func (o *CapabilityUpdateConstraintMeta) HasPlatformType() bool {
+	if o != nil && !IsNil(o.PlatformType) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformType gets a reference to the given string and assigns it to the PlatformType field.
+func (o *CapabilityUpdateConstraintMeta) SetPlatformType(v string) {
+	o.PlatformType = &v
+}
+
+// GetServerSpecificConstraint returns the ServerSpecificConstraint field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilityUpdateConstraintMeta) GetServerSpecificConstraint() []CapabilityServerComponentConstraint {
+	if o == nil {
+		var ret []CapabilityServerComponentConstraint
+		return ret
+	}
+	return o.ServerSpecificConstraint
+}
+
+// GetServerSpecificConstraintOk returns a tuple with the ServerSpecificConstraint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilityUpdateConstraintMeta) GetServerSpecificConstraintOk() ([]CapabilityServerComponentConstraint, bool) {
+	if o == nil || IsNil(o.ServerSpecificConstraint) {
+		return nil, false
+	}
+	return o.ServerSpecificConstraint, true
+}
+
+// HasServerSpecificConstraint returns a boolean if a field has been set.
+func (o *CapabilityUpdateConstraintMeta) HasServerSpecificConstraint() bool {
+	if o != nil && !IsNil(o.ServerSpecificConstraint) {
+		return true
+	}
+
+	return false
+}
+
+// SetServerSpecificConstraint gets a reference to the given []CapabilityServerComponentConstraint and assigns it to the ServerSpecificConstraint field.
+func (o *CapabilityUpdateConstraintMeta) SetServerSpecificConstraint(v []CapabilityServerComponentConstraint) {
+	o.ServerSpecificConstraint = v
+}
+
 // GetSupportedPlatforms returns the SupportedPlatforms field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CapabilityUpdateConstraintMeta) GetSupportedPlatforms() []string {
 	if o == nil {
@@ -265,6 +333,12 @@ func (o CapabilityUpdateConstraintMeta) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Model) {
 		toSerialize["Model"] = o.Model
 	}
+	if !IsNil(o.PlatformType) {
+		toSerialize["PlatformType"] = o.PlatformType
+	}
+	if o.ServerSpecificConstraint != nil {
+		toSerialize["ServerSpecificConstraint"] = o.ServerSpecificConstraint
+	}
 	if o.SupportedPlatforms != nil {
 		toSerialize["SupportedPlatforms"] = o.SupportedPlatforms
 	}
@@ -325,8 +399,11 @@ func (o *CapabilityUpdateConstraintMeta) UnmarshalJSON(data []byte) (err error) 
 		// Firmware version below which firmware update is not supported for this inventory unit.
 		MinSupportedVersion *string `json:"MinSupportedVersion,omitempty"`
 		// Model of the inventory unit which will be supported in firmware operation.
-		Model              *string  `json:"Model,omitempty"`
-		SupportedPlatforms []string `json:"SupportedPlatforms,omitempty"`
+		Model *string `json:"Model,omitempty"`
+		// Platform type for which the constraint is to be enforced.
+		PlatformType             *string                               `json:"PlatformType,omitempty"`
+		ServerSpecificConstraint []CapabilityServerComponentConstraint `json:"ServerSpecificConstraint,omitempty"`
+		SupportedPlatforms       []string                              `json:"SupportedPlatforms,omitempty"`
 	}
 
 	varCapabilityUpdateConstraintMetaWithoutEmbeddedStruct := CapabilityUpdateConstraintMetaWithoutEmbeddedStruct{}
@@ -339,6 +416,8 @@ func (o *CapabilityUpdateConstraintMeta) UnmarshalJSON(data []byte) (err error) 
 		varCapabilityUpdateConstraintMeta.IsSecureBootSupported = varCapabilityUpdateConstraintMetaWithoutEmbeddedStruct.IsSecureBootSupported
 		varCapabilityUpdateConstraintMeta.MinSupportedVersion = varCapabilityUpdateConstraintMetaWithoutEmbeddedStruct.MinSupportedVersion
 		varCapabilityUpdateConstraintMeta.Model = varCapabilityUpdateConstraintMetaWithoutEmbeddedStruct.Model
+		varCapabilityUpdateConstraintMeta.PlatformType = varCapabilityUpdateConstraintMetaWithoutEmbeddedStruct.PlatformType
+		varCapabilityUpdateConstraintMeta.ServerSpecificConstraint = varCapabilityUpdateConstraintMetaWithoutEmbeddedStruct.ServerSpecificConstraint
 		varCapabilityUpdateConstraintMeta.SupportedPlatforms = varCapabilityUpdateConstraintMetaWithoutEmbeddedStruct.SupportedPlatforms
 		*o = CapabilityUpdateConstraintMeta(varCapabilityUpdateConstraintMeta)
 	} else {
@@ -362,6 +441,8 @@ func (o *CapabilityUpdateConstraintMeta) UnmarshalJSON(data []byte) (err error) 
 		delete(additionalProperties, "IsSecureBootSupported")
 		delete(additionalProperties, "MinSupportedVersion")
 		delete(additionalProperties, "Model")
+		delete(additionalProperties, "PlatformType")
+		delete(additionalProperties, "ServerSpecificConstraint")
 		delete(additionalProperties, "SupportedPlatforms")
 
 		// remove fields from embedded structs

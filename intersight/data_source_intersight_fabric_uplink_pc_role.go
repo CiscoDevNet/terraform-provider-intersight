@@ -114,6 +114,11 @@ func getFabricUplinkPcRoleSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"fec": {
+			Description: "Forward error correction configuration for Uplink Port Channel member ports.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"flow_control_policy": {
 			Description: "A reference to a fabricFlowControlPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -663,6 +668,11 @@ func dataSourceFabricUplinkPcRoleRead(c context.Context, d *schema.ResourceData,
 		o.SetEthNetworkGroupPolicy(x)
 	}
 
+	if v, ok := d.GetOk("fec"); ok {
+		x := (v.(string))
+		o.SetFec(x)
+	}
+
 	if v, ok := d.GetOk("flow_control_policy"); ok {
 		p := make([]models.FabricFlowControlPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1153,6 +1163,7 @@ func dataSourceFabricUplinkPcRoleRead(c context.Context, d *schema.ResourceData,
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["eth_network_group_policy"] = flattenListFabricEthNetworkGroupPolicyRelationship(s.GetEthNetworkGroupPolicy(), d)
+				temp["fec"] = (s.GetFec())
 
 				temp["flow_control_policy"] = flattenMapFabricFlowControlPolicyRelationship(s.GetFlowControlPolicy(), d)
 

@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **IsSecureBootSupported** | Pointer to **bool** | Flag to indicate support for secure boot. | [optional] [readonly] 
 **MinSupportedVersion** | Pointer to **string** | Firmware version below which firmware update is not supported for this inventory unit. | [optional] [readonly] 
 **Model** | Pointer to **string** | Model of the inventory unit which will be supported in firmware operation. | [optional] [readonly] 
+**PlatformType** | Pointer to **string** | Platform type for which the constraint is to be enforced. | [optional] [readonly] 
+**ServerSpecificConstraint** | Pointer to [**[]CapabilityServerComponentConstraint**](CapabilityServerComponentConstraint.md) |  | [optional] 
 **SupportedPlatforms** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
@@ -145,6 +147,66 @@ SetModel sets Model field to given value.
 
 HasModel returns a boolean if a field has been set.
 
+### GetPlatformType
+
+`func (o *CapabilityUpdateConstraintMeta) GetPlatformType() string`
+
+GetPlatformType returns the PlatformType field if non-nil, zero value otherwise.
+
+### GetPlatformTypeOk
+
+`func (o *CapabilityUpdateConstraintMeta) GetPlatformTypeOk() (*string, bool)`
+
+GetPlatformTypeOk returns a tuple with the PlatformType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformType
+
+`func (o *CapabilityUpdateConstraintMeta) SetPlatformType(v string)`
+
+SetPlatformType sets PlatformType field to given value.
+
+### HasPlatformType
+
+`func (o *CapabilityUpdateConstraintMeta) HasPlatformType() bool`
+
+HasPlatformType returns a boolean if a field has been set.
+
+### GetServerSpecificConstraint
+
+`func (o *CapabilityUpdateConstraintMeta) GetServerSpecificConstraint() []CapabilityServerComponentConstraint`
+
+GetServerSpecificConstraint returns the ServerSpecificConstraint field if non-nil, zero value otherwise.
+
+### GetServerSpecificConstraintOk
+
+`func (o *CapabilityUpdateConstraintMeta) GetServerSpecificConstraintOk() (*[]CapabilityServerComponentConstraint, bool)`
+
+GetServerSpecificConstraintOk returns a tuple with the ServerSpecificConstraint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerSpecificConstraint
+
+`func (o *CapabilityUpdateConstraintMeta) SetServerSpecificConstraint(v []CapabilityServerComponentConstraint)`
+
+SetServerSpecificConstraint sets ServerSpecificConstraint field to given value.
+
+### HasServerSpecificConstraint
+
+`func (o *CapabilityUpdateConstraintMeta) HasServerSpecificConstraint() bool`
+
+HasServerSpecificConstraint returns a boolean if a field has been set.
+
+### SetServerSpecificConstraintNil
+
+`func (o *CapabilityUpdateConstraintMeta) SetServerSpecificConstraintNil(b bool)`
+
+ SetServerSpecificConstraintNil sets the value for ServerSpecificConstraint to be an explicit nil
+
+### UnsetServerSpecificConstraint
+`func (o *CapabilityUpdateConstraintMeta) UnsetServerSpecificConstraint()`
+
+UnsetServerSpecificConstraint ensures that no value is present for ServerSpecificConstraint, not even an explicit nil
 ### GetSupportedPlatforms
 
 `func (o *CapabilityUpdateConstraintMeta) GetSupportedPlatforms() []string`

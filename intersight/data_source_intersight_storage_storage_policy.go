@@ -355,7 +355,7 @@ func getStorageStoragePolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"drive_slots_list": {
-						Description: "The list of drive slots where RAID0 virtual drives must be created (comma seperated).",
+						Description: "The list of drive slots where RAID0 virtual drives must be created (comma separated).",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

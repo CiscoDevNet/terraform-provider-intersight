@@ -181,7 +181,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"device_mo_id": {
-			Description: "The database identifier of the registered device of an object.",
+			Description: "The MoId of the registered device that coresponds to the server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -206,7 +206,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"fault_summary": {
-			Description: "The fault summary of the network Element out-of-band management interface.",
+			Description: "The fault summary for the server.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -260,6 +260,41 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"inventory_parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"ipv4_address": {
 			Description: "IP version 4 address is saved in this property.",
 			Type:        schema.TypeString,
@@ -281,7 +316,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"model": {
-			Description: "This field displays the model number of the associated component or hardware.",
+			Description: "This field identifies the model of the given component.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -291,7 +326,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Name of the ElementSummary object is saved in this property.",
+			Description: "The admin configured name of the system.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -440,11 +475,6 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"peer_firmware_out_of_sync": {
-			Description: "The flag to indicate the firmware of peer Fabric Interconnect is out of sync.",
-			Type:        schema.TypeBool,
-			Optional:    true,
-		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -480,7 +510,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			},
 		},
 		"presence": {
-			Description: "This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.",
+			Description: "This field identifies the presence (equipped) or absence of the given component.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -525,7 +555,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"revision": {
-			Description: "This field displays the revised version of the associated component or hardware (if any).",
+			Description: "The product revision of the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -535,7 +565,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"serial": {
-			Description: "This field displays the serial number of the associated component or hardware.",
+			Description: "This field identifies the serial of the given component.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -545,7 +575,7 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"source_object_type": {
-			Description: "The source object type of this view MO.",
+			Description: "Stores the source object type used to fill the properties of this object.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -607,18 +637,13 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
-		"user_label": {
-			Description: "The user defined label assigned to the switch.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
 		"vendor": {
-			Description: "This field displays the vendor information of the associated component or hardware.",
+			Description: "This field identifies the vendor of the given component.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"nr_version": {
-			Description: "Version holds the firmware version related information.",
+			Description: "Firmware version of the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -977,6 +1002,49 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetInterClusterLinkState(x)
 	}
 
+	if v, ok := d.GetOk("inventory_parent"); ok {
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetInventoryParent(x)
+		}
+	}
+
 	if v, ok := d.GetOk("ipv4_address"); ok {
 		x := (v.(string))
 		o.SetIpv4Address(x)
@@ -1171,11 +1239,6 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetPartNumber(x)
 	}
 
-	if v, ok := d.GetOkExists("peer_firmware_out_of_sync"); ok {
-		x := (v.(bool))
-		o.SetPeerFirmwareOutOfSync(x)
-	}
-
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1362,11 +1425,6 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetTotalMemory(x)
 	}
 
-	if v, ok := d.GetOk("user_label"); ok {
-		x := (v.(string))
-		o.SetUserLabel(x)
-	}
-
 	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
@@ -1520,6 +1578,8 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["inband_ip_mask"] = (s.GetInbandIpMask())
 				temp["inband_vlan"] = (s.GetInbandVlan())
 				temp["inter_cluster_link_state"] = (s.GetInterClusterLinkState())
+
+				temp["inventory_parent"] = flattenMapMoBaseMoRelationship(s.GetInventoryParent(), d)
 				temp["ipv4_address"] = (s.GetIpv4Address())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 				temp["management_mode"] = (s.GetManagementMode())
@@ -1552,7 +1612,6 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 				temp["part_number"] = (s.GetPartNumber())
-				temp["peer_firmware_out_of_sync"] = (s.GetPeerFirmwareOutOfSync())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["presence"] = (s.GetPresence())
@@ -1573,7 +1632,6 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["thermal"] = (s.GetThermal())
 				temp["total_memory"] = (s.GetTotalMemory())
-				temp["user_label"] = (s.GetUserLabel())
 				temp["vendor"] = (s.GetVendor())
 				temp["nr_version"] = (s.GetVersion())
 
