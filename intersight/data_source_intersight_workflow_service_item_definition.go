@@ -267,6 +267,11 @@ func getWorkflowServiceItemDefinitionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"create_user": {
+			Description: "The user identifier who created or cloned the service item definition.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"cvd_id": {
 			Description: "The Cisco Validated Design (CVD) Identifier that this service item provides.",
 			Type:        schema.TypeString,
@@ -299,6 +304,11 @@ func getWorkflowServiceItemDefinitionSchema() map[string]*schema.Schema {
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mod_user": {
+			Description: "The user identifier who last updated the service item definition.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -392,7 +402,7 @@ func getWorkflowServiceItemDefinitionSchema() map[string]*schema.Schema {
 			},
 		},
 		"publish_status": {
-			Description: "Publish status of the service item.\n* `NotPublished` - A state of the service item or catalog item which is not yet published.\n* `Published` - A state denoting that the service item or catalog item is published.",
+			Description: "The publish status of service item (Draft, Published, Archived).\n* `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested.\n* `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption.\n* `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -435,7 +445,7 @@ func getWorkflowServiceItemDefinitionSchema() map[string]*schema.Schema {
 			},
 		},
 		"user_id_or_email": {
-			Description: "The user identifier who created or updated the service item definition.",
+			Description: "This attribute is deprecated and replaced by createUser and modUser.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -960,6 +970,11 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("create_user"); ok {
+		x := (v.(string))
+		o.SetCreateUser(x)
+	}
+
 	if v, ok := d.GetOk("cvd_id"); ok {
 		x := (v.(string))
 		o.SetCvdId(x)
@@ -993,6 +1008,11 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
+	}
+
+	if v, ok := d.GetOk("mod_user"); ok {
+		x := (v.(string))
+		o.SetModUser(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -1352,6 +1372,7 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["create_user"] = (s.GetCreateUser())
 				temp["cvd_id"] = (s.GetCvdId())
 				temp["delete_instance_on_decommission"] = (s.GetDeleteInstanceOnDecommission())
 				temp["description"] = (s.GetDescription())
@@ -1360,6 +1381,7 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 				temp["license_entitlement"] = (s.GetLicenseEntitlement())
 
 				temp["mod_time"] = (s.GetModTime()).String()
+				temp["mod_user"] = (s.GetModUser())
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())

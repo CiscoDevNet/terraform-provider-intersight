@@ -884,6 +884,13 @@ func resourceFirmwareSwitchUpgrade() *schema.Resource {
 				Optional:    true,
 				ForceNew:    true,
 			},
+			"skip_wait_for_io_path_connectivity": {
+				Description: "The flag to enable or disable the option to wait for IO paths connectivity during the switch firmware upgrade.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+				ForceNew:    true,
+			},
 			"status": {
 				Description:  "Status of the upgrade operation.\n* `NONE` - Upgrade status is not populated.\n* `IN_PROGRESS` - The upgrade is in progress.\n* `SUCCESSFUL` - The upgrade successfully completed.\n* `FAILED` - The upgrade shows failed status.\n* `TERMINATED` - The upgrade has been terminated.",
 				Type:         schema.TypeString,
@@ -1677,6 +1684,11 @@ func resourceFirmwareSwitchUpgradeCreate(c context.Context, d *schema.ResourceDa
 		o.SetSkipEstimateImpact(x)
 	}
 
+	if v, ok := d.GetOkExists("skip_wait_for_io_path_connectivity"); ok {
+		x := (v.(bool))
+		o.SetSkipWaitForIoPathConnectivity(x)
+	}
+
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
@@ -1854,6 +1866,10 @@ func resourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("skip_estimate_impact", (s.GetSkipEstimateImpact())); err != nil {
 		return diag.Errorf("error occurred while setting property SkipEstimateImpact in FirmwareSwitchUpgrade object: %s", err.Error())
+	}
+
+	if err := d.Set("skip_wait_for_io_path_connectivity", (s.GetSkipWaitForIoPathConnectivity())); err != nil {
+		return diag.Errorf("error occurred while setting property SkipWaitForIoPathConnectivity in FirmwareSwitchUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("status", (s.GetStatus())); err != nil {

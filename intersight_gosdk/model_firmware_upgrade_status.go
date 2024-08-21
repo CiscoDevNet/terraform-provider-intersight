@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17227
+API version: 1.0.11-17956
 Contact: intersight@cisco.com
 */
 
@@ -38,6 +38,8 @@ type FirmwareUpgradeStatus struct {
 	EpPowerStatus *string `json:"EpPowerStatus,omitempty"`
 	// The server power status before the upgrade request is submitted in the endpoint. * `none` - Server power status is none. * `powered on` - Server power status is powered on. * `powered off` - Server power status is powered off.
 	InitialPowerStatus *string `json:"InitialPowerStatus,omitempty"`
+	// A boolean flag which indicates that the generated pre-signed url is not a CDN URL when set to true.
+	IsCdnDisabled *bool `json:"IsCdnDisabled,omitempty"`
 	// The reason for the operation failure.
 	OverallError *string `json:"OverallError,omitempty"`
 	// The overall percentage of the operation.
@@ -314,6 +316,38 @@ func (o *FirmwareUpgradeStatus) HasInitialPowerStatus() bool {
 // SetInitialPowerStatus gets a reference to the given string and assigns it to the InitialPowerStatus field.
 func (o *FirmwareUpgradeStatus) SetInitialPowerStatus(v string) {
 	o.InitialPowerStatus = &v
+}
+
+// GetIsCdnDisabled returns the IsCdnDisabled field value if set, zero value otherwise.
+func (o *FirmwareUpgradeStatus) GetIsCdnDisabled() bool {
+	if o == nil || IsNil(o.IsCdnDisabled) {
+		var ret bool
+		return ret
+	}
+	return *o.IsCdnDisabled
+}
+
+// GetIsCdnDisabledOk returns a tuple with the IsCdnDisabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareUpgradeStatus) GetIsCdnDisabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsCdnDisabled) {
+		return nil, false
+	}
+	return o.IsCdnDisabled, true
+}
+
+// HasIsCdnDisabled returns a boolean if a field has been set.
+func (o *FirmwareUpgradeStatus) HasIsCdnDisabled() bool {
+	if o != nil && !IsNil(o.IsCdnDisabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsCdnDisabled gets a reference to the given bool and assigns it to the IsCdnDisabled field.
+func (o *FirmwareUpgradeStatus) SetIsCdnDisabled(v bool) {
+	o.IsCdnDisabled = &v
 }
 
 // GetOverallError returns the OverallError field value if set, zero value otherwise.
@@ -667,6 +701,9 @@ func (o FirmwareUpgradeStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InitialPowerStatus) {
 		toSerialize["InitialPowerStatus"] = o.InitialPowerStatus
 	}
+	if !IsNil(o.IsCdnDisabled) {
+		toSerialize["IsCdnDisabled"] = o.IsCdnDisabled
+	}
 	if !IsNil(o.OverallError) {
 		toSerialize["OverallError"] = o.OverallError
 	}
@@ -759,6 +796,8 @@ func (o *FirmwareUpgradeStatus) UnmarshalJSON(data []byte) (err error) {
 		EpPowerStatus *string `json:"EpPowerStatus,omitempty"`
 		// The server power status before the upgrade request is submitted in the endpoint. * `none` - Server power status is none. * `powered on` - Server power status is powered on. * `powered off` - Server power status is powered off.
 		InitialPowerStatus *string `json:"InitialPowerStatus,omitempty"`
+		// A boolean flag which indicates that the generated pre-signed url is not a CDN URL when set to true.
+		IsCdnDisabled *bool `json:"IsCdnDisabled,omitempty"`
 		// The reason for the operation failure.
 		OverallError *string `json:"OverallError,omitempty"`
 		// The overall percentage of the operation.
@@ -789,6 +828,7 @@ func (o *FirmwareUpgradeStatus) UnmarshalJSON(data []byte) (err error) {
 		varFirmwareUpgradeStatus.DownloadStage = varFirmwareUpgradeStatusWithoutEmbeddedStruct.DownloadStage
 		varFirmwareUpgradeStatus.EpPowerStatus = varFirmwareUpgradeStatusWithoutEmbeddedStruct.EpPowerStatus
 		varFirmwareUpgradeStatus.InitialPowerStatus = varFirmwareUpgradeStatusWithoutEmbeddedStruct.InitialPowerStatus
+		varFirmwareUpgradeStatus.IsCdnDisabled = varFirmwareUpgradeStatusWithoutEmbeddedStruct.IsCdnDisabled
 		varFirmwareUpgradeStatus.OverallError = varFirmwareUpgradeStatusWithoutEmbeddedStruct.OverallError
 		varFirmwareUpgradeStatus.OverallPercentage = varFirmwareUpgradeStatusWithoutEmbeddedStruct.OverallPercentage
 		varFirmwareUpgradeStatus.Overallstatus = varFirmwareUpgradeStatusWithoutEmbeddedStruct.Overallstatus
@@ -822,6 +862,7 @@ func (o *FirmwareUpgradeStatus) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "DownloadStage")
 		delete(additionalProperties, "EpPowerStatus")
 		delete(additionalProperties, "InitialPowerStatus")
+		delete(additionalProperties, "IsCdnDisabled")
 		delete(additionalProperties, "OverallError")
 		delete(additionalProperties, "OverallPercentage")
 		delete(additionalProperties, "Overallstatus")

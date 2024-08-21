@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.RemoteKeySetting"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.RemoteKeySetting"]
 **AuthCredentials** | Pointer to [**NullableStorageKmipAuthCredentials**](StorageKmipAuthCredentials.md) |  | [optional] 
+**ExistingKey** | Pointer to **string** | Current Security Key Passphrase which is already configured on the server. | [optional] 
 **IsExistingKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;existingKey&#39; property has been set. | [optional] [readonly] [default to false]
 **PrimaryServer** | Pointer to [**NullableStorageKmipServer**](StorageKmipServer.md) |  | [optional] 
 **SecondaryServer** | Pointer to [**NullableStorageKmipServer**](StorageKmipServer.md) |  | [optional] 
@@ -106,6 +107,31 @@ HasAuthCredentials returns a boolean if a field has been set.
 `func (o *StorageRemoteKeySetting) UnsetAuthCredentials()`
 
 UnsetAuthCredentials ensures that no value is present for AuthCredentials, not even an explicit nil
+### GetExistingKey
+
+`func (o *StorageRemoteKeySetting) GetExistingKey() string`
+
+GetExistingKey returns the ExistingKey field if non-nil, zero value otherwise.
+
+### GetExistingKeyOk
+
+`func (o *StorageRemoteKeySetting) GetExistingKeyOk() (*string, bool)`
+
+GetExistingKeyOk returns a tuple with the ExistingKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExistingKey
+
+`func (o *StorageRemoteKeySetting) SetExistingKey(v string)`
+
+SetExistingKey sets ExistingKey field to given value.
+
+### HasExistingKey
+
+`func (o *StorageRemoteKeySetting) HasExistingKey() bool`
+
+HasExistingKey returns a boolean if a field has been set.
+
 ### GetIsExistingKeySet
 
 `func (o *StorageRemoteKeySetting) GetIsExistingKeySet() bool`

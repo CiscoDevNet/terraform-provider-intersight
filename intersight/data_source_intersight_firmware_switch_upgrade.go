@@ -613,6 +613,11 @@ func getFirmwareSwitchUpgradeSchema() map[string]*schema.Schema {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"skip_wait_for_io_path_connectivity": {
+			Description: "The flag to enable or disable the option to wait for IO paths connectivity during the switch firmware upgrade.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"status": {
 			Description: "Status of the upgrade operation.\n* `NONE` - Upgrade status is not populated.\n* `IN_PROGRESS` - The upgrade is in progress.\n* `SUCCESSFUL` - The upgrade successfully completed.\n* `FAILED` - The upgrade shows failed status.\n* `TERMINATED` - The upgrade has been terminated.",
 			Type:        schema.TypeString,
@@ -1530,6 +1535,11 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 		o.SetSkipEstimateImpact(x)
 	}
 
+	if v, ok := d.GetOkExists("skip_wait_for_io_path_connectivity"); ok {
+		x := (v.(bool))
+		o.SetSkipWaitForIoPathConnectivity(x)
+	}
+
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
@@ -1802,6 +1812,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 				temp["release"] = flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["skip_estimate_impact"] = (s.GetSkipEstimateImpact())
+				temp["skip_wait_for_io_path_connectivity"] = (s.GetSkipWaitForIoPathConnectivity())
 				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | A unique descriptive name of the exemption. | [optional] 
 **OsVendor** | Pointer to **string** | Vendor of the Operating System. | [optional] 
 **OsVersion** | Pointer to **string** | Version of the Operating system. | [optional] 
+**Personality** | Pointer to **string** | It indicates the personality of the sever. | [optional] 
 **ProcessorName** | Pointer to **string** | Name of the processor supported for the server. | [optional] 
 **ProductModels** | Pointer to **[]string** |  | [optional] 
 **ProductType** | Pointer to **string** | Type of the product/adapter say GPU for graphic cards. * &#x60;&#x60; - Default type of the Product. * &#x60;Adapter&#x60; - Represents network adapter cards. * &#x60;StorageController&#x60; - Represents storage controllers. * &#x60;GPU&#x60; - Represents graphics cards. | [optional] [default to ""]
@@ -175,6 +176,31 @@ SetOsVersion sets OsVersion field to given value.
 `func (o *HclExemptedCatalog) HasOsVersion() bool`
 
 HasOsVersion returns a boolean if a field has been set.
+
+### GetPersonality
+
+`func (o *HclExemptedCatalog) GetPersonality() string`
+
+GetPersonality returns the Personality field if non-nil, zero value otherwise.
+
+### GetPersonalityOk
+
+`func (o *HclExemptedCatalog) GetPersonalityOk() (*string, bool)`
+
+GetPersonalityOk returns a tuple with the Personality field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPersonality
+
+`func (o *HclExemptedCatalog) SetPersonality(v string)`
+
+SetPersonality sets Personality field to given value.
+
+### HasPersonality
+
+`func (o *HclExemptedCatalog) HasPersonality() bool`
+
+HasPersonality returns a boolean if a field has been set.
 
 ### GetProcessorName
 

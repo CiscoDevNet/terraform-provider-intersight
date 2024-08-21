@@ -150,6 +150,11 @@ func getFabricAppliancePcRoleSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"fec": {
+			Description: "Forward error correction configuration for Appliance Port Channel member ports.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"link_aggregation_policy": {
 			Description: "A reference to a fabricLinkAggregationPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -685,6 +690,11 @@ func dataSourceFabricAppliancePcRoleRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOk("fec"); ok {
+		x := (v.(string))
+		o.SetFec(x)
+	}
+
 	if v, ok := d.GetOk("link_aggregation_policy"); ok {
 		p := make([]models.FabricLinkAggregationPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1101,6 +1111,7 @@ func dataSourceFabricAppliancePcRoleRead(c context.Context, d *schema.ResourceDa
 				temp["eth_network_control_policy"] = flattenMapFabricEthNetworkControlPolicyRelationship(s.GetEthNetworkControlPolicy(), d)
 
 				temp["eth_network_group_policy"] = flattenMapFabricEthNetworkGroupPolicyRelationship(s.GetEthNetworkGroupPolicy(), d)
+				temp["fec"] = (s.GetFec())
 
 				temp["link_aggregation_policy"] = flattenMapFabricLinkAggregationPolicyRelationship(s.GetLinkAggregationPolicy(), d)
 

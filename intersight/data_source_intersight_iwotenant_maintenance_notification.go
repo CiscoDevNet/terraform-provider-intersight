@@ -16,11 +16,46 @@ import (
 
 func getIwotenantMaintenanceNotificationSchema() map[string]*schema.Schema {
 	var schemaMap = make(map[string]*schema.Schema)
-	schemaMap = map[string]*schema.Schema{"account_moid": {
-		Description: "The Account ID for this managed object.",
-		Type:        schema.TypeString,
+	schemaMap = map[string]*schema.Schema{"account": {
+		Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		Type:        schema.TypeList,
+		MaxItems:    1,
 		Optional:    true,
+		Elem: &schema.Resource{
+			Schema: map[string]*schema.Schema{
+				"additional_properties": {
+					Type:             schema.TypeString,
+					Optional:         true,
+					DiffSuppressFunc: SuppressDiffAdditionProps,
+				},
+				"class_id": {
+					Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"moid": {
+					Description: "The Moid of the referenced REST resource.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"object_type": {
+					Description: "The fully-qualified name of the remote type referred by this relationship.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+				"selector": {
+					Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+					Type:        schema.TypeString,
+					Optional:    true,
+				},
+			},
+		},
 	},
+		"account_moid": {
+			Description: "The Account ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -357,6 +392,49 @@ func dataSourceIwotenantMaintenanceNotificationRead(c context.Context, d *schema
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IwotenantMaintenanceNotification{}
+	if v, ok := d.GetOk("account"); ok {
+		p := make([]models.IamAccountRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamAccountRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAccount(x)
+		}
+	}
+
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
@@ -712,6 +790,8 @@ func dataSourceIwotenantMaintenanceNotificationRead(c context.Context, d *schema
 			for k := 0; k < len(results); k++ {
 				var s = results[k]
 				var temp = make(map[string]interface{})
+
+				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 

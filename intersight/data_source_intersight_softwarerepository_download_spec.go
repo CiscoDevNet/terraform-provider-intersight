@@ -65,6 +65,11 @@ func getSoftwarerepositoryDownloadSpecSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cdn_disabled": {
+			Description: "A boolean flag which indicates that the generated pre-signed url is not a CDN URL. An URL to Intersight storage source will be returned with the old domain name. This flag should be used when the  pre-signed CDN URL is not accessible from endpoint/appliance.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"certificate": {
 			Description: "The certificate of file server that will be used by the endpoint to validate the server before starting the file download.",
 			Type:        schema.TypeString,
@@ -451,6 +456,11 @@ func dataSourceSoftwarerepositoryDownloadSpecRead(c context.Context, d *schema.R
 		o.SetAuthToken(x)
 	}
 
+	if v, ok := d.GetOkExists("cdn_disabled"); ok {
+		x := (v.(bool))
+		o.SetCdnDisabled(x)
+	}
+
 	if v, ok := d.GetOk("certificate"); ok {
 		x := (v.(string))
 		o.SetCertificate(x)
@@ -795,6 +805,7 @@ func dataSourceSoftwarerepositoryDownloadSpecRead(c context.Context, d *schema.R
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["auth_token"] = (s.GetAuthToken())
+				temp["cdn_disabled"] = (s.GetCdnDisabled())
 				temp["certificate"] = (s.GetCertificate())
 				temp["class_id"] = (s.GetClassId())
 

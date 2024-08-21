@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.R0Drive"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.R0Drive"]
 **DriveSlots** | Pointer to **string** | The set of drive slots where RAID0 virtual drives must be created. | [optional] 
-**DriveSlotsList** | Pointer to **string** | The list of drive slots where RAID0 virtual drives must be created (comma seperated). | [optional] [readonly] 
+**DriveSlotsList** | Pointer to **string** | The list of drive slots where RAID0 virtual drives must be created (comma separated). | [optional] [readonly] 
 **Enable** | Pointer to **bool** | If enabled, this will create a RAID0 virtual drive per disk and encompassing the whole disk. | [optional] [default to false]
 **VirtualDrivePolicy** | Pointer to [**NullableStorageVirtualDrivePolicy**](StorageVirtualDrivePolicy.md) |  | [optional] 
 

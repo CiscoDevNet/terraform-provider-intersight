@@ -32,7 +32,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"alarm_summary": {
-			Description: "The summary of alarm counts based on the severity types (Critical or Warning).",
+			Description: "The summary of alarm counts based on alarm serverity.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -136,7 +136,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"available_memory": {
-			Description: "The amount of memory available on the server.",
+			Description: "Total memeory of the server in MB.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -161,7 +161,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"cpu_capacity": {
-			Description: "CPU Capacity = Number of CPU Sockets x Enabled Cores x Speed (GHz).",
+			Description: "Total processing capacity of the server.",
 			Type:        schema.TypeFloat,
 			Optional:    true,
 		},
@@ -171,7 +171,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"device_mo_id": {
-			Description: "The database identifier of the registered device of an object.",
+			Description: "The MoId of the registered device that coresponds to the server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -242,6 +242,41 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 		},
 		"inventory_device_info": {
 			Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"inventory_parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -374,7 +409,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"nr_lifecycle": {
-			Description: "The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.",
+			Description: "The lifecycle of the blade server.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `SecureEraseInProgress` - Secure Erase is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -399,7 +434,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"model": {
-			Description: "This field displays the model number of the associated component or hardware.",
+			Description: "This field identifies the model of the given component.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -419,7 +454,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"num_cpu_cores": {
-			Description: "The total number of CPU cores present on the server.",
+			Description: "The total number of CPU cores enabled on the server.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -479,7 +514,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
 		"package_version": {
-			Description: "The package version of the Host Service Utility (HSU) for this server.",
+			Description: "Bundle version which the firmware belongs to.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -553,7 +588,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			},
 		},
 		"personality": {
-			Description: "The Rack unit software Personality.",
+			Description: "Unique identity of added software personality.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -563,7 +598,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"presence": {
-			Description: "This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.",
+			Description: "This field identifies the presence (equipped) or absence of the given component.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -603,7 +638,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			},
 		},
 		"revision": {
-			Description: "This field displays the revised version of the associated component or hardware (if any).",
+			Description: "This field identifies the revision of the given component.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -618,7 +653,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"serial": {
-			Description: "This field displays the serial number of the associated component or hardware.",
+			Description: "This field identifies the serial of the given component.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -643,7 +678,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"source_object_type": {
-			Description: "The source object type of this view MO.",
+			Description: "Stores the source object type. This feild will either be RackUnit or Blade.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -696,7 +731,7 @@ func getComputePhysicalSummarySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"vendor": {
-			Description: "This field displays the vendor information of the associated component or hardware.",
+			Description: "This field identifies the vendor of the given component.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1083,6 +1118,49 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		if len(p) > 0 {
 			x := p[0]
 			o.SetInventoryDeviceInfo(x)
+		}
+	}
+
+	if v, ok := d.GetOk("inventory_parent"); ok {
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetInventoryParent(x)
 		}
 	}
 
@@ -1641,6 +1719,8 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 				temp["hardware_uuid"] = (s.GetHardwareUuid())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
+
+				temp["inventory_parent"] = flattenMapMoBaseMoRelationship(s.GetInventoryParent(), d)
 				temp["ipv4_address"] = (s.GetIpv4Address())
 				temp["is_upgraded"] = (s.GetIsUpgraded())
 

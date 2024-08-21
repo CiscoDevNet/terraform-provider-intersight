@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17227
+API version: 1.0.11-17956
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,9 @@ type FabricFcoeUplinkPcRole struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Admin configured speed for the port. * `Auto` - Admin configurable speed AUTO ( default ). * `1Gbps` - Admin configurable speed 1Gbps. * `10Gbps` - Admin configurable speed 10Gbps. * `25Gbps` - Admin configurable speed 25Gbps. * `40Gbps` - Admin configurable speed 40Gbps. * `100Gbps` - Admin configurable speed 100Gbps. * `NegAuto25Gbps` - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108.
-	AdminSpeed            *string                                         `json:"AdminSpeed,omitempty"`
+	AdminSpeed *string `json:"AdminSpeed,omitempty"`
+	// Forward error correction configuration for Fcoe Uplink Port Channel member ports. * `Auto` - Forward error correction option 'Auto'. * `Cl91` - Forward error correction option 'cl91'. * `Cl74` - Forward error correction option 'cl74'.
+	Fec                   *string                                         `json:"Fec,omitempty"`
 	LinkAggregationPolicy NullableFabricLinkAggregationPolicyRelationship `json:"LinkAggregationPolicy,omitempty"`
 	LinkControlPolicy     NullableFabricLinkControlPolicyRelationship     `json:"LinkControlPolicy,omitempty"`
 	AdditionalProperties  map[string]interface{}
@@ -47,6 +49,8 @@ func NewFabricFcoeUplinkPcRole(classId string, objectType string) *FabricFcoeUpl
 	this.ObjectType = objectType
 	var adminSpeed string = "Auto"
 	this.AdminSpeed = &adminSpeed
+	var fec string = "Auto"
+	this.Fec = &fec
 	return &this
 }
 
@@ -61,6 +65,8 @@ func NewFabricFcoeUplinkPcRoleWithDefaults() *FabricFcoeUplinkPcRole {
 	this.ObjectType = objectType
 	var adminSpeed string = "Auto"
 	this.AdminSpeed = &adminSpeed
+	var fec string = "Auto"
+	this.Fec = &fec
 	return &this
 }
 
@@ -152,6 +158,38 @@ func (o *FabricFcoeUplinkPcRole) HasAdminSpeed() bool {
 // SetAdminSpeed gets a reference to the given string and assigns it to the AdminSpeed field.
 func (o *FabricFcoeUplinkPcRole) SetAdminSpeed(v string) {
 	o.AdminSpeed = &v
+}
+
+// GetFec returns the Fec field value if set, zero value otherwise.
+func (o *FabricFcoeUplinkPcRole) GetFec() string {
+	if o == nil || IsNil(o.Fec) {
+		var ret string
+		return ret
+	}
+	return *o.Fec
+}
+
+// GetFecOk returns a tuple with the Fec field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricFcoeUplinkPcRole) GetFecOk() (*string, bool) {
+	if o == nil || IsNil(o.Fec) {
+		return nil, false
+	}
+	return o.Fec, true
+}
+
+// HasFec returns a boolean if a field has been set.
+func (o *FabricFcoeUplinkPcRole) HasFec() bool {
+	if o != nil && !IsNil(o.Fec) {
+		return true
+	}
+
+	return false
+}
+
+// SetFec gets a reference to the given string and assigns it to the Fec field.
+func (o *FabricFcoeUplinkPcRole) SetFec(v string) {
+	o.Fec = &v
 }
 
 // GetLinkAggregationPolicy returns the LinkAggregationPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -269,6 +307,9 @@ func (o FabricFcoeUplinkPcRole) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AdminSpeed) {
 		toSerialize["AdminSpeed"] = o.AdminSpeed
 	}
+	if !IsNil(o.Fec) {
+		toSerialize["Fec"] = o.Fec
+	}
 	if o.LinkAggregationPolicy.IsSet() {
 		toSerialize["LinkAggregationPolicy"] = o.LinkAggregationPolicy.Get()
 	}
@@ -331,7 +372,9 @@ func (o *FabricFcoeUplinkPcRole) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Admin configured speed for the port. * `Auto` - Admin configurable speed AUTO ( default ). * `1Gbps` - Admin configurable speed 1Gbps. * `10Gbps` - Admin configurable speed 10Gbps. * `25Gbps` - Admin configurable speed 25Gbps. * `40Gbps` - Admin configurable speed 40Gbps. * `100Gbps` - Admin configurable speed 100Gbps. * `NegAuto25Gbps` - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108.
-		AdminSpeed            *string                                         `json:"AdminSpeed,omitempty"`
+		AdminSpeed *string `json:"AdminSpeed,omitempty"`
+		// Forward error correction configuration for Fcoe Uplink Port Channel member ports. * `Auto` - Forward error correction option 'Auto'. * `Cl91` - Forward error correction option 'cl91'. * `Cl74` - Forward error correction option 'cl74'.
+		Fec                   *string                                         `json:"Fec,omitempty"`
 		LinkAggregationPolicy NullableFabricLinkAggregationPolicyRelationship `json:"LinkAggregationPolicy,omitempty"`
 		LinkControlPolicy     NullableFabricLinkControlPolicyRelationship     `json:"LinkControlPolicy,omitempty"`
 	}
@@ -344,6 +387,7 @@ func (o *FabricFcoeUplinkPcRole) UnmarshalJSON(data []byte) (err error) {
 		varFabricFcoeUplinkPcRole.ClassId = varFabricFcoeUplinkPcRoleWithoutEmbeddedStruct.ClassId
 		varFabricFcoeUplinkPcRole.ObjectType = varFabricFcoeUplinkPcRoleWithoutEmbeddedStruct.ObjectType
 		varFabricFcoeUplinkPcRole.AdminSpeed = varFabricFcoeUplinkPcRoleWithoutEmbeddedStruct.AdminSpeed
+		varFabricFcoeUplinkPcRole.Fec = varFabricFcoeUplinkPcRoleWithoutEmbeddedStruct.Fec
 		varFabricFcoeUplinkPcRole.LinkAggregationPolicy = varFabricFcoeUplinkPcRoleWithoutEmbeddedStruct.LinkAggregationPolicy
 		varFabricFcoeUplinkPcRole.LinkControlPolicy = varFabricFcoeUplinkPcRoleWithoutEmbeddedStruct.LinkControlPolicy
 		*o = FabricFcoeUplinkPcRole(varFabricFcoeUplinkPcRole)
@@ -366,6 +410,7 @@ func (o *FabricFcoeUplinkPcRole) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminSpeed")
+		delete(additionalProperties, "Fec")
 		delete(additionalProperties, "LinkAggregationPolicy")
 		delete(additionalProperties, "LinkControlPolicy")
 

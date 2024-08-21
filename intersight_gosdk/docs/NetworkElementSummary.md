@@ -14,13 +14,13 @@ Name | Type | Description | Notes
 **Chassis** | Pointer to **string** | Chassis IP of the switch. | [optional] [readonly] 
 **ConfModTs** | Pointer to **string** | Configuration modified timestamp of the switch. | [optional] [readonly] 
 **ConfModTsBackup** | Pointer to **string** | Configuration modified backup timestamp of the switch. | [optional] [readonly] 
-**ConnectionStatus** | Pointer to **string** | Connection status of the switch. | [optional] [readonly] 
-**DefaultDomain** | Pointer to **string** | The default domain name configured on the switch. | [optional] [readonly] 
-**DeviceMoId** | Pointer to **string** | The database identifier of the registered device of an object. | [optional] [readonly] 
+**ConnectionStatus** | Pointer to **string** | Connection status of the switch. | [optional] 
+**DefaultDomain** | Pointer to **string** | The default domain name configured on the switch. | [optional] 
+**DeviceMoId** | Pointer to **string** | The MoId of the registered device that coresponds to the server. | [optional] [readonly] 
 **Dn** | Pointer to **string** | The Distinguished Name unambiguously identifies an object in the system. | [optional] [readonly] 
 **EthernetMode** | Pointer to **string** | The user configured Ethernet operational mode for this switch (End-Host or Switching). | [optional] [readonly] 
 **EthernetSwitchingMode** | Pointer to **string** | The user configured Ethernet operational mode for this switch (End-Host or Switching). * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [readonly] [default to "end-host"]
-**FaultSummary** | Pointer to **int64** | The fault summary of the network Element out-of-band management interface. | [optional] [readonly] 
+**FaultSummary** | Pointer to **int64** | The fault summary for the server. | [optional] [readonly] 
 **FcMode** | Pointer to **string** | The user configured FC operational mode for this switch (End-Host or Switching). | [optional] [readonly] 
 **FcSwitchingMode** | Pointer to **string** | The user configured FC operational mode for this switch (End-Host or Switching). * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [readonly] [default to "end-host"]
 **Firmware** | Pointer to **string** | Running firmware information. | [optional] [readonly] 
@@ -32,10 +32,10 @@ Name | Type | Description | Notes
 **InbandVlan** | Pointer to **int64** | The VLAN ID of the network Element inband management interface. | [optional] [readonly] 
 **InterClusterLinkState** | Pointer to **string** | The intercluster link state of the switch. * &#x60;Unknown&#x60; - The operational state of the link is not known. * &#x60;Up&#x60; - The operational state of the link is up. * &#x60;Down&#x60; - The operational state of the link is down. * &#x60;Degraded&#x60; - The link is operational but degraded. This state is applicable to port channels when any one of the member links is down. | [optional] [readonly] [default to "Unknown"]
 **Ipv4Address** | Pointer to **string** | IP version 4 address is saved in this property. | [optional] [readonly] 
-**IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] [default to false]
+**IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] 
 **ManagementMode** | Pointer to **string** | The management mode of the fabric interconnect. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
-**Model** | Pointer to **string** | This field displays the model number of the associated component or hardware. | [optional] [readonly] 
-**Name** | Pointer to **string** | Name of the ElementSummary object is saved in this property. | [optional] [readonly] 
+**Model** | Pointer to **string** | This field identifies the model of the given component. | [optional] [readonly] 
+**Name** | Pointer to **string** | The admin configured name of the system. | [optional] [readonly] 
 **NumEtherPorts** | Pointer to **int64** | Total number of Ethernet ports. | [optional] [readonly] 
 **NumEtherPortsConfigured** | Pointer to **int64** | Total number of configured Ethernet ports. | [optional] [readonly] 
 **NumEtherPortsLinkUp** | Pointer to **int64** | Total number of Ethernet ports which are UP. | [optional] [readonly] 
@@ -55,24 +55,23 @@ Name | Type | Description | Notes
 **OutOfBandIpv6Gateway** | Pointer to **string** | The default IPv6 gateway of the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandIpv6Prefix** | Pointer to **string** | The network mask of the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandMac** | Pointer to **string** | The MAC address of the network Element out-of-band management interface. | [optional] [readonly] 
-**PartNumber** | Pointer to **string** | Part number of the switch. | [optional] [readonly] 
-**PeerFirmwareOutOfSync** | Pointer to **bool** | The flag to indicate the firmware of peer Fabric Interconnect is out of sync. | [optional] [readonly] 
-**Presence** | Pointer to **string** | This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. | [optional] [readonly] 
+**PartNumber** | Pointer to **string** | Part number of the switch. | [optional] 
+**Presence** | Pointer to **string** | This field identifies the presence (equipped) or absence of the given component. | [optional] [readonly] 
 **ReservedVlanStartId** | Pointer to **int64** | The reserved VLAN start ID of the Network Element. A block of 128 VLANs are reserved for internal use and cannot be used for carrying network traffic. | [optional] [readonly] 
-**Revision** | Pointer to **string** | This field displays the revised version of the associated component or hardware (if any). | [optional] [readonly] 
+**Revision** | Pointer to **string** | The product revision of the switch. | [optional] [readonly] 
 **Rn** | Pointer to **string** | The Relative Name uniquely identifies an object within a given context. | [optional] [readonly] 
-**Serial** | Pointer to **string** | This field displays the serial number of the associated component or hardware. | [optional] [readonly] 
-**SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
-**Status** | Pointer to **string** | The status of the switch. | [optional] [readonly] 
+**Serial** | Pointer to **string** | This field identifies the serial of the given component. | [optional] [readonly] 
+**SourceObjectType** | Pointer to **string** | Stores the source object type used to fill the properties of this object. | [optional] [readonly] 
+**Status** | Pointer to **string** | The status of the switch. | [optional] 
 **SwitchId** | Pointer to **string** | The Switch Id of the network Element. | [optional] [readonly] 
 **SwitchProfileName** | Pointer to **string** | The name of switch profile associated with the switch. | [optional] [readonly] 
 **SwitchType** | Pointer to **string** | The Switch type that the network element is a part of. * &#x60;FabricInterconnect&#x60; - The default Switch type of UCSM and IMM mode devices. * &#x60;NexusDevice&#x60; - Switch type of Nexus devices. * &#x60;MDSDevice&#x60; - Switch type of Nexus MDS devices. | [optional] [readonly] [default to "FabricInterconnect"]
-**SystemUpTime** | Pointer to **string** | System up time of the switch. | [optional] [readonly] 
-**Thermal** | Pointer to **string** | The Thermal status of the fabric interconnect. * &#x60;unknown&#x60; - The default state of the sensor (in case no data is received). * &#x60;ok&#x60; - State of the sensor indicating the sensor&#39;s temperature range is okay. * &#x60;upper-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely high above normal range. * &#x60;upper-critical&#x60; - State of the sensor indicating that the temperature is above normal range. * &#x60;upper-non-critical&#x60; - State of the sensor indicating that the temperature is a little above the normal range. * &#x60;lower-non-critical&#x60; - State of the sensor indicating that the temperature is a little below the normal range. * &#x60;lower-critical&#x60; - State of the sensor indicating that the temperature is below normal range. * &#x60;lower-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely below normal range. | [optional] [readonly] [default to "unknown"]
+**SystemUpTime** | Pointer to **string** | System up time of the switch. | [optional] 
+**Thermal** | Pointer to **string** | The Thermal status of the fabric interconnect. * &#x60;unknown&#x60; - The default state of the sensor (in case no data is received). * &#x60;ok&#x60; - State of the sensor indicating the sensor&#39;s temperature range is okay. * &#x60;upper-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely high above normal range. * &#x60;upper-critical&#x60; - State of the sensor indicating that the temperature is above normal range. * &#x60;upper-non-critical&#x60; - State of the sensor indicating that the temperature is a little above the normal range. * &#x60;lower-non-critical&#x60; - State of the sensor indicating that the temperature is a little below the normal range. * &#x60;lower-critical&#x60; - State of the sensor indicating that the temperature is below normal range. * &#x60;lower-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely below normal range. | [optional] [default to "unknown"]
 **TotalMemory** | Pointer to **int64** | Total available memory on this switch platform. | [optional] [readonly] 
-**UserLabel** | Pointer to **string** | The user defined label assigned to the switch. | [optional] [readonly] 
-**Vendor** | Pointer to **string** | This field displays the vendor information of the associated component or hardware. | [optional] [readonly] 
-**Version** | Pointer to **string** | Version holds the firmware version related information. | [optional] [readonly] 
+**Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
+**Version** | Pointer to **string** | Firmware version of the switch. | [optional] [readonly] 
+**InventoryParent** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -1394,31 +1393,6 @@ SetPartNumber sets PartNumber field to given value.
 
 HasPartNumber returns a boolean if a field has been set.
 
-### GetPeerFirmwareOutOfSync
-
-`func (o *NetworkElementSummary) GetPeerFirmwareOutOfSync() bool`
-
-GetPeerFirmwareOutOfSync returns the PeerFirmwareOutOfSync field if non-nil, zero value otherwise.
-
-### GetPeerFirmwareOutOfSyncOk
-
-`func (o *NetworkElementSummary) GetPeerFirmwareOutOfSyncOk() (*bool, bool)`
-
-GetPeerFirmwareOutOfSyncOk returns a tuple with the PeerFirmwareOutOfSync field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPeerFirmwareOutOfSync
-
-`func (o *NetworkElementSummary) SetPeerFirmwareOutOfSync(v bool)`
-
-SetPeerFirmwareOutOfSync sets PeerFirmwareOutOfSync field to given value.
-
-### HasPeerFirmwareOutOfSync
-
-`func (o *NetworkElementSummary) HasPeerFirmwareOutOfSync() bool`
-
-HasPeerFirmwareOutOfSync returns a boolean if a field has been set.
-
 ### GetPresence
 
 `func (o *NetworkElementSummary) GetPresence() string`
@@ -1744,31 +1718,6 @@ SetTotalMemory sets TotalMemory field to given value.
 
 HasTotalMemory returns a boolean if a field has been set.
 
-### GetUserLabel
-
-`func (o *NetworkElementSummary) GetUserLabel() string`
-
-GetUserLabel returns the UserLabel field if non-nil, zero value otherwise.
-
-### GetUserLabelOk
-
-`func (o *NetworkElementSummary) GetUserLabelOk() (*string, bool)`
-
-GetUserLabelOk returns a tuple with the UserLabel field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUserLabel
-
-`func (o *NetworkElementSummary) SetUserLabel(v string)`
-
-SetUserLabel sets UserLabel field to given value.
-
-### HasUserLabel
-
-`func (o *NetworkElementSummary) HasUserLabel() bool`
-
-HasUserLabel returns a boolean if a field has been set.
-
 ### GetVendor
 
 `func (o *NetworkElementSummary) GetVendor() string`
@@ -1819,6 +1768,41 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
+### GetInventoryParent
+
+`func (o *NetworkElementSummary) GetInventoryParent() MoBaseMoRelationship`
+
+GetInventoryParent returns the InventoryParent field if non-nil, zero value otherwise.
+
+### GetInventoryParentOk
+
+`func (o *NetworkElementSummary) GetInventoryParentOk() (*MoBaseMoRelationship, bool)`
+
+GetInventoryParentOk returns a tuple with the InventoryParent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInventoryParent
+
+`func (o *NetworkElementSummary) SetInventoryParent(v MoBaseMoRelationship)`
+
+SetInventoryParent sets InventoryParent field to given value.
+
+### HasInventoryParent
+
+`func (o *NetworkElementSummary) HasInventoryParent() bool`
+
+HasInventoryParent returns a boolean if a field has been set.
+
+### SetInventoryParentNil
+
+`func (o *NetworkElementSummary) SetInventoryParentNil(b bool)`
+
+ SetInventoryParentNil sets the value for InventoryParent to be an explicit nil
+
+### UnsetInventoryParent
+`func (o *NetworkElementSummary) UnsetInventoryParent()`
+
+UnsetInventoryParent ensures that no value is present for InventoryParent, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *NetworkElementSummary) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

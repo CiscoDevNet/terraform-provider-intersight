@@ -145,6 +145,11 @@ func getFirmwareUpgradeStatusSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_cdn_disabled": {
+			Description: "A boolean flag which indicates that the generated pre-signed url is not a CDN URL when set to true.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -648,6 +653,11 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		o.SetInitialPowerStatus(x)
 	}
 
+	if v, ok := d.GetOkExists("is_cdn_disabled"); ok {
+		x := (v.(bool))
+		o.SetIsCdnDisabled(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1043,6 +1053,7 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 				temp["download_stage"] = (s.GetDownloadStage())
 				temp["ep_power_status"] = (s.GetEpPowerStatus())
 				temp["initial_power_status"] = (s.GetInitialPowerStatus())
+				temp["is_cdn_disabled"] = (s.GetIsCdnDisabled())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

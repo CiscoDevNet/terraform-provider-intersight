@@ -490,53 +490,58 @@ func getHyperflexClusterSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"cluster_data_ip": {
-						Description: "Cluster data IP of the HyperFlex cluster.",
+					"data_gateway_ip_address": {
+						Description: "The data gateway IP of the HyperFlex cluster.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"cluster_management_ip": {
-						Description: "Cluster management IP of the HyperFlex cluster.",
+					"data_ip_address": {
+						Description: "The data IP of the HyperFlex cluster.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"data_default_gateway": {
-						Description: "Default gateway of the data network.",
+					"data_netmask": {
+						Description: "The data subnet mask of the HyperFlex cluster.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"data_jumbo_frame": {
-						Description: "Boolean value to indicate if jumboframes is enabled for storage-data network.",
+					"data_vlan": {
+						Description: "The data VLAN of the HyperFlex cluster.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"dns_suffix": {
+						Description: "The DNS domain suffix configured for the HyperFlex Cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"jumbo_frame_enabled": {
+						Description: "The jumbo frame enablement of the HyperFlex cluster.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
-					"data_sub_netmask": {
-						Description: "Subnet mask of the data network.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"data_vlan_id": {
-						Description: "Data VLAN ID. Enter the correct VLAN tags if you are using trunk ports. The VLAN tags must be different when using trunk mode.",
+					"live_migration_vlan": {
+						Description: "The live migration VLAN ID of the HyperFlex cluster.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
-					"live_migration_vlan_id": {
-						Description: "VLAN ID for virtual machine live migration.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"management_default_gateway": {
-						Description: "Default gateway of the management network.",
+					"mgmt_gateway_ip_address": {
+						Description: "The management gateway IP of the HyperFlex cluster.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"management_sub_netmask": {
-						Description: "Subnet mask of the management network.",
+					"mgmt_ip_address": {
+						Description: "The management IP or the hostname of the HyperFlex cluster.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"management_vlan_id": {
-						Description: "Management VLAN ID. Enter the correct VLAN tags if you are using trunk ports. The VLAN tags must be different when using trunk mode.",
+					"mgmt_netmask": {
+						Description: "The management subnet mask of the HyperFlex cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"mgmt_vlan": {
+						Description: "The management VLAN ID of the HyperFlex cluster.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -545,11 +550,16 @@ func getHyperflexClusterSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"vm_network_vlan_id": {
-						Description: "VM network VLAN ID. Used for VM data traffic.",
-						Type:        schema.TypeInt,
+					"timezone": {
+						Description: "The timezone configured on the HyperFlex Cluster.",
+						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"vm_network_vlans": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeInt}},
 				},
 			},
 		},
@@ -1887,76 +1897,24 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 				}
 			}
 			o.SetClassId("hyperflex.NetworkConfiguration")
-			if v, ok := l["cluster_data_ip"]; ok {
-				{
-					x := (v.(string))
-					o.SetClusterDataIp(x)
-				}
-			}
-			if v, ok := l["cluster_management_ip"]; ok {
-				{
-					x := (v.(string))
-					o.SetClusterManagementIp(x)
-				}
-			}
-			if v, ok := l["data_default_gateway"]; ok {
-				{
-					x := (v.(string))
-					o.SetDataDefaultGateway(x)
-				}
-			}
-			if v, ok := l["data_jumbo_frame"]; ok {
-				{
-					x := (v.(bool))
-					o.SetDataJumboFrame(x)
-				}
-			}
-			if v, ok := l["data_sub_netmask"]; ok {
-				{
-					x := (v.(string))
-					o.SetDataSubNetmask(x)
-				}
-			}
-			if v, ok := l["data_vlan_id"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetDataVlanId(x)
-				}
-			}
-			if v, ok := l["live_migration_vlan_id"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetLiveMigrationVlanId(x)
-				}
-			}
-			if v, ok := l["management_default_gateway"]; ok {
-				{
-					x := (v.(string))
-					o.SetManagementDefaultGateway(x)
-				}
-			}
-			if v, ok := l["management_sub_netmask"]; ok {
-				{
-					x := (v.(string))
-					o.SetManagementSubNetmask(x)
-				}
-			}
-			if v, ok := l["management_vlan_id"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetManagementVlanId(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
 				}
 			}
-			if v, ok := l["vm_network_vlan_id"]; ok {
+			if v, ok := l["vm_network_vlans"]; ok {
 				{
-					x := int64(v.(int))
-					o.SetVmNetworkVlanId(x)
+					x := make([]int64, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(int64))
+						}
+					}
+					if len(x) > 0 {
+						o.SetVmNetworkVlans(x)
+					}
 				}
 			}
 			p = append(p, *o)

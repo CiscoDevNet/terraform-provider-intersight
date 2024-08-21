@@ -6,17 +6,19 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.NetworkConfiguration"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.NetworkConfiguration"]
-**ClusterDataIp** | Pointer to **string** | Cluster data IP of the HyperFlex cluster. | [optional] 
-**ClusterManagementIp** | Pointer to **string** | Cluster management IP of the HyperFlex cluster. | [optional] 
-**DataDefaultGateway** | Pointer to **string** | Default gateway of the data network. | [optional] 
-**DataJumboFrame** | Pointer to **bool** | Boolean value to indicate if jumboframes is enabled for storage-data network. | [optional] 
-**DataSubNetmask** | Pointer to **string** | Subnet mask of the data network. | [optional] 
-**DataVlanId** | Pointer to **int64** | Data VLAN ID. Enter the correct VLAN tags if you are using trunk ports. The VLAN tags must be different when using trunk mode. | [optional] 
-**LiveMigrationVlanId** | Pointer to **int64** | VLAN ID for virtual machine live migration. | [optional] 
-**ManagementDefaultGateway** | Pointer to **string** | Default gateway of the management network. | [optional] 
-**ManagementSubNetmask** | Pointer to **string** | Subnet mask of the management network. | [optional] 
-**ManagementVlanId** | Pointer to **int64** | Management VLAN ID. Enter the correct VLAN tags if you are using trunk ports. The VLAN tags must be different when using trunk mode. | [optional] 
-**VmNetworkVlanId** | Pointer to **int64** | VM network VLAN ID. Used for VM data traffic. | [optional] 
+**DataGatewayIpAddress** | Pointer to **string** | The data gateway IP of the HyperFlex cluster. | [optional] [readonly] 
+**DataIpAddress** | Pointer to **string** | The data IP of the HyperFlex cluster. | [optional] [readonly] 
+**DataNetmask** | Pointer to **string** | The data subnet mask of the HyperFlex cluster. | [optional] [readonly] 
+**DataVlan** | Pointer to **int64** | The data VLAN of the HyperFlex cluster. | [optional] [readonly] 
+**DnsSuffix** | Pointer to **string** | The DNS domain suffix configured for the HyperFlex Cluster. | [optional] [readonly] 
+**JumboFrameEnabled** | Pointer to **bool** | The jumbo frame enablement of the HyperFlex cluster. | [optional] [readonly] 
+**LiveMigrationVlan** | Pointer to **int64** | The live migration VLAN ID of the HyperFlex cluster. | [optional] [readonly] 
+**MgmtGatewayIpAddress** | Pointer to **string** | The management gateway IP of the HyperFlex cluster. | [optional] [readonly] 
+**MgmtIpAddress** | Pointer to **string** | The management IP or the hostname of the HyperFlex cluster. | [optional] [readonly] 
+**MgmtNetmask** | Pointer to **string** | The management subnet mask of the HyperFlex cluster. | [optional] [readonly] 
+**MgmtVlan** | Pointer to **int64** | The management VLAN ID of the HyperFlex cluster. | [optional] [readonly] 
+**Timezone** | Pointer to **string** | The timezone configured on the HyperFlex Cluster. | [optional] [readonly] 
+**VmNetworkVlans** | Pointer to **[]int64** |  | [optional] 
 
 ## Methods
 
@@ -77,281 +79,341 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetClusterDataIp
+### GetDataGatewayIpAddress
 
-`func (o *HyperflexNetworkConfiguration) GetClusterDataIp() string`
+`func (o *HyperflexNetworkConfiguration) GetDataGatewayIpAddress() string`
 
-GetClusterDataIp returns the ClusterDataIp field if non-nil, zero value otherwise.
+GetDataGatewayIpAddress returns the DataGatewayIpAddress field if non-nil, zero value otherwise.
 
-### GetClusterDataIpOk
+### GetDataGatewayIpAddressOk
 
-`func (o *HyperflexNetworkConfiguration) GetClusterDataIpOk() (*string, bool)`
+`func (o *HyperflexNetworkConfiguration) GetDataGatewayIpAddressOk() (*string, bool)`
 
-GetClusterDataIpOk returns a tuple with the ClusterDataIp field if it's non-nil, zero value otherwise
+GetDataGatewayIpAddressOk returns a tuple with the DataGatewayIpAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetClusterDataIp
+### SetDataGatewayIpAddress
 
-`func (o *HyperflexNetworkConfiguration) SetClusterDataIp(v string)`
+`func (o *HyperflexNetworkConfiguration) SetDataGatewayIpAddress(v string)`
 
-SetClusterDataIp sets ClusterDataIp field to given value.
+SetDataGatewayIpAddress sets DataGatewayIpAddress field to given value.
 
-### HasClusterDataIp
+### HasDataGatewayIpAddress
 
-`func (o *HyperflexNetworkConfiguration) HasClusterDataIp() bool`
+`func (o *HyperflexNetworkConfiguration) HasDataGatewayIpAddress() bool`
 
-HasClusterDataIp returns a boolean if a field has been set.
+HasDataGatewayIpAddress returns a boolean if a field has been set.
 
-### GetClusterManagementIp
+### GetDataIpAddress
 
-`func (o *HyperflexNetworkConfiguration) GetClusterManagementIp() string`
+`func (o *HyperflexNetworkConfiguration) GetDataIpAddress() string`
 
-GetClusterManagementIp returns the ClusterManagementIp field if non-nil, zero value otherwise.
+GetDataIpAddress returns the DataIpAddress field if non-nil, zero value otherwise.
 
-### GetClusterManagementIpOk
+### GetDataIpAddressOk
 
-`func (o *HyperflexNetworkConfiguration) GetClusterManagementIpOk() (*string, bool)`
+`func (o *HyperflexNetworkConfiguration) GetDataIpAddressOk() (*string, bool)`
 
-GetClusterManagementIpOk returns a tuple with the ClusterManagementIp field if it's non-nil, zero value otherwise
+GetDataIpAddressOk returns a tuple with the DataIpAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetClusterManagementIp
+### SetDataIpAddress
 
-`func (o *HyperflexNetworkConfiguration) SetClusterManagementIp(v string)`
+`func (o *HyperflexNetworkConfiguration) SetDataIpAddress(v string)`
 
-SetClusterManagementIp sets ClusterManagementIp field to given value.
+SetDataIpAddress sets DataIpAddress field to given value.
 
-### HasClusterManagementIp
+### HasDataIpAddress
 
-`func (o *HyperflexNetworkConfiguration) HasClusterManagementIp() bool`
+`func (o *HyperflexNetworkConfiguration) HasDataIpAddress() bool`
 
-HasClusterManagementIp returns a boolean if a field has been set.
+HasDataIpAddress returns a boolean if a field has been set.
 
-### GetDataDefaultGateway
+### GetDataNetmask
 
-`func (o *HyperflexNetworkConfiguration) GetDataDefaultGateway() string`
+`func (o *HyperflexNetworkConfiguration) GetDataNetmask() string`
 
-GetDataDefaultGateway returns the DataDefaultGateway field if non-nil, zero value otherwise.
+GetDataNetmask returns the DataNetmask field if non-nil, zero value otherwise.
 
-### GetDataDefaultGatewayOk
+### GetDataNetmaskOk
 
-`func (o *HyperflexNetworkConfiguration) GetDataDefaultGatewayOk() (*string, bool)`
+`func (o *HyperflexNetworkConfiguration) GetDataNetmaskOk() (*string, bool)`
 
-GetDataDefaultGatewayOk returns a tuple with the DataDefaultGateway field if it's non-nil, zero value otherwise
+GetDataNetmaskOk returns a tuple with the DataNetmask field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDataDefaultGateway
+### SetDataNetmask
 
-`func (o *HyperflexNetworkConfiguration) SetDataDefaultGateway(v string)`
+`func (o *HyperflexNetworkConfiguration) SetDataNetmask(v string)`
 
-SetDataDefaultGateway sets DataDefaultGateway field to given value.
+SetDataNetmask sets DataNetmask field to given value.
 
-### HasDataDefaultGateway
+### HasDataNetmask
 
-`func (o *HyperflexNetworkConfiguration) HasDataDefaultGateway() bool`
+`func (o *HyperflexNetworkConfiguration) HasDataNetmask() bool`
 
-HasDataDefaultGateway returns a boolean if a field has been set.
+HasDataNetmask returns a boolean if a field has been set.
 
-### GetDataJumboFrame
+### GetDataVlan
 
-`func (o *HyperflexNetworkConfiguration) GetDataJumboFrame() bool`
+`func (o *HyperflexNetworkConfiguration) GetDataVlan() int64`
 
-GetDataJumboFrame returns the DataJumboFrame field if non-nil, zero value otherwise.
+GetDataVlan returns the DataVlan field if non-nil, zero value otherwise.
 
-### GetDataJumboFrameOk
+### GetDataVlanOk
 
-`func (o *HyperflexNetworkConfiguration) GetDataJumboFrameOk() (*bool, bool)`
+`func (o *HyperflexNetworkConfiguration) GetDataVlanOk() (*int64, bool)`
 
-GetDataJumboFrameOk returns a tuple with the DataJumboFrame field if it's non-nil, zero value otherwise
+GetDataVlanOk returns a tuple with the DataVlan field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDataJumboFrame
+### SetDataVlan
 
-`func (o *HyperflexNetworkConfiguration) SetDataJumboFrame(v bool)`
+`func (o *HyperflexNetworkConfiguration) SetDataVlan(v int64)`
 
-SetDataJumboFrame sets DataJumboFrame field to given value.
+SetDataVlan sets DataVlan field to given value.
 
-### HasDataJumboFrame
+### HasDataVlan
 
-`func (o *HyperflexNetworkConfiguration) HasDataJumboFrame() bool`
+`func (o *HyperflexNetworkConfiguration) HasDataVlan() bool`
 
-HasDataJumboFrame returns a boolean if a field has been set.
+HasDataVlan returns a boolean if a field has been set.
 
-### GetDataSubNetmask
+### GetDnsSuffix
 
-`func (o *HyperflexNetworkConfiguration) GetDataSubNetmask() string`
+`func (o *HyperflexNetworkConfiguration) GetDnsSuffix() string`
 
-GetDataSubNetmask returns the DataSubNetmask field if non-nil, zero value otherwise.
+GetDnsSuffix returns the DnsSuffix field if non-nil, zero value otherwise.
 
-### GetDataSubNetmaskOk
+### GetDnsSuffixOk
 
-`func (o *HyperflexNetworkConfiguration) GetDataSubNetmaskOk() (*string, bool)`
+`func (o *HyperflexNetworkConfiguration) GetDnsSuffixOk() (*string, bool)`
 
-GetDataSubNetmaskOk returns a tuple with the DataSubNetmask field if it's non-nil, zero value otherwise
+GetDnsSuffixOk returns a tuple with the DnsSuffix field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDataSubNetmask
+### SetDnsSuffix
 
-`func (o *HyperflexNetworkConfiguration) SetDataSubNetmask(v string)`
+`func (o *HyperflexNetworkConfiguration) SetDnsSuffix(v string)`
 
-SetDataSubNetmask sets DataSubNetmask field to given value.
+SetDnsSuffix sets DnsSuffix field to given value.
 
-### HasDataSubNetmask
+### HasDnsSuffix
 
-`func (o *HyperflexNetworkConfiguration) HasDataSubNetmask() bool`
+`func (o *HyperflexNetworkConfiguration) HasDnsSuffix() bool`
 
-HasDataSubNetmask returns a boolean if a field has been set.
+HasDnsSuffix returns a boolean if a field has been set.
 
-### GetDataVlanId
+### GetJumboFrameEnabled
 
-`func (o *HyperflexNetworkConfiguration) GetDataVlanId() int64`
+`func (o *HyperflexNetworkConfiguration) GetJumboFrameEnabled() bool`
 
-GetDataVlanId returns the DataVlanId field if non-nil, zero value otherwise.
+GetJumboFrameEnabled returns the JumboFrameEnabled field if non-nil, zero value otherwise.
 
-### GetDataVlanIdOk
+### GetJumboFrameEnabledOk
 
-`func (o *HyperflexNetworkConfiguration) GetDataVlanIdOk() (*int64, bool)`
+`func (o *HyperflexNetworkConfiguration) GetJumboFrameEnabledOk() (*bool, bool)`
 
-GetDataVlanIdOk returns a tuple with the DataVlanId field if it's non-nil, zero value otherwise
+GetJumboFrameEnabledOk returns a tuple with the JumboFrameEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDataVlanId
+### SetJumboFrameEnabled
 
-`func (o *HyperflexNetworkConfiguration) SetDataVlanId(v int64)`
+`func (o *HyperflexNetworkConfiguration) SetJumboFrameEnabled(v bool)`
 
-SetDataVlanId sets DataVlanId field to given value.
+SetJumboFrameEnabled sets JumboFrameEnabled field to given value.
 
-### HasDataVlanId
+### HasJumboFrameEnabled
 
-`func (o *HyperflexNetworkConfiguration) HasDataVlanId() bool`
+`func (o *HyperflexNetworkConfiguration) HasJumboFrameEnabled() bool`
 
-HasDataVlanId returns a boolean if a field has been set.
+HasJumboFrameEnabled returns a boolean if a field has been set.
 
-### GetLiveMigrationVlanId
+### GetLiveMigrationVlan
 
-`func (o *HyperflexNetworkConfiguration) GetLiveMigrationVlanId() int64`
+`func (o *HyperflexNetworkConfiguration) GetLiveMigrationVlan() int64`
 
-GetLiveMigrationVlanId returns the LiveMigrationVlanId field if non-nil, zero value otherwise.
+GetLiveMigrationVlan returns the LiveMigrationVlan field if non-nil, zero value otherwise.
 
-### GetLiveMigrationVlanIdOk
+### GetLiveMigrationVlanOk
 
-`func (o *HyperflexNetworkConfiguration) GetLiveMigrationVlanIdOk() (*int64, bool)`
+`func (o *HyperflexNetworkConfiguration) GetLiveMigrationVlanOk() (*int64, bool)`
 
-GetLiveMigrationVlanIdOk returns a tuple with the LiveMigrationVlanId field if it's non-nil, zero value otherwise
+GetLiveMigrationVlanOk returns a tuple with the LiveMigrationVlan field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLiveMigrationVlanId
+### SetLiveMigrationVlan
 
-`func (o *HyperflexNetworkConfiguration) SetLiveMigrationVlanId(v int64)`
+`func (o *HyperflexNetworkConfiguration) SetLiveMigrationVlan(v int64)`
 
-SetLiveMigrationVlanId sets LiveMigrationVlanId field to given value.
+SetLiveMigrationVlan sets LiveMigrationVlan field to given value.
 
-### HasLiveMigrationVlanId
+### HasLiveMigrationVlan
 
-`func (o *HyperflexNetworkConfiguration) HasLiveMigrationVlanId() bool`
+`func (o *HyperflexNetworkConfiguration) HasLiveMigrationVlan() bool`
 
-HasLiveMigrationVlanId returns a boolean if a field has been set.
+HasLiveMigrationVlan returns a boolean if a field has been set.
 
-### GetManagementDefaultGateway
+### GetMgmtGatewayIpAddress
 
-`func (o *HyperflexNetworkConfiguration) GetManagementDefaultGateway() string`
+`func (o *HyperflexNetworkConfiguration) GetMgmtGatewayIpAddress() string`
 
-GetManagementDefaultGateway returns the ManagementDefaultGateway field if non-nil, zero value otherwise.
+GetMgmtGatewayIpAddress returns the MgmtGatewayIpAddress field if non-nil, zero value otherwise.
 
-### GetManagementDefaultGatewayOk
+### GetMgmtGatewayIpAddressOk
 
-`func (o *HyperflexNetworkConfiguration) GetManagementDefaultGatewayOk() (*string, bool)`
+`func (o *HyperflexNetworkConfiguration) GetMgmtGatewayIpAddressOk() (*string, bool)`
 
-GetManagementDefaultGatewayOk returns a tuple with the ManagementDefaultGateway field if it's non-nil, zero value otherwise
+GetMgmtGatewayIpAddressOk returns a tuple with the MgmtGatewayIpAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetManagementDefaultGateway
+### SetMgmtGatewayIpAddress
 
-`func (o *HyperflexNetworkConfiguration) SetManagementDefaultGateway(v string)`
+`func (o *HyperflexNetworkConfiguration) SetMgmtGatewayIpAddress(v string)`
 
-SetManagementDefaultGateway sets ManagementDefaultGateway field to given value.
+SetMgmtGatewayIpAddress sets MgmtGatewayIpAddress field to given value.
 
-### HasManagementDefaultGateway
+### HasMgmtGatewayIpAddress
 
-`func (o *HyperflexNetworkConfiguration) HasManagementDefaultGateway() bool`
+`func (o *HyperflexNetworkConfiguration) HasMgmtGatewayIpAddress() bool`
 
-HasManagementDefaultGateway returns a boolean if a field has been set.
+HasMgmtGatewayIpAddress returns a boolean if a field has been set.
 
-### GetManagementSubNetmask
+### GetMgmtIpAddress
 
-`func (o *HyperflexNetworkConfiguration) GetManagementSubNetmask() string`
+`func (o *HyperflexNetworkConfiguration) GetMgmtIpAddress() string`
 
-GetManagementSubNetmask returns the ManagementSubNetmask field if non-nil, zero value otherwise.
+GetMgmtIpAddress returns the MgmtIpAddress field if non-nil, zero value otherwise.
 
-### GetManagementSubNetmaskOk
+### GetMgmtIpAddressOk
 
-`func (o *HyperflexNetworkConfiguration) GetManagementSubNetmaskOk() (*string, bool)`
+`func (o *HyperflexNetworkConfiguration) GetMgmtIpAddressOk() (*string, bool)`
 
-GetManagementSubNetmaskOk returns a tuple with the ManagementSubNetmask field if it's non-nil, zero value otherwise
+GetMgmtIpAddressOk returns a tuple with the MgmtIpAddress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetManagementSubNetmask
+### SetMgmtIpAddress
 
-`func (o *HyperflexNetworkConfiguration) SetManagementSubNetmask(v string)`
+`func (o *HyperflexNetworkConfiguration) SetMgmtIpAddress(v string)`
 
-SetManagementSubNetmask sets ManagementSubNetmask field to given value.
+SetMgmtIpAddress sets MgmtIpAddress field to given value.
 
-### HasManagementSubNetmask
+### HasMgmtIpAddress
 
-`func (o *HyperflexNetworkConfiguration) HasManagementSubNetmask() bool`
+`func (o *HyperflexNetworkConfiguration) HasMgmtIpAddress() bool`
 
-HasManagementSubNetmask returns a boolean if a field has been set.
+HasMgmtIpAddress returns a boolean if a field has been set.
 
-### GetManagementVlanId
+### GetMgmtNetmask
 
-`func (o *HyperflexNetworkConfiguration) GetManagementVlanId() int64`
+`func (o *HyperflexNetworkConfiguration) GetMgmtNetmask() string`
 
-GetManagementVlanId returns the ManagementVlanId field if non-nil, zero value otherwise.
+GetMgmtNetmask returns the MgmtNetmask field if non-nil, zero value otherwise.
 
-### GetManagementVlanIdOk
+### GetMgmtNetmaskOk
 
-`func (o *HyperflexNetworkConfiguration) GetManagementVlanIdOk() (*int64, bool)`
+`func (o *HyperflexNetworkConfiguration) GetMgmtNetmaskOk() (*string, bool)`
 
-GetManagementVlanIdOk returns a tuple with the ManagementVlanId field if it's non-nil, zero value otherwise
+GetMgmtNetmaskOk returns a tuple with the MgmtNetmask field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetManagementVlanId
+### SetMgmtNetmask
 
-`func (o *HyperflexNetworkConfiguration) SetManagementVlanId(v int64)`
+`func (o *HyperflexNetworkConfiguration) SetMgmtNetmask(v string)`
 
-SetManagementVlanId sets ManagementVlanId field to given value.
+SetMgmtNetmask sets MgmtNetmask field to given value.
 
-### HasManagementVlanId
+### HasMgmtNetmask
 
-`func (o *HyperflexNetworkConfiguration) HasManagementVlanId() bool`
+`func (o *HyperflexNetworkConfiguration) HasMgmtNetmask() bool`
 
-HasManagementVlanId returns a boolean if a field has been set.
+HasMgmtNetmask returns a boolean if a field has been set.
 
-### GetVmNetworkVlanId
+### GetMgmtVlan
 
-`func (o *HyperflexNetworkConfiguration) GetVmNetworkVlanId() int64`
+`func (o *HyperflexNetworkConfiguration) GetMgmtVlan() int64`
 
-GetVmNetworkVlanId returns the VmNetworkVlanId field if non-nil, zero value otherwise.
+GetMgmtVlan returns the MgmtVlan field if non-nil, zero value otherwise.
 
-### GetVmNetworkVlanIdOk
+### GetMgmtVlanOk
 
-`func (o *HyperflexNetworkConfiguration) GetVmNetworkVlanIdOk() (*int64, bool)`
+`func (o *HyperflexNetworkConfiguration) GetMgmtVlanOk() (*int64, bool)`
 
-GetVmNetworkVlanIdOk returns a tuple with the VmNetworkVlanId field if it's non-nil, zero value otherwise
+GetMgmtVlanOk returns a tuple with the MgmtVlan field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVmNetworkVlanId
+### SetMgmtVlan
 
-`func (o *HyperflexNetworkConfiguration) SetVmNetworkVlanId(v int64)`
+`func (o *HyperflexNetworkConfiguration) SetMgmtVlan(v int64)`
 
-SetVmNetworkVlanId sets VmNetworkVlanId field to given value.
+SetMgmtVlan sets MgmtVlan field to given value.
 
-### HasVmNetworkVlanId
+### HasMgmtVlan
 
-`func (o *HyperflexNetworkConfiguration) HasVmNetworkVlanId() bool`
+`func (o *HyperflexNetworkConfiguration) HasMgmtVlan() bool`
 
-HasVmNetworkVlanId returns a boolean if a field has been set.
+HasMgmtVlan returns a boolean if a field has been set.
 
+### GetTimezone
+
+`func (o *HyperflexNetworkConfiguration) GetTimezone() string`
+
+GetTimezone returns the Timezone field if non-nil, zero value otherwise.
+
+### GetTimezoneOk
+
+`func (o *HyperflexNetworkConfiguration) GetTimezoneOk() (*string, bool)`
+
+GetTimezoneOk returns a tuple with the Timezone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimezone
+
+`func (o *HyperflexNetworkConfiguration) SetTimezone(v string)`
+
+SetTimezone sets Timezone field to given value.
+
+### HasTimezone
+
+`func (o *HyperflexNetworkConfiguration) HasTimezone() bool`
+
+HasTimezone returns a boolean if a field has been set.
+
+### GetVmNetworkVlans
+
+`func (o *HyperflexNetworkConfiguration) GetVmNetworkVlans() []int64`
+
+GetVmNetworkVlans returns the VmNetworkVlans field if non-nil, zero value otherwise.
+
+### GetVmNetworkVlansOk
+
+`func (o *HyperflexNetworkConfiguration) GetVmNetworkVlansOk() (*[]int64, bool)`
+
+GetVmNetworkVlansOk returns a tuple with the VmNetworkVlans field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVmNetworkVlans
+
+`func (o *HyperflexNetworkConfiguration) SetVmNetworkVlans(v []int64)`
+
+SetVmNetworkVlans sets VmNetworkVlans field to given value.
+
+### HasVmNetworkVlans
+
+`func (o *HyperflexNetworkConfiguration) HasVmNetworkVlans() bool`
+
+HasVmNetworkVlans returns a boolean if a field has been set.
+
+### SetVmNetworkVlansNil
+
+`func (o *HyperflexNetworkConfiguration) SetVmNetworkVlansNil(b bool)`
+
+ SetVmNetworkVlansNil sets the value for VmNetworkVlans to be an explicit nil
+
+### UnsetVmNetworkVlans
+`func (o *HyperflexNetworkConfiguration) UnsetVmNetworkVlans()`
+
+UnsetVmNetworkVlans ensures that no value is present for VmNetworkVlans, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

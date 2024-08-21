@@ -259,6 +259,46 @@ func getEquipmentSwitchOperationSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"reset_action": {
+			Description: "An action to initiate a reboot of the Fabric Interconnect with an optional fabric evacuation beforehand.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"action": {
+						Description: "The reboot behavior for the Fabric Interconnect. Reboot - An action to reset the Fabric Interconnect by initiating its reboot. ForceReboot - Forces an immediate reboot of the Fabric Interconnect, overriding normal reboot validation checks. None - No reboot action should be triggered on the the Fabric Interconnect.\n* `None` - No action to be triggered on the Fabric Interconnect.\n* `Reboot` - An action to reset the Fabric Interconnect by initiating its reboot.\n* `ForceReboot` - An action to enforce an immediate reboot of the Fabric Interconnect regardless of existing validation checks.By default, a reset action is not allowed on an Fabric Interconnect if Domain Profile deployment, Manual Data Evacuation, or a reset action on the peer FI is already in progress. The force option allows users to override this check and perform the reset action on the FI.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"enable_fabric_evacuation": {
+						Description: "The flag to enable or disable fabric evacuation before rebooting the Fabric Interconnect.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"reset_action_state": {
+			Description: "Current status of the reset operation executed on the Fabric Interconnect.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -711,6 +751,54 @@ func dataSourceEquipmentSwitchOperationRead(c context.Context, d *schema.Resourc
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("reset_action"); ok {
+		p := make([]models.EquipmentResetAction, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.EquipmentResetAction{}
+			if v, ok := l["action"]; ok {
+				{
+					x := (v.(string))
+					o.SetAction(x)
+				}
+			}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("equipment.ResetAction")
+			if v, ok := l["enable_fabric_evacuation"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnableFabricEvacuation(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetResetAction(x)
+		}
+	}
+
+	if v, ok := d.GetOk("reset_action_state"); ok {
+		x := (v.(string))
+		o.SetResetActionState(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -884,6 +972,9 @@ func dataSourceEquipmentSwitchOperationRead(c context.Context, d *schema.Resourc
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+
+				temp["reset_action"] = flattenMapEquipmentResetAction(s.GetResetAction(), d)
+				temp["reset_action_state"] = (s.GetResetActionState())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

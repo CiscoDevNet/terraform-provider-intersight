@@ -23,6 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) A unique descriptive name of the exemption. 
 * `os_vendor`:(string) Vendor of the Operating System. 
 * `os_version`:(string) Version of the Operating system. 
+* `personality`:(string) It indicates the personality of the sever. 
 * `processor_name`:(string) Name of the processor supported for the server. 
 * `product_type`:(string) Type of the product/adapter say GPU for graphic cards.* `` - Default type of the Product.* `Adapter` - Represents network adapter cards.* `StorageController` - Represents storage controllers.* `GPU` - Represents graphics cards. 
 * `server_pid`:(string) Three part ID representing the server model as returned by UCSM/CIMC XML APIs. 

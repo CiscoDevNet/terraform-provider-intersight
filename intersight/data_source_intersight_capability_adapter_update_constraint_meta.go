@@ -184,6 +184,44 @@ func getCapabilityAdapterUpdateConstraintMetaSchema() map[string]*schema.Schema 
 				},
 			},
 		},
+		"platform_type": {
+			Description: "Platform type for which the constraint is to be enforced.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"server_specific_constraint": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"min_supported_version": {
+						Description: "The version below which the component is not supported.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"server_model": {
+						Description: "The server model this constraint is to be enforced upon.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -555,6 +593,39 @@ func dataSourceCapabilityAdapterUpdateConstraintMetaRead(c context.Context, d *s
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("platform_type"); ok {
+		x := (v.(string))
+		o.SetPlatformType(x)
+	}
+
+	if v, ok := d.GetOk("server_specific_constraint"); ok {
+		x := make([]models.CapabilityServerComponentConstraint, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.CapabilityServerComponentConstraint{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.ServerComponentConstraint")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetServerSpecificConstraint(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -739,6 +810,9 @@ func dataSourceCapabilityAdapterUpdateConstraintMetaRead(c context.Context, d *s
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["platform_type"] = (s.GetPlatformType())
+
+				temp["server_specific_constraint"] = flattenListCapabilityServerComponentConstraint(s.GetServerSpecificConstraint(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["supported_platform"] = (s.GetSupportedPlatform())
 				temp["supported_platforms"] = (s.GetSupportedPlatforms())

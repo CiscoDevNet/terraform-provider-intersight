@@ -22,12 +22,13 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `hardware_version`:(string) The hardware version of the device. 
 * `is_upgraded`:(bool) This field indicates the compute status of the catalog values for the associated component or hardware. 
+* `lan_ip`:(string) LAN IP address of the device. 
 * `mac`:(string) The MAC address of the device. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field displays the model number of the associated component or hardware. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Administrator defined name for the device. 
-* `network_id`:(string) The unique Meraki network id. 
+* `network_id`:(string) The network the device belongs to. 
 * `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
 * `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

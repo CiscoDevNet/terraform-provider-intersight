@@ -1,4 +1,4 @@
-# ViewsView
+# FabricSpanSourceEthPortChannel
 
 ## Properties
 
@@ -7,20 +7,20 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewViewsView
+### NewFabricSpanSourceEthPortChannel
 
-`func NewViewsView() *ViewsView`
+`func NewFabricSpanSourceEthPortChannel() *FabricSpanSourceEthPortChannel`
 
-NewViewsView instantiates a new ViewsView object
+NewFabricSpanSourceEthPortChannel instantiates a new FabricSpanSourceEthPortChannel object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewViewsViewWithDefaults
+### NewFabricSpanSourceEthPortChannelWithDefaults
 
-`func NewViewsViewWithDefaults() *ViewsView`
+`func NewFabricSpanSourceEthPortChannelWithDefaults() *FabricSpanSourceEthPortChannel`
 
-NewViewsViewWithDefaults instantiates a new ViewsView object
+NewFabricSpanSourceEthPortChannelWithDefaults instantiates a new FabricSpanSourceEthPortChannel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 

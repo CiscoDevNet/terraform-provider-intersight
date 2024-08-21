@@ -16,6 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_softwarer
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `auth_token`:(string) The OAuth2 token that will be used during image download by the endpoint to authenticate with file server. 
+* `cdn_disabled`:(bool) A boolean flag which indicates that the generated pre-signed url is not a CDN URL. An URL to Intersight storage source will be returned with the old domain name. This flag should be used when the  pre-signed CDN URL is not accessible from endpoint/appliance. 
 * `certificate`:(string) The certificate of file server that will be used by the endpoint to validate the server before starting the file download. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

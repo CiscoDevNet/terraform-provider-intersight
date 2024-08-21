@@ -9,30 +9,30 @@ Name | Type | Description | Notes
 **AdminPowerState** | Pointer to **string** | The desired power state of the server. | [optional] [readonly] 
 **AlarmSummary** | Pointer to [**NullableComputeAlarmSummary**](ComputeAlarmSummary.md) |  | [optional] 
 **AssetTag** | Pointer to **string** | The user defined asset tag assigned to the server. | [optional] [readonly] 
-**AvailableMemory** | Pointer to **int64** | The amount of memory available on the server. | [optional] [readonly] 
+**AvailableMemory** | Pointer to **int64** | Total memeory of the server in MB. | [optional] [readonly] 
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] [readonly] 
 **ChassisId** | Pointer to **string** | The id of the chassis that the blade is discovered in. | [optional] [readonly] 
 **ConnectionStatus** | Pointer to **string** | Connectivity Status of RackUnit to Switch - A or B or AB. | [optional] [readonly] 
-**CpuCapacity** | Pointer to **float32** | CPU Capacity &#x3D; Number of CPU Sockets x Enabled Cores x Speed (GHz). | [optional] [readonly] 
-**DeviceMoId** | Pointer to **string** | The database identifier of the registered device of an object. | [optional] [readonly] 
+**CpuCapacity** | Pointer to **float32** | Total processing capacity of the server. | [optional] [readonly] 
+**DeviceMoId** | Pointer to **string** | The MoId of the registered device that coresponds to the server. | [optional] [readonly] 
 **Dn** | Pointer to **string** | The Distinguished Name unambiguously identifies an object in the system. | [optional] [readonly] 
 **FaultSummary** | Pointer to **int64** | The fault summary for the server. | [optional] [readonly] 
 **Firmware** | Pointer to **string** | The firmware version of the Cisco Integrated Management Controller (CIMC) for this server. | [optional] [readonly] 
-**FrontPanelLockState** | Pointer to **string** | The actual front panel state of the server. * &#x60;None&#x60; - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. | [optional] [readonly] [default to "None"]
+**FrontPanelLockState** | Pointer to **string** | The actual front panel state of the server. * &#x60;None&#x60; - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. | [optional] [default to "None"]
 **HardwareUuid** | Pointer to **string** | The universally unique hardware identity of the server provided by the manufacturer. | [optional] [readonly] 
 **Ipv4Address** | Pointer to **string** | The IPv4 address configured on the management interface of the Integrated Management Controller. | [optional] [readonly] 
-**IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] [default to false]
+**IsUpgraded** | Pointer to **bool** | This field indicates the compute status of the catalog values for the associated component or hardware. | [optional] [readonly] 
 **KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **KvmServerStateEnabled** | Pointer to **bool** | The KVM server state of the server. | [optional] [readonly] 
 **KvmVendor** | Pointer to **string** | The KVM Vendor for the server. | [optional] [readonly] 
-**Lifecycle** | Pointer to **string** | The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object. * &#x60;None&#x60; - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * &#x60;Active&#x60; - Default Lifecycle State for a physical entity. * &#x60;Decommissioned&#x60; - Decommission Lifecycle state. * &#x60;DiscoveryInProgress&#x60; - DiscoveryInProgress Lifecycle state. * &#x60;DiscoveryFailed&#x60; - DiscoveryFailed Lifecycle state. * &#x60;FirmwareUpgradeInProgress&#x60; - Firmware upgrade is in progress on given physical entity. * &#x60;BladeMigrationInProgress&#x60; - Server slot migration is in progress on given physical entity. * &#x60;SlotMismatch&#x60; - The blade server is detected in a different chassis/slot than it was previously. | [optional] [readonly] [default to "None"]
+**Lifecycle** | Pointer to **string** | The lifecycle of the blade server. * &#x60;None&#x60; - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * &#x60;Active&#x60; - Default Lifecycle State for a physical entity. * &#x60;Decommissioned&#x60; - Decommission Lifecycle state. * &#x60;DiscoveryInProgress&#x60; - DiscoveryInProgress Lifecycle state. * &#x60;DiscoveryFailed&#x60; - DiscoveryFailed Lifecycle state. * &#x60;FirmwareUpgradeInProgress&#x60; - Firmware upgrade is in progress on given physical entity. * &#x60;SecureEraseInProgress&#x60; - Secure Erase is in progress on given physical entity. * &#x60;BladeMigrationInProgress&#x60; - Server slot migration is in progress on given physical entity. * &#x60;SlotMismatch&#x60; - The blade server is detected in a different chassis/slot than it was previously. | [optional] [readonly] [default to "None"]
 **ManagementMode** | Pointer to **string** | The management mode of the server. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
 **MemorySpeed** | Pointer to **string** | The maximum memory speed in MHz available on the server. | [optional] [readonly] 
 **MgmtIpAddress** | Pointer to **string** | Management address of the server. | [optional] [readonly] 
-**Model** | Pointer to **string** | This field displays the model number of the associated component or hardware. | [optional] [readonly] 
+**Model** | Pointer to **string** | This field identifies the model of the given component. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id. | [optional] [readonly] 
 **NumAdaptors** | Pointer to **int64** | The total number of network adapters present on the server. | [optional] [readonly] 
-**NumCpuCores** | Pointer to **int64** | The total number of CPU cores present on the server. | [optional] [readonly] 
+**NumCpuCores** | Pointer to **int64** | The total number of CPU cores enabled on the server. | [optional] [readonly] 
 **NumCpuCoresEnabled** | Pointer to **int64** | The total number of CPU cores enabled on the server. | [optional] [readonly] 
 **NumCpus** | Pointer to **int64** | The total number of CPUs present on the server. | [optional] [readonly] 
 **NumEthHostInterfaces** | Pointer to **int64** | The total number of vNICs which are visible to a host on the server. | [optional] [readonly] 
@@ -42,26 +42,27 @@ Name | Type | Description | Notes
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | The operational state of the server. | [optional] [readonly] 
 **Operability** | Pointer to **string** | The operability of the server. | [optional] [readonly] 
-**PackageVersion** | Pointer to **string** | The package version of the Host Service Utility (HSU) for this server. | [optional] [readonly] 
-**Personality** | Pointer to **string** | The Rack unit software Personality. | [optional] [readonly] 
+**PackageVersion** | Pointer to **string** | Bundle version which the firmware belongs to. | [optional] [readonly] 
+**Personality** | Pointer to **string** | Unique identity of added software personality. | [optional] [readonly] 
 **PlatformType** | Pointer to **string** | The platform type of the registered device - whether managed by UCSM or operating in standalone mode. | [optional] [readonly] 
-**Presence** | Pointer to **string** | This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. | [optional] [readonly] 
-**Revision** | Pointer to **string** | This field displays the revised version of the associated component or hardware (if any). | [optional] [readonly] 
+**Presence** | Pointer to **string** | This field identifies the presence (equipped) or absence of the given component. | [optional] [readonly] 
+**Revision** | Pointer to **string** | This field identifies the revision of the given component. | [optional] [readonly] 
 **Rn** | Pointer to **string** | The Relative Name uniquely identifies an object within a given context. | [optional] [readonly] 
 **ScaledMode** | Pointer to **string** | The mode of the server that determines it is scaled. | [optional] [readonly] 
-**Serial** | Pointer to **string** | This field displays the serial number of the associated component or hardware. | [optional] [readonly] 
+**Serial** | Pointer to **string** | This field identifies the serial of the given component. | [optional] [readonly] 
 **ServerId** | Pointer to **int64** | RackUnit ID that uniquely identifies the server. | [optional] [readonly] 
 **ServiceProfile** | Pointer to **string** | The distinguished name of the service profile to which the server is associated to. It is applicable only for servers which are managed via UCSM. | [optional] [readonly] 
 **SlotId** | Pointer to **int64** | The slot number in the chassis that the blade is discovered in. | [optional] [readonly] 
-**SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
+**SourceObjectType** | Pointer to **string** | Stores the source object type. This feild will either be RackUnit or Blade. | [optional] [readonly] 
 **TopologyScanStatus** | Pointer to **string** | To maintain the Topology workflow run status. | [optional] [readonly] 
 **TotalMemory** | Pointer to **int64** | The total memory available on the server. | [optional] [readonly] 
 **TunneledKvm** | Pointer to **bool** | The Tunneled vKVM status of the server. | [optional] [readonly] 
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
-**Vendor** | Pointer to **string** | This field displays the vendor information of the associated component or hardware. | [optional] [readonly] 
+**Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
 **EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**InventoryParent** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -1573,6 +1574,41 @@ HasInventoryDeviceInfo returns a boolean if a field has been set.
 `func (o *ComputePhysicalSummary) UnsetInventoryDeviceInfo()`
 
 UnsetInventoryDeviceInfo ensures that no value is present for InventoryDeviceInfo, not even an explicit nil
+### GetInventoryParent
+
+`func (o *ComputePhysicalSummary) GetInventoryParent() MoBaseMoRelationship`
+
+GetInventoryParent returns the InventoryParent field if non-nil, zero value otherwise.
+
+### GetInventoryParentOk
+
+`func (o *ComputePhysicalSummary) GetInventoryParentOk() (*MoBaseMoRelationship, bool)`
+
+GetInventoryParentOk returns a tuple with the InventoryParent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInventoryParent
+
+`func (o *ComputePhysicalSummary) SetInventoryParent(v MoBaseMoRelationship)`
+
+SetInventoryParent sets InventoryParent field to given value.
+
+### HasInventoryParent
+
+`func (o *ComputePhysicalSummary) HasInventoryParent() bool`
+
+HasInventoryParent returns a boolean if a field has been set.
+
+### SetInventoryParentNil
+
+`func (o *ComputePhysicalSummary) SetInventoryParentNil(b bool)`
+
+ SetInventoryParentNil sets the value for InventoryParent to be an explicit nil
+
+### UnsetInventoryParent
+`func (o *ComputePhysicalSummary) UnsetInventoryParent()`
+
+UnsetInventoryParent ensures that no value is present for InventoryParent, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *ComputePhysicalSummary) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

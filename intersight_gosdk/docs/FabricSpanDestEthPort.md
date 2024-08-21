@@ -1,0 +1,124 @@
+# FabricSpanDestEthPort
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SpanDestEthPort"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SpanDestEthPort"]
+**AdminSpeed** | Pointer to **string** | Admin speed of the SPAN Destination Port. * &#x60;Auto&#x60; - Admin configurable speed AUTO ( default ). * &#x60;1Gbps&#x60; - Admin configurable speed 1Gbps. * &#x60;10Gbps&#x60; - Admin configurable speed 10Gbps. * &#x60;25Gbps&#x60; - Admin configurable speed 25Gbps. * &#x60;40Gbps&#x60; - Admin configurable speed 40Gbps. * &#x60;100Gbps&#x60; - Admin configurable speed 100Gbps. * &#x60;NegAuto25Gbps&#x60; - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108. | [optional] [default to "Auto"]
+**Fec** | Pointer to **string** | Forward error correction setting of the SPAN Destination Port. * &#x60;Auto&#x60; - Forward error correction option &#39;Auto&#39;. * &#x60;Cl91&#x60; - Forward error correction option &#39;cl91&#39;. * &#x60;Cl74&#x60; - Forward error correction option &#39;cl74&#39;. | [optional] [default to "Auto"]
+
+## Methods
+
+### NewFabricSpanDestEthPort
+
+`func NewFabricSpanDestEthPort(classId string, objectType string, ) *FabricSpanDestEthPort`
+
+NewFabricSpanDestEthPort instantiates a new FabricSpanDestEthPort object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewFabricSpanDestEthPortWithDefaults
+
+`func NewFabricSpanDestEthPortWithDefaults() *FabricSpanDestEthPort`
+
+NewFabricSpanDestEthPortWithDefaults instantiates a new FabricSpanDestEthPort object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FabricSpanDestEthPort) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FabricSpanDestEthPort) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FabricSpanDestEthPort) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FabricSpanDestEthPort) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FabricSpanDestEthPort) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FabricSpanDestEthPort) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
+### GetAdminSpeed
+
+`func (o *FabricSpanDestEthPort) GetAdminSpeed() string`
+
+GetAdminSpeed returns the AdminSpeed field if non-nil, zero value otherwise.
+
+### GetAdminSpeedOk
+
+`func (o *FabricSpanDestEthPort) GetAdminSpeedOk() (*string, bool)`
+
+GetAdminSpeedOk returns a tuple with the AdminSpeed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdminSpeed
+
+`func (o *FabricSpanDestEthPort) SetAdminSpeed(v string)`
+
+SetAdminSpeed sets AdminSpeed field to given value.
+
+### HasAdminSpeed
+
+`func (o *FabricSpanDestEthPort) HasAdminSpeed() bool`
+
+HasAdminSpeed returns a boolean if a field has been set.
+
+### GetFec
+
+`func (o *FabricSpanDestEthPort) GetFec() string`
+
+GetFec returns the Fec field if non-nil, zero value otherwise.
+
+### GetFecOk
+
+`func (o *FabricSpanDestEthPort) GetFecOk() (*string, bool)`
+
+GetFecOk returns a tuple with the Fec field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFec
+
+`func (o *FabricSpanDestEthPort) SetFec(v string)`
+
+SetFec sets Fec field to given value.
+
+### HasFec
+
+`func (o *FabricSpanDestEthPort) HasFec() bool`
+
+HasFec returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

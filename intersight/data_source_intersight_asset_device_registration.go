@@ -558,7 +558,12 @@ func getAssetDeviceRegistrationSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"public_access_key": {
-			Description: "The device connector's public key used by Intersight to authenticate a connection from the device connector. The public key is used to verify that the signature a device connector sends on connect has been signed by the connector's private key stored on the device's filesystem. Must be a PEM encoded RSA public key string.",
+			Description: "The device connector's public key used by Intersight to authenticate a connection from the device connector. The public key is used to verify that the signature a device connector sends on connect has been signed by the connector's private key stored on the device's filesystem. Must be a PEM encoded RSA or Ed22519 public key string.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"public_encryption_key": {
+			Description: "The device connector public key used by Intersight for encryption. The public key is used to encrypt ephemeral aes keys to be used for decrypting sensitive data from Intersight. Must be a PEM encoded RSA public key string.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1430,6 +1435,11 @@ func dataSourceAssetDeviceRegistrationRead(c context.Context, d *schema.Resource
 		o.SetPublicAccessKey(x)
 	}
 
+	if v, ok := d.GetOk("public_encryption_key"); ok {
+		x := (v.(string))
+		o.SetPublicEncryptionKey(x)
+	}
+
 	if v, ok := d.GetOkExists("read_only"); ok {
 		x := (v.(bool))
 		o.SetReadOnly(x)
@@ -1696,6 +1706,7 @@ func dataSourceAssetDeviceRegistrationRead(c context.Context, d *schema.Resource
 				temp["platform_type"] = (s.GetPlatformType())
 				temp["proxy_app"] = (s.GetProxyApp())
 				temp["public_access_key"] = (s.GetPublicAccessKey())
+				temp["public_encryption_key"] = (s.GetPublicEncryptionKey())
 				temp["read_only"] = (s.GetReadOnly())
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())

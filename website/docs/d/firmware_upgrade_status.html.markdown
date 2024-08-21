@@ -25,6 +25,7 @@ The following arguments can be used to get data of already created objects in In
 * `download_stage`:(string) The image download stages. Example:downloading, flashing. 
 * `ep_power_status`:(string) The server power status after the upgrade request is submitted in the endpoint.* `none` - Server power status is none.* `powered on` - Server power status is powered on.* `powered off` - Server power status is powered off. 
 * `initial_power_status`:(string) The server power status before the upgrade request is submitted in the endpoint.* `none` - Server power status is none.* `powered on` - Server power status is powered on.* `powered off` - Server power status is powered off. 
+* `is_cdn_disabled`:(bool) A boolean flag which indicates that the generated pre-signed url is not a CDN URL when set to true. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `overall_error`:(string) The reason for the operation failure. 

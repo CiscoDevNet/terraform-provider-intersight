@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17227
+API version: 1.0.11-17956
 Contact: intersight@cisco.com
 */
 
@@ -23,7 +23,7 @@ var _ MappedNullable = &ComputePhysicalSummary{}
 
 // ComputePhysicalSummary Consolidated view of Blades and RackUnits.
 type ComputePhysicalSummary struct {
-	ViewsView
+	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
@@ -33,7 +33,7 @@ type ComputePhysicalSummary struct {
 	AlarmSummary    NullableComputeAlarmSummary `json:"AlarmSummary,omitempty"`
 	// The user defined asset tag assigned to the server.
 	AssetTag *string `json:"AssetTag,omitempty"`
-	// The amount of memory available on the server.
+	// Total memeory of the server in MB.
 	AvailableMemory *int64 `json:"AvailableMemory,omitempty"`
 	// The BIOS POST completion status of the server.
 	BiosPostComplete *bool `json:"BiosPostComplete,omitempty"`
@@ -41,14 +41,13 @@ type ComputePhysicalSummary struct {
 	ChassisId *string `json:"ChassisId,omitempty"`
 	// Connectivity Status of RackUnit to Switch - A or B or AB.
 	ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
-	// CPU Capacity = Number of CPU Sockets x Enabled Cores x Speed (GHz).
+	// Total processing capacity of the server.
 	CpuCapacity *float32 `json:"CpuCapacity,omitempty"`
-	// The database identifier of the registered device of an object.
+	// The MoId of the registered device that coresponds to the server.
 	DeviceMoId *string `json:"DeviceMoId,omitempty"`
 	// The Distinguished Name unambiguously identifies an object in the system.
 	Dn *string `json:"Dn,omitempty"`
 	// The fault summary for the server.
-	// Deprecated
 	FaultSummary *int64 `json:"FaultSummary,omitempty"`
 	// The firmware version of the Cisco Integrated Management Controller (CIMC) for this server.
 	Firmware *string `json:"Firmware,omitempty"`
@@ -65,7 +64,7 @@ type ComputePhysicalSummary struct {
 	KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
 	// The KVM Vendor for the server.
 	KvmVendor *string `json:"KvmVendor,omitempty"`
-	// The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.
+	// The lifecycle of the blade server. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `SecureEraseInProgress` - Secure Erase is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.
 	Lifecycle *string `json:"Lifecycle,omitempty"`
 	// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
@@ -73,13 +72,13 @@ type ComputePhysicalSummary struct {
 	MemorySpeed *string `json:"MemorySpeed,omitempty"`
 	// Management address of the server.
 	MgmtIpAddress *string `json:"MgmtIpAddress,omitempty"`
-	// This field displays the model number of the associated component or hardware.
+	// This field identifies the model of the given component.
 	Model *string `json:"Model,omitempty"`
 	// The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.
 	Name *string `json:"Name,omitempty"`
 	// The total number of network adapters present on the server.
 	NumAdaptors *int64 `json:"NumAdaptors,omitempty"`
-	// The total number of CPU cores present on the server.
+	// The total number of CPU cores enabled on the server.
 	NumCpuCores *int64 `json:"NumCpuCores,omitempty"`
 	// The total number of CPU cores enabled on the server.
 	NumCpuCoresEnabled *int64 `json:"NumCpuCoresEnabled,omitempty"`
@@ -98,21 +97,21 @@ type ComputePhysicalSummary struct {
 	OperState *string `json:"OperState,omitempty"`
 	// The operability of the server.
 	Operability *string `json:"Operability,omitempty"`
-	// The package version of the Host Service Utility (HSU) for this server.
+	// Bundle version which the firmware belongs to.
 	PackageVersion *string `json:"PackageVersion,omitempty"`
-	// The Rack unit software Personality.
+	// Unique identity of added software personality.
 	Personality *string `json:"Personality,omitempty"`
 	// The platform type of the registered device - whether managed by UCSM or operating in standalone mode.
 	PlatformType *string `json:"PlatformType,omitempty"`
-	// This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.
+	// This field identifies the presence (equipped) or absence of the given component.
 	Presence *string `json:"Presence,omitempty"`
-	// This field displays the revised version of the associated component or hardware (if any).
+	// This field identifies the revision of the given component.
 	Revision *string `json:"Revision,omitempty"`
 	// The Relative Name uniquely identifies an object within a given context.
 	Rn *string `json:"Rn,omitempty"`
 	// The mode of the server that determines it is scaled.
 	ScaledMode *string `json:"ScaledMode,omitempty"`
-	// This field displays the serial number of the associated component or hardware.
+	// This field identifies the serial of the given component.
 	Serial *string `json:"Serial,omitempty"`
 	// RackUnit ID that uniquely identifies the server.
 	ServerId *int64 `json:"ServerId,omitempty"`
@@ -120,7 +119,7 @@ type ComputePhysicalSummary struct {
 	ServiceProfile *string `json:"ServiceProfile,omitempty"`
 	// The slot number in the chassis that the blade is discovered in.
 	SlotId *int64 `json:"SlotId,omitempty"`
-	// The source object type of this view MO.
+	// Stores the source object type. This feild will either be RackUnit or Blade.
 	SourceObjectType *string `json:"SourceObjectType,omitempty"`
 	// To maintain the Topology workflow run status.
 	TopologyScanStatus *string `json:"TopologyScanStatus,omitempty"`
@@ -132,10 +131,11 @@ type ComputePhysicalSummary struct {
 	UserLabel *string `json:"UserLabel,omitempty"`
 	// The universally unique identity of the server.
 	Uuid *string `json:"Uuid,omitempty"`
-	// This field displays the vendor information of the associated component or hardware.
+	// This field identifies the vendor of the given component.
 	Vendor               *string                                     `json:"Vendor,omitempty"`
 	EquipmentChassis     NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
 	InventoryDeviceInfo  NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	InventoryParent      NullableMoBaseMoRelationship                `json:"InventoryParent,omitempty"`
 	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -150,6 +150,8 @@ func NewComputePhysicalSummary(classId string, objectType string) *ComputePhysic
 	this := ComputePhysicalSummary{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var frontPanelLockState string = "None"
+	this.FrontPanelLockState = &frontPanelLockState
 	return &this
 }
 
@@ -162,6 +164,8 @@ func NewComputePhysicalSummaryWithDefaults() *ComputePhysicalSummary {
 	this.ClassId = classId
 	var objectType string = "compute.PhysicalSummary"
 	this.ObjectType = objectType
+	var frontPanelLockState string = "None"
+	this.FrontPanelLockState = &frontPanelLockState
 	return &this
 }
 
@@ -555,7 +559,6 @@ func (o *ComputePhysicalSummary) SetDn(v string) {
 }
 
 // GetFaultSummary returns the FaultSummary field value if set, zero value otherwise.
-// Deprecated
 func (o *ComputePhysicalSummary) GetFaultSummary() int64 {
 	if o == nil || IsNil(o.FaultSummary) {
 		var ret int64
@@ -566,7 +569,6 @@ func (o *ComputePhysicalSummary) GetFaultSummary() int64 {
 
 // GetFaultSummaryOk returns a tuple with the FaultSummary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *ComputePhysicalSummary) GetFaultSummaryOk() (*int64, bool) {
 	if o == nil || IsNil(o.FaultSummary) {
 		return nil, false
@@ -584,7 +586,6 @@ func (o *ComputePhysicalSummary) HasFaultSummary() bool {
 }
 
 // SetFaultSummary gets a reference to the given int64 and assigns it to the FaultSummary field.
-// Deprecated
 func (o *ComputePhysicalSummary) SetFaultSummary(v int64) {
 	o.FaultSummary = &v
 }
@@ -2053,6 +2054,49 @@ func (o *ComputePhysicalSummary) UnsetInventoryDeviceInfo() {
 	o.InventoryDeviceInfo.Unset()
 }
 
+// GetInventoryParent returns the InventoryParent field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputePhysicalSummary) GetInventoryParent() MoBaseMoRelationship {
+	if o == nil || IsNil(o.InventoryParent.Get()) {
+		var ret MoBaseMoRelationship
+		return ret
+	}
+	return *o.InventoryParent.Get()
+}
+
+// GetInventoryParentOk returns a tuple with the InventoryParent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputePhysicalSummary) GetInventoryParentOk() (*MoBaseMoRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InventoryParent.Get(), o.InventoryParent.IsSet()
+}
+
+// HasInventoryParent returns a boolean if a field has been set.
+func (o *ComputePhysicalSummary) HasInventoryParent() bool {
+	if o != nil && o.InventoryParent.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInventoryParent gets a reference to the given NullableMoBaseMoRelationship and assigns it to the InventoryParent field.
+func (o *ComputePhysicalSummary) SetInventoryParent(v MoBaseMoRelationship) {
+	o.InventoryParent.Set(&v)
+}
+
+// SetInventoryParentNil sets the value for InventoryParent to be an explicit nil
+func (o *ComputePhysicalSummary) SetInventoryParentNil() {
+	o.InventoryParent.Set(nil)
+}
+
+// UnsetInventoryParent ensures that no value is present for InventoryParent, not even an explicit nil
+func (o *ComputePhysicalSummary) UnsetInventoryParent() {
+	o.InventoryParent.Unset()
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputePhysicalSummary) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || IsNil(o.RegisteredDevice.Get()) {
@@ -2106,13 +2150,13 @@ func (o ComputePhysicalSummary) MarshalJSON() ([]byte, error) {
 
 func (o ComputePhysicalSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedViewsView, errViewsView := json.Marshal(o.ViewsView)
-	if errViewsView != nil {
-		return map[string]interface{}{}, errViewsView
+	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
+	if errMoBaseMo != nil {
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	errViewsView = json.Unmarshal([]byte(serializedViewsView), &toSerialize)
-	if errViewsView != nil {
-		return map[string]interface{}{}, errViewsView
+	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
+	if errMoBaseMo != nil {
+		return map[string]interface{}{}, errMoBaseMo
 	}
 	if _, exists := toSerialize["ClassId"]; !exists {
 		toSerialize["ClassId"] = o.GetDefaultClassId()
@@ -2290,6 +2334,9 @@ func (o ComputePhysicalSummary) ToMap() (map[string]interface{}, error) {
 	if o.InventoryDeviceInfo.IsSet() {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo.Get()
 	}
+	if o.InventoryParent.IsSet() {
+		toSerialize["InventoryParent"] = o.InventoryParent.Get()
+	}
 	if o.RegisteredDevice.IsSet() {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
@@ -2353,7 +2400,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		AlarmSummary    NullableComputeAlarmSummary `json:"AlarmSummary,omitempty"`
 		// The user defined asset tag assigned to the server.
 		AssetTag *string `json:"AssetTag,omitempty"`
-		// The amount of memory available on the server.
+		// Total memeory of the server in MB.
 		AvailableMemory *int64 `json:"AvailableMemory,omitempty"`
 		// The BIOS POST completion status of the server.
 		BiosPostComplete *bool `json:"BiosPostComplete,omitempty"`
@@ -2361,14 +2408,13 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		ChassisId *string `json:"ChassisId,omitempty"`
 		// Connectivity Status of RackUnit to Switch - A or B or AB.
 		ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
-		// CPU Capacity = Number of CPU Sockets x Enabled Cores x Speed (GHz).
+		// Total processing capacity of the server.
 		CpuCapacity *float32 `json:"CpuCapacity,omitempty"`
-		// The database identifier of the registered device of an object.
+		// The MoId of the registered device that coresponds to the server.
 		DeviceMoId *string `json:"DeviceMoId,omitempty"`
 		// The Distinguished Name unambiguously identifies an object in the system.
 		Dn *string `json:"Dn,omitempty"`
 		// The fault summary for the server.
-		// Deprecated
 		FaultSummary *int64 `json:"FaultSummary,omitempty"`
 		// The firmware version of the Cisco Integrated Management Controller (CIMC) for this server.
 		Firmware *string `json:"Firmware,omitempty"`
@@ -2385,7 +2431,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		KvmServerStateEnabled *bool `json:"KvmServerStateEnabled,omitempty"`
 		// The KVM Vendor for the server.
 		KvmVendor *string `json:"KvmVendor,omitempty"`
-		// The lifecycle state of the server. This will map to the discovery lifecycle as represented in the server Identity object. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.
+		// The lifecycle of the blade server. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `SecureEraseInProgress` - Secure Erase is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.
 		Lifecycle *string `json:"Lifecycle,omitempty"`
 		// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
@@ -2393,13 +2439,13 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		MemorySpeed *string `json:"MemorySpeed,omitempty"`
 		// Management address of the server.
 		MgmtIpAddress *string `json:"MgmtIpAddress,omitempty"`
-		// This field displays the model number of the associated component or hardware.
+		// This field identifies the model of the given component.
 		Model *string `json:"Model,omitempty"`
 		// The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.
 		Name *string `json:"Name,omitempty"`
 		// The total number of network adapters present on the server.
 		NumAdaptors *int64 `json:"NumAdaptors,omitempty"`
-		// The total number of CPU cores present on the server.
+		// The total number of CPU cores enabled on the server.
 		NumCpuCores *int64 `json:"NumCpuCores,omitempty"`
 		// The total number of CPU cores enabled on the server.
 		NumCpuCoresEnabled *int64 `json:"NumCpuCoresEnabled,omitempty"`
@@ -2418,21 +2464,21 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		OperState *string `json:"OperState,omitempty"`
 		// The operability of the server.
 		Operability *string `json:"Operability,omitempty"`
-		// The package version of the Host Service Utility (HSU) for this server.
+		// Bundle version which the firmware belongs to.
 		PackageVersion *string `json:"PackageVersion,omitempty"`
-		// The Rack unit software Personality.
+		// Unique identity of added software personality.
 		Personality *string `json:"Personality,omitempty"`
 		// The platform type of the registered device - whether managed by UCSM or operating in standalone mode.
 		PlatformType *string `json:"PlatformType,omitempty"`
-		// This field indicates the presence (equipped) or absence (absent) of the associated component or hardware.
+		// This field identifies the presence (equipped) or absence of the given component.
 		Presence *string `json:"Presence,omitempty"`
-		// This field displays the revised version of the associated component or hardware (if any).
+		// This field identifies the revision of the given component.
 		Revision *string `json:"Revision,omitempty"`
 		// The Relative Name uniquely identifies an object within a given context.
 		Rn *string `json:"Rn,omitempty"`
 		// The mode of the server that determines it is scaled.
 		ScaledMode *string `json:"ScaledMode,omitempty"`
-		// This field displays the serial number of the associated component or hardware.
+		// This field identifies the serial of the given component.
 		Serial *string `json:"Serial,omitempty"`
 		// RackUnit ID that uniquely identifies the server.
 		ServerId *int64 `json:"ServerId,omitempty"`
@@ -2440,7 +2486,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		ServiceProfile *string `json:"ServiceProfile,omitempty"`
 		// The slot number in the chassis that the blade is discovered in.
 		SlotId *int64 `json:"SlotId,omitempty"`
-		// The source object type of this view MO.
+		// Stores the source object type. This feild will either be RackUnit or Blade.
 		SourceObjectType *string `json:"SourceObjectType,omitempty"`
 		// To maintain the Topology workflow run status.
 		TopologyScanStatus *string `json:"TopologyScanStatus,omitempty"`
@@ -2452,10 +2498,11 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		UserLabel *string `json:"UserLabel,omitempty"`
 		// The universally unique identity of the server.
 		Uuid *string `json:"Uuid,omitempty"`
-		// This field displays the vendor information of the associated component or hardware.
+		// This field identifies the vendor of the given component.
 		Vendor              *string                                     `json:"Vendor,omitempty"`
 		EquipmentChassis    NullableEquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
 		InventoryDeviceInfo NullableInventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		InventoryParent     NullableMoBaseMoRelationship                `json:"InventoryParent,omitempty"`
 		RegisteredDevice    NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
@@ -2522,6 +2569,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		varComputePhysicalSummary.Vendor = varComputePhysicalSummaryWithoutEmbeddedStruct.Vendor
 		varComputePhysicalSummary.EquipmentChassis = varComputePhysicalSummaryWithoutEmbeddedStruct.EquipmentChassis
 		varComputePhysicalSummary.InventoryDeviceInfo = varComputePhysicalSummaryWithoutEmbeddedStruct.InventoryDeviceInfo
+		varComputePhysicalSummary.InventoryParent = varComputePhysicalSummaryWithoutEmbeddedStruct.InventoryParent
 		varComputePhysicalSummary.RegisteredDevice = varComputePhysicalSummaryWithoutEmbeddedStruct.RegisteredDevice
 		*o = ComputePhysicalSummary(varComputePhysicalSummary)
 	} else {
@@ -2532,7 +2580,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 
 	err = json.Unmarshal(data, &varComputePhysicalSummary)
 	if err == nil {
-		o.ViewsView = varComputePhysicalSummary.ViewsView
+		o.MoBaseMo = varComputePhysicalSummary.MoBaseMo
 	} else {
 		return err
 	}
@@ -2598,12 +2646,13 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Vendor")
 		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "InventoryDeviceInfo")
+		delete(additionalProperties, "InventoryParent")
 		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs
-		reflectViewsView := reflect.ValueOf(o.ViewsView)
-		for i := 0; i < reflectViewsView.Type().NumField(); i++ {
-			t := reflectViewsView.Type().Field(i)
+		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
+		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
+			t := reflectMoBaseMo.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""
