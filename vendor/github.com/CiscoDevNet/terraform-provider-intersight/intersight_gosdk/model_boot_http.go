@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,7 @@ type BootHttp struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The name of the underlying virtual ethernet interface used by the HTTP boot device.
-	InterfaceName *string `json:"InterfaceName,omitempty"`
+	InterfaceName *string `json:"InterfaceName,omitempty" validate:"regexp=^[a-zA-Z0-9-._:]*$"`
 	// Lists the supported Interface Source for HTTP device. Supported values are \"name\" and \"mac\". * `name` - Use interface name to select virtual ethernet interface. * `mac` - Use MAC address to select virtual ethernet interface. * `port` - Use port to select virtual ethernet interface.
 	InterfaceSource *string `json:"InterfaceSource,omitempty"`
 	// The IP config type to use during the HTTP boot process. For DHCP configuration, the IP address, DNS server, netmask and gateway details are obtained from DHCP server. For static configuration, please provide the IP address, DNS server, netmask, and gateway details. * `DHCP` - The type of the IP config is DHCP. * `Static` - The type of the IP config is Static.
@@ -37,13 +37,13 @@ type BootHttp struct {
 	// The IP address family type to use during the HTTP boot process. * `IPv4` - The type of the IP address is IPv4. * `IPv6` - The type of the IP address is IPv6.
 	IpType *string `json:"IpType,omitempty"`
 	// The MAC Address of the underlying virtual ethernet interface used by the HTTP boot device.
-	MacAddress *string `json:"MacAddress,omitempty"`
+	MacAddress *string `json:"MacAddress,omitempty" validate:"regexp=^$|^(((\\\\d|([a-f]|[A-F])){2}:){5}(\\\\d|([a-f]|[A-F])){2})$"`
 	// The Port ID of the adapter on which the underlying virtual ethernet interface is present. If no port is specified, the default value is -1. Supported values are 0 to 255.
 	Port *int64 `json:"Port,omitempty"`
 	// Protocol to be used for HTTP boot. HTTPS require root certificate for authentication. * `HTTPS` - Secure HTTP protocol, certificate required for authentication. * `HTTP` - HTTP protocol without security certificate requirement.
 	Protocol *string `json:"Protocol,omitempty"`
 	// The slot ID of the adapter on which the underlying virtual ethernet interface is present. Supported values are ( 1 - 255, \"MLOM\", \"L\", \"L1\", \"L2\", \"OCP\").
-	Slot               *string                        `json:"Slot,omitempty"`
+	Slot               *string                        `json:"Slot,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]|L|MLOM|L1|L2|OCP)$"`
 	StaticIpV4Settings NullableBootStaticIpV4Settings `json:"StaticIpV4Settings,omitempty"`
 	StaticIpV6Settings NullableBootStaticIpV6Settings `json:"StaticIpV6Settings,omitempty"`
 	// Boot resource location in URI format.
@@ -645,7 +645,7 @@ func (o *BootHttp) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// The name of the underlying virtual ethernet interface used by the HTTP boot device.
-		InterfaceName *string `json:"InterfaceName,omitempty"`
+		InterfaceName *string `json:"InterfaceName,omitempty" validate:"regexp=^[a-zA-Z0-9-._:]*$"`
 		// Lists the supported Interface Source for HTTP device. Supported values are \"name\" and \"mac\". * `name` - Use interface name to select virtual ethernet interface. * `mac` - Use MAC address to select virtual ethernet interface. * `port` - Use port to select virtual ethernet interface.
 		InterfaceSource *string `json:"InterfaceSource,omitempty"`
 		// The IP config type to use during the HTTP boot process. For DHCP configuration, the IP address, DNS server, netmask and gateway details are obtained from DHCP server. For static configuration, please provide the IP address, DNS server, netmask, and gateway details. * `DHCP` - The type of the IP config is DHCP. * `Static` - The type of the IP config is Static.
@@ -653,13 +653,13 @@ func (o *BootHttp) UnmarshalJSON(data []byte) (err error) {
 		// The IP address family type to use during the HTTP boot process. * `IPv4` - The type of the IP address is IPv4. * `IPv6` - The type of the IP address is IPv6.
 		IpType *string `json:"IpType,omitempty"`
 		// The MAC Address of the underlying virtual ethernet interface used by the HTTP boot device.
-		MacAddress *string `json:"MacAddress,omitempty"`
+		MacAddress *string `json:"MacAddress,omitempty" validate:"regexp=^$|^(((\\\\d|([a-f]|[A-F])){2}:){5}(\\\\d|([a-f]|[A-F])){2})$"`
 		// The Port ID of the adapter on which the underlying virtual ethernet interface is present. If no port is specified, the default value is -1. Supported values are 0 to 255.
 		Port *int64 `json:"Port,omitempty"`
 		// Protocol to be used for HTTP boot. HTTPS require root certificate for authentication. * `HTTPS` - Secure HTTP protocol, certificate required for authentication. * `HTTP` - HTTP protocol without security certificate requirement.
 		Protocol *string `json:"Protocol,omitempty"`
 		// The slot ID of the adapter on which the underlying virtual ethernet interface is present. Supported values are ( 1 - 255, \"MLOM\", \"L\", \"L1\", \"L2\", \"OCP\").
-		Slot               *string                        `json:"Slot,omitempty"`
+		Slot               *string                        `json:"Slot,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]|L|MLOM|L1|L2|OCP)$"`
 		StaticIpV4Settings NullableBootStaticIpV4Settings `json:"StaticIpV4Settings,omitempty"`
 		StaticIpV6Settings NullableBootStaticIpV6Settings `json:"StaticIpV6Settings,omitempty"`
 		// Boot resource location in URI format.

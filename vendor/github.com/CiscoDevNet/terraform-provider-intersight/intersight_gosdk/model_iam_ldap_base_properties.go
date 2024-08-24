@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,7 @@ type IamLdapBaseProperties struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Role and locale information of the user.
-	Attribute *string `json:"Attribute,omitempty"`
+	Attribute *string `json:"Attribute,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9\\\\-\\\\.]*[a-zA-Z0-9\\\\-]$"`
 	// Base Distinguished Name (DN). Starting point from where server will search for users and groups.
 	BaseDn *string `json:"BaseDn,omitempty"`
 	// Distinguished Name (DN) of the user, that is used to authenticate against LDAP servers.
@@ -37,7 +37,7 @@ type IamLdapBaseProperties struct {
 	// Authentication method to access LDAP servers. * `LoginCredentials` - Requires the user credentials. If the bind process fails, then user is denied access. * `Anonymous` - Requires no username and password. If this option is selected and the LDAP server is configured for Anonymous logins, then the user gains access. * `ConfiguredCredentials` - Requires a known set of credentials to be specified for the initial bind process. If the initial bind process succeeds, then the distinguished name (DN) of the user name is queried and re-used for the re-binding process. If the re-binding process fails, then the user is denied access.
 	BindMethod *string `json:"BindMethod,omitempty"`
 	// The IPv4 domain that all users must be in.
-	Domain *string `json:"Domain,omitempty"`
+	Domain *string `json:"Domain,omitempty" validate:"regexp=^$|^(([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\\\\.\\\\-]*[a-zA-Z0-9]))$"`
 	// If enabled, the endpoint encrypts all information it sends to the LDAP server.
 	EnableEncryption *bool `json:"EnableEncryption,omitempty"`
 	// If enabled, user authorization is also done at the group level for LDAP users not in the local user database.
@@ -45,15 +45,15 @@ type IamLdapBaseProperties struct {
 	// If enabled, an extended search walks the chain of ancestry all the way to the root and returns all the groups and subgroups, each of those groups belong to recursively.
 	EnableNestedGroupSearch *bool `json:"EnableNestedGroupSearch,omitempty"`
 	// Criteria to identify entries in search requests.
-	Filter *string `json:"Filter,omitempty"`
+	Filter *string `json:"Filter,omitempty" validate:"regexp=^$|^[a-zA-Z0-9(][a-zA-Z0-9_#@$%&\\\\-\\\\^|()*=:!,.]*[a-zA-Z0-9\\\\-)]$"`
 	// Groups to which an LDAP entry belongs.
-	GroupAttribute *string `json:"GroupAttribute,omitempty"`
+	GroupAttribute *string `json:"GroupAttribute,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9_#@$%&\\\\-\\\\^]*[a-zA-Z0-9\\\\-]$"`
 	// Indicates whether the value of the 'password' property has been set.
 	IsPasswordSet *bool `json:"IsPasswordSet,omitempty"`
 	// Search depth to look for a nested LDAP group in an LDAP group map.
 	NestedGroupSearchDepth *int64 `json:"NestedGroupSearchDepth,omitempty"`
 	// The password of the user for initial bind process. It can be any string that adheres to the following constraints. It can have character except spaces, tabs, line breaks. It cannot be more than 254 characters.
-	Password *string `json:"Password,omitempty"`
+	Password *string `json:"Password,omitempty" validate:"regexp=^[\\\\S+]{0,254}$"`
 	// LDAP authentication timeout duration, in seconds.
 	Timeout              *int64 `json:"Timeout,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -730,7 +730,7 @@ func (o *IamLdapBaseProperties) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Role and locale information of the user.
-		Attribute *string `json:"Attribute,omitempty"`
+		Attribute *string `json:"Attribute,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9\\\\-\\\\.]*[a-zA-Z0-9\\\\-]$"`
 		// Base Distinguished Name (DN). Starting point from where server will search for users and groups.
 		BaseDn *string `json:"BaseDn,omitempty"`
 		// Distinguished Name (DN) of the user, that is used to authenticate against LDAP servers.
@@ -738,7 +738,7 @@ func (o *IamLdapBaseProperties) UnmarshalJSON(data []byte) (err error) {
 		// Authentication method to access LDAP servers. * `LoginCredentials` - Requires the user credentials. If the bind process fails, then user is denied access. * `Anonymous` - Requires no username and password. If this option is selected and the LDAP server is configured for Anonymous logins, then the user gains access. * `ConfiguredCredentials` - Requires a known set of credentials to be specified for the initial bind process. If the initial bind process succeeds, then the distinguished name (DN) of the user name is queried and re-used for the re-binding process. If the re-binding process fails, then the user is denied access.
 		BindMethod *string `json:"BindMethod,omitempty"`
 		// The IPv4 domain that all users must be in.
-		Domain *string `json:"Domain,omitempty"`
+		Domain *string `json:"Domain,omitempty" validate:"regexp=^$|^(([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\\\\.\\\\-]*[a-zA-Z0-9]))$"`
 		// If enabled, the endpoint encrypts all information it sends to the LDAP server.
 		EnableEncryption *bool `json:"EnableEncryption,omitempty"`
 		// If enabled, user authorization is also done at the group level for LDAP users not in the local user database.
@@ -746,15 +746,15 @@ func (o *IamLdapBaseProperties) UnmarshalJSON(data []byte) (err error) {
 		// If enabled, an extended search walks the chain of ancestry all the way to the root and returns all the groups and subgroups, each of those groups belong to recursively.
 		EnableNestedGroupSearch *bool `json:"EnableNestedGroupSearch,omitempty"`
 		// Criteria to identify entries in search requests.
-		Filter *string `json:"Filter,omitempty"`
+		Filter *string `json:"Filter,omitempty" validate:"regexp=^$|^[a-zA-Z0-9(][a-zA-Z0-9_#@$%&\\\\-\\\\^|()*=:!,.]*[a-zA-Z0-9\\\\-)]$"`
 		// Groups to which an LDAP entry belongs.
-		GroupAttribute *string `json:"GroupAttribute,omitempty"`
+		GroupAttribute *string `json:"GroupAttribute,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9_#@$%&\\\\-\\\\^]*[a-zA-Z0-9\\\\-]$"`
 		// Indicates whether the value of the 'password' property has been set.
 		IsPasswordSet *bool `json:"IsPasswordSet,omitempty"`
 		// Search depth to look for a nested LDAP group in an LDAP group map.
 		NestedGroupSearchDepth *int64 `json:"NestedGroupSearchDepth,omitempty"`
 		// The password of the user for initial bind process. It can be any string that adheres to the following constraints. It can have character except spaces, tabs, line breaks. It cannot be more than 254 characters.
-		Password *string `json:"Password,omitempty"`
+		Password *string `json:"Password,omitempty" validate:"regexp=^[\\\\S+]{0,254}$"`
 		// LDAP authentication timeout duration, in seconds.
 		Timeout *int64 `json:"Timeout,omitempty"`
 	}

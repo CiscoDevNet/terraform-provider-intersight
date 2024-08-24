@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -93,7 +93,7 @@ type BiosPolicy struct {
 	// BIOS Token for setting APBDIS configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `0` - Value - 0 for configuring CbsCmnApbdis token. * `1` - Value - 1 for configuring CbsCmnApbdis token. * `Auto` - Value - Auto for configuring CbsCmnApbdis token.
 	CbsCmnApbdis *string `json:"CbsCmnApbdis,omitempty"`
 	// BIOS Token for setting Fixed SOC P-State SP5 F19h configuration (0 - 2 P State).
-	CbsCmnApbdisDfPstateRs *string `json:"CbsCmnApbdisDfPstateRs,omitempty"`
+	CbsCmnApbdisDfPstateRs *string `json:"CbsCmnApbdisDfPstateRs,omitempty" validate:"regexp=^([0-2])$|^(platform-default)$"`
 	// BIOS Token for setting AVX512 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuAvx512 token. * `disabled` - Value - disabled for configuring CbsCmnCpuAvx512 token. * `enabled` - Value - enabled for configuring CbsCmnCpuAvx512 token.
 	CbsCmnCpuAvx512 *string `json:"CbsCmnCpuAvx512,omitempty"`
 	// BIOS Token for setting Core Performance Boost configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuCpb token. * `disabled` - Value - disabled for configuring CbsCmnCpuCpb token.
@@ -107,7 +107,7 @@ type BiosPolicy struct {
 	// BIOS Token for setting L2 Stream HW Prefetcher configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuL2streamHwPrefetcher token. * `disabled` - Value - disabled for configuring CbsCmnCpuL2streamHwPrefetcher token. * `enabled` - Value - enabled for configuring CbsCmnCpuL2streamHwPrefetcher token.
 	CbsCmnCpuL2streamHwPrefetcher *string `json:"CbsCmnCpuL2streamHwPrefetcher,omitempty"`
 	// BIOS Token for setting SEV-ES ASID Space Limit configuration (1 - 1007 ASIDs).
-	CbsCmnCpuSevAsidSpaceLimit *string `json:"CbsCmnCpuSevAsidSpaceLimit,omitempty"`
+	CbsCmnCpuSevAsidSpaceLimit *string `json:"CbsCmnCpuSevAsidSpaceLimit,omitempty" validate:"regexp=^([1-9]|[1-9]\\\\d|[1-9]\\\\d{2}|100[0-7])$|^(platform-default)$"`
 	// BIOS Token for setting CPU SMEE configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuSmee token. * `disabled` - Value - disabled for configuring CbsCmnCpuSmee token. * `enabled` - Value - enabled for configuring CbsCmnCpuSmee token.
 	CbsCmnCpuSmee *string `json:"CbsCmnCpuSmee,omitempty"`
 	// BIOS Token for setting Streaming Stores Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuStreamingStoresCtrl token. * `disabled` - Value - disabled for configuring CbsCmnCpuStreamingStoresCtrl token. * `enabled` - Value - enabled for configuring CbsCmnCpuStreamingStoresCtrl token.
@@ -167,7 +167,7 @@ type BiosPolicy struct {
 	// BIOS Token for setting SNP Memory Coverage configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuSnpMemCover token. * `Custom` - Value - Custom for configuring CbsDbgCpuSnpMemCover token. * `disabled` - Value - disabled for configuring CbsDbgCpuSnpMemCover token. * `enabled` - Value - enabled for configuring CbsDbgCpuSnpMemCover token.
 	CbsDbgCpuSnpMemCover *string `json:"CbsDbgCpuSnpMemCover,omitempty"`
 	// BIOS Token for setting SNP Memory Size to Cover in MiB configuration (0 - 1048576 MiB).
-	CbsDbgCpuSnpMemSizeCover *string `json:"CbsDbgCpuSnpMemSizeCover,omitempty"`
+	CbsDbgCpuSnpMemSizeCover *string `json:"CbsDbgCpuSnpMemSizeCover,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-9]\\\\d{4}|[1-9]\\\\d{5}|10[0-3]\\\\d{4}|104[0-7]\\\\d{3}|1048[0-4]\\\\d{2}|10485[0-6]\\\\d|104857[0-6])$|^(platform-default)$"`
 	// BIOS Token for setting 4-link xGMI max speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `20Gbps` - Value - 20Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `25Gbps` - Value - 25Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `32Gbps` - Value - 32Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `Auto` - Value - Auto for configuring CbsDfCmn4linkMaxXgmiSpeed token.
 	CbsDfCmn4linkMaxXgmiSpeed *string `json:"CbsDfCmn4linkMaxXgmiSpeed,omitempty"`
 	// BIOS Token for setting ACPI SRAT L3 Cache As NUMA Domain configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnAcpiSratL3numa token. * `disabled` - Value - disabled for configuring CbsDfCmnAcpiSratL3numa token. * `enabled` - Value - enabled for configuring CbsDfCmnAcpiSratL3numa token.
@@ -363,7 +363,7 @@ type BiosPolicy struct {
 	// BIOS Token for setting Memory Refresh Rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1x Refresh` - Value - 1x Refresh for configuring MemoryRefreshRate token. * `2x Refresh` - Value - 2x Refresh for configuring MemoryRefreshRate token.
 	MemoryRefreshRate *string `json:"MemoryRefreshRate,omitempty"`
 	// BIOS Token for setting Memory Size Limit in GiB configuration (0 - 65535 GiB).
-	MemorySizeLimit *string `json:"MemorySizeLimit,omitempty"`
+	MemorySizeLimit *string `json:"MemorySizeLimit,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-5]\\\\d{4}|6[0-4]\\\\d{3}|65[0-4]\\\\d{2}|655[0-2]\\\\d|6553[0-5])$|^(platform-default)$"`
 	// BIOS Token for setting Memory Thermal Throttling Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `CLTT with PECI` - Value - CLTT with PECI for configuring MemoryThermalThrottling token. * `Disabled` - Value - Disabled for configuring MemoryThermalThrottling token.
 	MemoryThermalThrottling *string `json:"MemoryThermalThrottling,omitempty"`
 	// BIOS Token for setting Mirroring Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `inter-socket` - Value - inter-socket for configuring MirroringMode token. * `intra-socket` - Value - intra-socket for configuring MirroringMode token.
@@ -409,25 +409,25 @@ type BiosPolicy struct {
 	// BIOS Token for setting Partial Memory Mirror Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring PartialMirrorModeConfig token. * `Percentage` - Value - Percentage for configuring PartialMirrorModeConfig token. * `Value in GB` - Value - Value in GiB for configuring PartialMirrorModeConfig token.
 	PartialMirrorModeConfig *string `json:"PartialMirrorModeConfig,omitempty"`
 	// BIOS Token for setting Partial Mirror Percentage configuration (0.00 - 50.00 Percentage).
-	PartialMirrorPercent *string `json:"PartialMirrorPercent,omitempty"`
+	PartialMirrorPercent *string `json:"PartialMirrorPercent,omitempty" validate:"regexp=^(\\\\d\\\\.\\\\d{1,2}|[1-4]\\\\d\\\\.\\\\d{1,2}|50\\\\.[0]{1,2})$|^(platform-default)$"`
 	// BIOS Token for setting Partial Mirror1 Size in GiB configuration (0 - 65535 GiB).
-	PartialMirrorValue1 *string `json:"PartialMirrorValue1,omitempty"`
+	PartialMirrorValue1 *string `json:"PartialMirrorValue1,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-5]\\\\d{4}|6[0-4]\\\\d{3}|65[0-4]\\\\d{2}|655[0-2]\\\\d|6553[0-5])$|^(platform-default)$"`
 	// BIOS Token for setting Partial Mirror2 Size in GiB configuration (0 - 65535 GiB).
-	PartialMirrorValue2 *string `json:"PartialMirrorValue2,omitempty"`
+	PartialMirrorValue2 *string `json:"PartialMirrorValue2,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-5]\\\\d{4}|6[0-4]\\\\d{3}|65[0-4]\\\\d{2}|655[0-2]\\\\d|6553[0-5])$|^(platform-default)$"`
 	// BIOS Token for setting Partial Mirror3 Size in GiB configuration (0 - 65535 GiB).
-	PartialMirrorValue3 *string `json:"PartialMirrorValue3,omitempty"`
+	PartialMirrorValue3 *string `json:"PartialMirrorValue3,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-5]\\\\d{4}|6[0-4]\\\\d{3}|65[0-4]\\\\d{2}|655[0-2]\\\\d|6553[0-5])$|^(platform-default)$"`
 	// BIOS Token for setting Partial Mirror4 Size in GiB configuration (0 - 65535 GiB).
-	PartialMirrorValue4 *string `json:"PartialMirrorValue4,omitempty"`
+	PartialMirrorValue4 *string `json:"PartialMirrorValue4,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-5]\\\\d{4}|6[0-4]\\\\d{3}|65[0-4]\\\\d{2}|655[0-2]\\\\d|6553[0-5])$|^(platform-default)$"`
 	// BIOS Token for setting Patrol Scrub configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring PatrolScrub token. * `Enable at End of POST` - Value - Enable at End of POST for configuring PatrolScrub token. * `enabled` - Value - enabled for configuring PatrolScrub token.
 	PatrolScrub *string `json:"PatrolScrub,omitempty"`
 	// BIOS Token for setting Patrol Scrub Interval configuration (5 - 23 Hour).
-	PatrolScrubDuration *string `json:"PatrolScrubDuration,omitempty"`
+	PatrolScrubDuration *string `json:"PatrolScrubDuration,omitempty" validate:"regexp=^([5-9]|1\\\\d|2[0-3])$|^(platform-default)$"`
 	// BIOS Token for setting PCIe RAS Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	PcIeRasSupport *string `json:"PcIeRasSupport,omitempty"`
 	// BIOS Token for setting NVMe SSD Hot-Plug Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	PcIeSsdHotPlugSupport *string `json:"PcIeSsdHotPlugSupport,omitempty"`
 	// BIOS Token for setting PCIe PLL SSC Percent configuration (0 - 255 (n/10)%).
-	PchPciePllSsc *string `json:"PchPciePllSsc,omitempty"`
+	PchPciePllSsc *string `json:"PchPciePllSsc,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|1\\\\d{2}|2[0-4]\\\\d|25[0-5])$|^(platform-default)$"`
 	// BIOS Token for setting xHCI Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	PchUsb30mode *string `json:"PchUsb30mode,omitempty"`
 	// BIOS Token for setting All PCIe Slots OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring PciOptionRoMs token. * `enabled` - Value - enabled for configuring PciOptionRoMs token. * `Legacy Only` - Value - Legacy Only for configuring PciOptionRoMs token. * `UEFI Only` - Value - UEFI Only for configuring PciOptionRoMs token.
@@ -529,19 +529,19 @@ type BiosPolicy struct {
 	// BIOS Token for setting SGX Auto MP Registration Agent configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SgxAutoRegistrationAgent *string `json:"SgxAutoRegistrationAgent,omitempty"`
 	// BIOS Token for setting SGX Epoch 0 configuration (0 - ffffffffffffffff Hash byte 7-0).
-	SgxEpoch0 *string `json:"SgxEpoch0,omitempty"`
+	SgxEpoch0 *string `json:"SgxEpoch0,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 	// BIOS Token for setting SGX Epoch 1 configuration (0 - ffffffffffffffff Hash byte 7-0).
-	SgxEpoch1 *string `json:"SgxEpoch1,omitempty"`
+	SgxEpoch1 *string `json:"SgxEpoch1,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 	// BIOS Token for setting SGX Factory Reset configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SgxFactoryReset *string `json:"SgxFactoryReset,omitempty"`
 	// BIOS Token for setting SGX PubKey Hash0 configuration (0 - ffffffffffffffff Hash byte 7-0).
-	SgxLePubKeyHash0 *string `json:"SgxLePubKeyHash0,omitempty"`
+	SgxLePubKeyHash0 *string `json:"SgxLePubKeyHash0,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 	// BIOS Token for setting SGX PubKey Hash1 configuration (0 - ffffffffffffffff Hash byte 15-8).
-	SgxLePubKeyHash1 *string `json:"SgxLePubKeyHash1,omitempty"`
+	SgxLePubKeyHash1 *string `json:"SgxLePubKeyHash1,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 	// BIOS Token for setting SGX PubKey Hash2 configuration (0 - ffffffffffffffff Hash byte 23-16).
-	SgxLePubKeyHash2 *string `json:"SgxLePubKeyHash2,omitempty"`
+	SgxLePubKeyHash2 *string `json:"SgxLePubKeyHash2,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 	// BIOS Token for setting SGX PubKey Hash3 configuration (0 - ffffffffffffffff Hash byte 31-24).
-	SgxLePubKeyHash3 *string `json:"SgxLePubKeyHash3,omitempty"`
+	SgxLePubKeyHash3 *string `json:"SgxLePubKeyHash3,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 	// BIOS Token for setting SGX Write Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SgxLeWr *string `json:"SgxLeWr,omitempty"`
 	// BIOS Token for setting SGX Package Information In-Band Access configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -18549,7 +18549,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		// BIOS Token for setting APBDIS configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `0` - Value - 0 for configuring CbsCmnApbdis token. * `1` - Value - 1 for configuring CbsCmnApbdis token. * `Auto` - Value - Auto for configuring CbsCmnApbdis token.
 		CbsCmnApbdis *string `json:"CbsCmnApbdis,omitempty"`
 		// BIOS Token for setting Fixed SOC P-State SP5 F19h configuration (0 - 2 P State).
-		CbsCmnApbdisDfPstateRs *string `json:"CbsCmnApbdisDfPstateRs,omitempty"`
+		CbsCmnApbdisDfPstateRs *string `json:"CbsCmnApbdisDfPstateRs,omitempty" validate:"regexp=^([0-2])$|^(platform-default)$"`
 		// BIOS Token for setting AVX512 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuAvx512 token. * `disabled` - Value - disabled for configuring CbsCmnCpuAvx512 token. * `enabled` - Value - enabled for configuring CbsCmnCpuAvx512 token.
 		CbsCmnCpuAvx512 *string `json:"CbsCmnCpuAvx512,omitempty"`
 		// BIOS Token for setting Core Performance Boost configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuCpb token. * `disabled` - Value - disabled for configuring CbsCmnCpuCpb token.
@@ -18563,7 +18563,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		// BIOS Token for setting L2 Stream HW Prefetcher configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuL2streamHwPrefetcher token. * `disabled` - Value - disabled for configuring CbsCmnCpuL2streamHwPrefetcher token. * `enabled` - Value - enabled for configuring CbsCmnCpuL2streamHwPrefetcher token.
 		CbsCmnCpuL2streamHwPrefetcher *string `json:"CbsCmnCpuL2streamHwPrefetcher,omitempty"`
 		// BIOS Token for setting SEV-ES ASID Space Limit configuration (1 - 1007 ASIDs).
-		CbsCmnCpuSevAsidSpaceLimit *string `json:"CbsCmnCpuSevAsidSpaceLimit,omitempty"`
+		CbsCmnCpuSevAsidSpaceLimit *string `json:"CbsCmnCpuSevAsidSpaceLimit,omitempty" validate:"regexp=^([1-9]|[1-9]\\\\d|[1-9]\\\\d{2}|100[0-7])$|^(platform-default)$"`
 		// BIOS Token for setting CPU SMEE configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuSmee token. * `disabled` - Value - disabled for configuring CbsCmnCpuSmee token. * `enabled` - Value - enabled for configuring CbsCmnCpuSmee token.
 		CbsCmnCpuSmee *string `json:"CbsCmnCpuSmee,omitempty"`
 		// BIOS Token for setting Streaming Stores Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuStreamingStoresCtrl token. * `disabled` - Value - disabled for configuring CbsCmnCpuStreamingStoresCtrl token. * `enabled` - Value - enabled for configuring CbsCmnCpuStreamingStoresCtrl token.
@@ -18623,7 +18623,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		// BIOS Token for setting SNP Memory Coverage configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDbgCpuSnpMemCover token. * `Custom` - Value - Custom for configuring CbsDbgCpuSnpMemCover token. * `disabled` - Value - disabled for configuring CbsDbgCpuSnpMemCover token. * `enabled` - Value - enabled for configuring CbsDbgCpuSnpMemCover token.
 		CbsDbgCpuSnpMemCover *string `json:"CbsDbgCpuSnpMemCover,omitempty"`
 		// BIOS Token for setting SNP Memory Size to Cover in MiB configuration (0 - 1048576 MiB).
-		CbsDbgCpuSnpMemSizeCover *string `json:"CbsDbgCpuSnpMemSizeCover,omitempty"`
+		CbsDbgCpuSnpMemSizeCover *string `json:"CbsDbgCpuSnpMemSizeCover,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-9]\\\\d{4}|[1-9]\\\\d{5}|10[0-3]\\\\d{4}|104[0-7]\\\\d{3}|1048[0-4]\\\\d{2}|10485[0-6]\\\\d|104857[0-6])$|^(platform-default)$"`
 		// BIOS Token for setting 4-link xGMI max speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `20Gbps` - Value - 20Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `25Gbps` - Value - 25Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `32Gbps` - Value - 32Gbps for configuring CbsDfCmn4linkMaxXgmiSpeed token. * `Auto` - Value - Auto for configuring CbsDfCmn4linkMaxXgmiSpeed token.
 		CbsDfCmn4linkMaxXgmiSpeed *string `json:"CbsDfCmn4linkMaxXgmiSpeed,omitempty"`
 		// BIOS Token for setting ACPI SRAT L3 Cache As NUMA Domain configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnAcpiSratL3numa token. * `disabled` - Value - disabled for configuring CbsDfCmnAcpiSratL3numa token. * `enabled` - Value - enabled for configuring CbsDfCmnAcpiSratL3numa token.
@@ -18819,7 +18819,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		// BIOS Token for setting Memory Refresh Rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1x Refresh` - Value - 1x Refresh for configuring MemoryRefreshRate token. * `2x Refresh` - Value - 2x Refresh for configuring MemoryRefreshRate token.
 		MemoryRefreshRate *string `json:"MemoryRefreshRate,omitempty"`
 		// BIOS Token for setting Memory Size Limit in GiB configuration (0 - 65535 GiB).
-		MemorySizeLimit *string `json:"MemorySizeLimit,omitempty"`
+		MemorySizeLimit *string `json:"MemorySizeLimit,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-5]\\\\d{4}|6[0-4]\\\\d{3}|65[0-4]\\\\d{2}|655[0-2]\\\\d|6553[0-5])$|^(platform-default)$"`
 		// BIOS Token for setting Memory Thermal Throttling Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `CLTT with PECI` - Value - CLTT with PECI for configuring MemoryThermalThrottling token. * `Disabled` - Value - Disabled for configuring MemoryThermalThrottling token.
 		MemoryThermalThrottling *string `json:"MemoryThermalThrottling,omitempty"`
 		// BIOS Token for setting Mirroring Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `inter-socket` - Value - inter-socket for configuring MirroringMode token. * `intra-socket` - Value - intra-socket for configuring MirroringMode token.
@@ -18865,25 +18865,25 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		// BIOS Token for setting Partial Memory Mirror Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring PartialMirrorModeConfig token. * `Percentage` - Value - Percentage for configuring PartialMirrorModeConfig token. * `Value in GB` - Value - Value in GiB for configuring PartialMirrorModeConfig token.
 		PartialMirrorModeConfig *string `json:"PartialMirrorModeConfig,omitempty"`
 		// BIOS Token for setting Partial Mirror Percentage configuration (0.00 - 50.00 Percentage).
-		PartialMirrorPercent *string `json:"PartialMirrorPercent,omitempty"`
+		PartialMirrorPercent *string `json:"PartialMirrorPercent,omitempty" validate:"regexp=^(\\\\d\\\\.\\\\d{1,2}|[1-4]\\\\d\\\\.\\\\d{1,2}|50\\\\.[0]{1,2})$|^(platform-default)$"`
 		// BIOS Token for setting Partial Mirror1 Size in GiB configuration (0 - 65535 GiB).
-		PartialMirrorValue1 *string `json:"PartialMirrorValue1,omitempty"`
+		PartialMirrorValue1 *string `json:"PartialMirrorValue1,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-5]\\\\d{4}|6[0-4]\\\\d{3}|65[0-4]\\\\d{2}|655[0-2]\\\\d|6553[0-5])$|^(platform-default)$"`
 		// BIOS Token for setting Partial Mirror2 Size in GiB configuration (0 - 65535 GiB).
-		PartialMirrorValue2 *string `json:"PartialMirrorValue2,omitempty"`
+		PartialMirrorValue2 *string `json:"PartialMirrorValue2,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-5]\\\\d{4}|6[0-4]\\\\d{3}|65[0-4]\\\\d{2}|655[0-2]\\\\d|6553[0-5])$|^(platform-default)$"`
 		// BIOS Token for setting Partial Mirror3 Size in GiB configuration (0 - 65535 GiB).
-		PartialMirrorValue3 *string `json:"PartialMirrorValue3,omitempty"`
+		PartialMirrorValue3 *string `json:"PartialMirrorValue3,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-5]\\\\d{4}|6[0-4]\\\\d{3}|65[0-4]\\\\d{2}|655[0-2]\\\\d|6553[0-5])$|^(platform-default)$"`
 		// BIOS Token for setting Partial Mirror4 Size in GiB configuration (0 - 65535 GiB).
-		PartialMirrorValue4 *string `json:"PartialMirrorValue4,omitempty"`
+		PartialMirrorValue4 *string `json:"PartialMirrorValue4,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|[1-9]\\\\d{2}|[1-9]\\\\d{3}|[1-5]\\\\d{4}|6[0-4]\\\\d{3}|65[0-4]\\\\d{2}|655[0-2]\\\\d|6553[0-5])$|^(platform-default)$"`
 		// BIOS Token for setting Patrol Scrub configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring PatrolScrub token. * `Enable at End of POST` - Value - Enable at End of POST for configuring PatrolScrub token. * `enabled` - Value - enabled for configuring PatrolScrub token.
 		PatrolScrub *string `json:"PatrolScrub,omitempty"`
 		// BIOS Token for setting Patrol Scrub Interval configuration (5 - 23 Hour).
-		PatrolScrubDuration *string `json:"PatrolScrubDuration,omitempty"`
+		PatrolScrubDuration *string `json:"PatrolScrubDuration,omitempty" validate:"regexp=^([5-9]|1\\\\d|2[0-3])$|^(platform-default)$"`
 		// BIOS Token for setting PCIe RAS Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		PcIeRasSupport *string `json:"PcIeRasSupport,omitempty"`
 		// BIOS Token for setting NVMe SSD Hot-Plug Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		PcIeSsdHotPlugSupport *string `json:"PcIeSsdHotPlugSupport,omitempty"`
 		// BIOS Token for setting PCIe PLL SSC Percent configuration (0 - 255 (n/10)%).
-		PchPciePllSsc *string `json:"PchPciePllSsc,omitempty"`
+		PchPciePllSsc *string `json:"PchPciePllSsc,omitempty" validate:"regexp=^(\\\\d|[1-9]\\\\d|1\\\\d{2}|2[0-4]\\\\d|25[0-5])$|^(platform-default)$"`
 		// BIOS Token for setting xHCI Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		PchUsb30mode *string `json:"PchUsb30mode,omitempty"`
 		// BIOS Token for setting All PCIe Slots OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring PciOptionRoMs token. * `enabled` - Value - enabled for configuring PciOptionRoMs token. * `Legacy Only` - Value - Legacy Only for configuring PciOptionRoMs token. * `UEFI Only` - Value - UEFI Only for configuring PciOptionRoMs token.
@@ -18985,19 +18985,19 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		// BIOS Token for setting SGX Auto MP Registration Agent configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		SgxAutoRegistrationAgent *string `json:"SgxAutoRegistrationAgent,omitempty"`
 		// BIOS Token for setting SGX Epoch 0 configuration (0 - ffffffffffffffff Hash byte 7-0).
-		SgxEpoch0 *string `json:"SgxEpoch0,omitempty"`
+		SgxEpoch0 *string `json:"SgxEpoch0,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 		// BIOS Token for setting SGX Epoch 1 configuration (0 - ffffffffffffffff Hash byte 7-0).
-		SgxEpoch1 *string `json:"SgxEpoch1,omitempty"`
+		SgxEpoch1 *string `json:"SgxEpoch1,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 		// BIOS Token for setting SGX Factory Reset configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		SgxFactoryReset *string `json:"SgxFactoryReset,omitempty"`
 		// BIOS Token for setting SGX PubKey Hash0 configuration (0 - ffffffffffffffff Hash byte 7-0).
-		SgxLePubKeyHash0 *string `json:"SgxLePubKeyHash0,omitempty"`
+		SgxLePubKeyHash0 *string `json:"SgxLePubKeyHash0,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 		// BIOS Token for setting SGX PubKey Hash1 configuration (0 - ffffffffffffffff Hash byte 15-8).
-		SgxLePubKeyHash1 *string `json:"SgxLePubKeyHash1,omitempty"`
+		SgxLePubKeyHash1 *string `json:"SgxLePubKeyHash1,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 		// BIOS Token for setting SGX PubKey Hash2 configuration (0 - ffffffffffffffff Hash byte 23-16).
-		SgxLePubKeyHash2 *string `json:"SgxLePubKeyHash2,omitempty"`
+		SgxLePubKeyHash2 *string `json:"SgxLePubKeyHash2,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 		// BIOS Token for setting SGX PubKey Hash3 configuration (0 - ffffffffffffffff Hash byte 31-24).
-		SgxLePubKeyHash3 *string `json:"SgxLePubKeyHash3,omitempty"`
+		SgxLePubKeyHash3 *string `json:"SgxLePubKeyHash3,omitempty" validate:"regexp=^([0-9a-fA-F]{1,16})$|^(platform-default)$"`
 		// BIOS Token for setting SGX Write Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		SgxLeWr *string `json:"SgxLeWr,omitempty"`
 		// BIOS Token for setting SGX Package Information In-Band Access configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.

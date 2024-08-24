@@ -637,6 +637,11 @@ func getNetworkElementSummarySchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"user_label": {
+			Description: "The user defined label assigned to the server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"vendor": {
 			Description: "This field identifies the vendor of the given component.",
 			Type:        schema.TypeString,
@@ -1425,6 +1430,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetTotalMemory(x)
 	}
 
+	if v, ok := d.GetOk("user_label"); ok {
+		x := (v.(string))
+		o.SetUserLabel(x)
+	}
+
 	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
@@ -1632,6 +1642,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["thermal"] = (s.GetThermal())
 				temp["total_memory"] = (s.GetTotalMemory())
+				temp["user_label"] = (s.GetUserLabel())
 				temp["vendor"] = (s.GetVendor())
 				temp["nr_version"] = (s.GetVersion())
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -44,7 +44,7 @@ type NetworkElement struct {
 	// Connection status of the switch.
 	ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
 	// The default domain name configured on the switch.
-	DefaultDomain *string `json:"DefaultDomain,omitempty"`
+	DefaultDomain *string `json:"DefaultDomain,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]+([-.]{1}[a-zA-Z0-9]+)*$"`
 	// The user configured Ethernet operational mode for this switch (End-Host or Switching).
 	// Deprecated
 	EthernetMode *string `json:"EthernetMode,omitempty"`
@@ -117,7 +117,7 @@ type NetworkElement struct {
 	// Total available memory on this switch platform.
 	TotalMemory *int64 `json:"TotalMemory,omitempty"`
 	// The user defined label assigned to the switch.
-	UserLabel *string `json:"UserLabel,omitempty"`
+	UserLabel *string `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 	// Firmware version of the switch.
 	Version *string `json:"Version,omitempty"`
 	// An array of relationships to equipmentSwitchCard resources.
@@ -3250,7 +3250,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		// Connection status of the switch.
 		ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
 		// The default domain name configured on the switch.
-		DefaultDomain *string `json:"DefaultDomain,omitempty"`
+		DefaultDomain *string `json:"DefaultDomain,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]+([-.]{1}[a-zA-Z0-9]+)*$"`
 		// The user configured Ethernet operational mode for this switch (End-Host or Switching).
 		// Deprecated
 		EthernetMode *string `json:"EthernetMode,omitempty"`
@@ -3323,7 +3323,7 @@ func (o *NetworkElement) UnmarshalJSON(data []byte) (err error) {
 		// Total available memory on this switch platform.
 		TotalMemory *int64 `json:"TotalMemory,omitempty"`
 		// The user defined label assigned to the switch.
-		UserLabel *string `json:"UserLabel,omitempty"`
+		UserLabel *string `json:"UserLabel,omitempty" validate:"regexp=^[ !#$%&\\\\(\\\\)\\\\*\\\\+,\\\\-\\\\.\\/:;\\\\?@\\\\[\\\\]_\\\\{\\\\|\\\\}~a-zA-Z0-9]*$"`
 		// Firmware version of the switch.
 		Version *string `json:"Version,omitempty"`
 		// An array of relationships to equipmentSwitchCard resources.

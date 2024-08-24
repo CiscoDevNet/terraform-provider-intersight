@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -31,9 +31,9 @@ type WorkflowCatalogItemDefinition struct {
 	// The description for the catalog item which provides information on what are the pre-requisites to deploy the resource.
 	Description *string `json:"Description,omitempty"`
 	// A user friendly short name to identify the catalog item. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).
-	Label *string `json:"Label,omitempty"`
+	Label *string `json:"Label,omitempty" validate:"regexp=^[a-zA-Z0-9]+[\\\\sa-zA-Z0-9_.:-]{1,92}$"`
 	// The name for this catalog item definition. You can have multiple versions of the catalog item with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_).
-	Name *string `json:"Name,omitempty"`
+	Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_.:-]{1,64}$"`
 	// Publish status of the catalog item. * `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested. * `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption. * `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.
 	PublishStatus *string                   `json:"PublishStatus,omitempty"`
 	ServiceItems  []WorkflowServiceItemType `json:"ServiceItems,omitempty"`
@@ -600,9 +600,9 @@ func (o *WorkflowCatalogItemDefinition) UnmarshalJSON(data []byte) (err error) {
 		// The description for the catalog item which provides information on what are the pre-requisites to deploy the resource.
 		Description *string `json:"Description,omitempty"`
 		// A user friendly short name to identify the catalog item. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).
-		Label *string `json:"Label,omitempty"`
+		Label *string `json:"Label,omitempty" validate:"regexp=^[a-zA-Z0-9]+[\\\\sa-zA-Z0-9_.:-]{1,92}$"`
 		// The name for this catalog item definition. You can have multiple versions of the catalog item with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_).
-		Name *string `json:"Name,omitempty"`
+		Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9_.:-]{1,64}$"`
 		// Publish status of the catalog item. * `Draft` - The enum specifies the option as Draft which means the meta definition is being designed and tested. * `Published` - The enum specifies the option as Published which means the meta definition is ready for consumption. * `Archived` - The enum specifies the option as Archived which means the meta definition is archived and can no longer be consumed.
 		PublishStatus *string                   `json:"PublishStatus,omitempty"`
 		ServiceItems  []WorkflowServiceItemType `json:"ServiceItems,omitempty"`

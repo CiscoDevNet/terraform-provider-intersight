@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -31,15 +31,15 @@ type StorageStoragePolicy struct {
 	// All unconfigured drives will move to the selected state on deployment. Newly inserted drives will move to the selected state. Select Unconfigured Good option to retain the existing configuration. Select JBOD to move the unconfigured drives to JBOD state. Select RAID0 to create a RAID0 virtual drive on each of the unconfigured drives. If JBOD is selected, unconfigured drives will move to JBOD state on host reboot. This setting is applicable only to selected set of controllers on FI attached servers. * `UnconfiguredGood` - Newly inserted drives or on reboot, drives will remain the same state. * `Jbod` - Newly inserted drives or on reboot, drives will automatically move to JBOD state if drive state was UnconfiguredGood. * `RAID0` - Newly inserted drives or on reboot, virtual drives will be created, respective drives will move to Online state.
 	DefaultDriveMode *string `json:"DefaultDriveMode,omitempty"`
 	// Only U.3 NVMe drives has to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.
-	DirectAttachedNvmeSlots *string `json:"DirectAttachedNvmeSlots,omitempty"`
+	DirectAttachedNvmeSlots *string `json:"DirectAttachedNvmeSlots,omitempty" validate:"regexp=^$|^((\\\\d+\\\\-\\\\d+)|(\\\\d+))(,((\\\\d+\\\\-\\\\d+)|(\\\\d+)))*$"`
 	// A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen.
-	GlobalHotSpares *string                             `json:"GlobalHotSpares,omitempty"`
+	GlobalHotSpares *string                             `json:"GlobalHotSpares,omitempty" validate:"regexp=^$|^((\\\\d+\\\\-\\\\d+)|(\\\\d+))(,((\\\\d+\\\\-\\\\d+)|(\\\\d+)))*$"`
 	M2VirtualDrive  NullableStorageM2VirtualDriveConfig `json:"M2VirtualDrive,omitempty"`
 	Raid0Drive      NullableStorageR0Drive              `json:"Raid0Drive,omitempty"`
 	// Only U.3 NVMe drives has to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.
-	RaidAttachedNvmeSlots *string `json:"RaidAttachedNvmeSlots,omitempty"`
+	RaidAttachedNvmeSlots *string `json:"RaidAttachedNvmeSlots,omitempty" validate:"regexp=^$|^((\\\\d+\\\\-\\\\d+)|(\\\\d+))(,((\\\\d+\\\\-\\\\d+)|(\\\\d+)))*$"`
 	// JBOD drives specified in this slot range will be encrypted. Allowed values are 'ALL', or a comma or hyphen separated number range. Sample format is ALL or 1, 3 or 4-6, 8. Setting the value to 'ALL' will encrypt all the unused UnconfigureGood/JBOD disks.
-	SecureJbods *string `json:"SecureJbods,omitempty"`
+	SecureJbods *string `json:"SecureJbods,omitempty" validate:"regexp=^$|^((((\\\\d+\\\\-\\\\d+)|(\\\\d+))(,((\\\\d+\\\\-\\\\d+)|(\\\\d+)))*)|(a|A)(l|L)(l|L))$"`
 	// State to which drives, not used in this policy, are to be moved. NoChange will not change the drive state. No Change must be selected if Default Drive State is set to JBOD or RAID0. * `NoChange` - Drive state will not be modified by Storage Policy. * `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group. * `Jbod` - JBOD state where the disks start showing up to Host OS.
 	UnusedDisksState *string `json:"UnusedDisksState,omitempty"`
 	// Disks in JBOD State are used to create virtual drives. This setting must be disabled if Default Drive State is set to JBOD.
@@ -682,15 +682,15 @@ func (o *StorageStoragePolicy) UnmarshalJSON(data []byte) (err error) {
 		// All unconfigured drives will move to the selected state on deployment. Newly inserted drives will move to the selected state. Select Unconfigured Good option to retain the existing configuration. Select JBOD to move the unconfigured drives to JBOD state. Select RAID0 to create a RAID0 virtual drive on each of the unconfigured drives. If JBOD is selected, unconfigured drives will move to JBOD state on host reboot. This setting is applicable only to selected set of controllers on FI attached servers. * `UnconfiguredGood` - Newly inserted drives or on reboot, drives will remain the same state. * `Jbod` - Newly inserted drives or on reboot, drives will automatically move to JBOD state if drive state was UnconfiguredGood. * `RAID0` - Newly inserted drives or on reboot, virtual drives will be created, respective drives will move to Online state.
 		DefaultDriveMode *string `json:"DefaultDriveMode,omitempty"`
 		// Only U.3 NVMe drives has to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.
-		DirectAttachedNvmeSlots *string `json:"DirectAttachedNvmeSlots,omitempty"`
+		DirectAttachedNvmeSlots *string `json:"DirectAttachedNvmeSlots,omitempty" validate:"regexp=^$|^((\\\\d+\\\\-\\\\d+)|(\\\\d+))(,((\\\\d+\\\\-\\\\d+)|(\\\\d+)))*$"`
 		// A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen.
-		GlobalHotSpares *string                             `json:"GlobalHotSpares,omitempty"`
+		GlobalHotSpares *string                             `json:"GlobalHotSpares,omitempty" validate:"regexp=^$|^((\\\\d+\\\\-\\\\d+)|(\\\\d+))(,((\\\\d+\\\\-\\\\d+)|(\\\\d+)))*$"`
 		M2VirtualDrive  NullableStorageM2VirtualDriveConfig `json:"M2VirtualDrive,omitempty"`
 		Raid0Drive      NullableStorageR0Drive              `json:"Raid0Drive,omitempty"`
 		// Only U.3 NVMe drives has to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.
-		RaidAttachedNvmeSlots *string `json:"RaidAttachedNvmeSlots,omitempty"`
+		RaidAttachedNvmeSlots *string `json:"RaidAttachedNvmeSlots,omitempty" validate:"regexp=^$|^((\\\\d+\\\\-\\\\d+)|(\\\\d+))(,((\\\\d+\\\\-\\\\d+)|(\\\\d+)))*$"`
 		// JBOD drives specified in this slot range will be encrypted. Allowed values are 'ALL', or a comma or hyphen separated number range. Sample format is ALL or 1, 3 or 4-6, 8. Setting the value to 'ALL' will encrypt all the unused UnconfigureGood/JBOD disks.
-		SecureJbods *string `json:"SecureJbods,omitempty"`
+		SecureJbods *string `json:"SecureJbods,omitempty" validate:"regexp=^$|^((((\\\\d+\\\\-\\\\d+)|(\\\\d+))(,((\\\\d+\\\\-\\\\d+)|(\\\\d+)))*)|(a|A)(l|L)(l|L))$"`
 		// State to which drives, not used in this policy, are to be moved. NoChange will not change the drive state. No Change must be selected if Default Drive State is set to JBOD or RAID0. * `NoChange` - Drive state will not be modified by Storage Policy. * `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group. * `Jbod` - JBOD state where the disks start showing up to Host OS.
 		UnusedDisksState *string `json:"UnusedDisksState,omitempty"`
 		// Disks in JBOD State are used to create virtual drives. This setting must be disabled if Default Drive State is set to JBOD.

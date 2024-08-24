@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -32,7 +32,7 @@ type OsServerConfig struct {
 	Answers              NullableOsAnswers `json:"Answers,omitempty"`
 	ErrorMsgs            []string          `json:"ErrorMsgs,omitempty"`
 	// The WWPN Address of the underlying fibre channel interface at the host side used for SAN accesss. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.  For example, 20:00:D4:C9:3C:35:02:01.
-	InitiatorWwpn *string `json:"InitiatorWwpn,omitempty"`
+	InitiatorWwpn *string `json:"InitiatorWwpn,omitempty" validate:"regexp=^$|(^([0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$)"`
 	// The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive.
 	InstallTarget *string `json:"InstallTarget,omitempty"`
 	// The Logical Unit Number (LUN) of the install target.
@@ -44,9 +44,9 @@ type OsServerConfig struct {
 	// IQN (iSCSI qualified name) of Storage iSCSI target. Can be up to 255 characters long and has the following format, iqn.yyyy-mm.naming-authority:unique_name.
 	TargetIqn *string `json:"TargetIqn,omitempty"`
 	// The WWPN Address of the underlying fibre channel interface at the target used by the storage. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.  For example, 51:4F:0C:50:14:1F:AF:01.
-	TargetWwpn *string `json:"TargetWwpn,omitempty"`
+	TargetWwpn *string `json:"TargetWwpn,omitempty" validate:"regexp=^$|(^([0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$)"`
 	// MAC address of the VNIC used as iSCSI initiator interface.
-	VnicMac              *string `json:"VnicMac,omitempty"`
+	VnicMac              *string `json:"VnicMac,omitempty" validate:"regexp=^$|^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -673,7 +673,7 @@ func (o *OsServerConfig) UnmarshalJSON(data []byte) (err error) {
 		Answers              NullableOsAnswers `json:"Answers,omitempty"`
 		ErrorMsgs            []string          `json:"ErrorMsgs,omitempty"`
 		// The WWPN Address of the underlying fibre channel interface at the host side used for SAN accesss. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.  For example, 20:00:D4:C9:3C:35:02:01.
-		InitiatorWwpn *string `json:"InitiatorWwpn,omitempty"`
+		InitiatorWwpn *string `json:"InitiatorWwpn,omitempty" validate:"regexp=^$|(^([0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$)"`
 		// The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive.
 		InstallTarget *string `json:"InstallTarget,omitempty"`
 		// The Logical Unit Number (LUN) of the install target.
@@ -685,9 +685,9 @@ func (o *OsServerConfig) UnmarshalJSON(data []byte) (err error) {
 		// IQN (iSCSI qualified name) of Storage iSCSI target. Can be up to 255 characters long and has the following format, iqn.yyyy-mm.naming-authority:unique_name.
 		TargetIqn *string `json:"TargetIqn,omitempty"`
 		// The WWPN Address of the underlying fibre channel interface at the target used by the storage. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.  For example, 51:4F:0C:50:14:1F:AF:01.
-		TargetWwpn *string `json:"TargetWwpn,omitempty"`
+		TargetWwpn *string `json:"TargetWwpn,omitempty" validate:"regexp=^$|(^([0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$)"`
 		// MAC address of the VNIC used as iSCSI initiator interface.
-		VnicMac *string `json:"VnicMac,omitempty"`
+		VnicMac *string `json:"VnicMac,omitempty" validate:"regexp=^$|^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$"`
 	}
 
 	varOsServerConfigWithoutEmbeddedStruct := OsServerConfigWithoutEmbeddedStruct{}

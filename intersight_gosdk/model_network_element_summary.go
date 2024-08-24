@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -46,7 +46,7 @@ type NetworkElementSummary struct {
 	// Connection status of the switch.
 	ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
 	// The default domain name configured on the switch.
-	DefaultDomain *string `json:"DefaultDomain,omitempty"`
+	DefaultDomain *string `json:"DefaultDomain,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]+([-.]{1}[a-zA-Z0-9]+)*$"`
 	// The MoId of the registered device that coresponds to the server.
 	DeviceMoId *string `json:"DeviceMoId,omitempty"`
 	// The Distinguished Name unambiguously identifies an object in the system.
@@ -156,6 +156,8 @@ type NetworkElementSummary struct {
 	Thermal *string `json:"Thermal,omitempty"`
 	// Total available memory on this switch platform.
 	TotalMemory *int64 `json:"TotalMemory,omitempty"`
+	// The user defined label assigned to the server.
+	UserLabel *string `json:"UserLabel,omitempty"`
 	// This field identifies the vendor of the given component.
 	Vendor *string `json:"Vendor,omitempty"`
 	// Firmware version of the switch.
@@ -2288,6 +2290,38 @@ func (o *NetworkElementSummary) SetTotalMemory(v int64) {
 	o.TotalMemory = &v
 }
 
+// GetUserLabel returns the UserLabel field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetUserLabel() string {
+	if o == nil || IsNil(o.UserLabel) {
+		var ret string
+		return ret
+	}
+	return *o.UserLabel
+}
+
+// GetUserLabelOk returns a tuple with the UserLabel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetUserLabelOk() (*string, bool) {
+	if o == nil || IsNil(o.UserLabel) {
+		return nil, false
+	}
+	return o.UserLabel, true
+}
+
+// HasUserLabel returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasUserLabel() bool {
+	if o != nil && !IsNil(o.UserLabel) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserLabel gets a reference to the given string and assigns it to the UserLabel field.
+func (o *NetworkElementSummary) SetUserLabel(v string) {
+	o.UserLabel = &v
+}
+
 // GetVendor returns the Vendor field value if set, zero value otherwise.
 func (o *NetworkElementSummary) GetVendor() string {
 	if o == nil || IsNil(o.Vendor) {
@@ -2653,6 +2687,9 @@ func (o NetworkElementSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalMemory) {
 		toSerialize["TotalMemory"] = o.TotalMemory
 	}
+	if !IsNil(o.UserLabel) {
+		toSerialize["UserLabel"] = o.UserLabel
+	}
 	if !IsNil(o.Vendor) {
 		toSerialize["Vendor"] = o.Vendor
 	}
@@ -2738,7 +2775,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		// Connection status of the switch.
 		ConnectionStatus *string `json:"ConnectionStatus,omitempty"`
 		// The default domain name configured on the switch.
-		DefaultDomain *string `json:"DefaultDomain,omitempty"`
+		DefaultDomain *string `json:"DefaultDomain,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]+([-.]{1}[a-zA-Z0-9]+)*$"`
 		// The MoId of the registered device that coresponds to the server.
 		DeviceMoId *string `json:"DeviceMoId,omitempty"`
 		// The Distinguished Name unambiguously identifies an object in the system.
@@ -2848,6 +2885,8 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		Thermal *string `json:"Thermal,omitempty"`
 		// Total available memory on this switch platform.
 		TotalMemory *int64 `json:"TotalMemory,omitempty"`
+		// The user defined label assigned to the server.
+		UserLabel *string `json:"UserLabel,omitempty"`
 		// This field identifies the vendor of the given component.
 		Vendor *string `json:"Vendor,omitempty"`
 		// Firmware version of the switch.
@@ -2926,6 +2965,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		varNetworkElementSummary.SystemUpTime = varNetworkElementSummaryWithoutEmbeddedStruct.SystemUpTime
 		varNetworkElementSummary.Thermal = varNetworkElementSummaryWithoutEmbeddedStruct.Thermal
 		varNetworkElementSummary.TotalMemory = varNetworkElementSummaryWithoutEmbeddedStruct.TotalMemory
+		varNetworkElementSummary.UserLabel = varNetworkElementSummaryWithoutEmbeddedStruct.UserLabel
 		varNetworkElementSummary.Vendor = varNetworkElementSummaryWithoutEmbeddedStruct.Vendor
 		varNetworkElementSummary.Version = varNetworkElementSummaryWithoutEmbeddedStruct.Version
 		varNetworkElementSummary.InventoryParent = varNetworkElementSummaryWithoutEmbeddedStruct.InventoryParent
@@ -3012,6 +3052,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "SystemUpTime")
 		delete(additionalProperties, "Thermal")
 		delete(additionalProperties, "TotalMemory")
+		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "Vendor")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "InventoryParent")

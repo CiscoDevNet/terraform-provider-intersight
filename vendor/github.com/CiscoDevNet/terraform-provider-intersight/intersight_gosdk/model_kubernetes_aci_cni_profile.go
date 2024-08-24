@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -29,23 +29,23 @@ type KubernetesAciCniProfile struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Name of ACI AAEP (Attachable Access Entity Profile) to be used for all Kubernetes clusters using this policy.
-	AaepName *string `json:"AaepName,omitempty"`
+	AaepName *string `json:"AaepName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 	// Start of range of IP subnets for external services with dynamic IP allocation for use by Kubernetes clusters using this ACI CNI policy.
-	ExtSvcDynSubnetStart *string `json:"ExtSvcDynSubnetStart,omitempty"`
+	ExtSvcDynSubnetStart *string `json:"ExtSvcDynSubnetStart,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 	// Start of range of IP subnets for external services with static IP allocation for use by Kubernetes clusters using this ACI CNI policy.
-	ExtSvcStaticSubnetStart *string `json:"ExtSvcStaticSubnetStart,omitempty"`
+	ExtSvcStaticSubnetStart *string `json:"ExtSvcStaticSubnetStart,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 	// Value of ACI infrastructuere VLAN ID for the ACI fabric.
 	InfraVlanId *int64 `json:"InfraVlanId,omitempty"`
 	// Name of ACI L3Out network to be used for all Kubernetes clusters using this policy.
-	L3OutNetworkName *string `json:"L3OutNetworkName,omitempty"`
+	L3OutNetworkName *string `json:"L3OutNetworkName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 	// Name of ACI L3Out policy to be used for all Kubernetes clusters using this policy.
-	L3OutPolicyName *string `json:"L3OutPolicyName,omitempty"`
+	L3OutPolicyName *string `json:"L3OutPolicyName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 	// Tenant in ACI used by this L3Out and Common VRF.
-	L3OutTenant *string `json:"L3OutTenant,omitempty"`
+	L3OutTenant *string `json:"L3OutTenant,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 	// VMM domain within which Kubernetes clusters using this policy are nested.
-	NestedVmmDomain *string `json:"NestedVmmDomain,omitempty"`
+	NestedVmmDomain *string `json:"NestedVmmDomain,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 	// Start of range of ACI Node Service IP subnets to use by Kubernetes clusters using this ACI CNI policy This is used for the service graph which is used for ACI PBR based load balancing.
-	NodeSvcSubnetStart *string `json:"NodeSvcSubnetStart,omitempty"`
+	NodeSvcSubnetStart *string `json:"NodeSvcSubnetStart,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 	// Ending value of VLAN range used to assign Node VLAN Ids for each Kubernetes cluster using this policy.
 	NodeVlanRangeEnd *int64 `json:"NodeVlanRangeEnd,omitempty"`
 	// Starting value of VLAN range used to assign Node VLAN Ids for each Kubernetes cluster using this policy.
@@ -53,13 +53,13 @@ type KubernetesAciCniProfile struct {
 	// Number of k8s clusters currently using this ACI CNI profile.
 	NumberOfKubernetesClusters *int64 `json:"NumberOfKubernetesClusters,omitempty"`
 	// Range of IP Multicast addresses to be used by the Opflex protocol for Kubernetes clusters using this policy.
-	OpflexMulticastAddressRange *string `json:"OpflexMulticastAddressRange,omitempty"`
+	OpflexMulticastAddressRange *string `json:"OpflexMulticastAddressRange,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 	// Start of range of Kubernetes pod IP subnets to use by Kubernetes clusters using this ACI CNI policy This should be a /8 IP subnet so that multiple /16 subnets can be assigned for pod subnets of Kubernetes clusters using this profile.
-	PodSubnetStart *string `json:"PodSubnetStart,omitempty"`
+	PodSubnetStart *string `json:"PodSubnetStart,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 	// Start of range of Kubernetes Service IP subnets to use by Kubernetes clusters using this ACI CNI policy Currently this is fixed internally and read-only.
-	SvcSubnetStart *string `json:"SvcSubnetStart,omitempty"`
+	SvcSubnetStart *string `json:"SvcSubnetStart,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 	// VRF (Virtual Routing and Forwarding) domain to be used within ACI fabric by all k8s clusters using this policy.
-	Vrf *string `json:"Vrf,omitempty"`
+	Vrf *string `json:"Vrf,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 	// An array of relationships to kubernetesAciCniTenantClusterAllocation resources.
 	ClusterAciAllocations []KubernetesAciCniTenantClusterAllocationRelationship `json:"ClusterAciAllocations,omitempty"`
 	// An array of relationships to kubernetesClusterProfile resources.
@@ -960,23 +960,23 @@ func (o *KubernetesAciCniProfile) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Name of ACI AAEP (Attachable Access Entity Profile) to be used for all Kubernetes clusters using this policy.
-		AaepName *string `json:"AaepName,omitempty"`
+		AaepName *string `json:"AaepName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 		// Start of range of IP subnets for external services with dynamic IP allocation for use by Kubernetes clusters using this ACI CNI policy.
-		ExtSvcDynSubnetStart *string `json:"ExtSvcDynSubnetStart,omitempty"`
+		ExtSvcDynSubnetStart *string `json:"ExtSvcDynSubnetStart,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 		// Start of range of IP subnets for external services with static IP allocation for use by Kubernetes clusters using this ACI CNI policy.
-		ExtSvcStaticSubnetStart *string `json:"ExtSvcStaticSubnetStart,omitempty"`
+		ExtSvcStaticSubnetStart *string `json:"ExtSvcStaticSubnetStart,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 		// Value of ACI infrastructuere VLAN ID for the ACI fabric.
 		InfraVlanId *int64 `json:"InfraVlanId,omitempty"`
 		// Name of ACI L3Out network to be used for all Kubernetes clusters using this policy.
-		L3OutNetworkName *string `json:"L3OutNetworkName,omitempty"`
+		L3OutNetworkName *string `json:"L3OutNetworkName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 		// Name of ACI L3Out policy to be used for all Kubernetes clusters using this policy.
-		L3OutPolicyName *string `json:"L3OutPolicyName,omitempty"`
+		L3OutPolicyName *string `json:"L3OutPolicyName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 		// Tenant in ACI used by this L3Out and Common VRF.
-		L3OutTenant *string `json:"L3OutTenant,omitempty"`
+		L3OutTenant *string `json:"L3OutTenant,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 		// VMM domain within which Kubernetes clusters using this policy are nested.
-		NestedVmmDomain *string `json:"NestedVmmDomain,omitempty"`
+		NestedVmmDomain *string `json:"NestedVmmDomain,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 		// Start of range of ACI Node Service IP subnets to use by Kubernetes clusters using this ACI CNI policy This is used for the service graph which is used for ACI PBR based load balancing.
-		NodeSvcSubnetStart *string `json:"NodeSvcSubnetStart,omitempty"`
+		NodeSvcSubnetStart *string `json:"NodeSvcSubnetStart,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 		// Ending value of VLAN range used to assign Node VLAN Ids for each Kubernetes cluster using this policy.
 		NodeVlanRangeEnd *int64 `json:"NodeVlanRangeEnd,omitempty"`
 		// Starting value of VLAN range used to assign Node VLAN Ids for each Kubernetes cluster using this policy.
@@ -984,13 +984,13 @@ func (o *KubernetesAciCniProfile) UnmarshalJSON(data []byte) (err error) {
 		// Number of k8s clusters currently using this ACI CNI profile.
 		NumberOfKubernetesClusters *int64 `json:"NumberOfKubernetesClusters,omitempty"`
 		// Range of IP Multicast addresses to be used by the Opflex protocol for Kubernetes clusters using this policy.
-		OpflexMulticastAddressRange *string `json:"OpflexMulticastAddressRange,omitempty"`
+		OpflexMulticastAddressRange *string `json:"OpflexMulticastAddressRange,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 		// Start of range of Kubernetes pod IP subnets to use by Kubernetes clusters using this ACI CNI policy This should be a /8 IP subnet so that multiple /16 subnets can be assigned for pod subnets of Kubernetes clusters using this profile.
-		PodSubnetStart *string `json:"PodSubnetStart,omitempty"`
+		PodSubnetStart *string `json:"PodSubnetStart,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 		// Start of range of Kubernetes Service IP subnets to use by Kubernetes clusters using this ACI CNI policy Currently this is fixed internally and read-only.
-		SvcSubnetStart *string `json:"SvcSubnetStart,omitempty"`
+		SvcSubnetStart *string `json:"SvcSubnetStart,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]).([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\/([0-9]|[1-2][0-9]|3[0-2])$"`
 		// VRF (Virtual Routing and Forwarding) domain to be used within ACI fabric by all k8s clusters using this policy.
-		Vrf *string `json:"Vrf,omitempty"`
+		Vrf *string `json:"Vrf,omitempty" validate:"regexp=^$|^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$"`
 		// An array of relationships to kubernetesAciCniTenantClusterAllocation resources.
 		ClusterAciAllocations []KubernetesAciCniTenantClusterAllocationRelationship `json:"ClusterAciAllocations,omitempty"`
 		// An array of relationships to kubernetesClusterProfile resources.

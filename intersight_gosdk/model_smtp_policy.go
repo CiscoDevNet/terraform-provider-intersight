@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,7 @@ type SmtpPolicy struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Authorization password for the process.
-	AuthPassword *string `json:"AuthPassword,omitempty"`
+	AuthPassword *string `json:"AuthPassword,omitempty" validate:"regexp=^[\\\\S+]{0,254}$"`
 	// If enabled, lets user input username and password.
 	EnableAuth *bool `json:"EnableAuth,omitempty"`
 	// If enabled, lets user input valid CA certificates for authorization.
@@ -41,7 +41,7 @@ type SmtpPolicy struct {
 	// Minimum fault severity level to receive email notifications. Email notifications are sent for all faults whose severity is equal to or greater than the chosen level. * `critical` - Minimum severity to report is critical. * `condition` - Minimum severity to report is informational. * `warning` - Minimum severity to report is warning. * `minor` - Minimum severity to report is minor. * `major` - Minimum severity to report is major.
 	MinSeverity *string `json:"MinSeverity,omitempty"`
 	// The email address entered here will be displayed as the from address (mail received from address) of all the SMTP mail alerts that are received. If not configured, the hostname of the server is used in the from address field.
-	SenderEmail *string `json:"SenderEmail,omitempty"`
+	SenderEmail *string "json:\"SenderEmail,omitempty\" validate:\"regexp=^$|^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$\""
 	// Port number used by the SMTP server for outgoing SMTP communication.
 	SmtpPort       *int64   `json:"SmtpPort,omitempty"`
 	SmtpRecipients []string `json:"SmtpRecipients,omitempty"`
@@ -802,7 +802,7 @@ func (o *SmtpPolicy) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Authorization password for the process.
-		AuthPassword *string `json:"AuthPassword,omitempty"`
+		AuthPassword *string `json:"AuthPassword,omitempty" validate:"regexp=^[\\\\S+]{0,254}$"`
 		// If enabled, lets user input username and password.
 		EnableAuth *bool `json:"EnableAuth,omitempty"`
 		// If enabled, lets user input valid CA certificates for authorization.
@@ -814,7 +814,7 @@ func (o *SmtpPolicy) UnmarshalJSON(data []byte) (err error) {
 		// Minimum fault severity level to receive email notifications. Email notifications are sent for all faults whose severity is equal to or greater than the chosen level. * `critical` - Minimum severity to report is critical. * `condition` - Minimum severity to report is informational. * `warning` - Minimum severity to report is warning. * `minor` - Minimum severity to report is minor. * `major` - Minimum severity to report is major.
 		MinSeverity *string `json:"MinSeverity,omitempty"`
 		// The email address entered here will be displayed as the from address (mail received from address) of all the SMTP mail alerts that are received. If not configured, the hostname of the server is used in the from address field.
-		SenderEmail *string `json:"SenderEmail,omitempty"`
+		SenderEmail *string "json:\"SenderEmail,omitempty\" validate:\"regexp=^$|^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$\""
 		// Port number used by the SMTP server for outgoing SMTP communication.
 		SmtpPort       *int64   `json:"SmtpPort,omitempty"`
 		SmtpRecipients []string `json:"SmtpRecipients,omitempty"`
