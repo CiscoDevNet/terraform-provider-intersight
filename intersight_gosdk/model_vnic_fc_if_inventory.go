@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -29,17 +29,17 @@ type VnicFcIfInventory struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Name of the virtual fibre channel interface.
-	Name *string `json:"Name,omitempty"`
+	Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9\\\\-\\\\._:]+$"`
 	// The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.
 	Order          *int64   `json:"Order,omitempty"`
 	OverriddenList []string `json:"OverriddenList,omitempty"`
 	// Enables retention of LUN ID associations in memory until they are manually cleared.
 	PersistentBindings *bool `json:"PersistentBindings,omitempty"`
 	// Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.
-	PinGroupName *string                       `json:"PinGroupName,omitempty"`
+	PinGroupName *string                       `json:"PinGroupName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_.:-]{1,64}$"`
 	Placement    NullableVnicPlacementSettings `json:"Placement,omitempty"`
 	// The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.
-	StaticWwpnAddress  *string                 `json:"StaticWwpnAddress,omitempty"`
+	StaticWwpnAddress  *string                 `json:"StaticWwpnAddress,omitempty" validate:"regexp=^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2})$)"`
 	TemplateActions    []MotemplateActionEntry `json:"TemplateActions,omitempty"`
 	TemplateSyncErrors []MotemplateSyncError   `json:"TemplateSyncErrors,omitempty"`
 	// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
@@ -49,7 +49,7 @@ type VnicFcIfInventory struct {
 	// This should be the same as the channel number of the vfc created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vfc is created on the switch for every vHBA.
 	VifId *int64 `json:"VifId,omitempty"`
 	// The WWPN address that is assigned to the vHBA based on the wwn pool that has been assigned to the SAN Connectivity Policy.
-	Wwpn *string `json:"Wwpn,omitempty"`
+	Wwpn *string `json:"Wwpn,omitempty" validate:"regexp=^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2})$)"`
 	// Type of allocation selected to assign a WWPN address to the vhba. * `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.
 	WwpnAddressType *string                                          `json:"WwpnAddressType,omitempty"`
 	FcAdapterPolicy NullableVnicFcAdapterPolicyInventoryRelationship `json:"FcAdapterPolicy,omitempty"`
@@ -1176,17 +1176,17 @@ func (o *VnicFcIfInventory) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Name of the virtual fibre channel interface.
-		Name *string `json:"Name,omitempty"`
+		Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9\\\\-\\\\._:]+$"`
 		// The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The order should start from zero with no overlaps. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1340, VIC 1380 and VIC 1385 which have two.
 		Order          *int64   `json:"Order,omitempty"`
 		OverriddenList []string `json:"OverriddenList,omitempty"`
 		// Enables retention of LUN ID associations in memory until they are manually cleared.
 		PersistentBindings *bool `json:"PersistentBindings,omitempty"`
 		// Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.
-		PinGroupName *string                       `json:"PinGroupName,omitempty"`
+		PinGroupName *string                       `json:"PinGroupName,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_.:-]{1,64}$"`
 		Placement    NullableVnicPlacementSettings `json:"Placement,omitempty"`
 		// The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.
-		StaticWwpnAddress  *string                 `json:"StaticWwpnAddress,omitempty"`
+		StaticWwpnAddress  *string                 `json:"StaticWwpnAddress,omitempty" validate:"regexp=^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2})$)"`
 		TemplateActions    []MotemplateActionEntry `json:"TemplateActions,omitempty"`
 		TemplateSyncErrors []MotemplateSyncError   `json:"TemplateSyncErrors,omitempty"`
 		// The sync status of the current MO wrt the attached Template MO. * `None` - The Enum value represents that the object is not attached to any template. * `OK` - The Enum value represents that the object values are in sync with attached template. * `Scheduled` - The Enum value represents that the object sync from attached template is scheduled from template. * `InProgress` - The Enum value represents that the object sync with the attached template is in progress. * `OutOfSync` - The Enum value represents that the object values are not in sync with attached template.
@@ -1196,7 +1196,7 @@ func (o *VnicFcIfInventory) UnmarshalJSON(data []byte) (err error) {
 		// This should be the same as the channel number of the vfc created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vfc is created on the switch for every vHBA.
 		VifId *int64 `json:"VifId,omitempty"`
 		// The WWPN address that is assigned to the vHBA based on the wwn pool that has been assigned to the SAN Connectivity Policy.
-		Wwpn *string `json:"Wwpn,omitempty"`
+		Wwpn *string `json:"Wwpn,omitempty" validate:"regexp=^$|((^20|5[0-9a-fA-F]{1}):([0-9a-fA-F]{2}:){6}([0-9a-fA-F]{2})$)"`
 		// Type of allocation selected to assign a WWPN address to the vhba. * `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.
 		WwpnAddressType *string                                          `json:"WwpnAddressType,omitempty"`
 		FcAdapterPolicy NullableVnicFcAdapterPolicyInventoryRelationship `json:"FcAdapterPolicy,omitempty"`

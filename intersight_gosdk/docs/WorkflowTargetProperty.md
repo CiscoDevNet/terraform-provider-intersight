@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ConnectorAttribute** | Pointer to **string** | A singleton value which will contain the path to connector object from the selected object. | [optional] 
 **ConstraintAttributes** | Pointer to **[]string** |  | [optional] 
 **DisplayAttributes** | Pointer to **[]string** |  | [optional] 
+**PlatformType** | Pointer to **[]string** |  | [optional] 
 **Selector** | Pointer to **string** | Field to hold an Intersight API along with an optional filter to narrow down the search options for target device. | [optional] 
 **SelectorProperty** | Pointer to [**NullableWorkflowSelectorProperty**](WorkflowSelectorProperty.md) |  | [optional] 
 **SupportedObjects** | Pointer to **[]string** |  | [optional] 
@@ -167,6 +168,41 @@ HasDisplayAttributes returns a boolean if a field has been set.
 `func (o *WorkflowTargetProperty) UnsetDisplayAttributes()`
 
 UnsetDisplayAttributes ensures that no value is present for DisplayAttributes, not even an explicit nil
+### GetPlatformType
+
+`func (o *WorkflowTargetProperty) GetPlatformType() []string`
+
+GetPlatformType returns the PlatformType field if non-nil, zero value otherwise.
+
+### GetPlatformTypeOk
+
+`func (o *WorkflowTargetProperty) GetPlatformTypeOk() (*[]string, bool)`
+
+GetPlatformTypeOk returns a tuple with the PlatformType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformType
+
+`func (o *WorkflowTargetProperty) SetPlatformType(v []string)`
+
+SetPlatformType sets PlatformType field to given value.
+
+### HasPlatformType
+
+`func (o *WorkflowTargetProperty) HasPlatformType() bool`
+
+HasPlatformType returns a boolean if a field has been set.
+
+### SetPlatformTypeNil
+
+`func (o *WorkflowTargetProperty) SetPlatformTypeNil(b bool)`
+
+ SetPlatformTypeNil sets the value for PlatformType to be an explicit nil
+
+### UnsetPlatformType
+`func (o *WorkflowTargetProperty) UnsetPlatformType()`
+
+UnsetPlatformType ensures that no value is present for PlatformType, not even an explicit nil
 ### GetSelector
 
 `func (o *WorkflowTargetProperty) GetSelector() string`

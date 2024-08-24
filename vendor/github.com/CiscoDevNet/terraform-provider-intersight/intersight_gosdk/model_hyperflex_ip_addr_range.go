@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -30,15 +30,15 @@ type HyperflexIpAddrRange struct {
 	ObjectType string `json:"ObjectType"`
 	// The end IPv4 address of the range.
 	// Deprecated
-	EndAddr *string `json:"EndAddr,omitempty"`
+	EndAddr *string `json:"EndAddr,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 	// The default gateway for the start and end IPv4 addresses.
-	Gateway      *string                `json:"Gateway,omitempty"`
+	Gateway      *string                `json:"Gateway,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 	IpAddrBlocks []CommIpV4AddressBlock `json:"IpAddrBlocks,omitempty"`
 	// The netmask specified in dot decimal notation. The start address, end address, and gateway must all be within the network specified by this netmask.
-	Netmask *string `json:"Netmask,omitempty"`
+	Netmask *string `json:"Netmask,omitempty" validate:"regexp=^$|^(((255\\\\.){3}(255|254|252|248|240|224|192|128|0+))|((255\\\\.){2}(255|254|252|248|240|224|192|128|0+)\\\\.0)|((255\\\\.)(255|254|252|248|240|224|192|128|0+)(\\\\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\\\\.0+){3}))$"`
 	// The start IPv4 address of the range.
 	// Deprecated
-	StartAddr            *string `json:"StartAddr,omitempty"`
+	StartAddr            *string `json:"StartAddr,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -390,15 +390,15 @@ func (o *HyperflexIpAddrRange) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// The end IPv4 address of the range.
 		// Deprecated
-		EndAddr *string `json:"EndAddr,omitempty"`
+		EndAddr *string `json:"EndAddr,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 		// The default gateway for the start and end IPv4 addresses.
-		Gateway      *string                `json:"Gateway,omitempty"`
+		Gateway      *string                `json:"Gateway,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 		IpAddrBlocks []CommIpV4AddressBlock `json:"IpAddrBlocks,omitempty"`
 		// The netmask specified in dot decimal notation. The start address, end address, and gateway must all be within the network specified by this netmask.
-		Netmask *string `json:"Netmask,omitempty"`
+		Netmask *string `json:"Netmask,omitempty" validate:"regexp=^$|^(((255\\\\.){3}(255|254|252|248|240|224|192|128|0+))|((255\\\\.){2}(255|254|252|248|240|224|192|128|0+)\\\\.0)|((255\\\\.)(255|254|252|248|240|224|192|128|0+)(\\\\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\\\\.0+){3}))$"`
 		// The start IPv4 address of the range.
 		// Deprecated
-		StartAddr *string `json:"StartAddr,omitempty"`
+		StartAddr *string `json:"StartAddr,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 	}
 
 	varHyperflexIpAddrRangeWithoutEmbeddedStruct := HyperflexIpAddrRangeWithoutEmbeddedStruct{}

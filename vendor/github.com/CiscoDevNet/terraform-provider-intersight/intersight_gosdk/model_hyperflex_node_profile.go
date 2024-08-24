@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -29,17 +29,17 @@ type HyperflexNodeProfile struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// IP address for storage data network (Controller VM interface).
-	HxdpDataIp *string `json:"HxdpDataIp,omitempty"`
+	HxdpDataIp *string `json:"HxdpDataIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 	// IP address for HyperFlex management network.
-	HxdpMgmtIp *string `json:"HxdpMgmtIp,omitempty"`
+	HxdpMgmtIp *string `json:"HxdpMgmtIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 	// IP address for storage client network (Controller VM interface).
-	HxdpStorageClientIp *string `json:"HxdpStorageClientIp,omitempty"`
+	HxdpStorageClientIp *string `json:"HxdpStorageClientIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 	// IP address for hypervisor control such as VM migration or pod management.
-	HypervisorControlIp *string `json:"HypervisorControlIp,omitempty"`
+	HypervisorControlIp *string `json:"HypervisorControlIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 	// IP address for storage data network (Hypervisor interface).
-	HypervisorDataIp *string `json:"HypervisorDataIp,omitempty"`
+	HypervisorDataIp *string `json:"HypervisorDataIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 	// IP address for Hypervisor management network.
-	HypervisorMgmtIp *string `json:"HypervisorMgmtIp,omitempty"`
+	HypervisorMgmtIp *string `json:"HypervisorMgmtIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 	// The role that this node performs in the HyperFlex cluster. * `Unknown` - The node role is not available. * `Storage` - The node persists data and contributes to the storage capacity of a cluster. * `Compute` - The node contributes to the compute capacity of a cluster.
 	NodeRole             *string                                     `json:"NodeRole,omitempty"`
 	AssignedServer       NullableComputePhysicalRelationship         `json:"AssignedServer,omitempty"`
@@ -604,17 +604,17 @@ func (o *HyperflexNodeProfile) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// IP address for storage data network (Controller VM interface).
-		HxdpDataIp *string `json:"HxdpDataIp,omitempty"`
+		HxdpDataIp *string `json:"HxdpDataIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 		// IP address for HyperFlex management network.
-		HxdpMgmtIp *string `json:"HxdpMgmtIp,omitempty"`
+		HxdpMgmtIp *string `json:"HxdpMgmtIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 		// IP address for storage client network (Controller VM interface).
-		HxdpStorageClientIp *string `json:"HxdpStorageClientIp,omitempty"`
+		HxdpStorageClientIp *string `json:"HxdpStorageClientIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 		// IP address for hypervisor control such as VM migration or pod management.
-		HypervisorControlIp *string `json:"HypervisorControlIp,omitempty"`
+		HypervisorControlIp *string `json:"HypervisorControlIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 		// IP address for storage data network (Hypervisor interface).
-		HypervisorDataIp *string `json:"HypervisorDataIp,omitempty"`
+		HypervisorDataIp *string `json:"HypervisorDataIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 		// IP address for Hypervisor management network.
-		HypervisorMgmtIp *string `json:"HypervisorMgmtIp,omitempty"`
+		HypervisorMgmtIp *string `json:"HypervisorMgmtIp,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\\\.([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"`
 		// The role that this node performs in the HyperFlex cluster. * `Unknown` - The node role is not available. * `Storage` - The node persists data and contributes to the storage capacity of a cluster. * `Compute` - The node contributes to the compute capacity of a cluster.
 		NodeRole       *string                                     `json:"NodeRole,omitempty"`
 		AssignedServer NullableComputePhysicalRelationship         `json:"AssignedServer,omitempty"`

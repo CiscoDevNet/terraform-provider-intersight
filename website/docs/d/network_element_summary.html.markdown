@@ -82,6 +82,7 @@ The following arguments can be used to get data of already created objects in In
 * `system_up_time`:(string) System up time of the switch. 
 * `thermal`:(string) The Thermal status of the fabric interconnect.* `unknown` - The default state of the sensor (in case no data is received).* `ok` - State of the sensor indicating the sensor's temperature range is okay.* `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range.* `upper-critical` - State of the sensor indicating that the temperature is above normal range.* `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range.* `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range.* `lower-critical` - State of the sensor indicating that the temperature is below normal range.* `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range. 
 * `total_memory`:(int) Total available memory on this switch platform. 
+* `user_label`:(string) The user defined label assigned to the server. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `nr_version`:(string) Firmware version of the switch. 
  

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -30,13 +30,13 @@ type BootSan struct {
 	ObjectType string                 `json:"ObjectType"`
 	Bootloader NullableBootBootloader `json:"Bootloader,omitempty"`
 	// The name of the underlying vHBA interface to be used by the SAN boot device.
-	InterfaceName *string `json:"InterfaceName,omitempty"`
+	InterfaceName *string `json:"InterfaceName,omitempty" validate:"regexp=^[a-zA-Z0-9-._:]*$"`
 	// The Logical Unit Number (LUN) of the device. For SAN boot configuration to be deployed on a server with 1300 family of Cisco VIC adapters, the recommendation is for the boot LUN to be numbered as 0 to ensure that LUN is mounted as the first disk from which the server boots.
 	Lun *int64 `json:"Lun,omitempty"`
 	// Slot ID of the device. Supported values are ( 1 - 255, \"MLOM\", \"L1\", \"L2\" ).
-	Slot *string `json:"Slot,omitempty"`
+	Slot *string `json:"Slot,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]|MLOM|L1|L2)$"`
 	// The WWPN Address of the underlying fibre channel interface used by the SAN boot device. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.
-	Wwpn                 *string `json:"Wwpn,omitempty"`
+	Wwpn                 *string `json:"Wwpn,omitempty" validate:"regexp=^$|(^([0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$)"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -398,13 +398,13 @@ func (o *BootSan) UnmarshalJSON(data []byte) (err error) {
 		ObjectType string                 `json:"ObjectType"`
 		Bootloader NullableBootBootloader `json:"Bootloader,omitempty"`
 		// The name of the underlying vHBA interface to be used by the SAN boot device.
-		InterfaceName *string `json:"InterfaceName,omitempty"`
+		InterfaceName *string `json:"InterfaceName,omitempty" validate:"regexp=^[a-zA-Z0-9-._:]*$"`
 		// The Logical Unit Number (LUN) of the device. For SAN boot configuration to be deployed on a server with 1300 family of Cisco VIC adapters, the recommendation is for the boot LUN to be numbered as 0 to ensure that LUN is mounted as the first disk from which the server boots.
 		Lun *int64 `json:"Lun,omitempty"`
 		// Slot ID of the device. Supported values are ( 1 - 255, \"MLOM\", \"L1\", \"L2\" ).
-		Slot *string `json:"Slot,omitempty"`
+		Slot *string `json:"Slot,omitempty" validate:"regexp=^$|^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]|MLOM|L1|L2)$"`
 		// The WWPN Address of the underlying fibre channel interface used by the SAN boot device. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.
-		Wwpn *string `json:"Wwpn,omitempty"`
+		Wwpn *string `json:"Wwpn,omitempty" validate:"regexp=^$|(^([0-9a-fA-F]{2}:){7}[0-9a-fA-F]{2}$)"`
 	}
 
 	varBootSanWithoutEmbeddedStruct := BootSanWithoutEmbeddedStruct{}

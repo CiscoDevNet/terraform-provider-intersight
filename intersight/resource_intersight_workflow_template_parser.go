@@ -468,9 +468,9 @@ func resourceWorkflowTemplateParser() *schema.Resource {
 																ForceNew:    true,
 															},
 															"label": {
-																Description:  "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must have an alphanumeric character.",
+																Description:  "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), round parenthesis ( () ), or an underscore (_) and must have an alphanumeric character.",
 																Type:         schema.TypeString,
-																ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[+\\s\\/a-zA-Z0-9_'.:-]{0,92}$"), ""),
+																ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[+\\s\\/a-zA-Z0-9)(_'.:-]{0,92}$"), ""),
 																Optional:     true,
 																ForceNew:     true,
 															},
@@ -482,9 +482,9 @@ func resourceWorkflowTemplateParser() *schema.Resource {
 																ForceNew:    true,
 															},
 															"value": {
-																Description:  "Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_).",
+																Description:  "Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), round parenthesis ( () ), forward slash (/), or an underscore (_).",
 																Type:         schema.TypeString,
-																ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]*[+\\s\\/a-zA-Z0-9_.:-]{1,64}$"), ""),
+																ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.:-]*[+\\s\\/a-zA-Z0-9)(_.:-]{1,64}$"), ""),
 																Optional:     true,
 																ForceNew:     true,
 															},

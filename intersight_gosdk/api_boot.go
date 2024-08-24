@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -109,10 +109,10 @@ func (a *BootApiService) CreateBootPrecisionPolicyExecute(r ApiCreateBootPrecisi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootPrecisionPolicy
@@ -623,52 +623,52 @@ func (a *BootApiService) GetBootCddDeviceListExecute(r ApiGetBootCddDeviceListRe
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1052,52 +1052,52 @@ func (a *BootApiService) GetBootDeviceBootModeListExecute(r ApiGetBootDeviceBoot
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1481,52 +1481,52 @@ func (a *BootApiService) GetBootDeviceBootSecurityListExecute(r ApiGetBootDevice
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1910,52 +1910,52 @@ func (a *BootApiService) GetBootHddDeviceListExecute(r ApiGetBootHddDeviceListRe
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2339,52 +2339,52 @@ func (a *BootApiService) GetBootIscsiDeviceListExecute(r ApiGetBootIscsiDeviceLi
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2768,52 +2768,52 @@ func (a *BootApiService) GetBootNvmeDeviceListExecute(r ApiGetBootNvmeDeviceList
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3197,52 +3197,52 @@ func (a *BootApiService) GetBootPchStorageDeviceListExecute(r ApiGetBootPchStora
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3626,52 +3626,52 @@ func (a *BootApiService) GetBootPrecisionPolicyListExecute(r ApiGetBootPrecision
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4055,52 +4055,52 @@ func (a *BootApiService) GetBootPxeDeviceListExecute(r ApiGetBootPxeDeviceListRe
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4484,52 +4484,52 @@ func (a *BootApiService) GetBootSanDeviceListExecute(r ApiGetBootSanDeviceListRe
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4913,52 +4913,52 @@ func (a *BootApiService) GetBootSdDeviceListExecute(r ApiGetBootSdDeviceListRequ
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5342,52 +5342,52 @@ func (a *BootApiService) GetBootUefiShellDeviceListExecute(r ApiGetBootUefiShell
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5771,52 +5771,52 @@ func (a *BootApiService) GetBootUsbDeviceListExecute(r ApiGetBootUsbDeviceListRe
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6200,52 +6200,52 @@ func (a *BootApiService) GetBootVmediaDeviceListExecute(r ApiGetBootVmediaDevice
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6436,7 +6436,7 @@ func (a *BootApiService) PatchBootCddDeviceExecute(r ApiPatchBootCddDeviceReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootCddDevice
@@ -6612,7 +6612,7 @@ func (a *BootApiService) PatchBootDeviceBootModeExecute(r ApiPatchBootDeviceBoot
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootDeviceBootMode
@@ -6788,7 +6788,7 @@ func (a *BootApiService) PatchBootDeviceBootSecurityExecute(r ApiPatchBootDevice
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootDeviceBootSecurity
@@ -6964,7 +6964,7 @@ func (a *BootApiService) PatchBootHddDeviceExecute(r ApiPatchBootHddDeviceReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootHddDevice
@@ -7140,7 +7140,7 @@ func (a *BootApiService) PatchBootIscsiDeviceExecute(r ApiPatchBootIscsiDeviceRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootIscsiDevice
@@ -7316,7 +7316,7 @@ func (a *BootApiService) PatchBootNvmeDeviceExecute(r ApiPatchBootNvmeDeviceRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootNvmeDevice
@@ -7492,7 +7492,7 @@ func (a *BootApiService) PatchBootPchStorageDeviceExecute(r ApiPatchBootPchStora
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootPchStorageDevice
@@ -7668,7 +7668,7 @@ func (a *BootApiService) PatchBootPrecisionPolicyExecute(r ApiPatchBootPrecision
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootPrecisionPolicy
@@ -7844,7 +7844,7 @@ func (a *BootApiService) PatchBootPxeDeviceExecute(r ApiPatchBootPxeDeviceReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootPxeDevice
@@ -8020,7 +8020,7 @@ func (a *BootApiService) PatchBootSanDeviceExecute(r ApiPatchBootSanDeviceReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootSanDevice
@@ -8196,7 +8196,7 @@ func (a *BootApiService) PatchBootSdDeviceExecute(r ApiPatchBootSdDeviceRequest)
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootSdDevice
@@ -8372,7 +8372,7 @@ func (a *BootApiService) PatchBootUefiShellDeviceExecute(r ApiPatchBootUefiShell
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootUefiShellDevice
@@ -8548,7 +8548,7 @@ func (a *BootApiService) PatchBootUsbDeviceExecute(r ApiPatchBootUsbDeviceReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootUsbDevice
@@ -8724,7 +8724,7 @@ func (a *BootApiService) PatchBootVmediaDeviceExecute(r ApiPatchBootVmediaDevice
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootVmediaDevice
@@ -8900,7 +8900,7 @@ func (a *BootApiService) UpdateBootCddDeviceExecute(r ApiUpdateBootCddDeviceRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootCddDevice
@@ -9076,7 +9076,7 @@ func (a *BootApiService) UpdateBootDeviceBootModeExecute(r ApiUpdateBootDeviceBo
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootDeviceBootMode
@@ -9252,7 +9252,7 @@ func (a *BootApiService) UpdateBootDeviceBootSecurityExecute(r ApiUpdateBootDevi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootDeviceBootSecurity
@@ -9428,7 +9428,7 @@ func (a *BootApiService) UpdateBootHddDeviceExecute(r ApiUpdateBootHddDeviceRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootHddDevice
@@ -9604,7 +9604,7 @@ func (a *BootApiService) UpdateBootIscsiDeviceExecute(r ApiUpdateBootIscsiDevice
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootIscsiDevice
@@ -9780,7 +9780,7 @@ func (a *BootApiService) UpdateBootNvmeDeviceExecute(r ApiUpdateBootNvmeDeviceRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootNvmeDevice
@@ -9956,7 +9956,7 @@ func (a *BootApiService) UpdateBootPchStorageDeviceExecute(r ApiUpdateBootPchSto
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootPchStorageDevice
@@ -10132,7 +10132,7 @@ func (a *BootApiService) UpdateBootPrecisionPolicyExecute(r ApiUpdateBootPrecisi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootPrecisionPolicy
@@ -10308,7 +10308,7 @@ func (a *BootApiService) UpdateBootPxeDeviceExecute(r ApiUpdateBootPxeDeviceRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootPxeDevice
@@ -10484,7 +10484,7 @@ func (a *BootApiService) UpdateBootSanDeviceExecute(r ApiUpdateBootSanDeviceRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootSanDevice
@@ -10660,7 +10660,7 @@ func (a *BootApiService) UpdateBootSdDeviceExecute(r ApiUpdateBootSdDeviceReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootSdDevice
@@ -10836,7 +10836,7 @@ func (a *BootApiService) UpdateBootUefiShellDeviceExecute(r ApiUpdateBootUefiShe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootUefiShellDevice
@@ -11012,7 +11012,7 @@ func (a *BootApiService) UpdateBootUsbDeviceExecute(r ApiUpdateBootUsbDeviceRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootUsbDevice
@@ -11188,7 +11188,7 @@ func (a *BootApiService) UpdateBootVmediaDeviceExecute(r ApiUpdateBootVmediaDevi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.bootVmediaDevice

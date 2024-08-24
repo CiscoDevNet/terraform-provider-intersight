@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -113,10 +113,10 @@ func (a *KubernetesApiService) CreateKubernetesAciCniApicExecute(r ApiCreateKube
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAciCniApic
@@ -299,10 +299,10 @@ func (a *KubernetesApiService) CreateKubernetesAciCniProfileExecute(r ApiCreateK
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAciCniProfile
@@ -485,10 +485,10 @@ func (a *KubernetesApiService) CreateKubernetesAciCniTenantClusterAllocationExec
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAciCniTenantClusterAllocation
@@ -667,10 +667,10 @@ func (a *KubernetesApiService) CreateKubernetesAddonDefinitionExecute(r ApiCreat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAddonDefinition
@@ -849,10 +849,10 @@ func (a *KubernetesApiService) CreateKubernetesAddonPolicyExecute(r ApiCreateKub
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAddonPolicy
@@ -1031,10 +1031,10 @@ func (a *KubernetesApiService) CreateKubernetesAddonRepositoryExecute(r ApiCreat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAddonRepository
@@ -1217,10 +1217,10 @@ func (a *KubernetesApiService) CreateKubernetesBaremetalNodeProfileExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesBaremetalNodeProfile
@@ -1399,10 +1399,10 @@ func (a *KubernetesApiService) CreateKubernetesClusterExecute(r ApiCreateKuberne
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesCluster
@@ -1581,10 +1581,10 @@ func (a *KubernetesApiService) CreateKubernetesClusterAddonProfileExecute(r ApiC
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesClusterAddonProfile
@@ -1763,10 +1763,10 @@ func (a *KubernetesApiService) CreateKubernetesClusterProfileExecute(r ApiCreate
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesClusterProfile
@@ -1945,10 +1945,10 @@ func (a *KubernetesApiService) CreateKubernetesContainerRuntimePolicyExecute(r A
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesContainerRuntimePolicy
@@ -2127,10 +2127,10 @@ func (a *KubernetesApiService) CreateKubernetesHttpProxyPolicyExecute(r ApiCreat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesHttpProxyPolicy
@@ -2309,10 +2309,10 @@ func (a *KubernetesApiService) CreateKubernetesNetworkPolicyExecute(r ApiCreateK
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesNetworkPolicy
@@ -2491,10 +2491,10 @@ func (a *KubernetesApiService) CreateKubernetesNodeGroupProfileExecute(r ApiCrea
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesNodeGroupProfile
@@ -2673,10 +2673,10 @@ func (a *KubernetesApiService) CreateKubernetesNvidiaGpuProductExecute(r ApiCrea
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesNvidiaGpuProduct
@@ -2855,10 +2855,10 @@ func (a *KubernetesApiService) CreateKubernetesSysConfigPolicyExecute(r ApiCreat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesSysConfigPolicy
@@ -3037,10 +3037,10 @@ func (a *KubernetesApiService) CreateKubernetesTrustedRegistriesPolicyExecute(r 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesTrustedRegistriesPolicy
@@ -3219,10 +3219,10 @@ func (a *KubernetesApiService) CreateKubernetesVersionExecute(r ApiCreateKuberne
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVersion
@@ -3401,10 +3401,10 @@ func (a *KubernetesApiService) CreateKubernetesVersionPolicyExecute(r ApiCreateK
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVersionPolicy
@@ -3583,10 +3583,10 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfraConfigPolicyEx
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineInfraConfigPolicy
@@ -3765,10 +3765,10 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfrastructureProvi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineInfrastructureProvider
@@ -3947,10 +3947,10 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInstanceTypeExecute
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineInstanceType
@@ -4129,10 +4129,10 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineNodeProfileExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	if r.ifNoneMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-None-Match", r.ifNoneMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineNodeProfile
@@ -8639,52 +8639,52 @@ func (a *KubernetesApiService) GetKubernetesAciCniApicListExecute(r ApiGetKubern
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9076,52 +9076,52 @@ func (a *KubernetesApiService) GetKubernetesAciCniProfileListExecute(r ApiGetKub
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9513,52 +9513,52 @@ func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationListExe
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9942,52 +9942,52 @@ func (a *KubernetesApiService) GetKubernetesAddonDefinitionListExecute(r ApiGetK
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10371,52 +10371,52 @@ func (a *KubernetesApiService) GetKubernetesAddonPolicyListExecute(r ApiGetKuber
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10800,52 +10800,52 @@ func (a *KubernetesApiService) GetKubernetesAddonRepositoryListExecute(r ApiGetK
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11237,52 +11237,52 @@ func (a *KubernetesApiService) GetKubernetesBaremetalNodeProfileListExecute(r Ap
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11666,52 +11666,52 @@ func (a *KubernetesApiService) GetKubernetesCatalogListExecute(r ApiGetKubernete
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -12095,52 +12095,52 @@ func (a *KubernetesApiService) GetKubernetesClusterAddonProfileListExecute(r Api
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -12524,52 +12524,52 @@ func (a *KubernetesApiService) GetKubernetesClusterListExecute(r ApiGetKubernete
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -12953,52 +12953,52 @@ func (a *KubernetesApiService) GetKubernetesClusterProfileListExecute(r ApiGetKu
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -13536,52 +13536,52 @@ func (a *KubernetesApiService) GetKubernetesConfigResultEntryListExecute(r ApiGe
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -13811,52 +13811,52 @@ func (a *KubernetesApiService) GetKubernetesConfigResultListExecute(r ApiGetKube
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -14240,52 +14240,52 @@ func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyListExecute(r 
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -14669,52 +14669,52 @@ func (a *KubernetesApiService) GetKubernetesDaemonSetListExecute(r ApiGetKuberne
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15098,52 +15098,52 @@ func (a *KubernetesApiService) GetKubernetesDeploymentListExecute(r ApiGetKubern
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15527,52 +15527,52 @@ func (a *KubernetesApiService) GetKubernetesHttpProxyPolicyListExecute(r ApiGetK
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15956,52 +15956,52 @@ func (a *KubernetesApiService) GetKubernetesIngressListExecute(r ApiGetKubernete
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -16385,52 +16385,52 @@ func (a *KubernetesApiService) GetKubernetesNetworkPolicyListExecute(r ApiGetKub
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -16968,52 +16968,52 @@ func (a *KubernetesApiService) GetKubernetesNodeGroupProfileListExecute(r ApiGet
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -17243,52 +17243,52 @@ func (a *KubernetesApiService) GetKubernetesNodeListExecute(r ApiGetKubernetesNo
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -17672,52 +17672,52 @@ func (a *KubernetesApiService) GetKubernetesNvidiaGpuProductListExecute(r ApiGet
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -18101,52 +18101,52 @@ func (a *KubernetesApiService) GetKubernetesPodListExecute(r ApiGetKubernetesPod
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -18530,52 +18530,52 @@ func (a *KubernetesApiService) GetKubernetesServiceListExecute(r ApiGetKubernete
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -18959,52 +18959,52 @@ func (a *KubernetesApiService) GetKubernetesStatefulSetListExecute(r ApiGetKuber
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -19388,52 +19388,52 @@ func (a *KubernetesApiService) GetKubernetesSysConfigPolicyListExecute(r ApiGetK
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -19817,52 +19817,52 @@ func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyListExecute(r
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -20246,52 +20246,52 @@ func (a *KubernetesApiService) GetKubernetesVersionListExecute(r ApiGetKubernete
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -20675,52 +20675,52 @@ func (a *KubernetesApiService) GetKubernetesVersionPolicyListExecute(r ApiGetKub
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -21104,52 +21104,52 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfraConfigPolicyListE
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -21533,52 +21533,52 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProvider
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -21962,52 +21962,52 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeListExecut
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -22391,52 +22391,52 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileListExecute
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$filter", r.filter, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.filter = &defaultValue
 	}
 	if r.orderby != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$orderby", r.orderby, "form", "")
 	}
 	if r.top != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$top", r.top, "form", "")
 	} else {
 		var defaultValue int32 = 100
 		r.top = &defaultValue
 	}
 	if r.skip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$skip", r.skip, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.skip = &defaultValue
 	}
 	if r.select_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$select", r.select_, "form", "")
 	} else {
 		var defaultValue string = ""
 		r.select_ = &defaultValue
 	}
 	if r.expand != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$expand", r.expand, "form", "")
 	}
 	if r.apply != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$apply", r.apply, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$count", r.count, "form", "")
 	}
 	if r.inlinecount != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "$inlinecount", r.inlinecount, "form", "")
 	} else {
 		var defaultValue string = "allpages"
 		r.inlinecount = &defaultValue
 	}
 	if r.at != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "at", r.at, "form", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -22631,7 +22631,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniApicExecute(r ApiPatchKubern
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAciCniApic
@@ -22811,7 +22811,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniProfileExecute(r ApiPatchKub
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAciCniProfile
@@ -22991,7 +22991,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniTenantClusterAllocationExecu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAciCniTenantClusterAllocation
@@ -23167,7 +23167,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonDefinitionExecute(r ApiPatchK
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAddonDefinition
@@ -23343,7 +23343,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonPolicyExecute(r ApiPatchKuber
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAddonPolicy
@@ -23519,7 +23519,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonRepositoryExecute(r ApiPatchK
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAddonRepository
@@ -23699,7 +23699,7 @@ func (a *KubernetesApiService) PatchKubernetesBaremetalNodeProfileExecute(r ApiP
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesBaremetalNodeProfile
@@ -23875,7 +23875,7 @@ func (a *KubernetesApiService) PatchKubernetesClusterExecute(r ApiPatchKubernete
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesCluster
@@ -24051,7 +24051,7 @@ func (a *KubernetesApiService) PatchKubernetesClusterAddonProfileExecute(r ApiPa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesClusterAddonProfile
@@ -24227,7 +24227,7 @@ func (a *KubernetesApiService) PatchKubernetesClusterProfileExecute(r ApiPatchKu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesClusterProfile
@@ -24403,7 +24403,7 @@ func (a *KubernetesApiService) PatchKubernetesContainerRuntimePolicyExecute(r Ap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesContainerRuntimePolicy
@@ -24579,7 +24579,7 @@ func (a *KubernetesApiService) PatchKubernetesHttpProxyPolicyExecute(r ApiPatchK
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesHttpProxyPolicy
@@ -24755,7 +24755,7 @@ func (a *KubernetesApiService) PatchKubernetesNetworkPolicyExecute(r ApiPatchKub
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesNetworkPolicy
@@ -24931,7 +24931,7 @@ func (a *KubernetesApiService) PatchKubernetesNodeGroupProfileExecute(r ApiPatch
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesNodeGroupProfile
@@ -25107,7 +25107,7 @@ func (a *KubernetesApiService) PatchKubernetesNvidiaGpuProductExecute(r ApiPatch
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesNvidiaGpuProduct
@@ -25283,7 +25283,7 @@ func (a *KubernetesApiService) PatchKubernetesSysConfigPolicyExecute(r ApiPatchK
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesSysConfigPolicy
@@ -25459,7 +25459,7 @@ func (a *KubernetesApiService) PatchKubernetesTrustedRegistriesPolicyExecute(r A
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesTrustedRegistriesPolicy
@@ -25635,7 +25635,7 @@ func (a *KubernetesApiService) PatchKubernetesVersionExecute(r ApiPatchKubernete
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVersion
@@ -25811,7 +25811,7 @@ func (a *KubernetesApiService) PatchKubernetesVersionPolicyExecute(r ApiPatchKub
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVersionPolicy
@@ -25987,7 +25987,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfraConfigPolicyExe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineInfraConfigPolicy
@@ -26163,7 +26163,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfrastructureProvid
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineInfrastructureProvider
@@ -26339,7 +26339,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInstanceTypeExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineInstanceType
@@ -26515,7 +26515,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineNodeProfileExecute(r
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineNodeProfile
@@ -26695,7 +26695,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniApicExecute(r ApiUpdateKube
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAciCniApic
@@ -26875,7 +26875,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniProfileExecute(r ApiUpdateK
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAciCniProfile
@@ -27055,7 +27055,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniTenantClusterAllocationExec
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAciCniTenantClusterAllocation
@@ -27231,7 +27231,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonDefinitionExecute(r ApiUpdat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAddonDefinition
@@ -27407,7 +27407,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonPolicyExecute(r ApiUpdateKub
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAddonPolicy
@@ -27583,7 +27583,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonRepositoryExecute(r ApiUpdat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesAddonRepository
@@ -27763,7 +27763,7 @@ func (a *KubernetesApiService) UpdateKubernetesBaremetalNodeProfileExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesBaremetalNodeProfile
@@ -27939,7 +27939,7 @@ func (a *KubernetesApiService) UpdateKubernetesClusterExecute(r ApiUpdateKuberne
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesCluster
@@ -28115,7 +28115,7 @@ func (a *KubernetesApiService) UpdateKubernetesClusterAddonProfileExecute(r ApiU
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesClusterAddonProfile
@@ -28291,7 +28291,7 @@ func (a *KubernetesApiService) UpdateKubernetesClusterProfileExecute(r ApiUpdate
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesClusterProfile
@@ -28467,7 +28467,7 @@ func (a *KubernetesApiService) UpdateKubernetesContainerRuntimePolicyExecute(r A
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesContainerRuntimePolicy
@@ -28643,7 +28643,7 @@ func (a *KubernetesApiService) UpdateKubernetesHttpProxyPolicyExecute(r ApiUpdat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesHttpProxyPolicy
@@ -28819,7 +28819,7 @@ func (a *KubernetesApiService) UpdateKubernetesNetworkPolicyExecute(r ApiUpdateK
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesNetworkPolicy
@@ -28995,7 +28995,7 @@ func (a *KubernetesApiService) UpdateKubernetesNodeGroupProfileExecute(r ApiUpda
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesNodeGroupProfile
@@ -29171,7 +29171,7 @@ func (a *KubernetesApiService) UpdateKubernetesNvidiaGpuProductExecute(r ApiUpda
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesNvidiaGpuProduct
@@ -29347,7 +29347,7 @@ func (a *KubernetesApiService) UpdateKubernetesSysConfigPolicyExecute(r ApiUpdat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesSysConfigPolicy
@@ -29523,7 +29523,7 @@ func (a *KubernetesApiService) UpdateKubernetesTrustedRegistriesPolicyExecute(r 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesTrustedRegistriesPolicy
@@ -29699,7 +29699,7 @@ func (a *KubernetesApiService) UpdateKubernetesVersionExecute(r ApiUpdateKuberne
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVersion
@@ -29875,7 +29875,7 @@ func (a *KubernetesApiService) UpdateKubernetesVersionPolicyExecute(r ApiUpdateK
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVersionPolicy
@@ -30051,7 +30051,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfraConfigPolicyEx
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineInfraConfigPolicy
@@ -30227,7 +30227,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfrastructureProvi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineInfrastructureProvider
@@ -30403,7 +30403,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInstanceTypeExecute
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineInstanceType
@@ -30579,7 +30579,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineNodeProfileExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.ifMatch != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.kubernetesVirtualMachineNodeProfile

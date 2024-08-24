@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-17956
+API version: 1.0.11-18012
 Contact: intersight@cisco.com
 */
 
@@ -30,13 +30,13 @@ type BulkMoDeepCloner struct {
 	ObjectType        string   `json:"ObjectType"`
 	ExcludeProperties []string `json:"ExcludeProperties,omitempty"`
 	// Name suffix to be applied to all the MOs being cloned when ReferencePolicy chosen is CreateNew. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_).
-	ReferenceNameSuffix *string `json:"ReferenceNameSuffix,omitempty"`
+	ReferenceNameSuffix *string `json:"ReferenceNameSuffix,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_-]{1,64}$"`
 	// User selected reference clone behavior. Applies to all the MOs being cloned. * `ReuseAll` - Any policies in the destination organization whose name matches the policy referenced in the cloned policy will be attached. If no policyin the destination organization matches by name, a policy will be cloned with the same name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created. * `CreateNew` - New policies will be created for the source and all the attached policies. If a policy of the same name and type already exists in thedestination organization or any organization from which it shares policies, a clone will be created with the provided suffix added to the name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created.
 	ReferencePolicy *string    `json:"ReferencePolicy,omitempty"`
 	Source          *MoMoRef   `json:"Source,omitempty"`
 	Targets         []MoBaseMo `json:"Targets,omitempty"`
 	// A user-friendly short name to identify the workflow. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), comma or an underscore (_).
-	WorkflowNameSuffix   *string                                      `json:"WorkflowNameSuffix,omitempty"`
+	WorkflowNameSuffix   *string                                      `json:"WorkflowNameSuffix,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]{1}[\\\\sa-zA-Z0-9_.\\\\,\\/:-]{0,63}$"`
 	AsyncResult          NullableBulkResultRelationship               `json:"AsyncResult,omitempty"`
 	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -516,13 +516,13 @@ func (o *BulkMoDeepCloner) UnmarshalJSON(data []byte) (err error) {
 		ObjectType        string   `json:"ObjectType"`
 		ExcludeProperties []string `json:"ExcludeProperties,omitempty"`
 		// Name suffix to be applied to all the MOs being cloned when ReferencePolicy chosen is CreateNew. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_).
-		ReferenceNameSuffix *string `json:"ReferenceNameSuffix,omitempty"`
+		ReferenceNameSuffix *string `json:"ReferenceNameSuffix,omitempty" validate:"regexp=^$|^[a-zA-Z0-9_-]{1,64}$"`
 		// User selected reference clone behavior. Applies to all the MOs being cloned. * `ReuseAll` - Any policies in the destination organization whose name matches the policy referenced in the cloned policy will be attached. If no policyin the destination organization matches by name, a policy will be cloned with the same name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created. * `CreateNew` - New policies will be created for the source and all the attached policies. If a policy of the same name and type already exists in thedestination organization or any organization from which it shares policies, a clone will be created with the provided suffix added to the name.Pool references will always be matched by name. If not found, the pool will be cloned in the destination organization, but no identifierblocks will be created.
 		ReferencePolicy *string    `json:"ReferencePolicy,omitempty"`
 		Source          *MoMoRef   `json:"Source,omitempty"`
 		Targets         []MoBaseMo `json:"Targets,omitempty"`
 		// A user-friendly short name to identify the workflow. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), comma or an underscore (_).
-		WorkflowNameSuffix *string                                      `json:"WorkflowNameSuffix,omitempty"`
+		WorkflowNameSuffix *string                                      `json:"WorkflowNameSuffix,omitempty" validate:"regexp=^$|^[a-zA-Z0-9]{1}[\\\\sa-zA-Z0-9_.\\\\,\\/:-]{0,63}$"`
 		AsyncResult        NullableBulkResultRelationship               `json:"AsyncResult,omitempty"`
 		Organization       NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
