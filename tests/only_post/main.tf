@@ -19,8 +19,8 @@ data "intersight_organization_organization" "default" {
 
 
 #Boot precision policy for creating server profile template
-resource "intersight_boot_precision_policy" "boot_precision1" {
-  name                     = "boot_precision2"
+resource "intersight_boot_precision_policy" "tf_boot_precision_onlypost" {
+  name                     = "tf_boot_precision_onlypost"
   description              = "test policy"
   configured_boot_mode     = "Legacy"
   enforce_uefi_secure_boot = false
@@ -67,8 +67,8 @@ resource "intersight_boot_precision_policy" "boot_precision1" {
 }
 
 
-resource "intersight_server_profile_template" "template1" {
-  name            = "server_profile_template1"
+resource "intersight_server_profile_template" "tf_template_onlypost" {
+  name            = "tf_template_onlypost"
   description     = "demo server profile template"
   target_platform = "FIAttached"
    organization {
@@ -76,7 +76,7 @@ resource "intersight_server_profile_template" "template1" {
      moid        = data.intersight_organization_organization.default.results.0.moid
    }
    policy_bucket {
-     moid        = intersight_boot_precision_policy.boot_precision1.moid
+     moid        = intersight_boot_precision_policy.tf_boot_precision_onlypost.moid
      object_type = "boot.PrecisionPolicy"
    }
 }
@@ -90,26 +90,29 @@ resource "intersight_server_profile_template" "template1" {
 #  os_version = "Ubuntu Server 18.04 LTS"
 #}
 
-resource "intersight_bulk_mo_cloner" "clone_server1"{
+resource "intersight_bulk_mo_cloner" "tf_clone_onlypost"{
        sources {
                class_id = "server.ProfileTemplate"
                object_type = "server.ProfileTemplate"
-               moid = intersight_server_profile_template.template1.moid
+               moid = intersight_server_profile_template.tf_template_onlypost.id
        }
        targets {
                class_id = "server.Profile"
                object_type = "server.Profile"
                additional_properties = jsonencode({
-                Name = "demotesting_DERIVED-4"
+                Name = "tf_server_profile_post"
                 Description = "Sample description"
                })
                tags = []
        }
 }
 
-resource "intersight_server_profile" "server_profile"{
-	depends_on = [intersight_bulk_mo_cloner.clone_server1]
-	name = "demotesting_DERIVED-4"
+resource "intersight_server_profile" "tf_server_profile_only_post"{
+  depends_on = [ intersight_bulk_mo_cloner.tf_clone_onlypost ]
+	name = "tf_server_profile_post"
 	description = "Sample description"
+  organization {
+     object_type = "organization.Organization"
+     moid        = data.intersight_organization_organization.default.results.0.moid
+   }
 }
-

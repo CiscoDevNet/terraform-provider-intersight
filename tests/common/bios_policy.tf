@@ -1,5 +1,9 @@
 
 resource "intersight_bios_policy" "bios_policy1" {
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
   name                                  = "TEST_BIOS_POLICY"
   description                           = "Bios policy"
   acs_control_gpu1state                 = "disabled"

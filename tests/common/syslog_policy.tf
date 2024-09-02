@@ -23,7 +23,7 @@ resource "intersight_syslog_policy" "syslog1" {
     object_type  = "syslog.RemoteLoggingClient"
   }
   profiles {
-    moid        = intersight_server_profile.server1.id
+    moid        = intersight_server_profile.tf_server_common.id
     object_type = "server.Profile"
   }
   organization {

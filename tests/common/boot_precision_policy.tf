@@ -1,6 +1,6 @@
 
-resource "intersight_boot_precision_policy" "boot_precision1" {
-  name                     = "boot_precision1"
+resource "intersight_boot_precision_policy" "tf_boot_precision_common" {
+  name                     = "tf_boot_precision_common"
   description              = "test policy"
   configured_boot_mode     = "Legacy"
   enforce_uefi_secure_boot = false
@@ -45,4 +45,3 @@ resource "intersight_boot_precision_policy" "boot_precision1" {
     })
   }
 }
-
