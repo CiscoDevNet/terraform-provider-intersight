@@ -289,6 +289,17 @@ func resourceServerProfileTemplate() *schema.Resource {
 					}
 					return
 				}},
+			"management_mode": {
+				Description: "The management mode of the server.\n* `IntersightStandalone` - Intersight Standalone mode of operation.\n* `Intersight` - Intersight managed mode of operation.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -1317,6 +1328,10 @@ func resourceServerProfileTemplateRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in ServerProfileTemplate object: %s", err.Error())
+	}
+
+	if err := d.Set("management_mode", (s.GetManagementMode())); err != nil {
+		return diag.Errorf("error occurred while setting property ManagementMode in ServerProfileTemplate object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.KeySetting"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.KeySetting"]
-**KeyType** | Pointer to **string** | Method to be used for fetching the encryption key. * &#x60;Kmip&#x60; - Remote encryption using KMIP. * &#x60;Manual&#x60; - Drive encryption using manual key. | [optional] [default to "Kmip"]
+**KeyType** | Pointer to **string** | Method to be used for fetching the security key. * &#x60;Kmip&#x60; - Remote security using KMIP. * &#x60;Manual&#x60; - Drive security using manual key. | [optional] [default to "Kmip"]
 **ManualKey** | Pointer to [**NullableStorageLocalKeySetting**](StorageLocalKeySetting.md) |  | [optional] 
 **RemoteKey** | Pointer to [**NullableStorageRemoteKeySetting**](StorageRemoteKeySetting.md) |  | [optional] 
 

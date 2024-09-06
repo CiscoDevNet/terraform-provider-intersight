@@ -26,6 +26,7 @@ api_convergedinfra.go
 api_crd.go
 api_deviceconnector.go
 api_dnac.go
+api_energy.go
 api_equipment.go
 api_ether.go
 api_externalsite.go
@@ -1159,6 +1160,8 @@ docs/DnacTransitResponse.md
 docs/DnacVirtualNetworkFabricSite.md
 docs/DnacVirtualNetworkFabricSiteList.md
 docs/DnacVirtualNetworkFabricSiteResponse.md
+docs/EnergyApi.md
+docs/EnergyMetrics.md
 docs/EquipmentAbstractDevice.md
 docs/EquipmentApi.md
 docs/EquipmentBase.md
@@ -3651,7 +3654,6 @@ docs/SchedulerBaseScheduleParams.md
 docs/SchedulerDailyCadenceParams.md
 docs/SchedulerEveryCadenceParams.md
 docs/SchedulerMonthlyCadenceParams.md
-docs/SchedulerMonthlyWeekDayFormat.md
 docs/SchedulerOneTimeScheduleParams.md
 docs/SchedulerRecurringScheduleParams.md
 docs/SchedulerRestStimTaskRequest.md
@@ -3665,7 +3667,6 @@ docs/SchedulerTaskScheduleRelationship.md
 docs/SchedulerTaskScheduleResponse.md
 docs/SchedulerTaskScheduleStatus.md
 docs/SchedulerWeeklyCadenceParams.md
-docs/SchedulerYearlyCadenceParams.md
 docs/SdaaciApi.md
 docs/SdaaciConnection.md
 docs/SdaaciConnectionDetail.md
@@ -6184,6 +6185,7 @@ model_dnac_transit_response.go
 model_dnac_virtual_network_fabric_site.go
 model_dnac_virtual_network_fabric_site_list.go
 model_dnac_virtual_network_fabric_site_response.go
+model_energy_metrics.go
 model_equipment_abstract_device.go
 model_equipment_base.go
 model_equipment_base_relationship.go
@@ -8620,7 +8622,6 @@ model_scheduler_base_schedule_params.go
 model_scheduler_daily_cadence_params.go
 model_scheduler_every_cadence_params.go
 model_scheduler_monthly_cadence_params.go
-model_scheduler_monthly_week_day_format.go
 model_scheduler_one_time_schedule_params.go
 model_scheduler_recurring_schedule_params.go
 model_scheduler_rest_stim_task_request.go
@@ -8634,7 +8635,6 @@ model_scheduler_task_schedule_relationship.go
 model_scheduler_task_schedule_response.go
 model_scheduler_task_schedule_status.go
 model_scheduler_weekly_cadence_params.go
-model_scheduler_yearly_cadence_params.go
 model_sdaaci_connection.go
 model_sdaaci_connection_detail.go
 model_sdaaci_connection_detail_list.go
@@ -10123,6 +10123,7 @@ test/api_convergedinfra_test.go
 test/api_crd_test.go
 test/api_deviceconnector_test.go
 test/api_dnac_test.go
+test/api_energy_test.go
 test/api_equipment_test.go
 test/api_ether_test.go
 test/api_externalsite_test.go

@@ -61,7 +61,7 @@ func getCapabilityAdapterUpdateConstraintMetaSchema() map[string]*schema.Schema 
 			},
 		},
 		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -106,7 +106,7 @@ func getCapabilityAdapterUpdateConstraintMetaSchema() map[string]*schema.Schema 
 			Optional:    true,
 		},
 		"object_type": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -227,16 +227,6 @@ func getCapabilityAdapterUpdateConstraintMetaSchema() map[string]*schema.Schema 
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"supported_platform": {
-			Description: "Platform for which the constraint is to be enforced.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"supported_platforms": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Schema{
-				Type: schema.TypeString}},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -631,22 +621,6 @@ func dataSourceCapabilityAdapterUpdateConstraintMetaRead(c context.Context, d *s
 		o.SetSharedScope(x)
 	}
 
-	if v, ok := d.GetOk("supported_platform"); ok {
-		x := (v.(string))
-		o.SetSupportedPlatform(x)
-	}
-
-	if v, ok := d.GetOk("supported_platforms"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			if y.Index(i).Interface() != nil {
-				x = append(x, y.Index(i).Interface().(string))
-			}
-		}
-		o.SetSupportedPlatforms(x)
-	}
-
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -814,8 +788,6 @@ func dataSourceCapabilityAdapterUpdateConstraintMetaRead(c context.Context, d *s
 
 				temp["server_specific_constraint"] = flattenListCapabilityServerComponentConstraint(s.GetServerSpecificConstraint(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
-				temp["supported_platform"] = (s.GetSupportedPlatform())
-				temp["supported_platforms"] = (s.GetSupportedPlatforms())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

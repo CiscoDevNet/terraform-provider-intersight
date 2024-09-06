@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **Model** | Pointer to **string** | Model of the inventory unit which will be supported in firmware operation. | [optional] [readonly] 
 **PlatformType** | Pointer to **string** | Platform type for which the constraint is to be enforced. | [optional] [readonly] 
 **ServerSpecificConstraint** | Pointer to [**[]CapabilityServerComponentConstraint**](CapabilityServerComponentConstraint.md) |  | [optional] 
-**SupportedPlatforms** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -207,41 +206,6 @@ HasServerSpecificConstraint returns a boolean if a field has been set.
 `func (o *CapabilityUpdateConstraintMeta) UnsetServerSpecificConstraint()`
 
 UnsetServerSpecificConstraint ensures that no value is present for ServerSpecificConstraint, not even an explicit nil
-### GetSupportedPlatforms
-
-`func (o *CapabilityUpdateConstraintMeta) GetSupportedPlatforms() []string`
-
-GetSupportedPlatforms returns the SupportedPlatforms field if non-nil, zero value otherwise.
-
-### GetSupportedPlatformsOk
-
-`func (o *CapabilityUpdateConstraintMeta) GetSupportedPlatformsOk() (*[]string, bool)`
-
-GetSupportedPlatformsOk returns a tuple with the SupportedPlatforms field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSupportedPlatforms
-
-`func (o *CapabilityUpdateConstraintMeta) SetSupportedPlatforms(v []string)`
-
-SetSupportedPlatforms sets SupportedPlatforms field to given value.
-
-### HasSupportedPlatforms
-
-`func (o *CapabilityUpdateConstraintMeta) HasSupportedPlatforms() bool`
-
-HasSupportedPlatforms returns a boolean if a field has been set.
-
-### SetSupportedPlatformsNil
-
-`func (o *CapabilityUpdateConstraintMeta) SetSupportedPlatformsNil(b bool)`
-
- SetSupportedPlatformsNil sets the value for SupportedPlatforms to be an explicit nil
-
-### UnsetSupportedPlatforms
-`func (o *CapabilityUpdateConstraintMeta) UnsetSupportedPlatforms()`
-
-UnsetSupportedPlatforms ensures that no value is present for SupportedPlatforms, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.KmipServer"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.KmipServer"]
-**EnableDriveSecurity** | Pointer to **bool** | Enable the selected KMIP Server configuration for encryption. This flag just enables the drive security and only after remote key setting configured, the actual encryption will be done. | [optional] 
+**EnableDriveSecurity** | Pointer to **bool** | Enable the selected KMIP Server configuration for security. This flag just enables the drive security and only after remote key setting configured, the actual security will be applied. | [optional] 
 **IpAddress** | Pointer to **string** | The IP address of the KMIP server. It could be an IPv4 address, an IPv6 address, or a hostname. Hostnames are valid only when Inband is configured for the CIMC address. | [optional] 
 **Port** | Pointer to **int64** | The port to which the KMIP client should connect. | [optional] [default to 5696]
 **Timeout** | Pointer to **int64** | The timeout before which the KMIP client should connect. | [optional] [default to 60]

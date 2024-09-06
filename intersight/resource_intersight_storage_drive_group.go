@@ -368,7 +368,7 @@ func resourceStorageDriveGroup() *schema.Resource {
 				Default:      "Raid0",
 			},
 			"secure_drive_group": {
-				Description: "Enables/disables the drive encryption on all the drives used in this policy. This flag just enables the drive security and only after remote key setting configured, the actual encryption will be done.",
+				Description: "Enables/disables the drive security on all the drives used in this policy. This flag just enables the drive security and only after Remote/Manual key setting configured, the actual security will be applied.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},

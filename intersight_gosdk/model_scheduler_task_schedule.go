@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18012
+API version: 1.0.11-18369
 Contact: intersight@cisco.com
 */
 
@@ -29,11 +29,11 @@ type SchedulerTaskSchedule struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The action of the scheduled task such as suspend or resume. * `None` - No action is set (default). * `Suspend` - Suspend a scheduled task indefinitely. * `Resume` - Resume a suspended scheduled task. * `SuspendTill` - Suspend the scheduled task until a specified end-date.
+	// The action of the scheduled task such as suspend or resume. * `None` - No action is set (default). * `Suspend` - Suspend a scheduled task indefinitely. * `Resume` - Resume a suspended scheduled task. * `SuspendTill` - Suspend the scheduled task until a specified end-date. Not supported in this release.
 	Action *string `json:"Action,omitempty"`
 	// A description to describe the schedule for easier identification.
 	Description *string `json:"Description,omitempty"`
-	// The last action for the scheduled task is saved in this field. Set to none if there was no action. * `None` - No action is set (default). * `Suspend` - Suspend a scheduled task indefinitely. * `Resume` - Resume a suspended scheduled task. * `SuspendTill` - Suspend the scheduled task until a specified end-date.
+	// The last action for the scheduled task is saved in this field. Set to none if there was no action. * `None` - No action is set (default). * `Suspend` - Suspend a scheduled task indefinitely. * `Resume` - Resume a suspended scheduled task. * `SuspendTill` - Suspend the scheduled task until a specified end-date. Not supported in this release.
 	LastAction *string `json:"LastAction,omitempty"`
 	// A schedule name for easier identification (not required to be unique).
 	Name           *string                             `json:"Name,omitempty"`
@@ -42,7 +42,7 @@ type SchedulerTaskSchedule struct {
 	// Suspend a task until an end date. this applies only to the action suspendTill.
 	SuspendEndTime *time.Time                    `json:"SuspendEndTime,omitempty"`
 	TaskRequest    *SchedulerRestStimTaskRequest `json:"TaskRequest,omitempty"`
-	// An Enum describing the type of scheduler to use. * `None` - No value was set for the schedule type (Enum value None). * `OneTime` - Define a one-time task execution time that will not automatically repeat. * `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, yearly, or every <interval> pattern. This option is not currently supported.
+	// An Enum describing the type of scheduler to use. * `None` - No value was set for the schedule type (Enum value None). * `OneTime` - Define a one-time task execution time that will not automatically repeat. * `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, or every <interval> pattern.
 	Type                 *string                                        `json:"Type,omitempty"`
 	AssociatedObject     NullableMoBaseMoRelationship                   `json:"AssociatedObject,omitempty"`
 	WorkflowDefinition   NullableWorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`
@@ -639,11 +639,11 @@ func (o *SchedulerTaskSchedule) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// The action of the scheduled task such as suspend or resume. * `None` - No action is set (default). * `Suspend` - Suspend a scheduled task indefinitely. * `Resume` - Resume a suspended scheduled task. * `SuspendTill` - Suspend the scheduled task until a specified end-date.
+		// The action of the scheduled task such as suspend or resume. * `None` - No action is set (default). * `Suspend` - Suspend a scheduled task indefinitely. * `Resume` - Resume a suspended scheduled task. * `SuspendTill` - Suspend the scheduled task until a specified end-date. Not supported in this release.
 		Action *string `json:"Action,omitempty"`
 		// A description to describe the schedule for easier identification.
 		Description *string `json:"Description,omitempty"`
-		// The last action for the scheduled task is saved in this field. Set to none if there was no action. * `None` - No action is set (default). * `Suspend` - Suspend a scheduled task indefinitely. * `Resume` - Resume a suspended scheduled task. * `SuspendTill` - Suspend the scheduled task until a specified end-date.
+		// The last action for the scheduled task is saved in this field. Set to none if there was no action. * `None` - No action is set (default). * `Suspend` - Suspend a scheduled task indefinitely. * `Resume` - Resume a suspended scheduled task. * `SuspendTill` - Suspend the scheduled task until a specified end-date. Not supported in this release.
 		LastAction *string `json:"LastAction,omitempty"`
 		// A schedule name for easier identification (not required to be unique).
 		Name           *string                             `json:"Name,omitempty"`
@@ -652,7 +652,7 @@ func (o *SchedulerTaskSchedule) UnmarshalJSON(data []byte) (err error) {
 		// Suspend a task until an end date. this applies only to the action suspendTill.
 		SuspendEndTime *time.Time                    `json:"SuspendEndTime,omitempty"`
 		TaskRequest    *SchedulerRestStimTaskRequest `json:"TaskRequest,omitempty"`
-		// An Enum describing the type of scheduler to use. * `None` - No value was set for the schedule type (Enum value None). * `OneTime` - Define a one-time task execution time that will not automatically repeat. * `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, yearly, or every <interval> pattern. This option is not currently supported.
+		// An Enum describing the type of scheduler to use. * `None` - No value was set for the schedule type (Enum value None). * `OneTime` - Define a one-time task execution time that will not automatically repeat. * `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, or every <interval> pattern.
 		Type               *string                                        `json:"Type,omitempty"`
 		AssociatedObject   NullableMoBaseMoRelationship                   `json:"AssociatedObject,omitempty"`
 		WorkflowDefinition NullableWorkflowWorkflowDefinitionRelationship `json:"WorkflowDefinition,omitempty"`

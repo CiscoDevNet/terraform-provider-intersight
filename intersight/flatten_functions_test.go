@@ -20354,7 +20354,7 @@ func TestFlattenMapSchedulerTaskScheduleRelationship(t *testing.T) {
 func TestFlattenMapSchedulerTaskScheduleStatus(t *testing.T) {
 	p := models.SchedulerTaskScheduleStatus{}
 	var d = &schema.ResourceData{}
-	c := `{"ClassId":"scheduler.TaskScheduleStatus","Count":32,"CurrentStatus":"CurrentStatus %d","IsSystemSuspended":true,"ObjectType":"scheduler.TaskScheduleStatus","Reason":"Reason %d"}`
+	c := `{"ClassId":"scheduler.TaskScheduleStatus","ConsecutiveFailures":32,"Count":32,"CurrentStatus":"CurrentStatus %d","IsSystemSuspended":true,"LastRunStatus":"LastRunStatus %d","ObjectType":"scheduler.TaskScheduleStatus","Reason":"Reason %d"}`
 
 	//test when the response is empty
 	ffOpEmpty := flattenMapSchedulerTaskScheduleStatus(p, d)
@@ -20365,7 +20365,7 @@ func TestFlattenMapSchedulerTaskScheduleStatus(t *testing.T) {
 	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
 	CheckError(t, err)
 	ffOp := flattenMapSchedulerTaskScheduleStatus(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "scheduler.TaskScheduleStatus", "nr_count": 32, "current_status": "CurrentStatus 1", "is_system_suspended": true, "object_type": "scheduler.TaskScheduleStatus", "reason": "Reason 1"}
+	expectedOp := map[string]interface{}{"class_id": "scheduler.TaskScheduleStatus", "consecutive_failures": 32, "nr_count": 32, "current_status": "CurrentStatus 1", "is_system_suspended": true, "last_run_status": "LastRunStatus 1", "object_type": "scheduler.TaskScheduleStatus", "reason": "Reason 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }

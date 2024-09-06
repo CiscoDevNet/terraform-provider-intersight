@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "scheduler.EveryCadenceParams"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "scheduler.EveryCadenceParams"]
-**Interval** | Pointer to **string** | An interval specified as string where valid time units are \&quot;ns\&quot;, \&quot;us\&quot;, \&quot;ms\&quot;, \&quot;s\&quot;, \&quot;m\&quot;, \&quot;h\&quot;. The calender calculations use a gregorian calendar with no leap seconds. The default is 24h. | [optional] 
+**Interval** | Pointer to **string** | An interval specified as string where valid time units are \&quot;s\&quot;, \&quot;m\&quot;, \&quot;h\&quot;. The minimum interval is 15 minutes and the maximum is 24 hours. | [optional] 
 
 ## Methods
 

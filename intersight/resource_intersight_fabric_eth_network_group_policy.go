@@ -488,11 +488,11 @@ func resourceFabricEthNetworkGroupPolicy() *schema.Resource {
 							Default:     "fabric.VlanSettings",
 						},
 						"native_vlan": {
-							Description:  "Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. If the native VLAN is not a part of the allowed VLANs, it will automatically be added to the list of allowed VLANs.",
+							Description:  "Native VLAN ID of the virtual interface or the corresponding Vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Native VLAN ID maps all incoming untagged traffic i.e. packets without a VLAN tag to the native VLAN for switching purposes. If the native VLAN is not a part of the allowed VLANs, it will automatically be added to the list of allowed VLANs. A native VLAN ID of 0 will indicate to the system to use the system default native VLAN ID and will also prevent native VLAN from being added to the allowed VLAN list.",
 							Type:         schema.TypeInt,
-							ValidateFunc: validation.IntBetween(1, 4093),
+							ValidateFunc: validation.IntBetween(0, 4093),
 							Optional:     true,
-							Default:      1,
+							Default:      0,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",

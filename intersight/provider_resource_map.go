@@ -71,6 +71,7 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_connectorpack_connector_pack_upgrade":                    resourceConnectorpackConnectorPackUpgrade(),
 		"intersight_crd_custom_resource":                                     resourceCrdCustomResource(),
 		"intersight_deviceconnector_policy":                                  resourceDeviceconnectorPolicy(),
+		"intersight_energy_metrics":                                          resourceEnergyMetrics(),
 		"intersight_externalsite_authorization":                              resourceExternalsiteAuthorization(),
 		"intersight_fabric_appliance_pc_role":                                resourceFabricAppliancePcRole(),
 		"intersight_fabric_appliance_role":                                   resourceFabricApplianceRole(),

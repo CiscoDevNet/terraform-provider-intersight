@@ -785,6 +785,17 @@ func resourceServerProfile() *schema.Resource {
 					},
 				},
 			},
+			"management_mode": {
+				Description: "The management mode of the server.\n* `IntersightStandalone` - Intersight Standalone mode of operation.\n* `Intersight` - Intersight managed mode of operation.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -2521,6 +2532,10 @@ func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta i
 
 	if err := d.Set("leased_server", flattenMapComputePhysicalRelationship(s.GetLeasedServer(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property LeasedServer in ServerProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("management_mode", (s.GetManagementMode())); err != nil {
+		return diag.Errorf("error occurred while setting property ManagementMode in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {

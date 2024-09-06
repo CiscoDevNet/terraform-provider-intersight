@@ -32,6 +32,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The property used to identify the name of the server it is associated with. 
 * `one_time_boot_device`:(string) The name of the device chosen by user for configuring One-Time Boot device. 
+* `reset_memory_errors`:(string) Reset Correctable and Uncorrectable ECC errors on all the DIMMs present in the server.* `Ready` - Reset memory errors operation is allowed on the server in this state.* `Reset` - Trigger reset memory errors operation on a server. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tpm_reset`:(string) Clear the configuration of TPM chip in the server.* `None` - Perform no action on the TPM.* `ClearTpm` - Clear the configuration and restore factory defaults of TPM chip in the server. 
