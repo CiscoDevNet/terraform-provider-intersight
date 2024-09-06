@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "scheduler.WeeklyCadenceParams"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "scheduler.WeeklyCadenceParams"]
 **DayOfWeek** | Pointer to **[]string** |  | [optional] 
+**RunEvery** | Pointer to **int64** | A weekly interval for a task execution. If an interval is not explicitly specified, the task will be executed once every week by default. | [optional] [default to 1]
 
 ## Methods
 
@@ -102,6 +103,31 @@ HasDayOfWeek returns a boolean if a field has been set.
 `func (o *SchedulerWeeklyCadenceParams) UnsetDayOfWeek()`
 
 UnsetDayOfWeek ensures that no value is present for DayOfWeek, not even an explicit nil
+### GetRunEvery
+
+`func (o *SchedulerWeeklyCadenceParams) GetRunEvery() int64`
+
+GetRunEvery returns the RunEvery field if non-nil, zero value otherwise.
+
+### GetRunEveryOk
+
+`func (o *SchedulerWeeklyCadenceParams) GetRunEveryOk() (*int64, bool)`
+
+GetRunEveryOk returns a tuple with the RunEvery field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunEvery
+
+`func (o *SchedulerWeeklyCadenceParams) SetRunEvery(v int64)`
+
+SetRunEvery sets RunEvery field to given value.
+
+### HasRunEvery
+
+`func (o *SchedulerWeeklyCadenceParams) HasRunEvery() bool`
+
+HasRunEvery returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

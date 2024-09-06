@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **OneTimeBootDevice** | Pointer to **string** | The name of the device chosen by user for configuring One-Time Boot device. | [optional] 
 **PersistentMemoryOperation** | Pointer to [**NullableComputePersistentMemoryOperation**](ComputePersistentMemoryOperation.md) |  | [optional] 
 **PersonalitySetting** | Pointer to [**NullableComputePersonalitySetting**](ComputePersonalitySetting.md) |  | [optional] 
+**ResetMemoryErrors** | Pointer to **string** | Reset Correctable and Uncorrectable ECC errors on all the DIMMs present in the server. * &#x60;Ready&#x60; - Reset memory errors operation is allowed on the server in this state. * &#x60;Reset&#x60; - Trigger reset memory errors operation on a server. | [optional] [default to "Ready"]
 **ServerConfig** | Pointer to [**NullableComputeServerConfig**](ComputeServerConfig.md) |  | [optional] 
 **ServerOpStatus** | Pointer to [**[]ComputeServerOpStatus**](ComputeServerOpStatus.md) |  | [optional] 
 **StorageControllerOperation** | Pointer to [**NullableComputeStorageControllerOperation**](ComputeStorageControllerOperation.md) |  | [optional] 
@@ -472,6 +473,31 @@ HasPersonalitySetting returns a boolean if a field has been set.
 `func (o *ComputeServerSetting) UnsetPersonalitySetting()`
 
 UnsetPersonalitySetting ensures that no value is present for PersonalitySetting, not even an explicit nil
+### GetResetMemoryErrors
+
+`func (o *ComputeServerSetting) GetResetMemoryErrors() string`
+
+GetResetMemoryErrors returns the ResetMemoryErrors field if non-nil, zero value otherwise.
+
+### GetResetMemoryErrorsOk
+
+`func (o *ComputeServerSetting) GetResetMemoryErrorsOk() (*string, bool)`
+
+GetResetMemoryErrorsOk returns a tuple with the ResetMemoryErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResetMemoryErrors
+
+`func (o *ComputeServerSetting) SetResetMemoryErrors(v string)`
+
+SetResetMemoryErrors sets ResetMemoryErrors field to given value.
+
+### HasResetMemoryErrors
+
+`func (o *ComputeServerSetting) HasResetMemoryErrors() bool`
+
+HasResetMemoryErrors returns a boolean if a field has been set.
+
 ### GetServerConfig
 
 `func (o *ComputeServerSetting) GetServerConfig() ComputeServerConfig`

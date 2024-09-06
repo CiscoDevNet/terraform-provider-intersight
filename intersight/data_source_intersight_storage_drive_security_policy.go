@@ -81,7 +81,7 @@ func getStorageDriveSecurityPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"key_setting": {
-			Description: "Key details for supporting disk encryption.",
+			Description: "Key details for supporting drive security.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -98,7 +98,7 @@ func getStorageDriveSecurityPolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"key_type": {
-						Description: "Method to be used for fetching the encryption key.\n* `Kmip` - Remote encryption using KMIP.\n* `Manual` - Drive encryption using manual key.",
+						Description: "Method to be used for fetching the security key.\n* `Kmip` - Remote security using KMIP.\n* `Manual` - Drive security using manual key.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -120,7 +120,7 @@ func getStorageDriveSecurityPolicySchema() map[string]*schema.Schema {
 									Optional:    true,
 								},
 								"existing_key": {
-									Description: "Current Security Key Passphrase which is already configured on the server.",
+									Description: "Current Security Key Passphrase which is already configured on the server. From the security context, the passphrase should be at least 8 characters long and should include at least one uppercase letter, one lowercase letter, one number, and one special character.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -135,7 +135,7 @@ func getStorageDriveSecurityPolicySchema() map[string]*schema.Schema {
 									Optional:    true,
 								},
 								"new_key": {
-									Description: "New Security Key Passphrase to be configured on the controller.",
+									Description: "New Security Key Passphrase to be configured on the server. From the security context, the passphrase should be at least 8 characters long and should include at least one uppercase letter, one lowercase letter, one number, and one special character.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -153,7 +153,7 @@ func getStorageDriveSecurityPolicySchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"remote_key": {
-						Description: "Remote key encryption using KMIP configuration.",
+						Description: "Remote key security using KMIP configuration.",
 						Type:        schema.TypeList,
 						MaxItems:    1,
 						Optional:    true,
@@ -215,7 +215,7 @@ func getStorageDriveSecurityPolicySchema() map[string]*schema.Schema {
 									Optional:    true,
 								},
 								"existing_key": {
-									Description: "Current Security Key Passphrase which is already configured on the server.",
+									Description: "Current Security Key Passphrase which is already configured on the server. From the security context, the passphrase should be at least 8 characters long and should include at least one uppercase letter, one lowercase letter, one number, and one special character.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -247,7 +247,7 @@ func getStorageDriveSecurityPolicySchema() map[string]*schema.Schema {
 												Optional:    true,
 											},
 											"enable_drive_security": {
-												Description: "Enable the selected KMIP Server configuration for encryption. This flag just enables the drive security and only after remote key setting configured, the actual encryption will be done.",
+												Description: "Enable the selected KMIP Server configuration for security. This flag just enables the drive security and only after remote key setting configured, the actual security will be applied.",
 												Type:        schema.TypeBool,
 												Optional:    true,
 											},
@@ -292,7 +292,7 @@ func getStorageDriveSecurityPolicySchema() map[string]*schema.Schema {
 												Optional:    true,
 											},
 											"enable_drive_security": {
-												Description: "Enable the selected KMIP Server configuration for encryption. This flag just enables the drive security and only after remote key setting configured, the actual encryption will be done.",
+												Description: "Enable the selected KMIP Server configuration for security. This flag just enables the drive security and only after remote key setting configured, the actual security will be applied.",
 												Type:        schema.TypeBool,
 												Optional:    true,
 											},

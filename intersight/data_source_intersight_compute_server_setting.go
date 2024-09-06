@@ -597,6 +597,11 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"reset_memory_errors": {
+			Description: "Reset Correctable and Uncorrectable ECC errors on all the DIMMs present in the server.\n* `Ready` - Reset memory errors operation is allowed on the server in this state.\n* `Reset` - Trigger reset memory errors operation on a server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"rn": {
 			Description: "The Relative Name uniquely identifies an object within a given context.",
 			Type:        schema.TypeString,
@@ -1672,6 +1677,11 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("reset_memory_errors"); ok {
+		x := (v.(string))
+		o.SetResetMemoryErrors(x)
+	}
+
 	if v, ok := d.GetOk("rn"); ok {
 		x := (v.(string))
 		o.SetRn(x)
@@ -2318,6 +2328,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 				temp["persistent_memory_operation"] = flattenMapComputePersistentMemoryOperation(s.GetPersistentMemoryOperation(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+				temp["reset_memory_errors"] = (s.GetResetMemoryErrors())
 				temp["rn"] = (s.GetRn())
 
 				temp["running_workflow"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetRunningWorkflow(), d)

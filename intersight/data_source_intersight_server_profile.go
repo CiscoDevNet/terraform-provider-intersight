@@ -598,6 +598,11 @@ func getServerProfileSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"management_mode": {
+			Description: "The management mode of the server.\n* `IntersightStandalone` - Intersight Standalone mode of operation.\n* `Intersight` - Intersight managed mode of operation.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -1906,6 +1911,11 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	if v, ok := d.GetOk("management_mode"); ok {
+		x := (v.(string))
+		o.SetManagementMode(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -2708,6 +2718,7 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 				temp["is_pmc_deployed_secure_passphrase_set"] = (s.GetIsPmcDeployedSecurePassphraseSet())
 
 				temp["leased_server"] = flattenMapComputePhysicalRelationship(s.GetLeasedServer(), d)
+				temp["management_mode"] = (s.GetManagementMode())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

@@ -36,7 +36,7 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 					return
 				}},
 			"action": {
-				Description:  "The action of the scheduled task such as suspend or resume.\n* `None` - No action is set (default).\n* `Suspend` - Suspend a scheduled task indefinitely.\n* `Resume` - Resume a suspended scheduled task.\n* `SuspendTill` - Suspend the scheduled task until a specified end-date.",
+				Description:  "The action of the scheduled task such as suspend or resume.\n* `None` - No action is set (default).\n* `Suspend` - Suspend a scheduled task indefinitely.\n* `Resume` - Resume a suspended scheduled task.\n* `SuspendTill` - Suspend the scheduled task until a specified end-date. Not supported in this release.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"None", "Suspend", "Resume", "SuspendTill"}, false),
 				Optional:     true,
@@ -160,7 +160,7 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 					return
 				}},
 			"last_action": {
-				Description: "The last action for the scheduled task is saved in this field. Set to none if there was no action.\n* `None` - No action is set (default).\n* `Suspend` - Suspend a scheduled task indefinitely.\n* `Resume` - Resume a suspended scheduled task.\n* `SuspendTill` - Suspend the scheduled task until a specified end-date.",
+				Description: "The last action for the scheduled task is saved in this field. Set to none if there was no action.\n* `None` - No action is set (default).\n* `Suspend` - Suspend a scheduled task indefinitely.\n* `Resume` - Resume a suspended scheduled task.\n* `SuspendTill` - Suspend the scheduled task until a specified end-date. Not supported in this release.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -287,7 +287,7 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 				},
 			},
 			"schedule_params": {
-				Description: "According to the schedule type this property is evaluated. If the property Type is set to OneTime, then the ObjectType must be scheduler.OneTimeScheduleParams.",
+				Description: "According to the schedule type this property is evaluated. If the property Type is set to OneTime, then the ObjectType must be scheduler.OneTimeScheduleParams. If the Type is Recurring, then the ObjectType must be scheduler.RecurringScheduleParams.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -313,7 +313,7 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 							Computed:    true,
 						},
 						"start_time": {
-							Description: "The schedule start time. A future time is required. When the start time is updated, it is mandatory to specify the corresponding timeZone property as well.",
+							Description: "The schedule start time. A future time is required.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -358,6 +358,17 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 							Optional:    true,
 							Default:     "scheduler.TaskScheduleStatus",
 						},
+						"consecutive_failures": {
+							Description: "The number of consecutive times the task has failed.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"nr_count": {
 							Description: "The task completion count, which includes both successful executions and any failures.",
 							Type:        schema.TypeInt,
@@ -383,6 +394,17 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 						"is_system_suspended": {
 							Description: "Indicates if this task was suspended by the system.",
 							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"last_run_status": {
+							Description: "The last task completion status, which includes both successful executions and any failures.\n* `None` - No status is set (default).\n* `Scheduled` - The status is set when a task is scheduled.\n* `Running` - The status is set when a task is running.\n* `Completed` - The status is set when a task is complete.\n* `Failed` - The status is set when a task fails.\n* `Suspended` - The status is set when a task is suspended.\n* `Skipped` - The status is set when a task is skipped because the previous task is still running.",
+							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
 							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
@@ -528,7 +550,7 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 							Optional:    true,
 						},
 						"timeout": {
-							Description: "Upper limit on the execution time of a scheduled task. Helps purge run-away scheduled tasks.",
+							Description: "Upper limit on the execution time of a scheduled task. Helps purge run-away scheduled tasks.\nNot supported in this release.",
 							Type:        schema.TypeInt,
 							Optional:    true,
 						},
@@ -541,7 +563,7 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 				},
 			},
 			"type": {
-				Description:  "An Enum describing the type of scheduler to use.\n* `None` - No value was set for the schedule type (Enum value None).\n* `OneTime` - Define a one-time task execution time that will not automatically repeat.\n* `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, yearly, or every <interval> pattern. This option is not currently supported.",
+				Description:  "An Enum describing the type of scheduler to use.\n* `None` - No value was set for the schedule type (Enum value None).\n* `OneTime` - Define a one-time task execution time that will not automatically repeat.\n* `Recurring` - Specify a recurring task cadence based on a predefined pattern, such as daily, weekly, monthly, or every <interval> pattern.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"None", "OneTime", "Recurring"}, false),
 				Optional:     true,

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "catalystsdwan.VedgeDevice"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "catalystsdwan.VedgeDevice"]
 **ConfigStatusMessage** | Pointer to **string** | The Catalyst SDWAN device config status message. | [optional] 
+**DeviceId** | Pointer to **string** | The Catalyst SDWAN device id. | [optional] 
 **DeviceState** | Pointer to **string** | The Catalyst SDWAN device state. | [optional] 
 **HostName** | Pointer to **string** | The Catalyst SDWAN device host name. | [optional] 
 **PlatformFamily** | Pointer to **string** | The Catalyst SDWAN device platform family. | [optional] 
@@ -102,6 +103,31 @@ SetConfigStatusMessage sets ConfigStatusMessage field to given value.
 `func (o *CatalystsdwanVedgeDevice) HasConfigStatusMessage() bool`
 
 HasConfigStatusMessage returns a boolean if a field has been set.
+
+### GetDeviceId
+
+`func (o *CatalystsdwanVedgeDevice) GetDeviceId() string`
+
+GetDeviceId returns the DeviceId field if non-nil, zero value otherwise.
+
+### GetDeviceIdOk
+
+`func (o *CatalystsdwanVedgeDevice) GetDeviceIdOk() (*string, bool)`
+
+GetDeviceIdOk returns a tuple with the DeviceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeviceId
+
+`func (o *CatalystsdwanVedgeDevice) SetDeviceId(v string)`
+
+SetDeviceId sets DeviceId field to given value.
+
+### HasDeviceId
+
+`func (o *CatalystsdwanVedgeDevice) HasDeviceId() bool`
+
+HasDeviceId returns a boolean if a field has been set.
 
 ### GetDeviceState
 

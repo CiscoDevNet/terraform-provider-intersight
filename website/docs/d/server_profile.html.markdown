@@ -22,6 +22,7 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) Description of the profile. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `is_pmc_deployed_secure_passphrase_set`:(bool) Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set. 
+* `management_mode`:(string) The management mode of the server.* `IntersightStandalone` - Intersight Standalone mode of operation.* `Intersight` - Intersight managed mode of operation. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the profile instance or profile template. 

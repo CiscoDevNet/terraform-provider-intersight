@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Method** | Pointer to **string** | The supported values are POST, PUT, DELETE, PATCH. | [optional] 
 **Protocol** | Pointer to **string** | The accepted web protocol values are http and https. | [optional] 
 **Response** | Pointer to **interface{}** | The response obtained for the scheduled API service. | [optional] 
-**Timeout** | Pointer to **int64** | Upper limit on the execution time of a scheduled task. Helps purge run-away scheduled tasks. | [optional] 
+**Timeout** | Pointer to **int64** | Upper limit on the execution time of a scheduled task. Helps purge run-away scheduled tasks. Not supported in this release. | [optional] 
 **Url** | Pointer to **string** | The URL of the resource in the target to which the API request is made. | [optional] 
 
 ## Methods

@@ -17,6 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `config_status_message`:(string) The Catalyst SDWAN device config status message. 
 * `create_time`:(string) The time when this managed object was created. 
+* `device_id`:(string) The Catalyst SDWAN device id. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `device_state`:(string) The Catalyst SDWAN device state. 
 * `device_type`:(string) The categorization of the device type. Optional parameter to categorize devices by product type. For example, Meraki device types are wireless, appliance, switch, systemsManager, camera, cellularGateway, sensor, and secureConnect. 

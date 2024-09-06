@@ -3,12 +3,12 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_drive_security_policy"
 description: |-
-        The drive security policy models the KMIP server related configuration that can be applied on multiple servers. Storage controller encryption can be enabled through this policy using remote keys from a KMIP server.
+        The drive security policy defines the configuration for a manual key or a KMIP server, which can be applied to multiple servers. You can enable drive security on the servers using either configuration..
 
 ---
 
 # Resource: intersight_storage_drive_security_policy
-The drive security policy models the KMIP server related configuration that can be applied on multiple servers. Storage controller encryption can be enabled through this policy using remote keys from a KMIP server.
+The drive security policy defines the configuration for a manual key or a KMIP server, which can be applied to multiple servers. You can enable drive security on the servers using either configuration..
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -20,18 +20,18 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `key_setting`:(HashMap) - Key details for supporting disk encryption. 
+* `key_setting`:(HashMap) - Key details for supporting drive security. 
 This complex property has following sub-properties:
-  + `key_type`:(string) Method to be used for fetching the encryption key.* `Kmip` - Remote encryption using KMIP.* `Manual` - Drive encryption using manual key. 
+  + `key_type`:(string) Method to be used for fetching the security key.* `Kmip` - Remote security using KMIP.* `Manual` - Drive security using manual key. 
   + `manual_key`:(HashMap) - Manual key configuration. 
 This complex property has following sub-properties:
-    + `existing_key`:(string) Current Security Key Passphrase which is already configured on the server. 
+    + `existing_key`:(string) Current Security Key Passphrase which is already configured on the server. From the security context, the passphrase should be at least 8 characters long and should include at least one uppercase letter, one lowercase letter, one number, and one special character. 
     + `is_existing_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'existingKey' property has been set. 
     + `is_new_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'newKey' property has been set. 
-    + `new_key`:(string) New Security Key Passphrase to be configured on the controller. 
+    + `new_key`:(string) New Security Key Passphrase to be configured on the server. From the security context, the passphrase should be at least 8 characters long and should include at least one uppercase letter, one lowercase letter, one number, and one special character. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `remote_key`:(HashMap) - Remote key encryption using KMIP configuration. 
+  + `remote_key`:(HashMap) - Remote key security using KMIP configuration. 
 This complex property has following sub-properties:
     + `auth_credentials`:(HashMap) - The authentication details of the KMIP server. It is required to login to the KMIP server. 
 This complex property has following sub-properties:
@@ -40,19 +40,19 @@ This complex property has following sub-properties:
     + `password`:(string) The password for the KMIP server login. 
     + `use_authentication`:(bool) Enables/disables the authentication for communicating with KMIP server. This flag enables the authentication which makes authentication mandatory. 
     + `username`:(string) The user name for the KMIP server login. 
-  + `existing_key`:(string) Current Security Key Passphrase which is already configured on the server. 
+  + `existing_key`:(string) Current Security Key Passphrase which is already configured on the server. From the security context, the passphrase should be at least 8 characters long and should include at least one uppercase letter, one lowercase letter, one number, and one special character. 
   + `is_existing_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'existingKey' property has been set. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `primary_server`:(HashMap) - Configuration of the primary KMIP server. 
 This complex property has following sub-properties:
-    + `enable_drive_security`:(bool) Enable the selected KMIP Server configuration for encryption. This flag just enables the drive security and only after remote key setting configured, the actual encryption will be done. 
+    + `enable_drive_security`:(bool) Enable the selected KMIP Server configuration for security. This flag just enables the drive security and only after remote key setting configured, the actual security will be applied. 
     + `ip_address`:(string) The IP address of the KMIP server. It could be an IPv4 address, an IPv6 address, or a hostname. Hostnames are valid only when Inband is configured for the CIMC address. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `port`:(int) The port to which the KMIP client should connect. 
     + `timeout`:(int) The timeout before which the KMIP client should connect. 
   + `secondary_server`:(HashMap) - Configuration of the secondary KMIP server. 
 This complex property has following sub-properties:
-    + `enable_drive_security`:(bool) Enable the selected KMIP Server configuration for encryption. This flag just enables the drive security and only after remote key setting configured, the actual encryption will be done. 
+    + `enable_drive_security`:(bool) Enable the selected KMIP Server configuration for security. This flag just enables the drive security and only after remote key setting configured, the actual security will be applied. 
     + `ip_address`:(string) The IP address of the KMIP server. It could be an IPv4 address, an IPv6 address, or a hostname. Hostnames are valid only when Inband is configured for the CIMC address. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `port`:(int) The port to which the KMIP client should connect. 

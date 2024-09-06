@@ -75,6 +75,11 @@ func getCatalystsdwanVedgeDeviceSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"device_id": {
+			Description: "The Catalyst SDWAN device id.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"device_location": {
 			Description: "The location of the device.",
 			Type:        schema.TypeList,
@@ -631,6 +636,11 @@ func dataSourceCatalystsdwanVedgeDeviceRead(c context.Context, d *schema.Resourc
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("device_id"); ok {
+		x := (v.(string))
+		o.SetDeviceId(x)
+	}
+
 	if v, ok := d.GetOk("device_location"); ok {
 		p := make([]models.EquipmentDeviceLocation, 0, 1)
 		s := v.([]interface{})
@@ -1137,6 +1147,7 @@ func dataSourceCatalystsdwanVedgeDeviceRead(c context.Context, d *schema.Resourc
 				temp["config_status_message"] = (s.GetConfigStatusMessage())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["device_id"] = (s.GetDeviceId())
 
 				temp["device_location"] = flattenMapEquipmentDeviceLocation(s.GetDeviceLocation(), d)
 				temp["device_mo_id"] = (s.GetDeviceMoId())

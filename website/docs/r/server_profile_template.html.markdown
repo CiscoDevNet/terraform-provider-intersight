@@ -89,6 +89,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the profile. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `management_mode`:(string)(ReadOnly) The management mode of the server.* `IntersightStandalone` - Intersight Standalone mode of operation.* `Intersight` - Intersight managed mode of operation. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the profile instance or profile template. 

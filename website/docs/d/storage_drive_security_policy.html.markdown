@@ -3,12 +3,12 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_drive_security_policy"
 description: |-
-        The drive security policy models the KMIP server related configuration that can be applied on multiple servers. Storage controller encryption can be enabled through this policy using remote keys from a KMIP server.
+        The drive security policy defines the configuration for a manual key or a KMIP server, which can be applied to multiple servers. You can enable drive security on the servers using either configuration..
 
 ---
 
 # Data Source: intersight_storage_drive_security_policy
-The drive security policy models the KMIP server related configuration that can be applied on multiple servers. Storage controller encryption can be enabled through this policy using remote keys from a KMIP server.
+The drive security policy defines the configuration for a manual key or a KMIP server, which can be applied to multiple servers. You can enable drive security on the servers using either configuration..
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.

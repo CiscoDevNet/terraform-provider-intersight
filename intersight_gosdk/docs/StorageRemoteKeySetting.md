@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.RemoteKeySetting"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.RemoteKeySetting"]
 **AuthCredentials** | Pointer to [**NullableStorageKmipAuthCredentials**](StorageKmipAuthCredentials.md) |  | [optional] 
-**ExistingKey** | Pointer to **string** | Current Security Key Passphrase which is already configured on the server. | [optional] 
+**ExistingKey** | Pointer to **string** | Current Security Key Passphrase which is already configured on the server. From the security context, the passphrase should be at least 8 characters long and should include at least one uppercase letter, one lowercase letter, one number, and one special character. | [optional] 
 **IsExistingKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;existingKey&#39; property has been set. | [optional] [readonly] [default to false]
 **PrimaryServer** | Pointer to [**NullableStorageKmipServer**](StorageKmipServer.md) |  | [optional] 
 **SecondaryServer** | Pointer to [**NullableStorageKmipServer**](StorageKmipServer.md) |  | [optional] 

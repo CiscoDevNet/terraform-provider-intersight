@@ -16892,7 +16892,7 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["hostname"] = item.GetHostname()
 	kubernetesproxyconfig["is_password_set"] = item.GetIsPasswordSet()
 	kubernetesproxyconfig["object_type"] = item.GetObjectType()
-	password_x, exists := d.GetOk("http_proxy")
+	password_x, exists := d.GetOk("docker_http_proxy")
 	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]
@@ -19800,9 +19800,11 @@ func flattenMapSchedulerTaskScheduleStatus(p models.SchedulerTaskScheduleStatus,
 	schedulertaskschedulestatus := make(map[string]interface{})
 	schedulertaskschedulestatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	schedulertaskschedulestatus["class_id"] = item.GetClassId()
+	schedulertaskschedulestatus["consecutive_failures"] = item.GetConsecutiveFailures()
 	schedulertaskschedulestatus["nr_count"] = item.GetCount()
 	schedulertaskschedulestatus["current_status"] = item.GetCurrentStatus()
 	schedulertaskschedulestatus["is_system_suspended"] = item.GetIsSystemSuspended()
+	schedulertaskschedulestatus["last_run_status"] = item.GetLastRunStatus()
 	schedulertaskschedulestatus["next_run_start_time"] = item.GetNextRunStartTime().String()
 	schedulertaskschedulestatus["object_type"] = item.GetObjectType()
 	schedulertaskschedulestatus["prev_run_end_time"] = item.GetPrevRunEndTime().String()

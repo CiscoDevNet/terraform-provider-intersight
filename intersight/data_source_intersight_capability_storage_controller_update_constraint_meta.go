@@ -227,11 +227,6 @@ func getCapabilityStorageControllerUpdateConstraintMetaSchema() map[string]*sche
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"supported_platforms": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Schema{
-				Type: schema.TypeString}},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -626,17 +621,6 @@ func dataSourceCapabilityStorageControllerUpdateConstraintMetaRead(c context.Con
 		o.SetSharedScope(x)
 	}
 
-	if v, ok := d.GetOk("supported_platforms"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			if y.Index(i).Interface() != nil {
-				x = append(x, y.Index(i).Interface().(string))
-			}
-		}
-		o.SetSupportedPlatforms(x)
-	}
-
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -804,7 +788,6 @@ func dataSourceCapabilityStorageControllerUpdateConstraintMetaRead(c context.Con
 
 				temp["server_specific_constraint"] = flattenListCapabilityServerComponentConstraint(s.GetServerSpecificConstraint(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
-				temp["supported_platforms"] = (s.GetSupportedPlatforms())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

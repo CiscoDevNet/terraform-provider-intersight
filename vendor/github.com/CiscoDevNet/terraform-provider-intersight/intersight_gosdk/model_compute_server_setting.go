@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18012
+API version: 1.0.11-18369
 Contact: intersight@cisco.com
 */
 
@@ -50,9 +50,11 @@ type ComputeServerSetting struct {
 	// The property used to identify the name of the server it is associated with.
 	Name *string `json:"Name,omitempty"`
 	// The name of the device chosen by user for configuring One-Time Boot device.
-	OneTimeBootDevice             *string                                      `json:"OneTimeBootDevice,omitempty"`
-	PersistentMemoryOperation     NullableComputePersistentMemoryOperation     `json:"PersistentMemoryOperation,omitempty"`
-	PersonalitySetting            NullableComputePersonalitySetting            `json:"PersonalitySetting,omitempty"`
+	OneTimeBootDevice         *string                                  `json:"OneTimeBootDevice,omitempty"`
+	PersistentMemoryOperation NullableComputePersistentMemoryOperation `json:"PersistentMemoryOperation,omitempty"`
+	PersonalitySetting        NullableComputePersonalitySetting        `json:"PersonalitySetting,omitempty"`
+	// Reset Correctable and Uncorrectable ECC errors on all the DIMMs present in the server. * `Ready` - Reset memory errors operation is allowed on the server in this state. * `Reset` - Trigger reset memory errors operation on a server.
+	ResetMemoryErrors             *string                                      `json:"ResetMemoryErrors,omitempty"`
 	ServerConfig                  NullableComputeServerConfig                  `json:"ServerConfig,omitempty"`
 	ServerOpStatus                []ComputeServerOpStatus                      `json:"ServerOpStatus,omitempty"`
 	StorageControllerOperation    NullableComputeStorageControllerOperation    `json:"StorageControllerOperation,omitempty"`
@@ -94,6 +96,8 @@ func NewComputeServerSetting(classId string, objectType string) *ComputeServerSe
 	this.FrontPanelLockState = &frontPanelLockState
 	var kvmReset string = "Ready"
 	this.KvmReset = &kvmReset
+	var resetMemoryErrors string = "Ready"
+	this.ResetMemoryErrors = &resetMemoryErrors
 	var tpmReset string = "None"
 	this.TpmReset = &tpmReset
 	var tunneledKvmState string = "Ready"
@@ -124,6 +128,8 @@ func NewComputeServerSettingWithDefaults() *ComputeServerSetting {
 	this.FrontPanelLockState = &frontPanelLockState
 	var kvmReset string = "Ready"
 	this.KvmReset = &kvmReset
+	var resetMemoryErrors string = "Ready"
+	this.ResetMemoryErrors = &resetMemoryErrors
 	var tpmReset string = "None"
 	this.TpmReset = &tpmReset
 	var tunneledKvmState string = "Ready"
@@ -668,6 +674,38 @@ func (o *ComputeServerSetting) SetPersonalitySettingNil() {
 // UnsetPersonalitySetting ensures that no value is present for PersonalitySetting, not even an explicit nil
 func (o *ComputeServerSetting) UnsetPersonalitySetting() {
 	o.PersonalitySetting.Unset()
+}
+
+// GetResetMemoryErrors returns the ResetMemoryErrors field value if set, zero value otherwise.
+func (o *ComputeServerSetting) GetResetMemoryErrors() string {
+	if o == nil || IsNil(o.ResetMemoryErrors) {
+		var ret string
+		return ret
+	}
+	return *o.ResetMemoryErrors
+}
+
+// GetResetMemoryErrorsOk returns a tuple with the ResetMemoryErrors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeServerSetting) GetResetMemoryErrorsOk() (*string, bool) {
+	if o == nil || IsNil(o.ResetMemoryErrors) {
+		return nil, false
+	}
+	return o.ResetMemoryErrors, true
+}
+
+// HasResetMemoryErrors returns a boolean if a field has been set.
+func (o *ComputeServerSetting) HasResetMemoryErrors() bool {
+	if o != nil && !IsNil(o.ResetMemoryErrors) {
+		return true
+	}
+
+	return false
+}
+
+// SetResetMemoryErrors gets a reference to the given string and assigns it to the ResetMemoryErrors field.
+func (o *ComputeServerSetting) SetResetMemoryErrors(v string) {
+	o.ResetMemoryErrors = &v
 }
 
 // GetServerConfig returns the ServerConfig field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1222,6 +1260,9 @@ func (o ComputeServerSetting) ToMap() (map[string]interface{}, error) {
 	if o.PersonalitySetting.IsSet() {
 		toSerialize["PersonalitySetting"] = o.PersonalitySetting.Get()
 	}
+	if !IsNil(o.ResetMemoryErrors) {
+		toSerialize["ResetMemoryErrors"] = o.ResetMemoryErrors
+	}
 	if o.ServerConfig.IsSet() {
 		toSerialize["ServerConfig"] = o.ServerConfig.Get()
 	}
@@ -1335,9 +1376,11 @@ func (o *ComputeServerSetting) UnmarshalJSON(data []byte) (err error) {
 		// The property used to identify the name of the server it is associated with.
 		Name *string `json:"Name,omitempty"`
 		// The name of the device chosen by user for configuring One-Time Boot device.
-		OneTimeBootDevice             *string                                      `json:"OneTimeBootDevice,omitempty"`
-		PersistentMemoryOperation     NullableComputePersistentMemoryOperation     `json:"PersistentMemoryOperation,omitempty"`
-		PersonalitySetting            NullableComputePersonalitySetting            `json:"PersonalitySetting,omitempty"`
+		OneTimeBootDevice         *string                                  `json:"OneTimeBootDevice,omitempty"`
+		PersistentMemoryOperation NullableComputePersistentMemoryOperation `json:"PersistentMemoryOperation,omitempty"`
+		PersonalitySetting        NullableComputePersonalitySetting        `json:"PersonalitySetting,omitempty"`
+		// Reset Correctable and Uncorrectable ECC errors on all the DIMMs present in the server. * `Ready` - Reset memory errors operation is allowed on the server in this state. * `Reset` - Trigger reset memory errors operation on a server.
+		ResetMemoryErrors             *string                                      `json:"ResetMemoryErrors,omitempty"`
 		ServerConfig                  NullableComputeServerConfig                  `json:"ServerConfig,omitempty"`
 		ServerOpStatus                []ComputeServerOpStatus                      `json:"ServerOpStatus,omitempty"`
 		StorageControllerOperation    NullableComputeStorageControllerOperation    `json:"StorageControllerOperation,omitempty"`
@@ -1375,6 +1418,7 @@ func (o *ComputeServerSetting) UnmarshalJSON(data []byte) (err error) {
 		varComputeServerSetting.OneTimeBootDevice = varComputeServerSettingWithoutEmbeddedStruct.OneTimeBootDevice
 		varComputeServerSetting.PersistentMemoryOperation = varComputeServerSettingWithoutEmbeddedStruct.PersistentMemoryOperation
 		varComputeServerSetting.PersonalitySetting = varComputeServerSettingWithoutEmbeddedStruct.PersonalitySetting
+		varComputeServerSetting.ResetMemoryErrors = varComputeServerSettingWithoutEmbeddedStruct.ResetMemoryErrors
 		varComputeServerSetting.ServerConfig = varComputeServerSettingWithoutEmbeddedStruct.ServerConfig
 		varComputeServerSetting.ServerOpStatus = varComputeServerSettingWithoutEmbeddedStruct.ServerOpStatus
 		varComputeServerSetting.StorageControllerOperation = varComputeServerSettingWithoutEmbeddedStruct.StorageControllerOperation
@@ -1420,6 +1464,7 @@ func (o *ComputeServerSetting) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "OneTimeBootDevice")
 		delete(additionalProperties, "PersistentMemoryOperation")
 		delete(additionalProperties, "PersonalitySetting")
+		delete(additionalProperties, "ResetMemoryErrors")
 		delete(additionalProperties, "ServerConfig")
 		delete(additionalProperties, "ServerOpStatus")
 		delete(additionalProperties, "StorageControllerOperation")

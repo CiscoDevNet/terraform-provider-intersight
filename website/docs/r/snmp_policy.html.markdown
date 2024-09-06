@@ -74,7 +74,7 @@ variable "profile" {
 ```
 ## Argument Reference
 The following arguments are supported:
-* `access_community_string`:(string) The default SNMPv1, SNMPv2c community name or SNMPv3 username to include on any trap messages sent to the SNMP host. The name can be 18 characters long. 
+* `access_community_string`:(string) The default SNMPv1, SNMPv2c community name or SNMPv3 username to include on any trap messages sent to the SNMP host. The name can be 32 characters long. 
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:

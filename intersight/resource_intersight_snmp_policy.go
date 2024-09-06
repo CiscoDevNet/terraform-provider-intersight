@@ -26,9 +26,9 @@ func resourceSnmpPolicy() *schema.Resource {
 		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"access_community_string": {
-				Description:  "The default SNMPv1, SNMPv2c community name or SNMPv3 username to include on any trap messages sent to the SNMP host. The name can be 18 characters long.",
+				Description:  "The default SNMPv1, SNMPv2c community name or SNMPv3 username to include on any trap messages sent to the SNMP host. The name can be 32 characters long.",
 				Type:         schema.TypeString,
-				ValidateFunc: StringLenMaximum(18),
+				ValidateFunc: StringLenMaximum(32),
 				Optional:     true,
 			},
 			"account_moid": {

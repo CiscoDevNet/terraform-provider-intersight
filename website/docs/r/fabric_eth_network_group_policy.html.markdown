@@ -83,7 +83,7 @@ This complex property has following sub-properties:
 * `vlan_settings`:(HashMap) - VLAN configuration for the virtual interface. 
 This complex property has following sub-properties:
   + `allowed_vlans`:(string) Allowed VLAN IDs of the virtual interface. A list of comma separated VLAN ids and/or VLAN id ranges. 
-  + `native_vlan`:(int) Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. If the native VLAN is not a part of the allowed VLANs, it will automatically be added to the list of allowed VLANs. 
+  + `native_vlan`:(int) Native VLAN ID of the virtual interface or the corresponding Vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Native VLAN ID maps all incoming untagged traffic i.e. packets without a VLAN tag to the native VLAN for switching purposes. If the native VLAN is not a part of the allowed VLANs, it will automatically be added to the list of allowed VLANs. A native VLAN ID of 0 will indicate to the system to use the system default native VLAN ID and will also prevent native VLAN from being added to the allowed VLAN list. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `qinq_enabled`:(bool) Enable QinQ (802.1Q-in-802.1Q) Tunneling on the vNIC. 
   + `qinq_vlan`:(int) Select the VLAN ID for VIC QinQ (802.1Q-in-802.1Q) Tunneling. 
