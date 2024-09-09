@@ -113,3 +113,27 @@ resource "intersight_server_profile" "server_profile"{
 	description = "Sample description"
 }
 
+resource "intersight_server_profile" "server_profile1"{
+	name = "demotesting_DERIVED-5"
+	description = "Sample description"
+  organization {
+     object_type = "organization.Organization"
+     moid        = data.intersight_organization_organization.default.results.0.moid
+   }
+}
+
+resource "intersight_bulk_mo_merger" "trigger_profile_update" {
+  class_id     = "bulk.MoMerger"
+  merge_action = "Merge"
+  object_type  = "bulk.MoMerger"
+  sources {
+    class_id    = "server.ProfileTemplate"
+    moid        = intersight_server_profile_template.template1.moid
+    object_type = "server.ProfileTemplate"
+  }
+  targets {
+    class_id    = "server.Profile"
+    moid        = intersight_server_profile.server_profile1.moid
+    object_type = "server.Profile"
+  }
+}
