@@ -25,7 +25,7 @@ resource "intersight_firmware_server_configuration_utility_distributable" "scu1"
 }
 
 data "intersight_organization_organization" "organization" {
-  name = "v3keytest"
+  name = "default"
 }
 
 data "intersight_softwarerepository_catalog" "catalog"{
