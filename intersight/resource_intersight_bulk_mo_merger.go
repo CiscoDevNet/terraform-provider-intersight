@@ -2794,10 +2794,7 @@ func resourceBulkMoMergerCreate(c context.Context, d *schema.ResourceData, meta 
 		d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
 		log.Printf("Mo: %v", resultMo)
 	}
-	if len(resultMo.GetMoid()) == 0 {
-		return de
-	}
-	return append(de, resourceBulkMoMergerRead(c, d, meta)...)
+	return de
 }
 
 func resourceBulkMoMergerRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
