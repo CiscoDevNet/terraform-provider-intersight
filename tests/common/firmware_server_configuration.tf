@@ -27,6 +27,6 @@ resource "intersight_firmware_server_configuration_utility_distributable" "scu1"
 data "intersight_softwarerepository_catalog" "catalog"{
   organization {
     class_id = "organization.Organization"
-    moid = data.intersight_organization_organization.organization.id
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 } 
