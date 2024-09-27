@@ -32,8 +32,3 @@ variable "base_properties_password_1" {
   type = string
   description = "Password field in Base properties in LDAP policy"
 }
-
-variable "organization" {
-  type = string
-  description = "Organization moid"
-}
