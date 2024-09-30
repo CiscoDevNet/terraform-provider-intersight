@@ -20,6 +20,10 @@ resource "intersight_bios_policy" "bios_policy1" {
   lom_port2state                        = "disabled"
   lom_port3state                        = "disabled"
   lom_ports_all_state                   = "disabled"
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
   pci_option_ro_ms                      = "disabled"
   pci_rom_clp                           = "disabled"
   slot10link_speed                      = "Auto"
