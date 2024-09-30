@@ -7109,6 +7109,54 @@ func TestFlattenListNiatelemetryDigitalOpticalMonitoring(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListNiatelemetryDomInfo(t *testing.T) {
+	p := []models.NiatelemetryDomInfo{}
+	var d = &schema.ResourceData{}
+	c := `{"Avg":"Avg %d","ClassId":"niatelemetry.DomInfo","Dn":"Dn %d","Instant":"Instant %d","Max":"Max %d","Min":"Min %d","ObjectType":"niatelemetry.DomInfo","Unit":"Unit %d","Value":"Value %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListNiatelemetryDomInfo(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.NiatelemetryDomInfo{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListNiatelemetryDomInfo(p, d)
+	expectedOp := []map[string]interface{}{{"avg": "Avg 1", "class_id": "niatelemetry.DomInfo", "dn": "Dn 1", "instant": "Instant 1", "max": "Max 1", "min": "Min 1", "object_type": "niatelemetry.DomInfo", "unit": "Unit 1", "value": "Value 1"}, {"avg": "Avg 2", "class_id": "niatelemetry.DomInfo", "dn": "Dn 2", "instant": "Instant 2", "max": "Max 2", "min": "Min 2", "object_type": "niatelemetry.DomInfo", "unit": "Unit 2", "value": "Value 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
+func TestFlattenListNiatelemetryDomThresInfo(t *testing.T) {
+	p := []models.NiatelemetryDomThresInfo{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"niatelemetry.DomThresInfo","Dn":"Dn %d","HighAlarm":"HighAlarm %d","HighWarning":"HighWarning %d","LowAlarm":"LowAlarm %d","LowWarning":"LowWarning %d","NumLanes":"NumLanes %d","ObjectType":"niatelemetry.DomThresInfo","PartNumber":"PartNumber %d","Type":"Type %d","TypeName":"TypeName %d","Unit":"Unit %d","VendorName":"VendorName %d","VendorPn":"VendorPn %d","VendorRev":"VendorRev %d","VendorSn":"VendorSn %d","VersionId":"VersionId %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListNiatelemetryDomThresInfo(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.NiatelemetryDomThresInfo{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListNiatelemetryDomThresInfo(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "niatelemetry.DomThresInfo", "dn": "Dn 1", "high_alarm": "HighAlarm 1", "high_warning": "HighWarning 1", "low_alarm": "LowAlarm 1", "low_warning": "LowWarning 1", "num_lanes": "NumLanes 1", "object_type": "niatelemetry.DomThresInfo", "part_number": "PartNumber 1", "type": "Type 1", "type_name": "TypeName 1", "unit": "Unit 1", "vendor_name": "VendorName 1", "vendor_pn": "VendorPn 1", "vendor_rev": "VendorRev 1", "vendor_sn": "VendorSn 1", "version_id": "VersionId 1"}, {"class_id": "niatelemetry.DomThresInfo", "dn": "Dn 2", "high_alarm": "HighAlarm 2", "high_warning": "HighWarning 2", "low_alarm": "LowAlarm 2", "low_warning": "LowWarning 2", "num_lanes": "NumLanes 2", "object_type": "niatelemetry.DomThresInfo", "part_number": "PartNumber 2", "type": "Type 2", "type_name": "TypeName 2", "unit": "Unit 2", "vendor_name": "VendorName 2", "vendor_pn": "VendorPn 2", "vendor_rev": "VendorRev 2", "vendor_sn": "VendorSn 2", "version_id": "VersionId 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListNiatelemetryFanDetails(t *testing.T) {
 	p := []models.NiatelemetryFanDetails{}
 	var d = &schema.ResourceData{}
@@ -10512,54 +10560,6 @@ func TestFlattenListTechsupportmanagementTechSupportFileInfo(t *testing.T) {
 	}
 	ffOp := flattenListTechsupportmanagementTechSupportFileInfo(p, d)
 	expectedOp := []map[string]interface{}{{"class_id": "techsupportmanagement.TechSupportFileInfo", "file_name": "FileName 1", "file_size": 32, "object_type": "techsupportmanagement.TechSupportFileInfo", "techsupport_download_url": "TechsupportDownloadUrl 1", "upload_status": "UploadStatus 1"}, {"class_id": "techsupportmanagement.TechSupportFileInfo", "file_name": "FileName 2", "file_size": 32, "object_type": "techsupportmanagement.TechSupportFileInfo", "techsupport_download_url": "TechsupportDownloadUrl 2", "upload_status": "UploadStatus 2"}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
-func TestFlattenListTerraformCloudResource(t *testing.T) {
-	p := []models.TerraformCloudResource{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"terraform.CloudResource","CurrentStatus":"CurrentStatus %d","DesiredStatus":"DesiredStatus %d","ObjectType":"terraform.CloudResource","ResourceId":"ResourceId %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListTerraformCloudResource(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.TerraformCloudResource{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListTerraformCloudResource(p, d)
-	expectedOp := []map[string]interface{}{{"class_id": "terraform.CloudResource", "current_status": "CurrentStatus 1", "desired_status": "DesiredStatus 1", "object_type": "terraform.CloudResource", "resource_id": "ResourceId 1"}, {"class_id": "terraform.CloudResource", "current_status": "CurrentStatus 2", "desired_status": "DesiredStatus 2", "object_type": "terraform.CloudResource", "resource_id": "ResourceId 2"}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
-func TestFlattenListTerraformRunstate(t *testing.T) {
-	p := []models.TerraformRunstate{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"terraform.Runstate","ObjectType":"terraform.Runstate","RunId":"RunId %d","StateFile":"StateFile %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListTerraformRunstate(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.TerraformRunstate{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListTerraformRunstate(p, d)
-	expectedOp := []map[string]interface{}{{"class_id": "terraform.Runstate", "object_type": "terraform.Runstate", "run_id": "RunId 1", "state_file": "StateFile 1"}, {"class_id": "terraform.Runstate", "object_type": "terraform.Runstate", "run_id": "RunId 2", "state_file": "StateFile 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)

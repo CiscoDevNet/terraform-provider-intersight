@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.StorageUtilityImageOperation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.StorageUtilityImageOperation"]
-**Action** | Pointer to **string** | Actions that can be performed by the storage utility. * &#x60;None&#x60; - No action by storage utility. * &#x60;Upload&#x60; - Upload action by storage utility. * &#x60;TurnOnImageVisibility&#x60; - Turn on image&#39;s visibility. * &#x60;TurnOffImageVisibility&#x60; - Turn off image&#39;s visibility. | [optional] [default to "None"]
+**Action** | Pointer to **string** | Actions that can be performed by the storage utility. * &#x60;None&#x60; - No action by storage utility. * &#x60;Upload&#x60; - Upload action by storage utility. * &#x60;TurnOnImageVisibility&#x60; - Turn on image&#39;s visibility. * &#x60;TurnOffImageVisibility&#x60; - Turn off image&#39;s visibility. * &#x60;Remove&#x60; - Removes images from a server&#39;s utility storage. | [optional] [default to "None"]
 **ImageName** | Pointer to **string** | The image name this action operates on. | [optional] 
 **ImageType** | Pointer to **string** | The image type this action operates on. | [optional] 
 

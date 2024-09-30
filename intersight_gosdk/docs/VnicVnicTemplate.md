@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Description of the vNIC template. | [optional] 
 **EnableOverride** | Pointer to **bool** | When enabled, the configuration of the derived instances may override the template configuration. | [optional] 
 **LcpUsageCount** | Pointer to **int64** | The count of the Lan Connectivity Policies using vNIC template. | [optional] [readonly] 
-**Name** | Pointer to **string** | Name of the virtual ethernet interface. | [optional] 
+**Name** | Pointer to **string** | Name of the vNIC template. | [optional] 
 **PeerVnicName** | Pointer to **string** | Name of the peer vNIC which belongs to the peer FI. | [optional] 
 **SwitchId** | Pointer to **string** | The fabric port to which the vNICs will be associated. * &#x60;None&#x60; - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value &#39;None&#39; should be used. * &#x60;A&#x60; - Fabric A of the FI cluster. * &#x60;B&#x60; - Fabric B of the FI cluster. | [optional] [default to "None"]
 **TemplateActions** | Pointer to [**[]MotemplateActionEntry**](MotemplateActionEntry.md) |  | [optional] 

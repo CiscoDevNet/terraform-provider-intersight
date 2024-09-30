@@ -1,110 +1,110 @@
-# TerraformExecutorResponse
+# NiatelemetryDomInfoObjectResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ObjectType** | **string** | A discriminator value to disambiguate the schema of a HTTP GET response body. | 
-**Count** | Pointer to **int32** | The total number of &#39;terraform.Executor&#39; resources matching the request, accross all pages. The &#39;Count&#39; attribute is included when the HTTP GET request includes the &#39;$inlinecount&#39; parameter. | [optional] 
+**Count** | Pointer to **int32** | The total number of &#39;niatelemetry.DomInfoObject&#39; resources matching the request, accross all pages. The &#39;Count&#39; attribute is included when the HTTP GET request includes the &#39;$inlinecount&#39; parameter. | [optional] 
 **Results** | Pointer to [**[]MoTagKeySummary**](MoTagKeySummary.md) |  | [optional] 
 
 ## Methods
 
-### NewTerraformExecutorResponse
+### NewNiatelemetryDomInfoObjectResponse
 
-`func NewTerraformExecutorResponse(objectType string, ) *TerraformExecutorResponse`
+`func NewNiatelemetryDomInfoObjectResponse(objectType string, ) *NiatelemetryDomInfoObjectResponse`
 
-NewTerraformExecutorResponse instantiates a new TerraformExecutorResponse object
+NewNiatelemetryDomInfoObjectResponse instantiates a new NiatelemetryDomInfoObjectResponse object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewTerraformExecutorResponseWithDefaults
+### NewNiatelemetryDomInfoObjectResponseWithDefaults
 
-`func NewTerraformExecutorResponseWithDefaults() *TerraformExecutorResponse`
+`func NewNiatelemetryDomInfoObjectResponseWithDefaults() *NiatelemetryDomInfoObjectResponse`
 
-NewTerraformExecutorResponseWithDefaults instantiates a new TerraformExecutorResponse object
+NewNiatelemetryDomInfoObjectResponseWithDefaults instantiates a new NiatelemetryDomInfoObjectResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetObjectType
 
-`func (o *TerraformExecutorResponse) GetObjectType() string`
+`func (o *NiatelemetryDomInfoObjectResponse) GetObjectType() string`
 
 GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
 
 ### GetObjectTypeOk
 
-`func (o *TerraformExecutorResponse) GetObjectTypeOk() (*string, bool)`
+`func (o *NiatelemetryDomInfoObjectResponse) GetObjectTypeOk() (*string, bool)`
 
 GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetObjectType
 
-`func (o *TerraformExecutorResponse) SetObjectType(v string)`
+`func (o *NiatelemetryDomInfoObjectResponse) SetObjectType(v string)`
 
 SetObjectType sets ObjectType field to given value.
 
 
 ### GetCount
 
-`func (o *TerraformExecutorResponse) GetCount() int32`
+`func (o *NiatelemetryDomInfoObjectResponse) GetCount() int32`
 
 GetCount returns the Count field if non-nil, zero value otherwise.
 
 ### GetCountOk
 
-`func (o *TerraformExecutorResponse) GetCountOk() (*int32, bool)`
+`func (o *NiatelemetryDomInfoObjectResponse) GetCountOk() (*int32, bool)`
 
 GetCountOk returns a tuple with the Count field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCount
 
-`func (o *TerraformExecutorResponse) SetCount(v int32)`
+`func (o *NiatelemetryDomInfoObjectResponse) SetCount(v int32)`
 
 SetCount sets Count field to given value.
 
 ### HasCount
 
-`func (o *TerraformExecutorResponse) HasCount() bool`
+`func (o *NiatelemetryDomInfoObjectResponse) HasCount() bool`
 
 HasCount returns a boolean if a field has been set.
 
 ### GetResults
 
-`func (o *TerraformExecutorResponse) GetResults() []MoTagKeySummary`
+`func (o *NiatelemetryDomInfoObjectResponse) GetResults() []MoTagKeySummary`
 
 GetResults returns the Results field if non-nil, zero value otherwise.
 
 ### GetResultsOk
 
-`func (o *TerraformExecutorResponse) GetResultsOk() (*[]MoTagKeySummary, bool)`
+`func (o *NiatelemetryDomInfoObjectResponse) GetResultsOk() (*[]MoTagKeySummary, bool)`
 
 GetResultsOk returns a tuple with the Results field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResults
 
-`func (o *TerraformExecutorResponse) SetResults(v []MoTagKeySummary)`
+`func (o *NiatelemetryDomInfoObjectResponse) SetResults(v []MoTagKeySummary)`
 
 SetResults sets Results field to given value.
 
 ### HasResults
 
-`func (o *TerraformExecutorResponse) HasResults() bool`
+`func (o *NiatelemetryDomInfoObjectResponse) HasResults() bool`
 
 HasResults returns a boolean if a field has been set.
 
 ### SetResultsNil
 
-`func (o *TerraformExecutorResponse) SetResultsNil(b bool)`
+`func (o *NiatelemetryDomInfoObjectResponse) SetResultsNil(b bool)`
 
  SetResultsNil sets the value for Results to be an explicit nil
 
 ### UnsetResults
-`func (o *TerraformExecutorResponse) UnsetResults()`
+`func (o *NiatelemetryDomInfoObjectResponse) UnsetResults()`
 
 UnsetResults ensures that no value is present for Results, not even an explicit nil
 
