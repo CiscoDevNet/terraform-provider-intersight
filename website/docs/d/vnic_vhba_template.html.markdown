@@ -105,7 +105,7 @@ The following arguments can be used to get data of already created objects in In
 * `enable_override`:(bool) When enabled, the configuration of the derived instances may override the template configuration. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) Name of the virtual fibre channel interface. 
+* `name`:(string) Name of the vHBA template. 
 * `peer_vhba_name`:(string) Name of the peer vHBA which belongs to the peer FI. 
 * `persistent_bindings`:(bool) Enables retention of LUN ID associations in memory until they are manually cleared. 
 * `pin_group_name`:(string) Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic. 

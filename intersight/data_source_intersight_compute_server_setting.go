@@ -876,7 +876,7 @@ func getComputeServerSettingSchema() map[string]*schema.Schema {
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
 					"action": {
-						Description: "Actions that can be performed by the storage utility.\n* `None` - No action by storage utility.\n* `Upload` - Upload action by storage utility.\n* `TurnOnImageVisibility` - Turn on image's visibility.\n* `TurnOffImageVisibility` - Turn off image's visibility.",
+						Description: "Actions that can be performed by the storage utility.\n* `None` - No action by storage utility.\n* `Upload` - Upload action by storage utility.\n* `TurnOnImageVisibility` - Turn on image's visibility.\n* `TurnOffImageVisibility` - Turn off image's visibility.\n* `Remove` - Removes images from a server's utility storage.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

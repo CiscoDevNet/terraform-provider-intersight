@@ -13,7 +13,9 @@ Name | Type | Description | Notes
 **ManagerSlotId** | Pointer to **int64** | Chassis slot number of the manager compute server. | [optional] [readonly] 
 **Presence** | Pointer to **string** | The presence state of the blade server. * &#x60;Unknown&#x60; - The default presence state. * &#x60;Equipped&#x60; - The server is equipped in the slot. * &#x60;EquippedMismatch&#x60; - The slot is equipped, but there is another server currently inventoried in the slot. * &#x60;Missing&#x60; - The server is not present in the given slot. | [optional] [readonly] [default to "Unknown"]
 **SlotId** | Pointer to **int64** | Chassis slot number of a blade server. | [optional] [readonly] 
+**DiscoveredBladeIdInCurrLocation** | Pointer to [**[]ComputeBladeIdentityRelationship**](ComputeBladeIdentityRelationship.md) | An array of relationships to computeBladeIdentity resources. | [optional] [readonly] 
 **ManagedNodes** | Pointer to [**[]ComputeBladeIdentityRelationship**](ComputeBladeIdentityRelationship.md) | An array of relationships to computeBladeIdentity resources. | [optional] [readonly] 
+**NewBladeIdInDiscoveredLocation** | Pointer to [**[]ComputeBladeIdentityRelationship**](ComputeBladeIdentityRelationship.md) | An array of relationships to computeBladeIdentity resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -249,6 +251,41 @@ SetSlotId sets SlotId field to given value.
 
 HasSlotId returns a boolean if a field has been set.
 
+### GetDiscoveredBladeIdInCurrLocation
+
+`func (o *ComputeBladeIdentity) GetDiscoveredBladeIdInCurrLocation() []ComputeBladeIdentityRelationship`
+
+GetDiscoveredBladeIdInCurrLocation returns the DiscoveredBladeIdInCurrLocation field if non-nil, zero value otherwise.
+
+### GetDiscoveredBladeIdInCurrLocationOk
+
+`func (o *ComputeBladeIdentity) GetDiscoveredBladeIdInCurrLocationOk() (*[]ComputeBladeIdentityRelationship, bool)`
+
+GetDiscoveredBladeIdInCurrLocationOk returns a tuple with the DiscoveredBladeIdInCurrLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiscoveredBladeIdInCurrLocation
+
+`func (o *ComputeBladeIdentity) SetDiscoveredBladeIdInCurrLocation(v []ComputeBladeIdentityRelationship)`
+
+SetDiscoveredBladeIdInCurrLocation sets DiscoveredBladeIdInCurrLocation field to given value.
+
+### HasDiscoveredBladeIdInCurrLocation
+
+`func (o *ComputeBladeIdentity) HasDiscoveredBladeIdInCurrLocation() bool`
+
+HasDiscoveredBladeIdInCurrLocation returns a boolean if a field has been set.
+
+### SetDiscoveredBladeIdInCurrLocationNil
+
+`func (o *ComputeBladeIdentity) SetDiscoveredBladeIdInCurrLocationNil(b bool)`
+
+ SetDiscoveredBladeIdInCurrLocationNil sets the value for DiscoveredBladeIdInCurrLocation to be an explicit nil
+
+### UnsetDiscoveredBladeIdInCurrLocation
+`func (o *ComputeBladeIdentity) UnsetDiscoveredBladeIdInCurrLocation()`
+
+UnsetDiscoveredBladeIdInCurrLocation ensures that no value is present for DiscoveredBladeIdInCurrLocation, not even an explicit nil
 ### GetManagedNodes
 
 `func (o *ComputeBladeIdentity) GetManagedNodes() []ComputeBladeIdentityRelationship`
@@ -284,6 +321,41 @@ HasManagedNodes returns a boolean if a field has been set.
 `func (o *ComputeBladeIdentity) UnsetManagedNodes()`
 
 UnsetManagedNodes ensures that no value is present for ManagedNodes, not even an explicit nil
+### GetNewBladeIdInDiscoveredLocation
+
+`func (o *ComputeBladeIdentity) GetNewBladeIdInDiscoveredLocation() []ComputeBladeIdentityRelationship`
+
+GetNewBladeIdInDiscoveredLocation returns the NewBladeIdInDiscoveredLocation field if non-nil, zero value otherwise.
+
+### GetNewBladeIdInDiscoveredLocationOk
+
+`func (o *ComputeBladeIdentity) GetNewBladeIdInDiscoveredLocationOk() (*[]ComputeBladeIdentityRelationship, bool)`
+
+GetNewBladeIdInDiscoveredLocationOk returns a tuple with the NewBladeIdInDiscoveredLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNewBladeIdInDiscoveredLocation
+
+`func (o *ComputeBladeIdentity) SetNewBladeIdInDiscoveredLocation(v []ComputeBladeIdentityRelationship)`
+
+SetNewBladeIdInDiscoveredLocation sets NewBladeIdInDiscoveredLocation field to given value.
+
+### HasNewBladeIdInDiscoveredLocation
+
+`func (o *ComputeBladeIdentity) HasNewBladeIdInDiscoveredLocation() bool`
+
+HasNewBladeIdInDiscoveredLocation returns a boolean if a field has been set.
+
+### SetNewBladeIdInDiscoveredLocationNil
+
+`func (o *ComputeBladeIdentity) SetNewBladeIdInDiscoveredLocationNil(b bool)`
+
+ SetNewBladeIdInDiscoveredLocationNil sets the value for NewBladeIdInDiscoveredLocation to be an explicit nil
+
+### UnsetNewBladeIdInDiscoveredLocation
+`func (o *ComputeBladeIdentity) UnsetNewBladeIdInDiscoveredLocation()`
+
+UnsetNewBladeIdInDiscoveredLocation ensures that no value is present for NewBladeIdInDiscoveredLocation, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **LastDiscoveryTriggered** | Pointer to **string** | Denotes the type of discovery that was most recently triggered on this server. * &#x60;Unknown&#x60; - The last discovery type is unknown. * &#x60;Deep&#x60; - The last discovery triggered is deep. * &#x60;Shallow&#x60; - The last discovery triggered is shallow. | [optional] [readonly] [default to "Unknown"]
+**ResetToDefault** | Pointer to **bool** | Specifies whether device configurations need to be reset to default upon first-time discovery or recommission of a server. | [optional] [readonly] 
 **PhysicalDeviceRegistration** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -92,6 +93,31 @@ SetLastDiscoveryTriggered sets LastDiscoveryTriggered field to given value.
 `func (o *EquipmentPhysicalIdentity) HasLastDiscoveryTriggered() bool`
 
 HasLastDiscoveryTriggered returns a boolean if a field has been set.
+
+### GetResetToDefault
+
+`func (o *EquipmentPhysicalIdentity) GetResetToDefault() bool`
+
+GetResetToDefault returns the ResetToDefault field if non-nil, zero value otherwise.
+
+### GetResetToDefaultOk
+
+`func (o *EquipmentPhysicalIdentity) GetResetToDefaultOk() (*bool, bool)`
+
+GetResetToDefaultOk returns a tuple with the ResetToDefault field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResetToDefault
+
+`func (o *EquipmentPhysicalIdentity) SetResetToDefault(v bool)`
+
+SetResetToDefault sets ResetToDefault field to given value.
+
+### HasResetToDefault
+
+`func (o *EquipmentPhysicalIdentity) HasResetToDefault() bool`
+
+HasResetToDefault returns a boolean if a field has been set.
 
 ### GetPhysicalDeviceRegistration
 

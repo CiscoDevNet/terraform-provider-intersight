@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18369
+API version: 1.0.11-18534
 Contact: intersight@cisco.com
 */
 
@@ -18,41 +18,41 @@ import (
 	"strings"
 )
 
-// checks if the TerraformExecutorList type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TerraformExecutorList{}
+// checks if the NiatelemetryDomInfoObjectList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NiatelemetryDomInfoObjectList{}
 
-// TerraformExecutorList This resource list is returned as a response to a HTTP GET request that does not include a specific resource identifier.
-type TerraformExecutorList struct {
+// NiatelemetryDomInfoObjectList This resource list is returned as a response to a HTTP GET request that does not include a specific resource identifier.
+type NiatelemetryDomInfoObjectList struct {
 	MoBaseResponse
-	// The total number of 'terraform.Executor' resources matching the request, accross all pages. The 'Count' attribute is included when the HTTP GET request includes the '$inlinecount' parameter.
+	// The total number of 'niatelemetry.DomInfoObject' resources matching the request, accross all pages. The 'Count' attribute is included when the HTTP GET request includes the '$inlinecount' parameter.
 	Count *int32 `json:"Count,omitempty"`
-	// The array of 'terraform.Executor' resources matching the request.
-	Results              []TerraformExecutor `json:"Results,omitempty"`
+	// The array of 'niatelemetry.DomInfoObject' resources matching the request.
+	Results              []NiatelemetryDomInfoObject `json:"Results,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _TerraformExecutorList TerraformExecutorList
+type _NiatelemetryDomInfoObjectList NiatelemetryDomInfoObjectList
 
-// NewTerraformExecutorList instantiates a new TerraformExecutorList object
+// NewNiatelemetryDomInfoObjectList instantiates a new NiatelemetryDomInfoObjectList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTerraformExecutorList(objectType string) *TerraformExecutorList {
-	this := TerraformExecutorList{}
+func NewNiatelemetryDomInfoObjectList(objectType string) *NiatelemetryDomInfoObjectList {
+	this := NiatelemetryDomInfoObjectList{}
 	this.ObjectType = objectType
 	return &this
 }
 
-// NewTerraformExecutorListWithDefaults instantiates a new TerraformExecutorList object
+// NewNiatelemetryDomInfoObjectListWithDefaults instantiates a new NiatelemetryDomInfoObjectList object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTerraformExecutorListWithDefaults() *TerraformExecutorList {
-	this := TerraformExecutorList{}
+func NewNiatelemetryDomInfoObjectListWithDefaults() *NiatelemetryDomInfoObjectList {
+	this := NiatelemetryDomInfoObjectList{}
 	return &this
 }
 
 // GetCount returns the Count field value if set, zero value otherwise.
-func (o *TerraformExecutorList) GetCount() int32 {
+func (o *NiatelemetryDomInfoObjectList) GetCount() int32 {
 	if o == nil || IsNil(o.Count) {
 		var ret int32
 		return ret
@@ -62,7 +62,7 @@ func (o *TerraformExecutorList) GetCount() int32 {
 
 // GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TerraformExecutorList) GetCountOk() (*int32, bool) {
+func (o *NiatelemetryDomInfoObjectList) GetCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *TerraformExecutorList) GetCountOk() (*int32, bool) {
 }
 
 // HasCount returns a boolean if a field has been set.
-func (o *TerraformExecutorList) HasCount() bool {
+func (o *NiatelemetryDomInfoObjectList) HasCount() bool {
 	if o != nil && !IsNil(o.Count) {
 		return true
 	}
@@ -79,14 +79,14 @@ func (o *TerraformExecutorList) HasCount() bool {
 }
 
 // SetCount gets a reference to the given int32 and assigns it to the Count field.
-func (o *TerraformExecutorList) SetCount(v int32) {
+func (o *NiatelemetryDomInfoObjectList) SetCount(v int32) {
 	o.Count = &v
 }
 
 // GetResults returns the Results field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *TerraformExecutorList) GetResults() []TerraformExecutor {
+func (o *NiatelemetryDomInfoObjectList) GetResults() []NiatelemetryDomInfoObject {
 	if o == nil {
-		var ret []TerraformExecutor
+		var ret []NiatelemetryDomInfoObject
 		return ret
 	}
 	return o.Results
@@ -95,7 +95,7 @@ func (o *TerraformExecutorList) GetResults() []TerraformExecutor {
 // GetResultsOk returns a tuple with the Results field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TerraformExecutorList) GetResultsOk() ([]TerraformExecutor, bool) {
+func (o *NiatelemetryDomInfoObjectList) GetResultsOk() ([]NiatelemetryDomInfoObject, bool) {
 	if o == nil || IsNil(o.Results) {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *TerraformExecutorList) GetResultsOk() ([]TerraformExecutor, bool) {
 }
 
 // HasResults returns a boolean if a field has been set.
-func (o *TerraformExecutorList) HasResults() bool {
+func (o *NiatelemetryDomInfoObjectList) HasResults() bool {
 	if o != nil && !IsNil(o.Results) {
 		return true
 	}
@@ -111,12 +111,12 @@ func (o *TerraformExecutorList) HasResults() bool {
 	return false
 }
 
-// SetResults gets a reference to the given []TerraformExecutor and assigns it to the Results field.
-func (o *TerraformExecutorList) SetResults(v []TerraformExecutor) {
+// SetResults gets a reference to the given []NiatelemetryDomInfoObject and assigns it to the Results field.
+func (o *NiatelemetryDomInfoObjectList) SetResults(v []NiatelemetryDomInfoObject) {
 	o.Results = v
 }
 
-func (o TerraformExecutorList) MarshalJSON() ([]byte, error) {
+func (o NiatelemetryDomInfoObjectList) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -124,7 +124,7 @@ func (o TerraformExecutorList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerraformExecutorList) ToMap() (map[string]interface{}, error) {
+func (o NiatelemetryDomInfoObjectList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseResponse, errMoBaseResponse := json.Marshal(o.MoBaseResponse)
 	if errMoBaseResponse != nil {
@@ -148,7 +148,7 @@ func (o TerraformExecutorList) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *TerraformExecutorList) UnmarshalJSON(data []byte) (err error) {
+func (o *NiatelemetryDomInfoObjectList) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -186,30 +186,30 @@ func (o *TerraformExecutorList) UnmarshalJSON(data []byte) (err error) {
 			return err
 		}
 	}
-	type TerraformExecutorListWithoutEmbeddedStruct struct {
-		// The total number of 'terraform.Executor' resources matching the request, accross all pages. The 'Count' attribute is included when the HTTP GET request includes the '$inlinecount' parameter.
+	type NiatelemetryDomInfoObjectListWithoutEmbeddedStruct struct {
+		// The total number of 'niatelemetry.DomInfoObject' resources matching the request, accross all pages. The 'Count' attribute is included when the HTTP GET request includes the '$inlinecount' parameter.
 		Count *int32 `json:"Count,omitempty"`
-		// The array of 'terraform.Executor' resources matching the request.
-		Results []TerraformExecutor `json:"Results,omitempty"`
+		// The array of 'niatelemetry.DomInfoObject' resources matching the request.
+		Results []NiatelemetryDomInfoObject `json:"Results,omitempty"`
 	}
 
-	varTerraformExecutorListWithoutEmbeddedStruct := TerraformExecutorListWithoutEmbeddedStruct{}
+	varNiatelemetryDomInfoObjectListWithoutEmbeddedStruct := NiatelemetryDomInfoObjectListWithoutEmbeddedStruct{}
 
-	err = json.Unmarshal(data, &varTerraformExecutorListWithoutEmbeddedStruct)
+	err = json.Unmarshal(data, &varNiatelemetryDomInfoObjectListWithoutEmbeddedStruct)
 	if err == nil {
-		varTerraformExecutorList := _TerraformExecutorList{}
-		varTerraformExecutorList.Count = varTerraformExecutorListWithoutEmbeddedStruct.Count
-		varTerraformExecutorList.Results = varTerraformExecutorListWithoutEmbeddedStruct.Results
-		*o = TerraformExecutorList(varTerraformExecutorList)
+		varNiatelemetryDomInfoObjectList := _NiatelemetryDomInfoObjectList{}
+		varNiatelemetryDomInfoObjectList.Count = varNiatelemetryDomInfoObjectListWithoutEmbeddedStruct.Count
+		varNiatelemetryDomInfoObjectList.Results = varNiatelemetryDomInfoObjectListWithoutEmbeddedStruct.Results
+		*o = NiatelemetryDomInfoObjectList(varNiatelemetryDomInfoObjectList)
 	} else {
 		return err
 	}
 
-	varTerraformExecutorList := _TerraformExecutorList{}
+	varNiatelemetryDomInfoObjectList := _NiatelemetryDomInfoObjectList{}
 
-	err = json.Unmarshal(data, &varTerraformExecutorList)
+	err = json.Unmarshal(data, &varNiatelemetryDomInfoObjectList)
 	if err == nil {
-		o.MoBaseResponse = varTerraformExecutorList.MoBaseResponse
+		o.MoBaseResponse = varNiatelemetryDomInfoObjectList.MoBaseResponse
 	} else {
 		return err
 	}
@@ -244,38 +244,38 @@ func (o *TerraformExecutorList) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableTerraformExecutorList struct {
-	value *TerraformExecutorList
+type NullableNiatelemetryDomInfoObjectList struct {
+	value *NiatelemetryDomInfoObjectList
 	isSet bool
 }
 
-func (v NullableTerraformExecutorList) Get() *TerraformExecutorList {
+func (v NullableNiatelemetryDomInfoObjectList) Get() *NiatelemetryDomInfoObjectList {
 	return v.value
 }
 
-func (v *NullableTerraformExecutorList) Set(val *TerraformExecutorList) {
+func (v *NullableNiatelemetryDomInfoObjectList) Set(val *NiatelemetryDomInfoObjectList) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTerraformExecutorList) IsSet() bool {
+func (v NullableNiatelemetryDomInfoObjectList) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTerraformExecutorList) Unset() {
+func (v *NullableNiatelemetryDomInfoObjectList) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTerraformExecutorList(val *TerraformExecutorList) *NullableTerraformExecutorList {
-	return &NullableTerraformExecutorList{value: val, isSet: true}
+func NewNullableNiatelemetryDomInfoObjectList(val *NiatelemetryDomInfoObjectList) *NullableNiatelemetryDomInfoObjectList {
+	return &NullableNiatelemetryDomInfoObjectList{value: val, isSet: true}
 }
 
-func (v NullableTerraformExecutorList) MarshalJSON() ([]byte, error) {
+func (v NullableNiatelemetryDomInfoObjectList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTerraformExecutorList) UnmarshalJSON(src []byte) error {
+func (v *NullableNiatelemetryDomInfoObjectList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

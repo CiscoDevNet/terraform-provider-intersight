@@ -206,6 +206,12 @@ func resourceIqnpoolPool() *schema.Resource {
 							Type:         schema.TypeInt,
 							ValidateFunc: validation.IntBetween(1, 1024),
 							Optional:     true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if new == "0" || new == "0.0" {
+									return true
+								}
+								return false
+							},
 						},
 						"suffix": {
 							Description: "The suffix for this block of IQNs.",
@@ -216,6 +222,12 @@ func resourceIqnpoolPool() *schema.Resource {
 							Description: "The last suffix number in the block.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if new == "0" || new == "0.0" {
+									return true
+								}
+								return false
+							},
 						},
 					},
 				},

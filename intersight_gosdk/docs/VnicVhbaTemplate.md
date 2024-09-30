@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.VhbaTemplate"]
 **Description** | Pointer to **string** | Description of the vHBA template. | [optional] 
 **EnableOverride** | Pointer to **bool** | When enabled, the configuration of the derived instances may override the template configuration. | [optional] 
-**Name** | Pointer to **string** | Name of the virtual fibre channel interface. | [optional] 
+**Name** | Pointer to **string** | Name of the vHBA template. | [optional] 
 **PeerVhbaName** | Pointer to **string** | Name of the peer vHBA which belongs to the peer FI. | [optional] 
 **ScpUsageCount** | Pointer to **int64** | The count of the San Connectivity Policies using vHBA template. | [optional] [readonly] 
 **SwitchId** | Pointer to **string** | The fabric port to which the vHBAs will be associated. * &#x60;None&#x60; - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value &#39;None&#39; should be used. * &#x60;A&#x60; - Fabric A of the FI cluster. * &#x60;B&#x60; - Fabric B of the FI cluster. | [optional] [default to "None"]

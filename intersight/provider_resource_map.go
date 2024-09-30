@@ -349,7 +349,6 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_task_server_scoped_inventory":                            resourceTaskServerScopedInventory(),
 		"intersight_techsupportmanagement_collection_control_policy":         resourceTechsupportmanagementCollectionControlPolicy(),
 		"intersight_techsupportmanagement_tech_support_bundle":               resourceTechsupportmanagementTechSupportBundle(),
-		"intersight_terraform_executor":                                      resourceTerraformExecutor(),
 		"intersight_thermal_policy":                                          resourceThermalPolicy(),
 		"intersight_uuidpool_pool":                                           resourceUuidpoolPool(),
 		"intersight_uuidpool_reservation":                                    resourceUuidpoolReservation(),

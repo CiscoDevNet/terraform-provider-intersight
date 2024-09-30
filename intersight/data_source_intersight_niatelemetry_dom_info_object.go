@@ -14,48 +14,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-func getTerraformExecutorSchema() map[string]*schema.Schema {
+func getNiatelemetryDomInfoObjectSchema() map[string]*schema.Schema {
 	var schemaMap = make(map[string]*schema.Schema)
-	schemaMap = map[string]*schema.Schema{"account": {
-		Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-		Type:        schema.TypeList,
-		MaxItems:    1,
+	schemaMap = map[string]*schema.Schema{"account_moid": {
+		Description: "The Account ID for this managed object.",
+		Type:        schema.TypeString,
 		Optional:    true,
-		Elem: &schema.Resource{
-			Schema: map[string]*schema.Schema{
-				"additional_properties": {
-					Type:             schema.TypeString,
-					Optional:         true,
-					DiffSuppressFunc: SuppressDiffAdditionProps,
-				},
-				"class_id": {
-					Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-					Type:        schema.TypeString,
-					Optional:    true,
-				},
-				"moid": {
-					Description: "The Moid of the referenced REST resource.",
-					Type:        schema.TypeString,
-					Optional:    true,
-				},
-				"object_type": {
-					Description: "The fully-qualified name of the remote type referred by this relationship.",
-					Type:        schema.TypeString,
-					Optional:    true,
-				},
-				"selector": {
-					Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-					Type:        schema.TypeString,
-					Optional:    true,
-				},
-			},
-		},
 	},
-		"account_moid": {
-			Description: "The Account ID for this managed object.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -100,7 +65,17 @@ func getTerraformExecutorSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"cloud_resource": {
+		"collection_id": {
+			Description: "Collection id is for index of one of 4 records in the timestamp interval for the particular dom threshold info.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"dom_info": {
 			Type:     schema.TypeList,
 			Optional: true,
 			Elem: &schema.Resource{
@@ -110,18 +85,33 @@ func getTerraformExecutorSchema() map[string]*schema.Schema {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"avg": {
+						Description: "Returns Average value of the transceiver sensor.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"current_status": {
-						Description: "Currentstatus of the resource if applicable on the cloud.",
+					"dn": {
+						Description: "Returns distinguished name of the transceiver.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"desired_status": {
-						Description: "Desiredstatus of the resource if applicable on the cloud.",
+					"instant": {
+						Description: "Returns instant value of the  transceiversensor.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"max": {
+						Description: "Returns Maximum value reported by the transceiver sensor.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"min": {
+						Description: "Returns Minimum value reported by the transceiver sensor.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -130,23 +120,18 @@ func getTerraformExecutorSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"resource_id": {
-						Description: "Unique id of the resource from the cloud provider.",
+					"unit": {
+						Description: "Returns transceiver sensor's unit identifier.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "Returns calibration value (unit) of transceiver sensor.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 				},
 			},
-		},
-		"command": {
-			Description: "Command to be executed during update operation.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"create_time": {
-			Description: "The time when this managed object was created.",
-			Type:        schema.TypeString,
-			Optional:    true,
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
@@ -165,16 +150,6 @@ func getTerraformExecutorSchema() map[string]*schema.Schema {
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"operation": {
-			Description: "Enum indicates what operation is being done.\n* `Create` - Creating a Terraform resource.\n* `Update` - Updating a Terraform resource.\n* `Delete` - Deleting a Terraform resource.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"output": {
-			Description: "Terraform output of the entire execution.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -252,8 +227,13 @@ func getTerraformExecutorSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"platform_type": {
-			Description: "The Platform type used in conjunction with 'sourceFolderPath' and 'sourceFolderName' determines unique path for a Terraform workflow.",
+		"record_type": {
+			Description: "Type of record NEXUS. This determines the type of platform where inventory was collected.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"record_version": {
+			Description: "Version of record being pushed. This determines what was the API version for data available from the device.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -292,71 +272,18 @@ func getTerraformExecutorSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"run_state": {
-			Type:     schema.TypeList,
-			Optional: true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"run_id": {
-						Description: "Run identifier for every terraform execution.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"state_file": {
-						Description: "StateFile identifier of terraform execution.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
+		"serial": {
+			Description: "Serial number of device being inventoried. The serial number is unique per device.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"source_folder_name": {
-			Description: "Folder Name where Terraform workflows are stored.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"source_folder_path": {
-			Description: "Relative folder Path where 'sourceFolderName' is located.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"source_location": {
-			Description: "Flag indicates whether workflow is internal/external.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"status": {
-			Description: "Status of the terraform execution.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"stderr": {
-			Description: "Stderr of the terraform execution will be captured here.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"stdout": {
-			Description: "Stdout of the terraform execution will be captured here.",
+		"slot_id": {
+			Description: "Line card slot of device being inventoried - The linecard number is specific to serial of a device.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -382,16 +309,6 @@ func getTerraformExecutorSchema() map[string]*schema.Schema {
 					},
 				},
 			},
-		},
-		"task_id": {
-			Description: "TaskId of a pontem workflow is same as the MO.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"variables": {
-			Description: "Variables needed by the terraform configuration as a JSON object.",
-			Type:        schema.TypeString,
-			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -506,106 +423,28 @@ func getTerraformExecutorSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"workflow_info": {
-			Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
 	}
 	return schemaMap
 }
 
-func dataSourceTerraformExecutor() *schema.Resource {
-	var subSchema = getTerraformExecutorSchema()
-	var model = getTerraformExecutorSchema()
+func dataSourceNiatelemetryDomInfoObject() *schema.Resource {
+	var subSchema = getNiatelemetryDomInfoObjectSchema()
+	var model = getNiatelemetryDomInfoObjectSchema()
 	model["results"] = &schema.Schema{
 		Type:     schema.TypeList,
 		Elem:     &schema.Resource{Schema: subSchema},
 		Computed: true,
 	}
 	return &schema.Resource{
-		ReadContext: dataSourceTerraformExecutorRead,
+		ReadContext: dataSourceNiatelemetryDomInfoObjectRead,
 		Schema:      model}
 }
 
-func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func dataSourceNiatelemetryDomInfoObjectRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
-	var o = &models.TerraformExecutor{}
-	if v, ok := d.GetOk("account"); ok {
-		p := make([]models.IamAccountRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsIamAccountRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetAccount(x)
-		}
-	}
-
+	var o = &models.NiatelemetryDomInfoObject{}
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
@@ -665,11 +504,21 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 		o.SetClassId(x)
 	}
 
-	if v, ok := d.GetOk("cloud_resource"); ok {
-		x := make([]models.TerraformCloudResource, 0)
+	if v, ok := d.GetOk("collection_id"); ok {
+		x := (v.(string))
+		o.SetCollectionId(x)
+	}
+
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetCreateTime(x)
+	}
+
+	if v, ok := d.GetOk("dom_info"); ok {
+		x := make([]models.NiatelemetryDomInfo, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := &models.TerraformCloudResource{}
+			o := &models.NiatelemetryDomInfo{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -681,17 +530,35 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("terraform.CloudResource")
-			if v, ok := l["current_status"]; ok {
+			if v, ok := l["avg"]; ok {
 				{
 					x := (v.(string))
-					o.SetCurrentStatus(x)
+					o.SetAvg(x)
 				}
 			}
-			if v, ok := l["desired_status"]; ok {
+			o.SetClassId("niatelemetry.DomInfo")
+			if v, ok := l["dn"]; ok {
 				{
 					x := (v.(string))
-					o.SetDesiredStatus(x)
+					o.SetDn(x)
+				}
+			}
+			if v, ok := l["instant"]; ok {
+				{
+					x := (v.(string))
+					o.SetInstant(x)
+				}
+			}
+			if v, ok := l["max"]; ok {
+				{
+					x := (v.(string))
+					o.SetMax(x)
+				}
+			}
+			if v, ok := l["min"]; ok {
+				{
+					x := (v.(string))
+					o.SetMin(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -700,25 +567,21 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 					o.SetObjectType(x)
 				}
 			}
-			if v, ok := l["resource_id"]; ok {
+			if v, ok := l["unit"]; ok {
 				{
 					x := (v.(string))
-					o.SetResourceId(x)
+					o.SetUnit(x)
+				}
+			}
+			if v, ok := l["value"]; ok {
+				{
+					x := (v.(string))
+					o.SetValue(x)
 				}
 			}
 			x = append(x, *o)
 		}
-		o.SetCloudResource(x)
-	}
-
-	if v, ok := d.GetOk("command"); ok {
-		x := (v.(string))
-		o.SetCommand(x)
-	}
-
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
-		o.SetCreateTime(x)
+		o.SetDomInfo(x)
 	}
 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
@@ -739,21 +602,6 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
-	}
-
-	if v, ok := d.GetOk("operation"); ok {
-		x := (v.(string))
-		o.SetOperation(x)
-	}
-
-	if v, ok := d.GetOk("output"); ok {
-		x := []byte(v.(string))
-		var x1 interface{}
-		err := json.Unmarshal(x, &x1)
-		if err == nil && x1 != nil {
-			x2 := x1.(map[string]interface{})
-			o.SetOutput(x2)
-		}
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -850,9 +698,14 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 		o.SetPermissionResources(x)
 	}
 
-	if v, ok := d.GetOk("platform_type"); ok {
+	if v, ok := d.GetOk("record_type"); ok {
 		x := (v.(string))
-		o.SetPlatformType(x)
+		o.SetRecordType(x)
+	}
+
+	if v, ok := d.GetOk("record_version"); ok {
+		x := (v.(string))
+		o.SetRecordVersion(x)
 	}
 
 	if v, ok := d.GetOk("registered_device"); ok {
@@ -898,44 +751,9 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("run_state"); ok {
-		x := make([]models.TerraformRunstate, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.TerraformRunstate{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("terraform.Runstate")
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["run_id"]; ok {
-				{
-					x := (v.(string))
-					o.SetRunId(x)
-				}
-			}
-			if v, ok := l["state_file"]; ok {
-				{
-					x := (v.(string))
-					o.SetStateFile(x)
-				}
-			}
-			x = append(x, *o)
-		}
-		o.SetRunState(x)
+	if v, ok := d.GetOk("serial"); ok {
+		x := (v.(string))
+		o.SetSerial(x)
 	}
 
 	if v, ok := d.GetOk("shared_scope"); ok {
@@ -943,44 +761,9 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 		o.SetSharedScope(x)
 	}
 
-	if v, ok := d.GetOk("source_folder_name"); ok {
+	if v, ok := d.GetOk("slot_id"); ok {
 		x := (v.(string))
-		o.SetSourceFolderName(x)
-	}
-
-	if v, ok := d.GetOk("source_folder_path"); ok {
-		x := (v.(string))
-		o.SetSourceFolderPath(x)
-	}
-
-	if v, ok := d.GetOk("source_location"); ok {
-		x := (v.(string))
-		o.SetSourceLocation(x)
-	}
-
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
-	}
-
-	if v, ok := d.GetOk("stderr"); ok {
-		x := []byte(v.(string))
-		var x1 interface{}
-		err := json.Unmarshal(x, &x1)
-		if err == nil && x1 != nil {
-			x2 := x1.(map[string]interface{})
-			o.SetStderr(x2)
-		}
-	}
-
-	if v, ok := d.GetOk("stdout"); ok {
-		x := []byte(v.(string))
-		var x1 interface{}
-		err := json.Unmarshal(x, &x1)
-		if err == nil && x1 != nil {
-			x2 := x1.(map[string]interface{})
-			o.SetStdout(x2)
-		}
+		o.SetSlotId(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1014,21 +797,6 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 			x = append(x, *o)
 		}
 		o.SetTags(x)
-	}
-
-	if v, ok := d.GetOk("task_id"); ok {
-		x := (v.(string))
-		o.SetTaskId(x)
-	}
-
-	if v, ok := d.GetOk("variables"); ok {
-		x := []byte(v.(string))
-		var x1 interface{}
-		err := json.Unmarshal(x, &x1)
-		if err == nil && x1 != nil {
-			x2 := x1.(map[string]interface{})
-			o.SetVariables(x2)
-		}
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -1105,136 +873,80 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("workflow_info"); ok {
-		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowWorkflowInfoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetWorkflowInfo(x)
-		}
-	}
-
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return diag.Errorf("json marshal of TerraformExecutor object failed with error : %s", err.Error())
+		return diag.Errorf("json marshal of NiatelemetryDomInfoObject object failed with error : %s", err.Error())
 	}
-	countResponse, _, responseErr := conn.ApiClient.TerraformApi.GetTerraformExecutorList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
+	countResponse, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryDomInfoObjectList(conn.ctx).Filter(getRequestParams(data)).Count(true).Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
 			responseErr := responseErr.(*models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching count of TerraformExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			return diag.Errorf("error occurred while fetching count of NiatelemetryDomInfoObject: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
-		return diag.Errorf("error occurred while fetching count of TerraformExecutor: %s", responseErr.Error())
+		return diag.Errorf("error occurred while fetching count of NiatelemetryDomInfoObject: %s", responseErr.Error())
 	}
 	count := countResponse.MoDocumentCount.GetCount()
 	if count == 0 {
-		return diag.Errorf("your query for TerraformExecutor data source did not return any results. Please change your search criteria and try again")
+		return diag.Errorf("your query for NiatelemetryDomInfoObject data source did not return any results. Please change your search criteria and try again")
 	}
 	var i int32
-	var terraformExecutorResults = make([]map[string]interface{}, 0, 0)
+	var niatelemetryDomInfoObjectResults = make([]map[string]interface{}, 0, 0)
 	for i = 0; i < count; i += 100 {
-		resMo, _, responseErr := conn.ApiClient.TerraformApi.GetTerraformExecutorList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		resMo, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryDomInfoObjectList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
 				responseErr := responseErr.(*models.GenericOpenAPIError)
-				return diag.Errorf("error occurred while fetching TerraformExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+				return diag.Errorf("error occurred while fetching NiatelemetryDomInfoObject: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
-			return diag.Errorf("error occurred while fetching TerraformExecutor: %s", responseErr.Error())
+			return diag.Errorf("error occurred while fetching NiatelemetryDomInfoObject: %s", responseErr.Error())
 		}
-		results := resMo.TerraformExecutorList.GetResults()
+		results := resMo.NiatelemetryDomInfoObjectList.GetResults()
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for k := 0; k < len(results); k++ {
 				var s = results[k]
 				var temp = make(map[string]interface{})
-
-				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
-
-				temp["cloud_resource"] = flattenListTerraformCloudResource(s.GetCloudResource(), d)
-				temp["command"] = (s.GetCommand())
+				temp["collection_id"] = (s.GetCollectionId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+
+				temp["dom_info"] = flattenListNiatelemetryDomInfo(s.GetDomInfo(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
-				temp["operation"] = (s.GetOperation())
-				temp["output"] = flattenAdditionalProperties(s.GetOutput())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
-				temp["platform_type"] = (s.GetPlatformType())
+				temp["record_type"] = (s.GetRecordType())
+				temp["record_version"] = (s.GetRecordVersion())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
-
-				temp["run_state"] = flattenListTerraformRunstate(s.GetRunState(), d)
+				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
-				temp["source_folder_name"] = (s.GetSourceFolderName())
-				temp["source_folder_path"] = (s.GetSourceFolderPath())
-				temp["source_location"] = (s.GetSourceLocation())
-				temp["status"] = (s.GetStatus())
-				temp["stderr"] = flattenAdditionalProperties(s.GetStderr())
-				temp["stdout"] = flattenAdditionalProperties(s.GetStdout())
+				temp["slot_id"] = (s.GetSlotId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
-				temp["task_id"] = (s.GetTaskId())
-				temp["variables"] = flattenAdditionalProperties(s.GetVariables())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-
-				temp["workflow_info"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflowInfo(), d)
-				terraformExecutorResults = append(terraformExecutorResults, temp)
+				niatelemetryDomInfoObjectResults = append(niatelemetryDomInfoObjectResults, temp)
 			}
 		}
 	}
-	log.Println("length of results: ", len(terraformExecutorResults))
-	if err := d.Set("results", terraformExecutorResults); err != nil {
+	log.Println("length of results: ", len(niatelemetryDomInfoObjectResults))
+	if err := d.Set("results", niatelemetryDomInfoObjectResults); err != nil {
 		return diag.Errorf("error occurred while setting results: %s", err.Error())
 	}
-	d.SetId(terraformExecutorResults[0]["moid"].(string))
+	d.SetId(niatelemetryDomInfoObjectResults[0]["moid"].(string))
 	return de
 }

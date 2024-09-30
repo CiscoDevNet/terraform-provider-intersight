@@ -5946,6 +5946,56 @@ func flattenListNiatelemetryDigitalOpticalMonitoring(p []models.NiatelemetryDigi
 	}
 	return niatelemetrydigitalopticalmonitorings
 }
+func flattenListNiatelemetryDomInfo(p []models.NiatelemetryDomInfo, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetrydominfos []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetrydominfo := make(map[string]interface{})
+		niatelemetrydominfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetrydominfo["avg"] = item.GetAvg()
+		niatelemetrydominfo["class_id"] = item.GetClassId()
+		niatelemetrydominfo["dn"] = item.GetDn()
+		niatelemetrydominfo["instant"] = item.GetInstant()
+		niatelemetrydominfo["max"] = item.GetMax()
+		niatelemetrydominfo["min"] = item.GetMin()
+		niatelemetrydominfo["object_type"] = item.GetObjectType()
+		niatelemetrydominfo["unit"] = item.GetUnit()
+		niatelemetrydominfo["value"] = item.GetValue()
+		niatelemetrydominfos = append(niatelemetrydominfos, niatelemetrydominfo)
+	}
+	return niatelemetrydominfos
+}
+func flattenListNiatelemetryDomThresInfo(p []models.NiatelemetryDomThresInfo, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetrydomthresinfos []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetrydomthresinfo := make(map[string]interface{})
+		niatelemetrydomthresinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetrydomthresinfo["class_id"] = item.GetClassId()
+		niatelemetrydomthresinfo["dn"] = item.GetDn()
+		niatelemetrydomthresinfo["high_alarm"] = item.GetHighAlarm()
+		niatelemetrydomthresinfo["high_warning"] = item.GetHighWarning()
+		niatelemetrydomthresinfo["low_alarm"] = item.GetLowAlarm()
+		niatelemetrydomthresinfo["low_warning"] = item.GetLowWarning()
+		niatelemetrydomthresinfo["num_lanes"] = item.GetNumLanes()
+		niatelemetrydomthresinfo["object_type"] = item.GetObjectType()
+		niatelemetrydomthresinfo["part_number"] = item.GetPartNumber()
+		niatelemetrydomthresinfo["type"] = item.GetType()
+		niatelemetrydomthresinfo["type_name"] = item.GetTypeName()
+		niatelemetrydomthresinfo["unit"] = item.GetUnit()
+		niatelemetrydomthresinfo["vendor_name"] = item.GetVendorName()
+		niatelemetrydomthresinfo["vendor_pn"] = item.GetVendorPn()
+		niatelemetrydomthresinfo["vendor_rev"] = item.GetVendorRev()
+		niatelemetrydomthresinfo["vendor_sn"] = item.GetVendorSn()
+		niatelemetrydomthresinfo["version_id"] = item.GetVersionId()
+		niatelemetrydomthresinfos = append(niatelemetrydomthresinfos, niatelemetrydomthresinfo)
+	}
+	return niatelemetrydomthresinfos
+}
 func flattenListNiatelemetryFanDetails(p []models.NiatelemetryFanDetails, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetryfandetailss []map[string]interface{}
 	if len(p) == 0 {
@@ -8315,39 +8365,6 @@ func flattenListTechsupportmanagementTechSupportFileInfo(p []models.Techsupportm
 		techsupportmanagementtechsupportfileinfos = append(techsupportmanagementtechsupportfileinfos, techsupportmanagementtechsupportfileinfo)
 	}
 	return techsupportmanagementtechsupportfileinfos
-}
-func flattenListTerraformCloudResource(p []models.TerraformCloudResource, d *schema.ResourceData) []map[string]interface{} {
-	var terraformcloudresources []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		terraformcloudresource := make(map[string]interface{})
-		terraformcloudresource["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		terraformcloudresource["class_id"] = item.GetClassId()
-		terraformcloudresource["current_status"] = item.GetCurrentStatus()
-		terraformcloudresource["desired_status"] = item.GetDesiredStatus()
-		terraformcloudresource["object_type"] = item.GetObjectType()
-		terraformcloudresource["resource_id"] = item.GetResourceId()
-		terraformcloudresources = append(terraformcloudresources, terraformcloudresource)
-	}
-	return terraformcloudresources
-}
-func flattenListTerraformRunstate(p []models.TerraformRunstate, d *schema.ResourceData) []map[string]interface{} {
-	var terraformrunstates []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		terraformrunstate := make(map[string]interface{})
-		terraformrunstate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		terraformrunstate["class_id"] = item.GetClassId()
-		terraformrunstate["object_type"] = item.GetObjectType()
-		terraformrunstate["run_id"] = item.GetRunId()
-		terraformrunstate["state_file"] = item.GetStateFile()
-		terraformrunstates = append(terraformrunstates, terraformrunstate)
-	}
-	return terraformrunstates
 }
 func flattenListUcsdConnectorPack(p []models.UcsdConnectorPack, d *schema.ResourceData) []map[string]interface{} {
 	var ucsdconnectorpacks []map[string]interface{}

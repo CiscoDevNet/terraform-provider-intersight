@@ -117,7 +117,7 @@ The following arguments can be used to get data of already created objects in In
 * `lcp_usage_count`:(int) The count of the Lan Connectivity Policies using vNIC template. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) Name of the virtual ethernet interface. 
+* `name`:(string) Name of the vNIC template. 
 * `peer_vnic_name`:(string) Name of the peer vNIC which belongs to the peer FI. 
 * `pin_group_name`:(string) Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
