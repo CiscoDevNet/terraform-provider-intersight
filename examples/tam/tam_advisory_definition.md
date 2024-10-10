@@ -10,15 +10,15 @@ resource "intersight_tam_advisory_definition" "tam_advisory_definition" {
   actions {
     operation_type = "create"
     name           = "tam_security_advisories1"
-    type           = "restApi"
+    nr_type           = "restApi"
     object_type    = "tam.SecurityAdvisoryDetails"
     alert_type     = "psirt"
   }
-  type = "securityAdvisory"
+  nr_type = "securityAdvisory"
   api_data_sources {
     object_type = "tam.ApiDataSource"
     name        = "api_data_source_1"
-    type        = "intersightApi"
+    nr_type        = "intersightApi"
 
   }
   advisory_details {
