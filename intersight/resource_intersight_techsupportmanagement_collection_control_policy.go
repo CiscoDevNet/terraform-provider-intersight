@@ -22,7 +22,7 @@ func resourceTechsupportmanagementCollectionControlPolicy() *schema.Resource {
 		UpdateContext: resourceTechsupportmanagementCollectionControlPolicyUpdate,
 		DeleteContext: resourceTechsupportmanagementCollectionControlPolicyDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",

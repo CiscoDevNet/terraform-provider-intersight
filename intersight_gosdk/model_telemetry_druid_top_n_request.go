@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18534
+API version: 1.0.11-18775
 Contact: intersight@cisco.com
 */
 
@@ -31,7 +31,9 @@ type TelemetryDruidTopNRequest struct {
 	Aggregations []TelemetryDruidAggregator `json:"aggregations,omitempty"`
 	// Post-aggregations are specifications of processing that should happen on aggregated values as they come out of Apache Druid. If you include a post aggregation as part of a query, make sure to include all aggregators the post-aggregator requires.
 	PostAggregations []TelemetryDruidPostAggregator `json:"postAggregations,omitempty"`
-	Dimension        TelemetryDruidDimensionSpec    `json:"dimension"`
+	// Virtual columns are columns that are computed on the fly during query execution. It can potentially draw from multiple underlying columns, although a virtual column always presents itself as a single column. Virtual columns can be referenced by their output names to be used as dimensions or as inputs to filters and aggregators.
+	VirtualColumns []TelemetryDruidVirtualColumn `json:"virtualColumns,omitempty"`
+	Dimension      TelemetryDruidDimensionSpec   `json:"dimension"`
 	// An integer defining the N in the topN (i.e., how many results you want in the top list).
 	Threshold            int32                        `json:"threshold"`
 	Metric               TelemetryDruidTopNMetricSpec `json:"metric"`
@@ -257,6 +259,38 @@ func (o *TelemetryDruidTopNRequest) SetPostAggregations(v []TelemetryDruidPostAg
 	o.PostAggregations = v
 }
 
+// GetVirtualColumns returns the VirtualColumns field value if set, zero value otherwise.
+func (o *TelemetryDruidTopNRequest) GetVirtualColumns() []TelemetryDruidVirtualColumn {
+	if o == nil || IsNil(o.VirtualColumns) {
+		var ret []TelemetryDruidVirtualColumn
+		return ret
+	}
+	return o.VirtualColumns
+}
+
+// GetVirtualColumnsOk returns a tuple with the VirtualColumns field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TelemetryDruidTopNRequest) GetVirtualColumnsOk() ([]TelemetryDruidVirtualColumn, bool) {
+	if o == nil || IsNil(o.VirtualColumns) {
+		return nil, false
+	}
+	return o.VirtualColumns, true
+}
+
+// HasVirtualColumns returns a boolean if a field has been set.
+func (o *TelemetryDruidTopNRequest) HasVirtualColumns() bool {
+	if o != nil && !IsNil(o.VirtualColumns) {
+		return true
+	}
+
+	return false
+}
+
+// SetVirtualColumns gets a reference to the given []TelemetryDruidVirtualColumn and assigns it to the VirtualColumns field.
+func (o *TelemetryDruidTopNRequest) SetVirtualColumns(v []TelemetryDruidVirtualColumn) {
+	o.VirtualColumns = v
+}
+
 // GetDimension returns the Dimension field value
 func (o *TelemetryDruidTopNRequest) GetDimension() TelemetryDruidDimensionSpec {
 	if o == nil {
@@ -384,6 +418,9 @@ func (o TelemetryDruidTopNRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PostAggregations) {
 		toSerialize["postAggregations"] = o.PostAggregations
 	}
+	if !IsNil(o.VirtualColumns) {
+		toSerialize["virtualColumns"] = o.VirtualColumns
+	}
 	toSerialize["dimension"] = o.Dimension
 	toSerialize["threshold"] = o.Threshold
 	toSerialize["metric"] = o.Metric
@@ -462,6 +499,7 @@ func (o *TelemetryDruidTopNRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "filter")
 		delete(additionalProperties, "aggregations")
 		delete(additionalProperties, "postAggregations")
+		delete(additionalProperties, "virtualColumns")
 		delete(additionalProperties, "dimension")
 		delete(additionalProperties, "threshold")
 		delete(additionalProperties, "metric")

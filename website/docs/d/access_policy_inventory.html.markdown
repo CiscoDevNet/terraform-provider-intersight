@@ -19,7 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) Description of the policy. 
 * `device_mo_id`:(string) Device ID of the entity from where inventory is reported. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `inband_vlan`:(int) VLAN to be used for server access over Inband network. 
+* `inband_vlan`:(int) VLAN to be used for server access over Inband network. When Inband is enabled, only numbers between 4 to 4093 are allowed. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the inventoried policy object. 

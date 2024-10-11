@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18534
+API version: 1.0.11-18775
 Contact: intersight@cisco.com
 */
 
@@ -59,7 +59,8 @@ type IamAppRegistration struct {
 	// Used to perform revocation for tokens of AppRegistration. Updated only internally is case Revoke property come from UI with value true. On each request with OAuth2 access token the CreationTime of the OAuth2 token will be compared to RevokationTimestamp of the corresponding App Registration.
 	RevocationTimestamp *time.Time `json:"RevocationTimestamp,omitempty"`
 	// Used to trigger update the revocationTimestamp value. If UI sent updating request with the Revoke value is true, then update RevocationTimestamp.
-	Revoke *bool `json:"Revoke,omitempty"`
+	Revoke *bool                             `json:"Revoke,omitempty"`
+	Scope  NullableIamSwitchScopePermissions `json:"Scope,omitempty"`
 	// Set to true if consent screen needs to be shown during the OAuth login process. Applicable only for public AppRegistrations, means only 'authorization_code' grantType. Note that consent screen will be shown on each login.
 	ShowConsentScreen *bool `json:"ShowConsentScreen,omitempty"`
 	// The timestamp at which an expiry date was first set on this app registration.  For expiring App Registrations, this field is same as the create time of the App Registration. For never-expiring App Registrations, this field is set initially to zero time value. If a never-expiry App Registration is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.
@@ -729,6 +730,49 @@ func (o *IamAppRegistration) SetRevoke(v bool) {
 	o.Revoke = &v
 }
 
+// GetScope returns the Scope field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IamAppRegistration) GetScope() IamSwitchScopePermissions {
+	if o == nil || IsNil(o.Scope.Get()) {
+		var ret IamSwitchScopePermissions
+		return ret
+	}
+	return *o.Scope.Get()
+}
+
+// GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IamAppRegistration) GetScopeOk() (*IamSwitchScopePermissions, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Scope.Get(), o.Scope.IsSet()
+}
+
+// HasScope returns a boolean if a field has been set.
+func (o *IamAppRegistration) HasScope() bool {
+	if o != nil && o.Scope.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetScope gets a reference to the given NullableIamSwitchScopePermissions and assigns it to the Scope field.
+func (o *IamAppRegistration) SetScope(v IamSwitchScopePermissions) {
+	o.Scope.Set(&v)
+}
+
+// SetScopeNil sets the value for Scope to be an explicit nil
+func (o *IamAppRegistration) SetScopeNil() {
+	o.Scope.Set(nil)
+}
+
+// UnsetScope ensures that no value is present for Scope, not even an explicit nil
+func (o *IamAppRegistration) UnsetScope() {
+	o.Scope.Unset()
+}
+
 // GetShowConsentScreen returns the ShowConsentScreen field value if set, zero value otherwise.
 func (o *IamAppRegistration) GetShowConsentScreen() bool {
 	if o == nil || IsNil(o.ShowConsentScreen) {
@@ -1068,6 +1112,9 @@ func (o IamAppRegistration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Revoke) {
 		toSerialize["Revoke"] = o.Revoke
 	}
+	if o.Scope.IsSet() {
+		toSerialize["Scope"] = o.Scope.Get()
+	}
 	if !IsNil(o.ShowConsentScreen) {
 		toSerialize["ShowConsentScreen"] = o.ShowConsentScreen
 	}
@@ -1174,7 +1221,8 @@ func (o *IamAppRegistration) UnmarshalJSON(data []byte) (err error) {
 		// Used to perform revocation for tokens of AppRegistration. Updated only internally is case Revoke property come from UI with value true. On each request with OAuth2 access token the CreationTime of the OAuth2 token will be compared to RevokationTimestamp of the corresponding App Registration.
 		RevocationTimestamp *time.Time `json:"RevocationTimestamp,omitempty"`
 		// Used to trigger update the revocationTimestamp value. If UI sent updating request with the Revoke value is true, then update RevocationTimestamp.
-		Revoke *bool `json:"Revoke,omitempty"`
+		Revoke *bool                             `json:"Revoke,omitempty"`
+		Scope  NullableIamSwitchScopePermissions `json:"Scope,omitempty"`
 		// Set to true if consent screen needs to be shown during the OAuth login process. Applicable only for public AppRegistrations, means only 'authorization_code' grantType. Note that consent screen will be shown on each login.
 		ShowConsentScreen *bool `json:"ShowConsentScreen,omitempty"`
 		// The timestamp at which an expiry date was first set on this app registration.  For expiring App Registrations, this field is same as the create time of the App Registration. For never-expiring App Registrations, this field is set initially to zero time value. If a never-expiry App Registration is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.
@@ -1213,6 +1261,7 @@ func (o *IamAppRegistration) UnmarshalJSON(data []byte) (err error) {
 		varIamAppRegistration.ResponseTypes = varIamAppRegistrationWithoutEmbeddedStruct.ResponseTypes
 		varIamAppRegistration.RevocationTimestamp = varIamAppRegistrationWithoutEmbeddedStruct.RevocationTimestamp
 		varIamAppRegistration.Revoke = varIamAppRegistrationWithoutEmbeddedStruct.Revoke
+		varIamAppRegistration.Scope = varIamAppRegistrationWithoutEmbeddedStruct.Scope
 		varIamAppRegistration.ShowConsentScreen = varIamAppRegistrationWithoutEmbeddedStruct.ShowConsentScreen
 		varIamAppRegistration.StartTime = varIamAppRegistrationWithoutEmbeddedStruct.StartTime
 		varIamAppRegistration.Account = varIamAppRegistrationWithoutEmbeddedStruct.Account
@@ -1256,6 +1305,7 @@ func (o *IamAppRegistration) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ResponseTypes")
 		delete(additionalProperties, "RevocationTimestamp")
 		delete(additionalProperties, "Revoke")
+		delete(additionalProperties, "Scope")
 		delete(additionalProperties, "ShowConsentScreen")
 		delete(additionalProperties, "StartTime")
 		delete(additionalProperties, "Account")

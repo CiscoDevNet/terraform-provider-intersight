@@ -23,7 +23,7 @@ func resourceAccessPolicy() *schema.Resource {
 		UpdateContext: resourceAccessPolicyUpdate,
 		DeleteContext: resourceAccessPolicyDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -237,9 +237,9 @@ func resourceAccessPolicy() *schema.Resource {
 				},
 			},
 			"inband_vlan": {
-				Description:  "VLAN to be used for server access over Inband network.",
+				Description:  "VLAN to be used for server access over Inband network. When Inband is enabled, only numbers between 4 to 4093 are allowed.",
 				Type:         schema.TypeInt,
-				ValidateFunc: validation.IntBetween(4, 4093),
+				ValidateFunc: validation.IntBetween(0, 4093),
 				Optional:     true,
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
 					if new == "0" || new == "0.0" {
@@ -247,6 +247,7 @@ func resourceAccessPolicy() *schema.Resource {
 					}
 					return false
 				},
+				Default: 0,
 			},
 			"inband_vrf": {
 				Description: "A reference to a vrfVrf resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",

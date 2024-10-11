@@ -452,6 +452,11 @@ func getKubernetesClusterProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"deployed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"description": {
 			Description: "Description of the profile.",
 			Type:        schema.TypeString,
@@ -1108,6 +1113,11 @@ func getKubernetesClusterProfileSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"removed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"scheduled_actions": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1962,6 +1972,17 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("deployed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDeployedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -2763,6 +2784,17 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		o.SetPolicyBucket(x)
 	}
 
+	if v, ok := d.GetOk("removed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRemovedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("scheduled_actions"); ok {
 		x := make([]models.PolicyScheduledAction, 0)
 		s := v.([]interface{})
@@ -3158,6 +3190,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 				temp["container_runtime_proxy_policy"] = flattenMapKubernetesHttpProxyPolicyRelationship(s.GetContainerRuntimeProxyPolicy(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["deployed_policies"] = (s.GetDeployedPolicies())
 				temp["description"] = (s.GetDescription())
 
 				temp["device_connector_proxy_policy"] = flattenMapKubernetesHttpProxyPolicyRelationship(s.GetDeviceConnectorProxyPolicy(), d)
@@ -3195,6 +3228,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
+				temp["removed_policies"] = (s.GetRemovedPolicies())
 
 				temp["scheduled_actions"] = flattenListPolicyScheduledAction(s.GetScheduledActions(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

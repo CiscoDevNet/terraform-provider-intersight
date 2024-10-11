@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **OperStatus** | Pointer to **string** | The current status of the API key that dictates the validity of the key. * &#x60;enabled&#x60; - An API key/App Registration having enabled status can be used for API invocation. * &#x60;disabled&#x60; - An API key/App Registration having disabled status cannot be used for API invocation. * &#x60;expired&#x60; - An API key/App Registration having expired status cannot be used for API invocation as the expiration date has passed. | [optional] [readonly] [default to "enabled"]
 **PrivateKey** | Pointer to **string** | Holds the private key for the API key. | [optional] 
 **Purpose** | Pointer to **string** | The purpose of the API Key. | [optional] 
+**Scope** | Pointer to [**NullableIamSwitchScopePermissions**](IamSwitchScopePermissions.md) |  | [optional] 
 **SigningAlgorithm** | Pointer to **string** | The signing algorithm used by the client to authenticate API requests to Intersight. The signing algorithm must be compatible with the key generation specification. * &#x60;RSASSA-PKCS1-v1_5&#x60; - RSASSA-PKCS1-v1_5 is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).RSASSA-PKCS1-v1_5 is included only for compatibility with existing applications. * &#x60;RSASSA-PSS&#x60; - RSASSA-PSS is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).It combines the RSASP1 and RSAVP1 primitives with the EMSA-PSS encoding method.In the interest of increased robustness, RSASSA-PSS is required in new applications. * &#x60;Ed25519&#x60; - The Ed25519 signature algorithm, as specified in [RFC 8032](https://tools.ietf.org/html/rfc8032).Ed25519 is a public-key signature system with several attractive features, includingfast single-signature verification, very fast signing, fast key generation and high security level. * &#x60;Ecdsa&#x60; - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is encoded as a ASN.1 DER SEQUENCE with two INTEGERs (r and s), as defined in RFC3279.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side. * &#x60;EcdsaP1363Format&#x60; - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is the raw concatenation of r and s, as defined in the ISO/IEC 7816-8 IEEE P.1363 standard.In that format, r and s are represented as unsigned, big endian numbers.Extra padding bytes (of value 0x00) is applied so that both r and s encodings have the same size.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side. | [optional] [default to "RSASSA-PKCS1-v1_5"]
 **StartTime** | Pointer to **time.Time** | The timestamp at which an expiry date was first set on this API key. For expiring API keys, this field is same as the create time of the API key. For never-expiring API keys, this field is set initially to zero time value. If a never-expiry API key is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field. | [optional] [readonly] 
 **Permission** | Pointer to [**NullableIamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
@@ -340,6 +341,41 @@ SetPurpose sets Purpose field to given value.
 
 HasPurpose returns a boolean if a field has been set.
 
+### GetScope
+
+`func (o *IamApiKey) GetScope() IamSwitchScopePermissions`
+
+GetScope returns the Scope field if non-nil, zero value otherwise.
+
+### GetScopeOk
+
+`func (o *IamApiKey) GetScopeOk() (*IamSwitchScopePermissions, bool)`
+
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScope
+
+`func (o *IamApiKey) SetScope(v IamSwitchScopePermissions)`
+
+SetScope sets Scope field to given value.
+
+### HasScope
+
+`func (o *IamApiKey) HasScope() bool`
+
+HasScope returns a boolean if a field has been set.
+
+### SetScopeNil
+
+`func (o *IamApiKey) SetScopeNil(b bool)`
+
+ SetScopeNil sets the value for Scope to be an explicit nil
+
+### UnsetScope
+`func (o *IamApiKey) UnsetScope()`
+
+UnsetScope ensures that no value is present for Scope, not even an explicit nil
 ### GetSigningAlgorithm
 
 `func (o *IamApiKey) GetSigningAlgorithm() string`

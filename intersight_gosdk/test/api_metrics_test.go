@@ -35,6 +35,18 @@ func Test_intersight_MetricsApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test MetricsApiService CreateMetricsResourceConfiguration", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.MetricsApi.CreateMetricsResourceConfiguration(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test MetricsApiService DeleteMetricsMetricsExploration", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -44,6 +56,32 @@ func Test_intersight_MetricsApiService(t *testing.T) {
 		httpRes, err := apiClient.MetricsApi.DeleteMetricsMetricsExploration(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MetricsApiService GetMetricsConfigurationByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MetricsApi.GetMetricsConfigurationByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MetricsApiService GetMetricsConfigurationList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.MetricsApi.GetMetricsConfigurationList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -74,6 +112,46 @@ func Test_intersight_MetricsApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test MetricsApiService GetMetricsResourceConfigurationByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MetricsApi.GetMetricsResourceConfigurationByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MetricsApiService GetMetricsResourceConfigurationList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.MetricsApi.GetMetricsResourceConfigurationList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MetricsApiService PatchMetricsConfiguration", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MetricsApi.PatchMetricsConfiguration(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test MetricsApiService PatchMetricsMetricsExploration", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -88,6 +166,34 @@ func Test_intersight_MetricsApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test MetricsApiService PatchMetricsResourceConfiguration", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MetricsApi.PatchMetricsResourceConfiguration(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MetricsApiService UpdateMetricsConfiguration", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MetricsApi.UpdateMetricsConfiguration(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test MetricsApiService UpdateMetricsMetricsExploration", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -95,6 +201,20 @@ func Test_intersight_MetricsApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.MetricsApi.UpdateMetricsMetricsExploration(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MetricsApiService UpdateMetricsResourceConfiguration", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MetricsApi.UpdateMetricsResourceConfiguration(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -24,7 +24,7 @@ func resourceKubernetesSysConfigPolicy() *schema.Resource {
 		UpdateContext: resourceKubernetesSysConfigPolicyUpdate,
 		DeleteContext: resourceKubernetesSysConfigPolicyDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",

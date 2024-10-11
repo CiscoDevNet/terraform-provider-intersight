@@ -20,7 +20,7 @@ func resourceSearchSuggestItem() *schema.Resource {
 		ReadContext:   resourceSearchSuggestItemRead,
 		DeleteContext: resourceSearchSuggestItemDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,

@@ -310,6 +310,11 @@ func getChassisIomProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"deployed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"description": {
 			Description: "Description of the profile.",
 			Type:        schema.TypeString,
@@ -523,6 +528,11 @@ func getChassisIomProfileSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"removed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"scheduled_actions": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1124,6 +1134,17 @@ func dataSourceChassisIomProfileRead(c context.Context, d *schema.ResourceData, 
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("deployed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDeployedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -1379,6 +1400,17 @@ func dataSourceChassisIomProfileRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOk("removed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRemovedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("scheduled_actions"); ok {
 		x := make([]models.PolicyScheduledAction, 0)
 		s := v.([]interface{})
@@ -1632,6 +1664,7 @@ func dataSourceChassisIomProfileRead(c context.Context, d *schema.ResourceData, 
 				temp["config_result"] = flattenMapChassisConfigResultRelationship(s.GetConfigResult(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["deployed_policies"] = (s.GetDeployedPolicies())
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["iom_entity"] = (s.GetIomEntity())
@@ -1651,6 +1684,7 @@ func dataSourceChassisIomProfileRead(c context.Context, d *schema.ResourceData, 
 				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
 
 				temp["profile"] = flattenMapChassisBaseProfileRelationship(s.GetProfile(), d)
+				temp["removed_policies"] = (s.GetRemovedPolicies())
 
 				temp["scheduled_actions"] = flattenListPolicyScheduledAction(s.GetScheduledActions(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

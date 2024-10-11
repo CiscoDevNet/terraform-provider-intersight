@@ -186,7 +186,7 @@ func getAccessPolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"inband_vlan": {
-			Description: "VLAN to be used for server access over Inband network.",
+			Description: "VLAN to be used for server access over Inband network. When Inband is enabled, only numbers between 4 to 4093 are allowed.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},

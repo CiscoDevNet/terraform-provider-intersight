@@ -136,25 +136,9 @@ This complex property has following sub-properties:
   + `bridge`:(string) Virtual machine network bridge name. 
   + `connect_at_power_on`:(bool) Connect the adaptor at virtual machine power on. 
   + `direct_path_io`:(bool) Enable the direct path I/O. 
-  + `ip_forwarding_enabled`:(bool) Set to true, if IP forwarding is enabled on the NIC. 
-  + `ipv6_address`:(bool) Set to true, if IPv6 address should be allocated for the NIC. 
   + `mac_address`:(string) Virtual machine network mac address. 
   + `name`:(string) Name of the network interface. This may be different from guest operating system assigned. 
-  + `network_id`:(string) Identity of the network to which this network interface belongs. 
-  + `nic_id`:(string) Identity of the network interface. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `order`:(int) Order of the NIC attachment to the VM. 
-  + `private_ip_allocation_mode`:(string) Allocation mode for NIC addresses e.g. DHCP or static.* `DHCP` - Dynamic IP address allocation using DHCP protocol.* `STATIC_IP` - Assign fixed / static IPs to resources for use.* `IPAM_CALLOUT` - Use callout scripts to query cloud IP allocation tools to assign network parameters.* `PREALLOCATE_IP` - Allows the cloud infrastructure IP allocation to be dynamically provided before the server boots up. 
-  + `public_ip_allocate`:(bool) Set to true, if public IP should be allocated for the NIC. 
-  + `security_groups`:
-                (Array of schema.TypeString) -
-  + `static_ip_address`:(Array)
-This complex property has following sub-properties:
-    + `gateway_ip`:(string) IP address of the device on network which forwards local traffic to other networks. 
-    + `ip_address`:(string) An IP address is a 32-bit number. It uniquely identifies a host in given network. 
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-    + `subnet_mask`:(string) A 32 bit number which helps to identify the host and rest of the network. 
-  + `subnet_id`:(string) Subnet identifier for the NIC. 
 * `inventory`:(HashMap) -(ReadOnly) A reference to a virtualizationBaseVirtualMachine resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

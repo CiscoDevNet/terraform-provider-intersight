@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18534
+API version: 1.0.11-18775
 Contact: intersight@cisco.com
 */
 
@@ -47,7 +47,8 @@ type IamApiKey struct {
 	// Holds the private key for the API key.
 	PrivateKey *string `json:"PrivateKey,omitempty"`
 	// The purpose of the API Key.
-	Purpose *string `json:"Purpose,omitempty"`
+	Purpose *string                           `json:"Purpose,omitempty"`
+	Scope   NullableIamSwitchScopePermissions `json:"Scope,omitempty"`
 	// The signing algorithm used by the client to authenticate API requests to Intersight. The signing algorithm must be compatible with the key generation specification. * `RSASSA-PKCS1-v1_5` - RSASSA-PKCS1-v1_5 is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).RSASSA-PKCS1-v1_5 is included only for compatibility with existing applications. * `RSASSA-PSS` - RSASSA-PSS is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).It combines the RSASP1 and RSAVP1 primitives with the EMSA-PSS encoding method.In the interest of increased robustness, RSASSA-PSS is required in new applications. * `Ed25519` - The Ed25519 signature algorithm, as specified in [RFC 8032](https://tools.ietf.org/html/rfc8032).Ed25519 is a public-key signature system with several attractive features, includingfast single-signature verification, very fast signing, fast key generation and high security level. * `Ecdsa` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is encoded as a ASN.1 DER SEQUENCE with two INTEGERs (r and s), as defined in RFC3279.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side. * `EcdsaP1363Format` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is the raw concatenation of r and s, as defined in the ISO/IEC 7816-8 IEEE P.1363 standard.In that format, r and s are represented as unsigned, big endian numbers.Extra padding bytes (of value 0x00) is applied so that both r and s encodings have the same size.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.
 	SigningAlgorithm *string `json:"SigningAlgorithm,omitempty"`
 	// The timestamp at which an expiry date was first set on this API key. For expiring API keys, this field is same as the create time of the API key. For never-expiring API keys, this field is set initially to zero time value. If a never-expiry API key is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.
@@ -487,6 +488,49 @@ func (o *IamApiKey) SetPurpose(v string) {
 	o.Purpose = &v
 }
 
+// GetScope returns the Scope field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IamApiKey) GetScope() IamSwitchScopePermissions {
+	if o == nil || IsNil(o.Scope.Get()) {
+		var ret IamSwitchScopePermissions
+		return ret
+	}
+	return *o.Scope.Get()
+}
+
+// GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IamApiKey) GetScopeOk() (*IamSwitchScopePermissions, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Scope.Get(), o.Scope.IsSet()
+}
+
+// HasScope returns a boolean if a field has been set.
+func (o *IamApiKey) HasScope() bool {
+	if o != nil && o.Scope.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetScope gets a reference to the given NullableIamSwitchScopePermissions and assigns it to the Scope field.
+func (o *IamApiKey) SetScope(v IamSwitchScopePermissions) {
+	o.Scope.Set(&v)
+}
+
+// SetScopeNil sets the value for Scope to be an explicit nil
+func (o *IamApiKey) SetScopeNil() {
+	o.Scope.Set(nil)
+}
+
+// UnsetScope ensures that no value is present for Scope, not even an explicit nil
+func (o *IamApiKey) UnsetScope() {
+	o.Scope.Unset()
+}
+
 // GetSigningAlgorithm returns the SigningAlgorithm field value if set, zero value otherwise.
 func (o *IamApiKey) GetSigningAlgorithm() string {
 	if o == nil || IsNil(o.SigningAlgorithm) {
@@ -693,6 +737,9 @@ func (o IamApiKey) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Purpose) {
 		toSerialize["Purpose"] = o.Purpose
 	}
+	if o.Scope.IsSet() {
+		toSerialize["Scope"] = o.Scope.Get()
+	}
 	if !IsNil(o.SigningAlgorithm) {
 		toSerialize["SigningAlgorithm"] = o.SigningAlgorithm
 	}
@@ -778,7 +825,8 @@ func (o *IamApiKey) UnmarshalJSON(data []byte) (err error) {
 		// Holds the private key for the API key.
 		PrivateKey *string `json:"PrivateKey,omitempty"`
 		// The purpose of the API Key.
-		Purpose *string `json:"Purpose,omitempty"`
+		Purpose *string                           `json:"Purpose,omitempty"`
+		Scope   NullableIamSwitchScopePermissions `json:"Scope,omitempty"`
 		// The signing algorithm used by the client to authenticate API requests to Intersight. The signing algorithm must be compatible with the key generation specification. * `RSASSA-PKCS1-v1_5` - RSASSA-PKCS1-v1_5 is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).RSASSA-PKCS1-v1_5 is included only for compatibility with existing applications. * `RSASSA-PSS` - RSASSA-PSS is a RSA signature scheme specified in [RFC 8017](https://tools.ietf.org/html/rfc8017).It combines the RSASP1 and RSAVP1 primitives with the EMSA-PSS encoding method.In the interest of increased robustness, RSASSA-PSS is required in new applications. * `Ed25519` - The Ed25519 signature algorithm, as specified in [RFC 8032](https://tools.ietf.org/html/rfc8032).Ed25519 is a public-key signature system with several attractive features, includingfast single-signature verification, very fast signing, fast key generation and high security level. * `Ecdsa` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is encoded as a ASN.1 DER SEQUENCE with two INTEGERs (r and s), as defined in RFC3279.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side. * `EcdsaP1363Format` - The Elliptic Curve Digital Signature Standard (ECDSA), as defined by NIST in FIPS 186-4 and ANSI X9.62.The signature is the raw concatenation of r and s, as defined in the ISO/IEC 7816-8 IEEE P.1363 standard.In that format, r and s are represented as unsigned, big endian numbers.Extra padding bytes (of value 0x00) is applied so that both r and s encodings have the same size.When using ECDSA signatures, configure the client to use the same signature encoding as specified on the server side.
 		SigningAlgorithm *string `json:"SigningAlgorithm,omitempty"`
 		// The timestamp at which an expiry date was first set on this API key. For expiring API keys, this field is same as the create time of the API key. For never-expiring API keys, this field is set initially to zero time value. If a never-expiry API key is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field.
@@ -804,6 +852,7 @@ func (o *IamApiKey) UnmarshalJSON(data []byte) (err error) {
 		varIamApiKey.OperStatus = varIamApiKeyWithoutEmbeddedStruct.OperStatus
 		varIamApiKey.PrivateKey = varIamApiKeyWithoutEmbeddedStruct.PrivateKey
 		varIamApiKey.Purpose = varIamApiKeyWithoutEmbeddedStruct.Purpose
+		varIamApiKey.Scope = varIamApiKeyWithoutEmbeddedStruct.Scope
 		varIamApiKey.SigningAlgorithm = varIamApiKeyWithoutEmbeddedStruct.SigningAlgorithm
 		varIamApiKey.StartTime = varIamApiKeyWithoutEmbeddedStruct.StartTime
 		varIamApiKey.Permission = varIamApiKeyWithoutEmbeddedStruct.Permission
@@ -837,6 +886,7 @@ func (o *IamApiKey) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "OperStatus")
 		delete(additionalProperties, "PrivateKey")
 		delete(additionalProperties, "Purpose")
+		delete(additionalProperties, "Scope")
 		delete(additionalProperties, "SigningAlgorithm")
 		delete(additionalProperties, "StartTime")
 		delete(additionalProperties, "Permission")

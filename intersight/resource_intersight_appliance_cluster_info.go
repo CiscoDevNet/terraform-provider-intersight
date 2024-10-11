@@ -22,7 +22,7 @@ func resourceApplianceClusterInfo() *schema.Resource {
 		UpdateContext: resourceApplianceClusterInfoUpdate,
 		DeleteContext: resourceApplianceClusterInfoDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -167,6 +167,11 @@ func resourceApplianceClusterInfo() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"installer_version": {
+				Description: "Installer version used to install on peer node.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -238,6 +243,41 @@ func resourceApplianceClusterInfo() *schema.Resource {
 						},
 					},
 				},
+			},
+			"partition_database": {
+				Description: "The partition size for /opt/database of this node.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"partition_file_cisco": {
+				Description: "The partition size for /Cisco of this node.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"partition_opt_data": {
+				Description: "The partition size for /opt/cisco/data of this node.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"partition_opt_kafka": {
+				Description: "The partition size for /opt/kafka of this node.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"partition_opt_mongo": {
+				Description: "The partition size for /opt/mongodb of this node.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"partition_var_lib_docker": {
+				Description: "The partition size for /var/lib/docker of this node.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"partition_var_log": {
+				Description: "The partition size for /var of this node.",
+				Type:        schema.TypeInt,
+				Optional:    true,
 			},
 			"peerkey": {
 				Description: "The public key of peer host.",
@@ -539,12 +579,52 @@ func resourceApplianceClusterInfoCreate(c context.Context, d *schema.ResourceDat
 		o.SetHostname(x)
 	}
 
+	if v, ok := d.GetOk("installer_version"); ok {
+		x := (v.(string))
+		o.SetInstallerVersion(x)
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
 	o.SetObjectType("appliance.ClusterInfo")
+
+	if v, ok := d.GetOkExists("partition_database"); ok {
+		x := int64(v.(int))
+		o.SetPartitionDatabase(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_file_cisco"); ok {
+		x := int64(v.(int))
+		o.SetPartitionFileCisco(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_opt_data"); ok {
+		x := int64(v.(int))
+		o.SetPartitionOptData(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_opt_kafka"); ok {
+		x := int64(v.(int))
+		o.SetPartitionOptKafka(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_opt_mongo"); ok {
+		x := int64(v.(int))
+		o.SetPartitionOptMongo(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_var_lib_docker"); ok {
+		x := int64(v.(int))
+		o.SetPartitionVarLibDocker(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_var_log"); ok {
+		x := int64(v.(int))
+		o.SetPartitionVarLog(x)
+	}
 
 	if v, ok := d.GetOk("peerkey"); ok {
 		x := (v.(string))
@@ -691,6 +771,10 @@ func resourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property Hostname in ApplianceClusterInfo object: %s", err.Error())
 	}
 
+	if err := d.Set("installer_version", (s.GetInstallerVersion())); err != nil {
+		return diag.Errorf("error occurred while setting property InstallerVersion in ApplianceClusterInfo object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in ApplianceClusterInfo object: %s", err.Error())
 	}
@@ -709,6 +793,34 @@ func resourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("parent", flattenMapMoBaseMoRelationship(s.GetParent(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Parent in ApplianceClusterInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("partition_database", (s.GetPartitionDatabase())); err != nil {
+		return diag.Errorf("error occurred while setting property PartitionDatabase in ApplianceClusterInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("partition_file_cisco", (s.GetPartitionFileCisco())); err != nil {
+		return diag.Errorf("error occurred while setting property PartitionFileCisco in ApplianceClusterInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("partition_opt_data", (s.GetPartitionOptData())); err != nil {
+		return diag.Errorf("error occurred while setting property PartitionOptData in ApplianceClusterInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("partition_opt_kafka", (s.GetPartitionOptKafka())); err != nil {
+		return diag.Errorf("error occurred while setting property PartitionOptKafka in ApplianceClusterInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("partition_opt_mongo", (s.GetPartitionOptMongo())); err != nil {
+		return diag.Errorf("error occurred while setting property PartitionOptMongo in ApplianceClusterInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("partition_var_lib_docker", (s.GetPartitionVarLibDocker())); err != nil {
+		return diag.Errorf("error occurred while setting property PartitionVarLibDocker in ApplianceClusterInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("partition_var_log", (s.GetPartitionVarLog())); err != nil {
+		return diag.Errorf("error occurred while setting property PartitionVarLog in ApplianceClusterInfo object: %s", err.Error())
 	}
 
 	if err := d.Set("peerkey", (s.GetPeerkey())); err != nil {
@@ -794,6 +906,12 @@ func resourceApplianceClusterInfoUpdate(c context.Context, d *schema.ResourceDat
 		o.SetHostname(x)
 	}
 
+	if d.HasChange("installer_version") {
+		v := d.Get("installer_version")
+		x := (v.(string))
+		o.SetInstallerVersion(x)
+	}
+
 	if d.HasChange("moid") {
 		v := d.Get("moid")
 		x := (v.(string))
@@ -801,6 +919,48 @@ func resourceApplianceClusterInfoUpdate(c context.Context, d *schema.ResourceDat
 	}
 
 	o.SetObjectType("appliance.ClusterInfo")
+
+	if d.HasChange("partition_database") {
+		v := d.Get("partition_database")
+		x := int64(v.(int))
+		o.SetPartitionDatabase(x)
+	}
+
+	if d.HasChange("partition_file_cisco") {
+		v := d.Get("partition_file_cisco")
+		x := int64(v.(int))
+		o.SetPartitionFileCisco(x)
+	}
+
+	if d.HasChange("partition_opt_data") {
+		v := d.Get("partition_opt_data")
+		x := int64(v.(int))
+		o.SetPartitionOptData(x)
+	}
+
+	if d.HasChange("partition_opt_kafka") {
+		v := d.Get("partition_opt_kafka")
+		x := int64(v.(int))
+		o.SetPartitionOptKafka(x)
+	}
+
+	if d.HasChange("partition_opt_mongo") {
+		v := d.Get("partition_opt_mongo")
+		x := int64(v.(int))
+		o.SetPartitionOptMongo(x)
+	}
+
+	if d.HasChange("partition_var_lib_docker") {
+		v := d.Get("partition_var_lib_docker")
+		x := int64(v.(int))
+		o.SetPartitionVarLibDocker(x)
+	}
+
+	if d.HasChange("partition_var_log") {
+		v := d.Get("partition_var_log")
+		x := int64(v.(int))
+		o.SetPartitionVarLog(x)
+	}
 
 	if d.HasChange("peerkey") {
 		v := d.Get("peerkey")

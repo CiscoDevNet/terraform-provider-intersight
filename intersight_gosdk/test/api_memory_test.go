@@ -35,6 +35,18 @@ func Test_intersight_MemoryApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test MemoryApiService CreateMemoryPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.MemoryApi.CreateMemoryPolicy(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test MemoryApiService DeleteMemoryPersistentMemoryPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -42,6 +54,19 @@ func Test_intersight_MemoryApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.MemoryApi.DeleteMemoryPersistentMemoryPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MemoryApiService DeleteMemoryPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.MemoryApi.DeleteMemoryPolicy(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -256,6 +281,58 @@ func Test_intersight_MemoryApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test MemoryApiService GetMemoryPolicyByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MemoryApi.GetMemoryPolicyByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MemoryApiService GetMemoryPolicyInventoryByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MemoryApi.GetMemoryPolicyInventoryByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MemoryApiService GetMemoryPolicyInventoryList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.MemoryApi.GetMemoryPolicyInventoryList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MemoryApiService GetMemoryPolicyList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.MemoryApi.GetMemoryPolicyList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test MemoryApiService GetMemoryUnitByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -394,6 +471,20 @@ func Test_intersight_MemoryApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test MemoryApiService PatchMemoryPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MemoryApi.PatchMemoryPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test MemoryApiService PatchMemoryUnit", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -513,6 +604,20 @@ func Test_intersight_MemoryApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.MemoryApi.UpdateMemoryPersistentMemoryUnit(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MemoryApiService UpdateMemoryPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.MemoryApi.UpdateMemoryPolicy(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

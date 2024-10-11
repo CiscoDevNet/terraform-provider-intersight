@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**SwitchId** | Pointer to **string** | Value indicating the switch side on which the switch profile or template has to be deployed. * &#x60;None&#x60; - Switch side not defined for the policy configurations in the switch profile or template. * &#x60;A&#x60; - Policy configurations in the switch profile or template to be deployed on fabric interconnect A. * &#x60;B&#x60; - Policy configurations in the switch profile or template to be deployed on fabric interconnect B. | [optional] [default to "None"]
 **ConfigResult** | Pointer to [**NullableFabricConfigResultRelationship**](FabricConfigResultRelationship.md) |  | [optional] 
 
 ## Methods
@@ -66,6 +67,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetSwitchId
+
+`func (o *FabricBaseSwitchProfile) GetSwitchId() string`
+
+GetSwitchId returns the SwitchId field if non-nil, zero value otherwise.
+
+### GetSwitchIdOk
+
+`func (o *FabricBaseSwitchProfile) GetSwitchIdOk() (*string, bool)`
+
+GetSwitchIdOk returns a tuple with the SwitchId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSwitchId
+
+`func (o *FabricBaseSwitchProfile) SetSwitchId(v string)`
+
+SetSwitchId sets SwitchId field to given value.
+
+### HasSwitchId
+
+`func (o *FabricBaseSwitchProfile) HasSwitchId() bool`
+
+HasSwitchId returns a boolean if a field has been set.
 
 ### GetConfigResult
 

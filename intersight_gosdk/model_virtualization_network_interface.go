@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18534
+API version: 1.0.11-18775
 Contact: intersight@cisco.com
 */
 
@@ -36,28 +36,10 @@ type VirtualizationNetworkInterface struct {
 	ConnectAtPowerOn *bool `json:"ConnectAtPowerOn,omitempty"`
 	// Enable the direct path I/O.
 	DirectPathIo *bool `json:"DirectPathIo,omitempty"`
-	// Set to true, if IP forwarding is enabled on the NIC.
-	IpForwardingEnabled *bool `json:"IpForwardingEnabled,omitempty"`
-	// Set to true, if IPv6 address should be allocated for the NIC.
-	Ipv6Address *bool `json:"Ipv6Address,omitempty"`
 	// Virtual machine network mac address.
 	MacAddress *string `json:"MacAddress,omitempty" validate:"regexp=^$|^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"`
 	// Name of the network interface. This may be different from guest operating system assigned.
-	Name *string `json:"Name,omitempty"`
-	// Identity of the network to which this network interface belongs.
-	NetworkId *string `json:"NetworkId,omitempty"`
-	// Identity of the network interface.
-	NicId *string `json:"NicId,omitempty"`
-	// Order of the NIC attachment to the VM.
-	Order *int64 `json:"Order,omitempty"`
-	// Allocation mode for NIC addresses e.g. DHCP or static. * `DHCP` - Dynamic IP address allocation using DHCP protocol. * `STATIC_IP` - Assign fixed / static IPs to resources for use. * `IPAM_CALLOUT` - Use callout scripts to query cloud IP allocation tools to assign network parameters. * `PREALLOCATE_IP` - Allows the cloud infrastructure IP allocation to be dynamically provided before the server boots up.
-	PrivateIpAllocationMode *string `json:"PrivateIpAllocationMode,omitempty"`
-	// Set to true, if public IP should be allocated for the NIC.
-	PublicIpAllocate *bool                         `json:"PublicIpAllocate,omitempty"`
-	SecurityGroups   []string                      `json:"SecurityGroups,omitempty"`
-	StaticIpAddress  []VirtualizationIpAddressInfo `json:"StaticIpAddress,omitempty"`
-	// Subnet identifier for the NIC.
-	SubnetId             *string `json:"SubnetId,omitempty"`
+	Name                 *string `json:"Name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -73,8 +55,6 @@ func NewVirtualizationNetworkInterface(classId string, objectType string) *Virtu
 	this.ObjectType = objectType
 	var adaptorType string = "Unknown"
 	this.AdaptorType = &adaptorType
-	var privateIpAllocationMode string = "DHCP"
-	this.PrivateIpAllocationMode = &privateIpAllocationMode
 	return &this
 }
 
@@ -89,8 +69,6 @@ func NewVirtualizationNetworkInterfaceWithDefaults() *VirtualizationNetworkInter
 	this.ObjectType = objectType
 	var adaptorType string = "Unknown"
 	this.AdaptorType = &adaptorType
-	var privateIpAllocationMode string = "DHCP"
-	this.PrivateIpAllocationMode = &privateIpAllocationMode
 	return &this
 }
 
@@ -280,70 +258,6 @@ func (o *VirtualizationNetworkInterface) SetDirectPathIo(v bool) {
 	o.DirectPathIo = &v
 }
 
-// GetIpForwardingEnabled returns the IpForwardingEnabled field value if set, zero value otherwise.
-func (o *VirtualizationNetworkInterface) GetIpForwardingEnabled() bool {
-	if o == nil || IsNil(o.IpForwardingEnabled) {
-		var ret bool
-		return ret
-	}
-	return *o.IpForwardingEnabled
-}
-
-// GetIpForwardingEnabledOk returns a tuple with the IpForwardingEnabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationNetworkInterface) GetIpForwardingEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.IpForwardingEnabled) {
-		return nil, false
-	}
-	return o.IpForwardingEnabled, true
-}
-
-// HasIpForwardingEnabled returns a boolean if a field has been set.
-func (o *VirtualizationNetworkInterface) HasIpForwardingEnabled() bool {
-	if o != nil && !IsNil(o.IpForwardingEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetIpForwardingEnabled gets a reference to the given bool and assigns it to the IpForwardingEnabled field.
-func (o *VirtualizationNetworkInterface) SetIpForwardingEnabled(v bool) {
-	o.IpForwardingEnabled = &v
-}
-
-// GetIpv6Address returns the Ipv6Address field value if set, zero value otherwise.
-func (o *VirtualizationNetworkInterface) GetIpv6Address() bool {
-	if o == nil || IsNil(o.Ipv6Address) {
-		var ret bool
-		return ret
-	}
-	return *o.Ipv6Address
-}
-
-// GetIpv6AddressOk returns a tuple with the Ipv6Address field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationNetworkInterface) GetIpv6AddressOk() (*bool, bool) {
-	if o == nil || IsNil(o.Ipv6Address) {
-		return nil, false
-	}
-	return o.Ipv6Address, true
-}
-
-// HasIpv6Address returns a boolean if a field has been set.
-func (o *VirtualizationNetworkInterface) HasIpv6Address() bool {
-	if o != nil && !IsNil(o.Ipv6Address) {
-		return true
-	}
-
-	return false
-}
-
-// SetIpv6Address gets a reference to the given bool and assigns it to the Ipv6Address field.
-func (o *VirtualizationNetworkInterface) SetIpv6Address(v bool) {
-	o.Ipv6Address = &v
-}
-
 // GetMacAddress returns the MacAddress field value if set, zero value otherwise.
 func (o *VirtualizationNetworkInterface) GetMacAddress() string {
 	if o == nil || IsNil(o.MacAddress) {
@@ -408,264 +322,6 @@ func (o *VirtualizationNetworkInterface) SetName(v string) {
 	o.Name = &v
 }
 
-// GetNetworkId returns the NetworkId field value if set, zero value otherwise.
-func (o *VirtualizationNetworkInterface) GetNetworkId() string {
-	if o == nil || IsNil(o.NetworkId) {
-		var ret string
-		return ret
-	}
-	return *o.NetworkId
-}
-
-// GetNetworkIdOk returns a tuple with the NetworkId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationNetworkInterface) GetNetworkIdOk() (*string, bool) {
-	if o == nil || IsNil(o.NetworkId) {
-		return nil, false
-	}
-	return o.NetworkId, true
-}
-
-// HasNetworkId returns a boolean if a field has been set.
-func (o *VirtualizationNetworkInterface) HasNetworkId() bool {
-	if o != nil && !IsNil(o.NetworkId) {
-		return true
-	}
-
-	return false
-}
-
-// SetNetworkId gets a reference to the given string and assigns it to the NetworkId field.
-func (o *VirtualizationNetworkInterface) SetNetworkId(v string) {
-	o.NetworkId = &v
-}
-
-// GetNicId returns the NicId field value if set, zero value otherwise.
-func (o *VirtualizationNetworkInterface) GetNicId() string {
-	if o == nil || IsNil(o.NicId) {
-		var ret string
-		return ret
-	}
-	return *o.NicId
-}
-
-// GetNicIdOk returns a tuple with the NicId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationNetworkInterface) GetNicIdOk() (*string, bool) {
-	if o == nil || IsNil(o.NicId) {
-		return nil, false
-	}
-	return o.NicId, true
-}
-
-// HasNicId returns a boolean if a field has been set.
-func (o *VirtualizationNetworkInterface) HasNicId() bool {
-	if o != nil && !IsNil(o.NicId) {
-		return true
-	}
-
-	return false
-}
-
-// SetNicId gets a reference to the given string and assigns it to the NicId field.
-func (o *VirtualizationNetworkInterface) SetNicId(v string) {
-	o.NicId = &v
-}
-
-// GetOrder returns the Order field value if set, zero value otherwise.
-func (o *VirtualizationNetworkInterface) GetOrder() int64 {
-	if o == nil || IsNil(o.Order) {
-		var ret int64
-		return ret
-	}
-	return *o.Order
-}
-
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationNetworkInterface) GetOrderOk() (*int64, bool) {
-	if o == nil || IsNil(o.Order) {
-		return nil, false
-	}
-	return o.Order, true
-}
-
-// HasOrder returns a boolean if a field has been set.
-func (o *VirtualizationNetworkInterface) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrder gets a reference to the given int64 and assigns it to the Order field.
-func (o *VirtualizationNetworkInterface) SetOrder(v int64) {
-	o.Order = &v
-}
-
-// GetPrivateIpAllocationMode returns the PrivateIpAllocationMode field value if set, zero value otherwise.
-func (o *VirtualizationNetworkInterface) GetPrivateIpAllocationMode() string {
-	if o == nil || IsNil(o.PrivateIpAllocationMode) {
-		var ret string
-		return ret
-	}
-	return *o.PrivateIpAllocationMode
-}
-
-// GetPrivateIpAllocationModeOk returns a tuple with the PrivateIpAllocationMode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationNetworkInterface) GetPrivateIpAllocationModeOk() (*string, bool) {
-	if o == nil || IsNil(o.PrivateIpAllocationMode) {
-		return nil, false
-	}
-	return o.PrivateIpAllocationMode, true
-}
-
-// HasPrivateIpAllocationMode returns a boolean if a field has been set.
-func (o *VirtualizationNetworkInterface) HasPrivateIpAllocationMode() bool {
-	if o != nil && !IsNil(o.PrivateIpAllocationMode) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrivateIpAllocationMode gets a reference to the given string and assigns it to the PrivateIpAllocationMode field.
-func (o *VirtualizationNetworkInterface) SetPrivateIpAllocationMode(v string) {
-	o.PrivateIpAllocationMode = &v
-}
-
-// GetPublicIpAllocate returns the PublicIpAllocate field value if set, zero value otherwise.
-func (o *VirtualizationNetworkInterface) GetPublicIpAllocate() bool {
-	if o == nil || IsNil(o.PublicIpAllocate) {
-		var ret bool
-		return ret
-	}
-	return *o.PublicIpAllocate
-}
-
-// GetPublicIpAllocateOk returns a tuple with the PublicIpAllocate field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationNetworkInterface) GetPublicIpAllocateOk() (*bool, bool) {
-	if o == nil || IsNil(o.PublicIpAllocate) {
-		return nil, false
-	}
-	return o.PublicIpAllocate, true
-}
-
-// HasPublicIpAllocate returns a boolean if a field has been set.
-func (o *VirtualizationNetworkInterface) HasPublicIpAllocate() bool {
-	if o != nil && !IsNil(o.PublicIpAllocate) {
-		return true
-	}
-
-	return false
-}
-
-// SetPublicIpAllocate gets a reference to the given bool and assigns it to the PublicIpAllocate field.
-func (o *VirtualizationNetworkInterface) SetPublicIpAllocate(v bool) {
-	o.PublicIpAllocate = &v
-}
-
-// GetSecurityGroups returns the SecurityGroups field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *VirtualizationNetworkInterface) GetSecurityGroups() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-	return o.SecurityGroups
-}
-
-// GetSecurityGroupsOk returns a tuple with the SecurityGroups field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VirtualizationNetworkInterface) GetSecurityGroupsOk() ([]string, bool) {
-	if o == nil || IsNil(o.SecurityGroups) {
-		return nil, false
-	}
-	return o.SecurityGroups, true
-}
-
-// HasSecurityGroups returns a boolean if a field has been set.
-func (o *VirtualizationNetworkInterface) HasSecurityGroups() bool {
-	if o != nil && !IsNil(o.SecurityGroups) {
-		return true
-	}
-
-	return false
-}
-
-// SetSecurityGroups gets a reference to the given []string and assigns it to the SecurityGroups field.
-func (o *VirtualizationNetworkInterface) SetSecurityGroups(v []string) {
-	o.SecurityGroups = v
-}
-
-// GetStaticIpAddress returns the StaticIpAddress field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *VirtualizationNetworkInterface) GetStaticIpAddress() []VirtualizationIpAddressInfo {
-	if o == nil {
-		var ret []VirtualizationIpAddressInfo
-		return ret
-	}
-	return o.StaticIpAddress
-}
-
-// GetStaticIpAddressOk returns a tuple with the StaticIpAddress field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VirtualizationNetworkInterface) GetStaticIpAddressOk() ([]VirtualizationIpAddressInfo, bool) {
-	if o == nil || IsNil(o.StaticIpAddress) {
-		return nil, false
-	}
-	return o.StaticIpAddress, true
-}
-
-// HasStaticIpAddress returns a boolean if a field has been set.
-func (o *VirtualizationNetworkInterface) HasStaticIpAddress() bool {
-	if o != nil && !IsNil(o.StaticIpAddress) {
-		return true
-	}
-
-	return false
-}
-
-// SetStaticIpAddress gets a reference to the given []VirtualizationIpAddressInfo and assigns it to the StaticIpAddress field.
-func (o *VirtualizationNetworkInterface) SetStaticIpAddress(v []VirtualizationIpAddressInfo) {
-	o.StaticIpAddress = v
-}
-
-// GetSubnetId returns the SubnetId field value if set, zero value otherwise.
-func (o *VirtualizationNetworkInterface) GetSubnetId() string {
-	if o == nil || IsNil(o.SubnetId) {
-		var ret string
-		return ret
-	}
-	return *o.SubnetId
-}
-
-// GetSubnetIdOk returns a tuple with the SubnetId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationNetworkInterface) GetSubnetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.SubnetId) {
-		return nil, false
-	}
-	return o.SubnetId, true
-}
-
-// HasSubnetId returns a boolean if a field has been set.
-func (o *VirtualizationNetworkInterface) HasSubnetId() bool {
-	if o != nil && !IsNil(o.SubnetId) {
-		return true
-	}
-
-	return false
-}
-
-// SetSubnetId gets a reference to the given string and assigns it to the SubnetId field.
-func (o *VirtualizationNetworkInterface) SetSubnetId(v string) {
-	o.SubnetId = &v
-}
-
 func (o VirtualizationNetworkInterface) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -704,41 +360,11 @@ func (o VirtualizationNetworkInterface) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.DirectPathIo) {
 		toSerialize["DirectPathIo"] = o.DirectPathIo
 	}
-	if !IsNil(o.IpForwardingEnabled) {
-		toSerialize["IpForwardingEnabled"] = o.IpForwardingEnabled
-	}
-	if !IsNil(o.Ipv6Address) {
-		toSerialize["Ipv6Address"] = o.Ipv6Address
-	}
 	if !IsNil(o.MacAddress) {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
-	}
-	if !IsNil(o.NetworkId) {
-		toSerialize["NetworkId"] = o.NetworkId
-	}
-	if !IsNil(o.NicId) {
-		toSerialize["NicId"] = o.NicId
-	}
-	if !IsNil(o.Order) {
-		toSerialize["Order"] = o.Order
-	}
-	if !IsNil(o.PrivateIpAllocationMode) {
-		toSerialize["PrivateIpAllocationMode"] = o.PrivateIpAllocationMode
-	}
-	if !IsNil(o.PublicIpAllocate) {
-		toSerialize["PublicIpAllocate"] = o.PublicIpAllocate
-	}
-	if o.SecurityGroups != nil {
-		toSerialize["SecurityGroups"] = o.SecurityGroups
-	}
-	if o.StaticIpAddress != nil {
-		toSerialize["StaticIpAddress"] = o.StaticIpAddress
-	}
-	if !IsNil(o.SubnetId) {
-		toSerialize["SubnetId"] = o.SubnetId
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -803,28 +429,10 @@ func (o *VirtualizationNetworkInterface) UnmarshalJSON(data []byte) (err error) 
 		ConnectAtPowerOn *bool `json:"ConnectAtPowerOn,omitempty"`
 		// Enable the direct path I/O.
 		DirectPathIo *bool `json:"DirectPathIo,omitempty"`
-		// Set to true, if IP forwarding is enabled on the NIC.
-		IpForwardingEnabled *bool `json:"IpForwardingEnabled,omitempty"`
-		// Set to true, if IPv6 address should be allocated for the NIC.
-		Ipv6Address *bool `json:"Ipv6Address,omitempty"`
 		// Virtual machine network mac address.
 		MacAddress *string `json:"MacAddress,omitempty" validate:"regexp=^$|^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"`
 		// Name of the network interface. This may be different from guest operating system assigned.
 		Name *string `json:"Name,omitempty"`
-		// Identity of the network to which this network interface belongs.
-		NetworkId *string `json:"NetworkId,omitempty"`
-		// Identity of the network interface.
-		NicId *string `json:"NicId,omitempty"`
-		// Order of the NIC attachment to the VM.
-		Order *int64 `json:"Order,omitempty"`
-		// Allocation mode for NIC addresses e.g. DHCP or static. * `DHCP` - Dynamic IP address allocation using DHCP protocol. * `STATIC_IP` - Assign fixed / static IPs to resources for use. * `IPAM_CALLOUT` - Use callout scripts to query cloud IP allocation tools to assign network parameters. * `PREALLOCATE_IP` - Allows the cloud infrastructure IP allocation to be dynamically provided before the server boots up.
-		PrivateIpAllocationMode *string `json:"PrivateIpAllocationMode,omitempty"`
-		// Set to true, if public IP should be allocated for the NIC.
-		PublicIpAllocate *bool                         `json:"PublicIpAllocate,omitempty"`
-		SecurityGroups   []string                      `json:"SecurityGroups,omitempty"`
-		StaticIpAddress  []VirtualizationIpAddressInfo `json:"StaticIpAddress,omitempty"`
-		// Subnet identifier for the NIC.
-		SubnetId *string `json:"SubnetId,omitempty"`
 	}
 
 	varVirtualizationNetworkInterfaceWithoutEmbeddedStruct := VirtualizationNetworkInterfaceWithoutEmbeddedStruct{}
@@ -838,18 +446,8 @@ func (o *VirtualizationNetworkInterface) UnmarshalJSON(data []byte) (err error) 
 		varVirtualizationNetworkInterface.Bridge = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.Bridge
 		varVirtualizationNetworkInterface.ConnectAtPowerOn = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.ConnectAtPowerOn
 		varVirtualizationNetworkInterface.DirectPathIo = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.DirectPathIo
-		varVirtualizationNetworkInterface.IpForwardingEnabled = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.IpForwardingEnabled
-		varVirtualizationNetworkInterface.Ipv6Address = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.Ipv6Address
 		varVirtualizationNetworkInterface.MacAddress = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.MacAddress
 		varVirtualizationNetworkInterface.Name = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.Name
-		varVirtualizationNetworkInterface.NetworkId = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.NetworkId
-		varVirtualizationNetworkInterface.NicId = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.NicId
-		varVirtualizationNetworkInterface.Order = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.Order
-		varVirtualizationNetworkInterface.PrivateIpAllocationMode = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.PrivateIpAllocationMode
-		varVirtualizationNetworkInterface.PublicIpAllocate = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.PublicIpAllocate
-		varVirtualizationNetworkInterface.SecurityGroups = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.SecurityGroups
-		varVirtualizationNetworkInterface.StaticIpAddress = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.StaticIpAddress
-		varVirtualizationNetworkInterface.SubnetId = varVirtualizationNetworkInterfaceWithoutEmbeddedStruct.SubnetId
 		*o = VirtualizationNetworkInterface(varVirtualizationNetworkInterface)
 	} else {
 		return err
@@ -873,18 +471,8 @@ func (o *VirtualizationNetworkInterface) UnmarshalJSON(data []byte) (err error) 
 		delete(additionalProperties, "Bridge")
 		delete(additionalProperties, "ConnectAtPowerOn")
 		delete(additionalProperties, "DirectPathIo")
-		delete(additionalProperties, "IpForwardingEnabled")
-		delete(additionalProperties, "Ipv6Address")
 		delete(additionalProperties, "MacAddress")
 		delete(additionalProperties, "Name")
-		delete(additionalProperties, "NetworkId")
-		delete(additionalProperties, "NicId")
-		delete(additionalProperties, "Order")
-		delete(additionalProperties, "PrivateIpAllocationMode")
-		delete(additionalProperties, "PublicIpAllocate")
-		delete(additionalProperties, "SecurityGroups")
-		delete(additionalProperties, "StaticIpAddress")
-		delete(additionalProperties, "SubnetId")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

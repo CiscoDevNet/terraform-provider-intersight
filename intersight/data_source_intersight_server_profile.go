@@ -515,6 +515,11 @@ func getServerProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"deployed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"deployed_switches": {
 			Description: "The property which determines if the deployment should be skipped on any of the Fabric Interconnects. It is set based on the state of a fabric interconnect to Intersight before the deployment of the server proile begins.\n* `None` - Server profile configuration not deployed on either of the fabric interconnects.\n* `AB` - Server profile configuration deployed on both fabric interconnects.\n* `A` - Server profile configuration deployed on fabric interconnect A only.\n* `B` - Server profile configuration deployed on fabric interconnect B only.",
 			Type:        schema.TypeString,
@@ -771,6 +776,11 @@ func getServerProfileSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"removed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"reservation_references": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1814,6 +1824,17 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 		o.SetDeployStatus(x)
 	}
 
+	if v, ok := d.GetOk("deployed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDeployedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("deployed_switches"); ok {
 		x := (v.(string))
 		o.SetDeployedSwitches(x)
@@ -2116,6 +2137,17 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
 		}
 		o.SetPolicyBucket(x)
+	}
+
+	if v, ok := d.GetOk("removed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRemovedPolicies(x)
 	}
 
 	if v, ok := d.GetOk("reservation_references"); ok {
@@ -2710,6 +2742,7 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["deploy_status"] = (s.GetDeployStatus())
+				temp["deployed_policies"] = (s.GetDeployedPolicies())
 				temp["deployed_switches"] = (s.GetDeployedSwitches())
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
@@ -2733,6 +2766,7 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
+				temp["removed_policies"] = (s.GetRemovedPolicies())
 
 				temp["reservation_references"] = flattenListPoolReservationReference(s.GetReservationReferences(), d)
 

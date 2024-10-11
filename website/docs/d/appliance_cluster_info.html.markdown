@@ -23,8 +23,16 @@ The following arguments can be used to get data of already created objects in In
 * `gateway`:(string) Default gateway configured on the peer node. 
 * `hostip`:(string) Publicly accessible IP of the peer node. 
 * `hostname`:(string) Publicly accessible FQDN of the peer node. 
+* `installer_version`:(string) Installer version used to install on peer node. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `partition_database`:(int) The partition size for /opt/database of this node. 
+* `partition_file_cisco`:(int) The partition size for /Cisco of this node. 
+* `partition_opt_data`:(int) The partition size for /opt/cisco/data of this node. 
+* `partition_opt_kafka`:(int) The partition size for /opt/kafka of this node. 
+* `partition_opt_mongo`:(int) The partition size for /opt/mongodb of this node. 
+* `partition_var_lib_docker`:(int) The partition size for /var/lib/docker of this node. 
+* `partition_var_log`:(int) The partition size for /var of this node. 
 * `peerkey`:(string) The public key of peer host. 
 * `responsekey`:(string) Public key returned to the client. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 

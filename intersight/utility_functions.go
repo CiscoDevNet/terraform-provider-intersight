@@ -19,65 +19,6 @@ var (
 	endsOfWorkflow = map[string]bool{"RUNNING": false, "WAITING": false, "COMPLETED": true, "TIME_OUT": true, "FAILED": true}
 )
 
-// CustomizePolicyBucketDiff Customizes the diff for policy_bucket to handle ordering
-func CustomizePolicyBucketDiff(ctx context.Context, diff *schema.ResourceDiff, i interface{}) error {
-	if _, ok := diff.GetOk("policy_bucket"); ok {
-		old, _new := diff.GetChange("policy_bucket")
-		oldArray := old.([]interface{})
-		newArray := _new.([]interface{})
-
-		newModArray := ReorderPolicyBucket(oldArray, newArray)
-
-		err := diff.SetNew("policy_bucket", newModArray)
-		return err
-	}
-	return nil
-}
-
-func ReorderPolicyBucket(old, new []interface{}) []interface{} {
-	if len(old) == 0 {
-		return new
-	}
-
-	oldMap := make(map[string]interface{})
-	newMap := make(map[string]interface{})
-	var oldMoidArray []string
-
-	for _, item := range old {
-		m := item.(map[string]interface{})
-		moid := m["moid"].(string)
-		oldMap[moid] = m
-		oldMoidArray = append(oldMoidArray, moid)
-	}
-
-	for _, item := range new {
-		m := item.(map[string]interface{})
-		moid := m["moid"].(string)
-		newMap[moid] = m
-	}
-
-	var newModArray []interface{}
-
-	for _, moid := range oldMoidArray {
-		newPolicy, ok := newMap[moid]
-		if ok {
-			newModArray = append(newModArray, newPolicy)
-			delete(newMap, moid)
-		}
-	}
-
-	for _, item := range new {
-		m := item.(map[string]interface{})
-		moid := m["moid"].(string)
-		newPolicy, ok := newMap[moid]
-		if ok {
-			newModArray = append(newModArray, newPolicy)
-		}
-	}
-
-	return newModArray
-}
-
 // SuppressDiffAdditionProps Suppress Difference functions for additional properties
 // old is from tfstate file
 // new is from tf config file
@@ -244,7 +185,7 @@ func sortTags(tags []map[string]interface{}) {
 }
 
 // CustomizeTagDiff Customize tag diff to ignore cisco.meta tags
-func CustomizeTagDiff(ctx context.Context, diff *schema.ResourceDiff, i interface{}) error {
+func CustomizeTagDiff(tags interface{}, diff *schema.ResourceDiff) error {
 	if tags, ok := diff.GetOk("tags"); ok {
 		tagsArray := tags.([]interface{})
 		log.Println("tags", tagsArray) // user config
@@ -275,4 +216,80 @@ func CustomizeTagDiff(ctx context.Context, diff *schema.ResourceDiff, i interfac
 		return err
 	}
 	return nil
+}
+
+func ReorderPolicyBucket(old, new []interface{}) []interface{} {
+	if len(old) == 0 {
+		return new
+	}
+
+	oldMap := make(map[string]interface{})
+	newMap := make(map[string]interface{})
+	var oldMoidArray []string
+
+	for _, item := range old {
+		m := item.(map[string]interface{})
+		moid := m["moid"].(string)
+		oldMap[moid] = m
+		oldMoidArray = append(oldMoidArray, moid)
+	}
+
+	for _, item := range new {
+		m := item.(map[string]interface{})
+		moid := m["moid"].(string)
+		newMap[moid] = m
+	}
+
+	var newModArray []interface{}
+
+	// Arrange newArray according to oldArray
+	for _, moid := range oldMoidArray {
+		newPolicy, ok := newMap[moid]
+		if ok {
+			newModArray = append(newModArray, newPolicy)
+			delete(newMap, moid)
+		}
+	}
+
+	// Append left out data to newArray
+	for _, item := range new {
+		m := item.(map[string]interface{})
+		moid := m["moid"].(string)
+		newPolicy, ok := newMap[moid]
+		if ok {
+			newModArray = append(newModArray, newPolicy)
+		}
+	}
+
+	return newModArray
+}
+
+// CustomizePolicyBucketDiff Customizes the diff for policy_bucket to handle ordering
+func CustomizePolicyBucketDiff(policyBuckets interface{}, diff *schema.ResourceDiff) error {
+	policyBucketArray := policyBuckets.([]interface{})
+	log.Println("policy_bucket", policyBucketArray)
+	old, _new := diff.GetChange("policy_bucket")
+	oldArray := old.([]interface{})
+	newArray := _new.([]interface{})
+	log.Printf("old Array %#v", oldArray)
+	log.Printf("new Array %#v", newArray)
+
+	newModArray := ReorderPolicyBucket(oldArray, newArray)
+	log.Printf("new mod Array %#v", newModArray)
+
+	err := diff.SetNew("policy_bucket", newModArray)
+	return err
+}
+
+func CombinedCustomizeDiff(ctx context.Context, diff *schema.ResourceDiff, i interface{}) error {
+	// Handle tag diff logic
+	var err error
+	if tags, ok := diff.GetOk("tags"); ok {
+		err = CustomizeTagDiff(tags, diff)
+	}
+	// Handle policy bucket diff logic
+	if policy_bucket, ok := diff.GetOk("policy_bucket"); ok {
+		err = CustomizePolicyBucketDiff(policy_bucket, diff)
+	}
+	return err
 }

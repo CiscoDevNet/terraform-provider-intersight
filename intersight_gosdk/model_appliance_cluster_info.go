@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18534
+API version: 1.0.11-18775
 Contact: intersight@cisco.com
 */
 
@@ -36,6 +36,22 @@ type ApplianceClusterInfo struct {
 	Hostip *string `json:"Hostip,omitempty"`
 	// Publicly accessible FQDN of the peer node.
 	Hostname *string `json:"Hostname,omitempty"`
+	// Installer version used to install on peer node.
+	InstallerVersion *string `json:"InstallerVersion,omitempty"`
+	// The partition size for /opt/database of this node.
+	PartitionDatabase *int64 `json:"PartitionDatabase,omitempty"`
+	// The partition size for /Cisco of this node.
+	PartitionFileCisco *int64 `json:"PartitionFileCisco,omitempty"`
+	// The partition size for /opt/cisco/data of this node.
+	PartitionOptData *int64 `json:"PartitionOptData,omitempty"`
+	// The partition size for /opt/kafka of this node.
+	PartitionOptKafka *int64 `json:"PartitionOptKafka,omitempty"`
+	// The partition size for /opt/mongodb of this node.
+	PartitionOptMongo *int64 `json:"PartitionOptMongo,omitempty"`
+	// The partition size for /var/lib/docker of this node.
+	PartitionVarLibDocker *int64 `json:"PartitionVarLibDocker,omitempty"`
+	// The partition size for /var of this node.
+	PartitionVarLog *int64 `json:"PartitionVarLog,omitempty"`
 	// The public key of peer host.
 	Peerkey *string `json:"Peerkey,omitempty"`
 	// Public key returned to the client.
@@ -259,6 +275,262 @@ func (o *ApplianceClusterInfo) HasHostname() bool {
 // SetHostname gets a reference to the given string and assigns it to the Hostname field.
 func (o *ApplianceClusterInfo) SetHostname(v string) {
 	o.Hostname = &v
+}
+
+// GetInstallerVersion returns the InstallerVersion field value if set, zero value otherwise.
+func (o *ApplianceClusterInfo) GetInstallerVersion() string {
+	if o == nil || IsNil(o.InstallerVersion) {
+		var ret string
+		return ret
+	}
+	return *o.InstallerVersion
+}
+
+// GetInstallerVersionOk returns a tuple with the InstallerVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceClusterInfo) GetInstallerVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.InstallerVersion) {
+		return nil, false
+	}
+	return o.InstallerVersion, true
+}
+
+// HasInstallerVersion returns a boolean if a field has been set.
+func (o *ApplianceClusterInfo) HasInstallerVersion() bool {
+	if o != nil && !IsNil(o.InstallerVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstallerVersion gets a reference to the given string and assigns it to the InstallerVersion field.
+func (o *ApplianceClusterInfo) SetInstallerVersion(v string) {
+	o.InstallerVersion = &v
+}
+
+// GetPartitionDatabase returns the PartitionDatabase field value if set, zero value otherwise.
+func (o *ApplianceClusterInfo) GetPartitionDatabase() int64 {
+	if o == nil || IsNil(o.PartitionDatabase) {
+		var ret int64
+		return ret
+	}
+	return *o.PartitionDatabase
+}
+
+// GetPartitionDatabaseOk returns a tuple with the PartitionDatabase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceClusterInfo) GetPartitionDatabaseOk() (*int64, bool) {
+	if o == nil || IsNil(o.PartitionDatabase) {
+		return nil, false
+	}
+	return o.PartitionDatabase, true
+}
+
+// HasPartitionDatabase returns a boolean if a field has been set.
+func (o *ApplianceClusterInfo) HasPartitionDatabase() bool {
+	if o != nil && !IsNil(o.PartitionDatabase) {
+		return true
+	}
+
+	return false
+}
+
+// SetPartitionDatabase gets a reference to the given int64 and assigns it to the PartitionDatabase field.
+func (o *ApplianceClusterInfo) SetPartitionDatabase(v int64) {
+	o.PartitionDatabase = &v
+}
+
+// GetPartitionFileCisco returns the PartitionFileCisco field value if set, zero value otherwise.
+func (o *ApplianceClusterInfo) GetPartitionFileCisco() int64 {
+	if o == nil || IsNil(o.PartitionFileCisco) {
+		var ret int64
+		return ret
+	}
+	return *o.PartitionFileCisco
+}
+
+// GetPartitionFileCiscoOk returns a tuple with the PartitionFileCisco field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceClusterInfo) GetPartitionFileCiscoOk() (*int64, bool) {
+	if o == nil || IsNil(o.PartitionFileCisco) {
+		return nil, false
+	}
+	return o.PartitionFileCisco, true
+}
+
+// HasPartitionFileCisco returns a boolean if a field has been set.
+func (o *ApplianceClusterInfo) HasPartitionFileCisco() bool {
+	if o != nil && !IsNil(o.PartitionFileCisco) {
+		return true
+	}
+
+	return false
+}
+
+// SetPartitionFileCisco gets a reference to the given int64 and assigns it to the PartitionFileCisco field.
+func (o *ApplianceClusterInfo) SetPartitionFileCisco(v int64) {
+	o.PartitionFileCisco = &v
+}
+
+// GetPartitionOptData returns the PartitionOptData field value if set, zero value otherwise.
+func (o *ApplianceClusterInfo) GetPartitionOptData() int64 {
+	if o == nil || IsNil(o.PartitionOptData) {
+		var ret int64
+		return ret
+	}
+	return *o.PartitionOptData
+}
+
+// GetPartitionOptDataOk returns a tuple with the PartitionOptData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceClusterInfo) GetPartitionOptDataOk() (*int64, bool) {
+	if o == nil || IsNil(o.PartitionOptData) {
+		return nil, false
+	}
+	return o.PartitionOptData, true
+}
+
+// HasPartitionOptData returns a boolean if a field has been set.
+func (o *ApplianceClusterInfo) HasPartitionOptData() bool {
+	if o != nil && !IsNil(o.PartitionOptData) {
+		return true
+	}
+
+	return false
+}
+
+// SetPartitionOptData gets a reference to the given int64 and assigns it to the PartitionOptData field.
+func (o *ApplianceClusterInfo) SetPartitionOptData(v int64) {
+	o.PartitionOptData = &v
+}
+
+// GetPartitionOptKafka returns the PartitionOptKafka field value if set, zero value otherwise.
+func (o *ApplianceClusterInfo) GetPartitionOptKafka() int64 {
+	if o == nil || IsNil(o.PartitionOptKafka) {
+		var ret int64
+		return ret
+	}
+	return *o.PartitionOptKafka
+}
+
+// GetPartitionOptKafkaOk returns a tuple with the PartitionOptKafka field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceClusterInfo) GetPartitionOptKafkaOk() (*int64, bool) {
+	if o == nil || IsNil(o.PartitionOptKafka) {
+		return nil, false
+	}
+	return o.PartitionOptKafka, true
+}
+
+// HasPartitionOptKafka returns a boolean if a field has been set.
+func (o *ApplianceClusterInfo) HasPartitionOptKafka() bool {
+	if o != nil && !IsNil(o.PartitionOptKafka) {
+		return true
+	}
+
+	return false
+}
+
+// SetPartitionOptKafka gets a reference to the given int64 and assigns it to the PartitionOptKafka field.
+func (o *ApplianceClusterInfo) SetPartitionOptKafka(v int64) {
+	o.PartitionOptKafka = &v
+}
+
+// GetPartitionOptMongo returns the PartitionOptMongo field value if set, zero value otherwise.
+func (o *ApplianceClusterInfo) GetPartitionOptMongo() int64 {
+	if o == nil || IsNil(o.PartitionOptMongo) {
+		var ret int64
+		return ret
+	}
+	return *o.PartitionOptMongo
+}
+
+// GetPartitionOptMongoOk returns a tuple with the PartitionOptMongo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceClusterInfo) GetPartitionOptMongoOk() (*int64, bool) {
+	if o == nil || IsNil(o.PartitionOptMongo) {
+		return nil, false
+	}
+	return o.PartitionOptMongo, true
+}
+
+// HasPartitionOptMongo returns a boolean if a field has been set.
+func (o *ApplianceClusterInfo) HasPartitionOptMongo() bool {
+	if o != nil && !IsNil(o.PartitionOptMongo) {
+		return true
+	}
+
+	return false
+}
+
+// SetPartitionOptMongo gets a reference to the given int64 and assigns it to the PartitionOptMongo field.
+func (o *ApplianceClusterInfo) SetPartitionOptMongo(v int64) {
+	o.PartitionOptMongo = &v
+}
+
+// GetPartitionVarLibDocker returns the PartitionVarLibDocker field value if set, zero value otherwise.
+func (o *ApplianceClusterInfo) GetPartitionVarLibDocker() int64 {
+	if o == nil || IsNil(o.PartitionVarLibDocker) {
+		var ret int64
+		return ret
+	}
+	return *o.PartitionVarLibDocker
+}
+
+// GetPartitionVarLibDockerOk returns a tuple with the PartitionVarLibDocker field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceClusterInfo) GetPartitionVarLibDockerOk() (*int64, bool) {
+	if o == nil || IsNil(o.PartitionVarLibDocker) {
+		return nil, false
+	}
+	return o.PartitionVarLibDocker, true
+}
+
+// HasPartitionVarLibDocker returns a boolean if a field has been set.
+func (o *ApplianceClusterInfo) HasPartitionVarLibDocker() bool {
+	if o != nil && !IsNil(o.PartitionVarLibDocker) {
+		return true
+	}
+
+	return false
+}
+
+// SetPartitionVarLibDocker gets a reference to the given int64 and assigns it to the PartitionVarLibDocker field.
+func (o *ApplianceClusterInfo) SetPartitionVarLibDocker(v int64) {
+	o.PartitionVarLibDocker = &v
+}
+
+// GetPartitionVarLog returns the PartitionVarLog field value if set, zero value otherwise.
+func (o *ApplianceClusterInfo) GetPartitionVarLog() int64 {
+	if o == nil || IsNil(o.PartitionVarLog) {
+		var ret int64
+		return ret
+	}
+	return *o.PartitionVarLog
+}
+
+// GetPartitionVarLogOk returns a tuple with the PartitionVarLog field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceClusterInfo) GetPartitionVarLogOk() (*int64, bool) {
+	if o == nil || IsNil(o.PartitionVarLog) {
+		return nil, false
+	}
+	return o.PartitionVarLog, true
+}
+
+// HasPartitionVarLog returns a boolean if a field has been set.
+func (o *ApplianceClusterInfo) HasPartitionVarLog() bool {
+	if o != nil && !IsNil(o.PartitionVarLog) {
+		return true
+	}
+
+	return false
+}
+
+// SetPartitionVarLog gets a reference to the given int64 and assigns it to the PartitionVarLog field.
+func (o *ApplianceClusterInfo) SetPartitionVarLog(v int64) {
+	o.PartitionVarLog = &v
 }
 
 // GetPeerkey returns the Peerkey field value if set, zero value otherwise.
@@ -502,6 +774,30 @@ func (o ApplianceClusterInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Hostname) {
 		toSerialize["Hostname"] = o.Hostname
 	}
+	if !IsNil(o.InstallerVersion) {
+		toSerialize["InstallerVersion"] = o.InstallerVersion
+	}
+	if !IsNil(o.PartitionDatabase) {
+		toSerialize["PartitionDatabase"] = o.PartitionDatabase
+	}
+	if !IsNil(o.PartitionFileCisco) {
+		toSerialize["PartitionFileCisco"] = o.PartitionFileCisco
+	}
+	if !IsNil(o.PartitionOptData) {
+		toSerialize["PartitionOptData"] = o.PartitionOptData
+	}
+	if !IsNil(o.PartitionOptKafka) {
+		toSerialize["PartitionOptKafka"] = o.PartitionOptKafka
+	}
+	if !IsNil(o.PartitionOptMongo) {
+		toSerialize["PartitionOptMongo"] = o.PartitionOptMongo
+	}
+	if !IsNil(o.PartitionVarLibDocker) {
+		toSerialize["PartitionVarLibDocker"] = o.PartitionVarLibDocker
+	}
+	if !IsNil(o.PartitionVarLog) {
+		toSerialize["PartitionVarLog"] = o.PartitionVarLog
+	}
 	if !IsNil(o.Peerkey) {
 		toSerialize["Peerkey"] = o.Peerkey
 	}
@@ -583,6 +879,22 @@ func (o *ApplianceClusterInfo) UnmarshalJSON(data []byte) (err error) {
 		Hostip *string `json:"Hostip,omitempty"`
 		// Publicly accessible FQDN of the peer node.
 		Hostname *string `json:"Hostname,omitempty"`
+		// Installer version used to install on peer node.
+		InstallerVersion *string `json:"InstallerVersion,omitempty"`
+		// The partition size for /opt/database of this node.
+		PartitionDatabase *int64 `json:"PartitionDatabase,omitempty"`
+		// The partition size for /Cisco of this node.
+		PartitionFileCisco *int64 `json:"PartitionFileCisco,omitempty"`
+		// The partition size for /opt/cisco/data of this node.
+		PartitionOptData *int64 `json:"PartitionOptData,omitempty"`
+		// The partition size for /opt/kafka of this node.
+		PartitionOptKafka *int64 `json:"PartitionOptKafka,omitempty"`
+		// The partition size for /opt/mongodb of this node.
+		PartitionOptMongo *int64 `json:"PartitionOptMongo,omitempty"`
+		// The partition size for /var/lib/docker of this node.
+		PartitionVarLibDocker *int64 `json:"PartitionVarLibDocker,omitempty"`
+		// The partition size for /var of this node.
+		PartitionVarLog *int64 `json:"PartitionVarLog,omitempty"`
 		// The public key of peer host.
 		Peerkey *string `json:"Peerkey,omitempty"`
 		// Public key returned to the client.
@@ -607,6 +919,14 @@ func (o *ApplianceClusterInfo) UnmarshalJSON(data []byte) (err error) {
 		varApplianceClusterInfo.Gateway = varApplianceClusterInfoWithoutEmbeddedStruct.Gateway
 		varApplianceClusterInfo.Hostip = varApplianceClusterInfoWithoutEmbeddedStruct.Hostip
 		varApplianceClusterInfo.Hostname = varApplianceClusterInfoWithoutEmbeddedStruct.Hostname
+		varApplianceClusterInfo.InstallerVersion = varApplianceClusterInfoWithoutEmbeddedStruct.InstallerVersion
+		varApplianceClusterInfo.PartitionDatabase = varApplianceClusterInfoWithoutEmbeddedStruct.PartitionDatabase
+		varApplianceClusterInfo.PartitionFileCisco = varApplianceClusterInfoWithoutEmbeddedStruct.PartitionFileCisco
+		varApplianceClusterInfo.PartitionOptData = varApplianceClusterInfoWithoutEmbeddedStruct.PartitionOptData
+		varApplianceClusterInfo.PartitionOptKafka = varApplianceClusterInfoWithoutEmbeddedStruct.PartitionOptKafka
+		varApplianceClusterInfo.PartitionOptMongo = varApplianceClusterInfoWithoutEmbeddedStruct.PartitionOptMongo
+		varApplianceClusterInfo.PartitionVarLibDocker = varApplianceClusterInfoWithoutEmbeddedStruct.PartitionVarLibDocker
+		varApplianceClusterInfo.PartitionVarLog = varApplianceClusterInfoWithoutEmbeddedStruct.PartitionVarLog
 		varApplianceClusterInfo.Peerkey = varApplianceClusterInfoWithoutEmbeddedStruct.Peerkey
 		varApplianceClusterInfo.Responsekey = varApplianceClusterInfoWithoutEmbeddedStruct.Responsekey
 		varApplianceClusterInfo.Status = varApplianceClusterInfoWithoutEmbeddedStruct.Status
@@ -636,6 +956,14 @@ func (o *ApplianceClusterInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Gateway")
 		delete(additionalProperties, "Hostip")
 		delete(additionalProperties, "Hostname")
+		delete(additionalProperties, "InstallerVersion")
+		delete(additionalProperties, "PartitionDatabase")
+		delete(additionalProperties, "PartitionFileCisco")
+		delete(additionalProperties, "PartitionOptData")
+		delete(additionalProperties, "PartitionOptKafka")
+		delete(additionalProperties, "PartitionOptMongo")
+		delete(additionalProperties, "PartitionVarLibDocker")
+		delete(additionalProperties, "PartitionVarLog")
 		delete(additionalProperties, "Peerkey")
 		delete(additionalProperties, "Responsekey")
 		delete(additionalProperties, "Status")

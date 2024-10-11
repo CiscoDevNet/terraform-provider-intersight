@@ -475,6 +475,11 @@ func getChassisProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"deployed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"description": {
 			Description: "Description of the profile.",
 			Type:        schema.TypeString,
@@ -682,6 +687,11 @@ func getChassisProfileSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"removed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"running_workflows": {
 			Description: "An array of relationships to workflowWorkflowInfo resources.",
 			Type:        schema.TypeList,
@@ -1444,6 +1454,17 @@ func dataSourceChassisProfileRead(c context.Context, d *schema.ResourceData, met
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("deployed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDeployedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -1689,6 +1710,17 @@ func dataSourceChassisProfileRead(c context.Context, d *schema.ResourceData, met
 			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
 		}
 		o.SetPolicyBucket(x)
+	}
+
+	if v, ok := d.GetOk("removed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRemovedPolicies(x)
 	}
 
 	if v, ok := d.GetOk("running_workflows"); ok {
@@ -2000,6 +2032,7 @@ func dataSourceChassisProfileRead(c context.Context, d *schema.ResourceData, met
 				temp["config_result"] = flattenMapChassisConfigResultRelationship(s.GetConfigResult(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["deployed_policies"] = (s.GetDeployedPolicies())
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
@@ -2018,6 +2051,7 @@ func dataSourceChassisProfileRead(c context.Context, d *schema.ResourceData, met
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
+				temp["removed_policies"] = (s.GetRemovedPolicies())
 
 				temp["running_workflows"] = flattenListWorkflowWorkflowInfoRelationship(s.GetRunningWorkflows(), d)
 

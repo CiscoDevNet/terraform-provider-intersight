@@ -22,7 +22,7 @@ func resourceLicenseIncLicenseCount() *schema.Resource {
 		UpdateContext: resourceLicenseIncLicenseCountUpdate,
 		DeleteContext: resourceLicenseIncLicenseCountDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_license_data": {
 				Description: "A reference to a licenseAccountLicenseData resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",

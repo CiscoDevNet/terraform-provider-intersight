@@ -30,6 +30,7 @@ This complex property has following sub-properties:
 * `gateway`:(string) Default gateway configured on the peer node. 
 * `hostip`:(string) Publicly accessible IP of the peer node. 
 * `hostname`:(string) Publicly accessible FQDN of the peer node. 
+* `installer_version`:(string) Installer version used to install on peer node. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `owners`:
@@ -39,6 +40,13 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `partition_database`:(int) The partition size for /opt/database of this node. 
+* `partition_file_cisco`:(int) The partition size for /Cisco of this node. 
+* `partition_opt_data`:(int) The partition size for /opt/cisco/data of this node. 
+* `partition_opt_kafka`:(int) The partition size for /opt/kafka of this node. 
+* `partition_opt_mongo`:(int) The partition size for /opt/mongodb of this node. 
+* `partition_var_lib_docker`:(int) The partition size for /var/lib/docker of this node. 
+* `partition_var_log`:(int) The partition size for /var of this node. 
 * `peerkey`:(string) The public key of peer host. 
 * `permission_resources`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:

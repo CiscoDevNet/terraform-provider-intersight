@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.HostUtilityOperation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.HostUtilityOperation"]
-**HostUtilityOperationMode** | Pointer to **string** | Host utility operation need to be performed in the endpoint. * &#x60;None&#x60; - Host utility mode of the operation is set to none by default. * &#x60;SecureErase&#x60; - EU LOT-9 secure data cleanup on the server components. * &#x60;SecureEraseWithDecommission&#x60; - EU LOT-9 secure data cleanup on the server components and do decommission. | [optional] [default to "None"]
+**HostOpConfig** | Pointer to [**NullableComputeHostUtilityOperationConfguration**](ComputeHostUtilityOperationConfguration.md) |  | [optional] 
+**HostUtilityOperationMode** | Pointer to **string** | Host utility operation need to be performed in the endpoint. * &#x60;None&#x60; - Host utility mode of the operation is set to none by default. * &#x60;SecureErase&#x60; - EU LOT-9 secure data cleanup on the server components. * &#x60;SecureEraseWithDecommission&#x60; - EU LOT-9 secure data cleanup on the server components and do decommission. * &#x60;Scrub&#x60; - Quick cleanup on storage and BIOS. | [optional] [default to "None"]
 **HostUtilityOperationStatus** | Pointer to **string** | Task status of the host utility operation. * &#x60;Initiated&#x60; - This status indicates that host utility operation request is initiated. * &#x60;InProgress&#x60; - The operation status indicates that host utility operation is in-progress after the basic validations. * &#x60;CompletedOk&#x60; - The operation status indicates that host utility operation is completed successfully with no error or warning. * &#x60;CompletedError&#x60; - The operation status indicates that host utility operation is completed with error. * &#x60;CompletedWarning&#x60; - The operation status indicates that host utility operation is completed with warning. * &#x60;Aborted&#x60; - The operation status indicates that host utility operation is terminated or aborted. * &#x60;Invalidated&#x60; - The operation status indicates that host utility operation is invalid due to validation failure. | [optional] [readonly] [default to "Initiated"]
 **DownloadStatus** | Pointer to [**NullableComputeDownloadStatusRelationship**](ComputeDownloadStatusRelationship.md) |  | [optional] 
 **Server** | Pointer to [**NullableComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
@@ -71,6 +72,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetHostOpConfig
+
+`func (o *ComputeHostUtilityOperation) GetHostOpConfig() ComputeHostUtilityOperationConfguration`
+
+GetHostOpConfig returns the HostOpConfig field if non-nil, zero value otherwise.
+
+### GetHostOpConfigOk
+
+`func (o *ComputeHostUtilityOperation) GetHostOpConfigOk() (*ComputeHostUtilityOperationConfguration, bool)`
+
+GetHostOpConfigOk returns a tuple with the HostOpConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostOpConfig
+
+`func (o *ComputeHostUtilityOperation) SetHostOpConfig(v ComputeHostUtilityOperationConfguration)`
+
+SetHostOpConfig sets HostOpConfig field to given value.
+
+### HasHostOpConfig
+
+`func (o *ComputeHostUtilityOperation) HasHostOpConfig() bool`
+
+HasHostOpConfig returns a boolean if a field has been set.
+
+### SetHostOpConfigNil
+
+`func (o *ComputeHostUtilityOperation) SetHostOpConfigNil(b bool)`
+
+ SetHostOpConfigNil sets the value for HostOpConfig to be an explicit nil
+
+### UnsetHostOpConfig
+`func (o *ComputeHostUtilityOperation) UnsetHostOpConfig()`
+
+UnsetHostOpConfig ensures that no value is present for HostOpConfig, not even an explicit nil
 ### GetHostUtilityOperationMode
 
 `func (o *ComputeHostUtilityOperation) GetHostUtilityOperationMode() string`
