@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18534
+API version: 1.0.11-18775
 Contact: intersight@cisco.com
 */
 
@@ -16,14 +16,34 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // checks if the InventoryDeviceInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InventoryDeviceInfo{}
 
-// InventoryDeviceInfo Information pertaining to a Registered Device in starship which is pertinent to Inventory Microservice.
+// InventoryDeviceInfo Information pertaining to a Registered Device in Intersight which is pertinent to Inventory Microservice.
 type InventoryDeviceInfo struct {
-	PolicyinventoryAbstractDeviceInfo
+	MoBaseMo
+	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
+	ClassId string `json:"ClassId"`
+	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
+	ObjectType string `json:"ObjectType"`
+	// Subscribe/Unsubscribe events for the device.
+	DisableEvents *bool `json:"DisableEvents,omitempty"`
+	// Information regarding the number of events recorded for this device.
+	EventCounter *int64 `json:"EventCounter,omitempty"`
+	// Indicates whether the event counter enabled for the device.
+	EventCounterEnabled *bool `json:"EventCounterEnabled,omitempty"`
+	// The time interval (in hours) between job runs.
+	Interval *int64             `json:"Interval,omitempty"`
+	JobInfo  []InventoryJobInfo `json:"JobInfo,omitempty"`
+	// Last Reinventory time of the device.
+	LastReInventoryTime *time.Time `json:"LastReInventoryTime,omitempty"`
+	// Number of full inventory within the given time.
+	ReInventoryCount     *int64                                      `json:"ReInventoryCount,omitempty"`
+	ClusterMember        NullableAssetClusterMemberRelationship      `json:"ClusterMember,omitempty"`
+	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,7 +65,380 @@ func NewInventoryDeviceInfo(classId string, objectType string) *InventoryDeviceI
 // but it doesn't guarantee that properties required by API are set
 func NewInventoryDeviceInfoWithDefaults() *InventoryDeviceInfo {
 	this := InventoryDeviceInfo{}
+	var classId string = "inventory.DeviceInfo"
+	this.ClassId = classId
+	var objectType string = "inventory.DeviceInfo"
+	this.ObjectType = objectType
 	return &this
+}
+
+// GetClassId returns the ClassId field value
+func (o *InventoryDeviceInfo) GetClassId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ClassId
+}
+
+// GetClassIdOk returns a tuple with the ClassId field value
+// and a boolean to check if the value has been set.
+func (o *InventoryDeviceInfo) GetClassIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ClassId, true
+}
+
+// SetClassId sets field value
+func (o *InventoryDeviceInfo) SetClassId(v string) {
+	o.ClassId = v
+}
+
+// GetDefaultClassId returns the default value "inventory.DeviceInfo" of the ClassId field.
+func (o *InventoryDeviceInfo) GetDefaultClassId() interface{} {
+	return "inventory.DeviceInfo"
+}
+
+// GetObjectType returns the ObjectType field value
+func (o *InventoryDeviceInfo) GetObjectType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ObjectType
+}
+
+// GetObjectTypeOk returns a tuple with the ObjectType field value
+// and a boolean to check if the value has been set.
+func (o *InventoryDeviceInfo) GetObjectTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ObjectType, true
+}
+
+// SetObjectType sets field value
+func (o *InventoryDeviceInfo) SetObjectType(v string) {
+	o.ObjectType = v
+}
+
+// GetDefaultObjectType returns the default value "inventory.DeviceInfo" of the ObjectType field.
+func (o *InventoryDeviceInfo) GetDefaultObjectType() interface{} {
+	return "inventory.DeviceInfo"
+}
+
+// GetDisableEvents returns the DisableEvents field value if set, zero value otherwise.
+func (o *InventoryDeviceInfo) GetDisableEvents() bool {
+	if o == nil || IsNil(o.DisableEvents) {
+		var ret bool
+		return ret
+	}
+	return *o.DisableEvents
+}
+
+// GetDisableEventsOk returns a tuple with the DisableEvents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryDeviceInfo) GetDisableEventsOk() (*bool, bool) {
+	if o == nil || IsNil(o.DisableEvents) {
+		return nil, false
+	}
+	return o.DisableEvents, true
+}
+
+// HasDisableEvents returns a boolean if a field has been set.
+func (o *InventoryDeviceInfo) HasDisableEvents() bool {
+	if o != nil && !IsNil(o.DisableEvents) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableEvents gets a reference to the given bool and assigns it to the DisableEvents field.
+func (o *InventoryDeviceInfo) SetDisableEvents(v bool) {
+	o.DisableEvents = &v
+}
+
+// GetEventCounter returns the EventCounter field value if set, zero value otherwise.
+func (o *InventoryDeviceInfo) GetEventCounter() int64 {
+	if o == nil || IsNil(o.EventCounter) {
+		var ret int64
+		return ret
+	}
+	return *o.EventCounter
+}
+
+// GetEventCounterOk returns a tuple with the EventCounter field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryDeviceInfo) GetEventCounterOk() (*int64, bool) {
+	if o == nil || IsNil(o.EventCounter) {
+		return nil, false
+	}
+	return o.EventCounter, true
+}
+
+// HasEventCounter returns a boolean if a field has been set.
+func (o *InventoryDeviceInfo) HasEventCounter() bool {
+	if o != nil && !IsNil(o.EventCounter) {
+		return true
+	}
+
+	return false
+}
+
+// SetEventCounter gets a reference to the given int64 and assigns it to the EventCounter field.
+func (o *InventoryDeviceInfo) SetEventCounter(v int64) {
+	o.EventCounter = &v
+}
+
+// GetEventCounterEnabled returns the EventCounterEnabled field value if set, zero value otherwise.
+func (o *InventoryDeviceInfo) GetEventCounterEnabled() bool {
+	if o == nil || IsNil(o.EventCounterEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.EventCounterEnabled
+}
+
+// GetEventCounterEnabledOk returns a tuple with the EventCounterEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryDeviceInfo) GetEventCounterEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.EventCounterEnabled) {
+		return nil, false
+	}
+	return o.EventCounterEnabled, true
+}
+
+// HasEventCounterEnabled returns a boolean if a field has been set.
+func (o *InventoryDeviceInfo) HasEventCounterEnabled() bool {
+	if o != nil && !IsNil(o.EventCounterEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetEventCounterEnabled gets a reference to the given bool and assigns it to the EventCounterEnabled field.
+func (o *InventoryDeviceInfo) SetEventCounterEnabled(v bool) {
+	o.EventCounterEnabled = &v
+}
+
+// GetInterval returns the Interval field value if set, zero value otherwise.
+func (o *InventoryDeviceInfo) GetInterval() int64 {
+	if o == nil || IsNil(o.Interval) {
+		var ret int64
+		return ret
+	}
+	return *o.Interval
+}
+
+// GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryDeviceInfo) GetIntervalOk() (*int64, bool) {
+	if o == nil || IsNil(o.Interval) {
+		return nil, false
+	}
+	return o.Interval, true
+}
+
+// HasInterval returns a boolean if a field has been set.
+func (o *InventoryDeviceInfo) HasInterval() bool {
+	if o != nil && !IsNil(o.Interval) {
+		return true
+	}
+
+	return false
+}
+
+// SetInterval gets a reference to the given int64 and assigns it to the Interval field.
+func (o *InventoryDeviceInfo) SetInterval(v int64) {
+	o.Interval = &v
+}
+
+// GetJobInfo returns the JobInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InventoryDeviceInfo) GetJobInfo() []InventoryJobInfo {
+	if o == nil {
+		var ret []InventoryJobInfo
+		return ret
+	}
+	return o.JobInfo
+}
+
+// GetJobInfoOk returns a tuple with the JobInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InventoryDeviceInfo) GetJobInfoOk() ([]InventoryJobInfo, bool) {
+	if o == nil || IsNil(o.JobInfo) {
+		return nil, false
+	}
+	return o.JobInfo, true
+}
+
+// HasJobInfo returns a boolean if a field has been set.
+func (o *InventoryDeviceInfo) HasJobInfo() bool {
+	if o != nil && !IsNil(o.JobInfo) {
+		return true
+	}
+
+	return false
+}
+
+// SetJobInfo gets a reference to the given []InventoryJobInfo and assigns it to the JobInfo field.
+func (o *InventoryDeviceInfo) SetJobInfo(v []InventoryJobInfo) {
+	o.JobInfo = v
+}
+
+// GetLastReInventoryTime returns the LastReInventoryTime field value if set, zero value otherwise.
+func (o *InventoryDeviceInfo) GetLastReInventoryTime() time.Time {
+	if o == nil || IsNil(o.LastReInventoryTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastReInventoryTime
+}
+
+// GetLastReInventoryTimeOk returns a tuple with the LastReInventoryTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryDeviceInfo) GetLastReInventoryTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.LastReInventoryTime) {
+		return nil, false
+	}
+	return o.LastReInventoryTime, true
+}
+
+// HasLastReInventoryTime returns a boolean if a field has been set.
+func (o *InventoryDeviceInfo) HasLastReInventoryTime() bool {
+	if o != nil && !IsNil(o.LastReInventoryTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastReInventoryTime gets a reference to the given time.Time and assigns it to the LastReInventoryTime field.
+func (o *InventoryDeviceInfo) SetLastReInventoryTime(v time.Time) {
+	o.LastReInventoryTime = &v
+}
+
+// GetReInventoryCount returns the ReInventoryCount field value if set, zero value otherwise.
+func (o *InventoryDeviceInfo) GetReInventoryCount() int64 {
+	if o == nil || IsNil(o.ReInventoryCount) {
+		var ret int64
+		return ret
+	}
+	return *o.ReInventoryCount
+}
+
+// GetReInventoryCountOk returns a tuple with the ReInventoryCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InventoryDeviceInfo) GetReInventoryCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.ReInventoryCount) {
+		return nil, false
+	}
+	return o.ReInventoryCount, true
+}
+
+// HasReInventoryCount returns a boolean if a field has been set.
+func (o *InventoryDeviceInfo) HasReInventoryCount() bool {
+	if o != nil && !IsNil(o.ReInventoryCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetReInventoryCount gets a reference to the given int64 and assigns it to the ReInventoryCount field.
+func (o *InventoryDeviceInfo) SetReInventoryCount(v int64) {
+	o.ReInventoryCount = &v
+}
+
+// GetClusterMember returns the ClusterMember field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InventoryDeviceInfo) GetClusterMember() AssetClusterMemberRelationship {
+	if o == nil || IsNil(o.ClusterMember.Get()) {
+		var ret AssetClusterMemberRelationship
+		return ret
+	}
+	return *o.ClusterMember.Get()
+}
+
+// GetClusterMemberOk returns a tuple with the ClusterMember field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InventoryDeviceInfo) GetClusterMemberOk() (*AssetClusterMemberRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ClusterMember.Get(), o.ClusterMember.IsSet()
+}
+
+// HasClusterMember returns a boolean if a field has been set.
+func (o *InventoryDeviceInfo) HasClusterMember() bool {
+	if o != nil && o.ClusterMember.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterMember gets a reference to the given NullableAssetClusterMemberRelationship and assigns it to the ClusterMember field.
+func (o *InventoryDeviceInfo) SetClusterMember(v AssetClusterMemberRelationship) {
+	o.ClusterMember.Set(&v)
+}
+
+// SetClusterMemberNil sets the value for ClusterMember to be an explicit nil
+func (o *InventoryDeviceInfo) SetClusterMemberNil() {
+	o.ClusterMember.Set(nil)
+}
+
+// UnsetClusterMember ensures that no value is present for ClusterMember, not even an explicit nil
+func (o *InventoryDeviceInfo) UnsetClusterMember() {
+	o.ClusterMember.Unset()
+}
+
+// GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InventoryDeviceInfo) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
+	if o == nil || IsNil(o.RegisteredDevice.Get()) {
+		var ret AssetDeviceRegistrationRelationship
+		return ret
+	}
+	return *o.RegisteredDevice.Get()
+}
+
+// GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InventoryDeviceInfo) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RegisteredDevice.Get(), o.RegisteredDevice.IsSet()
+}
+
+// HasRegisteredDevice returns a boolean if a field has been set.
+func (o *InventoryDeviceInfo) HasRegisteredDevice() bool {
+	if o != nil && o.RegisteredDevice.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRegisteredDevice gets a reference to the given NullableAssetDeviceRegistrationRelationship and assigns it to the RegisteredDevice field.
+func (o *InventoryDeviceInfo) SetRegisteredDevice(v AssetDeviceRegistrationRelationship) {
+	o.RegisteredDevice.Set(&v)
+}
+
+// SetRegisteredDeviceNil sets the value for RegisteredDevice to be an explicit nil
+func (o *InventoryDeviceInfo) SetRegisteredDeviceNil() {
+	o.RegisteredDevice.Set(nil)
+}
+
+// UnsetRegisteredDevice ensures that no value is present for RegisteredDevice, not even an explicit nil
+func (o *InventoryDeviceInfo) UnsetRegisteredDevice() {
+	o.RegisteredDevice.Unset()
 }
 
 func (o InventoryDeviceInfo) MarshalJSON() ([]byte, error) {
@@ -58,13 +451,48 @@ func (o InventoryDeviceInfo) MarshalJSON() ([]byte, error) {
 
 func (o InventoryDeviceInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedPolicyinventoryAbstractDeviceInfo, errPolicyinventoryAbstractDeviceInfo := json.Marshal(o.PolicyinventoryAbstractDeviceInfo)
-	if errPolicyinventoryAbstractDeviceInfo != nil {
-		return map[string]interface{}{}, errPolicyinventoryAbstractDeviceInfo
+	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
+	if errMoBaseMo != nil {
+		return map[string]interface{}{}, errMoBaseMo
 	}
-	errPolicyinventoryAbstractDeviceInfo = json.Unmarshal([]byte(serializedPolicyinventoryAbstractDeviceInfo), &toSerialize)
-	if errPolicyinventoryAbstractDeviceInfo != nil {
-		return map[string]interface{}{}, errPolicyinventoryAbstractDeviceInfo
+	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
+	if errMoBaseMo != nil {
+		return map[string]interface{}{}, errMoBaseMo
+	}
+	if _, exists := toSerialize["ClassId"]; !exists {
+		toSerialize["ClassId"] = o.GetDefaultClassId()
+	}
+	toSerialize["ClassId"] = o.ClassId
+	if _, exists := toSerialize["ObjectType"]; !exists {
+		toSerialize["ObjectType"] = o.GetDefaultObjectType()
+	}
+	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.DisableEvents) {
+		toSerialize["DisableEvents"] = o.DisableEvents
+	}
+	if !IsNil(o.EventCounter) {
+		toSerialize["EventCounter"] = o.EventCounter
+	}
+	if !IsNil(o.EventCounterEnabled) {
+		toSerialize["EventCounterEnabled"] = o.EventCounterEnabled
+	}
+	if !IsNil(o.Interval) {
+		toSerialize["Interval"] = o.Interval
+	}
+	if o.JobInfo != nil {
+		toSerialize["JobInfo"] = o.JobInfo
+	}
+	if !IsNil(o.LastReInventoryTime) {
+		toSerialize["LastReInventoryTime"] = o.LastReInventoryTime
+	}
+	if !IsNil(o.ReInventoryCount) {
+		toSerialize["ReInventoryCount"] = o.ReInventoryCount
+	}
+	if o.ClusterMember.IsSet() {
+		toSerialize["ClusterMember"] = o.ClusterMember.Get()
+	}
+	if o.RegisteredDevice.IsSet() {
+		toSerialize["RegisteredDevice"] = o.RegisteredDevice.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -117,6 +545,25 @@ func (o *InventoryDeviceInfo) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 	type InventoryDeviceInfoWithoutEmbeddedStruct struct {
+		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
+		ClassId string `json:"ClassId"`
+		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
+		ObjectType string `json:"ObjectType"`
+		// Subscribe/Unsubscribe events for the device.
+		DisableEvents *bool `json:"DisableEvents,omitempty"`
+		// Information regarding the number of events recorded for this device.
+		EventCounter *int64 `json:"EventCounter,omitempty"`
+		// Indicates whether the event counter enabled for the device.
+		EventCounterEnabled *bool `json:"EventCounterEnabled,omitempty"`
+		// The time interval (in hours) between job runs.
+		Interval *int64             `json:"Interval,omitempty"`
+		JobInfo  []InventoryJobInfo `json:"JobInfo,omitempty"`
+		// Last Reinventory time of the device.
+		LastReInventoryTime *time.Time `json:"LastReInventoryTime,omitempty"`
+		// Number of full inventory within the given time.
+		ReInventoryCount *int64                                      `json:"ReInventoryCount,omitempty"`
+		ClusterMember    NullableAssetClusterMemberRelationship      `json:"ClusterMember,omitempty"`
+		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varInventoryDeviceInfoWithoutEmbeddedStruct := InventoryDeviceInfoWithoutEmbeddedStruct{}
@@ -124,6 +571,17 @@ func (o *InventoryDeviceInfo) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &varInventoryDeviceInfoWithoutEmbeddedStruct)
 	if err == nil {
 		varInventoryDeviceInfo := _InventoryDeviceInfo{}
+		varInventoryDeviceInfo.ClassId = varInventoryDeviceInfoWithoutEmbeddedStruct.ClassId
+		varInventoryDeviceInfo.ObjectType = varInventoryDeviceInfoWithoutEmbeddedStruct.ObjectType
+		varInventoryDeviceInfo.DisableEvents = varInventoryDeviceInfoWithoutEmbeddedStruct.DisableEvents
+		varInventoryDeviceInfo.EventCounter = varInventoryDeviceInfoWithoutEmbeddedStruct.EventCounter
+		varInventoryDeviceInfo.EventCounterEnabled = varInventoryDeviceInfoWithoutEmbeddedStruct.EventCounterEnabled
+		varInventoryDeviceInfo.Interval = varInventoryDeviceInfoWithoutEmbeddedStruct.Interval
+		varInventoryDeviceInfo.JobInfo = varInventoryDeviceInfoWithoutEmbeddedStruct.JobInfo
+		varInventoryDeviceInfo.LastReInventoryTime = varInventoryDeviceInfoWithoutEmbeddedStruct.LastReInventoryTime
+		varInventoryDeviceInfo.ReInventoryCount = varInventoryDeviceInfoWithoutEmbeddedStruct.ReInventoryCount
+		varInventoryDeviceInfo.ClusterMember = varInventoryDeviceInfoWithoutEmbeddedStruct.ClusterMember
+		varInventoryDeviceInfo.RegisteredDevice = varInventoryDeviceInfoWithoutEmbeddedStruct.RegisteredDevice
 		*o = InventoryDeviceInfo(varInventoryDeviceInfo)
 	} else {
 		return err
@@ -133,7 +591,7 @@ func (o *InventoryDeviceInfo) UnmarshalJSON(data []byte) (err error) {
 
 	err = json.Unmarshal(data, &varInventoryDeviceInfo)
 	if err == nil {
-		o.PolicyinventoryAbstractDeviceInfo = varInventoryDeviceInfo.PolicyinventoryAbstractDeviceInfo
+		o.MoBaseMo = varInventoryDeviceInfo.MoBaseMo
 	} else {
 		return err
 	}
@@ -141,11 +599,22 @@ func (o *InventoryDeviceInfo) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ClassId")
+		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "DisableEvents")
+		delete(additionalProperties, "EventCounter")
+		delete(additionalProperties, "EventCounterEnabled")
+		delete(additionalProperties, "Interval")
+		delete(additionalProperties, "JobInfo")
+		delete(additionalProperties, "LastReInventoryTime")
+		delete(additionalProperties, "ReInventoryCount")
+		delete(additionalProperties, "ClusterMember")
+		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs
-		reflectPolicyinventoryAbstractDeviceInfo := reflect.ValueOf(o.PolicyinventoryAbstractDeviceInfo)
-		for i := 0; i < reflectPolicyinventoryAbstractDeviceInfo.Type().NumField(); i++ {
-			t := reflectPolicyinventoryAbstractDeviceInfo.Type().Field(i)
+		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
+		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
+			t := reflectMoBaseMo.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

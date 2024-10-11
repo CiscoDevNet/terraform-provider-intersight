@@ -24,7 +24,7 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 		UpdateContext: resourceKubernetesBaremetalNodeProfileUpdate,
 		DeleteContext: resourceKubernetesBaremetalNodeProfileDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -278,6 +278,14 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
 					}
 					return
+				}},
+			"deployed_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
 				}},
 			"description": {
 				Description:  "Description of the profile.",
@@ -877,7 +885,6 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
 				Elem: &schema.Resource{
-					CustomizeDiff: CustomizePolicyBucketDiff,
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
 							Type:             schema.TypeString,
@@ -910,6 +917,14 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 					},
 				},
 			},
+			"removed_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"scheduled_actions": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -1433,6 +1448,19 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 		}
 	}
 
+	if v, ok := d.GetOk("deployed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetDeployedPolicies(x)
+		}
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -1927,6 +1955,19 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 		}
 	}
 
+	if v, ok := d.GetOk("removed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetRemovedPolicies(x)
+		}
+	}
+
 	if v, ok := d.GetOk("scheduled_actions"); ok {
 		x := make([]models.PolicyScheduledAction, 0)
 		s := v.([]interface{})
@@ -2224,6 +2265,10 @@ func resourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.Res
 		return diag.Errorf("error occurred while setting property CreateTime in KubernetesBaremetalNodeProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("deployed_policies", (s.GetDeployedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property DeployedPolicies in KubernetesBaremetalNodeProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in KubernetesBaremetalNodeProfile object: %s", err.Error())
 	}
@@ -2274,6 +2319,10 @@ func resourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.Res
 
 	if err := d.Set("policy_bucket", flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PolicyBucket in KubernetesBaremetalNodeProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("removed_policies", (s.GetRemovedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property RemovedPolicies in KubernetesBaremetalNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("scheduled_actions", flattenListPolicyScheduledAction(s.GetScheduledActions(), d)); err != nil {
@@ -2444,6 +2493,18 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 			x := p[0]
 			o.SetConfigContext(x)
 		}
+	}
+
+	if d.HasChange("deployed_policies") {
+		v := d.Get("deployed_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDeployedPolicies(x)
 	}
 
 	if d.HasChange("description") {
@@ -2943,6 +3004,18 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
 		}
 		o.SetPolicyBucket(x)
+	}
+
+	if d.HasChange("removed_policies") {
+		v := d.Get("removed_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRemovedPolicies(x)
 	}
 
 	if d.HasChange("scheduled_actions") {

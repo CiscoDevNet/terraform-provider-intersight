@@ -23,7 +23,7 @@ func resourceHyperflexLocalCredentialPolicy() *schema.Resource {
 		UpdateContext: resourceHyperflexLocalCredentialPolicyUpdate,
 		DeleteContext: resourceHyperflexLocalCredentialPolicyDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",

@@ -208,6 +208,11 @@ func getKubernetesNodeGroupProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"deployed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"description": {
 			Description: "Description of the profile.",
 			Type:        schema.TypeString,
@@ -575,6 +580,11 @@ func getKubernetesNodeGroupProfileSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"removed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"scheduled_actions": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1063,6 +1073,17 @@ func dataSourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resou
 		o.SetCurrentsize(x)
 	}
 
+	if v, ok := d.GetOk("deployed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDeployedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -1499,6 +1520,17 @@ func dataSourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resou
 		o.SetPolicyBucket(x)
 	}
 
+	if v, ok := d.GetOk("removed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRemovedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("scheduled_actions"); ok {
 		x := make([]models.PolicyScheduledAction, 0)
 		s := v.([]interface{})
@@ -1795,6 +1827,7 @@ func dataSourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resou
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["currentsize"] = (s.GetCurrentsize())
+				temp["deployed_policies"] = (s.GetDeployedPolicies())
 				temp["description"] = (s.GetDescription())
 				temp["desiredsize"] = (s.GetDesiredsize())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
@@ -1825,6 +1858,7 @@ func dataSourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resou
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
+				temp["removed_policies"] = (s.GetRemovedPolicies())
 
 				temp["scheduled_actions"] = flattenListPolicyScheduledAction(s.GetScheduledActions(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

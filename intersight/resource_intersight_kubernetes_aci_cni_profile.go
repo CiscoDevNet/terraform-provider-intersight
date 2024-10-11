@@ -23,7 +23,7 @@ func resourceKubernetesAciCniProfile() *schema.Resource {
 		UpdateContext: resourceKubernetesAciCniProfileUpdate,
 		DeleteContext: resourceKubernetesAciCniProfileDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"aaep_name": {
 				Description:  "Name of ACI AAEP (Attachable Access Entity Profile) to be used for all Kubernetes clusters using this policy.",

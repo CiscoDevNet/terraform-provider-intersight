@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **Order** | Pointer to **string** | The ordering of returned rows based on timestamp. \&quot;ascending\&quot;, \&quot;descending\&quot;, and \&quot;none\&quot; (default) are supported. Currently, \&quot;ascending\&quot; and \&quot;descending\&quot; are only supported for queries where the __time column is included in the columns field and the requirements outlined in the time ordering section are met. | [optional] [default to "none"]
 **Legacy** | Pointer to **bool** | Return results consistent with the legacy \&quot;scan-query\&quot; contrib extension. Defaults to the value set by druid.query.scan.legacy, which in turn defaults to false. | [optional] [default to false]
 **Context** | Pointer to [**TelemetryDruidQueryContext**](TelemetryDruidQueryContext.md) |  | [optional] 
+**VirtualColumns** | Pointer to [**[]TelemetryDruidVirtualColumn**](TelemetryDruidVirtualColumn.md) | Virtual columns are columns that are computed on the fly during query execution. It can potentially draw from multiple underlying columns, although a virtual column always presents itself as a single column. Virtual columns can be referenced by their output names to be used as dimensions or as inputs to filters and aggregators. | [optional] 
 
 ## Methods
 
@@ -320,6 +321,31 @@ SetContext sets Context field to given value.
 `func (o *TelemetryDruidScanRequest) HasContext() bool`
 
 HasContext returns a boolean if a field has been set.
+
+### GetVirtualColumns
+
+`func (o *TelemetryDruidScanRequest) GetVirtualColumns() []TelemetryDruidVirtualColumn`
+
+GetVirtualColumns returns the VirtualColumns field if non-nil, zero value otherwise.
+
+### GetVirtualColumnsOk
+
+`func (o *TelemetryDruidScanRequest) GetVirtualColumnsOk() (*[]TelemetryDruidVirtualColumn, bool)`
+
+GetVirtualColumnsOk returns a tuple with the VirtualColumns field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVirtualColumns
+
+`func (o *TelemetryDruidScanRequest) SetVirtualColumns(v []TelemetryDruidVirtualColumn)`
+
+SetVirtualColumns sets VirtualColumns field to given value.
+
+### HasVirtualColumns
+
+`func (o *TelemetryDruidScanRequest) HasVirtualColumns() bool`
+
+HasVirtualColumns returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

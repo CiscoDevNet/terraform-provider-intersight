@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **ResponseTypes** | Pointer to **[]string** |  | [optional] 
 **RevocationTimestamp** | Pointer to **time.Time** | Used to perform revocation for tokens of AppRegistration. Updated only internally is case Revoke property come from UI with value true. On each request with OAuth2 access token the CreationTime of the OAuth2 token will be compared to RevokationTimestamp of the corresponding App Registration. | [optional] [readonly] 
 **Revoke** | Pointer to **bool** | Used to trigger update the revocationTimestamp value. If UI sent updating request with the Revoke value is true, then update RevocationTimestamp. | [optional] [default to false]
+**Scope** | Pointer to [**NullableIamSwitchScopePermissions**](IamSwitchScopePermissions.md) |  | [optional] 
 **ShowConsentScreen** | Pointer to **bool** | Set to true if consent screen needs to be shown during the OAuth login process. Applicable only for public AppRegistrations, means only &#39;authorization_code&#39; grantType. Note that consent screen will be shown on each login. | [optional] [default to false]
 **StartTime** | Pointer to **time.Time** | The timestamp at which an expiry date was first set on this app registration.  For expiring App Registrations, this field is same as the create time of the App Registration. For never-expiring App Registrations, this field is set initially to zero time value. If a never-expiry App Registration is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field. | [optional] [readonly] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
@@ -545,6 +546,41 @@ SetRevoke sets Revoke field to given value.
 
 HasRevoke returns a boolean if a field has been set.
 
+### GetScope
+
+`func (o *IamAppRegistration) GetScope() IamSwitchScopePermissions`
+
+GetScope returns the Scope field if non-nil, zero value otherwise.
+
+### GetScopeOk
+
+`func (o *IamAppRegistration) GetScopeOk() (*IamSwitchScopePermissions, bool)`
+
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScope
+
+`func (o *IamAppRegistration) SetScope(v IamSwitchScopePermissions)`
+
+SetScope sets Scope field to given value.
+
+### HasScope
+
+`func (o *IamAppRegistration) HasScope() bool`
+
+HasScope returns a boolean if a field has been set.
+
+### SetScopeNil
+
+`func (o *IamAppRegistration) SetScopeNil(b bool)`
+
+ SetScopeNil sets the value for Scope to be an explicit nil
+
+### UnsetScope
+`func (o *IamAppRegistration) UnsetScope()`
+
+UnsetScope ensures that no value is present for Scope, not even an explicit nil
 ### GetShowConsentScreen
 
 `func (o *IamAppRegistration) GetShowConsentScreen() bool`

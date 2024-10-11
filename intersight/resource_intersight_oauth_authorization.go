@@ -22,7 +22,7 @@ func resourceOauthAuthorization() *schema.Resource {
 		UpdateContext: resourceOauthAuthorizationUpdate,
 		DeleteContext: resourceOauthAuthorizationDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"access_token": {
 				Description: "A reference to a oauthAccessToken resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",

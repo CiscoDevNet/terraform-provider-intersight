@@ -110,8 +110,33 @@ func getComputeHostUtilityOperationSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"host_op_config": {
+			Description: "Host operation related configuration such as scrub components those need to be cleared while scrub are specified using this configuration.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"host_utility_operation_mode": {
-			Description: "Host utility operation need to be performed in the endpoint.\n* `None` - Host utility mode of the operation is set to none by default.\n* `SecureErase` - EU LOT-9 secure data cleanup on the server components.\n* `SecureEraseWithDecommission` - EU LOT-9 secure data cleanup on the server components and do decommission.",
+			Description: "Host utility operation need to be performed in the endpoint.\n* `None` - Host utility mode of the operation is set to none by default.\n* `SecureErase` - EU LOT-9 secure data cleanup on the server components.\n* `SecureEraseWithDecommission` - EU LOT-9 secure data cleanup on the server components and do decommission.\n* `Scrub` - Quick cleanup on storage and BIOS.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -554,6 +579,37 @@ func dataSourceComputeHostUtilityOperationRead(c context.Context, d *schema.Reso
 		}
 	}
 
+	if v, ok := d.GetOk("host_op_config"); ok {
+		p := make([]models.ComputeHostUtilityOperationConfguration, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ComputeHostUtilityOperationConfguration{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("compute.HostUtilityOperationConfguration")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetHostOpConfig(x)
+		}
+	}
+
 	if v, ok := d.GetOk("host_utility_operation_mode"); ok {
 		x := (v.(string))
 		o.SetHostUtilityOperationMode(x)
@@ -916,6 +972,8 @@ func dataSourceComputeHostUtilityOperationRead(c context.Context, d *schema.Reso
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["download_status"] = flattenMapComputeDownloadStatusRelationship(s.GetDownloadStatus(), d)
+
+				temp["host_op_config"] = flattenMapComputeHostUtilityOperationConfguration(s.GetHostOpConfig(), d)
 				temp["host_utility_operation_mode"] = (s.GetHostUtilityOperationMode())
 				temp["host_utility_operation_status"] = (s.GetHostUtilityOperationStatus())
 

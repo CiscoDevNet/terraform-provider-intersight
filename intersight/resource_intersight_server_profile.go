@@ -24,7 +24,7 @@ func resourceServerProfile() *schema.Resource {
 		UpdateContext: resourceServerProfileUpdate,
 		DeleteContext: resourceServerProfileDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -674,6 +674,14 @@ func resourceServerProfile() *schema.Resource {
 					}
 					return
 				}},
+			"deployed_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"deployed_switches": {
 				Description: "The property which determines if the deployment should be skipped on any of the Fabric Interconnects. It is set based on the state of a fabric interconnect to Intersight before the deployment of the server proile begins.\n* `None` - Server profile configuration not deployed on either of the fabric interconnects.\n* `AB` - Server profile configuration deployed on both fabric interconnects.\n* `A` - Server profile configuration deployed on fabric interconnect A only.\n* `B` - Server profile configuration deployed on fabric interconnect B only.",
 				Type:        schema.TypeString,
@@ -966,7 +974,6 @@ func resourceServerProfile() *schema.Resource {
 				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
 				Elem: &schema.Resource{
-					CustomizeDiff: CustomizePolicyBucketDiff,
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
 							Type:             schema.TypeString,
@@ -999,6 +1006,14 @@ func resourceServerProfile() *schema.Resource {
 					},
 				},
 			},
+			"removed_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"reservation_references": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -1818,6 +1833,19 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	if v, ok := d.GetOk("deployed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetDeployedPolicies(x)
+		}
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -2001,6 +2029,19 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		}
 		if len(x) > 0 {
 			o.SetPolicyBucket(x)
+		}
+	}
+
+	if v, ok := d.GetOk("removed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetRemovedPolicies(x)
 		}
 	}
 
@@ -2511,6 +2552,10 @@ func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta i
 		return diag.Errorf("error occurred while setting property DeployStatus in ServerProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("deployed_policies", (s.GetDeployedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property DeployedPolicies in ServerProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("deployed_switches", (s.GetDeployedSwitches())); err != nil {
 		return diag.Errorf("error occurred while setting property DeployedSwitches in ServerProfile object: %s", err.Error())
 	}
@@ -2573,6 +2618,10 @@ func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta i
 
 	if err := d.Set("policy_bucket", flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PolicyBucket in ServerProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("removed_policies", (s.GetRemovedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property RemovedPolicies in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("reservation_references", flattenListPoolReservationReference(s.GetReservationReferences(), d)); err != nil {
@@ -2871,6 +2920,18 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	if d.HasChange("deployed_policies") {
+		v := d.Get("deployed_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDeployedPolicies(x)
+	}
+
 	if d.HasChange("description") {
 		v := d.Get("description")
 		x := (v.(string))
@@ -3059,6 +3120,18 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
 		}
 		o.SetPolicyBucket(x)
+	}
+
+	if d.HasChange("removed_policies") {
+		v := d.Get("removed_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRemovedPolicies(x)
 	}
 
 	if d.HasChange("reservation_references") {

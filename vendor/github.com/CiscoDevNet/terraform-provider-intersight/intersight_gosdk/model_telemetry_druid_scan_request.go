@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18534
+API version: 1.0.11-18775
 Contact: intersight@cisco.com
 */
 
@@ -39,8 +39,10 @@ type TelemetryDruidScanRequest struct {
 	// The ordering of returned rows based on timestamp. \"ascending\", \"descending\", and \"none\" (default) are supported. Currently, \"ascending\" and \"descending\" are only supported for queries where the __time column is included in the columns field and the requirements outlined in the time ordering section are met.
 	Order *string `json:"order,omitempty"`
 	// Return results consistent with the legacy \"scan-query\" contrib extension. Defaults to the value set by druid.query.scan.legacy, which in turn defaults to false.
-	Legacy               *bool                       `json:"legacy,omitempty"`
-	Context              *TelemetryDruidQueryContext `json:"context,omitempty"`
+	Legacy  *bool                       `json:"legacy,omitempty"`
+	Context *TelemetryDruidQueryContext `json:"context,omitempty"`
+	// Virtual columns are columns that are computed on the fly during query execution. It can potentially draw from multiple underlying columns, although a virtual column always presents itself as a single column. Virtual columns can be referenced by their output names to be used as dimensions or as inputs to filters and aggregators.
+	VirtualColumns       []TelemetryDruidVirtualColumn `json:"virtualColumns,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -442,6 +444,38 @@ func (o *TelemetryDruidScanRequest) SetContext(v TelemetryDruidQueryContext) {
 	o.Context = &v
 }
 
+// GetVirtualColumns returns the VirtualColumns field value if set, zero value otherwise.
+func (o *TelemetryDruidScanRequest) GetVirtualColumns() []TelemetryDruidVirtualColumn {
+	if o == nil || IsNil(o.VirtualColumns) {
+		var ret []TelemetryDruidVirtualColumn
+		return ret
+	}
+	return o.VirtualColumns
+}
+
+// GetVirtualColumnsOk returns a tuple with the VirtualColumns field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TelemetryDruidScanRequest) GetVirtualColumnsOk() ([]TelemetryDruidVirtualColumn, bool) {
+	if o == nil || IsNil(o.VirtualColumns) {
+		return nil, false
+	}
+	return o.VirtualColumns, true
+}
+
+// HasVirtualColumns returns a boolean if a field has been set.
+func (o *TelemetryDruidScanRequest) HasVirtualColumns() bool {
+	if o != nil && !IsNil(o.VirtualColumns) {
+		return true
+	}
+
+	return false
+}
+
+// SetVirtualColumns gets a reference to the given []TelemetryDruidVirtualColumn and assigns it to the VirtualColumns field.
+func (o *TelemetryDruidScanRequest) SetVirtualColumns(v []TelemetryDruidVirtualColumn) {
+	o.VirtualColumns = v
+}
+
 func (o TelemetryDruidScanRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -481,6 +515,9 @@ func (o TelemetryDruidScanRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Context) {
 		toSerialize["context"] = o.Context
+	}
+	if !IsNil(o.VirtualColumns) {
+		toSerialize["virtualColumns"] = o.VirtualColumns
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -555,6 +592,7 @@ func (o *TelemetryDruidScanRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "order")
 		delete(additionalProperties, "legacy")
 		delete(additionalProperties, "context")
+		delete(additionalProperties, "virtualColumns")
 		o.AdditionalProperties = additionalProperties
 	}
 

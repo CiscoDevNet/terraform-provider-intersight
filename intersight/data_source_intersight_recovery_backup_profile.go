@@ -238,6 +238,11 @@ func getRecoveryBackupProfileSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"deployed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"description": {
 			Description: "Description of the profile.",
 			Type:        schema.TypeString,
@@ -451,6 +456,11 @@ func getRecoveryBackupProfileSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"removed_policies": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"schedule_config": {
 			Description: "A reference to a recoveryScheduleConfigPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -974,6 +984,17 @@ func dataSourceRecoveryBackupProfileRead(c context.Context, d *schema.ResourceDa
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("deployed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDeployedPolicies(x)
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -1227,6 +1248,17 @@ func dataSourceRecoveryBackupProfileRead(c context.Context, d *schema.ResourceDa
 			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
 		}
 		o.SetPolicyBucket(x)
+	}
+
+	if v, ok := d.GetOk("removed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRemovedPolicies(x)
 	}
 
 	if v, ok := d.GetOk("schedule_config"); ok {
@@ -1523,6 +1555,7 @@ func dataSourceRecoveryBackupProfileRead(c context.Context, d *schema.ResourceDa
 				temp["config_result"] = flattenMapRecoveryConfigResultRelationship(s.GetConfigResult(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["deployed_policies"] = (s.GetDeployedPolicies())
 				temp["description"] = (s.GetDescription())
 
 				temp["device_id"] = flattenMapAssetDeviceRegistrationRelationship(s.GetDeviceId(), d)
@@ -1542,6 +1575,7 @@ func dataSourceRecoveryBackupProfileRead(c context.Context, d *schema.ResourceDa
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
+				temp["removed_policies"] = (s.GetRemovedPolicies())
 
 				temp["schedule_config"] = flattenMapRecoveryScheduleConfigPolicyRelationship(s.GetScheduleConfig(), d)
 

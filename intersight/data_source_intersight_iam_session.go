@@ -348,6 +348,109 @@ func getIamSessionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"scope": {
+			Description: "Scope holds a collection of account Id, permission Id to which the current session is scoped to.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"account_access_control_id": {
+						Description: "Moid of the AccountAccessControl through which the access is given to switch scope.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"request_identifier": {
+						Description: "Stores the identifier of the issue for which user is trying to switch scope to another account.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"switched_from_account": {
+						Description: "Permission for the Account from which user switched the scope.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"account_id": {
+									Description: "Moid of the Account to/from which user switched the scope.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"permission_id": {
+									Description: "Moid of the Permission for the Account to/from which user switched the scope.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"switched_to_accounts": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"account_id": {
+									Description: "Moid of the Account to/from which user switched the scope.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"permission_id": {
+									Description: "Moid of the Permission for the Account to/from which user switched the scope.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+				},
+			},
+		},
 		"session_id": {
 			Description: "Session token shared with the user agent which is used to identify the user session when API requests are received to perform authorization.",
 			Type:        schema.TypeString,
@@ -924,6 +1027,68 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetRole(x)
 	}
 
+	if v, ok := d.GetOk("scope"); ok {
+		p := make([]models.IamSwitchScopePermissions, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.IamSwitchScopePermissions{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("iam.SwitchScopePermissions")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["switched_to_accounts"]; ok {
+				{
+					x := make([]models.IamSwitchAccountPermission, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewIamSwitchAccountPermissionWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("iam.SwitchAccountPermission")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetSwitchedToAccounts(x)
+					}
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetScope(x)
+		}
+	}
+
 	if v, ok := d.GetOk("session_id"); ok {
 		x := (v.(string))
 		o.SetSessionId(x)
@@ -1162,6 +1327,8 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["role"] = (s.GetRole())
+
+				temp["scope"] = flattenMapIamSwitchScopePermissions(s.GetScope(), d)
 				temp["session_id"] = (s.GetSessionId())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["status"] = (s.GetStatus())

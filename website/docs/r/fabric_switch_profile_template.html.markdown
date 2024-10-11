@@ -40,6 +40,8 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
+* `deployed_policies`:
+                (Array of schema.TypeString) -
 * `description`:(string) Description of the profile. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
@@ -62,6 +64,8 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `removed_policies`:
+                (Array of schema.TypeString) -
 * `scheduled_actions`:(Array)
 This complex property has following sub-properties:
   + `action`:(string) Name of the action to be performed on the profile. 
@@ -78,6 +82,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `switch_id`:(string) Value indicating the switch side on which the switch profile or template has to be deployed.* `None` - Switch side not defined for the policy configurations in the switch profile or template.* `A` - Policy configurations in the switch profile or template to be deployed on fabric interconnect A.* `B` - Policy configurations in the switch profile or template to be deployed on fabric interconnect B. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 

@@ -4452,6 +4452,26 @@ func flattenListInventoryGenericInventoryHolderRelationship(p []models.Inventory
 	}
 	return inventorygenericinventoryholderrelationships
 }
+func flattenListInventoryJobInfo(p []models.InventoryJobInfo, d *schema.ResourceData) []map[string]interface{} {
+	var inventoryjobinfos []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		inventoryjobinfo := make(map[string]interface{})
+		inventoryjobinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		inventoryjobinfo["class_id"] = item.GetClassId()
+		inventoryjobinfo["execution_status"] = item.GetExecutionStatus()
+		inventoryjobinfo["job_name"] = item.GetJobName()
+		inventoryjobinfo["last_processed_time"] = item.GetLastProcessedTime().String()
+		inventoryjobinfo["last_scheduled_time"] = item.GetLastScheduledTime().String()
+		inventoryjobinfo["object_type"] = item.GetObjectType()
+		inventoryjobinfo["properties"] = item.GetProperties()
+		inventoryjobinfo["regex"] = item.GetRegex()
+		inventoryjobinfos = append(inventoryjobinfos, inventoryjobinfo)
+	}
+	return inventoryjobinfos
+}
 func flattenListIppoolBlockLeaseRelationship(p []models.IppoolBlockLeaseRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var ippoolblockleaserelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -6774,24 +6794,6 @@ func flattenListPolicyScheduledAction(p []models.PolicyScheduledAction, d *schem
 	}
 	return policyscheduledactions
 }
-func flattenListPolicyinventoryJobInfo(p []models.PolicyinventoryJobInfo, d *schema.ResourceData) []map[string]interface{} {
-	var policyinventoryjobinfos []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		policyinventoryjobinfo := make(map[string]interface{})
-		policyinventoryjobinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		policyinventoryjobinfo["class_id"] = item.GetClassId()
-		policyinventoryjobinfo["execution_status"] = item.GetExecutionStatus()
-		policyinventoryjobinfo["last_scheduled_time"] = item.GetLastScheduledTime().String()
-		policyinventoryjobinfo["object_type"] = item.GetObjectType()
-		policyinventoryjobinfo["policy_id"] = item.GetPolicyId()
-		policyinventoryjobinfo["policy_name"] = item.GetPolicyName()
-		policyinventoryjobinfos = append(policyinventoryjobinfos, policyinventoryjobinfo)
-	}
-	return policyinventoryjobinfos
-}
 func flattenListPoolReservationReference(p []models.PoolReservationReference, d *schema.ResourceData) []map[string]interface{} {
 	var poolreservationreferences []map[string]interface{}
 	if len(p) == 0 {
@@ -7621,6 +7623,23 @@ func flattenListStorageHyperFlexVolumeRelationship(p []models.StorageHyperFlexVo
 		storagehyperflexvolumerelationships = append(storagehyperflexvolumerelationships, storagehyperflexvolumerelationship)
 	}
 	return storagehyperflexvolumerelationships
+}
+func flattenListStorageInternalMoPhysicalDiskConfig(p []models.StorageInternalMoPhysicalDiskConfig, d *schema.ResourceData) []map[string]interface{} {
+	var storageinternalmophysicaldiskconfigs []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		storageinternalmophysicaldiskconfig := make(map[string]interface{})
+		storageinternalmophysicaldiskconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		storageinternalmophysicaldiskconfig["class_id"] = item.GetClassId()
+		storageinternalmophysicaldiskconfig["encryption_op"] = item.GetEncryptionOp()
+		storageinternalmophysicaldiskconfig["object_type"] = item.GetObjectType()
+		storageinternalmophysicaldiskconfig["slot"] = item.GetSlot()
+		storageinternalmophysicaldiskconfig["state"] = item.GetState()
+		storageinternalmophysicaldiskconfigs = append(storageinternalmophysicaldiskconfigs, storageinternalmophysicaldiskconfig)
+	}
+	return storageinternalmophysicaldiskconfigs
 }
 func flattenListStorageItemRelationship(p []models.StorageItemRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var storageitemrelationships []map[string]interface{}
@@ -8453,35 +8472,9 @@ func flattenListVirtualizationNetworkInterface(p []models.VirtualizationNetworkI
 		virtualizationnetworkinterface["class_id"] = item.GetClassId()
 		virtualizationnetworkinterface["connect_at_power_on"] = item.GetConnectAtPowerOn()
 		virtualizationnetworkinterface["direct_path_io"] = item.GetDirectPathIo()
-		virtualizationnetworkinterface["ip_forwarding_enabled"] = item.GetIpForwardingEnabled()
-		virtualizationnetworkinterface["ipv6_address"] = item.GetIpv6Address()
 		virtualizationnetworkinterface["mac_address"] = item.GetMacAddress()
 		virtualizationnetworkinterface["name"] = item.GetName()
-		virtualizationnetworkinterface["network_id"] = item.GetNetworkId()
-		virtualizationnetworkinterface["nic_id"] = item.GetNicId()
 		virtualizationnetworkinterface["object_type"] = item.GetObjectType()
-		virtualizationnetworkinterface["order"] = item.GetOrder()
-		virtualizationnetworkinterface["private_ip_allocation_mode"] = item.GetPrivateIpAllocationMode()
-		virtualizationnetworkinterface["public_ip_allocate"] = item.GetPublicIpAllocate()
-		virtualizationnetworkinterface["security_groups"] = item.GetSecurityGroups()
-		virtualizationnetworkinterface["static_ip_address"] = (func(p []models.VirtualizationIpAddressInfo, d *schema.ResourceData) []map[string]interface{} {
-			var virtualizationipaddressinfos []map[string]interface{}
-			if len(p) == 0 {
-				return nil
-			}
-			for _, item := range p {
-				virtualizationipaddressinfo := make(map[string]interface{})
-				virtualizationipaddressinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-				virtualizationipaddressinfo["class_id"] = item.GetClassId()
-				virtualizationipaddressinfo["gateway_ip"] = item.GetGatewayIp()
-				virtualizationipaddressinfo["ip_address"] = item.GetIpAddress()
-				virtualizationipaddressinfo["object_type"] = item.GetObjectType()
-				virtualizationipaddressinfo["subnet_mask"] = item.GetSubnetMask()
-				virtualizationipaddressinfos = append(virtualizationipaddressinfos, virtualizationipaddressinfo)
-			}
-			return virtualizationipaddressinfos
-		})(item.GetStaticIpAddress(), d)
-		virtualizationnetworkinterface["subnet_id"] = item.GetSubnetId()
 		virtualizationnetworkinterfaces = append(virtualizationnetworkinterfaces, virtualizationnetworkinterface)
 	}
 	return virtualizationnetworkinterfaces
@@ -11504,6 +11497,21 @@ func flattenMapComputeHostUtilityOperationRelationship(p models.ComputeHostUtili
 
 	computehostutilityoperationrelationships = append(computehostutilityoperationrelationships, computehostutilityoperationrelationship)
 	return computehostutilityoperationrelationships
+}
+func flattenMapComputeHostUtilityOperationConfguration(p models.ComputeHostUtilityOperationConfguration, d *schema.ResourceData) []map[string]interface{} {
+	var computehostutilityoperationconfgurations []map[string]interface{}
+	var ret models.ComputeHostUtilityOperationConfguration
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	computehostutilityoperationconfguration := make(map[string]interface{})
+	computehostutilityoperationconfguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	computehostutilityoperationconfguration["class_id"] = item.GetClassId()
+	computehostutilityoperationconfguration["object_type"] = item.GetObjectType()
+
+	computehostutilityoperationconfgurations = append(computehostutilityoperationconfgurations, computehostutilityoperationconfguration)
+	return computehostutilityoperationconfgurations
 }
 func flattenMapComputePersistentMemoryOperation(p models.ComputePersistentMemoryOperation, d *schema.ResourceData) []map[string]interface{} {
 	var computepersistentmemoryoperations []map[string]interface{}
@@ -15526,6 +15534,56 @@ func flattenMapIamSharingRuleRelationship(p models.IamSharingRuleRelationship, d
 
 	iamsharingrulerelationships = append(iamsharingrulerelationships, iamsharingrulerelationship)
 	return iamsharingrulerelationships
+}
+func flattenMapIamSwitchScopePermissions(p models.IamSwitchScopePermissions, d *schema.ResourceData) []map[string]interface{} {
+	var iamswitchscopepermissionss []map[string]interface{}
+	var ret models.IamSwitchScopePermissions
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	iamswitchscopepermissions := make(map[string]interface{})
+	iamswitchscopepermissions["account_access_control_id"] = item.GetAccountAccessControlId()
+	iamswitchscopepermissions["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	iamswitchscopepermissions["class_id"] = item.GetClassId()
+	iamswitchscopepermissions["object_type"] = item.GetObjectType()
+	iamswitchscopepermissions["request_identifier"] = item.GetRequestIdentifier()
+	iamswitchscopepermissions["switched_from_account"] = (func(p models.IamSwitchAccountPermission, d *schema.ResourceData) []map[string]interface{} {
+		var iamswitchaccountpermissions []map[string]interface{}
+		var ret models.IamSwitchAccountPermission
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		iamswitchaccountpermission := make(map[string]interface{})
+		iamswitchaccountpermission["account_id"] = item.GetAccountId()
+		iamswitchaccountpermission["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		iamswitchaccountpermission["class_id"] = item.GetClassId()
+		iamswitchaccountpermission["object_type"] = item.GetObjectType()
+		iamswitchaccountpermission["permission_id"] = item.GetPermissionId()
+
+		iamswitchaccountpermissions = append(iamswitchaccountpermissions, iamswitchaccountpermission)
+		return iamswitchaccountpermissions
+	})(item.GetSwitchedFromAccount(), d)
+	iamswitchscopepermissions["switched_to_accounts"] = (func(p []models.IamSwitchAccountPermission, d *schema.ResourceData) []map[string]interface{} {
+		var iamswitchaccountpermissions []map[string]interface{}
+		if len(p) == 0 {
+			return nil
+		}
+		for _, item := range p {
+			iamswitchaccountpermission := make(map[string]interface{})
+			iamswitchaccountpermission["account_id"] = item.GetAccountId()
+			iamswitchaccountpermission["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			iamswitchaccountpermission["class_id"] = item.GetClassId()
+			iamswitchaccountpermission["object_type"] = item.GetObjectType()
+			iamswitchaccountpermission["permission_id"] = item.GetPermissionId()
+			iamswitchaccountpermissions = append(iamswitchaccountpermissions, iamswitchaccountpermission)
+		}
+		return iamswitchaccountpermissions
+	})(item.GetSwitchedToAccounts(), d)
+
+	iamswitchscopepermissionss = append(iamswitchscopepermissionss, iamswitchscopepermissions)
+	return iamswitchscopepermissionss
 }
 func flattenMapIamSystemRelationship(p models.IamSystemRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iamsystemrelationships []map[string]interface{}
@@ -21321,6 +21379,25 @@ func flattenMapTamSeverity(p models.TamSeverity, d *schema.ResourceData) []map[s
 
 	tamseveritys = append(tamseveritys, tamseverity)
 	return tamseveritys
+}
+func flattenMapTaskFileDownloadInfo(p models.TaskFileDownloadInfo, d *schema.ResourceData) []map[string]interface{} {
+	var taskfiledownloadinfos []map[string]interface{}
+	var ret models.TaskFileDownloadInfo
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	taskfiledownloadinfo := make(map[string]interface{})
+	taskfiledownloadinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	taskfiledownloadinfo["class_id"] = item.GetClassId()
+	taskfiledownloadinfo["contents"] = item.GetContents()
+	taskfiledownloadinfo["object_type"] = item.GetObjectType()
+	taskfiledownloadinfo["path"] = item.GetPath()
+	taskfiledownloadinfo["nr_source"] = item.GetSource()
+	taskfiledownloadinfo["type"] = item.GetType()
+
+	taskfiledownloadinfos = append(taskfiledownloadinfos, taskfiledownloadinfo)
+	return taskfiledownloadinfos
 }
 func flattenMapTechsupportmanagementTechSupportBundleRelationship(p models.TechsupportmanagementTechSupportBundleRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var techsupportmanagementtechsupportbundlerelationships []map[string]interface{}

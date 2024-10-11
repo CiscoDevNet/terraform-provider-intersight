@@ -37,6 +37,32 @@ func Test_intersight_ServicenowApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ServicenowApiService GetServicenowChangeRequestDocByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ServicenowApi.GetServicenowChangeRequestDocByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServicenowApiService GetServicenowChangeRequestDocList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ServicenowApi.GetServicenowChangeRequestDocList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ServicenowApiService GetServicenowChangeRequestList", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -56,6 +82,32 @@ func Test_intersight_ServicenowApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.ServicenowApi.GetServicenowIncidentByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServicenowApiService GetServicenowIncidentDocByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ServicenowApi.GetServicenowIncidentDocByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ServicenowApiService GetServicenowIncidentDocList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ServicenowApi.GetServicenowIncidentDocList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -5237,6 +5237,30 @@ func TestFlattenListInventoryGenericInventoryHolderRelationship(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListInventoryJobInfo(t *testing.T) {
+	p := []models.InventoryJobInfo{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"inventory.JobInfo","ExecutionStatus":"ExecutionStatus %d","JobName":"JobName %d","ObjectType":"inventory.JobInfo"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListInventoryJobInfo(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.InventoryJobInfo{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListInventoryJobInfo(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "inventory.JobInfo", "execution_status": "ExecutionStatus 1", "job_name": "JobName 1", "object_type": "inventory.JobInfo"}, {"class_id": "inventory.JobInfo", "execution_status": "ExecutionStatus 2", "job_name": "JobName 2", "object_type": "inventory.JobInfo"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListIppoolBlockLeaseRelationship(t *testing.T) {
 	p := []models.IppoolBlockLeaseRelationship{}
 	var d = &schema.ResourceData{}
@@ -8165,30 +8189,6 @@ func TestFlattenListPolicyScheduledAction(t *testing.T) {
 		CheckError(t, err)
 	}
 }
-func TestFlattenListPolicyinventoryJobInfo(t *testing.T) {
-	p := []models.PolicyinventoryJobInfo{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"policyinventory.JobInfo","ExecutionStatus":"ExecutionStatus %d","ObjectType":"policyinventory.JobInfo","PolicyId":"PolicyId %d","PolicyName":"PolicyName %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListPolicyinventoryJobInfo(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.PolicyinventoryJobInfo{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListPolicyinventoryJobInfo(p, d)
-	expectedOp := []map[string]interface{}{{"class_id": "policyinventory.JobInfo", "execution_status": "ExecutionStatus 1", "object_type": "policyinventory.JobInfo", "policy_id": "PolicyId 1", "policy_name": "PolicyName 1"}, {"class_id": "policyinventory.JobInfo", "execution_status": "ExecutionStatus 2", "object_type": "policyinventory.JobInfo", "policy_id": "PolicyId 2", "policy_name": "PolicyName 2"}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
 func TestFlattenListPoolReservationReference(t *testing.T) {
 	p := []models.PoolReservationReference{}
 	var d = &schema.ResourceData{}
@@ -9509,6 +9509,30 @@ func TestFlattenListStorageHyperFlexVolumeRelationship(t *testing.T) {
 		CheckError(t, err)
 	}
 }
+func TestFlattenListStorageInternalMoPhysicalDiskConfig(t *testing.T) {
+	p := []models.StorageInternalMoPhysicalDiskConfig{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"storage.InternalMoPhysicalDiskConfig","EncryptionOp":"EncryptionOp %d","ObjectType":"storage.InternalMoPhysicalDiskConfig","Slot":"Slot %d","State":"State %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenListStorageInternalMoPhysicalDiskConfig(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	for i := 1; i < 3; i++ {
+		x := models.StorageInternalMoPhysicalDiskConfig{}
+		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
+		CheckError(t, err)
+		p = append(p, x)
+	}
+	ffOp := flattenListStorageInternalMoPhysicalDiskConfig(p, d)
+	expectedOp := []map[string]interface{}{{"class_id": "storage.InternalMoPhysicalDiskConfig", "encryption_op": "EncryptionOp 1", "object_type": "storage.InternalMoPhysicalDiskConfig", "slot": "Slot 1", "state": "State 1"}, {"class_id": "storage.InternalMoPhysicalDiskConfig", "encryption_op": "EncryptionOp 2", "object_type": "storage.InternalMoPhysicalDiskConfig", "slot": "Slot 2", "state": "State 2"}}
+	for i := 0; i < len(expectedOp); i++ {
+		err := compareMaps(expectedOp[i], ffOp[i], t)
+		CheckError(t, err)
+	}
+}
 func TestFlattenListStorageItemRelationship(t *testing.T) {
 	p := []models.StorageItemRelationship{}
 	var d = &schema.ResourceData{}
@@ -10688,7 +10712,7 @@ func TestFlattenListVirtualizationBaseNetworkRelationship(t *testing.T) {
 func TestFlattenListVirtualizationNetworkInterface(t *testing.T) {
 	p := []models.VirtualizationNetworkInterface{}
 	var d = &schema.ResourceData{}
-	c := `{"AdaptorType":"AdaptorType %d","Bridge":"Bridge %d","ClassId":"virtualization.NetworkInterface","ConnectAtPowerOn":true,"DirectPathIo":true,"IpForwardingEnabled":true,"Ipv6Address":true,"MacAddress":"MacAddress %d","Name":"Name %d","NetworkId":"NetworkId %d","NicId":"NicId %d","ObjectType":"virtualization.NetworkInterface","Order":32,"PrivateIpAllocationMode":"PrivateIpAllocationMode %d","PublicIpAllocate":true,"SubnetId":"SubnetId %d"}`
+	c := `{"AdaptorType":"AdaptorType %d","Bridge":"Bridge %d","ClassId":"virtualization.NetworkInterface","ConnectAtPowerOn":true,"DirectPathIo":true,"MacAddress":"MacAddress %d","Name":"Name %d","ObjectType":"virtualization.NetworkInterface"}`
 
 	//test when the response is empty
 	ffOpEmpty := flattenListVirtualizationNetworkInterface(p, d)
@@ -10703,7 +10727,7 @@ func TestFlattenListVirtualizationNetworkInterface(t *testing.T) {
 		p = append(p, x)
 	}
 	ffOp := flattenListVirtualizationNetworkInterface(p, d)
-	expectedOp := []map[string]interface{}{{"adaptor_type": "AdaptorType 1", "bridge": "Bridge 1", "class_id": "virtualization.NetworkInterface", "connect_at_power_on": true, "direct_path_io": true, "ip_forwarding_enabled": true, "ipv6_address": true, "mac_address": "MacAddress 1", "name": "Name 1", "network_id": "NetworkId 1", "nic_id": "NicId 1", "object_type": "virtualization.NetworkInterface", "order": 32, "private_ip_allocation_mode": "PrivateIpAllocationMode 1", "public_ip_allocate": true, "subnet_id": "SubnetId 1"}, {"adaptor_type": "AdaptorType 2", "bridge": "Bridge 2", "class_id": "virtualization.NetworkInterface", "connect_at_power_on": true, "direct_path_io": true, "ip_forwarding_enabled": true, "ipv6_address": true, "mac_address": "MacAddress 2", "name": "Name 2", "network_id": "NetworkId 2", "nic_id": "NicId 2", "object_type": "virtualization.NetworkInterface", "order": 32, "private_ip_allocation_mode": "PrivateIpAllocationMode 2", "public_ip_allocate": true, "subnet_id": "SubnetId 2"}}
+	expectedOp := []map[string]interface{}{{"adaptor_type": "AdaptorType 1", "bridge": "Bridge 1", "class_id": "virtualization.NetworkInterface", "connect_at_power_on": true, "direct_path_io": true, "mac_address": "MacAddress 1", "name": "Name 1", "object_type": "virtualization.NetworkInterface"}, {"adaptor_type": "AdaptorType 2", "bridge": "Bridge 2", "class_id": "virtualization.NetworkInterface", "connect_at_power_on": true, "direct_path_io": true, "mac_address": "MacAddress 2", "name": "Name 2", "object_type": "virtualization.NetworkInterface"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)
@@ -13382,6 +13406,24 @@ func TestFlattenMapComputeHostUtilityOperationRelationship(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapComputeHostUtilityOperationRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapComputeHostUtilityOperationConfguration(t *testing.T) {
+	p := models.ComputeHostUtilityOperationConfguration{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"compute.HostUtilityOperationConfguration","ObjectType":"compute.HostUtilityOperationConfguration"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapComputeHostUtilityOperationConfguration(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapComputeHostUtilityOperationConfguration(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "compute.HostUtilityOperationConfguration", "object_type": "compute.HostUtilityOperationConfguration"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
@@ -16820,6 +16862,24 @@ func TestFlattenMapIamSharingRuleRelationship(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapIamSharingRuleRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapIamSwitchScopePermissions(t *testing.T) {
+	p := models.IamSwitchScopePermissions{}
+	var d = &schema.ResourceData{}
+	c := `{"AccountAccessControlId":"AccountAccessControlId %d","ClassId":"iam.SwitchScopePermissions","ObjectType":"iam.SwitchScopePermissions","RequestIdentifier":"RequestIdentifier %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapIamSwitchScopePermissions(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapIamSwitchScopePermissions(p, d)[0]
+	expectedOp := map[string]interface{}{"account_access_control_id": "AccountAccessControlId 1", "class_id": "iam.SwitchScopePermissions", "object_type": "iam.SwitchScopePermissions", "request_identifier": "RequestIdentifier 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
@@ -21662,6 +21722,24 @@ func TestFlattenMapTamSeverity(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapTamSeverity(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "tam.Severity", "object_type": "tam.Severity"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapTaskFileDownloadInfo(t *testing.T) {
+	p := models.TaskFileDownloadInfo{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"task.FileDownloadInfo","Contents":"Contents %d","ObjectType":"task.FileDownloadInfo","Path":"Path %d","Source":"Source %d","Type":"Type %d"}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapTaskFileDownloadInfo(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapTaskFileDownloadInfo(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "task.FileDownloadInfo", "contents": "Contents 1", "object_type": "task.FileDownloadInfo", "path": "Path 1", "nr_source": "Source 1", "type": "Type 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }

@@ -3,12 +3,12 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_host_utility_operation"
 description: |-
-        Host operation that need to be performed using host utility (HSU). Operation like secure erase, secure erase wtih decommission are initiated and monitored using this.
+        Host operation that need to be performed using host utility (HSU), like secure erase, secure erase with decommission and scrub are managed by this MO.
 
 ---
 
 # Resource: intersight_compute_host_utility_operation
-Host operation that need to be performed using host utility (HSU). Operation like secure erase, secure erase wtih decommission are initiated and monitored using this.
+Host operation that need to be performed using host utility (HSU), like secure erase, secure erase with decommission and scrub are managed by this MO.
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -24,7 +24,10 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `host_utility_operation_mode`:(string) Host utility operation need to be performed in the endpoint.* `None` - Host utility mode of the operation is set to none by default.* `SecureErase` - EU LOT-9 secure data cleanup on the server components.* `SecureEraseWithDecommission` - EU LOT-9 secure data cleanup on the server components and do decommission. 
+* `host_op_config`:(HashMap) - Host operation related configuration such as scrub components those need to be cleared while scrub are specified using this configuration. 
+This complex property has following sub-properties:
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `host_utility_operation_mode`:(string) Host utility operation need to be performed in the endpoint.* `None` - Host utility mode of the operation is set to none by default.* `SecureErase` - EU LOT-9 secure data cleanup on the server components.* `SecureEraseWithDecommission` - EU LOT-9 secure data cleanup on the server components and do decommission.* `Scrub` - Quick cleanup on storage and BIOS. 
 * `host_utility_operation_status`:(string)(ReadOnly) Task status of the host utility operation.* `Initiated` - This status indicates that host utility operation request is initiated.* `InProgress` - The operation status indicates that host utility operation is in-progress after the basic validations.* `CompletedOk` - The operation status indicates that host utility operation is completed successfully with no error or warning.* `CompletedError` - The operation status indicates that host utility operation is completed with error.* `CompletedWarning` - The operation status indicates that host utility operation is completed with warning.* `Aborted` - The operation status indicates that host utility operation is terminated or aborted.* `Invalidated` - The operation status indicates that host utility operation is invalid due to validation failure. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

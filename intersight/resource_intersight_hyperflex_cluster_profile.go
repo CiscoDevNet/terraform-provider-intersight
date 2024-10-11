@@ -24,7 +24,7 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 		UpdateContext: resourceHyperflexClusterProfileUpdate,
 		DeleteContext: resourceHyperflexClusterProfileDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -491,6 +491,14 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 					return false
 				},
 			},
+			"deployed_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"description": {
 				Description:  "Description of the profile.",
 				Type:         schema.TypeString,
@@ -962,7 +970,6 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
 				Elem: &schema.Resource{
-					CustomizeDiff: CustomizePolicyBucketDiff,
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
 							Type:             schema.TypeString,
@@ -1035,6 +1042,14 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 					},
 				},
 			},
+			"removed_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"replication": {
 				Description: "The number of copies of each data block written.",
 				Type:        schema.TypeInt,
@@ -1998,6 +2013,19 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		o.SetDataIpAddress(x)
 	}
 
+	if v, ok := d.GetOk("deployed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetDeployedPolicies(x)
+		}
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -2427,6 +2455,19 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		if len(p) > 0 {
 			x := p[0]
 			o.SetProxySetting(x)
+		}
+	}
+
+	if v, ok := d.GetOk("removed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetRemovedPolicies(x)
 		}
 	}
 
@@ -2998,6 +3039,10 @@ func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceDa
 		return diag.Errorf("error occurred while setting property DataIpAddress in HyperflexClusterProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("deployed_policies", (s.GetDeployedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property DeployedPolicies in HyperflexClusterProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in HyperflexClusterProfile object: %s", err.Error())
 	}
@@ -3096,6 +3141,10 @@ func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceDa
 
 	if err := d.Set("proxy_setting", flattenMapHyperflexProxySettingPolicyRelationship(s.GetProxySetting(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ProxySetting in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("removed_policies", (s.GetRemovedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property RemovedPolicies in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("replication", (s.GetReplication())); err != nil {
@@ -3532,6 +3581,18 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		v := d.Get("data_ip_address")
 		x := (v.(string))
 		o.SetDataIpAddress(x)
+	}
+
+	if d.HasChange("deployed_policies") {
+		v := d.Get("deployed_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDeployedPolicies(x)
 	}
 
 	if d.HasChange("description") {
@@ -3978,6 +4039,18 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 			x := p[0]
 			o.SetProxySetting(x)
 		}
+	}
+
+	if d.HasChange("removed_policies") {
+		v := d.Get("removed_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRemovedPolicies(x)
 	}
 
 	if d.HasChange("replication") {

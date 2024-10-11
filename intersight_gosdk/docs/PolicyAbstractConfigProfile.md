@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **Action** | Pointer to **string** | User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. | [optional] [default to "No-op"]
 **ActionParams** | Pointer to [**[]PolicyActionParam**](PolicyActionParam.md) |  | [optional] 
 **ConfigContext** | Pointer to [**NullablePolicyConfigContext**](PolicyConfigContext.md) |  | [optional] 
+**DeployedPolicies** | Pointer to **[]string** |  | [optional] 
+**RemovedPolicies** | Pointer to **[]string** |  | [optional] 
 **ScheduledActions** | Pointer to [**[]PolicyScheduledAction**](PolicyScheduledAction.md) |  | [optional] 
 **PolicyBucket** | Pointer to [**[]PolicyAbstractPolicyRelationship**](PolicyAbstractPolicyRelationship.md) | An array of relationships to policyAbstractPolicy resources. | [optional] 
 
@@ -166,6 +168,76 @@ HasConfigContext returns a boolean if a field has been set.
 `func (o *PolicyAbstractConfigProfile) UnsetConfigContext()`
 
 UnsetConfigContext ensures that no value is present for ConfigContext, not even an explicit nil
+### GetDeployedPolicies
+
+`func (o *PolicyAbstractConfigProfile) GetDeployedPolicies() []string`
+
+GetDeployedPolicies returns the DeployedPolicies field if non-nil, zero value otherwise.
+
+### GetDeployedPoliciesOk
+
+`func (o *PolicyAbstractConfigProfile) GetDeployedPoliciesOk() (*[]string, bool)`
+
+GetDeployedPoliciesOk returns a tuple with the DeployedPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeployedPolicies
+
+`func (o *PolicyAbstractConfigProfile) SetDeployedPolicies(v []string)`
+
+SetDeployedPolicies sets DeployedPolicies field to given value.
+
+### HasDeployedPolicies
+
+`func (o *PolicyAbstractConfigProfile) HasDeployedPolicies() bool`
+
+HasDeployedPolicies returns a boolean if a field has been set.
+
+### SetDeployedPoliciesNil
+
+`func (o *PolicyAbstractConfigProfile) SetDeployedPoliciesNil(b bool)`
+
+ SetDeployedPoliciesNil sets the value for DeployedPolicies to be an explicit nil
+
+### UnsetDeployedPolicies
+`func (o *PolicyAbstractConfigProfile) UnsetDeployedPolicies()`
+
+UnsetDeployedPolicies ensures that no value is present for DeployedPolicies, not even an explicit nil
+### GetRemovedPolicies
+
+`func (o *PolicyAbstractConfigProfile) GetRemovedPolicies() []string`
+
+GetRemovedPolicies returns the RemovedPolicies field if non-nil, zero value otherwise.
+
+### GetRemovedPoliciesOk
+
+`func (o *PolicyAbstractConfigProfile) GetRemovedPoliciesOk() (*[]string, bool)`
+
+GetRemovedPoliciesOk returns a tuple with the RemovedPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemovedPolicies
+
+`func (o *PolicyAbstractConfigProfile) SetRemovedPolicies(v []string)`
+
+SetRemovedPolicies sets RemovedPolicies field to given value.
+
+### HasRemovedPolicies
+
+`func (o *PolicyAbstractConfigProfile) HasRemovedPolicies() bool`
+
+HasRemovedPolicies returns a boolean if a field has been set.
+
+### SetRemovedPoliciesNil
+
+`func (o *PolicyAbstractConfigProfile) SetRemovedPoliciesNil(b bool)`
+
+ SetRemovedPoliciesNil sets the value for RemovedPolicies to be an explicit nil
+
+### UnsetRemovedPolicies
+`func (o *PolicyAbstractConfigProfile) UnsetRemovedPolicies()`
+
+UnsetRemovedPolicies ensures that no value is present for RemovedPolicies, not even an explicit nil
 ### GetScheduledActions
 
 `func (o *PolicyAbstractConfigProfile) GetScheduledActions() []PolicyScheduledAction`

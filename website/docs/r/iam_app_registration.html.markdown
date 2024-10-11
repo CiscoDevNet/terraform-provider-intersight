@@ -97,6 +97,21 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `scope`:(HashMap) -(ReadOnly) Scope holds a collection of account Id, permission Id to which the current session is scoped to. 
+This complex property has following sub-properties:
+  + `account_access_control_id`:(string)(ReadOnly) Moid of the AccountAccessControl through which the access is given to switch scope. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `request_identifier`:(string)(ReadOnly) Stores the identifier of the issue for which user is trying to switch scope to another account. 
+  + `switched_from_account`:(HashMap) -(ReadOnly) Permission for the Account from which user switched the scope. 
+This complex property has following sub-properties:
+    + `account_id`:(string)(ReadOnly) Moid of the Account to/from which user switched the scope. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `permission_id`:(string)(ReadOnly) Moid of the Permission for the Account to/from which user switched the scope. 
+  + `switched_to_accounts`:(Array)
+This complex property has following sub-properties:
+    + `account_id`:(string)(ReadOnly) Moid of the Account to/from which user switched the scope. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `permission_id`:(string)(ReadOnly) Moid of the Permission for the Account to/from which user switched the scope. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `show_consent_screen`:(bool) Set to true if consent screen needs to be shown during the OAuth login process.Applicable only for public AppRegistrations, means only 'authorization_code' grantType.Note that consent screen will be shown on each login. 
 * `start_time`:(string)(ReadOnly) The timestamp at which an expiry date was first set on this app registration. For expiring App Registrations, this field is same as the create time of the App Registration.For never-expiring App Registrations, this field is set initially to zero time value. If a never-expiry App Registration is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field. 

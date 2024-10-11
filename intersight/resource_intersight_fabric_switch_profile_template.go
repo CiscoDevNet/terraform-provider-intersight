@@ -24,7 +24,7 @@ func resourceFabricSwitchProfileTemplate() *schema.Resource {
 		UpdateContext: resourceFabricSwitchProfileTemplateUpdate,
 		DeleteContext: resourceFabricSwitchProfileTemplateDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -272,6 +272,14 @@ func resourceFabricSwitchProfileTemplate() *schema.Resource {
 					}
 					return
 				}},
+			"deployed_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"description": {
 				Description:  "Description of the profile.",
 				Type:         schema.TypeString,
@@ -413,7 +421,6 @@ func resourceFabricSwitchProfileTemplate() *schema.Resource {
 				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
 				Elem: &schema.Resource{
-					CustomizeDiff: CustomizePolicyBucketDiff,
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
 							Type:             schema.TypeString,
@@ -446,6 +453,14 @@ func resourceFabricSwitchProfileTemplate() *schema.Resource {
 					},
 				},
 			},
+			"removed_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"scheduled_actions": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -573,6 +588,13 @@ func resourceFabricSwitchProfileTemplate() *schema.Resource {
 						},
 					},
 				},
+			},
+			"switch_id": {
+				Description:  "Value indicating the switch side on which the switch profile or template has to be deployed.\n* `None` - Switch side not defined for the policy configurations in the switch profile or template.\n* `A` - Policy configurations in the switch profile or template to be deployed on fabric interconnect A.\n* `B` - Policy configurations in the switch profile or template to be deployed on fabric interconnect B.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "A", "B"}, false),
+				Optional:     true,
+				Default:      "None",
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -884,6 +906,19 @@ func resourceFabricSwitchProfileTemplateCreate(c context.Context, d *schema.Reso
 		}
 	}
 
+	if v, ok := d.GetOk("deployed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetDeployedPolicies(x)
+		}
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -940,6 +975,19 @@ func resourceFabricSwitchProfileTemplateCreate(c context.Context, d *schema.Reso
 		}
 		if len(x) > 0 {
 			o.SetPolicyBucket(x)
+		}
+	}
+
+	if v, ok := d.GetOk("removed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetRemovedPolicies(x)
 		}
 	}
 
@@ -1071,6 +1119,11 @@ func resourceFabricSwitchProfileTemplateCreate(c context.Context, d *schema.Reso
 		}
 	}
 
+	if v, ok := d.GetOk("switch_id"); ok {
+		x := (v.(string))
+		o.SetSwitchId(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1193,6 +1246,10 @@ func resourceFabricSwitchProfileTemplateRead(c context.Context, d *schema.Resour
 		return diag.Errorf("error occurred while setting property CreateTime in FabricSwitchProfileTemplate object: %s", err.Error())
 	}
 
+	if err := d.Set("deployed_policies", (s.GetDeployedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property DeployedPolicies in FabricSwitchProfileTemplate object: %s", err.Error())
+	}
+
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in FabricSwitchProfileTemplate object: %s", err.Error())
 	}
@@ -1233,6 +1290,10 @@ func resourceFabricSwitchProfileTemplateRead(c context.Context, d *schema.Resour
 		return diag.Errorf("error occurred while setting property PolicyBucket in FabricSwitchProfileTemplate object: %s", err.Error())
 	}
 
+	if err := d.Set("removed_policies", (s.GetRemovedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property RemovedPolicies in FabricSwitchProfileTemplate object: %s", err.Error())
+	}
+
 	if err := d.Set("scheduled_actions", flattenListPolicyScheduledAction(s.GetScheduledActions(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ScheduledActions in FabricSwitchProfileTemplate object: %s", err.Error())
 	}
@@ -1247,6 +1308,10 @@ func resourceFabricSwitchProfileTemplateRead(c context.Context, d *schema.Resour
 
 	if err := d.Set("switch_cluster_profile_template", flattenMapFabricSwitchClusterProfileTemplateRelationship(s.GetSwitchClusterProfileTemplate(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property SwitchClusterProfileTemplate in FabricSwitchProfileTemplate object: %s", err.Error())
+	}
+
+	if err := d.Set("switch_id", (s.GetSwitchId())); err != nil {
+		return diag.Errorf("error occurred while setting property SwitchId in FabricSwitchProfileTemplate object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
@@ -1389,6 +1454,18 @@ func resourceFabricSwitchProfileTemplateUpdate(c context.Context, d *schema.Reso
 		}
 	}
 
+	if d.HasChange("deployed_policies") {
+		v := d.Get("deployed_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDeployedPolicies(x)
+	}
+
 	if d.HasChange("description") {
 		v := d.Get("description")
 		x := (v.(string))
@@ -1448,6 +1525,18 @@ func resourceFabricSwitchProfileTemplateUpdate(c context.Context, d *schema.Reso
 			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
 		}
 		o.SetPolicyBucket(x)
+	}
+
+	if d.HasChange("removed_policies") {
+		v := d.Get("removed_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRemovedPolicies(x)
 	}
 
 	if d.HasChange("scheduled_actions") {
@@ -1577,6 +1666,12 @@ func resourceFabricSwitchProfileTemplateUpdate(c context.Context, d *schema.Reso
 			x := p[0]
 			o.SetSwitchClusterProfileTemplate(x)
 		}
+	}
+
+	if d.HasChange("switch_id") {
+		v := d.Get("switch_id")
+		x := (v.(string))
+		o.SetSwitchId(x)
 	}
 
 	if d.HasChange("tags") {

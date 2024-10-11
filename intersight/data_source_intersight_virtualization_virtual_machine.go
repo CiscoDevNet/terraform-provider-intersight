@@ -462,16 +462,6 @@ func getVirtualizationVirtualMachineSchema() map[string]*schema.Schema {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
-					"ip_forwarding_enabled": {
-						Description: "Set to true, if IP forwarding is enabled on the NIC.",
-						Type:        schema.TypeBool,
-						Optional:    true,
-					},
-					"ipv6_address": {
-						Description: "Set to true, if IPv6 address should be allocated for the NIC.",
-						Type:        schema.TypeBool,
-						Optional:    true,
-					},
 					"mac_address": {
 						Description: "Virtual machine network mac address.",
 						Type:        schema.TypeString,
@@ -482,81 +472,8 @@ func getVirtualizationVirtualMachineSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"network_id": {
-						Description: "Identity of the network to which this network interface belongs.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"nic_id": {
-						Description: "Identity of the network interface.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"order": {
-						Description: "Order of the NIC attachment to the VM.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"private_ip_allocation_mode": {
-						Description: "Allocation mode for NIC addresses e.g. DHCP or static.\n* `DHCP` - Dynamic IP address allocation using DHCP protocol.\n* `STATIC_IP` - Assign fixed / static IPs to resources for use.\n* `IPAM_CALLOUT` - Use callout scripts to query cloud IP allocation tools to assign network parameters.\n* `PREALLOCATE_IP` - Allows the cloud infrastructure IP allocation to be dynamically provided before the server boots up.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"public_ip_allocate": {
-						Description: "Set to true, if public IP should be allocated for the NIC.",
-						Type:        schema.TypeBool,
-						Optional:    true,
-					},
-					"security_groups": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Schema{
-							Type: schema.TypeString}},
-					"static_ip_address": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"gateway_ip": {
-									Description: "IP address of the device on network which forwards local traffic to other networks.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"ip_address": {
-									Description: "An IP address is a 32-bit number. It uniquely identifies a host in given network.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"subnet_mask": {
-									Description: "A 32 bit number which helps to identify the host and rest of the network.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"subnet_id": {
-						Description: "Subnet identifier for the NIC.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1486,18 +1403,6 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					o.SetDirectPathIo(x)
 				}
 			}
-			if v, ok := l["ip_forwarding_enabled"]; ok {
-				{
-					x := (v.(bool))
-					o.SetIpForwardingEnabled(x)
-				}
-			}
-			if v, ok := l["ipv6_address"]; ok {
-				{
-					x := (v.(bool))
-					o.SetIpv6Address(x)
-				}
-			}
 			if v, ok := l["mac_address"]; ok {
 				{
 					x := (v.(string))
@@ -1510,109 +1415,10 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					o.SetName(x)
 				}
 			}
-			if v, ok := l["network_id"]; ok {
-				{
-					x := (v.(string))
-					o.SetNetworkId(x)
-				}
-			}
-			if v, ok := l["nic_id"]; ok {
-				{
-					x := (v.(string))
-					o.SetNicId(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["order"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetOrder(x)
-				}
-			}
-			if v, ok := l["private_ip_allocation_mode"]; ok {
-				{
-					x := (v.(string))
-					o.SetPrivateIpAllocationMode(x)
-				}
-			}
-			if v, ok := l["public_ip_allocate"]; ok {
-				{
-					x := (v.(bool))
-					o.SetPublicIpAllocate(x)
-				}
-			}
-			if v, ok := l["security_groups"]; ok {
-				{
-					x := make([]string, 0)
-					y := reflect.ValueOf(v)
-					for i := 0; i < y.Len(); i++ {
-						if y.Index(i).Interface() != nil {
-							x = append(x, y.Index(i).Interface().(string))
-						}
-					}
-					if len(x) > 0 {
-						o.SetSecurityGroups(x)
-					}
-				}
-			}
-			if v, ok := l["static_ip_address"]; ok {
-				{
-					x := make([]models.VirtualizationIpAddressInfo, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewVirtualizationIpAddressInfoWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("virtualization.IpAddressInfo")
-						if v, ok := l["gateway_ip"]; ok {
-							{
-								x := (v.(string))
-								o.SetGatewayIp(x)
-							}
-						}
-						if v, ok := l["ip_address"]; ok {
-							{
-								x := (v.(string))
-								o.SetIpAddress(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["subnet_mask"]; ok {
-							{
-								x := (v.(string))
-								o.SetSubnetMask(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetStaticIpAddress(x)
-					}
-				}
-			}
-			if v, ok := l["subnet_id"]; ok {
-				{
-					x := (v.(string))
-					o.SetSubnetId(x)
 				}
 			}
 			x = append(x, *o)

@@ -35,6 +35,18 @@ func Test_intersight_ComputeApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ComputeApiService CreateComputeScrubPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ComputeApi.CreateComputeScrubPolicy(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ComputeApiService DeleteComputeRackUnit", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -55,6 +67,19 @@ func Test_intersight_ComputeApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.ComputeApi.DeleteComputeRackUnitIdentity(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ComputeApiService DeleteComputeScrubPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.ComputeApi.DeleteComputeScrubPolicy(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -334,6 +359,32 @@ func Test_intersight_ComputeApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ComputeApiService GetComputeScrubPolicyByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ComputeApi.GetComputeScrubPolicyByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ComputeApiService GetComputeScrubPolicyList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ComputeApi.GetComputeScrubPolicyList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ComputeApiService GetComputeServerIdPoolByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -536,6 +587,20 @@ func Test_intersight_ComputeApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test ComputeApiService PatchComputeScrubPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ComputeApi.PatchComputeScrubPolicy(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ComputeApiService PatchComputeServerPowerPolicy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -655,6 +720,20 @@ func Test_intersight_ComputeApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.ComputeApi.UpdateComputeRackUnitIdentity(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ComputeApiService UpdateComputeScrubPolicy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.ComputeApi.UpdateComputeScrubPolicy(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

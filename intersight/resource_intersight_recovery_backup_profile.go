@@ -24,7 +24,7 @@ func resourceRecoveryBackupProfile() *schema.Resource {
 		UpdateContext: resourceRecoveryBackupProfileUpdate,
 		DeleteContext: resourceRecoveryBackupProfileDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -312,6 +312,14 @@ func resourceRecoveryBackupProfile() *schema.Resource {
 					}
 					return
 				}},
+			"deployed_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"description": {
 				Description:  "Description of the profile.",
 				Type:         schema.TypeString,
@@ -540,7 +548,6 @@ func resourceRecoveryBackupProfile() *schema.Resource {
 				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
 				Elem: &schema.Resource{
-					CustomizeDiff: CustomizePolicyBucketDiff,
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
 							Type:             schema.TypeString,
@@ -573,6 +580,14 @@ func resourceRecoveryBackupProfile() *schema.Resource {
 					},
 				},
 			},
+			"removed_policies": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				}},
 			"schedule_config": {
 				Description: "A reference to a recoveryScheduleConfigPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -1054,6 +1069,19 @@ func resourceRecoveryBackupProfileCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOk("deployed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetDeployedPolicies(x)
+		}
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -1201,6 +1229,19 @@ func resourceRecoveryBackupProfileCreate(c context.Context, d *schema.ResourceDa
 		}
 		if len(x) > 0 {
 			o.SetPolicyBucket(x)
+		}
+	}
+
+	if v, ok := d.GetOk("removed_policies"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		if len(x) > 0 {
+			o.SetRemovedPolicies(x)
 		}
 	}
 
@@ -1458,6 +1499,10 @@ func resourceRecoveryBackupProfileRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property CreateTime in RecoveryBackupProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("deployed_policies", (s.GetDeployedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property DeployedPolicies in RecoveryBackupProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in RecoveryBackupProfile object: %s", err.Error())
 	}
@@ -1508,6 +1553,10 @@ func resourceRecoveryBackupProfileRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("policy_bucket", flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PolicyBucket in RecoveryBackupProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("removed_policies", (s.GetRemovedPolicies())); err != nil {
+		return diag.Errorf("error occurred while setting property RemovedPolicies in RecoveryBackupProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("schedule_config", flattenMapRecoveryScheduleConfigPolicyRelationship(s.GetScheduleConfig(), d)); err != nil {
@@ -1710,6 +1759,18 @@ func resourceRecoveryBackupProfileUpdate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if d.HasChange("deployed_policies") {
+		v := d.Get("deployed_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDeployedPolicies(x)
+	}
+
 	if d.HasChange("description") {
 		v := d.Get("description")
 		x := (v.(string))
@@ -1863,6 +1924,18 @@ func resourceRecoveryBackupProfileUpdate(c context.Context, d *schema.ResourceDa
 			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
 		}
 		o.SetPolicyBucket(x)
+	}
+
+	if d.HasChange("removed_policies") {
+		v := d.Get("removed_policies")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetRemovedPolicies(x)
 	}
 
 	if d.HasChange("schedule_config") {

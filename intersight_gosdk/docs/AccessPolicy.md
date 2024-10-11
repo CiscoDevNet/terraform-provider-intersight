@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "access.Policy"]
 **AddressType** | Pointer to [**NullableAccessAddressType**](AccessAddressType.md) |  | [optional] 
 **ConfigurationType** | Pointer to [**NullableAccessConfigurationType**](AccessConfigurationType.md) |  | [optional] 
-**InbandVlan** | Pointer to **int64** | VLAN to be used for server access over Inband network. | [optional] 
+**InbandVlan** | Pointer to **int64** | VLAN to be used for server access over Inband network. When Inband is enabled, only numbers between 4 to 4093 are allowed. | [optional] [default to 0]
 **InbandIpPool** | Pointer to [**NullableIppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
 **InbandVrf** | Pointer to [**NullableVrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 

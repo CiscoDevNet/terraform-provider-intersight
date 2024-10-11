@@ -21,7 +21,7 @@ func resourceComputeHostUtilityOperation() *schema.Resource {
 		ReadContext:   resourceComputeHostUtilityOperationRead,
 		DeleteContext: resourceComputeHostUtilityOperationDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -163,10 +163,43 @@ func resourceComputeHostUtilityOperation() *schema.Resource {
 				},
 				ForceNew: true,
 			},
+			"host_op_config": {
+				Description: "Host operation related configuration such as scrub components those need to be cleared while scrub are specified using this configuration.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+							ForceNew:         true,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ForceNew:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ForceNew:    true,
+						},
+					},
+				},
+				ForceNew: true,
+			},
 			"host_utility_operation_mode": {
-				Description:  "Host utility operation need to be performed in the endpoint.\n* `None` - Host utility mode of the operation is set to none by default.\n* `SecureErase` - EU LOT-9 secure data cleanup on the server components.\n* `SecureEraseWithDecommission` - EU LOT-9 secure data cleanup on the server components and do decommission.",
+				Description:  "Host utility operation need to be performed in the endpoint.\n* `None` - Host utility mode of the operation is set to none by default.\n* `SecureErase` - EU LOT-9 secure data cleanup on the server components.\n* `SecureEraseWithDecommission` - EU LOT-9 secure data cleanup on the server components and do decommission.\n* `Scrub` - Quick cleanup on storage and BIOS.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"None", "SecureErase", "SecureEraseWithDecommission"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"None", "SecureErase", "SecureEraseWithDecommission", "Scrub"}, false),
 				Optional:     true,
 				Default:      "None",
 				ForceNew:     true,
@@ -641,6 +674,37 @@ func resourceComputeHostUtilityOperationCreate(c context.Context, d *schema.Reso
 
 	o.SetClassId("compute.HostUtilityOperation")
 
+	if v, ok := d.GetOk("host_op_config"); ok {
+		p := make([]models.ComputeHostUtilityOperationConfguration, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewComputeHostUtilityOperationConfgurationWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("compute.HostUtilityOperationConfguration")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetHostOpConfig(x)
+		}
+	}
+
 	if v, ok := d.GetOk("host_utility_operation_mode"); ok {
 		x := (v.(string))
 		o.SetHostUtilityOperationMode(x)
@@ -852,6 +916,10 @@ func resourceComputeHostUtilityOperationRead(c context.Context, d *schema.Resour
 
 	if err := d.Set("download_status", flattenMapComputeDownloadStatusRelationship(s.GetDownloadStatus(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property DownloadStatus in ComputeHostUtilityOperation object: %s", err.Error())
+	}
+
+	if err := d.Set("host_op_config", flattenMapComputeHostUtilityOperationConfguration(s.GetHostOpConfig(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property HostOpConfig in ComputeHostUtilityOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("host_utility_operation_mode", (s.GetHostUtilityOperationMode())); err != nil {

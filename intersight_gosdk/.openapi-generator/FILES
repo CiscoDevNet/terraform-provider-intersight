@@ -15,6 +15,7 @@ api_bulk.go
 api_capability.go
 api_catalystsdwan.go
 api_certificatemanagement.go
+api_changelog.go
 api_chassis.go
 api_cloud.go
 api_comm.go
@@ -755,6 +756,9 @@ docs/CapabilitySiocModuleManufacturingDefResponse.md
 docs/CapabilityStorageControllerUpdateConstraintMeta.md
 docs/CapabilityStorageControllerUpdateConstraintMetaList.md
 docs/CapabilityStorageControllerUpdateConstraintMetaResponse.md
+docs/CapabilityStorageControllersMetaData.md
+docs/CapabilityStorageControllersMetaDataList.md
+docs/CapabilityStorageControllersMetaDataResponse.md
 docs/CapabilitySwitchCapability.md
 docs/CapabilitySwitchCapabilityDef.md
 docs/CapabilitySwitchCapabilityList.md
@@ -806,6 +810,10 @@ docs/CertificatemanagementPolicyInventoryResponse.md
 docs/CertificatemanagementPolicyList.md
 docs/CertificatemanagementPolicyResponse.md
 docs/CertificatemanagementRootCaCertificate.md
+docs/ChangelogApi.md
+docs/ChangelogItem.md
+docs/ChangelogItemList.md
+docs/ChangelogItemResponse.md
 docs/ChassisApi.md
 docs/ChassisBaseProfile.md
 docs/ChassisBaseProfileRelationship.md
@@ -959,6 +967,7 @@ docs/ComputeDownloadStatusList.md
 docs/ComputeDownloadStatusRelationship.md
 docs/ComputeDownloadStatusResponse.md
 docs/ComputeHostUtilityOperation.md
+docs/ComputeHostUtilityOperationConfguration.md
 docs/ComputeHostUtilityOperationList.md
 docs/ComputeHostUtilityOperationRelationship.md
 docs/ComputeHostUtilityOperationResponse.md
@@ -988,6 +997,10 @@ docs/ComputeRackUnitIdentityResponse.md
 docs/ComputeRackUnitList.md
 docs/ComputeRackUnitRelationship.md
 docs/ComputeRackUnitResponse.md
+docs/ComputeScrubOpConfigutation.md
+docs/ComputeScrubPolicy.md
+docs/ComputeScrubPolicyList.md
+docs/ComputeScrubPolicyResponse.md
 docs/ComputeServerConfig.md
 docs/ComputeServerIdPool.md
 docs/ComputeServerIdPoolList.md
@@ -2285,6 +2298,8 @@ docs/IamSharingRuleList.md
 docs/IamSharingRuleRelationship.md
 docs/IamSharingRuleResponse.md
 docs/IamSsoSessionAttributes.md
+docs/IamSwitchAccountPermission.md
+docs/IamSwitchScopePermissions.md
 docs/IamSystem.md
 docs/IamSystemList.md
 docs/IamSystemRelationship.md
@@ -2339,6 +2354,7 @@ docs/InventoryGenericInventoryResponse.md
 docs/InventoryInterface.md
 docs/InventoryInterfaceRelationship.md
 docs/InventoryInventoryMo.md
+docs/InventoryJobInfo.md
 docs/InventoryRequest.md
 docs/InventoryUemInfo.md
 docs/IpmioverlanApi.md
@@ -2768,6 +2784,12 @@ docs/MemoryPersistentMemoryUnit.md
 docs/MemoryPersistentMemoryUnitList.md
 docs/MemoryPersistentMemoryUnitRelationship.md
 docs/MemoryPersistentMemoryUnitResponse.md
+docs/MemoryPolicy.md
+docs/MemoryPolicyInventory.md
+docs/MemoryPolicyInventoryList.md
+docs/MemoryPolicyInventoryResponse.md
+docs/MemoryPolicyList.md
+docs/MemoryPolicyResponse.md
 docs/MemoryUnit.md
 docs/MemoryUnitList.md
 docs/MemoryUnitRelationship.md
@@ -2801,10 +2823,16 @@ docs/MetaIdentityDefinition.md
 docs/MetaPropDefinition.md
 docs/MetaRelationshipDefinition.md
 docs/MetricsApi.md
+docs/MetricsConfiguration.md
+docs/MetricsConfigurationList.md
+docs/MetricsConfigurationResponse.md
 docs/MetricsMetricCriterion.md
 docs/MetricsMetricsExploration.md
 docs/MetricsMetricsExplorationList.md
 docs/MetricsMetricsExplorationResponse.md
+docs/MetricsResourceConfiguration.md
+docs/MetricsResourceConfigurationList.md
+docs/MetricsResourceConfigurationResponse.md
 docs/MoAggregateTransform.md
 docs/MoBaseComplexType.md
 docs/MoBaseMo.md
@@ -3475,8 +3503,6 @@ docs/PolicyPolicyError.md
 docs/PolicyPolicyStatus.md
 docs/PolicyQualifier.md
 docs/PolicyScheduledAction.md
-docs/PolicyinventoryAbstractDeviceInfo.md
-docs/PolicyinventoryJobInfo.md
 docs/PoolAbstractBlock.md
 docs/PoolAbstractBlockLease.md
 docs/PoolAbstractBlockType.md
@@ -3748,9 +3774,15 @@ docs/ServiceitemMessage.md
 docs/ServiceitemSelectionCriteriaInput.md
 docs/ServicenowApi.md
 docs/ServicenowChangeRequest.md
+docs/ServicenowChangeRequestDoc.md
+docs/ServicenowChangeRequestDocList.md
+docs/ServicenowChangeRequestDocResponse.md
 docs/ServicenowChangeRequestList.md
 docs/ServicenowChangeRequestResponse.md
 docs/ServicenowIncident.md
+docs/ServicenowIncidentDoc.md
+docs/ServicenowIncidentDocList.md
+docs/ServicenowIncidentDocResponse.md
 docs/ServicenowIncidentList.md
 docs/ServicenowIncidentResponse.md
 docs/ServicenowInventoryEntity.md
@@ -4049,6 +4081,7 @@ docs/StorageHyperFlexVolumeList.md
 docs/StorageHyperFlexVolumeRelationship.md
 docs/StorageHyperFlexVolumeResponse.md
 docs/StorageInitiator.md
+docs/StorageInternalMoPhysicalDiskConfig.md
 docs/StorageItem.md
 docs/StorageItemList.md
 docs/StorageItemRelationship.md
@@ -4056,6 +4089,9 @@ docs/StorageItemResponse.md
 docs/StorageKeySetting.md
 docs/StorageKmipAuthCredentials.md
 docs/StorageKmipServer.md
+docs/StorageKnoxSecureDriveConfiguration.md
+docs/StorageKnoxSecureDriveConfigurationList.md
+docs/StorageKnoxSecureDriveConfigurationResponse.md
 docs/StorageLocalKeySetting.md
 docs/StorageM2VirtualDriveConfig.md
 docs/StorageManualDriveGroup.md
@@ -4412,7 +4448,9 @@ docs/TamSecurityAdvisoryResponse.md
 docs/TamSeverity.md
 docs/TamTextFsmTemplateDataSource.md
 docs/TaskApi.md
+docs/TaskCatalystSdwanScopedInventory.md
 docs/TaskFabricMosScopedInventory.md
+docs/TaskFileDownloadInfo.md
 docs/TaskHitachiScopedInventory.md
 docs/TaskHyperFlexManagementScopedInventory.md
 docs/TaskHyperflexScopedInventory.md
@@ -4426,6 +4464,9 @@ docs/TaskNexusVlanScopedInventory.md
 docs/TaskPublicCloudScopedInventory.md
 docs/TaskPureScopedInventory.md
 docs/TaskServerScopedInventory.md
+docs/TaskWorkflowAction.md
+docs/TaskWorkflowActionList.md
+docs/TaskWorkflowActionResponse.md
 docs/TechsupportmanagementApi.md
 docs/TechsupportmanagementApplianceParam.md
 docs/TechsupportmanagementCollectionControlPolicy.md
@@ -4467,6 +4508,7 @@ docs/TelemetryDruidBaseQuerySpec.md
 docs/TelemetryDruidBaseRequest.md
 docs/TelemetryDruidBaseSearchSpec.md
 docs/TelemetryDruidBaseTopNMetricSpec.md
+docs/TelemetryDruidBaseVirtualColumn.md
 docs/TelemetryDruidBoundFilter.md
 docs/TelemetryDruidColumnComparisonFilter.md
 docs/TelemetryDruidConstantPostAggregator.md
@@ -4484,6 +4526,7 @@ docs/TelemetryDruidEqualityFilter.md
 docs/TelemetryDruidError.md
 docs/TelemetryDruidExpressionFilter.md
 docs/TelemetryDruidExpressionPostAggregator.md
+docs/TelemetryDruidExpressionVirtualColumn.md
 docs/TelemetryDruidExtractionDimensionSpec.md
 docs/TelemetryDruidExtractionFunction.md
 docs/TelemetryDruidExtractionFunctionBucket.md
@@ -4523,6 +4566,7 @@ docs/TelemetryDruidIntervalResult.md
 docs/TelemetryDruidInvertedTopNMetricSpec.md
 docs/TelemetryDruidJoinDataSource.md
 docs/TelemetryDruidLikeFilter.md
+docs/TelemetryDruidListFilteredVirtualColumn.md
 docs/TelemetryDruidLookupDataSource.md
 docs/TelemetryDruidMinMaxAggregator.md
 docs/TelemetryDruidNotFilter.md
@@ -4564,6 +4608,9 @@ docs/TelemetryDruidTopNRequest.md
 docs/TelemetryDruidTopNResult.md
 docs/TelemetryDruidTrueFilter.md
 docs/TelemetryDruidUnionDataSource.md
+docs/TelemetryDruidVirtualColumn.md
+docs/TelemetryNestedFieldVirtualColumn.md
+docs/TelemetryNestedFieldVirtualColumnAllOfPathParts.md
 docs/TemplateTransformationStage.md
 docs/TerminalApi.md
 docs/TerminalAuditLog.md
@@ -4625,10 +4672,6 @@ docs/ViewServerList.md
 docs/ViewServerResponse.md
 docs/VirtualizationActionInfo.md
 docs/VirtualizationApi.md
-docs/VirtualizationAwsVmComputeConfiguration.md
-docs/VirtualizationAwsVmConfiguration.md
-docs/VirtualizationAwsVmNetworkConfiguration.md
-docs/VirtualizationAwsVmStorageConfiguration.md
 docs/VirtualizationBaseCluster.md
 docs/VirtualizationBaseClusterRelationship.md
 docs/VirtualizationBaseCustomSpec.md
@@ -4664,10 +4707,6 @@ docs/VirtualizationBaseVirtualNetworkInterfaceCard.md
 docs/VirtualizationBaseVirtualSwitch.md
 docs/VirtualizationBaseVmConfiguration.md
 docs/VirtualizationCloudInitConfig.md
-docs/VirtualizationCloudVmComputeConfiguration.md
-docs/VirtualizationCloudVmConfiguration.md
-docs/VirtualizationCloudVmNetworkConfiguration.md
-docs/VirtualizationCloudVmStorageConfiguration.md
 docs/VirtualizationComputeCapacity.md
 docs/VirtualizationCpuInfo.md
 docs/VirtualizationEsxiCloneCustomSpec.md
@@ -4684,7 +4723,6 @@ docs/VirtualizationGuestInfo.md
 docs/VirtualizationHost.md
 docs/VirtualizationHostList.md
 docs/VirtualizationHostResponse.md
-docs/VirtualizationIpAddressInfo.md
 docs/VirtualizationMemoryCapacity.md
 docs/VirtualizationNetworkInterface.md
 docs/VirtualizationProductInfo.md
@@ -4782,7 +4820,6 @@ docs/VirtualizationVmwareVmCpuShareInfo.md
 docs/VirtualizationVmwareVmCpuSocketInfo.md
 docs/VirtualizationVmwareVmDiskCommitInfo.md
 docs/VirtualizationVmwareVmMemoryShareInfo.md
-docs/VirtualizationVolumeInfo.md
 docs/VmediaApi.md
 docs/VmediaMapping.md
 docs/VmediaPolicy.md
@@ -5795,6 +5832,9 @@ model_capability_sioc_module_manufacturing_def_response.go
 model_capability_storage_controller_update_constraint_meta.go
 model_capability_storage_controller_update_constraint_meta_list.go
 model_capability_storage_controller_update_constraint_meta_response.go
+model_capability_storage_controllers_meta_data.go
+model_capability_storage_controllers_meta_data_list.go
+model_capability_storage_controllers_meta_data_response.go
 model_capability_switch_capability.go
 model_capability_switch_capability_def.go
 model_capability_switch_capability_list.go
@@ -5844,6 +5884,9 @@ model_certificatemanagement_policy_inventory_response.go
 model_certificatemanagement_policy_list.go
 model_certificatemanagement_policy_response.go
 model_certificatemanagement_root_ca_certificate.go
+model_changelog_item.go
+model_changelog_item_list.go
+model_changelog_item_response.go
 model_chassis_base_profile.go
 model_chassis_base_profile_relationship.go
 model_chassis_config_change_detail.go
@@ -5993,6 +6036,7 @@ model_compute_download_status_list.go
 model_compute_download_status_relationship.go
 model_compute_download_status_response.go
 model_compute_host_utility_operation.go
+model_compute_host_utility_operation_confguration.go
 model_compute_host_utility_operation_list.go
 model_compute_host_utility_operation_relationship.go
 model_compute_host_utility_operation_response.go
@@ -6022,6 +6066,10 @@ model_compute_rack_unit_identity_response.go
 model_compute_rack_unit_list.go
 model_compute_rack_unit_relationship.go
 model_compute_rack_unit_response.go
+model_compute_scrub_op_configutation.go
+model_compute_scrub_policy.go
+model_compute_scrub_policy_list.go
+model_compute_scrub_policy_response.go
 model_compute_server_config.go
 model_compute_server_id_pool.go
 model_compute_server_id_pool_list.go
@@ -7295,6 +7343,8 @@ model_iam_sharing_rule_list.go
 model_iam_sharing_rule_relationship.go
 model_iam_sharing_rule_response.go
 model_iam_sso_session_attributes.go
+model_iam_switch_account_permission.go
+model_iam_switch_scope_permissions.go
 model_iam_system.go
 model_iam_system_list.go
 model_iam_system_relationship.go
@@ -7348,6 +7398,7 @@ model_inventory_generic_inventory_response.go
 model_inventory_interface.go
 model_inventory_interface_relationship.go
 model_inventory_inventory_mo.go
+model_inventory_job_info.go
 model_inventory_request.go
 model_inventory_uem_info.go
 model_ipmioverlan_policy.go
@@ -7765,6 +7816,12 @@ model_memory_persistent_memory_unit.go
 model_memory_persistent_memory_unit_list.go
 model_memory_persistent_memory_unit_relationship.go
 model_memory_persistent_memory_unit_response.go
+model_memory_policy.go
+model_memory_policy_inventory.go
+model_memory_policy_inventory_list.go
+model_memory_policy_inventory_response.go
+model_memory_policy_list.go
+model_memory_policy_response.go
 model_memory_unit.go
 model_memory_unit_list.go
 model_memory_unit_relationship.go
@@ -7795,10 +7852,16 @@ model_meta_display_name_definition.go
 model_meta_identity_definition.go
 model_meta_prop_definition.go
 model_meta_relationship_definition.go
+model_metrics_configuration.go
+model_metrics_configuration_list.go
+model_metrics_configuration_response.go
 model_metrics_metric_criterion.go
 model_metrics_metrics_exploration.go
 model_metrics_metrics_exploration_list.go
 model_metrics_metrics_exploration_response.go
+model_metrics_resource_configuration.go
+model_metrics_resource_configuration_list.go
+model_metrics_resource_configuration_response.go
 model_mo_aggregate_transform.go
 model_mo_base_complex_type.go
 model_mo_base_mo.go
@@ -8455,8 +8518,6 @@ model_policy_policy_error.go
 model_policy_policy_status.go
 model_policy_qualifier.go
 model_policy_scheduled_action.go
-model_policyinventory_abstract_device_info.go
-model_policyinventory_job_info.go
 model_pool_abstract_block.go
 model_pool_abstract_block_lease.go
 model_pool_abstract_block_type.go
@@ -8712,9 +8773,15 @@ model_serviceitem_health_check_error_element.go
 model_serviceitem_message.go
 model_serviceitem_selection_criteria_input.go
 model_servicenow_change_request.go
+model_servicenow_change_request_doc.go
+model_servicenow_change_request_doc_list.go
+model_servicenow_change_request_doc_response.go
 model_servicenow_change_request_list.go
 model_servicenow_change_request_response.go
 model_servicenow_incident.go
+model_servicenow_incident_doc.go
+model_servicenow_incident_doc_list.go
+model_servicenow_incident_doc_response.go
 model_servicenow_incident_list.go
 model_servicenow_incident_response.go
 model_servicenow_inventory_entity.go
@@ -9006,6 +9073,7 @@ model_storage_hyper_flex_volume_list.go
 model_storage_hyper_flex_volume_relationship.go
 model_storage_hyper_flex_volume_response.go
 model_storage_initiator.go
+model_storage_internal_mo_physical_disk_config.go
 model_storage_item.go
 model_storage_item_list.go
 model_storage_item_relationship.go
@@ -9013,6 +9081,9 @@ model_storage_item_response.go
 model_storage_key_setting.go
 model_storage_kmip_auth_credentials.go
 model_storage_kmip_server.go
+model_storage_knox_secure_drive_configuration.go
+model_storage_knox_secure_drive_configuration_list.go
+model_storage_knox_secure_drive_configuration_response.go
 model_storage_local_key_setting.go
 model_storage_m2_virtual_drive_config.go
 model_storage_manual_drive_group.go
@@ -9366,7 +9437,9 @@ model_tam_security_advisory_list.go
 model_tam_security_advisory_response.go
 model_tam_severity.go
 model_tam_text_fsm_template_data_source.go
+model_task_catalyst_sdwan_scoped_inventory.go
 model_task_fabric_mos_scoped_inventory.go
+model_task_file_download_info.go
 model_task_hitachi_scoped_inventory.go
 model_task_hyper_flex_management_scoped_inventory.go
 model_task_hyperflex_scoped_inventory.go
@@ -9380,6 +9453,9 @@ model_task_nexus_vlan_scoped_inventory.go
 model_task_public_cloud_scoped_inventory.go
 model_task_pure_scoped_inventory.go
 model_task_server_scoped_inventory.go
+model_task_workflow_action.go
+model_task_workflow_action_list.go
+model_task_workflow_action_response.go
 model_techsupportmanagement_appliance_param.go
 model_techsupportmanagement_collection_control_policy.go
 model_techsupportmanagement_collection_control_policy_list.go
@@ -9419,6 +9495,7 @@ model_telemetry_druid_base_query_spec.go
 model_telemetry_druid_base_request.go
 model_telemetry_druid_base_search_spec.go
 model_telemetry_druid_base_top_n_metric_spec.go
+model_telemetry_druid_base_virtual_column.go
 model_telemetry_druid_bound_filter.go
 model_telemetry_druid_column_comparison_filter.go
 model_telemetry_druid_constant_post_aggregator.go
@@ -9436,6 +9513,7 @@ model_telemetry_druid_equality_filter.go
 model_telemetry_druid_error.go
 model_telemetry_druid_expression_filter.go
 model_telemetry_druid_expression_post_aggregator.go
+model_telemetry_druid_expression_virtual_column.go
 model_telemetry_druid_extraction_dimension_spec.go
 model_telemetry_druid_extraction_function.go
 model_telemetry_druid_extraction_function_bucket.go
@@ -9475,6 +9553,7 @@ model_telemetry_druid_interval_result.go
 model_telemetry_druid_inverted_top_n_metric_spec.go
 model_telemetry_druid_join_data_source.go
 model_telemetry_druid_like_filter.go
+model_telemetry_druid_list_filtered_virtual_column.go
 model_telemetry_druid_lookup_data_source.go
 model_telemetry_druid_min_max_aggregator.go
 model_telemetry_druid_not_filter.go
@@ -9516,6 +9595,9 @@ model_telemetry_druid_top_n_request.go
 model_telemetry_druid_top_n_result.go
 model_telemetry_druid_true_filter.go
 model_telemetry_druid_union_data_source.go
+model_telemetry_druid_virtual_column.go
+model_telemetry_nested_field_virtual_column.go
+model_telemetry_nested_field_virtual_column_all_of_path_parts.go
 model_template_transformation_stage.go
 model_terminal_audit_log.go
 model_terminal_audit_log_list.go
@@ -9570,10 +9652,6 @@ model_view_server.go
 model_view_server_list.go
 model_view_server_response.go
 model_virtualization_action_info.go
-model_virtualization_aws_vm_compute_configuration.go
-model_virtualization_aws_vm_configuration.go
-model_virtualization_aws_vm_network_configuration.go
-model_virtualization_aws_vm_storage_configuration.go
 model_virtualization_base_cluster.go
 model_virtualization_base_cluster_relationship.go
 model_virtualization_base_custom_spec.go
@@ -9609,10 +9687,6 @@ model_virtualization_base_virtual_network_interface_card.go
 model_virtualization_base_virtual_switch.go
 model_virtualization_base_vm_configuration.go
 model_virtualization_cloud_init_config.go
-model_virtualization_cloud_vm_compute_configuration.go
-model_virtualization_cloud_vm_configuration.go
-model_virtualization_cloud_vm_network_configuration.go
-model_virtualization_cloud_vm_storage_configuration.go
 model_virtualization_compute_capacity.go
 model_virtualization_cpu_info.go
 model_virtualization_esxi_clone_custom_spec.go
@@ -9629,7 +9703,6 @@ model_virtualization_guest_info.go
 model_virtualization_host.go
 model_virtualization_host_list.go
 model_virtualization_host_response.go
-model_virtualization_ip_address_info.go
 model_virtualization_memory_capacity.go
 model_virtualization_network_interface.go
 model_virtualization_product_info.go
@@ -9727,7 +9800,6 @@ model_virtualization_vmware_vm_cpu_share_info.go
 model_virtualization_vmware_vm_cpu_socket_info.go
 model_virtualization_vmware_vm_disk_commit_info.go
 model_virtualization_vmware_vm_memory_share_info.go
-model_virtualization_volume_info.go
 model_vmedia_mapping.go
 model_vmedia_policy.go
 model_vmedia_policy_inventory.go
@@ -10116,6 +10188,7 @@ test/api_bulk_test.go
 test/api_capability_test.go
 test/api_catalystsdwan_test.go
 test/api_certificatemanagement_test.go
+test/api_changelog_test.go
 test/api_chassis_test.go
 test/api_cloud_test.go
 test/api_comm_test.go

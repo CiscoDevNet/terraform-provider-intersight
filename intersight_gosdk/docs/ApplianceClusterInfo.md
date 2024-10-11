@@ -10,6 +10,14 @@ Name | Type | Description | Notes
 **Gateway** | Pointer to **string** | Default gateway configured on the peer node. | [optional] 
 **Hostip** | Pointer to **string** | Publicly accessible IP of the peer node. | [optional] 
 **Hostname** | Pointer to **string** | Publicly accessible FQDN of the peer node. | [optional] 
+**InstallerVersion** | Pointer to **string** | Installer version used to install on peer node. | [optional] 
+**PartitionDatabase** | Pointer to **int64** | The partition size for /opt/database of this node. | [optional] 
+**PartitionFileCisco** | Pointer to **int64** | The partition size for /Cisco of this node. | [optional] 
+**PartitionOptData** | Pointer to **int64** | The partition size for /opt/cisco/data of this node. | [optional] 
+**PartitionOptKafka** | Pointer to **int64** | The partition size for /opt/kafka of this node. | [optional] 
+**PartitionOptMongo** | Pointer to **int64** | The partition size for /opt/mongodb of this node. | [optional] 
+**PartitionVarLibDocker** | Pointer to **int64** | The partition size for /var/lib/docker of this node. | [optional] 
+**PartitionVarLog** | Pointer to **int64** | The partition size for /var of this node. | [optional] 
 **Peerkey** | Pointer to **string** | The public key of peer host. | [optional] 
 **Responsekey** | Pointer to **string** | Public key returned to the client. | [optional] 
 **Status** | Pointer to **string** | The status of the cluster join process. * &#x60;Unknown&#x60; - The status of the appliance node is unknown. * &#x60;Operational&#x60; - The appliance node is operational. * &#x60;Impaired&#x60; - The appliance node is impaired. * &#x60;AttentionNeeded&#x60; - The appliance node needs attention. * &#x60;ReadyToJoin&#x60; - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * &#x60;OutOfService&#x60; - The user has taken this node (part of a cluster) to out of service. * &#x60;ReadyForReplacement&#x60; - The cluster node is ready to be replaced. * &#x60;ReplacementInProgress&#x60; - The cluster node replacement is in progress. * &#x60;ReplacementFailed&#x60; - There was a failure during the cluster node replacement. | [optional] [readonly] [default to "Unknown"]
@@ -175,6 +183,206 @@ SetHostname sets Hostname field to given value.
 `func (o *ApplianceClusterInfo) HasHostname() bool`
 
 HasHostname returns a boolean if a field has been set.
+
+### GetInstallerVersion
+
+`func (o *ApplianceClusterInfo) GetInstallerVersion() string`
+
+GetInstallerVersion returns the InstallerVersion field if non-nil, zero value otherwise.
+
+### GetInstallerVersionOk
+
+`func (o *ApplianceClusterInfo) GetInstallerVersionOk() (*string, bool)`
+
+GetInstallerVersionOk returns a tuple with the InstallerVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstallerVersion
+
+`func (o *ApplianceClusterInfo) SetInstallerVersion(v string)`
+
+SetInstallerVersion sets InstallerVersion field to given value.
+
+### HasInstallerVersion
+
+`func (o *ApplianceClusterInfo) HasInstallerVersion() bool`
+
+HasInstallerVersion returns a boolean if a field has been set.
+
+### GetPartitionDatabase
+
+`func (o *ApplianceClusterInfo) GetPartitionDatabase() int64`
+
+GetPartitionDatabase returns the PartitionDatabase field if non-nil, zero value otherwise.
+
+### GetPartitionDatabaseOk
+
+`func (o *ApplianceClusterInfo) GetPartitionDatabaseOk() (*int64, bool)`
+
+GetPartitionDatabaseOk returns a tuple with the PartitionDatabase field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartitionDatabase
+
+`func (o *ApplianceClusterInfo) SetPartitionDatabase(v int64)`
+
+SetPartitionDatabase sets PartitionDatabase field to given value.
+
+### HasPartitionDatabase
+
+`func (o *ApplianceClusterInfo) HasPartitionDatabase() bool`
+
+HasPartitionDatabase returns a boolean if a field has been set.
+
+### GetPartitionFileCisco
+
+`func (o *ApplianceClusterInfo) GetPartitionFileCisco() int64`
+
+GetPartitionFileCisco returns the PartitionFileCisco field if non-nil, zero value otherwise.
+
+### GetPartitionFileCiscoOk
+
+`func (o *ApplianceClusterInfo) GetPartitionFileCiscoOk() (*int64, bool)`
+
+GetPartitionFileCiscoOk returns a tuple with the PartitionFileCisco field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartitionFileCisco
+
+`func (o *ApplianceClusterInfo) SetPartitionFileCisco(v int64)`
+
+SetPartitionFileCisco sets PartitionFileCisco field to given value.
+
+### HasPartitionFileCisco
+
+`func (o *ApplianceClusterInfo) HasPartitionFileCisco() bool`
+
+HasPartitionFileCisco returns a boolean if a field has been set.
+
+### GetPartitionOptData
+
+`func (o *ApplianceClusterInfo) GetPartitionOptData() int64`
+
+GetPartitionOptData returns the PartitionOptData field if non-nil, zero value otherwise.
+
+### GetPartitionOptDataOk
+
+`func (o *ApplianceClusterInfo) GetPartitionOptDataOk() (*int64, bool)`
+
+GetPartitionOptDataOk returns a tuple with the PartitionOptData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartitionOptData
+
+`func (o *ApplianceClusterInfo) SetPartitionOptData(v int64)`
+
+SetPartitionOptData sets PartitionOptData field to given value.
+
+### HasPartitionOptData
+
+`func (o *ApplianceClusterInfo) HasPartitionOptData() bool`
+
+HasPartitionOptData returns a boolean if a field has been set.
+
+### GetPartitionOptKafka
+
+`func (o *ApplianceClusterInfo) GetPartitionOptKafka() int64`
+
+GetPartitionOptKafka returns the PartitionOptKafka field if non-nil, zero value otherwise.
+
+### GetPartitionOptKafkaOk
+
+`func (o *ApplianceClusterInfo) GetPartitionOptKafkaOk() (*int64, bool)`
+
+GetPartitionOptKafkaOk returns a tuple with the PartitionOptKafka field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartitionOptKafka
+
+`func (o *ApplianceClusterInfo) SetPartitionOptKafka(v int64)`
+
+SetPartitionOptKafka sets PartitionOptKafka field to given value.
+
+### HasPartitionOptKafka
+
+`func (o *ApplianceClusterInfo) HasPartitionOptKafka() bool`
+
+HasPartitionOptKafka returns a boolean if a field has been set.
+
+### GetPartitionOptMongo
+
+`func (o *ApplianceClusterInfo) GetPartitionOptMongo() int64`
+
+GetPartitionOptMongo returns the PartitionOptMongo field if non-nil, zero value otherwise.
+
+### GetPartitionOptMongoOk
+
+`func (o *ApplianceClusterInfo) GetPartitionOptMongoOk() (*int64, bool)`
+
+GetPartitionOptMongoOk returns a tuple with the PartitionOptMongo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartitionOptMongo
+
+`func (o *ApplianceClusterInfo) SetPartitionOptMongo(v int64)`
+
+SetPartitionOptMongo sets PartitionOptMongo field to given value.
+
+### HasPartitionOptMongo
+
+`func (o *ApplianceClusterInfo) HasPartitionOptMongo() bool`
+
+HasPartitionOptMongo returns a boolean if a field has been set.
+
+### GetPartitionVarLibDocker
+
+`func (o *ApplianceClusterInfo) GetPartitionVarLibDocker() int64`
+
+GetPartitionVarLibDocker returns the PartitionVarLibDocker field if non-nil, zero value otherwise.
+
+### GetPartitionVarLibDockerOk
+
+`func (o *ApplianceClusterInfo) GetPartitionVarLibDockerOk() (*int64, bool)`
+
+GetPartitionVarLibDockerOk returns a tuple with the PartitionVarLibDocker field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartitionVarLibDocker
+
+`func (o *ApplianceClusterInfo) SetPartitionVarLibDocker(v int64)`
+
+SetPartitionVarLibDocker sets PartitionVarLibDocker field to given value.
+
+### HasPartitionVarLibDocker
+
+`func (o *ApplianceClusterInfo) HasPartitionVarLibDocker() bool`
+
+HasPartitionVarLibDocker returns a boolean if a field has been set.
+
+### GetPartitionVarLog
+
+`func (o *ApplianceClusterInfo) GetPartitionVarLog() int64`
+
+GetPartitionVarLog returns the PartitionVarLog field if non-nil, zero value otherwise.
+
+### GetPartitionVarLogOk
+
+`func (o *ApplianceClusterInfo) GetPartitionVarLogOk() (*int64, bool)`
+
+GetPartitionVarLogOk returns a tuple with the PartitionVarLog field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartitionVarLog
+
+`func (o *ApplianceClusterInfo) SetPartitionVarLog(v int64)`
+
+SetPartitionVarLog sets PartitionVarLog field to given value.
+
+### HasPartitionVarLog
+
+`func (o *ApplianceClusterInfo) HasPartitionVarLog() bool`
+
+HasPartitionVarLog returns a boolean if a field has been set.
 
 ### GetPeerkey
 

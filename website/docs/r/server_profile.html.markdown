@@ -113,6 +113,8 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `deploy_status`:(string)(ReadOnly) The status of the server profile indicating if deployment has been initiated on both fabric interconnects or not.* `None` - Switch profiles not deployed on either of the switches.* `Complete` - Both switch profiles of the cluster profile are deployed.* `Partial` - Only one of the switch profiles of the cluster profile is deployed. 
+* `deployed_policies`:
+                (Array of schema.TypeString) -
 * `deployed_switches`:(string)(ReadOnly) The property which determines if the deployment should be skipped on any of the Fabric Interconnects. It is set based on the state of a fabric interconnect to Intersight before the deployment of the server proile begins.* `None` - Server profile configuration not deployed on either of the fabric interconnects.* `AB` - Server profile configuration deployed on both fabric interconnects.* `A` - Server profile configuration deployed on fabric interconnect A only.* `B` - Server profile configuration deployed on fabric interconnect B only. 
 * `description`:(string) Description of the profile. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
@@ -158,6 +160,8 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `removed_policies`:
+                (Array of schema.TypeString) -
 * `reservation_references`:(Array)
 This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [fcpool.ReservationReference](#fcpoolReservationReference)

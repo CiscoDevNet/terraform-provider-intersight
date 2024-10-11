@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Filter** | Pointer to [**TelemetryDruidFilter**](TelemetryDruidFilter.md) |  | [optional] 
 **Aggregations** | Pointer to [**[]TelemetryDruidAggregator**](TelemetryDruidAggregator.md) | Aggregation functions are used to summarize data in buckets. Summarization functions include counting rows, calculating the min/max/sum of metrics and retrieving the first/last value of metrics for each bucket. Additional summarization functions are available with extensions. If no aggregator is provided, the results will be empty for each bucket. | [optional] 
 **PostAggregations** | Pointer to [**[]TelemetryDruidPostAggregator**](TelemetryDruidPostAggregator.md) | Post-aggregations are specifications of processing that should happen on aggregated values as they come out of Apache Druid. If you include a post aggregation as part of a query, make sure to include all aggregators the post-aggregator requires. | [optional] 
+**VirtualColumns** | Pointer to [**[]TelemetryDruidVirtualColumn**](TelemetryDruidVirtualColumn.md) | Virtual columns are columns that are computed on the fly during query execution. It can potentially draw from multiple underlying columns, although a virtual column always presents itself as a single column. Virtual columns can be referenced by their output names to be used as dimensions or as inputs to filters and aggregators. | [optional] 
 **Limit** | Pointer to **int32** | An integer that limits the number of results. The default is unlimited. | [optional] 
 **Context** | Pointer to [**TelemetryDruidQueryContext**](TelemetryDruidQueryContext.md) |  | [optional] 
 
@@ -213,6 +214,31 @@ SetPostAggregations sets PostAggregations field to given value.
 `func (o *TelemetryDruidTimeSeriesRequest) HasPostAggregations() bool`
 
 HasPostAggregations returns a boolean if a field has been set.
+
+### GetVirtualColumns
+
+`func (o *TelemetryDruidTimeSeriesRequest) GetVirtualColumns() []TelemetryDruidVirtualColumn`
+
+GetVirtualColumns returns the VirtualColumns field if non-nil, zero value otherwise.
+
+### GetVirtualColumnsOk
+
+`func (o *TelemetryDruidTimeSeriesRequest) GetVirtualColumnsOk() (*[]TelemetryDruidVirtualColumn, bool)`
+
+GetVirtualColumnsOk returns a tuple with the VirtualColumns field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVirtualColumns
+
+`func (o *TelemetryDruidTimeSeriesRequest) SetVirtualColumns(v []TelemetryDruidVirtualColumn)`
+
+SetVirtualColumns sets VirtualColumns field to given value.
+
+### HasVirtualColumns
+
+`func (o *TelemetryDruidTimeSeriesRequest) HasVirtualColumns() bool`
+
+HasVirtualColumns returns a boolean if a field has been set.
 
 ### GetLimit
 

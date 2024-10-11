@@ -130,6 +130,11 @@ func getApplianceClusterInfoSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"installer_version": {
+			Description: "Installer version used to install on peer node.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -184,6 +189,41 @@ func getApplianceClusterInfoSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"partition_database": {
+			Description: "The partition size for /opt/database of this node.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"partition_file_cisco": {
+			Description: "The partition size for /Cisco of this node.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"partition_opt_data": {
+			Description: "The partition size for /opt/cisco/data of this node.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"partition_opt_kafka": {
+			Description: "The partition size for /opt/kafka of this node.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"partition_opt_mongo": {
+			Description: "The partition size for /opt/mongodb of this node.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"partition_var_lib_docker": {
+			Description: "The partition size for /var/lib/docker of this node.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"partition_var_log": {
+			Description: "The partition size for /var of this node.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"peerkey": {
 			Description: "The public key of peer host.",
@@ -539,6 +579,11 @@ func dataSourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceDat
 		o.SetHostname(x)
 	}
 
+	if v, ok := d.GetOk("installer_version"); ok {
+		x := (v.(string))
+		o.SetInstallerVersion(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -606,6 +651,41 @@ func dataSourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceDat
 			x := p[0]
 			o.SetParent(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("partition_database"); ok {
+		x := int64(v.(int))
+		o.SetPartitionDatabase(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_file_cisco"); ok {
+		x := int64(v.(int))
+		o.SetPartitionFileCisco(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_opt_data"); ok {
+		x := int64(v.(int))
+		o.SetPartitionOptData(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_opt_kafka"); ok {
+		x := int64(v.(int))
+		o.SetPartitionOptKafka(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_opt_mongo"); ok {
+		x := int64(v.(int))
+		o.SetPartitionOptMongo(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_var_lib_docker"); ok {
+		x := int64(v.(int))
+		o.SetPartitionVarLibDocker(x)
+	}
+
+	if v, ok := d.GetOkExists("partition_var_log"); ok {
+		x := int64(v.(int))
+		o.SetPartitionVarLog(x)
 	}
 
 	if v, ok := d.GetOk("peerkey"); ok {
@@ -834,6 +914,7 @@ func dataSourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceDat
 				temp["gateway"] = (s.GetGateway())
 				temp["hostip"] = (s.GetHostip())
 				temp["hostname"] = (s.GetHostname())
+				temp["installer_version"] = (s.GetInstallerVersion())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -841,6 +922,13 @@ func dataSourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceDat
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["partition_database"] = (s.GetPartitionDatabase())
+				temp["partition_file_cisco"] = (s.GetPartitionFileCisco())
+				temp["partition_opt_data"] = (s.GetPartitionOptData())
+				temp["partition_opt_kafka"] = (s.GetPartitionOptKafka())
+				temp["partition_opt_mongo"] = (s.GetPartitionOptMongo())
+				temp["partition_var_lib_docker"] = (s.GetPartitionVarLibDocker())
+				temp["partition_var_log"] = (s.GetPartitionVarLog())
 				temp["peerkey"] = (s.GetPeerkey())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)

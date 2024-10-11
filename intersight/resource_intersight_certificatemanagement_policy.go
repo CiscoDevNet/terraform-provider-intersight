@@ -23,7 +23,7 @@ func resourceCertificatemanagementPolicy() *schema.Resource {
 		UpdateContext: resourceCertificatemanagementPolicyUpdate,
 		DeleteContext: resourceCertificatemanagementPolicyDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -83,7 +83,7 @@ func resourceCertificatemanagementPolicy() *schema.Resource {
 			"certificates": {
 				Type:       schema.TypeList,
 				MaxItems:   2550,
-				MinItems:   1,
+				MinItems:   0,
 				Optional:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,

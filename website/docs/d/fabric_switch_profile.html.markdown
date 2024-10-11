@@ -23,5 +23,6 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the profile instance or profile template. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `switch_id`:(string) Value indicating the switch side on which the switch profile or template has to be deployed.* `None` - Switch side not defined for the policy configurations in the switch profile or template.* `A` - Policy configurations in the switch profile or template to be deployed on fabric interconnect A.* `B` - Policy configurations in the switch profile or template to be deployed on fabric interconnect B. 
 * `type`:(string) Defines the type of the profile. Accepted values are instance or template.* `instance` - The profile defines the configuration for a specific instance of a target. 
  

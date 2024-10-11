@@ -23,7 +23,7 @@ func resourceBootPrecisionPolicy() *schema.Resource {
 		UpdateContext: resourceBootPrecisionPolicyUpdate,
 		DeleteContext: resourceBootPrecisionPolicyDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
-		CustomizeDiff: CustomizeTagDiff,
+		CustomizeDiff: CombinedCustomizeDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -83,7 +83,7 @@ func resourceBootPrecisionPolicy() *schema.Resource {
 			"boot_devices": {
 				Type:       schema.TypeList,
 				MaxItems:   255,
-				MinItems:   1,
+				MinItems:   0,
 				Optional:   true,
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
