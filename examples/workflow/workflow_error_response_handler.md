@@ -11,7 +11,7 @@ resource "intersight_workflow_error_response_handler" "workflow_error_response_h
     object_type         = "content.TextParameter"
     name                = "show-pure"
     item_type           = "string"
-    type                = "string"
+    nr_type                = "string"
   }
   types {
     object_type = "content.ComplexType"
@@ -22,7 +22,7 @@ resource "intersight_workflow_error_response_handler" "workflow_error_response_h
       object_type         = "content.TextParameter"
       name                = "show-hitachi"
       item_type           = "string"
-      type                = "string"
+      nr_type                = "string"
     }
   }
   catalog {
