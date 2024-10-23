@@ -9,6 +9,6 @@ resource "intersight_recovery_schedule_config_policy" "recovery_schedule_config_
     object_type    = "recovery.BackupSchedule"
     frequency_unit = "Daily"
     hours          = "8"
-    execution_time = "Thu, 21 Oct 2024 15:04:05 UTC"
+    execution_time = "Thu, 21 Oct 2028 15:04:05 UTC"
   }
 }
