@@ -156,7 +156,7 @@ func getVirtualizationVmwareDatacenterSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWS\nvirtual machine, and datacenter name in case of VMware virtual machine.",
+			Description: "Name of the virtual machine placement. It is datacenter name in case of VMware virtual machine.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

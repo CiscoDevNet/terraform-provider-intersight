@@ -6,8 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ether.HostPort"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ether.HostPort"]
+**AdminState** | Pointer to **string** | Administratively configured state (enabled/disabled) for this port. | [optional] [readonly] 
 **AggregatePortId** | Pointer to **int64** | Breakout port member in the fabric extender. | [optional] [readonly] 
-**ModuleId** | Pointer to **int64** | Fabric extender identifier for this port. | [optional] 
+**ModuleId** | Pointer to **int64** | Fabric extender identifier for this port. | [optional] [readonly] 
 **Speed** | Pointer to **string** | Host Port Speed of IO card or fabric extender. | [optional] [readonly] 
 **EquipmentIoCardBase** | Pointer to [**NullableEquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -70,6 +71,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAdminState
+
+`func (o *EtherHostPort) GetAdminState() string`
+
+GetAdminState returns the AdminState field if non-nil, zero value otherwise.
+
+### GetAdminStateOk
+
+`func (o *EtherHostPort) GetAdminStateOk() (*string, bool)`
+
+GetAdminStateOk returns a tuple with the AdminState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdminState
+
+`func (o *EtherHostPort) SetAdminState(v string)`
+
+SetAdminState sets AdminState field to given value.
+
+### HasAdminState
+
+`func (o *EtherHostPort) HasAdminState() bool`
+
+HasAdminState returns a boolean if a field has been set.
 
 ### GetAggregatePortId
 

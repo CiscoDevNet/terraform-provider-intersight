@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18775
+API version: 1.0.11-2024100405
 Contact: intersight@cisco.com
 */
 
@@ -37,6 +37,8 @@ type ComputePhysical struct {
 	AvailableMemory *int64 `json:"AvailableMemory,omitempty"`
 	// The BIOS POST completion status of the server.
 	BiosPostComplete *bool `json:"BiosPostComplete,omitempty"`
+	// Total processing capacity of the server.
+	CpuCapacity *float32 `json:"CpuCapacity,omitempty"`
 	// The DIMM Blocklisting setting configured on the server. * `Unknown` - The configured state is unknown. * `Enabled` - The configured state is enabled. * `Disabled` - The configured state is disabled.
 	DimmBlocklisting *string `json:"DimmBlocklisting,omitempty"`
 	// The fault summary for the server.
@@ -368,6 +370,38 @@ func (o *ComputePhysical) HasBiosPostComplete() bool {
 // SetBiosPostComplete gets a reference to the given bool and assigns it to the BiosPostComplete field.
 func (o *ComputePhysical) SetBiosPostComplete(v bool) {
 	o.BiosPostComplete = &v
+}
+
+// GetCpuCapacity returns the CpuCapacity field value if set, zero value otherwise.
+func (o *ComputePhysical) GetCpuCapacity() float32 {
+	if o == nil || IsNil(o.CpuCapacity) {
+		var ret float32
+		return ret
+	}
+	return *o.CpuCapacity
+}
+
+// GetCpuCapacityOk returns a tuple with the CpuCapacity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetCpuCapacityOk() (*float32, bool) {
+	if o == nil || IsNil(o.CpuCapacity) {
+		return nil, false
+	}
+	return o.CpuCapacity, true
+}
+
+// HasCpuCapacity returns a boolean if a field has been set.
+func (o *ComputePhysical) HasCpuCapacity() bool {
+	if o != nil && !IsNil(o.CpuCapacity) {
+		return true
+	}
+
+	return false
+}
+
+// SetCpuCapacity gets a reference to the given float32 and assigns it to the CpuCapacity field.
+func (o *ComputePhysical) SetCpuCapacity(v float32) {
+	o.CpuCapacity = &v
 }
 
 // GetDimmBlocklisting returns the DimmBlocklisting field value if set, zero value otherwise.
@@ -1830,6 +1864,9 @@ func (o ComputePhysical) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BiosPostComplete) {
 		toSerialize["BiosPostComplete"] = o.BiosPostComplete
 	}
+	if !IsNil(o.CpuCapacity) {
+		toSerialize["CpuCapacity"] = o.CpuCapacity
+	}
 	if !IsNil(o.DimmBlocklisting) {
 		toSerialize["DimmBlocklisting"] = o.DimmBlocklisting
 	}
@@ -2020,6 +2057,8 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		AvailableMemory *int64 `json:"AvailableMemory,omitempty"`
 		// The BIOS POST completion status of the server.
 		BiosPostComplete *bool `json:"BiosPostComplete,omitempty"`
+		// Total processing capacity of the server.
+		CpuCapacity *float32 `json:"CpuCapacity,omitempty"`
 		// The DIMM Blocklisting setting configured on the server. * `Unknown` - The configured state is unknown. * `Enabled` - The configured state is enabled. * `Disabled` - The configured state is disabled.
 		DimmBlocklisting *string `json:"DimmBlocklisting,omitempty"`
 		// The fault summary for the server.
@@ -2116,6 +2155,7 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		varComputePhysical.AssetTag = varComputePhysicalWithoutEmbeddedStruct.AssetTag
 		varComputePhysical.AvailableMemory = varComputePhysicalWithoutEmbeddedStruct.AvailableMemory
 		varComputePhysical.BiosPostComplete = varComputePhysicalWithoutEmbeddedStruct.BiosPostComplete
+		varComputePhysical.CpuCapacity = varComputePhysicalWithoutEmbeddedStruct.CpuCapacity
 		varComputePhysical.DimmBlocklisting = varComputePhysicalWithoutEmbeddedStruct.DimmBlocklisting
 		varComputePhysical.FaultSummary = varComputePhysicalWithoutEmbeddedStruct.FaultSummary
 		varComputePhysical.FrontPanelLockState = varComputePhysicalWithoutEmbeddedStruct.FrontPanelLockState
@@ -2183,6 +2223,7 @@ func (o *ComputePhysical) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "AssetTag")
 		delete(additionalProperties, "AvailableMemory")
 		delete(additionalProperties, "BiosPostComplete")
+		delete(additionalProperties, "CpuCapacity")
 		delete(additionalProperties, "DimmBlocklisting")
 		delete(additionalProperties, "FaultSummary")
 		delete(additionalProperties, "FrontPanelLockState")

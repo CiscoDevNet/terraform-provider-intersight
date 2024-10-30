@@ -276,6 +276,11 @@ func getSchedulerTaskScheduleSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"completed_count": {
+						Description: "The count of tasks that ran to successful completion.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"consecutive_failures": {
 						Description: "The number of consecutive times the task has failed.",
 						Type:        schema.TypeInt,
@@ -291,8 +296,13 @@ func getSchedulerTaskScheduleSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"failed_count": {
+						Description: "The count of tasks that failed.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"is_system_suspended": {
-						Description: "Indicates if this task was suspended by the system.",
+						Description: "The flag if set to true means it was suspended by the system.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
@@ -324,6 +334,11 @@ func getSchedulerTaskScheduleSchema() map[string]*schema.Schema {
 					"reason": {
 						Description: "The reason why the task failed or suspended.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"skipped_count": {
+						Description: "The count of tasks that were skipped.",
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 				},

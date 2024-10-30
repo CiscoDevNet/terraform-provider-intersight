@@ -251,6 +251,18 @@ func Test_intersight_WorkflowApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test WorkflowApiService CreateWorkflowVariable", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WorkflowApi.CreateWorkflowVariable(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test WorkflowApiService CreateWorkflowWorkflowDefinition", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -490,6 +502,19 @@ func Test_intersight_WorkflowApiService(t *testing.T) {
 		var moid string
 
 		httpRes, err := apiClient.WorkflowApi.DeleteWorkflowUiDisplayMetadata(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WorkflowApiService DeleteWorkflowVariable", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		httpRes, err := apiClient.WorkflowApi.DeleteWorkflowVariable(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -1146,6 +1171,32 @@ func Test_intersight_WorkflowApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test WorkflowApiService GetWorkflowVariableByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.WorkflowApi.GetWorkflowVariableByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WorkflowApiService GetWorkflowVariableList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WorkflowApi.GetWorkflowVariableList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test WorkflowApiService GetWorkflowWorkflowDefinitionByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1476,6 +1527,20 @@ func Test_intersight_WorkflowApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test WorkflowApiService PatchWorkflowVariable", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.WorkflowApi.PatchWorkflowVariable(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test WorkflowApiService PatchWorkflowWorkflowDefinition", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -1749,6 +1814,20 @@ func Test_intersight_WorkflowApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.WorkflowApi.UpdateWorkflowUiDisplayMetadata(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WorkflowApiService UpdateWorkflowVariable", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.WorkflowApi.UpdateWorkflowVariable(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18775
+API version: 1.0.11-2024100405
 Contact: intersight@cisco.com
 */
 
@@ -29,13 +29,17 @@ type SchedulerTaskScheduleStatus struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The count of tasks that ran to successful completion.
+	CompletedCount *int64 `json:"CompletedCount,omitempty"`
 	// The number of consecutive times the task has failed.
 	ConsecutiveFailures *int64 `json:"ConsecutiveFailures,omitempty"`
 	// The task completion count, which includes both successful executions and any failures.
 	Count *int64 `json:"Count,omitempty"`
 	// The status of the current task. * `None` - No status is set (default). * `Scheduled` - The status is set when a task is scheduled. * `Running` - The status is set when a task is running. * `Completed` - The status is set when a task is complete. * `Failed` - The status is set when a task fails. * `Suspended` - The status is set when a task is suspended. * `Skipped` - The status is set when a task is skipped because the previous task is still running.
 	CurrentStatus *string `json:"CurrentStatus,omitempty"`
-	// Indicates if this task was suspended by the system.
+	// The count of tasks that failed.
+	FailedCount *int64 `json:"FailedCount,omitempty"`
+	// The flag if set to true means it was suspended by the system.
 	IsSystemSuspended *bool `json:"IsSystemSuspended,omitempty"`
 	// The last task completion status, which includes both successful executions and any failures. * `None` - No status is set (default). * `Scheduled` - The status is set when a task is scheduled. * `Running` - The status is set when a task is running. * `Completed` - The status is set when a task is complete. * `Failed` - The status is set when a task fails. * `Suspended` - The status is set when a task is suspended. * `Skipped` - The status is set when a task is skipped because the previous task is still running.
 	LastRunStatus *string `json:"LastRunStatus,omitempty"`
@@ -46,7 +50,9 @@ type SchedulerTaskScheduleStatus struct {
 	// The previous time the scheduled task was run.
 	PrevRunStartTime *time.Time `json:"PrevRunStartTime,omitempty"`
 	// The reason why the task failed or suspended.
-	Reason               *string `json:"Reason,omitempty"`
+	Reason *string `json:"Reason,omitempty"`
+	// The count of tasks that were skipped.
+	SkippedCount         *int64 `json:"SkippedCount,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -131,6 +137,38 @@ func (o *SchedulerTaskScheduleStatus) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "scheduler.TaskScheduleStatus" of the ObjectType field.
 func (o *SchedulerTaskScheduleStatus) GetDefaultObjectType() interface{} {
 	return "scheduler.TaskScheduleStatus"
+}
+
+// GetCompletedCount returns the CompletedCount field value if set, zero value otherwise.
+func (o *SchedulerTaskScheduleStatus) GetCompletedCount() int64 {
+	if o == nil || IsNil(o.CompletedCount) {
+		var ret int64
+		return ret
+	}
+	return *o.CompletedCount
+}
+
+// GetCompletedCountOk returns a tuple with the CompletedCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchedulerTaskScheduleStatus) GetCompletedCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.CompletedCount) {
+		return nil, false
+	}
+	return o.CompletedCount, true
+}
+
+// HasCompletedCount returns a boolean if a field has been set.
+func (o *SchedulerTaskScheduleStatus) HasCompletedCount() bool {
+	if o != nil && !IsNil(o.CompletedCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompletedCount gets a reference to the given int64 and assigns it to the CompletedCount field.
+func (o *SchedulerTaskScheduleStatus) SetCompletedCount(v int64) {
+	o.CompletedCount = &v
 }
 
 // GetConsecutiveFailures returns the ConsecutiveFailures field value if set, zero value otherwise.
@@ -227,6 +265,38 @@ func (o *SchedulerTaskScheduleStatus) HasCurrentStatus() bool {
 // SetCurrentStatus gets a reference to the given string and assigns it to the CurrentStatus field.
 func (o *SchedulerTaskScheduleStatus) SetCurrentStatus(v string) {
 	o.CurrentStatus = &v
+}
+
+// GetFailedCount returns the FailedCount field value if set, zero value otherwise.
+func (o *SchedulerTaskScheduleStatus) GetFailedCount() int64 {
+	if o == nil || IsNil(o.FailedCount) {
+		var ret int64
+		return ret
+	}
+	return *o.FailedCount
+}
+
+// GetFailedCountOk returns a tuple with the FailedCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchedulerTaskScheduleStatus) GetFailedCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.FailedCount) {
+		return nil, false
+	}
+	return o.FailedCount, true
+}
+
+// HasFailedCount returns a boolean if a field has been set.
+func (o *SchedulerTaskScheduleStatus) HasFailedCount() bool {
+	if o != nil && !IsNil(o.FailedCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailedCount gets a reference to the given int64 and assigns it to the FailedCount field.
+func (o *SchedulerTaskScheduleStatus) SetFailedCount(v int64) {
+	o.FailedCount = &v
 }
 
 // GetIsSystemSuspended returns the IsSystemSuspended field value if set, zero value otherwise.
@@ -421,6 +491,38 @@ func (o *SchedulerTaskScheduleStatus) SetReason(v string) {
 	o.Reason = &v
 }
 
+// GetSkippedCount returns the SkippedCount field value if set, zero value otherwise.
+func (o *SchedulerTaskScheduleStatus) GetSkippedCount() int64 {
+	if o == nil || IsNil(o.SkippedCount) {
+		var ret int64
+		return ret
+	}
+	return *o.SkippedCount
+}
+
+// GetSkippedCountOk returns a tuple with the SkippedCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchedulerTaskScheduleStatus) GetSkippedCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.SkippedCount) {
+		return nil, false
+	}
+	return o.SkippedCount, true
+}
+
+// HasSkippedCount returns a boolean if a field has been set.
+func (o *SchedulerTaskScheduleStatus) HasSkippedCount() bool {
+	if o != nil && !IsNil(o.SkippedCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetSkippedCount gets a reference to the given int64 and assigns it to the SkippedCount field.
+func (o *SchedulerTaskScheduleStatus) SetSkippedCount(v int64) {
+	o.SkippedCount = &v
+}
+
 func (o SchedulerTaskScheduleStatus) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -447,6 +549,9 @@ func (o SchedulerTaskScheduleStatus) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.CompletedCount) {
+		toSerialize["CompletedCount"] = o.CompletedCount
+	}
 	if !IsNil(o.ConsecutiveFailures) {
 		toSerialize["ConsecutiveFailures"] = o.ConsecutiveFailures
 	}
@@ -455,6 +560,9 @@ func (o SchedulerTaskScheduleStatus) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CurrentStatus) {
 		toSerialize["CurrentStatus"] = o.CurrentStatus
+	}
+	if !IsNil(o.FailedCount) {
+		toSerialize["FailedCount"] = o.FailedCount
 	}
 	if !IsNil(o.IsSystemSuspended) {
 		toSerialize["IsSystemSuspended"] = o.IsSystemSuspended
@@ -473,6 +581,9 @@ func (o SchedulerTaskScheduleStatus) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Reason) {
 		toSerialize["Reason"] = o.Reason
+	}
+	if !IsNil(o.SkippedCount) {
+		toSerialize["SkippedCount"] = o.SkippedCount
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -529,13 +640,17 @@ func (o *SchedulerTaskScheduleStatus) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// The count of tasks that ran to successful completion.
+		CompletedCount *int64 `json:"CompletedCount,omitempty"`
 		// The number of consecutive times the task has failed.
 		ConsecutiveFailures *int64 `json:"ConsecutiveFailures,omitempty"`
 		// The task completion count, which includes both successful executions and any failures.
 		Count *int64 `json:"Count,omitempty"`
 		// The status of the current task. * `None` - No status is set (default). * `Scheduled` - The status is set when a task is scheduled. * `Running` - The status is set when a task is running. * `Completed` - The status is set when a task is complete. * `Failed` - The status is set when a task fails. * `Suspended` - The status is set when a task is suspended. * `Skipped` - The status is set when a task is skipped because the previous task is still running.
 		CurrentStatus *string `json:"CurrentStatus,omitempty"`
-		// Indicates if this task was suspended by the system.
+		// The count of tasks that failed.
+		FailedCount *int64 `json:"FailedCount,omitempty"`
+		// The flag if set to true means it was suspended by the system.
 		IsSystemSuspended *bool `json:"IsSystemSuspended,omitempty"`
 		// The last task completion status, which includes both successful executions and any failures. * `None` - No status is set (default). * `Scheduled` - The status is set when a task is scheduled. * `Running` - The status is set when a task is running. * `Completed` - The status is set when a task is complete. * `Failed` - The status is set when a task fails. * `Suspended` - The status is set when a task is suspended. * `Skipped` - The status is set when a task is skipped because the previous task is still running.
 		LastRunStatus *string `json:"LastRunStatus,omitempty"`
@@ -547,6 +662,8 @@ func (o *SchedulerTaskScheduleStatus) UnmarshalJSON(data []byte) (err error) {
 		PrevRunStartTime *time.Time `json:"PrevRunStartTime,omitempty"`
 		// The reason why the task failed or suspended.
 		Reason *string `json:"Reason,omitempty"`
+		// The count of tasks that were skipped.
+		SkippedCount *int64 `json:"SkippedCount,omitempty"`
 	}
 
 	varSchedulerTaskScheduleStatusWithoutEmbeddedStruct := SchedulerTaskScheduleStatusWithoutEmbeddedStruct{}
@@ -556,15 +673,18 @@ func (o *SchedulerTaskScheduleStatus) UnmarshalJSON(data []byte) (err error) {
 		varSchedulerTaskScheduleStatus := _SchedulerTaskScheduleStatus{}
 		varSchedulerTaskScheduleStatus.ClassId = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.ClassId
 		varSchedulerTaskScheduleStatus.ObjectType = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.ObjectType
+		varSchedulerTaskScheduleStatus.CompletedCount = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.CompletedCount
 		varSchedulerTaskScheduleStatus.ConsecutiveFailures = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.ConsecutiveFailures
 		varSchedulerTaskScheduleStatus.Count = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.Count
 		varSchedulerTaskScheduleStatus.CurrentStatus = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.CurrentStatus
+		varSchedulerTaskScheduleStatus.FailedCount = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.FailedCount
 		varSchedulerTaskScheduleStatus.IsSystemSuspended = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.IsSystemSuspended
 		varSchedulerTaskScheduleStatus.LastRunStatus = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.LastRunStatus
 		varSchedulerTaskScheduleStatus.NextRunStartTime = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.NextRunStartTime
 		varSchedulerTaskScheduleStatus.PrevRunEndTime = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.PrevRunEndTime
 		varSchedulerTaskScheduleStatus.PrevRunStartTime = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.PrevRunStartTime
 		varSchedulerTaskScheduleStatus.Reason = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.Reason
+		varSchedulerTaskScheduleStatus.SkippedCount = varSchedulerTaskScheduleStatusWithoutEmbeddedStruct.SkippedCount
 		*o = SchedulerTaskScheduleStatus(varSchedulerTaskScheduleStatus)
 	} else {
 		return err
@@ -584,15 +704,18 @@ func (o *SchedulerTaskScheduleStatus) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "CompletedCount")
 		delete(additionalProperties, "ConsecutiveFailures")
 		delete(additionalProperties, "Count")
 		delete(additionalProperties, "CurrentStatus")
+		delete(additionalProperties, "FailedCount")
 		delete(additionalProperties, "IsSystemSuspended")
 		delete(additionalProperties, "LastRunStatus")
 		delete(additionalProperties, "NextRunStartTime")
 		delete(additionalProperties, "PrevRunEndTime")
 		delete(additionalProperties, "PrevRunStartTime")
 		delete(additionalProperties, "Reason")
+		delete(additionalProperties, "SkippedCount")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)
