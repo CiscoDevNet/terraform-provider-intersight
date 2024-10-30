@@ -61,6 +61,11 @@ func getEtherHostPortSchema() map[string]*schema.Schema {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"admin_state": {
+			Description: "Administratively configured state (enabled/disabled) for this port.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"aggregate_port_id": {
 			Description: "Breakout port member in the fabric extender.",
 			Type:        schema.TypeInt,
@@ -619,6 +624,11 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	if v, ok := d.GetOk("admin_state"); ok {
+		x := (v.(string))
+		o.SetAdminState(x)
+	}
+
 	if v, ok := d.GetOkExists("aggregate_port_id"); ok {
 		x := int64(v.(int))
 		o.SetAggregatePortId(x)
@@ -1158,6 +1168,7 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 
 				temp["acknowledged_peer_interface"] = flattenMapPortInterfaceBaseRelationship(s.GetAcknowledgedPeerInterface(), d)
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["admin_state"] = (s.GetAdminState())
 				temp["aggregate_port_id"] = (s.GetAggregatePortId())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)

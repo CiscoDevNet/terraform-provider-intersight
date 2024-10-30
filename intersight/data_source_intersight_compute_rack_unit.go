@@ -876,6 +876,11 @@ func getComputeRackUnitSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cpu_capacity": {
+			Description: "Total processing capacity of the server.",
+			Type:        schema.TypeFloat,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -3075,6 +3080,11 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		o.SetConnectionStatus(x)
 	}
 
+	if v, ok := d.GetOk("cpu_capacity"); ok {
+		x := float32(v.(float64))
+		o.SetCpuCapacity(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -4448,6 +4458,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 
 				temp["compute_personality"] = flattenListComputePersonalityRelationship(s.GetComputePersonality(), d)
 				temp["connection_status"] = (s.GetConnectionStatus())
+				temp["cpu_capacity"] = (s.GetCpuCapacity())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["device_mo_id"] = (s.GetDeviceMoId())

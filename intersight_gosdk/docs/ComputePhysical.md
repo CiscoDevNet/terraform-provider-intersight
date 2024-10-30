@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **AssetTag** | Pointer to **string** | The user defined asset tag assigned to the server. | [optional] [readonly] 
 **AvailableMemory** | Pointer to **int64** | The amount of memory available on the server. | [optional] [readonly] 
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] 
+**CpuCapacity** | Pointer to **float32** | Total processing capacity of the server. | [optional] [readonly] 
 **DimmBlocklisting** | Pointer to **string** | The DIMM Blocklisting setting configured on the server. * &#x60;Unknown&#x60; - The configured state is unknown. * &#x60;Enabled&#x60; - The configured state is enabled. * &#x60;Disabled&#x60; - The configured state is disabled. | [optional] [readonly] [default to "Unknown"]
 **FaultSummary** | Pointer to **int64** | The fault summary for the server. | [optional] 
 **FrontPanelLockState** | Pointer to **string** | The actual front panel state of the server. * &#x60;None&#x60; - Front Panel of the server is set to None state. It is required so that the next frontPanelLockState operation can be triggered. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. | [optional] [default to "None"]
@@ -248,6 +249,31 @@ SetBiosPostComplete sets BiosPostComplete field to given value.
 `func (o *ComputePhysical) HasBiosPostComplete() bool`
 
 HasBiosPostComplete returns a boolean if a field has been set.
+
+### GetCpuCapacity
+
+`func (o *ComputePhysical) GetCpuCapacity() float32`
+
+GetCpuCapacity returns the CpuCapacity field if non-nil, zero value otherwise.
+
+### GetCpuCapacityOk
+
+`func (o *ComputePhysical) GetCpuCapacityOk() (*float32, bool)`
+
+GetCpuCapacityOk returns a tuple with the CpuCapacity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCpuCapacity
+
+`func (o *ComputePhysical) SetCpuCapacity(v float32)`
+
+SetCpuCapacity sets CpuCapacity field to given value.
+
+### HasCpuCapacity
+
+`func (o *ComputePhysical) HasCpuCapacity() bool`
+
+HasCpuCapacity returns a boolean if a field has been set.
 
 ### GetDimmBlocklisting
 

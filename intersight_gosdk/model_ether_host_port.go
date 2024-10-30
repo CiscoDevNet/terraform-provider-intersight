@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-18775
+API version: 1.0.11-2024100405
 Contact: intersight@cisco.com
 */
 
@@ -28,6 +28,8 @@ type EtherHostPort struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Administratively configured state (enabled/disabled) for this port.
+	AdminState *string `json:"AdminState,omitempty"`
 	// Breakout port member in the fabric extender.
 	AggregatePortId *int64 `json:"AggregatePortId,omitempty"`
 	// Fabric extender identifier for this port.
@@ -120,6 +122,38 @@ func (o *EtherHostPort) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "ether.HostPort" of the ObjectType field.
 func (o *EtherHostPort) GetDefaultObjectType() interface{} {
 	return "ether.HostPort"
+}
+
+// GetAdminState returns the AdminState field value if set, zero value otherwise.
+func (o *EtherHostPort) GetAdminState() string {
+	if o == nil || IsNil(o.AdminState) {
+		var ret string
+		return ret
+	}
+	return *o.AdminState
+}
+
+// GetAdminStateOk returns a tuple with the AdminState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherHostPort) GetAdminStateOk() (*string, bool) {
+	if o == nil || IsNil(o.AdminState) {
+		return nil, false
+	}
+	return o.AdminState, true
+}
+
+// HasAdminState returns a boolean if a field has been set.
+func (o *EtherHostPort) HasAdminState() bool {
+	if o != nil && !IsNil(o.AdminState) {
+		return true
+	}
+
+	return false
+}
+
+// SetAdminState gets a reference to the given string and assigns it to the AdminState field.
+func (o *EtherHostPort) SetAdminState(v string) {
+	o.AdminState = &v
 }
 
 // GetAggregatePortId returns the AggregatePortId field value if set, zero value otherwise.
@@ -330,6 +364,9 @@ func (o EtherHostPort) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AdminState) {
+		toSerialize["AdminState"] = o.AdminState
+	}
 	if !IsNil(o.AggregatePortId) {
 		toSerialize["AggregatePortId"] = o.AggregatePortId
 	}
@@ -400,6 +437,8 @@ func (o *EtherHostPort) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Administratively configured state (enabled/disabled) for this port.
+		AdminState *string `json:"AdminState,omitempty"`
 		// Breakout port member in the fabric extender.
 		AggregatePortId *int64 `json:"AggregatePortId,omitempty"`
 		// Fabric extender identifier for this port.
@@ -417,6 +456,7 @@ func (o *EtherHostPort) UnmarshalJSON(data []byte) (err error) {
 		varEtherHostPort := _EtherHostPort{}
 		varEtherHostPort.ClassId = varEtherHostPortWithoutEmbeddedStruct.ClassId
 		varEtherHostPort.ObjectType = varEtherHostPortWithoutEmbeddedStruct.ObjectType
+		varEtherHostPort.AdminState = varEtherHostPortWithoutEmbeddedStruct.AdminState
 		varEtherHostPort.AggregatePortId = varEtherHostPortWithoutEmbeddedStruct.AggregatePortId
 		varEtherHostPort.ModuleId = varEtherHostPortWithoutEmbeddedStruct.ModuleId
 		varEtherHostPort.Speed = varEtherHostPortWithoutEmbeddedStruct.Speed
@@ -441,6 +481,7 @@ func (o *EtherHostPort) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AdminState")
 		delete(additionalProperties, "AggregatePortId")
 		delete(additionalProperties, "ModuleId")
 		delete(additionalProperties, "Speed")

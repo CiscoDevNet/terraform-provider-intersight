@@ -6,15 +6,18 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "scheduler.TaskScheduleStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "scheduler.TaskScheduleStatus"]
+**CompletedCount** | Pointer to **int64** | The count of tasks that ran to successful completion. | [optional] [readonly] 
 **ConsecutiveFailures** | Pointer to **int64** | The number of consecutive times the task has failed. | [optional] [readonly] 
 **Count** | Pointer to **int64** | The task completion count, which includes both successful executions and any failures. | [optional] [readonly] 
 **CurrentStatus** | Pointer to **string** | The status of the current task. * &#x60;None&#x60; - No status is set (default). * &#x60;Scheduled&#x60; - The status is set when a task is scheduled. * &#x60;Running&#x60; - The status is set when a task is running. * &#x60;Completed&#x60; - The status is set when a task is complete. * &#x60;Failed&#x60; - The status is set when a task fails. * &#x60;Suspended&#x60; - The status is set when a task is suspended. * &#x60;Skipped&#x60; - The status is set when a task is skipped because the previous task is still running. | [optional] [readonly] [default to "None"]
-**IsSystemSuspended** | Pointer to **bool** | Indicates if this task was suspended by the system. | [optional] [readonly] 
+**FailedCount** | Pointer to **int64** | The count of tasks that failed. | [optional] [readonly] 
+**IsSystemSuspended** | Pointer to **bool** | The flag if set to true means it was suspended by the system. | [optional] [readonly] 
 **LastRunStatus** | Pointer to **string** | The last task completion status, which includes both successful executions and any failures. * &#x60;None&#x60; - No status is set (default). * &#x60;Scheduled&#x60; - The status is set when a task is scheduled. * &#x60;Running&#x60; - The status is set when a task is running. * &#x60;Completed&#x60; - The status is set when a task is complete. * &#x60;Failed&#x60; - The status is set when a task fails. * &#x60;Suspended&#x60; - The status is set when a task is suspended. * &#x60;Skipped&#x60; - The status is set when a task is skipped because the previous task is still running. | [optional] [readonly] [default to "None"]
 **NextRunStartTime** | Pointer to **time.Time** | The next run time for a recurrently scheduled the task. | [optional] [readonly] 
 **PrevRunEndTime** | Pointer to **time.Time** | The time when the last occurrence of scheduled task completed. | [optional] [readonly] 
 **PrevRunStartTime** | Pointer to **time.Time** | The previous time the scheduled task was run. | [optional] [readonly] 
 **Reason** | Pointer to **string** | The reason why the task failed or suspended. | [optional] [readonly] 
+**SkippedCount** | Pointer to **int64** | The count of tasks that were skipped. | [optional] [readonly] 
 
 ## Methods
 
@@ -74,6 +77,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCompletedCount
+
+`func (o *SchedulerTaskScheduleStatus) GetCompletedCount() int64`
+
+GetCompletedCount returns the CompletedCount field if non-nil, zero value otherwise.
+
+### GetCompletedCountOk
+
+`func (o *SchedulerTaskScheduleStatus) GetCompletedCountOk() (*int64, bool)`
+
+GetCompletedCountOk returns a tuple with the CompletedCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompletedCount
+
+`func (o *SchedulerTaskScheduleStatus) SetCompletedCount(v int64)`
+
+SetCompletedCount sets CompletedCount field to given value.
+
+### HasCompletedCount
+
+`func (o *SchedulerTaskScheduleStatus) HasCompletedCount() bool`
+
+HasCompletedCount returns a boolean if a field has been set.
 
 ### GetConsecutiveFailures
 
@@ -149,6 +177,31 @@ SetCurrentStatus sets CurrentStatus field to given value.
 `func (o *SchedulerTaskScheduleStatus) HasCurrentStatus() bool`
 
 HasCurrentStatus returns a boolean if a field has been set.
+
+### GetFailedCount
+
+`func (o *SchedulerTaskScheduleStatus) GetFailedCount() int64`
+
+GetFailedCount returns the FailedCount field if non-nil, zero value otherwise.
+
+### GetFailedCountOk
+
+`func (o *SchedulerTaskScheduleStatus) GetFailedCountOk() (*int64, bool)`
+
+GetFailedCountOk returns a tuple with the FailedCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailedCount
+
+`func (o *SchedulerTaskScheduleStatus) SetFailedCount(v int64)`
+
+SetFailedCount sets FailedCount field to given value.
+
+### HasFailedCount
+
+`func (o *SchedulerTaskScheduleStatus) HasFailedCount() bool`
+
+HasFailedCount returns a boolean if a field has been set.
 
 ### GetIsSystemSuspended
 
@@ -299,6 +352,31 @@ SetReason sets Reason field to given value.
 `func (o *SchedulerTaskScheduleStatus) HasReason() bool`
 
 HasReason returns a boolean if a field has been set.
+
+### GetSkippedCount
+
+`func (o *SchedulerTaskScheduleStatus) GetSkippedCount() int64`
+
+GetSkippedCount returns the SkippedCount field if non-nil, zero value otherwise.
+
+### GetSkippedCountOk
+
+`func (o *SchedulerTaskScheduleStatus) GetSkippedCountOk() (*int64, bool)`
+
+GetSkippedCountOk returns a tuple with the SkippedCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSkippedCount
+
+`func (o *SchedulerTaskScheduleStatus) SetSkippedCount(v int64)`
+
+SetSkippedCount sets SkippedCount field to given value.
+
+### HasSkippedCount
+
+`func (o *SchedulerTaskScheduleStatus) HasSkippedCount() bool`
+
+HasSkippedCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -358,6 +358,17 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 							Optional:    true,
 							Default:     "scheduler.TaskScheduleStatus",
 						},
+						"completed_count": {
+							Description: "The count of tasks that ran to successful completion.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"consecutive_failures": {
 							Description: "The number of consecutive times the task has failed.",
 							Type:        schema.TypeInt,
@@ -391,8 +402,19 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 								}
 								return
 							}},
+						"failed_count": {
+							Description: "The count of tasks that failed.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"is_system_suspended": {
-							Description: "Indicates if this task was suspended by the system.",
+							Description: "The flag if set to true means it was suspended by the system.",
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Computed:    true,
@@ -455,6 +477,17 @@ func resourceSchedulerTaskSchedule() *schema.Resource {
 						"reason": {
 							Description: "The reason why the task failed or suspended.",
 							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"skipped_count": {
+							Description: "The count of tasks that were skipped.",
+							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
 							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {

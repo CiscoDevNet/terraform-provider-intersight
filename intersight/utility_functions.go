@@ -218,6 +218,15 @@ func CustomizeTagDiff(tags interface{}, diff *schema.ResourceDiff) error {
 	return nil
 }
 
+func isNonEmptySliceOfMaps(v interface{}) bool {
+	if vSlice, ok := v.([]interface{}); ok && len(vSlice) > 0 {
+		if _, ok := vSlice[0].(map[string]interface{}); ok {
+			return ok
+		}
+	}
+	return false
+}
+
 func ReorderPolicyBucket(old, new []interface{}) []interface{} {
 	if len(old) == 0 {
 		return new

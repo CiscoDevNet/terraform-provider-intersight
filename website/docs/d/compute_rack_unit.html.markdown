@@ -20,6 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `available_memory`:(int) The amount of memory available on the server. 
 * `bios_post_complete`:(bool) The BIOS POST completion status of the server. 
 * `connection_status`:(string) Connectivity Status of RackUnit to Switch - A or B or AB. 
+* `cpu_capacity`:(float) Total processing capacity of the server. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dimm_blocklisting`:(string) The DIMM Blocklisting setting configured on the server.* `Unknown` - The configured state is unknown.* `Enabled` - The configured state is enabled.* `Disabled` - The configured state is disabled. 

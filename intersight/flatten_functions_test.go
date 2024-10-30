@@ -1517,126 +1517,6 @@ func TestFlattenListChassisIomProfileRelationship(t *testing.T) {
 		CheckError(t, err)
 	}
 }
-func TestFlattenListCloudAwsSecurityGroupRelationship(t *testing.T) {
-	p := []models.CloudAwsSecurityGroupRelationship{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListCloudAwsSecurityGroupRelationship(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.CloudAwsSecurityGroupRelationship{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListCloudAwsSecurityGroupRelationship(p, d)
-	expectedOp := []map[string]interface{}{{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}, {"class_id": "mo.MoRef", "moid": "Moid 2", "object_type": "mo.MoRef", "selector": "Selector 2"}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
-func TestFlattenListCloudCloudTag(t *testing.T) {
-	p := []models.CloudCloudTag{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"cloud.CloudTag","Key":"Key %d","ObjectType":"cloud.CloudTag","Value":"Value %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListCloudCloudTag(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.CloudCloudTag{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListCloudCloudTag(p, d)
-	expectedOp := []map[string]interface{}{{"class_id": "cloud.CloudTag", "key": "Key 1", "object_type": "cloud.CloudTag", "value": "Value 1"}, {"class_id": "cloud.CloudTag", "key": "Key 2", "object_type": "cloud.CloudTag", "value": "Value 2"}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
-func TestFlattenListCloudCustomAttributes(t *testing.T) {
-	p := []models.CloudCustomAttributes{}
-	var d = &schema.ResourceData{}
-	c := `{"AttributeName":"AttributeName %d","AttributeType":"AttributeType %d","AttributeValue":"AttributeValue %d","ClassId":"cloud.CustomAttributes","ObjectType":"cloud.CustomAttributes"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListCloudCustomAttributes(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.CloudCustomAttributes{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListCloudCustomAttributes(p, d)
-	expectedOp := []map[string]interface{}{{"attribute_name": "AttributeName 1", "attribute_type": "AttributeType 1", "attribute_value": "AttributeValue 1", "class_id": "cloud.CustomAttributes", "object_type": "cloud.CustomAttributes"}, {"attribute_name": "AttributeName 2", "attribute_type": "AttributeType 2", "attribute_value": "AttributeValue 2", "class_id": "cloud.CustomAttributes", "object_type": "cloud.CustomAttributes"}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
-func TestFlattenListCloudNetworkInterfaceAttachment(t *testing.T) {
-	p := []models.CloudNetworkInterfaceAttachment{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"cloud.NetworkInterfaceAttachment","Identity":"Identity %d","IpForwardingEnabled":true,"MacAddress":"MacAddress %d","NetworkId":"NetworkId %d","NetworkName":"NetworkName %d","NicIndex":32,"ObjectType":"cloud.NetworkInterfaceAttachment","SubNetworkId":"SubNetworkId %d","SubNetworkName":"SubNetworkName %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListCloudNetworkInterfaceAttachment(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.CloudNetworkInterfaceAttachment{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListCloudNetworkInterfaceAttachment(p, d)
-	expectedOp := []map[string]interface{}{{"class_id": "cloud.NetworkInterfaceAttachment", "identity": "Identity 1", "ip_forwarding_enabled": true, "mac_address": "MacAddress 1", "network_id": "NetworkId 1", "network_name": "NetworkName 1", "nic_index": 32, "object_type": "cloud.NetworkInterfaceAttachment", "sub_network_id": "SubNetworkId 1", "sub_network_name": "SubNetworkName 1"}, {"class_id": "cloud.NetworkInterfaceAttachment", "identity": "Identity 2", "ip_forwarding_enabled": true, "mac_address": "MacAddress 2", "network_id": "NetworkId 2", "network_name": "NetworkName 2", "nic_index": 32, "object_type": "cloud.NetworkInterfaceAttachment", "sub_network_id": "SubNetworkId 2", "sub_network_name": "SubNetworkName 2"}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
-func TestFlattenListCloudSecurityGroupRule(t *testing.T) {
-	p := []models.CloudSecurityGroupRule{}
-	var d = &schema.ResourceData{}
-	c := `{"Action":"Action %d","ClassId":"cloud.SecurityGroupRule","Description":"Description %d","EndPort":32,"EtherType":"EtherType %d","Identity":"Identity %d","Index":32,"Name":"Name %d","ObjectType":"cloud.SecurityGroupRule","Protocol":"Protocol %d","SourceSecurityGroup":"SourceSecurityGroup %d","StartPort":32}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListCloudSecurityGroupRule(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.CloudSecurityGroupRule{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListCloudSecurityGroupRule(p, d)
-	expectedOp := []map[string]interface{}{{"action": "Action 1", "class_id": "cloud.SecurityGroupRule", "description": "Description 1", "end_port": 32, "ether_type": "EtherType 1", "identity": "Identity 1", "index": 32, "name": "Name 1", "object_type": "cloud.SecurityGroupRule", "protocol": "Protocol 1", "source_security_group": "SourceSecurityGroup 1", "start_port": 32}, {"action": "Action 2", "class_id": "cloud.SecurityGroupRule", "description": "Description 2", "end_port": 32, "ether_type": "EtherType 2", "identity": "Identity 2", "index": 32, "name": "Name 2", "object_type": "cloud.SecurityGroupRule", "protocol": "Protocol 2", "source_security_group": "SourceSecurityGroup 2", "start_port": 32}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
 func TestFlattenListCloudTfcWorkspaceVariables(t *testing.T) {
 	p := []models.CloudTfcWorkspaceVariables{}
 	var d = &schema.ResourceData{}
@@ -1656,54 +1536,6 @@ func TestFlattenListCloudTfcWorkspaceVariables(t *testing.T) {
 	}
 	ffOp := flattenListCloudTfcWorkspaceVariables(p, d)
 	expectedOp := []map[string]interface{}{{"category": "Category 1", "class_id": "cloud.TfcWorkspaceVariables", "description": "Description 1", "hcl": true, "identity": "Identity 1", "key": "Key 1", "object_type": "cloud.TfcWorkspaceVariables", "sensitive": true, "value": "Value 1"}, {"category": "Category 2", "class_id": "cloud.TfcWorkspaceVariables", "description": "Description 2", "hcl": true, "identity": "Identity 2", "key": "Key 2", "object_type": "cloud.TfcWorkspaceVariables", "sensitive": true, "value": "Value 2"}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
-func TestFlattenListCloudVolumeAttachment(t *testing.T) {
-	p := []models.CloudVolumeAttachment{}
-	var d = &schema.ResourceData{}
-	c := `{"AutoDelete":true,"ClassId":"cloud.VolumeAttachment","DeviceName":"DeviceName %d","Identity":"Identity %d","Index":32,"IsRoot":true,"ObjectType":"cloud.VolumeAttachment"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListCloudVolumeAttachment(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.CloudVolumeAttachment{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListCloudVolumeAttachment(p, d)
-	expectedOp := []map[string]interface{}{{"auto_delete": true, "class_id": "cloud.VolumeAttachment", "device_name": "DeviceName 1", "identity": "Identity 1", "index": 32, "is_root": true, "object_type": "cloud.VolumeAttachment"}, {"auto_delete": true, "class_id": "cloud.VolumeAttachment", "device_name": "DeviceName 2", "identity": "Identity 2", "index": 32, "is_root": true, "object_type": "cloud.VolumeAttachment"}}
-	for i := 0; i < len(expectedOp); i++ {
-		err := compareMaps(expectedOp[i], ffOp[i], t)
-		CheckError(t, err)
-	}
-}
-func TestFlattenListCloudVolumeInstanceAttachment(t *testing.T) {
-	p := []models.CloudVolumeInstanceAttachment{}
-	var d = &schema.ResourceData{}
-	c := `{"AutoDelete":true,"ClassId":"cloud.VolumeInstanceAttachment","DeviceName":"DeviceName %d","InstanceId":"InstanceId %d","ObjectType":"cloud.VolumeInstanceAttachment","State":"State %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenListCloudVolumeInstanceAttachment(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	for i := 1; i < 3; i++ {
-		x := models.CloudVolumeInstanceAttachment{}
-		err := x.UnmarshalJSON([]byte(strings.Replace(c, "%d", fmt.Sprint(i), -1)))
-		CheckError(t, err)
-		p = append(p, x)
-	}
-	ffOp := flattenListCloudVolumeInstanceAttachment(p, d)
-	expectedOp := []map[string]interface{}{{"auto_delete": true, "class_id": "cloud.VolumeInstanceAttachment", "device_name": "DeviceName 1", "instance_id": "InstanceId 1", "object_type": "cloud.VolumeInstanceAttachment", "state": "State 1"}, {"auto_delete": true, "class_id": "cloud.VolumeInstanceAttachment", "device_name": "DeviceName 2", "instance_id": "InstanceId 2", "object_type": "cloud.VolumeInstanceAttachment", "state": "State 2"}}
 	for i := 0; i < len(expectedOp); i++ {
 		err := compareMaps(expectedOp[i], ffOp[i], t)
 		CheckError(t, err)
@@ -12959,240 +12791,6 @@ func TestFlattenMapChassisProfileRelationship(t *testing.T) {
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
-func TestFlattenMapCloudAvailabilityZone(t *testing.T) {
-	p := models.CloudAvailabilityZone{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"cloud.AvailabilityZone","Name":"Name %d","ObjectType":"cloud.AvailabilityZone","ZoneId":"ZoneId %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudAvailabilityZone(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudAvailabilityZone(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "cloud.AvailabilityZone", "name": "Name 1", "object_type": "cloud.AvailabilityZone", "zone_id": "ZoneId 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudAwsBillingUnitRelationship(t *testing.T) {
-	p := models.CloudAwsBillingUnitRelationship{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudAwsBillingUnitRelationship(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudAwsBillingUnitRelationship(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudAwsKeyPairRelationship(t *testing.T) {
-	p := models.CloudAwsKeyPairRelationship{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudAwsKeyPairRelationship(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudAwsKeyPairRelationship(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudAwsOrganizationalUnitRelationship(t *testing.T) {
-	p := models.CloudAwsOrganizationalUnitRelationship{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudAwsOrganizationalUnitRelationship(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudAwsOrganizationalUnitRelationship(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudAwsSubnetRelationship(t *testing.T) {
-	p := models.CloudAwsSubnetRelationship{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudAwsSubnetRelationship(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudAwsSubnetRelationship(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudAwsVpcRelationship(t *testing.T) {
-	p := models.CloudAwsVpcRelationship{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudAwsVpcRelationship(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudAwsVpcRelationship(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudBaseSkuRelationship(t *testing.T) {
-	p := models.CloudBaseSkuRelationship{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudBaseSkuRelationship(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudBaseSkuRelationship(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudBillingUnit(t *testing.T) {
-	p := models.CloudBillingUnit{}
-	var d = &schema.ResourceData{}
-	c := `{"BillingId":"BillingId %d","ClassId":"cloud.BillingUnit","Name":"Name %d","ObjectType":"cloud.BillingUnit"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudBillingUnit(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudBillingUnit(p, d)[0]
-	expectedOp := map[string]interface{}{"billing_id": "BillingId 1", "class_id": "cloud.BillingUnit", "name": "Name 1", "object_type": "cloud.BillingUnit"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudCloudRegion(t *testing.T) {
-	p := models.CloudCloudRegion{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"cloud.CloudRegion","Name":"Name %d","ObjectType":"cloud.CloudRegion","RegionId":"RegionId %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudCloudRegion(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudCloudRegion(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "cloud.CloudRegion", "name": "Name 1", "object_type": "cloud.CloudRegion", "region_id": "RegionId 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudImageReference(t *testing.T) {
-	p := models.CloudImageReference{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"cloud.ImageReference","ImageId":"ImageId %d","Name":"Name %d","ObjectType":"cloud.ImageReference"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudImageReference(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudImageReference(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "cloud.ImageReference", "image_id": "ImageId 1", "name": "Name 1", "object_type": "cloud.ImageReference"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudInstanceType(t *testing.T) {
-	p := models.CloudInstanceType{}
-	var d = &schema.ResourceData{}
-	c := `{"Architecture":"Architecture %d","ClassId":"cloud.InstanceType","CpuSpeed":32,"Cpus":32,"InstanceTypeId":"InstanceTypeId %d","Memory":32,"Name":"Name %d","ObjectType":"cloud.InstanceType","Platform":"Platform %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudInstanceType(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudInstanceType(p, d)[0]
-	expectedOp := map[string]interface{}{"architecture": "Architecture 1", "class_id": "cloud.InstanceType", "cpu_speed": 32, "cpus": 32, "instance_type_id": "InstanceTypeId 1", "memory": 32, "name": "Name 1", "object_type": "cloud.InstanceType", "platform": "Platform 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudNetworkInstanceAttachment(t *testing.T) {
-	p := models.CloudNetworkInstanceAttachment{}
-	var d = &schema.ResourceData{}
-	c := `{"AutoDelete":true,"ClassId":"cloud.NetworkInstanceAttachment","DeviceIndex":32,"InstanceId":"InstanceId %d","ObjectType":"cloud.NetworkInstanceAttachment","State":"State %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudNetworkInstanceAttachment(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudNetworkInstanceAttachment(p, d)[0]
-	expectedOp := map[string]interface{}{"auto_delete": true, "class_id": "cloud.NetworkInstanceAttachment", "device_index": 32, "instance_id": "InstanceId 1", "object_type": "cloud.NetworkInstanceAttachment", "state": "State 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudRegionsRelationship(t *testing.T) {
-	p := models.CloudRegionsRelationship{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"mo.MoRef","Moid":"Moid %d","ObjectType":"mo.MoRef","Selector":"Selector %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudRegionsRelationship(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudRegionsRelationship(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
 func TestFlattenMapCloudTfcOrganizationRelationship(t *testing.T) {
 	p := models.CloudTfcOrganizationRelationship{}
 	var d = &schema.ResourceData{}
@@ -13208,42 +12806,6 @@ func TestFlattenMapCloudTfcOrganizationRelationship(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapCloudTfcOrganizationRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudVolumeIopsInfo(t *testing.T) {
-	p := models.CloudVolumeIopsInfo{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"cloud.VolumeIopsInfo","IopsReadLimit":32,"IopsWriteLimit":32,"ObjectType":"cloud.VolumeIopsInfo","ThroughputReadLimit":32,"ThroughputWriteLimit":32}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudVolumeIopsInfo(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudVolumeIopsInfo(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "cloud.VolumeIopsInfo", "iops_read_limit": 32, "iops_write_limit": 32, "object_type": "cloud.VolumeIopsInfo", "throughput_read_limit": 32, "throughput_write_limit": 32}
-	err = compareMaps(expectedOp, ffOp, t)
-	CheckError(t, err)
-}
-func TestFlattenMapCloudVolumeType(t *testing.T) {
-	p := models.CloudVolumeType{}
-	var d = &schema.ResourceData{}
-	c := `{"ClassId":"cloud.VolumeType","Name":"Name %d","ObjectType":"cloud.VolumeType","VolumeTypeId":"VolumeTypeId %d"}`
-
-	//test when the response is empty
-	ffOpEmpty := flattenMapCloudVolumeType(p, d)
-	if len(ffOpEmpty) != 0 {
-		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
-	}
-	// test when response is available and resourceData is empty
-	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
-	CheckError(t, err)
-	ffOp := flattenMapCloudVolumeType(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "cloud.VolumeType", "name": "Name 1", "object_type": "cloud.VolumeType", "volume_type_id": "VolumeTypeId 1"}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
@@ -20414,7 +19976,7 @@ func TestFlattenMapSchedulerTaskScheduleRelationship(t *testing.T) {
 func TestFlattenMapSchedulerTaskScheduleStatus(t *testing.T) {
 	p := models.SchedulerTaskScheduleStatus{}
 	var d = &schema.ResourceData{}
-	c := `{"ClassId":"scheduler.TaskScheduleStatus","ConsecutiveFailures":32,"Count":32,"CurrentStatus":"CurrentStatus %d","IsSystemSuspended":true,"LastRunStatus":"LastRunStatus %d","ObjectType":"scheduler.TaskScheduleStatus","Reason":"Reason %d"}`
+	c := `{"ClassId":"scheduler.TaskScheduleStatus","CompletedCount":32,"ConsecutiveFailures":32,"Count":32,"CurrentStatus":"CurrentStatus %d","FailedCount":32,"IsSystemSuspended":true,"LastRunStatus":"LastRunStatus %d","ObjectType":"scheduler.TaskScheduleStatus","Reason":"Reason %d","SkippedCount":32}`
 
 	//test when the response is empty
 	ffOpEmpty := flattenMapSchedulerTaskScheduleStatus(p, d)
@@ -20425,7 +19987,7 @@ func TestFlattenMapSchedulerTaskScheduleStatus(t *testing.T) {
 	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
 	CheckError(t, err)
 	ffOp := flattenMapSchedulerTaskScheduleStatus(p, d)[0]
-	expectedOp := map[string]interface{}{"class_id": "scheduler.TaskScheduleStatus", "consecutive_failures": 32, "nr_count": 32, "current_status": "CurrentStatus 1", "is_system_suspended": true, "last_run_status": "LastRunStatus 1", "object_type": "scheduler.TaskScheduleStatus", "reason": "Reason 1"}
+	expectedOp := map[string]interface{}{"class_id": "scheduler.TaskScheduleStatus", "completed_count": 32, "consecutive_failures": 32, "nr_count": 32, "current_status": "CurrentStatus 1", "failed_count": 32, "is_system_suspended": true, "last_run_status": "LastRunStatus 1", "object_type": "scheduler.TaskScheduleStatus", "reason": "Reason 1", "skipped_count": 32}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }
@@ -23612,6 +23174,24 @@ func TestFlattenMapVrfVrfRelationship(t *testing.T) {
 	CheckError(t, err)
 	ffOp := flattenMapVrfVrfRelationship(p, d)[0]
 	expectedOp := map[string]interface{}{"class_id": "mo.MoRef", "moid": "Moid 1", "object_type": "mo.MoRef", "selector": "Selector 1"}
+	err = compareMaps(expectedOp, ffOp, t)
+	CheckError(t, err)
+}
+func TestFlattenMapWorkflowBaseDataType(t *testing.T) {
+	p := models.WorkflowBaseDataType{}
+	var d = &schema.ResourceData{}
+	c := `{"ClassId":"workflow.BaseDataType","Description":"Description %d","Label":"Label %d","Name":"Name %d","ObjectType":"workflow.BaseDataType","Required":true}`
+
+	//test when the response is empty
+	ffOpEmpty := flattenMapWorkflowBaseDataType(p, d)
+	if len(ffOpEmpty) != 0 {
+		t.Errorf("error: no elements should be present. Found %d elements", len(ffOpEmpty))
+	}
+	// test when response is available and resourceData is empty
+	err := p.UnmarshalJSON([]byte(strings.Replace(c, "%d", "1", -1)))
+	CheckError(t, err)
+	ffOp := flattenMapWorkflowBaseDataType(p, d)[0]
+	expectedOp := map[string]interface{}{"class_id": "workflow.BaseDataType", "description": "Description 1", "label": "Label 1", "name": "Name 1", "object_type": "workflow.BaseDataType", "required": true}
 	err = compareMaps(expectedOp, ffOp, t)
 	CheckError(t, err)
 }

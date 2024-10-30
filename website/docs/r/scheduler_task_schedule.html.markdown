@@ -52,16 +52,19 @@ This complex property has following sub-properties:
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `status`:(HashMap) -(ReadOnly) Status of the current scheduled task. 
 This complex property has following sub-properties:
+  + `completed_count`:(int)(ReadOnly) The count of tasks that ran to successful completion. 
   + `consecutive_failures`:(int)(ReadOnly) The number of consecutive times the task has failed. 
   + `nr_count`:(int)(ReadOnly) The task completion count, which includes both successful executions and any failures. 
   + `current_status`:(string)(ReadOnly) The status of the current task.* `None` - No status is set (default).* `Scheduled` - The status is set when a task is scheduled.* `Running` - The status is set when a task is running.* `Completed` - The status is set when a task is complete.* `Failed` - The status is set when a task fails.* `Suspended` - The status is set when a task is suspended.* `Skipped` - The status is set when a task is skipped because the previous task is still running. 
-  + `is_system_suspended`:(bool)(ReadOnly) Indicates if this task was suspended by the system. 
+  + `failed_count`:(int)(ReadOnly) The count of tasks that failed. 
+  + `is_system_suspended`:(bool)(ReadOnly) The flag if set to true means it was suspended by the system. 
   + `last_run_status`:(string)(ReadOnly) The last task completion status, which includes both successful executions and any failures.* `None` - No status is set (default).* `Scheduled` - The status is set when a task is scheduled.* `Running` - The status is set when a task is running.* `Completed` - The status is set when a task is complete.* `Failed` - The status is set when a task fails.* `Suspended` - The status is set when a task is suspended.* `Skipped` - The status is set when a task is skipped because the previous task is still running. 
   + `next_run_start_time`:(string)(ReadOnly) The next run time for a recurrently scheduled the task. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `prev_run_end_time`:(string)(ReadOnly) The time when the last occurrence of scheduled task completed. 
   + `prev_run_start_time`:(string)(ReadOnly) The previous time the scheduled task was run. 
   + `reason`:(string)(ReadOnly) The reason why the task failed or suspended. 
+  + `skipped_count`:(int)(ReadOnly) The count of tasks that were skipped. 
 * `suspend_end_time`:(string) Suspend a task until an end date. this applies only to the action suspendTill. 
 * `tags`:(Array)
 This complex property has following sub-properties:
