@@ -2,7 +2,7 @@
 resource "intersight_chassis_profile" "chassis_profile1" {
   name            = "chassis_profile1"
   description     = "chassis profile"
-  type            = "instance"
+  nr_type            = "instance"
   target_platform = "FIAttached"
   action          = "Validate"
   config_context {

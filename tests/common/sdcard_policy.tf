@@ -7,7 +7,7 @@ resource "intersight_sdcard_policy" "sdcard1" {
     moid        = data.intersight_organization_organization.default.results.0.moid
   }
   partitions {
-    type        = "OS"
+    nr_type        = "OS"
     object_type = "sdcard.Partition"
 
     virtual_drives {
