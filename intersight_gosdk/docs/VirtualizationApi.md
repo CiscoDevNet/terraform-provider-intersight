@@ -1890,7 +1890,7 @@ Name | Type | Description  | Notes
 
 ## GetVirtualizationVmwareHostGpuByMoid
 
-> VirtualizationVmwareHostGpu GetVirtualizationVmwareHostGpuByMoid(ctx, moid).Execute()
+> VirtualizationBaseHostGpu GetVirtualizationVmwareHostGpuByMoid(ctx, moid).Execute()
 
 Read a 'virtualization.VmwareHostGpu' resource.
 
@@ -1916,7 +1916,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationVmwareHostGpuByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetVirtualizationVmwareHostGpuByMoid`: VirtualizationVmwareHostGpu
+	// response from `GetVirtualizationVmwareHostGpuByMoid`: VirtualizationBaseHostGpu
 	fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationVmwareHostGpuByMoid`: %v\n", resp)
 }
 ```
@@ -1940,7 +1940,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareHostGpu**](VirtualizationVmwareHostGpu.md)
+[**VirtualizationBaseHostGpu**](VirtualizationBaseHostGpu.md)
 
 ### Authorization
 

@@ -154,7 +154,7 @@ Method | HTTP request | Description
 
 ## CreateFirmwareBiosDescriptor
 
-> FirmwareBiosDescriptor CreateFirmwareBiosDescriptor(ctx).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareBiosDescriptor(ctx).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.BiosDescriptor' resource.
 
@@ -182,7 +182,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareBiosDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareBiosDescriptor`: FirmwareBiosDescriptor
+	// response from `CreateFirmwareBiosDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareBiosDescriptor`: %v\n", resp)
 }
 ```
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwareBoardControllerDescriptor
 
-> FirmwareBoardControllerDescriptor CreateFirmwareBoardControllerDescriptor(ctx).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareBoardControllerDescriptor(ctx).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.BoardControllerDescriptor' resource.
 
@@ -250,7 +250,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareBoardControllerDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareBoardControllerDescriptor`: FirmwareBoardControllerDescriptor
+	// response from `CreateFirmwareBoardControllerDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareBoardControllerDescriptor`: %v\n", resp)
 }
 ```
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -358,7 +358,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwareCimcDescriptor
 
-> FirmwareCimcDescriptor CreateFirmwareCimcDescriptor(ctx).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareCimcDescriptor(ctx).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.CimcDescriptor' resource.
 
@@ -386,7 +386,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareCimcDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareCimcDescriptor`: FirmwareCimcDescriptor
+	// response from `CreateFirmwareCimcDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareCimcDescriptor`: %v\n", resp)
 }
 ```
@@ -408,7 +408,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -426,7 +426,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwareDimmDescriptor
 
-> FirmwareDimmDescriptor CreateFirmwareDimmDescriptor(ctx).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareDimmDescriptor(ctx).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.DimmDescriptor' resource.
 
@@ -454,7 +454,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareDimmDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareDimmDescriptor`: FirmwareDimmDescriptor
+	// response from `CreateFirmwareDimmDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareDimmDescriptor`: %v\n", resp)
 }
 ```
@@ -476,7 +476,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -562,7 +562,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwareDriveDescriptor
 
-> FirmwareDriveDescriptor CreateFirmwareDriveDescriptor(ctx).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareDriveDescriptor(ctx).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.DriveDescriptor' resource.
 
@@ -590,7 +590,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareDriveDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareDriveDescriptor`: FirmwareDriveDescriptor
+	// response from `CreateFirmwareDriveDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareDriveDescriptor`: %v\n", resp)
 }
 ```
@@ -612,7 +612,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -766,7 +766,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwareGpuDescriptor
 
-> FirmwareGpuDescriptor CreateFirmwareGpuDescriptor(ctx).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareGpuDescriptor(ctx).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.GpuDescriptor' resource.
 
@@ -794,7 +794,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareGpuDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareGpuDescriptor`: FirmwareGpuDescriptor
+	// response from `CreateFirmwareGpuDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareGpuDescriptor`: %v\n", resp)
 }
 ```
@@ -816,7 +816,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -834,7 +834,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwareHbaDescriptor
 
-> FirmwareHbaDescriptor CreateFirmwareHbaDescriptor(ctx).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareHbaDescriptor(ctx).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.HbaDescriptor' resource.
 
@@ -862,7 +862,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareHbaDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareHbaDescriptor`: FirmwareHbaDescriptor
+	// response from `CreateFirmwareHbaDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareHbaDescriptor`: %v\n", resp)
 }
 ```
@@ -884,7 +884,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -902,7 +902,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwareIomDescriptor
 
-> FirmwareIomDescriptor CreateFirmwareIomDescriptor(ctx).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareIomDescriptor(ctx).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.IomDescriptor' resource.
 
@@ -930,7 +930,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareIomDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareIomDescriptor`: FirmwareIomDescriptor
+	// response from `CreateFirmwareIomDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareIomDescriptor`: %v\n", resp)
 }
 ```
@@ -952,7 +952,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareIomDescriptor**](FirmwareIomDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -970,7 +970,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwareMswitchDescriptor
 
-> FirmwareMswitchDescriptor CreateFirmwareMswitchDescriptor(ctx).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareMswitchDescriptor(ctx).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.MswitchDescriptor' resource.
 
@@ -998,7 +998,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareMswitchDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareMswitchDescriptor`: FirmwareMswitchDescriptor
+	// response from `CreateFirmwareMswitchDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareMswitchDescriptor`: %v\n", resp)
 }
 ```
@@ -1020,7 +1020,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -1038,7 +1038,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwareNxosDescriptor
 
-> FirmwareNxosDescriptor CreateFirmwareNxosDescriptor(ctx).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareNxosDescriptor(ctx).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.NxosDescriptor' resource.
 
@@ -1066,7 +1066,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareNxosDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareNxosDescriptor`: FirmwareNxosDescriptor
+	// response from `CreateFirmwareNxosDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareNxosDescriptor`: %v\n", resp)
 }
 ```
@@ -1088,7 +1088,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -1106,7 +1106,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwarePcieDescriptor
 
-> FirmwarePcieDescriptor CreateFirmwarePcieDescriptor(ctx).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwarePcieDescriptor(ctx).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.PcieDescriptor' resource.
 
@@ -1134,7 +1134,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwarePcieDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwarePcieDescriptor`: FirmwarePcieDescriptor
+	// response from `CreateFirmwarePcieDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwarePcieDescriptor`: %v\n", resp)
 }
 ```
@@ -1156,7 +1156,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -1242,7 +1242,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwarePsuDescriptor
 
-> FirmwarePsuDescriptor CreateFirmwarePsuDescriptor(ctx).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwarePsuDescriptor(ctx).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.PsuDescriptor' resource.
 
@@ -1270,7 +1270,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwarePsuDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwarePsuDescriptor`: FirmwarePsuDescriptor
+	// response from `CreateFirmwarePsuDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwarePsuDescriptor`: %v\n", resp)
 }
 ```
@@ -1292,7 +1292,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -1310,7 +1310,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwareSasExpanderDescriptor
 
-> FirmwareSasExpanderDescriptor CreateFirmwareSasExpanderDescriptor(ctx).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareSasExpanderDescriptor(ctx).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.SasExpanderDescriptor' resource.
 
@@ -1338,7 +1338,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareSasExpanderDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareSasExpanderDescriptor`: FirmwareSasExpanderDescriptor
+	// response from `CreateFirmwareSasExpanderDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareSasExpanderDescriptor`: %v\n", resp)
 }
 ```
@@ -1360,7 +1360,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -1446,7 +1446,7 @@ Name | Type | Description  | Notes
 
 ## CreateFirmwareStorageControllerDescriptor
 
-> FirmwareStorageControllerDescriptor CreateFirmwareStorageControllerDescriptor(ctx).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FirmwareComponentDescriptor CreateFirmwareStorageControllerDescriptor(ctx).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'firmware.StorageControllerDescriptor' resource.
 
@@ -1474,7 +1474,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.CreateFirmwareStorageControllerDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFirmwareStorageControllerDescriptor`: FirmwareStorageControllerDescriptor
+	// response from `CreateFirmwareStorageControllerDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.CreateFirmwareStorageControllerDescriptor`: %v\n", resp)
 }
 ```
@@ -1496,7 +1496,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -3306,7 +3306,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareBiosDescriptorByMoid
 
-> FirmwareBiosDescriptor GetFirmwareBiosDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareBiosDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.BiosDescriptor' resource.
 
@@ -3332,7 +3332,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareBiosDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareBiosDescriptorByMoid`: FirmwareBiosDescriptor
+	// response from `GetFirmwareBiosDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareBiosDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -3356,7 +3356,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -3458,7 +3458,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareBoardControllerDescriptorByMoid
 
-> FirmwareBoardControllerDescriptor GetFirmwareBoardControllerDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareBoardControllerDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.BoardControllerDescriptor' resource.
 
@@ -3484,7 +3484,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareBoardControllerDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareBoardControllerDescriptorByMoid`: FirmwareBoardControllerDescriptor
+	// response from `GetFirmwareBoardControllerDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareBoardControllerDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -3508,7 +3508,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -3762,7 +3762,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareCimcDescriptorByMoid
 
-> FirmwareCimcDescriptor GetFirmwareCimcDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareCimcDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.CimcDescriptor' resource.
 
@@ -3788,7 +3788,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareCimcDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareCimcDescriptorByMoid`: FirmwareCimcDescriptor
+	// response from `GetFirmwareCimcDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareCimcDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -3812,7 +3812,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -3914,7 +3914,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareDimmDescriptorByMoid
 
-> FirmwareDimmDescriptor GetFirmwareDimmDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareDimmDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.DimmDescriptor' resource.
 
@@ -3940,7 +3940,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareDimmDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareDimmDescriptorByMoid`: FirmwareDimmDescriptor
+	// response from `GetFirmwareDimmDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareDimmDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -3964,7 +3964,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -4370,7 +4370,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareDriveDescriptorByMoid
 
-> FirmwareDriveDescriptor GetFirmwareDriveDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareDriveDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.DriveDescriptor' resource.
 
@@ -4396,7 +4396,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareDriveDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareDriveDescriptorByMoid`: FirmwareDriveDescriptor
+	// response from `GetFirmwareDriveDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareDriveDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -4420,7 +4420,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -4978,7 +4978,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareGpuDescriptorByMoid
 
-> FirmwareGpuDescriptor GetFirmwareGpuDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareGpuDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.GpuDescriptor' resource.
 
@@ -5004,7 +5004,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareGpuDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareGpuDescriptorByMoid`: FirmwareGpuDescriptor
+	// response from `GetFirmwareGpuDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareGpuDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -5028,7 +5028,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -5130,7 +5130,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareHbaDescriptorByMoid
 
-> FirmwareHbaDescriptor GetFirmwareHbaDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareHbaDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.HbaDescriptor' resource.
 
@@ -5156,7 +5156,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareHbaDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareHbaDescriptorByMoid`: FirmwareHbaDescriptor
+	// response from `GetFirmwareHbaDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareHbaDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -5180,7 +5180,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -5282,7 +5282,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareIomDescriptorByMoid
 
-> FirmwareIomDescriptor GetFirmwareIomDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareIomDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.IomDescriptor' resource.
 
@@ -5308,7 +5308,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareIomDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareIomDescriptorByMoid`: FirmwareIomDescriptor
+	// response from `GetFirmwareIomDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareIomDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -5332,7 +5332,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareIomDescriptor**](FirmwareIomDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -5434,7 +5434,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareMswitchDescriptorByMoid
 
-> FirmwareMswitchDescriptor GetFirmwareMswitchDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareMswitchDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.MswitchDescriptor' resource.
 
@@ -5460,7 +5460,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareMswitchDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareMswitchDescriptorByMoid`: FirmwareMswitchDescriptor
+	// response from `GetFirmwareMswitchDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareMswitchDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -5484,7 +5484,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -5586,7 +5586,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareNxosDescriptorByMoid
 
-> FirmwareNxosDescriptor GetFirmwareNxosDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareNxosDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.NxosDescriptor' resource.
 
@@ -5612,7 +5612,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareNxosDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareNxosDescriptorByMoid`: FirmwareNxosDescriptor
+	// response from `GetFirmwareNxosDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareNxosDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -5636,7 +5636,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -5738,7 +5738,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwarePcieDescriptorByMoid
 
-> FirmwarePcieDescriptor GetFirmwarePcieDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwarePcieDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.PcieDescriptor' resource.
 
@@ -5764,7 +5764,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwarePcieDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwarePcieDescriptorByMoid`: FirmwarePcieDescriptor
+	// response from `GetFirmwarePcieDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwarePcieDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -5788,7 +5788,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -6042,7 +6042,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwarePsuDescriptorByMoid
 
-> FirmwarePsuDescriptor GetFirmwarePsuDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwarePsuDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.PsuDescriptor' resource.
 
@@ -6068,7 +6068,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwarePsuDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwarePsuDescriptorByMoid`: FirmwarePsuDescriptor
+	// response from `GetFirmwarePsuDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwarePsuDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -6092,7 +6092,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -6346,7 +6346,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareSasExpanderDescriptorByMoid
 
-> FirmwareSasExpanderDescriptor GetFirmwareSasExpanderDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareSasExpanderDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.SasExpanderDescriptor' resource.
 
@@ -6372,7 +6372,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareSasExpanderDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareSasExpanderDescriptorByMoid`: FirmwareSasExpanderDescriptor
+	// response from `GetFirmwareSasExpanderDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareSasExpanderDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -6396,7 +6396,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -6650,7 +6650,7 @@ Name | Type | Description  | Notes
 
 ## GetFirmwareStorageControllerDescriptorByMoid
 
-> FirmwareStorageControllerDescriptor GetFirmwareStorageControllerDescriptorByMoid(ctx, moid).Execute()
+> FirmwareComponentDescriptor GetFirmwareStorageControllerDescriptorByMoid(ctx, moid).Execute()
 
 Read a 'firmware.StorageControllerDescriptor' resource.
 
@@ -6676,7 +6676,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.GetFirmwareStorageControllerDescriptorByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFirmwareStorageControllerDescriptorByMoid`: FirmwareStorageControllerDescriptor
+	// response from `GetFirmwareStorageControllerDescriptorByMoid`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.GetFirmwareStorageControllerDescriptorByMoid`: %v\n", resp)
 }
 ```
@@ -6700,7 +6700,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -7562,7 +7562,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareBiosDescriptor
 
-> FirmwareBiosDescriptor PatchFirmwareBiosDescriptor(ctx, moid).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareBiosDescriptor(ctx, moid).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.BiosDescriptor' resource.
 
@@ -7590,7 +7590,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareBiosDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareBiosDescriptor`: FirmwareBiosDescriptor
+	// response from `PatchFirmwareBiosDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareBiosDescriptor`: %v\n", resp)
 }
 ```
@@ -7616,7 +7616,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -7634,7 +7634,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareBoardControllerDescriptor
 
-> FirmwareBoardControllerDescriptor PatchFirmwareBoardControllerDescriptor(ctx, moid).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareBoardControllerDescriptor(ctx, moid).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.BoardControllerDescriptor' resource.
 
@@ -7662,7 +7662,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareBoardControllerDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareBoardControllerDescriptor`: FirmwareBoardControllerDescriptor
+	// response from `PatchFirmwareBoardControllerDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareBoardControllerDescriptor`: %v\n", resp)
 }
 ```
@@ -7688,7 +7688,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -7706,7 +7706,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareCimcDescriptor
 
-> FirmwareCimcDescriptor PatchFirmwareCimcDescriptor(ctx, moid).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareCimcDescriptor(ctx, moid).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.CimcDescriptor' resource.
 
@@ -7734,7 +7734,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareCimcDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareCimcDescriptor`: FirmwareCimcDescriptor
+	// response from `PatchFirmwareCimcDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareCimcDescriptor`: %v\n", resp)
 }
 ```
@@ -7760,7 +7760,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -7778,7 +7778,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareDimmDescriptor
 
-> FirmwareDimmDescriptor PatchFirmwareDimmDescriptor(ctx, moid).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareDimmDescriptor(ctx, moid).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.DimmDescriptor' resource.
 
@@ -7806,7 +7806,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareDimmDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareDimmDescriptor`: FirmwareDimmDescriptor
+	// response from `PatchFirmwareDimmDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareDimmDescriptor`: %v\n", resp)
 }
 ```
@@ -7832,7 +7832,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -7922,7 +7922,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareDriveDescriptor
 
-> FirmwareDriveDescriptor PatchFirmwareDriveDescriptor(ctx, moid).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareDriveDescriptor(ctx, moid).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.DriveDescriptor' resource.
 
@@ -7950,7 +7950,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareDriveDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareDriveDescriptor`: FirmwareDriveDescriptor
+	// response from `PatchFirmwareDriveDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareDriveDescriptor`: %v\n", resp)
 }
 ```
@@ -7976,7 +7976,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -8066,7 +8066,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareGpuDescriptor
 
-> FirmwareGpuDescriptor PatchFirmwareGpuDescriptor(ctx, moid).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareGpuDescriptor(ctx, moid).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.GpuDescriptor' resource.
 
@@ -8094,7 +8094,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareGpuDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareGpuDescriptor`: FirmwareGpuDescriptor
+	// response from `PatchFirmwareGpuDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareGpuDescriptor`: %v\n", resp)
 }
 ```
@@ -8120,7 +8120,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -8138,7 +8138,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareHbaDescriptor
 
-> FirmwareHbaDescriptor PatchFirmwareHbaDescriptor(ctx, moid).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareHbaDescriptor(ctx, moid).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.HbaDescriptor' resource.
 
@@ -8166,7 +8166,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareHbaDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareHbaDescriptor`: FirmwareHbaDescriptor
+	// response from `PatchFirmwareHbaDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareHbaDescriptor`: %v\n", resp)
 }
 ```
@@ -8192,7 +8192,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -8210,7 +8210,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareIomDescriptor
 
-> FirmwareIomDescriptor PatchFirmwareIomDescriptor(ctx, moid).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareIomDescriptor(ctx, moid).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.IomDescriptor' resource.
 
@@ -8238,7 +8238,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareIomDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareIomDescriptor`: FirmwareIomDescriptor
+	// response from `PatchFirmwareIomDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareIomDescriptor`: %v\n", resp)
 }
 ```
@@ -8264,7 +8264,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareIomDescriptor**](FirmwareIomDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -8282,7 +8282,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareMswitchDescriptor
 
-> FirmwareMswitchDescriptor PatchFirmwareMswitchDescriptor(ctx, moid).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareMswitchDescriptor(ctx, moid).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.MswitchDescriptor' resource.
 
@@ -8310,7 +8310,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareMswitchDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareMswitchDescriptor`: FirmwareMswitchDescriptor
+	// response from `PatchFirmwareMswitchDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareMswitchDescriptor`: %v\n", resp)
 }
 ```
@@ -8336,7 +8336,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -8354,7 +8354,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareNxosDescriptor
 
-> FirmwareNxosDescriptor PatchFirmwareNxosDescriptor(ctx, moid).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareNxosDescriptor(ctx, moid).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.NxosDescriptor' resource.
 
@@ -8382,7 +8382,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareNxosDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareNxosDescriptor`: FirmwareNxosDescriptor
+	// response from `PatchFirmwareNxosDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareNxosDescriptor`: %v\n", resp)
 }
 ```
@@ -8408,7 +8408,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -8426,7 +8426,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwarePcieDescriptor
 
-> FirmwarePcieDescriptor PatchFirmwarePcieDescriptor(ctx, moid).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwarePcieDescriptor(ctx, moid).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.PcieDescriptor' resource.
 
@@ -8454,7 +8454,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwarePcieDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwarePcieDescriptor`: FirmwarePcieDescriptor
+	// response from `PatchFirmwarePcieDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwarePcieDescriptor`: %v\n", resp)
 }
 ```
@@ -8480,7 +8480,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -8570,7 +8570,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwarePsuDescriptor
 
-> FirmwarePsuDescriptor PatchFirmwarePsuDescriptor(ctx, moid).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwarePsuDescriptor(ctx, moid).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.PsuDescriptor' resource.
 
@@ -8598,7 +8598,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwarePsuDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwarePsuDescriptor`: FirmwarePsuDescriptor
+	// response from `PatchFirmwarePsuDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwarePsuDescriptor`: %v\n", resp)
 }
 ```
@@ -8624,7 +8624,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -8714,7 +8714,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareSasExpanderDescriptor
 
-> FirmwareSasExpanderDescriptor PatchFirmwareSasExpanderDescriptor(ctx, moid).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareSasExpanderDescriptor(ctx, moid).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.SasExpanderDescriptor' resource.
 
@@ -8742,7 +8742,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareSasExpanderDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareSasExpanderDescriptor`: FirmwareSasExpanderDescriptor
+	// response from `PatchFirmwareSasExpanderDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareSasExpanderDescriptor`: %v\n", resp)
 }
 ```
@@ -8768,7 +8768,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -8858,7 +8858,7 @@ Name | Type | Description  | Notes
 
 ## PatchFirmwareStorageControllerDescriptor
 
-> FirmwareStorageControllerDescriptor PatchFirmwareStorageControllerDescriptor(ctx, moid).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor PatchFirmwareStorageControllerDescriptor(ctx, moid).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.StorageControllerDescriptor' resource.
 
@@ -8886,7 +8886,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.PatchFirmwareStorageControllerDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchFirmwareStorageControllerDescriptor`: FirmwareStorageControllerDescriptor
+	// response from `PatchFirmwareStorageControllerDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.PatchFirmwareStorageControllerDescriptor`: %v\n", resp)
 }
 ```
@@ -8912,7 +8912,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -9074,7 +9074,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareBiosDescriptor
 
-> FirmwareBiosDescriptor UpdateFirmwareBiosDescriptor(ctx, moid).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareBiosDescriptor(ctx, moid).FirmwareBiosDescriptor(firmwareBiosDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.BiosDescriptor' resource.
 
@@ -9102,7 +9102,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareBiosDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareBiosDescriptor`: FirmwareBiosDescriptor
+	// response from `UpdateFirmwareBiosDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareBiosDescriptor`: %v\n", resp)
 }
 ```
@@ -9128,7 +9128,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -9146,7 +9146,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareBoardControllerDescriptor
 
-> FirmwareBoardControllerDescriptor UpdateFirmwareBoardControllerDescriptor(ctx, moid).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareBoardControllerDescriptor(ctx, moid).FirmwareBoardControllerDescriptor(firmwareBoardControllerDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.BoardControllerDescriptor' resource.
 
@@ -9174,7 +9174,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareBoardControllerDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareBoardControllerDescriptor`: FirmwareBoardControllerDescriptor
+	// response from `UpdateFirmwareBoardControllerDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareBoardControllerDescriptor`: %v\n", resp)
 }
 ```
@@ -9200,7 +9200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -9218,7 +9218,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareCimcDescriptor
 
-> FirmwareCimcDescriptor UpdateFirmwareCimcDescriptor(ctx, moid).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareCimcDescriptor(ctx, moid).FirmwareCimcDescriptor(firmwareCimcDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.CimcDescriptor' resource.
 
@@ -9246,7 +9246,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareCimcDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareCimcDescriptor`: FirmwareCimcDescriptor
+	// response from `UpdateFirmwareCimcDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareCimcDescriptor`: %v\n", resp)
 }
 ```
@@ -9272,7 +9272,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -9290,7 +9290,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareDimmDescriptor
 
-> FirmwareDimmDescriptor UpdateFirmwareDimmDescriptor(ctx, moid).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareDimmDescriptor(ctx, moid).FirmwareDimmDescriptor(firmwareDimmDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.DimmDescriptor' resource.
 
@@ -9318,7 +9318,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareDimmDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareDimmDescriptor`: FirmwareDimmDescriptor
+	// response from `UpdateFirmwareDimmDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareDimmDescriptor`: %v\n", resp)
 }
 ```
@@ -9344,7 +9344,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -9434,7 +9434,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareDriveDescriptor
 
-> FirmwareDriveDescriptor UpdateFirmwareDriveDescriptor(ctx, moid).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareDriveDescriptor(ctx, moid).FirmwareDriveDescriptor(firmwareDriveDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.DriveDescriptor' resource.
 
@@ -9462,7 +9462,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareDriveDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareDriveDescriptor`: FirmwareDriveDescriptor
+	// response from `UpdateFirmwareDriveDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareDriveDescriptor`: %v\n", resp)
 }
 ```
@@ -9488,7 +9488,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -9578,7 +9578,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareGpuDescriptor
 
-> FirmwareGpuDescriptor UpdateFirmwareGpuDescriptor(ctx, moid).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareGpuDescriptor(ctx, moid).FirmwareGpuDescriptor(firmwareGpuDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.GpuDescriptor' resource.
 
@@ -9606,7 +9606,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareGpuDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareGpuDescriptor`: FirmwareGpuDescriptor
+	// response from `UpdateFirmwareGpuDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareGpuDescriptor`: %v\n", resp)
 }
 ```
@@ -9632,7 +9632,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -9650,7 +9650,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareHbaDescriptor
 
-> FirmwareHbaDescriptor UpdateFirmwareHbaDescriptor(ctx, moid).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareHbaDescriptor(ctx, moid).FirmwareHbaDescriptor(firmwareHbaDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.HbaDescriptor' resource.
 
@@ -9678,7 +9678,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareHbaDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareHbaDescriptor`: FirmwareHbaDescriptor
+	// response from `UpdateFirmwareHbaDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareHbaDescriptor`: %v\n", resp)
 }
 ```
@@ -9704,7 +9704,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -9722,7 +9722,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareIomDescriptor
 
-> FirmwareIomDescriptor UpdateFirmwareIomDescriptor(ctx, moid).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareIomDescriptor(ctx, moid).FirmwareIomDescriptor(firmwareIomDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.IomDescriptor' resource.
 
@@ -9750,7 +9750,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareIomDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareIomDescriptor`: FirmwareIomDescriptor
+	// response from `UpdateFirmwareIomDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareIomDescriptor`: %v\n", resp)
 }
 ```
@@ -9776,7 +9776,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareIomDescriptor**](FirmwareIomDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -9794,7 +9794,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareMswitchDescriptor
 
-> FirmwareMswitchDescriptor UpdateFirmwareMswitchDescriptor(ctx, moid).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareMswitchDescriptor(ctx, moid).FirmwareMswitchDescriptor(firmwareMswitchDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.MswitchDescriptor' resource.
 
@@ -9822,7 +9822,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareMswitchDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareMswitchDescriptor`: FirmwareMswitchDescriptor
+	// response from `UpdateFirmwareMswitchDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareMswitchDescriptor`: %v\n", resp)
 }
 ```
@@ -9848,7 +9848,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -9866,7 +9866,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareNxosDescriptor
 
-> FirmwareNxosDescriptor UpdateFirmwareNxosDescriptor(ctx, moid).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareNxosDescriptor(ctx, moid).FirmwareNxosDescriptor(firmwareNxosDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.NxosDescriptor' resource.
 
@@ -9894,7 +9894,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareNxosDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareNxosDescriptor`: FirmwareNxosDescriptor
+	// response from `UpdateFirmwareNxosDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareNxosDescriptor`: %v\n", resp)
 }
 ```
@@ -9920,7 +9920,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -9938,7 +9938,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwarePcieDescriptor
 
-> FirmwarePcieDescriptor UpdateFirmwarePcieDescriptor(ctx, moid).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwarePcieDescriptor(ctx, moid).FirmwarePcieDescriptor(firmwarePcieDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.PcieDescriptor' resource.
 
@@ -9966,7 +9966,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwarePcieDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwarePcieDescriptor`: FirmwarePcieDescriptor
+	// response from `UpdateFirmwarePcieDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwarePcieDescriptor`: %v\n", resp)
 }
 ```
@@ -9992,7 +9992,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -10082,7 +10082,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwarePsuDescriptor
 
-> FirmwarePsuDescriptor UpdateFirmwarePsuDescriptor(ctx, moid).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwarePsuDescriptor(ctx, moid).FirmwarePsuDescriptor(firmwarePsuDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.PsuDescriptor' resource.
 
@@ -10110,7 +10110,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwarePsuDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwarePsuDescriptor`: FirmwarePsuDescriptor
+	// response from `UpdateFirmwarePsuDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwarePsuDescriptor`: %v\n", resp)
 }
 ```
@@ -10136,7 +10136,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -10226,7 +10226,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareSasExpanderDescriptor
 
-> FirmwareSasExpanderDescriptor UpdateFirmwareSasExpanderDescriptor(ctx, moid).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareSasExpanderDescriptor(ctx, moid).FirmwareSasExpanderDescriptor(firmwareSasExpanderDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.SasExpanderDescriptor' resource.
 
@@ -10254,7 +10254,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareSasExpanderDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareSasExpanderDescriptor`: FirmwareSasExpanderDescriptor
+	// response from `UpdateFirmwareSasExpanderDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareSasExpanderDescriptor`: %v\n", resp)
 }
 ```
@@ -10280,7 +10280,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 
@@ -10370,7 +10370,7 @@ Name | Type | Description  | Notes
 
 ## UpdateFirmwareStorageControllerDescriptor
 
-> FirmwareStorageControllerDescriptor UpdateFirmwareStorageControllerDescriptor(ctx, moid).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).Execute()
+> FirmwareComponentDescriptor UpdateFirmwareStorageControllerDescriptor(ctx, moid).FirmwareStorageControllerDescriptor(firmwareStorageControllerDescriptor).IfMatch(ifMatch).Execute()
 
 Update a 'firmware.StorageControllerDescriptor' resource.
 
@@ -10398,7 +10398,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirmwareApi.UpdateFirmwareStorageControllerDescriptor``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateFirmwareStorageControllerDescriptor`: FirmwareStorageControllerDescriptor
+	// response from `UpdateFirmwareStorageControllerDescriptor`: FirmwareComponentDescriptor
 	fmt.Fprintf(os.Stdout, "Response from `FirmwareApi.UpdateFirmwareStorageControllerDescriptor`: %v\n", resp)
 }
 ```
@@ -10424,7 +10424,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md)
+[**FirmwareComponentDescriptor**](FirmwareComponentDescriptor.md)
 
 ### Authorization
 

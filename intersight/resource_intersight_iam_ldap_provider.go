@@ -308,6 +308,13 @@ func resourceIamLdapProvider() *schema.Resource {
 					},
 				},
 			},
+			"vendor": {
+				Description:  "LDAP server vendor type used for authentication.\n* `OpenLDAP` - Open source LDAP server for remote authentication.\n* `MSAD` - Microsoft active directory for remote authentication.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"OpenLDAP", "MSAD"}, false),
+				Optional:     true,
+				Default:      "OpenLDAP",
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -575,6 +582,11 @@ func resourceIamLdapProviderCreate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if v, ok := d.GetOk("vendor"); ok {
+		x := (v.(string))
+		o.SetVendor(x)
+	}
+
 	r := conn.ApiClient.IamApi.CreateIamLdapProvider(conn.ctx).IamLdapProvider(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -687,6 +699,10 @@ func resourceIamLdapProviderRead(c context.Context, d *schema.ResourceData, meta
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in IamLdapProvider object: %s", err.Error())
+	}
+
+	if err := d.Set("vendor", (s.GetVendor())); err != nil {
+		return diag.Errorf("error occurred while setting property Vendor in IamLdapProvider object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -812,6 +828,12 @@ func resourceIamLdapProviderUpdate(c context.Context, d *schema.ResourceData, me
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("vendor") {
+		v := d.Get("vendor")
+		x := (v.(string))
+		o.SetVendor(x)
 	}
 
 	r := conn.ApiClient.IamApi.UpdateIamLdapProvider(conn.ctx, d.Id()).IamLdapProvider(*o)

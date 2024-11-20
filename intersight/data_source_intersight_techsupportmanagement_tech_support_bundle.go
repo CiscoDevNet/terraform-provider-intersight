@@ -719,11 +719,11 @@ func dataSourceTechsupportmanagementTechSupportBundleRead(c context.Context, d *
 	}
 
 	if v, ok := d.GetOk("platform_param"); ok {
-		p := make([]models.ConnectorPlatformParamBase, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.ConnectorPlatformParamBase{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1015,7 +1015,7 @@ func dataSourceTechsupportmanagementTechSupportBundleRead(c context.Context, d *
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["pid"] = (s.GetPid())
 
-				temp["platform_param"] = flattenMapConnectorPlatformParamBase(s.GetPlatformParam(), d)
+				temp["platform_param"] = flattenMapMoBaseComplexType(s.GetPlatformParam(), d)
 				temp["platform_type"] = (s.GetPlatformType())
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())

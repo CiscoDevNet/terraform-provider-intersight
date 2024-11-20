@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | The filter type. | 
+**Type** | **NullableString** | The filter type. | 
 
 ## Methods
 
 ### NewTelemetryDruidBaseFilter
 
-`func NewTelemetryDruidBaseFilter(type_ string, ) *TelemetryDruidBaseFilter`
+`func NewTelemetryDruidBaseFilter(type_ NullableString, ) *TelemetryDruidBaseFilter`
 
 NewTelemetryDruidBaseFilter instantiates a new TelemetryDruidBaseFilter object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,16 @@ and a boolean to check if the value has been set.
 SetType sets Type field to given value.
 
 
+### SetTypeNil
+
+`func (o *TelemetryDruidBaseFilter) SetTypeNil(b bool)`
+
+ SetTypeNil sets the value for Type to be an explicit nil
+
+### UnsetType
+`func (o *TelemetryDruidBaseFilter) UnsetType()`
+
+UnsetType ensures that no value is present for Type, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

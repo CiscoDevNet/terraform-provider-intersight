@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **InitiatorWwpn** | Pointer to **string** | The WWPN Address of the underlying fibre channel interface at the host side used for SAN accesss. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.  For example, 20:00:D4:C9:3C:35:02:01. | [optional] [readonly] 
 **InstallTarget** | Pointer to **string** | The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive. | [optional] [readonly] 
 **LunId** | Pointer to **int64** | The Logical Unit Number (LUN) of the install target. | [optional] [readonly] [default to 0]
-**OperatingSystemParameters** | Pointer to [**NullableOsOperatingSystemParameters**](OsOperatingSystemParameters.md) |  | [optional] 
-**ProcessedInstallTarget** | Pointer to [**NullableOsInstallTarget**](OsInstallTarget.md) |  | [optional] 
+**OperatingSystemParameters** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | Installation parameters specific to selected OS. | [optional] 
+**ProcessedInstallTarget** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | Install Target upon which Operating System is installed. | [optional] 
 **SerialNumber** | Pointer to **string** | The Serial Number of the server. | [optional] [readonly] 
 **TargetIqn** | Pointer to **string** | IQN (iSCSI qualified name) of Storage iSCSI target. Can be up to 255 characters long and has the following format, iqn.yyyy-mm.naming-authority:unique_name. | [optional] [readonly] 
 **TargetWwpn** | Pointer to **string** | The WWPN Address of the underlying fibre channel interface at the target used by the storage. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.  For example, 51:4F:0C:50:14:1F:AF:01. | [optional] [readonly] 
@@ -260,20 +260,20 @@ HasLunId returns a boolean if a field has been set.
 
 ### GetOperatingSystemParameters
 
-`func (o *OsServerConfig) GetOperatingSystemParameters() OsOperatingSystemParameters`
+`func (o *OsServerConfig) GetOperatingSystemParameters() MoBaseComplexType`
 
 GetOperatingSystemParameters returns the OperatingSystemParameters field if non-nil, zero value otherwise.
 
 ### GetOperatingSystemParametersOk
 
-`func (o *OsServerConfig) GetOperatingSystemParametersOk() (*OsOperatingSystemParameters, bool)`
+`func (o *OsServerConfig) GetOperatingSystemParametersOk() (*MoBaseComplexType, bool)`
 
 GetOperatingSystemParametersOk returns a tuple with the OperatingSystemParameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOperatingSystemParameters
 
-`func (o *OsServerConfig) SetOperatingSystemParameters(v OsOperatingSystemParameters)`
+`func (o *OsServerConfig) SetOperatingSystemParameters(v MoBaseComplexType)`
 
 SetOperatingSystemParameters sets OperatingSystemParameters field to given value.
 
@@ -295,20 +295,20 @@ HasOperatingSystemParameters returns a boolean if a field has been set.
 UnsetOperatingSystemParameters ensures that no value is present for OperatingSystemParameters, not even an explicit nil
 ### GetProcessedInstallTarget
 
-`func (o *OsServerConfig) GetProcessedInstallTarget() OsInstallTarget`
+`func (o *OsServerConfig) GetProcessedInstallTarget() MoBaseComplexType`
 
 GetProcessedInstallTarget returns the ProcessedInstallTarget field if non-nil, zero value otherwise.
 
 ### GetProcessedInstallTargetOk
 
-`func (o *OsServerConfig) GetProcessedInstallTargetOk() (*OsInstallTarget, bool)`
+`func (o *OsServerConfig) GetProcessedInstallTargetOk() (*MoBaseComplexType, bool)`
 
 GetProcessedInstallTargetOk returns a tuple with the ProcessedInstallTarget field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProcessedInstallTarget
 
-`func (o *OsServerConfig) SetProcessedInstallTarget(v OsInstallTarget)`
+`func (o *OsServerConfig) SetProcessedInstallTarget(v MoBaseComplexType)`
 
 SetProcessedInstallTarget sets ProcessedInstallTarget field to given value.
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppAggregate"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppAggregate"]
 **AggregateType** | Pointer to **string** | Storage disk type for NetApp aggregate. * &#x60;HDD&#x60; - Hard Disk Drive disk type. * &#x60;Hybrid&#x60; - Solid State Hard Disk Drive. * &#x60;Hybrid (Flash Pool)&#x60; - SSHD in a flash pool disk type. * &#x60;SSD&#x60; - Solid State Disk disk type. * &#x60;SSD (FabricPool)&#x60; - SSD in a flash pool disk type. * &#x60;VMDisk (SDS)&#x60; - Storage disk with Hard disk drive. * &#x60;VMDisk (FabricPool)&#x60; - Storage disk with Non-volatile random-access memory drives. * &#x60;LUN (FlexArray)&#x60; - LUN (FlexArray) disk type. * &#x60;Not Mapped&#x60; - Storage disk is not mapped. | [optional] [readonly] [default to "HDD"]
-**AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
+**AvgPerformanceMetrics** | Pointer to [**NullableStorageBasePerformanceMetricsAverage**](StorageBasePerformanceMetricsAverage.md) | Average performance metrics data for a NetApp storage resource over a given period of time. | [optional] 
 **CloudStorage** | Pointer to **[]string** |  | [optional] 
 **EfficiencyRatio** | Pointer to **float32** | Data reduction ratio (logical_used / used). | [optional] [readonly] 
 **Key** | Pointer to **string** | Unique identifier of NetApp Aggregate across data center. | [optional] [readonly] 
@@ -105,20 +105,20 @@ HasAggregateType returns a boolean if a field has been set.
 
 ### GetAvgPerformanceMetrics
 
-`func (o *StorageNetAppAggregate) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage`
+`func (o *StorageNetAppAggregate) GetAvgPerformanceMetrics() StorageBasePerformanceMetricsAverage`
 
 GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field if non-nil, zero value otherwise.
 
 ### GetAvgPerformanceMetricsOk
 
-`func (o *StorageNetAppAggregate) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool)`
+`func (o *StorageNetAppAggregate) GetAvgPerformanceMetricsOk() (*StorageBasePerformanceMetricsAverage, bool)`
 
 GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvgPerformanceMetrics
 
-`func (o *StorageNetAppAggregate) SetAvgPerformanceMetrics(v StorageNetAppPerformanceMetricsAverage)`
+`func (o *StorageNetAppAggregate) SetAvgPerformanceMetrics(v StorageBasePerformanceMetricsAverage)`
 
 SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
 
@@ -128,6 +128,16 @@ SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
 
 HasAvgPerformanceMetrics returns a boolean if a field has been set.
 
+### SetAvgPerformanceMetricsNil
+
+`func (o *StorageNetAppAggregate) SetAvgPerformanceMetricsNil(b bool)`
+
+ SetAvgPerformanceMetricsNil sets the value for AvgPerformanceMetrics to be an explicit nil
+
+### UnsetAvgPerformanceMetrics
+`func (o *StorageNetAppAggregate) UnsetAvgPerformanceMetrics()`
+
+UnsetAvgPerformanceMetrics ensures that no value is present for AvgPerformanceMetrics, not even an explicit nil
 ### GetCloudStorage
 
 `func (o *StorageNetAppAggregate) GetCloudStorage() []string`

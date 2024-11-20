@@ -784,11 +784,11 @@ func dataSourcePartnerintegrationFileRead(c context.Context, d *schema.ResourceD
 	}
 
 	if v, ok := d.GetOk("nr_source"); ok {
-		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.SoftwarerepositoryFileServer{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1006,7 +1006,7 @@ func dataSourcePartnerintegrationFileRead(c context.Context, d *schema.ResourceD
 				temp["size"] = (s.GetSize())
 				temp["software_advisory_url"] = (s.GetSoftwareAdvisoryUrl())
 
-				temp["nr_source"] = flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)
+				temp["nr_source"] = flattenMapMoBaseComplexType(s.GetSource(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["nr_version"] = (s.GetVersion())

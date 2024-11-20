@@ -1370,11 +1370,11 @@ func resourceFirmwareSwitchUpgradeCreate(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("file_server"); ok {
-		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewSoftwarerepositoryFileServerWithDefaults()
+			o := models.NewMoBaseComplexTypeWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1820,7 +1820,7 @@ func resourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property EnableFabricEvacuation in FirmwareSwitchUpgrade object: %s", err.Error())
 	}
 
-	if err := d.Set("file_server", flattenMapSoftwarerepositoryFileServer(s.GetFileServer(), d)); err != nil {
+	if err := d.Set("file_server", flattenMapMoBaseComplexType(s.GetFileServer(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property FileServer in FirmwareSwitchUpgrade object: %s", err.Error())
 	}
 

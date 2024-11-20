@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resourcepool.Pool"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resourcepool.Pool"]
 **PoolType** | Pointer to **string** | The resource management type in the pool, it can be either static or dynamic. * &#x60;Static&#x60; - The resources in the pool will not be changed until user manually update it. * &#x60;Dynamic&#x60; - The resources in the pool will be updated dynamically based on the condition. | [optional] [default to "Static"]
-**ResourcePoolParameters** | Pointer to [**NullableResourcepoolResourcePoolParameters**](ResourcepoolResourcePoolParameters.md) |  | [optional] 
+**ResourcePoolParameters** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | The resource pool can hold different type of resources, each resources can have some specific parameters and functionality, those details are captured as part of this. | [optional] 
 **ResourceType** | Pointer to **string** | The type of the resource present in the pool, example &#39;server&#39; its combination of RackUnit and Blade. * &#x60;None&#x60; - The resource cannot consider for Resource Pool. * &#x60;Server&#x60; - Resource Pool holds the server kind of resources, example - RackServer, Blade. | [optional] [default to "None"]
 **Selectors** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
@@ -98,20 +98,20 @@ HasPoolType returns a boolean if a field has been set.
 
 ### GetResourcePoolParameters
 
-`func (o *ResourcepoolPool) GetResourcePoolParameters() ResourcepoolResourcePoolParameters`
+`func (o *ResourcepoolPool) GetResourcePoolParameters() MoBaseComplexType`
 
 GetResourcePoolParameters returns the ResourcePoolParameters field if non-nil, zero value otherwise.
 
 ### GetResourcePoolParametersOk
 
-`func (o *ResourcepoolPool) GetResourcePoolParametersOk() (*ResourcepoolResourcePoolParameters, bool)`
+`func (o *ResourcepoolPool) GetResourcePoolParametersOk() (*MoBaseComplexType, bool)`
 
 GetResourcePoolParametersOk returns a tuple with the ResourcePoolParameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResourcePoolParameters
 
-`func (o *ResourcepoolPool) SetResourcePoolParameters(v ResourcepoolResourcePoolParameters)`
+`func (o *ResourcepoolPool) SetResourcePoolParameters(v MoBaseComplexType)`
 
 SetResourcePoolParameters sets ResourcePoolParameters field to given value.
 

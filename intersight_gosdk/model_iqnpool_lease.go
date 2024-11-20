@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024100405
+API version: 1.0.11-2024101709
 Contact: intersight@cisco.com
 */
 
@@ -35,8 +35,9 @@ type IqnpoolLease struct {
 	// Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
 	IqnPrefix *string `json:"IqnPrefix,omitempty"`
 	// Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
-	IqnSuffix            *string                               `json:"IqnSuffix,omitempty"`
-	Reservation          *IqnpoolReservationReference          `json:"Reservation,omitempty"`
+	IqnSuffix *string `json:"IqnSuffix,omitempty"`
+	// The reference to the reservation object.
+	Reservation          NullablePoolReservationReference      `json:"Reservation,omitempty"`
 	AssignedToEntity     NullableMoBaseMoRelationship          `json:"AssignedToEntity,omitempty"`
 	Pool                 NullableIqnpoolPoolRelationship       `json:"Pool,omitempty"`
 	PoolMember           NullableIqnpoolPoolMemberRelationship `json:"PoolMember,omitempty"`
@@ -259,36 +260,47 @@ func (o *IqnpoolLease) SetIqnSuffix(v string) {
 	o.IqnSuffix = &v
 }
 
-// GetReservation returns the Reservation field value if set, zero value otherwise.
-func (o *IqnpoolLease) GetReservation() IqnpoolReservationReference {
-	if o == nil || IsNil(o.Reservation) {
-		var ret IqnpoolReservationReference
+// GetReservation returns the Reservation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IqnpoolLease) GetReservation() PoolReservationReference {
+	if o == nil || IsNil(o.Reservation.Get()) {
+		var ret PoolReservationReference
 		return ret
 	}
-	return *o.Reservation
+	return *o.Reservation.Get()
 }
 
 // GetReservationOk returns a tuple with the Reservation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IqnpoolLease) GetReservationOk() (*IqnpoolReservationReference, bool) {
-	if o == nil || IsNil(o.Reservation) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IqnpoolLease) GetReservationOk() (*PoolReservationReference, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Reservation, true
+	return o.Reservation.Get(), o.Reservation.IsSet()
 }
 
 // HasReservation returns a boolean if a field has been set.
 func (o *IqnpoolLease) HasReservation() bool {
-	if o != nil && !IsNil(o.Reservation) {
+	if o != nil && o.Reservation.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetReservation gets a reference to the given IqnpoolReservationReference and assigns it to the Reservation field.
-func (o *IqnpoolLease) SetReservation(v IqnpoolReservationReference) {
-	o.Reservation = &v
+// SetReservation gets a reference to the given NullablePoolReservationReference and assigns it to the Reservation field.
+func (o *IqnpoolLease) SetReservation(v PoolReservationReference) {
+	o.Reservation.Set(&v)
+}
+
+// SetReservationNil sets the value for Reservation to be an explicit nil
+func (o *IqnpoolLease) SetReservationNil() {
+	o.Reservation.Set(nil)
+}
+
+// UnsetReservation ensures that no value is present for Reservation, not even an explicit nil
+func (o *IqnpoolLease) UnsetReservation() {
+	o.Reservation.Unset()
 }
 
 // GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -501,8 +513,8 @@ func (o IqnpoolLease) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IqnSuffix) {
 		toSerialize["IqnSuffix"] = o.IqnSuffix
 	}
-	if !IsNil(o.Reservation) {
-		toSerialize["Reservation"] = o.Reservation
+	if o.Reservation.IsSet() {
+		toSerialize["Reservation"] = o.Reservation.Get()
 	}
 	if o.AssignedToEntity.IsSet() {
 		toSerialize["AssignedToEntity"] = o.AssignedToEntity.Get()
@@ -578,8 +590,9 @@ func (o *IqnpoolLease) UnmarshalJSON(data []byte) (err error) {
 		// Prefix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
 		IqnPrefix *string `json:"IqnPrefix,omitempty"`
 		// Suffix of the IQN address. IQN Address is constructed as <prefix>:<suffix>:<number>.
-		IqnSuffix        *string                               `json:"IqnSuffix,omitempty"`
-		Reservation      *IqnpoolReservationReference          `json:"Reservation,omitempty"`
+		IqnSuffix *string `json:"IqnSuffix,omitempty"`
+		// The reference to the reservation object.
+		Reservation      NullablePoolReservationReference      `json:"Reservation,omitempty"`
 		AssignedToEntity NullableMoBaseMoRelationship          `json:"AssignedToEntity,omitempty"`
 		Pool             NullableIqnpoolPoolRelationship       `json:"Pool,omitempty"`
 		PoolMember       NullableIqnpoolPoolMemberRelationship `json:"PoolMember,omitempty"`

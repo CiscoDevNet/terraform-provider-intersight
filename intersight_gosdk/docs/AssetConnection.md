@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
-**Credential** | Pointer to [**NullableAssetCredential**](AssetCredential.md) |  | [optional] 
+**Credential** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | A credential which can be used to authenticate with a managed target. | [optional] 
 
 ## Methods
 
@@ -69,20 +69,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetCredential
 
-`func (o *AssetConnection) GetCredential() AssetCredential`
+`func (o *AssetConnection) GetCredential() MoBaseComplexType`
 
 GetCredential returns the Credential field if non-nil, zero value otherwise.
 
 ### GetCredentialOk
 
-`func (o *AssetConnection) GetCredentialOk() (*AssetCredential, bool)`
+`func (o *AssetConnection) GetCredentialOk() (*MoBaseComplexType, bool)`
 
 GetCredentialOk returns a tuple with the Credential field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCredential
 
-`func (o *AssetConnection) SetCredential(v AssetCredential)`
+`func (o *AssetConnection) SetCredential(v MoBaseComplexType)`
 
 SetCredential sets Credential field to given value.
 

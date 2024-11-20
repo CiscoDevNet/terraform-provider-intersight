@@ -595,11 +595,11 @@ func dataSourceRecoveryRestoreRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("config_params"); ok {
-		p := make([]models.RecoveryConfigParams, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.RecoveryConfigParams{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1028,7 +1028,7 @@ func dataSourceRecoveryRestoreRead(c context.Context, d *schema.ResourceData, me
 				temp["backup_info"] = flattenMapRecoveryAbstractBackupInfoRelationship(s.GetBackupInfo(), d)
 				temp["class_id"] = (s.GetClassId())
 
-				temp["config_params"] = flattenMapRecoveryConfigParams(s.GetConfigParams(), d)
+				temp["config_params"] = flattenMapMoBaseComplexType(s.GetConfigParams(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 

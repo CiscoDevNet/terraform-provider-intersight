@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **DisplayAttributes** | Pointer to **[]string** |  | [optional] 
 **Filters** | Pointer to **[]string** |  | [optional] 
 **OrderBy** | Pointer to **string** | Determines  properties that are used to sort the collection of resources. | [optional] 
-**Rule** | Pointer to [**NullableWorkflowAbstractResourceSelector**](WorkflowAbstractResourceSelector.md) |  | [optional] 
+**Rule** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | The abstract selector which can be used to create selection criteria for inputs. | [optional] 
 
 ## Methods
 
@@ -167,20 +167,20 @@ HasOrderBy returns a boolean if a field has been set.
 
 ### GetRule
 
-`func (o *WorkflowMoReferenceAutoProperty) GetRule() WorkflowAbstractResourceSelector`
+`func (o *WorkflowMoReferenceAutoProperty) GetRule() MoBaseComplexType`
 
 GetRule returns the Rule field if non-nil, zero value otherwise.
 
 ### GetRuleOk
 
-`func (o *WorkflowMoReferenceAutoProperty) GetRuleOk() (*WorkflowAbstractResourceSelector, bool)`
+`func (o *WorkflowMoReferenceAutoProperty) GetRuleOk() (*MoBaseComplexType, bool)`
 
 GetRuleOk returns a tuple with the Rule field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRule
 
-`func (o *WorkflowMoReferenceAutoProperty) SetRule(v WorkflowAbstractResourceSelector)`
+`func (o *WorkflowMoReferenceAutoProperty) SetRule(v MoBaseComplexType)`
 
 SetRule sets Rule field to given value.
 

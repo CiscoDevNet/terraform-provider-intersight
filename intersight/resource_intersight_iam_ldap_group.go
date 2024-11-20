@@ -100,7 +100,7 @@ func resourceIamLdapGroup() *schema.Resource {
 			"domain": {
 				Description:  "LDAP server domain the Group resides in.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*$"), ""), StringLenMaximum(255)),
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*$"), ""), StringLenMaximum(255)),
 				Optional:     true,
 			},
 			"domain_group_moid": {
@@ -152,6 +152,12 @@ func resourceIamLdapGroup() *schema.Resource {
 						},
 					},
 				},
+			},
+			"group_dn": {
+				Description:  "LDAP Group DN in the LDAP server database.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.All(validation.StringMatch(regexp.MustCompile("^$|^([^+\\-][a-zA-Z0-9=!#$%()*+,-.:;@ _{|}~?&]*)$"), ""), StringLenMaximum(300)),
+				Optional:     true,
 			},
 			"ldap_policy": {
 				Description: "A reference to a iamLdapPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -567,6 +573,11 @@ func resourceIamLdapGroupCreate(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
+	if v, ok := d.GetOk("group_dn"); ok {
+		x := (v.(string))
+		o.SetGroupDn(x)
+	}
+
 	if v, ok := d.GetOk("ldap_policy"); ok {
 		p := make([]models.IamLdapPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -735,6 +746,10 @@ func resourceIamLdapGroupRead(c context.Context, d *schema.ResourceData, meta in
 		return diag.Errorf("error occurred while setting property EndPointRole in IamLdapGroup object: %s", err.Error())
 	}
 
+	if err := d.Set("group_dn", (s.GetGroupDn())); err != nil {
+		return diag.Errorf("error occurred while setting property GroupDn in IamLdapGroup object: %s", err.Error())
+	}
+
 	if err := d.Set("ldap_policy", flattenMapIamLdapPolicyRelationship(s.GetLdapPolicy(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property LdapPolicy in IamLdapGroup object: %s", err.Error())
 	}
@@ -847,6 +862,12 @@ func resourceIamLdapGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 			x = append(x, models.MoMoRefAsIamEndPointRoleRelationship(o))
 		}
 		o.SetEndPointRole(x)
+	}
+
+	if d.HasChange("group_dn") {
+		v := d.Get("group_dn")
+		x := (v.(string))
+		o.SetGroupDn(x)
 	}
 
 	if d.HasChange("ldap_policy") {

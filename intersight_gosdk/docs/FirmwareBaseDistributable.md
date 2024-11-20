@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Mdfid** | Pointer to **string** | The mdfid of the image provided by cisco.com. | [optional] 
 **Model** | Pointer to **string** | The endpoint model for which this firmware image is applicable. | [optional] 
 **PlatformType** | Pointer to **string** | The platform type of the image. | [optional] [readonly] 
-**RecommendedBuild** | Pointer to **string** | The build which is recommended by Cisco. | [optional] [default to "N"]
+**RecommendedBuild** | Pointer to **string** | The build which is recommended by Cisco. | [optional] 
 **ReleaseNotesUrl** | Pointer to **string** | The url for the release notes of this image. | [optional] 
 **SoftwareTypeId** | Pointer to **string** | The software type id provided by cisco.com. | [optional] [readonly] 
 **SupportedModels** | Pointer to **[]string** |  | [optional] 

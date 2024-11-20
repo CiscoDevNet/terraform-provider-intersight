@@ -1782,11 +1782,11 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 	}
 
 	if v, ok := d.GetOk("vm_config"); ok {
-		p := make([]models.VirtualizationBaseVmConfiguration, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.VirtualizationBaseVmConfiguration{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1949,7 +1949,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
-				temp["vm_config"] = flattenMapVirtualizationBaseVmConfiguration(s.GetVmConfig(), d)
+				temp["vm_config"] = flattenMapMoBaseComplexType(s.GetVmConfig(), d)
 
 				temp["workflow_info"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflowInfo(), d)
 				virtualizationVirtualMachineResults = append(virtualizationVirtualMachineResults, temp)

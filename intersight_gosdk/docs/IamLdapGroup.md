@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.LdapGroup"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LdapGroup"]
 **Domain** | Pointer to **string** | LDAP server domain the Group resides in. | [optional] 
+**GroupDn** | Pointer to **string** | LDAP Group DN in the LDAP server database. | [optional] 
 **Name** | Pointer to **string** | LDAP Group name in the LDAP server database. | [optional] 
 **EndPointRole** | Pointer to [**[]IamEndPointRoleRelationship**](IamEndPointRoleRelationship.md) | An array of relationships to iamEndPointRole resources. | [optional] 
 **LdapPolicy** | Pointer to [**NullableIamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
@@ -94,6 +95,31 @@ SetDomain sets Domain field to given value.
 `func (o *IamLdapGroup) HasDomain() bool`
 
 HasDomain returns a boolean if a field has been set.
+
+### GetGroupDn
+
+`func (o *IamLdapGroup) GetGroupDn() string`
+
+GetGroupDn returns the GroupDn field if non-nil, zero value otherwise.
+
+### GetGroupDnOk
+
+`func (o *IamLdapGroup) GetGroupDnOk() (*string, bool)`
+
+GetGroupDnOk returns a tuple with the GroupDn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupDn
+
+`func (o *IamLdapGroup) SetGroupDn(v string)`
+
+SetGroupDn sets GroupDn field to given value.
+
+### HasGroupDn
+
+`func (o *IamLdapGroup) HasGroupDn() bool`
+
+HasGroupDn returns a boolean if a field has been set.
 
 ### GetName
 

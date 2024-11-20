@@ -1124,6 +1124,32 @@ func Test_intersight_CapabilityApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CapabilityApiService GetCapabilityDomainPolicyRequirementByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CapabilityApi.GetCapabilityDomainPolicyRequirementByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CapabilityApiService GetCapabilityDomainPolicyRequirementList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CapabilityApi.GetCapabilityDomainPolicyRequirementList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CapabilityApiService GetCapabilityDrivesEndpointDescriptorByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

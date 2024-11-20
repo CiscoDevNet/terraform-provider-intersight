@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "cond.AlarmDefinition"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "cond.AlarmDefinition"]
-**Condition** | Pointer to [**NullableIssueCondition**](IssueCondition.md) |  | [optional] 
+**Condition** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | Condition defines the set of criteria under which an issue exists. | [optional] 
 **Description** | Pointer to **string** | A description of the issue which is common to all instances of the issue. | [optional] 
 **Name** | Pointer to **string** | An informational display name. | [optional] 
 **ProbableCause** | Pointer to **string** | An explanation of the likely causes of the detected issue. | [optional] 
@@ -74,20 +74,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetCondition
 
-`func (o *IssueDefinition) GetCondition() IssueCondition`
+`func (o *IssueDefinition) GetCondition() MoBaseComplexType`
 
 GetCondition returns the Condition field if non-nil, zero value otherwise.
 
 ### GetConditionOk
 
-`func (o *IssueDefinition) GetConditionOk() (*IssueCondition, bool)`
+`func (o *IssueDefinition) GetConditionOk() (*MoBaseComplexType, bool)`
 
 GetConditionOk returns a tuple with the Condition field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCondition
 
-`func (o *IssueDefinition) SetCondition(v IssueCondition)`
+`func (o *IssueDefinition) SetCondition(v MoBaseComplexType)`
 
 SetCondition sets Condition field to given value.
 

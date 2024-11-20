@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024100405
+API version: 1.0.11-2024101709
 Contact: intersight@cisco.com
 */
 
@@ -36,9 +36,11 @@ type OsServerConfig struct {
 	// The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive.
 	InstallTarget *string `json:"InstallTarget,omitempty"`
 	// The Logical Unit Number (LUN) of the install target.
-	LunId                     *int64                              `json:"LunId,omitempty"`
-	OperatingSystemParameters NullableOsOperatingSystemParameters `json:"OperatingSystemParameters,omitempty"`
-	ProcessedInstallTarget    NullableOsInstallTarget             `json:"ProcessedInstallTarget,omitempty"`
+	LunId *int64 `json:"LunId,omitempty"`
+	// Installation parameters specific to selected OS.
+	OperatingSystemParameters NullableMoBaseComplexType `json:"OperatingSystemParameters,omitempty"`
+	// Install Target upon which Operating System is installed.
+	ProcessedInstallTarget NullableMoBaseComplexType `json:"ProcessedInstallTarget,omitempty"`
 	// The Serial Number of the server.
 	SerialNumber *string `json:"SerialNumber,omitempty"`
 	// IQN (iSCSI qualified name) of Storage iSCSI target. Can be up to 255 characters long and has the following format, iqn.yyyy-mm.naming-authority:unique_name.
@@ -339,9 +341,9 @@ func (o *OsServerConfig) SetLunId(v int64) {
 }
 
 // GetOperatingSystemParameters returns the OperatingSystemParameters field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OsServerConfig) GetOperatingSystemParameters() OsOperatingSystemParameters {
+func (o *OsServerConfig) GetOperatingSystemParameters() MoBaseComplexType {
 	if o == nil || IsNil(o.OperatingSystemParameters.Get()) {
-		var ret OsOperatingSystemParameters
+		var ret MoBaseComplexType
 		return ret
 	}
 	return *o.OperatingSystemParameters.Get()
@@ -350,7 +352,7 @@ func (o *OsServerConfig) GetOperatingSystemParameters() OsOperatingSystemParamet
 // GetOperatingSystemParametersOk returns a tuple with the OperatingSystemParameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OsServerConfig) GetOperatingSystemParametersOk() (*OsOperatingSystemParameters, bool) {
+func (o *OsServerConfig) GetOperatingSystemParametersOk() (*MoBaseComplexType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -366,8 +368,8 @@ func (o *OsServerConfig) HasOperatingSystemParameters() bool {
 	return false
 }
 
-// SetOperatingSystemParameters gets a reference to the given NullableOsOperatingSystemParameters and assigns it to the OperatingSystemParameters field.
-func (o *OsServerConfig) SetOperatingSystemParameters(v OsOperatingSystemParameters) {
+// SetOperatingSystemParameters gets a reference to the given NullableMoBaseComplexType and assigns it to the OperatingSystemParameters field.
+func (o *OsServerConfig) SetOperatingSystemParameters(v MoBaseComplexType) {
 	o.OperatingSystemParameters.Set(&v)
 }
 
@@ -382,9 +384,9 @@ func (o *OsServerConfig) UnsetOperatingSystemParameters() {
 }
 
 // GetProcessedInstallTarget returns the ProcessedInstallTarget field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OsServerConfig) GetProcessedInstallTarget() OsInstallTarget {
+func (o *OsServerConfig) GetProcessedInstallTarget() MoBaseComplexType {
 	if o == nil || IsNil(o.ProcessedInstallTarget.Get()) {
-		var ret OsInstallTarget
+		var ret MoBaseComplexType
 		return ret
 	}
 	return *o.ProcessedInstallTarget.Get()
@@ -393,7 +395,7 @@ func (o *OsServerConfig) GetProcessedInstallTarget() OsInstallTarget {
 // GetProcessedInstallTargetOk returns a tuple with the ProcessedInstallTarget field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OsServerConfig) GetProcessedInstallTargetOk() (*OsInstallTarget, bool) {
+func (o *OsServerConfig) GetProcessedInstallTargetOk() (*MoBaseComplexType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -409,8 +411,8 @@ func (o *OsServerConfig) HasProcessedInstallTarget() bool {
 	return false
 }
 
-// SetProcessedInstallTarget gets a reference to the given NullableOsInstallTarget and assigns it to the ProcessedInstallTarget field.
-func (o *OsServerConfig) SetProcessedInstallTarget(v OsInstallTarget) {
+// SetProcessedInstallTarget gets a reference to the given NullableMoBaseComplexType and assigns it to the ProcessedInstallTarget field.
+func (o *OsServerConfig) SetProcessedInstallTarget(v MoBaseComplexType) {
 	o.ProcessedInstallTarget.Set(&v)
 }
 
@@ -677,9 +679,11 @@ func (o *OsServerConfig) UnmarshalJSON(data []byte) (err error) {
 		// The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive.
 		InstallTarget *string `json:"InstallTarget,omitempty"`
 		// The Logical Unit Number (LUN) of the install target.
-		LunId                     *int64                              `json:"LunId,omitempty"`
-		OperatingSystemParameters NullableOsOperatingSystemParameters `json:"OperatingSystemParameters,omitempty"`
-		ProcessedInstallTarget    NullableOsInstallTarget             `json:"ProcessedInstallTarget,omitempty"`
+		LunId *int64 `json:"LunId,omitempty"`
+		// Installation parameters specific to selected OS.
+		OperatingSystemParameters NullableMoBaseComplexType `json:"OperatingSystemParameters,omitempty"`
+		// Install Target upon which Operating System is installed.
+		ProcessedInstallTarget NullableMoBaseComplexType `json:"ProcessedInstallTarget,omitempty"`
 		// The Serial Number of the server.
 		SerialNumber *string `json:"SerialNumber,omitempty"`
 		// IQN (iSCSI qualified name) of Storage iSCSI target. Can be up to 255 characters long and has the following format, iqn.yyyy-mm.naming-authority:unique_name.

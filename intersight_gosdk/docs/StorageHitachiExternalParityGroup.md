@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | External parity group number. | [optional] [readonly] 
 **ReservedOpenVolumeCapacity** | Pointer to **int64** | From among the open volumes in the external parity group, the total capacity of volumes which are reserved (KB). | [optional] [readonly] 
 **Spaces** | Pointer to [**[]StorageSpace**](StorageSpace.md) |  | [optional] 
-**StorageUtilization** | Pointer to [**StorageHitachiCapacity**](StorageHitachiCapacity.md) |  | [optional] 
+**StorageUtilization** | Pointer to [**NullableStorageBaseCapacity**](StorageBaseCapacity.md) | Storage space utilization of Hitachi Arrays. Used for specifying utilization by different entities. | [optional] 
 **TotalOpenVolumeCapacity** | Pointer to **int64** | Total volume capacity of the open volumes in the external parity group (KB). | [optional] [readonly] 
 **UnallocatedOpenVolumeCapacity** | Pointer to **int64** | From among the open volumes in the external parity group, the total capacity of volumes to which paths are not allocated (KB). | [optional] [readonly] 
 **UsedCapacityRate** | Pointer to **int64** | Usage rate of the external parity group. | [optional] [readonly] 
@@ -344,20 +344,20 @@ HasSpaces returns a boolean if a field has been set.
 UnsetSpaces ensures that no value is present for Spaces, not even an explicit nil
 ### GetStorageUtilization
 
-`func (o *StorageHitachiExternalParityGroup) GetStorageUtilization() StorageHitachiCapacity`
+`func (o *StorageHitachiExternalParityGroup) GetStorageUtilization() StorageBaseCapacity`
 
 GetStorageUtilization returns the StorageUtilization field if non-nil, zero value otherwise.
 
 ### GetStorageUtilizationOk
 
-`func (o *StorageHitachiExternalParityGroup) GetStorageUtilizationOk() (*StorageHitachiCapacity, bool)`
+`func (o *StorageHitachiExternalParityGroup) GetStorageUtilizationOk() (*StorageBaseCapacity, bool)`
 
 GetStorageUtilizationOk returns a tuple with the StorageUtilization field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStorageUtilization
 
-`func (o *StorageHitachiExternalParityGroup) SetStorageUtilization(v StorageHitachiCapacity)`
+`func (o *StorageHitachiExternalParityGroup) SetStorageUtilization(v StorageBaseCapacity)`
 
 SetStorageUtilization sets StorageUtilization field to given value.
 
@@ -367,6 +367,16 @@ SetStorageUtilization sets StorageUtilization field to given value.
 
 HasStorageUtilization returns a boolean if a field has been set.
 
+### SetStorageUtilizationNil
+
+`func (o *StorageHitachiExternalParityGroup) SetStorageUtilizationNil(b bool)`
+
+ SetStorageUtilizationNil sets the value for StorageUtilization to be an explicit nil
+
+### UnsetStorageUtilization
+`func (o *StorageHitachiExternalParityGroup) UnsetStorageUtilization()`
+
+UnsetStorageUtilization ensures that no value is present for StorageUtilization, not even an explicit nil
 ### GetTotalOpenVolumeCapacity
 
 `func (o *StorageHitachiExternalParityGroup) GetTotalOpenVolumeCapacity() int64`

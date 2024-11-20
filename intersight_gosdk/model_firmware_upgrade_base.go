@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024100405
+API version: 1.0.11-2024101709
 Contact: intersight@cisco.com
 */
 
@@ -27,10 +27,11 @@ type FirmwareUpgradeBase struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-	ObjectType     string                               `json:"ObjectType"`
-	DirectDownload NullableFirmwareDirectDownload       `json:"DirectDownload,omitempty"`
-	FileServer     NullableSoftwarerepositoryFileServer `json:"FileServer,omitempty"`
-	NetworkShare   NullableFirmwareNetworkShare         `json:"NetworkShare,omitempty"`
+	ObjectType     string                         `json:"ObjectType"`
+	DirectDownload NullableFirmwareDirectDownload `json:"DirectDownload,omitempty"`
+	// An external software repository which serves as the source of the file to be imported into the image catalog. If the source is available in the user's local machine, needs to be corrected to source image or just image If not, only a pointer to the file in the external repository is created in the image catalog. For more information, please refer to the softwarerepositoryUploader and softwarerepositoryFile object descriptions where this type is used.
+	FileServer   NullableMoBaseComplexType    `json:"FileServer,omitempty"`
+	NetworkShare NullableFirmwareNetworkShare `json:"NetworkShare,omitempty"`
 	// User has the option to skip the estimate impact calculation.
 	SkipEstimateImpact *bool `json:"SkipEstimateImpact,omitempty"`
 	// Status of the upgrade operation. * `NONE` - Upgrade status is not populated. * `IN_PROGRESS` - The upgrade is in progress. * `SUCCESSFUL` - The upgrade successfully completed. * `FAILED` - The upgrade shows failed status. * `TERMINATED` - The upgrade has been terminated.
@@ -165,9 +166,9 @@ func (o *FirmwareUpgradeBase) UnsetDirectDownload() {
 }
 
 // GetFileServer returns the FileServer field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FirmwareUpgradeBase) GetFileServer() SoftwarerepositoryFileServer {
+func (o *FirmwareUpgradeBase) GetFileServer() MoBaseComplexType {
 	if o == nil || IsNil(o.FileServer.Get()) {
-		var ret SoftwarerepositoryFileServer
+		var ret MoBaseComplexType
 		return ret
 	}
 	return *o.FileServer.Get()
@@ -176,7 +177,7 @@ func (o *FirmwareUpgradeBase) GetFileServer() SoftwarerepositoryFileServer {
 // GetFileServerOk returns a tuple with the FileServer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FirmwareUpgradeBase) GetFileServerOk() (*SoftwarerepositoryFileServer, bool) {
+func (o *FirmwareUpgradeBase) GetFileServerOk() (*MoBaseComplexType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -192,8 +193,8 @@ func (o *FirmwareUpgradeBase) HasFileServer() bool {
 	return false
 }
 
-// SetFileServer gets a reference to the given NullableSoftwarerepositoryFileServer and assigns it to the FileServer field.
-func (o *FirmwareUpgradeBase) SetFileServer(v SoftwarerepositoryFileServer) {
+// SetFileServer gets a reference to the given NullableMoBaseComplexType and assigns it to the FileServer field.
+func (o *FirmwareUpgradeBase) SetFileServer(v MoBaseComplexType) {
 	o.FileServer.Set(&v)
 }
 
@@ -619,10 +620,11 @@ func (o *FirmwareUpgradeBase) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-		ObjectType     string                               `json:"ObjectType"`
-		DirectDownload NullableFirmwareDirectDownload       `json:"DirectDownload,omitempty"`
-		FileServer     NullableSoftwarerepositoryFileServer `json:"FileServer,omitempty"`
-		NetworkShare   NullableFirmwareNetworkShare         `json:"NetworkShare,omitempty"`
+		ObjectType     string                         `json:"ObjectType"`
+		DirectDownload NullableFirmwareDirectDownload `json:"DirectDownload,omitempty"`
+		// An external software repository which serves as the source of the file to be imported into the image catalog. If the source is available in the user's local machine, needs to be corrected to source image or just image If not, only a pointer to the file in the external repository is created in the image catalog. For more information, please refer to the softwarerepositoryUploader and softwarerepositoryFile object descriptions where this type is used.
+		FileServer   NullableMoBaseComplexType    `json:"FileServer,omitempty"`
+		NetworkShare NullableFirmwareNetworkShare `json:"NetworkShare,omitempty"`
 		// User has the option to skip the estimate impact calculation.
 		SkipEstimateImpact *bool `json:"SkipEstimateImpact,omitempty"`
 		// Status of the upgrade operation. * `NONE` - Upgrade status is not populated. * `IN_PROGRESS` - The upgrade is in progress. * `SUCCESSFUL` - The upgrade successfully completed. * `FAILED` - The upgrade shows failed status. * `TERMINATED` - The upgrade has been terminated.

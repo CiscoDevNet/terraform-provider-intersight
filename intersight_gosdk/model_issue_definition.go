@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024100405
+API version: 1.0.11-2024101709
 Contact: intersight@cisco.com
 */
 
@@ -27,8 +27,9 @@ type IssueDefinition struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-	ObjectType string                 `json:"ObjectType"`
-	Condition  NullableIssueCondition `json:"Condition,omitempty"`
+	ObjectType string `json:"ObjectType"`
+	// Condition defines the set of criteria under which an issue exists.
+	Condition NullableMoBaseComplexType `json:"Condition,omitempty"`
 	// A description of the issue which is common to all instances of the issue.
 	Description *string `json:"Description,omitempty"`
 	// An informational display name.
@@ -125,9 +126,9 @@ func (o *IssueDefinition) GetDefaultObjectType() interface{} {
 }
 
 // GetCondition returns the Condition field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IssueDefinition) GetCondition() IssueCondition {
+func (o *IssueDefinition) GetCondition() MoBaseComplexType {
 	if o == nil || IsNil(o.Condition.Get()) {
-		var ret IssueCondition
+		var ret MoBaseComplexType
 		return ret
 	}
 	return *o.Condition.Get()
@@ -136,7 +137,7 @@ func (o *IssueDefinition) GetCondition() IssueCondition {
 // GetConditionOk returns a tuple with the Condition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IssueDefinition) GetConditionOk() (*IssueCondition, bool) {
+func (o *IssueDefinition) GetConditionOk() (*MoBaseComplexType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -152,8 +153,8 @@ func (o *IssueDefinition) HasCondition() bool {
 	return false
 }
 
-// SetCondition gets a reference to the given NullableIssueCondition and assigns it to the Condition field.
-func (o *IssueDefinition) SetCondition(v IssueCondition) {
+// SetCondition gets a reference to the given NullableMoBaseComplexType and assigns it to the Condition field.
+func (o *IssueDefinition) SetCondition(v MoBaseComplexType) {
 	o.Condition.Set(&v)
 }
 
@@ -426,8 +427,9 @@ func (o *IssueDefinition) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-		ObjectType string                 `json:"ObjectType"`
-		Condition  NullableIssueCondition `json:"Condition,omitempty"`
+		ObjectType string `json:"ObjectType"`
+		// Condition defines the set of criteria under which an issue exists.
+		Condition NullableMoBaseComplexType `json:"Condition,omitempty"`
 		// A description of the issue which is common to all instances of the issue.
 		Description *string `json:"Description,omitempty"`
 		// An informational display name.
