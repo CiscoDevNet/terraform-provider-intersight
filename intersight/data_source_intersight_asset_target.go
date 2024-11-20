@@ -957,11 +957,11 @@ func dataSourceAssetTargetRead(c context.Context, d *schema.ResourceData, meta i
 			o.SetClassId("asset.Connection")
 			if v, ok := l["credential"]; ok {
 				{
-					p := make([]models.AssetCredential, 0, 1)
+					p := make([]models.MoBaseComplexType, 0, 1)
 					s := v.([]interface{})
 					for i := 0; i < len(s); i++ {
 						l := s[i].(map[string]interface{})
-						o := models.NewAssetCredentialWithDefaults()
+						o := models.NewMoBaseComplexTypeWithDefaults()
 						if v, ok := l["additional_properties"]; ok {
 							{
 								x := []byte(v.(string))
@@ -1272,11 +1272,11 @@ func dataSourceAssetTargetRead(c context.Context, d *schema.ResourceData, meta i
 			}
 			if v, ok := l["options"]; ok {
 				{
-					p := make([]models.AssetServiceOptions, 0, 1)
+					p := make([]models.MoBaseComplexType, 0, 1)
 					s := v.([]interface{})
 					for i := 0; i < len(s); i++ {
 						l := s[i].(map[string]interface{})
-						o := models.NewAssetServiceOptionsWithDefaults()
+						o := models.NewMoBaseComplexTypeWithDefaults()
 						if v, ok := l["additional_properties"]; ok {
 							{
 								x := []byte(v.(string))

@@ -1202,11 +1202,11 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("severity"); ok {
-		p := make([]models.TamSeverity, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewTamSeverityWithDefaults()
+			o := models.NewMoBaseComplexTypeWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1446,7 +1446,7 @@ func resourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while setting property Recommendation in TamSecurityAdvisory object: %s", err.Error())
 	}
 
-	if err := d.Set("severity", flattenMapTamSeverity(s.GetSeverity(), d)); err != nil {
+	if err := d.Set("severity", flattenMapMoBaseComplexType(s.GetSeverity(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Severity in TamSecurityAdvisory object: %s", err.Error())
 	}
 
@@ -1890,11 +1890,11 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 
 	if d.HasChange("severity") {
 		v := d.Get("severity")
-		p := make([]models.TamSeverity, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.TamSeverity{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))

@@ -3,12 +3,12 @@ subcategory: "certificatemanagement"
 layout: "intersight"
 page_title: "Intersight: intersight_certificatemanagement_policy"
 description: |-
-        Certificate Management policy models a reusable certificate and private key configuration that can be applied to multiple servers via profile association.
+        Certificate Management policy models a reusable certificate and private key configuration that can be applied to multiple servers or Fabric Interconnects via profile association.
 
 ---
 
 # Resource: intersight_certificatemanagement_policy
-Certificate Management policy models a reusable certificate and private key configuration that can be applied to multiple servers via profile association.
+Certificate Management policy models a reusable certificate and private key configuration that can be applied to multiple servers or Fabric Interconnects via profile association.
 ## Usage Example
 ### Resource Creation
 
@@ -158,6 +158,6 @@ IMC certificate has both Certificate and private key that will be used for IMC.
 * `privatekey`:(string) Private Key which is used to validate the certificate. 
 
 ### [certificatemanagement.RootCaCertificate](#argument-reference)
-Root CA Certificate used for HTTPS server authentication.
+Root CA Certificate used for HTTPS server authentication and TLS communication with LDAP server.
 * `certificate_name`:(string) A name that helps identify a certificate. It can be any string that adheres to the following constraints. It should start and end with an alphanumeric character. It can have underscores and hyphens. It cannot be more than 30 characters. 
   

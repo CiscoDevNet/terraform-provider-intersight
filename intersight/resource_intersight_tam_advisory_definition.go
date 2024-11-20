@@ -1406,11 +1406,11 @@ func resourceTamAdvisoryDefinitionCreate(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("severity"); ok {
-		p := make([]models.TamSeverity, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewTamSeverityWithDefaults()
+			o := models.NewMoBaseComplexTypeWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1641,7 +1641,7 @@ func resourceTamAdvisoryDefinitionRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while setting property S3DataSources in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
-	if err := d.Set("severity", flattenMapTamSeverity(s.GetSeverity(), d)); err != nil {
+	if err := d.Set("severity", flattenMapMoBaseComplexType(s.GetSeverity(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Severity in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
@@ -2191,11 +2191,11 @@ func resourceTamAdvisoryDefinitionUpdate(c context.Context, d *schema.ResourceDa
 
 	if d.HasChange("severity") {
 		v := d.Get("severity")
-		p := make([]models.TamSeverity, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.TamSeverity{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))

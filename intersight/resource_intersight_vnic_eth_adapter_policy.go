@@ -198,6 +198,12 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 					}
 					return
 				}},
+			"ether_channel_pinning_enabled": {
+				Description: "Enables Ether Channel Pinning to combine multiple physical links between two network switches into a single logical link. Transmit Queue Count should be at least 2 to enable ether channel pinning.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"geneve_enabled": {
 				Description: "GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints.",
 				Type:        schema.TypeBool,
@@ -1146,6 +1152,11 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOkExists("ether_channel_pinning_enabled"); ok {
+		x := (v.(bool))
+		o.SetEtherChannelPinningEnabled(x)
+	}
+
 	if v, ok := d.GetOkExists("geneve_enabled"); ok {
 		x := (v.(bool))
 		o.SetGeneveEnabled(x)
@@ -1795,6 +1806,10 @@ func resourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("ether_channel_pinning_enabled", (s.GetEtherChannelPinningEnabled())); err != nil {
+		return diag.Errorf("error occurred while setting property EtherChannelPinningEnabled in VnicEthAdapterPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("geneve_enabled", (s.GetGeneveEnabled())); err != nil {
 		return diag.Errorf("error occurred while setting property GeneveEnabled in VnicEthAdapterPolicy object: %s", err.Error())
 	}
@@ -2006,6 +2021,12 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("ether_channel_pinning_enabled") {
+		v := d.Get("ether_channel_pinning_enabled")
+		x := (v.(bool))
+		o.SetEtherChannelPinningEnabled(x)
 	}
 
 	if d.HasChange("geneve_enabled") {

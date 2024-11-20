@@ -710,11 +710,11 @@ func resourceSoftwarerepositoryOperatingSystemFileCreate(c context.Context, d *s
 	}
 
 	if v, ok := d.GetOk("nr_source"); ok {
-		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewSoftwarerepositoryFileServerWithDefaults()
+			o := models.NewMoBaseComplexTypeWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -943,7 +943,7 @@ func resourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *sch
 		return diag.Errorf("error occurred while setting property SoftwareAdvisoryUrl in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
-	if err := d.Set("nr_source", flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)); err != nil {
+	if err := d.Set("nr_source", flattenMapMoBaseComplexType(s.GetSource(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Source in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
@@ -1088,11 +1088,11 @@ func resourceSoftwarerepositoryOperatingSystemFileUpdate(c context.Context, d *s
 
 	if d.HasChange("nr_source") {
 		v := d.Get("nr_source")
-		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.SoftwarerepositoryFileServer{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))

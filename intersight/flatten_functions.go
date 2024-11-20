@@ -462,20 +462,20 @@ func flattenListAssetConnection(p []models.AssetConnection, d *schema.ResourceDa
 		assetconnection["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		assetconnection["class_id"] = item.GetClassId()
 		connections_x, _ := d.GetOk("connections")
-		assetconnection["credential"] = (func(p models.AssetCredential, v interface{}) []map[string]interface{} {
-			var assetcredentials []map[string]interface{}
-			var ret models.AssetCredential
+		assetconnection["credential"] = (func(p models.MoBaseComplexType, v interface{}) []map[string]interface{} {
+			var mobasecomplextypes []map[string]interface{}
+			var ret models.MoBaseComplexType
 			if reflect.DeepEqual(ret, p) {
 				return nil
 			}
 			item := p
-			assetcredential := make(map[string]interface{})
-			assetcredential["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			assetcredential["class_id"] = item.GetClassId()
-			assetcredential["object_type"] = item.GetObjectType()
+			mobasecomplextype := make(map[string]interface{})
+			mobasecomplextype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			mobasecomplextype["class_id"] = item.GetClassId()
+			mobasecomplextype["object_type"] = item.GetObjectType()
 
-			assetcredentials = append(assetcredentials, assetcredential)
-			return assetcredentials
+			mobasecomplextypes = append(mobasecomplextypes, mobasecomplextype)
+			return mobasecomplextypes
 		})(item.GetCredential(), connections_x)
 		assetconnection["object_type"] = item.GetObjectType()
 		assetconnections = append(assetconnections, assetconnection)
@@ -545,20 +545,20 @@ func flattenListAssetService(p []models.AssetService, d *schema.ResourceData) []
 		assetservice["class_id"] = item.GetClassId()
 		assetservice["object_type"] = item.GetObjectType()
 		services_x, _ := d.GetOk("services")
-		assetservice["options"] = (func(p models.AssetServiceOptions, v interface{}) []map[string]interface{} {
-			var assetserviceoptionss []map[string]interface{}
-			var ret models.AssetServiceOptions
+		assetservice["options"] = (func(p models.MoBaseComplexType, v interface{}) []map[string]interface{} {
+			var mobasecomplextypes []map[string]interface{}
+			var ret models.MoBaseComplexType
 			if reflect.DeepEqual(ret, p) {
 				return nil
 			}
 			item := p
-			assetserviceoptions := make(map[string]interface{})
-			assetserviceoptions["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			assetserviceoptions["class_id"] = item.GetClassId()
-			assetserviceoptions["object_type"] = item.GetObjectType()
+			mobasecomplextype := make(map[string]interface{})
+			mobasecomplextype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			mobasecomplextype["class_id"] = item.GetClassId()
+			mobasecomplextype["object_type"] = item.GetObjectType()
 
-			assetserviceoptionss = append(assetserviceoptionss, assetserviceoptions)
-			return assetserviceoptionss
+			mobasecomplextypes = append(mobasecomplextypes, mobasecomplextype)
+			return mobasecomplextypes
 		})(item.GetOptions(), services_x)
 		assetservices = append(assetservices, assetservice)
 	}
@@ -6408,6 +6408,42 @@ func flattenListOsDistributionRelationship(p []models.OsDistributionRelationship
 	}
 	return osdistributionrelationships
 }
+func flattenListOsFibreChannelResponse(p []models.OsFibreChannelResponse, d *schema.ResourceData) []map[string]interface{} {
+	var osfibrechannelresponses []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		osfibrechannelresponse := make(map[string]interface{})
+		osfibrechannelresponse["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		osfibrechannelresponse["class_id"] = item.GetClassId()
+		osfibrechannelresponse["initiator_wwpn"] = item.GetInitiatorWwpn()
+		osfibrechannelresponse["interface_name"] = item.GetInterfaceName()
+		osfibrechannelresponse["lun_id"] = item.GetLunId()
+		osfibrechannelresponse["object_type"] = item.GetObjectType()
+		osfibrechannelresponse["target_wwpn"] = item.GetTargetWwpn()
+		osfibrechannelresponses = append(osfibrechannelresponses, osfibrechannelresponse)
+	}
+	return osfibrechannelresponses
+}
+func flattenListOsIscsiLunResponse(p []models.OsIscsiLunResponse, d *schema.ResourceData) []map[string]interface{} {
+	var osiscsilunresponses []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		osiscsilunresponse := make(map[string]interface{})
+		osiscsilunresponse["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		osiscsilunresponse["class_id"] = item.GetClassId()
+		osiscsilunresponse["interface_name"] = item.GetInterfaceName()
+		osiscsilunresponse["lun_id"] = item.GetLunId()
+		osiscsilunresponse["object_type"] = item.GetObjectType()
+		osiscsilunresponse["target_iqn"] = item.GetTargetIqn()
+		osiscsilunresponse["vnic_mac"] = item.GetVnicMac()
+		osiscsilunresponses = append(osiscsilunresponses, osiscsilunresponse)
+	}
+	return osiscsilunresponses
+}
 func flattenListOsPlaceHolder(p []models.OsPlaceHolder, d *schema.ResourceData) []map[string]interface{} {
 	var osplaceholders []map[string]interface{}
 	if len(p) == 0 {
@@ -6474,20 +6510,20 @@ func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData
 			osanswers["class_id"] = item.GetClassId()
 			osanswers["hostname"] = item.GetHostname()
 			osanswers["ip_config_type"] = item.GetIpConfigType()
-			osanswers["ip_configuration"] = (func(p models.OsIpConfiguration, v interface{}) []map[string]interface{} {
-				var osipconfigurations []map[string]interface{}
-				var ret models.OsIpConfiguration
+			osanswers["ip_configuration"] = (func(p models.MoBaseComplexType, v interface{}) []map[string]interface{} {
+				var mobasecomplextypes []map[string]interface{}
+				var ret models.MoBaseComplexType
 				if reflect.DeepEqual(ret, p) {
 					return nil
 				}
 				item := p
-				osipconfiguration := make(map[string]interface{})
-				osipconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-				osipconfiguration["class_id"] = item.GetClassId()
-				osipconfiguration["object_type"] = item.GetObjectType()
+				mobasecomplextype := make(map[string]interface{})
+				mobasecomplextype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				mobasecomplextype["class_id"] = item.GetClassId()
+				mobasecomplextype["object_type"] = item.GetObjectType()
 
-				osipconfigurations = append(osipconfigurations, osipconfiguration)
-				return osipconfigurations
+				mobasecomplextypes = append(mobasecomplextypes, mobasecomplextype)
+				return mobasecomplextypes
 			})(item.GetIpConfiguration(), answers_x)
 			osanswers["is_answer_file_set"] = item.GetIsAnswerFileSet()
 			osanswers["is_root_password_crypted"] = item.GetIsRootPasswordCrypted()
@@ -6512,35 +6548,35 @@ func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData
 		osserverconfig["install_target"] = item.GetInstallTarget()
 		osserverconfig["lun_id"] = item.GetLunId()
 		osserverconfig["object_type"] = item.GetObjectType()
-		osserverconfig["operating_system_parameters"] = (func(p models.OsOperatingSystemParameters, v interface{}) []map[string]interface{} {
-			var osoperatingsystemparameterss []map[string]interface{}
-			var ret models.OsOperatingSystemParameters
+		osserverconfig["operating_system_parameters"] = (func(p models.MoBaseComplexType, v interface{}) []map[string]interface{} {
+			var mobasecomplextypes []map[string]interface{}
+			var ret models.MoBaseComplexType
 			if reflect.DeepEqual(ret, p) {
 				return nil
 			}
 			item := p
-			osoperatingsystemparameters := make(map[string]interface{})
-			osoperatingsystemparameters["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			osoperatingsystemparameters["class_id"] = item.GetClassId()
-			osoperatingsystemparameters["object_type"] = item.GetObjectType()
+			mobasecomplextype := make(map[string]interface{})
+			mobasecomplextype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			mobasecomplextype["class_id"] = item.GetClassId()
+			mobasecomplextype["object_type"] = item.GetObjectType()
 
-			osoperatingsystemparameterss = append(osoperatingsystemparameterss, osoperatingsystemparameters)
-			return osoperatingsystemparameterss
+			mobasecomplextypes = append(mobasecomplextypes, mobasecomplextype)
+			return mobasecomplextypes
 		})(item.GetOperatingSystemParameters(), server_configs_x)
-		osserverconfig["processed_install_target"] = (func(p models.OsInstallTarget, v interface{}) []map[string]interface{} {
-			var osinstalltargets []map[string]interface{}
-			var ret models.OsInstallTarget
+		osserverconfig["processed_install_target"] = (func(p models.MoBaseComplexType, v interface{}) []map[string]interface{} {
+			var mobasecomplextypes []map[string]interface{}
+			var ret models.MoBaseComplexType
 			if reflect.DeepEqual(ret, p) {
 				return nil
 			}
 			item := p
-			osinstalltarget := make(map[string]interface{})
-			osinstalltarget["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			osinstalltarget["class_id"] = item.GetClassId()
-			osinstalltarget["object_type"] = item.GetObjectType()
+			mobasecomplextype := make(map[string]interface{})
+			mobasecomplextype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			mobasecomplextype["class_id"] = item.GetClassId()
+			mobasecomplextype["object_type"] = item.GetObjectType()
 
-			osinstalltargets = append(osinstalltargets, osinstalltarget)
-			return osinstalltargets
+			mobasecomplextypes = append(mobasecomplextypes, mobasecomplextype)
+			return mobasecomplextypes
 		})(item.GetProcessedInstallTarget(), server_configs_x)
 		osserverconfig["serial_number"] = item.GetSerialNumber()
 		osserverconfig["target_iqn"] = item.GetTargetIqn()
@@ -10769,6 +10805,42 @@ func flattenMapBulkResultRelationship(p models.BulkResultRelationship, d *schema
 	bulkresultrelationships = append(bulkresultrelationships, bulkresultrelationship)
 	return bulkresultrelationships
 }
+func flattenMapCapabilityCertificatePropertyConstraints(p models.CapabilityCertificatePropertyConstraints, d *schema.ResourceData) []map[string]interface{} {
+	var capabilitycertificatepropertyconstraintss []map[string]interface{}
+	var ret models.CapabilityCertificatePropertyConstraints
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	capabilitycertificatepropertyconstraints := make(map[string]interface{})
+	capabilitycertificatepropertyconstraints["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	capabilitycertificatepropertyconstraints["class_id"] = item.GetClassId()
+	capabilitycertificatepropertyconstraints["num_of_root_certificates_supported"] = item.GetNumOfRootCertificatesSupported()
+	capabilitycertificatepropertyconstraints["object_type"] = item.GetObjectType()
+
+	capabilitycertificatepropertyconstraintss = append(capabilitycertificatepropertyconstraintss, capabilitycertificatepropertyconstraints)
+	return capabilitycertificatepropertyconstraintss
+}
+func flattenMapCapabilityLdapBasePropertyConstraints(p models.CapabilityLdapBasePropertyConstraints, d *schema.ResourceData) []map[string]interface{} {
+	var capabilityldapbasepropertyconstraintss []map[string]interface{}
+	var ret models.CapabilityLdapBasePropertyConstraints
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	capabilityldapbasepropertyconstraints := make(map[string]interface{})
+	capabilityldapbasepropertyconstraints["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	capabilityldapbasepropertyconstraints["class_id"] = item.GetClassId()
+	capabilityldapbasepropertyconstraints["max_ldap_groups_supported"] = item.GetMaxLdapGroupsSupported()
+	capabilityldapbasepropertyconstraints["max_ldap_providers_supported"] = item.GetMaxLdapProvidersSupported()
+	capabilityldapbasepropertyconstraints["object_type"] = item.GetObjectType()
+	capabilityldapbasepropertyconstraints["roles_supported"] = item.GetRolesSupported()
+	capabilityldapbasepropertyconstraints["supported_max_length_for_dn"] = item.GetSupportedMaxLengthForDn()
+	capabilityldapbasepropertyconstraints["supported_max_length_for_filter"] = item.GetSupportedMaxLengthForFilter()
+
+	capabilityldapbasepropertyconstraintss = append(capabilityldapbasepropertyconstraintss, capabilityldapbasepropertyconstraints)
+	return capabilityldapbasepropertyconstraintss
+}
 func flattenMapCapabilitySwitchNetworkLimits(p models.CapabilitySwitchNetworkLimits, d *schema.ResourceData) []map[string]interface{} {
 	var capabilityswitchnetworklimitss []map[string]interface{}
 	var ret models.CapabilitySwitchNetworkLimits
@@ -11272,21 +11344,6 @@ func flattenMapComputeHostUtilityOperationRelationship(p models.ComputeHostUtili
 	computehostutilityoperationrelationships = append(computehostutilityoperationrelationships, computehostutilityoperationrelationship)
 	return computehostutilityoperationrelationships
 }
-func flattenMapComputeHostUtilityOperationConfguration(p models.ComputeHostUtilityOperationConfguration, d *schema.ResourceData) []map[string]interface{} {
-	var computehostutilityoperationconfgurations []map[string]interface{}
-	var ret models.ComputeHostUtilityOperationConfguration
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	computehostutilityoperationconfguration := make(map[string]interface{})
-	computehostutilityoperationconfguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	computehostutilityoperationconfguration["class_id"] = item.GetClassId()
-	computehostutilityoperationconfguration["object_type"] = item.GetObjectType()
-
-	computehostutilityoperationconfgurations = append(computehostutilityoperationconfgurations, computehostutilityoperationconfguration)
-	return computehostutilityoperationconfgurations
-}
 func flattenMapComputePersistentMemoryOperation(p models.ComputePersistentMemoryOperation, d *schema.ResourceData) []map[string]interface{} {
 	var computepersistentmemoryoperations []map[string]interface{}
 	var ret models.ComputePersistentMemoryOperation
@@ -11615,21 +11672,6 @@ func flattenMapConnectorFileChecksum(p models.ConnectorFileChecksum, d *schema.R
 
 	connectorfilechecksums = append(connectorfilechecksums, connectorfilechecksum)
 	return connectorfilechecksums
-}
-func flattenMapConnectorPlatformParamBase(p models.ConnectorPlatformParamBase, d *schema.ResourceData) []map[string]interface{} {
-	var connectorplatformparambases []map[string]interface{}
-	var ret models.ConnectorPlatformParamBase
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	connectorplatformparambase := make(map[string]interface{})
-	connectorplatformparambase["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	connectorplatformparambase["class_id"] = item.GetClassId()
-	connectorplatformparambase["object_type"] = item.GetObjectType()
-
-	connectorplatformparambases = append(connectorplatformparambases, connectorplatformparambase)
-	return connectorplatformparambases
 }
 func flattenMapConvergedinfraAdapterComplianceDetailsRelationship(p models.ConvergedinfraAdapterComplianceDetailsRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var convergedinfraadaptercompliancedetailsrelationships []map[string]interface{}
@@ -13881,7 +13923,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 	hyperflexipaddrrange["class_id"] = item.GetClassId()
 	hyperflexipaddrrange["end_addr"] = item.GetEndAddr()
 	hyperflexipaddrrange["gateway"] = item.GetGateway()
-	kvm_ip_range_x, _ := d.GetOk("kvm_ip_range")
+	data_ip_range_x, _ := d.GetOk("data_ip_range")
 	hyperflexipaddrrange["ip_addr_blocks"] = (func(p []models.CommIpV4AddressBlock, v interface{}) []map[string]interface{} {
 		var commipv4addressblocks []map[string]interface{}
 		if len(p) == 0 {
@@ -13897,7 +13939,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 			commipv4addressblocks = append(commipv4addressblocks, commipv4addressblock)
 		}
 		return commipv4addressblocks
-	})(item.GetIpAddrBlocks(), kvm_ip_range_x)
+	})(item.GetIpAddrBlocks(), data_ip_range_x)
 	hyperflexipaddrrange["netmask"] = item.GetNetmask()
 	hyperflexipaddrrange["object_type"] = item.GetObjectType()
 	hyperflexipaddrrange["start_addr"] = item.GetStartAddr()
@@ -15948,22 +15990,6 @@ func flattenMapIqnpoolReservationRelationship(p models.IqnpoolReservationRelatio
 	iqnpoolreservationrelationships = append(iqnpoolreservationrelationships, iqnpoolreservationrelationship)
 	return iqnpoolreservationrelationships
 }
-func flattenMapIqnpoolReservationReference(p models.IqnpoolReservationReference, d *schema.ResourceData) []map[string]interface{} {
-	var iqnpoolreservationreferences []map[string]interface{}
-	var ret models.IqnpoolReservationReference
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	iqnpoolreservationreference := make(map[string]interface{})
-	iqnpoolreservationreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	iqnpoolreservationreference["class_id"] = item.GetClassId()
-	iqnpoolreservationreference["object_type"] = item.GetObjectType()
-	iqnpoolreservationreference["reservation_moid"] = item.GetReservationMoid()
-
-	iqnpoolreservationreferences = append(iqnpoolreservationreferences, iqnpoolreservationreference)
-	return iqnpoolreservationreferences
-}
 func flattenMapIqnpoolUniverseRelationship(p models.IqnpoolUniverseRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iqnpooluniverserelationships []map[string]interface{}
 	var ret models.IqnpoolUniverseRelationship
@@ -15981,21 +16007,6 @@ func flattenMapIqnpoolUniverseRelationship(p models.IqnpoolUniverseRelationship,
 
 	iqnpooluniverserelationships = append(iqnpooluniverserelationships, iqnpooluniverserelationship)
 	return iqnpooluniverserelationships
-}
-func flattenMapIssueCondition(p models.IssueCondition, d *schema.ResourceData) []map[string]interface{} {
-	var issueconditions []map[string]interface{}
-	var ret models.IssueCondition
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	issuecondition := make(map[string]interface{})
-	issuecondition["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	issuecondition["class_id"] = item.GetClassId()
-	issuecondition["object_type"] = item.GetObjectType()
-
-	issueconditions = append(issueconditions, issuecondition)
-	return issueconditions
 }
 func flattenMapKubernetesAciCniProfileRelationship(p models.KubernetesAciCniProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var kubernetesacicniprofilerelationships []map[string]interface{}
@@ -16309,7 +16320,7 @@ func flattenMapKubernetesBaseVirtualMachineInfraConfig(p models.KubernetesBaseVi
 	kubernetesbasevirtualmachineinfraconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	kubernetesbasevirtualmachineinfraconfig["class_id"] = item.GetClassId()
 	kubernetesbasevirtualmachineinfraconfig["interfaces"] = item.GetInterfaces()
-	vm_config_x, _ := d.GetOk("vm_config")
+	infra_config_x, _ := d.GetOk("infra_config")
 	kubernetesbasevirtualmachineinfraconfig["network_interfaces"] = (func(p []models.KubernetesNetworkInterfaceSpec, v interface{}) []map[string]interface{} {
 		var kubernetesnetworkinterfacespecs []map[string]interface{}
 		if len(p) == 0 {
@@ -16365,7 +16376,7 @@ func flattenMapKubernetesBaseVirtualMachineInfraConfig(p models.KubernetesBaseVi
 			kubernetesnetworkinterfacespecs = append(kubernetesnetworkinterfacespecs, kubernetesnetworkinterfacespec)
 		}
 		return kubernetesnetworkinterfacespecs
-	})(item.GetNetworkInterfaces(), vm_config_x)
+	})(item.GetNetworkInterfaces(), infra_config_x)
 	kubernetesbasevirtualmachineinfraconfig["object_type"] = item.GetObjectType()
 
 	kubernetesbasevirtualmachineinfraconfigs = append(kubernetesbasevirtualmachineinfraconfigs, kubernetesbasevirtualmachineinfraconfig)
@@ -16825,7 +16836,7 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["is_password_set"] = item.GetIsPasswordSet()
 	kubernetesproxyconfig["object_type"] = item.GetObjectType()
 
-	password_x, exists := d.GetOk("docker_http_proxy")
+	password_x, exists := d.GetOk("http_proxy")
 	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]
@@ -17598,6 +17609,21 @@ func flattenMapMerakiOrganizationRelationship(p models.MerakiOrganizationRelatio
 
 	merakiorganizationrelationships = append(merakiorganizationrelationships, merakiorganizationrelationship)
 	return merakiorganizationrelationships
+}
+func flattenMapMoBaseComplexType(p models.MoBaseComplexType, d *schema.ResourceData) []map[string]interface{} {
+	var mobasecomplextypes []map[string]interface{}
+	var ret models.MoBaseComplexType
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	mobasecomplextype := make(map[string]interface{})
+	mobasecomplextype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	mobasecomplextype["class_id"] = item.GetClassId()
+	mobasecomplextype["object_type"] = item.GetObjectType()
+
+	mobasecomplextypes = append(mobasecomplextypes, mobasecomplextype)
+	return mobasecomplextypes
 }
 func flattenMapMoBaseMo(p models.MoBaseMo, d *schema.ResourceData) []map[string]interface{} {
 	var mobasemos []map[string]interface{}
@@ -18775,20 +18801,20 @@ func flattenMapOsAnswers(p models.OsAnswers, d *schema.ResourceData) []map[strin
 	osanswers["hostname"] = item.GetHostname()
 	osanswers["ip_config_type"] = item.GetIpConfigType()
 	answers_x, _ := d.GetOk("answers")
-	osanswers["ip_configuration"] = (func(p models.OsIpConfiguration, v interface{}) []map[string]interface{} {
-		var osipconfigurations []map[string]interface{}
-		var ret models.OsIpConfiguration
+	osanswers["ip_configuration"] = (func(p models.MoBaseComplexType, v interface{}) []map[string]interface{} {
+		var mobasecomplextypes []map[string]interface{}
+		var ret models.MoBaseComplexType
 		if reflect.DeepEqual(ret, p) {
 			return nil
 		}
 		item := p
-		osipconfiguration := make(map[string]interface{})
-		osipconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		osipconfiguration["class_id"] = item.GetClassId()
-		osipconfiguration["object_type"] = item.GetObjectType()
+		mobasecomplextype := make(map[string]interface{})
+		mobasecomplextype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		mobasecomplextype["class_id"] = item.GetClassId()
+		mobasecomplextype["object_type"] = item.GetObjectType()
 
-		osipconfigurations = append(osipconfigurations, osipconfiguration)
-		return osipconfigurations
+		mobasecomplextypes = append(mobasecomplextypes, mobasecomplextype)
+		return mobasecomplextypes
 	})(item.GetIpConfiguration(), answers_x)
 	osanswers["is_answer_file_set"] = item.GetIsAnswerFileSet()
 	osanswers["is_root_password_crypted"] = item.GetIsRootPasswordCrypted()
@@ -18860,20 +18886,20 @@ func flattenMapOsGlobalConfig(p models.OsGlobalConfig, d *schema.ResourceData) [
 	osglobalconfig["install_target_type"] = item.GetInstallTargetType()
 	osglobalconfig["object_type"] = item.GetObjectType()
 	global_config_x, _ := d.GetOk("global_config")
-	osglobalconfig["operating_system_parameters"] = (func(p models.OsOperatingSystemParameters, v interface{}) []map[string]interface{} {
-		var osoperatingsystemparameterss []map[string]interface{}
-		var ret models.OsOperatingSystemParameters
+	osglobalconfig["operating_system_parameters"] = (func(p models.MoBaseComplexType, v interface{}) []map[string]interface{} {
+		var mobasecomplextypes []map[string]interface{}
+		var ret models.MoBaseComplexType
 		if reflect.DeepEqual(ret, p) {
 			return nil
 		}
 		item := p
-		osoperatingsystemparameters := make(map[string]interface{})
-		osoperatingsystemparameters["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		osoperatingsystemparameters["class_id"] = item.GetClassId()
-		osoperatingsystemparameters["object_type"] = item.GetObjectType()
+		mobasecomplextype := make(map[string]interface{})
+		mobasecomplextype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		mobasecomplextype["class_id"] = item.GetClassId()
+		mobasecomplextype["object_type"] = item.GetObjectType()
 
-		osoperatingsystemparameterss = append(osoperatingsystemparameterss, osoperatingsystemparameters)
-		return osoperatingsystemparameterss
+		mobasecomplextypes = append(mobasecomplextypes, mobasecomplextype)
+		return mobasecomplextypes
 	})(item.GetOperatingSystemParameters(), global_config_x)
 	osglobalconfig["os_image_name"] = item.GetOsImageName()
 	osglobalconfig["override_secure_boot"] = item.GetOverrideSecureBoot()
@@ -18882,36 +18908,6 @@ func flattenMapOsGlobalConfig(p models.OsGlobalConfig, d *schema.ResourceData) [
 
 	osglobalconfigs = append(osglobalconfigs, osglobalconfig)
 	return osglobalconfigs
-}
-func flattenMapOsInstallTarget(p models.OsInstallTarget, d *schema.ResourceData) []map[string]interface{} {
-	var osinstalltargets []map[string]interface{}
-	var ret models.OsInstallTarget
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	osinstalltarget := make(map[string]interface{})
-	osinstalltarget["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	osinstalltarget["class_id"] = item.GetClassId()
-	osinstalltarget["object_type"] = item.GetObjectType()
-
-	osinstalltargets = append(osinstalltargets, osinstalltarget)
-	return osinstalltargets
-}
-func flattenMapOsOperatingSystemParameters(p models.OsOperatingSystemParameters, d *schema.ResourceData) []map[string]interface{} {
-	var osoperatingsystemparameterss []map[string]interface{}
-	var ret models.OsOperatingSystemParameters
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	osoperatingsystemparameters := make(map[string]interface{})
-	osoperatingsystemparameters["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	osoperatingsystemparameters["class_id"] = item.GetClassId()
-	osoperatingsystemparameters["object_type"] = item.GetObjectType()
-
-	osoperatingsystemparameterss = append(osoperatingsystemparameterss, osoperatingsystemparameters)
-	return osoperatingsystemparameterss
 }
 func flattenMapPartnerintegrationDeviceConnectorRelationship(p models.PartnerintegrationDeviceConnectorRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var partnerintegrationdeviceconnectorrelationships []map[string]interface{}
@@ -19251,6 +19247,22 @@ func flattenMapPolicyConfigResultContext(p models.PolicyConfigResultContext, d *
 	policyconfigresultcontexts = append(policyconfigresultcontexts, policyconfigresultcontext)
 	return policyconfigresultcontexts
 }
+func flattenMapPoolReservationReference(p models.PoolReservationReference, d *schema.ResourceData) []map[string]interface{} {
+	var poolreservationreferences []map[string]interface{}
+	var ret models.PoolReservationReference
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	poolreservationreference := make(map[string]interface{})
+	poolreservationreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	poolreservationreference["class_id"] = item.GetClassId()
+	poolreservationreference["object_type"] = item.GetObjectType()
+	poolreservationreference["reservation_moid"] = item.GetReservationMoid()
+
+	poolreservationreferences = append(poolreservationreferences, poolreservationreference)
+	return poolreservationreferences
+}
 func flattenMapPortGroupRelationship(p models.PortGroupRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var portgrouprelationships []map[string]interface{}
 	var ret models.PortGroupRelationship
@@ -19449,21 +19461,6 @@ func flattenMapRecoveryBackupSchedule(p models.RecoveryBackupSchedule, d *schema
 	recoverybackupschedules = append(recoverybackupschedules, recoverybackupschedule)
 	return recoverybackupschedules
 }
-func flattenMapRecoveryConfigParams(p models.RecoveryConfigParams, d *schema.ResourceData) []map[string]interface{} {
-	var recoveryconfigparamss []map[string]interface{}
-	var ret models.RecoveryConfigParams
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	recoveryconfigparams := make(map[string]interface{})
-	recoveryconfigparams["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	recoveryconfigparams["class_id"] = item.GetClassId()
-	recoveryconfigparams["object_type"] = item.GetObjectType()
-
-	recoveryconfigparamss = append(recoveryconfigparamss, recoveryconfigparams)
-	return recoveryconfigparamss
-}
 func flattenMapRecoveryConfigResultRelationship(p models.RecoveryConfigResultRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var recoveryconfigresultrelationships []map[string]interface{}
 	var ret models.RecoveryConfigResultRelationship
@@ -19572,21 +19569,6 @@ func flattenMapResourcepoolLeaseRelationship(p models.ResourcepoolLeaseRelations
 	resourcepoolleaserelationships = append(resourcepoolleaserelationships, resourcepoolleaserelationship)
 	return resourcepoolleaserelationships
 }
-func flattenMapResourcepoolLeaseParameters(p models.ResourcepoolLeaseParameters, d *schema.ResourceData) []map[string]interface{} {
-	var resourcepoolleaseparameterss []map[string]interface{}
-	var ret models.ResourcepoolLeaseParameters
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	resourcepoolleaseparameters := make(map[string]interface{})
-	resourcepoolleaseparameters["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	resourcepoolleaseparameters["class_id"] = item.GetClassId()
-	resourcepoolleaseparameters["object_type"] = item.GetObjectType()
-
-	resourcepoolleaseparameterss = append(resourcepoolleaseparameterss, resourcepoolleaseparameters)
-	return resourcepoolleaseparameterss
-}
 func flattenMapResourcepoolLeaseResourceRelationship(p models.ResourcepoolLeaseResourceRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var resourcepoolleaseresourcerelationships []map[string]interface{}
 	var ret models.ResourcepoolLeaseResourceRelationship
@@ -19640,21 +19622,6 @@ func flattenMapResourcepoolPoolMemberRelationship(p models.ResourcepoolPoolMembe
 
 	resourcepoolpoolmemberrelationships = append(resourcepoolpoolmemberrelationships, resourcepoolpoolmemberrelationship)
 	return resourcepoolpoolmemberrelationships
-}
-func flattenMapResourcepoolResourcePoolParameters(p models.ResourcepoolResourcePoolParameters, d *schema.ResourceData) []map[string]interface{} {
-	var resourcepoolresourcepoolparameterss []map[string]interface{}
-	var ret models.ResourcepoolResourcePoolParameters
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	resourcepoolresourcepoolparameters := make(map[string]interface{})
-	resourcepoolresourcepoolparameters["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	resourcepoolresourcepoolparameters["class_id"] = item.GetClassId()
-	resourcepoolresourcepoolparameters["object_type"] = item.GetObjectType()
-
-	resourcepoolresourcepoolparameterss = append(resourcepoolresourcepoolparameterss, resourcepoolresourcepoolparameters)
-	return resourcepoolresourcepoolparameterss
 }
 func flattenMapResourcepoolUniverseRelationship(p models.ResourcepoolUniverseRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var resourcepooluniverserelationships []map[string]interface{}
@@ -19955,21 +19922,6 @@ func flattenMapSoftwarerepositoryFileRelationship(p models.SoftwarerepositoryFil
 	softwarerepositoryfilerelationships = append(softwarerepositoryfilerelationships, softwarerepositoryfilerelationship)
 	return softwarerepositoryfilerelationships
 }
-func flattenMapSoftwarerepositoryFileServer(p models.SoftwarerepositoryFileServer, d *schema.ResourceData) []map[string]interface{} {
-	var softwarerepositoryfileservers []map[string]interface{}
-	var ret models.SoftwarerepositoryFileServer
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	softwarerepositoryfileserver := make(map[string]interface{})
-	softwarerepositoryfileserver["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	softwarerepositoryfileserver["class_id"] = item.GetClassId()
-	softwarerepositoryfileserver["object_type"] = item.GetObjectType()
-
-	softwarerepositoryfileservers = append(softwarerepositoryfileservers, softwarerepositoryfileserver)
-	return softwarerepositoryfileservers
-}
 func flattenMapSoftwarerepositoryOperatingSystemFileRelationship(p models.SoftwarerepositoryOperatingSystemFileRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var softwarerepositoryoperatingsystemfilerelationships []map[string]interface{}
 	var ret models.SoftwarerepositoryOperatingSystemFileRelationship
@@ -20064,6 +20016,25 @@ func flattenMapStorageBaseCapacity(p models.StorageBaseCapacity, d *schema.Resou
 
 	storagebasecapacitys = append(storagebasecapacitys, storagebasecapacity)
 	return storagebasecapacitys
+}
+func flattenMapStorageBasePerformanceMetricsAverage(p models.StorageBasePerformanceMetricsAverage, d *schema.ResourceData) []map[string]interface{} {
+	var storagebaseperformancemetricsaverages []map[string]interface{}
+	var ret models.StorageBasePerformanceMetricsAverage
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	storagebaseperformancemetricsaverage := make(map[string]interface{})
+	storagebaseperformancemetricsaverage["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	storagebaseperformancemetricsaverage["class_id"] = item.GetClassId()
+	storagebaseperformancemetricsaverage["iops"] = item.GetIops()
+	storagebaseperformancemetricsaverage["latency"] = item.GetLatency()
+	storagebaseperformancemetricsaverage["object_type"] = item.GetObjectType()
+	storagebaseperformancemetricsaverage["period"] = item.GetPeriod()
+	storagebaseperformancemetricsaverage["throughput"] = item.GetThroughput()
+
+	storagebaseperformancemetricsaverages = append(storagebaseperformancemetricsaverages, storagebaseperformancemetricsaverage)
+	return storagebaseperformancemetricsaverages
 }
 func flattenMapStorageBatteryBackupUnitRelationship(p models.StorageBatteryBackupUnitRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var storagebatterybackupunitrelationships []map[string]interface{}
@@ -20208,26 +20179,6 @@ func flattenMapStorageHitachiArrayRelationship(p models.StorageHitachiArrayRelat
 
 	storagehitachiarrayrelationships = append(storagehitachiarrayrelationships, storagehitachiarrayrelationship)
 	return storagehitachiarrayrelationships
-}
-func flattenMapStorageHitachiCapacity(p models.StorageHitachiCapacity, d *schema.ResourceData) []map[string]interface{} {
-	var storagehitachicapacitys []map[string]interface{}
-	var ret models.StorageHitachiCapacity
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	storagehitachicapacity := make(map[string]interface{})
-	storagehitachicapacity["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	storagehitachicapacity["available"] = item.GetAvailable()
-	storagehitachicapacity["capacity_utilization"] = item.GetCapacityUtilization()
-	storagehitachicapacity["class_id"] = item.GetClassId()
-	storagehitachicapacity["free"] = item.GetFree()
-	storagehitachicapacity["object_type"] = item.GetObjectType()
-	storagehitachicapacity["total"] = item.GetTotal()
-	storagehitachicapacity["used"] = item.GetUsed()
-
-	storagehitachicapacitys = append(storagehitachicapacitys, storagehitachicapacity)
-	return storagehitachicapacitys
 }
 func flattenMapStorageHitachiExternalStoragePortRelationship(p models.StorageHitachiExternalStoragePortRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var storagehitachiexternalstorageportrelationships []map[string]interface{}
@@ -20892,25 +20843,6 @@ func flattenMapStorageNetAppNonDataIpInterfaceRelationship(p models.StorageNetAp
 	storagenetappnondataipinterfacerelationships = append(storagenetappnondataipinterfacerelationships, storagenetappnondataipinterfacerelationship)
 	return storagenetappnondataipinterfacerelationships
 }
-func flattenMapStorageNetAppPerformanceMetricsAverage(p models.StorageNetAppPerformanceMetricsAverage, d *schema.ResourceData) []map[string]interface{} {
-	var storagenetappperformancemetricsaverages []map[string]interface{}
-	var ret models.StorageNetAppPerformanceMetricsAverage
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	storagenetappperformancemetricsaverage := make(map[string]interface{})
-	storagenetappperformancemetricsaverage["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	storagenetappperformancemetricsaverage["class_id"] = item.GetClassId()
-	storagenetappperformancemetricsaverage["iops"] = item.GetIops()
-	storagenetappperformancemetricsaverage["latency"] = item.GetLatency()
-	storagenetappperformancemetricsaverage["object_type"] = item.GetObjectType()
-	storagenetappperformancemetricsaverage["period"] = item.GetPeriod()
-	storagenetappperformancemetricsaverage["throughput"] = item.GetThroughput()
-
-	storagenetappperformancemetricsaverages = append(storagenetappperformancemetricsaverages, storagenetappperformancemetricsaverage)
-	return storagenetappperformancemetricsaverages
-}
 func flattenMapStorageNetAppStorageClusterEfficiency(p models.StorageNetAppStorageClusterEfficiency, d *schema.ResourceData) []map[string]interface{} {
 	var storagenetappstorageclusterefficiencys []map[string]interface{}
 	var ret models.StorageNetAppStorageClusterEfficiency
@@ -21272,21 +21204,6 @@ func flattenMapTamBaseAdvisoryDetails(p models.TamBaseAdvisoryDetails, d *schema
 	tambaseadvisorydetailss = append(tambaseadvisorydetailss, tambaseadvisorydetails)
 	return tambaseadvisorydetailss
 }
-func flattenMapTamSeverity(p models.TamSeverity, d *schema.ResourceData) []map[string]interface{} {
-	var tamseveritys []map[string]interface{}
-	var ret models.TamSeverity
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	tamseverity := make(map[string]interface{})
-	tamseverity["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	tamseverity["class_id"] = item.GetClassId()
-	tamseverity["object_type"] = item.GetObjectType()
-
-	tamseveritys = append(tamseveritys, tamseverity)
-	return tamseveritys
-}
 func flattenMapTaskFileDownloadInfo(p models.TaskFileDownloadInfo, d *schema.ResourceData) []map[string]interface{} {
 	var taskfiledownloadinfos []map[string]interface{}
 	var ret models.TaskFileDownloadInfo
@@ -21432,22 +21349,6 @@ func flattenMapUuidpoolReservationRelationship(p models.UuidpoolReservationRelat
 	uuidpoolreservationrelationships = append(uuidpoolreservationrelationships, uuidpoolreservationrelationship)
 	return uuidpoolreservationrelationships
 }
-func flattenMapUuidpoolReservationReference(p models.UuidpoolReservationReference, d *schema.ResourceData) []map[string]interface{} {
-	var uuidpoolreservationreferences []map[string]interface{}
-	var ret models.UuidpoolReservationReference
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	uuidpoolreservationreference := make(map[string]interface{})
-	uuidpoolreservationreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	uuidpoolreservationreference["class_id"] = item.GetClassId()
-	uuidpoolreservationreference["object_type"] = item.GetObjectType()
-	uuidpoolreservationreference["reservation_moid"] = item.GetReservationMoid()
-
-	uuidpoolreservationreferences = append(uuidpoolreservationreferences, uuidpoolreservationreference)
-	return uuidpoolreservationreferences
-}
 func flattenMapUuidpoolUniverseRelationship(p models.UuidpoolUniverseRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var uuidpooluniverserelationships []map[string]interface{}
 	var ret models.UuidpoolUniverseRelationship
@@ -21556,21 +21457,6 @@ func flattenMapVirtualizationBaseHostRelationship(p models.VirtualizationBaseHos
 	virtualizationbasehostrelationships = append(virtualizationbasehostrelationships, virtualizationbasehostrelationship)
 	return virtualizationbasehostrelationships
 }
-func flattenMapVirtualizationBaseHostConfiguration(p models.VirtualizationBaseHostConfiguration, d *schema.ResourceData) []map[string]interface{} {
-	var virtualizationbasehostconfigurations []map[string]interface{}
-	var ret models.VirtualizationBaseHostConfiguration
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	virtualizationbasehostconfiguration := make(map[string]interface{})
-	virtualizationbasehostconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	virtualizationbasehostconfiguration["class_id"] = item.GetClassId()
-	virtualizationbasehostconfiguration["object_type"] = item.GetObjectType()
-
-	virtualizationbasehostconfigurations = append(virtualizationbasehostconfigurations, virtualizationbasehostconfiguration)
-	return virtualizationbasehostconfigurations
-}
 func flattenMapVirtualizationBaseHostPciDeviceRelationship(p models.VirtualizationBaseHostPciDeviceRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationbasehostpcidevicerelationships []map[string]interface{}
 	var ret models.VirtualizationBaseHostPciDeviceRelationship
@@ -21624,21 +21510,6 @@ func flattenMapVirtualizationBaseVirtualMachineRelationship(p models.Virtualizat
 
 	virtualizationbasevirtualmachinerelationships = append(virtualizationbasevirtualmachinerelationships, virtualizationbasevirtualmachinerelationship)
 	return virtualizationbasevirtualmachinerelationships
-}
-func flattenMapVirtualizationBaseVmConfiguration(p models.VirtualizationBaseVmConfiguration, d *schema.ResourceData) []map[string]interface{} {
-	var virtualizationbasevmconfigurations []map[string]interface{}
-	var ret models.VirtualizationBaseVmConfiguration
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	item := p
-	virtualizationbasevmconfiguration := make(map[string]interface{})
-	virtualizationbasevmconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	virtualizationbasevmconfiguration["class_id"] = item.GetClassId()
-	virtualizationbasevmconfiguration["object_type"] = item.GetObjectType()
-
-	virtualizationbasevmconfigurations = append(virtualizationbasevmconfigurations, virtualizationbasevmconfiguration)
-	return virtualizationbasevmconfigurations
 }
 func flattenMapVirtualizationCloudInitConfig(p models.VirtualizationCloudInitConfig, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationcloudinitconfigs []map[string]interface{}
@@ -24025,7 +23896,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 	x509certificate := make(map[string]interface{})
 	x509certificate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	x509certificate["class_id"] = item.GetClassId()
-	certificate_x, _ := d.GetOk("certificate")
+	ca_cert_x, _ := d.GetOk("ca_cert")
 	x509certificate["issuer"] = (func(p models.PkixDistinguishedName, v interface{}) []map[string]interface{} {
 		var pkixdistinguishednames []map[string]interface{}
 		var ret models.PkixDistinguishedName
@@ -24046,7 +23917,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetIssuer(), certificate_x)
+	})(item.GetIssuer(), ca_cert_x)
 	x509certificate["not_after"] = item.GetNotAfter().String()
 	x509certificate["not_before"] = item.GetNotBefore().String()
 	x509certificate["object_type"] = item.GetObjectType()
@@ -24073,7 +23944,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetSubject(), certificate_x)
+	})(item.GetSubject(), ca_cert_x)
 
 	x509certificates = append(x509certificates, x509certificate)
 	return x509certificates

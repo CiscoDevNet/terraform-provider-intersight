@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024100405
+API version: 1.0.11-2024101709
 Contact: intersight@cisco.com
 */
 
@@ -29,9 +29,10 @@ type StorageNetAppAggregate struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Storage disk type for NetApp aggregate. * `HDD` - Hard Disk Drive disk type. * `Hybrid` - Solid State Hard Disk Drive. * `Hybrid (Flash Pool)` - SSHD in a flash pool disk type. * `SSD` - Solid State Disk disk type. * `SSD (FabricPool)` - SSD in a flash pool disk type. * `VMDisk (SDS)` - Storage disk with Hard disk drive. * `VMDisk (FabricPool)` - Storage disk with Non-volatile random-access memory drives. * `LUN (FlexArray)` - LUN (FlexArray) disk type. * `Not Mapped` - Storage disk is not mapped.
-	AggregateType         *string                                 `json:"AggregateType,omitempty"`
-	AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage `json:"AvgPerformanceMetrics,omitempty"`
-	CloudStorage          []string                                `json:"CloudStorage,omitempty"`
+	AggregateType *string `json:"AggregateType,omitempty"`
+	// Average performance metrics data for a NetApp storage resource over a given period of time.
+	AvgPerformanceMetrics NullableStorageBasePerformanceMetricsAverage `json:"AvgPerformanceMetrics,omitempty"`
+	CloudStorage          []string                                     `json:"CloudStorage,omitempty"`
 	// Data reduction ratio (logical_used / used).
 	EfficiencyRatio *float32 `json:"EfficiencyRatio,omitempty"`
 	// Unique identifier of NetApp Aggregate across data center.
@@ -167,36 +168,47 @@ func (o *StorageNetAppAggregate) SetAggregateType(v string) {
 	o.AggregateType = &v
 }
 
-// GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field value if set, zero value otherwise.
-func (o *StorageNetAppAggregate) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage {
-	if o == nil || IsNil(o.AvgPerformanceMetrics) {
-		var ret StorageNetAppPerformanceMetricsAverage
+// GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StorageNetAppAggregate) GetAvgPerformanceMetrics() StorageBasePerformanceMetricsAverage {
+	if o == nil || IsNil(o.AvgPerformanceMetrics.Get()) {
+		var ret StorageBasePerformanceMetricsAverage
 		return ret
 	}
-	return *o.AvgPerformanceMetrics
+	return *o.AvgPerformanceMetrics.Get()
 }
 
 // GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StorageNetAppAggregate) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool) {
-	if o == nil || IsNil(o.AvgPerformanceMetrics) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StorageNetAppAggregate) GetAvgPerformanceMetricsOk() (*StorageBasePerformanceMetricsAverage, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AvgPerformanceMetrics, true
+	return o.AvgPerformanceMetrics.Get(), o.AvgPerformanceMetrics.IsSet()
 }
 
 // HasAvgPerformanceMetrics returns a boolean if a field has been set.
 func (o *StorageNetAppAggregate) HasAvgPerformanceMetrics() bool {
-	if o != nil && !IsNil(o.AvgPerformanceMetrics) {
+	if o != nil && o.AvgPerformanceMetrics.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAvgPerformanceMetrics gets a reference to the given StorageNetAppPerformanceMetricsAverage and assigns it to the AvgPerformanceMetrics field.
-func (o *StorageNetAppAggregate) SetAvgPerformanceMetrics(v StorageNetAppPerformanceMetricsAverage) {
-	o.AvgPerformanceMetrics = &v
+// SetAvgPerformanceMetrics gets a reference to the given NullableStorageBasePerformanceMetricsAverage and assigns it to the AvgPerformanceMetrics field.
+func (o *StorageNetAppAggregate) SetAvgPerformanceMetrics(v StorageBasePerformanceMetricsAverage) {
+	o.AvgPerformanceMetrics.Set(&v)
+}
+
+// SetAvgPerformanceMetricsNil sets the value for AvgPerformanceMetrics to be an explicit nil
+func (o *StorageNetAppAggregate) SetAvgPerformanceMetricsNil() {
+	o.AvgPerformanceMetrics.Set(nil)
+}
+
+// UnsetAvgPerformanceMetrics ensures that no value is present for AvgPerformanceMetrics, not even an explicit nil
+func (o *StorageNetAppAggregate) UnsetAvgPerformanceMetrics() {
+	o.AvgPerformanceMetrics.Unset()
 }
 
 // GetCloudStorage returns the CloudStorage field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -561,8 +573,8 @@ func (o StorageNetAppAggregate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AggregateType) {
 		toSerialize["AggregateType"] = o.AggregateType
 	}
-	if !IsNil(o.AvgPerformanceMetrics) {
-		toSerialize["AvgPerformanceMetrics"] = o.AvgPerformanceMetrics
+	if o.AvgPerformanceMetrics.IsSet() {
+		toSerialize["AvgPerformanceMetrics"] = o.AvgPerformanceMetrics.Get()
 	}
 	if o.CloudStorage != nil {
 		toSerialize["CloudStorage"] = o.CloudStorage
@@ -650,9 +662,10 @@ func (o *StorageNetAppAggregate) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Storage disk type for NetApp aggregate. * `HDD` - Hard Disk Drive disk type. * `Hybrid` - Solid State Hard Disk Drive. * `Hybrid (Flash Pool)` - SSHD in a flash pool disk type. * `SSD` - Solid State Disk disk type. * `SSD (FabricPool)` - SSD in a flash pool disk type. * `VMDisk (SDS)` - Storage disk with Hard disk drive. * `VMDisk (FabricPool)` - Storage disk with Non-volatile random-access memory drives. * `LUN (FlexArray)` - LUN (FlexArray) disk type. * `Not Mapped` - Storage disk is not mapped.
-		AggregateType         *string                                 `json:"AggregateType,omitempty"`
-		AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage `json:"AvgPerformanceMetrics,omitempty"`
-		CloudStorage          []string                                `json:"CloudStorage,omitempty"`
+		AggregateType *string `json:"AggregateType,omitempty"`
+		// Average performance metrics data for a NetApp storage resource over a given period of time.
+		AvgPerformanceMetrics NullableStorageBasePerformanceMetricsAverage `json:"AvgPerformanceMetrics,omitempty"`
+		CloudStorage          []string                                     `json:"CloudStorage,omitempty"`
 		// Data reduction ratio (logical_used / used).
 		EfficiencyRatio *float32 `json:"EfficiencyRatio,omitempty"`
 		// Unique identifier of NetApp Aggregate across data center.

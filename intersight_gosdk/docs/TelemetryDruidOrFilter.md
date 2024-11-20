@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | The filter type. | 
+**Type** | **NullableString** | The filter type. | 
 **Fields** | [**[]TelemetryDruidFilter**](TelemetryDruidFilter.md) |  | 
 
 ## Methods
 
 ### NewTelemetryDruidOrFilter
 
-`func NewTelemetryDruidOrFilter(type_ string, fields []TelemetryDruidFilter, ) *TelemetryDruidOrFilter`
+`func NewTelemetryDruidOrFilter(type_ NullableString, fields []TelemetryDruidFilter, ) *TelemetryDruidOrFilter`
 
 NewTelemetryDruidOrFilter instantiates a new TelemetryDruidOrFilter object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +46,16 @@ and a boolean to check if the value has been set.
 SetType sets Type field to given value.
 
 
+### SetTypeNil
+
+`func (o *TelemetryDruidOrFilter) SetTypeNil(b bool)`
+
+ SetTypeNil sets the value for Type to be an explicit nil
+
+### UnsetType
+`func (o *TelemetryDruidOrFilter) UnsetType()`
+
+UnsetType ensures that no value is present for Type, not even an explicit nil
 ### GetFields
 
 `func (o *TelemetryDruidOrFilter) GetFields() []TelemetryDruidFilter`

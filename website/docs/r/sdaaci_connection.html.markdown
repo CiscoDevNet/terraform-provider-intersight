@@ -26,12 +26,12 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `campus_fabric_site`:(string) Campus fabric site id in which the border node has configured. 
-* `create_time`:(string)(ReadOnly) The time when this managed object was created. 
-* `dnac_target`:(HashMap) - A reference to a assetTarget resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `catalyst_center_target`:(HashMap) - A reference to a assetTarget resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `epg`:(string) Application EPG Name of this connection. 
 * `epg_subnet`:(string) EPG Subnet Ipv4Cidr which is configured on APIC. 

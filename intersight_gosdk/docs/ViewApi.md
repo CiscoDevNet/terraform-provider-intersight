@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## GetViewHealthStatusByMoid
 
-> ViewHealthStatus GetViewHealthStatusByMoid(ctx, moid).Execute()
+> MoBaseMo GetViewHealthStatusByMoid(ctx, moid).Execute()
 
 Read a 'view.HealthStatus' resource.
 
@@ -39,7 +39,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ViewApi.GetViewHealthStatusByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetViewHealthStatusByMoid`: ViewHealthStatus
+	// response from `GetViewHealthStatusByMoid`: MoBaseMo
 	fmt.Fprintf(os.Stdout, "Response from `ViewApi.GetViewHealthStatusByMoid`: %v\n", resp)
 }
 ```
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ViewHealthStatus**](ViewHealthStatus.md)
+[**MoBaseMo**](MoBaseMo.md)
 
 ### Authorization
 
@@ -165,7 +165,7 @@ Name | Type | Description  | Notes
 
 ## GetViewServerByMoid
 
-> ViewServer GetViewServerByMoid(ctx, moid).Execute()
+> MoBaseMo GetViewServerByMoid(ctx, moid).Execute()
 
 Read a 'view.Server' resource.
 
@@ -191,7 +191,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ViewApi.GetViewServerByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetViewServerByMoid`: ViewServer
+	// response from `GetViewServerByMoid`: MoBaseMo
 	fmt.Fprintf(os.Stdout, "Response from `ViewApi.GetViewServerByMoid`: %v\n", resp)
 }
 ```
@@ -215,7 +215,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ViewServer**](ViewServer.md)
+[**MoBaseMo**](MoBaseMo.md)
 
 ### Authorization
 

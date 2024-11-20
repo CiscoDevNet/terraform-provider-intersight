@@ -114,6 +114,11 @@ func getIamLdapGroupSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"group_dn": {
+			Description: "LDAP Group DN in the LDAP server database.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"ldap_policy": {
 			Description: "A reference to a iamLdapPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -520,6 +525,11 @@ func dataSourceIamLdapGroupRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetEndPointRole(x)
 	}
 
+	if v, ok := d.GetOk("group_dn"); ok {
+		x := (v.(string))
+		o.SetGroupDn(x)
+	}
+
 	if v, ok := d.GetOk("ldap_policy"); ok {
 		p := make([]models.IamLdapPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -835,6 +845,7 @@ func dataSourceIamLdapGroupRead(c context.Context, d *schema.ResourceData, meta 
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["end_point_role"] = flattenListIamEndPointRoleRelationship(s.GetEndPointRole(), d)
+				temp["group_dn"] = (s.GetGroupDn())
 
 				temp["ldap_policy"] = flattenMapIamLdapPolicyRelationship(s.GetLdapPolicy(), d)
 

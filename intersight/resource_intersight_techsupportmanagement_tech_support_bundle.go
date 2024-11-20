@@ -706,11 +706,11 @@ func resourceTechsupportmanagementTechSupportBundleCreate(c context.Context, d *
 	}
 
 	if v, ok := d.GetOk("platform_param"); ok {
-		p := make([]models.ConnectorPlatformParamBase, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewConnectorPlatformParamBaseWithDefaults()
+			o := models.NewMoBaseComplexTypeWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -934,7 +934,7 @@ func resourceTechsupportmanagementTechSupportBundleRead(c context.Context, d *sc
 		return diag.Errorf("error occurred while setting property Pid in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
-	if err := d.Set("platform_param", flattenMapConnectorPlatformParamBase(s.GetPlatformParam(), d)); err != nil {
+	if err := d.Set("platform_param", flattenMapMoBaseComplexType(s.GetPlatformParam(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PlatformParam in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 

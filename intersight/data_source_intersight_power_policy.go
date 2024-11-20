@@ -244,6 +244,11 @@ func getPowerPolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"processor_package_power_limit": {
+			Description: "Sets the Processor Package Power Limit (PPL) of a server. PPL refers to the amount of power that a CPU can draw from the power supply. The Processor Package Power Limit (PPL) feature is currently available exclusively on Cisco UCS C225/C245 M8 servers.\n* `Default` - Set the Package Power Limit to the platform defined default value.\n* `Maximum` - Set the Package Power Limit to the platform defined maximum value.\n* `Minimum` - Set the Package Power Limit to the platform defined minimum value.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"profiles": {
 			Description: "An array of relationships to policyAbstractConfigProfile resources.",
 			Type:        schema.TypeList,
@@ -712,6 +717,11 @@ func dataSourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta i
 		o.SetPowerSaveMode(x)
 	}
 
+	if v, ok := d.GetOk("processor_package_power_limit"); ok {
+		x := (v.(string))
+		o.SetProcessorPackagePowerLimit(x)
+	}
+
 	if v, ok := d.GetOk("profiles"); ok {
 		x := make([]models.PolicyAbstractConfigProfileRelationship, 0)
 		s := v.([]interface{})
@@ -932,6 +942,7 @@ func dataSourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta i
 				temp["power_profiling"] = (s.GetPowerProfiling())
 				temp["power_restore_state"] = (s.GetPowerRestoreState())
 				temp["power_save_mode"] = (s.GetPowerSaveMode())
+				temp["processor_package_power_limit"] = (s.GetProcessorPackagePowerLimit())
 
 				temp["profiles"] = flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)
 				temp["redundancy_mode"] = (s.GetRedundancyMode())

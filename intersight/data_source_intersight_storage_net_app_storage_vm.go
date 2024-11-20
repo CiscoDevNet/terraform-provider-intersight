@@ -664,11 +664,11 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 	}
 
 	if v, ok := d.GetOk("avg_performance_metrics"); ok {
-		p := make([]models.StorageNetAppPerformanceMetricsAverage, 0, 1)
+		p := make([]models.StorageBasePerformanceMetricsAverage, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.StorageNetAppPerformanceMetricsAverage{}
+			o := &models.StorageBasePerformanceMetricsAverage{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1140,7 +1140,7 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 
 				temp["array"] = flattenMapStorageNetAppClusterRelationship(s.GetArray(), d)
 
-				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
+				temp["avg_performance_metrics"] = flattenMapStorageBasePerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
 				temp["cifs_enabled"] = (s.GetCifsEnabled())
 				temp["class_id"] = (s.GetClassId())
 

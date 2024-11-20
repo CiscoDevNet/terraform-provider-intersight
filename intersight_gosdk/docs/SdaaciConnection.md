@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **VnEpg** | Pointer to **string** | Contains both VN and EPG of this connection. | [optional] 
 **Vrf** | Pointer to **string** | APIC Tenant VRF from APIC. | [optional] 
 **ApicTarget** | Pointer to [**NullableAssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
-**DnacTarget** | Pointer to [**NullableAssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
+**CatalystCenterTarget** | Pointer to [**NullableAssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
 **FmcTarget** | Pointer to [**NullableAssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
@@ -469,41 +469,41 @@ HasApicTarget returns a boolean if a field has been set.
 `func (o *SdaaciConnection) UnsetApicTarget()`
 
 UnsetApicTarget ensures that no value is present for ApicTarget, not even an explicit nil
-### GetDnacTarget
+### GetCatalystCenterTarget
 
-`func (o *SdaaciConnection) GetDnacTarget() AssetTargetRelationship`
+`func (o *SdaaciConnection) GetCatalystCenterTarget() AssetTargetRelationship`
 
-GetDnacTarget returns the DnacTarget field if non-nil, zero value otherwise.
+GetCatalystCenterTarget returns the CatalystCenterTarget field if non-nil, zero value otherwise.
 
-### GetDnacTargetOk
+### GetCatalystCenterTargetOk
 
-`func (o *SdaaciConnection) GetDnacTargetOk() (*AssetTargetRelationship, bool)`
+`func (o *SdaaciConnection) GetCatalystCenterTargetOk() (*AssetTargetRelationship, bool)`
 
-GetDnacTargetOk returns a tuple with the DnacTarget field if it's non-nil, zero value otherwise
+GetCatalystCenterTargetOk returns a tuple with the CatalystCenterTarget field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDnacTarget
+### SetCatalystCenterTarget
 
-`func (o *SdaaciConnection) SetDnacTarget(v AssetTargetRelationship)`
+`func (o *SdaaciConnection) SetCatalystCenterTarget(v AssetTargetRelationship)`
 
-SetDnacTarget sets DnacTarget field to given value.
+SetCatalystCenterTarget sets CatalystCenterTarget field to given value.
 
-### HasDnacTarget
+### HasCatalystCenterTarget
 
-`func (o *SdaaciConnection) HasDnacTarget() bool`
+`func (o *SdaaciConnection) HasCatalystCenterTarget() bool`
 
-HasDnacTarget returns a boolean if a field has been set.
+HasCatalystCenterTarget returns a boolean if a field has been set.
 
-### SetDnacTargetNil
+### SetCatalystCenterTargetNil
 
-`func (o *SdaaciConnection) SetDnacTargetNil(b bool)`
+`func (o *SdaaciConnection) SetCatalystCenterTargetNil(b bool)`
 
- SetDnacTargetNil sets the value for DnacTarget to be an explicit nil
+ SetCatalystCenterTargetNil sets the value for CatalystCenterTarget to be an explicit nil
 
-### UnsetDnacTarget
-`func (o *SdaaciConnection) UnsetDnacTarget()`
+### UnsetCatalystCenterTarget
+`func (o *SdaaciConnection) UnsetCatalystCenterTarget()`
 
-UnsetDnacTarget ensures that no value is present for DnacTarget, not even an explicit nil
+UnsetCatalystCenterTarget ensures that no value is present for CatalystCenterTarget, not even an explicit nil
 ### GetFmcTarget
 
 `func (o *SdaaciConnection) GetFmcTarget() AssetTargetRelationship`

@@ -214,6 +214,11 @@ func getPowerPolicyInventorySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"processor_package_power_limit": {
+			Description: "Sets the Processor Package Power Limit (PPL) of a server. PPL refers to the amount of power that a CPU can draw from the power supply. The Processor Package Power Limit (PPL) feature is currently available exclusively on Cisco UCS C225/C245 M8 servers.\n* `Default` - Set the Package Power Limit to the platform defined default value.\n* `Maximum` - Set the Package Power Limit to the platform defined maximum value.\n* `Minimum` - Set the Package Power Limit to the platform defined minimum value.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"redundancy_mode": {
 			Description: "Sets the Power Redundancy Mode of the Chassis.  Redundancy Mode determines the number of PSUs the chassis keeps as redundant.  N+2 mode is only supported for Cisco UCS X series Chassis.\n* `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis.\n* `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained.\n* `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy.\n* `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.",
 			Type:        schema.TypeString,
@@ -645,6 +650,11 @@ func dataSourcePowerPolicyInventoryRead(c context.Context, d *schema.ResourceDat
 		o.SetPowerSaveMode(x)
 	}
 
+	if v, ok := d.GetOk("processor_package_power_limit"); ok {
+		x := (v.(string))
+		o.SetProcessorPackagePowerLimit(x)
+	}
+
 	if v, ok := d.GetOk("redundancy_mode"); ok {
 		x := (v.(string))
 		o.SetRedundancyMode(x)
@@ -867,6 +877,7 @@ func dataSourcePowerPolicyInventoryRead(c context.Context, d *schema.ResourceDat
 				temp["power_profiling"] = (s.GetPowerProfiling())
 				temp["power_restore_state"] = (s.GetPowerRestoreState())
 				temp["power_save_mode"] = (s.GetPowerSaveMode())
+				temp["processor_package_power_limit"] = (s.GetProcessorPackagePowerLimit())
 				temp["redundancy_mode"] = (s.GetRedundancyMode())
 				temp["shared_scope"] = (s.GetSharedScope())
 

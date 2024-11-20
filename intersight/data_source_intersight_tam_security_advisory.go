@@ -1206,11 +1206,11 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("severity"); ok {
-		p := make([]models.TamSeverity, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.TamSeverity{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1446,7 +1446,7 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["recommendation"] = (s.GetRecommendation())
 
-				temp["severity"] = flattenMapTamSeverity(s.GetSeverity(), d)
+				temp["severity"] = flattenMapMoBaseComplexType(s.GetSeverity(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["state"] = (s.GetState())
 				temp["status"] = (s.GetStatus())

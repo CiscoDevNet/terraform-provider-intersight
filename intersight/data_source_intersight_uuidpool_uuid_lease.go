@@ -830,11 +830,11 @@ func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, 
 	}
 
 	if v, ok := d.GetOk("reservation"); ok {
-		p := make([]models.UuidpoolReservationReference, 0, 1)
+		p := make([]models.PoolReservationReference, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.UuidpoolReservationReference{}
+			o := &models.PoolReservationReference{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1087,7 +1087,7 @@ func dataSourceUuidpoolUuidLeaseRead(c context.Context, d *schema.ResourceData, 
 
 				temp["pool_member"] = flattenMapUuidpoolPoolMemberRelationship(s.GetPoolMember(), d)
 
-				temp["reservation"] = flattenMapUuidpoolReservationReference(s.GetReservation(), d)
+				temp["reservation"] = flattenMapPoolReservationReference(s.GetReservation(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

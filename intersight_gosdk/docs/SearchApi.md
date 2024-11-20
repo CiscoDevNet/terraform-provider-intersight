@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 ## GetSearchSearchItemByMoid
 
-> SearchSearchItem GetSearchSearchItemByMoid(ctx, moid).Execute()
+> MoBaseMo GetSearchSearchItemByMoid(ctx, moid).Execute()
 
 Read a 'search.SearchItem' resource.
 
@@ -108,7 +108,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `SearchApi.GetSearchSearchItemByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSearchSearchItemByMoid`: SearchSearchItem
+	// response from `GetSearchSearchItemByMoid`: MoBaseMo
 	fmt.Fprintf(os.Stdout, "Response from `SearchApi.GetSearchSearchItemByMoid`: %v\n", resp)
 }
 ```
@@ -132,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SearchSearchItem**](SearchSearchItem.md)
+[**MoBaseMo**](MoBaseMo.md)
 
 ### Authorization
 

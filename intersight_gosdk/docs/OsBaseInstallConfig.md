@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | User provided description about the OS install configuration. | [optional] 
 **ErrorMsg** | Pointer to **string** | The failure message of the API. | [optional] [readonly] 
 **InstallMethod** | Pointer to **string** | The install method to be used for OS installation - vMedia, iPXE.  Only vMedia is supported as of now. * &#x60;vMedia&#x60; - OS image is mounted as vMedia in target server for OS installation. | [optional] [default to "vMedia"]
-**InstallTarget** | Pointer to [**NullableOsInstallTarget**](OsInstallTarget.md) |  | [optional] 
+**InstallTarget** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | Install Target upon which Operating System is installed. | [optional] 
 **OperState** | Pointer to **string** | Denotes API operating status as pending, in_progress, completed_ok, completed_error based on the execution status. * &#x60;Pending&#x60; - The initial value of the OperStatus. * &#x60;InProgress&#x60; - The OperStatus value will be InProgress during execution. * &#x60;CompletedOk&#x60; - The API is successful with operation then OperStatus will be marked as CompletedOk. * &#x60;CompletedError&#x60; - The API is failed with operation then OperStatus will be marked as CompletedError. * &#x60;CompletedWarning&#x60; - The API is completed with some warning then OperStatus will be CompletedWarning. | [optional] [readonly] [default to "Pending"]
-**OperatingSystemParameters** | Pointer to [**NullableOsOperatingSystemParameters**](OsOperatingSystemParameters.md) |  | [optional] 
+**OperatingSystemParameters** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | Installation parameters specific to selected OS. | [optional] 
 **OverrideSecureBoot** | Pointer to **bool** | ESXi Secure Boot installation is currently not supported. As a workaround, Secure Boot will be disabled before installation and restored after installation is complete. Enable to Override Secure Boot Configuration. | [optional] 
 
 ## Methods
@@ -222,20 +222,20 @@ HasInstallMethod returns a boolean if a field has been set.
 
 ### GetInstallTarget
 
-`func (o *OsBaseInstallConfig) GetInstallTarget() OsInstallTarget`
+`func (o *OsBaseInstallConfig) GetInstallTarget() MoBaseComplexType`
 
 GetInstallTarget returns the InstallTarget field if non-nil, zero value otherwise.
 
 ### GetInstallTargetOk
 
-`func (o *OsBaseInstallConfig) GetInstallTargetOk() (*OsInstallTarget, bool)`
+`func (o *OsBaseInstallConfig) GetInstallTargetOk() (*MoBaseComplexType, bool)`
 
 GetInstallTargetOk returns a tuple with the InstallTarget field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInstallTarget
 
-`func (o *OsBaseInstallConfig) SetInstallTarget(v OsInstallTarget)`
+`func (o *OsBaseInstallConfig) SetInstallTarget(v MoBaseComplexType)`
 
 SetInstallTarget sets InstallTarget field to given value.
 
@@ -282,20 +282,20 @@ HasOperState returns a boolean if a field has been set.
 
 ### GetOperatingSystemParameters
 
-`func (o *OsBaseInstallConfig) GetOperatingSystemParameters() OsOperatingSystemParameters`
+`func (o *OsBaseInstallConfig) GetOperatingSystemParameters() MoBaseComplexType`
 
 GetOperatingSystemParameters returns the OperatingSystemParameters field if non-nil, zero value otherwise.
 
 ### GetOperatingSystemParametersOk
 
-`func (o *OsBaseInstallConfig) GetOperatingSystemParametersOk() (*OsOperatingSystemParameters, bool)`
+`func (o *OsBaseInstallConfig) GetOperatingSystemParametersOk() (*MoBaseComplexType, bool)`
 
 GetOperatingSystemParametersOk returns a tuple with the OperatingSystemParameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOperatingSystemParameters
 
-`func (o *OsBaseInstallConfig) SetOperatingSystemParameters(v OsOperatingSystemParameters)`
+`func (o *OsBaseInstallConfig) SetOperatingSystemParameters(v MoBaseComplexType)`
 
 SetOperatingSystemParameters sets OperatingSystemParameters field to given value.
 

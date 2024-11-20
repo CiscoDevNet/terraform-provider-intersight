@@ -651,6 +651,7 @@ docs/CapabilityCapabilityRelationship.md
 docs/CapabilityCatalog.md
 docs/CapabilityCatalogList.md
 docs/CapabilityCatalogResponse.md
+docs/CapabilityCertificatePropertyConstraints.md
 docs/CapabilityChassisDescriptor.md
 docs/CapabilityChassisDescriptorList.md
 docs/CapabilityChassisDescriptorResponse.md
@@ -669,6 +670,9 @@ docs/CapabilityCpuEndpointDescriptorResponse.md
 docs/CapabilityDimmsEndpointDescriptor.md
 docs/CapabilityDimmsEndpointDescriptorList.md
 docs/CapabilityDimmsEndpointDescriptorResponse.md
+docs/CapabilityDomainPolicyRequirement.md
+docs/CapabilityDomainPolicyRequirementList.md
+docs/CapabilityDomainPolicyRequirementResponse.md
 docs/CapabilityDrivesEndpointDescriptor.md
 docs/CapabilityDrivesEndpointDescriptorList.md
 docs/CapabilityDrivesEndpointDescriptorResponse.md
@@ -715,6 +719,7 @@ docs/CapabilityIoCardManufacturingDefResponse.md
 docs/CapabilityIomUpgradeSupportMeta.md
 docs/CapabilityIomUpgradeSupportMetaList.md
 docs/CapabilityIomUpgradeSupportMetaResponse.md
+docs/CapabilityLdapBasePropertyConstraints.md
 docs/CapabilityPortGroupAggregationDef.md
 docs/CapabilityPortGroupAggregationDefList.md
 docs/CapabilityPortGroupAggregationDefResponse.md
@@ -3305,6 +3310,7 @@ docs/OsDistribution.md
 docs/OsDistributionList.md
 docs/OsDistributionRelationship.md
 docs/OsDistributionResponse.md
+docs/OsFibreChannelResponse.md
 docs/OsFibreChannelTarget.md
 docs/OsGlobalConfig.md
 docs/OsInstall.md
@@ -3315,12 +3321,14 @@ docs/OsInstallTargetResponse.md
 docs/OsIpConfiguration.md
 docs/OsIpv4Configuration.md
 docs/OsIpv6Configuration.md
+docs/OsIscsiLunResponse.md
 docs/OsIscsiTarget.md
 docs/OsOperatingSystemParameters.md
 docs/OsOsSupport.md
 docs/OsPhysicalDisk.md
 docs/OsPhysicalDiskResponse.md
 docs/OsPlaceHolder.md
+docs/OsRemoteTargetResponse.md
 docs/OsSanTarget.md
 docs/OsServerConfig.md
 docs/OsSupportedVersion.md
@@ -3328,6 +3336,9 @@ docs/OsSupportedVersionList.md
 docs/OsSupportedVersionResponse.md
 docs/OsTemplateFile.md
 docs/OsValidInstallTarget.md
+docs/OsValidRemoteTarget.md
+docs/OsValidRemoteTargetList.md
+docs/OsValidRemoteTargetResponse.md
 docs/OsValidationInformation.md
 docs/OsVirtualDrive.md
 docs/OsVirtualDriveResponse.md
@@ -5649,6 +5660,7 @@ model_capability_capability_relationship.go
 model_capability_catalog.go
 model_capability_catalog_list.go
 model_capability_catalog_response.go
+model_capability_certificate_property_constraints.go
 model_capability_chassis_descriptor.go
 model_capability_chassis_descriptor_list.go
 model_capability_chassis_descriptor_response.go
@@ -5667,6 +5679,9 @@ model_capability_cpu_endpoint_descriptor_response.go
 model_capability_dimms_endpoint_descriptor.go
 model_capability_dimms_endpoint_descriptor_list.go
 model_capability_dimms_endpoint_descriptor_response.go
+model_capability_domain_policy_requirement.go
+model_capability_domain_policy_requirement_list.go
+model_capability_domain_policy_requirement_response.go
 model_capability_drives_endpoint_descriptor.go
 model_capability_drives_endpoint_descriptor_list.go
 model_capability_drives_endpoint_descriptor_response.go
@@ -5713,6 +5728,7 @@ model_capability_io_card_manufacturing_def_response.go
 model_capability_iom_upgrade_support_meta.go
 model_capability_iom_upgrade_support_meta_list.go
 model_capability_iom_upgrade_support_meta_response.go
+model_capability_ldap_base_property_constraints.go
 model_capability_port_group_aggregation_def.go
 model_capability_port_group_aggregation_def_list.go
 model_capability_port_group_aggregation_def_response.go
@@ -8244,6 +8260,7 @@ model_os_distribution.go
 model_os_distribution_list.go
 model_os_distribution_relationship.go
 model_os_distribution_response.go
+model_os_fibre_channel_response.go
 model_os_fibre_channel_target.go
 model_os_global_config.go
 model_os_install.go
@@ -8254,12 +8271,14 @@ model_os_install_target_response.go
 model_os_ip_configuration.go
 model_os_ipv4_configuration.go
 model_os_ipv6_configuration.go
+model_os_iscsi_lun_response.go
 model_os_iscsi_target.go
 model_os_operating_system_parameters.go
 model_os_os_support.go
 model_os_physical_disk.go
 model_os_physical_disk_response.go
 model_os_place_holder.go
+model_os_remote_target_response.go
 model_os_san_target.go
 model_os_server_config.go
 model_os_supported_version.go
@@ -8267,6 +8286,9 @@ model_os_supported_version_list.go
 model_os_supported_version_response.go
 model_os_template_file.go
 model_os_valid_install_target.go
+model_os_valid_remote_target.go
+model_os_valid_remote_target_list.go
+model_os_valid_remote_target_response.go
 model_os_validation_information.go
 model_os_virtual_drive.go
 model_os_virtual_drive_response.go

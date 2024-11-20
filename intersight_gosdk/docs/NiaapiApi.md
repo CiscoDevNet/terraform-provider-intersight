@@ -49,7 +49,7 @@ Method | HTTP request | Description
 
 ## GetNiaapiApicCcoPostByMoid
 
-> NiaapiApicCcoPost GetNiaapiApicCcoPostByMoid(ctx, moid).Execute()
+> NiaapiNewReleasePost GetNiaapiApicCcoPostByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicCcoPost' resource.
 
@@ -75,7 +75,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicCcoPostByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicCcoPostByMoid`: NiaapiApicCcoPost
+	// response from `GetNiaapiApicCcoPostByMoid`: NiaapiNewReleasePost
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicCcoPostByMoid`: %v\n", resp)
 }
 ```
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicCcoPost**](NiaapiApicCcoPost.md)
+[**NiaapiNewReleasePost**](NiaapiNewReleasePost.md)
 
 ### Authorization
 
@@ -201,7 +201,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiApicFieldNoticeByMoid
 
-> NiaapiApicFieldNotice GetNiaapiApicFieldNoticeByMoid(ctx, moid).Execute()
+> NiaapiFieldNotice GetNiaapiApicFieldNoticeByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicFieldNotice' resource.
 
@@ -227,7 +227,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicFieldNoticeByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicFieldNoticeByMoid`: NiaapiApicFieldNotice
+	// response from `GetNiaapiApicFieldNoticeByMoid`: NiaapiFieldNotice
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicFieldNoticeByMoid`: %v\n", resp)
 }
 ```
@@ -251,7 +251,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicFieldNotice**](NiaapiApicFieldNotice.md)
+[**NiaapiFieldNotice**](NiaapiFieldNotice.md)
 
 ### Authorization
 
@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiApicHweolByMoid
 
-> NiaapiApicHweol GetNiaapiApicHweolByMoid(ctx, moid).Execute()
+> NiaapiHardwareEol GetNiaapiApicHweolByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicHweol' resource.
 
@@ -379,7 +379,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicHweolByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicHweolByMoid`: NiaapiApicHweol
+	// response from `GetNiaapiApicHweolByMoid`: NiaapiHardwareEol
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicHweolByMoid`: %v\n", resp)
 }
 ```
@@ -403,7 +403,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicHweol**](NiaapiApicHweol.md)
+[**NiaapiHardwareEol**](NiaapiHardwareEol.md)
 
 ### Authorization
 
@@ -505,7 +505,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiApicLatestMaintainedReleaseByMoid
 
-> NiaapiApicLatestMaintainedRelease GetNiaapiApicLatestMaintainedReleaseByMoid(ctx, moid).Execute()
+> NiaapiMaintainedRelease GetNiaapiApicLatestMaintainedReleaseByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicLatestMaintainedRelease' resource.
 
@@ -531,7 +531,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicLatestMaintainedReleaseByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicLatestMaintainedReleaseByMoid`: NiaapiApicLatestMaintainedRelease
+	// response from `GetNiaapiApicLatestMaintainedReleaseByMoid`: NiaapiMaintainedRelease
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicLatestMaintainedReleaseByMoid`: %v\n", resp)
 }
 ```
@@ -555,7 +555,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicLatestMaintainedRelease**](NiaapiApicLatestMaintainedRelease.md)
+[**NiaapiMaintainedRelease**](NiaapiMaintainedRelease.md)
 
 ### Authorization
 
@@ -657,7 +657,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiApicReleaseRecommendByMoid
 
-> NiaapiApicReleaseRecommend GetNiaapiApicReleaseRecommendByMoid(ctx, moid).Execute()
+> NiaapiReleaseRecommend GetNiaapiApicReleaseRecommendByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicReleaseRecommend' resource.
 
@@ -683,7 +683,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicReleaseRecommendByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicReleaseRecommendByMoid`: NiaapiApicReleaseRecommend
+	// response from `GetNiaapiApicReleaseRecommendByMoid`: NiaapiReleaseRecommend
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicReleaseRecommendByMoid`: %v\n", resp)
 }
 ```
@@ -707,7 +707,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicReleaseRecommend**](NiaapiApicReleaseRecommend.md)
+[**NiaapiReleaseRecommend**](NiaapiReleaseRecommend.md)
 
 ### Authorization
 
@@ -809,7 +809,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiApicSweolByMoid
 
-> NiaapiApicSweol GetNiaapiApicSweolByMoid(ctx, moid).Execute()
+> NiaapiSoftwareEol GetNiaapiApicSweolByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.ApicSweol' resource.
 
@@ -835,7 +835,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiApicSweolByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiApicSweolByMoid`: NiaapiApicSweol
+	// response from `GetNiaapiApicSweolByMoid`: NiaapiSoftwareEol
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiApicSweolByMoid`: %v\n", resp)
 }
 ```
@@ -859,7 +859,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicSweol**](NiaapiApicSweol.md)
+[**NiaapiSoftwareEol**](NiaapiSoftwareEol.md)
 
 ### Authorization
 
@@ -961,7 +961,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmCcoPostByMoid
 
-> NiaapiDcnmCcoPost GetNiaapiDcnmCcoPostByMoid(ctx, moid).Execute()
+> NiaapiNewReleasePost GetNiaapiDcnmCcoPostByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmCcoPost' resource.
 
@@ -987,7 +987,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmCcoPostByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmCcoPostByMoid`: NiaapiDcnmCcoPost
+	// response from `GetNiaapiDcnmCcoPostByMoid`: NiaapiNewReleasePost
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmCcoPostByMoid`: %v\n", resp)
 }
 ```
@@ -1011,7 +1011,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmCcoPost**](NiaapiDcnmCcoPost.md)
+[**NiaapiNewReleasePost**](NiaapiNewReleasePost.md)
 
 ### Authorization
 
@@ -1113,7 +1113,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmFieldNoticeByMoid
 
-> NiaapiDcnmFieldNotice GetNiaapiDcnmFieldNoticeByMoid(ctx, moid).Execute()
+> NiaapiFieldNotice GetNiaapiDcnmFieldNoticeByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmFieldNotice' resource.
 
@@ -1139,7 +1139,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmFieldNoticeByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmFieldNoticeByMoid`: NiaapiDcnmFieldNotice
+	// response from `GetNiaapiDcnmFieldNoticeByMoid`: NiaapiFieldNotice
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmFieldNoticeByMoid`: %v\n", resp)
 }
 ```
@@ -1163,7 +1163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmFieldNotice**](NiaapiDcnmFieldNotice.md)
+[**NiaapiFieldNotice**](NiaapiFieldNotice.md)
 
 ### Authorization
 
@@ -1265,7 +1265,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmHweolByMoid
 
-> NiaapiDcnmHweol GetNiaapiDcnmHweolByMoid(ctx, moid).Execute()
+> NiaapiHardwareEol GetNiaapiDcnmHweolByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmHweol' resource.
 
@@ -1291,7 +1291,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmHweolByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmHweolByMoid`: NiaapiDcnmHweol
+	// response from `GetNiaapiDcnmHweolByMoid`: NiaapiHardwareEol
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmHweolByMoid`: %v\n", resp)
 }
 ```
@@ -1315,7 +1315,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmHweol**](NiaapiDcnmHweol.md)
+[**NiaapiHardwareEol**](NiaapiHardwareEol.md)
 
 ### Authorization
 
@@ -1417,7 +1417,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmLatestMaintainedReleaseByMoid
 
-> NiaapiDcnmLatestMaintainedRelease GetNiaapiDcnmLatestMaintainedReleaseByMoid(ctx, moid).Execute()
+> NiaapiMaintainedRelease GetNiaapiDcnmLatestMaintainedReleaseByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmLatestMaintainedRelease' resource.
 
@@ -1443,7 +1443,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmLatestMaintainedReleaseByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmLatestMaintainedReleaseByMoid`: NiaapiDcnmLatestMaintainedRelease
+	// response from `GetNiaapiDcnmLatestMaintainedReleaseByMoid`: NiaapiMaintainedRelease
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmLatestMaintainedReleaseByMoid`: %v\n", resp)
 }
 ```
@@ -1467,7 +1467,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmLatestMaintainedRelease**](NiaapiDcnmLatestMaintainedRelease.md)
+[**NiaapiMaintainedRelease**](NiaapiMaintainedRelease.md)
 
 ### Authorization
 
@@ -1569,7 +1569,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmReleaseRecommendByMoid
 
-> NiaapiDcnmReleaseRecommend GetNiaapiDcnmReleaseRecommendByMoid(ctx, moid).Execute()
+> NiaapiReleaseRecommend GetNiaapiDcnmReleaseRecommendByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmReleaseRecommend' resource.
 
@@ -1595,7 +1595,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmReleaseRecommendByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmReleaseRecommendByMoid`: NiaapiDcnmReleaseRecommend
+	// response from `GetNiaapiDcnmReleaseRecommendByMoid`: NiaapiReleaseRecommend
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmReleaseRecommendByMoid`: %v\n", resp)
 }
 ```
@@ -1619,7 +1619,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmReleaseRecommend**](NiaapiDcnmReleaseRecommend.md)
+[**NiaapiReleaseRecommend**](NiaapiReleaseRecommend.md)
 
 ### Authorization
 
@@ -1721,7 +1721,7 @@ Name | Type | Description  | Notes
 
 ## GetNiaapiDcnmSweolByMoid
 
-> NiaapiDcnmSweol GetNiaapiDcnmSweolByMoid(ctx, moid).Execute()
+> NiaapiSoftwareEol GetNiaapiDcnmSweolByMoid(ctx, moid).Execute()
 
 Read a 'niaapi.DcnmSweol' resource.
 
@@ -1747,7 +1747,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `NiaapiApi.GetNiaapiDcnmSweolByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetNiaapiDcnmSweolByMoid`: NiaapiDcnmSweol
+	// response from `GetNiaapiDcnmSweolByMoid`: NiaapiSoftwareEol
 	fmt.Fprintf(os.Stdout, "Response from `NiaapiApi.GetNiaapiDcnmSweolByMoid`: %v\n", resp)
 }
 ```
@@ -1771,7 +1771,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmSweol**](NiaapiDcnmSweol.md)
+[**NiaapiSoftwareEol**](NiaapiSoftwareEol.md)
 
 ### Authorization
 

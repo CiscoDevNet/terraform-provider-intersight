@@ -744,11 +744,11 @@ func resourceRecoveryRestoreCreate(c context.Context, d *schema.ResourceData, me
 	o.SetClassId("recovery.Restore")
 
 	if v, ok := d.GetOk("config_params"); ok {
-		p := make([]models.RecoveryConfigParams, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewRecoveryConfigParamsWithDefaults()
+			o := models.NewMoBaseComplexTypeWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1017,7 +1017,7 @@ func resourceRecoveryRestoreRead(c context.Context, d *schema.ResourceData, meta
 		return diag.Errorf("error occurred while setting property ClassId in RecoveryRestore object: %s", err.Error())
 	}
 
-	if err := d.Set("config_params", flattenMapRecoveryConfigParams(s.GetConfigParams(), d)); err != nil {
+	if err := d.Set("config_params", flattenMapMoBaseComplexType(s.GetConfigParams(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ConfigParams in RecoveryRestore object: %s", err.Error())
 	}
 

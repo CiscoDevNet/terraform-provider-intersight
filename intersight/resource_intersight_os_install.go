@@ -1190,11 +1190,11 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 			}
 			if v, ok := l["ip_configuration"]; ok {
 				{
-					p := make([]models.OsIpConfiguration, 0, 1)
+					p := make([]models.MoBaseComplexType, 0, 1)
 					s := v.([]interface{})
 					for i := 0; i < len(s); i++ {
 						l := s[i].(map[string]interface{})
-						o := models.NewOsIpConfigurationWithDefaults()
+						o := models.NewMoBaseComplexTypeWithDefaults()
 						if v, ok := l["additional_properties"]; ok {
 							{
 								x := []byte(v.(string))
@@ -1369,11 +1369,11 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	if v, ok := d.GetOk("install_target"); ok {
-		p := make([]models.OsInstallTarget, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewOsInstallTargetWithDefaults()
+			o := models.NewMoBaseComplexTypeWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1412,11 +1412,11 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 	o.SetObjectType("os.Install")
 
 	if v, ok := d.GetOk("operating_system_parameters"); ok {
-		p := make([]models.OsOperatingSystemParameters, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewOsOperatingSystemParametersWithDefaults()
+			o := models.NewMoBaseComplexTypeWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1801,7 +1801,7 @@ func resourceOsInstallRead(c context.Context, d *schema.ResourceData, meta inter
 		return diag.Errorf("error occurred while setting property InstallMethod in OsInstall object: %s", err.Error())
 	}
 
-	if err := d.Set("install_target", flattenMapOsInstallTarget(s.GetInstallTarget(), d)); err != nil {
+	if err := d.Set("install_target", flattenMapMoBaseComplexType(s.GetInstallTarget(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property InstallTarget in OsInstall object: %s", err.Error())
 	}
 
@@ -1825,7 +1825,7 @@ func resourceOsInstallRead(c context.Context, d *schema.ResourceData, meta inter
 		return diag.Errorf("error occurred while setting property OperState in OsInstall object: %s", err.Error())
 	}
 
-	if err := d.Set("operating_system_parameters", flattenMapOsOperatingSystemParameters(s.GetOperatingSystemParameters(), d)); err != nil {
+	if err := d.Set("operating_system_parameters", flattenMapMoBaseComplexType(s.GetOperatingSystemParameters(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property OperatingSystemParameters in OsInstall object: %s", err.Error())
 	}
 

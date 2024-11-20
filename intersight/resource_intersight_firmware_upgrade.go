@@ -1354,11 +1354,11 @@ func resourceFirmwareUpgradeCreate(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("file_server"); ok {
-		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewSoftwarerepositoryFileServerWithDefaults()
+			o := models.NewMoBaseComplexTypeWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1809,7 +1809,7 @@ func resourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, meta
 		return diag.Errorf("error occurred while setting property ExcludeComponentPidList in FirmwareUpgrade object: %s", err.Error())
 	}
 
-	if err := d.Set("file_server", flattenMapSoftwarerepositoryFileServer(s.GetFileServer(), d)); err != nil {
+	if err := d.Set("file_server", flattenMapMoBaseComplexType(s.GetFileServer(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property FileServer in FirmwareUpgrade object: %s", err.Error())
 	}
 
@@ -2126,11 +2126,11 @@ func resourceFirmwareUpgradeUpdate(c context.Context, d *schema.ResourceData, me
 
 	if d.HasChange("file_server") {
 		v := d.Get("file_server")
-		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.SoftwarerepositoryFileServer{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))

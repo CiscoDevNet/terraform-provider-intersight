@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AdvancedFilter** | Pointer to **bool** | Enables advanced filtering on the interface. | [optional] [default to false]
 **ArfsSettings** | Pointer to [**NullableVnicArfsSettings**](VnicArfsSettings.md) |  | [optional] 
 **CompletionQueueSettings** | Pointer to [**NullableVnicCompletionQueueSettings**](VnicCompletionQueueSettings.md) |  | [optional] 
+**EtherChannelPinningEnabled** | Pointer to **bool** | Enables Ether Channel Pinning to combine multiple physical links between two network switches into a single logical link. Transmit Queue Count should be at least 2 to enable ether channel pinning. | [optional] [default to false]
 **GeneveEnabled** | Pointer to **bool** | GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints. | [optional] [default to false]
 **InterruptScaling** | Pointer to **bool** | Enables Interrupt Scaling on the interface. | [optional] [default to false]
 **InterruptSettings** | Pointer to [**NullableVnicEthInterruptSettings**](VnicEthInterruptSettings.md) |  | [optional] 
@@ -178,6 +179,31 @@ HasCompletionQueueSettings returns a boolean if a field has been set.
 `func (o *VnicEthAdapterPolicy) UnsetCompletionQueueSettings()`
 
 UnsetCompletionQueueSettings ensures that no value is present for CompletionQueueSettings, not even an explicit nil
+### GetEtherChannelPinningEnabled
+
+`func (o *VnicEthAdapterPolicy) GetEtherChannelPinningEnabled() bool`
+
+GetEtherChannelPinningEnabled returns the EtherChannelPinningEnabled field if non-nil, zero value otherwise.
+
+### GetEtherChannelPinningEnabledOk
+
+`func (o *VnicEthAdapterPolicy) GetEtherChannelPinningEnabledOk() (*bool, bool)`
+
+GetEtherChannelPinningEnabledOk returns a tuple with the EtherChannelPinningEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEtherChannelPinningEnabled
+
+`func (o *VnicEthAdapterPolicy) SetEtherChannelPinningEnabled(v bool)`
+
+SetEtherChannelPinningEnabled sets EtherChannelPinningEnabled field to given value.
+
+### HasEtherChannelPinningEnabled
+
+`func (o *VnicEthAdapterPolicy) HasEtherChannelPinningEnabled() bool`
+
+HasEtherChannelPinningEnabled returns a boolean if a field has been set.
+
 ### GetGeneveEnabled
 
 `func (o *VnicEthAdapterPolicy) GetGeneveEnabled() bool`

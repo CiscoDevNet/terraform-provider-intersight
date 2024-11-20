@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.WorkloadOptimizerMicrosoftSqlServerOptions"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.WorkloadOptimizerMicrosoftSqlServerOptions"]
 **BrowserServicePort** | Pointer to **int64** | Port that Microsoft SQL Server Browser listens for incoming requests for SQL Server resources and provides information about SQL Server instances that are installed on the computer. When this port is specified, Database will be communicated through the Browser Service with this port instead of default SQLServer port. | [optional] 
+**DiscoveryPath** | Pointer to **string** | Discovery path to define if its scope target entities or hostname or IP address. | [optional] [default to "targetEntities"]
 **FullDomainName** | Pointer to **string** | Active Directory domain, if required for this account. | [optional] 
 
 ## Methods
@@ -92,6 +93,31 @@ SetBrowserServicePort sets BrowserServicePort field to given value.
 `func (o *AssetWorkloadOptimizerMicrosoftSqlServerOptions) HasBrowserServicePort() bool`
 
 HasBrowserServicePort returns a boolean if a field has been set.
+
+### GetDiscoveryPath
+
+`func (o *AssetWorkloadOptimizerMicrosoftSqlServerOptions) GetDiscoveryPath() string`
+
+GetDiscoveryPath returns the DiscoveryPath field if non-nil, zero value otherwise.
+
+### GetDiscoveryPathOk
+
+`func (o *AssetWorkloadOptimizerMicrosoftSqlServerOptions) GetDiscoveryPathOk() (*string, bool)`
+
+GetDiscoveryPathOk returns a tuple with the DiscoveryPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiscoveryPath
+
+`func (o *AssetWorkloadOptimizerMicrosoftSqlServerOptions) SetDiscoveryPath(v string)`
+
+SetDiscoveryPath sets DiscoveryPath field to given value.
+
+### HasDiscoveryPath
+
+`func (o *AssetWorkloadOptimizerMicrosoftSqlServerOptions) HasDiscoveryPath() bool`
+
+HasDiscoveryPath returns a boolean if a field has been set.
 
 ### GetFullDomainName
 
