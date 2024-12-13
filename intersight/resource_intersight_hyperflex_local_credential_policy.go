@@ -160,9 +160,9 @@ func resourceHyperflexLocalCredentialPolicy() *schema.Resource {
 				Default:     false,
 			},
 			"hxdp_root_pwd": {
-				Description:  "HyperFlex storage controller VM password must contain a minimum of 10 characters, with at least 1 lowercase, 1 uppercase, 1 numeric, and 1 of these -_@#$%^&*! special characters.",
+				Description:  "HyperFlex storage controller VM password must contain a minimum of 10 characters, with at least 1 lowercase, 1 uppercase, 1 numeric, and 1 of these -._@#$%^&*! special characters.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9!@#$%^&*_-]{10,}$"), ""),
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^[a-zA-Z0-9!@#$%^&*_.-]{10,}$"), ""),
 				Optional:     true,
 			},
 			"hypervisor_admin": {

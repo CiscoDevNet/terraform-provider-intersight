@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resourcepool.PoolMember"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resourcepool.PoolMember"]
 **Features** | Pointer to **[]string** |  | [optional] 
-**AssignedToEntity** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] 
+**QualificationType** | Pointer to [**NullableResourcepoolQualificationType**](ResourcepoolQualificationType.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
 **Peer** | Pointer to [**NullableResourcepoolLeaseRelationship**](ResourcepoolLeaseRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**NullableResourcepoolPoolRelationship**](ResourcepoolPoolRelationship.md) |  | [optional] 
 **Resource** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
@@ -106,6 +107,41 @@ HasFeatures returns a boolean if a field has been set.
 `func (o *ResourcepoolPoolMember) UnsetFeatures()`
 
 UnsetFeatures ensures that no value is present for Features, not even an explicit nil
+### GetQualificationType
+
+`func (o *ResourcepoolPoolMember) GetQualificationType() ResourcepoolQualificationType`
+
+GetQualificationType returns the QualificationType field if non-nil, zero value otherwise.
+
+### GetQualificationTypeOk
+
+`func (o *ResourcepoolPoolMember) GetQualificationTypeOk() (*ResourcepoolQualificationType, bool)`
+
+GetQualificationTypeOk returns a tuple with the QualificationType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQualificationType
+
+`func (o *ResourcepoolPoolMember) SetQualificationType(v ResourcepoolQualificationType)`
+
+SetQualificationType sets QualificationType field to given value.
+
+### HasQualificationType
+
+`func (o *ResourcepoolPoolMember) HasQualificationType() bool`
+
+HasQualificationType returns a boolean if a field has been set.
+
+### SetQualificationTypeNil
+
+`func (o *ResourcepoolPoolMember) SetQualificationTypeNil(b bool)`
+
+ SetQualificationTypeNil sets the value for QualificationType to be an explicit nil
+
+### UnsetQualificationType
+`func (o *ResourcepoolPoolMember) UnsetQualificationType()`
+
+UnsetQualificationType ensures that no value is present for QualificationType, not even an explicit nil
 ### GetAssignedToEntity
 
 `func (o *ResourcepoolPoolMember) GetAssignedToEntity() []MoBaseMoRelationship`

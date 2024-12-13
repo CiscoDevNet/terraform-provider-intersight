@@ -677,7 +677,7 @@ func getResourcepoolLeaseSchema() map[string]*schema.Schema {
 			},
 		},
 		"resource_type": {
-			Description: "The type of resource present in the pool, such as 'server' can be a RackUnit or Blade.\n* `None` - The resource cannot consider for Resource Pool.\n* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.",
+			Description: "The type of resource present in the pool, such as 'server' can be a RackUnit or Blade.\n* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.\n* `None` - The resource cannot consider for Resource Pool.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

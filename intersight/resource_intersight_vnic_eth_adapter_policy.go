@@ -199,7 +199,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 					return
 				}},
 			"ether_channel_pinning_enabled": {
-				Description: "Enables Ether Channel Pinning to combine multiple physical links between two network switches into a single logical link. Transmit Queue Count should be at least 2 to enable ether channel pinning.",
+				Description: "Enables EtherChannel Pinning to combine multiple physical links between two network switches into a single logical link. Transmit Queue Count should be at least 2 to enable ether channel pinning.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,

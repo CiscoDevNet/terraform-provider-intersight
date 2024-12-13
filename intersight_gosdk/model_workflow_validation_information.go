@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024101709
+API version: 1.0.11-2024112619
 Contact: intersight@cisco.com
 */
 
@@ -28,6 +28,8 @@ type WorkflowValidationInformation struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The state of workflow definition metadata in the workflow engine. The workflow definition must be successfully updated in the engine before workflows can be executed. * `NotUpdated` - The workflow and task definition metadata is not yet updated in the workflow engine. * `Updating` - The workflow and task definition metadata is in the processing of being updated in the workflow engine. * `UpdateFailed` - The workflow and task definition metadata failed to be updated in the workflow engine. * `Updated` - The workflow and task definition metadata was updated successfully in the workflow engine.
+	EngineState *string `json:"EngineState,omitempty"`
 	// The current validation state of this workflow. The possible states are Valid, Invalid, NotValidated (default). * `NotValidated` - The state when workflow definition has not been validated. * `Valid` - The state when workflow definition is valid. * `Invalid` - The state when workflow definition is invalid.
 	State                *string                   `json:"State,omitempty"`
 	ValidationError      []WorkflowValidationError `json:"ValidationError,omitempty"`
@@ -115,6 +117,38 @@ func (o *WorkflowValidationInformation) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "workflow.ValidationInformation" of the ObjectType field.
 func (o *WorkflowValidationInformation) GetDefaultObjectType() interface{} {
 	return "workflow.ValidationInformation"
+}
+
+// GetEngineState returns the EngineState field value if set, zero value otherwise.
+func (o *WorkflowValidationInformation) GetEngineState() string {
+	if o == nil || IsNil(o.EngineState) {
+		var ret string
+		return ret
+	}
+	return *o.EngineState
+}
+
+// GetEngineStateOk returns a tuple with the EngineState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowValidationInformation) GetEngineStateOk() (*string, bool) {
+	if o == nil || IsNil(o.EngineState) {
+		return nil, false
+	}
+	return o.EngineState, true
+}
+
+// HasEngineState returns a boolean if a field has been set.
+func (o *WorkflowValidationInformation) HasEngineState() bool {
+	if o != nil && !IsNil(o.EngineState) {
+		return true
+	}
+
+	return false
+}
+
+// SetEngineState gets a reference to the given string and assigns it to the EngineState field.
+func (o *WorkflowValidationInformation) SetEngineState(v string) {
+	o.EngineState = &v
 }
 
 // GetState returns the State field value if set, zero value otherwise.
@@ -208,6 +242,9 @@ func (o WorkflowValidationInformation) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.EngineState) {
+		toSerialize["EngineState"] = o.EngineState
+	}
 	if !IsNil(o.State) {
 		toSerialize["State"] = o.State
 	}
@@ -269,6 +306,8 @@ func (o *WorkflowValidationInformation) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// The state of workflow definition metadata in the workflow engine. The workflow definition must be successfully updated in the engine before workflows can be executed. * `NotUpdated` - The workflow and task definition metadata is not yet updated in the workflow engine. * `Updating` - The workflow and task definition metadata is in the processing of being updated in the workflow engine. * `UpdateFailed` - The workflow and task definition metadata failed to be updated in the workflow engine. * `Updated` - The workflow and task definition metadata was updated successfully in the workflow engine.
+		EngineState *string `json:"EngineState,omitempty"`
 		// The current validation state of this workflow. The possible states are Valid, Invalid, NotValidated (default). * `NotValidated` - The state when workflow definition has not been validated. * `Valid` - The state when workflow definition is valid. * `Invalid` - The state when workflow definition is invalid.
 		State           *string                   `json:"State,omitempty"`
 		ValidationError []WorkflowValidationError `json:"ValidationError,omitempty"`
@@ -281,6 +320,7 @@ func (o *WorkflowValidationInformation) UnmarshalJSON(data []byte) (err error) {
 		varWorkflowValidationInformation := _WorkflowValidationInformation{}
 		varWorkflowValidationInformation.ClassId = varWorkflowValidationInformationWithoutEmbeddedStruct.ClassId
 		varWorkflowValidationInformation.ObjectType = varWorkflowValidationInformationWithoutEmbeddedStruct.ObjectType
+		varWorkflowValidationInformation.EngineState = varWorkflowValidationInformationWithoutEmbeddedStruct.EngineState
 		varWorkflowValidationInformation.State = varWorkflowValidationInformationWithoutEmbeddedStruct.State
 		varWorkflowValidationInformation.ValidationError = varWorkflowValidationInformationWithoutEmbeddedStruct.ValidationError
 		*o = WorkflowValidationInformation(varWorkflowValidationInformation)
@@ -302,6 +342,7 @@ func (o *WorkflowValidationInformation) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "EngineState")
 		delete(additionalProperties, "State")
 		delete(additionalProperties, "ValidationError")
 

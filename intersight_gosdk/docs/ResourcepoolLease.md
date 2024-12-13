@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **IsExclusiveAtAssignedEntity** | Pointer to **bool** | Indicates whether a lease allocation is exclusive based on the Assigned Entity, if the AssignedEntity holds any lease then not allowed to create new lease later. | [optional] [default to false]
 **LeaseParameters** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | The lease operations has some special operations based on the PoolType and ResourceType. Those special operations are handled based on this parameter. | [optional] 
 **Resource** | Pointer to [**MoBaseMo**](MoBaseMo.md) |  | [optional] 
-**ResourceType** | Pointer to **string** | The type of resource present in the pool, such as &#39;server&#39; can be a RackUnit or Blade. * &#x60;None&#x60; - The resource cannot consider for Resource Pool. * &#x60;Server&#x60; - Resource Pool holds the server kind of resources, example - RackServer, Blade. | [optional] [default to "None"]
+**ResourceType** | Pointer to **string** | The type of resource present in the pool, such as &#39;server&#39; can be a RackUnit or Blade. * &#x60;Server&#x60; - Resource Pool holds the server kind of resources, example - RackServer, Blade. * &#x60;None&#x60; - The resource cannot consider for Resource Pool. | [optional] [default to "Server"]
 **AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **LeasedResource** | Pointer to [**NullableResourcepoolLeaseResourceRelationship**](ResourcepoolLeaseResourceRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**NullableResourcepoolPoolRelationship**](ResourcepoolPoolRelationship.md) |  | [optional] 

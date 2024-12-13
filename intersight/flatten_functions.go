@@ -2359,6 +2359,22 @@ func flattenListForecastDefinitionRelationship(p []models.ForecastDefinitionRela
 	}
 	return forecastdefinitionrelationships
 }
+func flattenListFunctionsRuntimeComponent(p []models.FunctionsRuntimeComponent, d *schema.ResourceData) []map[string]interface{} {
+	var functionsruntimecomponents []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		functionsruntimecomponent := make(map[string]interface{})
+		functionsruntimecomponent["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		functionsruntimecomponent["class_id"] = item.GetClassId()
+		functionsruntimecomponent["name"] = item.GetName()
+		functionsruntimecomponent["object_type"] = item.GetObjectType()
+		functionsruntimecomponent["nr_version"] = item.GetVersion()
+		functionsruntimecomponents = append(functionsruntimecomponents, functionsruntimecomponent)
+	}
+	return functionsruntimecomponents
+}
 func flattenListGraphicsCardRelationship(p []models.GraphicsCardRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var graphicscardrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -2382,6 +2398,266 @@ func flattenListGraphicsControllerRelationship(p []models.GraphicsControllerRela
 		graphicscontrollerrelationships = append(graphicscontrollerrelationships, graphicscontrollerrelationship)
 	}
 	return graphicscontrollerrelationships
+}
+func flattenListHciAlarmParameter(p []models.HciAlarmParameter, d *schema.ResourceData) []map[string]interface{} {
+	var hcialarmparameters []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hcialarmparameter := make(map[string]interface{})
+		hcialarmparameter["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hcialarmparameter["class_id"] = item.GetClassId()
+		hcialarmparameter["name"] = item.GetName()
+		hcialarmparameter["object_type"] = item.GetObjectType()
+		hcialarmparameter["value"] = item.GetValue()
+		hcialarmparameters = append(hcialarmparameters, hcialarmparameter)
+	}
+	return hcialarmparameters
+}
+func flattenListHciCapacityViolation(p []models.HciCapacityViolation, d *schema.ResourceData) []map[string]interface{} {
+	var hcicapacityviolations []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hcicapacityviolation := make(map[string]interface{})
+		hcicapacityviolation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hcicapacityviolation["category"] = item.GetCategory()
+		hcicapacityviolation["class_id"] = item.GetClassId()
+		hcicapacityviolation["meter"] = item.GetMeter()
+		hcicapacityviolation["object_type"] = item.GetObjectType()
+		hcicapacityviolation["shortfall"] = item.GetShortfall()
+		hcicapacityviolation["type"] = item.GetType()
+		hcicapacityviolations = append(hcicapacityviolations, hcicapacityviolation)
+	}
+	return hcicapacityviolations
+}
+func flattenListHciClusterRelationship(p []models.HciClusterRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hciclusterrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		hciclusterrelationship := flattenMoMoRef(item)
+		hciclusterrelationships = append(hciclusterrelationships, hciclusterrelationship)
+	}
+	return hciclusterrelationships
+}
+func flattenListHciConsumption(p []models.HciConsumption, d *schema.ResourceData) []map[string]interface{} {
+	var hciconsumptions []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hciconsumption := make(map[string]interface{})
+		hciconsumption["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hciconsumption["class_id"] = item.GetClassId()
+		hciconsumption["cluster_ext_id"] = item.GetClusterExtId()
+		hciconsumption["license_id"] = item.GetLicenseId()
+		hciconsumption["object_type"] = item.GetObjectType()
+		hciconsumption["quantity_used"] = item.GetQuantityUsed()
+		hciconsumptions = append(hciconsumptions, hciconsumption)
+	}
+	return hciconsumptions
+}
+func flattenListHciDiskRelationship(p []models.HciDiskRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hcidiskrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		hcidiskrelationship := flattenMoMoRef(item)
+		hcidiskrelationships = append(hcidiskrelationships, hcidiskrelationship)
+	}
+	return hcidiskrelationships
+}
+func flattenListHciEntitlementDetail(p []models.HciEntitlementDetail, d *schema.ResourceData) []map[string]interface{} {
+	var hcientitlementdetails []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hcientitlementdetail := make(map[string]interface{})
+		hcientitlementdetail["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hcientitlementdetail["category"] = item.GetCategory()
+		hcientitlementdetail["class_id"] = item.GetClassId()
+		hcientitlementdetail["earliest_expiry_date"] = item.GetEarliestExpiryDate().String()
+		hcientitlementdetail["meter"] = item.GetMeter()
+		hcientitlementdetail["name"] = item.GetName()
+		hcientitlementdetail["object_type"] = item.GetObjectType()
+		hcientitlementdetail["quantity"] = item.GetQuantity()
+		hcientitlementdetail["scope"] = item.GetScope()
+		hcientitlementdetail["sub_category"] = item.GetSubCategory()
+		hcientitlementdetail["type"] = item.GetType()
+		hcientitlementdetails = append(hcientitlementdetails, hcientitlementdetail)
+	}
+	return hcientitlementdetails
+}
+func flattenListHciExpiredLicense(p []models.HciExpiredLicense, d *schema.ResourceData) []map[string]interface{} {
+	var hciexpiredlicenses []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hciexpiredlicense := make(map[string]interface{})
+		hciexpiredlicense["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hciexpiredlicense["category"] = item.GetCategory()
+		hciexpiredlicense["class_id"] = item.GetClassId()
+		hciexpiredlicense["expiry_date"] = item.GetExpiryDate().String()
+		hciexpiredlicense["ext_id"] = item.GetExtId()
+		hciexpiredlicense["license_id"] = item.GetLicenseId()
+		hciexpiredlicense["meter"] = item.GetMeter()
+		hciexpiredlicense["name"] = item.GetName()
+		hciexpiredlicense["object_type"] = item.GetObjectType()
+		hciexpiredlicense["sub_category"] = item.GetSubCategory()
+		hciexpiredlicense["used_quantity"] = item.GetUsedQuantity()
+		hciexpiredlicenses = append(hciexpiredlicenses, hciexpiredlicense)
+	}
+	return hciexpiredlicenses
+}
+func flattenListHciFeatureViolation(p []models.HciFeatureViolation, d *schema.ResourceData) []map[string]interface{} {
+	var hcifeatureviolations []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hcifeatureviolation := make(map[string]interface{})
+		hcifeatureviolation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hcifeatureviolation["affected_entity"] = item.GetAffectedEntity()
+		hcifeatureviolation["class_id"] = item.GetClassId()
+		hcifeatureviolation["description"] = item.GetDescription()
+		hcifeatureviolation["feature_id"] = item.GetFeatureId()
+		hcifeatureviolation["name"] = item.GetName()
+		hcifeatureviolation["object_type"] = item.GetObjectType()
+		hcifeatureviolations = append(hcifeatureviolations, hcifeatureviolation)
+	}
+	return hcifeatureviolations
+}
+func flattenListHciGpuRelationship(p []models.HciGpuRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hcigpurelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		hcigpurelationship := flattenMoMoRef(item)
+		hcigpurelationships = append(hcigpurelationships, hcigpurelationship)
+	}
+	return hcigpurelationships
+}
+func flattenListHciIpAddressOrFqdn(p []models.HciIpAddressOrFqdn, d *schema.ResourceData) []map[string]interface{} {
+	var hciipaddressorfqdns []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hciipaddressorfqdn := make(map[string]interface{})
+		hciipaddressorfqdn["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hciipaddressorfqdn["class_id"] = item.GetClassId()
+		hciipaddressorfqdn["fqdn"] = item.GetFqdn()
+		hciipaddressorfqdn["ipv4_address"] = item.GetIpv4Address()
+		hciipaddressorfqdn["ipv4_prefix_length"] = item.GetIpv4PrefixLength()
+		hciipaddressorfqdn["ipv6_address"] = item.GetIpv6Address()
+		hciipaddressorfqdn["ipv6_prefix_length"] = item.GetIpv6PrefixLength()
+		hciipaddressorfqdn["object_type"] = item.GetObjectType()
+		hciipaddressorfqdns = append(hciipaddressorfqdns, hciipaddressorfqdn)
+	}
+	return hciipaddressorfqdns
+}
+func flattenListHciKeyManagementDeviceToCertStatusInfo(p []models.HciKeyManagementDeviceToCertStatusInfo, d *schema.ResourceData) []map[string]interface{} {
+	var hcikeymanagementdevicetocertstatusinfos []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hcikeymanagementdevicetocertstatusinfo := make(map[string]interface{})
+		hcikeymanagementdevicetocertstatusinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hcikeymanagementdevicetocertstatusinfo["class_id"] = item.GetClassId()
+		hcikeymanagementdevicetocertstatusinfo["key_management_server_name"] = item.GetKeyManagementServerName()
+		hcikeymanagementdevicetocertstatusinfo["object_type"] = item.GetObjectType()
+		hcikeymanagementdevicetocertstatusinfo["status"] = item.GetStatus()
+		hcikeymanagementdevicetocertstatusinfos = append(hcikeymanagementdevicetocertstatusinfos, hcikeymanagementdevicetocertstatusinfo)
+	}
+	return hcikeymanagementdevicetocertstatusinfos
+}
+func flattenListHciLicenseRelationship(p []models.HciLicenseRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hcilicenserelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		hcilicenserelationship := flattenMoMoRef(item)
+		hcilicenserelationships = append(hcilicenserelationships, hcilicenserelationship)
+	}
+	return hcilicenserelationships
+}
+func flattenListHciLicensedService(p []models.HciLicensedService, d *schema.ResourceData) []map[string]interface{} {
+	var hcilicensedservices []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hcilicensedservice := make(map[string]interface{})
+		hcilicensedservice["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hcilicensedservice["class_id"] = item.GetClassId()
+		hcilicensedservice["enforcement_actions"] = item.GetEnforcementActions()
+		hcilicensedservice["enforcement_level"] = item.GetEnforcementLevel()
+		hcilicensedservice["is_compliant"] = item.GetIsCompliant()
+		hcilicensedservice["license_type"] = item.GetLicenseType()
+		hcilicensedservice["name"] = item.GetName()
+		hcilicensedservice["object_type"] = item.GetObjectType()
+		services_x, _ := d.GetOk("services")
+		hcilicensedservice["violations"] = (func(p []models.HciServiceViolation, v interface{}) []map[string]interface{} {
+			var hciserviceviolations []map[string]interface{}
+			if len(p) == 0 {
+				return nil
+			}
+			for _, item := range p {
+				hciserviceviolation := make(map[string]interface{})
+				hciserviceviolation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				hciserviceviolation["class_id"] = item.GetClassId()
+				hciserviceviolation["object_type"] = item.GetObjectType()
+				hciserviceviolation["start_date"] = item.GetStartDate().String()
+				hciserviceviolation["type"] = item.GetType()
+				hciserviceviolations = append(hciserviceviolations, hciserviceviolation)
+			}
+			return hciserviceviolations
+		})(item.GetViolations(), services_x)
+		hcilicensedservices = append(hcilicensedservices, hcilicensedservice)
+	}
+	return hcilicensedservices
+}
+func flattenListHciNodeRelationship(p []models.HciNodeRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hcinoderelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		hcinoderelationship := flattenMoMoRef(item)
+		hcinoderelationships = append(hcinoderelationships, hcinoderelationship)
+	}
+	return hcinoderelationships
+}
+func flattenListHciSoftwareType(p []models.HciSoftwareType, d *schema.ResourceData) []map[string]interface{} {
+	var hcisoftwaretypes []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hcisoftwaretype := make(map[string]interface{})
+		hcisoftwaretype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hcisoftwaretype["class_id"] = item.GetClassId()
+		hcisoftwaretype["object_type"] = item.GetObjectType()
+		hcisoftwaretype["software_type"] = item.GetSoftwareType()
+		hcisoftwaretype["nr_version"] = item.GetVersion()
+		hcisoftwaretypes = append(hcisoftwaretypes, hcisoftwaretype)
+	}
+	return hcisoftwaretypes
 }
 func flattenListHclConstraint(p []models.HclConstraint, d *schema.ResourceData) []map[string]interface{} {
 	var hclconstraints []map[string]interface{}
@@ -6978,6 +7254,20 @@ func flattenListResourcePerTypeCombinedSelector(p []models.ResourcePerTypeCombin
 	}
 	return resourcepertypecombinedselectors
 }
+func flattenListResourceResourceQualifier(p []models.ResourceResourceQualifier, d *schema.ResourceData) []map[string]interface{} {
+	var resourceresourcequalifiers []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		resourceresourcequalifier := make(map[string]interface{})
+		resourceresourcequalifier["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		resourceresourcequalifier["class_id"] = item.GetClassId()
+		resourceresourcequalifier["object_type"] = item.GetObjectType()
+		resourceresourcequalifiers = append(resourceresourcequalifiers, resourceresourcequalifier)
+	}
+	return resourceresourcequalifiers
+}
 func flattenListResourceSelector(p []models.ResourceSelector, d *schema.ResourceData) []map[string]interface{} {
 	var resourceselectors []map[string]interface{}
 	if len(p) == 0 {
@@ -7004,6 +7294,18 @@ func flattenListResourcepoolPoolRelationship(p []models.ResourcepoolPoolRelation
 		resourcepoolpoolrelationships = append(resourcepoolpoolrelationships, resourcepoolpoolrelationship)
 	}
 	return resourcepoolpoolrelationships
+}
+func flattenListResourcepoolQualificationPolicyRelationship(p []models.ResourcepoolQualificationPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var resourcepoolqualificationpolicyrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		resourcepoolqualificationpolicyrelationship := flattenMoMoRef(item)
+		resourcepoolqualificationpolicyrelationships = append(resourcepoolqualificationpolicyrelationships, resourcepoolqualificationpolicyrelationship)
+	}
+	return resourcepoolqualificationpolicyrelationships
 }
 func flattenListSdcardPartition(p []models.SdcardPartition, d *schema.ResourceData) []map[string]interface{} {
 	var sdcardpartitions []map[string]interface{}
@@ -8744,6 +9046,18 @@ func flattenListVnicVifStatus(p []models.VnicVifStatus, d *schema.ResourceData) 
 	}
 	return vnicvifstatuss
 }
+func flattenListWebhookSchemaRelationship(p []models.WebhookSchemaRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var webhookschemarelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		webhookschemarelationship := flattenMoMoRef(item)
+		webhookschemarelationships = append(webhookschemarelationships, webhookschemarelationship)
+	}
+	return webhookschemarelationships
+}
 func flattenListWorkflowApi(p []models.WorkflowApi, d *schema.ResourceData) []map[string]interface{} {
 	var workflowapis []map[string]interface{}
 	if len(p) == 0 {
@@ -8779,7 +9093,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 		workflowbasedatatype := make(map[string]interface{})
 		workflowbasedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		workflowbasedatatype["class_id"] = item.GetClassId()
-		input_definition_x, _ := d.GetOk("input_definition")
+		type_definition_x, _ := d.GetOk("type_definition")
 		workflowbasedatatype["default"] = (func(p models.WorkflowDefaultValue, v interface{}) []map[string]interface{} {
 			var workflowdefaultvalues []map[string]interface{}
 			var ret models.WorkflowDefaultValue
@@ -8797,7 +9111,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
 			return workflowdefaultvalues
-		})(item.GetDefault(), input_definition_x)
+		})(item.GetDefault(), type_definition_x)
 		workflowbasedatatype["description"] = item.GetDescription()
 		workflowbasedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, v interface{}) []map[string]interface{} {
 			var workflowdisplaymetas []map[string]interface{}
@@ -8815,7 +9129,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 
 			workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
 			return workflowdisplaymetas
-		})(item.GetDisplayMeta(), input_definition_x)
+		})(item.GetDisplayMeta(), type_definition_x)
 		workflowbasedatatype["input_parameters"] = flattenAdditionalProperties(item.InputParameters)
 		workflowbasedatatype["label"] = item.GetLabel()
 		workflowbasedatatype["name"] = item.GetName()
@@ -10440,6 +10754,7 @@ func flattenMapAssetSudiInfo(p models.AssetSudiInfo, d *schema.ResourceData) []m
 	assetsudiinfo := make(map[string]interface{})
 	assetsudiinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	assetsudiinfo["class_id"] = item.GetClassId()
+	assetsudiinfo["jti"] = item.GetJti()
 	assetsudiinfo["object_type"] = item.GetObjectType()
 	assetsudiinfo["pid"] = item.GetPid()
 	assetsudiinfo["serial_number"] = item.GetSerialNumber()
@@ -13201,6 +13516,41 @@ func flattenMapForecastModel(p models.ForecastModel, d *schema.ResourceData) []m
 	forecastmodels = append(forecastmodels, forecastmodel)
 	return forecastmodels
 }
+func flattenMapFunctionsFunctionLastAction(p models.FunctionsFunctionLastAction, d *schema.ResourceData) []map[string]interface{} {
+	var functionsfunctionlastactions []map[string]interface{}
+	var ret models.FunctionsFunctionLastAction
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	functionsfunctionlastaction := make(map[string]interface{})
+	functionsfunctionlastaction["action"] = item.GetAction()
+	functionsfunctionlastaction["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	functionsfunctionlastaction["class_id"] = item.GetClassId()
+	functionsfunctionlastaction["failure_reason"] = item.GetFailureReason()
+	functionsfunctionlastaction["object_type"] = item.GetObjectType()
+
+	functionsfunctionlastactions = append(functionsfunctionlastactions, functionsfunctionlastaction)
+	return functionsfunctionlastactions
+}
+func flattenMapFunctionsRuntimeRelationship(p models.FunctionsRuntimeRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var functionsruntimerelationships []map[string]interface{}
+	var ret models.FunctionsRuntimeRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	functionsruntimerelationship := make(map[string]interface{})
+	functionsruntimerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	functionsruntimerelationship["class_id"] = item.GetClassId()
+	functionsruntimerelationship["moid"] = item.GetMoid()
+	functionsruntimerelationship["object_type"] = item.GetObjectType()
+	functionsruntimerelationship["selector"] = item.GetSelector()
+
+	functionsruntimerelationships = append(functionsruntimerelationships, functionsruntimerelationship)
+	return functionsruntimerelationships
+}
 func flattenMapGraphicsCardRelationship(p models.GraphicsCardRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var graphicscardrelationships []map[string]interface{}
 	var ret models.GraphicsCardRelationship
@@ -13218,6 +13568,312 @@ func flattenMapGraphicsCardRelationship(p models.GraphicsCardRelationship, d *sc
 
 	graphicscardrelationships = append(graphicscardrelationships, graphicscardrelationship)
 	return graphicscardrelationships
+}
+func flattenMapHciAlarmSummary(p models.HciAlarmSummary, d *schema.ResourceData) []map[string]interface{} {
+	var hcialarmsummarys []map[string]interface{}
+	var ret models.HciAlarmSummary
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	hcialarmsummary := make(map[string]interface{})
+	hcialarmsummary["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hcialarmsummary["class_id"] = item.GetClassId()
+	hcialarmsummary["critical"] = item.GetCritical()
+	hcialarmsummary["health"] = item.GetHealth()
+	hcialarmsummary["info"] = item.GetInfo()
+	hcialarmsummary["object_type"] = item.GetObjectType()
+	hcialarmsummary["warning"] = item.GetWarning()
+
+	hcialarmsummarys = append(hcialarmsummarys, hcialarmsummary)
+	return hcialarmsummarys
+}
+func flattenMapHciBackplaneNetworkParams(p models.HciBackplaneNetworkParams, d *schema.ResourceData) []map[string]interface{} {
+	var hcibackplanenetworkparamss []map[string]interface{}
+	var ret models.HciBackplaneNetworkParams
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	hcibackplanenetworkparams := make(map[string]interface{})
+	hcibackplanenetworkparams["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hcibackplanenetworkparams["class_id"] = item.GetClassId()
+	hcibackplanenetworkparams["is_segmentation_enabled"] = item.GetIsSegmentationEnabled()
+	backplane_x, _ := d.GetOk("backplane")
+	hcibackplanenetworkparams["netmask"] = (func(p models.HciIpAddress, v interface{}) []map[string]interface{} {
+		var hciipaddresss []map[string]interface{}
+		var ret models.HciIpAddress
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		hciipaddress := make(map[string]interface{})
+		hciipaddress["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hciipaddress["class_id"] = item.GetClassId()
+		hciipaddress["ipv4_address"] = item.GetIpv4Address()
+		hciipaddress["ipv4_prefix_length"] = item.GetIpv4PrefixLength()
+		hciipaddress["ipv6_address"] = item.GetIpv6Address()
+		hciipaddress["ipv6_prefix_length"] = item.GetIpv6PrefixLength()
+		hciipaddress["object_type"] = item.GetObjectType()
+
+		hciipaddresss = append(hciipaddresss, hciipaddress)
+		return hciipaddresss
+	})(item.GetNetmask(), backplane_x)
+	hcibackplanenetworkparams["object_type"] = item.GetObjectType()
+	hcibackplanenetworkparams["subnet"] = (func(p models.HciIpAddress, v interface{}) []map[string]interface{} {
+		var hciipaddresss []map[string]interface{}
+		var ret models.HciIpAddress
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		hciipaddress := make(map[string]interface{})
+		hciipaddress["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hciipaddress["class_id"] = item.GetClassId()
+		hciipaddress["ipv4_address"] = item.GetIpv4Address()
+		hciipaddress["ipv4_prefix_length"] = item.GetIpv4PrefixLength()
+		hciipaddress["ipv6_address"] = item.GetIpv6Address()
+		hciipaddress["ipv6_prefix_length"] = item.GetIpv6PrefixLength()
+		hciipaddress["object_type"] = item.GetObjectType()
+
+		hciipaddresss = append(hciipaddresss, hciipaddress)
+		return hciipaddresss
+	})(item.GetSubnet(), backplane_x)
+	hcibackplanenetworkparams["vlan_tag"] = item.GetVlanTag()
+
+	hcibackplanenetworkparamss = append(hcibackplanenetworkparamss, hcibackplanenetworkparams)
+	return hcibackplanenetworkparamss
+}
+func flattenMapHciClusterRelationship(p models.HciClusterRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hciclusterrelationships []map[string]interface{}
+	var ret models.HciClusterRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	hciclusterrelationship := make(map[string]interface{})
+	hciclusterrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hciclusterrelationship["class_id"] = item.GetClassId()
+	hciclusterrelationship["moid"] = item.GetMoid()
+	hciclusterrelationship["object_type"] = item.GetObjectType()
+	hciclusterrelationship["selector"] = item.GetSelector()
+
+	hciclusterrelationships = append(hciclusterrelationships, hciclusterrelationship)
+	return hciclusterrelationships
+}
+func flattenMapHciComplianceRelationship(p models.HciComplianceRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hcicompliancerelationships []map[string]interface{}
+	var ret models.HciComplianceRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	hcicompliancerelationship := make(map[string]interface{})
+	hcicompliancerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hcicompliancerelationship["class_id"] = item.GetClassId()
+	hcicompliancerelationship["moid"] = item.GetMoid()
+	hcicompliancerelationship["object_type"] = item.GetObjectType()
+	hcicompliancerelationship["selector"] = item.GetSelector()
+
+	hcicompliancerelationships = append(hcicompliancerelationships, hcicompliancerelationship)
+	return hcicompliancerelationships
+}
+func flattenMapHciDomainManagerRelationship(p models.HciDomainManagerRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hcidomainmanagerrelationships []map[string]interface{}
+	var ret models.HciDomainManagerRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	hcidomainmanagerrelationship := make(map[string]interface{})
+	hcidomainmanagerrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hcidomainmanagerrelationship["class_id"] = item.GetClassId()
+	hcidomainmanagerrelationship["moid"] = item.GetMoid()
+	hcidomainmanagerrelationship["object_type"] = item.GetObjectType()
+	hcidomainmanagerrelationship["selector"] = item.GetSelector()
+
+	hcidomainmanagerrelationships = append(hcidomainmanagerrelationships, hcidomainmanagerrelationship)
+	return hcidomainmanagerrelationships
+}
+func flattenMapHciEntitlementRelationship(p models.HciEntitlementRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hcientitlementrelationships []map[string]interface{}
+	var ret models.HciEntitlementRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	hcientitlementrelationship := make(map[string]interface{})
+	hcientitlementrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hcientitlementrelationship["class_id"] = item.GetClassId()
+	hcientitlementrelationship["moid"] = item.GetMoid()
+	hcientitlementrelationship["object_type"] = item.GetObjectType()
+	hcientitlementrelationship["selector"] = item.GetSelector()
+
+	hcientitlementrelationships = append(hcientitlementrelationships, hcientitlementrelationship)
+	return hcientitlementrelationships
+}
+func flattenMapHciFaultToleranceState(p models.HciFaultToleranceState, d *schema.ResourceData) []map[string]interface{} {
+	var hcifaulttolerancestates []map[string]interface{}
+	var ret models.HciFaultToleranceState
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	hcifaulttolerancestate := make(map[string]interface{})
+	hcifaulttolerancestate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hcifaulttolerancestate["class_id"] = item.GetClassId()
+	hcifaulttolerancestate["current_max_fault_tolerance"] = item.GetCurrentMaxFaultTolerance()
+	hcifaulttolerancestate["desired_max_fault_tolerance"] = item.GetDesiredMaxFaultTolerance()
+	hcifaulttolerancestate["domain_awareness_level"] = item.GetDomainAwarenessLevel()
+	hcifaulttolerancestate["object_type"] = item.GetObjectType()
+
+	hcifaulttolerancestates = append(hcifaulttolerancestates, hcifaulttolerancestate)
+	return hcifaulttolerancestates
+}
+func flattenMapHciIpAddress(p models.HciIpAddress, d *schema.ResourceData) []map[string]interface{} {
+	var hciipaddresss []map[string]interface{}
+	var ret models.HciIpAddress
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	hciipaddress := make(map[string]interface{})
+	hciipaddress["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hciipaddress["class_id"] = item.GetClassId()
+	hciipaddress["ipv4_address"] = item.GetIpv4Address()
+	hciipaddress["ipv4_prefix_length"] = item.GetIpv4PrefixLength()
+	hciipaddress["ipv6_address"] = item.GetIpv6Address()
+	hciipaddress["ipv6_prefix_length"] = item.GetIpv6PrefixLength()
+	hciipaddress["object_type"] = item.GetObjectType()
+
+	hciipaddresss = append(hciipaddresss, hciipaddress)
+	return hciipaddresss
+}
+func flattenMapHciManagementServer(p models.HciManagementServer, d *schema.ResourceData) []map[string]interface{} {
+	var hcimanagementservers []map[string]interface{}
+	var ret models.HciManagementServer
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	hcimanagementserver := make(map[string]interface{})
+	hcimanagementserver["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hcimanagementserver["class_id"] = item.GetClassId()
+	hcimanagementserver["drs_enabled"] = item.GetDrsEnabled()
+	hcimanagementserver["in_use"] = item.GetInUse()
+	management_server_x, _ := d.GetOk("management_server")
+	hcimanagementserver["ip"] = (func(p models.HciIpAddress, v interface{}) []map[string]interface{} {
+		var hciipaddresss []map[string]interface{}
+		var ret models.HciIpAddress
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		hciipaddress := make(map[string]interface{})
+		hciipaddress["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hciipaddress["class_id"] = item.GetClassId()
+		hciipaddress["ipv4_address"] = item.GetIpv4Address()
+		hciipaddress["ipv4_prefix_length"] = item.GetIpv4PrefixLength()
+		hciipaddress["ipv6_address"] = item.GetIpv6Address()
+		hciipaddress["ipv6_prefix_length"] = item.GetIpv6PrefixLength()
+		hciipaddress["object_type"] = item.GetObjectType()
+
+		hciipaddresss = append(hciipaddresss, hciipaddress)
+		return hciipaddresss
+	})(item.GetIp(), management_server_x)
+	hcimanagementserver["is_registered"] = item.GetIsRegistered()
+	hcimanagementserver["object_type"] = item.GetObjectType()
+	hcimanagementserver["type"] = item.GetType()
+
+	hcimanagementservers = append(hcimanagementservers, hcimanagementserver)
+	return hcimanagementservers
+}
+func flattenMapHciNodeRelationship(p models.HciNodeRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hcinoderelationships []map[string]interface{}
+	var ret models.HciNodeRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	hcinoderelationship := make(map[string]interface{})
+	hcinoderelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hcinoderelationship["class_id"] = item.GetClassId()
+	hcinoderelationship["moid"] = item.GetMoid()
+	hcinoderelationship["object_type"] = item.GetObjectType()
+	hcinoderelationship["selector"] = item.GetSelector()
+
+	hcinoderelationships = append(hcinoderelationships, hcinoderelationship)
+	return hcinoderelationships
+}
+func flattenMapHciPulseStatus(p models.HciPulseStatus, d *schema.ResourceData) []map[string]interface{} {
+	var hcipulsestatuss []map[string]interface{}
+	var ret models.HciPulseStatus
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	hcipulsestatus := make(map[string]interface{})
+	hcipulsestatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hcipulsestatus["class_id"] = item.GetClassId()
+	hcipulsestatus["enabled"] = item.GetEnabled()
+	hcipulsestatus["object_type"] = item.GetObjectType()
+	hcipulsestatus["pii_scrubbing_level"] = item.GetPiiScrubbingLevel()
+
+	hcipulsestatuss = append(hcipulsestatuss, hcipulsestatus)
+	return hcipulsestatuss
+}
+func flattenMapHciViolationRelationship(p models.HciViolationRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hciviolationrelationships []map[string]interface{}
+	var ret models.HciViolationRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	hciviolationrelationship := make(map[string]interface{})
+	hciviolationrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hciviolationrelationship["class_id"] = item.GetClassId()
+	hciviolationrelationship["moid"] = item.GetMoid()
+	hciviolationrelationship["object_type"] = item.GetObjectType()
+	hciviolationrelationship["selector"] = item.GetSelector()
+
+	hciviolationrelationships = append(hciviolationrelationships, hciviolationrelationship)
+	return hciviolationrelationships
+}
+func flattenMapHciVirtualGpuConfig(p models.HciVirtualGpuConfig, d *schema.ResourceData) []map[string]interface{} {
+	var hcivirtualgpuconfigs []map[string]interface{}
+	var ret models.HciVirtualGpuConfig
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	hcivirtualgpuconfig := make(map[string]interface{})
+	hcivirtualgpuconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hcivirtualgpuconfig["assignable"] = item.GetAssignable()
+	hcivirtualgpuconfig["class_id"] = item.GetClassId()
+	hcivirtualgpuconfig["device_id"] = item.GetDeviceId()
+	hcivirtualgpuconfig["device_name"] = item.GetDeviceName()
+	hcivirtualgpuconfig["fraction"] = item.GetFraction()
+	hcivirtualgpuconfig["frame_buffer_size_bytes"] = item.GetFrameBufferSizeBytes()
+	hcivirtualgpuconfig["guest_driver_version"] = item.GetGuestDriverVersion()
+	hcivirtualgpuconfig["in_use"] = item.GetInUse()
+	hcivirtualgpuconfig["licenses"] = item.GetLicenses()
+	hcivirtualgpuconfig["max_resolution"] = item.GetMaxResolution()
+	hcivirtualgpuconfig["mode"] = item.GetMode()
+	hcivirtualgpuconfig["numa_node"] = item.GetNumaNode()
+	hcivirtualgpuconfig["number_of_virtual_display_heads"] = item.GetNumberOfVirtualDisplayHeads()
+	hcivirtualgpuconfig["object_type"] = item.GetObjectType()
+	hcivirtualgpuconfig["sbdf"] = item.GetSbdf()
+	hcivirtualgpuconfig["type"] = item.GetType()
+	hcivirtualgpuconfig["vendor_name"] = item.GetVendorName()
+
+	hcivirtualgpuconfigs = append(hcivirtualgpuconfigs, hcivirtualgpuconfig)
+	return hcivirtualgpuconfigs
 }
 func flattenMapHclOperatingSystemRelationship(p models.HclOperatingSystemRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var hcloperatingsystemrelationships []map[string]interface{}
@@ -13923,7 +14579,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 	hyperflexipaddrrange["class_id"] = item.GetClassId()
 	hyperflexipaddrrange["end_addr"] = item.GetEndAddr()
 	hyperflexipaddrrange["gateway"] = item.GetGateway()
-	data_ip_range_x, _ := d.GetOk("data_ip_range")
+	kvm_ip_range_x, _ := d.GetOk("kvm_ip_range")
 	hyperflexipaddrrange["ip_addr_blocks"] = (func(p []models.CommIpV4AddressBlock, v interface{}) []map[string]interface{} {
 		var commipv4addressblocks []map[string]interface{}
 		if len(p) == 0 {
@@ -13939,7 +14595,7 @@ func flattenMapHyperflexIpAddrRange(p models.HyperflexIpAddrRange, d *schema.Res
 			commipv4addressblocks = append(commipv4addressblocks, commipv4addressblock)
 		}
 		return commipv4addressblocks
-	})(item.GetIpAddrBlocks(), data_ip_range_x)
+	})(item.GetIpAddrBlocks(), kvm_ip_range_x)
 	hyperflexipaddrrange["netmask"] = item.GetNetmask()
 	hyperflexipaddrrange["object_type"] = item.GetObjectType()
 	hyperflexipaddrrange["start_addr"] = item.GetStartAddr()
@@ -16320,7 +16976,7 @@ func flattenMapKubernetesBaseVirtualMachineInfraConfig(p models.KubernetesBaseVi
 	kubernetesbasevirtualmachineinfraconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	kubernetesbasevirtualmachineinfraconfig["class_id"] = item.GetClassId()
 	kubernetesbasevirtualmachineinfraconfig["interfaces"] = item.GetInterfaces()
-	infra_config_x, _ := d.GetOk("infra_config")
+	vm_config_x, _ := d.GetOk("vm_config")
 	kubernetesbasevirtualmachineinfraconfig["network_interfaces"] = (func(p []models.KubernetesNetworkInterfaceSpec, v interface{}) []map[string]interface{} {
 		var kubernetesnetworkinterfacespecs []map[string]interface{}
 		if len(p) == 0 {
@@ -16376,7 +17032,7 @@ func flattenMapKubernetesBaseVirtualMachineInfraConfig(p models.KubernetesBaseVi
 			kubernetesnetworkinterfacespecs = append(kubernetesnetworkinterfacespecs, kubernetesnetworkinterfacespec)
 		}
 		return kubernetesnetworkinterfacespecs
-	})(item.GetNetworkInterfaces(), infra_config_x)
+	})(item.GetNetworkInterfaces(), vm_config_x)
 	kubernetesbasevirtualmachineinfraconfig["object_type"] = item.GetObjectType()
 
 	kubernetesbasevirtualmachineinfraconfigs = append(kubernetesbasevirtualmachineinfraconfigs, kubernetesbasevirtualmachineinfraconfig)
@@ -16836,7 +17492,7 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["is_password_set"] = item.GetIsPasswordSet()
 	kubernetesproxyconfig["object_type"] = item.GetObjectType()
 
-	password_x, exists := d.GetOk("http_proxy")
+	password_x, exists := d.GetOk("docker_http_proxy")
 	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]
@@ -19622,6 +20278,56 @@ func flattenMapResourcepoolPoolMemberRelationship(p models.ResourcepoolPoolMembe
 
 	resourcepoolpoolmemberrelationships = append(resourcepoolpoolmemberrelationships, resourcepoolpoolmemberrelationship)
 	return resourcepoolpoolmemberrelationships
+}
+func flattenMapResourcepoolQualificationType(p models.ResourcepoolQualificationType, d *schema.ResourceData) []map[string]interface{} {
+	var resourcepoolqualificationtypes []map[string]interface{}
+	var ret models.ResourcepoolQualificationType
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	resourcepoolqualificationtype := make(map[string]interface{})
+	resourcepoolqualificationtype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	resourcepoolqualificationtype["class_id"] = item.GetClassId()
+	resourcepoolqualificationtype["is_static_addition"] = item.GetIsStaticAddition()
+	resourcepoolqualificationtype["object_type"] = item.GetObjectType()
+	qualification_type_x, _ := d.GetOk("qualification_type")
+	resourcepoolqualificationtype["qualification_policies"] = (func(p []models.MoMoRef, v interface{}) []map[string]interface{} {
+		var momorefs []map[string]interface{}
+		if len(p) == 0 {
+			return nil
+		}
+		for _, item := range p {
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.GetClassId()
+			momoref["moid"] = item.GetMoid()
+			momoref["object_type"] = item.GetObjectType()
+			momoref["selector"] = item.GetSelector()
+			momorefs = append(momorefs, momoref)
+		}
+		return momorefs
+	})(item.GetQualificationPolicies(), qualification_type_x)
+
+	resourcepoolqualificationtypes = append(resourcepoolqualificationtypes, resourcepoolqualificationtype)
+	return resourcepoolqualificationtypes
+}
+func flattenMapResourcepoolResourceEvaluationStatus(p models.ResourcepoolResourceEvaluationStatus, d *schema.ResourceData) []map[string]interface{} {
+	var resourcepoolresourceevaluationstatuss []map[string]interface{}
+	var ret models.ResourcepoolResourceEvaluationStatus
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	resourcepoolresourceevaluationstatus := make(map[string]interface{})
+	resourcepoolresourceevaluationstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	resourcepoolresourceevaluationstatus["class_id"] = item.GetClassId()
+	resourcepoolresourceevaluationstatus["err_msg"] = item.GetErrMsg()
+	resourcepoolresourceevaluationstatus["object_type"] = item.GetObjectType()
+	resourcepoolresourceevaluationstatus["state"] = item.GetState()
+
+	resourcepoolresourceevaluationstatuss = append(resourcepoolresourceevaluationstatuss, resourcepoolresourceevaluationstatus)
+	return resourcepoolresourceevaluationstatuss
 }
 func flattenMapResourcepoolUniverseRelationship(p models.ResourcepoolUniverseRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var resourcepooluniverserelationships []map[string]interface{}
@@ -23674,6 +24380,7 @@ func flattenMapWorkflowValidationInformation(p models.WorkflowValidationInformat
 	workflowvalidationinformation := make(map[string]interface{})
 	workflowvalidationinformation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	workflowvalidationinformation["class_id"] = item.GetClassId()
+	workflowvalidationinformation["engine_state"] = item.GetEngineState()
 	workflowvalidationinformation["object_type"] = item.GetObjectType()
 	workflowvalidationinformation["state"] = item.GetState()
 	validation_information_x, _ := d.GetOk("validation_information")
@@ -23896,7 +24603,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 	x509certificate := make(map[string]interface{})
 	x509certificate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	x509certificate["class_id"] = item.GetClassId()
-	ca_cert_x, _ := d.GetOk("ca_cert")
+	certificate_x, _ := d.GetOk("certificate")
 	x509certificate["issuer"] = (func(p models.PkixDistinguishedName, v interface{}) []map[string]interface{} {
 		var pkixdistinguishednames []map[string]interface{}
 		var ret models.PkixDistinguishedName
@@ -23917,7 +24624,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetIssuer(), ca_cert_x)
+	})(item.GetIssuer(), certificate_x)
 	x509certificate["not_after"] = item.GetNotAfter().String()
 	x509certificate["not_before"] = item.GetNotBefore().String()
 	x509certificate["object_type"] = item.GetObjectType()
@@ -23944,7 +24651,7 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
-	})(item.GetSubject(), ca_cert_x)
+	})(item.GetSubject(), certificate_x)
 
 	x509certificates = append(x509certificates, x509certificate)
 	return x509certificates

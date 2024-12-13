@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) The vendor provided model name for the equipment. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the equipment for unique identification. 
+* `reset_to_default`:(string) Determines the default configuration deployment state for a chassis.* `NA` - Configuration deployment is not applicable for the chassis.* `Pending` - Configuration is not deployed to either A or B side IO card of the chassis.* `Applied` - Configuration is deployed to both A and B side IO cards of the chassis.* `PendingA` - Configuration deployment is pending in the A side IO card of the chassis.* `PendingB` - Configuration deployment is pending in the B side IO card of the chassis. 
 * `serial`:(string) The serial number of the equipment. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `vendor`:(string) The manufacturer of the equipment. 

@@ -222,6 +222,7 @@ This complex property has following sub-properties:
 * `ui_rendering_data`:(JSON as string) This will hold the data needed for workflow to be rendered in the user interface. 
 * `validation_information`:(HashMap) -(ReadOnly) The current validation state and associated information for this workflow. 
 This complex property has following sub-properties:
+  + `engine_state`:(string)(ReadOnly) The state of workflow definition metadata in the workflow engine. The workflow definition must be successfully updated in the engine before workflows can be executed.* `NotUpdated` - The workflow and task definition metadata is not yet updated in the workflow engine.* `Updating` - The workflow and task definition metadata is in the processing of being updated in the workflow engine.* `UpdateFailed` - The workflow and task definition metadata failed to be updated in the workflow engine.* `Updated` - The workflow and task definition metadata was updated successfully in the workflow engine. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `state`:(string)(ReadOnly) The current validation state of this workflow. The possible states are Valid, Invalid, NotValidated (default).* `NotValidated` - The state when workflow definition has not been validated.* `Valid` - The state when workflow definition is valid.* `Invalid` - The state when workflow definition is invalid. 
   + `validation_error`:(Array)

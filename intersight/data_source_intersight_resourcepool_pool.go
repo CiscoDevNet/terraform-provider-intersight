@@ -21,6 +21,11 @@ func getResourcepoolPoolSchema() map[string]*schema.Schema {
 		Type:        schema.TypeString,
 		Optional:    true,
 	},
+		"action": {
+			Description: "The pool is evaluated for resources with associated policies based on action. This action will help users to re-sync the resources for a pool.\n* `None` - The pool will not be considered for evaluation.\n* `ReEvaluate` - The resources in the pool will be re-evaluated against the server pool qualification associated with it.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -220,14 +225,83 @@ func getResourcepoolPoolSchema() map[string]*schema.Schema {
 			},
 		},
 		"pool_type": {
-			Description: "The resource management type in the pool, it can be either static or dynamic.\n* `Static` - The resources in the pool will not be changed until user manually update it.\n* `Dynamic` - The resources in the pool will be updated dynamically based on the condition.",
+			Description: "The resource management type in the pool, it can be either static or dynamic.\n* `Static` - The resources in the pool will not be changed until user manually update it.\n* `Dynamic` - The resources in the pool will be updated dynamically based on the condition.\n* `Hybrid` - The resources in the pool can be added by the user statically or dynamically, based on the matching conditions of the qualification policy. If the pool contains both statically added resources and resources added based on the qualification policy, the pool type can be classified as hybrid.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"qualification_policies": {
+			Description: "An array of relationships to resourcepoolQualificationPolicy resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"reserved": {
 			Description: "Number of IDs that are currently reserved (and not in use).",
 			Type:        schema.TypeInt,
 			Optional:    true,
+		},
+		"resource_evaluation_status": {
+			Description: "The resources are added to the pool based on conditions specified by the qualifiers. If there are any changes in the qualifier conditions or the properties of the resources, the corresponding pool will be evaluated for those changes. Subsequently, resources will be updated in the pool based on matching criteria. The status of these changes is tracked using ResourceEvaluationStatus.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"err_msg": {
+						Description: "The reason for the failure in ResourceEvaluation.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"state": {
+						Description: "The state of the evaluation operation.\n* `ok` - The policy association or validation is successful.\n* `error` - The policy association or validation has failed.\n* `validating` - The policy association or validation is in progress.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"resource_pool_parameters": {
 			Description: "The pool specific parameters.",
@@ -255,7 +329,7 @@ func getResourcepoolPoolSchema() map[string]*schema.Schema {
 			},
 		},
 		"resource_type": {
-			Description: "The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade.\n* `None` - The resource cannot consider for Resource Pool.\n* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.",
+			Description: "The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade.\n* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.\n* `None` - The resource cannot consider for Resource Pool.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -458,6 +532,11 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
+	}
+
+	if v, ok := d.GetOk("action"); ok {
+		x := (v.(string))
+		o.SetAction(x)
 	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
@@ -701,9 +780,80 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 		o.SetPoolType(x)
 	}
 
+	if v, ok := d.GetOk("qualification_policies"); ok {
+		x := make([]models.ResourcepoolQualificationPolicyRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsResourcepoolQualificationPolicyRelationship(o))
+		}
+		o.SetQualificationPolicies(x)
+	}
+
 	if v, ok := d.GetOkExists("reserved"); ok {
 		x := int64(v.(int))
 		o.SetReserved(x)
+	}
+
+	if v, ok := d.GetOk("resource_evaluation_status"); ok {
+		p := make([]models.ResourcepoolResourceEvaluationStatus, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.ResourcepoolResourceEvaluationStatus{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("resourcepool.ResourceEvaluationStatus")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetResourceEvaluationStatus(x)
+		}
 	}
 
 	if v, ok := d.GetOk("resource_pool_parameters"); ok {
@@ -929,6 +1079,7 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
+				temp["action"] = (s.GetAction())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
@@ -952,7 +1103,11 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["pool_type"] = (s.GetPoolType())
+
+				temp["qualification_policies"] = flattenListResourcepoolQualificationPolicyRelationship(s.GetQualificationPolicies(), d)
 				temp["reserved"] = (s.GetReserved())
+
+				temp["resource_evaluation_status"] = flattenMapResourcepoolResourceEvaluationStatus(s.GetResourceEvaluationStatus(), d)
 
 				temp["resource_pool_parameters"] = flattenMapMoBaseComplexType(s.GetResourcePoolParameters(), d)
 				temp["resource_type"] = (s.GetResourceType())

@@ -1,0 +1,33 @@
+---
+subcategory: "functions"
+layout: "intersight"
+page_title: "Intersight: intersight_functions_function"
+description: |-
+        The managed object which has info about custom function to be built and deployed.
+
+---
+
+# Data Source: intersight_functions_function
+The managed object which has info about custom function to be built and deployed.
+## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_functions_function.<custom_name>.results[i].<propertyname>`.
+The following arguments can be used to get data of already created objects in Intersight appliance:
+* `account_moid`:(string) The Account ID for this managed object. 
+* `action`:(string) Action of the function such as build, deploy, undeploy, delete.* `None` - No action is set, this is the default value for action field.* `Build` - Build an instance of a Function.* `Deploy` - Deploy the build Function.* `Undeploy` - Undeploy a Function that was previously successfully deployed.* `Delete` - Delete a Function that has yet to be deployed or that was recently undeployed. 
+* `code`:(string) Custom function code for Function MO. 
+* `create_time`:(string) The time when this managed object was created. 
+* `create_user`:(string) The user identifier who created the Function. 
+* `default_version`:(bool) When true this function version will be used in functions table. The very first function created with a name will be set as the default version. 
+* `description`:(string) Description of the function. 
+* `display_name`:(string) The display name of the function. Display name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). 
+* `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `mod_time`:(string) The time when this managed object was last modified. 
+* `mod_user`:(string) The user identifier who last updated the Function. 
+* `moid`:(string) The unique identifier of this Managed Object instance. 
+* `name`:(string) The name of the function. Name can only contain letters (a-z), numbers (0-9), hyphen (-). 
+* `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `state`:(string) Current representation of the Function MO state.* `Saved` - Function is saved, yet to be built and deployed.* `Building` - Function is currently being built.* `Built` - The Function has been built and can now be deployed.* `Deploying` - The built Function is currently being deployed.* `Deployed` - The Function has been deployed.* `Undeploying` - The deployed function is being Undeployed.* `Deleting` - The Function is being deleted. 
+* `nr_version`:(int) The version of the function to support multiple versions. 
+ 

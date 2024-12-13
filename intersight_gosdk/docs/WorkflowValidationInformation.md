@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.ValidationInformation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ValidationInformation"]
+**EngineState** | Pointer to **string** | The state of workflow definition metadata in the workflow engine. The workflow definition must be successfully updated in the engine before workflows can be executed. * &#x60;NotUpdated&#x60; - The workflow and task definition metadata is not yet updated in the workflow engine. * &#x60;Updating&#x60; - The workflow and task definition metadata is in the processing of being updated in the workflow engine. * &#x60;UpdateFailed&#x60; - The workflow and task definition metadata failed to be updated in the workflow engine. * &#x60;Updated&#x60; - The workflow and task definition metadata was updated successfully in the workflow engine. | [optional] [readonly] [default to "NotUpdated"]
 **State** | Pointer to **string** | The current validation state of this workflow. The possible states are Valid, Invalid, NotValidated (default). * &#x60;NotValidated&#x60; - The state when workflow definition has not been validated. * &#x60;Valid&#x60; - The state when workflow definition is valid. * &#x60;Invalid&#x60; - The state when workflow definition is invalid. | [optional] [readonly] [default to "NotValidated"]
 **ValidationError** | Pointer to [**[]WorkflowValidationError**](WorkflowValidationError.md) |  | [optional] 
 
@@ -67,6 +68,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetEngineState
+
+`func (o *WorkflowValidationInformation) GetEngineState() string`
+
+GetEngineState returns the EngineState field if non-nil, zero value otherwise.
+
+### GetEngineStateOk
+
+`func (o *WorkflowValidationInformation) GetEngineStateOk() (*string, bool)`
+
+GetEngineStateOk returns a tuple with the EngineState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEngineState
+
+`func (o *WorkflowValidationInformation) SetEngineState(v string)`
+
+SetEngineState sets EngineState field to given value.
+
+### HasEngineState
+
+`func (o *WorkflowValidationInformation) HasEngineState() bool`
+
+HasEngineState returns a boolean if a field has been set.
 
 ### GetState
 

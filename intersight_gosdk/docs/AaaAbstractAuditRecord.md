@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "aaa.AuditRecord"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "aaa.AuditRecord"]
 **Event** | Pointer to **string** | The operation that was performed on this Managed Object. The event is a compound string that includes the CRUD operation such as Create, Modify, Delete, and a string representing the Managed Object type. | [optional] [readonly] 
+**HttpOperation** | Pointer to **string** | The REST URL for the operation. | [optional] [readonly] 
 **MoDisplayNames** | Pointer to **interface{}** | The user-friendly names of the changed MO. | [optional] [readonly] 
 **MoType** | Pointer to **string** | The object type of the REST resource that was created, modified or deleted. | [optional] [readonly] 
 **ObjectMoid** | Pointer to **string** | The Moid of the REST resource that was created, modified or deleted. | [optional] [readonly] 
@@ -98,6 +99,31 @@ SetEvent sets Event field to given value.
 `func (o *AaaAbstractAuditRecord) HasEvent() bool`
 
 HasEvent returns a boolean if a field has been set.
+
+### GetHttpOperation
+
+`func (o *AaaAbstractAuditRecord) GetHttpOperation() string`
+
+GetHttpOperation returns the HttpOperation field if non-nil, zero value otherwise.
+
+### GetHttpOperationOk
+
+`func (o *AaaAbstractAuditRecord) GetHttpOperationOk() (*string, bool)`
+
+GetHttpOperationOk returns a tuple with the HttpOperation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHttpOperation
+
+`func (o *AaaAbstractAuditRecord) SetHttpOperation(v string)`
+
+SetHttpOperation sets HttpOperation field to given value.
+
+### HasHttpOperation
+
+`func (o *AaaAbstractAuditRecord) HasHttpOperation() bool`
+
+HasHttpOperation returns a boolean if a field has been set.
 
 ### GetMoDisplayNames
 
