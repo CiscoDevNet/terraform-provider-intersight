@@ -92,7 +92,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `ether_channel_pinning_enabled`:(bool) Enables Ether Channel Pinning to combine multiple physical links between two network switches into a single logical link. Transmit Queue Count should be at least 2 to enable ether channel pinning. 
+* `ether_channel_pinning_enabled`:(bool) Enables EtherChannel Pinning to combine multiple physical links between two network switches into a single logical link. Transmit Queue Count should be at least 2 to enable ether channel pinning. 
 * `geneve_enabled`:(bool) GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints. 
 * `interrupt_scaling`:(bool) Enables Interrupt Scaling on the interface. 
 * `interrupt_settings`:(HashMap) - Interrupt Settings for the virtual ethernet interface. 

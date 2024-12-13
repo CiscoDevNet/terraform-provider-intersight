@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Moid** | Pointer to **string** | The Moid of the referenced REST resource. | [optional] [readonly] 
+**Selector** | Pointer to **string** | An OData $filter expression which describes the REST resource to be referenced. This field may be set instead of &#39;moid&#39; by clients. 1. If &#39;moid&#39; is set this field is ignored. 1. If &#39;selector&#39; is set and &#39;moid&#39; is empty/absent from the request, Intersight determines the Moid of the resource matching the filter expression and populates it in the Cmrf that is part of the object instance being inserted/updated to fulfill the REST request. An error is returned if the filter matches zero or more than one REST resource. An example filter string is: Serial eq &#39;3AA8B7T11&#39;. | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetMoid sets Moid field to given value.
 `func (o *CmrfCmRf) HasMoid() bool`
 
 HasMoid returns a boolean if a field has been set.
+
+### GetSelector
+
+`func (o *CmrfCmRf) GetSelector() string`
+
+GetSelector returns the Selector field if non-nil, zero value otherwise.
+
+### GetSelectorOk
+
+`func (o *CmrfCmRf) GetSelectorOk() (*string, bool)`
+
+GetSelectorOk returns a tuple with the Selector field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSelector
+
+`func (o *CmrfCmRf) SetSelector(v string)`
+
+SetSelector sets Selector field to given value.
+
+### HasSelector
+
+`func (o *CmrfCmRf) HasSelector() bool`
+
+HasSelector returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

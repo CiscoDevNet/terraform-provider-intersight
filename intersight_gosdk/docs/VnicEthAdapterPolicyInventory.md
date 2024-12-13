@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **AdvancedFilter** | Pointer to **bool** | Enables advanced filtering on the interface. | [optional] [readonly] [default to false]
 **ArfsSettings** | Pointer to [**NullableVnicArfsSettings**](VnicArfsSettings.md) |  | [optional] 
 **CompletionQueueSettings** | Pointer to [**NullableVnicCompletionQueueSettings**](VnicCompletionQueueSettings.md) |  | [optional] 
-**EtherChannelPinningEnabled** | Pointer to **bool** | Enables Ether Channel Pinning to combine multiple physical links between two network switches into a single logical link. Transmit Queue Count should be at least 2 to enable ether channel pinning. | [optional] [readonly] [default to false]
+**EtherChannelPinningEnabled** | Pointer to **bool** | Enables EtherChannel Pinning to combine multiple physical links between two network switches into a single logical link. Transmit Queue Count should be at least 2 to enable ether channel pinning. | [optional] [readonly] [default to false]
 **GeneveEnabled** | Pointer to **bool** | GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints. | [optional] [readonly] [default to false]
 **InterruptScaling** | Pointer to **bool** | Enables Interrupt Scaling on the interface. | [optional] [readonly] [default to false]
 **InterruptSettings** | Pointer to [**NullableVnicEthInterruptSettings**](VnicEthInterruptSettings.md) |  | [optional] 

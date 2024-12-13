@@ -12,6 +12,7 @@ Pool represents a collection of resource. The resource can be any MO which has P
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `action`:(string) The pool is evaluated for resources with associated policies based on action. This action will help users to re-sync the resources for a pool.* `None` - The pool will not be considered for evaluation.* `ReEvaluate` - The resources in the pool will be re-evaluated against the server pool qualification associated with it. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -42,12 +43,22 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `pool_type`:(string) The resource management type in the pool, it can be either static or dynamic.* `Static` - The resources in the pool will not be changed until user manually update it.* `Dynamic` - The resources in the pool will be updated dynamically based on the condition. 
+* `pool_type`:(string) The resource management type in the pool, it can be either static or dynamic.* `Static` - The resources in the pool will not be changed until user manually update it.* `Dynamic` - The resources in the pool will be updated dynamically based on the condition.* `Hybrid` - The resources in the pool can be added by the user statically or dynamically, based on the matching conditions of the qualification policy. If the pool contains both statically added resources and resources added based on the qualification policy, the pool type can be classified as hybrid. 
+* `qualification_policies`:(Array) An array of relationships to resourcepoolQualificationPolicy resources. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `reserved`:(int)(ReadOnly) Number of IDs that are currently reserved (and not in use). 
+* `resource_evaluation_status`:(HashMap) -(ReadOnly) The resources are added to the pool based on conditions specified by the qualifiers. If there are any changes in the qualifier conditions or the properties of the resources, the corresponding pool will be evaluated for those changes. Subsequently, resources will be updated in the pool based on matching criteria. The status of these changes is tracked using ResourceEvaluationStatus. 
+This complex property has following sub-properties:
+  + `err_msg`:(string)(ReadOnly) The reason for the failure in ResourceEvaluation. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `state`:(string)(ReadOnly) The state of the evaluation operation.* `ok` - The policy association or validation is successful.* `error` - The policy association or validation has failed.* `validating` - The policy association or validation is in progress. 
 * `resource_pool_parameters`:(HashMap) - The pool specific parameters. 
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-* `resource_type`:(string) The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade.* `None` - The resource cannot consider for Resource Pool.* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade. 
+* `resource_type`:(string) The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade.* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.* `None` - The resource cannot consider for Resource Pool. 
 * `selectors`:(Array)
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 

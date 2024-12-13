@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024101709
+API version: 1.0.11-2024112619
 Contact: intersight@cisco.com
 */
 
@@ -28,15 +28,20 @@ type ResourcepoolPool struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// The resource management type in the pool, it can be either static or dynamic. * `Static` - The resources in the pool will not be changed until user manually update it. * `Dynamic` - The resources in the pool will be updated dynamically based on the condition.
-	PoolType *string `json:"PoolType,omitempty"`
+	// The pool is evaluated for resources with associated policies based on action. This action will help users to re-sync the resources for a pool. * `None` - The pool will not be considered for evaluation. * `ReEvaluate` - The resources in the pool will be re-evaluated against the server pool qualification associated with it.
+	Action *string `json:"Action,omitempty"`
+	// The resource management type in the pool, it can be either static or dynamic. * `Static` - The resources in the pool will not be changed until user manually update it. * `Dynamic` - The resources in the pool will be updated dynamically based on the condition. * `Hybrid` - The resources in the pool can be added by the user statically or dynamically, based on the matching conditions of the qualification policy. If the pool contains both statically added resources and resources added based on the qualification policy, the pool type can be classified as hybrid.
+	PoolType                 *string                                      `json:"PoolType,omitempty"`
+	ResourceEvaluationStatus NullableResourcepoolResourceEvaluationStatus `json:"ResourceEvaluationStatus,omitempty"`
 	// The resource pool can hold different type of resources, each resources can have some specific parameters and functionality, those details are captured as part of this.
 	ResourcePoolParameters NullableMoBaseComplexType `json:"ResourcePoolParameters,omitempty"`
-	// The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade. * `None` - The resource cannot consider for Resource Pool. * `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.
-	ResourceType         *string                                      `json:"ResourceType,omitempty"`
-	Selectors            []ResourceSelector                           `json:"Selectors,omitempty"`
-	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	AdditionalProperties map[string]interface{}
+	// The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade. * `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade. * `None` - The resource cannot consider for Resource Pool.
+	ResourceType *string                                      `json:"ResourceType,omitempty"`
+	Selectors    []ResourceSelector                           `json:"Selectors,omitempty"`
+	Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	// An array of relationships to resourcepoolQualificationPolicy resources.
+	QualificationPolicies []ResourcepoolQualificationPolicyRelationship `json:"QualificationPolicies,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _ResourcepoolPool ResourcepoolPool
@@ -51,9 +56,11 @@ func NewResourcepoolPool(classId string, objectType string) *ResourcepoolPool {
 	this.ObjectType = objectType
 	var assignmentOrder string = "sequential"
 	this.AssignmentOrder = &assignmentOrder
+	var action string = "None"
+	this.Action = &action
 	var poolType string = "Static"
 	this.PoolType = &poolType
-	var resourceType string = "None"
+	var resourceType string = "Server"
 	this.ResourceType = &resourceType
 	return &this
 }
@@ -67,9 +74,11 @@ func NewResourcepoolPoolWithDefaults() *ResourcepoolPool {
 	this.ClassId = classId
 	var objectType string = "resourcepool.Pool"
 	this.ObjectType = objectType
+	var action string = "None"
+	this.Action = &action
 	var poolType string = "Static"
 	this.PoolType = &poolType
-	var resourceType string = "None"
+	var resourceType string = "Server"
 	this.ResourceType = &resourceType
 	return &this
 }
@@ -132,6 +141,38 @@ func (o *ResourcepoolPool) GetDefaultObjectType() interface{} {
 	return "resourcepool.Pool"
 }
 
+// GetAction returns the Action field value if set, zero value otherwise.
+func (o *ResourcepoolPool) GetAction() string {
+	if o == nil || IsNil(o.Action) {
+		var ret string
+		return ret
+	}
+	return *o.Action
+}
+
+// GetActionOk returns a tuple with the Action field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourcepoolPool) GetActionOk() (*string, bool) {
+	if o == nil || IsNil(o.Action) {
+		return nil, false
+	}
+	return o.Action, true
+}
+
+// HasAction returns a boolean if a field has been set.
+func (o *ResourcepoolPool) HasAction() bool {
+	if o != nil && !IsNil(o.Action) {
+		return true
+	}
+
+	return false
+}
+
+// SetAction gets a reference to the given string and assigns it to the Action field.
+func (o *ResourcepoolPool) SetAction(v string) {
+	o.Action = &v
+}
+
 // GetPoolType returns the PoolType field value if set, zero value otherwise.
 func (o *ResourcepoolPool) GetPoolType() string {
 	if o == nil || IsNil(o.PoolType) {
@@ -162,6 +203,49 @@ func (o *ResourcepoolPool) HasPoolType() bool {
 // SetPoolType gets a reference to the given string and assigns it to the PoolType field.
 func (o *ResourcepoolPool) SetPoolType(v string) {
 	o.PoolType = &v
+}
+
+// GetResourceEvaluationStatus returns the ResourceEvaluationStatus field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ResourcepoolPool) GetResourceEvaluationStatus() ResourcepoolResourceEvaluationStatus {
+	if o == nil || IsNil(o.ResourceEvaluationStatus.Get()) {
+		var ret ResourcepoolResourceEvaluationStatus
+		return ret
+	}
+	return *o.ResourceEvaluationStatus.Get()
+}
+
+// GetResourceEvaluationStatusOk returns a tuple with the ResourceEvaluationStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResourcepoolPool) GetResourceEvaluationStatusOk() (*ResourcepoolResourceEvaluationStatus, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ResourceEvaluationStatus.Get(), o.ResourceEvaluationStatus.IsSet()
+}
+
+// HasResourceEvaluationStatus returns a boolean if a field has been set.
+func (o *ResourcepoolPool) HasResourceEvaluationStatus() bool {
+	if o != nil && o.ResourceEvaluationStatus.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceEvaluationStatus gets a reference to the given NullableResourcepoolResourceEvaluationStatus and assigns it to the ResourceEvaluationStatus field.
+func (o *ResourcepoolPool) SetResourceEvaluationStatus(v ResourcepoolResourceEvaluationStatus) {
+	o.ResourceEvaluationStatus.Set(&v)
+}
+
+// SetResourceEvaluationStatusNil sets the value for ResourceEvaluationStatus to be an explicit nil
+func (o *ResourcepoolPool) SetResourceEvaluationStatusNil() {
+	o.ResourceEvaluationStatus.Set(nil)
+}
+
+// UnsetResourceEvaluationStatus ensures that no value is present for ResourceEvaluationStatus, not even an explicit nil
+func (o *ResourcepoolPool) UnsetResourceEvaluationStatus() {
+	o.ResourceEvaluationStatus.Unset()
 }
 
 // GetResourcePoolParameters returns the ResourcePoolParameters field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -315,6 +399,39 @@ func (o *ResourcepoolPool) UnsetOrganization() {
 	o.Organization.Unset()
 }
 
+// GetQualificationPolicies returns the QualificationPolicies field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ResourcepoolPool) GetQualificationPolicies() []ResourcepoolQualificationPolicyRelationship {
+	if o == nil {
+		var ret []ResourcepoolQualificationPolicyRelationship
+		return ret
+	}
+	return o.QualificationPolicies
+}
+
+// GetQualificationPoliciesOk returns a tuple with the QualificationPolicies field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResourcepoolPool) GetQualificationPoliciesOk() ([]ResourcepoolQualificationPolicyRelationship, bool) {
+	if o == nil || IsNil(o.QualificationPolicies) {
+		return nil, false
+	}
+	return o.QualificationPolicies, true
+}
+
+// HasQualificationPolicies returns a boolean if a field has been set.
+func (o *ResourcepoolPool) HasQualificationPolicies() bool {
+	if o != nil && !IsNil(o.QualificationPolicies) {
+		return true
+	}
+
+	return false
+}
+
+// SetQualificationPolicies gets a reference to the given []ResourcepoolQualificationPolicyRelationship and assigns it to the QualificationPolicies field.
+func (o *ResourcepoolPool) SetQualificationPolicies(v []ResourcepoolQualificationPolicyRelationship) {
+	o.QualificationPolicies = v
+}
+
 func (o ResourcepoolPool) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -341,8 +458,14 @@ func (o ResourcepoolPool) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.Action) {
+		toSerialize["Action"] = o.Action
+	}
 	if !IsNil(o.PoolType) {
 		toSerialize["PoolType"] = o.PoolType
+	}
+	if o.ResourceEvaluationStatus.IsSet() {
+		toSerialize["ResourceEvaluationStatus"] = o.ResourceEvaluationStatus.Get()
 	}
 	if o.ResourcePoolParameters.IsSet() {
 		toSerialize["ResourcePoolParameters"] = o.ResourcePoolParameters.Get()
@@ -355,6 +478,9 @@ func (o ResourcepoolPool) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Organization.IsSet() {
 		toSerialize["Organization"] = o.Organization.Get()
+	}
+	if o.QualificationPolicies != nil {
+		toSerialize["QualificationPolicies"] = o.QualificationPolicies
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -411,14 +537,19 @@ func (o *ResourcepoolPool) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// The resource management type in the pool, it can be either static or dynamic. * `Static` - The resources in the pool will not be changed until user manually update it. * `Dynamic` - The resources in the pool will be updated dynamically based on the condition.
-		PoolType *string `json:"PoolType,omitempty"`
+		// The pool is evaluated for resources with associated policies based on action. This action will help users to re-sync the resources for a pool. * `None` - The pool will not be considered for evaluation. * `ReEvaluate` - The resources in the pool will be re-evaluated against the server pool qualification associated with it.
+		Action *string `json:"Action,omitempty"`
+		// The resource management type in the pool, it can be either static or dynamic. * `Static` - The resources in the pool will not be changed until user manually update it. * `Dynamic` - The resources in the pool will be updated dynamically based on the condition. * `Hybrid` - The resources in the pool can be added by the user statically or dynamically, based on the matching conditions of the qualification policy. If the pool contains both statically added resources and resources added based on the qualification policy, the pool type can be classified as hybrid.
+		PoolType                 *string                                      `json:"PoolType,omitempty"`
+		ResourceEvaluationStatus NullableResourcepoolResourceEvaluationStatus `json:"ResourceEvaluationStatus,omitempty"`
 		// The resource pool can hold different type of resources, each resources can have some specific parameters and functionality, those details are captured as part of this.
 		ResourcePoolParameters NullableMoBaseComplexType `json:"ResourcePoolParameters,omitempty"`
-		// The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade. * `None` - The resource cannot consider for Resource Pool. * `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.
+		// The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade. * `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade. * `None` - The resource cannot consider for Resource Pool.
 		ResourceType *string                                      `json:"ResourceType,omitempty"`
 		Selectors    []ResourceSelector                           `json:"Selectors,omitempty"`
 		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		// An array of relationships to resourcepoolQualificationPolicy resources.
+		QualificationPolicies []ResourcepoolQualificationPolicyRelationship `json:"QualificationPolicies,omitempty"`
 	}
 
 	varResourcepoolPoolWithoutEmbeddedStruct := ResourcepoolPoolWithoutEmbeddedStruct{}
@@ -428,11 +559,14 @@ func (o *ResourcepoolPool) UnmarshalJSON(data []byte) (err error) {
 		varResourcepoolPool := _ResourcepoolPool{}
 		varResourcepoolPool.ClassId = varResourcepoolPoolWithoutEmbeddedStruct.ClassId
 		varResourcepoolPool.ObjectType = varResourcepoolPoolWithoutEmbeddedStruct.ObjectType
+		varResourcepoolPool.Action = varResourcepoolPoolWithoutEmbeddedStruct.Action
 		varResourcepoolPool.PoolType = varResourcepoolPoolWithoutEmbeddedStruct.PoolType
+		varResourcepoolPool.ResourceEvaluationStatus = varResourcepoolPoolWithoutEmbeddedStruct.ResourceEvaluationStatus
 		varResourcepoolPool.ResourcePoolParameters = varResourcepoolPoolWithoutEmbeddedStruct.ResourcePoolParameters
 		varResourcepoolPool.ResourceType = varResourcepoolPoolWithoutEmbeddedStruct.ResourceType
 		varResourcepoolPool.Selectors = varResourcepoolPoolWithoutEmbeddedStruct.Selectors
 		varResourcepoolPool.Organization = varResourcepoolPoolWithoutEmbeddedStruct.Organization
+		varResourcepoolPool.QualificationPolicies = varResourcepoolPoolWithoutEmbeddedStruct.QualificationPolicies
 		*o = ResourcepoolPool(varResourcepoolPool)
 	} else {
 		return err
@@ -452,11 +586,14 @@ func (o *ResourcepoolPool) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Action")
 		delete(additionalProperties, "PoolType")
+		delete(additionalProperties, "ResourceEvaluationStatus")
 		delete(additionalProperties, "ResourcePoolParameters")
 		delete(additionalProperties, "ResourceType")
 		delete(additionalProperties, "Selectors")
 		delete(additionalProperties, "Organization")
+		delete(additionalProperties, "QualificationPolicies")
 
 		// remove fields from embedded structs
 		reflectPoolAbstractPool := reflect.ValueOf(o.PoolAbstractPool)
