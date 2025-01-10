@@ -6,21 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "functions.Function"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "functions.Function"]
-**Action** | Pointer to **string** | Action of the function such as build, deploy, undeploy, delete. * &#x60;None&#x60; - No action is set, this is the default value for action field. * &#x60;Build&#x60; - Build an instance of a Function. * &#x60;Deploy&#x60; - Deploy the build Function. * &#x60;Undeploy&#x60; - Undeploy a Function that was previously successfully deployed. * &#x60;Delete&#x60; - Delete a Function that has yet to be deployed or that was recently undeployed. | [optional] [default to "None"]
-**Code** | Pointer to **string** | Custom function code for Function MO. | [optional] 
+**Action** | Pointer to **string** | Action of the function such as build, deploy, undeploy. * &#x60;None&#x60; - No action is set, this is the default value for action field. * &#x60;Publish&#x60; - Publish a Function that was saved or built. | [optional] [default to "None"]
+**Code** | Pointer to **string** | Custom function code to create the first function version, mandatory in function creation payload. | [optional] 
 **CreateUser** | Pointer to **string** | The user identifier who created the Function. | [optional] [readonly] 
-**DefaultVersion** | Pointer to **bool** | When true this function version will be used in functions table. The very first function created with a name will be set as the default version. | [optional] [readonly] 
 **Description** | Pointer to **string** | Description of the function. | [optional] 
 **DisplayName** | Pointer to **string** | The display name of the function. Display name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). | [optional] 
-**LastAction** | Pointer to [**NullableFunctionsFunctionLastAction**](FunctionsFunctionLastAction.md) |  | [optional] 
 **ModUser** | Pointer to **string** | The user identifier who last updated the Function. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the function. Name can only contain letters (a-z), numbers (0-9), hyphen (-). | [optional] 
-**State** | Pointer to **string** | Current representation of the Function MO state. * &#x60;Saved&#x60; - Function is saved, yet to be built and deployed. * &#x60;Building&#x60; - Function is currently being built. * &#x60;Built&#x60; - The Function has been built and can now be deployed. * &#x60;Deploying&#x60; - The built Function is currently being deployed. * &#x60;Deployed&#x60; - The Function has been deployed. * &#x60;Undeploying&#x60; - The deployed function is being Undeployed. * &#x60;Deleting&#x60; - The Function is being deleted. | [optional] [readonly] [default to "Saved"]
-**Version** | Pointer to **int64** | The version of the function to support multiple versions. | [optional] [readonly] 
-**ActionExecution** | Pointer to [**NullableWorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
+**RuntimeMoid** | Pointer to **string** | Moid of runtime which is used to create the first function version, mandatory in function creation payload. | [optional] 
+**Version** | Pointer to **int64** | The target version of the function, which is needed by action. | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
-**Runtime** | Pointer to [**NullableFunctionsRuntimeRelationship**](FunctionsRuntimeRelationship.md) |  | [optional] 
-**TaskDefinition** | Pointer to [**NullableWorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -156,31 +151,6 @@ SetCreateUser sets CreateUser field to given value.
 
 HasCreateUser returns a boolean if a field has been set.
 
-### GetDefaultVersion
-
-`func (o *FunctionsFunction) GetDefaultVersion() bool`
-
-GetDefaultVersion returns the DefaultVersion field if non-nil, zero value otherwise.
-
-### GetDefaultVersionOk
-
-`func (o *FunctionsFunction) GetDefaultVersionOk() (*bool, bool)`
-
-GetDefaultVersionOk returns a tuple with the DefaultVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDefaultVersion
-
-`func (o *FunctionsFunction) SetDefaultVersion(v bool)`
-
-SetDefaultVersion sets DefaultVersion field to given value.
-
-### HasDefaultVersion
-
-`func (o *FunctionsFunction) HasDefaultVersion() bool`
-
-HasDefaultVersion returns a boolean if a field has been set.
-
 ### GetDescription
 
 `func (o *FunctionsFunction) GetDescription() string`
@@ -231,41 +201,6 @@ SetDisplayName sets DisplayName field to given value.
 
 HasDisplayName returns a boolean if a field has been set.
 
-### GetLastAction
-
-`func (o *FunctionsFunction) GetLastAction() FunctionsFunctionLastAction`
-
-GetLastAction returns the LastAction field if non-nil, zero value otherwise.
-
-### GetLastActionOk
-
-`func (o *FunctionsFunction) GetLastActionOk() (*FunctionsFunctionLastAction, bool)`
-
-GetLastActionOk returns a tuple with the LastAction field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLastAction
-
-`func (o *FunctionsFunction) SetLastAction(v FunctionsFunctionLastAction)`
-
-SetLastAction sets LastAction field to given value.
-
-### HasLastAction
-
-`func (o *FunctionsFunction) HasLastAction() bool`
-
-HasLastAction returns a boolean if a field has been set.
-
-### SetLastActionNil
-
-`func (o *FunctionsFunction) SetLastActionNil(b bool)`
-
- SetLastActionNil sets the value for LastAction to be an explicit nil
-
-### UnsetLastAction
-`func (o *FunctionsFunction) UnsetLastAction()`
-
-UnsetLastAction ensures that no value is present for LastAction, not even an explicit nil
 ### GetModUser
 
 `func (o *FunctionsFunction) GetModUser() string`
@@ -316,30 +251,30 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
-### GetState
+### GetRuntimeMoid
 
-`func (o *FunctionsFunction) GetState() string`
+`func (o *FunctionsFunction) GetRuntimeMoid() string`
 
-GetState returns the State field if non-nil, zero value otherwise.
+GetRuntimeMoid returns the RuntimeMoid field if non-nil, zero value otherwise.
 
-### GetStateOk
+### GetRuntimeMoidOk
 
-`func (o *FunctionsFunction) GetStateOk() (*string, bool)`
+`func (o *FunctionsFunction) GetRuntimeMoidOk() (*string, bool)`
 
-GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+GetRuntimeMoidOk returns a tuple with the RuntimeMoid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetState
+### SetRuntimeMoid
 
-`func (o *FunctionsFunction) SetState(v string)`
+`func (o *FunctionsFunction) SetRuntimeMoid(v string)`
 
-SetState sets State field to given value.
+SetRuntimeMoid sets RuntimeMoid field to given value.
 
-### HasState
+### HasRuntimeMoid
 
-`func (o *FunctionsFunction) HasState() bool`
+`func (o *FunctionsFunction) HasRuntimeMoid() bool`
 
-HasState returns a boolean if a field has been set.
+HasRuntimeMoid returns a boolean if a field has been set.
 
 ### GetVersion
 
@@ -366,41 +301,6 @@ SetVersion sets Version field to given value.
 
 HasVersion returns a boolean if a field has been set.
 
-### GetActionExecution
-
-`func (o *FunctionsFunction) GetActionExecution() WorkflowWorkflowInfoRelationship`
-
-GetActionExecution returns the ActionExecution field if non-nil, zero value otherwise.
-
-### GetActionExecutionOk
-
-`func (o *FunctionsFunction) GetActionExecutionOk() (*WorkflowWorkflowInfoRelationship, bool)`
-
-GetActionExecutionOk returns a tuple with the ActionExecution field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetActionExecution
-
-`func (o *FunctionsFunction) SetActionExecution(v WorkflowWorkflowInfoRelationship)`
-
-SetActionExecution sets ActionExecution field to given value.
-
-### HasActionExecution
-
-`func (o *FunctionsFunction) HasActionExecution() bool`
-
-HasActionExecution returns a boolean if a field has been set.
-
-### SetActionExecutionNil
-
-`func (o *FunctionsFunction) SetActionExecutionNil(b bool)`
-
- SetActionExecutionNil sets the value for ActionExecution to be an explicit nil
-
-### UnsetActionExecution
-`func (o *FunctionsFunction) UnsetActionExecution()`
-
-UnsetActionExecution ensures that no value is present for ActionExecution, not even an explicit nil
 ### GetOrganization
 
 `func (o *FunctionsFunction) GetOrganization() OrganizationOrganizationRelationship`
@@ -436,76 +336,6 @@ HasOrganization returns a boolean if a field has been set.
 `func (o *FunctionsFunction) UnsetOrganization()`
 
 UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
-### GetRuntime
-
-`func (o *FunctionsFunction) GetRuntime() FunctionsRuntimeRelationship`
-
-GetRuntime returns the Runtime field if non-nil, zero value otherwise.
-
-### GetRuntimeOk
-
-`func (o *FunctionsFunction) GetRuntimeOk() (*FunctionsRuntimeRelationship, bool)`
-
-GetRuntimeOk returns a tuple with the Runtime field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRuntime
-
-`func (o *FunctionsFunction) SetRuntime(v FunctionsRuntimeRelationship)`
-
-SetRuntime sets Runtime field to given value.
-
-### HasRuntime
-
-`func (o *FunctionsFunction) HasRuntime() bool`
-
-HasRuntime returns a boolean if a field has been set.
-
-### SetRuntimeNil
-
-`func (o *FunctionsFunction) SetRuntimeNil(b bool)`
-
- SetRuntimeNil sets the value for Runtime to be an explicit nil
-
-### UnsetRuntime
-`func (o *FunctionsFunction) UnsetRuntime()`
-
-UnsetRuntime ensures that no value is present for Runtime, not even an explicit nil
-### GetTaskDefinition
-
-`func (o *FunctionsFunction) GetTaskDefinition() WorkflowTaskDefinitionRelationship`
-
-GetTaskDefinition returns the TaskDefinition field if non-nil, zero value otherwise.
-
-### GetTaskDefinitionOk
-
-`func (o *FunctionsFunction) GetTaskDefinitionOk() (*WorkflowTaskDefinitionRelationship, bool)`
-
-GetTaskDefinitionOk returns a tuple with the TaskDefinition field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTaskDefinition
-
-`func (o *FunctionsFunction) SetTaskDefinition(v WorkflowTaskDefinitionRelationship)`
-
-SetTaskDefinition sets TaskDefinition field to given value.
-
-### HasTaskDefinition
-
-`func (o *FunctionsFunction) HasTaskDefinition() bool`
-
-HasTaskDefinition returns a boolean if a field has been set.
-
-### SetTaskDefinitionNil
-
-`func (o *FunctionsFunction) SetTaskDefinitionNil(b bool)`
-
- SetTaskDefinitionNil sets the value for TaskDefinition to be an explicit nil
-
-### UnsetTaskDefinition
-`func (o *FunctionsFunction) UnsetTaskDefinition()`
-
-UnsetTaskDefinition ensures that no value is present for TaskDefinition, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

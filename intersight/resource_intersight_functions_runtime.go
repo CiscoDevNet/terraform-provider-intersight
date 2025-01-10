@@ -140,6 +140,11 @@ func resourceFunctionsRuntime() *schema.Resource {
 				Optional:     true,
 				ForceNew:     true,
 			},
+			"code_template": {
+				Description: "Template to guide on how to compose code.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"components": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -685,6 +690,11 @@ func resourceFunctionsRuntimeCreate(c context.Context, d *schema.ResourceData, m
 		o.SetCodeFileName(x)
 	}
 
+	if v, ok := d.GetOk("code_template"); ok {
+		x := (v.(string))
+		o.SetCodeTemplate(x)
+	}
+
 	if v, ok := d.GetOk("components"); ok {
 		x := make([]models.FunctionsRuntimeComponent, 0)
 		s := v.([]interface{})
@@ -874,6 +884,10 @@ func resourceFunctionsRuntimeRead(c context.Context, d *schema.ResourceData, met
 		return diag.Errorf("error occurred while setting property CodeFileName in FunctionsRuntime object: %s", err.Error())
 	}
 
+	if err := d.Set("code_template", (s.GetCodeTemplate())); err != nil {
+		return diag.Errorf("error occurred while setting property CodeTemplate in FunctionsRuntime object: %s", err.Error())
+	}
+
 	if err := d.Set("components", flattenListFunctionsRuntimeComponent(s.GetComponents(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Components in FunctionsRuntime object: %s", err.Error())
 	}
@@ -1051,6 +1065,12 @@ func resourceFunctionsRuntimeUpdate(c context.Context, d *schema.ResourceData, m
 		v := d.Get("code_file_name")
 		x := (v.(string))
 		o.SetCodeFileName(x)
+	}
+
+	if d.HasChange("code_template") {
+		v := d.Get("code_template")
+		x := (v.(string))
+		o.SetCodeTemplate(x)
 	}
 
 	if d.HasChange("components") {

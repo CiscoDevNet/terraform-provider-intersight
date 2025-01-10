@@ -1648,7 +1648,11 @@ docs/FunctionsApi.md
 docs/FunctionsFunction.md
 docs/FunctionsFunctionLastAction.md
 docs/FunctionsFunctionList.md
+docs/FunctionsFunctionRelationship.md
 docs/FunctionsFunctionResponse.md
+docs/FunctionsFunctionVersion.md
+docs/FunctionsFunctionVersionList.md
+docs/FunctionsFunctionVersionResponse.md
 docs/FunctionsRuntime.md
 docs/FunctionsRuntimeComponent.md
 docs/FunctionsRuntimeList.md
@@ -6741,7 +6745,11 @@ model_forecast_model.go
 model_functions_function.go
 model_functions_function_last_action.go
 model_functions_function_list.go
+model_functions_function_relationship.go
 model_functions_function_response.go
+model_functions_function_version.go
+model_functions_function_version_list.go
+model_functions_function_version_response.go
 model_functions_runtime.go
 model_functions_runtime_component.go
 model_functions_runtime_list.go

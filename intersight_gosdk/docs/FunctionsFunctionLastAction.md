@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "functions.FunctionLastAction"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "functions.FunctionLastAction"]
-**Action** | Pointer to **string** | Name of the last action performed. * &#x60;None&#x60; - No action is set, this is the default value for action field. * &#x60;Build&#x60; - Build an instance of a Function. * &#x60;Deploy&#x60; - Deploy the build Function. * &#x60;Undeploy&#x60; - Undeploy a Function that was previously successfully deployed. * &#x60;Delete&#x60; - Delete a Function that has yet to be deployed or that was recently undeployed. | [optional] [readonly] [default to "None"]
+**Action** | Pointer to **string** | Name of the last action performed. | [optional] [readonly] 
 **FailureReason** | Pointer to **string** | Failure reason for the last action performed. | [optional] [readonly] 
 
 ## Methods

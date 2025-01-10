@@ -6,9 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateStorageDriveGroup**](StorageApi.md#CreateStorageDriveGroup) | **Post** /api/v1/storage/DriveGroups | Create a &#39;storage.DriveGroup&#39; resource.
 [**CreateStorageDriveSecurityPolicy**](StorageApi.md#CreateStorageDriveSecurityPolicy) | **Post** /api/v1/storage/DriveSecurityPolicies | Create a &#39;storage.DriveSecurityPolicy&#39; resource.
+[**CreateStorageNetAppVolumeSnapshot**](StorageApi.md#CreateStorageNetAppVolumeSnapshot) | **Post** /api/v1/storage/NetAppVolumeSnapshots | Create a &#39;storage.NetAppVolumeSnapshot&#39; resource.
 [**CreateStorageStoragePolicy**](StorageApi.md#CreateStorageStoragePolicy) | **Post** /api/v1/storage/StoragePolicies | Create a &#39;storage.StoragePolicy&#39; resource.
 [**DeleteStorageDriveGroup**](StorageApi.md#DeleteStorageDriveGroup) | **Delete** /api/v1/storage/DriveGroups/{Moid} | Delete a &#39;storage.DriveGroup&#39; resource.
 [**DeleteStorageDriveSecurityPolicy**](StorageApi.md#DeleteStorageDriveSecurityPolicy) | **Delete** /api/v1/storage/DriveSecurityPolicies/{Moid} | Delete a &#39;storage.DriveSecurityPolicy&#39; resource.
+[**DeleteStorageNetAppVolumeSnapshot**](StorageApi.md#DeleteStorageNetAppVolumeSnapshot) | **Delete** /api/v1/storage/NetAppVolumeSnapshots/{Moid} | Delete a &#39;storage.NetAppVolumeSnapshot&#39; resource.
 [**DeleteStorageStoragePolicy**](StorageApi.md#DeleteStorageStoragePolicy) | **Delete** /api/v1/storage/StoragePolicies/{Moid} | Delete a &#39;storage.StoragePolicy&#39; resource.
 [**GetStorageBatteryBackupUnitByMoid**](StorageApi.md#GetStorageBatteryBackupUnitByMoid) | **Get** /api/v1/storage/BatteryBackupUnits/{Moid} | Read a &#39;storage.BatteryBackupUnit&#39; resource.
 [**GetStorageBatteryBackupUnitList**](StorageApi.md#GetStorageBatteryBackupUnitList) | **Get** /api/v1/storage/BatteryBackupUnits | Read a &#39;storage.BatteryBackupUnit&#39; resource.
@@ -261,6 +263,7 @@ Method | HTTP request | Description
 [**PatchStorageFlexUtilVirtualDrive**](StorageApi.md#PatchStorageFlexUtilVirtualDrive) | **Patch** /api/v1/storage/FlexUtilVirtualDrives/{Moid} | Update a &#39;storage.FlexUtilVirtualDrive&#39; resource.
 [**PatchStorageHitachiArray**](StorageApi.md#PatchStorageHitachiArray) | **Patch** /api/v1/storage/HitachiArrays/{Moid} | Update a &#39;storage.HitachiArray&#39; resource.
 [**PatchStorageNetAppCluster**](StorageApi.md#PatchStorageNetAppCluster) | **Patch** /api/v1/storage/NetAppClusters/{Moid} | Update a &#39;storage.NetAppCluster&#39; resource.
+[**PatchStorageNetAppVolumeSnapshot**](StorageApi.md#PatchStorageNetAppVolumeSnapshot) | **Patch** /api/v1/storage/NetAppVolumeSnapshots/{Moid} | Update a &#39;storage.NetAppVolumeSnapshot&#39; resource.
 [**PatchStoragePhysicalDisk**](StorageApi.md#PatchStoragePhysicalDisk) | **Patch** /api/v1/storage/PhysicalDisks/{Moid} | Update a &#39;storage.PhysicalDisk&#39; resource.
 [**PatchStoragePhysicalDiskExtension**](StorageApi.md#PatchStoragePhysicalDiskExtension) | **Patch** /api/v1/storage/PhysicalDiskExtensions/{Moid} | Update a &#39;storage.PhysicalDiskExtension&#39; resource.
 [**PatchStoragePhysicalDiskUsage**](StorageApi.md#PatchStoragePhysicalDiskUsage) | **Patch** /api/v1/storage/PhysicalDiskUsages/{Moid} | Update a &#39;storage.PhysicalDiskUsage&#39; resource.
@@ -290,6 +293,7 @@ Method | HTTP request | Description
 [**UpdateStorageFlexUtilVirtualDrive**](StorageApi.md#UpdateStorageFlexUtilVirtualDrive) | **Post** /api/v1/storage/FlexUtilVirtualDrives/{Moid} | Update a &#39;storage.FlexUtilVirtualDrive&#39; resource.
 [**UpdateStorageHitachiArray**](StorageApi.md#UpdateStorageHitachiArray) | **Post** /api/v1/storage/HitachiArrays/{Moid} | Update a &#39;storage.HitachiArray&#39; resource.
 [**UpdateStorageNetAppCluster**](StorageApi.md#UpdateStorageNetAppCluster) | **Post** /api/v1/storage/NetAppClusters/{Moid} | Update a &#39;storage.NetAppCluster&#39; resource.
+[**UpdateStorageNetAppVolumeSnapshot**](StorageApi.md#UpdateStorageNetAppVolumeSnapshot) | **Post** /api/v1/storage/NetAppVolumeSnapshots/{Moid} | Update a &#39;storage.NetAppVolumeSnapshot&#39; resource.
 [**UpdateStoragePhysicalDisk**](StorageApi.md#UpdateStoragePhysicalDisk) | **Post** /api/v1/storage/PhysicalDisks/{Moid} | Update a &#39;storage.PhysicalDisk&#39; resource.
 [**UpdateStoragePhysicalDiskExtension**](StorageApi.md#UpdateStoragePhysicalDiskExtension) | **Post** /api/v1/storage/PhysicalDiskExtensions/{Moid} | Update a &#39;storage.PhysicalDiskExtension&#39; resource.
 [**UpdateStoragePhysicalDiskUsage**](StorageApi.md#UpdateStoragePhysicalDiskUsage) | **Post** /api/v1/storage/PhysicalDiskUsages/{Moid} | Update a &#39;storage.PhysicalDiskUsage&#39; resource.
@@ -426,6 +430,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**StorageDriveSecurityPolicy**](StorageDriveSecurityPolicy.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateStorageNetAppVolumeSnapshot
+
+> StorageNetAppVolumeSnapshot CreateStorageNetAppVolumeSnapshot(ctx).StorageNetAppVolumeSnapshot(storageNetAppVolumeSnapshot).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'storage.NetAppVolumeSnapshot' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	storageNetAppVolumeSnapshot := *openapiclient.NewStorageNetAppVolumeSnapshot("ClassId_example", "ObjectType_example") // StorageNetAppVolumeSnapshot | The 'storage.NetAppVolumeSnapshot' resource to create.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+	ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.StorageApi.CreateStorageNetAppVolumeSnapshot(context.Background()).StorageNetAppVolumeSnapshot(storageNetAppVolumeSnapshot).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.CreateStorageNetAppVolumeSnapshot``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateStorageNetAppVolumeSnapshot`: StorageNetAppVolumeSnapshot
+	fmt.Fprintf(os.Stdout, "Response from `StorageApi.CreateStorageNetAppVolumeSnapshot`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateStorageNetAppVolumeSnapshotRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **storageNetAppVolumeSnapshot** | [**StorageNetAppVolumeSnapshot**](StorageNetAppVolumeSnapshot.md) | The &#39;storage.NetAppVolumeSnapshot&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**StorageNetAppVolumeSnapshot**](StorageNetAppVolumeSnapshot.md)
 
 ### Authorization
 
@@ -617,6 +689,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteStorageDriveSecurityPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteStorageNetAppVolumeSnapshot
+
+> DeleteStorageNetAppVolumeSnapshot(ctx, moid).Execute()
+
+Delete a 'storage.NetAppVolumeSnapshot' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.StorageApi.DeleteStorageNetAppVolumeSnapshot(context.Background(), moid).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.DeleteStorageNetAppVolumeSnapshot``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteStorageNetAppVolumeSnapshotRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -19715,6 +19853,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchStorageNetAppVolumeSnapshot
+
+> StorageNetAppVolumeSnapshot PatchStorageNetAppVolumeSnapshot(ctx, moid).StorageNetAppVolumeSnapshot(storageNetAppVolumeSnapshot).IfMatch(ifMatch).Execute()
+
+Update a 'storage.NetAppVolumeSnapshot' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	storageNetAppVolumeSnapshot := *openapiclient.NewStorageNetAppVolumeSnapshot("ClassId_example", "ObjectType_example") // StorageNetAppVolumeSnapshot | The 'storage.NetAppVolumeSnapshot' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.StorageApi.PatchStorageNetAppVolumeSnapshot(context.Background(), moid).StorageNetAppVolumeSnapshot(storageNetAppVolumeSnapshot).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageNetAppVolumeSnapshot``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchStorageNetAppVolumeSnapshot`: StorageNetAppVolumeSnapshot
+	fmt.Fprintf(os.Stdout, "Response from `StorageApi.PatchStorageNetAppVolumeSnapshot`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchStorageNetAppVolumeSnapshotRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **storageNetAppVolumeSnapshot** | [**StorageNetAppVolumeSnapshot**](StorageNetAppVolumeSnapshot.md) | The &#39;storage.NetAppVolumeSnapshot&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**StorageNetAppVolumeSnapshot**](StorageNetAppVolumeSnapshot.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchStoragePhysicalDisk
 
 > StoragePhysicalDisk PatchStoragePhysicalDisk(ctx, moid).StoragePhysicalDisk(storagePhysicalDisk).IfMatch(ifMatch).Execute()
@@ -21788,6 +21998,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**StorageNetAppCluster**](StorageNetAppCluster.md)
+
+### Authorization
+
+[http_signature](../README.md#http_signature), [cookieAuth](../README.md#cookieAuth), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateStorageNetAppVolumeSnapshot
+
+> StorageNetAppVolumeSnapshot UpdateStorageNetAppVolumeSnapshot(ctx, moid).StorageNetAppVolumeSnapshot(storageNetAppVolumeSnapshot).IfMatch(ifMatch).Execute()
+
+Update a 'storage.NetAppVolumeSnapshot' resource.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/CiscoDevNet/intersight-go"
+)
+
+func main() {
+	moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+	storageNetAppVolumeSnapshot := *openapiclient.NewStorageNetAppVolumeSnapshot("ClassId_example", "ObjectType_example") // StorageNetAppVolumeSnapshot | The 'storage.NetAppVolumeSnapshot' resource to update.
+	ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.StorageApi.UpdateStorageNetAppVolumeSnapshot(context.Background(), moid).StorageNetAppVolumeSnapshot(storageNetAppVolumeSnapshot).IfMatch(ifMatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageNetAppVolumeSnapshot``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateStorageNetAppVolumeSnapshot`: StorageNetAppVolumeSnapshot
+	fmt.Fprintf(os.Stdout, "Response from `StorageApi.UpdateStorageNetAppVolumeSnapshot`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateStorageNetAppVolumeSnapshotRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **storageNetAppVolumeSnapshot** | [**StorageNetAppVolumeSnapshot**](StorageNetAppVolumeSnapshot.md) | The &#39;storage.NetAppVolumeSnapshot&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**StorageNetAppVolumeSnapshot**](StorageNetAppVolumeSnapshot.md)
 
 ### Authorization
 

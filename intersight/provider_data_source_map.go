@@ -353,6 +353,7 @@ func GetDataSourceMapping() map[string]*schema.Resource {
 		"intersight_forecast_definition":                                     dataSourceForecastDefinition(),
 		"intersight_forecast_instance":                                       dataSourceForecastInstance(),
 		"intersight_functions_function":                                      dataSourceFunctionsFunction(),
+		"intersight_functions_function_version":                              dataSourceFunctionsFunctionVersion(),
 		"intersight_functions_runtime":                                       dataSourceFunctionsRuntime(),
 		"intersight_functions_upload":                                        dataSourceFunctionsUpload(),
 		"intersight_graphics_card":                                           dataSourceGraphicsCard(),
