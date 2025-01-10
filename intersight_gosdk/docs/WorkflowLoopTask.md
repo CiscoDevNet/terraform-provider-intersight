@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.LoopTask"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.LoopTask"]
-**NumberOfBatches** | Pointer to **int64** | When tasks are run in parallel and the count is large, the actual number of task run in parallel can be controlled by this property. If count is 100 and numberOfBatches is 5 then 20 tasks are run in parallel 5 times. Parallel batch size must be less than the count. In cases where count is dynamic and depends on input given during workflow execution, if that count is less than batch then empty batches might get created which do not have any tasks under them. | [optional] [default to 1]
+**FailurePolicy** | Pointer to **string** | The policy to handle the failure of an iteration within a parallel loop. * &#x60;FailOnFirstFailure&#x60; - The enum specifies the option as FailOnFirstFailure where the loop task will fail if one of the iteration in the loop fails. The running iterations will be cancelled on first failure and the loop will be marked as failed. * &#x60;ContinueOnFailure&#x60; - The enum specifies the option as ContinueOnFailure where the loop task will continue with all iterations, even if one fails. Running iterations will not be canceled, but the loop will be marked as failed after all iterations are complete. | [optional] [default to "FailOnFirstFailure"]
+**NumberOfBatches** | Pointer to **int64** | All iterations of the loop run in parallel within a single batch, with a maximum of 100 iterations. To run more than 100 iterations, you can increase the number of batches. The configuration is acceptable as long as the total number of iterations divided by the number of batches is less than 100. Adjusting the number of batches also allows you to control how many iterations run in parallel. For example, if the total count is 100 and you set the number of batches to 5, then 20 tasks will run in parallel across the 5 batches. It&#39;s important to note that the number of batches must be less than the total count. If the count is dynamic and falls below the number of batches, this may result in empty batches with no tasks. | [optional] [default to 1]
 **Parallel** | Pointer to **bool** | This field is deprecated. Always set to true for parallel loop. | [optional] [default to true]
 
 ## Methods
@@ -67,6 +68,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetFailurePolicy
+
+`func (o *WorkflowLoopTask) GetFailurePolicy() string`
+
+GetFailurePolicy returns the FailurePolicy field if non-nil, zero value otherwise.
+
+### GetFailurePolicyOk
+
+`func (o *WorkflowLoopTask) GetFailurePolicyOk() (*string, bool)`
+
+GetFailurePolicyOk returns a tuple with the FailurePolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailurePolicy
+
+`func (o *WorkflowLoopTask) SetFailurePolicy(v string)`
+
+SetFailurePolicy sets FailurePolicy field to given value.
+
+### HasFailurePolicy
+
+`func (o *WorkflowLoopTask) HasFailurePolicy() bool`
+
+HasFailurePolicy returns a boolean if a field has been set.
 
 ### GetNumberOfBatches
 

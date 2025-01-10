@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "functions.Runtime"]
 **Action** | Pointer to **string** | Action against the Runtime. * &#x60;None&#x60; - No action is set, this is the default value for action field. * &#x60;Disable&#x60; - Disable an instance of a Runtime. * &#x60;Deprecate&#x60; - Deprecate an instance of a Runtime. * &#x60;FlagInsecure&#x60; - Flag an instance of a Runtime as insecure. | [optional] [default to "None"]
 **CodeFileName** | Pointer to **string** | Name of file containing function source code. | [optional] 
+**CodeTemplate** | Pointer to **string** | Template to guide on how to compose code. | [optional] 
 **Components** | Pointer to [**[]FunctionsRuntimeComponent**](FunctionsRuntimeComponent.md) |  | [optional] 
 **CreateUser** | Pointer to **string** | The user identifier who created the language runtime. | [optional] [readonly] 
 **Deprecated** | Pointer to **bool** | Indicate if this language runtime is deprecated. | [optional] [readonly] 
@@ -132,6 +133,31 @@ SetCodeFileName sets CodeFileName field to given value.
 `func (o *FunctionsRuntime) HasCodeFileName() bool`
 
 HasCodeFileName returns a boolean if a field has been set.
+
+### GetCodeTemplate
+
+`func (o *FunctionsRuntime) GetCodeTemplate() string`
+
+GetCodeTemplate returns the CodeTemplate field if non-nil, zero value otherwise.
+
+### GetCodeTemplateOk
+
+`func (o *FunctionsRuntime) GetCodeTemplateOk() (*string, bool)`
+
+GetCodeTemplateOk returns a tuple with the CodeTemplate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCodeTemplate
+
+`func (o *FunctionsRuntime) SetCodeTemplate(v string)`
+
+SetCodeTemplate sets CodeTemplate field to given value.
+
+### HasCodeTemplate
+
+`func (o *FunctionsRuntime) HasCodeTemplate() bool`
+
+HasCodeTemplate returns a boolean if a field has been set.
 
 ### GetComponents
 

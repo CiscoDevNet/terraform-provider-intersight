@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024112619
+API version: 1.0.11-2024120409
 Contact: intersight@cisco.com
 */
 
@@ -28,31 +28,25 @@ type FunctionsFunction struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Action of the function such as build, deploy, undeploy, delete. * `None` - No action is set, this is the default value for action field. * `Build` - Build an instance of a Function. * `Deploy` - Deploy the build Function. * `Undeploy` - Undeploy a Function that was previously successfully deployed. * `Delete` - Delete a Function that has yet to be deployed or that was recently undeployed.
+	// Action of the function such as build, deploy, undeploy. * `None` - No action is set, this is the default value for action field. * `Publish` - Publish a Function that was saved or built.
 	Action *string `json:"Action,omitempty"`
-	// Custom function code for Function MO.
+	// Custom function code to create the first function version, mandatory in function creation payload.
 	Code *string `json:"Code,omitempty"`
 	// The user identifier who created the Function.
 	CreateUser *string `json:"CreateUser,omitempty"`
-	// When true this function version will be used in functions table. The very first function created with a name will be set as the default version.
-	DefaultVersion *bool `json:"DefaultVersion,omitempty"`
 	// Description of the function.
 	Description *string `json:"Description,omitempty"`
 	// The display name of the function. Display name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).
-	DisplayName *string                             `json:"DisplayName,omitempty" validate:"regexp=^[a-zA-Z0-9]{1}[\\\\sa-zA-Z0-9_.:-]{0,91}$"`
-	LastAction  NullableFunctionsFunctionLastAction `json:"LastAction,omitempty"`
+	DisplayName *string `json:"DisplayName,omitempty" validate:"regexp=^[a-zA-Z0-9]{1}[\\\\sa-zA-Z0-9_.:-]{0,91}$"`
 	// The user identifier who last updated the Function.
 	ModUser *string `json:"ModUser,omitempty"`
 	// The name of the function. Name can only contain letters (a-z), numbers (0-9), hyphen (-).
-	Name *string `json:"Name,omitempty" validate:"regexp=^[a-z0-9]{1}[a-z0-9-]{0,62}[a-z0-9]{1}$"`
-	// Current representation of the Function MO state. * `Saved` - Function is saved, yet to be built and deployed. * `Building` - Function is currently being built. * `Built` - The Function has been built and can now be deployed. * `Deploying` - The built Function is currently being deployed. * `Deployed` - The Function has been deployed. * `Undeploying` - The deployed function is being Undeployed. * `Deleting` - The Function is being deleted.
-	State *string `json:"State,omitempty"`
-	// The version of the function to support multiple versions.
+	Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9]{1}[a-zA-Z0-9-]{0,62}[a-zA-Z0-9]{1}$"`
+	// Moid of runtime which is used to create the first function version, mandatory in function creation payload.
+	RuntimeMoid *string `json:"RuntimeMoid,omitempty"`
+	// The target version of the function, which is needed by action.
 	Version              *int64                                       `json:"Version,omitempty"`
-	ActionExecution      NullableWorkflowWorkflowInfoRelationship     `json:"ActionExecution,omitempty"`
 	Organization         NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	Runtime              NullableFunctionsRuntimeRelationship         `json:"Runtime,omitempty"`
-	TaskDefinition       NullableWorkflowTaskDefinitionRelationship   `json:"TaskDefinition,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -239,38 +233,6 @@ func (o *FunctionsFunction) SetCreateUser(v string) {
 	o.CreateUser = &v
 }
 
-// GetDefaultVersion returns the DefaultVersion field value if set, zero value otherwise.
-func (o *FunctionsFunction) GetDefaultVersion() bool {
-	if o == nil || IsNil(o.DefaultVersion) {
-		var ret bool
-		return ret
-	}
-	return *o.DefaultVersion
-}
-
-// GetDefaultVersionOk returns a tuple with the DefaultVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FunctionsFunction) GetDefaultVersionOk() (*bool, bool) {
-	if o == nil || IsNil(o.DefaultVersion) {
-		return nil, false
-	}
-	return o.DefaultVersion, true
-}
-
-// HasDefaultVersion returns a boolean if a field has been set.
-func (o *FunctionsFunction) HasDefaultVersion() bool {
-	if o != nil && !IsNil(o.DefaultVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefaultVersion gets a reference to the given bool and assigns it to the DefaultVersion field.
-func (o *FunctionsFunction) SetDefaultVersion(v bool) {
-	o.DefaultVersion = &v
-}
-
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *FunctionsFunction) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
@@ -333,49 +295,6 @@ func (o *FunctionsFunction) HasDisplayName() bool {
 // SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
 func (o *FunctionsFunction) SetDisplayName(v string) {
 	o.DisplayName = &v
-}
-
-// GetLastAction returns the LastAction field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionsFunction) GetLastAction() FunctionsFunctionLastAction {
-	if o == nil || IsNil(o.LastAction.Get()) {
-		var ret FunctionsFunctionLastAction
-		return ret
-	}
-	return *o.LastAction.Get()
-}
-
-// GetLastActionOk returns a tuple with the LastAction field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionsFunction) GetLastActionOk() (*FunctionsFunctionLastAction, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.LastAction.Get(), o.LastAction.IsSet()
-}
-
-// HasLastAction returns a boolean if a field has been set.
-func (o *FunctionsFunction) HasLastAction() bool {
-	if o != nil && o.LastAction.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastAction gets a reference to the given NullableFunctionsFunctionLastAction and assigns it to the LastAction field.
-func (o *FunctionsFunction) SetLastAction(v FunctionsFunctionLastAction) {
-	o.LastAction.Set(&v)
-}
-
-// SetLastActionNil sets the value for LastAction to be an explicit nil
-func (o *FunctionsFunction) SetLastActionNil() {
-	o.LastAction.Set(nil)
-}
-
-// UnsetLastAction ensures that no value is present for LastAction, not even an explicit nil
-func (o *FunctionsFunction) UnsetLastAction() {
-	o.LastAction.Unset()
 }
 
 // GetModUser returns the ModUser field value if set, zero value otherwise.
@@ -442,36 +361,36 @@ func (o *FunctionsFunction) SetName(v string) {
 	o.Name = &v
 }
 
-// GetState returns the State field value if set, zero value otherwise.
-func (o *FunctionsFunction) GetState() string {
-	if o == nil || IsNil(o.State) {
+// GetRuntimeMoid returns the RuntimeMoid field value if set, zero value otherwise.
+func (o *FunctionsFunction) GetRuntimeMoid() string {
+	if o == nil || IsNil(o.RuntimeMoid) {
 		var ret string
 		return ret
 	}
-	return *o.State
+	return *o.RuntimeMoid
 }
 
-// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// GetRuntimeMoidOk returns a tuple with the RuntimeMoid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FunctionsFunction) GetStateOk() (*string, bool) {
-	if o == nil || IsNil(o.State) {
+func (o *FunctionsFunction) GetRuntimeMoidOk() (*string, bool) {
+	if o == nil || IsNil(o.RuntimeMoid) {
 		return nil, false
 	}
-	return o.State, true
+	return o.RuntimeMoid, true
 }
 
-// HasState returns a boolean if a field has been set.
-func (o *FunctionsFunction) HasState() bool {
-	if o != nil && !IsNil(o.State) {
+// HasRuntimeMoid returns a boolean if a field has been set.
+func (o *FunctionsFunction) HasRuntimeMoid() bool {
+	if o != nil && !IsNil(o.RuntimeMoid) {
 		return true
 	}
 
 	return false
 }
 
-// SetState gets a reference to the given string and assigns it to the State field.
-func (o *FunctionsFunction) SetState(v string) {
-	o.State = &v
+// SetRuntimeMoid gets a reference to the given string and assigns it to the RuntimeMoid field.
+func (o *FunctionsFunction) SetRuntimeMoid(v string) {
+	o.RuntimeMoid = &v
 }
 
 // GetVersion returns the Version field value if set, zero value otherwise.
@@ -504,49 +423,6 @@ func (o *FunctionsFunction) HasVersion() bool {
 // SetVersion gets a reference to the given int64 and assigns it to the Version field.
 func (o *FunctionsFunction) SetVersion(v int64) {
 	o.Version = &v
-}
-
-// GetActionExecution returns the ActionExecution field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionsFunction) GetActionExecution() WorkflowWorkflowInfoRelationship {
-	if o == nil || IsNil(o.ActionExecution.Get()) {
-		var ret WorkflowWorkflowInfoRelationship
-		return ret
-	}
-	return *o.ActionExecution.Get()
-}
-
-// GetActionExecutionOk returns a tuple with the ActionExecution field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionsFunction) GetActionExecutionOk() (*WorkflowWorkflowInfoRelationship, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ActionExecution.Get(), o.ActionExecution.IsSet()
-}
-
-// HasActionExecution returns a boolean if a field has been set.
-func (o *FunctionsFunction) HasActionExecution() bool {
-	if o != nil && o.ActionExecution.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetActionExecution gets a reference to the given NullableWorkflowWorkflowInfoRelationship and assigns it to the ActionExecution field.
-func (o *FunctionsFunction) SetActionExecution(v WorkflowWorkflowInfoRelationship) {
-	o.ActionExecution.Set(&v)
-}
-
-// SetActionExecutionNil sets the value for ActionExecution to be an explicit nil
-func (o *FunctionsFunction) SetActionExecutionNil() {
-	o.ActionExecution.Set(nil)
-}
-
-// UnsetActionExecution ensures that no value is present for ActionExecution, not even an explicit nil
-func (o *FunctionsFunction) UnsetActionExecution() {
-	o.ActionExecution.Unset()
 }
 
 // GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -592,92 +468,6 @@ func (o *FunctionsFunction) UnsetOrganization() {
 	o.Organization.Unset()
 }
 
-// GetRuntime returns the Runtime field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionsFunction) GetRuntime() FunctionsRuntimeRelationship {
-	if o == nil || IsNil(o.Runtime.Get()) {
-		var ret FunctionsRuntimeRelationship
-		return ret
-	}
-	return *o.Runtime.Get()
-}
-
-// GetRuntimeOk returns a tuple with the Runtime field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionsFunction) GetRuntimeOk() (*FunctionsRuntimeRelationship, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Runtime.Get(), o.Runtime.IsSet()
-}
-
-// HasRuntime returns a boolean if a field has been set.
-func (o *FunctionsFunction) HasRuntime() bool {
-	if o != nil && o.Runtime.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetRuntime gets a reference to the given NullableFunctionsRuntimeRelationship and assigns it to the Runtime field.
-func (o *FunctionsFunction) SetRuntime(v FunctionsRuntimeRelationship) {
-	o.Runtime.Set(&v)
-}
-
-// SetRuntimeNil sets the value for Runtime to be an explicit nil
-func (o *FunctionsFunction) SetRuntimeNil() {
-	o.Runtime.Set(nil)
-}
-
-// UnsetRuntime ensures that no value is present for Runtime, not even an explicit nil
-func (o *FunctionsFunction) UnsetRuntime() {
-	o.Runtime.Unset()
-}
-
-// GetTaskDefinition returns the TaskDefinition field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FunctionsFunction) GetTaskDefinition() WorkflowTaskDefinitionRelationship {
-	if o == nil || IsNil(o.TaskDefinition.Get()) {
-		var ret WorkflowTaskDefinitionRelationship
-		return ret
-	}
-	return *o.TaskDefinition.Get()
-}
-
-// GetTaskDefinitionOk returns a tuple with the TaskDefinition field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FunctionsFunction) GetTaskDefinitionOk() (*WorkflowTaskDefinitionRelationship, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.TaskDefinition.Get(), o.TaskDefinition.IsSet()
-}
-
-// HasTaskDefinition returns a boolean if a field has been set.
-func (o *FunctionsFunction) HasTaskDefinition() bool {
-	if o != nil && o.TaskDefinition.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTaskDefinition gets a reference to the given NullableWorkflowTaskDefinitionRelationship and assigns it to the TaskDefinition field.
-func (o *FunctionsFunction) SetTaskDefinition(v WorkflowTaskDefinitionRelationship) {
-	o.TaskDefinition.Set(&v)
-}
-
-// SetTaskDefinitionNil sets the value for TaskDefinition to be an explicit nil
-func (o *FunctionsFunction) SetTaskDefinitionNil() {
-	o.TaskDefinition.Set(nil)
-}
-
-// UnsetTaskDefinition ensures that no value is present for TaskDefinition, not even an explicit nil
-func (o *FunctionsFunction) UnsetTaskDefinition() {
-	o.TaskDefinition.Unset()
-}
-
 func (o FunctionsFunction) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -713,17 +503,11 @@ func (o FunctionsFunction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreateUser) {
 		toSerialize["CreateUser"] = o.CreateUser
 	}
-	if !IsNil(o.DefaultVersion) {
-		toSerialize["DefaultVersion"] = o.DefaultVersion
-	}
 	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
 	if !IsNil(o.DisplayName) {
 		toSerialize["DisplayName"] = o.DisplayName
-	}
-	if o.LastAction.IsSet() {
-		toSerialize["LastAction"] = o.LastAction.Get()
 	}
 	if !IsNil(o.ModUser) {
 		toSerialize["ModUser"] = o.ModUser
@@ -731,23 +515,14 @@ func (o FunctionsFunction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["Name"] = o.Name
 	}
-	if !IsNil(o.State) {
-		toSerialize["State"] = o.State
+	if !IsNil(o.RuntimeMoid) {
+		toSerialize["RuntimeMoid"] = o.RuntimeMoid
 	}
 	if !IsNil(o.Version) {
 		toSerialize["Version"] = o.Version
 	}
-	if o.ActionExecution.IsSet() {
-		toSerialize["ActionExecution"] = o.ActionExecution.Get()
-	}
 	if o.Organization.IsSet() {
 		toSerialize["Organization"] = o.Organization.Get()
-	}
-	if o.Runtime.IsSet() {
-		toSerialize["Runtime"] = o.Runtime.Get()
-	}
-	if o.TaskDefinition.IsSet() {
-		toSerialize["TaskDefinition"] = o.TaskDefinition.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -804,31 +579,25 @@ func (o *FunctionsFunction) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
-		// Action of the function such as build, deploy, undeploy, delete. * `None` - No action is set, this is the default value for action field. * `Build` - Build an instance of a Function. * `Deploy` - Deploy the build Function. * `Undeploy` - Undeploy a Function that was previously successfully deployed. * `Delete` - Delete a Function that has yet to be deployed or that was recently undeployed.
+		// Action of the function such as build, deploy, undeploy. * `None` - No action is set, this is the default value for action field. * `Publish` - Publish a Function that was saved or built.
 		Action *string `json:"Action,omitempty"`
-		// Custom function code for Function MO.
+		// Custom function code to create the first function version, mandatory in function creation payload.
 		Code *string `json:"Code,omitempty"`
 		// The user identifier who created the Function.
 		CreateUser *string `json:"CreateUser,omitempty"`
-		// When true this function version will be used in functions table. The very first function created with a name will be set as the default version.
-		DefaultVersion *bool `json:"DefaultVersion,omitempty"`
 		// Description of the function.
 		Description *string `json:"Description,omitempty"`
 		// The display name of the function. Display name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).
-		DisplayName *string                             `json:"DisplayName,omitempty" validate:"regexp=^[a-zA-Z0-9]{1}[\\\\sa-zA-Z0-9_.:-]{0,91}$"`
-		LastAction  NullableFunctionsFunctionLastAction `json:"LastAction,omitempty"`
+		DisplayName *string `json:"DisplayName,omitempty" validate:"regexp=^[a-zA-Z0-9]{1}[\\\\sa-zA-Z0-9_.:-]{0,91}$"`
 		// The user identifier who last updated the Function.
 		ModUser *string `json:"ModUser,omitempty"`
 		// The name of the function. Name can only contain letters (a-z), numbers (0-9), hyphen (-).
-		Name *string `json:"Name,omitempty" validate:"regexp=^[a-z0-9]{1}[a-z0-9-]{0,62}[a-z0-9]{1}$"`
-		// Current representation of the Function MO state. * `Saved` - Function is saved, yet to be built and deployed. * `Building` - Function is currently being built. * `Built` - The Function has been built and can now be deployed. * `Deploying` - The built Function is currently being deployed. * `Deployed` - The Function has been deployed. * `Undeploying` - The deployed function is being Undeployed. * `Deleting` - The Function is being deleted.
-		State *string `json:"State,omitempty"`
-		// The version of the function to support multiple versions.
-		Version         *int64                                       `json:"Version,omitempty"`
-		ActionExecution NullableWorkflowWorkflowInfoRelationship     `json:"ActionExecution,omitempty"`
-		Organization    NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
-		Runtime         NullableFunctionsRuntimeRelationship         `json:"Runtime,omitempty"`
-		TaskDefinition  NullableWorkflowTaskDefinitionRelationship   `json:"TaskDefinition,omitempty"`
+		Name *string `json:"Name,omitempty" validate:"regexp=^[a-zA-Z0-9]{1}[a-zA-Z0-9-]{0,62}[a-zA-Z0-9]{1}$"`
+		// Moid of runtime which is used to create the first function version, mandatory in function creation payload.
+		RuntimeMoid *string `json:"RuntimeMoid,omitempty"`
+		// The target version of the function, which is needed by action.
+		Version      *int64                                       `json:"Version,omitempty"`
+		Organization NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	}
 
 	varFunctionsFunctionWithoutEmbeddedStruct := FunctionsFunctionWithoutEmbeddedStruct{}
@@ -841,18 +610,13 @@ func (o *FunctionsFunction) UnmarshalJSON(data []byte) (err error) {
 		varFunctionsFunction.Action = varFunctionsFunctionWithoutEmbeddedStruct.Action
 		varFunctionsFunction.Code = varFunctionsFunctionWithoutEmbeddedStruct.Code
 		varFunctionsFunction.CreateUser = varFunctionsFunctionWithoutEmbeddedStruct.CreateUser
-		varFunctionsFunction.DefaultVersion = varFunctionsFunctionWithoutEmbeddedStruct.DefaultVersion
 		varFunctionsFunction.Description = varFunctionsFunctionWithoutEmbeddedStruct.Description
 		varFunctionsFunction.DisplayName = varFunctionsFunctionWithoutEmbeddedStruct.DisplayName
-		varFunctionsFunction.LastAction = varFunctionsFunctionWithoutEmbeddedStruct.LastAction
 		varFunctionsFunction.ModUser = varFunctionsFunctionWithoutEmbeddedStruct.ModUser
 		varFunctionsFunction.Name = varFunctionsFunctionWithoutEmbeddedStruct.Name
-		varFunctionsFunction.State = varFunctionsFunctionWithoutEmbeddedStruct.State
+		varFunctionsFunction.RuntimeMoid = varFunctionsFunctionWithoutEmbeddedStruct.RuntimeMoid
 		varFunctionsFunction.Version = varFunctionsFunctionWithoutEmbeddedStruct.Version
-		varFunctionsFunction.ActionExecution = varFunctionsFunctionWithoutEmbeddedStruct.ActionExecution
 		varFunctionsFunction.Organization = varFunctionsFunctionWithoutEmbeddedStruct.Organization
-		varFunctionsFunction.Runtime = varFunctionsFunctionWithoutEmbeddedStruct.Runtime
-		varFunctionsFunction.TaskDefinition = varFunctionsFunctionWithoutEmbeddedStruct.TaskDefinition
 		*o = FunctionsFunction(varFunctionsFunction)
 	} else {
 		return err
@@ -875,18 +639,13 @@ func (o *FunctionsFunction) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Action")
 		delete(additionalProperties, "Code")
 		delete(additionalProperties, "CreateUser")
-		delete(additionalProperties, "DefaultVersion")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "DisplayName")
-		delete(additionalProperties, "LastAction")
 		delete(additionalProperties, "ModUser")
 		delete(additionalProperties, "Name")
-		delete(additionalProperties, "State")
+		delete(additionalProperties, "RuntimeMoid")
 		delete(additionalProperties, "Version")
-		delete(additionalProperties, "ActionExecution")
 		delete(additionalProperties, "Organization")
-		delete(additionalProperties, "Runtime")
-		delete(additionalProperties, "TaskDefinition")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024112619
+API version: 1.0.11-2024120409
 Contact: intersight@cisco.com
 */
 
@@ -31,7 +31,9 @@ type FunctionsRuntime struct {
 	// Action against the Runtime. * `None` - No action is set, this is the default value for action field. * `Disable` - Disable an instance of a Runtime. * `Deprecate` - Deprecate an instance of a Runtime. * `FlagInsecure` - Flag an instance of a Runtime as insecure.
 	Action *string `json:"Action,omitempty"`
 	// Name of file containing function source code.
-	CodeFileName *string                     `json:"CodeFileName,omitempty" validate:"regexp=^[a-zA-Z0-9]{1}[a-zA-Z0-9_.-]{0,63}$"`
+	CodeFileName *string `json:"CodeFileName,omitempty" validate:"regexp=^[a-zA-Z0-9]{1}[a-zA-Z0-9_.-]{0,63}$"`
+	// Template to guide on how to compose code.
+	CodeTemplate *string                     `json:"CodeTemplate,omitempty"`
 	Components   []FunctionsRuntimeComponent `json:"Components,omitempty"`
 	// The user identifier who created the language runtime.
 	CreateUser *string `json:"CreateUser,omitempty"`
@@ -216,6 +218,38 @@ func (o *FunctionsRuntime) HasCodeFileName() bool {
 // SetCodeFileName gets a reference to the given string and assigns it to the CodeFileName field.
 func (o *FunctionsRuntime) SetCodeFileName(v string) {
 	o.CodeFileName = &v
+}
+
+// GetCodeTemplate returns the CodeTemplate field value if set, zero value otherwise.
+func (o *FunctionsRuntime) GetCodeTemplate() string {
+	if o == nil || IsNil(o.CodeTemplate) {
+		var ret string
+		return ret
+	}
+	return *o.CodeTemplate
+}
+
+// GetCodeTemplateOk returns a tuple with the CodeTemplate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FunctionsRuntime) GetCodeTemplateOk() (*string, bool) {
+	if o == nil || IsNil(o.CodeTemplate) {
+		return nil, false
+	}
+	return o.CodeTemplate, true
+}
+
+// HasCodeTemplate returns a boolean if a field has been set.
+func (o *FunctionsRuntime) HasCodeTemplate() bool {
+	if o != nil && !IsNil(o.CodeTemplate) {
+		return true
+	}
+
+	return false
+}
+
+// SetCodeTemplate gets a reference to the given string and assigns it to the CodeTemplate field.
+func (o *FunctionsRuntime) SetCodeTemplate(v string) {
+	o.CodeTemplate = &v
 }
 
 // GetComponents returns the Components field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -742,6 +776,9 @@ func (o FunctionsRuntime) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CodeFileName) {
 		toSerialize["CodeFileName"] = o.CodeFileName
 	}
+	if !IsNil(o.CodeTemplate) {
+		toSerialize["CodeTemplate"] = o.CodeTemplate
+	}
 	if o.Components != nil {
 		toSerialize["Components"] = o.Components
 	}
@@ -845,7 +882,9 @@ func (o *FunctionsRuntime) UnmarshalJSON(data []byte) (err error) {
 		// Action against the Runtime. * `None` - No action is set, this is the default value for action field. * `Disable` - Disable an instance of a Runtime. * `Deprecate` - Deprecate an instance of a Runtime. * `FlagInsecure` - Flag an instance of a Runtime as insecure.
 		Action *string `json:"Action,omitempty"`
 		// Name of file containing function source code.
-		CodeFileName *string                     `json:"CodeFileName,omitempty" validate:"regexp=^[a-zA-Z0-9]{1}[a-zA-Z0-9_.-]{0,63}$"`
+		CodeFileName *string `json:"CodeFileName,omitempty" validate:"regexp=^[a-zA-Z0-9]{1}[a-zA-Z0-9_.-]{0,63}$"`
+		// Template to guide on how to compose code.
+		CodeTemplate *string                     `json:"CodeTemplate,omitempty"`
 		Components   []FunctionsRuntimeComponent `json:"Components,omitempty"`
 		// The user identifier who created the language runtime.
 		CreateUser *string `json:"CreateUser,omitempty"`
@@ -885,6 +924,7 @@ func (o *FunctionsRuntime) UnmarshalJSON(data []byte) (err error) {
 		varFunctionsRuntime.ObjectType = varFunctionsRuntimeWithoutEmbeddedStruct.ObjectType
 		varFunctionsRuntime.Action = varFunctionsRuntimeWithoutEmbeddedStruct.Action
 		varFunctionsRuntime.CodeFileName = varFunctionsRuntimeWithoutEmbeddedStruct.CodeFileName
+		varFunctionsRuntime.CodeTemplate = varFunctionsRuntimeWithoutEmbeddedStruct.CodeTemplate
 		varFunctionsRuntime.Components = varFunctionsRuntimeWithoutEmbeddedStruct.Components
 		varFunctionsRuntime.CreateUser = varFunctionsRuntimeWithoutEmbeddedStruct.CreateUser
 		varFunctionsRuntime.Deprecated = varFunctionsRuntimeWithoutEmbeddedStruct.Deprecated
@@ -921,6 +961,7 @@ func (o *FunctionsRuntime) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")
 		delete(additionalProperties, "CodeFileName")
+		delete(additionalProperties, "CodeTemplate")
 		delete(additionalProperties, "Components")
 		delete(additionalProperties, "CreateUser")
 		delete(additionalProperties, "Deprecated")

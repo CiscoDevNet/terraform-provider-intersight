@@ -22,44 +22,9 @@ func getFunctionsFunctionSchema() map[string]*schema.Schema {
 		Optional:    true,
 	},
 		"action": {
-			Description: "Action of the function such as build, deploy, undeploy, delete.\n* `None` - No action is set, this is the default value for action field.\n* `Build` - Build an instance of a Function.\n* `Deploy` - Deploy the build Function.\n* `Undeploy` - Undeploy a Function that was previously successfully deployed.\n* `Delete` - Delete a Function that has yet to be deployed or that was recently undeployed.",
+			Description: "Action of the function such as build, deploy, undeploy.\n* `None` - No action is set, this is the default value for action field.\n* `Publish` - Publish a Function that was saved or built.",
 			Type:        schema.TypeString,
 			Optional:    true,
-		},
-		"action_execution": {
-			Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
 		},
 		"additional_properties": {
 			Type:             schema.TypeString,
@@ -106,7 +71,7 @@ func getFunctionsFunctionSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"code": {
-			Description: "Custom function code for Function MO.",
+			Description: "Custom function code to create the first function version, mandatory in function creation payload.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -118,11 +83,6 @@ func getFunctionsFunctionSchema() map[string]*schema.Schema {
 		"create_user": {
 			Description: "The user identifier who created the Function.",
 			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"default_version": {
-			Description: "When true this function version will be used in functions table. The very first function created with a name will be set as the default version.",
-			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"description": {
@@ -139,41 +99,6 @@ func getFunctionsFunctionSchema() map[string]*schema.Schema {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
 			Optional:    true,
-		},
-		"last_action": {
-			Description: "Last action upon Function.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"action": {
-						Description: "Name of the last action performed.\n* `None` - No action is set, this is the default value for action field.\n* `Build` - Build an instance of a Function.\n* `Deploy` - Deploy the build Function.\n* `Undeploy` - Undeploy a Function that was previously successfully deployed.\n* `Delete` - Delete a Function that has yet to be deployed or that was recently undeployed.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"failure_reason": {
-						Description: "Failure reason for the last action performed.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -309,48 +234,13 @@ func getFunctionsFunctionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"runtime": {
-			Description: "A reference to a functionsRuntime resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"shared_scope": {
-			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+		"runtime_moid": {
+			Description: "Moid of runtime which is used to create the first function version, mandatory in function creation payload.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"state": {
-			Description: "Current representation of the Function MO state.\n* `Saved` - Function is saved, yet to be built and deployed.\n* `Building` - Function is currently being built.\n* `Built` - The Function has been built and can now be deployed.\n* `Deploying` - The built Function is currently being deployed.\n* `Deployed` - The Function has been deployed.\n* `Undeploying` - The deployed function is being Undeployed.\n* `Deleting` - The Function is being deleted.",
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -377,43 +267,8 @@ func getFunctionsFunctionSchema() map[string]*schema.Schema {
 				},
 			},
 		},
-		"task_definition": {
-			Description: "A reference to a workflowTaskDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
 		"nr_version": {
-			Description: "The version of the function to support multiple versions.",
+			Description: "The target version of the function, which is needed by action.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -562,49 +417,6 @@ func dataSourceFunctionsFunctionRead(c context.Context, d *schema.ResourceData, 
 		o.SetAction(x)
 	}
 
-	if v, ok := d.GetOk("action_execution"); ok {
-		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowWorkflowInfoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetActionExecution(x)
-		}
-	}
-
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
@@ -674,11 +486,6 @@ func dataSourceFunctionsFunctionRead(c context.Context, d *schema.ResourceData, 
 		o.SetCreateUser(x)
 	}
 
-	if v, ok := d.GetOkExists("default_version"); ok {
-		x := (v.(bool))
-		o.SetDefaultVersion(x)
-	}
-
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -692,37 +499,6 @@ func dataSourceFunctionsFunctionRead(c context.Context, d *schema.ResourceData, 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
-	}
-
-	if v, ok := d.GetOk("last_action"); ok {
-		p := make([]models.FunctionsFunctionLastAction, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.FunctionsFunctionLastAction{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("functions.FunctionLastAction")
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetLastAction(x)
-		}
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -887,57 +663,14 @@ func dataSourceFunctionsFunctionRead(c context.Context, d *schema.ResourceData, 
 		o.SetPermissionResources(x)
 	}
 
-	if v, ok := d.GetOk("runtime"); ok {
-		p := make([]models.FunctionsRuntimeRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsFunctionsRuntimeRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetRuntime(x)
-		}
+	if v, ok := d.GetOk("runtime_moid"); ok {
+		x := (v.(string))
+		o.SetRuntimeMoid(x)
 	}
 
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
-	}
-
-	if v, ok := d.GetOk("state"); ok {
-		x := (v.(string))
-		o.SetState(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -971,49 +704,6 @@ func dataSourceFunctionsFunctionRead(c context.Context, d *schema.ResourceData, 
 			x = append(x, *o)
 		}
 		o.SetTags(x)
-	}
-
-	if v, ok := d.GetOk("task_definition"); ok {
-		p := make([]models.WorkflowTaskDefinitionRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowTaskDefinitionRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetTaskDefinition(x)
-		}
 	}
 
 	if v, ok := d.GetOkExists("nr_version"); ok {
@@ -1131,8 +821,6 @@ func dataSourceFunctionsFunctionRead(c context.Context, d *schema.ResourceData, 
 				var s = results[k]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
-
-				temp["action_execution"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetActionExecution(), d)
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
@@ -1141,12 +829,9 @@ func dataSourceFunctionsFunctionRead(c context.Context, d *schema.ResourceData, 
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["create_user"] = (s.GetCreateUser())
-				temp["default_version"] = (s.GetDefaultVersion())
 				temp["description"] = (s.GetDescription())
 				temp["display_name"] = (s.GetDisplayName())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
-
-				temp["last_action"] = flattenMapFunctionsFunctionLastAction(s.GetLastAction(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["mod_user"] = (s.GetModUser())
@@ -1160,15 +845,10 @@ func dataSourceFunctionsFunctionRead(c context.Context, d *schema.ResourceData, 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
-
-				temp["runtime"] = flattenMapFunctionsRuntimeRelationship(s.GetRuntime(), d)
+				temp["runtime_moid"] = (s.GetRuntimeMoid())
 				temp["shared_scope"] = (s.GetSharedScope())
-				temp["state"] = (s.GetState())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
-
-				temp["task_definition"] = flattenMapWorkflowTaskDefinitionRelationship(s.GetTaskDefinition(), d)
-				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				functionsFunctionResults = append(functionsFunctionResults, temp)

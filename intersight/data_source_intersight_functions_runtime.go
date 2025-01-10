@@ -110,6 +110,11 @@ func getFunctionsRuntimeSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"code_template": {
+			Description: "Template to guide on how to compose code.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"components": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -582,6 +587,11 @@ func dataSourceFunctionsRuntimeRead(c context.Context, d *schema.ResourceData, m
 		o.SetCodeFileName(x)
 	}
 
+	if v, ok := d.GetOk("code_template"); ok {
+		x := (v.(string))
+		o.SetCodeTemplate(x)
+	}
+
 	if v, ok := d.GetOk("components"); ok {
 		x := make([]models.FunctionsRuntimeComponent, 0)
 		s := v.([]interface{})
@@ -961,6 +971,7 @@ func dataSourceFunctionsRuntimeRead(c context.Context, d *schema.ResourceData, m
 				temp["catalog"] = flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["code_file_name"] = (s.GetCodeFileName())
+				temp["code_template"] = (s.GetCodeTemplate())
 
 				temp["components"] = flattenListFunctionsRuntimeComponent(s.GetComponents(), d)
 

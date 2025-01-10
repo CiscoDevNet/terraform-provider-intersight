@@ -17,6 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `action`:(string) Action against the Runtime.* `None` - No action is set, this is the default value for action field.* `Disable` - Disable an instance of a Runtime.* `Deprecate` - Deprecate an instance of a Runtime.* `FlagInsecure` - Flag an instance of a Runtime as insecure. 
 * `code_file_name`:(string) Name of file containing function source code. 
+* `code_template`:(string) Template to guide on how to compose code. 
 * `create_time`:(string) The time when this managed object was created. 
 * `create_user`:(string) The user identifier who created the language runtime. 
 * `deprecated`:(bool) Indicate if this language runtime is deprecated. 

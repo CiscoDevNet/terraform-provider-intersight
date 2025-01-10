@@ -35,6 +35,18 @@ func Test_intersight_FunctionsApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FunctionsApiService CreateFunctionsFunctionVersion", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FunctionsApi.CreateFunctionsFunctionVersion(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FunctionsApiService CreateFunctionsRuntime", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -124,6 +136,32 @@ func Test_intersight_FunctionsApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FunctionsApiService GetFunctionsFunctionVersionByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FunctionsApi.GetFunctionsFunctionVersionByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FunctionsApiService GetFunctionsFunctionVersionList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FunctionsApi.GetFunctionsFunctionVersionList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FunctionsApiService GetFunctionsRuntimeByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -190,6 +228,20 @@ func Test_intersight_FunctionsApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test FunctionsApiService PatchFunctionsFunctionVersion", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FunctionsApi.PatchFunctionsFunctionVersion(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FunctionsApiService PatchFunctionsRuntime", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -225,6 +277,20 @@ func Test_intersight_FunctionsApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.FunctionsApi.UpdateFunctionsFunction(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FunctionsApiService UpdateFunctionsFunctionVersion", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.FunctionsApi.UpdateFunctionsFunctionVersion(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
