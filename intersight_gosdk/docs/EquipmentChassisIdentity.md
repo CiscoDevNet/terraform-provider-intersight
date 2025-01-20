@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.ChassisIdentity"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.ChassisIdentity"]
 **IoCardIdentityList** | Pointer to [**[]EquipmentIoCardIdentity**](EquipmentIoCardIdentity.md) |  | [optional] 
+**ResetToDefault** | Pointer to **string** | Determines the default configuration deployment state for a chassis. * &#x60;NA&#x60; - Configuration deployment is not applicable for the chassis. * &#x60;Pending&#x60; - Configuration is not deployed to either A or B side IO card of the chassis. * &#x60;Applied&#x60; - Configuration is deployed to both A and B side IO cards of the chassis. * &#x60;PendingA&#x60; - Configuration deployment is pending in the A side IO card of the chassis. * &#x60;PendingB&#x60; - Configuration deployment is pending in the B side IO card of the chassis. | [optional] [readonly] [default to "NA"]
 **Chassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 
 ## Methods
@@ -103,6 +104,31 @@ HasIoCardIdentityList returns a boolean if a field has been set.
 `func (o *EquipmentChassisIdentity) UnsetIoCardIdentityList()`
 
 UnsetIoCardIdentityList ensures that no value is present for IoCardIdentityList, not even an explicit nil
+### GetResetToDefault
+
+`func (o *EquipmentChassisIdentity) GetResetToDefault() string`
+
+GetResetToDefault returns the ResetToDefault field if non-nil, zero value otherwise.
+
+### GetResetToDefaultOk
+
+`func (o *EquipmentChassisIdentity) GetResetToDefaultOk() (*string, bool)`
+
+GetResetToDefaultOk returns a tuple with the ResetToDefault field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResetToDefault
+
+`func (o *EquipmentChassisIdentity) SetResetToDefault(v string)`
+
+SetResetToDefault sets ResetToDefault field to given value.
+
+### HasResetToDefault
+
+`func (o *EquipmentChassisIdentity) HasResetToDefault() bool`
+
+HasResetToDefault returns a boolean if a field has been set.
+
 ### GetChassis
 
 `func (o *EquipmentChassisIdentity) GetChassis() EquipmentChassisRelationship`

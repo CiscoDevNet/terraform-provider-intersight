@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024100405
+API version: 1.0.11-2024120409
 Contact: intersight@cisco.com
 */
 
@@ -31,7 +31,9 @@ type IamLdapProvider struct {
 	// LDAP Server Port for connection establishment.
 	Port *int64 `json:"Port,omitempty"`
 	// LDAP Server Address, can be IP address or hostname.
-	Server               *string                           `json:"Server,omitempty"`
+	Server *string `json:"Server,omitempty"`
+	// LDAP server vendor type used for authentication. * `OpenLDAP` - Open source LDAP server for remote authentication. * `MSAD` - Microsoft active directory for remote authentication.
+	Vendor               *string                           `json:"Vendor,omitempty"`
 	LdapPolicy           NullableIamLdapPolicyRelationship `json:"LdapPolicy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -48,6 +50,8 @@ func NewIamLdapProvider(classId string, objectType string) *IamLdapProvider {
 	this.ObjectType = objectType
 	var port int64 = 389
 	this.Port = &port
+	var vendor string = "OpenLDAP"
+	this.Vendor = &vendor
 	return &this
 }
 
@@ -62,6 +66,8 @@ func NewIamLdapProviderWithDefaults() *IamLdapProvider {
 	this.ObjectType = objectType
 	var port int64 = 389
 	this.Port = &port
+	var vendor string = "OpenLDAP"
+	this.Vendor = &vendor
 	return &this
 }
 
@@ -187,6 +193,38 @@ func (o *IamLdapProvider) SetServer(v string) {
 	o.Server = &v
 }
 
+// GetVendor returns the Vendor field value if set, zero value otherwise.
+func (o *IamLdapProvider) GetVendor() string {
+	if o == nil || IsNil(o.Vendor) {
+		var ret string
+		return ret
+	}
+	return *o.Vendor
+}
+
+// GetVendorOk returns a tuple with the Vendor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLdapProvider) GetVendorOk() (*string, bool) {
+	if o == nil || IsNil(o.Vendor) {
+		return nil, false
+	}
+	return o.Vendor, true
+}
+
+// HasVendor returns a boolean if a field has been set.
+func (o *IamLdapProvider) HasVendor() bool {
+	if o != nil && !IsNil(o.Vendor) {
+		return true
+	}
+
+	return false
+}
+
+// SetVendor gets a reference to the given string and assigns it to the Vendor field.
+func (o *IamLdapProvider) SetVendor(v string) {
+	o.Vendor = &v
+}
+
 // GetLdapPolicy returns the LdapPolicy field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *IamLdapProvider) GetLdapPolicy() IamLdapPolicyRelationship {
 	if o == nil || IsNil(o.LdapPolicy.Get()) {
@@ -262,6 +300,9 @@ func (o IamLdapProvider) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Server) {
 		toSerialize["Server"] = o.Server
 	}
+	if !IsNil(o.Vendor) {
+		toSerialize["Vendor"] = o.Vendor
+	}
 	if o.LdapPolicy.IsSet() {
 		toSerialize["LdapPolicy"] = o.LdapPolicy.Get()
 	}
@@ -323,7 +364,9 @@ func (o *IamLdapProvider) UnmarshalJSON(data []byte) (err error) {
 		// LDAP Server Port for connection establishment.
 		Port *int64 `json:"Port,omitempty"`
 		// LDAP Server Address, can be IP address or hostname.
-		Server     *string                           `json:"Server,omitempty"`
+		Server *string `json:"Server,omitempty"`
+		// LDAP server vendor type used for authentication. * `OpenLDAP` - Open source LDAP server for remote authentication. * `MSAD` - Microsoft active directory for remote authentication.
+		Vendor     *string                           `json:"Vendor,omitempty"`
 		LdapPolicy NullableIamLdapPolicyRelationship `json:"LdapPolicy,omitempty"`
 	}
 
@@ -336,6 +379,7 @@ func (o *IamLdapProvider) UnmarshalJSON(data []byte) (err error) {
 		varIamLdapProvider.ObjectType = varIamLdapProviderWithoutEmbeddedStruct.ObjectType
 		varIamLdapProvider.Port = varIamLdapProviderWithoutEmbeddedStruct.Port
 		varIamLdapProvider.Server = varIamLdapProviderWithoutEmbeddedStruct.Server
+		varIamLdapProvider.Vendor = varIamLdapProviderWithoutEmbeddedStruct.Vendor
 		varIamLdapProvider.LdapPolicy = varIamLdapProviderWithoutEmbeddedStruct.LdapPolicy
 		*o = IamLdapProvider(varIamLdapProvider)
 	} else {
@@ -358,6 +402,7 @@ func (o *IamLdapProvider) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Port")
 		delete(additionalProperties, "Server")
+		delete(additionalProperties, "Vendor")
 		delete(additionalProperties, "LdapPolicy")
 
 		// remove fields from embedded structs

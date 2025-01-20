@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.ArrayDataType"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ArrayDataType"]
-**ArrayItemType** | Pointer to [**NullableWorkflowArrayItem**](WorkflowArrayItem.md) |  | [optional] 
+**ArrayItemType** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | ArrayItem represents an array item within the array. | [optional] 
 **Max** | Pointer to **int64** | Specify the maximum value of the array. | [optional] 
 **Min** | Pointer to **int64** | Specify the minimum value of the array. | [optional] 
 
@@ -71,20 +71,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetArrayItemType
 
-`func (o *WorkflowArrayDataType) GetArrayItemType() WorkflowArrayItem`
+`func (o *WorkflowArrayDataType) GetArrayItemType() MoBaseComplexType`
 
 GetArrayItemType returns the ArrayItemType field if non-nil, zero value otherwise.
 
 ### GetArrayItemTypeOk
 
-`func (o *WorkflowArrayDataType) GetArrayItemTypeOk() (*WorkflowArrayItem, bool)`
+`func (o *WorkflowArrayDataType) GetArrayItemTypeOk() (*MoBaseComplexType, bool)`
 
 GetArrayItemTypeOk returns a tuple with the ArrayItemType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetArrayItemType
 
-`func (o *WorkflowArrayDataType) SetArrayItemType(v WorkflowArrayItem)`
+`func (o *WorkflowArrayDataType) SetArrayItemType(v MoBaseComplexType)`
 
 SetArrayItemType sets ArrayItemType field to given value.
 

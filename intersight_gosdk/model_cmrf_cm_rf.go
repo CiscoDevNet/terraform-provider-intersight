@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024100405
+API version: 1.0.11-2024120409
 Contact: intersight@cisco.com
 */
 
@@ -25,7 +25,9 @@ var _ MappedNullable = &CmrfCmRf{}
 type CmrfCmRf struct {
 	MoBaseComplexType
 	// The Moid of the referenced REST resource.
-	Moid                 *string `json:"Moid,omitempty"`
+	Moid *string `json:"Moid,omitempty"`
+	// An OData $filter expression which describes the REST resource to be referenced. This field may be set instead of 'moid' by clients. 1. If 'moid' is set this field is ignored. 1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the resource matching the filter expression and populates it in the Cmrf that is part of the object instance being inserted/updated to fulfill the REST request. An error is returned if the filter matches zero or more than one REST resource. An example filter string is: Serial eq '3AA8B7T11'.
+	Selector             *string `json:"Selector,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -82,6 +84,38 @@ func (o *CmrfCmRf) SetMoid(v string) {
 	o.Moid = &v
 }
 
+// GetSelector returns the Selector field value if set, zero value otherwise.
+func (o *CmrfCmRf) GetSelector() string {
+	if o == nil || IsNil(o.Selector) {
+		var ret string
+		return ret
+	}
+	return *o.Selector
+}
+
+// GetSelectorOk returns a tuple with the Selector field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CmrfCmRf) GetSelectorOk() (*string, bool) {
+	if o == nil || IsNil(o.Selector) {
+		return nil, false
+	}
+	return o.Selector, true
+}
+
+// HasSelector returns a boolean if a field has been set.
+func (o *CmrfCmRf) HasSelector() bool {
+	if o != nil && !IsNil(o.Selector) {
+		return true
+	}
+
+	return false
+}
+
+// SetSelector gets a reference to the given string and assigns it to the Selector field.
+func (o *CmrfCmRf) SetSelector(v string) {
+	o.Selector = &v
+}
+
 func (o CmrfCmRf) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -102,6 +136,9 @@ func (o CmrfCmRf) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Moid) {
 		toSerialize["Moid"] = o.Moid
+	}
+	if !IsNil(o.Selector) {
+		toSerialize["Selector"] = o.Selector
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -153,6 +190,8 @@ func (o *CmrfCmRf) UnmarshalJSON(data []byte) (err error) {
 	type CmrfCmRfWithoutEmbeddedStruct struct {
 		// The Moid of the referenced REST resource.
 		Moid *string `json:"Moid,omitempty"`
+		// An OData $filter expression which describes the REST resource to be referenced. This field may be set instead of 'moid' by clients. 1. If 'moid' is set this field is ignored. 1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the resource matching the filter expression and populates it in the Cmrf that is part of the object instance being inserted/updated to fulfill the REST request. An error is returned if the filter matches zero or more than one REST resource. An example filter string is: Serial eq '3AA8B7T11'.
+		Selector *string `json:"Selector,omitempty"`
 	}
 
 	varCmrfCmRfWithoutEmbeddedStruct := CmrfCmRfWithoutEmbeddedStruct{}
@@ -161,6 +200,7 @@ func (o *CmrfCmRf) UnmarshalJSON(data []byte) (err error) {
 	if err == nil {
 		varCmrfCmRf := _CmrfCmRf{}
 		varCmrfCmRf.Moid = varCmrfCmRfWithoutEmbeddedStruct.Moid
+		varCmrfCmRf.Selector = varCmrfCmRfWithoutEmbeddedStruct.Selector
 		*o = CmrfCmRf(varCmrfCmRf)
 	} else {
 		return err
@@ -179,6 +219,7 @@ func (o *CmrfCmRf) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "Moid")
+		delete(additionalProperties, "Selector")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

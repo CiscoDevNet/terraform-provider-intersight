@@ -120,7 +120,7 @@ func getHyperflexLocalCredentialPolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"hxdp_root_pwd": {
-			Description: "HyperFlex storage controller VM password must contain a minimum of 10 characters, with at least 1 lowercase, 1 uppercase, 1 numeric, and 1 of these -_@#$%^&*! special characters.",
+			Description: "HyperFlex storage controller VM password must contain a minimum of 10 characters, with at least 1 lowercase, 1 uppercase, 1 numeric, and 1 of these -._@#$%^&*! special characters.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

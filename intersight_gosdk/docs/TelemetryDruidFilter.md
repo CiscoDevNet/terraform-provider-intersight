@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | 
+**Type** | **NullableString** |  | 
 **Dimension** | **string** | Input column or virtual column name to filter. | 
 **Value** | **string** | The value of a dimension. | 
 **ExtractionFn** | Pointer to [**TelemetryDruidExtractionFunction**](TelemetryDruidExtractionFunction.md) |  | [optional] 
@@ -32,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewTelemetryDruidFilter
 
-`func NewTelemetryDruidFilter(type_ string, dimension string, value string, column string, matchValueType string, matchValue interface{}, dimensions []TelemetryDruidDimensionSpec, fields []TelemetryDruidFilter, field TelemetryDruidFilter, values []string, pattern string, intervals []string, query TelemetryDruidQuerySpec, expression string, ) *TelemetryDruidFilter`
+`func NewTelemetryDruidFilter(type_ NullableString, dimension string, value string, column string, matchValueType string, matchValue interface{}, dimensions []TelemetryDruidDimensionSpec, fields []TelemetryDruidFilter, field TelemetryDruidFilter, values []string, pattern string, intervals []string, query TelemetryDruidQuerySpec, expression string, ) *TelemetryDruidFilter`
 
 NewTelemetryDruidFilter instantiates a new TelemetryDruidFilter object
 This constructor will assign default values to properties that have it defined,
@@ -67,6 +67,16 @@ and a boolean to check if the value has been set.
 SetType sets Type field to given value.
 
 
+### SetTypeNil
+
+`func (o *TelemetryDruidFilter) SetTypeNil(b bool)`
+
+ SetTypeNil sets the value for Type to be an explicit nil
+
+### UnsetType
+`func (o *TelemetryDruidFilter) UnsetType()`
+
+UnsetType ensures that no value is present for Type, not even an explicit nil
 ### GetDimension
 
 `func (o *TelemetryDruidFilter) GetDimension() string`

@@ -592,11 +592,11 @@ func dataSourceVirtualizationHostRead(c context.Context, d *schema.ResourceData,
 	}
 
 	if v, ok := d.GetOk("host_config"); ok {
-		p := make([]models.VirtualizationBaseHostConfiguration, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.VirtualizationBaseHostConfiguration{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1054,7 +1054,7 @@ func dataSourceVirtualizationHostRead(c context.Context, d *schema.ResourceData,
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["evacuate"] = (s.GetEvacuate())
 
-				temp["host_config"] = flattenMapVirtualizationBaseHostConfiguration(s.GetHostConfig(), d)
+				temp["host_config"] = flattenMapMoBaseComplexType(s.GetHostConfig(), d)
 				temp["hypervisor_type"] = (s.GetHypervisorType())
 				temp["identity"] = (s.GetIdentity())
 

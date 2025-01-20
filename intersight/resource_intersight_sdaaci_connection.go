@@ -140,24 +140,7 @@ func resourceSdaaciConnection() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Default:     "sdaaci.Connection",
-			},
-			"create_time": {
-				Description: "The time when this managed object was created.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-					if val != nil {
-						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
-					}
-					return
-				}},
-			"dnac_target": {
+			"catalyst_center_target": {
 				Description: "A reference to a assetTarget resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -197,6 +180,23 @@ func resourceSdaaciConnection() *schema.Resource {
 					},
 				},
 			},
+			"class_id": {
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "sdaaci.Connection",
+			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
@@ -724,9 +724,7 @@ func resourceSdaaciConnectionCreate(c context.Context, d *schema.ResourceData, m
 		o.SetCampusFabricSite(x)
 	}
 
-	o.SetClassId("sdaaci.Connection")
-
-	if v, ok := d.GetOk("dnac_target"); ok {
+	if v, ok := d.GetOk("catalyst_center_target"); ok {
 		p := make([]models.AssetTargetRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -765,9 +763,11 @@ func resourceSdaaciConnectionCreate(c context.Context, d *schema.ResourceData, m
 		}
 		if len(p) > 0 {
 			x := p[0]
-			o.SetDnacTarget(x)
+			o.SetCatalystCenterTarget(x)
 		}
 	}
+
+	o.SetClassId("sdaaci.Connection")
 
 	if v, ok := d.GetOk("epg"); ok {
 		x := (v.(string))
@@ -1025,16 +1025,16 @@ func resourceSdaaciConnectionRead(c context.Context, d *schema.ResourceData, met
 		return diag.Errorf("error occurred while setting property CampusFabricSite in SdaaciConnection object: %s", err.Error())
 	}
 
+	if err := d.Set("catalyst_center_target", flattenMapAssetTargetRelationship(s.GetCatalystCenterTarget(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property CatalystCenterTarget in SdaaciConnection object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in SdaaciConnection object: %s", err.Error())
 	}
 
 	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property CreateTime in SdaaciConnection object: %s", err.Error())
-	}
-
-	if err := d.Set("dnac_target", flattenMapAssetTargetRelationship(s.GetDnacTarget(), d)); err != nil {
-		return diag.Errorf("error occurred while setting property DnacTarget in SdaaciConnection object: %s", err.Error())
 	}
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
@@ -1214,10 +1214,8 @@ func resourceSdaaciConnectionUpdate(c context.Context, d *schema.ResourceData, m
 		o.SetCampusFabricSite(x)
 	}
 
-	o.SetClassId("sdaaci.Connection")
-
-	if d.HasChange("dnac_target") {
-		v := d.Get("dnac_target")
+	if d.HasChange("catalyst_center_target") {
+		v := d.Get("catalyst_center_target")
 		p := make([]models.AssetTargetRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1256,9 +1254,11 @@ func resourceSdaaciConnectionUpdate(c context.Context, d *schema.ResourceData, m
 		}
 		if len(p) > 0 {
 			x := p[0]
-			o.SetDnacTarget(x)
+			o.SetCatalystCenterTarget(x)
 		}
 	}
+
+	o.SetClassId("sdaaci.Connection")
 
 	if d.HasChange("epg") {
 		v := d.Get("epg")

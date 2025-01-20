@@ -366,6 +366,11 @@ func getEquipmentChassisIdentitySchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"reset_to_default": {
+			Description: "Determines the default configuration deployment state for a chassis.\n* `NA` - Configuration deployment is not applicable for the chassis.\n* `Pending` - Configuration is not deployed to either A or B side IO card of the chassis.\n* `Applied` - Configuration is deployed to both A and B side IO cards of the chassis.\n* `PendingA` - Configuration deployment is pending in the A side IO card of the chassis.\n* `PendingB` - Configuration deployment is pending in the B side IO card of the chassis.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"serial": {
 			Description: "The serial number of the equipment.",
 			Type:        schema.TypeString,
@@ -906,6 +911,11 @@ func dataSourceEquipmentChassisIdentityRead(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOk("reset_to_default"); ok {
+		x := (v.(string))
+		o.SetResetToDefault(x)
+	}
+
 	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
@@ -1096,6 +1106,7 @@ func dataSourceEquipmentChassisIdentityRead(c context.Context, d *schema.Resourc
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+				temp["reset_to_default"] = (s.GetResetToDefault())
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LdapProvider"]
 **Port** | Pointer to **int64** | LDAP Server Port for connection establishment. | [optional] [default to 389]
 **Server** | Pointer to **string** | LDAP Server Address, can be IP address or hostname. | [optional] 
+**Vendor** | Pointer to **string** | LDAP server vendor type used for authentication. * &#x60;OpenLDAP&#x60; - Open source LDAP server for remote authentication. * &#x60;MSAD&#x60; - Microsoft active directory for remote authentication. | [optional] [default to "OpenLDAP"]
 **LdapPolicy** | Pointer to [**NullableIamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
 
 ## Methods
@@ -118,6 +119,31 @@ SetServer sets Server field to given value.
 `func (o *IamLdapProvider) HasServer() bool`
 
 HasServer returns a boolean if a field has been set.
+
+### GetVendor
+
+`func (o *IamLdapProvider) GetVendor() string`
+
+GetVendor returns the Vendor field if non-nil, zero value otherwise.
+
+### GetVendorOk
+
+`func (o *IamLdapProvider) GetVendorOk() (*string, bool)`
+
+GetVendorOk returns a tuple with the Vendor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVendor
+
+`func (o *IamLdapProvider) SetVendor(v string)`
+
+SetVendor sets Vendor field to given value.
+
+### HasVendor
+
+`func (o *IamLdapProvider) HasVendor() bool`
+
+HasVendor returns a boolean if a field has been set.
 
 ### GetLdapPolicy
 

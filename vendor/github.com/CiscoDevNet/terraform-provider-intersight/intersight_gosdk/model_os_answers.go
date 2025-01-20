@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024100405
+API version: 1.0.11-2024120409
 Contact: intersight@cisco.com
 */
 
@@ -34,8 +34,9 @@ type OsAnswers struct {
 	// Hostname to be configured for the server in the OS.
 	Hostname *string `json:"Hostname,omitempty"`
 	// IP configuration type. Values are Static or Dynamic configuration of IP. In case of static IP configuration, IP address, gateway and other details need to be populated. In case of dynamic the IP configuration is obtained dynamically from DHCP. * `static` - In case of static IP configuraton, provide the details such as IP address, netmask, and gateway. * `DHCP` - In case of dynamic IP configuration, the IP address, netmask and gateway detailsare obtained from DHCP.
-	IpConfigType    *string                   `json:"IpConfigType,omitempty"`
-	IpConfiguration NullableOsIpConfiguration `json:"IpConfiguration,omitempty"`
+	IpConfigType *string `json:"IpConfigType,omitempty"`
+	// The IP configuration used to configure Static IPv4/IPv6 configurations.
+	IpConfiguration NullableMoBaseComplexType `json:"IpConfiguration,omitempty"`
 	// Indicates whether the value of the 'answerFile' property has been set.
 	IsAnswerFileSet *bool `json:"IsAnswerFileSet,omitempty"`
 	// Enable to indicate Root Password provided is encrypted.
@@ -276,9 +277,9 @@ func (o *OsAnswers) SetIpConfigType(v string) {
 }
 
 // GetIpConfiguration returns the IpConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OsAnswers) GetIpConfiguration() OsIpConfiguration {
+func (o *OsAnswers) GetIpConfiguration() MoBaseComplexType {
 	if o == nil || IsNil(o.IpConfiguration.Get()) {
-		var ret OsIpConfiguration
+		var ret MoBaseComplexType
 		return ret
 	}
 	return *o.IpConfiguration.Get()
@@ -287,7 +288,7 @@ func (o *OsAnswers) GetIpConfiguration() OsIpConfiguration {
 // GetIpConfigurationOk returns a tuple with the IpConfiguration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OsAnswers) GetIpConfigurationOk() (*OsIpConfiguration, bool) {
+func (o *OsAnswers) GetIpConfigurationOk() (*MoBaseComplexType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -303,8 +304,8 @@ func (o *OsAnswers) HasIpConfiguration() bool {
 	return false
 }
 
-// SetIpConfiguration gets a reference to the given NullableOsIpConfiguration and assigns it to the IpConfiguration field.
-func (o *OsAnswers) SetIpConfiguration(v OsIpConfiguration) {
+// SetIpConfiguration gets a reference to the given NullableMoBaseComplexType and assigns it to the IpConfiguration field.
+func (o *OsAnswers) SetIpConfiguration(v MoBaseComplexType) {
 	o.IpConfiguration.Set(&v)
 }
 
@@ -700,8 +701,9 @@ func (o *OsAnswers) UnmarshalJSON(data []byte) (err error) {
 		// Hostname to be configured for the server in the OS.
 		Hostname *string `json:"Hostname,omitempty"`
 		// IP configuration type. Values are Static or Dynamic configuration of IP. In case of static IP configuration, IP address, gateway and other details need to be populated. In case of dynamic the IP configuration is obtained dynamically from DHCP. * `static` - In case of static IP configuraton, provide the details such as IP address, netmask, and gateway. * `DHCP` - In case of dynamic IP configuration, the IP address, netmask and gateway detailsare obtained from DHCP.
-		IpConfigType    *string                   `json:"IpConfigType,omitempty"`
-		IpConfiguration NullableOsIpConfiguration `json:"IpConfiguration,omitempty"`
+		IpConfigType *string `json:"IpConfigType,omitempty"`
+		// The IP configuration used to configure Static IPv4/IPv6 configurations.
+		IpConfiguration NullableMoBaseComplexType `json:"IpConfiguration,omitempty"`
 		// Indicates whether the value of the 'answerFile' property has been set.
 		IsAnswerFileSet *bool `json:"IsAnswerFileSet,omitempty"`
 		// Enable to indicate Root Password provided is encrypted.

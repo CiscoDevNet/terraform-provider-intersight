@@ -525,7 +525,6 @@ func resourceSoftwareUcsdDistributable() *schema.Resource {
 				Description: "The build which is recommended by Cisco.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "N",
 			},
 			"release": {
 				Description: "A reference to a softwarerepositoryRelease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1174,11 +1173,11 @@ func resourceSoftwareUcsdDistributableCreate(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("nr_source"); ok {
-		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewSoftwarerepositoryFileServerWithDefaults()
+			o := models.NewMoBaseComplexTypeWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1468,7 +1467,7 @@ func resourceSoftwareUcsdDistributableRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property SoftwareTypeId in SoftwareUcsdDistributable object: %s", err.Error())
 	}
 
-	if err := d.Set("nr_source", flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)); err != nil {
+	if err := d.Set("nr_source", flattenMapMoBaseComplexType(s.GetSource(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Source in SoftwareUcsdDistributable object: %s", err.Error())
 	}
 
@@ -1835,11 +1834,11 @@ func resourceSoftwareUcsdDistributableUpdate(c context.Context, d *schema.Resour
 
 	if d.HasChange("nr_source") {
 		v := d.Get("nr_source")
-		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.SoftwarerepositoryFileServer{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))

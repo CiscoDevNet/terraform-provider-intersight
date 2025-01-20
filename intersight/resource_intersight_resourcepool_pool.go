@@ -36,6 +36,13 @@ func resourceResourcepoolPool() *schema.Resource {
 					}
 					return
 				}},
+			"action": {
+				Description:  "The pool is evaluated for resources with associated policies based on action. This action will help users to re-sync the resources for a pool.\n* `None` - The pool will not be considered for evaluation.\n* `ReEvaluate` - The resources in the pool will be re-evaluated against the server pool qualification associated with it.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"None", "ReEvaluate"}, false),
+				Optional:     true,
+				Default:      "None",
+			},
 			"additional_properties": {
 				Type:             schema.TypeString,
 				Optional:         true,
@@ -291,11 +298,50 @@ func resourceResourcepoolPool() *schema.Resource {
 				},
 			},
 			"pool_type": {
-				Description:  "The resource management type in the pool, it can be either static or dynamic.\n* `Static` - The resources in the pool will not be changed until user manually update it.\n* `Dynamic` - The resources in the pool will be updated dynamically based on the condition.",
+				Description:  "The resource management type in the pool, it can be either static or dynamic.\n* `Static` - The resources in the pool will not be changed until user manually update it.\n* `Dynamic` - The resources in the pool will be updated dynamically based on the condition.\n* `Hybrid` - The resources in the pool can be added by the user statically or dynamically, based on the matching conditions of the qualification policy. If the pool contains both statically added resources and resources added based on the qualification policy, the pool type can be classified as hybrid.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"Static", "Dynamic"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"Static", "Dynamic", "Hybrid"}, false),
 				Optional:     true,
 				Default:      "Static",
+			},
+			"qualification_policies": {
+				Description: "An array of relationships to resourcepoolQualificationPolicy resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
 			},
 			"reserved": {
 				Description: "Number of IDs that are currently reserved (and not in use).",
@@ -308,6 +354,57 @@ func resourceResourcepoolPool() *schema.Resource {
 					}
 					return
 				}},
+			"resource_evaluation_status": {
+				Description: "The resources are added to the pool based on conditions specified by the qualifiers. If there are any changes in the qualifier conditions or the properties of the resources, the corresponding pool will be evaluated for those changes. Subsequently, resources will be updated in the pool based on matching criteria. The status of these changes is tracked using ResourceEvaluationStatus.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "resourcepool.ResourceEvaluationStatus",
+						},
+						"err_msg": {
+							Description: "The reason for the failure in ResourceEvaluation.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "resourcepool.ResourceEvaluationStatus",
+						},
+						"state": {
+							Description: "The state of the evaluation operation.\n* `ok` - The policy association or validation is successful.\n* `error` - The policy association or validation has failed.\n* `validating` - The policy association or validation is in progress.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
+					},
+				},
+			},
 			"resource_pool_parameters": {
 				Description: "The pool specific parameters.",
 				Type:        schema.TypeList,
@@ -338,11 +435,11 @@ func resourceResourcepoolPool() *schema.Resource {
 				},
 			},
 			"resource_type": {
-				Description:  "The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade.\n* `None` - The resource cannot consider for Resource Pool.\n* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.",
+				Description:  "The type of the resource present in the pool, example 'server' its combination of RackUnit and Blade.\n* `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade.\n* `None` - The resource cannot consider for Resource Pool.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"None", "Server"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"Server", "None"}, false),
 				Optional:     true,
-				Default:      "None",
+				Default:      "Server",
 			},
 			"selectors": {
 				Type:       schema.TypeList,
@@ -587,6 +684,11 @@ func resourceResourcepoolPoolCreate(c context.Context, d *schema.ResourceData, m
 	var de diag.Diagnostics
 	var o = models.NewResourcepoolPoolWithDefaults()
 
+	if v, ok := d.GetOk("action"); ok {
+		x := (v.(string))
+		o.SetAction(x)
+	}
+
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
@@ -668,12 +770,54 @@ func resourceResourcepoolPoolCreate(c context.Context, d *schema.ResourceData, m
 		o.SetPoolType(x)
 	}
 
+	if v, ok := d.GetOk("qualification_policies"); ok {
+		x := make([]models.ResourcepoolQualificationPolicyRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMoMoRefWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsResourcepoolQualificationPolicyRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetQualificationPolicies(x)
+		}
+	}
+
 	if v, ok := d.GetOk("resource_pool_parameters"); ok {
-		p := make([]models.ResourcepoolResourcePoolParameters, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewResourcepoolResourcePoolParametersWithDefaults()
+			o := models.NewMoBaseComplexTypeWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -825,6 +969,10 @@ func resourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, met
 		return diag.Errorf("error occurred while setting property AccountMoid in ResourcepoolPool object: %s", err.Error())
 	}
 
+	if err := d.Set("action", (s.GetAction())); err != nil {
+		return diag.Errorf("error occurred while setting property Action in ResourcepoolPool object: %s", err.Error())
+	}
+
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 		return diag.Errorf("error occurred while setting property AdditionalProperties in ResourcepoolPool object: %s", err.Error())
 	}
@@ -893,11 +1041,19 @@ func resourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, met
 		return diag.Errorf("error occurred while setting property PoolType in ResourcepoolPool object: %s", err.Error())
 	}
 
+	if err := d.Set("qualification_policies", flattenListResourcepoolQualificationPolicyRelationship(s.GetQualificationPolicies(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property QualificationPolicies in ResourcepoolPool object: %s", err.Error())
+	}
+
 	if err := d.Set("reserved", (s.GetReserved())); err != nil {
 		return diag.Errorf("error occurred while setting property Reserved in ResourcepoolPool object: %s", err.Error())
 	}
 
-	if err := d.Set("resource_pool_parameters", flattenMapResourcepoolResourcePoolParameters(s.GetResourcePoolParameters(), d)); err != nil {
+	if err := d.Set("resource_evaluation_status", flattenMapResourcepoolResourceEvaluationStatus(s.GetResourceEvaluationStatus(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ResourceEvaluationStatus in ResourcepoolPool object: %s", err.Error())
+	}
+
+	if err := d.Set("resource_pool_parameters", flattenMapMoBaseComplexType(s.GetResourcePoolParameters(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ResourcePoolParameters in ResourcepoolPool object: %s", err.Error())
 	}
 
@@ -935,6 +1091,12 @@ func resourceResourcepoolPoolUpdate(c context.Context, d *schema.ResourceData, m
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ResourcepoolPool{}
+
+	if d.HasChange("action") {
+		v := d.Get("action")
+		x := (v.(string))
+		o.SetAction(x)
+	}
 
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1024,13 +1186,54 @@ func resourceResourcepoolPoolUpdate(c context.Context, d *schema.ResourceData, m
 		o.SetPoolType(x)
 	}
 
+	if d.HasChange("qualification_policies") {
+		v := d.Get("qualification_policies")
+		x := make([]models.ResourcepoolQualificationPolicyRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsResourcepoolQualificationPolicyRelationship(o))
+		}
+		o.SetQualificationPolicies(x)
+	}
+
 	if d.HasChange("resource_pool_parameters") {
 		v := d.Get("resource_pool_parameters")
-		p := make([]models.ResourcepoolResourcePoolParameters, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.ResourcepoolResourcePoolParameters{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))

@@ -580,11 +580,11 @@ func dataSourceComputeHostUtilityOperationRead(c context.Context, d *schema.Reso
 	}
 
 	if v, ok := d.GetOk("host_op_config"); ok {
-		p := make([]models.ComputeHostUtilityOperationConfguration, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.ComputeHostUtilityOperationConfguration{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -973,7 +973,7 @@ func dataSourceComputeHostUtilityOperationRead(c context.Context, d *schema.Reso
 
 				temp["download_status"] = flattenMapComputeDownloadStatusRelationship(s.GetDownloadStatus(), d)
 
-				temp["host_op_config"] = flattenMapComputeHostUtilityOperationConfguration(s.GetHostOpConfig(), d)
+				temp["host_op_config"] = flattenMapMoBaseComplexType(s.GetHostOpConfig(), d)
 				temp["host_utility_operation_mode"] = (s.GetHostUtilityOperationMode())
 				temp["host_utility_operation_status"] = (s.GetHostUtilityOperationStatus())
 

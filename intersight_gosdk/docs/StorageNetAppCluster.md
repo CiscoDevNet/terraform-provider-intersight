@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppCluster"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppCluster"]
 **AutoSupport** | Pointer to [**NullableStorageNetAppAutoSupport**](StorageNetAppAutoSupport.md) |  | [optional] 
-**AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
+**AvgPerformanceMetrics** | Pointer to [**NullableStorageBasePerformanceMetricsAverage**](StorageBasePerformanceMetricsAverage.md) | Average performance metrics data for a NetApp storage resource over a given period of time. | [optional] 
 **ClusterEfficiency** | Pointer to [**NullableStorageNetAppStorageClusterEfficiency**](StorageNetAppStorageClusterEfficiency.md) |  | [optional] 
 **ClusterHealthStatus** | Pointer to **string** | The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. * &#x60;Unreachable&#x60; - Cluster status is unreachable. * &#x60;OK&#x60; - Cluster status is either ok or ok-with-suppressed. * &#x60;Degraded&#x60; - Cluster status is degraded. | [optional] [readonly] [default to "Unreachable"]
 **DefaultAdminLocked** | Pointer to **bool** | Indicates whether the default admin user is locked out. | [optional] [readonly] 
@@ -123,20 +123,20 @@ HasAutoSupport returns a boolean if a field has been set.
 UnsetAutoSupport ensures that no value is present for AutoSupport, not even an explicit nil
 ### GetAvgPerformanceMetrics
 
-`func (o *StorageNetAppCluster) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage`
+`func (o *StorageNetAppCluster) GetAvgPerformanceMetrics() StorageBasePerformanceMetricsAverage`
 
 GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field if non-nil, zero value otherwise.
 
 ### GetAvgPerformanceMetricsOk
 
-`func (o *StorageNetAppCluster) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool)`
+`func (o *StorageNetAppCluster) GetAvgPerformanceMetricsOk() (*StorageBasePerformanceMetricsAverage, bool)`
 
 GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvgPerformanceMetrics
 
-`func (o *StorageNetAppCluster) SetAvgPerformanceMetrics(v StorageNetAppPerformanceMetricsAverage)`
+`func (o *StorageNetAppCluster) SetAvgPerformanceMetrics(v StorageBasePerformanceMetricsAverage)`
 
 SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
 
@@ -146,6 +146,16 @@ SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
 
 HasAvgPerformanceMetrics returns a boolean if a field has been set.
 
+### SetAvgPerformanceMetricsNil
+
+`func (o *StorageNetAppCluster) SetAvgPerformanceMetricsNil(b bool)`
+
+ SetAvgPerformanceMetricsNil sets the value for AvgPerformanceMetrics to be an explicit nil
+
+### UnsetAvgPerformanceMetrics
+`func (o *StorageNetAppCluster) UnsetAvgPerformanceMetrics()`
+
+UnsetAvgPerformanceMetrics ensures that no value is present for AvgPerformanceMetrics, not even an explicit nil
 ### GetClusterEfficiency
 
 `func (o *StorageNetAppCluster) GetClusterEfficiency() StorageNetAppStorageClusterEfficiency`

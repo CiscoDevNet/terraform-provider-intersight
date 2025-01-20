@@ -18,6 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `domain`:(string) LDAP server domain the Group resides in. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `group_dn`:(string) LDAP Group DN in the LDAP server database. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) LDAP Group name in the LDAP server database. 

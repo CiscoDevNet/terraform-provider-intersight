@@ -926,11 +926,11 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 			}
 			if v, ok := l["ip_configuration"]; ok {
 				{
-					p := make([]models.OsIpConfiguration, 0, 1)
+					p := make([]models.MoBaseComplexType, 0, 1)
 					s := v.([]interface{})
 					for i := 0; i < len(s); i++ {
 						l := s[i].(map[string]interface{})
-						o := models.NewOsIpConfigurationWithDefaults()
+						o := models.NewMoBaseComplexTypeWithDefaults()
 						if v, ok := l["additional_properties"]; ok {
 							{
 								x := []byte(v.(string))
@@ -1123,11 +1123,11 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	if v, ok := d.GetOk("install_target"); ok {
-		p := make([]models.OsInstallTarget, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.OsInstallTarget{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1179,11 +1179,11 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	if v, ok := d.GetOk("operating_system_parameters"); ok {
-		p := make([]models.OsOperatingSystemParameters, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.OsOperatingSystemParameters{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1647,7 +1647,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 				temp["image"] = flattenMapSoftwarerepositoryOperatingSystemFileRelationship(s.GetImage(), d)
 				temp["install_method"] = (s.GetInstallMethod())
 
-				temp["install_target"] = flattenMapOsInstallTarget(s.GetInstallTarget(), d)
+				temp["install_target"] = flattenMapMoBaseComplexType(s.GetInstallTarget(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1655,7 +1655,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_state"] = (s.GetOperState())
 
-				temp["operating_system_parameters"] = flattenMapOsOperatingSystemParameters(s.GetOperatingSystemParameters(), d)
+				temp["operating_system_parameters"] = flattenMapMoBaseComplexType(s.GetOperatingSystemParameters(), d)
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024100405
+API version: 1.0.11-2024120409
 Contact: intersight@cisco.com
 */
 
@@ -35,8 +35,9 @@ type OsGlobalConfig struct {
 	// The install method to be used for OS installation - vMedia, iPXE. Only vMedia is supported as of now.
 	InstallMethod *string `json:"InstallMethod,omitempty"`
 	// The Prefill install Target Name.
-	InstallTargetType         *string                             `json:"InstallTargetType,omitempty"`
-	OperatingSystemParameters NullableOsOperatingSystemParameters `json:"OperatingSystemParameters,omitempty"`
+	InstallTargetType *string `json:"InstallTargetType,omitempty"`
+	// Installation parameters specific to selected OS.
+	OperatingSystemParameters NullableMoBaseComplexType `json:"OperatingSystemParameters,omitempty"`
 	// The Operating System Image name.
 	OsImageName *string `json:"OsImageName,omitempty"`
 	// ESXi Secure Boot installation is currently not supported. As a workaround, Secure Boot will be disabled before installation and restored after installation is complete. Enable to Override Secure Boot Configuration.
@@ -264,9 +265,9 @@ func (o *OsGlobalConfig) SetInstallTargetType(v string) {
 }
 
 // GetOperatingSystemParameters returns the OperatingSystemParameters field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OsGlobalConfig) GetOperatingSystemParameters() OsOperatingSystemParameters {
+func (o *OsGlobalConfig) GetOperatingSystemParameters() MoBaseComplexType {
 	if o == nil || IsNil(o.OperatingSystemParameters.Get()) {
-		var ret OsOperatingSystemParameters
+		var ret MoBaseComplexType
 		return ret
 	}
 	return *o.OperatingSystemParameters.Get()
@@ -275,7 +276,7 @@ func (o *OsGlobalConfig) GetOperatingSystemParameters() OsOperatingSystemParamet
 // GetOperatingSystemParametersOk returns a tuple with the OperatingSystemParameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OsGlobalConfig) GetOperatingSystemParametersOk() (*OsOperatingSystemParameters, bool) {
+func (o *OsGlobalConfig) GetOperatingSystemParametersOk() (*MoBaseComplexType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -291,8 +292,8 @@ func (o *OsGlobalConfig) HasOperatingSystemParameters() bool {
 	return false
 }
 
-// SetOperatingSystemParameters gets a reference to the given NullableOsOperatingSystemParameters and assigns it to the OperatingSystemParameters field.
-func (o *OsGlobalConfig) SetOperatingSystemParameters(v OsOperatingSystemParameters) {
+// SetOperatingSystemParameters gets a reference to the given NullableMoBaseComplexType and assigns it to the OperatingSystemParameters field.
+func (o *OsGlobalConfig) SetOperatingSystemParameters(v MoBaseComplexType) {
 	o.OperatingSystemParameters.Set(&v)
 }
 
@@ -549,8 +550,9 @@ func (o *OsGlobalConfig) UnmarshalJSON(data []byte) (err error) {
 		// The install method to be used for OS installation - vMedia, iPXE. Only vMedia is supported as of now.
 		InstallMethod *string `json:"InstallMethod,omitempty"`
 		// The Prefill install Target Name.
-		InstallTargetType         *string                             `json:"InstallTargetType,omitempty"`
-		OperatingSystemParameters NullableOsOperatingSystemParameters `json:"OperatingSystemParameters,omitempty"`
+		InstallTargetType *string `json:"InstallTargetType,omitempty"`
+		// Installation parameters specific to selected OS.
+		OperatingSystemParameters NullableMoBaseComplexType `json:"OperatingSystemParameters,omitempty"`
 		// The Operating System Image name.
 		OsImageName *string `json:"OsImageName,omitempty"`
 		// ESXi Secure Boot installation is currently not supported. As a workaround, Secure Boot will be disabled before installation and restored after installation is complete. Enable to Override Secure Boot Configuration.

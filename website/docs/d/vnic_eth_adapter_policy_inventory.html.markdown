@@ -20,6 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) Description of the policy. 
 * `device_mo_id`:(string) Device ID of the entity from where inventory is reported. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `ether_channel_pinning_enabled`:(bool) Enables EtherChannel Pinning to combine multiple physical links between two network switches into a single logical link. Transmit Queue Count should be at least 2 to enable ether channel pinning. 
 * `geneve_enabled`:(bool) GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints. 
 * `interrupt_scaling`:(bool) Enables Interrupt Scaling on the interface. 
 * `mod_time`:(string) The time when this managed object was last modified. 

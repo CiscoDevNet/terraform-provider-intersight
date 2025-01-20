@@ -115,17 +115,7 @@ func getSdaaciConnectionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"create_time": {
-			Description: "The time when this managed object was created.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"dnac_target": {
+		"catalyst_center_target": {
 			Description: "A reference to a assetTarget resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
@@ -159,6 +149,16 @@ func getSdaaciConnectionSchema() map[string]*schema.Schema {
 					},
 				},
 			},
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
@@ -654,17 +654,7 @@ func dataSourceSdaaciConnectionRead(c context.Context, d *schema.ResourceData, m
 		o.SetCampusFabricSite(x)
 	}
 
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(time.RFC1123, v.(string))
-		o.SetCreateTime(x)
-	}
-
-	if v, ok := d.GetOk("dnac_target"); ok {
+	if v, ok := d.GetOk("catalyst_center_target"); ok {
 		p := make([]models.AssetTargetRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -703,8 +693,18 @@ func dataSourceSdaaciConnectionRead(c context.Context, d *schema.ResourceData, m
 		}
 		if len(p) > 0 {
 			x := p[0]
-			o.SetDnacTarget(x)
+			o.SetCatalystCenterTarget(x)
 		}
+	}
+
+	if v, ok := d.GetOk("class_id"); ok {
+		x := (v.(string))
+		o.SetClassId(x)
+	}
+
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetCreateTime(x)
 	}
 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
@@ -1114,11 +1114,11 @@ func dataSourceSdaaciConnectionRead(c context.Context, d *schema.ResourceData, m
 
 				temp["apic_target"] = flattenMapAssetTargetRelationship(s.GetApicTarget(), d)
 				temp["campus_fabric_site"] = (s.GetCampusFabricSite())
+
+				temp["catalyst_center_target"] = flattenMapAssetTargetRelationship(s.GetCatalystCenterTarget(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
-
-				temp["dnac_target"] = flattenMapAssetTargetRelationship(s.GetDnacTarget(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["epg"] = (s.GetEpg())
 				temp["epg_subnet"] = (s.GetEpgSubnet())

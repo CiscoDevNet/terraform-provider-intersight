@@ -1217,11 +1217,11 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("file_server"); ok {
-		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
+		p := make([]models.MoBaseComplexType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.SoftwarerepositoryFileServer{}
+			o := &models.MoBaseComplexType{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1900,7 +1900,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 
 				temp["exclude_component_pid_list"] = flattenMapFirmwareExcludeComponentPidListType(s.GetExcludeComponentPidList(), d)
 
-				temp["file_server"] = flattenMapSoftwarerepositoryFileServer(s.GetFileServer(), d)
+				temp["file_server"] = flattenMapMoBaseComplexType(s.GetFileServer(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

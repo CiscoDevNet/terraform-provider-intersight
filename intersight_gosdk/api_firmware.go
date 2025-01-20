@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024100405
+API version: 1.0.11-2024120409
 Contact: intersight@cisco.com
 */
 
@@ -49,7 +49,7 @@ func (r ApiCreateFirmwareBiosDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareBiosDescriptorRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareBiosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareBiosDescriptorExecute(r)
 }
 
@@ -68,13 +68,13 @@ func (a *FirmwareApiService) CreateFirmwareBiosDescriptor(ctx context.Context) A
 
 // Execute executes the request
 //
-//	@return FirmwareBiosDescriptor
-func (a *FirmwareApiService) CreateFirmwareBiosDescriptorExecute(r ApiCreateFirmwareBiosDescriptorRequest) (*FirmwareBiosDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareBiosDescriptorExecute(r ApiCreateFirmwareBiosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareBiosDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareBiosDescriptor")
@@ -231,7 +231,7 @@ func (r ApiCreateFirmwareBoardControllerDescriptorRequest) IfNoneMatch(ifNoneMat
 	return r
 }
 
-func (r ApiCreateFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareBoardControllerDescriptorExecute(r)
 }
 
@@ -250,13 +250,13 @@ func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptor(ctx context
 
 // Execute executes the request
 //
-//	@return FirmwareBoardControllerDescriptor
-func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptorExecute(r ApiCreateFirmwareBoardControllerDescriptorRequest) (*FirmwareBoardControllerDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptorExecute(r ApiCreateFirmwareBoardControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareBoardControllerDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareBoardControllerDescriptor")
@@ -595,7 +595,7 @@ func (r ApiCreateFirmwareCimcDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareCimcDescriptorRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareCimcDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareCimcDescriptorExecute(r)
 }
 
@@ -614,13 +614,13 @@ func (a *FirmwareApiService) CreateFirmwareCimcDescriptor(ctx context.Context) A
 
 // Execute executes the request
 //
-//	@return FirmwareCimcDescriptor
-func (a *FirmwareApiService) CreateFirmwareCimcDescriptorExecute(r ApiCreateFirmwareCimcDescriptorRequest) (*FirmwareCimcDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareCimcDescriptorExecute(r ApiCreateFirmwareCimcDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareCimcDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareCimcDescriptor")
@@ -777,7 +777,7 @@ func (r ApiCreateFirmwareDimmDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareDimmDescriptorRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareDimmDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareDimmDescriptorExecute(r)
 }
 
@@ -796,13 +796,13 @@ func (a *FirmwareApiService) CreateFirmwareDimmDescriptor(ctx context.Context) A
 
 // Execute executes the request
 //
-//	@return FirmwareDimmDescriptor
-func (a *FirmwareApiService) CreateFirmwareDimmDescriptorExecute(r ApiCreateFirmwareDimmDescriptorRequest) (*FirmwareDimmDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareDimmDescriptorExecute(r ApiCreateFirmwareDimmDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareDimmDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareDimmDescriptor")
@@ -1141,7 +1141,7 @@ func (r ApiCreateFirmwareDriveDescriptorRequest) IfNoneMatch(ifNoneMatch string)
 	return r
 }
 
-func (r ApiCreateFirmwareDriveDescriptorRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareDriveDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareDriveDescriptorExecute(r)
 }
 
@@ -1160,13 +1160,13 @@ func (a *FirmwareApiService) CreateFirmwareDriveDescriptor(ctx context.Context) 
 
 // Execute executes the request
 //
-//	@return FirmwareDriveDescriptor
-func (a *FirmwareApiService) CreateFirmwareDriveDescriptorExecute(r ApiCreateFirmwareDriveDescriptorRequest) (*FirmwareDriveDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareDriveDescriptorExecute(r ApiCreateFirmwareDriveDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareDriveDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareDriveDescriptor")
@@ -1687,7 +1687,7 @@ func (r ApiCreateFirmwareGpuDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareGpuDescriptorRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareGpuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareGpuDescriptorExecute(r)
 }
 
@@ -1706,13 +1706,13 @@ func (a *FirmwareApiService) CreateFirmwareGpuDescriptor(ctx context.Context) Ap
 
 // Execute executes the request
 //
-//	@return FirmwareGpuDescriptor
-func (a *FirmwareApiService) CreateFirmwareGpuDescriptorExecute(r ApiCreateFirmwareGpuDescriptorRequest) (*FirmwareGpuDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareGpuDescriptorExecute(r ApiCreateFirmwareGpuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareGpuDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareGpuDescriptor")
@@ -1869,7 +1869,7 @@ func (r ApiCreateFirmwareHbaDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareHbaDescriptorRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareHbaDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareHbaDescriptorExecute(r)
 }
 
@@ -1888,13 +1888,13 @@ func (a *FirmwareApiService) CreateFirmwareHbaDescriptor(ctx context.Context) Ap
 
 // Execute executes the request
 //
-//	@return FirmwareHbaDescriptor
-func (a *FirmwareApiService) CreateFirmwareHbaDescriptorExecute(r ApiCreateFirmwareHbaDescriptorRequest) (*FirmwareHbaDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareHbaDescriptorExecute(r ApiCreateFirmwareHbaDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareHbaDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareHbaDescriptor")
@@ -2051,7 +2051,7 @@ func (r ApiCreateFirmwareIomDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareIomDescriptorRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareIomDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareIomDescriptorExecute(r)
 }
 
@@ -2070,13 +2070,13 @@ func (a *FirmwareApiService) CreateFirmwareIomDescriptor(ctx context.Context) Ap
 
 // Execute executes the request
 //
-//	@return FirmwareIomDescriptor
-func (a *FirmwareApiService) CreateFirmwareIomDescriptorExecute(r ApiCreateFirmwareIomDescriptorRequest) (*FirmwareIomDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareIomDescriptorExecute(r ApiCreateFirmwareIomDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareIomDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareIomDescriptor")
@@ -2233,7 +2233,7 @@ func (r ApiCreateFirmwareMswitchDescriptorRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateFirmwareMswitchDescriptorRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareMswitchDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareMswitchDescriptorExecute(r)
 }
 
@@ -2252,13 +2252,13 @@ func (a *FirmwareApiService) CreateFirmwareMswitchDescriptor(ctx context.Context
 
 // Execute executes the request
 //
-//	@return FirmwareMswitchDescriptor
-func (a *FirmwareApiService) CreateFirmwareMswitchDescriptorExecute(r ApiCreateFirmwareMswitchDescriptorRequest) (*FirmwareMswitchDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareMswitchDescriptorExecute(r ApiCreateFirmwareMswitchDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareMswitchDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareMswitchDescriptor")
@@ -2415,7 +2415,7 @@ func (r ApiCreateFirmwareNxosDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareNxosDescriptorRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareNxosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareNxosDescriptorExecute(r)
 }
 
@@ -2434,13 +2434,13 @@ func (a *FirmwareApiService) CreateFirmwareNxosDescriptor(ctx context.Context) A
 
 // Execute executes the request
 //
-//	@return FirmwareNxosDescriptor
-func (a *FirmwareApiService) CreateFirmwareNxosDescriptorExecute(r ApiCreateFirmwareNxosDescriptorRequest) (*FirmwareNxosDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareNxosDescriptorExecute(r ApiCreateFirmwareNxosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareNxosDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareNxosDescriptor")
@@ -2597,7 +2597,7 @@ func (r ApiCreateFirmwarePcieDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwarePcieDescriptorRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwarePcieDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwarePcieDescriptorExecute(r)
 }
 
@@ -2616,13 +2616,13 @@ func (a *FirmwareApiService) CreateFirmwarePcieDescriptor(ctx context.Context) A
 
 // Execute executes the request
 //
-//	@return FirmwarePcieDescriptor
-func (a *FirmwareApiService) CreateFirmwarePcieDescriptorExecute(r ApiCreateFirmwarePcieDescriptorRequest) (*FirmwarePcieDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwarePcieDescriptorExecute(r ApiCreateFirmwarePcieDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwarePcieDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwarePcieDescriptor")
@@ -2961,7 +2961,7 @@ func (r ApiCreateFirmwarePsuDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwarePsuDescriptorRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwarePsuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwarePsuDescriptorExecute(r)
 }
 
@@ -2980,13 +2980,13 @@ func (a *FirmwareApiService) CreateFirmwarePsuDescriptor(ctx context.Context) Ap
 
 // Execute executes the request
 //
-//	@return FirmwarePsuDescriptor
-func (a *FirmwareApiService) CreateFirmwarePsuDescriptorExecute(r ApiCreateFirmwarePsuDescriptorRequest) (*FirmwarePsuDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwarePsuDescriptorExecute(r ApiCreateFirmwarePsuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwarePsuDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwarePsuDescriptor")
@@ -3143,7 +3143,7 @@ func (r ApiCreateFirmwareSasExpanderDescriptorRequest) IfNoneMatch(ifNoneMatch s
 	return r
 }
 
-func (r ApiCreateFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareSasExpanderDescriptorExecute(r)
 }
 
@@ -3162,13 +3162,13 @@ func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptor(ctx context.Con
 
 // Execute executes the request
 //
-//	@return FirmwareSasExpanderDescriptor
-func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptorExecute(r ApiCreateFirmwareSasExpanderDescriptorRequest) (*FirmwareSasExpanderDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptorExecute(r ApiCreateFirmwareSasExpanderDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareSasExpanderDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareSasExpanderDescriptor")
@@ -3507,7 +3507,7 @@ func (r ApiCreateFirmwareStorageControllerDescriptorRequest) IfNoneMatch(ifNoneM
 	return r
 }
 
-func (r ApiCreateFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareStorageControllerDescriptorExecute(r)
 }
 
@@ -3526,13 +3526,13 @@ func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptor(ctx conte
 
 // Execute executes the request
 //
-//	@return FirmwareStorageControllerDescriptor
-func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptorExecute(r ApiCreateFirmwareStorageControllerDescriptorRequest) (*FirmwareStorageControllerDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptorExecute(r ApiCreateFirmwareStorageControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareStorageControllerDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareStorageControllerDescriptor")
@@ -7703,7 +7703,7 @@ type ApiGetFirmwareBiosDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareBiosDescriptorByMoidRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareBiosDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareBiosDescriptorByMoidExecute(r)
 }
 
@@ -7724,13 +7724,13 @@ func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoid(ctx context.Context
 
 // Execute executes the request
 //
-//	@return FirmwareBiosDescriptor
-func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoidExecute(r ApiGetFirmwareBiosDescriptorByMoidRequest) (*FirmwareBiosDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoidExecute(r ApiGetFirmwareBiosDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareBiosDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareBiosDescriptorByMoid")
@@ -8132,7 +8132,7 @@ type ApiGetFirmwareBoardControllerDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareBoardControllerDescriptorByMoidExecute(r)
 }
 
@@ -8153,13 +8153,13 @@ func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoid(ctx cont
 
 // Execute executes the request
 //
-//	@return FirmwareBoardControllerDescriptor
-func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoidExecute(r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) (*FirmwareBoardControllerDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoidExecute(r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareBoardControllerDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareBoardControllerDescriptorByMoid")
@@ -8990,7 +8990,7 @@ type ApiGetFirmwareCimcDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareCimcDescriptorByMoidRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareCimcDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareCimcDescriptorByMoidExecute(r)
 }
 
@@ -9011,13 +9011,13 @@ func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoid(ctx context.Context
 
 // Execute executes the request
 //
-//	@return FirmwareCimcDescriptor
-func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoidExecute(r ApiGetFirmwareCimcDescriptorByMoidRequest) (*FirmwareCimcDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoidExecute(r ApiGetFirmwareCimcDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareCimcDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareCimcDescriptorByMoid")
@@ -9419,7 +9419,7 @@ type ApiGetFirmwareDimmDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareDimmDescriptorByMoidRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareDimmDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareDimmDescriptorByMoidExecute(r)
 }
 
@@ -9440,13 +9440,13 @@ func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoid(ctx context.Context
 
 // Execute executes the request
 //
-//	@return FirmwareDimmDescriptor
-func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoidExecute(r ApiGetFirmwareDimmDescriptorByMoidRequest) (*FirmwareDimmDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoidExecute(r ApiGetFirmwareDimmDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareDimmDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDimmDescriptorByMoid")
@@ -10706,7 +10706,7 @@ type ApiGetFirmwareDriveDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareDriveDescriptorByMoidRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareDriveDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareDriveDescriptorByMoidExecute(r)
 }
 
@@ -10727,13 +10727,13 @@ func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoid(ctx context.Contex
 
 // Execute executes the request
 //
-//	@return FirmwareDriveDescriptor
-func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoidExecute(r ApiGetFirmwareDriveDescriptorByMoidRequest) (*FirmwareDriveDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoidExecute(r ApiGetFirmwareDriveDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareDriveDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDriveDescriptorByMoid")
@@ -12422,7 +12422,7 @@ type ApiGetFirmwareGpuDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareGpuDescriptorByMoidRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareGpuDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareGpuDescriptorByMoidExecute(r)
 }
 
@@ -12443,13 +12443,13 @@ func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoid(ctx context.Context,
 
 // Execute executes the request
 //
-//	@return FirmwareGpuDescriptor
-func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoidExecute(r ApiGetFirmwareGpuDescriptorByMoidRequest) (*FirmwareGpuDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoidExecute(r ApiGetFirmwareGpuDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareGpuDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareGpuDescriptorByMoid")
@@ -12851,7 +12851,7 @@ type ApiGetFirmwareHbaDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareHbaDescriptorByMoidRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareHbaDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareHbaDescriptorByMoidExecute(r)
 }
 
@@ -12872,13 +12872,13 @@ func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoid(ctx context.Context,
 
 // Execute executes the request
 //
-//	@return FirmwareHbaDescriptor
-func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoidExecute(r ApiGetFirmwareHbaDescriptorByMoidRequest) (*FirmwareHbaDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoidExecute(r ApiGetFirmwareHbaDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareHbaDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareHbaDescriptorByMoid")
@@ -13280,7 +13280,7 @@ type ApiGetFirmwareIomDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareIomDescriptorByMoidRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareIomDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareIomDescriptorByMoidExecute(r)
 }
 
@@ -13301,13 +13301,13 @@ func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoid(ctx context.Context,
 
 // Execute executes the request
 //
-//	@return FirmwareIomDescriptor
-func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoidExecute(r ApiGetFirmwareIomDescriptorByMoidRequest) (*FirmwareIomDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoidExecute(r ApiGetFirmwareIomDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareIomDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareIomDescriptorByMoid")
@@ -13709,7 +13709,7 @@ type ApiGetFirmwareMswitchDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareMswitchDescriptorByMoidRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareMswitchDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareMswitchDescriptorByMoidExecute(r)
 }
 
@@ -13730,13 +13730,13 @@ func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoid(ctx context.Cont
 
 // Execute executes the request
 //
-//	@return FirmwareMswitchDescriptor
-func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoidExecute(r ApiGetFirmwareMswitchDescriptorByMoidRequest) (*FirmwareMswitchDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoidExecute(r ApiGetFirmwareMswitchDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareMswitchDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareMswitchDescriptorByMoid")
@@ -14138,7 +14138,7 @@ type ApiGetFirmwareNxosDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareNxosDescriptorByMoidRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareNxosDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareNxosDescriptorByMoidExecute(r)
 }
 
@@ -14159,13 +14159,13 @@ func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoid(ctx context.Context
 
 // Execute executes the request
 //
-//	@return FirmwareNxosDescriptor
-func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoidExecute(r ApiGetFirmwareNxosDescriptorByMoidRequest) (*FirmwareNxosDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoidExecute(r ApiGetFirmwareNxosDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareNxosDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareNxosDescriptorByMoid")
@@ -14567,7 +14567,7 @@ type ApiGetFirmwarePcieDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwarePcieDescriptorByMoidRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
+func (r ApiGetFirmwarePcieDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwarePcieDescriptorByMoidExecute(r)
 }
 
@@ -14588,13 +14588,13 @@ func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoid(ctx context.Context
 
 // Execute executes the request
 //
-//	@return FirmwarePcieDescriptor
-func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoidExecute(r ApiGetFirmwarePcieDescriptorByMoidRequest) (*FirmwarePcieDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoidExecute(r ApiGetFirmwarePcieDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwarePcieDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwarePcieDescriptorByMoid")
@@ -15425,7 +15425,7 @@ type ApiGetFirmwarePsuDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwarePsuDescriptorByMoidRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
+func (r ApiGetFirmwarePsuDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwarePsuDescriptorByMoidExecute(r)
 }
 
@@ -15446,13 +15446,13 @@ func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoid(ctx context.Context,
 
 // Execute executes the request
 //
-//	@return FirmwarePsuDescriptor
-func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoidExecute(r ApiGetFirmwarePsuDescriptorByMoidRequest) (*FirmwarePsuDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoidExecute(r ApiGetFirmwarePsuDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwarePsuDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwarePsuDescriptorByMoid")
@@ -16283,7 +16283,7 @@ type ApiGetFirmwareSasExpanderDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareSasExpanderDescriptorByMoidExecute(r)
 }
 
@@ -16304,13 +16304,13 @@ func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoid(ctx context.
 
 // Execute executes the request
 //
-//	@return FirmwareSasExpanderDescriptor
-func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoidExecute(r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) (*FirmwareSasExpanderDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoidExecute(r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareSasExpanderDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareSasExpanderDescriptorByMoid")
@@ -17141,7 +17141,7 @@ type ApiGetFirmwareStorageControllerDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareStorageControllerDescriptorByMoidExecute(r)
 }
 
@@ -17162,13 +17162,13 @@ func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoid(ctx co
 
 // Execute executes the request
 //
-//	@return FirmwareStorageControllerDescriptor
-func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoidExecute(r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) (*FirmwareStorageControllerDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoidExecute(r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareStorageControllerDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareStorageControllerDescriptorByMoid")
@@ -19729,7 +19729,7 @@ func (r ApiPatchFirmwareBiosDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareBiosDescriptorRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareBiosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareBiosDescriptorExecute(r)
 }
 
@@ -19750,13 +19750,13 @@ func (a *FirmwareApiService) PatchFirmwareBiosDescriptor(ctx context.Context, mo
 
 // Execute executes the request
 //
-//	@return FirmwareBiosDescriptor
-func (a *FirmwareApiService) PatchFirmwareBiosDescriptorExecute(r ApiPatchFirmwareBiosDescriptorRequest) (*FirmwareBiosDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareBiosDescriptorExecute(r ApiPatchFirmwareBiosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareBiosDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareBiosDescriptor")
@@ -19905,7 +19905,7 @@ func (r ApiPatchFirmwareBoardControllerDescriptorRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiPatchFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareBoardControllerDescriptorExecute(r)
 }
 
@@ -19926,13 +19926,13 @@ func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptor(ctx context.
 
 // Execute executes the request
 //
-//	@return FirmwareBoardControllerDescriptor
-func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptorExecute(r ApiPatchFirmwareBoardControllerDescriptorRequest) (*FirmwareBoardControllerDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptorExecute(r ApiPatchFirmwareBoardControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareBoardControllerDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareBoardControllerDescriptor")
@@ -20081,7 +20081,7 @@ func (r ApiPatchFirmwareCimcDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareCimcDescriptorRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareCimcDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareCimcDescriptorExecute(r)
 }
 
@@ -20102,13 +20102,13 @@ func (a *FirmwareApiService) PatchFirmwareCimcDescriptor(ctx context.Context, mo
 
 // Execute executes the request
 //
-//	@return FirmwareCimcDescriptor
-func (a *FirmwareApiService) PatchFirmwareCimcDescriptorExecute(r ApiPatchFirmwareCimcDescriptorRequest) (*FirmwareCimcDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareCimcDescriptorExecute(r ApiPatchFirmwareCimcDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareCimcDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareCimcDescriptor")
@@ -20257,7 +20257,7 @@ func (r ApiPatchFirmwareDimmDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareDimmDescriptorRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareDimmDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareDimmDescriptorExecute(r)
 }
 
@@ -20278,13 +20278,13 @@ func (a *FirmwareApiService) PatchFirmwareDimmDescriptor(ctx context.Context, mo
 
 // Execute executes the request
 //
-//	@return FirmwareDimmDescriptor
-func (a *FirmwareApiService) PatchFirmwareDimmDescriptorExecute(r ApiPatchFirmwareDimmDescriptorRequest) (*FirmwareDimmDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareDimmDescriptorExecute(r ApiPatchFirmwareDimmDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareDimmDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareDimmDescriptor")
@@ -20609,7 +20609,7 @@ func (r ApiPatchFirmwareDriveDescriptorRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchFirmwareDriveDescriptorRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareDriveDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareDriveDescriptorExecute(r)
 }
 
@@ -20630,13 +20630,13 @@ func (a *FirmwareApiService) PatchFirmwareDriveDescriptor(ctx context.Context, m
 
 // Execute executes the request
 //
-//	@return FirmwareDriveDescriptor
-func (a *FirmwareApiService) PatchFirmwareDriveDescriptorExecute(r ApiPatchFirmwareDriveDescriptorRequest) (*FirmwareDriveDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareDriveDescriptorExecute(r ApiPatchFirmwareDriveDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareDriveDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareDriveDescriptor")
@@ -20961,7 +20961,7 @@ func (r ApiPatchFirmwareGpuDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwareGpuDescriptorRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareGpuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareGpuDescriptorExecute(r)
 }
 
@@ -20982,13 +20982,13 @@ func (a *FirmwareApiService) PatchFirmwareGpuDescriptor(ctx context.Context, moi
 
 // Execute executes the request
 //
-//	@return FirmwareGpuDescriptor
-func (a *FirmwareApiService) PatchFirmwareGpuDescriptorExecute(r ApiPatchFirmwareGpuDescriptorRequest) (*FirmwareGpuDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareGpuDescriptorExecute(r ApiPatchFirmwareGpuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareGpuDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareGpuDescriptor")
@@ -21137,7 +21137,7 @@ func (r ApiPatchFirmwareHbaDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwareHbaDescriptorRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareHbaDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareHbaDescriptorExecute(r)
 }
 
@@ -21158,13 +21158,13 @@ func (a *FirmwareApiService) PatchFirmwareHbaDescriptor(ctx context.Context, moi
 
 // Execute executes the request
 //
-//	@return FirmwareHbaDescriptor
-func (a *FirmwareApiService) PatchFirmwareHbaDescriptorExecute(r ApiPatchFirmwareHbaDescriptorRequest) (*FirmwareHbaDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareHbaDescriptorExecute(r ApiPatchFirmwareHbaDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareHbaDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareHbaDescriptor")
@@ -21313,7 +21313,7 @@ func (r ApiPatchFirmwareIomDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwareIomDescriptorRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareIomDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareIomDescriptorExecute(r)
 }
 
@@ -21334,13 +21334,13 @@ func (a *FirmwareApiService) PatchFirmwareIomDescriptor(ctx context.Context, moi
 
 // Execute executes the request
 //
-//	@return FirmwareIomDescriptor
-func (a *FirmwareApiService) PatchFirmwareIomDescriptorExecute(r ApiPatchFirmwareIomDescriptorRequest) (*FirmwareIomDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareIomDescriptorExecute(r ApiPatchFirmwareIomDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareIomDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareIomDescriptor")
@@ -21489,7 +21489,7 @@ func (r ApiPatchFirmwareMswitchDescriptorRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchFirmwareMswitchDescriptorRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareMswitchDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareMswitchDescriptorExecute(r)
 }
 
@@ -21510,13 +21510,13 @@ func (a *FirmwareApiService) PatchFirmwareMswitchDescriptor(ctx context.Context,
 
 // Execute executes the request
 //
-//	@return FirmwareMswitchDescriptor
-func (a *FirmwareApiService) PatchFirmwareMswitchDescriptorExecute(r ApiPatchFirmwareMswitchDescriptorRequest) (*FirmwareMswitchDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareMswitchDescriptorExecute(r ApiPatchFirmwareMswitchDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareMswitchDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareMswitchDescriptor")
@@ -21665,7 +21665,7 @@ func (r ApiPatchFirmwareNxosDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareNxosDescriptorRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareNxosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareNxosDescriptorExecute(r)
 }
 
@@ -21686,13 +21686,13 @@ func (a *FirmwareApiService) PatchFirmwareNxosDescriptor(ctx context.Context, mo
 
 // Execute executes the request
 //
-//	@return FirmwareNxosDescriptor
-func (a *FirmwareApiService) PatchFirmwareNxosDescriptorExecute(r ApiPatchFirmwareNxosDescriptorRequest) (*FirmwareNxosDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareNxosDescriptorExecute(r ApiPatchFirmwareNxosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareNxosDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareNxosDescriptor")
@@ -21841,7 +21841,7 @@ func (r ApiPatchFirmwarePcieDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwarePcieDescriptorRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwarePcieDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwarePcieDescriptorExecute(r)
 }
 
@@ -21862,13 +21862,13 @@ func (a *FirmwareApiService) PatchFirmwarePcieDescriptor(ctx context.Context, mo
 
 // Execute executes the request
 //
-//	@return FirmwarePcieDescriptor
-func (a *FirmwareApiService) PatchFirmwarePcieDescriptorExecute(r ApiPatchFirmwarePcieDescriptorRequest) (*FirmwarePcieDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwarePcieDescriptorExecute(r ApiPatchFirmwarePcieDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwarePcieDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwarePcieDescriptor")
@@ -22193,7 +22193,7 @@ func (r ApiPatchFirmwarePsuDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwarePsuDescriptorRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwarePsuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwarePsuDescriptorExecute(r)
 }
 
@@ -22214,13 +22214,13 @@ func (a *FirmwareApiService) PatchFirmwarePsuDescriptor(ctx context.Context, moi
 
 // Execute executes the request
 //
-//	@return FirmwarePsuDescriptor
-func (a *FirmwareApiService) PatchFirmwarePsuDescriptorExecute(r ApiPatchFirmwarePsuDescriptorRequest) (*FirmwarePsuDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwarePsuDescriptorExecute(r ApiPatchFirmwarePsuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwarePsuDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwarePsuDescriptor")
@@ -22545,7 +22545,7 @@ func (r ApiPatchFirmwareSasExpanderDescriptorRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareSasExpanderDescriptorExecute(r)
 }
 
@@ -22566,13 +22566,13 @@ func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptor(ctx context.Cont
 
 // Execute executes the request
 //
-//	@return FirmwareSasExpanderDescriptor
-func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptorExecute(r ApiPatchFirmwareSasExpanderDescriptorRequest) (*FirmwareSasExpanderDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptorExecute(r ApiPatchFirmwareSasExpanderDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareSasExpanderDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareSasExpanderDescriptor")
@@ -22897,7 +22897,7 @@ func (r ApiPatchFirmwareStorageControllerDescriptorRequest) IfMatch(ifMatch stri
 	return r
 }
 
-func (r ApiPatchFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareStorageControllerDescriptorExecute(r)
 }
 
@@ -22918,13 +22918,13 @@ func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptor(ctx contex
 
 // Execute executes the request
 //
-//	@return FirmwareStorageControllerDescriptor
-func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptorExecute(r ApiPatchFirmwareStorageControllerDescriptorRequest) (*FirmwareStorageControllerDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptorExecute(r ApiPatchFirmwareStorageControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareStorageControllerDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareStorageControllerDescriptor")
@@ -23425,7 +23425,7 @@ func (r ApiUpdateFirmwareBiosDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareBiosDescriptorRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareBiosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareBiosDescriptorExecute(r)
 }
 
@@ -23446,13 +23446,13 @@ func (a *FirmwareApiService) UpdateFirmwareBiosDescriptor(ctx context.Context, m
 
 // Execute executes the request
 //
-//	@return FirmwareBiosDescriptor
-func (a *FirmwareApiService) UpdateFirmwareBiosDescriptorExecute(r ApiUpdateFirmwareBiosDescriptorRequest) (*FirmwareBiosDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareBiosDescriptorExecute(r ApiUpdateFirmwareBiosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareBiosDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareBiosDescriptor")
@@ -23601,7 +23601,7 @@ func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) IfMatch(ifMatch strin
 	return r
 }
 
-func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareBoardControllerDescriptorExecute(r)
 }
 
@@ -23622,13 +23622,13 @@ func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptor(ctx context
 
 // Execute executes the request
 //
-//	@return FirmwareBoardControllerDescriptor
-func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptorExecute(r ApiUpdateFirmwareBoardControllerDescriptorRequest) (*FirmwareBoardControllerDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptorExecute(r ApiUpdateFirmwareBoardControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareBoardControllerDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareBoardControllerDescriptor")
@@ -23777,7 +23777,7 @@ func (r ApiUpdateFirmwareCimcDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareCimcDescriptorRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareCimcDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareCimcDescriptorExecute(r)
 }
 
@@ -23798,13 +23798,13 @@ func (a *FirmwareApiService) UpdateFirmwareCimcDescriptor(ctx context.Context, m
 
 // Execute executes the request
 //
-//	@return FirmwareCimcDescriptor
-func (a *FirmwareApiService) UpdateFirmwareCimcDescriptorExecute(r ApiUpdateFirmwareCimcDescriptorRequest) (*FirmwareCimcDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareCimcDescriptorExecute(r ApiUpdateFirmwareCimcDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareCimcDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareCimcDescriptor")
@@ -23953,7 +23953,7 @@ func (r ApiUpdateFirmwareDimmDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareDimmDescriptorRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareDimmDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareDimmDescriptorExecute(r)
 }
 
@@ -23974,13 +23974,13 @@ func (a *FirmwareApiService) UpdateFirmwareDimmDescriptor(ctx context.Context, m
 
 // Execute executes the request
 //
-//	@return FirmwareDimmDescriptor
-func (a *FirmwareApiService) UpdateFirmwareDimmDescriptorExecute(r ApiUpdateFirmwareDimmDescriptorRequest) (*FirmwareDimmDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareDimmDescriptorExecute(r ApiUpdateFirmwareDimmDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareDimmDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareDimmDescriptor")
@@ -24305,7 +24305,7 @@ func (r ApiUpdateFirmwareDriveDescriptorRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateFirmwareDriveDescriptorRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareDriveDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareDriveDescriptorExecute(r)
 }
 
@@ -24326,13 +24326,13 @@ func (a *FirmwareApiService) UpdateFirmwareDriveDescriptor(ctx context.Context, 
 
 // Execute executes the request
 //
-//	@return FirmwareDriveDescriptor
-func (a *FirmwareApiService) UpdateFirmwareDriveDescriptorExecute(r ApiUpdateFirmwareDriveDescriptorRequest) (*FirmwareDriveDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareDriveDescriptorExecute(r ApiUpdateFirmwareDriveDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareDriveDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareDriveDescriptor")
@@ -24657,7 +24657,7 @@ func (r ApiUpdateFirmwareGpuDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwareGpuDescriptorRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareGpuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareGpuDescriptorExecute(r)
 }
 
@@ -24678,13 +24678,13 @@ func (a *FirmwareApiService) UpdateFirmwareGpuDescriptor(ctx context.Context, mo
 
 // Execute executes the request
 //
-//	@return FirmwareGpuDescriptor
-func (a *FirmwareApiService) UpdateFirmwareGpuDescriptorExecute(r ApiUpdateFirmwareGpuDescriptorRequest) (*FirmwareGpuDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareGpuDescriptorExecute(r ApiUpdateFirmwareGpuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareGpuDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareGpuDescriptor")
@@ -24833,7 +24833,7 @@ func (r ApiUpdateFirmwareHbaDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwareHbaDescriptorRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareHbaDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareHbaDescriptorExecute(r)
 }
 
@@ -24854,13 +24854,13 @@ func (a *FirmwareApiService) UpdateFirmwareHbaDescriptor(ctx context.Context, mo
 
 // Execute executes the request
 //
-//	@return FirmwareHbaDescriptor
-func (a *FirmwareApiService) UpdateFirmwareHbaDescriptorExecute(r ApiUpdateFirmwareHbaDescriptorRequest) (*FirmwareHbaDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareHbaDescriptorExecute(r ApiUpdateFirmwareHbaDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareHbaDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareHbaDescriptor")
@@ -25009,7 +25009,7 @@ func (r ApiUpdateFirmwareIomDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwareIomDescriptorRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareIomDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareIomDescriptorExecute(r)
 }
 
@@ -25030,13 +25030,13 @@ func (a *FirmwareApiService) UpdateFirmwareIomDescriptor(ctx context.Context, mo
 
 // Execute executes the request
 //
-//	@return FirmwareIomDescriptor
-func (a *FirmwareApiService) UpdateFirmwareIomDescriptorExecute(r ApiUpdateFirmwareIomDescriptorRequest) (*FirmwareIomDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareIomDescriptorExecute(r ApiUpdateFirmwareIomDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareIomDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareIomDescriptor")
@@ -25185,7 +25185,7 @@ func (r ApiUpdateFirmwareMswitchDescriptorRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateFirmwareMswitchDescriptorRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareMswitchDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareMswitchDescriptorExecute(r)
 }
 
@@ -25206,13 +25206,13 @@ func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptor(ctx context.Context
 
 // Execute executes the request
 //
-//	@return FirmwareMswitchDescriptor
-func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptorExecute(r ApiUpdateFirmwareMswitchDescriptorRequest) (*FirmwareMswitchDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptorExecute(r ApiUpdateFirmwareMswitchDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareMswitchDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareMswitchDescriptor")
@@ -25361,7 +25361,7 @@ func (r ApiUpdateFirmwareNxosDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareNxosDescriptorRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareNxosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareNxosDescriptorExecute(r)
 }
 
@@ -25382,13 +25382,13 @@ func (a *FirmwareApiService) UpdateFirmwareNxosDescriptor(ctx context.Context, m
 
 // Execute executes the request
 //
-//	@return FirmwareNxosDescriptor
-func (a *FirmwareApiService) UpdateFirmwareNxosDescriptorExecute(r ApiUpdateFirmwareNxosDescriptorRequest) (*FirmwareNxosDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareNxosDescriptorExecute(r ApiUpdateFirmwareNxosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareNxosDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareNxosDescriptor")
@@ -25537,7 +25537,7 @@ func (r ApiUpdateFirmwarePcieDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwarePcieDescriptorRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwarePcieDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwarePcieDescriptorExecute(r)
 }
 
@@ -25558,13 +25558,13 @@ func (a *FirmwareApiService) UpdateFirmwarePcieDescriptor(ctx context.Context, m
 
 // Execute executes the request
 //
-//	@return FirmwarePcieDescriptor
-func (a *FirmwareApiService) UpdateFirmwarePcieDescriptorExecute(r ApiUpdateFirmwarePcieDescriptorRequest) (*FirmwarePcieDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwarePcieDescriptorExecute(r ApiUpdateFirmwarePcieDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwarePcieDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwarePcieDescriptor")
@@ -25889,7 +25889,7 @@ func (r ApiUpdateFirmwarePsuDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwarePsuDescriptorRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwarePsuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwarePsuDescriptorExecute(r)
 }
 
@@ -25910,13 +25910,13 @@ func (a *FirmwareApiService) UpdateFirmwarePsuDescriptor(ctx context.Context, mo
 
 // Execute executes the request
 //
-//	@return FirmwarePsuDescriptor
-func (a *FirmwareApiService) UpdateFirmwarePsuDescriptorExecute(r ApiUpdateFirmwarePsuDescriptorRequest) (*FirmwarePsuDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwarePsuDescriptorExecute(r ApiUpdateFirmwarePsuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwarePsuDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwarePsuDescriptor")
@@ -26241,7 +26241,7 @@ func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareSasExpanderDescriptorExecute(r)
 }
 
@@ -26262,13 +26262,13 @@ func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptor(ctx context.Con
 
 // Execute executes the request
 //
-//	@return FirmwareSasExpanderDescriptor
-func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptorExecute(r ApiUpdateFirmwareSasExpanderDescriptorRequest) (*FirmwareSasExpanderDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptorExecute(r ApiUpdateFirmwareSasExpanderDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareSasExpanderDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareSasExpanderDescriptor")
@@ -26593,7 +26593,7 @@ func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) IfMatch(ifMatch str
 	return r
 }
 
-func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareStorageControllerDescriptorExecute(r)
 }
 
@@ -26614,13 +26614,13 @@ func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptor(ctx conte
 
 // Execute executes the request
 //
-//	@return FirmwareStorageControllerDescriptor
-func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptorExecute(r ApiUpdateFirmwareStorageControllerDescriptorRequest) (*FirmwareStorageControllerDescriptor, *http.Response, error) {
+//	@return FirmwareComponentDescriptor
+func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptorExecute(r ApiUpdateFirmwareStorageControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareStorageControllerDescriptor
+		localVarReturnValue *FirmwareComponentDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareStorageControllerDescriptor")

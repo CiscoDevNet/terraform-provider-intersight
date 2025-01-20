@@ -237,6 +237,11 @@ func getIamLdapProviderSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"vendor": {
+			Description: "LDAP server vendor type used for authentication.\n* `OpenLDAP` - Open source LDAP server for remote authentication.\n* `MSAD` - Microsoft active directory for remote authentication.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -641,6 +646,11 @@ func dataSourceIamLdapProviderRead(c context.Context, d *schema.ResourceData, me
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("vendor"); ok {
+		x := (v.(string))
+		o.SetVendor(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -774,6 +784,7 @@ func dataSourceIamLdapProviderRead(c context.Context, d *schema.ResourceData, me
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["vendor"] = (s.GetVendor())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				iamLdapProviderResults = append(iamLdapProviderResults, temp)

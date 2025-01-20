@@ -2583,7 +2583,7 @@ Name | Type | Description  | Notes
 
 ## GetApplianceClusterInstallByMoid
 
-> ApplianceClusterInstall GetApplianceClusterInstallByMoid(ctx, moid).Execute()
+> ApplianceClusterInstallBase GetApplianceClusterInstallByMoid(ctx, moid).Execute()
 
 Read a 'appliance.ClusterInstall' resource.
 
@@ -2609,7 +2609,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ApplianceApi.GetApplianceClusterInstallByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetApplianceClusterInstallByMoid`: ApplianceClusterInstall
+	// response from `GetApplianceClusterInstallByMoid`: ApplianceClusterInstallBase
 	fmt.Fprintf(os.Stdout, "Response from `ApplianceApi.GetApplianceClusterInstallByMoid`: %v\n", resp)
 }
 ```
@@ -2633,7 +2633,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceClusterInstall**](ApplianceClusterInstall.md)
+[**ApplianceClusterInstallBase**](ApplianceClusterInstallBase.md)
 
 ### Authorization
 
@@ -7735,7 +7735,7 @@ Name | Type | Description  | Notes
 
 ## PatchApplianceClusterInstall
 
-> ApplianceClusterInstall PatchApplianceClusterInstall(ctx, moid).ApplianceClusterInstall(applianceClusterInstall).IfMatch(ifMatch).Execute()
+> ApplianceClusterInstallBase PatchApplianceClusterInstall(ctx, moid).ApplianceClusterInstall(applianceClusterInstall).IfMatch(ifMatch).Execute()
 
 Update a 'appliance.ClusterInstall' resource.
 
@@ -7763,7 +7763,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ApplianceApi.PatchApplianceClusterInstall``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PatchApplianceClusterInstall`: ApplianceClusterInstall
+	// response from `PatchApplianceClusterInstall`: ApplianceClusterInstallBase
 	fmt.Fprintf(os.Stdout, "Response from `ApplianceApi.PatchApplianceClusterInstall`: %v\n", resp)
 }
 ```
@@ -7789,7 +7789,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceClusterInstall**](ApplianceClusterInstall.md)
+[**ApplianceClusterInstallBase**](ApplianceClusterInstallBase.md)
 
 ### Authorization
 
@@ -8815,7 +8815,7 @@ Name | Type | Description  | Notes
 
 ## UpdateApplianceClusterInstall
 
-> ApplianceClusterInstall UpdateApplianceClusterInstall(ctx, moid).ApplianceClusterInstall(applianceClusterInstall).IfMatch(ifMatch).Execute()
+> ApplianceClusterInstallBase UpdateApplianceClusterInstall(ctx, moid).ApplianceClusterInstall(applianceClusterInstall).IfMatch(ifMatch).Execute()
 
 Update a 'appliance.ClusterInstall' resource.
 
@@ -8843,7 +8843,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ApplianceApi.UpdateApplianceClusterInstall``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateApplianceClusterInstall`: ApplianceClusterInstall
+	// response from `UpdateApplianceClusterInstall`: ApplianceClusterInstallBase
 	fmt.Fprintf(os.Stdout, "Response from `ApplianceApi.UpdateApplianceClusterInstall`: %v\n", resp)
 }
 ```
@@ -8869,7 +8869,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceClusterInstall**](ApplianceClusterInstall.md)
+[**ApplianceClusterInstallBase**](ApplianceClusterInstallBase.md)
 
 ### Authorization
 

@@ -155,6 +155,11 @@ func getVnicEthAdapterPolicyInventorySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"ether_channel_pinning_enabled": {
+			Description: "Enables EtherChannel Pinning to combine multiple physical links between two network switches into a single logical link. Transmit Queue Count should be at least 2 to enable ether channel pinning.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"geneve_enabled": {
 			Description: "GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints.",
 			Type:        schema.TypeBool,
@@ -1001,6 +1006,11 @@ func dataSourceVnicEthAdapterPolicyInventoryRead(c context.Context, d *schema.Re
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("ether_channel_pinning_enabled"); ok {
+		x := (v.(bool))
+		o.SetEtherChannelPinningEnabled(x)
+	}
+
 	if v, ok := d.GetOkExists("geneve_enabled"); ok {
 		x := (v.(bool))
 		o.SetGeneveEnabled(x)
@@ -1793,6 +1803,7 @@ func dataSourceVnicEthAdapterPolicyInventoryRead(c context.Context, d *schema.Re
 				temp["description"] = (s.GetDescription())
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["ether_channel_pinning_enabled"] = (s.GetEtherChannelPinningEnabled())
 				temp["geneve_enabled"] = (s.GetGeneveEnabled())
 				temp["interrupt_scaling"] = (s.GetInterruptScaling())
 

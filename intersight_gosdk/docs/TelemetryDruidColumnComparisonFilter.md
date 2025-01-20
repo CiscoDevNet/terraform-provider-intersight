@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | The filter type. | 
+**Type** | **NullableString** | The filter type. | 
 **Dimensions** | [**[]TelemetryDruidDimensionSpec**](TelemetryDruidDimensionSpec.md) | A list of DimensionSpecs, making it possible to apply an extraction function if needed. | 
 
 ## Methods
 
 ### NewTelemetryDruidColumnComparisonFilter
 
-`func NewTelemetryDruidColumnComparisonFilter(type_ string, dimensions []TelemetryDruidDimensionSpec, ) *TelemetryDruidColumnComparisonFilter`
+`func NewTelemetryDruidColumnComparisonFilter(type_ NullableString, dimensions []TelemetryDruidDimensionSpec, ) *TelemetryDruidColumnComparisonFilter`
 
 NewTelemetryDruidColumnComparisonFilter instantiates a new TelemetryDruidColumnComparisonFilter object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +46,16 @@ and a boolean to check if the value has been set.
 SetType sets Type field to given value.
 
 
+### SetTypeNil
+
+`func (o *TelemetryDruidColumnComparisonFilter) SetTypeNil(b bool)`
+
+ SetTypeNil sets the value for Type to be an explicit nil
+
+### UnsetType
+`func (o *TelemetryDruidColumnComparisonFilter) UnsetType()`
+
+UnsetType ensures that no value is present for Type, not even an explicit nil
 ### GetDimensions
 
 `func (o *TelemetryDruidColumnComparisonFilter) GetDimensions() []TelemetryDruidDimensionSpec`

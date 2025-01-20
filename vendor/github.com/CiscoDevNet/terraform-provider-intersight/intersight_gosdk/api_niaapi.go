@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024100405
+API version: 1.0.11-2024120409
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,7 @@ type ApiGetNiaapiApicCcoPostByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicCcoPostByMoidRequest) Execute() (*NiaapiApicCcoPost, *http.Response, error) {
+func (r ApiGetNiaapiApicCcoPostByMoidRequest) Execute() (*NiaapiNewReleasePost, *http.Response, error) {
 	return r.ApiService.GetNiaapiApicCcoPostByMoidExecute(r)
 }
 
@@ -50,13 +50,13 @@ func (a *NiaapiApiService) GetNiaapiApicCcoPostByMoid(ctx context.Context, moid 
 
 // Execute executes the request
 //
-//	@return NiaapiApicCcoPost
-func (a *NiaapiApiService) GetNiaapiApicCcoPostByMoidExecute(r ApiGetNiaapiApicCcoPostByMoidRequest) (*NiaapiApicCcoPost, *http.Response, error) {
+//	@return NiaapiNewReleasePost
+func (a *NiaapiApiService) GetNiaapiApicCcoPostByMoidExecute(r ApiGetNiaapiApicCcoPostByMoidRequest) (*NiaapiNewReleasePost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiApicCcoPost
+		localVarReturnValue *NiaapiNewReleasePost
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicCcoPostByMoid")
@@ -458,7 +458,7 @@ type ApiGetNiaapiApicFieldNoticeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicFieldNoticeByMoidRequest) Execute() (*NiaapiApicFieldNotice, *http.Response, error) {
+func (r ApiGetNiaapiApicFieldNoticeByMoidRequest) Execute() (*NiaapiFieldNotice, *http.Response, error) {
 	return r.ApiService.GetNiaapiApicFieldNoticeByMoidExecute(r)
 }
 
@@ -479,13 +479,13 @@ func (a *NiaapiApiService) GetNiaapiApicFieldNoticeByMoid(ctx context.Context, m
 
 // Execute executes the request
 //
-//	@return NiaapiApicFieldNotice
-func (a *NiaapiApiService) GetNiaapiApicFieldNoticeByMoidExecute(r ApiGetNiaapiApicFieldNoticeByMoidRequest) (*NiaapiApicFieldNotice, *http.Response, error) {
+//	@return NiaapiFieldNotice
+func (a *NiaapiApiService) GetNiaapiApicFieldNoticeByMoidExecute(r ApiGetNiaapiApicFieldNoticeByMoidRequest) (*NiaapiFieldNotice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiApicFieldNotice
+		localVarReturnValue *NiaapiFieldNotice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicFieldNoticeByMoid")
@@ -887,7 +887,7 @@ type ApiGetNiaapiApicHweolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicHweolByMoidRequest) Execute() (*NiaapiApicHweol, *http.Response, error) {
+func (r ApiGetNiaapiApicHweolByMoidRequest) Execute() (*NiaapiHardwareEol, *http.Response, error) {
 	return r.ApiService.GetNiaapiApicHweolByMoidExecute(r)
 }
 
@@ -908,13 +908,13 @@ func (a *NiaapiApiService) GetNiaapiApicHweolByMoid(ctx context.Context, moid st
 
 // Execute executes the request
 //
-//	@return NiaapiApicHweol
-func (a *NiaapiApiService) GetNiaapiApicHweolByMoidExecute(r ApiGetNiaapiApicHweolByMoidRequest) (*NiaapiApicHweol, *http.Response, error) {
+//	@return NiaapiHardwareEol
+func (a *NiaapiApiService) GetNiaapiApicHweolByMoidExecute(r ApiGetNiaapiApicHweolByMoidRequest) (*NiaapiHardwareEol, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiApicHweol
+		localVarReturnValue *NiaapiHardwareEol
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicHweolByMoid")
@@ -1316,7 +1316,7 @@ type ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest) Execute() (*NiaapiApicLatestMaintainedRelease, *http.Response, error) {
+func (r ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest) Execute() (*NiaapiMaintainedRelease, *http.Response, error) {
 	return r.ApiService.GetNiaapiApicLatestMaintainedReleaseByMoidExecute(r)
 }
 
@@ -1337,13 +1337,13 @@ func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseByMoid(ctx contex
 
 // Execute executes the request
 //
-//	@return NiaapiApicLatestMaintainedRelease
-func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseByMoidExecute(r ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest) (*NiaapiApicLatestMaintainedRelease, *http.Response, error) {
+//	@return NiaapiMaintainedRelease
+func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseByMoidExecute(r ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest) (*NiaapiMaintainedRelease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiApicLatestMaintainedRelease
+		localVarReturnValue *NiaapiMaintainedRelease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicLatestMaintainedReleaseByMoid")
@@ -1745,7 +1745,7 @@ type ApiGetNiaapiApicReleaseRecommendByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicReleaseRecommendByMoidRequest) Execute() (*NiaapiApicReleaseRecommend, *http.Response, error) {
+func (r ApiGetNiaapiApicReleaseRecommendByMoidRequest) Execute() (*NiaapiReleaseRecommend, *http.Response, error) {
 	return r.ApiService.GetNiaapiApicReleaseRecommendByMoidExecute(r)
 }
 
@@ -1766,13 +1766,13 @@ func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendByMoid(ctx context.Conte
 
 // Execute executes the request
 //
-//	@return NiaapiApicReleaseRecommend
-func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendByMoidExecute(r ApiGetNiaapiApicReleaseRecommendByMoidRequest) (*NiaapiApicReleaseRecommend, *http.Response, error) {
+//	@return NiaapiReleaseRecommend
+func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendByMoidExecute(r ApiGetNiaapiApicReleaseRecommendByMoidRequest) (*NiaapiReleaseRecommend, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiApicReleaseRecommend
+		localVarReturnValue *NiaapiReleaseRecommend
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicReleaseRecommendByMoid")
@@ -2174,7 +2174,7 @@ type ApiGetNiaapiApicSweolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicSweolByMoidRequest) Execute() (*NiaapiApicSweol, *http.Response, error) {
+func (r ApiGetNiaapiApicSweolByMoidRequest) Execute() (*NiaapiSoftwareEol, *http.Response, error) {
 	return r.ApiService.GetNiaapiApicSweolByMoidExecute(r)
 }
 
@@ -2195,13 +2195,13 @@ func (a *NiaapiApiService) GetNiaapiApicSweolByMoid(ctx context.Context, moid st
 
 // Execute executes the request
 //
-//	@return NiaapiApicSweol
-func (a *NiaapiApiService) GetNiaapiApicSweolByMoidExecute(r ApiGetNiaapiApicSweolByMoidRequest) (*NiaapiApicSweol, *http.Response, error) {
+//	@return NiaapiSoftwareEol
+func (a *NiaapiApiService) GetNiaapiApicSweolByMoidExecute(r ApiGetNiaapiApicSweolByMoidRequest) (*NiaapiSoftwareEol, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiApicSweol
+		localVarReturnValue *NiaapiSoftwareEol
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicSweolByMoid")
@@ -2603,7 +2603,7 @@ type ApiGetNiaapiDcnmCcoPostByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmCcoPostByMoidRequest) Execute() (*NiaapiDcnmCcoPost, *http.Response, error) {
+func (r ApiGetNiaapiDcnmCcoPostByMoidRequest) Execute() (*NiaapiNewReleasePost, *http.Response, error) {
 	return r.ApiService.GetNiaapiDcnmCcoPostByMoidExecute(r)
 }
 
@@ -2624,13 +2624,13 @@ func (a *NiaapiApiService) GetNiaapiDcnmCcoPostByMoid(ctx context.Context, moid 
 
 // Execute executes the request
 //
-//	@return NiaapiDcnmCcoPost
-func (a *NiaapiApiService) GetNiaapiDcnmCcoPostByMoidExecute(r ApiGetNiaapiDcnmCcoPostByMoidRequest) (*NiaapiDcnmCcoPost, *http.Response, error) {
+//	@return NiaapiNewReleasePost
+func (a *NiaapiApiService) GetNiaapiDcnmCcoPostByMoidExecute(r ApiGetNiaapiDcnmCcoPostByMoidRequest) (*NiaapiNewReleasePost, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiDcnmCcoPost
+		localVarReturnValue *NiaapiNewReleasePost
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmCcoPostByMoid")
@@ -3032,7 +3032,7 @@ type ApiGetNiaapiDcnmFieldNoticeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmFieldNoticeByMoidRequest) Execute() (*NiaapiDcnmFieldNotice, *http.Response, error) {
+func (r ApiGetNiaapiDcnmFieldNoticeByMoidRequest) Execute() (*NiaapiFieldNotice, *http.Response, error) {
 	return r.ApiService.GetNiaapiDcnmFieldNoticeByMoidExecute(r)
 }
 
@@ -3053,13 +3053,13 @@ func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeByMoid(ctx context.Context, m
 
 // Execute executes the request
 //
-//	@return NiaapiDcnmFieldNotice
-func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeByMoidExecute(r ApiGetNiaapiDcnmFieldNoticeByMoidRequest) (*NiaapiDcnmFieldNotice, *http.Response, error) {
+//	@return NiaapiFieldNotice
+func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeByMoidExecute(r ApiGetNiaapiDcnmFieldNoticeByMoidRequest) (*NiaapiFieldNotice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiDcnmFieldNotice
+		localVarReturnValue *NiaapiFieldNotice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmFieldNoticeByMoid")
@@ -3461,7 +3461,7 @@ type ApiGetNiaapiDcnmHweolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmHweolByMoidRequest) Execute() (*NiaapiDcnmHweol, *http.Response, error) {
+func (r ApiGetNiaapiDcnmHweolByMoidRequest) Execute() (*NiaapiHardwareEol, *http.Response, error) {
 	return r.ApiService.GetNiaapiDcnmHweolByMoidExecute(r)
 }
 
@@ -3482,13 +3482,13 @@ func (a *NiaapiApiService) GetNiaapiDcnmHweolByMoid(ctx context.Context, moid st
 
 // Execute executes the request
 //
-//	@return NiaapiDcnmHweol
-func (a *NiaapiApiService) GetNiaapiDcnmHweolByMoidExecute(r ApiGetNiaapiDcnmHweolByMoidRequest) (*NiaapiDcnmHweol, *http.Response, error) {
+//	@return NiaapiHardwareEol
+func (a *NiaapiApiService) GetNiaapiDcnmHweolByMoidExecute(r ApiGetNiaapiDcnmHweolByMoidRequest) (*NiaapiHardwareEol, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiDcnmHweol
+		localVarReturnValue *NiaapiHardwareEol
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmHweolByMoid")
@@ -3890,7 +3890,7 @@ type ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest) Execute() (*NiaapiDcnmLatestMaintainedRelease, *http.Response, error) {
+func (r ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest) Execute() (*NiaapiMaintainedRelease, *http.Response, error) {
 	return r.ApiService.GetNiaapiDcnmLatestMaintainedReleaseByMoidExecute(r)
 }
 
@@ -3911,13 +3911,13 @@ func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseByMoid(ctx contex
 
 // Execute executes the request
 //
-//	@return NiaapiDcnmLatestMaintainedRelease
-func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseByMoidExecute(r ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest) (*NiaapiDcnmLatestMaintainedRelease, *http.Response, error) {
+//	@return NiaapiMaintainedRelease
+func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseByMoidExecute(r ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest) (*NiaapiMaintainedRelease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiDcnmLatestMaintainedRelease
+		localVarReturnValue *NiaapiMaintainedRelease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmLatestMaintainedReleaseByMoid")
@@ -4319,7 +4319,7 @@ type ApiGetNiaapiDcnmReleaseRecommendByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmReleaseRecommendByMoidRequest) Execute() (*NiaapiDcnmReleaseRecommend, *http.Response, error) {
+func (r ApiGetNiaapiDcnmReleaseRecommendByMoidRequest) Execute() (*NiaapiReleaseRecommend, *http.Response, error) {
 	return r.ApiService.GetNiaapiDcnmReleaseRecommendByMoidExecute(r)
 }
 
@@ -4340,13 +4340,13 @@ func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendByMoid(ctx context.Conte
 
 // Execute executes the request
 //
-//	@return NiaapiDcnmReleaseRecommend
-func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendByMoidExecute(r ApiGetNiaapiDcnmReleaseRecommendByMoidRequest) (*NiaapiDcnmReleaseRecommend, *http.Response, error) {
+//	@return NiaapiReleaseRecommend
+func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendByMoidExecute(r ApiGetNiaapiDcnmReleaseRecommendByMoidRequest) (*NiaapiReleaseRecommend, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiDcnmReleaseRecommend
+		localVarReturnValue *NiaapiReleaseRecommend
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmReleaseRecommendByMoid")
@@ -4748,7 +4748,7 @@ type ApiGetNiaapiDcnmSweolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmSweolByMoidRequest) Execute() (*NiaapiDcnmSweol, *http.Response, error) {
+func (r ApiGetNiaapiDcnmSweolByMoidRequest) Execute() (*NiaapiSoftwareEol, *http.Response, error) {
 	return r.ApiService.GetNiaapiDcnmSweolByMoidExecute(r)
 }
 
@@ -4769,13 +4769,13 @@ func (a *NiaapiApiService) GetNiaapiDcnmSweolByMoid(ctx context.Context, moid st
 
 // Execute executes the request
 //
-//	@return NiaapiDcnmSweol
-func (a *NiaapiApiService) GetNiaapiDcnmSweolByMoidExecute(r ApiGetNiaapiDcnmSweolByMoidRequest) (*NiaapiDcnmSweol, *http.Response, error) {
+//	@return NiaapiSoftwareEol
+func (a *NiaapiApiService) GetNiaapiDcnmSweolByMoidExecute(r ApiGetNiaapiDcnmSweolByMoidRequest) (*NiaapiSoftwareEol, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NiaapiDcnmSweol
+		localVarReturnValue *NiaapiSoftwareEol
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmSweolByMoid")

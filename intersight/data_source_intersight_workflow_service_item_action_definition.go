@@ -853,6 +853,11 @@ func getWorkflowServiceItemActionDefinitionSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"engine_state": {
+						Description: "The state of workflow definition metadata in the workflow engine. The workflow definition must be successfully updated in the engine before workflows can be executed.\n* `NotUpdated` - The workflow and task definition metadata is not yet updated in the workflow engine.\n* `Updating` - The workflow and task definition metadata is in the processing of being updated in the workflow engine.\n* `UpdateFailed` - The workflow and task definition metadata failed to be updated in the workflow engine.\n* `Updated` - The workflow and task definition metadata was updated successfully in the workflow engine.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,

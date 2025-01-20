@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **AnswerFile** | Pointer to **string** | If the source of the answers is a static file, the content of the file is stored as value in this property. The value is mandatory only when the &#39;Source&#39; property has been set to &#39;File&#39;. | [optional] 
 **Hostname** | Pointer to **string** | Hostname to be configured for the server in the OS. | [optional] 
 **IpConfigType** | Pointer to **string** | IP configuration type. Values are Static or Dynamic configuration of IP. In case of static IP configuration, IP address, gateway and other details need to be populated. In case of dynamic the IP configuration is obtained dynamically from DHCP. * &#x60;static&#x60; - In case of static IP configuraton, provide the details such as IP address, netmask, and gateway. * &#x60;DHCP&#x60; - In case of dynamic IP configuration, the IP address, netmask and gateway detailsare obtained from DHCP. | [optional] [default to "static"]
-**IpConfiguration** | Pointer to [**NullableOsIpConfiguration**](OsIpConfiguration.md) |  | [optional] 
+**IpConfiguration** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | The IP configuration used to configure Static IPv4/IPv6 configurations. | [optional] 
 **IsAnswerFileSet** | Pointer to **bool** | Indicates whether the value of the &#39;answerFile&#39; property has been set. | [optional] [readonly] [default to false]
 **IsRootPasswordCrypted** | Pointer to **bool** | Enable to indicate Root Password provided is encrypted. | [optional] 
 **IsRootPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;rootPassword&#39; property has been set. | [optional] [readonly] [default to false]
@@ -191,20 +191,20 @@ HasIpConfigType returns a boolean if a field has been set.
 
 ### GetIpConfiguration
 
-`func (o *OsAnswers) GetIpConfiguration() OsIpConfiguration`
+`func (o *OsAnswers) GetIpConfiguration() MoBaseComplexType`
 
 GetIpConfiguration returns the IpConfiguration field if non-nil, zero value otherwise.
 
 ### GetIpConfigurationOk
 
-`func (o *OsAnswers) GetIpConfigurationOk() (*OsIpConfiguration, bool)`
+`func (o *OsAnswers) GetIpConfigurationOk() (*MoBaseComplexType, bool)`
 
 GetIpConfigurationOk returns a tuple with the IpConfiguration field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIpConfiguration
 
-`func (o *OsAnswers) SetIpConfiguration(v OsIpConfiguration)`
+`func (o *OsAnswers) SetIpConfiguration(v MoBaseComplexType)`
 
 SetIpConfiguration sets IpConfiguration field to given value.
 

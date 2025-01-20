@@ -125,6 +125,11 @@ func getAaaAuditRecordSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"http_operation": {
+			Description: "The REST URL for the operation.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"inst_id": {
 			Description: "The instance id of AuditRecordLocal, which is used to identify if the comming AuditRecordLocal was already processed before.",
 			Type:        schema.TypeString,
@@ -684,6 +689,11 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		o.SetEvent(x)
 	}
 
+	if v, ok := d.GetOk("http_operation"); ok {
+		x := (v.(string))
+		o.SetHttpOperation(x)
+	}
+
 	if v, ok := d.GetOk("inst_id"); ok {
 		x := (v.(string))
 		o.SetInstId(x)
@@ -1135,6 +1145,7 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["email"] = (s.GetEmail())
 				temp["event"] = (s.GetEvent())
+				temp["http_operation"] = (s.GetHttpOperation())
 				temp["inst_id"] = (s.GetInstId())
 				temp["mo_display_names"] = flattenAdditionalProperties(s.GetMoDisplayNames())
 				temp["mo_type"] = (s.GetMoType())

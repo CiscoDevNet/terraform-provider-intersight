@@ -321,6 +321,13 @@ func resourcePowerPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "Enabled",
 			},
+			"processor_package_power_limit": {
+				Description:  "Sets the Processor Package Power Limit (PPL) of a server. PPL refers to the amount of power that a CPU can draw from the power supply. The Processor Package Power Limit (PPL) feature is currently available exclusively on Cisco UCS C225/C245 M8 servers.\n* `Default` - Set the Package Power Limit to the platform defined default value.\n* `Maximum` - Set the Package Power Limit to the platform defined maximum value.\n* `Minimum` - Set the Package Power Limit to the platform defined minimum value.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"Default", "Maximum", "Minimum"}, false),
+				Optional:     true,
+				Default:      "Default",
+			},
 			"profiles": {
 				Description: "An array of relationships to policyAbstractConfigProfile resources.",
 				Type:        schema.TypeList,
@@ -672,6 +679,11 @@ func resourcePowerPolicyCreate(c context.Context, d *schema.ResourceData, meta i
 		o.SetPowerSaveMode(x)
 	}
 
+	if v, ok := d.GetOk("processor_package_power_limit"); ok {
+		x := (v.(string))
+		o.SetProcessorPackagePowerLimit(x)
+	}
+
 	if v, ok := d.GetOk("profiles"); ok {
 		x := make([]models.PolicyAbstractConfigProfileRelationship, 0)
 		s := v.([]interface{})
@@ -909,6 +921,10 @@ func resourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta int
 		return diag.Errorf("error occurred while setting property PowerSaveMode in PowerPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("processor_package_power_limit", (s.GetProcessorPackagePowerLimit())); err != nil {
+		return diag.Errorf("error occurred while setting property ProcessorPackagePowerLimit in PowerPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Profiles in PowerPolicy object: %s", err.Error())
 	}
@@ -1056,6 +1072,12 @@ func resourcePowerPolicyUpdate(c context.Context, d *schema.ResourceData, meta i
 		v := d.Get("power_save_mode")
 		x := (v.(string))
 		o.SetPowerSaveMode(x)
+	}
+
+	if d.HasChange("processor_package_power_limit") {
+		v := d.Get("processor_package_power_limit")
+		x := (v.(string))
+		o.SetProcessorPackagePowerLimit(x)
 	}
 
 	if d.HasChange("profiles") {

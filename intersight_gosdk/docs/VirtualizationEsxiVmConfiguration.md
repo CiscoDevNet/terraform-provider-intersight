@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.EsxiVmConfiguration"]
 **Annotation** | Pointer to **string** | Specify annotation (optional) for the virtual machine. | [optional] 
 **Compute** | Pointer to [**NullableVirtualizationEsxiVmComputeConfiguration**](VirtualizationEsxiVmComputeConfiguration.md) |  | [optional] 
-**Customspec** | Pointer to [**NullableVirtualizationBaseCustomSpec**](VirtualizationBaseCustomSpec.md) |  | [optional] 
+**Customspec** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | ESXi virtual machine custom specification. | [optional] 
 **Datacenter** | Pointer to **string** | Datacenter where virtual machine is deployed. | [optional] 
 **Folder** | Pointer to **string** | Folder where virtual machine is deployed. | [optional] 
 **Image** | Pointer to **string** | Image path of OVA (The image can be from any location). | [optional] 
@@ -138,20 +138,20 @@ HasCompute returns a boolean if a field has been set.
 UnsetCompute ensures that no value is present for Compute, not even an explicit nil
 ### GetCustomspec
 
-`func (o *VirtualizationEsxiVmConfiguration) GetCustomspec() VirtualizationBaseCustomSpec`
+`func (o *VirtualizationEsxiVmConfiguration) GetCustomspec() MoBaseComplexType`
 
 GetCustomspec returns the Customspec field if non-nil, zero value otherwise.
 
 ### GetCustomspecOk
 
-`func (o *VirtualizationEsxiVmConfiguration) GetCustomspecOk() (*VirtualizationBaseCustomSpec, bool)`
+`func (o *VirtualizationEsxiVmConfiguration) GetCustomspecOk() (*MoBaseComplexType, bool)`
 
 GetCustomspecOk returns a tuple with the Customspec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCustomspec
 
-`func (o *VirtualizationEsxiVmConfiguration) SetCustomspec(v VirtualizationBaseCustomSpec)`
+`func (o *VirtualizationEsxiVmConfiguration) SetCustomspec(v MoBaseComplexType)`
 
 SetCustomspec sets Customspec field to given value.
 

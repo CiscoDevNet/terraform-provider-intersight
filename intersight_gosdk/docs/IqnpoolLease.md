@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **IqnNumber** | Pointer to **int64** | Number of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
 **IqnPrefix** | Pointer to **string** | Prefix of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
 **IqnSuffix** | Pointer to **string** | Suffix of the IQN address. IQN Address is constructed as &lt;prefix&gt;:&lt;suffix&gt;:&lt;number&gt;. | [optional] [readonly] 
-**Reservation** | Pointer to [**IqnpoolReservationReference**](IqnpoolReservationReference.md) |  | [optional] 
+**Reservation** | Pointer to [**NullablePoolReservationReference**](PoolReservationReference.md) | The reference to the reservation object. | [optional] 
 **AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **Pool** | Pointer to [**NullableIqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
 **PoolMember** | Pointer to [**NullableIqnpoolPoolMemberRelationship**](IqnpoolPoolMemberRelationship.md) |  | [optional] 
@@ -177,20 +177,20 @@ HasIqnSuffix returns a boolean if a field has been set.
 
 ### GetReservation
 
-`func (o *IqnpoolLease) GetReservation() IqnpoolReservationReference`
+`func (o *IqnpoolLease) GetReservation() PoolReservationReference`
 
 GetReservation returns the Reservation field if non-nil, zero value otherwise.
 
 ### GetReservationOk
 
-`func (o *IqnpoolLease) GetReservationOk() (*IqnpoolReservationReference, bool)`
+`func (o *IqnpoolLease) GetReservationOk() (*PoolReservationReference, bool)`
 
 GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReservation
 
-`func (o *IqnpoolLease) SetReservation(v IqnpoolReservationReference)`
+`func (o *IqnpoolLease) SetReservation(v PoolReservationReference)`
 
 SetReservation sets Reservation field to given value.
 
@@ -200,6 +200,16 @@ SetReservation sets Reservation field to given value.
 
 HasReservation returns a boolean if a field has been set.
 
+### SetReservationNil
+
+`func (o *IqnpoolLease) SetReservationNil(b bool)`
+
+ SetReservationNil sets the value for Reservation to be an explicit nil
+
+### UnsetReservation
+`func (o *IqnpoolLease) UnsetReservation()`
+
+UnsetReservation ensures that no value is present for Reservation, not even an explicit nil
 ### GetAssignedToEntity
 
 `func (o *IqnpoolLease) GetAssignedToEntity() MoBaseMoRelationship`
