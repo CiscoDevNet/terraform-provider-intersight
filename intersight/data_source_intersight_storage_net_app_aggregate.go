@@ -659,11 +659,11 @@ func dataSourceStorageNetAppAggregateRead(c context.Context, d *schema.ResourceD
 	}
 
 	if v, ok := d.GetOk("avg_performance_metrics"); ok {
-		p := make([]models.StorageBasePerformanceMetricsAverage, 0, 1)
+		p := make([]models.StorageNetAppPerformanceMetricsAverage, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.StorageBasePerformanceMetricsAverage{}
+			o := &models.StorageNetAppPerformanceMetricsAverage{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1105,7 +1105,7 @@ func dataSourceStorageNetAppAggregateRead(c context.Context, d *schema.ResourceD
 
 				temp["array_controller"] = flattenMapStorageNetAppNodeRelationship(s.GetArrayController(), d)
 
-				temp["avg_performance_metrics"] = flattenMapStorageBasePerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
+				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["cloud_storage"] = (s.GetCloudStorage())
 

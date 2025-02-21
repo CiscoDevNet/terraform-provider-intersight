@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Condition** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **Feature** | Pointer to **string** | Lease opertion applied for the feature. | [optional] 
 **IsExclusiveAtAssignedEntity** | Pointer to **bool** | Indicates whether a lease allocation is exclusive based on the Assigned Entity, if the AssignedEntity holds any lease then not allowed to create new lease later. | [optional] [default to false]
-**LeaseParameters** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | The lease operations has some special operations based on the PoolType and ResourceType. Those special operations are handled based on this parameter. | [optional] 
+**LeaseParameters** | Pointer to [**NullableResourcepoolLeaseParameters**](ResourcepoolLeaseParameters.md) |  | [optional] 
 **Resource** | Pointer to [**MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **ResourceType** | Pointer to **string** | The type of resource present in the pool, such as &#39;server&#39; can be a RackUnit or Blade. * &#x60;Server&#x60; - Resource Pool holds the server kind of resources, example - RackServer, Blade. * &#x60;None&#x60; - The resource cannot consider for Resource Pool. | [optional] [default to "Server"]
 **AssignedToEntity** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
@@ -164,20 +164,20 @@ HasIsExclusiveAtAssignedEntity returns a boolean if a field has been set.
 
 ### GetLeaseParameters
 
-`func (o *ResourcepoolLease) GetLeaseParameters() MoBaseComplexType`
+`func (o *ResourcepoolLease) GetLeaseParameters() ResourcepoolLeaseParameters`
 
 GetLeaseParameters returns the LeaseParameters field if non-nil, zero value otherwise.
 
 ### GetLeaseParametersOk
 
-`func (o *ResourcepoolLease) GetLeaseParametersOk() (*MoBaseComplexType, bool)`
+`func (o *ResourcepoolLease) GetLeaseParametersOk() (*ResourcepoolLeaseParameters, bool)`
 
 GetLeaseParametersOk returns a tuple with the LeaseParameters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLeaseParameters
 
-`func (o *ResourcepoolLease) SetLeaseParameters(v MoBaseComplexType)`
+`func (o *ResourcepoolLease) SetLeaseParameters(v ResourcepoolLeaseParameters)`
 
 SetLeaseParameters sets LeaseParameters field to given value.
 

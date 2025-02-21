@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ClientSecret** | Pointer to **string** | The OAuth2 client secret. The value of this property is generated when grantType includes &#39;client-credentials&#39;. Otherwise, no client-secret is generated. | [optional] 
 **ClientType** | Pointer to **string** | The type of the OAuth2 client (public or confidential), as specified in https://tools.ietf.org/html/rfc6749#section-2.1. * &#x60;public&#x60; - Clients incapable of maintaining the confidentiality of their credentials.This includes clients executing on the device used by the resource owner,such as mobile applications, installed native application or a webbrowser-based application. * &#x60;confidential&#x60; - Clients capable of maintaining the confidentiality of their credentials.For example, this could be a client implemented on a secure server withrestricted access to the client credentials.To maintain the confidentiality of the OAuth2 credentials, two use cases areconsidered.1) The application is running as a service within Intersight. The application automatically   obtains the OAuth2 credentials when the application starts and the credentials are not   exposed to the end-user.   Because end-users (even account administrators) do not have access the OAuth2 credentials,   they cannot take the credentials with them when they leave their organization.2) The application is under the control of a \&quot;trusted\&quot; end-user. For example,   the end-user may create a native application running outside Intersight. The application   uses OAuth2 credentials to interact with the Intersight API. In that case, the Intersight   account administrator may generate OAuth2 credentials with a registered application   using \&quot;client_credentials\&quot; grant type.   In that case, the end-user is responsible for maintaining the confidentiality of the   OAuth2 credentials. If the end-user leaves the organization, you should revoke the   credentials and issue new Oauth2 credentials.Here is a possible workflow for handling OAuth2 tokens.1) User Alice (Intersight Account Administrator) logins to Intersight and deploys an Intersight   application that requires an OAuth2 token.2) Intersight automatically deploys the application. The application is assigned a OAuth2 token,   possibly linked to Alice. The application must NOT expose the OAuth2 secret to Alice, otherwise   Alice would be able to use the token after she leaves the company.3) The application can make API calls to Intersight using its assigned OAuth2 token. For example,   the application could make weekly scheduled API calls to Intersight.4) Separately, Alice may also get OAuth2 tokens that she can use to make API calls from the   Intersight SDK through the northbound API. In that case, Alice will get the associated OAuth2   secrets, but not the one assigned in step #2.5) Alice leaves the organization. The OAuth2 tokens assigned in step #2 must retain their validity   even after Alice has left the organization. Because the OAuth2 secrets were never shared with   Alice, there is no risk Alice can reuse the OAuth2 secrets.   On the other hand, the OAuth2 tokens assigned in step #4 must be invalidated because Alice had   the OAuth2 tokens in her possession. | [optional] [default to "public"]
 **Description** | Pointer to **string** | Description of the application. | [optional] 
+**EntityId** | Pointer to **string** | EntityId holds the Id of the client application that is using this AppRegistration. | [optional] [readonly] 
 **ExpiryDateTime** | Pointer to **time.Time** | The expiration date of the App Registration which is set at the time of its creation. Its value can only be assigned a date that falls within the range determined by the maximum expiration time configured at the account level. The expiry date can be edited to be earlier or later, provided it stays within the designated expiry period. This period is determined by adding the &#39;startTime&#39; property of the App Registration to the maximum expiry time configured at the account level. | [optional] 
 **GrantTypes** | Pointer to **[]string** |  | [optional] 
 **IsNeverExpiring** | Pointer to **bool** | Used to mark the App Registration as a never-expiring App Registration. | [optional] [default to false]
@@ -26,10 +27,13 @@ Name | Type | Description | Notes
 **Scope** | Pointer to [**NullableIamSwitchScopePermissions**](IamSwitchScopePermissions.md) |  | [optional] 
 **ShowConsentScreen** | Pointer to **bool** | Set to true if consent screen needs to be shown during the OAuth login process. Applicable only for public AppRegistrations, means only &#39;authorization_code&#39; grantType. Note that consent screen will be shown on each login. | [optional] [default to false]
 **StartTime** | Pointer to **time.Time** | The timestamp at which an expiry date was first set on this app registration.  For expiring App Registrations, this field is same as the create time of the App Registration. For never-expiring App Registrations, this field is set initially to zero time value. If a never-expiry App Registration is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field. | [optional] [readonly] 
+**TokenExpiry** | Pointer to **string** | Defines the expiry time of the token generated via the AppRegistration. * &#x60;generic&#x60; - This sets the expiryTime to ten minutes from the token issuing time. * &#x60;longLived&#x60; - This sets the expiryTime to an year from the token issuing time. * &#x60;infinite&#x60; - This allows for a never-expiring token. Use with caution. | [optional] [readonly] [default to "generic"]
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**ClientApplication** | Pointer to [**NullableIamAbstractClientApplicationRelationship**](IamAbstractClientApplicationRelationship.md) |  | [optional] 
 **OauthTokens** | Pointer to [**[]IamOAuthTokenRelationship**](IamOAuthTokenRelationship.md) | An array of relationships to iamOAuthToken resources. | [optional] [readonly] 
 **Permission** | Pointer to [**NullableIamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
 **Roles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] 
+**SecurityHolder** | Pointer to [**NullableIamSecurityHolderRelationship**](IamSecurityHolderRelationship.md) |  | [optional] 
 **User** | Pointer to [**NullableIamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
@@ -240,6 +244,31 @@ SetDescription sets Description field to given value.
 `func (o *IamAppRegistration) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetEntityId
+
+`func (o *IamAppRegistration) GetEntityId() string`
+
+GetEntityId returns the EntityId field if non-nil, zero value otherwise.
+
+### GetEntityIdOk
+
+`func (o *IamAppRegistration) GetEntityIdOk() (*string, bool)`
+
+GetEntityIdOk returns a tuple with the EntityId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntityId
+
+`func (o *IamAppRegistration) SetEntityId(v string)`
+
+SetEntityId sets EntityId field to given value.
+
+### HasEntityId
+
+`func (o *IamAppRegistration) HasEntityId() bool`
+
+HasEntityId returns a boolean if a field has been set.
 
 ### GetExpiryDateTime
 
@@ -631,6 +660,31 @@ SetStartTime sets StartTime field to given value.
 
 HasStartTime returns a boolean if a field has been set.
 
+### GetTokenExpiry
+
+`func (o *IamAppRegistration) GetTokenExpiry() string`
+
+GetTokenExpiry returns the TokenExpiry field if non-nil, zero value otherwise.
+
+### GetTokenExpiryOk
+
+`func (o *IamAppRegistration) GetTokenExpiryOk() (*string, bool)`
+
+GetTokenExpiryOk returns a tuple with the TokenExpiry field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTokenExpiry
+
+`func (o *IamAppRegistration) SetTokenExpiry(v string)`
+
+SetTokenExpiry sets TokenExpiry field to given value.
+
+### HasTokenExpiry
+
+`func (o *IamAppRegistration) HasTokenExpiry() bool`
+
+HasTokenExpiry returns a boolean if a field has been set.
+
 ### GetAccount
 
 `func (o *IamAppRegistration) GetAccount() IamAccountRelationship`
@@ -666,6 +720,41 @@ HasAccount returns a boolean if a field has been set.
 `func (o *IamAppRegistration) UnsetAccount()`
 
 UnsetAccount ensures that no value is present for Account, not even an explicit nil
+### GetClientApplication
+
+`func (o *IamAppRegistration) GetClientApplication() IamAbstractClientApplicationRelationship`
+
+GetClientApplication returns the ClientApplication field if non-nil, zero value otherwise.
+
+### GetClientApplicationOk
+
+`func (o *IamAppRegistration) GetClientApplicationOk() (*IamAbstractClientApplicationRelationship, bool)`
+
+GetClientApplicationOk returns a tuple with the ClientApplication field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientApplication
+
+`func (o *IamAppRegistration) SetClientApplication(v IamAbstractClientApplicationRelationship)`
+
+SetClientApplication sets ClientApplication field to given value.
+
+### HasClientApplication
+
+`func (o *IamAppRegistration) HasClientApplication() bool`
+
+HasClientApplication returns a boolean if a field has been set.
+
+### SetClientApplicationNil
+
+`func (o *IamAppRegistration) SetClientApplicationNil(b bool)`
+
+ SetClientApplicationNil sets the value for ClientApplication to be an explicit nil
+
+### UnsetClientApplication
+`func (o *IamAppRegistration) UnsetClientApplication()`
+
+UnsetClientApplication ensures that no value is present for ClientApplication, not even an explicit nil
 ### GetOauthTokens
 
 `func (o *IamAppRegistration) GetOauthTokens() []IamOAuthTokenRelationship`
@@ -771,6 +860,41 @@ HasRoles returns a boolean if a field has been set.
 `func (o *IamAppRegistration) UnsetRoles()`
 
 UnsetRoles ensures that no value is present for Roles, not even an explicit nil
+### GetSecurityHolder
+
+`func (o *IamAppRegistration) GetSecurityHolder() IamSecurityHolderRelationship`
+
+GetSecurityHolder returns the SecurityHolder field if non-nil, zero value otherwise.
+
+### GetSecurityHolderOk
+
+`func (o *IamAppRegistration) GetSecurityHolderOk() (*IamSecurityHolderRelationship, bool)`
+
+GetSecurityHolderOk returns a tuple with the SecurityHolder field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecurityHolder
+
+`func (o *IamAppRegistration) SetSecurityHolder(v IamSecurityHolderRelationship)`
+
+SetSecurityHolder sets SecurityHolder field to given value.
+
+### HasSecurityHolder
+
+`func (o *IamAppRegistration) HasSecurityHolder() bool`
+
+HasSecurityHolder returns a boolean if a field has been set.
+
+### SetSecurityHolderNil
+
+`func (o *IamAppRegistration) SetSecurityHolderNil(b bool)`
+
+ SetSecurityHolderNil sets the value for SecurityHolder to be an explicit nil
+
+### UnsetSecurityHolder
+`func (o *IamAppRegistration) UnsetSecurityHolder()`
+
+UnsetSecurityHolder ensures that no value is present for SecurityHolder, not even an explicit nil
 ### GetUser
 
 `func (o *IamAppRegistration) GetUser() IamUserRelationship`

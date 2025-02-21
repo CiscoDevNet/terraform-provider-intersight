@@ -60,6 +60,7 @@ Name | Type | Description | Notes
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
 **Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
+**CustomPermissionResources** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
 **EquipmentChassis** | Pointer to [**NullableEquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**NullableInventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **InventoryParent** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
@@ -1504,6 +1505,41 @@ SetVendor sets Vendor field to given value.
 
 HasVendor returns a boolean if a field has been set.
 
+### GetCustomPermissionResources
+
+`func (o *ComputePhysicalSummary) GetCustomPermissionResources() []MoBaseMoRelationship`
+
+GetCustomPermissionResources returns the CustomPermissionResources field if non-nil, zero value otherwise.
+
+### GetCustomPermissionResourcesOk
+
+`func (o *ComputePhysicalSummary) GetCustomPermissionResourcesOk() (*[]MoBaseMoRelationship, bool)`
+
+GetCustomPermissionResourcesOk returns a tuple with the CustomPermissionResources field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomPermissionResources
+
+`func (o *ComputePhysicalSummary) SetCustomPermissionResources(v []MoBaseMoRelationship)`
+
+SetCustomPermissionResources sets CustomPermissionResources field to given value.
+
+### HasCustomPermissionResources
+
+`func (o *ComputePhysicalSummary) HasCustomPermissionResources() bool`
+
+HasCustomPermissionResources returns a boolean if a field has been set.
+
+### SetCustomPermissionResourcesNil
+
+`func (o *ComputePhysicalSummary) SetCustomPermissionResourcesNil(b bool)`
+
+ SetCustomPermissionResourcesNil sets the value for CustomPermissionResources to be an explicit nil
+
+### UnsetCustomPermissionResources
+`func (o *ComputePhysicalSummary) UnsetCustomPermissionResources()`
+
+UnsetCustomPermissionResources ensures that no value is present for CustomPermissionResources, not even an explicit nil
 ### GetEquipmentChassis
 
 `func (o *ComputePhysicalSummary) GetEquipmentChassis() EquipmentChassisRelationship`

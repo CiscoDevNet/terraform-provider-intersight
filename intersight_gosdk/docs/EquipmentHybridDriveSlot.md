@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.HybridDriveSlot"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.HybridDriveSlot"]
-**CurrentMode** | Pointer to **string** | The Configured Mode of the Hybrid Drive slot. * &#x60;&#x60; - Hybrid Drive slot  mode is not applicable. * &#x60;RAID&#x60; - Hybrid Drive slot mode is RAID. * &#x60;Direct&#x60; - Hybrid Drive slot mode is Direct. | [optional] [readonly] [default to ""]
-**RequestedMode** | Pointer to **string** | The Requested Mode for the Hybrid Drive slot. * &#x60;&#x60; - Hybrid Drive slot  mode is not applicable. * &#x60;RAID&#x60; - Hybrid Drive slot mode is RAID. * &#x60;Direct&#x60; - Hybrid Drive slot mode is Direct. | [optional] [readonly] [default to ""]
+**CurrentMode** | Pointer to **string** | The Configured Mode of the Hybrid Drive slot. * &#x60;&#x60; - Hybrid Drive slot mode is not applicable. * &#x60;Controller&#x60; - Hybrid Drive slot mode is Controller. * &#x60;Direct&#x60; - Hybrid Drive slot mode is Direct. | [optional] [readonly] [default to ""]
+**RequestedMode** | Pointer to **string** | The Requested Mode for the Hybrid Drive slot. * &#x60;&#x60; - Hybrid Drive slot mode is not applicable. * &#x60;Controller&#x60; - Hybrid Drive slot mode is Controller. * &#x60;Direct&#x60; - Hybrid Drive slot mode is Direct. | [optional] [readonly] [default to ""]
 **ComputeBlade** | Pointer to [**NullableComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **ComputeBoard** | Pointer to [**NullableComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**NullableComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 

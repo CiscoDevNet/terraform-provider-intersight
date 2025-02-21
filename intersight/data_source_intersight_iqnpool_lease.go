@@ -865,11 +865,11 @@ func dataSourceIqnpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	if v, ok := d.GetOk("reservation"); ok {
-		p := make([]models.PoolReservationReference, 0, 1)
+		p := make([]models.IqnpoolReservationReference, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.PoolReservationReference{}
+			o := &models.IqnpoolReservationReference{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1121,7 +1121,7 @@ func dataSourceIqnpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 
 				temp["pool_member"] = flattenMapIqnpoolPoolMemberRelationship(s.GetPoolMember(), d)
 
-				temp["reservation"] = flattenMapPoolReservationReference(s.GetReservation(), d)
+				temp["reservation"] = flattenMapIqnpoolReservationReference(s.GetReservation(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

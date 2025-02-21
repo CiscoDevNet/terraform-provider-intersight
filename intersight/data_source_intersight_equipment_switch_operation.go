@@ -304,6 +304,11 @@ func getEquipmentSwitchOperationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"switch_name": {
+			Description: "Name of the switch on which the switch operation is performed.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -804,6 +809,11 @@ func dataSourceEquipmentSwitchOperationRead(c context.Context, d *schema.Resourc
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("switch_name"); ok {
+		x := (v.(string))
+		o.SetSwitchName(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -976,6 +986,7 @@ func dataSourceEquipmentSwitchOperationRead(c context.Context, d *schema.Resourc
 				temp["reset_action"] = flattenMapEquipmentResetAction(s.GetResetAction(), d)
 				temp["reset_action_state"] = (s.GetResetActionState())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["switch_name"] = (s.GetSwitchName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

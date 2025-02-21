@@ -277,6 +277,11 @@ func getWorkflowServiceItemDefinitionSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"default_version": {
+			Description: "The flag to indicate that this is the default version of the service item.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"delete_instance_on_decommission": {
 			Description: "The flag to indicate that service item instance will be deleted after the completion of decommission action.",
 			Type:        schema.TypeBool,
@@ -985,6 +990,11 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 		o.SetCvdId(x)
 	}
 
+	if v, ok := d.GetOkExists("default_version"); ok {
+		x := (v.(bool))
+		o.SetDefaultVersion(x)
+	}
+
 	if v, ok := d.GetOkExists("delete_instance_on_decommission"); ok {
 		x := (v.(bool))
 		o.SetDeleteInstanceOnDecommission(x)
@@ -1379,6 +1389,7 @@ func dataSourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Re
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["create_user"] = (s.GetCreateUser())
 				temp["cvd_id"] = (s.GetCvdId())
+				temp["default_version"] = (s.GetDefaultVersion())
 				temp["delete_instance_on_decommission"] = (s.GetDeleteInstanceOnDecommission())
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())

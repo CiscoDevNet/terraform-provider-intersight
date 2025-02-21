@@ -857,11 +857,11 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 	}
 
 	if v, ok := d.GetOk("resource_pool_parameters"); ok {
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.ResourcepoolResourcePoolParameters, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.MoBaseComplexType{}
+			o := &models.ResourcepoolResourcePoolParameters{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1109,7 +1109,7 @@ func dataSourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, m
 
 				temp["resource_evaluation_status"] = flattenMapResourcepoolResourceEvaluationStatus(s.GetResourceEvaluationStatus(), d)
 
-				temp["resource_pool_parameters"] = flattenMapMoBaseComplexType(s.GetResourcePoolParameters(), d)
+				temp["resource_pool_parameters"] = flattenMapResourcepoolResourcePoolParameters(s.GetResourcePoolParameters(), d)
 				temp["resource_type"] = (s.GetResourceType())
 
 				temp["selectors"] = flattenListResourceSelector(s.GetSelectors(), d)

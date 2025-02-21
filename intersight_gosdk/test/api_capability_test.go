@@ -1358,6 +1358,32 @@ func Test_intersight_CapabilityApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CapabilityApiService GetCapabilityFexSupportMetaByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.CapabilityApi.GetCapabilityFexSupportMetaByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CapabilityApiService GetCapabilityFexSupportMetaList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.CapabilityApi.GetCapabilityFexSupportMetaList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CapabilityApiService GetCapabilityGpuEndpointDescriptorByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppNode"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppNode"]
-**AvgPerformanceMetrics** | Pointer to [**NullableStorageBasePerformanceMetricsAverage**](StorageBasePerformanceMetricsAverage.md) | Average performance metrics data for a NetApp storage resource over a given period of time. | [optional] 
+**AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
 **CdpdEnabled** | Pointer to **string** | Storage node option for cdpd state. * &#x60;unknown&#x60; - The cdpd option is unknown on the node. * &#x60;on&#x60; - The cdpd option is enabled on the node. * &#x60;off&#x60; - The cdpd option is disabled on the node. | [optional] [readonly] [default to "unknown"]
 **Health** | Pointer to **bool** | The health of the NetApp Node. | [optional] [readonly] 
 **HighAvailability** | Pointer to [**NullableStorageNetAppHighAvailability**](StorageNetAppHighAvailability.md) |  | [optional] 
@@ -78,20 +78,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetAvgPerformanceMetrics
 
-`func (o *StorageNetAppNode) GetAvgPerformanceMetrics() StorageBasePerformanceMetricsAverage`
+`func (o *StorageNetAppNode) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage`
 
 GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field if non-nil, zero value otherwise.
 
 ### GetAvgPerformanceMetricsOk
 
-`func (o *StorageNetAppNode) GetAvgPerformanceMetricsOk() (*StorageBasePerformanceMetricsAverage, bool)`
+`func (o *StorageNetAppNode) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool)`
 
 GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvgPerformanceMetrics
 
-`func (o *StorageNetAppNode) SetAvgPerformanceMetrics(v StorageBasePerformanceMetricsAverage)`
+`func (o *StorageNetAppNode) SetAvgPerformanceMetrics(v StorageNetAppPerformanceMetricsAverage)`
 
 SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
 
@@ -101,16 +101,6 @@ SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
 
 HasAvgPerformanceMetrics returns a boolean if a field has been set.
 
-### SetAvgPerformanceMetricsNil
-
-`func (o *StorageNetAppNode) SetAvgPerformanceMetricsNil(b bool)`
-
- SetAvgPerformanceMetricsNil sets the value for AvgPerformanceMetrics to be an explicit nil
-
-### UnsetAvgPerformanceMetrics
-`func (o *StorageNetAppNode) UnsetAvgPerformanceMetrics()`
-
-UnsetAvgPerformanceMetrics ensures that no value is present for AvgPerformanceMetrics, not even an explicit nil
 ### GetCdpdEnabled
 
 `func (o *StorageNetAppNode) GetCdpdEnabled() string`

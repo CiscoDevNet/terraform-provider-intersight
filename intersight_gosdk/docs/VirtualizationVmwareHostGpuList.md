@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Count** | Pointer to **int32** | The total number of &#39;virtualization.VmwareHostGpu&#39; resources matching the request, accross all pages. The &#39;Count&#39; attribute is included when the HTTP GET request includes the &#39;$inlinecount&#39; parameter. | [optional] 
-**Results** | Pointer to [**[]VirtualizationBaseHostGpu**](VirtualizationBaseHostGpu.md) | The array of &#39;virtualization.VmwareHostGpu&#39; resources matching the request. | [optional] 
+**Results** | Pointer to [**[]VirtualizationVmwareHostGpu**](VirtualizationVmwareHostGpu.md) | The array of &#39;virtualization.VmwareHostGpu&#39; resources matching the request. | [optional] 
 
 ## Methods
 

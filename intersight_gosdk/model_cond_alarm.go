@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -47,8 +47,10 @@ type CondAlarm struct {
 	// Deprecated
 	AffectedObject *string `json:"AffectedObject,omitempty"`
 	// Parent MoId of the fault from managed system. For example, Blade moid for adaptor fault.
+	// Deprecated
 	AncestorMoId *string `json:"AncestorMoId,omitempty"`
 	// Parent MO type of the fault from managed system. For example, Blade for adaptor fault.
+	// Deprecated
 	AncestorMoType *string `json:"AncestorMoType,omitempty"`
 	// A unique alarm code. For alarms mapped from UCS faults, this will be the same as the UCS fault code.
 	Code *string `json:"Code,omitempty"`
@@ -56,10 +58,15 @@ type CondAlarm struct {
 	CreationTime *time.Time `json:"CreationTime,omitempty"`
 	// A longer description of the alarm than the name. The description contains details of the component reporting the issue.
 	Description *string `json:"Description,omitempty"`
+	// Alarm flapping state. This will be set to Flapping or Cooldown if both (A) this type of alarm is being monitored for flapping conditions, and (B) the alarm has recently transitioned to an active state (Critical, Warning or Info) followed by a Cleared state or vice versa. LastTransitionTime is a better field to use to know whether a particular alarm recently changed state. * `NotFlapping` - The enum value None says that no recent flaps have occurred. * `Flapping` - The enum value Flapping says that the alarm has become active recently, after being active and then cleared previously. * `Cooldown` - The enum value Cooldown says that the alarm is cleared, but was recently active. * `Unknown` - The enum value Unknown indicates that you might not have the latest version of the property meta.
+	Flapping *string `json:"Flapping,omitempty"`
+	// Alarm flapping counter. This will be incremented every time the state of the alarm transitions to an active state (Critical, Warning or Info) followed by a Cleared state or vice versa. If no more transitions occur within the system-defined flap interval (usually less than 5 minutes), the counter will be reset to zero. This represents the amount of times the alarm has flapped between an active and a cleared state since the last time the Flapping state was cleared.
+	FlappingCount *int64 `json:"FlappingCount,omitempty"`
+	// Alarm flapping start time. Only when the flapping state is Flapping or Cooldown, this will be set to the time the alarm began flapping. If the flapping state is NotFlapping, this timestamp may be set to zero or any other time and should be ignored.
+	FlappingStartTime *time.Time `json:"FlappingStartTime,omitempty"`
 	// The time the alarm last had a change in severity.
 	LastTransitionTime *time.Time `json:"LastTransitionTime,omitempty"`
 	// A unique key for the alarm from the managed system's point of view. For example, in the case of UCS, this is the fault's dn.
-	// Deprecated
 	MsAffectedObject *string `json:"MsAffectedObject,omitempty"`
 	// Uniquely identifies the type of alarm. For alarms originating from Intersight, this will be a descriptive name. For alarms that are mapped from faults, the name will be derived from fault properties. For example, alarms mapped from UCS faults will use a prefix of UCS and appended with the fault code.
 	Name *string `json:"Name,omitempty"`
@@ -68,11 +75,13 @@ type CondAlarm struct {
 	// The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * `None` - The Enum value None represents that there is no severity. * `Info` - The Enum value Info represents the Informational level of severity. * `Critical` - The Enum value Critical represents the Critical level of severity. * `Warning` - The Enum value Warning represents the Warning level of severity. * `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared.
 	Severity *string `json:"Severity,omitempty"`
 	// Indicates whether the alarm is marked for suppression or not.
-	Suppressed           *bool                                       `json:"Suppressed,omitempty"`
-	AffectedMo           NullableMoBaseMoRelationship                `json:"AffectedMo,omitempty"`
-	Definition           NullableCondAlarmDefinitionRelationship     `json:"Definition,omitempty"`
-	RegisteredDevice     NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Suppressed *bool                        `json:"Suppressed,omitempty"`
+	AffectedMo NullableMoBaseMoRelationship `json:"AffectedMo,omitempty"`
+	// An array of relationships to moBaseMo resources.
+	AlarmSummaryAggregators []MoBaseMoRelationship                      `json:"AlarmSummaryAggregators,omitempty"`
+	Definition              NullableCondAlarmDefinitionRelationship     `json:"Definition,omitempty"`
+	RegisteredDevice        NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _CondAlarm CondAlarm
@@ -396,6 +405,7 @@ func (o *CondAlarm) SetAffectedObject(v string) {
 }
 
 // GetAncestorMoId returns the AncestorMoId field value if set, zero value otherwise.
+// Deprecated
 func (o *CondAlarm) GetAncestorMoId() string {
 	if o == nil || IsNil(o.AncestorMoId) {
 		var ret string
@@ -406,6 +416,7 @@ func (o *CondAlarm) GetAncestorMoId() string {
 
 // GetAncestorMoIdOk returns a tuple with the AncestorMoId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CondAlarm) GetAncestorMoIdOk() (*string, bool) {
 	if o == nil || IsNil(o.AncestorMoId) {
 		return nil, false
@@ -423,11 +434,13 @@ func (o *CondAlarm) HasAncestorMoId() bool {
 }
 
 // SetAncestorMoId gets a reference to the given string and assigns it to the AncestorMoId field.
+// Deprecated
 func (o *CondAlarm) SetAncestorMoId(v string) {
 	o.AncestorMoId = &v
 }
 
 // GetAncestorMoType returns the AncestorMoType field value if set, zero value otherwise.
+// Deprecated
 func (o *CondAlarm) GetAncestorMoType() string {
 	if o == nil || IsNil(o.AncestorMoType) {
 		var ret string
@@ -438,6 +451,7 @@ func (o *CondAlarm) GetAncestorMoType() string {
 
 // GetAncestorMoTypeOk returns a tuple with the AncestorMoType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CondAlarm) GetAncestorMoTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.AncestorMoType) {
 		return nil, false
@@ -455,6 +469,7 @@ func (o *CondAlarm) HasAncestorMoType() bool {
 }
 
 // SetAncestorMoType gets a reference to the given string and assigns it to the AncestorMoType field.
+// Deprecated
 func (o *CondAlarm) SetAncestorMoType(v string) {
 	o.AncestorMoType = &v
 }
@@ -555,6 +570,102 @@ func (o *CondAlarm) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetFlapping returns the Flapping field value if set, zero value otherwise.
+func (o *CondAlarm) GetFlapping() string {
+	if o == nil || IsNil(o.Flapping) {
+		var ret string
+		return ret
+	}
+	return *o.Flapping
+}
+
+// GetFlappingOk returns a tuple with the Flapping field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarm) GetFlappingOk() (*string, bool) {
+	if o == nil || IsNil(o.Flapping) {
+		return nil, false
+	}
+	return o.Flapping, true
+}
+
+// HasFlapping returns a boolean if a field has been set.
+func (o *CondAlarm) HasFlapping() bool {
+	if o != nil && !IsNil(o.Flapping) {
+		return true
+	}
+
+	return false
+}
+
+// SetFlapping gets a reference to the given string and assigns it to the Flapping field.
+func (o *CondAlarm) SetFlapping(v string) {
+	o.Flapping = &v
+}
+
+// GetFlappingCount returns the FlappingCount field value if set, zero value otherwise.
+func (o *CondAlarm) GetFlappingCount() int64 {
+	if o == nil || IsNil(o.FlappingCount) {
+		var ret int64
+		return ret
+	}
+	return *o.FlappingCount
+}
+
+// GetFlappingCountOk returns a tuple with the FlappingCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarm) GetFlappingCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.FlappingCount) {
+		return nil, false
+	}
+	return o.FlappingCount, true
+}
+
+// HasFlappingCount returns a boolean if a field has been set.
+func (o *CondAlarm) HasFlappingCount() bool {
+	if o != nil && !IsNil(o.FlappingCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetFlappingCount gets a reference to the given int64 and assigns it to the FlappingCount field.
+func (o *CondAlarm) SetFlappingCount(v int64) {
+	o.FlappingCount = &v
+}
+
+// GetFlappingStartTime returns the FlappingStartTime field value if set, zero value otherwise.
+func (o *CondAlarm) GetFlappingStartTime() time.Time {
+	if o == nil || IsNil(o.FlappingStartTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.FlappingStartTime
+}
+
+// GetFlappingStartTimeOk returns a tuple with the FlappingStartTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondAlarm) GetFlappingStartTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.FlappingStartTime) {
+		return nil, false
+	}
+	return o.FlappingStartTime, true
+}
+
+// HasFlappingStartTime returns a boolean if a field has been set.
+func (o *CondAlarm) HasFlappingStartTime() bool {
+	if o != nil && !IsNil(o.FlappingStartTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetFlappingStartTime gets a reference to the given time.Time and assigns it to the FlappingStartTime field.
+func (o *CondAlarm) SetFlappingStartTime(v time.Time) {
+	o.FlappingStartTime = &v
+}
+
 // GetLastTransitionTime returns the LastTransitionTime field value if set, zero value otherwise.
 func (o *CondAlarm) GetLastTransitionTime() time.Time {
 	if o == nil || IsNil(o.LastTransitionTime) {
@@ -588,7 +699,6 @@ func (o *CondAlarm) SetLastTransitionTime(v time.Time) {
 }
 
 // GetMsAffectedObject returns the MsAffectedObject field value if set, zero value otherwise.
-// Deprecated
 func (o *CondAlarm) GetMsAffectedObject() string {
 	if o == nil || IsNil(o.MsAffectedObject) {
 		var ret string
@@ -599,7 +709,6 @@ func (o *CondAlarm) GetMsAffectedObject() string {
 
 // GetMsAffectedObjectOk returns a tuple with the MsAffectedObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *CondAlarm) GetMsAffectedObjectOk() (*string, bool) {
 	if o == nil || IsNil(o.MsAffectedObject) {
 		return nil, false
@@ -617,7 +726,6 @@ func (o *CondAlarm) HasMsAffectedObject() bool {
 }
 
 // SetMsAffectedObject gets a reference to the given string and assigns it to the MsAffectedObject field.
-// Deprecated
 func (o *CondAlarm) SetMsAffectedObject(v string) {
 	o.MsAffectedObject = &v
 }
@@ -793,6 +901,39 @@ func (o *CondAlarm) UnsetAffectedMo() {
 	o.AffectedMo.Unset()
 }
 
+// GetAlarmSummaryAggregators returns the AlarmSummaryAggregators field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CondAlarm) GetAlarmSummaryAggregators() []MoBaseMoRelationship {
+	if o == nil {
+		var ret []MoBaseMoRelationship
+		return ret
+	}
+	return o.AlarmSummaryAggregators
+}
+
+// GetAlarmSummaryAggregatorsOk returns a tuple with the AlarmSummaryAggregators field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CondAlarm) GetAlarmSummaryAggregatorsOk() ([]MoBaseMoRelationship, bool) {
+	if o == nil || IsNil(o.AlarmSummaryAggregators) {
+		return nil, false
+	}
+	return o.AlarmSummaryAggregators, true
+}
+
+// HasAlarmSummaryAggregators returns a boolean if a field has been set.
+func (o *CondAlarm) HasAlarmSummaryAggregators() bool {
+	if o != nil && !IsNil(o.AlarmSummaryAggregators) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlarmSummaryAggregators gets a reference to the given []MoBaseMoRelationship and assigns it to the AlarmSummaryAggregators field.
+func (o *CondAlarm) SetAlarmSummaryAggregators(v []MoBaseMoRelationship) {
+	o.AlarmSummaryAggregators = v
+}
+
 // GetDefinition returns the Definition field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CondAlarm) GetDefinition() CondAlarmDefinitionRelationship {
 	if o == nil || IsNil(o.Definition.Get()) {
@@ -941,6 +1082,15 @@ func (o CondAlarm) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["Description"] = o.Description
 	}
+	if !IsNil(o.Flapping) {
+		toSerialize["Flapping"] = o.Flapping
+	}
+	if !IsNil(o.FlappingCount) {
+		toSerialize["FlappingCount"] = o.FlappingCount
+	}
+	if !IsNil(o.FlappingStartTime) {
+		toSerialize["FlappingStartTime"] = o.FlappingStartTime
+	}
 	if !IsNil(o.LastTransitionTime) {
 		toSerialize["LastTransitionTime"] = o.LastTransitionTime
 	}
@@ -961,6 +1111,9 @@ func (o CondAlarm) ToMap() (map[string]interface{}, error) {
 	}
 	if o.AffectedMo.IsSet() {
 		toSerialize["AffectedMo"] = o.AffectedMo.Get()
+	}
+	if o.AlarmSummaryAggregators != nil {
+		toSerialize["AlarmSummaryAggregators"] = o.AlarmSummaryAggregators
 	}
 	if o.Definition.IsSet() {
 		toSerialize["Definition"] = o.Definition.Get()
@@ -1041,8 +1194,10 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		// Deprecated
 		AffectedObject *string `json:"AffectedObject,omitempty"`
 		// Parent MoId of the fault from managed system. For example, Blade moid for adaptor fault.
+		// Deprecated
 		AncestorMoId *string `json:"AncestorMoId,omitempty"`
 		// Parent MO type of the fault from managed system. For example, Blade for adaptor fault.
+		// Deprecated
 		AncestorMoType *string `json:"AncestorMoType,omitempty"`
 		// A unique alarm code. For alarms mapped from UCS faults, this will be the same as the UCS fault code.
 		Code *string `json:"Code,omitempty"`
@@ -1050,10 +1205,15 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		CreationTime *time.Time `json:"CreationTime,omitempty"`
 		// A longer description of the alarm than the name. The description contains details of the component reporting the issue.
 		Description *string `json:"Description,omitempty"`
+		// Alarm flapping state. This will be set to Flapping or Cooldown if both (A) this type of alarm is being monitored for flapping conditions, and (B) the alarm has recently transitioned to an active state (Critical, Warning or Info) followed by a Cleared state or vice versa. LastTransitionTime is a better field to use to know whether a particular alarm recently changed state. * `NotFlapping` - The enum value None says that no recent flaps have occurred. * `Flapping` - The enum value Flapping says that the alarm has become active recently, after being active and then cleared previously. * `Cooldown` - The enum value Cooldown says that the alarm is cleared, but was recently active. * `Unknown` - The enum value Unknown indicates that you might not have the latest version of the property meta.
+		Flapping *string `json:"Flapping,omitempty"`
+		// Alarm flapping counter. This will be incremented every time the state of the alarm transitions to an active state (Critical, Warning or Info) followed by a Cleared state or vice versa. If no more transitions occur within the system-defined flap interval (usually less than 5 minutes), the counter will be reset to zero. This represents the amount of times the alarm has flapped between an active and a cleared state since the last time the Flapping state was cleared.
+		FlappingCount *int64 `json:"FlappingCount,omitempty"`
+		// Alarm flapping start time. Only when the flapping state is Flapping or Cooldown, this will be set to the time the alarm began flapping. If the flapping state is NotFlapping, this timestamp may be set to zero or any other time and should be ignored.
+		FlappingStartTime *time.Time `json:"FlappingStartTime,omitempty"`
 		// The time the alarm last had a change in severity.
 		LastTransitionTime *time.Time `json:"LastTransitionTime,omitempty"`
 		// A unique key for the alarm from the managed system's point of view. For example, in the case of UCS, this is the fault's dn.
-		// Deprecated
 		MsAffectedObject *string `json:"MsAffectedObject,omitempty"`
 		// Uniquely identifies the type of alarm. For alarms originating from Intersight, this will be a descriptive name. For alarms that are mapped from faults, the name will be derived from fault properties. For example, alarms mapped from UCS faults will use a prefix of UCS and appended with the fault code.
 		Name *string `json:"Name,omitempty"`
@@ -1062,10 +1222,12 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		// The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * `None` - The Enum value None represents that there is no severity. * `Info` - The Enum value Info represents the Informational level of severity. * `Critical` - The Enum value Critical represents the Critical level of severity. * `Warning` - The Enum value Warning represents the Warning level of severity. * `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared.
 		Severity *string `json:"Severity,omitempty"`
 		// Indicates whether the alarm is marked for suppression or not.
-		Suppressed       *bool                                       `json:"Suppressed,omitempty"`
-		AffectedMo       NullableMoBaseMoRelationship                `json:"AffectedMo,omitempty"`
-		Definition       NullableCondAlarmDefinitionRelationship     `json:"Definition,omitempty"`
-		RegisteredDevice NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		Suppressed *bool                        `json:"Suppressed,omitempty"`
+		AffectedMo NullableMoBaseMoRelationship `json:"AffectedMo,omitempty"`
+		// An array of relationships to moBaseMo resources.
+		AlarmSummaryAggregators []MoBaseMoRelationship                      `json:"AlarmSummaryAggregators,omitempty"`
+		Definition              NullableCondAlarmDefinitionRelationship     `json:"Definition,omitempty"`
+		RegisteredDevice        NullableAssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
 	varCondAlarmWithoutEmbeddedStruct := CondAlarmWithoutEmbeddedStruct{}
@@ -1087,6 +1249,9 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		varCondAlarm.Code = varCondAlarmWithoutEmbeddedStruct.Code
 		varCondAlarm.CreationTime = varCondAlarmWithoutEmbeddedStruct.CreationTime
 		varCondAlarm.Description = varCondAlarmWithoutEmbeddedStruct.Description
+		varCondAlarm.Flapping = varCondAlarmWithoutEmbeddedStruct.Flapping
+		varCondAlarm.FlappingCount = varCondAlarmWithoutEmbeddedStruct.FlappingCount
+		varCondAlarm.FlappingStartTime = varCondAlarmWithoutEmbeddedStruct.FlappingStartTime
 		varCondAlarm.LastTransitionTime = varCondAlarmWithoutEmbeddedStruct.LastTransitionTime
 		varCondAlarm.MsAffectedObject = varCondAlarmWithoutEmbeddedStruct.MsAffectedObject
 		varCondAlarm.Name = varCondAlarmWithoutEmbeddedStruct.Name
@@ -1094,6 +1259,7 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		varCondAlarm.Severity = varCondAlarmWithoutEmbeddedStruct.Severity
 		varCondAlarm.Suppressed = varCondAlarmWithoutEmbeddedStruct.Suppressed
 		varCondAlarm.AffectedMo = varCondAlarmWithoutEmbeddedStruct.AffectedMo
+		varCondAlarm.AlarmSummaryAggregators = varCondAlarmWithoutEmbeddedStruct.AlarmSummaryAggregators
 		varCondAlarm.Definition = varCondAlarmWithoutEmbeddedStruct.Definition
 		varCondAlarm.RegisteredDevice = varCondAlarmWithoutEmbeddedStruct.RegisteredDevice
 		*o = CondAlarm(varCondAlarm)
@@ -1127,6 +1293,9 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Code")
 		delete(additionalProperties, "CreationTime")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "Flapping")
+		delete(additionalProperties, "FlappingCount")
+		delete(additionalProperties, "FlappingStartTime")
 		delete(additionalProperties, "LastTransitionTime")
 		delete(additionalProperties, "MsAffectedObject")
 		delete(additionalProperties, "Name")
@@ -1134,6 +1303,7 @@ func (o *CondAlarm) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Severity")
 		delete(additionalProperties, "Suppressed")
 		delete(additionalProperties, "AffectedMo")
+		delete(additionalProperties, "AlarmSummaryAggregators")
 		delete(additionalProperties, "Definition")
 		delete(additionalProperties, "RegisteredDevice")
 

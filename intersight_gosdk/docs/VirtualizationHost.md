@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Action** | Pointer to **string** | Action to be performed on a host (Create, PowerState, Migrate, Clone etc). * &#x60;None&#x60; - A place holder for the default value. * &#x60;EnterMaintenanceMode&#x60; - Put a host into maintenance mode. * &#x60;ExitMaintenanceMode&#x60; - Put a host into active mode. * &#x60;PowerOffStorageController&#x60; - Power off HyperFlex storage controller node running on selected hypervisor host. * &#x60;PowerOnStorageController&#x60; - Power on HyperFlex storage controller node running on selected hypervisor host. | [optional] [default to "None"]
 **Discovered** | Pointer to **bool** | Flag to indicate whether the configuration is created from inventory object. | [optional] [readonly] 
 **Evacuate** | Pointer to **bool** | If true, move powered-off and suspended virtual machines to other hosts in the cluster. | [optional] 
-**HostConfig** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | Specify ESXi host custom specification. | [optional] 
+**HostConfig** | Pointer to [**NullableVirtualizationBaseHostConfiguration**](VirtualizationBaseHostConfiguration.md) |  | [optional] 
 **HypervisorType** | Pointer to **string** | Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [readonly] [default to "ESXi"]
 **Identity** | Pointer to **string** | Unique identifier assigned to the hypervisor host. | [optional] [readonly] 
 **MaintenanceState** | Pointer to **string** | Expected state of host. An action on the host (e.g., Enter Maintenance) may cause the host to be put into maintenance mode. * &#x60;None&#x60; - A place holder for the default value. * &#x60;Enter&#x60; - Power action is performed on the virtual machine. * &#x60;Exit&#x60; - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor. | [optional] [default to "None"]
@@ -157,20 +157,20 @@ HasEvacuate returns a boolean if a field has been set.
 
 ### GetHostConfig
 
-`func (o *VirtualizationHost) GetHostConfig() MoBaseComplexType`
+`func (o *VirtualizationHost) GetHostConfig() VirtualizationBaseHostConfiguration`
 
 GetHostConfig returns the HostConfig field if non-nil, zero value otherwise.
 
 ### GetHostConfigOk
 
-`func (o *VirtualizationHost) GetHostConfigOk() (*MoBaseComplexType, bool)`
+`func (o *VirtualizationHost) GetHostConfigOk() (*VirtualizationBaseHostConfiguration, bool)`
 
 GetHostConfigOk returns a tuple with the HostConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHostConfig
 
-`func (o *VirtualizationHost) SetHostConfig(v MoBaseComplexType)`
+`func (o *VirtualizationHost) SetHostConfig(v VirtualizationBaseHostConfiguration)`
 
 SetHostConfig sets HostConfig field to given value.
 

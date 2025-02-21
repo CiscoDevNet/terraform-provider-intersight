@@ -1161,11 +1161,11 @@ func dataSourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceD
 	}
 
 	if v, ok := d.GetOk("file_server"); ok {
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.MoBaseComplexType{}
+			o := &models.SoftwarerepositoryFileServer{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1796,7 +1796,7 @@ func dataSourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceD
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["exclude_component_list"] = (s.GetExcludeComponentList())
 
-				temp["file_server"] = flattenMapMoBaseComplexType(s.GetFileServer(), d)
+				temp["file_server"] = flattenMapSoftwarerepositoryFileServer(s.GetFileServer(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

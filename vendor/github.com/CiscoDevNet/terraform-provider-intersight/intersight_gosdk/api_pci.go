@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -36,9 +36,9 @@ func (r ApiGetPciCoprocessorCardByMoidRequest) Execute() (*PciCoprocessorCard, *
 /*
 GetPciCoprocessorCardByMoid Read a 'pci.CoprocessorCard' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPciCoprocessorCardByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPciCoprocessorCardByMoidRequest
 */
 func (a *PciApiService) GetPciCoprocessorCardByMoid(ctx context.Context, moid string) ApiGetPciCoprocessorCardByMoidRequest {
 	return ApiGetPciCoprocessorCardByMoidRequest{
@@ -49,8 +49,7 @@ func (a *PciApiService) GetPciCoprocessorCardByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//
-//	@return PciCoprocessorCard
+//  @return PciCoprocessorCard
 func (a *PciApiService) GetPciCoprocessorCardByMoidExecute(r ApiGetPciCoprocessorCardByMoidRequest) (*PciCoprocessorCard, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -266,8 +265,8 @@ func (r ApiGetPciCoprocessorCardListRequest) Execute() (*PciCoprocessorCardRespo
 /*
 GetPciCoprocessorCardList Read a 'pci.CoprocessorCard' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPciCoprocessorCardListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPciCoprocessorCardListRequest
 */
 func (a *PciApiService) GetPciCoprocessorCardList(ctx context.Context) ApiGetPciCoprocessorCardListRequest {
 	return ApiGetPciCoprocessorCardListRequest{
@@ -277,8 +276,7 @@ func (a *PciApiService) GetPciCoprocessorCardList(ctx context.Context) ApiGetPci
 }
 
 // Execute executes the request
-//
-//	@return PciCoprocessorCardResponse
+//  @return PciCoprocessorCardResponse
 func (a *PciApiService) GetPciCoprocessorCardListExecute(r ApiGetPciCoprocessorCardListRequest) (*PciCoprocessorCardResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -465,9 +463,9 @@ func (r ApiGetPciDeviceByMoidRequest) Execute() (*PciDevice, *http.Response, err
 /*
 GetPciDeviceByMoid Read a 'pci.Device' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPciDeviceByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPciDeviceByMoidRequest
 */
 func (a *PciApiService) GetPciDeviceByMoid(ctx context.Context, moid string) ApiGetPciDeviceByMoidRequest {
 	return ApiGetPciDeviceByMoidRequest{
@@ -478,8 +476,7 @@ func (a *PciApiService) GetPciDeviceByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//
-//	@return PciDevice
+//  @return PciDevice
 func (a *PciApiService) GetPciDeviceByMoidExecute(r ApiGetPciDeviceByMoidRequest) (*PciDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -695,8 +692,8 @@ func (r ApiGetPciDeviceListRequest) Execute() (*PciDeviceResponse, *http.Respons
 /*
 GetPciDeviceList Read a 'pci.Device' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPciDeviceListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPciDeviceListRequest
 */
 func (a *PciApiService) GetPciDeviceList(ctx context.Context) ApiGetPciDeviceListRequest {
 	return ApiGetPciDeviceListRequest{
@@ -706,8 +703,7 @@ func (a *PciApiService) GetPciDeviceList(ctx context.Context) ApiGetPciDeviceLis
 }
 
 // Execute executes the request
-//
-//	@return PciDeviceResponse
+//  @return PciDeviceResponse
 func (a *PciApiService) GetPciDeviceListExecute(r ApiGetPciDeviceListRequest) (*PciDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -894,9 +890,9 @@ func (r ApiGetPciLinkByMoidRequest) Execute() (*PciLink, *http.Response, error) 
 /*
 GetPciLinkByMoid Read a 'pci.Link' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPciLinkByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPciLinkByMoidRequest
 */
 func (a *PciApiService) GetPciLinkByMoid(ctx context.Context, moid string) ApiGetPciLinkByMoidRequest {
 	return ApiGetPciLinkByMoidRequest{
@@ -907,8 +903,7 @@ func (a *PciApiService) GetPciLinkByMoid(ctx context.Context, moid string) ApiGe
 }
 
 // Execute executes the request
-//
-//	@return PciLink
+//  @return PciLink
 func (a *PciApiService) GetPciLinkByMoidExecute(r ApiGetPciLinkByMoidRequest) (*PciLink, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1124,8 +1119,8 @@ func (r ApiGetPciLinkListRequest) Execute() (*PciLinkResponse, *http.Response, e
 /*
 GetPciLinkList Read a 'pci.Link' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPciLinkListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPciLinkListRequest
 */
 func (a *PciApiService) GetPciLinkList(ctx context.Context) ApiGetPciLinkListRequest {
 	return ApiGetPciLinkListRequest{
@@ -1135,8 +1130,7 @@ func (a *PciApiService) GetPciLinkList(ctx context.Context) ApiGetPciLinkListReq
 }
 
 // Execute executes the request
-//
-//	@return PciLinkResponse
+//  @return PciLinkResponse
 func (a *PciApiService) GetPciLinkListExecute(r ApiGetPciLinkListRequest) (*PciLinkResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1323,9 +1317,9 @@ func (r ApiGetPciNodeByMoidRequest) Execute() (*PciNode, *http.Response, error) 
 /*
 GetPciNodeByMoid Read a 'pci.Node' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPciNodeByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPciNodeByMoidRequest
 */
 func (a *PciApiService) GetPciNodeByMoid(ctx context.Context, moid string) ApiGetPciNodeByMoidRequest {
 	return ApiGetPciNodeByMoidRequest{
@@ -1336,8 +1330,7 @@ func (a *PciApiService) GetPciNodeByMoid(ctx context.Context, moid string) ApiGe
 }
 
 // Execute executes the request
-//
-//	@return PciNode
+//  @return PciNode
 func (a *PciApiService) GetPciNodeByMoidExecute(r ApiGetPciNodeByMoidRequest) (*PciNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1553,8 +1546,8 @@ func (r ApiGetPciNodeListRequest) Execute() (*PciNodeResponse, *http.Response, e
 /*
 GetPciNodeList Read a 'pci.Node' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPciNodeListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPciNodeListRequest
 */
 func (a *PciApiService) GetPciNodeList(ctx context.Context) ApiGetPciNodeListRequest {
 	return ApiGetPciNodeListRequest{
@@ -1564,8 +1557,7 @@ func (a *PciApiService) GetPciNodeList(ctx context.Context) ApiGetPciNodeListReq
 }
 
 // Execute executes the request
-//
-//	@return PciNodeResponse
+//  @return PciNodeResponse
 func (a *PciApiService) GetPciNodeListExecute(r ApiGetPciNodeListRequest) (*PciNodeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1752,9 +1744,9 @@ func (r ApiGetPciSwitchByMoidRequest) Execute() (*PciSwitch, *http.Response, err
 /*
 GetPciSwitchByMoid Read a 'pci.Switch' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPciSwitchByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPciSwitchByMoidRequest
 */
 func (a *PciApiService) GetPciSwitchByMoid(ctx context.Context, moid string) ApiGetPciSwitchByMoidRequest {
 	return ApiGetPciSwitchByMoidRequest{
@@ -1765,8 +1757,7 @@ func (a *PciApiService) GetPciSwitchByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//
-//	@return PciSwitch
+//  @return PciSwitch
 func (a *PciApiService) GetPciSwitchByMoidExecute(r ApiGetPciSwitchByMoidRequest) (*PciSwitch, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1982,8 +1973,8 @@ func (r ApiGetPciSwitchListRequest) Execute() (*PciSwitchResponse, *http.Respons
 /*
 GetPciSwitchList Read a 'pci.Switch' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPciSwitchListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPciSwitchListRequest
 */
 func (a *PciApiService) GetPciSwitchList(ctx context.Context) ApiGetPciSwitchListRequest {
 	return ApiGetPciSwitchListRequest{
@@ -1993,8 +1984,7 @@ func (a *PciApiService) GetPciSwitchList(ctx context.Context) ApiGetPciSwitchLis
 }
 
 // Execute executes the request
-//
-//	@return PciSwitchResponse
+//  @return PciSwitchResponse
 func (a *PciApiService) GetPciSwitchListExecute(r ApiGetPciSwitchListRequest) (*PciSwitchResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2195,9 +2185,9 @@ func (r ApiPatchPciDeviceRequest) Execute() (*PciDevice, *http.Response, error) 
 /*
 PatchPciDevice Update a 'pci.Device' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchPciDeviceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchPciDeviceRequest
 */
 func (a *PciApiService) PatchPciDevice(ctx context.Context, moid string) ApiPatchPciDeviceRequest {
 	return ApiPatchPciDeviceRequest{
@@ -2208,8 +2198,7 @@ func (a *PciApiService) PatchPciDevice(ctx context.Context, moid string) ApiPatc
 }
 
 // Execute executes the request
-//
-//	@return PciDevice
+//  @return PciDevice
 func (a *PciApiService) PatchPciDeviceExecute(r ApiPatchPciDeviceRequest) (*PciDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2371,9 +2360,9 @@ func (r ApiPatchPciLinkRequest) Execute() (*PciLink, *http.Response, error) {
 /*
 PatchPciLink Update a 'pci.Link' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchPciLinkRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchPciLinkRequest
 */
 func (a *PciApiService) PatchPciLink(ctx context.Context, moid string) ApiPatchPciLinkRequest {
 	return ApiPatchPciLinkRequest{
@@ -2384,8 +2373,7 @@ func (a *PciApiService) PatchPciLink(ctx context.Context, moid string) ApiPatchP
 }
 
 // Execute executes the request
-//
-//	@return PciLink
+//  @return PciLink
 func (a *PciApiService) PatchPciLinkExecute(r ApiPatchPciLinkRequest) (*PciLink, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2547,9 +2535,9 @@ func (r ApiPatchPciNodeRequest) Execute() (*PciNode, *http.Response, error) {
 /*
 PatchPciNode Update a 'pci.Node' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchPciNodeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchPciNodeRequest
 */
 func (a *PciApiService) PatchPciNode(ctx context.Context, moid string) ApiPatchPciNodeRequest {
 	return ApiPatchPciNodeRequest{
@@ -2560,8 +2548,7 @@ func (a *PciApiService) PatchPciNode(ctx context.Context, moid string) ApiPatchP
 }
 
 // Execute executes the request
-//
-//	@return PciNode
+//  @return PciNode
 func (a *PciApiService) PatchPciNodeExecute(r ApiPatchPciNodeRequest) (*PciNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2723,9 +2710,9 @@ func (r ApiPatchPciSwitchRequest) Execute() (*PciSwitch, *http.Response, error) 
 /*
 PatchPciSwitch Update a 'pci.Switch' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchPciSwitchRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchPciSwitchRequest
 */
 func (a *PciApiService) PatchPciSwitch(ctx context.Context, moid string) ApiPatchPciSwitchRequest {
 	return ApiPatchPciSwitchRequest{
@@ -2736,8 +2723,7 @@ func (a *PciApiService) PatchPciSwitch(ctx context.Context, moid string) ApiPatc
 }
 
 // Execute executes the request
-//
-//	@return PciSwitch
+//  @return PciSwitch
 func (a *PciApiService) PatchPciSwitchExecute(r ApiPatchPciSwitchRequest) (*PciSwitch, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2899,9 +2885,9 @@ func (r ApiUpdatePciDeviceRequest) Execute() (*PciDevice, *http.Response, error)
 /*
 UpdatePciDevice Update a 'pci.Device' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdatePciDeviceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdatePciDeviceRequest
 */
 func (a *PciApiService) UpdatePciDevice(ctx context.Context, moid string) ApiUpdatePciDeviceRequest {
 	return ApiUpdatePciDeviceRequest{
@@ -2912,8 +2898,7 @@ func (a *PciApiService) UpdatePciDevice(ctx context.Context, moid string) ApiUpd
 }
 
 // Execute executes the request
-//
-//	@return PciDevice
+//  @return PciDevice
 func (a *PciApiService) UpdatePciDeviceExecute(r ApiUpdatePciDeviceRequest) (*PciDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3075,9 +3060,9 @@ func (r ApiUpdatePciLinkRequest) Execute() (*PciLink, *http.Response, error) {
 /*
 UpdatePciLink Update a 'pci.Link' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdatePciLinkRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdatePciLinkRequest
 */
 func (a *PciApiService) UpdatePciLink(ctx context.Context, moid string) ApiUpdatePciLinkRequest {
 	return ApiUpdatePciLinkRequest{
@@ -3088,8 +3073,7 @@ func (a *PciApiService) UpdatePciLink(ctx context.Context, moid string) ApiUpdat
 }
 
 // Execute executes the request
-//
-//	@return PciLink
+//  @return PciLink
 func (a *PciApiService) UpdatePciLinkExecute(r ApiUpdatePciLinkRequest) (*PciLink, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3251,9 +3235,9 @@ func (r ApiUpdatePciNodeRequest) Execute() (*PciNode, *http.Response, error) {
 /*
 UpdatePciNode Update a 'pci.Node' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdatePciNodeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdatePciNodeRequest
 */
 func (a *PciApiService) UpdatePciNode(ctx context.Context, moid string) ApiUpdatePciNodeRequest {
 	return ApiUpdatePciNodeRequest{
@@ -3264,8 +3248,7 @@ func (a *PciApiService) UpdatePciNode(ctx context.Context, moid string) ApiUpdat
 }
 
 // Execute executes the request
-//
-//	@return PciNode
+//  @return PciNode
 func (a *PciApiService) UpdatePciNodeExecute(r ApiUpdatePciNodeRequest) (*PciNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3427,9 +3410,9 @@ func (r ApiUpdatePciSwitchRequest) Execute() (*PciSwitch, *http.Response, error)
 /*
 UpdatePciSwitch Update a 'pci.Switch' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdatePciSwitchRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdatePciSwitchRequest
 */
 func (a *PciApiService) UpdatePciSwitch(ctx context.Context, moid string) ApiUpdatePciSwitchRequest {
 	return ApiUpdatePciSwitchRequest{
@@ -3440,8 +3423,7 @@ func (a *PciApiService) UpdatePciSwitch(ctx context.Context, moid string) ApiUpd
 }
 
 // Execute executes the request
-//
-//	@return PciSwitch
+//  @return PciSwitch
 func (a *PciApiService) UpdatePciSwitchExecute(r ApiUpdatePciSwitchRequest) (*PciSwitch, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

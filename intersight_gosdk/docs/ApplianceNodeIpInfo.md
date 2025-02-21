@@ -12,7 +12,8 @@ Name | Type | Description | Notes
 **Netmask** | Pointer to **string** | Netmask of the cluster node. | [optional] [readonly] 
 **NodeId** | Pointer to **int64** | Id number of the cluster node. | [optional] [readonly] 
 **NodeMoid** | Pointer to **string** | Moid of the corresponding appliance.ClusterInfo or appliance.NodeInfo mo. | [optional] [readonly] 
-**Status** | Pointer to **string** | Status of the cluster node. * &#x60;Unknown&#x60; - The status of the appliance node is unknown. * &#x60;Operational&#x60; - The appliance node is operational. * &#x60;Impaired&#x60; - The appliance node is impaired. * &#x60;AttentionNeeded&#x60; - The appliance node needs attention. * &#x60;ReadyToJoin&#x60; - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * &#x60;OutOfService&#x60; - The user has taken this node (part of a cluster) to out of service. * &#x60;ReadyForReplacement&#x60; - The cluster node is ready to be replaced. * &#x60;ReplacementInProgress&#x60; - The cluster node replacement is in progress. * &#x60;ReplacementFailed&#x60; - There was a failure during the cluster node replacement. | [optional] [readonly] [default to "Unknown"]
+**NodeType** | Pointer to **string** | The node type of Intersight Virtual Appliance. * &#x60;standalone&#x60; - Single Node Intersight Virtual Appliance. * &#x60;management&#x60; - Management node type when Intersight Virtual Appliance is running as management-worker deployment. * &#x60;hamanagement&#x60; - Management node type when Intersight Virtual Appliance is running as multi node HA deployment. * &#x60;metrics&#x60; - Metrics node when Intersight Virtual Appliance is running management-metrics node. | [optional] [readonly] [default to "standalone"]
+**Status** | Pointer to **string** | Status of the cluster node. * &#x60;Unknown&#x60; - The status of the appliance node is unknown. * &#x60;Operational&#x60; - The appliance node is operational. * &#x60;Impaired&#x60; - The appliance node is impaired. * &#x60;AttentionNeeded&#x60; - The appliance node needs attention. * &#x60;ReadyToJoin&#x60; - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * &#x60;OutOfService&#x60; - The user has taken this node (part of a cluster) to out of service. * &#x60;ReadyForReplacement&#x60; - The cluster node is ready to be replaced. * &#x60;ReplacementInProgress&#x60; - The cluster node replacement is in progress. * &#x60;ReplacementFailed&#x60; - There was a failure during the cluster node replacement. * &#x60;WorkerNodeInstInProgress&#x60; - The worker node installation is in progress. * &#x60;WorkerNodeInstSuccess&#x60; - The worker node installation succeeded. * &#x60;WorkerNodeInstFailed&#x60; - The worker node installation failed. | [optional] [readonly] [default to "Unknown"]
 
 ## Methods
 
@@ -222,6 +223,31 @@ SetNodeMoid sets NodeMoid field to given value.
 `func (o *ApplianceNodeIpInfo) HasNodeMoid() bool`
 
 HasNodeMoid returns a boolean if a field has been set.
+
+### GetNodeType
+
+`func (o *ApplianceNodeIpInfo) GetNodeType() string`
+
+GetNodeType returns the NodeType field if non-nil, zero value otherwise.
+
+### GetNodeTypeOk
+
+`func (o *ApplianceNodeIpInfo) GetNodeTypeOk() (*string, bool)`
+
+GetNodeTypeOk returns a tuple with the NodeType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeType
+
+`func (o *ApplianceNodeIpInfo) SetNodeType(v string)`
+
+SetNodeType sets NodeType field to given value.
+
+### HasNodeType
+
+`func (o *ApplianceNodeIpInfo) HasNodeType() bool`
+
+HasNodeType returns a boolean if a field has been set.
 
 ### GetStatus
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -49,15 +49,15 @@ func (r ApiCreateFirmwareBiosDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareBiosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareBiosDescriptorRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareBiosDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareBiosDescriptor Create a 'firmware.BiosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareBiosDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareBiosDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareBiosDescriptor(ctx context.Context) ApiCreateFirmwareBiosDescriptorRequest {
 	return ApiCreateFirmwareBiosDescriptorRequest{
@@ -67,14 +67,13 @@ func (a *FirmwareApiService) CreateFirmwareBiosDescriptor(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareBiosDescriptorExecute(r ApiCreateFirmwareBiosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareBiosDescriptor
+func (a *FirmwareApiService) CreateFirmwareBiosDescriptorExecute(r ApiCreateFirmwareBiosDescriptorRequest) (*FirmwareBiosDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareBiosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareBiosDescriptor")
@@ -231,15 +230,15 @@ func (r ApiCreateFirmwareBoardControllerDescriptorRequest) IfNoneMatch(ifNoneMat
 	return r
 }
 
-func (r ApiCreateFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareBoardControllerDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareBoardControllerDescriptor Create a 'firmware.BoardControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareBoardControllerDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareBoardControllerDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptor(ctx context.Context) ApiCreateFirmwareBoardControllerDescriptorRequest {
 	return ApiCreateFirmwareBoardControllerDescriptorRequest{
@@ -249,14 +248,13 @@ func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptor(ctx context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptorExecute(r ApiCreateFirmwareBoardControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareBoardControllerDescriptor
+func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptorExecute(r ApiCreateFirmwareBoardControllerDescriptorRequest) (*FirmwareBoardControllerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareBoardControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareBoardControllerDescriptor")
@@ -420,8 +418,8 @@ func (r ApiCreateFirmwareChassisUpgradeRequest) Execute() (*FirmwareChassisUpgra
 /*
 CreateFirmwareChassisUpgrade Create a 'firmware.ChassisUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareChassisUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareChassisUpgradeRequest
 */
 func (a *FirmwareApiService) CreateFirmwareChassisUpgrade(ctx context.Context) ApiCreateFirmwareChassisUpgradeRequest {
 	return ApiCreateFirmwareChassisUpgradeRequest{
@@ -431,8 +429,7 @@ func (a *FirmwareApiService) CreateFirmwareChassisUpgrade(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareChassisUpgrade
+//  @return FirmwareChassisUpgrade
 func (a *FirmwareApiService) CreateFirmwareChassisUpgradeExecute(r ApiCreateFirmwareChassisUpgradeRequest) (*FirmwareChassisUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -595,15 +592,15 @@ func (r ApiCreateFirmwareCimcDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareCimcDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareCimcDescriptorRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareCimcDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareCimcDescriptor Create a 'firmware.CimcDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareCimcDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareCimcDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareCimcDescriptor(ctx context.Context) ApiCreateFirmwareCimcDescriptorRequest {
 	return ApiCreateFirmwareCimcDescriptorRequest{
@@ -613,14 +610,13 @@ func (a *FirmwareApiService) CreateFirmwareCimcDescriptor(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareCimcDescriptorExecute(r ApiCreateFirmwareCimcDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareCimcDescriptor
+func (a *FirmwareApiService) CreateFirmwareCimcDescriptorExecute(r ApiCreateFirmwareCimcDescriptorRequest) (*FirmwareCimcDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareCimcDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareCimcDescriptor")
@@ -777,15 +773,15 @@ func (r ApiCreateFirmwareDimmDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareDimmDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareDimmDescriptorRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareDimmDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareDimmDescriptor Create a 'firmware.DimmDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareDimmDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareDimmDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareDimmDescriptor(ctx context.Context) ApiCreateFirmwareDimmDescriptorRequest {
 	return ApiCreateFirmwareDimmDescriptorRequest{
@@ -795,14 +791,13 @@ func (a *FirmwareApiService) CreateFirmwareDimmDescriptor(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareDimmDescriptorExecute(r ApiCreateFirmwareDimmDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareDimmDescriptor
+func (a *FirmwareApiService) CreateFirmwareDimmDescriptorExecute(r ApiCreateFirmwareDimmDescriptorRequest) (*FirmwareDimmDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareDimmDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareDimmDescriptor")
@@ -966,8 +961,8 @@ func (r ApiCreateFirmwareDistributableRequest) Execute() (*FirmwareDistributable
 /*
 CreateFirmwareDistributable Create a 'firmware.Distributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareDistributableRequest
 */
 func (a *FirmwareApiService) CreateFirmwareDistributable(ctx context.Context) ApiCreateFirmwareDistributableRequest {
 	return ApiCreateFirmwareDistributableRequest{
@@ -977,8 +972,7 @@ func (a *FirmwareApiService) CreateFirmwareDistributable(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDistributable
+//  @return FirmwareDistributable
 func (a *FirmwareApiService) CreateFirmwareDistributableExecute(r ApiCreateFirmwareDistributableRequest) (*FirmwareDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1141,15 +1135,15 @@ func (r ApiCreateFirmwareDriveDescriptorRequest) IfNoneMatch(ifNoneMatch string)
 	return r
 }
 
-func (r ApiCreateFirmwareDriveDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareDriveDescriptorRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareDriveDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareDriveDescriptor Create a 'firmware.DriveDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareDriveDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareDriveDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareDriveDescriptor(ctx context.Context) ApiCreateFirmwareDriveDescriptorRequest {
 	return ApiCreateFirmwareDriveDescriptorRequest{
@@ -1159,14 +1153,13 @@ func (a *FirmwareApiService) CreateFirmwareDriveDescriptor(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareDriveDescriptorExecute(r ApiCreateFirmwareDriveDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareDriveDescriptor
+func (a *FirmwareApiService) CreateFirmwareDriveDescriptorExecute(r ApiCreateFirmwareDriveDescriptorRequest) (*FirmwareDriveDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareDriveDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareDriveDescriptor")
@@ -1330,8 +1323,8 @@ func (r ApiCreateFirmwareDriverDistributableRequest) Execute() (*FirmwareDriverD
 /*
 CreateFirmwareDriverDistributable Create a 'firmware.DriverDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareDriverDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareDriverDistributableRequest
 */
 func (a *FirmwareApiService) CreateFirmwareDriverDistributable(ctx context.Context) ApiCreateFirmwareDriverDistributableRequest {
 	return ApiCreateFirmwareDriverDistributableRequest{
@@ -1341,8 +1334,7 @@ func (a *FirmwareApiService) CreateFirmwareDriverDistributable(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDriverDistributable
+//  @return FirmwareDriverDistributable
 func (a *FirmwareApiService) CreateFirmwareDriverDistributableExecute(r ApiCreateFirmwareDriverDistributableRequest) (*FirmwareDriverDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1512,8 +1504,8 @@ func (r ApiCreateFirmwareEulaRequest) Execute() (*FirmwareEula, *http.Response, 
 /*
 CreateFirmwareEula Create a 'firmware.Eula' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareEulaRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareEulaRequest
 */
 func (a *FirmwareApiService) CreateFirmwareEula(ctx context.Context) ApiCreateFirmwareEulaRequest {
 	return ApiCreateFirmwareEulaRequest{
@@ -1523,8 +1515,7 @@ func (a *FirmwareApiService) CreateFirmwareEula(ctx context.Context) ApiCreateFi
 }
 
 // Execute executes the request
-//
-//	@return FirmwareEula
+//  @return FirmwareEula
 func (a *FirmwareApiService) CreateFirmwareEulaExecute(r ApiCreateFirmwareEulaRequest) (*FirmwareEula, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1687,15 +1678,15 @@ func (r ApiCreateFirmwareGpuDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareGpuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareGpuDescriptorRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareGpuDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareGpuDescriptor Create a 'firmware.GpuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareGpuDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareGpuDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareGpuDescriptor(ctx context.Context) ApiCreateFirmwareGpuDescriptorRequest {
 	return ApiCreateFirmwareGpuDescriptorRequest{
@@ -1705,14 +1696,13 @@ func (a *FirmwareApiService) CreateFirmwareGpuDescriptor(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareGpuDescriptorExecute(r ApiCreateFirmwareGpuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareGpuDescriptor
+func (a *FirmwareApiService) CreateFirmwareGpuDescriptorExecute(r ApiCreateFirmwareGpuDescriptorRequest) (*FirmwareGpuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareGpuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareGpuDescriptor")
@@ -1869,15 +1859,15 @@ func (r ApiCreateFirmwareHbaDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareHbaDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareHbaDescriptorRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareHbaDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareHbaDescriptor Create a 'firmware.HbaDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareHbaDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareHbaDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareHbaDescriptor(ctx context.Context) ApiCreateFirmwareHbaDescriptorRequest {
 	return ApiCreateFirmwareHbaDescriptorRequest{
@@ -1887,14 +1877,13 @@ func (a *FirmwareApiService) CreateFirmwareHbaDescriptor(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareHbaDescriptorExecute(r ApiCreateFirmwareHbaDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareHbaDescriptor
+func (a *FirmwareApiService) CreateFirmwareHbaDescriptorExecute(r ApiCreateFirmwareHbaDescriptorRequest) (*FirmwareHbaDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareHbaDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareHbaDescriptor")
@@ -2051,15 +2040,15 @@ func (r ApiCreateFirmwareIomDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareIomDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareIomDescriptorRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareIomDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareIomDescriptor Create a 'firmware.IomDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareIomDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareIomDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareIomDescriptor(ctx context.Context) ApiCreateFirmwareIomDescriptorRequest {
 	return ApiCreateFirmwareIomDescriptorRequest{
@@ -2069,14 +2058,13 @@ func (a *FirmwareApiService) CreateFirmwareIomDescriptor(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareIomDescriptorExecute(r ApiCreateFirmwareIomDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareIomDescriptor
+func (a *FirmwareApiService) CreateFirmwareIomDescriptorExecute(r ApiCreateFirmwareIomDescriptorRequest) (*FirmwareIomDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareIomDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareIomDescriptor")
@@ -2233,15 +2221,15 @@ func (r ApiCreateFirmwareMswitchDescriptorRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateFirmwareMswitchDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareMswitchDescriptorRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareMswitchDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareMswitchDescriptor Create a 'firmware.MswitchDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareMswitchDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareMswitchDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareMswitchDescriptor(ctx context.Context) ApiCreateFirmwareMswitchDescriptorRequest {
 	return ApiCreateFirmwareMswitchDescriptorRequest{
@@ -2251,14 +2239,13 @@ func (a *FirmwareApiService) CreateFirmwareMswitchDescriptor(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareMswitchDescriptorExecute(r ApiCreateFirmwareMswitchDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareMswitchDescriptor
+func (a *FirmwareApiService) CreateFirmwareMswitchDescriptorExecute(r ApiCreateFirmwareMswitchDescriptorRequest) (*FirmwareMswitchDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareMswitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareMswitchDescriptor")
@@ -2415,15 +2402,15 @@ func (r ApiCreateFirmwareNxosDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareNxosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareNxosDescriptorRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareNxosDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareNxosDescriptor Create a 'firmware.NxosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareNxosDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareNxosDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareNxosDescriptor(ctx context.Context) ApiCreateFirmwareNxosDescriptorRequest {
 	return ApiCreateFirmwareNxosDescriptorRequest{
@@ -2433,14 +2420,13 @@ func (a *FirmwareApiService) CreateFirmwareNxosDescriptor(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareNxosDescriptorExecute(r ApiCreateFirmwareNxosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareNxosDescriptor
+func (a *FirmwareApiService) CreateFirmwareNxosDescriptorExecute(r ApiCreateFirmwareNxosDescriptorRequest) (*FirmwareNxosDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareNxosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareNxosDescriptor")
@@ -2597,15 +2583,15 @@ func (r ApiCreateFirmwarePcieDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwarePcieDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwarePcieDescriptorRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwarePcieDescriptorExecute(r)
 }
 
 /*
 CreateFirmwarePcieDescriptor Create a 'firmware.PcieDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwarePcieDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwarePcieDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwarePcieDescriptor(ctx context.Context) ApiCreateFirmwarePcieDescriptorRequest {
 	return ApiCreateFirmwarePcieDescriptorRequest{
@@ -2615,14 +2601,13 @@ func (a *FirmwareApiService) CreateFirmwarePcieDescriptor(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwarePcieDescriptorExecute(r ApiCreateFirmwarePcieDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwarePcieDescriptor
+func (a *FirmwareApiService) CreateFirmwarePcieDescriptorExecute(r ApiCreateFirmwarePcieDescriptorRequest) (*FirmwarePcieDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwarePcieDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwarePcieDescriptor")
@@ -2786,8 +2771,8 @@ func (r ApiCreateFirmwarePolicyRequest) Execute() (*FirmwarePolicy, *http.Respon
 /*
 CreateFirmwarePolicy Create a 'firmware.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwarePolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwarePolicyRequest
 */
 func (a *FirmwareApiService) CreateFirmwarePolicy(ctx context.Context) ApiCreateFirmwarePolicyRequest {
 	return ApiCreateFirmwarePolicyRequest{
@@ -2797,8 +2782,7 @@ func (a *FirmwareApiService) CreateFirmwarePolicy(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//
-//	@return FirmwarePolicy
+//  @return FirmwarePolicy
 func (a *FirmwareApiService) CreateFirmwarePolicyExecute(r ApiCreateFirmwarePolicyRequest) (*FirmwarePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2961,15 +2945,15 @@ func (r ApiCreateFirmwarePsuDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwarePsuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwarePsuDescriptorRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwarePsuDescriptorExecute(r)
 }
 
 /*
 CreateFirmwarePsuDescriptor Create a 'firmware.PsuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwarePsuDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwarePsuDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwarePsuDescriptor(ctx context.Context) ApiCreateFirmwarePsuDescriptorRequest {
 	return ApiCreateFirmwarePsuDescriptorRequest{
@@ -2979,14 +2963,13 @@ func (a *FirmwareApiService) CreateFirmwarePsuDescriptor(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwarePsuDescriptorExecute(r ApiCreateFirmwarePsuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwarePsuDescriptor
+func (a *FirmwareApiService) CreateFirmwarePsuDescriptorExecute(r ApiCreateFirmwarePsuDescriptorRequest) (*FirmwarePsuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwarePsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwarePsuDescriptor")
@@ -3143,15 +3126,15 @@ func (r ApiCreateFirmwareSasExpanderDescriptorRequest) IfNoneMatch(ifNoneMatch s
 	return r
 }
 
-func (r ApiCreateFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareSasExpanderDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareSasExpanderDescriptor Create a 'firmware.SasExpanderDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareSasExpanderDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareSasExpanderDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptor(ctx context.Context) ApiCreateFirmwareSasExpanderDescriptorRequest {
 	return ApiCreateFirmwareSasExpanderDescriptorRequest{
@@ -3161,14 +3144,13 @@ func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptor(ctx context.Con
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptorExecute(r ApiCreateFirmwareSasExpanderDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareSasExpanderDescriptor
+func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptorExecute(r ApiCreateFirmwareSasExpanderDescriptorRequest) (*FirmwareSasExpanderDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareSasExpanderDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareSasExpanderDescriptor")
@@ -3332,8 +3314,8 @@ func (r ApiCreateFirmwareServerConfigurationUtilityDistributableRequest) Execute
 /*
 CreateFirmwareServerConfigurationUtilityDistributable Create a 'firmware.ServerConfigurationUtilityDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareServerConfigurationUtilityDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareServerConfigurationUtilityDistributableRequest
 */
 func (a *FirmwareApiService) CreateFirmwareServerConfigurationUtilityDistributable(ctx context.Context) ApiCreateFirmwareServerConfigurationUtilityDistributableRequest {
 	return ApiCreateFirmwareServerConfigurationUtilityDistributableRequest{
@@ -3343,8 +3325,7 @@ func (a *FirmwareApiService) CreateFirmwareServerConfigurationUtilityDistributab
 }
 
 // Execute executes the request
-//
-//	@return FirmwareServerConfigurationUtilityDistributable
+//  @return FirmwareServerConfigurationUtilityDistributable
 func (a *FirmwareApiService) CreateFirmwareServerConfigurationUtilityDistributableExecute(r ApiCreateFirmwareServerConfigurationUtilityDistributableRequest) (*FirmwareServerConfigurationUtilityDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3507,15 +3488,15 @@ func (r ApiCreateFirmwareStorageControllerDescriptorRequest) IfNoneMatch(ifNoneM
 	return r
 }
 
-func (r ApiCreateFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiCreateFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
 	return r.ApiService.CreateFirmwareStorageControllerDescriptorExecute(r)
 }
 
 /*
 CreateFirmwareStorageControllerDescriptor Create a 'firmware.StorageControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareStorageControllerDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareStorageControllerDescriptorRequest
 */
 func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptor(ctx context.Context) ApiCreateFirmwareStorageControllerDescriptorRequest {
 	return ApiCreateFirmwareStorageControllerDescriptorRequest{
@@ -3525,14 +3506,13 @@ func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptor(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptorExecute(r ApiCreateFirmwareStorageControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareStorageControllerDescriptor
+func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptorExecute(r ApiCreateFirmwareStorageControllerDescriptorRequest) (*FirmwareStorageControllerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareStorageControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareStorageControllerDescriptor")
@@ -3696,8 +3676,8 @@ func (r ApiCreateFirmwareSwitchUpgradeRequest) Execute() (*FirmwareSwitchUpgrade
 /*
 CreateFirmwareSwitchUpgrade Create a 'firmware.SwitchUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareSwitchUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareSwitchUpgradeRequest
 */
 func (a *FirmwareApiService) CreateFirmwareSwitchUpgrade(ctx context.Context) ApiCreateFirmwareSwitchUpgradeRequest {
 	return ApiCreateFirmwareSwitchUpgradeRequest{
@@ -3707,8 +3687,7 @@ func (a *FirmwareApiService) CreateFirmwareSwitchUpgrade(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//
-//	@return FirmwareSwitchUpgrade
+//  @return FirmwareSwitchUpgrade
 func (a *FirmwareApiService) CreateFirmwareSwitchUpgradeExecute(r ApiCreateFirmwareSwitchUpgradeRequest) (*FirmwareSwitchUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3878,8 +3857,8 @@ func (r ApiCreateFirmwareUnsupportedVersionUpgradeRequest) Execute() (*FirmwareU
 /*
 CreateFirmwareUnsupportedVersionUpgrade Create a 'firmware.UnsupportedVersionUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareUnsupportedVersionUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareUnsupportedVersionUpgradeRequest
 */
 func (a *FirmwareApiService) CreateFirmwareUnsupportedVersionUpgrade(ctx context.Context) ApiCreateFirmwareUnsupportedVersionUpgradeRequest {
 	return ApiCreateFirmwareUnsupportedVersionUpgradeRequest{
@@ -3889,8 +3868,7 @@ func (a *FirmwareApiService) CreateFirmwareUnsupportedVersionUpgrade(ctx context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUnsupportedVersionUpgrade
+//  @return FirmwareUnsupportedVersionUpgrade
 func (a *FirmwareApiService) CreateFirmwareUnsupportedVersionUpgradeExecute(r ApiCreateFirmwareUnsupportedVersionUpgradeRequest) (*FirmwareUnsupportedVersionUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4060,8 +4038,8 @@ func (r ApiCreateFirmwareUpgradeRequest) Execute() (*FirmwareUpgrade, *http.Resp
 /*
 CreateFirmwareUpgrade Create a 'firmware.Upgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareUpgradeRequest
 */
 func (a *FirmwareApiService) CreateFirmwareUpgrade(ctx context.Context) ApiCreateFirmwareUpgradeRequest {
 	return ApiCreateFirmwareUpgradeRequest{
@@ -4071,8 +4049,7 @@ func (a *FirmwareApiService) CreateFirmwareUpgrade(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUpgrade
+//  @return FirmwareUpgrade
 func (a *FirmwareApiService) CreateFirmwareUpgradeExecute(r ApiCreateFirmwareUpgradeRequest) (*FirmwareUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4242,8 +4219,8 @@ func (r ApiCreateFirmwareUpgradeImpactRequest) Execute() (*FirmwareUpgradeImpact
 /*
 CreateFirmwareUpgradeImpact Create a 'firmware.UpgradeImpact' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareUpgradeImpactRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareUpgradeImpactRequest
 */
 func (a *FirmwareApiService) CreateFirmwareUpgradeImpact(ctx context.Context) ApiCreateFirmwareUpgradeImpactRequest {
 	return ApiCreateFirmwareUpgradeImpactRequest{
@@ -4253,8 +4230,7 @@ func (a *FirmwareApiService) CreateFirmwareUpgradeImpact(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUpgradeImpact
+//  @return FirmwareUpgradeImpact
 func (a *FirmwareApiService) CreateFirmwareUpgradeImpactExecute(r ApiCreateFirmwareUpgradeImpactRequest) (*FirmwareUpgradeImpact, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4424,8 +4400,8 @@ func (r ApiCreateFirmwareUpgradeValidityRequest) Execute() (*FirmwareUpgradeVali
 /*
 CreateFirmwareUpgradeValidity Create a 'firmware.UpgradeValidity' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFirmwareUpgradeValidityRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFirmwareUpgradeValidityRequest
 */
 func (a *FirmwareApiService) CreateFirmwareUpgradeValidity(ctx context.Context) ApiCreateFirmwareUpgradeValidityRequest {
 	return ApiCreateFirmwareUpgradeValidityRequest{
@@ -4435,8 +4411,7 @@ func (a *FirmwareApiService) CreateFirmwareUpgradeValidity(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUpgradeValidity
+//  @return FirmwareUpgradeValidity
 func (a *FirmwareApiService) CreateFirmwareUpgradeValidityExecute(r ApiCreateFirmwareUpgradeValidityRequest) (*FirmwareUpgradeValidity, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4586,9 +4561,9 @@ func (r ApiDeleteFirmwareBiosDescriptorRequest) Execute() (*http.Response, error
 /*
 DeleteFirmwareBiosDescriptor Delete a 'firmware.BiosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareBiosDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareBiosDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareBiosDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareBiosDescriptorRequest {
 	return ApiDeleteFirmwareBiosDescriptorRequest{
@@ -4728,9 +4703,9 @@ func (r ApiDeleteFirmwareBoardControllerDescriptorRequest) Execute() (*http.Resp
 /*
 DeleteFirmwareBoardControllerDescriptor Delete a 'firmware.BoardControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareBoardControllerDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareBoardControllerDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareBoardControllerDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareBoardControllerDescriptorRequest {
 	return ApiDeleteFirmwareBoardControllerDescriptorRequest{
@@ -4870,9 +4845,9 @@ func (r ApiDeleteFirmwareChassisUpgradeRequest) Execute() (*http.Response, error
 /*
 DeleteFirmwareChassisUpgrade Delete a 'firmware.ChassisUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareChassisUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareChassisUpgradeRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareChassisUpgrade(ctx context.Context, moid string) ApiDeleteFirmwareChassisUpgradeRequest {
 	return ApiDeleteFirmwareChassisUpgradeRequest{
@@ -5012,9 +4987,9 @@ func (r ApiDeleteFirmwareCimcDescriptorRequest) Execute() (*http.Response, error
 /*
 DeleteFirmwareCimcDescriptor Delete a 'firmware.CimcDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareCimcDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareCimcDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareCimcDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareCimcDescriptorRequest {
 	return ApiDeleteFirmwareCimcDescriptorRequest{
@@ -5154,9 +5129,9 @@ func (r ApiDeleteFirmwareDimmDescriptorRequest) Execute() (*http.Response, error
 /*
 DeleteFirmwareDimmDescriptor Delete a 'firmware.DimmDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareDimmDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareDimmDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareDimmDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareDimmDescriptorRequest {
 	return ApiDeleteFirmwareDimmDescriptorRequest{
@@ -5296,9 +5271,9 @@ func (r ApiDeleteFirmwareDistributableRequest) Execute() (*http.Response, error)
 /*
 DeleteFirmwareDistributable Delete a 'firmware.Distributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareDistributableRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareDistributable(ctx context.Context, moid string) ApiDeleteFirmwareDistributableRequest {
 	return ApiDeleteFirmwareDistributableRequest{
@@ -5438,9 +5413,9 @@ func (r ApiDeleteFirmwareDriveDescriptorRequest) Execute() (*http.Response, erro
 /*
 DeleteFirmwareDriveDescriptor Delete a 'firmware.DriveDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareDriveDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareDriveDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareDriveDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareDriveDescriptorRequest {
 	return ApiDeleteFirmwareDriveDescriptorRequest{
@@ -5580,9 +5555,9 @@ func (r ApiDeleteFirmwareDriverDistributableRequest) Execute() (*http.Response, 
 /*
 DeleteFirmwareDriverDistributable Delete a 'firmware.DriverDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareDriverDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareDriverDistributableRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareDriverDistributable(ctx context.Context, moid string) ApiDeleteFirmwareDriverDistributableRequest {
 	return ApiDeleteFirmwareDriverDistributableRequest{
@@ -5722,9 +5697,9 @@ func (r ApiDeleteFirmwareGpuDescriptorRequest) Execute() (*http.Response, error)
 /*
 DeleteFirmwareGpuDescriptor Delete a 'firmware.GpuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareGpuDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareGpuDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareGpuDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareGpuDescriptorRequest {
 	return ApiDeleteFirmwareGpuDescriptorRequest{
@@ -5864,9 +5839,9 @@ func (r ApiDeleteFirmwareHbaDescriptorRequest) Execute() (*http.Response, error)
 /*
 DeleteFirmwareHbaDescriptor Delete a 'firmware.HbaDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareHbaDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareHbaDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareHbaDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareHbaDescriptorRequest {
 	return ApiDeleteFirmwareHbaDescriptorRequest{
@@ -6006,9 +5981,9 @@ func (r ApiDeleteFirmwareIomDescriptorRequest) Execute() (*http.Response, error)
 /*
 DeleteFirmwareIomDescriptor Delete a 'firmware.IomDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareIomDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareIomDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareIomDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareIomDescriptorRequest {
 	return ApiDeleteFirmwareIomDescriptorRequest{
@@ -6148,9 +6123,9 @@ func (r ApiDeleteFirmwareMswitchDescriptorRequest) Execute() (*http.Response, er
 /*
 DeleteFirmwareMswitchDescriptor Delete a 'firmware.MswitchDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareMswitchDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareMswitchDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareMswitchDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareMswitchDescriptorRequest {
 	return ApiDeleteFirmwareMswitchDescriptorRequest{
@@ -6290,9 +6265,9 @@ func (r ApiDeleteFirmwareNxosDescriptorRequest) Execute() (*http.Response, error
 /*
 DeleteFirmwareNxosDescriptor Delete a 'firmware.NxosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareNxosDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareNxosDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareNxosDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareNxosDescriptorRequest {
 	return ApiDeleteFirmwareNxosDescriptorRequest{
@@ -6432,9 +6407,9 @@ func (r ApiDeleteFirmwarePcieDescriptorRequest) Execute() (*http.Response, error
 /*
 DeleteFirmwarePcieDescriptor Delete a 'firmware.PcieDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwarePcieDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwarePcieDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwarePcieDescriptor(ctx context.Context, moid string) ApiDeleteFirmwarePcieDescriptorRequest {
 	return ApiDeleteFirmwarePcieDescriptorRequest{
@@ -6574,9 +6549,9 @@ func (r ApiDeleteFirmwarePolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteFirmwarePolicy Delete a 'firmware.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwarePolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwarePolicyRequest
 */
 func (a *FirmwareApiService) DeleteFirmwarePolicy(ctx context.Context, moid string) ApiDeleteFirmwarePolicyRequest {
 	return ApiDeleteFirmwarePolicyRequest{
@@ -6716,9 +6691,9 @@ func (r ApiDeleteFirmwarePsuDescriptorRequest) Execute() (*http.Response, error)
 /*
 DeleteFirmwarePsuDescriptor Delete a 'firmware.PsuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwarePsuDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwarePsuDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwarePsuDescriptor(ctx context.Context, moid string) ApiDeleteFirmwarePsuDescriptorRequest {
 	return ApiDeleteFirmwarePsuDescriptorRequest{
@@ -6858,9 +6833,9 @@ func (r ApiDeleteFirmwareSasExpanderDescriptorRequest) Execute() (*http.Response
 /*
 DeleteFirmwareSasExpanderDescriptor Delete a 'firmware.SasExpanderDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareSasExpanderDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareSasExpanderDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareSasExpanderDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareSasExpanderDescriptorRequest {
 	return ApiDeleteFirmwareSasExpanderDescriptorRequest{
@@ -7000,9 +6975,9 @@ func (r ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest) Execute
 /*
 DeleteFirmwareServerConfigurationUtilityDistributable Delete a 'firmware.ServerConfigurationUtilityDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareServerConfigurationUtilityDistributable(ctx context.Context, moid string) ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest {
 	return ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest{
@@ -7142,9 +7117,9 @@ func (r ApiDeleteFirmwareStorageControllerDescriptorRequest) Execute() (*http.Re
 /*
 DeleteFirmwareStorageControllerDescriptor Delete a 'firmware.StorageControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareStorageControllerDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareStorageControllerDescriptorRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareStorageControllerDescriptor(ctx context.Context, moid string) ApiDeleteFirmwareStorageControllerDescriptorRequest {
 	return ApiDeleteFirmwareStorageControllerDescriptorRequest{
@@ -7284,9 +7259,9 @@ func (r ApiDeleteFirmwareSwitchUpgradeRequest) Execute() (*http.Response, error)
 /*
 DeleteFirmwareSwitchUpgrade Delete a 'firmware.SwitchUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareSwitchUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareSwitchUpgradeRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareSwitchUpgrade(ctx context.Context, moid string) ApiDeleteFirmwareSwitchUpgradeRequest {
 	return ApiDeleteFirmwareSwitchUpgradeRequest{
@@ -7426,9 +7401,9 @@ func (r ApiDeleteFirmwareUnsupportedVersionUpgradeRequest) Execute() (*http.Resp
 /*
 DeleteFirmwareUnsupportedVersionUpgrade Delete a 'firmware.UnsupportedVersionUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareUnsupportedVersionUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareUnsupportedVersionUpgradeRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareUnsupportedVersionUpgrade(ctx context.Context, moid string) ApiDeleteFirmwareUnsupportedVersionUpgradeRequest {
 	return ApiDeleteFirmwareUnsupportedVersionUpgradeRequest{
@@ -7568,9 +7543,9 @@ func (r ApiDeleteFirmwareUpgradeRequest) Execute() (*http.Response, error) {
 /*
 DeleteFirmwareUpgrade Delete a 'firmware.Upgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFirmwareUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFirmwareUpgradeRequest
 */
 func (a *FirmwareApiService) DeleteFirmwareUpgrade(ctx context.Context, moid string) ApiDeleteFirmwareUpgradeRequest {
 	return ApiDeleteFirmwareUpgradeRequest{
@@ -7703,16 +7678,16 @@ type ApiGetFirmwareBiosDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareBiosDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareBiosDescriptorByMoidRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareBiosDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareBiosDescriptorByMoid Read a 'firmware.BiosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareBiosDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareBiosDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareBiosDescriptorByMoidRequest {
 	return ApiGetFirmwareBiosDescriptorByMoidRequest{
@@ -7723,14 +7698,13 @@ func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoidExecute(r ApiGetFirmwareBiosDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareBiosDescriptor
+func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoidExecute(r ApiGetFirmwareBiosDescriptorByMoidRequest) (*FirmwareBiosDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareBiosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareBiosDescriptorByMoid")
@@ -7940,8 +7914,8 @@ func (r ApiGetFirmwareBiosDescriptorListRequest) Execute() (*FirmwareBiosDescrip
 /*
 GetFirmwareBiosDescriptorList Read a 'firmware.BiosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareBiosDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareBiosDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareBiosDescriptorList(ctx context.Context) ApiGetFirmwareBiosDescriptorListRequest {
 	return ApiGetFirmwareBiosDescriptorListRequest{
@@ -7951,8 +7925,7 @@ func (a *FirmwareApiService) GetFirmwareBiosDescriptorList(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return FirmwareBiosDescriptorResponse
+//  @return FirmwareBiosDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareBiosDescriptorListExecute(r ApiGetFirmwareBiosDescriptorListRequest) (*FirmwareBiosDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8132,16 +8105,16 @@ type ApiGetFirmwareBoardControllerDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareBoardControllerDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareBoardControllerDescriptorByMoid Read a 'firmware.BoardControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareBoardControllerDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareBoardControllerDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareBoardControllerDescriptorByMoidRequest {
 	return ApiGetFirmwareBoardControllerDescriptorByMoidRequest{
@@ -8152,14 +8125,13 @@ func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoid(ctx cont
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoidExecute(r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareBoardControllerDescriptor
+func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoidExecute(r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) (*FirmwareBoardControllerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareBoardControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareBoardControllerDescriptorByMoid")
@@ -8369,8 +8341,8 @@ func (r ApiGetFirmwareBoardControllerDescriptorListRequest) Execute() (*Firmware
 /*
 GetFirmwareBoardControllerDescriptorList Read a 'firmware.BoardControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareBoardControllerDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareBoardControllerDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorList(ctx context.Context) ApiGetFirmwareBoardControllerDescriptorListRequest {
 	return ApiGetFirmwareBoardControllerDescriptorListRequest{
@@ -8380,8 +8352,7 @@ func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorList(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return FirmwareBoardControllerDescriptorResponse
+//  @return FirmwareBoardControllerDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorListExecute(r ApiGetFirmwareBoardControllerDescriptorListRequest) (*FirmwareBoardControllerDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8568,9 +8539,9 @@ func (r ApiGetFirmwareChassisUpgradeByMoidRequest) Execute() (*FirmwareChassisUp
 /*
 GetFirmwareChassisUpgradeByMoid Read a 'firmware.ChassisUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareChassisUpgradeByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareChassisUpgradeByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareChassisUpgradeByMoid(ctx context.Context, moid string) ApiGetFirmwareChassisUpgradeByMoidRequest {
 	return ApiGetFirmwareChassisUpgradeByMoidRequest{
@@ -8581,8 +8552,7 @@ func (a *FirmwareApiService) GetFirmwareChassisUpgradeByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareChassisUpgrade
+//  @return FirmwareChassisUpgrade
 func (a *FirmwareApiService) GetFirmwareChassisUpgradeByMoidExecute(r ApiGetFirmwareChassisUpgradeByMoidRequest) (*FirmwareChassisUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8798,8 +8768,8 @@ func (r ApiGetFirmwareChassisUpgradeListRequest) Execute() (*FirmwareChassisUpgr
 /*
 GetFirmwareChassisUpgradeList Read a 'firmware.ChassisUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareChassisUpgradeListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareChassisUpgradeListRequest
 */
 func (a *FirmwareApiService) GetFirmwareChassisUpgradeList(ctx context.Context) ApiGetFirmwareChassisUpgradeListRequest {
 	return ApiGetFirmwareChassisUpgradeListRequest{
@@ -8809,8 +8779,7 @@ func (a *FirmwareApiService) GetFirmwareChassisUpgradeList(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return FirmwareChassisUpgradeResponse
+//  @return FirmwareChassisUpgradeResponse
 func (a *FirmwareApiService) GetFirmwareChassisUpgradeListExecute(r ApiGetFirmwareChassisUpgradeListRequest) (*FirmwareChassisUpgradeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8990,16 +8959,16 @@ type ApiGetFirmwareCimcDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareCimcDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareCimcDescriptorByMoidRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareCimcDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareCimcDescriptorByMoid Read a 'firmware.CimcDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareCimcDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareCimcDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareCimcDescriptorByMoidRequest {
 	return ApiGetFirmwareCimcDescriptorByMoidRequest{
@@ -9010,14 +8979,13 @@ func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoidExecute(r ApiGetFirmwareCimcDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareCimcDescriptor
+func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoidExecute(r ApiGetFirmwareCimcDescriptorByMoidRequest) (*FirmwareCimcDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareCimcDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareCimcDescriptorByMoid")
@@ -9227,8 +9195,8 @@ func (r ApiGetFirmwareCimcDescriptorListRequest) Execute() (*FirmwareCimcDescrip
 /*
 GetFirmwareCimcDescriptorList Read a 'firmware.CimcDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareCimcDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareCimcDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareCimcDescriptorList(ctx context.Context) ApiGetFirmwareCimcDescriptorListRequest {
 	return ApiGetFirmwareCimcDescriptorListRequest{
@@ -9238,8 +9206,7 @@ func (a *FirmwareApiService) GetFirmwareCimcDescriptorList(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return FirmwareCimcDescriptorResponse
+//  @return FirmwareCimcDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareCimcDescriptorListExecute(r ApiGetFirmwareCimcDescriptorListRequest) (*FirmwareCimcDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9419,16 +9386,16 @@ type ApiGetFirmwareDimmDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareDimmDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareDimmDescriptorByMoidRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareDimmDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareDimmDescriptorByMoid Read a 'firmware.DimmDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareDimmDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareDimmDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareDimmDescriptorByMoidRequest {
 	return ApiGetFirmwareDimmDescriptorByMoidRequest{
@@ -9439,14 +9406,13 @@ func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoidExecute(r ApiGetFirmwareDimmDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareDimmDescriptor
+func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoidExecute(r ApiGetFirmwareDimmDescriptorByMoidRequest) (*FirmwareDimmDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareDimmDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDimmDescriptorByMoid")
@@ -9656,8 +9622,8 @@ func (r ApiGetFirmwareDimmDescriptorListRequest) Execute() (*FirmwareDimmDescrip
 /*
 GetFirmwareDimmDescriptorList Read a 'firmware.DimmDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareDimmDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareDimmDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareDimmDescriptorList(ctx context.Context) ApiGetFirmwareDimmDescriptorListRequest {
 	return ApiGetFirmwareDimmDescriptorListRequest{
@@ -9667,8 +9633,7 @@ func (a *FirmwareApiService) GetFirmwareDimmDescriptorList(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDimmDescriptorResponse
+//  @return FirmwareDimmDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareDimmDescriptorListExecute(r ApiGetFirmwareDimmDescriptorListRequest) (*FirmwareDimmDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9855,9 +9820,9 @@ func (r ApiGetFirmwareDistributableByMoidRequest) Execute() (*FirmwareDistributa
 /*
 GetFirmwareDistributableByMoid Read a 'firmware.Distributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareDistributableByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareDistributableByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareDistributableByMoid(ctx context.Context, moid string) ApiGetFirmwareDistributableByMoidRequest {
 	return ApiGetFirmwareDistributableByMoidRequest{
@@ -9868,8 +9833,7 @@ func (a *FirmwareApiService) GetFirmwareDistributableByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDistributable
+//  @return FirmwareDistributable
 func (a *FirmwareApiService) GetFirmwareDistributableByMoidExecute(r ApiGetFirmwareDistributableByMoidRequest) (*FirmwareDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10085,8 +10049,8 @@ func (r ApiGetFirmwareDistributableListRequest) Execute() (*FirmwareDistributabl
 /*
 GetFirmwareDistributableList Read a 'firmware.Distributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareDistributableListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareDistributableListRequest
 */
 func (a *FirmwareApiService) GetFirmwareDistributableList(ctx context.Context) ApiGetFirmwareDistributableListRequest {
 	return ApiGetFirmwareDistributableListRequest{
@@ -10096,8 +10060,7 @@ func (a *FirmwareApiService) GetFirmwareDistributableList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDistributableResponse
+//  @return FirmwareDistributableResponse
 func (a *FirmwareApiService) GetFirmwareDistributableListExecute(r ApiGetFirmwareDistributableListRequest) (*FirmwareDistributableResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10284,9 +10247,9 @@ func (r ApiGetFirmwareDistributableMetaByMoidRequest) Execute() (*FirmwareDistri
 /*
 GetFirmwareDistributableMetaByMoid Read a 'firmware.DistributableMeta' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareDistributableMetaByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareDistributableMetaByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareDistributableMetaByMoid(ctx context.Context, moid string) ApiGetFirmwareDistributableMetaByMoidRequest {
 	return ApiGetFirmwareDistributableMetaByMoidRequest{
@@ -10297,8 +10260,7 @@ func (a *FirmwareApiService) GetFirmwareDistributableMetaByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDistributableMeta
+//  @return FirmwareDistributableMeta
 func (a *FirmwareApiService) GetFirmwareDistributableMetaByMoidExecute(r ApiGetFirmwareDistributableMetaByMoidRequest) (*FirmwareDistributableMeta, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10514,8 +10476,8 @@ func (r ApiGetFirmwareDistributableMetaListRequest) Execute() (*FirmwareDistribu
 /*
 GetFirmwareDistributableMetaList Read a 'firmware.DistributableMeta' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareDistributableMetaListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareDistributableMetaListRequest
 */
 func (a *FirmwareApiService) GetFirmwareDistributableMetaList(ctx context.Context) ApiGetFirmwareDistributableMetaListRequest {
 	return ApiGetFirmwareDistributableMetaListRequest{
@@ -10525,8 +10487,7 @@ func (a *FirmwareApiService) GetFirmwareDistributableMetaList(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDistributableMetaResponse
+//  @return FirmwareDistributableMetaResponse
 func (a *FirmwareApiService) GetFirmwareDistributableMetaListExecute(r ApiGetFirmwareDistributableMetaListRequest) (*FirmwareDistributableMetaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10706,16 +10667,16 @@ type ApiGetFirmwareDriveDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareDriveDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareDriveDescriptorByMoidRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareDriveDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareDriveDescriptorByMoid Read a 'firmware.DriveDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareDriveDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareDriveDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareDriveDescriptorByMoidRequest {
 	return ApiGetFirmwareDriveDescriptorByMoidRequest{
@@ -10726,14 +10687,13 @@ func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoidExecute(r ApiGetFirmwareDriveDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareDriveDescriptor
+func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoidExecute(r ApiGetFirmwareDriveDescriptorByMoidRequest) (*FirmwareDriveDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareDriveDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDriveDescriptorByMoid")
@@ -10943,8 +10903,8 @@ func (r ApiGetFirmwareDriveDescriptorListRequest) Execute() (*FirmwareDriveDescr
 /*
 GetFirmwareDriveDescriptorList Read a 'firmware.DriveDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareDriveDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareDriveDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareDriveDescriptorList(ctx context.Context) ApiGetFirmwareDriveDescriptorListRequest {
 	return ApiGetFirmwareDriveDescriptorListRequest{
@@ -10954,8 +10914,7 @@ func (a *FirmwareApiService) GetFirmwareDriveDescriptorList(ctx context.Context)
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDriveDescriptorResponse
+//  @return FirmwareDriveDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareDriveDescriptorListExecute(r ApiGetFirmwareDriveDescriptorListRequest) (*FirmwareDriveDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11142,9 +11101,9 @@ func (r ApiGetFirmwareDriverDistributableByMoidRequest) Execute() (*FirmwareDriv
 /*
 GetFirmwareDriverDistributableByMoid Read a 'firmware.DriverDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareDriverDistributableByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareDriverDistributableByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareDriverDistributableByMoid(ctx context.Context, moid string) ApiGetFirmwareDriverDistributableByMoidRequest {
 	return ApiGetFirmwareDriverDistributableByMoidRequest{
@@ -11155,8 +11114,7 @@ func (a *FirmwareApiService) GetFirmwareDriverDistributableByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDriverDistributable
+//  @return FirmwareDriverDistributable
 func (a *FirmwareApiService) GetFirmwareDriverDistributableByMoidExecute(r ApiGetFirmwareDriverDistributableByMoidRequest) (*FirmwareDriverDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11372,8 +11330,8 @@ func (r ApiGetFirmwareDriverDistributableListRequest) Execute() (*FirmwareDriver
 /*
 GetFirmwareDriverDistributableList Read a 'firmware.DriverDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareDriverDistributableListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareDriverDistributableListRequest
 */
 func (a *FirmwareApiService) GetFirmwareDriverDistributableList(ctx context.Context) ApiGetFirmwareDriverDistributableListRequest {
 	return ApiGetFirmwareDriverDistributableListRequest{
@@ -11383,8 +11341,7 @@ func (a *FirmwareApiService) GetFirmwareDriverDistributableList(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDriverDistributableResponse
+//  @return FirmwareDriverDistributableResponse
 func (a *FirmwareApiService) GetFirmwareDriverDistributableListExecute(r ApiGetFirmwareDriverDistributableListRequest) (*FirmwareDriverDistributableResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11571,9 +11528,9 @@ func (r ApiGetFirmwareEulaByMoidRequest) Execute() (*FirmwareEula, *http.Respons
 /*
 GetFirmwareEulaByMoid Read a 'firmware.Eula' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareEulaByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareEulaByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareEulaByMoid(ctx context.Context, moid string) ApiGetFirmwareEulaByMoidRequest {
 	return ApiGetFirmwareEulaByMoidRequest{
@@ -11584,8 +11541,7 @@ func (a *FirmwareApiService) GetFirmwareEulaByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//
-//	@return FirmwareEula
+//  @return FirmwareEula
 func (a *FirmwareApiService) GetFirmwareEulaByMoidExecute(r ApiGetFirmwareEulaByMoidRequest) (*FirmwareEula, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11801,8 +11757,8 @@ func (r ApiGetFirmwareEulaListRequest) Execute() (*FirmwareEulaResponse, *http.R
 /*
 GetFirmwareEulaList Read a 'firmware.Eula' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareEulaListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareEulaListRequest
 */
 func (a *FirmwareApiService) GetFirmwareEulaList(ctx context.Context) ApiGetFirmwareEulaListRequest {
 	return ApiGetFirmwareEulaListRequest{
@@ -11812,8 +11768,7 @@ func (a *FirmwareApiService) GetFirmwareEulaList(ctx context.Context) ApiGetFirm
 }
 
 // Execute executes the request
-//
-//	@return FirmwareEulaResponse
+//  @return FirmwareEulaResponse
 func (a *FirmwareApiService) GetFirmwareEulaListExecute(r ApiGetFirmwareEulaListRequest) (*FirmwareEulaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12000,9 +11955,9 @@ func (r ApiGetFirmwareFirmwareSummaryByMoidRequest) Execute() (*FirmwareFirmware
 /*
 GetFirmwareFirmwareSummaryByMoid Read a 'firmware.FirmwareSummary' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareFirmwareSummaryByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareFirmwareSummaryByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareFirmwareSummaryByMoid(ctx context.Context, moid string) ApiGetFirmwareFirmwareSummaryByMoidRequest {
 	return ApiGetFirmwareFirmwareSummaryByMoidRequest{
@@ -12013,8 +11968,7 @@ func (a *FirmwareApiService) GetFirmwareFirmwareSummaryByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return FirmwareFirmwareSummary
+//  @return FirmwareFirmwareSummary
 func (a *FirmwareApiService) GetFirmwareFirmwareSummaryByMoidExecute(r ApiGetFirmwareFirmwareSummaryByMoidRequest) (*FirmwareFirmwareSummary, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12230,8 +12184,8 @@ func (r ApiGetFirmwareFirmwareSummaryListRequest) Execute() (*FirmwareFirmwareSu
 /*
 GetFirmwareFirmwareSummaryList Read a 'firmware.FirmwareSummary' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareFirmwareSummaryListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareFirmwareSummaryListRequest
 */
 func (a *FirmwareApiService) GetFirmwareFirmwareSummaryList(ctx context.Context) ApiGetFirmwareFirmwareSummaryListRequest {
 	return ApiGetFirmwareFirmwareSummaryListRequest{
@@ -12241,8 +12195,7 @@ func (a *FirmwareApiService) GetFirmwareFirmwareSummaryList(ctx context.Context)
 }
 
 // Execute executes the request
-//
-//	@return FirmwareFirmwareSummaryResponse
+//  @return FirmwareFirmwareSummaryResponse
 func (a *FirmwareApiService) GetFirmwareFirmwareSummaryListExecute(r ApiGetFirmwareFirmwareSummaryListRequest) (*FirmwareFirmwareSummaryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12422,16 +12375,16 @@ type ApiGetFirmwareGpuDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareGpuDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareGpuDescriptorByMoidRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareGpuDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareGpuDescriptorByMoid Read a 'firmware.GpuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareGpuDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareGpuDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareGpuDescriptorByMoidRequest {
 	return ApiGetFirmwareGpuDescriptorByMoidRequest{
@@ -12442,14 +12395,13 @@ func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoidExecute(r ApiGetFirmwareGpuDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareGpuDescriptor
+func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoidExecute(r ApiGetFirmwareGpuDescriptorByMoidRequest) (*FirmwareGpuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareGpuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareGpuDescriptorByMoid")
@@ -12659,8 +12611,8 @@ func (r ApiGetFirmwareGpuDescriptorListRequest) Execute() (*FirmwareGpuDescripto
 /*
 GetFirmwareGpuDescriptorList Read a 'firmware.GpuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareGpuDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareGpuDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareGpuDescriptorList(ctx context.Context) ApiGetFirmwareGpuDescriptorListRequest {
 	return ApiGetFirmwareGpuDescriptorListRequest{
@@ -12670,8 +12622,7 @@ func (a *FirmwareApiService) GetFirmwareGpuDescriptorList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareGpuDescriptorResponse
+//  @return FirmwareGpuDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareGpuDescriptorListExecute(r ApiGetFirmwareGpuDescriptorListRequest) (*FirmwareGpuDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12851,16 +12802,16 @@ type ApiGetFirmwareHbaDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareHbaDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareHbaDescriptorByMoidRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareHbaDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareHbaDescriptorByMoid Read a 'firmware.HbaDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareHbaDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareHbaDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareHbaDescriptorByMoidRequest {
 	return ApiGetFirmwareHbaDescriptorByMoidRequest{
@@ -12871,14 +12822,13 @@ func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoidExecute(r ApiGetFirmwareHbaDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareHbaDescriptor
+func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoidExecute(r ApiGetFirmwareHbaDescriptorByMoidRequest) (*FirmwareHbaDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareHbaDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareHbaDescriptorByMoid")
@@ -13088,8 +13038,8 @@ func (r ApiGetFirmwareHbaDescriptorListRequest) Execute() (*FirmwareHbaDescripto
 /*
 GetFirmwareHbaDescriptorList Read a 'firmware.HbaDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareHbaDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareHbaDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareHbaDescriptorList(ctx context.Context) ApiGetFirmwareHbaDescriptorListRequest {
 	return ApiGetFirmwareHbaDescriptorListRequest{
@@ -13099,8 +13049,7 @@ func (a *FirmwareApiService) GetFirmwareHbaDescriptorList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareHbaDescriptorResponse
+//  @return FirmwareHbaDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareHbaDescriptorListExecute(r ApiGetFirmwareHbaDescriptorListRequest) (*FirmwareHbaDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13280,16 +13229,16 @@ type ApiGetFirmwareIomDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareIomDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareIomDescriptorByMoidRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareIomDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareIomDescriptorByMoid Read a 'firmware.IomDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareIomDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareIomDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareIomDescriptorByMoidRequest {
 	return ApiGetFirmwareIomDescriptorByMoidRequest{
@@ -13300,14 +13249,13 @@ func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoidExecute(r ApiGetFirmwareIomDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareIomDescriptor
+func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoidExecute(r ApiGetFirmwareIomDescriptorByMoidRequest) (*FirmwareIomDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareIomDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareIomDescriptorByMoid")
@@ -13517,8 +13465,8 @@ func (r ApiGetFirmwareIomDescriptorListRequest) Execute() (*FirmwareIomDescripto
 /*
 GetFirmwareIomDescriptorList Read a 'firmware.IomDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareIomDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareIomDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareIomDescriptorList(ctx context.Context) ApiGetFirmwareIomDescriptorListRequest {
 	return ApiGetFirmwareIomDescriptorListRequest{
@@ -13528,8 +13476,7 @@ func (a *FirmwareApiService) GetFirmwareIomDescriptorList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareIomDescriptorResponse
+//  @return FirmwareIomDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareIomDescriptorListExecute(r ApiGetFirmwareIomDescriptorListRequest) (*FirmwareIomDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13709,16 +13656,16 @@ type ApiGetFirmwareMswitchDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareMswitchDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareMswitchDescriptorByMoidRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareMswitchDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareMswitchDescriptorByMoid Read a 'firmware.MswitchDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareMswitchDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareMswitchDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareMswitchDescriptorByMoidRequest {
 	return ApiGetFirmwareMswitchDescriptorByMoidRequest{
@@ -13729,14 +13676,13 @@ func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoidExecute(r ApiGetFirmwareMswitchDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareMswitchDescriptor
+func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoidExecute(r ApiGetFirmwareMswitchDescriptorByMoidRequest) (*FirmwareMswitchDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareMswitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareMswitchDescriptorByMoid")
@@ -13946,8 +13892,8 @@ func (r ApiGetFirmwareMswitchDescriptorListRequest) Execute() (*FirmwareMswitchD
 /*
 GetFirmwareMswitchDescriptorList Read a 'firmware.MswitchDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareMswitchDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareMswitchDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareMswitchDescriptorList(ctx context.Context) ApiGetFirmwareMswitchDescriptorListRequest {
 	return ApiGetFirmwareMswitchDescriptorListRequest{
@@ -13957,8 +13903,7 @@ func (a *FirmwareApiService) GetFirmwareMswitchDescriptorList(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return FirmwareMswitchDescriptorResponse
+//  @return FirmwareMswitchDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareMswitchDescriptorListExecute(r ApiGetFirmwareMswitchDescriptorListRequest) (*FirmwareMswitchDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14138,16 +14083,16 @@ type ApiGetFirmwareNxosDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareNxosDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareNxosDescriptorByMoidRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareNxosDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareNxosDescriptorByMoid Read a 'firmware.NxosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareNxosDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareNxosDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareNxosDescriptorByMoidRequest {
 	return ApiGetFirmwareNxosDescriptorByMoidRequest{
@@ -14158,14 +14103,13 @@ func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoidExecute(r ApiGetFirmwareNxosDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareNxosDescriptor
+func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoidExecute(r ApiGetFirmwareNxosDescriptorByMoidRequest) (*FirmwareNxosDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareNxosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareNxosDescriptorByMoid")
@@ -14375,8 +14319,8 @@ func (r ApiGetFirmwareNxosDescriptorListRequest) Execute() (*FirmwareNxosDescrip
 /*
 GetFirmwareNxosDescriptorList Read a 'firmware.NxosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareNxosDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareNxosDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareNxosDescriptorList(ctx context.Context) ApiGetFirmwareNxosDescriptorListRequest {
 	return ApiGetFirmwareNxosDescriptorListRequest{
@@ -14386,8 +14330,7 @@ func (a *FirmwareApiService) GetFirmwareNxosDescriptorList(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return FirmwareNxosDescriptorResponse
+//  @return FirmwareNxosDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareNxosDescriptorListExecute(r ApiGetFirmwareNxosDescriptorListRequest) (*FirmwareNxosDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14567,16 +14510,16 @@ type ApiGetFirmwarePcieDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwarePcieDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwarePcieDescriptorByMoidRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwarePcieDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwarePcieDescriptorByMoid Read a 'firmware.PcieDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwarePcieDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwarePcieDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwarePcieDescriptorByMoidRequest {
 	return ApiGetFirmwarePcieDescriptorByMoidRequest{
@@ -14587,14 +14530,13 @@ func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoidExecute(r ApiGetFirmwarePcieDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwarePcieDescriptor
+func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoidExecute(r ApiGetFirmwarePcieDescriptorByMoidRequest) (*FirmwarePcieDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwarePcieDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwarePcieDescriptorByMoid")
@@ -14804,8 +14746,8 @@ func (r ApiGetFirmwarePcieDescriptorListRequest) Execute() (*FirmwarePcieDescrip
 /*
 GetFirmwarePcieDescriptorList Read a 'firmware.PcieDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwarePcieDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwarePcieDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwarePcieDescriptorList(ctx context.Context) ApiGetFirmwarePcieDescriptorListRequest {
 	return ApiGetFirmwarePcieDescriptorListRequest{
@@ -14815,8 +14757,7 @@ func (a *FirmwareApiService) GetFirmwarePcieDescriptorList(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return FirmwarePcieDescriptorResponse
+//  @return FirmwarePcieDescriptorResponse
 func (a *FirmwareApiService) GetFirmwarePcieDescriptorListExecute(r ApiGetFirmwarePcieDescriptorListRequest) (*FirmwarePcieDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15003,9 +14944,9 @@ func (r ApiGetFirmwarePolicyByMoidRequest) Execute() (*FirmwarePolicy, *http.Res
 /*
 GetFirmwarePolicyByMoid Read a 'firmware.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwarePolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwarePolicyByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwarePolicyByMoid(ctx context.Context, moid string) ApiGetFirmwarePolicyByMoidRequest {
 	return ApiGetFirmwarePolicyByMoidRequest{
@@ -15016,8 +14957,7 @@ func (a *FirmwareApiService) GetFirmwarePolicyByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//
-//	@return FirmwarePolicy
+//  @return FirmwarePolicy
 func (a *FirmwareApiService) GetFirmwarePolicyByMoidExecute(r ApiGetFirmwarePolicyByMoidRequest) (*FirmwarePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15233,8 +15173,8 @@ func (r ApiGetFirmwarePolicyListRequest) Execute() (*FirmwarePolicyResponse, *ht
 /*
 GetFirmwarePolicyList Read a 'firmware.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwarePolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwarePolicyListRequest
 */
 func (a *FirmwareApiService) GetFirmwarePolicyList(ctx context.Context) ApiGetFirmwarePolicyListRequest {
 	return ApiGetFirmwarePolicyListRequest{
@@ -15244,8 +15184,7 @@ func (a *FirmwareApiService) GetFirmwarePolicyList(ctx context.Context) ApiGetFi
 }
 
 // Execute executes the request
-//
-//	@return FirmwarePolicyResponse
+//  @return FirmwarePolicyResponse
 func (a *FirmwareApiService) GetFirmwarePolicyListExecute(r ApiGetFirmwarePolicyListRequest) (*FirmwarePolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15425,16 +15364,16 @@ type ApiGetFirmwarePsuDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwarePsuDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwarePsuDescriptorByMoidRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwarePsuDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwarePsuDescriptorByMoid Read a 'firmware.PsuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwarePsuDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwarePsuDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwarePsuDescriptorByMoidRequest {
 	return ApiGetFirmwarePsuDescriptorByMoidRequest{
@@ -15445,14 +15384,13 @@ func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoidExecute(r ApiGetFirmwarePsuDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwarePsuDescriptor
+func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoidExecute(r ApiGetFirmwarePsuDescriptorByMoidRequest) (*FirmwarePsuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwarePsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwarePsuDescriptorByMoid")
@@ -15662,8 +15600,8 @@ func (r ApiGetFirmwarePsuDescriptorListRequest) Execute() (*FirmwarePsuDescripto
 /*
 GetFirmwarePsuDescriptorList Read a 'firmware.PsuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwarePsuDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwarePsuDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwarePsuDescriptorList(ctx context.Context) ApiGetFirmwarePsuDescriptorListRequest {
 	return ApiGetFirmwarePsuDescriptorListRequest{
@@ -15673,8 +15611,7 @@ func (a *FirmwareApiService) GetFirmwarePsuDescriptorList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwarePsuDescriptorResponse
+//  @return FirmwarePsuDescriptorResponse
 func (a *FirmwareApiService) GetFirmwarePsuDescriptorListExecute(r ApiGetFirmwarePsuDescriptorListRequest) (*FirmwarePsuDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15861,9 +15798,9 @@ func (r ApiGetFirmwareRunningFirmwareByMoidRequest) Execute() (*FirmwareRunningF
 /*
 GetFirmwareRunningFirmwareByMoid Read a 'firmware.RunningFirmware' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareRunningFirmwareByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareRunningFirmwareByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareRunningFirmwareByMoid(ctx context.Context, moid string) ApiGetFirmwareRunningFirmwareByMoidRequest {
 	return ApiGetFirmwareRunningFirmwareByMoidRequest{
@@ -15874,8 +15811,7 @@ func (a *FirmwareApiService) GetFirmwareRunningFirmwareByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return FirmwareRunningFirmware
+//  @return FirmwareRunningFirmware
 func (a *FirmwareApiService) GetFirmwareRunningFirmwareByMoidExecute(r ApiGetFirmwareRunningFirmwareByMoidRequest) (*FirmwareRunningFirmware, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16091,8 +16027,8 @@ func (r ApiGetFirmwareRunningFirmwareListRequest) Execute() (*FirmwareRunningFir
 /*
 GetFirmwareRunningFirmwareList Read a 'firmware.RunningFirmware' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareRunningFirmwareListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareRunningFirmwareListRequest
 */
 func (a *FirmwareApiService) GetFirmwareRunningFirmwareList(ctx context.Context) ApiGetFirmwareRunningFirmwareListRequest {
 	return ApiGetFirmwareRunningFirmwareListRequest{
@@ -16102,8 +16038,7 @@ func (a *FirmwareApiService) GetFirmwareRunningFirmwareList(ctx context.Context)
 }
 
 // Execute executes the request
-//
-//	@return FirmwareRunningFirmwareResponse
+//  @return FirmwareRunningFirmwareResponse
 func (a *FirmwareApiService) GetFirmwareRunningFirmwareListExecute(r ApiGetFirmwareRunningFirmwareListRequest) (*FirmwareRunningFirmwareResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16283,16 +16218,16 @@ type ApiGetFirmwareSasExpanderDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareSasExpanderDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareSasExpanderDescriptorByMoid Read a 'firmware.SasExpanderDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareSasExpanderDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareSasExpanderDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareSasExpanderDescriptorByMoidRequest {
 	return ApiGetFirmwareSasExpanderDescriptorByMoidRequest{
@@ -16303,14 +16238,13 @@ func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoid(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoidExecute(r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareSasExpanderDescriptor
+func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoidExecute(r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) (*FirmwareSasExpanderDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareSasExpanderDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareSasExpanderDescriptorByMoid")
@@ -16520,8 +16454,8 @@ func (r ApiGetFirmwareSasExpanderDescriptorListRequest) Execute() (*FirmwareSasE
 /*
 GetFirmwareSasExpanderDescriptorList Read a 'firmware.SasExpanderDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareSasExpanderDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareSasExpanderDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorList(ctx context.Context) ApiGetFirmwareSasExpanderDescriptorListRequest {
 	return ApiGetFirmwareSasExpanderDescriptorListRequest{
@@ -16531,8 +16465,7 @@ func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorList(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return FirmwareSasExpanderDescriptorResponse
+//  @return FirmwareSasExpanderDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorListExecute(r ApiGetFirmwareSasExpanderDescriptorListRequest) (*FirmwareSasExpanderDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16719,9 +16652,9 @@ func (r ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest) Exec
 /*
 GetFirmwareServerConfigurationUtilityDistributableByMoid Read a 'firmware.ServerConfigurationUtilityDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableByMoid(ctx context.Context, moid string) ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest {
 	return ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest{
@@ -16732,8 +16665,7 @@ func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableB
 }
 
 // Execute executes the request
-//
-//	@return FirmwareServerConfigurationUtilityDistributable
+//  @return FirmwareServerConfigurationUtilityDistributable
 func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableByMoidExecute(r ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest) (*FirmwareServerConfigurationUtilityDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16949,8 +16881,8 @@ func (r ApiGetFirmwareServerConfigurationUtilityDistributableListRequest) Execut
 /*
 GetFirmwareServerConfigurationUtilityDistributableList Read a 'firmware.ServerConfigurationUtilityDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareServerConfigurationUtilityDistributableListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareServerConfigurationUtilityDistributableListRequest
 */
 func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableList(ctx context.Context) ApiGetFirmwareServerConfigurationUtilityDistributableListRequest {
 	return ApiGetFirmwareServerConfigurationUtilityDistributableListRequest{
@@ -16960,8 +16892,7 @@ func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableL
 }
 
 // Execute executes the request
-//
-//	@return FirmwareServerConfigurationUtilityDistributableResponse
+//  @return FirmwareServerConfigurationUtilityDistributableResponse
 func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableListExecute(r ApiGetFirmwareServerConfigurationUtilityDistributableListRequest) (*FirmwareServerConfigurationUtilityDistributableResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17141,16 +17072,16 @@ type ApiGetFirmwareStorageControllerDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
 	return r.ApiService.GetFirmwareStorageControllerDescriptorByMoidExecute(r)
 }
 
 /*
 GetFirmwareStorageControllerDescriptorByMoid Read a 'firmware.StorageControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareStorageControllerDescriptorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareStorageControllerDescriptorByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoid(ctx context.Context, moid string) ApiGetFirmwareStorageControllerDescriptorByMoidRequest {
 	return ApiGetFirmwareStorageControllerDescriptorByMoidRequest{
@@ -17161,14 +17092,13 @@ func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoid(ctx co
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoidExecute(r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareStorageControllerDescriptor
+func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoidExecute(r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) (*FirmwareStorageControllerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareStorageControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareStorageControllerDescriptorByMoid")
@@ -17378,8 +17308,8 @@ func (r ApiGetFirmwareStorageControllerDescriptorListRequest) Execute() (*Firmwa
 /*
 GetFirmwareStorageControllerDescriptorList Read a 'firmware.StorageControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareStorageControllerDescriptorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareStorageControllerDescriptorListRequest
 */
 func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorList(ctx context.Context) ApiGetFirmwareStorageControllerDescriptorListRequest {
 	return ApiGetFirmwareStorageControllerDescriptorListRequest{
@@ -17389,8 +17319,7 @@ func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorList(ctx cont
 }
 
 // Execute executes the request
-//
-//	@return FirmwareStorageControllerDescriptorResponse
+//  @return FirmwareStorageControllerDescriptorResponse
 func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorListExecute(r ApiGetFirmwareStorageControllerDescriptorListRequest) (*FirmwareStorageControllerDescriptorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17577,9 +17506,9 @@ func (r ApiGetFirmwareSwitchUpgradeByMoidRequest) Execute() (*FirmwareSwitchUpgr
 /*
 GetFirmwareSwitchUpgradeByMoid Read a 'firmware.SwitchUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareSwitchUpgradeByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareSwitchUpgradeByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareSwitchUpgradeByMoid(ctx context.Context, moid string) ApiGetFirmwareSwitchUpgradeByMoidRequest {
 	return ApiGetFirmwareSwitchUpgradeByMoidRequest{
@@ -17590,8 +17519,7 @@ func (a *FirmwareApiService) GetFirmwareSwitchUpgradeByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return FirmwareSwitchUpgrade
+//  @return FirmwareSwitchUpgrade
 func (a *FirmwareApiService) GetFirmwareSwitchUpgradeByMoidExecute(r ApiGetFirmwareSwitchUpgradeByMoidRequest) (*FirmwareSwitchUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17807,8 +17735,8 @@ func (r ApiGetFirmwareSwitchUpgradeListRequest) Execute() (*FirmwareSwitchUpgrad
 /*
 GetFirmwareSwitchUpgradeList Read a 'firmware.SwitchUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareSwitchUpgradeListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareSwitchUpgradeListRequest
 */
 func (a *FirmwareApiService) GetFirmwareSwitchUpgradeList(ctx context.Context) ApiGetFirmwareSwitchUpgradeListRequest {
 	return ApiGetFirmwareSwitchUpgradeListRequest{
@@ -17818,8 +17746,7 @@ func (a *FirmwareApiService) GetFirmwareSwitchUpgradeList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareSwitchUpgradeResponse
+//  @return FirmwareSwitchUpgradeResponse
 func (a *FirmwareApiService) GetFirmwareSwitchUpgradeListExecute(r ApiGetFirmwareSwitchUpgradeListRequest) (*FirmwareSwitchUpgradeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18006,9 +17933,9 @@ func (r ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest) Execute() (*Firmwa
 /*
 GetFirmwareUnsupportedVersionUpgradeByMoid Read a 'firmware.UnsupportedVersionUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareUnsupportedVersionUpgradeByMoid(ctx context.Context, moid string) ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest {
 	return ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest{
@@ -18019,8 +17946,7 @@ func (a *FirmwareApiService) GetFirmwareUnsupportedVersionUpgradeByMoid(ctx cont
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUnsupportedVersionUpgrade
+//  @return FirmwareUnsupportedVersionUpgrade
 func (a *FirmwareApiService) GetFirmwareUnsupportedVersionUpgradeByMoidExecute(r ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest) (*FirmwareUnsupportedVersionUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18236,8 +18162,8 @@ func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Execute() (*Firmware
 /*
 GetFirmwareUnsupportedVersionUpgradeList Read a 'firmware.UnsupportedVersionUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareUnsupportedVersionUpgradeListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareUnsupportedVersionUpgradeListRequest
 */
 func (a *FirmwareApiService) GetFirmwareUnsupportedVersionUpgradeList(ctx context.Context) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
 	return ApiGetFirmwareUnsupportedVersionUpgradeListRequest{
@@ -18247,8 +18173,7 @@ func (a *FirmwareApiService) GetFirmwareUnsupportedVersionUpgradeList(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUnsupportedVersionUpgradeResponse
+//  @return FirmwareUnsupportedVersionUpgradeResponse
 func (a *FirmwareApiService) GetFirmwareUnsupportedVersionUpgradeListExecute(r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) (*FirmwareUnsupportedVersionUpgradeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18435,9 +18360,9 @@ func (r ApiGetFirmwareUpgradeByMoidRequest) Execute() (*FirmwareUpgrade, *http.R
 /*
 GetFirmwareUpgradeByMoid Read a 'firmware.Upgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareUpgradeByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareUpgradeByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareUpgradeByMoid(ctx context.Context, moid string) ApiGetFirmwareUpgradeByMoidRequest {
 	return ApiGetFirmwareUpgradeByMoidRequest{
@@ -18448,8 +18373,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUpgrade
+//  @return FirmwareUpgrade
 func (a *FirmwareApiService) GetFirmwareUpgradeByMoidExecute(r ApiGetFirmwareUpgradeByMoidRequest) (*FirmwareUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18589,9 +18513,9 @@ func (r ApiGetFirmwareUpgradeImpactStatusByMoidRequest) Execute() (*FirmwareUpgr
 /*
 GetFirmwareUpgradeImpactStatusByMoid Read a 'firmware.UpgradeImpactStatus' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareUpgradeImpactStatusByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareUpgradeImpactStatusByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusByMoid(ctx context.Context, moid string) ApiGetFirmwareUpgradeImpactStatusByMoidRequest {
 	return ApiGetFirmwareUpgradeImpactStatusByMoidRequest{
@@ -18602,8 +18526,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUpgradeImpactStatus
+//  @return FirmwareUpgradeImpactStatus
 func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusByMoidExecute(r ApiGetFirmwareUpgradeImpactStatusByMoidRequest) (*FirmwareUpgradeImpactStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18819,8 +18742,8 @@ func (r ApiGetFirmwareUpgradeImpactStatusListRequest) Execute() (*FirmwareUpgrad
 /*
 GetFirmwareUpgradeImpactStatusList Read a 'firmware.UpgradeImpactStatus' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareUpgradeImpactStatusListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareUpgradeImpactStatusListRequest
 */
 func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusList(ctx context.Context) ApiGetFirmwareUpgradeImpactStatusListRequest {
 	return ApiGetFirmwareUpgradeImpactStatusListRequest{
@@ -18830,8 +18753,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusList(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUpgradeImpactStatusResponse
+//  @return FirmwareUpgradeImpactStatusResponse
 func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusListExecute(r ApiGetFirmwareUpgradeImpactStatusListRequest) (*FirmwareUpgradeImpactStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19094,8 +19016,8 @@ func (r ApiGetFirmwareUpgradeListRequest) Execute() (*FirmwareUpgradeResponse, *
 /*
 GetFirmwareUpgradeList Read a 'firmware.Upgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareUpgradeListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareUpgradeListRequest
 */
 func (a *FirmwareApiService) GetFirmwareUpgradeList(ctx context.Context) ApiGetFirmwareUpgradeListRequest {
 	return ApiGetFirmwareUpgradeListRequest{
@@ -19105,8 +19027,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeList(ctx context.Context) ApiGetF
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUpgradeResponse
+//  @return FirmwareUpgradeResponse
 func (a *FirmwareApiService) GetFirmwareUpgradeListExecute(r ApiGetFirmwareUpgradeListRequest) (*FirmwareUpgradeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19293,9 +19214,9 @@ func (r ApiGetFirmwareUpgradeStatusByMoidRequest) Execute() (*FirmwareUpgradeSta
 /*
 GetFirmwareUpgradeStatusByMoid Read a 'firmware.UpgradeStatus' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFirmwareUpgradeStatusByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFirmwareUpgradeStatusByMoidRequest
 */
 func (a *FirmwareApiService) GetFirmwareUpgradeStatusByMoid(ctx context.Context, moid string) ApiGetFirmwareUpgradeStatusByMoidRequest {
 	return ApiGetFirmwareUpgradeStatusByMoidRequest{
@@ -19306,8 +19227,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeStatusByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUpgradeStatus
+//  @return FirmwareUpgradeStatus
 func (a *FirmwareApiService) GetFirmwareUpgradeStatusByMoidExecute(r ApiGetFirmwareUpgradeStatusByMoidRequest) (*FirmwareUpgradeStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19523,8 +19443,8 @@ func (r ApiGetFirmwareUpgradeStatusListRequest) Execute() (*FirmwareUpgradeStatu
 /*
 GetFirmwareUpgradeStatusList Read a 'firmware.UpgradeStatus' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFirmwareUpgradeStatusListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFirmwareUpgradeStatusListRequest
 */
 func (a *FirmwareApiService) GetFirmwareUpgradeStatusList(ctx context.Context) ApiGetFirmwareUpgradeStatusListRequest {
 	return ApiGetFirmwareUpgradeStatusListRequest{
@@ -19534,8 +19454,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeStatusList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUpgradeStatusResponse
+//  @return FirmwareUpgradeStatusResponse
 func (a *FirmwareApiService) GetFirmwareUpgradeStatusListExecute(r ApiGetFirmwareUpgradeStatusListRequest) (*FirmwareUpgradeStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19729,16 +19648,16 @@ func (r ApiPatchFirmwareBiosDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareBiosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareBiosDescriptorRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareBiosDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareBiosDescriptor Update a 'firmware.BiosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareBiosDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareBiosDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareBiosDescriptor(ctx context.Context, moid string) ApiPatchFirmwareBiosDescriptorRequest {
 	return ApiPatchFirmwareBiosDescriptorRequest{
@@ -19749,14 +19668,13 @@ func (a *FirmwareApiService) PatchFirmwareBiosDescriptor(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareBiosDescriptorExecute(r ApiPatchFirmwareBiosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareBiosDescriptor
+func (a *FirmwareApiService) PatchFirmwareBiosDescriptorExecute(r ApiPatchFirmwareBiosDescriptorRequest) (*FirmwareBiosDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareBiosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareBiosDescriptor")
@@ -19905,16 +19823,16 @@ func (r ApiPatchFirmwareBoardControllerDescriptorRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiPatchFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareBoardControllerDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareBoardControllerDescriptor Update a 'firmware.BoardControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareBoardControllerDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareBoardControllerDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptor(ctx context.Context, moid string) ApiPatchFirmwareBoardControllerDescriptorRequest {
 	return ApiPatchFirmwareBoardControllerDescriptorRequest{
@@ -19925,14 +19843,13 @@ func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptor(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptorExecute(r ApiPatchFirmwareBoardControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareBoardControllerDescriptor
+func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptorExecute(r ApiPatchFirmwareBoardControllerDescriptorRequest) (*FirmwareBoardControllerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareBoardControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareBoardControllerDescriptor")
@@ -20081,16 +19998,16 @@ func (r ApiPatchFirmwareCimcDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareCimcDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareCimcDescriptorRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareCimcDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareCimcDescriptor Update a 'firmware.CimcDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareCimcDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareCimcDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareCimcDescriptor(ctx context.Context, moid string) ApiPatchFirmwareCimcDescriptorRequest {
 	return ApiPatchFirmwareCimcDescriptorRequest{
@@ -20101,14 +20018,13 @@ func (a *FirmwareApiService) PatchFirmwareCimcDescriptor(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareCimcDescriptorExecute(r ApiPatchFirmwareCimcDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareCimcDescriptor
+func (a *FirmwareApiService) PatchFirmwareCimcDescriptorExecute(r ApiPatchFirmwareCimcDescriptorRequest) (*FirmwareCimcDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareCimcDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareCimcDescriptor")
@@ -20257,16 +20173,16 @@ func (r ApiPatchFirmwareDimmDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareDimmDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareDimmDescriptorRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareDimmDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareDimmDescriptor Update a 'firmware.DimmDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareDimmDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareDimmDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareDimmDescriptor(ctx context.Context, moid string) ApiPatchFirmwareDimmDescriptorRequest {
 	return ApiPatchFirmwareDimmDescriptorRequest{
@@ -20277,14 +20193,13 @@ func (a *FirmwareApiService) PatchFirmwareDimmDescriptor(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareDimmDescriptorExecute(r ApiPatchFirmwareDimmDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareDimmDescriptor
+func (a *FirmwareApiService) PatchFirmwareDimmDescriptorExecute(r ApiPatchFirmwareDimmDescriptorRequest) (*FirmwareDimmDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareDimmDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareDimmDescriptor")
@@ -20440,9 +20355,9 @@ func (r ApiPatchFirmwareDistributableRequest) Execute() (*FirmwareDistributable,
 /*
 PatchFirmwareDistributable Update a 'firmware.Distributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareDistributableRequest
 */
 func (a *FirmwareApiService) PatchFirmwareDistributable(ctx context.Context, moid string) ApiPatchFirmwareDistributableRequest {
 	return ApiPatchFirmwareDistributableRequest{
@@ -20453,8 +20368,7 @@ func (a *FirmwareApiService) PatchFirmwareDistributable(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDistributable
+//  @return FirmwareDistributable
 func (a *FirmwareApiService) PatchFirmwareDistributableExecute(r ApiPatchFirmwareDistributableRequest) (*FirmwareDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20609,16 +20523,16 @@ func (r ApiPatchFirmwareDriveDescriptorRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchFirmwareDriveDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareDriveDescriptorRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareDriveDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareDriveDescriptor Update a 'firmware.DriveDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareDriveDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareDriveDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareDriveDescriptor(ctx context.Context, moid string) ApiPatchFirmwareDriveDescriptorRequest {
 	return ApiPatchFirmwareDriveDescriptorRequest{
@@ -20629,14 +20543,13 @@ func (a *FirmwareApiService) PatchFirmwareDriveDescriptor(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareDriveDescriptorExecute(r ApiPatchFirmwareDriveDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareDriveDescriptor
+func (a *FirmwareApiService) PatchFirmwareDriveDescriptorExecute(r ApiPatchFirmwareDriveDescriptorRequest) (*FirmwareDriveDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareDriveDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareDriveDescriptor")
@@ -20792,9 +20705,9 @@ func (r ApiPatchFirmwareDriverDistributableRequest) Execute() (*FirmwareDriverDi
 /*
 PatchFirmwareDriverDistributable Update a 'firmware.DriverDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareDriverDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareDriverDistributableRequest
 */
 func (a *FirmwareApiService) PatchFirmwareDriverDistributable(ctx context.Context, moid string) ApiPatchFirmwareDriverDistributableRequest {
 	return ApiPatchFirmwareDriverDistributableRequest{
@@ -20805,8 +20718,7 @@ func (a *FirmwareApiService) PatchFirmwareDriverDistributable(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDriverDistributable
+//  @return FirmwareDriverDistributable
 func (a *FirmwareApiService) PatchFirmwareDriverDistributableExecute(r ApiPatchFirmwareDriverDistributableRequest) (*FirmwareDriverDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -20961,16 +20873,16 @@ func (r ApiPatchFirmwareGpuDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwareGpuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareGpuDescriptorRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareGpuDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareGpuDescriptor Update a 'firmware.GpuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareGpuDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareGpuDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareGpuDescriptor(ctx context.Context, moid string) ApiPatchFirmwareGpuDescriptorRequest {
 	return ApiPatchFirmwareGpuDescriptorRequest{
@@ -20981,14 +20893,13 @@ func (a *FirmwareApiService) PatchFirmwareGpuDescriptor(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareGpuDescriptorExecute(r ApiPatchFirmwareGpuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareGpuDescriptor
+func (a *FirmwareApiService) PatchFirmwareGpuDescriptorExecute(r ApiPatchFirmwareGpuDescriptorRequest) (*FirmwareGpuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareGpuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareGpuDescriptor")
@@ -21137,16 +21048,16 @@ func (r ApiPatchFirmwareHbaDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwareHbaDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareHbaDescriptorRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareHbaDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareHbaDescriptor Update a 'firmware.HbaDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareHbaDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareHbaDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareHbaDescriptor(ctx context.Context, moid string) ApiPatchFirmwareHbaDescriptorRequest {
 	return ApiPatchFirmwareHbaDescriptorRequest{
@@ -21157,14 +21068,13 @@ func (a *FirmwareApiService) PatchFirmwareHbaDescriptor(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareHbaDescriptorExecute(r ApiPatchFirmwareHbaDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareHbaDescriptor
+func (a *FirmwareApiService) PatchFirmwareHbaDescriptorExecute(r ApiPatchFirmwareHbaDescriptorRequest) (*FirmwareHbaDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareHbaDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareHbaDescriptor")
@@ -21313,16 +21223,16 @@ func (r ApiPatchFirmwareIomDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwareIomDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareIomDescriptorRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareIomDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareIomDescriptor Update a 'firmware.IomDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareIomDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareIomDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareIomDescriptor(ctx context.Context, moid string) ApiPatchFirmwareIomDescriptorRequest {
 	return ApiPatchFirmwareIomDescriptorRequest{
@@ -21333,14 +21243,13 @@ func (a *FirmwareApiService) PatchFirmwareIomDescriptor(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareIomDescriptorExecute(r ApiPatchFirmwareIomDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareIomDescriptor
+func (a *FirmwareApiService) PatchFirmwareIomDescriptorExecute(r ApiPatchFirmwareIomDescriptorRequest) (*FirmwareIomDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareIomDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareIomDescriptor")
@@ -21489,16 +21398,16 @@ func (r ApiPatchFirmwareMswitchDescriptorRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchFirmwareMswitchDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareMswitchDescriptorRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareMswitchDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareMswitchDescriptor Update a 'firmware.MswitchDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareMswitchDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareMswitchDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareMswitchDescriptor(ctx context.Context, moid string) ApiPatchFirmwareMswitchDescriptorRequest {
 	return ApiPatchFirmwareMswitchDescriptorRequest{
@@ -21509,14 +21418,13 @@ func (a *FirmwareApiService) PatchFirmwareMswitchDescriptor(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareMswitchDescriptorExecute(r ApiPatchFirmwareMswitchDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareMswitchDescriptor
+func (a *FirmwareApiService) PatchFirmwareMswitchDescriptorExecute(r ApiPatchFirmwareMswitchDescriptorRequest) (*FirmwareMswitchDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareMswitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareMswitchDescriptor")
@@ -21665,16 +21573,16 @@ func (r ApiPatchFirmwareNxosDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareNxosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareNxosDescriptorRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareNxosDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareNxosDescriptor Update a 'firmware.NxosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareNxosDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareNxosDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareNxosDescriptor(ctx context.Context, moid string) ApiPatchFirmwareNxosDescriptorRequest {
 	return ApiPatchFirmwareNxosDescriptorRequest{
@@ -21685,14 +21593,13 @@ func (a *FirmwareApiService) PatchFirmwareNxosDescriptor(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareNxosDescriptorExecute(r ApiPatchFirmwareNxosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareNxosDescriptor
+func (a *FirmwareApiService) PatchFirmwareNxosDescriptorExecute(r ApiPatchFirmwareNxosDescriptorRequest) (*FirmwareNxosDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareNxosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareNxosDescriptor")
@@ -21841,16 +21748,16 @@ func (r ApiPatchFirmwarePcieDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwarePcieDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwarePcieDescriptorRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwarePcieDescriptorExecute(r)
 }
 
 /*
 PatchFirmwarePcieDescriptor Update a 'firmware.PcieDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwarePcieDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwarePcieDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwarePcieDescriptor(ctx context.Context, moid string) ApiPatchFirmwarePcieDescriptorRequest {
 	return ApiPatchFirmwarePcieDescriptorRequest{
@@ -21861,14 +21768,13 @@ func (a *FirmwareApiService) PatchFirmwarePcieDescriptor(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwarePcieDescriptorExecute(r ApiPatchFirmwarePcieDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwarePcieDescriptor
+func (a *FirmwareApiService) PatchFirmwarePcieDescriptorExecute(r ApiPatchFirmwarePcieDescriptorRequest) (*FirmwarePcieDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwarePcieDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwarePcieDescriptor")
@@ -22024,9 +21930,9 @@ func (r ApiPatchFirmwarePolicyRequest) Execute() (*FirmwarePolicy, *http.Respons
 /*
 PatchFirmwarePolicy Update a 'firmware.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwarePolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwarePolicyRequest
 */
 func (a *FirmwareApiService) PatchFirmwarePolicy(ctx context.Context, moid string) ApiPatchFirmwarePolicyRequest {
 	return ApiPatchFirmwarePolicyRequest{
@@ -22037,8 +21943,7 @@ func (a *FirmwareApiService) PatchFirmwarePolicy(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//
-//	@return FirmwarePolicy
+//  @return FirmwarePolicy
 func (a *FirmwareApiService) PatchFirmwarePolicyExecute(r ApiPatchFirmwarePolicyRequest) (*FirmwarePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22193,16 +22098,16 @@ func (r ApiPatchFirmwarePsuDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwarePsuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwarePsuDescriptorRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwarePsuDescriptorExecute(r)
 }
 
 /*
 PatchFirmwarePsuDescriptor Update a 'firmware.PsuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwarePsuDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwarePsuDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwarePsuDescriptor(ctx context.Context, moid string) ApiPatchFirmwarePsuDescriptorRequest {
 	return ApiPatchFirmwarePsuDescriptorRequest{
@@ -22213,14 +22118,13 @@ func (a *FirmwareApiService) PatchFirmwarePsuDescriptor(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwarePsuDescriptorExecute(r ApiPatchFirmwarePsuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwarePsuDescriptor
+func (a *FirmwareApiService) PatchFirmwarePsuDescriptorExecute(r ApiPatchFirmwarePsuDescriptorRequest) (*FirmwarePsuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwarePsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwarePsuDescriptor")
@@ -22376,9 +22280,9 @@ func (r ApiPatchFirmwareRunningFirmwareRequest) Execute() (*FirmwareRunningFirmw
 /*
 PatchFirmwareRunningFirmware Update a 'firmware.RunningFirmware' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareRunningFirmwareRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareRunningFirmwareRequest
 */
 func (a *FirmwareApiService) PatchFirmwareRunningFirmware(ctx context.Context, moid string) ApiPatchFirmwareRunningFirmwareRequest {
 	return ApiPatchFirmwareRunningFirmwareRequest{
@@ -22389,8 +22293,7 @@ func (a *FirmwareApiService) PatchFirmwareRunningFirmware(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return FirmwareRunningFirmware
+//  @return FirmwareRunningFirmware
 func (a *FirmwareApiService) PatchFirmwareRunningFirmwareExecute(r ApiPatchFirmwareRunningFirmwareRequest) (*FirmwareRunningFirmware, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22545,16 +22448,16 @@ func (r ApiPatchFirmwareSasExpanderDescriptorRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareSasExpanderDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareSasExpanderDescriptor Update a 'firmware.SasExpanderDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareSasExpanderDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareSasExpanderDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptor(ctx context.Context, moid string) ApiPatchFirmwareSasExpanderDescriptorRequest {
 	return ApiPatchFirmwareSasExpanderDescriptorRequest{
@@ -22565,14 +22468,13 @@ func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptor(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptorExecute(r ApiPatchFirmwareSasExpanderDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareSasExpanderDescriptor
+func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptorExecute(r ApiPatchFirmwareSasExpanderDescriptorRequest) (*FirmwareSasExpanderDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareSasExpanderDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareSasExpanderDescriptor")
@@ -22728,9 +22630,9 @@ func (r ApiPatchFirmwareServerConfigurationUtilityDistributableRequest) Execute(
 /*
 PatchFirmwareServerConfigurationUtilityDistributable Update a 'firmware.ServerConfigurationUtilityDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareServerConfigurationUtilityDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareServerConfigurationUtilityDistributableRequest
 */
 func (a *FirmwareApiService) PatchFirmwareServerConfigurationUtilityDistributable(ctx context.Context, moid string) ApiPatchFirmwareServerConfigurationUtilityDistributableRequest {
 	return ApiPatchFirmwareServerConfigurationUtilityDistributableRequest{
@@ -22741,8 +22643,7 @@ func (a *FirmwareApiService) PatchFirmwareServerConfigurationUtilityDistributabl
 }
 
 // Execute executes the request
-//
-//	@return FirmwareServerConfigurationUtilityDistributable
+//  @return FirmwareServerConfigurationUtilityDistributable
 func (a *FirmwareApiService) PatchFirmwareServerConfigurationUtilityDistributableExecute(r ApiPatchFirmwareServerConfigurationUtilityDistributableRequest) (*FirmwareServerConfigurationUtilityDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -22897,16 +22798,16 @@ func (r ApiPatchFirmwareStorageControllerDescriptorRequest) IfMatch(ifMatch stri
 	return r
 }
 
-func (r ApiPatchFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiPatchFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
 	return r.ApiService.PatchFirmwareStorageControllerDescriptorExecute(r)
 }
 
 /*
 PatchFirmwareStorageControllerDescriptor Update a 'firmware.StorageControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareStorageControllerDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareStorageControllerDescriptorRequest
 */
 func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptor(ctx context.Context, moid string) ApiPatchFirmwareStorageControllerDescriptorRequest {
 	return ApiPatchFirmwareStorageControllerDescriptorRequest{
@@ -22917,14 +22818,13 @@ func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptor(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptorExecute(r ApiPatchFirmwareStorageControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareStorageControllerDescriptor
+func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptorExecute(r ApiPatchFirmwareStorageControllerDescriptorRequest) (*FirmwareStorageControllerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareStorageControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareStorageControllerDescriptor")
@@ -23080,9 +22980,9 @@ func (r ApiPatchFirmwareUnsupportedVersionUpgradeRequest) Execute() (*FirmwareUn
 /*
 PatchFirmwareUnsupportedVersionUpgrade Update a 'firmware.UnsupportedVersionUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareUnsupportedVersionUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareUnsupportedVersionUpgradeRequest
 */
 func (a *FirmwareApiService) PatchFirmwareUnsupportedVersionUpgrade(ctx context.Context, moid string) ApiPatchFirmwareUnsupportedVersionUpgradeRequest {
 	return ApiPatchFirmwareUnsupportedVersionUpgradeRequest{
@@ -23093,8 +22993,7 @@ func (a *FirmwareApiService) PatchFirmwareUnsupportedVersionUpgrade(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUnsupportedVersionUpgrade
+//  @return FirmwareUnsupportedVersionUpgrade
 func (a *FirmwareApiService) PatchFirmwareUnsupportedVersionUpgradeExecute(r ApiPatchFirmwareUnsupportedVersionUpgradeRequest) (*FirmwareUnsupportedVersionUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -23256,9 +23155,9 @@ func (r ApiPatchFirmwareUpgradeRequest) Execute() (*FirmwareUpgrade, *http.Respo
 /*
 PatchFirmwareUpgrade Update a 'firmware.Upgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFirmwareUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFirmwareUpgradeRequest
 */
 func (a *FirmwareApiService) PatchFirmwareUpgrade(ctx context.Context, moid string) ApiPatchFirmwareUpgradeRequest {
 	return ApiPatchFirmwareUpgradeRequest{
@@ -23269,8 +23168,7 @@ func (a *FirmwareApiService) PatchFirmwareUpgrade(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUpgrade
+//  @return FirmwareUpgrade
 func (a *FirmwareApiService) PatchFirmwareUpgradeExecute(r ApiPatchFirmwareUpgradeRequest) (*FirmwareUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -23425,16 +23323,16 @@ func (r ApiUpdateFirmwareBiosDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareBiosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareBiosDescriptorRequest) Execute() (*FirmwareBiosDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareBiosDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareBiosDescriptor Update a 'firmware.BiosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareBiosDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareBiosDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareBiosDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareBiosDescriptorRequest {
 	return ApiUpdateFirmwareBiosDescriptorRequest{
@@ -23445,14 +23343,13 @@ func (a *FirmwareApiService) UpdateFirmwareBiosDescriptor(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareBiosDescriptorExecute(r ApiUpdateFirmwareBiosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareBiosDescriptor
+func (a *FirmwareApiService) UpdateFirmwareBiosDescriptorExecute(r ApiUpdateFirmwareBiosDescriptorRequest) (*FirmwareBiosDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareBiosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareBiosDescriptor")
@@ -23601,16 +23498,16 @@ func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) IfMatch(ifMatch strin
 	return r
 }
 
-func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) Execute() (*FirmwareBoardControllerDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareBoardControllerDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareBoardControllerDescriptor Update a 'firmware.BoardControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareBoardControllerDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareBoardControllerDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareBoardControllerDescriptorRequest {
 	return ApiUpdateFirmwareBoardControllerDescriptorRequest{
@@ -23621,14 +23518,13 @@ func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptor(ctx context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptorExecute(r ApiUpdateFirmwareBoardControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareBoardControllerDescriptor
+func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptorExecute(r ApiUpdateFirmwareBoardControllerDescriptorRequest) (*FirmwareBoardControllerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareBoardControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareBoardControllerDescriptor")
@@ -23777,16 +23673,16 @@ func (r ApiUpdateFirmwareCimcDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareCimcDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareCimcDescriptorRequest) Execute() (*FirmwareCimcDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareCimcDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareCimcDescriptor Update a 'firmware.CimcDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareCimcDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareCimcDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareCimcDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareCimcDescriptorRequest {
 	return ApiUpdateFirmwareCimcDescriptorRequest{
@@ -23797,14 +23693,13 @@ func (a *FirmwareApiService) UpdateFirmwareCimcDescriptor(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareCimcDescriptorExecute(r ApiUpdateFirmwareCimcDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareCimcDescriptor
+func (a *FirmwareApiService) UpdateFirmwareCimcDescriptorExecute(r ApiUpdateFirmwareCimcDescriptorRequest) (*FirmwareCimcDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareCimcDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareCimcDescriptor")
@@ -23953,16 +23848,16 @@ func (r ApiUpdateFirmwareDimmDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareDimmDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareDimmDescriptorRequest) Execute() (*FirmwareDimmDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareDimmDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareDimmDescriptor Update a 'firmware.DimmDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareDimmDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareDimmDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareDimmDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareDimmDescriptorRequest {
 	return ApiUpdateFirmwareDimmDescriptorRequest{
@@ -23973,14 +23868,13 @@ func (a *FirmwareApiService) UpdateFirmwareDimmDescriptor(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareDimmDescriptorExecute(r ApiUpdateFirmwareDimmDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareDimmDescriptor
+func (a *FirmwareApiService) UpdateFirmwareDimmDescriptorExecute(r ApiUpdateFirmwareDimmDescriptorRequest) (*FirmwareDimmDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareDimmDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareDimmDescriptor")
@@ -24136,9 +24030,9 @@ func (r ApiUpdateFirmwareDistributableRequest) Execute() (*FirmwareDistributable
 /*
 UpdateFirmwareDistributable Update a 'firmware.Distributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareDistributableRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareDistributable(ctx context.Context, moid string) ApiUpdateFirmwareDistributableRequest {
 	return ApiUpdateFirmwareDistributableRequest{
@@ -24149,8 +24043,7 @@ func (a *FirmwareApiService) UpdateFirmwareDistributable(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDistributable
+//  @return FirmwareDistributable
 func (a *FirmwareApiService) UpdateFirmwareDistributableExecute(r ApiUpdateFirmwareDistributableRequest) (*FirmwareDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24305,16 +24198,16 @@ func (r ApiUpdateFirmwareDriveDescriptorRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateFirmwareDriveDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareDriveDescriptorRequest) Execute() (*FirmwareDriveDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareDriveDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareDriveDescriptor Update a 'firmware.DriveDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareDriveDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareDriveDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareDriveDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareDriveDescriptorRequest {
 	return ApiUpdateFirmwareDriveDescriptorRequest{
@@ -24325,14 +24218,13 @@ func (a *FirmwareApiService) UpdateFirmwareDriveDescriptor(ctx context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareDriveDescriptorExecute(r ApiUpdateFirmwareDriveDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareDriveDescriptor
+func (a *FirmwareApiService) UpdateFirmwareDriveDescriptorExecute(r ApiUpdateFirmwareDriveDescriptorRequest) (*FirmwareDriveDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareDriveDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareDriveDescriptor")
@@ -24488,9 +24380,9 @@ func (r ApiUpdateFirmwareDriverDistributableRequest) Execute() (*FirmwareDriverD
 /*
 UpdateFirmwareDriverDistributable Update a 'firmware.DriverDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareDriverDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareDriverDistributableRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareDriverDistributable(ctx context.Context, moid string) ApiUpdateFirmwareDriverDistributableRequest {
 	return ApiUpdateFirmwareDriverDistributableRequest{
@@ -24501,8 +24393,7 @@ func (a *FirmwareApiService) UpdateFirmwareDriverDistributable(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return FirmwareDriverDistributable
+//  @return FirmwareDriverDistributable
 func (a *FirmwareApiService) UpdateFirmwareDriverDistributableExecute(r ApiUpdateFirmwareDriverDistributableRequest) (*FirmwareDriverDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -24657,16 +24548,16 @@ func (r ApiUpdateFirmwareGpuDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwareGpuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareGpuDescriptorRequest) Execute() (*FirmwareGpuDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareGpuDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareGpuDescriptor Update a 'firmware.GpuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareGpuDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareGpuDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareGpuDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareGpuDescriptorRequest {
 	return ApiUpdateFirmwareGpuDescriptorRequest{
@@ -24677,14 +24568,13 @@ func (a *FirmwareApiService) UpdateFirmwareGpuDescriptor(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareGpuDescriptorExecute(r ApiUpdateFirmwareGpuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareGpuDescriptor
+func (a *FirmwareApiService) UpdateFirmwareGpuDescriptorExecute(r ApiUpdateFirmwareGpuDescriptorRequest) (*FirmwareGpuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareGpuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareGpuDescriptor")
@@ -24833,16 +24723,16 @@ func (r ApiUpdateFirmwareHbaDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwareHbaDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareHbaDescriptorRequest) Execute() (*FirmwareHbaDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareHbaDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareHbaDescriptor Update a 'firmware.HbaDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareHbaDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareHbaDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareHbaDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareHbaDescriptorRequest {
 	return ApiUpdateFirmwareHbaDescriptorRequest{
@@ -24853,14 +24743,13 @@ func (a *FirmwareApiService) UpdateFirmwareHbaDescriptor(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareHbaDescriptorExecute(r ApiUpdateFirmwareHbaDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareHbaDescriptor
+func (a *FirmwareApiService) UpdateFirmwareHbaDescriptorExecute(r ApiUpdateFirmwareHbaDescriptorRequest) (*FirmwareHbaDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareHbaDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareHbaDescriptor")
@@ -25009,16 +24898,16 @@ func (r ApiUpdateFirmwareIomDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwareIomDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareIomDescriptorRequest) Execute() (*FirmwareIomDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareIomDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareIomDescriptor Update a 'firmware.IomDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareIomDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareIomDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareIomDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareIomDescriptorRequest {
 	return ApiUpdateFirmwareIomDescriptorRequest{
@@ -25029,14 +24918,13 @@ func (a *FirmwareApiService) UpdateFirmwareIomDescriptor(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareIomDescriptorExecute(r ApiUpdateFirmwareIomDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareIomDescriptor
+func (a *FirmwareApiService) UpdateFirmwareIomDescriptorExecute(r ApiUpdateFirmwareIomDescriptorRequest) (*FirmwareIomDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareIomDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareIomDescriptor")
@@ -25185,16 +25073,16 @@ func (r ApiUpdateFirmwareMswitchDescriptorRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateFirmwareMswitchDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareMswitchDescriptorRequest) Execute() (*FirmwareMswitchDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareMswitchDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareMswitchDescriptor Update a 'firmware.MswitchDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareMswitchDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareMswitchDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareMswitchDescriptorRequest {
 	return ApiUpdateFirmwareMswitchDescriptorRequest{
@@ -25205,14 +25093,13 @@ func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptor(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptorExecute(r ApiUpdateFirmwareMswitchDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareMswitchDescriptor
+func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptorExecute(r ApiUpdateFirmwareMswitchDescriptorRequest) (*FirmwareMswitchDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareMswitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareMswitchDescriptor")
@@ -25361,16 +25248,16 @@ func (r ApiUpdateFirmwareNxosDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareNxosDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareNxosDescriptorRequest) Execute() (*FirmwareNxosDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareNxosDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareNxosDescriptor Update a 'firmware.NxosDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareNxosDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareNxosDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareNxosDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareNxosDescriptorRequest {
 	return ApiUpdateFirmwareNxosDescriptorRequest{
@@ -25381,14 +25268,13 @@ func (a *FirmwareApiService) UpdateFirmwareNxosDescriptor(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareNxosDescriptorExecute(r ApiUpdateFirmwareNxosDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareNxosDescriptor
+func (a *FirmwareApiService) UpdateFirmwareNxosDescriptorExecute(r ApiUpdateFirmwareNxosDescriptorRequest) (*FirmwareNxosDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareNxosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareNxosDescriptor")
@@ -25537,16 +25423,16 @@ func (r ApiUpdateFirmwarePcieDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwarePcieDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwarePcieDescriptorRequest) Execute() (*FirmwarePcieDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwarePcieDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwarePcieDescriptor Update a 'firmware.PcieDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwarePcieDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwarePcieDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwarePcieDescriptor(ctx context.Context, moid string) ApiUpdateFirmwarePcieDescriptorRequest {
 	return ApiUpdateFirmwarePcieDescriptorRequest{
@@ -25557,14 +25443,13 @@ func (a *FirmwareApiService) UpdateFirmwarePcieDescriptor(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwarePcieDescriptorExecute(r ApiUpdateFirmwarePcieDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwarePcieDescriptor
+func (a *FirmwareApiService) UpdateFirmwarePcieDescriptorExecute(r ApiUpdateFirmwarePcieDescriptorRequest) (*FirmwarePcieDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwarePcieDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwarePcieDescriptor")
@@ -25720,9 +25605,9 @@ func (r ApiUpdateFirmwarePolicyRequest) Execute() (*FirmwarePolicy, *http.Respon
 /*
 UpdateFirmwarePolicy Update a 'firmware.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwarePolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwarePolicyRequest
 */
 func (a *FirmwareApiService) UpdateFirmwarePolicy(ctx context.Context, moid string) ApiUpdateFirmwarePolicyRequest {
 	return ApiUpdateFirmwarePolicyRequest{
@@ -25733,8 +25618,7 @@ func (a *FirmwareApiService) UpdateFirmwarePolicy(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//
-//	@return FirmwarePolicy
+//  @return FirmwarePolicy
 func (a *FirmwareApiService) UpdateFirmwarePolicyExecute(r ApiUpdateFirmwarePolicyRequest) (*FirmwarePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -25889,16 +25773,16 @@ func (r ApiUpdateFirmwarePsuDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwarePsuDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwarePsuDescriptorRequest) Execute() (*FirmwarePsuDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwarePsuDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwarePsuDescriptor Update a 'firmware.PsuDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwarePsuDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwarePsuDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwarePsuDescriptor(ctx context.Context, moid string) ApiUpdateFirmwarePsuDescriptorRequest {
 	return ApiUpdateFirmwarePsuDescriptorRequest{
@@ -25909,14 +25793,13 @@ func (a *FirmwareApiService) UpdateFirmwarePsuDescriptor(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwarePsuDescriptorExecute(r ApiUpdateFirmwarePsuDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwarePsuDescriptor
+func (a *FirmwareApiService) UpdateFirmwarePsuDescriptorExecute(r ApiUpdateFirmwarePsuDescriptorRequest) (*FirmwarePsuDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwarePsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwarePsuDescriptor")
@@ -26072,9 +25955,9 @@ func (r ApiUpdateFirmwareRunningFirmwareRequest) Execute() (*FirmwareRunningFirm
 /*
 UpdateFirmwareRunningFirmware Update a 'firmware.RunningFirmware' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareRunningFirmwareRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareRunningFirmwareRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareRunningFirmware(ctx context.Context, moid string) ApiUpdateFirmwareRunningFirmwareRequest {
 	return ApiUpdateFirmwareRunningFirmwareRequest{
@@ -26085,8 +25968,7 @@ func (a *FirmwareApiService) UpdateFirmwareRunningFirmware(ctx context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return FirmwareRunningFirmware
+//  @return FirmwareRunningFirmware
 func (a *FirmwareApiService) UpdateFirmwareRunningFirmwareExecute(r ApiUpdateFirmwareRunningFirmwareRequest) (*FirmwareRunningFirmware, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -26241,16 +26123,16 @@ func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) Execute() (*FirmwareSasExpanderDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareSasExpanderDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareSasExpanderDescriptor Update a 'firmware.SasExpanderDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareSasExpanderDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareSasExpanderDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareSasExpanderDescriptorRequest {
 	return ApiUpdateFirmwareSasExpanderDescriptorRequest{
@@ -26261,14 +26143,13 @@ func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptor(ctx context.Con
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptorExecute(r ApiUpdateFirmwareSasExpanderDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareSasExpanderDescriptor
+func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptorExecute(r ApiUpdateFirmwareSasExpanderDescriptorRequest) (*FirmwareSasExpanderDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareSasExpanderDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareSasExpanderDescriptor")
@@ -26424,9 +26305,9 @@ func (r ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest) Execute
 /*
 UpdateFirmwareServerConfigurationUtilityDistributable Update a 'firmware.ServerConfigurationUtilityDistributable' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareServerConfigurationUtilityDistributable(ctx context.Context, moid string) ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest {
 	return ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest{
@@ -26437,8 +26318,7 @@ func (a *FirmwareApiService) UpdateFirmwareServerConfigurationUtilityDistributab
 }
 
 // Execute executes the request
-//
-//	@return FirmwareServerConfigurationUtilityDistributable
+//  @return FirmwareServerConfigurationUtilityDistributable
 func (a *FirmwareApiService) UpdateFirmwareServerConfigurationUtilityDistributableExecute(r ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest) (*FirmwareServerConfigurationUtilityDistributable, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -26593,16 +26473,16 @@ func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) IfMatch(ifMatch str
 	return r
 }
 
-func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareComponentDescriptor, *http.Response, error) {
+func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) Execute() (*FirmwareStorageControllerDescriptor, *http.Response, error) {
 	return r.ApiService.UpdateFirmwareStorageControllerDescriptorExecute(r)
 }
 
 /*
 UpdateFirmwareStorageControllerDescriptor Update a 'firmware.StorageControllerDescriptor' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareStorageControllerDescriptorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareStorageControllerDescriptorRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptor(ctx context.Context, moid string) ApiUpdateFirmwareStorageControllerDescriptorRequest {
 	return ApiUpdateFirmwareStorageControllerDescriptorRequest{
@@ -26613,14 +26493,13 @@ func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptor(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return FirmwareComponentDescriptor
-func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptorExecute(r ApiUpdateFirmwareStorageControllerDescriptorRequest) (*FirmwareComponentDescriptor, *http.Response, error) {
+//  @return FirmwareStorageControllerDescriptor
+func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptorExecute(r ApiUpdateFirmwareStorageControllerDescriptorRequest) (*FirmwareStorageControllerDescriptor, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FirmwareComponentDescriptor
+		localVarReturnValue *FirmwareStorageControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareStorageControllerDescriptor")
@@ -26776,9 +26655,9 @@ func (r ApiUpdateFirmwareUnsupportedVersionUpgradeRequest) Execute() (*FirmwareU
 /*
 UpdateFirmwareUnsupportedVersionUpgrade Update a 'firmware.UnsupportedVersionUpgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareUnsupportedVersionUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareUnsupportedVersionUpgradeRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareUnsupportedVersionUpgrade(ctx context.Context, moid string) ApiUpdateFirmwareUnsupportedVersionUpgradeRequest {
 	return ApiUpdateFirmwareUnsupportedVersionUpgradeRequest{
@@ -26789,8 +26668,7 @@ func (a *FirmwareApiService) UpdateFirmwareUnsupportedVersionUpgrade(ctx context
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUnsupportedVersionUpgrade
+//  @return FirmwareUnsupportedVersionUpgrade
 func (a *FirmwareApiService) UpdateFirmwareUnsupportedVersionUpgradeExecute(r ApiUpdateFirmwareUnsupportedVersionUpgradeRequest) (*FirmwareUnsupportedVersionUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -26952,9 +26830,9 @@ func (r ApiUpdateFirmwareUpgradeRequest) Execute() (*FirmwareUpgrade, *http.Resp
 /*
 UpdateFirmwareUpgrade Update a 'firmware.Upgrade' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFirmwareUpgradeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFirmwareUpgradeRequest
 */
 func (a *FirmwareApiService) UpdateFirmwareUpgrade(ctx context.Context, moid string) ApiUpdateFirmwareUpgradeRequest {
 	return ApiUpdateFirmwareUpgradeRequest{
@@ -26965,8 +26843,7 @@ func (a *FirmwareApiService) UpdateFirmwareUpgrade(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//
-//	@return FirmwareUpgrade
+//  @return FirmwareUpgrade
 func (a *FirmwareApiService) UpdateFirmwareUpgradeExecute(r ApiUpdateFirmwareUpgradeRequest) (*FirmwareUpgrade, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

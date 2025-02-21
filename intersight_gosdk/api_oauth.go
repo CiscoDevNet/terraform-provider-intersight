@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateOauthAuthorizationRequest) Execute() (*OauthAuthorization, *htt
 /*
 CreateOauthAuthorization Create a 'oauth.Authorization' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateOauthAuthorizationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateOauthAuthorizationRequest
 */
 func (a *OauthApiService) CreateOauthAuthorization(ctx context.Context) ApiCreateOauthAuthorizationRequest {
 	return ApiCreateOauthAuthorizationRequest{
@@ -67,8 +67,7 @@ func (a *OauthApiService) CreateOauthAuthorization(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//
-//	@return OauthAuthorization
+//  @return OauthAuthorization
 func (a *OauthApiService) CreateOauthAuthorizationExecute(r ApiCreateOauthAuthorizationRequest) (*OauthAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -218,9 +217,9 @@ func (r ApiDeleteOauthAccessTokenRequest) Execute() (*http.Response, error) {
 /*
 DeleteOauthAccessToken Delete a 'oauth.AccessToken' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteOauthAccessTokenRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteOauthAccessTokenRequest
 */
 func (a *OauthApiService) DeleteOauthAccessToken(ctx context.Context, moid string) ApiDeleteOauthAccessTokenRequest {
 	return ApiDeleteOauthAccessTokenRequest{
@@ -360,9 +359,9 @@ func (r ApiGetOauthAccessTokenByMoidRequest) Execute() (*OauthAccessToken, *http
 /*
 GetOauthAccessTokenByMoid Read a 'oauth.AccessToken' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetOauthAccessTokenByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetOauthAccessTokenByMoidRequest
 */
 func (a *OauthApiService) GetOauthAccessTokenByMoid(ctx context.Context, moid string) ApiGetOauthAccessTokenByMoidRequest {
 	return ApiGetOauthAccessTokenByMoidRequest{
@@ -373,8 +372,7 @@ func (a *OauthApiService) GetOauthAccessTokenByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//
-//	@return OauthAccessToken
+//  @return OauthAccessToken
 func (a *OauthApiService) GetOauthAccessTokenByMoidExecute(r ApiGetOauthAccessTokenByMoidRequest) (*OauthAccessToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -590,8 +588,8 @@ func (r ApiGetOauthAccessTokenListRequest) Execute() (*OauthAccessTokenResponse,
 /*
 GetOauthAccessTokenList Read a 'oauth.AccessToken' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetOauthAccessTokenListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetOauthAccessTokenListRequest
 */
 func (a *OauthApiService) GetOauthAccessTokenList(ctx context.Context) ApiGetOauthAccessTokenListRequest {
 	return ApiGetOauthAccessTokenListRequest{
@@ -601,8 +599,7 @@ func (a *OauthApiService) GetOauthAccessTokenList(ctx context.Context) ApiGetOau
 }
 
 // Execute executes the request
-//
-//	@return OauthAccessTokenResponse
+//  @return OauthAccessTokenResponse
 func (a *OauthApiService) GetOauthAccessTokenListExecute(r ApiGetOauthAccessTokenListRequest) (*OauthAccessTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -789,9 +786,9 @@ func (r ApiGetOauthAuthorizationByMoidRequest) Execute() (*OauthAuthorization, *
 /*
 GetOauthAuthorizationByMoid Read a 'oauth.Authorization' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetOauthAuthorizationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetOauthAuthorizationByMoidRequest
 */
 func (a *OauthApiService) GetOauthAuthorizationByMoid(ctx context.Context, moid string) ApiGetOauthAuthorizationByMoidRequest {
 	return ApiGetOauthAuthorizationByMoidRequest{
@@ -802,8 +799,7 @@ func (a *OauthApiService) GetOauthAuthorizationByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return OauthAuthorization
+//  @return OauthAuthorization
 func (a *OauthApiService) GetOauthAuthorizationByMoidExecute(r ApiGetOauthAuthorizationByMoidRequest) (*OauthAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1019,8 +1015,8 @@ func (r ApiGetOauthAuthorizationListRequest) Execute() (*OauthAuthorizationRespo
 /*
 GetOauthAuthorizationList Read a 'oauth.Authorization' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetOauthAuthorizationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetOauthAuthorizationListRequest
 */
 func (a *OauthApiService) GetOauthAuthorizationList(ctx context.Context) ApiGetOauthAuthorizationListRequest {
 	return ApiGetOauthAuthorizationListRequest{
@@ -1030,8 +1026,7 @@ func (a *OauthApiService) GetOauthAuthorizationList(ctx context.Context) ApiGetO
 }
 
 // Execute executes the request
-//
-//	@return OauthAuthorizationResponse
+//  @return OauthAuthorizationResponse
 func (a *OauthApiService) GetOauthAuthorizationListExecute(r ApiGetOauthAuthorizationListRequest) (*OauthAuthorizationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1232,9 +1227,9 @@ func (r ApiPatchOauthAuthorizationRequest) Execute() (*OauthAuthorization, *http
 /*
 PatchOauthAuthorization Update a 'oauth.Authorization' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchOauthAuthorizationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchOauthAuthorizationRequest
 */
 func (a *OauthApiService) PatchOauthAuthorization(ctx context.Context, moid string) ApiPatchOauthAuthorizationRequest {
 	return ApiPatchOauthAuthorizationRequest{
@@ -1245,8 +1240,7 @@ func (a *OauthApiService) PatchOauthAuthorization(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//
-//	@return OauthAuthorization
+//  @return OauthAuthorization
 func (a *OauthApiService) PatchOauthAuthorizationExecute(r ApiPatchOauthAuthorizationRequest) (*OauthAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1408,9 +1402,9 @@ func (r ApiUpdateOauthAuthorizationRequest) Execute() (*OauthAuthorization, *htt
 /*
 UpdateOauthAuthorization Update a 'oauth.Authorization' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateOauthAuthorizationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateOauthAuthorizationRequest
 */
 func (a *OauthApiService) UpdateOauthAuthorization(ctx context.Context, moid string) ApiUpdateOauthAuthorizationRequest {
 	return ApiUpdateOauthAuthorizationRequest{
@@ -1421,8 +1415,7 @@ func (a *OauthApiService) UpdateOauthAuthorization(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//
-//	@return OauthAuthorization
+//  @return OauthAuthorization
 func (a *OauthApiService) UpdateOauthAuthorizationExecute(r ApiUpdateOauthAuthorizationRequest) (*OauthAuthorization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

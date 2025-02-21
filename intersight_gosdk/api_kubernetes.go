@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateKubernetesAciCniApicRequest) Execute() (*KubernetesAciCniApic, 
 /*
 CreateKubernetesAciCniApic Create a 'kubernetes.AciCniApic' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesAciCniApicRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesAciCniApicRequest
 
 Deprecated
 */
@@ -69,9 +69,7 @@ func (a *KubernetesApiService) CreateKubernetesAciCniApic(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniApic
-//
+//  @return KubernetesAciCniApic
 // Deprecated
 func (a *KubernetesApiService) CreateKubernetesAciCniApicExecute(r ApiCreateKubernetesAciCniApicRequest) (*KubernetesAciCniApic, *http.Response, error) {
 	var (
@@ -242,8 +240,8 @@ func (r ApiCreateKubernetesAciCniProfileRequest) Execute() (*KubernetesAciCniPro
 /*
 CreateKubernetesAciCniProfile Create a 'kubernetes.AciCniProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesAciCniProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesAciCniProfileRequest
 
 Deprecated
 */
@@ -255,9 +253,7 @@ func (a *KubernetesApiService) CreateKubernetesAciCniProfile(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniProfile
-//
+//  @return KubernetesAciCniProfile
 // Deprecated
 func (a *KubernetesApiService) CreateKubernetesAciCniProfileExecute(r ApiCreateKubernetesAciCniProfileRequest) (*KubernetesAciCniProfile, *http.Response, error) {
 	var (
@@ -428,8 +424,8 @@ func (r ApiCreateKubernetesAciCniTenantClusterAllocationRequest) Execute() (*Kub
 /*
 CreateKubernetesAciCniTenantClusterAllocation Create a 'kubernetes.AciCniTenantClusterAllocation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesAciCniTenantClusterAllocationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesAciCniTenantClusterAllocationRequest
 
 Deprecated
 */
@@ -441,9 +437,7 @@ func (a *KubernetesApiService) CreateKubernetesAciCniTenantClusterAllocation(ctx
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniTenantClusterAllocation
-//
+//  @return KubernetesAciCniTenantClusterAllocation
 // Deprecated
 func (a *KubernetesApiService) CreateKubernetesAciCniTenantClusterAllocationExecute(r ApiCreateKubernetesAciCniTenantClusterAllocationRequest) (*KubernetesAciCniTenantClusterAllocation, *http.Response, error) {
 	var (
@@ -614,8 +608,8 @@ func (r ApiCreateKubernetesAddonDefinitionRequest) Execute() (*KubernetesAddonDe
 /*
 CreateKubernetesAddonDefinition Create a 'kubernetes.AddonDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesAddonDefinitionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesAddonDefinitionRequest
 */
 func (a *KubernetesApiService) CreateKubernetesAddonDefinition(ctx context.Context) ApiCreateKubernetesAddonDefinitionRequest {
 	return ApiCreateKubernetesAddonDefinitionRequest{
@@ -625,8 +619,7 @@ func (a *KubernetesApiService) CreateKubernetesAddonDefinition(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonDefinition
+//  @return KubernetesAddonDefinition
 func (a *KubernetesApiService) CreateKubernetesAddonDefinitionExecute(r ApiCreateKubernetesAddonDefinitionRequest) (*KubernetesAddonDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -796,8 +789,8 @@ func (r ApiCreateKubernetesAddonPolicyRequest) Execute() (*KubernetesAddonPolicy
 /*
 CreateKubernetesAddonPolicy Create a 'kubernetes.AddonPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesAddonPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesAddonPolicyRequest
 */
 func (a *KubernetesApiService) CreateKubernetesAddonPolicy(ctx context.Context) ApiCreateKubernetesAddonPolicyRequest {
 	return ApiCreateKubernetesAddonPolicyRequest{
@@ -807,8 +800,7 @@ func (a *KubernetesApiService) CreateKubernetesAddonPolicy(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonPolicy
+//  @return KubernetesAddonPolicy
 func (a *KubernetesApiService) CreateKubernetesAddonPolicyExecute(r ApiCreateKubernetesAddonPolicyRequest) (*KubernetesAddonPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -978,8 +970,8 @@ func (r ApiCreateKubernetesAddonRepositoryRequest) Execute() (*KubernetesAddonRe
 /*
 CreateKubernetesAddonRepository Create a 'kubernetes.AddonRepository' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesAddonRepositoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesAddonRepositoryRequest
 */
 func (a *KubernetesApiService) CreateKubernetesAddonRepository(ctx context.Context) ApiCreateKubernetesAddonRepositoryRequest {
 	return ApiCreateKubernetesAddonRepositoryRequest{
@@ -989,8 +981,7 @@ func (a *KubernetesApiService) CreateKubernetesAddonRepository(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonRepository
+//  @return KubernetesAddonRepository
 func (a *KubernetesApiService) CreateKubernetesAddonRepositoryExecute(r ApiCreateKubernetesAddonRepositoryRequest) (*KubernetesAddonRepository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1160,8 +1151,8 @@ func (r ApiCreateKubernetesBaremetalNodeProfileRequest) Execute() (*KubernetesBa
 /*
 CreateKubernetesBaremetalNodeProfile Create a 'kubernetes.BaremetalNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesBaremetalNodeProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesBaremetalNodeProfileRequest
 
 Deprecated
 */
@@ -1173,9 +1164,7 @@ func (a *KubernetesApiService) CreateKubernetesBaremetalNodeProfile(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return KubernetesBaremetalNodeProfile
-//
+//  @return KubernetesBaremetalNodeProfile
 // Deprecated
 func (a *KubernetesApiService) CreateKubernetesBaremetalNodeProfileExecute(r ApiCreateKubernetesBaremetalNodeProfileRequest) (*KubernetesBaremetalNodeProfile, *http.Response, error) {
 	var (
@@ -1346,8 +1335,8 @@ func (r ApiCreateKubernetesClusterRequest) Execute() (*KubernetesCluster, *http.
 /*
 CreateKubernetesCluster Create a 'kubernetes.Cluster' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesClusterRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesClusterRequest
 */
 func (a *KubernetesApiService) CreateKubernetesCluster(ctx context.Context) ApiCreateKubernetesClusterRequest {
 	return ApiCreateKubernetesClusterRequest{
@@ -1357,8 +1346,7 @@ func (a *KubernetesApiService) CreateKubernetesCluster(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//
-//	@return KubernetesCluster
+//  @return KubernetesCluster
 func (a *KubernetesApiService) CreateKubernetesClusterExecute(r ApiCreateKubernetesClusterRequest) (*KubernetesCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1528,8 +1516,8 @@ func (r ApiCreateKubernetesClusterAddonProfileRequest) Execute() (*KubernetesClu
 /*
 CreateKubernetesClusterAddonProfile Create a 'kubernetes.ClusterAddonProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesClusterAddonProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesClusterAddonProfileRequest
 */
 func (a *KubernetesApiService) CreateKubernetesClusterAddonProfile(ctx context.Context) ApiCreateKubernetesClusterAddonProfileRequest {
 	return ApiCreateKubernetesClusterAddonProfileRequest{
@@ -1539,8 +1527,7 @@ func (a *KubernetesApiService) CreateKubernetesClusterAddonProfile(ctx context.C
 }
 
 // Execute executes the request
-//
-//	@return KubernetesClusterAddonProfile
+//  @return KubernetesClusterAddonProfile
 func (a *KubernetesApiService) CreateKubernetesClusterAddonProfileExecute(r ApiCreateKubernetesClusterAddonProfileRequest) (*KubernetesClusterAddonProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1710,8 +1697,8 @@ func (r ApiCreateKubernetesClusterProfileRequest) Execute() (*KubernetesClusterP
 /*
 CreateKubernetesClusterProfile Create a 'kubernetes.ClusterProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesClusterProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesClusterProfileRequest
 */
 func (a *KubernetesApiService) CreateKubernetesClusterProfile(ctx context.Context) ApiCreateKubernetesClusterProfileRequest {
 	return ApiCreateKubernetesClusterProfileRequest{
@@ -1721,8 +1708,7 @@ func (a *KubernetesApiService) CreateKubernetesClusterProfile(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesClusterProfile
+//  @return KubernetesClusterProfile
 func (a *KubernetesApiService) CreateKubernetesClusterProfileExecute(r ApiCreateKubernetesClusterProfileRequest) (*KubernetesClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1892,8 +1878,8 @@ func (r ApiCreateKubernetesContainerRuntimePolicyRequest) Execute() (*Kubernetes
 /*
 CreateKubernetesContainerRuntimePolicy Create a 'kubernetes.ContainerRuntimePolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesContainerRuntimePolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesContainerRuntimePolicyRequest
 */
 func (a *KubernetesApiService) CreateKubernetesContainerRuntimePolicy(ctx context.Context) ApiCreateKubernetesContainerRuntimePolicyRequest {
 	return ApiCreateKubernetesContainerRuntimePolicyRequest{
@@ -1903,8 +1889,7 @@ func (a *KubernetesApiService) CreateKubernetesContainerRuntimePolicy(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesContainerRuntimePolicy
+//  @return KubernetesContainerRuntimePolicy
 func (a *KubernetesApiService) CreateKubernetesContainerRuntimePolicyExecute(r ApiCreateKubernetesContainerRuntimePolicyRequest) (*KubernetesContainerRuntimePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2074,8 +2059,8 @@ func (r ApiCreateKubernetesHttpProxyPolicyRequest) Execute() (*KubernetesHttpPro
 /*
 CreateKubernetesHttpProxyPolicy Create a 'kubernetes.HttpProxyPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesHttpProxyPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesHttpProxyPolicyRequest
 */
 func (a *KubernetesApiService) CreateKubernetesHttpProxyPolicy(ctx context.Context) ApiCreateKubernetesHttpProxyPolicyRequest {
 	return ApiCreateKubernetesHttpProxyPolicyRequest{
@@ -2085,8 +2070,7 @@ func (a *KubernetesApiService) CreateKubernetesHttpProxyPolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesHttpProxyPolicy
+//  @return KubernetesHttpProxyPolicy
 func (a *KubernetesApiService) CreateKubernetesHttpProxyPolicyExecute(r ApiCreateKubernetesHttpProxyPolicyRequest) (*KubernetesHttpProxyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2256,8 +2240,8 @@ func (r ApiCreateKubernetesNetworkPolicyRequest) Execute() (*KubernetesNetworkPo
 /*
 CreateKubernetesNetworkPolicy Create a 'kubernetes.NetworkPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesNetworkPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesNetworkPolicyRequest
 */
 func (a *KubernetesApiService) CreateKubernetesNetworkPolicy(ctx context.Context) ApiCreateKubernetesNetworkPolicyRequest {
 	return ApiCreateKubernetesNetworkPolicyRequest{
@@ -2267,8 +2251,7 @@ func (a *KubernetesApiService) CreateKubernetesNetworkPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNetworkPolicy
+//  @return KubernetesNetworkPolicy
 func (a *KubernetesApiService) CreateKubernetesNetworkPolicyExecute(r ApiCreateKubernetesNetworkPolicyRequest) (*KubernetesNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2438,8 +2421,8 @@ func (r ApiCreateKubernetesNodeGroupProfileRequest) Execute() (*KubernetesNodeGr
 /*
 CreateKubernetesNodeGroupProfile Create a 'kubernetes.NodeGroupProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesNodeGroupProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesNodeGroupProfileRequest
 */
 func (a *KubernetesApiService) CreateKubernetesNodeGroupProfile(ctx context.Context) ApiCreateKubernetesNodeGroupProfileRequest {
 	return ApiCreateKubernetesNodeGroupProfileRequest{
@@ -2449,8 +2432,7 @@ func (a *KubernetesApiService) CreateKubernetesNodeGroupProfile(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNodeGroupProfile
+//  @return KubernetesNodeGroupProfile
 func (a *KubernetesApiService) CreateKubernetesNodeGroupProfileExecute(r ApiCreateKubernetesNodeGroupProfileRequest) (*KubernetesNodeGroupProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2620,8 +2602,8 @@ func (r ApiCreateKubernetesNvidiaGpuProductRequest) Execute() (*KubernetesNvidia
 /*
 CreateKubernetesNvidiaGpuProduct Create a 'kubernetes.NvidiaGpuProduct' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesNvidiaGpuProductRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesNvidiaGpuProductRequest
 */
 func (a *KubernetesApiService) CreateKubernetesNvidiaGpuProduct(ctx context.Context) ApiCreateKubernetesNvidiaGpuProductRequest {
 	return ApiCreateKubernetesNvidiaGpuProductRequest{
@@ -2631,8 +2613,7 @@ func (a *KubernetesApiService) CreateKubernetesNvidiaGpuProduct(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNvidiaGpuProduct
+//  @return KubernetesNvidiaGpuProduct
 func (a *KubernetesApiService) CreateKubernetesNvidiaGpuProductExecute(r ApiCreateKubernetesNvidiaGpuProductRequest) (*KubernetesNvidiaGpuProduct, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2802,8 +2783,8 @@ func (r ApiCreateKubernetesSysConfigPolicyRequest) Execute() (*KubernetesSysConf
 /*
 CreateKubernetesSysConfigPolicy Create a 'kubernetes.SysConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesSysConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesSysConfigPolicyRequest
 */
 func (a *KubernetesApiService) CreateKubernetesSysConfigPolicy(ctx context.Context) ApiCreateKubernetesSysConfigPolicyRequest {
 	return ApiCreateKubernetesSysConfigPolicyRequest{
@@ -2813,8 +2794,7 @@ func (a *KubernetesApiService) CreateKubernetesSysConfigPolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesSysConfigPolicy
+//  @return KubernetesSysConfigPolicy
 func (a *KubernetesApiService) CreateKubernetesSysConfigPolicyExecute(r ApiCreateKubernetesSysConfigPolicyRequest) (*KubernetesSysConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2984,8 +2964,8 @@ func (r ApiCreateKubernetesTrustedRegistriesPolicyRequest) Execute() (*Kubernete
 /*
 CreateKubernetesTrustedRegistriesPolicy Create a 'kubernetes.TrustedRegistriesPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesTrustedRegistriesPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesTrustedRegistriesPolicyRequest
 */
 func (a *KubernetesApiService) CreateKubernetesTrustedRegistriesPolicy(ctx context.Context) ApiCreateKubernetesTrustedRegistriesPolicyRequest {
 	return ApiCreateKubernetesTrustedRegistriesPolicyRequest{
@@ -2995,8 +2975,7 @@ func (a *KubernetesApiService) CreateKubernetesTrustedRegistriesPolicy(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesTrustedRegistriesPolicy
+//  @return KubernetesTrustedRegistriesPolicy
 func (a *KubernetesApiService) CreateKubernetesTrustedRegistriesPolicyExecute(r ApiCreateKubernetesTrustedRegistriesPolicyRequest) (*KubernetesTrustedRegistriesPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3166,8 +3145,8 @@ func (r ApiCreateKubernetesVersionRequest) Execute() (*KubernetesVersion, *http.
 /*
 CreateKubernetesVersion Create a 'kubernetes.Version' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesVersionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesVersionRequest
 */
 func (a *KubernetesApiService) CreateKubernetesVersion(ctx context.Context) ApiCreateKubernetesVersionRequest {
 	return ApiCreateKubernetesVersionRequest{
@@ -3177,8 +3156,7 @@ func (a *KubernetesApiService) CreateKubernetesVersion(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVersion
+//  @return KubernetesVersion
 func (a *KubernetesApiService) CreateKubernetesVersionExecute(r ApiCreateKubernetesVersionRequest) (*KubernetesVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3348,8 +3326,8 @@ func (r ApiCreateKubernetesVersionPolicyRequest) Execute() (*KubernetesVersionPo
 /*
 CreateKubernetesVersionPolicy Create a 'kubernetes.VersionPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesVersionPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesVersionPolicyRequest
 */
 func (a *KubernetesApiService) CreateKubernetesVersionPolicy(ctx context.Context) ApiCreateKubernetesVersionPolicyRequest {
 	return ApiCreateKubernetesVersionPolicyRequest{
@@ -3359,8 +3337,7 @@ func (a *KubernetesApiService) CreateKubernetesVersionPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVersionPolicy
+//  @return KubernetesVersionPolicy
 func (a *KubernetesApiService) CreateKubernetesVersionPolicyExecute(r ApiCreateKubernetesVersionPolicyRequest) (*KubernetesVersionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3530,8 +3507,8 @@ func (r ApiCreateKubernetesVirtualMachineInfraConfigPolicyRequest) Execute() (*K
 /*
 CreateKubernetesVirtualMachineInfraConfigPolicy Create a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesVirtualMachineInfraConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesVirtualMachineInfraConfigPolicyRequest
 */
 func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfraConfigPolicy(ctx context.Context) ApiCreateKubernetesVirtualMachineInfraConfigPolicyRequest {
 	return ApiCreateKubernetesVirtualMachineInfraConfigPolicyRequest{
@@ -3541,8 +3518,7 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfraConfigPolicy(c
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInfraConfigPolicy
+//  @return KubernetesVirtualMachineInfraConfigPolicy
 func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfraConfigPolicyExecute(r ApiCreateKubernetesVirtualMachineInfraConfigPolicyRequest) (*KubernetesVirtualMachineInfraConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3712,8 +3688,8 @@ func (r ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest) Execute(
 /*
 CreateKubernetesVirtualMachineInfrastructureProvider Create a 'kubernetes.VirtualMachineInfrastructureProvider' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest
 */
 func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfrastructureProvider(ctx context.Context) ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest {
 	return ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest{
@@ -3723,8 +3699,7 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfrastructureProvi
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInfrastructureProvider
+//  @return KubernetesVirtualMachineInfrastructureProvider
 func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfrastructureProviderExecute(r ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest) (*KubernetesVirtualMachineInfrastructureProvider, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3894,8 +3869,8 @@ func (r ApiCreateKubernetesVirtualMachineInstanceTypeRequest) Execute() (*Kubern
 /*
 CreateKubernetesVirtualMachineInstanceType Create a 'kubernetes.VirtualMachineInstanceType' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesVirtualMachineInstanceTypeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesVirtualMachineInstanceTypeRequest
 */
 func (a *KubernetesApiService) CreateKubernetesVirtualMachineInstanceType(ctx context.Context) ApiCreateKubernetesVirtualMachineInstanceTypeRequest {
 	return ApiCreateKubernetesVirtualMachineInstanceTypeRequest{
@@ -3905,8 +3880,7 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInstanceType(ctx co
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInstanceType
+//  @return KubernetesVirtualMachineInstanceType
 func (a *KubernetesApiService) CreateKubernetesVirtualMachineInstanceTypeExecute(r ApiCreateKubernetesVirtualMachineInstanceTypeRequest) (*KubernetesVirtualMachineInstanceType, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4076,8 +4050,8 @@ func (r ApiCreateKubernetesVirtualMachineNodeProfileRequest) Execute() (*Kuberne
 /*
 CreateKubernetesVirtualMachineNodeProfile Create a 'kubernetes.VirtualMachineNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateKubernetesVirtualMachineNodeProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateKubernetesVirtualMachineNodeProfileRequest
 */
 func (a *KubernetesApiService) CreateKubernetesVirtualMachineNodeProfile(ctx context.Context) ApiCreateKubernetesVirtualMachineNodeProfileRequest {
 	return ApiCreateKubernetesVirtualMachineNodeProfileRequest{
@@ -4087,8 +4061,7 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineNodeProfile(ctx con
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineNodeProfile
+//  @return KubernetesVirtualMachineNodeProfile
 func (a *KubernetesApiService) CreateKubernetesVirtualMachineNodeProfileExecute(r ApiCreateKubernetesVirtualMachineNodeProfileRequest) (*KubernetesVirtualMachineNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4238,9 +4211,9 @@ func (r ApiDeleteKubernetesAciCniApicRequest) Execute() (*http.Response, error) 
 /*
 DeleteKubernetesAciCniApic Delete a 'kubernetes.AciCniApic' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesAciCniApicRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesAciCniApicRequest
 
 Deprecated
 */
@@ -4383,9 +4356,9 @@ func (r ApiDeleteKubernetesAciCniProfileRequest) Execute() (*http.Response, erro
 /*
 DeleteKubernetesAciCniProfile Delete a 'kubernetes.AciCniProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesAciCniProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesAciCniProfileRequest
 
 Deprecated
 */
@@ -4528,9 +4501,9 @@ func (r ApiDeleteKubernetesAciCniTenantClusterAllocationRequest) Execute() (*htt
 /*
 DeleteKubernetesAciCniTenantClusterAllocation Delete a 'kubernetes.AciCniTenantClusterAllocation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesAciCniTenantClusterAllocationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesAciCniTenantClusterAllocationRequest
 
 Deprecated
 */
@@ -4673,9 +4646,9 @@ func (r ApiDeleteKubernetesAddonDefinitionRequest) Execute() (*http.Response, er
 /*
 DeleteKubernetesAddonDefinition Delete a 'kubernetes.AddonDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesAddonDefinitionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesAddonDefinitionRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesAddonDefinition(ctx context.Context, moid string) ApiDeleteKubernetesAddonDefinitionRequest {
 	return ApiDeleteKubernetesAddonDefinitionRequest{
@@ -4815,9 +4788,9 @@ func (r ApiDeleteKubernetesAddonPolicyRequest) Execute() (*http.Response, error)
 /*
 DeleteKubernetesAddonPolicy Delete a 'kubernetes.AddonPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesAddonPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesAddonPolicyRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesAddonPolicy(ctx context.Context, moid string) ApiDeleteKubernetesAddonPolicyRequest {
 	return ApiDeleteKubernetesAddonPolicyRequest{
@@ -4957,9 +4930,9 @@ func (r ApiDeleteKubernetesAddonRepositoryRequest) Execute() (*http.Response, er
 /*
 DeleteKubernetesAddonRepository Delete a 'kubernetes.AddonRepository' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesAddonRepositoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesAddonRepositoryRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesAddonRepository(ctx context.Context, moid string) ApiDeleteKubernetesAddonRepositoryRequest {
 	return ApiDeleteKubernetesAddonRepositoryRequest{
@@ -5099,9 +5072,9 @@ func (r ApiDeleteKubernetesBaremetalNodeProfileRequest) Execute() (*http.Respons
 /*
 DeleteKubernetesBaremetalNodeProfile Delete a 'kubernetes.BaremetalNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesBaremetalNodeProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesBaremetalNodeProfileRequest
 
 Deprecated
 */
@@ -5244,9 +5217,9 @@ func (r ApiDeleteKubernetesClusterRequest) Execute() (*http.Response, error) {
 /*
 DeleteKubernetesCluster Delete a 'kubernetes.Cluster' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesClusterRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesClusterRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesCluster(ctx context.Context, moid string) ApiDeleteKubernetesClusterRequest {
 	return ApiDeleteKubernetesClusterRequest{
@@ -5386,9 +5359,9 @@ func (r ApiDeleteKubernetesClusterAddonProfileRequest) Execute() (*http.Response
 /*
 DeleteKubernetesClusterAddonProfile Delete a 'kubernetes.ClusterAddonProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesClusterAddonProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesClusterAddonProfileRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesClusterAddonProfile(ctx context.Context, moid string) ApiDeleteKubernetesClusterAddonProfileRequest {
 	return ApiDeleteKubernetesClusterAddonProfileRequest{
@@ -5528,9 +5501,9 @@ func (r ApiDeleteKubernetesClusterProfileRequest) Execute() (*http.Response, err
 /*
 DeleteKubernetesClusterProfile Delete a 'kubernetes.ClusterProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesClusterProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesClusterProfileRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesClusterProfile(ctx context.Context, moid string) ApiDeleteKubernetesClusterProfileRequest {
 	return ApiDeleteKubernetesClusterProfileRequest{
@@ -5670,9 +5643,9 @@ func (r ApiDeleteKubernetesContainerRuntimePolicyRequest) Execute() (*http.Respo
 /*
 DeleteKubernetesContainerRuntimePolicy Delete a 'kubernetes.ContainerRuntimePolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesContainerRuntimePolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesContainerRuntimePolicyRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesContainerRuntimePolicy(ctx context.Context, moid string) ApiDeleteKubernetesContainerRuntimePolicyRequest {
 	return ApiDeleteKubernetesContainerRuntimePolicyRequest{
@@ -5812,9 +5785,9 @@ func (r ApiDeleteKubernetesDaemonSetRequest) Execute() (*http.Response, error) {
 /*
 DeleteKubernetesDaemonSet Delete a 'kubernetes.DaemonSet' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesDaemonSetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesDaemonSetRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesDaemonSet(ctx context.Context, moid string) ApiDeleteKubernetesDaemonSetRequest {
 	return ApiDeleteKubernetesDaemonSetRequest{
@@ -5954,9 +5927,9 @@ func (r ApiDeleteKubernetesDeploymentRequest) Execute() (*http.Response, error) 
 /*
 DeleteKubernetesDeployment Delete a 'kubernetes.Deployment' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesDeploymentRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesDeploymentRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesDeployment(ctx context.Context, moid string) ApiDeleteKubernetesDeploymentRequest {
 	return ApiDeleteKubernetesDeploymentRequest{
@@ -6096,9 +6069,9 @@ func (r ApiDeleteKubernetesHttpProxyPolicyRequest) Execute() (*http.Response, er
 /*
 DeleteKubernetesHttpProxyPolicy Delete a 'kubernetes.HttpProxyPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesHttpProxyPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesHttpProxyPolicyRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesHttpProxyPolicy(ctx context.Context, moid string) ApiDeleteKubernetesHttpProxyPolicyRequest {
 	return ApiDeleteKubernetesHttpProxyPolicyRequest{
@@ -6238,9 +6211,9 @@ func (r ApiDeleteKubernetesIngressRequest) Execute() (*http.Response, error) {
 /*
 DeleteKubernetesIngress Delete a 'kubernetes.Ingress' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesIngressRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesIngressRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesIngress(ctx context.Context, moid string) ApiDeleteKubernetesIngressRequest {
 	return ApiDeleteKubernetesIngressRequest{
@@ -6380,9 +6353,9 @@ func (r ApiDeleteKubernetesNetworkPolicyRequest) Execute() (*http.Response, erro
 /*
 DeleteKubernetesNetworkPolicy Delete a 'kubernetes.NetworkPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesNetworkPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesNetworkPolicyRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesNetworkPolicy(ctx context.Context, moid string) ApiDeleteKubernetesNetworkPolicyRequest {
 	return ApiDeleteKubernetesNetworkPolicyRequest{
@@ -6522,9 +6495,9 @@ func (r ApiDeleteKubernetesNodeRequest) Execute() (*http.Response, error) {
 /*
 DeleteKubernetesNode Delete a 'kubernetes.Node' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesNodeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesNodeRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesNode(ctx context.Context, moid string) ApiDeleteKubernetesNodeRequest {
 	return ApiDeleteKubernetesNodeRequest{
@@ -6664,9 +6637,9 @@ func (r ApiDeleteKubernetesNodeGroupProfileRequest) Execute() (*http.Response, e
 /*
 DeleteKubernetesNodeGroupProfile Delete a 'kubernetes.NodeGroupProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesNodeGroupProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesNodeGroupProfileRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesNodeGroupProfile(ctx context.Context, moid string) ApiDeleteKubernetesNodeGroupProfileRequest {
 	return ApiDeleteKubernetesNodeGroupProfileRequest{
@@ -6806,9 +6779,9 @@ func (r ApiDeleteKubernetesNvidiaGpuProductRequest) Execute() (*http.Response, e
 /*
 DeleteKubernetesNvidiaGpuProduct Delete a 'kubernetes.NvidiaGpuProduct' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesNvidiaGpuProductRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesNvidiaGpuProductRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesNvidiaGpuProduct(ctx context.Context, moid string) ApiDeleteKubernetesNvidiaGpuProductRequest {
 	return ApiDeleteKubernetesNvidiaGpuProductRequest{
@@ -6948,9 +6921,9 @@ func (r ApiDeleteKubernetesPodRequest) Execute() (*http.Response, error) {
 /*
 DeleteKubernetesPod Delete a 'kubernetes.Pod' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesPodRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesPodRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesPod(ctx context.Context, moid string) ApiDeleteKubernetesPodRequest {
 	return ApiDeleteKubernetesPodRequest{
@@ -7090,9 +7063,9 @@ func (r ApiDeleteKubernetesServiceRequest) Execute() (*http.Response, error) {
 /*
 DeleteKubernetesService Delete a 'kubernetes.Service' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesServiceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesServiceRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesService(ctx context.Context, moid string) ApiDeleteKubernetesServiceRequest {
 	return ApiDeleteKubernetesServiceRequest{
@@ -7232,9 +7205,9 @@ func (r ApiDeleteKubernetesStatefulSetRequest) Execute() (*http.Response, error)
 /*
 DeleteKubernetesStatefulSet Delete a 'kubernetes.StatefulSet' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesStatefulSetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesStatefulSetRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesStatefulSet(ctx context.Context, moid string) ApiDeleteKubernetesStatefulSetRequest {
 	return ApiDeleteKubernetesStatefulSetRequest{
@@ -7374,9 +7347,9 @@ func (r ApiDeleteKubernetesSysConfigPolicyRequest) Execute() (*http.Response, er
 /*
 DeleteKubernetesSysConfigPolicy Delete a 'kubernetes.SysConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesSysConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesSysConfigPolicyRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesSysConfigPolicy(ctx context.Context, moid string) ApiDeleteKubernetesSysConfigPolicyRequest {
 	return ApiDeleteKubernetesSysConfigPolicyRequest{
@@ -7516,9 +7489,9 @@ func (r ApiDeleteKubernetesTrustedRegistriesPolicyRequest) Execute() (*http.Resp
 /*
 DeleteKubernetesTrustedRegistriesPolicy Delete a 'kubernetes.TrustedRegistriesPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesTrustedRegistriesPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesTrustedRegistriesPolicyRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesTrustedRegistriesPolicy(ctx context.Context, moid string) ApiDeleteKubernetesTrustedRegistriesPolicyRequest {
 	return ApiDeleteKubernetesTrustedRegistriesPolicyRequest{
@@ -7658,9 +7631,9 @@ func (r ApiDeleteKubernetesVersionRequest) Execute() (*http.Response, error) {
 /*
 DeleteKubernetesVersion Delete a 'kubernetes.Version' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesVersionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesVersionRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesVersion(ctx context.Context, moid string) ApiDeleteKubernetesVersionRequest {
 	return ApiDeleteKubernetesVersionRequest{
@@ -7800,9 +7773,9 @@ func (r ApiDeleteKubernetesVersionPolicyRequest) Execute() (*http.Response, erro
 /*
 DeleteKubernetesVersionPolicy Delete a 'kubernetes.VersionPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesVersionPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesVersionPolicyRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesVersionPolicy(ctx context.Context, moid string) ApiDeleteKubernetesVersionPolicyRequest {
 	return ApiDeleteKubernetesVersionPolicyRequest{
@@ -7942,9 +7915,9 @@ func (r ApiDeleteKubernetesVirtualMachineInfraConfigPolicyRequest) Execute() (*h
 /*
 DeleteKubernetesVirtualMachineInfraConfigPolicy Delete a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesVirtualMachineInfraConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesVirtualMachineInfraConfigPolicyRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInfraConfigPolicy(ctx context.Context, moid string) ApiDeleteKubernetesVirtualMachineInfraConfigPolicyRequest {
 	return ApiDeleteKubernetesVirtualMachineInfraConfigPolicyRequest{
@@ -8084,9 +8057,9 @@ func (r ApiDeleteKubernetesVirtualMachineInstanceTypeRequest) Execute() (*http.R
 /*
 DeleteKubernetesVirtualMachineInstanceType Delete a 'kubernetes.VirtualMachineInstanceType' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesVirtualMachineInstanceTypeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesVirtualMachineInstanceTypeRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInstanceType(ctx context.Context, moid string) ApiDeleteKubernetesVirtualMachineInstanceTypeRequest {
 	return ApiDeleteKubernetesVirtualMachineInstanceTypeRequest{
@@ -8226,9 +8199,9 @@ func (r ApiDeleteKubernetesVirtualMachineNodeProfileRequest) Execute() (*http.Re
 /*
 DeleteKubernetesVirtualMachineNodeProfile Delete a 'kubernetes.VirtualMachineNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteKubernetesVirtualMachineNodeProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteKubernetesVirtualMachineNodeProfileRequest
 */
 func (a *KubernetesApiService) DeleteKubernetesVirtualMachineNodeProfile(ctx context.Context, moid string) ApiDeleteKubernetesVirtualMachineNodeProfileRequest {
 	return ApiDeleteKubernetesVirtualMachineNodeProfileRequest{
@@ -8368,9 +8341,9 @@ func (r ApiGetKubernetesAciCniApicByMoidRequest) Execute() (*KubernetesAciCniApi
 /*
 GetKubernetesAciCniApicByMoid Read a 'kubernetes.AciCniApic' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesAciCniApicByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesAciCniApicByMoidRequest
 
 Deprecated
 */
@@ -8383,9 +8356,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniApicByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniApic
-//
+//  @return KubernetesAciCniApic
 // Deprecated
 func (a *KubernetesApiService) GetKubernetesAciCniApicByMoidExecute(r ApiGetKubernetesAciCniApicByMoidRequest) (*KubernetesAciCniApic, *http.Response, error) {
 	var (
@@ -8602,8 +8573,8 @@ func (r ApiGetKubernetesAciCniApicListRequest) Execute() (*KubernetesAciCniApicR
 /*
 GetKubernetesAciCniApicList Read a 'kubernetes.AciCniApic' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesAciCniApicListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesAciCniApicListRequest
 
 Deprecated
 */
@@ -8615,9 +8586,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniApicList(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniApicResponse
-//
+//  @return KubernetesAciCniApicResponse
 // Deprecated
 func (a *KubernetesApiService) GetKubernetesAciCniApicListExecute(r ApiGetKubernetesAciCniApicListRequest) (*KubernetesAciCniApicResponse, *http.Response, error) {
 	var (
@@ -8805,9 +8774,9 @@ func (r ApiGetKubernetesAciCniProfileByMoidRequest) Execute() (*KubernetesAciCni
 /*
 GetKubernetesAciCniProfileByMoid Read a 'kubernetes.AciCniProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesAciCniProfileByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesAciCniProfileByMoidRequest
 
 Deprecated
 */
@@ -8820,9 +8789,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniProfileByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniProfile
-//
+//  @return KubernetesAciCniProfile
 // Deprecated
 func (a *KubernetesApiService) GetKubernetesAciCniProfileByMoidExecute(r ApiGetKubernetesAciCniProfileByMoidRequest) (*KubernetesAciCniProfile, *http.Response, error) {
 	var (
@@ -9039,8 +9006,8 @@ func (r ApiGetKubernetesAciCniProfileListRequest) Execute() (*KubernetesAciCniPr
 /*
 GetKubernetesAciCniProfileList Read a 'kubernetes.AciCniProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesAciCniProfileListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesAciCniProfileListRequest
 
 Deprecated
 */
@@ -9052,9 +9019,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniProfileList(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniProfileResponse
-//
+//  @return KubernetesAciCniProfileResponse
 // Deprecated
 func (a *KubernetesApiService) GetKubernetesAciCniProfileListExecute(r ApiGetKubernetesAciCniProfileListRequest) (*KubernetesAciCniProfileResponse, *http.Response, error) {
 	var (
@@ -9242,9 +9207,9 @@ func (r ApiGetKubernetesAciCniTenantClusterAllocationByMoidRequest) Execute() (*
 /*
 GetKubernetesAciCniTenantClusterAllocationByMoid Read a 'kubernetes.AciCniTenantClusterAllocation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesAciCniTenantClusterAllocationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesAciCniTenantClusterAllocationByMoidRequest
 
 Deprecated
 */
@@ -9257,9 +9222,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationByMoid(
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniTenantClusterAllocation
-//
+//  @return KubernetesAciCniTenantClusterAllocation
 // Deprecated
 func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationByMoidExecute(r ApiGetKubernetesAciCniTenantClusterAllocationByMoidRequest) (*KubernetesAciCniTenantClusterAllocation, *http.Response, error) {
 	var (
@@ -9476,8 +9439,8 @@ func (r ApiGetKubernetesAciCniTenantClusterAllocationListRequest) Execute() (*Ku
 /*
 GetKubernetesAciCniTenantClusterAllocationList Read a 'kubernetes.AciCniTenantClusterAllocation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesAciCniTenantClusterAllocationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesAciCniTenantClusterAllocationListRequest
 
 Deprecated
 */
@@ -9489,9 +9452,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationList(ct
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniTenantClusterAllocationResponse
-//
+//  @return KubernetesAciCniTenantClusterAllocationResponse
 // Deprecated
 func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationListExecute(r ApiGetKubernetesAciCniTenantClusterAllocationListRequest) (*KubernetesAciCniTenantClusterAllocationResponse, *http.Response, error) {
 	var (
@@ -9679,9 +9640,9 @@ func (r ApiGetKubernetesAddonDefinitionByMoidRequest) Execute() (*KubernetesAddo
 /*
 GetKubernetesAddonDefinitionByMoid Read a 'kubernetes.AddonDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesAddonDefinitionByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesAddonDefinitionByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesAddonDefinitionByMoid(ctx context.Context, moid string) ApiGetKubernetesAddonDefinitionByMoidRequest {
 	return ApiGetKubernetesAddonDefinitionByMoidRequest{
@@ -9692,8 +9653,7 @@ func (a *KubernetesApiService) GetKubernetesAddonDefinitionByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonDefinition
+//  @return KubernetesAddonDefinition
 func (a *KubernetesApiService) GetKubernetesAddonDefinitionByMoidExecute(r ApiGetKubernetesAddonDefinitionByMoidRequest) (*KubernetesAddonDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9909,8 +9869,8 @@ func (r ApiGetKubernetesAddonDefinitionListRequest) Execute() (*KubernetesAddonD
 /*
 GetKubernetesAddonDefinitionList Read a 'kubernetes.AddonDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesAddonDefinitionListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesAddonDefinitionListRequest
 */
 func (a *KubernetesApiService) GetKubernetesAddonDefinitionList(ctx context.Context) ApiGetKubernetesAddonDefinitionListRequest {
 	return ApiGetKubernetesAddonDefinitionListRequest{
@@ -9920,8 +9880,7 @@ func (a *KubernetesApiService) GetKubernetesAddonDefinitionList(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonDefinitionResponse
+//  @return KubernetesAddonDefinitionResponse
 func (a *KubernetesApiService) GetKubernetesAddonDefinitionListExecute(r ApiGetKubernetesAddonDefinitionListRequest) (*KubernetesAddonDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10108,9 +10067,9 @@ func (r ApiGetKubernetesAddonPolicyByMoidRequest) Execute() (*KubernetesAddonPol
 /*
 GetKubernetesAddonPolicyByMoid Read a 'kubernetes.AddonPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesAddonPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesAddonPolicyByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesAddonPolicyByMoid(ctx context.Context, moid string) ApiGetKubernetesAddonPolicyByMoidRequest {
 	return ApiGetKubernetesAddonPolicyByMoidRequest{
@@ -10121,8 +10080,7 @@ func (a *KubernetesApiService) GetKubernetesAddonPolicyByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonPolicy
+//  @return KubernetesAddonPolicy
 func (a *KubernetesApiService) GetKubernetesAddonPolicyByMoidExecute(r ApiGetKubernetesAddonPolicyByMoidRequest) (*KubernetesAddonPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10338,8 +10296,8 @@ func (r ApiGetKubernetesAddonPolicyListRequest) Execute() (*KubernetesAddonPolic
 /*
 GetKubernetesAddonPolicyList Read a 'kubernetes.AddonPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesAddonPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesAddonPolicyListRequest
 */
 func (a *KubernetesApiService) GetKubernetesAddonPolicyList(ctx context.Context) ApiGetKubernetesAddonPolicyListRequest {
 	return ApiGetKubernetesAddonPolicyListRequest{
@@ -10349,8 +10307,7 @@ func (a *KubernetesApiService) GetKubernetesAddonPolicyList(ctx context.Context)
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonPolicyResponse
+//  @return KubernetesAddonPolicyResponse
 func (a *KubernetesApiService) GetKubernetesAddonPolicyListExecute(r ApiGetKubernetesAddonPolicyListRequest) (*KubernetesAddonPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10537,9 +10494,9 @@ func (r ApiGetKubernetesAddonRepositoryByMoidRequest) Execute() (*KubernetesAddo
 /*
 GetKubernetesAddonRepositoryByMoid Read a 'kubernetes.AddonRepository' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesAddonRepositoryByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesAddonRepositoryByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesAddonRepositoryByMoid(ctx context.Context, moid string) ApiGetKubernetesAddonRepositoryByMoidRequest {
 	return ApiGetKubernetesAddonRepositoryByMoidRequest{
@@ -10550,8 +10507,7 @@ func (a *KubernetesApiService) GetKubernetesAddonRepositoryByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonRepository
+//  @return KubernetesAddonRepository
 func (a *KubernetesApiService) GetKubernetesAddonRepositoryByMoidExecute(r ApiGetKubernetesAddonRepositoryByMoidRequest) (*KubernetesAddonRepository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10767,8 +10723,8 @@ func (r ApiGetKubernetesAddonRepositoryListRequest) Execute() (*KubernetesAddonR
 /*
 GetKubernetesAddonRepositoryList Read a 'kubernetes.AddonRepository' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesAddonRepositoryListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesAddonRepositoryListRequest
 */
 func (a *KubernetesApiService) GetKubernetesAddonRepositoryList(ctx context.Context) ApiGetKubernetesAddonRepositoryListRequest {
 	return ApiGetKubernetesAddonRepositoryListRequest{
@@ -10778,8 +10734,7 @@ func (a *KubernetesApiService) GetKubernetesAddonRepositoryList(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonRepositoryResponse
+//  @return KubernetesAddonRepositoryResponse
 func (a *KubernetesApiService) GetKubernetesAddonRepositoryListExecute(r ApiGetKubernetesAddonRepositoryListRequest) (*KubernetesAddonRepositoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10966,9 +10921,9 @@ func (r ApiGetKubernetesBaremetalNodeProfileByMoidRequest) Execute() (*Kubernete
 /*
 GetKubernetesBaremetalNodeProfileByMoid Read a 'kubernetes.BaremetalNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesBaremetalNodeProfileByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesBaremetalNodeProfileByMoidRequest
 
 Deprecated
 */
@@ -10981,9 +10936,7 @@ func (a *KubernetesApiService) GetKubernetesBaremetalNodeProfileByMoid(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesBaremetalNodeProfile
-//
+//  @return KubernetesBaremetalNodeProfile
 // Deprecated
 func (a *KubernetesApiService) GetKubernetesBaremetalNodeProfileByMoidExecute(r ApiGetKubernetesBaremetalNodeProfileByMoidRequest) (*KubernetesBaremetalNodeProfile, *http.Response, error) {
 	var (
@@ -11200,8 +11153,8 @@ func (r ApiGetKubernetesBaremetalNodeProfileListRequest) Execute() (*KubernetesB
 /*
 GetKubernetesBaremetalNodeProfileList Read a 'kubernetes.BaremetalNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesBaremetalNodeProfileListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesBaremetalNodeProfileListRequest
 
 Deprecated
 */
@@ -11213,9 +11166,7 @@ func (a *KubernetesApiService) GetKubernetesBaremetalNodeProfileList(ctx context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesBaremetalNodeProfileResponse
-//
+//  @return KubernetesBaremetalNodeProfileResponse
 // Deprecated
 func (a *KubernetesApiService) GetKubernetesBaremetalNodeProfileListExecute(r ApiGetKubernetesBaremetalNodeProfileListRequest) (*KubernetesBaremetalNodeProfileResponse, *http.Response, error) {
 	var (
@@ -11403,9 +11354,9 @@ func (r ApiGetKubernetesCatalogByMoidRequest) Execute() (*KubernetesCatalog, *ht
 /*
 GetKubernetesCatalogByMoid Read a 'kubernetes.Catalog' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesCatalogByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesCatalogByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesCatalogByMoid(ctx context.Context, moid string) ApiGetKubernetesCatalogByMoidRequest {
 	return ApiGetKubernetesCatalogByMoidRequest{
@@ -11416,8 +11367,7 @@ func (a *KubernetesApiService) GetKubernetesCatalogByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return KubernetesCatalog
+//  @return KubernetesCatalog
 func (a *KubernetesApiService) GetKubernetesCatalogByMoidExecute(r ApiGetKubernetesCatalogByMoidRequest) (*KubernetesCatalog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11633,8 +11583,8 @@ func (r ApiGetKubernetesCatalogListRequest) Execute() (*KubernetesCatalogRespons
 /*
 GetKubernetesCatalogList Read a 'kubernetes.Catalog' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesCatalogListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesCatalogListRequest
 */
 func (a *KubernetesApiService) GetKubernetesCatalogList(ctx context.Context) ApiGetKubernetesCatalogListRequest {
 	return ApiGetKubernetesCatalogListRequest{
@@ -11644,8 +11594,7 @@ func (a *KubernetesApiService) GetKubernetesCatalogList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//
-//	@return KubernetesCatalogResponse
+//  @return KubernetesCatalogResponse
 func (a *KubernetesApiService) GetKubernetesCatalogListExecute(r ApiGetKubernetesCatalogListRequest) (*KubernetesCatalogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11832,9 +11781,9 @@ func (r ApiGetKubernetesClusterAddonProfileByMoidRequest) Execute() (*Kubernetes
 /*
 GetKubernetesClusterAddonProfileByMoid Read a 'kubernetes.ClusterAddonProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesClusterAddonProfileByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesClusterAddonProfileByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesClusterAddonProfileByMoid(ctx context.Context, moid string) ApiGetKubernetesClusterAddonProfileByMoidRequest {
 	return ApiGetKubernetesClusterAddonProfileByMoidRequest{
@@ -11845,8 +11794,7 @@ func (a *KubernetesApiService) GetKubernetesClusterAddonProfileByMoid(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesClusterAddonProfile
+//  @return KubernetesClusterAddonProfile
 func (a *KubernetesApiService) GetKubernetesClusterAddonProfileByMoidExecute(r ApiGetKubernetesClusterAddonProfileByMoidRequest) (*KubernetesClusterAddonProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12062,8 +12010,8 @@ func (r ApiGetKubernetesClusterAddonProfileListRequest) Execute() (*KubernetesCl
 /*
 GetKubernetesClusterAddonProfileList Read a 'kubernetes.ClusterAddonProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesClusterAddonProfileListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesClusterAddonProfileListRequest
 */
 func (a *KubernetesApiService) GetKubernetesClusterAddonProfileList(ctx context.Context) ApiGetKubernetesClusterAddonProfileListRequest {
 	return ApiGetKubernetesClusterAddonProfileListRequest{
@@ -12073,8 +12021,7 @@ func (a *KubernetesApiService) GetKubernetesClusterAddonProfileList(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return KubernetesClusterAddonProfileResponse
+//  @return KubernetesClusterAddonProfileResponse
 func (a *KubernetesApiService) GetKubernetesClusterAddonProfileListExecute(r ApiGetKubernetesClusterAddonProfileListRequest) (*KubernetesClusterAddonProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12261,9 +12208,9 @@ func (r ApiGetKubernetesClusterByMoidRequest) Execute() (*KubernetesCluster, *ht
 /*
 GetKubernetesClusterByMoid Read a 'kubernetes.Cluster' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesClusterByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesClusterByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesClusterByMoid(ctx context.Context, moid string) ApiGetKubernetesClusterByMoidRequest {
 	return ApiGetKubernetesClusterByMoidRequest{
@@ -12274,8 +12221,7 @@ func (a *KubernetesApiService) GetKubernetesClusterByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return KubernetesCluster
+//  @return KubernetesCluster
 func (a *KubernetesApiService) GetKubernetesClusterByMoidExecute(r ApiGetKubernetesClusterByMoidRequest) (*KubernetesCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12491,8 +12437,8 @@ func (r ApiGetKubernetesClusterListRequest) Execute() (*KubernetesClusterRespons
 /*
 GetKubernetesClusterList Read a 'kubernetes.Cluster' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesClusterListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesClusterListRequest
 */
 func (a *KubernetesApiService) GetKubernetesClusterList(ctx context.Context) ApiGetKubernetesClusterListRequest {
 	return ApiGetKubernetesClusterListRequest{
@@ -12502,8 +12448,7 @@ func (a *KubernetesApiService) GetKubernetesClusterList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//
-//	@return KubernetesClusterResponse
+//  @return KubernetesClusterResponse
 func (a *KubernetesApiService) GetKubernetesClusterListExecute(r ApiGetKubernetesClusterListRequest) (*KubernetesClusterResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12690,9 +12635,9 @@ func (r ApiGetKubernetesClusterProfileByMoidRequest) Execute() (*KubernetesClust
 /*
 GetKubernetesClusterProfileByMoid Read a 'kubernetes.ClusterProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesClusterProfileByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesClusterProfileByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesClusterProfileByMoid(ctx context.Context, moid string) ApiGetKubernetesClusterProfileByMoidRequest {
 	return ApiGetKubernetesClusterProfileByMoidRequest{
@@ -12703,8 +12648,7 @@ func (a *KubernetesApiService) GetKubernetesClusterProfileByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//
-//	@return KubernetesClusterProfile
+//  @return KubernetesClusterProfile
 func (a *KubernetesApiService) GetKubernetesClusterProfileByMoidExecute(r ApiGetKubernetesClusterProfileByMoidRequest) (*KubernetesClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12920,8 +12864,8 @@ func (r ApiGetKubernetesClusterProfileListRequest) Execute() (*KubernetesCluster
 /*
 GetKubernetesClusterProfileList Read a 'kubernetes.ClusterProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesClusterProfileListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesClusterProfileListRequest
 */
 func (a *KubernetesApiService) GetKubernetesClusterProfileList(ctx context.Context) ApiGetKubernetesClusterProfileListRequest {
 	return ApiGetKubernetesClusterProfileListRequest{
@@ -12931,8 +12875,7 @@ func (a *KubernetesApiService) GetKubernetesClusterProfileList(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesClusterProfileResponse
+//  @return KubernetesClusterProfileResponse
 func (a *KubernetesApiService) GetKubernetesClusterProfileListExecute(r ApiGetKubernetesClusterProfileListRequest) (*KubernetesClusterProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13119,9 +13062,9 @@ func (r ApiGetKubernetesConfigResultByMoidRequest) Execute() (*KubernetesConfigR
 /*
 GetKubernetesConfigResultByMoid Read a 'kubernetes.ConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesConfigResultByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesConfigResultByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesConfigResultByMoid(ctx context.Context, moid string) ApiGetKubernetesConfigResultByMoidRequest {
 	return ApiGetKubernetesConfigResultByMoidRequest{
@@ -13132,8 +13075,7 @@ func (a *KubernetesApiService) GetKubernetesConfigResultByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesConfigResult
+//  @return KubernetesConfigResult
 func (a *KubernetesApiService) GetKubernetesConfigResultByMoidExecute(r ApiGetKubernetesConfigResultByMoidRequest) (*KubernetesConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13273,9 +13215,9 @@ func (r ApiGetKubernetesConfigResultEntryByMoidRequest) Execute() (*KubernetesCo
 /*
 GetKubernetesConfigResultEntryByMoid Read a 'kubernetes.ConfigResultEntry' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesConfigResultEntryByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesConfigResultEntryByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesConfigResultEntryByMoid(ctx context.Context, moid string) ApiGetKubernetesConfigResultEntryByMoidRequest {
 	return ApiGetKubernetesConfigResultEntryByMoidRequest{
@@ -13286,8 +13228,7 @@ func (a *KubernetesApiService) GetKubernetesConfigResultEntryByMoid(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return KubernetesConfigResultEntry
+//  @return KubernetesConfigResultEntry
 func (a *KubernetesApiService) GetKubernetesConfigResultEntryByMoidExecute(r ApiGetKubernetesConfigResultEntryByMoidRequest) (*KubernetesConfigResultEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13503,8 +13444,8 @@ func (r ApiGetKubernetesConfigResultEntryListRequest) Execute() (*KubernetesConf
 /*
 GetKubernetesConfigResultEntryList Read a 'kubernetes.ConfigResultEntry' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesConfigResultEntryListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesConfigResultEntryListRequest
 */
 func (a *KubernetesApiService) GetKubernetesConfigResultEntryList(ctx context.Context) ApiGetKubernetesConfigResultEntryListRequest {
 	return ApiGetKubernetesConfigResultEntryListRequest{
@@ -13514,8 +13455,7 @@ func (a *KubernetesApiService) GetKubernetesConfigResultEntryList(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return KubernetesConfigResultEntryResponse
+//  @return KubernetesConfigResultEntryResponse
 func (a *KubernetesApiService) GetKubernetesConfigResultEntryListExecute(r ApiGetKubernetesConfigResultEntryListRequest) (*KubernetesConfigResultEntryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13778,8 +13718,8 @@ func (r ApiGetKubernetesConfigResultListRequest) Execute() (*KubernetesConfigRes
 /*
 GetKubernetesConfigResultList Read a 'kubernetes.ConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesConfigResultListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesConfigResultListRequest
 */
 func (a *KubernetesApiService) GetKubernetesConfigResultList(ctx context.Context) ApiGetKubernetesConfigResultListRequest {
 	return ApiGetKubernetesConfigResultListRequest{
@@ -13789,8 +13729,7 @@ func (a *KubernetesApiService) GetKubernetesConfigResultList(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesConfigResultResponse
+//  @return KubernetesConfigResultResponse
 func (a *KubernetesApiService) GetKubernetesConfigResultListExecute(r ApiGetKubernetesConfigResultListRequest) (*KubernetesConfigResultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13977,9 +13916,9 @@ func (r ApiGetKubernetesContainerRuntimePolicyByMoidRequest) Execute() (*Kuberne
 /*
 GetKubernetesContainerRuntimePolicyByMoid Read a 'kubernetes.ContainerRuntimePolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesContainerRuntimePolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesContainerRuntimePolicyByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyByMoid(ctx context.Context, moid string) ApiGetKubernetesContainerRuntimePolicyByMoidRequest {
 	return ApiGetKubernetesContainerRuntimePolicyByMoidRequest{
@@ -13990,8 +13929,7 @@ func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyByMoid(ctx con
 }
 
 // Execute executes the request
-//
-//	@return KubernetesContainerRuntimePolicy
+//  @return KubernetesContainerRuntimePolicy
 func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyByMoidExecute(r ApiGetKubernetesContainerRuntimePolicyByMoidRequest) (*KubernetesContainerRuntimePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14207,8 +14145,8 @@ func (r ApiGetKubernetesContainerRuntimePolicyListRequest) Execute() (*Kubernete
 /*
 GetKubernetesContainerRuntimePolicyList Read a 'kubernetes.ContainerRuntimePolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesContainerRuntimePolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesContainerRuntimePolicyListRequest
 */
 func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyList(ctx context.Context) ApiGetKubernetesContainerRuntimePolicyListRequest {
 	return ApiGetKubernetesContainerRuntimePolicyListRequest{
@@ -14218,8 +14156,7 @@ func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyList(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesContainerRuntimePolicyResponse
+//  @return KubernetesContainerRuntimePolicyResponse
 func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyListExecute(r ApiGetKubernetesContainerRuntimePolicyListRequest) (*KubernetesContainerRuntimePolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14406,9 +14343,9 @@ func (r ApiGetKubernetesDaemonSetByMoidRequest) Execute() (*KubernetesDaemonSet,
 /*
 GetKubernetesDaemonSetByMoid Read a 'kubernetes.DaemonSet' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesDaemonSetByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesDaemonSetByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesDaemonSetByMoid(ctx context.Context, moid string) ApiGetKubernetesDaemonSetByMoidRequest {
 	return ApiGetKubernetesDaemonSetByMoidRequest{
@@ -14419,8 +14356,7 @@ func (a *KubernetesApiService) GetKubernetesDaemonSetByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return KubernetesDaemonSet
+//  @return KubernetesDaemonSet
 func (a *KubernetesApiService) GetKubernetesDaemonSetByMoidExecute(r ApiGetKubernetesDaemonSetByMoidRequest) (*KubernetesDaemonSet, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14636,8 +14572,8 @@ func (r ApiGetKubernetesDaemonSetListRequest) Execute() (*KubernetesDaemonSetRes
 /*
 GetKubernetesDaemonSetList Read a 'kubernetes.DaemonSet' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesDaemonSetListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesDaemonSetListRequest
 */
 func (a *KubernetesApiService) GetKubernetesDaemonSetList(ctx context.Context) ApiGetKubernetesDaemonSetListRequest {
 	return ApiGetKubernetesDaemonSetListRequest{
@@ -14647,8 +14583,7 @@ func (a *KubernetesApiService) GetKubernetesDaemonSetList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return KubernetesDaemonSetResponse
+//  @return KubernetesDaemonSetResponse
 func (a *KubernetesApiService) GetKubernetesDaemonSetListExecute(r ApiGetKubernetesDaemonSetListRequest) (*KubernetesDaemonSetResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14835,9 +14770,9 @@ func (r ApiGetKubernetesDeploymentByMoidRequest) Execute() (*KubernetesDeploymen
 /*
 GetKubernetesDeploymentByMoid Read a 'kubernetes.Deployment' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesDeploymentByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesDeploymentByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesDeploymentByMoid(ctx context.Context, moid string) ApiGetKubernetesDeploymentByMoidRequest {
 	return ApiGetKubernetesDeploymentByMoidRequest{
@@ -14848,8 +14783,7 @@ func (a *KubernetesApiService) GetKubernetesDeploymentByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesDeployment
+//  @return KubernetesDeployment
 func (a *KubernetesApiService) GetKubernetesDeploymentByMoidExecute(r ApiGetKubernetesDeploymentByMoidRequest) (*KubernetesDeployment, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15065,8 +14999,8 @@ func (r ApiGetKubernetesDeploymentListRequest) Execute() (*KubernetesDeploymentR
 /*
 GetKubernetesDeploymentList Read a 'kubernetes.Deployment' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesDeploymentListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesDeploymentListRequest
 */
 func (a *KubernetesApiService) GetKubernetesDeploymentList(ctx context.Context) ApiGetKubernetesDeploymentListRequest {
 	return ApiGetKubernetesDeploymentListRequest{
@@ -15076,8 +15010,7 @@ func (a *KubernetesApiService) GetKubernetesDeploymentList(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return KubernetesDeploymentResponse
+//  @return KubernetesDeploymentResponse
 func (a *KubernetesApiService) GetKubernetesDeploymentListExecute(r ApiGetKubernetesDeploymentListRequest) (*KubernetesDeploymentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15264,9 +15197,9 @@ func (r ApiGetKubernetesHttpProxyPolicyByMoidRequest) Execute() (*KubernetesHttp
 /*
 GetKubernetesHttpProxyPolicyByMoid Read a 'kubernetes.HttpProxyPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesHttpProxyPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesHttpProxyPolicyByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesHttpProxyPolicyByMoid(ctx context.Context, moid string) ApiGetKubernetesHttpProxyPolicyByMoidRequest {
 	return ApiGetKubernetesHttpProxyPolicyByMoidRequest{
@@ -15277,8 +15210,7 @@ func (a *KubernetesApiService) GetKubernetesHttpProxyPolicyByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return KubernetesHttpProxyPolicy
+//  @return KubernetesHttpProxyPolicy
 func (a *KubernetesApiService) GetKubernetesHttpProxyPolicyByMoidExecute(r ApiGetKubernetesHttpProxyPolicyByMoidRequest) (*KubernetesHttpProxyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15494,8 +15426,8 @@ func (r ApiGetKubernetesHttpProxyPolicyListRequest) Execute() (*KubernetesHttpPr
 /*
 GetKubernetesHttpProxyPolicyList Read a 'kubernetes.HttpProxyPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesHttpProxyPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesHttpProxyPolicyListRequest
 */
 func (a *KubernetesApiService) GetKubernetesHttpProxyPolicyList(ctx context.Context) ApiGetKubernetesHttpProxyPolicyListRequest {
 	return ApiGetKubernetesHttpProxyPolicyListRequest{
@@ -15505,8 +15437,7 @@ func (a *KubernetesApiService) GetKubernetesHttpProxyPolicyList(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesHttpProxyPolicyResponse
+//  @return KubernetesHttpProxyPolicyResponse
 func (a *KubernetesApiService) GetKubernetesHttpProxyPolicyListExecute(r ApiGetKubernetesHttpProxyPolicyListRequest) (*KubernetesHttpProxyPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15693,9 +15624,9 @@ func (r ApiGetKubernetesIngressByMoidRequest) Execute() (*KubernetesIngress, *ht
 /*
 GetKubernetesIngressByMoid Read a 'kubernetes.Ingress' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesIngressByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesIngressByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesIngressByMoid(ctx context.Context, moid string) ApiGetKubernetesIngressByMoidRequest {
 	return ApiGetKubernetesIngressByMoidRequest{
@@ -15706,8 +15637,7 @@ func (a *KubernetesApiService) GetKubernetesIngressByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return KubernetesIngress
+//  @return KubernetesIngress
 func (a *KubernetesApiService) GetKubernetesIngressByMoidExecute(r ApiGetKubernetesIngressByMoidRequest) (*KubernetesIngress, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15923,8 +15853,8 @@ func (r ApiGetKubernetesIngressListRequest) Execute() (*KubernetesIngressRespons
 /*
 GetKubernetesIngressList Read a 'kubernetes.Ingress' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesIngressListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesIngressListRequest
 */
 func (a *KubernetesApiService) GetKubernetesIngressList(ctx context.Context) ApiGetKubernetesIngressListRequest {
 	return ApiGetKubernetesIngressListRequest{
@@ -15934,8 +15864,7 @@ func (a *KubernetesApiService) GetKubernetesIngressList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//
-//	@return KubernetesIngressResponse
+//  @return KubernetesIngressResponse
 func (a *KubernetesApiService) GetKubernetesIngressListExecute(r ApiGetKubernetesIngressListRequest) (*KubernetesIngressResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16122,9 +16051,9 @@ func (r ApiGetKubernetesNetworkPolicyByMoidRequest) Execute() (*KubernetesNetwor
 /*
 GetKubernetesNetworkPolicyByMoid Read a 'kubernetes.NetworkPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesNetworkPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesNetworkPolicyByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesNetworkPolicyByMoid(ctx context.Context, moid string) ApiGetKubernetesNetworkPolicyByMoidRequest {
 	return ApiGetKubernetesNetworkPolicyByMoidRequest{
@@ -16135,8 +16064,7 @@ func (a *KubernetesApiService) GetKubernetesNetworkPolicyByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNetworkPolicy
+//  @return KubernetesNetworkPolicy
 func (a *KubernetesApiService) GetKubernetesNetworkPolicyByMoidExecute(r ApiGetKubernetesNetworkPolicyByMoidRequest) (*KubernetesNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16352,8 +16280,8 @@ func (r ApiGetKubernetesNetworkPolicyListRequest) Execute() (*KubernetesNetworkP
 /*
 GetKubernetesNetworkPolicyList Read a 'kubernetes.NetworkPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesNetworkPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesNetworkPolicyListRequest
 */
 func (a *KubernetesApiService) GetKubernetesNetworkPolicyList(ctx context.Context) ApiGetKubernetesNetworkPolicyListRequest {
 	return ApiGetKubernetesNetworkPolicyListRequest{
@@ -16363,8 +16291,7 @@ func (a *KubernetesApiService) GetKubernetesNetworkPolicyList(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNetworkPolicyResponse
+//  @return KubernetesNetworkPolicyResponse
 func (a *KubernetesApiService) GetKubernetesNetworkPolicyListExecute(r ApiGetKubernetesNetworkPolicyListRequest) (*KubernetesNetworkPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16551,9 +16478,9 @@ func (r ApiGetKubernetesNodeByMoidRequest) Execute() (*KubernetesNode, *http.Res
 /*
 GetKubernetesNodeByMoid Read a 'kubernetes.Node' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesNodeByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesNodeByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesNodeByMoid(ctx context.Context, moid string) ApiGetKubernetesNodeByMoidRequest {
 	return ApiGetKubernetesNodeByMoidRequest{
@@ -16564,8 +16491,7 @@ func (a *KubernetesApiService) GetKubernetesNodeByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNode
+//  @return KubernetesNode
 func (a *KubernetesApiService) GetKubernetesNodeByMoidExecute(r ApiGetKubernetesNodeByMoidRequest) (*KubernetesNode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16705,9 +16631,9 @@ func (r ApiGetKubernetesNodeGroupProfileByMoidRequest) Execute() (*KubernetesNod
 /*
 GetKubernetesNodeGroupProfileByMoid Read a 'kubernetes.NodeGroupProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesNodeGroupProfileByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesNodeGroupProfileByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesNodeGroupProfileByMoid(ctx context.Context, moid string) ApiGetKubernetesNodeGroupProfileByMoidRequest {
 	return ApiGetKubernetesNodeGroupProfileByMoidRequest{
@@ -16718,8 +16644,7 @@ func (a *KubernetesApiService) GetKubernetesNodeGroupProfileByMoid(ctx context.C
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNodeGroupProfile
+//  @return KubernetesNodeGroupProfile
 func (a *KubernetesApiService) GetKubernetesNodeGroupProfileByMoidExecute(r ApiGetKubernetesNodeGroupProfileByMoidRequest) (*KubernetesNodeGroupProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16935,8 +16860,8 @@ func (r ApiGetKubernetesNodeGroupProfileListRequest) Execute() (*KubernetesNodeG
 /*
 GetKubernetesNodeGroupProfileList Read a 'kubernetes.NodeGroupProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesNodeGroupProfileListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesNodeGroupProfileListRequest
 */
 func (a *KubernetesApiService) GetKubernetesNodeGroupProfileList(ctx context.Context) ApiGetKubernetesNodeGroupProfileListRequest {
 	return ApiGetKubernetesNodeGroupProfileListRequest{
@@ -16946,8 +16871,7 @@ func (a *KubernetesApiService) GetKubernetesNodeGroupProfileList(ctx context.Con
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNodeGroupProfileResponse
+//  @return KubernetesNodeGroupProfileResponse
 func (a *KubernetesApiService) GetKubernetesNodeGroupProfileListExecute(r ApiGetKubernetesNodeGroupProfileListRequest) (*KubernetesNodeGroupProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17210,8 +17134,8 @@ func (r ApiGetKubernetesNodeListRequest) Execute() (*KubernetesNodeResponse, *ht
 /*
 GetKubernetesNodeList Read a 'kubernetes.Node' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesNodeListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesNodeListRequest
 */
 func (a *KubernetesApiService) GetKubernetesNodeList(ctx context.Context) ApiGetKubernetesNodeListRequest {
 	return ApiGetKubernetesNodeListRequest{
@@ -17221,8 +17145,7 @@ func (a *KubernetesApiService) GetKubernetesNodeList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNodeResponse
+//  @return KubernetesNodeResponse
 func (a *KubernetesApiService) GetKubernetesNodeListExecute(r ApiGetKubernetesNodeListRequest) (*KubernetesNodeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17409,9 +17332,9 @@ func (r ApiGetKubernetesNvidiaGpuProductByMoidRequest) Execute() (*KubernetesNvi
 /*
 GetKubernetesNvidiaGpuProductByMoid Read a 'kubernetes.NvidiaGpuProduct' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesNvidiaGpuProductByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesNvidiaGpuProductByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesNvidiaGpuProductByMoid(ctx context.Context, moid string) ApiGetKubernetesNvidiaGpuProductByMoidRequest {
 	return ApiGetKubernetesNvidiaGpuProductByMoidRequest{
@@ -17422,8 +17345,7 @@ func (a *KubernetesApiService) GetKubernetesNvidiaGpuProductByMoid(ctx context.C
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNvidiaGpuProduct
+//  @return KubernetesNvidiaGpuProduct
 func (a *KubernetesApiService) GetKubernetesNvidiaGpuProductByMoidExecute(r ApiGetKubernetesNvidiaGpuProductByMoidRequest) (*KubernetesNvidiaGpuProduct, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17639,8 +17561,8 @@ func (r ApiGetKubernetesNvidiaGpuProductListRequest) Execute() (*KubernetesNvidi
 /*
 GetKubernetesNvidiaGpuProductList Read a 'kubernetes.NvidiaGpuProduct' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesNvidiaGpuProductListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesNvidiaGpuProductListRequest
 */
 func (a *KubernetesApiService) GetKubernetesNvidiaGpuProductList(ctx context.Context) ApiGetKubernetesNvidiaGpuProductListRequest {
 	return ApiGetKubernetesNvidiaGpuProductListRequest{
@@ -17650,8 +17572,7 @@ func (a *KubernetesApiService) GetKubernetesNvidiaGpuProductList(ctx context.Con
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNvidiaGpuProductResponse
+//  @return KubernetesNvidiaGpuProductResponse
 func (a *KubernetesApiService) GetKubernetesNvidiaGpuProductListExecute(r ApiGetKubernetesNvidiaGpuProductListRequest) (*KubernetesNvidiaGpuProductResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -17838,9 +17759,9 @@ func (r ApiGetKubernetesPodByMoidRequest) Execute() (*KubernetesPod, *http.Respo
 /*
 GetKubernetesPodByMoid Read a 'kubernetes.Pod' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesPodByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesPodByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesPodByMoid(ctx context.Context, moid string) ApiGetKubernetesPodByMoidRequest {
 	return ApiGetKubernetesPodByMoidRequest{
@@ -17851,8 +17772,7 @@ func (a *KubernetesApiService) GetKubernetesPodByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return KubernetesPod
+//  @return KubernetesPod
 func (a *KubernetesApiService) GetKubernetesPodByMoidExecute(r ApiGetKubernetesPodByMoidRequest) (*KubernetesPod, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18068,8 +17988,8 @@ func (r ApiGetKubernetesPodListRequest) Execute() (*KubernetesPodResponse, *http
 /*
 GetKubernetesPodList Read a 'kubernetes.Pod' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesPodListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesPodListRequest
 */
 func (a *KubernetesApiService) GetKubernetesPodList(ctx context.Context) ApiGetKubernetesPodListRequest {
 	return ApiGetKubernetesPodListRequest{
@@ -18079,8 +17999,7 @@ func (a *KubernetesApiService) GetKubernetesPodList(ctx context.Context) ApiGetK
 }
 
 // Execute executes the request
-//
-//	@return KubernetesPodResponse
+//  @return KubernetesPodResponse
 func (a *KubernetesApiService) GetKubernetesPodListExecute(r ApiGetKubernetesPodListRequest) (*KubernetesPodResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18267,9 +18186,9 @@ func (r ApiGetKubernetesServiceByMoidRequest) Execute() (*KubernetesService, *ht
 /*
 GetKubernetesServiceByMoid Read a 'kubernetes.Service' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesServiceByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesServiceByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesServiceByMoid(ctx context.Context, moid string) ApiGetKubernetesServiceByMoidRequest {
 	return ApiGetKubernetesServiceByMoidRequest{
@@ -18280,8 +18199,7 @@ func (a *KubernetesApiService) GetKubernetesServiceByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return KubernetesService
+//  @return KubernetesService
 func (a *KubernetesApiService) GetKubernetesServiceByMoidExecute(r ApiGetKubernetesServiceByMoidRequest) (*KubernetesService, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18497,8 +18415,8 @@ func (r ApiGetKubernetesServiceListRequest) Execute() (*KubernetesServiceRespons
 /*
 GetKubernetesServiceList Read a 'kubernetes.Service' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesServiceListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesServiceListRequest
 */
 func (a *KubernetesApiService) GetKubernetesServiceList(ctx context.Context) ApiGetKubernetesServiceListRequest {
 	return ApiGetKubernetesServiceListRequest{
@@ -18508,8 +18426,7 @@ func (a *KubernetesApiService) GetKubernetesServiceList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//
-//	@return KubernetesServiceResponse
+//  @return KubernetesServiceResponse
 func (a *KubernetesApiService) GetKubernetesServiceListExecute(r ApiGetKubernetesServiceListRequest) (*KubernetesServiceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18696,9 +18613,9 @@ func (r ApiGetKubernetesStatefulSetByMoidRequest) Execute() (*KubernetesStateful
 /*
 GetKubernetesStatefulSetByMoid Read a 'kubernetes.StatefulSet' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesStatefulSetByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesStatefulSetByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesStatefulSetByMoid(ctx context.Context, moid string) ApiGetKubernetesStatefulSetByMoidRequest {
 	return ApiGetKubernetesStatefulSetByMoidRequest{
@@ -18709,8 +18626,7 @@ func (a *KubernetesApiService) GetKubernetesStatefulSetByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesStatefulSet
+//  @return KubernetesStatefulSet
 func (a *KubernetesApiService) GetKubernetesStatefulSetByMoidExecute(r ApiGetKubernetesStatefulSetByMoidRequest) (*KubernetesStatefulSet, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -18926,8 +18842,8 @@ func (r ApiGetKubernetesStatefulSetListRequest) Execute() (*KubernetesStatefulSe
 /*
 GetKubernetesStatefulSetList Read a 'kubernetes.StatefulSet' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesStatefulSetListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesStatefulSetListRequest
 */
 func (a *KubernetesApiService) GetKubernetesStatefulSetList(ctx context.Context) ApiGetKubernetesStatefulSetListRequest {
 	return ApiGetKubernetesStatefulSetListRequest{
@@ -18937,8 +18853,7 @@ func (a *KubernetesApiService) GetKubernetesStatefulSetList(ctx context.Context)
 }
 
 // Execute executes the request
-//
-//	@return KubernetesStatefulSetResponse
+//  @return KubernetesStatefulSetResponse
 func (a *KubernetesApiService) GetKubernetesStatefulSetListExecute(r ApiGetKubernetesStatefulSetListRequest) (*KubernetesStatefulSetResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19125,9 +19040,9 @@ func (r ApiGetKubernetesSysConfigPolicyByMoidRequest) Execute() (*KubernetesSysC
 /*
 GetKubernetesSysConfigPolicyByMoid Read a 'kubernetes.SysConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesSysConfigPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesSysConfigPolicyByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesSysConfigPolicyByMoid(ctx context.Context, moid string) ApiGetKubernetesSysConfigPolicyByMoidRequest {
 	return ApiGetKubernetesSysConfigPolicyByMoidRequest{
@@ -19138,8 +19053,7 @@ func (a *KubernetesApiService) GetKubernetesSysConfigPolicyByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return KubernetesSysConfigPolicy
+//  @return KubernetesSysConfigPolicy
 func (a *KubernetesApiService) GetKubernetesSysConfigPolicyByMoidExecute(r ApiGetKubernetesSysConfigPolicyByMoidRequest) (*KubernetesSysConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19355,8 +19269,8 @@ func (r ApiGetKubernetesSysConfigPolicyListRequest) Execute() (*KubernetesSysCon
 /*
 GetKubernetesSysConfigPolicyList Read a 'kubernetes.SysConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesSysConfigPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesSysConfigPolicyListRequest
 */
 func (a *KubernetesApiService) GetKubernetesSysConfigPolicyList(ctx context.Context) ApiGetKubernetesSysConfigPolicyListRequest {
 	return ApiGetKubernetesSysConfigPolicyListRequest{
@@ -19366,8 +19280,7 @@ func (a *KubernetesApiService) GetKubernetesSysConfigPolicyList(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesSysConfigPolicyResponse
+//  @return KubernetesSysConfigPolicyResponse
 func (a *KubernetesApiService) GetKubernetesSysConfigPolicyListExecute(r ApiGetKubernetesSysConfigPolicyListRequest) (*KubernetesSysConfigPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19554,9 +19467,9 @@ func (r ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest) Execute() (*Kubern
 /*
 GetKubernetesTrustedRegistriesPolicyByMoid Read a 'kubernetes.TrustedRegistriesPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyByMoid(ctx context.Context, moid string) ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest {
 	return ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest{
@@ -19567,8 +19480,7 @@ func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyByMoid(ctx co
 }
 
 // Execute executes the request
-//
-//	@return KubernetesTrustedRegistriesPolicy
+//  @return KubernetesTrustedRegistriesPolicy
 func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyByMoidExecute(r ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest) (*KubernetesTrustedRegistriesPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19784,8 +19696,8 @@ func (r ApiGetKubernetesTrustedRegistriesPolicyListRequest) Execute() (*Kubernet
 /*
 GetKubernetesTrustedRegistriesPolicyList Read a 'kubernetes.TrustedRegistriesPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesTrustedRegistriesPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesTrustedRegistriesPolicyListRequest
 */
 func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyList(ctx context.Context) ApiGetKubernetesTrustedRegistriesPolicyListRequest {
 	return ApiGetKubernetesTrustedRegistriesPolicyListRequest{
@@ -19795,8 +19707,7 @@ func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyList(ctx cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesTrustedRegistriesPolicyResponse
+//  @return KubernetesTrustedRegistriesPolicyResponse
 func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyListExecute(r ApiGetKubernetesTrustedRegistriesPolicyListRequest) (*KubernetesTrustedRegistriesPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -19983,9 +19894,9 @@ func (r ApiGetKubernetesVersionByMoidRequest) Execute() (*KubernetesVersion, *ht
 /*
 GetKubernetesVersionByMoid Read a 'kubernetes.Version' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesVersionByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesVersionByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesVersionByMoid(ctx context.Context, moid string) ApiGetKubernetesVersionByMoidRequest {
 	return ApiGetKubernetesVersionByMoidRequest{
@@ -19996,8 +19907,7 @@ func (a *KubernetesApiService) GetKubernetesVersionByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVersion
+//  @return KubernetesVersion
 func (a *KubernetesApiService) GetKubernetesVersionByMoidExecute(r ApiGetKubernetesVersionByMoidRequest) (*KubernetesVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20213,8 +20123,8 @@ func (r ApiGetKubernetesVersionListRequest) Execute() (*KubernetesVersionRespons
 /*
 GetKubernetesVersionList Read a 'kubernetes.Version' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesVersionListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesVersionListRequest
 */
 func (a *KubernetesApiService) GetKubernetesVersionList(ctx context.Context) ApiGetKubernetesVersionListRequest {
 	return ApiGetKubernetesVersionListRequest{
@@ -20224,8 +20134,7 @@ func (a *KubernetesApiService) GetKubernetesVersionList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVersionResponse
+//  @return KubernetesVersionResponse
 func (a *KubernetesApiService) GetKubernetesVersionListExecute(r ApiGetKubernetesVersionListRequest) (*KubernetesVersionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20412,9 +20321,9 @@ func (r ApiGetKubernetesVersionPolicyByMoidRequest) Execute() (*KubernetesVersio
 /*
 GetKubernetesVersionPolicyByMoid Read a 'kubernetes.VersionPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesVersionPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesVersionPolicyByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesVersionPolicyByMoid(ctx context.Context, moid string) ApiGetKubernetesVersionPolicyByMoidRequest {
 	return ApiGetKubernetesVersionPolicyByMoidRequest{
@@ -20425,8 +20334,7 @@ func (a *KubernetesApiService) GetKubernetesVersionPolicyByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVersionPolicy
+//  @return KubernetesVersionPolicy
 func (a *KubernetesApiService) GetKubernetesVersionPolicyByMoidExecute(r ApiGetKubernetesVersionPolicyByMoidRequest) (*KubernetesVersionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20642,8 +20550,8 @@ func (r ApiGetKubernetesVersionPolicyListRequest) Execute() (*KubernetesVersionP
 /*
 GetKubernetesVersionPolicyList Read a 'kubernetes.VersionPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesVersionPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesVersionPolicyListRequest
 */
 func (a *KubernetesApiService) GetKubernetesVersionPolicyList(ctx context.Context) ApiGetKubernetesVersionPolicyListRequest {
 	return ApiGetKubernetesVersionPolicyListRequest{
@@ -20653,8 +20561,7 @@ func (a *KubernetesApiService) GetKubernetesVersionPolicyList(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVersionPolicyResponse
+//  @return KubernetesVersionPolicyResponse
 func (a *KubernetesApiService) GetKubernetesVersionPolicyListExecute(r ApiGetKubernetesVersionPolicyListRequest) (*KubernetesVersionPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -20841,9 +20748,9 @@ func (r ApiGetKubernetesVirtualMachineInfraConfigPolicyByMoidRequest) Execute() 
 /*
 GetKubernetesVirtualMachineInfraConfigPolicyByMoid Read a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesVirtualMachineInfraConfigPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesVirtualMachineInfraConfigPolicyByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInfraConfigPolicyByMoid(ctx context.Context, moid string) ApiGetKubernetesVirtualMachineInfraConfigPolicyByMoidRequest {
 	return ApiGetKubernetesVirtualMachineInfraConfigPolicyByMoidRequest{
@@ -20854,8 +20761,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfraConfigPolicyByMoi
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInfraConfigPolicy
+//  @return KubernetesVirtualMachineInfraConfigPolicy
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInfraConfigPolicyByMoidExecute(r ApiGetKubernetesVirtualMachineInfraConfigPolicyByMoidRequest) (*KubernetesVirtualMachineInfraConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21071,8 +20977,8 @@ func (r ApiGetKubernetesVirtualMachineInfraConfigPolicyListRequest) Execute() (*
 /*
 GetKubernetesVirtualMachineInfraConfigPolicyList Read a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesVirtualMachineInfraConfigPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesVirtualMachineInfraConfigPolicyListRequest
 */
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInfraConfigPolicyList(ctx context.Context) ApiGetKubernetesVirtualMachineInfraConfigPolicyListRequest {
 	return ApiGetKubernetesVirtualMachineInfraConfigPolicyListRequest{
@@ -21082,8 +20988,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfraConfigPolicyList(
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInfraConfigPolicyResponse
+//  @return KubernetesVirtualMachineInfraConfigPolicyResponse
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInfraConfigPolicyListExecute(r ApiGetKubernetesVirtualMachineInfraConfigPolicyListRequest) (*KubernetesVirtualMachineInfraConfigPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21270,9 +21175,9 @@ func (r ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest) Execu
 /*
 GetKubernetesVirtualMachineInfrastructureProviderByMoid Read a 'kubernetes.VirtualMachineInfrastructureProvider' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProviderByMoid(ctx context.Context, moid string) ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest {
 	return ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest{
@@ -21283,8 +21188,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProvider
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInfrastructureProvider
+//  @return KubernetesVirtualMachineInfrastructureProvider
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProviderByMoidExecute(r ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest) (*KubernetesVirtualMachineInfrastructureProvider, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21500,8 +21404,8 @@ func (r ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest) Execute
 /*
 GetKubernetesVirtualMachineInfrastructureProviderList Read a 'kubernetes.VirtualMachineInfrastructureProvider' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest
 */
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProviderList(ctx context.Context) ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest {
 	return ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest{
@@ -21511,8 +21415,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProvider
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInfrastructureProviderResponse
+//  @return KubernetesVirtualMachineInfrastructureProviderResponse
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProviderListExecute(r ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest) (*KubernetesVirtualMachineInfrastructureProviderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21699,9 +21602,9 @@ func (r ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest) Execute() (*Kub
 /*
 GetKubernetesVirtualMachineInstanceTypeByMoid Read a 'kubernetes.VirtualMachineInstanceType' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeByMoid(ctx context.Context, moid string) ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest {
 	return ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest{
@@ -21712,8 +21615,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeByMoid(ctx
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInstanceType
+//  @return KubernetesVirtualMachineInstanceType
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeByMoidExecute(r ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest) (*KubernetesVirtualMachineInstanceType, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -21929,8 +21831,8 @@ func (r ApiGetKubernetesVirtualMachineInstanceTypeListRequest) Execute() (*Kuber
 /*
 GetKubernetesVirtualMachineInstanceTypeList Read a 'kubernetes.VirtualMachineInstanceType' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesVirtualMachineInstanceTypeListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesVirtualMachineInstanceTypeListRequest
 */
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeList(ctx context.Context) ApiGetKubernetesVirtualMachineInstanceTypeListRequest {
 	return ApiGetKubernetesVirtualMachineInstanceTypeListRequest{
@@ -21940,8 +21842,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeList(ctx c
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInstanceTypeResponse
+//  @return KubernetesVirtualMachineInstanceTypeResponse
 func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeListExecute(r ApiGetKubernetesVirtualMachineInstanceTypeListRequest) (*KubernetesVirtualMachineInstanceTypeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22128,9 +22029,9 @@ func (r ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest) Execute() (*Kube
 /*
 GetKubernetesVirtualMachineNodeProfileByMoid Read a 'kubernetes.VirtualMachineNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest
 */
 func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileByMoid(ctx context.Context, moid string) ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest {
 	return ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest{
@@ -22141,8 +22042,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileByMoid(ctx 
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineNodeProfile
+//  @return KubernetesVirtualMachineNodeProfile
 func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileByMoidExecute(r ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest) (*KubernetesVirtualMachineNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22358,8 +22258,8 @@ func (r ApiGetKubernetesVirtualMachineNodeProfileListRequest) Execute() (*Kubern
 /*
 GetKubernetesVirtualMachineNodeProfileList Read a 'kubernetes.VirtualMachineNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetKubernetesVirtualMachineNodeProfileListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetKubernetesVirtualMachineNodeProfileListRequest
 */
 func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileList(ctx context.Context) ApiGetKubernetesVirtualMachineNodeProfileListRequest {
 	return ApiGetKubernetesVirtualMachineNodeProfileListRequest{
@@ -22369,8 +22269,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileList(ctx co
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineNodeProfileResponse
+//  @return KubernetesVirtualMachineNodeProfileResponse
 func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileListExecute(r ApiGetKubernetesVirtualMachineNodeProfileListRequest) (*KubernetesVirtualMachineNodeProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -22571,9 +22470,9 @@ func (r ApiPatchKubernetesAciCniApicRequest) Execute() (*KubernetesAciCniApic, *
 /*
 PatchKubernetesAciCniApic Update a 'kubernetes.AciCniApic' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesAciCniApicRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesAciCniApicRequest
 
 Deprecated
 */
@@ -22586,9 +22485,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniApic(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniApic
-//
+//  @return KubernetesAciCniApic
 // Deprecated
 func (a *KubernetesApiService) PatchKubernetesAciCniApicExecute(r ApiPatchKubernetesAciCniApicRequest) (*KubernetesAciCniApic, *http.Response, error) {
 	var (
@@ -22751,9 +22648,9 @@ func (r ApiPatchKubernetesAciCniProfileRequest) Execute() (*KubernetesAciCniProf
 /*
 PatchKubernetesAciCniProfile Update a 'kubernetes.AciCniProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesAciCniProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesAciCniProfileRequest
 
 Deprecated
 */
@@ -22766,9 +22663,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniProfile(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniProfile
-//
+//  @return KubernetesAciCniProfile
 // Deprecated
 func (a *KubernetesApiService) PatchKubernetesAciCniProfileExecute(r ApiPatchKubernetesAciCniProfileRequest) (*KubernetesAciCniProfile, *http.Response, error) {
 	var (
@@ -22931,9 +22826,9 @@ func (r ApiPatchKubernetesAciCniTenantClusterAllocationRequest) Execute() (*Kube
 /*
 PatchKubernetesAciCniTenantClusterAllocation Update a 'kubernetes.AciCniTenantClusterAllocation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesAciCniTenantClusterAllocationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesAciCniTenantClusterAllocationRequest
 
 Deprecated
 */
@@ -22946,9 +22841,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniTenantClusterAllocation(ctx 
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniTenantClusterAllocation
-//
+//  @return KubernetesAciCniTenantClusterAllocation
 // Deprecated
 func (a *KubernetesApiService) PatchKubernetesAciCniTenantClusterAllocationExecute(r ApiPatchKubernetesAciCniTenantClusterAllocationRequest) (*KubernetesAciCniTenantClusterAllocation, *http.Response, error) {
 	var (
@@ -23111,9 +23004,9 @@ func (r ApiPatchKubernetesAddonDefinitionRequest) Execute() (*KubernetesAddonDef
 /*
 PatchKubernetesAddonDefinition Update a 'kubernetes.AddonDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesAddonDefinitionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesAddonDefinitionRequest
 */
 func (a *KubernetesApiService) PatchKubernetesAddonDefinition(ctx context.Context, moid string) ApiPatchKubernetesAddonDefinitionRequest {
 	return ApiPatchKubernetesAddonDefinitionRequest{
@@ -23124,8 +23017,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonDefinition(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonDefinition
+//  @return KubernetesAddonDefinition
 func (a *KubernetesApiService) PatchKubernetesAddonDefinitionExecute(r ApiPatchKubernetesAddonDefinitionRequest) (*KubernetesAddonDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -23287,9 +23179,9 @@ func (r ApiPatchKubernetesAddonPolicyRequest) Execute() (*KubernetesAddonPolicy,
 /*
 PatchKubernetesAddonPolicy Update a 'kubernetes.AddonPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesAddonPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesAddonPolicyRequest
 */
 func (a *KubernetesApiService) PatchKubernetesAddonPolicy(ctx context.Context, moid string) ApiPatchKubernetesAddonPolicyRequest {
 	return ApiPatchKubernetesAddonPolicyRequest{
@@ -23300,8 +23192,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonPolicy(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonPolicy
+//  @return KubernetesAddonPolicy
 func (a *KubernetesApiService) PatchKubernetesAddonPolicyExecute(r ApiPatchKubernetesAddonPolicyRequest) (*KubernetesAddonPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -23463,9 +23354,9 @@ func (r ApiPatchKubernetesAddonRepositoryRequest) Execute() (*KubernetesAddonRep
 /*
 PatchKubernetesAddonRepository Update a 'kubernetes.AddonRepository' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesAddonRepositoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesAddonRepositoryRequest
 */
 func (a *KubernetesApiService) PatchKubernetesAddonRepository(ctx context.Context, moid string) ApiPatchKubernetesAddonRepositoryRequest {
 	return ApiPatchKubernetesAddonRepositoryRequest{
@@ -23476,8 +23367,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonRepository(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonRepository
+//  @return KubernetesAddonRepository
 func (a *KubernetesApiService) PatchKubernetesAddonRepositoryExecute(r ApiPatchKubernetesAddonRepositoryRequest) (*KubernetesAddonRepository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -23639,9 +23529,9 @@ func (r ApiPatchKubernetesBaremetalNodeProfileRequest) Execute() (*KubernetesBar
 /*
 PatchKubernetesBaremetalNodeProfile Update a 'kubernetes.BaremetalNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesBaremetalNodeProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesBaremetalNodeProfileRequest
 
 Deprecated
 */
@@ -23654,9 +23544,7 @@ func (a *KubernetesApiService) PatchKubernetesBaremetalNodeProfile(ctx context.C
 }
 
 // Execute executes the request
-//
-//	@return KubernetesBaremetalNodeProfile
-//
+//  @return KubernetesBaremetalNodeProfile
 // Deprecated
 func (a *KubernetesApiService) PatchKubernetesBaremetalNodeProfileExecute(r ApiPatchKubernetesBaremetalNodeProfileRequest) (*KubernetesBaremetalNodeProfile, *http.Response, error) {
 	var (
@@ -23819,9 +23707,9 @@ func (r ApiPatchKubernetesClusterRequest) Execute() (*KubernetesCluster, *http.R
 /*
 PatchKubernetesCluster Update a 'kubernetes.Cluster' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesClusterRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesClusterRequest
 */
 func (a *KubernetesApiService) PatchKubernetesCluster(ctx context.Context, moid string) ApiPatchKubernetesClusterRequest {
 	return ApiPatchKubernetesClusterRequest{
@@ -23832,8 +23720,7 @@ func (a *KubernetesApiService) PatchKubernetesCluster(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return KubernetesCluster
+//  @return KubernetesCluster
 func (a *KubernetesApiService) PatchKubernetesClusterExecute(r ApiPatchKubernetesClusterRequest) (*KubernetesCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -23995,9 +23882,9 @@ func (r ApiPatchKubernetesClusterAddonProfileRequest) Execute() (*KubernetesClus
 /*
 PatchKubernetesClusterAddonProfile Update a 'kubernetes.ClusterAddonProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesClusterAddonProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesClusterAddonProfileRequest
 */
 func (a *KubernetesApiService) PatchKubernetesClusterAddonProfile(ctx context.Context, moid string) ApiPatchKubernetesClusterAddonProfileRequest {
 	return ApiPatchKubernetesClusterAddonProfileRequest{
@@ -24008,8 +23895,7 @@ func (a *KubernetesApiService) PatchKubernetesClusterAddonProfile(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return KubernetesClusterAddonProfile
+//  @return KubernetesClusterAddonProfile
 func (a *KubernetesApiService) PatchKubernetesClusterAddonProfileExecute(r ApiPatchKubernetesClusterAddonProfileRequest) (*KubernetesClusterAddonProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -24171,9 +24057,9 @@ func (r ApiPatchKubernetesClusterProfileRequest) Execute() (*KubernetesClusterPr
 /*
 PatchKubernetesClusterProfile Update a 'kubernetes.ClusterProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesClusterProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesClusterProfileRequest
 */
 func (a *KubernetesApiService) PatchKubernetesClusterProfile(ctx context.Context, moid string) ApiPatchKubernetesClusterProfileRequest {
 	return ApiPatchKubernetesClusterProfileRequest{
@@ -24184,8 +24070,7 @@ func (a *KubernetesApiService) PatchKubernetesClusterProfile(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesClusterProfile
+//  @return KubernetesClusterProfile
 func (a *KubernetesApiService) PatchKubernetesClusterProfileExecute(r ApiPatchKubernetesClusterProfileRequest) (*KubernetesClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -24347,9 +24232,9 @@ func (r ApiPatchKubernetesContainerRuntimePolicyRequest) Execute() (*KubernetesC
 /*
 PatchKubernetesContainerRuntimePolicy Update a 'kubernetes.ContainerRuntimePolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesContainerRuntimePolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesContainerRuntimePolicyRequest
 */
 func (a *KubernetesApiService) PatchKubernetesContainerRuntimePolicy(ctx context.Context, moid string) ApiPatchKubernetesContainerRuntimePolicyRequest {
 	return ApiPatchKubernetesContainerRuntimePolicyRequest{
@@ -24360,8 +24245,7 @@ func (a *KubernetesApiService) PatchKubernetesContainerRuntimePolicy(ctx context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesContainerRuntimePolicy
+//  @return KubernetesContainerRuntimePolicy
 func (a *KubernetesApiService) PatchKubernetesContainerRuntimePolicyExecute(r ApiPatchKubernetesContainerRuntimePolicyRequest) (*KubernetesContainerRuntimePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -24523,9 +24407,9 @@ func (r ApiPatchKubernetesHttpProxyPolicyRequest) Execute() (*KubernetesHttpProx
 /*
 PatchKubernetesHttpProxyPolicy Update a 'kubernetes.HttpProxyPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesHttpProxyPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesHttpProxyPolicyRequest
 */
 func (a *KubernetesApiService) PatchKubernetesHttpProxyPolicy(ctx context.Context, moid string) ApiPatchKubernetesHttpProxyPolicyRequest {
 	return ApiPatchKubernetesHttpProxyPolicyRequest{
@@ -24536,8 +24420,7 @@ func (a *KubernetesApiService) PatchKubernetesHttpProxyPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesHttpProxyPolicy
+//  @return KubernetesHttpProxyPolicy
 func (a *KubernetesApiService) PatchKubernetesHttpProxyPolicyExecute(r ApiPatchKubernetesHttpProxyPolicyRequest) (*KubernetesHttpProxyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -24699,9 +24582,9 @@ func (r ApiPatchKubernetesNetworkPolicyRequest) Execute() (*KubernetesNetworkPol
 /*
 PatchKubernetesNetworkPolicy Update a 'kubernetes.NetworkPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesNetworkPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesNetworkPolicyRequest
 */
 func (a *KubernetesApiService) PatchKubernetesNetworkPolicy(ctx context.Context, moid string) ApiPatchKubernetesNetworkPolicyRequest {
 	return ApiPatchKubernetesNetworkPolicyRequest{
@@ -24712,8 +24595,7 @@ func (a *KubernetesApiService) PatchKubernetesNetworkPolicy(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNetworkPolicy
+//  @return KubernetesNetworkPolicy
 func (a *KubernetesApiService) PatchKubernetesNetworkPolicyExecute(r ApiPatchKubernetesNetworkPolicyRequest) (*KubernetesNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -24875,9 +24757,9 @@ func (r ApiPatchKubernetesNodeGroupProfileRequest) Execute() (*KubernetesNodeGro
 /*
 PatchKubernetesNodeGroupProfile Update a 'kubernetes.NodeGroupProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesNodeGroupProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesNodeGroupProfileRequest
 */
 func (a *KubernetesApiService) PatchKubernetesNodeGroupProfile(ctx context.Context, moid string) ApiPatchKubernetesNodeGroupProfileRequest {
 	return ApiPatchKubernetesNodeGroupProfileRequest{
@@ -24888,8 +24770,7 @@ func (a *KubernetesApiService) PatchKubernetesNodeGroupProfile(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNodeGroupProfile
+//  @return KubernetesNodeGroupProfile
 func (a *KubernetesApiService) PatchKubernetesNodeGroupProfileExecute(r ApiPatchKubernetesNodeGroupProfileRequest) (*KubernetesNodeGroupProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -25051,9 +24932,9 @@ func (r ApiPatchKubernetesNvidiaGpuProductRequest) Execute() (*KubernetesNvidiaG
 /*
 PatchKubernetesNvidiaGpuProduct Update a 'kubernetes.NvidiaGpuProduct' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesNvidiaGpuProductRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesNvidiaGpuProductRequest
 */
 func (a *KubernetesApiService) PatchKubernetesNvidiaGpuProduct(ctx context.Context, moid string) ApiPatchKubernetesNvidiaGpuProductRequest {
 	return ApiPatchKubernetesNvidiaGpuProductRequest{
@@ -25064,8 +24945,7 @@ func (a *KubernetesApiService) PatchKubernetesNvidiaGpuProduct(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNvidiaGpuProduct
+//  @return KubernetesNvidiaGpuProduct
 func (a *KubernetesApiService) PatchKubernetesNvidiaGpuProductExecute(r ApiPatchKubernetesNvidiaGpuProductRequest) (*KubernetesNvidiaGpuProduct, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -25227,9 +25107,9 @@ func (r ApiPatchKubernetesSysConfigPolicyRequest) Execute() (*KubernetesSysConfi
 /*
 PatchKubernetesSysConfigPolicy Update a 'kubernetes.SysConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesSysConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesSysConfigPolicyRequest
 */
 func (a *KubernetesApiService) PatchKubernetesSysConfigPolicy(ctx context.Context, moid string) ApiPatchKubernetesSysConfigPolicyRequest {
 	return ApiPatchKubernetesSysConfigPolicyRequest{
@@ -25240,8 +25120,7 @@ func (a *KubernetesApiService) PatchKubernetesSysConfigPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesSysConfigPolicy
+//  @return KubernetesSysConfigPolicy
 func (a *KubernetesApiService) PatchKubernetesSysConfigPolicyExecute(r ApiPatchKubernetesSysConfigPolicyRequest) (*KubernetesSysConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -25403,9 +25282,9 @@ func (r ApiPatchKubernetesTrustedRegistriesPolicyRequest) Execute() (*Kubernetes
 /*
 PatchKubernetesTrustedRegistriesPolicy Update a 'kubernetes.TrustedRegistriesPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesTrustedRegistriesPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesTrustedRegistriesPolicyRequest
 */
 func (a *KubernetesApiService) PatchKubernetesTrustedRegistriesPolicy(ctx context.Context, moid string) ApiPatchKubernetesTrustedRegistriesPolicyRequest {
 	return ApiPatchKubernetesTrustedRegistriesPolicyRequest{
@@ -25416,8 +25295,7 @@ func (a *KubernetesApiService) PatchKubernetesTrustedRegistriesPolicy(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesTrustedRegistriesPolicy
+//  @return KubernetesTrustedRegistriesPolicy
 func (a *KubernetesApiService) PatchKubernetesTrustedRegistriesPolicyExecute(r ApiPatchKubernetesTrustedRegistriesPolicyRequest) (*KubernetesTrustedRegistriesPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -25579,9 +25457,9 @@ func (r ApiPatchKubernetesVersionRequest) Execute() (*KubernetesVersion, *http.R
 /*
 PatchKubernetesVersion Update a 'kubernetes.Version' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesVersionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesVersionRequest
 */
 func (a *KubernetesApiService) PatchKubernetesVersion(ctx context.Context, moid string) ApiPatchKubernetesVersionRequest {
 	return ApiPatchKubernetesVersionRequest{
@@ -25592,8 +25470,7 @@ func (a *KubernetesApiService) PatchKubernetesVersion(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVersion
+//  @return KubernetesVersion
 func (a *KubernetesApiService) PatchKubernetesVersionExecute(r ApiPatchKubernetesVersionRequest) (*KubernetesVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -25755,9 +25632,9 @@ func (r ApiPatchKubernetesVersionPolicyRequest) Execute() (*KubernetesVersionPol
 /*
 PatchKubernetesVersionPolicy Update a 'kubernetes.VersionPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesVersionPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesVersionPolicyRequest
 */
 func (a *KubernetesApiService) PatchKubernetesVersionPolicy(ctx context.Context, moid string) ApiPatchKubernetesVersionPolicyRequest {
 	return ApiPatchKubernetesVersionPolicyRequest{
@@ -25768,8 +25645,7 @@ func (a *KubernetesApiService) PatchKubernetesVersionPolicy(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVersionPolicy
+//  @return KubernetesVersionPolicy
 func (a *KubernetesApiService) PatchKubernetesVersionPolicyExecute(r ApiPatchKubernetesVersionPolicyRequest) (*KubernetesVersionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -25931,9 +25807,9 @@ func (r ApiPatchKubernetesVirtualMachineInfraConfigPolicyRequest) Execute() (*Ku
 /*
 PatchKubernetesVirtualMachineInfraConfigPolicy Update a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesVirtualMachineInfraConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesVirtualMachineInfraConfigPolicyRequest
 */
 func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfraConfigPolicy(ctx context.Context, moid string) ApiPatchKubernetesVirtualMachineInfraConfigPolicyRequest {
 	return ApiPatchKubernetesVirtualMachineInfraConfigPolicyRequest{
@@ -25944,8 +25820,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfraConfigPolicy(ct
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInfraConfigPolicy
+//  @return KubernetesVirtualMachineInfraConfigPolicy
 func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfraConfigPolicyExecute(r ApiPatchKubernetesVirtualMachineInfraConfigPolicyRequest) (*KubernetesVirtualMachineInfraConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -26107,9 +25982,9 @@ func (r ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest) Execute()
 /*
 PatchKubernetesVirtualMachineInfrastructureProvider Update a 'kubernetes.VirtualMachineInfrastructureProvider' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest
 */
 func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfrastructureProvider(ctx context.Context, moid string) ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest {
 	return ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest{
@@ -26120,8 +25995,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfrastructureProvid
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInfrastructureProvider
+//  @return KubernetesVirtualMachineInfrastructureProvider
 func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfrastructureProviderExecute(r ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest) (*KubernetesVirtualMachineInfrastructureProvider, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -26283,9 +26157,9 @@ func (r ApiPatchKubernetesVirtualMachineInstanceTypeRequest) Execute() (*Kuberne
 /*
 PatchKubernetesVirtualMachineInstanceType Update a 'kubernetes.VirtualMachineInstanceType' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesVirtualMachineInstanceTypeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesVirtualMachineInstanceTypeRequest
 */
 func (a *KubernetesApiService) PatchKubernetesVirtualMachineInstanceType(ctx context.Context, moid string) ApiPatchKubernetesVirtualMachineInstanceTypeRequest {
 	return ApiPatchKubernetesVirtualMachineInstanceTypeRequest{
@@ -26296,8 +26170,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInstanceType(ctx con
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInstanceType
+//  @return KubernetesVirtualMachineInstanceType
 func (a *KubernetesApiService) PatchKubernetesVirtualMachineInstanceTypeExecute(r ApiPatchKubernetesVirtualMachineInstanceTypeRequest) (*KubernetesVirtualMachineInstanceType, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -26459,9 +26332,9 @@ func (r ApiPatchKubernetesVirtualMachineNodeProfileRequest) Execute() (*Kubernet
 /*
 PatchKubernetesVirtualMachineNodeProfile Update a 'kubernetes.VirtualMachineNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchKubernetesVirtualMachineNodeProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchKubernetesVirtualMachineNodeProfileRequest
 */
 func (a *KubernetesApiService) PatchKubernetesVirtualMachineNodeProfile(ctx context.Context, moid string) ApiPatchKubernetesVirtualMachineNodeProfileRequest {
 	return ApiPatchKubernetesVirtualMachineNodeProfileRequest{
@@ -26472,8 +26345,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineNodeProfile(ctx cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineNodeProfile
+//  @return KubernetesVirtualMachineNodeProfile
 func (a *KubernetesApiService) PatchKubernetesVirtualMachineNodeProfileExecute(r ApiPatchKubernetesVirtualMachineNodeProfileRequest) (*KubernetesVirtualMachineNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -26635,9 +26507,9 @@ func (r ApiUpdateKubernetesAciCniApicRequest) Execute() (*KubernetesAciCniApic, 
 /*
 UpdateKubernetesAciCniApic Update a 'kubernetes.AciCniApic' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesAciCniApicRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesAciCniApicRequest
 
 Deprecated
 */
@@ -26650,9 +26522,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniApic(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniApic
-//
+//  @return KubernetesAciCniApic
 // Deprecated
 func (a *KubernetesApiService) UpdateKubernetesAciCniApicExecute(r ApiUpdateKubernetesAciCniApicRequest) (*KubernetesAciCniApic, *http.Response, error) {
 	var (
@@ -26815,9 +26685,9 @@ func (r ApiUpdateKubernetesAciCniProfileRequest) Execute() (*KubernetesAciCniPro
 /*
 UpdateKubernetesAciCniProfile Update a 'kubernetes.AciCniProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesAciCniProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesAciCniProfileRequest
 
 Deprecated
 */
@@ -26830,9 +26700,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniProfile(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniProfile
-//
+//  @return KubernetesAciCniProfile
 // Deprecated
 func (a *KubernetesApiService) UpdateKubernetesAciCniProfileExecute(r ApiUpdateKubernetesAciCniProfileRequest) (*KubernetesAciCniProfile, *http.Response, error) {
 	var (
@@ -26995,9 +26863,9 @@ func (r ApiUpdateKubernetesAciCniTenantClusterAllocationRequest) Execute() (*Kub
 /*
 UpdateKubernetesAciCniTenantClusterAllocation Update a 'kubernetes.AciCniTenantClusterAllocation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesAciCniTenantClusterAllocationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesAciCniTenantClusterAllocationRequest
 
 Deprecated
 */
@@ -27010,9 +26878,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniTenantClusterAllocation(ctx
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAciCniTenantClusterAllocation
-//
+//  @return KubernetesAciCniTenantClusterAllocation
 // Deprecated
 func (a *KubernetesApiService) UpdateKubernetesAciCniTenantClusterAllocationExecute(r ApiUpdateKubernetesAciCniTenantClusterAllocationRequest) (*KubernetesAciCniTenantClusterAllocation, *http.Response, error) {
 	var (
@@ -27175,9 +27041,9 @@ func (r ApiUpdateKubernetesAddonDefinitionRequest) Execute() (*KubernetesAddonDe
 /*
 UpdateKubernetesAddonDefinition Update a 'kubernetes.AddonDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesAddonDefinitionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesAddonDefinitionRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesAddonDefinition(ctx context.Context, moid string) ApiUpdateKubernetesAddonDefinitionRequest {
 	return ApiUpdateKubernetesAddonDefinitionRequest{
@@ -27188,8 +27054,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonDefinition(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonDefinition
+//  @return KubernetesAddonDefinition
 func (a *KubernetesApiService) UpdateKubernetesAddonDefinitionExecute(r ApiUpdateKubernetesAddonDefinitionRequest) (*KubernetesAddonDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -27351,9 +27216,9 @@ func (r ApiUpdateKubernetesAddonPolicyRequest) Execute() (*KubernetesAddonPolicy
 /*
 UpdateKubernetesAddonPolicy Update a 'kubernetes.AddonPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesAddonPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesAddonPolicyRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesAddonPolicy(ctx context.Context, moid string) ApiUpdateKubernetesAddonPolicyRequest {
 	return ApiUpdateKubernetesAddonPolicyRequest{
@@ -27364,8 +27229,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonPolicy(ctx context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonPolicy
+//  @return KubernetesAddonPolicy
 func (a *KubernetesApiService) UpdateKubernetesAddonPolicyExecute(r ApiUpdateKubernetesAddonPolicyRequest) (*KubernetesAddonPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -27527,9 +27391,9 @@ func (r ApiUpdateKubernetesAddonRepositoryRequest) Execute() (*KubernetesAddonRe
 /*
 UpdateKubernetesAddonRepository Update a 'kubernetes.AddonRepository' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesAddonRepositoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesAddonRepositoryRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesAddonRepository(ctx context.Context, moid string) ApiUpdateKubernetesAddonRepositoryRequest {
 	return ApiUpdateKubernetesAddonRepositoryRequest{
@@ -27540,8 +27404,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonRepository(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesAddonRepository
+//  @return KubernetesAddonRepository
 func (a *KubernetesApiService) UpdateKubernetesAddonRepositoryExecute(r ApiUpdateKubernetesAddonRepositoryRequest) (*KubernetesAddonRepository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -27703,9 +27566,9 @@ func (r ApiUpdateKubernetesBaremetalNodeProfileRequest) Execute() (*KubernetesBa
 /*
 UpdateKubernetesBaremetalNodeProfile Update a 'kubernetes.BaremetalNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesBaremetalNodeProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesBaremetalNodeProfileRequest
 
 Deprecated
 */
@@ -27718,9 +27581,7 @@ func (a *KubernetesApiService) UpdateKubernetesBaremetalNodeProfile(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return KubernetesBaremetalNodeProfile
-//
+//  @return KubernetesBaremetalNodeProfile
 // Deprecated
 func (a *KubernetesApiService) UpdateKubernetesBaremetalNodeProfileExecute(r ApiUpdateKubernetesBaremetalNodeProfileRequest) (*KubernetesBaremetalNodeProfile, *http.Response, error) {
 	var (
@@ -27883,9 +27744,9 @@ func (r ApiUpdateKubernetesClusterRequest) Execute() (*KubernetesCluster, *http.
 /*
 UpdateKubernetesCluster Update a 'kubernetes.Cluster' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesClusterRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesClusterRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesCluster(ctx context.Context, moid string) ApiUpdateKubernetesClusterRequest {
 	return ApiUpdateKubernetesClusterRequest{
@@ -27896,8 +27757,7 @@ func (a *KubernetesApiService) UpdateKubernetesCluster(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return KubernetesCluster
+//  @return KubernetesCluster
 func (a *KubernetesApiService) UpdateKubernetesClusterExecute(r ApiUpdateKubernetesClusterRequest) (*KubernetesCluster, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -28059,9 +27919,9 @@ func (r ApiUpdateKubernetesClusterAddonProfileRequest) Execute() (*KubernetesClu
 /*
 UpdateKubernetesClusterAddonProfile Update a 'kubernetes.ClusterAddonProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesClusterAddonProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesClusterAddonProfileRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesClusterAddonProfile(ctx context.Context, moid string) ApiUpdateKubernetesClusterAddonProfileRequest {
 	return ApiUpdateKubernetesClusterAddonProfileRequest{
@@ -28072,8 +27932,7 @@ func (a *KubernetesApiService) UpdateKubernetesClusterAddonProfile(ctx context.C
 }
 
 // Execute executes the request
-//
-//	@return KubernetesClusterAddonProfile
+//  @return KubernetesClusterAddonProfile
 func (a *KubernetesApiService) UpdateKubernetesClusterAddonProfileExecute(r ApiUpdateKubernetesClusterAddonProfileRequest) (*KubernetesClusterAddonProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -28235,9 +28094,9 @@ func (r ApiUpdateKubernetesClusterProfileRequest) Execute() (*KubernetesClusterP
 /*
 UpdateKubernetesClusterProfile Update a 'kubernetes.ClusterProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesClusterProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesClusterProfileRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesClusterProfile(ctx context.Context, moid string) ApiUpdateKubernetesClusterProfileRequest {
 	return ApiUpdateKubernetesClusterProfileRequest{
@@ -28248,8 +28107,7 @@ func (a *KubernetesApiService) UpdateKubernetesClusterProfile(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesClusterProfile
+//  @return KubernetesClusterProfile
 func (a *KubernetesApiService) UpdateKubernetesClusterProfileExecute(r ApiUpdateKubernetesClusterProfileRequest) (*KubernetesClusterProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -28411,9 +28269,9 @@ func (r ApiUpdateKubernetesContainerRuntimePolicyRequest) Execute() (*Kubernetes
 /*
 UpdateKubernetesContainerRuntimePolicy Update a 'kubernetes.ContainerRuntimePolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesContainerRuntimePolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesContainerRuntimePolicyRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesContainerRuntimePolicy(ctx context.Context, moid string) ApiUpdateKubernetesContainerRuntimePolicyRequest {
 	return ApiUpdateKubernetesContainerRuntimePolicyRequest{
@@ -28424,8 +28282,7 @@ func (a *KubernetesApiService) UpdateKubernetesContainerRuntimePolicy(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return KubernetesContainerRuntimePolicy
+//  @return KubernetesContainerRuntimePolicy
 func (a *KubernetesApiService) UpdateKubernetesContainerRuntimePolicyExecute(r ApiUpdateKubernetesContainerRuntimePolicyRequest) (*KubernetesContainerRuntimePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -28587,9 +28444,9 @@ func (r ApiUpdateKubernetesHttpProxyPolicyRequest) Execute() (*KubernetesHttpPro
 /*
 UpdateKubernetesHttpProxyPolicy Update a 'kubernetes.HttpProxyPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesHttpProxyPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesHttpProxyPolicyRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesHttpProxyPolicy(ctx context.Context, moid string) ApiUpdateKubernetesHttpProxyPolicyRequest {
 	return ApiUpdateKubernetesHttpProxyPolicyRequest{
@@ -28600,8 +28457,7 @@ func (a *KubernetesApiService) UpdateKubernetesHttpProxyPolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesHttpProxyPolicy
+//  @return KubernetesHttpProxyPolicy
 func (a *KubernetesApiService) UpdateKubernetesHttpProxyPolicyExecute(r ApiUpdateKubernetesHttpProxyPolicyRequest) (*KubernetesHttpProxyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -28763,9 +28619,9 @@ func (r ApiUpdateKubernetesNetworkPolicyRequest) Execute() (*KubernetesNetworkPo
 /*
 UpdateKubernetesNetworkPolicy Update a 'kubernetes.NetworkPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesNetworkPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesNetworkPolicyRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesNetworkPolicy(ctx context.Context, moid string) ApiUpdateKubernetesNetworkPolicyRequest {
 	return ApiUpdateKubernetesNetworkPolicyRequest{
@@ -28776,8 +28632,7 @@ func (a *KubernetesApiService) UpdateKubernetesNetworkPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNetworkPolicy
+//  @return KubernetesNetworkPolicy
 func (a *KubernetesApiService) UpdateKubernetesNetworkPolicyExecute(r ApiUpdateKubernetesNetworkPolicyRequest) (*KubernetesNetworkPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -28939,9 +28794,9 @@ func (r ApiUpdateKubernetesNodeGroupProfileRequest) Execute() (*KubernetesNodeGr
 /*
 UpdateKubernetesNodeGroupProfile Update a 'kubernetes.NodeGroupProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesNodeGroupProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesNodeGroupProfileRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesNodeGroupProfile(ctx context.Context, moid string) ApiUpdateKubernetesNodeGroupProfileRequest {
 	return ApiUpdateKubernetesNodeGroupProfileRequest{
@@ -28952,8 +28807,7 @@ func (a *KubernetesApiService) UpdateKubernetesNodeGroupProfile(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNodeGroupProfile
+//  @return KubernetesNodeGroupProfile
 func (a *KubernetesApiService) UpdateKubernetesNodeGroupProfileExecute(r ApiUpdateKubernetesNodeGroupProfileRequest) (*KubernetesNodeGroupProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -29115,9 +28969,9 @@ func (r ApiUpdateKubernetesNvidiaGpuProductRequest) Execute() (*KubernetesNvidia
 /*
 UpdateKubernetesNvidiaGpuProduct Update a 'kubernetes.NvidiaGpuProduct' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesNvidiaGpuProductRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesNvidiaGpuProductRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesNvidiaGpuProduct(ctx context.Context, moid string) ApiUpdateKubernetesNvidiaGpuProductRequest {
 	return ApiUpdateKubernetesNvidiaGpuProductRequest{
@@ -29128,8 +28982,7 @@ func (a *KubernetesApiService) UpdateKubernetesNvidiaGpuProduct(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return KubernetesNvidiaGpuProduct
+//  @return KubernetesNvidiaGpuProduct
 func (a *KubernetesApiService) UpdateKubernetesNvidiaGpuProductExecute(r ApiUpdateKubernetesNvidiaGpuProductRequest) (*KubernetesNvidiaGpuProduct, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -29291,9 +29144,9 @@ func (r ApiUpdateKubernetesSysConfigPolicyRequest) Execute() (*KubernetesSysConf
 /*
 UpdateKubernetesSysConfigPolicy Update a 'kubernetes.SysConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesSysConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesSysConfigPolicyRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesSysConfigPolicy(ctx context.Context, moid string) ApiUpdateKubernetesSysConfigPolicyRequest {
 	return ApiUpdateKubernetesSysConfigPolicyRequest{
@@ -29304,8 +29157,7 @@ func (a *KubernetesApiService) UpdateKubernetesSysConfigPolicy(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesSysConfigPolicy
+//  @return KubernetesSysConfigPolicy
 func (a *KubernetesApiService) UpdateKubernetesSysConfigPolicyExecute(r ApiUpdateKubernetesSysConfigPolicyRequest) (*KubernetesSysConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -29467,9 +29319,9 @@ func (r ApiUpdateKubernetesTrustedRegistriesPolicyRequest) Execute() (*Kubernete
 /*
 UpdateKubernetesTrustedRegistriesPolicy Update a 'kubernetes.TrustedRegistriesPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesTrustedRegistriesPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesTrustedRegistriesPolicyRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesTrustedRegistriesPolicy(ctx context.Context, moid string) ApiUpdateKubernetesTrustedRegistriesPolicyRequest {
 	return ApiUpdateKubernetesTrustedRegistriesPolicyRequest{
@@ -29480,8 +29332,7 @@ func (a *KubernetesApiService) UpdateKubernetesTrustedRegistriesPolicy(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return KubernetesTrustedRegistriesPolicy
+//  @return KubernetesTrustedRegistriesPolicy
 func (a *KubernetesApiService) UpdateKubernetesTrustedRegistriesPolicyExecute(r ApiUpdateKubernetesTrustedRegistriesPolicyRequest) (*KubernetesTrustedRegistriesPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -29643,9 +29494,9 @@ func (r ApiUpdateKubernetesVersionRequest) Execute() (*KubernetesVersion, *http.
 /*
 UpdateKubernetesVersion Update a 'kubernetes.Version' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesVersionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesVersionRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesVersion(ctx context.Context, moid string) ApiUpdateKubernetesVersionRequest {
 	return ApiUpdateKubernetesVersionRequest{
@@ -29656,8 +29507,7 @@ func (a *KubernetesApiService) UpdateKubernetesVersion(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVersion
+//  @return KubernetesVersion
 func (a *KubernetesApiService) UpdateKubernetesVersionExecute(r ApiUpdateKubernetesVersionRequest) (*KubernetesVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -29819,9 +29669,9 @@ func (r ApiUpdateKubernetesVersionPolicyRequest) Execute() (*KubernetesVersionPo
 /*
 UpdateKubernetesVersionPolicy Update a 'kubernetes.VersionPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesVersionPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesVersionPolicyRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesVersionPolicy(ctx context.Context, moid string) ApiUpdateKubernetesVersionPolicyRequest {
 	return ApiUpdateKubernetesVersionPolicyRequest{
@@ -29832,8 +29682,7 @@ func (a *KubernetesApiService) UpdateKubernetesVersionPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVersionPolicy
+//  @return KubernetesVersionPolicy
 func (a *KubernetesApiService) UpdateKubernetesVersionPolicyExecute(r ApiUpdateKubernetesVersionPolicyRequest) (*KubernetesVersionPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -29995,9 +29844,9 @@ func (r ApiUpdateKubernetesVirtualMachineInfraConfigPolicyRequest) Execute() (*K
 /*
 UpdateKubernetesVirtualMachineInfraConfigPolicy Update a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesVirtualMachineInfraConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesVirtualMachineInfraConfigPolicyRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfraConfigPolicy(ctx context.Context, moid string) ApiUpdateKubernetesVirtualMachineInfraConfigPolicyRequest {
 	return ApiUpdateKubernetesVirtualMachineInfraConfigPolicyRequest{
@@ -30008,8 +29857,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfraConfigPolicy(c
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInfraConfigPolicy
+//  @return KubernetesVirtualMachineInfraConfigPolicy
 func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfraConfigPolicyExecute(r ApiUpdateKubernetesVirtualMachineInfraConfigPolicyRequest) (*KubernetesVirtualMachineInfraConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -30171,9 +30019,9 @@ func (r ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest) Execute(
 /*
 UpdateKubernetesVirtualMachineInfrastructureProvider Update a 'kubernetes.VirtualMachineInfrastructureProvider' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfrastructureProvider(ctx context.Context, moid string) ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest {
 	return ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest{
@@ -30184,8 +30032,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfrastructureProvi
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInfrastructureProvider
+//  @return KubernetesVirtualMachineInfrastructureProvider
 func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfrastructureProviderExecute(r ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest) (*KubernetesVirtualMachineInfrastructureProvider, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -30347,9 +30194,9 @@ func (r ApiUpdateKubernetesVirtualMachineInstanceTypeRequest) Execute() (*Kubern
 /*
 UpdateKubernetesVirtualMachineInstanceType Update a 'kubernetes.VirtualMachineInstanceType' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesVirtualMachineInstanceTypeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesVirtualMachineInstanceTypeRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInstanceType(ctx context.Context, moid string) ApiUpdateKubernetesVirtualMachineInstanceTypeRequest {
 	return ApiUpdateKubernetesVirtualMachineInstanceTypeRequest{
@@ -30360,8 +30207,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInstanceType(ctx co
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineInstanceType
+//  @return KubernetesVirtualMachineInstanceType
 func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInstanceTypeExecute(r ApiUpdateKubernetesVirtualMachineInstanceTypeRequest) (*KubernetesVirtualMachineInstanceType, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -30523,9 +30369,9 @@ func (r ApiUpdateKubernetesVirtualMachineNodeProfileRequest) Execute() (*Kuberne
 /*
 UpdateKubernetesVirtualMachineNodeProfile Update a 'kubernetes.VirtualMachineNodeProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateKubernetesVirtualMachineNodeProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateKubernetesVirtualMachineNodeProfileRequest
 */
 func (a *KubernetesApiService) UpdateKubernetesVirtualMachineNodeProfile(ctx context.Context, moid string) ApiUpdateKubernetesVirtualMachineNodeProfileRequest {
 	return ApiUpdateKubernetesVirtualMachineNodeProfileRequest{
@@ -30536,8 +30382,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineNodeProfile(ctx con
 }
 
 // Execute executes the request
-//
-//	@return KubernetesVirtualMachineNodeProfile
+//  @return KubernetesVirtualMachineNodeProfile
 func (a *KubernetesApiService) UpdateKubernetesVirtualMachineNodeProfileExecute(r ApiUpdateKubernetesVirtualMachineNodeProfileRequest) (*KubernetesVirtualMachineNodeProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

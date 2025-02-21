@@ -134,6 +134,46 @@ func resourceIamAppRegistration() *schema.Resource {
 				Optional:    true,
 				Default:     "iam.AppRegistration",
 			},
+			"client_application": {
+				Description: "A reference to a iamAbstractClientApplication resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"client_id": {
 				Description: "A unique identifier for the OAuth2 client application.\nThe client ID is auto-generated when the AppRegistration object is created.",
 				Type:        schema.TypeString,
@@ -180,6 +220,17 @@ func resourceIamAppRegistration() *schema.Resource {
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"entity_id": {
+				Description: "EntityId holds the Id of the client application that is using this AppRegistration.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -663,6 +714,46 @@ func resourceIamAppRegistration() *schema.Resource {
 					},
 				},
 			},
+			"security_holder": {
+				Description: "A reference to a iamSecurityHolder resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -718,6 +809,17 @@ func resourceIamAppRegistration() *schema.Resource {
 					},
 				},
 			},
+			"token_expiry": {
+				Description: "Defines the expiry time of the token generated via the AppRegistration.\n* `generic` - This sets the expiryTime to ten minutes from the token issuing time.\n* `longLived` - This sets the expiryTime to an year from the token issuing time.\n* `infinite` - This allows for a never-expiring token. Use with caution.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"user": {
 				Description: "A reference to a iamUser resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -1173,6 +1275,10 @@ func resourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while setting property ClassId in IamAppRegistration object: %s", err.Error())
 	}
 
+	if err := d.Set("client_application", flattenMapIamAbstractClientApplicationRelationship(s.GetClientApplication(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ClientApplication in IamAppRegistration object: %s", err.Error())
+	}
+
 	if err := d.Set("client_id", (s.GetClientId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClientId in IamAppRegistration object: %s", err.Error())
 	}
@@ -1199,6 +1305,10 @@ func resourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, m
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in IamAppRegistration object: %s", err.Error())
+	}
+
+	if err := d.Set("entity_id", (s.GetEntityId())); err != nil {
+		return diag.Errorf("error occurred while setting property EntityId in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("expiry_date_time", (s.GetExpiryDateTime()).String()); err != nil {
@@ -1285,6 +1395,10 @@ func resourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while setting property Scope in IamAppRegistration object: %s", err.Error())
 	}
 
+	if err := d.Set("security_holder", flattenMapIamSecurityHolderRelationship(s.GetSecurityHolder(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property SecurityHolder in IamAppRegistration object: %s", err.Error())
+	}
+
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
 		return diag.Errorf("error occurred while setting property SharedScope in IamAppRegistration object: %s", err.Error())
 	}
@@ -1299,6 +1413,10 @@ func resourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, m
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in IamAppRegistration object: %s", err.Error())
+	}
+
+	if err := d.Set("token_expiry", (s.GetTokenExpiry())); err != nil {
+		return diag.Errorf("error occurred while setting property TokenExpiry in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("user", flattenMapIamUserRelationship(s.GetUser(), d)); err != nil {

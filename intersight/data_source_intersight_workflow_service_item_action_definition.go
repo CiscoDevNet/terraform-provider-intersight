@@ -44,7 +44,12 @@ func getWorkflowServiceItemActionDefinitionSchema() map[string]*schema.Schema {
 						Optional:    true,
 					},
 					"operation_type": {
-						Description: "Type of action operation to be executed on the service item.\n* `PostDeployment` - This represents the post-deployment actions for the resources created or defined through the deployment action. There can be more than one post-deployment operations associated with a service item.\n* `Deployment` - This represents the deploy action, for the service item action definition. This operation type is used to create or define resources that is managed by the service item. There can only be one Service Item Action Definition that can be marked with the operation type as Deployment and this is a mandatory operation type. All valid Service Items must have one and only one operation type marked as type Deployment.\n* `Decommission` - This represents the decommission action, used to decommission the created resources. All valid Service Items must have one and only one operation type marked as type Decommission. Once a decommission action is run on a Service Item, no further operations are allowed on that Service Item.",
+						Description: "Type of action operation to be executed on the service item.\n* `PostDeployment` - This represents the post-deployment actions for the resources created or defined through the deployment action. There can be more than one post-deployment operations associated with a service item.\n* `Deployment` - This represents the deploy action, for the service item action definition. This operation type is used to create or define resources that is managed by the service item. There can only be one Service Item Action Definition that can be marked with the operation type as Deployment and this is a mandatory operation type. All valid Service Items must have one and only one operation type marked as type Deployment.\n* `Decommission` - This represents the decommission action, used to decommission the created resources. All valid Service Items must have one and only one operation type marked as type Decommission. Once a decommission action is run on a Service Item, no further operations are allowed on that Service Item.\n* `Migration` - This represents the migration action, used to migrate service item instance from one service item definition version to another service item definition version. All valid service items can have up to one operation type marked as Migration. Once a migration action is running on a service item instance, no further operations are allowed on that service item instance during the migration process.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"properties": {
+						Description: "The properties of the action. The actual structure of properties can vary based on the operationType.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1209,6 +1214,17 @@ func dataSourceWorkflowServiceItemActionDefinitionRead(c context.Context, d *sch
 				{
 					x := (v.(string))
 					o.SetOperationType(x)
+				}
+			}
+			if v, ok := l["properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetProperties(x2)
+					}
 				}
 			}
 			if v, ok := l["stop_on_failure"]; ok {

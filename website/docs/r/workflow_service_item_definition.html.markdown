@@ -58,6 +58,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `create_user`:(string)(ReadOnly) The user identifier who created or cloned the service item definition. 
 * `cvd_id`:(string) The Cisco Validated Design (CVD) Identifier that this service item provides. 
+* `default_version`:(bool) The flag to indicate that this is the default version of the service item. 
 * `delete_instance_on_decommission`:(bool) The flag to indicate that service item instance will be deleted after the completion of decommission action. 
 * `description`:(string) The description for this service item which provides information on what are the pre-requisites to deploy the service item and what features are supported on the service item. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
@@ -203,6 +204,13 @@ This complex property has following sub-properties:
   + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `regex`:(string) When the parameter is a string this regular expression is used to ensure the value is valid. 
+  + `data_source_selector`:(Array)
+This complex property has following sub-properties:
+    + `display_attributes`:
+                (Array of schema.TypeString) -
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `selector`:(string) This field holds mapping information used to provide suggestions to the user. The mapping should be in the '${workflow.input.property}' format. It supports workflow input mapping for workflows, and for User Actions, it supports workflow inputs, workflow outputs, workflow variables, and outputs from previous tasks. 
+    + `value_attribute`:(string) A property from the mapped parameter, value of which can be used as value for referenced input definition. 
   + `inventory_selector`:(Array)
 This complex property has following sub-properties:
     + `display_attributes`:

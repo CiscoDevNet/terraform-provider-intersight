@@ -119,6 +119,11 @@ func resourceApplianceClusterInfo() *schema.Resource {
 					},
 				},
 			},
+			"build_type": {
+				Description: "The build type of the Intersight Virtual Appliance.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -189,6 +194,24 @@ func resourceApplianceClusterInfo() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 				ForceNew:    true,
+			},
+			"node_id": {
+				Description: "System assigned unique ID of the Intersight Appliance node. The system incrementally assigns identifiers to each node in the Intersight Appliance starting with a value of 0.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"node_type": {
+				Description:  "The node type of Intersight Virtual Appliance.\n* `standalone` - Single Node Intersight Virtual Appliance.\n* `management` - Management node type when Intersight Virtual Appliance is running as management-worker deployment.\n* `hamanagement` - Management node type when Intersight Virtual Appliance is running as multi node HA deployment.\n* `metrics` - Metrics node when Intersight Virtual Appliance is running management-metrics node.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"standalone", "management", "hamanagement", "metrics"}, false),
+				Optional:     true,
+				Default:      "standalone",
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -340,7 +363,7 @@ func resourceApplianceClusterInfo() *schema.Resource {
 					return
 				}},
 			"status": {
-				Description: "The status of the cluster join process.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.\n* `ReplacementInProgress` - The cluster node replacement is in progress.\n* `ReplacementFailed` - There was a failure during the cluster node replacement.",
+				Description: "The status of the cluster join process.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.\n* `ReplacementInProgress` - The cluster node replacement is in progress.\n* `ReplacementFailed` - There was a failure during the cluster node replacement.\n* `WorkerNodeInstInProgress` - The worker node installation is in progress.\n* `WorkerNodeInstSuccess` - The worker node installation succeeded.\n* `WorkerNodeInstFailed` - The worker node installation failed.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -557,6 +580,11 @@ func resourceApplianceClusterInfoCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("build_type"); ok {
+		x := (v.(string))
+		o.SetBuildType(x)
+	}
+
 	o.SetClassId("appliance.ClusterInfo")
 
 	if v, ok := d.GetOk("deployment_size"); ok {
@@ -587,6 +615,11 @@ func resourceApplianceClusterInfoCreate(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("node_type"); ok {
+		x := (v.(string))
+		o.SetNodeType(x)
 	}
 
 	o.SetObjectType("appliance.ClusterInfo")
@@ -743,6 +776,10 @@ func resourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property Ancestors in ApplianceClusterInfo object: %s", err.Error())
 	}
 
+	if err := d.Set("build_type", (s.GetBuildType())); err != nil {
+		return diag.Errorf("error occurred while setting property BuildType in ApplianceClusterInfo object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in ApplianceClusterInfo object: %s", err.Error())
 	}
@@ -781,6 +818,14 @@ func resourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property Moid in ApplianceClusterInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("node_id", (s.GetNodeId())); err != nil {
+		return diag.Errorf("error occurred while setting property NodeId in ApplianceClusterInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("node_type", (s.GetNodeType())); err != nil {
+		return diag.Errorf("error occurred while setting property NodeType in ApplianceClusterInfo object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
@@ -880,6 +925,12 @@ func resourceApplianceClusterInfoUpdate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if d.HasChange("build_type") {
+		v := d.Get("build_type")
+		x := (v.(string))
+		o.SetBuildType(x)
+	}
+
 	o.SetClassId("appliance.ClusterInfo")
 
 	if d.HasChange("deployment_size") {
@@ -916,6 +967,12 @@ func resourceApplianceClusterInfoUpdate(c context.Context, d *schema.ResourceDat
 		v := d.Get("moid")
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if d.HasChange("node_type") {
+		v := d.Get("node_type")
+		x := (v.(string))
+		o.SetNodeType(x)
 	}
 
 	o.SetObjectType("appliance.ClusterInfo")

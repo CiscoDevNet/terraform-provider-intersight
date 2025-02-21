@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateRecommendationHardwareExpansionRequestRequest) Execute() (*Reco
 /*
 CreateRecommendationHardwareExpansionRequest Create a 'recommendation.HardwareExpansionRequest' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateRecommendationHardwareExpansionRequestRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateRecommendationHardwareExpansionRequestRequest
 */
 func (a *RecommendationApiService) CreateRecommendationHardwareExpansionRequest(ctx context.Context) ApiCreateRecommendationHardwareExpansionRequestRequest {
 	return ApiCreateRecommendationHardwareExpansionRequestRequest{
@@ -67,8 +67,7 @@ func (a *RecommendationApiService) CreateRecommendationHardwareExpansionRequest(
 }
 
 // Execute executes the request
-//
-//	@return RecommendationHardwareExpansionRequest
+//  @return RecommendationHardwareExpansionRequest
 func (a *RecommendationApiService) CreateRecommendationHardwareExpansionRequestExecute(r ApiCreateRecommendationHardwareExpansionRequestRequest) (*RecommendationHardwareExpansionRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -238,8 +237,8 @@ func (r ApiCreateRecommendationHardwareExpansionRequestItemRequest) Execute() (*
 /*
 CreateRecommendationHardwareExpansionRequestItem Create a 'recommendation.HardwareExpansionRequestItem' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateRecommendationHardwareExpansionRequestItemRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateRecommendationHardwareExpansionRequestItemRequest
 */
 func (a *RecommendationApiService) CreateRecommendationHardwareExpansionRequestItem(ctx context.Context) ApiCreateRecommendationHardwareExpansionRequestItemRequest {
 	return ApiCreateRecommendationHardwareExpansionRequestItemRequest{
@@ -249,8 +248,7 @@ func (a *RecommendationApiService) CreateRecommendationHardwareExpansionRequestI
 }
 
 // Execute executes the request
-//
-//	@return RecommendationHardwareExpansionRequestItem
+//  @return RecommendationHardwareExpansionRequestItem
 func (a *RecommendationApiService) CreateRecommendationHardwareExpansionRequestItemExecute(r ApiCreateRecommendationHardwareExpansionRequestItemRequest) (*RecommendationHardwareExpansionRequestItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -420,8 +418,8 @@ func (r ApiCreateRecommendationPurchaseOrderEstimateRequest) Execute() (*Recomme
 /*
 CreateRecommendationPurchaseOrderEstimate Create a 'recommendation.PurchaseOrderEstimate' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateRecommendationPurchaseOrderEstimateRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateRecommendationPurchaseOrderEstimateRequest
 
 Deprecated
 */
@@ -433,9 +431,7 @@ func (a *RecommendationApiService) CreateRecommendationPurchaseOrderEstimate(ctx
 }
 
 // Execute executes the request
-//
-//	@return RecommendationPurchaseOrderEstimate
-//
+//  @return RecommendationPurchaseOrderEstimate
 // Deprecated
 func (a *RecommendationApiService) CreateRecommendationPurchaseOrderEstimateExecute(r ApiCreateRecommendationPurchaseOrderEstimateRequest) (*RecommendationPurchaseOrderEstimate, *http.Response, error) {
 	var (
@@ -586,9 +582,9 @@ func (r ApiGetRecommendationCapacityRunwayByMoidRequest) Execute() (*Recommendat
 /*
 GetRecommendationCapacityRunwayByMoid Read a 'recommendation.CapacityRunway' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetRecommendationCapacityRunwayByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetRecommendationCapacityRunwayByMoidRequest
 */
 func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoid(ctx context.Context, moid string) ApiGetRecommendationCapacityRunwayByMoidRequest {
 	return ApiGetRecommendationCapacityRunwayByMoidRequest{
@@ -599,8 +595,7 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoid(ctx con
 }
 
 // Execute executes the request
-//
-//	@return RecommendationCapacityRunway
+//  @return RecommendationCapacityRunway
 func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoidExecute(r ApiGetRecommendationCapacityRunwayByMoidRequest) (*RecommendationCapacityRunway, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -816,8 +811,8 @@ func (r ApiGetRecommendationCapacityRunwayListRequest) Execute() (*Recommendatio
 /*
 GetRecommendationCapacityRunwayList Read a 'recommendation.CapacityRunway' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetRecommendationCapacityRunwayListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetRecommendationCapacityRunwayListRequest
 */
 func (a *RecommendationApiService) GetRecommendationCapacityRunwayList(ctx context.Context) ApiGetRecommendationCapacityRunwayListRequest {
 	return ApiGetRecommendationCapacityRunwayListRequest{
@@ -827,8 +822,7 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayList(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return RecommendationCapacityRunwayResponse
+//  @return RecommendationCapacityRunwayResponse
 func (a *RecommendationApiService) GetRecommendationCapacityRunwayListExecute(r ApiGetRecommendationCapacityRunwayListRequest) (*RecommendationCapacityRunwayResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1015,9 +1009,9 @@ func (r ApiGetRecommendationClusterExpansionByMoidRequest) Execute() (*Recommend
 /*
 GetRecommendationClusterExpansionByMoid Read a 'recommendation.ClusterExpansion' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetRecommendationClusterExpansionByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetRecommendationClusterExpansionByMoidRequest
 */
 func (a *RecommendationApiService) GetRecommendationClusterExpansionByMoid(ctx context.Context, moid string) ApiGetRecommendationClusterExpansionByMoidRequest {
 	return ApiGetRecommendationClusterExpansionByMoidRequest{
@@ -1028,8 +1022,7 @@ func (a *RecommendationApiService) GetRecommendationClusterExpansionByMoid(ctx c
 }
 
 // Execute executes the request
-//
-//	@return RecommendationClusterExpansion
+//  @return RecommendationClusterExpansion
 func (a *RecommendationApiService) GetRecommendationClusterExpansionByMoidExecute(r ApiGetRecommendationClusterExpansionByMoidRequest) (*RecommendationClusterExpansion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1245,8 +1238,8 @@ func (r ApiGetRecommendationClusterExpansionListRequest) Execute() (*Recommendat
 /*
 GetRecommendationClusterExpansionList Read a 'recommendation.ClusterExpansion' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetRecommendationClusterExpansionListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetRecommendationClusterExpansionListRequest
 */
 func (a *RecommendationApiService) GetRecommendationClusterExpansionList(ctx context.Context) ApiGetRecommendationClusterExpansionListRequest {
 	return ApiGetRecommendationClusterExpansionListRequest{
@@ -1256,8 +1249,7 @@ func (a *RecommendationApiService) GetRecommendationClusterExpansionList(ctx con
 }
 
 // Execute executes the request
-//
-//	@return RecommendationClusterExpansionResponse
+//  @return RecommendationClusterExpansionResponse
 func (a *RecommendationApiService) GetRecommendationClusterExpansionListExecute(r ApiGetRecommendationClusterExpansionListRequest) (*RecommendationClusterExpansionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1444,9 +1436,9 @@ func (r ApiGetRecommendationHardwareExpansionRequestByMoidRequest) Execute() (*R
 /*
 GetRecommendationHardwareExpansionRequestByMoid Read a 'recommendation.HardwareExpansionRequest' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetRecommendationHardwareExpansionRequestByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetRecommendationHardwareExpansionRequestByMoidRequest
 */
 func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestByMoid(ctx context.Context, moid string) ApiGetRecommendationHardwareExpansionRequestByMoidRequest {
 	return ApiGetRecommendationHardwareExpansionRequestByMoidRequest{
@@ -1457,8 +1449,7 @@ func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestByMo
 }
 
 // Execute executes the request
-//
-//	@return RecommendationHardwareExpansionRequest
+//  @return RecommendationHardwareExpansionRequest
 func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestByMoidExecute(r ApiGetRecommendationHardwareExpansionRequestByMoidRequest) (*RecommendationHardwareExpansionRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1598,9 +1589,9 @@ func (r ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest) Execute()
 /*
 GetRecommendationHardwareExpansionRequestItemByMoid Read a 'recommendation.HardwareExpansionRequestItem' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest
 */
 func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestItemByMoid(ctx context.Context, moid string) ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest {
 	return ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest{
@@ -1611,8 +1602,7 @@ func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestItem
 }
 
 // Execute executes the request
-//
-//	@return RecommendationHardwareExpansionRequestItem
+//  @return RecommendationHardwareExpansionRequestItem
 func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestItemByMoidExecute(r ApiGetRecommendationHardwareExpansionRequestItemByMoidRequest) (*RecommendationHardwareExpansionRequestItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1828,8 +1818,8 @@ func (r ApiGetRecommendationHardwareExpansionRequestItemListRequest) Execute() (
 /*
 GetRecommendationHardwareExpansionRequestItemList Read a 'recommendation.HardwareExpansionRequestItem' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetRecommendationHardwareExpansionRequestItemListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetRecommendationHardwareExpansionRequestItemListRequest
 */
 func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestItemList(ctx context.Context) ApiGetRecommendationHardwareExpansionRequestItemListRequest {
 	return ApiGetRecommendationHardwareExpansionRequestItemListRequest{
@@ -1839,8 +1829,7 @@ func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestItem
 }
 
 // Execute executes the request
-//
-//	@return RecommendationHardwareExpansionRequestItemResponse
+//  @return RecommendationHardwareExpansionRequestItemResponse
 func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestItemListExecute(r ApiGetRecommendationHardwareExpansionRequestItemListRequest) (*RecommendationHardwareExpansionRequestItemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2103,8 +2092,8 @@ func (r ApiGetRecommendationHardwareExpansionRequestListRequest) Execute() (*Rec
 /*
 GetRecommendationHardwareExpansionRequestList Read a 'recommendation.HardwareExpansionRequest' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetRecommendationHardwareExpansionRequestListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetRecommendationHardwareExpansionRequestListRequest
 */
 func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestList(ctx context.Context) ApiGetRecommendationHardwareExpansionRequestListRequest {
 	return ApiGetRecommendationHardwareExpansionRequestListRequest{
@@ -2114,8 +2103,7 @@ func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestList
 }
 
 // Execute executes the request
-//
-//	@return RecommendationHardwareExpansionRequestResponse
+//  @return RecommendationHardwareExpansionRequestResponse
 func (a *RecommendationApiService) GetRecommendationHardwareExpansionRequestListExecute(r ApiGetRecommendationHardwareExpansionRequestListRequest) (*RecommendationHardwareExpansionRequestResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2302,9 +2290,9 @@ func (r ApiGetRecommendationPhysicalItemByMoidRequest) Execute() (*Recommendatio
 /*
 GetRecommendationPhysicalItemByMoid Read a 'recommendation.PhysicalItem' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetRecommendationPhysicalItemByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetRecommendationPhysicalItemByMoidRequest
 */
 func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoid(ctx context.Context, moid string) ApiGetRecommendationPhysicalItemByMoidRequest {
 	return ApiGetRecommendationPhysicalItemByMoidRequest{
@@ -2315,8 +2303,7 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoid(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return RecommendationPhysicalItem
+//  @return RecommendationPhysicalItem
 func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoidExecute(r ApiGetRecommendationPhysicalItemByMoidRequest) (*RecommendationPhysicalItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2532,8 +2519,8 @@ func (r ApiGetRecommendationPhysicalItemListRequest) Execute() (*RecommendationP
 /*
 GetRecommendationPhysicalItemList Read a 'recommendation.PhysicalItem' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetRecommendationPhysicalItemListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetRecommendationPhysicalItemListRequest
 */
 func (a *RecommendationApiService) GetRecommendationPhysicalItemList(ctx context.Context) ApiGetRecommendationPhysicalItemListRequest {
 	return ApiGetRecommendationPhysicalItemListRequest{
@@ -2543,8 +2530,7 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemList(ctx context
 }
 
 // Execute executes the request
-//
-//	@return RecommendationPhysicalItemResponse
+//  @return RecommendationPhysicalItemResponse
 func (a *RecommendationApiService) GetRecommendationPhysicalItemListExecute(r ApiGetRecommendationPhysicalItemListRequest) (*RecommendationPhysicalItemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2731,9 +2717,9 @@ func (r ApiGetRecommendationPurchaseOrderEstimateByMoidRequest) Execute() (*Reco
 /*
 GetRecommendationPurchaseOrderEstimateByMoid Read a 'recommendation.PurchaseOrderEstimate' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetRecommendationPurchaseOrderEstimateByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetRecommendationPurchaseOrderEstimateByMoidRequest
 
 Deprecated
 */
@@ -2746,9 +2732,7 @@ func (a *RecommendationApiService) GetRecommendationPurchaseOrderEstimateByMoid(
 }
 
 // Execute executes the request
-//
-//	@return RecommendationPurchaseOrderEstimate
-//
+//  @return RecommendationPurchaseOrderEstimate
 // Deprecated
 func (a *RecommendationApiService) GetRecommendationPurchaseOrderEstimateByMoidExecute(r ApiGetRecommendationPurchaseOrderEstimateByMoidRequest) (*RecommendationPurchaseOrderEstimate, *http.Response, error) {
 	var (
@@ -2965,8 +2949,8 @@ func (r ApiGetRecommendationPurchaseOrderEstimateListRequest) Execute() (*Recomm
 /*
 GetRecommendationPurchaseOrderEstimateList Read a 'recommendation.PurchaseOrderEstimate' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetRecommendationPurchaseOrderEstimateListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetRecommendationPurchaseOrderEstimateListRequest
 
 Deprecated
 */
@@ -2978,9 +2962,7 @@ func (a *RecommendationApiService) GetRecommendationPurchaseOrderEstimateList(ct
 }
 
 // Execute executes the request
-//
-//	@return RecommendationPurchaseOrderEstimateResponse
-//
+//  @return RecommendationPurchaseOrderEstimateResponse
 // Deprecated
 func (a *RecommendationApiService) GetRecommendationPurchaseOrderEstimateListExecute(r ApiGetRecommendationPurchaseOrderEstimateListRequest) (*RecommendationPurchaseOrderEstimateResponse, *http.Response, error) {
 	var (
@@ -3168,9 +3150,9 @@ func (r ApiGetRecommendationPurchaseOrderListByMoidRequest) Execute() (*Recommen
 /*
 GetRecommendationPurchaseOrderListByMoid Read a 'recommendation.PurchaseOrderList' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetRecommendationPurchaseOrderListByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetRecommendationPurchaseOrderListByMoidRequest
 */
 func (a *RecommendationApiService) GetRecommendationPurchaseOrderListByMoid(ctx context.Context, moid string) ApiGetRecommendationPurchaseOrderListByMoidRequest {
 	return ApiGetRecommendationPurchaseOrderListByMoidRequest{
@@ -3181,8 +3163,7 @@ func (a *RecommendationApiService) GetRecommendationPurchaseOrderListByMoid(ctx 
 }
 
 // Execute executes the request
-//
-//	@return RecommendationPurchaseOrderList
+//  @return RecommendationPurchaseOrderList
 func (a *RecommendationApiService) GetRecommendationPurchaseOrderListByMoidExecute(r ApiGetRecommendationPurchaseOrderListByMoidRequest) (*RecommendationPurchaseOrderList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3398,8 +3379,8 @@ func (r ApiGetRecommendationPurchaseOrderListListRequest) Execute() (*Recommenda
 /*
 GetRecommendationPurchaseOrderListList Read a 'recommendation.PurchaseOrderList' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetRecommendationPurchaseOrderListListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetRecommendationPurchaseOrderListListRequest
 */
 func (a *RecommendationApiService) GetRecommendationPurchaseOrderListList(ctx context.Context) ApiGetRecommendationPurchaseOrderListListRequest {
 	return ApiGetRecommendationPurchaseOrderListListRequest{
@@ -3409,8 +3390,7 @@ func (a *RecommendationApiService) GetRecommendationPurchaseOrderListList(ctx co
 }
 
 // Execute executes the request
-//
-//	@return RecommendationPurchaseOrderListResponse
+//  @return RecommendationPurchaseOrderListResponse
 func (a *RecommendationApiService) GetRecommendationPurchaseOrderListListExecute(r ApiGetRecommendationPurchaseOrderListListRequest) (*RecommendationPurchaseOrderListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3597,9 +3577,9 @@ func (r ApiGetRecommendationSoftwareItemByMoidRequest) Execute() (*Recommendatio
 /*
 GetRecommendationSoftwareItemByMoid Read a 'recommendation.SoftwareItem' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetRecommendationSoftwareItemByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetRecommendationSoftwareItemByMoidRequest
 */
 func (a *RecommendationApiService) GetRecommendationSoftwareItemByMoid(ctx context.Context, moid string) ApiGetRecommendationSoftwareItemByMoidRequest {
 	return ApiGetRecommendationSoftwareItemByMoidRequest{
@@ -3610,8 +3590,7 @@ func (a *RecommendationApiService) GetRecommendationSoftwareItemByMoid(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return RecommendationSoftwareItem
+//  @return RecommendationSoftwareItem
 func (a *RecommendationApiService) GetRecommendationSoftwareItemByMoidExecute(r ApiGetRecommendationSoftwareItemByMoidRequest) (*RecommendationSoftwareItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3827,8 +3806,8 @@ func (r ApiGetRecommendationSoftwareItemListRequest) Execute() (*RecommendationS
 /*
 GetRecommendationSoftwareItemList Read a 'recommendation.SoftwareItem' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetRecommendationSoftwareItemListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetRecommendationSoftwareItemListRequest
 */
 func (a *RecommendationApiService) GetRecommendationSoftwareItemList(ctx context.Context) ApiGetRecommendationSoftwareItemListRequest {
 	return ApiGetRecommendationSoftwareItemListRequest{
@@ -3838,8 +3817,7 @@ func (a *RecommendationApiService) GetRecommendationSoftwareItemList(ctx context
 }
 
 // Execute executes the request
-//
-//	@return RecommendationSoftwareItemResponse
+//  @return RecommendationSoftwareItemResponse
 func (a *RecommendationApiService) GetRecommendationSoftwareItemListExecute(r ApiGetRecommendationSoftwareItemListRequest) (*RecommendationSoftwareItemResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4040,9 +4018,9 @@ func (r ApiPatchRecommendationHardwareExpansionRequestRequest) Execute() (*Recom
 /*
 PatchRecommendationHardwareExpansionRequest Update a 'recommendation.HardwareExpansionRequest' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchRecommendationHardwareExpansionRequestRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchRecommendationHardwareExpansionRequestRequest
 */
 func (a *RecommendationApiService) PatchRecommendationHardwareExpansionRequest(ctx context.Context, moid string) ApiPatchRecommendationHardwareExpansionRequestRequest {
 	return ApiPatchRecommendationHardwareExpansionRequestRequest{
@@ -4053,8 +4031,7 @@ func (a *RecommendationApiService) PatchRecommendationHardwareExpansionRequest(c
 }
 
 // Execute executes the request
-//
-//	@return RecommendationHardwareExpansionRequest
+//  @return RecommendationHardwareExpansionRequest
 func (a *RecommendationApiService) PatchRecommendationHardwareExpansionRequestExecute(r ApiPatchRecommendationHardwareExpansionRequestRequest) (*RecommendationHardwareExpansionRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4216,9 +4193,9 @@ func (r ApiPatchRecommendationHardwareExpansionRequestItemRequest) Execute() (*R
 /*
 PatchRecommendationHardwareExpansionRequestItem Update a 'recommendation.HardwareExpansionRequestItem' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchRecommendationHardwareExpansionRequestItemRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchRecommendationHardwareExpansionRequestItemRequest
 */
 func (a *RecommendationApiService) PatchRecommendationHardwareExpansionRequestItem(ctx context.Context, moid string) ApiPatchRecommendationHardwareExpansionRequestItemRequest {
 	return ApiPatchRecommendationHardwareExpansionRequestItemRequest{
@@ -4229,8 +4206,7 @@ func (a *RecommendationApiService) PatchRecommendationHardwareExpansionRequestIt
 }
 
 // Execute executes the request
-//
-//	@return RecommendationHardwareExpansionRequestItem
+//  @return RecommendationHardwareExpansionRequestItem
 func (a *RecommendationApiService) PatchRecommendationHardwareExpansionRequestItemExecute(r ApiPatchRecommendationHardwareExpansionRequestItemRequest) (*RecommendationHardwareExpansionRequestItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4392,9 +4368,9 @@ func (r ApiPatchRecommendationPurchaseOrderEstimateRequest) Execute() (*Recommen
 /*
 PatchRecommendationPurchaseOrderEstimate Update a 'recommendation.PurchaseOrderEstimate' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchRecommendationPurchaseOrderEstimateRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchRecommendationPurchaseOrderEstimateRequest
 
 Deprecated
 */
@@ -4407,9 +4383,7 @@ func (a *RecommendationApiService) PatchRecommendationPurchaseOrderEstimate(ctx 
 }
 
 // Execute executes the request
-//
-//	@return RecommendationPurchaseOrderEstimate
-//
+//  @return RecommendationPurchaseOrderEstimate
 // Deprecated
 func (a *RecommendationApiService) PatchRecommendationPurchaseOrderEstimateExecute(r ApiPatchRecommendationPurchaseOrderEstimateRequest) (*RecommendationPurchaseOrderEstimate, *http.Response, error) {
 	var (
@@ -4572,9 +4546,9 @@ func (r ApiUpdateRecommendationHardwareExpansionRequestRequest) Execute() (*Reco
 /*
 UpdateRecommendationHardwareExpansionRequest Update a 'recommendation.HardwareExpansionRequest' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateRecommendationHardwareExpansionRequestRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateRecommendationHardwareExpansionRequestRequest
 */
 func (a *RecommendationApiService) UpdateRecommendationHardwareExpansionRequest(ctx context.Context, moid string) ApiUpdateRecommendationHardwareExpansionRequestRequest {
 	return ApiUpdateRecommendationHardwareExpansionRequestRequest{
@@ -4585,8 +4559,7 @@ func (a *RecommendationApiService) UpdateRecommendationHardwareExpansionRequest(
 }
 
 // Execute executes the request
-//
-//	@return RecommendationHardwareExpansionRequest
+//  @return RecommendationHardwareExpansionRequest
 func (a *RecommendationApiService) UpdateRecommendationHardwareExpansionRequestExecute(r ApiUpdateRecommendationHardwareExpansionRequestRequest) (*RecommendationHardwareExpansionRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4748,9 +4721,9 @@ func (r ApiUpdateRecommendationHardwareExpansionRequestItemRequest) Execute() (*
 /*
 UpdateRecommendationHardwareExpansionRequestItem Update a 'recommendation.HardwareExpansionRequestItem' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateRecommendationHardwareExpansionRequestItemRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateRecommendationHardwareExpansionRequestItemRequest
 */
 func (a *RecommendationApiService) UpdateRecommendationHardwareExpansionRequestItem(ctx context.Context, moid string) ApiUpdateRecommendationHardwareExpansionRequestItemRequest {
 	return ApiUpdateRecommendationHardwareExpansionRequestItemRequest{
@@ -4761,8 +4734,7 @@ func (a *RecommendationApiService) UpdateRecommendationHardwareExpansionRequestI
 }
 
 // Execute executes the request
-//
-//	@return RecommendationHardwareExpansionRequestItem
+//  @return RecommendationHardwareExpansionRequestItem
 func (a *RecommendationApiService) UpdateRecommendationHardwareExpansionRequestItemExecute(r ApiUpdateRecommendationHardwareExpansionRequestItemRequest) (*RecommendationHardwareExpansionRequestItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4924,9 +4896,9 @@ func (r ApiUpdateRecommendationPurchaseOrderEstimateRequest) Execute() (*Recomme
 /*
 UpdateRecommendationPurchaseOrderEstimate Update a 'recommendation.PurchaseOrderEstimate' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateRecommendationPurchaseOrderEstimateRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateRecommendationPurchaseOrderEstimateRequest
 
 Deprecated
 */
@@ -4939,9 +4911,7 @@ func (a *RecommendationApiService) UpdateRecommendationPurchaseOrderEstimate(ctx
 }
 
 // Execute executes the request
-//
-//	@return RecommendationPurchaseOrderEstimate
-//
+//  @return RecommendationPurchaseOrderEstimate
 // Deprecated
 func (a *RecommendationApiService) UpdateRecommendationPurchaseOrderEstimateExecute(r ApiUpdateRecommendationPurchaseOrderEstimateRequest) (*RecommendationPurchaseOrderEstimate, *http.Response, error) {
 	var (

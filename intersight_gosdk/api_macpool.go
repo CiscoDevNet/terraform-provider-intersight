@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateMacpoolPoolRequest) Execute() (*MacpoolPool, *http.Response, er
 /*
 CreateMacpoolPool Create a 'macpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateMacpoolPoolRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateMacpoolPoolRequest
 */
 func (a *MacpoolApiService) CreateMacpoolPool(ctx context.Context) ApiCreateMacpoolPoolRequest {
 	return ApiCreateMacpoolPoolRequest{
@@ -67,8 +67,7 @@ func (a *MacpoolApiService) CreateMacpoolPool(ctx context.Context) ApiCreateMacp
 }
 
 // Execute executes the request
-//
-//	@return MacpoolPool
+//  @return MacpoolPool
 func (a *MacpoolApiService) CreateMacpoolPoolExecute(r ApiCreateMacpoolPoolRequest) (*MacpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -238,8 +237,8 @@ func (r ApiCreateMacpoolReservationRequest) Execute() (*MacpoolReservation, *htt
 /*
 CreateMacpoolReservation Create a 'macpool.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateMacpoolReservationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateMacpoolReservationRequest
 */
 func (a *MacpoolApiService) CreateMacpoolReservation(ctx context.Context) ApiCreateMacpoolReservationRequest {
 	return ApiCreateMacpoolReservationRequest{
@@ -249,8 +248,7 @@ func (a *MacpoolApiService) CreateMacpoolReservation(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//
-//	@return MacpoolReservation
+//  @return MacpoolReservation
 func (a *MacpoolApiService) CreateMacpoolReservationExecute(r ApiCreateMacpoolReservationRequest) (*MacpoolReservation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -400,9 +398,9 @@ func (r ApiDeleteMacpoolLeaseRequest) Execute() (*http.Response, error) {
 /*
 DeleteMacpoolLease Delete a 'macpool.Lease' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteMacpoolLeaseRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteMacpoolLeaseRequest
 */
 func (a *MacpoolApiService) DeleteMacpoolLease(ctx context.Context, moid string) ApiDeleteMacpoolLeaseRequest {
 	return ApiDeleteMacpoolLeaseRequest{
@@ -542,9 +540,9 @@ func (r ApiDeleteMacpoolPoolRequest) Execute() (*http.Response, error) {
 /*
 DeleteMacpoolPool Delete a 'macpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteMacpoolPoolRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteMacpoolPoolRequest
 */
 func (a *MacpoolApiService) DeleteMacpoolPool(ctx context.Context, moid string) ApiDeleteMacpoolPoolRequest {
 	return ApiDeleteMacpoolPoolRequest{
@@ -684,9 +682,9 @@ func (r ApiDeleteMacpoolReservationRequest) Execute() (*http.Response, error) {
 /*
 DeleteMacpoolReservation Delete a 'macpool.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteMacpoolReservationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteMacpoolReservationRequest
 */
 func (a *MacpoolApiService) DeleteMacpoolReservation(ctx context.Context, moid string) ApiDeleteMacpoolReservationRequest {
 	return ApiDeleteMacpoolReservationRequest{
@@ -826,9 +824,9 @@ func (r ApiGetMacpoolIdBlockByMoidRequest) Execute() (*MacpoolIdBlock, *http.Res
 /*
 GetMacpoolIdBlockByMoid Read a 'macpool.IdBlock' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMacpoolIdBlockByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMacpoolIdBlockByMoidRequest
 */
 func (a *MacpoolApiService) GetMacpoolIdBlockByMoid(ctx context.Context, moid string) ApiGetMacpoolIdBlockByMoidRequest {
 	return ApiGetMacpoolIdBlockByMoidRequest{
@@ -839,8 +837,7 @@ func (a *MacpoolApiService) GetMacpoolIdBlockByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//
-//	@return MacpoolIdBlock
+//  @return MacpoolIdBlock
 func (a *MacpoolApiService) GetMacpoolIdBlockByMoidExecute(r ApiGetMacpoolIdBlockByMoidRequest) (*MacpoolIdBlock, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1056,8 +1053,8 @@ func (r ApiGetMacpoolIdBlockListRequest) Execute() (*MacpoolIdBlockResponse, *ht
 /*
 GetMacpoolIdBlockList Read a 'macpool.IdBlock' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMacpoolIdBlockListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMacpoolIdBlockListRequest
 */
 func (a *MacpoolApiService) GetMacpoolIdBlockList(ctx context.Context) ApiGetMacpoolIdBlockListRequest {
 	return ApiGetMacpoolIdBlockListRequest{
@@ -1067,8 +1064,7 @@ func (a *MacpoolApiService) GetMacpoolIdBlockList(ctx context.Context) ApiGetMac
 }
 
 // Execute executes the request
-//
-//	@return MacpoolIdBlockResponse
+//  @return MacpoolIdBlockResponse
 func (a *MacpoolApiService) GetMacpoolIdBlockListExecute(r ApiGetMacpoolIdBlockListRequest) (*MacpoolIdBlockResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1255,9 +1251,9 @@ func (r ApiGetMacpoolLeaseByMoidRequest) Execute() (*MacpoolLease, *http.Respons
 /*
 GetMacpoolLeaseByMoid Read a 'macpool.Lease' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMacpoolLeaseByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMacpoolLeaseByMoidRequest
 */
 func (a *MacpoolApiService) GetMacpoolLeaseByMoid(ctx context.Context, moid string) ApiGetMacpoolLeaseByMoidRequest {
 	return ApiGetMacpoolLeaseByMoidRequest{
@@ -1268,8 +1264,7 @@ func (a *MacpoolApiService) GetMacpoolLeaseByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//
-//	@return MacpoolLease
+//  @return MacpoolLease
 func (a *MacpoolApiService) GetMacpoolLeaseByMoidExecute(r ApiGetMacpoolLeaseByMoidRequest) (*MacpoolLease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1485,8 +1480,8 @@ func (r ApiGetMacpoolLeaseListRequest) Execute() (*MacpoolLeaseResponse, *http.R
 /*
 GetMacpoolLeaseList Read a 'macpool.Lease' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMacpoolLeaseListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMacpoolLeaseListRequest
 */
 func (a *MacpoolApiService) GetMacpoolLeaseList(ctx context.Context) ApiGetMacpoolLeaseListRequest {
 	return ApiGetMacpoolLeaseListRequest{
@@ -1496,8 +1491,7 @@ func (a *MacpoolApiService) GetMacpoolLeaseList(ctx context.Context) ApiGetMacpo
 }
 
 // Execute executes the request
-//
-//	@return MacpoolLeaseResponse
+//  @return MacpoolLeaseResponse
 func (a *MacpoolApiService) GetMacpoolLeaseListExecute(r ApiGetMacpoolLeaseListRequest) (*MacpoolLeaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1684,9 +1678,9 @@ func (r ApiGetMacpoolPoolByMoidRequest) Execute() (*MacpoolPool, *http.Response,
 /*
 GetMacpoolPoolByMoid Read a 'macpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMacpoolPoolByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMacpoolPoolByMoidRequest
 */
 func (a *MacpoolApiService) GetMacpoolPoolByMoid(ctx context.Context, moid string) ApiGetMacpoolPoolByMoidRequest {
 	return ApiGetMacpoolPoolByMoidRequest{
@@ -1697,8 +1691,7 @@ func (a *MacpoolApiService) GetMacpoolPoolByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//
-//	@return MacpoolPool
+//  @return MacpoolPool
 func (a *MacpoolApiService) GetMacpoolPoolByMoidExecute(r ApiGetMacpoolPoolByMoidRequest) (*MacpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1914,8 +1907,8 @@ func (r ApiGetMacpoolPoolListRequest) Execute() (*MacpoolPoolResponse, *http.Res
 /*
 GetMacpoolPoolList Read a 'macpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMacpoolPoolListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMacpoolPoolListRequest
 */
 func (a *MacpoolApiService) GetMacpoolPoolList(ctx context.Context) ApiGetMacpoolPoolListRequest {
 	return ApiGetMacpoolPoolListRequest{
@@ -1925,8 +1918,7 @@ func (a *MacpoolApiService) GetMacpoolPoolList(ctx context.Context) ApiGetMacpoo
 }
 
 // Execute executes the request
-//
-//	@return MacpoolPoolResponse
+//  @return MacpoolPoolResponse
 func (a *MacpoolApiService) GetMacpoolPoolListExecute(r ApiGetMacpoolPoolListRequest) (*MacpoolPoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2113,9 +2105,9 @@ func (r ApiGetMacpoolPoolMemberByMoidRequest) Execute() (*MacpoolPoolMember, *ht
 /*
 GetMacpoolPoolMemberByMoid Read a 'macpool.PoolMember' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMacpoolPoolMemberByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMacpoolPoolMemberByMoidRequest
 */
 func (a *MacpoolApiService) GetMacpoolPoolMemberByMoid(ctx context.Context, moid string) ApiGetMacpoolPoolMemberByMoidRequest {
 	return ApiGetMacpoolPoolMemberByMoidRequest{
@@ -2126,8 +2118,7 @@ func (a *MacpoolApiService) GetMacpoolPoolMemberByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return MacpoolPoolMember
+//  @return MacpoolPoolMember
 func (a *MacpoolApiService) GetMacpoolPoolMemberByMoidExecute(r ApiGetMacpoolPoolMemberByMoidRequest) (*MacpoolPoolMember, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2343,8 +2334,8 @@ func (r ApiGetMacpoolPoolMemberListRequest) Execute() (*MacpoolPoolMemberRespons
 /*
 GetMacpoolPoolMemberList Read a 'macpool.PoolMember' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMacpoolPoolMemberListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMacpoolPoolMemberListRequest
 */
 func (a *MacpoolApiService) GetMacpoolPoolMemberList(ctx context.Context) ApiGetMacpoolPoolMemberListRequest {
 	return ApiGetMacpoolPoolMemberListRequest{
@@ -2354,8 +2345,7 @@ func (a *MacpoolApiService) GetMacpoolPoolMemberList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//
-//	@return MacpoolPoolMemberResponse
+//  @return MacpoolPoolMemberResponse
 func (a *MacpoolApiService) GetMacpoolPoolMemberListExecute(r ApiGetMacpoolPoolMemberListRequest) (*MacpoolPoolMemberResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2542,9 +2532,9 @@ func (r ApiGetMacpoolReservationByMoidRequest) Execute() (*MacpoolReservation, *
 /*
 GetMacpoolReservationByMoid Read a 'macpool.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMacpoolReservationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMacpoolReservationByMoidRequest
 */
 func (a *MacpoolApiService) GetMacpoolReservationByMoid(ctx context.Context, moid string) ApiGetMacpoolReservationByMoidRequest {
 	return ApiGetMacpoolReservationByMoidRequest{
@@ -2555,8 +2545,7 @@ func (a *MacpoolApiService) GetMacpoolReservationByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return MacpoolReservation
+//  @return MacpoolReservation
 func (a *MacpoolApiService) GetMacpoolReservationByMoidExecute(r ApiGetMacpoolReservationByMoidRequest) (*MacpoolReservation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2772,8 +2761,8 @@ func (r ApiGetMacpoolReservationListRequest) Execute() (*MacpoolReservationRespo
 /*
 GetMacpoolReservationList Read a 'macpool.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMacpoolReservationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMacpoolReservationListRequest
 */
 func (a *MacpoolApiService) GetMacpoolReservationList(ctx context.Context) ApiGetMacpoolReservationListRequest {
 	return ApiGetMacpoolReservationListRequest{
@@ -2783,8 +2772,7 @@ func (a *MacpoolApiService) GetMacpoolReservationList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//
-//	@return MacpoolReservationResponse
+//  @return MacpoolReservationResponse
 func (a *MacpoolApiService) GetMacpoolReservationListExecute(r ApiGetMacpoolReservationListRequest) (*MacpoolReservationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2971,9 +2959,9 @@ func (r ApiGetMacpoolUniverseByMoidRequest) Execute() (*MacpoolUniverse, *http.R
 /*
 GetMacpoolUniverseByMoid Read a 'macpool.Universe' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMacpoolUniverseByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMacpoolUniverseByMoidRequest
 */
 func (a *MacpoolApiService) GetMacpoolUniverseByMoid(ctx context.Context, moid string) ApiGetMacpoolUniverseByMoidRequest {
 	return ApiGetMacpoolUniverseByMoidRequest{
@@ -2984,8 +2972,7 @@ func (a *MacpoolApiService) GetMacpoolUniverseByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//
-//	@return MacpoolUniverse
+//  @return MacpoolUniverse
 func (a *MacpoolApiService) GetMacpoolUniverseByMoidExecute(r ApiGetMacpoolUniverseByMoidRequest) (*MacpoolUniverse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3201,8 +3188,8 @@ func (r ApiGetMacpoolUniverseListRequest) Execute() (*MacpoolUniverseResponse, *
 /*
 GetMacpoolUniverseList Read a 'macpool.Universe' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMacpoolUniverseListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMacpoolUniverseListRequest
 */
 func (a *MacpoolApiService) GetMacpoolUniverseList(ctx context.Context) ApiGetMacpoolUniverseListRequest {
 	return ApiGetMacpoolUniverseListRequest{
@@ -3212,8 +3199,7 @@ func (a *MacpoolApiService) GetMacpoolUniverseList(ctx context.Context) ApiGetMa
 }
 
 // Execute executes the request
-//
-//	@return MacpoolUniverseResponse
+//  @return MacpoolUniverseResponse
 func (a *MacpoolApiService) GetMacpoolUniverseListExecute(r ApiGetMacpoolUniverseListRequest) (*MacpoolUniverseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3414,9 +3400,9 @@ func (r ApiPatchMacpoolPoolRequest) Execute() (*MacpoolPool, *http.Response, err
 /*
 PatchMacpoolPool Update a 'macpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchMacpoolPoolRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchMacpoolPoolRequest
 */
 func (a *MacpoolApiService) PatchMacpoolPool(ctx context.Context, moid string) ApiPatchMacpoolPoolRequest {
 	return ApiPatchMacpoolPoolRequest{
@@ -3427,8 +3413,7 @@ func (a *MacpoolApiService) PatchMacpoolPool(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//
-//	@return MacpoolPool
+//  @return MacpoolPool
 func (a *MacpoolApiService) PatchMacpoolPoolExecute(r ApiPatchMacpoolPoolRequest) (*MacpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3590,9 +3575,9 @@ func (r ApiUpdateMacpoolPoolRequest) Execute() (*MacpoolPool, *http.Response, er
 /*
 UpdateMacpoolPool Update a 'macpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateMacpoolPoolRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateMacpoolPoolRequest
 */
 func (a *MacpoolApiService) UpdateMacpoolPool(ctx context.Context, moid string) ApiUpdateMacpoolPoolRequest {
 	return ApiUpdateMacpoolPoolRequest{
@@ -3603,8 +3588,7 @@ func (a *MacpoolApiService) UpdateMacpoolPool(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//
-//	@return MacpoolPool
+//  @return MacpoolPool
 func (a *MacpoolApiService) UpdateMacpoolPoolExecute(r ApiUpdateMacpoolPoolRequest) (*MacpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

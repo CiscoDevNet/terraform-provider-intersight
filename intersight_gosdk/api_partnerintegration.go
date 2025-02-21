@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreatePartnerintegrationDeviceConnectorRequest) Execute() (*Partnerin
 /*
 CreatePartnerintegrationDeviceConnector Create a 'partnerintegration.DeviceConnector' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatePartnerintegrationDeviceConnectorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatePartnerintegrationDeviceConnectorRequest
 */
 func (a *PartnerintegrationApiService) CreatePartnerintegrationDeviceConnector(ctx context.Context) ApiCreatePartnerintegrationDeviceConnectorRequest {
 	return ApiCreatePartnerintegrationDeviceConnectorRequest{
@@ -67,8 +67,7 @@ func (a *PartnerintegrationApiService) CreatePartnerintegrationDeviceConnector(c
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationDeviceConnector
+//  @return PartnerintegrationDeviceConnector
 func (a *PartnerintegrationApiService) CreatePartnerintegrationDeviceConnectorExecute(r ApiCreatePartnerintegrationDeviceConnectorRequest) (*PartnerintegrationDeviceConnector, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -238,8 +237,8 @@ func (r ApiCreatePartnerintegrationEtlRequest) Execute() (*PartnerintegrationEtl
 /*
 CreatePartnerintegrationEtl Create a 'partnerintegration.Etl' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatePartnerintegrationEtlRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatePartnerintegrationEtlRequest
 */
 func (a *PartnerintegrationApiService) CreatePartnerintegrationEtl(ctx context.Context) ApiCreatePartnerintegrationEtlRequest {
 	return ApiCreatePartnerintegrationEtlRequest{
@@ -249,8 +248,7 @@ func (a *PartnerintegrationApiService) CreatePartnerintegrationEtl(ctx context.C
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationEtl
+//  @return PartnerintegrationEtl
 func (a *PartnerintegrationApiService) CreatePartnerintegrationEtlExecute(r ApiCreatePartnerintegrationEtlRequest) (*PartnerintegrationEtl, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -420,8 +418,8 @@ func (r ApiCreatePartnerintegrationFileRequest) Execute() (*PartnerintegrationFi
 /*
 CreatePartnerintegrationFile Create a 'partnerintegration.File' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatePartnerintegrationFileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatePartnerintegrationFileRequest
 */
 func (a *PartnerintegrationApiService) CreatePartnerintegrationFile(ctx context.Context) ApiCreatePartnerintegrationFileRequest {
 	return ApiCreatePartnerintegrationFileRequest{
@@ -431,8 +429,7 @@ func (a *PartnerintegrationApiService) CreatePartnerintegrationFile(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationFile
+//  @return PartnerintegrationFile
 func (a *PartnerintegrationApiService) CreatePartnerintegrationFileExecute(r ApiCreatePartnerintegrationFileRequest) (*PartnerintegrationFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -602,8 +599,8 @@ func (r ApiCreatePartnerintegrationInventoryRequest) Execute() (*Partnerintegrat
 /*
 CreatePartnerintegrationInventory Create a 'partnerintegration.Inventory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatePartnerintegrationInventoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatePartnerintegrationInventoryRequest
 */
 func (a *PartnerintegrationApiService) CreatePartnerintegrationInventory(ctx context.Context) ApiCreatePartnerintegrationInventoryRequest {
 	return ApiCreatePartnerintegrationInventoryRequest{
@@ -613,8 +610,7 @@ func (a *PartnerintegrationApiService) CreatePartnerintegrationInventory(ctx con
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationInventory
+//  @return PartnerintegrationInventory
 func (a *PartnerintegrationApiService) CreatePartnerintegrationInventoryExecute(r ApiCreatePartnerintegrationInventoryRequest) (*PartnerintegrationInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -784,8 +780,8 @@ func (r ApiCreatePartnerintegrationMetricsRequest) Execute() (*Partnerintegratio
 /*
 CreatePartnerintegrationMetrics Create a 'partnerintegration.Metrics' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatePartnerintegrationMetricsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatePartnerintegrationMetricsRequest
 */
 func (a *PartnerintegrationApiService) CreatePartnerintegrationMetrics(ctx context.Context) ApiCreatePartnerintegrationMetricsRequest {
 	return ApiCreatePartnerintegrationMetricsRequest{
@@ -795,8 +791,7 @@ func (a *PartnerintegrationApiService) CreatePartnerintegrationMetrics(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationMetrics
+//  @return PartnerintegrationMetrics
 func (a *PartnerintegrationApiService) CreatePartnerintegrationMetricsExecute(r ApiCreatePartnerintegrationMetricsRequest) (*PartnerintegrationMetrics, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -966,8 +961,8 @@ func (r ApiCreatePartnerintegrationModelRequest) Execute() (*PartnerintegrationM
 /*
 CreatePartnerintegrationModel Create a 'partnerintegration.Model' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatePartnerintegrationModelRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatePartnerintegrationModelRequest
 */
 func (a *PartnerintegrationApiService) CreatePartnerintegrationModel(ctx context.Context) ApiCreatePartnerintegrationModelRequest {
 	return ApiCreatePartnerintegrationModelRequest{
@@ -977,8 +972,7 @@ func (a *PartnerintegrationApiService) CreatePartnerintegrationModel(ctx context
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationModel
+//  @return PartnerintegrationModel
 func (a *PartnerintegrationApiService) CreatePartnerintegrationModelExecute(r ApiCreatePartnerintegrationModelRequest) (*PartnerintegrationModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1128,9 +1122,9 @@ func (r ApiDeletePartnerintegrationDeviceConnectorRequest) Execute() (*http.Resp
 /*
 DeletePartnerintegrationDeviceConnector Delete a 'partnerintegration.DeviceConnector' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeletePartnerintegrationDeviceConnectorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeletePartnerintegrationDeviceConnectorRequest
 */
 func (a *PartnerintegrationApiService) DeletePartnerintegrationDeviceConnector(ctx context.Context, moid string) ApiDeletePartnerintegrationDeviceConnectorRequest {
 	return ApiDeletePartnerintegrationDeviceConnectorRequest{
@@ -1270,9 +1264,9 @@ func (r ApiDeletePartnerintegrationEtlRequest) Execute() (*http.Response, error)
 /*
 DeletePartnerintegrationEtl Delete a 'partnerintegration.Etl' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeletePartnerintegrationEtlRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeletePartnerintegrationEtlRequest
 */
 func (a *PartnerintegrationApiService) DeletePartnerintegrationEtl(ctx context.Context, moid string) ApiDeletePartnerintegrationEtlRequest {
 	return ApiDeletePartnerintegrationEtlRequest{
@@ -1412,9 +1406,9 @@ func (r ApiDeletePartnerintegrationFileRequest) Execute() (*http.Response, error
 /*
 DeletePartnerintegrationFile Delete a 'partnerintegration.File' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeletePartnerintegrationFileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeletePartnerintegrationFileRequest
 */
 func (a *PartnerintegrationApiService) DeletePartnerintegrationFile(ctx context.Context, moid string) ApiDeletePartnerintegrationFileRequest {
 	return ApiDeletePartnerintegrationFileRequest{
@@ -1554,9 +1548,9 @@ func (r ApiDeletePartnerintegrationInventoryRequest) Execute() (*http.Response, 
 /*
 DeletePartnerintegrationInventory Delete a 'partnerintegration.Inventory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeletePartnerintegrationInventoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeletePartnerintegrationInventoryRequest
 */
 func (a *PartnerintegrationApiService) DeletePartnerintegrationInventory(ctx context.Context, moid string) ApiDeletePartnerintegrationInventoryRequest {
 	return ApiDeletePartnerintegrationInventoryRequest{
@@ -1696,9 +1690,9 @@ func (r ApiDeletePartnerintegrationMetricsRequest) Execute() (*http.Response, er
 /*
 DeletePartnerintegrationMetrics Delete a 'partnerintegration.Metrics' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeletePartnerintegrationMetricsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeletePartnerintegrationMetricsRequest
 */
 func (a *PartnerintegrationApiService) DeletePartnerintegrationMetrics(ctx context.Context, moid string) ApiDeletePartnerintegrationMetricsRequest {
 	return ApiDeletePartnerintegrationMetricsRequest{
@@ -1838,9 +1832,9 @@ func (r ApiDeletePartnerintegrationModelRequest) Execute() (*http.Response, erro
 /*
 DeletePartnerintegrationModel Delete a 'partnerintegration.Model' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeletePartnerintegrationModelRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeletePartnerintegrationModelRequest
 */
 func (a *PartnerintegrationApiService) DeletePartnerintegrationModel(ctx context.Context, moid string) ApiDeletePartnerintegrationModelRequest {
 	return ApiDeletePartnerintegrationModelRequest{
@@ -1980,9 +1974,9 @@ func (r ApiGetPartnerintegrationDcLogsByMoidRequest) Execute() (*Partnerintegrat
 /*
 GetPartnerintegrationDcLogsByMoid Read a 'partnerintegration.DcLogs' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPartnerintegrationDcLogsByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPartnerintegrationDcLogsByMoidRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationDcLogsByMoid(ctx context.Context, moid string) ApiGetPartnerintegrationDcLogsByMoidRequest {
 	return ApiGetPartnerintegrationDcLogsByMoidRequest{
@@ -1993,8 +1987,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationDcLogsByMoid(ctx con
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationDcLogs
+//  @return PartnerintegrationDcLogs
 func (a *PartnerintegrationApiService) GetPartnerintegrationDcLogsByMoidExecute(r ApiGetPartnerintegrationDcLogsByMoidRequest) (*PartnerintegrationDcLogs, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2210,8 +2203,8 @@ func (r ApiGetPartnerintegrationDcLogsListRequest) Execute() (*Partnerintegratio
 /*
 GetPartnerintegrationDcLogsList Read a 'partnerintegration.DcLogs' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPartnerintegrationDcLogsListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPartnerintegrationDcLogsListRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationDcLogsList(ctx context.Context) ApiGetPartnerintegrationDcLogsListRequest {
 	return ApiGetPartnerintegrationDcLogsListRequest{
@@ -2221,8 +2214,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationDcLogsList(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationDcLogsResponse
+//  @return PartnerintegrationDcLogsResponse
 func (a *PartnerintegrationApiService) GetPartnerintegrationDcLogsListExecute(r ApiGetPartnerintegrationDcLogsListRequest) (*PartnerintegrationDcLogsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2409,9 +2401,9 @@ func (r ApiGetPartnerintegrationDeviceConnectorByMoidRequest) Execute() (*Partne
 /*
 GetPartnerintegrationDeviceConnectorByMoid Read a 'partnerintegration.DeviceConnector' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPartnerintegrationDeviceConnectorByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPartnerintegrationDeviceConnectorByMoidRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationDeviceConnectorByMoid(ctx context.Context, moid string) ApiGetPartnerintegrationDeviceConnectorByMoidRequest {
 	return ApiGetPartnerintegrationDeviceConnectorByMoidRequest{
@@ -2422,8 +2414,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationDeviceConnectorByMoi
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationDeviceConnector
+//  @return PartnerintegrationDeviceConnector
 func (a *PartnerintegrationApiService) GetPartnerintegrationDeviceConnectorByMoidExecute(r ApiGetPartnerintegrationDeviceConnectorByMoidRequest) (*PartnerintegrationDeviceConnector, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2639,8 +2630,8 @@ func (r ApiGetPartnerintegrationDeviceConnectorListRequest) Execute() (*Partneri
 /*
 GetPartnerintegrationDeviceConnectorList Read a 'partnerintegration.DeviceConnector' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPartnerintegrationDeviceConnectorListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPartnerintegrationDeviceConnectorListRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationDeviceConnectorList(ctx context.Context) ApiGetPartnerintegrationDeviceConnectorListRequest {
 	return ApiGetPartnerintegrationDeviceConnectorListRequest{
@@ -2650,8 +2641,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationDeviceConnectorList(
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationDeviceConnectorResponse
+//  @return PartnerintegrationDeviceConnectorResponse
 func (a *PartnerintegrationApiService) GetPartnerintegrationDeviceConnectorListExecute(r ApiGetPartnerintegrationDeviceConnectorListRequest) (*PartnerintegrationDeviceConnectorResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2838,9 +2828,9 @@ func (r ApiGetPartnerintegrationDocIssuesByMoidRequest) Execute() (*Partnerinteg
 /*
 GetPartnerintegrationDocIssuesByMoid Read a 'partnerintegration.DocIssues' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPartnerintegrationDocIssuesByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPartnerintegrationDocIssuesByMoidRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationDocIssuesByMoid(ctx context.Context, moid string) ApiGetPartnerintegrationDocIssuesByMoidRequest {
 	return ApiGetPartnerintegrationDocIssuesByMoidRequest{
@@ -2851,8 +2841,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationDocIssuesByMoid(ctx 
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationDocIssues
+//  @return PartnerintegrationDocIssues
 func (a *PartnerintegrationApiService) GetPartnerintegrationDocIssuesByMoidExecute(r ApiGetPartnerintegrationDocIssuesByMoidRequest) (*PartnerintegrationDocIssues, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3068,8 +3057,8 @@ func (r ApiGetPartnerintegrationDocIssuesListRequest) Execute() (*Partnerintegra
 /*
 GetPartnerintegrationDocIssuesList Read a 'partnerintegration.DocIssues' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPartnerintegrationDocIssuesListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPartnerintegrationDocIssuesListRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationDocIssuesList(ctx context.Context) ApiGetPartnerintegrationDocIssuesListRequest {
 	return ApiGetPartnerintegrationDocIssuesListRequest{
@@ -3079,8 +3068,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationDocIssuesList(ctx co
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationDocIssuesResponse
+//  @return PartnerintegrationDocIssuesResponse
 func (a *PartnerintegrationApiService) GetPartnerintegrationDocIssuesListExecute(r ApiGetPartnerintegrationDocIssuesListRequest) (*PartnerintegrationDocIssuesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3267,9 +3255,9 @@ func (r ApiGetPartnerintegrationEtlByMoidRequest) Execute() (*Partnerintegration
 /*
 GetPartnerintegrationEtlByMoid Read a 'partnerintegration.Etl' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPartnerintegrationEtlByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPartnerintegrationEtlByMoidRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationEtlByMoid(ctx context.Context, moid string) ApiGetPartnerintegrationEtlByMoidRequest {
 	return ApiGetPartnerintegrationEtlByMoidRequest{
@@ -3280,8 +3268,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationEtlByMoid(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationEtl
+//  @return PartnerintegrationEtl
 func (a *PartnerintegrationApiService) GetPartnerintegrationEtlByMoidExecute(r ApiGetPartnerintegrationEtlByMoidRequest) (*PartnerintegrationEtl, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3497,8 +3484,8 @@ func (r ApiGetPartnerintegrationEtlListRequest) Execute() (*PartnerintegrationEt
 /*
 GetPartnerintegrationEtlList Read a 'partnerintegration.Etl' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPartnerintegrationEtlListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPartnerintegrationEtlListRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationEtlList(ctx context.Context) ApiGetPartnerintegrationEtlListRequest {
 	return ApiGetPartnerintegrationEtlListRequest{
@@ -3508,8 +3495,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationEtlList(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationEtlResponse
+//  @return PartnerintegrationEtlResponse
 func (a *PartnerintegrationApiService) GetPartnerintegrationEtlListExecute(r ApiGetPartnerintegrationEtlListRequest) (*PartnerintegrationEtlResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3696,9 +3682,9 @@ func (r ApiGetPartnerintegrationFileByMoidRequest) Execute() (*Partnerintegratio
 /*
 GetPartnerintegrationFileByMoid Read a 'partnerintegration.File' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPartnerintegrationFileByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPartnerintegrationFileByMoidRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationFileByMoid(ctx context.Context, moid string) ApiGetPartnerintegrationFileByMoidRequest {
 	return ApiGetPartnerintegrationFileByMoidRequest{
@@ -3709,8 +3695,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationFileByMoid(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationFile
+//  @return PartnerintegrationFile
 func (a *PartnerintegrationApiService) GetPartnerintegrationFileByMoidExecute(r ApiGetPartnerintegrationFileByMoidRequest) (*PartnerintegrationFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3926,8 +3911,8 @@ func (r ApiGetPartnerintegrationFileListRequest) Execute() (*PartnerintegrationF
 /*
 GetPartnerintegrationFileList Read a 'partnerintegration.File' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPartnerintegrationFileListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPartnerintegrationFileListRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationFileList(ctx context.Context) ApiGetPartnerintegrationFileListRequest {
 	return ApiGetPartnerintegrationFileListRequest{
@@ -3937,8 +3922,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationFileList(ctx context
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationFileResponse
+//  @return PartnerintegrationFileResponse
 func (a *PartnerintegrationApiService) GetPartnerintegrationFileListExecute(r ApiGetPartnerintegrationFileListRequest) (*PartnerintegrationFileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4125,9 +4109,9 @@ func (r ApiGetPartnerintegrationInventoryByMoidRequest) Execute() (*Partnerinteg
 /*
 GetPartnerintegrationInventoryByMoid Read a 'partnerintegration.Inventory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPartnerintegrationInventoryByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPartnerintegrationInventoryByMoidRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationInventoryByMoid(ctx context.Context, moid string) ApiGetPartnerintegrationInventoryByMoidRequest {
 	return ApiGetPartnerintegrationInventoryByMoidRequest{
@@ -4138,8 +4122,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationInventoryByMoid(ctx 
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationInventory
+//  @return PartnerintegrationInventory
 func (a *PartnerintegrationApiService) GetPartnerintegrationInventoryByMoidExecute(r ApiGetPartnerintegrationInventoryByMoidRequest) (*PartnerintegrationInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4355,8 +4338,8 @@ func (r ApiGetPartnerintegrationInventoryListRequest) Execute() (*Partnerintegra
 /*
 GetPartnerintegrationInventoryList Read a 'partnerintegration.Inventory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPartnerintegrationInventoryListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPartnerintegrationInventoryListRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationInventoryList(ctx context.Context) ApiGetPartnerintegrationInventoryListRequest {
 	return ApiGetPartnerintegrationInventoryListRequest{
@@ -4366,8 +4349,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationInventoryList(ctx co
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationInventoryResponse
+//  @return PartnerintegrationInventoryResponse
 func (a *PartnerintegrationApiService) GetPartnerintegrationInventoryListExecute(r ApiGetPartnerintegrationInventoryListRequest) (*PartnerintegrationInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4554,9 +4536,9 @@ func (r ApiGetPartnerintegrationLogsByMoidRequest) Execute() (*Partnerintegratio
 /*
 GetPartnerintegrationLogsByMoid Read a 'partnerintegration.Logs' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPartnerintegrationLogsByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPartnerintegrationLogsByMoidRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationLogsByMoid(ctx context.Context, moid string) ApiGetPartnerintegrationLogsByMoidRequest {
 	return ApiGetPartnerintegrationLogsByMoidRequest{
@@ -4567,8 +4549,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationLogsByMoid(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationLogs
+//  @return PartnerintegrationLogs
 func (a *PartnerintegrationApiService) GetPartnerintegrationLogsByMoidExecute(r ApiGetPartnerintegrationLogsByMoidRequest) (*PartnerintegrationLogs, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4784,8 +4765,8 @@ func (r ApiGetPartnerintegrationLogsListRequest) Execute() (*PartnerintegrationL
 /*
 GetPartnerintegrationLogsList Read a 'partnerintegration.Logs' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPartnerintegrationLogsListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPartnerintegrationLogsListRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationLogsList(ctx context.Context) ApiGetPartnerintegrationLogsListRequest {
 	return ApiGetPartnerintegrationLogsListRequest{
@@ -4795,8 +4776,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationLogsList(ctx context
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationLogsResponse
+//  @return PartnerintegrationLogsResponse
 func (a *PartnerintegrationApiService) GetPartnerintegrationLogsListExecute(r ApiGetPartnerintegrationLogsListRequest) (*PartnerintegrationLogsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4983,9 +4963,9 @@ func (r ApiGetPartnerintegrationMetricsByMoidRequest) Execute() (*Partnerintegra
 /*
 GetPartnerintegrationMetricsByMoid Read a 'partnerintegration.Metrics' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPartnerintegrationMetricsByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPartnerintegrationMetricsByMoidRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationMetricsByMoid(ctx context.Context, moid string) ApiGetPartnerintegrationMetricsByMoidRequest {
 	return ApiGetPartnerintegrationMetricsByMoidRequest{
@@ -4996,8 +4976,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationMetricsByMoid(ctx co
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationMetrics
+//  @return PartnerintegrationMetrics
 func (a *PartnerintegrationApiService) GetPartnerintegrationMetricsByMoidExecute(r ApiGetPartnerintegrationMetricsByMoidRequest) (*PartnerintegrationMetrics, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5213,8 +5192,8 @@ func (r ApiGetPartnerintegrationMetricsListRequest) Execute() (*Partnerintegrati
 /*
 GetPartnerintegrationMetricsList Read a 'partnerintegration.Metrics' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPartnerintegrationMetricsListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPartnerintegrationMetricsListRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationMetricsList(ctx context.Context) ApiGetPartnerintegrationMetricsListRequest {
 	return ApiGetPartnerintegrationMetricsListRequest{
@@ -5224,8 +5203,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationMetricsList(ctx cont
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationMetricsResponse
+//  @return PartnerintegrationMetricsResponse
 func (a *PartnerintegrationApiService) GetPartnerintegrationMetricsListExecute(r ApiGetPartnerintegrationMetricsListRequest) (*PartnerintegrationMetricsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5412,9 +5390,9 @@ func (r ApiGetPartnerintegrationModelByMoidRequest) Execute() (*Partnerintegrati
 /*
 GetPartnerintegrationModelByMoid Read a 'partnerintegration.Model' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPartnerintegrationModelByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPartnerintegrationModelByMoidRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationModelByMoid(ctx context.Context, moid string) ApiGetPartnerintegrationModelByMoidRequest {
 	return ApiGetPartnerintegrationModelByMoidRequest{
@@ -5425,8 +5403,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationModelByMoid(ctx cont
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationModel
+//  @return PartnerintegrationModel
 func (a *PartnerintegrationApiService) GetPartnerintegrationModelByMoidExecute(r ApiGetPartnerintegrationModelByMoidRequest) (*PartnerintegrationModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5642,8 +5619,8 @@ func (r ApiGetPartnerintegrationModelListRequest) Execute() (*Partnerintegration
 /*
 GetPartnerintegrationModelList Read a 'partnerintegration.Model' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPartnerintegrationModelListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPartnerintegrationModelListRequest
 */
 func (a *PartnerintegrationApiService) GetPartnerintegrationModelList(ctx context.Context) ApiGetPartnerintegrationModelListRequest {
 	return ApiGetPartnerintegrationModelListRequest{
@@ -5653,8 +5630,7 @@ func (a *PartnerintegrationApiService) GetPartnerintegrationModelList(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationModelResponse
+//  @return PartnerintegrationModelResponse
 func (a *PartnerintegrationApiService) GetPartnerintegrationModelListExecute(r ApiGetPartnerintegrationModelListRequest) (*PartnerintegrationModelResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5855,9 +5831,9 @@ func (r ApiPatchPartnerintegrationDeviceConnectorRequest) Execute() (*Partnerint
 /*
 PatchPartnerintegrationDeviceConnector Update a 'partnerintegration.DeviceConnector' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchPartnerintegrationDeviceConnectorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchPartnerintegrationDeviceConnectorRequest
 */
 func (a *PartnerintegrationApiService) PatchPartnerintegrationDeviceConnector(ctx context.Context, moid string) ApiPatchPartnerintegrationDeviceConnectorRequest {
 	return ApiPatchPartnerintegrationDeviceConnectorRequest{
@@ -5868,8 +5844,7 @@ func (a *PartnerintegrationApiService) PatchPartnerintegrationDeviceConnector(ct
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationDeviceConnector
+//  @return PartnerintegrationDeviceConnector
 func (a *PartnerintegrationApiService) PatchPartnerintegrationDeviceConnectorExecute(r ApiPatchPartnerintegrationDeviceConnectorRequest) (*PartnerintegrationDeviceConnector, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6031,9 +6006,9 @@ func (r ApiPatchPartnerintegrationEtlRequest) Execute() (*PartnerintegrationEtl,
 /*
 PatchPartnerintegrationEtl Update a 'partnerintegration.Etl' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchPartnerintegrationEtlRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchPartnerintegrationEtlRequest
 */
 func (a *PartnerintegrationApiService) PatchPartnerintegrationEtl(ctx context.Context, moid string) ApiPatchPartnerintegrationEtlRequest {
 	return ApiPatchPartnerintegrationEtlRequest{
@@ -6044,8 +6019,7 @@ func (a *PartnerintegrationApiService) PatchPartnerintegrationEtl(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationEtl
+//  @return PartnerintegrationEtl
 func (a *PartnerintegrationApiService) PatchPartnerintegrationEtlExecute(r ApiPatchPartnerintegrationEtlRequest) (*PartnerintegrationEtl, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6207,9 +6181,9 @@ func (r ApiPatchPartnerintegrationFileRequest) Execute() (*PartnerintegrationFil
 /*
 PatchPartnerintegrationFile Update a 'partnerintegration.File' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchPartnerintegrationFileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchPartnerintegrationFileRequest
 */
 func (a *PartnerintegrationApiService) PatchPartnerintegrationFile(ctx context.Context, moid string) ApiPatchPartnerintegrationFileRequest {
 	return ApiPatchPartnerintegrationFileRequest{
@@ -6220,8 +6194,7 @@ func (a *PartnerintegrationApiService) PatchPartnerintegrationFile(ctx context.C
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationFile
+//  @return PartnerintegrationFile
 func (a *PartnerintegrationApiService) PatchPartnerintegrationFileExecute(r ApiPatchPartnerintegrationFileRequest) (*PartnerintegrationFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6383,9 +6356,9 @@ func (r ApiPatchPartnerintegrationInventoryRequest) Execute() (*Partnerintegrati
 /*
 PatchPartnerintegrationInventory Update a 'partnerintegration.Inventory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchPartnerintegrationInventoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchPartnerintegrationInventoryRequest
 */
 func (a *PartnerintegrationApiService) PatchPartnerintegrationInventory(ctx context.Context, moid string) ApiPatchPartnerintegrationInventoryRequest {
 	return ApiPatchPartnerintegrationInventoryRequest{
@@ -6396,8 +6369,7 @@ func (a *PartnerintegrationApiService) PatchPartnerintegrationInventory(ctx cont
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationInventory
+//  @return PartnerintegrationInventory
 func (a *PartnerintegrationApiService) PatchPartnerintegrationInventoryExecute(r ApiPatchPartnerintegrationInventoryRequest) (*PartnerintegrationInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6559,9 +6531,9 @@ func (r ApiPatchPartnerintegrationMetricsRequest) Execute() (*Partnerintegration
 /*
 PatchPartnerintegrationMetrics Update a 'partnerintegration.Metrics' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchPartnerintegrationMetricsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchPartnerintegrationMetricsRequest
 */
 func (a *PartnerintegrationApiService) PatchPartnerintegrationMetrics(ctx context.Context, moid string) ApiPatchPartnerintegrationMetricsRequest {
 	return ApiPatchPartnerintegrationMetricsRequest{
@@ -6572,8 +6544,7 @@ func (a *PartnerintegrationApiService) PatchPartnerintegrationMetrics(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationMetrics
+//  @return PartnerintegrationMetrics
 func (a *PartnerintegrationApiService) PatchPartnerintegrationMetricsExecute(r ApiPatchPartnerintegrationMetricsRequest) (*PartnerintegrationMetrics, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6735,9 +6706,9 @@ func (r ApiPatchPartnerintegrationModelRequest) Execute() (*PartnerintegrationMo
 /*
 PatchPartnerintegrationModel Update a 'partnerintegration.Model' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchPartnerintegrationModelRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchPartnerintegrationModelRequest
 */
 func (a *PartnerintegrationApiService) PatchPartnerintegrationModel(ctx context.Context, moid string) ApiPatchPartnerintegrationModelRequest {
 	return ApiPatchPartnerintegrationModelRequest{
@@ -6748,8 +6719,7 @@ func (a *PartnerintegrationApiService) PatchPartnerintegrationModel(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationModel
+//  @return PartnerintegrationModel
 func (a *PartnerintegrationApiService) PatchPartnerintegrationModelExecute(r ApiPatchPartnerintegrationModelRequest) (*PartnerintegrationModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6911,9 +6881,9 @@ func (r ApiUpdatePartnerintegrationDeviceConnectorRequest) Execute() (*Partnerin
 /*
 UpdatePartnerintegrationDeviceConnector Update a 'partnerintegration.DeviceConnector' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdatePartnerintegrationDeviceConnectorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdatePartnerintegrationDeviceConnectorRequest
 */
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationDeviceConnector(ctx context.Context, moid string) ApiUpdatePartnerintegrationDeviceConnectorRequest {
 	return ApiUpdatePartnerintegrationDeviceConnectorRequest{
@@ -6924,8 +6894,7 @@ func (a *PartnerintegrationApiService) UpdatePartnerintegrationDeviceConnector(c
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationDeviceConnector
+//  @return PartnerintegrationDeviceConnector
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationDeviceConnectorExecute(r ApiUpdatePartnerintegrationDeviceConnectorRequest) (*PartnerintegrationDeviceConnector, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7087,9 +7056,9 @@ func (r ApiUpdatePartnerintegrationEtlRequest) Execute() (*PartnerintegrationEtl
 /*
 UpdatePartnerintegrationEtl Update a 'partnerintegration.Etl' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdatePartnerintegrationEtlRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdatePartnerintegrationEtlRequest
 */
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationEtl(ctx context.Context, moid string) ApiUpdatePartnerintegrationEtlRequest {
 	return ApiUpdatePartnerintegrationEtlRequest{
@@ -7100,8 +7069,7 @@ func (a *PartnerintegrationApiService) UpdatePartnerintegrationEtl(ctx context.C
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationEtl
+//  @return PartnerintegrationEtl
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationEtlExecute(r ApiUpdatePartnerintegrationEtlRequest) (*PartnerintegrationEtl, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7263,9 +7231,9 @@ func (r ApiUpdatePartnerintegrationFileRequest) Execute() (*PartnerintegrationFi
 /*
 UpdatePartnerintegrationFile Update a 'partnerintegration.File' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdatePartnerintegrationFileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdatePartnerintegrationFileRequest
 */
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationFile(ctx context.Context, moid string) ApiUpdatePartnerintegrationFileRequest {
 	return ApiUpdatePartnerintegrationFileRequest{
@@ -7276,8 +7244,7 @@ func (a *PartnerintegrationApiService) UpdatePartnerintegrationFile(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationFile
+//  @return PartnerintegrationFile
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationFileExecute(r ApiUpdatePartnerintegrationFileRequest) (*PartnerintegrationFile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7439,9 +7406,9 @@ func (r ApiUpdatePartnerintegrationInventoryRequest) Execute() (*Partnerintegrat
 /*
 UpdatePartnerintegrationInventory Update a 'partnerintegration.Inventory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdatePartnerintegrationInventoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdatePartnerintegrationInventoryRequest
 */
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationInventory(ctx context.Context, moid string) ApiUpdatePartnerintegrationInventoryRequest {
 	return ApiUpdatePartnerintegrationInventoryRequest{
@@ -7452,8 +7419,7 @@ func (a *PartnerintegrationApiService) UpdatePartnerintegrationInventory(ctx con
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationInventory
+//  @return PartnerintegrationInventory
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationInventoryExecute(r ApiUpdatePartnerintegrationInventoryRequest) (*PartnerintegrationInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7615,9 +7581,9 @@ func (r ApiUpdatePartnerintegrationMetricsRequest) Execute() (*Partnerintegratio
 /*
 UpdatePartnerintegrationMetrics Update a 'partnerintegration.Metrics' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdatePartnerintegrationMetricsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdatePartnerintegrationMetricsRequest
 */
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationMetrics(ctx context.Context, moid string) ApiUpdatePartnerintegrationMetricsRequest {
 	return ApiUpdatePartnerintegrationMetricsRequest{
@@ -7628,8 +7594,7 @@ func (a *PartnerintegrationApiService) UpdatePartnerintegrationMetrics(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationMetrics
+//  @return PartnerintegrationMetrics
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationMetricsExecute(r ApiUpdatePartnerintegrationMetricsRequest) (*PartnerintegrationMetrics, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7791,9 +7756,9 @@ func (r ApiUpdatePartnerintegrationModelRequest) Execute() (*PartnerintegrationM
 /*
 UpdatePartnerintegrationModel Update a 'partnerintegration.Model' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdatePartnerintegrationModelRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdatePartnerintegrationModelRequest
 */
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationModel(ctx context.Context, moid string) ApiUpdatePartnerintegrationModelRequest {
 	return ApiUpdatePartnerintegrationModelRequest{
@@ -7804,8 +7769,7 @@ func (a *PartnerintegrationApiService) UpdatePartnerintegrationModel(ctx context
 }
 
 // Execute executes the request
-//
-//	@return PartnerintegrationModel
+//  @return PartnerintegrationModel
 func (a *PartnerintegrationApiService) UpdatePartnerintegrationModelExecute(r ApiUpdatePartnerintegrationModelRequest) (*PartnerintegrationModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

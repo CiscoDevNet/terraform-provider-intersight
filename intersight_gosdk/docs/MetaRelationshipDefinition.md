@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ExportWithPeer** | Pointer to **bool** | When turned on, the local MO is exported when the peer is exported. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the relationship. | [optional] [readonly] 
 **PeerRelName** | Pointer to **string** | Name of relationship in peer managed object. | [optional] [readonly] 
+**PeerSupportedObjectTypes** | Pointer to **[]string** |  | [optional] 
 **PeerSync** | Pointer to **bool** | When turned on, peer MO corresponding to the reference provided in relation is updated with a reference to the current MO. | [optional] [readonly] 
 **Type** | Pointer to **string** | Fully qualified type of the peer managed object. | [optional] [readonly] 
 
@@ -224,6 +225,41 @@ SetPeerRelName sets PeerRelName field to given value.
 
 HasPeerRelName returns a boolean if a field has been set.
 
+### GetPeerSupportedObjectTypes
+
+`func (o *MetaRelationshipDefinition) GetPeerSupportedObjectTypes() []string`
+
+GetPeerSupportedObjectTypes returns the PeerSupportedObjectTypes field if non-nil, zero value otherwise.
+
+### GetPeerSupportedObjectTypesOk
+
+`func (o *MetaRelationshipDefinition) GetPeerSupportedObjectTypesOk() (*[]string, bool)`
+
+GetPeerSupportedObjectTypesOk returns a tuple with the PeerSupportedObjectTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPeerSupportedObjectTypes
+
+`func (o *MetaRelationshipDefinition) SetPeerSupportedObjectTypes(v []string)`
+
+SetPeerSupportedObjectTypes sets PeerSupportedObjectTypes field to given value.
+
+### HasPeerSupportedObjectTypes
+
+`func (o *MetaRelationshipDefinition) HasPeerSupportedObjectTypes() bool`
+
+HasPeerSupportedObjectTypes returns a boolean if a field has been set.
+
+### SetPeerSupportedObjectTypesNil
+
+`func (o *MetaRelationshipDefinition) SetPeerSupportedObjectTypesNil(b bool)`
+
+ SetPeerSupportedObjectTypesNil sets the value for PeerSupportedObjectTypes to be an explicit nil
+
+### UnsetPeerSupportedObjectTypes
+`func (o *MetaRelationshipDefinition) UnsetPeerSupportedObjectTypes()`
+
+UnsetPeerSupportedObjectTypes ensures that no value is present for PeerSupportedObjectTypes, not even an explicit nil
 ### GetPeerSync
 
 `func (o *MetaRelationshipDefinition) GetPeerSync() bool`

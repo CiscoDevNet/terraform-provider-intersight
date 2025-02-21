@@ -28,6 +28,7 @@ The following arguments can be used to get data of already created objects in In
 * `bucket_name`:(string) Bucket name in the cloud storage service where the file is stored. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `external_host`:(bool) Flag to specify if the requested file is served from an external host. An external host is a host other than the Intersight endpoint URL that resides outside of an endpoint device's local network. A download client (e.g. the Intersight Appliance device connector) should use this property to determine if a proxy is required to reach the host. 
 * `file_size`:(int) Size of the file in bytes. FileSize maybe zero if the storage service does not report file size. 
 * `file_time`:(string) File timestamp as reported by the cloud storage service. 
 * `file_type`:(string) User defined file type supplied by the caller. 

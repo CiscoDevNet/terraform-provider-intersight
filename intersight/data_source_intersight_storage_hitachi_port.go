@@ -254,6 +254,11 @@ func getStorageHitachiPortSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"port_type": {
+			Description: "Port type of the Hitachi port.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -768,6 +773,11 @@ func dataSourceStorageHitachiPortRead(c context.Context, d *schema.ResourceData,
 		o.SetPortMode(x)
 	}
 
+	if v, ok := d.GetOk("port_type"); ok {
+		x := (v.(string))
+		o.SetPortType(x)
+	}
+
 	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1028,6 +1038,7 @@ func dataSourceStorageHitachiPortRead(c context.Context, d *schema.ResourceData,
 				temp["port_connection"] = (s.GetPortConnection())
 				temp["port_lun_security"] = (s.GetPortLunSecurity())
 				temp["port_mode"] = (s.GetPortMode())
+				temp["port_type"] = (s.GetPortType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

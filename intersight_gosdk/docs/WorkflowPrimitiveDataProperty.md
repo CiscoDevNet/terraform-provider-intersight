@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.PrimitiveDataProperty"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.PrimitiveDataProperty"]
 **Constraints** | Pointer to [**NullableWorkflowConstraints**](WorkflowConstraints.md) |  | [optional] 
+**DataSourceSelector** | Pointer to [**[]WorkflowDataSourceSelector**](WorkflowDataSourceSelector.md) |  | [optional] 
 **InventorySelector** | Pointer to [**[]WorkflowMoReferenceProperty**](WorkflowMoReferenceProperty.md) |  | [optional] 
 **Secure** | Pointer to **bool** | Intersight supports secure properties as task input/output. The values of these properties are encrypted and stored in Intersight. This flag marks the property to be secure when it is set to true. | [optional] 
 **Type** | Pointer to **string** | Specify the enum type for primitive data type. * &#x60;string&#x60; - Enum to specify a string data type. * &#x60;integer&#x60; - Enum to specify an integer32 data type. * &#x60;float&#x60; - Enum to specify a float64 data type. * &#x60;boolean&#x60; - Enum to specify a boolean data type. * &#x60;json&#x60; - Enum to specify a json data type. * &#x60;enum&#x60; - Enum to specify a enum data type which is a list of pre-defined strings. | [optional] [default to "string"]
@@ -105,6 +106,41 @@ HasConstraints returns a boolean if a field has been set.
 `func (o *WorkflowPrimitiveDataProperty) UnsetConstraints()`
 
 UnsetConstraints ensures that no value is present for Constraints, not even an explicit nil
+### GetDataSourceSelector
+
+`func (o *WorkflowPrimitiveDataProperty) GetDataSourceSelector() []WorkflowDataSourceSelector`
+
+GetDataSourceSelector returns the DataSourceSelector field if non-nil, zero value otherwise.
+
+### GetDataSourceSelectorOk
+
+`func (o *WorkflowPrimitiveDataProperty) GetDataSourceSelectorOk() (*[]WorkflowDataSourceSelector, bool)`
+
+GetDataSourceSelectorOk returns a tuple with the DataSourceSelector field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDataSourceSelector
+
+`func (o *WorkflowPrimitiveDataProperty) SetDataSourceSelector(v []WorkflowDataSourceSelector)`
+
+SetDataSourceSelector sets DataSourceSelector field to given value.
+
+### HasDataSourceSelector
+
+`func (o *WorkflowPrimitiveDataProperty) HasDataSourceSelector() bool`
+
+HasDataSourceSelector returns a boolean if a field has been set.
+
+### SetDataSourceSelectorNil
+
+`func (o *WorkflowPrimitiveDataProperty) SetDataSourceSelectorNil(b bool)`
+
+ SetDataSourceSelectorNil sets the value for DataSourceSelector to be an explicit nil
+
+### UnsetDataSourceSelector
+`func (o *WorkflowPrimitiveDataProperty) UnsetDataSourceSelector()`
+
+UnsetDataSourceSelector ensures that no value is present for DataSourceSelector, not even an explicit nil
 ### GetInventorySelector
 
 `func (o *WorkflowPrimitiveDataProperty) GetInventorySelector() []WorkflowMoReferenceProperty`

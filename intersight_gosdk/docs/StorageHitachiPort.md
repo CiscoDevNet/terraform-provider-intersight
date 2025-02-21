@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **PortConnection** | Pointer to **string** | Topology setting for the port. | [optional] [readonly] 
 **PortLunSecurity** | Pointer to **bool** | LUN security setting for the port. | [optional] [readonly] 
 **PortMode** | Pointer to **string** | Operation mode of the port. Possible values are FC-NVMe, FCP-SCSI, and NOT SUPPORTED. | [optional] [readonly] 
+**PortType** | Pointer to **string** | Port type of the Hitachi port. | [optional] [readonly] 
 **ShortportId** | Pointer to **string** | Port ID (short) of the port. | [optional] [readonly] 
 **TcpMtu** | Pointer to **int64** | Value of MTU for iSCSI communication. | [optional] [readonly] 
 **Array** | Pointer to [**NullableStorageHitachiArrayRelationship**](StorageHitachiArrayRelationship.md) |  | [optional] 
@@ -303,6 +304,31 @@ SetPortMode sets PortMode field to given value.
 `func (o *StorageHitachiPort) HasPortMode() bool`
 
 HasPortMode returns a boolean if a field has been set.
+
+### GetPortType
+
+`func (o *StorageHitachiPort) GetPortType() string`
+
+GetPortType returns the PortType field if non-nil, zero value otherwise.
+
+### GetPortTypeOk
+
+`func (o *StorageHitachiPort) GetPortTypeOk() (*string, bool)`
+
+GetPortTypeOk returns a tuple with the PortType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortType
+
+`func (o *StorageHitachiPort) SetPortType(v string)`
+
+SetPortType sets PortType field to given value.
+
+### HasPortType
+
+`func (o *StorageHitachiPort) HasPortType() bool`
+
+HasPortType returns a boolean if a field has been set.
 
 ### GetShortportId
 

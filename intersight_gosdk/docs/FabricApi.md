@@ -2026,7 +2026,7 @@ Name | Type | Description  | Notes
 
 ## CreateFabricSpanSourceEthPort
 
-> FabricAbstractSpanSourcePort CreateFabricSpanSourceEthPort(ctx).FabricSpanSourceEthPort(fabricSpanSourceEthPort).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FabricSpanSourceEthPort CreateFabricSpanSourceEthPort(ctx).FabricSpanSourceEthPort(fabricSpanSourceEthPort).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'fabric.SpanSourceEthPort' resource.
 
@@ -2054,7 +2054,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.CreateFabricSpanSourceEthPort``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFabricSpanSourceEthPort`: FabricAbstractSpanSourcePort
+	// response from `CreateFabricSpanSourceEthPort`: FabricSpanSourceEthPort
 	fmt.Fprintf(os.Stdout, "Response from `FabricApi.CreateFabricSpanSourceEthPort`: %v\n", resp)
 }
 ```
@@ -2076,7 +2076,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricAbstractSpanSourcePort**](FabricAbstractSpanSourcePort.md)
+[**FabricSpanSourceEthPort**](FabricSpanSourceEthPort.md)
 
 ### Authorization
 
@@ -2094,7 +2094,7 @@ Name | Type | Description  | Notes
 
 ## CreateFabricSpanSourceEthPortChannel
 
-> FabricAbstractSpanSourcePortChannel CreateFabricSpanSourceEthPortChannel(ctx).FabricSpanSourceEthPortChannel(fabricSpanSourceEthPortChannel).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> FabricSpanSourceEthPortChannel CreateFabricSpanSourceEthPortChannel(ctx).FabricSpanSourceEthPortChannel(fabricSpanSourceEthPortChannel).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'fabric.SpanSourceEthPortChannel' resource.
 
@@ -2122,7 +2122,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.CreateFabricSpanSourceEthPortChannel``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFabricSpanSourceEthPortChannel`: FabricAbstractSpanSourcePortChannel
+	// response from `CreateFabricSpanSourceEthPortChannel`: FabricSpanSourceEthPortChannel
 	fmt.Fprintf(os.Stdout, "Response from `FabricApi.CreateFabricSpanSourceEthPortChannel`: %v\n", resp)
 }
 ```
@@ -2144,7 +2144,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricAbstractSpanSourcePortChannel**](FabricAbstractSpanSourcePortChannel.md)
+[**FabricSpanSourceEthPortChannel**](FabricSpanSourceEthPortChannel.md)
 
 ### Authorization
 
@@ -10416,7 +10416,7 @@ Name | Type | Description  | Notes
 
 ## GetFabricSpanSourceEthPortByMoid
 
-> FabricAbstractSpanSourcePort GetFabricSpanSourceEthPortByMoid(ctx, moid).Execute()
+> FabricSpanSourceEthPort GetFabricSpanSourceEthPortByMoid(ctx, moid).Execute()
 
 Read a 'fabric.SpanSourceEthPort' resource.
 
@@ -10442,7 +10442,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.GetFabricSpanSourceEthPortByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFabricSpanSourceEthPortByMoid`: FabricAbstractSpanSourcePort
+	// response from `GetFabricSpanSourceEthPortByMoid`: FabricSpanSourceEthPort
 	fmt.Fprintf(os.Stdout, "Response from `FabricApi.GetFabricSpanSourceEthPortByMoid`: %v\n", resp)
 }
 ```
@@ -10466,7 +10466,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricAbstractSpanSourcePort**](FabricAbstractSpanSourcePort.md)
+[**FabricSpanSourceEthPort**](FabricSpanSourceEthPort.md)
 
 ### Authorization
 
@@ -10484,7 +10484,7 @@ Name | Type | Description  | Notes
 
 ## GetFabricSpanSourceEthPortChannelByMoid
 
-> FabricAbstractSpanSourcePortChannel GetFabricSpanSourceEthPortChannelByMoid(ctx, moid).Execute()
+> FabricSpanSourceEthPortChannel GetFabricSpanSourceEthPortChannelByMoid(ctx, moid).Execute()
 
 Read a 'fabric.SpanSourceEthPortChannel' resource.
 
@@ -10510,7 +10510,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.GetFabricSpanSourceEthPortChannelByMoid``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetFabricSpanSourceEthPortChannelByMoid`: FabricAbstractSpanSourcePortChannel
+	// response from `GetFabricSpanSourceEthPortChannelByMoid`: FabricSpanSourceEthPortChannel
 	fmt.Fprintf(os.Stdout, "Response from `FabricApi.GetFabricSpanSourceEthPortChannelByMoid`: %v\n", resp)
 }
 ```
@@ -10534,7 +10534,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricAbstractSpanSourcePortChannel**](FabricAbstractSpanSourcePortChannel.md)
+[**FabricSpanSourceEthPortChannel**](FabricSpanSourceEthPortChannel.md)
 
 ### Authorization
 

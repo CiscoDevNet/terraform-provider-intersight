@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateAdapterConfigPolicyRequest) Execute() (*AdapterConfigPolicy, *h
 /*
 CreateAdapterConfigPolicy Create a 'adapter.ConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateAdapterConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAdapterConfigPolicyRequest
 */
 func (a *AdapterApiService) CreateAdapterConfigPolicy(ctx context.Context) ApiCreateAdapterConfigPolicyRequest {
 	return ApiCreateAdapterConfigPolicyRequest{
@@ -67,8 +67,7 @@ func (a *AdapterApiService) CreateAdapterConfigPolicy(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//
-//	@return AdapterConfigPolicy
+//  @return AdapterConfigPolicy
 func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterConfigPolicyRequest) (*AdapterConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -218,9 +217,9 @@ func (r ApiDeleteAdapterConfigPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteAdapterConfigPolicy Delete a 'adapter.ConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteAdapterConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteAdapterConfigPolicyRequest
 */
 func (a *AdapterApiService) DeleteAdapterConfigPolicy(ctx context.Context, moid string) ApiDeleteAdapterConfigPolicyRequest {
 	return ApiDeleteAdapterConfigPolicyRequest{
@@ -360,9 +359,9 @@ func (r ApiGetAdapterConfigPolicyByMoidRequest) Execute() (*AdapterConfigPolicy,
 /*
 GetAdapterConfigPolicyByMoid Read a 'adapter.ConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAdapterConfigPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAdapterConfigPolicyByMoidRequest
 */
 func (a *AdapterApiService) GetAdapterConfigPolicyByMoid(ctx context.Context, moid string) ApiGetAdapterConfigPolicyByMoidRequest {
 	return ApiGetAdapterConfigPolicyByMoidRequest{
@@ -373,8 +372,7 @@ func (a *AdapterApiService) GetAdapterConfigPolicyByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return AdapterConfigPolicy
+//  @return AdapterConfigPolicy
 func (a *AdapterApiService) GetAdapterConfigPolicyByMoidExecute(r ApiGetAdapterConfigPolicyByMoidRequest) (*AdapterConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -590,8 +588,8 @@ func (r ApiGetAdapterConfigPolicyListRequest) Execute() (*AdapterConfigPolicyRes
 /*
 GetAdapterConfigPolicyList Read a 'adapter.ConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAdapterConfigPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAdapterConfigPolicyListRequest
 */
 func (a *AdapterApiService) GetAdapterConfigPolicyList(ctx context.Context) ApiGetAdapterConfigPolicyListRequest {
 	return ApiGetAdapterConfigPolicyListRequest{
@@ -601,8 +599,7 @@ func (a *AdapterApiService) GetAdapterConfigPolicyList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//
-//	@return AdapterConfigPolicyResponse
+//  @return AdapterConfigPolicyResponse
 func (a *AdapterApiService) GetAdapterConfigPolicyListExecute(r ApiGetAdapterConfigPolicyListRequest) (*AdapterConfigPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -789,9 +786,9 @@ func (r ApiGetAdapterExtEthInterfaceByMoidRequest) Execute() (*AdapterExtEthInte
 /*
 GetAdapterExtEthInterfaceByMoid Read a 'adapter.ExtEthInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAdapterExtEthInterfaceByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAdapterExtEthInterfaceByMoidRequest
 */
 func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoid(ctx context.Context, moid string) ApiGetAdapterExtEthInterfaceByMoidRequest {
 	return ApiGetAdapterExtEthInterfaceByMoidRequest{
@@ -802,8 +799,7 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return AdapterExtEthInterface
+//  @return AdapterExtEthInterface
 func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoidExecute(r ApiGetAdapterExtEthInterfaceByMoidRequest) (*AdapterExtEthInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1019,8 +1015,8 @@ func (r ApiGetAdapterExtEthInterfaceListRequest) Execute() (*AdapterExtEthInterf
 /*
 GetAdapterExtEthInterfaceList Read a 'adapter.ExtEthInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAdapterExtEthInterfaceListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAdapterExtEthInterfaceListRequest
 */
 func (a *AdapterApiService) GetAdapterExtEthInterfaceList(ctx context.Context) ApiGetAdapterExtEthInterfaceListRequest {
 	return ApiGetAdapterExtEthInterfaceListRequest{
@@ -1030,8 +1026,7 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return AdapterExtEthInterfaceResponse
+//  @return AdapterExtEthInterfaceResponse
 func (a *AdapterApiService) GetAdapterExtEthInterfaceListExecute(r ApiGetAdapterExtEthInterfaceListRequest) (*AdapterExtEthInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1218,9 +1213,9 @@ func (r ApiGetAdapterHostEthInterfaceByMoidRequest) Execute() (*AdapterHostEthIn
 /*
 GetAdapterHostEthInterfaceByMoid Read a 'adapter.HostEthInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAdapterHostEthInterfaceByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAdapterHostEthInterfaceByMoidRequest
 */
 func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoid(ctx context.Context, moid string) ApiGetAdapterHostEthInterfaceByMoidRequest {
 	return ApiGetAdapterHostEthInterfaceByMoidRequest{
@@ -1231,8 +1226,7 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoid(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return AdapterHostEthInterface
+//  @return AdapterHostEthInterface
 func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoidExecute(r ApiGetAdapterHostEthInterfaceByMoidRequest) (*AdapterHostEthInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1448,8 +1442,8 @@ func (r ApiGetAdapterHostEthInterfaceListRequest) Execute() (*AdapterHostEthInte
 /*
 GetAdapterHostEthInterfaceList Read a 'adapter.HostEthInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAdapterHostEthInterfaceListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAdapterHostEthInterfaceListRequest
 */
 func (a *AdapterApiService) GetAdapterHostEthInterfaceList(ctx context.Context) ApiGetAdapterHostEthInterfaceListRequest {
 	return ApiGetAdapterHostEthInterfaceListRequest{
@@ -1459,8 +1453,7 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceList(ctx context.Context) 
 }
 
 // Execute executes the request
-//
-//	@return AdapterHostEthInterfaceResponse
+//  @return AdapterHostEthInterfaceResponse
 func (a *AdapterApiService) GetAdapterHostEthInterfaceListExecute(r ApiGetAdapterHostEthInterfaceListRequest) (*AdapterHostEthInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1647,9 +1640,9 @@ func (r ApiGetAdapterHostFcInterfaceByMoidRequest) Execute() (*AdapterHostFcInte
 /*
 GetAdapterHostFcInterfaceByMoid Read a 'adapter.HostFcInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAdapterHostFcInterfaceByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAdapterHostFcInterfaceByMoidRequest
 */
 func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoid(ctx context.Context, moid string) ApiGetAdapterHostFcInterfaceByMoidRequest {
 	return ApiGetAdapterHostFcInterfaceByMoidRequest{
@@ -1660,8 +1653,7 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return AdapterHostFcInterface
+//  @return AdapterHostFcInterface
 func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoidExecute(r ApiGetAdapterHostFcInterfaceByMoidRequest) (*AdapterHostFcInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1877,8 +1869,8 @@ func (r ApiGetAdapterHostFcInterfaceListRequest) Execute() (*AdapterHostFcInterf
 /*
 GetAdapterHostFcInterfaceList Read a 'adapter.HostFcInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAdapterHostFcInterfaceListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAdapterHostFcInterfaceListRequest
 */
 func (a *AdapterApiService) GetAdapterHostFcInterfaceList(ctx context.Context) ApiGetAdapterHostFcInterfaceListRequest {
 	return ApiGetAdapterHostFcInterfaceListRequest{
@@ -1888,8 +1880,7 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return AdapterHostFcInterfaceResponse
+//  @return AdapterHostFcInterfaceResponse
 func (a *AdapterApiService) GetAdapterHostFcInterfaceListExecute(r ApiGetAdapterHostFcInterfaceListRequest) (*AdapterHostFcInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2076,9 +2067,9 @@ func (r ApiGetAdapterHostIscsiInterfaceByMoidRequest) Execute() (*AdapterHostIsc
 /*
 GetAdapterHostIscsiInterfaceByMoid Read a 'adapter.HostIscsiInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAdapterHostIscsiInterfaceByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAdapterHostIscsiInterfaceByMoidRequest
 */
 func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoid(ctx context.Context, moid string) ApiGetAdapterHostIscsiInterfaceByMoidRequest {
 	return ApiGetAdapterHostIscsiInterfaceByMoidRequest{
@@ -2089,8 +2080,7 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return AdapterHostIscsiInterface
+//  @return AdapterHostIscsiInterface
 func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoidExecute(r ApiGetAdapterHostIscsiInterfaceByMoidRequest) (*AdapterHostIscsiInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2306,8 +2296,8 @@ func (r ApiGetAdapterHostIscsiInterfaceListRequest) Execute() (*AdapterHostIscsi
 /*
 GetAdapterHostIscsiInterfaceList Read a 'adapter.HostIscsiInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAdapterHostIscsiInterfaceListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAdapterHostIscsiInterfaceListRequest
 */
 func (a *AdapterApiService) GetAdapterHostIscsiInterfaceList(ctx context.Context) ApiGetAdapterHostIscsiInterfaceListRequest {
 	return ApiGetAdapterHostIscsiInterfaceListRequest{
@@ -2317,8 +2307,7 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceList(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return AdapterHostIscsiInterfaceResponse
+//  @return AdapterHostIscsiInterfaceResponse
 func (a *AdapterApiService) GetAdapterHostIscsiInterfaceListExecute(r ApiGetAdapterHostIscsiInterfaceListRequest) (*AdapterHostIscsiInterfaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2505,9 +2494,9 @@ func (r ApiGetAdapterUnitByMoidRequest) Execute() (*AdapterUnit, *http.Response,
 /*
 GetAdapterUnitByMoid Read a 'adapter.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAdapterUnitByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAdapterUnitByMoidRequest
 */
 func (a *AdapterApiService) GetAdapterUnitByMoid(ctx context.Context, moid string) ApiGetAdapterUnitByMoidRequest {
 	return ApiGetAdapterUnitByMoidRequest{
@@ -2518,8 +2507,7 @@ func (a *AdapterApiService) GetAdapterUnitByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//
-//	@return AdapterUnit
+//  @return AdapterUnit
 func (a *AdapterApiService) GetAdapterUnitByMoidExecute(r ApiGetAdapterUnitByMoidRequest) (*AdapterUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2659,9 +2647,9 @@ func (r ApiGetAdapterUnitExpanderByMoidRequest) Execute() (*AdapterUnitExpander,
 /*
 GetAdapterUnitExpanderByMoid Read a 'adapter.UnitExpander' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAdapterUnitExpanderByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAdapterUnitExpanderByMoidRequest
 */
 func (a *AdapterApiService) GetAdapterUnitExpanderByMoid(ctx context.Context, moid string) ApiGetAdapterUnitExpanderByMoidRequest {
 	return ApiGetAdapterUnitExpanderByMoidRequest{
@@ -2672,8 +2660,7 @@ func (a *AdapterApiService) GetAdapterUnitExpanderByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return AdapterUnitExpander
+//  @return AdapterUnitExpander
 func (a *AdapterApiService) GetAdapterUnitExpanderByMoidExecute(r ApiGetAdapterUnitExpanderByMoidRequest) (*AdapterUnitExpander, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2889,8 +2876,8 @@ func (r ApiGetAdapterUnitExpanderListRequest) Execute() (*AdapterUnitExpanderRes
 /*
 GetAdapterUnitExpanderList Read a 'adapter.UnitExpander' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAdapterUnitExpanderListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAdapterUnitExpanderListRequest
 */
 func (a *AdapterApiService) GetAdapterUnitExpanderList(ctx context.Context) ApiGetAdapterUnitExpanderListRequest {
 	return ApiGetAdapterUnitExpanderListRequest{
@@ -2900,8 +2887,7 @@ func (a *AdapterApiService) GetAdapterUnitExpanderList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//
-//	@return AdapterUnitExpanderResponse
+//  @return AdapterUnitExpanderResponse
 func (a *AdapterApiService) GetAdapterUnitExpanderListExecute(r ApiGetAdapterUnitExpanderListRequest) (*AdapterUnitExpanderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3164,8 +3150,8 @@ func (r ApiGetAdapterUnitListRequest) Execute() (*AdapterUnitResponse, *http.Res
 /*
 GetAdapterUnitList Read a 'adapter.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAdapterUnitListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAdapterUnitListRequest
 */
 func (a *AdapterApiService) GetAdapterUnitList(ctx context.Context) ApiGetAdapterUnitListRequest {
 	return ApiGetAdapterUnitListRequest{
@@ -3175,8 +3161,7 @@ func (a *AdapterApiService) GetAdapterUnitList(ctx context.Context) ApiGetAdapte
 }
 
 // Execute executes the request
-//
-//	@return AdapterUnitResponse
+//  @return AdapterUnitResponse
 func (a *AdapterApiService) GetAdapterUnitListExecute(r ApiGetAdapterUnitListRequest) (*AdapterUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3377,9 +3362,9 @@ func (r ApiPatchAdapterConfigPolicyRequest) Execute() (*AdapterConfigPolicy, *ht
 /*
 PatchAdapterConfigPolicy Update a 'adapter.ConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchAdapterConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchAdapterConfigPolicyRequest
 */
 func (a *AdapterApiService) PatchAdapterConfigPolicy(ctx context.Context, moid string) ApiPatchAdapterConfigPolicyRequest {
 	return ApiPatchAdapterConfigPolicyRequest{
@@ -3390,8 +3375,7 @@ func (a *AdapterApiService) PatchAdapterConfigPolicy(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//
-//	@return AdapterConfigPolicy
+//  @return AdapterConfigPolicy
 func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterConfigPolicyRequest) (*AdapterConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3553,9 +3537,9 @@ func (r ApiPatchAdapterHostEthInterfaceRequest) Execute() (*AdapterHostEthInterf
 /*
 PatchAdapterHostEthInterface Update a 'adapter.HostEthInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchAdapterHostEthInterfaceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchAdapterHostEthInterfaceRequest
 */
 func (a *AdapterApiService) PatchAdapterHostEthInterface(ctx context.Context, moid string) ApiPatchAdapterHostEthInterfaceRequest {
 	return ApiPatchAdapterHostEthInterfaceRequest{
@@ -3566,8 +3550,7 @@ func (a *AdapterApiService) PatchAdapterHostEthInterface(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return AdapterHostEthInterface
+//  @return AdapterHostEthInterface
 func (a *AdapterApiService) PatchAdapterHostEthInterfaceExecute(r ApiPatchAdapterHostEthInterfaceRequest) (*AdapterHostEthInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3729,9 +3712,9 @@ func (r ApiPatchAdapterHostFcInterfaceRequest) Execute() (*AdapterHostFcInterfac
 /*
 PatchAdapterHostFcInterface Update a 'adapter.HostFcInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchAdapterHostFcInterfaceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchAdapterHostFcInterfaceRequest
 */
 func (a *AdapterApiService) PatchAdapterHostFcInterface(ctx context.Context, moid string) ApiPatchAdapterHostFcInterfaceRequest {
 	return ApiPatchAdapterHostFcInterfaceRequest{
@@ -3742,8 +3725,7 @@ func (a *AdapterApiService) PatchAdapterHostFcInterface(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return AdapterHostFcInterface
+//  @return AdapterHostFcInterface
 func (a *AdapterApiService) PatchAdapterHostFcInterfaceExecute(r ApiPatchAdapterHostFcInterfaceRequest) (*AdapterHostFcInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3905,9 +3887,9 @@ func (r ApiUpdateAdapterConfigPolicyRequest) Execute() (*AdapterConfigPolicy, *h
 /*
 UpdateAdapterConfigPolicy Update a 'adapter.ConfigPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateAdapterConfigPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateAdapterConfigPolicyRequest
 */
 func (a *AdapterApiService) UpdateAdapterConfigPolicy(ctx context.Context, moid string) ApiUpdateAdapterConfigPolicyRequest {
 	return ApiUpdateAdapterConfigPolicyRequest{
@@ -3918,8 +3900,7 @@ func (a *AdapterApiService) UpdateAdapterConfigPolicy(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return AdapterConfigPolicy
+//  @return AdapterConfigPolicy
 func (a *AdapterApiService) UpdateAdapterConfigPolicyExecute(r ApiUpdateAdapterConfigPolicyRequest) (*AdapterConfigPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4081,9 +4062,9 @@ func (r ApiUpdateAdapterHostEthInterfaceRequest) Execute() (*AdapterHostEthInter
 /*
 UpdateAdapterHostEthInterface Update a 'adapter.HostEthInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateAdapterHostEthInterfaceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateAdapterHostEthInterfaceRequest
 */
 func (a *AdapterApiService) UpdateAdapterHostEthInterface(ctx context.Context, moid string) ApiUpdateAdapterHostEthInterfaceRequest {
 	return ApiUpdateAdapterHostEthInterfaceRequest{
@@ -4094,8 +4075,7 @@ func (a *AdapterApiService) UpdateAdapterHostEthInterface(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return AdapterHostEthInterface
+//  @return AdapterHostEthInterface
 func (a *AdapterApiService) UpdateAdapterHostEthInterfaceExecute(r ApiUpdateAdapterHostEthInterfaceRequest) (*AdapterHostEthInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4257,9 +4237,9 @@ func (r ApiUpdateAdapterHostFcInterfaceRequest) Execute() (*AdapterHostFcInterfa
 /*
 UpdateAdapterHostFcInterface Update a 'adapter.HostFcInterface' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateAdapterHostFcInterfaceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateAdapterHostFcInterfaceRequest
 */
 func (a *AdapterApiService) UpdateAdapterHostFcInterface(ctx context.Context, moid string) ApiUpdateAdapterHostFcInterfaceRequest {
 	return ApiUpdateAdapterHostFcInterfaceRequest{
@@ -4270,8 +4250,7 @@ func (a *AdapterApiService) UpdateAdapterHostFcInterface(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return AdapterHostFcInterface
+//  @return AdapterHostFcInterface
 func (a *AdapterApiService) UpdateAdapterHostFcInterfaceExecute(r ApiUpdateAdapterHostFcInterfaceRequest) (*AdapterHostFcInterface, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

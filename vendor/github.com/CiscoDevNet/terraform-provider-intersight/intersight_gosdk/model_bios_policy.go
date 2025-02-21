@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -28,6 +28,8 @@ type BiosPolicy struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// BIOS Token for setting ACPI SRAT Special Purpose Memory Flag configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	AcpiSratSpFlagEn *string `json:"AcpiSratSpFlagEn,omitempty"`
 	// BIOS Token for setting ACS Control GPU 1 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	AcsControlGpu1state *string `json:"AcsControlGpu1state,omitempty"`
 	// BIOS Token for setting ACS Control GPU 2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -118,7 +120,7 @@ type BiosPolicy struct {
 	CbsCmnEdcControlThrottle *string `json:"CbsCmnEdcControlThrottle,omitempty"`
 	// BIOS Token for setting Efficiency Mode Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnEfficiencyModeEn token. * `Enabled` - Value - Enabled for configuring CbsCmnEfficiencyModeEn token.
 	CbsCmnEfficiencyModeEn *string `json:"CbsCmnEfficiencyModeEn,omitempty"`
-	// BIOS Token for setting Power Profile Selection F19h configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Balanced Memory Performance Mode` - Value - Balanced Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Efficiency Mode` - Value - Efficiency Mode for configuring CbsCmnEfficiencyModeEnRs token. * `High Performance Mode` - Value - High Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Maximum IO Performance Mode` - Value - Maximum IO Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.
+	// BIOS Token for setting Power Profile Selection F19h configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnEfficiencyModeEnRs token. * `Balanced Core Memory Performance Mode` - Value - Balanced Core Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Balanced Core Performance Mode` - Value - Balanced Core Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Balanced Memory Performance Mode` - Value - Balanced Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Efficiency Mode` - Value - Efficiency Mode for configuring CbsCmnEfficiencyModeEnRs token. * `High Performance Mode` - Value - High Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Maximum IO Performance Mode` - Value - Maximum IO Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.
 	CbsCmnEfficiencyModeEnRs *string `json:"CbsCmnEfficiencyModeEnRs,omitempty"`
 	// BIOS Token for setting Fixed SOC P-State configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnFixedSocPstate token. * `P0` - Value - P0 for configuring CbsCmnFixedSocPstate token. * `P1` - Value - P1 for configuring CbsCmnFixedSocPstate token. * `P2` - Value - P2 for configuring CbsCmnFixedSocPstate token. * `P3` - Value - P3 for configuring CbsCmnFixedSocPstate token.
 	CbsCmnFixedSocPstate *string `json:"CbsCmnFixedSocPstate,omitempty"`
@@ -136,7 +138,7 @@ type BiosPolicy struct {
 	CbsCmnMemCtrlBankGroupSwapDdr4 *string `json:"CbsCmnMemCtrlBankGroupSwapDdr4,omitempty"`
 	// BIOS Token for setting Power Down Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `disabled` - Value - disabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `enabled` - Value - enabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token.
 	CbsCmnMemCtrllerPwrDnEnDdr *string `json:"CbsCmnMemCtrllerPwrDnEnDdr,omitempty"`
-	// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `Enabled` - Value - Enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
+	// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `enabled` - Value - enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
 	CbsCmnMemMapBankInterleaveDdr4 *string `json:"CbsCmnMemMapBankInterleaveDdr4,omitempty"`
 	// BIOS Token for setting Memory Clock Speed 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `667MHz` - Value - 667MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `800MHz` - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `933MHz` - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1067MHz` - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1200MHz` - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1333MHz` - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1467MHz` - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1600MHz` - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `Auto` - Value - Auto for configuring CbsCmnMemSpeedDdr47xx2 token.
 	CbsCmnMemSpeedDdr47xx2 *string `json:"CbsCmnMemSpeedDdr47xx2,omitempty"`
@@ -150,13 +152,13 @@ type BiosPolicy struct {
 	CbsCmncTdpCtl *string `json:"CbsCmncTdpCtl,omitempty"`
 	// BIOS Token for setting xGMI Force Link Width configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `0` - Value - 0 for configuring CbsCmnxGmiForceLinkWidthRs token. * `1` - Value - 1 for configuring CbsCmnxGmiForceLinkWidthRs token. * `2` - Value - 2 for configuring CbsCmnxGmiForceLinkWidthRs token. * `Auto` - Value - Auto for configuring CbsCmnxGmiForceLinkWidthRs token.
 	CbsCmnxGmiForceLinkWidthRs *string `json:"CbsCmnxGmiForceLinkWidthRs,omitempty"`
-	// BIOS Token for setting CCD Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token. * `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token. * `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token. * `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token. * `8 CCDs` - Value - 8 CCDs for configuring CbsCpuCcdCtrlSsp token. * `10 CCDs` - Value - 10 CCDs for configuring CbsCpuCcdCtrlSsp token. * `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.
+	// BIOS Token for setting CCD Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token. * `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token. * `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token. * `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token. * `8 CCDs` - Value - 8 CCDs for configuring CbsCpuCcdCtrlSsp token. * `10 CCDs` - Value - 10 CCDs for configuring CbsCpuCcdCtrlSsp token. * `12 CCDs` - Value - 12 CCDs for configuring CbsCpuCcdCtrlSsp token. * `14 CCDs` - Value - 14 CCDs for configuring CbsCpuCcdCtrlSsp token. * `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.
 	CbsCpuCcdCtrlSsp *string `json:"CbsCpuCcdCtrlSsp,omitempty"`
 	// BIOS Token for setting CPU Downcore control 7xx3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuCoreCtrl token. * `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuCoreCtrl token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuCoreCtrl token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuCoreCtrl token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuCoreCtrl token. * `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuCoreCtrl token. * `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuCoreCtrl token. * `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuCoreCtrl token.
 	CbsCpuCoreCtrl *string `json:"CbsCpuCoreCtrl,omitempty"`
 	// BIOS Token for setting Downcore control F19 MA0h-AFh configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlBergamo token. * `TWO (1 + 1)` - Value - TWO (1 + 1) for configuring CbsCpuDownCoreCtrlBergamo token. * `FOUR (2 + 2)` - Value - FOUR (2 + 2) for configuring CbsCpuDownCoreCtrlBergamo token. * `SIX (3 + 3)` - Value - SIX (3 + 3) for configuring CbsCpuDownCoreCtrlBergamo token. * `EIGHT (4 + 4)` - Value - EIGHT (4 + 4) for configuring CbsCpuDownCoreCtrlBergamo token. * `TEN (5 + 5)` - Value - TEN (5 + 5) for configuring CbsCpuDownCoreCtrlBergamo token. * `TWELVE (6 + 6)` - Value - TWELVE (6 + 6) for configuring CbsCpuDownCoreCtrlBergamo token. * `FOURTEEN (7 + 7)` - Value - FOURTEEN (7 + 7) for configuring CbsCpuDownCoreCtrlBergamo token.
 	CbsCpuDownCoreCtrlBergamo *string `json:"CbsCpuDownCoreCtrlBergamo,omitempty"`
-	// BIOS Token for setting CPU Downcore control F19 M10h-1Fh configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlGenoa token. * `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.
+	// BIOS Token for setting CPU Downcore control F19 M10h-1Fh configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlGenoa token. * `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `EIGHT (8 + 0)` - Value - EIGHT (8 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `NINE (9 + 0)` - Value - NINE (9 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `TEN (10 + 0)` - Value - TEN (10 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `ELEVEN (11 + 0)` - Value - ELEVEN (11 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `TWELVE (12 + 0)` - Value - TWELVE (12 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `THIRTEEN (13 + 0)` - Value - THIRTEEN (13 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FOURTEEN (14 + 0)` - Value - FOURTEEN (14 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FIFTEEN (15 + 0)` - Value - FIFTEEN (15 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.
 	CbsCpuDownCoreCtrlGenoa *string `json:"CbsCpuDownCoreCtrlGenoa,omitempty"`
 	// BIOS Token for setting CPU SMT Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuSmtCtrl token. * `disabled` - Value - disabled for configuring CbsCpuSmtCtrl token. * `enabled` - Value - enabled for configuring CbsCpuSmtCtrl token.
 	CbsCpuSmtCtrl *string `json:"CbsCpuSmtCtrl,omitempty"`
@@ -272,7 +274,7 @@ type BiosPolicy struct {
 	EngPerfTuning *string `json:"EngPerfTuning,omitempty"`
 	// BIOS Token for setting Enhanced Intel Speedstep (R) Technology configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	EnhancedIntelSpeedStepTech *string `json:"EnhancedIntelSpeedStepTech,omitempty"`
-	// BIOS Token for setting Select Owner EPOCH Input Type configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Change to New Random Owner EPOCHs` - Value - Change to New Random Owner EPOCHs for configuring EpochUpdate token. * `Manual User Defined Owner EPOCHs` - Value - Manual User Defined Owner EPOCHs for configuring EpochUpdate token. * `SGX Owner EPOCH activated` - Value - SGX Owner EPOCH activated for configuring EpochUpdate token.
+	// BIOS Token for setting Select Owner EPOCH Input Type configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Change to New Random Owner EPOCHs` - Value - Change to New Random Owner EPOCHs for configuring EpochUpdate token. * `Manual User Defined Owner EPOCHs` - Value - Manual User Defined Owner EPOCHs for configuring EpochUpdate token. * `SGX Owner EPOCH activated` - Value - SGX Owner EPOCH activated for configuring EpochUpdate token. * `SGX Owner EPOCH deactivated` - Value - SGX Owner EPOCH deactivated for configuring EpochUpdate token.
 	EpochUpdate *string `json:"EpochUpdate,omitempty"`
 	// BIOS Token for setting Processor EPP Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	EppEnable *string `json:"EppEnable,omitempty"`
@@ -298,7 +300,7 @@ type BiosPolicy struct {
 	IntelDynamicSpeedSelect *string `json:"IntelDynamicSpeedSelect,omitempty"`
 	// BIOS Token for setting Intel HyperThreading Tech configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	IntelHyperThreadingTech *string `json:"IntelHyperThreadingTech,omitempty"`
-	// BIOS Token for setting Intel Speed Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring IntelSpeedSelect token. * `Base` - Value - Base for configuring IntelSpeedSelect token. * `Config 1` - Value - Config 1 for configuring IntelSpeedSelect token. * `Config 2` - Value - Config 2 for configuring IntelSpeedSelect token. * `Config 3` - Value - Config 3 for configuring IntelSpeedSelect token. * `Config 4` - Value - Config 4 for configuring IntelSpeedSelect token.
+	// BIOS Token for setting Intel Speed Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring IntelSpeedSelect token. * `Base` - Value - Base for configuring IntelSpeedSelect token. * `Config 1` - Value - Config 1 for configuring IntelSpeedSelect token. * `Config 2` - Value - Config 2 for configuring IntelSpeedSelect token. * `Config 3` - Value - Config 3 for configuring IntelSpeedSelect token. * `Config 4` - Value - Config 4 for configuring IntelSpeedSelect token. * `Level 0` - Value - Level 0 for configuring IntelSpeedSelect token. * `Level 1` - Value - Level 1 for configuring IntelSpeedSelect token. * `Level 2` - Value - Level 2 for configuring IntelSpeedSelect token. * `Level 3` - Value - Level 3 for configuring IntelSpeedSelect token. * `Level 4` - Value - Level 4 for configuring IntelSpeedSelect token.
 	IntelSpeedSelect *string `json:"IntelSpeedSelect,omitempty"`
 	// BIOS Token for setting Intel Turbo Boost Tech configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	IntelTurboBoostTech *string `json:"IntelTurboBoostTech,omitempty"`
@@ -332,6 +334,8 @@ type BiosPolicy struct {
 	Ipv6pxe *string `json:"Ipv6pxe,omitempty"`
 	// BIOS Token for setting KTI Prefetch configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring KtiPrefetch token. * `disabled` - Value - disabled for configuring KtiPrefetch token. * `enabled` - Value - enabled for configuring KtiPrefetch token.
 	KtiPrefetch *string `json:"KtiPrefetch,omitempty"`
+	// BIOS Token for setting Latency Optimized Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	LatencyOptimizedMode *string `json:"LatencyOptimizedMode,omitempty"`
 	// BIOS Token for setting Legacy OS Redirection configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	LegacyOsRedirection *string `json:"LegacyOsRedirection,omitempty"`
 	// BIOS Token for setting Legacy USB Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `auto` - Value - auto for configuring LegacyUsbSupport token. * `disabled` - Value - disabled for configuring LegacyUsbSupport token. * `enabled` - Value - enabled for configuring LegacyUsbSupport token.
@@ -482,13 +486,15 @@ type BiosPolicy struct {
 	PostErrorPause *string `json:"PostErrorPause,omitempty"`
 	// BIOS Token for setting Post Package Repair configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disabled` - Value - Disabled for configuring PostPackageRepair token. * `Hard PPR` - Value - Hard PPR for configuring PostPackageRepair token.
 	PostPackageRepair *string `json:"PostPackageRepair,omitempty"`
+	// BIOS Token for setting PreBoot DMA Protection configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	PreBootDmaProtection *string `json:"PreBootDmaProtection,omitempty"`
 	// BIOS Token for setting PRMRR Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring PrmrrSize token. * `2G` - Value - 2G for configuring PrmrrSize token. * `4G` - Value - 4G for configuring PrmrrSize token. * `8G` - Value - 8G for configuring PrmrrSize token. * `16G` - Value - 16G for configuring PrmrrSize token. * `32G` - Value - 32G for configuring PrmrrSize token. * `64G` - Value - 64G for configuring PrmrrSize token. * `128G` - Value - 128G for configuring PrmrrSize token. * `256G` - Value - 256G for configuring PrmrrSize token. * `512G` - Value - 512G for configuring PrmrrSize token. * `128M` - Value - 128M for configuring PrmrrSize token. * `256M` - Value - 256M for configuring PrmrrSize token. * `512M` - Value - 512M for configuring PrmrrSize token. * `Auto` - Value - Auto for configuring PrmrrSize token. * `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.
 	PrmrrSize *string `json:"PrmrrSize,omitempty"`
 	// BIOS Token for setting Processor C1E configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	ProcessorC1e *string `json:"ProcessorC1e,omitempty"`
 	// BIOS Token for setting Processor C3 Report configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	ProcessorC3report *string `json:"ProcessorC3report,omitempty"`
-	// BIOS Token for setting Processor C6 Report configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	// BIOS Token for setting Processor C6 Report configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring ProcessorC6report token. * `disabled` - Value - disabled for configuring ProcessorC6report token. * `enabled` - Value - enabled for configuring ProcessorC6report token.
 	ProcessorC6report *string `json:"ProcessorC6report,omitempty"`
 	// BIOS Token for setting CPU C State configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	ProcessorCstate *string `json:"ProcessorCstate,omitempty"`
@@ -502,7 +508,7 @@ type BiosPolicy struct {
 	PwrPerfTuning *string `json:"PwrPerfTuning,omitempty"`
 	// BIOS Token for setting QPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `6.4-gt/s` - Value - 6.4-gt/s for configuring QpiLinkFrequency token. * `7.2-gt/s` - Value - 7.2-gt/s for configuring QpiLinkFrequency token. * `8.0-gt/s` - Value - 8.0-gt/s for configuring QpiLinkFrequency token. * `9.6-gt/s` - Value - 9.6-gt/s for configuring QpiLinkFrequency token. * `auto` - Value - auto for configuring QpiLinkFrequency token.
 	QpiLinkFrequency *string `json:"QpiLinkFrequency,omitempty"`
-	// BIOS Token for setting UPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token. * `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token. * `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token. * `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token. * `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token. * `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token. * `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token. * `Auto` - Value - Auto for configuring QpiLinkSpeed token.
+	// BIOS Token for setting UPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token. * `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token. * `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token. * `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token. * `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token. * `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token. * `24.0GT/s` - Value - 24.0GT/s for configuring QpiLinkSpeed token. * `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token. * `Auto` - Value - Auto for configuring QpiLinkSpeed token. * `Use Per Link Setting` - Value - Use Per Link Setting for configuring QpiLinkSpeed token.
 	QpiLinkSpeed *string `json:"QpiLinkSpeed,omitempty"`
 	// BIOS Token for setting QPI Snoop Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `auto` - Value - auto for configuring QpiSnoopMode token. * `cluster-on-die` - Value - cluster-on-die for configuring QpiSnoopMode token. * `early-snoop` - Value - early-snoop for configuring QpiSnoopMode token. * `home-directory-snoop` - Value - home-directory-snoop for configuring QpiSnoopMode token. * `home-directory-snoop-with-osb` - Value - home-directory-snoop-with-osb for configuring QpiSnoopMode token. * `home-snoop` - Value - home-snoop for configuring QpiSnoopMode token.
 	QpiSnoopMode *string `json:"QpiSnoopMode,omitempty"`
@@ -674,10 +680,42 @@ type BiosPolicy struct {
 	SlotFrontNvme24linkSpeed *string `json:"SlotFrontNvme24linkSpeed,omitempty"`
 	// BIOS Token for setting Front NVME 24 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SlotFrontNvme24optionRom *string `json:"SlotFrontNvme24optionRom,omitempty"`
+	// BIOS Token for setting PCIe Slot:Front NVME 25 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme25linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme25linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme25linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme25linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme25linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme25linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme25linkSpeed token.
+	SlotFrontNvme25linkSpeed *string `json:"SlotFrontNvme25linkSpeed,omitempty"`
+	// BIOS Token for setting Front NVME 25 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	SlotFrontNvme25optionRom *string `json:"SlotFrontNvme25optionRom,omitempty"`
+	// BIOS Token for setting PCIe Slot:Front NVME 26 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme26linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme26linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme26linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme26linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme26linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme26linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme26linkSpeed token.
+	SlotFrontNvme26linkSpeed *string `json:"SlotFrontNvme26linkSpeed,omitempty"`
+	// BIOS Token for setting Front NVME 26 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	SlotFrontNvme26optionRom *string `json:"SlotFrontNvme26optionRom,omitempty"`
+	// BIOS Token for setting PCIe Slot:Front NVME 27 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme27linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme27linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme27linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme27linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme27linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme27linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme27linkSpeed token.
+	SlotFrontNvme27linkSpeed *string `json:"SlotFrontNvme27linkSpeed,omitempty"`
+	// BIOS Token for setting Front NVME 27 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	SlotFrontNvme27optionRom *string `json:"SlotFrontNvme27optionRom,omitempty"`
+	// BIOS Token for setting PCIe Slot:Front NVME 28 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme28linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme28linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme28linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme28linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme28linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme28linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme28linkSpeed token.
+	SlotFrontNvme28linkSpeed *string `json:"SlotFrontNvme28linkSpeed,omitempty"`
+	// BIOS Token for setting Front NVME 28 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	SlotFrontNvme28optionRom *string `json:"SlotFrontNvme28optionRom,omitempty"`
+	// BIOS Token for setting PCIe Slot:Front NVME 29 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme29linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme29linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme29linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme29linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme29linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme29linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme29linkSpeed token.
+	SlotFrontNvme29linkSpeed *string `json:"SlotFrontNvme29linkSpeed,omitempty"`
+	// BIOS Token for setting Front NVME 29 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	SlotFrontNvme29optionRom *string `json:"SlotFrontNvme29optionRom,omitempty"`
 	// BIOS Token for setting PCIe Slot:Front NVME 2 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme2linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme2linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme2linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme2linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme2linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme2linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme2linkSpeed token.
 	SlotFrontNvme2linkSpeed *string `json:"SlotFrontNvme2linkSpeed,omitempty"`
 	// BIOS Token for setting Front NVME 2 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SlotFrontNvme2optionRom *string `json:"SlotFrontNvme2optionRom,omitempty"`
+	// BIOS Token for setting PCIe Slot:Front NVME 30 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme30linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme30linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme30linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme30linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme30linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme30linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme30linkSpeed token.
+	SlotFrontNvme30linkSpeed *string `json:"SlotFrontNvme30linkSpeed,omitempty"`
+	// BIOS Token for setting Front NVME 30 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	SlotFrontNvme30optionRom *string `json:"SlotFrontNvme30optionRom,omitempty"`
+	// BIOS Token for setting PCIe Slot:Front NVME 31 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme31linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme31linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme31linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme31linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme31linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme31linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme31linkSpeed token.
+	SlotFrontNvme31linkSpeed *string `json:"SlotFrontNvme31linkSpeed,omitempty"`
+	// BIOS Token for setting Front NVME 31 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	SlotFrontNvme31optionRom *string `json:"SlotFrontNvme31optionRom,omitempty"`
+	// BIOS Token for setting PCIe Slot:Front NVME 32 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme32linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme32linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme32linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme32linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme32linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme32linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme32linkSpeed token.
+	SlotFrontNvme32linkSpeed *string `json:"SlotFrontNvme32linkSpeed,omitempty"`
+	// BIOS Token for setting Front NVME 32 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	SlotFrontNvme32optionRom *string `json:"SlotFrontNvme32optionRom,omitempty"`
 	// BIOS Token for setting Front NVME 3 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme3linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme3linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme3linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme3linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme3linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme3linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme3linkSpeed token.
 	SlotFrontNvme3linkSpeed *string `json:"SlotFrontNvme3linkSpeed,omitempty"`
 	// BIOS Token for setting Front NVME 3 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -876,7 +914,9 @@ type BiosPolicy struct {
 	TxtSupport *string `json:"TxtSupport,omitempty"`
 	// BIOS Token for setting Boot Order Rules configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Loose` - Value - Loose for configuring UcsmBootOrderRule token. * `Strict` - Value - Strict for configuring UcsmBootOrderRule token.
 	UcsmBootOrderRule *string `json:"UcsmBootOrderRule,omitempty"`
-	// BIOS Token for setting Uncore Frequency Scaling configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	// BIOS Token for setting UEFI Memory Map Special Purpose Memory Flag configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	UefiMemMapSpFlagEn *string `json:"UefiMemMapSpFlagEn,omitempty"`
+	// BIOS Token for setting Uncore Frequency Scaling configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring UfsDisable token. * `enabled` - Value - enabled for configuring UfsDisable token. * `Mode 0` - Value - Mode 0 for configuring UfsDisable token. * `Mode 1` - Value - Mode 1 for configuring UfsDisable token.
 	UfsDisable *string `json:"UfsDisable,omitempty"`
 	// BIOS Token for setting UMA Based Clustering configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disable (All2All)` - Value - Disable (All2All) for configuring UmaBasedClustering token. * `Hemisphere (2-clusters)` - Value - Hemisphere (2-clusters) for configuring UmaBasedClustering token. * `Quadrant (4-clusters)` - Value - Quadrant (4-clusters) for configuring UmaBasedClustering token.
 	UmaBasedClustering *string `json:"UmaBasedClustering,omitempty"`
@@ -918,6 +958,7 @@ type BiosPolicy struct {
 	XptRemotePrefetch *string                                      `json:"XptRemotePrefetch,omitempty"`
 	Organization      NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
+	// Deprecated
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -932,6 +973,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this := BiosPolicy{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var acpiSratSpFlagEn string = "platform-default"
+	this.AcpiSratSpFlagEn = &acpiSratSpFlagEn
 	var acsControlGpu1state string = "platform-default"
 	this.AcsControlGpu1state = &acsControlGpu1state
 	var acsControlGpu2state string = "platform-default"
@@ -1236,6 +1279,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.Ipv6pxe = &ipv6pxe
 	var ktiPrefetch string = "platform-default"
 	this.KtiPrefetch = &ktiPrefetch
+	var latencyOptimizedMode string = "platform-default"
+	this.LatencyOptimizedMode = &latencyOptimizedMode
 	var legacyOsRedirection string = "platform-default"
 	this.LegacyOsRedirection = &legacyOsRedirection
 	var legacyUsbSupport string = "platform-default"
@@ -1386,6 +1431,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.PostErrorPause = &postErrorPause
 	var postPackageRepair string = "platform-default"
 	this.PostPackageRepair = &postPackageRepair
+	var preBootDmaProtection string = "platform-default"
+	this.PreBootDmaProtection = &preBootDmaProtection
 	var prmrrSize string = "platform-default"
 	this.PrmrrSize = &prmrrSize
 	var processorC1e string = "platform-default"
@@ -1578,10 +1625,42 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.SlotFrontNvme24linkSpeed = &slotFrontNvme24linkSpeed
 	var slotFrontNvme24optionRom string = "platform-default"
 	this.SlotFrontNvme24optionRom = &slotFrontNvme24optionRom
+	var slotFrontNvme25linkSpeed string = "platform-default"
+	this.SlotFrontNvme25linkSpeed = &slotFrontNvme25linkSpeed
+	var slotFrontNvme25optionRom string = "platform-default"
+	this.SlotFrontNvme25optionRom = &slotFrontNvme25optionRom
+	var slotFrontNvme26linkSpeed string = "platform-default"
+	this.SlotFrontNvme26linkSpeed = &slotFrontNvme26linkSpeed
+	var slotFrontNvme26optionRom string = "platform-default"
+	this.SlotFrontNvme26optionRom = &slotFrontNvme26optionRom
+	var slotFrontNvme27linkSpeed string = "platform-default"
+	this.SlotFrontNvme27linkSpeed = &slotFrontNvme27linkSpeed
+	var slotFrontNvme27optionRom string = "platform-default"
+	this.SlotFrontNvme27optionRom = &slotFrontNvme27optionRom
+	var slotFrontNvme28linkSpeed string = "platform-default"
+	this.SlotFrontNvme28linkSpeed = &slotFrontNvme28linkSpeed
+	var slotFrontNvme28optionRom string = "platform-default"
+	this.SlotFrontNvme28optionRom = &slotFrontNvme28optionRom
+	var slotFrontNvme29linkSpeed string = "platform-default"
+	this.SlotFrontNvme29linkSpeed = &slotFrontNvme29linkSpeed
+	var slotFrontNvme29optionRom string = "platform-default"
+	this.SlotFrontNvme29optionRom = &slotFrontNvme29optionRom
 	var slotFrontNvme2linkSpeed string = "platform-default"
 	this.SlotFrontNvme2linkSpeed = &slotFrontNvme2linkSpeed
 	var slotFrontNvme2optionRom string = "platform-default"
 	this.SlotFrontNvme2optionRom = &slotFrontNvme2optionRom
+	var slotFrontNvme30linkSpeed string = "platform-default"
+	this.SlotFrontNvme30linkSpeed = &slotFrontNvme30linkSpeed
+	var slotFrontNvme30optionRom string = "platform-default"
+	this.SlotFrontNvme30optionRom = &slotFrontNvme30optionRom
+	var slotFrontNvme31linkSpeed string = "platform-default"
+	this.SlotFrontNvme31linkSpeed = &slotFrontNvme31linkSpeed
+	var slotFrontNvme31optionRom string = "platform-default"
+	this.SlotFrontNvme31optionRom = &slotFrontNvme31optionRom
+	var slotFrontNvme32linkSpeed string = "platform-default"
+	this.SlotFrontNvme32linkSpeed = &slotFrontNvme32linkSpeed
+	var slotFrontNvme32optionRom string = "platform-default"
+	this.SlotFrontNvme32optionRom = &slotFrontNvme32optionRom
 	var slotFrontNvme3linkSpeed string = "platform-default"
 	this.SlotFrontNvme3linkSpeed = &slotFrontNvme3linkSpeed
 	var slotFrontNvme3optionRom string = "platform-default"
@@ -1780,6 +1859,8 @@ func NewBiosPolicy(classId string, objectType string) *BiosPolicy {
 	this.TxtSupport = &txtSupport
 	var ucsmBootOrderRule string = "platform-default"
 	this.UcsmBootOrderRule = &ucsmBootOrderRule
+	var uefiMemMapSpFlagEn string = "platform-default"
+	this.UefiMemMapSpFlagEn = &uefiMemMapSpFlagEn
 	var ufsDisable string = "platform-default"
 	this.UfsDisable = &ufsDisable
 	var umaBasedClustering string = "platform-default"
@@ -1832,6 +1913,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.ClassId = classId
 	var objectType string = "bios.Policy"
 	this.ObjectType = objectType
+	var acpiSratSpFlagEn string = "platform-default"
+	this.AcpiSratSpFlagEn = &acpiSratSpFlagEn
 	var acsControlGpu1state string = "platform-default"
 	this.AcsControlGpu1state = &acsControlGpu1state
 	var acsControlGpu2state string = "platform-default"
@@ -2136,6 +2219,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.Ipv6pxe = &ipv6pxe
 	var ktiPrefetch string = "platform-default"
 	this.KtiPrefetch = &ktiPrefetch
+	var latencyOptimizedMode string = "platform-default"
+	this.LatencyOptimizedMode = &latencyOptimizedMode
 	var legacyOsRedirection string = "platform-default"
 	this.LegacyOsRedirection = &legacyOsRedirection
 	var legacyUsbSupport string = "platform-default"
@@ -2286,6 +2371,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.PostErrorPause = &postErrorPause
 	var postPackageRepair string = "platform-default"
 	this.PostPackageRepair = &postPackageRepair
+	var preBootDmaProtection string = "platform-default"
+	this.PreBootDmaProtection = &preBootDmaProtection
 	var prmrrSize string = "platform-default"
 	this.PrmrrSize = &prmrrSize
 	var processorC1e string = "platform-default"
@@ -2478,10 +2565,42 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.SlotFrontNvme24linkSpeed = &slotFrontNvme24linkSpeed
 	var slotFrontNvme24optionRom string = "platform-default"
 	this.SlotFrontNvme24optionRom = &slotFrontNvme24optionRom
+	var slotFrontNvme25linkSpeed string = "platform-default"
+	this.SlotFrontNvme25linkSpeed = &slotFrontNvme25linkSpeed
+	var slotFrontNvme25optionRom string = "platform-default"
+	this.SlotFrontNvme25optionRom = &slotFrontNvme25optionRom
+	var slotFrontNvme26linkSpeed string = "platform-default"
+	this.SlotFrontNvme26linkSpeed = &slotFrontNvme26linkSpeed
+	var slotFrontNvme26optionRom string = "platform-default"
+	this.SlotFrontNvme26optionRom = &slotFrontNvme26optionRom
+	var slotFrontNvme27linkSpeed string = "platform-default"
+	this.SlotFrontNvme27linkSpeed = &slotFrontNvme27linkSpeed
+	var slotFrontNvme27optionRom string = "platform-default"
+	this.SlotFrontNvme27optionRom = &slotFrontNvme27optionRom
+	var slotFrontNvme28linkSpeed string = "platform-default"
+	this.SlotFrontNvme28linkSpeed = &slotFrontNvme28linkSpeed
+	var slotFrontNvme28optionRom string = "platform-default"
+	this.SlotFrontNvme28optionRom = &slotFrontNvme28optionRom
+	var slotFrontNvme29linkSpeed string = "platform-default"
+	this.SlotFrontNvme29linkSpeed = &slotFrontNvme29linkSpeed
+	var slotFrontNvme29optionRom string = "platform-default"
+	this.SlotFrontNvme29optionRom = &slotFrontNvme29optionRom
 	var slotFrontNvme2linkSpeed string = "platform-default"
 	this.SlotFrontNvme2linkSpeed = &slotFrontNvme2linkSpeed
 	var slotFrontNvme2optionRom string = "platform-default"
 	this.SlotFrontNvme2optionRom = &slotFrontNvme2optionRom
+	var slotFrontNvme30linkSpeed string = "platform-default"
+	this.SlotFrontNvme30linkSpeed = &slotFrontNvme30linkSpeed
+	var slotFrontNvme30optionRom string = "platform-default"
+	this.SlotFrontNvme30optionRom = &slotFrontNvme30optionRom
+	var slotFrontNvme31linkSpeed string = "platform-default"
+	this.SlotFrontNvme31linkSpeed = &slotFrontNvme31linkSpeed
+	var slotFrontNvme31optionRom string = "platform-default"
+	this.SlotFrontNvme31optionRom = &slotFrontNvme31optionRom
+	var slotFrontNvme32linkSpeed string = "platform-default"
+	this.SlotFrontNvme32linkSpeed = &slotFrontNvme32linkSpeed
+	var slotFrontNvme32optionRom string = "platform-default"
+	this.SlotFrontNvme32optionRom = &slotFrontNvme32optionRom
 	var slotFrontNvme3linkSpeed string = "platform-default"
 	this.SlotFrontNvme3linkSpeed = &slotFrontNvme3linkSpeed
 	var slotFrontNvme3optionRom string = "platform-default"
@@ -2680,6 +2799,8 @@ func NewBiosPolicyWithDefaults() *BiosPolicy {
 	this.TxtSupport = &txtSupport
 	var ucsmBootOrderRule string = "platform-default"
 	this.UcsmBootOrderRule = &ucsmBootOrderRule
+	var uefiMemMapSpFlagEn string = "platform-default"
+	this.UefiMemMapSpFlagEn = &uefiMemMapSpFlagEn
 	var ufsDisable string = "platform-default"
 	this.UfsDisable = &ufsDisable
 	var umaBasedClustering string = "platform-default"
@@ -2779,6 +2900,38 @@ func (o *BiosPolicy) SetObjectType(v string) {
 // GetDefaultObjectType returns the default value "bios.Policy" of the ObjectType field.
 func (o *BiosPolicy) GetDefaultObjectType() interface{} {
 	return "bios.Policy"
+}
+
+// GetAcpiSratSpFlagEn returns the AcpiSratSpFlagEn field value if set, zero value otherwise.
+func (o *BiosPolicy) GetAcpiSratSpFlagEn() string {
+	if o == nil || IsNil(o.AcpiSratSpFlagEn) {
+		var ret string
+		return ret
+	}
+	return *o.AcpiSratSpFlagEn
+}
+
+// GetAcpiSratSpFlagEnOk returns a tuple with the AcpiSratSpFlagEn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetAcpiSratSpFlagEnOk() (*string, bool) {
+	if o == nil || IsNil(o.AcpiSratSpFlagEn) {
+		return nil, false
+	}
+	return o.AcpiSratSpFlagEn, true
+}
+
+// HasAcpiSratSpFlagEn returns a boolean if a field has been set.
+func (o *BiosPolicy) HasAcpiSratSpFlagEn() bool {
+	if o != nil && !IsNil(o.AcpiSratSpFlagEn) {
+		return true
+	}
+
+	return false
+}
+
+// SetAcpiSratSpFlagEn gets a reference to the given string and assigns it to the AcpiSratSpFlagEn field.
+func (o *BiosPolicy) SetAcpiSratSpFlagEn(v string) {
+	o.AcpiSratSpFlagEn = &v
 }
 
 // GetAcsControlGpu1state returns the AcsControlGpu1state field value if set, zero value otherwise.
@@ -7645,6 +7798,38 @@ func (o *BiosPolicy) SetKtiPrefetch(v string) {
 	o.KtiPrefetch = &v
 }
 
+// GetLatencyOptimizedMode returns the LatencyOptimizedMode field value if set, zero value otherwise.
+func (o *BiosPolicy) GetLatencyOptimizedMode() string {
+	if o == nil || IsNil(o.LatencyOptimizedMode) {
+		var ret string
+		return ret
+	}
+	return *o.LatencyOptimizedMode
+}
+
+// GetLatencyOptimizedModeOk returns a tuple with the LatencyOptimizedMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetLatencyOptimizedModeOk() (*string, bool) {
+	if o == nil || IsNil(o.LatencyOptimizedMode) {
+		return nil, false
+	}
+	return o.LatencyOptimizedMode, true
+}
+
+// HasLatencyOptimizedMode returns a boolean if a field has been set.
+func (o *BiosPolicy) HasLatencyOptimizedMode() bool {
+	if o != nil && !IsNil(o.LatencyOptimizedMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetLatencyOptimizedMode gets a reference to the given string and assigns it to the LatencyOptimizedMode field.
+func (o *BiosPolicy) SetLatencyOptimizedMode(v string) {
+	o.LatencyOptimizedMode = &v
+}
+
 // GetLegacyOsRedirection returns the LegacyOsRedirection field value if set, zero value otherwise.
 func (o *BiosPolicy) GetLegacyOsRedirection() string {
 	if o == nil || IsNil(o.LegacyOsRedirection) {
@@ -10043,6 +10228,38 @@ func (o *BiosPolicy) HasPostPackageRepair() bool {
 // SetPostPackageRepair gets a reference to the given string and assigns it to the PostPackageRepair field.
 func (o *BiosPolicy) SetPostPackageRepair(v string) {
 	o.PostPackageRepair = &v
+}
+
+// GetPreBootDmaProtection returns the PreBootDmaProtection field value if set, zero value otherwise.
+func (o *BiosPolicy) GetPreBootDmaProtection() string {
+	if o == nil || IsNil(o.PreBootDmaProtection) {
+		var ret string
+		return ret
+	}
+	return *o.PreBootDmaProtection
+}
+
+// GetPreBootDmaProtectionOk returns a tuple with the PreBootDmaProtection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetPreBootDmaProtectionOk() (*string, bool) {
+	if o == nil || IsNil(o.PreBootDmaProtection) {
+		return nil, false
+	}
+	return o.PreBootDmaProtection, true
+}
+
+// HasPreBootDmaProtection returns a boolean if a field has been set.
+func (o *BiosPolicy) HasPreBootDmaProtection() bool {
+	if o != nil && !IsNil(o.PreBootDmaProtection) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreBootDmaProtection gets a reference to the given string and assigns it to the PreBootDmaProtection field.
+func (o *BiosPolicy) SetPreBootDmaProtection(v string) {
+	o.PreBootDmaProtection = &v
 }
 
 // GetPrmrrSize returns the PrmrrSize field value if set, zero value otherwise.
@@ -13117,6 +13334,326 @@ func (o *BiosPolicy) SetSlotFrontNvme24optionRom(v string) {
 	o.SlotFrontNvme24optionRom = &v
 }
 
+// GetSlotFrontNvme25linkSpeed returns the SlotFrontNvme25linkSpeed field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme25linkSpeed() string {
+	if o == nil || IsNil(o.SlotFrontNvme25linkSpeed) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme25linkSpeed
+}
+
+// GetSlotFrontNvme25linkSpeedOk returns a tuple with the SlotFrontNvme25linkSpeed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme25linkSpeedOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme25linkSpeed) {
+		return nil, false
+	}
+	return o.SlotFrontNvme25linkSpeed, true
+}
+
+// HasSlotFrontNvme25linkSpeed returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme25linkSpeed() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme25linkSpeed) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme25linkSpeed gets a reference to the given string and assigns it to the SlotFrontNvme25linkSpeed field.
+func (o *BiosPolicy) SetSlotFrontNvme25linkSpeed(v string) {
+	o.SlotFrontNvme25linkSpeed = &v
+}
+
+// GetSlotFrontNvme25optionRom returns the SlotFrontNvme25optionRom field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme25optionRom() string {
+	if o == nil || IsNil(o.SlotFrontNvme25optionRom) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme25optionRom
+}
+
+// GetSlotFrontNvme25optionRomOk returns a tuple with the SlotFrontNvme25optionRom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme25optionRomOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme25optionRom) {
+		return nil, false
+	}
+	return o.SlotFrontNvme25optionRom, true
+}
+
+// HasSlotFrontNvme25optionRom returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme25optionRom() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme25optionRom) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme25optionRom gets a reference to the given string and assigns it to the SlotFrontNvme25optionRom field.
+func (o *BiosPolicy) SetSlotFrontNvme25optionRom(v string) {
+	o.SlotFrontNvme25optionRom = &v
+}
+
+// GetSlotFrontNvme26linkSpeed returns the SlotFrontNvme26linkSpeed field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme26linkSpeed() string {
+	if o == nil || IsNil(o.SlotFrontNvme26linkSpeed) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme26linkSpeed
+}
+
+// GetSlotFrontNvme26linkSpeedOk returns a tuple with the SlotFrontNvme26linkSpeed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme26linkSpeedOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme26linkSpeed) {
+		return nil, false
+	}
+	return o.SlotFrontNvme26linkSpeed, true
+}
+
+// HasSlotFrontNvme26linkSpeed returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme26linkSpeed() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme26linkSpeed) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme26linkSpeed gets a reference to the given string and assigns it to the SlotFrontNvme26linkSpeed field.
+func (o *BiosPolicy) SetSlotFrontNvme26linkSpeed(v string) {
+	o.SlotFrontNvme26linkSpeed = &v
+}
+
+// GetSlotFrontNvme26optionRom returns the SlotFrontNvme26optionRom field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme26optionRom() string {
+	if o == nil || IsNil(o.SlotFrontNvme26optionRom) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme26optionRom
+}
+
+// GetSlotFrontNvme26optionRomOk returns a tuple with the SlotFrontNvme26optionRom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme26optionRomOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme26optionRom) {
+		return nil, false
+	}
+	return o.SlotFrontNvme26optionRom, true
+}
+
+// HasSlotFrontNvme26optionRom returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme26optionRom() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme26optionRom) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme26optionRom gets a reference to the given string and assigns it to the SlotFrontNvme26optionRom field.
+func (o *BiosPolicy) SetSlotFrontNvme26optionRom(v string) {
+	o.SlotFrontNvme26optionRom = &v
+}
+
+// GetSlotFrontNvme27linkSpeed returns the SlotFrontNvme27linkSpeed field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme27linkSpeed() string {
+	if o == nil || IsNil(o.SlotFrontNvme27linkSpeed) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme27linkSpeed
+}
+
+// GetSlotFrontNvme27linkSpeedOk returns a tuple with the SlotFrontNvme27linkSpeed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme27linkSpeedOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme27linkSpeed) {
+		return nil, false
+	}
+	return o.SlotFrontNvme27linkSpeed, true
+}
+
+// HasSlotFrontNvme27linkSpeed returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme27linkSpeed() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme27linkSpeed) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme27linkSpeed gets a reference to the given string and assigns it to the SlotFrontNvme27linkSpeed field.
+func (o *BiosPolicy) SetSlotFrontNvme27linkSpeed(v string) {
+	o.SlotFrontNvme27linkSpeed = &v
+}
+
+// GetSlotFrontNvme27optionRom returns the SlotFrontNvme27optionRom field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme27optionRom() string {
+	if o == nil || IsNil(o.SlotFrontNvme27optionRom) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme27optionRom
+}
+
+// GetSlotFrontNvme27optionRomOk returns a tuple with the SlotFrontNvme27optionRom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme27optionRomOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme27optionRom) {
+		return nil, false
+	}
+	return o.SlotFrontNvme27optionRom, true
+}
+
+// HasSlotFrontNvme27optionRom returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme27optionRom() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme27optionRom) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme27optionRom gets a reference to the given string and assigns it to the SlotFrontNvme27optionRom field.
+func (o *BiosPolicy) SetSlotFrontNvme27optionRom(v string) {
+	o.SlotFrontNvme27optionRom = &v
+}
+
+// GetSlotFrontNvme28linkSpeed returns the SlotFrontNvme28linkSpeed field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme28linkSpeed() string {
+	if o == nil || IsNil(o.SlotFrontNvme28linkSpeed) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme28linkSpeed
+}
+
+// GetSlotFrontNvme28linkSpeedOk returns a tuple with the SlotFrontNvme28linkSpeed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme28linkSpeedOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme28linkSpeed) {
+		return nil, false
+	}
+	return o.SlotFrontNvme28linkSpeed, true
+}
+
+// HasSlotFrontNvme28linkSpeed returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme28linkSpeed() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme28linkSpeed) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme28linkSpeed gets a reference to the given string and assigns it to the SlotFrontNvme28linkSpeed field.
+func (o *BiosPolicy) SetSlotFrontNvme28linkSpeed(v string) {
+	o.SlotFrontNvme28linkSpeed = &v
+}
+
+// GetSlotFrontNvme28optionRom returns the SlotFrontNvme28optionRom field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme28optionRom() string {
+	if o == nil || IsNil(o.SlotFrontNvme28optionRom) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme28optionRom
+}
+
+// GetSlotFrontNvme28optionRomOk returns a tuple with the SlotFrontNvme28optionRom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme28optionRomOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme28optionRom) {
+		return nil, false
+	}
+	return o.SlotFrontNvme28optionRom, true
+}
+
+// HasSlotFrontNvme28optionRom returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme28optionRom() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme28optionRom) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme28optionRom gets a reference to the given string and assigns it to the SlotFrontNvme28optionRom field.
+func (o *BiosPolicy) SetSlotFrontNvme28optionRom(v string) {
+	o.SlotFrontNvme28optionRom = &v
+}
+
+// GetSlotFrontNvme29linkSpeed returns the SlotFrontNvme29linkSpeed field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme29linkSpeed() string {
+	if o == nil || IsNil(o.SlotFrontNvme29linkSpeed) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme29linkSpeed
+}
+
+// GetSlotFrontNvme29linkSpeedOk returns a tuple with the SlotFrontNvme29linkSpeed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme29linkSpeedOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme29linkSpeed) {
+		return nil, false
+	}
+	return o.SlotFrontNvme29linkSpeed, true
+}
+
+// HasSlotFrontNvme29linkSpeed returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme29linkSpeed() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme29linkSpeed) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme29linkSpeed gets a reference to the given string and assigns it to the SlotFrontNvme29linkSpeed field.
+func (o *BiosPolicy) SetSlotFrontNvme29linkSpeed(v string) {
+	o.SlotFrontNvme29linkSpeed = &v
+}
+
+// GetSlotFrontNvme29optionRom returns the SlotFrontNvme29optionRom field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme29optionRom() string {
+	if o == nil || IsNil(o.SlotFrontNvme29optionRom) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme29optionRom
+}
+
+// GetSlotFrontNvme29optionRomOk returns a tuple with the SlotFrontNvme29optionRom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme29optionRomOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme29optionRom) {
+		return nil, false
+	}
+	return o.SlotFrontNvme29optionRom, true
+}
+
+// HasSlotFrontNvme29optionRom returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme29optionRom() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme29optionRom) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme29optionRom gets a reference to the given string and assigns it to the SlotFrontNvme29optionRom field.
+func (o *BiosPolicy) SetSlotFrontNvme29optionRom(v string) {
+	o.SlotFrontNvme29optionRom = &v
+}
+
 // GetSlotFrontNvme2linkSpeed returns the SlotFrontNvme2linkSpeed field value if set, zero value otherwise.
 func (o *BiosPolicy) GetSlotFrontNvme2linkSpeed() string {
 	if o == nil || IsNil(o.SlotFrontNvme2linkSpeed) {
@@ -13179,6 +13716,198 @@ func (o *BiosPolicy) HasSlotFrontNvme2optionRom() bool {
 // SetSlotFrontNvme2optionRom gets a reference to the given string and assigns it to the SlotFrontNvme2optionRom field.
 func (o *BiosPolicy) SetSlotFrontNvme2optionRom(v string) {
 	o.SlotFrontNvme2optionRom = &v
+}
+
+// GetSlotFrontNvme30linkSpeed returns the SlotFrontNvme30linkSpeed field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme30linkSpeed() string {
+	if o == nil || IsNil(o.SlotFrontNvme30linkSpeed) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme30linkSpeed
+}
+
+// GetSlotFrontNvme30linkSpeedOk returns a tuple with the SlotFrontNvme30linkSpeed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme30linkSpeedOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme30linkSpeed) {
+		return nil, false
+	}
+	return o.SlotFrontNvme30linkSpeed, true
+}
+
+// HasSlotFrontNvme30linkSpeed returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme30linkSpeed() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme30linkSpeed) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme30linkSpeed gets a reference to the given string and assigns it to the SlotFrontNvme30linkSpeed field.
+func (o *BiosPolicy) SetSlotFrontNvme30linkSpeed(v string) {
+	o.SlotFrontNvme30linkSpeed = &v
+}
+
+// GetSlotFrontNvme30optionRom returns the SlotFrontNvme30optionRom field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme30optionRom() string {
+	if o == nil || IsNil(o.SlotFrontNvme30optionRom) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme30optionRom
+}
+
+// GetSlotFrontNvme30optionRomOk returns a tuple with the SlotFrontNvme30optionRom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme30optionRomOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme30optionRom) {
+		return nil, false
+	}
+	return o.SlotFrontNvme30optionRom, true
+}
+
+// HasSlotFrontNvme30optionRom returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme30optionRom() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme30optionRom) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme30optionRom gets a reference to the given string and assigns it to the SlotFrontNvme30optionRom field.
+func (o *BiosPolicy) SetSlotFrontNvme30optionRom(v string) {
+	o.SlotFrontNvme30optionRom = &v
+}
+
+// GetSlotFrontNvme31linkSpeed returns the SlotFrontNvme31linkSpeed field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme31linkSpeed() string {
+	if o == nil || IsNil(o.SlotFrontNvme31linkSpeed) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme31linkSpeed
+}
+
+// GetSlotFrontNvme31linkSpeedOk returns a tuple with the SlotFrontNvme31linkSpeed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme31linkSpeedOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme31linkSpeed) {
+		return nil, false
+	}
+	return o.SlotFrontNvme31linkSpeed, true
+}
+
+// HasSlotFrontNvme31linkSpeed returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme31linkSpeed() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme31linkSpeed) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme31linkSpeed gets a reference to the given string and assigns it to the SlotFrontNvme31linkSpeed field.
+func (o *BiosPolicy) SetSlotFrontNvme31linkSpeed(v string) {
+	o.SlotFrontNvme31linkSpeed = &v
+}
+
+// GetSlotFrontNvme31optionRom returns the SlotFrontNvme31optionRom field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme31optionRom() string {
+	if o == nil || IsNil(o.SlotFrontNvme31optionRom) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme31optionRom
+}
+
+// GetSlotFrontNvme31optionRomOk returns a tuple with the SlotFrontNvme31optionRom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme31optionRomOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme31optionRom) {
+		return nil, false
+	}
+	return o.SlotFrontNvme31optionRom, true
+}
+
+// HasSlotFrontNvme31optionRom returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme31optionRom() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme31optionRom) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme31optionRom gets a reference to the given string and assigns it to the SlotFrontNvme31optionRom field.
+func (o *BiosPolicy) SetSlotFrontNvme31optionRom(v string) {
+	o.SlotFrontNvme31optionRom = &v
+}
+
+// GetSlotFrontNvme32linkSpeed returns the SlotFrontNvme32linkSpeed field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme32linkSpeed() string {
+	if o == nil || IsNil(o.SlotFrontNvme32linkSpeed) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme32linkSpeed
+}
+
+// GetSlotFrontNvme32linkSpeedOk returns a tuple with the SlotFrontNvme32linkSpeed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme32linkSpeedOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme32linkSpeed) {
+		return nil, false
+	}
+	return o.SlotFrontNvme32linkSpeed, true
+}
+
+// HasSlotFrontNvme32linkSpeed returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme32linkSpeed() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme32linkSpeed) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme32linkSpeed gets a reference to the given string and assigns it to the SlotFrontNvme32linkSpeed field.
+func (o *BiosPolicy) SetSlotFrontNvme32linkSpeed(v string) {
+	o.SlotFrontNvme32linkSpeed = &v
+}
+
+// GetSlotFrontNvme32optionRom returns the SlotFrontNvme32optionRom field value if set, zero value otherwise.
+func (o *BiosPolicy) GetSlotFrontNvme32optionRom() string {
+	if o == nil || IsNil(o.SlotFrontNvme32optionRom) {
+		var ret string
+		return ret
+	}
+	return *o.SlotFrontNvme32optionRom
+}
+
+// GetSlotFrontNvme32optionRomOk returns a tuple with the SlotFrontNvme32optionRom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetSlotFrontNvme32optionRomOk() (*string, bool) {
+	if o == nil || IsNil(o.SlotFrontNvme32optionRom) {
+		return nil, false
+	}
+	return o.SlotFrontNvme32optionRom, true
+}
+
+// HasSlotFrontNvme32optionRom returns a boolean if a field has been set.
+func (o *BiosPolicy) HasSlotFrontNvme32optionRom() bool {
+	if o != nil && !IsNil(o.SlotFrontNvme32optionRom) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlotFrontNvme32optionRom gets a reference to the given string and assigns it to the SlotFrontNvme32optionRom field.
+func (o *BiosPolicy) SetSlotFrontNvme32optionRom(v string) {
+	o.SlotFrontNvme32optionRom = &v
 }
 
 // GetSlotFrontNvme3linkSpeed returns the SlotFrontNvme3linkSpeed field value if set, zero value otherwise.
@@ -16349,6 +17078,38 @@ func (o *BiosPolicy) SetUcsmBootOrderRule(v string) {
 	o.UcsmBootOrderRule = &v
 }
 
+// GetUefiMemMapSpFlagEn returns the UefiMemMapSpFlagEn field value if set, zero value otherwise.
+func (o *BiosPolicy) GetUefiMemMapSpFlagEn() string {
+	if o == nil || IsNil(o.UefiMemMapSpFlagEn) {
+		var ret string
+		return ret
+	}
+	return *o.UefiMemMapSpFlagEn
+}
+
+// GetUefiMemMapSpFlagEnOk returns a tuple with the UefiMemMapSpFlagEn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicy) GetUefiMemMapSpFlagEnOk() (*string, bool) {
+	if o == nil || IsNil(o.UefiMemMapSpFlagEn) {
+		return nil, false
+	}
+	return o.UefiMemMapSpFlagEn, true
+}
+
+// HasUefiMemMapSpFlagEn returns a boolean if a field has been set.
+func (o *BiosPolicy) HasUefiMemMapSpFlagEn() bool {
+	if o != nil && !IsNil(o.UefiMemMapSpFlagEn) {
+		return true
+	}
+
+	return false
+}
+
+// SetUefiMemMapSpFlagEn gets a reference to the given string and assigns it to the UefiMemMapSpFlagEn field.
+func (o *BiosPolicy) SetUefiMemMapSpFlagEn(v string) {
+	o.UefiMemMapSpFlagEn = &v
+}
+
 // GetUfsDisable returns the UfsDisable field value if set, zero value otherwise.
 func (o *BiosPolicy) GetUfsDisable() string {
 	if o == nil || IsNil(o.UfsDisable) {
@@ -17033,6 +17794,7 @@ func (o *BiosPolicy) UnsetOrganization() {
 }
 
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *BiosPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship {
 	if o == nil {
 		var ret []PolicyAbstractConfigProfileRelationship
@@ -17044,6 +17806,7 @@ func (o *BiosPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship {
 // GetProfilesOk returns a tuple with the Profiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *BiosPolicy) GetProfilesOk() ([]PolicyAbstractConfigProfileRelationship, bool) {
 	if o == nil || IsNil(o.Profiles) {
 		return nil, false
@@ -17061,6 +17824,7 @@ func (o *BiosPolicy) HasProfiles() bool {
 }
 
 // SetProfiles gets a reference to the given []PolicyAbstractConfigProfileRelationship and assigns it to the Profiles field.
+// Deprecated
 func (o *BiosPolicy) SetProfiles(v []PolicyAbstractConfigProfileRelationship) {
 	o.Profiles = v
 }
@@ -17091,6 +17855,9 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
+	if !IsNil(o.AcpiSratSpFlagEn) {
+		toSerialize["AcpiSratSpFlagEn"] = o.AcpiSratSpFlagEn
+	}
 	if !IsNil(o.AcsControlGpu1state) {
 		toSerialize["AcsControlGpu1state"] = o.AcsControlGpu1state
 	}
@@ -17547,6 +18314,9 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.KtiPrefetch) {
 		toSerialize["KtiPrefetch"] = o.KtiPrefetch
 	}
+	if !IsNil(o.LatencyOptimizedMode) {
+		toSerialize["LatencyOptimizedMode"] = o.LatencyOptimizedMode
+	}
 	if !IsNil(o.LegacyOsRedirection) {
 		toSerialize["LegacyOsRedirection"] = o.LegacyOsRedirection
 	}
@@ -17771,6 +18541,9 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PostPackageRepair) {
 		toSerialize["PostPackageRepair"] = o.PostPackageRepair
+	}
+	if !IsNil(o.PreBootDmaProtection) {
+		toSerialize["PreBootDmaProtection"] = o.PreBootDmaProtection
 	}
 	if !IsNil(o.PrmrrSize) {
 		toSerialize["PrmrrSize"] = o.PrmrrSize
@@ -18060,11 +18833,59 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SlotFrontNvme24optionRom) {
 		toSerialize["SlotFrontNvme24optionRom"] = o.SlotFrontNvme24optionRom
 	}
+	if !IsNil(o.SlotFrontNvme25linkSpeed) {
+		toSerialize["SlotFrontNvme25linkSpeed"] = o.SlotFrontNvme25linkSpeed
+	}
+	if !IsNil(o.SlotFrontNvme25optionRom) {
+		toSerialize["SlotFrontNvme25optionRom"] = o.SlotFrontNvme25optionRom
+	}
+	if !IsNil(o.SlotFrontNvme26linkSpeed) {
+		toSerialize["SlotFrontNvme26linkSpeed"] = o.SlotFrontNvme26linkSpeed
+	}
+	if !IsNil(o.SlotFrontNvme26optionRom) {
+		toSerialize["SlotFrontNvme26optionRom"] = o.SlotFrontNvme26optionRom
+	}
+	if !IsNil(o.SlotFrontNvme27linkSpeed) {
+		toSerialize["SlotFrontNvme27linkSpeed"] = o.SlotFrontNvme27linkSpeed
+	}
+	if !IsNil(o.SlotFrontNvme27optionRom) {
+		toSerialize["SlotFrontNvme27optionRom"] = o.SlotFrontNvme27optionRom
+	}
+	if !IsNil(o.SlotFrontNvme28linkSpeed) {
+		toSerialize["SlotFrontNvme28linkSpeed"] = o.SlotFrontNvme28linkSpeed
+	}
+	if !IsNil(o.SlotFrontNvme28optionRom) {
+		toSerialize["SlotFrontNvme28optionRom"] = o.SlotFrontNvme28optionRom
+	}
+	if !IsNil(o.SlotFrontNvme29linkSpeed) {
+		toSerialize["SlotFrontNvme29linkSpeed"] = o.SlotFrontNvme29linkSpeed
+	}
+	if !IsNil(o.SlotFrontNvme29optionRom) {
+		toSerialize["SlotFrontNvme29optionRom"] = o.SlotFrontNvme29optionRom
+	}
 	if !IsNil(o.SlotFrontNvme2linkSpeed) {
 		toSerialize["SlotFrontNvme2linkSpeed"] = o.SlotFrontNvme2linkSpeed
 	}
 	if !IsNil(o.SlotFrontNvme2optionRom) {
 		toSerialize["SlotFrontNvme2optionRom"] = o.SlotFrontNvme2optionRom
+	}
+	if !IsNil(o.SlotFrontNvme30linkSpeed) {
+		toSerialize["SlotFrontNvme30linkSpeed"] = o.SlotFrontNvme30linkSpeed
+	}
+	if !IsNil(o.SlotFrontNvme30optionRom) {
+		toSerialize["SlotFrontNvme30optionRom"] = o.SlotFrontNvme30optionRom
+	}
+	if !IsNil(o.SlotFrontNvme31linkSpeed) {
+		toSerialize["SlotFrontNvme31linkSpeed"] = o.SlotFrontNvme31linkSpeed
+	}
+	if !IsNil(o.SlotFrontNvme31optionRom) {
+		toSerialize["SlotFrontNvme31optionRom"] = o.SlotFrontNvme31optionRom
+	}
+	if !IsNil(o.SlotFrontNvme32linkSpeed) {
+		toSerialize["SlotFrontNvme32linkSpeed"] = o.SlotFrontNvme32linkSpeed
+	}
+	if !IsNil(o.SlotFrontNvme32optionRom) {
+		toSerialize["SlotFrontNvme32optionRom"] = o.SlotFrontNvme32optionRom
 	}
 	if !IsNil(o.SlotFrontNvme3linkSpeed) {
 		toSerialize["SlotFrontNvme3linkSpeed"] = o.SlotFrontNvme3linkSpeed
@@ -18363,6 +19184,9 @@ func (o BiosPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UcsmBootOrderRule) {
 		toSerialize["UcsmBootOrderRule"] = o.UcsmBootOrderRule
 	}
+	if !IsNil(o.UefiMemMapSpFlagEn) {
+		toSerialize["UefiMemMapSpFlagEn"] = o.UefiMemMapSpFlagEn
+	}
 	if !IsNil(o.UfsDisable) {
 		toSerialize["UfsDisable"] = o.UfsDisable
 	}
@@ -18484,6 +19308,8 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// BIOS Token for setting ACPI SRAT Special Purpose Memory Flag configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		AcpiSratSpFlagEn *string `json:"AcpiSratSpFlagEn,omitempty"`
 		// BIOS Token for setting ACS Control GPU 1 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		AcsControlGpu1state *string `json:"AcsControlGpu1state,omitempty"`
 		// BIOS Token for setting ACS Control GPU 2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -18574,7 +19400,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		CbsCmnEdcControlThrottle *string `json:"CbsCmnEdcControlThrottle,omitempty"`
 		// BIOS Token for setting Efficiency Mode Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnEfficiencyModeEn token. * `Enabled` - Value - Enabled for configuring CbsCmnEfficiencyModeEn token.
 		CbsCmnEfficiencyModeEn *string `json:"CbsCmnEfficiencyModeEn,omitempty"`
-		// BIOS Token for setting Power Profile Selection F19h configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Balanced Memory Performance Mode` - Value - Balanced Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Efficiency Mode` - Value - Efficiency Mode for configuring CbsCmnEfficiencyModeEnRs token. * `High Performance Mode` - Value - High Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Maximum IO Performance Mode` - Value - Maximum IO Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.
+		// BIOS Token for setting Power Profile Selection F19h configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnEfficiencyModeEnRs token. * `Balanced Core Memory Performance Mode` - Value - Balanced Core Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Balanced Core Performance Mode` - Value - Balanced Core Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Balanced Memory Performance Mode` - Value - Balanced Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Efficiency Mode` - Value - Efficiency Mode for configuring CbsCmnEfficiencyModeEnRs token. * `High Performance Mode` - Value - High Performance Mode for configuring CbsCmnEfficiencyModeEnRs token. * `Maximum IO Performance Mode` - Value - Maximum IO Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.
 		CbsCmnEfficiencyModeEnRs *string `json:"CbsCmnEfficiencyModeEnRs,omitempty"`
 		// BIOS Token for setting Fixed SOC P-State configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnFixedSocPstate token. * `P0` - Value - P0 for configuring CbsCmnFixedSocPstate token. * `P1` - Value - P1 for configuring CbsCmnFixedSocPstate token. * `P2` - Value - P2 for configuring CbsCmnFixedSocPstate token. * `P3` - Value - P3 for configuring CbsCmnFixedSocPstate token.
 		CbsCmnFixedSocPstate *string `json:"CbsCmnFixedSocPstate,omitempty"`
@@ -18592,7 +19418,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		CbsCmnMemCtrlBankGroupSwapDdr4 *string `json:"CbsCmnMemCtrlBankGroupSwapDdr4,omitempty"`
 		// BIOS Token for setting Power Down Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `disabled` - Value - disabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token. * `enabled` - Value - enabled for configuring CbsCmnMemCtrllerPwrDnEnDdr token.
 		CbsCmnMemCtrllerPwrDnEnDdr *string `json:"CbsCmnMemCtrllerPwrDnEnDdr,omitempty"`
-		// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `Enabled` - Value - Enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
+		// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `enabled` - Value - enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
 		CbsCmnMemMapBankInterleaveDdr4 *string `json:"CbsCmnMemMapBankInterleaveDdr4,omitempty"`
 		// BIOS Token for setting Memory Clock Speed 7xx2 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `667MHz` - Value - 667MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `800MHz` - Value - 800MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `933MHz` - Value - 933MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1067MHz` - Value - 1067MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1200MHz` - Value - 1200MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1333MHz` - Value - 1333MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1467MHz` - Value - 1467MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `1600MHz` - Value - 1600MHz for configuring CbsCmnMemSpeedDdr47xx2 token. * `Auto` - Value - Auto for configuring CbsCmnMemSpeedDdr47xx2 token.
 		CbsCmnMemSpeedDdr47xx2 *string `json:"CbsCmnMemSpeedDdr47xx2,omitempty"`
@@ -18606,13 +19432,13 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		CbsCmncTdpCtl *string `json:"CbsCmncTdpCtl,omitempty"`
 		// BIOS Token for setting xGMI Force Link Width configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `0` - Value - 0 for configuring CbsCmnxGmiForceLinkWidthRs token. * `1` - Value - 1 for configuring CbsCmnxGmiForceLinkWidthRs token. * `2` - Value - 2 for configuring CbsCmnxGmiForceLinkWidthRs token. * `Auto` - Value - Auto for configuring CbsCmnxGmiForceLinkWidthRs token.
 		CbsCmnxGmiForceLinkWidthRs *string `json:"CbsCmnxGmiForceLinkWidthRs,omitempty"`
-		// BIOS Token for setting CCD Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token. * `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token. * `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token. * `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token. * `8 CCDs` - Value - 8 CCDs for configuring CbsCpuCcdCtrlSsp token. * `10 CCDs` - Value - 10 CCDs for configuring CbsCpuCcdCtrlSsp token. * `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.
+		// BIOS Token for setting CCD Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token. * `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token. * `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token. * `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token. * `8 CCDs` - Value - 8 CCDs for configuring CbsCpuCcdCtrlSsp token. * `10 CCDs` - Value - 10 CCDs for configuring CbsCpuCcdCtrlSsp token. * `12 CCDs` - Value - 12 CCDs for configuring CbsCpuCcdCtrlSsp token. * `14 CCDs` - Value - 14 CCDs for configuring CbsCpuCcdCtrlSsp token. * `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.
 		CbsCpuCcdCtrlSsp *string `json:"CbsCpuCcdCtrlSsp,omitempty"`
 		// BIOS Token for setting CPU Downcore control 7xx3 configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuCoreCtrl token. * `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuCoreCtrl token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuCoreCtrl token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuCoreCtrl token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuCoreCtrl token. * `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuCoreCtrl token. * `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuCoreCtrl token. * `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuCoreCtrl token.
 		CbsCpuCoreCtrl *string `json:"CbsCpuCoreCtrl,omitempty"`
 		// BIOS Token for setting Downcore control F19 MA0h-AFh configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlBergamo token. * `TWO (1 + 1)` - Value - TWO (1 + 1) for configuring CbsCpuDownCoreCtrlBergamo token. * `FOUR (2 + 2)` - Value - FOUR (2 + 2) for configuring CbsCpuDownCoreCtrlBergamo token. * `SIX (3 + 3)` - Value - SIX (3 + 3) for configuring CbsCpuDownCoreCtrlBergamo token. * `EIGHT (4 + 4)` - Value - EIGHT (4 + 4) for configuring CbsCpuDownCoreCtrlBergamo token. * `TEN (5 + 5)` - Value - TEN (5 + 5) for configuring CbsCpuDownCoreCtrlBergamo token. * `TWELVE (6 + 6)` - Value - TWELVE (6 + 6) for configuring CbsCpuDownCoreCtrlBergamo token. * `FOURTEEN (7 + 7)` - Value - FOURTEEN (7 + 7) for configuring CbsCpuDownCoreCtrlBergamo token.
 		CbsCpuDownCoreCtrlBergamo *string `json:"CbsCpuDownCoreCtrlBergamo,omitempty"`
-		// BIOS Token for setting CPU Downcore control F19 M10h-1Fh configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlGenoa token. * `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.
+		// BIOS Token for setting CPU Downcore control F19 M10h-1Fh configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlGenoa token. * `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `EIGHT (8 + 0)` - Value - EIGHT (8 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `NINE (9 + 0)` - Value - NINE (9 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `TEN (10 + 0)` - Value - TEN (10 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `ELEVEN (11 + 0)` - Value - ELEVEN (11 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `TWELVE (12 + 0)` - Value - TWELVE (12 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `THIRTEEN (13 + 0)` - Value - THIRTEEN (13 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FOURTEEN (14 + 0)` - Value - FOURTEEN (14 + 0) for configuring CbsCpuDownCoreCtrlGenoa token. * `FIFTEEN (15 + 0)` - Value - FIFTEEN (15 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.
 		CbsCpuDownCoreCtrlGenoa *string `json:"CbsCpuDownCoreCtrlGenoa,omitempty"`
 		// BIOS Token for setting CPU SMT Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCpuSmtCtrl token. * `disabled` - Value - disabled for configuring CbsCpuSmtCtrl token. * `enabled` - Value - enabled for configuring CbsCpuSmtCtrl token.
 		CbsCpuSmtCtrl *string `json:"CbsCpuSmtCtrl,omitempty"`
@@ -18728,7 +19554,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		EngPerfTuning *string `json:"EngPerfTuning,omitempty"`
 		// BIOS Token for setting Enhanced Intel Speedstep (R) Technology configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		EnhancedIntelSpeedStepTech *string `json:"EnhancedIntelSpeedStepTech,omitempty"`
-		// BIOS Token for setting Select Owner EPOCH Input Type configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Change to New Random Owner EPOCHs` - Value - Change to New Random Owner EPOCHs for configuring EpochUpdate token. * `Manual User Defined Owner EPOCHs` - Value - Manual User Defined Owner EPOCHs for configuring EpochUpdate token. * `SGX Owner EPOCH activated` - Value - SGX Owner EPOCH activated for configuring EpochUpdate token.
+		// BIOS Token for setting Select Owner EPOCH Input Type configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Change to New Random Owner EPOCHs` - Value - Change to New Random Owner EPOCHs for configuring EpochUpdate token. * `Manual User Defined Owner EPOCHs` - Value - Manual User Defined Owner EPOCHs for configuring EpochUpdate token. * `SGX Owner EPOCH activated` - Value - SGX Owner EPOCH activated for configuring EpochUpdate token. * `SGX Owner EPOCH deactivated` - Value - SGX Owner EPOCH deactivated for configuring EpochUpdate token.
 		EpochUpdate *string `json:"EpochUpdate,omitempty"`
 		// BIOS Token for setting Processor EPP Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		EppEnable *string `json:"EppEnable,omitempty"`
@@ -18754,7 +19580,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		IntelDynamicSpeedSelect *string `json:"IntelDynamicSpeedSelect,omitempty"`
 		// BIOS Token for setting Intel HyperThreading Tech configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		IntelHyperThreadingTech *string `json:"IntelHyperThreadingTech,omitempty"`
-		// BIOS Token for setting Intel Speed Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring IntelSpeedSelect token. * `Base` - Value - Base for configuring IntelSpeedSelect token. * `Config 1` - Value - Config 1 for configuring IntelSpeedSelect token. * `Config 2` - Value - Config 2 for configuring IntelSpeedSelect token. * `Config 3` - Value - Config 3 for configuring IntelSpeedSelect token. * `Config 4` - Value - Config 4 for configuring IntelSpeedSelect token.
+		// BIOS Token for setting Intel Speed Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring IntelSpeedSelect token. * `Base` - Value - Base for configuring IntelSpeedSelect token. * `Config 1` - Value - Config 1 for configuring IntelSpeedSelect token. * `Config 2` - Value - Config 2 for configuring IntelSpeedSelect token. * `Config 3` - Value - Config 3 for configuring IntelSpeedSelect token. * `Config 4` - Value - Config 4 for configuring IntelSpeedSelect token. * `Level 0` - Value - Level 0 for configuring IntelSpeedSelect token. * `Level 1` - Value - Level 1 for configuring IntelSpeedSelect token. * `Level 2` - Value - Level 2 for configuring IntelSpeedSelect token. * `Level 3` - Value - Level 3 for configuring IntelSpeedSelect token. * `Level 4` - Value - Level 4 for configuring IntelSpeedSelect token.
 		IntelSpeedSelect *string `json:"IntelSpeedSelect,omitempty"`
 		// BIOS Token for setting Intel Turbo Boost Tech configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		IntelTurboBoostTech *string `json:"IntelTurboBoostTech,omitempty"`
@@ -18788,6 +19614,8 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		Ipv6pxe *string `json:"Ipv6pxe,omitempty"`
 		// BIOS Token for setting KTI Prefetch configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring KtiPrefetch token. * `disabled` - Value - disabled for configuring KtiPrefetch token. * `enabled` - Value - enabled for configuring KtiPrefetch token.
 		KtiPrefetch *string `json:"KtiPrefetch,omitempty"`
+		// BIOS Token for setting Latency Optimized Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		LatencyOptimizedMode *string `json:"LatencyOptimizedMode,omitempty"`
 		// BIOS Token for setting Legacy OS Redirection configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		LegacyOsRedirection *string `json:"LegacyOsRedirection,omitempty"`
 		// BIOS Token for setting Legacy USB Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `auto` - Value - auto for configuring LegacyUsbSupport token. * `disabled` - Value - disabled for configuring LegacyUsbSupport token. * `enabled` - Value - enabled for configuring LegacyUsbSupport token.
@@ -18938,13 +19766,15 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		PostErrorPause *string `json:"PostErrorPause,omitempty"`
 		// BIOS Token for setting Post Package Repair configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disabled` - Value - Disabled for configuring PostPackageRepair token. * `Hard PPR` - Value - Hard PPR for configuring PostPackageRepair token.
 		PostPackageRepair *string `json:"PostPackageRepair,omitempty"`
+		// BIOS Token for setting PreBoot DMA Protection configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		PreBootDmaProtection *string `json:"PreBootDmaProtection,omitempty"`
 		// BIOS Token for setting PRMRR Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1G` - Value - 1G for configuring PrmrrSize token. * `2G` - Value - 2G for configuring PrmrrSize token. * `4G` - Value - 4G for configuring PrmrrSize token. * `8G` - Value - 8G for configuring PrmrrSize token. * `16G` - Value - 16G for configuring PrmrrSize token. * `32G` - Value - 32G for configuring PrmrrSize token. * `64G` - Value - 64G for configuring PrmrrSize token. * `128G` - Value - 128G for configuring PrmrrSize token. * `256G` - Value - 256G for configuring PrmrrSize token. * `512G` - Value - 512G for configuring PrmrrSize token. * `128M` - Value - 128M for configuring PrmrrSize token. * `256M` - Value - 256M for configuring PrmrrSize token. * `512M` - Value - 512M for configuring PrmrrSize token. * `Auto` - Value - Auto for configuring PrmrrSize token. * `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.
 		PrmrrSize *string `json:"PrmrrSize,omitempty"`
 		// BIOS Token for setting Processor C1E configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		ProcessorC1e *string `json:"ProcessorC1e,omitempty"`
 		// BIOS Token for setting Processor C3 Report configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		ProcessorC3report *string `json:"ProcessorC3report,omitempty"`
-		// BIOS Token for setting Processor C6 Report configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		// BIOS Token for setting Processor C6 Report configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring ProcessorC6report token. * `disabled` - Value - disabled for configuring ProcessorC6report token. * `enabled` - Value - enabled for configuring ProcessorC6report token.
 		ProcessorC6report *string `json:"ProcessorC6report,omitempty"`
 		// BIOS Token for setting CPU C State configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		ProcessorCstate *string `json:"ProcessorCstate,omitempty"`
@@ -18958,7 +19788,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		PwrPerfTuning *string `json:"PwrPerfTuning,omitempty"`
 		// BIOS Token for setting QPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `6.4-gt/s` - Value - 6.4-gt/s for configuring QpiLinkFrequency token. * `7.2-gt/s` - Value - 7.2-gt/s for configuring QpiLinkFrequency token. * `8.0-gt/s` - Value - 8.0-gt/s for configuring QpiLinkFrequency token. * `9.6-gt/s` - Value - 9.6-gt/s for configuring QpiLinkFrequency token. * `auto` - Value - auto for configuring QpiLinkFrequency token.
 		QpiLinkFrequency *string `json:"QpiLinkFrequency,omitempty"`
-		// BIOS Token for setting UPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token. * `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token. * `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token. * `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token. * `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token. * `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token. * `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token. * `Auto` - Value - Auto for configuring QpiLinkSpeed token.
+		// BIOS Token for setting UPI Link Frequency Select configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token. * `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token. * `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token. * `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token. * `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token. * `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token. * `24.0GT/s` - Value - 24.0GT/s for configuring QpiLinkSpeed token. * `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token. * `Auto` - Value - Auto for configuring QpiLinkSpeed token. * `Use Per Link Setting` - Value - Use Per Link Setting for configuring QpiLinkSpeed token.
 		QpiLinkSpeed *string `json:"QpiLinkSpeed,omitempty"`
 		// BIOS Token for setting QPI Snoop Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `auto` - Value - auto for configuring QpiSnoopMode token. * `cluster-on-die` - Value - cluster-on-die for configuring QpiSnoopMode token. * `early-snoop` - Value - early-snoop for configuring QpiSnoopMode token. * `home-directory-snoop` - Value - home-directory-snoop for configuring QpiSnoopMode token. * `home-directory-snoop-with-osb` - Value - home-directory-snoop-with-osb for configuring QpiSnoopMode token. * `home-snoop` - Value - home-snoop for configuring QpiSnoopMode token.
 		QpiSnoopMode *string `json:"QpiSnoopMode,omitempty"`
@@ -19130,10 +19960,42 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		SlotFrontNvme24linkSpeed *string `json:"SlotFrontNvme24linkSpeed,omitempty"`
 		// BIOS Token for setting Front NVME 24 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		SlotFrontNvme24optionRom *string `json:"SlotFrontNvme24optionRom,omitempty"`
+		// BIOS Token for setting PCIe Slot:Front NVME 25 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme25linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme25linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme25linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme25linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme25linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme25linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme25linkSpeed token.
+		SlotFrontNvme25linkSpeed *string `json:"SlotFrontNvme25linkSpeed,omitempty"`
+		// BIOS Token for setting Front NVME 25 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		SlotFrontNvme25optionRom *string `json:"SlotFrontNvme25optionRom,omitempty"`
+		// BIOS Token for setting PCIe Slot:Front NVME 26 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme26linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme26linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme26linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme26linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme26linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme26linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme26linkSpeed token.
+		SlotFrontNvme26linkSpeed *string `json:"SlotFrontNvme26linkSpeed,omitempty"`
+		// BIOS Token for setting Front NVME 26 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		SlotFrontNvme26optionRom *string `json:"SlotFrontNvme26optionRom,omitempty"`
+		// BIOS Token for setting PCIe Slot:Front NVME 27 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme27linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme27linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme27linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme27linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme27linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme27linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme27linkSpeed token.
+		SlotFrontNvme27linkSpeed *string `json:"SlotFrontNvme27linkSpeed,omitempty"`
+		// BIOS Token for setting Front NVME 27 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		SlotFrontNvme27optionRom *string `json:"SlotFrontNvme27optionRom,omitempty"`
+		// BIOS Token for setting PCIe Slot:Front NVME 28 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme28linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme28linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme28linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme28linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme28linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme28linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme28linkSpeed token.
+		SlotFrontNvme28linkSpeed *string `json:"SlotFrontNvme28linkSpeed,omitempty"`
+		// BIOS Token for setting Front NVME 28 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		SlotFrontNvme28optionRom *string `json:"SlotFrontNvme28optionRom,omitempty"`
+		// BIOS Token for setting PCIe Slot:Front NVME 29 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme29linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme29linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme29linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme29linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme29linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme29linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme29linkSpeed token.
+		SlotFrontNvme29linkSpeed *string `json:"SlotFrontNvme29linkSpeed,omitempty"`
+		// BIOS Token for setting Front NVME 29 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		SlotFrontNvme29optionRom *string `json:"SlotFrontNvme29optionRom,omitempty"`
 		// BIOS Token for setting PCIe Slot:Front NVME 2 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme2linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme2linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme2linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme2linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme2linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme2linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme2linkSpeed token.
 		SlotFrontNvme2linkSpeed *string `json:"SlotFrontNvme2linkSpeed,omitempty"`
 		// BIOS Token for setting Front NVME 2 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 		SlotFrontNvme2optionRom *string `json:"SlotFrontNvme2optionRom,omitempty"`
+		// BIOS Token for setting PCIe Slot:Front NVME 30 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme30linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme30linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme30linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme30linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme30linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme30linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme30linkSpeed token.
+		SlotFrontNvme30linkSpeed *string `json:"SlotFrontNvme30linkSpeed,omitempty"`
+		// BIOS Token for setting Front NVME 30 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		SlotFrontNvme30optionRom *string `json:"SlotFrontNvme30optionRom,omitempty"`
+		// BIOS Token for setting PCIe Slot:Front NVME 31 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme31linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme31linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme31linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme31linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme31linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme31linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme31linkSpeed token.
+		SlotFrontNvme31linkSpeed *string `json:"SlotFrontNvme31linkSpeed,omitempty"`
+		// BIOS Token for setting Front NVME 31 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		SlotFrontNvme31optionRom *string `json:"SlotFrontNvme31optionRom,omitempty"`
+		// BIOS Token for setting PCIe Slot:Front NVME 32 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme32linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme32linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme32linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme32linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme32linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme32linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme32linkSpeed token.
+		SlotFrontNvme32linkSpeed *string `json:"SlotFrontNvme32linkSpeed,omitempty"`
+		// BIOS Token for setting Front NVME 32 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		SlotFrontNvme32optionRom *string `json:"SlotFrontNvme32optionRom,omitempty"`
 		// BIOS Token for setting Front NVME 3 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring SlotFrontNvme3linkSpeed token. * `Disabled` - Value - Disabled for configuring SlotFrontNvme3linkSpeed token. * `GEN1` - Value - GEN1 for configuring SlotFrontNvme3linkSpeed token. * `GEN2` - Value - GEN2 for configuring SlotFrontNvme3linkSpeed token. * `GEN3` - Value - GEN3 for configuring SlotFrontNvme3linkSpeed token. * `GEN4` - Value - GEN4 for configuring SlotFrontNvme3linkSpeed token. * `GEN5` - Value - GEN5 for configuring SlotFrontNvme3linkSpeed token.
 		SlotFrontNvme3linkSpeed *string `json:"SlotFrontNvme3linkSpeed,omitempty"`
 		// BIOS Token for setting Front NVME 3 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -19332,7 +20194,9 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		TxtSupport *string `json:"TxtSupport,omitempty"`
 		// BIOS Token for setting Boot Order Rules configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Loose` - Value - Loose for configuring UcsmBootOrderRule token. * `Strict` - Value - Strict for configuring UcsmBootOrderRule token.
 		UcsmBootOrderRule *string `json:"UcsmBootOrderRule,omitempty"`
-		// BIOS Token for setting Uncore Frequency Scaling configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		// BIOS Token for setting UEFI Memory Map Special Purpose Memory Flag configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+		UefiMemMapSpFlagEn *string `json:"UefiMemMapSpFlagEn,omitempty"`
+		// BIOS Token for setting Uncore Frequency Scaling configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring UfsDisable token. * `enabled` - Value - enabled for configuring UfsDisable token. * `Mode 0` - Value - Mode 0 for configuring UfsDisable token. * `Mode 1` - Value - Mode 1 for configuring UfsDisable token.
 		UfsDisable *string `json:"UfsDisable,omitempty"`
 		// BIOS Token for setting UMA Based Clustering configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disable (All2All)` - Value - Disable (All2All) for configuring UmaBasedClustering token. * `Hemisphere (2-clusters)` - Value - Hemisphere (2-clusters) for configuring UmaBasedClustering token. * `Quadrant (4-clusters)` - Value - Quadrant (4-clusters) for configuring UmaBasedClustering token.
 		UmaBasedClustering *string `json:"UmaBasedClustering,omitempty"`
@@ -19374,6 +20238,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		XptRemotePrefetch *string                                      `json:"XptRemotePrefetch,omitempty"`
 		Organization      NullableOrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
+		// Deprecated
 		Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	}
 
@@ -19384,6 +20249,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy := _BiosPolicy{}
 		varBiosPolicy.ClassId = varBiosPolicyWithoutEmbeddedStruct.ClassId
 		varBiosPolicy.ObjectType = varBiosPolicyWithoutEmbeddedStruct.ObjectType
+		varBiosPolicy.AcpiSratSpFlagEn = varBiosPolicyWithoutEmbeddedStruct.AcpiSratSpFlagEn
 		varBiosPolicy.AcsControlGpu1state = varBiosPolicyWithoutEmbeddedStruct.AcsControlGpu1state
 		varBiosPolicy.AcsControlGpu2state = varBiosPolicyWithoutEmbeddedStruct.AcsControlGpu2state
 		varBiosPolicy.AcsControlGpu3state = varBiosPolicyWithoutEmbeddedStruct.AcsControlGpu3state
@@ -19536,6 +20402,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.Ipv6http = varBiosPolicyWithoutEmbeddedStruct.Ipv6http
 		varBiosPolicy.Ipv6pxe = varBiosPolicyWithoutEmbeddedStruct.Ipv6pxe
 		varBiosPolicy.KtiPrefetch = varBiosPolicyWithoutEmbeddedStruct.KtiPrefetch
+		varBiosPolicy.LatencyOptimizedMode = varBiosPolicyWithoutEmbeddedStruct.LatencyOptimizedMode
 		varBiosPolicy.LegacyOsRedirection = varBiosPolicyWithoutEmbeddedStruct.LegacyOsRedirection
 		varBiosPolicy.LegacyUsbSupport = varBiosPolicyWithoutEmbeddedStruct.LegacyUsbSupport
 		varBiosPolicy.LlcAlloc = varBiosPolicyWithoutEmbeddedStruct.LlcAlloc
@@ -19611,6 +20478,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.PopSupport = varBiosPolicyWithoutEmbeddedStruct.PopSupport
 		varBiosPolicy.PostErrorPause = varBiosPolicyWithoutEmbeddedStruct.PostErrorPause
 		varBiosPolicy.PostPackageRepair = varBiosPolicyWithoutEmbeddedStruct.PostPackageRepair
+		varBiosPolicy.PreBootDmaProtection = varBiosPolicyWithoutEmbeddedStruct.PreBootDmaProtection
 		varBiosPolicy.PrmrrSize = varBiosPolicyWithoutEmbeddedStruct.PrmrrSize
 		varBiosPolicy.ProcessorC1e = varBiosPolicyWithoutEmbeddedStruct.ProcessorC1e
 		varBiosPolicy.ProcessorC3report = varBiosPolicyWithoutEmbeddedStruct.ProcessorC3report
@@ -19707,8 +20575,24 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.SlotFrontNvme23optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme23optionRom
 		varBiosPolicy.SlotFrontNvme24linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme24linkSpeed
 		varBiosPolicy.SlotFrontNvme24optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme24optionRom
+		varBiosPolicy.SlotFrontNvme25linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme25linkSpeed
+		varBiosPolicy.SlotFrontNvme25optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme25optionRom
+		varBiosPolicy.SlotFrontNvme26linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme26linkSpeed
+		varBiosPolicy.SlotFrontNvme26optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme26optionRom
+		varBiosPolicy.SlotFrontNvme27linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme27linkSpeed
+		varBiosPolicy.SlotFrontNvme27optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme27optionRom
+		varBiosPolicy.SlotFrontNvme28linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme28linkSpeed
+		varBiosPolicy.SlotFrontNvme28optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme28optionRom
+		varBiosPolicy.SlotFrontNvme29linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme29linkSpeed
+		varBiosPolicy.SlotFrontNvme29optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme29optionRom
 		varBiosPolicy.SlotFrontNvme2linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme2linkSpeed
 		varBiosPolicy.SlotFrontNvme2optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme2optionRom
+		varBiosPolicy.SlotFrontNvme30linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme30linkSpeed
+		varBiosPolicy.SlotFrontNvme30optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme30optionRom
+		varBiosPolicy.SlotFrontNvme31linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme31linkSpeed
+		varBiosPolicy.SlotFrontNvme31optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme31optionRom
+		varBiosPolicy.SlotFrontNvme32linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme32linkSpeed
+		varBiosPolicy.SlotFrontNvme32optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme32optionRom
 		varBiosPolicy.SlotFrontNvme3linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme3linkSpeed
 		varBiosPolicy.SlotFrontNvme3optionRom = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme3optionRom
 		varBiosPolicy.SlotFrontNvme4linkSpeed = varBiosPolicyWithoutEmbeddedStruct.SlotFrontNvme4linkSpeed
@@ -19808,6 +20692,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		varBiosPolicy.Tsme = varBiosPolicyWithoutEmbeddedStruct.Tsme
 		varBiosPolicy.TxtSupport = varBiosPolicyWithoutEmbeddedStruct.TxtSupport
 		varBiosPolicy.UcsmBootOrderRule = varBiosPolicyWithoutEmbeddedStruct.UcsmBootOrderRule
+		varBiosPolicy.UefiMemMapSpFlagEn = varBiosPolicyWithoutEmbeddedStruct.UefiMemMapSpFlagEn
 		varBiosPolicy.UfsDisable = varBiosPolicyWithoutEmbeddedStruct.UfsDisable
 		varBiosPolicy.UmaBasedClustering = varBiosPolicyWithoutEmbeddedStruct.UmaBasedClustering
 		varBiosPolicy.UpiLinkEnablement = varBiosPolicyWithoutEmbeddedStruct.UpiLinkEnablement
@@ -19849,6 +20734,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AcpiSratSpFlagEn")
 		delete(additionalProperties, "AcsControlGpu1state")
 		delete(additionalProperties, "AcsControlGpu2state")
 		delete(additionalProperties, "AcsControlGpu3state")
@@ -20001,6 +20887,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Ipv6http")
 		delete(additionalProperties, "Ipv6pxe")
 		delete(additionalProperties, "KtiPrefetch")
+		delete(additionalProperties, "LatencyOptimizedMode")
 		delete(additionalProperties, "LegacyOsRedirection")
 		delete(additionalProperties, "LegacyUsbSupport")
 		delete(additionalProperties, "LlcAlloc")
@@ -20076,6 +20963,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "PopSupport")
 		delete(additionalProperties, "PostErrorPause")
 		delete(additionalProperties, "PostPackageRepair")
+		delete(additionalProperties, "PreBootDmaProtection")
 		delete(additionalProperties, "PrmrrSize")
 		delete(additionalProperties, "ProcessorC1e")
 		delete(additionalProperties, "ProcessorC3report")
@@ -20172,8 +21060,24 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "SlotFrontNvme23optionRom")
 		delete(additionalProperties, "SlotFrontNvme24linkSpeed")
 		delete(additionalProperties, "SlotFrontNvme24optionRom")
+		delete(additionalProperties, "SlotFrontNvme25linkSpeed")
+		delete(additionalProperties, "SlotFrontNvme25optionRom")
+		delete(additionalProperties, "SlotFrontNvme26linkSpeed")
+		delete(additionalProperties, "SlotFrontNvme26optionRom")
+		delete(additionalProperties, "SlotFrontNvme27linkSpeed")
+		delete(additionalProperties, "SlotFrontNvme27optionRom")
+		delete(additionalProperties, "SlotFrontNvme28linkSpeed")
+		delete(additionalProperties, "SlotFrontNvme28optionRom")
+		delete(additionalProperties, "SlotFrontNvme29linkSpeed")
+		delete(additionalProperties, "SlotFrontNvme29optionRom")
 		delete(additionalProperties, "SlotFrontNvme2linkSpeed")
 		delete(additionalProperties, "SlotFrontNvme2optionRom")
+		delete(additionalProperties, "SlotFrontNvme30linkSpeed")
+		delete(additionalProperties, "SlotFrontNvme30optionRom")
+		delete(additionalProperties, "SlotFrontNvme31linkSpeed")
+		delete(additionalProperties, "SlotFrontNvme31optionRom")
+		delete(additionalProperties, "SlotFrontNvme32linkSpeed")
+		delete(additionalProperties, "SlotFrontNvme32optionRom")
 		delete(additionalProperties, "SlotFrontNvme3linkSpeed")
 		delete(additionalProperties, "SlotFrontNvme3optionRom")
 		delete(additionalProperties, "SlotFrontNvme4linkSpeed")
@@ -20273,6 +21177,7 @@ func (o *BiosPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Tsme")
 		delete(additionalProperties, "TxtSupport")
 		delete(additionalProperties, "UcsmBootOrderRule")
+		delete(additionalProperties, "UefiMemMapSpFlagEn")
 		delete(additionalProperties, "UfsDisable")
 		delete(additionalProperties, "UmaBasedClustering")
 		delete(additionalProperties, "UpiLinkEnablement")

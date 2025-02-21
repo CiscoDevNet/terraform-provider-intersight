@@ -47,6 +47,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Description of the application. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `entity_id`:(string) EntityId holds the Id of the client application that is using this AppRegistration. 
 * `expiry_date_time`:(string) The expiration date of the App Registration which is set at the time of its creation. Its value can only be assigned a date that falls within the range determined by the maximum expiration time configured at the account level. The expiry date can be edited to be earlier or later, provided it stays within the designated expiry period. This period is determined by adding the 'startTime' property of the App Registration to the maximum expiry time configured at the account level. 
 * `is_never_expiring`:(bool) Used to mark the App Registration as a never-expiring App Registration. 
 * `last_used_ip`:(string) The ip address from which the App Registration was last used. 
@@ -60,4 +61,5 @@ The following arguments can be used to get data of already created objects in In
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `show_consent_screen`:(bool) Set to true if consent screen needs to be shown during the OAuth login process.Applicable only for public AppRegistrations, means only 'authorization_code' grantType.Note that consent screen will be shown on each login. 
 * `start_time`:(string) The timestamp at which an expiry date was first set on this app registration. For expiring App Registrations, this field is same as the create time of the App Registration.For never-expiring App Registrations, this field is set initially to zero time value. If a never-expiry App Registration is later changed to have an expiration, the timestamp marking the start of this transition is recorded in this field. 
+* `token_expiry`:(string) Defines the expiry time of the token generated via the AppRegistration.* `generic` - This sets the expiryTime to ten minutes from the token issuing time.* `longLived` - This sets the expiryTime to an year from the token issuing time.* `infinite` - This allows for a never-expiring token. Use with caution. 
  

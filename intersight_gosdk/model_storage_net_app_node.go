@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -27,9 +27,8 @@ type StorageNetAppNode struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
-	// Average performance metrics data for a NetApp storage resource over a given period of time.
-	AvgPerformanceMetrics NullableStorageBasePerformanceMetricsAverage `json:"AvgPerformanceMetrics,omitempty"`
+	ObjectType            string                                  `json:"ObjectType"`
+	AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage `json:"AvgPerformanceMetrics,omitempty"`
 	// Storage node option for cdpd state. * `unknown` - The cdpd option is unknown on the node. * `on` - The cdpd option is enabled on the node. * `off` - The cdpd option is disabled on the node.
 	CdpdEnabled *string `json:"CdpdEnabled,omitempty"`
 	// The health of the NetApp Node.
@@ -133,47 +132,36 @@ func (o *StorageNetAppNode) GetDefaultObjectType() interface{} {
 	return "storage.NetAppNode"
 }
 
-// GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *StorageNetAppNode) GetAvgPerformanceMetrics() StorageBasePerformanceMetricsAverage {
-	if o == nil || IsNil(o.AvgPerformanceMetrics.Get()) {
-		var ret StorageBasePerformanceMetricsAverage
+// GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field value if set, zero value otherwise.
+func (o *StorageNetAppNode) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage {
+	if o == nil || IsNil(o.AvgPerformanceMetrics) {
+		var ret StorageNetAppPerformanceMetricsAverage
 		return ret
 	}
-	return *o.AvgPerformanceMetrics.Get()
+	return *o.AvgPerformanceMetrics
 }
 
 // GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StorageNetAppNode) GetAvgPerformanceMetricsOk() (*StorageBasePerformanceMetricsAverage, bool) {
-	if o == nil {
+func (o *StorageNetAppNode) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool) {
+	if o == nil || IsNil(o.AvgPerformanceMetrics) {
 		return nil, false
 	}
-	return o.AvgPerformanceMetrics.Get(), o.AvgPerformanceMetrics.IsSet()
+	return o.AvgPerformanceMetrics, true
 }
 
 // HasAvgPerformanceMetrics returns a boolean if a field has been set.
 func (o *StorageNetAppNode) HasAvgPerformanceMetrics() bool {
-	if o != nil && o.AvgPerformanceMetrics.IsSet() {
+	if o != nil && !IsNil(o.AvgPerformanceMetrics) {
 		return true
 	}
 
 	return false
 }
 
-// SetAvgPerformanceMetrics gets a reference to the given NullableStorageBasePerformanceMetricsAverage and assigns it to the AvgPerformanceMetrics field.
-func (o *StorageNetAppNode) SetAvgPerformanceMetrics(v StorageBasePerformanceMetricsAverage) {
-	o.AvgPerformanceMetrics.Set(&v)
-}
-
-// SetAvgPerformanceMetricsNil sets the value for AvgPerformanceMetrics to be an explicit nil
-func (o *StorageNetAppNode) SetAvgPerformanceMetricsNil() {
-	o.AvgPerformanceMetrics.Set(nil)
-}
-
-// UnsetAvgPerformanceMetrics ensures that no value is present for AvgPerformanceMetrics, not even an explicit nil
-func (o *StorageNetAppNode) UnsetAvgPerformanceMetrics() {
-	o.AvgPerformanceMetrics.Unset()
+// SetAvgPerformanceMetrics gets a reference to the given StorageNetAppPerformanceMetricsAverage and assigns it to the AvgPerformanceMetrics field.
+func (o *StorageNetAppNode) SetAvgPerformanceMetrics(v StorageNetAppPerformanceMetricsAverage) {
+	o.AvgPerformanceMetrics = &v
 }
 
 // GetCdpdEnabled returns the CdpdEnabled field value if set, zero value otherwise.
@@ -516,8 +504,8 @@ func (o StorageNetAppNode) ToMap() (map[string]interface{}, error) {
 		toSerialize["ObjectType"] = o.GetDefaultObjectType()
 	}
 	toSerialize["ObjectType"] = o.ObjectType
-	if o.AvgPerformanceMetrics.IsSet() {
-		toSerialize["AvgPerformanceMetrics"] = o.AvgPerformanceMetrics.Get()
+	if !IsNil(o.AvgPerformanceMetrics) {
+		toSerialize["AvgPerformanceMetrics"] = o.AvgPerformanceMetrics
 	}
 	if !IsNil(o.CdpdEnabled) {
 		toSerialize["CdpdEnabled"] = o.CdpdEnabled
@@ -600,9 +588,8 @@ func (o *StorageNetAppNode) UnmarshalJSON(data []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
-		// Average performance metrics data for a NetApp storage resource over a given period of time.
-		AvgPerformanceMetrics NullableStorageBasePerformanceMetricsAverage `json:"AvgPerformanceMetrics,omitempty"`
+		ObjectType            string                                  `json:"ObjectType"`
+		AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage `json:"AvgPerformanceMetrics,omitempty"`
 		// Storage node option for cdpd state. * `unknown` - The cdpd option is unknown on the node. * `on` - The cdpd option is enabled on the node. * `off` - The cdpd option is disabled on the node.
 		CdpdEnabled *string `json:"CdpdEnabled,omitempty"`
 		// The health of the NetApp Node.

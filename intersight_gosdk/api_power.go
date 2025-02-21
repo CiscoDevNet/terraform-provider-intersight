@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreatePowerPolicyRequest) Execute() (*PowerPolicy, *http.Response, er
 /*
 CreatePowerPolicy Create a 'power.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreatePowerPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreatePowerPolicyRequest
 */
 func (a *PowerApiService) CreatePowerPolicy(ctx context.Context) ApiCreatePowerPolicyRequest {
 	return ApiCreatePowerPolicyRequest{
@@ -67,8 +67,7 @@ func (a *PowerApiService) CreatePowerPolicy(ctx context.Context) ApiCreatePowerP
 }
 
 // Execute executes the request
-//
-//	@return PowerPolicy
+//  @return PowerPolicy
 func (a *PowerApiService) CreatePowerPolicyExecute(r ApiCreatePowerPolicyRequest) (*PowerPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -218,9 +217,9 @@ func (r ApiDeletePowerPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeletePowerPolicy Delete a 'power.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeletePowerPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeletePowerPolicyRequest
 */
 func (a *PowerApiService) DeletePowerPolicy(ctx context.Context, moid string) ApiDeletePowerPolicyRequest {
 	return ApiDeletePowerPolicyRequest{
@@ -360,9 +359,9 @@ func (r ApiGetPowerControlStateByMoidRequest) Execute() (*PowerControlState, *ht
 /*
 GetPowerControlStateByMoid Read a 'power.ControlState' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPowerControlStateByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPowerControlStateByMoidRequest
 */
 func (a *PowerApiService) GetPowerControlStateByMoid(ctx context.Context, moid string) ApiGetPowerControlStateByMoidRequest {
 	return ApiGetPowerControlStateByMoidRequest{
@@ -373,8 +372,7 @@ func (a *PowerApiService) GetPowerControlStateByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//
-//	@return PowerControlState
+//  @return PowerControlState
 func (a *PowerApiService) GetPowerControlStateByMoidExecute(r ApiGetPowerControlStateByMoidRequest) (*PowerControlState, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -590,8 +588,8 @@ func (r ApiGetPowerControlStateListRequest) Execute() (*PowerControlStateRespons
 /*
 GetPowerControlStateList Read a 'power.ControlState' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPowerControlStateListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPowerControlStateListRequest
 */
 func (a *PowerApiService) GetPowerControlStateList(ctx context.Context) ApiGetPowerControlStateListRequest {
 	return ApiGetPowerControlStateListRequest{
@@ -601,8 +599,7 @@ func (a *PowerApiService) GetPowerControlStateList(ctx context.Context) ApiGetPo
 }
 
 // Execute executes the request
-//
-//	@return PowerControlStateResponse
+//  @return PowerControlStateResponse
 func (a *PowerApiService) GetPowerControlStateListExecute(r ApiGetPowerControlStateListRequest) (*PowerControlStateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -789,9 +786,9 @@ func (r ApiGetPowerPolicyByMoidRequest) Execute() (*PowerPolicy, *http.Response,
 /*
 GetPowerPolicyByMoid Read a 'power.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPowerPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPowerPolicyByMoidRequest
 */
 func (a *PowerApiService) GetPowerPolicyByMoid(ctx context.Context, moid string) ApiGetPowerPolicyByMoidRequest {
 	return ApiGetPowerPolicyByMoidRequest{
@@ -802,8 +799,7 @@ func (a *PowerApiService) GetPowerPolicyByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//
-//	@return PowerPolicy
+//  @return PowerPolicy
 func (a *PowerApiService) GetPowerPolicyByMoidExecute(r ApiGetPowerPolicyByMoidRequest) (*PowerPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -943,9 +939,9 @@ func (r ApiGetPowerPolicyInventoryByMoidRequest) Execute() (*PowerPolicyInventor
 /*
 GetPowerPolicyInventoryByMoid Read a 'power.PolicyInventory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetPowerPolicyInventoryByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetPowerPolicyInventoryByMoidRequest
 */
 func (a *PowerApiService) GetPowerPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetPowerPolicyInventoryByMoidRequest {
 	return ApiGetPowerPolicyInventoryByMoidRequest{
@@ -956,8 +952,7 @@ func (a *PowerApiService) GetPowerPolicyInventoryByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return PowerPolicyInventory
+//  @return PowerPolicyInventory
 func (a *PowerApiService) GetPowerPolicyInventoryByMoidExecute(r ApiGetPowerPolicyInventoryByMoidRequest) (*PowerPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1173,8 +1168,8 @@ func (r ApiGetPowerPolicyInventoryListRequest) Execute() (*PowerPolicyInventoryR
 /*
 GetPowerPolicyInventoryList Read a 'power.PolicyInventory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPowerPolicyInventoryListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPowerPolicyInventoryListRequest
 */
 func (a *PowerApiService) GetPowerPolicyInventoryList(ctx context.Context) ApiGetPowerPolicyInventoryListRequest {
 	return ApiGetPowerPolicyInventoryListRequest{
@@ -1184,8 +1179,7 @@ func (a *PowerApiService) GetPowerPolicyInventoryList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//
-//	@return PowerPolicyInventoryResponse
+//  @return PowerPolicyInventoryResponse
 func (a *PowerApiService) GetPowerPolicyInventoryListExecute(r ApiGetPowerPolicyInventoryListRequest) (*PowerPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1448,8 +1442,8 @@ func (r ApiGetPowerPolicyListRequest) Execute() (*PowerPolicyResponse, *http.Res
 /*
 GetPowerPolicyList Read a 'power.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPowerPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetPowerPolicyListRequest
 */
 func (a *PowerApiService) GetPowerPolicyList(ctx context.Context) ApiGetPowerPolicyListRequest {
 	return ApiGetPowerPolicyListRequest{
@@ -1459,8 +1453,7 @@ func (a *PowerApiService) GetPowerPolicyList(ctx context.Context) ApiGetPowerPol
 }
 
 // Execute executes the request
-//
-//	@return PowerPolicyResponse
+//  @return PowerPolicyResponse
 func (a *PowerApiService) GetPowerPolicyListExecute(r ApiGetPowerPolicyListRequest) (*PowerPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1661,9 +1654,9 @@ func (r ApiPatchPowerPolicyRequest) Execute() (*PowerPolicy, *http.Response, err
 /*
 PatchPowerPolicy Update a 'power.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchPowerPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchPowerPolicyRequest
 */
 func (a *PowerApiService) PatchPowerPolicy(ctx context.Context, moid string) ApiPatchPowerPolicyRequest {
 	return ApiPatchPowerPolicyRequest{
@@ -1674,8 +1667,7 @@ func (a *PowerApiService) PatchPowerPolicy(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//
-//	@return PowerPolicy
+//  @return PowerPolicy
 func (a *PowerApiService) PatchPowerPolicyExecute(r ApiPatchPowerPolicyRequest) (*PowerPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1837,9 +1829,9 @@ func (r ApiUpdatePowerPolicyRequest) Execute() (*PowerPolicy, *http.Response, er
 /*
 UpdatePowerPolicy Update a 'power.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdatePowerPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdatePowerPolicyRequest
 */
 func (a *PowerApiService) UpdatePowerPolicy(ctx context.Context, moid string) ApiUpdatePowerPolicyRequest {
 	return ApiUpdatePowerPolicyRequest{
@@ -1850,8 +1842,7 @@ func (a *PowerApiService) UpdatePowerPolicy(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//
-//	@return PowerPolicy
+//  @return PowerPolicy
 func (a *PowerApiService) UpdatePowerPolicyExecute(r ApiUpdatePowerPolicyRequest) (*PowerPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

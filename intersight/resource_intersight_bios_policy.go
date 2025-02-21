@@ -36,6 +36,13 @@ func resourceBiosPolicy() *schema.Resource {
 					}
 					return
 				}},
+			"acpi_srat_sp_flag_en": {
+				Description:  "BIOS Token for setting ACPI SRAT Special Purpose Memory Flag configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"acs_control_gpu1state": {
 				Description:  "BIOS Token for setting ACS Control GPU 1 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:         schema.TypeString,
@@ -396,9 +403,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"cbs_cmn_efficiency_mode_en_rs": {
-				Description:  "BIOS Token for setting Power Profile Selection F19h configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Balanced Memory Performance Mode` - Value - Balanced Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.\n* `Efficiency Mode` - Value - Efficiency Mode for configuring CbsCmnEfficiencyModeEnRs token.\n* `High Performance Mode` - Value - High Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.\n* `Maximum IO Performance Mode` - Value - Maximum IO Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.",
+				Description:  "BIOS Token for setting Power Profile Selection F19h configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnEfficiencyModeEnRs token.\n* `Balanced Core Memory Performance Mode` - Value - Balanced Core Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.\n* `Balanced Core Performance Mode` - Value - Balanced Core Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.\n* `Balanced Memory Performance Mode` - Value - Balanced Memory Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.\n* `Efficiency Mode` - Value - Efficiency Mode for configuring CbsCmnEfficiencyModeEnRs token.\n* `High Performance Mode` - Value - High Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.\n* `Maximum IO Performance Mode` - Value - Maximum IO Performance Mode for configuring CbsCmnEfficiencyModeEnRs token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Balanced Memory Performance Mode", "Efficiency Mode", "High Performance Mode", "Maximum IO Performance Mode"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Balanced Core Memory Performance Mode", "Balanced Core Performance Mode", "Balanced Memory Performance Mode", "Efficiency Mode", "High Performance Mode", "Maximum IO Performance Mode"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -459,9 +466,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"cbs_cmn_mem_map_bank_interleave_ddr4": {
-				Description:  "BIOS Token for setting Chipset Interleave configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `Enabled` - Value - Enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.",
+				Description:  "BIOS Token for setting Chipset Interleave configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `enabled` - Value - enabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "Enabled"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -508,9 +515,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"cbs_cpu_ccd_ctrl_ssp": {
-				Description:  "BIOS Token for setting CCD Control configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `8 CCDs` - Value - 8 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `10 CCDs` - Value - 10 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.",
+				Description:  "BIOS Token for setting CCD Control configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `2 CCDs` - Value - 2 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `3 CCDs` - Value - 3 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `4 CCDs` - Value - 4 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `6 CCDs` - Value - 6 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `8 CCDs` - Value - 8 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `10 CCDs` - Value - 10 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `12 CCDs` - Value - 12 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `14 CCDs` - Value - 14 CCDs for configuring CbsCpuCcdCtrlSsp token.\n* `Auto` - Value - Auto for configuring CbsCpuCcdCtrlSsp token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "2 CCDs", "3 CCDs", "4 CCDs", "6 CCDs", "8 CCDs", "10 CCDs", "Auto"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "2 CCDs", "3 CCDs", "4 CCDs", "6 CCDs", "8 CCDs", "10 CCDs", "12 CCDs", "14 CCDs", "Auto"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -529,9 +536,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"cbs_cpu_down_core_ctrl_genoa": {
-				Description:  "BIOS Token for setting CPU Downcore control F19 M10h-1Fh configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlGenoa token.\n* `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.",
+				Description:  "BIOS Token for setting CPU Downcore control F19 M10h-1Fh configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCpuDownCoreCtrlGenoa token.\n* `ONE (1 + 0)` - Value - ONE (1 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `TWO (2 + 0)` - Value - TWO (2 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `THREE (3 + 0)` - Value - THREE (3 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `FOUR (4 + 0)` - Value - FOUR (4 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `FIVE (5 + 0)` - Value - FIVE (5 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `SIX (6 + 0)` - Value - SIX (6 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `SEVEN (7 + 0)` - Value - SEVEN (7 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `EIGHT (8 + 0)` - Value - EIGHT (8 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `NINE (9 + 0)` - Value - NINE (9 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `TEN (10 + 0)` - Value - TEN (10 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `ELEVEN (11 + 0)` - Value - ELEVEN (11 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `TWELVE (12 + 0)` - Value - TWELVE (12 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `THIRTEEN (13 + 0)` - Value - THIRTEEN (13 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `FOURTEEN (14 + 0)` - Value - FOURTEEN (14 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.\n* `FIFTEEN (15 + 0)` - Value - FIFTEEN (15 + 0) for configuring CbsCpuDownCoreCtrlGenoa token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "ONE (1 + 0)", "TWO (2 + 0)", "THREE (3 + 0)", "FOUR (4 + 0)", "FIVE (5 + 0)", "SIX (6 + 0)", "SEVEN (7 + 0)"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "ONE (1 + 0)", "TWO (2 + 0)", "THREE (3 + 0)", "FOUR (4 + 0)", "FIVE (5 + 0)", "SIX (6 + 0)", "SEVEN (7 + 0)", "EIGHT (8 + 0)", "NINE (9 + 0)", "TEN (10 + 0)", "ELEVEN (11 + 0)", "TWELVE (12 + 0)", "THIRTEEN (13 + 0)", "FOURTEEN (14 + 0)", "FIFTEEN (15 + 0)"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -969,9 +976,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"epoch_update": {
-				Description:  "BIOS Token for setting Select Owner EPOCH Input Type configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Change to New Random Owner EPOCHs` - Value - Change to New Random Owner EPOCHs for configuring EpochUpdate token.\n* `Manual User Defined Owner EPOCHs` - Value - Manual User Defined Owner EPOCHs for configuring EpochUpdate token.\n* `SGX Owner EPOCH activated` - Value - SGX Owner EPOCH activated for configuring EpochUpdate token.",
+				Description:  "BIOS Token for setting Select Owner EPOCH Input Type configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Change to New Random Owner EPOCHs` - Value - Change to New Random Owner EPOCHs for configuring EpochUpdate token.\n* `Manual User Defined Owner EPOCHs` - Value - Manual User Defined Owner EPOCHs for configuring EpochUpdate token.\n* `SGX Owner EPOCH activated` - Value - SGX Owner EPOCH activated for configuring EpochUpdate token.\n* `SGX Owner EPOCH deactivated` - Value - SGX Owner EPOCH deactivated for configuring EpochUpdate token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Change to New Random Owner EPOCHs", "Manual User Defined Owner EPOCHs", "SGX Owner EPOCH activated"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Change to New Random Owner EPOCHs", "Manual User Defined Owner EPOCHs", "SGX Owner EPOCH activated", "SGX Owner EPOCH deactivated"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -1060,9 +1067,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"intel_speed_select": {
-				Description:  "BIOS Token for setting Intel Speed Select configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring IntelSpeedSelect token.\n* `Base` - Value - Base for configuring IntelSpeedSelect token.\n* `Config 1` - Value - Config 1 for configuring IntelSpeedSelect token.\n* `Config 2` - Value - Config 2 for configuring IntelSpeedSelect token.\n* `Config 3` - Value - Config 3 for configuring IntelSpeedSelect token.\n* `Config 4` - Value - Config 4 for configuring IntelSpeedSelect token.",
+				Description:  "BIOS Token for setting Intel Speed Select configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring IntelSpeedSelect token.\n* `Base` - Value - Base for configuring IntelSpeedSelect token.\n* `Config 1` - Value - Config 1 for configuring IntelSpeedSelect token.\n* `Config 2` - Value - Config 2 for configuring IntelSpeedSelect token.\n* `Config 3` - Value - Config 3 for configuring IntelSpeedSelect token.\n* `Config 4` - Value - Config 4 for configuring IntelSpeedSelect token.\n* `Level 0` - Value - Level 0 for configuring IntelSpeedSelect token.\n* `Level 1` - Value - Level 1 for configuring IntelSpeedSelect token.\n* `Level 2` - Value - Level 2 for configuring IntelSpeedSelect token.\n* `Level 3` - Value - Level 3 for configuring IntelSpeedSelect token.\n* `Level 4` - Value - Level 4 for configuring IntelSpeedSelect token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Base", "Config 1", "Config 2", "Config 3", "Config 4"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Base", "Config 1", "Config 2", "Config 3", "Config 4", "Level 0", "Level 1", "Level 2", "Level 3", "Level 4"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -1175,6 +1182,13 @@ func resourceBiosPolicy() *schema.Resource {
 				Description:  "BIOS Token for setting KTI Prefetch configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring KtiPrefetch token.\n* `disabled` - Value - disabled for configuring KtiPrefetch token.\n* `enabled` - Value - enabled for configuring KtiPrefetch token.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"latency_optimized_mode": {
+				Description:  "BIOS Token for setting Latency Optimized Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -1861,6 +1875,13 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"pre_boot_dma_protection": {
+				Description:  "BIOS Token for setting PreBoot DMA Protection configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"prmrr_size": {
 				Description:  "BIOS Token for setting PRMRR Size configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1G` - Value - 1G for configuring PrmrrSize token.\n* `2G` - Value - 2G for configuring PrmrrSize token.\n* `4G` - Value - 4G for configuring PrmrrSize token.\n* `8G` - Value - 8G for configuring PrmrrSize token.\n* `16G` - Value - 16G for configuring PrmrrSize token.\n* `32G` - Value - 32G for configuring PrmrrSize token.\n* `64G` - Value - 64G for configuring PrmrrSize token.\n* `128G` - Value - 128G for configuring PrmrrSize token.\n* `256G` - Value - 256G for configuring PrmrrSize token.\n* `512G` - Value - 512G for configuring PrmrrSize token.\n* `128M` - Value - 128M for configuring PrmrrSize token.\n* `256M` - Value - 256M for configuring PrmrrSize token.\n* `512M` - Value - 512M for configuring PrmrrSize token.\n* `Auto` - Value - Auto for configuring PrmrrSize token.\n* `Invalid Config.` - Value - Invalid Config for configuring PrmrrSize token.",
 				Type:         schema.TypeString,
@@ -1883,9 +1904,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"processor_c6report": {
-				Description:  "BIOS Token for setting Processor C6 Report configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Description:  "BIOS Token for setting Processor C6 Report configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring ProcessorC6report token.\n* `disabled` - Value - disabled for configuring ProcessorC6report token.\n* `enabled` - Value - enabled for configuring ProcessorC6report token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "disabled", "enabled"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -1971,9 +1992,9 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:      "platform-default",
 			},
 			"qpi_link_speed": {
-				Description:  "BIOS Token for setting UPI Link Frequency Select configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token.\n* `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token.\n* `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token.\n* `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token.\n* `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token.\n* `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token.\n* `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token.\n* `Auto` - Value - Auto for configuring QpiLinkSpeed token.",
+				Description:  "BIOS Token for setting UPI Link Frequency Select configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `10.4GT/s` - Value - 10.4GT/s for configuring QpiLinkSpeed token.\n* `11.2GT/s` - Value - 11.2GT/s for configuring QpiLinkSpeed token.\n* `12.8GT/s` - Value - 12.8GT/s for configuring QpiLinkSpeed token.\n* `14.4GT/s` - Value - 14.4GT/s for configuring QpiLinkSpeed token.\n* `16.0GT/s` - Value - 16.0GT/s for configuring QpiLinkSpeed token.\n* `20.0GT/s` - Value - 20.0GT/s for configuring QpiLinkSpeed token.\n* `24.0GT/s` - Value - 24.0GT/s for configuring QpiLinkSpeed token.\n* `9.6GT/s` - Value - 9.6GT/s for configuring QpiLinkSpeed token.\n* `Auto` - Value - Auto for configuring QpiLinkSpeed token.\n* `Use Per Link Setting` - Value - Use Per Link Setting for configuring QpiLinkSpeed token.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"platform-default", "10.4GT/s", "11.2GT/s", "12.8GT/s", "14.4GT/s", "16.0GT/s", "20.0GT/s", "9.6GT/s", "Auto"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "10.4GT/s", "11.2GT/s", "12.8GT/s", "14.4GT/s", "16.0GT/s", "20.0GT/s", "24.0GT/s", "9.6GT/s", "Auto", "Use Per Link Setting"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -2583,6 +2604,76 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
+			"slot_front_nvme25link_speed": {
+				Description:  "BIOS Token for setting PCIe Slot:Front NVME 25 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme25linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme25linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme25linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme25linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme25linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme25linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme25linkSpeed token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Disabled", "GEN1", "GEN2", "GEN3", "GEN4", "GEN5"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme25option_rom": {
+				Description:  "BIOS Token for setting Front NVME 25 OptionROM configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme26link_speed": {
+				Description:  "BIOS Token for setting PCIe Slot:Front NVME 26 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme26linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme26linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme26linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme26linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme26linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme26linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme26linkSpeed token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Disabled", "GEN1", "GEN2", "GEN3", "GEN4", "GEN5"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme26option_rom": {
+				Description:  "BIOS Token for setting Front NVME 26 OptionROM configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme27link_speed": {
+				Description:  "BIOS Token for setting PCIe Slot:Front NVME 27 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme27linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme27linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme27linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme27linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme27linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme27linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme27linkSpeed token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Disabled", "GEN1", "GEN2", "GEN3", "GEN4", "GEN5"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme27option_rom": {
+				Description:  "BIOS Token for setting Front NVME 27 OptionROM configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme28link_speed": {
+				Description:  "BIOS Token for setting PCIe Slot:Front NVME 28 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme28linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme28linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme28linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme28linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme28linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme28linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme28linkSpeed token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Disabled", "GEN1", "GEN2", "GEN3", "GEN4", "GEN5"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme28option_rom": {
+				Description:  "BIOS Token for setting Front NVME 28 OptionROM configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme29link_speed": {
+				Description:  "BIOS Token for setting PCIe Slot:Front NVME 29 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme29linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme29linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme29linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme29linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme29linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme29linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme29linkSpeed token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Disabled", "GEN1", "GEN2", "GEN3", "GEN4", "GEN5"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme29option_rom": {
+				Description:  "BIOS Token for setting Front NVME 29 OptionROM configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
 			"slot_front_nvme2link_speed": {
 				Description:  "BIOS Token for setting PCIe Slot:Front NVME 2 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme2linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme2linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme2linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme2linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme2linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme2linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme2linkSpeed token.",
 				Type:         schema.TypeString,
@@ -2592,6 +2683,48 @@ func resourceBiosPolicy() *schema.Resource {
 			},
 			"slot_front_nvme2option_rom": {
 				Description:  "BIOS Token for setting Front NVME 2 OptionROM configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme30link_speed": {
+				Description:  "BIOS Token for setting PCIe Slot:Front NVME 30 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme30linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme30linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme30linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme30linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme30linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme30linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme30linkSpeed token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Disabled", "GEN1", "GEN2", "GEN3", "GEN4", "GEN5"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme30option_rom": {
+				Description:  "BIOS Token for setting Front NVME 30 OptionROM configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme31link_speed": {
+				Description:  "BIOS Token for setting PCIe Slot:Front NVME 31 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme31linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme31linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme31linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme31linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme31linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme31linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme31linkSpeed token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Disabled", "GEN1", "GEN2", "GEN3", "GEN4", "GEN5"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme31option_rom": {
+				Description:  "BIOS Token for setting Front NVME 31 OptionROM configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme32link_speed": {
+				Description:  "BIOS Token for setting PCIe Slot:Front NVME 32 Link Speed configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring SlotFrontNvme32linkSpeed token.\n* `Disabled` - Value - Disabled for configuring SlotFrontNvme32linkSpeed token.\n* `GEN1` - Value - GEN1 for configuring SlotFrontNvme32linkSpeed token.\n* `GEN2` - Value - GEN2 for configuring SlotFrontNvme32linkSpeed token.\n* `GEN3` - Value - GEN3 for configuring SlotFrontNvme32linkSpeed token.\n* `GEN4` - Value - GEN4 for configuring SlotFrontNvme32linkSpeed token.\n* `GEN5` - Value - GEN5 for configuring SlotFrontNvme32linkSpeed token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "Auto", "Disabled", "GEN1", "GEN2", "GEN3", "GEN4", "GEN5"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"slot_front_nvme32option_rom": {
+				Description:  "BIOS Token for setting Front NVME 32 OptionROM configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
 				Optional:     true,
@@ -3317,10 +3450,17 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:     true,
 				Default:      "platform-default",
 			},
-			"ufs_disable": {
-				Description:  "BIOS Token for setting Uncore Frequency Scaling configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			"uefi_mem_map_sp_flag_en": {
+				Description:  "BIOS Token for setting UEFI Memory Map Special Purpose Memory Flag configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringInSlice([]string{"platform-default", "enabled", "disabled"}, false),
+				Optional:     true,
+				Default:      "platform-default",
+			},
+			"ufs_disable": {
+				Description:  "BIOS Token for setting Uncore Frequency Scaling configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `disabled` - Value - disabled for configuring UfsDisable token.\n* `enabled` - Value - enabled for configuring UfsDisable token.\n* `Mode 0` - Value - Mode 0 for configuring UfsDisable token.\n* `Mode 1` - Value - Mode 1 for configuring UfsDisable token.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"platform-default", "disabled", "enabled", "Mode 0", "Mode 1"}, false),
 				Optional:     true,
 				Default:      "platform-default",
 			},
@@ -3617,6 +3757,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewBiosPolicyWithDefaults()
+
+	if v, ok := d.GetOk("acpi_srat_sp_flag_en"); ok {
+		x := (v.(string))
+		o.SetAcpiSratSpFlagEn(x)
+	}
 
 	if v, ok := d.GetOk("acs_control_gpu1state"); ok {
 		x := (v.(string))
@@ -4394,6 +4539,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetKtiPrefetch(x)
 	}
 
+	if v, ok := d.GetOk("latency_optimized_mode"); ok {
+		x := (v.(string))
+		o.SetLatencyOptimizedMode(x)
+	}
+
 	if v, ok := d.GetOk("legacy_os_redirection"); ok {
 		x := (v.(string))
 		o.SetLegacyOsRedirection(x)
@@ -4822,6 +4972,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("post_package_repair"); ok {
 		x := (v.(string))
 		o.SetPostPackageRepair(x)
+	}
+
+	if v, ok := d.GetOk("pre_boot_dma_protection"); ok {
+		x := (v.(string))
+		o.SetPreBootDmaProtection(x)
 	}
 
 	if v, ok := d.GetOk("prmrr_size"); ok {
@@ -5346,6 +5501,56 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetSlotFrontNvme24optionRom(x)
 	}
 
+	if v, ok := d.GetOk("slot_front_nvme25link_speed"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme25linkSpeed(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme25option_rom"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme25optionRom(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme26link_speed"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme26linkSpeed(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme26option_rom"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme26optionRom(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme27link_speed"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme27linkSpeed(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme27option_rom"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme27optionRom(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme28link_speed"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme28linkSpeed(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme28option_rom"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme28optionRom(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme29link_speed"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme29linkSpeed(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme29option_rom"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme29optionRom(x)
+	}
+
 	if v, ok := d.GetOk("slot_front_nvme2link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme2linkSpeed(x)
@@ -5354,6 +5559,36 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("slot_front_nvme2option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme2optionRom(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme30link_speed"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme30linkSpeed(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme30option_rom"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme30optionRom(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme31link_speed"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme31linkSpeed(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme31option_rom"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme31optionRom(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme32link_speed"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme32linkSpeed(x)
+	}
+
+	if v, ok := d.GetOk("slot_front_nvme32option_rom"); ok {
+		x := (v.(string))
+		o.SetSlotFrontNvme32optionRom(x)
 	}
 
 	if v, ok := d.GetOk("slot_front_nvme3link_speed"); ok {
@@ -5886,6 +6121,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetUcsmBootOrderRule(x)
 	}
 
+	if v, ok := d.GetOk("uefi_mem_map_sp_flag_en"); ok {
+		x := (v.(string))
+		o.SetUefiMemMapSpFlagEn(x)
+	}
+
 	if v, ok := d.GetOk("ufs_disable"); ok {
 		x := (v.(string))
 		o.SetUfsDisable(x)
@@ -6055,6 +6295,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("account_moid", (s.GetAccountMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property AccountMoid in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("acpi_srat_sp_flag_en", (s.GetAcpiSratSpFlagEn())); err != nil {
+		return diag.Errorf("error occurred while setting property AcpiSratSpFlagEn in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_gpu1state", (s.GetAcsControlGpu1state())); err != nil {
@@ -6689,6 +6933,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property KtiPrefetch in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("latency_optimized_mode", (s.GetLatencyOptimizedMode())); err != nil {
+		return diag.Errorf("error occurred while setting property LatencyOptimizedMode in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("legacy_os_redirection", (s.GetLegacyOsRedirection())); err != nil {
 		return diag.Errorf("error occurred while setting property LegacyOsRedirection in BiosPolicy object: %s", err.Error())
 	}
@@ -7019,6 +7267,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("post_package_repair", (s.GetPostPackageRepair())); err != nil {
 		return diag.Errorf("error occurred while setting property PostPackageRepair in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("pre_boot_dma_protection", (s.GetPreBootDmaProtection())); err != nil {
+		return diag.Errorf("error occurred while setting property PreBootDmaProtection in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("prmrr_size", (s.GetPrmrrSize())); err != nil {
@@ -7413,12 +7665,76 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property SlotFrontNvme24optionRom in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("slot_front_nvme25link_speed", (s.GetSlotFrontNvme25linkSpeed())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme25linkSpeed in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme25option_rom", (s.GetSlotFrontNvme25optionRom())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme25optionRom in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme26link_speed", (s.GetSlotFrontNvme26linkSpeed())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme26linkSpeed in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme26option_rom", (s.GetSlotFrontNvme26optionRom())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme26optionRom in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme27link_speed", (s.GetSlotFrontNvme27linkSpeed())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme27linkSpeed in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme27option_rom", (s.GetSlotFrontNvme27optionRom())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme27optionRom in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme28link_speed", (s.GetSlotFrontNvme28linkSpeed())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme28linkSpeed in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme28option_rom", (s.GetSlotFrontNvme28optionRom())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme28optionRom in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme29link_speed", (s.GetSlotFrontNvme29linkSpeed())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme29linkSpeed in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme29option_rom", (s.GetSlotFrontNvme29optionRom())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme29optionRom in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("slot_front_nvme2link_speed", (s.GetSlotFrontNvme2linkSpeed())); err != nil {
 		return diag.Errorf("error occurred while setting property SlotFrontNvme2linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_front_nvme2option_rom", (s.GetSlotFrontNvme2optionRom())); err != nil {
 		return diag.Errorf("error occurred while setting property SlotFrontNvme2optionRom in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme30link_speed", (s.GetSlotFrontNvme30linkSpeed())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme30linkSpeed in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme30option_rom", (s.GetSlotFrontNvme30optionRom())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme30optionRom in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme31link_speed", (s.GetSlotFrontNvme31linkSpeed())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme31linkSpeed in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme31option_rom", (s.GetSlotFrontNvme31optionRom())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme31optionRom in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme32link_speed", (s.GetSlotFrontNvme32linkSpeed())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme32linkSpeed in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("slot_front_nvme32option_rom", (s.GetSlotFrontNvme32optionRom())); err != nil {
+		return diag.Errorf("error occurred while setting property SlotFrontNvme32optionRom in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_front_nvme3link_speed", (s.GetSlotFrontNvme3linkSpeed())); err != nil {
@@ -7821,6 +8137,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property UcsmBootOrderRule in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("uefi_mem_map_sp_flag_en", (s.GetUefiMemMapSpFlagEn())); err != nil {
+		return diag.Errorf("error occurred while setting property UefiMemMapSpFlagEn in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("ufs_disable", (s.GetUfsDisable())); err != nil {
 		return diag.Errorf("error occurred while setting property UfsDisable in BiosPolicy object: %s", err.Error())
 	}
@@ -7915,6 +8235,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.BiosPolicy{}
+
+	if d.HasChange("acpi_srat_sp_flag_en") {
+		v := d.Get("acpi_srat_sp_flag_en")
+		x := (v.(string))
+		o.SetAcpiSratSpFlagEn(x)
+	}
 
 	if d.HasChange("acs_control_gpu1state") {
 		v := d.Get("acs_control_gpu1state")
@@ -8846,6 +9172,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetKtiPrefetch(x)
 	}
 
+	if d.HasChange("latency_optimized_mode") {
+		v := d.Get("latency_optimized_mode")
+		x := (v.(string))
+		o.SetLatencyOptimizedMode(x)
+	}
+
 	if d.HasChange("legacy_os_redirection") {
 		v := d.Get("legacy_os_redirection")
 		x := (v.(string))
@@ -9352,6 +9684,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("post_package_repair")
 		x := (v.(string))
 		o.SetPostPackageRepair(x)
+	}
+
+	if d.HasChange("pre_boot_dma_protection") {
+		v := d.Get("pre_boot_dma_protection")
+		x := (v.(string))
+		o.SetPreBootDmaProtection(x)
 	}
 
 	if d.HasChange("prmrr_size") {
@@ -9971,6 +10309,66 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetSlotFrontNvme24optionRom(x)
 	}
 
+	if d.HasChange("slot_front_nvme25link_speed") {
+		v := d.Get("slot_front_nvme25link_speed")
+		x := (v.(string))
+		o.SetSlotFrontNvme25linkSpeed(x)
+	}
+
+	if d.HasChange("slot_front_nvme25option_rom") {
+		v := d.Get("slot_front_nvme25option_rom")
+		x := (v.(string))
+		o.SetSlotFrontNvme25optionRom(x)
+	}
+
+	if d.HasChange("slot_front_nvme26link_speed") {
+		v := d.Get("slot_front_nvme26link_speed")
+		x := (v.(string))
+		o.SetSlotFrontNvme26linkSpeed(x)
+	}
+
+	if d.HasChange("slot_front_nvme26option_rom") {
+		v := d.Get("slot_front_nvme26option_rom")
+		x := (v.(string))
+		o.SetSlotFrontNvme26optionRom(x)
+	}
+
+	if d.HasChange("slot_front_nvme27link_speed") {
+		v := d.Get("slot_front_nvme27link_speed")
+		x := (v.(string))
+		o.SetSlotFrontNvme27linkSpeed(x)
+	}
+
+	if d.HasChange("slot_front_nvme27option_rom") {
+		v := d.Get("slot_front_nvme27option_rom")
+		x := (v.(string))
+		o.SetSlotFrontNvme27optionRom(x)
+	}
+
+	if d.HasChange("slot_front_nvme28link_speed") {
+		v := d.Get("slot_front_nvme28link_speed")
+		x := (v.(string))
+		o.SetSlotFrontNvme28linkSpeed(x)
+	}
+
+	if d.HasChange("slot_front_nvme28option_rom") {
+		v := d.Get("slot_front_nvme28option_rom")
+		x := (v.(string))
+		o.SetSlotFrontNvme28optionRom(x)
+	}
+
+	if d.HasChange("slot_front_nvme29link_speed") {
+		v := d.Get("slot_front_nvme29link_speed")
+		x := (v.(string))
+		o.SetSlotFrontNvme29linkSpeed(x)
+	}
+
+	if d.HasChange("slot_front_nvme29option_rom") {
+		v := d.Get("slot_front_nvme29option_rom")
+		x := (v.(string))
+		o.SetSlotFrontNvme29optionRom(x)
+	}
+
 	if d.HasChange("slot_front_nvme2link_speed") {
 		v := d.Get("slot_front_nvme2link_speed")
 		x := (v.(string))
@@ -9981,6 +10379,42 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("slot_front_nvme2option_rom")
 		x := (v.(string))
 		o.SetSlotFrontNvme2optionRom(x)
+	}
+
+	if d.HasChange("slot_front_nvme30link_speed") {
+		v := d.Get("slot_front_nvme30link_speed")
+		x := (v.(string))
+		o.SetSlotFrontNvme30linkSpeed(x)
+	}
+
+	if d.HasChange("slot_front_nvme30option_rom") {
+		v := d.Get("slot_front_nvme30option_rom")
+		x := (v.(string))
+		o.SetSlotFrontNvme30optionRom(x)
+	}
+
+	if d.HasChange("slot_front_nvme31link_speed") {
+		v := d.Get("slot_front_nvme31link_speed")
+		x := (v.(string))
+		o.SetSlotFrontNvme31linkSpeed(x)
+	}
+
+	if d.HasChange("slot_front_nvme31option_rom") {
+		v := d.Get("slot_front_nvme31option_rom")
+		x := (v.(string))
+		o.SetSlotFrontNvme31optionRom(x)
+	}
+
+	if d.HasChange("slot_front_nvme32link_speed") {
+		v := d.Get("slot_front_nvme32link_speed")
+		x := (v.(string))
+		o.SetSlotFrontNvme32linkSpeed(x)
+	}
+
+	if d.HasChange("slot_front_nvme32option_rom") {
+		v := d.Get("slot_front_nvme32option_rom")
+		x := (v.(string))
+		o.SetSlotFrontNvme32optionRom(x)
 	}
 
 	if d.HasChange("slot_front_nvme3link_speed") {
@@ -10609,6 +11043,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("ucsm_boot_order_rule")
 		x := (v.(string))
 		o.SetUcsmBootOrderRule(x)
+	}
+
+	if d.HasChange("uefi_mem_map_sp_flag_en") {
+		v := d.Get("uefi_mem_map_sp_flag_en")
+		x := (v.(string))
+		o.SetUefiMemMapSpFlagEn(x)
 	}
 
 	if d.HasChange("ufs_disable") {

@@ -348,6 +348,12 @@ func resourceWorkflowServiceItemDefinition() *schema.Resource {
 				Optional:    true,
 				ForceNew:    true,
 			},
+			"default_version": {
+				Description: "The flag to indicate that this is the default version of the service item.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"delete_instance_on_decommission": {
 				Description: "The flag to indicate that service item instance will be deleted after the completion of decommission action.",
 				Type:        schema.TypeBool,
@@ -1146,6 +1152,11 @@ func resourceWorkflowServiceItemDefinitionCreate(c context.Context, d *schema.Re
 		o.SetCvdId(x)
 	}
 
+	if v, ok := d.GetOkExists("default_version"); ok {
+		x := (v.(bool))
+		o.SetDefaultVersion(x)
+	}
+
 	if v, ok := d.GetOkExists("delete_instance_on_decommission"); ok {
 		x := (v.(bool))
 		o.SetDeleteInstanceOnDecommission(x)
@@ -1311,6 +1322,10 @@ func resourceWorkflowServiceItemDefinitionRead(c context.Context, d *schema.Reso
 
 	if err := d.Set("cvd_id", (s.GetCvdId())); err != nil {
 		return diag.Errorf("error occurred while setting property CvdId in WorkflowServiceItemDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("default_version", (s.GetDefaultVersion())); err != nil {
+		return diag.Errorf("error occurred while setting property DefaultVersion in WorkflowServiceItemDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("delete_instance_on_decommission", (s.GetDeleteInstanceOnDecommission())); err != nil {
@@ -1676,6 +1691,12 @@ func resourceWorkflowServiceItemDefinitionUpdate(c context.Context, d *schema.Re
 		v := d.Get("cvd_id")
 		x := (v.(string))
 		o.SetCvdId(x)
+	}
+
+	if d.HasChange("default_version") {
+		v := d.Get("default_version")
+		x := (v.(bool))
+		o.SetDefaultVersion(x)
 	}
 
 	if d.HasChange("delete_instance_on_decommission") {

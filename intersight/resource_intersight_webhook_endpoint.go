@@ -119,6 +119,84 @@ func resourceWebhookEndpoint() *schema.Resource {
 					},
 				},
 			},
+			"app_credentials": {
+				Description: "Stores the credentials for the specified authentication type.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ForceNew: true,
+			},
+			"app_registration": {
+				Description: "A reference to a iamAppRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
+			"auth_type": {
+				Description:  "Type of authentication used by the clientApp.\n* `basic` - The client uses basic username/password authentication. The password is expected to be a JWT token.\n* `none` - No authentication method specified by the client.\n* `bearer-token` - The client uses a long-lived bearer token to authenticate.\n* `auth-code` - The client uses OAuth Authorization Grant Flow without PKCE for authentication.\n* `client-credentials` - The client uses OAuth Client Credentials Flow for authentication.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"basic", "none", "bearer-token", "auth-code", "client-credentials"}, false),
+				Optional:     true,
+				Default:      "basic",
+				ForceNew:     true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -136,6 +214,13 @@ func resourceWebhookEndpoint() *schema.Resource {
 					}
 					return
 				}},
+			"credentials_action": {
+				Description:  "An action to be performed on the credentials.\n* `none` - No action to be performed.\n* `regenerateCredentials` - Allows for revocation and regeneration of a token. The old token associated with the client application. will not be usable and a new token will be generated.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringInSlice([]string{"none", "regenerateCredentials"}, false),
+				Optional:     true,
+				Default:      "none",
+			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
@@ -563,7 +648,91 @@ func resourceWebhookEndpointCreate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if v, ok := d.GetOk("app_credentials"); ok {
+		p := make([]models.IamAppCredentials, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewIamAppCredentialsWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("iam.AppCredentials")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAppCredentials(x)
+		}
+	}
+
+	if v, ok := d.GetOk("app_registration"); ok {
+		p := make([]models.IamAppRegistrationRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamAppRegistrationRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAppRegistration(x)
+		}
+	}
+
+	if v, ok := d.GetOk("auth_type"); ok {
+		x := (v.(string))
+		o.SetAuthType(x)
+	}
+
 	o.SetClassId("webhook.Endpoint")
+
+	if v, ok := d.GetOk("credentials_action"); ok {
+		x := (v.(string))
+		o.SetCredentialsAction(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -759,12 +928,28 @@ func resourceWebhookEndpointRead(c context.Context, d *schema.ResourceData, meta
 		return diag.Errorf("error occurred while setting property Ancestors in WebhookEndpoint object: %s", err.Error())
 	}
 
+	if err := d.Set("app_credentials", flattenMapIamAppCredentials(s.GetAppCredentials(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property AppCredentials in WebhookEndpoint object: %s", err.Error())
+	}
+
+	if err := d.Set("app_registration", flattenMapIamAppRegistrationRelationship(s.GetAppRegistration(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property AppRegistration in WebhookEndpoint object: %s", err.Error())
+	}
+
+	if err := d.Set("auth_type", (s.GetAuthType())); err != nil {
+		return diag.Errorf("error occurred while setting property AuthType in WebhookEndpoint object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in WebhookEndpoint object: %s", err.Error())
 	}
 
 	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property CreateTime in WebhookEndpoint object: %s", err.Error())
+	}
+
+	if err := d.Set("credentials_action", (s.GetCredentialsAction())); err != nil {
+		return diag.Errorf("error occurred while setting property CredentialsAction in WebhookEndpoint object: %s", err.Error())
 	}
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
@@ -844,7 +1029,95 @@ func resourceWebhookEndpointUpdate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if d.HasChange("app_credentials") {
+		v := d.Get("app_credentials")
+		p := make([]models.IamAppCredentials, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.IamAppCredentials{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("iam.AppCredentials")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAppCredentials(x)
+		}
+	}
+
+	if d.HasChange("app_registration") {
+		v := d.Get("app_registration")
+		p := make([]models.IamAppRegistrationRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamAppRegistrationRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAppRegistration(x)
+		}
+	}
+
+	if d.HasChange("auth_type") {
+		v := d.Get("auth_type")
+		x := (v.(string))
+		o.SetAuthType(x)
+	}
+
 	o.SetClassId("webhook.Endpoint")
+
+	if d.HasChange("credentials_action") {
+		v := d.Get("credentials_action")
+		x := (v.(string))
+		o.SetCredentialsAction(x)
+	}
 
 	if d.HasChange("moid") {
 		v := d.Get("moid")

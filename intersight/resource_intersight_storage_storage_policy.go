@@ -86,6 +86,12 @@ func resourceStorageStoragePolicy() *schema.Resource {
 				Optional:    true,
 				Default:     "storage.StoragePolicy",
 			},
+			"controller_attached_nvme_slots": {
+				Description:  "Only U.3 NVMe drives need to be specified, entered slots will be moved to controller attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number ranges.",
+				Type:         schema.TypeString,
+				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
+				Optional:     true,
+			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
 				Type:        schema.TypeString,
@@ -111,7 +117,7 @@ func resourceStorageStoragePolicy() *schema.Resource {
 				Optional:     true,
 			},
 			"direct_attached_nvme_slots": {
-				Description:  "Only U.3 NVMe drives has to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.",
+				Description:  "Only U.3 NVMe drives need to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number ranges.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
 				Optional:     true,
@@ -535,7 +541,7 @@ func resourceStorageStoragePolicy() *schema.Resource {
 				},
 			},
 			"raid_attached_nvme_slots": {
-				Description:  "Only U.3 NVMe drives has to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.",
+				Description:  "Only U.3 NVMe drives need to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number ranges. Deprecated in favor of controllerAttachedNvmeSlots.",
 				Type:         schema.TypeString,
 				ValidateFunc: validation.StringMatch(regexp.MustCompile("^$|^((\\d+\\-\\d+)|(\\d+))(,((\\d+\\-\\d+)|(\\d+)))*$"), ""),
 				Optional:     true,
@@ -767,6 +773,11 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 	}
 
 	o.SetClassId("storage.StoragePolicy")
+
+	if v, ok := d.GetOk("controller_attached_nvme_slots"); ok {
+		x := (v.(string))
+		o.SetControllerAttachedNvmeSlots(x)
+	}
 
 	if v, ok := d.GetOk("default_drive_mode"); ok {
 		x := (v.(string))
@@ -1219,6 +1230,10 @@ func resourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property ClassId in StorageStoragePolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("controller_attached_nvme_slots", (s.GetControllerAttachedNvmeSlots())); err != nil {
+		return diag.Errorf("error occurred while setting property ControllerAttachedNvmeSlots in StorageStoragePolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property CreateTime in StorageStoragePolicy object: %s", err.Error())
 	}
@@ -1341,6 +1356,12 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 	}
 
 	o.SetClassId("storage.StoragePolicy")
+
+	if d.HasChange("controller_attached_nvme_slots") {
+		v := d.Get("controller_attached_nvme_slots")
+		x := (v.(string))
+		o.SetControllerAttachedNvmeSlots(x)
+	}
 
 	if d.HasChange("default_drive_mode") {
 		v := d.Get("default_drive_mode")

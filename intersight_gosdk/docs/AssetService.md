@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
-**Options** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | ServiceOptions captures configuration that is specific to a target type for a specific service. | [optional] 
+**Options** | Pointer to [**NullableAssetServiceOptions**](AssetServiceOptions.md) |  | [optional] 
 
 ## Methods
 
@@ -69,20 +69,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetOptions
 
-`func (o *AssetService) GetOptions() MoBaseComplexType`
+`func (o *AssetService) GetOptions() AssetServiceOptions`
 
 GetOptions returns the Options field if non-nil, zero value otherwise.
 
 ### GetOptionsOk
 
-`func (o *AssetService) GetOptionsOk() (*MoBaseComplexType, bool)`
+`func (o *AssetService) GetOptionsOk() (*AssetServiceOptions, bool)`
 
 GetOptionsOk returns a tuple with the Options field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOptions
 
-`func (o *AssetService) SetOptions(v MoBaseComplexType)`
+`func (o *AssetService) SetOptions(v AssetServiceOptions)`
 
 SetOptions sets Options field to given value.
 

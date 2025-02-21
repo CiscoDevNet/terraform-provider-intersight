@@ -1191,11 +1191,11 @@ func dataSourceSoftwareUcsdDistributableRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("nr_source"); ok {
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.MoBaseComplexType{}
+			o := &models.SoftwarerepositoryFileServer{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1437,7 +1437,7 @@ func dataSourceSoftwareUcsdDistributableRead(c context.Context, d *schema.Resour
 				temp["software_advisory_url"] = (s.GetSoftwareAdvisoryUrl())
 				temp["software_type_id"] = (s.GetSoftwareTypeId())
 
-				temp["nr_source"] = flattenMapMoBaseComplexType(s.GetSource(), d)
+				temp["nr_source"] = flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)
 				temp["supported_models"] = (s.GetSupportedModels())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

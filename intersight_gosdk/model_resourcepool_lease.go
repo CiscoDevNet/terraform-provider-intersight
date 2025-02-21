@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -32,10 +32,9 @@ type ResourcepoolLease struct {
 	// Lease opertion applied for the feature.
 	Feature *string `json:"Feature,omitempty"`
 	// Indicates whether a lease allocation is exclusive based on the Assigned Entity, if the AssignedEntity holds any lease then not allowed to create new lease later.
-	IsExclusiveAtAssignedEntity *bool `json:"IsExclusiveAtAssignedEntity,omitempty"`
-	// The lease operations has some special operations based on the PoolType and ResourceType. Those special operations are handled based on this parameter.
-	LeaseParameters NullableMoBaseComplexType `json:"LeaseParameters,omitempty"`
-	Resource        *MoBaseMo                 `json:"Resource,omitempty"`
+	IsExclusiveAtAssignedEntity *bool                               `json:"IsExclusiveAtAssignedEntity,omitempty"`
+	LeaseParameters             NullableResourcepoolLeaseParameters `json:"LeaseParameters,omitempty"`
+	Resource                    *MoBaseMo                           `json:"Resource,omitempty"`
 	// The type of resource present in the pool, such as 'server' can be a RackUnit or Blade. * `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade. * `None` - The resource cannot consider for Resource Pool.
 	ResourceType         *string                                       `json:"ResourceType,omitempty"`
 	AssignedToEntity     NullableMoBaseMoRelationship                  `json:"AssignedToEntity,omitempty"`
@@ -239,9 +238,9 @@ func (o *ResourcepoolLease) SetIsExclusiveAtAssignedEntity(v bool) {
 }
 
 // GetLeaseParameters returns the LeaseParameters field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ResourcepoolLease) GetLeaseParameters() MoBaseComplexType {
+func (o *ResourcepoolLease) GetLeaseParameters() ResourcepoolLeaseParameters {
 	if o == nil || IsNil(o.LeaseParameters.Get()) {
-		var ret MoBaseComplexType
+		var ret ResourcepoolLeaseParameters
 		return ret
 	}
 	return *o.LeaseParameters.Get()
@@ -250,7 +249,7 @@ func (o *ResourcepoolLease) GetLeaseParameters() MoBaseComplexType {
 // GetLeaseParametersOk returns a tuple with the LeaseParameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ResourcepoolLease) GetLeaseParametersOk() (*MoBaseComplexType, bool) {
+func (o *ResourcepoolLease) GetLeaseParametersOk() (*ResourcepoolLeaseParameters, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -266,8 +265,8 @@ func (o *ResourcepoolLease) HasLeaseParameters() bool {
 	return false
 }
 
-// SetLeaseParameters gets a reference to the given NullableMoBaseComplexType and assigns it to the LeaseParameters field.
-func (o *ResourcepoolLease) SetLeaseParameters(v MoBaseComplexType) {
+// SetLeaseParameters gets a reference to the given NullableResourcepoolLeaseParameters and assigns it to the LeaseParameters field.
+func (o *ResourcepoolLease) SetLeaseParameters(v ResourcepoolLeaseParameters) {
 	o.LeaseParameters.Set(&v)
 }
 
@@ -678,10 +677,9 @@ func (o *ResourcepoolLease) UnmarshalJSON(data []byte) (err error) {
 		// Lease opertion applied for the feature.
 		Feature *string `json:"Feature,omitempty"`
 		// Indicates whether a lease allocation is exclusive based on the Assigned Entity, if the AssignedEntity holds any lease then not allowed to create new lease later.
-		IsExclusiveAtAssignedEntity *bool `json:"IsExclusiveAtAssignedEntity,omitempty"`
-		// The lease operations has some special operations based on the PoolType and ResourceType. Those special operations are handled based on this parameter.
-		LeaseParameters NullableMoBaseComplexType `json:"LeaseParameters,omitempty"`
-		Resource        *MoBaseMo                 `json:"Resource,omitempty"`
+		IsExclusiveAtAssignedEntity *bool                               `json:"IsExclusiveAtAssignedEntity,omitempty"`
+		LeaseParameters             NullableResourcepoolLeaseParameters `json:"LeaseParameters,omitempty"`
+		Resource                    *MoBaseMo                           `json:"Resource,omitempty"`
 		// The type of resource present in the pool, such as 'server' can be a RackUnit or Blade. * `Server` - Resource Pool holds the server kind of resources, example - RackServer, Blade. * `None` - The resource cannot consider for Resource Pool.
 		ResourceType     *string                                       `json:"ResourceType,omitempty"`
 		AssignedToEntity NullableMoBaseMoRelationship                  `json:"AssignedToEntity,omitempty"`

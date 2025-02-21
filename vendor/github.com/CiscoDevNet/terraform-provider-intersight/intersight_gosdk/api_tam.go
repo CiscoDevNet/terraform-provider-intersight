@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateTamAdvisoryCountRequest) Execute() (*TamAdvisoryCount, *http.Re
 /*
 CreateTamAdvisoryCount Create a 'tam.AdvisoryCount' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateTamAdvisoryCountRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateTamAdvisoryCountRequest
 */
 func (a *TamApiService) CreateTamAdvisoryCount(ctx context.Context) ApiCreateTamAdvisoryCountRequest {
 	return ApiCreateTamAdvisoryCountRequest{
@@ -67,8 +67,7 @@ func (a *TamApiService) CreateTamAdvisoryCount(ctx context.Context) ApiCreateTam
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryCount
+//  @return TamAdvisoryCount
 func (a *TamApiService) CreateTamAdvisoryCountExecute(r ApiCreateTamAdvisoryCountRequest) (*TamAdvisoryCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -238,8 +237,8 @@ func (r ApiCreateTamAdvisoryDefinitionRequest) Execute() (*TamAdvisoryDefinition
 /*
 CreateTamAdvisoryDefinition Create a 'tam.AdvisoryDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateTamAdvisoryDefinitionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateTamAdvisoryDefinitionRequest
 */
 func (a *TamApiService) CreateTamAdvisoryDefinition(ctx context.Context) ApiCreateTamAdvisoryDefinitionRequest {
 	return ApiCreateTamAdvisoryDefinitionRequest{
@@ -249,8 +248,7 @@ func (a *TamApiService) CreateTamAdvisoryDefinition(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryDefinition
+//  @return TamAdvisoryDefinition
 func (a *TamApiService) CreateTamAdvisoryDefinitionExecute(r ApiCreateTamAdvisoryDefinitionRequest) (*TamAdvisoryDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -420,8 +418,8 @@ func (r ApiCreateTamAdvisoryInfoRequest) Execute() (*TamAdvisoryInfo, *http.Resp
 /*
 CreateTamAdvisoryInfo Create a 'tam.AdvisoryInfo' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateTamAdvisoryInfoRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateTamAdvisoryInfoRequest
 */
 func (a *TamApiService) CreateTamAdvisoryInfo(ctx context.Context) ApiCreateTamAdvisoryInfoRequest {
 	return ApiCreateTamAdvisoryInfoRequest{
@@ -431,8 +429,7 @@ func (a *TamApiService) CreateTamAdvisoryInfo(ctx context.Context) ApiCreateTamA
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryInfo
+//  @return TamAdvisoryInfo
 func (a *TamApiService) CreateTamAdvisoryInfoExecute(r ApiCreateTamAdvisoryInfoRequest) (*TamAdvisoryInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -602,8 +599,8 @@ func (r ApiCreateTamAdvisoryInstanceRequest) Execute() (*TamAdvisoryInstance, *h
 /*
 CreateTamAdvisoryInstance Create a 'tam.AdvisoryInstance' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateTamAdvisoryInstanceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateTamAdvisoryInstanceRequest
 */
 func (a *TamApiService) CreateTamAdvisoryInstance(ctx context.Context) ApiCreateTamAdvisoryInstanceRequest {
 	return ApiCreateTamAdvisoryInstanceRequest{
@@ -613,8 +610,7 @@ func (a *TamApiService) CreateTamAdvisoryInstance(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryInstance
+//  @return TamAdvisoryInstance
 func (a *TamApiService) CreateTamAdvisoryInstanceExecute(r ApiCreateTamAdvisoryInstanceRequest) (*TamAdvisoryInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -784,8 +780,8 @@ func (r ApiCreateTamSecurityAdvisoryRequest) Execute() (*TamSecurityAdvisory, *h
 /*
 CreateTamSecurityAdvisory Create a 'tam.SecurityAdvisory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateTamSecurityAdvisoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateTamSecurityAdvisoryRequest
 */
 func (a *TamApiService) CreateTamSecurityAdvisory(ctx context.Context) ApiCreateTamSecurityAdvisoryRequest {
 	return ApiCreateTamSecurityAdvisoryRequest{
@@ -795,8 +791,7 @@ func (a *TamApiService) CreateTamSecurityAdvisory(ctx context.Context) ApiCreate
 }
 
 // Execute executes the request
-//
-//	@return TamSecurityAdvisory
+//  @return TamSecurityAdvisory
 func (a *TamApiService) CreateTamSecurityAdvisoryExecute(r ApiCreateTamSecurityAdvisoryRequest) (*TamSecurityAdvisory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -946,9 +941,9 @@ func (r ApiDeleteTamAdvisoryCountRequest) Execute() (*http.Response, error) {
 /*
 DeleteTamAdvisoryCount Delete a 'tam.AdvisoryCount' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteTamAdvisoryCountRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteTamAdvisoryCountRequest
 */
 func (a *TamApiService) DeleteTamAdvisoryCount(ctx context.Context, moid string) ApiDeleteTamAdvisoryCountRequest {
 	return ApiDeleteTamAdvisoryCountRequest{
@@ -1088,9 +1083,9 @@ func (r ApiDeleteTamAdvisoryDefinitionRequest) Execute() (*http.Response, error)
 /*
 DeleteTamAdvisoryDefinition Delete a 'tam.AdvisoryDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteTamAdvisoryDefinitionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteTamAdvisoryDefinitionRequest
 */
 func (a *TamApiService) DeleteTamAdvisoryDefinition(ctx context.Context, moid string) ApiDeleteTamAdvisoryDefinitionRequest {
 	return ApiDeleteTamAdvisoryDefinitionRequest{
@@ -1230,9 +1225,9 @@ func (r ApiDeleteTamAdvisoryInfoRequest) Execute() (*http.Response, error) {
 /*
 DeleteTamAdvisoryInfo Delete a 'tam.AdvisoryInfo' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteTamAdvisoryInfoRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteTamAdvisoryInfoRequest
 */
 func (a *TamApiService) DeleteTamAdvisoryInfo(ctx context.Context, moid string) ApiDeleteTamAdvisoryInfoRequest {
 	return ApiDeleteTamAdvisoryInfoRequest{
@@ -1372,9 +1367,9 @@ func (r ApiDeleteTamAdvisoryInstanceRequest) Execute() (*http.Response, error) {
 /*
 DeleteTamAdvisoryInstance Delete a 'tam.AdvisoryInstance' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteTamAdvisoryInstanceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteTamAdvisoryInstanceRequest
 */
 func (a *TamApiService) DeleteTamAdvisoryInstance(ctx context.Context, moid string) ApiDeleteTamAdvisoryInstanceRequest {
 	return ApiDeleteTamAdvisoryInstanceRequest{
@@ -1514,9 +1509,9 @@ func (r ApiDeleteTamSecurityAdvisoryRequest) Execute() (*http.Response, error) {
 /*
 DeleteTamSecurityAdvisory Delete a 'tam.SecurityAdvisory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteTamSecurityAdvisoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteTamSecurityAdvisoryRequest
 */
 func (a *TamApiService) DeleteTamSecurityAdvisory(ctx context.Context, moid string) ApiDeleteTamSecurityAdvisoryRequest {
 	return ApiDeleteTamSecurityAdvisoryRequest{
@@ -1656,9 +1651,9 @@ func (r ApiGetTamAdvisoryCountByMoidRequest) Execute() (*TamAdvisoryCount, *http
 /*
 GetTamAdvisoryCountByMoid Read a 'tam.AdvisoryCount' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetTamAdvisoryCountByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetTamAdvisoryCountByMoidRequest
 */
 func (a *TamApiService) GetTamAdvisoryCountByMoid(ctx context.Context, moid string) ApiGetTamAdvisoryCountByMoidRequest {
 	return ApiGetTamAdvisoryCountByMoidRequest{
@@ -1669,8 +1664,7 @@ func (a *TamApiService) GetTamAdvisoryCountByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryCount
+//  @return TamAdvisoryCount
 func (a *TamApiService) GetTamAdvisoryCountByMoidExecute(r ApiGetTamAdvisoryCountByMoidRequest) (*TamAdvisoryCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1886,8 +1880,8 @@ func (r ApiGetTamAdvisoryCountListRequest) Execute() (*TamAdvisoryCountResponse,
 /*
 GetTamAdvisoryCountList Read a 'tam.AdvisoryCount' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetTamAdvisoryCountListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTamAdvisoryCountListRequest
 */
 func (a *TamApiService) GetTamAdvisoryCountList(ctx context.Context) ApiGetTamAdvisoryCountListRequest {
 	return ApiGetTamAdvisoryCountListRequest{
@@ -1897,8 +1891,7 @@ func (a *TamApiService) GetTamAdvisoryCountList(ctx context.Context) ApiGetTamAd
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryCountResponse
+//  @return TamAdvisoryCountResponse
 func (a *TamApiService) GetTamAdvisoryCountListExecute(r ApiGetTamAdvisoryCountListRequest) (*TamAdvisoryCountResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2085,9 +2078,9 @@ func (r ApiGetTamAdvisoryDefinitionByMoidRequest) Execute() (*TamAdvisoryDefinit
 /*
 GetTamAdvisoryDefinitionByMoid Read a 'tam.AdvisoryDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetTamAdvisoryDefinitionByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetTamAdvisoryDefinitionByMoidRequest
 */
 func (a *TamApiService) GetTamAdvisoryDefinitionByMoid(ctx context.Context, moid string) ApiGetTamAdvisoryDefinitionByMoidRequest {
 	return ApiGetTamAdvisoryDefinitionByMoidRequest{
@@ -2098,8 +2091,7 @@ func (a *TamApiService) GetTamAdvisoryDefinitionByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryDefinition
+//  @return TamAdvisoryDefinition
 func (a *TamApiService) GetTamAdvisoryDefinitionByMoidExecute(r ApiGetTamAdvisoryDefinitionByMoidRequest) (*TamAdvisoryDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2315,8 +2307,8 @@ func (r ApiGetTamAdvisoryDefinitionListRequest) Execute() (*TamAdvisoryDefinitio
 /*
 GetTamAdvisoryDefinitionList Read a 'tam.AdvisoryDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetTamAdvisoryDefinitionListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTamAdvisoryDefinitionListRequest
 */
 func (a *TamApiService) GetTamAdvisoryDefinitionList(ctx context.Context) ApiGetTamAdvisoryDefinitionListRequest {
 	return ApiGetTamAdvisoryDefinitionListRequest{
@@ -2326,8 +2318,7 @@ func (a *TamApiService) GetTamAdvisoryDefinitionList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryDefinitionResponse
+//  @return TamAdvisoryDefinitionResponse
 func (a *TamApiService) GetTamAdvisoryDefinitionListExecute(r ApiGetTamAdvisoryDefinitionListRequest) (*TamAdvisoryDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2514,9 +2505,9 @@ func (r ApiGetTamAdvisoryInfoByMoidRequest) Execute() (*TamAdvisoryInfo, *http.R
 /*
 GetTamAdvisoryInfoByMoid Read a 'tam.AdvisoryInfo' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetTamAdvisoryInfoByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetTamAdvisoryInfoByMoidRequest
 */
 func (a *TamApiService) GetTamAdvisoryInfoByMoid(ctx context.Context, moid string) ApiGetTamAdvisoryInfoByMoidRequest {
 	return ApiGetTamAdvisoryInfoByMoidRequest{
@@ -2527,8 +2518,7 @@ func (a *TamApiService) GetTamAdvisoryInfoByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryInfo
+//  @return TamAdvisoryInfo
 func (a *TamApiService) GetTamAdvisoryInfoByMoidExecute(r ApiGetTamAdvisoryInfoByMoidRequest) (*TamAdvisoryInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2744,8 +2734,8 @@ func (r ApiGetTamAdvisoryInfoListRequest) Execute() (*TamAdvisoryInfoResponse, *
 /*
 GetTamAdvisoryInfoList Read a 'tam.AdvisoryInfo' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetTamAdvisoryInfoListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTamAdvisoryInfoListRequest
 */
 func (a *TamApiService) GetTamAdvisoryInfoList(ctx context.Context) ApiGetTamAdvisoryInfoListRequest {
 	return ApiGetTamAdvisoryInfoListRequest{
@@ -2755,8 +2745,7 @@ func (a *TamApiService) GetTamAdvisoryInfoList(ctx context.Context) ApiGetTamAdv
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryInfoResponse
+//  @return TamAdvisoryInfoResponse
 func (a *TamApiService) GetTamAdvisoryInfoListExecute(r ApiGetTamAdvisoryInfoListRequest) (*TamAdvisoryInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2943,9 +2932,9 @@ func (r ApiGetTamAdvisoryInstanceByMoidRequest) Execute() (*TamAdvisoryInstance,
 /*
 GetTamAdvisoryInstanceByMoid Read a 'tam.AdvisoryInstance' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetTamAdvisoryInstanceByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetTamAdvisoryInstanceByMoidRequest
 */
 func (a *TamApiService) GetTamAdvisoryInstanceByMoid(ctx context.Context, moid string) ApiGetTamAdvisoryInstanceByMoidRequest {
 	return ApiGetTamAdvisoryInstanceByMoidRequest{
@@ -2956,8 +2945,7 @@ func (a *TamApiService) GetTamAdvisoryInstanceByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryInstance
+//  @return TamAdvisoryInstance
 func (a *TamApiService) GetTamAdvisoryInstanceByMoidExecute(r ApiGetTamAdvisoryInstanceByMoidRequest) (*TamAdvisoryInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3173,8 +3161,8 @@ func (r ApiGetTamAdvisoryInstanceListRequest) Execute() (*TamAdvisoryInstanceRes
 /*
 GetTamAdvisoryInstanceList Read a 'tam.AdvisoryInstance' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetTamAdvisoryInstanceListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTamAdvisoryInstanceListRequest
 */
 func (a *TamApiService) GetTamAdvisoryInstanceList(ctx context.Context) ApiGetTamAdvisoryInstanceListRequest {
 	return ApiGetTamAdvisoryInstanceListRequest{
@@ -3184,8 +3172,7 @@ func (a *TamApiService) GetTamAdvisoryInstanceList(ctx context.Context) ApiGetTa
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryInstanceResponse
+//  @return TamAdvisoryInstanceResponse
 func (a *TamApiService) GetTamAdvisoryInstanceListExecute(r ApiGetTamAdvisoryInstanceListRequest) (*TamAdvisoryInstanceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3372,9 +3359,9 @@ func (r ApiGetTamSecurityAdvisoryByMoidRequest) Execute() (*TamSecurityAdvisory,
 /*
 GetTamSecurityAdvisoryByMoid Read a 'tam.SecurityAdvisory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetTamSecurityAdvisoryByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetTamSecurityAdvisoryByMoidRequest
 */
 func (a *TamApiService) GetTamSecurityAdvisoryByMoid(ctx context.Context, moid string) ApiGetTamSecurityAdvisoryByMoidRequest {
 	return ApiGetTamSecurityAdvisoryByMoidRequest{
@@ -3385,8 +3372,7 @@ func (a *TamApiService) GetTamSecurityAdvisoryByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//
-//	@return TamSecurityAdvisory
+//  @return TamSecurityAdvisory
 func (a *TamApiService) GetTamSecurityAdvisoryByMoidExecute(r ApiGetTamSecurityAdvisoryByMoidRequest) (*TamSecurityAdvisory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3602,8 +3588,8 @@ func (r ApiGetTamSecurityAdvisoryListRequest) Execute() (*TamSecurityAdvisoryRes
 /*
 GetTamSecurityAdvisoryList Read a 'tam.SecurityAdvisory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetTamSecurityAdvisoryListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTamSecurityAdvisoryListRequest
 */
 func (a *TamApiService) GetTamSecurityAdvisoryList(ctx context.Context) ApiGetTamSecurityAdvisoryListRequest {
 	return ApiGetTamSecurityAdvisoryListRequest{
@@ -3613,8 +3599,7 @@ func (a *TamApiService) GetTamSecurityAdvisoryList(ctx context.Context) ApiGetTa
 }
 
 // Execute executes the request
-//
-//	@return TamSecurityAdvisoryResponse
+//  @return TamSecurityAdvisoryResponse
 func (a *TamApiService) GetTamSecurityAdvisoryListExecute(r ApiGetTamSecurityAdvisoryListRequest) (*TamSecurityAdvisoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3815,9 +3800,9 @@ func (r ApiPatchTamAdvisoryCountRequest) Execute() (*TamAdvisoryCount, *http.Res
 /*
 PatchTamAdvisoryCount Update a 'tam.AdvisoryCount' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchTamAdvisoryCountRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchTamAdvisoryCountRequest
 */
 func (a *TamApiService) PatchTamAdvisoryCount(ctx context.Context, moid string) ApiPatchTamAdvisoryCountRequest {
 	return ApiPatchTamAdvisoryCountRequest{
@@ -3828,8 +3813,7 @@ func (a *TamApiService) PatchTamAdvisoryCount(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryCount
+//  @return TamAdvisoryCount
 func (a *TamApiService) PatchTamAdvisoryCountExecute(r ApiPatchTamAdvisoryCountRequest) (*TamAdvisoryCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3991,9 +3975,9 @@ func (r ApiPatchTamAdvisoryDefinitionRequest) Execute() (*TamAdvisoryDefinition,
 /*
 PatchTamAdvisoryDefinition Update a 'tam.AdvisoryDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchTamAdvisoryDefinitionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchTamAdvisoryDefinitionRequest
 */
 func (a *TamApiService) PatchTamAdvisoryDefinition(ctx context.Context, moid string) ApiPatchTamAdvisoryDefinitionRequest {
 	return ApiPatchTamAdvisoryDefinitionRequest{
@@ -4004,8 +3988,7 @@ func (a *TamApiService) PatchTamAdvisoryDefinition(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryDefinition
+//  @return TamAdvisoryDefinition
 func (a *TamApiService) PatchTamAdvisoryDefinitionExecute(r ApiPatchTamAdvisoryDefinitionRequest) (*TamAdvisoryDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4167,9 +4150,9 @@ func (r ApiPatchTamAdvisoryInfoRequest) Execute() (*TamAdvisoryInfo, *http.Respo
 /*
 PatchTamAdvisoryInfo Update a 'tam.AdvisoryInfo' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchTamAdvisoryInfoRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchTamAdvisoryInfoRequest
 */
 func (a *TamApiService) PatchTamAdvisoryInfo(ctx context.Context, moid string) ApiPatchTamAdvisoryInfoRequest {
 	return ApiPatchTamAdvisoryInfoRequest{
@@ -4180,8 +4163,7 @@ func (a *TamApiService) PatchTamAdvisoryInfo(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryInfo
+//  @return TamAdvisoryInfo
 func (a *TamApiService) PatchTamAdvisoryInfoExecute(r ApiPatchTamAdvisoryInfoRequest) (*TamAdvisoryInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4343,9 +4325,9 @@ func (r ApiPatchTamAdvisoryInstanceRequest) Execute() (*TamAdvisoryInstance, *ht
 /*
 PatchTamAdvisoryInstance Update a 'tam.AdvisoryInstance' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchTamAdvisoryInstanceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchTamAdvisoryInstanceRequest
 */
 func (a *TamApiService) PatchTamAdvisoryInstance(ctx context.Context, moid string) ApiPatchTamAdvisoryInstanceRequest {
 	return ApiPatchTamAdvisoryInstanceRequest{
@@ -4356,8 +4338,7 @@ func (a *TamApiService) PatchTamAdvisoryInstance(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryInstance
+//  @return TamAdvisoryInstance
 func (a *TamApiService) PatchTamAdvisoryInstanceExecute(r ApiPatchTamAdvisoryInstanceRequest) (*TamAdvisoryInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4519,9 +4500,9 @@ func (r ApiPatchTamSecurityAdvisoryRequest) Execute() (*TamSecurityAdvisory, *ht
 /*
 PatchTamSecurityAdvisory Update a 'tam.SecurityAdvisory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchTamSecurityAdvisoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchTamSecurityAdvisoryRequest
 */
 func (a *TamApiService) PatchTamSecurityAdvisory(ctx context.Context, moid string) ApiPatchTamSecurityAdvisoryRequest {
 	return ApiPatchTamSecurityAdvisoryRequest{
@@ -4532,8 +4513,7 @@ func (a *TamApiService) PatchTamSecurityAdvisory(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//
-//	@return TamSecurityAdvisory
+//  @return TamSecurityAdvisory
 func (a *TamApiService) PatchTamSecurityAdvisoryExecute(r ApiPatchTamSecurityAdvisoryRequest) (*TamSecurityAdvisory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4695,9 +4675,9 @@ func (r ApiUpdateTamAdvisoryCountRequest) Execute() (*TamAdvisoryCount, *http.Re
 /*
 UpdateTamAdvisoryCount Update a 'tam.AdvisoryCount' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateTamAdvisoryCountRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateTamAdvisoryCountRequest
 */
 func (a *TamApiService) UpdateTamAdvisoryCount(ctx context.Context, moid string) ApiUpdateTamAdvisoryCountRequest {
 	return ApiUpdateTamAdvisoryCountRequest{
@@ -4708,8 +4688,7 @@ func (a *TamApiService) UpdateTamAdvisoryCount(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryCount
+//  @return TamAdvisoryCount
 func (a *TamApiService) UpdateTamAdvisoryCountExecute(r ApiUpdateTamAdvisoryCountRequest) (*TamAdvisoryCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4871,9 +4850,9 @@ func (r ApiUpdateTamAdvisoryDefinitionRequest) Execute() (*TamAdvisoryDefinition
 /*
 UpdateTamAdvisoryDefinition Update a 'tam.AdvisoryDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateTamAdvisoryDefinitionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateTamAdvisoryDefinitionRequest
 */
 func (a *TamApiService) UpdateTamAdvisoryDefinition(ctx context.Context, moid string) ApiUpdateTamAdvisoryDefinitionRequest {
 	return ApiUpdateTamAdvisoryDefinitionRequest{
@@ -4884,8 +4863,7 @@ func (a *TamApiService) UpdateTamAdvisoryDefinition(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryDefinition
+//  @return TamAdvisoryDefinition
 func (a *TamApiService) UpdateTamAdvisoryDefinitionExecute(r ApiUpdateTamAdvisoryDefinitionRequest) (*TamAdvisoryDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5047,9 +5025,9 @@ func (r ApiUpdateTamAdvisoryInfoRequest) Execute() (*TamAdvisoryInfo, *http.Resp
 /*
 UpdateTamAdvisoryInfo Update a 'tam.AdvisoryInfo' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateTamAdvisoryInfoRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateTamAdvisoryInfoRequest
 */
 func (a *TamApiService) UpdateTamAdvisoryInfo(ctx context.Context, moid string) ApiUpdateTamAdvisoryInfoRequest {
 	return ApiUpdateTamAdvisoryInfoRequest{
@@ -5060,8 +5038,7 @@ func (a *TamApiService) UpdateTamAdvisoryInfo(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryInfo
+//  @return TamAdvisoryInfo
 func (a *TamApiService) UpdateTamAdvisoryInfoExecute(r ApiUpdateTamAdvisoryInfoRequest) (*TamAdvisoryInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5223,9 +5200,9 @@ func (r ApiUpdateTamAdvisoryInstanceRequest) Execute() (*TamAdvisoryInstance, *h
 /*
 UpdateTamAdvisoryInstance Update a 'tam.AdvisoryInstance' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateTamAdvisoryInstanceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateTamAdvisoryInstanceRequest
 */
 func (a *TamApiService) UpdateTamAdvisoryInstance(ctx context.Context, moid string) ApiUpdateTamAdvisoryInstanceRequest {
 	return ApiUpdateTamAdvisoryInstanceRequest{
@@ -5236,8 +5213,7 @@ func (a *TamApiService) UpdateTamAdvisoryInstance(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//
-//	@return TamAdvisoryInstance
+//  @return TamAdvisoryInstance
 func (a *TamApiService) UpdateTamAdvisoryInstanceExecute(r ApiUpdateTamAdvisoryInstanceRequest) (*TamAdvisoryInstance, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5399,9 +5375,9 @@ func (r ApiUpdateTamSecurityAdvisoryRequest) Execute() (*TamSecurityAdvisory, *h
 /*
 UpdateTamSecurityAdvisory Update a 'tam.SecurityAdvisory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateTamSecurityAdvisoryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateTamSecurityAdvisoryRequest
 */
 func (a *TamApiService) UpdateTamSecurityAdvisory(ctx context.Context, moid string) ApiUpdateTamSecurityAdvisoryRequest {
 	return ApiUpdateTamSecurityAdvisoryRequest{
@@ -5412,8 +5388,7 @@ func (a *TamApiService) UpdateTamSecurityAdvisory(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//
-//	@return TamSecurityAdvisory
+//  @return TamSecurityAdvisory
 func (a *TamApiService) UpdateTamSecurityAdvisoryExecute(r ApiUpdateTamSecurityAdvisoryRequest) (*TamSecurityAdvisory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

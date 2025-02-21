@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -36,9 +36,9 @@ func (r ApiGetMerakiDeviceByMoidRequest) Execute() (*MerakiDevice, *http.Respons
 /*
 GetMerakiDeviceByMoid Read a 'meraki.Device' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMerakiDeviceByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMerakiDeviceByMoidRequest
 */
 func (a *MerakiApiService) GetMerakiDeviceByMoid(ctx context.Context, moid string) ApiGetMerakiDeviceByMoidRequest {
 	return ApiGetMerakiDeviceByMoidRequest{
@@ -49,8 +49,7 @@ func (a *MerakiApiService) GetMerakiDeviceByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//
-//	@return MerakiDevice
+//  @return MerakiDevice
 func (a *MerakiApiService) GetMerakiDeviceByMoidExecute(r ApiGetMerakiDeviceByMoidRequest) (*MerakiDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -266,8 +265,8 @@ func (r ApiGetMerakiDeviceListRequest) Execute() (*MerakiDeviceResponse, *http.R
 /*
 GetMerakiDeviceList Read a 'meraki.Device' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMerakiDeviceListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMerakiDeviceListRequest
 */
 func (a *MerakiApiService) GetMerakiDeviceList(ctx context.Context) ApiGetMerakiDeviceListRequest {
 	return ApiGetMerakiDeviceListRequest{
@@ -277,8 +276,7 @@ func (a *MerakiApiService) GetMerakiDeviceList(ctx context.Context) ApiGetMeraki
 }
 
 // Execute executes the request
-//
-//	@return MerakiDeviceResponse
+//  @return MerakiDeviceResponse
 func (a *MerakiApiService) GetMerakiDeviceListExecute(r ApiGetMerakiDeviceListRequest) (*MerakiDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -465,9 +463,9 @@ func (r ApiGetMerakiNetworkByMoidRequest) Execute() (*MerakiNetwork, *http.Respo
 /*
 GetMerakiNetworkByMoid Read a 'meraki.Network' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMerakiNetworkByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMerakiNetworkByMoidRequest
 */
 func (a *MerakiApiService) GetMerakiNetworkByMoid(ctx context.Context, moid string) ApiGetMerakiNetworkByMoidRequest {
 	return ApiGetMerakiNetworkByMoidRequest{
@@ -478,8 +476,7 @@ func (a *MerakiApiService) GetMerakiNetworkByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//
-//	@return MerakiNetwork
+//  @return MerakiNetwork
 func (a *MerakiApiService) GetMerakiNetworkByMoidExecute(r ApiGetMerakiNetworkByMoidRequest) (*MerakiNetwork, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -695,8 +692,8 @@ func (r ApiGetMerakiNetworkListRequest) Execute() (*MerakiNetworkResponse, *http
 /*
 GetMerakiNetworkList Read a 'meraki.Network' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMerakiNetworkListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMerakiNetworkListRequest
 */
 func (a *MerakiApiService) GetMerakiNetworkList(ctx context.Context) ApiGetMerakiNetworkListRequest {
 	return ApiGetMerakiNetworkListRequest{
@@ -706,8 +703,7 @@ func (a *MerakiApiService) GetMerakiNetworkList(ctx context.Context) ApiGetMerak
 }
 
 // Execute executes the request
-//
-//	@return MerakiNetworkResponse
+//  @return MerakiNetworkResponse
 func (a *MerakiApiService) GetMerakiNetworkListExecute(r ApiGetMerakiNetworkListRequest) (*MerakiNetworkResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -894,9 +890,9 @@ func (r ApiGetMerakiOrganizationByMoidRequest) Execute() (*MerakiOrganization, *
 /*
 GetMerakiOrganizationByMoid Read a 'meraki.Organization' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMerakiOrganizationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMerakiOrganizationByMoidRequest
 */
 func (a *MerakiApiService) GetMerakiOrganizationByMoid(ctx context.Context, moid string) ApiGetMerakiOrganizationByMoidRequest {
 	return ApiGetMerakiOrganizationByMoidRequest{
@@ -907,8 +903,7 @@ func (a *MerakiApiService) GetMerakiOrganizationByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return MerakiOrganization
+//  @return MerakiOrganization
 func (a *MerakiApiService) GetMerakiOrganizationByMoidExecute(r ApiGetMerakiOrganizationByMoidRequest) (*MerakiOrganization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1124,8 +1119,8 @@ func (r ApiGetMerakiOrganizationListRequest) Execute() (*MerakiOrganizationRespo
 /*
 GetMerakiOrganizationList Read a 'meraki.Organization' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMerakiOrganizationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMerakiOrganizationListRequest
 */
 func (a *MerakiApiService) GetMerakiOrganizationList(ctx context.Context) ApiGetMerakiOrganizationListRequest {
 	return ApiGetMerakiOrganizationListRequest{
@@ -1135,8 +1130,7 @@ func (a *MerakiApiService) GetMerakiOrganizationList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//
-//	@return MerakiOrganizationResponse
+//  @return MerakiOrganizationResponse
 func (a *MerakiApiService) GetMerakiOrganizationListExecute(r ApiGetMerakiOrganizationListRequest) (*MerakiOrganizationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1323,9 +1317,9 @@ func (r ApiGetMerakiPortProfileByMoidRequest) Execute() (*MerakiPortProfile, *ht
 /*
 GetMerakiPortProfileByMoid Read a 'meraki.PortProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMerakiPortProfileByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMerakiPortProfileByMoidRequest
 */
 func (a *MerakiApiService) GetMerakiPortProfileByMoid(ctx context.Context, moid string) ApiGetMerakiPortProfileByMoidRequest {
 	return ApiGetMerakiPortProfileByMoidRequest{
@@ -1336,8 +1330,7 @@ func (a *MerakiApiService) GetMerakiPortProfileByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return MerakiPortProfile
+//  @return MerakiPortProfile
 func (a *MerakiApiService) GetMerakiPortProfileByMoidExecute(r ApiGetMerakiPortProfileByMoidRequest) (*MerakiPortProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1553,8 +1546,8 @@ func (r ApiGetMerakiPortProfileListRequest) Execute() (*MerakiPortProfileRespons
 /*
 GetMerakiPortProfileList Read a 'meraki.PortProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMerakiPortProfileListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMerakiPortProfileListRequest
 */
 func (a *MerakiApiService) GetMerakiPortProfileList(ctx context.Context) ApiGetMerakiPortProfileListRequest {
 	return ApiGetMerakiPortProfileListRequest{
@@ -1564,8 +1557,7 @@ func (a *MerakiApiService) GetMerakiPortProfileList(ctx context.Context) ApiGetM
 }
 
 // Execute executes the request
-//
-//	@return MerakiPortProfileResponse
+//  @return MerakiPortProfileResponse
 func (a *MerakiApiService) GetMerakiPortProfileListExecute(r ApiGetMerakiPortProfileListRequest) (*MerakiPortProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1752,9 +1744,9 @@ func (r ApiGetMerakiTagByMoidRequest) Execute() (*MerakiTag, *http.Response, err
 /*
 GetMerakiTagByMoid Read a 'meraki.Tag' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMerakiTagByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMerakiTagByMoidRequest
 */
 func (a *MerakiApiService) GetMerakiTagByMoid(ctx context.Context, moid string) ApiGetMerakiTagByMoidRequest {
 	return ApiGetMerakiTagByMoidRequest{
@@ -1765,8 +1757,7 @@ func (a *MerakiApiService) GetMerakiTagByMoid(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//
-//	@return MerakiTag
+//  @return MerakiTag
 func (a *MerakiApiService) GetMerakiTagByMoidExecute(r ApiGetMerakiTagByMoidRequest) (*MerakiTag, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1982,8 +1973,8 @@ func (r ApiGetMerakiTagListRequest) Execute() (*MerakiTagResponse, *http.Respons
 /*
 GetMerakiTagList Read a 'meraki.Tag' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMerakiTagListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMerakiTagListRequest
 */
 func (a *MerakiApiService) GetMerakiTagList(ctx context.Context) ApiGetMerakiTagListRequest {
 	return ApiGetMerakiTagListRequest{
@@ -1993,8 +1984,7 @@ func (a *MerakiApiService) GetMerakiTagList(ctx context.Context) ApiGetMerakiTag
 }
 
 // Execute executes the request
-//
-//	@return MerakiTagResponse
+//  @return MerakiTagResponse
 func (a *MerakiApiService) GetMerakiTagListExecute(r ApiGetMerakiTagListRequest) (*MerakiTagResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

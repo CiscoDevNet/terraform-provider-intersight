@@ -898,11 +898,11 @@ func dataSourceStorageHitachiExternalParityGroupRead(c context.Context, d *schem
 	}
 
 	if v, ok := d.GetOk("storage_utilization"); ok {
-		p := make([]models.StorageBaseCapacity, 0, 1)
+		p := make([]models.StorageHitachiCapacity, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.StorageBaseCapacity{}
+			o := &models.StorageHitachiCapacity{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1119,7 +1119,7 @@ func dataSourceStorageHitachiExternalParityGroupRead(c context.Context, d *schem
 
 				temp["spaces"] = flattenListStorageSpace(s.GetSpaces(), d)
 
-				temp["storage_utilization"] = flattenMapStorageBaseCapacity(s.GetStorageUtilization(), d)
+				temp["storage_utilization"] = flattenMapStorageHitachiCapacity(s.GetStorageUtilization(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["total_open_volume_capacity"] = (s.GetTotalOpenVolumeCapacity())

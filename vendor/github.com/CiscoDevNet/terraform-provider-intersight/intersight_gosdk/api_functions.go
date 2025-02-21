@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateFunctionsFunctionRequest) Execute() (*FunctionsFunction, *http.
 /*
 CreateFunctionsFunction Create a 'functions.Function' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFunctionsFunctionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFunctionsFunctionRequest
 */
 func (a *FunctionsApiService) CreateFunctionsFunction(ctx context.Context) ApiCreateFunctionsFunctionRequest {
 	return ApiCreateFunctionsFunctionRequest{
@@ -67,8 +67,7 @@ func (a *FunctionsApiService) CreateFunctionsFunction(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//
-//	@return FunctionsFunction
+//  @return FunctionsFunction
 func (a *FunctionsApiService) CreateFunctionsFunctionExecute(r ApiCreateFunctionsFunctionRequest) (*FunctionsFunction, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -238,8 +237,8 @@ func (r ApiCreateFunctionsFunctionVersionRequest) Execute() (*FunctionsFunctionV
 /*
 CreateFunctionsFunctionVersion Create a 'functions.FunctionVersion' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFunctionsFunctionVersionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFunctionsFunctionVersionRequest
 */
 func (a *FunctionsApiService) CreateFunctionsFunctionVersion(ctx context.Context) ApiCreateFunctionsFunctionVersionRequest {
 	return ApiCreateFunctionsFunctionVersionRequest{
@@ -249,8 +248,7 @@ func (a *FunctionsApiService) CreateFunctionsFunctionVersion(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return FunctionsFunctionVersion
+//  @return FunctionsFunctionVersion
 func (a *FunctionsApiService) CreateFunctionsFunctionVersionExecute(r ApiCreateFunctionsFunctionVersionRequest) (*FunctionsFunctionVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -420,8 +418,8 @@ func (r ApiCreateFunctionsRuntimeRequest) Execute() (*FunctionsRuntime, *http.Re
 /*
 CreateFunctionsRuntime Create a 'functions.Runtime' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFunctionsRuntimeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFunctionsRuntimeRequest
 */
 func (a *FunctionsApiService) CreateFunctionsRuntime(ctx context.Context) ApiCreateFunctionsRuntimeRequest {
 	return ApiCreateFunctionsRuntimeRequest{
@@ -431,8 +429,7 @@ func (a *FunctionsApiService) CreateFunctionsRuntime(ctx context.Context) ApiCre
 }
 
 // Execute executes the request
-//
-//	@return FunctionsRuntime
+//  @return FunctionsRuntime
 func (a *FunctionsApiService) CreateFunctionsRuntimeExecute(r ApiCreateFunctionsRuntimeRequest) (*FunctionsRuntime, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -602,8 +599,8 @@ func (r ApiCreateFunctionsUploadRequest) Execute() (*FunctionsUpload, *http.Resp
 /*
 CreateFunctionsUpload Create a 'functions.Upload' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFunctionsUploadRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFunctionsUploadRequest
 */
 func (a *FunctionsApiService) CreateFunctionsUpload(ctx context.Context) ApiCreateFunctionsUploadRequest {
 	return ApiCreateFunctionsUploadRequest{
@@ -613,8 +610,7 @@ func (a *FunctionsApiService) CreateFunctionsUpload(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//
-//	@return FunctionsUpload
+//  @return FunctionsUpload
 func (a *FunctionsApiService) CreateFunctionsUploadExecute(r ApiCreateFunctionsUploadRequest) (*FunctionsUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -764,9 +760,9 @@ func (r ApiDeleteFunctionsFunctionRequest) Execute() (*http.Response, error) {
 /*
 DeleteFunctionsFunction Delete a 'functions.Function' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFunctionsFunctionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFunctionsFunctionRequest
 */
 func (a *FunctionsApiService) DeleteFunctionsFunction(ctx context.Context, moid string) ApiDeleteFunctionsFunctionRequest {
 	return ApiDeleteFunctionsFunctionRequest{
@@ -906,9 +902,9 @@ func (r ApiDeleteFunctionsRuntimeRequest) Execute() (*http.Response, error) {
 /*
 DeleteFunctionsRuntime Delete a 'functions.Runtime' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFunctionsRuntimeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFunctionsRuntimeRequest
 */
 func (a *FunctionsApiService) DeleteFunctionsRuntime(ctx context.Context, moid string) ApiDeleteFunctionsRuntimeRequest {
 	return ApiDeleteFunctionsRuntimeRequest{
@@ -1048,9 +1044,9 @@ func (r ApiDeleteFunctionsUploadRequest) Execute() (*http.Response, error) {
 /*
 DeleteFunctionsUpload Delete a 'functions.Upload' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFunctionsUploadRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFunctionsUploadRequest
 */
 func (a *FunctionsApiService) DeleteFunctionsUpload(ctx context.Context, moid string) ApiDeleteFunctionsUploadRequest {
 	return ApiDeleteFunctionsUploadRequest{
@@ -1190,9 +1186,9 @@ func (r ApiGetFunctionsFunctionByMoidRequest) Execute() (*FunctionsFunction, *ht
 /*
 GetFunctionsFunctionByMoid Read a 'functions.Function' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFunctionsFunctionByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFunctionsFunctionByMoidRequest
 */
 func (a *FunctionsApiService) GetFunctionsFunctionByMoid(ctx context.Context, moid string) ApiGetFunctionsFunctionByMoidRequest {
 	return ApiGetFunctionsFunctionByMoidRequest{
@@ -1203,8 +1199,7 @@ func (a *FunctionsApiService) GetFunctionsFunctionByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return FunctionsFunction
+//  @return FunctionsFunction
 func (a *FunctionsApiService) GetFunctionsFunctionByMoidExecute(r ApiGetFunctionsFunctionByMoidRequest) (*FunctionsFunction, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1420,8 +1415,8 @@ func (r ApiGetFunctionsFunctionListRequest) Execute() (*FunctionsFunctionRespons
 /*
 GetFunctionsFunctionList Read a 'functions.Function' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFunctionsFunctionListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFunctionsFunctionListRequest
 */
 func (a *FunctionsApiService) GetFunctionsFunctionList(ctx context.Context) ApiGetFunctionsFunctionListRequest {
 	return ApiGetFunctionsFunctionListRequest{
@@ -1431,8 +1426,7 @@ func (a *FunctionsApiService) GetFunctionsFunctionList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//
-//	@return FunctionsFunctionResponse
+//  @return FunctionsFunctionResponse
 func (a *FunctionsApiService) GetFunctionsFunctionListExecute(r ApiGetFunctionsFunctionListRequest) (*FunctionsFunctionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1619,9 +1613,9 @@ func (r ApiGetFunctionsFunctionVersionByMoidRequest) Execute() (*FunctionsFuncti
 /*
 GetFunctionsFunctionVersionByMoid Read a 'functions.FunctionVersion' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFunctionsFunctionVersionByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFunctionsFunctionVersionByMoidRequest
 */
 func (a *FunctionsApiService) GetFunctionsFunctionVersionByMoid(ctx context.Context, moid string) ApiGetFunctionsFunctionVersionByMoidRequest {
 	return ApiGetFunctionsFunctionVersionByMoidRequest{
@@ -1632,8 +1626,7 @@ func (a *FunctionsApiService) GetFunctionsFunctionVersionByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return FunctionsFunctionVersion
+//  @return FunctionsFunctionVersion
 func (a *FunctionsApiService) GetFunctionsFunctionVersionByMoidExecute(r ApiGetFunctionsFunctionVersionByMoidRequest) (*FunctionsFunctionVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1849,8 +1842,8 @@ func (r ApiGetFunctionsFunctionVersionListRequest) Execute() (*FunctionsFunction
 /*
 GetFunctionsFunctionVersionList Read a 'functions.FunctionVersion' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFunctionsFunctionVersionListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFunctionsFunctionVersionListRequest
 */
 func (a *FunctionsApiService) GetFunctionsFunctionVersionList(ctx context.Context) ApiGetFunctionsFunctionVersionListRequest {
 	return ApiGetFunctionsFunctionVersionListRequest{
@@ -1860,8 +1853,7 @@ func (a *FunctionsApiService) GetFunctionsFunctionVersionList(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return FunctionsFunctionVersionResponse
+//  @return FunctionsFunctionVersionResponse
 func (a *FunctionsApiService) GetFunctionsFunctionVersionListExecute(r ApiGetFunctionsFunctionVersionListRequest) (*FunctionsFunctionVersionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2048,9 +2040,9 @@ func (r ApiGetFunctionsRuntimeByMoidRequest) Execute() (*FunctionsRuntime, *http
 /*
 GetFunctionsRuntimeByMoid Read a 'functions.Runtime' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFunctionsRuntimeByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFunctionsRuntimeByMoidRequest
 */
 func (a *FunctionsApiService) GetFunctionsRuntimeByMoid(ctx context.Context, moid string) ApiGetFunctionsRuntimeByMoidRequest {
 	return ApiGetFunctionsRuntimeByMoidRequest{
@@ -2061,8 +2053,7 @@ func (a *FunctionsApiService) GetFunctionsRuntimeByMoid(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return FunctionsRuntime
+//  @return FunctionsRuntime
 func (a *FunctionsApiService) GetFunctionsRuntimeByMoidExecute(r ApiGetFunctionsRuntimeByMoidRequest) (*FunctionsRuntime, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2278,8 +2269,8 @@ func (r ApiGetFunctionsRuntimeListRequest) Execute() (*FunctionsRuntimeResponse,
 /*
 GetFunctionsRuntimeList Read a 'functions.Runtime' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFunctionsRuntimeListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFunctionsRuntimeListRequest
 */
 func (a *FunctionsApiService) GetFunctionsRuntimeList(ctx context.Context) ApiGetFunctionsRuntimeListRequest {
 	return ApiGetFunctionsRuntimeListRequest{
@@ -2289,8 +2280,7 @@ func (a *FunctionsApiService) GetFunctionsRuntimeList(ctx context.Context) ApiGe
 }
 
 // Execute executes the request
-//
-//	@return FunctionsRuntimeResponse
+//  @return FunctionsRuntimeResponse
 func (a *FunctionsApiService) GetFunctionsRuntimeListExecute(r ApiGetFunctionsRuntimeListRequest) (*FunctionsRuntimeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2477,9 +2467,9 @@ func (r ApiGetFunctionsUploadByMoidRequest) Execute() (*FunctionsUpload, *http.R
 /*
 GetFunctionsUploadByMoid Read a 'functions.Upload' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFunctionsUploadByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFunctionsUploadByMoidRequest
 */
 func (a *FunctionsApiService) GetFunctionsUploadByMoid(ctx context.Context, moid string) ApiGetFunctionsUploadByMoidRequest {
 	return ApiGetFunctionsUploadByMoidRequest{
@@ -2490,8 +2480,7 @@ func (a *FunctionsApiService) GetFunctionsUploadByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return FunctionsUpload
+//  @return FunctionsUpload
 func (a *FunctionsApiService) GetFunctionsUploadByMoidExecute(r ApiGetFunctionsUploadByMoidRequest) (*FunctionsUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2707,8 +2696,8 @@ func (r ApiGetFunctionsUploadListRequest) Execute() (*FunctionsUploadResponse, *
 /*
 GetFunctionsUploadList Read a 'functions.Upload' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFunctionsUploadListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFunctionsUploadListRequest
 */
 func (a *FunctionsApiService) GetFunctionsUploadList(ctx context.Context) ApiGetFunctionsUploadListRequest {
 	return ApiGetFunctionsUploadListRequest{
@@ -2718,8 +2707,7 @@ func (a *FunctionsApiService) GetFunctionsUploadList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//
-//	@return FunctionsUploadResponse
+//  @return FunctionsUploadResponse
 func (a *FunctionsApiService) GetFunctionsUploadListExecute(r ApiGetFunctionsUploadListRequest) (*FunctionsUploadResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2920,9 +2908,9 @@ func (r ApiPatchFunctionsFunctionRequest) Execute() (*FunctionsFunction, *http.R
 /*
 PatchFunctionsFunction Update a 'functions.Function' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFunctionsFunctionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFunctionsFunctionRequest
 */
 func (a *FunctionsApiService) PatchFunctionsFunction(ctx context.Context, moid string) ApiPatchFunctionsFunctionRequest {
 	return ApiPatchFunctionsFunctionRequest{
@@ -2933,8 +2921,7 @@ func (a *FunctionsApiService) PatchFunctionsFunction(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//
-//	@return FunctionsFunction
+//  @return FunctionsFunction
 func (a *FunctionsApiService) PatchFunctionsFunctionExecute(r ApiPatchFunctionsFunctionRequest) (*FunctionsFunction, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3096,9 +3083,9 @@ func (r ApiPatchFunctionsFunctionVersionRequest) Execute() (*FunctionsFunctionVe
 /*
 PatchFunctionsFunctionVersion Update a 'functions.FunctionVersion' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFunctionsFunctionVersionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFunctionsFunctionVersionRequest
 */
 func (a *FunctionsApiService) PatchFunctionsFunctionVersion(ctx context.Context, moid string) ApiPatchFunctionsFunctionVersionRequest {
 	return ApiPatchFunctionsFunctionVersionRequest{
@@ -3109,8 +3096,7 @@ func (a *FunctionsApiService) PatchFunctionsFunctionVersion(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return FunctionsFunctionVersion
+//  @return FunctionsFunctionVersion
 func (a *FunctionsApiService) PatchFunctionsFunctionVersionExecute(r ApiPatchFunctionsFunctionVersionRequest) (*FunctionsFunctionVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3272,9 +3258,9 @@ func (r ApiPatchFunctionsRuntimeRequest) Execute() (*FunctionsRuntime, *http.Res
 /*
 PatchFunctionsRuntime Update a 'functions.Runtime' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFunctionsRuntimeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFunctionsRuntimeRequest
 */
 func (a *FunctionsApiService) PatchFunctionsRuntime(ctx context.Context, moid string) ApiPatchFunctionsRuntimeRequest {
 	return ApiPatchFunctionsRuntimeRequest{
@@ -3285,8 +3271,7 @@ func (a *FunctionsApiService) PatchFunctionsRuntime(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//
-//	@return FunctionsRuntime
+//  @return FunctionsRuntime
 func (a *FunctionsApiService) PatchFunctionsRuntimeExecute(r ApiPatchFunctionsRuntimeRequest) (*FunctionsRuntime, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3448,9 +3433,9 @@ func (r ApiPatchFunctionsUploadRequest) Execute() (*FunctionsUpload, *http.Respo
 /*
 PatchFunctionsUpload Update a 'functions.Upload' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFunctionsUploadRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFunctionsUploadRequest
 */
 func (a *FunctionsApiService) PatchFunctionsUpload(ctx context.Context, moid string) ApiPatchFunctionsUploadRequest {
 	return ApiPatchFunctionsUploadRequest{
@@ -3461,8 +3446,7 @@ func (a *FunctionsApiService) PatchFunctionsUpload(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//
-//	@return FunctionsUpload
+//  @return FunctionsUpload
 func (a *FunctionsApiService) PatchFunctionsUploadExecute(r ApiPatchFunctionsUploadRequest) (*FunctionsUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3624,9 +3608,9 @@ func (r ApiUpdateFunctionsFunctionRequest) Execute() (*FunctionsFunction, *http.
 /*
 UpdateFunctionsFunction Update a 'functions.Function' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFunctionsFunctionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFunctionsFunctionRequest
 */
 func (a *FunctionsApiService) UpdateFunctionsFunction(ctx context.Context, moid string) ApiUpdateFunctionsFunctionRequest {
 	return ApiUpdateFunctionsFunctionRequest{
@@ -3637,8 +3621,7 @@ func (a *FunctionsApiService) UpdateFunctionsFunction(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return FunctionsFunction
+//  @return FunctionsFunction
 func (a *FunctionsApiService) UpdateFunctionsFunctionExecute(r ApiUpdateFunctionsFunctionRequest) (*FunctionsFunction, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3800,9 +3783,9 @@ func (r ApiUpdateFunctionsFunctionVersionRequest) Execute() (*FunctionsFunctionV
 /*
 UpdateFunctionsFunctionVersion Update a 'functions.FunctionVersion' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFunctionsFunctionVersionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFunctionsFunctionVersionRequest
 */
 func (a *FunctionsApiService) UpdateFunctionsFunctionVersion(ctx context.Context, moid string) ApiUpdateFunctionsFunctionVersionRequest {
 	return ApiUpdateFunctionsFunctionVersionRequest{
@@ -3813,8 +3796,7 @@ func (a *FunctionsApiService) UpdateFunctionsFunctionVersion(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return FunctionsFunctionVersion
+//  @return FunctionsFunctionVersion
 func (a *FunctionsApiService) UpdateFunctionsFunctionVersionExecute(r ApiUpdateFunctionsFunctionVersionRequest) (*FunctionsFunctionVersion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3976,9 +3958,9 @@ func (r ApiUpdateFunctionsRuntimeRequest) Execute() (*FunctionsRuntime, *http.Re
 /*
 UpdateFunctionsRuntime Update a 'functions.Runtime' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFunctionsRuntimeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFunctionsRuntimeRequest
 */
 func (a *FunctionsApiService) UpdateFunctionsRuntime(ctx context.Context, moid string) ApiUpdateFunctionsRuntimeRequest {
 	return ApiUpdateFunctionsRuntimeRequest{
@@ -3989,8 +3971,7 @@ func (a *FunctionsApiService) UpdateFunctionsRuntime(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//
-//	@return FunctionsRuntime
+//  @return FunctionsRuntime
 func (a *FunctionsApiService) UpdateFunctionsRuntimeExecute(r ApiUpdateFunctionsRuntimeRequest) (*FunctionsRuntime, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4152,9 +4133,9 @@ func (r ApiUpdateFunctionsUploadRequest) Execute() (*FunctionsUpload, *http.Resp
 /*
 UpdateFunctionsUpload Update a 'functions.Upload' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFunctionsUploadRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFunctionsUploadRequest
 */
 func (a *FunctionsApiService) UpdateFunctionsUpload(ctx context.Context, moid string) ApiUpdateFunctionsUploadRequest {
 	return ApiUpdateFunctionsUploadRequest{
@@ -4165,8 +4146,7 @@ func (a *FunctionsApiService) UpdateFunctionsUpload(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//
-//	@return FunctionsUpload
+//  @return FunctionsUpload
 func (a *FunctionsApiService) UpdateFunctionsUploadExecute(r ApiUpdateFunctionsUploadRequest) (*FunctionsUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

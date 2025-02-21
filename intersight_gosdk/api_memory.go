@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateMemoryPersistentMemoryPolicyRequest) Execute() (*MemoryPersiste
 /*
 CreateMemoryPersistentMemoryPolicy Create a 'memory.PersistentMemoryPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateMemoryPersistentMemoryPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateMemoryPersistentMemoryPolicyRequest
 */
 func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicy(ctx context.Context) ApiCreateMemoryPersistentMemoryPolicyRequest {
 	return ApiCreateMemoryPersistentMemoryPolicyRequest{
@@ -67,8 +67,7 @@ func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryPolicy
+//  @return MemoryPersistentMemoryPolicy
 func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicyExecute(r ApiCreateMemoryPersistentMemoryPolicyRequest) (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -238,8 +237,8 @@ func (r ApiCreateMemoryPolicyRequest) Execute() (*MemoryPolicy, *http.Response, 
 /*
 CreateMemoryPolicy Create a 'memory.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateMemoryPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateMemoryPolicyRequest
 */
 func (a *MemoryApiService) CreateMemoryPolicy(ctx context.Context) ApiCreateMemoryPolicyRequest {
 	return ApiCreateMemoryPolicyRequest{
@@ -249,8 +248,7 @@ func (a *MemoryApiService) CreateMemoryPolicy(ctx context.Context) ApiCreateMemo
 }
 
 // Execute executes the request
-//
-//	@return MemoryPolicy
+//  @return MemoryPolicy
 func (a *MemoryApiService) CreateMemoryPolicyExecute(r ApiCreateMemoryPolicyRequest) (*MemoryPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -400,9 +398,9 @@ func (r ApiDeleteMemoryPersistentMemoryPolicyRequest) Execute() (*http.Response,
 /*
 DeleteMemoryPersistentMemoryPolicy Delete a 'memory.PersistentMemoryPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteMemoryPersistentMemoryPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteMemoryPersistentMemoryPolicyRequest
 */
 func (a *MemoryApiService) DeleteMemoryPersistentMemoryPolicy(ctx context.Context, moid string) ApiDeleteMemoryPersistentMemoryPolicyRequest {
 	return ApiDeleteMemoryPersistentMemoryPolicyRequest{
@@ -542,9 +540,9 @@ func (r ApiDeleteMemoryPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteMemoryPolicy Delete a 'memory.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteMemoryPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteMemoryPolicyRequest
 */
 func (a *MemoryApiService) DeleteMemoryPolicy(ctx context.Context, moid string) ApiDeleteMemoryPolicyRequest {
 	return ApiDeleteMemoryPolicyRequest{
@@ -684,9 +682,9 @@ func (r ApiGetMemoryArrayByMoidRequest) Execute() (*MemoryArray, *http.Response,
 /*
 GetMemoryArrayByMoid Read a 'memory.Array' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMemoryArrayByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMemoryArrayByMoidRequest
 */
 func (a *MemoryApiService) GetMemoryArrayByMoid(ctx context.Context, moid string) ApiGetMemoryArrayByMoidRequest {
 	return ApiGetMemoryArrayByMoidRequest{
@@ -697,8 +695,7 @@ func (a *MemoryApiService) GetMemoryArrayByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//
-//	@return MemoryArray
+//  @return MemoryArray
 func (a *MemoryApiService) GetMemoryArrayByMoidExecute(r ApiGetMemoryArrayByMoidRequest) (*MemoryArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -914,8 +911,8 @@ func (r ApiGetMemoryArrayListRequest) Execute() (*MemoryArrayResponse, *http.Res
 /*
 GetMemoryArrayList Read a 'memory.Array' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMemoryArrayListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMemoryArrayListRequest
 */
 func (a *MemoryApiService) GetMemoryArrayList(ctx context.Context) ApiGetMemoryArrayListRequest {
 	return ApiGetMemoryArrayListRequest{
@@ -925,8 +922,7 @@ func (a *MemoryApiService) GetMemoryArrayList(ctx context.Context) ApiGetMemoryA
 }
 
 // Execute executes the request
-//
-//	@return MemoryArrayResponse
+//  @return MemoryArrayResponse
 func (a *MemoryApiService) GetMemoryArrayListExecute(r ApiGetMemoryArrayListRequest) (*MemoryArrayResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1113,9 +1109,9 @@ func (r ApiGetMemoryPersistentMemoryConfigResultByMoidRequest) Execute() (*Memor
 /*
 GetMemoryPersistentMemoryConfigResultByMoid Read a 'memory.PersistentMemoryConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMemoryPersistentMemoryConfigResultByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMemoryPersistentMemoryConfigResultByMoidRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryConfigResultByMoidRequest {
 	return ApiGetMemoryPersistentMemoryConfigResultByMoidRequest{
@@ -1126,8 +1122,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoid(ctx conte
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryConfigResult
+//  @return MemoryPersistentMemoryConfigResult
 func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoidExecute(r ApiGetMemoryPersistentMemoryConfigResultByMoidRequest) (*MemoryPersistentMemoryConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1343,8 +1338,8 @@ func (r ApiGetMemoryPersistentMemoryConfigResultListRequest) Execute() (*MemoryP
 /*
 GetMemoryPersistentMemoryConfigResultList Read a 'memory.PersistentMemoryConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMemoryPersistentMemoryConfigResultListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMemoryPersistentMemoryConfigResultListRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultList(ctx context.Context) ApiGetMemoryPersistentMemoryConfigResultListRequest {
 	return ApiGetMemoryPersistentMemoryConfigResultListRequest{
@@ -1354,8 +1349,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultList(ctx context
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryConfigResultResponse
+//  @return MemoryPersistentMemoryConfigResultResponse
 func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultListExecute(r ApiGetMemoryPersistentMemoryConfigResultListRequest) (*MemoryPersistentMemoryConfigResultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1542,9 +1536,9 @@ func (r ApiGetMemoryPersistentMemoryConfigurationByMoidRequest) Execute() (*Memo
 /*
 GetMemoryPersistentMemoryConfigurationByMoid Read a 'memory.PersistentMemoryConfiguration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMemoryPersistentMemoryConfigurationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMemoryPersistentMemoryConfigurationByMoidRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryConfigurationByMoidRequest {
 	return ApiGetMemoryPersistentMemoryConfigurationByMoidRequest{
@@ -1555,8 +1549,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoid(ctx cont
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryConfiguration
+//  @return MemoryPersistentMemoryConfiguration
 func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoidExecute(r ApiGetMemoryPersistentMemoryConfigurationByMoidRequest) (*MemoryPersistentMemoryConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1772,8 +1765,8 @@ func (r ApiGetMemoryPersistentMemoryConfigurationListRequest) Execute() (*Memory
 /*
 GetMemoryPersistentMemoryConfigurationList Read a 'memory.PersistentMemoryConfiguration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMemoryPersistentMemoryConfigurationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMemoryPersistentMemoryConfigurationListRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationList(ctx context.Context) ApiGetMemoryPersistentMemoryConfigurationListRequest {
 	return ApiGetMemoryPersistentMemoryConfigurationListRequest{
@@ -1783,8 +1776,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationList(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryConfigurationResponse
+//  @return MemoryPersistentMemoryConfigurationResponse
 func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationListExecute(r ApiGetMemoryPersistentMemoryConfigurationListRequest) (*MemoryPersistentMemoryConfigurationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1971,9 +1963,9 @@ func (r ApiGetMemoryPersistentMemoryNamespaceByMoidRequest) Execute() (*MemoryPe
 /*
 GetMemoryPersistentMemoryNamespaceByMoid Read a 'memory.PersistentMemoryNamespace' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMemoryPersistentMemoryNamespaceByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMemoryPersistentMemoryNamespaceByMoidRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryNamespaceByMoidRequest {
 	return ApiGetMemoryPersistentMemoryNamespaceByMoidRequest{
@@ -1984,8 +1976,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoid(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryNamespace
+//  @return MemoryPersistentMemoryNamespace
 func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoidExecute(r ApiGetMemoryPersistentMemoryNamespaceByMoidRequest) (*MemoryPersistentMemoryNamespace, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2125,9 +2116,9 @@ func (r ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest) Execute(
 /*
 GetMemoryPersistentMemoryNamespaceConfigResultByMoid Read a 'memory.PersistentMemoryNamespaceConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest {
 	return ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest{
@@ -2138,8 +2129,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoid(
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryNamespaceConfigResult
+//  @return MemoryPersistentMemoryNamespaceConfigResult
 func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoidExecute(r ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest) (*MemoryPersistentMemoryNamespaceConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2355,8 +2345,8 @@ func (r ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest) Execute() 
 /*
 GetMemoryPersistentMemoryNamespaceConfigResultList Read a 'memory.PersistentMemoryNamespaceConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultList(ctx context.Context) ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest {
 	return ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest{
@@ -2366,8 +2356,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultList(ct
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryNamespaceConfigResultResponse
+//  @return MemoryPersistentMemoryNamespaceConfigResultResponse
 func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultListExecute(r ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest) (*MemoryPersistentMemoryNamespaceConfigResultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2630,8 +2619,8 @@ func (r ApiGetMemoryPersistentMemoryNamespaceListRequest) Execute() (*MemoryPers
 /*
 GetMemoryPersistentMemoryNamespaceList Read a 'memory.PersistentMemoryNamespace' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMemoryPersistentMemoryNamespaceListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMemoryPersistentMemoryNamespaceListRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceList(ctx context.Context) ApiGetMemoryPersistentMemoryNamespaceListRequest {
 	return ApiGetMemoryPersistentMemoryNamespaceListRequest{
@@ -2641,8 +2630,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceList(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryNamespaceResponse
+//  @return MemoryPersistentMemoryNamespaceResponse
 func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceListExecute(r ApiGetMemoryPersistentMemoryNamespaceListRequest) (*MemoryPersistentMemoryNamespaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2829,9 +2817,9 @@ func (r ApiGetMemoryPersistentMemoryPolicyByMoidRequest) Execute() (*MemoryPersi
 /*
 GetMemoryPersistentMemoryPolicyByMoid Read a 'memory.PersistentMemoryPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMemoryPersistentMemoryPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMemoryPersistentMemoryPolicyByMoidRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryPolicyByMoidRequest {
 	return ApiGetMemoryPersistentMemoryPolicyByMoidRequest{
@@ -2842,8 +2830,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryPolicy
+//  @return MemoryPersistentMemoryPolicy
 func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoidExecute(r ApiGetMemoryPersistentMemoryPolicyByMoidRequest) (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3059,8 +3046,8 @@ func (r ApiGetMemoryPersistentMemoryPolicyListRequest) Execute() (*MemoryPersist
 /*
 GetMemoryPersistentMemoryPolicyList Read a 'memory.PersistentMemoryPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMemoryPersistentMemoryPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMemoryPersistentMemoryPolicyListRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyList(ctx context.Context) ApiGetMemoryPersistentMemoryPolicyListRequest {
 	return ApiGetMemoryPersistentMemoryPolicyListRequest{
@@ -3070,8 +3057,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyList(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryPolicyResponse
+//  @return MemoryPersistentMemoryPolicyResponse
 func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyListExecute(r ApiGetMemoryPersistentMemoryPolicyListRequest) (*MemoryPersistentMemoryPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3258,9 +3244,9 @@ func (r ApiGetMemoryPersistentMemoryRegionByMoidRequest) Execute() (*MemoryPersi
 /*
 GetMemoryPersistentMemoryRegionByMoid Read a 'memory.PersistentMemoryRegion' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMemoryPersistentMemoryRegionByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMemoryPersistentMemoryRegionByMoidRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryRegionByMoidRequest {
 	return ApiGetMemoryPersistentMemoryRegionByMoidRequest{
@@ -3271,8 +3257,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoid(ctx context.Con
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryRegion
+//  @return MemoryPersistentMemoryRegion
 func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoidExecute(r ApiGetMemoryPersistentMemoryRegionByMoidRequest) (*MemoryPersistentMemoryRegion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3488,8 +3473,8 @@ func (r ApiGetMemoryPersistentMemoryRegionListRequest) Execute() (*MemoryPersist
 /*
 GetMemoryPersistentMemoryRegionList Read a 'memory.PersistentMemoryRegion' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMemoryPersistentMemoryRegionListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMemoryPersistentMemoryRegionListRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryRegionList(ctx context.Context) ApiGetMemoryPersistentMemoryRegionListRequest {
 	return ApiGetMemoryPersistentMemoryRegionListRequest{
@@ -3499,8 +3484,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionList(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryRegionResponse
+//  @return MemoryPersistentMemoryRegionResponse
 func (a *MemoryApiService) GetMemoryPersistentMemoryRegionListExecute(r ApiGetMemoryPersistentMemoryRegionListRequest) (*MemoryPersistentMemoryRegionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3687,9 +3671,9 @@ func (r ApiGetMemoryPersistentMemoryUnitByMoidRequest) Execute() (*MemoryPersist
 /*
 GetMemoryPersistentMemoryUnitByMoid Read a 'memory.PersistentMemoryUnit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMemoryPersistentMemoryUnitByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMemoryPersistentMemoryUnitByMoidRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryUnitByMoidRequest {
 	return ApiGetMemoryPersistentMemoryUnitByMoidRequest{
@@ -3700,8 +3684,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryUnit
+//  @return MemoryPersistentMemoryUnit
 func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoidExecute(r ApiGetMemoryPersistentMemoryUnitByMoidRequest) (*MemoryPersistentMemoryUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3917,8 +3900,8 @@ func (r ApiGetMemoryPersistentMemoryUnitListRequest) Execute() (*MemoryPersisten
 /*
 GetMemoryPersistentMemoryUnitList Read a 'memory.PersistentMemoryUnit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMemoryPersistentMemoryUnitListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMemoryPersistentMemoryUnitListRequest
 */
 func (a *MemoryApiService) GetMemoryPersistentMemoryUnitList(ctx context.Context) ApiGetMemoryPersistentMemoryUnitListRequest {
 	return ApiGetMemoryPersistentMemoryUnitListRequest{
@@ -3928,8 +3911,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitList(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryUnitResponse
+//  @return MemoryPersistentMemoryUnitResponse
 func (a *MemoryApiService) GetMemoryPersistentMemoryUnitListExecute(r ApiGetMemoryPersistentMemoryUnitListRequest) (*MemoryPersistentMemoryUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4116,9 +4098,9 @@ func (r ApiGetMemoryPolicyByMoidRequest) Execute() (*MemoryPolicy, *http.Respons
 /*
 GetMemoryPolicyByMoid Read a 'memory.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMemoryPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMemoryPolicyByMoidRequest
 */
 func (a *MemoryApiService) GetMemoryPolicyByMoid(ctx context.Context, moid string) ApiGetMemoryPolicyByMoidRequest {
 	return ApiGetMemoryPolicyByMoidRequest{
@@ -4129,8 +4111,7 @@ func (a *MemoryApiService) GetMemoryPolicyByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//
-//	@return MemoryPolicy
+//  @return MemoryPolicy
 func (a *MemoryApiService) GetMemoryPolicyByMoidExecute(r ApiGetMemoryPolicyByMoidRequest) (*MemoryPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4270,9 +4251,9 @@ func (r ApiGetMemoryPolicyInventoryByMoidRequest) Execute() (*MemoryPolicyInvent
 /*
 GetMemoryPolicyInventoryByMoid Read a 'memory.PolicyInventory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMemoryPolicyInventoryByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMemoryPolicyInventoryByMoidRequest
 */
 func (a *MemoryApiService) GetMemoryPolicyInventoryByMoid(ctx context.Context, moid string) ApiGetMemoryPolicyInventoryByMoidRequest {
 	return ApiGetMemoryPolicyInventoryByMoidRequest{
@@ -4283,8 +4264,7 @@ func (a *MemoryApiService) GetMemoryPolicyInventoryByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return MemoryPolicyInventory
+//  @return MemoryPolicyInventory
 func (a *MemoryApiService) GetMemoryPolicyInventoryByMoidExecute(r ApiGetMemoryPolicyInventoryByMoidRequest) (*MemoryPolicyInventory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4500,8 +4480,8 @@ func (r ApiGetMemoryPolicyInventoryListRequest) Execute() (*MemoryPolicyInventor
 /*
 GetMemoryPolicyInventoryList Read a 'memory.PolicyInventory' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMemoryPolicyInventoryListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMemoryPolicyInventoryListRequest
 */
 func (a *MemoryApiService) GetMemoryPolicyInventoryList(ctx context.Context) ApiGetMemoryPolicyInventoryListRequest {
 	return ApiGetMemoryPolicyInventoryListRequest{
@@ -4511,8 +4491,7 @@ func (a *MemoryApiService) GetMemoryPolicyInventoryList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//
-//	@return MemoryPolicyInventoryResponse
+//  @return MemoryPolicyInventoryResponse
 func (a *MemoryApiService) GetMemoryPolicyInventoryListExecute(r ApiGetMemoryPolicyInventoryListRequest) (*MemoryPolicyInventoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4775,8 +4754,8 @@ func (r ApiGetMemoryPolicyListRequest) Execute() (*MemoryPolicyResponse, *http.R
 /*
 GetMemoryPolicyList Read a 'memory.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMemoryPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMemoryPolicyListRequest
 */
 func (a *MemoryApiService) GetMemoryPolicyList(ctx context.Context) ApiGetMemoryPolicyListRequest {
 	return ApiGetMemoryPolicyListRequest{
@@ -4786,8 +4765,7 @@ func (a *MemoryApiService) GetMemoryPolicyList(ctx context.Context) ApiGetMemory
 }
 
 // Execute executes the request
-//
-//	@return MemoryPolicyResponse
+//  @return MemoryPolicyResponse
 func (a *MemoryApiService) GetMemoryPolicyListExecute(r ApiGetMemoryPolicyListRequest) (*MemoryPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4974,9 +4952,9 @@ func (r ApiGetMemoryUnitByMoidRequest) Execute() (*MemoryUnit, *http.Response, e
 /*
 GetMemoryUnitByMoid Read a 'memory.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetMemoryUnitByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetMemoryUnitByMoidRequest
 */
 func (a *MemoryApiService) GetMemoryUnitByMoid(ctx context.Context, moid string) ApiGetMemoryUnitByMoidRequest {
 	return ApiGetMemoryUnitByMoidRequest{
@@ -4987,8 +4965,7 @@ func (a *MemoryApiService) GetMemoryUnitByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//
-//	@return MemoryUnit
+//  @return MemoryUnit
 func (a *MemoryApiService) GetMemoryUnitByMoidExecute(r ApiGetMemoryUnitByMoidRequest) (*MemoryUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5204,8 +5181,8 @@ func (r ApiGetMemoryUnitListRequest) Execute() (*MemoryUnitResponse, *http.Respo
 /*
 GetMemoryUnitList Read a 'memory.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMemoryUnitListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetMemoryUnitListRequest
 */
 func (a *MemoryApiService) GetMemoryUnitList(ctx context.Context) ApiGetMemoryUnitListRequest {
 	return ApiGetMemoryUnitListRequest{
@@ -5215,8 +5192,7 @@ func (a *MemoryApiService) GetMemoryUnitList(ctx context.Context) ApiGetMemoryUn
 }
 
 // Execute executes the request
-//
-//	@return MemoryUnitResponse
+//  @return MemoryUnitResponse
 func (a *MemoryApiService) GetMemoryUnitListExecute(r ApiGetMemoryUnitListRequest) (*MemoryUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5417,9 +5393,9 @@ func (r ApiPatchMemoryArrayRequest) Execute() (*MemoryArray, *http.Response, err
 /*
 PatchMemoryArray Update a 'memory.Array' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchMemoryArrayRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchMemoryArrayRequest
 */
 func (a *MemoryApiService) PatchMemoryArray(ctx context.Context, moid string) ApiPatchMemoryArrayRequest {
 	return ApiPatchMemoryArrayRequest{
@@ -5430,8 +5406,7 @@ func (a *MemoryApiService) PatchMemoryArray(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//
-//	@return MemoryArray
+//  @return MemoryArray
 func (a *MemoryApiService) PatchMemoryArrayExecute(r ApiPatchMemoryArrayRequest) (*MemoryArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5593,9 +5568,9 @@ func (r ApiPatchMemoryPersistentMemoryConfigResultRequest) Execute() (*MemoryPer
 /*
 PatchMemoryPersistentMemoryConfigResult Update a 'memory.PersistentMemoryConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchMemoryPersistentMemoryConfigResultRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchMemoryPersistentMemoryConfigResultRequest
 */
 func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResult(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryConfigResultRequest {
 	return ApiPatchMemoryPersistentMemoryConfigResultRequest{
@@ -5606,8 +5581,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResult(ctx context.C
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryConfigResult
+//  @return MemoryPersistentMemoryConfigResult
 func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResultExecute(r ApiPatchMemoryPersistentMemoryConfigResultRequest) (*MemoryPersistentMemoryConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5769,9 +5743,9 @@ func (r ApiPatchMemoryPersistentMemoryConfigurationRequest) Execute() (*MemoryPe
 /*
 PatchMemoryPersistentMemoryConfiguration Update a 'memory.PersistentMemoryConfiguration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchMemoryPersistentMemoryConfigurationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchMemoryPersistentMemoryConfigurationRequest
 */
 func (a *MemoryApiService) PatchMemoryPersistentMemoryConfiguration(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryConfigurationRequest {
 	return ApiPatchMemoryPersistentMemoryConfigurationRequest{
@@ -5782,8 +5756,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfiguration(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryConfiguration
+//  @return MemoryPersistentMemoryConfiguration
 func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigurationExecute(r ApiPatchMemoryPersistentMemoryConfigurationRequest) (*MemoryPersistentMemoryConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5945,9 +5918,9 @@ func (r ApiPatchMemoryPersistentMemoryNamespaceRequest) Execute() (*MemoryPersis
 /*
 PatchMemoryPersistentMemoryNamespace Update a 'memory.PersistentMemoryNamespace' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchMemoryPersistentMemoryNamespaceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchMemoryPersistentMemoryNamespaceRequest
 */
 func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespace(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryNamespaceRequest {
 	return ApiPatchMemoryPersistentMemoryNamespaceRequest{
@@ -5958,8 +5931,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespace(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryNamespace
+//  @return MemoryPersistentMemoryNamespace
 func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceExecute(r ApiPatchMemoryPersistentMemoryNamespaceRequest) (*MemoryPersistentMemoryNamespace, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6121,9 +6093,9 @@ func (r ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest) Execute() (*
 /*
 PatchMemoryPersistentMemoryNamespaceConfigResult Update a 'memory.PersistentMemoryNamespaceConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest
 */
 func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResult(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest {
 	return ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest{
@@ -6134,8 +6106,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResult(ctx 
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryNamespaceConfigResult
+//  @return MemoryPersistentMemoryNamespaceConfigResult
 func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResultExecute(r ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest) (*MemoryPersistentMemoryNamespaceConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6297,9 +6268,9 @@ func (r ApiPatchMemoryPersistentMemoryPolicyRequest) Execute() (*MemoryPersisten
 /*
 PatchMemoryPersistentMemoryPolicy Update a 'memory.PersistentMemoryPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchMemoryPersistentMemoryPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchMemoryPersistentMemoryPolicyRequest
 */
 func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicy(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryPolicyRequest {
 	return ApiPatchMemoryPersistentMemoryPolicyRequest{
@@ -6310,8 +6281,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicy(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryPolicy
+//  @return MemoryPersistentMemoryPolicy
 func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicyExecute(r ApiPatchMemoryPersistentMemoryPolicyRequest) (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6473,9 +6443,9 @@ func (r ApiPatchMemoryPersistentMemoryRegionRequest) Execute() (*MemoryPersisten
 /*
 PatchMemoryPersistentMemoryRegion Update a 'memory.PersistentMemoryRegion' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchMemoryPersistentMemoryRegionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchMemoryPersistentMemoryRegionRequest
 */
 func (a *MemoryApiService) PatchMemoryPersistentMemoryRegion(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryRegionRequest {
 	return ApiPatchMemoryPersistentMemoryRegionRequest{
@@ -6486,8 +6456,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryRegion(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryRegion
+//  @return MemoryPersistentMemoryRegion
 func (a *MemoryApiService) PatchMemoryPersistentMemoryRegionExecute(r ApiPatchMemoryPersistentMemoryRegionRequest) (*MemoryPersistentMemoryRegion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6649,9 +6618,9 @@ func (r ApiPatchMemoryPersistentMemoryUnitRequest) Execute() (*MemoryPersistentM
 /*
 PatchMemoryPersistentMemoryUnit Update a 'memory.PersistentMemoryUnit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchMemoryPersistentMemoryUnitRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchMemoryPersistentMemoryUnitRequest
 */
 func (a *MemoryApiService) PatchMemoryPersistentMemoryUnit(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryUnitRequest {
 	return ApiPatchMemoryPersistentMemoryUnitRequest{
@@ -6662,8 +6631,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryUnit(ctx context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryUnit
+//  @return MemoryPersistentMemoryUnit
 func (a *MemoryApiService) PatchMemoryPersistentMemoryUnitExecute(r ApiPatchMemoryPersistentMemoryUnitRequest) (*MemoryPersistentMemoryUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6825,9 +6793,9 @@ func (r ApiPatchMemoryPolicyRequest) Execute() (*MemoryPolicy, *http.Response, e
 /*
 PatchMemoryPolicy Update a 'memory.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchMemoryPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchMemoryPolicyRequest
 */
 func (a *MemoryApiService) PatchMemoryPolicy(ctx context.Context, moid string) ApiPatchMemoryPolicyRequest {
 	return ApiPatchMemoryPolicyRequest{
@@ -6838,8 +6806,7 @@ func (a *MemoryApiService) PatchMemoryPolicy(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//
-//	@return MemoryPolicy
+//  @return MemoryPolicy
 func (a *MemoryApiService) PatchMemoryPolicyExecute(r ApiPatchMemoryPolicyRequest) (*MemoryPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7001,9 +6968,9 @@ func (r ApiPatchMemoryUnitRequest) Execute() (*MemoryUnit, *http.Response, error
 /*
 PatchMemoryUnit Update a 'memory.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchMemoryUnitRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchMemoryUnitRequest
 */
 func (a *MemoryApiService) PatchMemoryUnit(ctx context.Context, moid string) ApiPatchMemoryUnitRequest {
 	return ApiPatchMemoryUnitRequest{
@@ -7014,8 +6981,7 @@ func (a *MemoryApiService) PatchMemoryUnit(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//
-//	@return MemoryUnit
+//  @return MemoryUnit
 func (a *MemoryApiService) PatchMemoryUnitExecute(r ApiPatchMemoryUnitRequest) (*MemoryUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7177,9 +7143,9 @@ func (r ApiUpdateMemoryArrayRequest) Execute() (*MemoryArray, *http.Response, er
 /*
 UpdateMemoryArray Update a 'memory.Array' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateMemoryArrayRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateMemoryArrayRequest
 */
 func (a *MemoryApiService) UpdateMemoryArray(ctx context.Context, moid string) ApiUpdateMemoryArrayRequest {
 	return ApiUpdateMemoryArrayRequest{
@@ -7190,8 +7156,7 @@ func (a *MemoryApiService) UpdateMemoryArray(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//
-//	@return MemoryArray
+//  @return MemoryArray
 func (a *MemoryApiService) UpdateMemoryArrayExecute(r ApiUpdateMemoryArrayRequest) (*MemoryArray, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7353,9 +7318,9 @@ func (r ApiUpdateMemoryPersistentMemoryConfigResultRequest) Execute() (*MemoryPe
 /*
 UpdateMemoryPersistentMemoryConfigResult Update a 'memory.PersistentMemoryConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateMemoryPersistentMemoryConfigResultRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateMemoryPersistentMemoryConfigResultRequest
 */
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResult(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryConfigResultRequest {
 	return ApiUpdateMemoryPersistentMemoryConfigResultRequest{
@@ -7366,8 +7331,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResult(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryConfigResult
+//  @return MemoryPersistentMemoryConfigResult
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResultExecute(r ApiUpdateMemoryPersistentMemoryConfigResultRequest) (*MemoryPersistentMemoryConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7529,9 +7493,9 @@ func (r ApiUpdateMemoryPersistentMemoryConfigurationRequest) Execute() (*MemoryP
 /*
 UpdateMemoryPersistentMemoryConfiguration Update a 'memory.PersistentMemoryConfiguration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateMemoryPersistentMemoryConfigurationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateMemoryPersistentMemoryConfigurationRequest
 */
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfiguration(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryConfigurationRequest {
 	return ApiUpdateMemoryPersistentMemoryConfigurationRequest{
@@ -7542,8 +7506,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfiguration(ctx context
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryConfiguration
+//  @return MemoryPersistentMemoryConfiguration
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigurationExecute(r ApiUpdateMemoryPersistentMemoryConfigurationRequest) (*MemoryPersistentMemoryConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7705,9 +7668,9 @@ func (r ApiUpdateMemoryPersistentMemoryNamespaceRequest) Execute() (*MemoryPersi
 /*
 UpdateMemoryPersistentMemoryNamespace Update a 'memory.PersistentMemoryNamespace' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateMemoryPersistentMemoryNamespaceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateMemoryPersistentMemoryNamespaceRequest
 */
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespace(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryNamespaceRequest {
 	return ApiUpdateMemoryPersistentMemoryNamespaceRequest{
@@ -7718,8 +7681,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespace(ctx context.Con
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryNamespace
+//  @return MemoryPersistentMemoryNamespace
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceExecute(r ApiUpdateMemoryPersistentMemoryNamespaceRequest) (*MemoryPersistentMemoryNamespace, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7881,9 +7843,9 @@ func (r ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest) Execute() (
 /*
 UpdateMemoryPersistentMemoryNamespaceConfigResult Update a 'memory.PersistentMemoryNamespaceConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest
 */
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResult(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest {
 	return ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest{
@@ -7894,8 +7856,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResult(ctx
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryNamespaceConfigResult
+//  @return MemoryPersistentMemoryNamespaceConfigResult
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResultExecute(r ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest) (*MemoryPersistentMemoryNamespaceConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8057,9 +8018,9 @@ func (r ApiUpdateMemoryPersistentMemoryPolicyRequest) Execute() (*MemoryPersiste
 /*
 UpdateMemoryPersistentMemoryPolicy Update a 'memory.PersistentMemoryPolicy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateMemoryPersistentMemoryPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateMemoryPersistentMemoryPolicyRequest
 */
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicy(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryPolicyRequest {
 	return ApiUpdateMemoryPersistentMemoryPolicyRequest{
@@ -8070,8 +8031,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicy(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryPolicy
+//  @return MemoryPersistentMemoryPolicy
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicyExecute(r ApiUpdateMemoryPersistentMemoryPolicyRequest) (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8233,9 +8193,9 @@ func (r ApiUpdateMemoryPersistentMemoryRegionRequest) Execute() (*MemoryPersiste
 /*
 UpdateMemoryPersistentMemoryRegion Update a 'memory.PersistentMemoryRegion' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateMemoryPersistentMemoryRegionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateMemoryPersistentMemoryRegionRequest
 */
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegion(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryRegionRequest {
 	return ApiUpdateMemoryPersistentMemoryRegionRequest{
@@ -8246,8 +8206,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegion(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryRegion
+//  @return MemoryPersistentMemoryRegion
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegionExecute(r ApiUpdateMemoryPersistentMemoryRegionRequest) (*MemoryPersistentMemoryRegion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8409,9 +8368,9 @@ func (r ApiUpdateMemoryPersistentMemoryUnitRequest) Execute() (*MemoryPersistent
 /*
 UpdateMemoryPersistentMemoryUnit Update a 'memory.PersistentMemoryUnit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateMemoryPersistentMemoryUnitRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateMemoryPersistentMemoryUnitRequest
 */
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnit(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryUnitRequest {
 	return ApiUpdateMemoryPersistentMemoryUnitRequest{
@@ -8422,8 +8381,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnit(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return MemoryPersistentMemoryUnit
+//  @return MemoryPersistentMemoryUnit
 func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnitExecute(r ApiUpdateMemoryPersistentMemoryUnitRequest) (*MemoryPersistentMemoryUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8585,9 +8543,9 @@ func (r ApiUpdateMemoryPolicyRequest) Execute() (*MemoryPolicy, *http.Response, 
 /*
 UpdateMemoryPolicy Update a 'memory.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateMemoryPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateMemoryPolicyRequest
 */
 func (a *MemoryApiService) UpdateMemoryPolicy(ctx context.Context, moid string) ApiUpdateMemoryPolicyRequest {
 	return ApiUpdateMemoryPolicyRequest{
@@ -8598,8 +8556,7 @@ func (a *MemoryApiService) UpdateMemoryPolicy(ctx context.Context, moid string) 
 }
 
 // Execute executes the request
-//
-//	@return MemoryPolicy
+//  @return MemoryPolicy
 func (a *MemoryApiService) UpdateMemoryPolicyExecute(r ApiUpdateMemoryPolicyRequest) (*MemoryPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8761,9 +8718,9 @@ func (r ApiUpdateMemoryUnitRequest) Execute() (*MemoryUnit, *http.Response, erro
 /*
 UpdateMemoryUnit Update a 'memory.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateMemoryUnitRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateMemoryUnitRequest
 */
 func (a *MemoryApiService) UpdateMemoryUnit(ctx context.Context, moid string) ApiUpdateMemoryUnitRequest {
 	return ApiUpdateMemoryUnitRequest{
@@ -8774,8 +8731,7 @@ func (a *MemoryApiService) UpdateMemoryUnit(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//
-//	@return MemoryUnit
+//  @return MemoryUnit
 func (a *MemoryApiService) UpdateMemoryUnitExecute(r ApiUpdateMemoryUnitRequest) (*MemoryUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
