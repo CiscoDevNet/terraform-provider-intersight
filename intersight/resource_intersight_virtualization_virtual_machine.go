@@ -1720,11 +1720,11 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 	}
 
 	if v, ok := d.GetOk("vm_config"); ok {
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.VirtualizationBaseVmConfiguration, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoBaseComplexTypeWithDefaults()
+			o := models.NewVirtualizationBaseVmConfigurationWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -2001,7 +2001,7 @@ func resourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Resou
 		return diag.Errorf("error occurred while setting property VersionContext in VirtualizationVirtualMachine object: %s", err.Error())
 	}
 
-	if err := d.Set("vm_config", flattenMapMoBaseComplexType(s.GetVmConfig(), d)); err != nil {
+	if err := d.Set("vm_config", flattenMapVirtualizationBaseVmConfiguration(s.GetVmConfig(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property VmConfig in VirtualizationVirtualMachine object: %s", err.Error())
 	}
 
@@ -2588,11 +2588,11 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 
 	if d.HasChange("vm_config") {
 		v := d.Get("vm_config")
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.VirtualizationBaseVmConfiguration, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.MoBaseComplexType{}
+			o := &models.VirtualizationBaseVmConfiguration{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))

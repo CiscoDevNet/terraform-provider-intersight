@@ -521,6 +521,59 @@ func resourceWorkflowTemplateParser() *schema.Resource {
 										},
 										ForceNew: true,
 									},
+									"data_source_selector": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+													ForceNew:         true,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.DataSourceSelector",
+													ForceNew:    true,
+												},
+												"display_attributes": {
+													Type:       schema.TypeList,
+													MinItems:   1,
+													Optional:   true,
+													ConfigMode: schema.SchemaConfigModeAttr,
+													Computed:   true,
+													Elem: &schema.Schema{
+														Type: schema.TypeString,
+													}, ForceNew: true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "workflow.DataSourceSelector",
+													ForceNew:    true,
+												},
+												"selector": {
+													Description: "This field holds mapping information used to provide suggestions to the user. The mapping should be in the '${workflow.input.property}' format. It supports workflow input mapping for workflows, and for User Actions, it supports workflow inputs, workflow outputs, workflow variables, and outputs from previous tasks.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													ForceNew:    true,
+												},
+												"value_attribute": {
+													Description: "A property from the mapped parameter, value of which can be used as value for referenced input definition.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													ForceNew:    true,
+												},
+											},
+										},
+										ForceNew: true,
+									},
 									"inventory_selector": {
 										Type:       schema.TypeList,
 										Optional:   true,
@@ -1158,6 +1211,63 @@ func resourceWorkflowTemplateParserCreate(c context.Context, d *schema.ResourceD
 								if len(p) > 0 {
 									x := p[0]
 									o.SetConstraints(x)
+								}
+							}
+						}
+						if v, ok := l["data_source_selector"]; ok {
+							{
+								x := make([]models.WorkflowDataSourceSelector, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewWorkflowDataSourceSelectorWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("workflow.DataSourceSelector")
+									if v, ok := l["display_attributes"]; ok {
+										{
+											x := make([]string, 0)
+											y := reflect.ValueOf(v)
+											for i := 0; i < y.Len(); i++ {
+												if y.Index(i).Interface() != nil {
+													x = append(x, y.Index(i).Interface().(string))
+												}
+											}
+											if len(x) > 0 {
+												o.SetDisplayAttributes(x)
+											}
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["selector"]; ok {
+										{
+											x := (v.(string))
+											o.SetSelector(x)
+										}
+									}
+									if v, ok := l["value_attribute"]; ok {
+										{
+											x := (v.(string))
+											o.SetValueAttribute(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetDataSourceSelector(x)
 								}
 							}
 						}

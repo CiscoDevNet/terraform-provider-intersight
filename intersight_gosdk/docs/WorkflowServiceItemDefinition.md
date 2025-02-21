@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **AttributeDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
 **CreateUser** | Pointer to **string** | The user identifier who created or cloned the service item definition. | [optional] [readonly] 
 **CvdId** | Pointer to **string** | The Cisco Validated Design (CVD) Identifier that this service item provides. | [optional] 
+**DefaultVersion** | Pointer to **bool** | The flag to indicate that this is the default version of the service item. | [optional] [default to false]
 **DeleteInstanceOnDecommission** | Pointer to **bool** | The flag to indicate that service item instance will be deleted after the completion of decommission action. | [optional] [default to false]
 **Description** | Pointer to **string** | The description for this service item which provides information on what are the pre-requisites to deploy the service item and what features are supported on the service item. | [optional] 
 **Label** | Pointer to **string** | A user friendly short name to identify the service item. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). | [optional] 
@@ -193,6 +194,31 @@ SetCvdId sets CvdId field to given value.
 `func (o *WorkflowServiceItemDefinition) HasCvdId() bool`
 
 HasCvdId returns a boolean if a field has been set.
+
+### GetDefaultVersion
+
+`func (o *WorkflowServiceItemDefinition) GetDefaultVersion() bool`
+
+GetDefaultVersion returns the DefaultVersion field if non-nil, zero value otherwise.
+
+### GetDefaultVersionOk
+
+`func (o *WorkflowServiceItemDefinition) GetDefaultVersionOk() (*bool, bool)`
+
+GetDefaultVersionOk returns a tuple with the DefaultVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultVersion
+
+`func (o *WorkflowServiceItemDefinition) SetDefaultVersion(v bool)`
+
+SetDefaultVersion sets DefaultVersion field to given value.
+
+### HasDefaultVersion
+
+`func (o *WorkflowServiceItemDefinition) HasDefaultVersion() bool`
+
+HasDefaultVersion returns a boolean if a field has been set.
 
 ### GetDeleteInstanceOnDecommission
 

@@ -813,11 +813,11 @@ func resourceResourcepoolPoolCreate(c context.Context, d *schema.ResourceData, m
 	}
 
 	if v, ok := d.GetOk("resource_pool_parameters"); ok {
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.ResourcepoolResourcePoolParameters, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoBaseComplexTypeWithDefaults()
+			o := models.NewResourcepoolResourcePoolParametersWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1053,7 +1053,7 @@ func resourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, met
 		return diag.Errorf("error occurred while setting property ResourceEvaluationStatus in ResourcepoolPool object: %s", err.Error())
 	}
 
-	if err := d.Set("resource_pool_parameters", flattenMapMoBaseComplexType(s.GetResourcePoolParameters(), d)); err != nil {
+	if err := d.Set("resource_pool_parameters", flattenMapResourcepoolResourcePoolParameters(s.GetResourcePoolParameters(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ResourcePoolParameters in ResourcepoolPool object: %s", err.Error())
 	}
 
@@ -1229,11 +1229,11 @@ func resourceResourcepoolPoolUpdate(c context.Context, d *schema.ResourceData, m
 
 	if d.HasChange("resource_pool_parameters") {
 		v := d.Get("resource_pool_parameters")
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.ResourcepoolResourcePoolParameters, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.MoBaseComplexType{}
+			o := &models.ResourcepoolResourcePoolParameters{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))

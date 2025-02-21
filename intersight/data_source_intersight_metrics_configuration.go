@@ -105,6 +105,11 @@ func getMetricsConfigurationSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"collection_granularity": {
+			Description: "The current supported collection granularity by the system, defined as the lowest granularity supported, with the actual granularity per resource determined by the license tier of the resource.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -484,6 +489,11 @@ func dataSourceMetricsConfigurationRead(c context.Context, d *schema.ResourceDat
 		o.SetCollectNewDevices(x)
 	}
 
+	if v, ok := d.GetOk("collection_granularity"); ok {
+		x := (v.(string))
+		o.SetCollectionGranularity(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -768,6 +778,7 @@ func dataSourceMetricsConfigurationRead(c context.Context, d *schema.ResourceDat
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["collect_new_devices"] = (s.GetCollectNewDevices())
+				temp["collection_granularity"] = (s.GetCollectionGranularity())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())

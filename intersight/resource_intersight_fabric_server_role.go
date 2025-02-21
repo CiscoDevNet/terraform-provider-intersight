@@ -120,9 +120,9 @@ func resourceFabricServerRole() *schema.Resource {
 					return
 				}},
 			"fec": {
-				Description:  "Forward error correction configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 25G speed ports on UCS-FI-6454/UCS-FI-64108 and should be set as Cl74.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
+				Description:  "Forward error correction configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 25G speed ports on UCS-FI-6454/UCS-FI-64108 and should be set as Cl74.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.\n* `rs-cons16` - Forward Error Correction option \"rs-cons16\".\n* `rs-ieee` - Forward Error Correction option \"rs-ieee\".\n* `Off` - Turn off Forward Error Correction.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"Auto", "Cl91", "Cl74"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"Auto", "Cl91", "Cl74", "rs-cons16", "rs-ieee", "Off"}, false),
 				Optional:     true,
 				Default:      "Auto",
 			},

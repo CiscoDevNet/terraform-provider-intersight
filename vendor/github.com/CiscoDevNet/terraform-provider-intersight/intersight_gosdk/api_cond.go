@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateCondAlarmSuppressionRequest) Execute() (*CondAlarmSuppression, 
 /*
 CreateCondAlarmSuppression Create a 'cond.AlarmSuppression' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateCondAlarmSuppressionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateCondAlarmSuppressionRequest
 */
 func (a *CondApiService) CreateCondAlarmSuppression(ctx context.Context) ApiCreateCondAlarmSuppressionRequest {
 	return ApiCreateCondAlarmSuppressionRequest{
@@ -67,8 +67,7 @@ func (a *CondApiService) CreateCondAlarmSuppression(ctx context.Context) ApiCrea
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmSuppression
+//  @return CondAlarmSuppression
 func (a *CondApiService) CreateCondAlarmSuppressionExecute(r ApiCreateCondAlarmSuppressionRequest) (*CondAlarmSuppression, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -218,9 +217,9 @@ func (r ApiDeleteCondAlarmSuppressionRequest) Execute() (*http.Response, error) 
 /*
 DeleteCondAlarmSuppression Delete a 'cond.AlarmSuppression' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteCondAlarmSuppressionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteCondAlarmSuppressionRequest
 */
 func (a *CondApiService) DeleteCondAlarmSuppression(ctx context.Context, moid string) ApiDeleteCondAlarmSuppressionRequest {
 	return ApiDeleteCondAlarmSuppressionRequest{
@@ -360,9 +359,9 @@ func (r ApiGetCondAlarmAggregationByMoidRequest) Execute() (*CondAlarmAggregatio
 /*
 GetCondAlarmAggregationByMoid Read a 'cond.AlarmAggregation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetCondAlarmAggregationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetCondAlarmAggregationByMoidRequest
 */
 func (a *CondApiService) GetCondAlarmAggregationByMoid(ctx context.Context, moid string) ApiGetCondAlarmAggregationByMoidRequest {
 	return ApiGetCondAlarmAggregationByMoidRequest{
@@ -373,8 +372,7 @@ func (a *CondApiService) GetCondAlarmAggregationByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmAggregation
+//  @return CondAlarmAggregation
 func (a *CondApiService) GetCondAlarmAggregationByMoidExecute(r ApiGetCondAlarmAggregationByMoidRequest) (*CondAlarmAggregation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -590,8 +588,8 @@ func (r ApiGetCondAlarmAggregationListRequest) Execute() (*CondAlarmAggregationR
 /*
 GetCondAlarmAggregationList Read a 'cond.AlarmAggregation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCondAlarmAggregationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetCondAlarmAggregationListRequest
 */
 func (a *CondApiService) GetCondAlarmAggregationList(ctx context.Context) ApiGetCondAlarmAggregationListRequest {
 	return ApiGetCondAlarmAggregationListRequest{
@@ -601,8 +599,7 @@ func (a *CondApiService) GetCondAlarmAggregationList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmAggregationResponse
+//  @return CondAlarmAggregationResponse
 func (a *CondApiService) GetCondAlarmAggregationListExecute(r ApiGetCondAlarmAggregationListRequest) (*CondAlarmAggregationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -789,9 +786,9 @@ func (r ApiGetCondAlarmByMoidRequest) Execute() (*CondAlarm, *http.Response, err
 /*
 GetCondAlarmByMoid Read a 'cond.Alarm' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetCondAlarmByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetCondAlarmByMoidRequest
 */
 func (a *CondApiService) GetCondAlarmByMoid(ctx context.Context, moid string) ApiGetCondAlarmByMoidRequest {
 	return ApiGetCondAlarmByMoidRequest{
@@ -802,8 +799,7 @@ func (a *CondApiService) GetCondAlarmByMoid(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//
-//	@return CondAlarm
+//  @return CondAlarm
 func (a *CondApiService) GetCondAlarmByMoidExecute(r ApiGetCondAlarmByMoidRequest) (*CondAlarm, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -943,9 +939,9 @@ func (r ApiGetCondAlarmClassificationByMoidRequest) Execute() (*CondAlarmClassif
 /*
 GetCondAlarmClassificationByMoid Read a 'cond.AlarmClassification' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetCondAlarmClassificationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetCondAlarmClassificationByMoidRequest
 */
 func (a *CondApiService) GetCondAlarmClassificationByMoid(ctx context.Context, moid string) ApiGetCondAlarmClassificationByMoidRequest {
 	return ApiGetCondAlarmClassificationByMoidRequest{
@@ -956,8 +952,7 @@ func (a *CondApiService) GetCondAlarmClassificationByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmClassification
+//  @return CondAlarmClassification
 func (a *CondApiService) GetCondAlarmClassificationByMoidExecute(r ApiGetCondAlarmClassificationByMoidRequest) (*CondAlarmClassification, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1173,8 +1168,8 @@ func (r ApiGetCondAlarmClassificationListRequest) Execute() (*CondAlarmClassific
 /*
 GetCondAlarmClassificationList Read a 'cond.AlarmClassification' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCondAlarmClassificationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetCondAlarmClassificationListRequest
 */
 func (a *CondApiService) GetCondAlarmClassificationList(ctx context.Context) ApiGetCondAlarmClassificationListRequest {
 	return ApiGetCondAlarmClassificationListRequest{
@@ -1184,8 +1179,7 @@ func (a *CondApiService) GetCondAlarmClassificationList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmClassificationResponse
+//  @return CondAlarmClassificationResponse
 func (a *CondApiService) GetCondAlarmClassificationListExecute(r ApiGetCondAlarmClassificationListRequest) (*CondAlarmClassificationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1372,9 +1366,9 @@ func (r ApiGetCondAlarmDefinitionByMoidRequest) Execute() (*CondAlarmDefinition,
 /*
 GetCondAlarmDefinitionByMoid Read a 'cond.AlarmDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetCondAlarmDefinitionByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetCondAlarmDefinitionByMoidRequest
 */
 func (a *CondApiService) GetCondAlarmDefinitionByMoid(ctx context.Context, moid string) ApiGetCondAlarmDefinitionByMoidRequest {
 	return ApiGetCondAlarmDefinitionByMoidRequest{
@@ -1385,8 +1379,7 @@ func (a *CondApiService) GetCondAlarmDefinitionByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmDefinition
+//  @return CondAlarmDefinition
 func (a *CondApiService) GetCondAlarmDefinitionByMoidExecute(r ApiGetCondAlarmDefinitionByMoidRequest) (*CondAlarmDefinition, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1602,8 +1595,8 @@ func (r ApiGetCondAlarmDefinitionListRequest) Execute() (*CondAlarmDefinitionRes
 /*
 GetCondAlarmDefinitionList Read a 'cond.AlarmDefinition' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCondAlarmDefinitionListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetCondAlarmDefinitionListRequest
 */
 func (a *CondApiService) GetCondAlarmDefinitionList(ctx context.Context) ApiGetCondAlarmDefinitionListRequest {
 	return ApiGetCondAlarmDefinitionListRequest{
@@ -1613,8 +1606,7 @@ func (a *CondApiService) GetCondAlarmDefinitionList(ctx context.Context) ApiGetC
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmDefinitionResponse
+//  @return CondAlarmDefinitionResponse
 func (a *CondApiService) GetCondAlarmDefinitionListExecute(r ApiGetCondAlarmDefinitionListRequest) (*CondAlarmDefinitionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1877,8 +1869,8 @@ func (r ApiGetCondAlarmListRequest) Execute() (*CondAlarmResponse, *http.Respons
 /*
 GetCondAlarmList Read a 'cond.Alarm' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCondAlarmListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetCondAlarmListRequest
 */
 func (a *CondApiService) GetCondAlarmList(ctx context.Context) ApiGetCondAlarmListRequest {
 	return ApiGetCondAlarmListRequest{
@@ -1888,8 +1880,7 @@ func (a *CondApiService) GetCondAlarmList(ctx context.Context) ApiGetCondAlarmLi
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmResponse
+//  @return CondAlarmResponse
 func (a *CondApiService) GetCondAlarmListExecute(r ApiGetCondAlarmListRequest) (*CondAlarmResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2076,9 +2067,9 @@ func (r ApiGetCondAlarmSuppressionByMoidRequest) Execute() (*CondAlarmSuppressio
 /*
 GetCondAlarmSuppressionByMoid Read a 'cond.AlarmSuppression' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetCondAlarmSuppressionByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetCondAlarmSuppressionByMoidRequest
 */
 func (a *CondApiService) GetCondAlarmSuppressionByMoid(ctx context.Context, moid string) ApiGetCondAlarmSuppressionByMoidRequest {
 	return ApiGetCondAlarmSuppressionByMoidRequest{
@@ -2089,8 +2080,7 @@ func (a *CondApiService) GetCondAlarmSuppressionByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmSuppression
+//  @return CondAlarmSuppression
 func (a *CondApiService) GetCondAlarmSuppressionByMoidExecute(r ApiGetCondAlarmSuppressionByMoidRequest) (*CondAlarmSuppression, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2306,8 +2296,8 @@ func (r ApiGetCondAlarmSuppressionListRequest) Execute() (*CondAlarmSuppressionR
 /*
 GetCondAlarmSuppressionList Read a 'cond.AlarmSuppression' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCondAlarmSuppressionListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetCondAlarmSuppressionListRequest
 */
 func (a *CondApiService) GetCondAlarmSuppressionList(ctx context.Context) ApiGetCondAlarmSuppressionListRequest {
 	return ApiGetCondAlarmSuppressionListRequest{
@@ -2317,8 +2307,7 @@ func (a *CondApiService) GetCondAlarmSuppressionList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmSuppressionResponse
+//  @return CondAlarmSuppressionResponse
 func (a *CondApiService) GetCondAlarmSuppressionListExecute(r ApiGetCondAlarmSuppressionListRequest) (*CondAlarmSuppressionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2505,9 +2494,9 @@ func (r ApiGetCondHclStatusByMoidRequest) Execute() (*CondHclStatus, *http.Respo
 /*
 GetCondHclStatusByMoid Read a 'cond.HclStatus' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetCondHclStatusByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetCondHclStatusByMoidRequest
 */
 func (a *CondApiService) GetCondHclStatusByMoid(ctx context.Context, moid string) ApiGetCondHclStatusByMoidRequest {
 	return ApiGetCondHclStatusByMoidRequest{
@@ -2518,8 +2507,7 @@ func (a *CondApiService) GetCondHclStatusByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//
-//	@return CondHclStatus
+//  @return CondHclStatus
 func (a *CondApiService) GetCondHclStatusByMoidExecute(r ApiGetCondHclStatusByMoidRequest) (*CondHclStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2659,9 +2647,9 @@ func (r ApiGetCondHclStatusDetailByMoidRequest) Execute() (*CondHclStatusDetail,
 /*
 GetCondHclStatusDetailByMoid Read a 'cond.HclStatusDetail' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetCondHclStatusDetailByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetCondHclStatusDetailByMoidRequest
 */
 func (a *CondApiService) GetCondHclStatusDetailByMoid(ctx context.Context, moid string) ApiGetCondHclStatusDetailByMoidRequest {
 	return ApiGetCondHclStatusDetailByMoidRequest{
@@ -2672,8 +2660,7 @@ func (a *CondApiService) GetCondHclStatusDetailByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return CondHclStatusDetail
+//  @return CondHclStatusDetail
 func (a *CondApiService) GetCondHclStatusDetailByMoidExecute(r ApiGetCondHclStatusDetailByMoidRequest) (*CondHclStatusDetail, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2889,8 +2876,8 @@ func (r ApiGetCondHclStatusDetailListRequest) Execute() (*CondHclStatusDetailRes
 /*
 GetCondHclStatusDetailList Read a 'cond.HclStatusDetail' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCondHclStatusDetailListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetCondHclStatusDetailListRequest
 */
 func (a *CondApiService) GetCondHclStatusDetailList(ctx context.Context) ApiGetCondHclStatusDetailListRequest {
 	return ApiGetCondHclStatusDetailListRequest{
@@ -2900,8 +2887,7 @@ func (a *CondApiService) GetCondHclStatusDetailList(ctx context.Context) ApiGetC
 }
 
 // Execute executes the request
-//
-//	@return CondHclStatusDetailResponse
+//  @return CondHclStatusDetailResponse
 func (a *CondApiService) GetCondHclStatusDetailListExecute(r ApiGetCondHclStatusDetailListRequest) (*CondHclStatusDetailResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3088,9 +3074,9 @@ func (r ApiGetCondHclStatusJobByMoidRequest) Execute() (*CondHclStatusJob, *http
 /*
 GetCondHclStatusJobByMoid Read a 'cond.HclStatusJob' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetCondHclStatusJobByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetCondHclStatusJobByMoidRequest
 */
 func (a *CondApiService) GetCondHclStatusJobByMoid(ctx context.Context, moid string) ApiGetCondHclStatusJobByMoidRequest {
 	return ApiGetCondHclStatusJobByMoidRequest{
@@ -3101,8 +3087,7 @@ func (a *CondApiService) GetCondHclStatusJobByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//
-//	@return CondHclStatusJob
+//  @return CondHclStatusJob
 func (a *CondApiService) GetCondHclStatusJobByMoidExecute(r ApiGetCondHclStatusJobByMoidRequest) (*CondHclStatusJob, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3318,8 +3303,8 @@ func (r ApiGetCondHclStatusJobListRequest) Execute() (*CondHclStatusJobResponse,
 /*
 GetCondHclStatusJobList Read a 'cond.HclStatusJob' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCondHclStatusJobListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetCondHclStatusJobListRequest
 */
 func (a *CondApiService) GetCondHclStatusJobList(ctx context.Context) ApiGetCondHclStatusJobListRequest {
 	return ApiGetCondHclStatusJobListRequest{
@@ -3329,8 +3314,7 @@ func (a *CondApiService) GetCondHclStatusJobList(ctx context.Context) ApiGetCond
 }
 
 // Execute executes the request
-//
-//	@return CondHclStatusJobResponse
+//  @return CondHclStatusJobResponse
 func (a *CondApiService) GetCondHclStatusJobListExecute(r ApiGetCondHclStatusJobListRequest) (*CondHclStatusJobResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3593,8 +3577,8 @@ func (r ApiGetCondHclStatusListRequest) Execute() (*CondHclStatusResponse, *http
 /*
 GetCondHclStatusList Read a 'cond.HclStatus' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCondHclStatusListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetCondHclStatusListRequest
 */
 func (a *CondApiService) GetCondHclStatusList(ctx context.Context) ApiGetCondHclStatusListRequest {
 	return ApiGetCondHclStatusListRequest{
@@ -3604,8 +3588,7 @@ func (a *CondApiService) GetCondHclStatusList(ctx context.Context) ApiGetCondHcl
 }
 
 // Execute executes the request
-//
-//	@return CondHclStatusResponse
+//  @return CondHclStatusResponse
 func (a *CondApiService) GetCondHclStatusListExecute(r ApiGetCondHclStatusListRequest) (*CondHclStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3806,9 +3789,9 @@ func (r ApiPatchCondAlarmRequest) Execute() (*CondAlarm, *http.Response, error) 
 /*
 PatchCondAlarm Update a 'cond.Alarm' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchCondAlarmRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchCondAlarmRequest
 */
 func (a *CondApiService) PatchCondAlarm(ctx context.Context, moid string) ApiPatchCondAlarmRequest {
 	return ApiPatchCondAlarmRequest{
@@ -3819,8 +3802,7 @@ func (a *CondApiService) PatchCondAlarm(ctx context.Context, moid string) ApiPat
 }
 
 // Execute executes the request
-//
-//	@return CondAlarm
+//  @return CondAlarm
 func (a *CondApiService) PatchCondAlarmExecute(r ApiPatchCondAlarmRequest) (*CondAlarm, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3982,9 +3964,9 @@ func (r ApiPatchCondAlarmSuppressionRequest) Execute() (*CondAlarmSuppression, *
 /*
 PatchCondAlarmSuppression Update a 'cond.AlarmSuppression' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchCondAlarmSuppressionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchCondAlarmSuppressionRequest
 */
 func (a *CondApiService) PatchCondAlarmSuppression(ctx context.Context, moid string) ApiPatchCondAlarmSuppressionRequest {
 	return ApiPatchCondAlarmSuppressionRequest{
@@ -3995,8 +3977,7 @@ func (a *CondApiService) PatchCondAlarmSuppression(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmSuppression
+//  @return CondAlarmSuppression
 func (a *CondApiService) PatchCondAlarmSuppressionExecute(r ApiPatchCondAlarmSuppressionRequest) (*CondAlarmSuppression, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4158,9 +4139,9 @@ func (r ApiUpdateCondAlarmRequest) Execute() (*CondAlarm, *http.Response, error)
 /*
 UpdateCondAlarm Update a 'cond.Alarm' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateCondAlarmRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateCondAlarmRequest
 */
 func (a *CondApiService) UpdateCondAlarm(ctx context.Context, moid string) ApiUpdateCondAlarmRequest {
 	return ApiUpdateCondAlarmRequest{
@@ -4171,8 +4152,7 @@ func (a *CondApiService) UpdateCondAlarm(ctx context.Context, moid string) ApiUp
 }
 
 // Execute executes the request
-//
-//	@return CondAlarm
+//  @return CondAlarm
 func (a *CondApiService) UpdateCondAlarmExecute(r ApiUpdateCondAlarmRequest) (*CondAlarm, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4334,9 +4314,9 @@ func (r ApiUpdateCondAlarmSuppressionRequest) Execute() (*CondAlarmSuppression, 
 /*
 UpdateCondAlarmSuppression Update a 'cond.AlarmSuppression' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateCondAlarmSuppressionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateCondAlarmSuppressionRequest
 */
 func (a *CondApiService) UpdateCondAlarmSuppression(ctx context.Context, moid string) ApiUpdateCondAlarmSuppressionRequest {
 	return ApiUpdateCondAlarmSuppressionRequest{
@@ -4347,8 +4327,7 @@ func (a *CondApiService) UpdateCondAlarmSuppression(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//
-//	@return CondAlarmSuppression
+//  @return CondAlarmSuppression
 func (a *CondApiService) UpdateCondAlarmSuppressionExecute(r ApiUpdateCondAlarmSuppressionRequest) (*CondAlarmSuppression, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

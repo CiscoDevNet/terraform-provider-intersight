@@ -75,6 +75,11 @@ func getAssetClusterMemberSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"connected_host": {
+			Description: "The DNS hostname the device connector has used to connect to Intersight. Devices may be configured to connect to a set of DNS hostnames which all resolve to the same Intersight instance, the connected host is the latest hostname the device used to connect successfully to Intersight.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"connection_id": {
 			Description: "The unique identifier for the current connection. The identifier persists across network connectivity loss and is reset on device connector process restart or platform administrator toggle of the Intersight connectivity. The connectionId can be used by services that need to interact with stateful plugins running in the device connector process. For example if a service schedules an inventory in a devices job scheduler plugin at registration it is not necessary to reschedule the job if the device loses network connectivity due to an Intersight service upgrade or intermittent network issues in the devices datacenter.",
 			Type:        schema.TypeString,
@@ -711,6 +716,11 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOk("connected_host"); ok {
+		x := (v.(string))
+		o.SetConnectedHost(x)
+	}
+
 	if v, ok := d.GetOk("connection_id"); ok {
 		x := (v.(string))
 		o.SetConnectionId(x)
@@ -1113,6 +1123,7 @@ func dataSourceAssetClusterMemberRead(c context.Context, d *schema.ResourceData,
 				temp["api_version"] = (s.GetApiVersion())
 				temp["app_partition_number"] = (s.GetAppPartitionNumber())
 				temp["class_id"] = (s.GetClassId())
+				temp["connected_host"] = (s.GetConnectedHost())
 				temp["connection_id"] = (s.GetConnectionId())
 				temp["connection_reason"] = (s.GetConnectionReason())
 				temp["connection_status"] = (s.GetConnectionStatus())

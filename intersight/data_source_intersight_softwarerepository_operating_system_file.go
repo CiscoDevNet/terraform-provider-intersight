@@ -764,11 +764,11 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 	}
 
 	if v, ok := d.GetOk("nr_source"); ok {
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.MoBaseComplexType{}
+			o := &models.SoftwarerepositoryFileServer{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -984,7 +984,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 				temp["size"] = (s.GetSize())
 				temp["software_advisory_url"] = (s.GetSoftwareAdvisoryUrl())
 
-				temp["nr_source"] = flattenMapMoBaseComplexType(s.GetSource(), d)
+				temp["nr_source"] = flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["vendor"] = (s.GetVendor())

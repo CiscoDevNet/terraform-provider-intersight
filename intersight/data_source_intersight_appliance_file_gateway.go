@@ -115,6 +115,11 @@ func getApplianceFileGatewaySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"external_host": {
+			Description: "Flag to specify if the requested file is served from an external host. An external host is a host other than the Intersight endpoint URL that resides outside of an endpoint device's local network. A download client (e.g. the Intersight Appliance device connector) should use this property to determine if a proxy is required to reach the host.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"file_size": {
 			Description: "Size of the file in bytes. FileSize maybe zero if the storage service does not report file size.",
 			Type:        schema.TypeInt,
@@ -524,6 +529,11 @@ func dataSourceApplianceFileGatewayRead(c context.Context, d *schema.ResourceDat
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("external_host"); ok {
+		x := (v.(bool))
+		o.SetExternalHost(x)
+	}
+
 	if v, ok := d.GetOkExists("file_size"); ok {
 		x := int64(v.(int))
 		o.SetFileSize(x)
@@ -831,6 +841,7 @@ func dataSourceApplianceFileGatewayRead(c context.Context, d *schema.ResourceDat
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["external_host"] = (s.GetExternalHost())
 				temp["file_size"] = (s.GetFileSize())
 
 				temp["file_time"] = (s.GetFileTime()).String()

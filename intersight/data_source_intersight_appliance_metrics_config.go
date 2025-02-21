@@ -110,6 +110,16 @@ func getApplianceMetricsConfigSchema() map[string]*schema.Schema {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"disk_capacity": {
+			Description: "Capacity of the metrics disk /opt/database in bytes.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"disk_usage": {
+			Description: "Disk usage of the metrics disk /opt/database in bytes.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -514,6 +524,16 @@ func dataSourceApplianceMetricsConfigRead(c context.Context, d *schema.ResourceD
 		o.SetCurrentEndpointCount(x)
 	}
 
+	if v, ok := d.GetOkExists("disk_capacity"); ok {
+		x := int64(v.(int))
+		o.SetDiskCapacity(x)
+	}
+
+	if v, ok := d.GetOkExists("disk_usage"); ok {
+		x := int64(v.(int))
+		o.SetDiskUsage(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
@@ -820,6 +840,8 @@ func dataSourceApplianceMetricsConfigRead(c context.Context, d *schema.ResourceD
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["current_endpoint_count"] = (s.GetCurrentEndpointCount())
+				temp["disk_capacity"] = (s.GetDiskCapacity())
+				temp["disk_usage"] = (s.GetDiskUsage())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["endpoint_usage_percent"] = (s.GetEndpointUsagePercent())
 

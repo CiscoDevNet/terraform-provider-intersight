@@ -81,7 +81,7 @@ func getFabricFcoeUplinkPcRoleSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"fec": {
-			Description: "Forward error correction configuration for Fcoe Uplink Port Channel member ports.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
+			Description: "Forward error correction configuration for Fcoe Uplink Port Channel member ports.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.\n* `rs-cons16` - Forward Error Correction option \"rs-cons16\".\n* `rs-ieee` - Forward Error Correction option \"rs-ieee\".\n* `Off` - Turn off Forward Error Correction.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

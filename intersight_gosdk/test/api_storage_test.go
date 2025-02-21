@@ -825,6 +825,32 @@ func Test_intersight_StorageApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test StorageApiService GetStorageHitachiNvmSubsystemByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.StorageApi.GetStorageHitachiNvmSubsystemByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test StorageApiService GetStorageHitachiNvmSubsystemList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.StorageApi.GetStorageHitachiNvmSubsystemList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test StorageApiService GetStorageHitachiParityGroupByMoid", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

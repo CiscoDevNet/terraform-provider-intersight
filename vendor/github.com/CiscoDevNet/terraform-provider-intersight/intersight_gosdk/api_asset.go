@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateAssetDeviceClaimRequest) Execute() (*AssetDeviceClaim, *http.Re
 /*
 CreateAssetDeviceClaim Create a 'asset.DeviceClaim' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateAssetDeviceClaimRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAssetDeviceClaimRequest
 */
 func (a *AssetApiService) CreateAssetDeviceClaim(ctx context.Context) ApiCreateAssetDeviceClaimRequest {
 	return ApiCreateAssetDeviceClaimRequest{
@@ -67,8 +67,7 @@ func (a *AssetApiService) CreateAssetDeviceClaim(ctx context.Context) ApiCreateA
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceClaim
+//  @return AssetDeviceClaim
 func (a *AssetApiService) CreateAssetDeviceClaimExecute(r ApiCreateAssetDeviceClaimRequest) (*AssetDeviceClaim, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -238,8 +237,8 @@ func (r ApiCreateAssetDeviceContractNotificationRequest) Execute() (*AssetDevice
 /*
 CreateAssetDeviceContractNotification Create a 'asset.DeviceContractNotification' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateAssetDeviceContractNotificationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAssetDeviceContractNotificationRequest
 */
 func (a *AssetApiService) CreateAssetDeviceContractNotification(ctx context.Context) ApiCreateAssetDeviceContractNotificationRequest {
 	return ApiCreateAssetDeviceContractNotificationRequest{
@@ -249,8 +248,7 @@ func (a *AssetApiService) CreateAssetDeviceContractNotification(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceContractNotification
+//  @return AssetDeviceContractNotification
 func (a *AssetApiService) CreateAssetDeviceContractNotificationExecute(r ApiCreateAssetDeviceContractNotificationRequest) (*AssetDeviceContractNotification, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -420,8 +418,8 @@ func (r ApiCreateAssetTargetRequest) Execute() (*AssetTarget, *http.Response, er
 /*
 CreateAssetTarget Create a 'asset.Target' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateAssetTargetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAssetTargetRequest
 */
 func (a *AssetApiService) CreateAssetTarget(ctx context.Context) ApiCreateAssetTargetRequest {
 	return ApiCreateAssetTargetRequest{
@@ -431,8 +429,7 @@ func (a *AssetApiService) CreateAssetTarget(ctx context.Context) ApiCreateAssetT
 }
 
 // Execute executes the request
-//
-//	@return AssetTarget
+//  @return AssetTarget
 func (a *AssetApiService) CreateAssetTargetExecute(r ApiCreateAssetTargetRequest) (*AssetTarget, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -582,9 +579,9 @@ func (r ApiDeleteAssetClusterMemberRequest) Execute() (*http.Response, error) {
 /*
 DeleteAssetClusterMember Delete a 'asset.ClusterMember' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteAssetClusterMemberRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteAssetClusterMemberRequest
 */
 func (a *AssetApiService) DeleteAssetClusterMember(ctx context.Context, moid string) ApiDeleteAssetClusterMemberRequest {
 	return ApiDeleteAssetClusterMemberRequest{
@@ -724,9 +721,9 @@ func (r ApiDeleteAssetDeploymentRequest) Execute() (*http.Response, error) {
 /*
 DeleteAssetDeployment Delete a 'asset.Deployment' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteAssetDeploymentRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteAssetDeploymentRequest
 */
 func (a *AssetApiService) DeleteAssetDeployment(ctx context.Context, moid string) ApiDeleteAssetDeploymentRequest {
 	return ApiDeleteAssetDeploymentRequest{
@@ -866,9 +863,9 @@ func (r ApiDeleteAssetDeploymentDeviceRequest) Execute() (*http.Response, error)
 /*
 DeleteAssetDeploymentDevice Delete a 'asset.DeploymentDevice' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteAssetDeploymentDeviceRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteAssetDeploymentDeviceRequest
 */
 func (a *AssetApiService) DeleteAssetDeploymentDevice(ctx context.Context, moid string) ApiDeleteAssetDeploymentDeviceRequest {
 	return ApiDeleteAssetDeploymentDeviceRequest{
@@ -1008,9 +1005,9 @@ func (r ApiDeleteAssetDeviceClaimRequest) Execute() (*http.Response, error) {
 /*
 DeleteAssetDeviceClaim Delete a 'asset.DeviceClaim' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteAssetDeviceClaimRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteAssetDeviceClaimRequest
 */
 func (a *AssetApiService) DeleteAssetDeviceClaim(ctx context.Context, moid string) ApiDeleteAssetDeviceClaimRequest {
 	return ApiDeleteAssetDeviceClaimRequest{
@@ -1150,9 +1147,9 @@ func (r ApiDeleteAssetDeviceContractInformationRequest) Execute() (*http.Respons
 /*
 DeleteAssetDeviceContractInformation Delete a 'asset.DeviceContractInformation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteAssetDeviceContractInformationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteAssetDeviceContractInformationRequest
 */
 func (a *AssetApiService) DeleteAssetDeviceContractInformation(ctx context.Context, moid string) ApiDeleteAssetDeviceContractInformationRequest {
 	return ApiDeleteAssetDeviceContractInformationRequest{
@@ -1292,9 +1289,9 @@ func (r ApiDeleteAssetDeviceRegistrationRequest) Execute() (*http.Response, erro
 /*
 DeleteAssetDeviceRegistration Deletes the resource representing the device connector. All associated REST resources will be deleted. In particular, inventory and operational data associated with this device will be deleted.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteAssetDeviceRegistrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteAssetDeviceRegistrationRequest
 */
 func (a *AssetApiService) DeleteAssetDeviceRegistration(ctx context.Context, moid string) ApiDeleteAssetDeviceRegistrationRequest {
 	return ApiDeleteAssetDeviceRegistrationRequest{
@@ -1434,9 +1431,9 @@ func (r ApiDeleteAssetSubscriptionRequest) Execute() (*http.Response, error) {
 /*
 DeleteAssetSubscription Delete a 'asset.Subscription' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteAssetSubscriptionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteAssetSubscriptionRequest
 */
 func (a *AssetApiService) DeleteAssetSubscription(ctx context.Context, moid string) ApiDeleteAssetSubscriptionRequest {
 	return ApiDeleteAssetSubscriptionRequest{
@@ -1576,9 +1573,9 @@ func (r ApiDeleteAssetSubscriptionAccountRequest) Execute() (*http.Response, err
 /*
 DeleteAssetSubscriptionAccount Delete a 'asset.SubscriptionAccount' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteAssetSubscriptionAccountRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteAssetSubscriptionAccountRequest
 */
 func (a *AssetApiService) DeleteAssetSubscriptionAccount(ctx context.Context, moid string) ApiDeleteAssetSubscriptionAccountRequest {
 	return ApiDeleteAssetSubscriptionAccountRequest{
@@ -1718,9 +1715,9 @@ func (r ApiDeleteAssetTargetRequest) Execute() (*http.Response, error) {
 /*
 DeleteAssetTarget Delete a 'asset.Target' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteAssetTargetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteAssetTargetRequest
 */
 func (a *AssetApiService) DeleteAssetTarget(ctx context.Context, moid string) ApiDeleteAssetTargetRequest {
 	return ApiDeleteAssetTargetRequest{
@@ -1860,9 +1857,9 @@ func (r ApiGetAssetClusterMemberByMoidRequest) Execute() (*AssetClusterMember, *
 /*
 GetAssetClusterMemberByMoid Read a 'asset.ClusterMember' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAssetClusterMemberByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAssetClusterMemberByMoidRequest
 */
 func (a *AssetApiService) GetAssetClusterMemberByMoid(ctx context.Context, moid string) ApiGetAssetClusterMemberByMoidRequest {
 	return ApiGetAssetClusterMemberByMoidRequest{
@@ -1873,8 +1870,7 @@ func (a *AssetApiService) GetAssetClusterMemberByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return AssetClusterMember
+//  @return AssetClusterMember
 func (a *AssetApiService) GetAssetClusterMemberByMoidExecute(r ApiGetAssetClusterMemberByMoidRequest) (*AssetClusterMember, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2090,8 +2086,8 @@ func (r ApiGetAssetClusterMemberListRequest) Execute() (*AssetClusterMemberRespo
 /*
 GetAssetClusterMemberList Read a 'asset.ClusterMember' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAssetClusterMemberListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAssetClusterMemberListRequest
 */
 func (a *AssetApiService) GetAssetClusterMemberList(ctx context.Context) ApiGetAssetClusterMemberListRequest {
 	return ApiGetAssetClusterMemberListRequest{
@@ -2101,8 +2097,7 @@ func (a *AssetApiService) GetAssetClusterMemberList(ctx context.Context) ApiGetA
 }
 
 // Execute executes the request
-//
-//	@return AssetClusterMemberResponse
+//  @return AssetClusterMemberResponse
 func (a *AssetApiService) GetAssetClusterMemberListExecute(r ApiGetAssetClusterMemberListRequest) (*AssetClusterMemberResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2289,9 +2284,9 @@ func (r ApiGetAssetDeploymentByMoidRequest) Execute() (*AssetDeployment, *http.R
 /*
 GetAssetDeploymentByMoid Read a 'asset.Deployment' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAssetDeploymentByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAssetDeploymentByMoidRequest
 */
 func (a *AssetApiService) GetAssetDeploymentByMoid(ctx context.Context, moid string) ApiGetAssetDeploymentByMoidRequest {
 	return ApiGetAssetDeploymentByMoidRequest{
@@ -2302,8 +2297,7 @@ func (a *AssetApiService) GetAssetDeploymentByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//
-//	@return AssetDeployment
+//  @return AssetDeployment
 func (a *AssetApiService) GetAssetDeploymentByMoidExecute(r ApiGetAssetDeploymentByMoidRequest) (*AssetDeployment, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2443,9 +2437,9 @@ func (r ApiGetAssetDeploymentDeviceByMoidRequest) Execute() (*AssetDeploymentDev
 /*
 GetAssetDeploymentDeviceByMoid Read a 'asset.DeploymentDevice' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAssetDeploymentDeviceByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAssetDeploymentDeviceByMoidRequest
 */
 func (a *AssetApiService) GetAssetDeploymentDeviceByMoid(ctx context.Context, moid string) ApiGetAssetDeploymentDeviceByMoidRequest {
 	return ApiGetAssetDeploymentDeviceByMoidRequest{
@@ -2456,8 +2450,7 @@ func (a *AssetApiService) GetAssetDeploymentDeviceByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return AssetDeploymentDevice
+//  @return AssetDeploymentDevice
 func (a *AssetApiService) GetAssetDeploymentDeviceByMoidExecute(r ApiGetAssetDeploymentDeviceByMoidRequest) (*AssetDeploymentDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2673,8 +2666,8 @@ func (r ApiGetAssetDeploymentDeviceListRequest) Execute() (*AssetDeploymentDevic
 /*
 GetAssetDeploymentDeviceList Read a 'asset.DeploymentDevice' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAssetDeploymentDeviceListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAssetDeploymentDeviceListRequest
 */
 func (a *AssetApiService) GetAssetDeploymentDeviceList(ctx context.Context) ApiGetAssetDeploymentDeviceListRequest {
 	return ApiGetAssetDeploymentDeviceListRequest{
@@ -2684,8 +2677,7 @@ func (a *AssetApiService) GetAssetDeploymentDeviceList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//
-//	@return AssetDeploymentDeviceResponse
+//  @return AssetDeploymentDeviceResponse
 func (a *AssetApiService) GetAssetDeploymentDeviceListExecute(r ApiGetAssetDeploymentDeviceListRequest) (*AssetDeploymentDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2948,8 +2940,8 @@ func (r ApiGetAssetDeploymentListRequest) Execute() (*AssetDeploymentResponse, *
 /*
 GetAssetDeploymentList Read a 'asset.Deployment' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAssetDeploymentListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAssetDeploymentListRequest
 */
 func (a *AssetApiService) GetAssetDeploymentList(ctx context.Context) ApiGetAssetDeploymentListRequest {
 	return ApiGetAssetDeploymentListRequest{
@@ -2959,8 +2951,7 @@ func (a *AssetApiService) GetAssetDeploymentList(ctx context.Context) ApiGetAsse
 }
 
 // Execute executes the request
-//
-//	@return AssetDeploymentResponse
+//  @return AssetDeploymentResponse
 func (a *AssetApiService) GetAssetDeploymentListExecute(r ApiGetAssetDeploymentListRequest) (*AssetDeploymentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3147,9 +3138,9 @@ func (r ApiGetAssetDeviceConfigurationByMoidRequest) Execute() (*AssetDeviceConf
 /*
 GetAssetDeviceConfigurationByMoid Read a 'asset.DeviceConfiguration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAssetDeviceConfigurationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAssetDeviceConfigurationByMoidRequest
 */
 func (a *AssetApiService) GetAssetDeviceConfigurationByMoid(ctx context.Context, moid string) ApiGetAssetDeviceConfigurationByMoidRequest {
 	return ApiGetAssetDeviceConfigurationByMoidRequest{
@@ -3160,8 +3151,7 @@ func (a *AssetApiService) GetAssetDeviceConfigurationByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceConfiguration
+//  @return AssetDeviceConfiguration
 func (a *AssetApiService) GetAssetDeviceConfigurationByMoidExecute(r ApiGetAssetDeviceConfigurationByMoidRequest) (*AssetDeviceConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3377,8 +3367,8 @@ func (r ApiGetAssetDeviceConfigurationListRequest) Execute() (*AssetDeviceConfig
 /*
 GetAssetDeviceConfigurationList Read a 'asset.DeviceConfiguration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAssetDeviceConfigurationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAssetDeviceConfigurationListRequest
 */
 func (a *AssetApiService) GetAssetDeviceConfigurationList(ctx context.Context) ApiGetAssetDeviceConfigurationListRequest {
 	return ApiGetAssetDeviceConfigurationListRequest{
@@ -3388,8 +3378,7 @@ func (a *AssetApiService) GetAssetDeviceConfigurationList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceConfigurationResponse
+//  @return AssetDeviceConfigurationResponse
 func (a *AssetApiService) GetAssetDeviceConfigurationListExecute(r ApiGetAssetDeviceConfigurationListRequest) (*AssetDeviceConfigurationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3576,9 +3565,9 @@ func (r ApiGetAssetDeviceConnectorManagerByMoidRequest) Execute() (*AssetDeviceC
 /*
 GetAssetDeviceConnectorManagerByMoid Read a 'asset.DeviceConnectorManager' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAssetDeviceConnectorManagerByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAssetDeviceConnectorManagerByMoidRequest
 */
 func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoid(ctx context.Context, moid string) ApiGetAssetDeviceConnectorManagerByMoidRequest {
 	return ApiGetAssetDeviceConnectorManagerByMoidRequest{
@@ -3589,8 +3578,7 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceConnectorManager
+//  @return AssetDeviceConnectorManager
 func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoidExecute(r ApiGetAssetDeviceConnectorManagerByMoidRequest) (*AssetDeviceConnectorManager, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3806,8 +3794,8 @@ func (r ApiGetAssetDeviceConnectorManagerListRequest) Execute() (*AssetDeviceCon
 /*
 GetAssetDeviceConnectorManagerList Read a 'asset.DeviceConnectorManager' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAssetDeviceConnectorManagerListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAssetDeviceConnectorManagerListRequest
 */
 func (a *AssetApiService) GetAssetDeviceConnectorManagerList(ctx context.Context) ApiGetAssetDeviceConnectorManagerListRequest {
 	return ApiGetAssetDeviceConnectorManagerListRequest{
@@ -3817,8 +3805,7 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerList(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceConnectorManagerResponse
+//  @return AssetDeviceConnectorManagerResponse
 func (a *AssetApiService) GetAssetDeviceConnectorManagerListExecute(r ApiGetAssetDeviceConnectorManagerListRequest) (*AssetDeviceConnectorManagerResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4005,9 +3992,9 @@ func (r ApiGetAssetDeviceContractInformationByMoidRequest) Execute() (*AssetDevi
 /*
 GetAssetDeviceContractInformationByMoid Read a 'asset.DeviceContractInformation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAssetDeviceContractInformationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAssetDeviceContractInformationByMoidRequest
 */
 func (a *AssetApiService) GetAssetDeviceContractInformationByMoid(ctx context.Context, moid string) ApiGetAssetDeviceContractInformationByMoidRequest {
 	return ApiGetAssetDeviceContractInformationByMoidRequest{
@@ -4018,8 +4005,7 @@ func (a *AssetApiService) GetAssetDeviceContractInformationByMoid(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceContractInformation
+//  @return AssetDeviceContractInformation
 func (a *AssetApiService) GetAssetDeviceContractInformationByMoidExecute(r ApiGetAssetDeviceContractInformationByMoidRequest) (*AssetDeviceContractInformation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4235,8 +4221,8 @@ func (r ApiGetAssetDeviceContractInformationListRequest) Execute() (*AssetDevice
 /*
 GetAssetDeviceContractInformationList Read a 'asset.DeviceContractInformation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAssetDeviceContractInformationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAssetDeviceContractInformationListRequest
 */
 func (a *AssetApiService) GetAssetDeviceContractInformationList(ctx context.Context) ApiGetAssetDeviceContractInformationListRequest {
 	return ApiGetAssetDeviceContractInformationListRequest{
@@ -4246,8 +4232,7 @@ func (a *AssetApiService) GetAssetDeviceContractInformationList(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceContractInformationResponse
+//  @return AssetDeviceContractInformationResponse
 func (a *AssetApiService) GetAssetDeviceContractInformationListExecute(r ApiGetAssetDeviceContractInformationListRequest) (*AssetDeviceContractInformationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4434,9 +4419,9 @@ func (r ApiGetAssetDeviceRegistrationByMoidRequest) Execute() (*AssetDeviceRegis
 /*
 GetAssetDeviceRegistrationByMoid Read a 'asset.DeviceRegistration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAssetDeviceRegistrationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAssetDeviceRegistrationByMoidRequest
 */
 func (a *AssetApiService) GetAssetDeviceRegistrationByMoid(ctx context.Context, moid string) ApiGetAssetDeviceRegistrationByMoidRequest {
 	return ApiGetAssetDeviceRegistrationByMoidRequest{
@@ -4447,8 +4432,7 @@ func (a *AssetApiService) GetAssetDeviceRegistrationByMoid(ctx context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceRegistration
+//  @return AssetDeviceRegistration
 func (a *AssetApiService) GetAssetDeviceRegistrationByMoidExecute(r ApiGetAssetDeviceRegistrationByMoidRequest) (*AssetDeviceRegistration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4664,8 +4648,8 @@ func (r ApiGetAssetDeviceRegistrationListRequest) Execute() (*AssetDeviceRegistr
 /*
 GetAssetDeviceRegistrationList Read a 'asset.DeviceRegistration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAssetDeviceRegistrationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAssetDeviceRegistrationListRequest
 */
 func (a *AssetApiService) GetAssetDeviceRegistrationList(ctx context.Context) ApiGetAssetDeviceRegistrationListRequest {
 	return ApiGetAssetDeviceRegistrationListRequest{
@@ -4675,8 +4659,7 @@ func (a *AssetApiService) GetAssetDeviceRegistrationList(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceRegistrationResponse
+//  @return AssetDeviceRegistrationResponse
 func (a *AssetApiService) GetAssetDeviceRegistrationListExecute(r ApiGetAssetDeviceRegistrationListRequest) (*AssetDeviceRegistrationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4863,9 +4846,9 @@ func (r ApiGetAssetSubscriptionAccountByMoidRequest) Execute() (*AssetSubscripti
 /*
 GetAssetSubscriptionAccountByMoid Read a 'asset.SubscriptionAccount' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAssetSubscriptionAccountByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAssetSubscriptionAccountByMoidRequest
 */
 func (a *AssetApiService) GetAssetSubscriptionAccountByMoid(ctx context.Context, moid string) ApiGetAssetSubscriptionAccountByMoidRequest {
 	return ApiGetAssetSubscriptionAccountByMoidRequest{
@@ -4876,8 +4859,7 @@ func (a *AssetApiService) GetAssetSubscriptionAccountByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return AssetSubscriptionAccount
+//  @return AssetSubscriptionAccount
 func (a *AssetApiService) GetAssetSubscriptionAccountByMoidExecute(r ApiGetAssetSubscriptionAccountByMoidRequest) (*AssetSubscriptionAccount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5093,8 +5075,8 @@ func (r ApiGetAssetSubscriptionAccountListRequest) Execute() (*AssetSubscription
 /*
 GetAssetSubscriptionAccountList Read a 'asset.SubscriptionAccount' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAssetSubscriptionAccountListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAssetSubscriptionAccountListRequest
 */
 func (a *AssetApiService) GetAssetSubscriptionAccountList(ctx context.Context) ApiGetAssetSubscriptionAccountListRequest {
 	return ApiGetAssetSubscriptionAccountListRequest{
@@ -5104,8 +5086,7 @@ func (a *AssetApiService) GetAssetSubscriptionAccountList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return AssetSubscriptionAccountResponse
+//  @return AssetSubscriptionAccountResponse
 func (a *AssetApiService) GetAssetSubscriptionAccountListExecute(r ApiGetAssetSubscriptionAccountListRequest) (*AssetSubscriptionAccountResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5292,9 +5273,9 @@ func (r ApiGetAssetSubscriptionByMoidRequest) Execute() (*AssetSubscription, *ht
 /*
 GetAssetSubscriptionByMoid Read a 'asset.Subscription' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAssetSubscriptionByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAssetSubscriptionByMoidRequest
 */
 func (a *AssetApiService) GetAssetSubscriptionByMoid(ctx context.Context, moid string) ApiGetAssetSubscriptionByMoidRequest {
 	return ApiGetAssetSubscriptionByMoidRequest{
@@ -5305,8 +5286,7 @@ func (a *AssetApiService) GetAssetSubscriptionByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//
-//	@return AssetSubscription
+//  @return AssetSubscription
 func (a *AssetApiService) GetAssetSubscriptionByMoidExecute(r ApiGetAssetSubscriptionByMoidRequest) (*AssetSubscription, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5446,9 +5426,9 @@ func (r ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest) Execute()
 /*
 GetAssetSubscriptionDeviceContractInformationByMoid Read a 'asset.SubscriptionDeviceContractInformation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest
 */
 func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoid(ctx context.Context, moid string) ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest {
 	return ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest{
@@ -5459,8 +5439,7 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoid(ct
 }
 
 // Execute executes the request
-//
-//	@return AssetSubscriptionDeviceContractInformation
+//  @return AssetSubscriptionDeviceContractInformation
 func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoidExecute(r ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest) (*AssetSubscriptionDeviceContractInformation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5676,8 +5655,8 @@ func (r ApiGetAssetSubscriptionDeviceContractInformationListRequest) Execute() (
 /*
 GetAssetSubscriptionDeviceContractInformationList Read a 'asset.SubscriptionDeviceContractInformation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAssetSubscriptionDeviceContractInformationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAssetSubscriptionDeviceContractInformationListRequest
 */
 func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationList(ctx context.Context) ApiGetAssetSubscriptionDeviceContractInformationListRequest {
 	return ApiGetAssetSubscriptionDeviceContractInformationListRequest{
@@ -5687,8 +5666,7 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationList(ctx 
 }
 
 // Execute executes the request
-//
-//	@return AssetSubscriptionDeviceContractInformationResponse
+//  @return AssetSubscriptionDeviceContractInformationResponse
 func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationListExecute(r ApiGetAssetSubscriptionDeviceContractInformationListRequest) (*AssetSubscriptionDeviceContractInformationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5951,8 +5929,8 @@ func (r ApiGetAssetSubscriptionListRequest) Execute() (*AssetSubscriptionRespons
 /*
 GetAssetSubscriptionList Read a 'asset.Subscription' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAssetSubscriptionListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAssetSubscriptionListRequest
 */
 func (a *AssetApiService) GetAssetSubscriptionList(ctx context.Context) ApiGetAssetSubscriptionListRequest {
 	return ApiGetAssetSubscriptionListRequest{
@@ -5962,8 +5940,7 @@ func (a *AssetApiService) GetAssetSubscriptionList(ctx context.Context) ApiGetAs
 }
 
 // Execute executes the request
-//
-//	@return AssetSubscriptionResponse
+//  @return AssetSubscriptionResponse
 func (a *AssetApiService) GetAssetSubscriptionListExecute(r ApiGetAssetSubscriptionListRequest) (*AssetSubscriptionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6150,9 +6127,9 @@ func (r ApiGetAssetTargetByMoidRequest) Execute() (*AssetTarget, *http.Response,
 /*
 GetAssetTargetByMoid Read a 'asset.Target' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetAssetTargetByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetAssetTargetByMoidRequest
 */
 func (a *AssetApiService) GetAssetTargetByMoid(ctx context.Context, moid string) ApiGetAssetTargetByMoidRequest {
 	return ApiGetAssetTargetByMoidRequest{
@@ -6163,8 +6140,7 @@ func (a *AssetApiService) GetAssetTargetByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//
-//	@return AssetTarget
+//  @return AssetTarget
 func (a *AssetApiService) GetAssetTargetByMoidExecute(r ApiGetAssetTargetByMoidRequest) (*AssetTarget, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6380,8 +6356,8 @@ func (r ApiGetAssetTargetListRequest) Execute() (*AssetTargetResponse, *http.Res
 /*
 GetAssetTargetList Read a 'asset.Target' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAssetTargetListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetAssetTargetListRequest
 */
 func (a *AssetApiService) GetAssetTargetList(ctx context.Context) ApiGetAssetTargetListRequest {
 	return ApiGetAssetTargetListRequest{
@@ -6391,8 +6367,7 @@ func (a *AssetApiService) GetAssetTargetList(ctx context.Context) ApiGetAssetTar
 }
 
 // Execute executes the request
-//
-//	@return AssetTargetResponse
+//  @return AssetTargetResponse
 func (a *AssetApiService) GetAssetTargetListExecute(r ApiGetAssetTargetListRequest) (*AssetTargetResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6593,9 +6568,9 @@ func (r ApiPatchAssetDeviceConfigurationRequest) Execute() (*AssetDeviceConfigur
 /*
 PatchAssetDeviceConfiguration Update a 'asset.DeviceConfiguration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchAssetDeviceConfigurationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchAssetDeviceConfigurationRequest
 */
 func (a *AssetApiService) PatchAssetDeviceConfiguration(ctx context.Context, moid string) ApiPatchAssetDeviceConfigurationRequest {
 	return ApiPatchAssetDeviceConfigurationRequest{
@@ -6606,8 +6581,7 @@ func (a *AssetApiService) PatchAssetDeviceConfiguration(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceConfiguration
+//  @return AssetDeviceConfiguration
 func (a *AssetApiService) PatchAssetDeviceConfigurationExecute(r ApiPatchAssetDeviceConfigurationRequest) (*AssetDeviceConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6769,9 +6743,9 @@ func (r ApiPatchAssetDeviceContractInformationRequest) Execute() (*AssetDeviceCo
 /*
 PatchAssetDeviceContractInformation Update a 'asset.DeviceContractInformation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchAssetDeviceContractInformationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchAssetDeviceContractInformationRequest
 */
 func (a *AssetApiService) PatchAssetDeviceContractInformation(ctx context.Context, moid string) ApiPatchAssetDeviceContractInformationRequest {
 	return ApiPatchAssetDeviceContractInformationRequest{
@@ -6782,8 +6756,7 @@ func (a *AssetApiService) PatchAssetDeviceContractInformation(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceContractInformation
+//  @return AssetDeviceContractInformation
 func (a *AssetApiService) PatchAssetDeviceContractInformationExecute(r ApiPatchAssetDeviceContractInformationRequest) (*AssetDeviceContractInformation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6945,9 +6918,9 @@ func (r ApiPatchAssetDeviceRegistrationRequest) Execute() (*AssetDeviceRegistrat
 /*
 PatchAssetDeviceRegistration Updates the resource representing the device connector. For example, this can be used to annotate the device connector resource with user-specified tags.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchAssetDeviceRegistrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchAssetDeviceRegistrationRequest
 */
 func (a *AssetApiService) PatchAssetDeviceRegistration(ctx context.Context, moid string) ApiPatchAssetDeviceRegistrationRequest {
 	return ApiPatchAssetDeviceRegistrationRequest{
@@ -6958,8 +6931,7 @@ func (a *AssetApiService) PatchAssetDeviceRegistration(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceRegistration
+//  @return AssetDeviceRegistration
 func (a *AssetApiService) PatchAssetDeviceRegistrationExecute(r ApiPatchAssetDeviceRegistrationRequest) (*AssetDeviceRegistration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7121,9 +7093,9 @@ func (r ApiPatchAssetTargetRequest) Execute() (*AssetTarget, *http.Response, err
 /*
 PatchAssetTarget Update a 'asset.Target' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchAssetTargetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchAssetTargetRequest
 */
 func (a *AssetApiService) PatchAssetTarget(ctx context.Context, moid string) ApiPatchAssetTargetRequest {
 	return ApiPatchAssetTargetRequest{
@@ -7134,8 +7106,7 @@ func (a *AssetApiService) PatchAssetTarget(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//
-//	@return AssetTarget
+//  @return AssetTarget
 func (a *AssetApiService) PatchAssetTargetExecute(r ApiPatchAssetTargetRequest) (*AssetTarget, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7297,9 +7268,9 @@ func (r ApiUpdateAssetDeviceConfigurationRequest) Execute() (*AssetDeviceConfigu
 /*
 UpdateAssetDeviceConfiguration Update a 'asset.DeviceConfiguration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateAssetDeviceConfigurationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateAssetDeviceConfigurationRequest
 */
 func (a *AssetApiService) UpdateAssetDeviceConfiguration(ctx context.Context, moid string) ApiUpdateAssetDeviceConfigurationRequest {
 	return ApiUpdateAssetDeviceConfigurationRequest{
@@ -7310,8 +7281,7 @@ func (a *AssetApiService) UpdateAssetDeviceConfiguration(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceConfiguration
+//  @return AssetDeviceConfiguration
 func (a *AssetApiService) UpdateAssetDeviceConfigurationExecute(r ApiUpdateAssetDeviceConfigurationRequest) (*AssetDeviceConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7473,9 +7443,9 @@ func (r ApiUpdateAssetDeviceContractInformationRequest) Execute() (*AssetDeviceC
 /*
 UpdateAssetDeviceContractInformation Update a 'asset.DeviceContractInformation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateAssetDeviceContractInformationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateAssetDeviceContractInformationRequest
 */
 func (a *AssetApiService) UpdateAssetDeviceContractInformation(ctx context.Context, moid string) ApiUpdateAssetDeviceContractInformationRequest {
 	return ApiUpdateAssetDeviceContractInformationRequest{
@@ -7486,8 +7456,7 @@ func (a *AssetApiService) UpdateAssetDeviceContractInformation(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceContractInformation
+//  @return AssetDeviceContractInformation
 func (a *AssetApiService) UpdateAssetDeviceContractInformationExecute(r ApiUpdateAssetDeviceContractInformationRequest) (*AssetDeviceContractInformation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7649,9 +7618,9 @@ func (r ApiUpdateAssetDeviceRegistrationRequest) Execute() (*AssetDeviceRegistra
 /*
 UpdateAssetDeviceRegistration Updates the resource representing the device connector. For example, this can be used to annotate the device connector resource with user-specified tags.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateAssetDeviceRegistrationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateAssetDeviceRegistrationRequest
 */
 func (a *AssetApiService) UpdateAssetDeviceRegistration(ctx context.Context, moid string) ApiUpdateAssetDeviceRegistrationRequest {
 	return ApiUpdateAssetDeviceRegistrationRequest{
@@ -7662,8 +7631,7 @@ func (a *AssetApiService) UpdateAssetDeviceRegistration(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return AssetDeviceRegistration
+//  @return AssetDeviceRegistration
 func (a *AssetApiService) UpdateAssetDeviceRegistrationExecute(r ApiUpdateAssetDeviceRegistrationRequest) (*AssetDeviceRegistration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7825,9 +7793,9 @@ func (r ApiUpdateAssetTargetRequest) Execute() (*AssetTarget, *http.Response, er
 /*
 UpdateAssetTarget Update a 'asset.Target' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateAssetTargetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateAssetTargetRequest
 */
 func (a *AssetApiService) UpdateAssetTarget(ctx context.Context, moid string) ApiUpdateAssetTargetRequest {
 	return ApiUpdateAssetTargetRequest{
@@ -7838,8 +7806,7 @@ func (a *AssetApiService) UpdateAssetTarget(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//
-//	@return AssetTarget
+//  @return AssetTarget
 func (a *AssetApiService) UpdateAssetTargetExecute(r ApiUpdateAssetTargetRequest) (*AssetTarget, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

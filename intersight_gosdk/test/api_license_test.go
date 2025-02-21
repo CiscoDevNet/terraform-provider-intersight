@@ -23,6 +23,18 @@ func Test_intersight_LicenseApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test LicenseApiService CreateLicenseErpLicenseCount", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.LicenseApi.CreateLicenseErpLicenseCount(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test LicenseApiService CreateLicenseIksLicenseCount", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -128,6 +140,58 @@ func Test_intersight_LicenseApiService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.LicenseApi.GetLicenseCustomerOpList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test LicenseApiService GetLicenseErpCustomerOpByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.LicenseApi.GetLicenseErpCustomerOpByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test LicenseApiService GetLicenseErpCustomerOpList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.LicenseApi.GetLicenseErpCustomerOpList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test LicenseApiService GetLicenseErpLicenseCountByMoid", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.LicenseApi.GetLicenseErpLicenseCountByMoid(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test LicenseApiService GetLicenseErpLicenseCountList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.LicenseApi.GetLicenseErpLicenseCountList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -449,6 +513,34 @@ func Test_intersight_LicenseApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test LicenseApiService PatchLicenseErpCustomerOp", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.LicenseApi.PatchLicenseErpCustomerOp(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test LicenseApiService PatchLicenseErpLicenseCount", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.LicenseApi.PatchLicenseErpLicenseCount(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test LicenseApiService PatchLicenseIksCustomerOp", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -610,6 +702,34 @@ func Test_intersight_LicenseApiService(t *testing.T) {
 		var moid string
 
 		resp, httpRes, err := apiClient.LicenseApi.UpdateLicenseCustomerOp(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test LicenseApiService UpdateLicenseErpCustomerOp", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.LicenseApi.UpdateLicenseErpCustomerOp(context.Background(), moid).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test LicenseApiService UpdateLicenseErpLicenseCount", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var moid string
+
+		resp, httpRes, err := apiClient.LicenseApi.UpdateLicenseErpLicenseCount(context.Background(), moid).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

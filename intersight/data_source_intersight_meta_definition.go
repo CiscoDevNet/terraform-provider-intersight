@@ -426,6 +426,11 @@ func getMetaDefinitionSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"peer_supported_object_types": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 					"peer_sync": {
 						Description: "When turned on, peer MO corresponding to the reference provided in relation is updated with a reference to the current MO.",
 						Type:        schema.TypeBool,
@@ -1004,6 +1009,20 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["peer_supported_object_types"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetPeerSupportedObjectTypes(x)
+					}
 				}
 			}
 			x = append(x, *o)

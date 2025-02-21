@@ -121,9 +121,9 @@ func resourceFabricFcoeUplinkRole() *schema.Resource {
 					return
 				}},
 			"fec": {
-				Description:  "Forward error correction configuration for the port.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
+				Description:  "Forward error correction configuration for the port.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.\n* `rs-cons16` - Forward Error Correction option \"rs-cons16\".\n* `rs-ieee` - Forward Error Correction option \"rs-ieee\".\n* `Off` - Turn off Forward Error Correction.",
 				Type:         schema.TypeString,
-				ValidateFunc: validation.StringInSlice([]string{"Auto", "Cl91", "Cl74"}, false),
+				ValidateFunc: validation.StringInSlice([]string{"Auto", "Cl91", "Cl74", "rs-cons16", "rs-ieee", "Off"}, false),
 				Optional:     true,
 				Default:      "Auto",
 			},

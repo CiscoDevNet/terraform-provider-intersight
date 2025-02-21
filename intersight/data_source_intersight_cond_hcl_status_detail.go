@@ -200,6 +200,11 @@ func getCondHclStatusDetailSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"inv_vendor": {
+			Description: "The vendor detail of the adapter.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -677,6 +682,11 @@ func dataSourceCondHclStatusDetailRead(c context.Context, d *schema.ResourceData
 		o.SetInvModel(x)
 	}
 
+	if v, ok := d.GetOk("inv_vendor"); ok {
+		x := (v.(string))
+		o.SetInvVendor(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -971,6 +981,7 @@ func dataSourceCondHclStatusDetailRead(c context.Context, d *schema.ResourceData
 				temp["inv_driver_version"] = (s.GetInvDriverVersion())
 				temp["inv_firmware_version"] = (s.GetInvFirmwareVersion())
 				temp["inv_model"] = (s.GetInvModel())
+				temp["inv_vendor"] = (s.GetInvVendor())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

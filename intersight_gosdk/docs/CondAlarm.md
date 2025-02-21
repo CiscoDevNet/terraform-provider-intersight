@@ -18,6 +18,9 @@ Name | Type | Description | Notes
 **Code** | Pointer to **string** | A unique alarm code. For alarms mapped from UCS faults, this will be the same as the UCS fault code. | [optional] [readonly] 
 **CreationTime** | Pointer to **time.Time** | The time the alarm was created. | [optional] [readonly] 
 **Description** | Pointer to **string** | A longer description of the alarm than the name. The description contains details of the component reporting the issue. | [optional] [readonly] 
+**Flapping** | Pointer to **string** | Alarm flapping state. This will be set to Flapping or Cooldown if both (A) this type of alarm is being monitored for flapping conditions, and (B) the alarm has recently transitioned to an active state (Critical, Warning or Info) followed by a Cleared state or vice versa. LastTransitionTime is a better field to use to know whether a particular alarm recently changed state. * &#x60;NotFlapping&#x60; - The enum value None says that no recent flaps have occurred. * &#x60;Flapping&#x60; - The enum value Flapping says that the alarm has become active recently, after being active and then cleared previously. * &#x60;Cooldown&#x60; - The enum value Cooldown says that the alarm is cleared, but was recently active. * &#x60;Unknown&#x60; - The enum value Unknown indicates that you might not have the latest version of the property meta. | [optional] [readonly] [default to "NotFlapping"]
+**FlappingCount** | Pointer to **int64** | Alarm flapping counter. This will be incremented every time the state of the alarm transitions to an active state (Critical, Warning or Info) followed by a Cleared state or vice versa. If no more transitions occur within the system-defined flap interval (usually less than 5 minutes), the counter will be reset to zero. This represents the amount of times the alarm has flapped between an active and a cleared state since the last time the Flapping state was cleared. | [optional] [readonly] 
+**FlappingStartTime** | Pointer to **time.Time** | Alarm flapping start time. Only when the flapping state is Flapping or Cooldown, this will be set to the time the alarm began flapping. If the flapping state is NotFlapping, this timestamp may be set to zero or any other time and should be ignored. | [optional] [readonly] 
 **LastTransitionTime** | Pointer to **time.Time** | The time the alarm last had a change in severity. | [optional] [readonly] 
 **MsAffectedObject** | Pointer to **string** | A unique key for the alarm from the managed system&#39;s point of view. For example, in the case of UCS, this is the fault&#39;s dn. | [optional] [readonly] 
 **Name** | Pointer to **string** | Uniquely identifies the type of alarm. For alarms originating from Intersight, this will be a descriptive name. For alarms that are mapped from faults, the name will be derived from fault properties. For example, alarms mapped from UCS faults will use a prefix of UCS and appended with the fault code. | [optional] [readonly] 
@@ -25,6 +28,7 @@ Name | Type | Description | Notes
 **Severity** | Pointer to **string** | The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [readonly] [default to "None"]
 **Suppressed** | Pointer to **bool** | Indicates whether the alarm is marked for suppression or not. | [optional] 
 **AffectedMo** | Pointer to [**NullableMoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**AlarmSummaryAggregators** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
 **Definition** | Pointer to [**NullableCondAlarmDefinitionRelationship**](CondAlarmDefinitionRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -387,6 +391,81 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetFlapping
+
+`func (o *CondAlarm) GetFlapping() string`
+
+GetFlapping returns the Flapping field if non-nil, zero value otherwise.
+
+### GetFlappingOk
+
+`func (o *CondAlarm) GetFlappingOk() (*string, bool)`
+
+GetFlappingOk returns a tuple with the Flapping field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFlapping
+
+`func (o *CondAlarm) SetFlapping(v string)`
+
+SetFlapping sets Flapping field to given value.
+
+### HasFlapping
+
+`func (o *CondAlarm) HasFlapping() bool`
+
+HasFlapping returns a boolean if a field has been set.
+
+### GetFlappingCount
+
+`func (o *CondAlarm) GetFlappingCount() int64`
+
+GetFlappingCount returns the FlappingCount field if non-nil, zero value otherwise.
+
+### GetFlappingCountOk
+
+`func (o *CondAlarm) GetFlappingCountOk() (*int64, bool)`
+
+GetFlappingCountOk returns a tuple with the FlappingCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFlappingCount
+
+`func (o *CondAlarm) SetFlappingCount(v int64)`
+
+SetFlappingCount sets FlappingCount field to given value.
+
+### HasFlappingCount
+
+`func (o *CondAlarm) HasFlappingCount() bool`
+
+HasFlappingCount returns a boolean if a field has been set.
+
+### GetFlappingStartTime
+
+`func (o *CondAlarm) GetFlappingStartTime() time.Time`
+
+GetFlappingStartTime returns the FlappingStartTime field if non-nil, zero value otherwise.
+
+### GetFlappingStartTimeOk
+
+`func (o *CondAlarm) GetFlappingStartTimeOk() (*time.Time, bool)`
+
+GetFlappingStartTimeOk returns a tuple with the FlappingStartTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFlappingStartTime
+
+`func (o *CondAlarm) SetFlappingStartTime(v time.Time)`
+
+SetFlappingStartTime sets FlappingStartTime field to given value.
+
+### HasFlappingStartTime
+
+`func (o *CondAlarm) HasFlappingStartTime() bool`
+
+HasFlappingStartTime returns a boolean if a field has been set.
+
 ### GetLastTransitionTime
 
 `func (o *CondAlarm) GetLastTransitionTime() time.Time`
@@ -572,6 +651,41 @@ HasAffectedMo returns a boolean if a field has been set.
 `func (o *CondAlarm) UnsetAffectedMo()`
 
 UnsetAffectedMo ensures that no value is present for AffectedMo, not even an explicit nil
+### GetAlarmSummaryAggregators
+
+`func (o *CondAlarm) GetAlarmSummaryAggregators() []MoBaseMoRelationship`
+
+GetAlarmSummaryAggregators returns the AlarmSummaryAggregators field if non-nil, zero value otherwise.
+
+### GetAlarmSummaryAggregatorsOk
+
+`func (o *CondAlarm) GetAlarmSummaryAggregatorsOk() (*[]MoBaseMoRelationship, bool)`
+
+GetAlarmSummaryAggregatorsOk returns a tuple with the AlarmSummaryAggregators field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlarmSummaryAggregators
+
+`func (o *CondAlarm) SetAlarmSummaryAggregators(v []MoBaseMoRelationship)`
+
+SetAlarmSummaryAggregators sets AlarmSummaryAggregators field to given value.
+
+### HasAlarmSummaryAggregators
+
+`func (o *CondAlarm) HasAlarmSummaryAggregators() bool`
+
+HasAlarmSummaryAggregators returns a boolean if a field has been set.
+
+### SetAlarmSummaryAggregatorsNil
+
+`func (o *CondAlarm) SetAlarmSummaryAggregatorsNil(b bool)`
+
+ SetAlarmSummaryAggregatorsNil sets the value for AlarmSummaryAggregators to be an explicit nil
+
+### UnsetAlarmSummaryAggregators
+`func (o *CondAlarm) UnsetAlarmSummaryAggregators()`
+
+UnsetAlarmSummaryAggregators ensures that no value is present for AlarmSummaryAggregators, not even an explicit nil
 ### GetDefinition
 
 `func (o *CondAlarm) GetDefinition() CondAlarmDefinitionRelationship`

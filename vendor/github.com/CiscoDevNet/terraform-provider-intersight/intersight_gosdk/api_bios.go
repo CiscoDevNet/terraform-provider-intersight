@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateBiosPolicyRequest) Execute() (*BiosPolicy, *http.Response, erro
 /*
 CreateBiosPolicy Create a 'bios.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateBiosPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateBiosPolicyRequest
 */
 func (a *BiosApiService) CreateBiosPolicy(ctx context.Context) ApiCreateBiosPolicyRequest {
 	return ApiCreateBiosPolicyRequest{
@@ -67,8 +67,7 @@ func (a *BiosApiService) CreateBiosPolicy(ctx context.Context) ApiCreateBiosPoli
 }
 
 // Execute executes the request
-//
-//	@return BiosPolicy
+//  @return BiosPolicy
 func (a *BiosApiService) CreateBiosPolicyExecute(r ApiCreateBiosPolicyRequest) (*BiosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -218,9 +217,9 @@ func (r ApiDeleteBiosPolicyRequest) Execute() (*http.Response, error) {
 /*
 DeleteBiosPolicy Delete a 'bios.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteBiosPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteBiosPolicyRequest
 */
 func (a *BiosApiService) DeleteBiosPolicy(ctx context.Context, moid string) ApiDeleteBiosPolicyRequest {
 	return ApiDeleteBiosPolicyRequest{
@@ -360,9 +359,9 @@ func (r ApiGetBiosBootDeviceByMoidRequest) Execute() (*BiosBootDevice, *http.Res
 /*
 GetBiosBootDeviceByMoid Read a 'bios.BootDevice' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetBiosBootDeviceByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetBiosBootDeviceByMoidRequest
 */
 func (a *BiosApiService) GetBiosBootDeviceByMoid(ctx context.Context, moid string) ApiGetBiosBootDeviceByMoidRequest {
 	return ApiGetBiosBootDeviceByMoidRequest{
@@ -373,8 +372,7 @@ func (a *BiosApiService) GetBiosBootDeviceByMoid(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//
-//	@return BiosBootDevice
+//  @return BiosBootDevice
 func (a *BiosApiService) GetBiosBootDeviceByMoidExecute(r ApiGetBiosBootDeviceByMoidRequest) (*BiosBootDevice, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -590,8 +588,8 @@ func (r ApiGetBiosBootDeviceListRequest) Execute() (*BiosBootDeviceResponse, *ht
 /*
 GetBiosBootDeviceList Read a 'bios.BootDevice' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetBiosBootDeviceListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetBiosBootDeviceListRequest
 */
 func (a *BiosApiService) GetBiosBootDeviceList(ctx context.Context) ApiGetBiosBootDeviceListRequest {
 	return ApiGetBiosBootDeviceListRequest{
@@ -601,8 +599,7 @@ func (a *BiosApiService) GetBiosBootDeviceList(ctx context.Context) ApiGetBiosBo
 }
 
 // Execute executes the request
-//
-//	@return BiosBootDeviceResponse
+//  @return BiosBootDeviceResponse
 func (a *BiosApiService) GetBiosBootDeviceListExecute(r ApiGetBiosBootDeviceListRequest) (*BiosBootDeviceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -789,9 +786,9 @@ func (r ApiGetBiosBootModeByMoidRequest) Execute() (*BiosBootMode, *http.Respons
 /*
 GetBiosBootModeByMoid Read a 'bios.BootMode' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetBiosBootModeByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetBiosBootModeByMoidRequest
 */
 func (a *BiosApiService) GetBiosBootModeByMoid(ctx context.Context, moid string) ApiGetBiosBootModeByMoidRequest {
 	return ApiGetBiosBootModeByMoidRequest{
@@ -802,8 +799,7 @@ func (a *BiosApiService) GetBiosBootModeByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//
-//	@return BiosBootMode
+//  @return BiosBootMode
 func (a *BiosApiService) GetBiosBootModeByMoidExecute(r ApiGetBiosBootModeByMoidRequest) (*BiosBootMode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1019,8 +1015,8 @@ func (r ApiGetBiosBootModeListRequest) Execute() (*BiosBootModeResponse, *http.R
 /*
 GetBiosBootModeList Read a 'bios.BootMode' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetBiosBootModeListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetBiosBootModeListRequest
 */
 func (a *BiosApiService) GetBiosBootModeList(ctx context.Context) ApiGetBiosBootModeListRequest {
 	return ApiGetBiosBootModeListRequest{
@@ -1030,8 +1026,7 @@ func (a *BiosApiService) GetBiosBootModeList(ctx context.Context) ApiGetBiosBoot
 }
 
 // Execute executes the request
-//
-//	@return BiosBootModeResponse
+//  @return BiosBootModeResponse
 func (a *BiosApiService) GetBiosBootModeListExecute(r ApiGetBiosBootModeListRequest) (*BiosBootModeResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1218,9 +1213,9 @@ func (r ApiGetBiosPolicyByMoidRequest) Execute() (*BiosPolicy, *http.Response, e
 /*
 GetBiosPolicyByMoid Read a 'bios.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetBiosPolicyByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetBiosPolicyByMoidRequest
 */
 func (a *BiosApiService) GetBiosPolicyByMoid(ctx context.Context, moid string) ApiGetBiosPolicyByMoidRequest {
 	return ApiGetBiosPolicyByMoidRequest{
@@ -1231,8 +1226,7 @@ func (a *BiosApiService) GetBiosPolicyByMoid(ctx context.Context, moid string) A
 }
 
 // Execute executes the request
-//
-//	@return BiosPolicy
+//  @return BiosPolicy
 func (a *BiosApiService) GetBiosPolicyByMoidExecute(r ApiGetBiosPolicyByMoidRequest) (*BiosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1448,8 +1442,8 @@ func (r ApiGetBiosPolicyListRequest) Execute() (*BiosPolicyResponse, *http.Respo
 /*
 GetBiosPolicyList Read a 'bios.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetBiosPolicyListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetBiosPolicyListRequest
 */
 func (a *BiosApiService) GetBiosPolicyList(ctx context.Context) ApiGetBiosPolicyListRequest {
 	return ApiGetBiosPolicyListRequest{
@@ -1459,8 +1453,7 @@ func (a *BiosApiService) GetBiosPolicyList(ctx context.Context) ApiGetBiosPolicy
 }
 
 // Execute executes the request
-//
-//	@return BiosPolicyResponse
+//  @return BiosPolicyResponse
 func (a *BiosApiService) GetBiosPolicyListExecute(r ApiGetBiosPolicyListRequest) (*BiosPolicyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1647,9 +1640,9 @@ func (r ApiGetBiosSystemBootOrderByMoidRequest) Execute() (*BiosSystemBootOrder,
 /*
 GetBiosSystemBootOrderByMoid Read a 'bios.SystemBootOrder' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetBiosSystemBootOrderByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetBiosSystemBootOrderByMoidRequest
 */
 func (a *BiosApiService) GetBiosSystemBootOrderByMoid(ctx context.Context, moid string) ApiGetBiosSystemBootOrderByMoidRequest {
 	return ApiGetBiosSystemBootOrderByMoidRequest{
@@ -1660,8 +1653,7 @@ func (a *BiosApiService) GetBiosSystemBootOrderByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return BiosSystemBootOrder
+//  @return BiosSystemBootOrder
 func (a *BiosApiService) GetBiosSystemBootOrderByMoidExecute(r ApiGetBiosSystemBootOrderByMoidRequest) (*BiosSystemBootOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1877,8 +1869,8 @@ func (r ApiGetBiosSystemBootOrderListRequest) Execute() (*BiosSystemBootOrderRes
 /*
 GetBiosSystemBootOrderList Read a 'bios.SystemBootOrder' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetBiosSystemBootOrderListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetBiosSystemBootOrderListRequest
 */
 func (a *BiosApiService) GetBiosSystemBootOrderList(ctx context.Context) ApiGetBiosSystemBootOrderListRequest {
 	return ApiGetBiosSystemBootOrderListRequest{
@@ -1888,8 +1880,7 @@ func (a *BiosApiService) GetBiosSystemBootOrderList(ctx context.Context) ApiGetB
 }
 
 // Execute executes the request
-//
-//	@return BiosSystemBootOrderResponse
+//  @return BiosSystemBootOrderResponse
 func (a *BiosApiService) GetBiosSystemBootOrderListExecute(r ApiGetBiosSystemBootOrderListRequest) (*BiosSystemBootOrderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2076,9 +2067,9 @@ func (r ApiGetBiosTokenSettingsByMoidRequest) Execute() (*BiosTokenSettings, *ht
 /*
 GetBiosTokenSettingsByMoid Read a 'bios.TokenSettings' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetBiosTokenSettingsByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetBiosTokenSettingsByMoidRequest
 */
 func (a *BiosApiService) GetBiosTokenSettingsByMoid(ctx context.Context, moid string) ApiGetBiosTokenSettingsByMoidRequest {
 	return ApiGetBiosTokenSettingsByMoidRequest{
@@ -2089,8 +2080,7 @@ func (a *BiosApiService) GetBiosTokenSettingsByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//
-//	@return BiosTokenSettings
+//  @return BiosTokenSettings
 func (a *BiosApiService) GetBiosTokenSettingsByMoidExecute(r ApiGetBiosTokenSettingsByMoidRequest) (*BiosTokenSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2306,8 +2296,8 @@ func (r ApiGetBiosTokenSettingsListRequest) Execute() (*BiosTokenSettingsRespons
 /*
 GetBiosTokenSettingsList Read a 'bios.TokenSettings' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetBiosTokenSettingsListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetBiosTokenSettingsListRequest
 */
 func (a *BiosApiService) GetBiosTokenSettingsList(ctx context.Context) ApiGetBiosTokenSettingsListRequest {
 	return ApiGetBiosTokenSettingsListRequest{
@@ -2317,8 +2307,7 @@ func (a *BiosApiService) GetBiosTokenSettingsList(ctx context.Context) ApiGetBio
 }
 
 // Execute executes the request
-//
-//	@return BiosTokenSettingsResponse
+//  @return BiosTokenSettingsResponse
 func (a *BiosApiService) GetBiosTokenSettingsListExecute(r ApiGetBiosTokenSettingsListRequest) (*BiosTokenSettingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2505,9 +2494,9 @@ func (r ApiGetBiosUnitByMoidRequest) Execute() (*BiosUnit, *http.Response, error
 /*
 GetBiosUnitByMoid Read a 'bios.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetBiosUnitByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetBiosUnitByMoidRequest
 */
 func (a *BiosApiService) GetBiosUnitByMoid(ctx context.Context, moid string) ApiGetBiosUnitByMoidRequest {
 	return ApiGetBiosUnitByMoidRequest{
@@ -2518,8 +2507,7 @@ func (a *BiosApiService) GetBiosUnitByMoid(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//
-//	@return BiosUnit
+//  @return BiosUnit
 func (a *BiosApiService) GetBiosUnitByMoidExecute(r ApiGetBiosUnitByMoidRequest) (*BiosUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2735,8 +2723,8 @@ func (r ApiGetBiosUnitListRequest) Execute() (*BiosUnitResponse, *http.Response,
 /*
 GetBiosUnitList Read a 'bios.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetBiosUnitListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetBiosUnitListRequest
 */
 func (a *BiosApiService) GetBiosUnitList(ctx context.Context) ApiGetBiosUnitListRequest {
 	return ApiGetBiosUnitListRequest{
@@ -2746,8 +2734,7 @@ func (a *BiosApiService) GetBiosUnitList(ctx context.Context) ApiGetBiosUnitList
 }
 
 // Execute executes the request
-//
-//	@return BiosUnitResponse
+//  @return BiosUnitResponse
 func (a *BiosApiService) GetBiosUnitListExecute(r ApiGetBiosUnitListRequest) (*BiosUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2934,9 +2921,9 @@ func (r ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest) Execute() (*BiosV
 /*
 GetBiosVfSelectMemoryRasConfigurationByMoid Read a 'bios.VfSelectMemoryRasConfiguration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest
 */
 func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoid(ctx context.Context, moid string) ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest {
 	return ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest{
@@ -2947,8 +2934,7 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoid(ctx context
 }
 
 // Execute executes the request
-//
-//	@return BiosVfSelectMemoryRasConfiguration
+//  @return BiosVfSelectMemoryRasConfiguration
 func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoidExecute(r ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest) (*BiosVfSelectMemoryRasConfiguration, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3164,8 +3150,8 @@ func (r ApiGetBiosVfSelectMemoryRasConfigurationListRequest) Execute() (*BiosVfS
 /*
 GetBiosVfSelectMemoryRasConfigurationList Read a 'bios.VfSelectMemoryRasConfiguration' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetBiosVfSelectMemoryRasConfigurationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetBiosVfSelectMemoryRasConfigurationListRequest
 */
 func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationList(ctx context.Context) ApiGetBiosVfSelectMemoryRasConfigurationListRequest {
 	return ApiGetBiosVfSelectMemoryRasConfigurationListRequest{
@@ -3175,8 +3161,7 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationList(ctx context.C
 }
 
 // Execute executes the request
-//
-//	@return BiosVfSelectMemoryRasConfigurationResponse
+//  @return BiosVfSelectMemoryRasConfigurationResponse
 func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationListExecute(r ApiGetBiosVfSelectMemoryRasConfigurationListRequest) (*BiosVfSelectMemoryRasConfigurationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3377,9 +3362,9 @@ func (r ApiPatchBiosBootModeRequest) Execute() (*BiosBootMode, *http.Response, e
 /*
 PatchBiosBootMode Update a 'bios.BootMode' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchBiosBootModeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchBiosBootModeRequest
 */
 func (a *BiosApiService) PatchBiosBootMode(ctx context.Context, moid string) ApiPatchBiosBootModeRequest {
 	return ApiPatchBiosBootModeRequest{
@@ -3390,8 +3375,7 @@ func (a *BiosApiService) PatchBiosBootMode(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//
-//	@return BiosBootMode
+//  @return BiosBootMode
 func (a *BiosApiService) PatchBiosBootModeExecute(r ApiPatchBiosBootModeRequest) (*BiosBootMode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3553,9 +3537,9 @@ func (r ApiPatchBiosPolicyRequest) Execute() (*BiosPolicy, *http.Response, error
 /*
 PatchBiosPolicy Update a 'bios.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchBiosPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchBiosPolicyRequest
 */
 func (a *BiosApiService) PatchBiosPolicy(ctx context.Context, moid string) ApiPatchBiosPolicyRequest {
 	return ApiPatchBiosPolicyRequest{
@@ -3566,8 +3550,7 @@ func (a *BiosApiService) PatchBiosPolicy(ctx context.Context, moid string) ApiPa
 }
 
 // Execute executes the request
-//
-//	@return BiosPolicy
+//  @return BiosPolicy
 func (a *BiosApiService) PatchBiosPolicyExecute(r ApiPatchBiosPolicyRequest) (*BiosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3729,9 +3712,9 @@ func (r ApiPatchBiosUnitRequest) Execute() (*BiosUnit, *http.Response, error) {
 /*
 PatchBiosUnit Update a 'bios.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchBiosUnitRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchBiosUnitRequest
 */
 func (a *BiosApiService) PatchBiosUnit(ctx context.Context, moid string) ApiPatchBiosUnitRequest {
 	return ApiPatchBiosUnitRequest{
@@ -3742,8 +3725,7 @@ func (a *BiosApiService) PatchBiosUnit(ctx context.Context, moid string) ApiPatc
 }
 
 // Execute executes the request
-//
-//	@return BiosUnit
+//  @return BiosUnit
 func (a *BiosApiService) PatchBiosUnitExecute(r ApiPatchBiosUnitRequest) (*BiosUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3905,9 +3887,9 @@ func (r ApiUpdateBiosBootModeRequest) Execute() (*BiosBootMode, *http.Response, 
 /*
 UpdateBiosBootMode Update a 'bios.BootMode' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateBiosBootModeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateBiosBootModeRequest
 */
 func (a *BiosApiService) UpdateBiosBootMode(ctx context.Context, moid string) ApiUpdateBiosBootModeRequest {
 	return ApiUpdateBiosBootModeRequest{
@@ -3918,8 +3900,7 @@ func (a *BiosApiService) UpdateBiosBootMode(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//
-//	@return BiosBootMode
+//  @return BiosBootMode
 func (a *BiosApiService) UpdateBiosBootModeExecute(r ApiUpdateBiosBootModeRequest) (*BiosBootMode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4081,9 +4062,9 @@ func (r ApiUpdateBiosPolicyRequest) Execute() (*BiosPolicy, *http.Response, erro
 /*
 UpdateBiosPolicy Update a 'bios.Policy' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateBiosPolicyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateBiosPolicyRequest
 */
 func (a *BiosApiService) UpdateBiosPolicy(ctx context.Context, moid string) ApiUpdateBiosPolicyRequest {
 	return ApiUpdateBiosPolicyRequest{
@@ -4094,8 +4075,7 @@ func (a *BiosApiService) UpdateBiosPolicy(ctx context.Context, moid string) ApiU
 }
 
 // Execute executes the request
-//
-//	@return BiosPolicy
+//  @return BiosPolicy
 func (a *BiosApiService) UpdateBiosPolicyExecute(r ApiUpdateBiosPolicyRequest) (*BiosPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4257,9 +4237,9 @@ func (r ApiUpdateBiosUnitRequest) Execute() (*BiosUnit, *http.Response, error) {
 /*
 UpdateBiosUnit Update a 'bios.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateBiosUnitRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateBiosUnitRequest
 */
 func (a *BiosApiService) UpdateBiosUnit(ctx context.Context, moid string) ApiUpdateBiosUnitRequest {
 	return ApiUpdateBiosUnitRequest{
@@ -4270,8 +4250,7 @@ func (a *BiosApiService) UpdateBiosUnit(ctx context.Context, moid string) ApiUpd
 }
 
 // Execute executes the request
-//
-//	@return BiosUnit
+//  @return BiosUnit
 func (a *BiosApiService) UpdateBiosUnitExecute(r ApiUpdateBiosUnitRequest) (*BiosUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

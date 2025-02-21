@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateChassisConfigImportRequest) Execute() (*ChassisConfigImport, *h
 /*
 CreateChassisConfigImport Create a 'chassis.ConfigImport' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateChassisConfigImportRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateChassisConfigImportRequest
 */
 func (a *ChassisApiService) CreateChassisConfigImport(ctx context.Context) ApiCreateChassisConfigImportRequest {
 	return ApiCreateChassisConfigImportRequest{
@@ -67,8 +67,7 @@ func (a *ChassisApiService) CreateChassisConfigImport(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//
-//	@return ChassisConfigImport
+//  @return ChassisConfigImport
 func (a *ChassisApiService) CreateChassisConfigImportExecute(r ApiCreateChassisConfigImportRequest) (*ChassisConfigImport, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -238,8 +237,8 @@ func (r ApiCreateChassisProfileRequest) Execute() (*ChassisProfile, *http.Respon
 /*
 CreateChassisProfile Create a 'chassis.Profile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateChassisProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateChassisProfileRequest
 */
 func (a *ChassisApiService) CreateChassisProfile(ctx context.Context) ApiCreateChassisProfileRequest {
 	return ApiCreateChassisProfileRequest{
@@ -249,8 +248,7 @@ func (a *ChassisApiService) CreateChassisProfile(ctx context.Context) ApiCreateC
 }
 
 // Execute executes the request
-//
-//	@return ChassisProfile
+//  @return ChassisProfile
 func (a *ChassisApiService) CreateChassisProfileExecute(r ApiCreateChassisProfileRequest) (*ChassisProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -420,8 +418,8 @@ func (r ApiCreateChassisProfileTemplateRequest) Execute() (*ChassisProfileTempla
 /*
 CreateChassisProfileTemplate Create a 'chassis.ProfileTemplate' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateChassisProfileTemplateRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateChassisProfileTemplateRequest
 */
 func (a *ChassisApiService) CreateChassisProfileTemplate(ctx context.Context) ApiCreateChassisProfileTemplateRequest {
 	return ApiCreateChassisProfileTemplateRequest{
@@ -431,8 +429,7 @@ func (a *ChassisApiService) CreateChassisProfileTemplate(ctx context.Context) Ap
 }
 
 // Execute executes the request
-//
-//	@return ChassisProfileTemplate
+//  @return ChassisProfileTemplate
 func (a *ChassisApiService) CreateChassisProfileTemplateExecute(r ApiCreateChassisProfileTemplateRequest) (*ChassisProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -582,9 +579,9 @@ func (r ApiDeleteChassisProfileRequest) Execute() (*http.Response, error) {
 /*
 DeleteChassisProfile Delete a 'chassis.Profile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteChassisProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteChassisProfileRequest
 */
 func (a *ChassisApiService) DeleteChassisProfile(ctx context.Context, moid string) ApiDeleteChassisProfileRequest {
 	return ApiDeleteChassisProfileRequest{
@@ -724,9 +721,9 @@ func (r ApiDeleteChassisProfileTemplateRequest) Execute() (*http.Response, error
 /*
 DeleteChassisProfileTemplate Delete a 'chassis.ProfileTemplate' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteChassisProfileTemplateRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteChassisProfileTemplateRequest
 */
 func (a *ChassisApiService) DeleteChassisProfileTemplate(ctx context.Context, moid string) ApiDeleteChassisProfileTemplateRequest {
 	return ApiDeleteChassisProfileTemplateRequest{
@@ -866,9 +863,9 @@ func (r ApiGetChassisConfigChangeDetailByMoidRequest) Execute() (*ChassisConfigC
 /*
 GetChassisConfigChangeDetailByMoid Read a 'chassis.ConfigChangeDetail' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetChassisConfigChangeDetailByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetChassisConfigChangeDetailByMoidRequest
 */
 func (a *ChassisApiService) GetChassisConfigChangeDetailByMoid(ctx context.Context, moid string) ApiGetChassisConfigChangeDetailByMoidRequest {
 	return ApiGetChassisConfigChangeDetailByMoidRequest{
@@ -879,8 +876,7 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return ChassisConfigChangeDetail
+//  @return ChassisConfigChangeDetail
 func (a *ChassisApiService) GetChassisConfigChangeDetailByMoidExecute(r ApiGetChassisConfigChangeDetailByMoidRequest) (*ChassisConfigChangeDetail, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1096,8 +1092,8 @@ func (r ApiGetChassisConfigChangeDetailListRequest) Execute() (*ChassisConfigCha
 /*
 GetChassisConfigChangeDetailList Read a 'chassis.ConfigChangeDetail' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetChassisConfigChangeDetailListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetChassisConfigChangeDetailListRequest
 */
 func (a *ChassisApiService) GetChassisConfigChangeDetailList(ctx context.Context) ApiGetChassisConfigChangeDetailListRequest {
 	return ApiGetChassisConfigChangeDetailListRequest{
@@ -1107,8 +1103,7 @@ func (a *ChassisApiService) GetChassisConfigChangeDetailList(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return ChassisConfigChangeDetailResponse
+//  @return ChassisConfigChangeDetailResponse
 func (a *ChassisApiService) GetChassisConfigChangeDetailListExecute(r ApiGetChassisConfigChangeDetailListRequest) (*ChassisConfigChangeDetailResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1295,9 +1290,9 @@ func (r ApiGetChassisConfigImportByMoidRequest) Execute() (*ChassisConfigImport,
 /*
 GetChassisConfigImportByMoid Read a 'chassis.ConfigImport' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetChassisConfigImportByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetChassisConfigImportByMoidRequest
 */
 func (a *ChassisApiService) GetChassisConfigImportByMoid(ctx context.Context, moid string) ApiGetChassisConfigImportByMoidRequest {
 	return ApiGetChassisConfigImportByMoidRequest{
@@ -1308,8 +1303,7 @@ func (a *ChassisApiService) GetChassisConfigImportByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return ChassisConfigImport
+//  @return ChassisConfigImport
 func (a *ChassisApiService) GetChassisConfigImportByMoidExecute(r ApiGetChassisConfigImportByMoidRequest) (*ChassisConfigImport, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1525,8 +1519,8 @@ func (r ApiGetChassisConfigImportListRequest) Execute() (*ChassisConfigImportRes
 /*
 GetChassisConfigImportList Read a 'chassis.ConfigImport' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetChassisConfigImportListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetChassisConfigImportListRequest
 */
 func (a *ChassisApiService) GetChassisConfigImportList(ctx context.Context) ApiGetChassisConfigImportListRequest {
 	return ApiGetChassisConfigImportListRequest{
@@ -1536,8 +1530,7 @@ func (a *ChassisApiService) GetChassisConfigImportList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//
-//	@return ChassisConfigImportResponse
+//  @return ChassisConfigImportResponse
 func (a *ChassisApiService) GetChassisConfigImportListExecute(r ApiGetChassisConfigImportListRequest) (*ChassisConfigImportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1724,9 +1717,9 @@ func (r ApiGetChassisConfigResultByMoidRequest) Execute() (*ChassisConfigResult,
 /*
 GetChassisConfigResultByMoid Read a 'chassis.ConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetChassisConfigResultByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetChassisConfigResultByMoidRequest
 */
 func (a *ChassisApiService) GetChassisConfigResultByMoid(ctx context.Context, moid string) ApiGetChassisConfigResultByMoidRequest {
 	return ApiGetChassisConfigResultByMoidRequest{
@@ -1737,8 +1730,7 @@ func (a *ChassisApiService) GetChassisConfigResultByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return ChassisConfigResult
+//  @return ChassisConfigResult
 func (a *ChassisApiService) GetChassisConfigResultByMoidExecute(r ApiGetChassisConfigResultByMoidRequest) (*ChassisConfigResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1878,9 +1870,9 @@ func (r ApiGetChassisConfigResultEntryByMoidRequest) Execute() (*ChassisConfigRe
 /*
 GetChassisConfigResultEntryByMoid Read a 'chassis.ConfigResultEntry' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetChassisConfigResultEntryByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetChassisConfigResultEntryByMoidRequest
 */
 func (a *ChassisApiService) GetChassisConfigResultEntryByMoid(ctx context.Context, moid string) ApiGetChassisConfigResultEntryByMoidRequest {
 	return ApiGetChassisConfigResultEntryByMoidRequest{
@@ -1891,8 +1883,7 @@ func (a *ChassisApiService) GetChassisConfigResultEntryByMoid(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return ChassisConfigResultEntry
+//  @return ChassisConfigResultEntry
 func (a *ChassisApiService) GetChassisConfigResultEntryByMoidExecute(r ApiGetChassisConfigResultEntryByMoidRequest) (*ChassisConfigResultEntry, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2108,8 +2099,8 @@ func (r ApiGetChassisConfigResultEntryListRequest) Execute() (*ChassisConfigResu
 /*
 GetChassisConfigResultEntryList Read a 'chassis.ConfigResultEntry' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetChassisConfigResultEntryListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetChassisConfigResultEntryListRequest
 */
 func (a *ChassisApiService) GetChassisConfigResultEntryList(ctx context.Context) ApiGetChassisConfigResultEntryListRequest {
 	return ApiGetChassisConfigResultEntryListRequest{
@@ -2119,8 +2110,7 @@ func (a *ChassisApiService) GetChassisConfigResultEntryList(ctx context.Context)
 }
 
 // Execute executes the request
-//
-//	@return ChassisConfigResultEntryResponse
+//  @return ChassisConfigResultEntryResponse
 func (a *ChassisApiService) GetChassisConfigResultEntryListExecute(r ApiGetChassisConfigResultEntryListRequest) (*ChassisConfigResultEntryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2383,8 +2373,8 @@ func (r ApiGetChassisConfigResultListRequest) Execute() (*ChassisConfigResultRes
 /*
 GetChassisConfigResultList Read a 'chassis.ConfigResult' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetChassisConfigResultListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetChassisConfigResultListRequest
 */
 func (a *ChassisApiService) GetChassisConfigResultList(ctx context.Context) ApiGetChassisConfigResultListRequest {
 	return ApiGetChassisConfigResultListRequest{
@@ -2394,8 +2384,7 @@ func (a *ChassisApiService) GetChassisConfigResultList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//
-//	@return ChassisConfigResultResponse
+//  @return ChassisConfigResultResponse
 func (a *ChassisApiService) GetChassisConfigResultListExecute(r ApiGetChassisConfigResultListRequest) (*ChassisConfigResultResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2582,9 +2571,9 @@ func (r ApiGetChassisIomProfileByMoidRequest) Execute() (*ChassisIomProfile, *ht
 /*
 GetChassisIomProfileByMoid Read a 'chassis.IomProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetChassisIomProfileByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetChassisIomProfileByMoidRequest
 */
 func (a *ChassisApiService) GetChassisIomProfileByMoid(ctx context.Context, moid string) ApiGetChassisIomProfileByMoidRequest {
 	return ApiGetChassisIomProfileByMoidRequest{
@@ -2595,8 +2584,7 @@ func (a *ChassisApiService) GetChassisIomProfileByMoid(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return ChassisIomProfile
+//  @return ChassisIomProfile
 func (a *ChassisApiService) GetChassisIomProfileByMoidExecute(r ApiGetChassisIomProfileByMoidRequest) (*ChassisIomProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2812,8 +2800,8 @@ func (r ApiGetChassisIomProfileListRequest) Execute() (*ChassisIomProfileRespons
 /*
 GetChassisIomProfileList Read a 'chassis.IomProfile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetChassisIomProfileListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetChassisIomProfileListRequest
 */
 func (a *ChassisApiService) GetChassisIomProfileList(ctx context.Context) ApiGetChassisIomProfileListRequest {
 	return ApiGetChassisIomProfileListRequest{
@@ -2823,8 +2811,7 @@ func (a *ChassisApiService) GetChassisIomProfileList(ctx context.Context) ApiGet
 }
 
 // Execute executes the request
-//
-//	@return ChassisIomProfileResponse
+//  @return ChassisIomProfileResponse
 func (a *ChassisApiService) GetChassisIomProfileListExecute(r ApiGetChassisIomProfileListRequest) (*ChassisIomProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3011,9 +2998,9 @@ func (r ApiGetChassisProfileByMoidRequest) Execute() (*ChassisProfile, *http.Res
 /*
 GetChassisProfileByMoid Read a 'chassis.Profile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetChassisProfileByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetChassisProfileByMoidRequest
 */
 func (a *ChassisApiService) GetChassisProfileByMoid(ctx context.Context, moid string) ApiGetChassisProfileByMoidRequest {
 	return ApiGetChassisProfileByMoidRequest{
@@ -3024,8 +3011,7 @@ func (a *ChassisApiService) GetChassisProfileByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//
-//	@return ChassisProfile
+//  @return ChassisProfile
 func (a *ChassisApiService) GetChassisProfileByMoidExecute(r ApiGetChassisProfileByMoidRequest) (*ChassisProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3241,8 +3227,8 @@ func (r ApiGetChassisProfileListRequest) Execute() (*ChassisProfileResponse, *ht
 /*
 GetChassisProfileList Read a 'chassis.Profile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetChassisProfileListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetChassisProfileListRequest
 */
 func (a *ChassisApiService) GetChassisProfileList(ctx context.Context) ApiGetChassisProfileListRequest {
 	return ApiGetChassisProfileListRequest{
@@ -3252,8 +3238,7 @@ func (a *ChassisApiService) GetChassisProfileList(ctx context.Context) ApiGetCha
 }
 
 // Execute executes the request
-//
-//	@return ChassisProfileResponse
+//  @return ChassisProfileResponse
 func (a *ChassisApiService) GetChassisProfileListExecute(r ApiGetChassisProfileListRequest) (*ChassisProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3440,9 +3425,9 @@ func (r ApiGetChassisProfileTemplateByMoidRequest) Execute() (*ChassisProfileTem
 /*
 GetChassisProfileTemplateByMoid Read a 'chassis.ProfileTemplate' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetChassisProfileTemplateByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetChassisProfileTemplateByMoidRequest
 */
 func (a *ChassisApiService) GetChassisProfileTemplateByMoid(ctx context.Context, moid string) ApiGetChassisProfileTemplateByMoidRequest {
 	return ApiGetChassisProfileTemplateByMoidRequest{
@@ -3453,8 +3438,7 @@ func (a *ChassisApiService) GetChassisProfileTemplateByMoid(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return ChassisProfileTemplate
+//  @return ChassisProfileTemplate
 func (a *ChassisApiService) GetChassisProfileTemplateByMoidExecute(r ApiGetChassisProfileTemplateByMoidRequest) (*ChassisProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3670,8 +3654,8 @@ func (r ApiGetChassisProfileTemplateListRequest) Execute() (*ChassisProfileTempl
 /*
 GetChassisProfileTemplateList Read a 'chassis.ProfileTemplate' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetChassisProfileTemplateListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetChassisProfileTemplateListRequest
 */
 func (a *ChassisApiService) GetChassisProfileTemplateList(ctx context.Context) ApiGetChassisProfileTemplateListRequest {
 	return ApiGetChassisProfileTemplateListRequest{
@@ -3681,8 +3665,7 @@ func (a *ChassisApiService) GetChassisProfileTemplateList(ctx context.Context) A
 }
 
 // Execute executes the request
-//
-//	@return ChassisProfileTemplateResponse
+//  @return ChassisProfileTemplateResponse
 func (a *ChassisApiService) GetChassisProfileTemplateListExecute(r ApiGetChassisProfileTemplateListRequest) (*ChassisProfileTemplateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3883,9 +3866,9 @@ func (r ApiPatchChassisProfileRequest) Execute() (*ChassisProfile, *http.Respons
 /*
 PatchChassisProfile Update a 'chassis.Profile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchChassisProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchChassisProfileRequest
 */
 func (a *ChassisApiService) PatchChassisProfile(ctx context.Context, moid string) ApiPatchChassisProfileRequest {
 	return ApiPatchChassisProfileRequest{
@@ -3896,8 +3879,7 @@ func (a *ChassisApiService) PatchChassisProfile(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//
-//	@return ChassisProfile
+//  @return ChassisProfile
 func (a *ChassisApiService) PatchChassisProfileExecute(r ApiPatchChassisProfileRequest) (*ChassisProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4059,9 +4041,9 @@ func (r ApiPatchChassisProfileTemplateRequest) Execute() (*ChassisProfileTemplat
 /*
 PatchChassisProfileTemplate Update a 'chassis.ProfileTemplate' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchChassisProfileTemplateRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchChassisProfileTemplateRequest
 */
 func (a *ChassisApiService) PatchChassisProfileTemplate(ctx context.Context, moid string) ApiPatchChassisProfileTemplateRequest {
 	return ApiPatchChassisProfileTemplateRequest{
@@ -4072,8 +4054,7 @@ func (a *ChassisApiService) PatchChassisProfileTemplate(ctx context.Context, moi
 }
 
 // Execute executes the request
-//
-//	@return ChassisProfileTemplate
+//  @return ChassisProfileTemplate
 func (a *ChassisApiService) PatchChassisProfileTemplateExecute(r ApiPatchChassisProfileTemplateRequest) (*ChassisProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4235,9 +4216,9 @@ func (r ApiUpdateChassisProfileRequest) Execute() (*ChassisProfile, *http.Respon
 /*
 UpdateChassisProfile Update a 'chassis.Profile' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateChassisProfileRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateChassisProfileRequest
 */
 func (a *ChassisApiService) UpdateChassisProfile(ctx context.Context, moid string) ApiUpdateChassisProfileRequest {
 	return ApiUpdateChassisProfileRequest{
@@ -4248,8 +4229,7 @@ func (a *ChassisApiService) UpdateChassisProfile(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//
-//	@return ChassisProfile
+//  @return ChassisProfile
 func (a *ChassisApiService) UpdateChassisProfileExecute(r ApiUpdateChassisProfileRequest) (*ChassisProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4411,9 +4391,9 @@ func (r ApiUpdateChassisProfileTemplateRequest) Execute() (*ChassisProfileTempla
 /*
 UpdateChassisProfileTemplate Update a 'chassis.ProfileTemplate' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateChassisProfileTemplateRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateChassisProfileTemplateRequest
 */
 func (a *ChassisApiService) UpdateChassisProfileTemplate(ctx context.Context, moid string) ApiUpdateChassisProfileTemplateRequest {
 	return ApiUpdateChassisProfileTemplateRequest{
@@ -4424,8 +4404,7 @@ func (a *ChassisApiService) UpdateChassisProfileTemplate(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return ChassisProfileTemplate
+//  @return ChassisProfileTemplate
 func (a *ChassisApiService) UpdateChassisProfileTemplateExecute(r ApiUpdateChassisProfileTemplateRequest) (*ChassisProfileTemplate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

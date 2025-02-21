@@ -675,11 +675,11 @@ func resourceComputeHostUtilityOperationCreate(c context.Context, d *schema.Reso
 	o.SetClassId("compute.HostUtilityOperation")
 
 	if v, ok := d.GetOk("host_op_config"); ok {
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.ComputeHostUtilityOperationConfguration, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoBaseComplexTypeWithDefaults()
+			o := models.NewComputeHostUtilityOperationConfgurationWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -918,7 +918,7 @@ func resourceComputeHostUtilityOperationRead(c context.Context, d *schema.Resour
 		return diag.Errorf("error occurred while setting property DownloadStatus in ComputeHostUtilityOperation object: %s", err.Error())
 	}
 
-	if err := d.Set("host_op_config", flattenMapMoBaseComplexType(s.GetHostOpConfig(), d)); err != nil {
+	if err := d.Set("host_op_config", flattenMapComputeHostUtilityOperationConfguration(s.GetHostOpConfig(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property HostOpConfig in ComputeHostUtilityOperation object: %s", err.Error())
 	}
 

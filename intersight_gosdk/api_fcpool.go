@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateFcpoolPoolRequest) Execute() (*FcpoolPool, *http.Response, erro
 /*
 CreateFcpoolPool Create a 'fcpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFcpoolPoolRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFcpoolPoolRequest
 */
 func (a *FcpoolApiService) CreateFcpoolPool(ctx context.Context) ApiCreateFcpoolPoolRequest {
 	return ApiCreateFcpoolPoolRequest{
@@ -67,8 +67,7 @@ func (a *FcpoolApiService) CreateFcpoolPool(ctx context.Context) ApiCreateFcpool
 }
 
 // Execute executes the request
-//
-//	@return FcpoolPool
+//  @return FcpoolPool
 func (a *FcpoolApiService) CreateFcpoolPoolExecute(r ApiCreateFcpoolPoolRequest) (*FcpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -238,8 +237,8 @@ func (r ApiCreateFcpoolReservationRequest) Execute() (*FcpoolReservation, *http.
 /*
 CreateFcpoolReservation Create a 'fcpool.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFcpoolReservationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFcpoolReservationRequest
 */
 func (a *FcpoolApiService) CreateFcpoolReservation(ctx context.Context) ApiCreateFcpoolReservationRequest {
 	return ApiCreateFcpoolReservationRequest{
@@ -249,8 +248,7 @@ func (a *FcpoolApiService) CreateFcpoolReservation(ctx context.Context) ApiCreat
 }
 
 // Execute executes the request
-//
-//	@return FcpoolReservation
+//  @return FcpoolReservation
 func (a *FcpoolApiService) CreateFcpoolReservationExecute(r ApiCreateFcpoolReservationRequest) (*FcpoolReservation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -400,9 +398,9 @@ func (r ApiDeleteFcpoolLeaseRequest) Execute() (*http.Response, error) {
 /*
 DeleteFcpoolLease Delete a 'fcpool.Lease' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFcpoolLeaseRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFcpoolLeaseRequest
 */
 func (a *FcpoolApiService) DeleteFcpoolLease(ctx context.Context, moid string) ApiDeleteFcpoolLeaseRequest {
 	return ApiDeleteFcpoolLeaseRequest{
@@ -542,9 +540,9 @@ func (r ApiDeleteFcpoolPoolRequest) Execute() (*http.Response, error) {
 /*
 DeleteFcpoolPool Delete a 'fcpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFcpoolPoolRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFcpoolPoolRequest
 */
 func (a *FcpoolApiService) DeleteFcpoolPool(ctx context.Context, moid string) ApiDeleteFcpoolPoolRequest {
 	return ApiDeleteFcpoolPoolRequest{
@@ -684,9 +682,9 @@ func (r ApiDeleteFcpoolReservationRequest) Execute() (*http.Response, error) {
 /*
 DeleteFcpoolReservation Delete a 'fcpool.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteFcpoolReservationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFcpoolReservationRequest
 */
 func (a *FcpoolApiService) DeleteFcpoolReservation(ctx context.Context, moid string) ApiDeleteFcpoolReservationRequest {
 	return ApiDeleteFcpoolReservationRequest{
@@ -826,9 +824,9 @@ func (r ApiGetFcpoolFcBlockByMoidRequest) Execute() (*FcpoolFcBlock, *http.Respo
 /*
 GetFcpoolFcBlockByMoid Read a 'fcpool.FcBlock' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFcpoolFcBlockByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFcpoolFcBlockByMoidRequest
 */
 func (a *FcpoolApiService) GetFcpoolFcBlockByMoid(ctx context.Context, moid string) ApiGetFcpoolFcBlockByMoidRequest {
 	return ApiGetFcpoolFcBlockByMoidRequest{
@@ -839,8 +837,7 @@ func (a *FcpoolApiService) GetFcpoolFcBlockByMoid(ctx context.Context, moid stri
 }
 
 // Execute executes the request
-//
-//	@return FcpoolFcBlock
+//  @return FcpoolFcBlock
 func (a *FcpoolApiService) GetFcpoolFcBlockByMoidExecute(r ApiGetFcpoolFcBlockByMoidRequest) (*FcpoolFcBlock, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1056,8 +1053,8 @@ func (r ApiGetFcpoolFcBlockListRequest) Execute() (*FcpoolFcBlockResponse, *http
 /*
 GetFcpoolFcBlockList Read a 'fcpool.FcBlock' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFcpoolFcBlockListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFcpoolFcBlockListRequest
 */
 func (a *FcpoolApiService) GetFcpoolFcBlockList(ctx context.Context) ApiGetFcpoolFcBlockListRequest {
 	return ApiGetFcpoolFcBlockListRequest{
@@ -1067,8 +1064,7 @@ func (a *FcpoolApiService) GetFcpoolFcBlockList(ctx context.Context) ApiGetFcpoo
 }
 
 // Execute executes the request
-//
-//	@return FcpoolFcBlockResponse
+//  @return FcpoolFcBlockResponse
 func (a *FcpoolApiService) GetFcpoolFcBlockListExecute(r ApiGetFcpoolFcBlockListRequest) (*FcpoolFcBlockResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1255,9 +1251,9 @@ func (r ApiGetFcpoolLeaseByMoidRequest) Execute() (*FcpoolLease, *http.Response,
 /*
 GetFcpoolLeaseByMoid Read a 'fcpool.Lease' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFcpoolLeaseByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFcpoolLeaseByMoidRequest
 */
 func (a *FcpoolApiService) GetFcpoolLeaseByMoid(ctx context.Context, moid string) ApiGetFcpoolLeaseByMoidRequest {
 	return ApiGetFcpoolLeaseByMoidRequest{
@@ -1268,8 +1264,7 @@ func (a *FcpoolApiService) GetFcpoolLeaseByMoid(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//
-//	@return FcpoolLease
+//  @return FcpoolLease
 func (a *FcpoolApiService) GetFcpoolLeaseByMoidExecute(r ApiGetFcpoolLeaseByMoidRequest) (*FcpoolLease, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1485,8 +1480,8 @@ func (r ApiGetFcpoolLeaseListRequest) Execute() (*FcpoolLeaseResponse, *http.Res
 /*
 GetFcpoolLeaseList Read a 'fcpool.Lease' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFcpoolLeaseListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFcpoolLeaseListRequest
 */
 func (a *FcpoolApiService) GetFcpoolLeaseList(ctx context.Context) ApiGetFcpoolLeaseListRequest {
 	return ApiGetFcpoolLeaseListRequest{
@@ -1496,8 +1491,7 @@ func (a *FcpoolApiService) GetFcpoolLeaseList(ctx context.Context) ApiGetFcpoolL
 }
 
 // Execute executes the request
-//
-//	@return FcpoolLeaseResponse
+//  @return FcpoolLeaseResponse
 func (a *FcpoolApiService) GetFcpoolLeaseListExecute(r ApiGetFcpoolLeaseListRequest) (*FcpoolLeaseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1684,9 +1678,9 @@ func (r ApiGetFcpoolPoolByMoidRequest) Execute() (*FcpoolPool, *http.Response, e
 /*
 GetFcpoolPoolByMoid Read a 'fcpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFcpoolPoolByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFcpoolPoolByMoidRequest
 */
 func (a *FcpoolApiService) GetFcpoolPoolByMoid(ctx context.Context, moid string) ApiGetFcpoolPoolByMoidRequest {
 	return ApiGetFcpoolPoolByMoidRequest{
@@ -1697,8 +1691,7 @@ func (a *FcpoolApiService) GetFcpoolPoolByMoid(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//
-//	@return FcpoolPool
+//  @return FcpoolPool
 func (a *FcpoolApiService) GetFcpoolPoolByMoidExecute(r ApiGetFcpoolPoolByMoidRequest) (*FcpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1914,8 +1907,8 @@ func (r ApiGetFcpoolPoolListRequest) Execute() (*FcpoolPoolResponse, *http.Respo
 /*
 GetFcpoolPoolList Read a 'fcpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFcpoolPoolListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFcpoolPoolListRequest
 */
 func (a *FcpoolApiService) GetFcpoolPoolList(ctx context.Context) ApiGetFcpoolPoolListRequest {
 	return ApiGetFcpoolPoolListRequest{
@@ -1925,8 +1918,7 @@ func (a *FcpoolApiService) GetFcpoolPoolList(ctx context.Context) ApiGetFcpoolPo
 }
 
 // Execute executes the request
-//
-//	@return FcpoolPoolResponse
+//  @return FcpoolPoolResponse
 func (a *FcpoolApiService) GetFcpoolPoolListExecute(r ApiGetFcpoolPoolListRequest) (*FcpoolPoolResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2113,9 +2105,9 @@ func (r ApiGetFcpoolPoolMemberByMoidRequest) Execute() (*FcpoolPoolMember, *http
 /*
 GetFcpoolPoolMemberByMoid Read a 'fcpool.PoolMember' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFcpoolPoolMemberByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFcpoolPoolMemberByMoidRequest
 */
 func (a *FcpoolApiService) GetFcpoolPoolMemberByMoid(ctx context.Context, moid string) ApiGetFcpoolPoolMemberByMoidRequest {
 	return ApiGetFcpoolPoolMemberByMoidRequest{
@@ -2126,8 +2118,7 @@ func (a *FcpoolApiService) GetFcpoolPoolMemberByMoid(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//
-//	@return FcpoolPoolMember
+//  @return FcpoolPoolMember
 func (a *FcpoolApiService) GetFcpoolPoolMemberByMoidExecute(r ApiGetFcpoolPoolMemberByMoidRequest) (*FcpoolPoolMember, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2343,8 +2334,8 @@ func (r ApiGetFcpoolPoolMemberListRequest) Execute() (*FcpoolPoolMemberResponse,
 /*
 GetFcpoolPoolMemberList Read a 'fcpool.PoolMember' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFcpoolPoolMemberListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFcpoolPoolMemberListRequest
 */
 func (a *FcpoolApiService) GetFcpoolPoolMemberList(ctx context.Context) ApiGetFcpoolPoolMemberListRequest {
 	return ApiGetFcpoolPoolMemberListRequest{
@@ -2354,8 +2345,7 @@ func (a *FcpoolApiService) GetFcpoolPoolMemberList(ctx context.Context) ApiGetFc
 }
 
 // Execute executes the request
-//
-//	@return FcpoolPoolMemberResponse
+//  @return FcpoolPoolMemberResponse
 func (a *FcpoolApiService) GetFcpoolPoolMemberListExecute(r ApiGetFcpoolPoolMemberListRequest) (*FcpoolPoolMemberResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2542,9 +2532,9 @@ func (r ApiGetFcpoolReservationByMoidRequest) Execute() (*FcpoolReservation, *ht
 /*
 GetFcpoolReservationByMoid Read a 'fcpool.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFcpoolReservationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFcpoolReservationByMoidRequest
 */
 func (a *FcpoolApiService) GetFcpoolReservationByMoid(ctx context.Context, moid string) ApiGetFcpoolReservationByMoidRequest {
 	return ApiGetFcpoolReservationByMoidRequest{
@@ -2555,8 +2545,7 @@ func (a *FcpoolApiService) GetFcpoolReservationByMoid(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return FcpoolReservation
+//  @return FcpoolReservation
 func (a *FcpoolApiService) GetFcpoolReservationByMoidExecute(r ApiGetFcpoolReservationByMoidRequest) (*FcpoolReservation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2772,8 +2761,8 @@ func (r ApiGetFcpoolReservationListRequest) Execute() (*FcpoolReservationRespons
 /*
 GetFcpoolReservationList Read a 'fcpool.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFcpoolReservationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFcpoolReservationListRequest
 */
 func (a *FcpoolApiService) GetFcpoolReservationList(ctx context.Context) ApiGetFcpoolReservationListRequest {
 	return ApiGetFcpoolReservationListRequest{
@@ -2783,8 +2772,7 @@ func (a *FcpoolApiService) GetFcpoolReservationList(ctx context.Context) ApiGetF
 }
 
 // Execute executes the request
-//
-//	@return FcpoolReservationResponse
+//  @return FcpoolReservationResponse
 func (a *FcpoolApiService) GetFcpoolReservationListExecute(r ApiGetFcpoolReservationListRequest) (*FcpoolReservationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2971,9 +2959,9 @@ func (r ApiGetFcpoolUniverseByMoidRequest) Execute() (*FcpoolUniverse, *http.Res
 /*
 GetFcpoolUniverseByMoid Read a 'fcpool.Universe' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetFcpoolUniverseByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFcpoolUniverseByMoidRequest
 */
 func (a *FcpoolApiService) GetFcpoolUniverseByMoid(ctx context.Context, moid string) ApiGetFcpoolUniverseByMoidRequest {
 	return ApiGetFcpoolUniverseByMoidRequest{
@@ -2984,8 +2972,7 @@ func (a *FcpoolApiService) GetFcpoolUniverseByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//
-//	@return FcpoolUniverse
+//  @return FcpoolUniverse
 func (a *FcpoolApiService) GetFcpoolUniverseByMoidExecute(r ApiGetFcpoolUniverseByMoidRequest) (*FcpoolUniverse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3201,8 +3188,8 @@ func (r ApiGetFcpoolUniverseListRequest) Execute() (*FcpoolUniverseResponse, *ht
 /*
 GetFcpoolUniverseList Read a 'fcpool.Universe' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFcpoolUniverseListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFcpoolUniverseListRequest
 */
 func (a *FcpoolApiService) GetFcpoolUniverseList(ctx context.Context) ApiGetFcpoolUniverseListRequest {
 	return ApiGetFcpoolUniverseListRequest{
@@ -3212,8 +3199,7 @@ func (a *FcpoolApiService) GetFcpoolUniverseList(ctx context.Context) ApiGetFcpo
 }
 
 // Execute executes the request
-//
-//	@return FcpoolUniverseResponse
+//  @return FcpoolUniverseResponse
 func (a *FcpoolApiService) GetFcpoolUniverseListExecute(r ApiGetFcpoolUniverseListRequest) (*FcpoolUniverseResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3414,9 +3400,9 @@ func (r ApiPatchFcpoolPoolRequest) Execute() (*FcpoolPool, *http.Response, error
 /*
 PatchFcpoolPool Update a 'fcpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchFcpoolPoolRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFcpoolPoolRequest
 */
 func (a *FcpoolApiService) PatchFcpoolPool(ctx context.Context, moid string) ApiPatchFcpoolPoolRequest {
 	return ApiPatchFcpoolPoolRequest{
@@ -3427,8 +3413,7 @@ func (a *FcpoolApiService) PatchFcpoolPool(ctx context.Context, moid string) Api
 }
 
 // Execute executes the request
-//
-//	@return FcpoolPool
+//  @return FcpoolPool
 func (a *FcpoolApiService) PatchFcpoolPoolExecute(r ApiPatchFcpoolPoolRequest) (*FcpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3590,9 +3575,9 @@ func (r ApiUpdateFcpoolPoolRequest) Execute() (*FcpoolPool, *http.Response, erro
 /*
 UpdateFcpoolPool Update a 'fcpool.Pool' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateFcpoolPoolRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFcpoolPoolRequest
 */
 func (a *FcpoolApiService) UpdateFcpoolPool(ctx context.Context, moid string) ApiUpdateFcpoolPoolRequest {
 	return ApiUpdateFcpoolPoolRequest{
@@ -3603,8 +3588,7 @@ func (a *FcpoolApiService) UpdateFcpoolPool(ctx context.Context, moid string) Ap
 }
 
 // Execute executes the request
-//
-//	@return FcpoolPool
+//  @return FcpoolPool
 func (a *FcpoolApiService) UpdateFcpoolPoolExecute(r ApiUpdateFcpoolPoolRequest) (*FcpoolPool, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

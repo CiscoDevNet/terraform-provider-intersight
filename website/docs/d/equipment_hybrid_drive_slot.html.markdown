@@ -16,7 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_equipment
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
-* `current_mode`:(string) The Configured Mode of the Hybrid Drive slot.* `` - Hybrid Drive slot  mode is not applicable.* `RAID` - Hybrid Drive slot mode is RAID.* `Direct` - Hybrid Drive slot mode is Direct. 
+* `current_mode`:(string) The Configured Mode of the Hybrid Drive slot.* `` - Hybrid Drive slot mode is not applicable.* `Controller` - Hybrid Drive slot mode is Controller.* `Direct` - Hybrid Drive slot mode is Direct. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
@@ -25,7 +25,7 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) This field displays the model number of the associated component or hardware. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `presence`:(string) This field indicates the presence (equipped) or absence (absent) of the associated component or hardware. 
-* `requested_mode`:(string) The Requested Mode for the Hybrid Drive slot.* `` - Hybrid Drive slot  mode is not applicable.* `RAID` - Hybrid Drive slot mode is RAID.* `Direct` - Hybrid Drive slot mode is Direct. 
+* `requested_mode`:(string) The Requested Mode for the Hybrid Drive slot.* `` - Hybrid Drive slot mode is not applicable.* `Controller` - Hybrid Drive slot mode is Controller.* `Direct` - Hybrid Drive slot mode is Direct. 
 * `revision`:(string) This field displays the revised version of the associated component or hardware (if any). 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field displays the serial number of the associated component or hardware. 

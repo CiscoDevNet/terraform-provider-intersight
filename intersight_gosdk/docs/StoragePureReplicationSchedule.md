@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureReplicationSchedule"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureReplicationSchedule"]
 **DailyLimit** | Pointer to **int64** | Total number of snapshots per day to be available on target above and over the specified retention time. PureStorage FlashArray maintains all created snapshot until retention period. Daily limit is applied only on the snapshots once retention time is expired. In case of, daily limit is less than the number of snapshot available on source, system select snapshots evenly spaced out throughout the day. | [optional] [readonly] 
-**ReplicationBlackoutIntervals** | Pointer to [**[]StorageBaseReplicationBlackout**](StorageBaseReplicationBlackout.md) |  | [optional] 
+**ReplicationBlackoutIntervals** | Pointer to [**[]StoragePureReplicationBlackout**](StoragePureReplicationBlackout.md) |  | [optional] 
 **SnapshotExpiryTime** | Pointer to **string** | Duration to keep the daily limit snapshots on target array. StorageArray deletes the snapshots permanently from the targets beyond this period. | [optional] [readonly] 
 **Array** | Pointer to [**NullableStoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
 **ProtectionGroup** | Pointer to [**NullableStoragePureProtectionGroupRelationship**](StoragePureProtectionGroupRelationship.md) |  | [optional] 

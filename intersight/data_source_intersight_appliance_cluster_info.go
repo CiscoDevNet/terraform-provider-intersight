@@ -95,6 +95,11 @@ func getApplianceClusterInfoSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"build_type": {
+			Description: "The build type of the Intersight Virtual Appliance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -142,6 +147,16 @@ func getApplianceClusterInfoSchema() map[string]*schema.Schema {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"node_id": {
+			Description: "System assigned unique ID of the Intersight Appliance node. The system incrementally assigns identifiers to each node in the Intersight Appliance starting with a value of 0.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"node_type": {
+			Description: "The node type of Intersight Virtual Appliance.\n* `standalone` - Single Node Intersight Virtual Appliance.\n* `management` - Management node type when Intersight Virtual Appliance is running as management-worker deployment.\n* `hamanagement` - Management node type when Intersight Virtual Appliance is running as multi node HA deployment.\n* `metrics` - Metrics node when Intersight Virtual Appliance is running management-metrics node.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -275,7 +290,7 @@ func getApplianceClusterInfoSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"status": {
-			Description: "The status of the cluster join process.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.\n* `ReplacementInProgress` - The cluster node replacement is in progress.\n* `ReplacementFailed` - There was a failure during the cluster node replacement.",
+			Description: "The status of the cluster join process.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.\n* `ReplacementInProgress` - The cluster node replacement is in progress.\n* `ReplacementFailed` - There was a failure during the cluster node replacement.\n* `WorkerNodeInstInProgress` - The worker node installation is in progress.\n* `WorkerNodeInstSuccess` - The worker node installation succeeded.\n* `WorkerNodeInstFailed` - The worker node installation failed.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -544,6 +559,11 @@ func dataSourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceDat
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("build_type"); ok {
+		x := (v.(string))
+		o.SetBuildType(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -592,6 +612,16 @@ func dataSourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("node_id"); ok {
+		x := int64(v.(int))
+		o.SetNodeId(x)
+	}
+
+	if v, ok := d.GetOk("node_type"); ok {
+		x := (v.(string))
+		o.SetNodeType(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -906,6 +936,7 @@ func dataSourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceDat
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["build_type"] = (s.GetBuildType())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -918,6 +949,8 @@ func dataSourceApplianceClusterInfoRead(c context.Context, d *schema.ResourceDat
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["node_id"] = (s.GetNodeId())
+				temp["node_type"] = (s.GetNodeType())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

@@ -70,6 +70,11 @@ func getApplianceNodeInfoSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"deployment_size": {
+			Description: "Current running deployment size for the Intersight Appliance node. Eg. small, medium, large etc.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -175,13 +180,18 @@ func getApplianceNodeInfoSchema() map[string]*schema.Schema {
 				},
 			},
 		},
+		"node_type": {
+			Description: "The node type of Intersight Virtual Appliance.\n* `standalone` - Single Node Intersight Virtual Appliance.\n* `management` - Management node type when Intersight Virtual Appliance is running as management-worker deployment.\n* `hamanagement` - Management node type when Intersight Virtual Appliance is running as multi node HA deployment.\n* `metrics` - Metrics node when Intersight Virtual Appliance is running management-metrics node.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"operational_status": {
-			Description: "Operational status of the Intersight Appliance node.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.\n* `ReplacementInProgress` - The cluster node replacement is in progress.\n* `ReplacementFailed` - There was a failure during the cluster node replacement.",
+			Description: "Operational status of the Intersight Appliance node.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.\n* `ReplacementInProgress` - The cluster node replacement is in progress.\n* `ReplacementFailed` - There was a failure during the cluster node replacement.\n* `WorkerNodeInstInProgress` - The worker node installation is in progress.\n* `WorkerNodeInstSuccess` - The worker node installation succeeded.\n* `WorkerNodeInstFailed` - The worker node installation failed.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -486,6 +496,11 @@ func dataSourceApplianceNodeInfoRead(c context.Context, d *schema.ResourceData, 
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOk("deployment_size"); ok {
+		x := (v.(string))
+		o.SetDeploymentSize(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
@@ -607,6 +622,11 @@ func dataSourceApplianceNodeInfoRead(c context.Context, d *schema.ResourceData, 
 			x := p[0]
 			o.SetNodeIpV6Config(x)
 		}
+	}
+
+	if v, ok := d.GetOk("node_type"); ok {
+		x := (v.(string))
+		o.SetNodeType(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -867,6 +887,7 @@ func dataSourceApplianceNodeInfoRead(c context.Context, d *schema.ResourceData, 
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["deployment_size"] = (s.GetDeploymentSize())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["hostname"] = (s.GetHostname())
 
@@ -877,6 +898,7 @@ func dataSourceApplianceNodeInfoRead(c context.Context, d *schema.ResourceData, 
 				temp["node_ip_v4_config"] = flattenMapCommIpV4Interface(s.GetNodeIpV4Config(), d)
 
 				temp["node_ip_v6_config"] = flattenMapCommIpV6Interface(s.GetNodeIpV6Config(), d)
+				temp["node_type"] = (s.GetNodeType())
 				temp["object_type"] = (s.GetObjectType())
 				temp["operational_status"] = (s.GetOperationalStatus())
 				temp["owners"] = (s.GetOwners())

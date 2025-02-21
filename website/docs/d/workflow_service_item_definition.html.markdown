@@ -19,6 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `create_user`:(string) The user identifier who created or cloned the service item definition. 
 * `cvd_id`:(string) The Cisco Validated Design (CVD) Identifier that this service item provides. 
+* `default_version`:(bool) The flag to indicate that this is the default version of the service item. 
 * `delete_instance_on_decommission`:(bool) The flag to indicate that service item instance will be deleted after the completion of decommission action. 
 * `description`:(string) The description for this service item which provides information on what are the pre-requisites to deploy the service item and what features are supported on the service item. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

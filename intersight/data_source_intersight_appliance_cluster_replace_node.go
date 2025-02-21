@@ -343,13 +343,18 @@ func getApplianceClusterReplaceNodeSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"node_type": {
+						Description: "The node type of Intersight Virtual Appliance.\n* `standalone` - Single Node Intersight Virtual Appliance.\n* `management` - Management node type when Intersight Virtual Appliance is running as management-worker deployment.\n* `hamanagement` - Management node type when Intersight Virtual Appliance is running as multi node HA deployment.\n* `metrics` - Metrics node when Intersight Virtual Appliance is running management-metrics node.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"status": {
-						Description: "Status of the cluster node.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.\n* `ReplacementInProgress` - The cluster node replacement is in progress.\n* `ReplacementFailed` - There was a failure during the cluster node replacement.",
+						Description: "Status of the cluster node.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.\n* `ReplacementInProgress` - The cluster node replacement is in progress.\n* `ReplacementFailed` - There was a failure during the cluster node replacement.\n* `WorkerNodeInstInProgress` - The worker node installation is in progress.\n* `WorkerNodeInstSuccess` - The worker node installation succeeded.\n* `WorkerNodeInstFailed` - The worker node installation failed.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -653,13 +658,18 @@ func getApplianceClusterReplaceNodeSchema() map[string]*schema.Schema {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"node_type": {
+						Description: "The node type of Intersight Virtual Appliance.\n* `standalone` - Single Node Intersight Virtual Appliance.\n* `management` - Management node type when Intersight Virtual Appliance is running as management-worker deployment.\n* `hamanagement` - Management node type when Intersight Virtual Appliance is running as multi node HA deployment.\n* `metrics` - Metrics node when Intersight Virtual Appliance is running management-metrics node.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"status": {
-						Description: "Status of the cluster node.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.\n* `ReplacementInProgress` - The cluster node replacement is in progress.\n* `ReplacementFailed` - There was a failure during the cluster node replacement.",
+						Description: "Status of the cluster node.\n* `Unknown` - The status of the appliance node is unknown.\n* `Operational` - The appliance node is operational.\n* `Impaired` - The appliance node is impaired.\n* `AttentionNeeded` - The appliance node needs attention.\n* `ReadyToJoin` - The node is ready to be added to a standalone Intersight Appliance to form a cluster.\n* `OutOfService` - The user has taken this node (part of a cluster) to out of service.\n* `ReadyForReplacement` - The cluster node is ready to be replaced.\n* `ReplacementInProgress` - The cluster node replacement is in progress.\n* `ReplacementFailed` - There was a failure during the cluster node replacement.\n* `WorkerNodeInstInProgress` - The worker node installation is in progress.\n* `WorkerNodeInstSuccess` - The worker node installation succeeded.\n* `WorkerNodeInstFailed` - The worker node installation failed.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

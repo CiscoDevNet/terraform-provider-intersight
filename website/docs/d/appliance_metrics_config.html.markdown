@@ -17,6 +17,8 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
 * `current_endpoint_count`:(int) Number of discovered endpoints from where metrics is being collected currently. 
+* `disk_capacity`:(int) Capacity of the metrics disk /opt/database in bytes. 
+* `disk_usage`:(int) Disk usage of the metrics disk /opt/database in bytes. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `endpoint_usage_percent`:(int) Usage percentage of the discovered endpoints. 
 * `last_disabled_date`:(string) Disabled date of the metrics collection feature. 

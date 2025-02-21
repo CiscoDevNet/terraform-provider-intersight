@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -36,9 +36,9 @@ func (r ApiGetSecurityUnitByMoidRequest) Execute() (*SecurityUnit, *http.Respons
 /*
 GetSecurityUnitByMoid Read a 'security.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetSecurityUnitByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetSecurityUnitByMoidRequest
 */
 func (a *SecurityApiService) GetSecurityUnitByMoid(ctx context.Context, moid string) ApiGetSecurityUnitByMoidRequest {
 	return ApiGetSecurityUnitByMoidRequest{
@@ -49,8 +49,7 @@ func (a *SecurityApiService) GetSecurityUnitByMoid(ctx context.Context, moid str
 }
 
 // Execute executes the request
-//
-//	@return SecurityUnit
+//  @return SecurityUnit
 func (a *SecurityApiService) GetSecurityUnitByMoidExecute(r ApiGetSecurityUnitByMoidRequest) (*SecurityUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -266,8 +265,8 @@ func (r ApiGetSecurityUnitListRequest) Execute() (*SecurityUnitResponse, *http.R
 /*
 GetSecurityUnitList Read a 'security.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetSecurityUnitListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetSecurityUnitListRequest
 */
 func (a *SecurityApiService) GetSecurityUnitList(ctx context.Context) ApiGetSecurityUnitListRequest {
 	return ApiGetSecurityUnitListRequest{
@@ -277,8 +276,7 @@ func (a *SecurityApiService) GetSecurityUnitList(ctx context.Context) ApiGetSecu
 }
 
 // Execute executes the request
-//
-//	@return SecurityUnitResponse
+//  @return SecurityUnitResponse
 func (a *SecurityApiService) GetSecurityUnitListExecute(r ApiGetSecurityUnitListRequest) (*SecurityUnitResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -479,9 +477,9 @@ func (r ApiPatchSecurityUnitRequest) Execute() (*SecurityUnit, *http.Response, e
 /*
 PatchSecurityUnit Update a 'security.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchSecurityUnitRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchSecurityUnitRequest
 */
 func (a *SecurityApiService) PatchSecurityUnit(ctx context.Context, moid string) ApiPatchSecurityUnitRequest {
 	return ApiPatchSecurityUnitRequest{
@@ -492,8 +490,7 @@ func (a *SecurityApiService) PatchSecurityUnit(ctx context.Context, moid string)
 }
 
 // Execute executes the request
-//
-//	@return SecurityUnit
+//  @return SecurityUnit
 func (a *SecurityApiService) PatchSecurityUnitExecute(r ApiPatchSecurityUnitRequest) (*SecurityUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -655,9 +652,9 @@ func (r ApiUpdateSecurityUnitRequest) Execute() (*SecurityUnit, *http.Response, 
 /*
 UpdateSecurityUnit Update a 'security.Unit' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateSecurityUnitRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateSecurityUnitRequest
 */
 func (a *SecurityApiService) UpdateSecurityUnit(ctx context.Context, moid string) ApiUpdateSecurityUnitRequest {
 	return ApiUpdateSecurityUnitRequest{
@@ -668,8 +665,7 @@ func (a *SecurityApiService) UpdateSecurityUnit(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//
-//	@return SecurityUnit
+//  @return SecurityUnit
 func (a *SecurityApiService) UpdateSecurityUnitExecute(r ApiUpdateSecurityUnitRequest) (*SecurityUnit, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

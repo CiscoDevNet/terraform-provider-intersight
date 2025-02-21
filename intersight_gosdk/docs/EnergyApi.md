@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## CreateEnergyMetrics
 
-> MoBaseMo CreateEnergyMetrics(ctx).EnergyMetrics(energyMetrics).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+> EnergyMetrics CreateEnergyMetrics(ctx).EnergyMetrics(energyMetrics).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
 
 Create a 'energy.Metrics' resource.
 
@@ -38,7 +38,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `EnergyApi.CreateEnergyMetrics``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateEnergyMetrics`: MoBaseMo
+	// response from `CreateEnergyMetrics`: EnergyMetrics
 	fmt.Fprintf(os.Stdout, "Response from `EnergyApi.CreateEnergyMetrics`: %v\n", resp)
 }
 ```
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MoBaseMo**](MoBaseMo.md)
+[**EnergyMetrics**](EnergyMetrics.md)
 
 ### Authorization
 

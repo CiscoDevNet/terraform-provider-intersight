@@ -643,11 +643,11 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("condition"); ok {
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.IssueCondition, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.MoBaseComplexType{}
+			o := &models.IssueCondition{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -978,7 +978,7 @@ func dataSourceCondAlarmDefinitionRead(c context.Context, d *schema.ResourceData
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 
-				temp["condition"] = flattenMapMoBaseComplexType(s.GetCondition(), d)
+				temp["condition"] = flattenMapIssueCondition(s.GetCondition(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())

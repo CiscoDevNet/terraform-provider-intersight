@@ -65,6 +65,11 @@ func getStorageStoragePolicySchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"controller_attached_nvme_slots": {
+			Description: "Only U.3 NVMe drives need to be specified, entered slots will be moved to controller attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number ranges.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -81,7 +86,7 @@ func getStorageStoragePolicySchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"direct_attached_nvme_slots": {
-			Description: "Only U.3 NVMe drives has to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.",
+			Description: "Only U.3 NVMe drives need to be specified, entered slots will be moved to Direct attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number ranges.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -423,7 +428,7 @@ func getStorageStoragePolicySchema() map[string]*schema.Schema {
 			},
 		},
 		"raid_attached_nvme_slots": {
-			Description: "Only U.3 NVMe drives has to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number range.",
+			Description: "Only U.3 NVMe drives need to be specified, entered slots will be moved to RAID attached mode. Allowed slots are 1-4, 101-104. Allowed value is a comma or hyphen separated number ranges. Deprecated in favor of controllerAttachedNvmeSlots.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -662,6 +667,11 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+
+	if v, ok := d.GetOk("controller_attached_nvme_slots"); ok {
+		x := (v.(string))
+		o.SetControllerAttachedNvmeSlots(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
@@ -1257,6 +1267,7 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["controller_attached_nvme_slots"] = (s.GetControllerAttachedNvmeSlots())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["default_drive_mode"] = (s.GetDefaultDriveMode())

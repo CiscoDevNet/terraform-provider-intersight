@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppLun"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppLun"]
-**AvgPerformanceMetrics** | Pointer to [**NullableStorageBasePerformanceMetricsAverage**](StorageBasePerformanceMetricsAverage.md) | Average performance metrics data for a NetApp storage resource over a given period of time. | [optional] 
+**AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
 **ContainerState** | Pointer to **string** | The state of the volume and aggregate that contain the LUN. LUNs are only available when their containers are available. | [optional] [readonly] 
 **IsMapped** | Pointer to **string** | Reports if the LUN is mapped to one or more initiator groups. | [optional] [readonly] 
 **Key** | Pointer to **string** | Unique identifier of LUN across data center. | [optional] [readonly] 
@@ -84,20 +84,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetAvgPerformanceMetrics
 
-`func (o *StorageNetAppLun) GetAvgPerformanceMetrics() StorageBasePerformanceMetricsAverage`
+`func (o *StorageNetAppLun) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage`
 
 GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field if non-nil, zero value otherwise.
 
 ### GetAvgPerformanceMetricsOk
 
-`func (o *StorageNetAppLun) GetAvgPerformanceMetricsOk() (*StorageBasePerformanceMetricsAverage, bool)`
+`func (o *StorageNetAppLun) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool)`
 
 GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvgPerformanceMetrics
 
-`func (o *StorageNetAppLun) SetAvgPerformanceMetrics(v StorageBasePerformanceMetricsAverage)`
+`func (o *StorageNetAppLun) SetAvgPerformanceMetrics(v StorageNetAppPerformanceMetricsAverage)`
 
 SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
 
@@ -107,16 +107,6 @@ SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
 
 HasAvgPerformanceMetrics returns a boolean if a field has been set.
 
-### SetAvgPerformanceMetricsNil
-
-`func (o *StorageNetAppLun) SetAvgPerformanceMetricsNil(b bool)`
-
- SetAvgPerformanceMetricsNil sets the value for AvgPerformanceMetrics to be an explicit nil
-
-### UnsetAvgPerformanceMetrics
-`func (o *StorageNetAppLun) UnsetAvgPerformanceMetrics()`
-
-UnsetAvgPerformanceMetrics ensures that no value is present for AvgPerformanceMetrics, not even an explicit nil
 ### GetContainerState
 
 `func (o *StorageNetAppLun) GetContainerState() string`

@@ -36,6 +36,8 @@ Name | Type | Description | Notes
 **VirtualAccount** | Pointer to **string** | Name of the virtual account. | [optional] [readonly] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **CustomerOp** | Pointer to [**NullableLicenseCustomerOpRelationship**](LicenseCustomerOpRelationship.md) |  | [optional] 
+**ErpCustomerOp** | Pointer to [**NullableLicenseErpCustomerOpRelationship**](LicenseErpCustomerOpRelationship.md) |  | [optional] 
+**ErpLicenseCount** | Pointer to [**NullableLicenseErpLicenseCountRelationship**](LicenseErpLicenseCountRelationship.md) |  | [optional] 
 **IksCustomerOp** | Pointer to [**NullableLicenseIksCustomerOpRelationship**](LicenseIksCustomerOpRelationship.md) |  | [optional] 
 **IksLicenseCount** | Pointer to [**NullableLicenseIksLicenseCountRelationship**](LicenseIksLicenseCountRelationship.md) |  | [optional] 
 **IncCustomerOp** | Pointer to [**NullableLicenseIncCustomerOpRelationship**](LicenseIncCustomerOpRelationship.md) |  | [optional] 
@@ -876,6 +878,76 @@ HasCustomerOp returns a boolean if a field has been set.
 `func (o *LicenseAccountLicenseData) UnsetCustomerOp()`
 
 UnsetCustomerOp ensures that no value is present for CustomerOp, not even an explicit nil
+### GetErpCustomerOp
+
+`func (o *LicenseAccountLicenseData) GetErpCustomerOp() LicenseErpCustomerOpRelationship`
+
+GetErpCustomerOp returns the ErpCustomerOp field if non-nil, zero value otherwise.
+
+### GetErpCustomerOpOk
+
+`func (o *LicenseAccountLicenseData) GetErpCustomerOpOk() (*LicenseErpCustomerOpRelationship, bool)`
+
+GetErpCustomerOpOk returns a tuple with the ErpCustomerOp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErpCustomerOp
+
+`func (o *LicenseAccountLicenseData) SetErpCustomerOp(v LicenseErpCustomerOpRelationship)`
+
+SetErpCustomerOp sets ErpCustomerOp field to given value.
+
+### HasErpCustomerOp
+
+`func (o *LicenseAccountLicenseData) HasErpCustomerOp() bool`
+
+HasErpCustomerOp returns a boolean if a field has been set.
+
+### SetErpCustomerOpNil
+
+`func (o *LicenseAccountLicenseData) SetErpCustomerOpNil(b bool)`
+
+ SetErpCustomerOpNil sets the value for ErpCustomerOp to be an explicit nil
+
+### UnsetErpCustomerOp
+`func (o *LicenseAccountLicenseData) UnsetErpCustomerOp()`
+
+UnsetErpCustomerOp ensures that no value is present for ErpCustomerOp, not even an explicit nil
+### GetErpLicenseCount
+
+`func (o *LicenseAccountLicenseData) GetErpLicenseCount() LicenseErpLicenseCountRelationship`
+
+GetErpLicenseCount returns the ErpLicenseCount field if non-nil, zero value otherwise.
+
+### GetErpLicenseCountOk
+
+`func (o *LicenseAccountLicenseData) GetErpLicenseCountOk() (*LicenseErpLicenseCountRelationship, bool)`
+
+GetErpLicenseCountOk returns a tuple with the ErpLicenseCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErpLicenseCount
+
+`func (o *LicenseAccountLicenseData) SetErpLicenseCount(v LicenseErpLicenseCountRelationship)`
+
+SetErpLicenseCount sets ErpLicenseCount field to given value.
+
+### HasErpLicenseCount
+
+`func (o *LicenseAccountLicenseData) HasErpLicenseCount() bool`
+
+HasErpLicenseCount returns a boolean if a field has been set.
+
+### SetErpLicenseCountNil
+
+`func (o *LicenseAccountLicenseData) SetErpLicenseCountNil(b bool)`
+
+ SetErpLicenseCountNil sets the value for ErpLicenseCount to be an explicit nil
+
+### UnsetErpLicenseCount
+`func (o *LicenseAccountLicenseData) UnsetErpLicenseCount()`
+
+UnsetErpLicenseCount ensures that no value is present for ErpLicenseCount, not even an explicit nil
 ### GetIksCustomerOp
 
 `func (o *LicenseAccountLicenseData) GetIksCustomerOp() LicenseIksCustomerOpRelationship`

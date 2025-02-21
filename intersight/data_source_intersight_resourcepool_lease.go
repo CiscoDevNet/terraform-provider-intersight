@@ -1046,11 +1046,11 @@ func dataSourceResourcepoolLeaseRead(c context.Context, d *schema.ResourceData, 
 	}
 
 	if v, ok := d.GetOk("lease_parameters"); ok {
-		p := make([]models.MoBaseComplexType, 0, 1)
+		p := make([]models.ResourcepoolLeaseParameters, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := &models.MoBaseComplexType{}
+			o := &models.ResourcepoolLeaseParameters{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1599,7 +1599,7 @@ func dataSourceResourcepoolLeaseRead(c context.Context, d *schema.ResourceData, 
 				temp["has_duplicate"] = (s.GetHasDuplicate())
 				temp["is_exclusive_at_assigned_entity"] = (s.GetIsExclusiveAtAssignedEntity())
 
-				temp["lease_parameters"] = flattenMapMoBaseComplexType(s.GetLeaseParameters(), d)
+				temp["lease_parameters"] = flattenMapResourcepoolLeaseParameters(s.GetLeaseParameters(), d)
 
 				temp["leased_resource"] = flattenMapResourcepoolLeaseResourceRelationship(s.GetLeasedResource(), d)
 

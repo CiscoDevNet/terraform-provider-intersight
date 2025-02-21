@@ -176,7 +176,7 @@ func getEquipmentHybridDriveSlotSchema() map[string]*schema.Schema {
 			Optional:    true,
 		},
 		"current_mode": {
-			Description: "The Configured Mode of the Hybrid Drive slot.\n* `` - Hybrid Drive slot  mode is not applicable.\n* `RAID` - Hybrid Drive slot mode is RAID.\n* `Direct` - Hybrid Drive slot mode is Direct.",
+			Description: "The Configured Mode of the Hybrid Drive slot.\n* `` - Hybrid Drive slot mode is not applicable.\n* `Controller` - Hybrid Drive slot mode is Controller.\n* `Direct` - Hybrid Drive slot mode is Direct.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -370,7 +370,7 @@ func getEquipmentHybridDriveSlotSchema() map[string]*schema.Schema {
 			},
 		},
 		"requested_mode": {
-			Description: "The Requested Mode for the Hybrid Drive slot.\n* `` - Hybrid Drive slot  mode is not applicable.\n* `RAID` - Hybrid Drive slot mode is RAID.\n* `Direct` - Hybrid Drive slot mode is Direct.",
+			Description: "The Requested Mode for the Hybrid Drive slot.\n* `` - Hybrid Drive slot mode is not applicable.\n* `Controller` - Hybrid Drive slot mode is Controller.\n* `Direct` - Hybrid Drive slot mode is Direct.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

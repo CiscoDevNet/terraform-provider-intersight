@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -23,7 +23,7 @@ var _ MappedNullable = &WebhookEndpoint{}
 
 // WebhookEndpoint The webhook endpoint which an controller can use to forward events.
 type WebhookEndpoint struct {
-	MoBaseMo
+	IamAbstractClientApplication
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
@@ -49,6 +49,10 @@ func NewWebhookEndpoint(classId string, objectType string) *WebhookEndpoint {
 	this := WebhookEndpoint{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var authType string = "basic"
+	this.AuthType = &authType
+	var credentialsAction string = "none"
+	this.CredentialsAction = &credentialsAction
 	return &this
 }
 
@@ -315,13 +319,13 @@ func (o WebhookEndpoint) MarshalJSON() ([]byte, error) {
 
 func (o WebhookEndpoint) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
-	if errMoBaseMo != nil {
-		return map[string]interface{}{}, errMoBaseMo
+	serializedIamAbstractClientApplication, errIamAbstractClientApplication := json.Marshal(o.IamAbstractClientApplication)
+	if errIamAbstractClientApplication != nil {
+		return map[string]interface{}{}, errIamAbstractClientApplication
 	}
-	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
-	if errMoBaseMo != nil {
-		return map[string]interface{}{}, errMoBaseMo
+	errIamAbstractClientApplication = json.Unmarshal([]byte(serializedIamAbstractClientApplication), &toSerialize)
+	if errIamAbstractClientApplication != nil {
+		return map[string]interface{}{}, errIamAbstractClientApplication
 	}
 	if _, exists := toSerialize["ClassId"]; !exists {
 		toSerialize["ClassId"] = o.GetDefaultClassId()
@@ -432,7 +436,7 @@ func (o *WebhookEndpoint) UnmarshalJSON(data []byte) (err error) {
 
 	err = json.Unmarshal(data, &varWebhookEndpoint)
 	if err == nil {
-		o.MoBaseMo = varWebhookEndpoint.MoBaseMo
+		o.IamAbstractClientApplication = varWebhookEndpoint.IamAbstractClientApplication
 	} else {
 		return err
 	}
@@ -449,9 +453,9 @@ func (o *WebhookEndpoint) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "Schemas")
 
 		// remove fields from embedded structs
-		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
-		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
-			t := reflectMoBaseMo.Type().Field(i)
+		reflectIamAbstractClientApplication := reflect.ValueOf(o.IamAbstractClientApplication)
+		for i := 0; i < reflectIamAbstractClientApplication.Type().NumField(); i++ {
+			t := reflectIamAbstractClientApplication.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

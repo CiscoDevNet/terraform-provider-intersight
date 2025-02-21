@@ -18,7 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `admin_speed`:(string) Admin configured speed for the port.* `Auto` - Admin configurable speed AUTO ( default ).* `1Gbps` - Admin configurable speed 1Gbps.* `10Gbps` - Admin configurable speed 10Gbps.* `25Gbps` - Admin configurable speed 25Gbps.* `40Gbps` - Admin configurable speed 40Gbps.* `100Gbps` - Admin configurable speed 100Gbps.* `NegAuto25Gbps` - Admin configurable 25Gbps auto negotiation for ports and port-channels.Speed is applicable on Ethernet Uplink, Ethernet Appliance and FCoE Uplink port and port-channel roles.This speed config is only applicable to non-breakout ports on UCS-FI-6454 and UCS-FI-64108. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `fec`:(string) Forward error correction configuration for Uplink Port Channel member ports.* `Auto` - Forward error correction option 'Auto'.* `Cl91` - Forward error correction option 'cl91'.* `Cl74` - Forward error correction option 'cl74'. 
+* `fec`:(string) Forward error correction configuration for Uplink Port Channel member ports.* `Auto` - Forward error correction option 'Auto'.* `Cl91` - Forward error correction option 'cl91'.* `Cl74` - Forward error correction option 'cl74'.* `rs-cons16` - Forward Error Correction option \ rs-cons16\ .* `rs-ieee` - Forward Error Correction option \ rs-ieee\ .* `Off` - Turn off Forward Error Correction. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `pc_id`:(int) Unique Identifier of the port-channel, local to this switch. 

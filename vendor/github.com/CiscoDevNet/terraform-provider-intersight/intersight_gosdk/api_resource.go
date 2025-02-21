@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.11-2024120409
+API version: 1.0.11-2025020308
 Contact: intersight@cisco.com
 */
 
@@ -56,8 +56,8 @@ func (r ApiCreateResourceGroupRequest) Execute() (*ResourceGroup, *http.Response
 /*
 CreateResourceGroup Create a 'resource.Group' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateResourceGroupRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateResourceGroupRequest
 */
 func (a *ResourceApiService) CreateResourceGroup(ctx context.Context) ApiCreateResourceGroupRequest {
 	return ApiCreateResourceGroupRequest{
@@ -67,8 +67,7 @@ func (a *ResourceApiService) CreateResourceGroup(ctx context.Context) ApiCreateR
 }
 
 // Execute executes the request
-//
-//	@return ResourceGroup
+//  @return ResourceGroup
 func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroupRequest) (*ResourceGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -238,8 +237,8 @@ func (r ApiCreateResourceMembershipRequest) Execute() (*ResourceMembership, *htt
 /*
 CreateResourceMembership Create a 'resource.Membership' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateResourceMembershipRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateResourceMembershipRequest
 */
 func (a *ResourceApiService) CreateResourceMembership(ctx context.Context) ApiCreateResourceMembershipRequest {
 	return ApiCreateResourceMembershipRequest{
@@ -249,8 +248,7 @@ func (a *ResourceApiService) CreateResourceMembership(ctx context.Context) ApiCr
 }
 
 // Execute executes the request
-//
-//	@return ResourceMembership
+//  @return ResourceMembership
 func (a *ResourceApiService) CreateResourceMembershipExecute(r ApiCreateResourceMembershipRequest) (*ResourceMembership, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -420,8 +418,8 @@ func (r ApiCreateResourceReservationRequest) Execute() (*ResourceReservation, *h
 /*
 CreateResourceReservation Create a 'resource.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateResourceReservationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateResourceReservationRequest
 */
 func (a *ResourceApiService) CreateResourceReservation(ctx context.Context) ApiCreateResourceReservationRequest {
 	return ApiCreateResourceReservationRequest{
@@ -431,8 +429,7 @@ func (a *ResourceApiService) CreateResourceReservation(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//
-//	@return ResourceReservation
+//  @return ResourceReservation
 func (a *ResourceApiService) CreateResourceReservationExecute(r ApiCreateResourceReservationRequest) (*ResourceReservation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -602,8 +599,8 @@ func (r ApiCreateResourceSelectionCriteriaRequest) Execute() (*ResourceSelection
 /*
 CreateResourceSelectionCriteria Create a 'resource.SelectionCriteria' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateResourceSelectionCriteriaRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateResourceSelectionCriteriaRequest
 */
 func (a *ResourceApiService) CreateResourceSelectionCriteria(ctx context.Context) ApiCreateResourceSelectionCriteriaRequest {
 	return ApiCreateResourceSelectionCriteriaRequest{
@@ -613,8 +610,7 @@ func (a *ResourceApiService) CreateResourceSelectionCriteria(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return ResourceSelectionCriteria
+//  @return ResourceSelectionCriteria
 func (a *ResourceApiService) CreateResourceSelectionCriteriaExecute(r ApiCreateResourceSelectionCriteriaRequest) (*ResourceSelectionCriteria, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -764,9 +760,9 @@ func (r ApiDeleteResourceGroupRequest) Execute() (*http.Response, error) {
 /*
 DeleteResourceGroup Delete a 'resource.Group' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteResourceGroupRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteResourceGroupRequest
 */
 func (a *ResourceApiService) DeleteResourceGroup(ctx context.Context, moid string) ApiDeleteResourceGroupRequest {
 	return ApiDeleteResourceGroupRequest{
@@ -906,9 +902,9 @@ func (r ApiDeleteResourceGroupMemberRequest) Execute() (*http.Response, error) {
 /*
 DeleteResourceGroupMember Delete a 'resource.GroupMember' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteResourceGroupMemberRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteResourceGroupMemberRequest
 */
 func (a *ResourceApiService) DeleteResourceGroupMember(ctx context.Context, moid string) ApiDeleteResourceGroupMemberRequest {
 	return ApiDeleteResourceGroupMemberRequest{
@@ -1048,9 +1044,9 @@ func (r ApiDeleteResourceReservationRequest) Execute() (*http.Response, error) {
 /*
 DeleteResourceReservation Delete a 'resource.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteResourceReservationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteResourceReservationRequest
 */
 func (a *ResourceApiService) DeleteResourceReservation(ctx context.Context, moid string) ApiDeleteResourceReservationRequest {
 	return ApiDeleteResourceReservationRequest{
@@ -1190,9 +1186,9 @@ func (r ApiDeleteResourceSelectionCriteriaRequest) Execute() (*http.Response, er
 /*
 DeleteResourceSelectionCriteria Delete a 'resource.SelectionCriteria' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteResourceSelectionCriteriaRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteResourceSelectionCriteriaRequest
 */
 func (a *ResourceApiService) DeleteResourceSelectionCriteria(ctx context.Context, moid string) ApiDeleteResourceSelectionCriteriaRequest {
 	return ApiDeleteResourceSelectionCriteriaRequest{
@@ -1332,9 +1328,9 @@ func (r ApiDeleteResourceSharedResourcesInfoHolderRequest) Execute() (*http.Resp
 /*
 DeleteResourceSharedResourcesInfoHolder Delete a 'resource.SharedResourcesInfoHolder' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiDeleteResourceSharedResourcesInfoHolderRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteResourceSharedResourcesInfoHolderRequest
 */
 func (a *ResourceApiService) DeleteResourceSharedResourcesInfoHolder(ctx context.Context, moid string) ApiDeleteResourceSharedResourcesInfoHolderRequest {
 	return ApiDeleteResourceSharedResourcesInfoHolderRequest{
@@ -1474,9 +1470,9 @@ func (r ApiGetResourceGroupByMoidRequest) Execute() (*ResourceGroup, *http.Respo
 /*
 GetResourceGroupByMoid Read a 'resource.Group' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetResourceGroupByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetResourceGroupByMoidRequest
 */
 func (a *ResourceApiService) GetResourceGroupByMoid(ctx context.Context, moid string) ApiGetResourceGroupByMoidRequest {
 	return ApiGetResourceGroupByMoidRequest{
@@ -1487,8 +1483,7 @@ func (a *ResourceApiService) GetResourceGroupByMoid(ctx context.Context, moid st
 }
 
 // Execute executes the request
-//
-//	@return ResourceGroup
+//  @return ResourceGroup
 func (a *ResourceApiService) GetResourceGroupByMoidExecute(r ApiGetResourceGroupByMoidRequest) (*ResourceGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1704,8 +1699,8 @@ func (r ApiGetResourceGroupListRequest) Execute() (*ResourceGroupResponse, *http
 /*
 GetResourceGroupList Read a 'resource.Group' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetResourceGroupListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetResourceGroupListRequest
 */
 func (a *ResourceApiService) GetResourceGroupList(ctx context.Context) ApiGetResourceGroupListRequest {
 	return ApiGetResourceGroupListRequest{
@@ -1715,8 +1710,7 @@ func (a *ResourceApiService) GetResourceGroupList(ctx context.Context) ApiGetRes
 }
 
 // Execute executes the request
-//
-//	@return ResourceGroupResponse
+//  @return ResourceGroupResponse
 func (a *ResourceApiService) GetResourceGroupListExecute(r ApiGetResourceGroupListRequest) (*ResourceGroupResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1903,9 +1897,9 @@ func (r ApiGetResourceGroupMemberByMoidRequest) Execute() (*ResourceGroupMember,
 /*
 GetResourceGroupMemberByMoid Read a 'resource.GroupMember' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetResourceGroupMemberByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetResourceGroupMemberByMoidRequest
 */
 func (a *ResourceApiService) GetResourceGroupMemberByMoid(ctx context.Context, moid string) ApiGetResourceGroupMemberByMoidRequest {
 	return ApiGetResourceGroupMemberByMoidRequest{
@@ -1916,8 +1910,7 @@ func (a *ResourceApiService) GetResourceGroupMemberByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return ResourceGroupMember
+//  @return ResourceGroupMember
 func (a *ResourceApiService) GetResourceGroupMemberByMoidExecute(r ApiGetResourceGroupMemberByMoidRequest) (*ResourceGroupMember, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2133,8 +2126,8 @@ func (r ApiGetResourceGroupMemberListRequest) Execute() (*ResourceGroupMemberRes
 /*
 GetResourceGroupMemberList Read a 'resource.GroupMember' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetResourceGroupMemberListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetResourceGroupMemberListRequest
 */
 func (a *ResourceApiService) GetResourceGroupMemberList(ctx context.Context) ApiGetResourceGroupMemberListRequest {
 	return ApiGetResourceGroupMemberListRequest{
@@ -2144,8 +2137,7 @@ func (a *ResourceApiService) GetResourceGroupMemberList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//
-//	@return ResourceGroupMemberResponse
+//  @return ResourceGroupMemberResponse
 func (a *ResourceApiService) GetResourceGroupMemberListExecute(r ApiGetResourceGroupMemberListRequest) (*ResourceGroupMemberResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2332,9 +2324,9 @@ func (r ApiGetResourceLicenseResourceCountByMoidRequest) Execute() (*ResourceLic
 /*
 GetResourceLicenseResourceCountByMoid Read a 'resource.LicenseResourceCount' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetResourceLicenseResourceCountByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetResourceLicenseResourceCountByMoidRequest
 */
 func (a *ResourceApiService) GetResourceLicenseResourceCountByMoid(ctx context.Context, moid string) ApiGetResourceLicenseResourceCountByMoidRequest {
 	return ApiGetResourceLicenseResourceCountByMoidRequest{
@@ -2345,8 +2337,7 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountByMoid(ctx context.C
 }
 
 // Execute executes the request
-//
-//	@return ResourceLicenseResourceCount
+//  @return ResourceLicenseResourceCount
 func (a *ResourceApiService) GetResourceLicenseResourceCountByMoidExecute(r ApiGetResourceLicenseResourceCountByMoidRequest) (*ResourceLicenseResourceCount, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2562,8 +2553,8 @@ func (r ApiGetResourceLicenseResourceCountListRequest) Execute() (*ResourceLicen
 /*
 GetResourceLicenseResourceCountList Read a 'resource.LicenseResourceCount' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetResourceLicenseResourceCountListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetResourceLicenseResourceCountListRequest
 */
 func (a *ResourceApiService) GetResourceLicenseResourceCountList(ctx context.Context) ApiGetResourceLicenseResourceCountListRequest {
 	return ApiGetResourceLicenseResourceCountListRequest{
@@ -2573,8 +2564,7 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountList(ctx context.Con
 }
 
 // Execute executes the request
-//
-//	@return ResourceLicenseResourceCountResponse
+//  @return ResourceLicenseResourceCountResponse
 func (a *ResourceApiService) GetResourceLicenseResourceCountListExecute(r ApiGetResourceLicenseResourceCountListRequest) (*ResourceLicenseResourceCountResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2761,9 +2751,9 @@ func (r ApiGetResourceMembershipByMoidRequest) Execute() (*ResourceMembership, *
 /*
 GetResourceMembershipByMoid Read a 'resource.Membership' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetResourceMembershipByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetResourceMembershipByMoidRequest
 */
 func (a *ResourceApiService) GetResourceMembershipByMoid(ctx context.Context, moid string) ApiGetResourceMembershipByMoidRequest {
 	return ApiGetResourceMembershipByMoidRequest{
@@ -2774,8 +2764,7 @@ func (a *ResourceApiService) GetResourceMembershipByMoid(ctx context.Context, mo
 }
 
 // Execute executes the request
-//
-//	@return ResourceMembership
+//  @return ResourceMembership
 func (a *ResourceApiService) GetResourceMembershipByMoidExecute(r ApiGetResourceMembershipByMoidRequest) (*ResourceMembership, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2915,9 +2904,9 @@ func (r ApiGetResourceMembershipHolderByMoidRequest) Execute() (*ResourceMembers
 /*
 GetResourceMembershipHolderByMoid Read a 'resource.MembershipHolder' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetResourceMembershipHolderByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetResourceMembershipHolderByMoidRequest
 */
 func (a *ResourceApiService) GetResourceMembershipHolderByMoid(ctx context.Context, moid string) ApiGetResourceMembershipHolderByMoidRequest {
 	return ApiGetResourceMembershipHolderByMoidRequest{
@@ -2928,8 +2917,7 @@ func (a *ResourceApiService) GetResourceMembershipHolderByMoid(ctx context.Conte
 }
 
 // Execute executes the request
-//
-//	@return ResourceMembershipHolder
+//  @return ResourceMembershipHolder
 func (a *ResourceApiService) GetResourceMembershipHolderByMoidExecute(r ApiGetResourceMembershipHolderByMoidRequest) (*ResourceMembershipHolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3145,8 +3133,8 @@ func (r ApiGetResourceMembershipHolderListRequest) Execute() (*ResourceMembershi
 /*
 GetResourceMembershipHolderList Read a 'resource.MembershipHolder' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetResourceMembershipHolderListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetResourceMembershipHolderListRequest
 */
 func (a *ResourceApiService) GetResourceMembershipHolderList(ctx context.Context) ApiGetResourceMembershipHolderListRequest {
 	return ApiGetResourceMembershipHolderListRequest{
@@ -3156,8 +3144,7 @@ func (a *ResourceApiService) GetResourceMembershipHolderList(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return ResourceMembershipHolderResponse
+//  @return ResourceMembershipHolderResponse
 func (a *ResourceApiService) GetResourceMembershipHolderListExecute(r ApiGetResourceMembershipHolderListRequest) (*ResourceMembershipHolderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3420,8 +3407,8 @@ func (r ApiGetResourceMembershipListRequest) Execute() (*ResourceMembershipRespo
 /*
 GetResourceMembershipList Read a 'resource.Membership' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetResourceMembershipListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetResourceMembershipListRequest
 */
 func (a *ResourceApiService) GetResourceMembershipList(ctx context.Context) ApiGetResourceMembershipListRequest {
 	return ApiGetResourceMembershipListRequest{
@@ -3431,8 +3418,7 @@ func (a *ResourceApiService) GetResourceMembershipList(ctx context.Context) ApiG
 }
 
 // Execute executes the request
-//
-//	@return ResourceMembershipResponse
+//  @return ResourceMembershipResponse
 func (a *ResourceApiService) GetResourceMembershipListExecute(r ApiGetResourceMembershipListRequest) (*ResourceMembershipResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3619,9 +3605,9 @@ func (r ApiGetResourceReservationByMoidRequest) Execute() (*ResourceReservation,
 /*
 GetResourceReservationByMoid Read a 'resource.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetResourceReservationByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetResourceReservationByMoidRequest
 */
 func (a *ResourceApiService) GetResourceReservationByMoid(ctx context.Context, moid string) ApiGetResourceReservationByMoidRequest {
 	return ApiGetResourceReservationByMoidRequest{
@@ -3632,8 +3618,7 @@ func (a *ResourceApiService) GetResourceReservationByMoid(ctx context.Context, m
 }
 
 // Execute executes the request
-//
-//	@return ResourceReservation
+//  @return ResourceReservation
 func (a *ResourceApiService) GetResourceReservationByMoidExecute(r ApiGetResourceReservationByMoidRequest) (*ResourceReservation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3849,8 +3834,8 @@ func (r ApiGetResourceReservationListRequest) Execute() (*ResourceReservationRes
 /*
 GetResourceReservationList Read a 'resource.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetResourceReservationListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetResourceReservationListRequest
 */
 func (a *ResourceApiService) GetResourceReservationList(ctx context.Context) ApiGetResourceReservationListRequest {
 	return ApiGetResourceReservationListRequest{
@@ -3860,8 +3845,7 @@ func (a *ResourceApiService) GetResourceReservationList(ctx context.Context) Api
 }
 
 // Execute executes the request
-//
-//	@return ResourceReservationResponse
+//  @return ResourceReservationResponse
 func (a *ResourceApiService) GetResourceReservationListExecute(r ApiGetResourceReservationListRequest) (*ResourceReservationResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4048,9 +4032,9 @@ func (r ApiGetResourceSelectionCriteriaByMoidRequest) Execute() (*ResourceSelect
 /*
 GetResourceSelectionCriteriaByMoid Read a 'resource.SelectionCriteria' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetResourceSelectionCriteriaByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetResourceSelectionCriteriaByMoidRequest
 */
 func (a *ResourceApiService) GetResourceSelectionCriteriaByMoid(ctx context.Context, moid string) ApiGetResourceSelectionCriteriaByMoidRequest {
 	return ApiGetResourceSelectionCriteriaByMoidRequest{
@@ -4061,8 +4045,7 @@ func (a *ResourceApiService) GetResourceSelectionCriteriaByMoid(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return ResourceSelectionCriteria
+//  @return ResourceSelectionCriteria
 func (a *ResourceApiService) GetResourceSelectionCriteriaByMoidExecute(r ApiGetResourceSelectionCriteriaByMoidRequest) (*ResourceSelectionCriteria, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4278,8 +4261,8 @@ func (r ApiGetResourceSelectionCriteriaListRequest) Execute() (*ResourceSelectio
 /*
 GetResourceSelectionCriteriaList Read a 'resource.SelectionCriteria' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetResourceSelectionCriteriaListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetResourceSelectionCriteriaListRequest
 */
 func (a *ResourceApiService) GetResourceSelectionCriteriaList(ctx context.Context) ApiGetResourceSelectionCriteriaListRequest {
 	return ApiGetResourceSelectionCriteriaListRequest{
@@ -4289,8 +4272,7 @@ func (a *ResourceApiService) GetResourceSelectionCriteriaList(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return ResourceSelectionCriteriaResponse
+//  @return ResourceSelectionCriteriaResponse
 func (a *ResourceApiService) GetResourceSelectionCriteriaListExecute(r ApiGetResourceSelectionCriteriaListRequest) (*ResourceSelectionCriteriaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4477,9 +4459,9 @@ func (r ApiGetResourceSharedResourcesInfoHolderByMoidRequest) Execute() (*Resour
 /*
 GetResourceSharedResourcesInfoHolderByMoid Read a 'resource.SharedResourcesInfoHolder' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiGetResourceSharedResourcesInfoHolderByMoidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetResourceSharedResourcesInfoHolderByMoidRequest
 */
 func (a *ResourceApiService) GetResourceSharedResourcesInfoHolderByMoid(ctx context.Context, moid string) ApiGetResourceSharedResourcesInfoHolderByMoidRequest {
 	return ApiGetResourceSharedResourcesInfoHolderByMoidRequest{
@@ -4490,8 +4472,7 @@ func (a *ResourceApiService) GetResourceSharedResourcesInfoHolderByMoid(ctx cont
 }
 
 // Execute executes the request
-//
-//	@return ResourceSharedResourcesInfoHolder
+//  @return ResourceSharedResourcesInfoHolder
 func (a *ResourceApiService) GetResourceSharedResourcesInfoHolderByMoidExecute(r ApiGetResourceSharedResourcesInfoHolderByMoidRequest) (*ResourceSharedResourcesInfoHolder, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4707,8 +4688,8 @@ func (r ApiGetResourceSharedResourcesInfoHolderListRequest) Execute() (*Resource
 /*
 GetResourceSharedResourcesInfoHolderList Read a 'resource.SharedResourcesInfoHolder' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetResourceSharedResourcesInfoHolderListRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetResourceSharedResourcesInfoHolderListRequest
 */
 func (a *ResourceApiService) GetResourceSharedResourcesInfoHolderList(ctx context.Context) ApiGetResourceSharedResourcesInfoHolderListRequest {
 	return ApiGetResourceSharedResourcesInfoHolderListRequest{
@@ -4718,8 +4699,7 @@ func (a *ResourceApiService) GetResourceSharedResourcesInfoHolderList(ctx contex
 }
 
 // Execute executes the request
-//
-//	@return ResourceSharedResourcesInfoHolderResponse
+//  @return ResourceSharedResourcesInfoHolderResponse
 func (a *ResourceApiService) GetResourceSharedResourcesInfoHolderListExecute(r ApiGetResourceSharedResourcesInfoHolderListRequest) (*ResourceSharedResourcesInfoHolderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4920,9 +4900,9 @@ func (r ApiPatchResourceGroupRequest) Execute() (*ResourceGroup, *http.Response,
 /*
 PatchResourceGroup Update a 'resource.Group' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchResourceGroupRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchResourceGroupRequest
 */
 func (a *ResourceApiService) PatchResourceGroup(ctx context.Context, moid string) ApiPatchResourceGroupRequest {
 	return ApiPatchResourceGroupRequest{
@@ -4933,8 +4913,7 @@ func (a *ResourceApiService) PatchResourceGroup(ctx context.Context, moid string
 }
 
 // Execute executes the request
-//
-//	@return ResourceGroup
+//  @return ResourceGroup
 func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRequest) (*ResourceGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5096,9 +5075,9 @@ func (r ApiPatchResourceMembershipRequest) Execute() (*ResourceMembership, *http
 /*
 PatchResourceMembership Update a 'resource.Membership' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchResourceMembershipRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchResourceMembershipRequest
 */
 func (a *ResourceApiService) PatchResourceMembership(ctx context.Context, moid string) ApiPatchResourceMembershipRequest {
 	return ApiPatchResourceMembershipRequest{
@@ -5109,8 +5088,7 @@ func (a *ResourceApiService) PatchResourceMembership(ctx context.Context, moid s
 }
 
 // Execute executes the request
-//
-//	@return ResourceMembership
+//  @return ResourceMembership
 func (a *ResourceApiService) PatchResourceMembershipExecute(r ApiPatchResourceMembershipRequest) (*ResourceMembership, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5272,9 +5250,9 @@ func (r ApiPatchResourceReservationRequest) Execute() (*ResourceReservation, *ht
 /*
 PatchResourceReservation Update a 'resource.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchResourceReservationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchResourceReservationRequest
 */
 func (a *ResourceApiService) PatchResourceReservation(ctx context.Context, moid string) ApiPatchResourceReservationRequest {
 	return ApiPatchResourceReservationRequest{
@@ -5285,8 +5263,7 @@ func (a *ResourceApiService) PatchResourceReservation(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return ResourceReservation
+//  @return ResourceReservation
 func (a *ResourceApiService) PatchResourceReservationExecute(r ApiPatchResourceReservationRequest) (*ResourceReservation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5448,9 +5425,9 @@ func (r ApiPatchResourceSelectionCriteriaRequest) Execute() (*ResourceSelectionC
 /*
 PatchResourceSelectionCriteria Update a 'resource.SelectionCriteria' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiPatchResourceSelectionCriteriaRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchResourceSelectionCriteriaRequest
 */
 func (a *ResourceApiService) PatchResourceSelectionCriteria(ctx context.Context, moid string) ApiPatchResourceSelectionCriteriaRequest {
 	return ApiPatchResourceSelectionCriteriaRequest{
@@ -5461,8 +5438,7 @@ func (a *ResourceApiService) PatchResourceSelectionCriteria(ctx context.Context,
 }
 
 // Execute executes the request
-//
-//	@return ResourceSelectionCriteria
+//  @return ResourceSelectionCriteria
 func (a *ResourceApiService) PatchResourceSelectionCriteriaExecute(r ApiPatchResourceSelectionCriteriaRequest) (*ResourceSelectionCriteria, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5624,9 +5600,9 @@ func (r ApiUpdateResourceGroupRequest) Execute() (*ResourceGroup, *http.Response
 /*
 UpdateResourceGroup Update a 'resource.Group' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateResourceGroupRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateResourceGroupRequest
 */
 func (a *ResourceApiService) UpdateResourceGroup(ctx context.Context, moid string) ApiUpdateResourceGroupRequest {
 	return ApiUpdateResourceGroupRequest{
@@ -5637,8 +5613,7 @@ func (a *ResourceApiService) UpdateResourceGroup(ctx context.Context, moid strin
 }
 
 // Execute executes the request
-//
-//	@return ResourceGroup
+//  @return ResourceGroup
 func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroupRequest) (*ResourceGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5800,9 +5775,9 @@ func (r ApiUpdateResourceMembershipRequest) Execute() (*ResourceMembership, *htt
 /*
 UpdateResourceMembership Update a 'resource.Membership' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateResourceMembershipRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateResourceMembershipRequest
 */
 func (a *ResourceApiService) UpdateResourceMembership(ctx context.Context, moid string) ApiUpdateResourceMembershipRequest {
 	return ApiUpdateResourceMembershipRequest{
@@ -5813,8 +5788,7 @@ func (a *ResourceApiService) UpdateResourceMembership(ctx context.Context, moid 
 }
 
 // Execute executes the request
-//
-//	@return ResourceMembership
+//  @return ResourceMembership
 func (a *ResourceApiService) UpdateResourceMembershipExecute(r ApiUpdateResourceMembershipRequest) (*ResourceMembership, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5976,9 +5950,9 @@ func (r ApiUpdateResourceReservationRequest) Execute() (*ResourceReservation, *h
 /*
 UpdateResourceReservation Update a 'resource.Reservation' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateResourceReservationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateResourceReservationRequest
 */
 func (a *ResourceApiService) UpdateResourceReservation(ctx context.Context, moid string) ApiUpdateResourceReservationRequest {
 	return ApiUpdateResourceReservationRequest{
@@ -5989,8 +5963,7 @@ func (a *ResourceApiService) UpdateResourceReservation(ctx context.Context, moid
 }
 
 // Execute executes the request
-//
-//	@return ResourceReservation
+//  @return ResourceReservation
 func (a *ResourceApiService) UpdateResourceReservationExecute(r ApiUpdateResourceReservationRequest) (*ResourceReservation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6152,9 +6125,9 @@ func (r ApiUpdateResourceSelectionCriteriaRequest) Execute() (*ResourceSelection
 /*
 UpdateResourceSelectionCriteria Update a 'resource.SelectionCriteria' resource.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param moid The unique Moid identifier of a resource instance.
-	@return ApiUpdateResourceSelectionCriteriaRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateResourceSelectionCriteriaRequest
 */
 func (a *ResourceApiService) UpdateResourceSelectionCriteria(ctx context.Context, moid string) ApiUpdateResourceSelectionCriteriaRequest {
 	return ApiUpdateResourceSelectionCriteriaRequest{
@@ -6165,8 +6138,7 @@ func (a *ResourceApiService) UpdateResourceSelectionCriteria(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return ResourceSelectionCriteria
+//  @return ResourceSelectionCriteria
 func (a *ResourceApiService) UpdateResourceSelectionCriteriaExecute(r ApiUpdateResourceSelectionCriteriaRequest) (*ResourceSelectionCriteria, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

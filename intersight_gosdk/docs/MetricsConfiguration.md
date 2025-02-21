@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "metrics.Configuration"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "metrics.Configuration"]
 **CollectNewDevices** | Pointer to **string** | The behavior of the system when new resources are added, controls whether metric collection are automatically enabled for the new resources. * &#x60;AutoEnable&#x60; - Automatically enable metric collection for new resources, up to the limit of resource collection. * &#x60;Disabled&#x60; - Metrics will not be enabled on new resources, to enable collection requires an explicit user enable. | [optional] [default to "AutoEnable"]
+**CollectionGranularity** | Pointer to **string** | The current supported collection granularity by the system, defined as the lowest granularity supported, with the actual granularity per resource determined by the license tier of the resource. | [optional] [readonly] 
 **Enabled** | Pointer to **bool** | Enables metric collection for the account, if disabled metrics will be stopped for all resources in the account. | [optional] [readonly] 
 **Limit** | Pointer to **int64** | The total number of resources that can be enabled for metric collection in this account. | [optional] [readonly] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
@@ -94,6 +95,31 @@ SetCollectNewDevices sets CollectNewDevices field to given value.
 `func (o *MetricsConfiguration) HasCollectNewDevices() bool`
 
 HasCollectNewDevices returns a boolean if a field has been set.
+
+### GetCollectionGranularity
+
+`func (o *MetricsConfiguration) GetCollectionGranularity() string`
+
+GetCollectionGranularity returns the CollectionGranularity field if non-nil, zero value otherwise.
+
+### GetCollectionGranularityOk
+
+`func (o *MetricsConfiguration) GetCollectionGranularityOk() (*string, bool)`
+
+GetCollectionGranularityOk returns a tuple with the CollectionGranularity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCollectionGranularity
+
+`func (o *MetricsConfiguration) SetCollectionGranularity(v string)`
+
+SetCollectionGranularity sets CollectionGranularity field to given value.
+
+### HasCollectionGranularity
+
+`func (o *MetricsConfiguration) HasCollectionGranularity() bool`
+
+HasCollectionGranularity returns a boolean if a field has been set.
 
 ### GetEnabled
 

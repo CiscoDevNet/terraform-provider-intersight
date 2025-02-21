@@ -6,11 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.ClusterInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.ClusterInfo"]
+**BuildType** | Pointer to **string** | The build type of the Intersight Virtual Appliance. | [optional] 
 **DeploymentSize** | Pointer to **string** | The deployment size of the node requiring to join cluster. | [optional] 
 **Gateway** | Pointer to **string** | Default gateway configured on the peer node. | [optional] 
 **Hostip** | Pointer to **string** | Publicly accessible IP of the peer node. | [optional] 
 **Hostname** | Pointer to **string** | Publicly accessible FQDN of the peer node. | [optional] 
 **InstallerVersion** | Pointer to **string** | Installer version used to install on peer node. | [optional] 
+**NodeId** | Pointer to **int64** | System assigned unique ID of the Intersight Appliance node. The system incrementally assigns identifiers to each node in the Intersight Appliance starting with a value of 0. | [optional] [readonly] 
+**NodeType** | Pointer to **string** | The node type of Intersight Virtual Appliance. * &#x60;standalone&#x60; - Single Node Intersight Virtual Appliance. * &#x60;management&#x60; - Management node type when Intersight Virtual Appliance is running as management-worker deployment. * &#x60;hamanagement&#x60; - Management node type when Intersight Virtual Appliance is running as multi node HA deployment. * &#x60;metrics&#x60; - Metrics node when Intersight Virtual Appliance is running management-metrics node. | [optional] [default to "standalone"]
 **PartitionDatabase** | Pointer to **int64** | The partition size for /opt/database of this node. | [optional] 
 **PartitionFileCisco** | Pointer to **int64** | The partition size for /Cisco of this node. | [optional] 
 **PartitionOptData** | Pointer to **int64** | The partition size for /opt/cisco/data of this node. | [optional] 
@@ -20,7 +23,7 @@ Name | Type | Description | Notes
 **PartitionVarLog** | Pointer to **int64** | The partition size for /var of this node. | [optional] 
 **Peerkey** | Pointer to **string** | The public key of peer host. | [optional] 
 **Responsekey** | Pointer to **string** | Public key returned to the client. | [optional] 
-**Status** | Pointer to **string** | The status of the cluster join process. * &#x60;Unknown&#x60; - The status of the appliance node is unknown. * &#x60;Operational&#x60; - The appliance node is operational. * &#x60;Impaired&#x60; - The appliance node is impaired. * &#x60;AttentionNeeded&#x60; - The appliance node needs attention. * &#x60;ReadyToJoin&#x60; - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * &#x60;OutOfService&#x60; - The user has taken this node (part of a cluster) to out of service. * &#x60;ReadyForReplacement&#x60; - The cluster node is ready to be replaced. * &#x60;ReplacementInProgress&#x60; - The cluster node replacement is in progress. * &#x60;ReplacementFailed&#x60; - There was a failure during the cluster node replacement. | [optional] [readonly] [default to "Unknown"]
+**Status** | Pointer to **string** | The status of the cluster join process. * &#x60;Unknown&#x60; - The status of the appliance node is unknown. * &#x60;Operational&#x60; - The appliance node is operational. * &#x60;Impaired&#x60; - The appliance node is impaired. * &#x60;AttentionNeeded&#x60; - The appliance node needs attention. * &#x60;ReadyToJoin&#x60; - The node is ready to be added to a standalone Intersight Appliance to form a cluster. * &#x60;OutOfService&#x60; - The user has taken this node (part of a cluster) to out of service. * &#x60;ReadyForReplacement&#x60; - The cluster node is ready to be replaced. * &#x60;ReplacementInProgress&#x60; - The cluster node replacement is in progress. * &#x60;ReplacementFailed&#x60; - There was a failure during the cluster node replacement. * &#x60;WorkerNodeInstInProgress&#x60; - The worker node installation is in progress. * &#x60;WorkerNodeInstSuccess&#x60; - The worker node installation succeeded. * &#x60;WorkerNodeInstFailed&#x60; - The worker node installation failed. | [optional] [readonly] [default to "Unknown"]
 **Subnetmask** | Pointer to **string** | Subnet Mask of the peer node. | [optional] 
 **Uuid** | Pointer to **string** | The UUID of the peer appliance. | [optional] 
 **Account** | Pointer to [**NullableIamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
@@ -83,6 +86,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetBuildType
+
+`func (o *ApplianceClusterInfo) GetBuildType() string`
+
+GetBuildType returns the BuildType field if non-nil, zero value otherwise.
+
+### GetBuildTypeOk
+
+`func (o *ApplianceClusterInfo) GetBuildTypeOk() (*string, bool)`
+
+GetBuildTypeOk returns a tuple with the BuildType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuildType
+
+`func (o *ApplianceClusterInfo) SetBuildType(v string)`
+
+SetBuildType sets BuildType field to given value.
+
+### HasBuildType
+
+`func (o *ApplianceClusterInfo) HasBuildType() bool`
+
+HasBuildType returns a boolean if a field has been set.
 
 ### GetDeploymentSize
 
@@ -208,6 +236,56 @@ SetInstallerVersion sets InstallerVersion field to given value.
 `func (o *ApplianceClusterInfo) HasInstallerVersion() bool`
 
 HasInstallerVersion returns a boolean if a field has been set.
+
+### GetNodeId
+
+`func (o *ApplianceClusterInfo) GetNodeId() int64`
+
+GetNodeId returns the NodeId field if non-nil, zero value otherwise.
+
+### GetNodeIdOk
+
+`func (o *ApplianceClusterInfo) GetNodeIdOk() (*int64, bool)`
+
+GetNodeIdOk returns a tuple with the NodeId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeId
+
+`func (o *ApplianceClusterInfo) SetNodeId(v int64)`
+
+SetNodeId sets NodeId field to given value.
+
+### HasNodeId
+
+`func (o *ApplianceClusterInfo) HasNodeId() bool`
+
+HasNodeId returns a boolean if a field has been set.
+
+### GetNodeType
+
+`func (o *ApplianceClusterInfo) GetNodeType() string`
+
+GetNodeType returns the NodeType field if non-nil, zero value otherwise.
+
+### GetNodeTypeOk
+
+`func (o *ApplianceClusterInfo) GetNodeTypeOk() (*string, bool)`
+
+GetNodeTypeOk returns a tuple with the NodeType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeType
+
+`func (o *ApplianceClusterInfo) SetNodeType(v string)`
+
+SetNodeType sets NodeType field to given value.
+
+### HasNodeType
+
+`func (o *ApplianceClusterInfo) HasNodeType() bool`
+
+HasNodeType returns a boolean if a field has been set.
 
 ### GetPartitionDatabase
 

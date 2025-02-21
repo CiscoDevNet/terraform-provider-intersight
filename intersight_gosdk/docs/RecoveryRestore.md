@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recovery.Restore"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recovery.Restore"]
-**ConfigParams** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | Encapsulates the restore workflows configuration parameters. | [optional] 
+**ConfigParams** | Pointer to [**NullableRecoveryConfigParams**](RecoveryConfigParams.md) |  | [optional] 
 **BackupInfo** | Pointer to [**NullableRecoveryAbstractBackupInfoRelationship**](RecoveryAbstractBackupInfoRelationship.md) |  | [optional] 
 **Device** | Pointer to [**NullableAssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**NullableOrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
@@ -73,20 +73,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetConfigParams
 
-`func (o *RecoveryRestore) GetConfigParams() MoBaseComplexType`
+`func (o *RecoveryRestore) GetConfigParams() RecoveryConfigParams`
 
 GetConfigParams returns the ConfigParams field if non-nil, zero value otherwise.
 
 ### GetConfigParamsOk
 
-`func (o *RecoveryRestore) GetConfigParamsOk() (*MoBaseComplexType, bool)`
+`func (o *RecoveryRestore) GetConfigParamsOk() (*RecoveryConfigParams, bool)`
 
 GetConfigParamsOk returns a tuple with the ConfigParams field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetConfigParams
 
-`func (o *RecoveryRestore) SetConfigParams(v MoBaseComplexType)`
+`func (o *RecoveryRestore) SetConfigParams(v RecoveryConfigParams)`
 
 SetConfigParams sets ConfigParams field to given value.
 

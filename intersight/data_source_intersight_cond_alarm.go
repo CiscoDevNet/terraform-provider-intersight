@@ -96,6 +96,40 @@ func getCondAlarmSchema() map[string]*schema.Schema {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"alarm_summary_aggregators": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"ancestor_mo_id": {
 			Description: "Parent MoId of the fault from managed system. For example, Blade moid for adaptor fault.",
 			Type:        schema.TypeString,
@@ -202,6 +236,21 @@ func getCondAlarmSchema() map[string]*schema.Schema {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"flapping": {
+			Description: "Alarm flapping state. This will be set to Flapping or Cooldown if both (A) this type of alarm is being monitored for flapping conditions, and (B) the alarm has recently transitioned to an active state (Critical, Warning or Info) followed by a Cleared state or vice versa. LastTransitionTime is a better field to use to know whether a particular alarm recently changed state.\n* `NotFlapping` - The enum value None says that no recent flaps have occurred.\n* `Flapping` - The enum value Flapping says that the alarm has become active recently, after being active and then cleared previously.\n* `Cooldown` - The enum value Cooldown says that the alarm is cleared, but was recently active.\n* `Unknown` - The enum value Unknown indicates that you might not have the latest version of the property meta.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"flapping_count": {
+			Description: "Alarm flapping counter. This will be incremented every time the state of the alarm transitions to an active state (Critical, Warning or Info) followed by a Cleared state or vice versa. If no more transitions occur within the system-defined flap interval (usually less than 5 minutes), the counter will be reset to zero. This represents the amount of times the alarm has flapped between an active and a cleared state since the last time the Flapping state was cleared.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"flapping_start_time": {
+			Description: "Alarm flapping start time. Only when the flapping state is Flapping or Cooldown, this will be set to the time the alarm began flapping. If the flapping state is NotFlapping, this timestamp may be set to zero or any other time and should be ignored.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -614,6 +663,46 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetAffectedObject(x)
 	}
 
+	if v, ok := d.GetOk("alarm_summary_aggregators"); ok {
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		o.SetAlarmSummaryAggregators(x)
+	}
+
 	if v, ok := d.GetOk("ancestor_mo_id"); ok {
 		x := (v.(string))
 		o.SetAncestorMoId(x)
@@ -735,6 +824,21 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("flapping"); ok {
+		x := (v.(string))
+		o.SetFlapping(x)
+	}
+
+	if v, ok := d.GetOkExists("flapping_count"); ok {
+		x := int64(v.(int))
+		o.SetFlappingCount(x)
+	}
+
+	if v, ok := d.GetOk("flapping_start_time"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetFlappingStartTime(x)
 	}
 
 	if v, ok := d.GetOk("last_transition_time"); ok {
@@ -1078,6 +1182,8 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 				temp["affected_mo_id"] = (s.GetAffectedMoId())
 				temp["affected_mo_type"] = (s.GetAffectedMoType())
 				temp["affected_object"] = (s.GetAffectedObject())
+
+				temp["alarm_summary_aggregators"] = flattenListMoBaseMoRelationship(s.GetAlarmSummaryAggregators(), d)
 				temp["ancestor_mo_id"] = (s.GetAncestorMoId())
 				temp["ancestor_mo_type"] = (s.GetAncestorMoType())
 
@@ -1092,6 +1198,10 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 				temp["definition"] = flattenMapCondAlarmDefinitionRelationship(s.GetDefinition(), d)
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["flapping"] = (s.GetFlapping())
+				temp["flapping_count"] = (s.GetFlappingCount())
+
+				temp["flapping_start_time"] = (s.GetFlappingStartTime()).String()
 
 				temp["last_transition_time"] = (s.GetLastTransitionTime()).String()
 

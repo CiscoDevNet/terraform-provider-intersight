@@ -262,6 +262,11 @@ docs/ApplianceClusterInstallResponse.md
 docs/ApplianceClusterReplaceNode.md
 docs/ApplianceClusterReplaceNodeList.md
 docs/ApplianceClusterReplaceNodeResponse.md
+docs/ApplianceClusterWorkerNode.md
+docs/ApplianceClusterWorkerNodeList.md
+docs/ApplianceClusterWorkerNodeReplace.md
+docs/ApplianceClusterWorkerNodeResponse.md
+docs/ApplianceClusterWorkerNodeReuse.md
 docs/ApplianceDataExportPolicy.md
 docs/ApplianceDataExportPolicyList.md
 docs/ApplianceDataExportPolicyRelationship.md
@@ -702,6 +707,9 @@ docs/CapabilityFexDescriptorResponse.md
 docs/CapabilityFexManufacturingDef.md
 docs/CapabilityFexManufacturingDefList.md
 docs/CapabilityFexManufacturingDefResponse.md
+docs/CapabilityFexSupportMeta.md
+docs/CapabilityFexSupportMetaList.md
+docs/CapabilityFexSupportMetaResponse.md
 docs/CapabilityGpuEndpointDescriptor.md
 docs/CapabilityGpuEndpointDescriptorList.md
 docs/CapabilityGpuEndpointDescriptorResponse.md
@@ -2121,6 +2129,8 @@ docs/IaasUcsdMessages.md
 docs/IaasUcsdMessagesList.md
 docs/IaasUcsdMessagesResponse.md
 docs/IaasWorkflowSteps.md
+docs/IamAbstractClientApplication.md
+docs/IamAbstractClientApplicationRelationship.md
 docs/IamAccount.md
 docs/IamAccountExperience.md
 docs/IamAccountExperienceList.md
@@ -2135,6 +2145,7 @@ docs/IamApiKey.md
 docs/IamApiKeyList.md
 docs/IamApiKeyRelationship.md
 docs/IamApiKeyResponse.md
+docs/IamAppCredentials.md
 docs/IamAppRegistration.md
 docs/IamAppRegistrationList.md
 docs/IamAppRegistrationRelationship.md
@@ -2142,6 +2153,7 @@ docs/IamAppRegistrationResponse.md
 docs/IamBannerMessage.md
 docs/IamBannerMessageList.md
 docs/IamBannerMessageResponse.md
+docs/IamBasicAuthCredentials.md
 docs/IamCertificate.md
 docs/IamCertificateList.md
 docs/IamCertificateRelationship.md
@@ -2649,6 +2661,14 @@ docs/LicenseCustomerOp.md
 docs/LicenseCustomerOpList.md
 docs/LicenseCustomerOpRelationship.md
 docs/LicenseCustomerOpResponse.md
+docs/LicenseErpCustomerOp.md
+docs/LicenseErpCustomerOpList.md
+docs/LicenseErpCustomerOpRelationship.md
+docs/LicenseErpCustomerOpResponse.md
+docs/LicenseErpLicenseCount.md
+docs/LicenseErpLicenseCountList.md
+docs/LicenseErpLicenseCountRelationship.md
+docs/LicenseErpLicenseCountResponse.md
 docs/LicenseIksCustomerOp.md
 docs/LicenseIksCustomerOpList.md
 docs/LicenseIksCustomerOpRelationship.md
@@ -3311,6 +3331,8 @@ docs/NotificationSendEmail.md
 docs/NotificationSoftwareReleaseMetaMoCondition.md
 docs/NotificationSubscription.md
 docs/NotificationTriggerWebhook.md
+docs/NotificationTriggerWorkflow.md
+docs/NotificationWebhookEventMoCondition.md
 docs/NtpApi.md
 docs/NtpAuthNtpServer.md
 docs/NtpNtpServer.md
@@ -3833,7 +3855,11 @@ docs/SessionAbstractSubSession.md
 docs/SmtpApi.md
 docs/SmtpPolicy.md
 docs/SmtpPolicyList.md
+docs/SmtpPolicyRelationship.md
 docs/SmtpPolicyResponse.md
+docs/SmtpPolicyTest.md
+docs/SmtpPolicyTestList.md
+docs/SmtpPolicyTestResponse.md
 docs/SnmpApi.md
 docs/SnmpPolicy.md
 docs/SnmpPolicyInventory.md
@@ -4078,6 +4104,9 @@ docs/StorageHitachiHostLunResponse.md
 docs/StorageHitachiHostRelationship.md
 docs/StorageHitachiHostResponse.md
 docs/StorageHitachiInitiator.md
+docs/StorageHitachiNvmSubsystem.md
+docs/StorageHitachiNvmSubsystemList.md
+docs/StorageHitachiNvmSubsystemResponse.md
 docs/StorageHitachiParityGroup.md
 docs/StorageHitachiParityGroupList.md
 docs/StorageHitachiParityGroupRelationship.md
@@ -4111,6 +4140,7 @@ docs/StorageHitachiVolumeMigrationPairList.md
 docs/StorageHitachiVolumeMigrationPairResponse.md
 docs/StorageHitachiVolumeRelationship.md
 docs/StorageHitachiVolumeResponse.md
+docs/StorageHostNqn.md
 docs/StorageHyperFlexIscsiInitiator.md
 docs/StorageHyperFlexStorageContainer.md
 docs/StorageHyperFlexStorageContainerList.md
@@ -4135,6 +4165,8 @@ docs/StorageKnoxSecureDriveConfigurationResponse.md
 docs/StorageLocalKeySetting.md
 docs/StorageM2VirtualDriveConfig.md
 docs/StorageManualDriveGroup.md
+docs/StorageNamespace.md
+docs/StorageNamespacePath.md
 docs/StorageNetAppAggregate.md
 docs/StorageNetAppAggregateEvent.md
 docs/StorageNetAppAggregateEventList.md
@@ -4476,6 +4508,7 @@ docs/TamBaseAdvisoryRelationship.md
 docs/TamBaseDataSource.md
 docs/TamEolAdvisoryDetails.md
 docs/TamEolSeverity.md
+docs/TamFnSeverity.md
 docs/TamIdentifiers.md
 docs/TamMilestone.md
 docs/TamPsirtSeverity.md
@@ -5087,6 +5120,7 @@ docs/WorkflowCustomDataTypeDefinitionList.md
 docs/WorkflowCustomDataTypeDefinitionRelationship.md
 docs/WorkflowCustomDataTypeDefinitionResponse.md
 docs/WorkflowCustomDataTypeProperties.md
+docs/WorkflowDataSourceSelector.md
 docs/WorkflowDecisionCase.md
 docs/WorkflowDecisionTask.md
 docs/WorkflowDefaultValue.md
@@ -5391,6 +5425,11 @@ model_appliance_cluster_install_response.go
 model_appliance_cluster_replace_node.go
 model_appliance_cluster_replace_node_list.go
 model_appliance_cluster_replace_node_response.go
+model_appliance_cluster_worker_node.go
+model_appliance_cluster_worker_node_list.go
+model_appliance_cluster_worker_node_replace.go
+model_appliance_cluster_worker_node_response.go
+model_appliance_cluster_worker_node_reuse.go
 model_appliance_data_export_policy.go
 model_appliance_data_export_policy_list.go
 model_appliance_data_export_policy_relationship.go
@@ -5826,6 +5865,9 @@ model_capability_fex_descriptor_response.go
 model_capability_fex_manufacturing_def.go
 model_capability_fex_manufacturing_def_list.go
 model_capability_fex_manufacturing_def_response.go
+model_capability_fex_support_meta.go
+model_capability_fex_support_meta_list.go
+model_capability_fex_support_meta_response.go
 model_capability_gpu_endpoint_descriptor.go
 model_capability_gpu_endpoint_descriptor_list.go
 model_capability_gpu_endpoint_descriptor_response.go
@@ -7213,6 +7255,8 @@ model_iaas_ucsd_messages.go
 model_iaas_ucsd_messages_list.go
 model_iaas_ucsd_messages_response.go
 model_iaas_workflow_steps.go
+model_iam_abstract_client_application.go
+model_iam_abstract_client_application_relationship.go
 model_iam_account.go
 model_iam_account_experience.go
 model_iam_account_experience_list.go
@@ -7226,6 +7270,7 @@ model_iam_api_key.go
 model_iam_api_key_list.go
 model_iam_api_key_relationship.go
 model_iam_api_key_response.go
+model_iam_app_credentials.go
 model_iam_app_registration.go
 model_iam_app_registration_list.go
 model_iam_app_registration_relationship.go
@@ -7233,6 +7278,7 @@ model_iam_app_registration_response.go
 model_iam_banner_message.go
 model_iam_banner_message_list.go
 model_iam_banner_message_response.go
+model_iam_basic_auth_credentials.go
 model_iam_certificate.go
 model_iam_certificate_list.go
 model_iam_certificate_relationship.go
@@ -7732,6 +7778,14 @@ model_license_customer_op.go
 model_license_customer_op_list.go
 model_license_customer_op_relationship.go
 model_license_customer_op_response.go
+model_license_erp_customer_op.go
+model_license_erp_customer_op_list.go
+model_license_erp_customer_op_relationship.go
+model_license_erp_customer_op_response.go
+model_license_erp_license_count.go
+model_license_erp_license_count_list.go
+model_license_erp_license_count_relationship.go
+model_license_erp_license_count_response.go
 model_license_iks_customer_op.go
 model_license_iks_customer_op_list.go
 model_license_iks_customer_op_relationship.go
@@ -8380,6 +8434,8 @@ model_notification_send_email.go
 model_notification_software_release_meta_mo_condition.go
 model_notification_subscription.go
 model_notification_trigger_webhook.go
+model_notification_trigger_workflow.go
+model_notification_webhook_event_mo_condition.go
 model_ntp_auth_ntp_server.go
 model_ntp_ntp_server.go
 model_ntp_ntp_server_list.go
@@ -8877,7 +8933,11 @@ model_session_abstract_session_relationship.go
 model_session_abstract_sub_session.go
 model_smtp_policy.go
 model_smtp_policy_list.go
+model_smtp_policy_relationship.go
 model_smtp_policy_response.go
+model_smtp_policy_test_.go
+model_smtp_policy_test_list.go
+model_smtp_policy_test_response.go
 model_snmp_policy.go
 model_snmp_policy_inventory.go
 model_snmp_policy_inventory_list.go
@@ -9116,6 +9176,9 @@ model_storage_hitachi_host_lun_response.go
 model_storage_hitachi_host_relationship.go
 model_storage_hitachi_host_response.go
 model_storage_hitachi_initiator.go
+model_storage_hitachi_nvm_subsystem.go
+model_storage_hitachi_nvm_subsystem_list.go
+model_storage_hitachi_nvm_subsystem_response.go
 model_storage_hitachi_parity_group.go
 model_storage_hitachi_parity_group_list.go
 model_storage_hitachi_parity_group_relationship.go
@@ -9149,6 +9212,7 @@ model_storage_hitachi_volume_migration_pair_list.go
 model_storage_hitachi_volume_migration_pair_response.go
 model_storage_hitachi_volume_relationship.go
 model_storage_hitachi_volume_response.go
+model_storage_host_nqn.go
 model_storage_hyper_flex_iscsi_initiator.go
 model_storage_hyper_flex_storage_container.go
 model_storage_hyper_flex_storage_container_list.go
@@ -9173,6 +9237,8 @@ model_storage_knox_secure_drive_configuration_response.go
 model_storage_local_key_setting.go
 model_storage_m2_virtual_drive_config.go
 model_storage_manual_drive_group.go
+model_storage_namespace.go
+model_storage_namespace_path.go
 model_storage_net_app_aggregate.go
 model_storage_net_app_aggregate_event.go
 model_storage_net_app_aggregate_event_list.go
@@ -9512,6 +9578,7 @@ model_tam_base_advisory_relationship.go
 model_tam_base_data_source.go
 model_tam_eol_advisory_details.go
 model_tam_eol_severity.go
+model_tam_fn_severity.go
 model_tam_identifiers.go
 model_tam_milestone.go
 model_tam_psirt_severity.go
@@ -10107,6 +10174,7 @@ model_workflow_custom_data_type_definition_list.go
 model_workflow_custom_data_type_definition_relationship.go
 model_workflow_custom_data_type_definition_response.go
 model_workflow_custom_data_type_properties.go
+model_workflow_data_source_selector.go
 model_workflow_decision_case.go
 model_workflow_decision_task.go
 model_workflow_default_value.go

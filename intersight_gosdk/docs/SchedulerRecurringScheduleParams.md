@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **EndAfterOccurrences** | Pointer to **int64** | Specify the number of occurrences (instead of an end-time) for a recurring schedule. | [optional] 
 **EndTime** | Pointer to **time.Time** | End time for the recurring schedule. The schedule will not run beyond this time. If using the endAfterOccurrences parameter instead, this field should be set to zero time, i.e, 0001-01-01T00:00:00Z. | [optional] 
 **FailureThreshold** | Pointer to **int64** | The maximum number of consecutive failures until the recurring scheduled task is suspended by the system. The default is 1. | [optional] [default to 1]
-**Params** | Pointer to [**NullableMoBaseComplexType**](MoBaseComplexType.md) | The parameters for a onetime or recurring schedule. | [optional] 
+**Params** | Pointer to [**NullableSchedulerBaseCadenceParams**](SchedulerBaseCadenceParams.md) |  | [optional] 
 
 ## Methods
 
@@ -173,20 +173,20 @@ HasFailureThreshold returns a boolean if a field has been set.
 
 ### GetParams
 
-`func (o *SchedulerRecurringScheduleParams) GetParams() MoBaseComplexType`
+`func (o *SchedulerRecurringScheduleParams) GetParams() SchedulerBaseCadenceParams`
 
 GetParams returns the Params field if non-nil, zero value otherwise.
 
 ### GetParamsOk
 
-`func (o *SchedulerRecurringScheduleParams) GetParamsOk() (*MoBaseComplexType, bool)`
+`func (o *SchedulerRecurringScheduleParams) GetParamsOk() (*SchedulerBaseCadenceParams, bool)`
 
 GetParamsOk returns a tuple with the Params field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetParams
 
-`func (o *SchedulerRecurringScheduleParams) SetParams(v MoBaseComplexType)`
+`func (o *SchedulerRecurringScheduleParams) SetParams(v SchedulerBaseCadenceParams)`
 
 SetParams sets Params field to given value.
 
